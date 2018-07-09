@@ -1,0 +1,6 @@
+<!--index.wxml-->
+<view class="container">
+  <view class="userinfo">
+   <button bindtap="scanqrcode">扫码链接电视</button>
+  </view>
+</view>
