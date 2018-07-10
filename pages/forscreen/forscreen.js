@@ -79,18 +79,29 @@ Page({
     wx.clearStorage();
     var that = this;
     box_mac = decodeURIComponent(options.scene);
-    box_mac = '1234';     //上线去掉**************************
+    //box_mac = '1234';     //上线去掉**************************
     var openid = app.globalData.openid;
-    if(box_mac =='' || box_mac==undefined){
+    if(box_mac =='' || box_mac=='undefined'){
       wx.navigateTo({
         url: '../index/index'
       })
     }
-    if (openid=='' || openid==undefined){
+    if (openid=='' || openid=='undefined'){
       wx.navigateTo({
         url: '../index/index'
       })
     }
+    wx.request({
+      url: 'https://mobile.littlehotspot.com/Smallapp/Index/getOssParams',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      success: function (res) {
+        //console.log(res);
+        policy = res.data.policy;
+        signature = res.data.signature;
+      }
+    }),
     //发送随机码给电视显示 
     wx.request({
       url: 'https://mobile.littlehotspot.com/Smallapp/Index/genCode',
@@ -105,20 +116,22 @@ Page({
       success: function (res) {
         var is_have = res.data.is_have;
         if(is_have==0){
+          
           var code = res.data.code;
             wx.request({
               url: 'https://netty-push.littlehotspot.com/push/box',
-              headers: {
-                'Content-Type': 'application/json'
+              header: {
+                "Content-Type": "application/x-www-form-urlencoded"
               },
               method: "POST",
               data:{
                 box_mac:box_mac,
                 cmd: 'call-mini-program',
-                msg: '{"action":1,"code":' + code
+                msg: '{"action":1,"code":' + code +'}',
+                req_id: timestamp
               },
               success:function(rt){
-                console.log(111);
+                //console.log(rt);
               }
             })
         }else if(is_have==1) {
@@ -170,10 +183,11 @@ Page({
               },
               method: "POST",
               data: { 
-                "box_mac": box_mac, 
-                'cmd':' call-mini-program',
-                "msg": {"action":2 ,"url": "forscreen/resource/" + timestamp + postf }, 
-                "req_id": timestamp },
+                box_mac: box_mac, 
+                cmd: 'call-mini-program',
+                msg: '{ "action": 2, "url": "forscreen/resource/' + timestamp + postf + '", "filename":"' + timestamp + postf +'"}' , 
+                req_id: timestamp 
+              },
               success: function (data) {
                 wx.showToast({
                   title: '发送投屏成功',

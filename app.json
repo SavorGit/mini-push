@@ -8,17 +8,5 @@
     "navigationBarBackgroundColor": "#932c3f",
     "navigationBarTitleText": "WeChat",
     "navigationBarTextStyle": "#932c3f"
-  },
-  "tabBar": {
-    "list": [
-      {
-        "pagePath": "pages/index/index",
-        "text": "首页"
-      },
-      {
-        "pagePath": "pages/forscreen/forscreen",
-        "text": "投屏"
-      }
-    ]
   }
 }
