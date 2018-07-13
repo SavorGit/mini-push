@@ -4,7 +4,7 @@ var openid = app.globalData.openid;
 var policy;
 var signature;
 var postf;   //上传文件扩展名
-var timestamp = (new Date()).valueOf();
+///var timestamp = (new Date()).valueOf();
 var box_mac = '';
 Page({
   /**
@@ -115,6 +115,7 @@ Page({
       method: "POST",
       success: function (res) {
         var is_have = res.data.is_have;
+        var timestamp = (new Date()).valueOf();
         if(is_have==0){
           
           var code = res.data.code;
@@ -155,6 +156,8 @@ Page({
         var filename = res.tempFilePaths[0];
         var index1 = filename.lastIndexOf(".");
         var index2 = filename.length;
+        var timestamp = (new Date()).valueOf();
+        console.log(timestamp);
         postf = filename.substring(index1, index2);//后缀名
         that.setData({
           tempFilePaths: res.tempFilePaths
