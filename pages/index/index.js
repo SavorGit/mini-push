@@ -13,8 +13,7 @@ Page({
       imageUrl: '/images/qrcode.jpg'
     }
   },
-  onLoad: function (option) {
-    box_mac = option.box_mac;
+  onLoad: function () {
     wx.request({
       url: 'https://mobile.littlehotspot.com/Smallapp/Index/getOssParams',
       headers: {

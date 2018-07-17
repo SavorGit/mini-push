@@ -1,6 +1,7 @@
 // pages/forscreen/forscreen.js
 const app = getApp();
-var openid = app.globalData.openid;
+var tmp ;
+var openid;
 var policy;
 var signature;
 var postf;   //上传文件扩展名
@@ -18,8 +19,7 @@ Page({
     pwds:"",
    
     showView: false,     //是否显示投屏选择图片
-    showCode: true      //显示填写验证码
-  
+    showCode: true,      //显示填写验证码
   },
   Focus(e) {
     var that = this;
@@ -36,7 +36,6 @@ Page({
   },
   formSubmit(e) {
     var that = this;
-    var openid = app.globalData.openid;
     wx.request({
       url: 'https://mobile.littlehotspot.com/smallapp/index/checkcode',
       headers: {
@@ -71,78 +70,115 @@ Page({
           })
         }
         
+      },
+      fial: function ({ errMsg }) {
+        console.log('errMsg is', errMsg)
       }
     })
   },
   //进来加载页面：
   onLoad: function (options) {
-    wx.clearStorage();
-    var that = this;
-    box_mac = decodeURIComponent(options.scene);
-    //box_mac = '1234';     //上线去掉**************************
-    var openid = app.globalData.openid;
-    if(box_mac =='' || box_mac=='undefined'){
-      wx.navigateTo({
-        url: '../index/index'
-      })
-    }
-    if (openid=='' || openid=='undefined'){
-      wx.navigateTo({
-        url: '../index/index'
-      })
-    }
-    wx.request({
-      url: 'https://mobile.littlehotspot.com/Smallapp/Index/getOssParams',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      success: function (res) {
-        //console.log(res);
-        policy = res.data.policy;
-        signature = res.data.signature;
-      }
-    }),
-    //发送随机码给电视显示 
-    wx.request({
-      url: 'https://mobile.littlehotspot.com/Smallapp/Index/genCode',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      data:{
-        box_mac: box_mac,
-        openid:openid 
-      },
-      method: "POST",
-      success: function (res) {
-        var is_have = res.data.is_have;
-        var timestamp = (new Date()).valueOf();
-        if(is_have==0){
-          
-          var code = res.data.code;
-            wx.request({
-              url: 'https://netty-push.littlehotspot.com/push/box',
-              header: {
-                "Content-Type": "application/x-www-form-urlencoded"
-              },
-              method: "POST",
-              data:{
-                box_mac:box_mac,
-                cmd: 'call-mini-program',
-                msg: '{"action":1,"code":' + code +'}',
-                req_id: timestamp
-              },
-              success:function(rt){
-                //console.log(rt);
-              }
-            })
-        }else if(is_have==1) {
-          that.setData({
-            showView: (!that.data.showView),
-            showCode: (!that.data.showCode)
+    var that = this
+    if (openid && openid != '') {
+    }else {
+      wx.login({
+        success: res => {
+          var code = res.code; //返回code
+          wx.request({
+            url: 'https://mobile.littlehotspot.com/smallapp/index/getOpenid',
+            data: { "code": code },
+            header: {
+              'content-type': 'application/json'
+            },
+            success: function (res) {
+              //console.log(res.data.result.openid);
+              app.globalData.openid = res.data.result.openid;
+            }
           })
         }
+      });
+      tmp = app.globalData;
+      openid = tmp.openid;
+    }
+    
+    if (openid && openid!= '') {
+      var that = this;
+      box_mac = decodeURIComponent(options.scene);
+
+      //box_mac = '1234';     //上线去掉**************************
+      if (box_mac == '' || box_mac == 'undefined') {
+        wx.navigateTo({
+          url: '/pages/index/index'
+        })
       }
-    })
+      if (openid == '' || openid == 'undefined') {
+        wx.navigateTo({
+          url: '/pages/index/index'
+        })
+      }
+      wx.request({
+        url: 'https://mobile.littlehotspot.com/Smallapp/Index/getOssParams',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        success: function (res) {
+          //console.log(res);
+          policy = res.data.policy;
+          signature = res.data.signature;
+        }
+      }),
+        //发送随机码给电视显示 
+        wx.request({
+          url: 'https://mobile.littlehotspot.com/Smallapp/Index/genCode',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          data: {
+            box_mac: box_mac,
+            openid: openid
+          },
+          method: "POST",
+          success: function (res) {
+            var is_have = res.data.is_have;
+            var timestamp = (new Date()).valueOf();
+            if (is_have == 0) {
+
+              var code = res.data.code;
+              wx.request({
+                url: 'https://netty-push.littlehotspot.com/push/box',
+                header: {
+                  "Content-Type": "application/x-www-form-urlencoded"
+                },
+                method: "POST",
+                data: {
+                  box_mac: box_mac,
+                  cmd: 'call-mini-program',
+                  msg: '{"action":1,"code":' + code + '}',
+                  req_id: timestamp
+                },
+                success: function (rt) {
+                  if(rt.data.code !=10000){
+                    wx.showToast({
+                      title: '该电视暂不能投屏',
+                      icon: 'none',
+                      duration: 2000
+                    })
+                  }
+                }
+              })
+            } else if (is_have == 1) {
+              that.setData({
+                showView: (!that.data.showView),
+                showCode: (!that.data.showCode)
+              })
+            }
+          }
+        })
+    }else {
+      wx.navigateTo({
+        url: '/pages/index/index'
+      })
+    } 
   },
   chooseImage() {
     var that = this;
@@ -157,7 +193,6 @@ Page({
         var index1 = filename.lastIndexOf(".");
         var index2 = filename.length;
         var timestamp = (new Date()).valueOf();
-        console.log(timestamp);
         postf = filename.substring(index1, index2);//后缀名
         that.setData({
           tempFilePaths: res.tempFilePaths
