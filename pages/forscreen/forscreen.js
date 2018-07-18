@@ -100,10 +100,10 @@ Page({
       tmp = app.globalData;
       openid = tmp.openid;
     }
-    
+    box_mac = decodeURIComponent(options.scene);
     if (openid && openid!= '') {
       var that = this;
-      box_mac = decodeURIComponent(options.scene);
+      
 
       //box_mac = '1234';     //上线去掉**************************
       if (box_mac == '' || box_mac == 'undefined') {
