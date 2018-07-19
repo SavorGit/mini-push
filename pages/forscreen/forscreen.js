@@ -24,7 +24,9 @@ Page({
     showExit: false,     //是否显示退出投屏
     openid :'',
     box_mac:'',
-    tempFilePaths:'/images/pic_default.png'
+    tempFilePaths:'/images/pic_default.png',
+    percent: '100',
+    hotel_room:'',
   },
   Focus(e) {
     var that = this;
@@ -85,6 +87,24 @@ Page({
   onLoad: function (options) {
     box_mac = decodeURIComponent(options.scene);
     var that = this
+
+    wx.request({
+      url: 'https://mobile.littlehotspot.com/Smallapp/Index/getHotelInfo',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      data: {
+        box_mac: box_mac,
+      },
+      method:"POST",
+      success:function(res){
+        that.setData({
+          hotel_room: res.data.result.hotel_name+res.data.result.room_name
+        })
+      }
+    })
+
+
     if (openid && openid != '') {
     }else {
       function setInfos(box_mac,openid){
@@ -186,7 +206,7 @@ Page({
       console.log(res);
       console.log(box_mac);
       console.log(openid);*/
-      wx.uploadFile({
+      var upload_task = wx.uploadFile({
         url: "https://oss.littlehotspot.com",
         filePath: res.tempFilePaths[0],
         name: 'file',
@@ -242,11 +262,18 @@ Page({
 
             },
           })
-
+          
         },
         fial: function ({ errMsg }) {
           console.log('uploadImage fial,errMsg is', errMsg)
-        }
+        },
+        
+
+      });
+      upload_task.onProgressUpdate((res) => {
+        that.setData({
+          percent: res.progress
+        })
       })
     }
     function uploadInfos( res,box_mac,openid){
