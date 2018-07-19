@@ -34,7 +34,7 @@
 image.top_tip{
   width:448rpx;
   height:34rpx;
-  margin-top:-50rpx;
+  margin-top:-110rpx;
   margin-bottom:36rpx;
 }
 
@@ -47,9 +47,15 @@ image.scan_twd{
 
 view.bottom_tip{
   margin-top:24rpx;
+  margin-bottom: 10rpx;
   display:flex;
   flex-direction:column;
   align-items:center;
   font-size:32rpx;
   color: #333333;
+}
+
+label.label_text{
+  margin-top: 8rpx;
+  margin-bottom: 8rpx;
 }

@@ -3,7 +3,7 @@
   <image class='top_tip' src='/images/top_tip.png' ></image>
   <image class='scan_twd' src='/images/scan_twd.png' bindtap='scanqrcode' ></image>
   <view class='bottom_tip'>
-    <label>连接后即可</label>
-    <label>将手机照片在电视中与大家分享</label>
+    <label class='label_text'>连接后即可</label>
+    <label class='label_text'>将手机照片在电视中与大家分享</label>
   </view>
 </view>
