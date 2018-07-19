@@ -47,7 +47,7 @@ image.scan_twd{
 
 view.bottom_tip{
   margin-top:24rpx;
-  margin-bottom: 152rpx;
+  margin-bottom: 10rpx;
   display:flex;
   flex-direction:column;
   align-items:center;

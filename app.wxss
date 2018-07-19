@@ -1,6 +1,7 @@
 /**app.wxss**/
 .container {
-  height: 100%;
+  width: calc(100vw);
+  height: calc(100vh);
   display: flex;
   flex-direction: column;
   align-items: center;
