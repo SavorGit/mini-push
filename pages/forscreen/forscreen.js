@@ -226,7 +226,7 @@ Page({
                 data:{
                   openid : openid,
                   box_mac:box_mac,
-                  imgs: '["' + timestamp + postf +'"]'
+                  imgs: '["forscreen/resource/' + timestamp + postf +'"]'
                 },
 
               })
