@@ -1,7 +1,7 @@
 <view class="container">
 
   <!-- 选择图片 -->
-  <view class="userinfo{{showView?'show':'hide'}} userinfo_page" >
+  <view class="userinfo{{showView?'show':'hide'}} full_page" >
     <view class='pic_tip_top'>
       <label>您已选择【</label><label>{{hotel_room}}</label><label>】电视</label>
     </view>
@@ -13,28 +13,27 @@
         <image class='choose_button' src='/images/button_pic_to_tv.png' bindtap="chooseImage" data-boxmac="{{box_mac}}" data-openid="{{openid}}" ></image>
       </view>
       <view class='rechoose_button_pic hide'>
-        <image class='rechoose_button' src='/images/button_pic_to_tv.png'></image>
-        <image class='rechoose_button button_space' src='/images/button_pic_to_tv.png'></image>
+        <image class='rechoose_button' src='/images/button_rechoose_pic.png'></image>
+        <image class='rechoose_button button_space' src='/images/button_exit_cast_screen.png'></image>
       </view>
     </view>
   </view>
   
   <!-- 输入验证 -->
-  <form bindsubmit="formSubmit" class="form{{showCode?'show':'hide'}}">
-    <label>请填写电视展示的验证码</label>
-    <view class='content'>
-      <block wx:for="{{Length}}" wx:key="item">
-        <input class='iptbox' value="{{Value.length>=index+1?Value[index]:''}}" disabled password='{{ispassword}}' catchtap='Tap'></input>
-      </block>
-    </view>
-    <input name="password" value="{{pwds}}" password="{{true}}" class='ipt' maxlength="{{Length}}" focus="{{isFocus}}" bindinput="Focus"></input>
-    <input name="openid" class="userinfohide" value="{{openid}}"></input>
-    <input name="box_mac" class="userinfohide" value="{{box_mac}}"></input>
-    <view>
+  <form bindsubmit="formSubmit" class="form{{showCode?'show':'hide'}} full_page">
+    <view class='input_num'>
+      <image class='input_pic_banner' src='/images/pic_check_code_banner.jpg'></image>
+      <view class='content'>
+        <block wx:for="{{Length}}" wx:key="item">
+          <input class="input iptbox" type="number"  value="{{Value.length>=index+1?Value[index]:''}}" disabled password='{{ispassword}}' catchtap='Tap'></input>
+        </block>
+      </view>
+      <label class='input_tip'>请输入电视中的三位数连接电视</label>
+      <input name="password" value="{{pwds}}" password="{{true}}" class='ipt' maxlength="{{Length}}" focus="{{isFocus}}" bindinput="Focus"></input>
+      <input name="openid" class="userinfohide" value="{{openid}}"></input>
+      <input name="box_mac" class="userinfohide" value="{{box_mac}}"></input>
       <button class="btn-area" formType="submit">提交</button>
     </view>
   </form>
-
-  <!-- 图片展示 -->
 
 </view>
