@@ -3,11 +3,17 @@
   <!-- 选择图片 -->
   <view class="userinfo{{showView?'show':'hide'}} userinfo_page" >
     <view class='pic_tip_top'>
-      <label>您已选择【</label><label>酒楼包间</label><label>】电视</label>
+      <label>您已选择【</label><label>{{hotel_room}}</label><label>】电视</label>
     </view>
     <view class='pic_div_body'>
       <image class='choose_pic_show' src="{{tempFilePaths}}" mode="cover"></image>
-      <image class='choose_button' src='/images/button_pic_to_tv.png' bindtap="chooseImage" data-boxmac="{{box_mac}}" data-openid="{{openid}}" ></image>
+      <view class='choose_button_pic show'>
+        <image class='choose_button' src='/images/button_pic_to_tv.png' bindtap="chooseImage" data-boxmac="{{box_mac}}" data-openid="{{openid}}" ></image>
+      </view>
+      <view class='rechoose_button_pic hide'>
+        <image class='rechoose_button' src='/images/button_pic_to_tv.png'></image>
+        <image class='rechoose_button button_space' src='/images/button_pic_to_tv.png'></image>
+      </view>
     </view>
   </view>
   
@@ -26,5 +32,7 @@
       <button class="btn-area" formType="submit">提交</button>
     </view>
   </form>
+
+  <!-- 图片展示 -->
 
 </view>

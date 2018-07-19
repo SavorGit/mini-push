@@ -82,7 +82,34 @@ image.choose_pic_show{
   height: 403rpx;
 }
 
+.choose_button_pic{
+  margin: 0rpx;
+}
+
+.rechoose_button_pic{
+  margin-top:calc(100vh - 1000rpx);
+  margin-left: 30rpx;
+  margin-right: 30rpx;
+  margin-bottom: 30rpx;
+}
+
 image.choose_button{
   width: 540rpx;
   height: 98rpx;
+}
+
+image.rechoose_button{
+  width: 340rpx;
+  height: 98rpx;
+}
+
+.button_space{
+  margin-left: 10rpx;
+}
+
+.hide {
+  display: none;
+}
+.show {
+  display: block;
 }
