@@ -19,3 +19,37 @@
 .usermotto {
   margin-top: 200px;
 }
+
+.scan_container {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  padding: 200rpx 0;
+  box-sizing: border-box;
+  background-color: #f6f2ec;
+}
+
+image.top_tip{
+  width:448rpx;
+  height:34rpx;
+  margin-top:-50rpx;
+  margin-bottom:36rpx;
+}
+
+image.scan_twd{
+  width:340rpx;
+  height:340rpx;
+  margin-top:200rpx;
+  margin-bottom:40rpx;
+}
+
+view.bottom_tip{
+  margin-top:24rpx;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  font-size:32rpx;
+  color: #333333;
+}
