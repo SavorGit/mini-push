@@ -1,5 +1,5 @@
 <!--index.wxml-->
-<view class="container">
+<view class="container page">
   <image class='top_tip' src='/images/tip_scan_top.png' ></image>
   <image class='scan_twd' src='/images/button_scan_twd.png' bindtap='scanqrcode' ></image>
   <view class='bottom_tip'>

@@ -31,6 +31,10 @@
   background-color: #f6f2ec;
 }
 
+.page{
+  padding: 200rpx 0;
+}
+
 image.top_tip{
   width:448rpx;
   height:34rpx;

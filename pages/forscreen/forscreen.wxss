@@ -1,13 +1,13 @@
 /**index.wxss**/
 .userinfohide {
   display: none;
-  flex-direction: column;
-  align-items: center;
 }
 .userinfoshow {
   display: block;
-  flex-direction: column;
-  align-items: center;
+}
+
+.userinfo_page{
+  width: 100%;
 }
 
 .userinfo-avatar {
@@ -54,4 +54,35 @@
 }
 .formhide{
    display: none;
+}
+
+view.pic_tip_top{
+  margin-top: 0rpx;
+  padding-left: 30rpx;
+  padding-right: 30rpx;
+  display: block;
+  height: 110rpx;
+  line-height: 110rpx;
+  font-size:32rpx;
+  color: #333333;
+  background-color: #faf8f5;
+  box-shadow: 2rpx 2rpx 10rpx #dddddd;
+}
+
+view.pic_div_body{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+image.choose_pic_show{
+  margin-top: 180rpx;
+  margin-bottom: 180rpx;
+  width: 543rpx;
+  height: 403rpx;
+}
+
+image.choose_button{
+  width: 540rpx;
+  height: 98rpx;
 }
