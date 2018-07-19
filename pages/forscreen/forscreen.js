@@ -22,7 +22,8 @@ Page({
     showView: false,     //是否显示投屏选择图片
     showCode: true,      //显示填写验证码
     openid :'',
-    box_mac:''
+    box_mac:'',
+    tempFilePaths:'/images/pic_default.png'
   },
   Focus(e) {
     var that = this;
