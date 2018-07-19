@@ -1,6 +1,6 @@
 <view class="container">
   <view class="userinfo{{showView?'show':'hide'}}">
-    <button bindtap="chooseImage">选择投屏图片{{text}}</button>
+    <button bindtap="chooseImage" data-boxmac="{{box_mac}}" data-openid="{{openid}}">选择投屏图片{{text}}</button>
     <image  src="{{tempFilePaths}}" mode="cover"></image>
   </view>
   <form bindsubmit="formSubmit" class="form{{showCode?'show':'hide'}}">
@@ -14,7 +14,8 @@
   </view>
  
   <input name="password" value="{{pwds}}" password="{{true}}" class='ipt' maxlength="{{Length}}" focus="{{isFocus}}" bindinput="Focus"></input>
- 
+  <input name="openid" class="userinfohide" value="{{openid}}"></input>
+  <input name="box_mac" class="userinfohide" value="{{box_mac}}"></input>
   <view>
     <button class="btn-area" formType="submit">提交</button>
   </view>

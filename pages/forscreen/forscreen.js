@@ -8,6 +8,7 @@ var postf;   //上传文件扩展名
 ///var timestamp = (new Date()).valueOf();
 var box_mac = '';
 Page({
+  
   /**
  * 页面的初始数据
  */
@@ -20,6 +21,8 @@ Page({
    
     showView: false,     //是否显示投屏选择图片
     showCode: true,      //显示填写验证码
+    openid :'',
+    box_mac:''
   },
   Focus(e) {
     var that = this;
@@ -43,8 +46,8 @@ Page({
       },
       data: {
         code: e.detail.value.password,
-        box_mac:box_mac,
-        openid:openid
+        box_mac: e.detail.value.box_mac,
+        openid: e.detail.value.openid
       },
       success: function (res) {
         if(res.data.is_right==0){
@@ -78,55 +81,15 @@ Page({
   },
   //进来加载页面：
   onLoad: function (options) {
+    box_mac = decodeURIComponent(options.scene);
     var that = this
     if (openid && openid != '') {
     }else {
-      wx.login({
-        success: res => {
-          var code = res.code; //返回code
-          wx.request({
-            url: 'https://mobile.littlehotspot.com/smallapp/index/getOpenid',
-            data: { "code": code },
-            header: {
-              'content-type': 'application/json'
-            },
-            success: function (res) {
-              //console.log(res.data.result.openid);
-              app.globalData.openid = res.data.result.openid;
-            }
-          })
-        }
-      });
-      tmp = app.globalData;
-      openid = tmp.openid;
-    }
-    box_mac = decodeURIComponent(options.scene);
-    if (openid && openid!= '') {
-      var that = this;
-      
-
-      //box_mac = '1234';     //上线去掉**************************
-      if (box_mac == '' || box_mac == 'undefined') {
-        wx.navigateTo({
-          url: '/pages/index/index'
-        })
-      }
-      if (openid == '' || openid == 'undefined') {
-        wx.navigateTo({
-          url: '/pages/index/index'
-        })
-      }
-      wx.request({
-        url: 'https://mobile.littlehotspot.com/Smallapp/Index/getOssParams',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        success: function (res) {
-          //console.log(res);
-          policy = res.data.policy;
-          signature = res.data.signature;
-        }
-      }),
+      function setInfos(box_mac,openid){
+        that.setData({
+          box_mac: box_mac,
+          openid:openid
+        });
         //发送随机码给电视显示 
         wx.request({
           url: 'https://mobile.littlehotspot.com/Smallapp/Index/genCode',
@@ -157,7 +120,7 @@ Page({
                   req_id: timestamp
                 },
                 success: function (rt) {
-                  if(rt.data.code !=10000){
+                  if (rt.data.code != 10000) {
                     wx.showToast({
                       title: '该电视暂不能投屏',
                       icon: 'none',
@@ -174,75 +137,136 @@ Page({
             }
           }
         })
+      }
+      wx.login({
+        success: res => {
+          var code = res.code; //返回code
+          wx.request({
+            url: 'https://mobile.littlehotspot.com/smallapp/index/getOpenid',
+            data: { "code": code },
+            header: {
+              'content-type': 'application/json'
+            },
+            success: function (res) {
+              //console.log(res.data.result.openid);
+              //app.globalData.openid = res.data.result.openid;
+              setInfos(box_mac, res.data.result.openid);
+            }
+          })
+        }
+      });
+    }
+    if (openid && openid!= '') {
+      
+     
+       
     }else {
-      wx.navigateTo({
-        url: '/pages/index/index'
-      })
+     
     } 
   },
-  chooseImage() {
+  
+  chooseImage(e) {
     var that = this;
+
+    openid = e.currentTarget.dataset.openid;
+
+    function uploadOss(policy, signature,res,box_mac,openid){
+      var filename = res.tempFilePaths[0];
+      var index1 = filename.lastIndexOf(".");
+      var index2 = filename.length;
+      var timestamp = (new Date()).valueOf();
+      postf = filename.substring(index1, index2);//后缀名
+      that.setData({
+        tempFilePaths: res.tempFilePaths
+      })
+      /*console.log(policy);
+      console.log(signature);
+      console.log(res);
+      console.log(box_mac);
+      console.log(openid);*/
+      wx.uploadFile({
+        url: "https://oss.littlehotspot.com",
+        filePath: res.tempFilePaths[0],
+        name: 'file',
+        formData: {
+          Bucket: "redian-produce",
+          name: res.tempFilePaths[0],
+          key: "forscreen/resource/" + timestamp + postf,
+          policy: policy,
+          OSSAccessKeyId: "LTAITjXOpRHKflOX",
+          sucess_action_status: "200",
+          signature: signature
+
+        },
+
+        success: function (res) {
+          wx.request({
+            url: "https://netty-push.littlehotspot.com/push/box",
+            header: {
+              "Content-Type": "application/x-www-form-urlencoded"
+            },
+            method: "POST",
+            data: {
+              box_mac: box_mac,
+              cmd: 'call-mini-program',
+              msg: '{ "action": 2, "url": "forscreen/resource/' + timestamp + postf + '", "filename":"' + timestamp + postf + '"}',
+              req_id: timestamp
+            },
+            success: function (result) {
+              wx.showToast({
+                title: '发送投屏成功',
+                icon: 'success',
+                duration: 1000
+              });
+              wx.request({
+                url: 'https://mobile.littlehotspot.com/Smallapp/index/recordForScreenPics',
+                header:{
+                  'content-type': 'application/json'
+                },
+                data:{
+                  openid : openid,
+                  box_mac:box_mac,
+                  imgs: '["' + timestamp + postf +'"]'
+                },
+
+              })
+
+            },
+          })
+
+        },
+        fial: function ({ errMsg }) {
+          console.log('uploadImage fial,errMsg is', errMsg)
+        }
+      })
+    }
+    function uploadInfos( res,box_mac,openid){
+      
+      wx.request({
+        url: 'https://mobile.littlehotspot.com/Smallapp/Index/getOssParams',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        success: function (rest) {
+
+          policy = rest.data.policy;
+          signature = rest.data.signature;
+          uploadOss(policy, signature, res, box_mac,openid);
+        }
+      })
+      // 返回选定照片的本地文件路径列表，tempFilePath可以作为img标签的src属性显示图片
+      //var tempFilePaths = res.tempFilePaths
+      /**/
+    }
+    
     wx.chooseImage({
       count: 1, // 默认9
       sizeType: ['original', 'compressed'], // 可以指定是原图还是压缩图，默认二者都有
       sourceType: ['album', 'camera'], // 可以指定来源是相册还是相机，默认二者都有
       success: function (res) {
-        // 返回选定照片的本地文件路径列表，tempFilePath可以作为img标签的src属性显示图片
-        //var tempFilePaths = res.tempFilePaths
-        var filename = res.tempFilePaths[0];
-        var index1 = filename.lastIndexOf(".");
-        var index2 = filename.length;
-        var timestamp = (new Date()).valueOf();
-        postf = filename.substring(index1, index2);//后缀名
-        that.setData({
-          tempFilePaths: res.tempFilePaths
-        })
-
-        wx.uploadFile({
-          url: "https://oss.littlehotspot.com",
-          filePath: res.tempFilePaths[0],
-          name: 'file',
-          formData: {
-            Bucket: "redian-produce",
-            name: res.tempFilePaths[0],
-            key: "forscreen/resource/" + timestamp + postf,
-            policy: policy,
-            OSSAccessKeyId: "LTAITjXOpRHKflOX",
-            sucess_action_status: "200",
-            signature: signature
-
-          },
-
-          success: function (res) {
-            wx.request({
-              url: "https://netty-push.littlehotspot.com/push/box",
-              header: {
-                "Content-Type": "application/x-www-form-urlencoded"
-              },
-              method: "POST",
-              data: { 
-                box_mac: box_mac, 
-                cmd: 'call-mini-program',
-                msg: '{ "action": 2, "url": "forscreen/resource/' + timestamp + postf + '", "filename":"' + timestamp + postf +'"}' , 
-                req_id: timestamp 
-              },
-              success: function (data) {
-                wx.showToast({
-                  title: '发送投屏成功',
-                  icon: 'success',
-                  duration: 1000
-                })
-
-              },
-            })
-
-          },
-          fial: function ({ errMsg }) {
-            console.log('uploadImage fial,errMsg is', errMsg)
-          }
-        })
-
+        uploadInfos(res, box_mac, openid);
       }
     })
   },
+  
 })
