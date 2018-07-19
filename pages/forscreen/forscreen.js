@@ -21,6 +21,7 @@ Page({
    
     showView: false,     //是否显示投屏选择图片
     showCode: true,      //显示填写验证码
+    showExit: false,     //是否显示退出投屏
     openid :'',
     box_mac:'',
     tempFilePaths:'/images/pic_default.png'
@@ -214,11 +215,13 @@ Page({
               req_id: timestamp
             },
             success: function (result) {
+              
               wx.showToast({
                 title: '发送投屏成功',
                 icon: 'success',
                 duration: 1000
               });
+              
               wx.request({
                 url: 'https://mobile.littlehotspot.com/Smallapp/index/recordForScreenPics',
                 header:{
@@ -230,7 +233,12 @@ Page({
                   imgs: '["forscreen/resource/' + timestamp + postf +'"]'
                 },
 
+              });
+              that.setData({
+                showExit: (!that.data.showExit),
+                
               })
+              //console.log(that.data);
 
             },
           })
@@ -269,5 +277,42 @@ Page({
       }
     })
   },
-  
+  exitForscreen(e){
+    var that = this;
+    openid = e.currentTarget.dataset.openid;
+    box_mac= e.currentTarget.dataset.box_mac;
+    var timestamp = (new Date()).valueOf();
+    wx.request({
+      url: "https://netty-push.littlehotspot.com/push/box",
+      header: {
+        "Content-Type": "application/x-www-form-urlencoded"
+      },
+      method: "POST",
+      data: {
+        box_mac: box_mac,
+        cmd: 'call-mini-program',
+        msg: '{ "action": 3}',
+        req_id: timestamp
+      },
+      success: function (res){
+        wx.showToast({
+          title: '退出成功',
+          icon: 'none',
+          duration: 2000
+        });
+        that.setData({
+          showExit: false,
+
+        })
+
+      },
+      fail:function (res){
+        wx.showToast({
+          title: '网络异常，退出失败',
+          icon: 'none',
+          duration: 2000
+        })
+      }
+    })
+  }
 })
