@@ -6,7 +6,9 @@
       <label>您已选择【</label><label>{{hotel_room}}</label><label>】电视</label>
     </view>
     <view class='pic_div_body'>
-      <image class='choose_pic_show' src="{{tempFilePaths}}" mode="cover"></image>
+      <view class='choose_pic_show_container'>
+        <image class='choose_pic_show' src="{{tempFilePaths}}" ></image>
+      </view>
       <view class='choose_button_pic show'>
         <image class='choose_button' src='/images/button_pic_to_tv.png' bindtap="chooseImage" data-boxmac="{{box_mac}}" data-openid="{{openid}}" ></image>
       </view>
