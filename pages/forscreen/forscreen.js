@@ -20,7 +20,7 @@ Page({
     pwds:"",
    
     showView: false,     //是否显示投屏选择图片
-    showCode: true,      //显示填写验证码
+    showCode: false,      //显示填写验证码
     showExit: false,     //是否显示退出投屏
     showFirst:true,
     showSecond:false,
@@ -89,26 +89,23 @@ Page({
   onLoad: function (options) {
     box_mac = decodeURIComponent(options.scene);
     var that = this
-
-    wx.request({
-      url: 'https://mobile.littlehotspot.com/Smallapp/Index/getHotelInfo',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      data: {
-        box_mac: box_mac,
-      },
-      method:"POST",
-      success:function(res){
-        that.setData({
-          hotel_room: res.data.result.hotel_name+res.data.result.room_name
-        })
-      }
-    })
-
-
-    if (openid && openid != '') {
-    }else {
+    function getHotelInfo(box_mac){
+      wx.request({
+        url: 'https://mobile.littlehotspot.com/Smallapp/Index/getHotelInfo',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        data: {
+          box_mac: box_mac,
+        },
+        method: "POST",
+        success: function (res) {
+          that.setData({
+            hotel_room: res.data.result.hotel_name + res.data.result.room_name
+          })
+        }
+      })
+    }
       function setInfos(box_mac,openid){
         that.setData({
           box_mac: box_mac,
@@ -130,7 +127,9 @@ Page({
             var timestamp = (new Date()).valueOf();
             if (is_have == 0) {
              that.setData({
-               isFocus:true
+               isFocus:true,
+               showCode:true,
+               showView:false,
              })
               var code = res.data.code;
               wx.request({
@@ -146,20 +145,25 @@ Page({
                   req_id: timestamp
                 },
                 success: function (rt) {
+                  
                   if (rt.data.code != 10000) {
                     wx.showToast({
                       title: '该电视暂不能投屏',
                       icon: 'none',
                       duration: 2000
                     })
+                  }else {
+                    getHotelInfo(box_mac);
                   }
                 }
-              })
+              });
+              
             } else if (is_have == 1) {
               that.setData({
                 showView: (!that.data.showView),
-                showCode: (!that.data.showCode)
-              })
+                showCode: false,
+              });
+              getHotelInfo(box_mac);
             }
           }
         })
@@ -181,14 +185,7 @@ Page({
           })
         }
       });
-    }
-    if (openid && openid!= '') {
       
-     
-       
-    }else {
-     
-    } 
   },
   
   chooseImage(e) {

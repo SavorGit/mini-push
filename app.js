@@ -3,7 +3,7 @@ App({
 
   onLaunch: function () {
     var that = this
-    wx.login({
+    /*wx.login({
       success: res => {
         var code = res.code; //返回code
         wx.request({
@@ -17,7 +17,7 @@ App({
           }
         })
       }
-    })
+    })*/
   },
   globalData: {
     openid: '',
