@@ -1,5 +1,5 @@
 /**index.wxss**/
- .userinfohide {
+/* .userinfohide {
   display: none;
 }
 .userinfoshow {
@@ -22,7 +22,7 @@
 }
 .secondchoosehide{
   display: none;
-} 
+} */
 
 /* .userinfo-avatar {
   width: 128rpx;
@@ -140,18 +140,21 @@ image.rechoose_button{
 view.choose_pic_show_page{
   margin: 0;
   padding: 0;
+  border: 0rpx;
   width: 100vw;
-  height: 98vh;
+  height: 100vh;
 }
 view.choose_pic_show_container{
   margin: 0;
   padding: 0;
+  border: 0rpx;
   width: 100%;
   height: 100%;
 }
 image.choose_pic_show{
   margin: 0;
   padding: 0;
+  border: 0rpx;
   width: 100%;
   height: 100%;
 }

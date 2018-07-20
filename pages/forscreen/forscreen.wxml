@@ -1,12 +1,12 @@
 <view class="container">
 
   <!-- 选择图片 -->
-  <view class="full_width userinfo{{showView?'show':'hide'}} " >
+  <view class="full_width display_{{showView?'show':'hide'}} " >
     <View >
       <progress percent="{{percent}}" wx:if="{{percent > 0}}" activeColor='#3ab2ca' active />
     </View>
     <view class='pic_tip_top'>
-      <label>您已选择【</label><label>{{hotel_room}}</label><label>】电视</label>
+      <label>您已连接【{{hotel_room}}】的电视</label>
     </view>
     <view class='pic_div_body'>
       <view class='choose_pic_default_container'>
@@ -19,7 +19,7 @@
   </view>
   
   <!-- 输入验证 -->
-  <form bindsubmit="formSubmit" class="full_width form{{showCode?'show':'hide'}}">
+  <form bindsubmit="formSubmit" class="full_width display_{{showCode?'show':'hide'}}">
     <view class='input_num'>
       <image class='input_pic_banner' src='/images/pic_check_code_banner.jpg'></image>
       <view class='content'>
@@ -29,17 +29,17 @@
       </view>
       <label class='input_tip'>请输入电视中的三位数连接电视</label>
       <input name="password" value="{{pwds}}" password="{{true}}" class='ipt' maxlength="{{Length}}" focus="{{isFocus}}" bindinput="Focus"></input>
-      <input name="openid" class="userinfohide" value="{{openid}}"></input>
-      <input name="box_mac" class="userinfohide" value="{{box_mac}}"></input>
+      <input name="openid" class="display_hide" value="{{openid}}"></input>
+      <input name="box_mac" class="display_hide" value="{{box_mac}}"></input>
       <button class="btn-area" formType="submit">提交</button>
     </view>
   </form>
 
   <!-- 图片展示页面 -->
-  <view class="choose_pic_show_page secondchoose{{showSecond?'show':'hide'}}">
-    <View >
+  <view class="choose_pic_show_page display_{{showSecond?'show':'hide'}}">
+     <View >
       <progress percent="{{percent}}" wx:if="{{percent > 0}}" activeColor='#3ab2ca' active />
-    </View>
+    </View> 
     <view class='choose_pic_show_container'>
       <image class='choose_pic_show' src='{{tempFilePaths}}' mode='aspectFit' ></image>
     </view>
