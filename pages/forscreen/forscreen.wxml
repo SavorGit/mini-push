@@ -39,6 +39,7 @@
     </view>
   </form>
 
+  <!-- 图片展示页面 -->
   <view class="choose_pic_show_page secondchoose{{showSecond?'show':'hide'}}">
     <View >
       <progress percent="{{percent}}" wx:if="{{percent > 0}}" activeColor='#C3BC4A' active />
