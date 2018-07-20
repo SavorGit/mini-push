@@ -3,7 +3,7 @@
   <!-- 选择图片 -->
   <view class="userinfo{{showView?'show':'hide'}} full_page" >
     <View >
-      <progress percent="100" activeColor='#ECB7AC' active />
+      <progress percent="{{percent}}" activeColor='#C3BC4A' active />
     </View>
     <view class='pic_tip_top'>
       <label>您已选择【</label><label>{{hotel_room}}</label><label>】电视</label>
