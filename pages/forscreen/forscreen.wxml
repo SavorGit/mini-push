@@ -37,9 +37,9 @@
 
   <!-- 图片展示页面 -->
   <view class="choose_pic_show_page display_{{showSecond?'show':'hide'}}">
-     <View >
+    <View >
       <progress percent="{{percent}}" wx:if="{{percent > 0}}" activeColor='#3ab2ca' active />
-    </View> 
+    </View>
     <view class='choose_pic_show_container'>
       <image class='choose_pic_show' src='{{tempFilePaths}}' mode='aspectFit' ></image>
     </view>
