@@ -1,9 +1,9 @@
 <view class="container">
 
   <!-- 选择图片 -->
-  <view class="full_width userinfo{{showView?'show':'hide'}} firstchoose{{showFirst?'show':'hide'}}" >
+  <view class="full_width userinfo{{showView?'show':'hide'}} " >
     <View >
-      <progress percent="{{percent}}" wx:if="{{percent > 0}}" activeColor='#C3BC4A' active />
+      <progress percent="{{percent}}" wx:if="{{percent > 0}}" activeColor='#3ab2ca' active />
     </View>
     <view class='pic_tip_top'>
       <label>您已选择【</label><label>{{hotel_room}}</label><label>】电视</label>
@@ -38,7 +38,7 @@
   <!-- 图片展示页面 -->
   <view class="choose_pic_show_page secondchoose{{showSecond?'show':'hide'}}">
     <View >
-      <progress percent="{{percent}}" wx:if="{{percent > 0}}" activeColor='#C3BC4A' active />
+      <progress percent="{{percent}}" wx:if="{{percent > 0}}" activeColor='#3ab2ca' active />
     </View>
     <view class='choose_pic_show_container'>
       <image class='choose_pic_show' src='{{tempFilePaths}}' mode='aspectFit' ></image>

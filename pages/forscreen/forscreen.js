@@ -14,7 +14,7 @@ Page({
  */
   data: {
     Length: 3,        //输入框个数
-    isFocus: true,    //聚焦
+    isFocus: false,    //聚焦
     Value: "",        //输入的内容
     ispassword: false, //是否密文显示 true为密文， false为明文。
     pwds:"",
@@ -129,7 +129,9 @@ Page({
             var is_have = res.data.is_have;
             var timestamp = (new Date()).valueOf();
             if (is_have == 0) {
-
+             that.setData({
+               isFocus:true
+             })
               var code = res.data.code;
               wx.request({
                 url: 'https://netty-push.littlehotspot.com/push/box',
@@ -260,6 +262,7 @@ Page({
                 showExit: true,
                 showFirst: false,
                 showSecond:true,
+                showView:false,
                 
               })
               //console.log(that.data);
@@ -335,6 +338,7 @@ Page({
           showFirst:true,
           showExit: false,
           showSecond:false,
+          showView:true,
 
         })
 
