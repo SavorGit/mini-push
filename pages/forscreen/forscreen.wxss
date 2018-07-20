@@ -6,7 +6,7 @@
   display: block;
 }
 
-.userinfo_page{
+.full_page{
   width: 100%;
 }
 
@@ -28,16 +28,14 @@
   display: flex;
   justify-content: space-around;
   align-items: center;
-  margin-top: 200rpx;
+  margin-top: -220rpx;
 }
 .iptbox{
-  width: 80rpx;
-  height: 80rpx;
-  border:1rpx solid #ddd;
-  border-radius: 20rpx;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  margin-left: 29rpx;
+  margin-right: 29rpx;
+  width: 140rpx;
+  height: 100rpx;
+  border:1rpx solid #ffd237;
   text-align: center;
 }
 .ipt{
@@ -56,6 +54,26 @@
    display: none;
 }
 
+/* 输入验证码页面 */
+view.input_num{
+  padding:30rpx 30rpx 0rpx 30rpx;
+  width: calc(100vw - 60rpx);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+image.input_pic_banner{
+  width: 695rpx;
+  height: 695rpx;
+}
+label.input_tip{
+  margin-top: 36rpx;
+  margin-bottom: 36rpx;
+  font-size:34rpx;
+  color: #333333;
+}
+
+/* 选择图片页面 */
 view.pic_tip_top{
   margin-top: 0rpx;
   padding-left: 30rpx;
@@ -75,11 +93,25 @@ view.pic_div_body{
   align-items: center;
 }
 
-image.choose_pic_show{
+view.choose_pic_show_container{
   margin-top: 180rpx;
   margin-bottom: 180rpx;
   width: 543rpx;
-  height: 403rpx;
+  height: 403rpx; 
+}
+
+image.choose_pic_show{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%,-50%);
+  transform: translate(-50%,-50%);
+  display: block;
+  max-width: 100%;
+  max-height: 100%;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  outline: none;
 }
 
 .choose_button_pic{
