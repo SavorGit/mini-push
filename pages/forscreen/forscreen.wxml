@@ -28,7 +28,7 @@
         </block>
       </view>
       <label class='input_tip'>请输入电视中的三位数连接电视</label>
-      <input name="password" value="{{pwds}}" password="{{true}}" class='ipt' maxlength="{{Length}}" focus="{{isFocus}}" bindinput="Focus"></input>
+      <input type="number" name="password" value="{{pwds}}" password="{{true}}" class='ipt' maxlength="{{Length}}" focus="{{isFocus}}" bindinput="Focus"></input>
       <input name="openid" class="display_hide" value="{{openid}}"></input>
       <input name="box_mac" class="display_hide" value="{{box_mac}}"></input>
       <button class="btn-area" formType="submit">提交</button>
