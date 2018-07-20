@@ -2,6 +2,9 @@
 
   <!-- 选择图片 -->
   <view class="userinfo{{showView?'show':'hide'}} full_page" >
+    <View >
+      <progress percent="100" activeColor='#ECB7AC' active />
+    </View>
     <view class='pic_tip_top'>
       <label>您已选择【</label><label>{{hotel_room}}</label><label>】电视</label>
     </view>
@@ -14,7 +17,7 @@
       </view>
       <view class="rechoose_button_pic secondchoose{{showSecond?'show':'hide'}}">
         <image bindtap="chooseImage" class='rechoose_button' src='/images/button_rechoose_pic.png'></image>
-        <image bindtap="exitForscreen" class='rechoose_button button_space' data-boxmac="{{box_mac}}"  src='/images/button_exit_cast_screen.png'></image>
+        <image bindtap="exitForscreen" class='rechoose_button button_space' data-boxmac="{{box_mac}}" src='/images/button_exit_cast_screen.png'></image>
       </view>
     </view>
   </view>

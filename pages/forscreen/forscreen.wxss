@@ -106,7 +106,7 @@ image.choose_pic_show{
 }
 
 .choose_button_pic{
-  margin-top:calc(100vh - 1000rpx);
+  margin-top:0;
 }
 
 .rechoose_button_pic{
