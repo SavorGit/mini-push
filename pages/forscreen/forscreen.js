@@ -22,6 +22,8 @@ Page({
     showView: false,     //是否显示投屏选择图片
     showCode: true,      //显示填写验证码
     showExit: false,     //是否显示退出投屏
+    showFirst:true,
+    showSecond:false,
     openid :'',
     box_mac:'',
     tempFilePaths:'/images/pic_default.png',
@@ -255,7 +257,9 @@ Page({
 
               });
               that.setData({
-                showExit: (!that.data.showExit),
+                showExit: true,
+                showFirst: false,
+                showSecond:true,
                 
               })
               //console.log(that.data);
@@ -307,7 +311,7 @@ Page({
   exitForscreen(e){
     var that = this;
     openid = e.currentTarget.dataset.openid;
-    box_mac= e.currentTarget.dataset.box_mac;
+    box_mac= e.currentTarget.dataset.boxmac;
     var timestamp = (new Date()).valueOf();
     wx.request({
       url: "https://netty-push.littlehotspot.com/push/box",
@@ -328,7 +332,9 @@ Page({
           duration: 2000
         });
         that.setData({
+          showFirst:true,
           showExit: false,
+          showSecond:false,
 
         })
 

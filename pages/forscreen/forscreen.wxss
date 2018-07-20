@@ -113,3 +113,15 @@ image.rechoose_button{
 .show {
   display: block;
 }
+.firstchooseshow{
+  display: block;
+}
+.firstchoosehide{
+   display: none;
+}
+.secondchooseshow{
+  display: block;
+}
+.secondchoosehide{
+  display: none;
+}
