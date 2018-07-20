@@ -27,7 +27,7 @@ Page({
     openid :'',
     box_mac:'',
     tempFilePaths:'/images/pic_default.png',
-    percent: '100',
+    percent: '0',
     hotel_room:'',
   },
   Focus(e) {
