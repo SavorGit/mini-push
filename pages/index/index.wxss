@@ -1,5 +1,5 @@
 /**index.wxss**/
-.userinfo {
+/* .userinfo {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -18,20 +18,9 @@
 
 .usermotto {
   margin-top: 200px;
-}
+} */
 
-.scan_container {
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-between;
-  padding: 200rpx 0;
-  box-sizing: border-box;
-  background-color: #f6f2ec;
-}
-
-.page{
+.scan_container{
   padding: 200rpx 0;
 }
 

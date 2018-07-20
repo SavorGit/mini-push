@@ -1,29 +1,55 @@
 /**index.wxss**/
-.userinfohide {
+ .userinfohide {
   display: none;
 }
 .userinfoshow {
   display: block;
 }
-
-.full_page{
-  width: 100%;
+.formshow{
+   display: block;
 }
+.formhide{
+   display: none;
+}
+.firstchooseshow{
+  display: block;
+}
+.firstchoosehide{
+   display: none;
+}
+.secondchooseshow{
+  display: block;
+}
+.secondchoosehide{
+  display: none;
+} 
 
-.userinfo-avatar {
+/* .userinfo-avatar {
   width: 128rpx;
   height: 128rpx;
   margin: 20rpx;
   border-radius: 50%;
 }
-
 .userinfo-nickname {
   color: #aaa;
 }
-
 .usermotto {
   margin-top: 200px;
+} */
+
+/* 共用样式 */
+.full_width{
+  width: 100%;
 }
+.display_hide {
+  display: none;
+}
+.display_show {
+  display: block;
+}
+
+
+/* 输入验证码页面 */
 .content{
   display: flex;
   justify-content: space-around;
@@ -47,14 +73,6 @@
   background-color: orange;
   color:white;
 }
-.formshow{
-   display: block;
-}
-.formhide{
-   display: none;
-}
-
-/* 输入验证码页面 */
 view.input_num{
   padding:30rpx 30rpx 0rpx 30rpx;
   width: calc(100vw - 60rpx);
@@ -73,6 +91,7 @@ label.input_tip{
   color: #333333;
 }
 
+
 /* 选择图片页面 */
 view.pic_tip_top{
   margin-top: 0rpx;
@@ -86,61 +105,36 @@ view.pic_tip_top{
   background-color: #faf8f5;
   box-shadow: 2rpx 2rpx 10rpx #dddddd;
 }
-
 view.pic_div_body{
   display: flex;
   flex-direction: column;
   align-items: center;
 }
-
 view.choose_pic_default_container{
   margin-top: 180rpx;
   margin-bottom: 180rpx;
   width: 543rpx;
   height: 403rpx; 
 }
-
 image.choose_pic_default{
   width: 100%;
   height: 100%;
 }
-
 .choose_button_pic{
   margin-top:0;
 }
-
 image.choose_button{
   width: 540rpx;
   height: 98rpx;
 }
-
 image.rechoose_button{
   width: 340rpx;
   height: 98rpx;
 }
-
 .button_space{
   margin-left: 10rpx;
 }
 
-.hide {
-  display: none;
-}
-.show {
-  display: block;
-}
-.firstchooseshow{
-  display: block;
-}
-.firstchoosehide{
-   display: none;
-}
-.secondchooseshow{
-  display: block;
-}
-.secondchoosehide{
-  display: none;
-}
 
 /* 选择图片展示页面 */
 view.choose_pic_show_page{
@@ -161,7 +155,6 @@ image.choose_pic_show{
   width: 100%;
   height: 100%;
 }
-
 .rechoose_button_pic{
   margin-top: -130rpx;
   margin-left: 30rpx;
@@ -169,9 +162,3 @@ image.choose_pic_show{
   margin-bottom: 30rpx;
 }
 
-/* .rechoose_button_pic{
-  margin-top:calc(100vh - 1000rpx);
-  margin-left: 30rpx;
-  margin-right: 30rpx;
-  margin-bottom: 30rpx;
-} */
