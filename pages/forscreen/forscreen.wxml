@@ -1,7 +1,7 @@
 <view class="container">
 
   <!-- 选择图片 -->
-  <view class="userinfo{{showView?'show':'hide'}} full_page" >
+  <view class="userinfo{{showView?'show':'hide'}} full_page firstchoose{{showFirst?'show':'hide'}}" >
     <View >
       <progress percent="{{percent}}" wx:if="{{percent > 0}}" activeColor='#C3BC4A' active />
     </View>
@@ -9,8 +9,8 @@
       <label>您已选择【</label><label>{{hotel_room}}</label><label>】电视</label>
     </view>
     <view class='pic_div_body'>
-      <view class='choose_pic_show_container'>
-        <image class='choose_pic_show' src="{{tempFilePaths}}" mode='aspectFit' ></image>
+      <view class='choose_pic_default_container'>
+        <image class='choose_pic_default' src="{{tempFilePaths}}" mode='aspectFit' ></image>
       </view>
       <view class="choose_button_pic firstchoose{{showFirst?'show':'hide'}}">
         <image class='choose_button' src='/images/button_pic_to_tv.png' bindtap="chooseImage" data-boxmac="{{box_mac}}" data-openid="{{openid}}" ></image>
@@ -38,5 +38,18 @@
       <button class="btn-area" formType="submit">提交</button>
     </view>
   </form>
+
+  <view class="choose_pic_show_page secondchoose{{showSecond?'show':'hide'}}">
+    <View >
+      <progress percent="{{percent}}" wx:if="{{percent > 0}}" activeColor='#C3BC4A' active />
+    </View>
+    <view class='choose_pic_show_container'>
+      <image class='choose_pic_show' src='{{tempFilePaths}}' mode='aspectFit' ></image>
+    </view>
+    <view class="rechoose_button_pic secondchoose{{showSecond?'show':'hide'}}">
+      <image bindtap="chooseImage" class='rechoose_button' src='/images/button_rechoose_pic.png'></image>
+      <image bindtap="exitForscreen" class='rechoose_button button_space' data-boxmac="{{box_mac}}" src='/images/button_exit_cast_screen.png'></image>
+    </view>
+  </view>
 
 </view>
