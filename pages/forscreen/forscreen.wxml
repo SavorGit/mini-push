@@ -3,7 +3,7 @@
   <!-- 选择图片 -->
   <view class="full_width display_{{showView?'show':'hide'}} " >
     <View >
-      <progress percent="{{percent}}" wx:if="{{percent > 0}}" activeColor='#3ab2ca' active />
+      <progress percent="{{percent}}" stroke-width="3" wx:if="{{percent > 0}}" activeColor='#762432' active />
     </View>
     <view class='pic_tip_top'>
       <label>您已连接【{{hotel_room}}】的电视</label>
@@ -38,7 +38,7 @@
   <!-- 图片展示页面 -->
   <view class="choose_pic_show_page display_{{showSecond?'show':'hide'}}">
     <View >
-      <progress percent="{{percent}}" wx:if="{{percent > 0}}" activeColor='#3ab2ca' active />
+      <progress percent="{{percent}}" stroke-width="3" wx:if="{{percent > 0}}" activeColor='#762432' active />
     </View>
     <view class='choose_pic_show_container'>
       <image class='choose_pic_show' src='{{tempFilePaths}}' mode='aspectFit' ></image>

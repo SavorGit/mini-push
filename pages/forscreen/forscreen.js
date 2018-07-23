@@ -237,11 +237,11 @@ Page({
             },
             success: function (result) {
               
-              wx.showToast({
+              /*wx.showToast({
                 title: '发送投屏成功',
                 icon: 'success',
                 duration: 1000
-              });
+              });*/
               
               wx.request({
                 url: 'https://mobile.littlehotspot.com/Smallapp/index/recordForScreenPics',
@@ -260,6 +260,7 @@ Page({
                 showFirst: false,
                 showSecond:true,
                 showView:false,
+                percent:0
                 
               })
               //console.log(that.data);
