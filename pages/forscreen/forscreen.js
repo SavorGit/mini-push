@@ -13,6 +13,7 @@ Page({
  * 页面的初始数据
  */
   data: {
+    loadingHidden: true,
     Length: 3,        //输入框个数
     isFocus: false,    //聚焦
     Value: "",        //输入的内容
@@ -200,8 +201,15 @@ Page({
       var timestamp = (new Date()).valueOf();
       postf = filename.substring(index1, index2);//后缀名
       that.setData({
-        tempFilePaths: res.tempFilePaths
-      })
+        tempFilePaths: res.tempFilePaths,
+        loadingHidden: false
+      });
+      setTimeout(function () {
+        that.setData({
+          loadingHidden: true
+        });
+        that.update();
+      }, 3000);
       /*console.log(policy);
       console.log(signature);
       console.log(res);
