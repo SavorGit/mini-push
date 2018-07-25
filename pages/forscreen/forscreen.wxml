@@ -19,19 +19,19 @@
   </view>
   
   <!-- 输入验证 -->
-  <form bindsubmit="formSubmit" class="full_width display_{{showCode?'show':'hide'}}">
+  <form  class="full_width display_{{showCode?'show':'hide'}}">
     <view class='input_num'>
       <image class='input_pic_banner' src='/images/pic_check_code_banner.jpg'></image>
       <view class='content'>
         <block wx:for="{{Length}}" wx:key="item">
-          <input class="input iptbox" type="number"  value="{{Value.length>=index+1?Value[index]:''}}" disabled password='{{ispassword}}' catchtap='Tap'></input>
+          <input class="input iptbox" type="number"   value="{{Value.length>=index+1?Value[index]:''}}" disabled password='{{ispassword}}' catchtap='Tap'></input>
         </block>
       </view>
       <label class='input_tip'>请输入电视中的三位数连接电视</label>
-      <input type="number" name="password" value="{{pwds}}" password="{{true}}" class='ipt' maxlength="{{Length}}" focus="{{isFocus}}" bindinput="Focus"></input>
+      <input type="number" name="password" data-boxmac="{{box_mac}}" data-openid="{{openid}}" value="{{pwds}}" password="{{true}}" class='ipt' maxlength="{{Length}}" focus="{{isFocus}}" bindinput="Focus"></input>
       <input name="openid" class="display_hide" value="{{openid}}"></input>
       <input name="box_mac" class="display_hide" value="{{box_mac}}"></input>
-      <button class="btn-area" formType="submit">提交</button>
+      
     </view>
   </form>
 

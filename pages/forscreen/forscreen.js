@@ -36,7 +36,53 @@ Page({
     var inputValue = e.detail.value;
     that.setData({
       Value: inputValue,
-    })
+    });
+
+    var code_len = inputValue.length;
+    if(code_len==3){
+
+      wx.request({
+        url: 'https://mobile.littlehotspot.com/smallapp/index/checkcode',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        data: {
+          code: inputValue,
+          box_mac: e.target.dataset.boxmac,
+          openid: e.target.dataset.openid
+        },
+        success: function (res) {
+          
+          if (res.data.is_right == 0) {
+            //刷新页面
+          } else if (res.data.is_right == 1) {
+            wx.showToast({
+              title: '验证码输入错误，请重新输入',
+              icon: 'none',
+              duration: 2000
+            }),
+              that.setData({
+                Length: 3,        //输入框个数
+                isFocus: true,    //聚焦
+                Value: "",        //输入的内容
+                ispassword: false, //是否密文显示 true为密文， false为明文。  
+                pwds: '',
+
+              })
+          } else if (res.data.is_right == 2) {
+            that.setData({
+              showView: (!that.data.showView),
+              showCode: (!that.data.showCode),
+              isFocus:false
+            })
+          }
+
+        },
+        fial: function ({ errMsg }) {
+          console.log('errMsg is', errMsg)
+        }
+      })
+    } 
   },
   Tap() {
     var that = this;
@@ -44,48 +90,7 @@ Page({
       isFocus: true,
     })
   },
-  formSubmit(e) {
-    var that = this;
-    wx.request({
-      url: 'https://mobile.littlehotspot.com/smallapp/index/checkcode',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      data: {
-        code: e.detail.value.password,
-        box_mac: e.detail.value.box_mac,
-        openid: e.detail.value.openid
-      },
-      success: function (res) {
-        if(res.data.is_right==0){
-         //刷新页面
-        }else if(res.data.is_right==1){
-          wx.showToast({
-            title: '验证码输入错误，请重新输入',
-            icon: 'none',
-            duration: 2000
-          }),
-            that.setData({
-              Length: 3,        //输入框个数
-              isFocus: true,    //聚焦
-              Value: "",        //输入的内容
-              ispassword: false, //是否密文显示 true为密文， false为明文。  
-              pwds : '',
-              
-            })
-        }else if(res.data.is_right==2){
-          that.setData({
-            showView: (!that.data.showView),
-            showCode: (!that.data.showCode)
-          })
-        }
-        
-      },
-      fial: function ({ errMsg }) {
-        console.log('errMsg is', errMsg)
-      }
-    })
-  },
+  
   //进来加载页面：
   onLoad: function (options) {
     box_mac = decodeURIComponent(options.scene);
