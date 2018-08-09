@@ -145,6 +145,9 @@ image.pic_show{
   border-radius: 10rpx;
   background-color: #333333;
 }
+image.pic_show_cur{
+  border: 2rpx solid #932c3f;
+}
 .savor-btn-size{
   width: 750rpx;
   height: 98rpx;

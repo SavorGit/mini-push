@@ -40,8 +40,8 @@
     <form bindsubmit="up_forscreen">
       <view class="weui-grids grids-frame">
         <view class="pic_show weui-grid" wx:for="{{up_imgs}}" wx:key="key"  wx:for-item="img" wx:for-index="index" bindtap='previewImg' >
-          <image class='pic_show' mode='aspectFill' bindtap='up_single_pic' data-img="{{tmp_imgs[index].oss_img}}" data-boxmac="{{box_mac}}" data-openid="{{openid}}" src="{{img.tmp_img}}"></image>
-          <progress style='margin-top:-20rpx;' percent="{{tmp_percent[index].percent}}" stroke-width="6" wx:if="{{tmp_percent[index].percent > 0}}"  activeColor='#762432' active />
+          <image class='pic_show pic_show_cur' mode='aspectFill' bindtap='up_single_pic' data-img="{{tmp_imgs[index].oss_img}}" data-boxmac="{{box_mac}}" data-openid="{{openid}}" src="{{img.tmp_img}}"></image>
+          <progress style='margin-top:-20rpx;' percent="{{tmp_percent[index].percent}}" stroke-width="6" wx:if="{{tmp_percent[index].percent > 0}}"  activeColor='#932c3f' active />
           <input class="display_hide" name="upimgs{{index}}" value="{{img.tmp_img}}"></input>
         </view>
       </view>
