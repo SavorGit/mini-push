@@ -105,7 +105,7 @@ view.choose_pic_show_page{
   padding: 0;
   border: 0rpx;
 }
-view.choose_pic_show_container{
+/* view.choose_pic_show_container{
   margin: 0;
   padding: 0;
   border: 0rpx;
@@ -116,7 +116,7 @@ image.choose_pic_show{
   border: 0rpx;
   width: 100vw;
   height: 99vh;
-}
+} */
 .rechoose_button_pic{
   margin-top: -130rpx;
   margin-left: 30rpx;
@@ -136,7 +136,7 @@ image.choose_pic_show{
 } */
 view.pic_show{
   width:224rpx;
-  height:224rpx;
+  height:227rpx;
   margin:3rpx;
 }
 image.pic_show{
@@ -150,6 +150,7 @@ image.pic_show{
   height: 98rpx;
 }
 .grids-frame{
+    height: 688rpx;
   margin: 35rpx calc(100vw - 718rpx) 35rpx calc(100vw - 717rpx);
 }
 .tip_text{
@@ -171,7 +172,6 @@ image.pic_show{
 .weui-grids {
     position: relative;
     overflow: hidden;
-    height: 684rpx;
 }
 .weui-grids:before {
     content: " ";
