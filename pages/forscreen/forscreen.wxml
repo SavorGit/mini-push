@@ -2,9 +2,6 @@
 
   <!-- 选择图片 -->
   <view class="full_width display_{{showView?'show':'hide'}} " >
-    <!--<View >
-      <progress percent="{{percent}}" stroke-width="3" wx:if="{{percent > 0}}" activeColor='#762432' active />
-    </View>-->
     <view class='pic_tip_top'>
       <label>您已连接【{{hotel_room}}】的电视</label>
     </view>
@@ -37,17 +34,28 @@
 
   <!-- 图片展示页面 -->
   <view class="choose_pic_show_page display_{{showSecond?'show':'hide'}}">
-    <!--<View >
-      <progress percent="{{percent}}" stroke-width="3" wx:if="{{percent > 0}}" activeColor='#762432' active />
-    </View>-->
-    <view class='choose_pic_show_container'>
+    <!--<view class='choose_pic_show_container'>
       <image class='choose_pic_show' src='{{tempFilePaths}}' mode='aspectFit' ></image>
-    </view>
+    </view>-->
+    <form bindsubmit="up_forscreen">
+      <view class="img" wx:for="{{up_imgs}}" wx:key="key"  wx:for-item="img" wx:for-index="index" bindtap='previewImg' >
+          <image bindtap='up_single_pic' data-img="{{tmp_imgs[index].oss_img}}" data-boxmac="{{box_mac}}" data-openid="{{openid}}"   src="{{img.tmp_img}}"></image>
+          <input class="display_hide" name="upimgs{{index}}" value="{{img.tmp_img}}"></input>
+          <progress percent="{{tmp_percent[index].percent}}" stroke-width="3" wx:if="{{tmp_percent[index].percent > 0}}" activeColor='#762432' active />
+      </view>
+      <input class='display_hide' name="img_lenth" value="{{img_lenth}}"></input>
+      <input class="display_hide" name="box_mac" value="{{box_mac}}"></input>
+      <input class="display_hide" name="openid"  value="{{openid}}"></input>
+      为所有照片增加文字（选填）
+      <view class="inputView">
+        <input class='input' maxlength='30' name="forscreen_char" type='text'></input>
+      </view>
+      <button class="btn" form-type="submit" hover-class="none">投屏</button>
+    </form>
     <view class="rechoose_button_pic">
       <image bindtap="chooseImage" data-boxmac="{{box_mac}}" data-openid="{{openid}}" class='rechoose_button' src='/images/button_rechoose_pic.png'></image>
       <image bindtap="exitForscreen" class='rechoose_button button_space' data-boxmac="{{box_mac}}" src='/images/button_exit_cast_screen.png'></image>
     </view>
+    
   </view>
-
 </view>
-<loading hidden="{{loadingHidden}}">上传中...</loading>

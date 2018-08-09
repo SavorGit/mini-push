@@ -18,9 +18,18 @@ App({
         })
       }
     })*/
+    wx.getSystemInfo({
+      success: function (res) {
+        that.globalData.mobile_brand = res.brand;
+        that.globalData.mobile_model = res.model;
+
+      }
+    })
   },
   globalData: {
     openid: '',
-    box_mac: ''
+    box_mac: '',
+    mobile_brand:'',
+    mobile_model:''
   }
 })
