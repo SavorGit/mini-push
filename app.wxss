@@ -10,3 +10,9 @@
   background-color: #f6f2ec;
 }
 
+.savor-btn{
+  background-color: #932c3f;
+  color: #f6f2ec;
+  font-size: 34rpx;
+}
+
