@@ -51,7 +51,7 @@
       <label class='tip_text'>为所有照片增加文字（选填）</label>
       <!-- <view class="inputView"> -->
         <!-- <input class='input' maxlength='30' name="forscreen_char" type='text'></input> -->
-        <textarea class='text_input' name="forscreen_char" maxlength='30' >1-30字</textarea>
+        <textarea class='text_input' name="forscreen_char" maxlength='30' placeholder='1-30字' ></textarea>
       <!-- </view> -->
       <button class="savor-btn savor-btn-size" form-type="submit" hover-class="none" style='' >投屏</button>
     </form>
