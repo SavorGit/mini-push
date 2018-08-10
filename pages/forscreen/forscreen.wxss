@@ -117,11 +117,15 @@ image.choose_pic_show{
   margin: 80rpx 0 0 0;
 }
 .link_relief{
+  color: #932c3f;
+  text-decoration: underline;
+}
+.link_relief_{
   width: 100%;
   text-align: center;
   background-color: #f6f2ec;
   color: #932c3f;
-  font-size: 32rpx;
+  font-size: 28rpx;
   text-decoration: underline;
 }
 /* .input{
@@ -202,8 +206,8 @@ image.pic_show_cur{
   line-height:32rpx;
   text-align:center;
   position:absolute;
-  top:185rpx;
-  left:185rpx;
+  top:180rpx;
+  left:180rpx;
 }
 .upload_progress{
   margin-top:-30rpx;
