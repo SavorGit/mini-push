@@ -46,7 +46,7 @@
           <view class="pic_show">
             <image class='pic_show pic_show_cur' mode='aspectFill' bindtap='up_single_pic' data-img="{{tmp_imgs[index].oss_img}}" data-boxmac="{{box_mac}}" data-openid="{{openid}}" src="{{img.tmp_img}}"></image>
             <view class='upload_success_frame' wx:if="{{tmp_percent[index].percent >= 100}}">
-              <image style='margin:180rpx 0 0 180rpx;width:32rpx;height:32rpx;' src='/images/check_alt_32x32.png'></image>
+              <image style='margin:0 0 0 0;width:32rpx;height:32rpx;' src='/images/check_alt_32x32.png'></image>
             </view>
             <view class='upload_mask' wx:if="{{tmp_percent[index].percent < 100}}" >
               <label>{{tmp_percent[index].percent}}%</label>
