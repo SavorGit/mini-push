@@ -242,6 +242,7 @@ Page({
         uploadInfos(res, box_mac, openid);
         that.setData({
           showTpBt:true,
+          showThird: false,
         })
       }
     })
@@ -313,7 +314,7 @@ Page({
             data: {
               box_mac: box_mac,
               cmd: 'call-mini-program',
-              msg: '{ "action": 4, "url": "forscreen/resource/' + timestamp + postf + '", "filename":"' + timestamp + postf + '","openid":"' + openid + '","img_nums":' + img_len + ',"forscreen_char":"' + forscreen_char + '","order:"' + order+'}',
+              msg: '{ "action": 4, "url": "forscreen/resource/' + timestamp + postf + '", "filename":"' + timestamp + postf + '","openid":"' + openid + '","img_nums":' + img_len + ',"forscreen_char":"' + forscreen_char + '","order:' + order+'}',
               req_id: timestamp
             },
             success: function (result) {
@@ -347,11 +348,35 @@ Page({
       });
       upload_task.onProgressUpdate((res) => {
         
-        tmp_percent[flag] = { "percent": res.progress};
-        console.log(tmp_percent);
+        /*if(res.progress>90){
+          
+          setTimeout(function () {
+            tmp_percent[flag] = { "percent": res.progress };
+            console.log(res.progress);
+            that.setData({
+              tmp_percent: tmp_percent
+            })
+          }, 1000);
+          
+        }else {
+          tmp_percent[flag] = { "percent": res.progress };
+
+          that.setData({
+            tmp_percent: tmp_percent
+          })
+        }*/
+        tmp_percent[flag] = { "percent": res.progress };
+        console.log(res.progress);
         that.setData({
-          tmp_percent : tmp_percent
+          tmp_percent: tmp_percent
         })
+        /*setTimeout(function () {
+          tmp_percent[flag] = { "percent": res.progress };
+          console.log(res.progress);
+          that.setData({
+            tmp_percent: tmp_percent
+          })
+        }, 500);*/
       })
       
     }
