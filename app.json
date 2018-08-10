@@ -1,7 +1,8 @@
 {
   "pages":[
     "pages/index/index",
-    "pages/forscreen/forscreen"
+    "pages/forscreen/forscreen",
+    "pages/forscreen/relief"
   ],
   "window": {
     "backgroundTextStyle": "light",

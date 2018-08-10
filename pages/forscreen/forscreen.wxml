@@ -67,7 +67,7 @@
     </form>
     <view class="rechoose_button_pic display_{{showThird?'show':'hide'}}">
       <view class='link_relief'>
-        <label >免责声明</label>
+        <label ><navigator url="/pages/forscreen/relief">免责声明</navigator></label>
       </view>
       <view class='rechoose_button_frame'>
         <image bindtap="chooseImage" data-boxmac="{{box_mac}}" data-openid="{{openid}}" class='rechoose_button' src='/images/button_rechoose_pic.png'></image>
