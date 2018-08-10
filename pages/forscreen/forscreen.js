@@ -278,7 +278,7 @@ Page({
         uploadOss_multy(policy, signature, upimgs, box_mac, openid, img_lenth, forscreen_char);
       }
     });
-    function uploadOssNew(policy, signature, img_url, box_mac, openid, timestamp, flag, img_len, forscreen_char) {
+    function uploadOssNew(policy, signature, img_url, box_mac, openid, timestamp, flag, img_len, forscreen_char, forscreen_id) {
       var filename = img_url;
       var index1 = filename.lastIndexOf(".");
       var index2 = filename.length;
@@ -314,7 +314,7 @@ Page({
             data: {
               box_mac: box_mac,
               cmd: 'call-mini-program',
-              msg: '{ "action": 4, "url": "forscreen/resource/' + timestamp + postf + '", "filename":"' + timestamp + postf + '","openid":"' + openid + '","img_nums":' + img_len + ',"forscreen_char":"' + forscreen_char + '","order":' + order+'}',
+              msg: '{ "action": 4, "url": "forscreen/resource/' + timestamp + postf + '", "filename":"' + timestamp + postf + '","openid":"' + openid + '","img_nums":' + img_len + ',"forscreen_char":"' + forscreen_char + '","order":' + order +',"forscreen_id":'+forscreen_id+'}',
               req_id: timestamp
             },
             success: function (result) {
@@ -383,6 +383,7 @@ Page({
     function uploadOss_multy(policy, signature, upimgs, box_mac, openid, img_len, forscreen_char) {
        //console.log(img_len);
       var tmp_imgs = [];
+      var forscreen_id = (new Date()).valueOf();
        for(var i=0; i<img_len;i++){
          var filename = upimgs[i];
          var index1 = filename.lastIndexOf(".");
@@ -395,7 +396,7 @@ Page({
          that.setData({
            tmp_imgs: tmp_imgs
          });
-         uploadOssNew(policy, signature, upimgs[i], box_mac, openid, timestamp, i, img_len, forscreen_char);
+         uploadOssNew(policy, signature, upimgs[i], box_mac, openid, timestamp, i, img_len, forscreen_char, forscreen_id);
        }
        that.setData({
          showThird:true,
