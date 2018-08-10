@@ -22,6 +22,14 @@
 .display_show {
   display: block;
 }
+.tip_font_28{
+  font-size:28rpx;
+  color: #333333;
+}
+.tip_font_24{
+  font-size:24rpx;
+  color: #333333;
+}
 .tip_font_30{
   font-size:32rpx;
   color: #333333;
