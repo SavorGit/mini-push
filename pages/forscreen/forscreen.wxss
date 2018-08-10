@@ -202,8 +202,8 @@ image.pic_show_cur{
   line-height:32rpx;
   text-align:center;
   position:absolute;
-  top:185rpx;
-  left:185rpx;
+  top:180rpx;
+  left:180rpx;
 }
 .upload_progress{
   margin-top:-30rpx;
