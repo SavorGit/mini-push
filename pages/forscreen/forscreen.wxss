@@ -145,15 +145,27 @@ image.pic_show{
   border-radius: 10rpx;
   background-color: #333333;
 }
+image.pic_show:active{
+  width: 222rpx;
+  height: 222rpx;
+  border: 1rpx solid #932c3f;
+}
+image.pic_show::selection{
+  width: 222rpx;
+  height: 222rpx;
+  border: 1rpx solid #932c3f;
+}
 image.pic_show_cur{
-  border: 2rpx solid #932c3f;
+  width: 222rpx;
+  height: 222rpx;
+  border: 1rpx solid #932c3f;
 }
 .savor-btn-size{
   width: 750rpx;
   height: 98rpx;
 }
 .grids-frame{
-    height: 688rpx;
+  height: 688rpx;
   margin: 35rpx calc(100vw - 718rpx) 35rpx calc(100vw - 717rpx);
 }
 .tip_text{
@@ -170,13 +182,27 @@ image.pic_show_cur{
   border: 1rpx #a5a19d solid;
   border-radius: 10rpx;
 }
+.upload_progress{
+  width:224rpx;
+  height:224rpx;
+  line-height:224rpx;
+  text-align:center;
+  position:absolute;
+  top:0;
+  left:0;
+  opacity:0.7;
+  background-color:#000;
+  color:#fff;
+  font-size:50rpx;
+  border-radius: 10rpx;
+}
 
 
 .weui-grids {
     position: relative;
     overflow: hidden;
 }
-.weui-grids:before {
+.weui-grids::before {
     content: " ";
     position: absolute;
     left: 0;
@@ -190,7 +216,7 @@ image.pic_show_cur{
     -webkit-transform: scaleY(0.5);
     transform: scaleY(0.5);
 }
-.weui-grids:after {
+.weui-grids::after {
     content: " ";
     position: absolute;
     left: 0;
@@ -210,7 +236,7 @@ image.pic_show_cur{
     width: 33.33333333%;
     box-sizing: border-box;
 }
-.weui-grid:before {
+.weui-grid::before {
     content: " ";
     position: absolute;
     right: 0;
@@ -224,7 +250,7 @@ image.pic_show_cur{
     -webkit-transform: scaleX(0.5);
     transform: scaleX(0.5);
 }
-.weui-grid:after {
+.weui-grid::after {
     content: " ";
     position: absolute;
     left: 0;
