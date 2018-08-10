@@ -342,41 +342,23 @@ Page({
             },
           })
         },
+        complete:function(es){
+          tmp_percent[flag] = { "percent": 100 };
+          that.setData({
+            tmp_percent: tmp_percent
+          })
+        },
         fial: function ({ errMsg }) {
           console.log('uploadImage fial,errMsg is', errMsg)
         },
       });
       upload_task.onProgressUpdate((res) => {
-        
-        /*if(res.progress>90){
-          
-          setTimeout(function () {
-            tmp_percent[flag] = { "percent": res.progress };
-            console.log(res.progress);
-            that.setData({
-              tmp_percent: tmp_percent
-            })
-          }, 1000);
-          
-        }else {
-          tmp_percent[flag] = { "percent": res.progress };
-
-          that.setData({
-            tmp_percent: tmp_percent
-          })
-        }*/
         tmp_percent[flag] = { "percent": res.progress };
         console.log(res.progress);
         that.setData({
           tmp_percent: tmp_percent
         })
-        /*setTimeout(function () {
-          tmp_percent[flag] = { "percent": res.progress };
-          console.log(res.progress);
-          that.setData({
-            tmp_percent: tmp_percent
-          })
-        }, 500);*/
+      
       })
       
     }
