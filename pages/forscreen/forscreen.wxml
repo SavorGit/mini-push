@@ -48,7 +48,7 @@
             <view class='upload_mask' wx:if="{{tmp_percent[index].percent < 100}}" >
               <label>{{tmp_percent[index].percent}}%</label>
             </view>
-            <progress class='upload_progress' percent="{{tmp_percent[index].percent}}" stroke-width="6" wx:if="{{tmp_percent[index].percent > 0}}"  activeColor='#932c3f' active />
+            <!-- <progress class='upload_progress' percent="{{tmp_percent[index].percent}}" stroke-width="6" wx:if="{{tmp_percent[index].percent > 0}}"  activeColor='#932c3f' active /> -->
             <input class="display_hide" name="upimgs{{index}}" value="{{img.tmp_img}}"></input>
           </view>
         </view>
