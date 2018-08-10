@@ -283,6 +283,7 @@ Page({
       var index2 = filename.length;
       var mobile_brand = app.globalData.mobile_brand;
       var mobile_model = app.globalData.mobile_model;
+      var order = flag+1;
       postf = filename.substring(index1, index2);//后缀名
 
       
@@ -312,7 +313,7 @@ Page({
             data: {
               box_mac: box_mac,
               cmd: 'call-mini-program',
-              msg: '{ "action": 4, "url": "forscreen/resource/' + timestamp + postf + '", "filename":"' + timestamp + postf + '","openid":"'+openid+'","img_nums":'+img_len+',"forscreen_char":"'+forscreen_char+'"}',
+              msg: '{ "action": 4, "url": "forscreen/resource/' + timestamp + postf + '", "filename":"' + timestamp + postf + '","openid":"' + openid + '","img_nums":' + img_len + ',"forscreen_char":"' + forscreen_char + '","order:"' + order+'}',
               req_id: timestamp
             },
             success: function (result) {
