@@ -204,6 +204,11 @@ Page({
   chooseImage(e) {
     var that = this;
     openid = e.currentTarget.dataset.openid;
+    box_mac = e.currentTarget.dataset.boxmac;
+    that.setData({
+      up_imgs:[],
+      tmp_percent:[]
+    })
     function uploadInfos( res,box_mac,openid){
       var img_len = res.tempFilePaths.length;
       if (img_len > 0 && img_len < 10) {
@@ -216,6 +221,7 @@ Page({
           showFirst: false,
           showSecond: true,
           showView: false,
+          showThird:false,
           percent: 0,
           up_imgs: tmp_imgs,
           img_lenth:img_len,
@@ -437,6 +443,7 @@ Page({
           showExit: false,
           showSecond:false,
           showView:true,
+          showThird:false,
 
         })
 
