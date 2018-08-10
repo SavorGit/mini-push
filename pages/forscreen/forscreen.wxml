@@ -49,14 +49,15 @@
       <input class='display_hide' name="img_lenth" value="{{img_lenth}}"></input>
       <input class="display_hide" name="box_mac" value="{{box_mac}}"></input>
       <input class="display_hide" name="openid"  value="{{openid}}"></input>
-      <label class='tip_text'>为所有照片增加文字（选填）</label>
-      <!-- <view class="inputView"> -->
-        <!-- <input class='input' maxlength='30' name="forscreen_char" type='text'></input> -->
+      <view class="display_{{showTpBt?'show':'hide'}}">
+         <label class='tip_text'>为所有照片增加文字（选填）</label>
+      
         <textarea class='text_input' name="forscreen_char" maxlength='30' placeholder='1-30字' ></textarea>
-      <!-- </view> -->
-      <button class="savor-btn savor-btn-size" form-type="submit" hover-class="none" style='' >投屏</button>
+      
+        <button class="savor-btn savor-btn-size" form-type="submit" hover-class="none" style='' >投屏</button>
+      </view>
     </form>
-    <view class="rechoose_button_pic display_hide">
+    <view class="rechoose_button_pic display_{{showThird?'show':'hide'}}">
       <image bindtap="chooseImage" data-boxmac="{{box_mac}}" data-openid="{{openid}}" class='rechoose_button' src='/images/button_rechoose_pic.png'></image>
       <image bindtap="exitForscreen" class='rechoose_button button_space' data-boxmac="{{box_mac}}" src='/images/button_exit_cast_screen.png'></image>
     </view>

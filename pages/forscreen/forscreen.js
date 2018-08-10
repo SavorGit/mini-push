@@ -29,6 +29,7 @@ Page({
     showExit: false,     //是否显示退出投屏
     showFirst:true,
     showSecond:false,
+    showThird:false,
     openid :'',
     box_mac:'',
     tempFilePaths:'/images/pic_default.png',
@@ -233,6 +234,9 @@ Page({
       sourceType: ['album', 'camera'], // 可以指定来源是相册还是相机，默认二者都有
       success: function (res) {
         uploadInfos(res, box_mac, openid);
+        that.setData({
+          showTpBt:true,
+        })
       }
     })
   },
@@ -361,6 +365,10 @@ Page({
          });
          uploadOssNew(policy, signature, upimgs[i], box_mac, openid, timestamp, i, img_len, forscreen_char);
        }
+       that.setData({
+         showThird:true,
+         showTpBt:false
+       });
     }
   }, 
   up_single_pic(e){
