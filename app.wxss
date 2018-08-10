@@ -16,3 +16,21 @@
   font-size: 34rpx;
 }
 
+.display_hide {
+  display: none;
+}
+.display_show {
+  display: block;
+}
+.tip_font_30{
+  font-size:32rpx;
+  color: #333333;
+}
+.tip_font_32{
+  font-size:32rpx;
+  color: #333333;
+}
+.tip_font_34{
+  font-size:34rpx;
+  color: #333333;
+}
