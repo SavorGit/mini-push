@@ -13,6 +13,7 @@ var img_lenth = 0;
 var oss_img = [];
 var tmp_percent = [];
 var forscreen_char = '';
+var pic_show_cur = [];
 Page({
   /**
  * 页面的初始数据
@@ -36,7 +37,8 @@ Page({
     percent : '',
     hotel_room:'',
     up_imgs:'',
-    tmp_percent :[]
+    tmp_percent :[],
+    pic_show_cur:[],
   },
   Focus(e) {
     var that = this;
@@ -387,6 +389,7 @@ Page({
     }
   }, 
   up_single_pic(e){
+    var that = this;
     box_mac = e.target.dataset.boxmac;
     openid  = e.target.dataset.openid;
     var forscreen_img =  e.target.dataset.img;
@@ -395,6 +398,19 @@ Page({
     var timestamp = (new Date()).valueOf();
     var mobile_brand = app.globalData.mobile_brand;
     var mobile_model = app.globalData.mobile_model;
+    var img_index = e.target.dataset.imgindex;
+    var img_len = e.target.dataset.imglen;
+    for(var p=0;p<img_len;p++){
+      if(img_index==p){
+        pic_show_cur[p] = true;
+        
+      }else {
+        pic_show_cur[p] = false;
+      }
+      that.setData({
+        pic_show_cur: pic_show_cur
+      })
+    }
     wx.request({
       url: "https://netty-push.littlehotspot.com/push/box",
       header: {
