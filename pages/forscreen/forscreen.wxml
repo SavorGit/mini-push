@@ -39,7 +39,7 @@
     </view>-->
     <view class="pic_tip_top display_{{showThird?'show':'hide'}}">
       <view class='full_width tip_font_28'>
-        <label style='position: relative;float: left;margin-left:40rpx;'>图片上传成功后，选择照片，电视开始展示</label>
+        <label style='position: relative;float: left;margin-left:40rpx;'>图片加载成功后，选择照片，电视开始展示</label>
         <label class='link_relief'><navigator url="/pages/forscreen/relief">免责声明</navigator></label>
       </view>
     </view>

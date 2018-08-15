@@ -209,7 +209,10 @@ Page({
     box_mac = e.currentTarget.dataset.boxmac;
     that.setData({
       up_imgs:[],
-      tmp_percent:[]
+      tmp_percent:[],
+      tmp_imgs:[],
+      pic_show_cur:[]
+
     })
     function uploadInfos( res,box_mac,openid){
       var img_len = res.tempFilePaths.length;
