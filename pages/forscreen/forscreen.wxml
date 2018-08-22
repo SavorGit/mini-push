@@ -27,7 +27,7 @@
       </view>
       <view>
         <image src='/images/btn_upload_video.jpg' bindtap='chooseVedio' data-boxmac="{{box_mac}}" data-openid="{{openid}}"></image>
-        <label class='font_d_red_24'>照片上电视</label>
+        <label class='font_d_red_24'>视频上电视</label>
       </view>
       <view>
         <image src='/images/btn_upload_video.jpg' bindtap='chooseVedio' data-boxmac="{{box_mac}}" data-openid="{{openid}}"></image>
