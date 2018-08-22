@@ -32,6 +32,7 @@ Page({
     showFirst:true,
     showSecond:false,
     showThird:false,
+    showVedio:false,     //投屏视频
     openid :'',
     box_mac:'',
     tempFilePaths:'/images/pic_default.png',
@@ -42,6 +43,7 @@ Page({
     pic_show_cur:[],
     program_list:[],
     hiddens:true,
+    upload_vedio_temp:''   //投屏视频封面图
     
   },
   Focus(e) {
@@ -539,14 +541,24 @@ Page({
     function uploadOssVedio(policy, signature, video, box_mac, openid){
       
       var filename = video.tempFilePath;          //视频url
-      var filename_img = video.thumbTempFilePath; //视频封面图
+      //var filename_img = video.thumbTempFilePath; //视频封面图
+      console.log(video);
       var index1 = filename.lastIndexOf(".");
       var index2 = filename.length;
       var mobile_brand = app.globalData.mobile_brand;
       var mobile_model = app.globalData.mobile_model;
       var postf_t = filename.substring(index1, index2);//后缀名
       var timestamp = (new Date()).valueOf();
-      
+      that.setData({
+        showExit: false,
+        showFirst: false,
+        showSecond: false,
+        showView: false,
+        showThird: false,
+        showVedio: true,
+        upload_vedio_temp: filename
+
+      });
       wx.uploadFile({
         url: "https://oss.littlehotspot.com",
         filePath: filename,
@@ -573,7 +585,7 @@ Page({
             data: {
               box_mac: box_mac,
               cmd: 'call-mini-program',
-              msg: '{ "action": 4, "url": "forscreen/resource/' + timestamp + postf_t + '", "filename":"' + timestamp + postf_t + '","openid":"' + openid + '","resource_type":2}',
+              msg: '{ "action": 2, "url": "forscreen/resource/' + timestamp + postf_t + '", "filename":"' + timestamp + postf_t + '","openid":"' + openid + '","resource_type":2}',
               req_id: timestamp
             },
             success: function (result) {
@@ -593,18 +605,10 @@ Page({
               });
               
             },
-          })
-          that.setData({
-            showExit: false,
-            showFirst: false,
-            showSecond: false,
-            showView: false,
-            showThird: false,
-            
           });
-          
         }
-      })
+      });
+      
     }
   },
   boxShow(e){//视频点播让盒子播放
