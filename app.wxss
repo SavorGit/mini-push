@@ -47,6 +47,14 @@
   font-size:34rpx;
   color: #F6F6F6;
 }
+.font_white_28{
+  font-size:28rpx;
+  color: #F6F6F6;
+}
+.font_d_red_24{
+  font-size:24rpx;
+  color: #932C3F;
+}
 
 button.btn_border_022{
   font-size: 22rpx;
