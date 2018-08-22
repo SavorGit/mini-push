@@ -92,10 +92,6 @@
 .fix_container > .top > button{
   width: 150rpx;
   height: 60rpx;
-  font-size: 22rpx;
-  color: #932C3F;
-  border: 1rpx solid #932C3F;
-  border-radius: 12rpx;
 }
 
 .fix_container > .operation{

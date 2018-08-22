@@ -1,0 +1,22 @@
+<!--pages/forscreen/video/play_video.wxml-->
+<view class='container'>
+  <view class='page_top flex_row_center tip_font_30'>
+    <label >视频上传成功后，电视下载完毕开始播放</label>
+    <label class='link_relief'><navigator url="/pages/forscreen/relief">免责声明</navigator></label>
+  </view>
+  <view class='page_main'>
+    <view class='cover'>
+      <image src='/images/pic_default.png'>封面图片</image>
+      <view class='mask_layer flex_column_center'>
+        <view>
+          <label class='font_white_34'>100%</label>
+          <progress style='' percent='100' stroke-width="5" activeColor='#FFFFFF' backgroundColor="#9F9F9F" active />
+        </view>
+      </view>
+    </view>
+  </view>
+  <view class='operation flex_row_center'>
+    <button class='btn_background_034'>重选视频</button>
+    <button class='btn_background_034'>退出投屏</button>
+  </view>
+</view>
