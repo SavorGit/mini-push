@@ -43,7 +43,8 @@ Page({
     pic_show_cur:[],
     program_list:[],
     hiddens:true,
-    upload_vedio_temp:''   //投屏视频封面图
+    upload_vedio_temp:'',   //投屏视频封面图
+    vedio_percent:100,
     
   },
   Focus(e) {
@@ -559,7 +560,7 @@ Page({
         upload_vedio_temp: filename
 
       });
-      wx.uploadFile({
+      var upload_task = wx.uploadFile({
         url: "https://oss.littlehotspot.com",
         filePath: filename,
         name: 'file',
@@ -585,7 +586,7 @@ Page({
             data: {
               box_mac: box_mac,
               cmd: 'call-mini-program',
-              msg: '{ "action": 2, "url": "forscreen/resource/' + timestamp + postf_t + '", "filename":"' + timestamp + postf_t + '","openid":"' + openid + '","resource_type":2}',
+              msg: '{ "action":2, "url": "forscreen/resource/' + timestamp + postf_t + '", "filename":"' + timestamp + postf_t + '","openid":"' + openid + '","resource_type":2}',
               req_id: timestamp
             },
             success: function (result) {
@@ -608,7 +609,13 @@ Page({
           });
         }
       });
-      
+      upload_task.onProgressUpdate((res) => {
+        console.log(res.progress);
+        that.setData({
+          vedio_percent: res.progress
+        })
+
+      })
     }
   },
   boxShow(e){//视频点播让盒子播放

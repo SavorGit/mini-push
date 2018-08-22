@@ -129,7 +129,7 @@
     <view class='cover'>
       <video class="screen_video" src='{{upload_vedio_temp}}' ></video>
       <view class='mask_layer flex_column_center'>
-        <view>
+        <view >
           <label class='font_white_34'>100%</label>
           <progress style='' percent='100' stroke-width="5" activeColor='#FFFFFF' backgroundColor="#9F9F9F" active />
         </view>
