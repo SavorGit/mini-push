@@ -14,6 +14,7 @@ var oss_img = [];
 var tmp_percent = [];
 var forscreen_char = '';
 var pic_show_cur = [];
+var page = 1;
 Page({
   /**
  * 页面的初始数据
@@ -39,6 +40,9 @@ Page({
     up_imgs:'',
     tmp_percent :[],
     pic_show_cur:[],
+    program_list:[],
+    hiddens:true,
+    
   },
   Focus(e) {
     var that = this;
@@ -104,6 +108,23 @@ Page({
   onLoad: function (options) {
     box_mac = decodeURIComponent(options.scene);
     var that = this
+    wx.request({//获取机顶盒节目单列表
+      url: 'https://mobile.littlehotspot.com/Smallapp/BoxProgram/getBoxProgramList',
+      header:{
+        'Content-Type': 'application/json'
+      },
+      data:{
+        box_mac:box_mac,
+        page:page,
+      },
+      method:"POST",
+      success:function(res){
+        that.setData({
+          program_list:res.data.result
+        })
+      }
+    })
+
     function getHotelInfo(box_mac){
       wx.request({
         url: 'https://mobile.littlehotspot.com/Smallapp/Index/getHotelInfo',
@@ -284,24 +305,28 @@ Page({
       }
     });
     function uploadOssNew(policy, signature, img_url, box_mac, openid, timestamp, flag, img_len, forscreen_char, forscreen_id) {
+
       var filename = img_url;
       var index1 = filename.lastIndexOf(".");
       var index2 = filename.length;
       var mobile_brand = app.globalData.mobile_brand;
       var mobile_model = app.globalData.mobile_model;
       var order = flag+1;
-      postf = filename.substring(index1, index2);//后缀名
-
-      
+      var postf_t = filename.substring(index1, index2);//后缀名
+      var postf_w = filename.substring(index1+1, index2);//后缀名
+      console.log(postf_w);
       
       var upload_task = wx.uploadFile({
         url: "https://oss.littlehotspot.com",
         filePath: img_url,
         name: 'file',
+        header:{
+          'Content-Type': 'image/' + postf_w
+        },
         formData: {
           Bucket: "redian-produce",
           name: img_url,
-          key: "forscreen/resource/" + timestamp + postf,
+          key: "forscreen/resource/" + timestamp + postf_t,
           policy: policy,
           OSSAccessKeyId: "LTAITjXOpRHKflOX",
           sucess_action_status: "200",
@@ -319,7 +344,7 @@ Page({
             data: {
               box_mac: box_mac,
               cmd: 'call-mini-program',
-              msg: '{ "action": 4, "url": "forscreen/resource/' + timestamp + postf + '", "filename":"' + timestamp + postf + '","openid":"' + openid + '","img_nums":' + img_len + ',"forscreen_char":"' + forscreen_char + '","order":' + order +',"forscreen_id":"'+forscreen_id+'"}',
+              msg: '{ "action": 4, "resource_type":2, "url": "forscreen/resource/' + timestamp + postf_t + '", "filename":"' + timestamp + postf_t + '","openid":"' + openid + '","img_nums":' + img_len + ',"forscreen_char":"' + forscreen_char + '","order":' + order +',"forscreen_id":"'+forscreen_id+'"}',
               req_id: timestamp
             },
             success: function (result) {
@@ -334,7 +359,7 @@ Page({
                   mobile_brand:mobile_brand,
                   mobile_model: mobile_model,
                   forscreen_char:forscreen_char,
-                  imgs: '["forscreen/resource/' + timestamp + postf + '"]'
+                  imgs: '["forscreen/resource/' + timestamp + postf_t + '"]'
                 },
               });
               that.setData({
@@ -481,6 +506,165 @@ Page({
           title: '网络异常，退出失败',
           icon: 'none',
           duration: 2000
+        })
+      }
+    })
+  },
+  chooseVedio(e){//选择视频投屏
+    var that = this
+    var box_mac= e.currentTarget.dataset.boxmac;
+    var openid = e.currentTarget.dataset.openid;
+
+    wx.chooseVideo({
+      sourceType: ['album', 'camera'],
+      maxDuration: 60,
+      camera: 'back',
+      success: function (res) {
+        uploadVedio(res,box_mac,openid);
+      }
+    });
+    function uploadVedio(video,box_mac,openid){
+      wx.request({
+        url: 'https://mobile.littlehotspot.com/Smallapp/Index/getOssParams',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        success: function (rest) {
+          policy = rest.data.policy;
+          signature = rest.data.signature;
+          uploadOssVedio(policy, signature, video, box_mac, openid);
+        }
+      });
+    }
+    function uploadOssVedio(policy, signature, video, box_mac, openid){
+      
+      var filename = video.tempFilePath;          //视频url
+      var filename_img = video.thumbTempFilePath; //视频封面图
+      var index1 = filename.lastIndexOf(".");
+      var index2 = filename.length;
+      var mobile_brand = app.globalData.mobile_brand;
+      var mobile_model = app.globalData.mobile_model;
+      var postf_t = filename.substring(index1, index2);//后缀名
+      var timestamp = (new Date()).valueOf();
+      
+      wx.uploadFile({
+        url: "https://oss.littlehotspot.com",
+        filePath: filename,
+        name: 'file',
+        
+        formData: {
+          Bucket: "redian-produce",
+          name: filename,
+          key: "forscreen/resource/" + timestamp + postf_t,
+          policy: policy,
+          OSSAccessKeyId: "LTAITjXOpRHKflOX",
+          sucess_action_status: "200",
+          signature: signature
+
+        },
+        success:function(res){
+          
+          wx.request({
+            url: "https://netty-push.littlehotspot.com/push/box",
+            header: {
+              "Content-Type": "application/x-www-form-urlencoded"
+            },
+            method: "POST",
+            data: {
+              box_mac: box_mac,
+              cmd: 'call-mini-program',
+              msg: '{ "action": 4, "url": "forscreen/resource/' + timestamp + postf_t + '", "filename":"' + timestamp + postf_t + '","openid":"' + openid + '","resource_type":2}',
+              req_id: timestamp
+            },
+            success: function (result) {
+              wx.request({
+                url: 'https://mobile.littlehotspot.com/Smallapp/index/recordForScreenPics',
+                header: {
+                  'content-type': 'application/json'
+                },
+                data: {
+                  openid: openid,
+                  box_mac: box_mac,
+                  mobile_brand: mobile_brand,
+                  mobile_model: mobile_model,
+                  forscreen_char: forscreen_char,
+                  imgs: '["forscreen/resource/' + timestamp + postf_t + '"]'
+                },
+              });
+              
+            },
+          })
+          that.setData({
+            showExit: false,
+            showFirst: false,
+            showSecond: false,
+            showView: false,
+            showThird: false,
+            
+          });
+          
+        }
+      })
+    }
+  },
+  boxShow(e){//视频点播让盒子播放
+    var box_mac = e.currentTarget.dataset.boxmac;
+    var vediourl = e.currentTarget.dataset.vediourl;
+    
+    var index1 = vediourl.lastIndexOf("/");
+    var index2 = vediourl.length;
+    var filename = vediourl.substring(index1+1, index2);//后缀名
+    var timestamp = (new Date()).valueOf();
+    wx.request({
+      url: "https://netty-push.littlehotspot.com/push/box",
+      header: {
+        "Content-Type": "application/x-www-form-urlencoded"
+      },
+      method: "POST",
+      data: {
+        box_mac: box_mac,
+        cmd: 'call-mini-program',
+        msg: '{ "action": 5,"url":"' + vediourl + '","filename":"'+filename+'"}',
+        req_id: timestamp
+      },
+      success: function (res) {
+        wx.showToast({
+          title: '点播成功,电视即将开始播放',
+          icon: 'none',
+          duration: 2000
+        });
+      },
+      fail: function (res) {
+        wx.showToast({
+          title: '网络异常,点播失败',
+          icon: 'none',
+          duration: 2000
+        })
+      }
+    })
+  },
+  // 上拉加载
+  loadMore: function (e) {
+    var that= this;
+    var box_mac = e.currentTarget.dataset.boxmac;
+    page = page+1;
+    that.setData({
+      hiddens:false,
+    })
+    wx.request({
+      url: 'https://mobile.littlehotspot.com/Smallapp/BoxProgram/getBoxProgramList',
+      header: {
+        'Content-Type': 'application/json'
+      },
+      data: {
+        box_mac: box_mac,
+        page: page,
+      },
+      method: "POST",
+      success: function (res) {
+        that.setData({
+          program_list: res.data.result,
+          hiddens: true,
         })
       }
     })

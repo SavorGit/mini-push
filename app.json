@@ -1,10 +1,9 @@
 {
   "pages":[
-    "pages/forscreen/video/launch_video",
     "pages/index/index",
     "pages/forscreen/forscreen",
     "pages/forscreen/relief",
-    "pages/forscreen/main/index"
+    "pages/forscreen/video/launch_video"
   ],
   "window": {
     "backgroundTextStyle": "light",
