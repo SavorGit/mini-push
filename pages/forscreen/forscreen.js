@@ -455,7 +455,7 @@ Page({
       data: {
         box_mac: box_mac,
         cmd: 'call-mini-program',
-        msg: '{ "action": 2, "url": "' + forscreen_img + '", "filename":"' + filename+ '","openid":"'+openid+'"}',
+        msg: '{ "action": 2,"resource_type":1, "url": "' + forscreen_img + '", "filename":"' + filename+ '","openid":"'+openid+'"}',
         req_id: timestamp
       },
       success: function (result) {
@@ -506,6 +506,7 @@ Page({
           showSecond:false,
           showView:true,
           showThird:false,
+          showVedio:false,
 
         })
 
@@ -556,16 +557,7 @@ Page({
       var mobile_model = app.globalData.mobile_model;
       var postf_t = filename.substring(index1, index2);//后缀名
       var timestamp = (new Date()).valueOf();
-      that.setData({
-        showExit: false,
-        showFirst: false,
-        showSecond: false,
-        showView: false,
-        showThird: false,
-        showVedio: true,
-        upload_vedio_temp: filename
-
-      });
+      
       var upload_task = wx.uploadFile({
         url: "https://image.littlehotspot.com",
         filePath: filename,
@@ -623,7 +615,17 @@ Page({
           vedio_percent: res.progress
         })
 
-      })
+      });
+      that.setData({
+        showExit: false,
+        showFirst: false,
+        showSecond: false,
+        showView: false,
+        showThird: false,
+        showVedio: true,
+        upload_vedio_temp: filename
+
+      });
     }
   },
   boxShow(e){//视频点播让盒子播放
