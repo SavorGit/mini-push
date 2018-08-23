@@ -524,6 +524,9 @@ Page({
     var that = this
     var box_mac= e.currentTarget.dataset.boxmac;
     var openid = e.currentTarget.dataset.openid;
+    that.setData({
+      upload_vedio_temp: '',
+    })
 
     wx.chooseVideo({
       sourceType: ['album', 'camera'],
