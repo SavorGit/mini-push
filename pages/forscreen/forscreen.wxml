@@ -136,12 +136,12 @@
     <view class='launch_video_page_main'>
       <view class='cover full_width'>
         <video class="screen_video" src='{{upload_vedio_temp}}' ></video>
-        <cover-view class='mask_layer flex_column_center'>
-          <cover-view>
+        <view class='mask_layer flex_column_center'>
+          <view>
             <label class='font_white_34'>{{vedio_percent}}%</label>
             <progress percent='{{vedio_percent}}' stroke-width="5" activeColor='#FFFFFF' backgroundColor="#6F6F6F" active />
-          </cover-view>
-        </cover-view>
+          </view>
+        </view>
       </view>
     </view>
     <view class='launch_video_page_bottom flex_row_center'>
