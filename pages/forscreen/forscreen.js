@@ -45,7 +45,8 @@ Page({
     hiddens:true,
     upload_vedio_temp:'',   //投屏视频封面图
     vedio_percent:100,
-    
+    happy_vedio_url:'' ,          //生日视频url
+    happy_vedio_name:''          //生日视频名称
   },
   Focus(e) {
     var that = this;
@@ -140,7 +141,9 @@ Page({
         method: "POST",
         success: function (res) {
           that.setData({
-            hotel_room: res.data.result.hotel_name + res.data.result.room_name
+            hotel_room: res.data.result.hotel_name + res.data.result.room_name,
+            happy_vedio_url:res.data.result.vedio_url,
+            happy_vedio_name: res.data.result.file_name,
           })
         }
       })
@@ -359,6 +362,7 @@ Page({
                 data: {
                   openid: openid,
                   box_mac: box_mac,
+                  action:  4,
                   mobile_brand:mobile_brand,
                   mobile_model: mobile_model,
                   forscreen_char:forscreen_char,
@@ -463,6 +467,8 @@ Page({
           data: {
             openid: openid,
             box_mac: box_mac,
+            action:2,
+            resource_type:1,
             mobile_brand: mobile_brand,
             mobile_model: mobile_model,
             imgs: '["'+forscreen_img+'"]'
@@ -598,6 +604,8 @@ Page({
                 data: {
                   openid: openid,
                   box_mac: box_mac,
+                  action:2,
+                  resource_type:2,
                   mobile_brand: mobile_brand,
                   mobile_model: mobile_model,
                   forscreen_char: forscreen_char,
@@ -620,12 +628,15 @@ Page({
   },
   boxShow(e){//视频点播让盒子播放
     var box_mac = e.currentTarget.dataset.boxmac;
+    var openid  = e.currentTarget.dataset.openid;
     var vediourl = e.currentTarget.dataset.vediourl;
     
     var index1 = vediourl.lastIndexOf("/");
     var index2 = vediourl.length;
     var filename = vediourl.substring(index1+1, index2);//后缀名
     var timestamp = (new Date()).valueOf();
+    var mobile_brand = app.globalData.mobile_brand;
+    var mobile_model = app.globalData.mobile_model;
     wx.request({
       url: "https://netty-push.littlehotspot.com/push/box",
       header: {
@@ -643,6 +654,21 @@ Page({
           title: '点播成功,电视即将开始播放',
           icon: 'none',
           duration: 2000
+        });
+        wx.request({
+          url: 'https://mobile.littlehotspot.com/Smallapp/index/recordForScreenPics',
+          header: {
+            'content-type': 'application/json'
+          },
+          data: {
+            openid: openid,
+            box_mac: box_mac,
+            action: 5,
+            mobile_brand: mobile_brand,
+            mobile_model: mobile_model,
+            forscreen_char: forscreen_char,
+            imgs: '["media/resource/' + filename+ '"]'
+          },
         });
       },
       fail: function (res) {
@@ -676,6 +702,39 @@ Page({
         that.setData({
           program_list: res.data.result,
           hiddens: true,
+        })
+      }
+    })
+  },
+  //断开连接
+  breakLink:function (e){
+    var that = this;
+    openid = e.currentTarget.dataset.openid;
+    box_mac = e.currentTarget.dataset.boxmac;
+    var timestamp = (new Date()).valueOf();
+    wx.request({
+      url: "https://netty-push.littlehotspot.com/push/box",
+      header: {
+        "Content-Type": "application/x-www-form-urlencoded"
+      },
+      method: "POST",
+      data: {
+        box_mac: box_mac,
+        cmd: 'call-mini-program',
+        msg: '{ "action": 3,"openid":"' + openid + '"}',
+        req_id: timestamp
+      },
+      success: function (res) {
+        wx.navigateTo({
+          url: '/pages/index/index',
+        })
+
+      },
+      fail: function (res) {
+        wx.showToast({
+          title: '网络异常，断开失败',
+          icon: 'none',
+          duration: 2000
         })
       }
     })

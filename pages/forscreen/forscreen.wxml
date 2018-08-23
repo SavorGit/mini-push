@@ -23,10 +23,10 @@
       </view>
       <view class='operation'>
         <navigator url="/pages/forscreen/video/launch_video?video_url={{list.oss_addr}}&video_name={{list.name}}"><button>手机播放</button></navigator>
-        <navigator bindtap='boxShow' data-vediourl="{{list.oss_addr}}" data-boxmac="{{box_mac}}" ><button>电视播放</button></navigator>
+        <navigator bindtap='boxShow' data-vediourl="{{list.oss_addr}}" data-boxmac="{{box_mac}}" data-openid="{{openid}}" ><button>电视播放</button></navigator>
       </view>
       <view class='video_info'>
-        <label>05'53''</label>
+        <label>{{list.duration}}</label>
       </view>
       <view class='cover'>
         <image src='{{list.img_url}}'></image>
@@ -42,7 +42,7 @@
   <view class="fix_container display_{{showView?'show':'hide'}}">
     <view class='top'>
       <label>您已连接到【{{hotel_room}}】电视</label>
-      <button>断开连接</button>
+      <button bindtap='breakLink' data-boxmac="{{box_mac}}" data-openid="{{openid}}">断开连接</button>
     </view>
     <view class='operation flex_row_center'>
       <view>
@@ -54,7 +54,7 @@
         <label class='font_d_red_24'>视频上电视</label>
       </view>
       <view>
-        <image src='/images/btn_music.png' bindtap='chooseVedio' data-boxmac="{{box_mac}}" data-openid="{{openid}}"></image>
+        <image src='/images/btn_music.png' bindtap='boxShow' data-boxmac="{{box_mac}}" data-openid="{{openid}}" data-vediourl="{{happy_vedio_url}}" data-happyVedioName="{{happy_vedio_name}}"></image>
         <label class='font_d_red_24'>生日快乐</label>
       </view>
     </view>
@@ -132,14 +132,15 @@
     <view class='launch_video_page_top flex_row_center tip_font_30'>
       <label >视频上传成功后，电视下载完毕开始播放</label>
       <label class='link_relief'><navigator url="/pages/forscreen/relief">免责声明</navigator></label>
+      
     </view>
     <view class='launch_video_page_main'>
       <view class='cover full_width'>
         <video class="screen_video" src='{{upload_vedio_temp}}' ></video>
         <view class='mask_layer flex_column_center'>
           <view >
-            <label class='font_white_34'>80%</label>
-            <progress percent='80' stroke-width="5" activeColor='#FFFFFF' backgroundColor="#6F6F6F" active />
+            <label class='font_white_34'>{{vedio_percent}}%</label>
+            <progress percent='{{vedio_percent}}' stroke-width="5" activeColor='#FFFFFF' backgroundColor="#6F6F6F" active />
           </view>
         </view>
       </view>
