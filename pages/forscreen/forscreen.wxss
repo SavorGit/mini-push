@@ -393,6 +393,7 @@ image.pic_show_cur{
   display: flex;
 }
 .article > .title > label{
+  text-shadow: 0 1px 1px #000;
   z-index: 2;
 }
 
@@ -434,9 +435,6 @@ image.pic_show_cur{
 }
 
 .fix_container > .operation{
-  display: flex;
-  flex-direction: row;
-  align-items: center;
   margin: 0 0 25rpx 5rpx;
   width: calc(100vw - 10rpx);
 }
@@ -452,32 +450,36 @@ image.pic_show_cur{
   width: 88rpx;
   height: 88rpx;
 }
-/**
-投屏视频
-**/
 
-.page_top{
+
+/** 投屏视频 **/
+.launch_video_page_top{
   width: 100%;
   height: 110rpx;
   background: #FFFFFF;
 }
-.page_top > label{
+.launch_video_page_top > label{
   margin-left: 30rpx;
 }
-.page_top > button{
+.launch_video_page_top > button{
   width: 150rpx;
   height: 60rpx;
 }
 
-.page_main{
+.launch_video_page_main{
+  margin-top: 250rpx;
   width: 100%;
   height: 484rpx;
 }
-.cover{
+
+.launch_video_page_main > view.cover > .screen_video{
   width: 100%;
+  height: 484rpx;
+  background-color: #932C3F;
+  z-index: 1;
 }
 
-.mask_layer{
+.launch_video_page_main > view.cover > .mask_layer{
   margin-top: -494rpx;
   width: 100%;
   height: 484rpx;
@@ -486,31 +488,25 @@ image.pic_show_cur{
   background: #000000;
   z-index: 999;
 }
-
-.mask_layer > view{
+.launch_video_page_main > view.cover > .mask_layer > view{
   margin-top: 202rpx;
   width: 450rpx;
   height: 60rpx;
   text-align:center;
 }
-
-.screen_video{
-  width: 100%;
-  height: 484rpx;
-  background-color: #932C3F;
-  z-index: -100;
-}
-
-.progress{
+.launch_video_page_main > view.cover > .mask_layer > progress{
   width: 450rpx;
   height: 5rpx;
   border-radius: 5rpx;
 }
 
-/* .operation{
+.launch_video_page_bottom{
+  margin-top: calc(100vh - 972rpx);
   margin-bottom: 30rpx;
-} */
-.operation > button{
+  padding-left: 30rpx;
+  padding-right: 30rpx;
+}
+.launch_video_page_bottom > button{
   width: 340rpx;
   height: 98rpx;
   line-height: 98rpx;
