@@ -46,7 +46,8 @@ Page({
     upload_vedio_temp:'',   //投屏视频封面图
     vedio_percent:100,
     happy_vedio_url:'' ,          //生日视频url
-    happy_vedio_name:''          //生日视频名称
+    happy_vedio_name:'',          //生日视频名称
+    happy_vedio_title:''          
   },
   Focus(e) {
     var that = this;
@@ -144,6 +145,7 @@ Page({
             hotel_room: res.data.result.hotel_name + res.data.result.room_name,
             happy_vedio_url:res.data.result.vedio_url,
             happy_vedio_name: res.data.result.file_name,
+            happy_vedio_title:res.data.result.name,
           })
         }
       })
@@ -635,6 +637,7 @@ Page({
     var box_mac = e.currentTarget.dataset.boxmac;
     var openid  = e.currentTarget.dataset.openid;
     var vediourl = e.currentTarget.dataset.vediourl;
+    var forscreen_char = e.currentTarget.dataset.name;
     
     var index1 = vediourl.lastIndexOf("/");
     var index2 = vediourl.length;

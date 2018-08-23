@@ -23,7 +23,7 @@
       </view>
       <view class='operation'>
         <navigator url="/pages/forscreen/video/launch_video?video_url={{list.oss_addr}}&video_name={{list.name}}"><button>手机播放</button></navigator>
-        <navigator bindtap='boxShow' data-vediourl="{{list.oss_addr}}" data-boxmac="{{box_mac}}" data-openid="{{openid}}" ><button>电视播放</button></navigator>
+        <navigator bindtap='boxShow' data-name="{{list.name}}" data-vediourl="{{list.oss_addr}}" data-boxmac="{{box_mac}}" data-openid="{{openid}}" ><button>电视播放</button></navigator>
       </view>
       <view class='video_info'>
         <label>{{list.duration}}</label>
@@ -54,7 +54,7 @@
         <label class='font_d_red_24'>视频上电视</label>
       </view>
       <view>
-        <image src='/images/btn_music.png' bindtap='boxShow' data-boxmac="{{box_mac}}" data-openid="{{openid}}" data-vediourl="{{happy_vedio_url}}" data-happyVedioName="{{happy_vedio_name}}"></image>
+        <image src='/images/btn_music.png' bindtap='boxShow' data-boxmac="{{box_mac}}" data-openid="{{openid}}" data-vediourl="{{happy_vedio_url}}" data-happyVedioName="{{happy_vedio_name}}" data-name="{{happy_vedio_title}}"></image>
         <label class='font_d_red_24'>生日快乐</label>
       </view>
     </view>
