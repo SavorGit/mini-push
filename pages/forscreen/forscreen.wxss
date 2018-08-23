@@ -342,6 +342,7 @@ image.pic_show_cur{
 .article > .operation > navigator {
   margin-left: calc((100vw - 320rpx)/4);
   margin-right: calc((100vw - 320rpx)/4);
+  background: transparent;
 }
 .article > .operation > navigator > button{
   height: 50rpx;
@@ -393,7 +394,7 @@ image.pic_show_cur{
   display: flex;
 }
 .article > .title > label{
-  text-shadow: 0 1px 1px #000;
+  text-shadow: 0 1px 1px #999;
   z-index: 2;
 }
 
@@ -435,8 +436,8 @@ image.pic_show_cur{
 }
 
 .fix_container > .operation{
-  margin: 0 0 25rpx 5rpx;
-  width: calc(100vw - 10rpx);
+  margin: 0 0 25rpx 60rpx;
+  width: calc(100vw - 120rpx);
 }
 .fix_container > .operation > view{
   display: flex;
@@ -446,7 +447,8 @@ image.pic_show_cur{
   box-sizing: border-box;
 }
 .fix_container > .operation > view > image{
-  margin: 24rpx;
+  margin-top: 24rpx;
+  margin-bottom: 18rpx;
   width: 88rpx;
   height: 88rpx;
 }
@@ -483,21 +485,29 @@ image.pic_show_cur{
   margin-top: -494rpx;
   width: 100%;
   height: 484rpx;
-  position:absolute;
   opacity:0.7;
   background: #000000;
-  z-index: 999;
+  position:absolute;
+  z-index: 9999;
+  line-height:1.2;
+overflow:hidden;
+white-space:nowrap;
+pointer-events:auto;
 }
 .launch_video_page_main > view.cover > .mask_layer > view{
   margin-top: 202rpx;
   width: 450rpx;
   height: 60rpx;
   text-align:center;
+  position:absolute;
+  z-index: 9999;
 }
 .launch_video_page_main > view.cover > .mask_layer > progress{
   width: 450rpx;
   height: 5rpx;
   border-radius: 5rpx;
+  position:absolute;
+  z-index: 9999;
 }
 
 .launch_video_page_bottom{
