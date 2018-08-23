@@ -322,7 +322,7 @@ image.pic_show_cur{
 /*1.2.0*/
 .scroll_container{
   width: 100%;
-  height: calc(100vh - 290rpx);
+  height: calc(100vh - 284rpx);
   background: #FFFFFF;
 }
 
@@ -401,7 +401,7 @@ image.pic_show_cur{
 
 .fix_container{
   width: 100%;
-  height: 290rpx;
+  height: 284rpx;
 }
 
 .fix_container > .top{
