@@ -323,7 +323,7 @@ Page({
       console.log(postf_w);
       
       var upload_task = wx.uploadFile({
-        url: "https://oss.littlehotspot.com",
+        url: "https://image.littlehotspot.com",
         filePath: img_url,
         name: 'file',
         header:{
@@ -415,7 +415,7 @@ Page({
          that.setData({
            tmp_imgs: tmp_imgs
          });
-         uploadOssNew(policy, signature, upimgs[i], box_mac, openid, timestamp, i, img_len, forscreen_char, forscreen_id);
+         uploadOssNew(policy, signature, filename, box_mac, openid, timestamp, i, img_len, forscreen_char, forscreen_id);
        }
        that.setData({
          showThird:true,
@@ -567,7 +567,7 @@ Page({
 
       });
       var upload_task = wx.uploadFile({
-        url: "https://oss.littlehotspot.com",
+        url: "https://image.littlehotspot.com",
         filePath: filename,
         name: 'file',
         
