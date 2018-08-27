@@ -3,7 +3,9 @@
     "pages/index/index",
     "pages/forscreen/forscreen",
     "pages/forscreen/relief",
-    "pages/forscreen/video/launch_video"
+    "pages/forscreen/video/launch_video",
+    "pages/forscreen/forimages/index",
+    "pages/forscreen/forvideo/index"
   ],
   "window": {
     "backgroundTextStyle": "light",
