@@ -5,7 +5,7 @@
   <view class="full_width display_{{showVedio?'show':'hide'}}">
     <view class='launch_video_page_top flex_row_center font_333333_26'>
       <label>视频资源较大，请稍后...</label>
-      <!-- <label>视频上传成功后，电视下载完毕开始播放</label> -->
+      <!-- <label>视频已投递完成，待电视下载完毕开始播放</label> -->
       <label class='link_relief'>
         <navigator url="/pages/forscreen/relief">免责声明</navigator>
       </label>
