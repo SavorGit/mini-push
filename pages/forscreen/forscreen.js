@@ -107,7 +107,7 @@ Page({
     var openid  = e.currentTarget.dataset.openid;
     var mobile_brand = app.globalData.mobile_brand;
     var mobile_model = app.globalData.mobile_model;
-    var forscreen_char = '';
+    var forscreen_char = 'wx71cdc83866d4d28f:pages/details/index?item_uid=3164341_629776';
     wx.request({
       url: 'https://mobile.littlehotspot.com/Smallapp/index/recordForScreenPics',
       header: {
