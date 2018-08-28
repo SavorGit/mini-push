@@ -7,8 +7,9 @@
         <label class='font_white_28'>{{list.name}}</label>
       </view>
       <view class='operation'>
-        <navigator url="/pages/forscreen/video/launch_video?video_url={{list.oss_addr}}&video_name={{list.name}}"><button>手机播放</button></navigator>
         <navigator bindtap='boxShow' data-name="{{list.name}}" data-vediourl="{{list.oss_addr}}" data-boxmac="{{box_mac}}" data-openid="{{openid}}" ><button>电视播放</button></navigator>
+        <navigator url="/pages/forscreen/video/launch_video?video_url={{list.oss_addr}}&video_name={{list.name}}"><button>手机播放</button></navigator>
+        
       </view>
       <view class='video_info'>
         <label>{{list.duration}}</label>

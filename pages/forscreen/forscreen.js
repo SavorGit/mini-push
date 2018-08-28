@@ -8,6 +8,17 @@ Page({
  * 页面的初始数据
  */
   data: {
+    imgUrls: [
+      '/images/ad_child_box.jpg',
+      
+    ],
+    indicatorDots: true,  //是否显示面板指示点
+    autoplay: true,      //是否自动切换
+    interval: 3000,       //自动切换时间间隔
+    duration: 1000,       //滑动动画时长
+    inputShowed: false,
+    inputVal: "",
+
     Length: 3,                    //输入框个数
     isFocus: false,               //聚焦
     Value: "",                    //输入的内容
@@ -85,6 +96,18 @@ Page({
     })
   },
   
+  //跳转到另一个小程序
+  jumpMimiPro:function(){
+    wx.navigateToMiniProgram({
+      appId: 'wx71cdc83866d4d28f',
+      path: 'pages/details/index?item_uid=3164341_629776',
+      extraData: {},
+      envVersion: 'release',
+      success(res) {
+        // 打开成功
+      }
+    })
+  },
   //进来加载页面：
   onLoad: function (options) {
     box_mac = decodeURIComponent(options.scene);
