@@ -102,16 +102,27 @@ Page({
   },
   
   //跳转到另一个小程序
-  jumpMimiPro:function(){
-    wx.navigateToMiniProgram({
-      appId: 'wx71cdc83866d4d28f',
-      path: 'pages/details/index?item_uid=3164341_629776',
-      extraData: {},
-      envVersion: 'release',
-      success(res) {
-        // 打开成功
-      }
-    })
+  jumpMimiPro:function(e){
+    var box_mac = e.currentTarget.dataset.boxmac;
+    var openid  = e.currentTarget.dataset.openid;
+    var mobile_brand = app.globalData.mobile_brand;
+    var mobile_model = app.globalData.mobile_model;
+    var forscreen_char = '';
+    wx.request({
+      url: 'https://mobile.littlehotspot.com/Smallapp/index/recordForScreenPics',
+      header: {
+        'content-type': 'application/json'
+      },
+      data: {
+        openid: openid,
+        box_mac: box_mac,
+        action: 6,
+        mobile_brand: mobile_brand,
+        mobile_model: mobile_model,
+        forscreen_char: forscreen_char,
+        imgs: '[]'
+      },
+    });
   },
   //进来加载页面：
   onLoad: function (options) {
@@ -356,6 +367,20 @@ Page({
         req_id: timestamp
       },
       success: function (res) {
+        wx.request({
+          url: 'https://mobile.littlehotspot.com/Smallapp/index/delCallCode',
+          header: {
+            'Content-Type': 'application/json'
+          },
+          data: {
+            box_mac: box_mac,
+            openid: openid,
+          },
+          method: "POST",
+          success: function (res) {
+            
+          }
+        })
         wx.navigateTo({
           url: '/pages/index/index',
         })
