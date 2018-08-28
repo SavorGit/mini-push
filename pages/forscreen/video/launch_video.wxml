@@ -1,3 +1,6 @@
+<!-- pages/forscreen/video/launch_video.wxml -->
+
+<!-- ================================== 点播页面 ================================== -->
 <view class="container">
   <view class='article'>
     <view class='video'>

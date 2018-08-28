@@ -1,13 +1,17 @@
+<!-- pages/forscreen/forvideo/index.wxml -->
 
+<!-- ================================== 视频 ================================== -->
 <view class="container">
-<view class="full_width display_{{showVedio?'show':'hide'}}">
+  <view class="full_width display_{{showVedio?'show':'hide'}}">
     <view class='launch_video_page_top flex_row_center tip_font_30'>
-      <label >视频上传成功后，电视下载完毕开始播放</label>
-      <label class='link_relief'><navigator url="/pages/forscreen/relief">免责声明</navigator></label>
+      <label>视频上传成功后，电视下载完毕开始播放</label>
+      <label class='link_relief'>
+        <navigator url="/pages/forscreen/relief">免责声明</navigator>
+      </label>
     </view>
     <view class='launch_video_page_main'>
       <view class='cover full_width'>
-        <video class="screen_video" src='{{upload_vedio_temp}}' ></video>
+        <video class="screen_video" src='{{upload_vedio_temp}}'></video>
         <view class='mask_layer flex_column_center'>
           <view>
             <label class='font_white_34'>{{vedio_percent}}%</label>

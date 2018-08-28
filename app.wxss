@@ -1,4 +1,7 @@
 /**app.wxss**/
+
+/* ================================== 页面 ================================== */
+
 .container {
   width: calc(100vw);
   height: calc(100vh);
@@ -7,82 +10,98 @@
   align-items: center;
   justify-content: space-between;
   box-sizing: border-box;
-  background-color: #F6F2EC;
+  background-color: #f6f2ec;
 }
 
-.savor-btn{
-  background-color: #932C3F;
-  color: #F6F2EC;
-  font-size: 34rpx;
+.full_width {
+  width: 100%;
 }
 
-.display_hide {
-  display: none;
-}
-.display_show {
-  display: block;
-}
-.tip_font_28{
-  font-size:28rpx;
-  color: #333333;
-}
-.tip_font_24{
-  font-size:24rpx;
-  color: #333333;
-}
-.tip_font_30{
-  font-size:30rpx;
-  color: #333333;
-}
-.tip_font_32{
-  font-size:32rpx;
-  color: #333333;
-}
-.tip_font_34{
-  font-size:34rpx;
-  color: #333333;
-}
-
-.font_white_34{
-  font-size:34rpx;
-  color: #F6F6F6;
-}
-.font_white_28{
-  font-size:28rpx;
-  color: #F6F6F6;
-}
-.font_d_red_24{
-  font-size:24rpx;
-  color: #932C3F;
-}
-
-button.btn_border_022{
-  font-size: 22rpx;
-  color: #932C3F;
-  border: 1rpx solid #932C3F;
-  border-radius: 12rpx;
-}
-
-button.btn_background_034{
-  font-size: 34rpx;
-  color: #F6F2EC;
-  background-color: #932C3F;
-  border-radius: 12rpx;
-}
-
-.flex_row_center{
+.flex_row_center {
   display: flex;
-  flex-direction:row;
+  flex-direction: row;
   align-items: center;
 }
 
-.flex_column_center{
+.flex_column_center {
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
-.link_relief{
-  color: #932C3F;
+.display_hide {
+  display: none;
+}
+
+.display_show {
+  display: block;
+}
+
+/* ================================== 文字 ================================== */
+
+.tip_font_28 {
+  font-size: 28rpx;
+  color: #333;
+}
+
+.tip_font_24 {
+  font-size: 24rpx;
+  color: #333;
+}
+
+.tip_font_30 {
+  font-size: 30rpx;
+  color: #333;
+}
+
+.tip_font_32 {
+  font-size: 32rpx;
+  color: #333;
+}
+
+.tip_font_34 {
+  font-size: 34rpx;
+  color: #333;
+}
+
+.font_white_34 {
+  font-size: 34rpx;
+  color: #f6f6f6;
+}
+
+.font_white_28 {
+  font-size: 28rpx;
+  color: #f6f6f6;
+}
+
+.font_d_red_24 {
+  font-size: 24rpx;
+  color: #932c3f;
+}
+
+.link_relief {
+  color: #932c3f;
   text-decoration: underline;
+}
+
+/* ================================== 按钮 ================================== */
+
+button.btn_border_022 {
+  font-size: 22rpx;
+  color: #932c3f;
+  border: 1rpx solid #932c3f;
+  border-radius: 12rpx;
+}
+
+button.btn_background_034 {
+  font-size: 34rpx;
+  color: #f6f2ec;
+  background-color: #932c3f;
+  border-radius: 12rpx;
+}
+
+.savor-btn {
+  background-color: #932c3f;
+  color: #f6f2ec;
+  font-size: 34rpx;
 }

@@ -1,57 +1,54 @@
+<!-- pages/forscreen/forimages/index.wxml -->
+
+<!-- ================================== 图片 ================================== -->
 <view class="container">
-
- 
-  
-  
-  
- 
-
-  <!-- 图片展示页面 -->
   <view class="choose_pic_show_page display_{{showSecond?'show':'hide'}} container">
-    <!--<view class='choose_pic_show_container'>
-      <image class='choose_pic_show' src='{{tempFilePaths}}' mode='aspectFit' ></image>
-    </view>-->
     <view class="pic_tip_top display_{{showThird?'show':'hide'}}">
       <view class='full_width tip_font_28'>
         <label style='position: relative;float: left;margin-left:40rpx;'>图片加载成功后，选择照片，电视开始展示</label>
-        <label class='link_relief'><navigator url="/pages/forscreen/relief">免责声明</navigator></label>
+        <label class='link_relief'>
+          <navigator url="/pages/forscreen/relief">免责声明</navigator>
+        </label>
       </view>
     </view>
     <form bindsubmit="up_forscreen">
       <view class="weui-grids grids-frame">
-        <view class="weui-grid" wx:for="{{up_imgs}}" wx:key="key"  wx:for-item="img" wx:for-index="index" >
+        <view class="weui-grid" wx:for="{{up_imgs}}" wx:key="key" wx:for-item="img" wx:for-index="index">
           <view class="pic_show">
-            <image class="pic_show {{pic_show_cur[index]?'pic_show_cur':''}}" mode='aspectFill' bindtap='up_single_pic' data-img="{{tmp_imgs[index].oss_img}}" data-boxmac="{{box_mac}}" data-openid="{{openid}}" data-imgindex="{{index}}" data-imglen="{{img_lenth}}" src="{{img.tmp_img}}"></image>
+            <image class="pic_show {{pic_show_cur[index]?'pic_show_cur':''}}" mode='aspectFill' bindtap='up_single_pic' data-img="{{tmp_imgs[index].oss_img}}" data-boxmac="{{box_mac}}" data-openid="{{openid}}" data-imgindex="{{index}}" data-imglen="{{img_lenth}}"
+              src="{{img.tmp_img}}"></image>
             <view class='upload_success_frame' wx:if="{{tmp_percent[index].percent >= 100}}">
               <image style='margin:0 0 0 0;width:38rpx;height:38rpx;' src='/images/check_alt_512x512.png'></image>
             </view>
-            <view class='upload_mask' wx:if="{{tmp_percent[index].percent < 100}}" >
+            <view class='upload_mask' wx:if="{{tmp_percent[index].percent < 100}}">
               <label>{{tmp_percent[index].percent}}%</label>
             </view>
-            <!-- <progress class='upload_progress' percent="{{tmp_percent[index].percent}}" stroke-width="6" wx:if="{{tmp_percent[index].percent > 0}}"  activeColor='#932c3f' active /> -->
             <input class="display_hide" name="upimgs{{index}}" value="{{img.tmp_img}}"></input>
           </view>
         </view>
       </view>
       <input class='display_hide' name="img_lenth" value="{{img_lenth}}"></input>
       <input class="display_hide" name="box_mac" value="{{box_mac}}"></input>
-      <input class="display_hide" name="openid"  value="{{openid}}"></input>
+      <input class="display_hide" name="openid" value="{{openid}}"></input>
+
+      <!-- 投图片 -->
       <view class="display_{{showTpBt?'show':'hide'}}">
-         <label class='tip_text tip_font_30'>为所有照片增加文字（选填）</label>
-        <textarea class='text_input' name="forscreen_char" maxlength='30' placeholder='1-30字' ></textarea>
-        <button class="savor-btn savor-btn-size" form-type="submit" hover-class="none" >投屏</button>
+        <label class='tip_text tip_font_30'>为所有照片增加文字（选填）</label>
+        <textarea class='text_input' name="forscreen_char" maxlength='30' placeholder='1-30字'></textarea>
+        <button class="savor-btn savor-btn-size" form-type="submit" hover-class="none">投屏</button>
       </view>
     </form>
+
+    <!-- 重选 -->
     <view class="rechoose_button_pic display_{{showThird?'show':'hide'}}">
       <view class='tip_font_24'>
-        <label style='margin:0 60rpx 0 60rpx;display: block;text-align: center; color:#666666;' >为保障个人隐私，热点投屏不会留存任何投屏记录，您所投内容将在退出投屏后系统自动销毁</label>
+        <label style='margin:0 60rpx 0 60rpx;display: block;text-align: center; color:#666666;'>为保障个人隐私，热点投屏不会留存任何投屏记录，您所投内容将在退出投屏后系统自动销毁</label>
       </view>
       <view class='rechoose_button_frame'>
         <image bindtap="chooseImage" data-boxmac="{{box_mac}}" data-openid="{{openid}}" class='rechoose_button' src='/images/button_rechoose_pic.png'></image>
         <image bindtap="exitForscreen" class='rechoose_button button_space' data-boxmac="{{box_mac}}" src='/images/button_exit_cast_screen.png'></image>
       </view>
     </view>
-  </view>
 
-  
+  </view>
 </view>
