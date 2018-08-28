@@ -3,8 +3,11 @@
 
 /** ================================== 投视频 ================================== **/
 .launch_video_page_top{
+  padding-top: 10rpx;
+  padding-bottom: 10rpx;
   width: 100%;
-  height: 110rpx;
+  height: 50rpx;
+  line-height: 50rpx;
   background: #FFFFFF;
 }
 .launch_video_page_top > label{

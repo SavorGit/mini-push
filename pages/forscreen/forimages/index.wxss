@@ -3,14 +3,20 @@
 /* ================================== 选择图片页面 ================================== */
 
 view.pic_tip_top {
-  margin-top: 0;
-  padding: 0 10rpx 0 10rpx;
-  /* display: block; */
-  height: 110rpx;
-  line-height: 110rpx;
+  /* padding: 10rpx; */
+  padding-top: 10rpx;
+  padding-bottom: 10rpx;
+  height: 50rpx;
+  line-height: 50rpx;
   text-align: center;
   background-color: #faf8f5;
   box-shadow: 2rpx 2rpx 10rpx #ddd;
+}
+
+.tip_top_lable {
+  position: relative;
+  float: left;
+  margin-left: 30rpx;
 }
 
 view.pic_div_body {
@@ -66,20 +72,6 @@ view.choose_pic_show_page {
   width: 100%;
   text-align: center;
   margin: 80rpx 0 0 0;
-}
-
-.link_relief {
-  color: #932c3f;
-  text-decoration: underline;
-}
-
-.link_relief_ {
-  width: 100%;
-  text-align: center;
-  background-color: #f6f2ec;
-  color: #932c3f;
-  font-size: 28rpx;
-  text-decoration: underline;
 }
 
 view.pic_show {

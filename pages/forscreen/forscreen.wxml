@@ -11,7 +11,7 @@
           <input class="input iptbox" type="number" value="{{Value.length>=index+1?Value[index]:''}}" disabled password='{{ispassword}}' catchtap='Tap'></input>
         </block>
       </view>
-      <label class='input_tip tip_font_34'>请输入电视中的三位数连接电视</label>
+      <label class='input_tip font_333333_34'>请输入电视中的三位数连接电视</label>
       <input type="number" name="password" data-boxmac="{{box_mac}}" data-openid="{{openid}}" value="{{pwds}}" password="{{true}}" class='ipt' maxlength="{{Length}}" focus="{{isFocus}}" bindinput="Focus"></input>
       <input name="openid" class="display_hide" value="{{openid}}"></input>
       <input name="box_mac" class="display_hide" value="{{box_mac}}"></input>
@@ -21,10 +21,10 @@
 
 
   <!-- ================================== 列表页 ================================== -->
-  <view class="fix_container display_{{showView?'show':'hide'}}">
-    <view class='top'>
-      <label>您已连接到【{{hotel_room}}】电视</label>
-      <button bindtap='breakLink' data-boxmac="{{box_mac}}" data-openid="{{openid}}">断开连接</button>
+  <view class="full_width display_{{showView?'show':'hide'}}">
+    <view class='full_width top'>
+      <label class='font_333333_26'>您已连接到【{{hotel_room}}】电视</label>
+      <button class='font_d_red_20' bindtap='breakLink' data-boxmac="{{box_mac}}" data-openid="{{openid}}">断开连接</button>
     </view>
   </view>
   <scroll-view class="scroll_container display_{{showView?'show':'hide'}}" bindscrolltolower="loadMore" data-boxmac="{{box_mac}}" scroll-y="true" scroll-with-animation="true">
@@ -68,15 +68,15 @@
     <view class='operation flex_row_center'>
       <view>
         <image src='/images/btn_pic.png' bindtap="chooseImage" data-boxmac="{{box_mac}}" data-openid="{{openid}}"></image>
-        <label class='font_d_red_24'>照片上电视</label>
+        <label class='font_d_red_20'>照片上电视</label>
       </view>
       <view>
         <image src='/images/btn_play.png' bindtap='chooseVedio' data-boxmac="{{box_mac}}" data-openid="{{openid}}"></image>
-        <label class='font_d_red_24'>视频上电视</label>
+        <label class='font_d_red_20'>视频上电视</label>
       </view>
       <view>
         <image src='/images/btn_music.png' bindtap='boxShow' data-boxmac="{{box_mac}}" data-openid="{{openid}}" data-vediourl="{{happy_vedio_url}}" data-happyVedioName="{{happy_vedio_name}}" data-name="{{happy_vedio_title}}"></image>
-        <label class='font_d_red_24'>生日快乐</label>
+        <label class='font_d_red_20'>生日快乐</label>
       </view>
     </view>
   </view>

@@ -51,7 +51,7 @@ label.input_tip {
 
 .scroll_container {
   width: 100%;
-  height: calc(100vh - 284rpx);
+  height: calc(100vh - 190rpx);
   background: #fff;
 }
 
@@ -147,28 +147,20 @@ swiper-image {
   z-index: 2;
 }
 
-.fix_container {
-  width: 100%;
-  height: 284rpx;
-}
-
-.fix_container > .top {
+.top {
   padding-top: 10rpx;
   padding-bottom: 10rpx;
-  width: 100%;
-  height: 70rpx;
-  line-height: 70rpx;
+  height: 50rpx;
+  line-height: 50rpx;
   display: flex;
   flex-direction: row;
   align-items: center;
   background: #fff;
 }
 
-.fix_container > .top > label {
+.top > label {
   margin-left: 30rpx;
   max-width: 510rpx;
-  font-size: 28rpx;
-  color: #333;
   word-break: keep-all;
   white-space: nowrap;
   display: inline;
@@ -176,17 +168,20 @@ swiper-image {
   text-overflow: ellipsis;
 }
 
-.fix_container > .top > button {
+.top > button {
   width: 150rpx;
-  height: 60rpx;
-  font-size: 22rpx;
-  color: #932c3f;
+  height: 55rpx;
   border: 1rpx solid #932c3f;
   border-radius: 12rpx;
 }
 
+.fix_container {
+  width: 100%;
+  height: 120rpx;
+}
+
 .fix_container > .operation {
-  margin: 0 0 25rpx 60rpx;
+  margin-left: 60rpx;
   width: calc(100vw - 120rpx);
 }
 
@@ -199,8 +194,8 @@ swiper-image {
 }
 
 .fix_container > .operation > view > image {
-  margin-top: 24rpx;
-  margin-bottom: 18rpx;
-  width: 88rpx;
-  height: 88rpx;
+  margin-top: 12rpx;
+  margin-bottom: 5rpx;
+  width: 66rpx;
+  height: 66rpx;
 }

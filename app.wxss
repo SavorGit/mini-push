@@ -39,27 +39,37 @@
 
 /* ================================== 文字 ================================== */
 
-.tip_font_28 {
+.font_333333_28 {
   font-size: 28rpx;
   color: #333;
 }
 
-.tip_font_24 {
+.font_333333_24 {
   font-size: 24rpx;
   color: #333;
 }
 
-.tip_font_30 {
+.font_333333_26 {
+  font-size: 26rpx;
+  color: #333;
+}
+
+.font_333333_28 {
+  font-size: 28rpx;
+  color: #333;
+}
+
+.font_333333_30 {
   font-size: 30rpx;
   color: #333;
 }
 
-.tip_font_32 {
+.font_333333_32 {
   font-size: 32rpx;
   color: #333;
 }
 
-.tip_font_34 {
+.font_333333_34 {
   font-size: 34rpx;
   color: #333;
 }
@@ -72,6 +82,11 @@
 .font_white_28 {
   font-size: 28rpx;
   color: #f6f6f6;
+}
+
+.font_d_red_20 {
+  font-size: 20rpx;
+  color: #932c3f;
 }
 
 .font_d_red_24 {
