@@ -1,0 +1,6 @@
+<!--pages/activity/turntable/game.wxml-->
+<view class="container">
+<image src='{{gameCode}}'></image>
+ <button bindtap='startGame' data-box_mac='{{box_mac}}' data-openid='{{openid}}'  data-avatarUrl="{{avatarUrl}}"  data-nickName='{{nickName}}' data-activity_id='{{activity_id}}'  >开始游戏</button>
+ <image scr='{{gameCode}}'></image>
+</view>

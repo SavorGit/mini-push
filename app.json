@@ -5,7 +5,10 @@
     "pages/forscreen/relief",
     "pages/forscreen/video/launch_video",
     "pages/forscreen/forimages/index",
-    "pages/forscreen/forvideo/index"
+    "pages/forscreen/forvideo/index",
+    "pages/activity/turntable/index",
+    "pages/activity/turntable/game",
+    "pages/activity/turntable/joingame"
   ],
   "window": {
     "backgroundTextStyle": "light",

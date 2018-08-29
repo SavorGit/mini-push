@@ -21,6 +21,7 @@
 
 
   <!-- ================================== 列表页 ================================== -->
+  <navigator url="/pages/activity/turntable/index?box_mac={{box_mac}}&openid={{openid}}" >互动游戏</navigator>
   <view class="full_width display_{{showView?'show':'hide'}}">
     <view class='full_width top'>
       <label class='font_333333_26'>您已连接到【{{hotel_room}}】电视</label>

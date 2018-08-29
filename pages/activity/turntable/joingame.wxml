@@ -1,0 +1,6 @@
+<!--pages/activity/turntable/joingame.wxml-->
+<view class="container">
+  <image src='{{gamecode}}'></image>
+  <button wx:if="{{canIUse}}" open-type="getUserInfo" bindgetuserinfo="joingame" data-box_mac='{{box_mac}}' data-openid='{{openid}}' data-activity_id='{{activity_id}}'>加入游戏</button>
+<view wx:else>请升级微信版本</view>
+</view>

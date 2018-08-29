@@ -1,0 +1,4 @@
+<view class="container">
+  <button wx:if="{{canIUse}}" open-type="getUserInfo" bindgetuserinfo="bindGetUserInfo" data-box_mac='{{box_mac}}' data-openid='{{openid}}'>发起游戏</button>
+<view wx:else>请升级微信版本</view>
+</view>
