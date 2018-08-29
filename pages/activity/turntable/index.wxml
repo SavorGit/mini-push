@@ -1,4 +1,12 @@
+<!-- pages/activity/turntable/index.wxml -->
+
+<!-- ================================== 发起游戏 ================================== -->
 <view class="container">
-  <button wx:if="{{canIUse}}" open-type="getUserInfo" bindgetuserinfo="bindGetUserInfo" data-box_mac='{{box_mac}}' data-openid='{{openid}}'>发起游戏</button>
-<view wx:else>请升级微信版本</view>
+  <view class='game_launch full_width full_height'>
+    <image class='game_launch_bg full_width full_height' src='/images/game_bg_launch.png' mode='aspectFit'></image>
+    <button wx:if="{{canIUse}}" open-type="getUserInfo" bindgetuserinfo="bindGetUserInfo" data-box_mac='{{box_mac}}' data-openid='{{openid}}'>
+      <image src='/images/btn_game_launch.png'></image>
+    </button>
+    <view wx:else>请升级微信版本</view>
+  </view>
 </view>

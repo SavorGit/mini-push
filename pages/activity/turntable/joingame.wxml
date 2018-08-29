@@ -1,6 +1,13 @@
 <!--pages/activity/turntable/joingame.wxml-->
+
+<!-- ================================== 加入游戏 ================================== -->
 <view class="container">
-  <image src='{{gamecode}}'></image>
-  <button wx:if="{{canIUse}}" open-type="getUserInfo" bindgetuserinfo="joingame" data-box_mac='{{box_mac}}' data-openid='{{openid}}' data-activity_id='{{activity_id}}'>加入游戏</button>
-<view wx:else>请升级微信版本</view>
+  <view class='join_game full_width full_height'>
+    <image class='join_game_bg full_width full_height' src='/images/game_bg_join.png' mode='aspectFit'></image>
+    <image class='code' src='{{gamecode}}'></image>
+    <button style='margin-top: 450rpx;' wx:if="{{canIUse}}" open-type="getUserInfo" bindgetuserinfo="joingame" data-box_mac='{{box_mac}}' data-openid='{{openid}}' data-activity_id='{{activity_id}}'>
+      <image src='/images/btn_game_join.png'></image>
+    </button>
+    <view wx:else>请升级微信版本</view>
+  </view>
 </view>

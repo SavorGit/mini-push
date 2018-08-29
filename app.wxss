@@ -17,6 +17,10 @@
   width: 100%;
 }
 
+.full_height {
+  height: 100%;
+}
+
 .flex_row_center {
   display: flex;
   flex-direction: row;

@@ -1,5 +1,5 @@
 {
-  "pages":[
+  "pages": [
     "pages/index/index",
     "pages/forscreen/forscreen",
     "pages/forscreen/relief",
@@ -8,7 +8,8 @@
     "pages/forscreen/forvideo/index",
     "pages/activity/turntable/index",
     "pages/activity/turntable/game",
-    "pages/activity/turntable/joingame"
+    "pages/activity/turntable/joingame",
+    "pages/activity/turntable/join_success"
   ],
   "window": {
     "backgroundTextStyle": "light",

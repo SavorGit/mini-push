@@ -1,6 +1,15 @@
 <!--pages/activity/turntable/game.wxml-->
+
+<!-- ================================== 开始游戏 ================================== -->
 <view class="container">
-<image src='{{gameCode}}'></image>
- <button bindtap='startGame' data-box_mac='{{box_mac}}' data-openid='{{openid}}'  data-avatarUrl="{{avatarUrl}}"  data-nickName='{{nickName}}' data-activity_id='{{activity_id}}'  >开始游戏</button>
- <image scr='{{gameCode}}'></image>
+  <view class='start_game full_width full_height'>
+    <image class='start_game_bg full_width full_height' src='/images/game_bg_start.png' mode='aspectFit'></image>
+    <image class='code' src='{{gameCode}}'></image>
+    <button style='margin-top: 450rpx;' bindtap='startGame' data-box_mac='{{box_mac}}' data-openid='{{openid}}' data-avatarUrl="{{avatarUrl}}" data-nickName='{{nickName}}' data-activity_id='{{activity_id}}'>
+      <image src='/images/btn_game_start.png'></image>
+    </button>
+    <button style='margin-top: 25rpx;'>
+      <image src='/images/btn_game_exit.png'></image>
+    </button>
+  </view>
 </view>
