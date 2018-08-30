@@ -46,6 +46,7 @@ Page({
           },
           data: {
             activity_id: activity_id,
+            box_mac:box_mac
           },
           success: function (res) {
 
