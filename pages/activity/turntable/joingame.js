@@ -73,6 +73,9 @@ Page({
         req_id: timestamp
       },
       success:function(res){
+        wx.navigateTo({
+          url: '/pages/activity/turntable/join_success',
+        });
         wx.request({
           url: 'https://mobile.littlehotspot.com/smallapp/Activity/joinGameLog',
           headers: {
