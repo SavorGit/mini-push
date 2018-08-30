@@ -145,15 +145,17 @@ Page({
     var that = this
     var box_mac = e.currentTarget.dataset.boxmac;
     var openid = e.currentTarget.dataset.openid;
-    that.setData({
-      upload_vedio_temp: '',
-    })
+    
 
     wx.chooseVideo({
       sourceType: ['album', 'camera'],
       maxDuration: 60,
       camera: 'back',
       success: function (res) {
+        that.setData({
+          upload_vedio_temp: '',
+          vedio_percent: 0
+        })
         uploadVedio(res, box_mac, openid);
       }
     });
