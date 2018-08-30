@@ -12,9 +12,9 @@
     <view class='launch_video_page_main'>
       <view class='cover full_width'>
         <video class="screen_video" src='{{upload_vedio_temp}}' controls="false" show-fullscreen-btn="false" show-play-btn="false" show-center-play-btn="false" enable-progress-gesture="false" duration="0"></video>
-        <view class='upload_progress'>
+        <view class='upload_progress' >
           <label class='font_932C3F_34'>{{vedio_percent}}%</label>
-          <progress percent='{{vedio_percent}}' activeColor='#932C3F' backgroundColor="#CECAC4" active />
+          <progress percent='{{vedio_percent}}' activeColor='#932C3F' backgroundColor="#CECAC4"  />
         </view>
         <view class='tip'>
           <label class='font_932C3F_24'>视频加载完成后，电视开始加载并自动播放</label>

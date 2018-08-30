@@ -16,7 +16,7 @@ Page({
     showVedio:false,
     upload_vedio_temp:'',
     //upload_vedio_img_temp:'',
-    vedio_percent: 100,
+    vedio_percent: 0,
   },
 
   /**
@@ -124,7 +124,7 @@ Page({
         }
       });
       upload_task.onProgressUpdate((res) => {
-        //console.log(res.progress);
+        console.log(res.progress);
         that.setData({
           vedio_percent: res.progress
         })
