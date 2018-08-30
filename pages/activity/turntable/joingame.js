@@ -26,7 +26,7 @@ Page({
     box_mac = scene[0];
     activity_id = scene[1];
 
-    gamecode = "https://mobile.littlehotspot.com/Smallapp/Activity/getGameCode?scene=" + box_mac + ":" + activity_id;
+    gamecode = "https://mobile.littlehotspot.com/Smallapp/Activity/getGameCode?scene=" + box_mac + "_" + activity_id;
     wx.login({
       success: res => {
         var code = res.code; //返回code
@@ -59,6 +59,7 @@ Page({
     activity_id = options.currentTarget.dataset.activity_id;
     var avatarurl = options.detail.userInfo.avatarUrl;
     var nickname = options.detail.userInfo.nickName;
+    var timestamp = (new Date()).valueOf();
     wx.request({
       url: 'https://netty-push.littlehotspot.com/push/box',
       header: {
@@ -71,8 +72,23 @@ Page({
         msg: '{"action":103,"activity_id":' + activity_id + ',"openid":"' + openid + '","avatarurl":"' + avatarurl+'"}',
         req_id: timestamp
       },
+      success:function(res){
+        wx.request({
+          url: 'https://mobile.littlehotspot.com/smallapp/Activity/joinGameLog',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          data: {
+            activity_id: activity_id,
+          },
+          success: function (res) {
+
+          }
+        })
+      }
     })
   },
+ 
 
   /**
    * 生命周期函数--监听页面初次渲染完成

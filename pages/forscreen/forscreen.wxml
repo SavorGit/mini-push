@@ -78,7 +78,7 @@
         <image src='/images/btn_music.png'></image>
         <label class='font_d_red_20'>生日快乐</label>
       </view>
-      <view url="/pages/activity/turntable/index?box_mac={{box_mac}}&openid={{openid}}">
+      <view bindtap='hdgames' data-boxmac="{{box_mac}}" data-openid="{{openid}}"  >
         <image src='/images/btn_game.png'></image>
         <label class='font_d_red_20'>互动游戏</label>
       </view>

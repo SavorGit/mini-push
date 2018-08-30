@@ -408,5 +408,13 @@ Page({
         })
       }
     })
-  }
+  },
+  //互动游戏
+  hdgames(e) {
+    var openid = e.currentTarget.dataset.openid;
+    var box_mac = e.currentTarget.dataset.boxmac;
+      wx.navigateTo({
+        url: '/pages/activity/turntable/index?box_mac='+box_mac+'&openid='+openid,
+      })
+  },
 })

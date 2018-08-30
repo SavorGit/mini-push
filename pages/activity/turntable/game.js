@@ -22,14 +22,15 @@ Page({
   onLoad: function (options) {
     //console.log(options);
       var that = this;
-      var avatarUrl = options.avatarUrl;           //微信用户头像
+      var avatarurl = options.avatarurl;           //微信用户头像
       var nickName  = options.nickName;            //微信用户昵称
       var box_mac   = options.box_mac;             //机顶盒mac
       var openid    = options.openid;              //openid
-      var activity_id  = (new Date()).valueOf();   //活动id
-      var gameCode = "https://mobile.littlehotspot.com/Smallapp/Activity/getGameCode?scene="+box_mac+":"+activity_id;
+      var activity_id = options.activity_id;         //活动id
+      //var activity_id  = (new Date()).valueOf();   //活动id
+      var gameCode = "https://mobile.littlehotspot.com/Smallapp/Activity/getGameCode?scene="+box_mac+"_"+activity_id;
       that.setData({
-        avatarUrl:avatarUrl,
+        avatarurl:avatarurl,
         nickName :nickName,
         box_mac  :box_mac,
         openid   :openid,
@@ -37,22 +38,10 @@ Page({
         gameCode: gameCode
 
       });
-      /*wx.request({
-        url: 'https://mobile.littlehotspot.com/smallapp/activity/getGameCode',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        data: {
-          
-        },
-        success:function(ret){
-           console.log(111);
-        },
-      })*/
+      
   },
   //开始游戏
   startGame:function(e){
-    console.log(e);
     var that = this;
     var box_mac   = e.currentTarget.dataset.box_mac;
     var openid    = e.currentTarget.dataset.openid;
@@ -72,9 +61,56 @@ Page({
       data: {
         box_mac: box_mac,
         cmd: 'call-mini-program',
-        msg: '{"action":11,"avatarurl":' + avatarurl + ',"openid":"' + openid + '","activity_id":' + activity_id+'}',
+        msg: '{"action":102,"openid":"' + openid + '","activity_id":' + activity_id+'}',
         req_id: activity_id
       },
+      success:function(res){
+        wx.request({
+          url: 'https://mobile.littlehotspot.com/smallapp/Activity/startGameLog',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          data: {
+            activity_id: activity_id,
+          },
+          success: function (res) {
+
+          }
+        })
+      }
+    })
+  },
+ 
+
+  //退出游戏
+  endGame: function (e) {
+    var that = this;
+    var box_mac = e.currentTarget.dataset.box_mac;
+    var openid = e.currentTarget.dataset.openid;
+    var activity_id = e.currentTarget.dataset.activity_id;
+    wx.request({
+      url: 'https://netty-push.littlehotspot.com/push/box',
+      header: {
+        "Content-Type": "application/x-www-form-urlencoded"
+      },
+      method: "POST",
+      data: {
+        box_mac: box_mac,
+        cmd: 'call-mini-program',
+        msg: '{"action":104,"openid":"' + openid + '","activity_id":' + activity_id + '}',
+        req_id: activity_id
+      },
+      success:function(res){
+         wx.navigateBack({
+           delta:2
+         })
+      },fail:function(res){
+        wx.showToast({
+          title: '网络异常，退出失败！',
+          icon: 'none',
+          duration: 2000
+        })
+      }
     })
   },
   /**
