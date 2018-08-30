@@ -78,23 +78,33 @@
   color: #333;
 }
 
-.font_white_34 {
+.font_F6F6F6_34 {
   font-size: 34rpx;
   color: #f6f6f6;
 }
 
-.font_white_28 {
+.font_F6F6F6_28 {
   font-size: 28rpx;
   color: #f6f6f6;
 }
 
-.font_d_red_20 {
+.font_932C3F_20 {
   font-size: 20rpx;
   color: #932c3f;
 }
 
-.font_d_red_24 {
+.font_932C3F_24 {
   font-size: 24rpx;
+  color: #932c3f;
+}
+
+.font_932C3F_28 {
+  font-size: 28rpx;
+  color: #932c3f;
+}
+
+.font_932C3F_34 {
+  font-size: 34rpx;
   color: #932c3f;
 }
 

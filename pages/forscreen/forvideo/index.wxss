@@ -1,72 +1,67 @@
 /* pages/forscreen/forvideo/index.wxss */
 
-
 /** ================================== 投视频 ================================== **/
-.launch_video_page_top{
+
+.launch_video_page_top {
   padding-top: 10rpx;
   padding-bottom: 10rpx;
   width: 100%;
   height: 50rpx;
   line-height: 50rpx;
-  background: #FFFFFF;
+  background: #fff;
 }
-.launch_video_page_top > label{
+
+.launch_video_page_top > label {
   margin-left: 30rpx;
 }
-.launch_video_page_top > button{
+
+.launch_video_page_top > button {
   width: 150rpx;
   height: 60rpx;
 }
 
-.launch_video_page_main{
-  margin-top: 250rpx;
+.launch_video_page_main {
+  margin-top: 135rpx;
   width: 100%;
-  height: 484rpx;
+  height: calc(100vh - 263rpx);
+  display: block;
+  text-align: center;
 }
 
-.launch_video_page_main > view.cover > .screen_video{
+.launch_video_page_main > view.cover > .screen_video {
   width: 100%;
   height: 484rpx;
-  background-color: #932C3F;
-  z-index: 1;
+  background-color: #932c3f;
 }
 
-.launch_video_page_main > view.cover > .mask_layer{
-  margin-top: -494rpx;
-  width: 100%;
-  height: 484rpx;
-  opacity:0.7;
-  background: #000000;
-  position:absolute;
-  z-index: 9999;
-  line-height:1.2;
-overflow:hidden;
-white-space:nowrap;
-pointer-events:auto;
+.upload_progress {
+  margin-top: 63rpx;
 }
-.launch_video_page_main > view.cover > .mask_layer > view{
-  margin-top: 202rpx;
+
+.upload_progress > progress {
+  margin-top: 16rpx;
+  margin-left: calc((100vw - 450rpx) / 2);
   width: 450rpx;
-  height: 60rpx;
-  text-align:center;
-  position:absolute;
-  z-index: 9999;
-}
-.launch_video_page_main > view.cover > .mask_layer > progress{
-  width: 450rpx;
-  height: 5rpx;
-  border-radius: 5rpx;
-  position:absolute;
-  z-index: 9999;
+  height: 5px;
+  border-radius: 2px;
+  overflow: hidden;
 }
 
-.launch_video_page_bottom{
-  margin-top: calc(100vh - 972rpx);
+.tip {
+  margin-top: 32rpx;
+}
+
+.option {
+  margin-top: 112rpx;
+}
+
+.launch_video_page_bottom {
   margin-bottom: 30rpx;
   padding-left: 30rpx;
   padding-right: 30rpx;
 }
-.launch_video_page_bottom > button{
+
+.launch_video_page_bottom > button {
   width: 340rpx;
   height: 98rpx;
   line-height: 98rpx;

@@ -3,21 +3,26 @@
 <!-- ================================== 视频 ================================== -->
 <view class="container">
   <view class="full_width display_{{showVedio?'show':'hide'}}">
-    <view class='launch_video_page_top flex_row_center font_333333_26'>
+    <!-- <view class='launch_video_page_top flex_row_center font_333333_26'>
       <label>视频资源较大，请稍后...</label>
-      <!-- <label>视频已投递完成，待电视下载完毕开始播放</label> -->
       <label class='link_relief'>
         <navigator url="/pages/forscreen/relief">免责声明</navigator>
       </label>
-    </view>
+    </view> -->
     <view class='launch_video_page_main'>
       <view class='cover full_width'>
-        <video class="screen_video" src='{{upload_vedio_temp}}'></video>
-        <view class='mask_layer flex_column_center'>
-          <view>
-            <label class='font_white_34'>{{vedio_percent}}%</label>
-            <progress percent='{{vedio_percent}}' stroke-width="5" activeColor='#FFFFFF' backgroundColor="#6F6F6F" active />
-          </view>
+        <video class="screen_video" src='{{upload_vedio_temp}}' controls="false" show-fullscreen-btn="false" show-play-btn="false" show-center-play-btn="false" enable-progress-gesture="false" duration="0"></video>
+        <view class='upload_progress'>
+          <label class='font_932C3F_34'>{{vedio_percent}}%</label>
+          <progress percent='{{vedio_percent}}' activeColor='#932C3F' backgroundColor="#CECAC4" active />
+        </view>
+        <view class='tip'>
+          <label class='font_932C3F_24'>视频加载完成后，电视开始加载并自动播放</label>
+        </view>
+        <view class='option'>
+          <label class='font_932C3F_28 link_relief'>
+            <navigator url="/pages/forscreen/relief">免责声明</navigator>
+          </label>
         </view>
       </view>
     </view>
