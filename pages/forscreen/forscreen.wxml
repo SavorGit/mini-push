@@ -21,7 +21,6 @@
 
 
   <!-- ================================== 列表页 ================================== -->
-  <navigator url="/pages/activity/turntable/index?box_mac={{box_mac}}&openid={{openid}}" >互动游戏</navigator>
   <view class="full_width display_{{showView?'show':'hide'}}">
     <view class='full_width top'>
       <label class='font_333333_26'>您已连接到【{{hotel_room}}】电视</label>
@@ -67,19 +66,23 @@
   </scroll-view>
   <view class="fix_container display_{{showView?'show':'hide'}}">
     <view class='operation flex_row_center'>
-      <view>
-        <image src='/images/btn_pic.png' bindtap="chooseImage" data-boxmac="{{box_mac}}" data-openid="{{openid}}"></image>
+      <view bindtap="chooseImage" data-boxmac="{{box_mac}}" data-openid="{{openid}}">
+        <image src='/images/btn_pic.png'></image>
         <label class='font_d_red_20'>照片上电视</label>
       </view>
-      <view>
-        <image src='/images/btn_play.png' bindtap='chooseVedio' data-boxmac="{{box_mac}}" data-openid="{{openid}}"></image>
+      <view bindtap='chooseVedio' data-boxmac="{{box_mac}}" data-openid="{{openid}}">
+        <image src='/images/btn_play.png'></image>
         <label class='font_d_red_20'>视频上电视</label>
       </view>
-      <view>
-        <image src='/images/btn_music.png' bindtap='boxShow' data-boxmac="{{box_mac}}" data-openid="{{openid}}" data-vediourl="{{happy_vedio_url}}" data-happyVedioName="{{happy_vedio_name}}" data-name="{{happy_vedio_title}}"></image>
+      <view bindtap='boxShow' data-boxmac="{{box_mac}}" data-openid="{{openid}}" data-vediourl="{{happy_vedio_url}}" data-happyVedioName="{{happy_vedio_name}}" data-name="{{happy_vedio_title}}">
+        <image src='/images/btn_music.png'></image>
         <label class='font_d_red_20'>生日快乐</label>
+      </view>
+      <view url="/pages/activity/turntable/index?box_mac={{box_mac}}&openid={{openid}}">
+        <image src='/images/btn_game.png'></image>
+        <label class='font_d_red_20'>互动游戏</label>
       </view>
     </view>
   </view>
-
 </view>
+<!-- <navigator url="/pages/activity/turntable/index?box_mac={{box_mac}}&openid={{openid}}">互动游戏</navigator> -->
