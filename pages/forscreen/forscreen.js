@@ -10,21 +10,21 @@ Page({
   data: {
     imgUrls: [
       {
-        "image": '/images/ad_child_box.jpg',
+        "image": 'http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/ads/ad_child_box.jpg',
         "target": "miniProgram",
         "appId":"wx71cdc83866d4d28f",
         "path":"pages/details/index?item_uid=3164341_629776",
         "extraData":""
       },
       {
-        "image": '/images/ad_child_box_1.jpg',
+        "image": 'http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/ads/ad_child_box_1.jpg',
         "target": "miniProgram",
         "appId": "wx71cdc83866d4d28f",
         "path": "pages/details/index?item_uid=3164341_629776",
         "extraData": ""
       },
       {
-        "image": '/images/ad_child_box_2.jpg',
+        "image": 'http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/ads/ad_child_box_2.jpg',
         "target": "miniProgram",
         "appId": "wx71cdc83866d4d28f",
         "path": "pages/details/index?item_uid=3164341_629776",
