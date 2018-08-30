@@ -14,8 +14,11 @@ Page({
   onLoad: function (options) {
     var that = this;
     var gamecode = options.gamecode;
+    var box_mac = options.box_mac;
+    var activity_id = options.activity_id;
+    var code_all = gamecode+"?scene="+box_mac+"_"+activity_id;
     that.setData({
-      gamecode: gamecode
+      gamecode: code_all
     })
   },
 

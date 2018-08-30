@@ -60,7 +60,9 @@ Page({
     var avatarurl = options.detail.userInfo.avatarUrl;
     var nickname = options.detail.userInfo.nickName;
     var timestamp = (new Date()).valueOf();
-    var gamecode = "https://mobile.littlehotspot.com/Smallapp/Activity/getGameCode?scene=" + box_mac + "_" + activity_id;
+    //var gamecode = "https://mobile.littlehotspot.com/Smallapp/Activity/getGameCode?scene=" + box_mac + "_" + activity_id;
+    var gamecode = "https://mobile.littlehotspot.com/Smallapp/Activity/getGameCode";
+    
     wx.request({
       url: 'https://netty-push.littlehotspot.com/push/box',
       header: {
@@ -75,7 +77,7 @@ Page({
       },
       success:function(res){
         wx.navigateTo({
-          url: '/pages/activity/turntable/join_success?gamecode=' + gamecode,
+          url: '/pages/activity/turntable/join_success?gamecode=' + gamecode +"&box_mac="+box_mac+"&activity_id="+activity_id,
         });
         wx.request({
           url: 'https://mobile.littlehotspot.com/smallapp/Activity/joinGameLog',
