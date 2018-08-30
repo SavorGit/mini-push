@@ -3,7 +3,7 @@
 <!-- ================================== 加入游戏成功 ================================== -->
 <view class="container">
   <view class='join_game_success full_width full_height'>
-    <image class='join_game_success_bg full_width full_height' src='/images/game_bg_join_success.png' mode='aspectFit'></image>
+    <image class='join_game_success_bg full_width full_height' src='http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/games/drink/game_bg_join_success.png' mode='aspectFit'></image>
     <image class='code' src='{{gamecode}}'></image>
   </view>
 </view>
