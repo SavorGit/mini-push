@@ -85,4 +85,4 @@
     </view>
   </view>
 </view>
-<!-- <navigator url="/pages/activity/turntable/index?box_mac={{box_mac}}&openid={{openid}}">互动游戏</navigator> -->
+<navigator url="/pages/activity/turntable/index?box_mac={{box_mac}}&openid={{openid}}">互动游戏</navigator>
