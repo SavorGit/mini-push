@@ -12,6 +12,7 @@ Page({
     openid : '',
     activity_id:'',
     gameCode:'',
+    showStart:true,
 
 
   },
@@ -43,6 +44,7 @@ Page({
   //开始游戏
   startGame:function(e){
     var that = this;
+    var retry = e.currentTarget.dataset.retry;
     var box_mac   = e.currentTarget.dataset.box_mac;
     var openid    = e.currentTarget.dataset.openid;
     var avatarurl = e.currentTarget.dataset.avatarurl;
@@ -65,22 +67,35 @@ Page({
         req_id: activity_id
       },
       success:function(res){
-        wx.request({
-          url: 'https://mobile.littlehotspot.com/smallapp/Activity/startGameLog',
-          headers: {
-            'Content-Type': 'application/json'
-          },
-          data: {
-            activity_id: activity_id,
-          },
-          success: function (res) {
-
-          }
+        that.setData({
+          showStart:false,
         })
+        if(retry==0){
+          wx.request({
+            url: 'https://mobile.littlehotspot.com/smallapp/Activity/startGameLog',
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            data: {
+              activity_id: activity_id,
+            },
+            success: function (res) {
+
+            }
+          })
+        }
+        
       }
     })
   },
- 
+  //重新发起游戏
+  /*orgGame(e){
+    var box_mac = e.currentTarget.dataset.box_mac;
+    var openid  = e.currentTarget.dataset.openid;
+      wx.navigateTo({
+        url: '/pages/activity/turntable/index?box_mac='+box_mac+'&openid='+openid,
+      })
+  },*/
 
   //退出游戏
   endGame: function (e) {

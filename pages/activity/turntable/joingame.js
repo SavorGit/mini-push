@@ -60,6 +60,7 @@ Page({
     var avatarurl = options.detail.userInfo.avatarUrl;
     var nickname = options.detail.userInfo.nickName;
     var timestamp = (new Date()).valueOf();
+    var gamecode = "https://mobile.littlehotspot.com/Smallapp/Activity/getGameCode?scene=" + box_mac + "_" + activity_id;
     wx.request({
       url: 'https://netty-push.littlehotspot.com/push/box',
       header: {
@@ -74,7 +75,7 @@ Page({
       },
       success:function(res){
         wx.navigateTo({
-          url: '/pages/activity/turntable/join_success',
+          url: '/pages/activity/turntable/join_success?gamecode=' + gamecode,
         });
         wx.request({
           url: 'https://mobile.littlehotspot.com/smallapp/Activity/joinGameLog',
