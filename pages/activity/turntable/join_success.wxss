@@ -21,7 +21,7 @@
 }
 
 .join_game_success > .code {
-  margin-top: calc((100vh - 95rpx) * -1);
+  margin-top: calc((100vw * 1.781333333333333 - 220rpx) * -1);
   width: 405rpx;
   height: 405rpx;
 }
