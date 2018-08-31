@@ -413,8 +413,32 @@ Page({
   hdgames(e) {
     var openid = e.currentTarget.dataset.openid;
     var box_mac = e.currentTarget.dataset.boxmac;
-      wx.navigateTo({
+    var mobile_brand = app.globalData.mobile_brand;
+    var mobile_model = app.globalData.mobile_model;
+    /*wx.navigateTo({
         url: '/pages/activity/turntable/index?box_mac='+box_mac+'&openid='+openid,
-      })
+    })*/
+
+    wx.showToast({
+      title: '游戏研发中，敬请期待',
+      icon: 'none',
+      duration: 2000
+    });
+    wx.request({
+      url: 'https://mobile.littlehotspot.com/Smallapp/activity/wantGameLog',
+      header: {
+        'Content-Type': 'application/json'
+      },
+      data: {
+        box_mac: box_mac,
+        openid: openid,
+        mobile_brand: mobile_brand,
+        mobile_model: mobile_model
+      },
+      method: "POST",
+      success: function (res) {
+
+      }
+    })
   },
 })
