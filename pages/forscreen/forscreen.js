@@ -415,11 +415,11 @@ Page({
     var box_mac = e.currentTarget.dataset.boxmac;
     var mobile_brand = app.globalData.mobile_brand;
     var mobile_model = app.globalData.mobile_model;
-    /*wx.navigateTo({
+    wx.navigateTo({
         url: '/pages/activity/turntable/index?box_mac='+box_mac+'&openid='+openid,
-    })*/
+    })
 
-    wx.showToast({
+    /*wx.showToast({
       title: '游戏研发中，敬请期待',
       icon: 'none',
       duration: 2000
@@ -439,6 +439,6 @@ Page({
       success: function (res) {
 
       }
-    })
+    })*/
   },
 })
