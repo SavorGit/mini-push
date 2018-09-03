@@ -1,4 +1,5 @@
 // pages/activity/turntable/joingame.js
+const app = getApp();
 var box_mac;
 var activity_id;
 var openid;
@@ -62,7 +63,8 @@ Page({
     var timestamp = (new Date()).valueOf();
     //var gamecode = "https://mobile.littlehotspot.com/Smallapp/Activity/getGameCode?scene=" + box_mac + "_" + activity_id;
     var gamecode = "https://mobile.littlehotspot.com/Smallapp/Activity/getGameCode";
-    
+    var mobile_brand = app.globalData.mobile_brand;
+    var mobile_model = app.globalData.mobile_model;
     wx.request({
       url: 'https://netty-push.littlehotspot.com/push/box',
       header: {
@@ -86,6 +88,10 @@ Page({
           },
           data: {
             activity_id: activity_id,
+            openid:openid,
+            mobile_brand: mobile_brand,
+            mobile_model: mobile_model
+            
           },
           success: function (res) {
 

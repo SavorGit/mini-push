@@ -23,6 +23,8 @@ Page({
     var openid  = res.currentTarget.dataset.openid;
     var avatarurl = res.detail.userInfo.avatarUrl;
     var nickName = res.detail.userInfo.nickName;
+    var mobile_brand = app.globalData.mobile_brand;
+    var mobile_model = app.globalData.mobile_model;
     var activity_id = (new Date()).valueOf();
     var gamecode = "https://mobile.littlehotspot.com/Smallapp/Activity/getGameCode?scene=" + box_mac + "_" + activity_id;
     wx.request({
@@ -46,7 +48,10 @@ Page({
           },
           data: {
             activity_id: activity_id,
-            box_mac:box_mac
+            box_mac:box_mac,
+            openid:openid,
+            mobile_brand: mobile_brand,
+            mobile_model: mobile_model
           },
           success: function (res) {
 
