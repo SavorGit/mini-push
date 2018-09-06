@@ -7,6 +7,7 @@ var signature;
 var postf;   //上传文件扩展名
 var box_mac = '';
 var forscreen_char = '';
+var res_sup_time;
 Page({
 
   /**
@@ -26,6 +27,7 @@ Page({
     var that = this
     var box_mac = e.box_mac;
     var openid = e.openid;
+    
     that.setData({
       openid: openid,
       box_mac: box_mac,
@@ -40,14 +42,16 @@ Page({
         that.setData({
           showVedio: true,
         });
-        uploadVedio(res, box_mac, openid);
+        res_sup_time = (new Date()).valueOf();
+        uploadVedio(res, box_mac, openid, res_sup_time);
       },fail:function(res){
         wx.navigateBack({
           delta: 1,
         })
       }
     });
-    function uploadVedio(video, box_mac, openid) {
+    function uploadVedio(video, box_mac, openid, res_sup_time) {
+      
       wx.request({
         url: 'https://mobile.littlehotspot.com/Smallapp/Index/getOssParams',
         headers: {
@@ -56,11 +60,11 @@ Page({
         success: function (rest) {
           policy = rest.data.policy;
           signature = rest.data.signature;
-          uploadOssVedio(policy, signature, video, box_mac, openid);
+          uploadOssVedio(policy, signature, video, box_mac, openid, res_sup_time);
         }
       });
     }
-    function uploadOssVedio(policy, signature, video, box_mac, openid) {
+    function uploadOssVedio(policy, signature, video, box_mac, openid, res_sup_time) {
 
       var filename = video.tempFilePath;          //视频url
       //var filename_img = video.thumbTempFilePath; //视频封面图
@@ -89,7 +93,7 @@ Page({
         },
         success: function (res) {
 
-          wx.request({
+          /*wx.request({
             url: "https://netty-push.littlehotspot.com/push/box",
             header: {
               "Content-Type": "application/x-www-form-urlencoded"
@@ -98,36 +102,66 @@ Page({
             data: {
               box_mac: box_mac,
               cmd: 'call-mini-program',
-              msg: '{ "action":2, "url": "forscreen/resource/' + timestamp + postf_t + '", "filename":"' + timestamp + postf_t + '","openid":"' + openid + '","resource_type":2}',
+              msg: '{ "action":2, "url": "forscreen/resource/' + timestamp + postf_t + '", "filename":"' + timestamp + postf_t + '","openid":"' + openid + '","resource_type":2,"video_id":"' + timestamp +'"}',
               req_id: timestamp
             },
             success: function (result) {
-              wx.request({
-                url: 'https://mobile.littlehotspot.com/Smallapp/index/recordForScreenPics',
-                header: {
-                  'content-type': 'application/json'
-                },
-                data: {
-                  openid: openid,
-                  box_mac: box_mac,
-                  action: 2,
-                  resource_type: 2,
-                  mobile_brand: mobile_brand,
-                  mobile_model: mobile_model,
-                  forscreen_char: forscreen_char,
-                  imgs: '["forscreen/resource/' + timestamp + postf_t + '"]'
-                },
-              });
+              
 
             },
-          });
+          });*/
         }
       });
       upload_task.onProgressUpdate((res) => {
-        console.log(res.progress);
+        //console.log(res);
+        
         that.setData({
           vedio_percent: res.progress
-        })
+        });
+        if(res.progress==100){
+          var res_eup_time = (new Date()).valueOf();
+          //console.log(res_eup_time);
+          
+          wx.request({
+            url: 'https://mobile.littlehotspot.com/Smallapp/index/recordForScreenPics',
+            header: {
+              'content-type': 'application/json'
+            },
+            data: {
+              openid: openid,
+              box_mac: box_mac,
+              action: 2,
+              resource_type: 2,
+              mobile_brand: mobile_brand,
+              mobile_model: mobile_model,
+              forscreen_char: forscreen_char,
+              imgs: '["forscreen/resource/' + timestamp + postf_t + '"]',
+              resource_id: timestamp,
+              res_sup_time: res_sup_time,
+              res_eup_time: res_eup_time,
+              resource_size: res.totalBytesSent
+            },
+            success:function(ret){
+              wx.request({
+                url: "https://netty-push.littlehotspot.com/push/box",
+                header: {
+                  "Content-Type": "application/x-www-form-urlencoded"
+                },
+                method: "POST",
+                data: {
+                  box_mac: box_mac,
+                  cmd: 'call-mini-program',
+                  msg: '{ "action":2, "url": "forscreen/resource/' + timestamp + postf_t + '", "filename":"' + timestamp + postf_t + '","openid":"' + openid + '","resource_type":2,"video_id":"' + timestamp + '"}',
+                  req_id: timestamp
+                },
+                success: function (result) {
+
+
+                },
+              });
+            }
+          });
+        }
 
       });
       that.setData({
@@ -201,7 +235,7 @@ Page({
         },
         success: function (res) {
 
-          wx.request({
+          /*wx.request({
             url: "https://netty-push.littlehotspot.com/push/box",
             header: {
               "Content-Type": "application/x-www-form-urlencoded"
@@ -210,29 +244,14 @@ Page({
             data: {
               box_mac: box_mac,
               cmd: 'call-mini-program',
-              msg: '{ "action":2, "url": "forscreen/resource/' + timestamp + postf_t + '", "filename":"' + timestamp + postf_t + '","openid":"' + openid + '","resource_type":2}',
+              msg: '{ "action":2, "url": "forscreen/resource/' + timestamp + postf_t + '", "filename":"' + timestamp + postf_t + '","openid":"' + openid + '","resource_type":2,"video_id":"' + timestamp+'"}',
               req_id: timestamp
             },
             success: function (result) {
-              wx.request({
-                url: 'https://mobile.littlehotspot.com/Smallapp/index/recordForScreenPics',
-                header: {
-                  'content-type': 'application/json'
-                },
-                data: {
-                  openid: openid,
-                  box_mac: box_mac,
-                  action: 2,
-                  resource_type: 2,
-                  mobile_brand: mobile_brand,
-                  mobile_model: mobile_model,
-                  forscreen_char: forscreen_char,
-                  imgs: '["forscreen/resource/' + timestamp + postf_t + '"]'
-                },
-              });
+             
 
             },
-          });
+          });*/
         }
       });
       upload_task.onProgressUpdate((res) => {
@@ -240,6 +259,50 @@ Page({
         that.setData({
           vedio_percent: res.progress
         })
+        if (res.progress == 100) {
+          var res_eup_time = (new Date()).valueOf();
+          //console.log(res_eup_time);
+
+          wx.request({
+            url: 'https://mobile.littlehotspot.com/Smallapp/index/recordForScreenPics',
+            header: {
+              'content-type': 'application/json'
+            },
+            data: {
+              openid: openid,
+              box_mac: box_mac,
+              action: 2,
+              resource_type: 2,
+              mobile_brand: mobile_brand,
+              mobile_model: mobile_model,
+              forscreen_char: forscreen_char,
+              imgs: '["forscreen/resource/' + timestamp + postf_t + '"]',
+              resource_id: timestamp,
+              res_sup_time: res_sup_time,
+              res_eup_time: res_eup_time,
+              resource_size: res.totalBytesSent
+            },
+            success:function(ret){
+              wx.request({
+                url: "https://netty-push.littlehotspot.com/push/box",
+                header: {
+                  "Content-Type": "application/x-www-form-urlencoded"
+                },
+                method: "POST",
+                data: {
+                  box_mac: box_mac,
+                  cmd: 'call-mini-program',
+                  msg: '{ "action":2, "url": "forscreen/resource/' + timestamp + postf_t + '", "filename":"' + timestamp + postf_t + '","openid":"' + openid + '","resource_type":2,"video_id":"' + timestamp + '"}',
+                  req_id: timestamp
+                },
+                success: function (result) {
+
+
+                },
+              });
+            }
+          });
+        }
 
       });
       that.setData({

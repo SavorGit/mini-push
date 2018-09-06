@@ -132,7 +132,7 @@ Page({
     openid = e.detail.value.openid;
     box_mac = e.detail.value.box_mac;
     forscreen_char = e.detail.value.forscreen_char;
-
+    
 
 
     if (e.detail.value.upimgs0 != '' && e.detail.value.upimgs0 != undefined) upimgs[0] = e.detail.value.upimgs0;
@@ -157,7 +157,7 @@ Page({
         uploadOss_multy(policy, signature, upimgs, box_mac, openid, img_lenth, forscreen_char);
       }
     });
-    function uploadOssNew(policy, signature, img_url, box_mac, openid, timestamp, flag, img_len, forscreen_char, forscreen_id) {
+    function uploadOssNew(policy, signature, img_url, box_mac, openid, timestamp, flag, img_len, forscreen_char, forscreen_id, res_sup_time) {
 
       var filename = img_url;
       var index1 = filename.lastIndexOf(".");
@@ -188,7 +188,7 @@ Page({
         },
 
         success: function (res) {
-          wx.request({
+          /*wx.request({
             url: "https://netty-push.littlehotspot.com/push/box",
             header: {
               "Content-Type": "application/x-www-form-urlencoded"
@@ -197,25 +197,11 @@ Page({
             data: {
               box_mac: box_mac,
               cmd: 'call-mini-program',
-              msg: '{ "action": 4, "resource_type":2, "url": "forscreen/resource/' + timestamp + postf_t + '", "filename":"' + timestamp + postf_t + '","openid":"' + openid + '","img_nums":' + img_len + ',"forscreen_char":"' + forscreen_char + '","order":' + order + ',"forscreen_id":"' + forscreen_id + '"}',
+              msg: '{ "action": 4, "resource_type":2, "url": "forscreen/resource/' + timestamp + postf_t + '", "filename":"' + timestamp + postf_t + '","openid":"' + openid + '","img_nums":' + img_len + ',"forscreen_char":"' + forscreen_char + '","order":' + order + ',"forscreen_id":"' + forscreen_id + '","img_id":"' + timestamp+'"}',
               req_id: timestamp
             },
             success: function (result) {
-              wx.request({
-                url: 'https://mobile.littlehotspot.com/Smallapp/index/recordForScreenPics',
-                header: {
-                  'content-type': 'application/json'
-                },
-                data: {
-                  openid: openid,
-                  box_mac: box_mac,
-                  action: 4,
-                  mobile_brand: mobile_brand,
-                  mobile_model: mobile_model,
-                  forscreen_char: forscreen_char,
-                  imgs: '["forscreen/resource/' + timestamp + postf_t + '"]'
-                },
-              });
+              
               that.setData({
                 showFirst: false,
                 showSecond: true,
@@ -223,7 +209,7 @@ Page({
                 percent: 0
               })
             },
-          })
+          })*/
         },
         complete: function (es) {
           tmp_percent[flag] = { "percent": 100 };
@@ -240,7 +226,53 @@ Page({
         //console.log(res.progress);
         that.setData({
           tmp_percent: tmp_percent
-        })
+        });
+        if (res.progress==100){
+          var res_eup_time = (new Date()).valueOf();
+          wx.request({
+                url: 'https://mobile.littlehotspot.com/Smallapp/index/recordForScreenPics',
+                header: {
+                  'content-type': 'application/json'
+                },
+                data: {
+                  openid: openid,
+                  box_mac: box_mac,
+                  action: 4,
+                  mobile_brand: mobile_brand,
+                  mobile_model: mobile_model,
+                  forscreen_char: forscreen_char,
+                  imgs: '["forscreen/resource/' + timestamp + postf_t + '"]',
+                  resource_id: timestamp,
+                  res_sup_time: res_sup_time,
+                  res_eup_time: res_eup_time,
+                  resource_size: res.totalBytesSent
+                },
+                success:function(ret){
+                  wx.request({
+                    url: "https://netty-push.littlehotspot.com/push/box",
+                    header: {
+                      "Content-Type": "application/x-www-form-urlencoded"
+                    },
+                    method: "POST",
+                    data: {
+                      box_mac: box_mac,
+                      cmd: 'call-mini-program',
+                      msg: '{ "action": 4, "resource_type":2, "url": "forscreen/resource/' + timestamp + postf_t + '", "filename":"' + timestamp + postf_t + '","openid":"' + openid + '","img_nums":' + img_len + ',"forscreen_char":"' + forscreen_char + '","order":' + order + ',"forscreen_id":"' + forscreen_id + '","img_id":"' + timestamp + '"}',
+                      req_id: timestamp
+                    },
+                    success: function (result) {
+
+                      that.setData({
+                        showFirst: false,
+                        showSecond: true,
+                        showView: false,
+                        percent: 0
+                      })
+                    },
+                  })
+                }
+          });
+        }
 
       })
 
@@ -250,6 +282,7 @@ Page({
       var tmp_imgs = [];
       var forscreen_id = (new Date()).valueOf();
       for (var i = 0; i < img_len; i++) {
+        var res_sup_time = (new Date()).valueOf();
         var filename = upimgs[i];
         var index1 = filename.lastIndexOf(".");
         var index2 = filename.length;
@@ -261,7 +294,7 @@ Page({
         that.setData({
           tmp_imgs: tmp_imgs
         });
-        uploadOssNew(policy, signature, filename, box_mac, openid, timestamp, i, img_len, forscreen_char, forscreen_id);
+        uploadOssNew(policy, signature, filename, box_mac, openid, timestamp, i, img_len, forscreen_char, forscreen_id, res_sup_time);
       }
       that.setData({
         showThird: true,

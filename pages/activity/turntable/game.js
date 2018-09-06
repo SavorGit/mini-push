@@ -50,11 +50,11 @@ Page({
     var avatarurl = e.currentTarget.dataset.avatarurl;
     var nickname  = e.currentTarget.dataset.nickname;
     var activity_id = e.currentTarget.dataset.activity_id;
-
+    var timestamp = (new Date()).valueOf();
     
 
 
-    wx.request({
+    /*wx.request({
       url: 'https://netty-push.littlehotspot.com/push/box',
       header: {
         "Content-Type": "application/x-www-form-urlencoded"
@@ -78,6 +78,20 @@ Page({
             },
             data: {
               activity_id: activity_id,
+              startgame_time: timestamp
+            },
+            success: function (res) {
+
+            }
+          })
+        }else if(retry==1){
+          wx.request({
+            url: 'https://mobile.littlehotspot.com/smallapp/Activity/retryGame',
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            data: {
+              activity_id: activity_id,
             },
             success: function (res) {
 
@@ -86,7 +100,72 @@ Page({
         }
         
       }
-    })
+    })*/
+    if (retry == 0) {
+      wx.request({
+        url: 'https://mobile.littlehotspot.com/smallapp/Activity/startGameLog',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        data: {
+          activity_id: activity_id,
+          startgame_time: timestamp
+        },
+        success: function (res) {
+          that.setData({
+            showStart: false,
+          })
+          wx.request({
+            url: 'https://netty-push.littlehotspot.com/push/box',
+            header: {
+              "Content-Type": "application/x-www-form-urlencoded"
+            },
+            method: "POST",
+            data: {
+              box_mac: box_mac,
+              cmd: 'call-mini-program',
+              msg: '{"action":102,"openid":"' + openid + '","activity_id":' + activity_id + '}',
+              req_id: activity_id
+            },
+            success:function(ret){
+
+            }
+          });
+        }
+      })
+    } else if (retry == 1) {
+      wx.request({
+        url: 'https://mobile.littlehotspot.com/smallapp/Activity/retryGame',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        data: {
+          activity_id: activity_id,
+        },
+        success: function (res) {
+          that.setData({
+            showStart: false,
+          })
+          wx.request({
+            url: 'https://netty-push.littlehotspot.com/push/box',
+            header: {
+              "Content-Type": "application/x-www-form-urlencoded"
+            },
+            method: "POST",
+            data: {
+              box_mac: box_mac,
+              cmd: 'call-mini-program',
+              msg: '{"action":105,"openid":"' + openid + '","activity_id":' + activity_id + '}',
+              req_id: activity_id
+            },
+            success: function (ret) {
+
+            }
+          });
+        }
+      })
+    }
+
   },
   //重新发起游戏
   /*orgGame(e){
