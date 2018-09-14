@@ -22,6 +22,7 @@
 
 .start_game > .code {
   margin-top: calc((100vw * 1.781333333333333 - 220rpx) * -1);
+  margin-bottom: 350rpx;
   width: 405rpx;
   height: 405rpx;
 }

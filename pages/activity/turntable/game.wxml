@@ -5,7 +5,7 @@
   <view class='start_game full_width full_height'>
     <image class='start_game_bg full_width full_height' src='http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/games/drink/game_bg_start.png' mode='aspectFit'></image>
     <image class='code' src='{{gameCode}}'></image>
-    <button wx:if="{{showStart}}" open-type='share' style='margin-top: 370rpx;' data-box_mac='{{box_mac}}' data-openid='{{openid}}' data-avatarUrl="{{avatarUrl}}" data-nickName='{{nickName}}' data-activity_id='{{activity_id}}' >
+    <button wx:if="{{showStart}}" open-type='share' style='margin-top: 25rpx;' data-box_mac='{{box_mac}}' data-openid='{{openid}}' data-avatarUrl="{{avatarUrl}}" data-nickName='{{nickName}}' data-activity_id='{{activity_id}}'>
       <image src='http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/games/drink/btn_game_invitation.png'></image>
     </button>
     <button wx:if="{{showStart}}" style='margin-top: 25rpx;' bindtap='startGame' data-box_mac='{{box_mac}}' data-openid='{{openid}}' data-avatarUrl="{{avatarUrl}}" data-nickName='{{nickName}}' data-activity_id='{{activity_id}}' data-retry='0'>
