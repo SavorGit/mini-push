@@ -3,12 +3,12 @@ const app = getApp();
 Page({
   onShareAppMessage: function (res) {
     var activity_id = res.target.dataset.activity_id;
-
+    var box_mac = res.target.dataset.box_mac;
     if (res.from === 'button') {
       // 来自页面内转发按钮
       return {
         title: '赶紧加入，吃饭怎么能不喝酒！',
-        path: '/page/activity/turntable/scangame?activity_id='+activity_id,
+        path: '/pages/activity/turntable/joingame?scene='+box_mac+'_'+activity_id,
         imageUrl: '/images/share_game.jpg'
       }
     }
@@ -157,11 +157,17 @@ Page({
               }
             })
           } else {
-            wx.showToast({
+            /*wx.showToast({
               title: '单人无法开始，邀请在座好友一起游戏吧！',
               icon: 'none',
               duration: 2000
-            })
+            })*/
+            wx.showModal({
+              title: '提示',
+              content: "1、单人无法开始游戏;\r\n2、您应先邀请在座好友扫描电视中二维码加入游戏;\r\n3、开始游戏前请勿退出游戏，否则将会造成游戏无法继续。",
+              showCancel:false,
+              confirmText:'我知道了'
+            });
           }
         }
       })
