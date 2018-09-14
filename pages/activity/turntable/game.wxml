@@ -5,13 +5,16 @@
   <view class='start_game full_width full_height'>
     <image class='start_game_bg full_width full_height' src='http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/games/drink/game_bg_start.png' mode='aspectFit'></image>
     <image class='code' src='{{gameCode}}'></image>
-    <button wx:if="{{showStart}}" style='margin-top: 450rpx;' bindtap='startGame' data-box_mac='{{box_mac}}' data-openid='{{openid}}' data-avatarUrl="{{avatarUrl}}" data-nickName='{{nickName}}' data-activity_id='{{activity_id}}' data-retry='0'>
+    <button style='margin-top: 370rpx;' bindtap='invitationFriends' data-box_mac='{{box_mac}}' data-openid='{{openid}}' data-avatarUrl="{{avatarUrl}}" data-nickName='{{nickName}}' data-activity_id='{{activity_id}}' data-retry='2'>
+      <image src='http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/games/drink/btn_game_invitation.png'></image>
+    </button>
+    <button wx:if="{{showStart}}" style='margin-top: 25rpx;' bindtap='startGame' data-box_mac='{{box_mac}}' data-openid='{{openid}}' data-avatarUrl="{{avatarUrl}}" data-nickName='{{nickName}}' data-activity_id='{{activity_id}}' data-retry='0'>
       <image src='http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/games/drink/btn_game_start.png'></image>
     </button>
-    <button wx:else style='margin-top: 450rpx;' bindtap='startGame' data-box_mac='{{box_mac}}' data-openid='{{openid}}' data-avatarUrl="{{avatarUrl}}" data-nickName='{{nickName}}' data-activity_id='{{activity_id}}' data-retry='1'>
+    <button wx:else style='margin-top: 25rpx;' bindtap='startGame' data-box_mac='{{box_mac}}' data-openid='{{openid}}' data-avatarUrl="{{avatarUrl}}" data-nickName='{{nickName}}' data-activity_id='{{activity_id}}' data-retry='1'>
       <image src='http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/games/drink/btn_game_again.png'></image>
     </button>
-    <button bindtap='endGame' data-box_mac='{{box_mac}}' data-openid='{{openid}}' data-activity_id='{{activity_id}}' style='margin-top: 25rpx;'>
+    <button style='margin-top: 25rpx;' bindtap='endGame' data-box_mac='{{box_mac}}' data-openid='{{openid}}' data-activity_id='{{activity_id}}'>
       <image src='http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/games/drink/btn_game_exit.png'></image>
     </button>
   </view>
