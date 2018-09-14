@@ -58,6 +58,9 @@ Page({
     box_mac = options.currentTarget.dataset.box_mac;
     openid  = options.currentTarget.dataset.openid;
     activity_id = options.currentTarget.dataset.activity_id;
+    
+
+
     var avatarurl = options.detail.userInfo.avatarUrl;
     var nickname = options.detail.userInfo.nickName;
     var timestamp = (new Date()).valueOf();
@@ -65,6 +68,66 @@ Page({
     var gamecode = "https://mobile.littlehotspot.com/Smallapp/Activity/getGameCode";
     var mobile_brand = app.globalData.mobile_brand;
     var mobile_model = app.globalData.mobile_model;
+
+
+    wx.request({
+      url: 'https://mobile.littlehotspot.com/smallapp/Activity/canJoinGame',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      data: {
+        activity_id: activity_id,
+
+      },
+      success: function (res) {
+        var canjoin = res.data.result.can_join;
+        if(canjoin==1){
+          wx.request({
+            url: 'https://mobile.littlehotspot.com/smallapp/Activity/joinGameLog',
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            data: {
+              activity_id: activity_id,
+              openid: openid,
+              mobile_brand: mobile_brand,
+              mobile_model: mobile_model,
+              join_time: timestamp
+
+            },
+            success: function (res) {
+              wx.request({
+                url: 'https://netty-push.littlehotspot.com/push/box',
+                header: {
+                  "Content-Type": "application/x-www-form-urlencoded"
+                },
+                method: "POST",
+                data: {
+                  box_mac: box_mac,
+                  cmd: 'call-mini-program',
+                  msg: '{"action":103,"activity_id":' + activity_id + ',"openid":"' + openid + '","avatarurl":"' + avatarurl + '"}',
+                  req_id: timestamp
+                },
+                success: function (ret) {
+                  wx.navigateTo({
+                    url: '/pages/activity/turntable/join_success?gamecode=' + gamecode + "&box_mac=" + box_mac + "&activity_id=" + activity_id,
+                  });
+                }
+              });
+            }
+          })
+        }else {
+          //本局游戏已结束，无法加入，您可扫描电视二维码加入新一局的游戏，或扫描链接电视发起新的游戏。
+          wx.showModal({
+            title: '加入游戏失败',
+            content: "本局游戏已结束，无法加入，您可扫描电视二维码加入新一局的游戏，或扫描链接电视发起新的游戏。",
+            showCancel: false,
+            confirmText: '确定'
+          });
+        }
+      }
+    })
+
     /*wx.request({
       url: 'https://netty-push.littlehotspot.com/push/box',
       header: {
@@ -100,40 +163,7 @@ Page({
         })
       }
     })*/
-    wx.request({
-      url: 'https://mobile.littlehotspot.com/smallapp/Activity/joinGameLog',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      data: {
-        activity_id: activity_id,
-        openid: openid,
-        mobile_brand: mobile_brand,
-        mobile_model: mobile_model,
-        join_time: timestamp
-
-      },
-      success: function (res) {
-        wx.request({
-          url: 'https://netty-push.littlehotspot.com/push/box',
-          header: {
-            "Content-Type": "application/x-www-form-urlencoded"
-          },
-          method: "POST",
-          data: {
-            box_mac: box_mac,
-            cmd: 'call-mini-program',
-            msg: '{"action":103,"activity_id":' + activity_id + ',"openid":"' + openid + '","avatarurl":"' + avatarurl + '"}',
-            req_id: timestamp
-          },
-          success: function (ret) {
-            wx.navigateTo({
-              url: '/pages/activity/turntable/join_success?gamecode=' + gamecode + "&box_mac=" + box_mac + "&activity_id=" + activity_id,
-            });
-          }
-        });
-      }
-    })
+    
   },
  
 
