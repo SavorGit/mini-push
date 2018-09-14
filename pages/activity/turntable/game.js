@@ -1,7 +1,20 @@
 // pages/activity/turntable/game.js
 const app = getApp();
 Page({
+  onShareAppMessage: function (res) {
+    var activity_id = res.target.dataset.activity_id;
 
+    if (res.from === 'button') {
+      // 来自页面内转发按钮
+      return {
+        title: '赶紧加入，吃饭怎么能不喝酒！',
+        path: '/page/activity/turntable/scangame?activity_id='+activity_id,
+        imageUrl: '/images/share_game.jpg'
+      }
+    }
+    
+    
+  },
   /**
    * 页面的初始数据
    */
@@ -16,7 +29,6 @@ Page({
 
 
   },
-
   /**
    * 生命周期函数--监听页面加载
    */
@@ -52,7 +64,7 @@ Page({
     var activity_id = e.currentTarget.dataset.activity_id;
     var timestamp = (new Date()).valueOf();
     
-
+   
 
     /*wx.request({
       url: 'https://netty-push.littlehotspot.com/push/box',
@@ -103,36 +115,57 @@ Page({
     })*/
     if (retry == 0) {
       wx.request({
-        url: 'https://mobile.littlehotspot.com/smallapp/Activity/startGameLog',
+        url: 'https://mobile.littlehotspot.com/smallapp/Activity/jugeGamePerson',
         headers: {
           'Content-Type': 'application/json'
         },
         data: {
-          activity_id: activity_id,
-          startgame_time: timestamp
+          activity_id: activity_id
         },
         success: function (res) {
-          that.setData({
-            showStart: false,
-          })
-          wx.request({
-            url: 'https://netty-push.littlehotspot.com/push/box',
-            header: {
-              "Content-Type": "application/x-www-form-urlencoded"
-            },
-            method: "POST",
-            data: {
-              box_mac: box_mac,
-              cmd: 'call-mini-program',
-              msg: '{"action":102,"openid":"' + openid + '","activity_id":' + activity_id + '}',
-              req_id: activity_id
-            },
-            success:function(ret){
+          var persons = res.data.result.nums;
+          if (persons > 0) {
+            wx.request({
+              url: 'https://mobile.littlehotspot.com/smallapp/Activity/startGameLog',
+              headers: {
+                'Content-Type': 'application/json'
+              },
+              data: {
+                activity_id: activity_id,
+                startgame_time: timestamp
+              },
+              success: function (res) {
+                that.setData({
+                  showStart: false,
+                })
+                wx.request({
+                  url: 'https://netty-push.littlehotspot.com/push/box',
+                  header: {
+                    "Content-Type": "application/x-www-form-urlencoded"
+                  },
+                  method: "POST",
+                  data: {
+                    box_mac: box_mac,
+                    cmd: 'call-mini-program',
+                    msg: '{"action":102,"openid":"' + openid + '","activity_id":' + activity_id + '}',
+                    req_id: activity_id
+                  },
+                  success: function (ret) {
 
-            }
-          });
+                  }
+                });
+              }
+            })
+          } else {
+            wx.showToast({
+              title: '单人无法开始，邀请在座好友一起游戏吧！',
+              icon: 'none',
+              duration: 2000
+            })
+          }
         }
       })
+      
     } else if (retry == 1) {
       wx.request({
         url: 'https://mobile.littlehotspot.com/smallapp/Activity/retryGame',
@@ -248,11 +281,4 @@ Page({
   onReachBottom: function () {
   
   },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-  
-  }
 })

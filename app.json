@@ -9,7 +9,8 @@
     "pages/activity/turntable/index",
     "pages/activity/turntable/game",
     "pages/activity/turntable/joingame",
-    "pages/activity/turntable/join_success"
+    "pages/activity/turntable/join_success",
+    "pages/activity/turntable/scangame"
   ],
   "window": {
     "backgroundTextStyle": "light",

@@ -7,12 +7,6 @@ var postf;   //上传文件扩展名
 var timestamp = (new Date()).valueOf();
 var box_mac;
 Page({
-  onShareAppMessage: function () {
-    return {
-      title: '热点投屏',
-      imageUrl: '/images/qrcode.jpg'
-    }
-  },
   onLoad: function () {
 
     wx.login({
