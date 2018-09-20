@@ -1,17 +1,18 @@
 /* pages/template/navigation.wxss */
 
 .bottom_nav {
-  width: calc(100vw - 120rpx);
+  width: 100vw;
   height: 138rpx;
   display: flex;
   flex-direction: row;
+  background-color: #fff;
 }
 
 .bottom_nav > navigator {
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 33.33333333%;
+  width: 40%;
   box-sizing: border-box;
 }
 
