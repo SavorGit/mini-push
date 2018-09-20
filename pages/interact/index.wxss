@@ -3,7 +3,7 @@
 
 .page_main_v {
   width: 100%;
-  height: calc(100vh - 138rpx);
+  height: calc(100% - 138rpx);
   background-color: #932c3f;
   display: flex;
   flex-direction: row;

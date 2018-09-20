@@ -29,7 +29,7 @@
     </view>
   </view>
   <scroll-view class="scroll_container display_{{showView?'show':'hide'}}" bindscrolltolower="loadMore" data-boxmac="{{box_mac}}" scroll-y="true" scroll-with-animation="true">
-    <swiper indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}">
+    <swiper wx:if="{{imgUrls.length > 0}}" indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}">
       <block wx:for="{{imgUrls}}" wx:key="item">
         <navigator bindtap='jumpMimiPro' data-boxmac="{{box_mac}}" data-openid="{{openid}}" target="{{item.target}}" open-type="navigate" app-id="{{item.appId}}" path="{{item.path}}" extra-data="{{item.extraData}}" version="release" url="{{item.url}}">
           <swiper-item>

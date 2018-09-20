@@ -1,17 +1,217 @@
 /* pages/find/index.wxss */
 @import "../template/navigation.wxss";
 
-.page_main_v {
+.page_main {
   width: 100%;
-  height: calc(100vh - 138rpx);
+  height: calc(100% - 138rpx);
+}
+
+.content {
+  margin: 0rpx 10rpx 0rpx 10rpx;
+  padding: 10rpx;
+  border: 1rpx solid #f6f2ec;
+  border-radius: 20rpx;
+  background-color: #fff;
+}
+
+/* =================== 内容头部开始 =================== */
+
+.con_top {
+  height: 120rpx;
   display: flex;
   flex-direction: row;
   align-items: center;
 }
 
-.page_main_h {
-  width: 100%;
+.con_top > .user_info {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
+  align-items: center;
+  flex-grow: 1;
+  justify-content: flex-start;
+}
+
+.con_top > .user_info > .user_head {
+  width: 80rpx;
+  height: 80rpx;
+  margin-left: 10rpx;
+  border-radius: 39rpx;
+  background-color: #bebebe;
+  vertical-align: middle;
+}
+
+.con_top > .user_info > .user_name {
+  margin: 0rpx 20rpx 0rpx 10rpx;
+}
+
+.con_top > .operation {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.con_top > .operation > .launch_tv {
+  margin-right: 10rpx;
+  width: 150rpx;
+  height: 55rpx;
+  border: 1rpx solid #932c3f;
+  border-radius: 12rpx;
+}
+
+/* =================== 内容头部结束 =================== */
+
+/* =================== 内容底部开始 =================== */
+
+.con_bottom {
+  height: 60rpx;
+  display: flex;
+  flex-direction: row;
   align-items: center;
 }
+
+.con_bottom > .hotel_info {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  flex-grow: 1;
+  justify-content: flex-start;
+}
+
+.con_bottom > .operation {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.con_bottom > .operation > view {
+  margin-left: 15rpx;
+  margin-right: 15rpx;
+}
+
+.con_bottom > .operation > view > image {
+  width: 50rpx;
+  height: 50rpx;
+  margin-right: 8rpx;
+  vertical-align: middle;
+}
+
+/* =================== 内容底部结束 =================== */
+
+/* =================== 内容中部开始 =================== */
+
+.weui-grids {
+  position: relative;
+  overflow: hidden;
+}
+
+.weui-grids::before {
+  content: " ";
+  position: absolute;
+  left: 0;
+  top: 0;
+  right: 0;
+  height: 1px;
+  /* border-top: 1px solid #d9d9d9; */
+  color: #d9d9d9;
+  -webkit-transform-origin: 0 0;
+  transform-origin: 0 0;
+  -webkit-transform: scaleY(0.5);
+  transform: scaleY(0.5);
+}
+
+.weui-grids::after {
+  content: " ";
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 1px;
+  bottom: 0;
+  /* border-left: 1px solid #d9d9d9; */
+  color: #d9d9d9;
+  -webkit-transform-origin: 0 0;
+  transform-origin: 0 0;
+  -webkit-transform: scaleX(0.5);
+  transform: scaleX(0.5);
+}
+
+.weui-grid {
+  position: relative;
+  float: left;
+  width: 33.33333333%;
+  box-sizing: border-box;
+}
+
+.weui-grid::before {
+  content: " ";
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 1px;
+  bottom: 0;
+  /* border-right: 1px solid #d9d9d9; */
+  color: #d9d9d9;
+  -webkit-transform-origin: 100% 0;
+  transform-origin: 100% 0;
+  -webkit-transform: scaleX(0.5);
+  transform: scaleX(0.5);
+}
+
+.weui-grid::after {
+  content: " ";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  height: 1px;
+  /* border-bottom: 1px solid #d9d9d9; */
+  color: #d9d9d9;
+  -webkit-transform-origin: 0 100%;
+  transform-origin: 0 100%;
+  -webkit-transform: scaleY(0.5);
+  transform: scaleY(0.5);
+}
+
+.weui-grid:active {
+  background-color: #ececec;
+}
+
+.weui-grid image {
+  width: calc((100vw - 40rpx) / 3 - 10rpx);
+  height: calc((100vw - 40rpx) / 3 - 10rpx);
+  border-radius: 10rpx;
+}
+
+/* .weui-grid__bg {
+    position: relative;
+    float: left;
+    padding: 0px 0px;
+    width: 100%;
+    box-sizing: border-box;
+}
+.weui-grid__icon {
+    width: 32px;
+    height: 32px;
+    margin: 0 auto;
+}
+.weui-grid__icon image {
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+.weui-grid__icon + .weui-grid__label {
+    margin-top: 5px;
+}
+.weui-grid__label {
+    display: block;
+    text-align: center;
+    font-weight: bold;
+    color: #000;
+    font-size: 14px;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+} */
+
+/* =================== 内容中部结束 =================== */
