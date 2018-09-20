@@ -53,7 +53,6 @@ label.input_tip {
 .scroll_container {
   width: 100%;
   height: calc(100vh - 208rpx);
-  background: #fff;
 }
 
 swiper {
@@ -71,12 +70,19 @@ swiper-image {
   width: 100%;
 }
 
+.article_list {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 .article {
   margin: 0;
   padding: 0;
+  width: 720rpx;
 }
 
-.article > .operation {
+/* .article > .operation {
   margin-top: 132rpx;
   height: 50rpx;
   line-height: 50rpx;
@@ -99,7 +105,7 @@ swiper-image {
   font-size: 24rpx;
   border-radius: 24rpx;
   border: 1rpx solid #fff;
-}
+} */
 
 .article > .video_info {
   margin-top: 124rpx;
@@ -123,21 +129,100 @@ swiper-image {
 }
 
 .article > .cover {
-  margin-top: -410rpx;
-  margin-left: 10rpx;
-  width: calc(100vw - 20rpx);
+  margin-top: 15rpx;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .article > .cover > image {
-  width: calc(100vw - 20rpx);
-  height: 410rpx;
+  width: 720rpx;
+  height: 405rpx;
   background-color: #932c3f;
   border-radius: 12rpx 12rpx 0rpx 0rpx;
   -moz-border-radius: 12rpx 12rpx 0rpx 0rpx;
   -webkit-border-radius: 12rpx 12rpx 0rpx 0rpx;
+  z-index: 1;
 }
 
-.article > .title {
+.article > .cover > view {
+  width: 100%;
+  height: 405rpx;
+  margin-top: -405rpx;
+  padding-left: 20rpx;
+  display: flex;
+  flex-direction: column;
+}
+
+.article > .cover > view > label {
+  width: 100%;
+  height: 50rpx;
+  line-height: 50rpx;
+  text-shadow: 0 1px 1px #999;
+  z-index: 2;
+}
+
+.article > .cover > view > navigator {
+  margin-top: calc(405rpx - 118rpx);
+  text-align: right;
+  z-index: 2;
+}
+
+.article > .cover > view > navigator > image {
+  width: 60rpx;
+  height: 60rpx;
+  margin-right: 18rpx;
+  z-index: 3;
+}
+
+.article > .con_bottom {
+  height: 75rpx;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  border-radius: 0rpx 0rpx 12rpx 12rpx;
+  -moz-border-radius: 0rpx 0rpx 12rpx 12rpx;
+  -webkit-border-radius: 0rpx 0rpx 12rpx 12rpx;
+  background-color: #fff;
+}
+
+.article > .con_bottom > .launch {
+  padding-left: 20rpx;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  flex-grow: 1;
+  justify-content: flex-start;
+}
+
+.article > .con_bottom > .launch > navigator > button {
+  margin-right: 10rpx;
+  width: 150rpx;
+  height: 55rpx;
+  border: 1rpx solid #932c3f;
+  border-radius: 12rpx;
+}
+
+.article > .con_bottom > .operation {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.article > .con_bottom > .operation > view {
+  margin-left: 15rpx;
+  margin-right: 15rpx;
+}
+
+.article > .con_bottom > .operation > view > image {
+  width: 36rpx;
+  height: 32rpx;
+  margin-right: 8rpx;
+  vertical-align: middle;
+}
+
+/* .article > .title {
   padding: 20rpx 0 0 20rpx;
   font-size: 30rpx;
   color: #434343;
@@ -148,7 +233,7 @@ swiper-image {
 .article > .title > label {
   text-shadow: 0 1px 1px #999;
   z-index: 2;
-}
+} */
 
 .top {
   padding-top: 10rpx;

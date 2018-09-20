@@ -64,7 +64,7 @@
 /* =================== 内容底部开始 =================== */
 
 .con_bottom {
-  height: 60rpx;
+  height: 75rpx;
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -91,8 +91,8 @@
 }
 
 .con_bottom > .operation > view > image {
-  width: 50rpx;
-  height: 50rpx;
+  width: 36rpx;
+  height: 32rpx;
   margin-right: 8rpx;
   vertical-align: middle;
 }
