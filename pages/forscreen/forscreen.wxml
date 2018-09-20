@@ -1,3 +1,4 @@
+<import src="../template/navigation.wxml" />
 <view class="container">
 
 
@@ -64,7 +65,9 @@
       </loading>
     </view>
   </scroll-view>
-  <view class="fix_container display_{{showView?'show':'hide'}}">
+
+  <!-- <view class="fix_container display_{{showView?'show':'hide'}}"> -->
+    <!--
     <view class='operation flex_row_center'>
       <view bindtap="chooseImage" data-boxmac="{{box_mac}}" data-openid="{{openid}}">
         <image src='/images/btn_pic.png'></image>
@@ -83,6 +86,10 @@
         <label class='font_932C3F_20'>互动游戏</label>
       </view>
     </view>
-  </view>
+    -->
+  <!-- </view> -->
+  <block wx:if="{{showView}}">
+    <template is="bottomNavigation" data="{{selectPage:'INDEX'}}"/>
+  </block>
 </view>
 <!-- <navigator url="/pages/activity/turntable/index?box_mac={{box_mac}}&openid={{openid}}">互动游戏</navigator> -->

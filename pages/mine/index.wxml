@@ -1,0 +1,10 @@
+<!--pages/mine/index.wxml-->
+<import src="../template/navigation.wxml" />
+<view class="container">
+  <view class='page_main_v'>
+    <view class='page_main_h'>
+      <label>此功能正在开发，请稍候……</label>
+    </view>
+  </view>
+  <template is="bottomNavigation" data='{{selectPage:"MINE"}}' />
+</view>

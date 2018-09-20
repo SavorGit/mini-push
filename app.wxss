@@ -43,8 +43,8 @@
 
 /* ================================== 文字 ================================== */
 
-.font_333333_28 {
-  font-size: 28rpx;
+.font_333333_20 {
+  font-size: 20rpx;
   color: #333;
 }
 
@@ -106,6 +106,21 @@
 .font_932C3F_34 {
   font-size: 34rpx;
   color: #932c3f;
+}
+
+.font_F6F2EC_34 {
+  font-size: 34rpx;
+  color: #f6f2ec;
+}
+
+.font_F6F2EC_30 {
+  font-size: 30rpx;
+  color: #f6f2ec;
+}
+
+.font_F6F2EC_28 {
+  font-size: 28rpx;
+  color: #f6f2ec;
 }
 
 .link_relief {

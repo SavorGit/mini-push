@@ -10,7 +10,11 @@
     "pages/activity/turntable/game",
     "pages/activity/turntable/joingame",
     "pages/activity/turntable/join_success",
-    "pages/activity/turntable/scangame"
+    "pages/activity/turntable/scangame",
+    "pages/find/index",
+    "pages/interact/index",
+    "pages/message/index",
+    "pages/mine/index"
   ],
   "window": {
     "backgroundTextStyle": "light",
