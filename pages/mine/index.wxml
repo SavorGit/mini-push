@@ -1,10 +1,379 @@
 <!--pages/mine/index.wxml-->
 <import src="../template/navigation.wxml" />
 <view class="container">
-  <view class='page_main_v'>
-    <view class='page_main_h'>
-      <label>此功能正在开发，请稍候……</label>
+  <scroll-view class='page_main' scroll-y="true" scroll-with-animation="true">
+    <view class='user'>
+      <view class='head'>
+        <image src='http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/icon/grey_interact.png'></image>
+      </view>
+      <view class='info'>
+        <label class='font_333333_36'>名称</label>
+        <label class='font_666666_24'>ID:1234567890</label>
+      </view>
     </view>
-  </view>
+
+    <!-- 选项卡开始 -->
+    <view class='swiper-tab font_333333_28'>
+      <view class="swiper-tab-item {{currentTab==0?'active':''}}" data-current="0" bindtap="clickTab">我的公开</view>
+      <view class="swiper-tab-item {{currentTab==1?'active':''}}" data-current="1" bindtap="clickTab">我的收藏</view>
+    </view>
+    <swiper current="{{currentTab}}" duration="300" bindchange="swiperTab" style='height: {{swiperTabHeight}}px; min-height: 150px;'>
+      <swiper-item>
+        <view id="tab_0">
+
+          <view class='content'>
+            <view class='con_top'>
+              <view class='info font_333333_24'>
+                <label>9月14日</label>
+                <label>.</label>
+                <label>花家怡园（世茂店）</label>
+              </view>
+              <view class='operation font_932C3F_24'>
+                <navigator>
+                  <label>删除</label>
+                </navigator>
+              </view>
+            </view>
+            <view class='con_main'>
+              <view class="weui-grids">
+                <view class="weui-grid">
+                  <view class="pic_show">
+                    <image class="pic_show" mode='aspectFill' src="http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
+                  </view>
+                </view>
+                <view class="weui-grid">
+                  <view class="pic_show">
+                    <image class="pic_show" mode='aspectFill' src="http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
+                  </view>
+                </view>
+              </view>
+            </view>
+            <view class='con_bottom'>
+              <view class='operation'>
+                <view wx:if="{{collect=='123'}}">
+                  <image src='http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/icon/red_heart.png'></image>
+                  <label class='font_333333_26'>100</label>
+                </view>
+                <view wx:else>
+                  <image src='http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/icon/grey_heart.png'></image>
+                  <label class='font_333333_26'>100</label>
+                </view>
+                <view>
+                  <image src='http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/icon/grey_comment.png'></image>
+                  <label class='font_333333_26'>100</label>
+                </view>
+                <view>
+                  <image src='http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/icon/grey_share.png'></image>
+                  <label class='font_333333_26'>100</label>
+                </view>
+              </view>
+            </view>
+          </view>
+
+          <view class='content'>
+            <view class='con_top'>
+              <view class='info font_333333_24'>
+                <label>9月14日</label>
+                <label>.</label>
+                <label>花家怡园（世茂店）</label>
+              </view>
+              <view class='operation font_932C3F_24'>
+                <navigator>
+                  <label>删除</label>
+                </navigator>
+              </view>
+            </view>
+            <view class='con_main'>
+              <view class="weui-grids">
+                <view class="weui-grid">
+                  <view class="pic_show">
+                    <image class="pic_show" mode='aspectFill' src="http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
+                  </view>
+                </view>
+                <view class="weui-grid">
+                  <view class="pic_show">
+                    <image class="pic_show" mode='aspectFill' src="http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
+                  </view>
+                </view>
+              </view>
+            </view>
+            <view class='con_bottom'>
+              <view class='operation'>
+                <view wx:if="{{collect=='123'}}">
+                  <image src='http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/icon/red_heart.png'></image>
+                  <label class='font_333333_26'>100</label>
+                </view>
+                <view wx:else>
+                  <image src='http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/icon/grey_heart.png'></image>
+                  <label class='font_333333_26'>100</label>
+                </view>
+                <view>
+                  <image src='http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/icon/grey_comment.png'></image>
+                  <label class='font_333333_26'>100</label>
+                </view>
+                <view>
+                  <image src='http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/icon/grey_share.png'></image>
+                  <label class='font_333333_26'>100</label>
+                </view>
+              </view>
+            </view>
+          </view>
+
+          <view class='content'>
+            <view class='con_top'>
+              <view class='info font_333333_24'>
+                <label>9月14日</label>
+                <label>.</label>
+                <label>花家怡园（世茂店）</label>
+              </view>
+              <view class='operation font_932C3F_24'>
+                <navigator>
+                  <label>删除</label>
+                </navigator>
+              </view>
+            </view>
+            <view class='con_main'>
+              <view class="weui-grids">
+                <view class="weui-grid">
+                  <view class="pic_show">
+                    <image class="pic_show" mode='aspectFill' src="http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
+                  </view>
+                </view>
+                <view class="weui-grid">
+                  <view class="pic_show">
+                    <image class="pic_show" mode='aspectFill' src="http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
+                  </view>
+                </view>
+              </view>
+            </view>
+            <view class='con_bottom'>
+              <view class='operation'>
+                <view wx:if="{{collect=='123'}}">
+                  <image src='http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/icon/red_heart.png'></image>
+                  <label class='font_333333_26'>100</label>
+                </view>
+                <view wx:else>
+                  <image src='http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/icon/grey_heart.png'></image>
+                  <label class='font_333333_26'>100</label>
+                </view>
+                <view>
+                  <image src='http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/icon/grey_comment.png'></image>
+                  <label class='font_333333_26'>100</label>
+                </view>
+                <view>
+                  <image src='http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/icon/grey_share.png'></image>
+                  <label class='font_333333_26'>100</label>
+                </view>
+              </view>
+            </view>
+          </view>
+
+        </view>
+      </swiper-item>
+      <swiper-item>
+        <view id="tab_1">
+
+          <view class='content'>
+            <view class='con_top'>
+              <view class='info font_333333_24'>
+                <label>9月14日</label>
+                <label>.</label>
+                <label>花家怡园（世茂店）</label>
+              </view>
+              <view class='operation font_932C3F_24'>
+                <navigator>
+                  <label>删除</label>
+                </navigator>
+              </view>
+            </view>
+            <view class='con_main'>
+              <view class="weui-grids">
+                <view class="weui-grid">
+                  <view class="pic_show">
+                    <image class="pic_show" mode='aspectFill' src="http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
+                  </view>
+                </view>
+                <view class="weui-grid">
+                  <view class="pic_show">
+                    <image class="pic_show" mode='aspectFill' src="http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
+                  </view>
+                </view>
+              </view>
+            </view>
+            <view class='con_bottom'>
+              <view class='operation'>
+                <view wx:if="{{collect=='123'}}">
+                  <image src='http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/icon/red_heart.png'></image>
+                  <label class='font_333333_26'>100</label>
+                </view>
+                <view wx:else>
+                  <image src='http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/icon/grey_heart.png'></image>
+                  <label class='font_333333_26'>100</label>
+                </view>
+                <view>
+                  <image src='http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/icon/grey_comment.png'></image>
+                  <label class='font_333333_26'>100</label>
+                </view>
+                <view>
+                  <image src='http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/icon/grey_share.png'></image>
+                  <label class='font_333333_26'>100</label>
+                </view>
+              </view>
+            </view>
+          </view>
+
+          <view class='content'>
+            <view class='con_top'>
+              <view class='info font_333333_24'>
+                <label>9月14日</label>
+                <label>.</label>
+                <label>花家怡园（世茂店）</label>
+              </view>
+              <view class='operation font_932C3F_24'>
+                <navigator>
+                  <label>删除</label>
+                </navigator>
+              </view>
+            </view>
+            <view class='con_main'>
+              <view class="weui-grids">
+                <view class="weui-grid">
+                  <view class="pic_show">
+                    <image class="pic_show" mode='aspectFill' src="http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
+                  </view>
+                </view>
+                <view class="weui-grid">
+                  <view class="pic_show">
+                    <image class="pic_show" mode='aspectFill' src="http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
+                  </view>
+                </view>
+              </view>
+            </view>
+            <view class='con_bottom'>
+              <view class='operation'>
+                <view wx:if="{{collect=='123'}}">
+                  <image src='http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/icon/red_heart.png'></image>
+                  <label class='font_333333_26'>100</label>
+                </view>
+                <view wx:else>
+                  <image src='http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/icon/grey_heart.png'></image>
+                  <label class='font_333333_26'>100</label>
+                </view>
+                <view>
+                  <image src='http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/icon/grey_comment.png'></image>
+                  <label class='font_333333_26'>100</label>
+                </view>
+                <view>
+                  <image src='http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/icon/grey_share.png'></image>
+                  <label class='font_333333_26'>100</label>
+                </view>
+              </view>
+            </view>
+          </view>
+
+          <view class='content'>
+            <view class='con_top'>
+              <view class='info font_333333_24'>
+                <label>9月14日</label>
+                <label>.</label>
+                <label>花家怡园（世茂店）</label>
+              </view>
+              <view class='operation font_932C3F_24'>
+                <navigator>
+                  <label>删除</label>
+                </navigator>
+              </view>
+            </view>
+            <view class='con_main'>
+              <view class="weui-grids">
+                <view class="weui-grid">
+                  <view class="pic_show">
+                    <image class="pic_show" mode='aspectFill' src="http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
+                  </view>
+                </view>
+                <view class="weui-grid">
+                  <view class="pic_show">
+                    <image class="pic_show" mode='aspectFill' src="http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
+                  </view>
+                </view>
+              </view>
+            </view>
+            <view class='con_bottom'>
+              <view class='operation'>
+                <view wx:if="{{collect=='123'}}">
+                  <image src='http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/icon/red_heart.png'></image>
+                  <label class='font_333333_26'>100</label>
+                </view>
+                <view wx:else>
+                  <image src='http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/icon/grey_heart.png'></image>
+                  <label class='font_333333_26'>100</label>
+                </view>
+                <view>
+                  <image src='http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/icon/grey_comment.png'></image>
+                  <label class='font_333333_26'>100</label>
+                </view>
+                <view>
+                  <image src='http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/icon/grey_share.png'></image>
+                  <label class='font_333333_26'>100</label>
+                </view>
+              </view>
+            </view>
+          </view>
+
+          <view class='content'>
+            <view class='con_top'>
+              <view class='info font_333333_24'>
+                <label>9月14日</label>
+                <label>.</label>
+                <label>花家怡园（世茂店）</label>
+              </view>
+              <view class='operation font_932C3F_24'>
+                <navigator>
+                  <label>删除</label>
+                </navigator>
+              </view>
+            </view>
+            <view class='con_main'>
+              <view class="weui-grids">
+                <view class="weui-grid">
+                  <view class="pic_show">
+                    <image class="pic_show" mode='aspectFill' src="http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
+                  </view>
+                </view>
+                <view class="weui-grid">
+                  <view class="pic_show">
+                    <image class="pic_show" mode='aspectFill' src="http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
+                  </view>
+                </view>
+              </view>
+            </view>
+            <view class='con_bottom'>
+              <view class='operation'>
+                <view wx:if="{{collect=='123'}}">
+                  <image src='http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/icon/red_heart.png'></image>
+                  <label class='font_333333_26'>100</label>
+                </view>
+                <view wx:else>
+                  <image src='http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/icon/grey_heart.png'></image>
+                  <label class='font_333333_26'>100</label>
+                </view>
+                <view>
+                  <image src='http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/icon/grey_comment.png'></image>
+                  <label class='font_333333_26'>100</label>
+                </view>
+                <view>
+                  <image src='http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/icon/grey_share.png'></image>
+                  <label class='font_333333_26'>100</label>
+                </view>
+              </view>
+            </view>
+          </view>
+
+        </view>
+      </swiper-item>
+    </swiper>
+    <!-- 选项卡结束 -->
+
+  </scroll-view>
   <template is="bottomNavigation" data='{{selectPage:"MINE"}}' />
 </view>
