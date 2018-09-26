@@ -46,9 +46,7 @@
   background-color: #f3f3f3;
   width: 100rpx;
   height: 100rpx;
-  border-radius: 70rpx;
-  -moz-border-radius: 70rpx;
-  -webkit-border-radius: 70rpx;
+  border-radius: 50%;
   position: absolute;
   z-index: 999999;
 }

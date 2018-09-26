@@ -35,7 +35,7 @@
   width: 80rpx;
   height: 80rpx;
   margin-left: 10rpx;
-  border-radius: 39rpx;
+  border-radius: 50%;
   background-color: #bebebe;
   vertical-align: middle;
 }
