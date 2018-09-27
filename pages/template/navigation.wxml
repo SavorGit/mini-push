@@ -2,51 +2,51 @@
 <template name="bottomNavigation">
   <view class='bottom_nav'>
     <!-- 首页 -->
-    <navigator wx:if='{{selectPage=="INDEX"}}' url='/pages/index/index'>
+    <view wx:if='{{selectPage=="INDEX"}}'>
       <image src='http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/icon/red_home.png'></image>
       <label class='font_932C3F_20'>首页</label>
-    </navigator>
-    <navigator wx:else url='/pages/index/index'>
+    </view>
+    <navigator wx:else open-type='reLaunch' url='/pages/index/index'>
       <image src='http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/icon/grey_home.png'></image>
       <label class='font_333333_20'>首页</label>
     </navigator>
 
     <!-- 发现 -->
-    <navigator wx:if='{{selectPage=="FIND"}}' url='/pages/find/index'>
+    <view wx:if='{{selectPage=="FIND"}}'>
       <image src='http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/icon/red_find.png'></image>
       <label class='font_932C3F_20'>发现</label>
-    </navigator>
-    <navigator wx:else url='/pages/find/index'>
+    </view>
+    <navigator wx:else open-type='reLaunch' url='/pages/find/index'>
       <image src='http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/icon/grey_find.png'></image>
       <label class='font_333333_20'>发现</label>
     </navigator>
 
     <!-- 电视互动 -->
-    <navigator wx:if='{{selectPage=="INTERACT"}}' class='special' url='/pages/interact/index'>
+    <view wx:if='{{selectPage=="INTERACT"}}' class='special'>
       <image style='background-color: #932c3f;' src='http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/icon/white_interact.png'></image>
       <label class='font_932C3F_20'>电视互动</label>
-    </navigator>
-    <navigator wx:else class='special' url='/pages/interact/index'>
+    </view>
+    <navigator wx:else open-type='reLaunch' class='special' url='/pages/interact/index'>
       <image src='http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/icon/grey_interact.png'></image>
       <label class='font_333333_20'>电视互动</label>
     </navigator>
 
     <!-- 消息 -->
-    <navigator wx:if='{{selectPage=="MESSAGE"}}' url='/pages/message/index'>
+    <view wx:if='{{selectPage=="MESSAGE"}}'>
       <image src='http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/icon/red_msg.png'></image>
       <label class='font_932C3F_20'>消息</label>
-    </navigator>
-    <navigator wx:else url='/pages/message/index'>
+    </view>
+    <navigator wx:else open-type='reLaunch' url='/pages/message/index'>
       <image src='http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/icon/grey_msg.png'></image>
       <label class='font_333333_20'>消息</label>
     </navigator>
 
     <!-- 我的 -->
-    <navigator wx:if='{{selectPage=="MINE"}}' url='/pages/mine/index'>
+    <view wx:if='{{selectPage=="MINE"}}'>
       <image src='http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/icon/red_mine.png'></image>
       <label class='font_932C3F_20'>我的</label>
-    </navigator>
-    <navigator wx:else url='/pages/mine/index'>
+    </view>
+    <navigator wx:else open-type='reLaunch' url='/pages/mine/index'>
       <image src='http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/icon/grey_mine.png'></image>
       <label class='font_333333_20'>我的</label>
     </navigator>

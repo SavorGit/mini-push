@@ -16,7 +16,7 @@
     </view>
   </form>
   <!-- ================================== 列表页 ================================== -->
-  
+
   <scroll-view class="scroll_container display_{{showView?'show':'hide'}}" bindscrolltolower="loadMore" data-boxmac="{{box_mac}}" scroll-y="true" scroll-with-animation="true">
 
     <!-- 轮播图开始 -->
@@ -63,8 +63,10 @@
               <label class='font_333333_26'>100</label>
             </view>-->
             <view>
-              <image src='http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/icon/grey_share.png'></image>
-              <label class='font_333333_26'>{{bean.share_num}}</label>
+              <button>
+                <image src='http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/icon/grey_share.png'></image>
+                <label class='font_333333_26'>{{bean.share_num}}</label>
+              </button>
             </view>
           </view>
         </view>
