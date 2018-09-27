@@ -50,3 +50,46 @@
   position: absolute;
   z-index: 999999;
 }
+
+.bottom_nav > view {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 40%;
+  box-sizing: border-box;
+}
+
+.bottom_nav > view > image {
+  margin-top: 15rpx;
+  margin-bottom: 8rpx;
+  width: 60rpx;
+  height: 60rpx;
+  position: absolute;
+  z-index: 999999;
+}
+
+.bottom_nav > view > label {
+  margin-top: 80rpx;
+  position: absolute;
+  z-index: 999999;
+}
+
+.bottom_nav > view.special {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 40%;
+  box-sizing: border-box;
+}
+
+.bottom_nav > view.special > image {
+  margin-top: -60rpx;
+  margin-bottom: 8rpx;
+  padding: 18rpx;
+  background-color: #f3f3f3;
+  width: 100rpx;
+  height: 100rpx;
+  border-radius: 50%;
+  position: absolute;
+  z-index: 999999;
+}

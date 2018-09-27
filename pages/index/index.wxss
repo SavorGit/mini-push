@@ -1,4 +1,5 @@
 /**index.wxss**/
+
 /* .userinfo {
   display: flex;
   flex-direction: column;
@@ -52,6 +53,7 @@ label.label_text{
   margin-top: 8rpx;
   margin-bottom: 8rpx;
 }*/
+
 /** /pages/forscreen/forscreen.wxss**/
 @import "../template/navigation.wxss";
 
@@ -106,7 +108,7 @@ label.input_tip {
 
 .scroll_container {
   width: 100%;
-  height: calc(100vh - 208rpx);
+  height: calc(100vh - 138rpx);
 }
 
 swiper {
@@ -276,6 +278,38 @@ swiper-image {
   vertical-align: middle;
 }
 
+.article > .con_bottom > .operation > view > button > image {
+  width: 36rpx;
+  height: 32rpx;
+  margin-right: 8rpx;
+  vertical-align: middle;
+}
+
+.article > .con_bottom > .operation > view > button {
+  margin: 0;
+  padding: 0;
+  height: 60rpx;
+  line-height: 60rpx;
+  /* position: none;
+  display: inline-block;
+  box-sizing: inherit;
+  font-size: 18px;
+  text-align: center;
+  text-decoration: none;
+  border-radius: 0rpx;
+  -webkit-tap-highlight-color: unset;
+  overflow: hidden;
+  color: #000;
+  border: 0rpx solid #fff;
+  background-color: #fff; */
+  background: none;
+}
+
+.article > .con_bottom > .operation > view > button::after {
+  border: none;
+  outline: none;
+}
+
 /* .article > .title {
   padding: 20rpx 0 0 20rpx;
   font-size: 30rpx;
@@ -345,3 +379,11 @@ swiper-image {
   height: 60rpx;
 }
 
+/* ====================== 模态窗口 ====================== */
+
+.modal-title {
+  padding-top: 50rpx;
+  font-size: 36rpx;
+  color: red;
+  text-align: center;
+}
