@@ -5,7 +5,7 @@
   height: 138rpx;
   display: flex;
   flex-direction: row;
-  background-color: #fff;
+  background-color: #f6f2ec;
 }
 
 .bottom_nav > navigator {
@@ -43,7 +43,6 @@
   margin-top: -60rpx;
   margin-bottom: 8rpx;
   padding: 18rpx;
-  background-color: #f3f3f3;
   width: 100rpx;
   height: 100rpx;
   border-radius: 50%;
@@ -86,7 +85,6 @@
   margin-top: -60rpx;
   margin-bottom: 8rpx;
   padding: 18rpx;
-  background-color: #f3f3f3;
   width: 100rpx;
   height: 100rpx;
   border-radius: 50%;
