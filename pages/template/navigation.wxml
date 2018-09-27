@@ -9,7 +9,7 @@
       <image src='http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/icon/red_home.png'></image>
       <label class='font_932C3F_20'>首页</label>
     </view>
-    <navigator wx:else open-type='reLaunch' url='/pages/index/index'>
+    <navigator wx:else open-type='reLaunch' url='/pages/demand/index'>
       <image src='http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/icon/grey_home.png'></image>
       <label class='font_333333_20'>首页</label>
     </navigator>

@@ -1,114 +1,64 @@
-//index.js
-//获取应用实例
+// pages/interact/index.js
 const app = getApp()
-var timestamp = (new Date()).valueOf();
-var box_mac;                     //当前连接机顶盒mac
-var page = 1;                    //当前节目单页数
-var user_id ;
-var program_list;                //点播列表
-var openid;                      //用户openid
+var openid;
 Page({
+
+  /**
+   * 页面的初始数据
+   */
   data: {
-    openid: '',
-    motto: '热点投屏',
-    userInfo: {},
-    hasUserInfo: false,
-    tempFilePaths: '',
-    canIUse: wx.canIUse('button.open-type.getUserInfo'),
-    showView: true,
-    imgUrls: [],
-    hiddens: true,
-    box_mac :''
+    openid:'',
+    hotel_name:'',   //酒楼名称
+    room_name:'',    //包间名称
+    box_mac: '',     //机顶盒mac
+    is_link:0,       //是否连接酒楼电视
+    happy_vedio_url: '',          //生日视频url
+    happy_vedio_name: '',          //生日视频名称
+    happy_vedio_title: ''          //生日视频标题
   },
-  
-  onLoad: function () {
+
+  /**
+   * 生命周期函数--监听页面加载
+   */
+  onLoad: function (options) {
     var that = this;
-    var user_info = wx.getStorageSync('savor_user_info')
     if (app.globalData.openid && app.globalData.openid != '') { 
-      //注册用户
       that.setData({
         openid: app.globalData.openid
       })
-      openid = openid;
-      wx.getUserInfo({
-        success: function (res) {
-          wx.request({
-            url: 'https://mobile.littlehotspot.com/smallapp/User/register',
-            data: { "openid": app.globalData.openid, 
-                    "avatarUrl": res.userInfo.avatarUrl, 
-                    "nickName": res.userInfo.nickName,
-                    "gender": res.userInfo.gender,
-                  },
-            header: {
-              'content-type': 'application/json'
-            },
-            success: function (res) {
-              wx.setStorage({
-                key: 'savor_user_info',
-                data: res.data.result,
-              })
-            },
-            fail: function (e) {
-              wx.setStorage({
-                key: 'savor_user_info',
-                data: { 'openid': openid },
-              })
-            }
-          })
-        }
-      });
       wx.request({
         url: 'https://mobile.littlehotspot.com/Smallapp/index/isHaveCallBox?openid=' + app.globalData.openid,
         headers: {
           'Content-Type': 'application/json'
         },
+
         success: function (rest) {
           var is_have = rest.data.result.is_have;
           if (is_have == 1) {
+            
             that.setData({
-              box_mac: rest.data.result.box_mac,
+              is_link:1,
+              hotel_name:rest.data.result.hotel_name,
+              room_name:rest.data.result.room_name,
+              box_mac :rest.data.result.box_mac,
             })
+            getHotelInfo(rest.data.result.box_mac);
+            /*var box_mac = rest.data.result.box_mac;
+            wx.navigateTo({
+              url: '/pages/forscreen/forscreen?scene=' + box_mac,
+            })*/
+          }else {
             
           }
 
         }
       })
-    } else { 
+    }else {
       app.openidCallback = openid => { 
         if (openid != '') { 
           that.setData({
             openid: openid
           })
-          openid = openid;
-          //注册用户
-
-          wx.getUserInfo({
-            success: function (res) {
-              wx.request({
-                url: 'https://mobile.littlehotspot.com/smallapp/User/register',
-                data: { "openid": app.globalData.openid, 
-                        "avatarUrl": res.userInfo.avatarUrl, 
-                        "nickName": res.userInfo.nickName,
-                        "gender": res.userInfo.gender
-                      },
-                header: {
-                  'content-type': 'application/json'
-                },
-                success: function (res) {
-                  wx.setStorage({
-                    key: 'savor_user_info',
-                    data: res.data.result,
-                  })
-                }
-              })
-            },
-            fail: function (e) {
-              wx.setStorage({
-                key: 'savor_user_info',
-                data: { 'openid': openid },
-              })
-            }
-          });
           wx.request({
             url: 'https://mobile.littlehotspot.com/Smallapp/index/isHaveCallBox?openid=' + openid,
             headers: {
@@ -119,100 +69,57 @@ Page({
               var is_have = rest.data.result.is_have;
               if (is_have == 1) {
                 that.setData({
+                  is_link: 1,
+                  hotel_name: rest.data.result.hotel_name,
+                  room_name: rest.data.result.room_name,
                   box_mac: rest.data.result.box_mac,
                 })
-                
+                getHotelInfo(rest.data.result.box_mac);
+                /*var box_mac = rest.data.result.box_mac;
+                wx.navigateTo({
+                  url: '/pages/forscreen/forscreen?scene=' + box_mac,
+                })*/
               }
 
             }
           })
-        } 
-      }
-    } 
-    var user_info = wx.getStorageSync("savor_user_info");
-    
-    openid= user_info.openid;
-    //获取点播列表
-    wx.request({
-      url: 'https://mobile.littlehotspot.com/smallapp/Demand/getList',
-      data:{
-        page:page,
-        openid:openid,
-      },
-      header: {
-        'content-type': 'application/json'
-      },
-      success: function (res) {
-        if (res.data.code==10000){
-          program_list = res.data.result
-          that.setData({
-            program_list: res.data.result,
-          })
         }
       }
-    })
+    }
+    function getHotelInfo(box_mac) {
+      wx.request({
+        url: 'https://mobile.littlehotspot.com/Smallapp/Index/getHotelInfo',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        data: {
+          box_mac: box_mac,
+        },
+        method: "POST",
+        success: function (res) {
+          that.setData({
+            hotel_room: res.data.result.hotel_name + res.data.result.room_name,
+            happy_vedio_url: res.data.result.vedio_url,
+            happy_vedio_name: res.data.result.file_name,
+            happy_vedio_title: res.data.result.name,
+          })
+        }
+      })
+    }
   },
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
-    this.onLoad()
-  },
-  scanqrcode() {
-    wx.scanCode({
-      onlyFromCamera: true,
-      success: (res) => {
-        //console.log(res);
-        wx.navigateTo({
-          url: '/'+res.path
-        })
-      }
-    })
-  },
-  //上拉刷新
-  loadMore: function (e) {
+  //选择照片上电视
+  chooseImage(e) {
     var that = this;
-    
-    page = page + 1;
-    that.setData({
-      hiddens: false,
-    })
-    wx.request({
-      url: 'https://mobile.littlehotspot.com/smallapp/Demand/getList',
-      header: {
-        'Content-Type': 'application/json'
-      },
-      data: {
-        page: page,
-        openid: openid,
-      },
-      method: "POST",
-      success: function (res) {
-        if (res.data.code == 10000) {
-          that.setData({
-            program_list: res.data.result,
-            hiddens: true,
-          })
-          program_list = res.data.result
-        }else {
-          that.setData({
-            hiddens: true,
-          })
-        }
-      }
-    })
-  },
-  //电视播放
-  boxShow(e){
-    var box_mac = e.target.dataset.boxmac;
+    var box_mac = e.currentTarget.dataset.boxmac;
+    var openid = e.currentTarget.dataset.openid;
     if(box_mac==''){
       wx.showModal({
         title: '提示',
         content: "您可扫码链接热点合作餐厅电视,使用此功能",
         showCancel: true,
         confirmText: '立即扫码',
-        success: function (res) {
-          if (res.confirm==true){
+        success:function(res){
+          if (res.confirm == true) {
             wx.scanCode({
               onlyFromCamera: true,
               success: (res) => {
@@ -223,22 +130,75 @@ Page({
               }
             })
           }
-          
         }
       });    
+    }else {
+      wx.navigateTo({
+        url: '/pages/forscreen/forimages/index?box_mac=' + box_mac + '&openid=' + openid,
+      })
+    } 
+  },
+  //选择视频投屏
+  chooseVedio(e) {
+    var that = this
+    var box_mac = e.currentTarget.dataset.boxmac;
+    var openid = e.currentTarget.dataset.openid;
+    if (box_mac == '') {
+      wx.showModal({
+        title: '提示',
+        content: "您可扫码链接热点合作餐厅电视,使用此功能",
+        showCancel: true,
+        confirmText: '立即扫码',
+        success: function (res) {
+          if (res.confirm == true) {
+            wx.scanCode({
+              onlyFromCamera: true,
+              success: (res) => {
+                //console.log(res);
+                wx.navigateTo({
+                  url: '/' + res.path
+                })
+              }
+            })
+          }
+        }
+      });
+    } else {
+      wx.navigateTo({
+        url: '/pages/forscreen/forvideo/index?box_mac=' + box_mac + '&openid=' + openid,
+      })
+    } 
+  },
+  boxShow(e) {//视频点播让盒子播放
+    var box_mac = e.currentTarget.dataset.boxmac;
+    if (box_mac == '') {
+      wx.showModal({
+        title: '提示',
+        content: "您可扫码链接热点合作餐厅电视,使用此功能",
+        showCancel: true,
+        confirmText: '立即扫码',
+        success: function (res) {
+          if (res.confirm == true) {
+            wx.scanCode({
+              onlyFromCamera: true,
+              success: (res) => {
+                //console.log(res);
+                wx.navigateTo({
+                  url: '/' + res.path
+                })
+              }
+            })
+          }
+        }
+      });
     }else {
       var openid = e.currentTarget.dataset.openid;
       var vediourl = e.currentTarget.dataset.vediourl;
       var forscreen_char = e.currentTarget.dataset.name;
 
       var index1 = vediourl.lastIndexOf("/");
-      var index_ask = vediourl.lastIndexOf("?");
-      if (index_ask>0){
-        var index2 = index_ask
-      }else {
-        var index2 = vediourl.length;
-      }
-      var filename = vediourl.substring(index1 + 1, index2);//文件名
+      var index2 = vediourl.length;
+      var filename = vediourl.substring(index1 + 1, index2);//后缀名
       var timestamp = (new Date()).valueOf();
       var mobile_brand = app.globalData.mobile_brand;
       var mobile_model = app.globalData.mobile_model;
@@ -285,154 +245,86 @@ Page({
         }
       })
     }
-  },//电视播放结束
-  //收藏资源
-  onCollect:function(e){
-    var that = this;
-    //var openid = e.target.dataset.openid;
-    var res_id = e.target.dataset.res_id;
-    var res_key = e.target.dataset.res_key;
-    wx.request({
-      url: 'https://mobile.littlehotspot.com/Smallapp/collect/recLogs',
-      header: {
-       'content-type': 'application/json'
-      },
-      data:{
-       'openid':openid,
-       'res_id':res_id,
-       'type':1,
-       'status':1,
-      },
-      success:function(e){
-        for (var i = 0; i < program_list.length; i++){
-          if(i==res_key){
-            program_list[i].is_collect =1;
-            program_list[i].collect_num ++;
-          }
-        }
-        that.setData({
-          program_list:program_list
-        })
-        if(e.data.code==10000){
-          wx.showToast({
-            title: '收藏成功',
-            icon: 'none',
-            duration: 2000
-          })
-        }else {
-          wx.showToast({
-            title: '收藏失败，请稍后重试',
-            icon: 'none',
-            duration: 2000
-          })
-        }
-      },
-      fial: function ({ errMsg }) {
-        wx.showToast({
-          title: '网络异常，请稍后重试',
-          icon: 'none',
-          duration: 2000
-        })
-      }   
-    })
-  },//收藏资源结束
-  //取消收藏
-  cancCollect: function (e) {
-    var that = this;
-    var res_id = e.target.dataset.res_id;
-    var res_key= e.target.dataset.res_key;
-    wx.request({
-      url: 'https://mobile.littlehotspot.com/Smallapp/collect/recLogs',
-      header: {
-        'content-type': 'application/json'
-      },
-      data: {
-        'openid': openid,
-        'res_id': res_id,
-        'type': 1,
-        'status': 0,
-      },
-      success: function (e) {
-        for (var i = 0; i < program_list.length; i++) {
-          if (i == res_key) {
-            program_list[i].is_collect = 0;
-            program_list[i].collect_num --;
-          }
-        }
-        that.setData({
-          program_list: program_list
-        })
-        if (e.data.code == 10000) {
-          wx.showToast({
-            title: '取消收藏成功',
-            icon: 'none',
-            duration: 2000
-          })
-        } else {
-          wx.showToast({
-            title: '取消收藏失败，请稍后重试',
-            icon: 'none',
-            duration: 2000
-          })
-        }
-      },
-      fial: function ({ errMsg }) {
-        wx.showToast({
-          title: '网络异常，请稍后重试',
-          icon: 'none',
-          duration: 2000
-        })
-      }
-    })
-  },//取消收藏结束
-  //点击分享按钮
-  onShareAppMessage: function (res) {
-    var that = this;
-    var res_id = res.target.dataset.res_id;
-    var res_key = res.target.dataset.res_key;
-    var video_url = res.target.dataset.video_url;
-    var video_name = res.target.dataset.video_name;
-    var video_img = res.target.dataset.video_img;
-    if (res.from === 'button') {
-      // 来自页面内转发按钮
-      return {
-        title: video_name,
-        path: '/pages/forscreen/video/launch_video?video_url=' + video_url + '&video_name=' + video_name,
-        imageUrl: video_img,
+    
+  },
+  //互动游戏
+  hdgames(e) {
+    var openid = e.currentTarget.dataset.openid;
+    var box_mac = e.currentTarget.dataset.boxmac;
+    if (box_mac == '') {
+      wx.showModal({
+        title: '提示',
+        content: "您可扫码链接热点合作餐厅电视,使用此功能",
+        showCancel: true,
+        confirmText: '立即扫码',
         success: function (res) {
-          // 转发成功
-          wx.request({
-            url: 'https://mobile.littlehotspot.com/Smallapp/share/recLogs',
-            header: {
-              'content-type': 'application/json'
-            },
-            data: {
-              'openid': openid,
-              'res_id': res_id,
-              'type': 1,
-              'status': 1,
-            },
-            success: function (e) {
-              for (var i = 0; i < program_list.length; i++) {
-                if (i == res_key) {
-                  program_list[i].share_num++;
-                }
+          if (res.confirm == true) {
+            wx.scanCode({
+              onlyFromCamera: true,
+              success: (res) => {
+                //console.log(res);
+                wx.navigateTo({
+                  url: '/' + res.path
+                })
               }
-              that.setData({
-                program_list: program_list
-              })
-
-            },
-            fial: function ({ errMsg }) {
-              wx.showToast({
-                title: '网络异常，请稍后重试',
-                icon: 'none',
-                duration: 2000
-              })
-            }
-          })
-        },
-      }
+            })
+          }
+        }
+      });
+    }else {
+      var mobile_brand = app.globalData.mobile_brand;
+      var mobile_model = app.globalData.mobile_model;
+      wx.navigateTo({
+        url: '/pages/activity/turntable/index?box_mac=' + box_mac + '&openid=' + openid,
+      })
     }
-  },// 分享结束
+  },
+  /**
+   * 生命周期函数--监听页面初次渲染完成
+   */
+  onReady: function () {
+
+  },
+
+  /**
+   * 生命周期函数--监听页面显示
+   */
+  onShow: function () {
+    this.onLoad()
+  },
+
+  /**
+   * 生命周期函数--监听页面隐藏
+   */
+  onHide: function () {
+
+  },
+
+  /**
+   * 生命周期函数--监听页面卸载
+   */
+  onUnload: function () {
+
+  },
+
+  /**
+   * 页面相关事件处理函数--监听用户下拉动作
+   */
+  onPullDownRefresh: function () {
+
+  },
+
+  /**
+   * 页面上拉触底事件的处理函数
+   */
+  onReachBottom: function () {
+
+  },
+
+  /**
+   * 用户点击右上角分享
+   */
+  onShareAppMessage: function () {
+
+  }
 })
