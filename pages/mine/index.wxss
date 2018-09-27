@@ -63,6 +63,9 @@
 
 .content {
   padding: 0rpx 45rpx 0rpx 65rpx;
+}
+
+.content_bottom_border {
   border-bottom: 1rpx solid #959595;
 }
 

@@ -21,7 +21,7 @@
       <swiper-item>
         <view id="tab_0">
 
-          <view class='content'>
+          <view class='content content_bottom_border'>
             <view class='con_top'>
               <view class='info font_333333_24'>
                 <label>9月14日</label>
@@ -66,7 +66,7 @@
             </view>
           </view>
 
-          <view class='content'>
+          <view class='content content_bottom_border'>
             <view class='con_top'>
               <view class='info font_333333_24'>
                 <label>9月14日</label>
@@ -111,7 +111,7 @@
             </view>
           </view>
 
-          <view class='content'>
+          <view class='content '>
             <view class='con_top'>
               <view class='info font_333333_24'>
                 <label>9月14日</label>
@@ -164,7 +164,7 @@
       <swiper-item>
         <view id="tab_1">
 
-          <view class='content'>
+          <view class='content content_bottom_border'>
             <view class='con_top'>
               <view class='info font_333333_24'>
                 <label>9月14日</label>
@@ -209,7 +209,7 @@
             </view>
           </view>
 
-          <view class='content'>
+          <view class='content content_bottom_border'>
             <view class='con_top'>
               <view class='info font_333333_24'>
                 <label>9月14日</label>
@@ -256,7 +256,7 @@
             </view>
           </view>
 
-          <view class='content'>
+          <view class='content content_bottom_border'>
             <view class='con_top'>
               <view class='info font_333333_24'>
                 <label>9月14日</label>
@@ -301,7 +301,7 @@
             </view>
           </view>
 
-          <view class='content'>
+          <view class='content '>
             <view class='con_top'>
               <view class='info font_333333_24'>
                 <label>9月14日</label>
