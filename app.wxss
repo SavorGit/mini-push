@@ -243,12 +243,6 @@ button.btn_background_034 {
   background-color: #ececec;
 }
 
-.weui-grid image {
-  width: calc((100vw - 40rpx) / 3 - 10rpx);
-  height: calc((100vw - 40rpx) / 3 - 10rpx);
-  border-radius: 10rpx;
-}
-
 /* .weui-grid__bg {
     position: relative;
     float: left;

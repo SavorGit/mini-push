@@ -61,12 +61,6 @@
   border-bottom: 5rpx solid #932c3f;
 }
 
-.weui-grid image {
-  width: calc((100vw - 110rpx) / 3 - 10rpx);
-  height: calc((100vw - 110rpx) / 3 - 10rpx);
-  border-radius: 10rpx;
-}
-
 .content {
   padding: 0rpx 45rpx 0rpx 65rpx;
   border-bottom: 1rpx solid #959595;
@@ -92,6 +86,19 @@
   flex-direction: row;
   align-items: center;
   justify-content: flex-end;
+}
+
+.con_main {
+  margin: 0rpx;
+  padding: 0rpx;
+  border: 0rpx;
+  width: 100%;
+}
+
+.con_main .weui-grid image {
+  width: calc((100vw - 110rpx) / 3 - 10rpx);
+  height: calc((100vw - 110rpx) / 3 - 10rpx);
+  border-radius: 10rpx;
 }
 
 .con_bottom {
