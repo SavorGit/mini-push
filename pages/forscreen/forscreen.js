@@ -93,10 +93,13 @@ Page({
 
               })
           } else if (res.data.is_right == 2) {
-            that.setData({
+            /*that.setData({
               showView: (!that.data.showView),
               showCode: (!that.data.showCode),
               isFocus:false
+            })*/
+            wx.navigateBack({
+              delta: 1
             })
           }
 

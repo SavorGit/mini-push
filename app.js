@@ -3,7 +3,7 @@ App({
 
   onLaunch: function () {
     var that = this
-    /*wx.login({
+    wx.login({
       success: res => {
         var code = res.code; //返回code
         wx.request({
@@ -14,10 +14,13 @@ App({
           },
           success: function (res) {
             that.globalData.openid = res.data.result.openid;
+            if (that.openidCallback) {
+              that.openidCallback(res.data.result.openid);
+            }
           }
         })
       }
-    })*/
+    })
     wx.getSystemInfo({
       success: function (res) {
         that.globalData.mobile_brand = res.brand;
@@ -29,7 +32,7 @@ App({
   globalData: {
     openid: '',
     box_mac: '',
-    mobile_brand:'',
-    mobile_model:''
+    mobile_brand: '',
+    mobile_model: '',
   }
 })

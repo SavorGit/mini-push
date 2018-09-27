@@ -2,11 +2,11 @@
 <template name="bottomNavigation">
   <view class='bottom_nav'>
     <!-- 首页 -->
-    <navigator wx:if='{{selectPage=="INDEX"}}' url='/pages/forscreen/forscreen'>
+    <navigator wx:if='{{selectPage=="INDEX"}}' url='/pages/index/index'>
       <image src='http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/icon/red_home.png'></image>
       <label class='font_932C3F_20'>首页</label>
     </navigator>
-    <navigator wx:else url='/pages/forscreen/forscreen'>
+    <navigator wx:else url='/pages/index/index'>
       <image src='http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/icon/grey_home.png'></image>
       <label class='font_333333_20'>首页</label>
     </navigator>

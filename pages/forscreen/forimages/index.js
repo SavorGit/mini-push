@@ -32,6 +32,29 @@ Page({
   onLoad: function (e) {
     var that = this;
     openid = e.openid;
+    //注册用户
+    wx.getUserInfo({
+      success: function (res) {
+        wx.request({
+          url: 'https://mobile.littlehotspot.com/smallapp/User/register',
+          data: {
+            "openid": openid,
+            "avatarUrl": res.userInfo.avatarUrl,
+            "nickName": res.userInfo.nickName,
+            "gender": res.userInfo.gender
+          },
+          header: {
+            'content-type': 'application/json'
+          },
+          success: function (res) {
+            wx.setStorage({
+              key: 'savor_user_info',
+              data: res.data.result,
+            })
+          }
+        })
+      }
+    });
     box_mac = e.box_mac;
     that.setData({
       openid: openid,
