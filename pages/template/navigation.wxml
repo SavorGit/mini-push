@@ -1,8 +1,8 @@
 <!--pages/template/navigation.wxml-->
 <template name="bottomNavigation">
-  <view style='height: 60rpx;margin: -60rpx 0rpx 0rpx 0rpx;padding: 0rpx;border: 0rpx;z-index: 999999;'>
+  <!-- <view style='height: 60rpx;margin: -60rpx 0rpx 0rpx 0rpx;padding: 0rpx;border: 0rpx;z-index: 999999;'>
     <image style='height: 60rpx;margin: 0rpx;padding: 0rpx;border: 0rpx;z-index: 999999;' src=''></image>
-  </view>
+  </view> -->
   <view class='bottom_nav'>
     <!-- 首页 -->
     <view wx:if='{{selectPage=="INDEX"}}'>
