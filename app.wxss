@@ -2,6 +2,16 @@
 
 /* ================================== 页面 ================================== */
 
+::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+  color: transparent;
+}
+
+.nav_bottom_space {
+  height: 61rpx;
+}
+
 .container {
   width: calc(100vw);
   height: calc(100vh);

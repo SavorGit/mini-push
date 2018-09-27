@@ -156,6 +156,9 @@
             </view>
           </view>
 
+          <!-- 滚动页面底部留白 -->
+          <view class='nav_bottom_space'></view>
+
         </view>
       </swiper-item>
       <swiper-item>
@@ -343,7 +346,11 @@
             </view>
           </view>
 
+          <!-- 滚动页面底部留白 -->
+          <view class='nav_bottom_space'></view>
+
         </view>
+
       </swiper-item>
     </swiper>
     <!-- 选项卡结束 -->
