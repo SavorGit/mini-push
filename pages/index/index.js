@@ -1,14 +1,12 @@
 //index.js
 //获取应用实例
 const app = getApp()
-var policy;
-var signature;
-var postf;   //上传文件扩展名
 var timestamp = (new Date()).valueOf();
-var box_mac;
+var box_mac;                     //当前连接机顶盒mac
 var page = 1;                    //当前节目单页数
 var user_id ;
-var program_list;
+var program_list;                //点播列表
+var openid;                      //用户openid
 Page({
   data: {
     openid: '',
@@ -22,67 +20,16 @@ Page({
     hiddens: true,
     box_mac :''
   },
-  //点击分享按钮
-  onShareAppMessage: function (res) {
-    var that = this;
-    var res_id = res.target.dataset.res_id;
-    var res_key = res.target.dataset.res_key;
-    var video_url = res.target.dataset.video_url;
-    var video_name = res.target.dataset.video_name;
-    var video_img  = res.target.dataset.video_img;
-    if (res.from === 'button') {
-      // 来自页面内转发按钮
-      return {
-        title: video_name,
-        path: '/pages/forscreen/video/launch_video?video_url=' + video_url + '&video_name=' + video_name,
-        imageUrl: video_img,
-        success: function (res) {
-          // 转发成功
-          wx.request({
-            url: 'https://mobile.littlehotspot.com/Smallapp/share/recLogs',
-            header: {
-              'content-type': 'application/json'
-            },
-            data: {
-              'user_id': user_id,
-              'res_id': res_id,
-              'type': 1,
-              'status': 1,
-            },
-            success: function (e) {
-              for (var i = 0; i < program_list.length; i++) {
-                if (i == res_key) {
-                  program_list[i].share_num ++;
-                }
-              }
-              that.setData({
-                program_list: program_list
-              })
-              
-            },
-            fial: function ({ errMsg }) {
-              wx.showToast({
-                title: '网络异常，请稍后重试',
-                icon: 'none',
-                duration: 2000
-              })
-            }
-          })
-        },
-      }
-    }
-
-
-  },
+  
   onLoad: function () {
     var that = this;
-    //var user_info = wx.getStorageSync('savor_user_info')
-    
+    var user_info = wx.getStorageSync('savor_user_info')
     if (app.globalData.openid && app.globalData.openid != '') { 
       //注册用户
       that.setData({
         openid: app.globalData.openid
       })
+      openid = openid;
       wx.getUserInfo({
         success: function (res) {
           wx.request({
@@ -90,7 +37,7 @@ Page({
             data: { "openid": app.globalData.openid, 
                     "avatarUrl": res.userInfo.avatarUrl, 
                     "nickName": res.userInfo.nickName,
-                    "gender": res.userInfo.gender
+                    "gender": res.userInfo.gender,
                   },
             header: {
               'content-type': 'application/json'
@@ -99,6 +46,12 @@ Page({
               wx.setStorage({
                 key: 'savor_user_info',
                 data: res.data.result,
+              })
+            },
+            fail: function (e) {
+              wx.setStorage({
+                key: 'savor_user_info',
+                data: { 'openid': openid },
               })
             }
           })
@@ -109,12 +62,10 @@ Page({
         headers: {
           'Content-Type': 'application/json'
         },
-
         success: function (rest) {
           var is_have = rest.data.result.is_have;
           if (is_have == 1) {
             that.setData({
-              
               box_mac: rest.data.result.box_mac,
             })
             
@@ -128,7 +79,9 @@ Page({
           that.setData({
             openid: openid
           })
+          openid = openid;
           //注册用户
+
           wx.getUserInfo({
             success: function (res) {
               wx.request({
@@ -148,6 +101,12 @@ Page({
                   })
                 }
               })
+            },
+            fail: function (e) {
+              wx.setStorage({
+                key: 'savor_user_info',
+                data: { 'openid': openid },
+              })
             }
           });
           wx.request({
@@ -160,7 +119,6 @@ Page({
               var is_have = rest.data.result.is_have;
               if (is_have == 1) {
                 that.setData({
-                  
                   box_mac: rest.data.result.box_mac,
                 })
                 
@@ -172,60 +130,27 @@ Page({
       }
     } 
     var user_info = wx.getStorageSync("savor_user_info");
-    user_id = user_info.user_id;
+    
+    openid= user_info.openid;
     //获取点播列表
     wx.request({
       url: 'https://mobile.littlehotspot.com/smallapp/Demand/getList',
       data:{
         page:page,
-        user_id:user_id,
+        openid:openid,
       },
       header: {
         'content-type': 'application/json'
       },
       success: function (res) {
-        program_list = res.data.result
-        that.setData({
-          program_list: res.data.result,
-        })
+        if (res.data.code==10000){
+          program_list = res.data.result
+          that.setData({
+            program_list: res.data.result,
+          })
+        }
       }
     })
-    /*wx.login({
-      success: res => {
-        var code = res.code; //返回code
-        wx.request({
-          url: 'https://mobile.littlehotspot.com/smallapp/index/getOpenid',
-          data: { "code": code },
-          header: {
-            'content-type': 'application/json'
-          },
-          success: function (res) {
-            var openid = res.data.result.openid;
-            //console.log(res.data.result.openid);
-            wx.request({
-              url: 'https://mobile.littlehotspot.com/Smallapp/index/isHaveCallBox?openid=' + openid,
-              headers: {
-                'Content-Type': 'application/json'
-              },
-
-              success: function (rest) {
-                var is_have = rest.data.result.is_have;
-                if(is_have==1){
-                  var box_mac = rest.data.result.box_mac;
-                  wx.navigateTo({
-                    url: '/pages/forscreen/forscreen?scene='+box_mac,
-                  })
-                }
-
-              }
-            })
-            //app.globalData.openid = res.data.result.openid;
-            //setInfos(box_mac, res.data.result.openid);
-          }
-        })
-      }
-    });*/
-
   },
   /**
    * 生命周期函数--监听页面显示
@@ -258,17 +183,22 @@ Page({
         'Content-Type': 'application/json'
       },
       data: {
-       
         page: page,
-        user_id: user_id,
+        openid: openid,
       },
       method: "POST",
       success: function (res) {
-        that.setData({
-          program_list: res.data.result,
-          hiddens: true,
-        })
-        program_list = res.data.result
+        if (res.data.code == 10000) {
+          that.setData({
+            program_list: res.data.result,
+            hiddens: true,
+          })
+          program_list = res.data.result
+        }else {
+          that.setData({
+            hiddens: true,
+          })
+        }
       }
     })
   },
@@ -308,7 +238,6 @@ Page({
       }else {
         var index2 = vediourl.length;
       }
-      
       var filename = vediourl.substring(index1 + 1, index2);//文件名
       var timestamp = (new Date()).valueOf();
       var mobile_brand = app.globalData.mobile_brand;
@@ -356,7 +285,7 @@ Page({
         }
       })
     }
-  },
+  },//电视播放结束
   //收藏资源
   onCollect:function(e){
     var that = this;
@@ -369,7 +298,7 @@ Page({
        'content-type': 'application/json'
       },
       data:{
-       'user_id':user_id,
+       'openid':openid,
        'res_id':res_id,
        'type':1,
        'status':1,
@@ -406,7 +335,7 @@ Page({
         })
       }   
     })
-  },
+  },//收藏资源结束
   //取消收藏
   cancCollect: function (e) {
     var that = this;
@@ -418,7 +347,7 @@ Page({
         'content-type': 'application/json'
       },
       data: {
-        'user_id': user_id,
+        'openid': openid,
         'res_id': res_id,
         'type': 1,
         'status': 0,
@@ -455,6 +384,55 @@ Page({
         })
       }
     })
-  }
-  
+  },//取消收藏结束
+  //点击分享按钮
+  onShareAppMessage: function (res) {
+    var that = this;
+    var res_id = res.target.dataset.res_id;
+    var res_key = res.target.dataset.res_key;
+    var video_url = res.target.dataset.video_url;
+    var video_name = res.target.dataset.video_name;
+    var video_img = res.target.dataset.video_img;
+    if (res.from === 'button') {
+      // 来自页面内转发按钮
+      return {
+        title: video_name,
+        path: '/pages/forscreen/video/launch_video?video_url=' + video_url + '&video_name=' + video_name,
+        imageUrl: video_img,
+        success: function (res) {
+          // 转发成功
+          wx.request({
+            url: 'https://mobile.littlehotspot.com/Smallapp/share/recLogs',
+            header: {
+              'content-type': 'application/json'
+            },
+            data: {
+              'openid': openid,
+              'res_id': res_id,
+              'type': 1,
+              'status': 1,
+            },
+            success: function (e) {
+              for (var i = 0; i < program_list.length; i++) {
+                if (i == res_key) {
+                  program_list[i].share_num++;
+                }
+              }
+              that.setData({
+                program_list: program_list
+              })
+
+            },
+            fial: function ({ errMsg }) {
+              wx.showToast({
+                title: '网络异常，请稍后重试',
+                icon: 'none',
+                duration: 2000
+              })
+            }
+          })
+        },
+      }
+    }
+  },// 分享结束
 })

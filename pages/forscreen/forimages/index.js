@@ -32,29 +32,6 @@ Page({
   onLoad: function (e) {
     var that = this;
     openid = e.openid;
-    //注册用户
-    wx.getUserInfo({
-      success: function (res) {
-        wx.request({
-          url: 'https://mobile.littlehotspot.com/smallapp/User/register',
-          data: {
-            "openid": openid,
-            "avatarUrl": res.userInfo.avatarUrl,
-            "nickName": res.userInfo.nickName,
-            "gender": res.userInfo.gender
-          },
-          header: {
-            'content-type': 'application/json'
-          },
-          success: function (res) {
-            wx.setStorage({
-              key: 'savor_user_info',
-              data: res.data.result,
-            })
-          }
-        })
-      }
-    });
     box_mac = e.box_mac;
     that.setData({
       openid: openid,
@@ -66,7 +43,7 @@ Page({
 
     });
     wx.chooseImage({
-      count: 9, // 默认9
+      count: 6, // 默认6
       sizeType: ['original', 'compressed'], // 可以指定是原图还是压缩图，默认二者都有
       sourceType: ['album', 'camera'], // 可以指定来源是相册还是相机，默认二者都有
       success: function (res) {
