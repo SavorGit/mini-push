@@ -24,7 +24,14 @@ Page({
     hotel_room: '',      //当前连接酒楼版位名称
     up_imgs: '',         //上传照片数组
     tmp_percent: [],     //上传照片百分比数组
-    pic_show_cur: [],    //当前上传照片是否被选中
+    pic_show_cur: [],    //当前上传照片是否被选中,
+    item: [
+      { 'name': '公开是显示餐厅信息', 'value': '1', 'checked':true,'disabled': false },
+      { 'name': '分享到发现栏目', 'value': '2', 'checked': true, 'disabled': false },
+      
+    ],
+    is_pub_hotelinfo:1,  //是否公开酒楼信息
+    is_share :1          //是否分享到发现栏目
   },
   /**
    * 生命周期函数--监听页面加载
@@ -126,13 +133,15 @@ Page({
     }
   },//重新选择照片结束
 
-  up_forscreen(e) {//多张图片投屏开始
+  up_forscreen(e) {//多张图片投屏开始(不分享到发现)
+    console.log(e);
     var that = this;
     img_lenth = e.detail.value.img_lenth;
     openid = e.detail.value.openid;
     box_mac = e.detail.value.box_mac;
     forscreen_char = e.detail.value.forscreen_char;
-    
+    var is_pub_hotelinfo = e.detail.value.is_pub_hotelinfo;   //是否公开显示餐厅信息
+    var is_share = e.detail.value.is_share;
 
 
     if (e.detail.value.upimgs0 != '' && e.detail.value.upimgs0 != undefined) upimgs[0] = e.detail.value.upimgs0;
@@ -188,28 +197,7 @@ Page({
         },
 
         success: function (res) {
-          /*wx.request({
-            url: "https://netty-push.littlehotspot.com/push/box",
-            header: {
-              "Content-Type": "application/x-www-form-urlencoded"
-            },
-            method: "POST",
-            data: {
-              box_mac: box_mac,
-              cmd: 'call-mini-program',
-              msg: '{ "action": 4, "resource_type":2, "url": "forscreen/resource/' + timestamp + postf_t + '", "filename":"' + timestamp + postf_t + '","openid":"' + openid + '","img_nums":' + img_len + ',"forscreen_char":"' + forscreen_char + '","order":' + order + ',"forscreen_id":"' + forscreen_id + '","img_id":"' + timestamp+'"}',
-              req_id: timestamp
-            },
-            success: function (result) {
-              
-              that.setData({
-                showFirst: false,
-                showSecond: true,
-                showView: false,
-                percent: 0
-              })
-            },
-          })*/
+          
         },
         complete: function (es) {
           tmp_percent[flag] = { "percent": 100 };
@@ -245,7 +233,9 @@ Page({
                   resource_id: timestamp,
                   res_sup_time: res_sup_time,
                   res_eup_time: res_eup_time,
-                  resource_size: res.totalBytesSent
+                  resource_size: res.totalBytesSent,
+                  is_pub_hotelinfo: is_pub_hotelinfo,
+                  is_share:is_share
                 },
                 success:function(ret){
                   wx.request({
@@ -301,7 +291,7 @@ Page({
         showTpBt: false
       });
     }
-  }, //多张图片投屏结束
+  }, //多张图片投屏结束(不分享到发现)
 
   up_single_pic(e) {//指定单张图片投屏开始
     var that = this;
@@ -392,5 +382,39 @@ Page({
         })
       }
     })
-  },
+  },//退出投屏结束
+  //是否公开显示餐厅信息
+  checkboxChange:function(e){
+    var that = this;
+    //console.log(e.detail.value.length);
+    var check_lenth = e.detail.value.length;
+    var check_arr = e.detail.value;
+    if(check_lenth==2){
+      that.setData({
+        is_share: 1,
+        is_pub_hotelinfo: 1
+      })
+    }else if(check_lenth==1){
+      if (check_arr[0]==1){
+        that.setData({
+          is_share:0,
+          is_pub_hotelinfo: 1
+        })
+      }else if(check_arr[0]==2){
+        that.setData({
+          is_share: 1,
+          is_pub_hotelinfo:0
+        })
+      }
+    }else if(check_lenth==0){
+       that.setData({
+         is_pub_hotelinfo: 0,
+         is_share: 0
+       })
+    }
+    var check_arr = e.detail.value;
+    
+
+  },//是否公开显示餐厅信息结束
+  
 })
