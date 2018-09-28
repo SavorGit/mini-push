@@ -305,6 +305,9 @@
       </view>
     </view>
 
+    <!-- 滚动页面底部留白 -->
+    <view class='nav_bottom_space'></view>
+
   </scroll-view>
   <template is="bottomNavigation" data='{{selectPage:"FIND"}}' />
 </view>

@@ -1,12 +1,13 @@
 <!--pages/template/navigation.wxml-->
 <template name="bottomNavigation">
-  <view wx:if='{{selectPage=="INTERACT"}}' style='width: 450rpx;height: 60rpx;margin: -6rpx 0rpx -60rpx 0rpx;padding: 0rpx;border: 0rpx;z-index: 999999;'>
-    <image mode='aspectFit' style='width: 450rpx;height: 60rpx;margin: 0rpx;padding: 0rpx;border: 0rpx;z-index: 999999;' src='http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/nav_red.png'></image>
-  </view>
-  <view wx:else style='width: 450rpx;height: 60rpx;margin: -54rpx 0rpx 0rpx 0rpx;padding: 0rpx;border: 0rpx;z-index: 999999;'>
-    <image mode='aspectFit' style='width: 450rpx;height: 60rpx;margin: 0rpx;padding: 0rpx;border: 0rpx;z-index: 999999;' src='http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/nav_grey.png'></image>
-  </view>
   <view class='bottom_nav'>
+    <view wx:if='{{selectPage=="INTERACT"}}' class='sunken'>
+      <image mode='aspectFit' src='http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/nav_red.png'></image>
+    </view>
+    <view wx:else class='protruding'>
+      <image mode='aspectFit' src='http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/nav_grey.png'></image>
+    </view>
+
     <!-- 首页 -->
     <view wx:if='{{selectPage=="INDEX"}}'>
       <image mode='aspectFit' src='http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/icon/red_home.png'></image>

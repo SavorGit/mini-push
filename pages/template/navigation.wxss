@@ -32,20 +32,28 @@
 }
 
 .bottom_nav > navigator.special {
+  margin-top: -60rpx;
   display: flex;
   flex-direction: column;
   align-items: center;
   width: 40%;
   box-sizing: border-box;
+  z-index: 999999;
 }
 
 .bottom_nav > navigator.special > image {
-  margin-top: -60rpx;
+  /* margin-top: -60rpx; */
   margin-bottom: 8rpx;
   padding: 18rpx;
   width: 100rpx;
   height: 100rpx;
   border-radius: 50%;
+  position: absolute;
+  z-index: 999999;
+}
+
+.bottom_nav > navigator.special > label {
+  margin-top: 140rpx;
   position: absolute;
   z-index: 999999;
 }
@@ -88,6 +96,46 @@
   width: 100rpx;
   height: 100rpx;
   border-radius: 50%;
+  position: absolute;
+  z-index: 999999;
+}
+
+.bottom_nav > view.sunken {
+  width: 100vw;
+  height: 60rpx;
+  margin: -6rpx 0rpx -60rpx 0rpx;
+  padding: 0rpx;
+  border: 0rpx;
+  position: absolute;
+  z-index: 999999;
+}
+
+.bottom_nav > view.sunken >image {
+  width: 450rpx;
+  height: 60rpx;
+  margin: 0rpx;
+  padding: 0rpx;
+  border: 0rpx;
+  position: absolute;
+  z-index: 999999;
+}
+
+.bottom_nav > view.protruding {
+  width: 100vw;
+  height: 60rpx;
+  margin: -54rpx 0rpx 0rpx 0rpx;
+  padding: 0rpx;
+  border: 0rpx;
+  position: absolute;
+  z-index: 999999;
+}
+
+.bottom_nav > view.protruding >image {
+  width: 450rpx;
+  height: 60rpx;
+  margin: 0rpx;
+  padding: 0rpx;
+  border: 0rpx;
   position: absolute;
   z-index: 999999;
 }
