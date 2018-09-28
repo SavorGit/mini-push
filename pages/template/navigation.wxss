@@ -5,7 +5,7 @@
   height: 138rpx;
   display: flex;
   flex-direction: row;
-  background-color: #f6f2ec;
+  background-color: #f6f3ee;
 }
 
 .bottom_nav > navigator {
@@ -17,16 +17,16 @@
 }
 
 .bottom_nav > navigator > image {
-  margin-top: 15rpx;
+  margin-top: 20rpx;
   margin-bottom: 8rpx;
-  width: 60rpx;
-  height: 60rpx;
+  width: 50rpx;
+  height: 50rpx;
   position: absolute;
   z-index: 999999;
 }
 
 .bottom_nav > navigator > label {
-  margin-top: 80rpx;
+  margin-top: 75rpx;
   position: absolute;
   z-index: 999999;
 }
@@ -53,7 +53,7 @@
 }
 
 .bottom_nav > navigator.special > label {
-  margin-top: 140rpx;
+  margin-top: 135rpx;
   position: absolute;
   z-index: 999999;
 }
@@ -67,16 +67,16 @@
 }
 
 .bottom_nav > view > image {
-  margin-top: 15rpx;
+  margin-top: 20rpx;
   margin-bottom: 8rpx;
-  width: 60rpx;
-  height: 60rpx;
+  width: 50rpx;
+  height: 50rpx;
   position: absolute;
   z-index: 999999;
 }
 
 .bottom_nav > view > label {
-  margin-top: 80rpx;
+  margin-top: 75rpx;
   position: absolute;
   z-index: 999999;
 }

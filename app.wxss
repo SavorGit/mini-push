@@ -20,7 +20,7 @@
   align-items: center;
   justify-content: space-between;
   box-sizing: border-box;
-  background-color: #f6f2ec;
+  background-color: #ede6de;
 }
 
 .full_width {

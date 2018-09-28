@@ -27,6 +27,16 @@
   vertical-align: middle;
 }
 
+.user > .head > image::before {
+  margin-left: 35rpx;
+  margin-right: 35rpx;
+  width: 120rpx;
+  height: 120rpx;
+  border-radius: 50%;
+  background-color: #bebebe;
+  vertical-align: middle;
+}
+
 .user > .info {
   margin-top: -25rpx;
 }
@@ -44,7 +54,7 @@
   height: 70rpx;
   line-height: 70rpx;
   font-weight: bold;
-  background-color: #fff;
+  background-color: #f6f3ee;
 }
 
 .swiper-tab-item {
@@ -66,7 +76,7 @@
 }
 
 .content_bottom_border {
-  border-bottom: 1rpx solid #959595;
+  border-bottom: 1rpx solid #d9d3cd;
 }
 
 .con_top {

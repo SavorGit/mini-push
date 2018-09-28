@@ -7,11 +7,11 @@
 }
 
 .content {
-  margin: 0rpx 10rpx 0rpx 10rpx;
-  padding: 10rpx;
-  border: 1rpx solid #f6f2ec;
-  border-radius: 20rpx;
-  background-color: #fff;
+  margin: 0rpx 30rpx 0rpx 30rpx;
+}
+
+.content_bottom_border {
+  border-bottom: 1rpx solid #d9d3cd;
 }
 
 /* =================== 内容头部开始 =================== */
@@ -31,10 +31,9 @@
   justify-content: flex-start;
 }
 
-.con_top > .user_info > .user_head {
-  width: 80rpx;
-  height: 80rpx;
-  margin-left: 10rpx;
+.con_top > .user_info > .user_head, .con_top > .user_info > .user_head::before {
+  width: 70rpx;
+  height: 70rpx;
   border-radius: 50%;
   background-color: #bebebe;
   vertical-align: middle;
@@ -51,21 +50,26 @@
   justify-content: flex-end;
 }
 
-.con_top > .operation > .launch_tv {
+.con_top > .operation > .launch_tv, .con_top > .operation > .launch_tv::before {
   margin-right: 10rpx;
   width: 150rpx;
   height: 55rpx;
   border: 1rpx solid #932c3f;
   border-radius: 12rpx;
+  background-color: unset;
 }
 
 /* =================== 内容头部结束 =================== */
 
 /* =================== 内容中部开始 =================== */
 
-.content .weui-grid image {
-  width: calc((100vw - 42rpx) / 3 - 10rpx);
-  height: calc((100vw - 42rpx) / 3 - 10rpx);
+.con_main {
+  margin: 0rpx 70rpx 0rpx 70rpx;
+}
+
+.con_main .weui-grid image {
+  width: calc((100vw - 200rpx) / 3 - 8rpx);
+  height: calc((100vw - 200rpx) / 3 - 8rpx);
   border-radius: 10rpx;
 }
 
@@ -75,6 +79,7 @@
 
 .con_bottom {
   height: 75rpx;
+  padding-left: 70rpx;
   display: flex;
   flex-direction: row;
   align-items: center;
