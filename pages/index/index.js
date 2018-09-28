@@ -26,6 +26,35 @@ Page({
       that.setData({
         openid: app.globalData.openid
       })
+      //注册用户
+      wx.getUserInfo({
+        success: function (res) {
+          wx.request({
+            url: 'https://mobile.littlehotspot.com/smallapp/User/register',
+            data: {
+              "openid": app.globalData.openid,
+              "avatarUrl": res.userInfo.avatarUrl,
+              "nickName": res.userInfo.nickName,
+              "gender": res.userInfo.gender,
+            },
+            header: {
+              'content-type': 'application/json'
+            },
+            success: function (res) {
+              wx.setStorage({
+                key: 'savor_user_info',
+                data: res.data.result,
+              })
+            },
+            fail: function (e) {
+              wx.setStorage({
+                key: 'savor_user_info',
+                data: { 'openid': openid },
+              })
+            }
+          })
+        }
+      });
       wx.request({
         url: 'https://mobile.littlehotspot.com/Smallapp/index/isHaveCallBox?openid=' + app.globalData.openid,
         headers: {
@@ -59,6 +88,36 @@ Page({
           that.setData({
             openid: openid
           })
+          //注册用户
+
+          wx.getUserInfo({
+            success: function (res) {
+              wx.request({
+                url: 'https://mobile.littlehotspot.com/smallapp/User/register',
+                data: {
+                  "openid": app.globalData.openid,
+                  "avatarUrl": res.userInfo.avatarUrl,
+                  "nickName": res.userInfo.nickName,
+                  "gender": res.userInfo.gender
+                },
+                header: {
+                  'content-type': 'application/json'
+                },
+                success: function (res) {
+                  wx.setStorage({
+                    key: 'savor_user_info',
+                    data: res.data.result,
+                  })
+                }
+              })
+            },
+            fail: function (e) {
+              wx.setStorage({
+                key: 'savor_user_info',
+                data: { 'openid': openid },
+              })
+            }
+          });
           wx.request({
             url: 'https://mobile.littlehotspot.com/Smallapp/index/isHaveCallBox?openid=' + openid,
             headers: {
@@ -75,12 +134,7 @@ Page({
                   box_mac: rest.data.result.box_mac,
                 })
                 getHotelInfo(rest.data.result.box_mac);
-                /*var box_mac = rest.data.result.box_mac;
-                wx.navigateTo({
-                  url: '/pages/forscreen/forscreen?scene=' + box_mac,
-                })*/
               }
-
             }
           })
         }
