@@ -223,6 +223,7 @@ Page({
                   'content-type': 'application/json'
                 },
                 data: {
+                  forscreen_id: forscreen_id,
                   openid: openid,
                   box_mac: box_mac,
                   action: 4,
