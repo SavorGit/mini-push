@@ -2,59 +2,59 @@
 <template name="bottomNavigation">
   <view class='bottom_nav'>
     <view wx:if='{{selectPage=="INTERACT"}}' class='sunken'>
-      <image mode='aspectFit' src='http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/nav_red.png'></image>
+      <image mode='aspectFit' src='/images/imgs/nav_red.png'></image>
     </view>
     <view wx:else class='protruding'>
-      <image mode='aspectFit' src='http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/nav_grey.png'></image>
+      <image mode='aspectFit' src='/images/imgs/nav_grey.png'></image>
     </view>
 
     <!-- 首页 -->
     <view wx:if='{{selectPage=="INDEX"}}'>
-      <image mode='aspectFit' src='http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/icon/red_home.png'></image>
+      <image mode='aspectFit' src='/images/icon/red_home.png'></image>
       <label class='font_932C3F_20'>首页</label>
     </view>
     <navigator wx:else open-type='reLaunch' url='/pages/demand/index'>
-      <image mode='aspectFit' src='http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/icon/grey_home.png'></image>
+      <image mode='aspectFit' src='/images/icon/grey_home.png'></image>
       <label class='font_333333_20'>首页</label>
     </navigator>
 
     <!-- 发现 -->
     <view wx:if='{{selectPage=="FIND"}}'>
-      <image mode='aspectFit' src='http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/icon/red_find.png'></image>
+      <image mode='aspectFit' src='/images/icon/red_find.png'></image>
       <label class='font_932C3F_20'>发现</label>
     </view>
     <navigator wx:else open-type='reLaunch' url='/pages/find/index'>
-      <image mode='aspectFit' src='http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/icon/grey_find.png'></image>
+      <image mode='aspectFit' src='/images/icon/grey_find.png'></image>
       <label class='font_333333_20'>发现</label>
     </navigator>
 
     <!-- 电视互动 -->
     <view wx:if='{{selectPage=="INTERACT"}}' class='special'>
-      <image mode='aspectFit' src='http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/icon/white_interact.png'></image>
+      <image mode='aspectFit' src='/images/icon/f6f3ee_interact.png'></image>
       <label class='font_932C3F_20'>电视互动</label>
     </view>
     <navigator wx:else open-type='reLaunch' class='special' url='/pages/interact/index'>
-      <image mode='aspectFit' src='http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/icon/grey_interact.png'></image>
+      <image mode='aspectFit' src='/images/icon/grey_interact.png'></image>
       <label class='font_333333_20'>电视互动</label>
     </navigator>
 
     <!-- 消息 -->
     <view wx:if='{{selectPage=="MESSAGE"}}'>
-      <image mode='aspectFit' src='http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/icon/red_msg.png'></image>
+      <image mode='aspectFit' src='/images/icon/red_msg.png'></image>
       <label class='font_932C3F_20'>消息</label>
     </view>
     <navigator wx:else open-type='reLaunch' url='/pages/message/index'>
-      <image mode='aspectFit' src='http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/icon/grey_msg.png'></image>
+      <image mode='aspectFit' src='/images/icon/grey_msg.png'></image>
       <label class='font_333333_20'>消息</label>
     </navigator>
 
     <!-- 我的 -->
     <view wx:if='{{selectPage=="MINE"}}'>
-      <image mode='aspectFit' src='http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/icon/red_mine.png'></image>
+      <image mode='aspectFit' src='/images/icon/red_mine.png'></image>
       <label class='font_932C3F_20'>我的</label>
     </view>
     <navigator wx:else open-type='reLaunch' url='/pages/mine/index'>
-      <image mode='aspectFit' src='http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/icon/grey_mine.png'></image>
+      <image mode='aspectFit' src='/images/icon/grey_mine.png'></image>
       <label class='font_333333_20'>我的</label>
     </navigator>
   </view>

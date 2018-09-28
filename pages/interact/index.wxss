@@ -32,10 +32,8 @@
 }
 
 .operation > view > image {
-  width: 60rpx;
-  height: 60rpx;
-  background-color: #f6f2ec;
-  border-radius: 50%;
+  width: 48rpx;
+  height: 38rpx;
   vertical-align: middle;
 }
 
