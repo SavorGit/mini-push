@@ -67,10 +67,58 @@
   margin: 0rpx 70rpx 0rpx 70rpx;
 }
 
+.con_main .weui-grid_1 {
+  width: 100%;
+}
+
+.con_main .weui-grid_1 > image {
+  width: 450rpx;
+  height: 450rpx;
+  border-radius: 10rpx;
+}
+
+.con_main .weui-grid_4 {
+  position: relative;
+  float: left;
+  width: 34%;
+  box-sizing: border-box;
+}
+
+.con_main .weui-grid_4 > image {
+  width: calc((100vw - 200rpx) * 0.34 - 8rpx);
+  height: calc((100vw - 200rpx) * 0.34 - 8rpx);
+  border-radius: 10rpx;
+}
+
 .con_main .weui-grid image {
   width: calc((100vw - 200rpx) / 3 - 8rpx);
   height: calc((100vw - 200rpx) / 3 - 8rpx);
   border-radius: 10rpx;
+}
+
+.con_main > .video > image {
+  width: 450rpx;
+  height: 450rpx;
+  border-radius: 10rpx;
+}
+
+.con_main > .video > .cover {
+  width: 255rpx;
+  height: 255rpx;
+  margin: -450rpx 0rpx 0rpx 0rpx;
+  padding: 195rpx 0rpx 0rpx 195rpx;
+  border: 0rpx;
+}
+
+.con_main > .video > .cover > image {
+  width: 60rpx;
+  height: 60rpx;
+}
+
+.con_main > .video > .cover > view {
+  margin-top: 115rpx;
+  padding-right: 20rpx;
+  text-align: right;
 }
 
 /* =================== 内容中部结束 =================== */

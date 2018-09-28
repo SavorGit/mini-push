@@ -103,29 +103,14 @@
   color: #f6f6f6;
 }
 
+.font_F6F3EE_20 {
+  font-size: 20rpx;
+  color: #f6f3ee;
+}
+
 .font_F6F6F6_28 {
   font-size: 28rpx;
   color: #f6f6f6;
-}
-
-.font_932C3F_20 {
-  font-size: 20rpx;
-  color: #932c3f;
-}
-
-.font_932C3F_24 {
-  font-size: 24rpx;
-  color: #932c3f;
-}
-
-.font_932C3F_28 {
-  font-size: 28rpx;
-  color: #932c3f;
-}
-
-.font_932C3F_34 {
-  font-size: 34rpx;
-  color: #932c3f;
 }
 
 .font_F6F2EC_24 {
@@ -146,6 +131,26 @@
 .font_F6F2EC_28 {
   font-size: 28rpx;
   color: #f6f2ec;
+}
+
+.font_932C3F_20 {
+  font-size: 20rpx;
+  color: #932c3f;
+}
+
+.font_932C3F_24 {
+  font-size: 24rpx;
+  color: #932c3f;
+}
+
+.font_932C3F_28 {
+  font-size: 28rpx;
+  color: #932c3f;
+}
+
+.font_932C3F_34 {
+  font-size: 34rpx;
+  color: #932c3f;
 }
 
 .link_relief {
