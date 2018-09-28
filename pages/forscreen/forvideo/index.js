@@ -39,11 +39,13 @@ Page({
       maxDuration: 60,
       camera: 'back',
       success: function (res) {
+        console.log(res);
         that.setData({
           showVedio: true,
+          upload_vedio_temp:res.tempFilePath
         });
         res_sup_time = (new Date()).valueOf();
-        uploadVedio(res, box_mac, openid, res_sup_time);
+        //uploadVedio(res, box_mac, openid, res_sup_time);
       },fail:function(res){
         wx.navigateBack({
           delta: 1,
