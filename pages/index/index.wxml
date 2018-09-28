@@ -3,25 +3,25 @@
 <view class="container">
   <view class='page_main_v'>
     <view class='page_main_h'>
-      <view  wx:if="{{is_link > 0}}" class='tip'>
+      <view wx:if="{{is_link > 0}}" class='tip'>
         <label class='font_F6F2EC_30'>您已成功链接“{{hotel_name}}”的{{room_name}}电视</label>
       </view>
       <view class='operation'>
         <view bindtap="chooseImage" data-boxmac="{{box_mac}}" data-openid="{{openid}}">
-          <image src='/images/btn_pic.png'></image>
+          <image src='/images/icon/f6f3ee_pic.png'></image>
           <label class='font_F6F2EC_34'>照片上电视</label>
         </view>
         <view bindtap='chooseVedio' data-boxmac="{{box_mac}}" data-openid="{{openid}}">
-          <image src='/images/btn_play.png'></image>
+          <image src='/images/icon/f6f3ee_video.png'></image>
           <label class='font_F6F2EC_34'>视频上电视</label>
         </view>
         <view bindtap='boxShow' data-boxmac="{{box_mac}}" data-openid="{{openid}}" data-vediourl="{{happy_vedio_url}}" data-happyVedioName="{{happy_vedio_name}}" data-name="{{happy_vedio_title}}">
-          <image src='/images/btn_music.png'></image>
-          <label class='font_F6F2EC_34'>生日快乐</label>
+          <image src='/images/icon/f6f3ee_birthday.png'></image>
+          <label class='font_F6F2EC_34'>生日歌点播</label>
         </view>
         <view bindtap='hdgames' data-boxmac="{{box_mac}}" data-openid="{{openid}}">
-          <image src='/images/btn_game.png'></image>
-          <label class='font_F6F2EC_34'>互动游戏</label>
+          <image src='/images/icon/f6f3ee_game.png'></image>
+          <label class='font_F6F2EC_34'>互动小游戏</label>
         </view>
       </view>
     </view>

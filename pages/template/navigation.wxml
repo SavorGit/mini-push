@@ -33,7 +33,7 @@
       <image mode='aspectFit' src='/images/icon/f6f3ee_interact.png'></image>
       <label class='font_932C3F_20'>电视互动</label>
     </view>
-    <navigator wx:else open-type='reLaunch' class='special' url='/pages/interact/index'>
+    <navigator wx:else open-type='reLaunch' class='special' url='/pages/index/index'>
       <image mode='aspectFit' src='/images/icon/grey_interact.png'></image>
       <label class='font_333333_20'>电视互动</label>
     </navigator>
