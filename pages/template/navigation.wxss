@@ -23,13 +23,13 @@
   width: 50rpx;
   height: 50rpx;
   position: absolute;
-  z-index: 999999;
+  z-index: 999;
 }
 
 .bottom_nav > navigator > label {
   margin-top: 75rpx;
   position: absolute;
-  z-index: 999999;
+  z-index: 999;
 }
 
 .bottom_nav > navigator.special {
@@ -39,7 +39,7 @@
   align-items: center;
   width: 40%;
   box-sizing: border-box;
-  z-index: 999999;
+  z-index: 999;
 }
 
 .bottom_nav > navigator.special > image {
@@ -50,13 +50,13 @@
   height: 100rpx;
   border-radius: 50%;
   position: absolute;
-  z-index: 999999;
+  z-index: 999;
 }
 
 .bottom_nav > navigator.special > label {
   margin-top: 135rpx;
   position: absolute;
-  z-index: 999999;
+  z-index: 999;
 }
 
 .bottom_nav > view {
@@ -73,13 +73,13 @@
   width: 50rpx;
   height: 50rpx;
   position: absolute;
-  z-index: 999999;
+  z-index: 999;
 }
 
 .bottom_nav > view > label {
   margin-top: 75rpx;
   position: absolute;
-  z-index: 999999;
+  z-index: 999;
 }
 
 .bottom_nav > view.special {
@@ -98,7 +98,7 @@
   height: 100rpx;
   border-radius: 50%;
   position: absolute;
-  z-index: 999999;
+  z-index: 999;
 }
 
 .bottom_nav > view.sunken {
@@ -108,7 +108,7 @@
   padding: 0rpx;
   border: 0rpx;
   position: absolute;
-  z-index: 999999;
+  z-index: 999;
 }
 
 .bottom_nav > view.sunken >image {
@@ -118,7 +118,7 @@
   padding: 0rpx;
   border: 0rpx;
   position: absolute;
-  z-index: 999999;
+  z-index: 999;
 }
 
 .bottom_nav > view.protruding {
@@ -128,7 +128,7 @@
   padding: 0rpx;
   border: 0rpx;
   position: absolute;
-  z-index: 999999;
+  z-index: 999;
 }
 
 .bottom_nav > view.protruding >image {
@@ -138,5 +138,5 @@
   padding: 0rpx;
   border: 0rpx;
   position: absolute;
-  z-index: 999999;
+  z-index: 999;
 }

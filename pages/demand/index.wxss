@@ -191,15 +191,20 @@ swiper-image {
   align-items: center;
 }
 
-.article > .cover > image {
+.article > .cover > navigator {
   width: 720rpx;
   height: 405rpx;
+}
+
+.article > .cover > navigator > image {
+  width: 100%;
+  height: 100%;
   background-color: #932c3f;
   border-radius: 12rpx 12rpx 0rpx 0rpx;
   z-index: 1;
 }
 
-.article > .cover > view {
+.article > .cover .full {
   width: 100%;
   height: 405rpx;
   margin-top: -400rpx;
@@ -208,7 +213,7 @@ swiper-image {
   flex-direction: column;
 }
 
-.article > .cover > view > label {
+.article > .cover .full > label {
   width: 100%;
   height: 50rpx;
   line-height: 50rpx;
@@ -216,13 +221,13 @@ swiper-image {
   z-index: 2;
 }
 
-.article > .cover > view > navigator {
+.article > .cover .full > .play {
   margin-top: calc(405rpx - 118rpx);
   text-align: right;
   z-index: 2;
 }
 
-.article > .cover > view > navigator > image {
+.article > .cover .full > .play > image {
   width: 60rpx;
   height: 60rpx;
   margin-right: 18rpx;
