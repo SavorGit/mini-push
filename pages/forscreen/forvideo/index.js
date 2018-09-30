@@ -15,6 +15,7 @@ Page({
    */
   data: {
     showVedio:false,
+    showRechoose:false,
     upload_vedio_temp:'',
     //upload_vedio_img_temp:'',
     vedio_percent: 0,
@@ -44,7 +45,6 @@ Page({
       maxDuration: 60,
       camera: 'back',
       success: function (res) {
-        console.log(res);
         that.setData({
           showVedio: true,
           upload_vedio_temp:res.tempFilePath
@@ -62,13 +62,17 @@ Page({
   },
 
   forscreen_video: function (res) {
-    var video = res.target.detail.video;
-    var box_mac = res.target.detail.box_mac;
-    var openid  = res.target.detail.openid;
-    res_sup_time = (new Date()).valueOf();
-    uploadVedio(res, box_mac, openid, res_sup_time);
-    function uploadVedio(video, box_mac, openid, res_sup_time) {
+    var that= this;
+    var video = res.target.dataset.video;
+    var box_mac = res.target.dataset.box_mac;
+    var openid = res.target.dataset.openid;
 
+    
+
+    res_sup_time = (new Date()).valueOf();
+    uploadVedio(video, box_mac, openid, res_sup_time);
+    function uploadVedio(video, box_mac, openid, res_sup_time) {
+   
       wx.request({
         url: 'https://mobile.littlehotspot.com/Smallapp/Index/getOssParams',
         headers: {
@@ -83,7 +87,8 @@ Page({
     }
     function uploadOssVedio(policy, signature, video, box_mac, openid, res_sup_time) {
 
-      var filename = video.tempFilePath;          //视频url
+      var filename = video;          //视频url
+
       //var filename_img = video.thumbTempFilePath; //视频封面图
       //console.log(video);
       var index1 = filename.lastIndexOf(".");
@@ -110,23 +115,6 @@ Page({
         },
         success: function (res) {
 
-          /*wx.request({
-            url: "https://netty-push.littlehotspot.com/push/box",
-            header: {
-              "Content-Type": "application/x-www-form-urlencoded"
-            },
-            method: "POST",
-            data: {
-              box_mac: box_mac,
-              cmd: 'call-mini-program',
-              msg: '{ "action":2, "url": "forscreen/resource/' + timestamp + postf_t + '", "filename":"' + timestamp + postf_t + '","openid":"' + openid + '","resource_type":2,"video_id":"' + timestamp +'"}',
-              req_id: timestamp
-            },
-            success: function (result) {
-              
-
-            },
-          });*/
         }
       });
       upload_task.onProgressUpdate((res) => {
@@ -138,7 +126,9 @@ Page({
         if (res.progress == 100) {
           var res_eup_time = (new Date()).valueOf();
           //console.log(res_eup_time);
-
+          that.setData({
+            showVedio:false,
+          })
           wx.request({
             url: 'https://mobile.littlehotspot.com/Smallapp/index/recordForScreenPics',
             header: {
@@ -172,7 +162,7 @@ Page({
                   req_id: timestamp
                 },
                 success: function (result) {
-
+                    
 
                 },
               });
