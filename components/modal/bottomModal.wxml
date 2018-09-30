@@ -1,4 +1,4 @@
-<!--components/modal/modal.wxml-->
+<!--components/modal/bottomModal.wxml-->
 <view class='mask' wx:if="{{show}}" bindtap='clickMask'>
   <view class='modal-content' style="width: {{width}};height: {{height}};border-radius: {{borderRadius}};">
     <block wx:if="{{titleText != ''}}">
@@ -10,8 +10,8 @@
       <slot></slot>
     </scroll-view>
     <view class='modal-btn-wrapper'>
-      <view class='cancel-btn' style='color: {{cancelColor}}' bindtap='cancel'>{{cancelText}}</view>
       <view class='confirm-btn' style='color: {{confirmColor}}' bindtap='confirm'>{{confirmText}}</view>
+      <view class='cancel-btn' style='color: {{cancelColor}}' bindtap='cancel'>{{cancelText}}</view>
     </view>
   </view>
 </view>

@@ -1,12 +1,12 @@
-// components/modal/modal.js
+// components/modal/bottomModal.js
 
 /**
  * 自定义modal浮层
  * 使用方法：
  *   
-<modal show="{{showModal}}" width="98%" height='60%'  border-radius="0rpx" title-text='Title' title-color="#f6f3ee" confirm-text='确定' confirm-color="#f6f3ee" cancel-text='取消' cancel-color='rgba(7,17,27,0.6)' bindclickMask='modalClickMask' bindcancel="modalCancel" bindconfirm='modalConfirm'>
+<bottomModal show="{{showModal}}" width="98%" height='60%'  border-radius="0rpx" title-text='Title' title-color="#f6f3ee" confirm-text='确定' confirm-color="#f6f3ee" cancel-text='取消' cancel-color='rgba(7,17,27,0.6)' bindclickMask='modalClickMask' bindcancel="modalCancel" bindconfirm='modalConfirm'>
   <view>你自己需要展示的内容</view>
-</modal>
+</bottomModal>
  
 属性说明：
  show：         控制modal显示与隐藏
