@@ -4,6 +4,13 @@
   <view class='page_main_v'>
     <view class='page_main_h'>
       <label>此功能正在开发，请稍候……</label>
+      <!-- <view class='mask' wx:if='{{show}}' bindtap='clickMask'>
+        <slot>aaaa</slot>
+      </view> -->
+      <button class="show-btn" bindtap="showDialogBtn">弹窗</button>
+      <modal show="{{showModal}}" height='60%'>
+        <view class='modal-content'>Show Modal {{showModal}}</view>
+      </modal>
     </view>
   </view>
   <template is="bottomNavigation" data='{{selectPage:"MESSAGE"}}' />

@@ -176,6 +176,11 @@ image.pic_show_cur {
   justify-content: space-between;
 }
 
+.grant_auth > .checkbox-group {
+  display: flex;
+  flex-direction: column;
+}
+
 .bottom_btn {
   display: flex;
   flex-direction: row;
