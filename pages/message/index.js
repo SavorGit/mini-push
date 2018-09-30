@@ -70,10 +70,6 @@ Page({
     this.setData({
       showModal: true
     })
-    wx.showModal({
-      title: 'aaa',
-      content: "<view class='modal-content'>Show Modal</view>",
-    })
   },
   modalCancel: function() {
     this.setData({

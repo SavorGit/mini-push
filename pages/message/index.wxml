@@ -4,13 +4,12 @@
   <view class='page_main_v'>
     <view class='page_main_h'>
       <label>此功能正在开发，请稍候……</label>
-      <!-- <view class='mask' wx:if='{{show}}' bindtap='clickMask'>
-        <slot>aaaa</slot>
-      </view> -->
-      <!-- <button class="show-btn" bindtap="showDialogBtn">弹窗</button>
-      <modal show="{{showModal}}" height='60%'>
+      <!-- 
+      <button class="show-btn" bindtap="showDialogBtn">弹窗</button>
+      <modal show="{{showModal}}" height='450rpx' width="98%" border-radius="0rpx" title-text="链接电视" title-color="#f6f3ee" confirm-text="扫码链接电视" confirm-color="#f6f3ee" cancel-text="取消" cancel-color="rgba(7,17,27,0.6)">
         <view class='modal-content'>Show Modal {{showModal}}</view>
-      </modal> -->
+      </modal> 
+      -->
     </view>
   </view>
   <template is="bottomNavigation" data='{{selectPage:"MESSAGE"}}' />
