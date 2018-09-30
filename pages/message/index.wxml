@@ -7,10 +7,10 @@
       <!-- <view class='mask' wx:if='{{show}}' bindtap='clickMask'>
         <slot>aaaa</slot>
       </view> -->
-      <button class="show-btn" bindtap="showDialogBtn">弹窗</button>
+      <!-- <button class="show-btn" bindtap="showDialogBtn">弹窗</button>
       <modal show="{{showModal}}" height='60%'>
         <view class='modal-content'>Show Modal {{showModal}}</view>
-      </modal>
+      </modal> -->
     </view>
   </view>
   <template is="bottomNavigation" data='{{selectPage:"MESSAGE"}}' />
