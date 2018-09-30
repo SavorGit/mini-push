@@ -80,7 +80,7 @@ Component({
     },
     cancelColor: {
       type: String,
-      value: 'rgba(7,17,27,0.6)'
+      value: 'rgba(237,230,222,0.9)'
     },
   },
 
@@ -92,12 +92,21 @@ Component({
   },
 
   /**
-   * 组件生命周期函数，在组件布局完成后执行，此时可以获取节点信息
+   * 组件生命周期函数，在组件实例进入页面节点树时执行
    */
-  ready: function() {
+  attached: function() {
     this.setData({
       show: false
     })
+  },
+
+  /**
+   * 组件生命周期函数，在组件布局完成后执行，此时可以获取节点信息
+   */
+  ready: function() {
+    // this.setData({
+    //   show: false
+    // })
   },
 
   /**
