@@ -15,6 +15,7 @@
     "pages/interact/index",
     "pages/message/index",
     "pages/mine/index",
+    "pages/mine/favorite",
     "pages/demand/index"
   ],
   "window": {

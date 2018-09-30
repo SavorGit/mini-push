@@ -1,0 +1,165 @@
+/* pages/mine/favorite.wxss */
+@import "../template/navigation.wxss";
+
+.page_main {
+  width: 100%;
+  height: calc(100% - 138rpx);
+}
+
+.user {
+  height: 190rpx;
+  line-height: 190rpx;
+  display: block;
+}
+
+.user > view {
+  position: relative;
+  float: left;
+}
+
+.user > .head > image {
+  margin-left: 35rpx;
+  margin-right: 35rpx;
+  width: 120rpx;
+  height: 120rpx;
+  border-radius: 50%;
+  background-color: #bebebe;
+  vertical-align: middle;
+}
+
+.user > .head > image::before {
+  margin-left: 35rpx;
+  margin-right: 35rpx;
+  width: 120rpx;
+  height: 120rpx;
+  border-radius: 50%;
+  background-color: #bebebe;
+  vertical-align: middle;
+}
+
+.user > .info {
+  margin-top: -25rpx;
+}
+
+.user > .info  > label {
+  height: 36rpx;
+  padding: 10rpx 0rpx 10rpx 0rpx;
+  display: block;
+}
+
+/* =============== 选项卡开始 =============== */
+
+.swiper-tab {
+  width: 100%;
+  height: 70rpx;
+  line-height: 70rpx;
+  font-weight: bold;
+  background-color: #f6f3ee;
+}
+
+.swiper-tab-item {
+  width: 150rpx;
+  height: 65rpx;
+  margin: 0rpx 40rpx 0rpx 40rpx;
+  display: inline-block;
+  text-align: center;
+  color: #666;
+}
+
+.active {
+  color: #333;
+  border-bottom: 5rpx solid #932c3f;
+}
+
+.content {
+  padding: 0rpx 45rpx 0rpx 65rpx;
+}
+
+.content_bottom_border {
+  border-bottom: 1rpx solid #d9d3cd;
+}
+
+.con_top {
+  margin: 30rpx 0rpx 40rpx 0rpx;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.con_top > .info {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  flex-grow: 1;
+  justify-content: flex-start;
+}
+
+.con_top > .operation {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.con_main {
+  margin: 0rpx;
+  padding: 0rpx;
+  border: 0rpx;
+  width: 100%;
+}
+
+.con_main .weui-grid image {
+  width: calc((100vw - 110rpx) / 3 - 10rpx);
+  height: calc((100vw - 110rpx) / 3 - 10rpx);
+  border-radius: 10rpx;
+}
+
+.con_main > .video > image {
+  width: 450rpx;
+  height: 450rpx;
+  border-radius: 10rpx;
+}
+
+.con_main > .video > .cover {
+  width: 255rpx;
+  height: 255rpx;
+  margin: -450rpx 0rpx 0rpx 0rpx;
+  padding: 195rpx 0rpx 0rpx 195rpx;
+  border: 0rpx;
+}
+
+.con_main > .video > .cover > image {
+  width: 60rpx;
+  height: 60rpx;
+}
+
+.con_main > .video > .cover > view {
+  margin-top: 115rpx;
+  padding-right: 20rpx;
+  text-align: right;
+}
+
+.con_bottom {
+  margin: 30rpx 0rpx 30rpx 0rpx;
+}
+
+.con_bottom > .operation {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.con_bottom > .operation > view {
+  margin-left: 15rpx;
+  margin-right: 15rpx;
+}
+
+.con_bottom > .operation > view > image {
+  width: 36rpx;
+  height: 32rpx;
+  margin-right: 8rpx;
+  vertical-align: middle;
+}
+
+/* =============== 选项卡结束 =============== */
