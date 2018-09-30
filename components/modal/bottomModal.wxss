@@ -52,6 +52,10 @@
   font-size: 32rpx;
 }
 
+.confirm-btn {
+  border-bottom: 2rpx solid rgba(246, 243, 238, 0.1);
+}
+
 .main-content {
   flex: 1;
   height: 100%;
