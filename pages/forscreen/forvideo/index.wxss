@@ -2,6 +2,12 @@
 
 /** ================================== 投视频 ================================== **/
 
+.choose_video_show_page {
+  margin: 0;
+  padding: 0;
+  border: 0rpx;
+}
+
 .launch_video_page_top {
   padding-top: 10rpx;
   padding-bottom: 10rpx;
@@ -21,7 +27,7 @@
 }
 
 .launch_video_page_main {
-  margin-top: 135rpx;
+  margin-top: 115rpx;
   width: 100%;
   height: calc(100vh - 263rpx);
   display: block;
@@ -36,6 +42,7 @@
 
 .upload_progress {
   margin-top: 63rpx;
+  margin-bottom: 100rpx;
 }
 
 .upload_progress > progress {
@@ -55,10 +62,18 @@
   margin-top: 112rpx;
 }
 
+.rechoose_button_video {
+  width: 100%;
+  margin: 0rpx;
+}
+
 .launch_video_page_bottom {
+  margin-top: 80rpx;
   margin-bottom: 30rpx;
   padding-left: 30rpx;
   padding-right: 30rpx;
+  width: 100%;
+  text-align: center;
 }
 
 .launch_video_page_bottom > button {
@@ -67,4 +82,18 @@
   line-height: 98rpx;
   text-align: center;
   margin: 0 5rpx 0 5rpx;
+}
+
+.grant_auth {
+  margin: 10rpx 0rpx 100rpx 0rpx;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.grant_auth > .checkbox-group {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
 }

@@ -169,7 +169,7 @@ image.pic_show_cur {
 }
 
 .grant_auth {
-  margin: 10rpx 0rpx 160rpx 0rpx;
+  margin: 10rpx 0rpx 100rpx 0rpx;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -179,6 +179,7 @@ image.pic_show_cur {
 .grant_auth > .checkbox-group {
   display: flex;
   flex-direction: column;
+  align-items: flex-start;
 }
 
 .bottom_btn {

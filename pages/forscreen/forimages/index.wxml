@@ -46,7 +46,7 @@
         </label>
         <view class='bottom_btn'>
           <!--<button class="savor-btn savor-btn-size" form-type="submit" hover-class="none" style='width: 320rpx;background-color: #BEBEBE;margin-left: 15rpx;'>投屏</button>-->
-          <button style='width: 750rpx;' class="savor-btn savor-btn-size" form-type="submit" hover-class="none">投屏</button>
+          <button class="savor-btn savor-btn-size full_width" form-type="submit" hover-class="none">投屏</button>
         </view>
       </view>
     </form>
