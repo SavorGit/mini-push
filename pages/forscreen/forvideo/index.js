@@ -24,6 +24,8 @@ Page({
       { 'name': '分享到发现栏目', 'value': '2', 'checked': true, 'disabled': false },
 
     ],
+    is_pub_hotelinfo: 1,  //是否公开酒楼信息
+    is_share: 1          //是否分享到发现栏目
   },
 
   /**
@@ -66,13 +68,13 @@ Page({
     var video = res.target.dataset.video;
     var box_mac = res.target.dataset.box_mac;
     var openid = res.target.dataset.openid;
-
+    var is_pub_hotelinfo = res.target.dataset.is_pub_hotelinfo;
+    var is_share = res.target.dataset.is_share;
     
-
     res_sup_time = (new Date()).valueOf();
-    uploadVedio(video, box_mac, openid, res_sup_time);
-    function uploadVedio(video, box_mac, openid, res_sup_time) {
-   
+    uploadVedio(video, box_mac, openid, res_sup_time, is_pub_hotelinfo, is_share);
+    function uploadVedio(video, box_mac, openid, res_sup_time, is_pub_hotelinfo, is_share) {
+     
       wx.request({
         url: 'https://mobile.littlehotspot.com/Smallapp/Index/getOssParams',
         headers: {
@@ -81,12 +83,12 @@ Page({
         success: function (rest) {
           policy = rest.data.policy;
           signature = rest.data.signature;
-          uploadOssVedio(policy, signature, video, box_mac, openid, res_sup_time);
+          uploadOssVedio(policy, signature, video, box_mac, openid, res_sup_time, is_pub_hotelinfo, is_share);
         }
       });
     }
-    function uploadOssVedio(policy, signature, video, box_mac, openid, res_sup_time) {
-
+    function uploadOssVedio(policy, signature, video, box_mac, openid, res_sup_time, is_pub_hotelinfo, is_share) {
+      
       var filename = video;          //视频url
 
       //var filename_img = video.thumbTempFilePath; //视频封面图
@@ -146,7 +148,10 @@ Page({
               resource_id: timestamp,
               res_sup_time: res_sup_time,
               res_eup_time: res_eup_time,
-              resource_size: res.totalBytesSent
+              resource_size: res.totalBytesSent,
+              is_pub_hotelinfo: is_pub_hotelinfo,
+              is_share: is_share,
+              forscreen_id: res_eup_time,
             },
             success: function (ret) {
               wx.request({
@@ -194,10 +199,11 @@ Page({
       camera: 'back',
       success: function (res) {
         that.setData({
-          upload_vedio_temp: '',
-          vedio_percent: 0
-        })
-        uploadVedio(res, box_mac, openid);
+          showVedio: true,
+          upload_vedio_temp: res.tempFilePath,
+          vedio_percent:0
+        });
+        //uploadVedio(res, box_mac, openid);
       }
     });
     function uploadVedio(video, box_mac, openid) {
@@ -358,7 +364,39 @@ Page({
       }
     })
   },
+  //是否公开显示餐厅信息
+  checkboxChange: function (e) {
+    var that = this;
+    //console.log(e.detail.value.length);
+    var check_lenth = e.detail.value.length;
+    var check_arr = e.detail.value;
+    if (check_lenth == 2) {
+      that.setData({
+        is_share: 1,
+        is_pub_hotelinfo: 1
+      })
+    } else if (check_lenth == 1) {
+      if (check_arr[0] == 1) {
+        that.setData({
+          is_share: 0,
+          is_pub_hotelinfo: 1
+        })
+      } else if (check_arr[0] == 2) {
+        that.setData({
+          is_share: 1,
+          is_pub_hotelinfo: 0
+        })
+      }
+    } else if (check_lenth == 0) {
+      that.setData({
+        is_pub_hotelinfo: 0,
+        is_share: 0
+      })
+    }
+    var check_arr = e.detail.value;
 
+
+  },//是否公开显示餐厅信息结束
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
