@@ -18,6 +18,11 @@ Page({
     upload_vedio_temp:'',
     //upload_vedio_img_temp:'',
     vedio_percent: 0,
+    item: [
+      { 'name': '公开是显示餐厅信息', 'value': '1', 'checked': true, 'disabled': false },
+      { 'name': '分享到发现栏目', 'value': '2', 'checked': true, 'disabled': false },
+
+    ],
   },
 
   /**
@@ -44,7 +49,7 @@ Page({
           showVedio: true,
           upload_vedio_temp:res.tempFilePath
         });
-        res_sup_time = (new Date()).valueOf();
+        //res_sup_time = (new Date()).valueOf();
         //uploadVedio(res, box_mac, openid, res_sup_time);
       },fail:function(res){
         wx.navigateBack({
@@ -52,8 +57,18 @@ Page({
         })
       }
     });
+    
+    
+  },
+
+  forscreen_video: function (res) {
+    var video = res.target.detail.video;
+    var box_mac = res.target.detail.box_mac;
+    var openid  = res.target.detail.openid;
+    res_sup_time = (new Date()).valueOf();
+    uploadVedio(res, box_mac, openid, res_sup_time);
     function uploadVedio(video, box_mac, openid, res_sup_time) {
-      
+
       wx.request({
         url: 'https://mobile.littlehotspot.com/Smallapp/Index/getOssParams',
         headers: {
@@ -116,14 +131,14 @@ Page({
       });
       upload_task.onProgressUpdate((res) => {
         //console.log(res);
-        
+
         that.setData({
           vedio_percent: res.progress
         });
-        if(res.progress==100){
+        if (res.progress == 100) {
           var res_eup_time = (new Date()).valueOf();
           //console.log(res_eup_time);
-          
+
           wx.request({
             url: 'https://mobile.littlehotspot.com/Smallapp/index/recordForScreenPics',
             header: {
@@ -143,7 +158,7 @@ Page({
               res_eup_time: res_eup_time,
               resource_size: res.totalBytesSent
             },
-            success:function(ret){
+            success: function (ret) {
               wx.request({
                 url: "https://netty-push.littlehotspot.com/push/box",
                 header: {
@@ -167,7 +182,7 @@ Page({
 
       });
       that.setData({
-        
+
         showVedio: true,
         upload_vedio_temp: filename,
         //upload_vedio_img_temp: filename_img,
