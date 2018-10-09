@@ -114,7 +114,12 @@
   border-radius: 10rpx;
 }
 
-.con_main > .video > image {
+.con_main > .video > navigator {
+  width: 450rpx;
+  height: 450rpx;
+}
+
+.con_main > .video > navigator > image {
   width: 450rpx;
   height: 450rpx;
   border-radius: 10rpx;
