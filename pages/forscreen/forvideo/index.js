@@ -17,6 +17,7 @@ Page({
     showVedio:false,
     showRechoose:false,
     upload_vedio_temp:'',
+    duration:0,
     //upload_vedio_img_temp:'',
     vedio_percent: 0,
     item: [
@@ -49,7 +50,8 @@ Page({
       success: function (res) {
         that.setData({
           showVedio: true,
-          upload_vedio_temp:res.tempFilePath
+          upload_vedio_temp:res.tempFilePath,
+          duration: res.duration
         });
         //res_sup_time = (new Date()).valueOf();
         //uploadVedio(res, box_mac, openid, res_sup_time);
@@ -70,10 +72,11 @@ Page({
     var openid = res.target.dataset.openid;
     var is_pub_hotelinfo = res.target.dataset.is_pub_hotelinfo;
     var is_share = res.target.dataset.is_share;
+    var duration = res.target.dataset.duration;
     
     res_sup_time = (new Date()).valueOf();
-    uploadVedio(video, box_mac, openid, res_sup_time, is_pub_hotelinfo, is_share);
-    function uploadVedio(video, box_mac, openid, res_sup_time, is_pub_hotelinfo, is_share) {
+    uploadVedio(video, box_mac, openid, res_sup_time, is_pub_hotelinfo, is_share, duration);
+    function uploadVedio(video, box_mac, openid, res_sup_time, is_pub_hotelinfo, is_share, duration) {
      
       wx.request({
         url: 'https://mobile.littlehotspot.com/Smallapp/Index/getOssParams',
@@ -83,11 +86,11 @@ Page({
         success: function (rest) {
           policy = rest.data.policy;
           signature = rest.data.signature;
-          uploadOssVedio(policy, signature, video, box_mac, openid, res_sup_time, is_pub_hotelinfo, is_share);
+          uploadOssVedio(policy, signature, video, box_mac, openid, res_sup_time, is_pub_hotelinfo, is_share, duration);
         }
       });
     }
-    function uploadOssVedio(policy, signature, video, box_mac, openid, res_sup_time, is_pub_hotelinfo, is_share) {
+    function uploadOssVedio(policy, signature, video, box_mac, openid, res_sup_time, is_pub_hotelinfo, is_share, duration) {
       
       var filename = video;          //视频url
 
@@ -152,6 +155,7 @@ Page({
               is_pub_hotelinfo: is_pub_hotelinfo,
               is_share: is_share,
               forscreen_id: res_eup_time,
+              duration: duration,
             },
             success: function (ret) {
               wx.request({

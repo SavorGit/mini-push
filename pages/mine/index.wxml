@@ -1,14 +1,14 @@
 <!--pages/mine/index.wxml-->
 <import src="../template/navigation.wxml" />
 <view class="container">
-  <scroll-view class='page_main' scroll-y="true" scroll-with-animation="true">
+  <scroll-view class='page_main' scroll-y="true" scroll-with-animation="true" bindscrolltolower="loadMore" data-openid='{{openid}}'>
     <view class='user'>
       <view class='head'>
-        <image src='http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/icon/grey_interact.png'></image>
+        <image src="{{userinfo.avatarUrl}}" lazy-load='http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/icon/grey_interact.png'></image>
       </view>
       <view class='info'>
-        <label class='font_333333_36'>名称</label>
-        <label class='font_666666_24'>ID:1234567890</label>
+        <label class='font_333333_36'>{{userinfo.nickName}}</label>
+        <label class='font_666666_24'>ID:{{userinfo.id}}</label>
       </view>
     </view>
 
@@ -19,26 +19,41 @@
     </view>
     <view>
 
+      
+      <!--循环开始 -->
+      <view wx:for="{{publiclist}}" wx:key="key" wx:for-item="bean" wx:for-index="index">
+      
       <view class='content content_bottom_border'>
         <view class='con_top'>
           <view class='info font_333333_24'>
-            <label>9月14日</label>
-            <label>.</label>
-            <label>花家怡园（世茂店）</label>
+            <label>{{bean.create_time}}</label>
+            <label wx:if="{{bean.is_pub_hotelinfo==1}}">.</label>
+            <label wx:if="{{bean.is_pub_hotelinfo==1}}">{{bean.hotel_name}}</label>
           </view>
           <view class='operation font_932C3F_24'>
-            <view bindtap='popDel'>
+            <view bindtap='popDel' data-forscreen_id="{{bean.forscreen_id}}" data-keys="{{index}}">
               <label>删除</label>
             </view>
           </view>
         </view>
         <view class='con_main'>
-          <view class="weui-grids">
-            <view class="weui-grid">
-              <image class="pic_show" mode='aspectFill' src="http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
+          <view class="weui-grids" wx:if="{{bean.res_type=='1'}}" >
+            
+            <view class="weui-grid" wx:for="{{bean.pubdetail}}" wx:key="pkey" wx:for-item="pubdetail" wx:for-index="pindex">
+              <image class="pic_show" mode='aspectFill' src="{{pubdetail.res_url}}" data-pkey="{{pindex}}" data-src="{{bean.pubdetail}}"  bindtap="previewImage"></image>
             </view>
-            <view class="weui-grid">
-              <image class="pic_show" mode='aspectFill' src="http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
+            
+          </view>
+          
+          <view class="video" wx:else >
+            <view wx:for="{{bean.pubdetail}}" wx:key="pkey" wx:for-item="pubdetail" wx:for-index="pindex">
+              <navigator url="/pages/forscreen/video/launch_video?video_url={{pubdetail.res_url}}&video_name="><image mode='aspectFill' src="{{pubdetail.vide_img}}"></image></navigator>
+              <view class="cover">
+                <image src='http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/icon/white_play.png'></image>
+                <view>
+                  <label class='font_F6F3EE_20'>{{pubdetail.duration}}</label>
+                </view>
+              </view>
             </view>
           </view>
         </view>
@@ -46,70 +61,30 @@
           <view class='operation'>
             <view wx:if="{{collect=='123'}}">
               <image src='http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/icon/red_heart.png'></image>
-              <label class='font_333333_26'>100</label>
+              <label class='font_333333_26'>{{bean.collect_num}}</label>
             </view>
             <view wx:else>
               <image src='http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/icon/grey_heart.png'></image>
-              <label class='font_333333_26'>100</label>
+              <label class='font_333333_26'>{{bean.collect_num}}</label>
             </view>
-            <view>
+            <!--<view>
               <image src='http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/icon/grey_comment.png'></image>
               <label class='font_333333_26'>100</label>
-            </view>
+            </view>-->
             <view>
               <image src='http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/icon/grey_share.png'></image>
-              <label class='font_333333_26'>100</label>
+              <label class='font_333333_26'>{{bean.share_num}}</label>
             </view>
           </view>
         </view>
       </view>
-
-      <view class='content content_bottom_border'>
-        <view class='con_top'>
-          <view class='info font_333333_24'>
-            <label>9月14日</label>
-            <label>.</label>
-            <label>花家怡园（世茂店）</label>
-          </view>
-          <view class='operation font_932C3F_24'>
-            <view bindtap='popDel'>
-              <label>删除</label>
-            </view>
-          </view>
-        </view>
-        <view class='con_main'>
-          <view class="weui-grids">
-            <view class="weui-grid">
-              <image class="pic_show" mode='aspectFill' src="http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
-            </view>
-            <view class="weui-grid">
-              <image class="pic_show" mode='aspectFill' src="http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
-            </view>
-          </view>
-        </view>
-        <view class='con_bottom'>
-          <view class='operation'>
-            <view wx:if="{{collect=='123'}}">
-              <image src='http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/icon/red_heart.png'></image>
-              <label class='font_333333_26'>100</label>
-            </view>
-            <view wx:else>
-              <image src='http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/icon/grey_heart.png'></image>
-              <label class='font_333333_26'>100</label>
-            </view>
-            <view>
-              <image src='http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/icon/grey_comment.png'></image>
-              <label class='font_333333_26'>100</label>
-            </view>
-            <view>
-              <image src='http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/icon/grey_share.png'></image>
-              <label class='font_333333_26'>100</label>
-            </view>
-          </view>
-        </view>
+      <view class="body-view">
+        <loading hidden="{{hiddens}}" bindchange="loadingChange">加载中...</loading>
       </view>
+      </view>
+      <!--循环结束 -->
 
-      <view class='content content_bottom_border'>
+      <!--<view class='content content_bottom_border'>
         <view class='con_top'>
           <view class='info font_333333_24'>
             <label>9月14日</label>
@@ -162,7 +137,7 @@
             <label>花家怡园（世茂店）</label>
           </view>
           <view class='operation font_932C3F_24'>
-            <view bindtap='popDel'>
+            <view bindtap='popDel' data-forscreen_id="{{bean.forscreen_id}}">
               <label>删除</label>
             </view>
           </view>
@@ -198,7 +173,7 @@
             </view>
           </view>
         </view>
-      </view>
+      </view>-->
 
       <!-- 滚动页面底部留白 -->
       <view class='nav_bottom_space'></view>
@@ -211,4 +186,4 @@
 </view>
 
 <!-- 弹窗 -->
-<bottomModal show="{{showModal}}" height='auto' width="98%" title-text="" confirm-text="删除" confirm-color="#ede6de" cancel-text="取消" cancel-color="rgba(153,153,153,0.8)" bindcancel="modalCancel" bindconfirm='modalConfirm' />
+<bottomModal show="{{showModal}}"  data-openid="{{openid}}"  data-forscreen_id="{{forscreen_id}}" height='auto' width="98%" title-text="" confirm-text="删除" confirm-color="#ede6de" cancel-text="取消" cancel-color="rgba(153,153,153,0.8)" bindcancel="modalCancel" bindconfirm='modalConfirm' />
