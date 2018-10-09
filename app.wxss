@@ -93,6 +93,16 @@
   color: #333;
 }
 
+.font_666666_30 {
+  font-size: 30rpx;
+  color: #666;
+}
+
+.font_666666_28 {
+  font-size: 28rpx;
+  color: #666;
+}
+
 .font_666666_24 {
   font-size: 24rpx;
   color: #666;
