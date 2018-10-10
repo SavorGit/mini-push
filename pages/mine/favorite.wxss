@@ -120,8 +120,8 @@
 }
 
 .con_main > .video navigator > image {
-  width: 450rpx;
-  height: 450rpx;
+  width: 100%;
+  height: 100%;
   border-radius: 10rpx;
 }
 
@@ -133,9 +133,14 @@
   border: 0rpx;
 }
 
-.con_main > .video .cover > image {
+.con_main > .video .cover > navigator {
   width: 60rpx;
   height: 60rpx;
+}
+
+.con_main > .video .cover > navigator > image {
+  width: 100%;
+  height: 100%;
 }
 
 .con_main > .video .cover > view {

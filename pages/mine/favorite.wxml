@@ -4,7 +4,7 @@
   <scroll-view class='page_main' scroll-y="true" scroll-with-animation="true" bindscrolltolower="loadMore" data-openid='{{openid}}'>
     <view class='user'>
       <view class='head'>
-       <image src="{{userinfo.avatarUrl}}" lazy-load='http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/icon/grey_interact.png'></image>
+        <image src="{{userinfo.avatarUrl}}" lazy-load='http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/icon/grey_interact.png'></image>
       </view>
       <view class='info'>
         <label class='font_333333_36'>{{userinfo.nickName}}</label>
@@ -35,19 +35,22 @@
         <view class='con_main'>
           <view class="weui-grids" wx:if="{{bean.res_type=='1'}}">
             <view class="weui-grid" wx:for="{{bean.list}}" wx:key="pkey" wx:for-item="pubdetail" wx:for-index="pindex">
-              <image class="pic_show" mode='aspectFill' src="{{pubdetail.res_url}}" data-pkey="{{pindex}}" data-src="{{bean.list}}"  bindtap="previewImage"></image>
+              <image class="pic_show" mode='aspectFill' src="{{pubdetail.res_url}}" data-pkey="{{pindex}}" data-src="{{bean.list}}" bindtap="previewImage"></image>
             </view>
-            
+
           </view>
-          <view class="video" wx:else >
-            
-              <navigator url="/pages/forscreen/video/launch_video?video_url={{bean.list.res_url}}&video_name="><image mode='aspectFill' src="http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image></navigator>
-              <view class="cover">
+          <view class="video" wx:else>
+            <navigator url="/pages/forscreen/video/launch_video?video_url={{bean.list.res_url}}&video_name=">
+              <image mode='aspectFill' src="http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
+            </navigator>
+            <view class="cover">
+              <navigator url="/pages/forscreen/video/launch_video?video_url={{bean.list.res_url}}&video_name=">
                 <image src='http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/icon/white_play.png'></image>
-                <view>
-                  <label class='font_F6F3EE_20'>{{bean.list.duration}}</label>
-                </view>
+              </navigator>
+              <view>
+                <label class='font_F6F3EE_20'>{{bean.list.duration}}</label>
               </view>
+            </view>
           </view>
         </view>
         <view class='con_bottom'>
@@ -71,10 +74,10 @@
           </view>
         </view>
         <view class="body-view">
-        <loading hidden="{{hiddens}}" bindchange="loadingChange">加载中...</loading>
+          <loading hidden="{{hiddens}}" bindchange="loadingChange">加载中...</loading>
+        </view>
       </view>
-      </view>
-      
+
 
       <!-- 滚动页面底部留白 -->
       <view class='nav_bottom_space'></view>
@@ -87,4 +90,5 @@
 </view>
 
 <!-- 弹窗 -->
-<bottomModal show="{{showModal}}" data-openid="{{openid}}"  data-forscreen_id="{{forscreen_id}}" height='auto' width="98%" title-text="" confirm-text="删除" confirm-color="#ede6de" cancel-text="取消" cancel-color="rgba(153,153,153,0.8)" bindcancel="modalCancel" bindconfirm='modalConfirm' />
+<bottomModal show="{{showModal}}" data-openid="{{openid}}" data-forscreen_id="{{forscreen_id}}" height='auto' width="98%" title-text="" confirm-text="删除" confirm-color="#ede6de" cancel-text="取消" cancel-color="rgba(153,153,153,0.8)" bindcancel="modalCancel"
+  bindconfirm='modalConfirm' />
