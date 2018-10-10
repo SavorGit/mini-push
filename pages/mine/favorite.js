@@ -15,7 +15,8 @@ Page({
     sharelist: [],
     keys: '',
     hiddens: true,
-    forscreen_id:''
+    forscreen_id:'',
+    collect:1
     
   },
 

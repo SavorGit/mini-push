@@ -52,7 +52,7 @@
         </view>
         <view class='con_bottom'>
           <view class='operation'>
-            <view wx:if="{{collect=='123'}}">
+            <view wx:if="{{collect=='1'}}">
               <image src='http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/icon/red_heart.png'></image>
               <label class='font_333333_26'>100</label>
             </view>
@@ -63,11 +63,11 @@
             <!--<view>
               <image src='http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/icon/grey_comment.png'></image>
               <label class='font_333333_26'>100</label>
-            </view>-->
+            </view>
             <view>
               <image src='http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/icon/grey_share.png'></image>
               <label class='font_333333_26'>100</label>
-            </view>
+            </view>-->
           </view>
         </view>
         <view class="body-view">

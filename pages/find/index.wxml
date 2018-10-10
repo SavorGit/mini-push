@@ -54,7 +54,7 @@
           <label class='hotel_name' wx:if="{{bean.is_pub_hotelinfo==1}}">{{bean.hotel_name}}</label>
         </view>
         <view class='operation'>
-          <view wx:if="{{collect=='123'}}">
+          <view wx:if="{{bean.is_collect=='1'}}">
             <image src='http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/icon/red_heart.png'></image>
             <label class='font_333333_26'>100</label>
           </view>

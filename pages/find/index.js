@@ -337,54 +337,65 @@ Page({
 
         }
       }else {//视频投屏
-        wx.request({
-          url: 'https://mobile.littlehotspot.com/Smallapp/index/recordForScreenPics',
-          header: {
-            'content-type': 'application/json'
-          },
-          data: {
-            openid: openid,
-            box_mac: box_mac,
-            action: 12,
-            
-            mobile_brand: mobile_brand,
-            mobile_model: mobile_model,
-            forscreen_char: forscreen_char,
-            imgs: '["' + pubdetail[i]['forscreen_url'] + '"]',
-            resource_id: pubdetail[i]['res_id'],
-            res_sup_time: 0,
-            res_eup_time: 0,
-            resource_size: pubdetail[i]['resource_size'],
-            is_pub_hotelinfo: 0,
-            is_share: 0,
-            forscreen_id: forscreen_id,
-            duration: pubdetail[i]['duration'],
-          },
-          success: function (ret) {
-            wx.request({
-              url: "https://netty-push.littlehotspot.com/push/box",
-              header: {
-                "Content-Type": "application/x-www-form-urlencoded"
-              },
-              method: "POST",
-              data: {
-                box_mac: box_mac,
-                cmd: 'call-mini-program',
-                msg: '{ "action":2, "url": "' + pubdetail[i]['forscreen_url'] + '", "filename":"' + pubdetail[i]['filename'] + '","openid":"' + openid + '","resource_type":2,"video_id":"' + pubdetail[i]['res_id'] + '"}',
-                req_id: pubdetail[i]['res_id']
-              },
-              success: function (result) {
+        for (i = 0; i < res_len; i++) {
+          wx.request({
+            url: 'https://mobile.littlehotspot.com/Smallapp/index/recordForScreenPics',
+            header: {
+              'content-type': 'application/json'
+            },
+            data: {
+              openid: openid,
+              box_mac: box_mac,
+              action: 12,
 
+              mobile_brand: mobile_brand,
+              mobile_model: mobile_model,
+              forscreen_char: forscreen_char,
+              imgs: '["' + pubdetail[i]['forscreen_url'] + '"]',
+              resource_id: pubdetail[i]['res_id'],
+              res_sup_time: 0,
+              res_eup_time: 0,
+              resource_size: pubdetail[i]['resource_size'],
+              is_pub_hotelinfo: 0,
+              is_share: 0,
+              forscreen_id: forscreen_id,
+              duration: pubdetail[i]['duration'],
+            },
+            success: function (ret) {
 
-              },
-            });
-          }
-        });
+            }
+          });
+
+          wx.request({
+            url: "https://netty-push.littlehotspot.com/push/box",
+            header: {
+              "Content-Type": "application/x-www-form-urlencoded"
+            },
+            method: "POST",
+            data: {
+              box_mac: box_mac,
+              cmd: 'call-mini-program',
+              msg: '{ "action":2, "url": "' + pubdetail[i]['forscreen_url'] + '", "filename":"' + pubdetail[i]['filename'] + '","openid":"' + openid + '","resource_type":2,"video_id":"' + pubdetail[i]['res_id'] + '"}',
+              req_id: pubdetail[i]['res_id']
+            },
+            success: function (result) {
+
+              wx.showToast({
+                title: '点播成功,电视即将开始播放',
+                icon: 'none',
+                duration: 2000
+              });
+            },
+            fail: function (res) {
+              wx.showToast({
+                title: '网络异常,点播失败',
+                icon: 'none',
+                duration: 2000
+              })
+            }
+          });
+        } 
       }
-      
-     
-      
-      
     }
   },//电视播放结束
   /**
