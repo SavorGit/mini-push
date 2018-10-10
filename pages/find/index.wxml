@@ -55,11 +55,11 @@
         </view>
         <view class='operation'>
           <view wx:if="{{bean.is_collect=='1'}}">
-            <image src='http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/icon/red_heart.png'></image>
+            <image src='http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/icon/red_heart.png' bindtap='cancCollect' data-res_id="{{bean.forscreen_id}}" data-res_key="{{index}}"></image>
             <label class='font_333333_26'>100</label>
           </view>
           <view wx:else>
-            <image src='http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/icon/grey_heart.png'></image>
+            <image src='http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/icon/grey_heart.png' bindtap='onCollect' data-res_id="{{bean.forscreen_id}}" data-res_key="{{index}}"></image>
             <label class='font_333333_26'>{{bean.collect_num}}</label>
           </view>
           <!--<view>
