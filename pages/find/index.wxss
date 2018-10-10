@@ -163,7 +163,16 @@
   margin-right: 15rpx;
 }
 
-.con_bottom > .operation > view > image {
+.con_bottom > .operation > view > button,
+.con_bottom > .operation > view > button::before,
+.con_bottom > .operation > view > button::after {
+  margin: unset;
+  padding: unset;
+  background: unset;
+  border: unset;
+}
+
+.con_bottom > .operation > view > button > image {
   width: 36rpx;
   height: 32rpx;
   margin-right: 8rpx;
