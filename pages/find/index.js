@@ -398,6 +398,106 @@ Page({
       }
     }
   },//电视播放结束
+  //收藏资源
+  onCollect: function (e) {
+    var that = this;
+    //var openid = e.target.dataset.openid;
+    var res_id = e.target.dataset.res_id;
+    var res_key = e.target.dataset.res_key;
+    wx.request({
+      url: 'https://mobile.littlehotspot.com/Smallapp/collect/recLogs',
+      header: {
+        'content-type': 'application/json'
+      },
+      data: {
+        'openid': openid,
+        'res_id': res_id,
+        'type': 1,
+        'status': 1,
+      },
+      success: function (e) {
+        for (var i = 0; i < discovery_list.length; i++) {
+          if (i == res_key) {
+            discovery_list[i].is_collect = 1;
+            discovery_list[i].collect_num++;
+          }
+        }
+        that.setData({
+          discovery_list: discovery_list
+        })
+        if (e.data.code == 10000) {
+          wx.showToast({
+            title: '收藏成功',
+            icon: 'none',
+            duration: 2000
+          })
+        } else {
+          wx.showToast({
+            title: '收藏失败，请稍后重试',
+            icon: 'none',
+            duration: 2000
+          })
+        }
+      },
+      fial: function ({ errMsg }) {
+        wx.showToast({
+          title: '网络异常，请稍后重试',
+          icon: 'none',
+          duration: 2000
+        })
+      }
+    })
+  },//收藏资源结束
+  //取消收藏
+  cancCollect: function (e) {
+    var that = this;
+    var res_id = e.target.dataset.res_id;
+    var res_key = e.target.dataset.res_key;
+    wx.request({
+      url: 'https://mobile.littlehotspot.com/Smallapp/collect/recLogs',
+      header: {
+        'content-type': 'application/json'
+      },
+      data: {
+        'openid': openid,
+        'res_id': res_id,
+        'type': 1,
+        'status': 0,
+      },
+      success: function (e) {
+        for (var i = 0; i < discovery_list.length; i++) {
+          if (i == res_key) {
+            discovery_list[i].is_collect = 0;
+            discovery_list[i].collect_num--;
+          }
+        }
+        that.setData({
+          discovery_list: discovery_list
+        })
+        if (e.data.code == 10000) {
+          wx.showToast({
+            title: '取消收藏成功',
+            icon: 'none',
+            duration: 2000
+          })
+        } else {
+          wx.showToast({
+            title: '取消收藏失败，请稍后重试',
+            icon: 'none',
+            duration: 2000
+          })
+        }
+      },
+      fial: function ({ errMsg }) {
+        wx.showToast({
+          title: '网络异常，请稍后重试',
+          icon: 'none',
+          duration: 2000
+        })
+      }
+    })
+  },//取消收藏结束
+
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
