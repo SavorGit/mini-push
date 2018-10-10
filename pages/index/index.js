@@ -7,6 +7,7 @@ Page({
    * 页面的初始数据
    */
   data: {
+    canIUse: wx.canIUse('button.open-type.getUserInfo'),
     openid:'',
     hotel_name:'',   //酒楼名称
     room_name:'',    //包间名称

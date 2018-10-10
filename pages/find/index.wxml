@@ -1,30 +1,57 @@
 <!--pages/find/index.wxml-->
 <import src="../template/navigation.wxml" />
 <view class="container">
-  <scroll-view class='page_main' scroll-y="true" scroll-with-animation="true">
-
-    <view class='content content_bottom_border'>
+  <scroll-view class='page_main' scroll-y="true" scroll-with-animation="true" bindscrolltolower="loadMore" data-openid='{{openid}}'>
+    <!--循环开始-->
+    <view class='content content_bottom_border' wx:for="{{discovery_list}}" wx:key="key" wx:for-item="bean" wx:for-index="index">
       <view class='con_top'>
         <view class='user_info'>
-          <image class='user_head' src='http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/icon/grey_interact.png'></image>
-          <label class='user_name font_333333_30'>用户名称</label>
+          <image class='user_head' src="{{bean.avatarUrl}}" lazy-load='http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/icon/grey_interact.png'></image>
+          <label class='user_name font_333333_30'>{{bean.nickName}}</label>
         </view>
         <view class='operation'>
-          <button class='launch_tv font_932C3F_20'>电视播放</button>
+          <button bindtap='boxShow' class='launch_tv font_932C3F_20' data-res_type="{{bean.res_type}}" data-res_nums="{{bean.res_nums}}" data-pubdetail="{{bean.pubdetail}}" data-boxmac="{{box_mac}}" data-openid="{{openid}}">电视播放</button>
         </view>
       </view>
       <view class='con_main'>
-        <view class="weui-grids">
-          <view class="weui-grid_1">
-            <image class="pic_show" mode='aspectFill' src="http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
+        <view class="weui-grids" wx:if="{{bean.res_type == 1 && bean.res_nums=='1'}}">
+          <view class="weui-grid_1" wx:for="{{bean.pubdetail}}" wx:key="pkey" wx:for-item="item" wx:for-index="indexs">
+            <image bindtap="previewImage" data-pkey="{{indexs}}" data-src="{{bean.pubdetail}}" class="pic_show" mode='aspectFill' src="{{item.res_url}}"></image>
           </view>
         </view>
+
+        <view class="weui-grids" wx:if="{{bean.res_type == 1 && (bean.res_nums=='2' || bean.res_nums=='3' || bean.res_nums=='5' || bean.res_nums=='6')}}">
+          
+          <view class="weui-grid" wx:for="{{bean.pubdetail}}" wx:key="pkey" wx:for-item="item" wx:for-index="indexs">
+            <image bindtap="previewImage" data-pkey="{{indexs}}" data-src="{{bean.pubdetail}}" class="pic_show" mode='aspectFill' src="{{item.res_url}}"></image>
+          </view>
+        </view>
+
+        <view class="weui-grids" wx:if="{{bean.res_type == 1 && bean.res_nums=='4'}}">
+          <view class="weui-grid_4" wx:for="{{bean.pubdetail}}" wx:key="pkey" wx:for-item="item" wx:for-index="indexs">
+            <image bindtap="previewImage" data-pkey="{{indexs}}" data-src="{{bean.pubdetail}}" class="pic_show" mode='aspectFill' src="{{item.res_url}}"></image>
+          </view>
+          
+        </view>
+
+        <view class="video" wx:if="{{bean.res_type == 2 }}">
+          <view wx:for="{{bean.pubdetail}}" wx:key="pkey" wx:for-item="item" wx:for-index="indexs">
+          <navigator url="/pages/forscreen/video/launch_video?video_url={{item.res_url}}&video_name="><image   mode='aspectFill' src="{{item.vide_img}}"></image></navigator>
+          <view class="cover">
+            <image src='http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/icon/white_play.png'></image>
+            <view>
+              <label class='font_F6F3EE_20'>{{item.duration}}</label>
+            </view>
+          </view>
+          </view>
+        </view>
+
       </view>
       <view class='con_bottom'>
         <view class='hotel_info font_666666_24'>
           <label class='time'>刚刚</label>
-          <label class='dot'>.</label>
-          <label class='hotel_name'>权茂北京菜</label>
+          <label class='dot' wx:if="{{bean.is_pub_hotelinfo==1}}">.</label>
+          <label class='hotel_name' wx:if="{{bean.is_pub_hotelinfo==1}}">{{bean.hotel_name}}</label>
         </view>
         <view class='operation'>
           <view wx:if="{{collect=='123'}}">
@@ -33,21 +60,21 @@
           </view>
           <view wx:else>
             <image src='http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/icon/grey_heart.png'></image>
-            <label class='font_333333_26'>100</label>
+            <label class='font_333333_26'>{{bean.collect_num}}</label>
           </view>
-          <view>
+          <!--<view>
             <image src='http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/icon/grey_comment.png'></image>
             <label class='font_333333_26'>100</label>
-          </view>
+          </view>-->
           <view>
             <image src='http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/icon/grey_share.png'></image>
-            <label class='font_333333_26'>100</label>
+            <label class='font_333333_26'>{{bean.share_num}}</label>
           </view>
         </view>
       </view>
     </view>
-
-
+    <!--循环结束-->
+    <!--
     <view class='content content_bottom_border'>
       <view class='con_top'>
         <view class='user_info'>
@@ -363,8 +390,10 @@
           </view>
         </view>
       </view>
-    </view>
-
+    </view>-->
+    <view class="body-view">
+        <loading hidden="{{hiddens}}" bindchange="loadingChange">加载中...</loading>
+      </view>
     <!-- 滚动页面底部留白 -->
     <view class='nav_bottom_space'></view>
 
