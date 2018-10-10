@@ -1,5 +1,6 @@
 <!--pages/message/index.wxml-->
-<import src="../template/navigation.wxml" />
+<import src="../template/navigation" />
+<import src="../template/commons" />
 <view class="container">
   <view class='page_main_v'>
     <view class='page_main_h'>
@@ -11,6 +12,16 @@
         <view class='modal-content'>Show Modal {{showModal}}</view>
       </modal>
       -->
+
+
+      <!--
+      <button class="show-btn" bindtap="showDialogBtn">授权弹窗</button>
+      <template is="wxAuthLogin" data='{{show: showModal}}' />
+      -->
+
+
+
+
     </view>
   </view>
   <template is="bottomNavigation" data='{{selectPage:"MESSAGE"}}' />

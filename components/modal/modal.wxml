@@ -9,9 +9,15 @@
     <scroll-view scroll-y class='main-content'>
       <slot></slot>
     </scroll-view>
-    <view class='modal-btn-wrapper'>
-      <view class='cancel-btn' style='color: {{cancelColor}}' bindtap='cancel'>{{cancelText}}</view>
-      <view class='confirm-btn' style='color: {{confirmColor}}' bindtap='confirm'>{{confirmText}}</view>
-    </view>
+    <block wx:if="{{cancelText != '' || confirmText != ''}}">
+      <view class='modal-btn-wrapper'>
+        <block wx:if="{{cancelText != ''}}">
+          <view class='cancel-btn' style='color: {{cancelColor}}' bindtap='cancel'>{{cancelText}}</view>
+        </block>
+        <block wx:if="{{confirmText != ''}}">
+          <view class='confirm-btn' style='color: {{confirmColor}}' bindtap='confirm'>{{confirmText}}</view>
+        </block>
+      </view>
+    </block>
   </view>
 </view>

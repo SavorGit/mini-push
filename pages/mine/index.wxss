@@ -1,5 +1,4 @@
 /* pages/mine/index.wxss */
-@import "../template/navigation.wxss";
 
 .page_main {
   width: 100%;

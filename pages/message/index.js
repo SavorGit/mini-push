@@ -80,5 +80,14 @@ Page({
     this.setData({
       showModal: false
     })
+  },
+
+
+
+  /**关闭授权窗口 */
+  closeAuth: function() {
+    this.setData({
+      showModal: false
+    })
   }
 })

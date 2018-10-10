@@ -1,1 +1,21 @@
 <!--pages/template/commons.wxml-->
+
+<!-- 微信授权登录 -->
+<template name="wxAuthLogin">
+  <modal show="{{show}}" height='450rpx' width="98%" border-radius="0rpx" title-text="" confirm-text="" cancel-text="">
+    <view style='background-color: #f6f3ee; width: 100%; height: 100%; text-align: center;'>
+      <view style='padding: 50rpx 0rpx 10rpx 0rpx;'>
+        <label class='font_333333_34' style='font-weight: bold;'>温馨提示</label>
+      </view>
+      <view style='padding: 20rpx 40rpx 20rpx 40rpx; margin-bottom: 20rpx;'>
+        <label class='font_333333_30' style='display: block;margin-bottom: 20rpx;'>使用“热点投屏”过程中请遵守相关法律法规，不得实施任何侵害国家利益、损害其他公民合法权益，有害社会道德风尚的行为。</label>
+        <label class='link_relief'>
+          <navigator url="/pages/forscreen/relief" style='font-size: 30rpx;'>免责声明</navigator>
+        </label>
+      </view>
+      <view>
+        <button class='savor-btn' bindtap='closeAuth' style='background-color: #932c3f; width: 50%; border-radius: 40rpx;'>微信授权登录</button>
+      </view>
+    </view>
+  </modal>
+</template>

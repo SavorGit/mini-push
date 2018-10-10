@@ -1,5 +1,4 @@
 /** /pages/forscreen/forscreen.wxss**/
-@import "../template/navigation.wxss";
 
 /* ================================== 输入验证码页面 ================================== */
 
