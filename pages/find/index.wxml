@@ -53,7 +53,7 @@
       </view>
       <view class='con_bottom'>
         <view class='hotel_info font_666666_24'>
-          <label class='time'>刚刚</label>
+          <label class='time'>{{bean.create_time}}</label>
           <label class='dot' wx:if="{{bean.is_pub_hotelinfo==1}}">.</label>
           <label class='hotel_name' wx:if="{{bean.is_pub_hotelinfo==1}}">{{bean.hotel_name}}</label>
         </view>
