@@ -55,10 +55,28 @@ Page({
             fail: function (e) {
               wx.setStorage({
                 key: 'savor_user_info',
-                data: { 'openid': openid },
+                data: { 'openid': app.globalData.openid },
               })
             }
           })
+        },
+        fail: function () {
+          wx.request({
+            url: 'https://mobile.littlehotspot.com/smallapp/User/register',
+            data: {
+              "openid": app.globalData.openid,
+
+            },
+            header: {
+              'content-type': 'application/json'
+            },
+            success: function () {
+              wx.setStorage({
+                key: 'savor_user_info',
+                data: { 'openid': app.globalData.openid },
+              })
+            }
+          });
         }
       });
       wx.request({
@@ -101,7 +119,7 @@ Page({
               wx.request({
                 url: 'https://mobile.littlehotspot.com/smallapp/User/register',
                 data: {
-                  "openid": app.globalData.openid,
+                  "openid": openid,
                   "avatarUrl": res.userInfo.avatarUrl,
                   "nickName": res.userInfo.nickName,
                   "gender": res.userInfo.gender
@@ -118,6 +136,19 @@ Page({
               })
             },
             fail: function (e) {
+              wx.request({
+                url: 'https://mobile.littlehotspot.com/smallapp/User/register',
+                data: {
+                  "openid": openid,
+
+                },
+                header: {
+                  'content-type': 'application/json'
+                },
+                success: function () {
+
+                }
+              });
               wx.setStorage({
                 key: 'savor_user_info',
                 data: { 'openid': openid },
@@ -401,7 +432,7 @@ Page({
   //收藏资源
   onCollect: function (e) {
     var that = this;
-    //var openid = e.target.dataset.openid;
+    var openid = e.target.dataset.openid;
     var res_id = e.target.dataset.res_id;
     var res_key = e.target.dataset.res_key;
     wx.request({
@@ -453,6 +484,7 @@ Page({
     var that = this;
     var res_id = e.target.dataset.res_id;
     var res_key = e.target.dataset.res_key;
+    var openid  = e.target.dataset.openid;
     wx.request({
       url: 'https://mobile.littlehotspot.com/Smallapp/collect/recLogs',
       header: {
@@ -497,6 +529,63 @@ Page({
       }
     })
   },//取消收藏结束
+  //点击分享按钮
+  onShareAppMessage: function (res) {
+    var that = this;
+    var res_id = res.target.dataset.res_id;
+    var res_key = res.target.dataset.res_key;
+    var res_type = res.target.dataset.res_type;
+    var openid   = res.target.dataset.openid;
+    var pubdetail = res.target.dataset.pubdetail;
+    
+    if(res_type==1){
+      var img_url = pubdetail[0]['res_url'];
+    }else {
+      var img_url = pubdetail[0]['vide_img'];
+    }
+
+    if (res.from === 'button') {
+      // 来自页面内转发按钮
+      return {
+        title: '发现一个好玩的东西',
+        path: '/pages/find/index',
+        imageUrl: img_url,
+        success: function (res) {
+          // 转发成功
+          wx.request({
+            url: 'https://mobile.littlehotspot.com/Smallapp/share/recLogs',
+            header: {
+              'content-type': 'application/json'
+            },
+            data: {
+              'openid': openid,
+              'res_id': res_id,
+              'type': 1,
+              'status': 1,
+            },
+            success: function (e) {
+              for (var i = 0; i < discovery_list.length; i++) {
+                if (i == res_key) {
+                  discovery_list[i].share_num++;
+                }
+              }
+              that.setData({
+                discovery_list: discovery_list
+              })
+
+            },
+            fial: function ({ errMsg }) {
+              wx.showToast({
+                title: '网络异常，请稍后重试',
+                icon: 'none',
+                duration: 2000
+              })
+            }
+          })
+        },
+      }
+    }
+  },// 分享结束
 
   /**
    * 生命周期函数--监听页面初次渲染完成
@@ -539,11 +628,4 @@ Page({
   onReachBottom: function () {
 
   },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-
-  }
 })

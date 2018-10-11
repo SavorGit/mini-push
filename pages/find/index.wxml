@@ -59,12 +59,15 @@
         </view>
         <view class='operation'>
           <view wx:if="{{bean.is_collect=='1'}}">
-            <image src='http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/icon/red_heart.png' bindtap='cancCollect' data-res_id="{{bean.forscreen_id}}" data-res_key="{{index}}"></image>
-            <label class='font_333333_26'>100</label>
+            <button bindtap='cancCollect' data-res_id="{{bean.forscreen_id}}" data-openid="{{openid}}" data-res_key="{{index}}">
+            <image src='http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/icon/red_heart.png' ></image>
+            <label class='font_333333_26'>{{bean.collect_num}}</label>
+            </button>
           </view>
+          
           <view wx:else>
-            <button>
-              <image src='http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/icon/grey_heart.png' bindtap='onCollect' data-res_id="{{bean.forscreen_id}}" data-res_key="{{index}}"></image>
+            <button bindtap='onCollect' data-res_id="{{bean.forscreen_id}}" data-openid="{{openid}}" data-res_key="{{index}}">
+              <image src='http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/icon/grey_heart.png' ></image>
               <label class='font_333333_26'>{{bean.collect_num}}</label>
             </button>
           </view>
@@ -75,7 +78,7 @@
             </button>
           </view>-->
           <view>
-            <button open-type='share' data-res_id="{{bean.forscreen_id}}" data-res_key="{{index}}" data-video_url="{{bean.tx_url}}" data-video_name="{{bean.title}}" data-video_img='{{bean.img_url}}'>
+            <button open-type='share' data-res_id="{{bean.forscreen_id}}" data-res_key="{{index}}" data-pubdetail="{{bean.pubdetail}}" data-openid="{{openid}}" data-res_type="{{bean.res_type}}">
               <image src='http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/icon/grey_share.png'></image>
               <label class='font_333333_26'>{{bean.share_num}}</label>
             </button>

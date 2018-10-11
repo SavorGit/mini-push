@@ -54,6 +54,24 @@ Page({
               })
             }
           })
+        },
+        fail: function () {
+          wx.request({
+            url: 'https://mobile.littlehotspot.com/smallapp/User/register',
+            data: {
+              "openid": app.globalData.openid,
+
+            },
+            header: {
+              'content-type': 'application/json'
+            },
+            success: function () {
+              wx.setStorage({
+                key: 'savor_user_info',
+                data: { 'openid': app.globalData.openid },
+              })
+            }
+          });
         }
       });
       
@@ -87,6 +105,19 @@ Page({
               })
             },
             fail: function (e) {
+              wx.request({
+                url: 'https://mobile.littlehotspot.com/smallapp/User/register',
+                data: {
+                  "openid": openid,
+
+                },
+                header: {
+                  'content-type': 'application/json'
+                },
+                success: function () {
+
+                }
+              });
               wx.setStorage({
                 key: 'savor_user_info',
                 data: { 'openid': openid },

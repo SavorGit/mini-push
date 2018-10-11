@@ -65,7 +65,7 @@
               <label class='font_333333_26'>100</label>
             </view>-->
             <view>
-              <button open-type='share' data-res_id="{{bean.id}}" data-res_key="{{index}}" data-video_url="{{bean.tx_url}}" data-video_name="{{bean.title}}" data-video_img='{{bean.img_url}}'>
+              <button open-type='share' data-openid="{{openid}}" data-res_id="{{bean.id}}" data-res_key="{{index}}" data-video_url="{{bean.tx_url}}" data-video_name="{{bean.title}}" data-video_img='{{bean.img_url}}'>
                 <image src='http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/icon/grey_share.png'></image>
                 <label class='font_333333_26'>{{bean.share_num}}</label>
               </button>

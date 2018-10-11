@@ -52,10 +52,28 @@ Page({
             fail: function (e) {
               wx.setStorage({
                 key: 'savor_user_info',
-                data: { 'openid': openid },
+                data: { 'openid': app.globalData.openid },
               })
             }
           })
+        },
+        fail:function(){
+          wx.request({
+            url: 'https://mobile.littlehotspot.com/smallapp/User/register',
+            data: {
+              "openid": app.globalData.openid,
+
+            },
+            header: {
+              'content-type': 'application/json'
+            },
+            success:function(){
+              wx.setStorage({
+                key: 'savor_user_info',
+                data: { 'openid': app.globalData.openid },
+              })
+            }
+          });
         }
       });
       wx.request({
@@ -88,7 +106,7 @@ Page({
               wx.request({
                 url: 'https://mobile.littlehotspot.com/smallapp/User/register',
                 data: {
-                  "openid": app.globalData.openid,
+                  "openid": openid,
                   "avatarUrl": res.userInfo.avatarUrl,
                   "nickName": res.userInfo.nickName,
                   "gender": res.userInfo.gender
@@ -105,6 +123,19 @@ Page({
               })
             },
             fail: function (e) {
+              wx.request({
+                url: 'https://mobile.littlehotspot.com/smallapp/User/register',
+                data: {
+                  "openid": openid,
+
+                },
+                header: {
+                  'content-type': 'application/json'
+                },
+                success: function () {
+                  
+                }
+              });
               wx.setStorage({
                 key: 'savor_user_info',
                 data: { 'openid': openid },
@@ -390,6 +421,7 @@ Page({
   //点击分享按钮
   onShareAppMessage: function (res) {
     var that = this;
+    var openid = res.target.dataset.openid;
     var res_id = res.target.dataset.res_id;
     var res_key = res.target.dataset.res_key;
     var video_url = res.target.dataset.video_url;
