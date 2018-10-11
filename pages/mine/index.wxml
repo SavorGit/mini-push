@@ -4,10 +4,12 @@
   <scroll-view class='page_main' scroll-y="true" scroll-with-animation="true" bindscrolltolower="loadMore" data-openid='{{openid}}'>
     <view class='user'>
       <view class='head'>
-        <image src="{{userinfo.avatarUrl}}" lazy-load='http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/icon/grey_interact.png'></image>
+        <image wx:if="{{userinfo.avatarUrl ==''}}" src="http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default_user_head.png" lazy-load='http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/icon/grey_interact.png'></image>
+         <image wx:else src="{{userinfo.avatarUrl}}" lazy-load='http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/icon/grey_interact.png'></image>
       </view>
       <view class='info'>
-        <label class='font_333333_36'>{{userinfo.nickName}}</label>
+        <label class='font_333333_36' wx:if="{{userinfo.nickName ==''}}">热点用户</label>
+        <label class='font_333333_36' wx:else>{{userinfo.nickName}}</label>
         <label class='font_666666_24'>ID:{{userinfo.id}}</label>
       </view>
     </view>

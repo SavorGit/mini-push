@@ -114,14 +114,14 @@ Page({
                 header: {
                   'content-type': 'application/json'
                 },
-                success: function () {
-
+                success: function (res) {
+                  wx.setStorage({
+                    key: 'savor_user_info',
+                    data: { 'openid': openid },
+                  })
                 }
               });
-              wx.setStorage({
-                key: 'savor_user_info',
-                data: { 'openid': openid },
-              })
+              
             }
           });
           
