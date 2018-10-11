@@ -469,6 +469,7 @@ Page({
       }
     }
   },// 分享结束
+  //查看视频播放记录日志
   demandLog:function(res){
     var openid = res.currentTarget.dataset.openid;
     var box_mac = res.currentTarget.dataset.box_mac;

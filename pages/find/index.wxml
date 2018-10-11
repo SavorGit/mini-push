@@ -37,7 +37,7 @@
 
         <view class="video" wx:if="{{bean.res_type == 2 }}">
           <view wx:for="{{bean.pubdetail}}" wx:key="pkey" wx:for-item="item" wx:for-index="indexs">
-            <navigator url="/pages/forscreen/video/launch_video?video_url={{item.res_url}}&video_name=">
+            <navigator bindtap='findLog' data-openid='{{openid}}' data-box_mac='{{box_mac}}' data-title='' data-tx_url='{{item.forscreen_url}}' data-id='{{bean.forscreen_id}}' data-duration="{{item.duration}}" url="/pages/forscreen/video/launch_video?video_url={{item.res_url}}&video_name=">
               <image mode='aspectFill' src="{{item.vide_img}}"></image>
             </navigator>
             <view class="cover">

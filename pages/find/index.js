@@ -589,7 +589,43 @@ Page({
       }
     }
   },// 分享结束
-
+  //查看视频播放记录日志
+  findLog: function (res) {
+    var openid = res.currentTarget.dataset.openid;
+    var box_mac = res.currentTarget.dataset.box_mac;
+    var mobile_brand = app.globalData.mobile_brand;
+    var mobile_model = app.globalData.mobile_model;
+    var forscreen_char = res.currentTarget.dataset.title;
+    var imgs = res.currentTarget.dataset.tx_url;
+    var resource_id = res.currentTarget.dataset.id
+    var timestamp = (new Date()).valueOf();
+    var duration = res.currentTarget.dataset.duration;
+    wx.request({
+      url: 'https://mobile.littlehotspot.com/Smallapp/index/recordForScreenPics',
+      header: {
+        'content-type': 'application/json'
+      },
+      data: {
+        openid: openid,
+        box_mac: box_mac,
+        action: 22,
+        resource_type: 2,
+        mobile_brand: mobile_brand,
+        mobile_model: mobile_model,
+        forscreen_char: forscreen_char,
+        imgs: '["' + imgs + '"]',
+        resource_id: resource_id,
+        res_sup_time: 0,
+        res_eup_time: 0,
+        resource_size: 0,
+        is_pub_hotelinfo: 0,
+        is_share: 0,
+        forscreen_id: timestamp,
+        duration: duration,
+      },
+    });
+  },
+  //记录日志结束
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
