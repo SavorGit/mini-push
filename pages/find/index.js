@@ -443,7 +443,7 @@ Page({
       data: {
         'openid': openid,
         'res_id': res_id,
-        'type': 1,
+        'type': 2,
         'status': 1,
       },
       success: function (e) {
@@ -493,7 +493,7 @@ Page({
       data: {
         'openid': openid,
         'res_id': res_id,
-        'type': 1,
+        'type': 2,
         'status': 0,
       },
       success: function (e) {

@@ -57,11 +57,11 @@
           <view class='operation'>
             <view wx:if="{{collect=='1'}}">
               <image src='http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/icon/red_heart.png'></image>
-              <label class='font_333333_26'>100</label>
+              <label class='font_333333_26'>{{bean.collect_num}}</label>
             </view>
             <view wx:else>
               <image src='http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/icon/grey_heart.png'></image>
-              <label class='font_333333_26'>100</label>
+              <label class='font_333333_26'>{{bean.collect_num}}</label>
             </view>
             <!--<view>
               <image src='http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/icon/grey_comment.png'></image>
