@@ -41,7 +41,7 @@
           </view>
           <view class="video" wx:else>
             <navigator url="/pages/forscreen/video/launch_video?video_url={{bean.list.res_url}}&video_name=">
-              <image mode='aspectFill' src="http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
+              <image mode='aspectFill' src="{{bean.list.imgurl}}"></image>
             </navigator>
             <view class="cover">
               <navigator url="/pages/forscreen/video/launch_video?video_url={{bean.list.res_url}}&video_name=">
