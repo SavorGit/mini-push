@@ -38,7 +38,7 @@
           <navigator url="/pages/forscreen/video/launch_video?video_url={{bean.tx_url}}&video_name={{bean.title}}">
             <image src='{{bean.img_url}}'></image>
           </navigator>
-          <navigator class='full' url="/pages/forscreen/video/launch_video?video_url={{bean.tx_url}}&video_name={{bean.title}}">
+          <navigator bindtap='demandLog' data-openid='{{openid}}' data-box_mac='{{box_mac}}' data-title='{{bean.title}}' data-tx_url='{{bean.tx_url}}' data-id='{{bean.id}}' data-duration="{{bean.duration}}" class='full' url="/pages/forscreen/video/launch_video?video_url={{bean.tx_url}}&video_name={{bean.title}}">
             <label class='font_F6F6F6_28'>{{bean.title}}</label>
             <view class='play'>
               <image src='http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/icon/white_play.png'></image>
