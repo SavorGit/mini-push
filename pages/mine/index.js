@@ -65,10 +65,10 @@ Page({
             header: {
               'content-type': 'application/json'
             },
-            success: function () {
+            success: function (res) {
               wx.setStorage({
                 key: 'savor_user_info',
-                data: { 'openid': app.globalData.openid },
+                data: { 'openid': app.globalData.openid, 'avatarUrl': 'http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default_user_head.png', 'nickName': '热点用户', 'user_id': res.data.result },
               })
             }
           });
