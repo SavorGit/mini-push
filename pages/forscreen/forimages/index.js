@@ -31,7 +31,8 @@ Page({
       
     ],
     is_pub_hotelinfo:1,  //是否公开酒楼信息
-    is_share :1          //是否分享到发现栏目
+    is_share :1,          //是否分享到发现栏目
+    is_btn_disabel:false,
   },
   /**
    * 生命周期函数--监听页面加载
@@ -134,8 +135,11 @@ Page({
   },//重新选择照片结束
 
   up_forscreen(e) {//多张图片投屏开始(不分享到发现)
-    console.log(e);
+
     var that = this;
+    that.setData({
+      is_btn_disabel:true,
+    })
     img_lenth = e.detail.value.img_lenth;
     openid = e.detail.value.openid;
     box_mac = e.detail.value.box_mac;

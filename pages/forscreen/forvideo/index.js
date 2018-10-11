@@ -26,7 +26,8 @@ Page({
 
     ],
     is_pub_hotelinfo: 1,  //是否公开酒楼信息
-    is_share: 1          //是否分享到发现栏目
+    is_share: 1 ,         //是否分享到发现栏目
+    is_btn_disabel:false,
   },
 
   /**
@@ -67,6 +68,9 @@ Page({
 
   forscreen_video: function (res) {
     var that= this;
+    that.setData({
+      is_btn_disabel:true,
+    })
     var video = res.target.dataset.video;
     var box_mac = res.target.dataset.box_mac;
     var openid = res.target.dataset.openid;
