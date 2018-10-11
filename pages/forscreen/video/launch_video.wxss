@@ -6,12 +6,17 @@
   width: 100vw;
 }
 
-.article > .video {
-  margin: 280rpx 0 0 0;
+.article > .video, .article > .video::before, .article > .video::after {
+  margin: 280rpx 0rpx -10rpx 0rpx;
+  padding: unset;
+  border: unset;
   width: 100%;
 }
 
 .article > .video > video {
+  margin: unset;
+  padding: unset;
+  border: unset;
   width: 100%;
 }
 
