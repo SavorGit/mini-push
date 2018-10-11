@@ -2,6 +2,8 @@
 <import src="../template/navigation.wxml" />
 <view class="container">
   <scroll-view class='page_main' scroll-y="true" scroll-with-animation="true" bindscrolltolower="loadMore" data-openid='{{openid}}'>
+
+    <!--
     <view class='user'>
       <view class='head'>
         <image src="{{userinfo.avatarUrl}}" lazy-load='http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/icon/grey_interact.png'></image>
@@ -12,11 +14,14 @@
       </view>
     </view>
 
-    <!-- 选项卡开始 -->
+    <!-- 选项卡开始
     <view class='swiper-tab font_333333_28'>
       <navigator class="swiper-tab-item" open-type='reLaunch' url='/pages/mine/index'>我的公开</navigator>
       <view class="swiper-tab-item active">我的收藏</view>
     </view>
+    -->
+
+
     <view>
       <!--循环开始 -->
       <view class='content content_bottom_border' wx:for="{{sharelist}}" wx:key="key" wx:for-item="bean" wx:for-index="index">

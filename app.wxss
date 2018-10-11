@@ -9,7 +9,8 @@
 }
 
 .nav_bottom_space {
-  height: 61rpx;
+  /* height: 61rpx; */
+  height: 8rpx;
 }
 
 .container {

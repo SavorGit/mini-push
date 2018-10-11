@@ -14,6 +14,7 @@
     "pages/find/index",
     "pages/interact/index",
     "pages/message/index",
+    "pages/mine/index_20181010",
     "pages/mine/index",
     "pages/mine/favorite",
     "pages/demand/index"
@@ -55,7 +56,7 @@
         "selectedIconPath": "images/icon/red_msg.png"
       },
       {
-        "pagePath": "pages/mine/index",
+        "pagePath": "pages/mine/index_20181010",
         "text": "我的",
         "iconPath": "images/icon/grey_mine.png",
         "selectedIconPath": "images/icon/red_mine.png"
