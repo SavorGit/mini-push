@@ -193,6 +193,7 @@ Page({
       })
     }
   },
+  
   //选择照片上电视
   chooseImage(e) {
     var that = this;
