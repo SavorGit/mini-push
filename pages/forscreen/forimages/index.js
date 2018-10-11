@@ -91,6 +91,9 @@ Page({
 
   chooseImage(e) {//重新选择照片开始
     var that = this;
+    that.setData({
+      is_btn_disabel: false
+    })
     openid = e.currentTarget.dataset.openid;
     box_mac = e.currentTarget.dataset.boxmac;
     

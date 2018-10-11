@@ -197,6 +197,9 @@ Page({
   //重新选择视频
   chooseVedio(e) {
     var that = this
+    that.setData({
+      is_btn_disabel:false
+    })
     var box_mac = e.currentTarget.dataset.boxmac;
     var openid = e.currentTarget.dataset.openid;
     

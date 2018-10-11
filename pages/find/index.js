@@ -197,6 +197,9 @@ Page({
         }
       })
     }
+    var user_info = wx.getStorageSync("savor_user_info");
+
+    openid = user_info.openid;
     //获取发现列表
     wx.request({
       url: 'https://mobile.littlehotspot.com/smallapp/Discovery/index',
