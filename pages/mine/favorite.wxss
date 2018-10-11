@@ -2,7 +2,8 @@
 
 .page_main {
   width: 100%;
-  height: calc(100% - 138rpx);
+  /* height: calc(100% - 138rpx); */
+  height: 100%;
 }
 
 .user {

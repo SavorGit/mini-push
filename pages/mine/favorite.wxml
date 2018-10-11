@@ -86,7 +86,10 @@
     <!-- 选项卡结束 -->
 
   </scroll-view>
+
+  <!-- 菜单 
   <template is="bottomNavigation" data='{{selectPage:"MINE"}}' />
+  -->
 </view>
 
 <!-- 弹窗 -->

@@ -29,5 +29,7 @@
       </view>
     </view>
   </view>
+  <!-- 菜单 
   <template is="bottomNavigation" data='{{selectPage:"INTERACT"}}' />
+  -->
 </view>

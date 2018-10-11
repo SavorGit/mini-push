@@ -92,5 +92,8 @@
     <view class='nav_bottom_space'></view>
 
   </scroll-view>
+
+  <!-- 菜单 
   <template is="bottomNavigation" data='{{selectPage:"FIND"}}' />
+  -->
 </view>

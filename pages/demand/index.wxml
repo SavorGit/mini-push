@@ -84,8 +84,9 @@
     <view class='nav_bottom_space'></view>
   </scroll-view>
 
-  <!-- 菜单 -->
+  <!-- 菜单 
   <block wx:if="{{showView}}">
     <template is="bottomNavigation" data="{{selectPage:'INDEX'}}" />
   </block>
+  -->
 </view>

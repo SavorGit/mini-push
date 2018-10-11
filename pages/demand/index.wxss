@@ -1,61 +1,5 @@
 /**index.wxss**/
 
-/* .userinfo {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.userinfo-avatar {
-  width: 128rpx;
-  height: 128rpx;
-  margin: 20rpx;
-  border-radius: 50%;
-}
-
-.userinfo-nickname {
-  color: #aaa;
-}
-
-.usermotto {
-  margin-top: 200px;
-} */
-
-/*.scan_container{
-  padding: 200rpx 0;
-}
-
-image.top_tip{
-  width:448rpx;
-  height:34rpx;
-  margin-top:-110rpx;
-  margin-bottom:36rpx;
-}
-
-image.scan_twd{
-  width:340rpx;
-  height:340rpx;
-  margin-top:200rpx;
-  margin-bottom:40rpx;
-}
-
-view.bottom_tip{
-  margin-top:24rpx;
-  margin-bottom: 10rpx;
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  font-size:32rpx;
-  color: #333333;
-}
-
-label.label_text{
-  margin-top: 8rpx;
-  margin-bottom: 8rpx;
-}*/
-
-/** /pages/forscreen/forscreen.wxss**/
-
 /* ================================== 输入验证码页面 ================================== */
 
 .content {
@@ -107,7 +51,8 @@ label.input_tip {
 
 .scroll_container {
   width: 100%;
-  height: calc(100vh - 138rpx);
+  /* height: calc(100vh - 138rpx); */
+  height: 100%;
 }
 
 swiper {

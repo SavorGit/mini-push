@@ -23,5 +23,43 @@
     "navigationBarBackgroundColor": "#932c3f",
     "navigationBarTitleText": "热点投屏",
     "navigationBarTextStyle": "#932c3f"
+  },
+  "tabBar": {
+    "color": "#333333",
+    "selectedColor": "#932C3F",
+    "backgroundColor": "#f6f3ee",
+    "borderStyle": "white",
+    "list": [
+      {
+        "pagePath": "pages/demand/index",
+        "text": "首页",
+        "iconPath": "/images/icon/grey_home.png",
+        "selectedIconPath": "/images/icon/red_home.png"
+      },
+      {
+        "pagePath": "pages/find/index",
+        "text": "发现",
+        "iconPath": "images/icon/grey_find.png",
+        "selectedIconPath": "images/icon/red_find.png"
+      },
+      {
+        "pagePath": "pages/index/index",
+        "text": "电视互动",
+        "iconPath": "images/icon/grey_interact.png",
+        "selectedIconPath": "images/icon/red_interact.png"
+      },
+      {
+        "pagePath": "pages/message/index",
+        "text": "消息",
+        "iconPath": "images/icon/grey_msg.png",
+        "selectedIconPath": "images/icon/red_msg.png"
+      },
+      {
+        "pagePath": "pages/mine/index",
+        "text": "我的",
+        "iconPath": "images/icon/grey_mine.png",
+        "selectedIconPath": "images/icon/red_mine.png"
+      }
+    ]
   }
 }
