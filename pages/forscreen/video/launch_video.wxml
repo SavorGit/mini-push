@@ -9,5 +9,8 @@
     <view class='title'>
       <label>{{video_name}}</label>
     </view>
+    <view style='margin-top: 50rpx; text-align: center;'>
+      <navigator class='link_relief font_932C3F_24' open-type='reLaunch'  url='/pages/demand/index'>更多...</navigator>
+    </view>
   </view>
 </view>
