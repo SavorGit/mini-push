@@ -20,7 +20,7 @@
     "pages/demand/index"
   ],
   "window": {
-    "backgroundTextStyle": "light",
+    "backgroundTextStyle": "dark",
     "navigationBarBackgroundColor": "#932c3f",
     "navigationBarTitleText": "热点投屏",
     "navigationBarTextStyle": "#932c3f"
