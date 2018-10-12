@@ -21,12 +21,12 @@ Page({
     //upload_vedio_img_temp:'',
     vedio_percent: 0,
     item: [
-      { 'name': '公开时显示餐厅信息', 'value': '1', 'checked': false, 'disabled': false },
+      { 'name': '公开时显示餐厅信息', 'value': '1', 'checked': true, 'disabled': false },
       { 'name': '公开发表，公众可见', 'value': '2', 'checked': false, 'disabled': false },
 
     ],
     is_pub_hotelinfo: 1,  //是否公开酒楼信息
-    is_share: 1 ,         //是否分享到发现栏目
+    is_share: 0 ,         //是否分享到发现栏目
     is_btn_disabel:false,
   },
 

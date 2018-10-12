@@ -39,8 +39,13 @@
         <label class='grant_auth'>
           <!--<checkbox checked="true">公开时显示餐厅信息</checkbox>-->
           <checkbox-group class="checkbox-group" bindchange="checkboxChange">
-            <label class="items" wx:for="{{item}}" wx:key="key">
-              <checkbox value="{{item.value}}" checked="{{item.checked}}" disabled="{{item.disabled}}">{{item.name}}</checkbox>
+            <label class="items" wx:for="{{item}}" wx:key="key" wx:for-index="index">
+              <view wx:if="{{index==0}}">
+              <checkbox class="display_hide"  value="{{item.value}}" checked="{{item.checked}}" disabled="{{item.disabled}}">{{item.name}}</checkbox>  
+              </view>
+              <view wx:else>
+              <checkbox   value="{{item.value}}" checked="{{item.checked}}" disabled="{{item.disabled}}">{{item.name}}</checkbox>  
+              </view>
             </label>
           </checkbox-group>
         </label>

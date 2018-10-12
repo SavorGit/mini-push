@@ -255,6 +255,7 @@ Page({
       method: "POST",
       success: function (res) {
         if (res.data.code == 10000) {
+          discovery_list = res.data.result,
           that.setData({
             discovery_list: res.data.result,
             hiddens: true,
@@ -450,10 +451,11 @@ Page({
         'status': 1,
       },
       success: function (e) {
+        var collect_nums = e.data.result.nums;
         for (var i = 0; i < discovery_list.length; i++) {
           if (i == res_key) {
             discovery_list[i].is_collect = 1;
-            discovery_list[i].collect_num++;
+            discovery_list[i].collect_num = collect_nums;
           }
         }
         that.setData({
@@ -500,10 +502,11 @@ Page({
         'status': 0,
       },
       success: function (e) {
+        var collect_nums = e.data.result.nums;
         for (var i = 0; i < discovery_list.length; i++) {
           if (i == res_key) {
             discovery_list[i].is_collect = 0;
-            discovery_list[i].collect_num--;
+            discovery_list[i].collect_num = collect_nums;
           }
         }
         that.setData({
