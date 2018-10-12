@@ -6,10 +6,17 @@
   height: 100%;
 }
 
-.user {
+.page_top {
   height: 190rpx;
   line-height: 190rpx;
-  display: block;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.user {
+  width: 50%;
+  height: 100%;
 }
 
 .user > view {
@@ -45,6 +52,41 @@
   height: 36rpx;
   padding: 10rpx 0rpx 10rpx 0rpx;
   display: block;
+}
+
+.right {
+  width: 50%;
+  height: 100%;
+  line-height: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.right .flush, .right .flush::before, .right .flush::after {
+  margin: unset;
+  padding: unset;
+  border: unset;
+  width: 60rpx;
+  height: 90rpx;
+  margin-top: 3rpx;
+  margin-right: 20rpx;
+  background-color: unset;
+  line-height: unset;
+}
+
+.right .flush > view {
+  margin: unset;
+  padding: unset;
+  border: unset;
+  width: 40rpx;
+  height: 40rpx;
+}
+
+.right .flush image {
+  width: 40rpx;
+  height: 40rpx;
 }
 
 /* =============== 选项卡开始 =============== */
