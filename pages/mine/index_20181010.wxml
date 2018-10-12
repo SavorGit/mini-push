@@ -19,37 +19,23 @@
       <view class='swiper-tab font_333333_28'>
         <view class="swiper-tab-item active">我的公开</view>
 
-        <!-- 如果没有数据更多不显示 
-        <navigator class="swiper-tab-item font_333333_24" style='margin-left: 340rpx;margin-right: 0rpx;' url='/pages/mine/index'>查看更多>></navigator>-->
+        <!-- 如果没有数据更多不显示 -->
+        <navigator wx:if="{{publiclist  !=''}}" class="swiper-tab-item font_333333_24" style='margin-left: 340rpx;margin-right: 0rpx;' url='/pages/mine/index'>查看更多>></navigator>
       </view>
       <view class='content'>
         <view class='con_main'>
 
-          <!-- 有数据时
-          <view class="weui-grids">
-            <view class="weui-grid">
-              <image class="pic_show" mode='aspectFill' src="http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
+          <!-- 有数据时-->
+          <view class="weui-grids" wx:if="{{publiclist  !=''}}">
+            <view class="weui-grid"  wx:for="{{publiclist}}" wx:key="key" wx:for-item="bean" wx:for-index="index">
+              <image class="pic_show" mode='aspectFill' src="{{bean.imgurl}}"></image>
             </view>
-            <view class="weui-grid">
-              <image class="pic_show" mode='aspectFill' src="http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
-            </view>
-            <view class="weui-grid">
-              <image class="pic_show" mode='aspectFill' src="http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
-            </view>
-            <view class="weui-grid">
-              <image class="pic_show" mode='aspectFill' src="http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
-            </view>
-            <view class="weui-grid">
-              <image class="pic_show" mode='aspectFill' src="http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
-            </view>
-            <view class="weui-grid">
-              <image class="pic_show" mode='aspectFill' src="http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
-            </view>
+            
           </view>
-          -->
+          
 
           <!-- 无数据 -->
-          <view class="row-center">
+          <view class="row-center" wx:else>
             <view>
               <image style='width: 44rpx;height: 64rpx;' src='http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default_mine.png'></image>
             </view>
@@ -71,35 +57,21 @@
         <view class="swiper-tab-item active">我的收藏</view>
 
         <!-- 如果没有数据更多不显示 -->
-        <navigator class="swiper-tab-item font_333333_24" style='margin-left: 340rpx;margin-right: 0rpx;' url='/pages/mine/favorite'>查看更多>></navigator>
+        <navigator wx:if="{{collectlist  !=''}}"  class="swiper-tab-item font_333333_24" style='margin-left: 340rpx;margin-right: 0rpx;' url='/pages/mine/favorite'>查看更多>></navigator>
       </view>
       <view class='content content_bottom_border'>
         <view class='con_main'>
 
           <!-- 有数据时 -->
-          <view class="weui-grids">
-            <view class="weui-grid">
-              <image class="pic_show" mode='aspectFill' src="http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
+          <view class="weui-grids" wx:if="{{collectlist  !=''}}">
+            <view class="weui-grid" wx:for="{{collectlist}}" wx:key="key" wx:for-item="bean" wx:for-index="index">
+              <image class="pic_show" mode='aspectFill' src="{{bean.imgurl}}"></image>
             </view>
-            <view class="weui-grid">
-              <image class="pic_show" mode='aspectFill' src="http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
-            </view>
-            <view class="weui-grid">
-              <image class="pic_show" mode='aspectFill' src="http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
-            </view>
-            <view class="weui-grid">
-              <image class="pic_show" mode='aspectFill' src="http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
-            </view>
-            <view class="weui-grid">
-              <image class="pic_show" mode='aspectFill' src="http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
-            </view>
-            <view class="weui-grid">
-              <image class="pic_show" mode='aspectFill' src="http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
-            </view>
+            
           </view>
 
-          <!-- 无数据 
-          <view class="row-center">
+          <!--无数据 -->
+          <view class="row-center" wx:else>
             <view>
               <image style='width: 44rpx;height: 64rpx;' src='http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default_mine.png'></image>
             </view>
@@ -107,7 +79,6 @@
               <label class='font_666666_24'>您还没有收藏内容</label>
             </view>
           </view>
-          -->
 
         </view>
 

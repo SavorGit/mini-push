@@ -59,11 +59,17 @@
           <label class='hotel_name' wx:if="{{bean.is_pub_hotelinfo==1}}">{{bean.hotel_name}}</label>
         </view>
         <view class='operation'>
-          <view >
+          <view wx:if="{{bean.is_collect=='1'}}">
             <button bindtap='cancCollect' data-res_id="{{bean.forscreen_id}}" data-openid="{{openid}}" data-res_key="{{index}}">
-            <image wx:if='{{bean.is_collects==1}}' src='http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/icon/red_heart.png' ></image>
-            <image wx:else  src='http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/icon/grey_heart.png' ></image>
+            <image src='http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/icon/red_heart.png' ></image>
             <label class='font_333333_26'>{{bean.collect_num}}</label>
+            </button>
+          </view>
+          
+          <view wx:else>
+            <button bindtap='onCollect' data-res_id="{{bean.forscreen_id}}" data-openid="{{openid}}" data-res_key="{{index}}">
+              <image src='http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/icon/grey_heart.png' ></image>
+              <label class='font_333333_26'>{{bean.collect_num}}</label>
             </button>
           </view>
           
