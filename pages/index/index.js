@@ -305,7 +305,7 @@ Page({
           wx.showToast({
             title: '点播成功,电视即将开始播放',
             icon: 'none',
-            duration: 2000
+            duration: 5000
           });
           wx.request({
             url: 'https://mobile.littlehotspot.com/Smallapp/index/recordForScreenPics',

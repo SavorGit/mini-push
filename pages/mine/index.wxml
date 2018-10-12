@@ -79,11 +79,11 @@
               <!--<view>
               <image src='http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/icon/grey_comment.png'></image>
               <label class='font_333333_26'>100</label>
-            </view>
+            </view>-->
             <view>
               <image src='http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/icon/grey_share.png'></image>
               <label class='font_333333_26'>{{bean.share_num}}</label>
-            </view>-->
+            </view>
             </view>
           </view>
         </view>
