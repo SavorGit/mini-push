@@ -77,6 +77,7 @@ Page({
         success: function (res) {
           
           if (res.data.is_right == 0) {
+            
             //刷新页面
           } else if (res.data.is_right == 1) {
             wx.showToast({
@@ -98,8 +99,16 @@ Page({
               showCode: (!that.data.showCode),
               isFocus:false
             })*/
-            wx.navigateBack({
+            /**wx.navigateBack({
               delta: 1
+            })**/
+            wx.switchTab({
+              url: '../index/index',
+              success: function (e) {
+                var page = getCurrentPages().pop();
+                if (page == undefined || page == null) return;
+                page.onLoad();
+              }
             })
           }
 
@@ -143,6 +152,14 @@ Page({
   },
   //进来加载页面：
   onLoad: function (options) {
+    wx.switchTab({
+      url: '../index/index',
+      success: function (e) {
+        var page = getCurrentPages().pop();
+        if (page == undefined || page == null) return;
+        page.onLoad();
+      }
+    });
     box_mac = decodeURIComponent(options.scene);
     var that = this
     wx.request({//获取机顶盒节目单列表
@@ -398,9 +415,20 @@ Page({
             
           }
         })
-        wx.navigateTo({
+        /*wx.navigateTo({
           url: '/pages/index/index',
-        })
+        })*/
+        /**wx.switchTab({
+          url: '../index/index',
+          success: function (e) {
+            var page = getCurrentPages().pop();
+            if (page == undefined || page == null) return;
+            page.onShow();
+          }
+        })**/
+        wx.reLaunch({
+          url: '../../index/index',
+        })  
 
       },
       fail: function (res) {
