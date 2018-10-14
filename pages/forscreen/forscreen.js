@@ -152,14 +152,14 @@ Page({
   },
   //进来加载页面：
   onLoad: function (options) {
-    wx.switchTab({
+    /*wx.switchTab({
       url: '../index/index',
       success: function (e) {
         var page = getCurrentPages().pop();
         if (page == undefined || page == null) return;
         page.onLoad();
       }
-    });
+    });*/
     box_mac = decodeURIComponent(options.scene);
     var that = this
     wx.request({//获取机顶盒节目单列表
@@ -272,7 +272,28 @@ Page({
             success: function (res) {
               //console.log(res.data.result.openid);
               //app.globalData.openid = res.data.result.openid;
+              wx.request({
+                url: 'https://mobile.littlehotspot.com/smallapp/index/isHaveCallBox',
+                data: { "openid": res.data.result.openid},
+                header: {
+                  'content-type': 'application/json'
+                },
+                success: function (rets) {
+                  if (rets.data.result.is_have==1){
+                    wx.switchTab({
+                      url: '../index/index',
+                      success: function (e) {
+                        var page = getCurrentPages().pop();
+                        if (page == undefined || page == null) return;
+                        page.onLoad();
+                      }
+                    });
+                  }
+                }
+              });
+              
               setInfos(box_mac, res.data.result.openid);
+
             }
           })
         }
