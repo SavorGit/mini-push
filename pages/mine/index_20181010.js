@@ -1,6 +1,7 @@
 // pages/mine/index_20181010.js
 const app = getApp();
 var openid;
+var box_mac;
 Page({
 
   /**
@@ -13,6 +14,7 @@ Page({
     userinfo:[],
     publiclist:[],
     collectlist:[],
+    box_mac:'',
   },
 
   /**
@@ -48,6 +50,26 @@ Page({
           })
         }
       });//判断用户是否注册结束
+      wx.request({
+        url: 'https://mobile.littlehotspot.com/Smallapp/index/isHaveCallBox?openid=' + app.globalData.openid,
+        headers: {
+          'Content-Type': 'application/json'
+        },
+
+        success: function (rest) {
+          var is_have = rest.data.result.is_have;
+          if (is_have == 1) {
+            that.setData({
+              box_mac: rest.data.result.box_mac,
+            })
+            box_mac = rest.data.result.box_mac;
+            
+          } else {
+
+          }
+
+        }
+      })
 
     } else {
       app.openidCallback = openid => {
@@ -79,6 +101,25 @@ Page({
               })
             }
           });//判断用户是否注册结束
+          wx.request({
+            url: 'https://mobile.littlehotspot.com/Smallapp/index/isHaveCallBox?openid=' + openid,
+            headers: {
+              'Content-Type': 'application/json'
+            },
+
+            success: function (rest) {
+              var is_have = rest.data.result.is_have;
+              if (is_have == 1) {
+                that.setData({
+                  is_link: 1,
+                  
+                  box_mac: rest.data.result.box_mac,
+                })
+                box_mac = rest.data.result.box_mac;
+                //getHotelInfo(rest.data.result.box_mac);
+              }
+            }
+          })
         }
       }
     }
@@ -101,7 +142,56 @@ Page({
       }
     })
   },
+  //呼大码
+  callQrCode: function (e) {
+    var user_info = wx.getStorageSync("savor_user_info");
+    openid = user_info.openid;
+    console.log(openid);
+    if (box_mac) {
+      var timestamp = (new Date()).valueOf();
+      var qrcode_url = 'https://mobile.littlehotspot.com/Smallapp/index/getBoxQr?box_mac=' + box_mac + '&type=3';
+      var mobile_brand = app.globalData.mobile_brand;
+      var mobile_model = app.globalData.mobile_model;
+      wx.request({
+        url: "https://netty-push.littlehotspot.com/push/box",
+        header: {
+          "Content-Type": "application/x-www-form-urlencoded"
+        },
+        method: "POST",
+        data: {
+          box_mac: box_mac,
+          cmd: 'call-mini-program',
+          msg: '{ "action": 9,"url":"' + qrcode_url + '"}',
+          req_id: timestamp
+        },
+        success: function () {
+          wx.showToast({
+            title: '呼玛成功，电视即将展示',
+            icon: 'none',
+            duration: 2000
+          });
+          wx.request({
+            url: 'https://mobile.littlehotspot.com/Smallapp/index/recordForScreenPics',
+            header: {
+              'content-type': 'application/json'
+            },
+            data: {
+              openid: openid,
+              box_mac: box_mac,
+              action: 9,
+              mobile_brand: mobile_brand,
+              mobile_model: mobile_model,
+              imgs: '[]'
+            },
+
+          })
+        }
+      })
+    }
+  },//呼大码结束
+
   refreshOn:function(){
+    
     this.onLoad();
   },
 

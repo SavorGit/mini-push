@@ -33,12 +33,16 @@ Page({
     is_pub_hotelinfo:1,  //是否公开酒楼信息
     is_share :0,          //是否分享到发现栏目
     is_btn_disabel:false,
+    avatarUrl:'',       //用户头像 
+    nickName:'',        //用户昵称
   },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (e) {
     var that = this;
+    var user_info = wx.getStorageSync("savor_user_info");
+
     openid = e.openid;
     box_mac = e.box_mac;
     that.setData({
@@ -47,7 +51,9 @@ Page({
       up_imgs: [],
       tmp_percent: [],
       tmp_imgs: [],
-      pic_show_cur: []
+      pic_show_cur: [],
+      avatarUrl: user_info.avatarUrl,
+      nickName: user_info.nickName
 
     });
     wx.chooseImage({
@@ -156,6 +162,8 @@ Page({
     forscreen_char = e.detail.value.forscreen_char;
     var is_pub_hotelinfo = e.detail.value.is_pub_hotelinfo;   //是否公开显示餐厅信息
     var is_share = e.detail.value.is_share;
+    var avatarUrl = e.detail.value.avatarUrl;
+    var nickName = e.detail.value.nickName;
 
 
     if (e.detail.value.upimgs0 != '' && e.detail.value.upimgs0 != undefined) upimgs[0] = e.detail.value.upimgs0;
@@ -177,10 +185,10 @@ Page({
 
         policy = rest.data.policy;
         signature = rest.data.signature;
-        uploadOss_multy(policy, signature, upimgs, box_mac, openid, img_lenth, forscreen_char);
+        uploadOss_multy(policy, signature, upimgs, box_mac, openid, img_lenth, forscreen_char, avatarUrl, nickName);
       }
     });
-    function uploadOssNew(policy, signature, img_url, box_mac, openid, timestamp, flag, img_len, forscreen_char, forscreen_id, res_sup_time) {
+    function uploadOssNew(policy, signature, img_url, box_mac, openid, timestamp, flag, img_len, forscreen_char, forscreen_id, res_sup_time, avatarUrl, nickName) {
 
       var filename = img_url;
       var index1 = filename.lastIndexOf(".");
@@ -262,7 +270,7 @@ Page({
                     data: {
                       box_mac: box_mac,
                       cmd: 'call-mini-program',
-                      msg: '{ "action": 4, "resource_type":2, "url": "forscreen/resource/' + timestamp + postf_t + '", "filename":"' + timestamp + postf_t + '","openid":"' + openid + '","img_nums":' + img_len + ',"forscreen_char":"' + forscreen_char + '","order":' + order + ',"forscreen_id":"' + forscreen_id + '","img_id":"' + timestamp + '"}',
+                      msg: '{ "action": 4, "resource_type":2, "url": "forscreen/resource/' + timestamp + postf_t + '", "filename":"' + timestamp + postf_t + '","openid":"' + openid + '","img_nums":' + img_len + ',"forscreen_char":"' + forscreen_char + '","order":' + order + ',"forscreen_id":"' + forscreen_id + '","img_id":"' + timestamp + '","avatarUrl":"' + avatarUrl + '","nickName":"' + nickName+'"}',
                       req_id: timestamp
                     },
                     success: function (result) {
@@ -282,7 +290,7 @@ Page({
       })
 
     }
-    function uploadOss_multy(policy, signature, upimgs, box_mac, openid, img_len, forscreen_char) {
+    function uploadOss_multy(policy, signature, upimgs, box_mac, openid, img_len, forscreen_char, avatarUrl, nickName) {
       //console.log(img_len);
       var tmp_imgs = [];
       var forscreen_id = (new Date()).valueOf();
@@ -299,7 +307,7 @@ Page({
         that.setData({
           tmp_imgs: tmp_imgs
         });
-        uploadOssNew(policy, signature, filename, box_mac, openid, timestamp, i, img_len, forscreen_char, forscreen_id, res_sup_time);
+        uploadOssNew(policy, signature, filename, box_mac, openid, timestamp, i, img_len, forscreen_char, forscreen_id, res_sup_time, avatarUrl, nickName);
       }
       that.setData({
         showThird: true,
@@ -309,6 +317,7 @@ Page({
   }, //多张图片投屏结束(不分享到发现)
 
   up_single_pic(e) {//指定单张图片投屏开始
+    
     var that = this;
     box_mac = e.target.dataset.boxmac;
     openid = e.target.dataset.openid;
@@ -320,6 +329,11 @@ Page({
     var mobile_model = app.globalData.mobile_model;
     var img_index = e.target.dataset.imgindex;
     var img_len = e.target.dataset.imglen;
+
+    var user_info = wx.getStorageSync("savor_user_info");
+    var avatarUrl = user_info.avatarUrl;
+    var nickName  = user_info.nickName;
+
     for (var p = 0; p < img_len; p++) {
       if (img_index == p) {
         pic_show_cur[p] = true;
@@ -340,7 +354,7 @@ Page({
       data: {
         box_mac: box_mac,
         cmd: 'call-mini-program',
-        msg: '{ "action": 2,"resource_type":1, "url": "' + forscreen_img + '", "filename":"' + filename + '","openid":"' + openid + '"}',
+        msg: '{ "action": 2,"resource_type":1, "url": "' + forscreen_img + '", "filename":"' + filename + '","openid":"' + openid + '","avatarUrl":"' + avatarUrl + '","nickName":"' + nickName+'"}',
         req_id: timestamp
       },
       success: function (result) {

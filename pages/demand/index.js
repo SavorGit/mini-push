@@ -64,7 +64,7 @@ Page({
             that.setData({
               box_mac: rest.data.result.box_mac,
             })
-
+            box_mac = rest.data.result.box_mac;
           }
 
         }
@@ -110,8 +110,8 @@ Page({
               if (is_have == 1) {
                 that.setData({
                   box_mac: rest.data.result.box_mac,
-                })
-
+                });
+                box_mac = rest.data.result.box_mac;
               }
 
             }
@@ -140,8 +140,56 @@ Page({
           })
         }
       }
-    })
+    });
+    
   },
+  //呼大码
+  callQrCode: function (e) {
+    var user_info = wx.getStorageSync("savor_user_info");
+    openid = user_info.openid;
+    console.log(openid);
+    if (box_mac) {
+      var timestamp = (new Date()).valueOf();
+      var qrcode_url = 'https://mobile.littlehotspot.com/Smallapp/index/getBoxQr?box_mac=' + box_mac + '&type=3';
+      var mobile_brand = app.globalData.mobile_brand;
+      var mobile_model = app.globalData.mobile_model;
+      wx.request({
+        url: "https://netty-push.littlehotspot.com/push/box",
+        header: {
+          "Content-Type": "application/x-www-form-urlencoded"
+        },
+        method: "POST",
+        data: {
+          box_mac: box_mac,
+          cmd: 'call-mini-program',
+          msg: '{ "action": 9,"url":"' + qrcode_url + '"}',
+          req_id: timestamp
+        },
+        success: function () {
+          wx.showToast({
+            title: '呼玛成功，电视即将展示',
+            icon: 'none',
+            duration: 2000
+          });
+          wx.request({
+            url: 'https://mobile.littlehotspot.com/Smallapp/index/recordForScreenPics',
+            header: {
+              'content-type': 'application/json'
+            },
+            data: {
+              openid: openid,
+              box_mac: box_mac,
+              action: 9,
+              mobile_brand: mobile_brand,
+              mobile_model: mobile_model,
+              imgs: '[]'
+            },
+
+          })
+        }
+      })
+    }
+  },//呼大码结束
   /**
    * 生命周期函数--监听页面显示
    */
@@ -303,7 +351,7 @@ Page({
         that.setData({
           program_list: program_list
         })
-        if (e.data.code == 10000) {
+        /*if (e.data.code == 10000) {
           wx.showToast({
             title: '收藏成功',
             icon: 'none',
@@ -315,7 +363,7 @@ Page({
             icon: 'none',
             duration: 2000
           })
-        }
+        }*/
       },
       fial: function ({ errMsg }) {
         wx.showToast({
@@ -352,7 +400,7 @@ Page({
         that.setData({
           program_list: program_list
         })
-        if (e.data.code == 10000) {
+        /*if (e.data.code == 10000) {
           wx.showToast({
             title: '取消收藏成功',
             icon: 'none',
@@ -364,7 +412,7 @@ Page({
             icon: 'none',
             duration: 2000
           })
-        }
+        }*/
       },
       fial: function ({ errMsg }) {
         wx.showToast({

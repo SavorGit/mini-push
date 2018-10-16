@@ -3,6 +3,7 @@ const app = getApp();
 var openid;                     //用户小程序唯一标识
 var box_mac = '';               //机顶盒mac
 var page = 1;                    //当前节目单页数
+var nowtime;
 Page({
   /**
  * 页面的初始数据
@@ -152,8 +153,27 @@ Page({
   },
   //进来加载页面：
   onLoad: function (options) {
-    box_mac = decodeURIComponent(options.scene);
+    wx.request({
+      url: 'https://mobile.littlehotspot.com/systemtime.php',
+      success:function(e){
+        wx.setStorage({
+          key: 'savor_now_time',
+          data: e.data,
+        })
+      }
+    })
+    nowtime = wx.getStorageSync("savor_now_time");
+    //console.log(nowtime);
+    //box_mac = decodeURIComponent(options.scene);
+    var scene = decodeURIComponent(options.scene);
+    var scene_arr = scene.split('_');
+    box_mac = scene_arr[0];
+    var code_type = scene_arr[1];
+    var jz_time = scene_arr[2];
+
     
+    //console.log(scene_arr);
+    //return false;
     var that = this
     wx.login({
       success: res => {
@@ -165,6 +185,37 @@ Page({
             'content-type': 'application/json'
           },
           success: function (res) {
+
+            if (jz_time) {//判断二维码时间是否超过两个小时
+              var fztime = 7200000;
+              var difftime = nowtime - jz_time;
+              if (difftime > fztime) {
+                wx.request({
+                  url: 'https://mobile.littlehotspot.com/smallapp21/index/recOverQrcodeLog',
+                  data: { "openid": res.data.result.openid,
+                          "box_mac":box_mac,
+                          "type":code_type,
+                          "is_overtime":1 },
+                  header: {
+                    'content-type': 'application/json'
+                  },
+                })
+                wx.switchTab({
+                  url: '../index/index',
+                  success: function (e) {
+                    var page = getCurrentPages().pop();
+                    if (page == undefined || page == null) return;
+                    page.onLoad();
+                    wx.showToast({
+                      title: '小程序码已过期',
+                      icon: 'none',
+                      duration: 2000
+                    });
+                  }
+                });
+                return false;
+              }
+            }
             //console.log(res.data.result.openid);
             wx.request({
               url: 'https://mobile.littlehotspot.com/smallapp/index/isHaveCallBox',
@@ -185,7 +236,7 @@ Page({
                 }
               }
             });
-            setInfos(box_mac, res.data.result.openid);
+            setInfos(box_mac, res.data.result.openid, code_type);
           }
         })
       }
@@ -202,8 +253,9 @@ Page({
           'Content-Type': 'application/json'
         },
         data: {
-          box_mac: box_mac,
-          openid: openid
+         'box_mac': box_mac,
+         'openid' : openid,
+         'type'   : code_type
         },
         method: "POST",
         success: function (res) {

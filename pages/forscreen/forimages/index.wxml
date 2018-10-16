@@ -32,6 +32,8 @@
       <input class="display_hide" name="openid" value="{{openid}}"></input>
       <input class="display_hide" name="is_pub_hotelinfo" value="{{is_pub_hotelinfo}}"></input>
       <input class="display_hide" name="is_share" value="{{is_share}}"></input>
+      <input class="display_hide" name="avatarUrl" value="{{avatarUrl}}"></input>
+      <input class="display_hide" name="nickName" value="{{nickName}}"></input>
       <!-- 投图片 -->
       <view class="display_{{showTpBt?'show':'hide'}}">
         <label class='tip_text font_333333_30'>为所有照片增加文字（选填）</label>

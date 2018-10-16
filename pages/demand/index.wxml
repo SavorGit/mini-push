@@ -93,4 +93,6 @@
 </view>
 
 <!-- 固定悬浮按钮组 -->
+<view wx:if="{{box_mac !=''}}">
 <template is="fixedSuspensionButtonGroup" />
+</view>

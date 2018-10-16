@@ -1,10 +1,13 @@
 // pages/message/index.js
+var box_mac;
+var openid;
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
+    box_mac:'',
     showModal: true
   },
 

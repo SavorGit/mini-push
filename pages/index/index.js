@@ -1,6 +1,7 @@
 // pages/interact/index.js
 const app = getApp()
 var openid;
+var box_mac;
 Page({
 
   /**
@@ -66,6 +67,7 @@ Page({
               room_name:rest.data.result.room_name,
               box_mac :rest.data.result.box_mac,
             })
+            box_mac = rest.data.result.box_mac;
             getHotelInfo(rest.data.result.box_mac);
           }else {
             
@@ -116,6 +118,7 @@ Page({
                   room_name: rest.data.result.room_name,
                   box_mac: rest.data.result.box_mac,
                 })
+                box_mac=rest.data.result.box_mac;
                 getHotelInfo(rest.data.result.box_mac);
               }
             }
@@ -145,43 +148,82 @@ Page({
     }
     
   },
-  //微信授权登陆
-  closeAuth(e){
+  onGetUserInfo: function (res) { 
     var that = this;
     var user_info = wx.getStorageSync("savor_user_info");
     openid = user_info.openid;
-
-    wx.getUserInfo({
-      success:function(res){
-        if (res.errMsg =='getUserInfo:ok'){
+    if (res.detail.errMsg =='getUserInfo:ok'){
+      wx.request({
+        url: 'https://mobile.littlehotspot.com/smallapp21/User/register',
+        data: {
+          'openid': openid,
+          'avatarUrl': res.detail.userInfo.avatarUrl,
+          'nickName': res.detail.userInfo.nickName,
+          'gender': res.detail.userInfo.gender
+        },
+        header: {
+          'content-type': 'application/json'
+        },
+        success: function (res) {
+          wx.setStorage({
+            key: 'savor_user_info',
+            data: res.data.result,
+          });
+          that.setData({
+            showModal: false,
+          })
+        }
+      })
+    }
+  },
+  //呼大码
+  callQrCode:function(e){
+    var user_info = wx.getStorageSync("savor_user_info");
+    openid = user_info.openid;
+    console.log(openid);
+    if(box_mac){
+      var timestamp = (new Date()).valueOf();
+      var qrcode_url = 'https://mobile.littlehotspot.com/Smallapp/index/getBoxQr?box_mac='+box_mac+'&type=3';
+      var mobile_brand = app.globalData.mobile_brand;
+      var mobile_model = app.globalData.mobile_model;
+      wx.request({
+        url: "https://netty-push.littlehotspot.com/push/box",
+        header: {
+          "Content-Type": "application/x-www-form-urlencoded"
+        },
+        method: "POST",
+        data: {
+          box_mac: box_mac,
+          cmd: 'call-mini-program',
+          msg: '{ "action": 9,"url":"' + qrcode_url + '"}',
+          req_id: timestamp
+        },
+        success:function(){
+          wx.showToast({
+            title: '呼玛成功，电视即将展示',
+            icon: 'none',
+            duration: 2000
+          });
           wx.request({
-            url: 'https://mobile.littlehotspot.com/smallapp21/User/register',
-            data: {
-              'openid': openid,
-              'avatarUrl': res.userInfo.avatarUrl,
-              'nickName': res.userInfo.nickName,
-              'gender': res.userInfo.gender
-            },
+            url: 'https://mobile.littlehotspot.com/Smallapp/index/recordForScreenPics',
             header: {
               'content-type': 'application/json'
             },
-            success: function (res) {
-              wx.setStorage({
-                key: 'savor_user_info',
-                data: res.data.result,
-              });
-              that.setData({
-                showModal: false,
-              })
-            }
+            data: {
+              openid: openid,
+              box_mac: box_mac,
+              action: 9,
+              mobile_brand: mobile_brand,
+              mobile_model: mobile_model,
+              imgs:'[]'
+            },
+
           })
         }
-        
-        //console.log(e);
-      },
-      
-    })
-  },
+      })
+    }
+  },//呼大码结束
+ 
   //选择照片上电视
   chooseImage(e) {
     var that = this;

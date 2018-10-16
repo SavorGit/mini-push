@@ -45,7 +45,7 @@
         </label>
         <view class='bottom_btn'>
           <!--<button class="savor-btn savor-btn-size" form-type="submit" hover-class="none" style='width: 320rpx;background-color: #BEBEBE;margin-left: 15rpx;'>投屏</button>-->
-          <button bindtap='forscreen_video' class="savor-btn savor-btn-size full_width" form-type="submit" hover-class="none" data-box_mac='{{box_mac}}' data-openid='{{openid}}' data-video="{{upload_vedio_temp}}" data-is_pub_hotelinfo='{{is_pub_hotelinfo}}' data-duration="{{duration}}" data-is_share='{{is_share}}' disabled='{{is_btn_disabel}}'>投屏</button>
+          <button bindtap='forscreen_video' class="savor-btn savor-btn-size full_width" form-type="submit" hover-class="none" data-box_mac='{{box_mac}}' data-openid='{{openid}}' data-video="{{upload_vedio_temp}}" data-is_pub_hotelinfo='{{is_pub_hotelinfo}}' data-duration="{{duration}}" data-is_share='{{is_share}}' data-avatarUrl='{{avatarUrl}}' data-nickName='{{nickName}}'  disabled='{{is_btn_disabel}}'>投屏</button>
         </view>
       </view>
 

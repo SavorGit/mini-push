@@ -28,6 +28,8 @@ Page({
     is_pub_hotelinfo: 1,  //是否公开酒楼信息
     is_share: 0 ,         //是否分享到发现栏目
     is_btn_disabel:false,
+    avatarUrl: '',
+    nickName: '',
   },
 
   /**
@@ -37,11 +39,15 @@ Page({
     var that = this
     var box_mac = e.box_mac;
     var openid = e.openid;
-    
+    var user_info = wx.getStorageSync("savor_user_info");
+    var avatarUrl = user_info.avatarUrl;
+    var nickName  = user_info.nickName;
     that.setData({
       openid: openid,
       box_mac: box_mac,
       upload_vedio_temp: '',
+      avatarUrl: avatarUrl,
+      nickName: nickName,
     })
 
     wx.chooseVideo({
@@ -67,6 +73,7 @@ Page({
   },
 
   forscreen_video: function (res) {
+    console.log(res);
     var that= this;
     that.setData({
       is_btn_disabel:true,
@@ -77,10 +84,12 @@ Page({
     var is_pub_hotelinfo = res.target.dataset.is_pub_hotelinfo;
     var is_share = res.target.dataset.is_share;
     var duration = res.target.dataset.duration;
+    var avatarUrl = res.target.dataset.avatarurl;
+    var nickName = res.target.dataset.nickname;
     
     res_sup_time = (new Date()).valueOf();
-    uploadVedio(video, box_mac, openid, res_sup_time, is_pub_hotelinfo, is_share, duration);
-    function uploadVedio(video, box_mac, openid, res_sup_time, is_pub_hotelinfo, is_share, duration) {
+    uploadVedio(video, box_mac, openid, res_sup_time, is_pub_hotelinfo, is_share, duration, avatarUrl, nickName);
+    function uploadVedio(video, box_mac, openid, res_sup_time, is_pub_hotelinfo, is_share, duration, avatarUrl, nickName) {
      
       wx.request({
         url: 'https://mobile.littlehotspot.com/Smallapp/Index/getOssParams',
@@ -90,11 +99,11 @@ Page({
         success: function (rest) {
           policy = rest.data.policy;
           signature = rest.data.signature;
-          uploadOssVedio(policy, signature, video, box_mac, openid, res_sup_time, is_pub_hotelinfo, is_share, duration);
+          uploadOssVedio(policy, signature, video, box_mac, openid, res_sup_time, is_pub_hotelinfo, is_share, duration, avatarUrl, nickName);
         }
       });
     }
-    function uploadOssVedio(policy, signature, video, box_mac, openid, res_sup_time, is_pub_hotelinfo, is_share, duration) {
+    function uploadOssVedio(policy, signature, video, box_mac, openid, res_sup_time, is_pub_hotelinfo, is_share, duration, avatarUrl, nickName) {
       
       var filename = video;          //视频url
 
@@ -171,7 +180,7 @@ Page({
                 data: {
                   box_mac: box_mac,
                   cmd: 'call-mini-program',
-                  msg: '{ "action":2, "url": "forscreen/resource/' + timestamp + postf_t + '", "filename":"' + timestamp + postf_t + '","openid":"' + openid + '","resource_type":2,"video_id":"' + timestamp + '"}',
+                  msg: '{ "action":2, "url": "forscreen/resource/' + timestamp + postf_t + '", "filename":"' + timestamp + postf_t + '","openid":"' + openid + '","resource_type":2,"video_id":"' + timestamp + '","avatarUrl":"' + avatarUrl +'","nickName":"'+nickName+'"}',
                   req_id: timestamp
                 },
                 success: function (result) {
