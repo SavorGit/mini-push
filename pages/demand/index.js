@@ -29,53 +29,30 @@ Page({
       that.setData({
         openid: app.globalData.openid
       })
-      openid = openid;
-      wx.getUserInfo({
+      openid = app.globalData.openid;
+      //判断用户是否注册
+      wx.request({
+        url: 'https://mobile.littlehotspot.com/smallapp21/User/isRegister',
+        data: {
+          "openid": app.globalData.openid,
+
+        },
+        header: {
+          'content-type': 'application/json'
+        },
         success: function (res) {
-          wx.request({
-            url: 'https://mobile.littlehotspot.com/smallapp/User/register',
-            data: {
-              "openid": app.globalData.openid,
-              "avatarUrl": res.userInfo.avatarUrl,
-              "nickName": res.userInfo.nickName,
-              "gender": res.userInfo.gender,
-            },
-            header: {
-              'content-type': 'application/json'
-            },
-            success: function (res) {
-              wx.setStorage({
-                key: 'savor_user_info',
-                data: res.data.result,
-              })
-            },
-            fail: function (e) {
-              wx.setStorage({
-                key: 'savor_user_info',
-                data: { 'openid': app.globalData.openid },
-              })
-            }
+          wx.setStorage({
+            key: 'savor_user_info',
+            data: res.data.result.userinfo,
           })
         },
-        fail:function(){
-          wx.request({
-            url: 'https://mobile.littlehotspot.com/smallapp/User/register',
-            data: {
-              "openid": app.globalData.openid,
-
-            },
-            header: {
-              'content-type': 'application/json'
-            },
-            success:function(){
-              wx.setStorage({
-                key: 'savor_user_info',
-                data: { 'openid': app.globalData.openid },
-              })
-            }
-          });
+        fail: function (e) {
+          wx.setStorage({
+            key: 'savor_user_info',
+            data: { 'openid': app.globalData.openid },
+          })
         }
-      });
+      });//判断用户是否注册结束
       wx.request({
         url: 'https://mobile.littlehotspot.com/Smallapp/index/isHaveCallBox?openid=' + app.globalData.openid,
         headers: {
@@ -99,49 +76,29 @@ Page({
             openid: openid
           })
           openid = openid;
-          //注册用户
+          //判断用户是否注册
+          wx.request({
+            url: 'https://mobile.littlehotspot.com/smallapp21/User/isRegister',
+            data: {
+              "openid": app.globalData.openid,
 
-          wx.getUserInfo({
+            },
+            header: {
+              'content-type': 'application/json'
+            },
             success: function (res) {
-              wx.request({
-                url: 'https://mobile.littlehotspot.com/smallapp/User/register',
-                data: {
-                  "openid": openid,
-                  "avatarUrl": res.userInfo.avatarUrl,
-                  "nickName": res.userInfo.nickName,
-                  "gender": res.userInfo.gender
-                },
-                header: {
-                  'content-type': 'application/json'
-                },
-                success: function (res) {
-                  wx.setStorage({
-                    key: 'savor_user_info',
-                    data: res.data.result,
-                  })
-                }
+              wx.setStorage({
+                key: 'savor_user_info',
+                data: res.data.result.userinfo,
               })
             },
             fail: function (e) {
-              wx.request({
-                url: 'https://mobile.littlehotspot.com/smallapp/User/register',
-                data: {
-                  "openid": openid,
-
-                },
-                header: {
-                  'content-type': 'application/json'
-                },
-                success: function () {
-                  
-                }
-              });
               wx.setStorage({
                 key: 'savor_user_info',
                 data: { 'openid': openid },
               })
             }
-          });
+          });//判断用户是否注册结束
           wx.request({
             url: 'https://mobile.littlehotspot.com/Smallapp/index/isHaveCallBox?openid=' + openid,
             headers: {

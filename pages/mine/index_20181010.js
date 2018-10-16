@@ -24,16 +24,44 @@ Page({
       that.setData({
         openid: app.globalData.openid
       })
-      //注册用户
-      wx.getUserInfo({
+      openid = app.globalData.openid;
+      //判断用户是否注册
+      wx.request({
+        url: 'https://mobile.littlehotspot.com/smallapp21/User/isRegister',
+        data: {
+          "openid": app.globalData.openid,
+
+        },
+        header: {
+          'content-type': 'application/json'
+        },
         success: function (res) {
+          wx.setStorage({
+            key: 'savor_user_info',
+            data: res.data.result.userinfo,
+          })
+        },
+        fail: function (e) {
+          wx.setStorage({
+            key: 'savor_user_info',
+            data: { 'openid': app.globalData.openid },
+          })
+        }
+      });//判断用户是否注册结束
+
+    } else {
+      app.openidCallback = openid => {
+        if (openid != '') {
+          that.setData({
+            openid: openid
+          })
+          openid = openid;
+          //判断用户是否注册
           wx.request({
-            url: 'https://mobile.littlehotspot.com/smallapp/User/register',
+            url: 'https://mobile.littlehotspot.com/smallapp21/User/isRegister',
             data: {
               "openid": app.globalData.openid,
-              "avatarUrl": res.userInfo.avatarUrl,
-              "nickName": res.userInfo.nickName,
-              "gender": res.userInfo.gender,
+
             },
             header: {
               'content-type': 'application/json'
@@ -41,7 +69,7 @@ Page({
             success: function (res) {
               wx.setStorage({
                 key: 'savor_user_info',
-                data: res.data.result,
+                data: res.data.result.userinfo,
               })
             },
             fail: function (e) {
@@ -50,78 +78,7 @@ Page({
                 data: { 'openid': openid },
               })
             }
-          })
-        },
-        fail: function () {
-          wx.request({
-            url: 'https://mobile.littlehotspot.com/smallapp/User/register',
-            data: {
-              "openid": app.globalData.openid,
-
-            },
-            header: {
-              'content-type': 'application/json'
-            },
-            success: function (res) {
-              wx.setStorage({
-                key: 'savor_user_info',
-                data: { 'openid': app.globalData.openid, 'avatarUrl': 'http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default_user_head.png', 'nickName': '热点用户', 'user_id': res.data.result },
-              })
-            }
-          });
-        }
-      });
-
-    } else {
-      app.openidCallback = openid => {
-        if (openid != '') {
-          that.setData({
-            openid: openid
-          })
-          //注册用户
-
-          wx.getUserInfo({
-            success: function (res) {
-              wx.request({
-                url: 'https://mobile.littlehotspot.com/smallapp/User/register',
-                data: {
-                  "openid": app.globalData.openid,
-                  "avatarUrl": res.userInfo.avatarUrl,
-                  "nickName": res.userInfo.nickName,
-                  "gender": res.userInfo.gender
-                },
-                header: {
-                  'content-type': 'application/json'
-                },
-                success: function (res) {
-                  wx.setStorage({
-                    key: 'savor_user_info',
-                    data: res.data.result,
-                  })
-                }
-              })
-            },
-            fail: function (e) {
-              wx.request({
-                url: 'https://mobile.littlehotspot.com/smallapp/User/register',
-                data: {
-                  "openid": openid,
-
-                },
-                header: {
-                  'content-type': 'application/json'
-                },
-                success: function (res) {
-                  wx.setStorage({
-                    key: 'savor_user_info',
-                    data: { 'openid': openid },
-                  })
-                }
-              });
-
-            }
-          });
-
+          });//判断用户是否注册结束
         }
       }
     }
@@ -136,7 +93,6 @@ Page({
       },
       data: { openid: openid },
       success: function (res) {
-        console.log(res);
         that.setData({
           userinfo: res.data.result.user_info,
           publiclist: res.data.result.public_list,

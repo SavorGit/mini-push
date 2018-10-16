@@ -1,7 +1,6 @@
 // pages/interact/index.js
 const app = getApp()
 var openid;
-var flag = 0;
 Page({
 
   /**
@@ -29,6 +28,7 @@ Page({
       that.setData({
         openid: app.globalData.openid
       })
+      openid = app.globalData.openid;
       //判断用户是否注册
       wx.request({
         url: 'https://mobile.littlehotspot.com/smallapp21/User/isRegister',
@@ -42,7 +42,7 @@ Page({
         success:function(res){
           wx.setStorage({
             key: 'savor_user_info',
-            data: { 'openid': app.globalData.openid },
+            data: res.data.result.userinfo,
           })
         },
         fail: function (e) {
@@ -51,7 +51,7 @@ Page({
             data: { 'openid': app.globalData.openid },
           })
         }
-      });
+      });//判断用户是否注册结束
       wx.request({
         url: 'https://mobile.littlehotspot.com/Smallapp/index/isHaveCallBox?openid=' + app.globalData.openid,
         headers: {
@@ -78,6 +78,7 @@ Page({
           that.setData({
             openid: openid
           })
+          openid = openid;
           //判断用户是否注册
           wx.request({
             url: 'https://mobile.littlehotspot.com/smallapp21/User/isRegister',
@@ -91,7 +92,7 @@ Page({
             success: function (res) {
               wx.setStorage({
                 key: 'savor_user_info',
-                data: { 'openid': openid },
+                data: res.data.result.userinfo,
               })
             }, 
             fail: function (e) {
@@ -100,7 +101,7 @@ Page({
                 data: { 'openid': openid},
               })
             }
-          });
+          });//判断用户是否注册结束
           wx.request({
             url: 'https://mobile.littlehotspot.com/Smallapp/index/isHaveCallBox?openid=' + openid,
             headers: {
@@ -145,17 +146,16 @@ Page({
     
   },
   //微信授权登陆
-  /*closeAuth(e){
+  closeAuth(e){
     var that = this;
     var user_info = wx.getStorageSync("savor_user_info");
-    console.log(flag);
     openid = user_info.openid;
 
     wx.getUserInfo({
       success:function(res){
         if (res.errMsg =='getUserInfo:ok'){
           wx.request({
-            url: 'https://mobile.littlehotspot.com/smallapp/User/register',
+            url: 'https://mobile.littlehotspot.com/smallapp21/User/register',
             data: {
               'openid': openid,
               'avatarUrl': res.userInfo.avatarUrl,
@@ -181,37 +181,44 @@ Page({
       },
       
     })
-  },*/
+  },
   //选择照片上电视
   chooseImage(e) {
     var that = this;
-    var box_mac = e.currentTarget.dataset.boxmac;
-    var openid = e.currentTarget.dataset.openid;
-    if(box_mac==''){
-      wx.showModal({
-        title: '提示',
-        content: "您可扫码链接热点合作餐厅电视,使用此功能",
-        showCancel: true,
-        confirmText: '立即扫码',
-        success:function(res){
-          if (res.confirm == true) {
-            wx.scanCode({
-              onlyFromCamera: true,
-              success: (res) => {
-                //console.log(res);
-                wx.navigateTo({
-                  url: '/' + res.path
-                })
-              }
-            })
-          }
-        }
-      });    
-    }else {
-      wx.navigateTo({
-        url: '/pages/forscreen/forimages/index?box_mac=' + box_mac + '&openid=' + openid,
+    var user_info = wx.getStorageSync("savor_user_info");
+    if (user_info.is_wx_auth==0){
+      that.setData({
+        showModal:true
       })
-    } 
+    }else {
+      var box_mac = e.currentTarget.dataset.boxmac;
+      var openid = e.currentTarget.dataset.openid;
+      if (box_mac == '') {
+        wx.showModal({
+          title: '提示',
+          content: "您可扫码链接热点合作餐厅电视,使用此功能",
+          showCancel: true,
+          confirmText: '立即扫码',
+          success: function (res) {
+            if (res.confirm == true) {
+              wx.scanCode({
+                onlyFromCamera: true,
+                success: (res) => {
+                  //console.log(res);
+                  wx.navigateTo({
+                    url: '/' + res.path
+                  })
+                }
+              })
+            }
+          }
+        });
+      } else {
+        wx.navigateTo({
+          url: '/pages/forscreen/forimages/index?box_mac=' + box_mac + '&openid=' + openid,
+        })
+      } 
+    }
   },
   //选择视频投屏
   chooseVedio(e) {
