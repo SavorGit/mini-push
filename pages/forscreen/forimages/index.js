@@ -91,7 +91,14 @@ Page({
 
   chooseImage(e) {//重新选择照片开始
     var that = this;
+    
     that.setData({
+      item: [
+        { 'name': '公开时显示餐厅信息', 'value': '1', 'checked': true, 'disabled': false },
+        { 'name': '公开发表，公众可见', 'value': '2', 'checked': false, 'disabled': false },
+
+      ],
+      is_share:0,
       is_btn_disabel: false
     })
     openid = e.currentTarget.dataset.openid;

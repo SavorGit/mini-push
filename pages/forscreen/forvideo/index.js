@@ -198,6 +198,12 @@ Page({
   chooseVedio(e) {
     var that = this
     that.setData({
+      item: [
+        { 'name': '公开时显示餐厅信息', 'value': '1', 'checked': true, 'disabled': false },
+        { 'name': '公开发表，公众可见', 'value': '2', 'checked': false, 'disabled': false },
+
+      ],
+      is_share: 0,
       is_btn_disabel:false
     })
     var box_mac = e.currentTarget.dataset.boxmac;

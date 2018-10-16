@@ -15,7 +15,8 @@ Page({
     is_link:0,       //是否连接酒楼电视
     happy_vedio_url: '',          //生日视频url
     happy_vedio_name: '',          //生日视频名称
-    happy_vedio_title: ''          //生日视频标题
+    happy_vedio_title: '',          //生日视频标题
+    showModal:false,   //显示授权登陆弹窗
   },
 
   /**
@@ -27,8 +28,22 @@ Page({
       that.setData({
         openid: app.globalData.openid
       })
+      //判断用户是否注册
+      wx.request({
+        url: 'https://mobile.littlehotspot.com/smallapp21/User/isRegister',
+        data: {
+          "openid": app.globalData.openid,
+          
+        },
+        header: {
+          'content-type': 'application/json'
+        },
+        success:function(res){
+            console.log(res);
+        }
+      });
       //注册用户
-      wx.getUserInfo({
+      /*wx.getUserInfo({
         success: function (res) {
           wx.request({
             url: 'https://mobile.littlehotspot.com/smallapp/User/register',
@@ -73,13 +88,13 @@ Page({
             }
           });
         } 
-      });
+      });*/
+
       wx.request({
         url: 'https://mobile.littlehotspot.com/Smallapp/index/isHaveCallBox?openid=' + app.globalData.openid,
         headers: {
           'Content-Type': 'application/json'
         },
-
         success: function (rest) {
           var is_have = rest.data.result.is_have;
           if (is_have == 1) {
@@ -107,9 +122,28 @@ Page({
           that.setData({
             openid: openid
           })
-          //注册用户
+          //判断用户是否注册
+          wx.request({
+            url: 'https://mobile.littlehotspot.com/smallapp21/User/isRegister',
+            data: {
+              "openid": app.globalData.openid,
 
-          wx.getUserInfo({
+            },
+            header: {
+              'content-type': 'application/json'
+            },
+            success: function (res) {
+              var is_register = res.data.result.register;
+              if(is_register==0){
+                that.setData({
+                  showModal: true
+                });
+              }
+            }
+          });
+
+          //注册用户
+          /*wx.getUserInfo({
             success: function (res) {
               wx.request({
                 url: 'https://mobile.littlehotspot.com/smallapp/User/register',
@@ -149,7 +183,7 @@ Page({
                 data: { 'openid': openid },
               })
             }
-          });
+          });*/
           wx.request({
             url: 'https://mobile.littlehotspot.com/Smallapp/index/isHaveCallBox?openid=' + openid,
             headers: {

@@ -1,5 +1,6 @@
 <!--pages/interact/index.wxml-->
 <import src="../template/navigation.wxml" />
+<import src="../template/commons" />
 <view class="container">
   <view class='page_main_v'>
     <view class='page_main_h'>
@@ -32,4 +33,5 @@
   <!-- 菜单 
   <template is="bottomNavigation" data='{{selectPage:"INTERACT"}}' />
   -->
+  <template is="wxAuthLogin" data='{{show: showModal}}' />
 </view>
