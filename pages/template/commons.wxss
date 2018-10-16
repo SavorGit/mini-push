@@ -1,1 +1,27 @@
 /* pages/template/commons.wxss */
+
+.fixedSuspensionButtonGroup {
+  position: fixed;
+  right: 80rpx;
+  bottom: 150rpx;
+  width: 50rpx;
+  height: 100rpx;
+}
+
+.scan_tdc > button, .scan_tdc > button::after, .scan_tdc > button::before {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  width: 100rpx;
+  height: 100rpx;
+  border-radius: 49%;
+  background-color: unset;
+}
+
+.scan_tdc > button > image {
+  width: 96rpx;
+  height: 96rpx;
+  border: 2rpx solid #932c3f;
+  border-radius: 49%;
+  /* background-color: #f6f3ee; */
+}

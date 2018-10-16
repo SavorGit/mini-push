@@ -1,5 +1,5 @@
 <!--pages/message/index.wxml-->
-<import src="../template/navigation" />
+<!-- <import src="../template/navigation" /> -->
 <import src="../template/commons" />
 <view class="container">
   <view class='page_main_v'>
@@ -29,3 +29,6 @@
   <template is="bottomNavigation" data='{{selectPage:"MESSAGE"}}' />
   -->
 </view>
+
+<!-- 固定悬浮按钮组 -->
+<template is="fixedSuspensionButtonGroup" />
