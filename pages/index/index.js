@@ -1,6 +1,7 @@
 // pages/interact/index.js
 const app = getApp()
 var openid;
+var flag = 0;
 Page({
 
   /**
@@ -39,57 +40,18 @@ Page({
           'content-type': 'application/json'
         },
         success:function(res){
-            console.log(res);
-        }
-      });
-      //注册用户
-      /*wx.getUserInfo({
-        success: function (res) {
-          wx.request({
-            url: 'https://mobile.littlehotspot.com/smallapp/User/register',
-            data: {
-              "openid": app.globalData.openid,
-              "avatarUrl": res.userInfo.avatarUrl,
-              "nickName": res.userInfo.nickName,
-              "gender": res.userInfo.gender,
-            },
-            header: {
-              'content-type': 'application/json'
-            },
-            success: function (res) {
-              wx.setStorage({
-                key: 'savor_user_info',
-                data: res.data.result,
-              })
-            },
-            fail: function (e) {
-              wx.setStorage({
-                key: 'savor_user_info',
-                data: { 'openid': app.globalData.openid },
-              })
-            }
+          wx.setStorage({
+            key: 'savor_user_info',
+            data: { 'openid': app.globalData.openid },
           })
         },
-        fail: function () {
-          wx.request({
-            url: 'https://mobile.littlehotspot.com/smallapp/User/register',
-            data: {
-              "openid": app.globalData.openid,
-
-            },
-            header: {
-              'content-type': 'application/json'
-            },
-            success: function () {
-              wx.setStorage({
-                key: 'savor_user_info',
-                data: { 'openid': app.globalData.openid },
-              })
-            }
-          });
-        } 
-      });*/
-
+        fail: function (e) {
+          wx.setStorage({
+            key: 'savor_user_info',
+            data: { 'openid': app.globalData.openid },
+          })
+        }
+      });
       wx.request({
         url: 'https://mobile.littlehotspot.com/Smallapp/index/isHaveCallBox?openid=' + app.globalData.openid,
         headers: {
@@ -97,8 +59,7 @@ Page({
         },
         success: function (rest) {
           var is_have = rest.data.result.is_have;
-          if (is_have == 1) {
-            
+          if (is_have == 1) {//已经扫码链接电视
             that.setData({
               is_link:1,
               hotel_name:rest.data.result.hotel_name,
@@ -106,14 +67,9 @@ Page({
               box_mac :rest.data.result.box_mac,
             })
             getHotelInfo(rest.data.result.box_mac);
-            /*var box_mac = rest.data.result.box_mac;
-            wx.navigateTo({
-              url: '/pages/forscreen/forscreen?scene=' + box_mac,
-            })*/
           }else {
             
           }
-
         }
       })
     }else {
@@ -133,63 +89,23 @@ Page({
               'content-type': 'application/json'
             },
             success: function (res) {
-              var is_register = res.data.result.register;
-              if(is_register==0){
-                that.setData({
-                  showModal: true
-                });
-              }
-            }
-          });
-
-          //注册用户
-          /*wx.getUserInfo({
-            success: function (res) {
-              wx.request({
-                url: 'https://mobile.littlehotspot.com/smallapp/User/register',
-                data: {
-                  "openid": openid,
-                  "avatarUrl": res.userInfo.avatarUrl,
-                  "nickName": res.userInfo.nickName,
-                  "gender": res.userInfo.gender
-                },
-                header: {
-                  'content-type': 'application/json'
-                },
-                success: function (res) {
-                  wx.setStorage({
-                    key: 'savor_user_info',
-                    data: res.data.result,
-                  })
-                }
-              })
-            },
-            fail: function (e) {
-              wx.request({
-                url: 'https://mobile.littlehotspot.com/smallapp/User/register',
-                data: {
-                  "openid": openid,
-
-                },
-                header: {
-                  'content-type': 'application/json'
-                },
-                success: function () {
-
-                }
-              });
               wx.setStorage({
                 key: 'savor_user_info',
                 data: { 'openid': openid },
               })
+            }, 
+            fail: function (e) {
+              wx.setStorage({
+                key: 'savor_user_info',
+                data: { 'openid': openid},
+              })
             }
-          });*/
+          });
           wx.request({
             url: 'https://mobile.littlehotspot.com/Smallapp/index/isHaveCallBox?openid=' + openid,
             headers: {
               'Content-Type': 'application/json'
             },
-
             success: function (rest) {
               var is_have = rest.data.result.is_have;
               if (is_have == 1) {
@@ -206,7 +122,7 @@ Page({
         }
       }
     }
-    function getHotelInfo(box_mac) {
+    function getHotelInfo(box_mac) {//获取链接的酒楼信息
       wx.request({
         url: 'https://mobile.littlehotspot.com/Smallapp/Index/getHotelInfo',
         headers: {
@@ -226,8 +142,46 @@ Page({
         }
       })
     }
+    
   },
-  
+  //微信授权登陆
+  /*closeAuth(e){
+    var that = this;
+    var user_info = wx.getStorageSync("savor_user_info");
+    console.log(flag);
+    openid = user_info.openid;
+
+    wx.getUserInfo({
+      success:function(res){
+        if (res.errMsg =='getUserInfo:ok'){
+          wx.request({
+            url: 'https://mobile.littlehotspot.com/smallapp/User/register',
+            data: {
+              'openid': openid,
+              'avatarUrl': res.userInfo.avatarUrl,
+              'nickName': res.userInfo.nickName,
+              'gender': res.userInfo.gender
+            },
+            header: {
+              'content-type': 'application/json'
+            },
+            success: function (res) {
+              wx.setStorage({
+                key: 'savor_user_info',
+                data: res.data.result,
+              });
+              that.setData({
+                showModal: false,
+              })
+            }
+          })
+        }
+        
+        //console.log(e);
+      },
+      
+    })
+  },*/
   //选择照片上电视
   chooseImage(e) {
     var that = this;
