@@ -1,5 +1,6 @@
 <!--pages/find/index.wxml-->
-<import src="../template/navigation.wxml" />
+<!-- <import src="../template/navigation.wxml" /> -->
+<import src="../template/commons" />
 <view class="container">
   <scroll-view class='page_main' scroll-y="true" scroll-with-animation="true" bindscrolltolower="loadMore" data-openid='{{openid}}'>
     <!--循环开始-->
@@ -10,7 +11,7 @@
           <label class='user_name font_333333_30'>{{bean.nickName}}</label>
         </view>
         <view class='operation' wx:if="{{bean.res_type==2}}">
-          
+
           <button bindtap='boxShow' class='launch_tv font_932C3F_20' data-res_type="{{bean.res_type}}" data-res_nums="{{bean.res_nums}}" data-pubdetail="{{bean.pubdetail}}" data-boxmac="{{box_mac}}" data-openid="{{openid}}">电视播放</button>
         </view>
       </view>
@@ -61,19 +62,19 @@
         <view class='operation'>
           <view wx:if="{{bean.is_collect=='1'}}">
             <button bindtap='cancCollect' data-res_id="{{bean.forscreen_id}}" data-openid="{{openid}}" data-res_key="{{index}}">
-            <image src='http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/icon/red_heart.png' ></image>
-            <label class='font_333333_26'>{{bean.collect_num}}</label>
-            </button>
-          </view>
-          
-          <view wx:else>
-            <button bindtap='onCollect' data-res_id="{{bean.forscreen_id}}" data-openid="{{openid}}" data-res_key="{{index}}">
-              <image src='http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/icon/grey_heart.png' ></image>
+              <image src='http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/icon/red_heart.png'></image>
               <label class='font_333333_26'>{{bean.collect_num}}</label>
             </button>
           </view>
-          
-          
+
+          <view wx:else>
+            <button bindtap='onCollect' data-res_id="{{bean.forscreen_id}}" data-openid="{{openid}}" data-res_key="{{index}}">
+              <image src='http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/icon/grey_heart.png'></image>
+              <label class='font_333333_26'>{{bean.collect_num}}</label>
+            </button>
+          </view>
+
+
           <!--<view>
             <button >
               <image src='http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/icon/grey_comment.png'></image>
@@ -103,3 +104,6 @@
   <template is="bottomNavigation" data='{{selectPage:"FIND"}}' />
   -->
 </view>
+
+<!-- 固定悬浮按钮组 -->
+<template is="fixedSuspensionButtonGroup" />

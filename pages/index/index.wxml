@@ -1,5 +1,5 @@
 <!--pages/interact/index.wxml-->
-<import src="../template/navigation.wxml" />
+<!-- <import src="../template/navigation.wxml" /> -->
 <import src="../template/commons" />
 <view class="container">
   <view class='page_main_v'>
@@ -35,3 +35,6 @@
   -->
   <template is="wxAuthLogin" data='{{show: showModal}}' />
 </view>
+
+<!-- 固定悬浮按钮组 -->
+<template is="fixedSuspensionButtonGroup" />

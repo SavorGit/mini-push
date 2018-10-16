@@ -1,4 +1,5 @@
-<import src="../template/navigation.wxml" />
+<!-- <import src="../template/navigation.wxml" /> -->
+<import src="../template/commons" />
 <view class="container">
   <!-- ================================== 输入验证码 ================================== -->
   <form class="full_width display_{{showCode?'show':'hide'}}">
@@ -90,3 +91,6 @@
   </block>
   -->
 </view>
+
+<!-- 固定悬浮按钮组 -->
+<template is="fixedSuspensionButtonGroup" />

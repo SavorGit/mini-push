@@ -14,8 +14,19 @@
         </label>
       </view>
       <view>
-        <button  class='savor-btn'  open-type="getUserInfo" bindtap='closeAuth' style='background-color: #932c3f; width: 50%; border-radius: 40rpx;'>微信授权登录</button>
+        <button class='savor-btn' open-type="getUserInfo" bindtap='closeAuth' style='background-color: #932c3f; width: 50%; border-radius: 40rpx;'>微信授权登录</button>
       </view>
     </view>
   </modal>
+</template>
+
+<!-- 固定悬浮按钮组 -->
+<template name="fixedSuspensionButtonGroup">
+  <view class='fixedSuspensionButtonGroup'>
+    <view class='scan_tdc'>
+      <button>
+        <image src='/images/icon/red_scan_tdc.png'></image>
+      </button>
+    </view>
+  </view>
 </template>
