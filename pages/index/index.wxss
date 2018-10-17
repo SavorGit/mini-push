@@ -22,14 +22,31 @@
   padding-bottom: 200rpx;
 }
 
+/* .page_main_h > .tip > button, .page_main_h > .tip > button::before,
+.page_main_h > .tip > button::after {
+  width: 180rpx;
+  height: 50rpx;
+  margin-top: 50rpx;
+  padding: unset;
+  line-height: 2;
+  font-size: 24rpx;
+  border: 1rpx solid #f6f2ec;
+  background-color: #fff;
+} */
+
 .page_main_h > .tip > button {
   width: 180rpx;
   height: 50rpx;
   margin-top: 50rpx;
   padding: unset;
-  line-height: 1.8;
+  line-height: 2;
   font-size: 24rpx;
-  border: 1rpx solid #f6f2ec;
+  border: 2rpx solid #f6f2ec;
+  background-color: unset;
+}
+
+.page_main_h > .tip > button::before, .page_main_h > .tip > button::after {
+  border: 2rpx solid #f6f2ec;
 }
 
 .page_main_h > .operation {

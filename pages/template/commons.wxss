@@ -69,6 +69,7 @@
   bottom: 150rpx;
   width: 50rpx;
   height: 100rpx;
+  z-index: 99;
 }
 
 .fixedSuspensionButtonGroup > .scan_tdc > button, .scan_tdc > button::after,
