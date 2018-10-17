@@ -124,7 +124,7 @@ Page({
     openid = user_info.openid;
     //获取点播列表
     wx.request({
-      url: 'https://mobile.littlehotspot.com/smallapp/Demand/getList',
+      url: 'https://mobile.littlehotspot.com/smallapp21/Demand/getList',
       data: {
         page: page,
         openid: openid,
