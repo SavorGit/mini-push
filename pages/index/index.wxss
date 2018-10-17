@@ -17,27 +17,36 @@
   align-items: center;
 }
 
-.tip {
+.page_main_h > .tip {
   height: 40rpx;
   padding-bottom: 200rpx;
 }
 
-.operation {
+.page_main_h > .tip > button {
+  width: 180rpx;
+  height: 50rpx;
+  margin-top: 50rpx;
+  padding: unset;
+  line-height: 1.25;
+  border: 1rpx solid #f6f2ec;
+}
+
+.page_main_h > .operation {
   height: 600rpx;
 }
 
-.operation > view {
+.page_main_h > .operation > view {
   align-items: center;
   padding: 20rpx 0rpx 20rpx 0rpx;
 }
 
-.operation > view > image {
+.page_main_h > .operation > view > image {
   width: 48rpx;
   height: 38rpx;
   vertical-align: middle;
 }
 
-.operation > view > label {
+.page_main_h > .operation > view > label {
   height: 60rpx;
   line-height: 60rpx;
   margin-left: 10rpx;
