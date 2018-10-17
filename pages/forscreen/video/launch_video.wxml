@@ -4,7 +4,7 @@
 <view class="container">
   <view class='article'>
     <view class='video'>
-      <video src="{{video_url}}" autoplay="true"></video>
+      <video src="{{video_url}}" autoplay="false"></video>
     </view>
     <view class='title'>
       <label>{{video_name}}</label>

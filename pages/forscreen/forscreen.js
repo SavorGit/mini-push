@@ -218,12 +218,13 @@ Page({
             }
             //console.log(res.data.result.openid);
             wx.request({
-              url: 'https://mobile.littlehotspot.com/smallapp/index/isHaveCallBox',
+              url: 'https://mobile.littlehotspot.com/smallapp21/index/isHaveCallBox',
               data: { "openid": res.data.result.openid},
               header: {
                 'content-type': 'application/json'
               },
               success: function (rets) {
+                
                 if (rets.data.result.is_have==1){
                   wx.switchTab({
                     url: '../index/index',
@@ -259,6 +260,7 @@ Page({
         },
         method: "POST",
         success: function (res) {
+          var timestamp = (new Date()).valueOf();
           var is_have = res.data.result.is_have;
           if (is_have == 0) {
             that.setData({
@@ -266,6 +268,30 @@ Page({
               showCode: true,
               showView: false,
             })
+            var code = res.data.result.code;
+            wx.request({
+              url: 'https://netty-push.littlehotspot.com/push/box',
+              header: {
+                "Content-Type": "application/x-www-form-urlencoded"
+              },
+              method: "POST",
+              data: {
+                box_mac: box_mac,
+                cmd: 'call-mini-program',
+                msg: '{"action":1,"code":' + code + ',"openid":"' + openid + '"}',
+                req_id: timestamp
+              },
+              success: function (rt) {
+
+                if (rt.data.code != 10000) {
+                  wx.showToast({
+                    title: '该电视暂不能投屏',
+                    icon: 'none',
+                    duration: 2000
+                  })
+                } 
+              }
+            });
           } else if (is_have == 1) {
             wx.switchTab({
               url: '../index/index',
