@@ -403,6 +403,50 @@ Page({
       })
     }
   },
+  //断开连接
+  breakLink: function (e) {
+    var that = this;
+    openid = e.currentTarget.dataset.openid;
+    box_mac = e.currentTarget.dataset.boxmac;
+    var timestamp = (new Date()).valueOf();
+    wx.request({
+      url: 'https://mobile.littlehotspot.com/Smallapp21/index/breakLink',
+      header: {
+        'content-type': 'application/json'
+      },
+      method: "POST",
+      data: {
+        box_mac: box_mac,
+        openid:openid
+      },
+      success: function (res) {
+        if(res.data.code==10000){
+          that.setData({
+            is_link: 0,
+            box_mac: ''
+          })
+          wx.showToast({
+            title: '断开成功',
+            icon: 'none',
+            duration: 2000
+          })
+        }else {
+          wx.showToast({
+            title: '断开失败',
+            icon: 'none',
+            duration: 2000
+          })
+        }
+      },
+      fail: function (res) {
+        wx.showToast({
+          title: '网络异常，断开失败',
+          icon: 'none',
+          duration: 2000
+        })
+      }
+    })
+  },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
