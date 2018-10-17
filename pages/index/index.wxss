@@ -27,7 +27,8 @@
   height: 50rpx;
   margin-top: 50rpx;
   padding: unset;
-  line-height: 1.25;
+  line-height: 1.8;
+  font-size: 24rpx;
   border: 1rpx solid #f6f2ec;
 }
 
