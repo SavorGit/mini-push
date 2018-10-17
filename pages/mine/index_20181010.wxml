@@ -67,7 +67,7 @@
     <!-- 我的收藏 -->
     <view>
       <view class='swiper-tab font_333333_28'>
-        <view class="swiper-tab-item active">我的收藏</view>
+        <view class="swiper-tab-item active">我喜欢</view>
 
         <!-- 如果没有数据更多不显示 -->
         <navigator wx:if="{{collectlist  !=''}}" class="swiper-tab-item font_333333_24" style='margin-left: 340rpx;margin-right: 0rpx;' url='/pages/mine/favorite'>查看更多>></navigator>

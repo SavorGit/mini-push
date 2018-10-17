@@ -176,6 +176,13 @@ Page({
       })
     }
   },
+  //关闭授权弹窗
+  closeAuth:function(){
+    var that = this;
+    that.setData({
+      showModal: false,
+    })
+  },
   //呼大码
   callQrCode:function(e){
     var user_info = wx.getStorageSync("savor_user_info");

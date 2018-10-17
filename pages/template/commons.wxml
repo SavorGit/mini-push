@@ -6,7 +6,7 @@
     <view class='wxAuthLogin-container'>
       <view class='wxAuthLogin-top'>
         <view class='opt'>
-          <button class='close'>
+          <button class='close' bindtap='closeAuth'>
             <image src='/images/icon/grey_close.png'></image>
           </button>
         </view>
