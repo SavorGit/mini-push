@@ -25,7 +25,7 @@
       <block wx:for="{{imgUrls}}" wx:key="item">
         <navigator bindtap='jumpMimiPro' data-boxmac="{{box_mac}}" data-openid="{{openid}}" target="{{item.target}}" open-type="navigate" app-id="{{item.appId}}" path="{{item.path}}" extra-data="{{item.extraData}}" version="release" url="{{item.url}}">
           <swiper-item>
-            <image src="{{item.image}}" class="slide-image" />
+            <image mode='aspectFill' src="{{item.image}}" class="slide-image" />
           </swiper-item>
         </navigator>
       </block>
@@ -37,7 +37,7 @@
       <view class='article' wx:for="{{program_list}}" wx:key="key" wx:for-item="bean" wx:for-index="index">
         <view class='cover'>
           <navigator url="/pages/forscreen/video/launch_video?video_url={{bean.tx_url}}&video_name={{bean.title}}">
-            <image src='{{bean.img_url}}'></image>
+            <image mode='aspectFill' src='{{bean.img_url}}'></image>
           </navigator>
           <navigator bindtap='demandLog' data-openid='{{openid}}' data-box_mac='{{box_mac}}' data-title='{{bean.title}}' data-tx_url='{{bean.tx_url}}' data-id='{{bean.id}}' data-duration="{{bean.duration}}" class='full' url="/pages/forscreen/video/launch_video?video_url={{bean.tx_url}}&video_name={{bean.title}}">
             <label class='font_F6F6F6_28'>{{bean.title}}</label>
