@@ -41,7 +41,7 @@
           <!-- 有数据时-->
           <view class="weui-grids full_width" wx:if="{{publiclist  !=''}}">
             <view class="weui-grid" wx:for="{{publiclist}}" wx:key="key" wx:for-item="bean" wx:for-index="index">
-              <image class="pic_show" mode='aspectFill' src="{{bean.imgurl}}"></image>
+              <navigator url="/pages/mine/index"><image class="pic_show" mode='aspectFill' src="{{bean.imgurl}}"></image></navigator>
             </view>
 
           </view>
@@ -78,7 +78,7 @@
           <!-- 有数据时 -->
           <view class="weui-grids full_width" wx:if="{{collectlist  !=''}}">
             <view class="weui-grid" wx:for="{{collectlist}}" wx:key="key" wx:for-item="bean" wx:for-index="index">
-              <image class="pic_show" mode='aspectFill' src="{{bean.imgurl}}"></image>
+              <navigator url="/pages/mine/favorite"><image class="pic_show" mode='aspectFill' src="{{bean.imgurl}}"></image></navigator>
             </view>
 
           </view>

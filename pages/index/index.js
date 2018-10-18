@@ -432,6 +432,9 @@ Page({
             is_link: 0,
             box_mac: ''
           })
+          wx.reLaunch({
+            url: '../index/index'
+          })
           wx.showToast({
             title: '断开成功',
             icon: 'none',
