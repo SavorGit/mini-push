@@ -186,7 +186,6 @@ Page({
   callQrCode: function (e) {
     var user_info = wx.getStorageSync("savor_user_info");
     openid = user_info.openid;
-    console.log(openid);
     if (box_mac) {
       var timestamp = (new Date()).valueOf();
       var qrcode_url = 'https://mobile.littlehotspot.com/Smallapp/index/getBoxQr?box_mac=' + box_mac + '&type=3';
@@ -237,7 +236,7 @@ Page({
       urls[row] = current[row]['res_url']
 
     }
-    console.log(pkey);
+    //console.log(pkey);
     wx.previewImage({
       current: urls[pkey], // 当前显示图片的http链接
       urls: urls // 需要预览的图片http链接列表
@@ -301,6 +300,10 @@ Page({
         }
       });
     } else {
+      var user_info = wx.getStorageSync("savor_user_info");
+      //console.log(user_info);
+      var avatarUrl = user_info.avatarUrl;
+      var nickName  = user_info.nickName;
       var openid = e.currentTarget.dataset.openid;
       pubdetail = e.currentTarget.dataset.pubdetail;
       var forscreen_char = '';
@@ -358,7 +361,7 @@ Page({
             data: {
               box_mac: box_mac,
               cmd: 'call-mini-program',
-              msg: '{ "action": 4, "resource_type":2, "url":"' + url + '","filename":"' + filename + '","openid":"' + openid + '","img_nums":' + res_len + ',"forscreen_char":"' + forscreen_char + '","order":' + order + ',"forscreen_id":"' + forscreen_id + '","img_id":"' + res_id + '"}',
+              msg: '{ "action": 4, "resource_type":2, "url":"' + url + '","filename":"' + filename + '","openid":"' + openid + '","img_nums":' + res_len + ',"forscreen_char":"' + forscreen_char + '","order":' + order + ',"forscreen_id":"' + forscreen_id + '","img_id":"' + res_id + '","avatarUrl":"' + avatarUrl + '","nickName":"' + nickName+'"}',
               req_id: res_id
             },
             success: function (result) {
@@ -418,7 +421,7 @@ Page({
             data: {
               box_mac: box_mac,
               cmd: 'call-mini-program',
-              msg: '{ "action":2, "url": "' + pubdetail[i]['forscreen_url'] + '", "filename":"' + pubdetail[i]['filename'] + '","openid":"' + openid + '","resource_type":2,"video_id":"' + pubdetail[i]['res_id'] + '"}',
+              msg: '{ "action":2, "url": "' + pubdetail[i]['forscreen_url'] + '", "filename":"' + pubdetail[i]['filename'] + '","openid":"' + openid + '","resource_type":2,"video_id":"' + pubdetail[i]['res_id'] + '","avatarUrl":"' + avatarUrl + '","nickName":"' + nickName+'"}',
               req_id: pubdetail[i]['res_id']
             },
             success: function (result) {

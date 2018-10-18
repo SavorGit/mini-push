@@ -272,33 +272,42 @@ Page({
   //选择视频投屏
   chooseVedio(e) {
     var that = this
-    var box_mac = e.currentTarget.dataset.boxmac;
-    var openid = e.currentTarget.dataset.openid;
-    if (box_mac == '') {
-      wx.showModal({
-        title: '提示',
-        content: "您可扫码链接热点合作餐厅电视,使用此功能",
-        showCancel: true,
-        confirmText: '立即扫码',
-        success: function (res) {
-          if (res.confirm == true) {
-            wx.scanCode({
-              onlyFromCamera: true,
-              success: (res) => {
-                //console.log(res);
-                wx.navigateTo({
-                  url: '/' + res.path
-                })
-              }
-            })
-          }
-        }
-      });
-    } else {
-      wx.navigateTo({
-        url: '/pages/forscreen/forvideo/index?box_mac=' + box_mac + '&openid=' + openid,
+    var user_info = wx.getStorageSync("savor_user_info");
+    if (user_info.is_wx_auth == 0) {
+      that.setData({
+        showModal: true
       })
+    }else{
+      var box_mac = e.currentTarget.dataset.boxmac;
+      var openid = e.currentTarget.dataset.openid;
+      if (box_mac == '') {
+        wx.showModal({
+          title: '提示',
+          content: "您可扫码链接热点合作餐厅电视,使用此功能",
+          showCancel: true,
+          confirmText: '立即扫码',
+          success: function (res) {
+            if (res.confirm == true) {
+              wx.scanCode({
+                onlyFromCamera: true,
+                success: (res) => {
+                  //console.log(res);
+                  wx.navigateTo({
+                    url: '/' + res.path
+                  })
+                }
+              })
+            }
+          }
+        });
+      } else {
+        wx.navigateTo({
+          url: '/pages/forscreen/forvideo/index?box_mac=' + box_mac + '&openid=' + openid,
+        })
+      } 
     } 
+
+    
   },
   boxShow(e) {//视频点播让盒子播放
     var box_mac = e.currentTarget.dataset.boxmac;
