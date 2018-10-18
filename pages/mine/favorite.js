@@ -120,7 +120,7 @@ Page({
   popDel: function(e) {
     var forscreen_id = e.currentTarget.dataset.forscreen_id;
     var keys = e.currentTarget.dataset.keys;
-    console.log(forscreen_id);
+    //console.log(forscreen_id);
     this.setData({
       showModal: true,
       forscreen_id: forscreen_id,
@@ -157,7 +157,7 @@ Page({
       urls[row] = current[row]['res_url']
 
     }
-    console.log(pkey);
+    //console.log(pkey);
     wx.previewImage({
       current: urls[pkey], // 当前显示图片的http链接
       urls: urls // 需要预览的图片http链接列表

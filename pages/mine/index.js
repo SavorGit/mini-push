@@ -149,7 +149,7 @@ Page({
       urls[row] = current[row]['res_url']
       
     }
-    console.log(pkey);
+    //console.log(pkey);
     wx.previewImage({
       current: urls[pkey], // 当前显示图片的http链接
       urls: urls // 需要预览的图片http链接列表

@@ -146,7 +146,7 @@ Page({
   callQrCode: function (e) {
     var user_info = wx.getStorageSync("savor_user_info");
     openid = user_info.openid;
-    console.log(openid);
+    //console.log(openid);
     if (box_mac) {
       var timestamp = (new Date()).valueOf();
       var qrcode_url = 'https://mobile.littlehotspot.com/Smallapp/index/getBoxQr?box_mac=' + box_mac + '&type=3';

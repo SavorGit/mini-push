@@ -73,7 +73,7 @@ Page({
   },
 
   forscreen_video: function (res) {
-    console.log(res);
+    //console.log(res);
     var that= this;
     that.setData({
       is_btn_disabel:true,
