@@ -174,13 +174,61 @@ Page({
           })
         }
       })
+    }else {
+      wx.request({
+        url: 'https://mobile.littlehotspot.com/smallapp21/User/refuseRegister',
+        data: {
+          'openid': openid,
+        },
+        header: {
+          'content-type': 'application/json'
+        },
+        success:function(res){
+          if(res.data.code==10000){
+            user_info['is_wx_auth'] =1;
+            wx.setStorage({
+              key: 'savor_user_info',
+              data: user_info,
+            })
+            that.setData({
+              showModal: false,
+            })
+          }else {
+            wx.showToast({
+              title: '拒绝失败,请重试',
+              icon: 'none',
+              duration: 2000
+            });
+          }
+          
+        }
+      })
+      
     }
   },
   //关闭授权弹窗
   closeAuth:function(){
+    //关闭授权登陆埋点
     var that = this;
     that.setData({
       showModal: false,
+    })
+    var user_info = wx.getStorageSync("savor_user_info");
+    openid = user_info.openid;
+    console.log(box_mac);
+    if (box_mac == 'undefined' || box_mac == undefined){
+      box_mac = '';
+    }
+    wx.request({
+      url: 'https://mobile.littlehotspot.com/Smallapp21/index/closeauthLog',
+      header: {
+        'content-type': 'application/json'
+      },
+      data: {
+        openid: openid,
+        box_mac: box_mac,
+      },
+      
     })
   },
   //呼大码

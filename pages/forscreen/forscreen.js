@@ -153,7 +153,7 @@ Page({
   },
   //进来加载页面：
   onLoad: function (options) {
-    wx.request({
+    /*wx.request({
       url: 'https://mobile.littlehotspot.com/systemtime.php',
       success:function(e){
         wx.setStorage({
@@ -161,16 +161,29 @@ Page({
           data: e.data,
         })
       }
+    })*/
+    wx.request({
+      url: 'https://mobile.littlehotspot.com/smallapp21/index/getConfig',
+      success: function (e) {
+        wx.setStorage({
+          key: 'savor_now_time',
+          data: e.data.result,
+        })
+      }
     })
-    nowtime = wx.getStorageSync("savor_now_time");
+    var sysconfig = wx.getStorageSync("savor_now_time");
+    //console.log(sysconfig);
+    //return false;
     //console.log(nowtime);
     //box_mac = decodeURIComponent(options.scene);
+    nowtime = sysconfig.sys_time;
     var scene = decodeURIComponent(options.scene);
+
     var scene_arr = scene.split('_');
     box_mac = scene_arr[0];
     var code_type = scene_arr[1];
     var jz_time = scene_arr[2];
-
+    
     
     //console.log(scene_arr);
     //return false;
@@ -187,7 +200,8 @@ Page({
           success: function (res) {
 
             if (jz_time) {//判断二维码时间是否超过两个小时
-              var fztime = 7200000;
+              //var fztime = 7200000;
+              var fztime = sysconfig.exp_time;
               var difftime = nowtime - jz_time;
               if (difftime > fztime) {
                 wx.request({
