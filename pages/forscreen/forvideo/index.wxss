@@ -56,9 +56,9 @@
 }
 
 .launch_video_page_b > .page_bottom > button {
-  margin-bottom: 10rpx;
-  width: 100%;
+  width: calc(100vw - 60rpx);
   height: 90rpx;
+  margin: 0 30rpx 10rpx 30rpx;
 }
 
 /* ================================== 上传视频后 ================================== */
@@ -243,12 +243,12 @@
 
 .launch_video_page_a > .page_bottom {
   width: 100%;
-  height: 118rpx;
+  height: 108rpx;
   margin: 0rpx;
+  padding-top: 10rpx;
 }
 
 .launch_video_page_a > .page_bottom > .button_group {
-  margin-top: 10rpx;
   padding-left: 30rpx;
   padding-right: 30rpx;
   width: 100%;
@@ -256,12 +256,11 @@
 }
 
 .launch_video_page_a > .page_bottom > .button_group > button {
-  margin-bottom: 10rpx;
   width: 340rpx;
   height: 98rpx;
   line-height: 98rpx;
   text-align: center;
-  margin: 0 5rpx 0 5rpx;
+  margin: 0 5rpx 10rpx 5rpx;
 }
 
 .row-center {
