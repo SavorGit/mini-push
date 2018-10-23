@@ -57,7 +57,8 @@
         <view class='cover'>
           <video src='{{upload_vedio_temp}}' controls="false " show-fullscreen-btn="false " show-play-btn="false " show-center-play-btn="false " enable-progress-gesture="false " duration="0 "></video>
           <view>
-            <button>再次播放</button>
+            <button class='replay_this'>再次播放</button>
+            <!-- <button class='replay_this disabled-button'>15S</button> -->
           </view>
         </view>
         <view class='launch_history'>
@@ -221,7 +222,7 @@
     <view class="page_bottom ">
       <view class='button_group flex_row_center'>
         <button class='btn_background_034' bindtap='chooseVedio' data-boxmac="{{box_mac}} " data-openid="{{openid}} ">重选视频</button>
-        <button class='btn_background_034' bindtap="exitForscreen " data-boxmac="{{box_mac}} " data-openid="{{openid}} ">退出投屏</button>
+        <button class='btn_background_034' bindtap="exitForscreen" data-boxmac="{{box_mac}} " data-openid="{{openid}} ">退出投屏</button>
       </view>
     </view>
 

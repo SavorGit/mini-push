@@ -91,7 +91,7 @@
 
 .launch_video_page_a > scroll-view {
   width: 100%;
-  height: calc(100vh - 178rpx);
+  height: calc(100vh - 188rpx);
 }
 
 .launch_video_page_a .page_main {
@@ -108,20 +108,6 @@
   width: 100%;
   height: 484rpx;
   background-color: #932c3f;
-}
-
-.launch_video_page_a .page_main > view.cover > view > button {
-  margin-top: 20rpx;
-  margin-bottom: 30rpx;
-  width: 120rpx;
-  height: 40rpx;
-  border-radius: 10rpx;
-  border: 1rpx solid #932c3f;
-  color: #932c3f;
-  font-size: 24rpx;
-  padding: 0rpx;
-  line-height: 1.4055;
-  background-color: unset;
 }
 
 .launch_video_page_a .page_main > .launch_history {
@@ -257,11 +243,12 @@
 
 .launch_video_page_a > .page_bottom {
   width: 100%;
-  height: 108rpx;
+  height: 118rpx;
   margin: 0rpx;
 }
 
 .launch_video_page_a > .page_bottom > .button_group {
+  margin-top: 10rpx;
   padding-left: 30rpx;
   padding-right: 30rpx;
   width: 100%;
@@ -283,4 +270,24 @@
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
+}
+
+.replay_this {
+  margin-top: 20rpx;
+  margin-bottom: 30rpx;
+  width: 120rpx;
+  height: 40rpx;
+  border-radius: 10rpx;
+  border: 1rpx solid #932c3f;
+  color: #932c3f;
+  font-size: 24rpx;
+  padding: 0rpx;
+  line-height: 1.4055;
+  background-color: unset;
+}
+
+.disabled-button {
+  cursor: not-allowed;
+  border-color: #999;
+  color: #999;
 }
