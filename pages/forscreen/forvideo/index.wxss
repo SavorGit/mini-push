@@ -1,51 +1,34 @@
 /* pages/forscreen/forvideo/index.wxss */
 
-/** ================================== 投视频 ================================== **/
+/** ================================== 上传视频前 ================================== **/
 
-.choose_video_show_page {
-  margin: 0;
-  padding: 0;
+.launch_video_page_b {
+  margin: 0rpx;
+  padding: 0rpx;
   border: 0rpx;
+  width: 100vw;
+  height: 100vh;
 }
 
-.launch_video_page_top {
-  padding-top: 10rpx;
-  padding-bottom: 10rpx;
+.launch_video_page_b > .page_main {
+  padding-top: 115rpx;
   width: 100%;
-  height: 50rpx;
-  line-height: 50rpx;
-  background: #fff;
-}
-
-.launch_video_page_top > label {
-  margin-left: 30rpx;
-}
-
-.launch_video_page_top > button {
-  width: 150rpx;
-  height: 60rpx;
-}
-
-.launch_video_page_main {
-  margin-top: 115rpx;
-  width: 100%;
-  height: calc(100vh - 263rpx);
-  display: block;
+  height: calc(100vh - 215rpx);
   text-align: center;
 }
 
-.launch_video_page_main > view.cover > .screen_video {
+.launch_video_page_b > .page_main > view.cover > video {
   width: 100%;
   height: 484rpx;
   background-color: #932c3f;
 }
 
-.upload_progress {
+.launch_video_page_b > .page_main > view.cover > view {
   margin-top: 63rpx;
   margin-bottom: 100rpx;
 }
 
-.upload_progress > progress {
+.launch_video_page_b > .page_main > view.cover > view > progress {
   margin-top: 16rpx;
   margin-left: calc((100vw - 450rpx) / 2);
   width: 450rpx;
@@ -54,37 +37,7 @@
   overflow: hidden;
 }
 
-.tip {
-  margin-top: 32rpx;
-}
-
-.option {
-  margin-top: 112rpx;
-}
-
-.rechoose_button_video {
-  width: 100%;
-  margin: 0rpx;
-}
-
-.launch_video_page_bottom {
-  margin-top: 80rpx;
-  margin-bottom: 30rpx;
-  padding-left: 30rpx;
-  padding-right: 30rpx;
-  width: 100%;
-  text-align: center;
-}
-
-.launch_video_page_bottom > button {
-  width: 340rpx;
-  height: 98rpx;
-  line-height: 98rpx;
-  text-align: center;
-  margin: 0 5rpx 0 5rpx;
-}
-
-.grant_auth {
+.launch_video_page_b > .page_main > .grant_auth {
   margin: 10rpx 0rpx 100rpx 0rpx;
   display: flex;
   flex-direction: column;
@@ -92,8 +45,242 @@
   justify-content: space-between;
 }
 
-.grant_auth > .checkbox-group {
+.launch_video_page_b > .page_main > .grant_auth > .checkbox-group {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
+}
+
+.launch_video_page_b > .page_bottom {
+  height: 100rpx;
+}
+
+.launch_video_page_b > .page_bottom > button {
+  margin-bottom: 10rpx;
+  width: 100%;
+  height: 90rpx;
+}
+
+/* ================================== 上传视频后 ================================== */
+
+.launch_video_page_a {
+  margin: 0;
+  padding: 0;
+  border: 0rpx;
+  width: 100vw;
+  height: 100vh;
+}
+
+.launch_video_page_a > .page_top {
+  padding-top: 10rpx;
+  padding-bottom: 10rpx;
+  width: 100%;
+  height: 50rpx;
+  line-height: 50rpx;
+  background: #f6f3ee;
+}
+
+.launch_video_page_a > .page_top > label {
+  margin-left: 30rpx;
+}
+
+.launch_video_page_a > .page_top > button {
+  width: 150rpx;
+  height: 60rpx;
+}
+
+.launch_video_page_a > scroll-view {
+  width: 100%;
+  height: calc(100vh - 178rpx);
+}
+
+.launch_video_page_a .page_main {
+  width: 100%;
+  text-align: center;
+}
+
+.launch_video_page_a .page_main > view.cover {
+  padding-bottom: 10rpx;
+  width: 100%;
+}
+
+.launch_video_page_a .page_main > view.cover > video {
+  width: 100%;
+  height: 484rpx;
+  background-color: #932c3f;
+}
+
+.launch_video_page_a .page_main > view.cover > view > button {
+  margin-top: 20rpx;
+  margin-bottom: 30rpx;
+  width: 120rpx;
+  height: 40rpx;
+  border-radius: 10rpx;
+  border: 1rpx solid #932c3f;
+  color: #932c3f;
+  font-size: 24rpx;
+  padding: 0rpx;
+  line-height: 1.4055;
+  background-color: unset;
+}
+
+.launch_video_page_a .page_main > .launch_history {
+  background: #f6f3ee;
+}
+
+.launch_video_page_a .page_main > .launch_history > .title {
+  text-align: left;
+  padding: 15rpx;
+}
+
+.launch_video_page_a .page_main > .launch_history > .title > image {
+  width: 40rpx;
+  height: 40rpx;
+  vertical-align: middle;
+}
+
+.launch_video_page_a .page_main > .launch_history > .no_data {
+  min-height: 300rpx;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.launch_video_page_a .page_main > .launch_history > .history_list {
+  padding: 0rpx 30rpx 20rpx 30rpx;
+}
+
+.launch_video_page_a .page_main > .launch_history > .history_list .line {
+  width: 100%;
+  height: 0rpx;
+  border: 1rpx solid #eee5d6;
+  margin-top: 15rpx;
+  margin-bottom: 15rpx;
+}
+
+.launch_video_page_a .page_main > .launch_history > .history_list .pic {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+}
+
+.launch_video_page_a .page_main > .launch_history > .history_list .pic > .weui-grids {
+  width: 570rpx;
+}
+
+.launch_video_page_a .page_main > .launch_history > .history_list .pic > .weui-grids > .weui-grid {
+  width: 95rpx;
+  height: 100rpx;
+}
+
+.launch_video_page_a .page_main > .launch_history > .history_list .pic > .weui-grids > .weui-grid > image {
+  width: 90rpx;
+  height: 90rpx;
+  border-radius: 10rpx;
+  margin: 5rpx 5rpx 5rpx 0rpx;
+}
+
+.launch_video_page_a .page_main > .launch_history > .history_list .pic > .btn {
+  width: calc(100vw - 630rpx);
+  text-align: right;
+}
+
+.launch_video_page_a .page_main > .launch_history > .history_list .pic > .btn > button::before,
+.launch_video_page_a .page_main > .launch_history > .history_list .pic > .btn > button::after {
+  border: unset;
+}
+
+.launch_video_page_a .page_main > .launch_history > .history_list .pic > .btn > button {
+  width: 90rpx;
+  height: 90rpx;
+  line-height: 90rpx;
+  border-radius: 10rpx;
+  padding: 0rpx;
+  margin-top: 5rpx;
+  margin-right: 0rpx;
+  background-color: #ede6de;
+  color: #932c3f;
+  font-size: 24rpx;
+}
+
+.launch_video_page_a .page_main > .launch_history > .history_list .video {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+}
+
+.launch_video_page_a .page_main > .launch_history > .history_list .video > .cover > navigator {
+  width: 90rpx;
+  height: 90rpx;
+}
+
+.launch_video_page_a .page_main > .launch_history > .history_list .video > .cover > navigator > image {
+  width: 100%;
+  height: 100%;
+  border-radius: 10rpx;
+  margin: 5rpx 5rpx 5rpx 0rpx;
+}
+
+.launch_video_page_a .page_main > .launch_history > .history_list .video > .cover > view > navigator {
+  margin-top: -65rpx;
+  margin-left: 25rpx;
+  width: 40rpx;
+  height: 40rpx;
+}
+
+.launch_video_page_a .page_main > .launch_history > .history_list .video > .cover > view > navigator > image {
+  width: 100%;
+  height: 100%;
+}
+
+.launch_video_page_a .page_main > .launch_history > .history_list .video > .btn {
+  width: calc(100vw - 150rpx);
+  text-align: right;
+}
+
+.launch_video_page_a .page_main > .launch_history > .history_list .video > .btn > button::before,
+.launch_video_page_a .page_main > .launch_history > .history_list .video > .btn > button::after {
+  border: unset;
+}
+
+.launch_video_page_a .page_main > .launch_history > .history_list .video > .btn > button {
+  width: 90rpx;
+  height: 90rpx;
+  line-height: 90rpx;
+  border-radius: 10rpx;
+  padding: 0rpx;
+  margin-right: 0rpx;
+  background-color: #ede6de;
+  color: #932c3f;
+  font-size: 24rpx;
+}
+
+.launch_video_page_a > .page_bottom {
+  width: 100%;
+  height: 108rpx;
+  margin: 0rpx;
+}
+
+.launch_video_page_a > .page_bottom > .button_group {
+  padding-left: 30rpx;
+  padding-right: 30rpx;
+  width: 100%;
+  text-align: center;
+}
+
+.launch_video_page_a > .page_bottom > .button_group > button {
+  margin-bottom: 10rpx;
+  width: 340rpx;
+  height: 98rpx;
+  line-height: 98rpx;
+  text-align: center;
+  margin: 0 5rpx 0 5rpx;
+}
+
+.row-center {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
 }
