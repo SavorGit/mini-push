@@ -301,14 +301,8 @@ Page({
       var vediourl = e.currentTarget.dataset.vediourl;
       var forscreen_char = e.currentTarget.dataset.name;
 
-      var index1 = vediourl.lastIndexOf("/");
-      var index_ask = vediourl.lastIndexOf("?");
-      if (index_ask > 0) {
-        var index2 = index_ask
-      } else {
-        var index2 = vediourl.length;
-      }
-      var filename = vediourl.substring(index1 + 1, index2);//文件名
+      
+      var filename = e.currentTarget.dataset.filename;//文件名
       var timestamp = (new Date()).valueOf();
       var mobile_brand = app.globalData.mobile_brand;
       var mobile_model = app.globalData.mobile_model;

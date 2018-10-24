@@ -49,7 +49,7 @@
         <view class='con_bottom'>
           <view class='launch'>
             <view>
-              <button bindtap='boxShow' data-name="{{bean.title}}" data-vediourl="{{bean.tx_url}}" data-boxmac="{{box_mac}}" data-openid="{{openid}}" class='font_932C3F_20'>电视播放</button>
+              <button bindtap='boxShow' data-name="{{bean.title}}" data-filename='{{bean.filename}}' data-vediourl="{{bean.tx_url}}" data-boxmac="{{box_mac}}" data-openid="{{openid}}" class='font_932C3F_20'>电视播放</button>
             </view>
           </view>
           <view class='operation'>

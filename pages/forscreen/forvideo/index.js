@@ -67,31 +67,7 @@ Page({
           upload_vedio_temp:res.tempFilePath,
           duration: res.duration
         });
-        wx.request({
-          url: 'https://mobile.littlehotspot.com/Smallapp21/ForscreenHistory/getList',
-          header: {
-            'content-type': 'application/json'
-          },
-          data: {
-            openid: openid,
-            box_mac: box_mac,
-            page: page,
-          },
-          success: function (res) {
-            var hst_list = res.data.result;
-            
-            if (JSON.stringify(hst_list) == "{}"){
-              that.setData({
-                forscreen_history_list:''
-              })
-            }else {
-              that.setData({
-                forscreen_history_list: res.data.result
-              })
-            }
-            
-          }
-        })
+        
         //res_sup_time = (new Date()).valueOf();
         //uploadVedio(res, box_mac, openid, res_sup_time);
       },fail:function(res){
@@ -219,7 +195,33 @@ Page({
                     
 
                 },
+                
               });
+              wx.request({
+                url: 'https://mobile.littlehotspot.com/Smallapp21/ForscreenHistory/getList',
+                header: {
+                  'content-type': 'application/json'
+                },
+                data: {
+                  openid: openid,
+                  box_mac: box_mac,
+                  page: page,
+                },
+                success: function (res) {
+                  var hst_list = res.data.result;
+
+                  if (JSON.stringify(hst_list) == "{}") {
+                    that.setData({
+                      forscreen_history_list: ''
+                    })
+                  } else {
+                    that.setData({
+                      forscreen_history_list: res.data.result
+                    })
+                  }
+
+                }
+              })
             }
           });
         }
@@ -256,31 +258,7 @@ Page({
       maxDuration: 60,
       camera: 'back',
       success: function (res) {
-        wx.request({
-          url: 'https://mobile.littlehotspot.com/Smallapp21/ForscreenHistory/getList',
-          header: {
-            'content-type': 'application/json'
-          },
-          data: {
-            openid: openid,
-            box_mac: box_mac,
-            page: page,
-          },
-          success: function (res) {
-            var hst_list = res.data.result;
-
-            if (JSON.stringify(hst_list) == "{}") {
-              that.setData({
-                forscreen_history_list: ''
-              })
-            } else {
-              that.setData({
-                forscreen_history_list: res.data.result
-              })
-            }
-
-          }
-        })
+        
         that.setData({
           showVedio: true,
           upload_vedio_temp: res.tempFilePath,
@@ -495,7 +473,7 @@ Page({
     var timestamp = (new Date()).valueOf();
     var mobile_brand = app.globalData.mobile_brand;
     var mobile_model = app.globalData.mobile_model;
-    var duration = parseInt(e.target.dataset.duration);
+    var duration = 10;
     wx.request({
       url: "https://netty-push.littlehotspot.com/push/box",
       header: {
