@@ -17,7 +17,8 @@
     "pages/mine/index_20181010",
     "pages/mine/index",
     "pages/mine/favorite",
-    "pages/demand/index"
+    "pages/demand/index",
+    "pages/thematic/birthday/list"
   ],
   "window": {
     "backgroundTextStyle": "dark",

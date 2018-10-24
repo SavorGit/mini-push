@@ -1,0 +1,50 @@
+/* pages/thematic/birthday/list.wxss */
+
+/* ================================= 生日歌列表 ================================= */
+
+.body {
+  width: calc(100vw - 34rpx);
+  height: calc(100vh - 32rpx);
+  padding: 16rpx 17rpx;
+}
+
+.birthday-list-grids {
+  width: 100%;
+}
+
+.birthday-list-grid {
+  width: 358rpx;
+  height: 286rpx;
+}
+
+.birthday-list-grid > image {
+  width: 342rpx;
+  height: 228rpx;
+  margin: 8rpx 8rpx 0rpx 8rpx;
+  border-radius: 15rpx 15rpx 0rpx 0rpx;
+  display: block;
+}
+
+.birthday-list-grid > text {
+  width: 342rpx;
+  height: 42rpx;
+  line-height: 42rpx;
+  margin: 0rpx 8rpx 8rpx 8rpx;
+  background-color: #f6f3ee;
+  border-radius: 0rpx 0rpx 15rpx 15rpx;
+  display: block;
+  text-align: center;
+}
+
+.birthday-list-grid > .cover {
+  width: 358rpx;
+  height: 286rpx;
+  margin-top: -286rpx;
+}
+
+.birthday-list-grid > .cover image {
+  margin-top: 113rpx;
+  margin-left: 149rpx;
+  width: 60rpx;
+  height: 60rpx;
+}

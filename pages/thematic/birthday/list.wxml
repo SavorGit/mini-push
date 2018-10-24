@@ -1,0 +1,37 @@
+<!--pages/thematic/birthday/list.wxml-->
+
+<!-- ================================= 生日歌列表 ================================= -->
+<view class="container">
+  <view class='body'>
+    <view class='weui-grids birthday-list-grids'>
+      <view class='weui-grid birthday-list-grid'>
+        <image mode='aspectFill' src='http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg'></image>
+        <text class='font_666666_24'>生日歌 - 20种语言版</text>
+        <navigator class='cover'>
+          <image src="/images/icon/white_play.png"></image>
+        </navigator>
+      </view>
+      <view class='weui-grid birthday-list-grid'>
+        <image mode='aspectFill' src='http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg'></image>
+        <text class='font_666666_24'>生日歌 - 经典英文版</text>
+        <navigator class='cover'>
+          <image src="/images/icon/white_play.png"></image>
+        </navigator>
+      </view>
+      <view class='weui-grid birthday-list-grid'>
+        <image mode='aspectFill' src='http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg'></image>
+        <text class='font_666666_24'>生日歌 - 儿童版</text>
+        <navigator class='cover'>
+          <image src="/images/icon/white_play.png"></image>
+        </navigator>
+      </view>
+      <view class='weui-grid birthday-list-grid'>
+        <image mode='aspectFill' src='http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg'></image>
+        <text class='font_666666_24'>生日歌 - 经典粤语版</text>
+        <navigator class='cover'>
+          <image src="/images/icon/white_play.png"></image>
+        </navigator>
+      </view>
+    </view>
+  </view>
+</view>
