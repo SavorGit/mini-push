@@ -178,7 +178,6 @@ Page({
     //box_mac = decodeURIComponent(options.scene);
     nowtime = sysconfig.sys_time;
     var scene = decodeURIComponent(options.scene);
-
     var scene_arr = scene.split('_');
     box_mac = scene_arr[0];
     var code_type = scene_arr[1];
@@ -240,14 +239,17 @@ Page({
               success: function (rets) {
                 
                 if (rets.data.result.is_have==1){
-                  wx.switchTab({
+                  /*wx.switchTab({
                     url: '../index/index',
                     success: function (e) {
                       var page = getCurrentPages().pop();
                       if (page == undefined || page == null) return;
                       page.onLoad();
                     }
-                  });
+                  });*/
+                  wx.reLaunch({
+                    url: '../index/index',
+                  })
                 }
               }
             });
@@ -307,14 +309,17 @@ Page({
               }
             });
           } else if (is_have == 1) {
-            wx.switchTab({
+            /*wx.switchTab({
               url: '../index/index',
               success: function (e) {
                 var page = getCurrentPages().pop();
                 if (page == undefined || page == null) return;
                 page.onLoad();
               }
-            });
+            });*/
+            wx.reLaunch({
+              url: '../index/index',
+            })
           }
         }
       })

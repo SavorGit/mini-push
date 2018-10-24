@@ -53,22 +53,7 @@ Page({
           })
         }
       });//判断用户是否注册结束
-      wx.request({
-        url: 'https://mobile.littlehotspot.com/Smallapp/index/isHaveCallBox?openid=' + app.globalData.openid,
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        success: function (rest) {
-          var is_have = rest.data.result.is_have;
-          if (is_have == 1) {
-            that.setData({
-              box_mac: rest.data.result.box_mac,
-            })
-            box_mac = rest.data.result.box_mac;
-          }
-
-        }
-      })
+     
     } else {
       app.openidCallback = openid => {
         if (openid != '') {
@@ -99,48 +84,73 @@ Page({
               })
             }
           });//判断用户是否注册结束
-          wx.request({
-            url: 'https://mobile.littlehotspot.com/Smallapp/index/isHaveCallBox?openid=' + openid,
-            headers: {
-              'Content-Type': 'application/json'
-            },
-
-            success: function (rest) {
-              var is_have = rest.data.result.is_have;
-              if (is_have == 1) {
-                that.setData({
-                  box_mac: rest.data.result.box_mac,
-                });
-                box_mac = rest.data.result.box_mac;
-              }
-
-            }
-          })
+          
         }
       }
     }
     var user_info = wx.getStorageSync("savor_user_info");
-
     openid = user_info.openid;
-    //获取点播列表
     wx.request({
-      url: 'https://mobile.littlehotspot.com/smallapp21/Demand/getList',
-      data: {
-        page: page,
-        openid: openid,
+      url: 'https://mobile.littlehotspot.com/Smallapp/index/isHaveCallBox?openid=' + openid,
+      headers: {
+        'Content-Type': 'application/json'
       },
-      header: {
-        'content-type': 'application/json'
-      },
-      success: function (res) {
-        if (res.data.code == 10000) {
-          program_list = res.data.result
+
+      success: function (rest) {
+        var is_have = rest.data.result.is_have;
+        if (is_have == 1) {
           that.setData({
-            program_list: res.data.result,
+            box_mac: rest.data.result.box_mac,
+          });
+          box_mac = rest.data.result.box_mac;
+          //获取节目单列表
+          wx.request({//获取机顶盒节目单列表
+            url: 'https://mobile.littlehotspot.com/Smallapp21/BoxProgram/getBoxProgramList',
+            header: {
+              'Content-Type': 'application/json'
+            },
+            data: {
+              box_mac: box_mac,
+              page: page,
+              openid: openid,
+            },
+            method: "POST",
+            success: function (res) {
+              program_list = res.data.result
+              that.setData({
+                program_list: res.data.result
+              })
+            }
           })
+        } else {
+          //获取点播列表
+          wx.request({
+            url: 'https://mobile.littlehotspot.com/smallapp21/Demand/getList',
+            data: {
+              page: page,
+              openid: openid,
+            },
+            header: {
+              'content-type': 'application/json'
+            },
+            success: function (res) {
+              if (res.data.code == 10000) {
+                program_list = res.data.result
+                that.setData({
+                  program_list: res.data.result,
+                })
+                
+              }
+            }
+          });
+          that.setData({
+            box_mac: '',
+          })
+          box_mac = '';
         }
       }
-    });
+    })
+    
     
   },
   //呼大码
@@ -210,35 +220,57 @@ Page({
   //上拉刷新
   loadMore: function (e) {
     var that = this;
-
+    var box_mac = e.currentTarget.dataset.boxmac;
     page = page + 1;
     that.setData({
       hiddens: false,
     })
-    wx.request({
-      url: 'https://mobile.littlehotspot.com/smallapp/Demand/getList',
-      header: {
-        'Content-Type': 'application/json'
-      },
-      data: {
-        page: page,
-        openid: openid,
-      },
-      method: "POST",
-      success: function (res) {
-        if (res.data.code == 10000) {
+    if(box_mac=='' || box_mac ==undefined){
+      wx.request({
+        url: 'https://mobile.littlehotspot.com/smallapp/Demand/getList',
+        header: {
+          'Content-Type': 'application/json'
+        },
+        data: {
+          page: page,
+          openid: openid,
+        },
+        method: "POST",
+        success: function (res) {
+          if (res.data.code == 10000) {
+            that.setData({
+              program_list: res.data.result,
+              hiddens: true,
+            })
+            program_list = res.data.result
+          } else {
+            that.setData({
+              hiddens: true,
+            })
+          }
+        }
+      })
+    }else {
+      wx.request({
+        url: 'https://mobile.littlehotspot.com/Smallapp/BoxProgram/getBoxProgramList',
+        header: {
+          'Content-Type': 'application/json'
+        },
+        data: {
+          box_mac: box_mac,
+          page: page,
+        },
+        method: "POST",
+        success: function (res) {
+          program_list = res.data.result
           that.setData({
             program_list: res.data.result,
             hiddens: true,
           })
-          program_list = res.data.result
-        } else {
-          that.setData({
-            hiddens: true,
-          })
         }
-      }
-    })
+      })
+    }
+    
   },
   //电视播放
   boxShow(e) {
@@ -330,6 +362,7 @@ Page({
     //var openid = e.target.dataset.openid;
     var res_id = e.target.dataset.res_id;
     var res_key = e.target.dataset.res_key;
+    var res_type = e.target.dataset.type;
     wx.request({
       url: 'https://mobile.littlehotspot.com/Smallapp/collect/recLogs',
       header: {
@@ -338,7 +371,7 @@ Page({
       data: {
         'openid': openid,
         'res_id': res_id,
-        'type': 1,
+        'type': res_type,
         'status': 1,
       },
       success: function (e) {
@@ -379,6 +412,7 @@ Page({
     var that = this;
     var res_id = e.target.dataset.res_id;
     var res_key = e.target.dataset.res_key;
+    var res_type= e.target.dataset.type;
     wx.request({
       url: 'https://mobile.littlehotspot.com/Smallapp/collect/recLogs',
       header: {
@@ -387,7 +421,7 @@ Page({
       data: {
         'openid': openid,
         'res_id': res_id,
-        'type': 1,
+        'type': res_type,
         'status': 0,
       },
       success: function (e) {
@@ -429,9 +463,11 @@ Page({
     var openid = res.target.dataset.openid;
     var res_id = res.target.dataset.res_id;
     var res_key = res.target.dataset.res_key;
+    var res_type= res.target.dataset.type;
     var video_url = res.target.dataset.video_url;
     var video_name = res.target.dataset.video_name;
     var video_img = res.target.dataset.video_img;
+    
     if (res.from === 'button') {
       // 来自页面内转发按钮
       return {
@@ -439,6 +475,7 @@ Page({
         path: '/pages/forscreen/video/launch_video?video_url=' + video_url + '&video_name=' + video_name,
         imageUrl: video_img,
         success: function (res) {
+          
           // 转发成功
           wx.request({
             url: 'https://mobile.littlehotspot.com/Smallapp/share/recLogs',
@@ -448,10 +485,11 @@ Page({
             data: {
               'openid': openid,
               'res_id': res_id,
-              'type': 1,
+              'type': res_type,
               'status': 1,
             },
             success: function (e) {
+              console.log('fdafdas');
               for (var i = 0; i < program_list.length; i++) {
                 if (i == res_key) {
                   program_list[i].share_num++;

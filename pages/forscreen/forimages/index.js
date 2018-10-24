@@ -240,7 +240,7 @@ Page({
         if (res.progress==100){
           var res_eup_time = (new Date()).valueOf();
           wx.request({
-                url: 'https://mobile.littlehotspot.com/Smallapp/index/recordForScreenPics',
+                url: 'https://mobile.littlehotspot.com/Smallapp21/index/recordForScreenPics',
                 header: {
                   'content-type': 'application/json'
                 },
@@ -359,7 +359,7 @@ Page({
       },
       success: function (result) {
         wx.request({
-          url: 'https://mobile.littlehotspot.com/Smallapp/index/recordForScreenPics',
+          url: 'https://mobile.littlehotspot.com/Smallapp21/index/recordForScreenPics',
           header: {
             'content-type': 'application/json'
           },

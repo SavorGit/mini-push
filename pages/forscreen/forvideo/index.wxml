@@ -52,13 +52,13 @@
         <navigator url="/pages/forscreen/relief ">免责声明</navigator>
       </label>
     </view>
-    <scroll-view scroll-y="true" scroll-with-animation="true">
+    <scroll-view scroll-y="true" scroll-with-animation="true" bindscrolltolower="loadMore" data-openid='{{openid}}' data-box_mac='{{box_mac}}'>
       <view class='page_main'>
         <view class='cover'>
           <video src='{{upload_vedio_temp}}' controls="false " show-fullscreen-btn="false " show-play-btn="false " show-center-play-btn="false " enable-progress-gesture="false " duration="0 "></video>
           <view>
-            <button class='replay_this'>再次播放</button>
-            <!-- <button class='replay_this disabled-button'>15S</button> -->
+            <button wx:if="{{is_replay_disabel==false}}" bindtap='replayVideo' data-openid='{{openid}}' data-box_mac='{{box_mac}}' data-replay_video_url="{{replay_video_url}}" data-duration='{{duration}}' class='replay_this'>再次播放</button>
+            <button wx:else class='replay_this disabled-button'>{{djs}}S</button> 
           </view>
         </view>
         <view class='launch_history'>
@@ -69,140 +69,41 @@
 
 
           <!-- 有数据时 -->
-          <view class='history_list'>
-
-            <view class="pic">
-              <view class="weui-grids">
-                <view class="weui-grid">
-                  <image mode='aspectFill' src="http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
+          
+          <view class='history_list' wx:if="{{forscreen_history_list !=''}}">
+              <view wx:for="{{forscreen_history_list}}" wx:key="key" wx:for-item="bean" wx:for-index="index">
+              <view wx:if="{{bean.res_type==1}}" class="pic">
+                <view class="weui-grids">
+                  <view class="weui-grid" wx:for="{{bean.list}}" wx:key="pkey" wx:for-item="item" wx:for-index="indexs">
+                    <image bindtap="previewImage" data-pkey="{{indexs}}" data-src="{{bean.list}}" mode='aspectFill' src="{{item.imgurl}}"></image>
+                  </view>
+                </view>
+                <view class='btn'>
+                  <button bindtap="replayHistory" data-res_type='{{bean.res_type}}' data-box_mac='{{box_mac}}' data-openid='{{openid}}' data-res_list='{{bean.list}}'>重播</button>
                 </view>
               </view>
-              <view class='btn'>
-                <button>重播</button>
+              <view  wx:else class="video">
+                <view class="cover" wx:for="{{bean.list}}" wx:key="pkey" wx:for-item="item" wx:for-index="indexs">
+                  <navigator url="/pages/forscreen/video/launch_video?video_url={{item.res_url}}&video_name=">
+                    <image mode='aspectFill' src="{{item.imgurl}}"></image>
+                  </navigator >
+                  <view>
+                    <navigator url="/pages/forscreen/video/launch_video?video_url={{item.res_url}}&video_name=">
+                      <image src="/images/icon/white_play.png"></image>
+                    </navigator>
+                  </view>
+                </view>
+                <view class='btn'>
+                  <button bindtap="replayHistory" data-res_type='{{bean.res_type}}' data-box_mac='{{box_mac}}' data-openid='{{openid}}' data-res_list='{{bean.list}}'>重播</button>
+                </view>
               </view>
-            </view>
             <view class='line'></view>
-            <view class="pic">
-              <view class="weui-grids">
-                <view class="weui-grid">
-                  <image mode='aspectFill' src="http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
-                </view>
-                <view class="weui-grid">
-                  <image mode='aspectFill' src="http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
-                </view>
-              </view>
-              <view class='btn'>
-                <button>重播</button>
-              </view>
             </view>
-            <view class='line'></view>
-            <view class="pic">
-              <view class="weui-grids">
-                <view class="weui-grid">
-                  <image mode='aspectFill' src="http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
-                </view>
-                <view class="weui-grid">
-                  <image mode='aspectFill' src="http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
-                </view>
-                <view class="weui-grid">
-                  <image mode='aspectFill' src="http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
-                </view>
-              </view>
-              <view class='btn'>
-                <button>重播</button>
-              </view>
-            </view>
-            <view class='line'></view>
-            <view class="pic">
-              <view class="weui-grids">
-                <view class="weui-grid">
-                  <image mode='aspectFill' src="http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
-                </view>
-                <view class="weui-grid">
-                  <image mode='aspectFill' src="http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
-                </view>
-                <view class="weui-grid">
-                  <image mode='aspectFill' src="http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
-                </view>
-                <view class="weui-grid">
-                  <image mode='aspectFill' src="http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
-                </view>
-              </view>
-              <view class='btn'>
-                <button>重播</button>
-              </view>
-            </view>
-            <view class='line'></view>
-            <view class="pic">
-              <view class="weui-grids">
-                <view class="weui-grid">
-                  <image mode='aspectFill' src="http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
-                </view>
-                <view class="weui-grid">
-                  <image mode='aspectFill' src="http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
-                </view>
-                <view class="weui-grid">
-                  <image mode='aspectFill' src="http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
-                </view>
-                <view class="weui-grid">
-                  <image mode='aspectFill' src="http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
-                </view>
-                <view class="weui-grid">
-                  <image mode='aspectFill' src="http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
-                </view>
-              </view>
-              <view class='btn'>
-                <button>重播</button>
-              </view>
-            </view>
-            <view class='line'></view>
-            <view class="pic">
-              <view class="weui-grids">
-                <view class="weui-grid">
-                  <image mode='aspectFill' src="http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
-                </view>
-                <view class="weui-grid">
-                  <image mode='aspectFill' src="http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
-                </view>
-                <view class="weui-grid">
-                  <image mode='aspectFill' src="http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
-                </view>
-                <view class="weui-grid">
-                  <image mode='aspectFill' src="http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
-                </view>
-                <view class="weui-grid">
-                  <image mode='aspectFill' src="http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
-                </view>
-                <view class="weui-grid">
-                  <image mode='aspectFill' src="http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
-                </view>
-              </view>
-              <view class='btn'>
-                <button>重播</button>
-              </view>
-            </view>
-            <view class='line'></view>
-
-            <view class="video">
-              <view class="cover">
-                <navigator>
-                  <image mode='aspectFill' src="http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
-                </navigator>
-                <view>
-                  <navigator>
-                    <image src="/images/icon/white_play.png"></image>
-                  </navigator>
-                </view>
-              </view>
-              <view class='btn'>
-                <button>重播</button>
-              </view>
-            </view>
+            
 
           </view>
 
-          <!--无数据 
-          <view class='no_data'>
+          <view class='no_data' wx:else>
             <view class="row-center">
               <view>
                 <image style='width: 44rpx;height: 64rpx;' src='http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default_mine.png'></image>
@@ -211,11 +112,14 @@
                 <label class='font_666666_24'>暂无投屏记录</label>
               </view>
             </view>
-          </view>-->
-
+          </view>
+          
 
         </view>
       </view>
+      <view class="body-view">
+      <loading hidden="{{hiddens}}" bindchange="loadingChange">加载中...</loading>
+    </view>
     </scroll-view>
 
     <!-- 重选 -->

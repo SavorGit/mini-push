@@ -65,7 +65,11 @@ Page({
             box_mac = rest.data.result.box_mac;
             
           } else {
-
+            that.setData({
+              is_link: 0,
+              box_mac: '',
+            })
+            box_mac = '';
           }
 
         }
@@ -117,6 +121,12 @@ Page({
                 })
                 box_mac = rest.data.result.box_mac;
                 //getHotelInfo(rest.data.result.box_mac);
+              }else {
+                that.setData({
+                  is_link: 0,
+                  box_mac: '',
+                })
+                box_mac = '';
               }
             }
           })
@@ -128,7 +138,7 @@ Page({
     var user_info = wx.getStorageSync("savor_user_info");
     openid = user_info.openid;
     wx.request({
-      url: 'https://mobile.littlehotspot.com/Smallapp/User/index',
+      url: 'https://mobile.littlehotspot.com/Smallapp21/User/index',
       headers: {
         'Content-Type': 'application/json'
       },
@@ -191,7 +201,11 @@ Page({
   },//呼大码结束
 
   refreshOn:function(){
-    
+    wx.showToast({
+      title: '刷新成功',
+      icon: 'none',
+      duration: 2000
+    });
     this.onLoad();
   },
 

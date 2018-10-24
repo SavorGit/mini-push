@@ -80,7 +80,11 @@ Page({
               url: '/pages/forscreen/forscreen?scene=' + box_mac,
             })*/
           } else {
-
+            that.setData({
+              is_link: 0,
+              box_mac: '',
+            })
+            box_mac = '';
           }
 
         }
@@ -132,6 +136,12 @@ Page({
                 })
                 box_mac = rest.data.result.box_mac;
                 //getHotelInfo(rest.data.result.box_mac);
+              }else {
+                that.setData({
+                  is_link: 0,
+                  box_mac: '',
+                })
+                box_mac = '';
               }
             }
           })
