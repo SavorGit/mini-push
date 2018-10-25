@@ -356,3 +356,11 @@ image.pic_show_cur {
 .launch_pic_page_a > .page_bottom > .button_group > .button_space {
   margin-left: 10rpx;
 }
+
+.row-center {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+}
