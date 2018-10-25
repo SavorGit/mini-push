@@ -97,7 +97,7 @@
                     <button bindtap="replayHistory" data-res_type='{{bean.res_type}}' data-box_mac='{{box_mac}}' data-openid='{{openid}}' data-res_list='{{bean.list}}'>重投</button>
                   </view>
                 </view>
-                <view class='line'></view>
+                <view wx:if="{{forscreen_history_list.length > index+1}}" class='line'></view>
               </view>
             </view>
 
