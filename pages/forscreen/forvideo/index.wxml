@@ -8,7 +8,7 @@
     <view class='page_main'>
 
       <view class='cover full_width'>
-        <video src='{{upload_vedio_temp}}' controls></video>
+        <video src='{{upload_vedio_temp}}' ></video>
         <view>
           <label class='font_932C3F_34'>{{vedio_percent}}%</label>
           <progress percent='{{vedio_percent}}' activeColor='#932C3F' backgroundColor="#CECAC4" />
@@ -55,7 +55,7 @@
     <scroll-view scroll-y="true" scroll-with-animation="true" bindscrolltolower="loadMore" data-openid='{{openid}}' data-box_mac='{{box_mac}}'>
       <view class='page_main'>
         <view class='cover'>
-          <video src='{{oss_video_url}}' controls></video>
+          <video src='{{oss_video_url}}'  ></video>
           <view>
             <button wx:if="{{is_replay_disabel==false}}" bindtap='replayVideo' data-openid='{{openid}}' data-box_mac='{{box_mac}}' data-replay_video_url="{{replay_video_url}}" data-duration='{{duration}}' class='replay_this'>再投一次</button>
             <button wx:else class='replay_this disabled-button'>{{djs}}S</button> 
