@@ -271,18 +271,23 @@
   justify-content: space-between;
 }
 
-.replay_this {
+.replay_this, .replay_this::before {
   margin-top: 20rpx;
   margin-bottom: 30rpx;
-  width: 120rpx;
-  height: 40rpx;
+  width: 160rpx;
+  height: 55rpx;
+  line-height: 1.877777;
   border-radius: 10rpx;
-  border: 1rpx solid #932c3f;
+  border: 2rpx solid #932c3f;
   color: #932c3f;
-  font-size: 24rpx;
+  font-size: 28rpx;
   padding: 0rpx;
-  line-height: 1.4055;
   background-color: unset;
+}
+
+.replay_this::after {
+  border-radius: 10rpx;
+  border: 0rpx;
 }
 
 .disabled-button {
