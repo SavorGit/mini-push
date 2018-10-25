@@ -19,6 +19,7 @@ Page({
     showVedio:false,
     showRechoose:false,
     upload_vedio_temp:'',
+    oss_video_url:'',
     duration:0,
     //upload_vedio_img_temp:'',
     vedio_percent: 0,
@@ -140,7 +141,7 @@ Page({
 
         },
         success: function (res) {
-
+            
         }
       });
       upload_task.onProgressUpdate((res) => {
@@ -154,6 +155,8 @@ Page({
           //console.log(res_eup_time);
           that.setData({
             showVedio:false,
+            oss_video_url: "http://oss.littlehotspot.com/forscreen/resource/" + timestamp + postf_t,
+            upload_vedio_temp:'',
           })
           wx.request({
             url: 'https://mobile.littlehotspot.com/Smallapp21/index/recordForScreenPics',
