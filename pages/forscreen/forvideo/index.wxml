@@ -57,7 +57,7 @@
         <view class='cover'>
           <video src='{{upload_vedio_temp}}' controls="false " show-fullscreen-btn="false " show-play-btn="false " show-center-play-btn="false " enable-progress-gesture="false " duration="0 "></video>
           <view>
-            <button wx:if="{{is_replay_disabel==false}}" bindtap='replayVideo' data-openid='{{openid}}' data-box_mac='{{box_mac}}' data-replay_video_url="{{replay_video_url}}" data-duration='{{duration}}' class='replay_this'>再次播放</button>
+            <button wx:if="{{is_replay_disabel==false}}" bindtap='replayVideo' data-openid='{{openid}}' data-box_mac='{{box_mac}}' data-replay_video_url="{{replay_video_url}}" data-duration='{{duration}}' class='replay_this'>再投一次</button>
             <button wx:else class='replay_this disabled-button'>{{djs}}S</button> 
           </view>
         </view>
@@ -79,7 +79,7 @@
                     </view>
                   </view>
                   <view class='btn'>
-                    <button bindtap="replayHistory" data-res_type='{{bean.res_type}}' data-box_mac='{{box_mac}}' data-openid='{{openid}}' data-res_list='{{bean.list}}'>重播</button>
+                    <button bindtap="replayHistory" data-res_type='{{bean.res_type}}' data-box_mac='{{box_mac}}' data-openid='{{openid}}' data-res_list='{{bean.list}}'>重投</button>
                   </view>
                 </view>
                 <view  wx:else class="video">
@@ -94,7 +94,7 @@
                     </view>
                   </view>
                   <view class='btn'>
-                    <button bindtap="replayHistory" data-res_type='{{bean.res_type}}' data-box_mac='{{box_mac}}' data-openid='{{openid}}' data-res_list='{{bean.list}}'>重播</button>
+                    <button bindtap="replayHistory" data-res_type='{{bean.res_type}}' data-box_mac='{{box_mac}}' data-openid='{{openid}}' data-res_list='{{bean.list}}'>重投</button>
                   </view>
                 </view>
                 <view class='line'></view>
