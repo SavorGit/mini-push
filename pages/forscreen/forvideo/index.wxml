@@ -62,7 +62,7 @@
           </view>
         </view>
         <view class='launch_history'>
-          <view class='title' wx:if="{{forscreen_history_list !=''}}">
+          <view class='title' >
             <image src='/images/icon/black_history.png'></image>
             <label class='font_333333_26'>投屏历史</label>
           </view>
