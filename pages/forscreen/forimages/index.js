@@ -488,7 +488,6 @@ Page({
     })
   },
   replayHistory: function (e) {
-    console.log(e);
     var that = this;
     var user_info = wx.getStorageSync("savor_user_info");
     //console.log(user_info);
@@ -523,6 +522,7 @@ Page({
             forscreen_char: forscreen_char,
             imgs: '["' + res_list[i]['forscreen_url'] + '"]',
             resource_id: res_list[i]['resource_id'],
+            resource_type: res_type,
             res_sup_time: 0,
             res_eup_time: 0,
             resource_size: 0,
@@ -551,7 +551,7 @@ Page({
           success: function (result) {
 
             wx.showToast({
-              title: '重播成功,电视即将开始播放',
+              title: '重投成功,电视即将开始播放',
               icon: 'none',
               duration: 5000
             });
@@ -583,6 +583,7 @@ Page({
             forscreen_char: forscreen_char,
             imgs: '["' + res_list[i]['forscreen_url'] + '"]',
             resource_id: res_list[i]['resource_id'],
+            resource_type: res_type,
             res_sup_time: 0,
             res_eup_time: 0,
             resource_size: 0,
@@ -611,7 +612,7 @@ Page({
           success: function (result) {
 
             wx.showToast({
-              title: '重播成功,电视即将开始播放',
+              title: '重投成功,电视即将开始播放',
               icon: 'none',
               duration: 2000
             });
