@@ -20,7 +20,11 @@
           <image src='/images/icon/f6f3ee_video.png'></image>
           <label class='font_F6F2EC_34'>视频上电视</label>
         </view>
-        <view bindtap='boxShow' data-boxmac="{{box_mac}}" data-openid="{{openid}}" data-vediourl="{{happy_vedio_url}}" data-happyVedioName="{{happy_vedio_name}}" data-name="{{happy_vedio_title}}">
+        <!--<view bindtap='boxShow' data-boxmac="{{box_mac}}" data-openid="{{openid}}" data-vediourl="{{happy_vedio_url}}" data-happyVedioName="{{happy_vedio_name}}" data-name="{{happy_vedio_title}}">
+          <image src='/images/icon/f6f3ee_birthday.png'></image>
+          <label class='font_F6F2EC_34'>生日歌点播</label>
+        </view>-->
+        <view bindtap='showHappy' data-boxmac="{{box_mac}}" data-openid="{{openid}}" >
           <image src='/images/icon/f6f3ee_birthday.png'></image>
           <label class='font_F6F2EC_34'>生日歌点播</label>
         </view>

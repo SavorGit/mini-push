@@ -7,30 +7,42 @@
       <view class='weui-grid birthday-list-grid'>
         <image mode='aspectFill' src='http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg'></image>
         <text class='font_666666_24'>生日歌 - 20种语言版</text>
-        <navigator class='cover'>
+        <!--<navigator class='cover'>
           <image src="/images/icon/white_play.png"></image>
-        </navigator>
+        </navigator>-->
+        <button bindtap='showHappy' data-boxmac="{{box_mac}}" data-openid="{{openid}}" data-vediourl="http://oss.littlehotspot.com/media/resource/jda24z7C8Z.mp4" data-happyVedioName="jda24z7C8Z.mp4" data-name="Happy Birthday">
+          <image src="/images/icon/white_play.png"></image>
+        </button>
       </view>
       <view class='weui-grid birthday-list-grid'>
         <image mode='aspectFill' src='http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg'></image>
         <text class='font_666666_24'>生日歌 - 经典英文版</text>
-        <navigator class='cover'>
+        <!--<navigator class='cover'>
           <image src="/images/icon/white_play.png"></image>
-        </navigator>
+        </navigator>-->
+        <button bindtap='showHappy' data-boxmac="{{box_mac}}" data-openid="{{openid}}" data-vediourl="http://oss.littlehotspot.com/media/resource/jda24z7C8Z.mp4" data-happyVedioName="jda24z7C8Z.mp4" data-name="Happy Birthday">
+          <image src="/images/icon/white_play.png"></image>
+        </button>
       </view>
       <view class='weui-grid birthday-list-grid'>
         <image mode='aspectFill' src='http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg'></image>
         <text class='font_666666_24'>生日歌 - 儿童版</text>
-        <navigator class='cover'>
+        <!--<navigator class='cover'>
           <image src="/images/icon/white_play.png"></image>
-        </navigator>
+        </navigator>-->
+        <button bindtap='showHappy' data-boxmac="{{box_mac}}" data-openid="{{openid}}" data-vediourl="http://oss.littlehotspot.com/media/resource/jda24z7C8Z.mp4" data-happyVedioName="jda24z7C8Z.mp4" data-name="Happy Birthday">
+          <image src="/images/icon/white_play.png"></image>
+        </button>
       </view>
       <view class='weui-grid birthday-list-grid'>
         <image mode='aspectFill' src='http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg'></image>
         <text class='font_666666_24'>生日歌 - 经典粤语版</text>
-        <navigator class='cover'>
+        <!--<navigator class='cover'>
           <image src="/images/icon/white_play.png"></image>
-        </navigator>
+        </navigator>-->
+        <button  bindtap='showHappy' data-boxmac="{{box_mac}}" data-openid="{{openid}}" data-vediourl="http://oss.littlehotspot.com/media/resource/jda24z7C8Z.mp4" data-happyVedioName="jda24z7C8Z.mp4" data-name="Happy Birthday">
+          <image src="/images/icon/white_play.png"></image>
+        </button>
       </view>
     </view>
   </view>
