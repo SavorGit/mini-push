@@ -29,6 +29,18 @@ Page({
    */
   onLoad: function (options) {
     var that = this;
+    wx.request({
+      url: 'https://mobile.littlehotspot.com/smallapp21/index/isFind',
+      success:function(res){
+        if(res.data.result.is_open==0){
+          wx.reLaunch({
+            url: '../message/index',
+          })
+        }
+      }
+    })
+
+
     if (app.globalData.openid && app.globalData.openid != '') {
       that.setData({
         openid: app.globalData.openid
