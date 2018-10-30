@@ -272,8 +272,7 @@
 }
 
 .replay_this, .replay_this::before {
-  margin-top: 20rpx;
-  margin-bottom: 30rpx;
+  margin: 20rpx 1rpx 30rpx 1rpx;
   width: 160rpx;
   height: 55rpx;
   line-height: 1.877777;
@@ -283,6 +282,7 @@
   font-size: 28rpx;
   padding: 0rpx;
   background-color: unset;
+  display: inline-block;
 }
 
 .replay_this::after {

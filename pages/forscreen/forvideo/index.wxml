@@ -8,7 +8,7 @@
     <view class='page_main'>
 
       <view class='cover full_width'>
-        <video src='{{upload_vedio_temp}}' ></video>
+        <video src='{{upload_vedio_temp}}'></video>
         <view>
           <label class='font_932C3F_34'>{{vedio_percent}}%</label>
           <progress percent='{{vedio_percent}}' activeColor='#932C3F' backgroundColor="#CECAC4" />
@@ -55,51 +55,53 @@
     <scroll-view scroll-y="true" scroll-with-animation="true" bindscrolltolower="loadMore" data-openid='{{openid}}' data-box_mac='{{box_mac}}'>
       <view class='page_main'>
         <view class='cover'>
-          <video src='{{oss_video_url}}'  ></video>
+          <video src='{{oss_video_url}}'></video>
           <view>
             <button wx:if="{{is_replay_disabel==false}}" bindtap='replayVideo' data-openid='{{openid}}' data-box_mac='{{box_mac}}' data-replay_video_url="{{replay_video_url}}" data-duration='{{duration}}' class='replay_this'>再投一次</button>
-            <button wx:else class='replay_this disabled-button'>{{djs}}S</button> 
+            <button wx:else class='replay_this disabled-button'>{{djs}}S</button>
+            <button class='replay_this'>音量 - </button>
+            <button class='replay_this'>音量 + </button>
           </view>
         </view>
         <view class='launch_history'>
-          <view class='title' >
+          <view class='title'>
             <image src='/images/icon/black_history.png'></image>
             <label class='font_333333_26'>投屏历史</label>
           </view>
 
 
           <!-- 有数据时 -->
-          
+
           <view class='history_list' wx:if="{{forscreen_history_list !=''}}">
-              <view wx:for="{{forscreen_history_list}}" wx:key="key" wx:for-item="bean" wx:for-index="index">
-                <view wx:if="{{bean.res_type==1}}" class="pic">
-                  <view class="weui-grids">
-                    <view class="weui-grid" wx:for="{{bean.list}}" wx:key="pkey" wx:for-item="item" wx:for-index="indexs">
-                      <image bindtap="previewImage" data-pkey="{{indexs}}" data-src="{{bean.list}}" mode='aspectFill' src="{{item.imgurl}}"></image>
-                    </view>
-                  </view>
-                  <view class='btn'>
-                    <button bindtap="replayHistory" data-res_type='{{bean.res_type}}' data-box_mac='{{box_mac}}' data-openid='{{openid}}' data-res_list='{{bean.list}}'>重投</button>
+            <view wx:for="{{forscreen_history_list}}" wx:key="key" wx:for-item="bean" wx:for-index="index">
+              <view wx:if="{{bean.res_type==1}}" class="pic">
+                <view class="weui-grids">
+                  <view class="weui-grid" wx:for="{{bean.list}}" wx:key="pkey" wx:for-item="item" wx:for-index="indexs">
+                    <image bindtap="previewImage" data-pkey="{{indexs}}" data-src="{{bean.list}}" mode='aspectFill' src="{{item.imgurl}}"></image>
                   </view>
                 </view>
-                <view  wx:else class="video">
-                  <view class="cover" wx:for="{{bean.list}}" wx:key="pkey" wx:for-item="item" wx:for-index="indexs">
-                    <navigator url="/pages/forscreen/video/launch_video?video_url={{item.res_url}}&video_name=">
-                      <image mode='aspectFill' src="{{item.imgurl}}"></image>
-                    </navigator >
-                    <view>
-                      <navigator url="/pages/forscreen/video/launch_video?video_url={{item.res_url}}&video_name=">
-                        <image src="/images/icon/white_play.png"></image>
-                      </navigator>
-                    </view>
-                  </view>
-                  <view class='btn'>
-                    <button bindtap="replayHistory" data-res_type='{{bean.res_type}}' data-box_mac='{{box_mac}}' data-openid='{{openid}}' data-res_list='{{bean.list}}'>重投</button>
-                  </view>
+                <view class='btn'>
+                  <button bindtap="replayHistory" data-res_type='{{bean.res_type}}' data-box_mac='{{box_mac}}' data-openid='{{openid}}' data-res_list='{{bean.list}}'>重投</button>
                 </view>
-                <view wx:if="{{forscreen_history_list.length > index+1}}" class='line'></view>
               </view>
+              <view wx:else class="video">
+                <view class="cover" wx:for="{{bean.list}}" wx:key="pkey" wx:for-item="item" wx:for-index="indexs">
+                  <navigator url="/pages/forscreen/video/launch_video?video_url={{item.res_url}}&video_name=">
+                    <image mode='aspectFill' src="{{item.imgurl}}"></image>
+                  </navigator>
+                  <view>
+                    <navigator url="/pages/forscreen/video/launch_video?video_url={{item.res_url}}&video_name=">
+                      <image src="/images/icon/white_play.png"></image>
+                    </navigator>
+                  </view>
+                </view>
+                <view class='btn'>
+                  <button bindtap="replayHistory" data-res_type='{{bean.res_type}}' data-box_mac='{{box_mac}}' data-openid='{{openid}}' data-res_list='{{bean.list}}'>重投</button>
+                </view>
+              </view>
+              <view wx:if="{{forscreen_history_list.length > index+1}}" class='line'></view>
             </view>
+          </view>
 
           <view class='no_data' wx:else>
             <view class="row-center">
@@ -111,13 +113,13 @@
               </view>
             </view>
           </view>
-          
+
 
         </view>
       </view>
       <view class="body-view">
-      <loading hidden="{{hiddens}}" bindchange="loadingChange">加载中...</loading>
-    </view>
+        <loading hidden="{{hiddens}}" bindchange="loadingChange">加载中...</loading>
+      </view>
     </scroll-view>
 
     <!-- 重选 -->
