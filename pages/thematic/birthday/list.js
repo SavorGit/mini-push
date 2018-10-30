@@ -45,7 +45,7 @@ Page({
       data: {
         box_mac: box_mac,
         cmd: 'call-mini-program',
-        msg: '{ "action": 5,"url":"' + vediourl + '","filename":"' + filename + '"}',
+        msg: '{ "action": 5,"url":"' + vediourl + '","filename":"' + filename + '","forscreen_id":"' + timestamp +'","resource_type":2}',
         req_id: timestamp
       },
       success: function (res) {
@@ -60,6 +60,7 @@ Page({
             'content-type': 'application/json'
           },
           data: {
+            forscreen_id: timestamp,
             openid: openid,
             box_mac: box_mac,
             action: 5,

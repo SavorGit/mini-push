@@ -62,6 +62,7 @@ Page({
       sizeType: ['original', 'compressed'], // 可以指定是原图还是压缩图，默认二者都有
       sourceType: ['album', 'camera'], // 可以指定来源是相册还是相机，默认二者都有
       success: function (res) {
+        console.log(res);
         uploadInfos(res, box_mac, openid);
         
         that.setData({
@@ -363,6 +364,7 @@ Page({
     var nickName  = user_info.nickName;
 
     for (var p = 0; p < img_len; p++) {
+      forscreen_id = (new Date()).valueOf();
       if (img_index == p) {
         pic_show_cur[p] = true;
 
@@ -382,7 +384,7 @@ Page({
       data: {
         box_mac: box_mac,
         cmd: 'call-mini-program',
-        msg: '{ "action": 2,"resource_type":1, "url": "' + forscreen_img + '", "filename":"' + filename + '","openid":"' + openid + '","avatarUrl":"' + avatarUrl + '","nickName":"' + nickName+'"}',
+        msg: '{ "action": 2,"resource_type":1, "url": "' + forscreen_img + '", "filename":"' + filename + '","openid":"' + openid + '","avatarUrl":"' + avatarUrl + '","nickName":"' + nickName +'","forscreen_id":"'+forscreen_id+'"}',
         req_id: timestamp
       },
       success: function (result) {
@@ -392,6 +394,7 @@ Page({
             'content-type': 'application/json'
           },
           data: {
+            forscreen_id: forscreen_id,
             openid: openid,
             box_mac: box_mac,
             action: 2,

@@ -191,7 +191,7 @@ Page({
                 data: {
                   box_mac: box_mac,
                   cmd: 'call-mini-program',
-                  msg: '{ "action":2, "url": "forscreen/resource/' + timestamp + postf_t + '", "filename":"' + timestamp + postf_t + '","openid":"' + openid + '","resource_type":2,"video_id":"' + timestamp + '","avatarUrl":"' + avatarUrl +'","nickName":"'+nickName+'"}',
+                  msg: '{ "action":2, "url": "forscreen/resource/' + timestamp + postf_t + '", "filename":"' + timestamp + postf_t + '","openid":"' + openid + '","resource_type":2,"video_id":"' + timestamp + '","avatarUrl":"' + avatarUrl + '","nickName":"' + nickName + '","forscreen_id":"' + res_eup_time+'"}',
                   req_id: timestamp
                 },
                 success: function (result) {
