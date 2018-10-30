@@ -33,7 +33,7 @@
           <label class='font_F6F2EC_34'>互动小游戏</label>
         </view>
         <view bindtap='' data-boxmac="{{box_mac}}" data-openid="{{openid}}">
-          <image src='/images/icon/f6f3ee_game.png'></image>
+          <image src='/images/icon/f6f3ee_history.png'></image>
           <label class='font_F6F2EC_34'>投屏历史</label>
         </view>
       </view>
