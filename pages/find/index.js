@@ -51,7 +51,7 @@ Page({
         url: 'https://mobile.littlehotspot.com/smallapp21/User/isRegister',
         data: {
           "openid": app.globalData.openid,
-
+          "page":2
         },
         header: {
           'content-type': 'application/json'
@@ -113,7 +113,7 @@ Page({
             url: 'https://mobile.littlehotspot.com/smallapp21/User/isRegister',
             data: {
               "openid": app.globalData.openid,
-
+              "page": 2
             },
             header: {
               'content-type': 'application/json'

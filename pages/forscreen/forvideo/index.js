@@ -730,6 +730,24 @@ Page({
       }
     })
   },
+  changeVolume:function(e){
+    var box_mac = e.target.dataset.box_mac;
+    var change_type = e.target.dataset.change_type;
+    var timestamp = (new Date()).valueOf();
+    wx.request({
+      url: "https://netty-push.littlehotspot.com/push/box",
+      header: {
+        "Content-Type": "application/x-www-form-urlencoded"
+      },
+      method: "POST",
+      data: {
+        box_mac: box_mac,
+        cmd: 'call-mini-program',
+        msg: '{"action":31,"change_type":' + change_type+'}',
+        req_id: timestamp
+      },
+    })
+  },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */

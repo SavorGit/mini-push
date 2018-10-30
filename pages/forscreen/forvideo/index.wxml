@@ -59,8 +59,8 @@
           <view>
             <button wx:if="{{is_replay_disabel==false}}" bindtap='replayVideo' data-openid='{{openid}}' data-box_mac='{{box_mac}}' data-replay_video_url="{{replay_video_url}}" data-duration='{{duration}}' class='replay_this'>再投一次</button>
             <button wx:else class='replay_this disabled-button'>{{djs}}S</button>
-            <button class='replay_this'>音量 - </button>
-            <button class='replay_this'>音量 + </button>
+            <button class='replay_this' bindtap='changeVolume' data-box_mac='{{box_mac}}' data-change_type='1'>音量 - </button>
+            <button class='replay_this' bindtap='changeVolume' data-box_mac='{{box_mac}}' data-change_type='2'>音量 + </button>
           </view>
         </view>
         <view class='launch_history'>

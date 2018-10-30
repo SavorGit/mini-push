@@ -35,7 +35,7 @@ Page({
         url: 'https://mobile.littlehotspot.com/smallapp21/User/isRegister',
         data: {
           "openid": app.globalData.openid,
-          
+          "page_id": 3
         },
         header: {
           'content-type': 'application/json'
@@ -90,7 +90,7 @@ Page({
             url: 'https://mobile.littlehotspot.com/smallapp21/User/isRegister',
             data: {
               "openid": app.globalData.openid,
-
+              "page_id": 3
             },
             header: {
               'content-type': 'application/json'
@@ -184,7 +184,8 @@ Page({
           })
         }
       })
-    }else {
+    }
+    /*else {
       wx.request({
         url: 'https://mobile.littlehotspot.com/smallapp21/User/refuseRegister',
         data: {
@@ -214,7 +215,7 @@ Page({
         }
       })
       
-    }
+    }*/
   },
   //关闭授权弹窗
   closeAuth:function(){
@@ -293,7 +294,7 @@ Page({
   chooseImage(e) {
     var that = this;
     var user_info = wx.getStorageSync("savor_user_info");
-    if (user_info.is_wx_auth==0){
+    if (user_info.is_wx_auth!=2){
       that.setData({
         showModal:true
       })
@@ -331,7 +332,7 @@ Page({
   chooseVedio(e) {
     var that = this
     var user_info = wx.getStorageSync("savor_user_info");
-    if (user_info.is_wx_auth == 0) {
+    if (user_info.is_wx_auth !=2) {
       that.setData({
         showModal: true
       })
