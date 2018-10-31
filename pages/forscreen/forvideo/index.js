@@ -406,7 +406,7 @@ Page({
       data: {
         box_mac: box_mac,
         cmd: 'call-mini-program',
-        msg: '{ "action": 3,"openid":"' + openid + '"}',
+        msg: '{"action": 3,"openid":"' + openid + '"}',
         req_id: timestamp
       },
       success: function (res) {

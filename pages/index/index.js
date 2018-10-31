@@ -555,6 +555,35 @@ Page({
       }
     })
   },
+  forscreenHistory:function(e){
+    var box_mac = e.currentTarget.dataset.boxmac;
+    var openid  = e.currentTarget.dataset.openid;
+    if (box_mac == '') {
+      wx.showModal({
+        title: '提示',
+        content: "您可扫码链接热点合作餐厅电视,使用此功能",
+        showCancel: true,
+        confirmText: '立即扫码',
+        success: function (res) {
+          if (res.confirm == true) {
+            wx.scanCode({
+              onlyFromCamera: true,
+              success: (res) => {
+                //console.log(res);
+                wx.navigateTo({
+                  url: '/' + res.path
+                })
+              }
+            })
+          }
+        }
+      });
+    }else {
+      wx.navigateTo({
+        url: '/pages/forscreen/history/list?openid='+openid+'&box_mac='+box_mac,
+      })
+    }
+  },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */

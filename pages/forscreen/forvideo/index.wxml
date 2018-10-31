@@ -125,8 +125,8 @@
     <!-- 重选 -->
     <view class="page_bottom ">
       <view class='button_group flex_row_center'>
-        <button class='btn_background_034' bindtap='chooseVedio' data-boxmac="{{box_mac}} " data-openid="{{openid}} ">重选视频</button>
-        <button class='btn_background_034' bindtap="exitForscreen" data-boxmac="{{box_mac}} " data-openid="{{openid}} ">退出投屏</button>
+        <button class='btn_background_034' bindtap='chooseVedio' data-boxmac="{{box_mac}}" data-openid="{{openid}}">重选视频</button>
+        <button class='btn_background_034' bindtap="exitForscreen" data-boxmac="{{box_mac}}" data-openid="{{openid}}">退出投屏</button>
       </view>
     </view>
 
