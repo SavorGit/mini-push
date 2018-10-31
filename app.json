@@ -18,7 +18,8 @@
     "pages/mine/index",
     "pages/mine/favorite",
     "pages/demand/index",
-    "pages/thematic/birthday/list"
+    "pages/thematic/birthday/list",
+    "pages/forscreen/history/list"
   ],
   "window": {
     "backgroundTextStyle": "dark",

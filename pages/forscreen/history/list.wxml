@@ -1,0 +1,240 @@
+<!--pages/forscreen/history/list.wxml-->
+<view class="container">
+  <scroll-view class='page_main' scroll-y="true">
+    <!--循环开始-->
+
+    <!-- 一张图片 -->
+    <view class='content content_bottom_border'>
+      <view class='con_top'>
+        <view class='datetime'>
+          <label class='font_333333_30'>9月30日 12:00</label>
+        </view>
+        <view class='operation'>
+          <button class='launch_tv font_932C3F_20'>电视播放</button>
+        </view>
+      </view>
+      <view class='con_main'>
+        <view class="weui-grids">
+          <view class="weui-grid_1">
+            <image mode='aspectFill' src="http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
+          </view>
+        </view>
+      </view>
+      <view class='con_bottom'></view>
+    </view>
+
+    <!-- 两张图片 -->
+    <view class='content content_bottom_border'>
+      <view class='con_top'>
+        <view class='datetime'>
+          <label class='font_333333_30'>9月30日 12:00</label>
+        </view>
+        <view class='operation'>
+          <button class='launch_tv font_932C3F_20'>电视播放</button>
+        </view>
+      </view>
+      <view class='con_main'>
+        <view class="weui-grids">
+          <view class="weui-grid">
+            <image mode='aspectFill' src="http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
+          </view>
+          <view class="weui-grid">
+            <image mode='aspectFill' src="http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
+          </view>
+        </view>
+      </view>
+      <view class='con_bottom'></view>
+    </view>
+
+    <!-- 三张图片 -->
+    <view class='content content_bottom_border'>
+      <view class='con_top'>
+        <view class='datetime'>
+          <label class='font_333333_30'>9月30日 12:00</label>
+        </view>
+        <view class='operation'>
+          <button class='launch_tv font_932C3F_20'>电视播放</button>
+        </view>
+      </view>
+      <view class='con_main'>
+        <view class="weui-grids">
+          <view class="weui-grid">
+            <image mode='aspectFill' src="http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
+          </view>
+          <view class="weui-grid">
+            <image mode='aspectFill' src="http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
+          </view>
+          <view class="weui-grid">
+            <image mode='aspectFill' src="http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
+          </view>
+        </view>
+      </view>
+      <view class='con_bottom'></view>
+    </view>
+
+
+    <!-- 四张图片 -->
+    <view class='content content_bottom_border'>
+      <view class='con_top'>
+        <view class='datetime'>
+          <label class='font_333333_30'>9月30日 12:00</label>
+        </view>
+        <view class='operation'>
+          <button class='launch_tv font_932C3F_20'>电视播放</button>
+        </view>
+      </view>
+      <view class='con_main'>
+        <view class="weui-grids">
+          <view class="weui-grid_4">
+            <image mode='aspectFill' src="http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
+          </view>
+          <view class="weui-grid_4">
+            <image mode='aspectFill' src="http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
+          </view>
+          <view class="weui-grid_4">
+            <image mode='aspectFill' src="http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
+          </view>
+          <view class="weui-grid_4">
+            <image mode='aspectFill' src="http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
+          </view>
+        </view>
+      </view>
+      <view class='con_bottom'></view>
+    </view>
+
+    <!-- 五张图片 -->
+    <view class='content content_bottom_border'>
+      <view class='con_top'>
+        <view class='datetime'>
+          <label class='font_333333_30'>9月30日 12:00</label>
+        </view>
+        <view class='operation'>
+          <button class='launch_tv font_932C3F_20'>电视播放</button>
+        </view>
+      </view>
+      <view class='con_main'>
+        <view class="weui-grids">
+          <view class="weui-grid">
+            <image mode='aspectFill' src="http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
+          </view>
+          <view class="weui-grid">
+            <image mode='aspectFill' src="http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
+          </view>
+          <view class="weui-grid">
+            <image mode='aspectFill' src="http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
+          </view>
+          <view class="weui-grid">
+            <image mode='aspectFill' src="http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
+          </view>
+          <view class="weui-grid">
+            <image mode='aspectFill' src="http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
+          </view>
+        </view>
+      </view>
+      <view class='con_bottom'></view>
+    </view>
+
+    <!-- 六张图片 -->
+    <view class='content content_bottom_border'>
+      <view class='con_top'>
+        <view class='datetime'>
+          <label class='font_333333_30'>9月30日 12:00</label>
+        </view>
+        <view class='operation'>
+          <button class='launch_tv font_932C3F_20'>电视播放</button>
+        </view>
+      </view>
+      <view class='con_main'>
+        <view class="weui-grids">
+          <view class="weui-grid">
+            <image mode='aspectFill' src="http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
+          </view>
+          <view class="weui-grid">
+            <image mode='aspectFill' src="http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
+          </view>
+          <view class="weui-grid">
+            <image mode='aspectFill' src="http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
+          </view>
+          <view class="weui-grid">
+            <image mode='aspectFill' src="http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
+          </view>
+          <view class="weui-grid">
+            <image mode='aspectFill' src="http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
+          </view>
+          <view class="weui-grid">
+            <image mode='aspectFill' src="http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
+          </view>
+        </view>
+      </view>
+      <view class='con_bottom'></view>
+    </view>
+
+    <!-- 视频 -->
+    <view class='content content_bottom_border'>
+      <view class='con_top'>
+        <view class='datetime'>
+          <label class='font_333333_30'>9月30日 12:00</label>
+        </view>
+        <view class='operation'>
+          <button class='launch_tv font_932C3F_20'>电视播放</button>
+        </view>
+      </view>
+      <view class='con_main'>
+        <view class="video">
+          <view>
+            <navigator>
+              <image mode='aspectFill' src="http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
+            </navigator>
+            <view class="cover">
+              <navigator>
+                <image src='http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/icon/white_play.png'></image>
+              </navigator>
+              <view>
+                <label class='font_F6F3EE_20'>0'59"</label>
+              </view>
+            </view>
+          </view>
+        </view>
+      </view>
+      <view class='con_bottom'></view>
+    </view>
+
+    <!-- 视频 -->
+    <view class='content'>
+      <view class='con_top'>
+        <view class='datetime'>
+          <label class='font_333333_30'>9月30日 12:00</label>
+        </view>
+        <view class='operation'>
+          <button class='launch_tv font_932C3F_20'>电视播放</button>
+        </view>
+      </view>
+      <view class='con_main'>
+        <view class="video">
+          <view>
+            <navigator>
+              <image mode='aspectFill' src="http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
+            </navigator>
+            <view class="cover">
+              <navigator>
+                <image src='http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/icon/white_play.png'></image>
+              </navigator>
+              <view>
+                <label class='font_F6F3EE_20'>12'23"</label>
+              </view>
+            </view>
+          </view>
+        </view>
+      </view>
+      <view class='con_bottom'></view>
+    </view>
+    <!--循环结束-->
+
+    <!-- <view class="body-view">
+      <loading hidden="{{hiddens}}" bindchange="loadingChange">加载中...</loading>
+    </view> -->
+    <!-- 滚动页面底部留白 -->
+    <view class='nav_bottom_space'></view>
+
+  </scroll-view>
+</view>

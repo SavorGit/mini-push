@@ -1,0 +1,136 @@
+/* pages/forscreen/history/list.wxss */
+
+.page_main {
+  width: 100%;
+  /* height: calc(100% - 138rpx); */
+  height: 100%;
+}
+
+.content {
+  margin: 0rpx 30rpx 0rpx 30rpx;
+}
+
+.content_bottom_border {
+  border-bottom: 1rpx solid #d9d3cd;
+}
+
+/* =================== 内容头部开始 =================== */
+
+.con_top {
+  height: 120rpx;
+  margin: 0rpx 0rpx 0rpx 30rpx;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.con_top > .datetime {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  flex-grow: 1;
+  justify-content: flex-start;
+}
+
+.con_top > .datetime > label {
+  margin: 0rpx 20rpx 0rpx 10rpx;
+}
+
+.con_top > .operation {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.con_top > .operation > .launch_tv, .con_top > .operation > .launch_tv::before {
+  margin-right: 10rpx;
+  width: 150rpx;
+  height: 55rpx;
+  border: 1rpx solid #932c3f;
+  border-radius: 12rpx;
+  background-color: unset;
+}
+
+/* =================== 内容头部结束 =================== */
+
+/* =================== 内容中部开始 =================== */
+
+.con_main {
+  margin: 0rpx 30rpx 0rpx 30rpx;
+}
+
+.con_main .weui-grid_1 {
+  width: 100%;
+}
+
+.con_main .weui-grid_1 > image {
+  width: 450rpx;
+  height: 450rpx;
+  border-radius: 10rpx;
+}
+
+.con_main .weui-grid_4 {
+  position: relative;
+  float: left;
+  width: 34%;
+  box-sizing: border-box;
+}
+
+.con_main .weui-grid_4 > image {
+  width: calc((100vw - 120rpx) * 0.34 - 8rpx);
+  height: calc((100vw - 120rpx) * 0.34 - 8rpx);
+  border-radius: 10rpx;
+}
+
+.con_main .weui-grid image {
+  width: calc((100vw - 120rpx) / 3 - 8rpx);
+  height: calc((100vw - 120rpx) / 3 - 8rpx);
+  border-radius: 10rpx;
+}
+
+.con_main > .video navigator {
+  width: 450rpx;
+  height: 450rpx;
+}
+
+.con_main > .video navigator > image {
+  width: 100%;
+  height: 100%;
+  border-radius: 10rpx;
+}
+
+.con_main > .video .cover {
+  width: 255rpx;
+  height: 255rpx;
+  margin: -450rpx 0rpx 0rpx 0rpx;
+  padding: 195rpx 0rpx 0rpx 195rpx;
+  border: 0rpx;
+}
+
+.con_main > .video .cover > navigator {
+  width: 60rpx;
+  height: 60rpx;
+}
+
+.con_main > .video .cover > navigator > image {
+  width: 100%;
+  height: 100%;
+}
+
+.con_main > .video .cover > view {
+  margin-top: 115rpx;
+  padding-right: 20rpx;
+  text-align: right;
+}
+
+/* =================== 内容中部结束 =================== */
+
+/* =================== 内容底部开始 =================== */
+
+.con_bottom {
+  height: 20rpx;
+  margin: 0rpx;
+}
+
+/* =================== 内容底部结束 =================== */
