@@ -19,7 +19,8 @@
     "pages/mine/favorite",
     "pages/demand/index",
     "pages/thematic/birthday/list",
-    "pages/forscreen/history/list"
+    "pages/forscreen/history/list",
+    "pages/recommend/hotel"
   ],
   "window": {
     "backgroundTextStyle": "dark",
@@ -52,10 +53,10 @@
         "selectedIconPath": "images/icon/red_interact.png"
       },
       {
-        "pagePath": "pages/message/index",
-        "text": "消息",
-        "iconPath": "images/icon/grey_msg.png",
-        "selectedIconPath": "images/icon/red_msg.png"
+        "pagePath": "pages/recommend/hotel",
+        "text": "推荐餐厅",
+        "iconPath": "images/icon/666666_star.png",
+        "selectedIconPath": "images/icon/red_star.png"
       },
       {
         "pagePath": "pages/mine/index_20181010",

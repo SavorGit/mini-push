@@ -109,6 +109,11 @@
   color: #666;
 }
 
+.font_999999_24 {
+  font-size: 24rpx;
+  color: #999;
+}
+
 .font_F6F6F6_34 {
   font-size: 34rpx;
   color: #f6f6f6;

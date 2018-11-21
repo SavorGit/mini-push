@@ -1,0 +1,113 @@
+/* pages/recommend/hotel.wxss */
+
+/* =========================== 页面头部 =========================== */
+
+.page_top {
+  width: 100%;
+  height: 70rpx;
+  line-height: 70rpx;
+}
+
+.page_top > view {
+  padding: 0rpx 25rpx 0rpx 25rpx;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.page_top > view .city_show > image {
+  width: 38rpx;
+  height: 38rpx;
+  vertical-align: middle;
+}
+
+.page_top > view .area_show > image {
+  width: 20rpx;
+  height: 20rpx;
+  vertical-align: middle;
+}
+
+.page_top > view .cuisine_show > image {
+  width: 20rpx;
+  height: 20rpx;
+  vertical-align: middle;
+}
+
+.page_top > view .perCapitaPay_show > image {
+  width: 20rpx;
+  height: 20rpx;
+  vertical-align: middle;
+}
+
+/* =========================== 页面主体 =========================== */
+
+.page_main_scroll {
+  height: calc(100vh - 70rpx);
+}
+
+.page_main {
+  min-height: calc(100vh - 70rpx);
+  background-color: #fff;
+}
+
+.page_main > .row-item {
+  padding: 25rpx 25rpx 20rpx 25rpx;
+  height: 120rpx;
+  border-bottom: 5rpx solid #ece6de;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+}
+
+.page_main > .row-item > .cover {
+  width: 120rpx;
+  height: 120rpx;
+  margin-right: 25rpx;
+}
+
+.page_main > .row-item > .cover > image {
+  width: 100%;
+  height: 100%;
+}
+
+.page_main > .row-item > .i-right {
+  width: calc(100% - 145rpx);
+}
+
+.page_main > .row-item > .i-right {
+  width: calc(100% - 145rpx);
+}
+
+.page_main > .row-item > .i-right > .ir-top {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+}
+
+.page_main > .row-item > .i-right > .ir-top > .irt-left {
+  width: calc(100% - 140rpx);
+}
+
+.page_main > .row-item > .i-right > .ir-top > .irt-left > .irtl-bottom {
+  margin: 6rpx 0 6rpx 0;
+}
+
+.page_main > .row-item > .i-right > .ir-top > .option {
+  width: 140rpx;
+}
+
+.page_main > .row-item > .i-right > .ir-top > .option > button {
+  height: 50rpx;
+  line-height: 50rpx;
+  background-color: #932c3f;
+  color: #fff;
+  font-size: 24rpx;
+  padding: unset;
+  border: unset;
+}
+
+.page_main > .row-item > .i-right > .address > image {
+  width: 20rpx;
+  height: 20rpx;
+}
