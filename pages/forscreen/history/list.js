@@ -104,16 +104,14 @@ Page({
         var res_id = res_list[i]['resource_id'];
 
         wx.request({
-          url: "https://netty-push.littlehotspot.com/push/box",
-          header: {
-            "Content-Type": "application/x-www-form-urlencoded"
+          url: 'https://mobile.littlehotspot.com/Netty/Index/index',
+          headers: {
+            'Content-Type': 'application/json'
           },
           method: "POST",
           data: {
             box_mac: box_mac,
-            cmd: 'call-mini-program',
             msg: '{ "action": 4, "resource_type":2, "url":"' + url + '","filename":"' + filename + '","openid":"' + openid + '","img_nums":' + res_len + ',"forscreen_char":"' + forscreen_char + '","order":' + order + ',"forscreen_id":"' + forscreen_id + '","img_id":"' + res_id + '","avatarUrl":"' + avatarUrl + '","nickName":"' + nickName + '"}',
-            req_id: res_id
           },
           success: function (result) {
 
@@ -165,16 +163,14 @@ Page({
         });
 
         wx.request({
-          url: "https://netty-push.littlehotspot.com/push/box",
-          header: {
-            "Content-Type": "application/x-www-form-urlencoded"
+          url: 'https://mobile.littlehotspot.com/Netty/Index/index',
+          headers: {
+            'Content-Type': 'application/json'
           },
           method: "POST",
           data: {
             box_mac: box_mac,
-            cmd: 'call-mini-program',
             msg: '{ "action":2, "url": "' + res_list[i]['forscreen_url'] + '", "filename":"' + res_list[i]['filename'] + '","openid":"' + openid + '","resource_type":2,"video_id":"' + res_list[i]['resource_id'] + '","avatarUrl":"' + avatarUrl + '","nickName":"' + nickName + '"}',
-            req_id: res_list[i]['resource_id']
           },
           success: function (result) {
 

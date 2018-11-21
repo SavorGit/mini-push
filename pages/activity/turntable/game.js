@@ -139,16 +139,14 @@ Page({
                   showStart: false,
                 })
                 wx.request({
-                  url: 'https://netty-push.littlehotspot.com/push/box',
-                  header: {
-                    "Content-Type": "application/x-www-form-urlencoded"
+                  url: 'https://mobile.littlehotspot.com/Netty/Index/index',
+                  headers: {
+                    'Content-Type': 'application/json'
                   },
                   method: "POST",
                   data: {
                     box_mac: box_mac,
-                    cmd: 'call-mini-program',
                     msg: '{"action":102,"openid":"' + openid + '","activity_id":' + activity_id + '}',
-                    req_id: activity_id
                   },
                   success: function (ret) {
 
@@ -186,16 +184,14 @@ Page({
             showStart: false,
           })
           wx.request({
-            url: 'https://netty-push.littlehotspot.com/push/box',
-            header: {
-              "Content-Type": "application/x-www-form-urlencoded"
+            url: 'https://mobile.littlehotspot.com/Netty/Index/index',
+            headers: {
+              'Content-Type': 'application/json'
             },
             method: "POST",
             data: {
               box_mac: box_mac,
-              cmd: 'call-mini-program',
               msg: '{"action":105,"openid":"' + openid + '","activity_id":' + activity_id + '}',
-              req_id: activity_id
             },
             success: function (ret) {
 
@@ -222,16 +218,14 @@ Page({
     var openid = e.currentTarget.dataset.openid;
     var activity_id = e.currentTarget.dataset.activity_id;
     wx.request({
-      url: 'https://netty-push.littlehotspot.com/push/box',
-      header: {
-        "Content-Type": "application/x-www-form-urlencoded"
+      url: 'https://mobile.littlehotspot.com/Netty/Index/index',
+      headers: {
+        'Content-Type': 'application/json'
       },
       method: "POST",
       data: {
         box_mac: box_mac,
-        cmd: 'call-mini-program',
         msg: '{"action":104,"openid":"' + openid + '","activity_id":' + activity_id + '}',
-        req_id: activity_id
       },
       success:function(res){
          wx.navigateBack({

@@ -285,20 +285,18 @@ Page({
               showView: false,
             })
             var code = res.data.result.code;
+            
             wx.request({
-              url: 'https://netty-push.littlehotspot.com/push/box',
-              header: {
-                "Content-Type": "application/x-www-form-urlencoded"
+              url: 'https://mobile.littlehotspot.com/Netty/Index/index',
+              headers: {
+                'Content-Type': 'application/json'
               },
               method: "POST",
               data: {
                 box_mac: box_mac,
-                cmd: 'call-mini-program',
                 msg: '{"action":1,"code":' + code + ',"openid":"' + openid + '"}',
-                req_id: timestamp
               },
-              success: function (rt) {
-
+              success:function(rt){
                 if (rt.data.code != 10000) {
                   wx.showToast({
                     title: '该电视暂不能投屏',
@@ -307,7 +305,7 @@ Page({
                   })
                 } 
               }
-            });
+            })
           } else if (is_have == 1) {
             /*wx.switchTab({
               url: '../index/index',

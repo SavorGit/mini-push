@@ -97,16 +97,14 @@ Page({
             },
             success: function (res) {
               wx.request({
-                url: 'https://netty-push.littlehotspot.com/push/box',
-                header: {
-                  "Content-Type": "application/x-www-form-urlencoded"
+                url: 'https://mobile.littlehotspot.com/Netty/Index/index',
+                headers: {
+                  'Content-Type': 'application/json'
                 },
                 method: "POST",
                 data: {
                   box_mac: box_mac,
-                  cmd: 'call-mini-program',
                   msg: '{"action":103,"activity_id":' + activity_id + ',"openid":"' + openid + '","avatarurl":"' + avatarurl + '"}',
-                  req_id: timestamp
                 },
                 success: function (ret) {
                   wx.navigateTo({

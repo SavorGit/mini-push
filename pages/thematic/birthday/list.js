@@ -9,7 +9,8 @@ Page({
    */
   data: {
     openid:'',
-    box_mac:''
+    box_mac:'',
+    happylist:'',
   },
 
   /**
@@ -23,12 +24,24 @@ Page({
       openid:openid,
       box_mac:box_mac
     })
+    wx.request({
+      url: 'https://mobile.littlehotspot.com/Smallapp21/index/happylist',
+      header: {
+        'content-type': 'application/json'
+      },
+      success:function(res){
+        //console.log(res);
+        that.setData({
+          happylist:res.data.result
+        })
+      }
+    })
   },
   showHappy:function(e){
     var box_mac = e.currentTarget.dataset.boxmac;
     var openid = e.currentTarget.dataset.openid;
     var vediourl = e.currentTarget.dataset.vediourl;
-    var forscreen_char = e.currentTarget.dataset.name;
+    var forscreen_char = 'Happy Birthday';
 
     var index1 = vediourl.lastIndexOf("/");
     var index2 = vediourl.length;
@@ -37,16 +50,14 @@ Page({
     var mobile_brand = app.globalData.mobile_brand;
     var mobile_model = app.globalData.mobile_model;
     wx.request({
-      url: "https://netty-push.littlehotspot.com/push/box",
-      header: {
-        "Content-Type": "application/x-www-form-urlencoded"
+      url: 'https://mobile.littlehotspot.com/Netty/Index/index',
+      headers: {
+        'Content-Type': 'application/json'
       },
       method: "POST",
       data: {
         box_mac: box_mac,
-        cmd: 'call-mini-program',
         msg: '{ "action": 5,"url":"' + vediourl + '","filename":"' + filename + '","forscreen_id":"' + timestamp +'","resource_type":2}',
-        req_id: timestamp
       },
       success: function (res) {
         wx.showToast({
