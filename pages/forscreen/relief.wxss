@@ -1,4 +1,8 @@
-label {
+scroll-view {
+  height: calc(100vh - 46px);
+}
+
+label.paragraph {
   margin: 12rpx 42rpx 12rpx 42rpx;
   width: calc(100vw - 84rpx);
   font-size: 24rpx;
