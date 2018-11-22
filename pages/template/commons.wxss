@@ -126,7 +126,7 @@
 }
 
 .default-navigation-bar > .navigation-bar > .title > .text {
-  font-size: 13px;
+  font-size: 16px;
   font-weight: bold;
   color: #fff;
 }
@@ -137,7 +137,6 @@
 .default-navigation-bar > .navigation-bar > .btn > .to-home {
   padding-left: 5px;
   padding-right: 5px;
-  /* border: 1px solid #f00; */
 }
 
 .default-navigation-bar > .navigation-bar > .btn > .go-back > image,

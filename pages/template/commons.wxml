@@ -62,8 +62,8 @@
         <navigator class='go-back' open-type='navigateBack' delta='100'>
           <image src='/images/icon/white_back.png'>Back</image>
         </navigator>
-        <view>
-          <image src='/images/icon/grey_vertical.png' style='width:1px; height: 18px; vertical-align: middle;'></image>
+        <view style='margin-right: 3px;'>
+          <image src='/images/icon/Ia54254_vertical.png' style='width:1px; height: 18px; vertical-align: middle;'></image>
         </view>
         <navigator class='to-home' open-type="switchTab" url='/pages/demand/index'>
           <image src='/images/icon/white_home_1.png'>Home</image>
@@ -85,15 +85,15 @@
         <view style='padding-left: 5px; padding-right: 5px;'>
           <image src='/images/icon/white_back.png' style='width: 18px; height: 18px; vertical-align: middle;'>Back</image>
         </view>
-        <view>
-          <image src='/images/icon/grey_vertical.png' style='width: 1px; height: 18px; vertical-align: middle;'></image>
+        <view style='margin-right: 3px;'>
+          <image src=' /images/icon/Ia54254_vertical.png ' style='width: 1px; height: 18px; vertical-align: middle; '></image>
         </view>
-        <navigator class='to-home' open-type="switchTab" url='/pages/demand/index'>
-          <image src='/images/icon/white_home_1.png'>Home</image>
+        <navigator class='to-home ' open-type="switchTab" url='/pages/demand/index '>
+          <image src='/images/icon/white_home_1.png '>Home</image>
         </navigator>
       </view>
-      <view class='title'>
-        <label class='text'>{{titleText}}</label>
+      <view class='title '>
+        <label class='text '>{{titleText}}</label>
       </view>
     </view>
   </view>
