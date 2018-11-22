@@ -19,6 +19,7 @@ Page({
    * 页面的初始数据
    */
   data: {
+    statusBarHeight: getApp().globalData.statusBarHeight,
     avatarUrl:'',
     nickName: '',
     box_mac :'',

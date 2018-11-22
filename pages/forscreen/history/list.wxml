@@ -1,4 +1,7 @@
 <!--pages/forscreen/history/list.wxml-->
+<import src="/pages/template/commons" />
+<template is="navigationBarForTwoLevel" data='{{statusBarHeight: statusBarHeight,titleText:"热点投屏"}}' />
+
 <view class="container">
   <scroll-view class='page_main' scroll-y="true" bindscrolltolower="loadMore" data-openid='{{openid}}' data-box_mac='{{box_mac}}'>
     <!--循环开始-->

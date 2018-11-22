@@ -43,11 +43,11 @@
 /* =========================== 页面主体 =========================== */
 
 .page_main_scroll {
-  height: calc(100vh - 70rpx);
+  height: calc(100% - 70rpx);
 }
 
 .page_main {
-  min-height: calc(100vh - 70rpx);
+  min-height: calc(100% - 70rpx);
   background-color: #fff;
 }
 

@@ -1,6 +1,7 @@
 const app = getApp();
 Page({
-  data:{
+  data: {
+    statusBarHeight: getApp().globalData.statusBarHeight,
     canIUse: wx.canIUse('button.open-type.getUserInfo'),
     box_mac:'',
     openid:'',

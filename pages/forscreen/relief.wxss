@@ -1,17 +1,19 @@
-label{
+label {
   margin: 12rpx 42rpx 12rpx 42rpx;
   width: calc(100vw - 84rpx);
   font-size: 24rpx;
-  color: #333333;
-  line-height:40rpx;
+  color: #333;
+  line-height: 40rpx;
 }
-label.title{
+
+label.title {
   margin: 40rpx 42rpx 12rpx 42rpx;
   font-size: 28rpx;
   text-align: center;
   color: #932c3f;
 }
-.content{
+
+.content {
   width: calc(100vw);
   display: flex;
   flex-direction: column;

@@ -1,4 +1,6 @@
 <!-- pages/forscreen/video/launch_video.wxml -->
+<import src="/pages/template/commons" />
+<template is="navigationBarForTwoLevel" data='{{statusBarHeight: statusBarHeight,titleText:"热点投屏"}}' />
 
 <!-- ================================== 点播页面 ================================== -->
 <view class="container">
@@ -10,7 +12,7 @@
       <label>{{video_name}}</label>
     </view>
     <view style='margin-top: 50rpx; text-align: center;'>
-      <navigator class='link_relief font_932C3F_30' open-type='reLaunch'  url='/pages/demand/index'>更多...</navigator>
+      <navigator class='link_relief font_932C3F_30' open-type='reLaunch' url='/pages/demand/index'>更多...</navigator>
     </view>
   </view>
 </view>

@@ -8,7 +8,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    
+    statusBarHeight: getApp().globalData.statusBarHeight,
     canIUse: wx.canIUse('button.open-type.getUserInfo'),
     openid: '',
     userinfo:[],

@@ -5,6 +5,7 @@ Page({
    * 页面的初始数据
    */
   data: {
+    statusBarHeight: getApp().globalData.statusBarHeight,
     cityArray: [
       ['中国'],
       ['北京市', '上海市', '广东省'],

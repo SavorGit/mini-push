@@ -1,6 +1,8 @@
 <!--pages/find/index.wxml-->
 <!-- <import src="../template/navigation.wxml" /> -->
 <import src="../template/commons" />
+<template is="navigationBarForTopLevel" data='{{statusBarHeight: statusBarHeight,titleText:"热点投屏"}}' />
+
 <view class="container">
   <scroll-view class='page_main' scroll-y="true" scroll-with-animation="true" bindscrolltolower="loadMore" data-openid='{{openid}}'>
     <!--循环开始-->
@@ -10,7 +12,7 @@
           <image class='user_head' src="{{bean.avatarUrl}}" lazy-load='http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/icon/grey_interact.png'></image>
           <label class='user_name font_333333_30'>{{bean.nickName}}</label>
         </view>
-        <view class='operation' >
+        <view class='operation'>
 
           <button bindtap='boxShow' class='launch_tv font_932C3F_20' data-res_type="{{bean.res_type}}" data-res_nums="{{bean.res_nums}}" data-pubdetail="{{bean.pubdetail}}" data-boxmac="{{box_mac}}" data-openid="{{openid}}">电视播放</button>
         </view>
@@ -107,5 +109,5 @@
 
 <!-- 固定悬浮按钮组 -->
 <view wx:if="{{box_mac !=''}}">
-<template is="fixedSuspensionButtonGroup" />
+  <template is="fixedSuspensionButtonGroup" />
 </view>

@@ -20,13 +20,16 @@
     "pages/demand/index",
     "pages/thematic/birthday/list",
     "pages/forscreen/history/list",
-    "pages/recommend/hotel"
+    "pages/recommend/hotel",
+    "pages/share/pic",
+    "pages/share/video"
   ],
   "window": {
     "backgroundTextStyle": "dark",
     "navigationBarBackgroundColor": "#932c3f",
     "navigationBarTitleText": "热点投屏",
-    "navigationBarTextStyle": "#932c3f"
+    "navigationBarTextStyle": "#932c3f",
+    "navigationStyle": "custom"
   },
   "tabBar": {
     "color": "#333333",

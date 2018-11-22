@@ -1,4 +1,6 @@
 <!-- pages/forscreen/forvideo/index.wxml -->
+<import src="/pages/template/commons" />
+<template is="navigationBarForTwoLevel" data='{{statusBarHeight: statusBarHeight,titleText:"热点投屏"}}' />
 
 <view class="container">
 
@@ -49,7 +51,7 @@
     <view class='page_top flex_row_center font_333333_26'>
       <label>视频加载完成后，电视开始加载并自动播放</label>
       <label class='link_relief'>
-        <navigator url="/pages/forscreen/relief ">免责声明</navigator>
+        <navigator url="/pages/forscreen/relief">免责声明</navigator>
       </label>
     </view>
     <scroll-view scroll-y="true" scroll-with-animation="true" bindscrolltolower="loadMore" data-openid='{{openid}}' data-box_mac='{{box_mac}}'>

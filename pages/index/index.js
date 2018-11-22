@@ -8,6 +8,7 @@ Page({
    * 页面的初始数据
    */
   data: {
+    statusBarHeight: getApp().globalData.statusBarHeight,
     canIUse: wx.canIUse('button.open-type.getUserInfo'),
     openid:'',
     hotel_name:'',   //酒楼名称
@@ -17,7 +18,7 @@ Page({
     happy_vedio_url: '',          //生日视频url
     happy_vedio_name: '',          //生日视频名称
     happy_vedio_title: '',          //生日视频标题
-    showModal:false,   //显示授权登陆弹窗
+    showModal: false,   //显示授权登陆弹窗
   },
 
   /**

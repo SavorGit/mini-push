@@ -1,4 +1,6 @@
 <!-- pages/forscreen/forimages/index.wxml -->
+<import src="/pages/template/commons" />
+<template is="navigationBarForTwoLevel" data='{{statusBarHeight: statusBarHeight,titleText:"热点投屏"}}' />
 
 <view class="container">
 
@@ -97,7 +99,7 @@
         </form>
 
         <view class='launch_history'>
-          <view class='title' >
+          <view class='title'>
             <image src='/images/icon/black_history.png'></image>
             <label class='font_333333_26'>投屏历史</label>
           </view>
@@ -116,7 +118,7 @@
                   <button bindtap="replayHistory" data-res_type='{{bean.res_type}}' data-box_mac='{{box_mac}}' data-openid='{{openid}}' data-res_list='{{bean.list}}'>重投</button>
                 </view>
               </view>
-              <view  wx:else class="video">
+              <view wx:else class="video">
                 <view class="cover" wx:for="{{bean.list}}" wx:key="pkey" wx:for-item="item" wx:for-index="indexs">
                   <navigator url="/pages/forscreen/video/launch_video?video_url={{item.res_url}}&video_name=">
                     <image mode='aspectFill' src="{{item.imgurl}}"></image>
@@ -134,7 +136,7 @@
               <view wx:if="{{forscreen_history_list.length > index+1}}" class='line'></view>
             </view>
           </view>
- 
+
           <view class='no_data' wx:else>
             <view class="row-center">
               <view>

@@ -68,13 +68,12 @@ image.pic_show_cur {
   margin: 0;
   padding: 0;
   border: 0rpx;
-  width: 100vw;
-  height: 100vh;
+  height: 100%;
 }
 
 .launch_pic_page_b .page_main {
   width: 100%;
-  height: calc(100vh - 135rpx);
+  height: calc(100% - 135rpx);
 }
 
 .launch_pic_page_b .page_main > .pic_text > label {
@@ -82,7 +81,7 @@ image.pic_show_cur {
 }
 
 .launch_pic_page_b .page_main > .pic_text > textarea {
-  margin: 24rpx 0 calc(100vh - 1079rpx) 28rpx;
+  margin: 24rpx 0 180rpx 28rpx;
   width: 690rpx;
   height: 148rpx;
   color: #000;
@@ -163,8 +162,7 @@ image.pic_show_cur {
   margin: 0;
   padding: 0;
   border: 0rpx;
-  width: 100vw;
-  height: 100vh;
+  height: 100%;
 }
 
 .launch_pic_page_a > .page_top {
@@ -186,7 +184,7 @@ image.pic_show_cur {
 
 .launch_pic_page_a > scroll-view {
   width: 100%;
-  height: calc(100vh - 188rpx);
+  height: calc(100% - 188rpx);
 }
 
 .launch_pic_page_a .page_main {

@@ -16,6 +16,7 @@ Page({
    * 页面的初始数据
    */
   data: {
+    statusBarHeight: getApp().globalData.statusBarHeight,
     showVedio:false,
     showRechoose:false,
     upload_vedio_temp:'',

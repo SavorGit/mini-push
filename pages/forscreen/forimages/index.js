@@ -16,6 +16,7 @@ var page = 1;
 var forscreen_history_list;
 Page({
   data: {
+    statusBarHeight: getApp().globalData.statusBarHeight,
     showSecond:false,    //页面是否展示
     showThird: false,    //重选照片 退出投屏
     showTpBt:true,       //投屏添加文字

@@ -1,4 +1,6 @@
 <!-- pages/activity/turntable/index.wxml -->
+<import src="/pages/template/commons" />
+<template is="navigationBarForTwoLevel" data='{{statusBarHeight: statusBarHeight,titleText:"热点投屏"}}' />
 
 <!-- ================================== 发起游戏 ================================== -->
 <view class="container">

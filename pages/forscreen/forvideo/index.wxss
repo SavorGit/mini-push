@@ -6,14 +6,13 @@
   margin: 0rpx;
   padding: 0rpx;
   border: 0rpx;
-  width: 100vw;
-  height: 100vh;
+  height: 100%;
 }
 
 .launch_video_page_b > .page_main {
   padding-top: 115rpx;
   width: 100%;
-  height: calc(100vh - 215rpx);
+  height: calc(100% - 215rpx);
   text-align: center;
 }
 
@@ -67,8 +66,7 @@
   margin: 0;
   padding: 0;
   border: 0rpx;
-  width: 100vw;
-  height: 100vh;
+  height: 100%;
 }
 
 .launch_video_page_a > .page_top {
@@ -91,7 +89,7 @@
 
 .launch_video_page_a > scroll-view {
   width: 100%;
-  height: calc(100vh - 188rpx);
+  height: calc(100% - 188rpx);
 }
 
 .launch_video_page_a .page_main {

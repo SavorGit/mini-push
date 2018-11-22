@@ -9,6 +9,7 @@ var program_list;                //点播列表
 var openid;                      //用户openid
 Page({
   data: {
+    statusBarHeight: getApp().globalData.statusBarHeight,
     openid: '',
     motto: '热点投屏',
     userInfo: {},

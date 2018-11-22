@@ -1,3 +1,7 @@
+
+<import src="/pages/template/commons" />
+<template is="navigationBarForTwoLevel" data='{{statusBarHeight: statusBarHeight,titleText:"热点投屏"}}' />
+
 <view class="content">
   <label class='title'>总则</label>
   <label>用户在接受小热点（热点投屏）服务之前，请务必仔细阅读本条款并同意本声明。</label>

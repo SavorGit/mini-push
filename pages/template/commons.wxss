@@ -91,3 +91,58 @@
   border-radius: 49%;
   /* background-color: #f6f3ee; */
 }
+
+/* 自定义顶级页面导航栏 */
+
+.default-navigation-bar {
+  background-color: #932c3f;
+  width: 100vw;
+}
+
+.default-navigation-bar > .status-bar {
+  font-size: 24px;
+}
+
+.default-navigation-bar > .navigation-bar {
+  height: 46px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.default-navigation-bar > .navigation-bar > .btn {
+  width: 60px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.default-navigation-bar > .navigation-bar > .title {
+  width: calc(100% - 120px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.default-navigation-bar > .navigation-bar > .title > .text {
+  font-size: 13px;
+  font-weight: bold;
+  color: #fff;
+}
+
+/* 自定义二级页面导航栏 */
+
+.default-navigation-bar > .navigation-bar > .btn > .go-back,
+.default-navigation-bar > .navigation-bar > .btn > .to-home {
+  padding-left: 5px;
+  padding-right: 5px;
+  /* border: 1px solid #f00; */
+}
+
+.default-navigation-bar > .navigation-bar > .btn > .go-back > image,
+.default-navigation-bar > .navigation-bar > .btn > .to-home > image {
+  width: 18px;
+  height: 18px;
+  vertical-align: middle;
+}

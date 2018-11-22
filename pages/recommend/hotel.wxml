@@ -1,5 +1,7 @@
 <!--pages/recommend/hotel.wxml-->
 <import src="../template/commons" />
+<template is="navigationBarForTopLevel" data='{{statusBarHeight: statusBarHeight,titleText:"热点投屏"}}' />
+
 <view class="container">
   <view class='page_top'>
     <view class='v-structure font_666666_28'>

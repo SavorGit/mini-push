@@ -1,5 +1,7 @@
 <!--pages/mine/index_20181010.wxml-->
 <import src="../template/commons" />
+<template is="navigationBarForTopLevel" data='{{statusBarHeight: statusBarHeight,titleText:"热点投屏"}}' />
+
 <view class="container">
   <scroll-view class='page_main' scroll-y="true" scroll-with-animation="true" bindscrolltolower="loadMore" data-openid='{{openid}}'>
     <view class='page_top'>

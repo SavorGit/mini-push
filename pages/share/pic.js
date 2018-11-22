@@ -1,11 +1,11 @@
-// pages/forscreen/relief.js
+// pages/share/pic.js
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    statusBarHeight: getApp().globalData.statusBarHeight,
+    statusBarHeight: getApp().globalData.statusBarHeight
   },
 
   /**

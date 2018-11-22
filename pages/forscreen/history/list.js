@@ -11,6 +11,7 @@ Page({
    * 页面的初始数据
    */
   data: {
+    statusBarHeight: getApp().globalData.statusBarHeight,
     forscreen_history_list: '',
     hiddens: true,   //上拉加载中
   },
