@@ -54,7 +54,7 @@
 .page_main > .row-item {
   padding: 25rpx 25rpx 20rpx 25rpx;
   height: 120rpx;
-  border-bottom: 5rpx solid #ece6de;
+  border-bottom: 1rpx solid #ece6de;
   display: flex;
   flex-direction: row;
   align-items: flex-start;
@@ -69,6 +69,7 @@
 .page_main > .row-item > .cover > image {
   width: 100%;
   height: 100%;
+  border-radius: 5rpx;
 }
 
 .page_main > .row-item > .i-right {
