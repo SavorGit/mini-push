@@ -2,7 +2,7 @@
 <import src="/pages/template/commons" />
 <template is="navigationBarForTwoLevel" data='{{statusBarHeight: statusBarHeight,titleText:"热点投屏"}}' />
 
-<view class="container">
+<view class="container" style='height: calc(100vh - 46px - {{statusBarHeight}}px);'>
   <scroll-view scroll-y="true" scroll-with-animation="true">
     <view class="content">
       <label class='title'>总则</label>

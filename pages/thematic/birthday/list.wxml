@@ -3,10 +3,10 @@
 <template is="navigationBarForTwoLevel" data='{{statusBarHeight: statusBarHeight,titleText:"热点投屏"}}' />
 
 <!-- ================================= 生日歌列表 ================================= -->
-<view class="container">
+<view class="container" style='height: calc(100vh - 46px - {{statusBarHeight}}px);'>
   <view class='body'>
     <view class='weui-grids birthday-list-grids'>
-      <view class='weui-grid birthday-list-grid' wx:for="{{happylist}}" wx:key="key" wx:for-item="bean" wx:for-index="index" >
+      <view class='weui-grid birthday-list-grid' wx:for="{{happylist}}" wx:key="key" wx:for-item="bean" wx:for-index="index">
         <image mode='aspectFill' src='{{bean.img_url}}'></image>
         <text class='font_666666_24'>{{bean.name}}</text>
         <view class='cover'>

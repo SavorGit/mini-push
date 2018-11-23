@@ -83,7 +83,7 @@
     <view class='navigation-bar'>
       <view class='btn'>
         <view style='padding-left: 5px; padding-right: 5px;'>
-          <image src='/images/icon/white_back.png' style='width: 18px; height: 18px; vertical-align: middle;'>Back</image>
+          <image src='/images/icon/Ia54254_back.png' style='width: 18px; height: 18px; vertical-align: middle;'>Back</image>
         </view>
         <view style='margin-right: 3px;'>
           <image src=' /images/icon/Ia54254_vertical.png ' style='width: 1px; height: 18px; vertical-align: middle; '></image>
@@ -94,6 +94,30 @@
       </view>
       <view class='title '>
         <label class='text '>{{titleText}}</label>
+      </view>
+    </view>
+  </view>
+</template>
+
+
+<!-- 自定义二级游戏页面导航栏 -->
+<template name="navigationBarForTwoLevelInGame">
+  <view class='default-navigation-bar' style='position: absolute; background-color: unset;'>
+    <view class='status-bar' style='height:{{statusBarHeight}}px; background-color: {{statusBarBGColor}}'></view>
+    <view class='navigation-bar' style='background-color: unset;'>
+      <view class='btn'>
+        <navigator class='go-back' open-type='navigateBack' delta='100'>
+          <image src='/images/icon/white_back.png'>Back</image>
+        </navigator>
+        <view style='margin-right: 3px;'>
+          <image src='/images/icon/Ia54254_vertical.png' style='width:1px; height: 18px; vertical-align: middle;'></image>
+        </view>
+        <navigator class='to-home' open-type="switchTab" url='/pages/demand/index'>
+          <image src='/images/icon/white_home_1.png'>Home</image>
+        </navigator>
+      </view>
+      <view class='title'>
+        <label class='text'>{{titleText}}</label>
       </view>
     </view>
   </view>

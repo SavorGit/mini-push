@@ -2,12 +2,12 @@
 <import src="/pages/template/commons" />
 <template is="navigationBarForTwoLevel" data='{{statusBarHeight: statusBarHeight,titleText:"热点投屏"}}' />
 
-<view class="container">
+<view class="container" style='height: calc(100vh - 46px - {{statusBarHeight}}px);'>
   <scroll-view class='page_main' scroll-y="true" bindscrolltolower="loadMore" data-openid='{{openid}}' data-box_mac='{{box_mac}}'>
     <!--循环开始-->
 
     <!-- 一张图片 -->
-    <view   class='content content_bottom_border' wx:for="{{forscreen_history_list}}" wx:key="key" wx:for-item="bean" wx:for-index="index">
+    <view class='content content_bottom_border' wx:for="{{forscreen_history_list}}" wx:key="key" wx:for-item="bean" wx:for-index="index">
       <view class='con_top'>
         <view class='datetime'>
           <label class='font_333333_30'>{{bean.create_time}}</label>
@@ -52,7 +52,7 @@
           </view>
         </view>
       </view>
-      <view  class='con_bottom'></view>
+      <view class='con_bottom'></view>
     </view>
 
     <!-- 两张图片 -->
@@ -261,9 +261,9 @@
     </view>-->
     <!--循环结束-->
 
-     <view class="body-view">
+    <view class="body-view">
       <loading hidden="{{hiddens}}" bindchange="loadingChange">加载中...</loading>
-    </view> 
+    </view>
     <!-- 滚动页面底部留白 -->
     <view class='nav_bottom_space'></view>
 

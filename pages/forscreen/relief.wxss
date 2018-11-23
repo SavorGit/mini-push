@@ -1,5 +1,5 @@
 scroll-view {
-  height: calc(100vh - 46px);
+  height: 100%;
 }
 
 label.paragraph {

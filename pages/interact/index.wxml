@@ -1,6 +1,9 @@
 <!--pages/interact/index.wxml-->
 <import src="../template/navigation.wxml" />
-<view class="container">
+<import src="../template/commons" />
+<template is="navigationBarForTopLevel" data='{{statusBarHeight: statusBarHeight,titleText:"热点投屏"}}' />
+
+<view class="container" style='height: calc(100vh - 46px - {{statusBarHeight}}px);'>
   <view class='page_main_v'>
     <view class='page_main_h'>
       <view wx:if="{{is_link > 0}}" class='tip'>

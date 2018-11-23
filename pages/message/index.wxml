@@ -1,7 +1,9 @@
 <!--pages/message/index.wxml-->
 <!-- <import src="../template/navigation" /> -->
 <import src="../template/commons" />
-<view class="container">
+<template is="navigationBarForTopLevel" data='{{statusBarHeight: statusBarHeight,titleText:"热点投屏"}}' />
+
+<view class="container" style='height: calc(100vh - 46px - {{statusBarHeight}}px);'>
   <view class='page_main_v'>
     <view class='page_main_h'>
       <image mode='widthFix' src='http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/not_open_002.png' style='width: 50vw;margin-bottom: 50rpx;'></image>
@@ -32,5 +34,5 @@
 
 <!-- 固定悬浮按钮组 -->
 <view wx:if="{{box_mac !=''}}">
-<template is="fixedSuspensionButtonGroup" />
+  <template is="fixedSuspensionButtonGroup" />
 </view>

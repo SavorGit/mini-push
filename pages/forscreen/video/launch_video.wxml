@@ -3,7 +3,7 @@
 <template is="navigationBarForTwoLevel" data='{{statusBarHeight: statusBarHeight,titleText:"热点投屏"}}' />
 
 <!-- ================================== 点播页面 ================================== -->
-<view class="container">
+<view class="container" style='height: calc(100vh - 46px - {{statusBarHeight}}px);'>
   <view class='article'>
     <view class='video'>
       <video src="{{video_url}}" autoplay="false"></video>

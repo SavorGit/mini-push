@@ -3,7 +3,7 @@
 <import src="/pages/template/commons" />
 <template is="navigationBarForTwoLevel" data='{{statusBarHeight: statusBarHeight,titleText:"热点投屏"}}' />
 
-<view class="container">
+<view class="container" style='height: calc(100vh - 46px - {{statusBarHeight}}px);'>
   <scroll-view class='page_main' scroll-y="true" scroll-with-animation="true" bindscrolltolower="loadMore" data-openid='{{openid}}'>
     <!--
     <view class='user'>
@@ -83,10 +83,10 @@
               <image src='http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/icon/grey_comment.png'></image>
               <label class='font_333333_26'>100</label>
             </view>-->
-            <view>
-              <image src='http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/icon/grey_share.png'></image>
-              <label class='font_333333_26'>{{bean.share_num}}</label>
-            </view>
+              <view>
+                <image src='http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/icon/grey_share.png'></image>
+                <label class='font_333333_26'>{{bean.share_num}}</label>
+              </view>
             </view>
           </view>
         </view>

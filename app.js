@@ -34,7 +34,7 @@ App({
     var app = this;
     wx.getSystemInfo({
       success: function(res) {
-        console.log(app, this);
+        console.log("/app.js", app);
         app.globalData.statusBarHeight = res.statusBarHeight;
       }
     })

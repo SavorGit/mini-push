@@ -2,7 +2,7 @@
 <import src="../template/commons" />
 <template is="navigationBarForTopLevel" data='{{statusBarHeight: statusBarHeight,titleText:"热点投屏"}}' />
 
-<view class="container">
+<view class="container" style='height: calc(100vh - 46px - {{statusBarHeight}}px);'>
   <view class='page_top'>
     <view class='v-structure font_666666_28'>
       <picker mode="multiSelector" bindchange="bindCityPickerChange" bindcolumnchange="bindCityPickerColumnChange" value="{{cityIndex}}" range="{{cityArray}}">
