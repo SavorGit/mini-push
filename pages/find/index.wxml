@@ -14,37 +14,33 @@
         </view>
         <view class='operation'>
 
-          <button bindtap='boxShow' class='launch_tv font_932C3F_20' data-res_type="{{bean.res_type}}" data-res_nums="{{bean.res_nums}}" data-pubdetail="{{bean.pubdetail}}" data-boxmac="{{box_mac}}" data-openid="{{openid}}" data-forscreen_id="{{bean.forscreen_id}}">电视播放</button>
+          <button bindtap='boxShow' class='launch_tv font_932C3F_20' data-res_type="{{bean.res_type}}" data-res_nums="{{bean.res_nums}}" data-pubdetail="{{bean.pubdetail}}" data-boxmac="{{box_mac}}" data-openid="{{openid}}">电视播放</button>
         </view>
       </view>
       <view class='con_main'>
         <view class="weui-grids" wx:if="{{bean.res_type == 1 && bean.res_nums=='1'}}">
-          <navigator url="/pages/share/pic?forscreen_id={{bean.forscreen_id}}">
-            <view class="weui-grid_1" wx:for="{{bean.pubdetail}}" wx:key="pkey" wx:for-item="item" wx:for-index="indexs">
-              <image  data-pkey="{{indexs}}" data-src="{{bean.pubdetail}}" class="pic_show" mode='aspectFill' src="{{item.res_url}}"></image>
-            </view>
-          </navigator>
+          <view class="weui-grid_1" wx:for="{{bean.pubdetail}}" wx:key="pkey" wx:for-item="item" wx:for-index="indexs">
+            <image bindtap="previewImage" data-pkey="{{indexs}}" data-src="{{bean.pubdetail}}" class="pic_show" mode='aspectFill' src="{{item.res_url}}"></image>
+          </view>
         </view>
 
         <view class="weui-grids" wx:if="{{bean.res_type == 1 && (bean.res_nums=='2' || bean.res_nums=='3' || bean.res_nums=='5' || bean.res_nums=='6')}}">
-          <navigator url="/pages/share/pic?forscreen_id={{bean.forscreen_id}}">
-            <view class="weui-grid" wx:for="{{bean.pubdetail}}" wx:key="pkey" wx:for-item="item" wx:for-index="indexs">
-              <image  data-pkey="{{indexs}}" data-src="{{bean.pubdetail}}" class="pic_show" mode='aspectFill' src="{{item.res_url}}"></image>
-            </view>
-          </navigator>
+
+          <view class="weui-grid" wx:for="{{bean.pubdetail}}" wx:key="pkey" wx:for-item="item" wx:for-index="indexs">
+            <image bindtap="previewImage" data-pkey="{{indexs}}" data-src="{{bean.pubdetail}}" class="pic_show" mode='aspectFill' src="{{item.res_url}}"></image>
+          </view>
         </view>
 
         <view class="weui-grids" wx:if="{{bean.res_type == 1 && bean.res_nums=='4'}}">
-          <navigator url="/pages/share/pic?forscreen_id={{bean.forscreen_id}}">
-            <view class="weui-grid_4" wx:for="{{bean.pubdetail}}" wx:key="pkey" wx:for-item="item" wx:for-index="indexs">
-              <image  data-pkey="{{indexs}}" data-src="{{bean.pubdetail}}" class="pic_show" mode='aspectFill' src="{{item.res_url}}"></image>
-            </view>
-          </navigator>
+          <view class="weui-grid_4" wx:for="{{bean.pubdetail}}" wx:key="pkey" wx:for-item="item" wx:for-index="indexs">
+            <image bindtap="previewImage" data-pkey="{{indexs}}" data-src="{{bean.pubdetail}}" class="pic_show" mode='aspectFill' src="{{item.res_url}}"></image>
+          </view>
+
         </view>
 
         <view class="video" wx:if="{{bean.res_type == 2 }}">
           <view wx:for="{{bean.pubdetail}}" wx:key="pkey" wx:for-item="item" wx:for-index="indexs">
-            <navigator bindtap='findLog' data-openid='{{openid}}' data-box_mac='{{box_mac}}' data-title='' data-tx_url='{{item.forscreen_url}}' data-id='{{bean.forscreen_id}}' data-duration="{{item.duration}}" url="/pages/share/video?forscreen_id={{bean.forscreen_id}}">
+            <navigator bindtap='findLog' data-openid='{{openid}}' data-box_mac='{{box_mac}}' data-title='' data-tx_url='{{item.forscreen_url}}' data-id='{{bean.forscreen_id}}' data-duration="{{item.duration}}" url="/pages/forscreen/video/launch_video?video_url={{item.res_url}}&video_name=">
               <image mode='aspectFill' src="{{item.vide_img}}"></image>
             </navigator>
             <view class="cover">
