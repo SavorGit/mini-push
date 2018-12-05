@@ -28,6 +28,34 @@
   </modal>
 </template>
 
+
+<!-- 微信授权登录 -->
+<template name="wxRecAuthLogin">
+  <modal show="{{show}}" height='450rpx' width="98%" border-radius="0rpx" title-text="" confirm-text="" cancel-text="">
+    <view class='wxAuthLogin-container'>
+      <view class='wxAuthLogin-top'>
+        <view class='opt'>
+          <button class='close' bindtap='closeAuth'>
+            <image src='/images/icon/grey_close.png'></image>
+          </button>
+        </view>
+        <view class='title'>
+          <label class='font_333333_34'>温馨提示</label>
+        </view>
+      </view>
+      <view class='wxAuthLogin-middle'>
+        <label class='content font_333333_30'>未获取到您所在的城市</label>
+        <label class='content font_333333_30'>请进行位置授权,以便为您推荐优质餐厅</label>
+        
+      </view>
+
+      <view class='wxAuthLogin-bottom'>
+        <button class='savor-btn' open-type="getUserInfo" bindgetuserinfo="onGetUserInfo">微信授权登录</button>
+      </view>
+    </view>
+  </modal>
+</template>
+
 <!-- 固定悬浮按钮组 -->
 <template name="fixedSuspensionButtonGroup">
   <view class='fixedSuspensionButtonGroup'>
@@ -65,7 +93,7 @@
         <view style='margin-right: 3px;'>
           <image src='/images/icon/Ia54254_vertical.png' style='width:1px; height: 18px; vertical-align: middle;'></image>
         </view>
-        <navigator class='to-home' open-type="switchTab" url='/pages/demand/index'>
+        <navigator class='to-home' open-type="switchTab" url='../demand/index'>
           <image src='/images/icon/white_home_1.png'>Home</image>
         </navigator>
       </view>
@@ -76,19 +104,45 @@
   </view>
 </template>
 
+<!-- 自定义二级页面导航栏 -->
+<template name="navigationBarForVideoLevel">
+  <view class='default-navigation-bar'>
+    <view class='status-bar' style='height:{{statusBarHeight}}px;'></view>
+    <view class='navigation-bar'>
+      <view class='btn'>
+        <navigator class='go-back' open-type='navigateBack' delta='100'>
+          <image src='/images/icon/white_back.png'>Back</image>
+        </navigator>
+        <view style='margin-right: 3px;'>
+          <image src='/images/icon/Ia54254_vertical.png' style='width:1px; height: 18px; vertical-align: middle;'></image>
+        </view>
+        <navigator class='to-home' open-type="switchTab" url='../../demand/index'>
+          <image src='/images/icon/white_home_1.png'>Home</image>
+        </navigator>
+      </view>
+      <view class='title'>
+        <label class='text'>{{titleText}}</label>
+      </view>
+    </view>
+  </view>
+</template>
+
+
 <!-- 自定义分享页面导航栏 -->
 <template name="navigationBarForShare">
   <view class='default-navigation-bar'>
     <view class='status-bar' style='height:{{statusBarHeight}}px;'></view>
     <view class='navigation-bar'>
       <view class='btn'>
+        <navigator class='go-back' open-type='navigateBack' delta='100'>
         <view style='padding-left: 5px; padding-right: 5px;'>
           <image src='/images/icon/Ia54254_back.png' style='width: 18px; height: 18px; vertical-align: middle;'>Back</image>
         </view>
+        </navigator>
         <view style='margin-right: 3px;'>
           <image src=' /images/icon/Ia54254_vertical.png ' style='width: 1px; height: 18px; vertical-align: middle; '></image>
         </view>
-        <navigator class='to-home ' open-type="switchTab" url='/pages/demand/index '>
+        <navigator class='to-home ' open-type="switchTab" url='../demand/index'>
           <image src='/images/icon/white_home_1.png '>Home</image>
         </navigator>
       </view>
@@ -112,7 +166,7 @@
         <view style='margin-right: 3px;'>
           <image src='/images/icon/Ia54254_vertical.png' style='width:1px; height: 18px; vertical-align: middle;'></image>
         </view>
-        <navigator class='to-home' open-type="switchTab" url='/pages/demand/index'>
+        <navigator class='to-home' open-type="switchTab" url='../demand/index'>
           <image src='/images/icon/white_home_1.png'>Home</image>
         </navigator>
       </view>

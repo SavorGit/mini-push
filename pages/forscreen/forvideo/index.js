@@ -97,8 +97,40 @@ Page({
     var avatarUrl = res.target.dataset.avatarurl;
     var nickName = res.target.dataset.nickname;
     
+
     res_sup_time = (new Date()).valueOf();
-    uploadVedio(video, box_mac, openid, res_sup_time, is_pub_hotelinfo, is_share, duration, avatarUrl, nickName);
+    
+    wx.request({
+      url: 'https://mobile.littlehotspot.com/smallapp21/User/isForscreenIng',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      method: "POST",
+      data: { box_mac: box_mac },
+      success: function (res) {
+        var is_forscreen = res.data.result.is_forscreen;
+        if (is_forscreen == 1) {
+          wx.showModal({
+            title: '确认要打断投屏',
+            content: '当前电视正在进行投屏,继续投屏有可能打断当前投屏中的内容.',
+            success: function (res) {
+              if (res.confirm) {
+                uploadVedio(video, box_mac, openid, res_sup_time, is_pub_hotelinfo, is_share, duration, avatarUrl, nickName);
+              }else {
+                
+              }
+            }
+          })
+        }else {
+          uploadVedio(video, box_mac, openid, res_sup_time, is_pub_hotelinfo, is_share, duration, avatarUrl, nickName);
+        }
+      }
+    })
+
+    
+    
+    
+    
     function uploadVedio(video, box_mac, openid, res_sup_time, is_pub_hotelinfo, is_share, duration, avatarUrl, nickName) {
      
       wx.request({
@@ -472,64 +504,148 @@ Page({
     var mobile_brand = app.globalData.mobile_brand;
     var mobile_model = app.globalData.mobile_model;
     var duration = 10;
+
     wx.request({
-      url: 'https://mobile.littlehotspot.com/Netty/Index/index',
+      url: 'https://mobile.littlehotspot.com/smallapp21/User/isForscreenIng',
       headers: {
         'Content-Type': 'application/json'
       },
       method: "POST",
-      data: {
-        box_mac: box_mac,
-        msg: '{ "action":2, "url":"' + replay_video_url + '", "filename":"' + filename + '","openid":"' + openid + '","resource_type":2,"video_id":"' + video_id + '","avatarUrl":"' + user_info.avatarUrl + '","nickName":"' + user_info.nickName+'"}',
-      },
-      success: function (result) {
-        that.setData({
-          is_replay_disabel:true
-        })
-        var djs = duration;
-        that.setData({
-          djs: djs
-        })
-        var timer8_0 = setInterval(function () {
-          djs -=1;
-          that.setData({
-            djs: djs
+      data: { box_mac: box_mac },
+      success: function (res) {
+        var is_forscreen = res.data.result.is_forscreen;
+        if (is_forscreen == 1) {
+          wx.showModal({
+            title: '确认要打断投屏',
+            content: '当前电视正在进行投屏,继续投屏有可能打断当前投屏中的内容.',
+            success: function (res) {
+              if (res.confirm) {
+                wx.request({
+                  url: 'https://mobile.littlehotspot.com/Netty/Index/index',
+                  headers: {
+                    'Content-Type': 'application/json'
+                  },
+                  method: "POST",
+                  data: {
+                    box_mac: box_mac,
+                    msg: '{ "action":2, "url":"' + replay_video_url + '", "filename":"' + filename + '","openid":"' + openid + '","resource_type":2,"video_id":"' + video_id + '","avatarUrl":"' + user_info.avatarUrl + '","nickName":"' + user_info.nickName + '","forscreen_id":' + timestamp+'}',
+                  },
+                  success: function (result) {
+                    that.setData({
+                      is_replay_disabel: true
+                    })
+                    var djs = duration;
+                    that.setData({
+                      djs: djs
+                    })
+                    var timer8_0 = setInterval(function () {
+                      djs -= 1;
+                      that.setData({
+                        djs: djs
+                      });
+                      if (djs == 0) {
+                        that.setData({
+                          is_replay_disabel: false,
+                        })
+                        clearInterval(timer8_0);
+                      }
+
+                    }, 1000);
+                    //记录
+                    wx.request({
+                      url: 'https://mobile.littlehotspot.com/Smallapp21/index/recordForScreenPics',
+                      header: {
+                        'content-type': 'application/json'
+                      },
+                      data: {
+                        openid: openid,
+                        box_mac: box_mac,
+                        action: 8,
+                        resource_type: 2,
+                        mobile_brand: mobile_brand,
+                        mobile_model: mobile_model,
+                        forscreen_char: '',
+                        imgs: '["' + replay_video_url + '"]',
+                        resource_id: video_id,
+                        res_sup_time: 0,
+                        res_eup_time: 0,
+                        resource_size: 0,
+                        is_pub_hotelinfo: 0,
+                        is_share: 0,
+                        forscreen_id: timestamp,
+
+                      },
+                    });
+                  },
+                });
+              }else {
+                
+              }
+            }
+          })
+        }else {
+          wx.request({
+            url: 'https://mobile.littlehotspot.com/Netty/Index/index',
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            method: "POST",
+            data: {
+              box_mac: box_mac,
+              msg: '{ "action":2, "url":"' + replay_video_url + '", "filename":"' + filename + '","openid":"' + openid + '","resource_type":2,"video_id":"' + video_id + '","avatarUrl":"' + user_info.avatarUrl + '","nickName":"' + user_info.nickName + '"}',
+            },
+            success: function (result) {
+              that.setData({
+                is_replay_disabel: true
+              })
+              var djs = duration;
+              that.setData({
+                djs: djs
+              })
+              var timer8_0 = setInterval(function () {
+                djs -= 1;
+                that.setData({
+                  djs: djs
+                });
+                if (djs == 0) {
+                  that.setData({
+                    is_replay_disabel: false,
+                  })
+                  clearInterval(timer8_0);
+                }
+
+              }, 1000);
+              //记录
+              wx.request({
+                url: 'https://mobile.littlehotspot.com/Smallapp21/index/recordForScreenPics',
+                header: {
+                  'content-type': 'application/json'
+                },
+                data: {
+                  openid: openid,
+                  box_mac: box_mac,
+                  action: 8,
+                  resource_type: 2,
+                  mobile_brand: mobile_brand,
+                  mobile_model: mobile_model,
+                  forscreen_char: '',
+                  imgs: '["' + replay_video_url + '"]',
+                  resource_id: video_id,
+                  res_sup_time: 0,
+                  res_eup_time: 0,
+                  resource_size: 0,
+                  is_pub_hotelinfo: 0,
+                  is_share: 0,
+                  forscreen_id: timestamp,
+
+                },
+              });
+            },
           });
-          if (djs==0){
-            that.setData({
-              is_replay_disabel: false,
-            })
-            clearInterval(timer8_0);
-          }
-        
-        }, 1000);
-        //记录
-        wx.request({
-          url: 'https://mobile.littlehotspot.com/Smallapp21/index/recordForScreenPics',
-          header: {
-            'content-type': 'application/json'
-          },
-          data: {
-            openid: openid,
-            box_mac: box_mac,
-            action: 8,
-            resource_type: 2,
-            mobile_brand: mobile_brand,
-            mobile_model: mobile_model,
-            forscreen_char: '',
-            imgs: '["' + replay_video_url + '"]',
-            resource_id: video_id,
-            res_sup_time: 0,
-            res_eup_time: 0,
-            resource_size: 0,
-            is_pub_hotelinfo: 0,
-            is_share: 0,
-            forscreen_id: timestamp,
-            
-          },
-        });
-      },
-    });
+        }
+      }
+    })
+    
   },
   previewImage: function (e) {
     var current = e.target.dataset.src;
@@ -563,126 +679,269 @@ Page({
     var res_len = res_list.length;
     var forscreen_id = (new Date()).valueOf();  //投屏id
     var action = 8;  //重新播放
-    if (res_type == 1) {
-      for (var i = 0; i < res_len; i++) {
-        var order = i + 1;
-        wx.request({//start
-          url: 'https://mobile.littlehotspot.com/Smallapp/index/recordForScreenPics',
-          header: {
-            'content-type': 'application/json'
-          },
-          data: {
-            forscreen_id: forscreen_id,
-            openid: openid,
-            box_mac: box_mac,
-            action: action,
-            mobile_brand: mobile_brand,
-            mobile_model: mobile_model,
-            forscreen_char: forscreen_char,
-            imgs: '["' + res_list[i]['forscreen_url'] + '"]',
-            resource_id: res_list[i]['resource_id'],
-            resource_type: res_type,
-            res_sup_time: 0,
-            res_eup_time: 0,
-            resource_size: 0,
-            is_pub_hotelinfo: 0,
-            is_share: 0
-          },
-          success: function (ret) {
+
+    wx.request({
+      url: 'https://mobile.littlehotspot.com/smallapp21/User/isForscreenIng',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      method: "POST",
+      data: { box_mac: box_mac },
+      success: function (res) {
+        var is_forscreen = res.data.result.is_forscreen;
+        if (is_forscreen == 1) {
+          wx.showModal({
+            title: '确认要打断投屏',
+            content: '当前电视正在进行投屏,继续投屏有可能打断当前投屏中的内容.',
+            success: function (res) {
+              if (res.confirm) {
+                if (res_type == 1) {
+                  for (var i = 0; i < res_len; i++) {
+                    var order = i + 1;
+                    wx.request({//start
+                      url: 'https://mobile.littlehotspot.com/Smallapp/index/recordForScreenPics',
+                      header: {
+                        'content-type': 'application/json'
+                      },
+                      data: {
+                        forscreen_id: forscreen_id,
+                        openid: openid,
+                        box_mac: box_mac,
+                        action: action,
+                        mobile_brand: mobile_brand,
+                        mobile_model: mobile_model,
+                        forscreen_char: forscreen_char,
+                        imgs: '["' + res_list[i]['forscreen_url'] + '"]',
+                        resource_id: res_list[i]['resource_id'],
+                        resource_type: res_type,
+                        res_sup_time: 0,
+                        res_eup_time: 0,
+                        resource_size: 0,
+                        is_pub_hotelinfo: 0,
+                        is_share: 0
+                      },
+                      success: function (ret) {
+                      }
+                    });//end
+                    var url = res_list[i]['forscreen_url'];
+                    var filename = res_list[i]['filename'];
+                    var res_id = res_list[i]['resource_id'];
+
+                    wx.request({
+                      url: 'https://mobile.littlehotspot.com/Netty/Index/index',
+                      headers: {
+                        'Content-Type': 'application/json'
+                      },
+                      method: "POST",
+                      data: {
+                        box_mac: box_mac,
+                        msg: '{ "action": 4, "resource_type":2, "url":"' + url + '","filename":"' + filename + '","openid":"' + openid + '","img_nums":' + res_len + ',"forscreen_char":"' + forscreen_char + '","order":' + order + ',"forscreen_id":"' + forscreen_id + '","img_id":"' + res_id + '","avatarUrl":"' + avatarUrl + '","nickName":"' + nickName + '"}',
+                      },
+                      success: function (result) {
+
+                        wx.showToast({
+                          title: '重投成功,电视即将开始播放',
+                          icon: 'none',
+                          duration: 5000
+                        });
+                      },
+                      fail: function (res) {
+                        wx.showToast({
+                          title: '网络异常,点播失败',
+                          icon: 'none',
+                          duration: 2000
+                        })
+                      }
+                    })
+
+                  }
+                } else {//视频投屏
+                  for (var i = 0; i < res_len; i++) {
+                    wx.request({
+                      url: 'https://mobile.littlehotspot.com/Smallapp/index/recordForScreenPics',
+                      header: {
+                        'content-type': 'application/json'
+                      },
+                      data: {
+                        openid: openid,
+                        box_mac: box_mac,
+                        action: action,
+
+                        mobile_brand: mobile_brand,
+                        mobile_model: mobile_model,
+                        forscreen_char: forscreen_char,
+                        imgs: '["' + res_list[i]['forscreen_url'] + '"]',
+                        resource_id: res_list[i]['resource_id'],
+                        resource_type: res_type,
+                        res_sup_time: 0,
+                        res_eup_time: 0,
+                        resource_size: 0,
+                        is_pub_hotelinfo: 0,
+                        is_share: 0,
+                        forscreen_id: forscreen_id,
+                        duration: 0,
+                      },
+                      success: function (ret) {
+
+                      }
+                    });
+
+                    wx.request({
+                      url: 'https://mobile.littlehotspot.com/Netty/Index/index',
+                      headers: {
+                        'Content-Type': 'application/json'
+                      },
+                      method: "POST",
+                      data: {
+                        box_mac: box_mac,
+                        msg: '{ "action":2, "url": "' + res_list[i]['forscreen_url'] + '", "filename":"' + res_list[i]['filename'] + '","openid":"' + openid + '","resource_type":2,"video_id":"' + res_list[i]['resource_id'] + '","avatarUrl":"' + avatarUrl + '","nickName":"' + nickName + '","forscreen_id":'+forscreen_id+'}',
+                      },
+                      success: function (result) {
+
+                        wx.showToast({
+                          title: '重投成功,电视即将开始播放',
+                          icon: 'none',
+                          duration: 2000
+                        });
+                      },
+                      fail: function (res) {
+                        wx.showToast({
+                          title: '网络异常,点播失败',
+                          icon: 'none',
+                          duration: 2000
+                        })
+                      }
+                    });
+                  }
+                }
+              }else{
+                
+              }
+            }
+          })
+        }else {
+          if (res_type == 1) {
+            for (var i = 0; i < res_len; i++) {
+              var order = i + 1;
+              wx.request({//start
+                url: 'https://mobile.littlehotspot.com/Smallapp/index/recordForScreenPics',
+                header: {
+                  'content-type': 'application/json'
+                },
+                data: {
+                  forscreen_id: forscreen_id,
+                  openid: openid,
+                  box_mac: box_mac,
+                  action: action,
+                  mobile_brand: mobile_brand,
+                  mobile_model: mobile_model,
+                  forscreen_char: forscreen_char,
+                  imgs: '["' + res_list[i]['forscreen_url'] + '"]',
+                  resource_id: res_list[i]['resource_id'],
+                  resource_type: res_type,
+                  res_sup_time: 0,
+                  res_eup_time: 0,
+                  resource_size: 0,
+                  is_pub_hotelinfo: 0,
+                  is_share: 0
+                },
+                success: function (ret) {
+                }
+              });//end
+              var url = res_list[i]['forscreen_url'];
+              var filename = res_list[i]['filename'];
+              var res_id = res_list[i]['resource_id'];
+
+              wx.request({
+                url: 'https://mobile.littlehotspot.com/Netty/Index/index',
+                headers: {
+                  'Content-Type': 'application/json'
+                },
+                method: "POST",
+                data: {
+                  box_mac: box_mac,
+                  msg: '{ "action": 4, "resource_type":2, "url":"' + url + '","filename":"' + filename + '","openid":"' + openid + '","img_nums":' + res_len + ',"forscreen_char":"' + forscreen_char + '","order":' + order + ',"forscreen_id":"' + forscreen_id + '","img_id":"' + res_id + '","avatarUrl":"' + avatarUrl + '","nickName":"' + nickName + '"}',
+                },
+                success: function (result) {
+
+                  wx.showToast({
+                    title: '重投成功,电视即将开始播放',
+                    icon: 'none',
+                    duration: 5000
+                  });
+                },
+                fail: function (res) {
+                  wx.showToast({
+                    title: '网络异常,点播失败',
+                    icon: 'none',
+                    duration: 2000
+                  })
+                }
+              })
+
+            }
+          } else {//视频投屏
+            for (var i = 0; i < res_len; i++) {
+              wx.request({
+                url: 'https://mobile.littlehotspot.com/Smallapp/index/recordForScreenPics',
+                header: {
+                  'content-type': 'application/json'
+                },
+                data: {
+                  openid: openid,
+                  box_mac: box_mac,
+                  action: action,
+
+                  mobile_brand: mobile_brand,
+                  mobile_model: mobile_model,
+                  forscreen_char: forscreen_char,
+                  imgs: '["' + res_list[i]['forscreen_url'] + '"]',
+                  resource_id: res_list[i]['resource_id'],
+                  resource_type: res_type,
+                  res_sup_time: 0,
+                  res_eup_time: 0,
+                  resource_size: 0,
+                  is_pub_hotelinfo: 0,
+                  is_share: 0,
+                  forscreen_id: forscreen_id,
+                  duration: 0,
+                },
+                success: function (ret) {
+
+                }
+              });
+
+              wx.request({
+                url: 'https://mobile.littlehotspot.com/Netty/Index/index',
+                headers: {
+                  'Content-Type': 'application/json'
+                },
+                method: "POST",
+                data: {
+                  box_mac: box_mac,
+                  msg: '{ "action":2, "url": "' + res_list[i]['forscreen_url'] + '", "filename":"' + res_list[i]['filename'] + '","openid":"' + openid + '","resource_type":2,"video_id":"' + res_list[i]['resource_id'] + '","avatarUrl":"' + avatarUrl + '","nickName":"' + nickName + '","forscreen_id":'+forscreen_id+'}',
+                },
+                success: function (result) {
+
+                  wx.showToast({
+                    title: '重投成功,电视即将开始播放',
+                    icon: 'none',
+                    duration: 2000
+                  });
+                },
+                fail: function (res) {
+                  wx.showToast({
+                    title: '网络异常,点播失败',
+                    icon: 'none',
+                    duration: 2000
+                  })
+                }
+              });
+            }
           }
-        });//end
-        var url = res_list[i]['forscreen_url'];
-        var filename = res_list[i]['filename'];
-        var res_id = res_list[i]['resource_id'];
-
-        wx.request({
-          url: 'https://mobile.littlehotspot.com/Netty/Index/index',
-          headers: {
-            'Content-Type': 'application/json'
-          },
-          method: "POST",
-          data: {
-            box_mac: box_mac,
-            msg: '{ "action": 4, "resource_type":2, "url":"' + url + '","filename":"' + filename + '","openid":"' + openid + '","img_nums":' + res_len + ',"forscreen_char":"' + forscreen_char + '","order":' + order + ',"forscreen_id":"' + forscreen_id + '","img_id":"' + res_id + '","avatarUrl":"' + avatarUrl + '","nickName":"' + nickName + '"}',
-          },
-          success: function (result) {
-
-            wx.showToast({
-              title: '重投成功,电视即将开始播放',
-              icon: 'none',
-              duration: 5000
-            });
-          },
-          fail: function (res) {
-            wx.showToast({
-              title: '网络异常,点播失败',
-              icon: 'none',
-              duration: 2000
-            })
-          }
-        })
-
+        }
       }
-    } else {//视频投屏
-      for (var i = 0; i < res_len; i++) {
-        wx.request({
-          url: 'https://mobile.littlehotspot.com/Smallapp/index/recordForScreenPics',
-          header: {
-            'content-type': 'application/json'
-          },
-          data: {
-            openid: openid,
-            box_mac: box_mac,
-            action: action,
-
-            mobile_brand: mobile_brand,
-            mobile_model: mobile_model,
-            forscreen_char: forscreen_char,
-            imgs: '["' + res_list[i]['forscreen_url'] + '"]',
-            resource_id: res_list[i]['resource_id'],
-            resource_type: res_type,
-            res_sup_time: 0,
-            res_eup_time: 0,
-            resource_size: 0,
-            is_pub_hotelinfo: 0,
-            is_share: 0,
-            forscreen_id: forscreen_id,
-            duration: 0,
-          },
-          success: function (ret) {
-
-          }
-        });
-
-        wx.request({
-          url: 'https://mobile.littlehotspot.com/Netty/Index/index',
-          headers: {
-            'Content-Type': 'application/json'
-          },
-          method: "POST",
-          data: {
-            box_mac: box_mac,
-            msg: '{ "action":2, "url": "' + res_list[i]['forscreen_url'] + '", "filename":"' + res_list[i]['filename'] + '","openid":"' + openid + '","resource_type":2,"video_id":"' + res_list[i]['resource_id'] + '","avatarUrl":"' + avatarUrl + '","nickName":"' + nickName + '"}',
-          },
-          success: function (result) {
-
-            wx.showToast({
-              title: '重投成功,电视即将开始播放',
-              icon: 'none',
-              duration: 2000
-            });
-          },
-          fail: function (res) {
-            wx.showToast({
-              title: '网络异常,点播失败',
-              icon: 'none',
-              duration: 2000
-            })
-          }
-        });
-      }
-    }
-
+    })
   },
   //上拉刷新
   loadMore: function (e) {

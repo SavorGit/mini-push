@@ -11,50 +11,49 @@
           <label class='user_name font_333333_30'>用户昵称</label>
         </view>
         <view class='operation'>
-          <button class='launch_tv font_932C3F_20'>电视播放</button>
+          <button bindtap='boxShow' class='launch_tv font_932C3F_20' data-res_type="{{pub_info.res_type}}" data-res_nums="{{pub_info.res_nums}}" data-pubdetail="{{pub_info.pubdetail}}" data-boxmac="{{box_mac}}" data-openid="{{openid}}" class='launch_tv font_932C3F_20' data-forscreen_id="{{pub_info.forscreen_id}}">电视播放</button>
         </view>
       </view>
       <view class='con_main'>
         <view class="video">
           <view>
-            <navigator>
-              <image mode='aspectFill' src="http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
-            </navigator>
-            <view class="cover">
+              <video src="{{vedio_url}}" ></video>
+            
+            <!-- <view class="cover">
               <navigator>
                 <image src='http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/icon/white_play.png'></image>
               </navigator>
               <view>
                 <label class='font_F6F3EE_20'>视频名称</label>
               </view>
-            </view>
+            </view> -->
           </view>
         </view>
       </view>
       <view class='con_bottom'>
         <view class='hotel_info font_666666_24'>
-          <label class='time'>时间</label>
-          <label class='dot'>.</label>
-          <label class='hotel_name'>酒楼名称</label>
+          <label class='time'>{{pub_info.create_time}}</label>
+          <label class='dot' wx:if="{{pub_info.is_pub_hotelinfo==1}}">.</label>
+          <label class='hotel_name' wx:if="{{pub_info.is_pub_hotelinfo==1}}">{{pub_info.hotel_name}}</label>
         </view>
         <view class='operation'>
-          <view wx:if="{{bean.is_collect=='1'}}">
-            <button>
+          <view wx:if="{{pub_info.is_collect=='1'}}">
+            <button  bindtap='cancCollect' data-res_id="{{pub_info.forscreen_id}}" data-pub_info="{{pub_info}}" data-openid="{{openid}}">
               <image src='http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/icon/red_heart.png'></image>
-              <label class='font_333333_26'>12</label>
+              <label class='font_333333_26'>{{pub_info.collect_num}}</label>
             </button>
           </view>
           <view wx:else>
-            <button>
+            <button bindtap='onCollect' data-res_id="{{pub_info.forscreen_id}}" data-pub_info="{{pub_info}}" data-openid="{{openid}}">
               <image src='http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/icon/grey_heart.png'></image>
-              <label class='font_333333_26'>12</label>
+              <label class='font_333333_26'>{{pub_info.collect_num}}</label>
             </button>
           </view>
 
           <view>
-            <button>
+            <button open-type='share' data-res_id="{{pub_info.forscreen_id}}" data-pub_info="{{pub_info}}"  data-pubdetail="{{pub_info.pubdetail}}" data-openid="{{openid}}" data-res_type="{{pub_info.res_type}}">
               <image src='http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/icon/grey_share.png'></image>
-              <label class='font_333333_26'>2</label>
+              <label class='font_333333_26'>{{pub_info.share_num}}</label>
             </button>
           </view>
         </view>

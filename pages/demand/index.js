@@ -20,7 +20,7 @@ Page({
     imgUrls: [],
     hiddens: true,
     box_mac: ''
-  },
+  },  
 
   onLoad: function () {
     var that = this;
@@ -126,7 +126,7 @@ Page({
         } else {
           //获取点播列表
           wx.request({
-            url: 'https://mobile.littlehotspot.com/smallapp21/Demand/getList',
+            url: 'https://mobile.littlehotspot.com/Smallapp21/Demand/getProgramList',
             data: {
               page: page,
               openid: openid,
@@ -164,39 +164,100 @@ Page({
       var qrcode_url = 'https://mobile.littlehotspot.com/Smallapp/index/getBoxQr?box_mac=' + box_mac + '&type=3';
       var mobile_brand = app.globalData.mobile_brand;
       var mobile_model = app.globalData.mobile_model;
+
       wx.request({
-        url: 'https://mobile.littlehotspot.com/Netty/Index/index',
+        url: 'https://mobile.littlehotspot.com/smallapp21/User/isForscreenIng',
         headers: {
           'Content-Type': 'application/json'
         },
         method: "POST",
-        data: {
-          box_mac: box_mac,
-          msg: '{ "action": 9,"url":"' + qrcode_url + '"}',
-        },
-        success: function () {
-          wx.showToast({
-            title: '呼玛成功，电视即将展示',
-            icon: 'none',
-            duration: 2000
-          });
-          wx.request({
-            url: 'https://mobile.littlehotspot.com/Smallapp/index/recordForScreenPics',
-            header: {
-              'content-type': 'application/json'
-            },
-            data: {
-              openid: openid,
-              box_mac: box_mac,
-              action: 9,
-              mobile_brand: mobile_brand,
-              mobile_model: mobile_model,
-              imgs: '[]'
-            },
+        data: { box_mac: box_mac },
+        success: function (res) {
+          var is_forscreen = res.data.result.is_forscreen;
+          if (is_forscreen == 1) {
+            wx.showModal({
+              title: '确认要打断投屏',
+              content: '当前电视正在进行投屏,继续投屏有可能打断当前投屏中的内容.',
+              success: function (res) {
+                if (res.confirm) {
+                  wx.request({
+                    url: 'https://mobile.littlehotspot.com/Netty/Index/index',
+                    headers: {
+                      'Content-Type': 'application/json'
+                    },
+                    method: "POST",
+                    data: {
+                      box_mac: box_mac,
+                      msg: '{ "action": 9,"url":"' + qrcode_url + '"}',
+                    },
+                    success: function () {
+                      wx.showToast({
+                        title: '呼玛成功，电视即将展示',
+                        icon: 'none',
+                        duration: 2000
+                      });
+                      wx.request({
+                        url: 'https://mobile.littlehotspot.com/Smallapp/index/recordForScreenPics',
+                        header: {
+                          'content-type': 'application/json'
+                        },
+                        data: {
+                          openid: openid,
+                          box_mac: box_mac,
+                          action: 9,
+                          mobile_brand: mobile_brand,
+                          mobile_model: mobile_model,
+                          imgs: '[]'
+                        },
 
-          })
+                      })
+                    }
+                  })
+                }else {
+
+                }
+              }
+            })
+          }else {
+            wx.request({
+              url: 'https://mobile.littlehotspot.com/Netty/Index/index',
+              headers: {
+                'Content-Type': 'application/json'
+              },
+              method: "POST",
+              data: {
+                box_mac: box_mac,
+                msg: '{ "action": 9,"url":"' + qrcode_url + '"}',
+              },
+              success: function () {
+                wx.showToast({
+                  title: '呼玛成功，电视即将展示',
+                  icon: 'none',
+                  duration: 2000
+                });
+                wx.request({
+                  url: 'https://mobile.littlehotspot.com/Smallapp/index/recordForScreenPics',
+                  header: {
+                    'content-type': 'application/json'
+                  },
+                  data: {
+                    openid: openid,
+                    box_mac: box_mac,
+                    action: 9,
+                    mobile_brand: mobile_brand,
+                    mobile_model: mobile_model,
+                    imgs: '[]'
+                  },
+
+                })
+              }
+            })
+          }
         }
       })
+
+
+      
     }
   },//呼大码结束
   /**
@@ -274,6 +335,8 @@ Page({
   //电视播放
   boxShow(e) {
     var box_mac = e.target.dataset.boxmac;
+    
+
     if (box_mac == '') {
       wx.showModal({
         title: '提示',
@@ -305,46 +368,120 @@ Page({
       var timestamp = (new Date()).valueOf();
       var mobile_brand = app.globalData.mobile_brand;
       var mobile_model = app.globalData.mobile_model;
+
+
+
       wx.request({
-        url: 'https://mobile.littlehotspot.com/Netty/Index/index',
+        url: 'https://mobile.littlehotspot.com/smallapp21/User/isForscreenIng',
         headers: {
           'Content-Type': 'application/json'
         },
         method: "POST",
-        data: {
-          box_mac: box_mac,
-          msg: '{ "action": 5,"url":"' + vediourl + '","filename":"' + filename + '"}',
-        },
+        data: { box_mac: box_mac },
         success: function (res) {
-          wx.showToast({
-            title: '点播成功,电视即将开始播放',
-            icon: 'none',
-            duration: 2000
-          });
-          wx.request({
-            url: 'https://mobile.littlehotspot.com/Smallapp/index/recordForScreenPics',
-            header: {
-              'content-type': 'application/json'
-            },
-            data: {
-              openid: openid,
-              box_mac: box_mac,
-              action: 5,
-              mobile_brand: mobile_brand,
-              mobile_model: mobile_model,
-              forscreen_char: forscreen_char,
-              imgs: '["media/resource/' + filename + '"]'
-            },
-          });
-        },
-        fail: function (res) {
-          wx.showToast({
-            title: '网络异常,点播失败',
-            icon: 'none',
-            duration: 2000
-          })
+          var is_forscreen = res.data.result.is_forscreen;
+          if(is_forscreen==1){
+            wx.showModal({
+              title: '确认要打断投屏',
+              content: '当前电视正在进行投屏,继续投屏有可能打断当前投屏中的内容.',
+              success: function (res) {
+                if (res.confirm) {
+                  //console.log('用户点击确定')
+                  wx.request({
+                    url: 'https://mobile.littlehotspot.com/Netty/Index/index',
+                    headers: {
+                      'Content-Type': 'application/json'
+                    },
+                    method: "POST",
+                    data: {
+                      box_mac: box_mac,
+                      msg: '{ "action": 5,"url":"' + vediourl + '","filename":"' + filename + '","forscreen_id":' + timestamp + ',"resource_id":' + timestamp + '}',
+                    },
+                    success: function (res) {
+                      wx.showToast({
+                        title: '点播成功,电视即将开始播放',
+                        icon: 'none',
+                        duration: 2000
+                      });
+                      wx.request({
+                        url: 'https://mobile.littlehotspot.com/Smallapp/index/recordForScreenPics',
+                        header: {
+                          'content-type': 'application/json'
+                        },
+                        data: {
+                          openid: openid,
+                          box_mac: box_mac,
+                          action: 5,
+                          mobile_brand: mobile_brand,
+                          mobile_model: mobile_model,
+                          forscreen_char: forscreen_char,
+                          forscreen_id: timestamp,
+                          resource_id: timestamp,
+                          imgs: '["media/resource/' + filename + '"]'
+                        },
+                      });
+                    },
+                    fail: function (res) {
+                      wx.showToast({
+                        title: '网络异常,点播失败',
+                        icon: 'none',
+                        duration: 2000
+                      })
+                    }
+                  })
+                } else if (res.cancel) {
+                  //console.log('用户点击取消')
+                }
+              }
+            })  
+          }else {
+            wx.request({
+              url: 'https://mobile.littlehotspot.com/Netty/Index/index',
+              headers: {
+                'Content-Type': 'application/json'
+              },
+              method: "POST",
+              data: {
+                box_mac: box_mac,
+                msg: '{ "action": 5,"url":"' + vediourl + '","filename":"' + filename + '","forscreen_id":' + timestamp + ',"resource_id":' + timestamp + '}',
+              },
+              success: function (res) {
+                wx.showToast({
+                  title: '点播成功,电视即将开始播放',
+                  icon: 'none',
+                  duration: 2000
+                });
+                wx.request({
+                  url: 'https://mobile.littlehotspot.com/Smallapp/index/recordForScreenPics',
+                  header: {
+                    'content-type': 'application/json'
+                  },
+                  data: {
+                    openid: openid,
+                    box_mac: box_mac,
+                    action: 5,
+                    mobile_brand: mobile_brand,
+                    mobile_model: mobile_model,
+                    forscreen_char: forscreen_char,
+                    forscreen_id: timestamp,
+                    resource_id: timestamp,
+                    imgs: '["media/resource/' + filename + '"]'
+                  },
+                });
+              },
+              fail: function (res) {
+                wx.showToast({
+                  title: '网络异常,点播失败',
+                  icon: 'none',
+                  duration: 2000
+                })
+              }
+            })
+          }
         }
       })
+      //return false;
+      
     }
   },//电视播放结束
   //收藏资源

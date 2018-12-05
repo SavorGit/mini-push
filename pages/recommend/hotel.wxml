@@ -5,25 +5,25 @@
 <view class="container" style='height: calc(100vh - 46px - {{statusBarHeight}}px);'>
   <view class='page_top'>
     <view class='v-structure font_666666_28'>
-      <picker mode="multiSelector" bindchange="bindCityPickerChange" bindcolumnchange="bindCityPickerColumnChange" value="{{cityIndex}}" range="{{cityArray}}">
+      <picker  bindchange="bindCityPickerChange"  value="{{cityIndex}}" range="{{cityArray}}">
         <view class='city_show'>
           <image src='/images/icon/666666_position_2.png'></image>
-          <label>{{cityArray[2][cityIndex[2]]}}</label>
+          <label>{{cityArray[cityIndex]}}</label>
         </view>
       </picker>
-      <picker value="{{areaIndex}}" range="{{areaArray}}">
+      <picker bindchange="bindAreaPickerChange" value="{{areaIndex}}" range="{{areaArray}}">
         <view class='area_show'>
           <label>{{areaArray[areaIndex]}}</label>
           <image src='/images/icon/666666_down.png'></image>
         </view>
       </picker>
-      <picker value="{{cuisineIndex}}" range="{{cuisineArray}}">
+      <picker bindchange="bindCuiPickerChange" value="{{cuisineIndex}}" range="{{cuisineArray}}">
         <view class='cuisine_show'>
           <label>{{cuisineArray[cuisineIndex]}}</label>
           <image src='/images/icon/666666_down.png'></image>
         </view>
       </picker>
-      <picker value="{{perCapitaPayIndex}}" range="{{perCapitaPayArray}}">
+      <picker bindchange="bindPayPickerChange" value="{{perCapitaPayIndex}}" range="{{perCapitaPayArray}}">
         <view class='perCapitaPay_show'>
           <label>{{perCapitaPayArray[perCapitaPayIndex]}}</label>
           <image src='/images/icon/666666_down.png'></image>
@@ -31,493 +31,38 @@
       </picker>
     </view>
   </view>
-  <scroll-view class='page_main_scroll' scroll-y="true" scroll-with-animation="true">
+  <scroll-view class='page_main_scroll' scroll-y="true" scroll-with-animation="true" bindscrolltolower="loadMore">
     <view class='page_main'>
-      <view class='row-item'>
+      <view class='row-item' wx:for="{{hotel_list}}" wx:key="key" wx:for-item="bean" wx:for-index="index">
         <view class='cover'>
-          <image src='http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg'></image>
+          <image src='{{bean.img_url}}'></image>
         </view>
         <view class='i-right'>
           <view class='ir-top'>
             <view class='irt-left'>
-              <label class='font_666666_28'>花家怡园（世茂店）</label>
+              <label class='font_666666_28'>{{bean.name}}</label>
               <view class='irtl-bottom font_999999_24'>
-                <label>北京菜</label>
-                <label style='margin-left:50rpx;'>￥200/人</label>
+                <label>{{bean.food_name}}</label>
+                <label style='margin-left:50rpx;' wx:if="{{bean.avg_expense>0}}">￥{{bean.avg_expense}}/人</label>
+                <label style='margin-left:50rpx;' wx:else></label>
               </view>
             </view>
-            <view class='option'>
-              <button>拨打电话</button>
+            <view class='option' wx:if="{{bean.tel !=''}}">
+              <button bindtap='phonecallevent' data-tel="{{bean.tel}}">拨打电话</button>
             </view>
           </view>
           <view class='address font_999999_24'>
             <image src='/images/icon/666666_position.png'></image>
-            <label>朝阳区建国路甲92号世贸大厦B座3层301</label>
+            <label>{{bean.addr}}</label>
           </view>
         </view>
       </view>
-      <view class='row-item'>
-        <view class='cover'>
-          <image src='http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg'></image>
-        </view>
-        <view class='i-right'>
-          <view class='ir-top'>
-            <view class='irt-left'>
-              <label class='font_666666_28'>花家怡园（世茂店）</label>
-              <view class='irtl-bottom font_999999_24'>
-                <label>北京菜</label>
-                <label style='margin-left:50rpx;'>￥200/人</label>
-              </view>
-            </view>
-            <view class='option'>
-              <button>拨打电话</button>
-            </view>
-          </view>
-          <view class='address font_999999_24'>
-            <image src='/images/icon/666666_position.png'></image>
-            <label>朝阳区建国路甲92号世贸大厦B座3层301</label>
-          </view>
-        </view>
-      </view>
-      <view class='row-item'>
-        <view class='cover'>
-          <image src='http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg'></image>
-        </view>
-        <view class='i-right'>
-          <view class='ir-top'>
-            <view class='irt-left'>
-              <label class='font_666666_28'>花家怡园（世茂店）</label>
-              <view class='irtl-bottom font_999999_24'>
-                <label>北京菜</label>
-                <label style='margin-left:50rpx;'>￥200/人</label>
-              </view>
-            </view>
-            <view class='option'>
-              <button>拨打电话</button>
-            </view>
-          </view>
-          <view class='address font_999999_24'>
-            <image src='/images/icon/666666_position.png'></image>
-            <label>朝阳区建国路甲92号世贸大厦B座3层301</label>
-          </view>
-        </view>
-      </view>
-      <view class='row-item'>
-        <view class='cover'>
-          <image src='http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg'></image>
-        </view>
-        <view class='i-right'>
-          <view class='ir-top'>
-            <view class='irt-left'>
-              <label class='font_666666_28'>花家怡园（世茂店）</label>
-              <view class='irtl-bottom font_999999_24'>
-                <label>北京菜</label>
-                <label style='margin-left:50rpx;'>￥200/人</label>
-              </view>
-            </view>
-            <view class='option'>
-              <button>拨打电话</button>
-            </view>
-          </view>
-          <view class='address font_999999_24'>
-            <image src='/images/icon/666666_position.png'></image>
-            <label>朝阳区建国路甲92号世贸大厦B座3层301</label>
-          </view>
-        </view>
-      </view>
-      <view class='row-item'>
-        <view class='cover'>
-          <image src='http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg'></image>
-        </view>
-        <view class='i-right'>
-          <view class='ir-top'>
-            <view class='irt-left'>
-              <label class='font_666666_28'>花家怡园（世茂店）</label>
-              <view class='irtl-bottom font_999999_24'>
-                <label>北京菜</label>
-                <label style='margin-left:50rpx;'>￥200/人</label>
-              </view>
-            </view>
-            <view class='option'>
-              <button>拨打电话</button>
-            </view>
-          </view>
-          <view class='address font_999999_24'>
-            <image src='/images/icon/666666_position.png'></image>
-            <label>朝阳区建国路甲92号世贸大厦B座3层301</label>
-          </view>
-        </view>
-      </view>
-      <view class='row-item'>
-        <view class='cover'>
-          <image src='http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg'></image>
-        </view>
-        <view class='i-right'>
-          <view class='ir-top'>
-            <view class='irt-left'>
-              <label class='font_666666_28'>花家怡园（世茂店）</label>
-              <view class='irtl-bottom font_999999_24'>
-                <label>北京菜</label>
-                <label style='margin-left:50rpx;'>￥200/人</label>
-              </view>
-            </view>
-            <view class='option'>
-              <button>拨打电话</button>
-            </view>
-          </view>
-          <view class='address font_999999_24'>
-            <image src='/images/icon/666666_position.png'></image>
-            <label>朝阳区建国路甲92号世贸大厦B座3层301</label>
-          </view>
-        </view>
-      </view>
-      <view class='row-item'>
-        <view class='cover'>
-          <image src='http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg'></image>
-        </view>
-        <view class='i-right'>
-          <view class='ir-top'>
-            <view class='irt-left'>
-              <label class='font_666666_28'>花家怡园（世茂店）</label>
-              <view class='irtl-bottom font_999999_24'>
-                <label>北京菜</label>
-                <label style='margin-left:50rpx;'>￥200/人</label>
-              </view>
-            </view>
-            <view class='option'>
-              <button>拨打电话</button>
-            </view>
-          </view>
-          <view class='address font_999999_24'>
-            <image src='/images/icon/666666_position.png'></image>
-            <label>朝阳区建国路甲92号世贸大厦B座3层301</label>
-          </view>
-        </view>
-      </view>
-      <view class='row-item'>
-        <view class='cover'>
-          <image src='http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg'></image>
-        </view>
-        <view class='i-right'>
-          <view class='ir-top'>
-            <view class='irt-left'>
-              <label class='font_666666_28'>花家怡园（世茂店）</label>
-              <view class='irtl-bottom font_999999_24'>
-                <label>北京菜</label>
-                <label style='margin-left:50rpx;'>￥200/人</label>
-              </view>
-            </view>
-            <view class='option'>
-              <button>拨打电话</button>
-            </view>
-          </view>
-          <view class='address font_999999_24'>
-            <image src='/images/icon/666666_position.png'></image>
-            <label>朝阳区建国路甲92号世贸大厦B座3层301</label>
-          </view>
-        </view>
-      </view>
-      <view class='row-item'>
-        <view class='cover'>
-          <image src='http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg'></image>
-        </view>
-        <view class='i-right'>
-          <view class='ir-top'>
-            <view class='irt-left'>
-              <label class='font_666666_28'>花家怡园（世茂店）</label>
-              <view class='irtl-bottom font_999999_24'>
-                <label>北京菜</label>
-                <label style='margin-left:50rpx;'>￥200/人</label>
-              </view>
-            </view>
-            <view class='option'>
-              <button>拨打电话</button>
-            </view>
-          </view>
-          <view class='address font_999999_24'>
-            <image src='/images/icon/666666_position.png'></image>
-            <label>朝阳区建国路甲92号世贸大厦B座3层301</label>
-          </view>
-        </view>
-      </view>
-      <view class='row-item'>
-        <view class='cover'>
-          <image src='http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg'></image>
-        </view>
-        <view class='i-right'>
-          <view class='ir-top'>
-            <view class='irt-left'>
-              <label class='font_666666_28'>花家怡园（世茂店）</label>
-              <view class='irtl-bottom font_999999_24'>
-                <label>北京菜</label>
-                <label style='margin-left:50rpx;'>￥200/人</label>
-              </view>
-            </view>
-            <view class='option'>
-              <button>拨打电话</button>
-            </view>
-          </view>
-          <view class='address font_999999_24'>
-            <image src='/images/icon/666666_position.png'></image>
-            <label>朝阳区建国路甲92号世贸大厦B座3层301</label>
-          </view>
-        </view>
-      </view>
-      <view class='row-item'>
-        <view class='cover'>
-          <image src='http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg'></image>
-        </view>
-        <view class='i-right'>
-          <view class='ir-top'>
-            <view class='irt-left'>
-              <label class='font_666666_28'>花家怡园（世茂店）</label>
-              <view class='irtl-bottom font_999999_24'>
-                <label>北京菜</label>
-                <label style='margin-left:50rpx;'>￥200/人</label>
-              </view>
-            </view>
-            <view class='option'>
-              <button>拨打电话</button>
-            </view>
-          </view>
-          <view class='address font_999999_24'>
-            <image src='/images/icon/666666_position.png'></image>
-            <label>朝阳区建国路甲92号世贸大厦B座3层301</label>
-          </view>
-        </view>
-      </view>
-      <view class='row-item'>
-        <view class='cover'>
-          <image src='http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg'></image>
-        </view>
-        <view class='i-right'>
-          <view class='ir-top'>
-            <view class='irt-left'>
-              <label class='font_666666_28'>花家怡园（世茂店）</label>
-              <view class='irtl-bottom font_999999_24'>
-                <label>北京菜</label>
-                <label style='margin-left:50rpx;'>￥200/人</label>
-              </view>
-            </view>
-            <view class='option'>
-              <button>拨打电话</button>
-            </view>
-          </view>
-          <view class='address font_999999_24'>
-            <image src='/images/icon/666666_position.png'></image>
-            <label>朝阳区建国路甲92号世贸大厦B座3层301</label>
-          </view>
-        </view>
-      </view>
-      <view class='row-item'>
-        <view class='cover'>
-          <image src='http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg'></image>
-        </view>
-        <view class='i-right'>
-          <view class='ir-top'>
-            <view class='irt-left'>
-              <label class='font_666666_28'>花家怡园（世茂店）</label>
-              <view class='irtl-bottom font_999999_24'>
-                <label>北京菜</label>
-                <label style='margin-left:50rpx;'>￥200/人</label>
-              </view>
-            </view>
-            <view class='option'>
-              <button>拨打电话</button>
-            </view>
-          </view>
-          <view class='address font_999999_24'>
-            <image src='/images/icon/666666_position.png'></image>
-            <label>朝阳区建国路甲92号世贸大厦B座3层301</label>
-          </view>
-        </view>
-      </view>
-      <view class='row-item'>
-        <view class='cover'>
-          <image src='http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg'></image>
-        </view>
-        <view class='i-right'>
-          <view class='ir-top'>
-            <view class='irt-left'>
-              <label class='font_666666_28'>花家怡园（世茂店）</label>
-              <view class='irtl-bottom font_999999_24'>
-                <label>北京菜</label>
-                <label style='margin-left:50rpx;'>￥200/人</label>
-              </view>
-            </view>
-            <view class='option'>
-              <button>拨打电话</button>
-            </view>
-          </view>
-          <view class='address font_999999_24'>
-            <image src='/images/icon/666666_position.png'></image>
-            <label>朝阳区建国路甲92号世贸大厦B座3层301</label>
-          </view>
-        </view>
-      </view>
-      <view class='row-item'>
-        <view class='cover'>
-          <image src='http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg'></image>
-        </view>
-        <view class='i-right'>
-          <view class='ir-top'>
-            <view class='irt-left'>
-              <label class='font_666666_28'>花家怡园（世茂店）</label>
-              <view class='irtl-bottom font_999999_24'>
-                <label>北京菜</label>
-                <label style='margin-left:50rpx;'>￥200/人</label>
-              </view>
-            </view>
-            <view class='option'>
-              <button>拨打电话</button>
-            </view>
-          </view>
-          <view class='address font_999999_24'>
-            <image src='/images/icon/666666_position.png'></image>
-            <label>朝阳区建国路甲92号世贸大厦B座3层301</label>
-          </view>
-        </view>
-      </view>
-      <view class='row-item'>
-        <view class='cover'>
-          <image src='http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg'></image>
-        </view>
-        <view class='i-right'>
-          <view class='ir-top'>
-            <view class='irt-left'>
-              <label class='font_666666_28'>花家怡园（世茂店）</label>
-              <view class='irtl-bottom font_999999_24'>
-                <label>北京菜</label>
-                <label style='margin-left:50rpx;'>￥200/人</label>
-              </view>
-            </view>
-            <view class='option'>
-              <button>拨打电话</button>
-            </view>
-          </view>
-          <view class='address font_999999_24'>
-            <image src='/images/icon/666666_position.png'></image>
-            <label>朝阳区建国路甲92号世贸大厦B座3层301</label>
-          </view>
-        </view>
-      </view>
-      <view class='row-item'>
-        <view class='cover'>
-          <image src='http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg'></image>
-        </view>
-        <view class='i-right'>
-          <view class='ir-top'>
-            <view class='irt-left'>
-              <label class='font_666666_28'>花家怡园（世茂店）</label>
-              <view class='irtl-bottom font_999999_24'>
-                <label>北京菜</label>
-                <label style='margin-left:50rpx;'>￥200/人</label>
-              </view>
-            </view>
-            <view class='option'>
-              <button>拨打电话</button>
-            </view>
-          </view>
-          <view class='address font_999999_24'>
-            <image src='/images/icon/666666_position.png'></image>
-            <label>朝阳区建国路甲92号世贸大厦B座3层301</label>
-          </view>
-        </view>
-      </view>
-      <view class='row-item'>
-        <view class='cover'>
-          <image src='http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg'></image>
-        </view>
-        <view class='i-right'>
-          <view class='ir-top'>
-            <view class='irt-left'>
-              <label class='font_666666_28'>花家怡园（世茂店）</label>
-              <view class='irtl-bottom font_999999_24'>
-                <label>北京菜</label>
-                <label style='margin-left:50rpx;'>￥200/人</label>
-              </view>
-            </view>
-            <view class='option'>
-              <button>拨打电话</button>
-            </view>
-          </view>
-          <view class='address font_999999_24'>
-            <image src='/images/icon/666666_position.png'></image>
-            <label>朝阳区建国路甲92号世贸大厦B座3层301</label>
-          </view>
-        </view>
-      </view>
-      <view class='row-item'>
-        <view class='cover'>
-          <image src='http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg'></image>
-        </view>
-        <view class='i-right'>
-          <view class='ir-top'>
-            <view class='irt-left'>
-              <label class='font_666666_28'>花家怡园（世茂店）</label>
-              <view class='irtl-bottom font_999999_24'>
-                <label>北京菜</label>
-                <label style='margin-left:50rpx;'>￥200/人</label>
-              </view>
-            </view>
-            <view class='option'>
-              <button>拨打电话</button>
-            </view>
-          </view>
-          <view class='address font_999999_24'>
-            <image src='/images/icon/666666_position.png'></image>
-            <label>朝阳区建国路甲92号世贸大厦B座3层301</label>
-          </view>
-        </view>
-      </view>
-      <view class='row-item'>
-        <view class='cover'>
-          <image src='http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg'></image>
-        </view>
-        <view class='i-right'>
-          <view class='ir-top'>
-            <view class='irt-left'>
-              <label class='font_666666_28'>花家怡园（世茂店）</label>
-              <view class='irtl-bottom font_999999_24'>
-                <label>北京菜</label>
-                <label style='margin-left:50rpx;'>￥200/人</label>
-              </view>
-            </view>
-            <view class='option'>
-              <button>拨打电话</button>
-            </view>
-          </view>
-          <view class='address font_999999_24'>
-            <image src='/images/icon/666666_position.png'></image>
-            <label>朝阳区建国路甲92号世贸大厦B座3层301</label>
-          </view>
-        </view>
-      </view>
-      <view class='row-item'>
-        <view class='cover'>
-          <image src='http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg'></image>
-        </view>
-        <view class='i-right'>
-          <view class='ir-top'>
-            <view class='irt-left'>
-              <label class='font_666666_28'>花家怡园（世茂店）</label>
-              <view class='irtl-bottom font_999999_24'>
-                <label>北京菜</label>
-                <label style='margin-left:50rpx;'>￥200/人</label>
-              </view>
-            </view>
-            <view class='option'>
-              <button>拨打电话</button>
-            </view>
-          </view>
-          <view class='address font_999999_24'>
-            <image src='/images/icon/666666_position.png'></image>
-            <label>朝阳区建国路甲92号世贸大厦B座3层301</label>
-          </view>
-        </view>
-      </view>
+      
     </view>
   </scroll-view>
+  <view class="body-view">
+      <loading hidden="{{hiddens}}" bindchange="loadingChange">加载中...</loading>
+    </view>
 </view>
 
 <!-- 固定悬浮按钮组 -->
