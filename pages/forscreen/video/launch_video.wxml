@@ -1,6 +1,6 @@
 <!-- pages/forscreen/video/launch_video.wxml -->
 <import src="/pages/template/commons" />
-<template is="navigationBarForVideoLevel" data='{{statusBarHeight: statusBarHeight,titleText:"热点投屏"}}' />
+<template is="navigationBarForTwoLevel" data='{{statusBarHeight: statusBarHeight,titleText:"热点投屏"}}' />
 
 <!-- ================================== 点播页面 ================================== -->
 <view class="container" style='height: calc(100vh - 46px - {{statusBarHeight}}px);'>

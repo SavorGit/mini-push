@@ -1,6 +1,6 @@
 <!--pages/activity/turntable/game.wxml-->
 <import src="/pages/template/commons" />
-<template is="navigationBarForVideoLevel" data='{{statusBarHeight: statusBarHeight,titleText:"热点投屏"}}' />
+<template is="navigationBarForTwoLevel" data='{{statusBarHeight: statusBarHeight,titleText:"热点投屏"}}' />
 
 <!-- ================================== 开始游戏 ================================== -->
 <view class="container">

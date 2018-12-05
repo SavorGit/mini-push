@@ -93,7 +93,7 @@
         <view style='margin-right: 3px;'>
           <image src='/images/icon/Ia54254_vertical.png' style='width:1px; height: 18px; vertical-align: middle;'></image>
         </view>
-        <navigator class='to-home' open-type="switchTab" url='../demand/index'>
+        <navigator class='to-home' open-type="switchTab" url='/pages/demand/index'>
           <image src='/images/icon/white_home_1.png'>Home</image>
         </navigator>
       </view>
@@ -116,7 +116,7 @@
         <view style='margin-right: 3px;'>
           <image src='/images/icon/Ia54254_vertical.png' style='width:1px; height: 18px; vertical-align: middle;'></image>
         </view>
-        <navigator class='to-home' open-type="switchTab" url='../../demand/index'>
+        <navigator class='to-home' open-type="switchTab" url='/pages/demand/index'>
           <image src='/images/icon/white_home_1.png'>Home</image>
         </navigator>
       </view>
@@ -140,7 +140,7 @@
         <view style='margin-right: 3px;'>
           <image src=' /images/icon/Ia54254_vertical.png ' style='width: 1px; height: 18px; vertical-align: middle; '></image>
         </view>
-        <navigator class='to-home ' open-type="switchTab" url='../demand/index'>
+        <navigator class='to-home ' open-type="switchTab" url='/pages/demand/index'>
           <image src='/images/icon/white_home_1.png '>Home</image>
         </navigator>
       </view>
@@ -164,7 +164,7 @@
         <view style='margin-right: 3px;'>
           <image src='/images/icon/Ia54254_vertical.png' style='width:1px; height: 18px; vertical-align: middle;'></image>
         </view>
-        <navigator class='to-home' open-type="switchTab" url='../demand/index'>
+        <navigator class='to-home' open-type="switchTab" url='/pages/demand/index'>
           <image src='/images/icon/white_home_1.png'>Home</image>
         </navigator>
       </view>
