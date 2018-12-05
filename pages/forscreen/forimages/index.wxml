@@ -1,6 +1,6 @@
 <!-- pages/forscreen/forimages/index.wxml -->
 <import src="/pages/template/commons" />
-<template is="navigationBarForTwoLevel" data='{{statusBarHeight: statusBarHeight,titleText:"热点投屏"}}' />
+<template is="navigationBarForVideoLevel" data='{{statusBarHeight: statusBarHeight,titleText:"热点投屏"}}' />
 
 <view class="container" style='height: calc(100vh - 46px - {{statusBarHeight}}px);'>
 

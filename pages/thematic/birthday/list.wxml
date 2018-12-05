@@ -1,6 +1,6 @@
 <!--pages/thematic/birthday/list.wxml-->
 <import src="/pages/template/commons" />
-<template is="navigationBarForTwoLevel" data='{{statusBarHeight: statusBarHeight,titleText:"热点投屏"}}' />
+<template is="navigationBarForVideoLevel" data='{{statusBarHeight: statusBarHeight,titleText:"热点投屏"}}' />
 
 <!-- ================================= 生日歌列表 ================================= -->
 <view class="container" style='height: calc(100vh - 46px - {{statusBarHeight}}px);'>
