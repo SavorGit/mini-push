@@ -134,11 +134,9 @@
     <view class='status-bar' style='height:{{statusBarHeight}}px;'></view>
     <view class='navigation-bar'>
       <view class='btn'>
-        <navigator class='go-back' open-type='navigateBack' delta='100'>
         <view style='padding-left: 5px; padding-right: 5px;'>
           <image src='/images/icon/Ia54254_back.png' style='width: 18px; height: 18px; vertical-align: middle;'>Back</image>
         </view>
-        </navigator>
         <view style='margin-right: 3px;'>
           <image src=' /images/icon/Ia54254_vertical.png ' style='width: 1px; height: 18px; vertical-align: middle; '></image>
         </view>
