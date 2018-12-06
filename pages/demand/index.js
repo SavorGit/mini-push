@@ -287,7 +287,8 @@ Page({
     })
     if(box_mac=='' || box_mac ==undefined){
       wx.request({
-        url: 'https://mobile.littlehotspot.com/smallapp/Demand/getList',
+        //url: 'https://mobile.littlehotspot.com/smallapp/Demand/getList',
+        url: 'https://mobile.littlehotspot.com/Smallapp21/Demand/getProgramList',
         header: {
           'Content-Type': 'application/json'
         },
@@ -312,7 +313,8 @@ Page({
       })
     }else {
       wx.request({
-        url: 'https://mobile.littlehotspot.com/Smallapp/BoxProgram/getBoxProgramList',
+        //url: 'https://mobile.littlehotspot.com/Smallapp/BoxProgram/getBoxProgramList',
+        url: 'https://mobile.littlehotspot.com/Smallapp21/BoxProgram/getBoxProgramList',
         header: {
           'Content-Type': 'application/json'
         },
