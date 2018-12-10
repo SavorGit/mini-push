@@ -48,7 +48,7 @@
               </view>
             </view>
             <view class='option' wx:if="{{bean.tel !=''}}">
-              <button bindtap='phonecallevent' data-tel="{{bean.tel}}">拨打电话</button>
+              <button bindtap='phonecallevent' data-tel="{{bean.tel}}">预订电话</button>
             </view>
           </view>
           <view class='address font_999999_24'>
