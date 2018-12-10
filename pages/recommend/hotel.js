@@ -241,6 +241,19 @@ Page({
     var that = this;
     var user_info = wx.getStorageSync("savor_user_info");
     openid = user_info.openid;
+
+    wx.request({
+      url: 'https://mobile.littlehotspot.com/smallapp21/User/isRegister',
+      data: {
+        "openid": openid,
+        "page_id": 4
+      },
+      header: {
+        'content-type': 'application/json'
+      },
+      
+    });//判断用户是否注册结束
+
     wx.request({
       url: 'https://mobile.littlehotspot.com/Smallapp/index/isHaveCallBox?openid=' + openid,
       headers: {
