@@ -321,6 +321,7 @@ Page({
         data: {
           box_mac: box_mac,
           page: page,
+          openid:openid,
         },
         method: "POST",
         success: function (res) {
