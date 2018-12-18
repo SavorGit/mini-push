@@ -1,0 +1,1 @@
+<web-view src='{{game_m_h5_url}}'></web-view>

@@ -1,0 +1,4 @@
+<!--pages/game/climbtree/index.wxml-->
+
+
+<button bindtap='lunchGame' data-game_id='{{game_id}}' data-box_mac='{{box_mac}}'>发起游戏</button>

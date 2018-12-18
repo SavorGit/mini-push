@@ -590,35 +590,57 @@ Page({
   },
   //互动游戏
   hdgames(e) {
-    var openid = e.currentTarget.dataset.openid;
-    var box_mac = e.currentTarget.dataset.boxmac;
-    if (box_mac == '') {
-      wx.showModal({
-        title: '提示',
-        content: "您可扫码链接热点合作餐厅电视,使用此功能",
-        showCancel: true,
-        confirmText: '立即扫码',
-        success: function (res) {
-          if (res.confirm == true) {
-            wx.scanCode({
-              onlyFromCamera: true,
-              success: (res) => {
-                //console.log(res);
-                wx.navigateTo({
-                  url: '/' + res.path
-                })
-              }
-            })
-          }
-        }
-      });
-    }else {
-      var mobile_brand = app.globalData.mobile_brand;
-      var mobile_model = app.globalData.mobile_model;
-      wx.navigateTo({
-        url: '/pages/activity/turntable/index?box_mac=' + box_mac + '&openid=' + openid,
-      })
+     var openid = e.currentTarget.dataset.openid;
+     var box_mac = e.currentTarget.dataset.boxmac;
+     if (box_mac == '') {
+       wx.showModal({
+         title: '提示',
+         content: "您可扫码链接热点合作餐厅电视,使用此功能",
+         showCancel: true,
+         confirmText: '立即扫码',
+         success: function (res) {
+           if (res.confirm == true) {
+             wx.scanCode({
+               onlyFromCamera: true,
+               success: (res) => {
+                 //console.log(res);
+                 wx.navigateTo({
+                   url: '/' + res.path
+                 })
+               }
+             })
+           }
+         }
+       });
+     }else {
+       var mobile_brand = app.globalData.mobile_brand;
+       var mobile_model = app.globalData.mobile_model;
+      //  wx.navigateTo({
+      //    url: '/pages/activity/turntable/index?box_mac=' + box_mac + '&openid=' + openid,
+      //  })
+        
+        // wx.request({
+        //   url: 'https://mobile.littlehotspot.com/Netty/index/index',
+        //   data:{
+        //     box_mac:box_mac,
+        //     msg:'{"action":111}'
+        //   },
+        //   success:function(){
+        //     wx.request({//发起互动游戏
+        //       url: 'https://mobile.littlehotspot.com/Games/ClimbTree/launchGame',
+        //       data: {
+        //         game_id: 2,
+        //         box_mac: box_mac
+        //       },
+             
+        //     })
+        //   }
+        // })
+        wx.navigateTo({
+          url: '/pages/game/climbtree/index?box_mac='+box_mac+'&game_id=2'
+        })
     }
+    
   },
   //断开连接
   breakLink: function (e) {
