@@ -22,7 +22,11 @@
     "pages/forscreen/history/list",
     "pages/recommend/hotel",
     "pages/share/pic",
-    "pages/share/video"
+    "pages/share/video",
+    "pages/game/climbtree/index",
+    "pages/game/climbtree/climbtree",
+    "pages/test/test",
+    "pages/test/zt"
   ],
   "window": {
     "backgroundTextStyle": "dark",
