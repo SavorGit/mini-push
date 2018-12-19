@@ -38,6 +38,10 @@
           <image src='/images/icon/f6f3ee_history.png'></image>
           <label class='font_F6F2EC_34'>投屏历史</label>
         </view>
+        <!-- <view bindtap='testzt' data-boxmac="{{box_mac}}" data-openid="{{openid}}">
+          <image src='/images/icon/f6f3ee_history.png'></image>
+          <label class='font_F6F2EC_34'>测试</label>
+        </view> -->
       </view>
     </view>
   </view>

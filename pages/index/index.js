@@ -718,6 +718,11 @@ Page({
       })
     }
   },
+  testzt:function(){
+    wx.navigateTo({
+      url: '/pages/test/zt',
+    })
+  },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
