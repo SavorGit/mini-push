@@ -29,16 +29,8 @@ Page({
   lunchGame:function(res){
     djs = 60;
     var that = this;
-    that.setData({
-      showButton:false,
-      hiddens:false,
-    })
-    wx.request({
-      url: 'https://mobile.littlehotspot.com/Games/ClimbTree/clearLaunchGame',
-      data: {
-        box_mac: box_mac,
-      },
-    })
+    
+    
     // wx.showToast({
     //   title: '房间创建中，请稍后...',
     //   icon: 'none',
@@ -53,58 +45,93 @@ Page({
       },
       success:function(res){
         if(res.data.code==10000){
-          var game_h5_url = res.data.result.game_url +box_mac;
-          var game_m_h5_url = game_h5_url + '/' + res.data.result.game_m_url;
-          
+          var game_h5_url = "http://"+res.data.result.game_url + box_mac;
+          var game_m_h5_url = "https://" + res.data.result.game_url + box_mac + '/' + res.data.result.game_m_url;
+          // wx.request({
+          //   url: 'https://mobile.littlehotspot.com/Games/ClimbTree/clearLaunchGame',
+          //   data: {
+          //     box_mac: box_mac,
+          //   },
+          // })
+
           wx.request({
-            url: 'https://mobile.littlehotspot.com/Netty/index/index',
+            url: 'https://mobile.littlehotspot.com/Games/ClimbTree/isHaveGameimg',
             data: {
               box_mac: box_mac,
-              msg: '{"action":110,"url":"'+game_h5_url+'"}'
             },
-            success: function (rtt) {
-
+            success:function(rtt){
+              var is_gaming = rtt.data.result.is_gaming;
+              if(is_gaming==1){
+                wx.showToast({
+                  title: '该房间已经创建游戏!',
+                  icon: 'none',
+                  duration: 2000
+                })
+              }else {
+                that.setData({
+                  showButton: false,
+                  hiddens: false,
+                })
                 
-                var interval = setInterval(function () {
+                wx.request({
+                  url: 'https://mobile.littlehotspot.com/Netty/index/index',
+                  data: {
+                    box_mac: box_mac,
+                    msg: '{"action":110,"url":"' + game_h5_url + '"}'
+                  },
+                  success: function (rtt) {
 
-                  wx.request({
-                    url: 'https://mobile.littlehotspot.com/Games/ClimbTree/isHaveLaunchGame',
-                    data: {
-                      box_mac: box_mac,
-                    },
-                    success: function (tmps) {
-                      if (tmps.data.code == 10000) {
+
+                    var interval = setInterval(function () {
+
+                      wx.request({
+                        url: 'https://mobile.littlehotspot.com/Games/ClimbTree/isHaveLaunchGame',
+                        data: {
+                          box_mac: box_mac,
+                        },
+                        success: function (tmps) {
+                          if (tmps.data.code == 10000) {
+                            that.setData({
+                              hiddens: true,
+                              showButton: true
+                            })
+                            clearInterval(interval);
+                            wx.request({
+                              url: 'https://mobile.littlehotspot.com/Games/ClimbTree/clearLaunchGame',
+                              data: {
+                                box_mac: box_mac,
+                              },
+                            })
+                            wx.navigateTo({
+                              url: '/pages/game/climbtree/climbtree?box_mac=' + box_mac + '&game_m_h5_url=' + game_m_h5_url
+                            })
+                          }
+                        }
+                      })
+                      if (djs <= 0) {
+                        clearInterval(interval);
                         that.setData({
                           hiddens: true,
                           showButton: true
                         })
-                        clearInterval(interval);
-                        wx.request({
-                          url: 'https://mobile.littlehotspot.com/Games/ClimbTree/clearLaunchGame',
-                          data: {
-                            box_mac: box_mac,
-                          },
-                        })
-                        wx.navigateTo({
-                          url: '/pages/game/climbtree/climbtree?box_mac=' + box_mac + '&game_m_h5_url=' + game_m_h5_url
-                        })
-                      } 
-                    }
-                  })
-                  if(djs<=0){
-                    clearInterval(interval);
-                    that.setData({
-                      hiddens:true,
-                      showButton:true
-                    })
-                  }
-                  djs--;
+                      }
+                      djs--;
 
-                }.bind(this), 1000);
+                    }.bind(this), 1000);
+                  }
+                })
+              }
             }
-          })
+          }) 
         }else {
-          
+          wx.showToast({
+            title: '该游戏不存在',
+            icon: 'none',
+            duration: 2000
+          })
+          wx.navigateTo({
+            url: '/pages/index/index',
+          })
         }
       }
     })
