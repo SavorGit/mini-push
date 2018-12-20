@@ -1,5 +1,5 @@
 // pages/game/climbtree/index.js
-var djs = 10;
+var djs = 60;
 Page({
 
   /**
@@ -9,6 +9,8 @@ Page({
     statusBarHeight: getApp().globalData.statusBarHeight,
     box_mac: '',
     game_id: '',
+    showButton:true,
+    hiddens: true,
   },
 
   /**
@@ -25,6 +27,16 @@ Page({
     })
   },
   lunchGame:function(res){
+    var that = this;
+    that.setData({
+      showButton:false,
+      hiddens:false,
+    })
+    // wx.showToast({
+    //   title: '房间创建中，请稍后...',
+    //   icon: 'none',
+    //   duration: 2000
+    // })
     var box_mac = res.target.dataset.box_mac;
     var game_id = res.target.dataset.game_id;
     wx.request({
@@ -55,6 +67,9 @@ Page({
                     },
                     success: function (tmps) {
                       if (tmps.data.code == 10000) {
+                        that.setData({
+                          hiddens: true,
+                        })
                         clearInterval(interval);
                         wx.navigateTo({
                           url: '/pages/game/climbtree/climbtree?box_mac=' + box_mac + '&game_m_h5_url=' + game_m_h5_url
@@ -64,6 +79,10 @@ Page({
                   })
                   if(djs<=0){
                     clearInterval(interval);
+                    that.setData({
+                      hiddens:true,
+                      showButton:true
+                    })
                   }
                   djs--;
 

@@ -15,4 +15,7 @@
       <label>发起游戏后，邀请好友扫描电视二维码加入游戏</label>
     </view>
   </view>
+  <view class="body-view">
+      <loading hidden="{{hiddens}}" bindchange="loadingChange">房间创建中，请稍后</loading>
+    </view>
 </view>
