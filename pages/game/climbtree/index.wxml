@@ -4,7 +4,9 @@
 
 <view class="container">
   <view class='page-bottom'>
-    <button bindtap='lunchGame' data-game_id='{{game_id}}' data-box_mac='{{box_mac}}'></button>
+    <button bindtap='lunchGame' data-game_id='{{game_id}}' data-box_mac='{{box_mac}}'>
+      <image src='http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/games/monkeys_climb_trees/launch_game.png'></image>
+    </button>
     <view class='game-tip font_333333_24'>
       <label>多人竞速爬树，最多支持10人</label>
       <label>发起游戏后，邀请好友扫描电视二维码加入游戏</label>

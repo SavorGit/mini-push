@@ -15,15 +15,23 @@
 .page-bottom button {
   width: 326rpx;
   height: 89rpx;
-  background-image: url("http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/games/monkeys_climb_trees/launch_game.png");
-  background-size: 326rpx 89rpx;
+  padding: unset;
+  margin: auto;
+  background-image: unset;
   background-color: unset;
   border: unset;
 }
 
 .page-bottom button::before, .page-bottom button::after {
+  padding: unset;
+  margin: auto;
   background-color: unset;
   border: unset;
+}
+
+.page-bottom button image {
+  width: 326rpx;
+  height: 89rpx;
 }
 
 .page-bottom .game-tip {
