@@ -4,8 +4,11 @@
 
 <view class="container">
   <view class='page-bottom'>
-    <button bindtap='lunchGame' data-game_id='{{game_id}}' data-box_mac='{{box_mac}}'>
+    <button wx:if="{{showButton}}" bindtap='lunchGame' data-game_id='{{game_id}}' data-box_mac='{{box_mac}}'>
       <image src='http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/games/monkeys_climb_trees/launch_game.png'></image>
+    </button>
+    <button wx:else>
+      <image src='http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/games/monkeys_climb_trees/launch_game_hide.png'></image>
     </button>
     <view class='game-tip font_333333_24'>
       <label>多人竞速爬树，最多支持10人</label>
