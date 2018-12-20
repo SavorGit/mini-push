@@ -14,6 +14,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    wx.hideShareMenu();
     var that = this;
     var box_mac = options.box_mac;
     var game_id = options.game_id;

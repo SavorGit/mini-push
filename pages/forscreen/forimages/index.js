@@ -42,6 +42,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (e) {
+    wx.hideShareMenu();
     var that = this;
     var user_info = wx.getStorageSync("savor_user_info");
 

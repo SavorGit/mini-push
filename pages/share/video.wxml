@@ -8,7 +8,7 @@
       <view class='con_top'>
         <view class='user_info'>
           <image class='user_head' src="http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
-          <label class='user_name font_333333_30'>用户昵称</label>
+          <label class='user_name font_333333_30'>{{pub_info.nickName}}</label>
         </view>
         <view class='operation'>
           <button bindtap='boxShow' class='launch_tv font_932C3F_20' data-res_type="{{pub_info.res_type}}" data-res_nums="{{pub_info.res_nums}}" data-pubdetail="{{pub_info.pubdetail}}" data-boxmac="{{box_mac}}" data-openid="{{openid}}" class='launch_tv font_932C3F_20' data-forscreen_id="{{pub_info.forscreen_id}}">电视播放</button>
