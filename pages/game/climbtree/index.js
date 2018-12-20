@@ -27,10 +27,17 @@ Page({
     })
   },
   lunchGame:function(res){
+    djs = 60;
     var that = this;
     that.setData({
       showButton:false,
       hiddens:false,
+    })
+    wx.request({
+      url: 'https://mobile.littlehotspot.com/Games/ClimbTree/clearLaunchGame',
+      data: {
+        box_mac: box_mac,
+      },
     })
     // wx.showToast({
     //   title: '房间创建中，请稍后...',
@@ -72,10 +79,16 @@ Page({
                           showButton: true
                         })
                         clearInterval(interval);
+                        wx.request({
+                          url: 'https://mobile.littlehotspot.com/Games/ClimbTree/clearLaunchGame',
+                          data: {
+                            box_mac: box_mac,
+                          },
+                        })
                         wx.navigateTo({
                           url: '/pages/game/climbtree/climbtree?box_mac=' + box_mac + '&game_m_h5_url=' + game_m_h5_url
                         })
-                      }
+                      } 
                     }
                   })
                   if(djs<=0){
