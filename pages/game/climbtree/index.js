@@ -1,4 +1,5 @@
 // pages/game/climbtree/index.js
+var djs = 10;
 Page({
 
   /**
@@ -43,19 +44,30 @@ Page({
               msg: '{"action":110,"url":"'+game_h5_url+'"}'
             },
             success: function (rtt) {
-              wx.navigateTo({
-                url: '/pages/game/climbtree/climbtree?box_mac=' + box_mac + '&game_m_h5_url=' + game_m_h5_url
-              })
-              // wx.request({//发起互动游戏
-              //   url: 'https://mobile.littlehotspot.com/Games/ClimbTree/launchGame',
-              //   data: {
-              //     game_id: 2,
-              //     box_mac: box_mac
-              //   },
-              //   success:function(rts){
-                  
-              //   }
-              // })
+
+                
+                var interval = setInterval(function () {
+
+                  wx.request({
+                    url: 'https://mobile.littlehotspot.com/Games/ClimbTree/isHaveLaunchGame',
+                    data: {
+                      box_mac: box_mac,
+                    },
+                    success: function (tmps) {
+                      if (tmps.data.code == 10000) {
+                        clearInterval(interval);
+                        wx.navigateTo({
+                          url: '/pages/game/climbtree/climbtree?box_mac=' + box_mac + '&game_m_h5_url=' + game_m_h5_url
+                        })
+                      }
+                    }
+                  })
+                  if(djs<=0){
+                    clearInterval(interval);
+                  }
+                  djs--;
+
+                }.bind(this), 1000);
             }
           })
         }else {

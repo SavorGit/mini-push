@@ -7,7 +7,7 @@
     <view class='content content_bottom_border'>
       <view class='con_top'>
         <view class='user_info'>
-          <image class='user_head' src="http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
+          <image class='user_head' src="{{pub_info.avatarUrl}}"></image>
           <label class='user_name font_333333_30'>{{pub_info.nickName}}</label>
         </view>
         <view class='operation'>
