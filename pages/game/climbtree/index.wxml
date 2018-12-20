@@ -16,6 +16,9 @@
     </view>
   </view>
   <view class="body-view">
-      <loading hidden="{{hiddens}}" bindchange="loadingChange">房间创建中，请稍后</loading>
-    </view>
+    <loading hidden="{{hiddens}}" bindchange="loadingChange">
+      <label style='display:block;'>房间创建中</label>
+      <label style='display:block;'>请稍后...</label>
+    </loading>
+  </view>
 </view>
