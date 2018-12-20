@@ -69,6 +69,7 @@ Page({
                       if (tmps.data.code == 10000) {
                         that.setData({
                           hiddens: true,
+                          showButton: true
                         })
                         clearInterval(interval);
                         wx.navigateTo({
