@@ -21,7 +21,16 @@
   height: 40rpx;
   padding-bottom: 200rpx;
 }
-
+.page_main_h > .climbtree{
+  width: 640rpx;
+  height: 286rpx;
+  padding: unset;
+  display: flex;
+}
+image.input_pic_banner {
+  width: 695rpx;
+  height: 200rpx;
+}
 /* .page_main_h > .tip > button, .page_main_h > .tip > button::before,
 .page_main_h > .tip > button::after {
   width: 180rpx;

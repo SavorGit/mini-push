@@ -6,6 +6,9 @@
 <view class="container" style='height: calc(100vh - 46px - {{statusBarHeight}}px);'>
   <view class='page_main_v'>
     <view class='page_main_h'>
+      <view  class='climbtree' bindtap='hdgames' data-boxmac="{{box_mac}}" data-openid="{{openid}}">
+        <image class='input_pic_banner' src="http://oss.littlehotspot.com/media/resource/3hipiW5nTX.jpg"></image>
+      </view>
       <view wx:if="{{is_link > 0}}" class='tip'>
         <label class='font_F6F2EC_30'>您已成功链接“{{hotel_name}}”的{{room_name}}电视</label>
         <button class='btn_background_034' bindtap="breakLink" data-boxmac="{{box_mac}}" data-openid="{{openid}}">断开链接</button>
