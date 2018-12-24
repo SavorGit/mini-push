@@ -19,6 +19,7 @@ Page({
     happy_vedio_name: '',          //生日视频名称
     happy_vedio_title: '',          //生日视频标题
     showModal: false,   //显示授权登陆弹窗
+    is_game_banner:0,  //是否显示猴子爬树游戏banner
   },
 
   /**
@@ -158,7 +159,19 @@ Page({
         }
       })
     }
-    
+    //是否显示猴子排数banner
+    wx.request({
+      url: 'https://mobile.littlehotspot.com/Games/index/isViewGame',
+      data:{
+        game_id:2,
+      },
+      success:function(res){
+        var is_game_banner = res.data.result.status;
+        that.setData({
+          is_game_banner: is_game_banner
+        })
+      }
+    })
   },
   onGetUserInfo: function (res) { 
     var that = this;
