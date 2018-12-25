@@ -26,7 +26,8 @@
     "pages/game/climbtree/index",
     "pages/game/climbtree/climbtree",
     "pages/test/test",
-    "pages/test/zt"
+    "pages/test/zt",
+    "pages/find/waterfall"
   ],
   "window": {
     "backgroundTextStyle": "dark",
