@@ -1,0 +1,103 @@
+<!--pages/find/waterfall.wxml-->
+<!-- <import src="../template/navigation.wxml" /> -->
+<import src="../template/commons" />
+<template is="navigationBarForTopLevel" data='{{statusBarHeight: statusBarHeight,titleText:"热点投屏"}}' />
+
+<view class='container'>
+  <scroll-view class='full_width full_height' scroll-y="true" scroll-with-animation="true" bindscrolltolower="loadMore" data-openid='{{openid}}'>
+    <view class='page_main'>
+      <view class='waterfall_list'>
+        <!--循环开始-->
+        <view class='content content_bottom_border' wx:for="{{discovery_list}}" wx:key="key" wx:for-item="bean" wx:for-index="index" wx:if="{{index % 2 == 0}}">
+          <view class='con_top'>
+            <view class='user_info'>
+              <image class='user_head' src="{{bean.avatarUrl}}" lazy-load='http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/icon/grey_interact.png'></image>
+              <label class='user_name font_333333_30'>{{bean.nickName}}</label>
+            </view>
+          </view>
+          <view class='con_main'>
+            <image wx:if="{{bean.res_type == 1 && bean.res_nums=='1'}}" mode='widthFix' src="{{bean.pubdetail[0].res_url}}"></image>
+            <image wx:if="{{bean.res_type == 2 }}" mode='widthFix' src="{{bean.pubdetail[0].vide_img}}"></image>
+          </view>
+          <view class='con_bottom'>
+            <view class='operation'>
+              <view wx:if="{{bean.is_collect=='1'}}">
+                <button bindtap='cancCollect' data-res_id="{{bean.forscreen_id}}" data-openid="{{openid}}" data-res_key="{{index}}">
+                  <image src='http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/icon/red_heart.png'></image>
+                  <label class='font_333333_26'>{{bean.collect_num}}</label>
+                </button>
+              </view>
+              <view wx:else>
+                <button bindtap='onCollect' data-res_id="{{bean.forscreen_id}}" data-openid="{{openid}}" data-res_key="{{index}}">
+                  <image src='http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/icon/grey_heart.png'></image>
+                  <label class='font_333333_26'>{{bean.collect_num}}</label>
+                </button>
+              </view>
+
+
+              <!--<view>
+            <button >
+              <image src='http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/icon/grey_comment.png'></image>
+              <label class='font_333333_26'>100</label>
+            </button>
+          </view>-->
+              <view>
+                <button open-type='share' data-res_id="{{bean.forscreen_id}}" data-res_key="{{index}}" data-pubdetail="{{bean.pubdetail}}" data-openid="{{openid}}" data-res_type="{{bean.res_type}}">
+                  <image src='http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/icon/grey_share.png'></image>
+                  <label class='font_333333_26'>{{bean.share_num}}</label>
+                </button>
+              </view>
+            </view>
+          </view>
+        </view>
+        <!--循环结束-->
+      </view>
+      <view class='waterfall_list'>
+        <!--循环开始-->
+        <view class='content content_bottom_border' wx:for="{{discovery_list}}" wx:key="key" wx:for-item="bean" wx:for-index="index" wx:if="{{index % 2 == 1}}">
+          <view class='con_top'>
+            <view class='user_info'>
+              <image class='user_head' src="{{bean.avatarUrl}}" lazy-load='http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/icon/grey_interact.png'></image>
+              <label class='user_name font_333333_30'>{{bean.nickName}}</label>
+            </view>
+          </view>
+          <view class='con_main'>
+            <image wx:if="{{bean.res_type == 1 && bean.res_nums=='1'}}" mode='widthFix' src="{{bean.pubdetail[0].res_url}}"></image>
+            <image wx:if="{{bean.res_type == 2 }}" mode='widthFix' src="{{bean.pubdetail[0].vide_img}}"></image>
+          </view>
+          <view class='con_bottom'>
+            <view class='operation'>
+              <view wx:if="{{bean.is_collect=='1'}}">
+                <button bindtap='cancCollect' data-res_id="{{bean.forscreen_id}}" data-openid="{{openid}}" data-res_key="{{index}}">
+                  <image src='http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/icon/red_heart.png'></image>
+                  <label class='font_333333_26'>{{bean.collect_num}}</label>
+                </button>
+              </view>
+              <view wx:else>
+                <button bindtap='onCollect' data-res_id="{{bean.forscreen_id}}" data-openid="{{openid}}" data-res_key="{{index}}">
+                  <image src='http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/icon/grey_heart.png'></image>
+                  <label class='font_333333_26'>{{bean.collect_num}}</label>
+                </button>
+              </view>
+
+
+              <!--<view>
+            <button >
+              <image src='http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/icon/grey_comment.png'></image>
+              <label class='font_333333_26'>100</label>
+            </button>
+          </view>-->
+              <view>
+                <button open-type='share' data-res_id="{{bean.forscreen_id}}" data-res_key="{{index}}" data-pubdetail="{{bean.pubdetail}}" data-openid="{{openid}}" data-res_type="{{bean.res_type}}">
+                  <image src='http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/icon/grey_share.png'></image>
+                  <label class='font_333333_26'>{{bean.share_num}}</label>
+                </button>
+              </view>
+            </view>
+          </view>
+        </view>
+        <!--循环结束-->
+      </view>
+    </view>
+  </scroll-view>
+</view>

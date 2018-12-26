@@ -27,7 +27,9 @@
     "pages/game/climbtree/climbtree",
     "pages/test/test",
     "pages/test/zt",
-    "pages/test/wifi"
+    "pages/test/wifi",
+    "pages/find/waterfall"
+
   ],
   "window": {
     "backgroundTextStyle": "dark",
@@ -62,7 +64,7 @@
       },
       {
         "pagePath": "pages/recommend/hotel",
-        "text": "推荐餐厅",
+        "text": "投屏餐厅",
         "iconPath": "images/icon/666666_star.png",
         "selectedIconPath": "images/icon/red_star.png"
       },
