@@ -3,7 +3,7 @@
 <import src="../template/commons" />
 <template is="navigationBarForTopLevel" data='{{statusBarHeight: statusBarHeight,titleText:"热点投屏"}}' />
 
-<view class='container'>
+<view class='container' style='height: calc(100vh - 46px - {{statusBarHeight}}px);'>
   <scroll-view class='full_width full_height' scroll-y="true" scroll-with-animation="true" bindscrolltolower="loadMore" data-openid='{{openid}}'>
     <view class='page_main'>
       <view class='waterfall_list'>
@@ -16,8 +16,19 @@
             </view>
           </view>
           <view class='con_main'>
-            <image wx:if="{{bean.res_type == 1 && bean.res_nums=='1'}}" mode='widthFix' src="{{bean.pubdetail[0].res_url}}"></image>
-            <image wx:if="{{bean.res_type == 2 }}" mode='widthFix' src="{{bean.pubdetail[0].vide_img}}"></image>
+            <view wx:if="{{bean.res_type == 1}}" class='full_width media-cover'>
+              <image class='full_width' mode='widthFix' src="{{bean.pubdetail[0].res_url}}" bindtap="previewImage" data-src="{{bean.pubdetail}}" data-pkey="0"></image>
+              <view class='built-up-layer'>
+                <image src='/images/icon/white-pictures.png'></image>
+              </view>
+            </view>
+            <navigator wx:if="{{bean.res_type == 2}}" class='full_width media-cover' bindtap='findLog' data-openid='{{openid}}' data-box_mac='{{box_mac}}' data-title='' data-tx_url='{{bean.pubdetail[0].forscreen_url}}' data-id='{{bean.forscreen_id}}' data-duration="{{bean.pubdetail[0].duration}}"
+              url="/pages/forscreen/video/launch_video?video_url={{bean.pubdetail[0].res_url}}&video_name=">
+              <image class='full_width' mode='widthFix' src="{{bean.pubdetail[0].vide_img}}"></image>
+              <view class='built-up-layer'>
+                <image src='/images/icon/white_play.png'></image>
+              </view>
+            </navigator>
           </view>
           <view class='con_bottom'>
             <view class='operation'>
@@ -33,14 +44,12 @@
                   <label class='font_333333_26'>{{bean.collect_num}}</label>
                 </button>
               </view>
-
-
               <!--<view>
-            <button >
-              <image src='http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/icon/grey_comment.png'></image>
-              <label class='font_333333_26'>100</label>
-            </button>
-          </view>-->
+                <button >
+                  <image src='http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/icon/grey_comment.png'></image>
+                  <label class='font_333333_26'>100</label>
+                </button>
+              </view>-->
               <view>
                 <button open-type='share' data-res_id="{{bean.forscreen_id}}" data-res_key="{{index}}" data-pubdetail="{{bean.pubdetail}}" data-openid="{{openid}}" data-res_type="{{bean.res_type}}">
                   <image src='http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/icon/grey_share.png'></image>
@@ -48,10 +57,14 @@
                 </button>
               </view>
             </view>
+            <view class='operation'>
+              <button bindtap='boxShow' class='launch_tv font_932C3F_20' data-res_type="{{bean.res_type}}" data-res_nums="{{bean.res_nums}}" data-pubdetail="{{bean.pubdetail}}" data-boxmac="{{box_mac}}" data-openid="{{openid}}" data-forscreen_id="{{bean.forscreen_id}}">电视播放</button>
+            </view>
           </view>
         </view>
         <!--循环结束-->
       </view>
+
       <view class='waterfall_list'>
         <!--循环开始-->
         <view class='content content_bottom_border' wx:for="{{discovery_list}}" wx:key="key" wx:for-item="bean" wx:for-index="index" wx:if="{{index % 2 == 1}}">
@@ -62,8 +75,19 @@
             </view>
           </view>
           <view class='con_main'>
-            <image wx:if="{{bean.res_type == 1 && bean.res_nums=='1'}}" mode='widthFix' src="{{bean.pubdetail[0].res_url}}"></image>
-            <image wx:if="{{bean.res_type == 2 }}" mode='widthFix' src="{{bean.pubdetail[0].vide_img}}"></image>
+            <view wx:if="{{bean.res_type == 1}}" class='full_width media-cover'>
+              <image class='full_width' mode='widthFix' src="{{bean.pubdetail[0].res_url}}" bindtap="previewImage" data-src="{{bean.pubdetail}}" data-pkey="0"></image>
+              <view class='built-up-layer'>
+                <image src='/images/icon/white-pictures.png'></image>
+              </view>
+            </view>
+            <navigator wx:if="{{bean.res_type == 2}}" class='full_width media-cover' bindtap='findLog' data-openid='{{openid}}' data-box_mac='{{box_mac}}' data-title='' data-tx_url='{{bean.pubdetail[0].forscreen_url}}' data-id='{{bean.forscreen_id}}' data-duration="{{bean.pubdetail[0].duration}}"
+              url="/pages/forscreen/video/launch_video?video_url={{bean.pubdetail[0].res_url}}&video_name=">
+              <image class='full_width' mode='widthFix' src="{{bean.pubdetail[0].vide_img}}"></image>
+              <view class='built-up-layer'>
+                <image src='/images/icon/white_play.png'></image>
+              </view>
+            </navigator>
           </view>
           <view class='con_bottom'>
             <view class='operation'>
@@ -79,20 +103,21 @@
                   <label class='font_333333_26'>{{bean.collect_num}}</label>
                 </button>
               </view>
-
-
               <!--<view>
-            <button >
-              <image src='http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/icon/grey_comment.png'></image>
-              <label class='font_333333_26'>100</label>
-            </button>
-          </view>-->
+                <button >
+                  <image src='http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/icon/grey_comment.png'></image>
+                  <label class='font_333333_26'>100</label>
+                </button>
+              </view>-->
               <view>
                 <button open-type='share' data-res_id="{{bean.forscreen_id}}" data-res_key="{{index}}" data-pubdetail="{{bean.pubdetail}}" data-openid="{{openid}}" data-res_type="{{bean.res_type}}">
                   <image src='http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/icon/grey_share.png'></image>
                   <label class='font_333333_26'>{{bean.share_num}}</label>
                 </button>
               </view>
+            </view>
+            <view class='operation'>
+              <button bindtap='boxShow' class='launch_tv font_932C3F_20' data-res_type="{{bean.res_type}}" data-res_nums="{{bean.res_nums}}" data-pubdetail="{{bean.pubdetail}}" data-boxmac="{{box_mac}}" data-openid="{{openid}}" data-forscreen_id="{{bean.forscreen_id}}">电视播放</button>
             </view>
           </view>
         </view>
