@@ -46,9 +46,9 @@
           <label class='font_F6F2EC_34'>测试</label>
         </view>  -->
       </view>
-      <navigator >
+      <navigator>
         <label>网络不好？传输速度慢？试试简易版</label>
-        <image></image>
+        <image src='/images/icon/white-right-arrow.png'></image>
       </navigator>
     </view>
   </view>

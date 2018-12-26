@@ -85,11 +85,12 @@ image.input_pic_banner {
 .page_main_h > navigator {
   width: 100%;
   text-align: right;
+  margin-right: 50rpx;
 }
 
 .page_main_h > navigator > image {
   width: 48rpx;
-  height: 38rpx;
+  height: 48rpx;
   vertical-align: middle;
 }
 

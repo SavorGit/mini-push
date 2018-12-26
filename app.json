@@ -62,7 +62,7 @@
       },
       {
         "pagePath": "pages/recommend/hotel",
-        "text": "推荐餐厅",
+        "text": "投屏餐厅",
         "iconPath": "images/icon/666666_star.png",
         "selectedIconPath": "images/icon/red_star.png"
       },
