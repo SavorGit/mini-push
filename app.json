@@ -29,7 +29,6 @@
     "pages/test/zt",
     "pages/test/wifi",
     "pages/find/waterfall"
-
   ],
   "window": {
     "backgroundTextStyle": "dark",

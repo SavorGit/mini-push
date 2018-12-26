@@ -12,7 +12,7 @@
           <view class='con_top'>
             <view class='user_info'>
               <image class='user_head' src="{{bean.avatarUrl}}" lazy-load='http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/icon/grey_interact.png'></image>
-              <label class='user_name font_333333_30'>{{bean.nickName}}</label>
+              <label class='user_name font_333333_28'>{{bean.nickName}}</label>
             </view>
           </view>
           <view class='con_main'>
@@ -35,25 +35,25 @@
               <view wx:if="{{bean.is_collect=='1'}}">
                 <button bindtap='cancCollect' data-res_id="{{bean.forscreen_id}}" data-openid="{{openid}}" data-res_key="{{index}}">
                   <image src='http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/icon/red_heart.png'></image>
-                  <label class='font_333333_26'>{{bean.collect_num}}</label>
+                  <label class='font_333333_24'>{{bean.collect_num}}</label>
                 </button>
               </view>
               <view wx:else>
                 <button bindtap='onCollect' data-res_id="{{bean.forscreen_id}}" data-openid="{{openid}}" data-res_key="{{index}}">
                   <image src='http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/icon/grey_heart.png'></image>
-                  <label class='font_333333_26'>{{bean.collect_num}}</label>
+                  <label class='font_333333_24'>{{bean.collect_num}}</label>
                 </button>
               </view>
               <!--<view>
                 <button >
                   <image src='http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/icon/grey_comment.png'></image>
-                  <label class='font_333333_26'>100</label>
+                  <label class='font_333333_24'>100</label>
                 </button>
               </view>-->
               <view>
                 <button open-type='share' data-res_id="{{bean.forscreen_id}}" data-res_key="{{index}}" data-pubdetail="{{bean.pubdetail}}" data-openid="{{openid}}" data-res_type="{{bean.res_type}}">
                   <image src='http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/icon/grey_share.png'></image>
-                  <label class='font_333333_26'>{{bean.share_num}}</label>
+                  <label class='font_333333_24'>{{bean.share_num}}</label>
                 </button>
               </view>
             </view>
@@ -71,7 +71,7 @@
           <view class='con_top'>
             <view class='user_info'>
               <image class='user_head' src="{{bean.avatarUrl}}" lazy-load='http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/icon/grey_interact.png'></image>
-              <label class='user_name font_333333_30'>{{bean.nickName}}</label>
+              <label class='user_name font_333333_28'>{{bean.nickName}}</label>
             </view>
           </view>
           <view class='con_main'>
@@ -94,25 +94,25 @@
               <view wx:if="{{bean.is_collect=='1'}}">
                 <button bindtap='cancCollect' data-res_id="{{bean.forscreen_id}}" data-openid="{{openid}}" data-res_key="{{index}}">
                   <image src='http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/icon/red_heart.png'></image>
-                  <label class='font_333333_26'>{{bean.collect_num}}</label>
+                  <label class='font_333333_24'>{{bean.collect_num}}</label>
                 </button>
               </view>
               <view wx:else>
                 <button bindtap='onCollect' data-res_id="{{bean.forscreen_id}}" data-openid="{{openid}}" data-res_key="{{index}}">
                   <image src='http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/icon/grey_heart.png'></image>
-                  <label class='font_333333_26'>{{bean.collect_num}}</label>
+                  <label class='font_333333_24'>{{bean.collect_num}}</label>
                 </button>
               </view>
               <!--<view>
                 <button >
                   <image src='http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/icon/grey_comment.png'></image>
-                  <label class='font_333333_26'>100</label>
+                  <label class='font_333333_24'>100</label>
                 </button>
               </view>-->
               <view>
                 <button open-type='share' data-res_id="{{bean.forscreen_id}}" data-res_key="{{index}}" data-pubdetail="{{bean.pubdetail}}" data-openid="{{openid}}" data-res_type="{{bean.res_type}}">
                   <image src='http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/icon/grey_share.png'></image>
-                  <label class='font_333333_26'>{{bean.share_num}}</label>
+                  <label class='font_333333_24'>{{bean.share_num}}</label>
                 </button>
               </view>
             </view>

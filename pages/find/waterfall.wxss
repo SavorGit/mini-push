@@ -27,6 +27,7 @@
 
 .con_top {
   height: 80rpx;
+  margin-top: 10rpx;
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -41,8 +42,8 @@
 }
 
 .con_top > .user_info > .user_head, .con_top > .user_info > .user_head::before {
-  width: 70rpx;
-  height: 70rpx;
+  width: 50rpx;
+  height: 50rpx;
   border-radius: 50%;
   background-color: #bebebe;
   vertical-align: middle;
@@ -83,12 +84,12 @@
   margin: 0;
   padding: 0;
   border: 0;
-  border-radius: 20rpx;
+  border-radius: 10rpx;
   z-index: 1;
 }
 
 .con_main .media-cover .built-up-layer {
-  margin: -80rpx 20rpx 0 0;
+  margin: -70rpx 15rpx 0 0;
   padding: 0;
   border: 0;
   height: 80rpx;
@@ -98,8 +99,8 @@
 }
 
 .con_main .media-cover .built-up-layer image {
-  width: 48rpx;
-  height: 48rpx;
+  width: 40rpx;
+  height: 40rpx;
   vertical-align: middle;
   z-index: 2;
 }
@@ -110,6 +111,8 @@
 
 .con_bottom {
   height: 75rpx;
+  line-height: 75rpx;
+  margin-top: -20rpx;
   display: flex;
   flex-direction: row;
   align-items: center;
