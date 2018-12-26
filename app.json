@@ -75,5 +75,8 @@
         "selectedIconPath": "images/icon/red_mine.png"
       }
     ]
-  }
+  },
+  "navigateToMiniProgramAppIdList": [
+    "wxe59b125a3f073901"
+  ]
 }

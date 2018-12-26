@@ -46,7 +46,7 @@
           <label class='font_F6F2EC_34'>测试</label>
         </view>  -->
       </view>
-      <navigator>
+      <navigator wx:if="{{box_mac !=''}}" target="miniProgram" app-id="wxe59b125a3f073901" path="pages/index/index?box_mac={{box_mac}}" version="develop">
         <label>网络不好？传输速度慢？试试简易版</label>
         <image src='/images/icon/white-right-arrow.png'></image>
       </navigator>
