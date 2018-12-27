@@ -4,21 +4,22 @@
  * 自定义modal浮层
  * 使用方法：
  *   
-<bottomModal show="{{showModal}}" width="98%" height='60%'  border-radius="0rpx" title-text='Title' title-color="#f6f3ee" confirm-text='确定' confirm-color="#f6f3ee" cancel-text='取消' cancel-color='rgba(7,17,27,0.6)' bindclickMask='modalClickMask' bindcancel="modalCancel" bindconfirm='modalConfirm'>
+<bottomModal show="{{showModal}}" width="98%" height='60%' background-color='#ffffff' border-radius="0rpx" title-text='Title' title-color="#f6f3ee" confirm-text='确定' confirm-color="#f6f3ee" cancel-text='取消' cancel-color='rgba(7,17,27,0.6)' bindclickMask='modalClickMask' bindcancel="modalCancel" bindconfirm='modalConfirm'>
   <view>你自己需要展示的内容</view>
 </bottomModal>
  
 属性说明：
- show：         控制modal显示与隐藏
- width：        modal的宽度
- height：       modal的高度
- borderRadius： modal的圆角
- titleText：    modal的标题
- titleColor：   modal的标题颜色
- confirmText：  modal的确定按钮文本
- confirmColor： modal的确定按钮文本颜色
- cancelText：   modal的取消按钮文本
- cancelColor：  modal的取消按钮文本颜色
+ show：            控制modal显示与隐藏
+ backgroundColor:  modal的背景色
+ width：           modal的宽度
+ height：          modal的高度
+ borderRadius：    modal的圆角
+ titleText：       modal的标题
+ titleColor：      modal的标题颜色
+ confirmText：     modal的确定按钮文本
+ confirmColor：    modal的确定按钮文本颜色
+ cancelText：      modal的取消按钮文本
+ cancelColor：     modal的取消按钮文本颜色
 
 事件说明：
  bindclickMask: 点击遮盖层的回调函数
@@ -44,6 +45,11 @@ Component({
     show: {
       type: Boolean,
       value: false
+    },
+    //modal的背景色
+    backgroundColor: {
+      type: String,
+      value: '#932c3f'
     },
     //modal的宽度
     width: {
@@ -115,22 +121,22 @@ Component({
    * 组件的方法列表
    */
   methods: {
-    clickMask() {
+    clickMask(e) {
       // this.setData({show: false})
     },
 
-    cancel() {
+    cancel(e) {
       this.setData({
         show: false
-      })
-      this.triggerEvent('cancel')
+      });
+      this.triggerEvent('cancel', e);
     },
 
-    confirm() {
+    confirm(e) {
       this.setData({
         show: false
-      })
-      this.triggerEvent('confirm')
+      });
+      this.triggerEvent('confirm', e);
     }
   }
 })
