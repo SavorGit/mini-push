@@ -65,6 +65,13 @@
             <button class='replay_this' bindtap='changeVolume' data-box_mac='{{box_mac}}' data-change_type='2'>音量 + </button>
           </view>
         </view>
+
+        <view style='width: 100%; height: 60rpx; line-height:60rpx; font-size: 24rpx; color: #FFFFFF; background-color: #A68E6D;'>
+          <navigator>
+            <label>投屏速度慢？点击前往「热点投屏极简版」</label>
+          </navigator>
+        </view>
+
         <view class='launch_history'>
           <view class='title'>
             <image src='/images/icon/black_history.png'></image>
