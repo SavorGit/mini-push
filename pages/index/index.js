@@ -20,6 +20,7 @@ Page({
     happy_vedio_title: '',          //生日视频标题
     showModal: false,   //显示授权登陆弹窗
     is_game_banner:0,  //是否显示猴子爬树游戏banner
+    is_open_simple:0,
   },
 
   /**
@@ -155,6 +156,7 @@ Page({
             happy_vedio_url: res.data.result.vedio_url,
             happy_vedio_name: res.data.result.file_name,
             happy_vedio_title: res.data.result.name,
+            is_open_simple: res.data.result.is_open_simple
           })
         }
       })
