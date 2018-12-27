@@ -121,22 +121,22 @@ Component({
    * 组件的方法列表
    */
   methods: {
-    clickMask() {
+    clickMask(e) {
       // this.setData({show: false})
     },
 
-    cancel() {
+    cancel(e) {
       this.setData({
         show: false
-      })
-      this.triggerEvent('cancel')
+      });
+      this.triggerEvent('cancel', e);
     },
 
-    confirm() {
+    confirm(e) {
       this.setData({
         show: false
-      })
-      this.triggerEvent('confirm')
+      });
+      this.triggerEvent('confirm', e);
     }
   }
 })
