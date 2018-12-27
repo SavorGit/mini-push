@@ -1,17 +1,15 @@
 <!--components/modal/bottomModal.wxml-->
 <view class='mask' wx:if="{{show}}" bindtap='clickMask'>
-  <view class='modal-content' style="width: {{width}};height: {{height}};border-radius: {{borderRadius}};">
-    <block wx:if="{{titleText != ''}}">
-      <view class='title' style='color: {{titleColor}};'>
-        <label>{{titleText}}</label>
-      </view>
-    </block>
+  <view class='modal-content' style="{{width != '' ? 'width: ' + width + ';' : ''}}{{height != '' ? 'height: ' + height + ';' : ''}}{{borderRadius != '' ? 'border-radius: ' + borderRadius + ';' : ''}}{{backgroundColor != '' ? 'background-color: ' + backgroundColor + ';' : ''}}">
+    <view wx:if="{{titleText != ''}}" class='title' style='color: {{titleColor}};'>
+      <label>{{titleText}}</label>
+    </view>
     <scroll-view scroll-y class='main-content'>
       <slot></slot>
     </scroll-view>
-    <view class='modal-btn-wrapper'>
-      <view class='confirm-btn' style='color: {{confirmColor}}' bindtap='confirm'>{{confirmText}}</view>
-      <view class='cancel-btn' style='color: {{cancelColor}}' bindtap='cancel'>{{cancelText}}</view>
+    <view wx:if="{{cancelText != '' || confirmText != ''}}" class='modal-btn-wrapper'>
+      <view wx:if="{{confirmText != ''}}" class='confirm-btn' style='color: {{confirmColor}}' bindtap='confirm'>{{confirmText}}</view>
+      <view wx:if="{{cancelText != ''}}" class='cancel-btn' style='color: {{cancelColor}}' bindtap='cancel'>{{cancelText}}</view>
     </view>
   </view>
 </view>
