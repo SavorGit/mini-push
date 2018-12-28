@@ -52,12 +52,14 @@ Page({
     var user_info = wx.getStorageSync("savor_user_info");
     var avatarUrl = user_info.avatarUrl;
     var nickName  = user_info.nickName;
+    var is_open_simple = e.is_open_simple;
     that.setData({
       openid: openid,
       box_mac: box_mac,
       upload_vedio_temp: '',
       avatarUrl: avatarUrl,
       nickName: nickName,
+      is_open_simple: is_open_simple
     })
 
     wx.chooseVideo({

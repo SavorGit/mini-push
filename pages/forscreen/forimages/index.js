@@ -45,7 +45,7 @@ Page({
     wx.hideShareMenu();
     var that = this;
     var user_info = wx.getStorageSync("savor_user_info");
-
+    var is_open_simple = e.is_open_simple;
     openid = e.openid;
     box_mac = e.box_mac;
     that.setData({
@@ -56,7 +56,8 @@ Page({
       tmp_imgs: [],
       pic_show_cur: [],
       avatarUrl: user_info.avatarUrl,
-      nickName: user_info.nickName
+      nickName: user_info.nickName,
+      is_open_simple: is_open_simple
 
     });
     wx.chooseImage({
