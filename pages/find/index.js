@@ -31,16 +31,7 @@ Page({
   onLoad: function (options) {
     wx.hideShareMenu();
     var that = this;
-    wx.request({
-      url: 'https://mobile.littlehotspot.com/smallapp21/index/isFind',
-      success:function(res){
-        if(res.data.result.is_open==0){
-          wx.reLaunch({
-            url: '../message/index',
-          })
-        }
-      }
-    })
+    
 
 
     if (app.globalData.openid && app.globalData.openid != '') {
@@ -185,25 +176,43 @@ Page({
     var user_info = wx.getStorageSync("savor_user_info");
 
     openid = user_info.openid;
-    //获取发现列表
+
     wx.request({
-      url: 'https://mobile.littlehotspot.com/smallapp/Discovery/index',
-      data: {
-        page: page,
-        openid: openid,
-      },
-      header: {
-        'content-type': 'application/json'
-      },
+      url: 'https://mobile.littlehotspot.com/smallapp21/index/isOpenFind',
       success: function (res) {
-        if (res.data.code == 10000) {
-          discovery_list = res.data.result
+        if (res.data.result.is_open == 0) {
+
+            that.setData({
+              is_open:0
+            })
+
+        }else {
           that.setData({
-            discovery_list: res.data.result,
+            is_open: 1
+          })
+          //获取发现列表
+          wx.request({
+            url: 'https://mobile.littlehotspot.com/smallapp/Discovery/index',
+            data: {
+              page: page,
+              openid: openid,
+            },
+            header: {
+              'content-type': 'application/json'
+            },
+            success: function (res) {
+              if (res.data.code == 10000) {
+                discovery_list = res.data.result
+                that.setData({
+                  discovery_list: res.data.result,
+                })
+              }
+            }
           })
         }
       }
     })
+    
     
   },
   //呼大码

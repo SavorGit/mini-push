@@ -180,3 +180,20 @@
 }
 
 /* =================== 内容底部结束 =================== */
+
+
+.page_main_v {
+  width: 100%;
+  /* height: calc(100vh - 138rpx); */
+  height: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.page_main_h {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
