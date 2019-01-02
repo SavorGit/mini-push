@@ -110,6 +110,10 @@
   height: 100rpx;
 }
 
+.launch_video_page_b > .page_bottom > .uploading {
+  background-color: #106763;
+}
+
 .launch_video_page_b > .page_bottom > button {
   height: 90rpx;
   line-height: 90rpx;
