@@ -11,31 +11,31 @@
           <image wx:else src="{{userinfo.avatarUrl}}" lazy-load='http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/icon/grey_interact.png'></image>
         </view>
         <view class='info'>
-          <label class='font_333333_36' wx:if="{{userinfo.nickName ==''}}">热点用户</label>
-          <label class='font_333333_36' wx:else>{{userinfo.nickName}}</label>
+          <label class='font_999999_36' wx:if="{{userinfo.nickName ==''}}">热点用户</label>
+          <label class='font_999999_36' wx:else>{{userinfo.nickName}}</label>
           <label class='font_666666_24'>ID:{{userinfo.id}}</label>
         </view>
       </view>
       <view class='right'>
-        <button class='flush' bindtap='refreshOn'>
+        <!-- <button class='flush' bindtap='refreshOn'>
           <view>
             <image src='/images/icon/flush.png'></image>
           </view>
           <view>
             <label class='font_932C3F_20'>刷新</label>
           </view>
-        </button>
+        </button> -->
       </view>
     </view>
 
 
     <!-- 我的公开 -->
-    <view>
-      <view class='swiper-tab font_333333_28'>
+    <view class='theme2'>
+      <view class='swiper-tab font_666666_28'>
         <view class="swiper-tab-item active">我的公开</view>
 
         <!-- 如果没有数据更多不显示 -->
-        <navigator wx:if="{{publiclist  !=''}}" class="swiper-tab-item font_333333_24" style='margin-left: 340rpx;margin-right: 0rpx;' url='/pages/mine/index'>查看更多>></navigator>
+        <navigator wx:if="{{publiclist  !=''}}" class="swiper-tab-item font_666666_24" style='margin-left: 340rpx;margin-right: 0rpx;' url='/pages/mine/index'>查看更多>></navigator>
       </view>
       <view class='content'>
         <view class='con_main'>
@@ -43,21 +43,25 @@
           <!-- 有数据时-->
           <view class="weui-grids full_width" wx:if="{{publiclist  !=''}}">
             <view class="weui-grid" wx:for="{{publiclist}}" wx:key="key" wx:for-item="bean" wx:for-index="index">
-              <navigator url="/pages/mine/index">
+              <navigator class='full_width full_height' url="/pages/mine/index">
                 <image class="pic_show" mode='aspectFill' src="{{bean.imgurl}}"></image>
+                <view class='cover'>
+                  <view class='share font_FFFFFF_32'>
+                    <image src='/images/icon2/FFFFFF_heart.png'></image>
+                    <label>123</label>
+                  </view>
+                </view>
               </navigator>
             </view>
-
           </view>
-
 
           <!-- 无数据 -->
           <view class="row-center" wx:else>
-            <view>
+            <!-- <view>
               <image style='width: 44rpx;height: 64rpx;' src='http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default_mine.png'></image>
-            </view>
+            </view> -->
             <view>
-              <label class='font_666666_24'>您还没有公开内容</label>
+              <label class='font_666666_30'>你还没有公开过作品~</label>
             </view>
           </view>
 
@@ -69,12 +73,12 @@
     <view style='height: 20rpx;'></view>
 
     <!-- 我的收藏 -->
-    <view>
+    <view class='theme2'>
       <view class='swiper-tab font_333333_28'>
         <view class="swiper-tab-item active">我喜欢</view>
 
         <!-- 如果没有数据更多不显示 -->
-        <navigator wx:if="{{collectlist  !=''}}" class="swiper-tab-item font_333333_24" style='margin-left: 340rpx;margin-right: 0rpx;' url='/pages/mine/favorite'>查看更多>></navigator>
+        <navigator wx:if="{{collectlist  !=''}}" class="swiper-tab-item font_666666_24" style='margin-left: 340rpx;margin-right: 0rpx;' url='/pages/mine/favorite'>查看更多>></navigator>
       </view>
       <view class='content'>
         <view class='con_main'>
@@ -82,20 +86,25 @@
           <!-- 有数据时 -->
           <view class="weui-grids full_width" wx:if="{{collectlist  !=''}}">
             <view class="weui-grid" wx:for="{{collectlist}}" wx:key="key" wx:for-item="bean" wx:for-index="index">
-              <navigator url="/pages/mine/favorite">
+              <navigator class='full_width full_height' url="/pages/mine/favorite">
                 <image class="pic_show" mode='aspectFill' src="{{bean.imgurl}}"></image>
+                <view class='cover'>
+                  <view class='share font_FFFFFF_32'>
+                    <image src='/images/icon2/FFFFFF_heart.png'></image>
+                    <label>123</label>
+                  </view>
+                </view>
               </navigator>
             </view>
-
           </view>
 
           <!--无数据 -->
           <view class="row-center" wx:else>
-            <view>
+            <!-- <view>
               <image style='width: 44rpx;height: 64rpx;' src='http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default_mine.png'></image>
-            </view>
+            </view> -->
             <view>
-              <label class='font_666666_24'>您还没有收藏内容</label>
+              <label class='font_666666_30'>你赞过的作品都会放到这里哦~</label>
             </view>
           </view>
 

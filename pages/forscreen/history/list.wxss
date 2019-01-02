@@ -11,7 +11,7 @@
 }
 
 .content_bottom_border {
-  border-bottom: 1rpx solid #d9d3cd;
+  border-bottom: 1rpx solid #333;
 }
 
 /* =================== 内容头部开始 =================== */
@@ -34,6 +34,7 @@
 
 .con_top > .datetime > label {
   margin: 0rpx 20rpx 0rpx 10rpx;
+  font-size: 30rpx;
 }
 
 .con_top > .operation {
@@ -43,13 +44,24 @@
   justify-content: flex-end;
 }
 
-.con_top > .operation > .launch_tv, .con_top > .operation > .launch_tv::before {
+/* .con_top > .operation > .launch_tv, .con_top > .operation > .launch_tv::before {
   margin-right: 10rpx;
   width: 150rpx;
   height: 55rpx;
   border: 1rpx solid #932c3f;
   border-radius: 12rpx;
   background-color: unset;
+} */
+
+.con_top > .operation > .launch_tv {
+  margin-right: 10rpx;
+  width: 150rpx;
+  height: 55rpx;
+  line-height: 55rpx;
+  border-radius: 27rpx;
+  padding: unset;
+  border: unset;
+  font-size: 28rpx;
 }
 
 /* =================== 内容头部结束 =================== */

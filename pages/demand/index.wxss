@@ -51,7 +51,6 @@ label.input_tip {
 
 .scroll_container {
   width: 100%;
-  /* height: calc(100vh - 138rpx); */
   height: 100%;
 }
 
@@ -105,7 +104,7 @@ swiper-image {
   font-size: 24rpx;
   border-radius: 24rpx;
   border: 1rpx solid #fff;
-} */
+}
 
 .article > .video_info {
   margin-top: 124rpx;
@@ -126,7 +125,7 @@ swiper-image {
   background: rgba(0, 0, 0, 0.3);
   border-radius: 13rpx;
   z-index: 2;
-}
+} */
 
 .article > .cover {
   margin-top: 15rpx;
@@ -143,7 +142,6 @@ swiper-image {
 .article > .cover > navigator > image {
   width: 100%;
   height: 100%;
-  background-color: #932c3f;
   border-radius: 12rpx 12rpx 0rpx 0rpx;
   z-index: 1;
 }
@@ -184,7 +182,6 @@ swiper-image {
   flex-direction: row;
   align-items: center;
   border-radius: 0rpx 0rpx 12rpx 12rpx;
-  background-color: #f6f3ee;
 }
 
 .article > .con_bottom > .launch {
@@ -196,14 +193,23 @@ swiper-image {
   justify-content: flex-start;
 }
 
-.article > .con_bottom > .launch > view >  button,
+/* .article > .con_bottom > .launch > view >  button,
 .article > .con_bottom > .launch > view >  button::before {
   margin-right: 10rpx;
   width: 150rpx;
   height: 55rpx;
-  border: 1rpx solid #932c3f;
+  border: 1rpx solid #05101a;
   border-radius: 12rpx;
   background-color: unset;
+} */
+
+.article > .con_bottom > .launch > view >  button {
+  margin-right: 10rpx;
+  width: 150rpx;
+  height: 55rpx;
+  line-height: 55rpx;
+  font-size: 20rpx;
+  border-radius: 27rpx;
 }
 
 .article > .con_bottom > .operation {
@@ -268,7 +274,7 @@ swiper-image {
 .article > .title > label {
   text-shadow: 0 1px 1px #999;
   z-index: 2;
-} */
+}
 
 .top {
   padding-top: 10rpx;
@@ -294,7 +300,7 @@ swiper-image {
 .top > button {
   width: 150rpx;
   height: 55rpx;
-  border: 1rpx solid #932c3f;
+  border: 1rpx solid #05101a;
   border-radius: 12rpx;
 }
 
@@ -324,13 +330,13 @@ swiper-image {
   margin-bottom: 8rpx;
   width: 60rpx;
   height: 60rpx;
-}
+} */
 
-/* ====================== 模态窗口 ====================== */
+/* ====================== 模态窗口 ======================
 
 .modal-title {
   padding-top: 50rpx;
   font-size: 36rpx;
   color: red;
   text-align: center;
-}
+} */

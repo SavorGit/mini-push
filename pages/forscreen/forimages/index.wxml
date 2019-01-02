@@ -6,7 +6,15 @@
 
 
   <!-- ================================== 上传图片前 ================================== -->
-  <view class="launch_pic_page_b display_{{showThird?'hide':'show'}}">
+  <view class="full_width launch_pic_page_b display_{{showThird?'hide':'show'}}">
+    <view class="page_top theme2">
+      <view class='full_width font_666666_26'>
+        <label class='tip_top_lable'>图片加载成功后，选择照片，电视开始展示</label>
+        <label class='link_relief'>
+          <navigator url="/pages/forscreen/relief">免责声明</navigator>
+        </label>
+      </view>
+    </view>
     <form bindsubmit="up_forscreen">
       <view class='page_main'>
         <view class="weui-grids grids-frame">
@@ -34,7 +42,7 @@
 
         <!-- 投图片 -->
         <view class='pic_text'>
-          <label class='font_333333_30'>为所有照片增加文字（选填）</label>
+          <!-- <label class='font_333333_30'>为所有照片增加文字（选填）</label> -->
           <textarea class='text_input' name="forscreen_char" maxlength='30' placeholder='1-30字'></textarea>
         </view>
         <view class='grant_auth'>
@@ -51,7 +59,7 @@
         </view>
       </view>
       <view class='page_bottom'>
-        <button class="savor-btn" form-type="submit" hover-class="none" disabled='{{is_btn_disabel}}'>投屏</button>
+        <button class="full_width savor-btn" form-type="submit" hover-class="none" disabled='{{is_btn_disabel}}'>投屏</button>
       </view>
     </form>
   </view>
@@ -62,8 +70,8 @@
 
   <!-- ================================== 上传图片后 ================================== -->
   <view class="launch_pic_page_a display_{{showThird?'show':'hide'}}">
-    <view class="page_top">
-      <view class='full_width font_333333_26'>
+    <view class="page_top theme2">
+      <view class='full_width font_666666_26'>
         <label class='tip_top_lable'>图片加载成功后，选择照片，电视开始展示</label>
         <label class='link_relief'>
           <navigator url="/pages/forscreen/relief">免责声明</navigator>
@@ -71,102 +79,98 @@
       </view>
     </view>
 
-    <scroll-view scroll-y="true" scroll-with-animation="true" bindscrolltolower="loadMore" data-openid='{{openid}}' data-box_mac='{{box_mac}}'>
-      <view class='page_main'>
-        <form bindsubmit="up_forscreen">
-          <view class="weui-grids grids-frame">
-            <view class="weui-grid" wx:for="{{up_imgs}}" wx:key="key" wx:for-item="img" wx:for-index="index">
-              <view class="pic_show">
-                <image class="pic_show {{pic_show_cur[index]?'pic_show_cur':''}}" mode='aspectFill' bindtap='up_single_pic' data-img="{{tmp_imgs[index].oss_img}}" data-boxmac="{{box_mac}}" data-openid="{{openid}}" data-imgindex="{{index}}" data-imglen="{{img_lenth}}"
-                  src="{{img.tmp_img}}"></image>
-                <view class='upload_success_frame' wx:if="{{tmp_percent[index].percent >= 100}}">
-                  <image style='margin:0 0 0 0;width:38rpx;height:38rpx;' src='/images/check_alt_512x512.png'></image>
-                </view>
-                <view class='upload_mask' wx:if="{{tmp_percent[index].percent < 100}}">
-                  <label>{{tmp_percent[index].percent}}%</label>
-                </view>
-                <input class="display_hide" name="upimgs{{index}}" value="{{img.tmp_img}}"></input>
+    <view class='page_main'>
+      <form bindsubmit="up_forscreen">
+        <view class="weui-grids grids-frame">
+          <view class="weui-grid" wx:for="{{up_imgs}}" wx:key="key" wx:for-item="img" wx:for-index="index">
+            <view class="pic_show">
+              <image class="pic_show {{pic_show_cur[index]?'pic_show_cur':''}}" mode='aspectFill' bindtap='up_single_pic' data-img="{{tmp_imgs[index].oss_img}}" data-boxmac="{{box_mac}}" data-openid="{{openid}}" data-imgindex="{{index}}" data-imglen="{{img_lenth}}"
+                src="{{img.tmp_img}}"></image>
+              <view class='upload_success_frame' wx:if="{{tmp_percent[index].percent >= 100}}">
+                <image style='margin:0 0 0 0;width:38rpx;height:38rpx;' src='/images/icon2/333333_check_alt_512x512.png'></image>
               </view>
+              <view class='upload_mask' wx:if="{{tmp_percent[index].percent < 100}}">
+                <label>{{tmp_percent[index].percent}}%</label>
+              </view>
+              <input class="display_hide" name="upimgs{{index}}" value="{{img.tmp_img}}"></input>
             </view>
           </view>
-          <input class='display_hide' name="img_lenth" value="{{img_lenth}}"></input>
-          <input class="display_hide" name="box_mac" value="{{box_mac}}"></input>
-          <input class="display_hide" name="openid" value="{{openid}}"></input>
-          <input class="display_hide" name="is_pub_hotelinfo" value="{{is_pub_hotelinfo}}"></input>
-          <input class="display_hide" name="is_share" value="{{is_share}}"></input>
-          <input class="display_hide" name="avatarUrl" value="{{avatarUrl}}"></input>
-          <input class="display_hide" name="nickName" value="{{nickName}}"></input>
-          <input class="display_hide" name="is_open_simple" value="{{is_open_simple}}"></input>
-        </form>
+        </view>
+        <input class='display_hide' name="img_lenth" value="{{img_lenth}}"></input>
+        <input class="display_hide" name="box_mac" value="{{box_mac}}"></input>
+        <input class="display_hide" name="openid" value="{{openid}}"></input>
+        <input class="display_hide" name="is_pub_hotelinfo" value="{{is_pub_hotelinfo}}"></input>
+        <input class="display_hide" name="is_share" value="{{is_share}}"></input>
+        <input class="display_hide" name="avatarUrl" value="{{avatarUrl}}"></input>
+        <input class="display_hide" name="nickName" value="{{nickName}}"></input>
+        <input class="display_hide" name="is_open_simple" value="{{is_open_simple}}"></input>
+      </form>
 
-        <view wx:if="{{is_open_simple>0}}" style='width: 100%; height: 60rpx; line-height:60rpx; font-size: 24rpx; color: #FFFFFF; background-color: #A68E6D;'>
+      <!-- <view wx:if="{{is_open_simple>0}}" style='width: 100%; height: 60rpx; line-height:60rpx; font-size: 24rpx; color: #FFFFFF; background-color: #A68E6D;'>
           <navigator target="miniProgram" app-id="wxe59b125a3f073901" path="pages/index/index?box_mac={{box_mac}}" version="release">
             <label>投屏速度慢？点击前往「热点投屏极简版」</label>
           </navigator>
-        </view>
-
-        <view class='launch_history'>
-          <view class='title'>
-            <image src='/images/icon/black_history.png'></image>
-            <label class='font_333333_26'>投屏历史</label>
-          </view>
+        </view> -->
 
 
-          <!-- 有数据时 -->
-          <view class='history_list' wx:if="{{forscreen_history_list !=''}}">
-            <view wx:for="{{forscreen_history_list}}" wx:key="key" wx:for-item="bean" wx:for-index="index">
-              <view wx:if="{{bean.res_type==1}}" class="pic">
-                <view class="weui-grids">
-                  <view class="weui-grid" wx:for="{{bean.list}}" wx:key="pkey" wx:for-item="item" wx:for-index="indexs">
-                    <image bindtap="previewImage" data-pkey="{{indexs}}" data-src="{{bean.list}}" mode='aspectFill' src="{{item.imgurl}}"></image>
-                  </view>
-                </view>
-                <view class='btn'>
-                  <button bindtap="replayHistory" data-res_type='{{bean.res_type}}' data-box_mac='{{box_mac}}' data-openid='{{openid}}' data-res_list='{{bean.list}}'>重投</button>
-                </view>
-              </view>
-              <view wx:else class="video">
-                <view class="cover" wx:for="{{bean.list}}" wx:key="pkey" wx:for-item="item" wx:for-index="indexs">
-                  <navigator url="/pages/forscreen/video/launch_video?video_url={{item.res_url}}&video_name=">
-                    <image mode='aspectFill' src="{{item.imgurl}}"></image>
-                  </navigator>
-                  <view>
-                    <navigator url="/pages/forscreen/video/launch_video?video_url={{item.res_url}}&video_name=">
-                      <image src="/images/icon/white_play.png"></image>
-                    </navigator>
-                  </view>
-                </view>
-                <view class='btn'>
-                  <button bindtap="replayHistory" data-res_type='{{bean.res_type}}' data-box_mac='{{box_mac}}' data-openid='{{openid}}' data-res_list='{{bean.list}}'>重投</button>
-                </view>
-              </view>
-              <view wx:if="{{forscreen_history_list.length > index+1}}" class='line'></view>
-            </view>
-          </view>
-
-          <view class='no_data' wx:else>
-            <view class="row-center">
-              <view>
-                <image style='width: 44rpx;height: 64rpx;' src='http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default_mine.png'></image>
-              </view>
-              <view>
-                <label class='font_666666_24'>暂无投屏记录</label>
-              </view>
-            </view>
-          </view>
-
-
-        </view>
-
-      </view>
-    </scroll-view>
+    </view>
 
     <!-- 重选 -->
-    <view class="page_bottom">
+    <view class="page_bottom theme2">
       <view class='button_group'>
-        <image bindtap="chooseImage" data-boxmac="{{box_mac}}" data-openid="{{openid}}" class='rechoose_button' src='/images/button_rechoose_pic.png'></image>
-        <image bindtap="exitForscreen" class='rechoose_button button_space' data-boxmac="{{box_mac}}" src='/images/button_exit_cast_screen.png'></image>
+        <button class='savor-btn button_space_left' bindtap="chooseImage" data-boxmac="{{box_mac}}" data-openid="{{openid}}" src='/images/button_rechoose_pic.png'>重选照片</button>
+        <button class='savor-btn button_space_right' bindtap="exitForscreen" data-boxmac="{{box_mac}}" src='/images/button_exit_cast_screen.png'>退出投屏</button>
       </view>
+    </view>
+    <view class='launch_history'>
+      <view class='title'>
+        <!-- <image src='/images/icon2/333333_history.png'></image> -->
+        <label class='font_666666_26'>投屏历史</label>
+      </view>
+      <scroll-view scroll-y="true" scroll-with-animation="true" bindscrolltolower="loadMore" data-openid='{{openid}}' data-box_mac='{{box_mac}}'>
+        <!-- 有数据时 -->
+        <view class='history_list' wx:if="{{forscreen_history_list !=''}}">
+          <view wx:for="{{forscreen_history_list}}" wx:key="key" wx:for-item="bean" wx:for-index="index">
+            <view wx:if="{{bean.res_type==1}}" class="pic">
+              <view class="weui-grids">
+                <view class="weui-grid" wx:for="{{bean.list}}" wx:key="pkey" wx:for-item="item" wx:for-index="indexs">
+                  <image bindtap="previewImage" data-pkey="{{indexs}}" data-src="{{bean.list}}" mode='aspectFill' src="{{item.imgurl}}"></image>
+                </view>
+              </view>
+              <view class='btn'>
+                <button bindtap="replayHistory" data-res_type='{{bean.res_type}}' data-box_mac='{{box_mac}}' data-openid='{{openid}}' data-res_list='{{bean.list}}'>重投</button>
+              </view>
+            </view>
+            <view wx:else class="video">
+              <view class="cover" wx:for="{{bean.list}}" wx:key="pkey" wx:for-item="item" wx:for-index="indexs">
+                <navigator url="/pages/forscreen/video/launch_video?video_url={{item.res_url}}&video_name=">
+                  <image mode='aspectFill' src="{{item.imgurl}}"></image>
+                </navigator>
+                <view>
+                  <navigator url="/pages/forscreen/video/launch_video?video_url={{item.res_url}}&video_name=">
+                    <image src="/images/icon2/FFFFFF_play.png"></image>
+                  </navigator>
+                </view>
+              </view>
+              <view class='btn'>
+                <button bindtap="replayHistory" data-res_type='{{bean.res_type}}' data-box_mac='{{box_mac}}' data-openid='{{openid}}' data-res_list='{{bean.list}}'>重投</button>
+              </view>
+            </view>
+            <view wx:if="{{forscreen_history_list.length > index+1}}" class='line'></view>
+          </view>
+        </view>
+
+        <view class='no_data' wx:else>
+          <view class="row-center">
+            <view>
+              <image style='width: 44rpx;height: 64rpx;' src='http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default_mine.png'></image>
+            </view>
+            <view>
+              <label class='font_666666_24'>暂无投屏记录</label>
+            </view>
+          </view>
+        </view>
+      </scroll-view>
     </view>
   </view>
 

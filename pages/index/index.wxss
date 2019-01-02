@@ -5,43 +5,27 @@
   opacity: 0.7;
 }
 
-.page_main_v {
-  width: 100%;
-  /* height: calc(100% - 138rpx); */
-  height: 100%;
-  background-color: #932c3f;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-}
-
-.page_main_h {
+.page_main {
   width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
-.page_main_h > .tip {
-  height: 40rpx;
-  padding-bottom: 140rpx;
-}
-
-.page_main_h > .climbtree {
-  width: 640rpx;
-  height: 226rpx;
+.page_main > .climbtree {
+  height: 256rpx;
   padding: unset;
   display: flex;
 }
 
-image.input_pic_banner {
-  width: 695rpx;
-  height: 200rpx;
-  border-radius: 10rpx;
+.page_main > .tip {
+  height: 40rpx;
+  padding-top: 20rpx;
+  padding-bottom: 140rpx;
 }
 
-/* .page_main_h > .tip > button, .page_main_h > .tip > button::before,
-.page_main_h > .tip > button::after {
+/* .page_main > .tip > button, .page_main > .tip > button::before,
+.page_main > .tip > button::after {
   width: 180rpx;
   height: 50rpx;
   margin-top: 50rpx;
@@ -50,60 +34,58 @@ image.input_pic_banner {
   font-size: 24rpx;
   border: 1rpx solid #f6f2ec;
   background-color: #fff;
+}
+
+.page_main > .tip > button::before, .page_main > .tip > button::after {
+  border: 2rpx solid #f6f2ec;
 } */
 
-.page_main_h > .tip > button {
+.page_main > .tip > button {
   width: 180rpx;
   height: 50rpx;
+  line-height: 50rpx;
   margin-top: 50rpx;
-  padding: unset;
-  line-height: 2;
   font-size: 24rpx;
-  border: 2rpx solid #f6f2ec;
-  background-color: unset;
+  border-radius: 25rpx;
 }
 
-.page_main_h > .tip > button::before, .page_main_h > .tip > button::after {
-  border: 2rpx solid #f6f2ec;
-}
-
-.page_main_h > .operation {
+.page_main > .operation {
   height: 500rpx;
 }
 
-.page_main_h > .operation > view {
+.page_main > .operation > view {
   align-items: center;
   padding: 10rpx 0rpx;
 }
 
-.page_main_h > .operation > view > image {
+.page_main > .operation > view > image {
   width: 48rpx;
   height: 38rpx;
   vertical-align: middle;
 }
 
-.page_main_h > .operation > view > label {
+.page_main > .operation > view > label {
   height: 60rpx;
   line-height: 60rpx;
   margin-left: 10rpx;
+  font-size: 34rpx;
 }
 
-.page_main_h > navigator {
+.page_main > navigator {
   width: 100%;
   text-align: right;
   margin-right: 50rpx;
 }
 
-.page_main_h > navigator > image {
+.page_main > navigator > image {
   width: 48rpx;
   height: 48rpx;
   vertical-align: middle;
 }
 
-.page_main_h > navigator > label {
+.page_main > navigator > label {
   height: 60rpx;
   line-height: 60rpx;
   margin-left: 10rpx;
   font-size: 28rpx;
-  color: #fff;
 }

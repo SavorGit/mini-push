@@ -1,47 +1,23 @@
 <!--pages/mine/index.wxml-->
 <import src="../template/navigation.wxml" />
 <import src="/pages/template/commons" />
-<template is="navigationBarForTwoLevel" data='{{statusBarHeight: statusBarHeight,titleText:"热点投屏"}}' />
+<template is="navigationBarForTwoLevel" data='{{statusBarHeight: statusBarHeight,titleText:"我的公开"}}' />
 
 <view class="container" style='height: calc(100vh - 46px - {{statusBarHeight}}px);'>
   <scroll-view class='page_main' scroll-y="true" scroll-with-animation="true" bindscrolltolower="loadMore" data-openid='{{openid}}'>
-    <!--
-    <view class='user'>
-      <view class='head'>
-        <image wx:if="{{userinfo.avatarUrl ==''}}" src="http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default_user_head.png" lazy-load='http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/icon/grey_interact.png'></image>
-        <image wx:else src="{{userinfo.avatarUrl}}" lazy-load='http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/icon/grey_interact.png'></image>
-      </view>
-      <view class='info'>
-        <label class='font_333333_36' wx:if="{{userinfo.nickName ==''}}">热点用户</label>
-        <label class='font_333333_36' wx:else>{{userinfo.nickName}}</label>
-        <label class='font_666666_24'>ID:{{userinfo.id}}</label>
-      </view>
-    </view>
-
-    <!-- 选项卡开始 
-    <view class='swiper-tab font_333333_28'>
-      <view class="swiper-tab-item active">我的公开</view>
-      <navigator class="swiper-tab-item" open-type='reLaunch' url='/pages/mine/favorite'>我的收藏</navigator>
-    </view>
-    -->
-
     <view>
-
 
       <!--循环开始 -->
       <view wx:for="{{publiclist}}" wx:key="key" wx:for-item="bean" wx:for-index="index">
 
         <view class='content content_bottom_border'>
           <view class='con_top'>
-            <view class='info font_333333_24'>
-              <label>{{bean.create_time}}</label>
-              <label wx:if="{{bean.is_pub_hotelinfo==1}}">.</label>
-              <label wx:if="{{bean.is_pub_hotelinfo==1}}">{{bean.hotel_name}}</label>
+            <view class='user_info'>
+              <image src='http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg'></image>
+              <label>奔波</label>
             </view>
-            <view class='operation font_932C3F_24'>
-              <view bindtap='popDel' data-forscreen_id="{{bean.forscreen_id}}" data-keys="{{index}}">
-                <label>删除</label>
-              </view>
+            <view class='operation'>
+              <button class='theme-button'>电视播放</button>
             </view>
           </view>
           <view class='con_main'>
@@ -60,7 +36,7 @@
                 </navigator>
                 <view class="cover">
                   <navigator url="/pages/forscreen/video/launch_video?video_url={{pubdetail.res_url}}&video_name=">
-                    <image src='http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/icon/white_play.png'></image>
+                    <image src='/images/icon2/FFFFFF__play.png'></image>
                   </navigator>
                   <view>
                     <label class='font_F6F3EE_20'>{{pubdetail.duration}}</label>
@@ -70,22 +46,36 @@
             </view>
           </view>
           <view class='con_bottom'>
-            <view class='operation'>
-              <view wx:if="{{collect=='123'}}">
-                <image src='http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/icon/red_heart.png'></image>
-                <label class='font_333333_26'>{{bean.collect_num}}</label>
+            <view class='hotel_info font_25635f_24'>
+              <label>{{bean.create_time}}</label>
+              <label wx:if="{{bean.is_pub_hotelinfo==1}}">.</label>
+              <label wx:if="{{bean.is_pub_hotelinfo==1}}">{{bean.hotel_name}}</label>
+            </view>
+            <view class='operation font_666666_26'>
+              <view class='op-left'>
+                <view>
+                  <image src='/images/icon2/666666_play1.png'></image>
+                  <label>123</label>
+                </view>
+                <view wx:if="{{collect=='123'}}">
+                  <image src='/images/icon2/FF0000_heart.png'></image>
+                  <label>{{bean.collect_num}}</label>
+                </view>
+                <view wx:else>
+                  <image src='/images/icon2/666666_heart.png'></image>
+                  <label>{{bean.collect_num}}</label>
+                </view>
+                <!--<view>
+                  <image src='/images/icon2/666666_comment.png'></image>
+                  <label >100</label>
+                </view>-->
+                <view>
+                  <image src='/images/icon2/666666_share.png'></image>
+                  <label>{{bean.share_num}}</label>
+                </view>
               </view>
-              <view wx:else>
-                <image src='http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/icon/grey_heart.png'></image>
-                <label class='font_333333_26'>{{bean.collect_num}}</label>
-              </view>
-              <!--<view>
-              <image src='http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/icon/grey_comment.png'></image>
-              <label class='font_333333_26'>100</label>
-            </view>-->
-              <view>
-                <image src='http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/icon/grey_share.png'></image>
-                <label class='font_333333_26'>{{bean.share_num}}</label>
+              <view class='op-right'>
+                <label bindtap='popDel' data-forscreen_id="{{bean.forscreen_id}}" data-keys="{{index}}">删除</label>
               </view>
             </view>
           </view>
@@ -96,8 +86,9 @@
       </view>
       <!--循环结束 -->
 
-      <!-- 滚动页面底部留白 -->
+      <!-- 滚动页面底部留白 
       <view class='nav_bottom_space'></view>
+      -->
 
     </view>
     <!-- 选项卡结束 -->
@@ -110,5 +101,20 @@
 </view>
 
 <!-- 弹窗 -->
-<bottomModal show="{{showModal}}" data-openid="{{openid}}" data-forscreen_id="{{forscreen_id}}" height='auto' width="98%" title-text="" confirm-text="删除" confirm-color="#ede6de" cancel-text="取消" cancel-color="rgba(153,153,153,0.8)" bindcancel="modalCancel"
-  bindconfirm='modalConfirm' />
+<bottomModal show="{{showModal}}" data-openid="{{openid}}" data-forscreen_id="{{forscreen_id}}" height='auto' width="98%" title-text="" confirm-text="" cancel-text="" bindcancel="modalCancel" bindconfirm='modalConfirm'>
+  <view class='delete-container'>
+    <view class='delete-top'>
+      <view class='title'>
+        <label class='font_333333_34'>确认删除？</label>
+      </view>
+    </view>
+    <view class='delete-main'>
+      <label class='content font_666666_30'>您公开的作品删除后，其他人将无法在发现页面看到您的作品。并在当前列表中删除。</label>
+    </view>
+
+    <view class='delete-bottom'>
+      <button class='savor-btn' bindtap="modalCancel">取消</button>
+      <button class='savor-btn theme-menu' bindtap="modalConfirm">删除</button>
+    </view>
+  </view>
+</bottomModal>

@@ -4,8 +4,8 @@
 
 <view class="container" style='height: calc(100vh - 46px - {{statusBarHeight}}px);'>
   <view class='page_top'>
-    <view class='v-structure font_666666_28'>
-      <picker  bindchange="bindCityPickerChange"  value="{{cityIndex}}" range="{{cityArray}}">
+    <view class='v-structure theme2 font_666666_28'>
+      <picker bindchange="bindCityPickerChange" value="{{cityIndex}}" range="{{cityArray}}">
         <view class='city_show'>
           <image src='/images/icon/666666_position_2.png'></image>
           <label>{{cityArray[cityIndex]}}</label>
@@ -40,29 +40,29 @@
         <view class='i-right'>
           <view class='ir-top'>
             <view class='irt-left'>
-              <label class='font_666666_28'>{{bean.name}}</label>
-              <view class='irtl-bottom font_999999_24'>
+              <label class='font_999999_28'>{{bean.name}}</label>
+              <view class='irtl-bottom font_666666_24'>
                 <label>{{bean.food_name}}</label>
                 <label style='margin-left:50rpx;' wx:if="{{bean.avg_expense>0}}">￥{{bean.avg_expense}}/人</label>
                 <label style='margin-left:50rpx;' wx:else></label>
               </view>
             </view>
             <view class='option' wx:if="{{bean.tel !=''}}">
-              <button bindtap='phonecallevent' data-tel="{{bean.tel}}">预订电话</button>
+              <button class='theme-button' bindtap='phonecallevent' data-tel="{{bean.tel}}">预订电话</button>
             </view>
           </view>
-          <view class='address font_999999_24'>
+          <view class='address font_666666_24'>
             <image src='/images/icon/666666_position.png'></image>
             <label>{{bean.addr}}</label>
           </view>
         </view>
       </view>
-      
+
     </view>
   </scroll-view>
   <view class="body-view">
-      <loading hidden="{{hiddens}}" bindchange="loadingChange">加载中...</loading>
-    </view>
+    <loading hidden="{{hiddens}}" bindchange="loadingChange">加载中...</loading>
+  </view>
 </view>
 
 <!-- 固定悬浮按钮组 -->

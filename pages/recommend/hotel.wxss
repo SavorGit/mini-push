@@ -47,14 +47,13 @@
 }
 
 .page_main {
-  min-height:100%;
-  background-color: #fff;
+  min-height: 100%;
 }
 
 .page_main > .row-item {
   padding: 25rpx 25rpx 20rpx 25rpx;
   min-height: 120rpx;
-  border-bottom: 1rpx solid #ece6de;
+  border-bottom: 1rpx solid #333;
   display: flex;
   flex-direction: row;
   align-items: flex-start;
@@ -101,11 +100,10 @@
 .page_main > .row-item > .i-right > .ir-top > .option > button {
   height: 50rpx;
   line-height: 50rpx;
-  background-color: #932c3f;
-  color: #fff;
   font-size: 24rpx;
   padding: unset;
   border: unset;
+  border-radius: 25rpx;
 }
 
 .page_main > .row-item > .i-right > .address > image {

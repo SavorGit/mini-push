@@ -2,7 +2,7 @@
 
 <!-- 微信授权登录 -->
 <template name="wxAuthLogin">
-  <modal show="{{show}}" height='450rpx' width="98%" border-radius="0rpx" title-text="" confirm-text="" cancel-text="">
+  <modal show="{{show}}" height='420rpx' width="90%" background-color='unset' border-radius="0rpx" title-text="" confirm-text="" cancel-text="">
     <view class='wxAuthLogin-container'>
       <view class='wxAuthLogin-top'>
         <view class='opt'>
@@ -11,11 +11,11 @@
           </button>
         </view>
         <view class='title'>
-          <label class='font_333333_34'>温馨提示</label>
+          <label class='font_1CBEB6_34'>温馨提示</label>
         </view>
       </view>
       <view class='wxAuthLogin-middle'>
-        <label class='content font_333333_30'>使用“热点投屏”过程中请遵守相关法律法规。</label>
+        <label class='content font_333333_30'>使用“热点投屏”过程中，请遵守相关法律法规。</label>
         <label class='link_relief'>
           <navigator url="/pages/forscreen/relief">免责声明</navigator>
         </label>
@@ -29,7 +29,7 @@
 </template>
 
 
-<!-- 微信授权登录 -->
+<!-- 微信授权登录
 <template name="wxRecAuthLogin">
   <modal show="{{show}}" height='450rpx' width="98%" border-radius="0rpx" title-text="" confirm-text="" cancel-text="">
     <view class='wxAuthLogin-container'>
@@ -46,7 +46,7 @@
       <view class='wxAuthLogin-middle'>
         <label class='content font_333333_30'>未获取到您所在的城市</label>
         <label class='content font_333333_30'>请进行位置授权,以便为您推荐优质餐厅</label>
-        
+
       </view>
 
       <view class='wxAuthLogin-bottom'>
@@ -55,6 +55,7 @@
     </view>
   </modal>
 </template>
+ -->
 
 <!-- 固定悬浮按钮组 -->
 <template name="fixedSuspensionButtonGroup">
@@ -69,7 +70,7 @@
 
 <!-- 自定义顶级页面导航栏 -->
 <template name="navigationBarForTopLevel">
-  <view class='default-navigation-bar'>
+  <view class='default-navigation-bar theme-navigation'>
     <view class='status-bar' style='height:{{statusBarHeight}}px;'></view>
     <view class='navigation-bar'>
       <view class='btn'>
@@ -83,19 +84,19 @@
 
 <!-- 自定义二级页面导航栏 -->
 <template name="navigationBarForTwoLevel">
-  <view class='default-navigation-bar'>
+  <view class='default-navigation-bar theme-navigation'>
     <view class='status-bar' style='height:{{statusBarHeight}}px;'></view>
     <view class='navigation-bar'>
       <view class='btn'>
         <navigator class='go-back' open-type='navigateBack' delta='100'>
-          <image src='/images/icon/white_back.png'>Back</image>
+          <image src='/images/icon2/FFFFFF_back.png'>Back</image>
         </navigator>
-        <view style='margin-right: 3px;'>
-          <image src='/images/icon/Ia54254_vertical.png' style='width:1px; height: 18px; vertical-align: middle;'></image>
+        <!-- <view style='margin-right: 3px;'>
+          <image src='/images/icon2/666666_vertical.png' style='width:1px; height: 18px; vertical-align: middle;'></image>
         </view>
         <navigator class='to-home' open-type="switchTab" url='/pages/demand/index'>
-          <image src='/images/icon/white_home_1.png'>Home</image>
-        </navigator>
+          <image src='/images/icon2/FFFFFF_home.png'>Home</image>
+        </navigator> -->
       </view>
       <view class='title'>
         <label class='text'>{{titleText}}</label>
@@ -106,19 +107,19 @@
 
 <!-- 自定义二级页面导航栏 -->
 <template name="navigationBarForVideoLevel">
-  <view class='default-navigation-bar'>
+  <view class='default-navigation-bar theme-navigation'>
     <view class='status-bar' style='height:{{statusBarHeight}}px;'></view>
     <view class='navigation-bar'>
       <view class='btn'>
         <navigator class='go-back' open-type='navigateBack' delta='100'>
-          <image src='/images/icon/white_back.png'>Back</image>
+          <image src='/images/icon2/FFFFFF_back.png'>Back</image>
         </navigator>
-        <view style='margin-right: 3px;'>
-          <image src='/images/icon/Ia54254_vertical.png' style='width:1px; height: 18px; vertical-align: middle;'></image>
+        <!-- <view style='margin-right: 3px;'>
+          <image src='/images/icon2/666666_vertical.png' style='width:1px; height: 18px; vertical-align: middle;'></image>
         </view>
         <navigator class='to-home' open-type="switchTab" url='/pages/demand/index'>
-          <image src='/images/icon/white_home_1.png'>Home</image>
-        </navigator>
+          <image src='/images/icon2/FFFFFF_home.png'>Home</image>
+        </navigator> -->
       </view>
       <view class='title'>
         <label class='text'>{{titleText}}</label>
@@ -130,18 +131,18 @@
 
 <!-- 自定义分享页面导航栏 -->
 <template name="navigationBarForShare">
-  <view class='default-navigation-bar'>
+  <view class='default-navigation-bar theme-navigation'>
     <view class='status-bar' style='height:{{statusBarHeight}}px;'></view>
     <view class='navigation-bar'>
       <view class='btn'>
-        <view style='padding-left: 5px; padding-right: 5px;'>
-          <image src='/images/icon/Ia54254_back.png' style='width: 18px; height: 18px; vertical-align: middle;'>Back</image>
+        <!-- <view style='padding-left: 5px; padding-right: 5px;'>
+          <image src='/images/icon2/Ia54254_back.png' style='width: 18px; height: 18px; vertical-align: middle;'>Back</image>
         </view>
         <view style='margin-right: 3px;'>
-          <image src=' /images/icon/Ia54254_vertical.png ' style='width: 1px; height: 18px; vertical-align: middle; '></image>
-        </view>
+          <image src=' /images/icon2/666666_vertical.png ' style='width: 1px; height: 18px; vertical-align: middle; '></image>
+        </view> -->
         <navigator class='to-home ' open-type="switchTab" url='/pages/demand/index'>
-          <image src='/images/icon/white_home_1.png '>Home</image>
+          <image src='/images/icon2/FFFFFF_home.png '>Home</image>
         </navigator>
       </view>
       <view class='title '>
@@ -154,19 +155,19 @@
 
 <!-- 自定义二级游戏页面导航栏 -->
 <template name="navigationBarForTwoLevelInGame">
-  <view class='default-navigation-bar' style='position: absolute; background-color: unset;'>
+  <view class='default-navigation-bar theme-navigation' style='position: absolute; background-color: unset;'>
     <view class='status-bar' style='height:{{statusBarHeight}}px; background-color: {{statusBarBGColor}}'></view>
     <view class='navigation-bar' style='background-color: unset;'>
       <view class='btn'>
         <navigator class='go-back' open-type='navigateBack' delta='100'>
-          <image src='/images/icon/white_back.png'>Back</image>
+          <image src='/images/icon2/FFFFFF_back.png'>Back</image>
         </navigator>
-        <view style='margin-right: 3px;'>
-          <image src='/images/icon/Ia54254_vertical.png' style='width:1px; height: 18px; vertical-align: middle;'></image>
+        <!-- <view style='margin-right: 3px;'>
+          <image src='/images/icon2/666666_vertical.png' style='width:1px; height: 18px; vertical-align: middle;'></image>
         </view>
         <navigator class='to-home' open-type="switchTab" url='/pages/demand/index'>
-          <image src='/images/icon/white_home_1.png'>Home</image>
-        </navigator>
+          <image src='/images/icon2/FFFFFF_home.png'>Home</image>
+        </navigator> -->
       </view>
       <view class='title'>
         <label class='text'>{{titleText}}</label>

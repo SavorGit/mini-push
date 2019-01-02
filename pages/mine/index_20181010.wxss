@@ -96,7 +96,6 @@
   height: 70rpx;
   line-height: 70rpx;
   font-weight: bold;
-  background-color: #f6f3ee;
 }
 
 .swiper-tab-item {
@@ -105,17 +104,15 @@
   margin: 0rpx 40rpx 0rpx 40rpx;
   display: inline-block;
   text-align: center;
-  color: #666;
 }
 
 .active {
-  color: #333;
-  border-bottom: 5rpx solid #932c3f;
+  color: #666;
+  border-bottom: 5rpx solid #1cbeb6;
 }
 
 .content {
   padding: 20rpx 30rpx 20rpx 30rpx;
-  background-color: #f6f3ee;
 }
 
 /* .content_bottom_border {
@@ -134,11 +131,42 @@
   justify-content: space-between;
 }
 
+.con_main .weui-grid {
+  width: calc((100vw - 60rpx) / 3);
+  height: calc((100vw - 60rpx) / 3);
+}
+
 .con_main .weui-grid image {
   margin: 0rpx 0rpx 0rpx 6rpx;
-  width: calc((100vw - 60rpx) / 3 - 10rpx);
-  height: calc((100vw - 60rpx) / 3 - 10rpx);
+  width: calc(100% - 10rpx);
+  height: calc(100% - 10rpx);
   border-radius: 10rpx;
+}
+
+.con_main .weui-grid .cover {
+  margin: calc(100% * -1) 0rpx 0rpx 6rpx;
+  width: calc(100% - 10rpx);
+  height: calc(100% - 10rpx);
+  border-radius: 10rpx;
+  vertical-align: bottom;
+}
+
+.con_main .weui-grid .cover .share {
+  margin-top: calc(100% - 55rpx);
+  margin-left: 5rpx;
+  height: 50rpx;
+  line-height: 50rpx;
+}
+
+.con_main .weui-grid .cover .share > image {
+  width: 32rpx;
+  height: 32rpx;
+  vertical-align: middle;
+}
+
+.con_main .weui-grid .cover .share > label {
+  margin-left: 10rpx;
+  vertical-align: middle;
 }
 
 .row-center {

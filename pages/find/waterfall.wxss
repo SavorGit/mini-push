@@ -20,7 +20,7 @@
 }
 
 .content_bottom_border {
-  border-bottom: 1rpx solid #d9d3cd;
+  border-bottom: 1rpx solid #666;
 }
 
 /* =================== 内容头部开始 =================== */
@@ -45,15 +45,15 @@
   width: 50rpx;
   height: 50rpx;
   border-radius: 50%;
-  background-color: #bebebe;
   vertical-align: middle;
 }
 
 .con_top > .user_info > .user_name {
   margin: 0rpx 20rpx 0rpx 10rpx;
+  font-size: 28rpx;
 }
 
-.con_top > .operation {
+/* .con_top > .operation {
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -67,7 +67,7 @@
   border: 1rpx solid #932c3f;
   border-radius: 12rpx;
   background-color: unset;
-}
+} */
 
 /* =================== 内容头部结束 =================== */
 
@@ -153,6 +153,15 @@
   height: 32rpx;
   margin-right: 8rpx;
   vertical-align: middle;
+}
+
+.con_bottom > .operation > .launch_tv {
+  margin-right: 10rpx;
+  width: 150rpx;
+  height: 55rpx;
+  line-height: 55rpx;
+  border-radius: 27rpx;
+  font-size: 20rpx;
 }
 
 /* =================== 内容底部结束 =================== */

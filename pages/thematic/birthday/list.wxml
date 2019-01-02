@@ -3,7 +3,7 @@
 <template is="navigationBarForTwoLevel" data='{{statusBarHeight: statusBarHeight,titleText:"热点投屏"}}' />
 
 <!-- ================================= 生日歌列表 ================================= -->
-<view class="container" style='height: calc(100vh - 46px - {{statusBarHeight}}px);'>
+<view class="container" style='height: calc(100vh - 46px - {{statusBarHeight}}px);display:none;'>
   <view class='body'>
     <view class='weui-grids birthday-list-grids'>
       <view class='weui-grid birthday-list-grid' wx:for="{{happylist}}" wx:key="key" wx:for-item="bean" wx:for-index="index">
@@ -15,33 +15,30 @@
           </button>
         </view>
       </view>
-      <!--<view class='weui-grid birthday-list-grid'>
-        <image mode='aspectFill' src='http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg'></image>
-        <text class='font_666666_24'>生日歌 - 经典英文版</text>
-        <view class='cover'>
-          <button bindtap='showHappy' data-boxmac="{{box_mac}}" data-openid="{{openid}}" data-vediourl="http://oss.littlehotspot.com/media/resource/jda24z7C8Z.mp4" data-happyVedioName="jda24z7C8Z.mp4" data-name="Happy Birthday">
-            <image src="/images/icon/grey_tv_play.png"></image>
-          </button>
-        </view>
-      </view>
-      <view class='weui-grid birthday-list-grid'>
-        <image mode='aspectFill' src='http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg'></image>
-        <text class='font_666666_24'>生日歌 - 儿童版</text>
-        <view class='cover'>
-          <button bindtap='showHappy' data-boxmac="{{box_mac}}" data-openid="{{openid}}" data-vediourl="http://oss.littlehotspot.com/media/resource/jda24z7C8Z.mp4" data-happyVedioName="jda24z7C8Z.mp4" data-name="Happy Birthday">
-            <image src="/images/icon/grey_tv_play.png"></image>
-          </button>
-        </view>
-      </view>
-      <view class='weui-grid birthday-list-grid'>
-        <image mode='aspectFill' src='http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg'></image>
-        <text class='font_666666_24'>生日歌 - 经典粤语版</text>
-        <view class='cover'>
-          <button bindtap='showHappy' data-boxmac="{{box_mac}}" data-openid="{{openid}}" data-vediourl="http://oss.littlehotspot.com/media/resource/jda24z7C8Z.mp4" data-happyVedioName="jda24z7C8Z.mp4" data-name="Happy Birthday">
-            <image src="/images/icon/grey_tv_play.png"></image>
-          </button>
-        </view>
-      </view>-->
     </view>
   </view>
+</view>
+
+
+<!-- =================================== 新版 =================================== -->
+<view class="container" style='height: calc(100vh - 46px - {{statusBarHeight}}px);'>
+  <scroll-view class='full_width full_height' scroll-y="true" scroll-with-animation="true">
+    <view class='page_top'></view>
+    <view class='page_main'>
+      <view class='article theme2' wx:for="{{happylist}}" wx:key="key" wx:for-item="bean" wx:for-index="index">
+        <view class='con_top'>
+          <label>{{bean.name}}</label>
+          <button class='theme-button op-right' bindtap='showHappy' data-boxmac="{{box_mac}}" data-openid="{{openid}}" data-vediourl="{{bean.res_url}}" data-happyVedioName="{{bean.file_name}}" data-name="{{bean.name}}">电视播放</button>
+        </view>
+        <view class='con_main'>
+          <image mode='aspectFill' src='{{bean.img_url}}'></image>
+          <view class='cover'>
+            <image src="/images/icon2/FFFFFF_play.png"></image>
+          </view>
+        </view>
+        <view class='con_bottom'></view>
+      </view>
+    </view>
+    <view class='page_bottom'></view>
+  </scroll-view>
 </view>

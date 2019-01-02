@@ -2,16 +2,24 @@
 
 /* ================================== 点播页面 ================================== */
 
-.article {
-  width: 100vw;
+.page_top {
+  display: none;
 }
 
-.article > .video, .article > .video::before, .article > .video::after {
+.page_main {
+  height: calc(100% - 100rpx);
+}
+
+/* .article {
+  width: 100vw;
+} */
+
+/* .article > .video, .article > .video::before, .article > .video::after {
   margin: 280rpx 0rpx -10rpx 0rpx;
   padding: unset;
   border: unset;
   width: 100%;
-}
+} */
 
 .article > .video > video {
   margin: unset;
@@ -29,9 +37,79 @@
   align-items: center; */
   background: #fff;
   text-align: center;
+  display: none;
 }
 
 .article > .title > label {
   font-size: 30rpx;
   color: #434343;
+}
+
+.article > .con_bottom {
+  height: 80rpx;
+  line-height: 80rpx;
+  margin-top: -8rpx;
+}
+
+.article > .con_bottom > .operation {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.article > .con_bottom > .operation > view {
+  margin-left: 15rpx;
+  margin-right: 15rpx;
+}
+
+.article > .con_bottom > .operation > view > image {
+  width: 36rpx;
+  height: 32rpx;
+  margin-right: 8rpx;
+  vertical-align: middle;
+}
+
+.article > .con_bottom > .operation > view > button > image {
+  width: 36rpx;
+  height: 32rpx;
+  margin-right: 8rpx;
+  vertical-align: middle;
+}
+
+.article > .con_bottom > .operation > view > button {
+  margin: 0;
+  padding: 0;
+  height: 60rpx;
+  line-height: 60rpx;
+  /* position: none;
+  display: inline-block;
+  box-sizing: inherit;
+  font-size: 18px;
+  text-align: center;
+  text-decoration: none;
+  border-radius: 0rpx;
+  -webkit-tap-highlight-color: unset;
+  overflow: hidden;
+  color: #000;
+  border: 0rpx solid #fff;
+  background-color: #fff; */
+  background: none;
+}
+
+.article > .con_bottom > .operation > view > button::after {
+  border: none;
+  outline: none;
+}
+
+.page_bottom {
+  height: 100rpx;
+  line-height: 100rpx;
+}
+
+.page_bottom button {
+  height: 98rpx;
+  line-height: 98rpx;
+  font-size: 36rpx;
+  border-radius: 0rpx;
 }

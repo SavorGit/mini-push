@@ -21,7 +21,8 @@
   align-items: center;
   justify-content: space-between;
   box-sizing: border-box;
-  background-color: #ede6de;
+  color: #fff;
+  background-color: #05101a;
 }
 
 .full_width {
@@ -104,9 +105,24 @@
   color: #666;
 }
 
+.font_666666_26 {
+  font-size: 26rpx;
+  color: #666;
+}
+
 .font_666666_24 {
   font-size: 24rpx;
   color: #666;
+}
+
+.font_999999_36 {
+  font-size: 36rpx;
+  color: #999;
+}
+
+.font_999999_28 {
+  font-size: 28rpx;
+  color: #999;
 }
 
 .font_999999_24 {
@@ -149,6 +165,51 @@
   color: #f6f2ec;
 }
 
+.font_FFFFFF_36 {
+  font-size: 36rpx;
+  color: #fff;
+}
+
+.font_FFFFFF_34 {
+  font-size: 34rpx;
+  color: #fff;
+}
+
+.font_FFFFFF_32 {
+  font-size: 32rpx;
+  color: #fff;
+}
+
+.font_FFFFFF_30 {
+  font-size: 30rpx;
+  color: #fff;
+}
+
+.font_FFFFFF_28 {
+  font-size: 28rpx;
+  color: #fff;
+}
+
+.font_FFFFFF_26 {
+  font-size: 26rpx;
+  color: #fff;
+}
+
+.font_FFFFFF_24 {
+  font-size: 24rpx;
+  color: #fff;
+}
+
+.font_1CBEB6_34 {
+  font-size: 34rpx;
+  color: #1cbeb6;
+}
+
+.font_25635f_24 {
+  font-size: 24rpx;
+  color: #25635f;
+}
+
 .font_932C3F_20 {
   font-size: 20rpx;
   color: #932c3f;
@@ -169,8 +230,13 @@
   color: #932c3f;
 }
 
-.link_relief {
+/* .link_relief {
   color: #932c3f;
+  text-decoration: underline;
+} */
+
+.link_relief {
+  color: #1cbeb6;
   text-decoration: underline;
 }
 
@@ -191,8 +257,8 @@ button.btn_background_034 {
 }
 
 .savor-btn {
-  background-color: #932c3f;
-  color: #f6f2ec;
+  background-color: #1cbeb6;
+  color: #fff;
   font-size: 34rpx;
 }
 
@@ -311,3 +377,5 @@ button.btn_background_034 {
 @import "pages/template/commons.wxss";
 
 /* @import "pages/template/navigation.wxss"; */
+
+@import "theme.wxss";
