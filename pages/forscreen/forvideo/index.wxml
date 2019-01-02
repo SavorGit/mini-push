@@ -44,6 +44,25 @@
         data-is_share='{{is_share}}' data-avatarUrl='{{avatarUrl}}' data-nickName='{{nickName}}' disabled='{{is_btn_disabel}}'>投屏</button>
     </view>
 
+
+    <!-- 打断投屏弹窗 -->
+    <bottomModal show="{{showModal}}" height='auto' width="98%" title-text="" confirm-text="" cancel-text="">
+      <view class='bottom-pop-window-container'>
+        <view class='bottom-pop-window-top'>
+          <view class='title'>
+            <label class='font_333333_34'>确认打断投屏？</label>
+          </view>
+        </view>
+        <view class='bottom-pop-window-main'>
+          <label class='content font_666666_30'>当前电视正在进行投屏，继续投屏有可能打断当前投屏中的内容。</label>
+        </view>
+
+        <view class='bottom-pop-window-bottom'>
+          <button class='savor-btn' bindtap="">继续投屏</button>
+          <button class='savor-btn theme-menu' bindtap="">取消投屏</button>
+        </view>
+      </view>
+    </bottomModal>
   </view>
 
 

@@ -321,3 +321,46 @@
   color: #fff;
   font-size: 24rpx;
 }
+
+/* =============== 打断投屏弹窗开始 =============== */
+
+.bottom-pop-window-container {
+  width: 100%;
+  height: 100%;
+  text-align: left;
+  border-radius: 10rpx;
+}
+
+.bottom-pop-window-container > .bottom-pop-window-top {
+  padding: 50rpx 0rpx 20rpx 0rpx;
+}
+
+.bottom-pop-window-container > .bottom-pop-window-top > .title > label {
+  font-weight: bold;
+  padding-left: 20rpx;
+}
+
+.bottom-pop-window-container > .bottom-pop-window-main {
+  padding: 20rpx 40rpx;
+  margin-bottom: 20rpx;
+}
+
+.bottom-pop-window-container > .bottom-pop-window-main > .content {
+  display: block;
+  margin-bottom: 20rpx;
+}
+
+.bottom-pop-window-container > .bottom-pop-window-bottom {
+  height: 120rpx;
+}
+
+.bottom-pop-window-container > .bottom-pop-window-bottom > button {
+  width: 285rpx;
+  height: 80rpx;
+  line-height: 80rpx;
+  border-radius: 40rpx;
+  display: inline-block;
+  margin: 0rpx 40rpx;
+}
+
+/* =============== 打断投屏弹窗结束 =============== */
