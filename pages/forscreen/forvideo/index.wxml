@@ -36,7 +36,9 @@
           </label>
         </checkbox-group>
       </view>
-
+      <view class='speak_with_interest'>
+        <textarea class='text_input' maxlength='30' placeholder='顺便说两句...'></textarea>
+      </view>
     </view>
 
     <view class='page_bottom'>

@@ -90,21 +90,26 @@ image.pic_show_cur {
   height: calc(100% - 205rpx);
 }
 
+.launch_pic_page_b .page_main > .pic_text {
+  padding: 10rpx 30rpx;
+}
+
 .launch_pic_page_b .page_main > .pic_text > label {
   margin: 25rpx 0 24rpx 28rpx;
 }
 
 .launch_pic_page_b .page_main > .pic_text > textarea {
-  margin: 24rpx 0 50rpx 28rpx;
   width: 690rpx;
   height: 148rpx;
   color: #fff;
   font-size: 28rpx;
   background-color: #0e1c29;
+  text-align: left;
 }
 
 .launch_pic_page_b .page_main > .grant_auth {
-  margin: 10rpx 0rpx 100rpx 0rpx;
+  height: 100rpx;
+  margin: 10rpx 0rpx;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -115,6 +120,46 @@ image.pic_show_cur {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
+}
+
+.launch_pic_page_b .page_main > .grant_auth > .checkbox-group checkbox {
+  font-size: 32rpx;
+}
+
+.launch_pic_page_b .page_main > .grant_auth > .checkbox-group checkbox .wx-checkbox-input {
+  width: 30rpx;
+  height: 30rpx;
+  background: unset;
+}
+
+.launch_pic_page_b .page_main > .grant_auth > .checkbox-group checkbox .wx-checkbox-input.wx-checkbox-input-checked {
+  background: #1cbeb6;
+  border-color: #1cbeb6;
+}
+
+.launch_pic_page_b .page_main > .grant_auth > .checkbox-group checkbox .wx-checkbox-input.wx-checkbox-input-checked::before {
+  width: 28rpx;
+  height: 28rpx;
+  line-height: 28rpx;
+  text-align: center;
+  font-size: 22rpx;
+  color: #fff;
+  background: transparent;
+  transform: translate(-50%, -50%) scale(1);
+  -webkit-transform: translate(-50%, -50%) scale(1);
+}
+
+.launch_pic_page_b .page_main > .speak_with_interest {
+  padding: 10rpx 30rpx;
+}
+
+.launch_pic_page_b .page_main > .speak_with_interest > textarea {
+  width: 690rpx;
+  height: 148rpx;
+  color: #fff;
+  font-size: 28rpx;
+  background-color: #0e1c29;
+  text-align: left;
 }
 
 .launch_pic_page_b .page_bottom {
