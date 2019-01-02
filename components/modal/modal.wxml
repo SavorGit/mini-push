@@ -8,8 +8,8 @@
       <slot></slot>
     </scroll-view>
     <view wx:if="{{cancelText != '' || confirmText != ''}}" class='modal-btn-wrapper'>
-      <view wx:if="{{cancelText != ''}}" class='cancel-btn' style='color: {{cancelColor}}' bindtap='cancel'>{{cancelText}}</view>
-      <view wx:if="{{confirmText != ''}}" class='confirm-btn' style='color: {{confirmColor}}' bindtap='confirm'>{{confirmText}}</view>
+      <button wx:if="{{cancelText != ''}}" class='cancel-btn' style='color: {{cancelColor}}' bindtap='cancel'>{{cancelText}}</button>
+      <button wx:if="{{confirmText != ''}}" class='confirm-btn' style='color: {{confirmColor}}' bindtap='confirm'>{{confirmText}}</button>
     </view>
   </view>
 </view>

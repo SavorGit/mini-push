@@ -89,3 +89,11 @@
   margin-left: 10rpx;
   font-size: 28rpx;
 }
+
+/* 扫描弹窗提示内容 */
+
+.scan_tip {
+  padding: 0rpx 40rpx;
+  font-size: 30rpx;
+  text-align: center;
+}

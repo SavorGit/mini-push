@@ -60,3 +60,8 @@
 <view wx:if="{{box_mac !=''}}">
   <template is="fixedSuspensionButtonGroup" />
 </view>
+
+<!-- 扫描二维码提示弹窗 -->
+<modal show="{{showScanModal}}" width="90vw" height="360rpx" border-radius="20rpx" title-text="温馨提示" confirm-text="立即扫码">
+  <view class='scan_tip'>您需要扫描热点合作餐厅电视中的二维码链接电视，链接成功后可使用此功能。</view>
+</modal>

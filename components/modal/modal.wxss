@@ -30,8 +30,7 @@
 .modal-content {
   display: flex;
   flex-direction: column;
-  /* background-color: #932c3f; */
-  /* width: 90%;
+  /* background-color: #932c3f; *//* width: 90%;
   height: 80%;
   border-radius: 10rpx; */
 }
@@ -39,22 +38,30 @@
 .modal-btn-wrapper {
   display: flex;
   flex-direction: row;
-  height: 100rpx;
-  line-height: 100rpx;
+  height: 110rpx;
+  line-height: 110rpx;
   font-weight: bold;
   border-top: 2rpx solid rgba(246, 243, 238, 0.1);
 }
 
+.modal-btn-wrapper button {
+  width: 260rpx;
+  height: 80rpx;
+  line-height: 80rpx;
+  padding: unset;
+  border: unset;
+  border-radius: 40rpx;
+}
+
 .cancel-btn, .confirm-btn {
-  flex: 1;
-  height: 100rpx;
-  line-height: 100rpx;
+  background-color: #1cbeb6;
+  color: #fff;
   text-align: center;
   font-size: 32rpx;
 }
 
 .cancel-btn {
-  border-right: 2rpx solid rgba(246, 243, 238, 0.1);
+  background-color: #05101a;
 }
 
 .main-content {
@@ -63,6 +70,6 @@
   overflow-y: hidden;
 }
 
-scroll-view {
+/* scroll-view {
   color: #ede6de;
-}
+} */

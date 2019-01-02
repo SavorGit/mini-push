@@ -50,7 +50,7 @@ Component({
     //modal的背景色
     backgroundColor: {
       type: String,
-      value: '#932c3f'
+      value: '#FFFFFF'
     },
     //modal的宽度
     width: {
@@ -73,7 +73,7 @@ Component({
     },
     titleColor: {
       type: String,
-      value: '#f6f3ee'
+      value: '#1CBEB6'
     },
     confirmText: {
       type: String,
@@ -81,7 +81,7 @@ Component({
     },
     confirmColor: {
       type: String,
-      value: '#f6f3ee'
+      value: '#FFFFFF'
     },
     cancelText: {
       type: String,
@@ -89,7 +89,7 @@ Component({
     },
     cancelColor: {
       type: String,
-      value: 'rgba(237,230,222,0.9)'
+      value: '#FFFFFF'
     }
   },
 
