@@ -7,9 +7,6 @@
   text-align: center;
 }
 
-.page_top .categry {
-}
-
 .page_top .categry label {
   font-size: 36rpx;
   vertical-align: middle;
@@ -27,6 +24,10 @@
   color: #666;
   display: inline-block;
   vertical-align: middle;
+}
+
+.scroll-view {
+  height: calc(100% - 100rpx);
 }
 
 .page_main {

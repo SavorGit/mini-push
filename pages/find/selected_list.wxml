@@ -10,7 +10,7 @@
       <navigator url='/pages/find/waterfall'>公开</navigator>
     </view>
   </view>
-  <scroll-view class='full_width full_height' scroll-y="true" scroll-with-animation="true" bindscrolltolower="loadMore" data-openid='{{openid}}'>
+  <scroll-view class='full_width scroll-view' scroll-y="true" scroll-with-animation="true" bindscrolltolower="loadMore" data-openid='{{openid}}'>
     <view class='page_main'>
       <view class='waterfall_list'>
         <!--循环开始-->
