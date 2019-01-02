@@ -1,0 +1,73 @@
+<!--pages/find/video.wxml-->
+<import src="/pages/template/commons" />
+<template is="navigationBarForTwoLevel" data='{{statusBarHeight: statusBarHeight,titleText:"热点投屏"}}' />
+
+<!-- 发现视频落地页 -->
+<view class="container" style='height: calc(100vh - 46px - {{statusBarHeight}}px);'>
+  <view class='full_width page_top'></view>
+  <view class='full_width page_main'>
+    <view class='article'>
+      <view class='con_top'>
+        <view class='user_info'>
+          <image mode='aspectFill' src='http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg'></image>
+          <label class='theme-font'>蜘蛛精</label>
+        </view>
+      </view>
+      <view class='con_main'>
+        <view class='speak_with_interest'>
+          <label>这里有个差别，就是我没有给.list这个class设置padding了，因为在微信小程序下是不能够操作节点获取样式的。后面我们将根据图片的宽度动态计算左右两边以及左边一列图片的padding。同时这里图片的单位用的是rpx。主要是为了适应不同屏幕终端。</label>
+        </view>
+        <view class='media'>
+          <image mode='aspectFill' src='http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg'></image>
+          <view class='cover'>
+            <image src="/images/icon2/FFFFFF_play.png"></image>
+          </view>
+        </view>
+      </view>
+      <view class='con_bottom'>
+        <view class='font_25635f_24'>
+          <label>10分钟前</label>
+          <label>.</label>
+          <label>花家怡园(世茂店)</label>
+        </view>
+        <view class='operation font_666666_24'>
+          <view>
+            <button>
+              <image src='/images/icon2/666666_play1.png'></image>
+              <label>123</label>
+            </button>
+          </view>
+          <view wx:if="{{bean.is_collect=='1'}}">
+            <button bindtap='cancCollect' data-res_id="{{bean.forscreen_id}}" data-openid="{{openid}}" data-res_key="{{index}}">
+              <image src='/images/icon2/FF0000_heart.png'></image>
+              <label>0</label>
+            </button>
+          </view>
+          <view wx:else>
+            <button bindtap='onCollect' data-res_id="{{bean.forscreen_id}}" data-openid="{{openid}}" data-res_key="{{index}}">
+              <image src='/images/icon2/666666_heart.png'></image>
+              <label>0</label>
+            </button>
+          </view>
+          <!--<view>
+                <button >
+                  <image src='/images/icon2/666666_comment.png'></image>
+                  <label >100</label>
+                </button>
+              </view>-->
+          <view>
+            <button open-type='share' data-res_id="{{bean.forscreen_id}}" data-res_key="{{index}}" data-pubdetail="{{bean.pubdetail}}" data-openid="{{openid}}" data-res_type="{{bean.res_type}}">
+              <image src='/images/icon2/666666_share.png'></image>
+              <label>0</label>
+            </button>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+  <view class='full_width page_bottom'>
+    <view class='option'>
+      <button class='theme-button'>电视播放</button>
+    </view>
+  </view>
+</view>

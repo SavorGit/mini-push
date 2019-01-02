@@ -6,12 +6,16 @@
     "pages/forscreen/video/launch_video",
     "pages/forscreen/forimages/index",
     "pages/forscreen/forvideo/index",
+    "pages/forscreen/history/list",
     "pages/activity/turntable/index",
     "pages/activity/turntable/game",
     "pages/activity/turntable/joingame",
     "pages/activity/turntable/join_success",
     "pages/activity/turntable/scangame",
     "pages/find/index",
+    "pages/find/waterfall",
+    "pages/find/video",
+    "pages/find/picture",
     "pages/interact/index",
     "pages/message/index",
     "pages/mine/index_20181010",
@@ -19,7 +23,7 @@
     "pages/mine/favorite",
     "pages/demand/index",
     "pages/thematic/birthday/list",
-    "pages/forscreen/history/list",
+    "pages/thematic/birthday/video",
     "pages/recommend/hotel",
     "pages/share/pic",
     "pages/share/video",
@@ -27,8 +31,7 @@
     "pages/game/climbtree/climbtree",
     "pages/test/test",
     "pages/test/zt",
-    "pages/test/wifi",
-    "pages/find/waterfall"
+    "pages/test/wifi"
   ],
   "permission": {
     "scope.userLocation": {

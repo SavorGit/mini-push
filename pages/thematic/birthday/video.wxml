@@ -1,0 +1,27 @@
+<!--pages/thematic/birthday/video.wxml-->
+<import src="/pages/template/commons" />
+<template is="navigationBarForTwoLevel" data='{{statusBarHeight: statusBarHeight,titleText:"热点投屏"}}' />
+
+<!-- 生日歌视频落地页 -->
+<view class="container" style='height: calc(100vh - 46px - {{statusBarHeight}}px);'>
+  <view class='full_width page_top'></view>
+  <view class='full_width page_main'>
+    <view class='article theme2'>
+      <view class='con_top'></view>
+      <view class='con_main'>
+        <image mode='aspectFill' src='http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg'></image>
+        <view class='cover'>
+          <image src="/images/icon2/FFFFFF_play.png"></image>
+        </view>
+      </view>
+      <view class='con_bottom'>
+        <label>视频名称</label>
+      </view>
+    </view>
+  </view>
+  <view class='full_width page_bottom'>
+    <view class='option'>
+      <button class='theme-button'>电视播放</button>
+    </view>
+  </view>
+</view>

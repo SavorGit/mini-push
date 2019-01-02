@@ -21,3 +21,7 @@
   color: #fff;
   background-color: #1cbeb6;
 }
+
+.theme-font {
+  color: #1cbeb6;
+}
