@@ -3,8 +3,8 @@
 <import src="../template/commons" />
 <template is="navigationBarForTopLevel" data='{{statusBarHeight: statusBarHeight,titleText:"热点投屏"}}' />
 
-<!-- 未开放发现页面 -->
 
+<!-- 未开放发现页面 -->
 <view wx:if="{{is_open==0}}" class="container" style='height: calc(100vh - 46px - {{statusBarHeight}}px);'>
   <view class='page_main_v'>
     <view class='page_main_h'>
@@ -34,8 +34,8 @@
   -->
 </view>
 
-<!-- 开放发现页面 -->
 
+<!-- 开放发现页面 -->
 <view wx:if="{{is_open>0}}" class="container" style='height: calc(100vh - 46px - {{statusBarHeight}}px);'>
   <scroll-view class='page_main' scroll-y="true" scroll-with-animation="true" bindscrolltolower="loadMore" data-openid='{{openid}}'>
     <!--循环开始-->
