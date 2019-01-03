@@ -107,7 +107,7 @@ Page({
           box_mac = rest.data.result.box_mac;
           //获取节目单列表
           wx.request({//获取机顶盒节目单列表
-            url: 'https://mobile.littlehotspot.com/Smallapp21/BoxProgram/getBoxProgramList',
+            url: 'https://mobile.littlehotspot.com/Smallapp3/Demand/getBoxProgramList',
             header: {
               'Content-Type': 'application/json'
             },
@@ -125,9 +125,9 @@ Page({
             }
           })
         } else {
-          //获取点播列表
+          //获取小程序主节目单列表
           wx.request({
-            url: 'https://mobile.littlehotspot.com/Smallapp21/Demand/getProgramList',
+            url: 'https://mobile.littlehotspot.com/Smallapp3/Demand/getDemanList',
             data: {
               page: page,
               openid: openid,
@@ -289,7 +289,7 @@ Page({
     if(box_mac=='' || box_mac ==undefined){
       wx.request({
         //url: 'https://mobile.littlehotspot.com/smallapp/Demand/getList',
-        url: 'https://mobile.littlehotspot.com/Smallapp21/Demand/getProgramList',
+        url: 'https://mobile.littlehotspot.com/Smallapp3/Demand/getDemanList',
         header: {
           'Content-Type': 'application/json'
         },
@@ -315,7 +315,7 @@ Page({
     }else {
       wx.request({
         //url: 'https://mobile.littlehotspot.com/Smallapp/BoxProgram/getBoxProgramList',
-        url: 'https://mobile.littlehotspot.com/Smallapp21/BoxProgram/getBoxProgramList',
+        url: 'https://mobile.littlehotspot.com/Smallapp3/Demand/getBoxProgramList',
         header: {
           'Content-Type': 'application/json'
         },
@@ -601,6 +601,37 @@ Page({
     var video_img = res.target.dataset.video_img;
     
     if (res.from === 'button') {
+      // 转发成功
+      wx.request({
+        url: 'https://mobile.littlehotspot.com/Smallapp/share/recLogs',
+        header: {
+          'content-type': 'application/json'
+        },
+        data: {
+          'openid': openid,
+          'res_id': res_id,
+          'type': res_type,
+          'status': 1,
+        },
+        success: function (e) {
+          for (var i = 0; i < program_list.length; i++) {
+            if (i == res_key) {
+              program_list[i].share_num++;
+            }
+          }
+          that.setData({
+            program_list: program_list
+          })
+
+        },
+        fail: function ({ errMsg }) {
+          wx.showToast({
+            title: '网络异常，请稍后重试',
+            icon: 'none',
+            duration: 2000
+          })
+        }
+      })
       // 来自页面内转发按钮
       return {
         title: video_name,
@@ -608,38 +639,7 @@ Page({
         imageUrl: video_img,
         success: function (res) {
           
-          // 转发成功
-          wx.request({
-            url: 'https://mobile.littlehotspot.com/Smallapp/share/recLogs',
-            header: {
-              'content-type': 'application/json'
-            },
-            data: {
-              'openid': openid,
-              'res_id': res_id,
-              'type': res_type,
-              'status': 1,
-            },
-            success: function (e) {
-              console.log('fdafdas');
-              for (var i = 0; i < program_list.length; i++) {
-                if (i == res_key) {
-                  program_list[i].share_num++;
-                }
-              }
-              that.setData({
-                program_list: program_list
-              })
-
-            },
-            fial: function ({ errMsg }) {
-              wx.showToast({
-                title: '网络异常，请稍后重试',
-                icon: 'none',
-                duration: 2000
-              })
-            }
-          })
+          
         },
       }
     }

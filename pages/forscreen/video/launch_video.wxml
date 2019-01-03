@@ -20,24 +20,24 @@
         <view class='full_height operation'>
           <view>
             <image src='/images/icon2/666666_play1.png'></image>
-            <label class='font_333333_26'>100</label>
+            <label class='font_333333_26'>{{play_num}}</label>
           </view>
-          <view wx:if="{{bean.is_collect==1}}">
-            <image src='/images/icon2/FF0000_heart.png' bindtap='cancCollect' data-res_id="{{bean.id}}" data-type='{{bean.type}}' data-res_key="{{index}}"></image>
-            <label class='font_333333_26'>{{bean.collect_num}}</label>
+          <view wx:if="{{is_collect==1}}">
+            <image src='/images/icon2/FF0000_heart.png' bindtap='cancCollect' data-res_id="{{res_id}}" data-type='{{res_type}}' data-openid='{{openid}}'></image>
+            <label class='font_333333_26'>{{collect_num}}</label>
           </view>
           <view wx:else>
-            <image src='/images/icon2/666666_heart.png' bindtap='onCollect' data-res_id="{{bean.id}}" data-type='{{bean.type}}' data-res_key="{{index}}"></image>
-            <label class='font_333333_26'>{{bean.collect_num}}</label>
+            <image src='/images/icon2/666666_heart.png' bindtap='onCollect' data-res_id="{{res_id}}" data-type='{{res_type}}' data-openid='{{openid}}' ></image>
+            <label class='font_333333_26'>{{collect_num}}</label>
           </view>
           <!--<view>
               <image src='/images/icon2/666666_comment.png'></image>
               <label class='font_333333_26'>100</label>
             </view>-->
           <view>
-            <button open-type='share' data-openid="{{openid}}" data-res_id="{{bean.id}}" data-type='{{bean.type}}' data-res_key="{{index}}" data-video_url="{{bean.tx_url}}" data-video_name="{{bean.title}}" data-video_img='{{bean.img_url}}'>
+            <button open-type='share' data-openid="{{openid}}" data-res_id="{{res_id}}" data-type='{{res_type}}' data-video_url="{{video_url}}" data-video_name="{{video_name}}" data-video_img='{{video_img_url}}' data-share_num='{{share_num}}' >
               <image src='/images/icon2/666666_share.png'></image>
-              <label class='font_333333_26'>{{bean.share_num}}</label>
+              <label class='font_333333_26'>{{share_num}}</label>
             </button>
           </view>
         </view>
@@ -45,6 +45,6 @@
     </view>
   </view>
   <view class='full_width page_bottom'>
-    <button class='full_width theme-button'>电视播放</button>
+    <button bindtap='boxShow' data-name="{{video_name}}" data-filename='{{filename}}' data-vediourl="{{video_url}}" data-boxmac="{{box_mac}}" data-openid="{{openid}}" class='full_width theme-button'>电视播放</button>
   </view>
 </view>
