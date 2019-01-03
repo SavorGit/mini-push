@@ -57,9 +57,14 @@
           </view>
         </view>
       </view>
-
     </view>
   </scroll-view>
+  <view class='full_width flex-for-bottom'>
+    <view class='flex-tip theme6'>
+      <label>以上餐厅均可进行电视互动，体验投屏功能~</label>
+      <label class='btn-colse'>⊗</label>
+    </view>
+  </view>
   <view class="body-view">
     <loading hidden="{{hiddens}}" bindchange="loadingChange">加载中...</loading>
   </view>

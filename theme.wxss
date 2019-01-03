@@ -20,6 +20,10 @@
   background-color: #106763;
 }
 
+.theme6 {
+  background-color: #1cbeb6;
+}
+
 .theme-navigation {
   color: #fff;
   background-color: #05101a;
