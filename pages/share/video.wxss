@@ -10,7 +10,7 @@
 }
 
 .content_bottom_border {
-  border-bottom: 1rpx solid #d9d3cd;
+  border-bottom: 1rpx solid #333;
 }
 
 /* =================== 内容头部开始 =================== */
@@ -34,7 +34,7 @@
   width: 70rpx;
   height: 70rpx;
   border-radius: 50%;
-  background-color: #bebebe;
+  background-color: #333;
   vertical-align: middle;
 }
 
@@ -49,13 +49,15 @@
   justify-content: flex-end;
 }
 
-.con_top > .operation > .launch_tv, .con_top > .operation > .launch_tv::before {
+.con_top > .operation > .launch_tv {
   margin-right: 10rpx;
   width: 150rpx;
   height: 55rpx;
-  border: 1rpx solid #932c3f;
-  border-radius: 12rpx;
-  background-color: unset;
+  line-height: 55rpx;
+  border-radius: 27rpx;
+  font-size: 20rpx;
+  border: unset;
+  padding: unset;
 }
 
 /* =================== 内容头部结束 =================== */
