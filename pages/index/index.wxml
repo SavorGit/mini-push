@@ -55,6 +55,7 @@
   -->
   <template is="wxAuthLogin" data='{{show: showModal}}' />
 </view>
+<template is="remoteControlWindow" data='{{popRemoteControlWindow: popRemoteControlWindow}}' />
 
 <!-- 固定悬浮按钮组 -->
 <view wx:if="{{box_mac !=''}}">

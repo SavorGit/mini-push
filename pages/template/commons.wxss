@@ -1,6 +1,6 @@
 /* pages/template/commons.wxss */
 
-/* 微信授权登录 */
+/* ================================= 微信授权登录 ================================= */
 
 .wxAuthLogin-container {
   background-color: #fff;
@@ -68,7 +68,7 @@
   border-radius: 40rpx;
 }
 
-/* 固定悬浮按钮组 */
+/* ================================= 固定悬浮按钮组 ================================= */
 
 .fixedSuspensionButtonGroup {
   position: fixed;
@@ -79,16 +79,18 @@
   z-index: 99;
 }
 
-.fixedSuspensionButtonGroup > .scan_tdc > button, .scan_tdc > button::after,
-.scan_tdc > button::before {
+.fixedSuspensionButtonGroup > .scan_tdc > button {
   margin: 0;
   padding: 0;
-  border: 0;
+  border: 1rpx solid #1cbeb6;
+  box-shadow: 0 0 15px #1cbeb6;
   width: 100rpx;
   height: 100rpx;
+  line-height: 100rpx;
   border-radius: 49%;
   background-color: unset;
-  line-height: 0;
+  color: #1cbeb6;
+  font-size: 24rpx;
 }
 
 .fixedSuspensionButtonGroup > .scan_tdc > button > image {
@@ -99,7 +101,109 @@
   border-radius: 49%;
 }
 
-/* 自定义顶级页面导航栏 */
+/* ================================= 遥控器窗口 ================================= */
+
+.remoteControlWindow-container {
+  background-color: #1cbeb6;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  border-radius: 20rpx;
+}
+
+.remoteControlWindow-container .remoteControlWindow-control {
+  padding: 20rpx;
+  text-align: right;
+}
+
+.remoteControlWindow-container .remoteControlWindow-control image {
+  width: 32rpx;
+  height: 32rpx;
+}
+
+.remoteControlWindow-container .remoteControlWindow-top {
+  padding: 10rpx 50rpx;
+}
+
+.remoteControlWindow-container .remoteControlWindow-top .opt {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.remoteControlWindow-container .remoteControlWindow-top .opt button {
+  width: 120rpx;
+  height: 120rpx;
+  border: unset;
+  padding: unset;
+  background: unset;
+  border-radius: 60rpx;
+}
+
+.remoteControlWindow-container .remoteControlWindow-top .opt button image {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+}
+
+.remoteControlWindow-container .remoteControlWindow-middle {
+  height: 530rpx;
+  padding-top: 30rpx;
+}
+
+.remoteControlWindow-container .remoteControlWindow-middle button {
+  width: 400rpx;
+  height: 400rpx;
+  border: unset;
+  padding: unset;
+  background: unset;
+  border-radius: 200rpx;
+}
+
+.remoteControlWindow-container .remoteControlWindow-middle button image {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.remoteControlWindow-container .remoteControlWindow-middle .btn-tip {
+  margin-top: -30rpx;
+  height: 100rpx;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: 2;
+}
+
+.remoteControlWindow-container .remoteControlWindow-middle .btn-tip image {
+  width: 64rpx;
+  height: 64rpx;
+  z-index: 2;
+}
+
+.remoteControlWindow-container .remoteControlWindow-middle .btn-tip {
+  font-size: 32rpx;
+  color: #fff;
+}
+
+.remoteControlWindow-container .remoteControlWindow-bottom {
+  display: flex;
+  flex-direction: row;
+  align-content: center;
+}
+
+.remoteControlWindow-container .remoteControlWindow-bottom button {
+  width: 280rpx;
+  height: 80rpx;
+  line-height: 80rpx;
+  font-size: 28rpx;
+  border-radius: 15rpx;
+}
+
+/* ================================= 自定义顶级页面导航栏 ================================= */
 
 .default-navigation-bar {
   /* background-color: #932c3f; */
@@ -138,7 +242,7 @@
   color: #fff;
 }
 
-/* 自定义二级页面导航栏 */
+/* ================================= 自定义二级页面导航栏 ================================= */
 
 .default-navigation-bar > .navigation-bar > .btn > .go-back,
 .default-navigation-bar > .navigation-bar > .btn > .to-home {

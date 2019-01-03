@@ -7,7 +7,7 @@
       <view class='wxAuthLogin-top'>
         <view class='opt'>
           <button class='close' bindtap='closeAuth'>
-            <image src='/images/icon/grey_close.png'></image>
+            <image src='/images/icon2/666666_close.png'></image>
           </button>
         </view>
         <view class='title'>
@@ -20,7 +20,6 @@
           <navigator url="/pages/forscreen/relief">免责声明</navigator>
         </label>
       </view>
-
       <view class='wxAuthLogin-bottom'>
         <button class='savor-btn' open-type="getUserInfo" bindgetuserinfo="onGetUserInfo">微信授权登录</button>
       </view>
@@ -61,11 +60,50 @@
 <template name="fixedSuspensionButtonGroup">
   <view class='fixedSuspensionButtonGroup'>
     <view class='scan_tdc'>
-      <button bindtap='callQrCode'>
-        <image src='/images/icon/red_scan_tdc.png'></image>
-      </button>
+      <button bindtap='callQrCode'>遥控器</button>
     </view>
   </view>
+</template>
+
+<!-- 遥控器窗口 -->
+<template name="remoteControlWindow">
+  <modal show="{{popRemoteControlWindow}}" height='900rpx' width="630rpx" background-color='unset' border-radius="0rpx" title-text="" confirm-text="" cancel-text="">
+    <view class='remoteControlWindow-container'>
+      <view class='remoteControlWindow-control'>
+        <image src='/images/icon2/666666_close.png'></image>
+      </view>
+      <view class='remoteControlWindow-top'>
+        <view class='opt'>
+          <button>
+            <image src='/images/icon2/last-one.png'></image>
+          </button>
+          <button>
+            <image src='/images/icon2/next-one.png'></image>
+          </button>
+          <button>
+            <image src='/images/icon2/volume-down.png'></image>
+          </button>
+          <button>
+            <image src='/images/icon2/volume-up.png'></image>
+          </button>
+        </view>
+      </view>
+      <view class='remoteControlWindow-middle'>
+        <button>
+          <image src='/images/icon2/big-button.png'></image>
+          <image src='/images/imgs/default_qr_code.png' style='width: calc(100% - 30rpx); height: calc(100% - 30rpx); border-radius: 50%; top: 15rpx; left: 15rpx;'></image>
+        </button>
+        <view class='btn-tip'>
+          <image src='/images/icon2/click-hand.png'></image>
+          <label>点TA，让TA上电视</label>
+        </view>
+      </view>
+      <view class='remoteControlWindow-bottom'>
+        <button class='theme-button3'>退出投屏</button>
+        <button class='theme-button4'>前往极简版</button>
+      </view>
+    </view>
+  </modal>
 </template>
 
 <!-- 自定义顶级页面导航栏 -->

@@ -8,6 +8,18 @@
   background-color: #000;
 }
 
+.theme3 {
+  background-color: #0e1c29;
+}
+
+.theme4 {
+  background-color: #25635f;
+}
+
+.theme5 {
+  background-color: #106763;
+}
+
 .theme-navigation {
   color: #fff;
   background-color: #05101a;
@@ -20,6 +32,21 @@
 .theme-button {
   color: #fff;
   background-color: #1cbeb6;
+}
+
+.theme-button2 {
+  color: #fff;
+  background-color: #25635f;
+}
+
+.theme-button3 {
+  color: #fff;
+  background-color: #0e1c29;
+}
+
+.theme-button4 {
+  color: #fff;
+  background-color: #05101a;
 }
 
 .theme-font {
