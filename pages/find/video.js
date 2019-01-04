@@ -8,6 +8,7 @@ Page({
    */
   data: {
     statusBarHeight: getApp().globalData.statusBarHeight,
+    is_replay_disabel:false
   },
 
   /**
@@ -168,6 +169,7 @@ Page({
   },// 分享结束
   //电视播放
   boxShow(e) {
+    var that = this;
     var box_mac = e.target.dataset.boxmac;
     var find_id = e.target.dataset.forscreen_id
     if (box_mac == '') {
@@ -225,7 +227,27 @@ Page({
               content: '当前电视正在进行投屏,继续投屏有可能打断当前投屏中的内容.',
               success: function (res) {
                 if (res.confirm) {
+                  var djs = 10;
+                  that.setData({
+                    is_replay_disabel: true
+                  })
 
+                  that.setData({
+                    djs: djs
+                  })
+                  var timer8_0 = setInterval(function () {
+                    djs -= 1;
+                    that.setData({
+                      djs: djs
+                    });
+                    if (djs == 0) {
+                      that.setData({
+                        is_replay_disabel: false,
+                      })
+                      clearInterval(timer8_0);
+                    }
+
+                  }, 1000);
                   if (res_type == 1) {
                     for (var i = 0; i < res_len; i++) {
                       var order = i + 1;
@@ -363,6 +385,27 @@ Page({
               }
             })
           } else {
+            var djs = 10;
+            that.setData({
+              is_replay_disabel: true
+            })
+
+            that.setData({
+              djs: djs
+            })
+            var timer8_0 = setInterval(function () {
+              djs -= 1;
+              that.setData({
+                djs: djs
+              });
+              if (djs == 0) {
+                that.setData({
+                  is_replay_disabel: false,
+                })
+                clearInterval(timer8_0);
+              }
+
+            }, 1000);
             if (res_type == 1) {
               for (var i = 0; i < res_len; i++) {
                 var order = i + 1;

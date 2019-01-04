@@ -14,8 +14,8 @@
         </view>
       </view>
       <view class='con_main'>
-        <view wx:if="{{videoinfo.forscreen_char!=''}}" class='speak_with_interest'>
-          <label>{{picinfo.forscreen_char}}</label>
+        <view wx:if="{{videoinfo.public_text!=''}}" class='speak_with_interest'>
+          <label>{{picinfo.public_text}}</label>
         </view>
         <view class='media'>
           <video src="{{videoinfo.pubdetail[0].res_url}}"></video>
@@ -68,9 +68,9 @@
   </view>
   <view class='full_width page_bottom'>
     <view class='option'>
-      <button bindtap='boxShow' data-forscreen_id='{{videoinfo.forscreen_id}}' data-pubdetail='{{videoinfo.pubdetail}}' data-forscreen_char='{{videoinfo.forscreen_char}}' data-res_type="{{videoinfo.res_type}}" data-res_nums="{{videoinfo.res_nums}}" data-boxmac="{{box_mac}}"
+      <button  wx:if="{{is_replay_disabel==false}}" bindtap='boxShow' data-forscreen_id='{{videoinfo.forscreen_id}}' data-pubdetail='{{videoinfo.pubdetail}}' data-forscreen_char='{{videoinfo.forscreen_char}}' data-res_type="{{videoinfo.res_type}}" data-res_nums="{{videoinfo.res_nums}}" data-boxmac="{{box_mac}}"
         data-openid="{{openid}}" class='theme-button'>电视播放</button>
-      <button class='theme-button2'>15 S</button>
+      <button wx:else class='theme-button2'>{{djs}} S</button>
     </view>
   </view>
 </view>

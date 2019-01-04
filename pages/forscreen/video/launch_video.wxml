@@ -45,7 +45,7 @@
     </view>
   </view>
   <view class='full_width page_bottom'>
-    <button bindtap='boxShow' data-name="{{video_name}}" data-filename='{{filename}}' data-vediourl="{{video_url}}" data-boxmac="{{box_mac}}" data-openid="{{openid}}" class='full_width theme-button'>电视播放</button>
-    <button class='theme-button2'>15 S</button>
+    <button wx:if="{{is_replay_disabel==false}}" bindtap='boxShow' data-name="{{video_name}}" data-filename='{{filename}}' data-vediourl="{{video_url}}" data-boxmac="{{box_mac}}" data-openid="{{openid}}" class='full_width theme-button'>电视播放</button>
+    <button wx:else class='theme-button2'>{{djs}} S</button>
   </view>
 </view>

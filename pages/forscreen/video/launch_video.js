@@ -9,6 +9,7 @@ Page({
     statusBarHeight: getApp().globalData.statusBarHeight,
     video_url:'',
     video_name:'',
+    is_replay_disabel:false,
   },
 
   /**
@@ -179,6 +180,7 @@ Page({
   },// 分享结束
   //电视播放
   boxShow(e) {
+    var that = this;
     var box_mac = e.target.dataset.boxmac;
     if (box_mac == '') {
       wx.showModal({
@@ -225,6 +227,27 @@ Page({
               success: function (res) {
                 if (res.confirm) {
                   //console.log('用户点击确定')
+                  var djs = 10;
+                  that.setData({
+                    is_replay_disabel: true
+                  })
+
+                  that.setData({
+                    djs: djs
+                  })
+                  var timer8_0 = setInterval(function () {
+                    djs -= 1;
+                    that.setData({
+                      djs: djs
+                    });
+                    if (djs == 0) {
+                      that.setData({
+                        is_replay_disabel: false,
+                      })
+                      clearInterval(timer8_0);
+                    }
+
+                  }, 1000);
                   wx.request({
                     url: 'https://mobile.littlehotspot.com/Netty/Index/index',
                     headers: {
@@ -273,6 +296,27 @@ Page({
               }
             })
           } else {
+            var djs = 10;
+            that.setData({
+              is_replay_disabel: true
+            })
+
+            that.setData({
+              djs: djs
+            })
+            var timer8_0 = setInterval(function () {
+              djs -= 1;
+              that.setData({
+                djs: djs
+              });
+              if (djs == 0) {
+                that.setData({
+                  is_replay_disabel: false,
+                })
+                clearInterval(timer8_0);
+              }
+
+            }, 1000);
             wx.request({
               url: 'https://mobile.littlehotspot.com/Netty/Index/index',
               headers: {

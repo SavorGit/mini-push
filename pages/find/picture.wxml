@@ -14,8 +14,8 @@
         </view>
       </view>
       <view class='con_main'>
-        <view wx:if="{{picinfo.forscreen_char!=''}}" class='speak_with_interest'>
-          <label>{{picinfo.forscreen_char}}</label>
+        <view wx:if="{{picinfo.public_text!=''}}" class='speak_with_interest'>
+          <label>{{picinfo.public_text}}</label>
         </view>
         <view class='weui-grids'>
           <view class='weui-grid' wx:for="{{picinfo.pubdetail}}" wx:key="key" wx:for-item="bean" wx:for-index="index">
@@ -67,9 +67,9 @@
   </view>
   <view class='full_width page_bottom'>
     <view class='option'>
-      <button bindtap='boxShow' data-forscreen_id='{{picinfo.forscreen_id}}' data-pubdetail='{{picinfo.pubdetail}}' data-forscreen_char='{{picinfo.forscreen_char}}' data-res_type="{{picinfo.res_type}}" data-res_nums="{{picinfo.res_nums}}" data-boxmac="{{box_mac}}"
+      <button wx:if="{{is_replay_disabel==false}}" bindtap='boxShow' data-forscreen_id='{{picinfo.forscreen_id}}' data-pubdetail='{{picinfo.pubdetail}}' data-forscreen_char='{{picinfo.forscreen_char}}' data-res_type="{{picinfo.res_type}}" data-res_nums="{{picinfo.res_nums}}" data-boxmac="{{box_mac}}"
         data-openid="{{openid}}" class='theme-button'>电视播放</button>
-      <button class='theme-button2'>15 S</button>
+      <button wx:else class='theme-button2'>{{djs}}S</button>
     </view>
   </view>
 </view>
