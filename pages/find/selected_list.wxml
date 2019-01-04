@@ -138,7 +138,7 @@
     </view>
   </scroll-view>
 </view>
-
+<template wx:if="{{showControl}}" is="remoteControlWindow" data="{{qrcode_img,box_mac,openid,is_open_simple}}"  />
 <!-- 固定悬浮按钮组 -->
 <view wx:if="{{box_mac !=''}}">
   <template is="fixedSuspensionButtonGroup" />

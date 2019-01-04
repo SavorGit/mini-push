@@ -60,7 +60,7 @@
 <template name="fixedSuspensionButtonGroup">
   <view class='fixedSuspensionButtonGroup'>
     <view class='scan_tdc'>
-      <button bindtap='callQrCode'>遥控器</button>
+      <button bindtap='openControl'>遥控器</button>
     </view>
   </view>
 </template>
@@ -69,29 +69,29 @@
 <template name="remoteControlWindow">
   <modal show="{{popRemoteControlWindow}}" height='900rpx' width="630rpx" background-color='unset' border-radius="0rpx" title-text="" confirm-text="" cancel-text="">
     <view class='remoteControlWindow-container'>
-      <view class='remoteControlWindow-control'>
+      <view bindtap='closeControl' class='remoteControlWindow-control'>
         <image src='/images/icon2/666666_close.png'></image>
       </view>
       <view class='remoteControlWindow-top'>
         <view class='opt'>
-          <button>
+          <button bindtap='changeProgram' data-box_mac='{{box_mac}}' data-change_type='1'>
             <image src='/images/icon2/last-one.png'></image>
           </button>
-          <button>
+          <button bindtap='changeProgram' data-box_mac='{{box_mac}}' data-change_type='2'>
             <image src='/images/icon2/next-one.png'></image>
           </button>
-          <button>
+          <button bindtap='changeVolume' data-box_mac='{{box_mac}}' data-change_type='1' >
             <image src='/images/icon2/volume-down.png'></image>
           </button>
-          <button>
+          <button bindtap='changeVolume' data-box_mac='{{box_mac}}' data-change_type='2' >
             <image src='/images/icon2/volume-up.png'></image>
           </button>
         </view>
       </view>
       <view class='remoteControlWindow-middle'>
-        <button>
+        <button bindtap='callQrCode' data-openid='{{openid}}' data-box_mac="{{box_mac}}" data-qrcode_img='{{qrcode_img}}'>
           <image src='/images/icon2/big-button.png'></image>
-          <image src='/images/imgs/default_qr_code.png' style='width: calc(100% - 30rpx); height: calc(100% - 30rpx); border-radius: 50%; top: 15rpx; left: 15rpx;'></image>
+          <image src='{{qrcode_img}}' style='width: calc(100% - 30rpx); height: calc(100% - 30rpx); border-radius: 50%; top: 15rpx; left: 15rpx;'></image>
         </button>
         <view class='btn-tip'>
           <image src='/images/icon2/click-hand.png'></image>
@@ -99,8 +99,10 @@
         </view>
       </view>
       <view class='remoteControlWindow-bottom'>
-        <button class='theme-button3'>退出投屏</button>
+        <button bindtap="exitForscreen" data-openid='{{openid}}' data-box_mac="{{box_mac}}" class='theme-button3'>退出投屏</button>
+        <navigator wx:if="{{box_mac !='' && is_open_simple>0}}" target="miniProgram" app-id="wxe59b125a3f073901" path="pages/index/index?box_mac={{box_mac}}" version="release">
         <button class='theme-button4'>前往极简版</button>
+        </navigator>
       </view>
     </view>
   </modal>

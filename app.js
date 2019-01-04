@@ -1,6 +1,172 @@
 //app.js
 App({
+  controlExitForscreen:function (openid,box_mac) {
+    var that = this;
+    //openid = e.currentTarget.dataset.openid;
+    //box_mac = e.currentTarget.dataset.boxmac;
+    var timestamp = (new Date()).valueOf();
+    wx.request({
+      url: 'https://mobile.littlehotspot.com/Netty/Index/index',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      method: "POST",
+      data: {
+        box_mac: box_mac,
+        msg: '{ "action": 3,"openid":"' + openid + '"}',
+      },
+      success: function (res) {
+        // wx.navigateBack({
+        //   delta: 1
+        // })
+        wx.showToast({
+          title: '退出成功',
+          icon: 'none',
+          duration: 2000
+        });
+      },
+      fail: function (res) {
+        wx.showToast({
+          title: '网络异常，退出失败',
+          icon: 'none',
+          duration: 2000
+        })
+      }
+    })
+  },//退出投屏结束
+  //遥控器呼玛
+  controlCallQrcode: function (openid, box_mac,qrcode_img){
+    
+    //console.log(openid);
+    if (box_mac) {
+      var timestamp = (new Date()).valueOf();
+      var qrcode_url = 'https://mobile.littlehotspot.com/Smallapp/index/getBoxQr?box_mac=' + box_mac + '&type=3';
+      var mobile_brand = this.globalData.mobile_brand;
+      var mobile_model = this.globalData.mobile_model;
 
+      wx.request({
+        url: 'https://mobile.littlehotspot.com/smallapp21/User/isForscreenIng',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        method: "POST",
+        data: { box_mac: box_mac },
+        success: function (res) {
+          var is_forscreen = res.data.result.is_forscreen;
+          if (is_forscreen == 1) {
+            wx.showModal({
+              title: '确认要打断投屏',
+              content: '当前电视正在进行投屏,继续投屏有可能打断当前投屏中的内容.',
+              success: function (res) {
+                if (res.confirm) {
+                  wx.request({
+                    url: 'https://mobile.littlehotspot.com/Netty/Index/index',
+                    headers: {
+                      'Content-Type': 'application/json'
+                    },
+                    method: "POST",
+                    data: {
+                      box_mac: box_mac,
+                      msg: '{ "action": 9,"url":"' + qrcode_url + '"}',
+                    },
+                    success: function () {
+                      wx.showToast({
+                        title: '呼玛成功，电视即将展示',
+                        icon: 'none',
+                        duration: 2000
+                      });
+                      wx.request({
+                        url: 'https://mobile.littlehotspot.com/Smallapp/index/recordForScreenPics',
+                        header: {
+                          'content-type': 'application/json'
+                        },
+                        data: {
+                          openid: openid,
+                          box_mac: box_mac,
+                          action: 9,
+                          mobile_brand: mobile_brand,
+                          mobile_model: mobile_model,
+                          imgs: '[]'
+                        },
+
+                      })
+                    }
+                  })
+                } else {
+
+                }
+              }
+            })
+          } else {
+            wx.request({
+              url: 'https://mobile.littlehotspot.com/Netty/Index/index',
+              headers: {
+                'Content-Type': 'application/json'
+              },
+              method: "POST",
+              data: {
+                box_mac: box_mac,
+                msg: '{ "action": 9,"url":"' + qrcode_url + '"}',
+              },
+              success: function () {
+                wx.showToast({
+                  title: '呼玛成功，电视即将展示',
+                  icon: 'none',
+                  duration: 2000
+                });
+                wx.request({
+                  url: 'https://mobile.littlehotspot.com/Smallapp/index/recordForScreenPics',
+                  header: {
+                    'content-type': 'application/json'
+                  },
+                  data: {
+                    openid: openid,
+                    box_mac: box_mac,
+                    action: 9,
+                    mobile_brand: mobile_brand,
+                    mobile_model: mobile_model,
+                    imgs: '[]'
+                  },
+
+                })
+              }
+            })
+          }
+        }
+      })
+    }
+  },
+  //遥控器控制音量
+  controlChangeVolume: function (box_mac,change_type) {
+    
+    var timestamp = (new Date()).valueOf();
+    wx.request({
+      url: 'https://mobile.littlehotspot.com/Netty/Index/index',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      method: "POST",
+      data: {
+        box_mac: box_mac,
+        msg: '{"action":31,"change_type":' + change_type + '}',
+      },
+    })
+  },
+  //遥控控制节目
+  controlChangeProgram:function(box_mac,change_type){
+    var timestamp = (new Date()).valueOf();
+    wx.request({
+      url: 'https://mobile.littlehotspot.com/Netty/Index/index',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      method: "POST",
+      data: {
+        box_mac: box_mac,
+        msg: '{"action":32,"change_type":' + change_type + '}',
+      },
+    })
+  },
   onLaunch: function() {
     // 获取小程序更新机制兼容
     if (wx.canIUse('getUpdateManager')) {
