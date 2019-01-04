@@ -13,6 +13,7 @@
         <navigator url="/pages/forscreen/relief">免责声明</navigator>
       </label>
     </view>
+    <form bindsubmit="forscreen_video">
     <view class='page_main'>
 
       <view class='cover full_width'>
@@ -32,16 +33,22 @@
           </label>
         </checkbox-group>
       </view>
-      <view class='speak_with_interest'>
-        <textarea class='text_input' maxlength='30' placeholder='顺便对公众说两句...'></textarea>
+      <view wx:if="{{is_share>0}}" class='speak_with_interest'>
+        <textarea class='text_input' name="public_text" maxlength='200' placeholder='顺便对公众说两句...'></textarea>
       </view>
     </view>
-
+    <input class='display_hide' name="box_mac" value="{{box_mac}}"></input>
+    <input class='display_hide' name="openid" value="{{openid}}"></input>
+    <input class='display_hide' name="video" value="{{upload_vedio_temp}}"></input>
+    <input class='display_hide' name="is_pub_hotelinfo" value="{{is_pub_hotelinfo}}"></input>
+    <input class='display_hide' name="duration" value="{{duration}}"></input>
+    <input class='display_hide' name="is_share" value="{{is_share}}"></input>
+    <input class='display_hide' name="avatarUrl" value="{{avatarUrl}}"></input>
+    <input class='display_hide' name="nickName" value="{{nickName}}"></input>
     <view class='page_bottom'>
-      <button bindtap='forscreen_video' class="savor-btn savor-btn-size" form-type="submit" hover-class="none" data-box_mac='{{box_mac}}' data-openid='{{openid}}' data-video="{{upload_vedio_temp}}" data-is_pub_hotelinfo='{{is_pub_hotelinfo}}' data-duration="{{duration}}"
-        data-is_share='{{is_share}}' data-avatarUrl='{{avatarUrl}}' data-nickName='{{nickName}}' disabled='{{is_btn_disabel}}'>投屏</button>
+      <button  class="savor-btn savor-btn-size" form-type="submit" hover-class="none"  disabled='{{is_btn_disabel}}'>投屏</button>
     </view>
-
+    </form>
 
     <!-- 打断投屏弹窗 -->
     <bottomModal show="{{showModal}}" height='auto' width="98%" title-text="" confirm-text="" cancel-text="">
@@ -65,7 +72,7 @@
 
 
   <!-- ================================== 视频上传中 ================================== -->
-  <view class="full_width launch_video_page_b display_{{showVedio?'show':'hide'}}">
+  <!-- <view class="full_width launch_video_page_b display_{{showVedio?'show':'hide'}}">
     <view class='page_top theme2 flex_row_center font_666666_26'>
       <label>视频加载完成后，电视开始加载并自动播放</label>
       <label class='link_relief'>
@@ -85,11 +92,11 @@
       <button bindtap='forscreen_video' class="savor-btn savor-btn-size uploading" form-type="submit" hover-class="none" data-box_mac='{{box_mac}}' data-openid='{{openid}}' data-video="{{upload_vedio_temp}}" data-is_pub_hotelinfo='{{is_pub_hotelinfo}}' data-duration="{{duration}}"
         data-is_share='{{is_share}}' data-avatarUrl='{{avatarUrl}}' data-nickName='{{nickName}}' disabled='{{is_btn_disabel}}'>正在上传...</button>
     </view>
-  </view>
+  </view> -->
 
 
   <!-- ================================== 视频上传失败 ================================== -->
-  <view class="full_width launch_video_page_b display_{{showVedio?'show':'hide'}}">
+  <!-- <view class="full_width launch_video_page_b display_{{showVedio?'show':'hide'}}">
     <view class='page_top theme2 flex_row_center font_666666_26'>
       <label>视频加载完成后，电视开始加载并自动播放</label>
       <label class='link_relief'>
@@ -109,7 +116,7 @@
       <button bindtap='forscreen_video' class="savor-btn savor-btn-size" form-type="submit" hover-class="none" data-box_mac='{{box_mac}}' data-openid='{{openid}}' data-video="{{upload_vedio_temp}}" data-is_pub_hotelinfo='{{is_pub_hotelinfo}}' data-duration="{{duration}}"
         data-is_share='{{is_share}}' data-avatarUrl='{{avatarUrl}}' data-nickName='{{nickName}}' disabled='{{is_btn_disabel}}'>重试</button>
     </view>
-  </view>
+  </view> -->
 
 
   <!-- ================================== 上传视频后 ================================== -->

@@ -165,6 +165,7 @@ Page({
     openid = e.detail.value.openid;
     box_mac = e.detail.value.box_mac;
     forscreen_char = e.detail.value.forscreen_char;
+    var public_text = e.detail.value.public_text;
     var is_pub_hotelinfo = e.detail.value.is_pub_hotelinfo;   //是否公开显示餐厅信息
     var is_share = e.detail.value.is_share;
     var avatarUrl = e.detail.value.avatarUrl;
@@ -205,7 +206,7 @@ Page({
 
                     policy = rest.data.policy;
                     signature = rest.data.signature;
-                    uploadOss_multy(policy, signature, upimgs, box_mac, openid, img_lenth, forscreen_char, avatarUrl, nickName);
+                    uploadOss_multy(policy, signature, upimgs, box_mac, openid, img_lenth, forscreen_char, avatarUrl, nickName, public_text);
                   }
                 });
               }else {
@@ -223,7 +224,7 @@ Page({
 
               policy = rest.data.policy;
               signature = rest.data.signature;
-              uploadOss_multy(policy, signature, upimgs, box_mac, openid, img_lenth, forscreen_char, avatarUrl, nickName);
+              uploadOss_multy(policy, signature, upimgs, box_mac, openid, img_lenth, forscreen_char, avatarUrl, nickName, public_text);
             }
           });
 
@@ -232,7 +233,7 @@ Page({
     })
 
     
-    function uploadOssNew(policy, signature, img_url, box_mac, openid, timestamp, flag, img_len, forscreen_char, forscreen_id, res_sup_time, avatarUrl, nickName) {
+    function uploadOssNew(policy, signature, img_url, box_mac, openid, timestamp, flag, img_len, forscreen_char, forscreen_id, res_sup_time, avatarUrl, nickName, public_text) {
 
       var filename = img_url;
       var index1 = filename.lastIndexOf(".");
@@ -296,6 +297,7 @@ Page({
                   mobile_brand: mobile_brand,
                   mobile_model: mobile_model,
                   forscreen_char: forscreen_char,
+                  public_text: public_text,
                   imgs: '["forscreen/resource/' + timestamp + postf_t + '"]',
                   resource_id: timestamp,
                   res_sup_time: res_sup_time,
@@ -360,7 +362,7 @@ Page({
       })
 
     }
-    function uploadOss_multy(policy, signature, upimgs, box_mac, openid, img_len, forscreen_char, avatarUrl, nickName) {
+    function uploadOss_multy(policy, signature, upimgs, box_mac, openid, img_len, forscreen_char, avatarUrl, nickName, public_text) {
       //console.log(img_len);
       var tmp_imgs = [];
       var forscreen_id = (new Date()).valueOf();
@@ -377,7 +379,7 @@ Page({
         that.setData({
           tmp_imgs: tmp_imgs
         });
-        uploadOssNew(policy, signature, filename, box_mac, openid, timestamp, i, img_len, forscreen_char, forscreen_id, res_sup_time, avatarUrl, nickName);
+        uploadOssNew(policy, signature, filename, box_mac, openid, timestamp, i, img_len, forscreen_char, forscreen_id, res_sup_time, avatarUrl, nickName, public_text);
       }
       that.setData({
         showThird: true,

@@ -402,28 +402,36 @@ Page({
                       msg: '{ "action": 5,"url":"' + vediourl + '","filename":"' + filename + '","forscreen_id":' + timestamp + ',"resource_id":' + timestamp + '}',
                     },
                     success: function (res) {
-                      wx.showToast({
-                        title: '点播成功,电视即将开始播放',
-                        icon: 'none',
-                        duration: 2000
-                      });
-                      wx.request({
-                        url: 'https://mobile.littlehotspot.com/Smallapp/index/recordForScreenPics',
-                        header: {
-                          'content-type': 'application/json'
-                        },
-                        data: {
-                          openid: openid,
-                          box_mac: box_mac,
-                          action: 5,
-                          mobile_brand: mobile_brand,
-                          mobile_model: mobile_model,
-                          forscreen_char: forscreen_char,
-                          forscreen_id: timestamp,
-                          resource_id: timestamp,
-                          imgs: '["media/resource/' + filename + '"]'
-                        },
-                      });
+                      if(res.data.code==10000){
+                        wx.showToast({
+                          title: '点播成功,电视即将开始播放',
+                          icon: 'none',
+                          duration: 2000
+                        });
+                        wx.request({
+                          url: 'https://mobile.littlehotspot.com/Smallapp/index/recordForScreenPics',
+                          header: {
+                            'content-type': 'application/json'
+                          },
+                          data: {
+                            openid: openid,
+                            box_mac: box_mac,
+                            action: 5,
+                            mobile_brand: mobile_brand,
+                            mobile_model: mobile_model,
+                            forscreen_char: forscreen_char,
+                            forscreen_id: timestamp,
+                            resource_id: timestamp,
+                            imgs: '["media/resource/' + filename + '"]'
+                          },
+                        });
+                      }else {
+                        wx.showToast({
+                          title: '该电视暂不支持投屏',
+                          icon: 'none',
+                          duration: 2000
+                        });
+                      }
                     },
                     fail: function (res) {
                       wx.showToast({
@@ -450,28 +458,37 @@ Page({
                 msg: '{ "action": 5,"url":"' + vediourl + '","filename":"' + filename + '","forscreen_id":' + timestamp + ',"resource_id":' + timestamp + '}',
               },
               success: function (res) {
-                wx.showToast({
-                  title: '点播成功,电视即将开始播放',
-                  icon: 'none',
-                  duration: 2000
-                });
-                wx.request({
-                  url: 'https://mobile.littlehotspot.com/Smallapp/index/recordForScreenPics',
-                  header: {
-                    'content-type': 'application/json'
-                  },
-                  data: {
-                    openid: openid,
-                    box_mac: box_mac,
-                    action: 5,
-                    mobile_brand: mobile_brand,
-                    mobile_model: mobile_model,
-                    forscreen_char: forscreen_char,
-                    forscreen_id: timestamp,
-                    resource_id: timestamp,
-                    imgs: '["media/resource/' + filename + '"]'
-                  },
-                });
+                if(res.data.code==10000){
+                  wx.showToast({
+                    title: '点播成功,电视即将开始播放',
+                    icon: 'none',
+                    duration: 2000
+                  });
+                  wx.request({
+                    url: 'https://mobile.littlehotspot.com/Smallapp/index/recordForScreenPics',
+                    header: {
+                      'content-type': 'application/json'
+                    },
+                    data: {
+                      openid: openid,
+                      box_mac: box_mac,
+                      action: 5,
+                      mobile_brand: mobile_brand,
+                      mobile_model: mobile_model,
+                      forscreen_char: forscreen_char,
+                      forscreen_id: timestamp,
+                      resource_id: timestamp,
+                      imgs: '["media/resource/' + filename + '"]'
+                    },
+                  });
+                }else {
+                  wx.showToast({
+                    title: '该电视暂不支持投屏',
+                    icon: 'none',
+                    duration: 2000
+                  });
+                }
+                
               },
               fail: function (res) {
                 wx.showToast({

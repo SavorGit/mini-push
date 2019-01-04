@@ -16,13 +16,16 @@
           </view>
           <view class='con_main'>
             <view wx:if="{{bean.res_type == 1}}" class='full_width media-cover'>
-              <image class='full_width' mode='widthFix' src="{{bean.pubdetail[0].res_url}}" bindtap="previewImage" data-src="{{bean.pubdetail}}" data-pkey="0"></image>
+              <!-- <image class='full_width' mode='widthFix' src="{{bean.pubdetail[0].res_url}}" bindtap="previewImage" data-src="{{bean.pubdetail}}" data-pkey="0"></image> -->
+              <navigator url='/pages/find/picture?forscreen_id={{bean.forscreen_id}}&box_mac={{box_mac}}'>
+                <image class='full_width' mode='widthFix' src="{{bean.pubdetail[0].res_url}}" ></image>
+              </navigator>
               <view class='built-up-layer'>
                 <image src='/images/icon2/FFFFFF_pictures.png'></image>
               </view>
             </view>
-            <navigator wx:if="{{bean.res_type == 2}}" class='full_width media-cover' bindtap='findLog' data-openid='{{openid}}' data-box_mac='{{box_mac}}' data-title='' data-tx_url='{{bean.pubdetail[0].forscreen_url}}' data-id='{{bean.forscreen_id}}' data-duration="{{bean.pubdetail[0].duration}}"
-              url="/pages/forscreen/video/launch_video?video_url={{bean.pubdetail[0].res_url}}&video_name=">
+            <navigator wx:if="{{bean.res_type == 2}}" class='full_width media-cover' 
+              url="/pages/find/video?forscreen_id={{bean.forscreen_id}}&box_mac={{box_mac}}">
               <image class='full_width' mode='widthFix' src="{{bean.pubdetail[0].vide_img}}"></image>
               <view class='built-up-layer'>
                 <image src='/images/icon2/FFFFFF_play.png'></image>
@@ -75,13 +78,16 @@
           </view>
           <view class='con_main'>
             <view wx:if="{{bean.res_type == 1}}" class='full_width media-cover'>
-              <image class='full_width' mode='widthFix' src="{{bean.pubdetail[0].res_url}}" bindtap="previewImage" data-src="{{bean.pubdetail}}" data-pkey="0"></image>
+              <!-- <image class='full_width' mode='widthFix' src="{{bean.pubdetail[0].res_url}}" bindtap="previewImage" data-src="{{bean.pubdetail}}" data-pkey="0"></image> -->
+              <navigator url='/pages/find/picture?forscreen_id={{bean.forscreen_id}}&box_mac={{box_mac}}'>
+                <image class='full_width' mode='widthFix' src="{{bean.pubdetail[0].res_url}}" ></image>
+              </navigator>
               <view class='built-up-layer'>
                 <image src='/images/icon2/FFFFFF_pictures.png'></image>
               </view>
             </view>
-            <navigator wx:if="{{bean.res_type == 2}}" class='full_width media-cover' bindtap='findLog' data-openid='{{openid}}' data-box_mac='{{box_mac}}' data-title='' data-tx_url='{{bean.pubdetail[0].forscreen_url}}' data-id='{{bean.forscreen_id}}' data-duration="{{bean.pubdetail[0].duration}}"
-              url="/pages/forscreen/video/launch_video?video_url={{bean.pubdetail[0].res_url}}&video_name=">
+            <navigator wx:if="{{bean.res_type == 2}}" class='full_width media-cover' 
+              url="/pages/find/video?forscreen_id={{bean.forscreen_id}}&box_mac={{box_mac}}">
               <image class='full_width' mode='widthFix' src="{{bean.pubdetail[0].vide_img}}"></image>
               <view class='built-up-layer'>
                 <image src='/images/icon2/FFFFFF_play.png'></image>
