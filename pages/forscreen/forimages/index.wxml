@@ -58,7 +58,7 @@
           </checkbox-group>
         </view>
         <view wx:if="{{is_share>0}}" class='speak_with_interest'>
-          <textarea class='text_input' name="public_text"  maxlength='200' placeholder='顺便对公众说两句...'></textarea>
+          <textarea class='text_input' name="public_text" maxlength='200' placeholder='顺便对公众说两句...'></textarea>
         </view>
       </view>
       <view class='page_bottom'>
