@@ -21,7 +21,7 @@
           <view class='weui-grid' wx:for="{{picinfo.pubdetail}}" wx:key="key" wx:for-item="bean" wx:for-index="index">
             <image mode='aspectFill' src='{{bean.res_url}}' bindtap="previewImage" data-src="{{picinfo.pubdetail}}" data-pkey="0"></image>
           </view>
-          
+
         </view>
       </view>
       <view class='con_bottom'>
@@ -56,7 +56,7 @@
                 </button>
               </view>-->
           <view>
-            <button open-type='share' data-res_id="{{picinfo.forscreen_id}}" data-res_key="{{index}}" data-pubdetail="{{picinfo.pubdetail}}" data-openid="{{openid}}" data-res_type="2" >
+            <button open-type='share' data-res_id="{{picinfo.forscreen_id}}" data-res_key="{{index}}" data-pubdetail="{{picinfo.pubdetail}}" data-openid="{{openid}}" data-res_type="2">
               <image src='/images/icon2/666666_share.png'></image>
               <label>{{share_num}}</label>
             </button>
@@ -67,7 +67,9 @@
   </view>
   <view class='full_width page_bottom'>
     <view class='option'>
-      <button bindtap='boxShow' data-forscreen_id='{{picinfo.forscreen_id}}' data-pubdetail='{{picinfo.pubdetail}}' data-forscreen_char='{{picinfo.forscreen_char}}' data-res_type="{{picinfo.res_type}}" data-res_nums="{{picinfo.res_nums}}"   data-boxmac="{{box_mac}}" data-openid="{{openid}}" class='theme-button'>电视播放</button>
+      <button bindtap='boxShow' data-forscreen_id='{{picinfo.forscreen_id}}' data-pubdetail='{{picinfo.pubdetail}}' data-forscreen_char='{{picinfo.forscreen_char}}' data-res_type="{{picinfo.res_type}}" data-res_nums="{{picinfo.res_nums}}" data-boxmac="{{box_mac}}"
+        data-openid="{{openid}}" class='theme-button'>电视播放</button>
+      <button class='theme-button2'>15 S</button>
     </view>
   </view>
 </view>
