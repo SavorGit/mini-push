@@ -24,6 +24,10 @@
   background-color: #1cbeb6;
 }
 
+.theme7 {
+  background-color: #fff;
+}
+
 .theme-navigation {
   color: #fff;
   background-color: #05101a;
@@ -55,4 +59,16 @@
 
 .theme-font {
   color: #1cbeb6;
+}
+
+.theme-font1 {
+  color: #333;
+}
+
+.theme-font2 {
+  color: #666;
+}
+
+.theme-font3 {
+  color: #999;
 }

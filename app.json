@@ -1,5 +1,6 @@
 {
   "pages": [
+    "pages/thematic/birthday/list_constellation",
     "pages/index/index",
     "pages/forscreen/forscreen",
     "pages/forscreen/relief",
