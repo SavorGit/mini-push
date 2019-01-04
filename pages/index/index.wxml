@@ -17,37 +17,37 @@
     </view>
     <view class='operation'>
       <view bindtap="chooseImage" data-boxmac="{{box_mac}}" data-openid="{{openid}}" data-is_open_simple='{{is_open_simple}}'>
-        <image src='/images/icon/f6f3ee_pic.png'></image>
+        <image src='/images/icon2/FFFFFF_picture.png'></image>
         <label>照片上电视</label>
       </view>
       <view bindtap='chooseVedio' data-boxmac="{{box_mac}}" data-openid="{{openid}}" data-is_open_simple='{{is_open_simple}}'>
-        <image src='/images/icon/f6f3ee_video.png'></image>
+        <image src='/images/icon2/FFFFFF_video.png'></image>
         <label>视频上电视</label>
       </view>
       <!--<view bindtap='boxShow' data-boxmac="{{box_mac}}" data-openid="{{openid}}" data-vediourl="{{happy_vedio_url}}" data-happyVedioName="{{happy_vedio_name}}" data-name="{{happy_vedio_title}}">
-          <image src='/images/icon/f6f3ee_birthday.png'></image>
+          <image src='/images/icon2/FFFFFF_birthday.png'></image>
           <label >生日歌点播</label>
         </view>-->
       <view bindtap='showHappy' data-boxmac="{{box_mac}}" data-openid="{{openid}}">
-        <image src='/images/icon/f6f3ee_birthday.png'></image>
+        <image src='/images/icon2/FFFFFF_birthday.png'></image>
         <label>生日歌点播</label>
       </view>
       <view bindtap='hdgames' data-boxmac="{{box_mac}}" data-openid="{{openid}}">
-        <image src='/images/icon/f6f3ee_game.png'></image>
+        <image src='/images/icon2/FFFFFF_game.png'></image>
         <label>互动小游戏</label>
       </view>
       <view bindtap='forscreenHistory' data-boxmac="{{box_mac}}" data-openid="{{openid}}">
-        <image src='/images/icon/f6f3ee_history.png'></image>
+        <image src='/images/icon2/FFFFFF_history.png'></image>
         <label>投屏历史</label>
       </view>
       <!-- <view bindtap='testzt' data-boxmac="{{box_mac}}" data-openid="{{openid}}">
-          <image src='/images/icon/f6f3ee_history.png'></image>
+          <image src='/images/icon2/FFFFFF_history.png'></image>
           <label >测试</label>
         </view> -->
     </view>
     <navigator wx:if="{{box_mac !='' && is_open_simple>0}}" target="miniProgram" app-id="wxe59b125a3f073901" path="pages/index/index?box_mac={{box_mac}}" version="release">
       <label>网络不好？传输速度慢？试试简易版</label>
-      <image src='/images/icon/white-right-arrow.png'></image>
+      <image src='/images/icon2/FFFFFF_right-arrow.png'></image>
     </navigator>
   </view>
   <!-- 菜单 

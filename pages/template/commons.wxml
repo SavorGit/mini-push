@@ -127,7 +127,7 @@
     <view class='navigation-bar'>
       <view class='btn'>
         <navigator class='go-back' open-type='navigateBack' delta='100'>
-          <image src='/images/icon2/FFFFFF_back.png'>Back</image>
+          <image src='/images/icon2/FFFFFF_left-arrow.png'>Back</image>
         </navigator>
         <!-- <view style='margin-right: 3px;'>
           <image src='/images/icon2/666666_vertical.png' style='width:1px; height: 18px; vertical-align: middle;'></image>
@@ -150,7 +150,7 @@
     <view class='navigation-bar'>
       <view class='btn'>
         <navigator class='go-back' open-type='navigateBack' delta='100'>
-          <image src='/images/icon2/FFFFFF_back.png'>Back</image>
+          <image src='/images/icon2/FFFFFF_left-arrow.png'>Back</image>
         </navigator>
         <!-- <view style='margin-right: 3px;'>
           <image src='/images/icon2/666666_vertical.png' style='width:1px; height: 18px; vertical-align: middle;'></image>
@@ -198,7 +198,7 @@
     <view class='navigation-bar' style='background-color: unset;'>
       <view class='btn'>
         <navigator class='go-back' open-type='navigateBack' delta='100'>
-          <image src='/images/icon2/FFFFFF_back.png'>Back</image>
+          <image src='/images/icon2/FFFFFF_left-arrow.png'>Back</image>
         </navigator>
         <!-- <view style='margin-right: 3px;'>
           <image src='/images/icon2/666666_vertical.png' style='width:1px; height: 18px; vertical-align: middle;'></image>
