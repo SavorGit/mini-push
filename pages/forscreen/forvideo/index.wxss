@@ -175,7 +175,7 @@
 .launch_video_page_a > .page_bottom > .button_group {
   padding-left: 30rpx;
   padding-right: 30rpx;
-  width: 100%;
+  width: 690rpx;
   text-align: center;
 }
 
