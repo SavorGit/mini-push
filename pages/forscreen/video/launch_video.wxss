@@ -108,8 +108,8 @@
 }
 
 .page_bottom button {
-  height: 98rpx;
-  line-height: 98rpx;
+  height: 100rpx;
+  line-height: 100rpx;
   font-size: 36rpx;
   border-radius: 0rpx;
 }
