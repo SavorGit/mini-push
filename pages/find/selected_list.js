@@ -196,7 +196,7 @@ Page({
           })
           //获取发现列表
           wx.request({
-            url: 'https://mobile.littlehotspot.com/smallapp/Discovery/index',
+            url: 'https://mobile.littlehotspot.com/smallapp3/Find/index',
             data: {
               page: page,
               openid: openid,
@@ -347,7 +347,7 @@ Page({
       hiddens: false,
     })
     wx.request({
-      url: 'https://mobile.littlehotspot.com/smallapp/Discovery/index',
+      url: 'https://mobile.littlehotspot.com/smallapp3/Find/index',
       header: {
         'Content-Type': 'application/json'
       },
@@ -831,45 +831,46 @@ Page({
     }
 
     if (res.from === 'button') {
+      // 转发成功
+      wx.request({
+        url: 'https://mobile.littlehotspot.com/Smallapp/share/recLogs',
+        header: {
+          'content-type': 'application/json'
+        },
+        data: {
+          'openid': openid,
+          'res_id': res_id,
+          'type': 2,
+          'status': 1,
+        },
+        success: function (e) {
+          for (var i = 0; i < discovery_list.length; i++) {
+            if (i == res_key) {
+              discovery_list[i].share_num++;
+            }
+          }
+          that.setData({
+            discovery_list: discovery_list
+          })
+
+        },
+        fail: function ({
+          errMsg
+        }) {
+          wx.showToast({
+            title: '网络异常，请稍后重试',
+            icon: 'none',
+            duration: 2000
+          })
+        }
+      })
       // 来自页面内转发按钮
       return {
         title: '发现一个好玩的东西',
         path: share_url,
         imageUrl: img_url,
         success: function(res) {
-          // 转发成功
-          wx.request({
-            url: 'https://mobile.littlehotspot.com/Smallapp/share/recLogs',
-            header: {
-              'content-type': 'application/json'
-            },
-            data: {
-              'openid': openid,
-              'res_id': res_id,
-              'type': 2,
-              'status': 1,
-            },
-            success: function(e) {
-              for (var i = 0; i < discovery_list.length; i++) {
-                if (i == res_key) {
-                  discovery_list[i].share_num++;
-                }
-              }
-              that.setData({
-                discovery_list: discovery_list
-              })
-
-            },
-            fial: function({
-              errMsg
-            }) {
-              wx.showToast({
-                title: '网络异常，请稍后重试',
-                icon: 'none',
-                duration: 2000
-              })
-            }
-          })
+          
         },
       }
     }
@@ -954,10 +955,5 @@ Page({
 
   },
 
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function() {
-
-  }
+  
 })
