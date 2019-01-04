@@ -14,40 +14,39 @@
       </label>
     </view>
     <form bindsubmit="forscreen_video">
-    <view class='page_main'>
+      <view class='page_main'>
+        <view class='cover full_width'>
+          <video src='{{upload_vedio_temp}}'></video>
+        </view>
 
-      <view class='cover full_width'>
-        <video src='{{upload_vedio_temp}}'></video>
+        <!-- 投视频 -->
+        <view class="grant_auth">
+          <checkbox-group class="checkbox-group" bindchange="checkboxChange">
+            <label class="items" wx:for="{{item}}" wx:key="key" wx:for-index="index">
+              <view wx:if="{{index==0}}">
+                <checkbox class="display_hide" value="{{item.value}}" checked="{{item.checked}}" disabled="{{item.disabled}}">{{item.name}}</checkbox>
+              </view>
+              <view wx:else>
+                <checkbox value="{{item.value}}" checked="{{item.checked}}" disabled="{{item.disabled}}">{{item.name}}</checkbox>
+              </view>
+            </label>
+          </checkbox-group>
+        </view>
+        <view wx:if="{{is_share>0}}" class='speak_with_interest'>
+          <textarea class='text_input' name="public_text" maxlength='200' placeholder='顺便对公众说两句...'></textarea>
+        </view>
       </view>
-
-      <!-- 投视频 -->
-      <view class="grant_auth">
-        <checkbox-group class="checkbox-group" bindchange="checkboxChange">
-          <label class="items" wx:for="{{item}}" wx:key="key" wx:for-index="index">
-            <view wx:if="{{index==0}}">
-              <checkbox class="display_hide" value="{{item.value}}" checked="{{item.checked}}" disabled="{{item.disabled}}">{{item.name}}</checkbox>
-            </view>
-            <view wx:else>
-              <checkbox value="{{item.value}}" checked="{{item.checked}}" disabled="{{item.disabled}}">{{item.name}}</checkbox>
-            </view>
-          </label>
-        </checkbox-group>
+      <input class='display_hide' name="box_mac" value="{{box_mac}}"></input>
+      <input class='display_hide' name="openid" value="{{openid}}"></input>
+      <input class='display_hide' name="video" value="{{upload_vedio_temp}}"></input>
+      <input class='display_hide' name="is_pub_hotelinfo" value="{{is_pub_hotelinfo}}"></input>
+      <input class='display_hide' name="duration" value="{{duration}}"></input>
+      <input class='display_hide' name="is_share" value="{{is_share}}"></input>
+      <input class='display_hide' name="avatarUrl" value="{{avatarUrl}}"></input>
+      <input class='display_hide' name="nickName" value="{{nickName}}"></input>
+      <view class='page_bottom'>
+        <button class="savor-btn savor-btn-size" form-type="submit" hover-class="none" disabled='{{is_btn_disabel}}'>投屏</button>
       </view>
-      <view wx:if="{{is_share>0}}" class='speak_with_interest'>
-        <textarea class='text_input' name="public_text" maxlength='200' placeholder='顺便对公众说两句...'></textarea>
-      </view>
-    </view>
-    <input class='display_hide' name="box_mac" value="{{box_mac}}"></input>
-    <input class='display_hide' name="openid" value="{{openid}}"></input>
-    <input class='display_hide' name="video" value="{{upload_vedio_temp}}"></input>
-    <input class='display_hide' name="is_pub_hotelinfo" value="{{is_pub_hotelinfo}}"></input>
-    <input class='display_hide' name="duration" value="{{duration}}"></input>
-    <input class='display_hide' name="is_share" value="{{is_share}}"></input>
-    <input class='display_hide' name="avatarUrl" value="{{avatarUrl}}"></input>
-    <input class='display_hide' name="nickName" value="{{nickName}}"></input>
-    <view class='page_bottom'>
-      <button  class="savor-btn savor-btn-size" form-type="submit" hover-class="none"  disabled='{{is_btn_disabel}}'>投屏</button>
-    </view>
     </form>
 
     <!-- 打断投屏弹窗 -->

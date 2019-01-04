@@ -9,7 +9,7 @@
   height: 100%;
 }
 
-.launch_video_page_b > .page_top {
+.launch_video_page_b .page_top {
   padding-top: 10rpx;
   padding-bottom: 10rpx;
   width: 100%;
@@ -17,32 +17,32 @@
   line-height: 50rpx;
 }
 
-.launch_video_page_b > .page_top > label {
+.launch_video_page_b .page_top > label {
   margin-left: 30rpx;
 }
 
-.launch_video_page_b > .page_top > button {
+.launch_video_page_b .page_top > button {
   width: 150rpx;
   height: 60rpx;
 }
 
-.launch_video_page_b > .page_main {
+.launch_video_page_b .page_main {
   width: 100%;
   height: calc(100% - 170rpx);
   text-align: center;
 }
 
-.launch_video_page_b > .page_main > view.cover > video {
+.launch_video_page_b .page_main > view.cover > video {
   width: 100%;
   height: 484rpx;
 }
 
-.launch_video_page_b > .page_main > view.cover > view {
+.launch_video_page_b .page_main > view.cover > view {
   margin-top: 63rpx;
   margin-bottom: 100rpx;
 }
 
-.launch_video_page_b > .page_main > view.cover > view > progress {
+.launch_video_page_b .page_main > view.cover > view > progress {
   margin-top: 16rpx;
   margin-left: calc((100vw - 450rpx) / 2);
   width: 450rpx;
@@ -51,7 +51,7 @@
   overflow: hidden;
 }
 
-.launch_video_page_b > .page_main > .grant_auth {
+.launch_video_page_b .page_main > .grant_auth {
   height: 100rpx;
   margin: 10rpx 0rpx;
   display: flex;
@@ -106,15 +106,15 @@
   text-align: left;
 }
 
-.launch_video_page_b > .page_bottom {
+.launch_video_page_b .page_bottom {
   height: 100rpx;
 }
 
-.launch_video_page_b > .page_bottom > .uploading {
+.launch_video_page_b .page_bottom > .uploading {
   background-color: #106763;
 }
 
-.launch_video_page_b > .page_bottom > button {
+.launch_video_page_b .page_bottom > button {
   height: 90rpx;
   line-height: 90rpx;
   margin: 0rpx;
