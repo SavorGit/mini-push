@@ -87,7 +87,7 @@ image.pic_show_cur {
 
 .launch_pic_page_b .page_main {
   width: 100%;
-  height: calc(100% - 205rpx);
+  height: calc(100% - 200rpx);
 }
 
 .launch_pic_page_b .page_main > .pic_text {
@@ -171,8 +171,8 @@ image.pic_show_cur {
 }
 
 .launch_pic_page_b .page_bottom > button {
-  height: 95rpx;
-  line-height: 95rpx;
+  height: 100rpx;
+  line-height: 100rpx;
   margin: 0px;
   border-radius: 0rpx;
 }

@@ -28,7 +28,7 @@
 
 .launch_video_page_b .page_main {
   width: 100%;
-  height: calc(100% - 170rpx);
+  height: calc(100% - 168rpx);
   text-align: center;
 }
 
@@ -115,8 +115,8 @@
 }
 
 .launch_video_page_b .page_bottom > button {
-  height: 90rpx;
-  line-height: 90rpx;
+  height: 100rpx;
+  line-height: 100rpx;
   margin: 0rpx;
   border-radius: 0rpx;
 }
@@ -175,7 +175,7 @@
 .launch_video_page_a > .page_bottom > .button_group {
   padding-left: 30rpx;
   padding-right: 30rpx;
-  width: 100%;
+  width: 690rpx;
   text-align: center;
 }
 
