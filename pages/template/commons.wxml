@@ -60,7 +60,7 @@
 <template name="fixedSuspensionButtonGroup">
   <view class='fixedSuspensionButtonGroup'>
     <view class='scan_tdc'>
-      <button class='theme' bindtap='callQrCode'>遥控器</button>
+      <button class='theme' bindtap='openControl'>遥控器</button>
 
     </view>
   </view>
