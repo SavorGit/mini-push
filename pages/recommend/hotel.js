@@ -1,9 +1,9 @@
 // pages/recommend/hotel.js
 const app = getApp()
-var   openid;        //用户openid
-var   page = 1;      //当前节目单页数
-var   hotel_list; 
-var   box_mac;
+var openid; //用户openid
+var page = 1; //当前节目单页数
+var hotel_list;
+var box_mac;
 Page({
 
   /**
@@ -16,7 +16,7 @@ Page({
     cityIndex: 0,
 
     areaArray: [],
-    objectAreaArray:[],
+    objectAreaArray: [],
     areaIndex: 0,
 
     cuisineArray: [],
@@ -26,22 +26,24 @@ Page({
     perCapitaPayArray: [],
     objectPerCapitaPayArray: [],
     perCapitaPayIndex: 0,
-    hotel_list:[],
-    
-    hiddens: true,     //加载更多
-    box_mac :''        //机顶盒mac
+    hotel_list: [],
+
+    hiddens: true, //加载更多
+    box_mac: '', //机顶盒mac
+    close_hotel_hint: 0,
+
   },
   //城市切换 
   bindCityPickerChange: function(e) {
     var that = this;
     var city_list = that.data.objectCityArray;
-    var picCityIndex = e.detail.value      //切换之后城市key
-    var cityIndex = that.data.cityIndex;   //切换之前城市key
-    
-    if(picCityIndex != cityIndex){
+    var picCityIndex = e.detail.value //切换之后城市key
+    var cityIndex = that.data.cityIndex; //切换之前城市key
+
+    if (picCityIndex != cityIndex) {
       that.setData({
         cityIndex: picCityIndex,
-        areaIndex:0
+        areaIndex: 0
       })
       //获取当前城市的区域
       var area_id = city_list[picCityIndex].id;
@@ -53,7 +55,7 @@ Page({
         data: {
           area_id: area_id
         },
-        success: function (res) {
+        success: function(res) {
           that.setData({
             areaArray: res.data.result.area_name_list,
             objectAreaArray: res.data.result.area_list
@@ -63,30 +65,31 @@ Page({
       //获取酒楼列表
       var food_style_list = that.data.objectCuisineArray;
       var cuisineIndex = that.data.cuisineIndex;
-      
+
       var food_style_id = food_style_list[cuisineIndex].id;
-      
+
       var avg_exp_list = that.data.objectPerCapitaPayArray;
       var perCapitaPayIndex = that.data.perCapitaPayIndex;
       var avg_exp_id = avg_exp_list[perCapitaPayIndex].id;
-      
+
       getHotelList(area_id, 0, food_style_id, avg_exp_id);
+
       function getHotelList(area_id, county_id, food_style_id, avg_exp_id) {
         wx.request({
           url: 'https://mobile.littlehotspot.com/smallapp21/Hotel/recList',
           header: {
             'content-type': 'application/json'
           },
-          data:{
-            page:page,
-            area_id:area_id,
-            county_id:county_id,
+          data: {
+            page: page,
+            area_id: area_id,
+            county_id: county_id,
             food_style_id: food_style_id,
             avg_exp_id: avg_exp_id
           },
-          success:function(res){
+          success: function(res) {
             that.setData({
-              hotel_list:res.data.result
+              hotel_list: res.data.result
             })
           }
         })
@@ -94,7 +97,7 @@ Page({
     }
   },
   //切换区域
-  bindAreaPickerChange:function(e){
+  bindAreaPickerChange: function(e) {
     var that = this;
     var area_list = that.data.objectAreaArray;
     var areaIndex = e.detail.value;
@@ -103,19 +106,20 @@ Page({
     })
 
     var city_list = that.data.objectCityArray;
-    var cityIndex = that.data.cityIndex;        //城市key
-    var area_id = city_list[cityIndex].id;   //城市id
-    
-    var county_id = area_list[areaIndex].id;    //区域id
-    
+    var cityIndex = that.data.cityIndex; //城市key
+    var area_id = city_list[cityIndex].id; //城市id
+
+    var county_id = area_list[areaIndex].id; //区域id
+
     var food_style_list = that.data.objectCuisineArray;
     var cuisineIndex = that.data.cuisineIndex;
     var food_style_id = food_style_list[cuisineIndex].id; //菜系id
-    
+
     var avg_exp_list = that.data.objectPerCapitaPayArray;
     var perCapitaPayIndex = that.data.perCapitaPayIndex;
-    var avg_exp_id = avg_exp_list[perCapitaPayIndex].id;  //人均消费id
+    var avg_exp_id = avg_exp_list[perCapitaPayIndex].id; //人均消费id
     getHotelList(area_id, county_id, food_style_id, avg_exp_id);
+
     function getHotelList(area_id, county_id, food_style_id, avg_exp_id) {
       wx.request({
         url: 'https://mobile.littlehotspot.com/smallapp21/Hotel/recList',
@@ -129,7 +133,7 @@ Page({
           food_style_id: food_style_id,
           avg_exp_id: avg_exp_id
         },
-        success: function (res) {
+        success: function(res) {
           that.setData({
             hotel_list: res.data.result
           })
@@ -138,7 +142,7 @@ Page({
     }
   },
   //切换菜系
-  bindCuiPickerChange:function(e){
+  bindCuiPickerChange: function(e) {
     var that = this;
     var cui_list = that.data.objectCuisineArray;
     var cuisineIndex = e.detail.value
@@ -146,20 +150,21 @@ Page({
       cuisineIndex: cuisineIndex
     })
     var city_list = that.data.objectCityArray;
-    var cityIndex = that.data.cityIndex;        //城市key
-    var area_id = city_list[cityIndex].id;   //城市id
+    var cityIndex = that.data.cityIndex; //城市key
+    var area_id = city_list[cityIndex].id; //城市id
 
     var county_list = that.data.objectAreaArray;
     var areaIndex = that.data.areaIndex;
-    var county_id = county_list[areaIndex].id;  //区域id
+    var county_id = county_list[areaIndex].id; //区域id
 
-    var food_style_id = cui_list[cuisineIndex].id;  //菜系id
-    
+    var food_style_id = cui_list[cuisineIndex].id; //菜系id
+
     var avg_exp_list = that.data.objectPerCapitaPayArray;
     var perCapitaPayIndex = that.data.perCapitaPayIndex;
-    var avg_exp_id = avg_exp_list[perCapitaPayIndex].id;  //人均消费id
-    
+    var avg_exp_id = avg_exp_list[perCapitaPayIndex].id; //人均消费id
+
     getHotelList(area_id, county_id, food_style_id, avg_exp_id);
+
     function getHotelList(area_id, county_id, food_style_id, avg_exp_id) {
       wx.request({
         url: 'https://mobile.littlehotspot.com/smallapp21/Hotel/recList',
@@ -173,7 +178,7 @@ Page({
           food_style_id: food_style_id,
           avg_exp_id: avg_exp_id
         },
-        success: function (res) {
+        success: function(res) {
           that.setData({
             hotel_list: res.data.result
           })
@@ -184,7 +189,7 @@ Page({
 
   },
   //切换消费水平
-  bindPayPickerChange:function(e){
+  bindPayPickerChange: function(e) {
     var that = this;
     var pay_list = that.data.objectPerCapitaPayArray;
     var perCapitaPayIndex = e.detail.value
@@ -194,18 +199,19 @@ Page({
     var avg_exp_id = pay_list[perCapitaPayIndex].id //人均消费id
 
     var city_list = that.data.objectCityArray;
-    var cityIndex = that.data.cityIndex;        //城市key
-    var area_id = city_list[cityIndex].id;   //城市id
+    var cityIndex = that.data.cityIndex; //城市key
+    var area_id = city_list[cityIndex].id; //城市id
 
     var county_list = that.data.objectAreaArray;
     var areaIndex = that.data.areaIndex;
-    var county_id = county_list[areaIndex].id;  //区域id
+    var county_id = county_list[areaIndex].id; //区域id
 
     var food_style_list = that.data.objectCuisineArray;
     var cuisineIndex = that.data.cuisineIndex;
     var food_style_id = food_style_list[cuisineIndex].id;
 
     getHotelList(area_id, county_id, food_style_id, avg_exp_id);
+
     function getHotelList(area_id, county_id, food_style_id, avg_exp_id) {
       wx.request({
         url: 'https://mobile.littlehotspot.com/smallapp21/Hotel/recList',
@@ -219,7 +225,7 @@ Page({
           food_style_id: food_style_id,
           avg_exp_id: avg_exp_id
         },
-        success: function (res) {
+        success: function(res) {
           that.setData({
             hotel_list: res.data.result
           })
@@ -227,7 +233,7 @@ Page({
       })
     }
   },
-  phonecallevent: function (e) {
+  phonecallevent: function(e) {
     var tel = e.target.dataset.tel;
     wx.makePhoneCall({
       phoneNumber: tel
@@ -241,7 +247,9 @@ Page({
     var that = this;
     var user_info = wx.getStorageSync("savor_user_info");
     openid = user_info.openid;
-
+    that.setData({
+      openid:openid,
+    })
     wx.request({
       url: 'https://mobile.littlehotspot.com/smallapp21/User/isRegister',
       data: {
@@ -251,8 +259,14 @@ Page({
       header: {
         'content-type': 'application/json'
       },
-      
-    });//判断用户是否注册结束
+      success:function(res){
+        if(res.data.code==10000){
+          that.setData({
+            close_hotel_hint: res.data.result.userinfo.close_hotel_hint,
+          })
+        }
+      }
+    }); //判断用户是否注册结束
 
     wx.request({
       url: 'https://mobile.littlehotspot.com/Smallapp/index/isHaveCallBox?openid=' + openid,
@@ -260,7 +274,7 @@ Page({
         'Content-Type': 'application/json'
       },
 
-      success: function (rest) {
+      success: function(rest) {
         var is_have = rest.data.result.is_have;
         if (is_have == 1) {
           that.setData({
@@ -286,15 +300,15 @@ Page({
       header: {
         'content-type': 'application/json'
       },
-      success:function(res){
+      success: function(res) {
         that.setData({
-          cityArray:res.data.result.city_name_list,
+          cityArray: res.data.result.city_name_list,
           objectCityArray: res.data.result.city_list
         })
       }
     })
-    
-    
+
+
     //获取当前城市
     wx.getLocation({
       type: 'wgs84',
@@ -306,13 +320,13 @@ Page({
           header: {
             'content-type': 'application/json'
           },
-          data:{
+          data: {
             latitude: latitude,
             longitude: longitude
           },
-          success:function(res){
+          success: function(res) {
             that.setData({
-              cityIndex:res.data.result.cityindex
+              cityIndex: res.data.result.cityindex
             })
             var area_id = res.data.result.area_id;
             wx.request({
@@ -320,14 +334,14 @@ Page({
               header: {
                 'content-type': 'application/json'
               },
-              data:{
-                area_id : area_id
+              data: {
+                area_id: area_id
               },
-              success: function(res){
-                  that.setData({
-                    areaArray: res.data.result.area_name_list,
-                    objectAreaArray: res.data.result.area_list
-                  })
+              success: function(res) {
+                that.setData({
+                  areaArray: res.data.result.area_name_list,
+                  objectAreaArray: res.data.result.area_list
+                })
               }
             });
             //获取酒楼列表
@@ -343,7 +357,7 @@ Page({
                 food_style_id: 0,
                 avg_exp_id: 0
               },
-              success: function (res) {
+              success: function(res) {
                 //console.log(res);
                 that.setData({
                   hotel_list: res.data.result
@@ -353,7 +367,7 @@ Page({
           }
         })
       },
-      fail:function(e){
+      fail: function(e) {
         that.setData({
           cityIndex: 0
         })
@@ -366,7 +380,7 @@ Page({
           data: {
             area_id: area_id
           },
-          success: function (res) {
+          success: function(res) {
             that.setData({
               areaArray: res.data.result.area_name_list,
               objectAreaArray: res.data.result.area_list
@@ -386,7 +400,7 @@ Page({
             food_style_id: 0,
             avg_exp_id: 0
           },
-          success: function (res) {
+          success: function(res) {
             //console.log(res);
             that.setData({
               hotel_list: res.data.result
@@ -401,7 +415,7 @@ Page({
       header: {
         'content-type': 'application/json'
       },
-      success: function (res) {
+      success: function(res) {
         that.setData({
           cuisineArray: res.data.result.food_name_list,
           objectCuisineArray: res.data.result.food_list
@@ -414,11 +428,11 @@ Page({
       header: {
         'content-type': 'application/json'
       },
-      success: function (res) {
-        
+      success: function(res) {
+
         that.setData({
-           perCapitaPayArray: res.data.result.agv_name,
-           objectPerCapitaPayArray: res.data.result.agv_lisg
+          perCapitaPayArray: res.data.result.agv_name,
+          objectPerCapitaPayArray: res.data.result.agv_lisg
         })
       }
     })
@@ -433,10 +447,10 @@ Page({
       header: {
         'content-type': 'application/json'
       },
-      success: function (res) {
+      success: function(res) {
         if (res.data.code == 10000) {
           hotel_list = res.data.result
-          
+
           that.setData({
             hotel_list: res.data.result,
           })
@@ -445,31 +459,32 @@ Page({
     });
   },
   //上拉刷新
-  loadMore: function (e) {
+  loadMore: function(e) {
     var that = this;
-    
+
     page = page + 1;
     that.setData({
       hiddens: false,
     })
     var city_list = that.data.objectCityArray;
-    var cityIndex = that.data.cityIndex;        //城市key
-    var area_id = city_list[cityIndex].id;   //城市id
+    var cityIndex = that.data.cityIndex; //城市key
+    var area_id = city_list[cityIndex].id; //城市id
 
     var county_list = that.data.objectAreaArray;
     var areaIndex = that.data.areaIndex;
-    var county_id = county_list[areaIndex].id;  //区域id
+    var county_id = county_list[areaIndex].id; //区域id
 
     var food_style_list = that.data.objectCuisineArray;
     var cuisineIndex = that.data.cuisineIndex;
-    var food_style_id = food_style_list[cuisineIndex].id;  //菜系id
+    var food_style_id = food_style_list[cuisineIndex].id; //菜系id
 
     var avg_exp_list = that.data.objectPerCapitaPayArray;
     var perCapitaPayIndex = that.data.perCapitaPayIndex;
-    var avg_exp_id = avg_exp_list[perCapitaPayIndex].id;  //人均消费id
+    var avg_exp_id = avg_exp_list[perCapitaPayIndex].id; //人均消费id
 
 
     getHotelList(area_id, county_id, food_style_id, avg_exp_id);
+
     function getHotelList(area_id, county_id, food_style_id, avg_exp_id) {
       wx.request({
         url: 'https://mobile.littlehotspot.com/smallapp21/Hotel/recList',
@@ -483,24 +498,24 @@ Page({
           food_style_id: food_style_id,
           avg_exp_id: avg_exp_id
         },
-        success: function (res) {
+        success: function(res) {
           if (res.data.code == 10000) {
             that.setData({
               hotel_list: res.data.result,
               hiddens: true,
             })
-          }else {
+          } else {
             that.setData({
               hiddens: true,
             })
           }
-          
+
         }
       })
     }
   },
   //呼大码
-  callQrCode: function (e) {
+  callQrCode: function(e) {
     var user_info = wx.getStorageSync("savor_user_info");
     openid = user_info.openid;
     if (box_mac) {
@@ -515,14 +530,16 @@ Page({
           'Content-Type': 'application/json'
         },
         method: "POST",
-        data: { box_mac: box_mac },
-        success: function (res) {
+        data: {
+          box_mac: box_mac
+        },
+        success: function(res) {
           var is_forscreen = res.data.result.is_forscreen;
           if (is_forscreen == 1) {
             wx.showModal({
               title: '确认要打断投屏',
               content: '当前电视正在进行投屏,继续投屏有可能打断当前投屏中的内容.',
-              success: function (res) {
+              success: function(res) {
                 if (res.confirm) {
                   wx.request({
                     url: 'https://mobile.littlehotspot.com/Netty/Index/index',
@@ -534,7 +551,7 @@ Page({
                       box_mac: box_mac,
                       msg: '{ "action": 9,"url":"' + qrcode_url + '"}',
                     },
-                    success: function () {
+                    success: function() {
                       wx.showToast({
                         title: '呼玛成功，电视即将展示',
                         icon: 'none',
@@ -560,7 +577,7 @@ Page({
                 }
               }
             })
-          }else {
+          } else {
             wx.request({
               url: 'https://mobile.littlehotspot.com/Netty/Index/index',
               headers: {
@@ -571,7 +588,7 @@ Page({
                 box_mac: box_mac,
                 msg: '{ "action": 9,"url":"' + qrcode_url + '"}',
               },
-              success: function () {
+              success: function() {
                 wx.showToast({
                   title: '呼玛成功，电视即将展示',
                   icon: 'none',
@@ -596,9 +613,39 @@ Page({
             })
           }
         }
-      })    
+      })
     }
-  },//呼大码结束
+  }, //呼大码结束
+  previewImage: function(e) {
+    var current = e.currentTarget.dataset.src;
+    var urls = [];
+    for (var i = 0; i < 1; i++) {
+      urls[i] = current;
+    }
+    wx.previewImage({
+      current: urls[0], // 当前显示图片的http链接
+      urls: urls // 需要预览的图片http链接列表
+    })
+  },
+  closeHotelHind:function(e){
+    var that = this;
+    var openid = e.currentTarget.dataset.openid;
+    wx.request({
+      url: 'https://mobile.littlehotspot.com/Smallapp3/user/closeHotelHind',
+      header: {
+        'content-type': 'application/json'
+      },
+      data:{
+        openid:openid
+      },
+      success:function(res){
+        that.setData({
+          close_hotel_hint:1
+        })
+      }
+    })
+    
+  },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
