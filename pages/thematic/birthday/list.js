@@ -11,9 +11,44 @@ Page({
     statusBarHeight: getApp().globalData.statusBarHeight,
     openid:'',
     box_mac:'',
+    choose_constellid:'',
     happylist:'',
+    constellationlist:'',
+    constellation_detail:'',
+    videolist:'',
   },
 
+  getContellDetail:function(constellid){
+    var that = this
+    wx.request({
+      url: 'https://mobile.littlehotspot.com/Smallapp3/constellation/getVideoList',
+      header: {
+        'content-type': 'application/json'
+      },
+      data: {
+        constellation_id: constellid,
+      },
+      success: function (res) {
+        that.setData({
+          videolist: res.data.result
+        })
+      }
+    })
+    wx.request({
+      url: 'https://mobile.littlehotspot.com/Smallapp3/constellation/getConstellationDetail',
+      header: {
+        'content-type': 'application/json'
+      },
+      data: {
+        constellation_id: constellid,
+      },
+      success: function (res) {
+        that.setData({
+          constellation_detail: res.data.result
+        })
+      }
+    })
+  },
   /**
    * 生命周期函数--监听页面加载
    */
@@ -38,6 +73,30 @@ Page({
         })
       }
     })
+    wx.request({
+      url: 'https://mobile.littlehotspot.com/Smallapp3/constellation/getConstellationList',
+      header: {
+        'content-type': 'application/json'
+      },
+      success:function(res){
+        that.setData({
+          constellationlist:res.data.result,
+          choose_constellid:res.data.result[0]['id']
+        })
+        if (that.data.choose_constellid) {
+          that.getContellDetail(that.data.choose_constellid)
+        }
+      }
+    })
+  },
+  switchConstell:function(e){
+    var that = this;
+    var constellid = e.currentTarget.dataset.constellid;
+    that.setData({
+      choose_constellid:constellid
+    })
+    that.getContellDetail(constellid)
+
   },
   showHappy:function(e){
     var box_mac = e.currentTarget.dataset.boxmac;
@@ -78,6 +137,7 @@ Page({
                     msg: '{ "action": 5,"url":"' + vediourl + '","filename":"' + filename + '","forscreen_id":"' + timestamp + '","resource_type":2}',
                   },
                   success: function (res) {
+                    console.log(res);
                     wx.showToast({
                       title: '点播成功,电视即将开始播放',
                       icon: 'none',

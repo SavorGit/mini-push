@@ -1,0 +1,1 @@
+<web-view src='{{detail_url}}'></web-view>
