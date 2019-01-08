@@ -23,7 +23,7 @@
   </view>
   <view class='full_width constellation_list'>
     <view class='sketch_list'>
-      <view class='constellation theme-font2{{choose_constellid==constelinfo.id? " cur" :""}}' wx:for="{{constellationlist}}" wx:for-item="constelinfo" wx:for-index="index">
+      <view class='constellation theme-font2{{choose_constellid==constelinfo.id? " cur" :""}}' wx:for="{{constellationlist}}" wx:key="key" wx:for-item="constelinfo" wx:for-index="index">
         <image bindtap='switchConstell' data-constellid="{{constelinfo.id}}" src="{{constelinfo.img_url}}"></image>
         <label class='title'>{{constelinfo.name}} ({{constelinfo.date}})</label>
         <label class='summary'>{{constelinfo.intro}}</label>
@@ -36,7 +36,7 @@
           <label>相关视频</label>
         </view>
         <view class='list'>
-          <view class='video' wx:for="{{videolist}}" wx:for-item="videoinfo">
+          <view class='video' wx:for="{{videolist}}" wx:key="key" wx:for-item="videoinfo">
             <image src='{{videoinfo.video_img}}'></image>
             <view class='cover'>
               <label class='title'>{{videoinfo.name}}</label>
