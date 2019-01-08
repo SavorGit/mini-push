@@ -72,7 +72,7 @@
         </view>
         <view class='describtion theme-font3'>
           <label>{{constellation_detail.desc}}
-            <navigator class='theme-font' url="/pages/thematic/birthday/detail?url={{constellation_detail.detail_url}}">[详情]</navigator>
+            <navigator class='theme-font' url="/pages/thematic/birthday/detail?url={{constellation_detail.detail_url}}&constellname={{constellation_detail.name}}">[详情]</navigator>
           </label>
         </view>
       </view>

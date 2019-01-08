@@ -7,7 +7,7 @@ Page({
    */
   data: {
     statusBarHeight: getApp().globalData.statusBarHeight,
-    detail_url: ''
+    detail_url: '',
   },
 
   /**
@@ -16,7 +16,7 @@ Page({
   onLoad: function(options) {
     var that = this;
     that.setData({
-      detail_url: options.url
+      detail_url: options.url + '?miniProgram=' + encodeURIComponent('{"navigationBarTitleText":"' + options.constellname + '","statusBarHeight":' + getApp().globalData.statusBarHeight+',"backgroundColor":"#05101A","color":"#FFFFFF"}')
     })
   },
 
