@@ -59,7 +59,7 @@
 }
 
 .constellation_list .sketch_list {
-  height: 300rpx;
+  height: 350rpx;
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -79,6 +79,11 @@
   width: 150rpx;
   height: 150rpx;
   border-radius: 50%;
+  opacity: 0.7;
+}
+
+.constellation_list .sketch_list .constellation .title {
+  margin-top: 10rpx;
 }
 
 .constellation_list .sketch_list .constellation .summary {
@@ -86,11 +91,13 @@
 }
 
 .constellation_list .sketch_list .constellation.cur image {
-  width: 200rpx;
-  height: 200rpx;
+  width: 250rpx;
+  height: 250rpx;
+  opacity: 1;
 }
 
 .constellation_list .sketch_list .constellation.cur .title {
+  margin-top: 20rpx;
   font-size: 30rpx;
   color: #fff;
 }
@@ -100,11 +107,11 @@
 }
 
 .constellation_list .detailed {
-  height: calc(100% - 300rpx);
+  height: calc(100% - 400rpx);
 }
 
 .constellation_list .detailed .video_list {
-  height: 350rpx;
+  height: 400rpx;
 }
 
 .constellation_list .detailed .video_list .title {
@@ -133,6 +140,7 @@
 .constellation_list .detailed .video_list .list .video image {
   width: 340rpx;
   height: 255rpx;
+  border-radius: 10rpx 10rpx 0rpx 0rpx;
 }
 
 .constellation_list .detailed .video_list .list .video .cover {
@@ -151,12 +159,18 @@
   display: block;
 }
 
+.constellation_list .detailed .video_list .list .video .cover button::before,
+.constellation_list .detailed .video_list .list .video .cover button::after {
+  border: unset;
+}
+
 .constellation_list .detailed .video_list .list .video .cover button {
   width: 100%;
   height: 60rpx;
   line-height: 60rpx;
   font-size: 28rpx;
   border-radius: 0rpx;
+  border: unset;
 }
 
 .constellation_list .detailed .overall .title {

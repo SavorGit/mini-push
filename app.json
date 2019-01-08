@@ -43,9 +43,9 @@
   },
   "window": {
     "backgroundTextStyle": "dark",
-    "navigationBarBackgroundColor": "#932c3f",
+    "navigationBarBackgroundColor": "#05101a",
     "navigationBarTitleText": "热点投屏",
-    "navigationBarTextStyle": "#932c3f",
+    "navigationBarTextStyle": "#05101a",
     "navigationStyle": "custom"
   },
   "tabBar": {
