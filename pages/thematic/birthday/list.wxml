@@ -11,13 +11,13 @@
         <label>为TA点歌</label>
       </view>
       <view class='list'>
-        <view class='music theme7' wx:for="{{happylist}}" wx:key="key" wx:for-item="happyinfo" wx:for-index="index">
-        <button bindtap='showHappy' data-boxmac="{{box_mac}}" data-openid="{{openid}}" data-vediourl="{{happyinfo.res_url}}" data-happyVedioName="{{happyinfo.file_name}}" data-name="{{happyinfo.name}}">
+        <block wx:for="{{happylist}}" wx:key="key" wx:for-item="happyinfo" wx:for-index="index">
+          <view class='music theme7' bindtap='showHappy' data-boxmac="{{box_mac}}" data-openid="{{openid}}" data-vediourl="{{happyinfo.res_url}}" data-happyVedioName="{{happyinfo.file_name}}" data-name="{{happyinfo.name}}">
             <image src='/images/icon2/1cbeb6_misic.png'></image>
             <label>{{happyinfo.title}}</label>
             <label>{{happyinfo.sub_title}}</label>
-        </button>
-        </view>
+          </view>
+        </block>
       </view>
     </view>
   </view>

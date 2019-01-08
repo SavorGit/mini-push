@@ -1,1 +1,6 @@
 /* pages/thematic/birthday/detail.wxss */
+
+web-view {
+  width: 100%;
+  /* height: 100%; */
+}
