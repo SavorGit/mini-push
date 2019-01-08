@@ -70,8 +70,10 @@
                   <label >100</label>
                 </view>-->
                 <view>
-                  <image src='/images/icon2/666666_share.png'></image>
-                  <label>{{bean.share_num}}</label>
+                  <button>
+                    <image src='/images/icon2/666666_share.png'></image>
+                    <label>{{bean.share_num}}</label>
+                  </button>
                 </view>
               </view>
               <view class='op-right'>

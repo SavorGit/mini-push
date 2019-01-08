@@ -203,14 +203,27 @@
   margin-right: 30rpx;
 }
 
-.con_bottom > .operation > .op-left > view > image {
+.con_bottom > .operation > .op-left > view button,
+.con_bottom > .operation > .op-left > view button::before,
+.con_bottom > .operation > .op-left > view button::after {
+  height: 50rpx;
+  line-height: 50rpx;
+  margin: unset;
+  padding: unset;
+  border: unset;
+  background: unset;
+  color: unset;
+  font-size: unset;
+}
+
+.con_bottom > .operation > .op-left > view image {
   width: 36rpx;
   height: 32rpx;
   margin-right: 8rpx;
   vertical-align: middle;
 }
 
-.con_bottom > .operation > .op-left > view > label {
+.con_bottom > .operation > .op-left > view label {
   vertical-align: middle;
 }
 

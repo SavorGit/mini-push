@@ -48,7 +48,7 @@
           <view class="weui-grids" wx:if="{{bean.res_type=='1'}}">
             <view class="weui-grid" wx:for="{{bean.list}}" wx:key="pkey" wx:for-item="pubdetail" wx:for-index="pindex">
               <navigator url="/pages/find/picture?forscreen_id={{bean.res_id}}&box_mac={{box_mac}}">
-              <image class="pic_show" mode='aspectFill' src="{{pubdetail.res_url}}" ></image>
+                <image class="pic_show" mode='aspectFill' src="{{pubdetail.res_url}}"></image>
               </navigator>
             </view>
 
@@ -57,7 +57,7 @@
             <navigator wx:if="{{bean.type==1 || bean.type==3}}" url="/pages/forscreen/video/launch_video?video_url={{bean.list.res_url}}&video_name={{bean.title}}&box_mac={{box_mac}}&res_id={{bean.res_id}}&filename={{bean.list.filename}}&video_img_url={{bean.list.imgurl}}">
               <image mode='aspectFill' src="{{bean.list.imgurl}}"></image>
             </navigator>
-            
+
             <navigator wx:if="{{bean.type==2}}" url="/pages/find/video?forscreen_id={{bean.res_id}}&box_mac={{box_mac}}">
               <image mode='aspectFill' src="{{bean.list.imgurl}}"></image>
             </navigator>
@@ -96,8 +96,10 @@
                 <label >100</label>
               </view>-->
               <view>
-                <image src='http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/icon/grey_share.png'></image>
-                <label>{{bean.share_num}}</label>
+                <button>
+                  <image src='http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/icon/grey_share.png'></image>
+                  <label>{{bean.share_num}}</label>
+                </button>
               </view>
             </view>
             <!-- <view class='op-right'>
