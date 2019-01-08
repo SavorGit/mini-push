@@ -29,23 +29,36 @@
       <!--循环开始 -->
       <view class='content content_bottom_border' wx:for="{{sharelist}}" wx:key="key" wx:for-item="bean" wx:for-index="index">
         <view class='con_top'>
-          <view class='user_info'>
-            <image src='http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg'></image>
-            <label>奔波</label>
+          <view wx:if="{{bean.type==1 || bean.type==3}}" class='user_info'>
+            <image src='http://oss.littlehotspot.com/media/resource/5dh67ffRXM.png'></image>
+            <label>小热点</label>
           </view>
-          <view class='operation'>
-            <button class='theme-button'>电视播放</button>
+          <view wx:else class='user_info'>
+            <image src='{{bean.avatarUrl}}'></image>
+            <label>{{bean.nickName}}</label>
+          </view>
+          <view wx:if="{{bean.type==1 || bean.type==3}}" class='operation'>
+            <button bindtap='boxShowProgram' data-name="" data-filename='{{bean.list.filename}}' data-vediourl="{{bean.list.res_url}}" data-boxmac="{{box_mac}}" data-openid="{{openid}}" class='theme-button'>电视播放</button>
+          </view>
+          <view wx:if="{{bean.type==2}}" class='operation'>
+            <button bindtap='boxShowForscreen' data-res_type="{{bean.res_type}}" data-res_nums="{{bean.res_nums}}" data-pubdetail="{{bean.list}}" data-boxmac="{{box_mac}}" data-openid="{{openid}}" data-forscreen_id="{{bean.res_id}}" class='theme-button'>电视播放</button>
           </view>
         </view>
         <view class='con_main'>
           <view class="weui-grids" wx:if="{{bean.res_type=='1'}}">
             <view class="weui-grid" wx:for="{{bean.list}}" wx:key="pkey" wx:for-item="pubdetail" wx:for-index="pindex">
-              <image class="pic_show" mode='aspectFill' src="{{pubdetail.res_url}}" data-pkey="{{pindex}}" data-src="{{bean.list}}" bindtap="previewImage"></image>
+              <navigator url="/pages/find/picture?forscreen_id={{bean.res_id}}&box_mac={{box_mac}}">
+              <image class="pic_show" mode='aspectFill' src="{{pubdetail.res_url}}" ></image>
+              </navigator>
             </view>
 
           </view>
           <view class="video" wx:else>
-            <navigator url="/pages/forscreen/video/launch_video?video_url={{bean.list.res_url}}&video_name=">
+            <navigator wx:if="{{bean.type==1 || bean.type==3}}" url="/pages/forscreen/video/launch_video?video_url={{bean.list.res_url}}&video_name={{bean.title}}&box_mac={{box_mac}}&res_id={{bean.res_id}}&filename={{bean.list.filename}}&video_img_url={{bean.list.imgurl}}">
+              <image mode='aspectFill' src="{{bean.list.imgurl}}"></image>
+            </navigator>
+            
+            <navigator wx:if="{{bean.type==2}}" url="/pages/find/video?forscreen_id={{bean.res_id}}&box_mac={{box_mac}}">
               <image mode='aspectFill' src="{{bean.list.imgurl}}"></image>
             </navigator>
             <view class="cover">
@@ -68,7 +81,7 @@
             <view class='op-left'>
               <view>
                 <image src='/images/icon2/666666_play1.png'></image>
-                <label>123</label>
+                <label>{{bean.play_num}}</label>
               </view>
               <view wx:if="{{collect=='1'}}">
                 <image src='http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/icon/red_heart.png'></image>

@@ -138,6 +138,9 @@
     </view>
   </scroll-view>
 </view>
+<view class="body-view">
+      <loading hidden="{{hiddens}}" bindchange="loadingChange">加载中...</loading>
+    </view>
 <template wx:if="{{showControl}}" is="remoteControlWindow" data="{{qrcode_img,box_mac,openid,is_open_simple}}"  />
 <!-- 固定悬浮按钮组 -->
 <view wx:if="{{box_mac !=''}}">
