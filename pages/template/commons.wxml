@@ -81,10 +81,10 @@
           <button bindtap='changeProgram' data-box_mac='{{box_mac}}' data-change_type='2'>
             <image src='/images/icon2/next-one.png'></image>
           </button>
-          <button bindtap='changeVolume' data-box_mac='{{box_mac}}' data-change_type='1' >
+          <button bindtap='changeVolume' data-box_mac='{{box_mac}}' data-change_type='1'>
             <image src='/images/icon2/volume-down.png'></image>
           </button>
-          <button bindtap='changeVolume' data-box_mac='{{box_mac}}' data-change_type='2' >
+          <button bindtap='changeVolume' data-box_mac='{{box_mac}}' data-change_type='2'>
             <image src='/images/icon2/volume-up.png'></image>
           </button>
         </view>
@@ -101,9 +101,7 @@
       </view>
       <view class='remoteControlWindow-bottom'>
         <button bindtap="exitForscreen" data-openid='{{openid}}' data-box_mac="{{box_mac}}" class='theme-button3'>退出投屏</button>
-        <navigator wx:if="{{box_mac !='' && is_open_simple>0}}" target="miniProgram" app-id="wx7883a4327329a67c" path="pages/index/index?box_mac={{box_mac}}" version="release">
-        <button class='theme-button4'>前往极简版</button>
-        </navigator>
+        <navigator class='theme-button4' wx:if="{{box_mac !='' && is_open_simple>0}}" target="miniProgram" app-id="wx7883a4327329a67c" path="pages/index/index?box_mac={{box_mac}}" version="release">前往极简版</navigator>
       </view>
     </view>
   </modal>

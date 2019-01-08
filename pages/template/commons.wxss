@@ -118,6 +118,7 @@
 .remoteControlWindow-container .remoteControlWindow-control image {
   width: 32rpx;
   height: 32rpx;
+  background-color: rgba(99, 99, 99, 0.075);
 }
 
 .remoteControlWindow-container .remoteControlWindow-top {
@@ -192,6 +193,12 @@
   display: flex;
   flex-direction: row;
   align-content: center;
+  justify-content: center;
+}
+
+.remoteControlWindow-container .remoteControlWindow-bottom view {
+  width: 50%;
+  height: 80rpx;
 }
 
 .remoteControlWindow-container .remoteControlWindow-bottom button {
@@ -200,6 +207,23 @@
   line-height: 80rpx;
   font-size: 28rpx;
   border-radius: 15rpx;
+}
+
+.remoteControlWindow-container .remoteControlWindow-bottom navigator {
+  width: 280rpx;
+  height: 80rpx;
+  line-height: 80rpx;
+  margin: auto;
+  font-size: 28rpx;
+  border-radius: 15rpx;
+  /* position: relative;
+  padding-left: 14px;
+  padding-right: 14px;
+  box-sizing: border-box;
+  text-align: center;
+  text-decoration: none;
+  -webkit-tap-highlight-color: transparent;
+  overflow: hidden; */
 }
 
 /* ================================= 自定义顶级页面导航栏 ================================= */
