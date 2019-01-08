@@ -1,0 +1,8 @@
+<!--pages/thematic/birthday/detail.wxml-->
+<!-- <import src="/pages/template/commons" />
+<template is="navigationBarForTwoLevel" data='{{statusBarHeight: statusBarHeight,titleText:"热点投屏"}}' /> -->
+
+<!-- =================================== 星座版 =================================== -->
+<!-- <view class="container" style='height: calc(100vh - 46px - {{statusBarHeight}}px);'> -->
+<web-view src='{{detail_url}}' style='height: 200rpx;'></web-view>
+<!-- </view> -->
