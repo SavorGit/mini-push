@@ -47,8 +47,9 @@
                 <image class="pic_show" mode='aspectFill' src="{{bean.imgurl}}"></image>
                 <view class='cover'>
                   <view class='share font_FFFFFF_32'>
-                    <image src='/images/icon2/FFFFFF_heart.png'></image>
-                    <label>123</label>
+                    <image wx:if="{{bean.is_collect==1}}" src='/images/icon2/FF0000_heart.png'></image>
+                    <image wx:else src='/images/icon2/FFFFFF_heart.png'></image>
+                    <label>{{bean.collect_num}}</label>
                   </view>
                 </view>
               </navigator>
@@ -90,8 +91,8 @@
                 <image class="pic_show" mode='aspectFill' src="{{bean.imgurl}}"></image>
                 <view class='cover'>
                   <view class='share font_FFFFFF_32'>
-                    <image src='/images/icon2/FFFFFF_heart.png'></image>
-                    <label>123</label>
+                    <image src='/images/icon2/FF0000_heart.png'></image>
+                    <label>{{bean.collect_num}}</label>
                   </view>
                 </view>
               </navigator>

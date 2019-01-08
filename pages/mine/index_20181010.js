@@ -140,7 +140,7 @@ Page({
     var user_info = wx.getStorageSync("savor_user_info");
     openid = user_info.openid;
     wx.request({
-      url: 'https://mobile.littlehotspot.com/Smallapp21/User/index',
+      url: 'https://mobile.littlehotspot.com/Smallapp3/User/index',
       headers: {
         'Content-Type': 'application/json'
       },
