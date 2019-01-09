@@ -159,7 +159,7 @@ Page({
       // 来自页面内转发按钮
       return {
         title: '发现一个好玩的东西',
-        path: '/pages/share/pic?forscreen_id=' + res_id,
+        path: '/pages/share/pic?res_id=' + res_id +'&type=2',
         imageUrl: img_url,
         success: function (res) {
 

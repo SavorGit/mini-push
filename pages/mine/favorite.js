@@ -32,7 +32,7 @@ Page({
     wx.hideShareMenu();
     var that = this;
     box_mac = options.box_mac;
-    console.log(box_mac);
+    
     //获取用户信息以及我的公开
 
     var user_info = wx.getStorageSync("savor_user_info");
@@ -618,7 +618,7 @@ Page({
   }, //收藏资源结束
   //取消收藏
   cancCollect: function (res) {
-    console.log(res);
+    
     var that = this;
     var res_id = res.currentTarget.dataset.res_id;
     var res_key = res.currentTarget.dataset.res_key;
@@ -644,7 +644,6 @@ Page({
             sharelist[i].collect_num = collect_nums;
           }
         }
-        console.log(sharelist);
         that.setData({
           sharelist: sharelist
         })
@@ -707,8 +706,76 @@ Page({
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage: function() {
+  onShareAppMessage: function(res) {
+    var that = this;
+    var res_id = res.target.dataset.res_id;
+    var res_key = res.target.dataset.res_key;
+    var res_type = res.target.dataset.res_type;
+    var openid = res.target.dataset.openid;
+    var pubdetail = res.target.dataset.pubdetail;
+    var filename = res.target.dataset.filename;
+    var type     = res.target.dataset.type;
+    //console.log(publiclist);
+    if(type==3){
+      var img_url = pubdetail.imgurl;
+      var video_url = pubdetail.res_url;
+      var share_url = '/pages/share/video?res_id=' + res_id + '&type=3';
+    }else if(type==2){
+      if (res_type == 1) {
+        var img_url = pubdetail[0]['res_url'];
+        var share_url = '/pages/share/pic?forscreen_id=' + res_id;
+      } else {
+        var img_url = pubdetail['imgurl'];
+        var share_url = '/pages/share/video?res_id=' + res_id+'&type=2';
+      }
+    }
 
+    
+
+    if (res.from === 'button') {
+      // 转发成功
+      wx.request({
+        url: 'https://mobile.littlehotspot.com/Smallapp/share/recLogs',
+        header: {
+          'content-type': 'application/json'
+        },
+        data: {
+          'openid': openid,
+          'res_id': res_id,
+          'type': type,
+          'status': 1,
+        },
+        success: function (e) {
+          for (var i = 0; i < sharelist.length; i++) {
+            if (i == res_key) {
+              sharelist[i].share_num++;
+            }
+          }
+          that.setData({
+            sharelist: sharelist
+          })
+
+        },
+        fail: function ({
+          errMsg
+        }) {
+          wx.showToast({
+            title: '网络异常，请稍后重试',
+            icon: 'none',
+            duration: 2000
+          })
+        }
+      })
+      // 来自页面内转发按钮
+      return {
+        title: '发现一个好玩的东西',
+        path: share_url,
+        imageUrl: img_url,
+        success: function (res) {
+
+        },
+      }
+    }
   },
   
 
@@ -780,7 +847,7 @@ Page({
         if (res.data.code == 10000) {
           sharelist = res.data.result.list;
           that.setData({
-            userinfo: res.data.result.user_info,
+            //userinfo: res.data.result.user_info,
             sharelist: res.data.result.list,
             hiddens: true,
           })

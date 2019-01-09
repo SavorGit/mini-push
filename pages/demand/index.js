@@ -566,7 +566,7 @@ Page({
         data: {
           'openid': openid,
           'res_id': res_id,
-          'type': res_type,
+          'type': 3,
           'status': 1,
         },
         success: function (e) {
@@ -591,7 +591,7 @@ Page({
       // 来自页面内转发按钮
       return {
         title: video_name,
-        path: '/pages/forscreen/video/launch_video?video_url=' + video_url + '&video_name=' + video_name,
+        path: '/pages/share/video?res_id='+res_id+'&type=3',
         imageUrl: video_img,
         success: function (res) {
           

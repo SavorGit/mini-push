@@ -114,7 +114,7 @@ Page({
       var share_url = '/pages/share/pic?forscreen_id=' + res_id;
     } else {
       var img_url = pubdetail[0]['vide_img'];
-      var share_url = '/pages/share/video?forscreen_id=' + res_id;
+      var share_url = '/pages/share/video?res_id=' + res_id+'&type=2';
     }
 
     if (res.from === 'button') {

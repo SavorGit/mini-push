@@ -11,9 +11,9 @@
           <image class='user_head' src="{{pub_info.avatarUrl}}"></image>
           <label class='user_name font_333333_30'>{{pub_info.nickName}}</label>
         </view>
-        <view class='operation'>
+        <!-- <view class='operation'>
           <button bindtap='boxShow' class='launch_tv theme-button' data-res_type="{{pub_info.res_type}}" data-res_nums="{{pub_info.res_nums}}" data-pubdetail="{{pub_info.pubdetail}}" data-boxmac="{{box_mac}}" data-openid="{{openid}}" data-forscreen_id="{{pub_info.forscreen_id}}">电视播放</button>
-        </view>
+        </view> -->
       </view>
       <view class='con_main'>
         <view class="weui-grids" wx:if="{{pub_info.res_nums=='1'}}">
