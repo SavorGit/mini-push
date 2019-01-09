@@ -35,7 +35,7 @@
         <view class="swiper-tab-item active">我的公开</view>
 
         <!-- 如果没有数据更多不显示 -->
-        <navigator wx:if="{{publiclist  !=''}}" class="swiper-tab-item font_666666_24" style='margin-left: 340rpx;margin-right: 0rpx;' url='/pages/mine/index'>查看更多>></navigator>
+        <navigator wx:if="{{publiclist  !=''}}" class="swiper-tab-item font_666666_24" style='margin-left: 340rpx;margin-right: 0rpx;' url='/pages/mine/index?box_mac={{box_mac}}'>查看更多>></navigator>
       </view>
       <view class='content'>
         <view class='con_main'>
@@ -43,7 +43,7 @@
           <!-- 有数据时-->
           <view class="weui-grids full_width" wx:if="{{publiclist  !=''}}">
             <view class="weui-grid" wx:for="{{publiclist}}" wx:key="key" wx:for-item="bean" wx:for-index="index">
-              <navigator class='full_width full_height' url="/pages/mine/index">
+              <navigator class='full_width full_height' url="/pages/mine/index?box_mac={{box_mac}}">
                 <image class="pic_show" mode='aspectFill' src="{{bean.imgurl}}"></image>
                 <view class='cover'>
                   <view class='share font_FFFFFF_32'>

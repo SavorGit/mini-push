@@ -13,18 +13,20 @@
         <view class='content content_bottom_border'>
           <view class='con_top'>
             <view class='user_info'>
-              <image src='http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg'></image>
-              <label>奔波</label>
+              <image src='{{userinfo.avatarUrl}}'></image>
+              <label>{{userinfo.nickName}}</label>
             </view>
             <view class='operation'>
-              <button class='theme-button'>电视播放</button>
+              <button bindtap='boxShow' data-res_type="{{bean.res_type}}" data-res_nums="{{bean.res_nums}}" data-pubdetail="{{bean.pubdetail}}" data-boxmac="{{box_mac}}" data-openid="{{openid}}" data-forscreen_id="{{bean.forscreen_id}}" class='theme-button'>电视播放</button>
             </view>
           </view>
           <view class='con_main'>
             <view class="weui-grids" wx:if="{{bean.res_type=='1'}}">
 
               <view class="weui-grid" wx:for="{{bean.pubdetail}}" wx:key="pkey" wx:for-item="pubdetail" wx:for-index="pindex">
-                <image class="pic_show" mode='aspectFill' src="{{pubdetail.res_url}}" data-pkey="{{pindex}}" data-src="{{bean.pubdetail}}" bindtap="previewImage"></image>
+                <navigator url='/pages/find/picture?forscreen_id={{bean.forscreen_id}}&box_mac={{box_mac}}'>
+                <image class="pic_show" mode='aspectFill' src="{{pubdetail.res_url}}" ></image>
+                </navigator>
               </view>
 
             </view>
@@ -55,9 +57,9 @@
               <view class='op-left'>
                 <view>
                   <image src='/images/icon2/666666_play1.png'></image>
-                  <label>123</label>
+                  <label>{{bean.play_num}}</label>
                 </view>
-                <view wx:if="{{collect=='123'}}">
+                <view wx:if="{{bean.is_collect}}==1}}">
                   <image src='/images/icon2/FF0000_heart.png'></image>
                   <label>{{bean.collect_num}}</label>
                 </view>
@@ -77,7 +79,7 @@
                 </view>
               </view>
               <view class='op-right'>
-                <label bindtap='popDel' data-forscreen_id="{{bean.forscreen_id}}" data-keys="{{index}}">删除</label>
+                <label bindtap='popDel' data-forscreen_id="{{bean.forscreen_id}}" data-publiclist="{{publiclist}}" data-keys="{{index}}">删除</label>
               </view>
             </view>
           </view>
@@ -115,8 +117,8 @@
     </view>
 
     <view class='delete-bottom'>
-      <button class='savor-btn' bindtap="modalCancel">取消</button>
-      <button class='savor-btn theme-menu' bindtap="modalConfirm">删除</button>
+      <button  class='savor-btn' bindtap="modalCancel">取消</button>
+      <button   class='savor-btn theme-menu' bindtap="modalConfirm" data-keys="{{keys}}" data-publiclist='{{publiclist}}' data-forscreen_id='{{forscreen_id}}'>删除</button>
     </view>
   </view>
 </bottomModal>
