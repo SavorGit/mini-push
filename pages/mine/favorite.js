@@ -5,6 +5,7 @@ var page = 1;
 var pubdetail;
 var i;
 var box_mac;
+var sharelist;
 Page({
 
   /**
@@ -30,132 +31,16 @@ Page({
   onLoad: function(options) {
     wx.hideShareMenu();
     var that = this;
-    if (app.globalData.openid && app.globalData.openid != '') {
-      that.setData({
-        openid: app.globalData.openid
-      })
-      openid = app.globalData.openid;
-      //判断用户是否注册
-      wx.request({
-        url: 'https://mobile.littlehotspot.com/smallapp21/User/isRegister',
-        data: {
-          "openid": app.globalData.openid,
-          "page_id": 2
-        },
-        header: {
-          'content-type': 'application/json'
-        },
-        success: function (res) {
-          wx.setStorage({
-            key: 'savor_user_info',
-            data: res.data.result.userinfo,
-          })
-        },
-        fail: function (e) {
-          wx.setStorage({
-            key: 'savor_user_info',
-            data: {
-              'openid': app.globalData.openid
-            },
-          })
-        }
-      }); //判断用户是否注册结束
-      wx.request({
-        url: 'https://mobile.littlehotspot.com/Smallapp/index/isHaveCallBox?openid=' + app.globalData.openid,
-        headers: {
-          'Content-Type': 'application/json'
-        },
-
-        success: function (rest) {
-          var is_have = rest.data.result.is_have;
-          if (is_have == 1) {
-
-            that.setData({
-              is_link: 1,
-              hotel_name: rest.data.result.hotel_name,
-              room_name: rest.data.result.room_name,
-              box_mac: rest.data.result.box_mac,
-              is_open_simple: rest.data.result.is_open_simple,
-            })
-            box_mac = rest.data.result.box_mac;
-            
-          } else {
-            that.setData({
-              is_link: 0,
-              box_mac: '',
-            })
-            box_mac = '';
-          }
-
-        }
-      })
-    } else {
-      app.openidCallback = openid => {
-        if (openid != '') {
-          that.setData({
-            openid: openid
-          })
-          openid = openid;
-          //判断用户是否注册
-          wx.request({
-            url: 'https://mobile.littlehotspot.com/smallapp21/User/isRegister',
-            data: {
-              "openid": app.globalData.openid,
-              "page_id": 2
-            },
-            header: {
-              'content-type': 'application/json'
-            },
-            success: function (res) {
-              wx.setStorage({
-                key: 'savor_user_info',
-                data: res.data.result.userinfo,
-              })
-            },
-            fail: function (e) {
-              wx.setStorage({
-                key: 'savor_user_info',
-                data: {
-                  'openid': openid
-                },
-              })
-            }
-          }); //判断用户是否注册结束
-          wx.request({
-            url: 'https://mobile.littlehotspot.com/Smallapp/index/isHaveCallBox?openid=' + openid,
-            headers: {
-              'Content-Type': 'application/json'
-            },
-
-            success: function (rest) {
-              var is_have = rest.data.result.is_have;
-              if (is_have == 1) {
-                that.setData({
-                  is_link: 1,
-                  //hotel_name: rest.data.result.hotel_name,
-                  //room_name: rest.data.result.room_name,
-                  box_mac: rest.data.result.box_mac,
-                  is_open_simple: rest.data.result.is_open_simple,
-
-                })
-                box_mac = rest.data.result.box_mac;
-                //getHotelInfo(rest.data.result.box_mac);
-              } else {
-                that.setData({
-                  is_link: 0,
-                  box_mac: '',
-                })
-                box_mac = '';
-              }
-            }
-          })
-        }
-      }
-    }
+    box_mac = options.box_mac;
+    console.log(box_mac);
     //获取用户信息以及我的公开
 
     var user_info = wx.getStorageSync("savor_user_info");
     openid = user_info.openid;
+    that.setData({
+      box_mac:box_mac,
+      openid:openid,
+    })
     wx.request({
       url: 'https://mobile.littlehotspot.com/Smallapp3/User/getMyCollect',
       headers: {
@@ -163,6 +48,7 @@ Page({
       },
       data: { openid: openid },
       success: function (res) {
+        sharelist = res.data.result.list;
         that.setData({
           //userinfo: res.data.result.user_info,
           sharelist: res.data.result.list,
@@ -676,6 +562,105 @@ Page({
 
     }
   }, //电视播放投屏结束
+  //收藏资源
+  onCollect: function (res) {
+    var that = this;
+    var res_id = res.currentTarget.dataset.res_id;
+    var res_key = res.currentTarget.dataset.res_key;
+    var openid = res.currentTarget.dataset.openid;
+    var type = res.currentTarget.dataset.type;
+    wx.request({
+      url: 'https://mobile.littlehotspot.com/Smallapp/collect/recLogs',
+      header: {
+        'content-type': 'application/json'
+      },
+      data: {
+        'openid': openid,
+        'res_id': res_id,
+        'type': type,
+        'status': 1,
+      },
+      success: function (e) {
+        var collect_nums = e.data.result.nums;
+        for (var i = 0; i < sharelist.length; i++) {
+          if (i == res_key) {
+            sharelist[i].is_collect = 1;
+            sharelist[i].collect_num = collect_nums;
+          }
+        }
+        that.setData({
+          sharelist: sharelist
+        })
+        /*if (e.data.code == 10000) {
+          wx.showToast({
+            title: '收藏成功',
+            icon: 'none',
+            duration: 2000
+          })
+        } else {
+          wx.showToast({
+            title: '收藏失败，请稍后重试',
+            icon: 'none',
+            duration: 2000
+          })
+        }*/
+      },
+      fial: function ({
+        errMsg
+      }) {
+        wx.showToast({
+          title: '网络异常，请稍后重试',
+          icon: 'none',
+          duration: 2000
+        })
+      }
+    })
+  }, //收藏资源结束
+  //取消收藏
+  cancCollect: function (res) {
+    console.log(res);
+    var that = this;
+    var res_id = res.currentTarget.dataset.res_id;
+    var res_key = res.currentTarget.dataset.res_key;
+    var openid = res.currentTarget.dataset.openid;
+    var type = res.currentTarget.dataset.type;
+   
+    wx.request({
+      url: 'https://mobile.littlehotspot.com/Smallapp/collect/recLogs',
+      header: {
+        'content-type': 'application/json'
+      },
+      data: {
+        'openid': openid,
+        'res_id': res_id,
+        'type': type,
+        'status': 0,
+      },
+      success: function (e) {
+        var collect_nums = e.data.result.nums;
+        for (var i = 0; i < sharelist.length; i++) {
+          if (i == res_key) {
+            sharelist[i].is_collect = 0;
+            sharelist[i].collect_num = collect_nums;
+          }
+        }
+        console.log(sharelist);
+        that.setData({
+          sharelist: sharelist
+        })
+        
+      },
+      fial: function ({
+        errMsg
+      }) {
+        wx.showToast({
+          title: '网络异常，请稍后重试',
+          icon: 'none',
+          duration: 2000
+        })
+      }
+    })
+  }, //取消收藏结束
 
   /**
    * 生命周期函数--监听页面初次渲染完成
@@ -782,7 +767,7 @@ Page({
       hiddens: false,
     })
     wx.request({
-      url: 'https://mobile.littlehotspot.com/smallapp/user/getMyCollect',
+      url: 'https://mobile.littlehotspot.com/smallapp3/user/getMyCollect',
       header: {
         'Content-Type': 'application/json'
       },
@@ -793,6 +778,7 @@ Page({
       method: "POST",
       success: function (res) {
         if (res.data.code == 10000) {
+          sharelist = res.data.result.list;
           that.setData({
             userinfo: res.data.result.user_info,
             sharelist: res.data.result.list,

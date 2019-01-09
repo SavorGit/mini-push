@@ -83,13 +83,17 @@
                 <image src='/images/icon2/666666_play1.png'></image>
                 <label>{{bean.play_num}}</label>
               </view>
-              <view wx:if="{{collect=='1'}}">
-                <image src='http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/icon/red_heart.png'></image>
-                <label>{{bean.collect_num}}</label>
+              <view wx:if="{{bean.is_collect=='1'}}">
+                <button bindtap='cancCollect' data-res_id="{{bean.res_id}}" data-openid="{{openid}}" data-type='{{bean.type}}' data-res_key="{{index}}">
+                  <image src='http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/icon/red_heart.png'></image>
+                  <label>{{bean.collect_num}}</label>
+                </button>
               </view>
               <view wx:else>
+                <button bindtap='onCollect' data-res_id="{{bean.res_id}}" data-openid="{{openid}}" data-type='{{bean.type}}' data-res_key="{{index}}">
                 <image src='http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/icon/grey_heart.png'></image>
                 <label>{{bean.collect_num}}</label>
+                </button>
               </view>
               <!--<view>
                 <image src='http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/icon/grey_comment.png'></image>
