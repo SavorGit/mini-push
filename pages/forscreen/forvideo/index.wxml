@@ -212,3 +212,9 @@
 
 <!-- 跳转极简版 -->
 <template is="jumpSimple" data="{{show:is_show_jump,box_mac:box_mac}}" />
+
+<template is="remoteControlWindow" data='{{popRemoteControlWindow: popRemoteControlWindow,qrcode_img:qrcode_img,box_mac:box_mac,openid:openid,is_open_simple:is_open_simple}}' />
+<!-- 固定悬浮按钮组 -->
+<view wx:if="{{box_mac !='' && is_view_control==true}}">
+  <template is="fixedSuspensionButtonGroup" />
+</view>

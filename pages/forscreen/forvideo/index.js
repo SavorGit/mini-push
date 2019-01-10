@@ -38,7 +38,8 @@ Page({
     is_replay_disabel:false,
     djs:10,
     forscreen_history_list:'',
-    hiddens: true,   //上拉加载中
+    hiddens: true,   //上拉加载中,
+    is_view_control:false,
   },
 
   /**
@@ -47,7 +48,7 @@ Page({
   onLoad: function (e) {
     wx.hideShareMenu();
     var that = this
-    var box_mac = e.box_mac;
+    box_mac = e.box_mac;
     var openid = e.openid;
     var user_info = wx.getStorageSync("savor_user_info");
     var avatarUrl = user_info.avatarUrl;
@@ -214,6 +215,7 @@ Page({
             showVedio:false,
             oss_video_url: "http://oss.littlehotspot.com/forscreen/resource/" + timestamp + postf_t,
             upload_vedio_temp:'',
+            is_view_control: true,
           })
           wx.request({
             url: 'https://mobile.littlehotspot.com/Smallapp21/index/recordForScreenPics',
@@ -290,6 +292,7 @@ Page({
         replay_video_url: "forscreen/resource/" + timestamp + postf_t,
         showVedio: true,
         upload_vedio_temp: filename,
+        
         //upload_vedio_img_temp: filename_img,
 
       });
@@ -1024,6 +1027,52 @@ Page({
     that.setData({
       is_show_jump: false,
     })
+  },
+  //遥控呼大码
+  callQrCode: function (e) {
+    openid = e.currentTarget.dataset.openid;
+    box_mac = e.currentTarget.dataset.box_mac;
+    var qrcode_img = e.currentTarget.dataset.qrcode_img;
+    app.controlCallQrcode(openid, box_mac, qrcode_img);
+  },//呼大码结束
+  //打开遥控器
+  openControl: function (e) {
+    var that = this;
+    var qrcode_url = 'https://mobile.littlehotspot.com/Smallapp/index/getBoxQr?box_mac=' + box_mac + '&type=3';
+    console.log(qrcode_url);
+    that.setData({
+
+      popRemoteControlWindow: true,
+      qrcode_img: qrcode_url
+    })
+  },
+  //关闭遥控
+  closeControl: function (e) {
+    var that = this;
+    that.setData({
+
+      popRemoteControlWindow: false,
+    })
+
+  },
+  //遥控退出投屏
+  exitForscreen: function (e) {
+    openid = e.currentTarget.dataset.openid;
+    box_mac = e.currentTarget.dataset.box_mac;
+    app.controlExitForscreen(openid, box_mac);
+  },
+  //遥控调整音量
+  changeVolume: function (e) {
+    box_mac = e.currentTarget.dataset.box_mac;
+    var change_type = e.currentTarget.dataset.change_type;
+    app.controlChangeVolume(box_mac, change_type);
+
+  },
+  //遥控切换节目
+  changeProgram: function (e) {
+    box_mac = e.currentTarget.dataset.box_mac;
+    var change_type = e.currentTarget.dataset.change_type;
+    app.controlChangeProgram(box_mac, change_type);
   },
   /**
    * 生命周期函数--监听页面初次渲染完成
