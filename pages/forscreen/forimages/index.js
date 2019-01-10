@@ -173,7 +173,6 @@ Page({
     var avatarUrl = e.detail.value.avatarUrl;
     var nickName = e.detail.value.nickName;
     var is_open_simple = e.detail.value.is_open_simple;
-
     if (e.detail.value.upimgs0 != '' && e.detail.value.upimgs0 != undefined) upimgs[0] = e.detail.value.upimgs0;
     if (e.detail.value.upimgs1 != '' && e.detail.value.upimgs1 != undefined) upimgs[1] = e.detail.value.upimgs1;
     if (e.detail.value.upimgs2 != '' && e.detail.value.upimgs2 != undefined) upimgs[2] = e.detail.value.upimgs2;
@@ -248,7 +247,7 @@ Page({
 
               policy = rest.data.policy;
               signature = rest.data.signature;
-              uploadOss_multy(policy, signature, upimgs, box_mac, openid, img_lenth, forscreen_char, avatarUrl, nickName, public_text);
+              uploadOss_multy(policy, signature, upimgs, box_mac, openid, img_lenth, forscreen_char, avatarUrl, nickName, public_text, timer8_0);
             }
           });
 
