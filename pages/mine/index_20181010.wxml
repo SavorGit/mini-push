@@ -43,16 +43,18 @@
           <!-- 有数据时-->
           <view class="weui-grids full_width" wx:if="{{publiclist  !=''}}">
             <view class="weui-grid" wx:for="{{publiclist}}" wx:key="key" wx:for-item="bean" wx:for-index="index">
-              <navigator class='full_width full_height' url="/pages/mine/index?box_mac={{box_mac}}">
-                <image class="pic_show" mode='aspectFill' src="{{bean.imgurl}}"></image>
-                <view class='cover'>
-                  <view class='share font_FFFFFF_32'>
-                    <image wx:if="{{bean.is_collect==1}}" src='/images/icon2/FF0000_heart.png'></image>
-                    <image wx:else src='/images/icon2/FFFFFF_heart.png'></image>
-                    <label>{{bean.collect_num}}</label>
+              <view class='yingtao'>
+                <navigator class='full_width full_height' url="/pages/mine/index?box_mac={{box_mac}}">
+                  <image class="pic_show" mode='aspectFill' src="{{bean.imgurl}}"></image>
+                  <view class='cover'>
+                    <view class='share font_FFFFFF_32'>
+                      <image wx:if="{{bean.is_collect==1}}" src='/images/icon2/FF0000_heart.png'></image>
+                      <image wx:else src='/images/icon2/FFFFFF_heart.png'></image>
+                      <label>{{bean.collect_num}}</label>
+                    </view>
                   </view>
-                </view>
-              </navigator>
+                </navigator>
+              </view>
             </view>
           </view>
 
@@ -87,16 +89,16 @@
           <!-- 有数据时 -->
           <view class="weui-grids full_width" wx:if="{{collectlist  !=''}}">
             <view class="weui-grid" wx:for="{{collectlist}}" wx:key="key" wx:for-item="bean" wx:for-index="index">
-              <view>
-              <navigator class='full_width full_height' url="/pages/mine/favorite?box_mac={{box_mac}}">
-                <image class="pic_show" mode='aspectFill' src="{{bean.imgurl}}"></image>
-                <view class='cover'>
-                  <view class='share font_FFFFFF_32'>
-                    <image src='/images/icon2/FF0000_heart.png'></image>
-                    <label>{{bean.collect_num}}</label>
+              <view class='yingtao'>
+                <navigator class='full_width full_height' url="/pages/mine/favorite?box_mac={{box_mac}}">
+                  <image class="pic_show" mode='aspectFill' src="{{bean.imgurl}}"></image>
+                  <view class='cover'>
+                    <view class='share font_FFFFFF_32'>
+                      <image src='/images/icon2/FF0000_heart.png'></image>
+                      <label>{{bean.collect_num}}</label>
+                    </view>
                   </view>
-                </view>
-              </navigator>
+                </navigator>
               </view>
             </view>
           </view>
@@ -125,7 +127,7 @@
   <template is="bottomNavigation" data='{{selectPage:"MINE"}}' />
   -->
 </view>
-<template wx:if="{{showControl}}" is="remoteControlWindow" data="{{qrcode_img,box_mac,openid,is_open_simple}}"  />
+<template wx:if="{{showControl}}" is="remoteControlWindow" data="{{qrcode_img,box_mac,openid,is_open_simple}}" />
 <!-- 固定悬浮按钮组 -->
 <view wx:if="{{box_mac !=''}}">
   <template is="fixedSuspensionButtonGroup" />

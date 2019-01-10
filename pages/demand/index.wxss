@@ -76,7 +76,7 @@ swiper-image {
 }
 
 .article {
-  margin: 0;
+  margin: 0 0 15rpx 0;
   padding: 0;
   width: 720rpx;
 }
@@ -205,11 +205,12 @@ swiper-image {
 
 .article > .con_bottom > .launch > view >  button {
   margin-right: 10rpx;
-  width: 150rpx;
-  height: 55rpx;
-  line-height: 55rpx;
+  padding: 0;
+  width: 130rpx;
+  height: 45rpx;
+  line-height: 45rpx;
   font-size: 20rpx;
-  border-radius: 27rpx;
+  border-radius: 22rpx;
 }
 
 .article > .con_bottom > .operation {
@@ -224,17 +225,14 @@ swiper-image {
   margin-right: 15rpx;
 }
 
-.article > .con_bottom > .operation > view > image {
+.article > .con_bottom > .operation > view image {
   width: 36rpx;
   height: 32rpx;
   margin-right: 8rpx;
   vertical-align: middle;
 }
 
-.article > .con_bottom > .operation > view > button > image {
-  width: 36rpx;
-  height: 32rpx;
-  margin-right: 8rpx;
+.article > .con_bottom > .operation > view label {
   vertical-align: middle;
 }
 
@@ -255,12 +253,18 @@ swiper-image {
   color: #000;
   border: 0rpx solid #fff;
   background-color: #fff; */
-  background: none;
+  color: unset;
+  font-size: unset;
+  background: unset;
 }
 
+.article > .con_bottom > .operation > view > button::before,
 .article > .con_bottom > .operation > view > button::after {
   border: none;
   outline: none;
+  color: unset;
+  font-size: unset;
+  background: unset;
 }
 
 /* .article > .title {

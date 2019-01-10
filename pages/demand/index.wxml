@@ -54,27 +54,27 @@
               <button bindtap='boxShow' data-name="{{bean.title}}" data-filename='{{bean.filename}}' data-vediourl="{{bean.tx_url}}" data-boxmac="{{box_mac}}" data-openid="{{openid}}" class='theme-button'>电视播放</button>
             </view>
           </view>
-          <view class='operation'>
+          <view class='operation font_666666_26'>
             <view>
               <image src='/images/icon2/666666_play1.png'></image>
-              <label class='font_333333_26'>{{bean.play_num}}</label>
+              <label>{{bean.play_num}}</label>
             </view>
             <view wx:if="{{bean.is_collect==1}}">
               <image src='/images/icon2/FF0000_heart.png' bindtap='cancCollect' data-res_id="{{bean.id}}" data-type='{{bean.type}}' data-res_key="{{index}}"></image>
-              <label class='font_333333_26'>{{bean.collect_num}}</label>
+              <label>{{bean.collect_num}}</label>
             </view>
             <view wx:else>
               <image src='/images/icon2/666666_heart.png' bindtap='onCollect' data-res_id="{{bean.id}}" data-type='{{bean.type}}' data-res_key="{{index}}"></image>
-              <label class='font_333333_26'>{{bean.collect_num}}</label>
+              <label>{{bean.collect_num}}</label>
             </view>
             <!--<view>
               <image src='/images/icon2/666666_comment.png'></image>
-              <label class='font_333333_26'>100</label>
+              <label >100</label>
             </view>-->
             <view>
               <button open-type='share' data-openid="{{openid}}" data-res_id="{{bean.id}}" data-type='{{bean.type}}' data-res_key="{{index}}" data-video_url="{{bean.tx_url}}" data-video_name="{{bean.title}}" data-video_img='{{bean.img_url}}'>
                 <image src='/images/icon2/666666_share.png'></image>
-                <label class='font_333333_26'>{{bean.share_num}}</label>
+                <label>{{bean.share_num}}</label>
               </button>
             </view>
           </view>
@@ -97,7 +97,7 @@
   </block>
   -->
 </view>
-<template wx:if="{{showControl}}" is="remoteControlWindow" data="{{qrcode_img,box_mac,openid,is_open_simple}}"  />
+<template wx:if="{{showControl}}" is="remoteControlWindow" data="{{qrcode_img,box_mac,openid,is_open_simple}}" />
 <!-- 固定悬浮按钮组 -->
 <view wx:if="{{box_mac !=''}}">
   <template is="fixedSuspensionButtonGroup" />

@@ -58,8 +58,8 @@
 }
 
 .page_main .article .con_bottom > .operation > view {
-  margin-left: 15rpx;
-  margin-right: 15rpx;
+  /* margin-left: 15rpx; */
+  margin-right: 30rpx;
 }
 
 .page_main .article .con_bottom > .operation > view > button,

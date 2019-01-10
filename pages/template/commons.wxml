@@ -49,7 +49,6 @@
   <view class='fixedSuspensionButtonGroup'>
     <view class='scan_tdc'>
       <button class='theme' bindtap='openControl'>遥控器</button>
-
     </view>
   </view>
 </template>

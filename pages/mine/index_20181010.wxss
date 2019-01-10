@@ -131,19 +131,19 @@
   justify-content: space-between;
 }
 
-.con_main .weui-grid {
+.con_main .weui-grid .yingtao {
   width: calc((100vw - 60rpx) / 3);
   height: calc((100vw - 60rpx) / 3);
 }
 
-.con_main .weui-grid image {
+.con_main .weui-grid .yingtao image {
   margin: 0rpx 0rpx 0rpx 6rpx;
   width: calc(100% - 10rpx);
   height: calc(100% - 10rpx);
   border-radius: 10rpx;
 }
 
-.con_main .weui-grid .cover {
+.con_main .weui-grid .yingtao .cover {
   margin: calc(100% * -1) 0rpx 0rpx 6rpx;
   width: calc(100% - 10rpx);
   height: calc(100% - 10rpx);
@@ -151,20 +151,20 @@
   vertical-align: bottom;
 }
 
-.con_main .weui-grid .cover .share {
+.con_main .weui-grid .yingtao .cover .share {
   margin-top: calc(100% - 55rpx);
   margin-left: 5rpx;
   height: 50rpx;
   line-height: 50rpx;
 }
 
-.con_main .weui-grid .cover .share > image {
+.con_main .weui-grid .yingtao .cover .share > image {
   width: 32rpx;
   height: 32rpx;
   vertical-align: middle;
 }
 
-.con_main .weui-grid .cover .share > label {
+.con_main .weui-grid .yingtao .cover .share > label {
   margin-left: 10rpx;
   vertical-align: middle;
 }

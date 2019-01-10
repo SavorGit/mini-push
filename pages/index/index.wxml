@@ -8,11 +8,11 @@
     <view wx:if="{{is_game_banner > 0}}" class='full_width climbtree' bindtap='hdgames' data-boxmac="{{box_mac}}" data-openid="{{openid}}">
       <image class='full_width full_height' src="http://oss.littlehotspot.com/media/resource/3hipiW5nTX.jpg"></image>
     </view>
-    <view wx:if="{{is_link > 0}}" class='tip'>
+    <view wx:if="{{is_link > 0}}" class='full_width tip'>
       <label class='font_F6F2EC_30'>您已成功链接“{{hotel_name}}”的{{room_name}}电视</label>
       <button class='theme-button' bindtap="breakLink" data-boxmac="{{box_mac}}" data-openid="{{openid}}">断开链接</button>
     </view>
-    <view wx:elif="{{is_link == 0}}" class='tip'>
+    <view wx:elif="{{is_link == 0}}" class='full_width tip'>
       <label class='font_F6F2EC_30'> </label>
     </view>
     <view class='operation'>
@@ -45,10 +45,10 @@
           <label >测试</label>
         </view> -->
     </view>
-    <navigator wx:if="{{box_mac !='' && is_open_simple>0}}" target="miniProgram" app-id="wx7883a4327329a67c" path="pages/index/index?box_mac={{box_mac}}" version="release">
+    <!-- <navigator wx:if="{{box_mac !='' && is_open_simple>0}}" target="miniProgram" app-id="wx7883a4327329a67c" path="pages/index/index?box_mac={{box_mac}}" version="release">
       <label>网络不好？传输速度慢？试试简易版</label>
       <image src='/images/icon2/FFFFFF_right-arrow.png'></image>
-    </navigator>
+    </navigator> -->
   </view>
   <!-- 菜单 
   <template is="bottomNavigation" data='{{selectPage:"INTERACT"}}' />

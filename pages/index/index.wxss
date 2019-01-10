@@ -13,15 +13,16 @@
 }
 
 .page_main > .climbtree {
-  height: 256rpx;
+  height: 240rpx;
   padding: unset;
   display: flex;
 }
 
 .page_main > .tip {
-  height: 40rpx;
+  height: 200rpx;
   padding-top: 20rpx;
-  padding-bottom: 140rpx;
+  padding-bottom: 20rpx;
+  text-align: center;
 }
 
 /* .page_main > .tip > button, .page_main > .tip > button::before,
@@ -49,13 +50,9 @@
   border-radius: 25rpx;
 }
 
-.page_main > .operation {
-  height: 500rpx;
-}
-
 .page_main > .operation > view {
   align-items: center;
-  padding: 10rpx 0rpx;
+  padding: 25rpx 0rpx;
 }
 
 .page_main > .operation > view > image {

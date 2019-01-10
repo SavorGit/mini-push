@@ -44,7 +44,7 @@
         <!-- 投图片 -->
         <view class='pic_text'>
           <!-- <label class='font_333333_30'>为所有照片增加文字（选填）</label> -->
-          <textarea class='text_input' name="forscreen_char" maxlength='30' placeholder='1-30字'></textarea>
+          <textarea class='text_input' name="forscreen_char" maxlength='30' placeholder='电视展示时增加文字...'></textarea>
         </view>
         <view class='grant_auth'>
           <checkbox-group class="checkbox-group" bindchange="checkboxChange">
@@ -129,7 +129,7 @@
         <input class="display_hide" name="is_open_simple" value="{{is_open_simple}}"></input>
       </form>
 
-      
+
     </view>
 
     <!-- 重选 -->

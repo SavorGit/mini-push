@@ -34,9 +34,9 @@
 }
 
 .page_main .article .con_main .media {
-  width: 630rpx;
-  height: 420rpx;
-  line-height: 420rpx;
+  width: 640rpx;
+  height: 360rpx;
+  line-height: 360rpx;
   text-align: center;
 }
 
@@ -79,8 +79,8 @@
 }
 
 .page_main .article .con_bottom > .operation > view {
-  margin-left: 15rpx;
-  margin-right: 15rpx;
+  /* margin-left: 15rpx; */
+  margin-right: 30rpx;
 }
 
 .page_main .article .con_bottom > .operation > view > button,

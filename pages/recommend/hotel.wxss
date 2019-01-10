@@ -22,6 +22,10 @@
   vertical-align: middle;
 }
 
+.page_top > view .city_show > label {
+  vertical-align: middle;
+}
+
 .page_top > view .area_show > image {
   width: 20rpx;
   height: 20rpx;
@@ -109,6 +113,11 @@
 .page_main > .row-item > .i-right > .address > image {
   width: 20rpx;
   height: 20rpx;
+  vertical-align: middle;
+}
+
+.page_main > .row-item > .i-right > .address > label {
+  vertical-align: middle;
 }
 
 .flex-for-bottom {
@@ -124,14 +133,18 @@
 }
 
 .flex-for-bottom >.flex-tip {
-  width: 92%;
-  height: 80rpx;
-  line-height: 80rpx;
-  border-radius: 40rpx;
+  width: 680rpx;
+  height: 60rpx;
+  line-height: 60rpx;
+  border-radius: 30rpx;
   font-size: 30rpx;
 }
 
-.flex-for-bottom >.flex-tip > .btn-colse {
+.flex-for-bottom >.flex-tip label {
+  vertical-align: middle;
+}
+
+.flex-for-bottom >.flex-tip .btn-colse {
   margin-left: 30rpx;
   font-size: 46rpx;
 }
