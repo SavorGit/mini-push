@@ -27,34 +27,22 @@
   </modal>
 </template>
 
-
-<!-- 微信授权登录
-<template name="wxRecAuthLogin">
-  <modal show="{{show}}" height='450rpx' width="98%" border-radius="0rpx" title-text="" confirm-text="" cancel-text="">
-    <view class='wxAuthLogin-container'>
-      <view class='wxAuthLogin-top'>
-        <view class='opt'>
-          <button class='close' bindtap='closeAuth'>
-            <image src='/images/icon/grey_close.png'></image>
-          </button>
-        </view>
-        <view class='title'>
-          <label class='font_333333_34'>温馨提示</label>
-        </view>
-      </view>
+<!-- 跳转极简版 -->
+<template name="jumpSimple">
+  <bottomModal show="{{show}}" height='500rpx' width="98%" border-radius="10rpx" title-text="温馨提示" title-color='#000000' confirm-text="" cancel-text="">
+    <view class='wxAuthLogin-container' style='border-radius: 0rpx 0rpx 10rpx 10rpx;'>
       <view class='wxAuthLogin-middle'>
-        <label class='content font_333333_30'>未获取到您所在的城市</label>
-        <label class='content font_333333_30'>请进行位置授权,以便为您推荐优质餐厅</label>
-
+        <label class='content font_333333_32'>亲，您当前所在的网络环境有可能较差，</label>
+        <label class='content font_333333_32'>需体验极速投屏，</label>
+        <label class='content font_333333_32'>请前往小热点极简版哦。</label>
       </view>
-
-      <view class='wxAuthLogin-bottom'>
-        <button class='savor-btn' open-type="getUserInfo" bindgetuserinfo="onGetUserInfo">微信授权登录</button>
+      <view class='wxAuthLogin-bottom' style='height: 110rpx; padding: 0rpx 100rpx; display:flex; flex-direction: row; align-items: center; justify-content: space-between;'>
+        <navigator bindtap='closeJump' class='savor-btn' style='width: 220rpx; height:80rpx; line-height:80rpx; border-radius: 10rpx; display: block; background-color: #BEBEBE;'>不需要</navigator>
+        <navigator target="miniProgram" app-id="wx7883a4327329a67c" path="pages/index/index?box_mac={{box_mac}}" version="release" class='savor-btn' style='width: 220rpx; height:80rpx; line-height:80rpx; border-radius: 10rpx; display: block; -webkit-animation: rotate2 1.8s linear;'>前往极简版</navigator>
       </view>
     </view>
-  </modal>
+  </bottomModal>
 </template>
- -->
 
 <!-- 固定悬浮按钮组 -->
 <template name="fixedSuspensionButtonGroup">

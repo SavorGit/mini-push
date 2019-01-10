@@ -279,3 +279,13 @@
   height: 18px;
   vertical-align: middle;
 }
+
+@-webkit-keyframes rotate2 {
+  from {
+    -webkit-transform: rotateX(0deg);
+  }
+
+  to {
+    -webkit-transform: rotateX(720deg);
+  }
+}

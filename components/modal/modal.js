@@ -81,7 +81,7 @@ Component({
     },
     confirmColor: {
       type: String,
-      value: '#FFFFFF'
+      value: '#333333'
     },
     cancelText: {
       type: String,
@@ -89,7 +89,7 @@ Component({
     },
     cancelColor: {
       type: String,
-      value: '#FFFFFF'
+      value: '#333333'
     }
   },
 

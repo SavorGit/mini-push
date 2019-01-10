@@ -197,3 +197,6 @@
   </view>
 
 </view>
+
+<!-- 跳转极简版 -->
+<template is="jumpSimple" data="{{show:is_show_jump,box_mac:box_mac}}" />
