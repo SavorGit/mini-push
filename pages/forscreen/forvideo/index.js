@@ -100,6 +100,7 @@ Page({
     var avatarUrl = res.detail.value.avatarUrl;
     var nickName = res.detail.value.nickName;
     var public_text = res.detail.value.public_text;
+    var is_open_simple = res.detail.value.is_open_simple;
     
 
     res_sup_time = (new Date()).valueOf();
@@ -112,6 +113,7 @@ Page({
       method: "POST",
       data: { box_mac: box_mac },
       success: function (res) {
+        var timer8_0;
         var is_forscreen = res.data.result.is_forscreen;
         if (is_forscreen == 1) {
           wx.showModal({
@@ -119,14 +121,32 @@ Page({
             content: '当前电视正在进行投屏,继续投屏有可能打断当前投屏中的内容.',
             success: function (res) {
               if (res.confirm) {
-                uploadVedio(video, box_mac, openid, res_sup_time, is_pub_hotelinfo, is_share, duration, avatarUrl, nickName, public_text);
+                if (is_open_simple > 0) {
+                  timer8_0 = setTimeout(function () {
+                    that.setData({
+                      is_show_jump: true,
+                      show: true
+
+                    })
+                  }, 7000);
+                }
+                uploadVedio(video, box_mac, openid, res_sup_time, is_pub_hotelinfo, is_share, duration, avatarUrl, nickName, public_text, timer8_0);
               }else {
                 
               }
             }
           })
         }else {
-          uploadVedio(video, box_mac, openid, res_sup_time, is_pub_hotelinfo, is_share, duration, avatarUrl, nickName, public_text);
+          if (is_open_simple > 0) {
+            timer8_0 = setTimeout(function () {
+              that.setData({
+                is_show_jump: true,
+                show: true
+
+              })
+            }, 7000);
+          }
+          uploadVedio(video, box_mac, openid, res_sup_time, is_pub_hotelinfo, is_share, duration, avatarUrl, nickName, public_text, timer8_0);
         }
       }
     })
@@ -135,7 +155,7 @@ Page({
     
     
     
-    function uploadVedio(video, box_mac, openid, res_sup_time, is_pub_hotelinfo, is_share, duration, avatarUrl, nickName, public_text) {
+    function uploadVedio(video, box_mac, openid, res_sup_time, is_pub_hotelinfo, is_share, duration, avatarUrl, nickName, public_text, timer8_0) {
      
       wx.request({
         url: 'https://mobile.littlehotspot.com/Smallapp/Index/getOssParams',
@@ -145,11 +165,11 @@ Page({
         success: function (rest) {
           policy = rest.data.policy;
           signature = rest.data.signature;
-          uploadOssVedio(policy, signature, video, box_mac, openid, res_sup_time, is_pub_hotelinfo, is_share, duration, avatarUrl, nickName, public_text);
+          uploadOssVedio(policy, signature, video, box_mac, openid, res_sup_time, is_pub_hotelinfo, is_share, duration, avatarUrl, nickName, public_text, timer8_0);
         }
       });
     }
-    function uploadOssVedio(policy, signature, video, box_mac, openid, res_sup_time, is_pub_hotelinfo, is_share, duration, avatarUrl, nickName, public_text) {
+    function uploadOssVedio(policy, signature, video, box_mac, openid, res_sup_time, is_pub_hotelinfo, is_share, duration, avatarUrl, nickName, public_text, timer8_0) {
       
       var filename = video;          //视频url
 
@@ -178,7 +198,7 @@ Page({
 
         },
         success: function (res) {
-            
+          clearInterval(timer8_0);
         }
       });
       upload_task.onProgressUpdate((res) => {
@@ -997,6 +1017,12 @@ Page({
         box_mac: box_mac,
         msg: '{"action":31,"change_type":' + change_type+'}',
       },
+    })
+  },
+  closeJump: function (e) {
+    var that = this;
+    that.setData({
+      is_show_jump: false,
     })
   },
   /**

@@ -57,7 +57,8 @@ Page({
       pic_show_cur: [],
       avatarUrl: user_info.avatarUrl,
       nickName: user_info.nickName,
-      is_open_simple: is_open_simple
+      is_open_simple: is_open_simple,
+      is_show_jump: false,
 
     });
     wx.chooseImage({
@@ -70,7 +71,7 @@ Page({
         that.setData({
           showTpBt: true,
           showThird: false,
-          showSecond:true
+          showSecond:true,
         })
       },
       fail:function(res){
@@ -110,7 +111,8 @@ Page({
 
       ],
       is_share:0,
-      is_btn_disabel: false
+      is_btn_disabel: false,
+      is_show_jump: false,
     })
     openid = e.currentTarget.dataset.openid;
     box_mac = e.currentTarget.dataset.boxmac;
@@ -170,7 +172,7 @@ Page({
     var is_share = e.detail.value.is_share;
     var avatarUrl = e.detail.value.avatarUrl;
     var nickName = e.detail.value.nickName;
-
+    var is_open_simple = e.detail.value.is_open_simple;
 
     if (e.detail.value.upimgs0 != '' && e.detail.value.upimgs0 != undefined) upimgs[0] = e.detail.value.upimgs0;
     if (e.detail.value.upimgs1 != '' && e.detail.value.upimgs1 != undefined) upimgs[1] = e.detail.value.upimgs1;
@@ -190,6 +192,7 @@ Page({
       method: "POST",
       data: { box_mac: box_mac },
       success: function (res) {
+        var timer8_0;
         var is_forscreen = res.data.result.is_forscreen;
         if (is_forscreen == 1) {
           wx.showModal({
@@ -197,6 +200,16 @@ Page({
             content: '当前电视正在进行投屏,继续投屏有可能打断当前投屏中的内容.',
             success: function (res) {
               if (res.confirm) {
+                if (is_open_simple > 0) {
+                  timer8_0 = setTimeout(function () {
+                    that.setData({
+                      is_show_jump: true,
+                      show: true
+
+                    })
+                    //clearInterval(timer8_0);
+                  }, 7000);
+                }
                 wx.request({
                   url: 'https://mobile.littlehotspot.com/Smallapp/Index/getOssParams',
                   headers: {
@@ -206,7 +219,7 @@ Page({
 
                     policy = rest.data.policy;
                     signature = rest.data.signature;
-                    uploadOss_multy(policy, signature, upimgs, box_mac, openid, img_lenth, forscreen_char, avatarUrl, nickName, public_text);
+                    uploadOss_multy(policy, signature, upimgs, box_mac, openid, img_lenth, forscreen_char, avatarUrl, nickName, public_text, timer8_0);
                   }
                 });
               }else {
@@ -215,6 +228,17 @@ Page({
             }
           })
         }else {
+          if (is_open_simple > 0) {
+            console.log('dffff');
+            timer8_0 = setTimeout(function () {
+              that.setData({
+                is_show_jump: true,
+                show: true
+
+              })
+              //clearInterval(timer8_0);
+            }, 7000);
+          }
           wx.request({
             url: 'https://mobile.littlehotspot.com/Smallapp/Index/getOssParams',
             headers: {
@@ -233,7 +257,7 @@ Page({
     })
 
     
-    function uploadOssNew(policy, signature, img_url, box_mac, openid, timestamp, flag, img_len, forscreen_char, forscreen_id, res_sup_time, avatarUrl, nickName, public_text) {
+    function uploadOssNew(policy, signature, img_url, box_mac, openid, timestamp, flag, img_len, forscreen_char, forscreen_id, res_sup_time, avatarUrl, nickName, public_text, timer8_0) {
 
       var filename = img_url;
       var index1 = filename.lastIndexOf(".");
@@ -264,7 +288,10 @@ Page({
         },
 
         success: function (res) {
-          
+          if (order == img_len) {
+            
+            clearInterval(timer8_0);
+          }
         },
         complete: function (es) {
           tmp_percent[flag] = { "percent": 100 };
@@ -362,7 +389,7 @@ Page({
       })
 
     }
-    function uploadOss_multy(policy, signature, upimgs, box_mac, openid, img_len, forscreen_char, avatarUrl, nickName, public_text) {
+    function uploadOss_multy(policy, signature, upimgs, box_mac, openid, img_len, forscreen_char, avatarUrl, nickName, public_text, timer8_0) {
       //console.log(img_len);
       var tmp_imgs = [];
       var forscreen_id = (new Date()).valueOf();
@@ -379,7 +406,7 @@ Page({
         that.setData({
           tmp_imgs: tmp_imgs
         });
-        uploadOssNew(policy, signature, filename, box_mac, openid, timestamp, i, img_len, forscreen_char, forscreen_id, res_sup_time, avatarUrl, nickName, public_text);
+        uploadOssNew(policy, signature, filename, box_mac, openid, timestamp, i, img_len, forscreen_char, forscreen_id, res_sup_time, avatarUrl, nickName, public_text, timer8_0);
       }
       that.setData({
         showThird: true,
@@ -847,6 +874,12 @@ Page({
           })
         }
       }
+    })
+  },
+  closeJump: function (e) {
+    var that = this;
+    that.setData({
+      is_show_jump: false,
     })
   },
 })
