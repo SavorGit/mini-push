@@ -449,7 +449,7 @@ Page({
   },
 
   //退出投屏
-  exitForscreen(e) {
+  exitForscreend(e) {
     var that = this;
     openid = e.currentTarget.dataset.openid;
     box_mac = e.currentTarget.dataset.boxmac;
@@ -466,7 +466,7 @@ Page({
       },
       success: function (res) {
         wx.navigateBack({
-          delta: 1
+          delta: 1,
         })
         wx.showToast({
           title: '退出成功',

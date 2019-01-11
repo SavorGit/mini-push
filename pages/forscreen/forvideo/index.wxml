@@ -147,7 +147,7 @@
     <view class="page_bottom theme2">
       <view class='button_group flex_row_center'>
         <button class='savor-btn button_space_left' bindtap='chooseVedio' data-boxmac="{{box_mac}}" data-openid="{{openid}}">重选视频</button>
-        <button class='savor-btn button_space_right' bindtap="exitForscreen" data-boxmac="{{box_mac}}" data-openid="{{openid}}">退出投屏</button>
+        <button class='savor-btn button_space_right' bindtap="exitForscreend" data-boxmac="{{box_mac}}" data-openid="{{openid}}">退出投屏</button>
       </view>
     </view>
 
