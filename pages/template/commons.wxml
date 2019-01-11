@@ -55,7 +55,7 @@
 
 <!-- 遥控器窗口 -->
 <template name="remoteControlWindow">
-  <modal show="{{popRemoteControlWindow}}" height='900rpx' width="630rpx" background-color='unset' border-radius="0rpx" title-text="" confirm-text="" cancel-text="">
+  <modal show="{{popRemoteControlWindow}}" height='990rpx' width="620rpx" background-color='unset' border-radius="0rpx" title-text="" confirm-text="" cancel-text="">
     <view class='remoteControlWindow-container'>
       <view bindtap='closeControl' class='remoteControlWindow-control'>
         <image src='/images/icon2/666666_close.png'></image>
@@ -79,7 +79,7 @@
       <view class='remoteControlWindow-middle'>
         <button bindtap='callQrCode' data-openid='{{openid}}' data-box_mac="{{box_mac}}" data-qrcode_img='{{qrcode_img}}'>
           <image src='/images/icon2/big-button.png'></image>
-          <image src='{{qrcode_img}}' style='width: calc(100% - 30rpx); height: calc(100% - 30rpx); border-radius: 50%; top: 15rpx; left: 15rpx;'></image>
+          <image src='{{qrcode_img}}' style='width: 310rpx; height: 310rpx; padding: 13rpx; border-radius: 50%; top: 33rpx; left: 33rpx; background-color: #FFFFFF;'></image>
         </button>
         <view class='btn-tip'>
           <image src='/images/icon2/click-hand.png'></image>

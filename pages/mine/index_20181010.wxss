@@ -136,10 +136,20 @@
   height: calc((100vw - 60rpx) / 3);
 }
 
-.con_main .weui-grid .yingtao image {
+.con_main .weui-grid:hover {
+  background: #000;
+  border: #000;
+}
+
+.con_main .weui-grid .yingtao navigator {
   margin: 0rpx 0rpx 0rpx 6rpx;
   width: calc(100% - 10rpx);
   height: calc(100% - 10rpx);
+}
+
+.con_main .weui-grid .yingtao navigator image {
+  width: 100%;
+  height: 100%;
   border-radius: 10rpx;
 }
 

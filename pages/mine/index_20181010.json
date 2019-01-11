@@ -1,1 +1,6 @@
-{"enablePullDownRefresh": true}
+{
+  "enablePullDownRefresh": true,
+  "usingComponents": {
+    "modal": "/components/modal/modal"
+  }
+}

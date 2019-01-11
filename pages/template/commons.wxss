@@ -116,8 +116,8 @@
 }
 
 .remoteControlWindow-container .remoteControlWindow-control image {
-  width: 32rpx;
-  height: 32rpx;
+  width: 30rpx;
+  height: 30rpx;
   background-color: rgba(99, 99, 99, 0.075);
 }
 
@@ -132,8 +132,8 @@
 }
 
 .remoteControlWindow-container .remoteControlWindow-top .opt button {
-  width: 120rpx;
-  height: 120rpx;
+  width: 100rpx;
+  height: 100rpx;
   border: unset;
   padding: unset;
   background: unset;
@@ -147,8 +147,9 @@
 }
 
 .remoteControlWindow-container .remoteControlWindow-middle {
-  height: 530rpx;
-  padding-top: 30rpx;
+  height: 580rpx;
+  padding-top: 90rpx;
+  z-index: 1;
 }
 
 .remoteControlWindow-container .remoteControlWindow-middle button {
@@ -158,6 +159,7 @@
   padding: unset;
   background: unset;
   border-radius: 200rpx;
+  z-index: 1;
 }
 
 .remoteControlWindow-container .remoteControlWindow-middle button image {
@@ -166,6 +168,7 @@
   position: absolute;
   top: 0;
   left: 0;
+  z-index: 1;
 }
 
 .remoteControlWindow-container .remoteControlWindow-middle .btn-tip {
@@ -175,18 +178,15 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  z-index: 2;
+  font-size: 24rpx;
+  color: #fff;
+  z-index: 10;
 }
 
 .remoteControlWindow-container .remoteControlWindow-middle .btn-tip image {
-  width: 64rpx;
-  height: 64rpx;
-  z-index: 2;
-}
-
-.remoteControlWindow-container .remoteControlWindow-middle .btn-tip {
-  font-size: 32rpx;
-  color: #fff;
+  width: 50rpx;
+  height: 50rpx;
+  z-index: 10;
 }
 
 .remoteControlWindow-container .remoteControlWindow-bottom {
@@ -202,7 +202,7 @@
 }
 
 .remoteControlWindow-container .remoteControlWindow-bottom button {
-  width: 280rpx;
+  width: 260rpx;
   height: 80rpx;
   line-height: 80rpx;
   font-size: 28rpx;

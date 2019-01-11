@@ -44,7 +44,7 @@
           <view class="weui-grids full_width" wx:if="{{publiclist  !=''}}">
             <view class="weui-grid" wx:for="{{publiclist}}" wx:key="key" wx:for-item="bean" wx:for-index="index">
               <view class='yingtao'>
-                <navigator class='full_width full_height' url="/pages/mine/index?box_mac={{box_mac}}">
+                <navigator class='navigator-hover' url="/pages/mine/index?box_mac={{box_mac}}">
                   <image class="pic_show" mode='aspectFill' src="{{bean.imgurl}}"></image>
                   <view class='cover'>
                     <view class='share font_FFFFFF_32'>
@@ -101,7 +101,7 @@
                 </navigator>
               </view>
               <view class='yingtao' wx:else>
-                <navigator wx:if="{{bean.type==1 || bean.type==3}}" class='full_width full_height' url="/pages/forscreen/video/launch_video?video_url={{bean.res_url}}&video_name={{bean.title}}&box_mac={{box_mac}}&res_id={{bean.res_id}}&filename={{bean.filename}}&video_img_url={{bean.imgurl}}">
+                <navigator wx:if="{{bean.type==1 || bean.type==3}}" url="/pages/forscreen/video/launch_video?video_url={{bean.res_url}}&video_name={{bean.title}}&box_mac={{box_mac}}&res_id={{bean.res_id}}&filename={{bean.filename}}&video_img_url={{bean.imgurl}}">
                   <image class="pic_show" mode='aspectFill' src="{{bean.imgurl}}"></image>
                   <view class='cover'>
                     <view class='share font_FFFFFF_32'>
@@ -148,7 +148,10 @@
   <template is="bottomNavigation" data='{{selectPage:"MINE"}}' />
   -->
 </view>
-<template wx:if="{{showControl}}" is="remoteControlWindow" data="{{qrcode_img,box_mac,openid,is_open_simple}}" />
+
+<!-- 遥控器 -->
+<template is="remoteControlWindow" data='{{popRemoteControlWindow: showControl, qrcode_img:qrcode_img, box_mac:box_mac, openid:openid, is_open_simple:is_open_simple}}' />
+
 <!-- 固定悬浮按钮组 -->
 <view wx:if="{{box_mac !=''}}">
   <template is="fixedSuspensionButtonGroup" />

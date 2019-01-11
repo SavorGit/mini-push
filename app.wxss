@@ -2,6 +2,18 @@
 
 /* ================================== 页面 ================================== */
 
+.navigator-hover {
+  background-color: unset;
+  opacity: unset;
+  /* background-color: rgba(0, 0, 0, 0.1);
+  opacity: 0.7; */
+}
+
+/* view:focus, view:active, view::selection, view:hover {
+  background: unset;
+  border: unset;
+} */
+
 ::-webkit-scrollbar {
   width: 0;
   height: 0;
@@ -377,5 +389,4 @@ button.btn_background_034 {
 @import "pages/template/commons.wxss";
 
 /* @import "pages/template/navigation.wxss"; */
-
 @import "theme.wxss";

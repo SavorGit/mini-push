@@ -128,12 +128,17 @@
   margin: 0rpx 65rpx;
   padding: 0rpx;
   border: 0rpx;
-  width: 100%;
+  width: calc(100% - 130rpx);
 }
 
-.con_main .weui-grid image {
-  width: calc((100vw - 110rpx) / 3 - 10rpx);
-  height: calc((100vw - 110rpx) / 3 - 10rpx);
+.con_main .weui-grid navigator {
+  width: calc((100vw - 130rpx) / 3 - 10rpx);
+  height: calc((100vw - 130rpx) / 3 - 10rpx);
+}
+
+.con_main .weui-grid navigator image {
+  width: 100%;
+  height: 100%;
   border-radius: 10rpx;
 }
 

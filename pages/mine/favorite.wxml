@@ -45,7 +45,7 @@
           </view>
         </view>
         <view class='con_main'>
-          <view class="weui-grids" wx:if="{{bean.res_type=='1'}}">
+          <view class="full_width weui-grids" wx:if="{{bean.res_type=='1'}}">
             <view class="weui-grid" wx:for="{{bean.list}}" wx:key="pkey" wx:for-item="pubdetail" wx:for-index="pindex">
               <navigator url="/pages/find/picture?forscreen_id={{bean.res_id}}&box_mac={{box_mac}}">
                 <image class="pic_show" mode='aspectFill' src="{{pubdetail.res_url}}"></image>
@@ -91,8 +91,8 @@
               </view>
               <view wx:else>
                 <button bindtap='onCollect' data-res_id="{{bean.res_id}}" data-openid="{{openid}}" data-type='{{bean.type}}' data-res_key="{{index}}">
-                <image src='http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/icon/grey_heart.png'></image>
-                <label>{{bean.collect_num}}</label>
+                  <image src='http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/icon/grey_heart.png'></image>
+                  <label>{{bean.collect_num}}</label>
                 </button>
               </view>
               <!--<view>

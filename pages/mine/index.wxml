@@ -21,11 +21,11 @@
             </view>
           </view>
           <view class='con_main'>
-            <view class="weui-grids" wx:if="{{bean.res_type=='1'}}">
+            <view class="full_width weui-grids" wx:if="{{bean.res_type=='1'}}">
 
               <view class="weui-grid" wx:for="{{bean.pubdetail}}" wx:key="pkey" wx:for-item="pubdetail" wx:for-index="pindex">
                 <navigator url='/pages/find/picture?forscreen_id={{bean.forscreen_id}}&box_mac={{box_mac}}'>
-                <image class="pic_show" mode='aspectFill' src="{{pubdetail.res_url}}" ></image>
+                  <image class="pic_show" mode='aspectFill' src="{{pubdetail.res_url}}"></image>
                 </navigator>
               </view>
 
@@ -61,8 +61,8 @@
                 </view>
                 <view wx:if="{{bean.is_collect=='1'}}">
                   <button bindtap='cancCollect' data-res_id="{{bean.forscreen_id}}" data-openid="{{openid}}" data-res_key="{{index}}">
-                  <image src='/images/icon2/FF0000_heart.png'></image>
-                  <label>{{bean.collect_num}}</label>
+                    <image src='/images/icon2/FF0000_heart.png'></image>
+                    <label>{{bean.collect_num}}</label>
                   </button>
                 </view>
                 <view wx:else>
@@ -121,8 +121,8 @@
     </view>
 
     <view class='delete-bottom'>
-      <button  class='savor-btn' bindtap="modalCancel">取消</button>
-      <button   class='savor-btn theme-menu' bindtap="modalConfirm" data-keys="{{keys}}" data-publiclist='{{publiclist}}' data-forscreen_id='{{forscreen_id}}'>删除</button>
+      <button class='savor-btn' bindtap="modalCancel">取消</button>
+      <button class='savor-btn theme-menu' bindtap="modalConfirm" data-keys="{{keys}}" data-publiclist='{{publiclist}}' data-forscreen_id='{{forscreen_id}}'>删除</button>
     </view>
   </view>
 </bottomModal>
