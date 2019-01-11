@@ -250,7 +250,7 @@
 
 .launch_video_page_a .launch_history > scroll-view {
   width: 100%;
-  height: calc(100vh - 920rpx);
+  height: calc(100vh - 940rpx);
 }
 
 .launch_video_page_a .launch_history .no_data {

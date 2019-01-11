@@ -314,7 +314,7 @@ image.pic_show_cur {
 
 .launch_pic_page_a .launch_history > scroll-view {
   width: 100%;
-  height: calc(100vh - 940rpx);
+  height: calc(100vh - 960rpx);
 }
 
 .launch_pic_page_a .launch_history .no_data {
