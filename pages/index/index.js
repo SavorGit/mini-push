@@ -169,8 +169,10 @@ Page({
       },
       success:function(res){
         var is_game_banner = res.data.result.status;
+        var img_url = res.data.result.img_url;
         that.setData({
-          is_game_banner: is_game_banner
+          is_game_banner: is_game_banner,
+          banner_img_url: img_url
         })
       }
     })
