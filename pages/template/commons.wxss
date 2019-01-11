@@ -123,7 +123,9 @@
 .remoteControlWindow-container .remoteControlWindow-control image {
   width: 30rpx;
   height: 30rpx;
-  background-color: rgba(99, 99, 99, 0.075);
+  /* padding: 10rpx 25rpx;
+  background-color: rgba(0, 0, 0, 0.1);
+  border-radius: 10rpx; */
 }
 
 .remoteControlWindow-container .remoteControlWindow-top {
