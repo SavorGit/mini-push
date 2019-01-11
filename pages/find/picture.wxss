@@ -16,6 +16,7 @@
 .page_main .article .con_top .user_info image {
   width: 80rpx;
   height: 80rpx;
+  border-radius: 50%;
   vertical-align: middle;
 }
 

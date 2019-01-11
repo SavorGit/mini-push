@@ -110,6 +110,11 @@
   border-radius: 20rpx;
 }
 
+.remoteControlWindow-container .button-hover {
+  /* background-color: rgba(0, 0, 0, 0.1); */
+  opacity: 0.7;
+}
+
 .remoteControlWindow-container .remoteControlWindow-control {
   padding: 20rpx;
   text-align: right;
@@ -226,6 +231,11 @@
   overflow: hidden; */
 }
 
+.remoteControlWindow-container .remoteControlWindow-bottom navigator.navigator-hover {
+  background-color: #05101a;
+  opacity: 0.7;
+}
+
 /* ================================= 自定义顶级页面导航栏 ================================= */
 
 .default-navigation-bar {
@@ -267,6 +277,10 @@
 
 /* ================================= 自定义二级页面导航栏 ================================= */
 
+.default-navigation-bar > .navigation-bar > .btn {
+  padding-left: 20rpx;
+}
+
 .default-navigation-bar > .navigation-bar > .btn > .go-back,
 .default-navigation-bar > .navigation-bar > .btn > .to-home {
   padding-left: 5px;
@@ -275,8 +289,8 @@
 
 .default-navigation-bar > .navigation-bar > .btn > .go-back > image,
 .default-navigation-bar > .navigation-bar > .btn > .to-home > image {
-  width: 18px;
-  height: 18px;
+  width: 24px;
+  height: 24px;
   vertical-align: middle;
 }
 
