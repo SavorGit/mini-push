@@ -39,6 +39,7 @@ Page({
     djs:10,
     forscreen_history_list:'',
     hiddens: true,   //上拉加载中,
+    load_fresh_char:'',
     is_view_control:false,
   },
 
@@ -90,6 +91,8 @@ Page({
     //console.log(res);
     var that= this;
     that.setData({
+      load_fresh_char: '亲^_^投屏中,请稍后...',
+      hiddens: false,
       is_btn_disabel:true,
     })
     var video = res.detail.value.video;
@@ -216,6 +219,7 @@ Page({
             oss_video_url: "http://oss.littlehotspot.com/forscreen/resource/" + timestamp + postf_t,
             upload_vedio_temp:'',
             is_view_control: true,
+            hiddens:true,
           })
           wx.request({
             url: 'https://mobile.littlehotspot.com/Smallapp21/index/recordForScreenPics',
@@ -978,6 +982,7 @@ Page({
     var box_mac = e.target.dataset.box_mac;
     page = page + 1;
     that.setData({
+      load_fresh_char:'加载中...',
       hiddens: false,
     })
     wx.request({
