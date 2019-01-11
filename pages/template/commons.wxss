@@ -172,7 +172,7 @@
 }
 
 .remoteControlWindow-container .remoteControlWindow-middle .btn-tip {
-  margin-top: -30rpx;
+  margin-top: -10rpx;
   height: 100rpx;
   display: flex;
   flex-direction: column;
