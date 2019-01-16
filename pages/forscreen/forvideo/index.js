@@ -1,4 +1,5 @@
 // pages/forscreen/forvideo/index.js
+const util = require('../../../utils/util.js')
 const app = getApp();
 var tmp;
 var openid;
@@ -1034,12 +1035,12 @@ Page({
     })
   },
   //遥控呼大码
-  callQrCode: function (e) {
+  callQrCode: util.throttle(function (e) {
     openid = e.currentTarget.dataset.openid;
     box_mac = e.currentTarget.dataset.box_mac;
     var qrcode_img = e.currentTarget.dataset.qrcode_img;
     app.controlCallQrcode(openid, box_mac, qrcode_img);
-  },//呼大码结束
+  }, 3000),//呼大码结束
   //打开遥控器
   openControl: function (e) {
     var that = this;
