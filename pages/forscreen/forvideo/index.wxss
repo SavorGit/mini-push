@@ -157,9 +157,9 @@
   width: 100%;
 }
 
-.launch_video_page_a .page_main > view.cover > video {
+.launch_video_page_a .page_main > view.cover > image {
   width: 100%;
-  height: 484rpx;
+  height: 380rpx;
 }
 
 .launch_video_page_a > .page_bottom {
@@ -250,7 +250,7 @@
 
 .launch_video_page_a .launch_history > scroll-view {
   width: 100%;
-  height: calc(100vh - 940rpx);
+  height: calc(100vh - 810rpx);
 }
 
 .launch_video_page_a .launch_history .no_data {
