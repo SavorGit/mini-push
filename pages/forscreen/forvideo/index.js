@@ -70,9 +70,11 @@ Page({
       maxDuration: 60,
       camera: 'back',
       success: function (res) {
+        //console.log(res);
         that.setData({
           showVedio: true,
           upload_vedio_temp:res.tempFilePath,
+          upload_vedio_cover:res.thumbTempFilePath,
           duration: res.duration
         });
         
@@ -133,7 +135,7 @@ Page({
                       show: true
 
                     })
-                  }, 7000);
+                  }, 10000);
                 }
                 uploadVedio(video, box_mac, openid, res_sup_time, is_pub_hotelinfo, is_share, duration, avatarUrl, nickName, public_text, timer8_0);
               }else {
@@ -149,7 +151,7 @@ Page({
                 show: true
 
               })
-            }, 7000);
+            }, 10000);
           }
           uploadVedio(video, box_mac, openid, res_sup_time, is_pub_hotelinfo, is_share, duration, avatarUrl, nickName, public_text, timer8_0);
         }
@@ -325,10 +327,10 @@ Page({
       maxDuration: 60,
       camera: 'back',
       success: function (res) {
-        
         that.setData({
           showVedio: true,
           upload_vedio_temp: res.tempFilePath,
+          upload_vedio_cover: res.thumbTempFilePath,
           vedio_percent:0
         });
         //uploadVedio(res, box_mac, openid);

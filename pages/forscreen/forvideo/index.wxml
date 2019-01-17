@@ -130,7 +130,7 @@
     </view>
     <view class='page_main'>
       <view class='cover'>
-        <image src='http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg'></image>
+        <image src='{{upload_vedio_cover}}'></image>
       </view>
 
 

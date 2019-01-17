@@ -1,4 +1,5 @@
 // pages/forscreen/history/list.js
+const util = require('../../../utils/util.js')
 const app = getApp();
 var tmp;
 var openid;
@@ -27,6 +28,20 @@ Page({
     that.setData({
       openid:openid,
       box_mac:box_mac
+    })
+
+    wx.request({
+      url: 'https://mobile.littlehotspot.com/Smallapp/index/isHaveCallBox?openid=' + openid,
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      success: function (res) {
+        if (res.data.code == 10000 && res.data.result.is_have == 1) {
+          that.setData({
+            is_open_simple: res.data.result.is_open_simple,
+          })
+        }
+      }
     })
     //获取投屏历史
     wx.request({
@@ -387,6 +402,51 @@ Page({
         }
       }
     })
+  },
+  //遥控呼大码
+  callQrCode: util.throttle(function (e) {
+    openid = e.currentTarget.dataset.openid;
+    box_mac = e.currentTarget.dataset.box_mac;
+    var qrcode_img = e.currentTarget.dataset.qrcode_img;
+    app.controlCallQrcode(openid, box_mac, qrcode_img);
+  }, 3000),//呼大码结束
+  //打开遥控器
+  openControl: function (e) {
+    var that = this;
+    var qrcode_url = 'https://mobile.littlehotspot.com/Smallapp/index/getBoxQr?box_mac=' + box_mac + '&type=3';
+    that.setData({
+
+      showControl: true,
+      qrcode_img: qrcode_url
+    })
+  },
+  //关闭遥控
+  closeControl: function (e) {
+    var that = this;
+    that.setData({
+
+      showControl: false,
+    })
+
+  },
+  //遥控退出投屏
+  exitForscreen: function (e) {
+    openid = e.currentTarget.dataset.openid;
+    box_mac = e.currentTarget.dataset.box_mac;
+    app.controlExitForscreen(openid, box_mac);
+  },
+  //遥控调整音量
+  changeVolume: function (e) {
+    box_mac = e.currentTarget.dataset.box_mac;
+    var change_type = e.currentTarget.dataset.change_type;
+    app.controlChangeVolume(box_mac, change_type);
+
+  },
+  //遥控切换节目
+  changeProgram: function (e) {
+    box_mac = e.currentTarget.dataset.box_mac;
+    var change_type = e.currentTarget.dataset.change_type;
+    app.controlChangeProgram(box_mac, change_type);
   },
   /**
    * 生命周期函数--监听页面初次渲染完成

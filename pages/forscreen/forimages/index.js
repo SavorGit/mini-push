@@ -207,7 +207,7 @@ Page({
 
                     })
                     //clearInterval(timer8_0);
-                  }, 7000);
+                  }, 10000);
                 }
                 wx.request({
                   url: 'https://mobile.littlehotspot.com/Smallapp/Index/getOssParams',
@@ -236,7 +236,7 @@ Page({
 
               })
               //clearInterval(timer8_0);
-            }, 7000);
+            }, 10000);
           }
           wx.request({
             url: 'https://mobile.littlehotspot.com/Smallapp/Index/getOssParams',

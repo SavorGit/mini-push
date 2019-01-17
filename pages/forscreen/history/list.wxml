@@ -38,95 +38,18 @@
         </view>
         <view class="video" wx:if="{{bean.res_type == 2 }}">
           <view wx:for="{{bean.list}}" wx:key="pkey" wx:for-item="item" wx:for-index="indexs">
-            <navigator bindtap='findLog' data-openid='{{openid}}' data-box_mac='{{box_mac}}' data-title='' data-tx_url='{{item.forscreen_url}}' data-id='{{bean.forscreen_id}}' data-duration="{{item.duration}}" url="/pages/forscreen/video/launch_video?video_url={{item.res_url}}&video_name=">
-              <image mode='aspectFill' src="{{item.imgurl}}"></image>
+            <navigator bindtap='findLog' data-openid='{{openid}}' data-box_mac='{{box_mac}}' data-title='' data-tx_url='{{item.forscreen_url}}' data-id='{{bean.forscreen_id}}' data-duration="{{item.duration}}" url="">
+              
+              <video src="{{item.res_url}}"></video>
             </navigator>
-            <view class="cover">
-              <navigator url="/pages/forscreen/video/launch_video?video_url={{item.res_url}}&video_name=">
+            <!-- <view class="cover">
+              <navigator url="">
                 <image src='/images/icon2/FFFFFF_play.png'></image>
               </navigator>
               <view>
                 <label class='font_F6F3EE_20'>{{item.duration}}</label>
               </view>
-            </view>
-          </view>
-        </view>
-      </view>
-      <view class='con_bottom'></view>
-    </view>
-
-    <!-- 两张图片 -->
-    <!--<view class='content content_bottom_border'>
-      <view class='con_top'>
-        <view class='datetime'>
-          <label >9月30日 12:00</label>
-        </view>
-        <view class='operation'>
-          <button class='launch_tv theme-button'>电视播放</button>
-        </view>
-      </view>
-      <view class='con_main'>
-        <view class="weui-grids">
-          <view class="weui-grid">
-            <image mode='aspectFill' src="http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
-          </view>
-          <view class="weui-grid">
-            <image mode='aspectFill' src="http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
-          </view>
-        </view>
-      </view>
-      <view class='con_bottom'></view>
-    </view>
-
-    <view class='content content_bottom_border'>
-      <view class='con_top'>
-        <view class='datetime'>
-          <label >9月30日 12:00</label>
-        </view>
-        <view class='operation'>
-          <button class='launch_tv theme-button'>电视播放</button>
-        </view>
-      </view>
-      <view class='con_main'>
-        <view class="weui-grids">
-          <view class="weui-grid">
-            <image mode='aspectFill' src="http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
-          </view>
-          <view class="weui-grid">
-            <image mode='aspectFill' src="http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
-          </view>
-          <view class="weui-grid">
-            <image mode='aspectFill' src="http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
-          </view>
-        </view>
-      </view>
-      <view class='con_bottom'></view>
-    </view>
-
-
-    
-    <view class='content content_bottom_border'>
-      <view class='con_top'>
-        <view class='datetime'>
-          <label >9月30日 12:00</label>
-        </view>
-        <view class='operation'>
-          <button class='launch_tv theme-button'>电视播放</button>
-        </view>
-      </view>
-      <view class='con_main'>
-        <view class="weui-grids">
-          <view class="weui-grid_4">
-            <image mode='aspectFill' src="http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
-          </view>
-          <view class="weui-grid_4">
-            <image mode='aspectFill' src="http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
-          </view>
-          <view class="weui-grid_4">
-            <image mode='aspectFill' src="http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
-          </view>
-          <view class="weui-grid_4">
-            <image mode='aspectFill' src="http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
+            </view> -->
           </view>
         </view>
       </view>
@@ -134,132 +57,6 @@
     </view>
 
     
-    <view class='content content_bottom_border'>
-      <view class='con_top'>
-        <view class='datetime'>
-          <label >9月30日 12:00</label>
-        </view>
-        <view class='operation'>
-          <button class='launch_tv theme-button'>电视播放</button>
-        </view>
-      </view>
-      <view class='con_main'>
-        <view class="weui-grids">
-          <view class="weui-grid">
-            <image mode='aspectFill' src="http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
-          </view>
-          <view class="weui-grid">
-            <image mode='aspectFill' src="http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
-          </view>
-          <view class="weui-grid">
-            <image mode='aspectFill' src="http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
-          </view>
-          <view class="weui-grid">
-            <image mode='aspectFill' src="http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
-          </view>
-          <view class="weui-grid">
-            <image mode='aspectFill' src="http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
-          </view>
-        </view>
-      </view>
-      <view class='con_bottom'></view>
-    </view>
-
-    
-    <view class='content content_bottom_border'>
-      <view class='con_top'>
-        <view class='datetime'>
-          <label >9月30日 12:00</label>
-        </view>
-        <view class='operation'>
-          <button class='launch_tv theme-button'>电视播放</button>
-        </view>
-      </view>
-      <view class='con_main'>
-        <view class="weui-grids">
-          <view class="weui-grid">
-            <image mode='aspectFill' src="http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
-          </view>
-          <view class="weui-grid">
-            <image mode='aspectFill' src="http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
-          </view>
-          <view class="weui-grid">
-            <image mode='aspectFill' src="http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
-          </view>
-          <view class="weui-grid">
-            <image mode='aspectFill' src="http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
-          </view>
-          <view class="weui-grid">
-            <image mode='aspectFill' src="http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
-          </view>
-          <view class="weui-grid">
-            <image mode='aspectFill' src="http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
-          </view>
-        </view>
-      </view>
-      <view class='con_bottom'></view>
-    </view>
-
-    
-    <view class='content content_bottom_border'>
-      <view class='con_top'>
-        <view class='datetime'>
-          <label >9月30日 12:00</label>
-        </view>
-        <view class='operation'>
-          <button class='launch_tv theme-button'>电视播放</button>
-        </view>
-      </view>
-      <view class='con_main'>
-        <view class="video">
-          <view>
-            <navigator>
-              <image mode='aspectFill' src="http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
-            </navigator>
-            <view class="cover">
-              <navigator>
-                <image src='http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/icon2/FFFFFF_play.png'></image>
-              </navigator>
-              <view>
-                <label class='font_F6F3EE_20'>0'59"</label>
-              </view>
-            </view>
-          </view>
-        </view>
-      </view>
-      <view class='con_bottom'></view>
-    </view>
-
-    
-    <view class='content'>
-      <view class='con_top'>
-        <view class='datetime'>
-          <label >9月30日 12:00</label>
-        </view>
-        <view class='operation'>
-          <button class='launch_tv theme-button'>电视播放</button>
-        </view>
-      </view>
-      <view class='con_main'>
-        <view class="video">
-          <view>
-            <navigator>
-              <image mode='aspectFill' src="http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
-            </navigator>
-            <view class="cover">
-              <navigator>
-                <image src='http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/icon2/FFFFFF_play.png'></image>
-              </navigator>
-              <view>
-                <label class='font_F6F3EE_20'>12'23"</label>
-              </view>
-            </view>
-          </view>
-        </view>
-      </view>
-      <view class='con_bottom'></view>
-    </view>-->
-    <!--循环结束-->
 
     <view class="body-view">
       <loading hidden="{{hiddens}}" bindchange="loadingChange">加载中...</loading>
@@ -269,4 +66,11 @@
     -->
 
   </scroll-view>
+  <!-- 遥控器 -->
+  <template is="remoteControlWindow" data='{{popRemoteControlWindow: showControl, qrcode_img:qrcode_img, box_mac:box_mac, openid:openid, is_open_simple:is_open_simple}}' />
+
+  <!-- 固定悬浮按钮组 -->
+  <view wx:if="{{box_mac !=''}}">
+    <template is="fixedSuspensionButtonGroup" />
+  </view>
 </view>
