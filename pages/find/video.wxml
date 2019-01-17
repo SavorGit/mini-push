@@ -6,7 +6,7 @@
 <view class="container" style='height: calc(100vh - 46px - {{statusBarHeight}}px);'>
   <view class='full_width page_top'></view>
   <view class='full_width page_main'>
-    <view class='article'>
+    <view class='article' wx:if="{{showControl==false}}">
       <view class='con_top'>
         <view class='user_info'>
           <image mode='aspectFill' src='{{videoinfo.avatarUrl}}'></image>

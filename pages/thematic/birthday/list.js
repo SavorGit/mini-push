@@ -150,7 +150,7 @@ Page({
                   method: "POST",
                   data: {
                     box_mac: box_mac,
-                    msg: '{ "action": 15,"url":"' + vediourl + '","filename":"' + filename + '","forscreen_id":"' + timestamp + '","resource_type":2}',
+                    msg: '{ "action": 5,"url":"' + vediourl + '","filename":"' + filename + '","forscreen_id":"' + timestamp + '","resource_type":2}',
                   },
                   success: function (res) {
                     console.log(res);
@@ -198,7 +198,7 @@ Page({
             method: "POST",
             data: {
               box_mac: box_mac,
-              msg: '{ "action": 15,"url":"' + vediourl + '","filename":"' + filename + '","forscreen_id":"' + timestamp + '","resource_type":2}',
+              msg: '{ "action": 5,"url":"' + vediourl + '","filename":"' + filename + '","forscreen_id":"' + timestamp + '","resource_type":2}',
             },
             success: function (res) {
               wx.showToast({

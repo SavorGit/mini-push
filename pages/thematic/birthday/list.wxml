@@ -37,10 +37,12 @@
         </view>
         <view class='list'>
           <view class='video' wx:for="{{videolist}}" wx:key="key" wx:for-item="videoinfo">
+            <view bindtap='showHappy' data-boxmac="{{box_mac}}" data-openid="{{openid}}" data-vediourl="{{videoinfo.video_url}}" data-name="{{videoinfo.name}}">
             <image src='{{videoinfo.video_img}}'></image>
             <view class='cover'>
               <label class='title'></label>
-              <button class='theme-button' bindtap='showHappy' data-boxmac="{{box_mac}}" data-openid="{{openid}}" data-vediourl="{{videoinfo.video_url}}" data-name="{{videoinfo.name}}">电视播放</button>
+              <button class='theme-button' >电视播放</button>
+            </view>
             </view>
           </view>
         </view>
