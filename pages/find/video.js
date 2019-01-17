@@ -48,7 +48,6 @@ Page({
 
       },
       success: function (res) {
-        console.log(res);
         that.setData({
           videoinfo: res.data.result,
           play_num: res.data.result.play_num,
