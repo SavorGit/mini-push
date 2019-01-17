@@ -13,6 +13,7 @@ Page({
     statusBarHeight: getApp().globalData.statusBarHeight,
     is_replay_disabel:false,
     showControl:false,
+    is_box_show:false,
   },
 
   /**
@@ -47,6 +48,7 @@ Page({
 
       },
       success: function (res) {
+        console.log(res);
         that.setData({
           videoinfo: res.data.result,
           play_num: res.data.result.play_num,
@@ -188,6 +190,7 @@ Page({
     var that = this;
     var box_mac = e.target.dataset.boxmac;
     var find_id = e.target.dataset.forscreen_id
+    
     if (box_mac == '') {
       wx.showModal({
         title: '提示',
@@ -243,6 +246,7 @@ Page({
               content: '当前电视正在进行投屏,继续投屏有可能打断当前投屏中的内容.',
               success: function (res) {
                 if (res.confirm) {
+                  
                   var djs = 10;
                   that.setData({
                     is_replay_disabel: true
@@ -328,6 +332,9 @@ Page({
                     }
 
                   } else {//视频投屏
+                    that.setData({
+                      is_box_show: true,
+                    })
                     for (var i = 0; i < res_len; i++) {
                       wx.request({
                         url: 'https://mobile.littlehotspot.com/Smallapp/index/recordForScreenPics',
@@ -486,6 +493,9 @@ Page({
               }
 
             } else {//视频投屏
+              that.setData({
+                is_box_show: true,
+              })
               for (var i = 0; i < res_len; i++) {
                 wx.request({
                   url: 'https://mobile.littlehotspot.com/Smallapp/index/recordForScreenPics',

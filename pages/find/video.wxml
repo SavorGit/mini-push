@@ -17,12 +17,17 @@
         <view wx:if="{{videoinfo.public_text!=''}}" class='speak_with_interest'>
           <label>{{videoinfo.public_text}}</label>
         </view>
-        <view class='media'>
+        <view wx:if="{{is_box_show==false}}" class='media'>
           <video src="{{videoinfo.pubdetail[0].res_url}}"></video>
           <!--<image mode='aspectFill' src='http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg'></image>
            <view class='cover'>
             <image src="/images/icon2/FFFFFF_play.png"></image>
           </view> -->
+        </view>
+
+        <view wx:else class='media'>
+          <image src='{{videoinfo.pubdetail[0].vide_img}}'></image>
+          
         </view>
       </view>
       <view class='con_bottom'>

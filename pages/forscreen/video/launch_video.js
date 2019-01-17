@@ -13,7 +13,8 @@ Page({
     video_url:'',
     video_name:'',
     is_replay_disabel:false,
-    showControl: false,   //显示授权登陆弹窗
+    showControl: false,   //显示授权登陆弹窗,
+    is_box_show:false,
   },
 
   /**
@@ -203,6 +204,7 @@ Page({
   boxShow(e) {
     var that = this;
     var box_mac = e.target.dataset.boxmac;
+    
     if (box_mac == '') {
       wx.showModal({
         title: '提示',
@@ -247,6 +249,9 @@ Page({
               content: '当前电视正在进行投屏,继续投屏有可能打断当前投屏中的内容.',
               success: function (res) {
                 if (res.confirm) {
+                  that.setData({
+                    is_box_show: true,
+                  })
                   //console.log('用户点击确定')
                   var djs = 10;
                   that.setData({
@@ -317,13 +322,15 @@ Page({
               }
             })
           } else {
+            
             var djs = 10;
             that.setData({
               is_replay_disabel: true
             })
 
             that.setData({
-              djs: djs
+              djs: djs,
+              is_box_show: true,
             })
             var timer8_0 = setInterval(function () {
               djs -= 1;
