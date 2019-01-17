@@ -11,7 +11,7 @@
         <video src="{{video_url}}" autoplay="false"></video>
       </view>
       <view wx:else class='full_width video'>
-        <image mode='aspectFit' src="{{video_img_url}}"></image>
+        <image src="{{video_img_url}}"></image>
       </view>
       <view class='title'>
         <label>{{video_name}}</label>
