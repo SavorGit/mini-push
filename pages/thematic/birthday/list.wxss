@@ -49,7 +49,7 @@
 }
 
 .birthday .video .list .music label {
-  font-size: 28rpx;
+  font-size: 24rpx;
   color: #666;
 }
 
