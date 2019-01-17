@@ -9,10 +9,9 @@
     <view class='full_width article'>
       <view wx:if="{{is_box_show==false}}" class='full_width video'>
         <video src="{{video_url}}" autoplay="false"></video>
-        
       </view>
       <view wx:else class='full_width video'>
-        <image src="{{video_img_url}}"></image>
+        <image mode='aspectFit' src="{{video_img_url}}"></image>
       </view>
       <view class='title'>
         <label>{{video_name}}</label>

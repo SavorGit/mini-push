@@ -28,6 +28,13 @@
   width: 100%;
 }
 
+.article > .video > image {
+  margin: unset;
+  padding: unset;
+  border: unset;
+  width: 100%;
+}
+
 .article > .title {
   width: 100%;
   height: 90rpx;
