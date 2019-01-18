@@ -130,7 +130,7 @@
     </view>
     <view class='page_main'>
       <view class='cover'>
-        <image src='{{upload_vedio_cover}}'></image>
+        <image mode='aspectFit' src='{{upload_vedio_cover}}'></image>
       </view>
 
 
@@ -196,14 +196,14 @@
         </view>
       </scroll-view>
     </view>
-    
-    
+
+
   </view>
 
 </view>
 <view class="body-view">
-      <loading hidden="{{hiddens}}" bindchange="loadingChange">{{load_fresh_char}}</loading>
-    </view>
+  <loading hidden="{{hiddens}}" bindchange="loadingChange">{{load_fresh_char}}</loading>
+</view>
 <!-- 跳转极简版 -->
 <template is="jumpSimple" data="{{show:is_show_jump,box_mac:box_mac}}" />
 
