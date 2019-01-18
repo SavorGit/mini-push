@@ -74,7 +74,7 @@ Page({
         that.setData({
           showVedio: true,
           upload_vedio_temp:res.tempFilePath,
-          upload_vedio_cover:res.thumbTempFilePath,
+          //upload_vedio_cover:res.thumbTempFilePath,
           duration: res.duration
         });
         
@@ -260,7 +260,9 @@ Page({
                   msg: '{ "action":2, "url": "forscreen/resource/' + timestamp + postf_t + '", "filename":"' + timestamp + postf_t + '","openid":"' + openid + '","resource_type":2,"video_id":"' + timestamp + '","avatarUrl":"' + avatarUrl + '","nickName":"' + nickName + '","forscreen_id":"' + res_eup_time+'"}',
                 },
                 success: function (result) {
-                    
+                    that.setData({
+                      upload_vedio_cover: 'http://oss.littlehotspot.com/forscreen/resource/' + timestamp + postf_t +'?x-oss-process=video/snapshot,t_2000,f_jpg,w_450,m_fast',
+                    })
 
                 },
                 
@@ -330,7 +332,7 @@ Page({
         that.setData({
           showVedio: true,
           upload_vedio_temp: res.tempFilePath,
-          upload_vedio_cover: res.thumbTempFilePath,
+          //upload_vedio_cover: res.thumbTempFilePath,
           vedio_percent:0
         });
         //uploadVedio(res, box_mac, openid);
