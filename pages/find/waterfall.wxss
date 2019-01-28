@@ -1,5 +1,39 @@
 /* pages/find/waterfall.wxss */
 
+.page_top {
+  width: 100%;
+  height: 80rpx;
+  text-align: center;
+  vertical-align: top;
+}
+
+.page_top .categry {
+  vertical-align: top;
+}
+
+.page_top .categry label {
+  font-size: 36rpx;
+  vertical-align: middle;
+}
+
+.page_top .categry image {
+  width: 5rpx;
+  height: 40rpx;
+  vertical-align: middle;
+  margin: 0rpx 30rpx;
+}
+
+.page_top .categry navigator {
+  font-size: 36rpx;
+  color: #666;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.scroll-view {
+  height: calc(100% - 80rpx);
+}
+
 .page_main {
   width: 100%;
   position: relative;
