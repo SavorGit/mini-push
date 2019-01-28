@@ -61,7 +61,7 @@
         "selectedIconPath": "/images/icon2/1cbeb6_home.png"
       },
       {
-        "pagePath": "pages/find/selected_list",
+        "pagePath": "pages/find/waterfall",
         "text": "发现",
         "iconPath": "/images/icon2/666666_find.png",
         "selectedIconPath": "/images/icon2/1cbeb6_find.png"
