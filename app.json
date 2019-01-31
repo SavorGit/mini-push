@@ -45,7 +45,7 @@
     "backgroundTextStyle": "dark",
     "navigationBarBackgroundColor": "#05101a",
     "navigationBarTitleText": "热点投屏",
-    "navigationBarTextStyle": "#05101a",
+    "navigationBarTextStyle": "white",
     "navigationStyle": "custom"
   },
   "tabBar": {
