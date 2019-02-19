@@ -92,7 +92,7 @@
 
 
   <!-- ================================== 上传图片后 ================================== -->
-  <view class="launch_pic_page_a display_{{showThird?'show':'hide'}}">
+  <view class="full_width full_height launch_pic_page_a display_{{showThird?'show':'hide'}}">
     <view class="page_top theme2">
       <view class='full_width font_666666_26'>
         <label class='tip_top_lable'>图片加载成功后，选择照片，电视开始展示</label>

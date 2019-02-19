@@ -121,7 +121,7 @@
 
 
   <!-- ================================== 上传视频后 ================================== -->
-  <view class="launch_video_page_a display_{{showVedio?'hide':'show'}}">
+  <view class="full_width full_height launch_video_page_a display_{{showVedio?'hide':'show'}}">
     <view class='page_top theme2 flex_row_center font_666666_26'>
       <label>视频加载完成后，电视开始加载并自动播放</label>
       <label class='link_relief'>
