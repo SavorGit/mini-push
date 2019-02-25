@@ -1,0 +1,69 @@
+/* 抢红包-红包列表 pages/thematic/money_blessing/grab_list.wxss */
+
+/* 导入红包样式 */
+@import "/pages/thematic/money_blessing/money_blessing.wxss";
+
+.list {
+  width: calc(100% - 150rpx);
+  height: calc(100% - 75rpx);
+  padding: 20rpx 40rpx;
+  background: #fedfb2;
+  color: #333;
+  border-radius: 5rpx;
+  text-align: center;
+}
+
+.list .navigator-hover {
+  background: unset;
+  color: unset;
+}
+
+.list .item {
+  width: 100%;
+  height: 90rpx;
+  padding: 20rpx 0;
+  margin-left: auto;
+  margin-right: auto;
+  border-bottom: 2rpx solid #999;
+}
+
+.list .item .left {
+  width: 60%;
+  display: inline-block;
+  text-align: left;
+  vertical-align: top;
+}
+
+.list .item .left .message {
+  display: block;
+  height: 50rpx;
+  line-height: 50rpx;
+  font-size: 30rpx;
+  font-weight: 900;
+}
+
+.list .item .left .date_time {
+  display: block;
+  height: 40rpx;
+  line-height: 40rpx;
+  color: #666;
+  font-size: 26rpx;
+}
+
+.list .item .right {
+  width: 40%;
+  height: 100%;
+  line-height: 2.5;
+  display: inline-block;
+  text-align: right;
+  vertical-align: top;
+}
+
+.list .item .right .money {
+  margin-right: 20rpx;
+}
+
+.list .item .right .next_link {
+  margin-left: 20rpx;
+  color: #666;
+}

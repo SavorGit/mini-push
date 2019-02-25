@@ -1,0 +1,22 @@
+/**  抢红包通用样式 /pages/thematic/money_blessing/money_blessing.wxss **/
+
+.PackageColor {
+  background: #f05649;
+  color: #fedfb2;
+}
+
+.PackingButtonColor {
+  background: #f05649;
+  color: #fff;
+}
+
+.BorderColor {
+  border-color: #f05649;
+  border-style: solid;
+  border-width: 10rpx;
+}
+
+.PackingButtonFontSize {
+  font-size: 36rpx;
+  font-weight: 900;
+}

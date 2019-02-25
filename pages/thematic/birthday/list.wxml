@@ -38,11 +38,11 @@
         <view class='list'>
           <view class='video' wx:for="{{videolist}}" wx:key="key" wx:for-item="videoinfo">
             <view bindtap='showHappy' data-boxmac="{{box_mac}}" data-openid="{{openid}}" data-vediourl="{{videoinfo.video_url}}" data-name="{{videoinfo.name}}">
-            <image src='{{videoinfo.video_img}}'></image>
-            <view class='cover'>
-              <label class='title'></label>
-              <button class='theme-button' >电视播放</button>
-            </view>
+              <image src='{{videoinfo.video_img}}'></image>
+              <view class='cover'>
+                <label class='title'></label>
+                <button class='theme-button'>电视播放</button>
+              </view>
             </view>
           </view>
         </view>
@@ -87,4 +87,10 @@
   <view wx:if="{{box_mac !=''}}">
     <template is="fixedSuspensionButtonGroup" />
   </view>
+</view>
+
+<!-- 发红包入口 -->
+<view class='money_blessing'>
+  <navigator class='button' url='/pages/thematic/money_blessing/main'>红包送祝福</navigator>
+  <!-- <button class='button'>红包送祝福</button> -->
 </view>

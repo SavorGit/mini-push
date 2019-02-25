@@ -210,3 +210,34 @@
 .constellation_list .detailed .overall .describtion label navigator {
   display: inline-block;
 }
+
+/* 发红包入口 */
+
+.money_blessing {
+  position: absolute;
+  bottom: 0rpx;
+  width: 100%;
+  height: 90rpx;
+  text-align: center;
+  vertical-align: middle;
+}
+
+.money_blessing .button {
+  position: relative;
+  display: block;
+  box-sizing: border-box;
+  width: 98%;
+  height: 80rpx;
+  line-height: 80rpx;
+  margin-left: auto;
+  margin-right: auto;
+  background: #f05649;
+  color: #fff;
+  font-size: 30rpx;
+  padding: unset;
+  border: unset;
+  border-radius: 10rpx;
+  text-align: center;
+  text-decoration: none;
+  overflow: hidden;
+}

@@ -1,0 +1,46 @@
+/*  抢红包-主页 pages/thematic/money_blessing/main.wxss */
+
+/* 导入红包样式 */
+@import "/pages/thematic/money_blessing/money_blessing.wxss";
+
+.container {
+  background-image: url('http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg');
+  background-size: 100% 100%;
+}
+
+.PageMain {
+  height: calc(100% - 200rpx);
+}
+
+.PageBottom {
+  height: 200rpx;
+}
+
+.PageBottom .DropMoneyBtn {
+  position: relative;
+  display: block;
+  box-sizing: border-box;
+  width: 90%;
+  height: 100rpx;
+  line-height: 2.8;
+  margin-left: auto;
+  margin-right: auto;
+  border-radius: 50rpx;
+  padding: unset;
+  border: unset;
+  text-align: center;
+  text-decoration: none;
+  overflow: hidden;
+}
+
+.PageBottom .DropMoneyList {
+  width: 200rpx;
+  line-height: 2.55555556;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+  color: #f05649;
+  font-size: 30rpx;
+  text-decoration: underline;
+  background: unset;
+}

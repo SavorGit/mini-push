@@ -1,0 +1,80 @@
+/* 抢红包-抢红包 pages/thematic/money_blessing/grab.wxss */
+
+/* 导入红包样式 */
+@import "/pages/thematic/money_blessing/money_blessing.wxss";
+
+.PageTop {
+  height: 50rpx;
+}
+
+.PageMain {
+  height: calc(100% - 100rpx);
+}
+
+.PageMain .package {
+  width: 90%;
+  height: 100%;
+  padding: 0 5%;
+}
+
+.PageMain .package > .head {
+  height: 200rpx;
+  text-align: center;
+}
+
+.PageMain .package > .head image {
+  width: 200rpx;
+  height: 100%;
+  border-radius: 50%;
+}
+
+.PageMain .package > .body {
+  height: calc(100% - 300rpx);
+  margin-top: -100rpx;
+  padding: 120rpx 50rpx 30rpx 50rpx;
+  border-radius: 20rpx;
+}
+
+.PageMain .package > .body .user_name {
+  text-align: center;
+  font-size: 30rpx;
+  font-weight: 900;
+  margin-top: 10rpx;
+}
+
+.PageMain .package > .body .blessing {
+  text-align: center;
+  font-size: 50rpx;
+  font-weight: 900;
+  margin-top: 100rpx;
+}
+
+.PageMain .package > .body .grab {
+  text-align: center;
+  font-size: 40rpx;
+  font-weight: 900;
+  margin-top: 230rpx;
+}
+
+.PageMain .package > .body .grab .button {
+  position: relative;
+  display: block;
+  box-sizing: border-box;
+  width: 200rpx;
+  height: 200rpx;
+  line-height: 200rpx;
+  margin-left: auto;
+  margin-right: auto;
+  border-radius: 50%;
+  background: #fedfb2;
+  color: #f05649;
+  padding: unset;
+  border: unset;
+  text-align: center;
+  text-decoration: none;
+  overflow: hidden;
+}
+
+.PageBottom {
+  height: 50rpx;
+}

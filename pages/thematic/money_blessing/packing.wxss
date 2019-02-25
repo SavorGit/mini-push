@@ -1,0 +1,127 @@
+/* 抢红包-发红包 pages/thematic/money_blessing/packing.wxss */
+
+/* 导入红包样式 */
+@import "/pages/thematic/money_blessing/money_blessing.wxss";
+
+.PageTop {
+  height: 100rpx;
+}
+
+.PageMain {
+  height: calc(100% - 400rpx);
+}
+
+.PageMain .package {
+  width: 90%;
+  padding: 0 5%;
+}
+
+.PageMain .package > .head {
+  height: 200rpx;
+  text-align: center;
+}
+
+.PageMain .package > .head image {
+  width: 200rpx;
+  height: 100%;
+  border-radius: 50%;
+}
+
+.PageMain .package > .body {
+  margin-top: -100rpx;
+  padding: 150rpx 50rpx 30rpx 50rpx;
+  border-radius: 20rpx;
+}
+
+.PageMain .package > .body > view {
+  display: flex;
+  flex-direction: row;
+  height: 80rpx;
+}
+
+.PageMain .package > .body > view > .RowLabel {
+  width: 150rpx;
+  font-size: 30rpx;
+  font-weight: 600;
+}
+
+.PageMain .package > .body > view > .right {
+  width: calc(100% - 150rpx);
+}
+
+.PageMain .package > .body > view input,
+.PageMain .package > .body > view picker {
+  background-color: #fff;
+  border: 1rpx solid #fefefe;
+  border-radius: 5rpx;
+}
+
+.PageMain .package > .body > view input.input,
+.PageMain .package > .body > view radio-group,
+.PageMain .package > .body > view picker.picker {
+  font-size: 28rpx;
+  height: 50rpx;
+  min-height: 50rpx;
+  line-height: 50rpx;
+  vertical-align: middle;
+}
+
+.PageMain .package > .body > view input.input {
+  text-align: right;
+}
+
+.PageMain .package > .body > view .surname {
+  width: 100rpx;
+  display: inline-block;
+}
+
+.PageMain .package > .body > view radio-group {
+  display: inline-block;
+}
+
+.PageMain .package > .body > view radio-group  radio {
+  margin-left: 30rpx;
+  margin-right: 30rpx;
+  font-size: 30rpx;
+}
+
+.PageMain .package > .body > view radio-group radio .wx-radio-input {
+  width: 30rpx;
+  height: 30rpx;
+  vertical-align: middle;
+}
+
+.PageMain .package > .body > view picker.picker {
+  color: #bebebe;
+}
+
+.PageMain .package > .body > view picker.picker image {
+  width: 26rpx;
+  height: 26rpx;
+}
+
+.PageMain .package > .body > view picker.picker view {
+  width: calc(100% - 28rpx);
+  display: inline-block;
+}
+
+.PageBottom {
+  height: 300rpx;
+}
+
+.PageBottom .PackingBtn {
+  position: relative;
+  display: block;
+  box-sizing: border-box;
+  width: 90%;
+  height: 100rpx;
+  line-height: 2.8;
+  margin-left: auto;
+  margin-right: auto;
+  border-radius: 50rpx;
+  padding: unset;
+  border: unset;
+  text-align: center;
+  text-decoration: none;
+  overflow: hidden;
+}

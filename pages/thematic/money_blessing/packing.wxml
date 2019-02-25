@@ -1,0 +1,62 @@
+<!-- 抢红包-发红包 pages/thematic/money_blessing/packing.wxml-->
+<import src="/pages/template/commons" />
+<template is="navigationBarForTwoLevel" data='{{statusBarHeight: statusBarHeight,titleText:"热点投屏"}}' />
+
+<view class='container' style='height: calc(100vh - 46px - {{statusBarHeight}}px);'>
+  <form class='full_width full_height'>
+    <view class='PageTop full_width'></view>
+    <view class='PageMain full_width'>
+      <view class='package'>
+        <view class='head'>
+          <image class='BorderColor' src='http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg'></image>
+        </view>
+        <view class='body PackageColor'>
+          <view>
+            <label class='RowLabel'>总金额</label>
+            <view class='right'>
+              <input class='input' type='digit' placeholder='0.00 (1-500元)'></input>
+            </view>
+          </view>
+          <view>
+            <label class='RowLabel'>红包个数</label>
+            <view class='right'>
+              <input class='input' type='number' placeholder='填写个数 (1-500个)'></input>
+            </view>
+          </view>
+          <view>
+            <label class='RowLabel'>祝</label>
+            <view class='right'>
+              <input class='input surname' type='text' placeholder=''></input>
+              <radio-group>
+                <radio checked='true'>先生</radio>
+                <radio>女士</radio>
+              </radio-group>
+            </view>
+          </view>
+          <view>
+            <label class='RowLabel'>祝福语</label>
+            <view class='right'>
+              <picker class="picker" value="{{blessingIndex}}" range="{{blessingArray}}">
+                <view>{{blessingArray[blessingIndex]}}</view>
+                <image src='/images/icon2/666666_down.png'></image>
+              </picker>
+            </view>
+          </view>
+          <view>
+            <label class='RowLabel'>发送范围</label>
+            <view class='right'>
+              <picker class="picker" value="{{rangeIndex}}" range="{{rangeArray}}">
+                <view>{{rangeArray[rangeIndex]}}</view>
+                <image src='/images/icon2/666666_down.png'></image>
+              </picker>
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+    <view class='PageBottom full_width'>
+      <navigator class='PackingBtn PackingButtonColor PackingButtonFontSize' url='/pages/thematic/money_blessing/grab'>发送电视红包</navigator>
+      <!-- <button class='PackingBtn PackingButtonColor PackingButtonFontSize'>发送电视红包</button> -->
+    </view>
+  </form>
+</view>

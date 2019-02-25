@@ -1,0 +1,148 @@
+<!-- 抢红包-红包列表 pages/thematic/money_blessing/grab_list.wxml-->
+<import src="/pages/template/commons" />
+<template is="navigationBarForTwoLevel" data='{{statusBarHeight: statusBarHeight,titleText:"热点投屏"}}' />
+
+<view class='container' style='height: calc(100vh - 46px - {{statusBarHeight}}px);'>
+  <scroll-view class='list' scroll-y="true" scroll-with-animation="true">
+    <navigator class='item' url='/pages/thematic/money_blessing/grab_detail'>
+      <view class='left'>
+        <label class='message'>大吉大利，今晚吃鸡</label>
+        <label class='date_time'>02-15 11:00:01</label>
+      </view>
+      <view class='right'>
+        <label class='money'>100元</label>
+        <label class='next_link'>></label>
+      </view>
+    </navigator>
+    <navigator class='item' url='/pages/thematic/money_blessing/grab_detail'>
+      <view class='left'>
+        <label class='message'>大吉大利，今晚吃鸡</label>
+        <label class='date_time'>02-15 11:00:01</label>
+      </view>
+      <view class='right'>
+        <label class='money'>100元</label>
+        <label class='next_link'>></label>
+      </view>
+    </navigator>
+    <navigator class='item' url='/pages/thematic/money_blessing/grab_detail'>
+      <view class='left'>
+        <label class='message'>大吉大利，今晚吃鸡</label>
+        <label class='date_time'>02-15 11:00:01</label>
+      </view>
+      <view class='right'>
+        <label class='money'>100元</label>
+        <label class='next_link'>></label>
+      </view>
+    </navigator>
+    <navigator class='item' url='/pages/thematic/money_blessing/grab_detail'>
+      <view class='left'>
+        <label class='message'>大吉大利，今晚吃鸡</label>
+        <label class='date_time'>02-15 11:00:01</label>
+      </view>
+      <view class='right'>
+        <label class='money'>100元</label>
+        <label class='next_link'>></label>
+      </view>
+    </navigator>
+    <navigator class='item' url='/pages/thematic/money_blessing/grab_detail'>
+      <view class='left'>
+        <label class='message'>大吉大利，今晚吃鸡</label>
+        <label class='date_time'>02-15 11:00:01</label>
+      </view>
+      <view class='right'>
+        <label class='money'>100元</label>
+        <label class='next_link'>></label>
+      </view>
+    </navigator>
+    <navigator class='item' url='/pages/thematic/money_blessing/grab_detail'>
+      <view class='left'>
+        <label class='message'>大吉大利，今晚吃鸡</label>
+        <label class='date_time'>02-15 11:00:01</label>
+      </view>
+      <view class='right'>
+        <label class='money'>100元</label>
+        <label class='next_link'>></label>
+      </view>
+    </navigator>
+    <navigator class='item' url='/pages/thematic/money_blessing/grab_detail'>
+      <view class='left'>
+        <label class='message'>大吉大利，今晚吃鸡</label>
+        <label class='date_time'>02-15 11:00:01</label>
+      </view>
+      <view class='right'>
+        <label class='money'>100元</label>
+        <label class='next_link'>></label>
+      </view>
+    </navigator>
+    <navigator class='item' url='/pages/thematic/money_blessing/grab_detail'>
+      <view class='left'>
+        <label class='message'>大吉大利，今晚吃鸡</label>
+        <label class='date_time'>02-15 11:00:01</label>
+      </view>
+      <view class='right'>
+        <label class='money'>100元</label>
+        <label class='next_link'>></label>
+      </view>
+    </navigator>
+    <navigator class='item' url='/pages/thematic/money_blessing/grab_detail'>
+      <view class='left'>
+        <label class='message'>大吉大利，今晚吃鸡</label>
+        <label class='date_time'>02-15 11:00:01</label>
+      </view>
+      <view class='right'>
+        <label class='money'>100元</label>
+        <label class='next_link'>></label>
+      </view>
+    </navigator>
+    <navigator class='item' url='/pages/thematic/money_blessing/grab_detail'>
+      <view class='left'>
+        <label class='message'>大吉大利，今晚吃鸡</label>
+        <label class='date_time'>02-15 11:00:01</label>
+      </view>
+      <view class='right'>
+        <label class='money'>100元</label>
+        <label class='next_link'>></label>
+      </view>
+    </navigator>
+    <navigator class='item' url='/pages/thematic/money_blessing/grab_detail'>
+      <view class='left'>
+        <label class='message'>大吉大利，今晚吃鸡</label>
+        <label class='date_time'>02-15 11:00:01</label>
+      </view>
+      <view class='right'>
+        <label class='money'>100元</label>
+        <label class='next_link'>></label>
+      </view>
+    </navigator>
+    <navigator class='item' url='/pages/thematic/money_blessing/grab_detail'>
+      <view class='left'>
+        <label class='message'>大吉大利，今晚吃鸡</label>
+        <label class='date_time'>02-15 11:00:01</label>
+      </view>
+      <view class='right'>
+        <label class='money'>100元</label>
+        <label class='next_link'>></label>
+      </view>
+    </navigator>
+    <navigator class='item' url='/pages/thematic/money_blessing/grab_detail'>
+      <view class='left'>
+        <label class='message'>大吉大利，今晚吃鸡</label>
+        <label class='date_time'>02-15 11:00:01</label>
+      </view>
+      <view class='right'>
+        <label class='money'>100元</label>
+        <label class='next_link'>></label>
+      </view>
+    </navigator>
+    <navigator class='item' url='/pages/thematic/money_blessing/grab_detail'>
+      <view class='left'>
+        <label class='message'>大吉大利，今晚吃鸡</label>
+        <label class='date_time'>02-15 11:00:01</label>
+      </view>
+      <view class='right'>
+        <label class='money'>100元</label>
+        <label class='next_link'>></label>
+      </view>
+    </navigator>
+  </scroll-view>
+</view>

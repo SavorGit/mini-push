@@ -1,0 +1,162 @@
+<!-- 抢红包-红包详情成功 pages/thematic/money_blessing/grab_detail.wxml-->
+<import src="/pages/template/commons" />
+<template is="navigationBarForTwoLevel" data='{{statusBarHeight: statusBarHeight,titleText:"热点投屏"}}' />
+
+<view class='container' style='height: calc(100vh - 46px - {{statusBarHeight}}px);'>
+  <view class='PageTop full_width'></view>
+  <view class='PageMain full_width'>
+    <view class='package'>
+      <view class='user full_width'>
+        <image src='http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg'></image>
+        <label>奔波霸的红包</label>
+      </view>
+      <view class='tip'>
+        <!-- <label>10个红包，10秒被抢完</label> -->
+        <label>已领取8/10个，共700/1000元</label>
+      </view>
+      <view class='detail'>
+        <scroll-view class='list no_message' scroll-y="true" scroll-with-animation="true">
+        <!-- <scroll-view class='list show_message' scroll-y="true" scroll-with-animation="true"> -->
+          <view class='item'>
+            <view class='left'>
+              <image src='http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg'></image>
+              <view class='info'>
+                <view class='name'>奔波霸</view>
+                <view class='date_time'>02-15 11:00:01</view>
+              </view>
+            </view>
+            <view class='right'>100元</view>
+          </view>
+          <view class='item'>
+            <view class='left'>
+              <image src='http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg'></image>
+              <view class='info'>
+                <view class='name'>奔波霸</view>
+                <view class='date_time'>02-15 11:00:01</view>
+              </view>
+            </view>
+            <view class='right'>100元</view>
+          </view>
+          <view class='item'>
+            <view class='left'>
+              <image src='http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg'></image>
+              <view class='info'>
+                <view class='name'>奔波霸</view>
+                <view class='date_time'>02-15 11:00:01</view>
+              </view>
+            </view>
+            <view class='right'>100元</view>
+          </view>
+          <view class='item'>
+            <view class='left'>
+              <image src='http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg'></image>
+              <view class='info'>
+                <view class='name'>奔波霸</view>
+                <view class='date_time'>02-15 11:00:01</view>
+              </view>
+            </view>
+            <view class='right'>100元</view>
+          </view>
+          <view class='item'>
+            <view class='left'>
+              <image src='http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg'></image>
+              <view class='info'>
+                <view class='name'>奔波霸</view>
+                <view class='date_time'>02-15 11:00:01</view>
+              </view>
+            </view>
+            <view class='right'>100元</view>
+          </view>
+          <view class='item'>
+            <view class='left'>
+              <image src='http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg'></image>
+              <view class='info'>
+                <view class='name'>奔波霸</view>
+                <view class='date_time'>02-15 11:00:01</view>
+              </view>
+            </view>
+            <view class='right'>100元</view>
+          </view>
+          <view class='item'>
+            <view class='left'>
+              <image src='http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg'></image>
+              <view class='info'>
+                <view class='name'>奔波霸</view>
+                <view class='date_time'>02-15 11:00:01</view>
+              </view>
+            </view>
+            <view class='right'>100元</view>
+          </view>
+          <view class='item'>
+            <view class='left'>
+              <image src='http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg'></image>
+              <view class='info'>
+                <view class='name'>奔波霸</view>
+                <view class='date_time'>02-15 11:00:01</view>
+              </view>
+            </view>
+            <view class='right'>100元</view>
+          </view>
+          <view class='item'>
+            <view class='left'>
+              <image src='http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg'></image>
+              <view class='info'>
+                <view class='name'>奔波霸</view>
+                <view class='date_time'>02-15 11:00:01</view>
+              </view>
+            </view>
+            <view class='right'>100元</view>
+          </view>
+          <view class='item'>
+            <view class='left'>
+              <image src='http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg'></image>
+              <view class='info'>
+                <view class='name'>奔波霸</view>
+                <view class='date_time'>02-15 11:00:01</view>
+              </view>
+            </view>
+            <view class='right'>100元</view>
+          </view>
+          <view class='item'>
+            <view class='left'>
+              <image src='http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg'></image>
+              <view class='info'>
+                <view class='name'>奔波霸</view>
+                <view class='date_time'>02-15 11:00:01</view>
+              </view>
+            </view>
+            <view class='right'>100元</view>
+          </view>
+          <view class='item'>
+            <view class='left'>
+              <image src='http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg'></image>
+              <view class='info'>
+                <view class='name'>奔波霸</view>
+                <view class='date_time'>02-15 11:00:01</view>
+              </view>
+            </view>
+            <view class='right'>100元</view>
+          </view>
+          <view class='item'>
+            <view class='left'>
+              <image src='http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg'></image>
+              <view class='info'>
+                <view class='name'>奔波霸</view>
+                <view class='date_time'>02-15 11:00:01</view>
+              </view>
+            </view>
+            <view class='right'>100元</view>
+          </view>
+        </scroll-view>
+        <!-- <view class='message'>未领取的红包，将24小时后发起退款</view> -->
+      </view>
+    </view>
+  </view>
+  <view class='PageBottom full_width'>
+    <navigator class='button PackingButtonFontSize' url='/pages/thematic/money_blessing/packing'>我也发一个</navigator>
+    <!-- <button class='button PackingButtonFontSize'>我也发一个</button> -->
+
+    <navigator class='button PackingButtonFontSize' url='/pages/thematic/money_blessing/main'>进入首页</navigator>
+    <!-- <button class='button PackingButtonFontSize'>进入首页</button> -->
+  </view>
+</view>
