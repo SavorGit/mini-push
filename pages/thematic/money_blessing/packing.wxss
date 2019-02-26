@@ -76,13 +76,14 @@
 }
 
 .PageMain .package > .body > view radio-group {
+  width: 320rpx;
   display: inline-block;
 }
 
 .PageMain .package > .body > view radio-group  radio {
-  margin-left: 30rpx;
-  margin-right: 30rpx;
-  font-size: 30rpx;
+  margin-left: 20rpx;
+  margin-right: 20rpx;
+  font-size: 28rpx;
 }
 
 .PageMain .package > .body > view radio-group radio .wx-radio-input {
