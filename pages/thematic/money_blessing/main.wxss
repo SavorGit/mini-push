@@ -4,7 +4,7 @@
 @import "/pages/thematic/money_blessing/money_blessing.wxss";
 
 .container {
-  background-image: url('http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg');
+  background-image: url('https://oss.littlehotspot.com/Html5/images/money_blessing/main_bg.jpg');
   background-size: 100% 100%;
 }
 
