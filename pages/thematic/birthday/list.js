@@ -19,6 +19,7 @@ Page({
     constellation_detail:'',
     videolist:'',
     showControl:false,
+    is_open_red_packet:0,  //是否打开红包
   },
 
   getContellDetail:function(constellid){
@@ -104,6 +105,26 @@ Page({
         }
       }
     })
+
+    //红包送祝福开关
+    wx.request({
+      url: 'https://mobile.littlehotspot.com/smallapp3/Redpacket/getConfig',
+      header: {
+        'content-type': 'application/json'
+      },
+      data:{
+        type:1
+      },
+      success:function(res){
+        if(res.data.code==10000){
+          that.setData({
+            is_open_red_packet: res.data.result.is_open_red_packet
+          })
+        }
+        
+      }
+    })
+
   },
   switchConstell:function(e){
     var that = this;
@@ -237,6 +258,77 @@ Page({
 
     
   },
+  //点击红包送祝福
+  clickRedPacket:function(e){
+    var that = this;
+    var user_info = wx.getStorageSync("savor_user_info");
+    if (user_info.is_wx_auth != 2) {
+      
+      that.setData({
+        showModal: true
+      })
+    } else {
+      wx.navigateTo({
+        url: '/pages/thematic/money_blessing/main?openid=' + openid + '&box_mac=' + box_mac,
+      })
+    }
+  },
+  onGetUserInfo: function (res) {
+    var that = this;
+    var user_info = wx.getStorageSync("savor_user_info");
+    openid = user_info.openid;
+    if (res.detail.errMsg == 'getUserInfo:ok') {
+      wx.request({
+        url: 'https://mobile.littlehotspot.com/smallapp21/User/register',
+        data: {
+          'openid': openid,
+          'avatarUrl': res.detail.userInfo.avatarUrl,
+          'nickName': res.detail.userInfo.nickName,
+          'gender': res.detail.userInfo.gender
+        },
+        header: {
+          'content-type': 'application/json'
+        },
+        success: function (res) {
+          wx.setStorage({
+            key: 'savor_user_info',
+            data: res.data.result,
+          });
+          that.setData({
+            showModal: false,
+          })
+          wx.navigateTo({
+            url: '/pages/thematic/money_blessing/main?openid=' + openid + '&box_mac=' + box_mac,
+          })
+        }
+      })
+    }
+    
+  },
+  //关闭授权弹窗
+  closeAuth: function () {
+    //关闭授权登陆埋点
+    var that = this;
+    that.setData({
+      showModal: false,
+    })
+    if (box_mac == 'undefined' || box_mac == undefined) {
+      box_mac = '';
+    }
+    wx.request({
+      url: 'https://mobile.littlehotspot.com/Smallapp21/index/closeauthLog',
+      header: {
+        'content-type': 'application/json'
+      },
+      data: {
+        openid: openid,
+        box_mac: box_mac,
+      },
+
+    })
+  },
+
+
   //遥控呼大码
   callQrCode: util.throttle(function (e) {
     openid = e.currentTarget.dataset.openid;

@@ -1,0 +1,1 @@
+<web-view src='{{pay_result_url}}'></web-view>

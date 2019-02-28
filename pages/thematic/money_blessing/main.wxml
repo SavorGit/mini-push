@@ -5,9 +5,9 @@
 <view class='container' style='height: calc(100vh - 46px - {{statusBarHeight}}px);'>
   <view class='PageMain full_width'></view>
   <view class='PageBottom full_width'>
-    <navigator class='DropMoneyBtn PackingButtonColor PackingButtonFontSize' url='/pages/thematic/money_blessing/packing'>我要发电视红包</navigator>
+    <navigator class='DropMoneyBtn PackingButtonColor PackingButtonFontSize' url='/pages/thematic/money_blessing/packing?openid={{openid}}&box_mac={{box_mac}}'>我要发电视红包</navigator>
     <!-- <button class='DropMoneyBtn PackingButtonColor PackingButtonFontSize'>我要发电视红包</button> -->
 
-    <navigator class='DropMoneyList' url='/pages/thematic/money_blessing/grab_list'>发送红包记录</navigator>
+    <navigator class='DropMoneyList' url='/pages/thematic/money_blessing/grab_list?openid={{openid}}&box_mac={{box_mac}}'>发送红包记录</navigator>
   </view>
 </view>

@@ -1,6 +1,7 @@
 // 抢红包-红包详情成功 pages/thematic/money_blessing/grab_detail.js
 const app = getApp();
-
+var page =1;
+var openid;
 Page({
 
   /**
@@ -14,7 +15,51 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
+    var that = this;
+    var order_id = options.order_id;
+    var user_info = wx.getStorageSync('savor_user_info');
+    openid = user_info.openid;
+    if(order_id == undefined){
+      wx.navigateBack({
+        delta: 1
+      })
+      wx.showToast({
+        title: '该红包为异常红包',
+        icon: 'none',
+        duration: 2000
+      })
+    }
+    wx.request({
+      url: 'https://mobile.littlehotspot.com/Smallapp3/redpacket/redpacketDetail',
+      header: {
+        'content-type': 'application/json'
+      },
+      data:{
+        order_id:order_id,
+        page:page,
+      },
+      success:function(res){
+        if(res.data.code==10000){
+          console.log(res);
+          that.setData({
+            packet_info:res.data.result.info,
+            receive_list: res.data.result.receive_list,
+            openid:openid,
+          })
 
+        }else {
+          wx.navigateBack({
+            delta:1,
+          })
+          wx.showToast({
+            title: '该红包为异常红包',
+            icon: 'none',
+            duration: 2000
+          })
+        }
+      }
+
+    })
   },
 
   /**

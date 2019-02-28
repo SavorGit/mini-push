@@ -1,0 +1,2 @@
+<!--pages/thematic/money_blessing/receive_h5.wxml-->
+<web-view src='{{jump_url}}'></web-view>

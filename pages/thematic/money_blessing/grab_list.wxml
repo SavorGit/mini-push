@@ -3,8 +3,18 @@
 <template is="navigationBarForTwoLevel" data='{{statusBarHeight: statusBarHeight,titleText:"热点投屏"}}' />
 
 <view class='container' style='height: calc(100vh - 46px - {{statusBarHeight}}px);'>
-  <scroll-view class='list' scroll-y="true" scroll-with-animation="true">
-    <navigator class='item' url='/pages/thematic/money_blessing/grab_detail'>
+  <scroll-view class='list' scroll-y="true" scroll-with-animation="true" bindscrolltolower="loadMore">
+    <navigator class='item' url='/pages/thematic/money_blessing/grab_detail?order_id={{bean.order_id}}' wx:for="{{redpacket_list}}" wx:key="key" wx:for-item="bean" wx:for-index="index">
+      <view class='left'>
+        <label class='message'>{{bean.bless}}</label>
+        <label class='date_time'>{{bean.pay_time}}</label>
+      </view>
+      <view class='right'>
+        <label class='money'>{{bean.pay_fee}}元</label>
+        <label class='next_link'>></label>
+      </view>
+    </navigator>
+    <!-- <navigator class='item' url='/pages/thematic/money_blessing/grab_detail'>
       <view class='left'>
         <label class='message'>大吉大利，今晚吃鸡</label>
         <label class='date_time'>02-15 11:00:01</label>
@@ -133,16 +143,9 @@
         <label class='money'>100元</label>
         <label class='next_link'>></label>
       </view>
-    </navigator>
-    <navigator class='item' url='/pages/thematic/money_blessing/grab_detail'>
-      <view class='left'>
-        <label class='message'>大吉大利，今晚吃鸡</label>
-        <label class='date_time'>02-15 11:00:01</label>
-      </view>
-      <view class='right'>
-        <label class='money'>100元</label>
-        <label class='next_link'>></label>
-      </view>
-    </navigator>
+    </navigator> -->
   </scroll-view>
+  <view class="body-view">
+  <loading hidden="{{hiddens}}" bindchange="loadingChange">加载中...</loading>
+</view>
 </view>

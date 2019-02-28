@@ -88,9 +88,9 @@
     <template is="fixedSuspensionButtonGroup" />
   </view>
 </view>
-
+<template is="wxAuthLogin" data='{{show: showModal}}' />
 <!-- 发红包入口 -->
-<view class='money_blessing'>
-  <navigator class='button' url='/pages/thematic/money_blessing/main'>红包送祝福</navigator>
-  <!-- <button class='button'>红包送祝福</button> -->
+<view class='money_blessing' wx:if="{{is_open_red_packet==1}}">
+  <!-- <navigator class='button' url='/pages/thematic/money_blessing/main?openid={{openid}}'>红包送祝福</navigator> -->
+  <button class='button' bindtap='clickRedPacket' data-opneid='{{openid}}' data-box_mac='{{box_mac}}'>红包送祝福</button>
 </view>
