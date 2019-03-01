@@ -13,7 +13,7 @@
       <view class='tip'>
         
         <label wx:if="{{packet_info.status==5}}">{{packet_info.amount}}个红包，10秒被抢完</label> 
-        <label wx:elif="{{packet_info.status==6}}">已领取{{packet_info.receive_nums}}/{{packet_info.amount}}个，共{{packet_info.receive_money}}/{{packet_info.pay_fee}}元</label>
+        <label wx:elif="{{packet_info.status==6 || packet_info.status==4}}">已领取{{packet_info.receive_nums}}/{{packet_info.amount}}个，共{{packet_info.receive_money}}/{{packet_info.pay_fee}}元</label>
       </view>
       <view class='detail'>
         <scroll-view class='list no_message' scroll-y="true" scroll-with-animation="true">
