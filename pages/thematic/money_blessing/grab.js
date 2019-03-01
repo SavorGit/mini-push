@@ -3,6 +3,7 @@ const app = getApp();
 var openid;
 var box_mac;
 var order_id;
+var scene;
 Page({
 
   /**
@@ -20,16 +21,24 @@ Page({
   onLoad: function (options) {
     wx.hideShareMenu();
     var that = this;
-    //上线打开
+    var grab_scene = wx.getStorageSync('savor_redpacket_grab_scene');
     
-    var scene = decodeURIComponent(options.scene);
-    var scene_arr = scene.split('_');
-    order_id = scene_arr[0];
-    box_mac  = scene_arr[1];
-    
-    //上线去掉
-    //box_mac = '00226D655202';
-    //order_id = 10105;
+    if(grab_scene==''){
+      wx.setStorage({
+        key: 'savor_redpacket_grab_scene',
+        data: options.scene,
+      })
+      scene = decodeURIComponent(options.scene);
+      var scene_arr = scene.split('_');
+      order_id = scene_arr[0];
+      box_mac = scene_arr[1];
+    }else {
+      scene = decodeURIComponent(grab_scene);
+      var scene_arr = scene.split('_');
+      order_id = scene_arr[0];
+      box_mac = scene_arr[1];
+    }
+  
     that.setData({
       order_id:order_id,
       box_mac:box_mac,
@@ -198,9 +207,10 @@ Page({
           that.setData({
             showModal: false,
           })
-          wx.navigateTo({
-            url: '/pages/thematic/money_blessing/main',
-          })
+          this.reload();
+          // wx.navigateTo({
+          //   url: '/pages/thematic/money_blessing/main',
+          // })
         }
       })
     }
@@ -226,6 +236,9 @@ Page({
         box_mac: box_mac,
       },
 
+    })
+    wx.reLaunch({
+      url: '/pages/index/index',
     })
   },
   /**
