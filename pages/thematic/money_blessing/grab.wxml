@@ -1,6 +1,6 @@
 <!-- 抢红包-抢红包 pages/thematic/money_blessing/grab.wxml-->
 <import src="/pages/template/commons" />
-<template is="navigationBarForTwoLevel" data='{{statusBarHeight: statusBarHeight,titleText:"热点投屏"}}' />
+<template is="navigationBarForShare" data='{{statusBarHeight: statusBarHeight,titleText:"热点投屏"}}' />
 
 <!-- 支付失败 -->
 <view wx:if="{{order_status==2}}" class='container' style='height: calc(100vh - 46px - {{statusBarHeight}}px);'>
