@@ -38,8 +38,6 @@
     "pages/thematic/money_blessing/main",
     "pages/thematic/money_blessing/packing",
     "pages/thematic/money_blessing/grab",
-    "pages/thematic/money_blessing/receive_success",
-    "pages/thematic/money_blessing/receive_fail",
     "pages/thematic/money_blessing/grab_detail",
     "pages/thematic/money_blessing/grab_list",
     "pages/thematic/money_blessing/pay_result",
