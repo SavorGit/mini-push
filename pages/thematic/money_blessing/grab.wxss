@@ -171,7 +171,7 @@
   font-size: 50rpx;
   font-weight: 900;
   margin-top: 100rpx;
-  padding-bottom: 80rpx;
+  padding-bottom: 50rpx;
 }
 
 /* ======== 支付失败 ======== */
@@ -180,7 +180,7 @@
   text-align: center;
   font-size: 100rpx;
   font-weight: 900;
-  margin-top: 100rpx;
+  margin-top: 80rpx;
 }
 
 .PageMain .package > .body .money > sub {
