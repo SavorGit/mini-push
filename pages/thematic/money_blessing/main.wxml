@@ -8,6 +8,6 @@
     <navigator class='DropMoneyBtn PackingButtonColor PackingButtonFontSize' url='/pages/thematic/money_blessing/packing?openid={{openid}}&box_mac={{box_mac}}'>我要发电视红包</navigator>
     <!-- <button class='DropMoneyBtn PackingButtonColor PackingButtonFontSize'>我要发电视红包</button> -->
 
-    <navigator class='DropMoneyList' url='/pages/thematic/money_blessing/grab_list?openid={{openid}}&box_mac={{box_mac}}'>发送红包记录</navigator>
+    <navigator class='DropMoneyList' url='/pages/thematic/money_blessing/grab_list?openid={{openid}}&box_mac={{box_mac}}'>我发的红包</navigator>
   </view>
 </view>
