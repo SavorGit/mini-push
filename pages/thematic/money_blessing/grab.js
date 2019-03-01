@@ -21,24 +21,16 @@ Page({
   onLoad: function (options) {
     wx.hideShareMenu();
     var that = this;
-    var grab_scene = wx.getStorageSync('savor_redpacket_grab_scene');
+    //var grab_scene = wx.getStorageSync('savor_redpacket_grab_scene');  
+    scene = decodeURIComponent(options.scene);
+    var scene_arr = scene.split('_');
+    order_id = scene_arr[0];
+    box_mac = scene_arr[1];
+    wx.setStorage({
+      key: 'savor_redpacket_grab_scene',
+      data: options.scene,
+    })
     
-    if(grab_scene==''){
-      wx.setStorage({
-        key: 'savor_redpacket_grab_scene',
-        data: options.scene,
-      })
-      scene = decodeURIComponent(options.scene);
-      var scene_arr = scene.split('_');
-      order_id = scene_arr[0];
-      box_mac = scene_arr[1];
-    }else {
-      scene = decodeURIComponent(grab_scene);
-      var scene_arr = scene.split('_');
-      order_id = scene_arr[0];
-      box_mac = scene_arr[1];
-    }
-  
     that.setData({
       order_id:order_id,
       box_mac:box_mac,
@@ -145,6 +137,10 @@ Page({
                           })
                         }
                       }
+                    })
+                  } else if (order_status == 5){
+                    wx.redirectTo({
+                      url: '/pages/thematic/money_blessing/grab_detail?order_id=' + order_id,
                     })
                   }
                 }else {

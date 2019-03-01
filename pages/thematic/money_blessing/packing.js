@@ -218,7 +218,7 @@ Page({
         'content-type': 'application/json'
       },
       data: {
-        amount: totalcount,
+        amount: totalnums,
         bless_id:blessid,
         mac: box_mnac,
         open_id:openid,
@@ -243,11 +243,21 @@ Page({
             hiddens: true,
           })
           wx.showToast({
-            title: '请输入正确的姓氏',
+            title: res.data.msg,
             icon: 'none',
             duration: 2000
           });
-        }else {
+        }else if(res.data.code==90117){
+          that.setData({
+            hiddens: true,
+          })
+          wx.showToast({
+            title: res.data.msg,
+            icon: 'none',
+            duration: 2000
+          });
+        }
+        else {
           wx.showToast({
             title: '发送红包失败',
             icon: 'none',
