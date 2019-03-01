@@ -40,7 +40,6 @@ Page({
       },
       success:function(res){
         if(res.data.code==10000){
-          console.log(res);
           that.setData({
             packet_info:res.data.result.info,
             receive_list: res.data.result.receive_list,

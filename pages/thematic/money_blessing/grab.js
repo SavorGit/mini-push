@@ -139,6 +139,7 @@ Page({
                       }
                     })
                   } else if (order_status == 5){
+                    console.log(order_id);
                     wx.redirectTo({
                       url: '/pages/thematic/money_blessing/grab_detail?order_id=' + order_id,
                     })
