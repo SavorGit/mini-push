@@ -68,6 +68,7 @@
 
 .PageMain .package > .body > view input.input {
   text-align: right;
+  color: #333;
 }
 
 .PageMain .package > .body > view .surname {
@@ -108,6 +109,10 @@
 
 .PageBottom {
   height: 300rpx;
+}
+
+.PageBottom .navigator-hover {
+  opacity: 1;
 }
 
 .PageBottom .PackingBtn {

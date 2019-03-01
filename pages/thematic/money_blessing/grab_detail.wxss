@@ -141,6 +141,11 @@
   justify-content: space-between;
 }
 
+.PageBottom .navigator-hover {
+  background-color: unset;
+  opacity: 1;
+}
+
 .PageBottom .button {
   position: relative;
   display: block;
