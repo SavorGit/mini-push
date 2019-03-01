@@ -38,7 +38,8 @@
       <view class='body PackageColor'>
         <view class='user_name'>{{nickName}}</view>
         <view class='blessing'>{{bless}}</view>
-        <view class='money'>{{money}}
+        <view class='money'>
+          <label>{{money}}</label>
           <sub>元</sub>
         </view>
         <view class='grab'>
