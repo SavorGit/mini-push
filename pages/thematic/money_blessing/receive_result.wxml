@@ -1,8 +1,9 @@
 <!--pages//thematic/money_blessing/receive_result.wxml-->
 <import src="/pages/template/commons" />
+<template is="navigationBarForTwoLevel" data='{{statusBarHeight: statusBarHeight,titleText:"热点投屏"}}' />
 
-<!-- <template is="navigationBarForTwoLevel" data='{{statusBarHeight: statusBarHeight,titleText:"热点投屏"}}' /> -->
 
+<!-- 支付失败 -->
 <view wx:if="{{order_status==2}}" class='container' style='height: calc(100vh - 46px - {{statusBarHeight}}px);'>
   <view class='PageTop full_width'></view>
   <view class='PageMain full_width'>
@@ -25,6 +26,8 @@
   </view>
 </view>
 
+
+<!-- 支付成功 -->
 <view wx:elif="{{order_status==1}}" class='container' style='height: calc(100vh - 46px - {{statusBarHeight}}px);'>
   <view class='PageTop full_width'></view>
   <view class='PageMain full_width'>
