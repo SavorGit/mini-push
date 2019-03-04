@@ -35,7 +35,8 @@ Page({
             bless: res.data.result.bless,
             money: res.data.result.money,
             nickName: res.data.result.nickName,
-            avatarUrl: res.data.result.avatarUrl
+            avatarUrl: res.data.result.avatarUrl,
+            box_mac: res.data.result.box_mac,
           })
         }else {
           wx.reLaunch({
