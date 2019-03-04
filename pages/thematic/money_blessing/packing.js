@@ -207,7 +207,11 @@ Page({
     var blessid = res.detail.value.blessid;
     var rangeid = res.detail.value.rangeid;
     var openid = res.detail.value.openid;
-    var box_mnac = res.detail.value.box_mac;
+    var box_mac = res.detail.value.box_mac;
+
+    var mobile_brand = app.globalData.mobile_brand;
+    var mobile_model = app.globalData.mobile_model;
+    var forscreen_id = (new Date()).valueOf();
     that.setData({
       hiddens: false,
     })
@@ -220,7 +224,7 @@ Page({
       data: {
         amount: totalnums,
         bless_id:blessid,
-        mac: box_mnac,
+        mac: box_mac,
         open_id:openid,
         scope:rangeid,
         sex:sex,
@@ -235,6 +239,27 @@ Page({
           var order_id = res.data.result.order_id;
           var jump_url = res.data.result.jump_url;
           jump_url = encodeURIComponent (jump_url);
+
+          //记录发红包日志
+          wx.request({
+            url: 'https://mobile.littlehotspot.com/Smallapp21/index/recordForScreenPics',
+            header: {
+              'content-type': 'application/json'
+            },
+            data: {
+              forscreen_id: forscreen_id,
+              openid: openid,
+              box_mac: box_mac,
+              action: 120,
+              mobile_brand: mobile_brand,
+              mobile_model: mobile_model,
+
+              imgs: '[]',
+              resource_id: order_id,
+
+            },
+          })
+
           wx.navigateTo({
             url: '/pages/thematic/money_blessing/pay_result?order_id='+order_id+'&jump_url='+jump_url,            
           })

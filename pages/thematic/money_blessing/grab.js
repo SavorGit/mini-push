@@ -21,16 +21,10 @@ Page({
   onLoad: function (options) {
     wx.hideShareMenu();
     var that = this;
-    //var grab_scene = wx.getStorageSync('savor_redpacket_grab_scene');  
     scene = decodeURIComponent(options.scene);
     var scene_arr = scene.split('_');
     order_id = scene_arr[0];
     box_mac = scene_arr[1];
-    wx.setStorage({
-      key: 'savor_redpacket_grab_scene',
-      data: options.scene,
-    })
-    
     that.setData({
       order_id:order_id,
       box_mac:box_mac,
@@ -54,6 +48,28 @@ Page({
         }
       }
     }
+    var forscreen_id = (new Date()).valueOf();
+    var mobile_brand = app.globalData.mobile_brand;
+    var mobile_model = app.globalData.mobile_model;
+    //记录扫码抢红包日志
+    wx.request({
+      url: 'https://mobile.littlehotspot.com/Smallapp21/index/recordForScreenPics',
+      header: {
+        'content-type': 'application/json'
+      },
+      data: {
+        forscreen_id: forscreen_id,
+        openid: openid,
+        box_mac: box_mac,
+        action: 121,
+        mobile_brand: mobile_brand,
+        mobile_model: mobile_model,
+        
+        imgs: '[]',
+        resource_id: order_id,
+        
+      },
+    })
     //判断用户是否注册
     wx.request({
       url: 'https://mobile.littlehotspot.com/smallapp21/User/isRegister',
@@ -88,7 +104,6 @@ Page({
                  "order_id":order_id,
               },
               success:function(res){
-                console.log(res);
                 if(res.data.code ==10000){
                   var order_status = res.data.result.status;
                   if(order_status==4 || order_status==0){
@@ -139,7 +154,6 @@ Page({
                       }
                     })
                   } else if (order_status == 5){
-                    console.log(order_id);
                     wx.redirectTo({
                       url: '/pages/thematic/money_blessing/grab_detail?order_id=' + order_id,
                     })
@@ -178,6 +192,7 @@ Page({
       }
     });//判断用户是否注册结束
     
+    //
     
   },
   onGetUserInfo: function (res) {
