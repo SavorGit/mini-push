@@ -1,11 +1,13 @@
 // pages//thematic/money_blessing/receive_result.js
+const app = getApp();
+var openid;
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-
+    statusBarHeight: getApp().globalData.statusBarHeight,
   },
 
   /**
@@ -16,6 +18,8 @@ Page({
     var order_id = options.order_id;
     var sign     = options.sign;
     var user_id = options.user_id;
+    var user_info = wx.getStorageSync("savor_user_info");
+    openid = user_info.openid;
     wx.request({
       url: 'https://mobile.littlehotspot.com/Smallapp3/redpacket/grabBonusResult',
       header: {
@@ -36,7 +40,8 @@ Page({
             money: res.data.result.money,
             nickName: res.data.result.nickName,
             avatarUrl: res.data.result.avatarUrl,
-            box_mac: res.data.result.box_mac,
+            box_mac: res.data.result.mac,
+            openid : openid,
           })
         }else {
           wx.reLaunch({

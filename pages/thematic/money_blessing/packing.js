@@ -281,8 +281,10 @@ Page({
             icon: 'none',
             duration: 2000
           });
-        }
-        else {
+        }else {
+          that.setData({
+            hiddens: true,
+          })
           wx.showToast({
             title: '发送红包失败',
             icon: 'none',
@@ -306,7 +308,8 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function() {
-
+    
+    wx.removeStorage({key: 'pay_info',});
   },
 
   /**
