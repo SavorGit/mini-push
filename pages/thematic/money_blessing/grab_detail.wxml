@@ -52,7 +52,7 @@
     <navigator class='button PackingButtonFontSize' url='/pages/thematic/money_blessing/packing?openid={{openid}}&box_mac={{packet_info.mac}}'>我也发一个</navigator>
     <!-- <button class='button PackingButtonFontSize'>我也发一个</button> -->
 
-    <navigator class='button PackingButtonFontSize' url='/pages/thematic/money_blessing/main?openid={{openid}}&box_mac={{packet_info.mac}}'>进入首页</navigator>
-    <!-- <button class='button PackingButtonFontSize'>进入首页</button> -->
+    <!-- <navigator class='button PackingButtonFontSize' url='/pages/thematic/money_blessing/main?openid={{openid}}&box_mac={{packet_info.mac}}'>进入首页</navigator> -->
+    <button class='button PackingButtonFontSize' bindtap='cintoindex'>进入首页</button> 
   </view>
 </view>
