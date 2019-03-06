@@ -203,6 +203,15 @@ Page({
       }
     }
     var surname = res.detail.value.surname;
+    if(surname ==''){
+      wx.showToast({
+        title: '请输入姓氏',
+        icon: 'none',
+        duration: 2000
+      });
+      return false;
+    }
+
     var sex = res.detail.value.sex;
     var blessid = res.detail.value.blessid;
     var rangeid = res.detail.value.rangeid;
