@@ -18,6 +18,7 @@ Page({
     var order_id = options.order_id;
     var sign     = options.sign;
     var user_id = options.user_id;
+    var box_mac = options.box_mac;
     var user_info = wx.getStorageSync("savor_user_info");
     openid = user_info.openid;
     wx.request({
@@ -40,7 +41,7 @@ Page({
             money: res.data.result.money,
             nickName: res.data.result.nickName,
             avatarUrl: res.data.result.avatarUrl,
-            box_mac: res.data.result.mac,
+            box_mac: box_mac,
             openid : openid,
           })
         }else {
