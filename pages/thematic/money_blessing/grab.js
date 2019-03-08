@@ -241,6 +241,7 @@ Page({
                     data: {
                       "open_id": openid,
                       "order_id": order_id,
+                      "box_mac":box_mac
                     },
                     success: function (res) {
                       if (res.data.code == 10000) {

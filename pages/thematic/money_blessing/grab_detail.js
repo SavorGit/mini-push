@@ -17,6 +17,10 @@ Page({
   onLoad: function(options) {
     var that = this;
     var order_id = options.order_id;
+    var box_mac = options.box_mac;
+    that.setData({
+      box_mac:box_mac,
+    })
     var user_info = wx.getStorageSync('savor_user_info');
     openid = user_info.openid;
     if(order_id == undefined){
@@ -36,6 +40,7 @@ Page({
       },
       data:{
         order_id:order_id,
+        openid:openid,
         page:page,
       },
       success:function(res){

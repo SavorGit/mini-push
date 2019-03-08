@@ -2,6 +2,7 @@
 const app = getApp();
 var openid;
 var page = 1;
+var box_mac;
 Page({
 
   /**
@@ -19,6 +20,7 @@ Page({
     var that = this;
     var user_info = wx.getStorageSync("savor_user_info");
     openid = user_info.openid;
+    box_mac = options.box_mac;
     wx.request({
       url: 'https://mobile.littlehotspot.com/Smallapp3/redpacket/sendList',
       header: {
@@ -32,7 +34,8 @@ Page({
         //console.log(res);
         if(res.data.code==10000){
           that.setData({
-            redpacket_list:res.data.result
+            redpacket_list:res.data.result,
+            box_mac:box_mac,
           })
 
         }else {
