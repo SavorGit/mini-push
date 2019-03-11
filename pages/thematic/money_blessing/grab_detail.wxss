@@ -106,6 +106,7 @@
 .PageMain .package .detail .list .item .left .info .name {
   font-size: 30rpx;
   font-weight: 900;
+  overflow: hidden;
 }
 
 .PageMain .package .detail .list .item .left .info .date_time {
