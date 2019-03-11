@@ -11,27 +11,14 @@
         <label>{{packet_info.nickName}}</label>
       </view>
       <view class='tip'>
-        
-        <label wx:if="{{packet_info.status==5}}">{{packet_info.amount}}个红包，{{packet_info.diff_time}}被抢完</label> 
+
+        <label wx:if="{{packet_info.status==5}}">{{packet_info.amount}}个红包，{{packet_info.diff_time}}被抢完</label>
         <label wx:elif="{{packet_info.status==6 || packet_info.status==4 || packet_info.status==7}}">已领取{{packet_info.receive_nums}}/{{packet_info.amount}}个，共{{packet_info.receive_money}}/{{packet_info.pay_fee}}元</label>
       </view>
       <view class='detail'>
-        <scroll-view wx:if="{{packet_info.status==6 || packet_info.status==4 || packet_info.status==7}}"  class='list show_message'   scroll-y="true" scroll-with-animation="true">
-        <!-- <scroll-view class='list show_message' scroll-y="true" scroll-with-animation="true"> -->
-          <view class='item' wx:for="{{receive_list}}" wx:key="key" wx:for-item="bean" wx:for-index="index">
-            <view class='left'>
-              <image src='{{bean.avatarUrl}}'></image>
-              <view class='info'>
-                <view class='name'>{{bean.nickName}}00000000000000000000000000000000   1111111111111111111100000000000000000000000</view>
-                <view class='date_time'>{{bean.add_time}}</view>
-              </view>
-            </view>
-            <view class='right'>{{bean.money}}元</view>
-          </view>
-          
-        </scroll-view>
-        <scroll-view wx:if="{{packet_info.status==5}}"  class='list no_message'   scroll-y="true" scroll-with-animation="true">
-        <!-- <scroll-view class='list show_message' scroll-y="true" scroll-with-animation="true"> -->
+
+        <scroll-view wx:if="{{packet_info.status==6 || packet_info.status==4 || packet_info.status==7}}" class='list show_message' scroll-y="true" scroll-with-animation="true">
+          <!-- <scroll-view class='list show_message' scroll-y="true" scroll-with-animation="true"> -->
           <view class='item' wx:for="{{receive_list}}" wx:key="key" wx:for-item="bean" wx:for-index="index">
             <view class='left'>
               <image src='{{bean.avatarUrl}}'></image>
@@ -42,8 +29,22 @@
             </view>
             <view class='right'>{{bean.money}}元</view>
           </view>
-          
         </scroll-view>
+
+        <scroll-view wx:if="{{packet_info.status==5}}" class='list no_message' scroll-y="true" scroll-with-animation="true">
+          <!-- <scroll-view class='list show_message' scroll-y="true" scroll-with-animation="true"> -->
+          <view class='item' wx:for="{{receive_list}}" wx:key="key" wx:for-item="bean" wx:for-index="index">
+            <view class='left'>
+              <image src='{{bean.avatarUrl}}'></image>
+              <view class='info'>
+                <view class='name'>{{bean.nickName}}</view>
+                <view class='date_time'>{{bean.add_time}}</view>
+              </view>
+            </view>
+            <view class='right'>{{bean.money}}元</view>
+          </view>
+        </scroll-view>
+
         <view wx:if="{{packet_info.status==6 || packet_info.status==4 }}" class='message'>未领取的红包，将24小时之内发起退款</view>
       </view>
     </view>
@@ -53,6 +54,6 @@
     <!-- <button class='button PackingButtonFontSize'>我也发一个</button> -->
 
     <!-- <navigator class='button PackingButtonFontSize' url='/pages/thematic/money_blessing/main?openid={{openid}}&box_mac={{packet_info.mac}}'>进入首页</navigator> -->
-    <button class='button PackingButtonFontSize' bindtap='cintoindex'>进入首页</button> 
+    <button class='button PackingButtonFontSize' bindtap='cintoindex'>进入首页</button>
   </view>
 </view>

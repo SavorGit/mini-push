@@ -98,12 +98,14 @@
 }
 
 .PageMain .package .detail .list .item .left .info {
+  width: calc(100% - 70rpx);
   margin-left: 10rpx;
   display: inline-block;
   vertical-align: middle;
 }
 
 .PageMain .package .detail .list .item .left .info .name {
+  max-width: 100%;
   font-size: 30rpx;
   font-weight: 900;
   overflow: hidden;
