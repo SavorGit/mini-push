@@ -16,7 +16,7 @@
         <view class='message'>手慢了，红包抢完了</view>
         <view class='grab'>
           <navigator class='button' url='/pages/thematic/money_blessing/packing?openid={{openid}}&box_mac={{box_mac}}'>我也发一个></navigator>
-          <navigator class='button' url='/pages/thematic/money_blessing/grab_detail?order_id={{order_id}}'>查看领取详情></navigator>
+          <navigator class='button' url='/pages/thematic/money_blessing/grab_detail?order_id={{order_id}}&box_mac={{box_mac}}'>查看领取详情></navigator>
         </view>
       </view>
     </view>
@@ -42,7 +42,7 @@
         </view>
         <view class='grab'>
           <navigator class='button' url='/pages/thematic/money_blessing/packing?openid={{openid}}&box_mac={{box_mac}}'>我也发一个></navigator>
-          <navigator class='button' url='/pages/thematic/money_blessing/grab_detail?order_id={{order_id}}'>查看领取详情></navigator>
+          <navigator class='button' url='/pages/thematic/money_blessing/grab_detail?order_id={{order_id}}&box_mac={{box_mac}}'>查看领取详情></navigator>
         </view>
       </view>
     </view>
