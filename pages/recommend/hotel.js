@@ -5,6 +5,7 @@ var openid; //用户openid
 var page = 1; //当前节目单页数
 var hotel_list;
 var box_mac;
+var rest_appid = app.globalData.rest_appid;
 Page({
 
   /**
@@ -32,6 +33,7 @@ Page({
     hiddens: true, //加载更多
     box_mac: '', //机顶盒mac
     close_hotel_hint: 0,
+    
 
   },
   //城市切换 
@@ -250,6 +252,7 @@ Page({
     openid = user_info.openid;
     that.setData({
       openid:openid,
+      rest_appid: rest_appid,
     })
     wx.request({
       url: 'https://mobile.littlehotspot.com/smallapp21/User/isRegister',
@@ -280,8 +283,8 @@ Page({
         if (is_have == 1) {
           that.setData({
             is_link: 1,
-            //hotel_name: rest.data.result.hotel_name,
-            //room_name: rest.data.result.room_name,
+            hotel_name: rest.data.result.hotel_name,
+            room_name: rest.data.result.room_name,
             box_mac: rest.data.result.box_mac,
             is_open_simple: rest.data.result.is_open_simple,
           })

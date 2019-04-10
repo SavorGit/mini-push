@@ -246,6 +246,7 @@ App({
     box_mac: '',
     mobile_brand: '',
     mobile_model: '',
-    statusBarHeight: 0
+    statusBarHeight: 0,
+    rest_appid:'wxc395eb4b44563af1'
   }
 })

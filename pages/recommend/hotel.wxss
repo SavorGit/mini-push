@@ -1,7 +1,41 @@
 /* pages/recommend/hotel.wxss */
 
 /* =========================== 页面头部 =========================== */
+.page_banner {
+  display: block;
+  width: 100%;
+  height: 100rpx;
+  line-height: 100rpx;
+  font-size: 26rpx;
+}
 
+.page_banner .layout {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.page_banner .layout > label {
+  margin-left: 10rpx;
+}
+
+.page_banner .layout > navigator {
+  width: 130rpx;
+  height: 50rpx;
+  line-height: 50rpx;
+  border-radius: 30rpx;
+  position: relative;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 0rpx;
+  box-sizing: border-box;
+  text-align: center;
+  text-decoration: none;
+  -webkit-tap-highlight-color: transparent;
+  overflow: hidden;
+}
 .page_top {
   width: 100%;
   height: 70rpx;
