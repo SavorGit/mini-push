@@ -247,6 +247,7 @@ App({
     mobile_brand: '',
     mobile_model: '',
     statusBarHeight: 0,
-    rest_appid:'wxc395eb4b44563af1'
+    rest_appid:'wxc395eb4b44563af1',
+    jijian_appid:'wx7883a4327329a67c',
   }
 })

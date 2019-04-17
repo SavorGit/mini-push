@@ -228,7 +228,6 @@ Page({
           })
         }else {
           if (is_open_simple > 0) {
-            console.log('dffff');
             timer8_0 = setTimeout(function () {
               that.setData({
                 is_show_jump: true,
@@ -256,7 +255,7 @@ Page({
     })
 
     
-    function uploadOssNew(policy, signature, img_url, box_mac, openid, timestamp, flag, img_len, forscreen_char, forscreen_id, res_sup_time, avatarUrl, nickName, public_text, timer8_0) {
+    function uploadOssNew(policy, signature, img_url, box_mac, openid, timestamp, flag, img_len, forscreen_char, forscreen_id, res_sup_time, avatarUrl, nickName, public_text, timer8_0, tmp_imgs) {
 
       var filename = img_url;
       var index1 = filename.lastIndexOf(".");
@@ -310,6 +309,11 @@ Page({
         });
         if (res.progress==100){
           var res_eup_time = (new Date()).valueOf();
+          tmp_imgs[flag].is_sing_forscreen = 1;
+          
+          that.setData({
+            tmp_imgs:tmp_imgs,
+          })
           wx.request({
                 url: 'https://mobile.littlehotspot.com/Smallapp21/index/recordForScreenPics',
                 header: {
@@ -402,10 +406,10 @@ Page({
         post_imgs[i] = "forscreen/resource/" + timestamp + postf;
 
         tmp_imgs[i] = { "oss_img": post_imgs[i] };
-        that.setData({
-          tmp_imgs: tmp_imgs
-        });
-        uploadOssNew(policy, signature, filename, box_mac, openid, timestamp, i, img_len, forscreen_char, forscreen_id, res_sup_time, avatarUrl, nickName, public_text, timer8_0);
+        // that.setData({
+        //   tmp_imgs: tmp_imgs
+        // });
+        uploadOssNew(policy, signature, filename, box_mac, openid, timestamp, i, img_len, forscreen_char, forscreen_id, res_sup_time, avatarUrl, nickName, public_text, timer8_0, tmp_imgs);
       }
       that.setData({
         showThird: true,
@@ -881,4 +885,11 @@ Page({
       is_show_jump: false,
     })
   },
+  upload_wait:function(e){
+    wx.showToast({
+      title: '该图片未上传成功,请稍后！',
+      icon: 'none',
+      duration: 2000
+    });
+  }
 })

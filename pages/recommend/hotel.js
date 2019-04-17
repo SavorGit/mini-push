@@ -6,6 +6,7 @@ var page = 1; //当前节目单页数
 var hotel_list;
 var box_mac;
 var rest_appid = app.globalData.rest_appid;
+var jijian_appid = app.globalData.jijian_appid;
 Page({
 
   /**
@@ -253,6 +254,7 @@ Page({
     that.setData({
       openid:openid,
       rest_appid: rest_appid,
+      jijian_appid: jijian_appid,
     })
     wx.request({
       url: 'https://mobile.littlehotspot.com/smallapp21/User/isRegister',

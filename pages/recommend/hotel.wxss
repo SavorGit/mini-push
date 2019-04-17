@@ -17,11 +17,15 @@
 }
 
 .page_banner .layout > label {
-  margin-left: 10rpx;
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
+  width: 500rpx;
+  overflow: hidden;
 }
 
 .page_banner .layout > navigator {
-  width: 130rpx;
+  width: 180rpx;
   height: 50rpx;
   line-height: 50rpx;
   border-radius: 30rpx;
