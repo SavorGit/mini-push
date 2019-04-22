@@ -4,9 +4,23 @@
 
 <view class="container" style='height: calc(100vh - 46px - {{statusBarHeight}}px);'>
   <view class='page_main'>
-    <view wx:if="{{is_game_banner > 0}}" class='full_width climbtree' bindtap='hdgames' data-boxmac="{{box_mac}}" data-openid="{{openid}}">
+    <!-- 轮播图开始 -->
+    <swiper wx:if="{{imgUrls.length > 0}}" indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{lb_duration}}">
+      <block wx:for="{{imgUrls}}" wx:key="item" wx:for-index="index">
+        <swiper-item>
+          <navigator wx:if="{{item.clicktype == 1}}" class='full_width full_height' target="miniProgram" app-id="{{item.appid}}" path="{{item.linkcontent}}">
+            <image mode='aspectFill' src="{{item.oss_addr}}" class="slide-image" />
+          </navigator>
+          <button wx:if="{{item.clicktype == 2}}" class='full_width full_height' bindtap='{{item.bindtap}}' data-boxmac="{{box_mac}}" data-openid="{{openid}}" data-index='{{index}}' data-linkcontent='{{item.linkcontent}}'>
+            <image mode='aspectFill' src="{{item.oss_addr}}" class="slide-image" />
+          </button>
+        </swiper-item>
+      </block>
+    </swiper>
+    <!-- 轮播图结束 -->
+    <!-- <view wx:if="{{is_game_banner > 0}}" class='full_width climbtree' bindtap='hdgames' data-boxmac="{{box_mac}}" data-openid="{{openid}}">
       <image class='full_width full_height' src="{{banner_img_url}}"></image>
-    </view>
+    </view> -->
     <view wx:if="{{is_link > 0}}" class='full_width tip'>
       <label class='font_F6F2EC_30'>您已成功链接“{{hotel_name}}”的{{room_name}}电视</label>
       <button class='theme-button' bindtap="breakLink" data-boxmac="{{box_mac}}" data-openid="{{openid}}">断开链接</button>
@@ -35,7 +49,7 @@
         <image src='/images/icon2/FFFFFF_history.png'></image>
         <label>投屏历史</label>
       </view>
-      
+
       <!-- <view >
         <image src='/images/icon2/FFFFFF_history.png'></image>
         <navigator url="/pages/thematic/money_blessing/grab?scene=10115_00226D655202"><label>抢红包</label></navigator>
