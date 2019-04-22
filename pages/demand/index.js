@@ -22,6 +22,11 @@ Page({
     hiddens: true,
     box_mac: '',
     showControl:false,
+
+    indicatorDots: true,  //是否显示面板指示点
+    autoplay: true,      //是否自动切换
+    interval: 3000,       //自动切换时间间隔
+    lb_duration: 1000,       //滑动动画时长
   },  
 
   onLoad: function () {
@@ -155,7 +160,20 @@ Page({
         }
       }
     })
-    
+    wx.request({
+      url: 'https://mobile.littlehotspot.com/Smallapp3/Adsposition/getAdspositionList',
+      data: {
+        position: 1,
+      },
+      success: function (res) {
+        if (res.data.code == 10000) {
+          var imgUrls = res.data.result;
+          that.setData({
+            imgUrls: res.data.result
+          })
+        }
+      }
+    })
     
   },
   //遥控呼大码
@@ -637,5 +655,41 @@ Page({
         duration: duration,
       },
     });
-  }
+  },
+  //互动游戏
+  hdgames(e) {
+    var openid = e.currentTarget.dataset.openid;
+    var box_mac = e.currentTarget.dataset.boxmac;
+    var linkcontent = e.currentTarget.dataset.linkcontent;
+
+    if (box_mac == '') {
+      wx.showModal({
+        title: '提示',
+        content: "您可扫码链接热点合作餐厅电视,使用此功能",
+        showCancel: true,
+        confirmText: '立即扫码',
+        success: function (res) {
+          if (res.confirm == true) {
+            wx.scanCode({
+              onlyFromCamera: true,
+              success: (res) => {
+                //console.log(res);
+                wx.navigateTo({
+                  url: '/' + res.path
+                })
+              }
+            })
+          }
+        }
+      });
+    } else {
+      var mobile_brand = app.globalData.mobile_brand;
+      var mobile_model = app.globalData.mobile_model;
+
+      wx.navigateTo({
+        url: linkcontent + '?box_mac=' + box_mac + '&openid=' + openid + '&game_id=2'
+      })
+    }
+
+  },
 })

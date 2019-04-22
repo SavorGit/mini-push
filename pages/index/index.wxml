@@ -41,7 +41,7 @@
         <image src='/images/icon2/FFFFFF_birthday.png'></image>
         <label>生日歌点播</label>
       </view>
-      <view bindtap='hdgames' data-boxmac="{{box_mac}}" data-openid="{{openid}}">
+      <view bindtap='hdgames' data-linkcontent='/pages/game/climbtree/index' data-boxmac="{{box_mac}}" data-openid="{{openid}}">
         <image src='/images/icon2/FFFFFF_game.png'></image>
         <label>互动小游戏</label>
       </view>

@@ -15,7 +15,7 @@
     </view>
     <form bindsubmit="forscreen_video">
       <view class='page_main'>
-        <view class='cover full_width'>
+        <view wx:if="{{is_open_control==false}}" class='cover full_width'>
           <video src='{{upload_vedio_temp}}'></video>
         </view>
 
@@ -129,8 +129,8 @@
       </label>
     </view>
     <view class='page_main'>
-      <view class='cover'>
-        <image mode='aspectFit' src='{{upload_vedio_cover}}'></image>
+       <view wx:if="{{is_open_control==false}}" class='cover'>
+        <video src='{{oss_video_url}}'></video>
       </view>
 
 

@@ -89,6 +89,7 @@ Page({
               hotel_name: rest.data.result.hotel_name,
               room_name: rest.data.result.room_name,
               box_mac: rest.data.result.box_mac,
+              is_open_simple: rest.data.result.is_open_simple,
             })
             box_mac = rest.data.result.box_mac;
             //getHotelInfo(rest.data.result.box_mac);
@@ -152,6 +153,7 @@ Page({
                   //hotel_name: rest.data.result.hotel_name,
                   //room_name: rest.data.result.room_name,
                   box_mac: rest.data.result.box_mac,
+                  is_open_simple: rest.data.result.is_open_simple,
                 })
                 box_mac = rest.data.result.box_mac;
                 //getHotelInfo(rest.data.result.box_mac);
