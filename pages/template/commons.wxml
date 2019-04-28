@@ -6,9 +6,9 @@
     <view class='wxAuthLogin-container'>
       <view class='wxAuthLogin-top'>
         <view class='opt'>
-          <button class='close' bindtap='closeAuth'>
+          <!-- <button class='close' bindtap='closeAuth'>
             <image src='/images/icon2/666666_close.png'></image>
-          </button>
+          </button> -->
         </view>
         <view class='title'>
           <label class='font_1CBEB6_34'>温馨提示</label>

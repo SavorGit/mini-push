@@ -20,7 +20,7 @@
         </view>
 
         <!-- 投视频 -->
-        <view class="grant_auth">
+        <view wx:if="{{is_open_control==false}}" class="grant_auth">
           <checkbox-group class="checkbox-group" bindchange="checkboxChange">
             <label class="items" wx:for="{{item}}" wx:key="key" wx:for-index="index">
               <view wx:if="{{index==0}}">

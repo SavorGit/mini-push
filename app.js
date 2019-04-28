@@ -219,7 +219,9 @@ App({
           },
           success: function(res) {
             that.globalData.openid = res.data.result.openid;
+            that.globalData.session_key = res.data.result.session_key;
             if (that.openidCallback) {
+
               that.openidCallback(res.data.result.openid);
             }
           }
@@ -243,6 +245,7 @@ App({
   },
   globalData: {
     openid: '',
+    session_key:'',
     box_mac: '',
     mobile_brand: '',
     mobile_model: '',

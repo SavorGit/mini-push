@@ -262,7 +262,7 @@ Page({
   clickRedPacket:function(e){
     var that = this;
     var user_info = wx.getStorageSync("savor_user_info");
-    if (user_info.is_wx_auth != 2) {
+    if (user_info.is_wx_auth != 3) {
       
       that.setData({
         showModal: true
@@ -275,7 +275,7 @@ Page({
   },
   onGetUserInfo: function (res) {
     var that = this;
-    var user_info = wx.getStorageSync("savor_user_info");
+    /*var user_info = wx.getStorageSync("savor_user_info");
     openid = user_info.openid;
     if (res.detail.errMsg == 'getUserInfo:ok') {
       wx.request({
@@ -302,7 +302,80 @@ Page({
           })
         }
       })
+    }*/
+    var user_info = wx.getStorageSync("savor_user_info");
+    openid = user_info.openid;
+    if (res.detail.errMsg == 'getUserInfo:ok') {
+      wx.getUserInfo({
+        success(rets) {
+          wx.request({
+            url: 'https://mobile.littlehotspot.com/smallapp3/User/registerCom',
+            data: {
+              'openid': openid,
+              'avatarUrl': rets.userInfo.avatarUrl,
+              'nickName': rets.userInfo.nickName,
+              'gender': rets.userInfo.gender,
+              'session_key': app.globalData.session_key,
+              'iv': rets.iv,
+              'encryptedData': rets.encryptedData
+            },
+            header: {
+              'content-type': 'application/json'
+            },
+            success: function (res) {
+              if (res.data.code == 10000) {
+                wx.setStorage({
+                  key: 'savor_user_info',
+                  data: res.data.result,
+                });
+                that.setData({
+                  showModal: false,
+                })
+                wx.navigateTo({
+                  url: '/pages/thematic/money_blessing/main?openid=' + openid + '&box_mac=' + box_mac,
+                })
+              } else {
+                wx.showToast({
+                  title: '微信授权登陆失败，请重试',
+                  icon: 'none',
+                  duration: 2000,
+
+                })
+              }
+
+            }
+          })
+        }
+      })
+    }else {
+      wx.request({
+        url: 'https://mobile.littlehotspot.com/smallapp21/User/refuseRegister',
+        data: {
+          'openid': openid,
+        },
+        header: {
+          'content-type': 'application/json'
+        },
+        success: function (res) {
+          if (res.data.code == 10000) {
+            user_info['is_wx_auth'] = 1;
+            wx.setStorage({
+              key: 'savor_user_info',
+              data: user_info,
+            })
+
+          } else {
+            wx.showToast({
+              title: '拒绝失败,请重试',
+              icon: 'none',
+              duration: 2000
+            });
+          }
+
+        }
+      })
     }
+    
     
   },
   //关闭授权弹窗

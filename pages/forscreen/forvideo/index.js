@@ -99,6 +99,7 @@ Page({
       load_fresh_char: '亲^_^投屏中,请稍后...',
       hiddens: false,
       is_btn_disabel:true,
+      is_open_control:true
     })
     var video = res.detail.value.video;
     var box_mac = res.detail.value.box_mac;
@@ -225,6 +226,7 @@ Page({
             upload_vedio_temp:'',
             is_view_control: true,
             hiddens:true,
+            is_open_control: false
           })
           wx.request({
             url: 'https://mobile.littlehotspot.com/Smallapp21/index/recordForScreenPics',

@@ -56,6 +56,11 @@ Page({
             key: 'savor_user_info',
             data: res.data.result.userinfo,
           })
+          if (res.data.result.userinfo.is_wx_auth != 3) {
+            that.setData({
+              showModal: true
+            })
+          }
         },
         fail: function (e) {
           wx.setStorage({
@@ -111,6 +116,11 @@ Page({
                 key: 'savor_user_info',
                 data: res.data.result.userinfo,
               })
+              if (res.data.result.userinfo.is_wx_auth !=3){
+                that.setData({
+                  showModal: true
+                })
+              }
             }, 
             fail: function (e) {
               wx.setStorage({
@@ -186,32 +196,56 @@ Page({
   },
   onGetUserInfo: function (res) { 
     var that = this;
+    
     var user_info = wx.getStorageSync("savor_user_info");
     openid = user_info.openid;
-    if (res.detail.errMsg =='getUserInfo:ok'){
-      wx.request({
-        url: 'https://mobile.littlehotspot.com/smallapp21/User/register',
-        data: {
-          'openid': openid,
-          'avatarUrl': res.detail.userInfo.avatarUrl,
-          'nickName': res.detail.userInfo.nickName,
-          'gender': res.detail.userInfo.gender
-        },
-        header: {
-          'content-type': 'application/json'
-        },
-        success: function (res) {
-          wx.setStorage({
-            key: 'savor_user_info',
-            data: res.data.result,
-          });
-          that.setData({
-            showModal: false,
+    if (res.detail.errMsg == 'getUserInfo:ok') {
+      wx.getUserInfo({
+        success(rets) {
+          wx.request({
+            url: 'https://mobile.littlehotspot.com/smallapp3/User/registerCom',
+            data: {
+              'openid': openid,
+              'avatarUrl': rets.userInfo.avatarUrl,
+              'nickName': rets.userInfo.nickName,
+              'gender': rets.userInfo.gender,
+              'session_key': app.globalData.session_key,
+              'iv': rets.iv,
+              'encryptedData': rets.encryptedData
+            },
+            header: {
+              'content-type': 'application/json'
+            },
+            success: function (res) {
+              if (res.data.code == 10000) {
+                wx.setStorage({
+                  key: 'savor_user_info',
+                  data: res.data.result,
+                });
+                that.setData({
+                  showModal: false,
+                })
+              } else {
+                wx.showToast({
+                  title: '微信授权登陆失败，请重试',
+                  icon: 'none',
+                  duration: 2000,
+
+                })
+              }
+
+            }, 
+            fail: function (res) {
+              wx.showToast({
+                title: '微信登陆失败，请重试',
+                icon: 'none',
+                duration: 2000
+              });
+            }
           })
         }
       })
-    }
-    /*else {
+    }else {
       wx.request({
         url: 'https://mobile.littlehotspot.com/smallapp21/User/refuseRegister',
         data: {
@@ -220,28 +254,27 @@ Page({
         header: {
           'content-type': 'application/json'
         },
-        success:function(res){
-          if(res.data.code==10000){
-            user_info['is_wx_auth'] =1;
+        success: function (res) {
+          if (res.data.code == 10000) {
+            user_info['is_wx_auth'] = 1;
             wx.setStorage({
               key: 'savor_user_info',
               data: user_info,
             })
-            that.setData({
-              showModal: false,
-            })
-          }else {
+            
+          } else {
             wx.showToast({
               title: '拒绝失败,请重试',
               icon: 'none',
               duration: 2000
             });
           }
-          
+
         }
       })
-      
-    }*/
+    }
+    
+    
   },
   //关闭授权弹窗
   closeAuth:function(){
@@ -274,7 +307,7 @@ Page({
   chooseImage(e) {
     var that = this;
     var user_info = wx.getStorageSync("savor_user_info");
-    if (user_info.is_wx_auth!=2){
+    if (user_info.is_wx_auth!=3){
       that.setData({
         showModal:true
       })
@@ -313,7 +346,7 @@ Page({
   chooseVedio(e) {
     var that = this
     var user_info = wx.getStorageSync("savor_user_info");
-    if (user_info.is_wx_auth !=2) {
+    if (user_info.is_wx_auth !=3) {
       that.setData({
         showModal: true
       })

@@ -256,7 +256,6 @@ Page({
 
     
     function uploadOssNew(policy, signature, img_url, box_mac, openid, timestamp, flag, img_len, forscreen_char, forscreen_id, res_sup_time, avatarUrl, nickName, public_text, timer8_0, tmp_imgs) {
-
       var filename = img_url;
       var index1 = filename.lastIndexOf(".");
       var index2 = filename.length;
@@ -287,8 +286,7 @@ Page({
 
         success: function (res) {
           if (order == img_len) {
-            
-            clearInterval(timer8_0);
+            clearTimeout(timer8_0);
           }
         },
         complete: function (es) {
