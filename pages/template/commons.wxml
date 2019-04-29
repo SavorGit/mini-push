@@ -15,7 +15,7 @@
         </view>
       </view>
       <view class='wxAuthLogin-middle'>
-        <label class='content font_333333_30'>使用“热点投屏”过程中，请遵守相关法律法规。</label>
+        <label class='content font_333333_30'>使用"热点投屏"过程中,请遵守相关法律法规。</label>
         <label class='link_relief'>
           <navigator url="/pages/forscreen/relief">免责声明</navigator>
         </label>

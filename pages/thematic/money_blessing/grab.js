@@ -372,7 +372,91 @@ Page({
                 that.setData({
                   showModal: false,
                 })
-                this.reload();
+                // wx.navigateTo({
+                //   url: '/pages/thematic/money_blessing/grab?scene='+order_id+'_'+box_mac,
+                // })
+                //that.onLoad()
+                //this.onLoad();
+                //that.reload();
+                //如果已授权   请求获取扫电视红包小程序码结果
+                wx.request({
+                  url: 'https://mobile.littlehotspot.com/Smallapp3/redpacket/getScanresult',
+                  header: {
+                    'content-type': 'application/json'
+                  },
+                  data: {
+                    "open_id": openid,
+                    "order_id": order_id,
+                    "box_mac": box_mac,
+                  },
+                  success: function (res) {
+                    if (res.data.code == 10000) {
+                      var order_status = res.data.result.status;
+                      if (order_status == 4 || order_status == 0) {
+                        wx.redirectTo({
+                          url: '/pages/thematic/money_blessing/receive_h5?jump_url=' + encodeURIComponent(res.data.result.jump_url),
+                        })
+
+                      } else if (order_status == 1 || order_status == 2) {
+                        that.setData({
+                          order_status: res.data.result.status,
+                          avatarUrl: res.data.result.avatarUrl,
+                          bless: res.data.result.bless,
+                          nickName: res.data.result.nickName,
+                          order_id: res.data.result.order_id,
+                          money: res.data.result.money,
+                        })
+                      } else if (order_status == 3) {
+                        wx.request({
+                          url: 'https://mobile.littlehotspot.com//Smallapp3/redpacket/grabBonusResult',
+                          header: {
+                            'content-type': 'application/json'
+                          },
+                          data: {
+                            order_id: order_id,
+                            user_id: res.data.result.user_id,
+                            sign: res.data.result.sign,
+                          },
+                          success: function (rt) {
+                            if (rt.data.code == 10000) {
+                              that.setData({
+                                order_status: res.data.result.status,
+                                avatarUrl: res.data.result.avatarUrl,
+                                bless: res.data.result.bless,
+                                nickName: res.data.result.nickName,
+                                order_id: res.data.result.order_id,
+                                money: res.data.result.money,
+                              })
+                            } else {
+                              wx.reLaunch({
+                                url: '/pages/index/index',
+                              })
+                              wx.showToast({
+                                title: '红包领取失败',
+                                icon: 'none',
+                                duration: 2000,
+                              })
+                            }
+                          }
+                        })
+                      } else if (order_status == 5) {
+                        wx.redirectTo({
+                          url: '/pages/thematic/money_blessing/grab_detail?order_id=' + order_id,
+                        })
+                      }
+                    } else {
+                      wx.reLaunch({
+                        url: '/pages/index/index',
+                      })
+                      wx.showToast({
+                        title: '该红包不可领取',
+                        icon: 'none',
+                        duration: 2000,
+                      })
+                    }
+
+                  }
+                })
               } else {
                 wx.showToast({
                   title: '微信授权登陆失败，请重试',
