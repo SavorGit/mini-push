@@ -1,15 +1,15 @@
 <!--pages/find/selected_list.wxml-->
 <import src="../template/commons" />
-<template is="navigationBarForTwoLevel" data='{{statusBarHeight: statusBarHeight,titleText:"热点投屏"}}' />
+<template is="navigationBarForTopLevel" data='{{statusBarHeight: statusBarHeight,titleText:"热点投屏"}}' />
 
 <view class='container' style='height: calc(100vh - 46px - {{statusBarHeight}}px);'>
-  <!-- <view class='page_top'>
+  <view class='page_top'>
     <view class='categry'>
       <label>精选</label>
       <image src='/images/icon2/666666_vertical.png'></image>
       <navigator url='/pages/find/waterfall'>公开</navigator>
     </view>
-  </view> -->
+  </view>
   <scroll-view class='full_width full_height' scroll-y="true" scroll-with-animation="true" bindscrolltolower="loadMore" data-openid='{{openid}}'>
     <view class='page_main'>
       <view class='waterfall_list left'>

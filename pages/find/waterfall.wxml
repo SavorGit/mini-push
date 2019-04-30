@@ -1,8 +1,9 @@
 <!--pages/find/waterfall.wxml-->
 <import src="/pages/template/commons" />
-<template is="navigationBarForTopLevel" data='{{statusBarHeight: statusBarHeight,titleText:"热点投屏"}}' />
+<template is="navigationBarForTwoLevel" data='{{statusBarHeight: statusBarHeight,titleText:"热点投屏"}}' />
 
 <view class='container' style='height: calc(100vh - 46px - {{statusBarHeight}}px);'>
+<!--
   <view class='page_top'>
     <view class='categry'>
       <label>公开</label>
@@ -10,6 +11,7 @@
       <navigator url='/pages/find/selected_list'>精选</navigator>
     </view>
   </view>
+  -->
   <scroll-view class='full_width scroll-view' scroll-y="true" scroll-with-animation="true" bindscrolltolower="loadMore" data-openid='{{openid}}'>
     <view class='page_main'>
       <view class='waterfall_list left'>
