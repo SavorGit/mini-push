@@ -1,4 +1,5 @@
 /**app.wxss**/
+@import "font-awesome.wxss";
 
 /* ================================== 页面 ================================== */
 
@@ -137,6 +138,21 @@
 
 .font_999999_24 {
   font-size: 24rpx;
+  color: #999;
+}
+
+.font_999999_26 {
+  font-size: 26rpx;
+  color: #999;
+}
+
+.font_999999_28 {
+  font-size: 28rpx;
+  color: #999;
+}
+
+.font_999999_30 {
+  font-size: 30rpx;
   color: #999;
 }
 

@@ -98,13 +98,14 @@
 
 .PageMain .package {
   width: 90%;
-  height: 800rpx;
+  height: 750rpx;
   padding: 0 5%;
 }
 
 .PageMain .package > .head {
   height: 200rpx;
   text-align: center;
+  margin-bottom: -100rpx;
 }
 
 .PageMain .package > .head image {
@@ -114,8 +115,7 @@
 }
 
 .PageMain .package > .body {
-  height: calc(100% - 300rpx);
-  margin-top: -100rpx;
+  height: calc(100% - 280rpx);
   padding: 120rpx 50rpx 30rpx 50rpx;
   border-radius: 20rpx;
 }
@@ -186,4 +186,248 @@
 .PageMain .package > .body .money > sub {
   font-size: 30rpx;
   font-weight: 900;
+}
+
+/* ======== 入口卡片 ======== */
+
+.EntranceCardColor {
+  background-color: #fedfb2;
+  color: #f05649;
+}
+
+.PageMain .EntranceCard {
+  width: 90%;
+  height: 520rpx;
+  margin: 0 5%;
+  border-radius: 20rpx;
+}
+
+.PageMain .EntranceCard > .header-bar {
+  height: 130rpx;
+  padding-top: 50rpx;
+  margin-bottom: 30rpx;
+  text-align: center;
+}
+
+.PageMain .EntranceCard > .slogan-bar {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: 36rpx;
+  font-weight: 900;
+  margin-bottom: 50rpx;
+}
+
+.PageMain .EntranceCard > .entrance-bar {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 50rpx;
+}
+
+.PageMain .EntranceCard > .entrance-bar > .entrance {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: 26rpx;
+  font-weight: 900;
+}
+
+.PageMain .EntranceCard > .entrance-bar > .entrance image {
+  width: 80rpx;
+  height: 70rpx;
+  vertical-align: middle;
+  text-align: center;
+  margin-bottom: 10rpx;
+}
+
+/* ======== 发现精选 ======== */
+
+.PageMain .FindSelected {
+  width: 90%;
+  margin: 80rpx 5% 50rpx 5%;
+}
+
+.PageMain .FindSelected > .header {
+  height: 70rpx;
+  line-height: 70rpx;
+  border-bottom: solid #666 1rpx;
+}
+
+.PageMain .FindSelected > .header > label {
+  margin-left: 15rpx;
+  padding-left: 15rpx;
+  border-left: solid #1cbeb6 10rpx;
+  font-size: 34rpx;
+  font-weight: 900;
+}
+
+/* .content {
+  margin: 0rpx 30rpx 0rpx 30rpx;
+} */
+
+.content_bottom_border {
+  border-bottom: 1rpx solid #666;
+}
+
+/* =================== 内容头部开始 =================== */
+
+.con_top {
+  height: 120rpx;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.con_top > .user_info {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  flex-grow: 1;
+  justify-content: flex-start;
+}
+
+.con_top > .user_info > .user_head, .con_top > .user_info > .user_head::before {
+  width: 70rpx;
+  height: 70rpx;
+  border-radius: 50%;
+  background-color: #bebebe;
+  vertical-align: middle;
+}
+
+.con_top > .user_info > .user_name {
+  margin: 0rpx 20rpx 0rpx 10rpx;
+}
+
+.con_top > .operation {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.con_top > .operation > .launch_tv {
+  margin-right: 10rpx;
+  width: 150rpx;
+  height: 55rpx;
+  padding: unset;
+  line-height: 55rpx;
+  border-radius: 12rpx;
+  font-size: 24rpx;
+}
+
+/* =================== 内容头部结束 =================== */
+
+/* =================== 内容中部开始 =================== */
+
+.con_main {
+  margin: 0rpx 70rpx 0rpx 70rpx;
+}
+
+.con_main .weui-grid {
+  width: calc((90vw - 140rpx) / 3);
+  height: calc((90vw - 140rpx) / 3);
+}
+
+.con_main .weui-grid image {
+  width: calc(100% - 8rpx);
+  height: calc(100% - 8rpx);
+  border-radius: 10rpx;
+}
+
+.con_main > .video navigator {
+  width: 450rpx;
+  height: 450rpx;
+}
+
+.con_main > .video navigator > image {
+  width: 100%;
+  height: 100%;
+  border-radius: 10rpx;
+}
+
+.con_main > .video .cover {
+  width: 255rpx;
+  height: 255rpx;
+  margin: -450rpx 0rpx 0rpx 0rpx;
+  padding: 195rpx 0rpx 0rpx 195rpx;
+  border: 0rpx;
+}
+
+.con_main > .video .cover > navigator {
+  width: 60rpx;
+  height: 60rpx;
+}
+
+.con_main > .video .cover > navigator > image {
+  width: 100%;
+  height: 100%;
+}
+
+.con_main > .video .cover > view {
+  margin-top: 115rpx;
+  padding-right: 20rpx;
+  text-align: right;
+}
+
+/* =================== 内容中部结束 =================== */
+
+/* =================== 内容底部开始 =================== */
+
+.con_bottom {
+  height: 75rpx;
+  padding-left: 70rpx;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.con_bottom > .hotel_info {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  flex-grow: 1;
+  justify-content: flex-start;
+}
+
+.con_bottom > .operation {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.con_bottom > .operation > view {
+  margin-left: 15rpx;
+  margin-right: 15rpx;
+}
+
+.con_bottom > .operation > view > button,
+.con_bottom > .operation > view > button::before,
+.con_bottom > .operation > view > button::after {
+  margin: unset;
+  padding: unset;
+  background: unset;
+  border: unset;
+}
+
+.con_bottom > .operation > view > button > image {
+  width: 36rpx;
+  height: 32rpx;
+  margin-right: 8rpx;
+  vertical-align: middle;
+}
+
+/* =================== 内容底部结束 =================== */
+
+.PageMain .FindSelected > .footer {
+  height: 70rpx;
+  line-height: 70rpx;
+}
+
+.PageMain .FindSelected > .footer > navigator {
+  text-align: center;
+  font-size: 26rpx;
+  text-decoration: underline;
 }
