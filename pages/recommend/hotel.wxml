@@ -6,7 +6,7 @@
   <view wx:if="{{is_link==1}}" class='page_banner theme7 theme-font'>
     <view  class='layout'>
       <label>您已经连接{{room_name}}电视</label>
-      <navigator  target="miniProgram" app-id="{{rest_appid}}" path="pages/index/index?box_mac={{box_mac}}" class='theme-button'>前往餐厅版</navigator>
+      <navigator version="trial"   target="miniProgram" app-id="{{rest_appid}}" path="pages/index/index?box_mac={{box_mac}}" class='theme-button'>前往餐厅版</navigator>
       
     </view>
   </view>

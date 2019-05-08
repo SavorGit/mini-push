@@ -1,6 +1,9 @@
 // pages//thematic/money_blessing/receive_result.js
 const app = getApp();
 var openid;
+var discovery_list; //发现列表
+var pubdetail;
+var i;
 Page({
 
   /**
@@ -43,6 +46,7 @@ Page({
             box_mac: res.data.result.box_mac,
             openid : openid,
           })
+          getRedpacketJx(openid);
         }else {
           wx.reLaunch({
             url: '/pages/index/index',
@@ -55,6 +59,25 @@ Page({
         }
       }
     })
+    function getRedpacketJx(openid) {
+      wx.request({
+        url: 'https://mobile.littlehotspot.com/Smallapp3/Find/redPacketJx',
+        header: {
+          'content-type': 'application/json'
+        },
+        data: {
+          openid: openid,
+        },
+        success: function (res) {
+          if (res.data.code == 10000) {
+            discovery_list = res.data.result
+            that.setData({
+              discovery_list: res.data.result,
+            })
+          }
+        }
+      })
+    }
   },
 
   /**

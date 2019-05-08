@@ -30,19 +30,19 @@
         <view>快来与朋友分享您的精彩内容吧</view>
       </view>
       <view class='entrance-bar theme-font1'>
-        <view class='entrance'>
+        <view bindtap="chooseImage" data-box_mac="{{box_mac}}" data-openid="{{openid}}" data-is_open_simple='{{is_open_simple}}' class='entrance'>
           <image src='/images/icon2/333333_picture.png'></image>
           <view>照片上电视</view>
         </view>
-        <view class='entrance'>
+        <view bindtap='chooseVedio' data-box_mac="{{box_mac}}" data-openid="{{openid}}" data-is_open_simple='{{is_open_simple}}' class='entrance'>
           <image src='/images/icon2/333333_video.png'></image>
           <view>视频上电视</view>
         </view>
-        <view class='entrance'>
+        <view bindtap='showHappy' data-box_mac="{{box_mac}}" data-openid="{{openid}}" class='entrance'>
           <image src='/images/icon2/333333_birthday.png'></image>
           <view>生日歌点播</view>
         </view>
-        <view class='entrance'>
+        <view bindtap='demand' class='entrance'>
           <image src='/images/icon2/333333_demand.png'></image>
           <view>节目点播</view>
         </view>
@@ -55,146 +55,30 @@
       <view class='body'>
 
 
-        <view class='content content_bottom_border'>
+        <view class='content content_bottom_border' wx:for="{{discovery_list}}" wx:key="key" wx:for-item="bean" wx:for-index="index">
           <view class='con_top'>
             <view class='user_info'>
-              <image class='user_head' src="http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/icon/grey_interact.png"></image>
-              <label class='user_name font_999999_30'>昵称</label>
+              <image class='user_head' src="{{bean.avatarUrl}}" lazy-load='/images/icon2/666666_interact.png'></image>
+              <label class='user_name font_999999_30'>{{bean.nickName}}</label>
             </view>
             <view class='operation'>
-              <button class='launch_tv theme-button'>电视播放</button>
+              <button bindtap='boxShow'  data-res_type="{{bean.res_type}}" data-res_nums="{{bean.res_nums}}" data-pubdetail="{{bean.pubdetail}}" data-boxmac="{{box_mac}}" data-openid="{{openid}}" data-forscreen_id="{{bean.forscreen_id}}" class='launch_tv theme-button'>电视播放</button>
             </view>
           </view>
           <view class='con_main'>
-            <view class="weui-grids">
-              <view class="weui-grid">
-                <image class="pic_show" mode='aspectFill' src="http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
+            <view wx:if="{{bean.res_type == 1}}" class="weui-grids">
+              <view wx:for="{{bean.pubdetail}}" wx:key="k" wx:for-item="item" wx:for-index="idx"  class="weui-grid">
+                <image bindtap="previewImage" data-src="{{bean.pubdetail}}" data-pkey="{{idx}}" class="pic_show" mode='aspectFill' src="{{item.res_url}}"></image>
               </view>
-              <view class="weui-grid">
-                <image class="pic_show" mode='aspectFill' src="http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
-              </view>
-              <view class="weui-grid">
-                <image class="pic_show" mode='aspectFill' src="http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
-              </view>
-              <view class="weui-grid">
-                <image class="pic_show" mode='aspectFill' src="http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
-              </view>
-              <view class="weui-grid">
-                <image class="pic_show" mode='aspectFill' src="http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
-              </view>
-              <view class="weui-grid">
-                <image class="pic_show" mode='aspectFill' src="http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
-              </view>
+              
             </view>
-          </view>
-          <view class='con_bottom'>
-            <view class='hotel_info font_999999_24'>
-              <label class='time'>10分钟前</label>
-              <label class='dot'>.</label>
-              <label class='hotel_name'>权茂北京菜</label>
-            </view>
-            <view class='operation'>
-              <view wx:if="{{collect}}">
-                <button>
-                  <image src='http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/icon/red_heart.png'></image>
-                  <label class='font_999999_26'>101</label>
-                </button>
-              </view>
-              <view wx:else>
-                <button>
-                  <image src='http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/icon/grey_heart.png'></image>
-                  <label class='font_999999_26'>100</label>
-                </button>
-              </view>
+            <view wx:elif="{{bean.res_type == 2}}" class="video">
               <view>
-                <button>
-                  <image src='http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/icon/grey_share.png'></image>
-                  <label class='font_999999_26'>100</label>
-                </button>
-              </view>
-            </view>
-          </view>
-        </view>
-
-
-        <view class='content content_bottom_border'>
-          <view class='con_top'>
-            <view class='user_info'>
-              <image class='user_head' src="http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/icon/grey_interact.png"></image>
-              <label class='user_name font_999999_30'>昵称</label>
-            </view>
-            <view class='operation'>
-              <button class='launch_tv theme-button'>电视播放</button>
-            </view>
-          </view>
-          <view class='con_main'>
-            <view class="weui-grids">
-              <view class="weui-grid">
-                <image class="pic_show" mode='aspectFill' src="http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
-              </view>
-              <view class="weui-grid">
-                <image class="pic_show" mode='aspectFill' src="http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
-              </view>
-              <view class="weui-grid">
-                <image class="pic_show" mode='aspectFill' src="http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
-              </view>
-              <view class="weui-grid">
-                <image class="pic_show" mode='aspectFill' src="http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
-              </view>
-              <view class="weui-grid">
-                <image class="pic_show" mode='aspectFill' src="http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
-              </view>
-            </view>
-          </view>
-          <view class='con_bottom'>
-            <view class='hotel_info font_999999_24'>
-              <label class='time'>10分钟前</label>
-              <label class='dot'>.</label>
-              <label class='hotel_name'>权茂北京菜</label>
-            </view>
-            <view class='operation'>
-              <view wx:if="{{collect}}">
-                <button>
-                  <image src='http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/icon/red_heart.png'></image>
-                  <label class='font_999999_26'>101</label>
-                </button>
-              </view>
-              <view wx:else>
-                <button>
-                  <image src='http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/icon/grey_heart.png'></image>
-                  <label class='font_999999_26'>100</label>
-                </button>
-              </view>
-              <view>
-                <button>
-                  <image src='http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/icon/grey_share.png'></image>
-                  <label class='font_999999_26'>100</label>
-                </button>
-              </view>
-            </view>
-          </view>
-        </view>
-
-
-
-        <view class='content content_bottom_border'>
-          <view class='con_top'>
-            <view class='user_info'>
-              <image class='user_head' src="http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/icon/grey_interact.png"></image>
-              <label class='user_name font_999999_30'>昵称</label>
-            </view>
-            <view class='operation'>
-              <button class='launch_tv theme-button'>电视播放</button>
-            </view>
-          </view>
-          <view class='con_main'>
-            <view class="video">
-              <view>
-                <navigator url="">
-                  <image mode='aspectFill' src="http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
+                <navigator url="/pages/find/video?forscreen_id={{bean.forscreen_id}}&box_mac={{box_mac}}">
+                  <image mode='aspectFill' src="{{bean.pubdetail[0].vide_img}}"></image>
                 </navigator>
                 <view class="cover">
-                  <navigator url="">
+                  <navigator url="/pages/find/video?forscreen_id={{bean.forscreen_id}}&box_mac={{box_mac}}">
                     <image src='http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/icon/white_play.png'></image>
                   </navigator>
                   <view>
@@ -203,41 +87,40 @@
                 </view>
               </view>
             </view>
+
           </view>
           <view class='con_bottom'>
             <view class='hotel_info font_999999_24'>
-              <label class='time'>10分钟前</label>
-              <label class='dot'>.</label>
-              <label class='hotel_name'>权茂北京菜</label>
+              <label class='time'>{{bean.create_time}}</label>
+              <label class='dot' wx:if="{{bean.hotel_name!=''}}">.</label>
+              <label class='hotel_name' wx:if="{{picinfo.hotel_name!=''}}">{{bean.hotel_name}}</label>
             </view>
             <view class='operation'>
-              <view wx:if="{{collect}}">
-                <button>
+              <view wx:if="{{bean.is_collect==1}}">
+                <button bindtap='cancCollect' data-res_id="{{bean.forscreen_id}}" data-openid="{{openid}}" data-res_key="{{index}}">
                   <image src='http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/icon/red_heart.png'></image>
-                  <label class='font_999999_26'>101</label>
+                  <label class='font_999999_26'>{{bean.collect_num}}</label>
                 </button>
               </view>
               <view wx:else>
-                <button>
+                <button bindtap='onCollect' data-res_id="{{bean.forscreen_id}}" data-openid="{{openid}}" data-res_key="{{index}}">
                   <image src='http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/icon/grey_heart.png'></image>
-                  <label class='font_999999_26'>100</label>
+                  <label class='font_999999_26'>{{bean.collect_num}}</label>
                 </button>
               </view>
               <view>
                 <button>
                   <image src='http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/icon/grey_share.png'></image>
-                  <label class='font_999999_26'>100</label>
+                  <label class='font_999999_26'>{{bean.share_num}}</label>
                 </button>
               </view>
             </view>
-          </view>
+          </view> 
         </view>
-
-
-
+        
       </view>
       <view class='footer'>
-        <navigator class='theme-font'>查看更多...</navigator>
+        <navigator url="/pages/find/selected_list" open-type='switchTab'  class='theme-font'>查看更多...</navigator>
       </view>
     </view>
   </scroll-view>
@@ -276,19 +159,19 @@
         <view>快来与朋友分享您的精彩内容吧</view>
       </view>
       <view class='entrance-bar theme-font1'>
-        <view class='entrance'>
+        <view bindtap="chooseImage" data-box_mac="{{box_mac}}" data-openid="{{openid}}" data-is_open_simple='{{is_open_simple}}' class='entrance'>
           <image src='/images/icon2/333333_picture.png'></image>
           <view>照片上电视</view>
         </view>
-        <view class='entrance'>
+        <view bindtap='chooseVedio' data-box_mac="{{box_mac}}" data-openid="{{openid}}" data-is_open_simple='{{is_open_simple}}' class='entrance'>
           <image src='/images/icon2/333333_video.png'></image>
           <view>视频上电视</view>
         </view>
-        <view class='entrance'>
+        <view bindtap='showHappy' data-box_mac="{{box_mac}}" data-openid="{{openid}}" class='entrance'>
           <image src='/images/icon2/333333_birthday.png'></image>
           <view>生日歌点播</view>
         </view>
-        <view class='entrance'>
+        <view bindtap='demand' class='entrance'>
           <image src='/images/icon2/333333_demand.png'></image>
           <view>节目点播</view>
         </view>
@@ -301,146 +184,30 @@
       <view class='body'>
 
 
-        <view class='content content_bottom_border'>
+        <view class='content content_bottom_border' wx:for="{{discovery_list}}" wx:key="key" wx:for-item="bean" wx:for-index="index">
           <view class='con_top'>
             <view class='user_info'>
-              <image class='user_head' src="http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/icon/grey_interact.png"></image>
-              <label class='user_name font_999999_30'>昵称</label>
+              <image class='user_head' src="{{bean.avatarUrl}}" lazy-load='/images/icon2/666666_interact.png'></image>
+              <label class='user_name font_999999_30'>{{bean.nickName}}</label>
             </view>
             <view class='operation'>
-              <button class='launch_tv theme-button'>电视播放</button>
+              <button bindtap='boxShow'  data-res_type="{{bean.res_type}}" data-res_nums="{{bean.res_nums}}" data-pubdetail="{{bean.pubdetail}}" data-boxmac="{{box_mac}}" data-openid="{{openid}}" data-forscreen_id="{{bean.forscreen_id}}" class='launch_tv theme-button'>电视播放</button>
             </view>
           </view>
           <view class='con_main'>
-            <view class="weui-grids">
-              <view class="weui-grid">
-                <image class="pic_show" mode='aspectFill' src="http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
+            <view wx:if="{{bean.res_type == 1}}" class="weui-grids">
+              <view wx:for="{{bean.pubdetail}}" wx:key="k" wx:for-item="item" wx:for-index="idx"  class="weui-grid">
+                <image bindtap="previewImage" data-src="{{bean.pubdetail}}" data-pkey="{{idx}}" class="pic_show" mode='aspectFill' src="{{item.res_url}}"></image>
               </view>
-              <view class="weui-grid">
-                <image class="pic_show" mode='aspectFill' src="http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
-              </view>
-              <view class="weui-grid">
-                <image class="pic_show" mode='aspectFill' src="http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
-              </view>
-              <view class="weui-grid">
-                <image class="pic_show" mode='aspectFill' src="http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
-              </view>
-              <view class="weui-grid">
-                <image class="pic_show" mode='aspectFill' src="http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
-              </view>
-              <view class="weui-grid">
-                <image class="pic_show" mode='aspectFill' src="http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
-              </view>
+              
             </view>
-          </view>
-          <view class='con_bottom'>
-            <view class='hotel_info font_999999_24'>
-              <label class='time'>10分钟前</label>
-              <label class='dot'>.</label>
-              <label class='hotel_name'>权茂北京菜</label>
-            </view>
-            <view class='operation'>
-              <view wx:if="{{collect}}">
-                <button>
-                  <image src='http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/icon/red_heart.png'></image>
-                  <label class='font_999999_26'>101</label>
-                </button>
-              </view>
-              <view wx:else>
-                <button>
-                  <image src='http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/icon/grey_heart.png'></image>
-                  <label class='font_999999_26'>100</label>
-                </button>
-              </view>
+            <view wx:elif="{{bean.res_type == 2}}" class="video">
               <view>
-                <button>
-                  <image src='http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/icon/grey_share.png'></image>
-                  <label class='font_999999_26'>100</label>
-                </button>
-              </view>
-            </view>
-          </view>
-        </view>
-
-
-        <view class='content content_bottom_border'>
-          <view class='con_top'>
-            <view class='user_info'>
-              <image class='user_head' src="http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/icon/grey_interact.png"></image>
-              <label class='user_name font_999999_30'>昵称</label>
-            </view>
-            <view class='operation'>
-              <button class='launch_tv theme-button'>电视播放</button>
-            </view>
-          </view>
-          <view class='con_main'>
-            <view class="weui-grids">
-              <view class="weui-grid">
-                <image class="pic_show" mode='aspectFill' src="http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
-              </view>
-              <view class="weui-grid">
-                <image class="pic_show" mode='aspectFill' src="http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
-              </view>
-              <view class="weui-grid">
-                <image class="pic_show" mode='aspectFill' src="http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
-              </view>
-              <view class="weui-grid">
-                <image class="pic_show" mode='aspectFill' src="http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
-              </view>
-              <view class="weui-grid">
-                <image class="pic_show" mode='aspectFill' src="http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
-              </view>
-            </view>
-          </view>
-          <view class='con_bottom'>
-            <view class='hotel_info font_999999_24'>
-              <label class='time'>10分钟前</label>
-              <label class='dot'>.</label>
-              <label class='hotel_name'>权茂北京菜</label>
-            </view>
-            <view class='operation'>
-              <view wx:if="{{collect}}">
-                <button>
-                  <image src='http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/icon/red_heart.png'></image>
-                  <label class='font_999999_26'>101</label>
-                </button>
-              </view>
-              <view wx:else>
-                <button>
-                  <image src='http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/icon/grey_heart.png'></image>
-                  <label class='font_999999_26'>100</label>
-                </button>
-              </view>
-              <view>
-                <button>
-                  <image src='http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/icon/grey_share.png'></image>
-                  <label class='font_999999_26'>100</label>
-                </button>
-              </view>
-            </view>
-          </view>
-        </view>
-
-
-
-        <view class='content content_bottom_border'>
-          <view class='con_top'>
-            <view class='user_info'>
-              <image class='user_head' src="http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/icon/grey_interact.png"></image>
-              <label class='user_name font_999999_30'>昵称</label>
-            </view>
-            <view class='operation'>
-              <button class='launch_tv theme-button'>电视播放</button>
-            </view>
-          </view>
-          <view class='con_main'>
-            <view class="video">
-              <view>
-                <navigator url="">
-                  <image mode='aspectFill' src="http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
+                <navigator url="/pages/find/video?forscreen_id={{bean.forscreen_id}}&box_mac={{box_mac}}">
+                  <image mode='aspectFill' src="{{bean.pubdetail[0].vide_img}}"></image>
                 </navigator>
                 <view class="cover">
-                  <navigator url="">
+                  <navigator url="/pages/find/video?forscreen_id={{bean.forscreen_id}}&box_mac={{box_mac}}">
                     <image src='http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/icon/white_play.png'></image>
                   </navigator>
                   <view>
@@ -449,41 +216,40 @@
                 </view>
               </view>
             </view>
+
           </view>
           <view class='con_bottom'>
             <view class='hotel_info font_999999_24'>
-              <label class='time'>10分钟前</label>
-              <label class='dot'>.</label>
-              <label class='hotel_name'>权茂北京菜</label>
+              <label class='time'>{{bean.create_time}}</label>
+              <label class='dot' wx:if="{{bean.hotel_name!=''}}">.</label>
+              <label class='hotel_name' wx:if="{{picinfo.hotel_name!=''}}">{{bean.hotel_name}}</label>
             </view>
             <view class='operation'>
-              <view wx:if="{{collect}}">
-                <button>
+              <view wx:if="{{bean.is_collect==1}}">
+                <button bindtap='cancCollect' data-res_id="{{bean.forscreen_id}}" data-openid="{{openid}}" data-res_key="{{index}}">
                   <image src='http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/icon/red_heart.png'></image>
-                  <label class='font_999999_26'>101</label>
+                  <label class='font_999999_26'>{{bean.collect_num}}</label>
                 </button>
               </view>
               <view wx:else>
-                <button>
+                <button bindtap='onCollect' data-res_id="{{bean.forscreen_id}}" data-openid="{{openid}}" data-res_key="{{index}}">
                   <image src='http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/icon/grey_heart.png'></image>
-                  <label class='font_999999_26'>100</label>
+                  <label class='font_999999_26'>{{bean.collect_num}}</label>
                 </button>
               </view>
               <view>
-                <button>
+                <button  open-type='share' data-res_id="{{bean.forscreen_id}}" data-res_key="{{index}}" data-pubdetail="{{bean.pubdetail}}" data-openid="{{openid}}" data-res_type="{{bean.res_type}}">
                   <image src='http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/icon/grey_share.png'></image>
-                  <label class='font_999999_26'>100</label>
+                  <label class='font_999999_26'>{{bean.share_num}}</label>
                 </button>
               </view>
             </view>
-          </view>
+          </view> 
         </view>
-
-
-
+        
       </view>
       <view class='footer'>
-        <navigator class='theme-font'>查看更多...</navigator>
+        <navigator url="/pages/find/selected_list" open-type='switchTab'  class='theme-font'>查看更多...</navigator>
       </view>
     </view>
   </scroll-view>

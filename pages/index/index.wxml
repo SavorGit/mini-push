@@ -50,10 +50,10 @@
         <label>投屏历史</label>
       </view>
 
-      <!-- <view >
+      <view >
         <image src='/images/icon2/FFFFFF_history.png'></image>
-        <navigator url="/pages/thematic/money_blessing/grab?scene=10115_00226D655202"><label>抢红包</label></navigator>
-      </view> -->
+        <navigator url="/pages/thematic/money_blessing/grab?scene=10550_00226D583D92"><label>抢红包</label></navigator>
+      </view> 
     </view>
   </view>
   <template is="wxAuthLogin" data='{{show: showModal}}' />
