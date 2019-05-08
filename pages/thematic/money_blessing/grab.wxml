@@ -31,19 +31,19 @@
       </view>
       <view class='entrance-bar theme-font1'>
         <view bindtap="chooseImage" data-box_mac="{{box_mac}}" data-openid="{{openid}}" data-is_open_simple='{{is_open_simple}}' class='entrance'>
-          <image src='/images/icon2/333333_picture.png'></image>
+          <image src='http://oss.littlehotspot.com/media/resource/ZGpjYT4ita.png'></image>
           <view>照片上电视</view>
         </view>
         <view bindtap='chooseVedio' data-box_mac="{{box_mac}}" data-openid="{{openid}}" data-is_open_simple='{{is_open_simple}}' class='entrance'>
-          <image src='/images/icon2/333333_video.png'></image>
+          <image src='http://oss.littlehotspot.com/media/resource/sMiCFDp4BP.png'></image>
           <view>视频上电视</view>
         </view>
         <view bindtap='showHappy' data-box_mac="{{box_mac}}" data-openid="{{openid}}" class='entrance'>
-          <image src='/images/icon2/333333_birthday.png'></image>
+          <image src='http://oss.littlehotspot.com/media/resource/42jTE3c8Sy.png'></image>
           <view>生日歌点播</view>
         </view>
         <view bindtap='demand' class='entrance'>
-          <image src='/images/icon2/333333_demand.png'></image>
+          <image src='http://oss.littlehotspot.com/media/resource/SsRSWYz5mB.png'></image>
           <view>节目点播</view>
         </view>
       </view>
@@ -160,19 +160,19 @@
       </view>
       <view class='entrance-bar theme-font1'>
         <view bindtap="chooseImage" data-box_mac="{{box_mac}}" data-openid="{{openid}}" data-is_open_simple='{{is_open_simple}}' class='entrance'>
-          <image src='/images/icon2/333333_picture.png'></image>
+          <image src='http://oss.littlehotspot.com/media/resource/ZGpjYT4ita.png'></image>
           <view>照片上电视</view>
         </view>
         <view bindtap='chooseVedio' data-box_mac="{{box_mac}}" data-openid="{{openid}}" data-is_open_simple='{{is_open_simple}}' class='entrance'>
-          <image src='/images/icon2/333333_video.png'></image>
+          <image src='http://oss.littlehotspot.com/media/resource/sMiCFDp4BP.png'></image>
           <view>视频上电视</view>
         </view>
         <view bindtap='showHappy' data-box_mac="{{box_mac}}" data-openid="{{openid}}" class='entrance'>
-          <image src='/images/icon2/333333_birthday.png'></image>
+          <image src='http://oss.littlehotspot.com/media/resource/42jTE3c8Sy.png'></image>
           <view>生日歌点播</view>
         </view>
         <view bindtap='demand' class='entrance'>
-          <image src='/images/icon2/333333_demand.png'></image>
+          <image src='http://oss.littlehotspot.com/media/resource/SsRSWYz5mB.png'></image>
           <view>节目点播</view>
         </view>
       </view>
