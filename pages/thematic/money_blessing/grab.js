@@ -30,340 +30,387 @@ Page({
     var scene_arr = scene.split('_');
     order_id = scene_arr[0];
     box_mac = scene_arr[1];
-    that.setData({
-      order_id:order_id,
-      box_mac:box_mac,
-    })
-    if (app.globalData.openid && app.globalData.openid != '') {
-      that.setData({
-        openid: app.globalData.openid
-      })
-      openid = app.globalData.openid;
-      var forscreen_id = (new Date()).valueOf();
-      var mobile_brand = app.globalData.mobile_brand;
-      var mobile_model = app.globalData.mobile_model;
-      //记录扫码抢红包日志
-      wx.request({
-        url: 'https://mobile.littlehotspot.com/Smallapp21/index/recordForScreenPics',
-        header: {
-          'content-type': 'application/json'
-        },
-        data: {
-          forscreen_id: forscreen_id,
-          openid: openid,
-          box_mac: box_mac,
-          action: 121,
-          mobile_brand: mobile_brand,
-          mobile_model: mobile_model,
-
-          imgs: '[]',
-          resource_id: order_id,
-
-        },
-      })
-      //判断用户是否注册
-      wx.request({
-        url: 'https://mobile.littlehotspot.com/smallapp3/User/isRegister',
-        data: {
-          "openid": openid,
-          "box_mac":box_mac,
-        },
-        header: {
-          'content-type': 'application/json'
-        },
-        success: function (res) {
-          var code = res.data.code;
-          if (code == 10000) {
-            wx.setStorage({
-              key: 'savor_user_info',
-              data: res.data.result.userinfo,
-            })
-            var is_wx_auth = res.data.result.userinfo.is_wx_auth;
-            is_open_simple = res.data.result.userinfo.is_open_simple;
-
-            if (is_wx_auth != 3) {
-              that.setData({
-                showModal: true
+    var redpackt_qrcode_createtime = scene_arr[2];  //红包生成时间
+    wx.request({
+      url: 'https://mobile.littlehotspot.com/smallapp3/index/getConfig',
+      success: function (e) {
+        if(e.data.code==10000){
+          var sys_time = e.data.result.sys_time;  //系统时间
+          var redpacket_exp_time = e.data.result.redpacket_exp_time;  //红包失效时间
+          var diff_time = sys_time - redpackt_qrcode_createtime;
+          if (diff_time > redpacket_exp_time){//如果红包已过期
+              wx.reLaunch({
+                url: '/pages/index/index',
               })
-            } else {
-              //如果已授权   请求获取扫电视红包小程序码结果
+              wx.showToast({
+                title: '该红包已过期！',
+                icon:'none',
+                duration:2000,
+              })
+          }else {
+            that.setData({
+              order_id: order_id,
+              box_mac: box_mac,
+            })
+            if (app.globalData.openid && app.globalData.openid != '') {
+              that.setData({
+                openid: app.globalData.openid
+              })
+              openid = app.globalData.openid;
+              var forscreen_id = (new Date()).valueOf();
+              var mobile_brand = app.globalData.mobile_brand;
+              var mobile_model = app.globalData.mobile_model;
+              //记录扫码抢红包日志
               wx.request({
-                url: 'https://mobile.littlehotspot.com/Smallapp3/redpacket/getScanresult',
+                url: 'https://mobile.littlehotspot.com/Smallapp21/index/recordForScreenPics',
                 header: {
                   'content-type': 'application/json'
                 },
                 data: {
-                  "open_id": openid,
-                  "order_id": order_id,
+                  forscreen_id: forscreen_id,
+                  openid: openid,
+                  box_mac: box_mac,
+                  action: 121,
+                  mobile_brand: mobile_brand,
+                  mobile_model: mobile_model,
+
+                  imgs: '[]',
+                  resource_id: order_id,
+
+                },
+              })
+              //判断用户是否注册
+              wx.request({
+                url: 'https://mobile.littlehotspot.com/smallapp3/User/isRegister',
+                data: {
+                  "openid": openid,
                   "box_mac": box_mac,
                 },
+                header: {
+                  'content-type': 'application/json'
+                },
                 success: function (res) {
-                  if (res.data.code == 10000) {
-                    console.log(res);
-                    var order_status = res.data.result.status;
-                    if (order_status == 4 || order_status == 0) {
-                      wx.redirectTo({
-                        url: '/pages/thematic/money_blessing/receive_h5?jump_url=' + encodeURIComponent(res.data.result.jump_url),
-                      })
+                  var code = res.data.code;
+                  if (code == 10000) {
+                    wx.setStorage({
+                      key: 'savor_user_info',
+                      data: res.data.result.userinfo,
+                    })
+                    var is_wx_auth = res.data.result.userinfo.is_wx_auth;
+                    is_open_simple = res.data.result.userinfo.is_open_simple;
 
-                    } else if (order_status == 1 || order_status == 2) {
+                    if (is_wx_auth != 3) {
                       that.setData({
-                        order_status: res.data.result.status,
-                        avatarUrl: res.data.result.avatarUrl,
-                        bless: res.data.result.bless,
-                        nickName: res.data.result.nickName,
-                        order_id: res.data.result.order_id,
-                        money: res.data.result.money,
-                        is_open_simple: is_open_simple
+                        showModal: true
                       })
-                      getRedpacketJx(openid);
-
-                    } else if (order_status == 3) {
+                    } else {
+                      //如果已授权   请求获取扫电视红包小程序码结果
                       wx.request({
-                        url: 'https://mobile.littlehotspot.com//Smallapp3/redpacket/grabBonusResult',
+                        url: 'https://mobile.littlehotspot.com/Smallapp3/redpacket/getScanresult',
                         header: {
                           'content-type': 'application/json'
                         },
                         data: {
-                          order_id: order_id,
-                          user_id: res.data.result.user_id,
-                          sign: res.data.result.sign,
+                          "open_id": openid,
+                          "order_id": order_id,
+                          "box_mac": box_mac,
                         },
-                        success: function (rt) {
-                          if (rt.data.code == 10000) {
-                            that.setData({
-                              order_status: res.data.result.status,
-                              avatarUrl: res.data.result.avatarUrl,
-                              bless: res.data.result.bless,
-                              nickName: res.data.result.nickName,
-                              order_id: res.data.result.order_id,
-                              money: res.data.result.money,
-                            })
+                        success: function (res) {
+                          if (res.data.code == 10000) {
+                            var order_status = res.data.result.status;
+                            if (order_status == 4 || order_status == 0) {
+                              wx.redirectTo({
+                                url: '/pages/thematic/money_blessing/receive_h5?jump_url=' + encodeURIComponent(res.data.result.jump_url),
+                              })
+
+                            } else if (order_status == 1 || order_status == 2) {
+                              that.setData({
+                                order_status: res.data.result.status,
+                                avatarUrl: res.data.result.avatarUrl,
+                                bless: res.data.result.bless,
+                                nickName: res.data.result.nickName,
+                                order_id: res.data.result.order_id,
+                                money: res.data.result.money,
+                                is_open_simple: is_open_simple
+                              })
+                              getRedpacketJx(openid);
+
+                            } else if (order_status == 3) {
+                              wx.request({
+                                url: 'https://mobile.littlehotspot.com//Smallapp3/redpacket/grabBonusResult',
+                                header: {
+                                  'content-type': 'application/json'
+                                },
+                                data: {
+                                  order_id: order_id,
+                                  user_id: res.data.result.user_id,
+                                  sign: res.data.result.sign,
+                                },
+                                success: function (rt) {
+                                  if (rt.data.code == 10000) {
+                                    that.setData({
+                                      order_status: res.data.result.status,
+                                      avatarUrl: res.data.result.avatarUrl,
+                                      bless: res.data.result.bless,
+                                      nickName: res.data.result.nickName,
+                                      order_id: res.data.result.order_id,
+                                      money: res.data.result.money,
+                                    })
+                                  } else {
+                                    wx.reLaunch({
+                                      url: '/pages/index/index',
+                                    })
+                                    wx.showToast({
+                                      title: '红包领取失败',
+                                      icon: 'none',
+                                      duration: 2000,
+                                    })
+                                  }
+                                }
+                              })
+                            } else if (order_status == 5) {
+                              wx.redirectTo({
+                                url: '/pages/thematic/money_blessing/grab_detail?order_id=' + order_id + "&box_mac=" + box_mac,
+                              })
+                            }
                           } else {
                             wx.reLaunch({
                               url: '/pages/index/index',
                             })
                             wx.showToast({
-                              title: '红包领取失败',
+                              title: '该红包不可领取',
                               icon: 'none',
                               duration: 2000,
                             })
                           }
+
                         }
                       })
-                    } else if (order_status == 5) {
-                      wx.redirectTo({
-                        url: '/pages/thematic/money_blessing/grab_detail?order_id=' + order_id,
-                      })
+
                     }
+
                   } else {
                     wx.reLaunch({
                       url: '/pages/index/index',
                     })
                     wx.showToast({
-                      title: '该红包不可领取',
+                      title: '用户数据异常',
                       icon: 'none',
-                      duration: 2000,
+                      duration: 2000
                     })
                   }
-
-                }
-              })
-
-            }
-
-          } else {
-            wx.reLaunch({
-              url: '/pages/index/index',
-            })
-            wx.showToast({
-              title: '用户数据异常',
-              icon: 'none',
-              duration: 2000
-            })
-          }
-        },
-        fail: function (e) {
-          wx.reLaunch({
-            url: '/pages/index/index',
-          })
-        }
-      });//判断用户是否注册结束
-      
-    } else {
-      app.openidCallback = openid => {
-        if (openid != '') {
-          that.setData({
-            openid: openid
-          })
-          openid = openid;
-          
-          var forscreen_id = (new Date()).valueOf();
-          var mobile_brand = app.globalData.mobile_brand;
-          var mobile_model = app.globalData.mobile_model;
-          //记录扫码抢红包日志
-          wx.request({
-            url: 'https://mobile.littlehotspot.com/Smallapp21/index/recordForScreenPics',
-            header: {
-              'content-type': 'application/json'
-            },
-            data: {
-              forscreen_id: forscreen_id,
-              openid: openid,
-              box_mac: box_mac,
-              action: 121,
-              mobile_brand: mobile_brand,
-              mobile_model: mobile_model,
-
-              imgs: '[]',
-              resource_id: order_id,
-
-            },
-          })
-          //判断用户是否注册
-          wx.request({
-            url: 'https://mobile.littlehotspot.com/smallapp21/User/isRegister',
-            data: {
-              "openid": openid,
-            },
-            header: {
-              'content-type': 'application/json'
-            },
-            success: function (res) {
-              var code = res.data.code;
-              if (code == 10000) {
-                wx.setStorage({
-                  key: 'savor_user_info',
-                  data: res.data.result.userinfo,
-                })
-                var is_wx_auth = res.data.result.userinfo.is_wx_auth;
-
-                if (is_wx_auth != 3) {
-                  that.setData({
-                    showModal: true
+                },
+                fail: function (e) {
+                  wx.reLaunch({
+                    url: '/pages/index/index',
                   })
-                } else {
-                  //如果已授权   请求获取扫电视红包小程序码结果
+                }
+              });//判断用户是否注册结束
+
+            } else {
+              app.openidCallback = openid => {
+                if (openid != '') {
+                  that.setData({
+                    openid: openid
+                  })
+                  openid = openid;
+
+                  var forscreen_id = (new Date()).valueOf();
+                  var mobile_brand = app.globalData.mobile_brand;
+                  var mobile_model = app.globalData.mobile_model;
+                  //记录扫码抢红包日志
                   wx.request({
-                    url: 'https://mobile.littlehotspot.com/Smallapp3/redpacket/getScanresult',
+                    url: 'https://mobile.littlehotspot.com/Smallapp21/index/recordForScreenPics',
                     header: {
                       'content-type': 'application/json'
                     },
                     data: {
-                      "open_id": openid,
-                      "order_id": order_id,
-                      "box_mac":box_mac
+                      forscreen_id: forscreen_id,
+                      openid: openid,
+                      box_mac: box_mac,
+                      action: 121,
+                      mobile_brand: mobile_brand,
+                      mobile_model: mobile_model,
+
+                      imgs: '[]',
+                      resource_id: order_id,
+
+                    },
+                  })
+                  //判断用户是否注册
+                  wx.request({
+                    url: 'https://mobile.littlehotspot.com/smallapp3/User/isRegister',
+                    data: {
+                      "openid": openid,
+                    },
+                    header: {
+                      'content-type': 'application/json'
                     },
                     success: function (res) {
-                      if (res.data.code == 10000) {
-                        var order_status = res.data.result.status;
-                        if (order_status == 4 || order_status == 0) {
-                          wx.redirectTo({
-                            url: '/pages/thematic/money_blessing/receive_h5?jump_url=' + encodeURIComponent(res.data.result.jump_url),
-                          })
-
-                        } else if (order_status == 1 || order_status == 2) {
+                      var code = res.data.code;
+                      if (code == 10000) {
+                        wx.setStorage({
+                          key: 'savor_user_info',
+                          data: res.data.result.userinfo,
+                        })
+                        var is_wx_auth = res.data.result.userinfo.is_wx_auth;
+                        is_open_simple = res.data.result.userinfo.is_open_simple;
+                        if (is_wx_auth != 3) {
                           that.setData({
-                            order_status: res.data.result.status,
-                            avatarUrl: res.data.result.avatarUrl,
-                            bless: res.data.result.bless,
-                            nickName: res.data.result.nickName,
-                            order_id: res.data.result.order_id,
-                            money: res.data.result.money,
+                            showModal: true
                           })
-                        } else if (order_status == 3) {
+                        } else {
+                          //如果已授权   请求获取扫电视红包小程序码结果
                           wx.request({
-                            url: 'https://mobile.littlehotspot.com//Smallapp3/redpacket/grabBonusResult',
+                            url: 'https://mobile.littlehotspot.com/Smallapp3/redpacket/getScanresult',
                             header: {
                               'content-type': 'application/json'
                             },
                             data: {
-                              order_id: order_id,
-                              user_id: res.data.result.user_id,
-                              sign: res.data.result.sign,
+                              "open_id": openid,
+                              "order_id": order_id,
+                              "box_mac": box_mac
                             },
-                            success: function (rt) {
-                              if (rt.data.code == 10000) {
-                                that.setData({
-                                  order_status: res.data.result.status,
-                                  avatarUrl: res.data.result.avatarUrl,
-                                  bless: res.data.result.bless,
-                                  nickName: res.data.result.nickName,
-                                  order_id: res.data.result.order_id,
-                                  money: res.data.result.money,
-                                })
+                            success: function (res) {
+                              if (res.data.code == 10000) {
+                                var order_status = res.data.result.status;
+                                if (order_status == 4 || order_status == 0) {
+                                  wx.redirectTo({
+                                    url: '/pages/thematic/money_blessing/receive_h5?jump_url=' + encodeURIComponent(res.data.result.jump_url),
+                                  })
+
+                                } else if (order_status == 1 || order_status == 2) {
+                                  that.setData({
+                                    order_status: res.data.result.status,
+                                    avatarUrl: res.data.result.avatarUrl,
+                                    bless: res.data.result.bless,
+                                    nickName: res.data.result.nickName,
+                                    order_id: res.data.result.order_id,
+                                    money: res.data.result.money,
+                                    is_open_simple: is_open_simple,
+                                  })
+                                  getRedpacketJx(openid);
+                                } else if (order_status == 3) {
+                                  wx.request({
+                                    url: 'https://mobile.littlehotspot.com//Smallapp3/redpacket/grabBonusResult',
+                                    header: {
+                                      'content-type': 'application/json'
+                                    },
+                                    data: {
+                                      order_id: order_id,
+                                      user_id: res.data.result.user_id,
+                                      sign: res.data.result.sign,
+                                    },
+                                    success: function (rt) {
+                                      if (rt.data.code == 10000) {
+                                        that.setData({
+                                          order_status: res.data.result.status,
+                                          avatarUrl: res.data.result.avatarUrl,
+                                          bless: res.data.result.bless,
+                                          nickName: res.data.result.nickName,
+                                          order_id: res.data.result.order_id,
+                                          money: res.data.result.money,
+                                        })
+                                      } else {
+                                        wx.reLaunch({
+                                          url: '/pages/index/index',
+                                        })
+                                        wx.showToast({
+                                          title: '红包领取失败',
+                                          icon: 'none',
+                                          duration: 2000,
+                                        })
+                                      }
+                                    }
+                                  })
+                                } else if (order_status == 5) {
+                                  wx.redirectTo({
+                                    url: '/pages/thematic/money_blessing/grab_detail?order_id=' + order_id,
+                                  })
+                                }
                               } else {
                                 wx.reLaunch({
                                   url: '/pages/index/index',
                                 })
                                 wx.showToast({
-                                  title: '红包领取失败',
+                                  title: '该红包不可领取',
                                   icon: 'none',
                                   duration: 2000,
                                 })
                               }
+
                             }
                           })
-                        } else if (order_status == 5) {
-                          wx.redirectTo({
-                            url: '/pages/thematic/money_blessing/grab_detail?order_id=' + order_id,
-                          })
+
                         }
+
                       } else {
                         wx.reLaunch({
                           url: '/pages/index/index',
                         })
                         wx.showToast({
-                          title: '该红包不可领取',
+                          title: '用户数据异常',
                           icon: 'none',
-                          duration: 2000,
+                          duration: 2000
                         })
                       }
-
+                    },
+                    fail: function (e) {
+                      wx.reLaunch({
+                        url: '/pages/index/index',
+                      })
                     }
-                  })
-
+                  });//判断用户是否注册结束
                 }
-
-              } else {
-                wx.reLaunch({
-                  url: '/pages/index/index',
-                })
-                wx.showToast({
-                  title: '用户数据异常',
-                  icon: 'none',
-                  duration: 2000
-                })
               }
-            },
-            fail: function (e) {
-              wx.reLaunch({
-                url: '/pages/index/index',
+            }
+            function getRedpacketJx(openid) {
+              wx.request({
+                url: 'https://mobile.littlehotspot.com/Smallapp3/Find/redPacketJx',
+                header: {
+                  'content-type': 'application/json'
+                },
+                data: {
+                  openid: openid,
+                },
+                success: function (res) {
+                  if (res.data.code == 10000) {
+                    discovery_list = res.data.result
+                    that.setData({
+                      discovery_list: res.data.result,
+                    })
+                  }
+                }
               })
             }
-          });//判断用户是否注册结束
-        }
-      }
-    }
-    function getRedpacketJx(openid){
-      wx.request({
-        url: 'https://mobile.littlehotspot.com/Smallapp3/Find/redPacketJx',
-        header: {
-          'content-type': 'application/json'
-        },
-        data:{
-          openid:openid,
-        },
-        success:function(res){
-          if(res.data.code==10000){
-            discovery_list = res.data.result
-            that.setData({
-              discovery_list: res.data.result,
-            })
           }
+
+        }else {//失败
+          wx.reLaunch({
+            url: '/pages/index/index',
+          })
+          wx.showToast({
+            title: '该红包领取失败，请扫码重试',
+            icon: 'none',
+            duration: 2000,
+          })
         }
-      })
-    }
+
+      },fail:function(e){
+        wx.reLaunch({
+          url: '/pages/index/index',
+        })
+        wx.showToast({
+          title: '该红包领取失败，请扫码重试',
+          icon: 'none',
+          duration: 2000,
+        })
+      }
+    })
+    
+
+
+    
     //
     
   },
@@ -372,6 +419,7 @@ Page({
     
     var user_info = wx.getStorageSync("savor_user_info");
     openid = user_info.openid;
+    is_open_simple = user_info.is_open_simple;
     if (res.detail.errMsg == 'getUserInfo:ok') {
       wx.getUserInfo({
         success(rets) {
@@ -432,7 +480,9 @@ Page({
                           nickName: res.data.result.nickName,
                           order_id: res.data.result.order_id,
                           money: res.data.result.money,
+                          is_open_simple: is_open_simple
                         })
+                        getRedpacketJx(openid);
                       } else if (order_status == 3) {
                         wx.request({
                           url: 'https://mobile.littlehotspot.com//Smallapp3/redpacket/grabBonusResult',
@@ -525,7 +575,25 @@ Page({
         }
       })
     }  
-
+    function getRedpacketJx(openid) {
+      wx.request({
+        url: 'https://mobile.littlehotspot.com/Smallapp3/Find/redPacketJx',
+        header: {
+          'content-type': 'application/json'
+        },
+        data: {
+          openid: openid,
+        },
+        success: function (res) {
+          if (res.data.code == 10000) {
+            discovery_list = res.data.result
+            that.setData({
+              discovery_list: res.data.result,
+            })
+          }
+        }
+      })
+    }
     
 
   },
@@ -1166,6 +1234,68 @@ Page({
       }
     })
   }, //取消收藏结束
+  //点击分享按钮
+  onShareAppMessage: function (res) {
+    var that = this;
+    var res_id = res.target.dataset.res_id;
+    var res_key = res.target.dataset.res_key;
+    var res_type = res.target.dataset.res_type;
+    var openid = res.target.dataset.openid;
+    var pubdetail = res.target.dataset.pubdetail;
+
+    if (res_type == 1) {
+      var img_url = pubdetail[0]['res_url'];
+      var share_url = '/pages/share/pic?forscreen_id=' + res_id;
+    } else {
+      var img_url = pubdetail[0]['vide_img'];
+      var share_url = '/pages/share/video?res_id=' + res_id + '&type=2';
+    }
+
+    if (res.from === 'button') {
+      // 转发成功
+      wx.request({
+        url: 'https://mobile.littlehotspot.com/Smallapp/share/recLogs',
+        header: {
+          'content-type': 'application/json'
+        },
+        data: {
+          'openid': openid,
+          'res_id': res_id,
+          'type': 2,
+          'status': 1,
+        },
+        success: function (e) {
+          for (var i = 0; i < discovery_list.length; i++) {
+            if (i == res_key) {
+              discovery_list[i].share_num++;
+            }
+          }
+          that.setData({
+            discovery_list: discovery_list
+          })
+
+        },
+        fail: function ({
+          errMsg
+        }) {
+          wx.showToast({
+            title: '网络异常，请稍后重试',
+            icon: 'none',
+            duration: 2000
+          })
+        }
+      })
+      // 来自页面内转发按钮
+      return {
+        title: '发现一个好玩的东西',
+        path: share_url,
+        imageUrl: img_url,
+        success: function (res) {
+
+        },
+      }
+    }
+  }, // 分享结束
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
@@ -1207,11 +1337,4 @@ Page({
   onReachBottom: function() {
 
   },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function() {
-
-  }
 })

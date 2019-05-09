@@ -13,7 +13,6 @@ Page({
    */
   onLoad: function (options) {
     var that = this;
-    console.log(options);
     var jump_url = decodeURIComponent(options.jump_url);
     that.setData({
       jump_url :jump_url,

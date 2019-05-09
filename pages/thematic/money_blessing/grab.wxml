@@ -109,7 +109,7 @@
                 </button>
               </view>
               <view>
-                <button>
+                <button  open-type='share' data-res_id="{{bean.forscreen_id}}" data-res_key="{{index}}" data-pubdetail="{{bean.pubdetail}}" data-openid="{{openid}}" data-res_type="{{bean.res_type}}">
                   <image src='http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/icon/grey_share.png'></image>
                   <label class='font_999999_26'>{{bean.share_num}}</label>
                 </button>
