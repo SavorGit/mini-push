@@ -13,7 +13,7 @@
       </view>
       <view class='body PackageColor'>
         <view class='user_name'>{{nickName}}</view>
-        <view class='blessing'>{{bless}}</view>
+        <!-- <view class='blessing'>{{bless}}</view> -->
         <view class='message'>手慢了，红包抢完了</view>
         <view class='grab'>
           <navigator class='button' url='/pages/thematic/money_blessing/packing?openid={{openid}}&box_mac={{box_mac}}'>我也发一个></navigator>
@@ -22,13 +22,14 @@
       </view>
     </view>
     <view class='EntranceCard EntranceCardColor'>
-      <view class='header-bar'>
+      <view style='height:50rpx;'></view>
+      <!-- <view class='header-bar'>
         <icon class="fa fa-group fa-3x" />
       </view>
       <view class='slogan-bar'>
         <view>独乐乐不如众乐乐</view>
         <view>快来与朋友分享您的精彩内容吧</view>
-      </view>
+      </view> -->
       <view class='entrance-bar theme-font1'>
         <view bindtap="chooseImage" data-box_mac="{{box_mac}}" data-openid="{{openid}}" data-is_open_simple='{{is_open_simple}}' class='entrance'>
           <image src='http://oss.littlehotspot.com/media/resource/ZGpjYT4ita.png'></image>
@@ -151,13 +152,14 @@
     </view>
 
     <view class='EntranceCard EntranceCardColor'>
-      <view class='header-bar'>
+      <view style='height:50rpx;'></view>
+      <!-- <view class='header-bar'>
         <icon class="fa fa-group fa-3x" />
       </view>
       <view class='slogan-bar'>
         <view>独乐乐不如众乐乐</view>
         <view>快来与朋友分享您的精彩内容吧</view>
-      </view>
+      </view> -->
       <view class='entrance-bar theme-font1'>
         <view bindtap="chooseImage" data-box_mac="{{box_mac}}" data-openid="{{openid}}" data-is_open_simple='{{is_open_simple}}' class='entrance'>
           <image src='http://oss.littlehotspot.com/media/resource/ZGpjYT4ita.png'></image>
