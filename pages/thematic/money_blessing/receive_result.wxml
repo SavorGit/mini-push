@@ -13,7 +13,6 @@
       </view>
       <view class='body PackageColor'>
         <view class='user_name'>{{nickName}}</view>
-        <!-- <view class='blessing'>{{bless}}</view> -->
         <view class='message'>手慢了，红包抢完了</view>
         <view class='grab'>
           <navigator class='button' url='/pages/thematic/money_blessing/packing?openid={{openid}}&box_mac={{box_mac}}'>我也发一个></navigator>
