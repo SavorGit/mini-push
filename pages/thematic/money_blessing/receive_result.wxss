@@ -34,6 +34,7 @@
   width: 200rpx;
   height: 100%;
   border-radius: 50%;
+  background-color: #fff;
 }
 
 .PageMain .package > .body {
@@ -47,13 +48,14 @@
   font-size: 30rpx;
   font-weight: 900;
   margin-top: 10rpx;
+  color: rgba(0, 0, 0, 0);
 }
 
 .PageMain .package > .body .blessing {
   text-align: center;
   font-size: 36rpx;
   font-weight: 900;
-  margin-top: 20rpx;
+  margin-top: 70rpx;
 }
 
 .PageMain .package > .body .grab {
@@ -100,9 +102,9 @@
 
 .PageMain .package > .body .money {
   text-align: center;
-  font-size: 100rpx;
+  font-size: 80rpx;
   font-weight: 900;
-  margin-top: 30rpx;
+  margin-top: 0rpx;
 }
 
 .PageMain .package > .body .money > sub {
