@@ -30,7 +30,7 @@ Page({
     openid = user_info.openid;
     var filename = options.filename;
     var video_img_url = options.video_img_url;
-    wx.hideShareMenu();
+    //wx.hideShareMenu();
 
     wx.request({
       url: 'https://mobile.littlehotspot.com/Smallapp/index/isHaveCallBox?openid=' + openid,

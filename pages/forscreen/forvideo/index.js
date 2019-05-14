@@ -50,7 +50,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (e) {
-    wx.hideShareMenu();
+    //wx.hideShareMenu();
     var that = this
     box_mac = e.box_mac;
     var openid = e.openid;

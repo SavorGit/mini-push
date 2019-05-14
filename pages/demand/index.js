@@ -30,7 +30,7 @@ Page({
   },  
 
   onLoad: function () {
-    wx.hideShareMenu();
+    //wx.hideShareMenu();
     var that = this;
     var user_info = wx.getStorageSync('savor_user_info')
     if (app.globalData.openid && app.globalData.openid != '') {

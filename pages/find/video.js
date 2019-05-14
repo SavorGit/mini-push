@@ -25,7 +25,7 @@ Page({
     openid = user_info.openid;
     box_mac = options.box_mac;
 
-    wx.hideShareMenu();
+    //wx.hideShareMenu();
     var forscreen_id = options.forscreen_id;
     wx.request({
       url: 'https://mobile.littlehotspot.com/Smallapp/index/isHaveCallBox?openid=' + openid,

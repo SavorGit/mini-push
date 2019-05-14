@@ -21,7 +21,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    wx.hideShareMenu();
+    //wx.hideShareMenu();
     var that = this;
     var res_id = options.res_id;
     var type   = options.type;

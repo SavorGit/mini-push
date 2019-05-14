@@ -22,7 +22,7 @@ Page({
     var openid = user_info.openid;
     var box_mac = options.box_mac;
     
-    wx.hideShareMenu();
+    //wx.hideShareMenu();
     var forscreen_id = options.forscreen_id;
     wx.request({
       url: 'https://mobile.littlehotspot.com/Smallapp3/Find/showPic',
