@@ -13,7 +13,7 @@
 }
 
 swiper {
-  height: 240rpx;
+  height: 364rpx;
   width: 100%;
 }
 
@@ -39,14 +39,14 @@ swiper-image {
   width: 100%;
 }
 
-.page_main > .climbtree {
+/* .page_main > .climbtree {
   height: 240rpx;
   padding: unset;
   display: flex;
-}
+} */
 
 .page_main > .tip {
-  height: 200rpx;
+  height: 160rpx;
   padding-top: 20rpx;
   padding-bottom: 20rpx;
   text-align: center;
@@ -72,14 +72,14 @@ swiper-image {
   width: 180rpx;
   height: 50rpx;
   line-height: 50rpx;
-  margin-top: 50rpx;
+  margin-top: 20rpx;
   font-size: 24rpx;
   border-radius: 25rpx;
 }
 
 .page_main > .operation > view {
   align-items: center;
-  padding: 25rpx 0rpx;
+  padding: 16rpx 0rpx;
 }
 
 .page_main > .operation > view > image {

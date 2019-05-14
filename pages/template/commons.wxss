@@ -84,12 +84,12 @@
   padding: 0;
   border: 1rpx solid #1cbeb6;
   box-shadow: 0 0 15px #1cbeb6;
-  width: 70rpx;
-  height: 70rpx;
-  line-height: 70rpx;
+  width: 90rpx;
+  height: 90rpx;
+  line-height: 90rpx;
   border-radius: 49%;
   color: #1cbeb6;
-  font-size: 20rpx;
+  font-size: 24rpx;
 }
 
 .fixedSuspensionButtonGroup > .scan_tdc > button > image {
