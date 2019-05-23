@@ -33,7 +33,7 @@ Page({
 
     hiddens: true, //加载更多
     box_mac: '', //机顶盒mac
-    close_hotel_hint: 0,
+    close_hotel_hint: 1,
     
 
   },
