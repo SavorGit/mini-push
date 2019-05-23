@@ -1,6 +1,7 @@
 /* pages/recommend/hotel.wxss */
 
 /* =========================== 页面头部 =========================== */
+
 .page_banner {
   display: block;
   width: 100%;
@@ -40,6 +41,7 @@
   -webkit-tap-highlight-color: transparent;
   overflow: hidden;
 }
+
 .page_top {
   width: 100%;
   height: 70rpx;
@@ -86,6 +88,10 @@
 
 .page_main_scroll {
   height: calc(100% - 70rpx);
+}
+
+.page_main_scroll_banner {
+  height: calc(100% - 170rpx);
 }
 
 .page_main {

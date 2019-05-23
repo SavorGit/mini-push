@@ -4,10 +4,9 @@
 
 <view class="container" style='height: calc(100vh - 46px - {{statusBarHeight}}px);'>
   <view wx:if="{{is_link==1}}" class='page_banner theme7 theme-font'>
-    <view  class='layout'>
+    <view class='layout'>
       <label>您已经连接{{room_name}}电视</label>
-      <navigator    target="miniProgram" app-id="{{rest_appid}}" path="pages/index/index?box_mac={{box_mac}}" class='theme-button'>前往餐厅版</navigator>
-      
+      <navigator target="miniProgram" app-id="{{rest_appid}}" path="pages/index/index?box_mac={{box_mac}}" class='theme-button'>前往餐厅版</navigator>
     </view>
   </view>
   <view class='page_top'>
@@ -38,7 +37,8 @@
       </picker>
     </view>
   </view>
-  <scroll-view class='page_main_scroll' scroll-y="true" scroll-with-animation="true" bindscrolltolower="loadMore">
+  <scroll-view class='page_main_scroll_banner' scroll-y="true" scroll-with-animation="true" bindscrolltolower="loadMore">
+    <!-- <scroll-view class='page_main_scroll' scroll-y="true" scroll-with-animation="true" bindscrolltolower="loadMore"> -->
     <view class='page_main'>
       <view class='row-item' wx:for="{{hotel_list}}" wx:key="key" wx:for-item="bean" wx:for-index="index">
         <view class='cover' bindtap="previewImage" data-src="{{bean.img_url}}">
