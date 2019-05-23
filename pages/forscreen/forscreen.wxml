@@ -1,9 +1,9 @@
 <import src="../template/navigation.wxml" />
-<view class="container">
+<view class="container" style='height: 100vh'>
 
 
 
-  <!-- ================================== 输入验证码 ================================== -->
+  <!-- ================================== 输入验证码 ================================== 
   <form class="full_width display_{{showCode?'show':'hide'}}">
     <view class='input_num'>
       <image class='input_pic_banner' src='/images/pic_check_code_banner.jpg'></image>
@@ -17,11 +17,11 @@
       <input name="openid" class="display_hide" value="{{openid}}"></input>
       <input name="box_mac" class="display_hide" value="{{box_mac}}"></input>
     </view>
-  </form>
+  </form>-->
 
 
 
-  <!-- ================================== 列表页 ================================== -->
+  <!-- ================================== 列表页 ================================== 
   <view class="full_width display_{{showView?'show':'hide'}}">
     <view class='full_width top'>
       <label class='font_333333_26'>您已连接到【{{hotel_room}}】电视</label>
@@ -30,7 +30,7 @@
   </view>
   <scroll-view class="scroll_container display_{{showView?'show':'hide'}}" bindscrolltolower="loadMore" data-boxmac="{{box_mac}}" scroll-y="true" scroll-with-animation="true">
 
-    <!-- 轮播图开始 -->
+    <!-- 轮播图开始 --
     <swiper wx:if="{{imgUrls.length > 0}}" indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}">
       <block wx:for="{{imgUrls}}" wx:key="item">
         <navigator bindtap='jumpMimiPro' data-boxmac="{{box_mac}}" data-openid="{{openid}}" target="{{item.target}}" open-type="navigate" app-id="{{item.appId}}" path="{{item.path}}" extra-data="{{item.extraData}}" version="release" url="{{item.url}}">
@@ -40,10 +40,10 @@
         </navigator>
       </block>
     </swiper>
-    <!-- 轮播图结束 -->
+    <!-- 轮播图结束 --
 
     <view class='article_list'>
-      <!-- 循环开始 -->
+      <!-- 循环开始 --
       <view class='article' wx:for="{{program_list}}" wx:key="key" wx:for-item="bean" wx:for-index="index">
         <view class='cover'>
           <image src='{{bean.img_url}}'></image>
@@ -80,7 +80,7 @@
           </view>
         </view>
       </view>
-      <!-- 循环结束 -->
+      <!-- 循环结束 --
 
       <view class="body-view">
         <loading hidden="{{hiddens}}" bindchange="loadingChange">加载中...</loading>
@@ -88,8 +88,11 @@
     </view>
   </scroll-view>
 
-  <!-- 菜单 -->
+  <!-- 菜单 --
   <block wx:if="{{showView}}">
     <template is="bottomNavigation" data="{{selectPage:'INDEX'}}" />
   </block>
+  -->
+
+
 </view>
