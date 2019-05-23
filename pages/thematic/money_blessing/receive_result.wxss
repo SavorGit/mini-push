@@ -313,6 +313,7 @@
   align-items: center;
   flex-grow: 1;
   justify-content: flex-start;
+  width: calc(100% - 200rpx);
 }
 
 .con_bottom > .operation {
@@ -320,6 +321,7 @@
   flex-direction: row;
   align-items: center;
   justify-content: flex-end;
+  width: 200rpx;
 }
 
 .con_bottom > .operation > view {
