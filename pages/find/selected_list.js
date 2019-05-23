@@ -200,7 +200,7 @@ Page({
           })
           //获取发现列表
           wx.request({
-            url: 'https://mobile.littlehotspot.com/smallapp3/Find/index',
+            url: 'https://mobile.littlehotspot.com/smallapp3/Find/choice',
             data: {
               page: page,
               openid: openid,
@@ -246,7 +246,7 @@ Page({
       hiddens: false,
     })
     wx.request({
-      url: 'https://mobile.littlehotspot.com/smallapp3/Find/index',
+      url: 'https://mobile.littlehotspot.com/smallapp3/Find/choice',
       header: {
         'Content-Type': 'application/json'
       },
