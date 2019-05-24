@@ -62,15 +62,15 @@
               <label class='user_name font_999999_30'>{{bean.nickName}}</label>
             </view>
             <view class='operation'>
-              <button bindtap='boxShow'  data-res_type="{{bean.res_type}}" data-res_nums="{{bean.res_nums}}" data-pubdetail="{{bean.pubdetail}}" data-boxmac="{{box_mac}}" data-openid="{{openid}}" data-forscreen_id="{{bean.forscreen_id}}" class='launch_tv theme-button'>电视播放</button>
+              <button bindtap='boxShow' data-res_type="{{bean.res_type}}" data-res_nums="{{bean.res_nums}}" data-pubdetail="{{bean.pubdetail}}" data-boxmac="{{box_mac}}" data-openid="{{openid}}" data-forscreen_id="{{bean.forscreen_id}}" class='launch_tv theme-button'>电视播放</button>
             </view>
           </view>
           <view class='con_main'>
             <view wx:if="{{bean.res_type == 1}}" class="weui-grids">
-              <view wx:for="{{bean.pubdetail}}" wx:key="k" wx:for-item="item" wx:for-index="idx"  class="weui-grid">
+              <view wx:for="{{bean.pubdetail}}" wx:key="k" wx:for-item="item" wx:for-index="idx" class="weui-grid">
                 <image bindtap="previewImage" data-src="{{bean.pubdetail}}" data-pkey="{{idx}}" class="pic_show" mode='aspectFill' src="{{item.res_url}}"></image>
               </view>
-              
+
             </view>
             <view wx:elif="{{bean.res_type == 2}}" class="video">
               <view>
@@ -109,18 +109,18 @@
                 </button>
               </view>
               <view>
-                <button  open-type='share' data-res_id="{{bean.forscreen_id}}" data-res_key="{{index}}" data-pubdetail="{{bean.pubdetail}}" data-openid="{{openid}}" data-res_type="{{bean.res_type}}">
+                <button open-type='share' data-res_id="{{bean.forscreen_id}}" data-res_key="{{index}}" data-pubdetail="{{bean.pubdetail}}" data-openid="{{openid}}" data-res_type="{{bean.res_type}}">
                   <image src='http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/icon/grey_share.png'></image>
                   <label class='font_999999_26'>{{bean.share_num}}</label>
                 </button>
               </view>
             </view>
-          </view> 
+          </view>
         </view>
-        
+
       </view>
       <view class='footer'>
-        <navigator url="/pages/find/selected_list" open-type='switchTab'  class='theme-font'>查看更多...</navigator>
+        <navigator url="/pages/find/selected_list" open-type='switchTab' class='theme-font'>查看更多...</navigator>
       </view>
     </view>
   </scroll-view>
@@ -192,15 +192,15 @@
               <label class='user_name font_999999_30'>{{bean.nickName}}</label>
             </view>
             <view class='operation'>
-              <button bindtap='boxShow'  data-res_type="{{bean.res_type}}" data-res_nums="{{bean.res_nums}}" data-pubdetail="{{bean.pubdetail}}" data-boxmac="{{box_mac}}" data-openid="{{openid}}" data-forscreen_id="{{bean.forscreen_id}}" class='launch_tv theme-button'>电视播放</button>
+              <button bindtap='boxShow' data-res_type="{{bean.res_type}}" data-res_nums="{{bean.res_nums}}" data-pubdetail="{{bean.pubdetail}}" data-boxmac="{{box_mac}}" data-openid="{{openid}}" data-forscreen_id="{{bean.forscreen_id}}" class='launch_tv theme-button'>电视播放</button>
             </view>
           </view>
           <view class='con_main'>
             <view wx:if="{{bean.res_type == 1}}" class="weui-grids">
-              <view wx:for="{{bean.pubdetail}}" wx:key="k" wx:for-item="item" wx:for-index="idx"  class="weui-grid">
+              <view wx:for="{{bean.pubdetail}}" wx:key="k" wx:for-item="item" wx:for-index="idx" class="weui-grid">
                 <image bindtap="previewImage" data-src="{{bean.pubdetail}}" data-pkey="{{idx}}" class="pic_show" mode='aspectFill' src="{{item.res_url}}"></image>
               </view>
-              
+
             </view>
             <view wx:elif="{{bean.res_type == 2}}" class="video">
               <view>
@@ -239,18 +239,18 @@
                 </button>
               </view>
               <view>
-                <button  open-type='share' data-res_id="{{bean.forscreen_id}}" data-res_key="{{index}}" data-pubdetail="{{bean.pubdetail}}" data-openid="{{openid}}" data-res_type="{{bean.res_type}}">
+                <button open-type='share' data-res_id="{{bean.forscreen_id}}" data-res_key="{{index}}" data-pubdetail="{{bean.pubdetail}}" data-openid="{{openid}}" data-res_type="{{bean.res_type}}">
                   <image src='http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/icon/grey_share.png'></image>
                   <label class='font_999999_26'>{{bean.share_num}}</label>
                 </button>
               </view>
             </view>
-          </view> 
+          </view>
         </view>
-        
+
       </view>
       <view class='footer'>
-        <navigator url="/pages/find/selected_list" open-type='switchTab'  class='theme-font'>查看更多...</navigator>
+        <navigator url="/pages/find/selected_list" open-type='switchTab' class='theme-font'>查看更多...</navigator>
       </view>
     </view>
   </scroll-view>
