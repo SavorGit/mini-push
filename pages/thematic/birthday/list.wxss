@@ -107,7 +107,7 @@
 }
 
 .constellation_list .detailed {
-  height: calc(100% - 400rpx);
+  height: calc(100% - 450rpx);
 }
 
 .constellation_list .detailed .video_list {
