@@ -313,7 +313,14 @@
   align-items: center;
   flex-grow: 1;
   justify-content: flex-start;
-  width: calc(100% - 200rpx);
+  width: calc(100% - 160rpx);
+}
+
+.con_bottom > .hotel_info > .hotel_name {
+  width: 310rpx;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .con_bottom > .operation {
