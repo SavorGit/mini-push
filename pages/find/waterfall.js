@@ -3,7 +3,7 @@ const app = getApp();
 const util = require('../../utils/util.js')
 var openid;
 var box_mac;
-var page = 1; //当前节目单页数
+var page ; //当前节目单页数
 var discovery_list; //发现列表
 var pubdetail;
 var i;
@@ -30,6 +30,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
+    page = 1;
     //wx.hideShareMenu();
     var that = this;
     wx.request({
@@ -197,7 +198,7 @@ Page({
     wx.request({
       url: 'https://mobile.littlehotspot.com/smallapp/Discovery/index',
       data: {
-        page: page,
+        page: 1,
         openid: openid,
       },
       header: {
