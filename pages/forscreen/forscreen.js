@@ -229,31 +229,51 @@ Page({
                 return false;
               }
             }
-            //console.log(res.data.result.openid);
-            wx.request({
-              url: 'https://mobile.littlehotspot.com/smallapp21/index/isHaveCallBox',
-              data: { "openid": res.data.result.openid},
-              header: {
-                'content-type': 'application/json'
-              },
-              success: function (rets) {
-                
-                if (rets.data.result.is_have==1){
-                  /*wx.switchTab({
+            if (code_type==7){
+              wx.request({
+                url: 'https://mobile.littlehotspot.com/smallapp3/index/recodeQrcodeLog',
+                data:{
+                  openid:res.data.result.openid,
+                  type :7
+                },
+                success:function(rts){
+                  wx.reLaunch({
                     url: '../index/index',
-                    success: function (e) {
-                      var page = getCurrentPages().pop();
-                      if (page == undefined || page == null) return;
-                      page.onLoad();
-                    }
-                  });*/
+                  })
+                },fail:function(rts){
                   wx.reLaunch({
                     url: '../index/index',
                   })
                 }
-              }
-            });
-            setInfos(box_mac, res.data.result.openid, code_type);
+              })
+            }else {
+              wx.request({
+                url: 'https://mobile.littlehotspot.com/smallapp21/index/isHaveCallBox',
+                data: { "openid": res.data.result.openid },
+                header: {
+                  'content-type': 'application/json'
+                },
+                success: function (rets) {
+
+                  if (rets.data.result.is_have == 1) {
+                    /*wx.switchTab({
+                      url: '../index/index',
+                      success: function (e) {
+                        var page = getCurrentPages().pop();
+                        if (page == undefined || page == null) return;
+                        page.onLoad();
+                      }
+                    });*/
+                    wx.reLaunch({
+                      url: '../index/index',
+                    })
+                  }
+                }
+              });
+              setInfos(box_mac, res.data.result.openid, code_type);
+            }
+            //console.log(res.data.result.openid);
+            
           }
         })
       }

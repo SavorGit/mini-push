@@ -34,7 +34,6 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    //wx.hideShareMenu();
     var that = this;
     if (app.globalData.openid && app.globalData.openid != '') { 
       that.setData({
@@ -70,7 +69,7 @@ Page({
         }
       });//判断用户是否注册结束
       wx.request({
-        url: 'https://mobile.littlehotspot.com/Smallapp/index/isHaveCallBox?openid=' + app.globalData.openid,
+        url: 'https://mobile.littlehotspot.com/Smallapp/index/isHaveCallBox?openid=' + app.globalData.openid ,
         headers: {
           'Content-Type': 'application/json'
         },
@@ -130,7 +129,7 @@ Page({
             }
           });//判断用户是否注册结束
           wx.request({
-            url: 'https://mobile.littlehotspot.com/Smallapp/index/isHaveCallBox?openid=' + openid,
+            url: 'https://mobile.littlehotspot.com/Smallapp/index/isHaveCallBox?openid=' + openid ,
             headers: {
               'Content-Type': 'application/json'
             },
