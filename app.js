@@ -36,7 +36,7 @@ App({
   },//退出投屏结束
   //遥控器呼玛
   controlCallQrcode: function (openid, box_mac,qrcode_img){
-    
+    var that = this;
     //console.log(openid);
     if (box_mac) {
       var timestamp = (new Date()).valueOf();
@@ -138,7 +138,7 @@ App({
   },
   //遥控器控制音量
   controlChangeVolume: function (box_mac,change_type) {
-    
+    var that = this;
     var timestamp = (new Date()).valueOf();
     wx.request({
       url: that.globalData.api_url +'/Netty/Index/index',
@@ -154,6 +154,7 @@ App({
   },
   //遥控控制节目
   controlChangeProgram:function(box_mac,change_type){
+    var that = this;
     var timestamp = (new Date()).valueOf();
     wx.request({
       url: that.globalData.api_url +'/Netty/Index/index',
@@ -169,6 +170,7 @@ App({
   },
   //扫码
   scanQrcode:function(){
+    var that = this;
     wx.showModal({
       title: '提示',
       content: "您可扫码链接热点合作餐厅电视,使用此功能",
