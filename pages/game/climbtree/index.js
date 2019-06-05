@@ -1,5 +1,7 @@
 // pages/game/climbtree/index.js
+const app = getApp()
 var djs = 60;
+var api_url = app.globalData.api_url;
 Page({
 
   /**
@@ -39,7 +41,7 @@ Page({
     var box_mac = res.target.dataset.box_mac;
     var game_id = res.target.dataset.game_id;
     wx.request({
-      url: 'https://mobile.littlehotspot.com/Games/Index/getGameInfo',
+      url: api_url+'/Games/Index/getGameInfo',
       data:{
         game_id:game_id
       },
@@ -48,14 +50,14 @@ Page({
           var game_h5_url = "http://"+res.data.result.game_url + box_mac;
           var game_m_h5_url = "https://" + res.data.result.game_url + box_mac + '/' + res.data.result.game_m_url;
           // wx.request({
-          //   url: 'https://mobile.littlehotspot.com/Games/ClimbTree/clearLaunchGame',
+          //   url: api_url+'/Games/ClimbTree/clearLaunchGame',
           //   data: {
           //     box_mac: box_mac,
           //   },
           // })
 
           wx.request({
-            url: 'https://mobile.littlehotspot.com/Games/ClimbTree/isHaveGameimg',
+            url: api_url+'/Games/ClimbTree/isHaveGameimg',
             data: {
               box_mac: box_mac,
             },
@@ -74,7 +76,7 @@ Page({
                 })
                 
                 wx.request({
-                  url: 'https://mobile.littlehotspot.com/Netty/index/index',
+                  url: api_url+'/Netty/index/index',
                   data: {
                     box_mac: box_mac,
                     msg: '{"action":110,"url":"' + game_h5_url + '"}'
@@ -85,7 +87,7 @@ Page({
                     var interval = setInterval(function () {
 
                       wx.request({
-                        url: 'https://mobile.littlehotspot.com/Games/ClimbTree/isHaveLaunchGame',
+                        url: api_url+'/Games/ClimbTree/isHaveLaunchGame',
                         data: {
                           box_mac: box_mac,
                         },
@@ -97,7 +99,7 @@ Page({
                             })
                             clearInterval(interval);
                             wx.request({
-                              url: 'https://mobile.littlehotspot.com/Games/ClimbTree/clearLaunchGame',
+                              url: api_url+'/Games/ClimbTree/clearLaunchGame',
                               data: {
                                 box_mac: box_mac,
                               },

@@ -2,6 +2,7 @@
 const app = getApp();
 var openid;
 var box_mac;
+var api_url = app.globalData.api_url;
 Page({
 
   /**
@@ -36,7 +37,7 @@ Page({
     })
     //获取发送红包 祝福语 发送范围配置
     wx.request({
-      url: 'https://mobile.littlehotspot.com/Smallapp3/Redpacket/getConfig',
+      url: api_url+'/Smallapp3/Redpacket/getConfig',
       header: {
         'content-type': 'application/json'
       },
@@ -226,7 +227,7 @@ Page({
     })
     //发送电视红包
     wx.request({
-      url: 'https://mobile.littlehotspot.com/Smallapp3/redpacket/sendTvbonus',
+      url: api_url+'/Smallapp3/redpacket/sendTvbonus',
       header: {
         'content-type': 'application/json'
       },
@@ -251,7 +252,7 @@ Page({
 
           //记录发红包日志
           wx.request({
-            url: 'https://mobile.littlehotspot.com/Smallapp21/index/recordForScreenPics',
+            url: api_url+'/Smallapp21/index/recordForScreenPics',
             header: {
               'content-type': 'application/json'
             },

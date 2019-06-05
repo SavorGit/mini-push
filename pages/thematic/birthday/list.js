@@ -3,7 +3,7 @@ const util = require('../../../utils/util.js')
 const app = getApp()
 var box_mac;
 var openid;
-
+var api_url = app.globalData.api_url;
 Page({
 
   /**
@@ -25,7 +25,7 @@ Page({
   getContellDetail:function(constellid){
     var that = this
     wx.request({
-      url: 'https://mobile.littlehotspot.com/Smallapp3/constellation/getVideoList',
+      url: api_url+'/Smallapp3/constellation/getVideoList',
       header: {
         'content-type': 'application/json'
       },
@@ -39,7 +39,7 @@ Page({
       }
     })
     wx.request({
-      url: 'https://mobile.littlehotspot.com/Smallapp3/constellation/getConstellationDetail',
+      url: api_url+'/Smallapp3/constellation/getConstellationDetail',
       header: {
         'content-type': 'application/json'
       },
@@ -66,7 +66,7 @@ Page({
       box_mac:box_mac
     })
     wx.request({
-      url: 'https://mobile.littlehotspot.com/Smallapp/index/isHaveCallBox?openid=' + openid,
+      url: api_url+'/Smallapp/index/isHaveCallBox?openid=' + openid,
       headers: {
         'Content-Type': 'application/json'
       },
@@ -79,7 +79,7 @@ Page({
       }
     })
     wx.request({
-      url: 'https://mobile.littlehotspot.com/Smallapp21/index/happylist',
+      url: api_url+'/Smallapp21/index/happylist',
       header: {
         'content-type': 'application/json'
       },
@@ -91,7 +91,7 @@ Page({
       }
     })
     wx.request({
-      url: 'https://mobile.littlehotspot.com/Smallapp3/constellation/getConstellationList',
+      url: api_url+'/Smallapp3/constellation/getConstellationList',
       header: {
         'content-type': 'application/json'
       },
@@ -108,7 +108,7 @@ Page({
 
     //红包送祝福开关
     wx.request({
-      url: 'https://mobile.littlehotspot.com/smallapp3/Redpacket/getConfig',
+      url: api_url+'/smallapp3/Redpacket/getConfig',
       header: {
         'content-type': 'application/json'
       },
@@ -149,7 +149,7 @@ Page({
     var mobile_model = app.globalData.mobile_model;
 
     wx.request({
-      url: 'https://mobile.littlehotspot.com/smallapp21/User/isForscreenIng',
+      url: api_url+'/smallapp21/User/isForscreenIng',
       headers: {
         'Content-Type': 'application/json'
       },
@@ -164,7 +164,7 @@ Page({
             success: function (res) {
               if (res.confirm) {
                 wx.request({
-                  url: 'https://mobile.littlehotspot.com/Netty/Index/index',
+                  url: api_url+'/Netty/Index/index',
                   headers: {
                     'Content-Type': 'application/json'
                   },
@@ -181,7 +181,7 @@ Page({
                       duration: 5000
                     });
                     wx.request({
-                      url: 'https://mobile.littlehotspot.com/Smallapp/index/recordForScreenPics',
+                      url: api_url+'/Smallapp/index/recordForScreenPics',
                       header: {
                         'content-type': 'application/json'
                       },
@@ -212,7 +212,7 @@ Page({
           })
         }else {
           wx.request({
-            url: 'https://mobile.littlehotspot.com/Netty/Index/index',
+            url: api_url+'/Netty/Index/index',
             headers: {
               'Content-Type': 'application/json'
             },
@@ -228,7 +228,7 @@ Page({
                 duration: 5000
               });
               wx.request({
-                url: 'https://mobile.littlehotspot.com/Smallapp/index/recordForScreenPics',
+                url: api_url+'/Smallapp/index/recordForScreenPics',
                 header: {
                   'content-type': 'application/json'
                 },
@@ -279,7 +279,7 @@ Page({
     openid = user_info.openid;
     if (res.detail.errMsg == 'getUserInfo:ok') {
       wx.request({
-        url: 'https://mobile.littlehotspot.com/smallapp21/User/register',
+        url: api_url+'/smallapp21/User/register',
         data: {
           'openid': openid,
           'avatarUrl': res.detail.userInfo.avatarUrl,
@@ -309,7 +309,7 @@ Page({
       wx.getUserInfo({
         success(rets) {
           wx.request({
-            url: 'https://mobile.littlehotspot.com/smallapp3/User/registerCom',
+            url: api_url+'/smallapp3/User/registerCom',
             data: {
               'openid': openid,
               'avatarUrl': rets.userInfo.avatarUrl,
@@ -349,7 +349,7 @@ Page({
       })
     }else {
       wx.request({
-        url: 'https://mobile.littlehotspot.com/smallapp21/User/refuseRegister',
+        url: api_url+'/smallapp21/User/refuseRegister',
         data: {
           'openid': openid,
         },
@@ -389,7 +389,7 @@ Page({
       box_mac = '';
     }
     wx.request({
-      url: 'https://mobile.littlehotspot.com/Smallapp21/index/closeauthLog',
+      url: api_url+'/Smallapp21/index/closeauthLog',
       header: {
         'content-type': 'application/json'
       },
@@ -412,7 +412,7 @@ Page({
   //打开遥控器
   openControl: function (e) {
     var that = this;
-    var qrcode_url = 'https://mobile.littlehotspot.com/Smallapp/index/getBoxQr?box_mac=' + box_mac + '&type=3';
+    var qrcode_url = api_url+'/Smallapp/index/getBoxQr?box_mac=' + box_mac + '&type=3';
     that.setData({
 
       showControl: true,

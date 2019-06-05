@@ -7,6 +7,7 @@ var hotel_list;
 var box_mac;
 var rest_appid = app.globalData.rest_appid;
 var jijian_appid = app.globalData.jijian_appid;
+var api_url = app.globalData.api_url;
 Page({
 
   /**
@@ -52,7 +53,7 @@ Page({
       //获取当前城市的区域
       var area_id = city_list[picCityIndex].id;
       wx.request({
-        url: 'https://mobile.littlehotspot.com/Smallapp21/Area/getSecArea',
+        url: api_url+'/Smallapp21/Area/getSecArea',
         header: {
           'content-type': 'application/json'
         },
@@ -80,7 +81,7 @@ Page({
 
       function getHotelList(area_id, county_id, food_style_id, avg_exp_id) {
         wx.request({
-          url: 'https://mobile.littlehotspot.com/smallapp21/Hotel/recList',
+          url: api_url+'/smallapp21/Hotel/recList',
           header: {
             'content-type': 'application/json'
           },
@@ -126,7 +127,7 @@ Page({
 
     function getHotelList(area_id, county_id, food_style_id, avg_exp_id) {
       wx.request({
-        url: 'https://mobile.littlehotspot.com/smallapp21/Hotel/recList',
+        url: api_url+'/smallapp21/Hotel/recList',
         header: {
           'content-type': 'application/json'
         },
@@ -171,7 +172,7 @@ Page({
 
     function getHotelList(area_id, county_id, food_style_id, avg_exp_id) {
       wx.request({
-        url: 'https://mobile.littlehotspot.com/smallapp21/Hotel/recList',
+        url: api_url+'/smallapp21/Hotel/recList',
         header: {
           'content-type': 'application/json'
         },
@@ -218,7 +219,7 @@ Page({
 
     function getHotelList(area_id, county_id, food_style_id, avg_exp_id) {
       wx.request({
-        url: 'https://mobile.littlehotspot.com/smallapp21/Hotel/recList',
+        url: api_url+'/smallapp21/Hotel/recList',
         header: {
           'content-type': 'application/json'
         },
@@ -257,7 +258,7 @@ Page({
       jijian_appid: jijian_appid,
     })
     wx.request({
-      url: 'https://mobile.littlehotspot.com/smallapp21/User/isRegister',
+      url: api_url+'/smallapp21/User/isRegister',
       data: {
         "openid": openid,
         "page_id": 4
@@ -275,7 +276,7 @@ Page({
     }); //判断用户是否注册结束
 
     wx.request({
-      url: 'https://mobile.littlehotspot.com/Smallapp/index/isHaveCallBox?openid=' + openid,
+      url: api_url+'/Smallapp/index/isHaveCallBox?openid=' + openid,
       headers: {
         'Content-Type': 'application/json'
       },
@@ -303,7 +304,7 @@ Page({
     })
     //获取城市列表
     wx.request({
-      url: 'https://mobile.littlehotspot.com/Smallapp21/Area/getAreaList',
+      url: api_url+'/Smallapp21/Area/getAreaList',
       header: {
         'content-type': 'application/json'
       },
@@ -323,7 +324,7 @@ Page({
         var latitude = res.latitude;
         var longitude = res.longitude;
         wx.request({
-          url: 'https://mobile.littlehotspot.com/Smallapp21/Area/getAreaid',
+          url: api_url+'/Smallapp21/Area/getAreaid',
           header: {
             'content-type': 'application/json'
           },
@@ -337,7 +338,7 @@ Page({
             })
             var area_id = res.data.result.area_id;
             wx.request({
-              url: 'https://mobile.littlehotspot.com/Smallapp21/Area/getSecArea',
+              url: api_url+'/Smallapp21/Area/getSecArea',
               header: {
                 'content-type': 'application/json'
               },
@@ -353,7 +354,7 @@ Page({
             });
             //获取酒楼列表
             wx.request({
-              url: 'https://mobile.littlehotspot.com/smallapp21/Hotel/recList',
+              url: api_url+'/smallapp21/Hotel/recList',
               header: {
                 'content-type': 'application/json'
               },
@@ -380,7 +381,7 @@ Page({
         })
         var area_id = 1;
         wx.request({
-          url: 'https://mobile.littlehotspot.com/Smallapp21/Area/getSecArea',
+          url: api_url+'/Smallapp21/Area/getSecArea',
           header: {
             'content-type': 'application/json'
           },
@@ -396,7 +397,7 @@ Page({
         });
         //获取酒楼列表
         wx.request({
-          url: 'https://mobile.littlehotspot.com/smallapp21/Hotel/recList',
+          url: api_url+'/smallapp21/Hotel/recList',
           header: {
             'content-type': 'application/json'
           },
@@ -418,7 +419,7 @@ Page({
     })
     //获取菜系列表
     wx.request({
-      url: 'https://mobile.littlehotspot.com/Smallapp21/FoodStyle/getList',
+      url: api_url+'/Smallapp21/FoodStyle/getList',
       header: {
         'content-type': 'application/json'
       },
@@ -431,7 +432,7 @@ Page({
     })
     //获取人均消费
     wx.request({
-      url: 'https://mobile.littlehotspot.com/Smallapp21/Hotel/getExplist',
+      url: api_url+'/Smallapp21/Hotel/getExplist',
       header: {
         'content-type': 'application/json'
       },
@@ -446,7 +447,7 @@ Page({
 
     //获取酒楼信息
     wx.request({
-      url: 'https://mobile.littlehotspot.com/Smallapp21/Hotel/recList',
+      url: api_url+'/Smallapp21/Hotel/recList',
       data: {
         page: page,
         openid: openid,
@@ -494,7 +495,7 @@ Page({
 
     function getHotelList(area_id, county_id, food_style_id, avg_exp_id) {
       wx.request({
-        url: 'https://mobile.littlehotspot.com/smallapp21/Hotel/recList',
+        url: api_url+'/smallapp21/Hotel/recList',
         header: {
           'content-type': 'application/json'
         },
@@ -537,7 +538,7 @@ Page({
     var that = this;
     var openid = e.currentTarget.dataset.openid;
     wx.request({
-      url: 'https://mobile.littlehotspot.com/Smallapp3/user/closeHotelHind',
+      url: api_url+'/Smallapp3/user/closeHotelHind',
       header: {
         'content-type': 'application/json'
       },
@@ -562,7 +563,7 @@ Page({
   //打开遥控器
   openControl: function (e) {
     var that = this;
-    var qrcode_url = 'https://mobile.littlehotspot.com/Smallapp/index/getBoxQr?box_mac=' + box_mac + '&type=3';
+    var qrcode_url = api_url+'/Smallapp/index/getBoxQr?box_mac=' + box_mac + '&type=3';
     that.setData({
       showControl: true,
       qrcode_img: qrcode_url

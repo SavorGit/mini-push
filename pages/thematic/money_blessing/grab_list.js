@@ -3,6 +3,7 @@ const app = getApp();
 var openid;
 var page = 1;
 var box_mac;
+var api_url = app.globalData.api_url;
 Page({
 
   /**
@@ -22,7 +23,7 @@ Page({
     openid = user_info.openid;
     box_mac = options.box_mac;
     wx.request({
-      url: 'https://mobile.littlehotspot.com/Smallapp3/redpacket/sendList',
+      url: api_url+'/Smallapp3/redpacket/sendList',
       header: {
         'content-type': 'application/json'
       },
@@ -60,7 +61,7 @@ Page({
       hiddens: false,
     })
     wx.request({
-      url: 'https://mobile.littlehotspot.com/Smallapp3/redpacket/sendList',
+      url: api_url+'/Smallapp3/redpacket/sendList',
       header: {
         'Content-Type': 'application/json'
       },

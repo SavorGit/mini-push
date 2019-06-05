@@ -5,6 +5,7 @@ var openid;
 var pubdetail;
 var info;
 var i;
+var api_url = app.globalData.api_url;
 Page({
 
   /**
@@ -32,7 +33,7 @@ Page({
       openid = app.globalData.openid;
       //判断用户是否注册
       wx.request({
-        url: 'https://mobile.littlehotspot.com/smallapp21/User/isRegister',
+        url: api_url+'/smallapp21/User/isRegister',
         data: {
           "openid": app.globalData.openid,
           
@@ -63,7 +64,7 @@ Page({
           openid = openid;
           //判断用户是否注册
           wx.request({
-            url: 'https://mobile.littlehotspot.com/smallapp21/User/isRegister',
+            url: api_url+'/smallapp21/User/isRegister',
             data: {
               "openid": app.globalData.openid,
               
@@ -92,7 +93,7 @@ Page({
     var user_info = wx.getStorageSync("savor_user_info");
     openid = user_info.openid;
     wx.request({
-      url: 'https://mobile.littlehotspot.com/smallapp3/Share/showVideo',
+      url: api_url+'/smallapp3/Share/showVideo',
       data: {
         'res_id': res_id,
         'type': type,
@@ -119,7 +120,7 @@ Page({
     var info = e.target.dataset.info;
     var type = e.target.dataset.type;
     wx.request({
-      url: 'https://mobile.littlehotspot.com/Smallapp/collect/recLogs',
+      url: api_url+'/Smallapp/collect/recLogs',
       header: {
         'content-type': 'application/json'
       },
@@ -167,7 +168,7 @@ Page({
     var openid = e.target.dataset.openid;
     var type = e.target.dataset.type;
     wx.request({
-      url: 'https://mobile.littlehotspot.com/Smallapp/collect/recLogs',
+      url: api_url+'/Smallapp/collect/recLogs',
       header: {
         'content-type': 'application/json'
       },
@@ -219,7 +220,7 @@ Page({
     if (res.from === 'button') {
       // 转发成功
       wx.request({
-        url: 'https://mobile.littlehotspot.com/Smallapp/share/recLogs',
+        url: api_url+'/Smallapp/share/recLogs',
         header: {
           'content-type': 'application/json'
         },

@@ -3,6 +3,7 @@ const app = getApp();
 var openid;
 var box_mac;
 var order_id;
+var api_url = app.globalData.api_url;
 Page({
 
   /**
@@ -35,7 +36,7 @@ Page({
       order_id = pay_info.order_id;
       
       wx.request({
-        url: 'https://mobile.littlehotspot.com/Smallapp3/redpacket/getresult',
+        url: api_url+'/Smallapp3/redpacket/getresult',
         header: {
           'content-type': 'application/json'
         },

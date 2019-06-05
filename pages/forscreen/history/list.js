@@ -1,11 +1,11 @@
 // pages/forscreen/history/list.js
 const util = require('../../../utils/util.js')
 const app = getApp();
-var tmp;
 var openid;
 var box_mac = '';
 var page = 1;
 var forscreen_history_list;
+var api_url = app.globalData.api_url;
 Page({
 
   /**
@@ -31,7 +31,7 @@ Page({
     })
 
     wx.request({
-      url: 'https://mobile.littlehotspot.com/Smallapp/index/isHaveCallBox?openid=' + openid,
+      url: api_url+'/Smallapp/index/isHaveCallBox?openid=' + openid,
       headers: {
         'Content-Type': 'application/json'
       },
@@ -45,7 +45,7 @@ Page({
     })
     //获取投屏历史
     wx.request({
-      url: 'https://mobile.littlehotspot.com/Smallapp21/ForscreenHistory/getList',
+      url: api_url+'/Smallapp21/ForscreenHistory/getList',
       header: {
         'content-type': 'application/json'
       },
@@ -89,7 +89,7 @@ Page({
     var action = 8;  //重新播放
 
     wx.request({
-      url: 'https://mobile.littlehotspot.com/smallapp21/User/isForscreenIng',
+      url: api_url+'/smallapp21/User/isForscreenIng',
       headers: {
         'Content-Type': 'application/json'
       },
@@ -107,7 +107,7 @@ Page({
                   for (var i = 0; i < res_len; i++) {
                     var order = i + 1;
                     wx.request({//start
-                      url: 'https://mobile.littlehotspot.com/Smallapp/index/recordForScreenPics',
+                      url: api_url+'/Smallapp/index/recordForScreenPics',
                       header: {
                         'content-type': 'application/json'
                       },
@@ -136,7 +136,7 @@ Page({
                     var res_id = res_list[i]['resource_id'];
 
                     wx.request({
-                      url: 'https://mobile.littlehotspot.com/Netty/Index/index',
+                      url: api_url+'/Netty/Index/index',
                       headers: {
                         'Content-Type': 'application/json'
                       },
@@ -166,7 +166,7 @@ Page({
                 } else {//视频投屏
                   for (var i = 0; i < res_len; i++) {
                     wx.request({
-                      url: 'https://mobile.littlehotspot.com/Smallapp/index/recordForScreenPics',
+                      url: api_url+'/Smallapp/index/recordForScreenPics',
                       header: {
                         'content-type': 'application/json'
                       },
@@ -195,7 +195,7 @@ Page({
                     });
 
                     wx.request({
-                      url: 'https://mobile.littlehotspot.com/Netty/Index/index',
+                      url: api_url+'/Netty/Index/index',
                       headers: {
                         'Content-Type': 'application/json'
                       },
@@ -232,7 +232,7 @@ Page({
             for (var i = 0; i < res_len; i++) {
               var order = i + 1;
               wx.request({//start
-                url: 'https://mobile.littlehotspot.com/Smallapp/index/recordForScreenPics',
+                url: api_url+'/Smallapp/index/recordForScreenPics',
                 header: {
                   'content-type': 'application/json'
                 },
@@ -261,7 +261,7 @@ Page({
               var res_id = res_list[i]['resource_id'];
 
               wx.request({
-                url: 'https://mobile.littlehotspot.com/Netty/Index/index',
+                url: api_url+'/Netty/Index/index',
                 headers: {
                   'Content-Type': 'application/json'
                 },
@@ -291,7 +291,7 @@ Page({
           } else {//视频投屏
             for (var i = 0; i < res_len; i++) {
               wx.request({
-                url: 'https://mobile.littlehotspot.com/Smallapp/index/recordForScreenPics',
+                url: api_url+'/Smallapp/index/recordForScreenPics',
                 header: {
                   'content-type': 'application/json'
                 },
@@ -320,7 +320,7 @@ Page({
               });
 
               wx.request({
-                url: 'https://mobile.littlehotspot.com/Netty/Index/index',
+                url: api_url+'/Netty/Index/index',
                 headers: {
                   'Content-Type': 'application/json'
                 },
@@ -378,7 +378,7 @@ Page({
       hiddens: false,
     })
     wx.request({
-      url: 'https://mobile.littlehotspot.com/Smallapp21/ForscreenHistory/getList',
+      url: api_url+'/Smallapp21/ForscreenHistory/getList',
       header: {
         'Content-Type': 'application/json'
       },
@@ -413,7 +413,7 @@ Page({
   //打开遥控器
   openControl: function (e) {
     var that = this;
-    var qrcode_url = 'https://mobile.littlehotspot.com/Smallapp/index/getBoxQr?box_mac=' + box_mac + '&type=3';
+    var qrcode_url = api_url+'/Smallapp/index/getBoxQr?box_mac=' + box_mac + '&type=3';
     that.setData({
 
       showControl: true,

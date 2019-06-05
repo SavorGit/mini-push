@@ -5,6 +5,7 @@ var openid;
 var pubdetail;
 var pub_info;
 var i;
+var api_url = app.globalData.api_url;
 Page({
 
   /**
@@ -26,7 +27,7 @@ Page({
     var user_info = wx.getStorageSync("savor_user_info");
     openid = user_info.openid;
     wx.request({
-      url: 'https://mobile.littlehotspot.com/smallapp21/Discovery/showPic',
+      url: api_url+'/smallapp21/Discovery/showPic',
       data:{'forscreen_id':forscreen_id,
             'openid':openid,
             },
@@ -39,7 +40,7 @@ Page({
       }
     })
     wx.request({
-      url: 'https://mobile.littlehotspot.com/Smallapp/index/isHaveCallBox?openid=' + openid,
+      url: api_url+'/Smallapp/index/isHaveCallBox?openid=' + openid,
       headers: {
         'Content-Type': 'application/json'
       },
@@ -87,7 +88,7 @@ Page({
     var res_id = e.target.dataset.res_id;
     var pub_info = e.target.dataset.pub_info;
     wx.request({
-      url: 'https://mobile.littlehotspot.com/Smallapp/collect/recLogs',
+      url: api_url+'/Smallapp/collect/recLogs',
       header: {
         'content-type': 'application/json'
       },
@@ -134,7 +135,7 @@ Page({
     var pub_info = e.target.dataset.pub_info;
     var openid = e.target.dataset.openid;
     wx.request({
-      url: 'https://mobile.littlehotspot.com/Smallapp/collect/recLogs',
+      url: api_url+'/Smallapp/collect/recLogs',
       header: {
         'content-type': 'application/json'
       },
@@ -192,7 +193,7 @@ Page({
     if (res.from === 'button') {
       // 转发成功
       wx.request({
-        url: 'https://mobile.littlehotspot.com/Smallapp/share/recLogs',
+        url: api_url+'/Smallapp/share/recLogs',
         header: {
           'content-type': 'application/json'
         },

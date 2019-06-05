@@ -2,6 +2,7 @@
 const app = getApp();
 var page =1;
 var openid;
+var api_url = app.globalData.api_url;
 Page({
 
   /**
@@ -34,7 +35,7 @@ Page({
       })
     }
     wx.request({
-      url: 'https://mobile.littlehotspot.com/Smallapp3/redpacket/redpacketDetail',
+      url: api_url+'/Smallapp3/redpacket/redpacketDetail',
       header: {
         'content-type': 'application/json'
       },

@@ -2,6 +2,7 @@
 const app = getApp()
 var box_mac;
 var openid;
+var api_url = app.globalData.api_url;
 Page({
 
   /**
@@ -28,7 +29,7 @@ Page({
       openid = app.globalData.openid;
       //判断用户是否注册
       wx.request({
-        url: 'https://mobile.littlehotspot.com/smallapp21/User/isRegister',
+        url: api_url+'/smallapp21/User/isRegister',
         data: {
           "openid": app.globalData.openid,
           'page_id': 4
@@ -59,7 +60,7 @@ Page({
           openid = openid;
           //判断用户是否注册
           wx.request({
-            url: 'https://mobile.littlehotspot.com/smallapp21/User/isRegister',
+            url: api_url+'/smallapp21/User/isRegister',
             data: {
               "openid": app.globalData.openid,
               "page_id": 4

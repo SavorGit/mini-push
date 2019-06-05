@@ -3,6 +3,7 @@ const util = require('../../utils/util.js')
 const app = getApp()
 var openid;
 var box_mac;
+var api_url = app.globalData.api_url;
 Page({
 
   /**
@@ -42,7 +43,7 @@ Page({
       openid = app.globalData.openid;
       //判断用户是否注册
       wx.request({
-        url: 'https://mobile.littlehotspot.com/smallapp21/User/isRegister',
+        url: api_url+'/smallapp21/User/isRegister',
         data: {
           "openid": app.globalData.openid,
           "page_id": 3
@@ -69,7 +70,7 @@ Page({
         }
       });//判断用户是否注册结束
       wx.request({
-        url: 'https://mobile.littlehotspot.com/Smallapp/index/isHaveCallBox?openid=' + app.globalData.openid ,
+        url: api_url+'/Smallapp/index/isHaveCallBox?openid=' + app.globalData.openid ,
         headers: {
           'Content-Type': 'application/json'
         },
@@ -102,7 +103,7 @@ Page({
           openid = openid;
           //判断用户是否注册
           wx.request({
-            url: 'https://mobile.littlehotspot.com/smallapp21/User/isRegister',
+            url: api_url+'/smallapp21/User/isRegister',
             data: {
               "openid": app.globalData.openid,
               "page_id": 3
@@ -129,7 +130,7 @@ Page({
             }
           });//判断用户是否注册结束
           wx.request({
-            url: 'https://mobile.littlehotspot.com/Smallapp/index/isHaveCallBox?openid=' + openid ,
+            url: api_url+'/Smallapp/index/isHaveCallBox?openid=' + openid ,
             headers: {
               'Content-Type': 'application/json'
             },
@@ -158,7 +159,7 @@ Page({
     }
     function getHotelInfo(box_mac) {//获取链接的酒楼信息
       wx.request({
-        url: 'https://mobile.littlehotspot.com/Smallapp/Index/getHotelInfo',
+        url: api_url+'/Smallapp/Index/getHotelInfo',
         headers: {
           'Content-Type': 'application/json'
         },
@@ -178,7 +179,7 @@ Page({
       })
     }
     wx.request({
-      url:  'https://mobile.littlehotspot.com/Smallapp3/Adsposition/getAdspositionList',
+      url:  api_url+'/Smallapp3/Adsposition/getAdspositionList',
       data: {
         position: 2,
       },
@@ -202,7 +203,7 @@ Page({
       wx.getUserInfo({
         success(rets) {
           wx.request({
-            url: 'https://mobile.littlehotspot.com/smallapp3/User/registerCom',
+            url: api_url+'/smallapp3/User/registerCom',
             data: {
               'openid': openid,
               'avatarUrl': rets.userInfo.avatarUrl,
@@ -246,7 +247,7 @@ Page({
       })
     }else {
       wx.request({
-        url: 'https://mobile.littlehotspot.com/smallapp21/User/refuseRegister',
+        url: api_url+'/smallapp21/User/refuseRegister',
         data: {
           'openid': openid,
         },
@@ -289,7 +290,7 @@ Page({
       box_mac = '';
     }
     wx.request({
-      url: 'https://mobile.littlehotspot.com/Smallapp21/index/closeauthLog',
+      url: api_url+'/Smallapp21/index/closeauthLog',
       header: {
         'content-type': 'application/json'
       },
@@ -315,25 +316,8 @@ Page({
       var openid = e.currentTarget.dataset.openid;
       var is_open_simple = e.currentTarget.dataset.is_open_simple;
       if (box_mac == '') {
-        wx.showModal({
-          title: '提示',
-          content: "您可扫码链接热点合作餐厅电视,使用此功能",
-          showCancel: true,
-          confirmText: '立即扫码',
-          success: function (res) {
-            if (res.confirm == true) {
-              wx.scanCode({
-                onlyFromCamera: true,
-                success: (res) => {
-                  //console.log(res);
-                  wx.navigateTo({
-                    url: '/' + res.path
-                  })
-                }
-              })
-            }
-          }
-        });
+        
+        app.scanQrcode();
       } else {
         wx.navigateTo({
           url: '/pages/forscreen/forimages/index?box_mac=' + box_mac + '&openid=' + openid + '&is_open_simple=' + is_open_simple,
@@ -354,25 +338,7 @@ Page({
       var openid = e.currentTarget.dataset.openid;
       var is_open_simple = e.currentTarget.dataset.is_open_simple;
       if (box_mac == '') {
-        wx.showModal({
-          title: '提示',
-          content: "您可扫码链接热点合作餐厅电视,使用此功能",
-          showCancel: true,
-          confirmText: '立即扫码',
-          success: function (res) {
-            if (res.confirm == true) {
-              wx.scanCode({
-                onlyFromCamera: true,
-                success: (res) => {
-                  //console.log(res);
-                  wx.navigateTo({
-                    url: '/' + res.path
-                  })
-                }
-              })
-            }
-          }
-        });
+        app.scanQrcode();
       } else {
         wx.navigateTo({
           url: '/pages/forscreen/forvideo/index?box_mac=' + box_mac + '&openid=' + openid + '&is_open_simple=' + is_open_simple,
@@ -382,163 +348,13 @@ Page({
 
     
   },
-  boxShow(e) {//视频点播让盒子播放 生日歌
-    var box_mac = e.currentTarget.dataset.boxmac;
-    if (box_mac == '') {
-      wx.showModal({
-        title: '提示',
-        content: "您可扫码链接热点合作餐厅电视,使用此功能",
-        showCancel: true,
-        confirmText: '立即扫码',
-        success: function (res) {
-          if (res.confirm == true) {
-            wx.scanCode({
-              onlyFromCamera: true,
-              success: (res) => {
-                //console.log(res);
-                wx.navigateTo({
-                  url: '/' + res.path
-                })
-              }
-            })
-          }
-        }
-      });
-    }else {
-      var openid = e.currentTarget.dataset.openid;
-      var vediourl = e.currentTarget.dataset.vediourl;
-      var forscreen_char = e.currentTarget.dataset.name;
-
-      var index1 = vediourl.lastIndexOf("/");
-      var index2 = vediourl.length;
-      var filename = vediourl.substring(index1 + 1, index2);//后缀名
-      var timestamp = (new Date()).valueOf();
-      var mobile_brand = app.globalData.mobile_brand;
-      var mobile_model = app.globalData.mobile_model;
-      wx.request({
-        url: "https://netty-push.littlehotspot.com/push/box",
-        header: {
-          "Content-Type": "application/x-www-form-urlencoded"
-        },
-        method: "POST",
-        data: {
-          box_mac: box_mac,
-          cmd: 'call-mini-program',
-          msg: '{ "action": 5,"url":"' + vediourl + '","filename":"' + filename + '"}',
-          req_id: timestamp
-        },
-        success: function (res) {
-          wx.showToast({
-            title: '点播成功,电视即将开始播放',
-            icon: 'none',
-            duration: 5000
-          });
-          wx.request({
-            url: 'https://mobile.littlehotspot.com/Smallapp/index/recordForScreenPics',
-            header: {
-              'content-type': 'application/json'
-            },
-            data: {
-              openid: openid,
-              box_mac: box_mac,
-              action: 5,
-              mobile_brand: mobile_brand,
-              mobile_model: mobile_model,
-              forscreen_char: forscreen_char,
-              imgs: '["media/resource/' + filename + '"]'
-            },
-          });
-        },
-        fail: function (res) {
-          wx.showToast({
-            title: '网络异常,点播失败',
-            icon: 'none',
-            duration: 2000
-          })
-        }
-      })
-    }
-    
-  },
+  
   showHappy(e) {//视频点播让盒子播放
     var box_mac = e.currentTarget.dataset.boxmac;
     var openid = e.currentTarget.dataset.openid;
     if (box_mac == '') {
-      wx.showModal({
-        title: '提示',
-        content: "您可扫码链接热点合作餐厅电视,使用此功能",
-        showCancel: true,
-        confirmText: '立即扫码',
-        success: function (res) {
-          if (res.confirm == true) {
-            wx.scanCode({
-              onlyFromCamera: true,
-              success: (res) => {
-                //console.log(res);
-                wx.navigateTo({
-                  url: '/' + res.path
-                })
-              }
-            })
-          }
-        }
-      });
-    }
-    /*else {
-      var openid = e.currentTarget.dataset.openid;
-      var vediourl = e.currentTarget.dataset.vediourl;
-      var forscreen_char = e.currentTarget.dataset.name;
-
-      var index1 = vediourl.lastIndexOf("/");
-      var index2 = vediourl.length;
-      var filename = vediourl.substring(index1 + 1, index2);//后缀名
-      var timestamp = (new Date()).valueOf();
-      var mobile_brand = app.globalData.mobile_brand;
-      var mobile_model = app.globalData.mobile_model;
-      wx.request({
-        url: "https://netty-push.littlehotspot.com/push/box",
-        header: {
-          "Content-Type": "application/x-www-form-urlencoded"
-        },
-        method: "POST",
-        data: {
-          box_mac: box_mac,
-          cmd: 'call-mini-program',
-          msg: '{ "action": 5,"url":"' + vediourl + '","filename":"' + filename + '"}',
-          req_id: timestamp
-        },
-        success: function (res) {
-          wx.showToast({
-            title: '点播成功,电视即将开始播放',
-            icon: 'none',
-            duration: 5000
-          });
-          wx.request({
-            url: 'https://mobile.littlehotspot.com/Smallapp/index/recordForScreenPics',
-            header: {
-              'content-type': 'application/json'
-            },
-            data: {
-              openid: openid,
-              box_mac: box_mac,
-              action: 5,
-              mobile_brand: mobile_brand,
-              mobile_model: mobile_model,
-              forscreen_char: forscreen_char,
-              imgs: '["media/resource/' + filename + '"]'
-            },
-          });
-        },
-        fail: function (res) {
-          wx.showToast({
-            title: '网络异常,点播失败',
-            icon: 'none',
-            duration: 2000
-          })
-        }
-      })
-    }*/
-    else {
+      app.scanQrcode();
+    }else {
       wx.navigateTo({
         url: '/pages/thematic/birthday/list?openid='+openid+'&box_mac='+box_mac,
       })
@@ -551,25 +367,7 @@ Page({
     var linkcontent = e.currentTarget.dataset.linkcontent;
 
     if (box_mac == '') {
-      wx.showModal({
-        title: '提示',
-        content: "您可扫码链接热点合作餐厅电视,使用此功能",
-        showCancel: true,
-        confirmText: '立即扫码',
-        success: function (res) {
-          if (res.confirm == true) {
-            wx.scanCode({
-              onlyFromCamera: true,
-              success: (res) => {
-                //console.log(res);
-                wx.navigateTo({
-                  url: '/' + res.path
-                })
-              }
-            })
-          }
-        }
-      });
+      app.scanQrcode();
     } else {
       var mobile_brand = app.globalData.mobile_brand;
       var mobile_model = app.globalData.mobile_model;
@@ -587,7 +385,7 @@ Page({
     box_mac = e.currentTarget.dataset.boxmac;
     var timestamp = (new Date()).valueOf();
     wx.request({
-      url: 'https://mobile.littlehotspot.com/Smallapp21/index/breakLink',
+      url: api_url+'/Smallapp21/index/breakLink',
       header: {
         'content-type': 'application/json'
       },
@@ -631,25 +429,7 @@ Page({
     var box_mac = e.currentTarget.dataset.boxmac;
     var openid  = e.currentTarget.dataset.openid;
     if (box_mac == '') {
-      wx.showModal({
-        title: '提示',
-        content: "您可扫码链接热点合作餐厅电视,使用此功能",
-        showCancel: true,
-        confirmText: '立即扫码',
-        success: function (res) {
-          if (res.confirm == true) {
-            wx.scanCode({
-              onlyFromCamera: true,
-              success: (res) => {
-                //console.log(res);
-                wx.navigateTo({
-                  url: '/' + res.path
-                })
-              }
-            })
-          }
-        }
-      });
+      app.scanQrcode();
     }else {
       wx.navigateTo({
         url: '/pages/forscreen/history/list?openid='+openid+'&box_mac='+box_mac,
@@ -666,7 +446,7 @@ Page({
   //打开遥控器
   openControl: function (e) {
     var that = this;
-    var qrcode_url = 'https://mobile.littlehotspot.com/Smallapp/index/getBoxQr?box_mac=' + box_mac + '&type=3';
+    var qrcode_url = api_url+'/Smallapp/index/getBoxQr?box_mac=' + box_mac + '&type=3';
     that.setData({
       
       popRemoteControlWindow:true,

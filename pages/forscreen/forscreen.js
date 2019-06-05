@@ -4,6 +4,7 @@ var openid;                     //用户小程序唯一标识
 var box_mac = '';               //机顶盒mac
 var page = 1;                    //当前节目单页数
 var nowtime;
+var api_url = app.globalData.api_url;
 Page({
   /**
  * 页面的初始数据
@@ -66,7 +67,7 @@ Page({
     if(code_len==3){
 
       wx.request({
-        url: 'https://mobile.littlehotspot.com/smallapp/index/checkcode',
+        url: api_url+'/smallapp/index/checkcode',
         headers: {
           'Content-Type': 'application/json'
         },
@@ -136,7 +137,7 @@ Page({
     var mobile_model = app.globalData.mobile_model;
     var forscreen_char = 'wx71cdc83866d4d28f:pages/details/index?item_uid=3164341_629776';
     wx.request({
-      url: 'https://mobile.littlehotspot.com/Smallapp/index/recordForScreenPics',
+      url: api_url+'/Smallapp/index/recordForScreenPics',
       header: {
         'content-type': 'application/json'
       },
@@ -154,7 +155,7 @@ Page({
   //进来加载页面：
   onLoad: function (options) {
     /*wx.request({
-      url: 'https://mobile.littlehotspot.com/systemtime.php',
+      url: api_url+'/systemtime.php',
       success:function(e){
         wx.setStorage({
           key: 'savor_now_time',
@@ -163,7 +164,7 @@ Page({
       }
     })*/
     wx.request({
-      url: 'https://mobile.littlehotspot.com/smallapp21/index/getConfig',
+      url: api_url+'/smallapp21/index/getConfig',
       success: function (e) {
         wx.setStorage({
           key: 'savor_now_time',
@@ -177,13 +178,18 @@ Page({
     //console.log(nowtime);
     //box_mac = decodeURIComponent(options.scene);
     nowtime = sysconfig.sys_time;
-    var scene = decodeURIComponent(options.scene);
+    if(typeof(options.q)=='undefined'){
+      var scene = decodeURIComponent(options.scene);
+      
+    }else {
+      var q = decodeURIComponent(options.q);
+      var selemite = q.indexOf("?");
+      var scene = q.substring(selemite+7, q.length);
+    }
     var scene_arr = scene.split('_');
     box_mac = scene_arr[0];
     var code_type = scene_arr[1];
     var jz_time = scene_arr[2];
-    
-    
     //console.log(scene_arr);
     //return false;
     var that = this
@@ -191,7 +197,7 @@ Page({
       success: res => {
         var code = res.code; //返回code
         wx.request({
-          url: 'https://mobile.littlehotspot.com/smallapp/index/getOpenid',
+          url: api_url+'/smallapp/index/getOpenid',
           data: { "code": code },
           header: {
             'content-type': 'application/json'
@@ -204,7 +210,7 @@ Page({
               var difftime = nowtime - jz_time;
               if (difftime > fztime) {
                 wx.request({
-                  url: 'https://mobile.littlehotspot.com/smallapp21/index/recOverQrcodeLog',
+                  url: api_url+'/smallapp21/index/recOverQrcodeLog',
                   data: { "openid": res.data.result.openid,
                           "box_mac":box_mac,
                           "type":code_type,
@@ -231,7 +237,7 @@ Page({
             }
             if (code_type==7){
               wx.request({
-                url: 'https://mobile.littlehotspot.com/smallapp3/index/recodeQrcodeLog',
+                url: api_url+'/smallapp3/index/recodeQrcodeLog',
                 data:{
                   openid:res.data.result.openid,
                   type :7
@@ -248,7 +254,7 @@ Page({
               })
             }else {
               wx.request({
-                url: 'https://mobile.littlehotspot.com/smallapp21/index/isHaveCallBox',
+                url: api_url+'/smallapp21/index/isHaveCallBox',
                 data: { "openid": res.data.result.openid },
                 header: {
                   'content-type': 'application/json'
@@ -285,7 +291,7 @@ Page({
       });
       //发送随机码给电视显示 (默认用户不用填写三位呼玛)
       wx.request({
-        url: 'https://mobile.littlehotspot.com/Smallapp21/Index/genCode',
+        url: api_url+'/Smallapp21/Index/genCode',
         headers: {
           'Content-Type': 'application/json'
         },
@@ -307,7 +313,7 @@ Page({
             var code = res.data.result.code;
             
             wx.request({
-              url: 'https://mobile.littlehotspot.com/Netty/Index/index',
+              url: api_url+'/Netty/Index/index',
               headers: {
                 'Content-Type': 'application/json'
               },

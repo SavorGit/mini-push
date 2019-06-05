@@ -3,6 +3,7 @@ const util = require('../../utils/util.js')
 const app = getApp();
 var openid;
 var box_mac;
+var api_url = app.globalData.api_url;
 Page({
 
   /**
@@ -31,7 +32,7 @@ Page({
       openid = app.globalData.openid;
       //判断用户是否注册
       wx.request({
-        url: 'https://mobile.littlehotspot.com/smallapp21/User/isRegister',
+        url: api_url+'/smallapp21/User/isRegister',
         data: {
           "openid": app.globalData.openid,
           "page_id": 5
@@ -53,7 +54,7 @@ Page({
         }
       });//判断用户是否注册结束
       wx.request({
-        url: 'https://mobile.littlehotspot.com/Smallapp/index/isHaveCallBox?openid=' + app.globalData.openid,
+        url: api_url+'/Smallapp/index/isHaveCallBox?openid=' + app.globalData.openid,
         headers: {
           'Content-Type': 'application/json'
         },
@@ -87,7 +88,7 @@ Page({
           openid = openid;
           //判断用户是否注册
           wx.request({
-            url: 'https://mobile.littlehotspot.com/smallapp21/User/isRegister',
+            url: api_url+'/smallapp21/User/isRegister',
             data: {
               "openid": app.globalData.openid,
               "page_id": 5
@@ -109,7 +110,7 @@ Page({
             }
           });//判断用户是否注册结束
           wx.request({
-            url: 'https://mobile.littlehotspot.com/Smallapp/index/isHaveCallBox?openid=' + openid,
+            url: api_url+'/Smallapp/index/isHaveCallBox?openid=' + openid,
             headers: {
               'Content-Type': 'application/json'
             },
@@ -141,7 +142,7 @@ Page({
     var user_info = wx.getStorageSync("savor_user_info");
     openid = user_info.openid;
     wx.request({
-      url: 'https://mobile.littlehotspot.com/Smallapp3/User/index',
+      url: api_url+'/Smallapp3/User/index',
       headers: {
         'Content-Type': 'application/json'
       },
@@ -175,7 +176,7 @@ Page({
   //打开遥控器
   openControl: function (e) {
     var that = this;
-    var qrcode_url = 'https://mobile.littlehotspot.com/Smallapp/index/getBoxQr?box_mac=' + box_mac + '&type=3';
+    var qrcode_url = api_url+'/Smallapp/index/getBoxQr?box_mac=' + box_mac + '&type=3';
     that.setData({
       showControl: true,
       qrcode_img: qrcode_url
