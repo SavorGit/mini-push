@@ -139,7 +139,7 @@ Page({
 
                             } else if (order_status == 3) {
                               wx.request({
-                                url: api_url+'//Smallapp3/redpacket/grabBonusResult',
+                                url: api_url+'/Smallapp3/redpacket/grabBonusResult',
                                 header: {
                                   'content-type': 'application/json'
                                 },
@@ -294,7 +294,7 @@ Page({
                                   getRedpacketJx(openid);
                                 } else if (order_status == 3) {
                                   wx.request({
-                                    url: api_url+'//Smallapp3/redpacket/grabBonusResult',
+                                    url: api_url+'/Smallapp3/redpacket/grabBonusResult',
                                     header: {
                                       'content-type': 'application/json'
                                     },
@@ -487,7 +487,7 @@ Page({
                         getRedpacketJx(openid);
                       } else if (order_status == 3) {
                         wx.request({
-                          url: api_url+'//Smallapp3/redpacket/grabBonusResult',
+                          url: api_url+'/Smallapp3/redpacket/grabBonusResult',
                           header: {
                             'content-type': 'application/json'
                           },
