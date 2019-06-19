@@ -1,7 +1,7 @@
 /* pages/game/climbtree/index.wxss */
 
 .container {
-  background-image: url("http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/games/monkeys_climb_trees/game_bg.png");
+  background-image: url("https://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/games/monkeys_climb_trees/game_bg.png");
   background-size: 100vw 100vh;
 }
 

@@ -481,6 +481,17 @@ Page({
     var change_type = e.currentTarget.dataset.change_type;
     app.controlChangeProgram(box_mac, change_type);
   },
+  //文件投屏
+  chooseFiles:function(e){
+    wx.chooseMessageFile({
+      count: 1,
+      type: 'file',
+      success(res) {
+        // tempFilePath可以作为img标签的src属性显示图片
+        const tempFilePaths = res.tempFilePaths
+      }
+    })
+  },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */

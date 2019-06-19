@@ -254,7 +254,7 @@ Page({
                     },
                     success: function() {
                       wx.showToast({
-                        title: '呼玛成功，电视即将展示',
+                        title: '呼码成功，电视即将展示',
                         icon: 'none',
                         duration: 2000
                       });
@@ -293,7 +293,7 @@ Page({
               },
               success: function() {
                 wx.showToast({
-                  title: '呼玛成功，电视即将展示',
+                  title: '呼码成功，电视即将展示',
                   icon: 'none',
                   duration: 2000
                 });

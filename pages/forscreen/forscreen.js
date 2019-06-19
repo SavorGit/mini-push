@@ -10,29 +10,7 @@ Page({
  * 页面的初始数据
  */
   data: {
-    imgUrls: [
-      {
-        "image": 'http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/ads/ad_child_box.jpg',
-        "target": "miniProgram",
-        "appId":"wx71cdc83866d4d28f",
-        "path":"pages/details/index?item_uid=3164341_629776",
-        "extraData":""
-      },
-      {
-        "image": 'http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/ads/ad_child_box_1.jpg',
-        "target": "miniProgram",
-        "appId": "wx71cdc83866d4d28f",
-        "path": "pages/details/index?item_uid=3164341_629776",
-        "extraData": ""
-      },
-      {
-        "image": 'http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/ads/ad_child_box_2.jpg',
-        "target": "miniProgram",
-        "appId": "wx71cdc83866d4d28f",
-        "path": "pages/details/index?item_uid=3164341_629776",
-        "extraData": ""
-      },
-    ],
+    
     indicatorDots: true,  //是否显示面板指示点
     autoplay: true,      //是否自动切换
     interval: 3000,       //自动切换时间间隔
