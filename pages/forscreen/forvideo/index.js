@@ -705,7 +705,6 @@ Page({
     })
   },
   replayHistory:function(e){
-    console.log(e);
     var that = this;
     var user_info = wx.getStorageSync("savor_user_info");
     //console.log(user_info);
