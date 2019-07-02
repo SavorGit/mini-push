@@ -1,1 +1,70 @@
 /* pages/forscreen/forfile/files.wxss */
+
+.page-top {
+  width: 100%;
+  height: 20rpx;
+}
+
+.page-main {
+  width: 100%;
+  height: calc(100% - 50rpx);
+}
+
+.page-main > .operation {
+  width: 100%;
+  height: 100rpx;
+  line-height: 100rpx;
+  display: flex;
+  flex-direction: row;
+  align-items: baseline;
+  justify-content: center;
+}
+
+.page-main > .operation > button {
+  width: 160rpx;
+  height: 40rpx;
+  line-height: 40rpx;
+  font-size: 30rpx;
+  /* margin: auto 10rpx auto 10rpx; */
+  padding: 0;
+  border: 0;
+}
+
+.page-main > .operation > view {
+  width: 160rpx;
+  height: 60rpx;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  /* margin: auto 10rpx auto 10rpx; */
+}
+
+.page-main > .operation > view > icon {
+  height: 30rpx;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  display: block;
+  font: normal normal normal 24rpx FontAwesome;
+  text-rendering: auto;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.page-main > .operation > view > label {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  display: block;
+  font-size: 24rpx;
+  text-rendering: auto;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  height: 30rpx;
+}
+
+.page-bottom {
+  width: 100%;
+  height: 30rpx;
+}

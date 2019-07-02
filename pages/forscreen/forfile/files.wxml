@@ -1,2 +1,30 @@
 <!--pages/forscreen/forfile/files.wxml-->
-<text>pages/forscreen/forfile/files.wxml</text>
+<import src="/pages/template/commons" />
+<template is="navigationBarForTwoLevel" data='{{statusBarHeight: statusBarHeight,titleText:"热点投屏"}}' />
+
+<view class="container" style='height: calc(100vh - 46px - {{statusBarHeight}}px);'>
+  <view class="page-top"></view>
+  <view class="page-main">
+    <scroll-view class="file-list"></scroll-view>
+    <view class="operation">
+      <button class="rechoose">重选文件</button>
+      <button class="quit">退出投屏</button>
+      <view class="previous">
+        <icon class="fa fa-group">aaa</icon>
+        <label>上一页</label>
+      </view>
+      <view class="next">
+        <icon class="fa fa-group"></icon>
+        <label>下一页</label>
+      </view>
+    </view>
+  </view>
+  <view class="page-bottom"></view>
+</view>
+<!-- 遥控器 -->
+<template is="remoteControlWindow" data='{{popRemoteControlWindow: showControl, qrcode_img:qrcode_img, box_mac:box_mac, openid:openid, is_open_simple:is_open_simple}}' />
+
+<!-- 固定悬浮按钮组 -->
+<view wx:if="{{box_mac !=''}}">
+  <template is="fixedSuspensionButtonGroup" />
+</view>
