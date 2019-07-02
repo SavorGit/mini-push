@@ -79,7 +79,7 @@ swiper-image {
 
 .page_main > .operation > view {
   align-items: center;
-  padding: 16rpx 0rpx;
+  padding: 10rpx 0rpx;
 }
 
 .page_main > .operation > view > image {
