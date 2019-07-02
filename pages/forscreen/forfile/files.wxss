@@ -1,5 +1,18 @@
 /* pages/forscreen/forfile/files.wxss */
 
+.weui-grid {
+  position: relative;
+  float: left;
+  width: 358rpx;
+  height: 358rpx;
+  box-sizing: border-box;
+}
+
+.weui-grid > image {
+  width: 100%;
+  height: 100%;
+}
+
 .page-top {
   width: 100%;
   height: 20rpx;
@@ -8,6 +21,56 @@
 .page-main {
   width: 100%;
   height: calc(100% - 50rpx);
+}
+
+.page-main > .file-list {
+  width: 100%;
+  height: calc(100% - 100rpx);
+}
+
+.page-main > .file-list .pic-platform {
+  padding-left: 10rpx;
+  padding-right: 10rpx;
+}
+
+.page-main > .file-list .pic-platform > .pic-frame {
+  /* border: 1rpx solid red; */
+  margin: 5rpx;
+}
+
+.page-main > .file-list .pic-platform > .pic-frame > .cover {
+  margin-top: -75rpx;
+  margin-left: 294rpx;
+}
+
+.page-main > .file-list .pic-platform > .pic-frame > .cover > image {
+  width: 64rpx;
+  height: 64rpx;
+}
+
+.page-main > .file-list .pic-platform > .pic-frame > .cover > .page-number {
+  width: 32rpx;
+  height: 64rpx;
+  display: block;
+  margin-top: -40rpx;
+  margin-left: 30rpx;
+  font-size: 24rpx;
+  text-align: center;
+}
+
+.page-main > .file-list .pic-platform > .pic-frame.choose {
+  border: 2rpx solid red;
+}
+
+.page-main > .file-list .pic-platform > .pic-frame.choose > image {
+  margin-top: 2rpx;
+  width: calc(100% - 4rpx);
+  height: calc(100% - 4rpx);
+}
+
+.page-main > .file-list .pic-platform > .pic-frame.choose > .cover {
+  margin-top: -75rpx;
+  margin-left: 290rpx;
 }
 
 .page-main > .operation {
@@ -25,42 +88,35 @@
   height: 40rpx;
   line-height: 40rpx;
   font-size: 30rpx;
-  /* margin: auto 10rpx auto 10rpx; */
   padding: 0;
   border: 0;
+  border-radius: 0;
 }
 
-.page-main > .operation > view {
+.page-main > .operation > .previous, .page-main > .operation > .next {
   width: 160rpx;
-  height: 60rpx;
+  height: 90rpx;
+  line-height: 30rpx;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  /* margin: auto 10rpx auto 10rpx; */
-}
-
-.page-main > .operation > view > icon {
-  height: 30rpx;
-  margin: 0;
+  font-size: 24rpx;
   padding: 0;
   border: 0;
-  display: block;
-  font: normal normal normal 24rpx FontAwesome;
-  text-rendering: auto;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
 }
 
-.page-main > .operation > view > label {
-  margin: 0;
-  padding: 0;
-  border: 0;
+.page-main > .operation > .previous > label,
+.page-main > .operation > .next > label {
   display: block;
   font-size: 24rpx;
-  text-rendering: auto;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  width: 100%;
+  height: 30rpx;
+}
+
+.page-main > .operation > .previous > image,
+.page-main > .operation > .next > image {
+  width: 30rpx;
   height: 30rpx;
 }
 

@@ -5,18 +5,63 @@
 <view class="container" style='height: calc(100vh - 46px - {{statusBarHeight}}px);'>
   <view class="page-top"></view>
   <view class="page-main">
-    <scroll-view class="file-list"></scroll-view>
+    <scroll-view class="file-list" scroll-y="true" scroll-with-animation="true">
+      <view class="weui-grids pic-platform">
+        <view class="weui-grid pic-frame">
+          <image src="http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
+          <view class="cover">
+            <image src="http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
+            <label class="page-number">1</label>
+          </view>
+        </view>
+        <view class="weui-grid pic-frame">
+          <image src="http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
+          <view class="cover">
+            <image src="http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
+            <label class="page-number">2</label>
+          </view>
+        </view>
+        <view class="weui-grid pic-frame choose">
+          <image src="http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
+          <view class="cover">
+            <image src="http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
+            <label class="page-number">3</label>
+          </view>
+        </view>
+        <view class="weui-grid pic-frame">
+          <image src="http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
+          <view class="cover">
+            <image src="http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
+            <label class="page-number">4</label>
+          </view>
+        </view>
+        <view class="weui-grid pic-frame">
+          <image src="http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
+          <view class="cover">
+            <image src="http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
+            <label class="page-number">5</label>
+          </view>
+        </view>
+        <view class="weui-grid pic-frame">
+          <image src="http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
+          <view class="cover">
+            <image src="http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
+            <label class="page-number">6</label>
+          </view>
+        </view>
+      </view>
+    </scroll-view>
     <view class="operation">
       <button class="rechoose">重选文件</button>
       <button class="quit">退出投屏</button>
-      <view class="previous">
-        <icon class="fa fa-group">aaa</icon>
+      <button class="previous">
+        <image src="http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
         <label>上一页</label>
-      </view>
-      <view class="next">
-        <icon class="fa fa-group"></icon>
+      </button>
+      <button class="next">
+        <image src="http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
         <label>下一页</label>
-      </view>
+      </button>
     </view>
   </view>
   <view class="page-bottom"></view>
