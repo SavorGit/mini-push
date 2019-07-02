@@ -10,6 +10,7 @@ Page({
    */
   data: {
     statusBarHeight: getApp().globalData.statusBarHeight,
+    hiddens:true
   },
 
   /**
@@ -21,6 +22,7 @@ Page({
     var box_mac = options.box_mac;
     that.setData({
       box_mac:box_mac,
+      order_id:order_id,
     })
     var user_info = wx.getStorageSync('savor_user_info');
     openid = user_info.openid;
@@ -118,5 +120,45 @@ Page({
    */
   onShareAppMessage: function() {
 
+  },
+  loadMore:function(e){
+    var that = this;
+    var openid = e.target.dataset.openid;
+    page = page + 1;
+    var order_id = e.target.dataset.order_id;
+    that.setData({
+      hiddens: false,
+    })
+    wx.request({
+      url: api_url + '/Smallapp3/redpacket/redpacketDetail',
+      header: {
+        'content-type': 'application/json'
+      },
+      data: {
+        order_id: order_id,
+        openid: openid,
+        page: page,
+      },
+      success: function (res) {
+        if (res.data.code == 10000) {
+          that.setData({
+            packet_info: res.data.result.info,
+            receive_list: res.data.result.receive_list,
+            openid: openid,
+            hiddens: true,
+          })
+
+        } else {
+          wx.showToast({
+            title: '数据异常，请重试',
+            icon: 'none',
+            duration: 2000
+          })
+          that.setData({
+            hiddens: true,
+          })
+        }
+      }
+    })
   }
 })
