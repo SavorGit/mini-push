@@ -482,15 +482,26 @@ Page({
     app.controlChangeProgram(box_mac, change_type);
   },
   //文件投屏
-  chooseFiles:function(e){
-    wx.chooseMessageFile({
-      count: 1,
-      type: 'file',
-      success(res) {
-        // tempFilePath可以作为img标签的src属性显示图片
-        const tempFilePaths = res.tempFilePaths
+  forfiles:function(e){
+    var that = this;
+    var user_info = wx.getStorageSync("savor_user_info");
+    if (user_info.is_wx_auth != 3) {
+      that.setData({
+        showModal: true
+      })
+    } else {
+      var box_mac = e.currentTarget.dataset.boxmac;
+      var openid = e.currentTarget.dataset.openid;
+      //var is_open_simple = e.currentTarget.dataset.is_open_simple;
+      if (box_mac == '') {
+
+        app.scanQrcode();
+      } else {
+        wx.navigateTo({
+          url: '/pages/forscreen/forfile/files?box_mac=' + box_mac + '&openid=' + openid ,
+        })
       }
-    })
+    }
   },
   /**
    * 生命周期函数--监听页面初次渲染完成

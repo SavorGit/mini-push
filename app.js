@@ -291,5 +291,7 @@ App({
     oss_upload_url: 'https://image.littlehotspot.com',
     netty_url: 'https://netty-push.littlehotspot.com',
     oss_url: 'https://oss.littlehotspot.com',
+    oss_bucket:'redian-produce',
+    oss_access_key_id:'LTAITjXOpRHKflOX',
   }
 })
