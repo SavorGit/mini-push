@@ -28,6 +28,10 @@
   background-color: #fff;
 }
 
+.theme8 {
+  background-color: #999;
+}
+
 .theme-navigation {
   color: #fff;
   background-color: #05101a;
@@ -57,6 +61,11 @@
   background-color: #05101a;
 }
 
+.theme-button5 {
+  color: #fff;
+  background-color: #999;
+}
+
 .theme-font {
   color: #1cbeb6;
 }
@@ -71,4 +80,8 @@
 
 .theme-font3 {
   color: #999;
+}
+
+.theme-font4 {
+  color: #fff;
 }

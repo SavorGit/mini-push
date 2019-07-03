@@ -3,64 +3,69 @@
 <template is="navigationBarForTwoLevel" data='{{statusBarHeight: statusBarHeight,titleText:"热点投屏"}}' />
 
 <view class="container" style='height: calc(100vh - 46px - {{statusBarHeight}}px);'>
-  <view class="page-top"></view>
+  <view class="page-top theme2 flex_row_center font_666666_26">
+    <label>所有投屏文件，投屏结束后自动销毁</label>
+    <label class='link_relief'>
+      <navigator url="/pages/forscreen/relief">免责声明</navigator>
+    </label>
+  </view>
   <view class="page-main">
     <scroll-view class="file-list" scroll-y="true" scroll-with-animation="true">
       <view class="weui-grids pic-platform">
         <view class="weui-grid pic-frame">
           <image src="http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
-          <view class="cover">
-            <image src="http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
+          <view class="cover theme-font1">
+            <image src="/images/icon2/FFFFFF_right-triangle.png"></image>
             <label class="page-number">1</label>
           </view>
         </view>
         <view class="weui-grid pic-frame">
           <image src="http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
-          <view class="cover">
-            <image src="http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
+          <view class="cover theme-font1">
+            <image src="/images/icon2/FFFFFF_right-triangle.png"></image>
             <label class="page-number">2</label>
           </view>
         </view>
         <view class="weui-grid pic-frame choose">
           <image src="http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
-          <view class="cover">
-            <image src="http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
+          <view class="cover theme-font4">
+            <image src="/images/icon2/1CBEB6_right-triangle.png"></image>
             <label class="page-number">3</label>
           </view>
         </view>
         <view class="weui-grid pic-frame">
           <image src="http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
-          <view class="cover">
-            <image src="http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
+          <view class="cover theme-font1">
+            <image src="/images/icon2/FFFFFF_right-triangle.png"></image>
             <label class="page-number">4</label>
           </view>
         </view>
         <view class="weui-grid pic-frame">
           <image src="http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
-          <view class="cover">
-            <image src="http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
+          <view class="cover theme-font1">
+            <image src="/images/icon2/FFFFFF_right-triangle.png"></image>
             <label class="page-number">5</label>
           </view>
         </view>
         <view class="weui-grid pic-frame">
           <image src="http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
-          <view class="cover">
-            <image src="http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
+          <view class="cover theme-font1">
+            <image src="/images/icon2/FFFFFF_right-triangle.png"></image>
             <label class="page-number">6</label>
           </view>
         </view>
       </view>
     </scroll-view>
-    <view class="operation">
-      <button class="rechoose">重选文件</button>
-      <button class="quit">退出投屏</button>
-      <button class="previous">
-        <image src="http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
-        <label>上一页</label>
+    <view class="operation theme2">
+      <button class="rechoose theme-button">重选文件</button>
+      <button class="quit theme-button5">退出投屏</button>
+      <button class="previous theme-font4">
+        <image src="/images/icon2/FFFFFF_chevron-circle-left.png"></image>
+        <label>播放上一页</label>
       </button>
-      <button class="next">
-        <image src="http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
-        <label>下一页</label>
+      <button class="next theme-font4">
+        <image src="/images/icon2/FFFFFF_chevron-circle-right.png"></image>
+        <label>播放下一页</label>
       </button>
     </view>
   </view>
