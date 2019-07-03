@@ -84,10 +84,10 @@
 <bottomModal show="{{showMe}}" width="98%" height='420rpx' background-color='#FFFFFF' border-radius="20rpx" title-text='选择要投屏的文件' title-color="#666666" confirm-text='' confirm-color="#f6f3ee" cancel-text='取消' cancel-color='rgba(7,17,27,0.6)' bindcancel="modalCancel">
   <view style="width: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; color: blue;">
     <view style="width: 100%; border-top: 1rpx solid rgba(7,17,27,0.1);">
-      <button class="button_none" style="margin: 0;padding: 0; border: 0;border-radius: 0;">微信好友文件</button>
+      <button bindtap="wxFriendfiles" data-boxmac="{{box_mac}}" data-openid="{{openid}}"  class="button_none" style="margin: 0;padding: 0; border: 0;border-radius: 0;">微信好友文件</button>
     </view>
     <view style="width: 100%; border-top: 1rpx solid rgba(7,17,27,0.1); border-bottom: 10rpx solid rgba(7,17,27,0.05);">
-      <button class="button_none" style="margin: 0;padding: 0; border: 0;border-radius: 0;">手机中的文件</button>
+      <button bindtap="phonefiles" data-boxmac="{{box_mac}}" data-openid="{{openid}}" class="button_none" style="margin: 0;padding: 0; border: 0;border-radius: 0;">手机中的文件</button>
     </view>
   </view>
 </bottomModal>

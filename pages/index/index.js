@@ -493,6 +493,13 @@ Page({
       var box_mac = e.currentTarget.dataset.boxmac;
       var openid = e.currentTarget.dataset.openid;
       //var is_open_simple = e.currentTarget.dataset.is_open_simple;
+      /*if(box_mac==''){
+        app.scanQrcode();
+      }else {
+        that.setData({
+          showMe: true,
+        })
+      }*/
       if (box_mac == '') {
 
         app.scanQrcode();
@@ -501,7 +508,27 @@ Page({
           url: '/pages/forscreen/forfile/files?box_mac=' + box_mac + '&openid=' + openid ,
         })
       }
+      
     }
+  },
+  //微信好友文件
+  wxFriendfiles:function(e){
+    var that = this;
+    var box_mac = e.currentTarget.dataset.boxmac;
+    var openid = e.currentTarget.dataset.openid;
+    wx.navigateTo({
+      url: '/pages/forscreen/forfile/files?box_mac=' + box_mac + '&openid=' + openid,
+      success:function(e){
+        that.setData({
+          showMe:false
+        })
+      }
+    })
+  },
+  phonefiles:function(e){
+    var box_mac = e.currentTarget.dataset.boxmac;
+    var openid = e.currentTarget.dataset.openid;
+    console.log(e);
   },
   /**
    * 生命周期函数--监听页面初次渲染完成
