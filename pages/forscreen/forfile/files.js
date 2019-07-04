@@ -68,6 +68,12 @@ Page({
               wx.navigateBack({
                 delta: 1,
               })
+              var show_max_file_size = file_max_size / (1024*1024)
+              wx.showToast({
+                title: '投屏文件不可以超过' + show_max_file_size+'M',
+                icon: 'none',
+                duration: 2000
+              });
             } else {//如果文件未超过设置的最大值
                wx.request({
                 url: api_url + '/Smallapp/Index/getOssParams',
@@ -500,6 +506,12 @@ Page({
               wx.navigateBack({
                 delta: 1,
               })
+              var show_max_file_size = file_max_size / (1024 * 1024)
+              wx.showToast({
+                title: '投屏文件不可以超过' + show_max_file_size + 'M',
+                icon: 'none',
+                duration: 2000
+              });
             } else {//如果文件未超过设置的最大值
               wx.request({
                 url: api_url + '/Smallapp/Index/getOssParams',
@@ -515,8 +527,8 @@ Page({
             }
 
           }, fail: function (res) {
-            wx.navigateBack({
-              delta: 1,
+            that.setData({
+              hiddens: true,
             })
           }
         });
