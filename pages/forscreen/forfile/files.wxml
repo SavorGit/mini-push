@@ -12,58 +12,33 @@
   <view class="page-main">
     <scroll-view class="file-list" scroll-y="true" scroll-with-animation="true">
       <view class="weui-grids pic-platform">
-        <view class="weui-grid pic-frame">
-          <image src="http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
-          <view class="cover theme-font1">
-            <image src="/images/icon2/FFFFFF_right-triangle.png"></image>
-            <label class="page-number">1</label>
-          </view>
-        </view>
-        <view class="weui-grid pic-frame">
-          <image src="http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
-          <view class="cover theme-font1">
-            <image src="/images/icon2/FFFFFF_right-triangle.png"></image>
-            <label class="page-number">2</label>
-          </view>
-        </view>
-        <view class="weui-grid pic-frame choose">
-          <image src="http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
+        <block wx:for="{{file_imgs}}" wx:key="key" wx:for-item="bean" wx:for-index="index">
+        <view wx:if="{{pos_id == index}}" class="weui-grid pic-frame choose" bindtap="appointPic" data-forscreen_id="{{forscreen_id}}" data-forscreen_img="{{bean.oss_path}}" data-pos_id="{{index}}">
+          <image src="{{bean.img_path}}"></image>
           <view class="cover theme-font4">
             <image src="/images/icon2/1CBEB6_right-triangle.png"></image>
-            <label class="page-number">3</label>
+            <label class="page-number">{{index+1}}</label>
           </view>
         </view>
-        <view class="weui-grid pic-frame">
-          <image src="http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
+        <view wx:if="{{pos_id != index}}" class="weui-grid pic-frame" bindtap="appointPic" data-forscreen_id="{{forscreen_id}}" data-forscreen_img="{{bean.oss_path}}" data-pos_id="{{index}}">
+          <image src="{{bean.img_path}}"></image>
           <view class="cover theme-font1">
             <image src="/images/icon2/FFFFFF_right-triangle.png"></image>
-            <label class="page-number">4</label>
+            <label class="page-number">{{index+1}}</label>
           </view>
         </view>
-        <view class="weui-grid pic-frame">
-          <image src="http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
-          <view class="cover theme-font1">
-            <image src="/images/icon2/FFFFFF_right-triangle.png"></image>
-            <label class="page-number">5</label>
-          </view>
-        </view>
-        <view class="weui-grid pic-frame">
-          <image src="http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
-          <view class="cover theme-font1">
-            <image src="/images/icon2/FFFFFF_right-triangle.png"></image>
-            <label class="page-number">6</label>
-          </view>
-        </view>
+        </block>
+        
       </view>
     </scroll-view>
     <view class="operation theme2">
-      <button class="rechoose theme-button">重选文件</button>
-      <button class="quit theme-button5">退出投屏</button>
-      <button class="previous theme-font4">
+      <button class="rechoose theme-button" bindtap="reChooseFile">重选文件</button>
+      <button class="quit theme-button5" bindtap="exitForscreend" data-openid="{{openid}}" data-box_mac="{{box_mac}}">退出投屏</button>
+      <button class="previous theme-font4" bindtap="changePic" data-action="1" data-file_imgs="{{file_imgs}}" data-pos_id="{{pos_id}}" data-forscreen_id="{{forscreen_id}}" data-pic_count="{{img_num}}">
         <image src="/images/icon2/FFFFFF_chevron-circle-left.png"></image>
         <label>播放上一页</label>
       </button>
-      <button class="next theme-font4">
+      <button class="next theme-font4" bindtap="changePic" data-action="2" data-file_imgs="{{file_imgs}}" data-pos_id="{{pos_id}}" data-forscreen_id="{{forscreen_id}}" data-pic_count="{{img_num}}">
         <image src="/images/icon2/FFFFFF_chevron-circle-right.png"></image>
         <label>播放下一页</label>
       </button>
@@ -77,4 +52,7 @@
 <!-- 固定悬浮按钮组 -->
 <view wx:if="{{box_mac !=''}}">
   <template is="fixedSuspensionButtonGroup" />
+</view>
+<view class="body-view">
+  <loading hidden="{{hiddens}}" bindchange="loadingChange">投屏文件处理中，请稍后</loading>
 </view>

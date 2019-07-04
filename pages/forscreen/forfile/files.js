@@ -1,9 +1,9 @@
-// pages/forscreen/forfile/files.js
+const util = require('../../../utils/util.js')
 const app = getApp()
 var api_url = app.globalData.api_url;
 var openid;
 var box_mac;
-var page = 1;
+var is_open_simple;
 var policy;
 var signature;
 var oss_bucket = app.globalData.oss_bucket;
@@ -11,7 +11,7 @@ var oss_access_key_id = app.globalData.oss_access_key_id;
 var oss_upload_url = app.globalData.oss_upload_url;
 var mobile_brand = app.globalData.mobile_brand;
 var mobile_model = app.globalData.mobile_model;
-var pos_id = 1;   //当前播放的文件图片索引
+var pos_id = 0;   //当前播放的文件图片索引
 Page({
 
   /**
@@ -20,6 +20,7 @@ Page({
   data: {
     statusBarHeight: getApp().globalData.statusBarHeight,
     hiddens:true,
+    pos_id: pos_id
   },
 
   /**
@@ -30,9 +31,11 @@ Page({
     var that = this;
     openid  = options.openid;
     box_mac = options.box_mac;
+    is_open_simple = options.is_open_simple;
     that.setData({
       openid:openid,
       box_mac:box_mac,
+      is_open_simple: is_open_simple
     })
 
     wx.request({
@@ -41,6 +44,7 @@ Page({
         'Content-Type': 'application/json'
       },
       success: function (rst) {
+        console.log(rst);
         var file_exts = rst.data.result.file_exts;
         var file_max_size = rst.data.result.file_max_size;
         var polling_time = rst.data.result.polling_time;
@@ -52,6 +56,9 @@ Page({
           success(res) {
             // tempFilePath可以作为img标签的src属性显示图片
             console.log(res);
+            that.setData({
+              hiddens:false,
+            })
             var tempFilePaths = res.tempFilePaths
             var file_path = res.tempFiles[0].path;
             var file_size = res.tempFiles[0].size;
@@ -118,57 +125,140 @@ Page({
 
         
         if (res.progress == 100) {
-          //1、记录日志接口
-          //recordUploadFile(openid, box_mac,  timestamp, res_eup_time, postf_t, res.totalBytesSent);
-          //2、处理文件接口
-          dealFile(oss_file_path, file_name, file_size, polling_time, that) ;
+          //1、处理文件接口
+          var res_eup_time = (new Date()).valueOf();
+          dealFile(oss_file_path, file_name, file_size, polling_time, timestamp, res_eup_time, that) ;
         }
         
       });
 
     }
-    function dealFile(oss_file_path, file_name, file_size, polling_time,that) {
+    function dealFile(oss_file_path, file_name, file_size, polling_time, res_sup_time, res_eup_time,that) {
       console.log(polling_time);
       console.log(that);
       //首先调用文件处理接口  if 如果返回文件处理完成则结束  else 轮询调用获取文件处理的图片接口
       wx.request({
-        url: api_url + '/smallapp3/index/getConfig',   //调用文件处理接口？？？？？？
+        url: api_url + '/Smallapp3/Fileforscreen/fileconversion',   //调用文件处理接口
         headers: {
           'Content-Type': 'application/json'
         },
         data: {
-          oss_file_path: oss_file_path,
-          file_name: file_name,
-          file_size: file_size
+          action:30,
+          box_mac:box_mac,
+          mobile_brand:mobile_brand,
+          mobile_model:mobile_model,
+          openid:openid,
+          oss_addr: oss_file_path,
+          res_sup_time: res_sup_time,
+          res_eup_time: res_eup_time,
+          resource_name: file_name,
+          resource_size: file_size,
+          resource_type:3,
         }, 
         success: function (res) {
-          if (res.data.code == 1000000000000) {
-            that.setData({
-              files:res.data.result.files,
-            })
-          } else {
+          console.log(res);
+          if (res.data.code == 10000) {
+            var task_id = res.data.result.task_id;
+            var file_status = res.data.result.status;
+            var forscreen_id = res.data.result.forscreen_id;
 
-            var timer8_0 = setInterval(function () {
-              polling_time -= 1;
-              console.log(polling_time);
-              wx.request({
-                url: api_url + '/smallapp3/index/getConfig',  //轮询获取文件处理结果接口？？？？？？
-                headers: {
-                  'Content-Type': 'application/json'
-                },
-                success:function(res){
-                  clearInterval(timer8_0);
-                }
+            
+            if (file_status==2){//转换成功
+              that.setData({
+                file_imgs: res.data.result.imgs,
+                img_nums: res.data.result.img_num,
+                forscreen_id:forscreen_id,
+                hiddens:true,
               })
-              if (polling_time == 0) {
-                
-                clearInterval(timer8_0);
-              }
-            }, 1000);
+              forscreenFirstPic(res.data.result.imgs,forscreen_id);
+            } else if (file_status==1){  //转换中
+              console.log('转换中');
+              var timer8_0 = setInterval(function () {
+                polling_time -= 1;
+                console.log(polling_time);
+                wx.request({
+                  url: api_url + '/Smallapp3/Fileforscreen/getresult',  //轮询获取文件处理结果接口
+                  headers: {
+                    'Content-Type': 'application/json'
+                  },
+                  data:{
+                    task_id: task_id,
+                  },
+                  success: function (res) {
+                    console.log(res);
+                    if(res.data.code==10000){
+                      if (res.data.result.status==2){//文件转换成功
+                        that.setData({
+                          file_imgs: res.data.result.imgs,
+                          img_num: res.data.result.img_num,
+                          forscreen_id: forscreen_id,
+                          hiddens: true,
+                        })
+                        clearInterval(timer8_0);
+                        console.log('转换成功')
+                        forscreenFirstPic(res.data.result.imgs, forscreen_id);
+                      }else if(res.data.result.status==3 || res.data.result.status==0){//文件转换异常或者失败 提示投屏失败
+                        that.setData({
+                          hiddens: true,
+                        })
+                        clearInterval(timer8_0);
+                        wx.navigateBack({
+                          delta: 1,
+                        });
+                        wx.showToast({
+                          title: '投屏失败',
+                          icon: 'none',
+                          duration: 2000
+                        });
+                      }
+                    }
+                  }
+                })
+                if (polling_time == 0) {//超时 提示投屏失败
+                  clearInterval(timer8_0);
+                  wx.navigateBack({
+                    delta: 1,
+                  });
+                  wx.showToast({
+                    title: '投屏失败',
+                    icon: 'none',
+                    duration: 2000
+                  });
+                }
+              }, 1000);
+            }else if (file_status == 0 || file_status==3){//转换失败
+              that.setData({
+                hiddens: true,
+              })
+              wx.navigateBack({
+                delta: 1,
+              });
+              wx.showToast({
+                title: '投屏失败',
+                icon: 'none',
+                duration: 2000
+              });
+            }
+            
+          } else {//转换接口请求失败
+            that.setData({
+              hiddens: true,
+            })
+            wx.navigateBack({
+              delta: 1,
+            });
+            wx.showToast({
+              title: '投屏失败',
+              icon: 'none',
+              duration: 2000
+            });
+            
           }
         },
         fail:function(res){
-          
+          that.setData({
+            hiddens: true,
+          })
           wx.navigateBack({
             delta: 1,
           });
@@ -179,114 +269,171 @@ Page({
           });
         }
       })
-
     }
-    
-  },
-  /**
-   * @desc 加载更多 (分页)
-   */
-  loadMore:function(e){
+    /**
+     * @desc  文件转换成功 投屏第一张图片
+     */
+    function forscreenFirstPic(file_imgs, forscreen_id){
+      
+      var forscreen_img = file_imgs[0].oss_path;
+      var file_arr = forscreen_img.split('/');
+      var file_lenght = file_arr.length - 1;
+      var filename = file_arr[file_lenght];
+      var user_info = wx.getStorageSync("savor_user_info");
+      var avatarUrl = user_info.avatarUrl;
+      var nickName = user_info.nickName;
 
-    var that = this;
-    var openid = e.target.dataset.openid;
-    var forscreen_id = e.target.dataset.forscreen_id;
-    page = page + 1;
-    that.setData({
-      hiddens: false,
-    })
-    wx.request({
-      url: api_url + '/aa/bb/cc',       //分页接口
-      header: {
-        'Content-Type': 'application/json'
-      },
-      data:{
-        page:page,
-        forscreen_id:forscreen_id,
-      },success:function(res){
-        if(res.data.code==10000){
-          that.setData({
-            hiddens:true,
-            file_result:res.data.result.files,
-          })
-        }else {
-          that.setData({
-            hiddens: true
-          })
-        }
-      }
-    })
-  },
+      //单张图片投屏
+      wx.request({
+        url: api_url + '/Netty/Index/index',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        method: "POST",
+        data: {
+          box_mac: box_mac,
+          msg: '{ "action": 7,"resource_type":1, "url": "' + forscreen_img + '", "filename":"' + filename + '","openid":"' + openid + '","avatarUrl":"' + avatarUrl + '","nickName":"' + nickName + '","forscreen_id":"' + forscreen_id + '"}',
+        },
+        success: function (result) {
+          wx.request({
+            url: api_url + '/Smallapp21/index/recordForScreenPics',
+            header: {
+              'content-type': 'application/json'
+            },
+            data: {
+              forscreen_id: forscreen_id,
+              openid: openid,
+              box_mac: box_mac,
+              action: 31,
+              resource_type: 1,
+              mobile_brand: mobile_brand,
+              mobile_model: mobile_model,
+              imgs: '["' + forscreen_img + '"]'
+            },
+          });
+        },
+      })
+        
+      
+    }
+  },//onload结束
+  
   /**
    * @desc  上一张  下一张
    */
   changePic:function(e){
+    console.log(e);
     var that = this;
-    var pic_count = e.target.dataset.pic_count;          //当前图片总张数
-    pos_id        = e.target.dataset.pos_id;             //当前投屏图片索引
-    var action    = e.target.dataset.action;             //图片切换方式1：上一张 2：下一张
-    var forscreen_img = e.target.dataset.forscreen_img;  //图片的oss地址
-    var filename  = e.target.dataset.filename;           //文件名称
-    var forscreen_id = (new Date()).valueOf();           //投屏唯一标识
-    if(action==1){
-      if(pos_id>1){
-        pos_id -=1;
-      }else {
-        pos_id = 1;
+
+    var user_info = wx.getStorageSync("savor_user_info");
+    var avatarUrl = user_info.avatarUrl;
+    var nickName = user_info.nickName;
+
+    var pic_count = e.currentTarget.dataset.pic_count;          //当前图片总张数
+    pic_count     -=1;
+    pos_id        = e.currentTarget.dataset.pos_id;            //当前投屏图片索引
+    var action = e.currentTarget.dataset.action;             //图片切换方式1：上一张 2：下一张
+
+    var file_imgs = e.currentTarget.dataset.file_imgs;
+    var forscreen_id = e.currentTarget.dataset.forscreen_id;    //投屏唯一标识
+
+    if(pos_id ==0 && action==1){
+      wx.showToast({
+        title: '已经是第一张',
+        icon: 'none',
+        duration: 2000
+      });
+    } else if (pos_id == pic_count && action==2){
+      wx.showToast({
+        title: '已经是最后一张',
+        icon: 'none',
+        duration: 2000
+      });
+    }else {
+      if (action == 1) {
+        if (pos_id > 0) {
+          pos_id -= 1;
+        } else {
+          pos_id = 0;
+        }
+      } else if (action == 2) {
+        if (pos_id < pic_count) {
+          pos_id += 1;
+        } else {
+          pos_id = pic_count;
+        }
       }
-    }else if(action==2){
-      if(pos_id<pic_count){
-        pos_id +=1;
-      }else {
-        pos_id = pic_count;
+
+      for (var i = 0; i < file_imgs.length; i++) {
+        if (i == pos_id) {
+          var forscreen_img = file_imgs[i].oss_path;
+          var file_arr = forscreen_img.split('/');
+          var file_length = file_arr.length -1;
+          var filename = file_arr[file_length];
+          break;
+        }
       }
+
+      that.setData({
+        pos_id: pos_id
+      })
+
+
+
+      //单张图片投屏
+      wx.request({
+        url: api_url + '/Netty/Index/index',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        method: "POST",
+        data: {
+          box_mac: box_mac,
+          msg: '{ "action": 7,"resource_type":1, "url": "' + forscreen_img + '", "filename":"' + filename + '","openid":"' + openid + '","avatarUrl":"' + avatarUrl + '","nickName":"' + nickName + '","forscreen_id":"' + forscreen_id + '"}',
+        },
+        success: function (result) {
+          wx.request({
+            url: api_url + '/Smallapp21/index/recordForScreenPics',
+            header: {
+              'content-type': 'application/json'
+            },
+            data: {
+              forscreen_id: forscreen_id,
+              openid: openid,
+              box_mac: box_mac,
+              action: 31,
+              resource_type: 1,
+              mobile_brand: mobile_brand,
+              mobile_model: mobile_model,
+              imgs: '["' + forscreen_img + '"]'
+            },
+          });
+        },
+      })
     }
-    that.setData({
-      pos_id:pos_id
-    })
-    //单张图片投屏
-    wx.request({
-      url: api_url + '/Netty/Index/index',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      method: "POST",
-      data: {
-        box_mac: box_mac,
-        msg: '{ "action": 7,"resource_type":1, "url": "' + forscreen_img + '", "filename":"' + filename + '","openid":"' + openid + '","avatarUrl":"' + avatarUrl + '","nickName":"' + nickName + '","forscreen_id":"' + forscreen_id + '"}',
-      },
-      success: function (result) {
-        wx.request({
-          url: api_url + '/Smallapp21/index/recordForScreenPics',
-          header: {
-            'content-type': 'application/json'
-          },
-          data: {
-            forscreen_id: forscreen_id,
-            openid: openid,
-            box_mac: box_mac,
-            action: 31,
-            resource_type: 1,
-            mobile_brand: mobile_brand,
-            mobile_model: mobile_model,
-            imgs: '["' + forscreen_img + '"]'
-          },
-        });
-      },
-    })
+
+    
+    
   },
   /**
    * @desc 指定单张图片投屏
    */
   appointPic:function(e){
+    console.log(e);
     var that = this;
-    pos_id = e.target.dataset.pos_id;  //指定图片的索引
+    pos_id = e.currentTarget.dataset.pos_id;  //指定图片的索引
     that.setData({
       pos_id:pos_id,
     })
-    var forscreen_img = e.target.dataset.forscreen_img;  //图片的oss地址
-    var filename = e.target.dataset.filename;           //文件名称
-    var forscreen_id = (new Date()).valueOf();           //投屏唯一标识
+    var forscreen_img = e.currentTarget.dataset.forscreen_img;  //图片的oss地址
+    var filename = e.currentTarget.dataset.filename;            //文件名称
+    var forscreen_id = e.currentTarget.dataset.forscreen_id;    //投屏唯一标识
+    var user_info = wx.getStorageSync("savor_user_info");
+    var avatarUrl = user_info.avatarUrl;
+    var nickName = user_info.nickName;
+    var file_arr = forscreen_img.split('/');
+    var file_length = file_arr.length - 1;
+    var filename =  file_arr[file_length];
     //单张图片投屏
     wx.request({
       url: api_url + '/Netty/Index/index',
@@ -320,12 +467,14 @@ Page({
   },
   //重选文件
   reChooseFile:function(e){
+    var that = this;
     wx.request({
       url: api_url + '/smallapp3/index/getConfig',
       headers: {
         'Content-Type': 'application/json'
       },
       success: function (rst) {
+        console.log(rst);
         var file_exts = rst.data.result.file_exts;
         var file_max_size = rst.data.result.file_max_size;
         var polling_time = rst.data.result.polling_time;
@@ -337,6 +486,11 @@ Page({
           success(res) {
             // tempFilePath可以作为img标签的src属性显示图片
             console.log(res);
+            that.setData({
+              pos_id:0,
+              hiddens: false,
+              file_imgs:[],
+            })
             var tempFilePaths = res.tempFilePaths
             var file_path = res.tempFiles[0].path;
             var file_size = res.tempFiles[0].size;
@@ -403,57 +557,139 @@ Page({
 
 
         if (res.progress == 100) {
-          //1、记录日志接口
-          //recordUploadFile(openid, box_mac,  timestamp, res_eup_time, postf_t, res.totalBytesSent);
-          //2、处理文件接口
-          dealFile(oss_file_path, file_name, file_size, polling_time, that);
+          //1、处理文件接口
+          var res_eup_time = (new Date()).valueOf();
+          dealFile(oss_file_path, file_name, file_size, polling_time, timestamp, res_eup_time, that);
         }
 
       });
 
     }
-    function dealFile(oss_file_path, file_name, file_size, polling_time, that) {
+    function dealFile(oss_file_path, file_name, file_size, polling_time, res_sup_time, res_eup_time, that) {
       console.log(polling_time);
       console.log(that);
       //首先调用文件处理接口  if 如果返回文件处理完成则结束  else 轮询调用获取文件处理的图片接口
       wx.request({
-        url: api_url + '/smallapp3/index/getConfig',   //调用文件处理接口？？？？？？
+        url: api_url + '/Smallapp3/Fileforscreen/fileconversion',   //调用文件处理接口
         headers: {
           'Content-Type': 'application/json'
         },
         data: {
-          oss_file_path: oss_file_path,
-          file_name: file_name,
-          file_size: file_size
+          action: 30,
+          box_mac: box_mac,
+          mobile_brand: mobile_brand,
+          mobile_model: mobile_model,
+          openid: openid,
+          oss_addr: oss_file_path,
+          res_sup_time: res_sup_time,
+          res_eup_time: res_eup_time,
+          resource_name: file_name,
+          resource_size: file_size,
+          resource_type: 3,
         },
         success: function (res) {
-          if (res.data.code == 1000000000000) {
-            that.setData({
-              files: res.data.result.files,
-            })
-          } else {
+          console.log(res);
+          if (res.data.code == 10000) {
+            var task_id = res.data.result.task_id;
+            var file_status = res.data.result.status;
+            var forscreen_id = res.data.result.forscreen_id;
 
-            var timer8_0 = setInterval(function () {
-              polling_time -= 1;
-              console.log(polling_time);
-              wx.request({
-                url: api_url + '/smallapp3/index/getConfig',  //轮询获取文件处理结果接口？？？？？？
-                headers: {
-                  'Content-Type': 'application/json'
-                },
-                success: function (res) {
-                  clearInterval(timer8_0);
-                }
+
+            if (file_status == 2) {//转换成功
+              that.setData({
+                file_imgs: res.data.result.imgs,
+                img_nums: res.data.result.img_num,
+                forscreen_id: forscreen_id,
+                hiddens: true,
               })
-              if (polling_time == 0) {
+              forscreenFirstPic(res.data.result.imgs,forscreen_id);
+            } else if (file_status == 1) {  //转换中
+              console.log('转换中');
+              var timer8_0 = setInterval(function () {
+                polling_time -= 1;
+                console.log(polling_time);
+                wx.request({
+                  url: api_url + '/Smallapp3/Fileforscreen/getresult',  //轮询获取文件处理结果接口
+                  headers: {
+                    'Content-Type': 'application/json'
+                  },
+                  data: {
+                    task_id: task_id,
+                  },
+                  success: function (res) {
+                    console.log(res);
+                    if (res.data.code == 10000) {
+                      if (res.data.result.status == 2) {//文件转换成功
+                        that.setData({
+                          file_imgs: res.data.result.imgs,
+                          img_num: res.data.result.img_num,
+                          forscreen_id: forscreen_id,
+                          hiddens: true,
+                        })
+                        clearInterval(timer8_0);
+                        forscreenFirstPic(res.data.result.imgs, forscreen_id);
+                      } else if (res.data.result.status == 3 || res.data.result.status == 0) {//文件转换异常或者失败 提示投屏失败
+                        that.setData({
+                          hiddens: true,
+                        })
+                        clearInterval(timer8_0);
+                        wx.navigateBack({
+                          delta: 1,
+                        });
+                        wx.showToast({
+                          title: '投屏失败',
+                          icon: 'none',
+                          duration: 2000
+                        });
+                      }
+                    }
+                  }
+                })
+                if (polling_time == 0) {//超时 提示投屏失败
+                  clearInterval(timer8_0);
+                  wx.navigateBack({
+                    delta: 1,
+                  });
+                  wx.showToast({
+                    title: '投屏失败',
+                    icon: 'none',
+                    duration: 2000
+                  });
+                }
+              }, 1000);
+            } else if (file_status == 0 || file_status == 3) {//转换失败
+              that.setData({
+                hiddens: true,
+              })
+              wx.navigateBack({
+                delta: 1,
+              });
+              wx.showToast({
+                title: '投屏失败',
+                icon: 'none',
+                duration: 2000
+              });
+            }
 
-                clearInterval(timer8_0);
-              }
-            }, 1000);
+          } else {//转换接口请求失败
+            that.setData({
+              hiddens: true,
+            })
+            wx.navigateBack({
+              delta: 1,
+            });
+            wx.showToast({
+              title: '投屏失败',
+              icon: 'none',
+              duration: 2000
+            });
+
           }
         },
         fail: function (res) {
-
+          that.setData({
+            hiddens: true,
+          })
           wx.navigateBack({
             delta: 1,
           });
@@ -464,8 +700,133 @@ Page({
           });
         }
       })
+    }
+    /**
+     * @desc  文件转换成功 投屏第一张图片
+     */
+    function forscreenFirstPic(file_imgs, forscreen_id) {
+
+      var forscreen_img = file_imgs[0].oss_path;
+      var file_arr = forscreen_img.split('/');
+      var file_lenght = file_arr.length - 1;
+      var filename = file_arr[file_lenght];
+      var user_info = wx.getStorageSync("savor_user_info");
+      var avatarUrl = user_info.avatarUrl;
+      var nickName = user_info.nickName;
+
+      //单张图片投屏
+      wx.request({
+        url: api_url + '/Netty/Index/index',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        method: "POST",
+        data: {
+          box_mac: box_mac,
+          msg: '{ "action": 7,"resource_type":1, "url": "' + forscreen_img + '", "filename":"' + filename + '","openid":"' + openid + '","avatarUrl":"' + avatarUrl + '","nickName":"' + nickName + '","forscreen_id":"' + forscreen_id + '"}',
+        },
+        success: function (result) {
+          wx.request({
+            url: api_url + '/Smallapp21/index/recordForScreenPics',
+            header: {
+              'content-type': 'application/json'
+            },
+            data: {
+              forscreen_id: forscreen_id,
+              openid: openid,
+              box_mac: box_mac,
+              action: 31,
+              resource_type: 1,
+              mobile_brand: mobile_brand,
+              mobile_model: mobile_model,
+              imgs: '["' + forscreen_img + '"]'
+            },
+          });
+        },
+      })
+
 
     }
+  },
+  exitForscreend(e) {
+    var that = this;
+    openid = e.currentTarget.dataset.openid;
+    box_mac = e.currentTarget.dataset.boxmac;
+    var timestamp = (new Date()).valueOf();
+    wx.request({
+      url: api_url + '/Netty/Index/index',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      method: "POST",
+      data: {
+        box_mac: box_mac,
+        msg: '{ "action": 3,"openid":"' + openid + '"}',
+      },
+      success: function (res) {
+        wx.switchTab({
+          url: '/pages/index/index',
+        })
+        wx.showToast({
+          title: '退出成功',
+          icon: 'none',
+          duration: 2000
+        });
+      },
+      fail: function (res) {
+        wx.switchTab({
+          url: '/pages/index/index',
+        })
+        wx.showToast({
+          title: '网络异常，退出失败',
+          icon: 'none',
+          duration: 2000
+        })
+      }
+    })
+  },//退出投屏结束
+  //遥控呼大码
+  callQrCode: util.throttle(function (e) {
+    openid = e.currentTarget.dataset.openid;
+    box_mac = e.currentTarget.dataset.box_mac;
+    var qrcode_img = e.currentTarget.dataset.qrcode_img;
+    app.controlCallQrcode(openid, box_mac, qrcode_img);
+  }, 3000),//呼大码结束
+  //打开遥控器
+  openControl: function (e) {
+    var that = this;
+    var qrcode_url = api_url + '/Smallapp/index/getBoxQr?box_mac=' + box_mac + '&type=3';
+    that.setData({
+      showControl: true,
+      qrcode_img: qrcode_url
+    })
+  },
+  //关闭遥控
+  closeControl: function (e) {
+    var that = this;
+    that.setData({
+      showControl: false,
+    })
+
+  },
+  //遥控退出投屏
+  exitForscreen: function (e) {
+    openid = e.currentTarget.dataset.openid;
+    box_mac = e.currentTarget.dataset.box_mac;
+    app.controlExitForscreen(openid, box_mac);
+  },
+  //遥控调整音量
+  changeVolume: function (e) {
+    box_mac = e.currentTarget.dataset.box_mac;
+    var change_type = e.currentTarget.dataset.change_type;
+    app.controlChangeVolume(box_mac, change_type);
+
+  },
+  //遥控切换节目
+  changeProgram: function (e) {
+    box_mac = e.currentTarget.dataset.box_mac;
+    var change_type = e.currentTarget.dataset.change_type;
+    app.controlChangeProgram(box_mac, change_type);
   },
   /**
    * 生命周期函数--监听页面初次渲染完成

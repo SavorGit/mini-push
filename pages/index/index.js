@@ -492,7 +492,7 @@ Page({
     } else {
       var box_mac = e.currentTarget.dataset.boxmac;
       var openid = e.currentTarget.dataset.openid;
-      //var is_open_simple = e.currentTarget.dataset.is_open_simple;
+      var is_open_simple = e.currentTarget.dataset.is_open_simple;
       /*if(box_mac==''){
         app.scanQrcode();
       }else {
@@ -505,7 +505,7 @@ Page({
         app.scanQrcode();
       } else {
         wx.navigateTo({
-          url: '/pages/forscreen/forfile/files?box_mac=' + box_mac + '&openid=' + openid ,
+          url: '/pages/forscreen/forfile/files?box_mac=' + box_mac + '&openid=' + openid + "&is_open_simple=" + is_open_simple ,
         })
       }
       
