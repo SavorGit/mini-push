@@ -145,12 +145,7 @@ Page({
       });*/
 
     }
-    function sleep(delay) {
-      var start = (new Date()).getTime();
-      while ((new Date()).getTime() - start < delay) {
-        continue;
-      }
-    }
+    
     function dealFile(oss_file_path, file_name, file_size, polling_time, res_sup_time, res_eup_time,that) {
       console.log(polling_time);
       console.log(that);
@@ -594,12 +589,6 @@ Page({
 
       });*/
 
-    }
-    function sleep(delay) {
-      var start = (new Date()).getTime();
-      while ((new Date()).getTime() - start < delay) {
-        continue;
-      }
     }
     function dealFile(oss_file_path, file_name, file_size, polling_time, res_sup_time, res_eup_time, that) {
       console.log(polling_time);
