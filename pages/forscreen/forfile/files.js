@@ -336,7 +336,7 @@ Page({
   /**
    * @desc  上一张  下一张
    */
-  changePic:function(e){
+  changePic: util.throttle(function (e) {
     console.log(e);
     var that = this;
 
@@ -431,7 +431,7 @@ Page({
 
     
     
-  },
+  }, 500),//呼大码结束,
   /**
    * @desc 指定单张图片投屏
    */
