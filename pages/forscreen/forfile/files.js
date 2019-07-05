@@ -126,12 +126,14 @@ Page({
 
         },
         success: function (res) {
-          
+          console.log(res);
+          var res_eup_time = (new Date()).valueOf();
+          dealFile(oss_file_path, file_name, file_size, polling_time, timestamp, res_eup_time, that);
         }
       });
-      var res_eup_time = (new Date()).valueOf();
+      /*var res_eup_time = (new Date()).valueOf();
       upload_task.onProgressUpdate((res) => {
-
+        console.log(res);
         
         if (res.progress == 100) {
           sleep(3000);
@@ -140,7 +142,7 @@ Page({
           dealFile(oss_file_path, file_name, file_size, polling_time, timestamp, res_eup_time, that) ;
         }
         
-      });
+      });*/
 
     }
     function sleep(delay) {
@@ -575,10 +577,11 @@ Page({
 
         },
         success: function (res) {
-
+          var res_eup_time = (new Date()).valueOf();
+          dealFile(oss_file_path, file_name, file_size, polling_time, timestamp, res_eup_time, that);
         }
       });
-      var res_eup_time = (new Date()).valueOf();
+      /*var res_eup_time = (new Date()).valueOf();
       upload_task.onProgressUpdate((res) => {
 
 
@@ -589,7 +592,7 @@ Page({
           dealFile(oss_file_path, file_name, file_size, polling_time, timestamp, res_eup_time, that);
         }
 
-      });
+      });*/
 
     }
     function sleep(delay) {
