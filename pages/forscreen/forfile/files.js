@@ -20,7 +20,10 @@ Page({
   data: {
     statusBarHeight: getApp().globalData.statusBarHeight,
     hiddens:true,
-    pos_id: pos_id
+    pos_id: pos_id,
+    file_imgs:[],
+    forscreen_id:'',
+
   },
 
   /**
@@ -131,6 +134,7 @@ Page({
 
         
         if (res.progress == 100) {
+          sleep(3000);
           //1、处理文件接口
           var res_eup_time = (new Date()).valueOf();
           dealFile(oss_file_path, file_name, file_size, polling_time, timestamp, res_eup_time, that) ;
@@ -139,9 +143,17 @@ Page({
       });
 
     }
+    function sleep(delay) {
+      var start = (new Date()).getTime();
+      while ((new Date()).getTime() - start < delay) {
+        continue;
+      }
+    }
     function dealFile(oss_file_path, file_name, file_size, polling_time, res_sup_time, res_eup_time,that) {
       console.log(polling_time);
       console.log(that);
+      var index1 = file_name.lastIndexOf(".");
+      file_name  = file_name.substring(0,index1); 
       //首先调用文件处理接口  if 如果返回文件处理完成则结束  else 轮询调用获取文件处理的图片接口
       wx.request({
         url: api_url + '/Smallapp3/Fileforscreen/fileconversion',   //调用文件处理接口
@@ -283,8 +295,8 @@ Page({
       
       var forscreen_img = file_imgs[0].oss_path;
       var file_arr = forscreen_img.split('/');
-      var file_lenght = file_arr.length - 1;
-      var filename = file_arr[file_lenght];
+      var file_length = file_arr.length - 1;
+      var filename = file_arr[file_length - 2] + '_' + file_arr[file_length - 1] + '_' + file_arr[file_length];
       var user_info = wx.getStorageSync("savor_user_info");
       var avatarUrl = user_info.avatarUrl;
       var nickName = user_info.nickName;
@@ -334,13 +346,13 @@ Page({
     var user_info = wx.getStorageSync("savor_user_info");
     var avatarUrl = user_info.avatarUrl;
     var nickName = user_info.nickName;
-
-    var pic_count = e.currentTarget.dataset.pic_count;          //当前图片总张数
+    var file_imgs = e.currentTarget.dataset.file_imgs;
+    var pic_count = file_imgs.length;          //当前图片总张数
     pic_count     -=1;
     pos_id        = e.currentTarget.dataset.pos_id;            //当前投屏图片索引
     var action = e.currentTarget.dataset.action;             //图片切换方式1：上一张 2：下一张
 
-    var file_imgs = e.currentTarget.dataset.file_imgs;
+    
     var forscreen_id = e.currentTarget.dataset.forscreen_id;    //投屏唯一标识
 
     if(pos_id ==0 && action==1){
@@ -375,13 +387,15 @@ Page({
           var forscreen_img = file_imgs[i].oss_path;
           var file_arr = forscreen_img.split('/');
           var file_length = file_arr.length -1;
-          var filename = file_arr[file_length];
+          var filename = file_arr[file_length - 2] + '_' + file_arr[file_length - 1] + '_' + file_arr[file_length];
           break;
         }
       }
-
+      var target = 'list'+pos_id;
+      console.log(pos_id);
       that.setData({
-        pos_id: pos_id
+        pos_id: pos_id,
+        toView: target
       })
 
 
@@ -439,7 +453,7 @@ Page({
     var nickName = user_info.nickName;
     var file_arr = forscreen_img.split('/');
     var file_length = file_arr.length - 1;
-    var filename =  file_arr[file_length];
+    var filename = file_arr[file_length - 2] + '_' + file_arr[file_length - 1] + '_' + file_arr[file_length];
     //单张图片投屏
     wx.request({
       url: api_url + '/Netty/Index/index',
@@ -569,6 +583,7 @@ Page({
 
 
         if (res.progress == 100) {
+          sleep(3000);
           //1、处理文件接口
           var res_eup_time = (new Date()).valueOf();
           dealFile(oss_file_path, file_name, file_size, polling_time, timestamp, res_eup_time, that);
@@ -577,9 +592,17 @@ Page({
       });
 
     }
+    function sleep(delay) {
+      var start = (new Date()).getTime();
+      while ((new Date()).getTime() - start < delay) {
+        continue;
+      }
+    }
     function dealFile(oss_file_path, file_name, file_size, polling_time, res_sup_time, res_eup_time, that) {
       console.log(polling_time);
       console.log(that);
+      var index1 = file_name.lastIndexOf(".");
+      file_name = file_name.substring(0, index1); 
       //首先调用文件处理接口  if 如果返回文件处理完成则结束  else 轮询调用获取文件处理的图片接口
       wx.request({
         url: api_url + '/Smallapp3/Fileforscreen/fileconversion',   //调用文件处理接口
@@ -720,8 +743,8 @@ Page({
 
       var forscreen_img = file_imgs[0].oss_path;
       var file_arr = forscreen_img.split('/');
-      var file_lenght = file_arr.length - 1;
-      var filename = file_arr[file_lenght];
+      var file_length = file_arr.length - 1;
+      var filename = file_arr[file_length - 2] + '_' + file_arr[file_length - 1] + '_' + file_arr[file_length];
       var user_info = wx.getStorageSync("savor_user_info");
       var avatarUrl = user_info.avatarUrl;
       var nickName = user_info.nickName;
