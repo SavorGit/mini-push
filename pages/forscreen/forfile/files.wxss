@@ -38,16 +38,25 @@
 .page-main > .file-list .pic-platform {
   padding-left: 10rpx;
   padding-right: 10rpx;
+  text-align: center;
 }
 
 .page-main > .file-list .pic-platform > .pic-frame {
-  /* border: 1rpx solid red; */
+  width: calc((100vw - 40rpx) / 2);
+  height: calc((100vw - 40rpx) / 2);
   margin: 5rpx;
+  border: 2rpx solid #fff;
+}
+
+.page-main > .file-list .pic-platform > .pic-frame > image {
+  margin-top: 2rpx;
+  width: calc(100% - 4rpx);
+  height: calc(100% - 4rpx);
 }
 
 .page-main > .file-list .pic-platform > .pic-frame > .cover {
-  margin-top: -72rpx;
-  margin-left: 294rpx;
+  margin-top: -70rpx;
+  margin-left: 290rpx;
 }
 
 .page-main > .file-list .pic-platform > .pic-frame > .cover > image {
