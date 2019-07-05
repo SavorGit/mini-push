@@ -791,8 +791,8 @@ Page({
         msg: '{ "action": 3,"openid":"' + openid + '"}',
       },
       success: function (res) {
-        wx.switchTab({
-          url: '/pages/index/index',
+        wx.navigateBack({
+          delta:1
         })
         wx.showToast({
           title: '退出成功',
