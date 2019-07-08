@@ -31,7 +31,7 @@ Page({
    */
   onLoad: function (options) {
 
-    var that;
+    var that = this;
     var user_info = wx.getStorageSync("savor_user_info");
     openid = user_info.openid;
     box_mac = options.box_mac;
@@ -407,7 +407,7 @@ Page({
   //重选文件
   reChooseFile: function (e) {
     var that = this;
-    
+
    
   },
   //退出投屏
