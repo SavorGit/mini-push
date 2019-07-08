@@ -30,7 +30,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    console.log(options);
     var that = this;
     var user_info = wx.getStorageSync("savor_user_info");
     openid = user_info.openid;
@@ -39,7 +39,8 @@ Page({
     that.setData({
       openid: openid,
       box_mac: box_mac,
-      is_open_simple: is_open_simple
+      is_open_simple: is_open_simple,
+      hiddens:false,
     })
 
     var oss_file_path = options.oss_addr;
@@ -56,6 +57,7 @@ Page({
       },
       success: function (rst) {
         var file_max_size = rst.data.result.file_max_size;
+        var polling_time = rst.data.result.polling_time;
         if (file_size >= file_max_size) {//如果文件超过最大配置大小 不可投屏
           wx.navigateBack({
             delta: 1,

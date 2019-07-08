@@ -1,2 +1,2 @@
 <!--pages/forscreen/forfile/h5files.wxml-->
-<text>pages/forscreen/forfile/h5files.wxml</text>
+<web-view src=' http://devp.mobile.littlehotspot.com/h5/fileforscreen/launch_file.html?box_mac=00226D655202&mobile_brand=devtools&mobile_model=iPhone%207%20Plus&openid=ofYZG4yZJHaV2h3lJHG5wOB9MzxE'></web-view>

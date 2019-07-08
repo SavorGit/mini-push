@@ -60,8 +60,8 @@
       </view>   -->
       <!-- <view bindtap='chooseFiles'>
         <image src='/images/icon2/FFFFFF_history.png'></image>
-        <navigator url=""><label>文件投屏</label></navigator>
-      </view> -->
+        <navigator url="/pages/forscreen/forfile/h5files"><label>文件投屏</label></navigator>
+      </view>  -->
     </view>
   </view>
   <template is="wxAuthLogin" data='{{show: showModal}}' />
