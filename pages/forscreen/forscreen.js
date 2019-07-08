@@ -52,7 +52,7 @@ Page({
               success: function (e) {
                 
                 wx.showToast({
-                  title: '二维码异常',
+                  title: '二维码已过期',
                   icon: 'none',
                   duration: 2000
                 });
@@ -82,7 +82,7 @@ Page({
               url: '../index/index',
               success: function (e) {
                 wx.showToast({
-                  title: '二维码异常',
+                  title: '二维码已过期',
                   icon: 'none',
                   duration: 2000
                 });
