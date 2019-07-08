@@ -47,7 +47,7 @@ Page({
             var scene = res.data.result.content;
             linkHotelBox(scene);
           }else {
-            wx.switchTab({
+            /*wx.switchTab({
               url: '../index/index',
               success: function (e) {
                 
@@ -57,6 +57,14 @@ Page({
                   duration: 2000
                 });
               }
+            });*/
+            wx.reLaunch({
+              url: '/pages/index/index',
+            })
+            wx.showToast({
+              title: '二维码已过期',
+              icon: 'none',
+              duration: 2000
             });
           }
         }
@@ -78,7 +86,7 @@ Page({
             var scene = res.data.result.content;
             linkHotelBox(scene);
           }else {
-            wx.switchTab({
+            /*wx.switchTab({
               url: '../index/index',
               success: function (e) {
                 wx.showToast({
@@ -87,6 +95,14 @@ Page({
                   duration: 2000
                 });
               }
+            });*/
+            wx.reLaunch({
+              url: '/pages/index/index',
+            })
+            wx.showToast({
+              title: '二维码已过期',
+              icon: 'none',
+              duration: 2000
             });
           }
         }
@@ -128,7 +144,7 @@ Page({
                       'content-type': 'application/json'
                     },
                   })
-                  wx.switchTab({
+                  /*wx.switchTab({
                     url: '../index/index',
                     success: function (e) {
                       var page = getCurrentPages().pop();
@@ -140,6 +156,14 @@ Page({
                         duration: 2000
                       });
                     }
+                  });*/
+                  wx.reLaunch({
+                    url: '/pages/index/index',
+                  })
+                  wx.showToast({
+                    title: '二维码已过期',
+                    icon: 'none',
+                    duration: 2000
                   });
                   return false;
                 }
