@@ -1,4 +1,10 @@
 // pages/forscreen/forfile/h5files.js
+const util = require('../../../utils/util.js')
+const app = getApp()
+var api_url = app.globalData.api_url;
+var openid;
+var box_mac;
+var is_open_simple;
 Page({
 
   /**
@@ -12,7 +18,15 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    var that = this;
+    openid = options.openid;
+    box_mac = options.box_mac;
+    is_open_simple = options.is_open_simple;
+    that.setData({
+      openid : openid,
+      box_mac:box_mac,
+      is_open_simple:is_open_simple
+    })
   },
 
   /**
