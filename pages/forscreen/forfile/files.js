@@ -68,12 +68,16 @@ Page({
             var file_name = res.tempFiles[0].name;
             
             if (file_size >= file_max_size) {//如果文件超过最大配置大小 不可投屏
-              wx.navigateBack({
-                delta: 1,
+              that.setData({
+                hiddens:true,
               })
-              var show_max_file_size = file_max_size / (1024*1024)
+              var show_max_file_size = file_max_size / (1024 * 1024)
+              
+              wx.switchTab({
+                url: '/pages/index/index',
+              })
               wx.showToast({
-                title: '投屏文件不可以超过' + show_max_file_size+'M',
+                title: '投屏文件不可以超过' + show_max_file_size + 'M',
                 icon: 'none',
                 duration: 2000
               });
@@ -217,9 +221,9 @@ Page({
                           hiddens: true,
                         })
                         clearInterval(timer8_0);
-                        wx.navigateBack({
-                          delta: 1,
-                        });
+                        wx.switchTab({
+                          url: '/pages/index/index',
+                        })
                         wx.showToast({
                           title: '投屏失败',
                           icon: 'none',
@@ -231,9 +235,9 @@ Page({
                 })
                 if (polling_time == 0) {//超时 提示投屏失败
                   clearInterval(timer8_0);
-                  wx.navigateBack({
-                    delta: 1,
-                  });
+                  wx.switchTab({
+                    url: '/pages/index/index',
+                  })
                   wx.showToast({
                     title: '投屏失败',
                     icon: 'none',
@@ -245,9 +249,9 @@ Page({
               that.setData({
                 hiddens: true,
               })
-              wx.navigateBack({
-                delta: 1,
-              });
+              wx.switchTab({
+                url: '/pages/index/index',
+              })
               wx.showToast({
                 title: '投屏失败',
                 icon: 'none',
@@ -259,9 +263,9 @@ Page({
             that.setData({
               hiddens: true,
             })
-            wx.navigateBack({
-              delta: 1,
-            });
+            wx.switchTab({
+              url: '/pages/index/index',
+            })
             wx.showToast({
               title: '投屏失败',
               icon: 'none',
@@ -274,9 +278,9 @@ Page({
           that.setData({
             hiddens: true,
           })
-          wx.navigateBack({
-            delta: 1,
-          });
+          wx.switchTab({
+            url: '/pages/index/index',
+          })
           wx.showToast({
             title: '投屏失败',
             icon: 'none',
@@ -514,8 +518,8 @@ Page({
             var file_name = res.tempFiles[0].name;
 
             if (file_size >= file_max_size) {//如果文件超过最大配置大小 不可投屏
-              wx.navigateBack({
-                delta: 1,
+              wx.switchTab({
+                url: '/pages/index/index',
               })
               var show_max_file_size = file_max_size / (1024 * 1024)
               wx.showToast({
@@ -660,9 +664,9 @@ Page({
                           hiddens: true,
                         })
                         clearInterval(timer8_0);
-                        wx.navigateBack({
-                          delta: 1,
-                        });
+                        wx.switchTab({
+                          url: '/pages/index/index',
+                        })
                         wx.showToast({
                           title: '投屏失败',
                           icon: 'none',
@@ -674,9 +678,9 @@ Page({
                 })
                 if (polling_time == 0) {//超时 提示投屏失败
                   clearInterval(timer8_0);
-                  wx.navigateBack({
-                    delta: 1,
-                  });
+                  wx.switchTab({
+                    url: '/pages/index/index',
+                  })
                   wx.showToast({
                     title: '投屏失败',
                     icon: 'none',
@@ -688,9 +692,9 @@ Page({
               that.setData({
                 hiddens: true,
               })
-              wx.navigateBack({
-                delta: 1,
-              });
+              wx.switchTab({
+                url: '/pages/index/index',
+              })
               wx.showToast({
                 title: '投屏失败',
                 icon: 'none',
@@ -702,9 +706,9 @@ Page({
             that.setData({
               hiddens: true,
             })
-            wx.navigateBack({
-              delta: 1,
-            });
+            wx.switchTab({
+              url: '/pages/index/index',
+            })
             wx.showToast({
               title: '投屏失败',
               icon: 'none',
@@ -717,9 +721,9 @@ Page({
           that.setData({
             hiddens: true,
           })
-          wx.navigateBack({
-            delta: 1,
-          });
+          wx.switchTab({
+            url: '/pages/index/index',
+          })
           wx.showToast({
             title: '投屏失败',
             icon: 'none',
@@ -792,8 +796,8 @@ Page({
         msg: '{"action": 3,"openid":"' + openid + '"}',
       },
       success: function (res) {
-        wx.navigateBack({
-          delta: 1,
+        wx.switchTab({
+          url: '/pages/index/index',
         })
         wx.showToast({
           title: '退出成功',
