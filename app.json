@@ -36,7 +36,8 @@
     "pages/thematic/money_blessing/receive_h5",
     "pages/thematic/money_blessing/receive_result",
     "pages/forscreen/forfile/files",
-    "pages/forscreen/forfile/h5files"
+    "pages/forscreen/forfile/h5files",
+    "pages/forscreen/forfile/h5files_result"
   ],
   "permission": {
     "scope.userLocation": {
