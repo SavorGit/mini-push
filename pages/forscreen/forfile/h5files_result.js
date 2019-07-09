@@ -109,6 +109,8 @@ Page({
               that.setData({
                 file_imgs: res.data.result.imgs,
                 img_nums: res.data.result.img_num,
+                oss_host: res.data.result.oss_host,
+                oss_suffix: res.data.result.suffix,
                 forscreen_id: forscreen_id,
                 hiddens: true,
               })
@@ -133,6 +135,8 @@ Page({
                         that.setData({
                           file_imgs: res.data.result.imgs,
                           img_num: res.data.result.img_num,
+                          oss_host: res.data.result.oss_host,
+                          oss_suffix: res.data.result.suffix,
                           forscreen_id: forscreen_id,
                           hiddens: true,
                         })
@@ -217,7 +221,7 @@ Page({
      */
     function forscreenFirstPic(file_imgs, forscreen_id) {
 
-      var forscreen_img = file_imgs[0].oss_path;
+      var forscreen_img = file_imgs[0];
       var file_arr = forscreen_img.split('/');
       var file_length = file_arr.length - 1;
       var filename = file_arr[file_length - 2] + '_' + file_arr[file_length - 1] + '_' + file_arr[file_length];
@@ -305,7 +309,7 @@ Page({
 
       for (var i = 0; i < file_imgs.length; i++) {
         if (i == pos_id) {
-          var forscreen_img = file_imgs[i].oss_path;
+          var forscreen_img = file_imgs[i];
           var file_arr = forscreen_img.split('/');
           var file_length = file_arr.length - 1;
           var filename = file_arr[file_length - 2] + '_' + file_arr[file_length - 1] + '_' + file_arr[file_length];

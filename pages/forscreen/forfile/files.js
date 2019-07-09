@@ -186,6 +186,8 @@ Page({
               that.setData({
                 file_imgs: res.data.result.imgs,
                 img_nums: res.data.result.img_num,
+                oss_host: res.data.result.oss_host,
+                oss_suffix: res.data.result.suffix,
                 forscreen_id:forscreen_id,
                 hiddens:true,
               })
@@ -210,6 +212,8 @@ Page({
                         that.setData({
                           file_imgs: res.data.result.imgs,
                           img_num: res.data.result.img_num,
+                          oss_host:res.data.result.oss_host,
+                          oss_suffix: res.data.result.suffix,
                           forscreen_id: forscreen_id,
                           hiddens: true,
                         })
@@ -294,7 +298,7 @@ Page({
      */
     function forscreenFirstPic(file_imgs, forscreen_id){
       
-      var forscreen_img = file_imgs[0].oss_path;
+      var forscreen_img = file_imgs[0];
       var file_arr = forscreen_img.split('/');
       var file_length = file_arr.length - 1;
       var filename = file_arr[file_length - 2] + '_' + file_arr[file_length - 1] + '_' + file_arr[file_length];
@@ -385,7 +389,7 @@ Page({
 
       for (var i = 0; i < file_imgs.length; i++) {
         if (i == pos_id) {
-          var forscreen_img = file_imgs[i].oss_path;
+          var forscreen_img = file_imgs[i];
           var file_arr = forscreen_img.split('/');
           var file_length = file_arr.length -1;
           var filename = file_arr[file_length - 2] + '_' + file_arr[file_length - 1] + '_' + file_arr[file_length];
@@ -510,7 +514,7 @@ Page({
             that.setData({
               pos_id:0,
               hiddens: false,
-              file_imgs:[],
+              
             })
             var tempFilePaths = res.tempFilePaths
             var file_path = res.tempFiles[0].path;
@@ -518,8 +522,11 @@ Page({
             var file_name = res.tempFiles[0].name;
 
             if (file_size >= file_max_size) {//如果文件超过最大配置大小 不可投屏
-              wx.switchTab({
-                url: '/pages/index/index',
+              // wx.switchTab({
+              //   url: '/pages/index/index',
+              // })
+              that.setData({
+                hiddens: true,
               })
               var show_max_file_size = file_max_size / (1024 * 1024)
               wx.showToast({
@@ -630,6 +637,8 @@ Page({
               that.setData({
                 file_imgs: res.data.result.imgs,
                 img_nums: res.data.result.img_num,
+                oss_host: res.data.result.oss_host,
+                oss_suffix: res.data.result.suffix,
                 forscreen_id: forscreen_id,
                 hiddens: true,
               })
@@ -653,6 +662,8 @@ Page({
                       if (res.data.result.status == 2) {//文件转换成功
                         that.setData({
                           file_imgs: res.data.result.imgs,
+                          oss_host: res.data.result.oss_host,
+                          oss_suffix: res.data.result.suffix,
                           img_num: res.data.result.img_num,
                           forscreen_id: forscreen_id,
                           hiddens: true,
@@ -737,7 +748,7 @@ Page({
      */
     function forscreenFirstPic(file_imgs, forscreen_id) {
 
-      var forscreen_img = file_imgs[0].oss_path;
+      var forscreen_img = file_imgs[0];
       var file_arr = forscreen_img.split('/');
       var file_length = file_arr.length - 1;
       var filename = file_arr[file_length - 2] + '_' + file_arr[file_length - 1] + '_' + file_arr[file_length];

@@ -13,15 +13,15 @@
     <scroll-view class="file-list" scroll-into-view="{{toView}}" scroll-y="true" scroll-with-animation="true">
       <view class="weui-grids pic-platform">
         <block wx:for="{{file_imgs}}" wx:key="key" wx:for-item="bean" wx:for-index="index">
-        <view id="list{{index}}" wx:if="{{pos_id == index}}" class="weui-grid pic-frame choose" bindtap="appointPic" data-forscreen_id="{{forscreen_id}}" data-forscreen_img="{{bean.oss_path}}" data-pos_id="{{index}}">
-          <image src="{{bean.img_path}}"></image>
+        <view id="list{{index}}" wx:if="{{pos_id == index}}" class="weui-grid pic-frame choose" bindtap="appointPic" data-forscreen_id="{{forscreen_id}}" data-forscreen_img="{{bean}}" data-pos_id="{{index}}">
+          <image src="{{oss_host}}/{{bean}}{{oss_oss_suffix}}"></image>
           <view class="cover theme-font4">
             <image src="/images/icon2/1CBEB6_right-triangle.png"></image>
             <label class="page-number">{{index+1}}</label>
           </view>
         </view>
-        <view wx:if="{{pos_id != index}}" class="weui-grid pic-frame" bindtap="appointPic" data-forscreen_id="{{forscreen_id}}" data-forscreen_img="{{bean.oss_path}}" data-pos_id="{{index}}">
-          <image src="{{bean.img_path}}"></image>
+        <view wx:if="{{pos_id != index}}" class="weui-grid pic-frame" bindtap="appointPic" data-forscreen_id="{{forscreen_id}}" data-forscreen_img="{{bean}}" data-pos_id="{{index}}">
+          <image src="{{oss_host}}/{{bean}}{{oss_oss_suffix}}"></image>
           <view class="cover theme-font1">
             <image src="/images/icon2/FFFFFF_right-triangle.png"></image>
             <label class="page-number">{{index+1}}</label>
