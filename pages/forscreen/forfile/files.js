@@ -47,18 +47,18 @@ Page({
         'Content-Type': 'application/json'
       },
       success: function (rst) {
-        console.log(rst);
+        //console.log(rst);
         var file_exts = rst.data.result.file_exts;
         var file_max_size = rst.data.result.file_max_size;
         var polling_time = rst.data.result.polling_time;
-        console.log(rst);
+        //console.log(rst);
         wx.chooseMessageFile({
           count: 1,
           type: 'file',
           extension: file_exts,
           success(res) {
             // tempFilePath可以作为img标签的src属性显示图片
-            console.log(res);
+            //console.log(res);
             that.setData({
               hiddens:false,
             })
@@ -113,7 +113,7 @@ Page({
       var postf_t = file_path.substring(index1, index2);//后缀名
       var timestamp = (new Date()).valueOf();
       var oss_file_path = "forscreen/resource/" + timestamp + postf_t;
-      console.log(timestamp);
+      //console.log(timestamp);
       var upload_task = wx.uploadFile({
         url: oss_upload_url,
         filePath: file_path,
@@ -130,29 +130,17 @@ Page({
 
         },
         success: function (res) {
-          console.log(res);
+          //console.log(res);
           var res_eup_time = (new Date()).valueOf();
           dealFile(oss_file_path, file_name, file_size, polling_time, timestamp, res_eup_time, that);
         }
       });
-      /*var res_eup_time = (new Date()).valueOf();
-      upload_task.onProgressUpdate((res) => {
-        console.log(res);
-        
-        if (res.progress == 100) {
-          sleep(3000);
-          //1、处理文件接口
-          var res_eup_time = (new Date()).valueOf();
-          dealFile(oss_file_path, file_name, file_size, polling_time, timestamp, res_eup_time, that) ;
-        }
-        
-      });*/
-
+      
     }
     
     function dealFile(oss_file_path, file_name, file_size, polling_time, res_sup_time, res_eup_time,that) {
-      console.log(polling_time);
-      console.log(that);
+      //console.log(polling_time);
+      //console.log(that);
       var index1 = file_name.lastIndexOf(".");
       file_name  = file_name.substring(0,index1); 
       //首先调用文件处理接口  if 如果返回文件处理完成则结束  else 轮询调用获取文件处理的图片接口
@@ -175,7 +163,7 @@ Page({
           resource_type:3,
         }, 
         success: function (res) {
-          console.log(res);
+          //console.log(res);
           if (res.data.code == 10000) {
             var task_id = res.data.result.task_id;
             var file_status = res.data.result.status;
@@ -193,10 +181,10 @@ Page({
               })
               forscreenFirstPic(res.data.result.imgs,forscreen_id);
             } else if (file_status==1){  //转换中
-              console.log('转换中');
+              //console.log('转换中');
               var timer8_0 = setInterval(function () {
                 polling_time -= 1;
-                console.log(polling_time);
+                //console.log(polling_time);
                 wx.request({
                   url: api_url + '/Smallapp3/Fileforscreen/getresult',  //轮询获取文件处理结果接口
                   headers: {
@@ -206,7 +194,7 @@ Page({
                     task_id: task_id,
                   },
                   success: function (res) {
-                    console.log(res);
+                    //console.log(res);
                     if(res.data.code==10000){
                       if (res.data.result.status==2){//文件转换成功
                         that.setData({
@@ -218,7 +206,7 @@ Page({
                           hiddens: true,
                         })
                         clearInterval(timer8_0);
-                        console.log('转换成功')
+                        //console.log('转换成功')
                         forscreenFirstPic(res.data.result.imgs, forscreen_id);
                       }else if(res.data.result.status==3 || res.data.result.status==0){//文件转换异常或者失败 提示投屏失败
                         that.setData({
@@ -345,7 +333,7 @@ Page({
    * @desc  上一张  下一张
    */
   changePic: util.throttle(function (e) {
-    console.log(e);
+    //console.log(e);
     var that = this;
 
     var user_info = wx.getStorageSync("savor_user_info");
@@ -397,7 +385,7 @@ Page({
         }
       }
       var target = 'list'+pos_id;
-      console.log(pos_id);
+      //console.log(pos_id);
       that.setData({
         pos_id: pos_id,
         toView: target
@@ -444,7 +432,7 @@ Page({
    * @desc 指定单张图片投屏
    */
   appointPic:function(e){
-    console.log(e);
+    //console.log(e);
     var that = this;
     pos_id = e.currentTarget.dataset.pos_id;  //指定图片的索引
     that.setData({
@@ -499,18 +487,18 @@ Page({
         'Content-Type': 'application/json'
       },
       success: function (rst) {
-        console.log(rst);
+        //console.log(rst);
         var file_exts = rst.data.result.file_exts;
         var file_max_size = rst.data.result.file_max_size;
         var polling_time = rst.data.result.polling_time;
-        console.log(rst);
+        //console.log(rst);
         wx.chooseMessageFile({
           count: 1,
           type: 'file',
           extension: file_exts,
           success(res) {
             // tempFilePath可以作为img标签的src属性显示图片
-            console.log(res);
+            //console.log(res);
             that.setData({
               pos_id:0,
               hiddens: false,
@@ -566,7 +554,7 @@ Page({
       var postf_t = file_path.substring(index1, index2);//后缀名
       var timestamp = (new Date()).valueOf();
       var oss_file_path = "forscreen/resource/" + timestamp + postf_t;
-      console.log(timestamp);
+      //console.log(timestamp);
       var upload_task = wx.uploadFile({
         url: oss_upload_url,
         filePath: file_path,
@@ -602,8 +590,8 @@ Page({
 
     }
     function dealFile(oss_file_path, file_name, file_size, polling_time, res_sup_time, res_eup_time, that) {
-      console.log(polling_time);
-      console.log(that);
+      //console.log(polling_time);
+      //console.log(that);
       var index1 = file_name.lastIndexOf(".");
       file_name = file_name.substring(0, index1); 
       //首先调用文件处理接口  if 如果返回文件处理完成则结束  else 轮询调用获取文件处理的图片接口
@@ -626,7 +614,7 @@ Page({
           resource_type: 3,
         },
         success: function (res) {
-          console.log(res);
+          //console.log(res);
           if (res.data.code == 10000) {
             var task_id = res.data.result.task_id;
             var file_status = res.data.result.status;
@@ -644,10 +632,10 @@ Page({
               })
               forscreenFirstPic(res.data.result.imgs,forscreen_id);
             } else if (file_status == 1) {  //转换中
-              console.log('转换中');
+              //console.log('转换中');
               var timer8_0 = setInterval(function () {
                 polling_time -= 1;
-                console.log(polling_time);
+                //console.log(polling_time);
                 wx.request({
                   url: api_url + '/Smallapp3/Fileforscreen/getresult',  //轮询获取文件处理结果接口
                   headers: {
@@ -657,7 +645,7 @@ Page({
                     task_id: task_id,
                   },
                   success: function (res) {
-                    console.log(res);
+                    //console.log(res);
                     if (res.data.code == 10000) {
                       if (res.data.result.status == 2) {//文件转换成功
                         that.setData({
