@@ -110,7 +110,7 @@ Page({
                 file_imgs: res.data.result.imgs,
                 img_nums: res.data.result.img_num,
                 oss_host: res.data.result.oss_host,
-                oss_suffix: res.data.result.suffix,
+                oss_suffix: res.data.result.oss_suffix,
                 forscreen_id: forscreen_id,
                 hiddens: true,
               })
@@ -136,7 +136,7 @@ Page({
                           file_imgs: res.data.result.imgs,
                           img_num: res.data.result.img_num,
                           oss_host: res.data.result.oss_host,
-                          oss_suffix: res.data.result.suffix,
+                          oss_suffix: res.data.result.oss_suffix,
                           forscreen_id: forscreen_id,
                           hiddens: true,
                         })
