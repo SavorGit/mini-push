@@ -231,9 +231,9 @@ Page({
                     url: '/pages/index/index',
                   })
                   wx.showToast({
-                    title: '投屏失败',
+                    title: '文件页码过多，投屏失败',
                     icon: 'none',
-                    duration: 2000
+                    duration: 3000
                   });
                 }
               }, 1000);
