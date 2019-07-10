@@ -32,48 +32,114 @@ Page({
   onLoad: function (options) {
     console.log(options);
     var that = this;
+    var pa_openid  = options.openid;
+    var pa_box_mac = options.box_mac;
     var user_info = wx.getStorageSync("savor_user_info");
     openid = user_info.openid;
-    box_mac = options.box_mac;
-    is_open_simple = options.is_open_simple;
-    that.setData({
-      openid: openid,
-      box_mac: box_mac,
-      is_open_simple: is_open_simple,
-      hiddens:false,
-    })
+    console.log('1111');
+    if(openid !=pa_openid){
+      wx.navigateBack({
+        delta: 1,
+      })
+      wx.showToast({
+        title: '用户校验失败',
+        icon: 'none',
+        duration: 2000
+      });
+    }else {
+      box_mac = options.box_mac;
+      is_open_simple = options.is_open_simple;
+      that.setData({
+        openid: openid,
+        box_mac: box_mac,
+        is_open_simple: is_open_simple,
+        hiddens: false,
+      })
 
-    var oss_file_path = options.oss_addr;
-    var file_name     = options.file_name;
-    var file_size     = options.file_size;
-    var polling_time  = options.polling_time;
-    var res_sup_time  = options.res_sup_time;
-    var res_eup_time  = options.res_eup_time;
-
-    wx.request({
-      url: api_url + '/smallapp3/index/getConfig',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      success: function (rst) {
-        var file_max_size = rst.data.result.file_max_size;
-        var polling_time = rst.data.result.polling_time;
-        if (file_size >= file_max_size) {//如果文件超过最大配置大小 不可投屏
-          wx.navigateBack({
-            delta: 1,
-          })
-          var show_max_file_size = file_max_size / (1024 * 1024)
-          wx.showToast({
-            title: '投屏文件不可以超过' + show_max_file_size + 'M',
-            icon: 'none',
-            duration: 2000
-          });
-        } else {
-          dealFile(oss_file_path, file_name, file_size, polling_time, res_sup_time, res_eup_time, that);
-        }
+      var oss_file_path = options.oss_addr;
+      var file_name     = options.file_name;
+      var file_size     = options.file_size;
+      var res_sup_time  = options.res_sup_time;
+      var res_eup_time  = options.res_eup_time;
+      var save_type     = options.save_type;
+      var is_fresh      = options.is_fresh;
+      console.log('222');
+      if (is_fresh==1){
+        wx.request({
+          url: api_url + '/smallapp3/index/getConfig',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          success: function (rst) {
+            var file_max_size = rst.data.result.file_max_size;
+            var polling_time = rst.data.result.polling_time;
+            if (file_size >= file_max_size) {//如果文件超过最大配置大小 不可投屏
+              wx.navigateBack({
+                delta: 1,
+              })
+              var show_max_file_size = file_max_size / (1024 * 1024)
+              wx.showToast({
+                title: '投屏文件不可以超过' + show_max_file_size + 'M',
+                icon: 'none',
+                duration: 2000
+              });
+            } else {
+              
+            
+              dealFile(oss_file_path, file_name, file_size, polling_time, res_sup_time, res_eup_time, save_type, that);
+            }
+          }
+        })
+      }else if(is_fresh==2){//投屏历史
+        console.log('aaaa');
+        var forscreen_id = options.forscreen_id;
+        wx.request({
+          url: api_url +'/Smallapp3/Fileforscreen/getforscreenbyid',
+          data:{
+            forscreen_id: forscreen_id,
+          },
+          success:function(res){
+            if(res.data.code==10000){
+              console.log(res);
+              that.setData({
+                file_imgs: res.data.result.imgs,
+                img_nums: res.data.result.img_num,
+                oss_host: res.data.result.oss_host,
+                oss_suffix: res.data.result.oss_suffix,
+                forscreen_id: forscreen_id,
+                hiddens: true,
+              })
+              forscreenFirstPic(res.data.result.imgs, forscreen_id)
+            }else {
+              that.setData({
+                hiddens:true,
+              })
+              wx.navigateBack({
+                delta:1
+              })
+              wx.showToast({
+                title: '投屏失败',
+                icon: 'none',
+                duration: 2000
+              });
+            }
+          },fail:function(res){
+            that.setData({
+              hiddens: true,
+            })
+            wx.navigateBack({
+              delta: 1
+            })
+            wx.showToast({
+              title: '投屏失败',
+              icon: 'none',
+              duration: 2000
+            });
+          }
+        })
       }
-    })
-    function dealFile(oss_file_path, file_name, file_size, polling_time, res_sup_time, res_eup_time, that) {
+    }
+    function dealFile(oss_file_path, file_name, file_size, polling_time, res_sup_time, res_eup_time, save_type, that) {
       console.log(polling_time);
       console.log(that);
       var index1 = file_name.lastIndexOf(".");
@@ -96,6 +162,7 @@ Page({
           resource_name: file_name,
           resource_size: file_size,
           resource_type: 3,
+          save_type: save_type
         },
         success: function (res) {
           console.log(res);
@@ -413,7 +480,9 @@ Page({
   //重选文件
   reChooseFile: function (e) {
     var that = this;
-
+    wx.navigateBack({
+      delta:1
+    })
    
   },
   //退出投屏

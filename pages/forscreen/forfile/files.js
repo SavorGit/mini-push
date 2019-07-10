@@ -114,6 +114,9 @@ Page({
       var timestamp = (new Date()).valueOf();
       var oss_file_path = "forscreen/resource/" + timestamp + postf_t;
       //console.log(timestamp);
+      wx.reportAnalytics('file_forscreen_report', {
+        forscreen_num: 1,
+      });
       var upload_task = wx.uploadFile({
         url: oss_upload_url,
         filePath: file_path,

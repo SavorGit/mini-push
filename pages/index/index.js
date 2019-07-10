@@ -493,21 +493,24 @@ Page({
       var box_mac = e.currentTarget.dataset.boxmac;
       var openid = e.currentTarget.dataset.openid;
       var is_open_simple = e.currentTarget.dataset.is_open_simple;
-      /*if(box_mac==''){
+      //微信好友文件投屏+h5文件投屏
+      if(box_mac==''){
         app.scanQrcode();
       }else {
         that.setData({
           showMe: true,
         })
-      }*/
-      if (box_mac == '') {
+      }
+
+      //微信好友文件投屏
+      /*if (box_mac == '') {
 
         app.scanQrcode();
       } else {
         wx.navigateTo({
           url: '/pages/forscreen/forfile/files?box_mac=' + box_mac + '&openid=' + openid + "&is_open_simple=" + is_open_simple ,
         })
-      }
+      }*/
       
     }
   },
@@ -516,8 +519,9 @@ Page({
     var that = this;
     var box_mac = e.currentTarget.dataset.boxmac;
     var openid = e.currentTarget.dataset.openid;
+    var is_open_simple = e.currentTarget.dataset.is_open_simple;
     wx.navigateTo({
-      url: '/pages/forscreen/forfile/files?box_mac=' + box_mac + '&openid=' + openid,
+      url: '/pages/forscreen/forfile/files?box_mac=' + box_mac + '&openid=' + openid + "&is_open_simple=" + is_open_simple,
       success:function(e){
         that.setData({
           showMe:false
@@ -526,9 +530,18 @@ Page({
     })
   },
   phonefiles:function(e){
+    var that = this;
     var box_mac = e.currentTarget.dataset.boxmac;
     var openid = e.currentTarget.dataset.openid;
-    console.log(e);
+    var is_open_simple = e.currentTarget.dataset.is_open_simple;
+    wx.navigateTo({
+      url: '/pages/forscreen/forfile/h5files?box_mac=' + box_mac + '&openid=' + openid + "&is_open_simple=" + is_open_simple,
+      success: function (e) {
+        that.setData({
+          showMe: false
+        })
+      }
+    })
   },
   /**
    * 生命周期函数--监听页面初次渲染完成

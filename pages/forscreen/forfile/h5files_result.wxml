@@ -54,5 +54,5 @@
   <template is="fixedSuspensionButtonGroup" />
 </view>
 <view class="body-view">
-  <loading hidden="{{hiddens}}" bindchange="loadingChange">投屏文件处理中，请稍后</loading>
+  <loading hidden="{{hiddens}}" bindchange="loadingChange">投屏文件处理中，请稍后!</loading>
 </view>

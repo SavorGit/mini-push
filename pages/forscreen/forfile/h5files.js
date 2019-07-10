@@ -5,6 +5,8 @@ var api_url = app.globalData.api_url;
 var openid;
 var box_mac;
 var is_open_simple;
+var mobile_brand = app.globalData.mobile_brand;
+var mobile_model = app.globalData.mobile_model;
 Page({
 
   /**
@@ -23,6 +25,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
+    console.log(options);
     var that = this;
     openid = options.openid;
     box_mac = options.box_mac;
@@ -30,11 +33,18 @@ Page({
     that.setData({
       openid: openid,
       box_mac: box_mac,
-      is_open_simple: is_open_simple
+      is_open_simple: is_open_simple,
+      mobile_brand: mobile_brand,
+      mobile_model: mobile_model,
     });
     wx.getSystemInfo({
       success: function(res) {
+        console.log(res);
+        var web_url = "https://mobile.littlehotspot.com/h5/fileforscreen/launch_file?windowHeight=" + res.windowHeight + "&statusBarHeight=" + res.statusBarHeight + "&box_mac=" + box_mac + "&mobile_brand=" + mobile_brand+"&mobile_model="+mobile_model+"&openid="+openid+"&is_open_simple="+is_open_simple
+        web_url = encodeURI(web_url);
+        console.log(web_url);
         that.setData({
+          web_url:web_url,
           pixelRatio: res.pixelRatio,
           screenHeight: res.screenHeight,
           screenWidth: res.screenWidth,
@@ -43,6 +53,7 @@ Page({
         });
       }
     });
+    
   },
 
   /**
@@ -95,6 +106,5 @@ Page({
   },
 
   pageLoad: function(event) {
-    console.log(event);
   }
 })
