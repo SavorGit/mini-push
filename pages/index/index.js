@@ -494,23 +494,23 @@ Page({
       var openid = e.currentTarget.dataset.openid;
       var is_open_simple = e.currentTarget.dataset.is_open_simple;
       //微信好友文件投屏+h5文件投屏
-      if(box_mac==''){
+      /*if(box_mac==''){
         app.scanQrcode();
       }else {
         that.setData({
           showMe: true,
         })
-      }
+      }*/
 
       //微信好友文件投屏
-      /*if (box_mac == '') {
+      if (box_mac == '') {
 
         app.scanQrcode();
       } else {
         wx.navigateTo({
           url: '/pages/forscreen/forfile/files?box_mac=' + box_mac + '&openid=' + openid + "&is_open_simple=" + is_open_simple ,
         })
-      }*/
+      }
       
     }
   },
