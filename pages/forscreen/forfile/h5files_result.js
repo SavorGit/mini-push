@@ -247,7 +247,7 @@ Page({
                 if (polling_time == 0) {//超时 提示投屏失败
                   clearInterval(timer8_0);
                   wx.showToast({
-                    title: '投屏失败',
+                    title: '文件页码过多，投屏失败',
                     icon: 'none',
                     duration: 2000,
                     success: function (res) {
