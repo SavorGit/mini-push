@@ -327,7 +327,8 @@ Page({
 
       ],
       is_share: 0,
-      is_btn_disabel:false
+      showVedio:true,
+      is_btn_disabel:true,
     })
     var box_mac = e.currentTarget.dataset.boxmac;
     var openid = e.currentTarget.dataset.openid;
@@ -340,11 +341,17 @@ Page({
       success: function (res) {
         that.setData({
           showVedio: true,
+          is_btn_disabel:false,
           upload_vedio_temp: res.tempFilePath,
           //upload_vedio_cover: res.thumbTempFilePath,
           vedio_percent:0
         });
         //uploadVedio(res, box_mac, openid);
+      },fail:function(res){
+        that.setData({
+          showVedio: false,
+          is_btn_disabel:true,
+        })
       }
     });
     function uploadVedio(video, box_mac, openid) {
