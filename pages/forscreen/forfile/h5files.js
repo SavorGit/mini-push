@@ -40,7 +40,7 @@ Page({
     wx.getSystemInfo({
       success: function(res) {
         console.log(res);
-        var web_url = "https://mobile.littlehotspot.com/h5/fileforscreen/launch_file?windowHeight=" + res.windowHeight + "&statusBarHeight=" + res.statusBarHeight + "&box_mac=" + box_mac + "&mobile_brand=" + mobile_brand+"&mobile_model="+mobile_model+"&openid="+openid+"&is_open_simple="+is_open_simple
+        var web_url = "https://mobile.littlehotspot.com/h5/fileforscreen?windowHeight=" + res.windowHeight + "&statusBarHeight=" + res.statusBarHeight + "&box_mac=" + box_mac + "&mobile_brand=" + mobile_brand+"&mobile_model="+mobile_model+"&openid="+openid+"&is_open_simple="+is_open_simple
         web_url = encodeURI(web_url);
         console.log(web_url);
         that.setData({

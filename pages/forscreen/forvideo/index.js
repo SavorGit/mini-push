@@ -20,7 +20,7 @@ Page({
    */
   data: {
     statusBarHeight: getApp().globalData.statusBarHeight,
-    showVedio:false,
+    showVedio:true,
     showRechoose:false,
     upload_vedio_temp:'',
     oss_video_url:'',
@@ -34,7 +34,7 @@ Page({
     ],
     is_pub_hotelinfo: 1,  //是否公开酒楼信息
     is_share: 0 ,         //是否分享到发现栏目
-    is_btn_disabel:false,
+    is_btn_disabel:true,
     avatarUrl: '',
     nickName: '',
     replay_video_url:'',
@@ -77,6 +77,7 @@ Page({
         //console.log(res);
         that.setData({
           showVedio: true,
+          is_btn_disabel:false,
           upload_vedio_temp:res.tempFilePath,
           //upload_vedio_cover:res.thumbTempFilePath,
           duration: res.duration
@@ -144,7 +145,9 @@ Page({
                 }
                 uploadVedio(video, box_mac, openid, res_sup_time, is_pub_hotelinfo, is_share, duration, avatarUrl, nickName, public_text, timer8_0);
               }else {
-                
+                that.setData({
+                  hiddens:true,
+                })
               }
             }
           })
