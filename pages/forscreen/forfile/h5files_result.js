@@ -30,7 +30,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-   
+    app.globalData.fromPage = "/pages/forscreen/forfile/h5files_result";
     console.log(options);
     var that = this;
     var pa_openid  = options.openid;
