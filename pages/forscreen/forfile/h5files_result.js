@@ -30,6 +30,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+   
     console.log(options);
     var that = this;
     var pa_openid  = options.openid;
@@ -38,14 +39,16 @@ Page({
     openid = user_info.openid;
     console.log('1111');
     if(openid !=pa_openid){
-      wx.navigateBack({
-        delta: 1,
-      })
       wx.showToast({
-        title: '用户校验失败',
+        title: '用户效验失败',
         icon: 'none',
-        duration: 2000
-      });
+        duration: 2000,
+        success: function (res) {
+          setTimeout(function () {
+            wx.navigateBack()
+          }, 2000)
+        },
+      })
     }else {
       box_mac = options.box_mac;
       is_open_simple = options.is_open_simple;
@@ -74,15 +77,20 @@ Page({
             var file_max_size = rst.data.result.file_max_size;
             var polling_time = rst.data.result.polling_time;
             if (file_size >= file_max_size) {//如果文件超过最大配置大小 不可投屏
-              wx.navigateBack({
-                delta: 1,
-              })
+              
               var show_max_file_size = file_max_size / (1024 * 1024)
+              
               wx.showToast({
                 title: '投屏文件不可以超过' + show_max_file_size + 'M',
                 icon: 'none',
-                duration: 2000
-              });
+                duration: 2000,
+                success: function (res) {
+                  setTimeout(function () {
+                    wx.navigateBack()
+                  }, 2000)
+                },
+              })
+              
             } else {
               
             
@@ -114,14 +122,16 @@ Page({
               that.setData({
                 hiddens:true,
               })
-              wx.navigateBack({
-                delta:1
-              })
               wx.showToast({
                 title: '投屏失败',
                 icon: 'none',
-                duration: 2000
-              });
+                duration: 2000,
+                success: function (res) {
+                  setTimeout(function () {
+                    wx.navigateBack()
+                  }, 2000)
+                },
+              })
             }
           },fail:function(res){
             that.setData({
@@ -133,8 +143,13 @@ Page({
             wx.showToast({
               title: '投屏失败',
               icon: 'none',
-              duration: 2000
-            });
+              duration: 2000,
+              success: function (res) {
+                setTimeout(function () {
+                  wx.navigateBack()
+                }, 2000)
+              },
+            })
           }
         })
       }
@@ -215,56 +230,64 @@ Page({
                           hiddens: true,
                         })
                         clearInterval(timer8_0);
-                        wx.navigateBack({
-                          delta: 1,
-                        });
                         wx.showToast({
                           title: '投屏失败',
                           icon: 'none',
-                          duration: 2000
-                        });
+                          duration: 2000,
+                          success: function (res) {
+                            setTimeout(function () {
+                              wx.navigateBack()
+                            }, 2000)
+                          },
+                        })
                       }
                     }
                   }
                 })
                 if (polling_time == 0) {//超时 提示投屏失败
                   clearInterval(timer8_0);
-                  wx.navigateBack({
-                    delta: 1,
-                  });
                   wx.showToast({
                     title: '投屏失败',
                     icon: 'none',
-                    duration: 2000
-                  });
+                    duration: 2000,
+                    success: function (res) {
+                      setTimeout(function () {
+                        wx.navigateBack()
+                      }, 2000)
+                    },
+                  })
                 }
               }, 1000);
             } else if (file_status == 0 || file_status == 3) {//转换失败
               that.setData({
                 hiddens: true,
               })
-              wx.navigateBack({
-                delta: 1,
-              });
               wx.showToast({
                 title: '投屏失败',
                 icon: 'none',
-                duration: 2000
-              });
+                duration: 2000,
+                success: function (res) {
+                  setTimeout(function () {
+                    wx.navigateBack()
+                  }, 2000)
+                },
+              })
             }
 
           } else {//转换接口请求失败
             that.setData({
               hiddens: true,
             })
-            wx.navigateBack({
-              delta: 1,
-            });
             wx.showToast({
               title: '投屏失败',
               icon: 'none',
-              duration: 2000
-            });
+              duration: 2000,
+              success: function (res) {
+                setTimeout(function () {
+                  wx.navigateBack()
+                }, 2000)
+              },
+            })
 
           }
         },
@@ -272,14 +295,16 @@ Page({
           that.setData({
             hiddens: true,
           })
-          wx.navigateBack({
-            delta: 1,
-          });
           wx.showToast({
             title: '投屏失败',
             icon: 'none',
-            duration: 2000
-          });
+            duration: 2000,
+            success: function (res) {
+              setTimeout(function () {
+                wx.navigateBack()
+              }, 2000)
+            },
+          })
         }
       })
     }
