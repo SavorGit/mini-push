@@ -44,7 +44,7 @@ Page({
         web_url = encodeURI(web_url);
         console.log(web_url);
         that.setData({
-          web_url:web_url,
+          //web_url:web_url,
           pixelRatio: res.pixelRatio,
           screenHeight: res.screenHeight,
           screenWidth: res.screenWidth,
@@ -66,8 +66,16 @@ Page({
   /**
    * 生命周期函数--监听页面显示
    */
-  onShow: function() {
 
+  onShow: function () {
+    var pageObje = this;
+    var pageData = pageObje.data;
+    var webUrl = "https://mobile.littlehotspot.com/h5/fileforscreen?windowHeight=" + pageData.windowHeight + "&statusBarHeight=" + pageData.statusBarHeight + "&box_mac=" + pageData.box_mac + "&mobile_brand=" + pageData.mobile_brand + "&mobile_model=" + pageData.mobile_model + "&openid=" + pageData.openid + "&is_open_simple=" + pageData.is_open_simple + "&time=" + new Date().getTime();
+    webUrl = encodeURI(webUrl);
+    console.log("onShow", pageData, webUrl);
+    this.setData({
+      web_url: webUrl
+    });
   },
 
   /**
