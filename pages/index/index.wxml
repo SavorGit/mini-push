@@ -109,7 +109,7 @@
     <view style="width: 100%;height: calc(100% - 160rpx);display: flex; flex-direction: column; align-items: center; justify-content: start;color: #666666;">
       <image style="width: 480rpx;height: 270rpx;" src="http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
       <view style="width: 480rpx;height: calc(100% - 320rpx);line-height: 3;text-align: center;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;">轩尼诗纪念版套装XXXXXXXXXXXX</view>
-      <view style="width: 100%;height: 80rpx;border-top: 1rpx solid #ededed;display: flex; flex-direction: row; align-items: center; justify-content: center;">
+      <view style="width: 100%;height: 80rpx;border-top: 2rpx solid #ededed;display: flex; flex-direction: row; align-items: center; justify-content: center;">
         <label style="width: 70rpx;">数量</label>
         <view style="width: 32rpx; height: 32rpx;">
           <image style="width: 32rpx; height: 32rpx;" src="/images/icon2/666666_enlarge.png"></image>
@@ -120,9 +120,9 @@
         </view>
       </view>
     </view>
-    <view style="width: 100%;height: 80rpx;border-top: 1rpx solid #ededed;display: flex; flex-direction: row; align-items: center; justify-content: center;">
+    <view style="width: 100%;height: 80rpx;border-top: 2rpx solid #ededed;display: flex; flex-direction: row; align-items: center; justify-content: center;">
       <view style="width: 100%;height: 80rpx;line-height: 80rpx; color: #448ACA; text-align: center;">店内购买</view>
-      <view wx:if='{{actgoods.showButton4JD}}' style="width: 100%;height: 80rpx;line-height: 80rpx; color: #666666; text-align: center;border-left: 1rpx solid #ededed;">京东购买</view>
+      <view wx:if='{{actgoods.showButton4JD}}' style="width: 100%;height: 80rpx;line-height: 80rpx; color: #666666; text-align: center;border-left: 2rpx solid #ededed;">京东购买</view>
     </view>
   </view>
   <view wx:if='{{actgoods.showButton4Favorites}}' style="width: 600rpx;height: 70rpx;margin-top: 25rpx;font-size: 24rpx;">
