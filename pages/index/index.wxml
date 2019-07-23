@@ -37,7 +37,7 @@
         <image src='/images/icon2/FFFFFF_video.png'></image>
         <label>视频上电视</label>
       </view>
-      <view bindtap='forfiles' data-boxmac="{{box_mac}}" data-openid="{{openid}}"  data-is_open_simple='{{is_open_simple}}'>
+      <view bindtap='forfiles' data-boxmac="{{box_mac}}" data-openid="{{openid}}" data-is_open_simple='{{is_open_simple}}'>
         <image src='/images/icon2/FFFFFF_files.png'></image>
         <label>文件上电视</label>
       </view>
@@ -95,3 +95,41 @@
   </view>
   <view class='cancel-btn' style='flex: 1; margin-top: 10rpx; width: 100%; height: 60rpx; line-height: 60rpx; text-align: center; font-size: 30rpx; color: rgba(7,17,27,0.6);' bindtap='modalCancel'>取消</view>
 </bottomModal>
+
+
+<!-- 销售页 -->
+<modal show="{{showActgoods}}" width="600rpx" height='730rpx' border-radius="10rpx" title-text='' confirm-text='' cancel-text='' background-color='unset'>
+  <view style="width: 600rpx;height: 560rpx; border-radius: 10rpx; background-color: #FFFFFF;font-size: 24rpx;">
+    <view style="width: 100%;height: 80rpx;padding-left: 60rpx;padding-right: 30rpx;">
+      <label style="width: calc(100% - 122rpx);height: 80rpx;line-height: 80rpx;display: inline-block;font-size: 30rpx; color: #333333;text-align: center;">下单提示</label>
+      <view style="width: 32rpx; height: 80rpx; display: inline-block;">
+        <image style="width: 32rpx; height: 32rpx;" src="/images/icon2/666666_close.png"></image>
+      </view>
+    </view>
+    <view style="width: 100%;height: calc(100% - 160rpx);display: flex; flex-direction: column; align-items: center; justify-content: start;color: #666666;">
+      <image style="width: 480rpx;height: 270rpx;" src="http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
+      <view style="width: 480rpx;height: calc(100% - 320rpx);line-height: 3;text-align: center;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;">轩尼诗纪念版套装XXXXXXXXXXXX</view>
+      <view style="width: 100%;height: 80rpx;border-top: 1rpx solid #ededed;display: flex; flex-direction: row; align-items: center; justify-content: center;">
+        <label style="width: 70rpx;">数量</label>
+        <view style="width: 32rpx; height: 32rpx;">
+          <image style="width: 32rpx; height: 32rpx;" src="/images/icon2/666666_enlarge.png"></image>
+        </view>
+        <label style="width: 70rpx;text-align: center;">1</label>
+        <view style="width: 32rpx; height: 32rpx;">
+          <image style="width: 32rpx; height: 32rpx;" src="/images/icon2/666666_narrow.png"></image>
+        </view>
+      </view>
+    </view>
+    <view style="width: 100%;height: 80rpx;border-top: 1rpx solid #ededed;display: flex; flex-direction: row; align-items: center; justify-content: center;">
+      <view style="width: 100%;height: 80rpx;line-height: 80rpx; color: #448ACA; text-align: center;">店内购买</view>
+      <view wx:if='{{actgoods.showButton4JD}}' style="width: 100%;height: 80rpx;line-height: 80rpx; color: #666666; text-align: center;border-left: 1rpx solid #ededed;">京东购买</view>
+    </view>
+  </view>
+  <view wx:if='{{actgoods.showButton4Favorites}}' style="width: 600rpx;height: 70rpx;margin-top: 25rpx;font-size: 24rpx;">
+    <button style="width: 100%;height: 100%; line-height: 70rpx; color: #FFFFFF; background-color: {{actgoods.showFavoritesPanel ? '#999999' : '#eb6877'}}; border-radius: 10rpx;font-size: 24rpx;">收藏</button>
+  </view>
+  <view wx:if='{{actgoods.showFavoritesPanel}}' style="width: 600rpx;height: 60rpx;margin-top: 10rpx;display: flex; flex-direction: row; align-items: center; justify-content: space-between;font-size: 24rpx;">
+    <input type="number" placeholder="请输入手机号" style="width: 385rpx;height: 60rpx; line-height: 60rpx; border-radius: 5rpx; color: #333333; background-color: #FFFFFF;padding-left: 10rpx;" placeholder-style="padding-left: 10rpx; color: #999999;"></input>
+    <button style="width: 200rpx;height: 60rpx;color: #FFFFFF; background-color: #eb6877;font-size: 24rpx;margin: auto;padding: 0; border: 0;">发送商品链接</button>
+  </view>
+</modal>
