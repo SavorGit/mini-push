@@ -4,6 +4,7 @@ const app = getApp()
 var openid;
 var box_mac;
 var api_url = app.globalData.api_url;
+var goods_nums = 1;
 Page({
 
   /**
@@ -22,11 +23,11 @@ Page({
     happy_vedio_title: '', //生日视频标题
     showModal: false, //显示授权登陆弹窗
     showActgoods: false, // 显示活动促销
-    actgoods: { // 活动促销设置
-      showButton4JD: true, // 显示京东购买按钮
+    
+      showButton4JD: false, // 显示京东购买按钮
       showButton4Favorites: true, // 显示收藏按钮
-      showFavoritesPanel: true // 显示收藏面板
-    },
+      showFavoritesPanel: false, // 显示收藏面板
+    
     is_game_banner: 0, //是否显示猴子爬树游戏banner
     is_open_simple: 0,
     imgUrls: [],
@@ -35,6 +36,7 @@ Page({
     autoplay: true, //是否自动切换
     interval: 3000, //自动切换时间间隔
     lb_duration: 1000, //滑动动画时长
+    goods_nums:1
   },
 
   /**
@@ -101,7 +103,9 @@ Page({
             box_mac = '';
           }
         }
-      })
+      });
+      //是否显示活动
+      isShowAct();
     } else {
       app.openidCallback = openid => {
         if (openid != '') {
@@ -163,11 +167,45 @@ Page({
                 box_mac = '';
               }
             }
-          })
+          });
+          //是否显示活动
+          isShowAct();
         }
       }
     }
-
+    //是否显示活动
+    function isShowAct(){
+      var goods_info = wx.getStorageSync('savor_goods_info');
+      if(goods_info=='' || typeof(goods_info)=='undefined'){
+        //************************上线去掉 */
+        // that.setData({
+        //   showActgoods: true
+        // });
+      }else {
+        var goods_id = goods_info.goods_id;
+        var goods_box_mac = goods_info.goods_box_mac;
+        that.setData({
+          goods_id:goods_id,
+          goods_box_mac:goods_box_mac,
+        })
+        wx.request({
+          url: api_url+'/aaa/bbb/ccc',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          data: {
+            goods_id: goods_id,
+          },
+          success:function(res){
+            that.setData({
+              showActgoods: true
+            });
+          }
+        })
+        
+      }
+      
+    }
     function getHotelInfo(box_mac) { //获取链接的酒楼信息
       wx.request({
         url: api_url + '/Smallapp/Index/getHotelInfo',
@@ -204,9 +242,7 @@ Page({
       }
     })
 
-    this.setData({
-      showActgoods: true
-    });
+    
   },
   onGetUserInfo: function(res) {
     var that = this;
@@ -561,6 +597,145 @@ Page({
     var that = this;
     that.setData({
       showMe: false,
+    })
+  },
+  changeActNums:function(e){
+    var that  = this;
+    var type = e.currentTarget.dataset.type;
+    if(type==1){//数量增加
+      if (goods_nums == 10) {
+        wx.showToast({
+          title: '数量不能大于10',
+          icon: 'none',
+          duration: 2000,
+        })
+      }else {
+        goods_nums +=1;
+        console.log(goods_nums);
+      }
+    }else if(type==2){ //数量减少
+      if(goods_nums==1){
+        wx.showToast({
+          title: '数量不能小于1',
+          icon:'none',
+          duration:2000,
+        })
+      }else {
+        goods_nums -=1;
+      }
+    }
+    that.setData({
+      goods_nums:goods_nums,
+    })
+  },
+  closeAct:function(e){
+    var that = this;
+    wx.removeStorageSync('savor_goods_info');
+    that.setData({
+      showActgoods:false
+    })
+  },
+  //店内购买
+  shopBuyGoods:function(e){
+    console.log(e);
+    var that = this;
+    var goods_id = e.currentTarget.dataset.goods_id;
+    var goods_nums = e.currentTarget.dataset.goods_nums;
+    var goods_box_mac = e.currentTarget.dataset.goods_box_mac;
+    var user_info = wx.getStorageSync("savor_user_info");
+    openid = user_info.openid;
+    wx.request({
+      url: api_url+'/aaa/bbb/ccc',
+      header: {
+        'content-type': 'application/json'
+      },
+      data:{
+        goods_id:goods_id,
+        box_mac:goods_box_mac,
+        goods_nums:goods_nums,
+        openid:openid
+      },
+      success:function(res){
+        if(res.data.code==10000){
+          this.setData({
+            showActgoods:false,
+          })
+          wx.showToast({
+            title: '购买成功，请重试',
+            icon: 'none',
+            duration: 2000,
+          })
+        }else {
+          wx.showToast({
+            title: '购买失败，请重试',
+            icon:'none',
+            duration:2000,
+          })
+        }
+      }
+    })
+  },
+  //收藏商品
+  collectGoods:function(e){
+    var goods_id = e.currentTarget.dataset.goods_id;
+    var that = this;
+    that.setData({
+      showFavoritesPanel:true,
+    })
+    
+    
+  },
+  //输入手机号失去焦点
+  mobileOnInput: function (res) {
+    var that = this;
+    var mobile = res.detail.value;
+    that.setData({
+      mobile: mobile
+    })
+  },
+  sendGoodsLink:function(e){
+    var that = this;
+    var user_info = wx.getStorageSync("savor_user_info");
+    openid = user_info.openid;
+    var goods_id = e.currentTarget.dataset.goods_id;
+    
+    var mobile = e.currentTarget.dataset.mobile;
+    if(mobile==''){
+      wx.showToast({
+        title: '请输入手机号',
+        icon: 'none',
+        duration: 2000
+      });
+      return;
+    }
+    var is_mobile = app.checkMobile(mobile);
+    if (!is_mobile) {
+      return;
+    }
+    wx.request({
+      url: api_url+'/aaa/bbb/ccc',
+      header: {
+        'content-type': 'application/json'
+      },
+      data:{
+        goods_id:goods_id,
+        mobile:mobile,
+        openid:openid,
+      },success:function(res){
+        if(res.data.code==10000){
+          wx.showToast({
+            title: '商品链接已发送到您的手机',
+            icon:'none',
+            duration:2000,
+          })
+        }else {
+          wx.showToast({
+            title: '商品链接发送失败，请稍后重试',
+            icon: 'none',
+            duration: 2000,
+          })
+        }
+      }
     })
   },
   /**

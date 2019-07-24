@@ -278,6 +278,34 @@ App({
       }
     })
   },
+  checkMobile: function (mobile) {
+
+    var myreg = /^(((13[0-9]{1})|(15[0-9]{1})|(18[0-9]{1})|(17[0-9]{1}))+\d{8})$/;
+    if (mobile.length == 0) {
+
+      wx.showToast({
+        title: '请输入手机号',
+        icon: 'none',
+        duration: 2000
+      })
+      return false;
+    } else if (mobile.length < 11) {
+      wx.showToast({
+        title: '手机号长度有误！',
+        icon: 'none',
+        duration: 2000
+      })
+      return false;
+    } else if (!myreg.test(mobile)) {
+      wx.showToast({
+        title: '请输入正确的手机号',
+        icon: 'none',
+        duration: 2000
+      })
+      return false;
+    }
+    return true;
+  },
   globalData: {
     openid: '',
     session_key:'',

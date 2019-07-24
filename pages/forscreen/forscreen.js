@@ -27,12 +27,12 @@ Page({
     var sysconfig = wx.getStorageSync("savor_now_time");
     nowtime = sysconfig.sys_time;
     
-    if (typeof (options.scene) != 'undefined') {
+    if (typeof (options.scene) != 'undefined') {//小程序码
       var scene = decodeURIComponent(options.scene);
 
       linkHotelBox(scene);
 
-    }else if(typeof(options.s) !='undefined'){
+    }else if(typeof(options.s) !='undefined'){//小程序内扫普通二维码
       var s = options.s
       wx.request({
         url: api_url + '/Smallapp21/index/getQrcontent',
@@ -69,44 +69,63 @@ Page({
           }
         }
       })
-    } else if (typeof (options.q) !='undefined'){
+    } else if (typeof (options.q) !='undefined'){//微信扫普通二维码
       var q = decodeURIComponent(options.q);
       var selemite = q.indexOf("?");
       var pams = q.substring(selemite+3,q.length);
-      wx.request({
-        url: api_url + '/Smallapp21/index/getQrcontent',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        data: {
-          content: pams
-        },
-        success:function(res){
-          if (res.data.code == 10000) {
-            var scene = res.data.result.content;
-            linkHotelBox(scene);
-          }else {
-            /*wx.switchTab({
-              url: '../index/index',
-              success: function (e) {
-                wx.showToast({
-                  title: '二维码已过期',
-                  icon: 'none',
-                  duration: 2000
-                });
-              }
-            });*/
-            wx.reLaunch({
-              url: '/pages/index/index',
-            })
-            wx.showToast({
-              title: '二维码已过期',
-              icon: 'none',
-              duration: 2000
-            });
+
+      var pams_arr = pams.split('_');
+      if (pams_arr[0] =='ag'){
+        var goods_info = '{"goods_id":' + pams_arr[3] + ',"goods_box_mac":'+pams_arr[1]+'}';
+        wx.setStorageSync('savor_goods_info', goods_info)
+        wx.reLaunch({
+          url: '/pages/index/index',
+        })
+      }else {
+        wx.request({
+          url: api_url + '/Smallapp21/index/getQrcontent',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          data: {
+            content: pams
+          },
+          success: function (res) {
+            if (res.data.code == 10000) {
+              var scene = res.data.result.content;
+              linkHotelBox(scene);
+            } else {
+              /*wx.switchTab({
+                url: '../index/index',
+                success: function (e) {
+                  wx.showToast({
+                    title: '二维码已过期',
+                    icon: 'none',
+                    duration: 2000
+                  });
+                }
+              });*/
+              wx.reLaunch({
+                url: '/pages/index/index',
+              })
+              wx.showToast({
+                title: '二维码已过期',
+                icon: 'none',
+                duration: 2000
+              });
+            }
           }
-        }
+        })
+      }
+    } else if (typeof (options.g) != 'undefined'){ //小程序内部扫销售端商品活动码
+      var g = options.g;
+      var g_arr = g.split('_');
+      var goods_info = '{"goods_id":' + pams_arr[3] + ',"goods_box_mac":' + pams_arr[1] + '}';
+      wx.setStorageSync('savor_goods_info', goods_info)
+      wx.reLaunch({
+        url: '/pages/index/index',
       })
+      
     }
     function linkHotelBox(scene){
       var scene_arr = scene.split('_');
