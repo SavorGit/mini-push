@@ -315,6 +315,7 @@ App({
     statusBarHeight: 0,
     rest_appid:'wxc395eb4b44563af1',
     jijian_appid:'wx7883a4327329a67c',
+    jd_appid:'wx91d27dbf599dff74',
     api_url:'https://mobile.littlehotspot.com',
     oss_upload_url: 'https://image.littlehotspot.com',
     netty_url: 'https://netty-push.littlehotspot.com',

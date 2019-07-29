@@ -5,6 +5,7 @@ var openid;
 var box_mac;
 var api_url = app.globalData.api_url;
 var goods_nums = 1;
+var jd_appid = app.globalData.jd_appid;
 Page({
 
   /**
@@ -36,7 +37,8 @@ Page({
     autoplay: true, //是否自动切换
     interval: 3000, //自动切换时间间隔
     lb_duration: 1000, //滑动动画时长
-    goods_nums:1
+    goods_nums:1,
+    jd_appid:jd_appid,
   },
 
   /**
