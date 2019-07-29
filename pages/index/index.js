@@ -201,12 +201,13 @@ Page({
           success:function(res){
             console.log(res);
             if(res.data.code==10000){
-              
+              console.log(res);
               if(res.data.result.jd_url==''){
                 var is_jd = false;
               }else {
                 is_jd =true;
               }
+              console.log(is_jd);
               that.setData({
                 jd_url: res.data.result.jd_url,
                 goods_info:res.data.result,
