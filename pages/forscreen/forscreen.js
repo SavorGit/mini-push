@@ -76,10 +76,38 @@ Page({
 
       var pams_arr = pams.split('_');
       if (pams_arr[0] =='ag'){
-        var goods_info = '{"goods_id":' + pams_arr[3] + ',"goods_box_mac":'+pams_arr[1]+'}';
+        var goods_info = {"goods_id":pams_arr[3] ,"goods_box_mac":pams_arr[1]};
         wx.setStorageSync('savor_goods_info', goods_info)
+        var box_mac = pams_arr[1];
+        var code_type = pams_arr[2] ;
         wx.reLaunch({
           url: '/pages/index/index',
+        })
+        wx.login({
+          success: res => {
+            var code = res.code; //返回code
+            wx.request({
+              url: api_url + '/smallapp/index/getOpenid',
+              data: { "code": code },
+              header: {
+                'content-type': 'application/json'
+              },
+              success: function (res) {
+                wx.request({
+                  url: api_url + '/smallapp21/index/recOverQrcodeLog',
+                  data: {
+                    "openid": res.data.result.openid,
+                    "box_mac": box_mac,
+                    "type": code_type,
+                    "is_overtime": 0
+                  },
+                  header: {
+                    'content-type': 'application/json'
+                  },
+                })
+              }
+            })
+          }
         })
       }else {
         wx.request({
@@ -120,12 +148,43 @@ Page({
     } else if (typeof (options.g) != 'undefined'){ //小程序内部扫销售端商品活动码
       var g = options.g;
       var g_arr = g.split('_');
-      var goods_info = '{"goods_id":' + pams_arr[3] + ',"goods_box_mac":' + pams_arr[1] + '}';
+      var goods_info = {"goods_id": g_arr[3] ,"goods_box_mac":g_arr[1]};
+      var box_mac = g_arr[1];
+      var code_type = g_arr[2];
       wx.setStorageSync('savor_goods_info', goods_info)
       wx.reLaunch({
         url: '/pages/index/index',
       })
-      
+      wx.login({
+        success: res => {
+          var code = res.code; //返回code
+          wx.request({
+            url: api_url + '/smallapp/index/getOpenid',
+            data: { "code": code },
+            header: {
+              'content-type': 'application/json'
+            },
+            success: function (res) {
+              wx.request({
+                url: api_url + '/smallapp21/index/recOverQrcodeLog',
+                data: {
+                  "openid": res.data.result.openid,
+                  "box_mac": box_mac,
+                  "type": code_type,
+                  "is_overtime": 0
+                },
+                header: {
+                  'content-type': 'application/json'
+                },
+              })
+            }
+          })
+        }
+      })
+    }else{
+      wx.reLaunch({
+        url: '/pages/index/index',
+      })
     }
     function linkHotelBox(scene){
       var scene_arr = scene.split('_');

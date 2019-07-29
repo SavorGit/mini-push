@@ -189,7 +189,7 @@ Page({
           goods_box_mac:goods_box_mac,
         })
         wx.request({
-          url: api_url+'/aaa/bbb/ccc',
+          url: api_url +'/Smalldinnerapp11/goods/getdetail',
           headers: {
             'Content-Type': 'application/json'
           },
@@ -197,9 +197,23 @@ Page({
             goods_id: goods_id,
           },
           success:function(res){
-            that.setData({
-              showActgoods: true
-            });
+            console.log(res);
+            if(res.data.code==10000){
+              
+              if(res.data.result.jd_url==''){
+                var is_jd = false;
+              }else {
+                is_jd =true;
+              }
+              that.setData({
+                jd_url: res.data.result.jd_url,
+                goods_info:res.data.result,
+                showActgoods: true,
+                showButton4JD:is_jd,
+                showButton4Favorites:is_jd
+              });
+            }
+            
           }
         })
         
@@ -634,6 +648,7 @@ Page({
     that.setData({
       showActgoods:false
     })
+    goods_nums = 1;
   },
   //店内购买
   shopBuyGoods:function(e){
@@ -645,23 +660,22 @@ Page({
     var user_info = wx.getStorageSync("savor_user_info");
     openid = user_info.openid;
     wx.request({
-      url: api_url+'/aaa/bbb/ccc',
+      url: api_url +'/Smalldinnerapp11/order/addOrder',
       header: {
         'content-type': 'application/json'
       },
       data:{
         goods_id:goods_id,
         box_mac:goods_box_mac,
-        goods_nums:goods_nums,
-        openid:openid
+        amount:goods_nums,
+        openid:openid,
+        buy_type:1
       },
       success:function(res){
         if(res.data.code==10000){
-          this.setData({
-            showActgoods:false,
-          })
+          
           wx.showToast({
-            title: '购买成功，请重试',
+            title: '购买成功',
             icon: 'none',
             duration: 2000,
           })
@@ -713,13 +727,13 @@ Page({
       return;
     }
     wx.request({
-      url: api_url+'/aaa/bbb/ccc',
+      url: api_url +'/Smalldinnerapp11/collection/addGoodscollection',
       header: {
         'content-type': 'application/json'
       },
       data:{
         goods_id:goods_id,
-        mobile:mobile,
+        phone:mobile,
         openid:openid,
       },success:function(res){
         if(res.data.code==10000){
@@ -736,6 +750,15 @@ Page({
           })
         }
       }
+    })
+  },
+  //活动商品京东购买
+  jdBuy:function(e){
+    console.log(e);
+    var h5_url = e.currentTarget.dataset.h5_url;
+    h5_url = encodeURIComponent(h5_url);
+    wx.navigateTo({
+      url: '/pages/h5/index?h5_url='+h5_url,
     })
   },
   /**

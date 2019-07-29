@@ -62,6 +62,10 @@
         <image src='/images/icon2/FFFFFF_history.png'></image>
         <navigator url="/pages/forscreen/forfile/h5files"><label>文件投屏</label></navigator>
       </view>  -->
+      <!-- <view >
+        <image src='/images/icon2/FFFFFF_history.png'></image>
+        <navigator url="/pages/forscreen/forscreen?g=ag_00226D655202_31_3"><label>扫码活动</label></navigator>
+      </view> -->
     </view>
   </view>
   <template is="wxAuthLogin" data='{{show: showModal}}' />
@@ -107,8 +111,8 @@
       </view>
     </view>
     <view style="width: 100%;height: calc(100% - 160rpx);display: flex; flex-direction: column; align-items: center; justify-content: start;color: #666666;">
-      <image style="width: 480rpx;height: 270rpx;" src="http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
-      <view style="width: 480rpx;height: calc(100% - 320rpx);line-height: 3;text-align: center;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;">轩尼诗纪念版套装XXXXXXXXXXXX</view>
+      <image style="width: 480rpx;height: 270rpx;" src="{{goods_info.img_url}}"></image>
+      <view style="width: 480rpx;height: calc(100% - 320rpx);line-height: 3;text-align: center;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;">{{goods_info.name}}</view>
       <view style="width: 100%;height: 80rpx;border-top: 2rpx solid #ededed;display: flex; flex-direction: row; align-items: center; justify-content: center;">
         <label style="width: 70rpx;">数量</label>
         <view style="width: 32rpx; height: 32rpx;" bindtap="changeActNums" data-type="1">
@@ -122,11 +126,11 @@
     </view>
     <view style="width: 100%;height: 80rpx;border-top: 2rpx solid #ededed;display: flex; flex-direction: row; align-items: center; justify-content: center;font-size: 28rpx;">
       <view style="width: 100%;height: 80rpx;line-height: 80rpx; color: #448ACA; text-align: center;" bindtap="shopBuyGoods" data-goods_id="{{goods_id}}" data-goods_nums="{{goods_nums}}" data-goods_box_mac="{{goods_box_mac}}">店内购买</view>
-      <view wx:if='{{showButton4JD}}' style="width: 100%;height: 80rpx;line-height: 80rpx; color: #666666; text-align: center;border-left: 2rpx solid #ededed;">京东购买</view>
+      <view wx:if='{{showButton4JD}}' style="width: 100%;height: 80rpx;line-height: 80rpx; color: #666666; text-align: center;border-left: 2rpx solid #ededed;" bindtap="jdBuy" data-h5_url="{{jd_url}}">京东购买</view>
     </view>
   </view>
   <view wx:if='{{showButton4Favorites}}' style="width: 600rpx;height: 80rpx;margin-top: 25rpx;font-size: 24rpx;">
-    <button style="width: 100%;height: 100%; line-height: 80rpx; color: #FFFFFF; background-color: {{actgoods.showFavoritesPanel ? '#999999' : '#eb6877'}}; border-radius: 10rpx;font-size: 24rpx;" bindtap="collectGoods" data-goods_id="{{goods_id}}" data-goods_box_mac="{{goods_box_mac}}">收藏</button>
+    <button style="width: 100%;height: 100%; line-height: 80rpx; color: #FFFFFF; background-color: {{showFavoritesPanel ? '#999999' : '#eb6877'}}; border-radius: 10rpx;font-size: 24rpx;" bindtap="collectGoods" data-goods_id="{{goods_id}}" data-goods_box_mac="{{goods_box_mac}}">收藏</button>
   </view>
   <view wx:if='{{showFavoritesPanel}}' style="width: 600rpx;height: 70rpx;margin-top: 10rpx;display: flex; flex-direction: row; align-items: center; justify-content: space-between;font-size: 24rpx;">
     <input type="number"  bindinput="mobileOnInput" placeholder="请输入手机号" style="width: 385rpx;height: 70rpx; line-height: 70rpx; border-radius: 5rpx; color: #333333; background-color: #FFFFFF;padding-left: 10rpx;" placeholder-style="padding-left: 10rpx; color: #999999;"></input>
