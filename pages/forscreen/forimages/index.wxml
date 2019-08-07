@@ -107,10 +107,10 @@
         <view class="weui-grids grids-frame">
           <view class="weui-grid" wx:for="{{up_imgs}}" wx:key="key" wx:for-item="img" wx:for-index="index">
             <view class="pic_show">
-              <image wx:if="{{tmp_imgs[index].is_sing_forscreen==1}}" class="pic_show {{pic_show_cur[index]?'pic_show_cur':''}}" mode='aspectFill'  bindtap='up_single_pic'   data-img="{{tmp_imgs[index].oss_img}}" data-boxmac="{{box_mac}}" data-openid="{{openid}}" data-imgindex="{{index}}" data-imglen="{{img_lenth}}"
-                src="{{img.tmp_img}}"></image>
-              <image wx:elif="{{tmp_imgs[index].is_sing_forscreen==''}}" bindtap='upload_wait' class="pic_show {{pic_show_cur[index]?'pic_show_cur':''}}" mode='aspectFill'     data-img="{{tmp_imgs[index].oss_img}}" data-boxmac="{{box_mac}}" data-openid="{{openid}}" data-imgindex="{{index}}" data-imglen="{{img_lenth}}"
-                src="{{img.tmp_img}}"></image>
+              <image wx:if="{{tmp_imgs[index].is_sing_forscreen==1}}" class="pic_show {{pic_show_cur[index]?'pic_show_cur':''}}" mode='aspectFill' bindtap='up_single_pic' data-img="{{tmp_imgs[index].oss_img}}" data-boxmac="{{box_mac}}" data-openid="{{openid}}" data-imgindex="{{index}}"
+                data-imglen="{{img_lenth}}" src="{{img.tmp_img}}"></image>
+              <image wx:elif="{{tmp_imgs[index].is_sing_forscreen==''}}" bindtap='upload_wait' class="pic_show {{pic_show_cur[index]?'pic_show_cur':''}}" mode='aspectFill' data-img="{{tmp_imgs[index].oss_img}}" data-boxmac="{{box_mac}}" data-openid="{{openid}}" data-imgindex="{{index}}"
+                data-imglen="{{img_lenth}}" src="{{img.tmp_img}}"></image>
               <view class='upload_success_frame' wx:if="{{tmp_percent[index].percent >= 100}}">
                 <image style='margin:0 0 0 0;width:38rpx;height:38rpx;' src='/images/icon2/333333_check_alt_512x512.png'></image>
               </view>
@@ -137,8 +137,8 @@
     <!-- 重选 -->
     <view class="page_bottom theme2">
       <view class='button_group'>
-        <button class='savor-btn button_space_left' bindtap="chooseImage" data-boxmac="{{box_mac}}" data-openid="{{openid}}" src='/images/button_rechoose_pic.png'>重选照片</button>
-        <button class='savor-btn button_space_right' bindtap="exitForscreen" data-boxmac="{{box_mac}}" src='/images/button_exit_cast_screen.png'>退出投屏</button>
+        <button class='savor-btn button_space_left' bindtap="chooseImage" data-boxmac="{{box_mac}}" data-openid="{{openid}}">重选照片</button>
+        <button class='savor-btn button_space_right' bindtap="exitForscreen" data-boxmac="{{box_mac}}">退出投屏</button>
       </view>
     </view>
     <view class='launch_history'>
