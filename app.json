@@ -38,7 +38,8 @@
     "pages/forscreen/forfile/files",
     "pages/forscreen/forfile/h5files",
     "pages/forscreen/forfile/h5files_result",
-    "pages/h5/index"
+    "pages/h5/index",
+    "pages/mine/assist/index"
   ],
   "permission": {
     "scope.userLocation": {
