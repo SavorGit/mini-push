@@ -15,7 +15,7 @@
         </label>
       </view>
     </view>
-    <form bindsubmit="up_forscreen">
+    <form bindsubmit="up_forscreen" report-submit="true">
       <view class='page_main'>
         <view class="weui-grids grids-frame">
           <view class="weui-grid" wx:for="{{up_imgs}}" wx:key="key" wx:for-item="img" wx:for-index="index">

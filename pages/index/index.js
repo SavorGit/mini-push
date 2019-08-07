@@ -191,7 +191,7 @@ Page({
           goods_box_mac:goods_box_mac,
         })
         wx.request({
-          url: api_url +'/Smalldinnerapp11/goods/getdetail',
+          url: api_url +'/Smallsale/goods/getdetail',
           headers: {
             'Content-Type': 'application/json'
           },
@@ -660,10 +660,11 @@ Page({
     var goods_id = e.currentTarget.dataset.goods_id;
     var goods_nums = e.currentTarget.dataset.goods_nums;
     var goods_box_mac = e.currentTarget.dataset.goods_box_mac;
+    var buy_type = e.currentTarget.dataset.buy_type;
     var user_info = wx.getStorageSync("savor_user_info");
     openid = user_info.openid;
     wx.request({
-      url: api_url +'/Smalldinnerapp11/order/addOrder',
+      url: api_url +'/Smallsale/order/addOrder',
       header: {
         'content-type': 'application/json'
       },
@@ -672,22 +673,27 @@ Page({
         box_mac:goods_box_mac,
         amount:goods_nums,
         openid:openid,
-        buy_type:1
+        buy_type: buy_type
       },
       success:function(res){
         if(res.data.code==10000){
+          if (buy_type==1){
+            wx.showToast({
+              title: '购买成功',
+              icon: 'none',
+              duration: 2000,
+            })
+          }
           
-          wx.showToast({
-            title: '购买成功',
-            icon: 'none',
-            duration: 2000,
-          })
         }else {
-          wx.showToast({
-            title: '购买失败，请重试',
-            icon:'none',
-            duration:2000,
-          })
+          if(buy_type==1){
+            wx.showToast({
+              title: res.data.msg,
+              icon: 'none',
+              duration: 2000,
+            })
+          }
+          
         }
       }
     })
@@ -730,7 +736,7 @@ Page({
       return;
     }
     wx.request({
-      url: api_url +'/Smalldinnerapp11/collection/addGoodscollection',
+      url: api_url +'/Smallsale/collection/addGoodscollection',
       header: {
         'content-type': 'application/json'
       },
@@ -746,12 +752,19 @@ Page({
             duration:2000,
           })
         }else {
+          var err_msg = res.data.msg;
           wx.showToast({
-            title: '商品链接发送失败，请稍后重试',
+            title: err_msg,
             icon: 'none',
             duration: 2000,
           })
         }
+      },fail:function(res){
+        wx.showToast({
+          title: '商品链接发送失败，请稍后重试',
+          icon: 'none',
+          duration: 2000,
+        })
       }
     })
   },

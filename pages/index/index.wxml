@@ -125,9 +125,11 @@
       </view>
     </view>
     <view style="width: 100%;height: 80rpx;border-top: 2rpx solid #ededed;display: flex; flex-direction: row; align-items: center; justify-content: center;font-size: 28rpx;">
-      <view style="width: 100%;height: 80rpx;line-height: 80rpx; color: #448ACA; text-align: center;" bindtap="shopBuyGoods" data-goods_id="{{goods_id}}" data-goods_nums="{{goods_nums}}" data-goods_box_mac="{{goods_box_mac}}">店内购买</view>
+      <view style="width: 100%;height: 80rpx;line-height: 80rpx; color: #448ACA; text-align: center;" bindtap="shopBuyGoods" data-goods_id="{{goods_id}}" data-goods_nums="{{goods_nums}}" data-goods_box_mac="{{goods_box_mac}}" data-buy_type="1">店内购买</view>
       <!-- <view wx:if='{{showButton4JD}}' style="width: 100%;height: 80rpx;line-height: 80rpx; color: #666666; text-align: center;border-left: 2rpx solid #ededed;" bindtap="jdBuy" data-h5_url="{{jd_url}}">京东购买</view> -->
-      <navigator wx:if='{{showButton4JD}}' style="width: 100%;height: 80rpx;line-height: 80rpx; color: #666666; text-align: center;border-left: 2rpx solid #ededed;" target="miniProgram" app-id="{{jd_appid}}" path="{{jd_url}}" >京东购买</navigator>
+      
+      <navigator bindtap="shopBuyGoods" data-goods_id="{{goods_id}}" data-goods_nums="{{goods_nums}}" data-goods_box_mac="{{goods_box_mac}}" data-buy_type="2" wx:if='{{showButton4JD}}' style="width: 100%;height: 80rpx;line-height: 80rpx; color: #666666; text-align: center;border-left: 2rpx solid #ededed;" target="miniProgram" app-id="{{jd_appid}}" path="{{jd_url}}" >京东购买</navigator>
+      
     </view>
   </view>
   <view wx:if='{{showButton4Favorites}}' style="width: 600rpx;height: 80rpx;margin-top: 25rpx;font-size: 24rpx;">
