@@ -17,6 +17,7 @@
     "pages/mine/index",
     "pages/mine/favorite",
     "pages/mine/assist/index",
+    "pages/mine/assist/assistlist",
     "pages/demand/index",
     "pages/thematic/birthday/list",
     "pages/thematic/birthday/detail",

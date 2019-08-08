@@ -1,5 +1,295 @@
 //app.js
 App({
+  //电视播放
+  boxShow(box_mac = '', forscreen_id, pubdetail, res_type, res_len) {
+    var that = this;
+    if (box_mac == '') {
+      this.scanQrcode();
+    } else {
+      var user_info = wx.getStorageSync("savor_user_info");
+      
+      var avatarUrl = user_info.avatarUrl;
+      var nickName = user_info.nickName;
+      var openid = user_info.openid;
+      var forscreen_char = '';
+      var mobile_brand = that.globalData.mobile_brand;
+      var mobile_model = that.globalData.mobile_model;
+      if (res_type == 1) {
+        var action = 11; //发现图片点播
+      } else if (res_type == 2) {
+        var action = 12; //发现视频点播
+      }
+      var forscreen_id = (new Date()).valueOf();
+      wx.request({
+        url: that.globalData.api_url + '/smallapp21/User/isForscreenIng',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        method: "POST",
+        data: {
+          box_mac: box_mac
+        },
+        success: function (res) {
+          var is_forscreen = res.data.result.is_forscreen;
+          if (is_forscreen == 1) {
+            wx.showModal({
+              title: '确认要打断投屏',
+              content: '当前电视正在进行投屏,继续投屏有可能打断当前投屏中的内容.',
+              success: function (res) {
+                if (res.confirm) {
+
+                  if (res_type == 1) {
+                    for (var i = 0; i < res_len; i++) {
+                      var order = i + 1;
+                      wx.request({ //start
+                        url: that.globalData.api_url + '/Smallapp/index/recordForScreenPics',
+                        header: {
+                          'content-type': 'application/json'
+                        },
+                        data: {
+                          forscreen_id: forscreen_id,
+                          openid: openid,
+                          box_mac: box_mac,
+                          action: action,
+                          mobile_brand: mobile_brand,
+                          mobile_model: mobile_model,
+                          forscreen_char: forscreen_char,
+                          imgs: '["' + pubdetail[i]['forscreen_url'] + '"]',
+                          resource_id: pubdetail[i]['res_id'],
+                          res_sup_time: 0,
+                          res_eup_time: 0,
+                          resource_size: pubdetail[i]['resource_size'],
+                          is_pub_hotelinfo: 0,
+                          is_share: 0
+                        },
+                        success: function (ret) { }
+                      }); //end
+                      var url = pubdetail[i]['forscreen_url'];
+                      var filename = pubdetail[i]['filename'];
+                      var res_id = pubdetail[i]['res_id'];
+
+                      wx.request({
+                        url: that.globalData.api_url + '/Netty/Index/index',
+                        headers: {
+                          'Content-Type': 'application/json'
+                        },
+                        method: "POST",
+                        data: {
+                          box_mac: box_mac,
+                          msg: '{ "action": 4, "resource_type":2, "url":"' + url + '","filename":"' + filename + '","openid":"' + openid + '","img_nums":' + res_len + ',"forscreen_char":"' + forscreen_char + '","order":' + order + ',"forscreen_id":"' + forscreen_id + '","img_id":"' + res_id + '","avatarUrl":"' + avatarUrl + '","nickName":"' + nickName + '"}',
+                        },
+                        success: function (result) {
+
+                          wx.showToast({
+                            title: '点播成功,电视即将开始播放',
+                            icon: 'none',
+                            duration: 5000
+                          });
+                        },
+                        fail: function (res) {
+                          wx.showToast({
+                            title: '网络异常,点播失败',
+                            icon: 'none',
+                            duration: 2000
+                          })
+                        }
+                      })
+                    }
+                  } else { //视频投屏
+                    for (var i = 0; i < res_len; i++) {
+                      wx.request({
+                        url: that.globalData.api_url + '/Smallapp/index/recordForScreenPics',
+                        header: {
+                          'content-type': 'application/json'
+                        },
+                        data: {
+                          openid: openid,
+                          box_mac: box_mac,
+                          action: 12,
+                          mobile_brand: mobile_brand,
+                          mobile_model: mobile_model,
+                          forscreen_char: forscreen_char,
+                          imgs: '["' + pubdetail[i]['forscreen_url'] + '"]',
+                          resource_id: pubdetail[i]['res_id'],
+                          res_sup_time: 0,
+                          res_eup_time: 0,
+                          resource_size: pubdetail[i]['resource_size'],
+                          is_pub_hotelinfo: 0,
+                          is_share: 0,
+                          forscreen_id: forscreen_id,
+                          duration: pubdetail[i]['duration'],
+                        },
+                        success: function (ret) {
+                        }
+                      });
+                      wx.request({
+                        url: that.globalData.api_url + '/Netty/Index/index',
+                        headers: {
+                          'Content-Type': 'application/json'
+                        },
+                        method: "POST",
+                        data: {
+                          box_mac: box_mac,
+                          msg: '{ "action":2, "url": "' + pubdetail[i]['forscreen_url'] + '", "filename":"' + pubdetail[i]['filename'] + '","openid":"' + openid + '","resource_type":2,"video_id":"' + pubdetail[i]['res_id'] + '","avatarUrl":"' + avatarUrl + '","nickName":"' + nickName + '","forscreen_id":"' + forscreen_id + '"}',
+                        },
+                        success: function (result) {
+
+                          wx.showToast({
+                            title: '点播成功,电视即将开始播放',
+                            icon: 'none',
+                            duration: 2000
+                          });
+                        },
+                        fail: function (res) {
+                          wx.showToast({
+                            title: '网络异常,点播失败',
+                            icon: 'none',
+                            duration: 2000
+                          })
+                        }
+                      });
+                    }
+                  }
+                  wx.request({
+                    url: that.globalData.api_url + '/Smallapp21/CollectCount/recCount',
+                    headers: {
+                      'Content-Type': 'application/json'
+                    },
+                    data: {
+                      res_id: forscreen_id
+                    },
+
+                  })
+                } else {
+                }
+              }
+            })
+          } else {
+            if (res_type == 1) {
+              for (var i = 0; i < res_len; i++) {
+                var order = i + 1;
+                wx.request({ //start
+                  url: that.globalData.api_url + '/Smallapp/index/recordForScreenPics',
+                  header: {
+                    'content-type': 'application/json'
+                  },
+                  data: {
+                    forscreen_id: forscreen_id,
+                    openid: openid,
+                    box_mac: box_mac,
+                    action: action,
+                    mobile_brand: mobile_brand,
+                    mobile_model: mobile_model,
+                    forscreen_char: forscreen_char,
+                    imgs: '["' + pubdetail[i]['forscreen_url'] + '"]',
+                    resource_id: pubdetail[i]['res_id'],
+                    res_sup_time: 0,
+                    res_eup_time: 0,
+                    resource_size: pubdetail[i]['resource_size'],
+                    is_pub_hotelinfo: 0,
+                    is_share: 0
+                  },
+                  success: function (ret) { }
+                }); //end
+                var url = pubdetail[i]['forscreen_url'];
+                var filename = pubdetail[i]['filename'];
+                var res_id = pubdetail[i]['res_id'];
+                wx.request({
+                  url: that.globalData.api_url + '/Netty/Index/index',
+                  headers: {
+                    'Content-Type': 'application/json'
+                  },
+                  method: "POST",
+                  data: {
+                    box_mac: box_mac,
+                    msg: '{ "action": 4, "resource_type":2, "url":"' + url + '","filename":"' + filename + '","openid":"' + openid + '","img_nums":' + res_len + ',"forscreen_char":"' + forscreen_char + '","order":' + order + ',"forscreen_id":"' + forscreen_id + '","img_id":"' + res_id + '","avatarUrl":"' + avatarUrl + '","nickName":"' + nickName + '"}',
+                  },
+                  success: function (result) {
+                    wx.showToast({
+                      title: '点播成功,电视即将开始播放',
+                      icon: 'none',
+                      duration: 5000
+                    });
+                  },
+                  fail: function (res) {
+                    wx.showToast({
+                      title: '网络异常,点播失败',
+                      icon: 'none',
+                      duration: 2000
+                    })
+                  }
+                })
+              }
+            } else { //视频投屏
+              for (var i = 0; i < res_len; i++) {
+                wx.request({
+                  url: that.globalData.api_url + '/Smallapp/index/recordForScreenPics',
+                  header: {
+                    'content-type': 'application/json'
+                  },
+                  data: {
+                    openid: openid,
+                    box_mac: box_mac,
+                    action: 12,
+                    mobile_brand: mobile_brand,
+                    mobile_model: mobile_model,
+                    forscreen_char: forscreen_char,
+                    imgs: '["' + pubdetail[i]['forscreen_url'] + '"]',
+                    resource_id: pubdetail[i]['res_id'],
+                    res_sup_time: 0,
+                    res_eup_time: 0,
+                    resource_size: pubdetail[i]['resource_size'],
+                    is_pub_hotelinfo: 0,
+                    is_share: 0,
+                    forscreen_id: forscreen_id,
+                    duration: pubdetail[i]['duration'],
+                  },
+                  success: function (ret) {
+
+                  }
+                });
+                wx.request({
+                  url: that.globalData.api_url + '/Netty/Index/index',
+                  headers: {
+                    'Content-Type': 'application/json'
+                  },
+                  method: "POST",
+                  data: {
+                    box_mac: box_mac,
+                    msg: '{ "action":2, "url": "' + pubdetail[i]['forscreen_url'] + '", "filename":"' + pubdetail[i]['filename'] + '","openid":"' + openid + '","resource_type":2,"video_id":"' + pubdetail[i]['res_id'] + '","avatarUrl":"' + avatarUrl + '","nickName":"' + nickName + '","forscreen_id":"' + forscreen_id + '"}',
+                  },
+                  success: function (result) {
+
+                    wx.showToast({
+                      title: '点播成功,电视即将开始播放',
+                      icon: 'none',
+                      duration: 2000
+                    });
+                  },
+                  fail: function (res) {
+                    wx.showToast({
+                      title: '网络异常,点播失败',
+                      icon: 'none',
+                      duration: 2000
+                    })
+                  }
+                });
+              }
+            }
+            wx.request({
+              url: that.globalData.api_url + '/Smallapp21/CollectCount/recCount',
+              headers: {
+                'Content-Type': 'application/json'
+              },
+              data: {
+                res_id: forscreen_id
+              },
+            })
+          }
+        }
+      });
+    }
+  }, //电视播放结束
   controlExitForscreen:function (openid,box_mac) {
     var that = this;
     //openid = e.currentTarget.dataset.openid;
@@ -316,10 +606,10 @@ App({
     rest_appid:'wxc395eb4b44563af1',
     jijian_appid:'wx7883a4327329a67c',
     jd_appid:'wx91d27dbf599dff74',
-    api_url:'https://mobile.littlehotspot.com',
-    oss_upload_url: 'https://image.littlehotspot.com',
-    netty_url: 'https://netty-push.littlehotspot.com',
-    oss_url: 'https://oss.littlehotspot.com',
+    api_url:'https://dev-mobile.littlehotspot.com',
+    oss_upload_url: 'https://dev-image.littlehotspot.com',
+    netty_url: 'https://dev-netty-push.littlehotspot.com',
+    oss_url: 'https://dev-oss.littlehotspot.com',
     oss_bucket:'redian-produce',
     oss_access_key_id:'LTAITjXOpRHKflOX',
   }

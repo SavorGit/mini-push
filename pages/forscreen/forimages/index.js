@@ -165,9 +165,7 @@ Page({
   up_forscreen(e) {//多张图片投屏开始(不分享到发现)
     console.log(e);
     var that = this;
-    that.setData({
-      is_btn_disabel:true,
-    })
+    
     img_lenth = e.detail.value.img_lenth;
     openid = e.detail.value.openid;
     box_mac = e.detail.value.box_mac;
@@ -178,6 +176,12 @@ Page({
     var avatarUrl = e.detail.value.avatarUrl;
     var nickName = e.detail.value.nickName;
     var is_open_simple = e.detail.value.is_open_simple;
+
+    that.setData({
+      is_btn_disabel: true,
+      is_share: is_share
+    })
+
     if (e.detail.value.upimgs0 != '' && e.detail.value.upimgs0 != undefined) upimgs[0] = e.detail.value.upimgs0;
     if (e.detail.value.upimgs1 != '' && e.detail.value.upimgs1 != undefined) upimgs[1] = e.detail.value.upimgs1;
     if (e.detail.value.upimgs2 != '' && e.detail.value.upimgs2 != undefined) upimgs[2] = e.detail.value.upimgs2;
@@ -223,6 +227,7 @@ Page({
 
                     policy = rest.data.policy;
                     signature = rest.data.signature;
+                    //第一步
                     uploadOss_multy(policy, signature, upimgs, box_mac, openid, img_lenth, forscreen_char, avatarUrl, nickName, public_text, timer8_0);
                   }
                 });
@@ -251,6 +256,7 @@ Page({
 
               policy = rest.data.policy;
               signature = rest.data.signature;
+              //第一步
               uploadOss_multy(policy, signature, upimgs, box_mac, openid, img_lenth, forscreen_char, avatarUrl, nickName, public_text, timer8_0);
             }
           });
@@ -412,11 +418,13 @@ Page({
         // that.setData({
         //   tmp_imgs: tmp_imgs
         // });
+        //第二步
         uploadOssNew(policy, signature, filename, box_mac, openid, timestamp, i, img_len, forscreen_char, forscreen_id, res_sup_time, avatarUrl, nickName, public_text, timer8_0, tmp_imgs);
       }
       that.setData({
         showThird: true,
-        showTpBt: false
+        showTpBt: false,
+        forscreen_id: forscreen_id,
       });
     }
   }, //多张图片投屏结束(不分享到发现)
@@ -894,5 +902,25 @@ Page({
       icon: 'none',
       duration: 2000
     });
+  },
+  //我要助力
+  assist:function(e){
+    var that = this;
+    var forscreen_id = e.currentTarget.dataset.forscreen_id;
+    if (typeof (forscreen_id)=='undefined'){
+      wx.showToast({
+        title: '助力参数异常，请重选照片',
+        icon:'none',
+        duration:2000
+      })
+      wx.navigateTo({
+        url: '/pages/mine/assist/index?rec_id=' + forscreen_id,
+      })
+    }else {
+      wx.navigateTo({
+        url: '/pages/mine/assist/index?rec_id=' + forscreen_id,
+      })
+    }
+    
   }
 })

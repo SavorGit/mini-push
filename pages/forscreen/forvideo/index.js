@@ -13,6 +13,7 @@ var page = 1;
 var forscreen_history_list;
 var api_url = app.globalData.api_url;
 var oss_upload_url = app.globalData.oss_upload_url;
+var oss_url = app.globalData.oss_url;
 Page({
 
   /**
@@ -98,12 +99,7 @@ Page({
   forscreen_video: function (res) {
     //console.log(res);
     var that= this;
-    that.setData({
-      load_fresh_char: '亲^_^投屏中,请稍后...',
-      hiddens: false,
-      is_btn_disabel:true,
-      is_open_control:true
-    })
+    
     var video = res.detail.value.video;
     var box_mac = res.detail.value.box_mac;
     var openid = res.detail.value.openid;
@@ -114,7 +110,13 @@ Page({
     var nickName = res.detail.value.nickName;
     var public_text = res.detail.value.public_text;
     var is_open_simple = res.detail.value.is_open_simple;
-    
+    that.setData({
+      load_fresh_char: '亲^_^投屏中,请稍后...',
+      hiddens: false,
+      is_btn_disabel: true,
+      is_open_control: true,
+      is_share: is_share
+    })
 
     res_sup_time = (new Date()).valueOf();
     
@@ -224,14 +226,15 @@ Page({
         });
         if (res.progress == 100) {
           var res_eup_time = (new Date()).valueOf();
-          //console.log(res_eup_time);
+          console.log(res_eup_time);
           that.setData({
             showVedio:false,
-            oss_video_url: "http://oss.littlehotspot.com/forscreen/resource/" + timestamp + postf_t,
+            oss_video_url: oss_url + "/forscreen/resource/" + timestamp + postf_t,
             upload_vedio_temp:'',
             is_view_control: true,
             hiddens:true,
-            is_open_control: false
+            is_open_control: false,
+            forscreen_id: res_eup_time
           })
           wx.request({
             url: api_url+'/Smallapp21/index/recordForScreenPics',
@@ -270,7 +273,7 @@ Page({
                 },
                 success: function (result) {
                     that.setData({
-                      upload_vedio_cover: 'http://oss.littlehotspot.com/forscreen/resource/' + timestamp + postf_t +'?x-oss-process=video/snapshot,t_2000,f_jpg,w_450,m_fast',
+                      upload_vedio_cover: oss_url+'/forscreen/resource/' + timestamp + postf_t +'?x-oss-process=video/snapshot,t_2000,f_jpg,w_450,m_fast',
                     })
 
                 },
@@ -1097,6 +1100,27 @@ Page({
     box_mac = e.currentTarget.dataset.box_mac;
     var change_type = e.currentTarget.dataset.change_type;
     app.controlChangeProgram(box_mac, change_type);
+  },
+  //我要助力
+  assist: function (e) {
+    console.log(e);
+    var that = this;
+    var forscreen_id = e.currentTarget.dataset.forscreen_id;
+    if (typeof (forscreen_id) == 'undefined') {
+      wx.showToast({
+        title: '助力参数异常，请重选照片',
+        icon: 'none',
+        duration: 2000
+      })
+      wx.navigateTo({
+        url: '/pages/mine/assist/index?rec_id=' + forscreen_id,
+      })
+    } else {
+      wx.navigateTo({
+        url: '/pages/mine/assist/index?rec_id=' + forscreen_id,
+      })
+    }
+
   },
   /**
    * 生命周期函数--监听页面初次渲染完成

@@ -31,7 +31,8 @@ Page({
     
     is_game_banner: 0, //是否显示猴子爬树游戏banner
     is_open_simple: 0,
-    imgUrls: [],
+    imgUrls: [],   //顶部广告位
+    imgUrls_mid:[],//中部广告位
 
     indicatorDots: true, //是否显示面板指示点
     autoplay: true, //是否自动切换
@@ -247,19 +248,34 @@ Page({
     wx.request({
       url: api_url + '/Smallapp3/Adsposition/getAdspositionList',
       data: {
-        position: 2,
+        position: '2,3',
       },
       success: function(res) {
         if (res.data.code == 10000) {
-          var imgUrls = res.data.result;
+          var imgUrls = res.data.result[2];
+          var imgUrls_mid = res.data.result[3];
           that.setData({
-            imgUrls: res.data.result
+            imgUrls: imgUrls,
+            imgUrls_mid: imgUrls_mid
           })
         }
       }
     })
-
-    
+    //热播内容
+    wx.request({
+      url: api_url+'/aa/bb/cc',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      method: "POST",
+      success:function(res){
+        if(res.data.code==10000){
+          that.setData({
+            hot_play:res.data.result
+          })
+        }
+      }
+    })
   },
   onGetUserInfo: function(res) {
     var that = this;
@@ -776,6 +792,15 @@ Page({
     wx.navigateTo({
       url: '/pages/h5/index?h5_url='+h5_url,
     })
+  },
+  //电视播放
+  boxShow:function(e){
+    var forscreen_id = e.currentTarget.dataset.forscreen_id;
+    console.log(box_mac);
+    var pubdetail = e.currentTarget.dataset.pubdetail;
+    var res_type = e.currentTarget.dataset.res_type;
+    var res_num  = e.currentTarget.dataset.res_num;
+    app.boxShow(box_mac, forscreen_id, pubdetail, res_type, res_num);
   },
   /**
    * 生命周期函数--监听页面初次渲染完成
