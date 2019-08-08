@@ -38,7 +38,7 @@
                 </navigator>
                 <view class="cover">
                   <navigator url="/pages/forscreen/video/launch_video?video_url={{pubdetail.res_url}}&video_name=">
-                    <image src='/images/icon2/FFFFFF__play.png'></image>
+                    <image src='/images/icon2/FFFFFF_play.png'></image>
                   </navigator>
                   <view>
                     <label class='font_F6F3EE_20'>{{pubdetail.duration}}</label>
@@ -127,8 +127,8 @@
     </view>
 
     <view class='delete-bottom'>
-      <button class='savor-btn' bindtap="modalCancel">取消</button>
-      <button class='savor-btn theme-menu' bindtap="modalConfirm" data-keys="{{keys}}" data-publiclist='{{publiclist}}' data-forscreen_id='{{forscreen_id}}'>删除</button>
+      <button class='savor-btn theme-button' bindtap="modalCancel">取消</button>
+      <button class='savor-btn theme-button-dark' bindtap="modalConfirm" data-keys="{{keys}}" data-publiclist='{{publiclist}}' data-forscreen_id='{{forscreen_id}}'>删除</button>
     </view>
   </view>
 </bottomModal>

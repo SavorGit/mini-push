@@ -47,7 +47,7 @@
       <input class='display_hide' name="is_open_simple" value="{{is_open_simple}}"></input>
 
       <view class='page_bottom'>
-        <button class="savor-btn savor-btn-size" form-type="submit" hover-class="none" disabled='{{is_btn_disabel}}'>投屏</button>
+        <button class="savor-btn savor-btn-size theme-button" form-type="submit" hover-class="none" disabled='{{is_btn_disabel}}'>投屏</button>
       </view>
     </form>
 
@@ -64,60 +64,14 @@
         </view>
 
         <view class='bottom-pop-window-bottom'>
-          <button class='savor-btn' bindtap="">继续投屏</button>
-          <button class='savor-btn theme-menu' bindtap="">取消投屏</button>
+          <button class='savor-btn theme-button' bindtap="">继续投屏</button>
+          <button class='savor-btn theme-button-dark' bindtap="">取消投屏</button>
         </view>
       </view>
     </bottomModal>
   </view>
 
 
-  <!-- ================================== 视频上传中 ================================== -->
-  <!-- <view class="full_width launch_video_page_b display_{{showVedio?'show':'hide'}}">
-    <view class='page_top theme2 flex_row_center font_666666_26'>
-      <label>视频加载完成后，电视开始加载并自动播放</label>
-      <label class='link_relief'>
-        <navigator url="/pages/forscreen/relief">免责声明</navigator>
-      </label>
-    </view>
-    <view class='page_main'>
-      <view class='cover full_width'>
-        <video src='{{upload_vedio_temp}}'></video>
-        <view>
-          <label class='font_1CBEB6_34'>{{vedio_percent}}%</label>
-          <progress percent='{{vedio_percent}}' activeColor='#1CBEB6' backgroundColor="#0e1c29" />
-        </view>
-      </view>
-    </view>
-    <view class='page_bottom'>
-      <button bindtap='forscreen_video' class="savor-btn savor-btn-size uploading" form-type="submit" hover-class="none" data-box_mac='{{box_mac}}' data-openid='{{openid}}' data-video="{{upload_vedio_temp}}" data-is_pub_hotelinfo='{{is_pub_hotelinfo}}' data-duration="{{duration}}"
-        data-is_share='{{is_share}}' data-avatarUrl='{{avatarUrl}}' data-nickName='{{nickName}}' disabled='{{is_btn_disabel}}'>正在上传...</button>
-    </view>
-  </view> -->
-
-
-  <!-- ================================== 视频上传失败 ================================== -->
-  <!-- <view class="full_width launch_video_page_b display_{{showVedio?'show':'hide'}}">
-    <view class='page_top theme2 flex_row_center font_666666_26'>
-      <label>视频加载完成后，电视开始加载并自动播放</label>
-      <label class='link_relief'>
-        <navigator url="/pages/forscreen/relief">免责声明</navigator>
-      </label>
-    </view>
-    <view class='page_main'>
-      <view class='cover full_width'>
-        <video src='{{upload_vedio_temp}}'></video>
-        <view>
-          <label class='font_666666_34'>{{vedio_percent}}%</label>
-          <progress percent='{{vedio_percent}}' activeColor='#666666' backgroundColor="#0e1c29" />
-        </view>
-      </view>
-    </view>
-    <view class='page_bottom'>
-      <button bindtap='forscreen_video' class="savor-btn savor-btn-size" form-type="submit" hover-class="none" data-box_mac='{{box_mac}}' data-openid='{{openid}}' data-video="{{upload_vedio_temp}}" data-is_pub_hotelinfo='{{is_pub_hotelinfo}}' data-duration="{{duration}}"
-        data-is_share='{{is_share}}' data-avatarUrl='{{avatarUrl}}' data-nickName='{{nickName}}' disabled='{{is_btn_disabel}}'>重试</button>
-    </view>
-  </view> -->
 
 
   <!-- ================================== 上传视频后 ================================== -->
@@ -129,25 +83,21 @@
       </label>
     </view>
     <view class='page_main'>
-       <view wx:if="{{is_open_control==false}}" class='cover'>
+      <view wx:if="{{is_open_control==false}}" class='cover'>
         <video src='{{oss_video_url}}'></video>
       </view>
-
-
-
     </view>
 
     <!-- 重选 -->
     <view class="page_bottom theme2">
       <view class='button_group flex_row_center'>
-        <button class='savor-btn button_space_left' bindtap='chooseVedio' data-boxmac="{{box_mac}}" data-openid="{{openid}}">重选视频</button>
-        <button class='savor-btn button_space_right' bindtap="exitForscreend" data-boxmac="{{box_mac}}" data-openid="{{openid}}">退出投屏</button>
+        <button class='savor-btn button_space_left theme-button' bindtap='chooseVedio' data-boxmac="{{box_mac}}" data-openid="{{openid}}">重选视频</button>
+        <button class='savor-btn button_space_right theme-button-dark' bindtap="exitForscreend" data-boxmac="{{box_mac}}" data-openid="{{openid}}">退出投屏</button>
       </view>
     </view>
 
     <view class='launch_history'>
       <view class='title'>
-        <!-- <image src='/images/icon2/333333_history.png'></image> -->
         <label class='font_666666_26'>投屏历史</label>
       </view>
 
@@ -162,18 +112,15 @@
                 </view>
               </view>
               <view class='btn'>
-                <button bindtap="replayHistory" data-res_type='{{bean.res_type}}' data-box_mac='{{box_mac}}' data-openid='{{openid}}' data-res_list='{{bean.list}}'>重投</button>
+                <button class="theme-button-dark" bindtap="replayHistory" data-res_type='{{bean.res_type}}' data-box_mac='{{box_mac}}' data-openid='{{openid}}' data-res_list='{{bean.list}}'>重投</button>
               </view>
             </view>
             <view wx:else class="video">
               <view class="cover" wx:for="{{bean.list}}" wx:key="pkey" wx:for-item="item" wx:for-index="indexs">
-                <!-- <navigator url="/pages/forscreen/video/launch_video?video_url={{item.res_url}}&video_name=">
-                  <image mode='aspectFill' src="{{item.imgurl}}"></image>
-                </navigator> -->
                 <navigator url="/pages/forscreen/video/launch_video?video_url={{item.res_url}}&video_name=&box_mac={{box_mac}}&res_id={{item.resource_id}}&filename={{item.filename}}&video_img_url={{item.imgurl}}">
                   <image mode='aspectFill' src="{{item.imgurl}}"></image>
                 </navigator>
-                
+
                 <view>
                   <navigator url="/pages/forscreen/video/launch_video?video_url={{item.res_url}}&video_name=&box_mac={{box_mac}}&res_id={{item.resource_id}}&filename={{item.filename}}&video_img_url={{item.imgurl}}">
                     <image src="/images/icon/white_play.png"></image>
@@ -181,7 +128,7 @@
                 </view>
               </view>
               <view class='btn'>
-                <button bindtap="replayHistory" data-res_type='{{bean.res_type}}' data-box_mac='{{box_mac}}' data-openid='{{openid}}' data-res_list='{{bean.list}}'>重投</button>
+                <button class="theme-button-dark" bindtap="replayHistory" data-res_type='{{bean.res_type}}' data-box_mac='{{box_mac}}' data-openid='{{openid}}' data-res_list='{{bean.list}}'>重投</button>
               </view>
             </view>
             <view wx:if="{{forscreen_history_list.length > index+1}}" class='line'></view>

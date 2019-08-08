@@ -16,6 +16,7 @@
     "pages/mine/index_20181010",
     "pages/mine/index",
     "pages/mine/favorite",
+    "pages/mine/assist/index",
     "pages/demand/index",
     "pages/thematic/birthday/list",
     "pages/thematic/birthday/detail",
@@ -37,8 +38,7 @@
     "pages/forscreen/forfile/files",
     "pages/forscreen/forfile/h5files",
     "pages/forscreen/forfile/h5files_result",
-    "pages/h5/index",
-    "pages/mine/assist/index"
+    "pages/h5/index"
   ],
   "permission": {
     "scope.userLocation": {
@@ -47,15 +47,16 @@
   },
   "window": {
     "backgroundTextStyle": "dark",
-    "navigationBarBackgroundColor": "#05101a",
     "navigationBarTitleText": "热点投屏",
-    "navigationBarTextStyle": "white",
+    "navigationBarTextStyle": "black",
+    "navigationBarBackgroundColor": "#FFFFFF",
+    "backgroundColor": "#FFFFFF",
     "navigationStyle": "custom"
   },
   "tabBar": {
-    "color": "#666666",
-    "selectedColor": "#1cbeb6",
-    "backgroundColor": "#000000",
+    "color": "#333333",
+    "selectedColor": "#000000",
+    "backgroundColor": "#FFFFFF",
     "borderStyle": "white",
     "list": [
       {

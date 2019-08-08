@@ -3,7 +3,7 @@
 /* ================================= 微信授权登录 ================================= */
 
 .wxAuthLogin-container {
-  background-color: #fff;
+  /* background-color: #fff; */
   width: 100%;
   height: 100%;
   text-align: center;
@@ -59,7 +59,7 @@
 
 .wxAuthLogin-container > .wxAuthLogin-middle > .link_relief > navigator {
   font-size: 30rpx;
-  color: #999;
+  /* color: #999; */
   text-decoration: underline;
 }
 
@@ -82,28 +82,28 @@
 .fixedSuspensionButtonGroup > .scan_tdc > button {
   margin: 0;
   padding: 0;
-  border: 1rpx solid #1cbeb6;
-  box-shadow: 0 0 15px #1cbeb6;
   width: 90rpx;
   height: 90rpx;
   line-height: 90rpx;
   border-radius: 49%;
-  color: #1cbeb6;
+  /* color: #1cbeb6;
+  border: 1rpx solid #1cbeb6;
+  box-shadow: 0 0 15px #1cbeb6; */
   font-size: 24rpx;
 }
 
 .fixedSuspensionButtonGroup > .scan_tdc > button > image {
   width: 96rpx;
   height: 96rpx;
-  border: 2rpx solid #1cbeb6;
-  box-shadow: 0 0 10px #1cbeb6;
+  /* border: 2rpx solid #1cbeb6;
+  box-shadow: 0 0 10px #1cbeb6; */
   border-radius: 49%;
 }
 
 /* ================================= 遥控器窗口 ================================= */
 
 .remoteControlWindow-container {
-  background-color: #1cbeb6;
+  /* background-color: #1cbeb6; */
   width: 100%;
   height: 100%;
   text-align: center;
@@ -111,7 +111,6 @@
 }
 
 .remoteControlWindow-container .button-hover {
-  /* background-color: rgba(0, 0, 0, 0.1); */
   opacity: 0.7;
 }
 
@@ -123,9 +122,6 @@
 .remoteControlWindow-container .remoteControlWindow-control image {
   width: 30rpx;
   height: 30rpx;
-  /* padding: 10rpx 25rpx;
-  background-color: rgba(0, 0, 0, 0.1);
-  border-radius: 10rpx; */
 }
 
 .remoteControlWindow-container .remoteControlWindow-top {
@@ -186,7 +182,7 @@
   align-items: center;
   justify-content: center;
   font-size: 24rpx;
-  color: #fff;
+  /* color: #fff; */
   z-index: 10;
 }
 
@@ -223,25 +219,16 @@
   margin: auto;
   font-size: 28rpx;
   border-radius: 15rpx;
-  /* position: relative;
-  padding-left: 14px;
-  padding-right: 14px;
-  box-sizing: border-box;
-  text-align: center;
-  text-decoration: none;
-  -webkit-tap-highlight-color: transparent;
-  overflow: hidden; */
 }
 
 .remoteControlWindow-container .remoteControlWindow-bottom navigator.navigator-hover {
-  background-color: #05101a;
+  /* background-color: #05101a; */
   opacity: 0.7;
 }
 
 /* ================================= 自定义顶级页面导航栏 ================================= */
 
 .default-navigation-bar {
-  /* background-color: #932c3f; */
   width: 100vw;
 }
 
@@ -274,7 +261,6 @@
 .default-navigation-bar > .navigation-bar > .title > .text {
   font-size: 16px;
   font-weight: bold;
-  color: #fff;
 }
 
 /* ================================= 自定义二级页面导航栏 ================================= */
@@ -287,6 +273,7 @@
 .default-navigation-bar > .navigation-bar > .btn > .to-home {
   padding-left: 5px;
   padding-right: 5px;
+  font-size: 12px;
 }
 
 .default-navigation-bar > .navigation-bar > .btn > .go-back > image,
@@ -294,6 +281,12 @@
   width: 24px;
   height: 24px;
   vertical-align: middle;
+}
+
+.default-navigation-bar > .navigation-bar > .btn > .go-back > label,
+.default-navigation-bar > .navigation-bar > .btn > .to-home > label {
+  width: 24px;
+  height: 24px;
 }
 
 @-webkit-keyframes rotate2 {

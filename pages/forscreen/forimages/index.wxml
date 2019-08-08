@@ -63,7 +63,7 @@
         </view>
       </view>
       <view class='page_bottom'>
-        <button class="full_width savor-btn" form-type="submit" hover-class="none" disabled='{{is_btn_disabel}}'>投屏</button>
+        <button class="full_width savor-btn theme-button" form-type="submit" hover-class="none" disabled='{{is_btn_disabel}}'>投屏</button>
       </view>
     </form>
 
@@ -80,8 +80,8 @@
         </view>
 
         <view class='bottom-pop-window-bottom'>
-          <button class='savor-btn' bindtap="">继续投屏</button>
-          <button class='savor-btn theme-menu' bindtap="">取消投屏</button>
+          <button class='savor-btn theme-button' bindtap="">继续投屏</button>
+          <button class='savor-btn theme-button-dark' bindtap="">取消投屏</button>
         </view>
       </view>
     </bottomModal>
@@ -137,13 +137,12 @@
     <!-- 重选 -->
     <view class="page_bottom theme2">
       <view class='button_group'>
-        <button class='savor-btn button_space_left' bindtap="chooseImage" data-boxmac="{{box_mac}}" data-openid="{{openid}}">重选照片</button>
-        <button class='savor-btn button_space_right' bindtap="exitForscreen" data-boxmac="{{box_mac}}">退出投屏</button>
+        <button class='savor-btn button_space_left theme-button' bindtap="chooseImage" data-boxmac="{{box_mac}}" data-openid="{{openid}}">重选照片</button>
+        <button class='savor-btn button_space_right theme-button-dark' bindtap="exitForscreen" data-boxmac="{{box_mac}}">退出投屏</button>
       </view>
     </view>
     <view class='launch_history'>
       <view class='title'>
-        <!-- <image src='/images/icon2/333333_history.png'></image> -->
         <label class='font_666666_26'>投屏历史</label>
       </view>
       <scroll-view scroll-y="true" scroll-with-animation="true" bindscrolltolower="loadMore" data-openid='{{openid}}' data-box_mac='{{box_mac}}'>
@@ -157,7 +156,7 @@
                 </view>
               </view>
               <view class='btn'>
-                <button bindtap="replayHistory" data-res_type='{{bean.res_type}}' data-box_mac='{{box_mac}}' data-openid='{{openid}}' data-res_list='{{bean.list}}'>重投</button>
+                <button class="theme-button-dark" bindtap="replayHistory" data-res_type='{{bean.res_type}}' data-box_mac='{{box_mac}}' data-openid='{{openid}}' data-res_list='{{bean.list}}'>重投</button>
               </view>
             </view>
             <view wx:else class="video">
@@ -172,7 +171,7 @@
                 </view>
               </view>
               <view class='btn'>
-                <button bindtap="replayHistory" data-res_type='{{bean.res_type}}' data-box_mac='{{box_mac}}' data-openid='{{openid}}' data-res_list='{{bean.list}}'>重投</button>
+                <button class="theme-button-dark" bindtap="replayHistory" data-res_type='{{bean.res_type}}' data-box_mac='{{box_mac}}' data-openid='{{openid}}' data-res_list='{{bean.list}}'>重投</button>
               </view>
             </view>
             <view wx:if="{{forscreen_history_list.length > index+1}}" class='line'></view>

@@ -1,5 +1,10 @@
 /** theme.wxss **/
 
+.navigator-hover {
+  background-color: rgba(0, 0, 0, 0.1);
+  opacity: 0.7;
+}
+
 .theme {
   background-color: #05101a;
 }
@@ -33,8 +38,8 @@
 }
 
 .theme-navigation {
-  color: #fff;
-  background-color: #05101a;
+  color: #333;
+  background-color: #fff;
 }
 
 .theme-menu {
@@ -44,6 +49,11 @@
 .theme-button {
   color: #fff;
   background-color: #1cbeb6;
+}
+
+.theme-button-dark {
+  color: #fff;
+  background-color: #0e1c29;
 }
 
 .theme-button2 {
@@ -84,4 +94,201 @@
 
 .theme-font4 {
   color: #fff;
+}
+
+/* ================================== 文字 ================================== */
+
+.font_333333_20 {
+  font-size: 20rpx;
+  color: #333;
+}
+
+.font_333333_24 {
+  font-size: 24rpx;
+  color: #333;
+}
+
+.font_333333_26 {
+  font-size: 26rpx;
+  color: #333;
+}
+
+.font_333333_28 {
+  font-size: 28rpx;
+  color: #333;
+}
+
+.font_333333_30 {
+  font-size: 30rpx;
+  color: #333;
+}
+
+.font_333333_32 {
+  font-size: 32rpx;
+  color: #333;
+}
+
+.font_333333_34 {
+  font-size: 34rpx;
+  color: #333;
+}
+
+.font_333333_36 {
+  font-size: 36rpx;
+  color: #333;
+}
+
+.font_666666_30 {
+  font-size: 30rpx;
+  color: #666;
+}
+
+.font_666666_28 {
+  font-size: 28rpx;
+  color: #666;
+}
+
+.font_666666_26 {
+  font-size: 26rpx;
+  color: #666;
+}
+
+.font_666666_24 {
+  font-size: 24rpx;
+  color: #666;
+}
+
+.font_999999_36 {
+  font-size: 36rpx;
+  color: #999;
+}
+
+.font_999999_28 {
+  font-size: 28rpx;
+  color: #999;
+}
+
+.font_999999_24 {
+  font-size: 24rpx;
+  color: #999;
+}
+
+.font_999999_26 {
+  font-size: 26rpx;
+  color: #999;
+}
+
+.font_999999_28 {
+  font-size: 28rpx;
+  color: #999;
+}
+
+.font_999999_30 {
+  font-size: 30rpx;
+  color: #999;
+}
+
+.font_F6F6F6_34 {
+  font-size: 34rpx;
+  color: #f6f6f6;
+}
+
+.font_F6F3EE_20 {
+  font-size: 20rpx;
+  color: #f6f3ee;
+}
+
+.font_F6F6F6_28 {
+  font-size: 28rpx;
+  color: #f6f6f6;
+}
+
+.font_F6F2EC_24 {
+  font-size: 24rpx;
+  color: #f6f2ec;
+}
+
+.font_F6F2EC_34 {
+  font-size: 34rpx;
+  color: #f6f2ec;
+}
+
+.font_F6F2EC_30 {
+  font-size: 30rpx;
+  color: #f6f2ec;
+}
+
+.font_F6F2EC_28 {
+  font-size: 28rpx;
+  color: #f6f2ec;
+}
+
+.font_FFFFFF_36 {
+  font-size: 36rpx;
+  color: #fff;
+}
+
+.font_FFFFFF_34 {
+  font-size: 34rpx;
+  color: #fff;
+}
+
+.font_FFFFFF_32 {
+  font-size: 32rpx;
+  color: #fff;
+}
+
+.font_FFFFFF_30 {
+  font-size: 30rpx;
+  color: #fff;
+}
+
+.font_FFFFFF_28 {
+  font-size: 28rpx;
+  color: #fff;
+}
+
+.font_FFFFFF_26 {
+  font-size: 26rpx;
+  color: #fff;
+}
+
+.font_FFFFFF_24 {
+  font-size: 24rpx;
+  color: #fff;
+}
+
+.font_1CBEB6_34 {
+  font-size: 34rpx;
+  color: #1cbeb6;
+}
+
+.font_25635f_24 {
+  font-size: 24rpx;
+  color: #25635f;
+}
+
+.font_932C3F_20 {
+  font-size: 20rpx;
+  color: #932c3f;
+}
+
+.font_932C3F_24 {
+  font-size: 24rpx;
+  color: #932c3f;
+}
+
+.font_932C3F_28 {
+  font-size: 28rpx;
+  color: #932c3f;
+}
+
+.font_932C3F_34 {
+  font-size: 34rpx;
+  color: #932c3f;
+}
+
+.link_relief {
+  color: #1cbeb6;
+  text-decoration: underline;
 }

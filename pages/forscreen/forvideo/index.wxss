@@ -197,7 +197,6 @@
 
 .launch_video_page_a > .page_bottom > .button_group > .button_space_right {
   margin-right: 40rpx;
-  background-color: #0e1c29;
 }
 
 .row-center {
@@ -208,34 +207,11 @@
   justify-content: space-between;
 }
 
-/* .replay_this, .replay_this::before {
-  margin: 20rpx 1rpx 30rpx 1rpx;
-  width: 160rpx;
-  height: 55rpx;
-  line-height: 1.877777;
-  border-radius: 10rpx;
-  border: 2rpx solid #932c3f;
-  color: #932c3f;
-  font-size: 28rpx;
-  padding: 0rpx;
-  background-color: unset;
-  display: inline-block;
-}
-
-.replay_this::after {
-  border-radius: 10rpx;
-  border: 0rpx;
-} */
-
 .disabled-button {
   cursor: not-allowed;
   border-color: #999;
   color: #999;
 }
-
-/* .launch_video_page_a .launch_history {
-  background: #f6f3ee;
-} */
 
 .launch_video_page_a .launch_history > .title {
   text-align: left;

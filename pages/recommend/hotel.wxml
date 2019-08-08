@@ -6,7 +6,7 @@
   <view wx:if="{{is_link==1}}" class='page_banner theme7 theme-font'>
     <view class='layout'>
       <label>您已经连接{{room_name}}电视</label>
-      <navigator  target="miniProgram" app-id="{{rest_appid}}" path="pages/index/index?box_mac={{box_mac}}" class='theme-button'>前往餐厅版</navigator>
+      <navigator target="miniProgram" app-id="{{rest_appid}}" path="pages/index/index?box_mac={{box_mac}}" class='theme-button'>前往餐厅版</navigator>
       <!-- <navigator version="trial" target="miniProgram" app-id="{{jijian_appid}}" path="pages/index/index?box_mac={{box_mac}}" class='theme-button'>前往极简版</navigator> -->
     </view>
   </view>
@@ -38,7 +38,7 @@
       </picker>
     </view>
   </view>
-  <scroll-view   class='{{is_link==1 ? "page_main_scroll_banner": "page_main_scroll" }}' scroll-y="true" scroll-with-animation="true" bindscrolltolower="loadMore">
+  <scroll-view class='{{is_link==1 ? "page_main_scroll_banner": "page_main_scroll" }}' scroll-y="true" scroll-with-animation="true" bindscrolltolower="loadMore">
     <!-- <scroll-view class='page_main_scroll' scroll-y="true" scroll-with-animation="true" bindscrolltolower="loadMore"> -->
     <view class='page_main'>
       <view class='row-item' wx:for="{{hotel_list}}" wx:key="key" wx:for-item="bean" wx:for-index="index">
@@ -70,7 +70,7 @@
   <view wx:if="{{close_hotel_hint==0}}" class='full_width flex-for-bottom'>
     <view class='flex-tip theme6'>
       <label>以上餐厅均可进行电视互动，体验投屏功能~</label>
-      <label bindtap='closeHotelHind' data-openid='{{openid}}' class='btn-colse'>⊗</label>
+      <label class='fa fa-times-circle-o btn-colse' bindtap='closeHotelHind' data-openid='{{openid}}'></label>
     </view>
   </view>
   <view class="body-view">

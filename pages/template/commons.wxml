@@ -21,7 +21,7 @@
         </label>
       </view>
       <view class='wxAuthLogin-bottom'>
-        <button class='savor-btn' open-type="getUserInfo" bindgetuserinfo="onGetUserInfo">微信授权登录</button>
+        <button class='savor-btn theme-button' open-type="getUserInfo" bindgetuserinfo="onGetUserInfo">微信授权登录</button>
       </view>
     </view>
   </modal>
@@ -37,8 +37,8 @@
         <label class='content font_333333_32'>请前往小热点极简版哦。</label>
       </view>
       <view class='wxAuthLogin-bottom' style='height: 110rpx; padding: 0rpx 100rpx; display:flex; flex-direction: row; align-items: center; justify-content: space-between;'>
-        <navigator bindtap='closeJump' class='savor-btn' style='width: 220rpx; height:80rpx; line-height:80rpx; border-radius: 10rpx; display: block; background-color: #BEBEBE;'>不需要</navigator>
-        <navigator target="miniProgram" app-id="wx7883a4327329a67c" path="pages/index/index?box_mac={{box_mac}}" version="release" class='savor-btn' style='width: 220rpx; height:80rpx; line-height:80rpx; border-radius: 10rpx; display: block; -webkit-animation: rotate2 1.8s linear;'>前往极简版</navigator>
+        <navigator bindtap='closeJump' class='savor-btn theme-button' style='width: 220rpx; height:80rpx; line-height:80rpx; border-radius: 10rpx; display: block; background-color: #BEBEBE;'>不需要</navigator>
+        <navigator target="miniProgram" app-id="wx7883a4327329a67c" path="pages/index/index?box_mac={{box_mac}}" version="release" class='savor-btn theme-button' style='width: 220rpx; height:80rpx; line-height:80rpx; border-radius: 10rpx; display: block; -webkit-animation: rotate2 1.8s linear;'>前往极简版</navigator>
       </view>
     </view>
   </bottomModal>
@@ -115,7 +115,7 @@
     <view class='navigation-bar'>
       <view class='btn'>
         <navigator class='go-back' open-type='navigateBack' delta='1'>
-          <image src='/images/icon2/FFFFFF_left-arrow.png'>Back</image>
+          <label class="fa fa-arrow-left fa-2x" title="Back"></label>
         </navigator>
         <!-- <view style='margin-right: 3px;'>
           <image src='/images/icon2/666666_vertical.png' style='width:1px; height: 18px; vertical-align: middle;'></image>
@@ -138,7 +138,7 @@
     <view class='navigation-bar'>
       <view class='btn'>
         <navigator class='go-back' open-type='navigateBack' delta='1'>
-          <image src='/images/icon2/FFFFFF_left-arrow.png'>Back</image>
+          <label class="fa fa-arrow-left fa-2x" title="Back"></label>
         </navigator>
         <!-- <view style='margin-right: 3px;'>
           <image src='/images/icon2/666666_vertical.png' style='width:1px; height: 18px; vertical-align: middle;'></image>
@@ -186,7 +186,7 @@
     <view class='navigation-bar' style='background-color: unset;'>
       <view class='btn'>
         <navigator class='go-back' open-type='navigateBack' delta='100'>
-          <image src='/images/icon2/FFFFFF_left-arrow.png'>Back</image>
+          <label class="fa fa-arrow-left fa-2x" title="Back"></label>
         </navigator>
         <!-- <view style='margin-right: 3px;'>
           <image src='/images/icon2/666666_vertical.png' style='width:1px; height: 18px; vertical-align: middle;'></image>

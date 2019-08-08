@@ -1,2 +1,7 @@
 <!--pages/mine/assist/index.wxml-->
-<text>pages/mine/assist/index.wxml</text>
+<import src="/pages/template/commons" />
+<template wx:if="{{isShare}}" is="navigationBarForShare" data='{{statusBarHeight: statusBarHeight,titleText:"为好友助力"}}' />
+<template wx:else is="navigationBarForTwoLevel" data='{{statusBarHeight: statusBarHeight,titleText:"邀请好友助力"}}' />
+
+<view class="container" style='height: calc(100vh - 46px - {{statusBarHeight}}px);'>
+</view>
