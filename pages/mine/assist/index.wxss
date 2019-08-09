@@ -4,37 +4,33 @@
   justify-content: start;
 }
 
-/* ==================================== 内容信息面板 ==================================== */
-
-.assist-info-panel {
-  height: 480rpx;
-}
-
 /* ==================================== 内容信息面板 [他人] ==================================== */
 
-/* ==================================== 内容信息面板 [自己] ==================================== */
-
-.assist-info-panel > .self {
+.assist-info-other-panel {
+  width: calc(100% - 40rpx);
+  height: 505rpx;
+  padding: 20rpx 20rpx 25rpx 20rpx;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: start;
 }
 
-.assist-info-panel > .self > .people {
+.assist-info-other-panel > .people {
   display: flex;
   flex-direction: row;
-  align-items: center;
+  align-items: flex-start;
   justify-content: start;
 }
 
-.assist-info-panel > .self > .people > .head-img {
+.assist-info-other-panel > .people > .head-img {
   width: 80rpx;
   height: 80rpx;
   border-radius: 50%;
+  margin-right: 20rpx;
 }
 
-.assist-info-panel > .self > .people > view {
+.assist-info-other-panel > .people > view {
   width: calc(100% - 80rpx);
   display: flex;
   flex-direction: column;
@@ -42,38 +38,134 @@
   justify-content: start;
 }
 
-.assist-info-panel > .self > .img {
-  width: 100rpx;
-  height: 100rpx;
+.assist-info-other-panel > .people > view > .name {
+  margin-top: 15rpx;
+}
+
+.assist-info-other-panel > .people > view > .msg:nth-child(2) {
+  margin-top: 20rpx;
+}
+
+.assist-info-other-panel > .people > view > .msg:nth-child(3) {
+  margin-left: 24rpx;
+}
+
+.assist-info-other-panel > .img {
+  width: 260rpx;
+  height: 260rpx;
+  margin-top: 30rpx;
   border-radius: 10rpx;
+}
+
+.assist-info-other-panel > .theme-button {
+  width: 350rpx;
+  height: 70rpx;
+  line-height: 70rpx;
+  margin-top: 21rpx;
+  border-radius: 35rpx;
+  font-size: 28rpx;
+}
+
+/* ==================================== 内容信息面板 [自己] ==================================== */
+
+.assist-info-self-panel {
+  width: calc(100% - 40rpx);
+  height: 560rpx;
+  padding: 20rpx;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: start;
+}
+
+.assist-info-self-panel > .people {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: start;
+}
+
+.assist-info-self-panel > .people > .head-img {
+  width: 80rpx;
+  height: 80rpx;
+  border-radius: 50%;
+  margin-right: 20rpx;
+}
+
+.assist-info-self-panel > .people > view {
+  width: calc(100% - 80rpx);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: start;
+}
+
+.assist-info-self-panel > .people > view > .name {
+  margin-top: 15rpx;
+}
+
+.assist-info-self-panel > .people > view > .msg:nth-child(2) {
+  margin-top: 20rpx;
+}
+
+.assist-info-self-panel > .people > view > .msg:nth-child(3) {
+  margin-left: 24rpx;
+}
+
+.assist-info-self-panel > .img {
+  width: 260rpx;
+  height: 260rpx;
+  margin-top: 30rpx;
+  border-radius: 10rpx;
+}
+
+.assist-info-self-panel > .theme-button {
+  width: 350rpx;
+  height: 70rpx;
+  line-height: 70rpx;
+  margin-top: 21rpx;
+  border-radius: 35rpx;
+  font-size: 28rpx;
+}
+
+.assist-info-self-panel > .font_333333_24 {
+  height: 30rpx;
+  line-height: 30rpx;
+  margin-top: 25rpx;
+}
+
+.assist-info-self-panel > .font_333333_24 > .theme-font5 {
+  font-size: 30rpx;
 }
 
 /* ==================================== 助力人员面板 ==================================== */
 
 .assist-people-panel {
-  height: 100rpx;
+  height: 174rpx;
   margin-top: 20rpx;
 }
 
 .assist-people-panel > .title-bar {
+  height: 24rpx;
+  padding: 5rpx 20rpx 0 20rpx;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.assist-people-panel > .list {
+  height: 110rpx;
   padding: 0 20rpx;
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
-  font-size: 24rpx;
-}
-
-.assist-people-panel > .list {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-around;
 }
 
 .assist-people-panel > .list > .people {
-  width: 70rpx;
-  height: 70rpx;
+  width: 90rpx;
+  height: 90rpx;
 }
 
 .assist-people-panel > .list > .people > .head-img {
@@ -85,7 +177,7 @@
 /* ==================================== 推荐面板 ==================================== */
 
 .recommend-panel {
-  height: 200rpx;
+  height: 610rpx;
   margin-top: 10rpx;
 }
 
@@ -98,11 +190,83 @@
   font-size: 24rpx;
 }
 
-.recommend-panel > .list {
+.recommend-panel > .title-bar > .title {
+  display: block;
+  font-size: 24rpx;
+  text-decoration: underline;
+}
+
+.recommend-panel > .list > .row {
+  height: 160rpx;
+  padding: 20rpx 0 15rpx 0;
+  margin: 0 25rpx;
   display: flex;
   flex-direction: row;
-  align-items: center;
-  justify-content: space-around;
+  align-items: flex-start;
+  justify-content: start;
+}
+
+.recommend-panel > .list > .row.line {
+  border-bottom: 1rpx solid #fff;
+}
+
+.recommend-panel > .list > .row > .img {
+  width: 160rpx;
+  height: 160rpx;
+  border-radius: 5rpx;
+}
+
+.recommend-panel > .list > .row > .info {
+  width: calc(100% - 290rpx);
+  height: 150rpx;
+  padding-left: 30rpx;
+  padding-bottom: 10rpx;
+  border-radius: 5rpx;
+}
+
+.recommend-panel > .list > .row > .info > .rank {
+  height: 30rpx;
+  font-size: 28rpx;
+  font-style: italic;
+}
+
+.recommend-panel > .list > .row > .info > .people {
+  height: 30rpx;
+  margin-top: 20rpx;
+  font-size: 24rpx;
+}
+
+.recommend-panel > .list > .row > .info > .msg {
+  height: 25rpx;
+  margin-top: 55rpx;
+  font-size: 20rpx;
+}
+
+.recommend-panel > .list > .row > .btn::before,
+.recommend-panel > .list > .row > .btn::after {
+  background: unset;
+  border: unset;
+  margin: unset;
+  padding: unset;
+}
+
+.recommend-panel > .list > .row > .btn {
+  width: 100rpx;
+  height: 40rpx;
+  line-height: 40rpx;
+  font-size: 20rpx;
+  border-radius: 5rpx;
+  border: unset;
+  margin: unset;
+  padding: unset;
+}
+
+/* 
+.recommend-panel > .list {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: start;
 }
 
 .recommend-panel > .list > .entry {
@@ -133,13 +297,13 @@
 
 .recommend-panel > .list > .entry > .rank {
   font-style: italic;
-}
+} */
 
 /* ==================================== 广告面板 ==================================== */
 
 .advert-panel {
   height: 100rpx;
-  margin-top: calc(100% - 100rpx);
+  margin-top: 30rpx;
 }
 
 .advert-panel > .img {

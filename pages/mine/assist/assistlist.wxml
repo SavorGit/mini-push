@@ -1,2 +1,6 @@
 <!--pages/mine/assist/assistlist.wxml-->
-<text>pages/mine/assist/assistlist.wxml</text>
+<import src="/pages/template/commons" />
+<template is="navigationBarForTwoLevel" data='{{statusBarHeight: statusBarHeight,titleText:"好友助力列表"}}' />
+
+<scroll-view class="container theme-container" style='height: calc(100vh - 46px - {{statusBarHeight}}px);' scroll-y="true" scroll-with-animation="true">
+</scroll-view>

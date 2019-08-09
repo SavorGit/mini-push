@@ -1,1 +1,5 @@
 /* pages/mine/assist/assistlist.wxss */
+
+.container {
+  justify-content: start;
+}
