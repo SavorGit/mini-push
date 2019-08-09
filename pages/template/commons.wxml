@@ -44,8 +44,8 @@
 <!-- 固定悬浮按钮组 -->
 <template name="fixedSuspensionButtonGroup">
   <view class='fixedSuspensionButtonGroup'>
-    <view class='scan_tdc'>
-      <button class='theme' bindtap='openControl'>遥控器</button>
+    <view class='scan_tdc' bindtap='openControl'>
+      <image src="/images/icon2/remote_control.png"></image>
     </view>
   </view>
 </template>
