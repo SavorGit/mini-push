@@ -136,7 +136,9 @@
   </view>
 
   <!-- 广告面板 -->
-  <view class="advert-panel full_width theme-panel">
-    <image class="img" src="http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
+  <view class="advert-panel full_width theme-panel-dark">
+    <label class="fa fa-phone fa-lg"></label>
+    <label class="msg">商务合作：010-64175797</label>
+    <button class="theme-button">拨打</button>
   </view>
 </scroll-view>

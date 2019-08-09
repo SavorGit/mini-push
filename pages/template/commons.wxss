@@ -3,7 +3,7 @@
 /* ================================= 微信授权登录 ================================= */
 
 .wxAuthLogin-container {
-  /* background-color: #fff; */
+  background-color: #fff;
   width: 100%;
   height: 100%;
   text-align: center;

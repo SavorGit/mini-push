@@ -88,18 +88,22 @@
   justify-content: space-around;
 }
 
-.functional-module-panel > .row > view {
+.functional-module-panel > .row > view, .functional-module-panel > .row > form {
   width: 33.33333333333%;
-  display: flex;
+  /* display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: center; */
+  display: block;
+  text-align: center;
   padding: 10rpx 0rpx;
 }
 
-.functional-module-panel > .row > view > .icon {
+.functional-module-panel > .row > view > .icon,
+.functional-module-panel > .row > form .icon {
   width: 74rpx;
   height: 74rpx;
+  margin: 0 auto;
   border-radius: 10rpx;
   display: flex;
   flex-direction: column;
@@ -107,40 +111,61 @@
   justify-content: center;
 }
 
-.functional-module-panel > .row > view > .icon > image {
+.functional-module-panel > .row > view > .icon > image,
+.functional-module-panel > .row > form .icon > image {
   width: 48rpx;
   height: 48rpx;
 }
 
-.functional-module-panel > .row > view > .pic {
+.functional-module-panel > .row > view > .pic,
+.functional-module-panel > .row > form .pic {
   background-color: #ef6877;
 }
 
-.functional-module-panel > .row > view > .video {
+.functional-module-panel > .row > view > .video,
+.functional-module-panel > .row > form .video {
   background-color: #84ccc9;
 }
 
-.functional-module-panel > .row > view > .file {
+.functional-module-panel > .row > view > .file,
+.functional-module-panel > .row > form .file {
   background-color: #f19ec2;
 }
 
-.functional-module-panel > .row > view > .birthday {
+.functional-module-panel > .row > view > .birthday,
+.functional-module-panel > .row > form .birthday {
   background-color: #448aca;
 }
 
-.functional-module-panel > .row > view > .game {
+.functional-module-panel > .row > view > .game,
+.functional-module-panel > .row > form .game {
   background-color: #f29b76;
 }
 
-.functional-module-panel > .row > view > .history {
+.functional-module-panel > .row > view > .history,
+.functional-module-panel > .row > form .history {
   background-color: #8f82bc;
 }
 
-.functional-module-panel > .row > view > label {
+.functional-module-panel > .row > view > label,
+.functional-module-panel > .row > form label,
+.functional-module-panel > .row > form button {
   height: 60rpx;
   line-height: 60rpx;
   margin-left: 10rpx;
   font-size: 24rpx;
+}
+
+.functional-module-panel > .row > form button {
+  background: unset;
+  border: unset;
+  padding: unset;
+  margin: auto;
+}
+
+.functional-module-panel > .row > form button::before,
+.functional-module-panel > .row > form button::after {
+  border: unset;
 }
 
 /* ==================================== 推荐面板 ==================================== */
@@ -229,13 +254,36 @@
 /* ==================================== 广告面板 ==================================== */
 
 .advert-panel {
-  height: 100rpx;
-  margin-top: 30rpx;
+  height: 90rpx;
+  margin-top: 10rpx;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 28rpx;
 }
 
-.advert-panel > .img {
-  width: 100%;
-  height: 100%;
+.advert-panel > label, .advert-panel > button {
+  display: block;
+  margin: auto;
+}
+
+.advert-panel > button {
+  width: 100rpx;
+  height: 50rpx;
+  line-height: 50rpx;
+  border-radius: 5rpx;
+  font-size: 24rpx;
+  padding: unset;
+  border: unset;
+}
+
+.advert-panel > .fa {
+  margin-right: 0;
+}
+
+.advert-panel > .msg {
+  margin-left: 20rpx;
 }
 
 /* 扫描弹窗提示内容 */

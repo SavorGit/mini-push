@@ -35,19 +35,21 @@
   </view>
 
   <!-- 中部横幅图面板 -->
-  <block wx:for="{{imgUrls_mid}}" wx:key="item" wx:for-index="index">
-    <view class="middle-banner-panel full_width" wx:if="{{item.clicktype == 2}}" bindtap='{{item.bindtap}}' data-boxmac="{{box_mac}}" data-openid="{{openid}}" data-index='{{index}}' data-linkcontent='{{item.linkcontent}}'>
-      <image class="full_width full_height" src="{{item.oss_addr}}"></image>
-    </view>
-    <navigator wx:if="{{item.clicktype == 2}}" target="miniProgram" app-id="{{item.appid}}" path="{{item.linkcontent}}">
-      <image class="full_width full_height" src="{{item.oss_addr}}"></image>
-    </navigator>
-  </block>
+  <view wx:if="{{imgUrls_mid.length > 0}}" class="middle-banner-panel full_width">
+    <block wx:for="{{imgUrls_mid}}" wx:key="item" wx:for-index="index">
+      <view class="full_width full_height" wx:if="{{item.clicktype == 2}}" bindtap='{{item.bindtap}}' data-boxmac="{{box_mac}}" data-openid="{{openid}}" data-index='{{index}}' data-linkcontent='{{item.linkcontent}}'>
+        <image class="full_width full_height" src="{{item.oss_addr}}"></image>
+      </view>
+      <navigator class="full_width full_height" wx:if="{{item.clicktype == 2}}" target="miniProgram" app-id="{{item.appid}}" path="{{item.linkcontent}}">
+        <image class="full_width full_height" src="{{item.oss_addr}}"></image>
+      </navigator>
+    </block>
+  </view>
+
   <!-- 功能模块面板 -->
   <view class='functional-module-panel full_width theme-panel'>
     <view class="row full_width">
       <form bindsubmit="chooseImage" report-submit="true">
-      <view>
         <view class="icon pic">
           <image src='/images/icon2/FFFFFF_picture.png'></image>
         </view>
@@ -55,10 +57,8 @@
         <input class="display_hide" name="openid" value="{{openid}}"></input>
         <input class="display_hide" name="is_open_simple" value="{{is_open_simple}}"></input>
         <button form-type="submit">照片上电视</button>
-      </view>
       </form>
       <form bindsubmit="chooseVedio" report-submit="true">
-      <view >
         <view class="icon video">
           <image src='/images/icon2/FFFFFF_video.png'></image>
         </view>
@@ -66,10 +66,8 @@
         <input class="display_hide" name="openid" value="{{openid}}"></input>
         <input class="display_hide" name="is_open_simple" value="{{is_open_simple}}"></input>
         <button form-type="submit">视频上电视</button>
-      </view>
       </form>
       <form bindsubmit="forfiles" report-submit="true">
-      <view >
         <view class="icon file">
           <image src='/images/icon2/FFFFFF_files.png'></image>
         </view>
@@ -77,7 +75,6 @@
         <input class="display_hide" name="openid" value="{{openid}}"></input>
         <input class="display_hide" name="is_open_simple" value="{{is_open_simple}}"></input>
         <button form-type="submit">文件上电视</button>
-      </view>
       </form>
     </view>
     <view class="row full_width">
@@ -109,15 +106,15 @@
     </view>
     <view class="list">
       <block wx:for="{{hot_play}}" wx:key="item" wx:for-index="index">
-      <view class="row {{index<4?'line':''}}" >
-        <image class="img" src="http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
-        <view class="info">
-          <view class="rank theme-font5">TOP {{index+1}}</view>
-          <view class="people theme-font1">张三三</view>
-          <view class="msg">累计播放 51 次</view>
+        <view class="row {{index<4?'line':''}}">
+          <image class="img" src="http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
+          <view class="info">
+            <view class="rank theme-font5">TOP {{index+1}}</view>
+            <view class="people theme-font1">张三三</view>
+            <view class="msg">累计播放 51 次</view>
+          </view>
+          <button class="btn theme-button-dark">电视播放</button>
         </view>
-        <button class="btn theme-button-dark">电视播放</button>
-      </view>
       </block>
       <!-- <view class="row line">
         <image class="img" src="http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
@@ -159,8 +156,10 @@
   </view>
 
   <!-- 广告面板 -->
-  <view class="advert-panel full_width theme-panel">
-    <image class="img" src="http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
+  <view class="advert-panel full_width theme-panel-dark">
+    <label class="fa fa-phone fa-lg"></label>
+    <label class="msg">商务合作：010-64175797</label>
+    <button class="theme-button">拨打</button>
   </view>
 </scroll-view>
 
@@ -203,7 +202,7 @@
     <view style="width: 100%;height: 80rpx;padding-left: 60rpx;padding-right: 30rpx;">
       <label style="width: calc(100% - 122rpx);height: 80rpx;line-height: 80rpx;display: inline-block;font-size: 30rpx; color: #333333;text-align: center;">下单提示</label>
       <view style="width: 32rpx; height: 80rpx; display: inline-block;" bindtap="closeAct">
-        <image style="width: 32rpx; height: 32rpx;" src="/images/icon2/666666_close.png"></image>
+        <label class="fa fa-close fa-lg" style="width: 32rpx; height: 32rpx; color: #666666;"></label>
       </view>
     </view>
     <view style="width: 100%;height: calc(100% - 160rpx);display: flex; flex-direction: column; align-items: center; justify-content: start;color: #666666;">
@@ -212,11 +211,11 @@
       <view style="width: 100%;height: 80rpx;border-top: 2rpx solid #ededed;display: flex; flex-direction: row; align-items: center; justify-content: center;">
         <label style="width: 70rpx;">数量</label>
         <view style="width: 32rpx; height: 32rpx;" bindtap="changeActNums" data-type="1">
-          <image style="width: 32rpx; height: 32rpx;" src="/images/icon2/666666_enlarge.png"></image>
+          <label class="fa fa-plus-square-o fa-lg" style="width: 32rpx; height: 32rpx; color: #666666;"></label>
         </view>
         <label style="width: 70rpx;text-align: center;">{{goods_nums}}</label>
         <view style="width: 32rpx; height: 32rpx;" bindtap="changeActNums" data-type="2">
-          <image style="width: 32rpx; height: 32rpx;" src="/images/icon2/666666_narrow.png"></image>
+          <label class="fa fa-minus-square-o fa-lg" style="width: 32rpx; height: 32rpx; color: #666666;"></label>
         </view>
       </view>
     </view>
