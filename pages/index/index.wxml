@@ -35,10 +35,14 @@
   </view>
 
   <!-- 中部横幅图面板 -->
-  <view class="middle-banner-panel full_width">
-    <image class="full_width full_height" src="http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
+  <block wx:for="{{imgUrls_mid}}" wx:key="item" wx:for-index="index">
+  <view class="middle-banner-panel full_width" wx:if="{{item.clicktype == 2}}" bindtap='{{item.bindtap}}' data-boxmac="{{box_mac}}" data-openid="{{openid}}" data-index='{{index}}' data-linkcontent='{{item.linkcontent}}'>
+    <image class="full_width full_height" src="{{item.oss_addr}}"></image>
   </view>
-
+  <navigator wx:if="{{item.clicktype == 2}}" target="miniProgram" app-id="{{item.appid}}" path="{{item.linkcontent}}">
+    <image class="full_width full_height" src="{{item.oss_addr}}"></image>
+  </navigator>
+  </block>
   <!-- 功能模块面板 -->
   <view class='functional-module-panel full_width theme-panel'>
     <view class="row full_width">
