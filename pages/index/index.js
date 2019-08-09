@@ -810,6 +810,12 @@ Page({
     var res_num  = e.currentTarget.dataset.res_num;
     app.boxShow(box_mac, forscreen_id, pubdetail, res_type, res_num);
   },
+  phonecallevent: function (e) {
+    var tel = e.target.dataset.tel;
+    wx.makePhoneCall({
+      phoneNumber: tel
+    })
+  },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
