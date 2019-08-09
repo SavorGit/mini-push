@@ -50,37 +50,37 @@
   <view class='functional-module-panel full_width theme-panel'>
     <view class="row full_width">
       <form bindsubmit="chooseImage" report-submit="true">
-        <view >
-          <button form-type="submit" class="icon pic">
-            <image src='/images/icon2/FFFFFF_picture.png'></image>
-          </button>
-        </view>
         <input class="display_hide" name="boxmac" value="{{box_mac}}"></input>
         <input class="display_hide" name="openid" value="{{openid}}"></input>
         <input class="display_hide" name="is_open_simple" value="{{is_open_simple}}"></input>
-        <button form-type="submit">照片上电视</button>
+        <button class="theme-font2" form-type="submit">
+          <view class="icon pic">
+            <image src='/images/icon2/FFFFFF_picture.png'></image>
+          </view>
+          <label>照片上电视</label>
+        </button>
       </form>
       <form bindsubmit="chooseVedio" report-submit="true">
-        <view >
-          <button form-type="submit" class="icon video">
-            <image src='/images/icon2/FFFFFF_video.png'></image>
-          </button>
-        </view>
         <input class="display_hide" name="boxmac" value="{{box_mac}}"></input>
         <input class="display_hide" name="openid" value="{{openid}}"></input>
         <input class="display_hide" name="is_open_simple" value="{{is_open_simple}}"></input>
-        <button form-type="submit">视频上电视</button>
+        <button class="theme-font2" form-type="submit">
+          <view class="icon video">
+            <image src='/images/icon2/FFFFFF_video.png'></image>
+          </view>
+          <label>视频上电视</label>
+        </button>
       </form>
       <form bindsubmit="forfiles" report-submit="true">
-        <view >
-          <button form-type="submit" class="icon file">
-          <image src='/images/icon2/FFFFFF_files.png'></image>
-          </button>
-        </view>
         <input class="display_hide" name="boxmac" value="{{box_mac}}"></input>
         <input class="display_hide" name="openid" value="{{openid}}"></input>
         <input class="display_hide" name="is_open_simple" value="{{is_open_simple}}"></input>
-        <button form-type="submit">文件上电视</button>
+        <button class="theme-font2" form-type="submit">
+          <view class="icon file">
+            <image src='/images/icon2/FFFFFF_files.png'></image>
+          </view>
+          <label>文件上电视</label>
+        </button>
       </form>
     </view>
     <view class="row full_width">
@@ -162,7 +162,7 @@
   </view>
 
   <!-- 广告面板 -->
-  <view class="advert-panel full_width theme-panel-dark">
+  <view wx:if="{{box_mac !=''}}" class="advert-panel full_width theme-panel-dark">
     <label class="fa fa-phone fa-lg"></label>
     <label class="msg">商务合作：010-64175797</label>
     <button class="theme-button">拨打</button>
