@@ -5,7 +5,7 @@
 
 
 <!-- 未开放发现页面 -->
-<view wx:if="{{is_open==0}}" class="container" style='height: calc(100vh - 46px - {{statusBarHeight}}px);'>
+<view wx:if="{{is_open==0}}" class="container theme-container" style='height: calc(100vh - 46px - {{statusBarHeight}}px);'>
   <view class='page_main_v'>
     <view class='page_main_h'>
       <image mode='widthFix' src='http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/not_open_002.png' style='width: 50vw;margin-bottom: 50rpx;'></image>
@@ -36,7 +36,7 @@
 
 
 <!-- 开放发现页面 -->
-<view wx:if="{{is_open>0}}" class="container" style='height: calc(100vh - 46px - {{statusBarHeight}}px);'>
+<view wx:if="{{is_open>0}}" class="container theme-container" style='height: calc(100vh - 46px - {{statusBarHeight}}px);'>
   <scroll-view class='page_main' scroll-y="true" scroll-with-animation="true" bindscrolltolower="loadMore" data-openid='{{openid}}'>
     <!--循环开始-->
     <view class='content content_bottom_border' wx:for="{{discovery_list}}" wx:key="key" wx:for-item="bean" wx:for-index="index">

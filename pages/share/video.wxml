@@ -2,7 +2,7 @@
 <import src="/pages/template/commons" />
 <template is="navigationBarForShare" data='{{statusBarHeight: statusBarHeight,titleText:"热点投屏"}}' />
 
-<view class="container" style='height: calc(100vh - 46px - {{statusBarHeight}}px);'>
+<view class="container theme-container" style='height: calc(100vh - 46px - {{statusBarHeight}}px);'>
   <view class='page_main'>
     <view class='content content_bottom_border'>
       <view class='con_top'>
@@ -42,20 +42,20 @@
         </view>
         <view class='operation'>
           <view wx:if="{{info.is_collect=='1'}}">
-            <button bindtap='cancCollect' data-res_id="{{info.res_id}}" data-info="{{info}}" data-type='{{info.type}}'  data-openid="{{openid}}">
+            <button bindtap='cancCollect' data-res_id="{{info.res_id}}" data-info="{{info}}" data-type='{{info.type}}' data-openid="{{openid}}">
               <image src='http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/icon/red_heart.png'></image>
               <label class='font_333333_26'>{{info.collect_nums}}</label>
             </button>
           </view>
           <view wx:else>
-            <button bindtap='onCollect' data-res_id="{{info.res_id}}" data-info="{{info}}" data-type='{{info.type}}'  data-openid="{{openid}}">
+            <button bindtap='onCollect' data-res_id="{{info.res_id}}" data-info="{{info}}" data-type='{{info.type}}' data-openid="{{openid}}">
               <image src='http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/icon/grey_heart.png'></image>
               <label class='font_333333_26'>{{info.collect_nums}}</label>
             </button>
           </view>
 
           <view>
-            <button open-type='share'  data-res_id="{{info.res_id}}" data-openid="{{openid}}" data-img_url='{{info.img_url}}'  data-type="{{info.type}}">
+            <button open-type='share' data-res_id="{{info.res_id}}" data-openid="{{openid}}" data-img_url='{{info.img_url}}' data-type="{{info.type}}">
               <image src='http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/icon/grey_share.png'></image>
               <label class='font_333333_26'>{{info.share_nums}}</label>
             </button>

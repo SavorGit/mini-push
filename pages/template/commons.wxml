@@ -6,9 +6,6 @@
     <view class='wxAuthLogin-container'>
       <view class='wxAuthLogin-top'>
         <view class='opt'>
-          <!-- <button class='close' bindtap='closeAuth'>
-            <image src='/images/icon2/666666_close.png'></image>
-          </button> -->
         </view>
         <view class='title'>
           <label class='font_1CBEB6_34'>温馨提示</label>
@@ -58,7 +55,7 @@
   <modal show="{{popRemoteControlWindow}}" height='990rpx' width="620rpx" background-color='unset' border-radius="0rpx" title-text="" confirm-text="" cancel-text="">
     <view class='remoteControlWindow-container'>
       <view bindtap='closeControl' class='remoteControlWindow-control'>
-        <image src='/images/icon2/666666_close.png'></image>
+        <label class="fa fa-close fa-lg"></label>
       </view>
       <view class='remoteControlWindow-top'>
         <view class='opt'>
@@ -117,12 +114,6 @@
         <navigator class='go-back' open-type='navigateBack' delta='1'>
           <label class="fa fa-arrow-left fa-2x" title="Back"></label>
         </navigator>
-        <!-- <view style='margin-right: 3px;'>
-          <image src='/images/icon2/666666_vertical.png' style='width:1px; height: 18px; vertical-align: middle;'></image>
-        </view>
-        <navigator class='to-home' open-type="switchTab" url='/pages/demand/index'>
-          <image src='/images/icon2/FFFFFF_home.png'>Home</image>
-        </navigator> -->
       </view>
       <view class='title'>
         <label class='text'>{{titleText}}</label>
@@ -140,12 +131,6 @@
         <navigator class='go-back' open-type='navigateBack' delta='1'>
           <label class="fa fa-arrow-left fa-2x" title="Back"></label>
         </navigator>
-        <!-- <view style='margin-right: 3px;'>
-          <image src='/images/icon2/666666_vertical.png' style='width:1px; height: 18px; vertical-align: middle;'></image>
-        </view>
-        <navigator class='to-home' open-type="switchTab" url='/pages/demand/index'>
-          <image src='/images/icon2/FFFFFF_home.png'>Home</image>
-        </navigator> -->
       </view>
       <view class='title'>
         <label class='text'>{{titleText}}</label>
@@ -161,14 +146,8 @@
     <view class='status-bar' style='height:{{statusBarHeight}}px;'></view>
     <view class='navigation-bar'>
       <view class='btn'>
-        <!-- <view style='padding-left: 5px; padding-right: 5px;'>
-          <image src='/images/icon2/Ia54254_back.png' style='width: 18px; height: 18px; vertical-align: middle;'>Back</image>
-        </view>
-        <view style='margin-right: 3px;'>
-          <image src=' /images/icon2/666666_vertical.png ' style='width: 1px; height: 18px; vertical-align: middle; '></image>
-        </view> -->
-        <navigator class='to-home ' open-type="switchTab" url='/pages/demand/index'>
-          <image src='/images/icon2/FFFFFF_home.png '>Home</image>
+        <navigator class='to-home' open-type="switchTab" url='/pages/demand/index'>
+          <label class="fa fa-home fa-2x"></label>
         </navigator>
       </view>
       <view class='title '>
@@ -188,12 +167,6 @@
         <navigator class='go-back' open-type='navigateBack' delta='100'>
           <label class="fa fa-arrow-left fa-2x" title="Back"></label>
         </navigator>
-        <!-- <view style='margin-right: 3px;'>
-          <image src='/images/icon2/666666_vertical.png' style='width:1px; height: 18px; vertical-align: middle;'></image>
-        </view>
-        <navigator class='to-home' open-type="switchTab" url='/pages/demand/index'>
-          <image src='/images/icon2/FFFFFF_home.png'>Home</image>
-        </navigator> -->
       </view>
       <view class='title'>
         <label class='text'>{{titleText}}</label>

@@ -3,7 +3,7 @@
 <template is="navigationBarForShare" data='{{statusBarHeight: statusBarHeight,titleText:"热点投屏"}}' />
 
 <!-- 支付失败 -->
-<view wx:if="{{order_status==2}}" class='container' style='height: calc(100vh - 46px - {{statusBarHeight}}px);'>
+<view wx:if="{{order_status==2}}" class='container theme-container' style='height: calc(100vh - 46px - {{statusBarHeight}}px);'>
   <view class='PageTop full_width'></view>
   <scroll-view class='PageMain full_width' scroll-y="true" scroll-with-animation="true">
     <view class='package'>
@@ -129,7 +129,7 @@
 </view>
 
 <!-- 支付成功 -->
-<view wx:elif="{{order_status==1}}" class='container' style='height: calc(100vh - 46px - {{statusBarHeight}}px);'>
+<view wx:elif="{{order_status==1}}" class='container theme-container' style='height: calc(100vh - 46px - {{statusBarHeight}}px);'>
   <view class='PageTop full_width'></view>
   <scroll-view class='PageMain full_width' scroll-y="true" scroll-with-animation="true">
     <view class='package'>

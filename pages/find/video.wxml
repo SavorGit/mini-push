@@ -3,7 +3,7 @@
 <template is="navigationBarForTwoLevel" data='{{statusBarHeight: statusBarHeight,titleText:"热点投屏"}}' />
 
 <!-- 发现视频落地页 -->
-<view class="container" style='height: calc(100vh - 46px - {{statusBarHeight}}px);'>
+<view class="container theme-container" style='height: calc(100vh - 46px - {{statusBarHeight}}px);'>
   <view class='full_width page_top'></view>
   <view class='full_width page_main'>
     <view class='article' wx:if="{{showControl==false}}">
@@ -37,31 +37,25 @@
         <view class='operation font_666666_24'>
           <view>
             <button>
-              <image src='/images/icon2/666666_play1.png'></image>
+              <label class="fa fa-play fa-lg" style="color: #666666;"></label>
               <label>{{play_num}}</label>
             </button>
           </view>
           <view wx:if="{{is_collect=='1'}}">
             <button bindtap='cancCollect' data-res_id="{{videoinfo.forscreen_id}}" data-openid="{{openid}}" data-type="2">
-              <image src='/images/icon2/FF0000_heart.png'></image>
+              <label class="fa fa-heart fa-lg" style="color: #E11E4C;"></label>
               <label>{{collect_num}}</label>
             </button>
           </view>
           <view wx:else>
             <button bindtap='onCollect' data-res_id="{{videoinfo.forscreen_id}}" data-openid="{{openid}}" data-type="2">
-              <image src='/images/icon2/666666_heart.png'></image>
+              <label class="fa fa-heart-o fa-lg" style="color: #666666;"></label>
               <label>{{collect_num}}</label>
             </button>
           </view>
-          <!--<view>
-                <button >
-                  <image src='/images/icon2/666666_comment.png'></image>
-                  <label >100</label>
-                </button>
-              </view>-->
           <view>
             <button open-type='share' data-res_id="{{videoinfo.forscreen_id}}" data-pubdetail="{{videoinfo.pubdetail}}" data-openid="{{openid}}" data-res_type="2">
-              <image src='/images/icon2/666666_share.png'></image>
+              <label class="fa fa-share-square-o fa-lg" style="color: #666666;"></label>
               <label>{{share_num}}</label>
             </button>
           </view>

@@ -2,7 +2,7 @@
 <import src="../template/commons" />
 <template is="navigationBarForTopLevel" data='{{statusBarHeight: statusBarHeight,titleText:"热点投屏"}}' />
 
-<view class="container" style='height: calc(100vh - 46px - {{statusBarHeight}}px);'>
+<view class="container theme-container" style='height: calc(100vh - 46px - {{statusBarHeight}}px);'>
   <scroll-view class='page_main' scroll-y="true" scroll-with-animation="true" bindscrolltolower="loadMore" data-openid='{{openid}}'>
     <view class='page_top'>
       <view class='user'>
@@ -40,8 +40,8 @@
                   <image class="pic_show" mode='aspectFill' src="{{bean.imgurl}}"></image>
                   <view class='cover'>
                     <view class='share font_FFFFFF_32'>
-                      <image wx:if="{{bean.is_collect==1}}" src='/images/icon2/FF0000_heart.png'></image>
-                      <image wx:else src='/images/icon2/FFFFFF_heart.png'></image>
+                      <label wx:if="{{bean.is_collect==1}}" class="fa fa-heart fa-lg" style="color: #E11E4C;"></label>
+                      <label wx:elseclass="fa fa-share-square-o fa-lg" style="color: #FFFFFF;"></label>
                       <label>{{bean.collect_num}}</label>
                     </view>
                   </view>
@@ -86,7 +86,7 @@
                   <image class="pic_show" mode='aspectFill' src="{{bean.imgurl}}"></image>
                   <view class='cover'>
                     <view class='share font_FFFFFF_32'>
-                      <image src='/images/icon2/FF0000_heart.png'></image>
+                      <label class="fa fa-heart fa-lg" style="color: #E11E4C;"></label>
                       <label>{{bean.collect_num}}</label>
                     </view>
                   </view>
@@ -97,7 +97,7 @@
                   <image class="pic_show" mode='aspectFill' src="{{bean.imgurl}}"></image>
                   <view class='cover'>
                     <view class='share font_FFFFFF_32'>
-                      <image src='/images/icon2/FF0000_heart.png'></image>
+                      <label class="fa fa-heart fa-lg" style="color: #E11E4C;"></label>
                       <label>{{bean.collect_num}}</label>
                     </view>
                   </view>
@@ -107,7 +107,7 @@
                   <image class="pic_show" mode='aspectFill' src="{{bean.imgurl}}"></image>
                   <view class='cover'>
                     <view class='share font_FFFFFF_32'>
-                      <image src='/images/icon2/FF0000_heart.png'></image>
+                      <label class="fa fa-heart fa-lg" style="color: #E11E4C;"></label>
                       <label>{{bean.collect_num}}</label>
                     </view>
                   </view>

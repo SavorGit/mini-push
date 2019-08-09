@@ -3,3 +3,32 @@
 .container {
   justify-content: start;
 }
+
+.row {
+  height: 90rpx;
+  padding: 20rpx 0 10rpx 0;
+  margin: 0 20rpx;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: start;
+}
+
+.row > .head-img {
+  width: 90rpx;
+  height: 90rpx;
+  border-radius: 10rpx;
+}
+
+.row > .name {
+  width: calc(100% - 340rpx);
+  margin-left: 50rpx;
+}
+
+.row > .date-time {
+  width: 200rpx;
+}
+
+.row.line {
+  border-bottom: 1rpx solid #fff;
+}

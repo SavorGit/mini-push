@@ -3,7 +3,7 @@
 <import src="/pages/template/commons" />
 <template is="navigationBarForTwoLevel" data='{{statusBarHeight: statusBarHeight,titleText:"我的公开"}}' />
 
-<view class="container" style='height: calc(100vh - 46px - {{statusBarHeight}}px);'>
+<view class="container theme-container" style='height: calc(100vh - 46px - {{statusBarHeight}}px);'>
   <scroll-view class='page_main' scroll-y="true" scroll-with-animation="true" bindscrolltolower="loadMore" data-openid='{{openid}}'>
     <view>
 
@@ -56,28 +56,24 @@
             <view class='operation font_666666_26'>
               <view class='op-left'>
                 <view>
-                  <image src='/images/icon2/666666_play1.png'></image>
+                  <label class="fa fa-play fa-lg" style="color: #666666;"></label>
                   <label>{{bean.play_num}}</label>
                 </view>
                 <view wx:if="{{bean.is_collect=='1'}}">
                   <button bindtap='cancCollect' data-res_id="{{bean.forscreen_id}}" data-openid="{{openid}}" data-res_key="{{index}}">
-                    <image src='/images/icon2/FF0000_heart.png'></image>
+                    <label class="fa fa-heart fa-lg" style="color: #E11E4C;"></label>
                     <label>{{bean.collect_num}}</label>
                   </button>
                 </view>
                 <view wx:else>
                   <button bindtap='onCollect' data-res_id="{{bean.forscreen_id}}" data-openid="{{openid}}" data-res_key="{{index}}">
-                    <image src='/images/icon2/666666_heart.png'></image>
+                    <label class="fa fa-heart-o fa-lg" style="color: #666666;"></label>
                     <label>{{bean.collect_num}}</label>
                   </button>
                 </view>
-                <!--<view>
-                  <image src='/images/icon2/666666_comment.png'></image>
-                  <label >100</label>
-                </view>-->
                 <view>
                   <button open-type='share' data-res_id="{{bean.forscreen_id}}" data-res_key="{{index}}" data-pubdetail="{{bean.pubdetail}}" data-openid="{{openid}}" data-res_type="{{bean.res_type}}">
-                    <image src='/images/icon2/666666_share.png'></image>
+                    <label class="fa fa-share-square-o fa-lg" style="color: #666666;"></label>
                     <label>{{bean.share_num}}</label>
                   </button>
                 </view>

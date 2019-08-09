@@ -2,7 +2,7 @@
 <import src="../template/commons" />
 <template is="navigationBarForTopLevel" data='{{statusBarHeight: statusBarHeight,titleText:"热点投屏"}}' />
 
-<view class="container" style='height: calc(100vh - 46px - {{statusBarHeight}}px);'>
+<view class="container theme-container" style='height: calc(100vh - 46px - {{statusBarHeight}}px);'>
   <view wx:if="{{is_link==1}}" class='page_banner theme7 theme-font'>
     <view class='layout'>
       <label>您已经连接{{room_name}}电视</label>
