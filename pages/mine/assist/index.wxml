@@ -3,5 +3,113 @@
 <template wx:if="{{isShare}}" is="navigationBarForShare" data='{{statusBarHeight: statusBarHeight,titleText:"为好友助力"}}' />
 <template wx:else is="navigationBarForTwoLevel" data='{{statusBarHeight: statusBarHeight,titleText:"邀请好友助力"}}' />
 
-<view class="container" style='height: calc(100vh - 46px - {{statusBarHeight}}px);'>
+<view class="container theme-container" style='height: calc(100vh - 46px - {{statusBarHeight}}px);'>
+
+  <!-- 内容信息面板 [他人] -->
+  <view wx:if="{{isShare}}" class="assist-info-panel full_width theme-panel">
+    <view class="other">
+      <view class="people">
+        <image class="head-img" src="http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
+        <view>
+          <label class="name">张三：</label>
+          <label class="msg">“快来帮我助力！我要在全国千家高端餐厅SHOW”</label>
+        </view>
+      </view>
+      <image class="img" src="http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
+      <button class="theme-button">帮TA上电视</button>
+    </view>
+  </view>
+
+  <!-- 内容信息面板 [自己] -->
+  <view wx:else class="assist-info-panel full_width theme-panel">
+    <view class="self">
+      <view class="people">
+        <image class="head-img" src="http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
+        <view>
+          <label class="name">张三：</label>
+          <label class="msg">“快来帮我助力！我要在全国千家高端餐厅SHOW”</label>
+        </view>
+      </view>
+      <image class="img" src="http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
+      <button class="theme-button">帮TA上电视</button>
+      <view>
+        <label>您当前有</label>
+        <label>30%</label>
+        <label>的几率，加油亲~</label>
+      </view>
+    </view>
+  </view>
+
+  <!-- 助力人员面板 -->
+  <view class="assist-people-panel full_width theme-panel">
+    <view class="title-bar">
+      <view class="title">已有18名好友帮您助力</view>
+      <navigator class="more">查看全部》</navigator>
+    </view>
+    <view class="list full_width">
+      <view class="people">
+        <image class="head-img" src="http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
+      </view>
+      <view class="people">
+        <image class="head-img" src="http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
+      </view>
+      <view class="people">
+        <image class="head-img" src="http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
+      </view>
+      <view class="people">
+        <image class="head-img" src="http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
+      </view>
+      <view class="people">
+        <image class="head-img" src="http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
+      </view>
+      <view class="people">
+        <image class="head-img" src="http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
+      </view>
+      <view class="people">
+        <image class="head-img" src="http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
+      </view>
+    </view>
+  </view>
+
+  <!-- 推荐面板 -->
+  <view class="recommend-panel full_width theme-panel">
+    <view class="title-bar">
+      <view class="title">当前热播内容</view>
+      <navigator class="more">更多...</navigator>
+    </view>
+    <view class="list">
+      <view class="entry">
+        <view class="people">
+          <image class="head-img" src="http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
+          <label class="name">三姑娘</label>
+        </view>
+        <image class="img" src="http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
+        <label class="rank">Top 1</label>
+        <label>累计播放 301 万次</label>
+      </view>
+      <view class="entry">
+        <view class="people">
+          <image class="head-img" src="http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
+          <label class="name">玉兔精</label>
+        </view>
+        <image class="img" src="http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
+        <label class="rank">Top 2</label>
+        <label>累计播放 201 万次</label>
+      </view>
+      <view class="entry">
+        <view class="people">
+          <image class="head-img" src="http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
+          <label class="name">三姑娘</label>
+        </view>
+        <image class="img" src="http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
+        <label class="rank">Top 3</label>
+        <label>累计播放 101 万次</label>
+      </view>
+    </view>
+  </view>
+
+  <!-- 广告面板 -->
+  <view class="advert-panel full_width theme-panel">
+    <image class="img" src="http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
+  </view>
 </view>

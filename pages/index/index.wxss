@@ -5,19 +5,13 @@
   opacity: 0.7;
 }
 
-.page_main {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+/* ==================================== 轮播图面板 ==================================== */
+
+.banner-loop-panel {
+  height: 420rpx;
 }
 
-swiper {
-  height: 364rpx;
-  width: 100%;
-}
-
-swiper button {
+.banner-loop-panel button {
   background-color: unset;
   border: 0;
   margin: 0;
@@ -25,77 +19,213 @@ swiper button {
   border-radius: 0;
 }
 
-swiper .button-hover {
+.banner-loop-panel .button-hover {
   background-color: unset;
 }
 
-swiper-image {
+/* .banner-loop-panel swiper-image {
   height: 100%;
   width: 100%;
-}
+} 
 
 .slide-image {
   height: 100%;
   width: 100%;
+}*/
+
+/* ==================================== 连接信息面板 ==================================== */
+
+.link-box-panel {
+  height: 90rpx;
 }
 
-/* .page_main > .climbtree {
-  height: 240rpx;
-  padding: unset;
+.link-box-panel > .tip {
   display: flex;
-} */
-
-.page_main > .tip {
-  height: 160rpx;
-  padding-top: 20rpx;
-  padding-bottom: 20rpx;
-  text-align: center;
-}
-
-/* .page_main > .tip > button, .page_main > .tip > button::before,
-.page_main > .tip > button::after {
-  width: 180rpx;
-  height: 50rpx;
-  margin-top: 50rpx;
-  padding: unset;
-  line-height: 2;
-  font-size: 24rpx;
-  border: 1rpx solid #f6f2ec;
-  background-color: #fff;
-}
-
-.page_main > .tip > button::before, .page_main > .tip > button::after {
-  border: 2rpx solid #f6f2ec;
-} */
-
-.page_main > .tip > button {
-  width: 180rpx;
-  height: 50rpx;
-  line-height: 50rpx;
-  margin-top: 20rpx;
-  font-size: 24rpx;
-  border-radius: 25rpx;
-}
-
-.page_main > .operation > view {
+  flex-direction: column;
   align-items: center;
+  justify-content: start;
+}
+
+.link-box-panel > .tip > button::before, .link-box-panel > .tip > button::after {
+  margin: unset;
+  padding: unset;
+  border: unset;
+  background: unset;
+}
+
+.link-box-panel > .tip > button {
+  width: 60rpx;
+  height: 24rpx;
+  line-height: 20rpx;
+  margin: 20rpx auto auto auto;
+  padding: unset;
+  border: unset;
+  background: unset;
+  font-size: unset;
+}
+
+/* ==================================== 中部横幅图面板 ==================================== */
+
+.middle-banner-panel {
+  height: 180rpx;
+  margin-top: 15rpx;
+}
+
+/* ==================================== 功能模块面板 ==================================== */
+
+.functional-module-panel {
+  height: 320rpx;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.functional-module-panel > .row {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.functional-module-panel > .row > view {
+  width: 33.33333333333%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
   padding: 10rpx 0rpx;
 }
 
-.page_main > .operation > view > image {
-  width: 48rpx;
-  height: 38rpx;
-  vertical-align: middle;
+.functional-module-panel > .row > view > .icon {
+  width: 74rpx;
+  height: 74rpx;
+  border-radius: 10rpx;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
-.page_main > .operation > view > label {
+.functional-module-panel > .row > view > .icon > image {
+  width: 48rpx;
+  height: 48rpx;
+}
+
+.functional-module-panel > .row > view > .pic {
+  background-color: #ef6877;
+}
+
+.functional-module-panel > .row > view > .video {
+  background-color: #84ccc9;
+}
+
+.functional-module-panel > .row > view > .file {
+  background-color: #f19ec2;
+}
+
+.functional-module-panel > .row > view > .birthday {
+  background-color: #448aca;
+}
+
+.functional-module-panel > .row > view > .game {
+  background-color: #f29b76;
+}
+
+.functional-module-panel > .row > view > .history {
+  background-color: #8f82bc;
+}
+
+.functional-module-panel > .row > view > label {
   height: 60rpx;
   line-height: 60rpx;
   margin-left: 10rpx;
-  font-size: 34rpx;
+  font-size: 24rpx;
 }
 
-.page_main > navigator {
+/* ==================================== 推荐面板 ==================================== */
+
+.recommend-panel {
+  height: 1003rpx;
+}
+
+.recommend-panel > .title-bar {
+  height: 32rpx;
+  padding-top: 20rpx;
+  padding-left: 25rpx;
+}
+
+.recommend-panel > .title-bar > .title {
+  display: block;
+  font-size: 24rpx;
+  text-decoration: underline;
+}
+
+.recommend-panel > .list > .row {
+  height: 160rpx;
+  padding: 20rpx 25rpx 15rpx 25rpx;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: start;
+}
+
+.recommend-panel > .list > .row.line {
+  border-bottom: 1rpx solid #fff;
+}
+
+.recommend-panel > .list > .row > .img {
+  width: 160rpx;
+  height: 160rpx;
+  border-radius: 5rpx;
+}
+
+.recommend-panel > .list > .row > .info {
+  width: calc(100% - 290rpx);
+  height: 150rpx;
+  padding-left: 30rpx;
+  padding-bottom: 10rpx;
+  border-radius: 5rpx;
+}
+
+.recommend-panel > .list > .row > .info > .rank {
+  height: 30rpx;
+  font-size: 28rpx;
+  font-style: italic;
+}
+
+.recommend-panel > .list > .row > .info > .people {
+  height: 30rpx;
+  margin-top: 20rpx;
+  font-size: 24rpx;
+}
+
+.recommend-panel > .list > .row > .info > .msg {
+  height: 25rpx;
+  margin-top: 55rpx;
+  font-size: 20rpx;
+}
+
+.recommend-panel > .list > .row > .btn::before,
+.recommend-panel > .list > .row > .btn::after {
+  background: unset;
+  border: unset;
+  margin: unset;
+  padding: unset;
+}
+
+.recommend-panel > .list > .row > .btn {
+  width: 100rpx;
+  height: 40rpx;
+  line-height: 40rpx;
+  font-size: 20rpx;
+  border-radius: 5rpx;
+  border: unset;
+  margin: unset;
+  padding: unset;
+}
+
+/* .page_main > navigator {
   width: 100%;
   text-align: right;
   margin-right: 50rpx;
@@ -112,7 +242,7 @@ swiper-image {
   line-height: 60rpx;
   margin-left: 10rpx;
   font-size: 28rpx;
-}
+} */
 
 /* 扫描弹窗提示内容 */
 

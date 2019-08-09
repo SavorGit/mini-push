@@ -34,7 +34,17 @@
 }
 
 .theme8 {
+  color: #333;
   background-color: #999;
+}
+
+.theme-container {
+  color: #666;
+  background-color: #f5f6f8;
+}
+
+.theme-panel {
+  background-color: #fff;
 }
 
 .theme-navigation {
@@ -53,7 +63,7 @@
 
 .theme-button-dark {
   color: #fff;
-  background-color: #0e1c29;
+  background-color: #333;
 }
 
 .theme-button2 {
@@ -94,6 +104,10 @@
 
 .theme-font4 {
   color: #fff;
+}
+
+.theme-font5 {
+  color: #eb6877;
 }
 
 /* ================================== 文字 ================================== */

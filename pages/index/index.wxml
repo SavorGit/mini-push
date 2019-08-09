@@ -2,74 +2,143 @@
 <import src="/pages/template/commons" />
 <template is="navigationBarForTopLevel" data='{{statusBarHeight: statusBarHeight,titleText:"热点投屏"}}' />
 
-<view class="container" style='height: calc(100vh - 46px - {{statusBarHeight}}px);'>
-  <view class='page_main'>
-    <!-- 轮播图开始 -->
-    <swiper wx:if="{{imgUrls.length > 0}}" indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{lb_duration}}">
-      <block wx:for="{{imgUrls}}" wx:key="item" wx:for-index="index">
-        <swiper-item>
-          <navigator wx:if="{{item.clicktype == 1}}" class='full_width full_height' target="miniProgram" app-id="{{item.appid}}" path="{{item.linkcontent}}">
-            <image mode='aspectFill' src="{{item.oss_addr}}" class="slide-image" />
-          </navigator>
-          <button wx:if="{{item.clicktype == 2}}" class='full_width full_height' bindtap='{{item.bindtap}}' data-boxmac="{{box_mac}}" data-openid="{{openid}}" data-index='{{index}}' data-linkcontent='{{item.linkcontent}}'>
-            <image mode='aspectFill' src="{{item.oss_addr}}" class="slide-image" />
-          </button>
-        </swiper-item>
-      </block>
-    </swiper>
-    <!-- 轮播图结束 -->
-    <!-- <view wx:if="{{is_game_banner > 0}}" class='full_width climbtree' bindtap='hdgames' data-boxmac="{{box_mac}}" data-openid="{{openid}}">
-      <image class='full_width full_height' src="{{banner_img_url}}"></image>
-    </view> -->
-    <view wx:if="{{is_link > 0}}" class='full_width tip'>
-      <label class='font_F6F2EC_30'>您已成功链接“{{hotel_name}}”的{{room_name}}电视</label>
-      <button class='theme-button' bindtap="breakLink" data-boxmac="{{box_mac}}" data-openid="{{openid}}">断开链接</button>
+<scroll-view class="container theme-container" style='height: calc(100vh - 46px - {{statusBarHeight}}px);' scroll-y="true" scroll-with-animation="true">
+
+  <!-- 轮播图面板 -->
+  <swiper wx:if="{{imgUrls.length > 0}}" class="banner-loop-panel full_width" indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{lb_duration}}">
+    <block wx:for="{{imgUrls}}" wx:key="item" wx:for-index="index">
+      <swiper-item class="full_width full_height">
+        <navigator wx:if="{{item.clicktype == 1}}" class='full_width full_height' target="miniProgram" app-id="{{item.appid}}" path="{{item.linkcontent}}">
+          <image mode='aspectFill' src="{{item.oss_addr}}" class="full_width full_height" />
+        </navigator>
+        <button wx:if="{{item.clicktype == 2}}" class='full_width full_height' bindtap='{{item.bindtap}}' data-boxmac="{{box_mac}}" data-openid="{{openid}}" data-index='{{index}}' data-linkcontent='{{item.linkcontent}}'>
+          <image mode='aspectFill' src="{{item.oss_addr}}" class="full_width full_height" />
+        </button>
+      </swiper-item>
+    </block>
+  </swiper>
+
+  <!-- 连接信息面板 -->
+  <view class="link-box-panel full_width theme-panel">
+    <view wx:if="{{is_link > 0}}" class='full_width full_height tip'>
+      <button bindtap="breakLink" data-boxmac="{{box_mac}}" data-openid="{{openid}}">
+        <image class="full_width full_height" src="/images/icon2/1CBEB6_link.png"></image>
+      </button>
+      <label class='font_666666_24'>您已链接【{{hotel_name}}】的{{room_name}}电视</label>
     </view>
-    <view wx:elif="{{is_link == 0}}" class='full_width tip'>
-      <label class='font_F6F2EC_30'> </label>
+    <view wx:else class='full_width full_height tip'>
+      <button data-boxmac="{{box_mac}}" data-openid="{{openid}}">
+        <image class="full_width full_height" src="/images/icon2/666666_link.png"></image>
+      </button>
+      <label class='font_666666_24'>当前暂未链接电视，链接后即可使用投屏功能</label>
     </view>
-    <view class='operation'>
+  </view>
+
+  <!-- 中部横幅图面板 -->
+  <view class="middle-banner-panel full_width">
+    <image class="full_width full_height" src="http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
+  </view>
+
+  <!-- 功能模块面板 -->
+  <view class='functional-module-panel full_width theme-panel'>
+    <view class="row full_width">
       <view bindtap="chooseImage" data-boxmac="{{box_mac}}" data-openid="{{openid}}" data-is_open_simple='{{is_open_simple}}'>
-        <image src='/images/icon2/FFFFFF_picture.png'></image>
+        <view class="icon pic">
+          <image src='/images/icon2/FFFFFF_picture.png'></image>
+        </view>
         <label>照片上电视</label>
       </view>
       <view bindtap='chooseVedio' data-boxmac="{{box_mac}}" data-openid="{{openid}}" data-is_open_simple='{{is_open_simple}}'>
-        <image src='/images/icon2/FFFFFF_video.png'></image>
+        <view class="icon video">
+          <image src='/images/icon2/FFFFFF_video.png'></image>
+        </view>
         <label>视频上电视</label>
       </view>
       <view bindtap='forfiles' data-boxmac="{{box_mac}}" data-openid="{{openid}}" data-is_open_simple='{{is_open_simple}}'>
-        <image src='/images/icon2/FFFFFF_files.png'></image>
+        <view class="icon file">
+          <image src='/images/icon2/FFFFFF_files.png'></image>
+        </view>
         <label>文件上电视</label>
       </view>
+    </view>
+    <view class="row full_width">
       <view bindtap='showHappy' data-boxmac="{{box_mac}}" data-openid="{{openid}}">
-        <image src='/images/icon2/FFFFFF_birthday.png'></image>
+        <view class="icon birthday">
+          <image src='/images/icon2/FFFFFF_birthday.png'></image>
+        </view>
         <label>生日歌点播</label>
       </view>
       <view bindtap='hdgames' data-linkcontent='/pages/game/climbtree/index' data-boxmac="{{box_mac}}" data-openid="{{openid}}">
-        <image src='/images/icon2/FFFFFF_game.png'></image>
+        <view class="icon game">
+          <image src='/images/icon2/FFFFFF_game.png'></image>
+        </view>
         <label>互动小游戏</label>
       </view>
       <view bindtap='forscreenHistory' data-boxmac="{{box_mac}}" data-openid="{{openid}}">
-        <image src='/images/icon2/FFFFFF_history.png'></image>
+        <view class="icon history">
+          <image src='/images/icon2/FFFFFF_history.png'></image>
+        </view>
         <label>投屏历史</label>
       </view>
-
-      <!-- <view >
-        <image src='/images/icon2/FFFFFF_history.png'></image>
-        <navigator url="/pages/thematic/money_blessing/grab?scene=10627_00226D584363_1557474106002"><label>抢红包</label></navigator>
-      </view>   -->
-      <!-- <view bindtap='chooseFiles'>
-        <image src='/images/icon2/FFFFFF_history.png'></image>
-        <navigator url="/pages/forscreen/forfile/h5files"><label>文件投屏</label></navigator>
-      </view>  -->
-      <!-- <view >
-        <image src='/images/icon2/FFFFFF_history.png'></image>
-        <navigator url="/pages/forscreen/forscreen?g=ag_00226D655202_31_3"><label>扫码活动</label></navigator>
-      </view> -->
     </view>
   </view>
+
+  <!-- 推荐面板 -->
+  <view class="recommend-panel full_width">
+    <view class="title-bar">
+      <label class="title theme-font1">热播内容</label>
+    </view>
+    <view class="list">
+      <view class="row line">
+        <image class="img" src="http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
+        <view class="info">
+          <view class="rank theme-font5">TOP 1</view>
+          <view class="people theme-font1">张三三</view>
+          <view class="msg">累计播放 51 次</view>
+        </view>
+        <button class="btn theme-button-dark">电视播放</button>
+      </view>
+      <view class="row line">
+        <image class="img" src="http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
+        <view class="info">
+          <view class="rank theme-font5">TOP 2</view>
+          <view class="people theme-font1">李四四</view>
+          <view class="msg">累计播放 41 次</view>
+        </view>
+        <button class="btn theme-button-dark">电视播放</button>
+      </view>
+      <view class="row line">
+        <image class="img" src="http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
+        <view class="info">
+          <view class="rank theme-font5">TOP 3</view>
+          <view class="people theme-font1">赵五五</view>
+          <view class="msg">累计播放 31 次</view>
+        </view>
+        <button class="btn theme-button-dark">电视播放</button>
+      </view>
+      <view class="row line">
+        <image class="img" src="http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
+        <view class="info">
+          <view class="rank theme-font5">TOP 4</view>
+          <view class="people theme-font1">王六六</view>
+          <view class="msg">累计播放 21 次</view>
+        </view>
+        <button class="btn theme-button-dark">电视播放</button>
+      </view>
+      <view class="row">
+        <image class="img" src="http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
+        <view class="info">
+          <view class="rank theme-font5">TOP 5</view>
+          <view class="people theme-font1">钱七七</view>
+          <view class="msg">累计播放 11 次</view>
+        </view>
+        <button class="btn theme-button-dark">电视播放</button>
+      </view>
+    </view>
+  </view>
+
   <template is="wxAuthLogin" data='{{show: showModal}}' />
-</view>
+</scroll-view>
 
 <!-- 遥控器 -->
 <template is="remoteControlWindow" data='{{popRemoteControlWindow: popRemoteControlWindow,qrcode_img:qrcode_img,box_mac:box_mac,openid:openid,is_open_simple:is_open_simple}}' />
@@ -127,16 +196,17 @@
     <view style="width: 100%;height: 80rpx;border-top: 2rpx solid #ededed;display: flex; flex-direction: row; align-items: center; justify-content: center;font-size: 28rpx;">
       <view style="width: 100%;height: 80rpx;line-height: 80rpx; color: #448ACA; text-align: center;" bindtap="shopBuyGoods" data-goods_id="{{goods_id}}" data-goods_nums="{{goods_nums}}" data-goods_box_mac="{{goods_box_mac}}" data-buy_type="1">店内购买</view>
       <!-- <view wx:if='{{showButton4JD}}' style="width: 100%;height: 80rpx;line-height: 80rpx; color: #666666; text-align: center;border-left: 2rpx solid #ededed;" bindtap="jdBuy" data-h5_url="{{jd_url}}">京东购买</view> -->
-      
-      <navigator bindtap="shopBuyGoods" data-goods_id="{{goods_id}}" data-goods_nums="{{goods_nums}}" data-goods_box_mac="{{goods_box_mac}}" data-buy_type="2" wx:if='{{showButton4JD}}' style="width: 100%;height: 80rpx;line-height: 80rpx; color: #666666; text-align: center;border-left: 2rpx solid #ededed;" target="miniProgram" app-id="{{jd_appid}}" path="{{jd_url}}" >京东购买</navigator>
-      
+
+      <navigator bindtap="shopBuyGoods" data-goods_id="{{goods_id}}" data-goods_nums="{{goods_nums}}" data-goods_box_mac="{{goods_box_mac}}" data-buy_type="2" wx:if='{{showButton4JD}}' style="width: 100%;height: 80rpx;line-height: 80rpx; color: #666666; text-align: center;border-left: 2rpx solid #ededed;"
+        target="miniProgram" app-id="{{jd_appid}}" path="{{jd_url}}">京东购买</navigator>
+
     </view>
   </view>
   <view wx:if='{{showButton4Favorites}}' style="width: 600rpx;height: 80rpx;margin-top: 25rpx;font-size: 24rpx;">
     <button style="width: 100%;height: 100%; line-height: 80rpx; color: #FFFFFF; background-color: {{showFavoritesPanel ? '#999999' : '#eb6877'}}; border-radius: 10rpx;font-size: 24rpx;" bindtap="collectGoods" data-goods_id="{{goods_id}}" data-goods_box_mac="{{goods_box_mac}}">收藏</button>
   </view>
   <view wx:if='{{showFavoritesPanel}}' style="width: 600rpx;height: 70rpx;margin-top: 10rpx;display: flex; flex-direction: row; align-items: center; justify-content: space-between;font-size: 24rpx;">
-    <input type="number"  bindinput="mobileOnInput" placeholder="请输入手机号" style="width: 385rpx;height: 70rpx; line-height: 70rpx; border-radius: 5rpx; color: #333333; background-color: #FFFFFF;padding-left: 10rpx;" placeholder-style="padding-left: 10rpx; color: #999999;"></input>
+    <input type="number" bindinput="mobileOnInput" placeholder="请输入手机号" style="width: 385rpx;height: 70rpx; line-height: 70rpx; border-radius: 5rpx; color: #333333; background-color: #FFFFFF;padding-left: 10rpx;" placeholder-style="padding-left: 10rpx; color: #999999;"></input>
     <button bindtap="sendGoodsLink" data-goods_id="{{goods_id}}" data-mobile="{{mobile}}" style="width: 200rpx;height: 70rpx;line-height: 70rpx;color: #FFFFFF; background-color: #eb6877;font-size: 24rpx;margin: auto;padding: 0; border: 0;">发送商品链接</button>
   </view>
 </modal>

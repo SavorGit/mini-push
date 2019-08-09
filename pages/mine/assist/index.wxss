@@ -1,1 +1,148 @@
 /* pages/mine/assist/index.wxss */
+
+.container {
+  justify-content: start;
+}
+
+/* ==================================== 内容信息面板 ==================================== */
+
+.assist-info-panel {
+  height: 480rpx;
+}
+
+/* ==================================== 内容信息面板 [他人] ==================================== */
+
+/* ==================================== 内容信息面板 [自己] ==================================== */
+
+.assist-info-panel > .self {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: start;
+}
+
+.assist-info-panel > .self > .people {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: start;
+}
+
+.assist-info-panel > .self > .people > .head-img {
+  width: 80rpx;
+  height: 80rpx;
+  border-radius: 50%;
+}
+
+.assist-info-panel > .self > .people > view {
+  width: calc(100% - 80rpx);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: start;
+}
+
+.assist-info-panel > .self > .img {
+  width: 100rpx;
+  height: 100rpx;
+  border-radius: 10rpx;
+}
+
+/* ==================================== 助力人员面板 ==================================== */
+
+.assist-people-panel {
+  height: 100rpx;
+  margin-top: 20rpx;
+}
+
+.assist-people-panel > .title-bar {
+  padding: 0 20rpx;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 24rpx;
+}
+
+.assist-people-panel > .list {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.assist-people-panel > .list > .people {
+  width: 70rpx;
+  height: 70rpx;
+}
+
+.assist-people-panel > .list > .people > .head-img {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+}
+
+/* ==================================== 推荐面板 ==================================== */
+
+.recommend-panel {
+  height: 200rpx;
+  margin-top: 10rpx;
+}
+
+.recommend-panel > .title-bar {
+  padding: 0 20rpx;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 24rpx;
+}
+
+.recommend-panel > .list {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.recommend-panel > .list > .entry {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: start;
+}
+
+.recommend-panel > .list > .entry > .people {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.recommend-panel > .list > .entry > .people > .head-img {
+  width: 32rpx;
+  height: 32rpx;
+  border-radius: 50%;
+}
+
+.recommend-panel > .list > .entry > .img {
+  width: 60rpx;
+  height: 60rpx;
+  border-radius: 10rpx;
+}
+
+.recommend-panel > .list > .entry > .rank {
+  font-style: italic;
+}
+
+/* ==================================== 广告面板 ==================================== */
+
+.advert-panel {
+  height: 100rpx;
+  margin-top: calc(100% - 100rpx);
+}
+
+.advert-panel > .img {
+  width: 100%;
+  height: 100%;
+}
