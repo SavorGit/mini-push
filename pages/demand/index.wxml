@@ -2,7 +2,7 @@
 <import src="/pages/template/commons" />
 <template is="navigationBarForTopLevel" data='{{statusBarHeight: statusBarHeight,titleText:"热点投屏"}}' />
 
-<view class="container" style='height: calc(100vh - 46px - {{statusBarHeight}}px);'>
+<view class="container theme-container" style='height: calc(100vh - 46px - {{statusBarHeight}}px);'>
   <!-- ================================== 列表页 ================================== -->
 
   <scroll-view class="scroll_container display_{{showView?'show':'hide'}}" bindscrolltolower="loadMore" data-boxmac="{{box_mac}}" scroll-y="true" scroll-with-animation="true">
@@ -44,20 +44,20 @@
           </view>
           <view class='operation font_666666_26'>
             <view>
-              <image src='/images/icon2/666666_play1.png'></image>
+              <label class="fa fa-play fa-lg" style="color: #666666;"></label>
               <label>{{bean.play_num}}</label>
             </view>
             <view wx:if="{{bean.is_collect==1}}">
-              <image src='/images/icon2/FF0000_heart.png' bindtap='cancCollect' data-res_id="{{bean.id}}" data-type='{{bean.type}}' data-res_key="{{index}}"></image>
+              <label class="fa fa-heart fa-lg" style="color: #E11E4C;" bindtap='cancCollect' data-res_id="{{bean.id}}" data-type='{{bean.type}}' data-res_key="{{index}}"></label>
               <label>{{bean.collect_num}}</label>
             </view>
             <view wx:else>
-              <image src='/images/icon2/666666_heart.png' bindtap='onCollect' data-res_id="{{bean.id}}" data-type='{{bean.type}}' data-res_key="{{index}}"></image>
+              <label class="fa fa-heart-o fa-lg" style="color: #666666;" bindtap='onCollect' data-res_id="{{bean.id}}" data-type='{{bean.type}}' data-res_key="{{index}}"></label>
               <label>{{bean.collect_num}}</label>
             </view>
             <view>
               <button open-type='share' data-openid="{{openid}}" data-res_id="{{bean.id}}" data-type='{{bean.type}}' data-res_key="{{index}}" data-video_url="{{bean.tx_url}}" data-video_name="{{bean.title}}" data-video_img='{{bean.img_url}}'>
-                <image src='/images/icon2/666666_share.png'></image>
+                <label class="fa fa-share-square-o fa-lg" style="color: #666666;"></label>
                 <label>{{bean.share_num}}</label>
               </button>
             </view>

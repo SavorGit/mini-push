@@ -190,6 +190,13 @@ swiper-image {
   vertical-align: middle;
 }
 
+.article > .con_bottom > .operation > view .fa {
+  width: 36rpx;
+  height: 32rpx;
+  margin-right: 8rpx;
+  vertical-align: middle;
+}
+
 .article > .con_bottom > .operation > view label {
   vertical-align: middle;
 }

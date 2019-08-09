@@ -2,7 +2,7 @@
 <import src="/pages/template/commons" />
 <template is="navigationBarForTwoLevel" data='{{statusBarHeight: statusBarHeight,titleText:"投屏历史"}}' />
 
-<view class="container" style='height: calc(100vh - 46px - {{statusBarHeight}}px);'>
+<view class="container theme-container" style='height: calc(100vh - 46px - {{statusBarHeight}}px);'>
   <scroll-view class='page_main' scroll-y="true" bindscrolltolower="loadMore" data-openid='{{openid}}' data-box_mac='{{box_mac}}'>
     <!--循环开始-->
 
@@ -39,7 +39,7 @@
         <view class="video" wx:if="{{bean.res_type == 2 }}">
           <view wx:for="{{bean.list}}" wx:key="pkey" wx:for-item="item" wx:for-index="indexs">
             <navigator bindtap='findLog' data-openid='{{openid}}' data-box_mac='{{box_mac}}' data-title='' data-tx_url='{{item.forscreen_url}}' data-id='{{bean.forscreen_id}}' data-duration="{{item.duration}}" url="">
-              
+
               <video src="{{item.res_url}}"></video>
             </navigator>
             <!-- <view class="cover">
@@ -56,7 +56,7 @@
       <view class='con_bottom'></view>
     </view>
 
-    
+
 
     <view class="body-view">
       <loading hidden="{{hiddens}}" bindchange="loadingChange">加载中...</loading>

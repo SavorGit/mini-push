@@ -3,4 +3,19 @@
 <template is="navigationBarForTwoLevel" data='{{statusBarHeight: statusBarHeight,titleText:"好友助力列表"}}' />
 
 <scroll-view class="container theme-container" style='height: calc(100vh - 46px - {{statusBarHeight}}px);' scroll-y="true" scroll-with-animation="true">
+  <view class="row line">
+    <image class="head-img" src="http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
+    <view class="name font_333333_24">张三三</view>
+    <view class="date-time font_666666_20">2019.07.08 9:00</view>
+  </view>
+  <view class="row line">
+    <image class="head-img" src="http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
+    <view class="name font_333333_24">李四四</view>
+    <view class="date-time font_666666_20">2019.07.08 9:00</view>
+  </view>
+  <view class="row">
+    <image class="head-img" src="http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
+    <view class="name font_333333_24">王五五</view>
+    <view class="date-time font_666666_20">2019.07.08 9:00</view>
+  </view>
 </scroll-view>

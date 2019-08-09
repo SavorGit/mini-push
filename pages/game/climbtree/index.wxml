@@ -2,7 +2,7 @@
 <import src="/pages/template/commons" />
 <template is="navigationBarForTwoLevel" data='{{statusBarHeight: statusBarHeight,titleText:"热点投屏"}}' />
 
-<view class="container">
+<view class="container theme-container">
   <view class='page-bottom'>
     <button wx:if="{{showButton}}" bindtap='lunchGame' data-game_id='{{game_id}}' data-box_mac='{{box_mac}}'>
       <image src='https://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/games/monkeys_climb_trees/launch_game.png'></image>

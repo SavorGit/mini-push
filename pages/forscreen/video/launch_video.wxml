@@ -3,7 +3,7 @@
 <template is="navigationBarForTwoLevel" data='{{statusBarHeight: statusBarHeight,titleText:"热点投屏"}}' />
 
 <!-- ================================== 点播页面 ================================== -->
-<view class="container" style='height: calc(100vh - 46px - {{statusBarHeight}}px);'>
+<view class="container theme-container" style='height: calc(100vh - 46px - {{statusBarHeight}}px);'>
   <view class='full_width page_top'></view>
   <view class='full_width page_main' wx:if="{{showControl==false}}">
     <view class='full_width article'>
@@ -22,24 +22,20 @@
       <view class='con_bottom theme2'>
         <view class='full_height operation font_666666_26'>
           <view>
-            <image src='/images/icon2/666666_play1.png'></image>
+            <label class="fa fa-play fa-lg" style="color: #666666;"></label>
             <label>{{play_num}}</label>
           </view>
           <view wx:if="{{is_collect==1}}">
-            <image src='/images/icon2/FF0000_heart.png' bindtap='cancCollect' data-res_id="{{res_id}}" data-type='{{res_type}}' data-openid='{{openid}}'></image>
+            <label class="fa fa-heart fa-lg" style="color: #E11E4C;" bindtap='cancCollect' data-res_id="{{res_id}}" data-type='{{res_type}}' data-openid='{{openid}}'></label>
             <label>{{collect_num}}</label>
           </view>
           <view wx:else>
-            <image src='/images/icon2/666666_heart.png' bindtap='onCollect' data-res_id="{{res_id}}" data-type='{{res_type}}' data-openid='{{openid}}'></image>
+            <label class="fa fa-heart-o fa-lg" style="color: #666666;" bindtap='onCollect' data-res_id="{{res_id}}" data-type='{{res_type}}' data-openid='{{openid}}'></label>
             <label>{{collect_num}}</label>
           </view>
-          <!--<view>
-              <image src='/images/icon2/666666_comment.png'></image>
-              <label >100</label>
-            </view>-->
           <view>
             <button open-type='share' data-openid="{{openid}}" data-res_id="{{res_id}}" data-type='{{res_type}}' data-video_url="{{video_url}}" data-video_name="{{video_name}}" data-video_img='{{video_img_url}}' data-share_num='{{share_num}}'>
-              <image src='/images/icon2/666666_share.png'></image>
+              <label class="fa fa-share-square-o fa-lg" style="color: #666666;"></label>
               <label>{{share_num}}</label>
             </button>
           </view>

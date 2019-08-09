@@ -2,7 +2,7 @@
 <import src="/pages/template/commons" />
 <template is="navigationBarForTwoLevel" data='{{statusBarHeight: statusBarHeight,titleText:"热点投屏"}}' />
 
-<view class="container" style='height: calc(100vh - 46px - {{statusBarHeight}}px);'>
+<view class="container theme-container" style='height: calc(100vh - 46px - {{statusBarHeight}}px);'>
   <view class="page-top theme2 flex_row_center font_666666_26">
     <label>所有投屏文件，投屏结束后自动销毁</label>
     <label class='link_relief'>
@@ -13,33 +13,33 @@
     <scroll-view class="file-list" scroll-into-view="{{toView}}" scroll-y="true" scroll-with-animation="true">
       <view class="weui-grids pic-platform">
         <block wx:for="{{file_imgs}}" wx:key="key" wx:for-item="bean" wx:for-index="index">
-        <view id="list{{index}}" wx:if="{{pos_id == index}}" class="weui-grid pic-frame choose" bindtap="appointPic" data-forscreen_id="{{forscreen_id}}" data-forscreen_img="{{bean}}" data-pos_id="{{index}}">
-          <image src="{{oss_host}}/{{bean}}{{oss_suffix}}"></image>
-          <view class="cover theme-font4">
-            <image src="/images/icon2/1CBEB6_right-triangle.png"></image>
-            <label class="page-number">{{index+1}}</label>
+          <view id="list{{index}}" wx:if="{{pos_id == index}}" class="weui-grid pic-frame choose" bindtap="appointPic" data-forscreen_id="{{forscreen_id}}" data-forscreen_img="{{bean}}" data-pos_id="{{index}}">
+            <image src="{{oss_host}}/{{bean}}{{oss_suffix}}"></image>
+            <view class="cover theme-font4">
+              <image src="/images/icon2/1CBEB6_right-triangle.png"></image>
+              <label class="page-number">{{index+1}}</label>
+            </view>
           </view>
-        </view>
-        <view wx:if="{{pos_id != index}}" class="weui-grid pic-frame" bindtap="appointPic" data-forscreen_id="{{forscreen_id}}" data-forscreen_img="{{bean}}" data-pos_id="{{index}}">
-          <image src="{{oss_host}}/{{bean}}{{oss_suffix}}"></image>
-          <view class="cover theme-font1">
-            <image src="/images/icon2/FFFFFF_right-triangle.png"></image>
-            <label class="page-number">{{index+1}}</label>
+          <view wx:if="{{pos_id != index}}" class="weui-grid pic-frame" bindtap="appointPic" data-forscreen_id="{{forscreen_id}}" data-forscreen_img="{{bean}}" data-pos_id="{{index}}">
+            <image src="{{oss_host}}/{{bean}}{{oss_suffix}}"></image>
+            <view class="cover theme-font1">
+              <image src="/images/icon2/FFFFFF_right-triangle.png"></image>
+              <label class="page-number">{{index+1}}</label>
+            </view>
           </view>
-        </view>
         </block>
-        
+
       </view>
     </scroll-view>
     <view class="operation theme2">
       <button class="rechoose theme-button" bindtap="reChooseFile">重选文件</button>
       <button class="quit theme-button5" bindtap="exitForscreend" data-openid="{{openid}}" data-box_mac="{{box_mac}}">退出投屏</button>
-      <button class="previous theme-font4" bindtap="changePic" data-action="1" data-file_imgs="{{file_imgs}}" data-pos_id="{{pos_id}}" data-forscreen_id="{{forscreen_id}}" >
-        <image src="/images/icon2/FFFFFF_chevron-circle-left.png"></image>
+      <button class="previous theme-font4" bindtap="changePic" data-action="1" data-file_imgs="{{file_imgs}}" data-pos_id="{{pos_id}}" data-forscreen_id="{{forscreen_id}}">
+        <label class="fa fa-chevron-circle-left"></label>
         <label>播放上一页</label>
       </button>
-      <button class="next theme-font4" bindtap="changePic" data-action="2" data-file_imgs="{{file_imgs}}" data-pos_id="{{pos_id}}" data-forscreen_id="{{forscreen_id}}" >
-        <image src="/images/icon2/FFFFFF_chevron-circle-right.png"></image>
+      <button class="next theme-font4" bindtap="changePic" data-action="2" data-file_imgs="{{file_imgs}}" data-pos_id="{{pos_id}}" data-forscreen_id="{{forscreen_id}}">
+        <label class="fa fa-chevron-circle-right"></label>
         <label>播放下一页</label>
       </button>
     </view>

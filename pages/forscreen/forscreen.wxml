@@ -1,5 +1,5 @@
 <import src="../template/navigation.wxml" />
-<view class="container" style='height: 100vh'>
+<view class="container theme-container" style='height: 100vh'>
 
 
 

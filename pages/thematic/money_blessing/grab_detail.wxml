@@ -2,7 +2,7 @@
 <import src="/pages/template/commons" />
 <template is="navigationBarForTwoLevel" data='{{statusBarHeight: statusBarHeight,titleText:"热点投屏"}}' />
 
-<view class='container' style='height: calc(100vh - 46px - {{statusBarHeight}}px);'>
+<view class='container theme-container' style='height: calc(100vh - 46px - {{statusBarHeight}}px);'>
   <view class='PageTop full_width'></view>
   <view class='PageMain full_width'>
     <view class='package'>
@@ -44,7 +44,7 @@
             <view class='right'>{{bean.money}}元</view>
           </view>
         </scroll-view>
-        
+
         <view wx:if="{{packet_info.status==6 || packet_info.status==4 }}" class='message'>未领取的红包，将24小时之内发起退款</view>
       </view>
     </view>
@@ -57,6 +57,6 @@
     <button class='button PackingButtonFontSize' bindtap='cintoindex'>进入首页</button>
   </view>
   <view class="body-view">
-          <loading hidden="{{hiddens}}" bindchange="loadingChange">加载中...</loading>
-        </view>
+    <loading hidden="{{hiddens}}" bindchange="loadingChange">加载中...</loading>
+  </view>
 </view>

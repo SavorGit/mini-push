@@ -2,8 +2,8 @@
 <import src="/pages/template/commons" />
 <template is="navigationBarForTwoLevel" data='{{statusBarHeight: statusBarHeight,titleText:"热点投屏"}}' />
 
-<view class='container' style='height: calc(100vh - 46px - {{statusBarHeight}}px);'>
-<!--
+<view class='container theme-container' style='height: calc(100vh - 46px - {{statusBarHeight}}px);'>
+  <!--
   <view class='page_top'>
     <view class='categry'>
       <label>公开</label>
@@ -36,7 +36,7 @@
             <navigator wx:if="{{bean.res_type == 2}}" class='full_width media-cover' url="/pages/find/video?forscreen_id={{bean.forscreen_id}}&box_mac={{box_mac}}">
               <image class='full_width' mode='widthFix' src="{{bean.pubdetail[0].vide_img}}"></image>
               <view class='built-up-layer'>
-                <image src='/images/icon2/FFFFFF_play.png'></image>
+                <label class="fa fa-play fa-lg" style="color: #666666;"></label>
               </view>
             </navigator>
           </view>
@@ -44,25 +44,19 @@
             <view class='operation font_666666_24'>
               <view wx:if="{{bean.is_collect=='1'}}">
                 <button bindtap='cancCollect' data-res_id="{{bean.forscreen_id}}" data-openid="{{openid}}" data-res_key="{{index}}">
-                  <image src='/images/icon2/FF0000_heart.png'></image>
+                  <label class="fa fa-heart fa-lg" style="color: #E11E4C;"></label>
                   <label>{{bean.collect_num}}</label>
                 </button>
               </view>
               <view wx:else>
                 <button bindtap='onCollect' data-res_id="{{bean.forscreen_id}}" data-openid="{{openid}}" data-res_key="{{index}}">
-                  <image src='/images/icon2/666666_heart.png'></image>
+                  <label class="fa fa-heart-o fa-lg" style="color: #666666;"></label>
                   <label>{{bean.collect_num}}</label>
                 </button>
               </view>
-              <!--<view>
-                <button >
-                  <image src='/images/icon2/666666_comment.png'></image>
-                  <label >100</label>
-                </button>
-              </view>-->
               <view>
                 <button open-type='share' data-res_id="{{bean.forscreen_id}}" data-res_key="{{index}}" data-pubdetail="{{bean.pubdetail}}" data-openid="{{openid}}" data-res_type="{{bean.res_type}}">
-                  <image src='/images/icon2/666666_share.png'></image>
+                  <label class="fa fa-share-square-o fa-lg" style="color: #666666;"></label>
                   <label>{{bean.share_num}}</label>
                 </button>
               </view>
@@ -97,7 +91,7 @@
             <navigator wx:if="{{bean.res_type == 2}}" class='full_width media-cover' url="/pages/find/video?forscreen_id={{bean.forscreen_id}}&box_mac={{box_mac}}">
               <image class='full_width' mode='widthFix' src="{{bean.pubdetail[0].vide_img}}"></image>
               <view class='built-up-layer'>
-                <image src='/images/icon2/FFFFFF_play.png'></image>
+                <label class="fa fa-play fa-lg" style="color: #666666;"></label>
               </view>
             </navigator>
           </view>
@@ -105,25 +99,19 @@
             <view class='operation font_666666_24'>
               <view wx:if="{{bean.is_collect=='1'}}">
                 <button bindtap='cancCollect' data-res_id="{{bean.forscreen_id}}" data-openid="{{openid}}" data-res_key="{{index}}">
-                  <image src='/images/icon2/FF0000_heart.png'></image>
+                  <label class="fa fa-heart fa-lg" style="color: #E11E4C;"></label>
                   <label>{{bean.collect_num}}</label>
                 </button>
               </view>
               <view wx:else>
                 <button bindtap='onCollect' data-res_id="{{bean.forscreen_id}}" data-openid="{{openid}}" data-res_key="{{index}}">
-                  <image src='/images/icon2/666666_heart.png'></image>
+                  <label class="fa fa-heart-o fa-lg" style="color: #666666;"></label>
                   <label>{{bean.collect_num}}</label>
                 </button>
               </view>
-              <!--<view>
-                <button >
-                  <image src='/images/icon2/666666_comment.png'></image>
-                  <label >100</label>
-                </button>
-              </view>-->
               <view>
                 <button open-type='share' data-res_id="{{bean.forscreen_id}}" data-res_key="{{index}}" data-pubdetail="{{bean.pubdetail}}" data-openid="{{openid}}" data-res_type="{{bean.res_type}}">
-                  <image src='/images/icon2/666666_share.png'></image>
+                  <label class="fa fa-share-square-o fa-lg" style="color: #666666;"></label>
                   <label>{{bean.share_num}}</label>
                 </button>
               </view>
