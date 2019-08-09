@@ -165,7 +165,7 @@ Page({
   up_forscreen(e) {//多张图片投屏开始(不分享到发现)
     console.log(e);
     var that = this;
-    
+    var formId = e.detail.formId;
     img_lenth = e.detail.value.img_lenth;
     openid = e.detail.value.openid;
     box_mac = e.detail.value.box_mac;
@@ -231,6 +231,9 @@ Page({
                     uploadOss_multy(policy, signature, upimgs, box_mac, openid, img_lenth, forscreen_char, avatarUrl, nickName, public_text, timer8_0);
                   }
                 });
+                
+                app.recordFormId(openid,formId);
+                
               }else {
 
               }
@@ -260,6 +263,8 @@ Page({
               uploadOss_multy(policy, signature, upimgs, box_mac, openid, img_lenth, forscreen_char, avatarUrl, nickName, public_text, timer8_0);
             }
           });
+          app.recordFormId(openid,formId);
+          
 
         }
       }
@@ -905,14 +910,19 @@ Page({
   },
   //我要助力
   assist:function(e){
+    console.log(e);
     var that = this;
-    var forscreen_id = e.currentTarget.dataset.forscreen_id;
+    var openid = e.detail.value.openid;
+    var forscreen_id = e.detail.value.forscreen_id;
+    var formId = e.detail.formId;
+    
     if (typeof (forscreen_id)=='undefined'){
       wx.showToast({
         title: '助力参数异常，请重选照片',
         icon:'none',
         duration:2000
       })
+      /*****************************************上线去掉 *///?????????????????????????????????????????????????
       wx.navigateTo({
         url: '/pages/mine/assist/index?rec_id=' + forscreen_id,
       })
@@ -920,6 +930,7 @@ Page({
       wx.navigateTo({
         url: '/pages/mine/assist/index?rec_id=' + forscreen_id,
       })
+      app.recordFormId(openid,formId);
     }
     
   }

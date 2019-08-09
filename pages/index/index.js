@@ -389,6 +389,7 @@ Page({
 
   //选择照片上电视
   chooseImage(e) {
+    console.log(e);
     var that = this;
     var user_info = wx.getStorageSync("savor_user_info");
     if (user_info.is_wx_auth != 3) {
@@ -396,9 +397,10 @@ Page({
         showModal: true
       })
     } else {
-      var box_mac = e.currentTarget.dataset.boxmac;
-      var openid = e.currentTarget.dataset.openid;
-      var is_open_simple = e.currentTarget.dataset.is_open_simple;
+      var box_mac = e.detail.value.boxmac;
+      var openid = e.detail.value.openid;
+      var is_open_simple = e.detail.value.is_open_simple;
+      var formId = e.detail.formId;
       if (box_mac == '') {
 
         app.scanQrcode();
@@ -406,6 +408,7 @@ Page({
         wx.navigateTo({
           url: '/pages/forscreen/forimages/index?box_mac=' + box_mac + '&openid=' + openid + '&is_open_simple=' + is_open_simple,
         })
+        app.recrdFormId(openid, formId);
       }
     }
   },
@@ -418,15 +421,17 @@ Page({
         showModal: true
       })
     } else {
-      var box_mac = e.currentTarget.dataset.boxmac;
-      var openid = e.currentTarget.dataset.openid;
-      var is_open_simple = e.currentTarget.dataset.is_open_simple;
+      var box_mac = e.detail.value.boxmac;
+      var openid = e.detail.value.openid;
+      var is_open_simple = e.detail.value.is_open_simple;
+      var formId = e.detail.formId;
       if (box_mac == '') {
         app.scanQrcode();
       } else {
         wx.navigateTo({
           url: '/pages/forscreen/forvideo/index?box_mac=' + box_mac + '&openid=' + openid + '&is_open_simple=' + is_open_simple,
         })
+        app.recrdFormId(openid, formId);
       }
     }
 
@@ -574,9 +579,10 @@ Page({
         showModal: true
       })
     } else {
-      var box_mac = e.currentTarget.dataset.boxmac;
-      var openid = e.currentTarget.dataset.openid;
-      var is_open_simple = e.currentTarget.dataset.is_open_simple;
+      var box_mac = e.detail.value.boxmac;
+      var openid = e.detail.value.openid;
+      var is_open_simple = e.detail.value.is_open_simple;
+      var formId = e.detail.formId;
       //微信好友文件投屏+h5文件投屏
       if (box_mac == '') {
         app.scanQrcode();
@@ -584,6 +590,7 @@ Page({
         that.setData({
           showMe: true,
         })
+        app.recrdFormId(openid,formId);
       }
 
       //微信好友文件投屏

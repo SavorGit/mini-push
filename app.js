@@ -1,5 +1,21 @@
 //app.js
 App({
+  recrdFormId(openid,formId){
+    var that = this;
+    if (formId != 'the formId is a mock one') {
+      wx.request({
+        url: that.globalData.api_url + '/aa/bb/cc',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        method: "POST",
+        data: {
+          openid: openid,
+          formId: formId,
+        }
+      })
+    }
+  },
   //电视播放
   boxShow(box_mac = '', forscreen_id, pubdetail, res_type, res_len) {
     var that = this;

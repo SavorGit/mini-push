@@ -137,7 +137,12 @@
     <!-- 重选 -->
     <view class="page_bottom theme2">
       <view class='button_group'>
-        <button wx:if="{{is_share==1}}" class='savor-btn button_space_left theme-button' bindtap="assist" data-boxmac="{{box_mac}}" data-openid="{{openid}}" data-forscreen_id="{{forscreen_id}}">助力全网播放</button>
+        <form bindsubmit="assist" report-submit="true" wx:if="{{is_share==1}}">
+        <input class="display_hide" name="box_mac" value="{{box_mac}}"></input>
+        <input class="display_hide" name="openid" value="{{openid}}"></input>
+        <input class="display_hide" name="forscreen_id" value="{{forscreen_id}}"></input>
+        <button  class='savor-btn button_space_left theme-button' form-type="submit" >助力全网播放</button>
+        </form>
         <button class='savor-btn theme-button-dark' bindtap="chooseImage" data-boxmac="{{box_mac}}" data-openid="{{openid}}">重选照片</button>
         <button class='savor-btn button_space_right theme-button-dark' bindtap="exitForscreen" data-boxmac="{{box_mac}}">退出投屏</button>
       </view>

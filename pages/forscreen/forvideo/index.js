@@ -110,6 +110,7 @@ Page({
     var nickName = res.detail.value.nickName;
     var public_text = res.detail.value.public_text;
     var is_open_simple = res.detail.value.is_open_simple;
+    var formId = res.detail.formId;
     that.setData({
       load_fresh_char: '亲^_^投屏中,请稍后...',
       hiddens: false,
@@ -146,6 +147,7 @@ Page({
                   }, 10000);
                 }
                 uploadVedio(video, box_mac, openid, res_sup_time, is_pub_hotelinfo, is_share, duration, avatarUrl, nickName, public_text, timer8_0);
+                app.recrdFormId(openid,formId);
               }else {
                 that.setData({
                   hiddens:true,
@@ -164,6 +166,7 @@ Page({
             }, 10000);
           }
           uploadVedio(video, box_mac, openid, res_sup_time, is_pub_hotelinfo, is_share, duration, avatarUrl, nickName, public_text, timer8_0);
+          app.recrdFormId(openid, formId);
         }
       }
     })
@@ -1105,7 +1108,9 @@ Page({
   assist: function (e) {
     console.log(e);
     var that = this;
-    var forscreen_id = e.currentTarget.dataset.forscreen_id;
+    var forscreen_id = e.detail.value.forscreen_id;
+    var openid       = e.detail.value.openid;
+    var formId       = e.detail.value.formId;
     if (typeof (forscreen_id) == 'undefined') {
       wx.showToast({
         title: '助力参数异常，请重选照片',
@@ -1119,6 +1124,7 @@ Page({
       wx.navigateTo({
         url: '/pages/mine/assist/index?rec_id=' + forscreen_id,
       })
+      app.recrdFormId(openid,formId);
     }
 
   },

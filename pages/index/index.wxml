@@ -46,24 +46,39 @@
   <!-- 功能模块面板 -->
   <view class='functional-module-panel full_width theme-panel'>
     <view class="row full_width">
-      <view bindtap="chooseImage" data-boxmac="{{box_mac}}" data-openid="{{openid}}" data-is_open_simple='{{is_open_simple}}'>
+      <form bindsubmit="chooseImage" report-submit="true">
+      <view>
         <view class="icon pic">
           <image src='/images/icon2/FFFFFF_picture.png'></image>
         </view>
-        <label>照片上电视</label>
+        <input class="display_hide" name="boxmac" value="{{box_mac}}"></input>
+        <input class="display_hide" name="openid" value="{{openid}}"></input>
+        <input class="display_hide" name="is_open_simple" value="{{is_open_simple}}"></input>
+        <button form-type="submit">照片上电视</button>
       </view>
-      <view bindtap='chooseVedio' data-boxmac="{{box_mac}}" data-openid="{{openid}}" data-is_open_simple='{{is_open_simple}}'>
+      </form>
+      <form bindsubmit="chooseVedio" report-submit="true">
+      <view >
         <view class="icon video">
           <image src='/images/icon2/FFFFFF_video.png'></image>
         </view>
-        <label>视频上电视</label>
+        <input class="display_hide" name="boxmac" value="{{box_mac}}"></input>
+        <input class="display_hide" name="openid" value="{{openid}}"></input>
+        <input class="display_hide" name="is_open_simple" value="{{is_open_simple}}"></input>
+        <button form-type="submit">视频上电视</button>
       </view>
-      <view bindtap='forfiles' data-boxmac="{{box_mac}}" data-openid="{{openid}}" data-is_open_simple='{{is_open_simple}}'>
+      </form>
+      <form bindsubmit="forfiles" report-submit="true">
+      <view >
         <view class="icon file">
           <image src='/images/icon2/FFFFFF_files.png'></image>
         </view>
-        <label>文件上电视</label>
+        <input class="display_hide" name="boxmac" value="{{box_mac}}"></input>
+        <input class="display_hide" name="openid" value="{{openid}}"></input>
+        <input class="display_hide" name="is_open_simple" value="{{is_open_simple}}"></input>
+        <button form-type="submit">文件上电视</button>
       </view>
+      </form>
     </view>
     <view class="row full_width">
       <view bindtap='showHappy' data-boxmac="{{box_mac}}" data-openid="{{openid}}">
@@ -93,16 +108,18 @@
       <label class="title theme-font1">热播内容</label>
     </view>
     <view class="list">
-      <view class="row line">
+      <block wx:for="{{hot_play}}" wx:key="item" wx:for-index="index">
+      <view class="row {{index<4?'line':''}}" >
         <image class="img" src="http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
         <view class="info">
-          <view class="rank theme-font5">TOP 1</view>
+          <view class="rank theme-font5">TOP {{index+1}}</view>
           <view class="people theme-font1">张三三</view>
           <view class="msg">累计播放 51 次</view>
         </view>
         <button class="btn theme-button-dark">电视播放</button>
       </view>
-      <view class="row line">
+      </block>
+      <!-- <view class="row line">
         <image class="img" src="http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
         <view class="info">
           <view class="rank theme-font5">TOP 2</view>
@@ -137,7 +154,7 @@
           <view class="msg">累计播放 11 次</view>
         </view>
         <button class="btn theme-button-dark">电视播放</button>
-      </view>
+      </view> -->
     </view>
   </view>
 
