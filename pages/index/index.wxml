@@ -88,7 +88,7 @@
   </view>
 
   <!-- 推荐面板 -->
-  <view class="recommend-panel full_width">
+  <view class="recommend-panel full_width" wx:if="{{hot_play.length>0}}">
     <view class="title-bar">
       <label class="title theme-font1">热播内容</label>
     </view>

@@ -40,6 +40,7 @@ Page({
     lb_duration: 1000, //滑动动画时长
     goods_nums:1,
     jd_appid:jd_appid,
+    hot_play:[]    //热播内容
   },
 
   /**
@@ -263,7 +264,7 @@ Page({
     })
     //热播内容
     wx.request({
-      url: api_url+'/aa/bb/cc',
+      url: api_url +'/Smallapp3/content/getHotplaylist',
       headers: {
         'Content-Type': 'application/json'
       },
