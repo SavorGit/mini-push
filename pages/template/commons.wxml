@@ -60,16 +60,32 @@
       <view class='remoteControlWindow-top'>
         <view class='opt'>
           <button bindtap='changeProgram' data-box_mac='{{box_mac}}' data-change_type='1'>
-            <image src='/images/icon2/last-one.png'></image>
+            <!-- <image src='/images/icon2/last-one.png'></image> -->
+            <icon class="fa-stack fa-lg">
+              <image src='/images/icon2/big-button.png'></image>
+              <i class="fa fa-step-backward fa-stack-1x theme-font4"></i>
+            </icon>
           </button>
           <button bindtap='changeProgram' data-box_mac='{{box_mac}}' data-change_type='2'>
-            <image src='/images/icon2/next-one.png'></image>
+            <!-- <image src='/images/icon2/next-one.png'></image> -->
+            <icon class="fa-stack fa-lg">
+              <image src='/images/icon2/big-button.png'></image>
+              <i class="fa fa-step-forward fa-stack-1x theme-font4"></i>
+            </icon>
           </button>
           <button bindtap='changeVolume' data-box_mac='{{box_mac}}' data-change_type='1'>
-            <image src='/images/icon2/volume-down.png'></image>
+            <!-- <image src='/images/icon2/volume-down.png'></image> -->
+            <icon class="fa-stack fa-lg">
+              <image src='/images/icon2/big-button.png'></image>
+              <i class="fa fa-volume-down fa-stack-1x theme-font4"></i>
+            </icon>
           </button>
           <button bindtap='changeVolume' data-box_mac='{{box_mac}}' data-change_type='2'>
-            <image src='/images/icon2/volume-up.png'></image>
+            <!-- <image src='/images/icon2/volume-up.png'></image> -->
+            <icon class="fa-stack fa-lg">
+              <image src='/images/icon2/big-button.png'></image>
+              <i class="fa fa-volume-up fa-stack-1x theme-font4"></i>
+            </icon>
           </button>
         </view>
       </view>

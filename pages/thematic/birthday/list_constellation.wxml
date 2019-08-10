@@ -13,32 +13,32 @@
       <view class='list'>
         <view class='music theme7'>
           <icon class="fa-stack fa-lg icon theme-font">
-            <text class="fa fa-circle-thin fa-stack-2x"></text>
-            <text class="fa fa-music fa-stack-1x"></text>
+            <i class="fa fa-circle-thin fa-stack-2x"></i>
+            <i class="fa fa-music fa-stack-1x"></i>
           </icon>
           <label>生日快乐</label>
           <label>普通版</label>
         </view>
         <view class='music theme7'>
           <icon class="fa-stack fa-lg icon theme-font">
-            <text class="fa fa-circle-thin fa-stack-2x"></text>
-            <text class="fa fa-music fa-stack-1x"></text>
+            <i class="fa fa-circle-thin fa-stack-2x"></i>
+            <i class="fa fa-music fa-stack-1x"></i>
           </icon>
           <label>生日快乐</label>
           <label>儿童版</label>
         </view>
         <view class='music theme7'>
           <icon class="fa-stack fa-lg icon theme-font">
-            <text class="fa fa-circle-thin fa-stack-2x"></text>
-            <text class="fa fa-music fa-stack-1x"></text>
+            <i class="fa fa-circle-thin fa-stack-2x"></i>
+            <i class="fa fa-music fa-stack-1x"></i>
           </icon>
           <label>生日快乐</label>
           <label>英文版</label>
         </view>
         <view class='music theme7'>
           <icon class="fa-stack fa-lg icon theme-font">
-            <text class="fa fa-circle-thin fa-stack-2x"></text>
-            <text class="fa fa-music fa-stack-1x"></text>
+            <i class="fa fa-circle-thin fa-stack-2x"></i>
+            <i class="fa fa-music fa-stack-1x"></i>
           </icon>
           <label>生日快乐</label>
           <label>粤语版</label>

@@ -126,16 +126,43 @@
 .remoteControlWindow-container .remoteControlWindow-top .opt button {
   width: 100rpx;
   height: 100rpx;
+  line-height: 100rpx;
+  text-align: center;
+  font-size: 34rpx;
   border: unset;
+  margin: auto;
   padding: unset;
   background: unset;
   border-radius: 60rpx;
 }
 
-.remoteControlWindow-container .remoteControlWindow-top .opt button image {
-  width: 100%;
-  height: 100%;
+.remoteControlWindow-container .remoteControlWindow-top .opt button::before,
+.remoteControlWindow-container .remoteControlWindow-top .opt button::after {
+  border: unset;
+  margin: auto;
+  padding: unset;
+  background: unset;
+}
+
+/* .remoteControlWindow-container .remoteControlWindow-top .opt button image {
+  width: 100rpx;
+  height: 100rpx;
   border-radius: 50%;
+} */
+
+.remoteControlWindow-container .remoteControlWindow-top .opt > button icon {
+  width: 100rpx;
+  height: 100rpx;
+}
+
+.remoteControlWindow-container .remoteControlWindow-top .opt > button icon image {
+  width: 100rpx;
+  height: 100rpx;
+  border-radius: 49rpx;
+}
+
+.remoteControlWindow-container .remoteControlWindow-top .opt > button icon .fa-stack-1x {
+  line-height: 2.4;
 }
 
 .remoteControlWindow-container .remoteControlWindow-middle {
