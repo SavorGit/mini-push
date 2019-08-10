@@ -137,10 +137,11 @@ swiper-image {
   z-index: 2;
 }
 
-.article > .cover .full > .play > image {
+.article > .cover .full > .play > .icon {
   width: 60rpx;
   height: 60rpx;
-  margin-right: 18rpx;
+  font-size: 60rpx;
+  margin-right: 20rpx;
   z-index: 3;
 }
 

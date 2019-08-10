@@ -14,26 +14,26 @@
     <view class='v-structure theme2 font_666666_28'>
       <picker bindchange="bindCityPickerChange" value="{{cityIndex}}" range="{{cityArray}}">
         <view class='city_show'>
-          <image src='/images/icon2/666666_position.png'></image>
+          <label class="fa fa-map-o icon"></label>
           <label>{{cityArray[cityIndex]}}</label>
         </view>
       </picker>
       <picker bindchange="bindAreaPickerChange" value="{{areaIndex}}" range="{{areaArray}}">
         <view class='area_show'>
           <label>{{areaArray[areaIndex]}}</label>
-          <image src='/images/icon2/666666_down.png'></image>
+          <label class="fa fa-caret-down icon"></label>
         </view>
       </picker>
       <picker bindchange="bindCuiPickerChange" value="{{cuisineIndex}}" range="{{cuisineArray}}">
         <view class='cuisine_show'>
           <label>{{cuisineArray[cuisineIndex]}}</label>
-          <image src='/images/icon2/666666_down.png'></image>
+          <label class="fa fa-caret-down icon"></label>
         </view>
       </picker>
       <picker bindchange="bindPayPickerChange" value="{{perCapitaPayIndex}}" range="{{perCapitaPayArray}}">
         <view class='perCapitaPay_show'>
           <label>{{perCapitaPayArray[perCapitaPayIndex]}}</label>
-          <image src='/images/icon2/666666_down.png'></image>
+          <label class="fa fa-caret-down icon"></label>
         </view>
       </picker>
     </view>
@@ -60,7 +60,7 @@
             </view>
           </view>
           <view class='address font_666666_24'>
-            <image src='/images/icon2/666666_position-2.png'></image>
+            <label class="fa fa-map-marker icon"></label>
             <label>{{bean.addr}}</label>
           </view>
         </view>

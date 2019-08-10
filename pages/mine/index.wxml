@@ -38,7 +38,7 @@
                 </navigator>
                 <view class="cover">
                   <navigator url="/pages/forscreen/video/launch_video?video_url={{pubdetail.res_url}}&video_name=">
-                    <image src='/images/icon2/FFFFFF_play.png'></image>
+                    <label class="fa fa-play-circle icon theme-font4"></label>
                   </navigator>
                   <view>
                     <label class='font_F6F3EE_20'>{{pubdetail.duration}}</label>

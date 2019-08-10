@@ -25,9 +25,10 @@
   text-align: center;
 }
 
-.page_main .article .con_main .cover > image {
+.page_main .article .con_main .cover > .icon {
   width: 64rpx;
   height: 64rpx;
+  font-size: 64rpx;
 }
 
 .page_main .article .con_bottom {

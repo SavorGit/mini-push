@@ -95,7 +95,7 @@
           <input class="display_hide" name="box_mac" value="{{box_mac}}"></input>
           <input class="display_hide" name="openid" value="{{openid}}"></input>
           <input class="display_hide" name="forscreen_id" value="{{forscreen_id}}"></input>
-          <button  class='savor-btn button_space_left theme-button' form-type="submit">助力全网播放</button>
+          <button class='savor-btn button_space_left theme-button' form-type="submit">助力全网播放</button>
         </form>
         <button class='savor-btn theme-button-dark' bindtap='chooseVedio' data-boxmac="{{box_mac}}" data-openid="{{openid}}">重选视频</button>
         <button class='savor-btn button_space_right theme-button-dark' bindtap="exitForscreend" data-boxmac="{{box_mac}}" data-openid="{{openid}}">退出投屏</button>
@@ -126,10 +126,9 @@
                 <navigator url="/pages/forscreen/video/launch_video?video_url={{item.res_url}}&video_name=&box_mac={{box_mac}}&res_id={{item.resource_id}}&filename={{item.filename}}&video_img_url={{item.imgurl}}">
                   <image mode='aspectFill' src="{{item.imgurl}}"></image>
                 </navigator>
-
                 <view>
                   <navigator url="/pages/forscreen/video/launch_video?video_url={{item.res_url}}&video_name=&box_mac={{box_mac}}&res_id={{item.resource_id}}&filename={{item.filename}}&video_img_url={{item.imgurl}}">
-                    <image src="/images/icon/white_play.png"></image>
+                    <label class="fa fa-play-circle-o icon theme-font4"></label>
                   </navigator>
                 </view>
               </view>

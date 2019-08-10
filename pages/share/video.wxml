@@ -22,15 +22,6 @@
         <view class="video">
           <view>
             <video src="{{info.video_url}}"></video>
-
-            <!-- <view class="cover">
-              <navigator>
-                <image src='http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/icon/white_play.png'></image>
-              </navigator>
-              <view>
-                <label class='font_F6F3EE_20'>视频名称</label>
-              </view>
-            </view> -->
           </view>
         </view>
       </view>

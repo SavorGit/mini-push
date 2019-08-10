@@ -13,9 +13,10 @@
   justify-content: flex-start;
 }
 
-.birthday .video .title image {
-  width: 50rpx;
+.birthday .video .title .icon {
+  width: 42rpx;
   height: 42rpx;
+  font-size: 42rpx;
   vertical-align: middle;
 }
 
@@ -51,6 +52,11 @@
 .birthday .video .list .music label {
   font-size: 28rpx;
   color: #666;
+}
+
+.birthday .video .list .music .icon {
+  font-size: 36rpx;
+  color: #1cbeb6;
 }
 
 .constellation_list {
@@ -111,9 +117,10 @@
   height: 70rpx;
 }
 
-.constellation_list .detailed .video_list .title image {
+.constellation_list .detailed .video_list .title .icon {
   width: 54rpx;
   height: 54rpx;
+  font-size: 54rpx;
   vertical-align: middle;
 }
 

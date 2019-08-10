@@ -7,13 +7,16 @@
   <view class='full_width birthday'>
     <view class='video'>
       <view class='title theme-font2'>
-        <image src='/images/icon2/666666_birthday.png'></image>
+        <label class="fa fa-birthday-cake icon"></label>
         <label>为TA点歌</label>
       </view>
       <view class='list'>
         <block wx:for="{{happylist}}" wx:key="key" wx:for-item="happyinfo" wx:for-index="index">
           <view class='music theme7' bindtap='showHappy' data-boxmac="{{box_mac}}" data-openid="{{openid}}" data-vediourl="{{happyinfo.res_url}}" data-happyVedioName="{{happyinfo.file_name}}" data-name="{{happyinfo.name}}">
-            <image src='/images/icon2/1cbeb6_misic.png'></image>
+            <icon class="fa-stack fa-lg icon theme-font">
+              <text class="fa fa-circle-thin fa-stack-2x"></text>
+              <text class="fa fa-music fa-stack-1x"></text>
+            </icon>
             <label>{{happyinfo.title}}</label>
             <label>{{happyinfo.sub_title}}</label>
           </view>
@@ -32,7 +35,7 @@
     <scroll-view class='full_width detailed' scroll-y="true" scroll-with-animation="true">
       <view class='video_list'>
         <view class='title theme-font2'>
-          <image src='/images/icon2/666666_video.png'></image>
+          <label class="fa fa-youtube-play icon"></label>
           <label>相关视频</label>
         </view>
         <view class='list'>

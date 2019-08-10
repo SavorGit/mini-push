@@ -30,7 +30,6 @@
                 <image class='full_width' mode='widthFix' src="{{bean.pubdetail[0].res_url}}"></image>
               </navigator>
               <view class='built-up-layer'>
-                <!-- <image src='/images/icon2/FFFFFF_pictures.png'></image> -->
               </view>
             </view>
             <navigator wx:if="{{bean.res_type == 2}}" class='full_width media-cover' url="/pages/find/video?forscreen_id={{bean.forscreen_id}}&box_mac={{box_mac}}">
@@ -85,7 +84,6 @@
                 <image class='full_width' mode='widthFix' src="{{bean.pubdetail[0].res_url}}"></image>
               </navigator>
               <view class='built-up-layer'>
-                <!-- <image src='/images/icon2/FFFFFF_pictures.png'></image> -->
               </view>
             </view>
             <navigator wx:if="{{bean.res_type == 2}}" class='full_width media-cover' url="/pages/find/video?forscreen_id={{bean.forscreen_id}}&box_mac={{box_mac}}">

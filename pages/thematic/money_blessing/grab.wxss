@@ -284,9 +284,10 @@
   height: 60rpx;
 }
 
-.con_main > .video .cover > navigator > image {
-  width: 100%;
-  height: 100%;
+.con_main > .video .cover > navigator > .icon {
+  width: 60rpx;
+  height: 60rpx;
+  font-size: 60rpx;
 }
 
 .con_main > .video .cover > view {

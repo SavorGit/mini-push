@@ -50,7 +50,7 @@
           <view>
             <label class='font_F6F6F6_28'>{{bean.name}}</label>
             <navigator url="/pages/forscreen/video/launch_video?video_url={{bean.oss_addr}}&video_name={{bean.name}}">
-              <image src='http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/icon/white_play.png'></image>
+              <label class="fa fa-play-circle-o icon theme-font4"></label>
             </navigator>
           </view>
         </view>

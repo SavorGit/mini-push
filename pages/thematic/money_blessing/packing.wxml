@@ -38,7 +38,7 @@
             <view class='right'>
               <picker bindchange='bindBlessPickerChange' class="picker" value="{{blessingIndex}}" range="{{blessingArray}}">
                 <view>{{blessingArray[blessingIndex]}}</view>
-                <image src='/images/icon2/666666_down.png'></image>
+                <label class="fa fa-caret-down"></label>
               </picker>
             </view>
           </view>
@@ -47,7 +47,7 @@
             <view class='right'>
               <picker bindchange='bindRangePickerChange' class="picker" value="{{rangeIndex}}" range="{{rangeArray}}">
                 <view>{{rangeArray[rangeIndex]}}</view>
-                <image src='/images/icon2/666666_down.png'></image>
+                <label class="fa fa-caret-down"></label>
               </picker>
             </view>
           </view>

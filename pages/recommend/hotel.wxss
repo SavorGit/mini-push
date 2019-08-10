@@ -56,9 +56,10 @@
   justify-content: space-between;
 }
 
-.page_top > view .city_show > image {
+.page_top > view .city_show > .icon {
   width: 38rpx;
-  height: 38rpx;
+  height: 30rpx;
+  font-size: 30rpx;
   vertical-align: middle;
 }
 
@@ -66,19 +67,19 @@
   vertical-align: middle;
 }
 
-.page_top > view .area_show > image {
+.page_top > view .area_show > .icon {
   width: 20rpx;
   height: 20rpx;
   vertical-align: middle;
 }
 
-.page_top > view .cuisine_show > image {
+.page_top > view .cuisine_show > .icon {
   width: 20rpx;
   height: 20rpx;
   vertical-align: middle;
 }
 
-.page_top > view .perCapitaPay_show > image {
+.page_top > view .perCapitaPay_show > .icon {
   width: 20rpx;
   height: 20rpx;
   vertical-align: middle;
@@ -154,7 +155,7 @@
   border-radius: 25rpx;
 }
 
-.page_main > .row-item > .i-right > .address > image {
+.page_main > .row-item > .i-right > .address > .icon {
   width: 20rpx;
   height: 20rpx;
   vertical-align: middle;

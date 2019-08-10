@@ -78,7 +78,7 @@
             </navigator>
             <view class="cover">
               <navigator url="/pages/forscreen/video/launch_video?video_url={{item.res_url}}&video_name=">
-                <image src='http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/icon/white_play.png'></image>
+                <label class="fa fa-play-circle-o icon theme-font4"></label>
               </navigator>
               <view>
                 <label class='font_F6F3EE_20'>{{item.duration}}</label>

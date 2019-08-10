@@ -42,14 +42,6 @@
 
               <video src="{{item.res_url}}"></video>
             </navigator>
-            <!-- <view class="cover">
-              <navigator url="">
-                <image src='/images/icon2/FFFFFF_play.png'></image>
-              </navigator>
-              <view>
-                <label class='font_F6F3EE_20'>{{item.duration}}</label>
-              </view>
-            </view> -->
           </view>
         </view>
       </view>

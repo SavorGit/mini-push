@@ -11,7 +11,7 @@
       <view class='con_main'>
         <image mode='aspectFill' src='http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg'></image>
         <view class='cover'>
-          <image src="/images/icon2/FFFFFF_play.png"></image>
+          <label class="fa fa-play-circle icon theme-font4"></label>
         </view>
       </view>
       <view class='con_bottom'>

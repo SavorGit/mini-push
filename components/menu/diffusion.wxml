@@ -9,5 +9,5 @@
   <image src="/images/icon/black_interact.png" class="buttom" animation="{{animationArray[3]}}" bindtap="add"></image>
   <image src="/images/icon/grey_interact_1.png" class="buttom" animation="{{animationArray[1]}}" bindtap="deleteLots"></image>
   <image src="/images/icon/black_interact.png" class="buttom" animation="{{animationArray[2]}}" bindtap="add"></image>
-  <image src="/images/icon/666666_position.png" class="buttom main" animation="{{animationArray[0]}}" bindtap="showOrHide"></image>
+  <label class="fa fa-map-o icon" class="buttom main" animation="{{animationArray[0]}}" bindtap="showOrHide"></label>
 </view>

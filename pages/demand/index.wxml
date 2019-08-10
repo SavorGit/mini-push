@@ -32,7 +32,7 @@
           <navigator bindtap='demandLog' data-openid='{{openid}}' data-box_mac='{{box_mac}}' data-title='{{bean.title}}' data-tx_url='{{bean.tx_url}}' data-id='{{bean.id}}' data-duration="{{bean.duration}}" class='full' url="/pages/forscreen/video/launch_video?video_url={{bean.tx_url}}&video_name={{bean.title}}&box_mac={{box_mac}}&res_id={{bean.id}}&filename={{bean.filename}}&video_img_url={{bean.img_url}}">
             <label class='font_F6F6F6_28'>{{bean.title}}</label>
             <view class='play'>
-              <image src='/images/icon2/FFFFFF_play.png'></image>
+              <label class="fa fa-play-circle icon theme-font4"></label>
             </view>
           </navigator>
         </view>
