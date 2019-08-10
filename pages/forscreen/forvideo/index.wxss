@@ -173,12 +173,12 @@
 }
 
 .launch_video_page_a > .page_bottom > .button_group {
-  /* padding-left: 30rpx;
-  padding-right: 30rpx; 
-  width: 690rpx;
-  */
-  width: 100%;
-  text-align: center;
+  width: calc(100% - 80rpx);
+  padding: 0 40rpx;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
 }
 
 .launch_video_page_a > .page_bottom > .button_group > button {
@@ -186,17 +186,10 @@
   height: 50rpx;
   line-height: 50rpx;
   border-radius: 25rpx;
+  margin: auto 0;
   padding: unset;
   border: unset;
   font-size: 28rpx;
-}
-
-.launch_video_page_a > .page_bottom > .button_group > .button_space_left {
-  margin-left: 40rpx;
-}
-
-.launch_video_page_a > .page_bottom > .button_group > .button_space_right {
-  margin-right: 40rpx;
 }
 
 .row-center {
