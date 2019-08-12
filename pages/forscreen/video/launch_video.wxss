@@ -10,17 +10,6 @@
   height: calc(100% - 100rpx);
 }
 
-/* .article {
-  width: 100vw;
-} */
-
-/* .article > .video, .article > .video::before, .article > .video::after {
-  margin: 280rpx 0rpx -10rpx 0rpx;
-  padding: unset;
-  border: unset;
-  width: 100%;
-} */
-
 .article > .video > video {
   margin: unset;
   padding: unset;
@@ -97,6 +86,21 @@
 .article > .con_bottom > .operation > view > button::after {
   border: none;
   outline: none;
+}
+
+.page_main > .btn-group {
+  margin-top: 30rpx;
+  text-align: center;
+}
+
+.page_main > .btn-group > button {
+  width: 400rpx;
+  height: 80rpx;
+  line-height: 80rpx;
+  border-radius: 10rpx;
+  font-size: 28rpx;
+  margin: auto;
+  padding: unset;
 }
 
 .page_bottom {
