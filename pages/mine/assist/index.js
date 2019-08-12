@@ -9,6 +9,7 @@ Page({
    */
   data: {
     statusBarHeight: getApp().globalData.statusBarHeight,
+    is_assist:false,
   },
 
   /**
@@ -104,15 +105,20 @@ Page({
     }
     //热播内容
     wx.request({
-      url: api_url + '/aa/bb/cc',
+      url: api_url + '/Smallapp3/content/getHotplaylist',
       headers: {
         'Content-Type': 'application/json'
       },
       method: "POST",
+      data:{
+        page:1,
+        pagesize:3
+      },
       success: function (res) {
         if (res.data.code == 10000) {
+          console.log(res.data.result);
           that.setData({
-            hot_play: res.data.result
+            hot_play: res.data.result.datalist
           })
         }
       }
@@ -130,8 +136,15 @@ Page({
           forscreen_id:forscreen_id
         },success:function(res){
           if(res.data.code==10000){
+            var is_assist ;
+            if(res.data.result.status==3){
+              is_assist= true
+            }else {
+              is_assist = false
+            }
             that.setData({
-              assist_info:res.data.result
+              assist_info:res.data.result,
+              is_assist: is_assist
             })
           }
         }
@@ -163,30 +176,34 @@ Page({
     var that = this;
     var user_info = wx.getStorageSync('savor_user_info');
     var openid = user_info.openid;
+    var help_id = e.target.dataset.help_id;
     if(user_info.is_wx_auth!=3){
       that.setData({
         showModel:true
       })
     }else {
       wx.request({
-        url: api+'/aa/bb/cc',
+        url: api_url +'/Smallapp3/ForscreenHelp/addhelp',
         header: {
           'content-type': 'application/json'
         },
         method:'POST',
+        data:{
+          help_id:help_id,
+          openid:openid
+        },
         success:function(res){
           if(res.data.code==10000){
-
+            that.setData({
+              is_assist:true
+            })
           }else {
             wx.showToast({
               title: res.data.msg,
               icon:'none',
               duration:2000
             })
-            that.setData({
-              assist_desc:res.data.msg,
-              is_btn_disable: true
-            })
+            
           }
         }
       })
@@ -295,10 +312,12 @@ Page({
 
     })
   },
-
-
-
-
+  phonecallevent: function (e) {
+    var tel = e.target.dataset.tel;
+    wx.makePhoneCall({
+      phoneNumber: tel
+    })
+  },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */

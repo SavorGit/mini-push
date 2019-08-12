@@ -264,15 +264,20 @@ Page({
     })
     //热播内容
     wx.request({
-      url: api_url +'/Smallapp3/content/getHotplaylist',
+      url: api_url + '/Smallapp3/content/getHotplaylist',
       headers: {
         'Content-Type': 'application/json'
       },
       method: "POST",
-      success:function(res){
-        if(res.data.code==10000){
+      data: {
+        page: 1,
+        pagesize: 5
+      },
+      success: function (res) {
+        if (res.data.code == 10000) {
+          console.log(res.data.result);
           that.setData({
-            hot_play:res.data.result
+            hot_play: res.data.result.datalist
           })
         }
       }

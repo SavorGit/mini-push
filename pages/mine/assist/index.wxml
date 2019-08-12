@@ -16,8 +16,8 @@
       </view>
     </view>
     <image class="img" src="{{assist_info.img_url}}"></image>
-    <button class="theme-button" wx:if="{{assist_info.status==2}}">帮TA上电视</button>
-    <button class="theme-button" wx:if="{{assist_info.status==3}}" disabled="true">已助力</button>
+    <button class="theme-button" wx:if="{{is_assist==false}}" bindtap="assist" data-help_id="{{assist_info.help_id}}">帮TA上电视</button>
+    <button class="theme-button" wx:if="{{is_assist==true}}" disabled="true">已助力</button>
   </view>
 
   <!-- 内容信息面板 [自己] -->
@@ -42,105 +42,46 @@
   <!-- 助力人员面板 -->
   <view class="assist-people-panel full_width theme-panel">
     <view class="title-bar">
-      <view class="title font_333333_24">已有{{assist_frieds.assist_frieds_nums}}名好友帮您助力</view>
+      <view class="title font_333333_24">已有{{assist_frieds_nums}}名好友帮您助力</view>
       <navigator class="more font_999999_24" url="/pages/mine/assist/assistlist">更多...</navigator>
     </view>
-    <view class="list">
-      <view class="people">
-        <image class="head-img" src="http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
+    <view class="list" wx:if="{{assist_frieds.lenth>0}}">
+      <view class="people" wx:for="{{assist_frieds}}" wx:key="{{key}}" wx:index="{{index}}" wx:for-item="bean">
+        <image class="head-img" src="{{bean.avatarUrl}}"></image>
       </view>
-      <view class="people">
-        <image class="head-img" src="http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
-      </view>
-      <view class="people">
-        <image class="head-img" src="http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
-      </view>
-      <view class="people">
-        <image class="head-img" src="http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
-      </view>
-      <view class="people">
-        <image class="head-img" src="http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
-      </view>
-      <view class="people">
-        <image class="head-img" src="http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
-      </view>
-      <view class="people">
-        <image class="head-img" src="http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
-      </view>
+      
     </view>
   </view>
 
   <!-- 推荐面板 -->
-  <view class="recommend-panel full_width">
+  <view class="recommend-panel full_width" wx:if="{{hot_play.length>0}}">
     <view class="title-bar">
       <view class="title font_333333_24">热播内容</view>
       <!-- <navigator class="more">更多...</navigator> -->
     </view>
     <view class="list">
-      <view class="row line">
-        <image class="img" src="http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
+      <block wx:for="{{hot_play}}" wx:key="key" wx:for-index="index" wx:for-item="bean">
+      <view class="row {{index<2 ? 'like':''}}">
+        
+        <image class="img" src="{{bean.pubdetail.res_url}}"></image>
         <view class="info">
-          <view class="rank theme-font5">TOP 1</view>
-          <view class="people theme-font1">张三三</view>
-          <view class="msg">累计播放 51 次</view>
+          <view class="rank theme-font5">TOP {{index+1}}</view>
+          <view class="people theme-font1">{{bean.nickName}}</view>
+          <view class="msg">累计播放 {{bean.play_nums}} 次</view>
         </view>
-        <button class="btn theme-button-dark">电视播放</button>
+        <!-- <button bindtap="boxShow" class="btn theme-button-dark">电视播放</button> -->
       </view>
-      <view class="row line">
-        <image class="img" src="http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
-        <view class="info">
-          <view class="rank theme-font5">TOP 2</view>
-          <view class="people theme-font1">李四四</view>
-          <view class="msg">累计播放 41 次</view>
-        </view>
-        <button class="btn theme-button-dark">电视播放</button>
-      </view>
-      <view class="row">
-        <image class="img" src="http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
-        <view class="info">
-          <view class="rank theme-font5">TOP 3</view>
-          <view class="people theme-font1">赵五五</view>
-          <view class="msg">累计播放 31 次</view>
-        </view>
-        <button class="btn theme-button-dark">电视播放</button>
-      </view>
+      </block>
+      
     </view>
-    <!-- <view class="list">
-      <view class="entry">
-        <view class="people">
-          <image class="head-img" src="http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
-          <label class="name">三姑娘</label>
-        </view>
-        <image class="img" src="http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
-        <label class="rank theme-font5">Top 1</label>
-        <label>累计播放 301 万次</label>
-      </view>
-      <view class="entry">
-        <view class="people">
-          <image class="head-img" src="http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
-          <label class="name">玉兔精</label>
-        </view>
-        <image class="img" src="http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
-        <label class="rank theme-font5">Top 2</label>
-        <label>累计播放 201 万次</label>
-      </view>
-      <view class="entry">
-        <view class="people">
-          <image class="head-img" src="http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
-          <label class="name">三姑娘</label>
-        </view>
-        <image class="img" src="http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
-        <label class="rank theme-font5">Top 3</label>
-        <label>累计播放 101 万次</label>
-      </view>
-    </view> -->
+    
   </view>
 
   <!-- 广告面板 -->
   <view class="advert-panel full_width theme-panel-dark">
     <label class="fa fa-phone fa-lg"></label>
     <label class="msg">商务合作：010-64175797</label>
-    <button class="theme-button">拨打</button>
+    <button class="theme-button" bindtap="phonecallevent" data-tel="010-6417579">拨打</button>
   </view>
 </scroll-view>
 <!-- 微信授权登录 -->

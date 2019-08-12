@@ -111,15 +111,15 @@
       <label class="title theme-font1">热播内容</label>
     </view>
     <view class="list">
-      <block wx:for="{{hot_play}}" wx:key="item" wx:for-index="index">
+      <block wx:for="{{hot_play}}" wx:key="item" wx:for-index="index" wx:for-item="bean">
         <view class="row {{index<4?'line':''}}">
-          <image class="img" src="http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
+          <image class="img" src="{{bean.pubdetail.res_url}}g"></image>
           <view class="info">
             <view class="rank theme-font5">TOP {{index+1}}</view>
-            <view class="people theme-font1">张三三</view>
-            <view class="msg">累计播放 51 次</view>
+            <view class="people theme-font1">{{bean.nickName}}</view>
+            <view class="msg">累计播放 {{bean.play_nums}} 次</view>
           </view>
-          <button class="btn theme-button-dark">电视播放</button>
+          <button class="btn theme-button-dark" data-res_type="{{bean.res_type}}" data-res_nums="{{bean.res_nums}}" data-pubdetail="{{bean.pubdetail}}" data-boxmac="{{box_mac}}" data-openid="{{openid}}" data-forscreen_id="{{bean.forscreen_id}}">电视播放</button>
         </view>
       </block>
       <!-- <view class="row line">

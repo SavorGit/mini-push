@@ -345,7 +345,8 @@ Page({
               res_eup_time: res_eup_time,
               resource_size: resource_size,
               is_pub_hotelinfo: is_pub_hotelinfo,
-              is_share: is_share
+              is_share: is_share,
+              resource_type:1
             },
             success: function (ret) {
               wx.request({
