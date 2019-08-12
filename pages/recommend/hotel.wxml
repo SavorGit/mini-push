@@ -68,7 +68,7 @@
     </view>
   </scroll-view>
   <view wx:if="{{close_hotel_hint==0}}" class='full_width flex-for-bottom'>
-    <view class='flex-tip theme6'>
+    <view class='flex-tip theme-button'>
       <label>以上餐厅均可进行电视互动，体验投屏功能~</label>
       <label class='fa fa-times-circle-o btn-colse' bindtap='closeHotelHind' data-openid='{{openid}}'></label>
     </view>
