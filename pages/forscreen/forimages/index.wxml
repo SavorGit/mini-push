@@ -29,6 +29,7 @@
                 <label>{{tmp_percent[index].percent}}%</label>
               </view>
               <input class="display_hide" name="upimgs{{index}}" value="{{img.tmp_img}}"></input>
+              <input class="display_hide" name="imgSize{{index}}" value="{{img.resource_size}}"></input>
             </view>
           </view>
         </view>

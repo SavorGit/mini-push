@@ -15,8 +15,12 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
+    console.log(options);
     var that = this;
     var forscreen_id = options.forscreen_id;
+    that.setData({
+      forscreen_id:forscreen_id
+    })
     if (app.globalData.openid && app.globalData.openid != '') {
       that.setData({
         openid: app.globalData.openid
@@ -53,6 +57,8 @@ Page({
       }); //判断用户是否注册结束
       //获取助力的内容
       getAssistInfo(app.globalData.openid, forscreen_id);
+      //获取助力好友
+      getAssistFriends(app.globalData.openid,forscreen_id);
     } else {
       app.openidCallback = openid => {
         if (openid != '') {
@@ -91,6 +97,8 @@ Page({
           }); //判断用户是否注册结束
           //获取助力的内容
           getAssistInfo(openid, forscreen_id);
+          //获取助力好友
+          getAssistFriends(app.globalData.openid, forscreen_id);
         }
       }
     }
@@ -112,15 +120,40 @@ Page({
 
     function getAssistInfo(openid,forscreen_id){
       wx.request({
-        url: api_url+'/aa/bb/cc',
+        url: api_url +'/Smallapp3/ForscreenHelp/detail',
         headers: {
           'Content-Type': 'application/json'
         },
         method: "POST",
-        
-        success:function(res){
+        data:{
+          openid:openid,
+          forscreen_id:forscreen_id
+        },success:function(res){
           if(res.data.code==10000){
-
+            that.setData({
+              assist_info:res.data.result
+            })
+          }
+        }
+      })
+    }
+    function getAssistFriends(openid, forscreen_id){
+      wx.request({
+        url: api_url + '/Smallapp3/ForscreenHelp/userlist',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        method: "POST",
+        data: {
+          forscreen_id: forscreen_id,
+          page:1,
+          pagesize:7,
+        }, success: function (res) {
+          if (res.data.code == 10000) {
+            that.setData({
+              assist_frieds: res.data.result.datalist,
+              assist_frieds_nums: res.data.result.total_num
+            })
           }
         }
       })
@@ -312,17 +345,19 @@ Page({
    * 用户点击右上角分享
    */
   onShareAppMessage: function (res) {
+    console.log(res);
     var that = this;
     var forscreen_id = res.target.dataset.forscreen_id;
-    var video_img = res.target.dataset.video_img;
+    console.log(forscreen_id);
+    var img_url = res.target.dataset.img_url;
     var title ="快来帮我助力";
     if (res.from === 'button') {
       // 转发成功
       // 来自页面内转发按钮
       return {
-        title: video_name,
-        path: '/pages/mine/video?res_id=' + res_id + '&type=3',
-        imageUrl: video_img,
+        title: title,
+        path: '/pages/mine/assist/index?forscreen_id=' + forscreen_id ,
+        imageUrl: img_url,
         success: function (res) {
 
         }

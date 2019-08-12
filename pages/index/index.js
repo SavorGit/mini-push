@@ -408,7 +408,7 @@ Page({
         wx.navigateTo({
           url: '/pages/forscreen/forimages/index?box_mac=' + box_mac + '&openid=' + openid + '&is_open_simple=' + is_open_simple,
         })
-        app.recrdFormId(openid, formId);
+        app.recordFormId(openid, formId);
       }
     }
   },
@@ -431,7 +431,7 @@ Page({
         wx.navigateTo({
           url: '/pages/forscreen/forvideo/index?box_mac=' + box_mac + '&openid=' + openid + '&is_open_simple=' + is_open_simple,
         })
-        app.recrdFormId(openid, formId);
+        app.recordFormId(openid, formId);
       }
     }
 
@@ -590,7 +590,7 @@ Page({
         that.setData({
           showMe: true,
         })
-        app.recrdFormId(openid,formId);
+        app.recordFormId(openid,formId);
       }
 
       //微信好友文件投屏

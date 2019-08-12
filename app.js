@@ -1,10 +1,10 @@
 //app.js
 App({
-  recrdFormId(openid,formId){
+  recordFormId(openid,formId){
     var that = this;
     if (formId != 'the formId is a mock one') {
       wx.request({
-        url: that.globalData.api_url + '/aa/bb/cc',
+        url: that.globalData.api_url + '/Smallapp3/content/addFormid',
         headers: {
           'Content-Type': 'application/json'
         },

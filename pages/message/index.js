@@ -20,7 +20,7 @@ Page({
    */
   onLoad: function(options) {
     var that = this;
-    var user_info = wx.getStorageSync('savor_user_info')
+    
     if (app.globalData.openid && app.globalData.openid != '') {
       //注册用户
       that.setData({
@@ -50,6 +50,11 @@ Page({
           })
         }
       });//判断用户是否注册结束
+      //获取助力详情
+
+      //获取助力好友列表
+
+      
 
     } else {
       app.openidCallback = openid => {

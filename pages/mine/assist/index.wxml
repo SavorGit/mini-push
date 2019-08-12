@@ -6,34 +6,35 @@
 <scroll-view class="container theme-container" style='height: calc(100vh - 46px - {{statusBarHeight}}px);' scroll-y="true" scroll-with-animation="true">
 
   <!-- 内容信息面板 [他人] -->
-  <view wx:if="{{isShare}}" class="assist-info-other-panel theme-panel">
+  <view wx:if="{{assist_info.status==2 || assist_info.status==3}}" class="assist-info-other-panel theme-panel">
     <view class="people full_width">
-      <image class="head-img" src="http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
+      <image class="head-img" src="{{assist_info.user.avataUrl}}"></image>
       <view>
-        <label class="name font_333333_24">张三：</label>
+        <label class="name font_333333_24">{{assist_info.user.nickName}}：</label>
         <label class="msg font_999999_24">“快来帮我助力！</label>
         <label class="msg font_999999_24">我要在全国千家高端餐厅SHOW”</label>
       </view>
     </view>
-    <image class="img" src="http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
-    <button class="theme-button">帮TA上电视</button>
+    <image class="img" src="{{assist_info.img_url}}"></image>
+    <button class="theme-button" wx:if="{{assist_info.status==2}}">帮TA上电视</button>
+    <button class="theme-button" wx:if="{{assist_info.status==3}}" disabled="true">已助力</button>
   </view>
 
   <!-- 内容信息面板 [自己] -->
-  <view wx:else class="assist-info-self-panel full_width theme-panel">
+  <view wx:if="{{assist_info.status==1}}" class="assist-info-self-panel full_width theme-panel">
     <view class="people full_width">
-      <image class="head-img" src="http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
+      <image class="head-img" src="{{assist_info.user.avatarUrl}}"></image>
       <view>
-        <label class="name font_333333_24">张三：</label>
+        <label class="name font_333333_24">{{assist_info.user.nickName}}：</label>
         <label class="msg font_999999_24">“快来帮我助力！</label>
         <label class="msg font_999999_24">我要在全国千家高端餐厅SHOW”</label>
       </view>
     </view>
-    <image class="img" src="http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
-    <button class="theme-button">帮TA上电视</button>
+    <image class="img" src="{{assist_info.img_url}}"></image>
+    <button open-type='share'  data-img_url="{{assist_info.img_url}}" data-forscreen_id="{{forscreen_id}}" class="theme-button">邀请好友助力</button>
     <view class="font_333333_24">
       <label>您当前有</label>
-      <label class="theme-font5">30%</label>
+      <label class="theme-font5">{{assist_info.rate}}%</label>
       <label>的几率，加油亲~</label>
     </view>
   </view>
@@ -41,7 +42,7 @@
   <!-- 助力人员面板 -->
   <view class="assist-people-panel full_width theme-panel">
     <view class="title-bar">
-      <view class="title font_333333_24">已有18名好友帮您助力</view>
+      <view class="title font_333333_24">已有{{assist_frieds.assist_frieds_nums}}名好友帮您助力</view>
       <navigator class="more font_999999_24" url="/pages/mine/assist/assistlist">更多...</navigator>
     </view>
     <view class="list">
@@ -142,3 +143,5 @@
     <button class="theme-button">拨打</button>
   </view>
 </scroll-view>
+<!-- 微信授权登录 -->
+<template is="wxAuthLogin" data='{{show: showModal}}' />
