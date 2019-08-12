@@ -22,7 +22,7 @@
 
 
     <!-- 我的公开 -->
-    <view class='theme2'>
+    <view class='theme-panel-2'>
       <view class='swiper-tab font_666666_28'>
         <view class="swiper-tab-item active">我的公开</view>
 
@@ -68,7 +68,7 @@
     <view style='height: 20rpx;'></view>
 
     <!-- 我的收藏 -->
-    <view class='theme2'>
+    <view class='theme-panel-2'>
       <view class='swiper-tab font_333333_28'>
         <view class="swiper-tab-item active">我喜欢</view>
 

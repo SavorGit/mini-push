@@ -99,6 +99,18 @@
   justify-content: center;
 }
 
+.page-main > .operation > button::before,
+.page-main > .operation > button::after {
+  border: unset;
+  margin: unset;
+  padding: unset;
+  background: unset;
+}
+
+.page-main > .operation > button {
+  border: unset;
+}
+
 .page-main > .operation > .rechoose, .page-main > .operation > .quit {
   width: 180rpx;
   height: 80rpx;
@@ -117,7 +129,6 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  font-size: 24rpx;
   padding: 0;
   border: 0;
   background-color: unset;

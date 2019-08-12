@@ -7,7 +7,7 @@
 
   <!-- ================================== 上传视频前 ================================== -->
   <view class="full_width launch_video_page_b display_{{showVedio?'show':'hide'}}">
-    <view class='page_top theme2 flex_row_center font_666666_26'>
+    <view class='page_top theme-panel-2 flex_row_center font_666666_26'>
       <label>视频加载完成后，电视开始加载并自动播放</label>
       <label class='link_relief'>
         <navigator url="/pages/forscreen/relief">免责声明</navigator>
@@ -33,7 +33,7 @@
           </checkbox-group>
         </view>
         <view wx:if="{{is_share>0}}" class='speak_with_interest'>
-          <textarea class='text_input' name="public_text" maxlength='200' placeholder='顺便对公众说两句...'></textarea>
+          <textarea class='text_input theme-textarea' name="public_text" maxlength='200' placeholder='顺便对公众说两句...'></textarea>
         </view>
       </view>
       <input class='display_hide' name="box_mac" value="{{box_mac}}"></input>
@@ -47,7 +47,7 @@
       <input class='display_hide' name="is_open_simple" value="{{is_open_simple}}"></input>
 
       <view class='page_bottom'>
-        <button class="savor-btn savor-btn-size theme-button" form-type="submit" hover-class="none" disabled='{{is_btn_disabel}}'>投屏</button>
+        <button class="savor-btn savor-btn-size theme-button-dark" form-type="submit" hover-class="none" disabled='{{is_btn_disabel}}'>投屏</button>
       </view>
     </form>
 
@@ -76,7 +76,7 @@
 
   <!-- ================================== 上传视频后 ================================== -->
   <view class="full_width full_height launch_video_page_a display_{{showVedio?'hide':'show'}}">
-    <view class='page_top theme2 flex_row_center font_666666_26'>
+    <view class='page_top theme-panel-2 flex_row_center font_666666_26'>
       <label>视频加载完成后，电视开始加载并自动播放</label>
       <label class='link_relief'>
         <navigator url="/pages/forscreen/relief">免责声明</navigator>

@@ -7,7 +7,7 @@
 
   <!-- ================================== 上传图片前 ================================== -->
   <view class="full_width launch_pic_page_b display_{{showThird?'hide':'show'}}">
-    <view class="page_top theme2">
+    <view class="page_top theme-panel-2">
       <view class='full_width font_666666_26'>
         <label class='tip_top_lable'>图片加载成功后，选择照片，电视开始展示</label>
         <label class='link_relief'>
@@ -44,7 +44,7 @@
         <!-- 投图片 -->
         <view class='pic_text'>
           <!-- <label class='font_333333_30'>为所有照片增加文字（选填）</label> -->
-          <textarea class='text_input' name="forscreen_char" maxlength='30' placeholder='电视展示时增加文字...'></textarea>
+          <textarea class='text_input theme-textarea' name="forscreen_char" maxlength='30' placeholder='电视展示时增加文字...'></textarea>
         </view>
         <view class='grant_auth'>
           <checkbox-group class="checkbox-group" bindchange="checkboxChange">
@@ -59,11 +59,11 @@
           </checkbox-group>
         </view>
         <view wx:if="{{is_share>0}}" class='speak_with_interest'>
-          <textarea class='text_input' name="public_text" maxlength='200' placeholder='顺便对公众说两句...'></textarea>
+          <textarea class='text_input theme-textarea' name="public_text" maxlength='200' placeholder='顺便对公众说两句...'></textarea>
         </view>
       </view>
       <view class='page_bottom'>
-        <button class="full_width savor-btn theme-button" form-type="submit" hover-class="none" disabled='{{is_btn_disabel}}'>投屏</button>
+        <button class="full_width savor-btn theme-button-dark" form-type="submit" hover-class="none" disabled='{{is_btn_disabel}}'>投屏</button>
       </view>
     </form>
 
@@ -93,7 +93,7 @@
 
   <!-- ================================== 上传图片后 ================================== -->
   <view class="full_width full_height launch_pic_page_a display_{{showThird?'show':'hide'}}">
-    <view class="page_top theme2">
+    <view class="page_top theme-panel-2">
       <view class='full_width font_666666_26'>
         <label class='tip_top_lable'>图片加载成功后，选择照片，电视开始展示</label>
         <label class='link_relief'>

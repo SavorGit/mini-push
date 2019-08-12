@@ -3,7 +3,6 @@
 /* ================================= 微信授权登录 ================================= */
 
 .wxAuthLogin-container {
-  background-color: #fff;
   width: 100%;
   height: 100%;
   text-align: center;
@@ -59,7 +58,6 @@
 
 .wxAuthLogin-container > .wxAuthLogin-middle > .link_relief > navigator {
   font-size: 30rpx;
-  /* color: #999; */
   text-decoration: underline;
 }
 
@@ -92,7 +90,6 @@
 /* ================================= 遥控器窗口 ================================= */
 
 .remoteControlWindow-container {
-  background-color: #1cbeb6;
   width: 100%;
   height: 100%;
   text-align: center;
@@ -144,12 +141,6 @@
   background: unset;
 }
 
-/* .remoteControlWindow-container .remoteControlWindow-top .opt button image {
-  width: 100rpx;
-  height: 100rpx;
-  border-radius: 50%;
-} */
-
 .remoteControlWindow-container .remoteControlWindow-top .opt > button icon {
   width: 100rpx;
   height: 100rpx;
@@ -198,7 +189,6 @@
   align-items: center;
   justify-content: center;
   font-size: 24rpx;
-  /* color: #fff; */
   z-index: 10;
 }
 
@@ -238,7 +228,6 @@
 }
 
 .remoteControlWindow-container .remoteControlWindow-bottom navigator.navigator-hover {
-  /* background-color: #05101a; */
   opacity: 0.7;
 }
 

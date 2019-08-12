@@ -29,11 +29,11 @@
       <!--循环开始 -->
       <view class='content content_bottom_border' wx:for="{{sharelist}}" wx:key="key" wx:for-item="bean" wx:for-index="index">
         <view class='con_top'>
-          <view wx:if="{{bean.type==1 || bean.type==3}}" class='user_info'>
+          <view wx:if="{{bean.type==1 || bean.type==3}}" class='user_info font_333333_36'>
             <image src='http://oss.littlehotspot.com/media/resource/5dh67ffRXM.png'></image>
             <label>小热点</label>
           </view>
-          <view wx:else class='user_info'>
+          <view wx:else class='user_info font_333333_36'>
             <image src='{{bean.avatarUrl}}'></image>
             <label>{{bean.nickName}}</label>
           </view>

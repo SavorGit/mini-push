@@ -33,7 +33,7 @@
             <navigator wx:if="{{bean.res_type == 2}}" class='full_width media-cover' url="/pages/find/video?forscreen_id={{bean.forscreen_id}}&box_mac={{box_mac}}">
               <image class='full_width' mode='widthFix' src="{{bean.pubdetail[0].vide_img}}"></image>
               <view class='built-up-layer'>
-                <label class="fa fa-play fa-lg" style="color: #666666;"></label>
+                <label class="fa fa-play-circle-o fa-lg" style="color: #FFFFFF;"></label>
               </view>
             </navigator>
           </view>
@@ -87,7 +87,7 @@
             <navigator wx:if="{{bean.res_type == 2}}" class='full_width media-cover' url="/pages/find/video?forscreen_id={{bean.forscreen_id}}&box_mac={{box_mac}}">
               <image class='full_width' mode='widthFix' src="{{bean.pubdetail[0].vide_img}}"></image>
               <view class='built-up-layer'>
-                <label class="fa fa-play fa-lg" style="color: #666666;"></label>
+                <label class="fa fa-play-circle-o fa-lg" style="color: #FFFFFF;"></label>
               </view>
             </navigator>
           </view>
