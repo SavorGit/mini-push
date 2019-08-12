@@ -12,7 +12,7 @@
 
         <view class='content content_bottom_border'>
           <view class='con_top'>
-            <view class='user_info'>
+            <view class='user_info font_333333_36'>
               <image src='{{userinfo.avatarUrl}}'></image>
               <label>{{userinfo.nickName}}</label>
             </view>

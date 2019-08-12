@@ -91,18 +91,6 @@
   padding: 0;
   height: 60rpx;
   line-height: 60rpx;
-  /* position: none;
-  display: inline-block;
-  box-sizing: inherit;
-  font-size: 18px;
-  text-align: center;
-  text-decoration: none;
-  border-radius: 0rpx;
-  -webkit-tap-highlight-color: unset;
-  overflow: hidden;
-  color: #000;
-  border: 0rpx solid #fff;
-  background-color: #fff; */
   background: none;
 }
 

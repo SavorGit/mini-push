@@ -8,6 +8,17 @@
   border: unset;
 } */
 
+button {
+  border: unset;
+}
+
+button::before, button::after {
+  border: unset;
+  padding: auto;
+  margin: auto;
+  background: unset;
+}
+
 .button_none, .button_none::before, .button_none::after {
   margin: inherit;
   border: inherit;
@@ -69,8 +80,6 @@
 /* ================================== 按钮 ================================== */
 
 .savor-btn {
-  /* background-color: #1cbeb6;
-  color: #fff; */
   font-size: 34rpx;
 }
 
@@ -88,8 +97,8 @@
   top: 0;
   right: 0;
   height: 1px;
-  /* border-top: 1px solid #d9d9d9; */
-  color: #d9d9d9;
+  /* border-top: 1px solid #d9d9d9;
+  color: #d9d9d9; */
   -webkit-transform-origin: 0 0;
   transform-origin: 0 0;
   -webkit-transform: scaleY(0.5);
@@ -103,8 +112,8 @@
   top: 0;
   width: 1px;
   bottom: 0;
-  /* border-left: 1px solid #d9d9d9; */
-  color: #d9d9d9;
+  /* border-left: 1px solid #d9d9d9;
+  color: #d9d9d9; */
   -webkit-transform-origin: 0 0;
   transform-origin: 0 0;
   -webkit-transform: scaleX(0.5);
@@ -125,8 +134,8 @@
   top: 0;
   width: 1px;
   bottom: 0;
-  /* border-right: 1px solid #d9d9d9; */
-  color: #d9d9d9;
+  /* border-right: 1px solid #d9d9d9;
+  color: #d9d9d9; */
   -webkit-transform-origin: 100% 0;
   transform-origin: 100% 0;
   -webkit-transform: scaleX(0.5);
@@ -140,8 +149,8 @@
   bottom: 0;
   right: 0;
   height: 1px;
-  /* border-bottom: 1px solid #d9d9d9; */
-  color: #d9d9d9;
+  /* border-bottom: 1px solid #d9d9d9;
+  color: #d9d9d9; */
   -webkit-transform-origin: 0 100%;
   transform-origin: 0 100%;
   -webkit-transform: scaleY(0.5);

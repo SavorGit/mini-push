@@ -3,7 +3,7 @@
 <template is="navigationBarForTwoLevel" data='{{statusBarHeight: statusBarHeight,titleText:"热点投屏"}}' />
 
 <view class="container theme-container" style='height: calc(100vh - 46px - {{statusBarHeight}}px);'>
-  <view class="page-top theme2 flex_row_center font_666666_26">
+  <view class="page-top theme-panel-2 flex_row_center font_666666_26">
     <label>所有投屏文件，投屏结束后自动销毁</label>
     <label class='link_relief'>
       <navigator url="/pages/forscreen/relief">免责声明</navigator>
@@ -31,14 +31,14 @@
 
       </view>
     </scroll-view>
-    <view class="operation theme2">
+    <view class="operation theme-panel-2">
       <button class="rechoose theme-button" bindtap="reChooseFile">重选文件</button>
       <button class="quit theme-button5" bindtap="exitForscreend" data-openid="{{openid}}" data-box_mac="{{box_mac}}">退出投屏</button>
-      <button class="previous theme-font4" bindtap="changePic" data-action="1" data-file_imgs="{{file_imgs}}" data-pos_id="{{pos_id}}" data-forscreen_id="{{forscreen_id}}">
+      <button class="previous font_333333_24" bindtap="changePic" data-action="1" data-file_imgs="{{file_imgs}}" data-pos_id="{{pos_id}}" data-forscreen_id="{{forscreen_id}}">
         <label class="fa fa-chevron-circle-left"></label>
         <label>播放上一页</label>
       </button>
-      <button class="next theme-font4" bindtap="changePic" data-action="2" data-file_imgs="{{file_imgs}}" data-pos_id="{{pos_id}}" data-forscreen_id="{{forscreen_id}}">
+      <button class="next font_333333_24" bindtap="changePic" data-action="2" data-file_imgs="{{file_imgs}}" data-pos_id="{{pos_id}}" data-forscreen_id="{{forscreen_id}}">
         <label class="fa fa-chevron-circle-right"></label>
         <label>播放下一页</label>
       </button>

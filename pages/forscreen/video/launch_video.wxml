@@ -19,7 +19,7 @@
       <!-- <view style='margin-top: 50rpx; text-align: center;'>
       <navigator class='link_relief font_932C3F_30' open-type='reLaunch' url='/pages/demand/index'>更多...</navigator>
     </view> -->
-      <view class='con_bottom theme2'>
+      <view class='con_bottom theme-panel'>
         <view class='full_height operation font_666666_26'>
           <view>
             <label class="fa fa-play fa-lg" style="color: #666666;"></label>
@@ -34,7 +34,7 @@
             <label>{{collect_num}}</label>
           </view>
           <view>
-            <button open-type='share' data-openid="{{openid}}" data-res_id="{{res_id}}" data-type='{{res_type}}' data-video_url="{{video_url}}" data-video_name="{{video_name}}" data-video_img='{{video_img_url}}' data-share_num='{{share_num}}'>
+            <button class="font_666666_26" open-type='share' data-openid="{{openid}}" data-res_id="{{res_id}}" data-type='{{res_type}}' data-video_url="{{video_url}}" data-video_name="{{video_name}}" data-video_img='{{video_img_url}}' data-share_num='{{share_num}}'>
               <label class="fa fa-share-square-o fa-lg" style="color: #666666;"></label>
               <label>{{share_num}}</label>
             </button>

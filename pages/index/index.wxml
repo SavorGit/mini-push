@@ -161,12 +161,12 @@
     </view>
   </view>
 
-  <!-- 广告面板 -->
+  <!-- 广告面板 
   <view wx:if="{{box_mac !=''}}" class="advert-panel full_width theme-panel-dark">
     <label class="fa fa-phone fa-lg"></label>
     <label class="msg">商务合作：010-64175797</label>
     <button class="theme-button">拨打</button>
-  </view>
+  </view>-->
 </scroll-view>
 
 <!-- 微信授权登录 -->

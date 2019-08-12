@@ -11,7 +11,7 @@
     </view>
   </view>
   <view class='page_top'>
-    <view class='v-structure theme2 font_666666_28'>
+    <view class='v-structure theme-panel-2 font_666666_28'>
       <picker bindchange="bindCityPickerChange" value="{{cityIndex}}" range="{{cityArray}}">
         <view class='city_show'>
           <label class="fa fa-map-o icon"></label>

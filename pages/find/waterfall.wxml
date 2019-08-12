@@ -35,7 +35,7 @@
             <navigator wx:if="{{bean.res_type == 2}}" class='full_width media-cover' url="/pages/find/video?forscreen_id={{bean.forscreen_id}}&box_mac={{box_mac}}">
               <image class='full_width' mode='widthFix' src="{{bean.pubdetail[0].vide_img}}"></image>
               <view class='built-up-layer'>
-                <label class="fa fa-play fa-lg" style="color: #666666;"></label>
+                <label class="fa fa-play-circle-o fa-lg" style="color: #FFFFFF;"></label>
               </view>
             </navigator>
           </view>
@@ -43,19 +43,19 @@
             <view class='operation font_666666_24'>
               <view wx:if="{{bean.is_collect=='1'}}">
                 <button bindtap='cancCollect' data-res_id="{{bean.forscreen_id}}" data-openid="{{openid}}" data-res_key="{{index}}">
-                  <label class="fa fa-heart fa-lg" style="color: #E11E4C;"></label>
+                  <label class="fa fa-heart fa-lg" style="color: #E11E4C;margin-right: 10rpx;"></label>
                   <label>{{bean.collect_num}}</label>
                 </button>
               </view>
               <view wx:else>
                 <button bindtap='onCollect' data-res_id="{{bean.forscreen_id}}" data-openid="{{openid}}" data-res_key="{{index}}">
-                  <label class="fa fa-heart-o fa-lg" style="color: #666666;"></label>
+                  <label class="fa fa-heart-o fa-lg" style="color: #666666;margin-right: 10rpx;"></label>
                   <label>{{bean.collect_num}}</label>
                 </button>
               </view>
               <view>
                 <button open-type='share' data-res_id="{{bean.forscreen_id}}" data-res_key="{{index}}" data-pubdetail="{{bean.pubdetail}}" data-openid="{{openid}}" data-res_type="{{bean.res_type}}">
-                  <label class="fa fa-share-square-o fa-lg" style="color: #666666;"></label>
+                  <label class="fa fa-share-square-o fa-lg" style="color: #666666;margin-right: 10rpx;"></label>
                   <label>{{bean.share_num}}</label>
                 </button>
               </view>
@@ -89,7 +89,7 @@
             <navigator wx:if="{{bean.res_type == 2}}" class='full_width media-cover' url="/pages/find/video?forscreen_id={{bean.forscreen_id}}&box_mac={{box_mac}}">
               <image class='full_width' mode='widthFix' src="{{bean.pubdetail[0].vide_img}}"></image>
               <view class='built-up-layer'>
-                <label class="fa fa-play fa-lg" style="color: #666666;"></label>
+                <label class="fa fa-play-circle-o fa-lg" style="color: #FFFFFF;"></label>
               </view>
             </navigator>
           </view>
@@ -97,19 +97,19 @@
             <view class='operation font_666666_24'>
               <view wx:if="{{bean.is_collect=='1'}}">
                 <button bindtap='cancCollect' data-res_id="{{bean.forscreen_id}}" data-openid="{{openid}}" data-res_key="{{index}}">
-                  <label class="fa fa-heart fa-lg" style="color: #E11E4C;"></label>
+                  <label class="fa fa-heart fa-lg" style="color: #E11E4C;margin-right: 10rpx;"></label>
                   <label>{{bean.collect_num}}</label>
                 </button>
               </view>
               <view wx:else>
                 <button bindtap='onCollect' data-res_id="{{bean.forscreen_id}}" data-openid="{{openid}}" data-res_key="{{index}}">
-                  <label class="fa fa-heart-o fa-lg" style="color: #666666;"></label>
+                  <label class="fa fa-heart-o fa-lg" style="color: #666666;margin-right: 10rpx;"></label>
                   <label>{{bean.collect_num}}</label>
                 </button>
               </view>
               <view>
                 <button open-type='share' data-res_id="{{bean.forscreen_id}}" data-res_key="{{index}}" data-pubdetail="{{bean.pubdetail}}" data-openid="{{openid}}" data-res_type="{{bean.res_type}}">
-                  <label class="fa fa-share-square-o fa-lg" style="color: #666666;"></label>
+                  <label class="fa fa-share-square-o fa-lg" style="color: #666666;margin-right: 10rpx;"></label>
                   <label>{{bean.share_num}}</label>
                 </button>
               </view>

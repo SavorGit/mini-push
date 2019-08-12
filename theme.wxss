@@ -38,12 +38,25 @@
   background-color: #999;
 }
 
+/* ----------------------- */
+
+.theme-wxAuthLogin-container {
+  color: #333;
+  background-color: #fff;
+}
+
 .theme-container {
   color: #666;
   background-color: #f5f6f8;
 }
 
+.theme-remote-control {
+  color: #fff;
+  background-color: #1cbeb6;
+}
+
 .theme-panel {
+  color: #333;
   background-color: #fff;
 }
 
@@ -52,13 +65,14 @@
   background-color: #333;
 }
 
+.theme-panel-2 {
+  color: #fff;
+  background-color: #edf0f2;
+}
+
 .theme-navigation {
   color: #333;
   background-color: #fff;
-}
-
-.theme-menu {
-  background-color: #05101a;
 }
 
 .theme-button {
@@ -69,6 +83,20 @@
 .theme-button-dark {
   color: #fff;
   background-color: #333;
+}
+
+.theme-button-disable {
+  color: #ebebeb;
+  background-color: #bfbfbf;
+}
+
+.theme-textarea {
+  color: #333;
+  background-color: #edf0f2;
+}
+
+.theme-menu {
+  background-color: #05101a;
 }
 
 .theme-button2 {
@@ -119,6 +147,11 @@
 
 .font_333333_20 {
   font-size: 20rpx;
+  color: #333;
+}
+
+.font_333333_22 {
+  font-size: 22rpx;
   color: #333;
 }
 

@@ -77,7 +77,7 @@
 } */
 
 .content_bottom_border {
-  border-bottom: 1rpx solid #333;
+  border-bottom: 1rpx solid #bfbfbf;
 }
 
 .con_top {

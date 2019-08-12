@@ -3,7 +3,7 @@
 <!-- 微信授权登录 -->
 <template name="wxAuthLogin">
   <modal show="{{show}}" height='420rpx' width="90%" background-color='unset' border-radius="0rpx" title-text="" confirm-text="" cancel-text="">
-    <view class='wxAuthLogin-container'>
+    <view class='wxAuthLogin-container theme-wxAuthLogin-container'>
       <view class='wxAuthLogin-top'>
         <view class='opt'>
         </view>
@@ -53,37 +53,33 @@
 <!-- 遥控器窗口 -->
 <template name="remoteControlWindow">
   <modal show="{{popRemoteControlWindow}}" height='990rpx' width="620rpx" background-color='unset' border-radius="0rpx" title-text="" confirm-text="" cancel-text="">
-    <view class='remoteControlWindow-container'>
+    <view class='remoteControlWindow-container theme-remote-control'>
       <view bindtap='closeControl' class='remoteControlWindow-control'>
         <label class="fa fa-close fa-lg"></label>
       </view>
       <view class='remoteControlWindow-top'>
         <view class='opt'>
           <button bindtap='changeProgram' data-box_mac='{{box_mac}}' data-change_type='1'>
-            <!-- <image src='/images/icon2/last-one.png'></image> -->
             <icon class="fa-stack fa-lg">
-              <image src='/images/icon2/big-button.png'></image>
+              <image src='/images/icon2/small-button.png'></image>
               <i class="fa fa-step-backward fa-stack-1x theme-font4"></i>
             </icon>
           </button>
           <button bindtap='changeProgram' data-box_mac='{{box_mac}}' data-change_type='2'>
-            <!-- <image src='/images/icon2/next-one.png'></image> -->
             <icon class="fa-stack fa-lg">
-              <image src='/images/icon2/big-button.png'></image>
+              <image src='/images/icon2/small-button.png'></image>
               <i class="fa fa-step-forward fa-stack-1x theme-font4"></i>
             </icon>
           </button>
           <button bindtap='changeVolume' data-box_mac='{{box_mac}}' data-change_type='1'>
-            <!-- <image src='/images/icon2/volume-down.png'></image> -->
             <icon class="fa-stack fa-lg">
-              <image src='/images/icon2/big-button.png'></image>
+              <image src='/images/icon2/small-button.png'></image>
               <i class="fa fa-volume-down fa-stack-1x theme-font4"></i>
             </icon>
           </button>
           <button bindtap='changeVolume' data-box_mac='{{box_mac}}' data-change_type='2'>
-            <!-- <image src='/images/icon2/volume-up.png'></image> -->
             <icon class="fa-stack fa-lg">
-              <image src='/images/icon2/big-button.png'></image>
+              <image src='/images/icon2/small-button.png'></image>
               <i class="fa fa-volume-up fa-stack-1x theme-font4"></i>
             </icon>
           </button>
@@ -128,7 +124,7 @@
     <view class='navigation-bar'>
       <view class='btn'>
         <navigator class='go-back' open-type='navigateBack' delta='1'>
-          <label class="fa fa-arrow-left fa-2x" title="Back"></label>
+          <label class="fa fa-angle-left fa-2x" title="Back"></label>
         </navigator>
       </view>
       <view class='title'>
@@ -145,7 +141,7 @@
     <view class='navigation-bar'>
       <view class='btn'>
         <navigator class='go-back' open-type='navigateBack' delta='1'>
-          <label class="fa fa-arrow-left fa-2x" title="Back"></label>
+          <label class="fa fa-angle-left fa-2x" title="Back"></label>
         </navigator>
       </view>
       <view class='title'>
@@ -181,7 +177,7 @@
     <view class='navigation-bar' style='background-color: unset;'>
       <view class='btn'>
         <navigator class='go-back' open-type='navigateBack' delta='100'>
-          <label class="fa fa-arrow-left fa-2x" title="Back"></label>
+          <label class="fa fa-angle-left fa-2x" title="Back"></label>
         </navigator>
       </view>
       <view class='title'>
