@@ -147,6 +147,12 @@ image.pic_show_cur {
   -webkit-transform: translate(-50%, -50%) scale(1);
 }
 
+.launch_pic_page_b .page_main > label {
+  margin: auto auto 30rpx auto;
+  text-align: center;
+  display: block;
+}
+
 .launch_pic_page_b .page_main > .speak_with_interest {
   padding: 10rpx 30rpx;
 }
@@ -156,6 +162,16 @@ image.pic_show_cur {
   height: 200rpx;
   font-size: 28rpx;
   text-align: left;
+}
+
+.launch_pic_page_b .page_main > .savor-btn {
+  width: 200rpx;
+  height: 40rpx;
+  line-height: 40rpx;
+  border-radius: 10rpx;
+  font-size: 24rpx;
+  margin: auto;
+  padding: unset;
 }
 
 .launch_pic_page_b .page_bottom {
@@ -280,7 +296,7 @@ image.pic_show_cur {
 .launch_pic_page_a .launch_history .history_list .line {
   width: 100%;
   height: 0rpx;
-  border: 1rpx solid #333;
+  border-bottom: 1rpx solid #bfbfbf;
   margin-top: 15rpx;
   margin-bottom: 15rpx;
 }
@@ -376,8 +392,6 @@ image.pic_show_cur {
   border-radius: 10rpx;
   padding: 0rpx;
   margin-right: 0rpx;
-  background-color: #0e1c29;
-  color: #fff;
   font-size: 24rpx;
 }
 

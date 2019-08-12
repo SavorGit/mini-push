@@ -102,7 +102,7 @@
 .page_main > .row-item {
   padding: 25rpx 25rpx 20rpx 25rpx;
   min-height: 120rpx;
-  border-bottom: 1rpx solid #333;
+  border-bottom: 1rpx solid #bfbfbf;
   display: flex;
   flex-direction: row;
   align-items: flex-start;

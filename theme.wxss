@@ -85,6 +85,11 @@
   background-color: #333;
 }
 
+.theme-button-disable {
+  color: #ebebeb;
+  background-color: #bfbfbf;
+}
+
 .theme-textarea {
   color: #333;
   background-color: #edf0f2;
@@ -142,6 +147,11 @@
 
 .font_333333_20 {
   font-size: 20rpx;
+  color: #333;
+}
+
+.font_333333_22 {
+  font-size: 22rpx;
   color: #333;
 }
 

@@ -36,7 +36,7 @@
             </view>
           </navigator>
         </view>
-        <view class='con_bottom theme2'>
+        <view class='con_bottom theme-panel'>
           <view class='launch'>
             <view>
               <button bindtap='boxShow' data-name="{{bean.title}}" data-filename='{{bean.filename}}' data-vediourl="{{bean.tx_url}}" data-boxmac="{{box_mac}}" data-openid="{{openid}}" class='theme-button'>电视播放</button>

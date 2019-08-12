@@ -8,6 +8,17 @@
   border: unset;
 } */
 
+button {
+  border: unset;
+}
+
+button::before, button::after {
+  border: unset;
+  padding: auto;
+  margin: auto;
+  background: unset;
+}
+
 .button_none, .button_none::before, .button_none::after {
   margin: inherit;
   border: inherit;

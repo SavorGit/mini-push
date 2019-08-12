@@ -19,7 +19,7 @@
       <!-- <view style='margin-top: 50rpx; text-align: center;'>
       <navigator class='link_relief font_932C3F_30' open-type='reLaunch' url='/pages/demand/index'>更多...</navigator>
     </view> -->
-      <view class='con_bottom theme2'>
+      <view class='con_bottom theme-panel'>
         <view class='full_height operation font_666666_26'>
           <view>
             <label class="fa fa-play fa-lg" style="color: #666666;"></label>

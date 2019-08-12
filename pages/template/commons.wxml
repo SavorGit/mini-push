@@ -124,7 +124,7 @@
     <view class='navigation-bar'>
       <view class='btn'>
         <navigator class='go-back' open-type='navigateBack' delta='1'>
-          <label class="fa fa-arrow-left fa-2x" title="Back"></label>
+          <label class="fa fa-angle-left fa-2x" title="Back"></label>
         </navigator>
       </view>
       <view class='title'>
@@ -141,7 +141,7 @@
     <view class='navigation-bar'>
       <view class='btn'>
         <navigator class='go-back' open-type='navigateBack' delta='1'>
-          <label class="fa fa-arrow-left fa-2x" title="Back"></label>
+          <label class="fa fa-angle-left fa-2x" title="Back"></label>
         </navigator>
       </view>
       <view class='title'>
@@ -177,7 +177,7 @@
     <view class='navigation-bar' style='background-color: unset;'>
       <view class='btn'>
         <navigator class='go-back' open-type='navigateBack' delta='100'>
-          <label class="fa fa-arrow-left fa-2x" title="Back"></label>
+          <label class="fa fa-angle-left fa-2x" title="Back"></label>
         </navigator>
       </view>
       <view class='title'>

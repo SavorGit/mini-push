@@ -32,9 +32,11 @@
             </label>
           </checkbox-group>
         </view>
+        <label class="full_width font_333333_22">公开即有机会在上千家餐厅电视中播放</label>
         <view wx:if="{{is_share>0}}" class='speak_with_interest'>
           <textarea class='text_input theme-textarea' name="public_text" maxlength='200' placeholder='顺便对公众说两句...'></textarea>
         </view>
+        <button class="savor-btn theme-button-dark" form-type="submit" hover-class="none" disabled='{{is_btn_disabel}}'>投屏</button>
       </view>
       <input class='display_hide' name="box_mac" value="{{box_mac}}"></input>
       <input class='display_hide' name="openid" value="{{openid}}"></input>
@@ -47,7 +49,7 @@
       <input class='display_hide' name="is_open_simple" value="{{is_open_simple}}"></input>
 
       <view class='page_bottom'>
-        <button class="savor-btn savor-btn-size theme-button-dark" form-type="submit" hover-class="none" disabled='{{is_btn_disabel}}'>投屏</button>
+        <!-- <button class="savor-btn savor-btn-size theme-button-dark" form-type="submit" hover-class="none" disabled='{{is_btn_disabel}}'>投屏</button> -->
       </view>
     </form>
 
@@ -89,7 +91,7 @@
     </view>
 
     <!-- 重选 -->
-    <view class="page_bottom theme2">
+    <view class="page_bottom theme-panel-2">
       <view class='button_group flex_row_center'>
         <form bindsubmit="assist" report-submit="true" wx:if="{{is_share==1}}">
           <input class="display_hide" name="box_mac" value="{{box_mac}}"></input>
