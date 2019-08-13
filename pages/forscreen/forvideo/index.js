@@ -1124,37 +1124,7 @@ Page({
         icon: 'none',
         duration: 2000
       })
-      /*************************上线去掉 *///???????????????????????????????????????????????????
-      wx.request({
-        url: api_url + '/Smallapp3/ForscreenHelp/helpplay',
-        header: {
-          'Content-Type': 'application/json'
-        },
-        data: {
-          forscreen_id: forscreen_id,
-          openid: openid,
-        }, success: function (res) {
-          if (res.data.code == 10000) {
-            var rec_id = res.data.result.forscreen_id;
-            wx.navigateTo({
-              url: '/pages/mine/assist/index?forscreen_id=' + rec_id,
-            })
-            app.recordFormId(openid, formId);
-          } else {
-            wx.showToast({
-              title: '助力参数异常，请重选照片',
-              icon: 'none',
-              duration: 2000
-            })
-          }
-        }, fail: function (res) {
-          wx.showToast({
-            title: '助力参数异常，请重选照片',
-            icon: 'none',
-            duration: 2000
-          })
-        }
-      })
+      
     } else {
       wx.request({
         url: api_url + '/Smallapp3/ForscreenHelp/helpplay',

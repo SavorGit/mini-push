@@ -809,11 +809,11 @@ Page({
   //电视播放
   boxShow:function(e){
     var forscreen_id = e.currentTarget.dataset.forscreen_id;
-    console.log(box_mac);
+    
     var pubdetail = e.currentTarget.dataset.pubdetail;
     var res_type = e.currentTarget.dataset.res_type;
-    var res_num  = e.currentTarget.dataset.res_num;
-    app.boxShow(box_mac, forscreen_id, pubdetail, res_type, res_num);
+    var res_nums  = e.currentTarget.dataset.res_nums;
+    app.boxShow(box_mac, forscreen_id, pubdetail, res_type, res_nums);
   },
   phonecallevent: function (e) {
     var tel = e.target.dataset.tel;

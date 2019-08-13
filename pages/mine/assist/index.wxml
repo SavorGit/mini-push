@@ -40,10 +40,10 @@
   </view>
 
   <!-- 助力人员面板 -->
-  <view class="assist-people-panel full_width theme-panel">
+  <view class="assist-people-panel full_width theme-panel" wx:if="{{assist_frieds_nums>0}}">
     <view class="title-bar">
       <view class="title font_333333_24">已有{{assist_frieds_nums}}名好友帮您助力</view>
-      <navigator class="more font_999999_24" url="/pages/mine/assist/assistlist">更多...</navigator>
+      <navigator class="more font_999999_24" url="/pages/mine/assist/assistlist?forscreen_id={{forscreen_id}}">更多...</navigator>
     </view>
     <view class="list" wx:if="{{assist_frieds.lenth>0}}">
       <view class="people" wx:for="{{assist_frieds}}" wx:key="{{key}}" wx:index="{{index}}" wx:for-item="bean">
@@ -63,7 +63,7 @@
       <block wx:for="{{hot_play}}" wx:key="key" wx:for-index="index" wx:for-item="bean">
       <view class="row {{index<2 ? 'like':''}}">
         
-        <image class="img" src="{{bean.pubdetail.res_url}}"></image>
+        <image class="img" src="{{bean.pubdetail[0].res_url}}"></image>
         <view class="info">
           <view class="rank theme-font5">TOP {{index+1}}</view>
           <view class="people theme-font1">{{bean.nickName}}</view>

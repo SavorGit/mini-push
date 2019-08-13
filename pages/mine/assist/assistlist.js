@@ -9,6 +9,7 @@ Page({
    */
   data: {
     statusBarHeight: getApp().globalData.statusBarHeight,
+    assist_friend_list:[]
   },
 
   /**
@@ -17,31 +18,38 @@ Page({
   onLoad: function(options) {
     var that = this;
     var forscreen_id = options.forscreen_id;
+    that.setData({
+      forscreen_id: forscreen_id,
+    })
     wx.request({
-      url: api_url + '/aa/bb/cc',
+      url: api_url + '/Smallapp3/ForscreenHelp/userlist',
       header: {
         'content-type': 'application/json'
       },
       data: {
         forscreen_id: forscreen_id,
-        page: 1
+        page: 1,
+        pagesize:10
       },
       method: "POST",
       success: function(res) {
         if (res.data.code == 10000) {
-
+          that.setData({
+            assist_friend_list:res.data.result.datalist
+          })
         }
       }
     })
   },
   loadModel: function(res) {
     var that = this;
+    var forscreen_id = e.target.dataset.forscreen_id;
     wx.showLoading({
       title: '加载中，请稍后',
     })
     page = page + 1;
     wx.request({
-      url: api_url + '/aa/bb/cc',
+      url: api_url + '/Smallapp3/ForscreenHelp/userlist',
       header: {
         'content-type': 'application/json'
       },
@@ -53,7 +61,7 @@ Page({
       success: function(res) {
         if (res.data.code == 10000) {
           that.setData({
-            assistList: res.data.result
+            assist_friend_list: res.data.result.datalist
           })
         } else {
           wx.hideLoading()

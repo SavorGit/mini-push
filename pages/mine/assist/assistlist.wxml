@@ -2,13 +2,15 @@
 <import src="/pages/template/commons" />
 <template is="navigationBarForTwoLevel" data='{{statusBarHeight: statusBarHeight,titleText:"好友助力列表"}}' />
 
-<scroll-view class="container theme-container" style='height: calc(100vh - 46px - {{statusBarHeight}}px);' scroll-y="true" scroll-with-animation="true">
-  <view class="row line">
-    <image class="head-img" src="http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
-    <view class="name font_333333_24">张三三</view>
-    <view class="date-time font_666666_20">2019.07.08 9:00</view>
+<scroll-view class="container theme-container" style='height: calc(100vh - 46px - {{statusBarHeight}}px);' scroll-y="true" scroll-with-animation="true" bindscrolltolower="loadMore" data-forscreen_id='{{forscreen_id}}'>
+  <block wx:for="{{assist_friend_list}}" wx:key="{{key}}" wx:index="{{index}}" wx:for-item="bean">
+  <view class="row {{index+1==assist_friend_list.length ? '':'line'}}">
+    <image class="head-img" src="{{bean.avatarUrl}}"></image>
+    <view class="name font_333333_24">{{bean.nickName}}</view>
+    <view class="date-time font_666666_20">{{bean.add_time}}</view>
   </view>
-  <view class="row line">
+  </block>
+  <!-- <view class="row line">
     <image class="head-img" src="http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
     <view class="name font_333333_24">李四四</view>
     <view class="date-time font_666666_20">2019.07.08 9:00</view>
@@ -17,5 +19,5 @@
     <image class="head-img" src="http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
     <view class="name font_333333_24">王五五</view>
     <view class="date-time font_666666_20">2019.07.08 9:00</view>
-  </view>
+  </view> -->
 </scroll-view>
