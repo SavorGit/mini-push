@@ -89,7 +89,7 @@
 }
 
 .page_main > .btn-group {
-  margin-top: 30rpx;
+  margin-top: 50rpx;
   text-align: center;
 }
 
