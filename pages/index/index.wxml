@@ -40,7 +40,7 @@
       <view class="full_width full_height" wx:if="{{item.clicktype == 2}}" bindtap='{{item.bindtap}}' data-boxmac="{{box_mac}}" data-openid="{{openid}}" data-index='{{index}}' data-linkcontent='{{item.linkcontent}}'>
         <image class="full_width full_height" src="{{item.oss_addr}}"></image>
       </view>
-      <navigator class="full_width full_height" wx:if="{{item.clicktype == 2}}" target="miniProgram" app-id="{{item.appid}}" path="{{item.linkcontent}}">
+      <navigator class="full_width full_height" wx:if="{{item.clicktype == 1}}" target="miniProgram" app-id="{{item.appid}}" path="{{item.linkcontent}}">
         <image class="full_width full_height" src="{{item.oss_addr}}"></image>
       </navigator>
     </block>

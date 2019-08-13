@@ -255,6 +255,7 @@ Page({
         if (res.data.code == 10000) {
           var imgUrls = res.data.result[2];
           var imgUrls_mid = res.data.result[3];
+          console.log(res);
           that.setData({
             imgUrls: imgUrls,
             imgUrls_mid: imgUrls_mid
