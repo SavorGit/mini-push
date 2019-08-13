@@ -10,14 +10,4 @@
     <view class="date-time font_666666_20">{{bean.add_time}}</view>
   </view>
   </block>
-  <!-- <view class="row line">
-    <image class="head-img" src="http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
-    <view class="name font_333333_24">李四四</view>
-    <view class="date-time font_666666_20">2019.07.08 9:00</view>
-  </view>
-  <view class="row">
-    <image class="head-img" src="http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
-    <view class="name font_333333_24">王五五</view>
-    <view class="date-time font_666666_20">2019.07.08 9:00</view>
-  </view> -->
 </scroll-view>

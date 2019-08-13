@@ -1160,6 +1160,12 @@ Page({
     }
 
   },
+  phonecallevent: function (e) {
+    var tel = e.target.dataset.tel;
+    wx.makePhoneCall({
+      phoneNumber: tel
+    })
+  },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */

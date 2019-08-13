@@ -988,5 +988,11 @@ Page({
         }
       })
     }
-  }
+  },
+  phonecallevent: function (e) {
+    var tel = e.target.dataset.tel;
+    wx.makePhoneCall({
+      phoneNumber: tel
+    })
+  },
 })

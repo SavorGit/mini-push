@@ -57,7 +57,7 @@
   <view class="recommend-panel full_width" wx:if="{{hot_play.length>0}}">
     <view class="title-bar">
       <view class="title font_333333_24">热播内容</view>
-      <!-- <navigator class="more">更多...</navigator> -->
+      <navigator class="more" open-type="switchTab" url="/pages/find/selected_list">更多...</navigator>
     </view>
     <view class="list">
       <block wx:for="{{hot_play}}" wx:key="key" wx:for-index="index" wx:for-item="bean">

@@ -122,42 +122,7 @@
           <button bindtap="boxShow" class="btn theme-button-dark" data-res_type="{{bean.res_type}}" data-res_nums="{{bean.res_nums}}" data-pubdetail="{{bean.pubdetail}}" data-boxmac="{{box_mac}}" data-openid="{{openid}}" data-forscreen_id="{{bean.forscreen_id}}">电视播放</button>
         </view>
       </block>
-      <!-- <view class="row line">
-        <image class="img" src="http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
-        <view class="info">
-          <view class="rank theme-font5">TOP 2</view>
-          <view class="people theme-font1">李四四</view>
-          <view class="msg">累计播放 41 次</view>
-        </view>
-        <button class="btn theme-button-dark">电视播放</button>
-      </view>
-      <view class="row line">
-        <image class="img" src="http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
-        <view class="info">
-          <view class="rank theme-font5">TOP 3</view>
-          <view class="people theme-font1">赵五五</view>
-          <view class="msg">累计播放 31 次</view>
-        </view>
-        <button class="btn theme-button-dark">电视播放</button>
-      </view>
-      <view class="row line">
-        <image class="img" src="http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
-        <view class="info">
-          <view class="rank theme-font5">TOP 4</view>
-          <view class="people theme-font1">王六六</view>
-          <view class="msg">累计播放 21 次</view>
-        </view>
-        <button class="btn theme-button-dark">电视播放</button>
-      </view>
-      <view class="row">
-        <image class="img" src="http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
-        <view class="info">
-          <view class="rank theme-font5">TOP 5</view>
-          <view class="people theme-font1">钱七七</view>
-          <view class="msg">累计播放 11 次</view>
-        </view>
-        <button class="btn theme-button-dark">电视播放</button>
-      </view> -->
+      
     </view>
   </view>
 

@@ -371,6 +371,9 @@ Page({
     var img_url = res.target.dataset.img_url;
     var title ="快来帮我助力";
     if (res.from === 'button') {
+      wx.reportAnalytics('invite_friends_report', {
+        num: 1,
+      });
       // 转发成功
       // 来自页面内转发按钮
       return {
