@@ -111,12 +111,17 @@ Page({
     var public_text = res.detail.value.public_text;
     var is_open_simple = res.detail.value.is_open_simple;
     var formId = res.detail.formId;
+    var is_assist  =0 ;
+    if(is_share==1){
+      is_assist = 1;
+    }
     that.setData({
       load_fresh_char: '亲^_^投屏中,请稍后...',
       hiddens: false,
       is_btn_disabel: true,
       is_open_control: true,
-      is_share: is_share
+      is_share: is_share,
+      is_assist: is_assist
     })
 
     res_sup_time = (new Date()).valueOf();
@@ -147,7 +152,7 @@ Page({
                   }, 10000);
                 }
                 uploadVedio(video, box_mac, openid, res_sup_time, is_pub_hotelinfo, is_share, duration, avatarUrl, nickName, public_text, timer8_0);
-                app.recrdFormId(openid,formId);
+                app.recordFormId(openid,formId);
               }else {
                 that.setData({
                   hiddens:true,
@@ -166,7 +171,7 @@ Page({
             }, 10000);
           }
           uploadVedio(video, box_mac, openid, res_sup_time, is_pub_hotelinfo, is_share, duration, avatarUrl, nickName, public_text, timer8_0);
-          app.recrdFormId(openid, formId);
+          app.recordFormId(openid, formId);
         }
       }
     })
@@ -219,6 +224,78 @@ Page({
         },
         success: function (res) {
           clearInterval(timer8_0);
+          var res_eup_time = (new Date()).valueOf();
+          wx.request({
+            url: api_url + '/Netty/Index/index',
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            method: "POST",
+            data: {
+              box_mac: box_mac,
+              msg: '{ "action":2, "url": "forscreen/resource/' + timestamp + postf_t + '", "filename":"' + timestamp + postf_t + '","openid":"' + openid + '","resource_type":2,"video_id":"' + timestamp + '","avatarUrl":"' + avatarUrl + '","nickName":"' + nickName + '","forscreen_id":"' + timestamp + '"}',
+            },
+            success: function (result) {
+              that.setData({
+                upload_vedio_cover: oss_url + '/forscreen/resource/' + timestamp + postf_t + '?x-oss-process=video/snapshot,t_2000,f_jpg,w_450,m_fast',
+              })
+              wx.request({
+                url: api_url + '/Smallapp21/index/recordForScreenPics',
+                header: {
+                  'content-type': 'application/json'
+                },
+                data: {
+                  openid: openid,
+                  box_mac: box_mac,
+                  action: 2,
+                  resource_type: 2,
+                  mobile_brand: mobile_brand,
+                  mobile_model: mobile_model,
+                  forscreen_char: forscreen_char,
+                  public_text: public_text,
+                  imgs: '["forscreen/resource/' + timestamp + postf_t + '"]',
+                  resource_id: timestamp,
+                  res_sup_time: res_sup_time,
+                  res_eup_time: res_eup_time,
+                  resource_size: res.totalBytesSent,
+                  is_pub_hotelinfo: is_pub_hotelinfo,
+                  is_share: is_share,
+                  forscreen_id: timestamp,
+                  duration: duration,
+                },
+                success: function (ret) {
+
+                }
+              });
+            },
+
+          });
+          wx.request({
+            url: api_url + '/Smallapp21/ForscreenHistory/getList',
+            header: {
+              'content-type': 'application/json'
+            },
+            data: {
+              openid: openid,
+              box_mac: box_mac,
+              page: page,
+            },
+            success: function (res) {
+              var hst_list = res.data.result;
+
+              if (JSON.stringify(hst_list) == "{}") {
+                that.setData({
+                  forscreen_history_list: ''
+                })
+              } else {
+                that.setData({
+                  forscreen_history_list: res.data.result
+                })
+              }
+
+            }
+          })
+          
         }
       });
       upload_task.onProgressUpdate((res) => {
@@ -228,8 +305,7 @@ Page({
           vedio_percent: res.progress
         });
         if (res.progress == 100) {
-          var res_eup_time = (new Date()).valueOf();
-          console.log(res_eup_time);
+          
           that.setData({
             showVedio:false,
             oss_video_url: oss_url + "/forscreen/resource/" + timestamp + postf_t,
@@ -237,78 +313,9 @@ Page({
             is_view_control: true,
             hiddens:true,
             is_open_control: false,
-            forscreen_id: res_eup_time
+            forscreen_id: timestamp
           })
-          wx.request({
-            url: api_url+'/Smallapp21/index/recordForScreenPics',
-            header: {
-              'content-type': 'application/json'
-            },
-            data: {
-              openid: openid,
-              box_mac: box_mac,
-              action: 2,
-              resource_type: 2,
-              mobile_brand: mobile_brand,
-              mobile_model: mobile_model,
-              forscreen_char: forscreen_char,
-              public_text: public_text,
-              imgs: '["forscreen/resource/' + timestamp + postf_t + '"]',
-              resource_id: timestamp,
-              res_sup_time: res_sup_time,
-              res_eup_time: res_eup_time,
-              resource_size: res.totalBytesSent,
-              is_pub_hotelinfo: is_pub_hotelinfo,
-              is_share: is_share,
-              forscreen_id: res_eup_time,
-              duration: duration,
-            },
-            success: function (ret) {
-              wx.request({
-                url: api_url+'/Netty/Index/index',
-                headers: {
-                  'Content-Type': 'application/json'
-                },
-                method: "POST",
-                data: {
-                  box_mac: box_mac,
-                  msg: '{ "action":2, "url": "forscreen/resource/' + timestamp + postf_t + '", "filename":"' + timestamp + postf_t + '","openid":"' + openid + '","resource_type":2,"video_id":"' + timestamp + '","avatarUrl":"' + avatarUrl + '","nickName":"' + nickName + '","forscreen_id":"' + res_eup_time+'"}',
-                },
-                success: function (result) {
-                    that.setData({
-                      upload_vedio_cover: oss_url+'/forscreen/resource/' + timestamp + postf_t +'?x-oss-process=video/snapshot,t_2000,f_jpg,w_450,m_fast',
-                    })
-
-                },
-                
-              });
-              wx.request({
-                url: api_url+'/Smallapp21/ForscreenHistory/getList',
-                header: {
-                  'content-type': 'application/json'
-                },
-                data: {
-                  openid: openid,
-                  box_mac: box_mac,
-                  page: page,
-                },
-                success: function (res) {
-                  var hst_list = res.data.result;
-
-                  if (JSON.stringify(hst_list) == "{}") {
-                    that.setData({
-                      forscreen_history_list: ''
-                    })
-                  } else {
-                    that.setData({
-                      forscreen_history_list: res.data.result
-                    })
-                  }
-
-                }
-              })
-            }
-          });
+          
         }
 
       });

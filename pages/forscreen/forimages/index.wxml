@@ -140,7 +140,7 @@
     <!-- 重选 -->
     <view class="page_bottom theme-panel-2">
       <view class='button_group'>
-        <form bindsubmit="assist" report-submit="true" wx:if="{{is_share==1}}">
+        <form bindsubmit="assist" report-submit="true" wx:if="{{is_assist==1}}">
           <input class="display_hide" name="box_mac" value="{{box_mac}}"></input>
           <input class="display_hide" name="openid" value="{{openid}}"></input>
           <input class="display_hide" name="forscreen_id" value="{{forscreen_id}}"></input>

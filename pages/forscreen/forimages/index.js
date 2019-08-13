@@ -40,6 +40,7 @@ Page({
     is_btn_disabel:false,
     avatarUrl:'',       //用户头像 
     nickName:'',        //用户昵称
+    is_assist:0,       //是否助力
   },
   /**
    * 生命周期函数--监听页面加载
@@ -149,7 +150,7 @@ Page({
       if (img_len > 0 && img_len < 10) {
         var tmp_imgs = [];
         for (var i = 0; i < img_len; i++) {
-          tmp_imgs[i] = { "tmp_img": res.tempFilePaths[i] };
+          tmp_imgs[i] = { "tmp_img": res.tempFilePaths[i], 'resource_size': res.tempFiles[i].size };
         }
         that.setData({
           showFirst: false,
@@ -176,13 +177,18 @@ Page({
     var public_text = e.detail.value.public_text;
     var is_pub_hotelinfo = e.detail.value.is_pub_hotelinfo;   //是否公开显示餐厅信息
     var is_share = e.detail.value.is_share;
+    var is_assist = 0;
+    if(is_share==1){
+      is_assist = 1
+    }
     var avatarUrl = e.detail.value.avatarUrl;
     var nickName = e.detail.value.nickName;
     var is_open_simple = e.detail.value.is_open_simple;
 
     that.setData({
       is_btn_disabel: true,
-      is_share: is_share
+      is_share: is_share,
+      is_assist:is_assist
     })
     console.log(e);
     if (e.detail.value.upimgs0 != '' && e.detail.value.upimgs0 != undefined){
@@ -301,7 +307,7 @@ Page({
       var postf_t = filename.substring(index1, index2);//后缀名
       var postf_w = filename.substring(index1 + 1, index2);//后缀名
       //console.log(postf_w);
-
+      console.log(resource_size);
       var upload_task = wx.uploadFile({
         url: oss_upload_url,
         filePath: img_url,
@@ -326,80 +332,73 @@ Page({
           }
           var res_eup_time = (new Date()).valueOf();
           wx.request({
-            url: api_url + '/Smallapp21/index/recordForScreenPics',
-            header: {
-              'content-type': 'application/json'
+            url: api_url + '/Netty/Index/index',
+            headers: {
+              'Content-Type': 'application/json'
             },
+            method: "POST",
             data: {
-              forscreen_id: forscreen_id,
-              openid: openid,
               box_mac: box_mac,
-              action: 4,
-              mobile_brand: mobile_brand,
-              mobile_model: mobile_model,
-              forscreen_char: forscreen_char,
-              public_text: public_text,
-              imgs: '["forscreen/resource/' + timestamp + postf_t + '"]',
-              resource_id: timestamp,
-              res_sup_time: res_sup_time,
-              res_eup_time: res_eup_time,
-              resource_size: resource_size,
-              is_pub_hotelinfo: is_pub_hotelinfo,
-              is_share: is_share,
-              resource_type:1
+
+              msg: '{ "action": 4, "resource_type":2, "url": "forscreen/resource/' + timestamp + postf_t + '", "filename":"' + timestamp + postf_t + '","openid":"' + openid + '","img_nums":' + img_len + ',"forscreen_char":"' + forscreen_char + '","order":' + order + ',"forscreen_id":"' + forscreen_id + '","img_id":"' + timestamp + '","avatarUrl":"' + avatarUrl + '","nickName":"' + nickName + '"}',
+
             },
-            success: function (ret) {
+            success: function (result) {
               wx.request({
-                url: api_url + '/Netty/Index/index',
-                headers: {
-                  'Content-Type': 'application/json'
-                },
-                method: "POST",
-                data: {
-                  box_mac: box_mac,
-
-                  msg: '{ "action": 4, "resource_type":2, "url": "forscreen/resource/' + timestamp + postf_t + '", "filename":"' + timestamp + postf_t + '","openid":"' + openid + '","img_nums":' + img_len + ',"forscreen_char":"' + forscreen_char + '","order":' + order + ',"forscreen_id":"' + forscreen_id + '","img_id":"' + timestamp + '","avatarUrl":"' + avatarUrl + '","nickName":"' + nickName + '"}',
-
-                },
-                success: function (result) {
-
-                  that.setData({
-                    showFirst: false,
-                    showSecond: true,
-                    showView: false,
-                    percent: 0
-                  })
-                },
-              });
-              wx.request({
-                url: api_url + '/Smallapp21/ForscreenHistory/getList',
+                url: api_url + '/Smallapp21/index/recordForScreenPics',
                 header: {
                   'content-type': 'application/json'
                 },
                 data: {
+                  forscreen_id: forscreen_id,
                   openid: openid,
                   box_mac: box_mac,
-                  page: page,
+                  action: 4,
+                  mobile_brand: mobile_brand,
+                  mobile_model: mobile_model,
+                  forscreen_char: forscreen_char,
+                  public_text: public_text,
+                  imgs: '["forscreen/resource/' + timestamp + postf_t + '"]',
+                  resource_id: timestamp,
+                  res_sup_time: res_sup_time,
+                  res_eup_time: res_eup_time,
+                  resource_size: resource_size,
+                  is_pub_hotelinfo: is_pub_hotelinfo,
+                  is_share: is_share,
+                  resource_type: 1
                 },
-                success: function (res) {
-                  var hst_list = res.data.result;
-
-                  if (JSON.stringify(hst_list) == "{}") {
-                    that.setData({
-                      forscreen_history_list: ''
-                    })
-                  } else {
-                    that.setData({
-                      forscreen_history_list: res.data.result
-                    })
-                  }
+                success: function (ret) {
 
                 }
-              })
-            }
-          });
-          
+              });
 
+            },
+          });
+          wx.request({
+            url: api_url + '/Smallapp21/ForscreenHistory/getList',
+            header: {
+              'content-type': 'application/json'
+            },
+            data: {
+              openid: openid,
+              box_mac: box_mac,
+              page: page,
+            },
+            success: function (res) {
+              var hst_list = res.data.result;
+
+              if (JSON.stringify(hst_list) == "{}") {
+                that.setData({
+                  forscreen_history_list: ''
+                })
+              } else {
+                that.setData({
+                  forscreen_history_list: res.data.result
+                })
+              }
+
+            }
+          })
 
         },
         complete: function (es) {
@@ -424,6 +423,10 @@ Page({
           console.log(tmp_imgs);
           that.setData({
             tmp_imgs:tmp_imgs,
+            showFirst: false,
+            showSecond: true,
+            showView: false,
+            percent: 0
           })
           
           
