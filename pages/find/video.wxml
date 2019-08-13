@@ -33,38 +33,43 @@
         <view class='operation font_666666_24'>
           <view>
             <button>
-              <label class="fa fa-play fa-lg" style="color: #666666;"></label>
+              <label class="fa fa-play fa-lg" style="color: #666666;margin-right: 5rpx;"></label>
               <label>{{play_num}}</label>
             </button>
           </view>
           <view wx:if="{{is_collect=='1'}}">
             <button bindtap='cancCollect' data-res_id="{{videoinfo.forscreen_id}}" data-openid="{{openid}}" data-type="2">
-              <label class="fa fa-heart fa-lg" style="color: #E11E4C;"></label>
+              <label class="fa fa-heart fa-lg" style="color: #E11E4C;margin-right: 5rpx;"></label>
               <label>{{collect_num}}</label>
             </button>
           </view>
           <view wx:else>
             <button bindtap='onCollect' data-res_id="{{videoinfo.forscreen_id}}" data-openid="{{openid}}" data-type="2">
-              <label class="fa fa-heart-o fa-lg" style="color: #666666;"></label>
+              <label class="fa fa-heart-o fa-lg" style="color: #666666;margin-right: 5rpx;"></label>
               <label>{{collect_num}}</label>
             </button>
           </view>
           <view>
             <button open-type='share' data-res_id="{{videoinfo.forscreen_id}}" data-pubdetail="{{videoinfo.pubdetail}}" data-openid="{{openid}}" data-res_type="2">
-              <label class="fa fa-share-square-o fa-lg" style="color: #666666;"></label>
+              <label class="fa fa-share-square-o fa-lg" style="color: #666666;margin-right: 5rpx;"></label>
               <label>{{share_num}}</label>
             </button>
           </view>
         </view>
       </view>
     </view>
+    <view class='btn-group full_width'>
+      <button wx:if="{{is_replay_disabel==false}}" class='theme-button-dark' bindtap='boxShow' data-forscreen_id='{{videoinfo.forscreen_id}}' data-pubdetail='{{videoinfo.pubdetail}}' data-forscreen_char='{{videoinfo.forscreen_char}}' data-res_type="{{videoinfo.res_type}}"
+        data-res_nums="{{videoinfo.res_nums}}" data-boxmac="{{box_mac}}" data-openid="{{openid}}">电视播放</button>
+      <button wx:else disabled="true">{{djs}} S</button>
+    </view>
   </view>
   <view class='full_width page_bottom'>
-    <view class='option'>
+    <!-- <view class='option'>
       <button wx:if="{{is_replay_disabel==false}}" bindtap='boxShow' data-forscreen_id='{{videoinfo.forscreen_id}}' data-pubdetail='{{videoinfo.pubdetail}}' data-forscreen_char='{{videoinfo.forscreen_char}}' data-res_type="{{videoinfo.res_type}}" data-res_nums="{{videoinfo.res_nums}}"
         data-boxmac="{{box_mac}}" data-openid="{{openid}}" class='theme-button'>电视播放</button>
       <button wx:else class='theme-button2'>{{djs}} S</button>
-    </view>
+    </view> -->
   </view>
 </view>
 <!-- 遥控器 -->

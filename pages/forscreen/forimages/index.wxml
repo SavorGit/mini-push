@@ -59,7 +59,7 @@
             </label>
           </checkbox-group>
         </view>
-        <label class="full_width font_333333_22">公开即有机会在上千家餐厅电视中播放</label>
+        <label class="full_width font_333333_24">公开即有机会在上千家餐厅电视中播放</label>
         <view wx:if="{{is_share>0}}" class='speak_with_interest'>
           <textarea class='text_input theme-textarea' name="public_text" maxlength='200' placeholder='顺便对公众说两句...'></textarea>
         </view>
@@ -198,6 +198,13 @@
           </view>
         </view>
       </scroll-view>
+    </view>
+
+    <!-- 广告面板 -->
+    <view class="advert-panel full_width theme-panel-dark">
+      <label class="fa fa-phone fa-lg"></label>
+      <label class="msg">商务合作：010-64175797</label>
+      <button class="theme-button">拨打</button>
     </view>
   </view>
 

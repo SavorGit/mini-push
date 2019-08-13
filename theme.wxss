@@ -1,5 +1,10 @@
 /** theme.wxss **/
 
+button[disabled] {
+  color: rgba(255, 255, 255, 0.6) !important;
+  background-color: rgba(0, 0, 0, 0.6) !important;
+}
+
 .navigator-hover {
   background-color: rgba(0, 0, 0, 0.1);
   opacity: 0.7;

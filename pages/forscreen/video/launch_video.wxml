@@ -22,30 +22,34 @@
       <view class='con_bottom theme-panel'>
         <view class='full_height operation font_666666_26'>
           <view>
-            <label class="fa fa-play fa-lg" style="color: #666666;"></label>
+            <label class="fa fa-play fa-lg" style="color: #666666;margin-right: 5rpx;"></label>
             <label>{{play_num}}</label>
           </view>
           <view wx:if="{{is_collect==1}}">
-            <label class="fa fa-heart fa-lg" style="color: #E11E4C;" bindtap='cancCollect' data-res_id="{{res_id}}" data-type='{{res_type}}' data-openid='{{openid}}'></label>
+            <label class="fa fa-heart fa-lg" style="color: #E11E4C;margin-right: 5rpx;" bindtap='cancCollect' data-res_id="{{res_id}}" data-type='{{res_type}}' data-openid='{{openid}}'></label>
             <label>{{collect_num}}</label>
           </view>
           <view wx:else>
-            <label class="fa fa-heart-o fa-lg" style="color: #666666;" bindtap='onCollect' data-res_id="{{res_id}}" data-type='{{res_type}}' data-openid='{{openid}}'></label>
+            <label class="fa fa-heart-o fa-lg" style="color: #666666;margin-right: 5rpx;" bindtap='onCollect' data-res_id="{{res_id}}" data-type='{{res_type}}' data-openid='{{openid}}'></label>
             <label>{{collect_num}}</label>
           </view>
           <view>
             <button class="font_666666_26" open-type='share' data-openid="{{openid}}" data-res_id="{{res_id}}" data-type='{{res_type}}' data-video_url="{{video_url}}" data-video_name="{{video_name}}" data-video_img='{{video_img_url}}' data-share_num='{{share_num}}'>
-              <label class="fa fa-share-square-o fa-lg" style="color: #666666;"></label>
+              <label class="fa fa-share-square-o fa-lg" style="color: #666666;margin-right: 5rpx;"></label>
               <label>{{share_num}}</label>
             </button>
           </view>
         </view>
       </view>
     </view>
+    <view class="btn-group full_width">
+      <button wx:if="{{is_replay_disabel==false}}" class='theme-button-dark' bindtap='boxShow' data-name="{{video_name}}" data-filename='{{filename}}' data-vediourl="{{video_url}}" data-boxmac="{{box_mac}}" data-openid="{{openid}}">电视播放</button>
+      <button wx:else disabled="true">{{djs}} S</button>
+    </view>
   </view>
   <view class='full_width page_bottom'>
-    <button wx:if="{{is_replay_disabel==false}}" bindtap='boxShow' data-name="{{video_name}}" data-filename='{{filename}}' data-vediourl="{{video_url}}" data-boxmac="{{box_mac}}" data-openid="{{openid}}" class='full_width theme-button'>电视播放</button>
-    <button wx:else class='theme-button2'>{{djs}} S</button>
+    <!-- <button wx:if="{{is_replay_disabel==false}}" bindtap='boxShow' data-name="{{video_name}}" data-filename='{{filename}}' data-vediourl="{{video_url}}" data-boxmac="{{box_mac}}" data-openid="{{openid}}" class='full_width theme-button'>电视播放</button>
+    <button wx:else class='theme-button2'>{{djs}} S</button> -->
   </view>
 </view>
 <!-- 遥控器 -->
