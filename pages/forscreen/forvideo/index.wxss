@@ -53,7 +53,7 @@
 
 .launch_video_page_b .page_main > .grant_auth {
   min-height: 10rpx;
-  margin: 10rpx 0rpx 30rpx 0rpx;
+  padding: 10rpx 0rpx 20rpx 0rpx;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -94,7 +94,8 @@
 }
 
 .launch_video_page_b .page_main > label {
-  margin: auto auto 30rpx auto;
+  min-height: 24rpx;
+  padding: 0 0 30rpx 0;
   text-align: center;
   display: block;
 }
@@ -116,7 +117,7 @@
   line-height: 80rpx;
   border-radius: 10rpx;
   font-size: 28rpx;
-  margin: auto;
+  margin: 30rpx auto auto auto;
   padding: unset;
 }
 
@@ -222,7 +223,7 @@
 }
 
 .launch_video_page_a .launch_history {
-  height: calc(100% - 798rpx);
+  height: calc(100% - 793rpx);
 }
 
 .launch_video_page_a .launch_history > .title {
