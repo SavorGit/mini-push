@@ -11,7 +11,7 @@ App({
         method: "POST",
         data: {
           openid: openid,
-          formId: formId,
+          formid: formId,
         }
       })
     }

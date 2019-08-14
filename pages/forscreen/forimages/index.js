@@ -947,7 +947,7 @@ Page({
     var openid = e.detail.value.openid;
     var forscreen_id = e.detail.value.forscreen_id;
     var formId = e.detail.formId;
-    
+    app.recordFormId(openid, formId);
     if (typeof (forscreen_id)=='undefined'){
       wx.showToast({
         title: '助力参数异常，请重选照片',
@@ -971,7 +971,7 @@ Page({
             wx.navigateTo({
               url: '/pages/mine/assist/index?forscreen_id=' + rec_id,
             })
-            app.recordFormId(openid, formId);
+            
           }else {
             wx.showToast({
               title: '助力参数异常，请重选照片',

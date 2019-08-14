@@ -1117,7 +1117,8 @@ Page({
     var that = this;
     var forscreen_id = e.detail.value.forscreen_id;
     var openid       = e.detail.value.openid;
-    var formId       = e.detail.value.formId;
+    var formId       = e.detail.formId;
+    app.recordFormId(openid, formId);
     if (typeof (forscreen_id) == 'undefined') {
       wx.showToast({
         title: '助力参数异常，请重选照片',
@@ -1126,6 +1127,7 @@ Page({
       })
       
     } else {
+      
       wx.request({
         url: api_url + '/Smallapp3/ForscreenHelp/helpplay',
         header: {
@@ -1140,7 +1142,7 @@ Page({
             wx.navigateTo({
               url: '/pages/mine/assist/index?forscreen_id=' + rec_id,
             })
-            app.recordFormId(openid, formId);
+            
           } else {
             wx.showToast({
               title: '助力参数异常，请重选照片',
@@ -1156,7 +1158,6 @@ Page({
           })
         }
       })
-      app.recordFormId(openid,formId);
     }
 
   },
