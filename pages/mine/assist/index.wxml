@@ -1,6 +1,6 @@
 <!--pages/mine/assist/index.wxml-->
 <import src="/pages/template/commons" />
-<template wx:if="{{isShare}}" is="navigationBarForShare" data='{{statusBarHeight: statusBarHeight,titleText:"为好友助力"}}' />
+<template wx:if="{{assist_info.status==2 || assist_info.status==3}}" is="navigationBarForShare" data='{{statusBarHeight: statusBarHeight,titleText:"为好友助力"}}' />
 <template wx:else is="navigationBarForTwoLevel" data='{{statusBarHeight: statusBarHeight,titleText:"邀请好友助力"}}' />
 
 <scroll-view class="container theme-container" style='height: calc(100vh - 46px - {{statusBarHeight}}px);' scroll-y="true" scroll-with-animation="true">
