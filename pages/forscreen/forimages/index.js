@@ -945,6 +945,7 @@ Page({
     console.log(e);
     var that = this;
     var openid = e.detail.value.openid;
+    var box_mac = e.detail.value.box_mac;
     var forscreen_id = e.detail.value.forscreen_id;
     var formId = e.detail.formId;
     app.recordFormId(openid, formId);
@@ -969,7 +970,7 @@ Page({
           if(res.data.code==10000){
             var rec_id = res.data.result.forscreen_id;
             wx.navigateTo({
-              url: '/pages/mine/assist/index?forscreen_id=' + rec_id,
+              url: '/pages/mine/assist/index?forscreen_id=' + rec_id +'&box_mac='+box_mac,
             })
             
           }else {

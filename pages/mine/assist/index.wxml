@@ -15,8 +15,14 @@
         <label class="msg font_999999_24">我要在全国千家高端餐厅SHOW”</label>
       </view>
     </view>
-    <image class="img" src="{{assist_info.img_url}}"></image>
-    <button class="theme-button" wx:if="{{is_assist==false}}" bindtap="assist" data-forscreen_id="{{forscreen_id}}" data-help_id="{{assist_info.help_id}}">帮TA上电视</button>
+    <block wx:if="{{assist_info.media_type==1}}">
+      <video class="img" src="{{assist_info.oss_addr}}"></video>
+      
+    </block>
+    <block wx:if="{{assist_info.media_type==2}}">
+      <image class="img" src="{{assist_info.img_url}}" bindtap="previewImage" data-src="{{pubdetail}}" data-pkey="0"></image>
+    </block>
+    <button class="theme-button" wx:if="{{is_assist==false}}" bindtap="assist" data-forscreen_id="{{forscreen_id}}" data-help_id="{{assist_info.help_id}}" data-box_mac="{{box_mac}}" data-forscreen_url="{{forscreen_url}}" data-media_type="{{assist_info.media_type}}">帮TA上电视</button>
     <button class="theme-button" wx:if="{{is_assist==true}}" disabled="true">已助力</button>
   </view>
 
@@ -30,8 +36,14 @@
         <label class="msg font_999999_24">我要在全国千家高端餐厅SHOW”</label>
       </view>
     </view>
-    <image class="img" src="{{assist_info.img_url}}"></image>
-    <button open-type='share'  data-img_url="{{assist_info.img_url}}" data-forscreen_id="{{forscreen_id}}" class="theme-button">邀请好友助力</button>
+    <block wx:if="{{assist_info.media_type==1}}">
+      <video class="img" src="{{assist_info.oss_addr}}"></video>
+      
+    </block>
+    <block wx:if="{{assist_info.media_type==2}}">
+      <image class="img" src="{{assist_info.img_url}}" bindtap="previewImage" data-src="{{pubdetail}}" data-pkey="0"></image>
+    </block>
+    <button open-type='share'  data-img_url="{{assist_info.img_url}}" data-forscreen_id="{{forscreen_id}}"  data-box_mac="{{box_mac}}" class="theme-button">邀请好友助力</button>
     <view class="font_333333_24">
       <label>您当前有</label>
       <label class="theme-font5">{{assist_info.rate}}%</label>

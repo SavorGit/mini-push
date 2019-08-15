@@ -9,6 +9,7 @@ Page({
    */
   data: {
     statusBarHeight: getApp().globalData.statusBarHeight,
+    picinfo: [],
     is_assist:false,
   },
 
@@ -19,8 +20,10 @@ Page({
     console.log(options);
     var that = this;
     var forscreen_id = options.forscreen_id;
+    var box_mac      = options.box_mac;
     that.setData({
-      forscreen_id:forscreen_id
+      forscreen_id:forscreen_id,
+      box_mac:box_mac
     })
     if (app.globalData.openid && app.globalData.openid != '') {
       that.setData({
@@ -142,9 +145,16 @@ Page({
             }else {
               is_assist = false
             }
+            var pubdetail = [{'res_url':''}];
+            
+            for(var i=0;i<1;i++){
+              pubdetail[i]['res_url'] = res.data.result.img_url;
+            }
+            console.log('dfdafad');
             that.setData({
               assist_info:res.data.result,
-              is_assist: is_assist
+              is_assist: is_assist,
+              pubdetail: pubdetail,
             })
           }
         }
@@ -178,6 +188,12 @@ Page({
     var openid = user_info.openid;
     var help_id = e.target.dataset.help_id;
     var forscreen_id = e.target.dataset.forscreen_id;
+    var mobile_brand = app.globalData.mobile_brand;
+    var mobile_model = app.globalData.mobile_model;
+    var box_mac = e.target.dataset.box_mac;
+    var forscreen_url  = e.target.dataset.forscreen_url;
+    var resource_type = e.target.dataset.media_type;
+    var timestamp = (new Date()).valueOf();
     if(user_info.is_wx_auth!=3){
       that.setData({
         showModel:true
@@ -216,6 +232,23 @@ Page({
                   })
                 }
               }
+            })
+            wx.request({
+              url: that.globalData.api_url + '/Smallapp/index/recordForScreenPics',
+              header: {
+                'content-type': 'application/json'
+              },
+              data:{
+                forscreen_id: timestamp,
+                openid: openid,
+                box_mac: box_mac,
+                action: 50,
+                mobile_brand: mobile_brand,
+                mobile_model: mobile_model,
+                imgs: '[' + forscreen_url+']',
+                resource_type: resource_type
+              }
+              
             })
           }else {
             wx.showToast({
@@ -338,6 +371,21 @@ Page({
       phoneNumber: tel
     })
   },
+  //预览图片
+  previewImage: function (e) {
+    var current = e.target.dataset.src;
+    var pkey = e.target.dataset.pkey;
+    var urls = [];
+    for (var row in current) {
+      urls[row] = current[row]['res_url']
+
+    }
+    //console.log(pkey);
+    wx.previewImage({
+      current: urls[pkey], // 当前显示图片的http链接
+      urls: urls // 需要预览的图片http链接列表
+    })
+  },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
@@ -387,6 +435,7 @@ Page({
     console.log(res);
     var that = this;
     var forscreen_id = res.target.dataset.forscreen_id;
+    var box_mac      = res.target.dataset.box_mac;
     console.log(forscreen_id);
     var img_url = res.target.dataset.img_url;
     var title ="快来帮我助力";
@@ -398,7 +447,7 @@ Page({
       // 来自页面内转发按钮
       return {
         title: title,
-        path: '/pages/mine/assist/index?forscreen_id=' + forscreen_id ,
+        path: '/pages/mine/assist/index?forscreen_id=' + forscreen_id +'&box_mac='+box_mac ,
         imageUrl: img_url,
         success: function (res) {
 
