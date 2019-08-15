@@ -323,9 +323,6 @@ Page({
         replay_video_url: "forscreen/resource/" + timestamp + postf_t,
         showVedio: true,
         upload_vedio_temp: filename,
-        
-        //upload_vedio_img_temp: filename_img,
-
       });
     }
   },

@@ -201,15 +201,15 @@ Page({
             goods_id: goods_id,
           },
           success:function(res){
-            console.log(res);
+            //console.log(res);
             if(res.data.code==10000){
-              console.log(res);
+             //console.log(res);
               if(res.data.result.jd_url==''){
                 var is_jd = false;
               }else {
                 is_jd =true;
               }
-              console.log(is_jd);
+              //console.log(is_jd);
               that.setData({
                 jd_url: res.data.result.jd_url,
                 goods_info:res.data.result,
@@ -255,7 +255,7 @@ Page({
         if (res.data.code == 10000) {
           var imgUrls = res.data.result[2];
           var imgUrls_mid = res.data.result[3];
-          console.log(res);
+          //console.log(res);
           that.setData({
             imgUrls: imgUrls,
             imgUrls_mid: imgUrls_mid
@@ -276,7 +276,7 @@ Page({
       },
       success: function (res) {
         if (res.data.code == 10000) {
-          console.log(res.data.result);
+          //onsole.log(res.data.result);
           that.setData({
             hot_play: res.data.result.datalist
           })
@@ -375,7 +375,7 @@ Page({
     })
     var user_info = wx.getStorageSync("savor_user_info");
     openid = user_info.openid;
-    console.log(box_mac);
+    //console.log(box_mac);
     if (box_mac == 'undefined' || box_mac == undefined) {
       box_mac = '';
     }
@@ -395,7 +395,7 @@ Page({
 
   //选择照片上电视
   chooseImage(e) {
-    console.log(e);
+    //console.log(e);
     var that = this;
     var user_info = wx.getStorageSync("savor_user_info");
     if (user_info.is_wx_auth != 3) {
@@ -658,7 +658,7 @@ Page({
         })
       }else {
         goods_nums +=1;
-        console.log(goods_nums);
+        //console.log(goods_nums);
       }
     }else if(type==2){ //数量减少
       if(goods_nums==1){
@@ -685,7 +685,7 @@ Page({
   },
   //店内购买
   shopBuyGoods:function(e){
-    console.log(e);
+    //console.log(e);
     var that = this;
     var goods_id = e.currentTarget.dataset.goods_id;
     var goods_nums = e.currentTarget.dataset.goods_nums;
@@ -800,7 +800,7 @@ Page({
   },
   //活动商品京东购买
   jdBuy:function(e){
-    console.log(e);
+    //console.log(e);
     var h5_url = e.currentTarget.dataset.h5_url;
     h5_url = encodeURIComponent(h5_url);
     wx.navigateTo({
