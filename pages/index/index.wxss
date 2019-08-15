@@ -181,9 +181,13 @@
 }
 
 .recommend-panel > .title-bar > .title {
+  width: 100rpx;
   display: block;
+  text-align: center;
   font-size: 24rpx;
-  text-decoration: underline;
+  /* text-decoration: underline; */
+  padding-bottom: 5rpx;
+  border-bottom: 4rpx solid #333;
 }
 
 .recommend-panel > .list > .row {
