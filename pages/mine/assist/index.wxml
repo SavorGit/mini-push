@@ -8,7 +8,7 @@
   <!-- 内容信息面板 [他人] -->
   <view wx:if="{{assist_info.status==2 || assist_info.status==3}}" class="assist-info-other-panel theme-panel">
     <view class="people full_width">
-      <image class="head-img" src="{{assist_info.user.avataUrl}}"></image>
+      <image class="head-img" src="{{assist_info.user.avatarUrl}}"></image>
       <view>
         <label class="name font_333333_24">{{assist_info.user.nickName}}：</label>
         <label class="msg font_999999_24">“快来帮我助力！</label>
@@ -16,7 +16,7 @@
       </view>
     </view>
     <image class="img" src="{{assist_info.img_url}}"></image>
-    <button class="theme-button" wx:if="{{is_assist==false}}" bindtap="assist" data-help_id="{{assist_info.help_id}}">帮TA上电视</button>
+    <button class="theme-button" wx:if="{{is_assist==false}}" bindtap="assist" data-forscreen_id="{{forscreen_id}}" data-help_id="{{assist_info.help_id}}">帮TA上电视</button>
     <button class="theme-button" wx:if="{{is_assist==true}}" disabled="true">已助力</button>
   </view>
 
@@ -45,7 +45,7 @@
       <view class="title font_333333_24">已有{{assist_frieds_nums}}名好友帮您助力</view>
       <navigator class="more font_999999_24" url="/pages/mine/assist/assistlist?forscreen_id={{forscreen_id}}">更多...</navigator>
     </view>
-    <view class="list" wx:if="{{assist_frieds.lenth>0}}">
+    <view class="list" wx:if="{{assist_frieds.length>0}}">
       <view class="people" wx:for="{{assist_frieds}}" wx:key="{{key}}" wx:index="{{index}}" wx:for-item="bean">
         <image class="head-img" src="{{bean.avatarUrl}}"></image>
       </view>

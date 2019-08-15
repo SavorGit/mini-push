@@ -177,6 +177,7 @@ Page({
     var user_info = wx.getStorageSync('savor_user_info');
     var openid = user_info.openid;
     var help_id = e.target.dataset.help_id;
+    var forscreen_id = e.target.dataset.forscreen_id;
     if(user_info.is_wx_auth!=3){
       that.setData({
         showModel:true
@@ -196,6 +197,25 @@ Page({
           if(res.data.code==10000){
             that.setData({
               is_assist:true
+            })
+            wx.request({
+              url: api_url + '/Smallapp3/ForscreenHelp/userlist',
+              headers: {
+                'Content-Type': 'application/json'
+              },
+              method: "POST",
+              data: {
+                forscreen_id: forscreen_id,
+                page: 1,
+                pagesize: 7,
+              }, success: function (res) {
+                if (res.data.code == 10000) {
+                  that.setData({
+                    assist_frieds: res.data.result.datalist,
+                    assist_frieds_nums: res.data.result.total_num
+                  })
+                }
+              }
             })
           }else {
             wx.showToast({
