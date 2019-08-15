@@ -170,12 +170,12 @@
 
 .launch_video_page_a .page_main > view.cover {
   padding-bottom: 10rpx;
-  width: 100%;
 }
 
-.launch_video_page_a .page_main > view.cover > image {
+.launch_video_page_a .page_main > view.cover > image,
+.launch_video_page_a .page_main > view.cover > video {
   width: 100%;
-  height: 380rpx;
+  height: 100%;
 }
 
 .launch_video_page_a > .page_bottom {

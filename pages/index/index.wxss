@@ -175,7 +175,7 @@
 }
 
 .recommend-panel > .title-bar {
-  height: 32rpx;
+  height: 40rpx;
   padding-top: 20rpx;
   padding-left: 25rpx;
 }
@@ -185,9 +185,8 @@
   display: block;
   text-align: center;
   font-size: 24rpx;
-  /* text-decoration: underline; */
-  padding-bottom: 5rpx;
-  border-bottom: 4rpx solid #333;
+  padding-bottom: 2rpx;
+  border-bottom: 6rpx solid #333;
 }
 
 .recommend-panel > .list > .row {
