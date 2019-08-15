@@ -160,12 +160,13 @@
   display: flex;
   flex-direction: row;
   align-items: center;
-  justify-content: space-between;
+  justify-content: start;
 }
 
 .assist-people-panel > .list > .people {
   width: 90rpx;
   height: 90rpx;
+  margin-right: 20rpx;
 }
 
 .assist-people-panel > .list > .people > .head-img {
