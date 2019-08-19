@@ -4,6 +4,14 @@
   justify-content: start;
 }
 
+.guided_mask_panel {
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: #000;
+  opacity: 0.9;
+}
+
 .grids-frame {
   /* height: 458rpx;
   margin: 35rpx calc(100vw - 718rpx) 35rpx calc(100vw - 717rpx); */
@@ -195,6 +203,67 @@ image.pic_show_cur {
   line-height: 100rpx;
   margin: 0px;
   border-radius: 0rpx;
+}
+
+.guided_mask_panel.launch_before {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: start;
+}
+
+.guided_mask_panel.launch_before > .point {
+  width: 330rpx;
+  height: 60rpx;
+  line-height: 60rpx;
+  font-size: 28rpx;
+  background-color: #fff;
+  opacity: 1;
+  border: 1rpx dashed #1cbeb6;
+  text-align: center;
+}
+
+.guided_mask_panel.launch_before > .point > .checkbox-group {
+  padding-left: 10rpx;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.guided_mask_panel.launch_before > .point > .checkbox-group checkbox {
+  font-size: 28rpx;
+}
+
+.guided_mask_panel.launch_before > .point > .checkbox-group checkbox .wx-checkbox-input {
+  width: 30rpx;
+  height: 30rpx;
+  background: unset;
+}
+
+.guided_mask_panel.launch_before > .arrow {
+  width: 100rpx;
+  height: 100rpx;
+  margin-top: 30rpx;
+  transform: scaleX(-1) rotate(-135deg);
+  filter: FlipH();
+}
+
+.guided_mask_panel.launch_before > .explain {
+  height: 70rpx;
+  margin-top: 30rpx;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: start;
+}
+
+.guided_mask_panel.launch_before > .theme-button {
+  width: 200rpx;
+  height: 80rpx;
+  line-height: 80rpx;
+  margin-top: 50rpx;
+  font-size: 28rpx;
+  opacity: 1;
 }
 
 /* ================================== 上传图片后 ================================== */
@@ -442,6 +511,68 @@ image.pic_show_cur {
 
 .advert-panel > .msg {
   margin-left: 20rpx;
+}
+
+.guided_mask_panel.launch_after {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: start;
+}
+
+.guided_mask_panel.launch_after > .point {
+  width: 670rpx;
+  height: 60rpx;
+  line-height: 60rpx;
+  font-size: 28rpx;
+}
+
+.guided_mask_panel.launch_after > .point > view {
+  width: 160rpx;
+  height: 50rpx;
+  line-height: 50rpx;
+  padding: 5rpx;
+  background-color: #fff;
+  opacity: 1;
+  border: 1rpx dashed #1cbeb6;
+  text-align: center;
+}
+
+.guided_mask_panel.launch_after > .point button {
+  width: 150rpx;
+  height: 50rpx;
+  line-height: 50rpx;
+  border-radius: 25rpx;
+  margin: auto 0;
+  padding: unset;
+  border: unset;
+  font-size: 28rpx;
+}
+
+.guided_mask_panel.launch_after > .arrow {
+  width: 100rpx;
+  height: 100rpx;
+  margin-top: 30rpx;
+  margin-left: -180rpx;
+  transform: rotate(-135deg);
+}
+
+.guided_mask_panel.launch_after > .explain {
+  height: 70rpx;
+  margin-top: 30rpx;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: start;
+}
+
+.guided_mask_panel.launch_after > .theme-button {
+  width: 200rpx;
+  height: 80rpx;
+  line-height: 80rpx;
+  margin-top: 50rpx;
+  font-size: 28rpx;
+  opacity: 1;
 }
 
 /* =============== 打断投屏弹窗开始 =============== */

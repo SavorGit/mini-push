@@ -2,11 +2,12 @@
 <import src="/pages/template/commons" />
 <template is="navigationBarForTwoLevel" data='{{statusBarHeight: statusBarHeight,titleText:"热点投屏"}}' />
 
-<view class="container theme-container" style='height: calc(100vh - 46px - {{statusBarHeight}}px);'>
 
 
-  <!-- ================================== 上传图片前 ================================== -->
-  <view class="full_width launch_pic_page_b display_{{showThird?'hide':'show'}}">
+<!-- ================================== 上传图片前 ================================== -->
+<view wx:if="{{!showThird}}" class="container theme-container" style='height: calc(100vh - 46px - {{statusBarHeight}}px);'>
+  <view class="full_width launch_pic_page_b">
+    <!-- <view class="full_width launch_pic_page_b display_{{showThird?'hide':'show'}}"> -->
     <view class="page_top theme-panel-2">
       <view class='full_width font_666666_26'>
         <label class='tip_top_lable'>图片加载成功后，选择照片，电视开始展示</label>
@@ -90,12 +91,30 @@
     </bottomModal>
   </view>
 
+  <!-- 引导蒙层 -->
+  <view wx:if="{{showGuidedMaskBeforLaunch}}" class="guided_mask_panel launch_before full_width full_height">
+    <view class="point" style="margin-top: calc(718rpx + 46px + {{statusBarHeight}}px);">
+      <checkbox-group class="checkbox-group">
+        <checkbox disabled="true">公开发表，公众可见</checkbox>
+      </checkbox-group>
+    </view>
+    <image class="arrow" src="/images/imgs/FFFFFF_guide_arrow.png"></image>
+    <view class="explain font_FFFFFF_28">
+      <label>公开不仅可以让更多人看到！</label>
+      <label>还有有机会在上千家餐厅电视中播放哦~</label>
+    </view>
+    <button class="theme-button font_FFFFFF_28">知道了</button>
+  </view>
+</view>
 
 
 
 
-  <!-- ================================== 上传图片后 ================================== -->
-  <view class="full_width full_height launch_pic_page_a display_{{showThird?'show':'hide'}}">
+
+<!-- ================================== 上传图片后 ================================== -->
+<view wx:if="{{showThird}}" class="container theme-container" style='height: calc(100vh - 46px - {{statusBarHeight}}px);'>
+  <!-- <view class="full_width full_height launch_pic_page_a display_{{showThird?'show':'hide'}}"> -->
+  <view class="full_width full_height launch_pic_page_a">
     <view class="page_top theme-panel-2">
       <view class='full_width font_666666_26'>
         <label class='tip_top_lable'>图片加载成功后，选择照片，电视开始展示</label>
@@ -206,6 +225,21 @@
       <label class="msg">商务合作：010-64175797</label>
       <button class="theme-button" bindtap="phonecallevent" data-tel="010-64175797">拨打</button>
     </view>
+  </view>
+
+  <!-- 引导蒙层 -->
+  <view wx:if="{{showGuidedMaskAfterLaunch}}" class="guided_mask_panel launch_after full_width full_height">
+    <view class="point" style="margin-top: calc(608rpx + 46px + {{statusBarHeight}}px);">
+      <view>
+        <button class='savor-btn theme-button' form-type="submit">助力全网播放</button>
+      </view>
+    </view>
+    <image class="arrow" src="/images/imgs/FFFFFF_guide_arrow.png"></image>
+    <view class="explain font_FFFFFF_28">
+      <label>您可邀请好友帮您助力，</label>
+      <label>助力人数越多，越有可能在上千家餐厅电视中播放~</label>
+    </view>
+    <button class="theme-button font_FFFFFF_28">知道了</button>
   </view>
 
 </view>

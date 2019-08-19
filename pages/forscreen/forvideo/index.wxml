@@ -2,11 +2,12 @@
 <import src="/pages/template/commons" />
 <template is="navigationBarForTwoLevel" data='{{statusBarHeight: statusBarHeight,titleText:"热点投屏"}}' />
 
-<view class="container theme-container" style='height: calc(100vh - 46px - {{statusBarHeight}}px);'>
 
 
-  <!-- ================================== 上传视频前 ================================== -->
-  <view class="full_width launch_video_page_b display_{{showVedio?'show':'hide'}}">
+<!-- ================================== 上传视频前 ================================== -->
+<view wx:if="{{showVedio}}" class="container theme-container" style='height: calc(100vh - 46px - {{statusBarHeight}}px);'>
+  <!-- <view class="full_width launch_video_page_b display_{{showVedio?'show':'hide'}}"> -->
+  <view class="full_width launch_video_page_b">
     <view class='page_top theme-panel-2 flex_row_center font_666666_26'>
       <label>视频加载完成后，电视开始加载并自动播放</label>
       <label class='link_relief'>
@@ -73,11 +74,30 @@
     </bottomModal>
   </view>
 
+  <!-- 引导蒙层 -->
+  <view wx:if="{{showGuidedMaskBeforLaunch}}" class="guided_mask_panel launch_before full_width full_height">
+    <view class="point" style="margin-top: calc(564rpx + 46px + {{statusBarHeight}}px);">
+      <checkbox-group class="checkbox-group">
+        <checkbox disabled="true">公开发表，公众可见</checkbox>
+      </checkbox-group>
+    </view>
+    <image class="arrow" src="/images/imgs/FFFFFF_guide_arrow.png"></image>
+    <view class="explain font_FFFFFF_28">
+      <label>公开不仅可以让更多人看到！</label>
+      <label>还有有机会在上千家餐厅电视中播放哦~</label>
+    </view>
+    <button class="theme-button font_FFFFFF_28">知道了</button>
+  </view>
+
+</view>
 
 
 
-  <!-- ================================== 上传视频后 ================================== -->
-  <view class="full_width full_height launch_video_page_a display_{{showVedio?'hide':'show'}}">
+
+<!-- ================================== 上传视频后 ================================== -->
+<view wx:if="{{!showVedio}}" class="container theme-container" style='height: calc(100vh - 46px - {{statusBarHeight}}px);'>
+  <!-- <view class="full_width full_height launch_video_page_a display_{{showVedio?'hide':'show'}}"> -->
+  <view class="full_width full_height launch_video_page_a">
     <view class='page_top theme-panel-2 flex_row_center font_666666_26'>
       <label>视频加载完成后，电视开始加载并自动播放</label>
       <label class='link_relief'>
@@ -161,7 +181,23 @@
     </view>
   </view>
 
+  <!-- 引导蒙层 -->
+  <view wx:if="{{showGuidedMaskAfterLaunch}}" class="guided_mask_panel launch_after full_width full_height">
+    <view class="point" style="margin-top: calc(608rpx + 46px + {{statusBarHeight}}px);">
+      <view>
+        <button class='savor-btn theme-button' form-type="submit">助力全网播放</button>
+      </view>
+    </view>
+    <image class="arrow" src="/images/imgs/FFFFFF_guide_arrow.png"></image>
+    <view class="explain font_FFFFFF_28">
+      <label>您可邀请好友帮您助力，</label>
+      <label>助力人数越多，越有可能在上千家餐厅电视中播放~</label>
+    </view>
+    <button class="theme-button font_FFFFFF_28">知道了</button>
+  </view>
+
 </view>
+
 <view class="body-view">
   <loading hidden="{{hiddens}}" bindchange="loadingChange">{{load_fresh_char}}</loading>
 </view>
