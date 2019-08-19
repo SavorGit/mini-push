@@ -2,6 +2,7 @@
 const app = getApp()
 var api_url = app.globalData.api_url;
 var openid;
+var inside = 0;
 Page({
 
   /**
@@ -21,9 +22,13 @@ Page({
     var that = this;
     var forscreen_id = options.forscreen_id;
     var box_mac      = options.box_mac;
+    if (typeof (options.inside) != 'undefined') {
+      inside = options.inside;
+    }
     that.setData({
       forscreen_id:forscreen_id,
-      box_mac:box_mac
+      box_mac:box_mac,
+      inside: inside
     })
     if (app.globalData.openid && app.globalData.openid != '') {
       that.setData({

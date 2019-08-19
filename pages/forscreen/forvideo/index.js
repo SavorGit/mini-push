@@ -1138,7 +1138,7 @@ Page({
           if (res.data.code == 10000) {
             var rec_id = res.data.result.forscreen_id;
             wx.navigateTo({
-              url: '/pages/mine/assist/index?forscreen_id=' + rec_id +"&box_mac="+box_mac,
+              url: '/pages/mine/assist/index?forscreen_id=' + rec_id + "&box_mac=" + box_mac + "&inside=1",
             })
             
           } else {
