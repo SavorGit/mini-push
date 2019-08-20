@@ -52,7 +52,7 @@
   </view>
 
   <!-- 助力人员面板 -->
-  <view class="assist-people-panel full_width theme-panel" wx:if="{{assist_frieds_nums>0}}">
+  <view wx:if="{{assist_frieds_nums>0}}" class="assist-people-panel full_width theme-panel">
     <view class="title-bar">
       <view class="title font_333333_24">已有{{assist_frieds_nums}}名好友帮您助力</view>
       <navigator class="more font_999999_24" url="/pages/mine/assist/assistlist?forscreen_id={{forscreen_id}}">更多...</navigator>
@@ -61,9 +61,9 @@
       <view class="people" wx:for="{{assist_frieds}}" wx:key="{{key}}" wx:index="{{index}}" wx:for-item="bean">
         <image class="head-img" src="{{bean.avatarUrl}}"></image>
       </view>
-
     </view>
   </view>
+  <view wx:else class="assist-people-panel full_width"></view>
 
   <!-- 推荐面板 -->
   <!-- <view wx:if="{{hot_play.length > 0}}" class="recommend-panel full_width"> -->
@@ -86,7 +86,7 @@
       </block>
     </view>
   </view>
-  <view wx:else class="recommend-panel full_width" style="height: calc(100% - {{inside==0 ? 645 : 700}}rpx);"></view>
+  <view wx:else class="recommend-panel full_width" style="height: calc(100% - {{inside==0 ? 847 : 898}}rpx);"></view>
 
   <!-- 广告面板 -->
   <view class="advert-panel full_width theme-panel-dark">
