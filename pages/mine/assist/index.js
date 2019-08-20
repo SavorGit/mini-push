@@ -23,7 +23,10 @@ Page({
     var forscreen_id = options.forscreen_id;
     var box_mac      = options.box_mac;
     if (typeof (options.inside) != 'undefined') {
+      
       inside = options.inside;
+    }else {
+      inside = 0
     }
     console.log(inside);
     that.setData({
