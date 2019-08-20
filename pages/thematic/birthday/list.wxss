@@ -105,7 +105,7 @@
 .constellation_list .sketch_list .constellation.cur .title {
   margin-top: 20rpx;
   font-size: 30rpx;
-  color: #fff;
+  color: #333;
 }
 
 .constellation_list .sketch_list .constellation.cur .summary {
