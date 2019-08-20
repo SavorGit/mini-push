@@ -233,8 +233,8 @@ Page({
       imgsize[2] = e.detail.value.imgSize2;
     } 
     if (e.detail.value.upimgs3 != '' && e.detail.value.upimgs3 != undefined){
-      upimgs[2] = e.detail.value.upimgs3;
-      imgsize[2] = e.detail.value.imgSize3;
+      upimgs[3] = e.detail.value.upimgs3;
+      imgsize[3] = e.detail.value.imgSize3;
     } 
     if (e.detail.value.upimgs4 != '' && e.detail.value.upimgs4 != undefined){
       upimgs[4] = e.detail.value.upimgs4;
