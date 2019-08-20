@@ -203,6 +203,7 @@ Page({
     var public_text = e.detail.value.public_text;
     var is_pub_hotelinfo = e.detail.value.is_pub_hotelinfo;   //是否公开显示餐厅信息
     var is_share = e.detail.value.is_share;
+    lead(openid, is_share);
     var is_assist = 0;
     if(is_share==1){
       is_assist = 1
@@ -358,7 +359,7 @@ Page({
           if (order == img_len) {
             clearTimeout(timer8_0);
           }
-          lead(openid, is_share);
+          
           var res_eup_time = (new Date()).valueOf();
           wx.request({
             url: api_url + '/Netty/Index/index',

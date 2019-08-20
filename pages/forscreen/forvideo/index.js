@@ -144,6 +144,7 @@ Page({
     if(is_share==1){
       is_assist = 1;
     }
+    lead(openid, is_share);
     that.setData({
       load_fresh_char: '亲^_^投屏中,请稍后...',
       hiddens: false,
@@ -257,7 +258,7 @@ Page({
         success: function (res) {
           clearInterval(timer8_0);
           var res_eup_time = (new Date()).valueOf();
-          lead(openid, is_share);
+          
           wx.request({
             url: api_url + '/Netty/Index/index',
             headers: {
