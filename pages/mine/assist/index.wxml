@@ -66,7 +66,7 @@
   <!-- <view wx:else class="assist-people-panel full_width"></view> -->
 
   <!-- 推荐面板 -->
-  <view wx:if="{{0 > 0}}" class="recommend-panel full_width">
+  <view wx:if="{{hot_play.length > 0}}" class="recommend-panel full_width">
     <view class="title-bar">
       <view class="title font_333333_24">热播内容</view>
       <navigator class="more" open-type="switchTab" url="/pages/find/selected_list">更多...</navigator>
@@ -85,14 +85,14 @@
       </block>
     </view>
   </view>
-  <view wx:elif="{{assist_frieds_nums < 1}}" class="recommend-panel full_width" style="height: calc(100% - {{inside==0 ? 650 : 705}}rpx);"></view>
-  <view wx:else class="recommend-panel full_width" style="height: calc(100% - {{inside==0 ? 844 : 899}}rpx);"></view>
+  <view wx:elif="{{assist_frieds_nums > 0}}" class="recommend-panel full_width" style="height: calc(100% - {{inside==0 ? 844 : 899}}rpx);"></view>
+  <view wx:else class="recommend-panel full_width" style="height: calc(100% - {{inside==0 ? 650 : 705}}rpx);"></view>
 
   <!-- 广告面板 -->
   <view class="advert-panel full_width theme-panel-dark">
     <label class="fa fa-phone fa-lg"></label>
-    <label class="msg">商务合作：010-64175797</label>
-    <button class="theme-button" bindtap="phonecallevent" data-tel="010-64175797">拨打</button>
+    <label class="msg">商务合作：010-64185797</label>
+    <button class="theme-button" bindtap="phonecallevent" data-tel="010-64185797">拨打</button>
   </view>
 </scroll-view>
 <!-- 微信授权登录 -->
