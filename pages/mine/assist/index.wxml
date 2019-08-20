@@ -17,7 +17,7 @@
     </view>
     <block wx:if="{{assist_info.media_type==1}}">
       <video class="img" src="{{assist_info.oss_addr}}"></video>
-      
+
     </block>
     <block wx:if="{{assist_info.media_type==2}}">
       <image class="img" src="{{assist_info.img_url}}" bindtap="previewImage" data-src="{{pubdetail}}" data-pkey="0"></image>
@@ -38,12 +38,12 @@
     </view>
     <block wx:if="{{assist_info.media_type==1}}">
       <video class="img" src="{{assist_info.oss_addr}}"></video>
-      
+
     </block>
     <block wx:if="{{assist_info.media_type==2}}">
       <image class="img" src="{{assist_info.img_url}}" bindtap="previewImage" data-src="{{pubdetail}}" data-pkey="0"></image>
     </block>
-    <button open-type='share'  data-img_url="{{assist_info.img_url}}" data-forscreen_id="{{forscreen_id}}"  data-box_mac="{{box_mac}}" class="theme-button">邀请好友助力</button>
+    <button open-type='share' data-img_url="{{assist_info.img_url}}" data-forscreen_id="{{forscreen_id}}" data-box_mac="{{box_mac}}" class="theme-button">邀请好友助力</button>
     <view class="font_333333_24">
       <label>您当前有</label>
       <label class="theme-font5">{{assist_info.rate}}%</label>
@@ -61,33 +61,32 @@
       <view class="people" wx:for="{{assist_frieds}}" wx:key="{{key}}" wx:index="{{index}}" wx:for-item="bean">
         <image class="head-img" src="{{bean.avatarUrl}}"></image>
       </view>
-      
+
     </view>
   </view>
 
   <!-- 推荐面板 -->
-  <view class="recommend-panel full_width" wx:if="{{hot_play.length>0}}">
+  <!-- <view wx:if="{{hot_play.length > 0}}" class="recommend-panel full_width"> -->
+  <view wx:if="{{0 > 0}}" class="recommend-panel full_width">
     <view class="title-bar">
       <view class="title font_333333_24">热播内容</view>
       <navigator class="more" open-type="switchTab" url="/pages/find/selected_list">更多...</navigator>
     </view>
     <view class="list">
       <block wx:for="{{hot_play}}" wx:key="key" wx:for-index="index" wx:for-item="bean">
-      <view class="row {{index<2 ? 'like':''}}">
-        
-        <image class="img" src="{{bean.pubdetail[0].res_url}}"></image>
-        <view class="info">
-          <view class="rank theme-font5">TOP {{index+1}}</view>
-          <view class="people theme-font1">{{bean.nickName}}</view>
-          <view class="msg">累计播放 {{bean.play_nums}} 次</view>
+        <view class="row {{index<2 ? 'like':''}}">
+          <image class="img" src="{{bean.pubdetail[0].res_url}}"></image>
+          <view class="info">
+            <view class="rank theme-font5">TOP {{index+1}}</view>
+            <view class="people theme-font1">{{bean.nickName}}</view>
+            <view class="msg">累计播放 {{bean.play_nums}} 次</view>
+          </view>
+          <!-- <button bindtap="boxShow" class="btn theme-button-dark">电视播放</button> -->
         </view>
-        <!-- <button bindtap="boxShow" class="btn theme-button-dark">电视播放</button> -->
-      </view>
       </block>
-      
     </view>
-    
   </view>
+  <view wx:else class="recommend-panel full_width" style="height: calc(100% - {{inside==0 ? 645 : 700}}rpx);"></view>
 
   <!-- 广告面板 -->
   <view class="advert-panel full_width theme-panel-dark">
