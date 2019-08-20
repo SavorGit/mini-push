@@ -63,10 +63,9 @@
       </view>
     </view>
   </view>
-  <view wx:else class="assist-people-panel full_width"></view>
+  <!-- <view wx:else class="assist-people-panel full_width"></view> -->
 
   <!-- 推荐面板 -->
-  <!-- <view wx:if="{{hot_play.length > 0}}" class="recommend-panel full_width"> -->
   <view wx:if="{{0 > 0}}" class="recommend-panel full_width">
     <view class="title-bar">
       <view class="title font_333333_24">热播内容</view>
@@ -86,7 +85,8 @@
       </block>
     </view>
   </view>
-  <view wx:else class="recommend-panel full_width" style="height: calc(100% - {{inside==0 ? 847 : 898}}rpx);"></view>
+  <view wx:elif="{{assist_frieds_nums < 1}}" class="recommend-panel full_width" style="height: calc(100% - {{inside==0 ? 650 : 705}}rpx);"></view>
+  <view wx:else class="recommend-panel full_width" style="height: calc(100% - {{inside==0 ? 844 : 899}}rpx);"></view>
 
   <!-- 广告面板 -->
   <view class="advert-panel full_width theme-panel-dark">
