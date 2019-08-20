@@ -41,6 +41,8 @@ Page({
     avatarUrl:'',       //用户头像 
     nickName:'',        //用户昵称
     is_assist:0,       //是否助力
+    showGuidedMaskBeforLaunch:false,
+    showGuidedMaskAfterLaunch:false,
   },
   /**
    * 生命周期函数--监听页面加载
@@ -72,7 +74,7 @@ Page({
       sourceType: ['album', 'camera'], // 可以指定来源是相册还是相机，默认二者都有
       success: function (res) {
         uploadInfos(res, box_mac, openid);
-        
+        lead(openid);
         that.setData({
           showTpBt: true,
           showThird: false,
@@ -107,6 +109,30 @@ Page({
         })
       }
     } 
+    //引导蒙层
+    function lead(openid){
+      
+      var user_info = wx.getStorageSync('savor_user_info');
+      var guide_prompt = user_info.guide_prompt;
+      if(guide_prompt.length==0){
+        that.setData({
+          showGuidedMaskBeforLaunch:true,
+        })
+      }else {
+        var is_lead = 1;
+        for(var i=0;i<guide_prompt.length;i++){
+          if(guide_prompt[i]==1){
+            is_lead=0;
+            break;
+          }
+        }
+        if(is_lead==1){
+          that.setData({
+            showGuidedMaskBeforLaunch:true
+          })
+        }
+      }
+    }
   },
 
   chooseImage(e) {//重新选择照片开始
@@ -260,8 +286,10 @@ Page({
                 
                 app.recordFormId(openid,formId);
                 
-              }else {
-
+              } else if (res.cancel) {
+                wx.navigateBack({
+                  delta:1
+                })
               }
             }
           })
@@ -330,6 +358,7 @@ Page({
           if (order == img_len) {
             clearTimeout(timer8_0);
           }
+          lead(openid, is_share);
           var res_eup_time = (new Date()).valueOf();
           wx.request({
             url: api_url + '/Netty/Index/index',
@@ -464,6 +493,36 @@ Page({
         forscreen_id: forscreen_id,
       });
     }
+    //引导蒙层
+    function lead(openid, is_share) {
+      
+      if(is_share==1){
+        var user_info = wx.getStorageSync('savor_user_info');
+        var guide_prompt = user_info.guide_prompt;
+        if (guide_prompt.length == 0) {
+          that.setData({
+            showGuidedMaskAfterLaunch: true,
+          })
+        } else {
+          var is_lead = 1;
+          for (var i = 0; i < guide_prompt.length; i++) {
+            if (guide_prompt[i] == 2) {
+              is_lead = 0;
+              break;
+            }
+          }
+          if (is_lead == 1) {
+            that.setData({
+              showGuidedMaskAfterLaunch: true
+            })
+          }
+        }
+      }
+      
+    }
+
+
+
   }, //多张图片投屏结束(不分享到发现)
 
   up_single_pic(e) {//指定单张图片投屏开始
@@ -760,8 +819,8 @@ Page({
                     });
                   }
                 }
-              }
-            }
+              } 
+            },
           })
         }else {
           if (res_type == 1) {
@@ -994,6 +1053,39 @@ Page({
     var tel = e.target.dataset.tel;
     wx.makePhoneCall({
       phoneNumber: tel
+    })
+  },
+  closeLead:function (e){
+    console.log(e);
+    var that = this;
+    var type = e.currentTarget.dataset.type;
+    if(type==1){
+      that.setData({
+        showGuidedMaskBeforLaunch:false,
+      })
+    }else if(type==2){
+      that.setData({
+        showGuidedMaskAfterLaunch:false,
+      })
+    }
+    wx.request({
+      url: api_url + '/Smallapp3/content/guidePrompt',
+      header: {
+        'Content-Type': 'application/json'
+      },
+      data: {
+        openid: openid,
+        type: type,
+      },
+      success: function (res) {
+        if (res.data.code == 10000) {
+          var user_info = wx.getStorageSync('savor_user_info');
+
+          user_info.guide_prompt.push(type);
+          wx.setStorageSync('savor_user_info', user_info);
+
+        }
+      }
     })
   },
 })

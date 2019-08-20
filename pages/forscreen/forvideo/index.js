@@ -47,6 +47,8 @@ Page({
     is_view_control:false,
     is_view_control: true,
     is_open_control: false,
+    showGuidedMaskBeforLaunch: false,
+    showGuidedMaskAfterLaunch: false,
   },
 
   /**
@@ -76,6 +78,7 @@ Page({
       camera: 'back',
       success: function (res) {
         //console.log(res);
+
         that.setData({
           showVedio: true,
           is_btn_disabel:false,
@@ -83,7 +86,7 @@ Page({
           //upload_vedio_cover:res.thumbTempFilePath,
           duration: res.duration
         });
-        
+        lead(openid);
         //res_sup_time = (new Date()).valueOf();
         //uploadVedio(res, box_mac, openid, res_sup_time);
       },fail:function(res){
@@ -93,7 +96,33 @@ Page({
       }
     });
     
-    
+    //引导蒙层
+    function lead(openid) {
+      
+
+
+      var user_info = wx.getStorageSync('savor_user_info');
+      var guide_prompt = user_info.guide_prompt;
+      if (guide_prompt.length == 0) {
+        that.setData({
+          showGuidedMaskBeforLaunch: true,
+        })
+      } else {
+        var is_lead = 1;
+        for (var i = 0; i < guide_prompt.length; i++) {
+          if (guide_prompt[i] == 3) {
+            is_lead = 0;
+            
+            break;
+          }
+        }
+        if(is_lead==1){
+          that.setData({
+            showGuidedMaskBeforLaunch: true,
+          })
+        }
+      }
+    }
   },
 
   forscreen_video: function (res) {
@@ -153,9 +182,12 @@ Page({
                 }
                 uploadVedio(video, box_mac, openid, res_sup_time, is_pub_hotelinfo, is_share, duration, avatarUrl, nickName, public_text, timer8_0);
                 app.recordFormId(openid,formId);
-              }else {
+              } else if (res.cancel) {
                 that.setData({
-                  hiddens:true,
+                  hiddens: true,
+                })
+                wx.navigateBack({
+                  delta: 1
                 })
               }
             }
@@ -225,6 +257,7 @@ Page({
         success: function (res) {
           clearInterval(timer8_0);
           var res_eup_time = (new Date()).valueOf();
+          lead(openid, is_share);
           wx.request({
             url: api_url + '/Netty/Index/index',
             headers: {
@@ -324,6 +357,34 @@ Page({
         showVedio: true,
         upload_vedio_temp: filename,
       });
+    }
+    //引导蒙层
+    function lead(openid) {
+      
+      if(is_share==1){
+        var user_info = wx.getStorageSync('savor_user_info');
+        var guide_prompt = user_info.guide_prompt;
+        if (guide_prompt.length == 0) {
+          that.setData({
+            showGuidedMaskAfterLaunch: true,
+          })
+        } else {
+          var is_lead = 1;
+          for (var i = 0; i < guide_prompt.length; i++) {
+            if (guide_prompt[i] == 4) {
+              is_lead = 0;
+
+              break;
+            }
+          }
+          if (is_lead == 1) {
+            that.setData({
+              showGuidedMaskAfterLaunch: true,
+            })
+          }
+        }
+      }
+      
     }
   },
 
@@ -1163,6 +1224,38 @@ Page({
     var tel = e.target.dataset.tel;
     wx.makePhoneCall({
       phoneNumber: tel
+    })
+  },
+  closeLead: function (e) {
+    var that = this;
+    var type = e.currentTarget.dataset.type;
+    var openid = e.currentTarget.dataset.openid;
+    if (type == 3) {
+      that.setData({
+        showGuidedMaskBeforLaunch: false,
+      })
+    } else if (type == 4) {
+      that.setData({
+        showGuidedMaskAfterLaunch: false,
+      })
+    }
+    wx.request({
+      url: api_url +'/Smallapp3/content/guidePrompt',
+      header: {
+        'Content-Type': 'application/json'
+      },
+      data:{
+        openid:openid,
+        type:type,
+      },
+      success:function(res){
+        if(res.data.code==10000){
+          var user_info = wx.getStorageSync('savor_user_info');
+          
+          user_info.guide_prompt.push(type);
+          wx.setStorageSync('savor_user_info', user_info);
+        }
+      }
     })
   },
   /**

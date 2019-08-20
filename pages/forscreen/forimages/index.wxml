@@ -103,7 +103,7 @@
       <label>公开不仅可以让更多人看到！</label>
       <label>还有有机会在上千家餐厅电视中播放哦~</label>
     </view>
-    <button class="theme-button font_FFFFFF_28">知道了</button>
+    <button class="theme-button font_FFFFFF_28" bindtap="closeLead" data-type="1">知道了</button>
   </view>
 </view>
 
@@ -239,7 +239,7 @@
       <label>您可邀请好友帮您助力，</label>
       <label>助力人数越多，越有可能在上千家餐厅电视中播放~</label>
     </view>
-    <button class="theme-button font_FFFFFF_28">知道了</button>
+    <button class="theme-button font_FFFFFF_28" bindtap="closeLead" data-type="2">知道了</button>
   </view>
 
 </view>

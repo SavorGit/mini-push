@@ -25,6 +25,7 @@ Page({
     if (typeof (options.inside) != 'undefined') {
       inside = options.inside;
     }
+    console.log(inside);
     that.setData({
       forscreen_id:forscreen_id,
       box_mac:box_mac,
