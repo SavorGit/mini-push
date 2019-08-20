@@ -100,8 +100,8 @@
     </view>
     <image class="arrow" src="/images/imgs/FFFFFF_guide_arrow.png"></image>
     <view class="explain font_FFFFFF_28">
-      <label>公开不仅可以让更多人看到！</label>
-      <label>还有有机会在上千家餐厅电视中播放哦~</label>
+      <label>公开不仅可以让更多人看到，</label>
+      <label>还有机会在上千家餐厅电视中播放哦~</label>
     </view>
     <button class="theme-button font_FFFFFF_28" bindtap="closeLead" data-type="1">知道了</button>
   </view>
