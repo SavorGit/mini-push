@@ -202,6 +202,11 @@ Page({
     var box_mac = e.target.dataset.box_mac;
     var forscreen_url  = e.target.dataset.forscreen_url;
     var resource_type = e.target.dataset.media_type;
+    if (resource_type==1){
+      resource_type = 2
+    }else if(resource_type==2){
+      resource_type = 1;
+    }
     var timestamp = (new Date()).valueOf();
     if(user_info.is_wx_auth!=3){
       that.setData({
@@ -243,7 +248,7 @@ Page({
               }
             })
             wx.request({
-              url: that.globalData.api_url + '/Smallapp/index/recordForScreenPics',
+              url: api_url + '/Smallapp/index/recordForScreenPics',
               header: {
                 'content-type': 'application/json'
               },
@@ -254,7 +259,7 @@ Page({
                 action: 50,
                 mobile_brand: mobile_brand,
                 mobile_model: mobile_model,
-                imgs: '[' + forscreen_url+']',
+                imgs: '["' + forscreen_url+'"]',
                 resource_type: resource_type
               }
               

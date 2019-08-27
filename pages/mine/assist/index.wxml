@@ -22,7 +22,7 @@
     <block wx:if="{{assist_info.media_type==2}}">
       <image class="img" src="{{assist_info.img_url}}" bindtap="previewImage" data-src="{{pubdetail}}" data-pkey="0"></image>
     </block>
-    <button class="theme-button" wx:if="{{is_assist==false}}" bindtap="assist" data-forscreen_id="{{forscreen_id}}" data-help_id="{{assist_info.help_id}}" data-box_mac="{{box_mac}}" data-forscreen_url="{{forscreen_url}}" data-media_type="{{assist_info.media_type}}">帮TA上电视</button>
+    <button class="theme-button" wx:if="{{is_assist==false}}" bindtap="assist" data-forscreen_id="{{forscreen_id}}" data-help_id="{{assist_info.help_id}}" data-box_mac="{{box_mac}}" data-forscreen_url="{{assist_info.forscreen_url}}" data-media_type="{{assist_info.media_type}}">帮TA上电视</button>
     <button class="theme-button" wx:if="{{is_assist==true}}" disabled="true">已助力</button>
   </view>
 
