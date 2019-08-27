@@ -114,31 +114,15 @@
   padding: 10rpx 50rpx;
 }
 
-.remoteControlWindow-container .remoteControlWindow-top .opt {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-}
-
 .remoteControlWindow-container .remoteControlWindow-top .opt button {
   width: 100rpx;
   height: 100rpx;
   line-height: 100rpx;
   text-align: center;
   font-size: 34rpx;
-  border: unset;
   margin: auto;
-  padding: unset;
-  background: unset;
   border-radius: 60rpx;
-}
-
-.remoteControlWindow-container .remoteControlWindow-top .opt button::before,
-.remoteControlWindow-container .remoteControlWindow-top .opt button::after {
-  border: unset;
-  margin: auto;
-  padding: unset;
-  background: unset;
+  background-color: unset;
 }
 
 .remoteControlWindow-container .remoteControlWindow-top .opt > button icon {
@@ -165,8 +149,7 @@
 .remoteControlWindow-container .remoteControlWindow-middle button {
   width: 400rpx;
   height: 400rpx;
-  border: unset;
-  padding: unset;
+  margin: auto;
   background: unset;
   border-radius: 200rpx;
   z-index: 1;
@@ -184,10 +167,6 @@
 .remoteControlWindow-container .remoteControlWindow-middle .btn-tip {
   margin-top: -10rpx;
   height: 100rpx;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
   font-size: 24rpx;
   z-index: 10;
 }
@@ -196,13 +175,6 @@
   width: 50rpx;
   height: 50rpx;
   z-index: 10;
-}
-
-.remoteControlWindow-container .remoteControlWindow-bottom {
-  display: flex;
-  flex-direction: row;
-  align-content: center;
-  justify-content: center;
 }
 
 .remoteControlWindow-container .remoteControlWindow-bottom view {
@@ -243,24 +215,14 @@
 
 .default-navigation-bar > .navigation-bar {
   height: 46px;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
 }
 
 .default-navigation-bar > .navigation-bar > .btn {
   width: 60px;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
 }
 
 .default-navigation-bar > .navigation-bar > .title {
   width: calc(100% - 120px);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-between;
 }
 
 .default-navigation-bar > .navigation-bar > .title > .text {

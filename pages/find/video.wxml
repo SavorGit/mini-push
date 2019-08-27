@@ -15,7 +15,7 @@
       </view>
       <view class='con_main'>
         <view wx:if="{{videoinfo.public_text!=''}}" class='speak_with_interest'>
-          <label>{{videoinfo.public_text}}</label>
+          <label class="one-line-overflow">{{videoinfo.public_text}}</label>
         </view>
         <view wx:if="{{is_box_show==false}}" class='media'>
           <video src="{{videoinfo.pubdetail[0].res_url}}"></video>

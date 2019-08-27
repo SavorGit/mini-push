@@ -93,7 +93,7 @@
             <view class='hotel_info font_999999_24'>
               <label class='time'>{{bean.create_time}}</label>
               <label class='dot' wx:if="{{bean.hotel_name!=''}}">.</label>
-              <label class='hotel_name' wx:if="{{picinfo.hotel_name!=''}}">{{bean.hotel_name}}</label>
+              <label class='hotel_name one-line-overflow' wx:if="{{picinfo.hotel_name!=''}}">{{bean.hotel_name}}</label>
             </view>
             <view class='operation'>
               <view wx:if="{{bean.is_collect==1}}">
@@ -223,7 +223,7 @@
             <view class='hotel_info font_999999_24'>
               <label class='time'>{{bean.create_time}}</label>
               <label class='dot' wx:if="{{bean.hotel_name!=''}}">.</label>
-              <label class='hotel_name' wx:if="{{picinfo.hotel_name!=''}}">{{bean.hotel_name}}</label>
+              <label class='hotel_name one-line-overflow' wx:if="{{picinfo.hotel_name!=''}}">{{bean.hotel_name}}</label>
             </view>
             <view class='operation'>
               <view wx:if="{{bean.is_collect==1}}">

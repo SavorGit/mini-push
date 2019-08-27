@@ -30,7 +30,6 @@
   word-break: break-all;
   line-height: 50rpx;
   display: block;
-  overflow: hidden;
   font-size: 30rpx;
 }
 

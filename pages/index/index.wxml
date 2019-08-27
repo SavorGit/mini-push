@@ -2,7 +2,7 @@
 <import src="/pages/template/commons" />
 <template is="navigationBarForTopLevel" data='{{statusBarHeight: statusBarHeight,titleText:"热点投屏"}}' />
 
-<scroll-view class="container theme-container" style='height: calc(100vh - 46px - {{statusBarHeight}}px);' scroll-y="true" scroll-with-animation="true">
+<scroll-view class="container flex-column-center-flex_start theme-container" style='height: calc(100vh - 46px - {{statusBarHeight}}px);' scroll-y="true" scroll-with-animation="true">
 
   <!-- 轮播图面板 -->
   <swiper wx:if="{{imgUrls.length > 0}}" class="banner-loop-panel full_width" indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{lb_duration}}">
@@ -20,7 +20,7 @@
 
   <!-- 连接信息面板 -->
   <view class="link-box-panel full_width theme-panel">
-    <view wx:if="{{is_link > 0}}" class='full_width full_height tip'>
+    <view wx:if="{{is_link > 0}}" class='full_width full_height tip flex-column-center-start'>
       <button bindtap="breakLink" data-boxmac="{{box_mac}}" data-openid="{{openid}}">
         <image class="full_width full_height" src="/images/icon2/1CBEB6_link.png"></image>
       </button>
@@ -47,14 +47,14 @@
   </view>
 
   <!-- 功能模块面板 -->
-  <view class='functional-module-panel full_width theme-panel'>
-    <view class="row full_width">
+  <view class='functional-module-panel flex-column-center-center full_width theme-panel'>
+    <view class="row flex-row-center-space_around full_width">
       <form bindsubmit="chooseImage" report-submit="true">
         <input class="display_hide" name="boxmac" value="{{box_mac}}"></input>
         <input class="display_hide" name="openid" value="{{openid}}"></input>
         <input class="display_hide" name="is_open_simple" value="{{is_open_simple}}"></input>
         <button class="theme-font2" form-type="submit">
-          <view class="icon pic">
+          <view class="icon flex-column-center-center pic">
             <image src='/images/icon2/FFFFFF_picture.png'></image>
           </view>
           <label>照片上电视</label>
@@ -65,7 +65,7 @@
         <input class="display_hide" name="openid" value="{{openid}}"></input>
         <input class="display_hide" name="is_open_simple" value="{{is_open_simple}}"></input>
         <button class="theme-font2" form-type="submit">
-          <view class="icon video">
+          <view class="icon flex-column-center-center video">
             <image src='/images/icon2/FFFFFF_video.png'></image>
           </view>
           <label>视频上电视</label>
@@ -76,28 +76,28 @@
         <input class="display_hide" name="openid" value="{{openid}}"></input>
         <input class="display_hide" name="is_open_simple" value="{{is_open_simple}}"></input>
         <button class="theme-font2" form-type="submit">
-          <view class="icon file">
+          <view class="icon flex-column-center-center file">
             <image src='/images/icon2/FFFFFF_files.png'></image>
           </view>
           <label>文件上电视</label>
         </button>
       </form>
     </view>
-    <view class="row full_width">
+    <view class="row flex-row-center-space_around full_width">
       <view bindtap='showHappy' data-boxmac="{{box_mac}}" data-openid="{{openid}}">
-        <view class="icon birthday">
+        <view class="icon flex-column-center-center birthday">
           <image src='/images/icon2/FFFFFF_birthday.png'></image>
         </view>
         <label>生日歌点播</label>
       </view>
       <view bindtap='hdgames' data-linkcontent='/pages/game/climbtree/index' data-boxmac="{{box_mac}}" data-openid="{{openid}}">
-        <view class="icon game">
+        <view class="icon flex-column-center-center game">
           <image src='/images/icon2/FFFFFF_game.png'></image>
         </view>
         <label>互动小游戏</label>
       </view>
       <view bindtap='forscreenHistory' data-boxmac="{{box_mac}}" data-openid="{{openid}}">
-        <view class="icon history">
+        <view class="icon flex-column-center-center history">
           <image src='/images/icon2/FFFFFF_history.png'></image>
         </view>
         <label>投屏历史</label>
@@ -112,7 +112,7 @@
     </view>
     <view class="list">
       <block wx:for="{{hot_play}}" wx:key="item" wx:for-index="index" wx:for-item="bean">
-        <view class="row {{index<4?'line':''}}">
+        <view class="row flex-row-flex_start-start {{index<4?'line':''}}">
           <image class="img" src="{{bean.pubdetail[0].res_url}}"></image>
           <view class="info">
             <view class="rank theme-font5">TOP {{index+1}}</view>
@@ -122,16 +122,9 @@
           <button bindtap="boxShow" class="btn theme-button-dark" data-res_type="{{bean.res_type}}" data-res_nums="{{bean.res_nums}}" data-pubdetail="{{bean.pubdetail}}" data-boxmac="{{box_mac}}" data-openid="{{openid}}" data-forscreen_id="{{bean.forscreen_id}}">电视播放</button>
         </view>
       </block>
-      
+
     </view>
   </view>
-
-  <!-- 广告面板 
-  <view wx:if="{{box_mac !=''}}" class="advert-panel full_width theme-panel-dark">
-    <label class="fa fa-phone fa-lg"></label>
-    <label class="msg">商务合作：010-64175797</label>
-    <button class="theme-button">拨打</button>
-  </view>-->
 </scroll-view>
 
 <!-- 微信授权登录 -->
@@ -152,10 +145,10 @@
 
 <!-- 选择文件弹窗 -->
 <bottomModal show="{{showMe}}" width="98%" height='340rpx' background-color='#FFFFFF' border-radius="20rpx" title-text='' title-color="" confirm-text='' confirm-color="#f6f3ee" cancel-text='' cancel-color='' bindcancel="modalCancel">
-  <view style='padding: 10rpx; height: 60rpx; line-height: 60rpx; display: flex; flex-direction: column; align-items: center; justify-content: space-between; border-bottom: 2rpx solid rgba(246, 243, 238, 0.1);font-size: 30rpx; color: #666666;'>
+  <view class="flex-column-center-space_between" style='padding: 10rpx; height: 60rpx; line-height: 60rpx; border-bottom: 2rpx solid rgba(246, 243, 238, 0.1);font-size: 30rpx; color: #666666;'>
     <label>选择要投屏的文件</label>
   </view>
-  <view style="width: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; font-size: 32rpx; color: #0076FF;">
+  <view class="flex-column-center-center" style="width: 100%; font-size: 32rpx; color: #0076FF;">
     <view style="width: 100%; border-top: 1rpx solid rgba(7,17,27,0.1);">
       <button bindtap="wxFriendfiles" data-boxmac="{{box_mac}}" data-openid="{{openid}}" data-is_open_simple="{{is_open_simple}}" class="button_none" style="margin: 0;padding: 0; border: 0;border-radius: 0;">微信好友文件</button>
     </view>
@@ -176,10 +169,10 @@
         <label class="fa fa-close fa-lg" style="width: 32rpx; height: 32rpx; color: #666666;"></label>
       </view>
     </view>
-    <view style="width: 100%;height: calc(100% - 160rpx);display: flex; flex-direction: column; align-items: center; justify-content: start;color: #666666;">
+    <view class="flex-column-center-start" style="width: 100%;height: calc(100% - 160rpx);color: #666666;">
       <image style="width: 480rpx;height: 270rpx;" src="{{goods_info.img_url}}"></image>
-      <view style="width: 480rpx;height: calc(100% - 320rpx);line-height: 3;text-align: center;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;">{{goods_info.name}}</view>
-      <view style="width: 100%;height: 80rpx;border-top: 2rpx solid #ededed;display: flex; flex-direction: row; align-items: center; justify-content: center;">
+      <view class="one-line-overflow" style="width: 480rpx;height: calc(100% - 320rpx);line-height: 3;text-align: center;">{{goods_info.name}}</view>
+      <view class="flex-row-center-center" style="width: 100%;height: 80rpx;border-top: 2rpx solid #ededed;">
         <label style="width: 70rpx;">数量</label>
         <view style="width: 32rpx; height: 32rpx;" bindtap="changeActNums" data-type="1">
           <label class="fa fa-plus-square-o fa-lg" style="width: 32rpx; height: 32rpx; color: #666666;"></label>
@@ -190,19 +183,17 @@
         </view>
       </view>
     </view>
-    <view style="width: 100%;height: 80rpx;border-top: 2rpx solid #ededed;display: flex; flex-direction: row; align-items: center; justify-content: center;font-size: 28rpx;">
+    <view class="flex-row-center-center" style="width: 100%;height: 80rpx;border-top: 2rpx solid #ededed;font-size: 28rpx;">
       <view style="width: 100%;height: 80rpx;line-height: 80rpx; color: #448ACA; text-align: center;" bindtap="shopBuyGoods" data-goods_id="{{goods_id}}" data-goods_nums="{{goods_nums}}" data-goods_box_mac="{{goods_box_mac}}" data-buy_type="1">店内购买</view>
       <!-- <view wx:if='{{showButton4JD}}' style="width: 100%;height: 80rpx;line-height: 80rpx; color: #666666; text-align: center;border-left: 2rpx solid #ededed;" bindtap="jdBuy" data-h5_url="{{jd_url}}">京东购买</view> -->
-
       <navigator bindtap="shopBuyGoods" data-goods_id="{{goods_id}}" data-goods_nums="{{goods_nums}}" data-goods_box_mac="{{goods_box_mac}}" data-buy_type="2" wx:if='{{showButton4JD}}' style="width: 100%;height: 80rpx;line-height: 80rpx; color: #666666; text-align: center;border-left: 2rpx solid #ededed;"
         target="miniProgram" app-id="{{jd_appid}}" path="{{jd_url}}">京东购买</navigator>
-
     </view>
   </view>
   <view wx:if='{{showButton4Favorites}}' style="width: 600rpx;height: 80rpx;margin-top: 25rpx;font-size: 24rpx;">
     <button style="width: 100%;height: 100%; line-height: 80rpx; color: #FFFFFF; background-color: {{showFavoritesPanel ? '#999999' : '#eb6877'}}; border-radius: 10rpx;font-size: 24rpx;" bindtap="collectGoods" data-goods_id="{{goods_id}}" data-goods_box_mac="{{goods_box_mac}}">收藏</button>
   </view>
-  <view wx:if='{{showFavoritesPanel}}' style="width: 600rpx;height: 70rpx;margin-top: 10rpx;display: flex; flex-direction: row; align-items: center; justify-content: space-between;font-size: 24rpx;">
+  <view wx:if='{{showFavoritesPanel}}' class="flex-row-center-space_between" style="width: 600rpx;height: 70rpx;margin-top: 10rpx;font-size: 24rpx;">
     <input type="number" bindinput="mobileOnInput" placeholder="请输入手机号" style="width: 385rpx;height: 70rpx; line-height: 70rpx; border-radius: 5rpx; color: #333333; background-color: #FFFFFF;padding-left: 10rpx;" placeholder-style="padding-left: 10rpx; color: #999999;"></input>
     <button bindtap="sendGoodsLink" data-goods_id="{{goods_id}}" data-mobile="{{mobile}}" style="width: 200rpx;height: 70rpx;line-height: 70rpx;color: #FFFFFF; background-color: #eb6877;font-size: 24rpx;margin: auto;padding: 0; border: 0;">发送商品链接</button>
   </view>

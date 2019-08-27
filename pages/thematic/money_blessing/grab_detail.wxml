@@ -23,7 +23,7 @@
             <view class='left'>
               <image src='{{bean.avatarUrl}}'></image>
               <view class='info'>
-                <view class='name'>{{bean.nickName}}</view>
+                <view class='name one-line-overflow'>{{bean.nickName}}</view>
                 <view class='date_time'>{{bean.add_time}}</view>
               </view>
             </view>
@@ -37,7 +37,7 @@
             <view class='left'>
               <image src='{{bean.avatarUrl}}'></image>
               <view class='info'>
-                <view class='name'>{{bean.nickName}}</view>
+                <view class='name one-line-overflow'>{{bean.nickName}}</view>
                 <view class='date_time'>{{bean.add_time}}</view>
               </view>
             </view>

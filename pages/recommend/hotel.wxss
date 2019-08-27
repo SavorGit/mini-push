@@ -22,7 +22,6 @@
   margin-right: auto;
   display: block;
   width: 500rpx;
-  overflow: hidden;
 }
 
 .page_banner .layout > navigator {

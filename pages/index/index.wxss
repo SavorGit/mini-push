@@ -13,25 +13,8 @@
 
 .banner-loop-panel button {
   background-color: unset;
-  border: 0;
-  margin: 0;
-  padding: 0;
   border-radius: 0;
 }
-
-.banner-loop-panel .button-hover {
-  background-color: unset;
-}
-
-/* .banner-loop-panel swiper-image {
-  height: 100%;
-  width: 100%;
-} 
-
-.slide-image {
-  height: 100%;
-  width: 100%;
-}*/
 
 /* ==================================== 连接信息面板 ==================================== */
 
@@ -39,27 +22,11 @@
   height: 90rpx;
 }
 
-.link-box-panel > .tip {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: start;
-}
-
-.link-box-panel > .tip > button::before, .link-box-panel > .tip > button::after {
-  margin: unset;
-  padding: unset;
-  border: unset;
-  background: unset;
-}
-
 .link-box-panel > .tip > button {
   width: 60rpx;
   height: 24rpx;
   line-height: 20rpx;
   margin: 20rpx auto auto auto;
-  padding: unset;
-  border: unset;
   background: unset;
   font-size: unset;
 }
@@ -75,25 +42,10 @@
 
 .functional-module-panel {
   height: 320rpx;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-}
-
-.functional-module-panel > .row {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-around;
 }
 
 .functional-module-panel > .row > view, .functional-module-panel > .row > form {
   width: 33.33333333333%;
-  /* display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center; */
   display: block;
   text-align: center;
   padding: 10rpx 0rpx;
@@ -102,14 +54,6 @@
 .functional-module-panel > .row button {
   line-height: unset;
   background: unset;
-  border: unset;
-  padding: unset;
-  margin: auto;
-}
-
-.functional-module-panel > .row button::before,
-.functional-module-panel > .row button::after {
-  border: unset;
 }
 
 .functional-module-panel > .row > view > .icon,
@@ -118,10 +62,6 @@
   height: 74rpx;
   margin: 0 auto;
   border-radius: 10rpx;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
 }
 
 .functional-module-panel > .row > view > .icon > image,
@@ -193,10 +133,6 @@
   height: 160rpx;
   padding: 20rpx 0 10rpx 0;
   margin: 0 25rpx;
-  display: flex;
-  flex-direction: row;
-  align-items: flex-start;
-  justify-content: start;
 }
 
 .recommend-panel > .list > .row.line {
@@ -235,58 +171,12 @@
   font-size: 20rpx;
 }
 
-.recommend-panel > .list > .row > .btn::before,
-.recommend-panel > .list > .row > .btn::after {
-  background: unset;
-  border: unset;
-  margin: unset;
-  padding: unset;
-}
-
 .recommend-panel > .list > .row > .btn {
   width: 100rpx;
   height: 40rpx;
   line-height: 40rpx;
   font-size: 20rpx;
   border-radius: 5rpx;
-  border: unset;
-  margin: unset;
-  padding: unset;
-}
-
-/* ==================================== 广告面板 ==================================== */
-
-.advert-panel {
-  height: 90rpx;
-  margin-top: 10rpx;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-between;
-  font-size: 28rpx;
-}
-
-.advert-panel > label, .advert-panel > button {
-  display: block;
-  margin: auto;
-}
-
-.advert-panel > button {
-  width: 100rpx;
-  height: 50rpx;
-  line-height: 50rpx;
-  border-radius: 5rpx;
-  font-size: 24rpx;
-  padding: unset;
-  border: unset;
-}
-
-.advert-panel > .fa {
-  margin-right: 0;
-}
-
-.advert-panel > .msg {
-  margin-left: 20rpx;
 }
 
 /* 扫描弹窗提示内容 */

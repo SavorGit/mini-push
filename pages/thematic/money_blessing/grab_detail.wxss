@@ -110,7 +110,6 @@
   line-height: 50rpx;
   font-size: 30rpx;
   font-weight: 900;
-  overflow: hidden;
 }
 
 .PageMain .package .detail .list .item .left .info .date_time {

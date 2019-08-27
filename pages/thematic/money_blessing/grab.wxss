@@ -319,9 +319,6 @@
 
 .con_bottom > .hotel_info > .hotel_name {
   width: 310rpx;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
 }
 
 .con_bottom > .operation {
