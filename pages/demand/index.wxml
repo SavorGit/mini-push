@@ -2,79 +2,76 @@
 <import src="/pages/template/commons" />
 <template is="navigationBarForTopLevel" data='{{statusBarHeight: statusBarHeight,titleText:"热点投屏"}}' />
 
-<view class="container theme-container" style='height: calc(100vh - 46px - {{statusBarHeight}}px);'>
-  <!-- ================================== 列表页 ================================== -->
+<scroll-view class="container flex-column-center-flex_start theme-container" style='height: calc(100vh - 46px - {{statusBarHeight}}px);' bindscrolltolower="loadMore" data-boxmac="{{box_mac}}" scroll-y="true" scroll-with-animation="true">
 
-  <scroll-view class="scroll_container display_{{showView?'show':'hide'}}" bindscrolltolower="loadMore" data-boxmac="{{box_mac}}" scroll-y="true" scroll-with-animation="true">
+  <!-- 轮播图开始 -->
+  <swiper wx:if="{{imgUrls.length > 0}}" class="swiper full_width" indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{lb_duration}}">
+    <block wx:for="{{imgUrls}}" wx:key="item" wx:for-index="index">
+      <swiper-item>
+        <navigator wx:if="{{item.clicktype == 1}}" class='full_width full_height navigator-hover' target="miniProgram" app-id="{{item.appid}}" path="{{item.linkcontent}}">
+          <image class="full_width full_height" mode='aspectFill' src="{{item.oss_addr}}" />
+        </navigator>
+        <button wx:if="{{item.clicktype == 2}}" class='full_width full_height' bindtap='{{item.bindtap}}' data-boxmac="{{box_mac}}" data-openid="{{openid}}" data-index='{{index}}' data-linkcontent='{{item.linkcontent}}'>
+          <image class="full_width full_height" mode='aspectFill' src="{{item.oss_addr}}" />
+        </button>
+      </swiper-item>
+    </block>
+  </swiper>
+  <!-- 轮播图结束 -->
 
-    <!-- 轮播图开始 -->
-    <swiper wx:if="{{imgUrls.length > 0}}" indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{lb_duration}}">
-      <block wx:for="{{imgUrls}}" wx:key="item" wx:for-index="index">
-        <swiper-item>
-          <navigator wx:if="{{item.clicktype == 1}}" class='full_width full_height' target="miniProgram" app-id="{{item.appid}}" path="{{item.linkcontent}}">
-            <image mode='aspectFill' src="{{item.oss_addr}}" class="slide-image" />
-          </navigator>
-          <button wx:if="{{item.clicktype == 2}}" class='full_width full_height' bindtap='{{item.bindtap}}' data-boxmac="{{box_mac}}" data-openid="{{openid}}" data-index='{{index}}' data-linkcontent='{{item.linkcontent}}'>
-            <image mode='aspectFill' src="{{item.oss_addr}}" class="slide-image" />
-          </button>
-        </swiper-item>
-      </block>
-    </swiper>
-    <!-- 轮播图结束 -->
-
-    <view class='article_list'>
-      <!-- 循环开始 -->
-      <view class='article' wx:for="{{program_list}}" wx:key="key" wx:for-item="bean" wx:for-index="index">
-        <view class='cover'>
-          <navigator url="/pages/forscreen/video/launch_video?video_url={{bean.tx_url}}&video_name={{bean.title}}&box_mac={{box_mac}}&res_id={{bean.id}}&filename={{bean.filename}}&video_img_url={{bean.img_url}}">
-            <image class='theme2' mode='aspectFill' src='{{bean.img_url}}'></image>
-          </navigator>
-          <navigator bindtap='demandLog' data-openid='{{openid}}' data-box_mac='{{box_mac}}' data-title='{{bean.title}}' data-tx_url='{{bean.tx_url}}' data-id='{{bean.id}}' data-duration="{{bean.duration}}" class='full' url="/pages/forscreen/video/launch_video?video_url={{bean.tx_url}}&video_name={{bean.title}}&box_mac={{box_mac}}&res_id={{bean.id}}&filename={{bean.filename}}&video_img_url={{bean.img_url}}">
-            <label class='font_F6F6F6_28'>{{bean.title}}</label>
-            <view class='play'>
-              <label class="fa fa-play-circle icon theme-font4"></label>
-            </view>
-          </navigator>
-        </view>
-        <view class='con_bottom theme-panel'>
-          <view class='launch'>
-            <view>
-              <button bindtap='boxShow' data-name="{{bean.title}}" data-filename='{{bean.filename}}' data-vediourl="{{bean.tx_url}}" data-boxmac="{{box_mac}}" data-openid="{{openid}}" class='theme-button'>电视播放</button>
-            </view>
+  <view class='flex-column-center-flex_start'>
+    <!-- 循环开始 -->
+    <view class='article' wx:for="{{program_list}}" wx:key="key" wx:for-item="bean" wx:for-index="index">
+      <view class='cover flex-column-center-flex_start'>
+        <navigator class="full_width full_height" url="/pages/forscreen/video/launch_video?video_url={{bean.tx_url}}&video_name={{bean.title}}&box_mac={{box_mac}}&res_id={{bean.id}}&filename={{bean.filename}}&video_img_url={{bean.img_url}}">
+          <image class='full_width full_height theme2' mode='aspectFill' src='{{bean.img_url}}'></image>
+        </navigator>
+        <navigator class='full full_width flex-column-stretch-flex_start' bindtap='demandLog' data-openid='{{openid}}' data-box_mac='{{box_mac}}' data-title='{{bean.title}}' data-tx_url='{{bean.tx_url}}' data-id='{{bean.id}}' data-duration="{{bean.duration}}"
+          url="/pages/forscreen/video/launch_video?video_url={{bean.tx_url}}&video_name={{bean.title}}&box_mac={{box_mac}}&res_id={{bean.id}}&filename={{bean.filename}}&video_img_url={{bean.img_url}}">
+          <label class='font_F6F6F6_28'>{{bean.title}}</label>
+          <view class='play'>
+            <label class="fa fa-play-circle icon theme-font4"></label>
           </view>
-          <view class='operation font_666666_26'>
-            <view>
-              <label class="fa fa-play fa-lg" style="color: #666666;"></label>
-              <label>{{bean.play_num}}</label>
-            </view>
-            <view wx:if="{{bean.is_collect==1}}">
-              <label class="fa fa-heart fa-lg" style="color: #E11E4C;" bindtap='cancCollect' data-res_id="{{bean.id}}" data-type='{{bean.type}}' data-res_key="{{index}}"></label>
-              <label>{{bean.collect_num}}</label>
-            </view>
-            <view wx:else>
-              <label class="fa fa-heart-o fa-lg" style="color: #666666;" bindtap='onCollect' data-res_id="{{bean.id}}" data-type='{{bean.type}}' data-res_key="{{index}}"></label>
-              <label>{{bean.collect_num}}</label>
-            </view>
-            <view>
-              <button open-type='share' data-openid="{{openid}}" data-res_id="{{bean.id}}" data-type='{{bean.type}}' data-res_key="{{index}}" data-video_url="{{bean.tx_url}}" data-video_name="{{bean.title}}" data-video_img='{{bean.img_url}}'>
-                <label class="fa fa-share-square-o fa-lg" style="color: #666666;"></label>
-                <label>{{bean.share_num}}</label>
-              </button>
-            </view>
-          </view>
-        </view>
+        </navigator>
       </view>
-      <!-- 循环结束 -->
-
-      <view class="body-view">
-        <loading hidden="{{hiddens}}" bindchange="loadingChange">加载中...</loading>
+      <view class='con_bottom flex-row-center-flex_start theme-panel'>
+        <view class='launch flex-row-center-flex_start'>
+          <view>
+            <button bindtap='boxShow' data-name="{{bean.title}}" data-filename='{{bean.filename}}' data-vediourl="{{bean.tx_url}}" data-boxmac="{{box_mac}}" data-openid="{{openid}}" class='theme-button'>电视播放</button>
+          </view>
+        </view>
+        <view class='operation flex-row-center-end font_666666_26'>
+          <view>
+            <label class="fa fa-play fa-lg" style="color: #666666;"></label>
+            <label>{{bean.play_num}}</label>
+          </view>
+          <view wx:if="{{bean.is_collect==1}}">
+            <label class="fa fa-heart fa-lg" style="color: #E11E4C;" bindtap='cancCollect' data-res_id="{{bean.id}}" data-type='{{bean.type}}' data-res_key="{{index}}"></label>
+            <label>{{bean.collect_num}}</label>
+          </view>
+          <view wx:else>
+            <label class="fa fa-heart-o fa-lg" style="color: #666666;" bindtap='onCollect' data-res_id="{{bean.id}}" data-type='{{bean.type}}' data-res_key="{{index}}"></label>
+            <label>{{bean.collect_num}}</label>
+          </view>
+          <view>
+            <button open-type='share' data-openid="{{openid}}" data-res_id="{{bean.id}}" data-type='{{bean.type}}' data-res_key="{{index}}" data-video_url="{{bean.tx_url}}" data-video_name="{{bean.title}}" data-video_img='{{bean.img_url}}'>
+              <label class="fa fa-share-square-o fa-lg" style="color: #666666;"></label>
+              <label>{{bean.share_num}}</label>
+            </button>
+          </view>
+        </view>
       </view>
     </view>
+    <!-- 循环结束 -->
 
-    <!-- 滚动页面底部留白 -->
-    <view class='nav_bottom_space'></view>
-  </scroll-view>
-</view>
+    <view class="body-view">
+      <loading hidden="{{hiddens}}" bindchange="loadingChange">加载中...</loading>
+    </view>
+  </view>
+
+  <!-- 滚动页面底部留白 -->
+  <view class='nav_bottom_space'></view>
+</scroll-view>
 
 <!-- 遥控器 -->
 <template is="remoteControlWindow" data='{{popRemoteControlWindow: showControl, qrcode_img:qrcode_img, box_mac:box_mac, openid:openid, is_open_simple:is_open_simple}}' />

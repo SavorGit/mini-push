@@ -1,65 +1,12 @@
 /**index.wxss**/
 
-/* ================================== 输入验证码页面 ================================== 
-
-.content {
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  margin-top: -220rpx;
-}
-
-.iptbox {
-  margin-left: 29rpx;
-  margin-right: 29rpx;
-  width: 140rpx;
-  height: 100rpx;
-  border: 1rpx solid #ffd237;
-  text-align: center;
-}
-
-.ipt {
-  width: 0;
-  height: 0;
-}
-
-.btn-area {
-  width: 80%;
-  background-color: #ffd237;
-  color: #fff;
-}
-
-view.input_num {
-  padding: 30rpx 30rpx 0rpx 30rpx;
-  width: calc(100vw - 60rpx);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-image.input_pic_banner {
-  width: 695rpx;
-  height: 695rpx;
-}
-
-label.input_tip {
-  margin-top: 36rpx;
-  margin-bottom: 36rpx;
-}*/
-
 /* ================================== 列表页 1.2.0 ================================== */
 
-.scroll_container {
-  width: 100%;
-  height: 100%;
-}
-
-swiper {
+.swiper {
   height: 315rpx;
-  width: 100%;
 }
 
-swiper button {
+.swiper button {
   background-color: unset;
   border: 0;
   margin: 0;
@@ -67,24 +14,9 @@ swiper button {
   border-radius: 0;
 }
 
-swiper .button-hover {
+.button-hover, .navigator-hover {
   background-color: unset;
-}
-
-swiper-image {
-  height: 100%;
-  width: 100%;
-}
-
-.slide-image {
-  height: 100%;
-  width: 100%;
-}
-
-.article_list {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  opacity: 1;
 }
 
 .article {
@@ -97,36 +29,22 @@ swiper-image {
   margin-top: 15rpx;
   width: 720rpx;
   height: 405rpx;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.article > .cover > navigator {
-  width: 100%;
-  height: 100%;
 }
 
 .article > .cover > navigator > image {
-  width: 100%;
-  height: 100%;
   border-radius: 12rpx 12rpx 0rpx 0rpx;
   z-index: 1;
 }
 
 .article > .cover .full {
-  width: 100%;
   height: 405rpx;
   margin-top: -400rpx;
-  padding-left: 25rpx;
-  display: flex;
-  flex-direction: column;
 }
 
 .article > .cover .full > label {
-  width: 100%;
   height: 50rpx;
   line-height: 50rpx;
+  padding-left: 25rpx;
   text-shadow: 0 1px 1px #999;
   z-index: 2;
 }
@@ -147,19 +65,12 @@ swiper-image {
 
 .article > .con_bottom {
   height: 75rpx;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
   border-radius: 0rpx 0rpx 12rpx 12rpx;
 }
 
 .article > .con_bottom > .launch {
   padding-left: 20rpx;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
   flex-grow: 1;
-  justify-content: flex-start;
 }
 
 .article > .con_bottom > .launch > view >  button {
@@ -170,13 +81,6 @@ swiper-image {
   line-height: 45rpx;
   font-size: 20rpx;
   border-radius: 22rpx;
-}
-
-.article > .con_bottom > .operation {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: flex-end;
 }
 
 .article > .con_bottom > .operation > view {
@@ -214,8 +118,8 @@ swiper-image {
 
 .article > .con_bottom > .operation > view > button::before,
 .article > .con_bottom > .operation > view > button::after {
-  border: none;
-  outline: none;
+  border: unset;
+  outline: unset;
   color: unset;
   font-size: unset;
   background: unset;
