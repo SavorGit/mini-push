@@ -3,24 +3,21 @@
 <template is="navigationBarForTwoLevel" data='{{statusBarHeight: statusBarHeight,titleText:"热点投屏"}}' />
 
 <!-- ================================== 点播页面 ================================== -->
-<view class="container theme-container" style='height: calc(100vh - 46px - {{statusBarHeight}}px);'>
-  <view class='full_width page_top'></view>
-  <view class='full_width page_main' wx:if="{{showControl==false}}">
+<view class="container flex-column-center-flex_start theme-container" style='height: calc(100vh - 46px - {{statusBarHeight}}px);'>
+  <view class='page_top full_width'></view>
+  <view class='page_main full_width' wx:if="{{showControl==false}}">
     <view class='full_width article'>
       <view wx:if="{{is_box_show==false}}" class='full_width video'>
-        <video src="{{video_url}}" autoplay="false"></video>
+        <video class='full_width' src="{{video_url}}" autoplay="false"></video>
       </view>
       <view wx:else class='full_width video'>
-        <image src="{{video_img_url}}"></image>
+        <image class='full_width' src="{{video_img_url}}"></image>
       </view>
-      <view class='title'>
+      <view class='title display_hide'>
         <label>{{video_name}}</label>
       </view>
-      <!-- <view style='margin-top: 50rpx; text-align: center;'>
-      <navigator class='link_relief font_932C3F_30' open-type='reLaunch' url='/pages/demand/index'>更多...</navigator>
-    </view> -->
       <view class='con_bottom theme-panel'>
-        <view class='full_height operation font_666666_26'>
+        <view class='full_height operation flex-row-center-flex_end font_666666_26'>
           <view>
             <label class="fa fa-play fa-lg" style="color: #666666;margin-right: 5rpx;"></label>
             <label>{{play_num}}</label>
@@ -47,7 +44,7 @@
       <button wx:else disabled="true">{{djs}} S</button>
     </view>
   </view>
-  <view class='full_width page_bottom'>
+  <view class='page_bottom full_width'>
     <!-- <button wx:if="{{is_replay_disabel==false}}" bindtap='boxShow' data-name="{{video_name}}" data-filename='{{filename}}' data-vediourl="{{video_url}}" data-boxmac="{{box_mac}}" data-openid="{{openid}}" class='full_width theme-button'>电视播放</button>
     <button wx:else class='theme-button2'>{{djs}} S</button> -->
   </view>
