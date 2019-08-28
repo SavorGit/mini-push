@@ -13,11 +13,6 @@
   height: calc(100% - 100rpx);
 }
 
-.PageMain .navigator-hover {
-  background-color: unset;
-  opacity: 1;
-}
-
 .PageMain .package {
   width: 90%;
   height: 530rpx;
@@ -59,10 +54,6 @@
 }
 
 .PageMain .package > .body .grab {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-between;
   font-size: 40rpx;
   font-weight: 900;
   margin-top: 40rpx;
@@ -70,14 +61,11 @@
 
 .PageMain .package > .body .grab .button {
   display: block;
-  /* width: 50%; */
   height: 50rpx;
   line-height: 2;
   margin-left: auto;
   margin-right: auto;
   border-radius: 5rpx;
-  padding: unset;
-  border: unset;
   text-align: center;
   text-decoration: none;
   overflow: hidden;
@@ -126,34 +114,11 @@
   border-radius: 20rpx;
 }
 
-.PageMain .EntranceCard > .header-bar {
-  height: 130rpx;
-  padding-top: 50rpx;
-  margin-bottom: 30rpx;
-  text-align: center;
-}
-
-.PageMain .EntranceCard > .slogan-bar {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  font-size: 36rpx;
-  font-weight: 900;
-  margin-bottom: 50rpx;
-}
-
 .PageMain .EntranceCard > .entrance-bar {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-between;
   padding: 0 50rpx;
 }
 
 .PageMain .EntranceCard > .entrance-bar > .entrance {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
   font-size: 26rpx;
   font-weight: 900;
 }
@@ -187,10 +152,6 @@
   font-weight: 900;
 }
 
-/* .content {
-  margin: 0rpx 30rpx 0rpx 30rpx;
-} */
-
 .content_bottom_border {
   border-bottom: 1rpx solid #666;
 }
@@ -199,17 +160,10 @@
 
 .con_top {
   height: 120rpx;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
 }
 
 .con_top > .user_info {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
   flex-grow: 1;
-  justify-content: flex-start;
 }
 
 .con_top > .user_info > .user_head, .con_top > .user_info > .user_head::before {
@@ -222,13 +176,6 @@
 
 .con_top > .user_info > .user_name {
   margin: 0rpx 20rpx 0rpx 10rpx;
-}
-
-.con_top > .operation {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: flex-end;
 }
 
 .con_top > .operation > .launch_tv {
@@ -303,17 +250,10 @@
 .con_bottom {
   height: 75rpx;
   padding-left: 70rpx;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
 }
 
 .con_bottom > .hotel_info {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
   flex-grow: 1;
-  justify-content: flex-start;
   width: calc(100% - 160rpx);
 }
 
@@ -322,10 +262,6 @@
 }
 
 .con_bottom > .operation {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: flex-end;
   width: 200rpx;
 }
 
@@ -337,10 +273,7 @@
 .con_bottom > .operation > view > button,
 .con_bottom > .operation > view > button::before,
 .con_bottom > .operation > view > button::after {
-  margin: unset;
-  padding: unset;
   background: unset;
-  border: unset;
 }
 
 .con_bottom > .operation > view > button > image {

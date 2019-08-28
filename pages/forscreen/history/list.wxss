@@ -2,7 +2,6 @@
 
 .page_main {
   width: 100%;
-  /* height: calc(100% - 138rpx); */
   height: 100%;
 }
 
@@ -19,17 +18,10 @@
 .con_top {
   height: 120rpx;
   margin: 0rpx 0rpx 0rpx 30rpx;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
 }
 
 .con_top > .datetime {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
   flex-grow: 1;
-  justify-content: flex-start;
 }
 
 .con_top > .datetime > label {
@@ -37,30 +29,12 @@
   font-size: 30rpx;
 }
 
-.con_top > .operation {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: flex-end;
-}
-
-/* .con_top > .operation > .launch_tv, .con_top > .operation > .launch_tv::before {
-  margin-right: 10rpx;
-  width: 150rpx;
-  height: 55rpx;
-  border: 1rpx solid #932c3f;
-  border-radius: 12rpx;
-  background-color: unset;
-} */
-
 .con_top > .operation > .launch_tv {
   margin-right: 10rpx;
   width: 150rpx;
   height: 55rpx;
   line-height: 55rpx;
   border-radius: 27rpx;
-  padding: unset;
-  border: unset;
   font-size: 28rpx;
 }
 

@@ -1,17 +1,9 @@
 /* pages/mine/assist/assistlist.wxss */
 
-.container {
-  justify-content: start;
-}
-
 .row {
   height: 90rpx;
   padding: 20rpx 0 10rpx 0;
   margin: 0 20rpx;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: start;
 }
 
 .row > .head-img {

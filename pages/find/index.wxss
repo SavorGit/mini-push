@@ -2,7 +2,6 @@
 
 .page_main {
   width: 100%;
-  /* height: calc(100% - 138rpx); */
   height: 100%;
 }
 
@@ -18,17 +17,10 @@
 
 .con_top {
   height: 120rpx;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
 }
 
 .con_top > .user_info {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
   flex-grow: 1;
-  justify-content: flex-start;
 }
 
 .con_top > .user_info > .user_head, .con_top > .user_info > .user_head::before {
@@ -41,13 +33,6 @@
 
 .con_top > .user_info > .user_name {
   margin: 0rpx 20rpx 0rpx 10rpx;
-}
-
-.con_top > .operation {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: flex-end;
 }
 
 .con_top > .operation > .launch_tv, .con_top > .operation > .launch_tv::before {
@@ -139,24 +124,10 @@
 .con_bottom {
   height: 75rpx;
   padding-left: 70rpx;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
 }
 
 .con_bottom > .hotel_info {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
   flex-grow: 1;
-  justify-content: flex-start;
-}
-
-.con_bottom > .operation {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: flex-end;
 }
 
 .con_bottom > .operation > view {
@@ -167,10 +138,7 @@
 .con_bottom > .operation > view > button,
 .con_bottom > .operation > view > button::before,
 .con_bottom > .operation > view > button::after {
-  margin: unset;
-  padding: unset;
   background: unset;
-  border: unset;
 }
 
 .con_bottom > .operation > view > button > image {
@@ -181,19 +149,3 @@
 }
 
 /* =================== 内容底部结束 =================== */
-
-.page_main_v {
-  width: 100%;
-  /* height: calc(100vh - 138rpx); */
-  height: 100%;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-}
-
-.page_main_h {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}

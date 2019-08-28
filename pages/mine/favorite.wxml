@@ -1,35 +1,14 @@
 <!--pages/mine/favorite.wxml-->
-<import src="../template/navigation.wxml" />
 <import src="/pages/template/commons" />
 <template is="navigationBarForTwoLevel" data='{{statusBarHeight: statusBarHeight,titleText:"我喜欢"}}' />
 
-<view class="container theme-container" style='height: calc(100vh - 46px - {{statusBarHeight}}px);'>
+<view class="container flex-column-center-flex_start theme-container" style='height: calc(100vh - 46px - {{statusBarHeight}}px);'>
   <scroll-view class='page_main' scroll-y="true" scroll-with-animation="true" bindscrolltolower="loadMore" data-openid='{{openid}}'>
-
-    <!--
-    <view class='user'>
-      <view class='head'>
-        <image src="{{userinfo.avatarUrl}}" lazy-load='http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/icon/grey_interact.png'></image>
-      </view>
-      <view class='info'>
-        <label class='font_333333_36'>{{userinfo.nickName}}</label>
-        <label class='font_666666_24'>ID:{{userinfo.id}}</label>
-      </view>
-    </view>
-
-    <!-- 选项卡开始
-    <view class='swiper-tab font_333333_28'>
-      <navigator class="swiper-tab-item" open-type='reLaunch' url='/pages/mine/index'>我的公开</navigator>
-      <view class="swiper-tab-item active">我的收藏</view>
-    </view>
-    -->
-
-
     <view>
       <!--循环开始 -->
       <view class='content content_bottom_border' wx:for="{{sharelist}}" wx:key="key" wx:for-item="bean" wx:for-index="index">
-        <view class='con_top'>
-          <view wx:if="{{bean.type==1 || bean.type==3}}" class='user_info font_333333_36'>
+        <view class='con_top flex-row-center-flex_start'>
+          <view wx:if="{{bean.type==1 || bean.type==3}}" class='user_info flex-row-center-flex_start font_333333_36'>
             <image src='http://oss.littlehotspot.com/media/resource/5dh67ffRXM.png'></image>
             <label>小热点</label>
           </view>
@@ -37,10 +16,10 @@
             <image src='{{bean.avatarUrl}}'></image>
             <label>{{bean.nickName}}</label>
           </view>
-          <view wx:if="{{bean.type==1 || bean.type==3}}" class='operation'>
+          <view wx:if="{{bean.type==1 || bean.type==3}}" class='operation flex-row-center-flex_end'>
             <button bindtap='boxShowProgram' data-name="" data-filename='{{bean.list.filename}}' data-vediourl="{{bean.list.res_url}}" data-boxmac="{{box_mac}}" data-openid="{{openid}}" class='theme-button'>电视播放</button>
           </view>
-          <view wx:if="{{bean.type==2}}" class='operation'>
+          <view wx:if="{{bean.type==2}}" class='operation flex-row-center-flex_end'>
             <button bindtap='boxShowForscreen' data-res_type="{{bean.res_type}}" data-res_nums="{{bean.res_nums}}" data-pubdetail="{{bean.list}}" data-boxmac="{{box_mac}}" data-openid="{{openid}}" data-forscreen_id="{{bean.res_id}}" class='theme-button'>电视播放</button>
           </view>
         </view>
@@ -72,13 +51,13 @@
           </view>
         </view>
         <view class='con_bottom'>
-          <view class='hotel_info font_25635f_24'>
+          <view class='hotel_info flex-row-center-flex_start font_25635f_24'>
             <label>{{bean.create_time}}</label>
             <label wx:if="{{bean.is_pub_hotelinfo==1}}">.</label>
             <label wx:if="{{bean.is_pub_hotelinfo==1}}">{{bean.hotel_name}}</label>
           </view>
-          <view class='operation font_666666_26'>
-            <view class='op-left'>
+          <view class='operation flex-row-center-space_between font_666666_26'>
+            <view class='op-left flex-row-center-flex_start'>
               <view>
                 <label class="fa fa-play fa-lg" style="color: #666666;"></label>
                 <label>{{bean.play_num}}</label>
@@ -102,9 +81,7 @@
                 </button>
               </view>
             </view>
-            <!-- <view class='op-right'>
-              <label bindtap='popDel' data-forscreen_id="{{bean.res_id}}" data-keys="{{index}}">删除</label>
-            </view> -->
+
           </view>
         </view>
         <view class="body-view">
@@ -120,11 +97,8 @@
     <!-- 选项卡结束 -->
 
   </scroll-view>
-
-  <!-- 菜单 
-  <template is="bottomNavigation" data='{{selectPage:"MINE"}}' />
-  -->
 </view>
+
 <!-- 遥控器 -->
 <template is="remoteControlWindow" data='{{popRemoteControlWindow: showControl, qrcode_img:qrcode_img, box_mac:box_mac, openid:openid, is_open_simple:is_open_simple}}' />
 
@@ -132,6 +106,7 @@
 <view wx:if="{{box_mac !=''}}">
   <template is="fixedSuspensionButtonGroup" />
 </view>
+
 <!-- 弹窗 -->
 <bottomModal show="{{showModal}}" data-openid="{{openid}}" data-forscreen_id="{{forscreen_id}}" height='auto' width="98%" title-text="" confirm-text="删除" confirm-color="#ede6de" cancel-text="取消" cancel-color="rgba(153,153,153,0.8)" bindcancel="modalCancel"
   bindconfirm='modalConfirm' />

@@ -1,13 +1,13 @@
 <!--components/modal/modal.wxml-->
-<view wx:if="{{show}}" class='mask' bindtap='clickMask'>
-  <view class='modal-content' style="{{width != '' ? 'width: ' + width + ';' : ''}}{{height != '' ? 'height: ' + height + ';' : ''}}{{borderRadius != '' ? 'border-radius: ' + borderRadius + ';' : ''}}{{backgroundColor != '' ? 'background-color: ' + backgroundColor + ';' : ''}}">
-    <view wx:if="{{titleText != ''}}" class='title' style='color: {{titleColor}};'>
+<view wx:if="{{show}}" class='mask flex-row-center-center' bindtap='clickMask'>
+  <view class='flex-column-flex_start-start' style="{{width != '' ? 'width: ' + width + ';' : ''}}{{height != '' ? 'height: ' + height + ';' : ''}}{{borderRadius != '' ? 'border-radius: ' + borderRadius + ';' : ''}}{{backgroundColor != '' ? 'background-color: ' + backgroundColor + ';' : ''}}">
+    <view wx:if="{{titleText != ''}}" class='title flex-column-center-space_between' style='color: {{titleColor}};'>
       <label>{{titleText}}</label>
     </view>
     <scroll-view scroll-y class='main-content'>
       <slot></slot>
     </scroll-view>
-    <view wx:if="{{cancelText != '' || confirmText != ''}}" class='modal-btn-wrapper'>
+    <view wx:if="{{cancelText != '' || confirmText != ''}}" class='modal-btn-wrapper flex-row-flex_start-start'>
       <button wx:if="{{cancelText != ''}}" class='cancel-btn' style='color: {{cancelColor}}' bindtap='cancel'>{{cancelText}}</button>
       <button wx:if="{{confirmText != ''}}" class='confirm-btn' style='color: {{confirmColor}}' bindtap='confirm'>{{confirmText}}</button>
     </view>

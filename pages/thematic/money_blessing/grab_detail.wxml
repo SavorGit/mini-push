@@ -2,7 +2,7 @@
 <import src="/pages/template/commons" />
 <template is="navigationBarForTwoLevel" data='{{statusBarHeight: statusBarHeight,titleText:"热点投屏"}}' />
 
-<view class='container theme-container' style='height: calc(100vh - 46px - {{statusBarHeight}}px);'>
+<view class='container flex-column-center-flex_start theme-container' style='height: calc(100vh - 46px - {{statusBarHeight}}px);'>
   <view class='PageTop full_width'></view>
   <view class='PageMain full_width'>
     <view class='package'>
@@ -18,7 +18,6 @@
       <view class='detail'>
 
         <scroll-view wx:if="{{packet_info.status==6 || packet_info.status==4 || packet_info.status==7}}" class='list show_message' scroll-y="true" scroll-with-animation="true" bindscrolltolower="loadMore" data-openid='{{openid}}' data-order_id='{{order_id}}'>
-          <!-- <scroll-view class='list show_message' scroll-y="true" scroll-with-animation="true"> -->
           <view class='item' wx:for="{{receive_list}}" wx:key="key" wx:for-item="bean" wx:for-index="index">
             <view class='left'>
               <image src='{{bean.avatarUrl}}'></image>
@@ -32,7 +31,6 @@
         </scroll-view>
 
         <scroll-view wx:if="{{packet_info.status==5}}" class='list no_message' scroll-y="true" scroll-with-animation="true" bindscrolltolower="loadMore" data-openid='{{openid}}' data-order_id='{{order_id}}'>
-          <!-- <scroll-view class='list show_message' scroll-y="true" scroll-with-animation="true"> -->
           <view class='item' wx:for="{{receive_list}}" wx:key="key" wx:for-item="bean" wx:for-index="index">
             <view class='left'>
               <image src='{{bean.avatarUrl}}'></image>
@@ -49,11 +47,8 @@
       </view>
     </view>
   </view>
-  <view class='PageBottom full_width'>
+  <view class='PageBottom flex-row-center-space_between full_width'>
     <navigator class='button PackingButtonFontSize' url='/pages/thematic/money_blessing/packing?openid={{openid}}&box_mac={{box_mac}}'>我也发一个</navigator>
-    <!-- <button class='button PackingButtonFontSize'>我也发一个</button> -->
-
-    <!-- <navigator class='button PackingButtonFontSize' url='/pages/thematic/money_blessing/main?openid={{openid}}&box_mac={{packet_info.mac}}'>进入首页</navigator> -->
     <button class='button PackingButtonFontSize' bindtap='cintoindex'>进入首页</button>
   </view>
   <view class="body-view">

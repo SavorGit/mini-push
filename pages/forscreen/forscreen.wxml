@@ -1,4 +1,2 @@
-<import src="../template/navigation.wxml" />
-<view class="container theme-container" style='height: 100vh'>
-
+<view class="container flex-column-center-flex_start theme-container" style='height: 100vh'>
 </view>

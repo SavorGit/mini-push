@@ -72,17 +72,10 @@
 .con_top {
   height: 80rpx;
   margin-top: 20rpx;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
 }
 
 .con_top > .user_info {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
   flex-grow: 1;
-  justify-content: flex-start;
 }
 
 .con_top > .user_info > .user_head, .con_top > .user_info > .user_head::before {
@@ -147,25 +140,6 @@
   line-height: 75rpx;
   margin-top: -10rpx;
   margin-bottom: 5rpx;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-between;
-}
-
-.con_bottom > .hotel_info {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  flex-grow: 1;
-  justify-content: flex-start;
-}
-
-.con_bottom > .operation {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: flex-end;
 }
 
 .con_bottom > .operation > view {
@@ -176,10 +150,7 @@
 .con_bottom > .operation > view > button,
 .con_bottom > .operation > view > button::before,
 .con_bottom > .operation > view > button::after {
-  margin: unset;
-  padding: unset;
   background: unset;
-  border: unset;
   font-size: unset;
   color: unset;
   background: unset;

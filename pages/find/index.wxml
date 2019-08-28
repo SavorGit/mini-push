@@ -1,52 +1,30 @@
 <!--pages/find/index.wxml-->
-<!-- <import src="../template/navigation.wxml" /> -->
-<import src="../template/commons" />
+<import src="/pages/template/commons" />
 <template is="navigationBarForTopLevel" data='{{statusBarHeight: statusBarHeight,titleText:"热点投屏"}}' />
 
 
 <!-- 未开放发现页面 -->
-<view wx:if="{{is_open==0}}" class="container theme-container" style='height: calc(100vh - 46px - {{statusBarHeight}}px);'>
-  <view class='page_main_v'>
-    <view class='page_main_h'>
+<view wx:if="{{is_open==0}}" class="container flex-column-center-flex_start theme-container" style='height: calc(100vh - 46px - {{statusBarHeight}}px);'>
+  <view class='full_width full_height flex-row-center-flex_start'>
+    <view class='full_width flex-column-center-flex_start'>
       <image mode='widthFix' src='http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/not_open_002.png' style='width: 50vw;margin-bottom: 50rpx;'></image>
       <label class='font_666666_28'>功能正在开发中，敬请期待</label>
-      <!--
-      <button class="show-btn" bindtap="showDialogBtn">弹窗</button>
-      <modal show="{{showModal}}" height='450rpx' width="98%" border-radius="0rpx" title-text="链接电视" title-color="#ede6de" confirm-text="扫码链接电视" confirm-color="#ede6de" cancel-text="取消" cancel-color="rgba(153,153,153,0.8)">
-        <view class='modal-content'>Show Modal {{showModal}}</view>
-      </modal>
-      -->
-
-
-      <!--
-      <button class="show-btn" bindtap="showDialogBtn">授权弹窗</button>
-      <template is="wxAuthLogin" data='{{show: showModal}}' />
-      -->
-
-
-
-
     </view>
   </view>
-
-  <!-- 菜单 
-  <template is="bottomNavigation" data='{{selectPage:"MESSAGE"}}' />
-  -->
 </view>
 
 
 <!-- 开放发现页面 -->
-<view wx:if="{{is_open>0}}" class="container theme-container" style='height: calc(100vh - 46px - {{statusBarHeight}}px);'>
+<view wx:if="{{is_open>0}}" class="container flex-column-center-flex_start theme-container" style='height: calc(100vh - 46px - {{statusBarHeight}}px);'>
   <scroll-view class='page_main' scroll-y="true" scroll-with-animation="true" bindscrolltolower="loadMore" data-openid='{{openid}}'>
     <!--循环开始-->
     <view class='content content_bottom_border' wx:for="{{discovery_list}}" wx:key="key" wx:for-item="bean" wx:for-index="index">
-      <view class='con_top'>
-        <view class='user_info'>
+      <view class='con_top flex-row-center-flex_start'>
+        <view class='user_info flex-row-center-flex_start'>
           <image class='user_head' src="{{bean.avatarUrl}}" lazy-load='http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/icon/grey_interact.png'></image>
           <label class='user_name font_333333_30'>{{bean.nickName}}</label>
         </view>
-        <view class='operation'>
-
+        <view class='operation flex-row-center-flex_end'>
           <button bindtap='boxShow' class='launch_tv font_932C3F_20' data-res_type="{{bean.res_type}}" data-res_nums="{{bean.res_nums}}" data-pubdetail="{{bean.pubdetail}}" data-boxmac="{{box_mac}}" data-openid="{{openid}}" data-forscreen_id="{{bean.forscreen_id}}">电视播放</button>
         </view>
       </view>
@@ -88,13 +66,13 @@
         </view>
 
       </view>
-      <view class='con_bottom'>
-        <view class='hotel_info font_666666_24'>
+      <view class='con_bottom flex-row-center-flex_start'>
+        <view class='hotel_info flex-row-center-flex_start font_666666_24'>
           <label class='time'>{{bean.create_time}}</label>
           <label class='dot' wx:if="{{bean.is_pub_hotelinfo==1}}">.</label>
           <label class='hotel_name' wx:if="{{bean.is_pub_hotelinfo==1}}">{{bean.hotel_name}}</label>
         </view>
-        <view class='operation'>
+        <view class='operation flex-row-center-flex_end'>
           <view wx:if="{{bean.is_collect=='1'}}">
             <button bindtap='cancCollect' data-res_id="{{bean.forscreen_id}}" data-openid="{{openid}}" data-res_key="{{index}}">
               <image src='http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/icon/red_heart.png'></image>

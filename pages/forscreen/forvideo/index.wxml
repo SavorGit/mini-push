@@ -6,7 +6,7 @@
 
 
 <!-- ================================== 上传视频前 ================================== -->
-<view wx:if="{{showVedio}}" class="container theme-container" style='height: calc(100vh - 46px - {{statusBarHeight}}px);'>
+<view wx:if="{{showVedio}}" class="container flex-column-center-flex_start theme-container" style='height: calc(100vh - 46px - {{statusBarHeight}}px);'>
   <view class="full_width before_launch">
     <template is="pageTop" />
     <form bindsubmit="forscreen_video">
@@ -59,7 +59,7 @@
 
 
 <!-- ================================== 上传视频后 ================================== -->
-<view wx:if="{{!showVedio}}" class="container theme-container" style='height: calc(100vh - 46px - {{statusBarHeight}}px);'>
+<view wx:if="{{!showVedio}}" class="container flex-column-center-flex_start theme-container" style='height: calc(100vh - 46px - {{statusBarHeight}}px);'>
   <view class="full_width full_height after_launch">
     <view class='page_top theme-panel-2 flex-row-center-flex_start font_666666_26'>
       <label>视频加载完成后，电视开始加载并自动播放</label>

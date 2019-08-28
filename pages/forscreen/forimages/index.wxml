@@ -6,7 +6,7 @@
 
 
 <!-- ================================== 上传图片前 ================================== -->
-<view wx:if="{{!showThird}}" class="container theme-container" style='height: calc(100vh - 46px - {{statusBarHeight}}px);'>
+<view wx:if="{{!showThird}}" class="container flex-column-center-flex_start theme-container" style='height: calc(100vh - 46px - {{statusBarHeight}}px);'>
   <view class="full_width before_launch">
     <template is="pageTop" />
     <form bindsubmit="up_forscreen" report-submit="true">
@@ -74,7 +74,7 @@
 
 
 <!-- ================================== 上传图片后 ================================== -->
-<view wx:if="{{showThird}}" class="container theme-container" style='height: calc(100vh - 46px - {{statusBarHeight}}px);'>
+<view wx:if="{{showThird}}" class="container flex-column-center-flex_start theme-container" style='height: calc(100vh - 46px - {{statusBarHeight}}px);'>
   <view class="full_width full_height after_launch">
     <view class="page_top theme-panel-2 flex-row-center-flex_start font_666666_26">
       <label>图片加载成功后，选择照片，电视开始展示</label>

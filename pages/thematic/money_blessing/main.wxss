@@ -16,10 +16,6 @@
   height: 200rpx;
 }
 
-.PageBottom .navigator-hover {
-  opacity: 1;
-}
-
 .PageBottom .DropMoneyBtn {
   position: relative;
   display: block;
@@ -30,8 +26,6 @@
   margin-left: auto;
   margin-right: auto;
   border-radius: 50rpx;
-  padding: unset;
-  border: unset;
   text-align: center;
   text-decoration: none;
   overflow: hidden;

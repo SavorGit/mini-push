@@ -2,7 +2,7 @@
 <import src="/pages/template/commons" />
 <template is="navigationBarForTwoLevel" data='{{statusBarHeight: statusBarHeight,titleText:"热点投屏"}}' />
 
-<view class='container theme-container' style='height: calc(100vh - 46px - {{statusBarHeight}}px);'>
+<view class='container flex-column-center-flex_start theme-container' style='height: calc(100vh - 46px - {{statusBarHeight}}px);'>
   <form class='full_width full_height' bindsubmit="sendRedPacket">
     <view class='PageTop full_width'></view>
     <view class='PageMain full_width'>
@@ -11,7 +11,7 @@
           <image class='BorderColor' src='{{avatarUrl}}'></image>
         </view>
         <view class='body PackageColor'>
-          <view>
+          <view class="flex-row-stretch-flex_start">
             <label class='RowLabel'>总金额</label>
             <view class='right'>
               <input name="totalcount" bindinput='setTotalCount' class='input' type='digit' placeholder='0.00 (1-500元)'></input>

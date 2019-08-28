@@ -1,9 +1,8 @@
 <!--pages/mine/index.wxml-->
-<import src="../template/navigation.wxml" />
 <import src="/pages/template/commons" />
 <template is="navigationBarForTwoLevel" data='{{statusBarHeight: statusBarHeight,titleText:"我的公开"}}' />
 
-<view class="container theme-container" style='height: calc(100vh - 46px - {{statusBarHeight}}px);'>
+<view class="container flex-column-center-flex_start theme-container" style='height: calc(100vh - 46px - {{statusBarHeight}}px);'>
   <scroll-view class='page_main' scroll-y="true" scroll-with-animation="true" bindscrolltolower="loadMore" data-openid='{{openid}}'>
     <view>
 
@@ -11,12 +10,12 @@
       <view wx:for="{{publiclist}}" wx:key="key" wx:for-item="bean" wx:for-index="index">
 
         <view class='content content_bottom_border'>
-          <view class='con_top'>
-            <view class='user_info font_333333_36'>
+          <view class='con_top flex-row-center-flex_start'>
+            <view class='user_info flex-row-center-flex_start font_333333_36'>
               <image src='{{userinfo.avatarUrl}}'></image>
               <label>{{userinfo.nickName}}</label>
             </view>
-            <view class='operation'>
+            <view class='operation flex-row-center-flex_end'>
               <button bindtap='boxShow' data-res_type="{{bean.res_type}}" data-res_nums="{{bean.res_nums}}" data-pubdetail="{{bean.pubdetail}}" data-boxmac="{{box_mac}}" data-openid="{{openid}}" data-forscreen_id="{{bean.forscreen_id}}" class='theme-button'>电视播放</button>
             </view>
           </view>
@@ -48,13 +47,13 @@
             </view>
           </view>
           <view class='con_bottom'>
-            <view class='hotel_info font_25635f_24'>
+            <view class='hotel_info flex-row-center-flex_start font_25635f_24'>
               <label>{{bean.create_time}}</label>
               <label wx:if="{{bean.is_pub_hotelinfo==1}}">.</label>
               <label wx:if="{{bean.is_pub_hotelinfo==1}}">{{bean.hotel_name}}</label>
             </view>
-            <view class='operation font_666666_26'>
-              <view class='op-left'>
+            <view class='operation flex-row-center-space_between font_666666_26'>
+              <view class='op-left flex-row-center-flex_start'>
                 <view>
                   <label class="fa fa-play fa-lg" style="color: #666666;"></label>
                   <label>{{bean.play_num}}</label>
@@ -90,19 +89,12 @@
       </view>
       <!--循环结束 -->
 
-      <!-- 滚动页面底部留白 
-      <view class='nav_bottom_space'></view>
-      -->
-
     </view>
     <!-- 选项卡结束 -->
 
   </scroll-view>
-
-  <!-- 菜单 
-  <template is="bottomNavigation" data='{{selectPage:"MINE"}}' />
-  -->
 </view>
+
 <!-- 遥控器 -->
 <template is="remoteControlWindow" data='{{popRemoteControlWindow: showControl, qrcode_img:qrcode_img, box_mac:box_mac, openid:openid, is_open_simple:is_open_simple}}' />
 
@@ -110,6 +102,7 @@
 <view wx:if="{{box_mac !=''}}">
   <template is="fixedSuspensionButtonGroup" />
 </view>
+
 <!-- 弹窗 -->
 <bottomModal show="{{showModal}}" data-openid="{{openid}}" data-forscreen_id="{{forscreen_id}}" height='auto' width="98%" title-text="" confirm-text="" cancel-text="" bindcancel="modalCancel" bindconfirm='modalConfirm'>
   <view class='delete-container'>

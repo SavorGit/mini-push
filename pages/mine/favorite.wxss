@@ -2,7 +2,6 @@
 
 .page_main {
   width: 100%;
-  /* height: calc(100% - 138rpx); */
   height: 100%;
 }
 
@@ -14,17 +13,10 @@
 
 .con_top {
   margin: 30rpx 30rpx 40rpx 30rpx;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
 }
 
 .con_top > .user_info {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
   flex-grow: 1;
-  justify-content: flex-start;
 }
 
 .con_top > .user_info > image {
@@ -39,21 +31,12 @@
   font-size: 36rpx;
 }
 
-.con_top > .operation {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: flex-end;
-}
-
 .con_top > .operation > button {
   width: 150rpx;
   height: 50rpx;
   line-height: 50rpx;
   border-radius: 25rpx;
   font-size: 24rpx;
-  padding: unset;
-  border: unset;
 }
 
 .con_main {
@@ -116,25 +99,7 @@
 
 .con_bottom > .hotel_info {
   margin-bottom: 20rpx;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
   flex-grow: 1;
-  justify-content: flex-start;
-}
-
-.con_bottom > .operation {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-between;
-}
-
-.con_bottom > .operation > .op-left {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: flex-start;
 }
 
 .con_bottom > .operation > .op-left > view {
@@ -146,9 +111,6 @@
 .con_bottom > .operation > .op-left > view button::after {
   height: 50rpx;
   line-height: 50rpx;
-  margin: unset;
-  padding: unset;
-  border: unset;
   background: unset;
   color: unset;
   font-size: unset;
@@ -163,6 +125,7 @@
 
 .con_bottom > .operation > .op-left > view label {
   vertical-align: middle;
+  margin-right: 8rpx;
 }
 
 .con_bottom > .operation > .op-right > label {

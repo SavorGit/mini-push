@@ -1,10 +1,10 @@
 <!--pages/mine/index_20181010.wxml-->
-<import src="../template/commons" />
+<import src="/pages/template/commons" />
 <template is="navigationBarForTopLevel" data='{{statusBarHeight: statusBarHeight,titleText:"热点投屏"}}' />
 
-<view class="container theme-container" style='height: calc(100vh - 46px - {{statusBarHeight}}px);'>
+<view class="container flex-column-center-flex_start theme-container" style='height: calc(100vh - 46px - {{statusBarHeight}}px);'>
   <scroll-view class='page_main' scroll-y="true" scroll-with-animation="true" bindscrolltolower="loadMore" data-openid='{{openid}}'>
-    <view class='page_top'>
+    <view class='page_top flex-row-center-flex_start'>
       <view class='user'>
         <view class='head'>
           <image wx:if="{{userinfo.avatarUrl ==''}}" src="http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default_user_head.png" lazy-load='http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/icon/grey_interact.png'></image>
@@ -16,8 +16,7 @@
           <label class='font_666666_24'>ID:{{userinfo.id}}</label>
         </view>
       </view>
-      <view class='right'>
-      </view>
+      <view class='right flex-row-center-flex_end'></view>
     </view>
 
 
@@ -30,7 +29,7 @@
         <navigator wx:if="{{publiclist  !=''}}" class="swiper-tab-item font_666666_24" style='margin-left: 340rpx;margin-right: 0rpx;' url='/pages/mine/index?box_mac={{box_mac}}'>查看更多>></navigator>
       </view>
       <view class='content'>
-        <view class='con_main'>
+        <view class='con_main flex-row-center-space_between'>
 
           <!-- 有数据时-->
           <view class="weui-grids full_width" wx:if="{{publiclist != ''}}">
@@ -51,10 +50,7 @@
           </view>
 
           <!-- 无数据 -->
-          <view class="row-center" wx:else>
-            <!-- <view>
-              <image style='width: 44rpx;height: 64rpx;' src='http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default_mine.png'></image>
-            </view> -->
+          <view class="full_width flex-column-center-space_between" wx:else>
             <view>
               <label class='font_666666_30'>你还没有公开过作品~</label>
             </view>
@@ -117,10 +113,7 @@
           </view>
 
           <!--无数据 -->
-          <view class="row-center" wx:else>
-            <!-- <view>
-              <image style='width: 44rpx;height: 64rpx;' src='http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default_mine.png'></image>
-            </view> -->
+          <view class="full_width flex-column-center-space_between" wx:else>
             <view>
               <label class='font_666666_30'>你赞过的作品都会放到这里哦~</label>
             </view>
@@ -135,10 +128,6 @@
     <view class='nav_bottom_space'></view>
 
   </scroll-view>
-
-  <!-- 菜单 
-  <template is="bottomNavigation" data='{{selectPage:"MINE"}}' />
-  -->
 </view>
 
 <!-- 遥控器 -->

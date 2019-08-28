@@ -1,10 +1,5 @@
 /* pages/interact/index.wxss */
 
-.navigator-hover {
-  background-color: unset;
-  opacity: 0.7;
-}
-
 /* ==================================== 轮播图面板 ==================================== */
 
 .banner-loop-panel {

@@ -15,18 +15,8 @@
 .page-bottom button {
   width: 326rpx;
   height: 89rpx;
-  padding: unset;
-  margin: auto;
   background-image: unset;
   background-color: unset;
-  border: unset;
-}
-
-.page-bottom button::before, .page-bottom button::after {
-  padding: unset;
-  margin: auto;
-  background-color: unset;
-  border: unset;
 }
 
 .page-bottom button image {
@@ -36,8 +26,4 @@
 
 .page-bottom .game-tip {
   margin-top: 50rpx;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
 }

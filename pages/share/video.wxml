@@ -2,21 +2,18 @@
 <import src="/pages/template/commons" />
 <template is="navigationBarForShare" data='{{statusBarHeight: statusBarHeight,titleText:"热点投屏"}}' />
 
-<view class="container theme-container" style='height: calc(100vh - 46px - {{statusBarHeight}}px);'>
+<view class="container flex-column-center-flex_start theme-container" style='height: calc(100vh - 46px - {{statusBarHeight}}px);'>
   <view class='page_main'>
     <view class='content content_bottom_border'>
-      <view class='con_top'>
-        <view wx:if="{{info.avatarUrl !=''}}" class='user_info'>
+      <view class='con_top flex-row-center-flex_start'>
+        <view wx:if="{{info.avatarUrl !=''}}" class='user_info flex-row-center-flex_start'>
           <image class='user_head' src="{{info.avatarUrl}}"></image>
           <label class='user_name font_333333_30'>{{info.nickName}}</label>
         </view>
-        <view wx:else class='user_info'>
+        <view wx:else class='user_info flex-row-center-flex_start'>
           <image class='user_head' src="http://oss.littlehotspot.com/media/resource/5dh67ffRXM.png"></image>
           <label class='user_name font_333333_30'>小热点</label>
         </view>
-        <!-- <view class='operation'>
-          <button bindtap='boxShow' class='launch_tv theme-button' data-res_type="{{pub_info.res_type}}" data-res_nums="{{pub_info.res_nums}}" data-pubdetail="{{pub_info.pubdetail}}" data-boxmac="{{box_mac}}" data-openid="{{openid}}" data-forscreen_id="{{pub_info.forscreen_id}}">电视播放</button>
-        </view> -->
       </view>
       <view class='con_main'>
         <view class="video">
@@ -25,13 +22,13 @@
           </view>
         </view>
       </view>
-      <view class='con_bottom'>
-        <view class='hotel_info font_666666_24'>
+      <view class='con_bottom flex-row-center-flex_start'>
+        <view class='hotel_info flex-row-center-flex_start font_666666_24'>
           <label class='time'>{{info.create_time}}</label>
           <label class='dot' wx:if="{{pub_info.is_pub_hotelinfo==1}}">.</label>
           <label class='hotel_name' wx:if="{{pub_info.is_pub_hotelinfo==1}}">{{pub_info.hotel_name}}</label>
         </view>
-        <view class='operation'>
+        <view class='operation flex-row-center-flex_end'>
           <view wx:if="{{info.is_collect=='1'}}">
             <button bindtap='cancCollect' data-res_id="{{info.res_id}}" data-info="{{info}}" data-type='{{info.type}}' data-openid="{{openid}}">
               <image src='http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/icon/red_heart.png'></image>

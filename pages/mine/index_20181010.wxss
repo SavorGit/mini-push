@@ -2,16 +2,12 @@
 
 .page_main {
   width: 100%;
-  /* height: calc(100% - 138rpx); */
   height: 100%;
 }
 
 .page_top {
   height: 190rpx;
   line-height: 190rpx;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
 }
 
 .user {
@@ -58,35 +54,6 @@
   width: 50%;
   height: 100%;
   line-height: 100%;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: flex-end;
-}
-
-.right .flush, .right .flush::before, .right .flush::after {
-  margin: unset;
-  padding: unset;
-  border: unset;
-  width: 60rpx;
-  height: 90rpx;
-  margin-top: 3rpx;
-  margin-right: 20rpx;
-  background-color: unset;
-  line-height: unset;
-}
-
-.right .flush > view {
-  margin: unset;
-  padding: unset;
-  border: unset;
-  width: 40rpx;
-  height: 40rpx;
-}
-
-.right .flush image {
-  width: 40rpx;
-  height: 40rpx;
 }
 
 /* =============== 选项卡开始 =============== */
@@ -115,20 +82,12 @@
   padding: 20rpx 30rpx 20rpx 30rpx;
 }
 
-/* .content_bottom_border {
-  border-bottom: 1rpx solid #d9d3cd;
-} */
-
 .con_main {
   margin: 0rpx;
   padding: 0rpx;
   border: 0rpx;
   width: 100%;
   min-height: 235rpx;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-between;
 }
 
 .con_main .weui-grid .yingtao {
@@ -177,14 +136,6 @@
 .con_main .weui-grid .yingtao .cover .share > label {
   margin-left: 10rpx;
   vertical-align: middle;
-}
-
-.row-center {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-between;
 }
 
 /* =============== 选项卡结束 =============== */

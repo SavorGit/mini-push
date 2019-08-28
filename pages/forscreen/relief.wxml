@@ -2,8 +2,8 @@
 <import src="/pages/template/commons" />
 <template is="navigationBarForTwoLevel" data='{{statusBarHeight: statusBarHeight,titleText:"热点投屏"}}' />
 
-<scroll-view class="container theme-container" style='height: calc(100vh - 46px - {{statusBarHeight}}px);' scroll-y="true" scroll-with-animation="true">
-  <view class="content">
+<scroll-view class="container flex-column-center-flex_start theme-container" style='height: calc(100vh - 46px - {{statusBarHeight}}px);' scroll-y="true" scroll-with-animation="true">
+  <view class="content flex-column-center-space_between">
     <label class='title'>总则</label>
     <label class='paragraph'>用户在接受小热点（热点投屏）服务之前，请务必仔细阅读本条款并同意本声明。</label>
     <label class='paragraph'>用户直接或通过各类方式使用小热点（热点投屏）服务的行为，都将被视作已无条件接受本声明所涉全部内容；若用户对本声明的任何条款有异议，请停止使用小热点（热点投屏）所提供的全部服务。</label>

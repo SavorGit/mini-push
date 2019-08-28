@@ -4,7 +4,7 @@
 
 
 <!-- 支付失败 -->
-<view wx:if="{{order_status==2}}" class='container theme-container' style='height: calc(100vh - 46px - {{statusBarHeight}}px);'>
+<view wx:if="{{order_status==2}}" class='container flex-column-center-flex_start theme-container' style='height: calc(100vh - 46px - {{statusBarHeight}}px);'>
   <view class='PageTop full_width'></view>
   <scroll-view class='PageMain full_width' scroll-y="true" scroll-with-animation="true">
     <view class='package'>
@@ -14,7 +14,7 @@
       <view class='body PackageColor'>
         <view class='user_name'>{{nickName}}</view>
         <view class='message'>手慢了，红包抢完了</view>
-        <view class='grab'>
+        <view class='grab flex-row-center-space_between'>
           <navigator class='button' url='/pages/thematic/money_blessing/packing?openid={{openid}}&box_mac={{box_mac}}'>我也发一个></navigator>
           <navigator class='button' url='/pages/thematic/money_blessing/grab_detail?order_id={{order_id}}&box_mac={{box_mac}}'>查看领取详情></navigator>
         </view>
@@ -22,27 +22,20 @@
     </view>
     <view class='EntranceCard EntranceCardColor'>
       <view style='height:50rpx;'></view>
-      <!-- <view class='header-bar'>
-        <icon class="fa fa-group fa-3x" />
-      </view>
-      <view class='slogan-bar'>
-        <view>独乐乐不如众乐乐</view>
-        <view>快来与朋友分享您的精彩内容吧</view>
-      </view> -->
-      <view class='entrance-bar theme-font1'>
-        <view bindtap="chooseImage" data-box_mac="{{box_mac}}" data-openid="{{openid}}" data-is_open_simple='{{is_open_simple}}' class='entrance'>
+      <view class='entrance-bar flex-row-center-space_between theme-font1'>
+        <view bindtap="chooseImage" data-box_mac="{{box_mac}}" data-openid="{{openid}}" data-is_open_simple='{{is_open_simple}}' class='entrance flex-column-center-flex_start'>
           <image src='http://oss.littlehotspot.com/media/resource/ZGpjYT4ita.png'></image>
           <view>照片上电视</view>
         </view>
-        <view bindtap='chooseVedio' data-box_mac="{{box_mac}}" data-openid="{{openid}}" data-is_open_simple='{{is_open_simple}}' class='entrance'>
+        <view bindtap='chooseVedio' data-box_mac="{{box_mac}}" data-openid="{{openid}}" data-is_open_simple='{{is_open_simple}}' class='entrance flex-column-center-flex_start'>
           <image src='http://oss.littlehotspot.com/media/resource/sMiCFDp4BP.png'></image>
           <view>视频上电视</view>
         </view>
-        <view bindtap='showHappy' data-box_mac="{{box_mac}}" data-openid="{{openid}}" class='entrance'>
+        <view bindtap='showHappy' data-box_mac="{{box_mac}}" data-openid="{{openid}}" class='entrance flex-column-center-flex_start'>
           <image src='http://oss.littlehotspot.com/media/resource/42jTE3c8Sy.png'></image>
           <view>生日歌点播</view>
         </view>
-        <view bindtap='demand' class='entrance'>
+        <view bindtap='demand' class='entrance flex-column-center-flex_start'>
           <image src='http://oss.littlehotspot.com/media/resource/SsRSWYz5mB.png'></image>
           <view>节目点播</view>
         </view>
@@ -56,12 +49,12 @@
 
 
         <view class='content content_bottom_border' wx:for="{{discovery_list}}" wx:key="key" wx:for-item="bean" wx:for-index="index">
-          <view class='con_top'>
-            <view class='user_info'>
+          <view class='con_top flex-row-center-flex_start'>
+            <view class='user_info flex-row-center-flex_start'>
               <image class='user_head' src="{{bean.avatarUrl}}" lazy-load='/images/icon2/666666_interact.png'></image>
               <label class='user_name font_999999_30'>{{bean.nickName}}</label>
             </view>
-            <view class='operation'>
+            <view class='operation flex-row-center-flex_end'>
               <button bindtap='boxShow' data-res_type="{{bean.res_type}}" data-res_nums="{{bean.res_nums}}" data-pubdetail="{{bean.pubdetail}}" data-boxmac="{{box_mac}}" data-openid="{{openid}}" data-forscreen_id="{{bean.forscreen_id}}" class='launch_tv theme-button'>电视播放</button>
             </view>
           </view>
@@ -89,13 +82,13 @@
             </view>
 
           </view>
-          <view class='con_bottom'>
-            <view class='hotel_info font_999999_24'>
+          <view class='con_bottom flex-row-center-flex_start'>
+            <view class='hotel_info flex-row-center-flex_start font_999999_24'>
               <label class='time'>{{bean.create_time}}</label>
               <label class='dot' wx:if="{{bean.hotel_name!=''}}">.</label>
               <label class='hotel_name one-line-overflow' wx:if="{{picinfo.hotel_name!=''}}">{{bean.hotel_name}}</label>
             </view>
-            <view class='operation'>
+            <view class='operation flex-row-center-flex_end'>
               <view wx:if="{{bean.is_collect==1}}">
                 <button bindtap='cancCollect' data-res_id="{{bean.forscreen_id}}" data-openid="{{openid}}" data-res_key="{{index}}">
                   <image src='http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/icon/red_heart.png'></image>
@@ -129,7 +122,7 @@
 
 
 <!-- 支付成功 -->
-<view wx:elif="{{order_status==1}}" class='container theme-container' style='height: calc(100vh - 46px - {{statusBarHeight}}px);'>
+<view wx:elif="{{order_status==1}}" class='container flex-column-center-flex_start theme-container' style='height: calc(100vh - 46px - {{statusBarHeight}}px);'>
   <view class='PageTop full_width'></view>
   <scroll-view class='PageMain full_width' scroll-y="true" scroll-with-animation="true">
     <view class='package'>
@@ -143,7 +136,7 @@
           <label>{{money}}</label>
           <sub>元</sub>
         </view>
-        <view class='grab'>
+        <view class='grab flex-row-center-space_between'>
           <navigator class='button' url='/pages/thematic/money_blessing/packing?openid={{openid}}&box_mac={{box_mac}}'>我也发一个></navigator>
           <navigator class='button' url='/pages/thematic/money_blessing/grab_detail?order_id={{order_id}}&box_mac={{box_mac}}'>查看领取详情></navigator>
         </view>
@@ -152,27 +145,20 @@
 
     <view class='EntranceCard EntranceCardColor'>
       <view style='height:50rpx;'></view>
-      <!-- <view class='header-bar'>
-        <icon class="fa fa-group fa-3x" />
-      </view>
-      <view class='slogan-bar'>
-        <view>独乐乐不如众乐乐</view>
-        <view>快来与朋友分享您的精彩内容吧</view>
-      </view> -->
-      <view class='entrance-bar theme-font1'>
-        <view bindtap="chooseImage" data-box_mac="{{box_mac}}" data-openid="{{openid}}" data-is_open_simple='{{is_open_simple}}' class='entrance'>
+      <view class='entrance-bar flex-row-center-space_between theme-font1'>
+        <view bindtap="chooseImage" data-box_mac="{{box_mac}}" data-openid="{{openid}}" data-is_open_simple='{{is_open_simple}}' class='entrance flex-column-center-flex_start'>
           <image src='http://oss.littlehotspot.com/media/resource/ZGpjYT4ita.png'></image>
           <view>照片上电视</view>
         </view>
-        <view bindtap='chooseVedio' data-box_mac="{{box_mac}}" data-openid="{{openid}}" data-is_open_simple='{{is_open_simple}}' class='entrance'>
+        <view bindtap='chooseVedio' data-box_mac="{{box_mac}}" data-openid="{{openid}}" data-is_open_simple='{{is_open_simple}}' class='entrance flex-column-center-flex_start'>
           <image src='http://oss.littlehotspot.com/media/resource/sMiCFDp4BP.png'></image>
           <view>视频上电视</view>
         </view>
-        <view bindtap='showHappy' data-box_mac="{{box_mac}}" data-openid="{{openid}}" class='entrance'>
+        <view bindtap='showHappy' data-box_mac="{{box_mac}}" data-openid="{{openid}}" class='entrance flex-column-center-flex_start'>
           <image src='http://oss.littlehotspot.com/media/resource/42jTE3c8Sy.png'></image>
           <view>生日歌点播</view>
         </view>
-        <view bindtap='demand' class='entrance'>
+        <view bindtap='demand' class='entrance flex-column-center-flex_start'>
           <image src='http://oss.littlehotspot.com/media/resource/SsRSWYz5mB.png'></image>
           <view>节目点播</view>
         </view>
@@ -186,12 +172,12 @@
 
 
         <view class='content content_bottom_border' wx:for="{{discovery_list}}" wx:key="key" wx:for-item="bean" wx:for-index="index">
-          <view class='con_top'>
-            <view class='user_info'>
+          <view class='con_top flex-row-center-flex_start'>
+            <view class='user_info flex-row-center-flex_start'>
               <image class='user_head' src="{{bean.avatarUrl}}" lazy-load='/images/icon2/666666_interact.png'></image>
               <label class='user_name font_999999_30'>{{bean.nickName}}</label>
             </view>
-            <view class='operation'>
+            <view class='operation flex-row-center-flex_end'>
               <button bindtap='boxShow' data-res_type="{{bean.res_type}}" data-res_nums="{{bean.res_nums}}" data-pubdetail="{{bean.pubdetail}}" data-boxmac="{{box_mac}}" data-openid="{{openid}}" data-forscreen_id="{{bean.forscreen_id}}" class='launch_tv theme-button'>电视播放</button>
             </view>
           </view>
@@ -219,13 +205,13 @@
             </view>
 
           </view>
-          <view class='con_bottom'>
-            <view class='hotel_info font_999999_24'>
+          <view class='con_bottom flex-row-center-flex_start'>
+            <view class='hotel_info flex-row-center-flex_start font_999999_24'>
               <label class='time'>{{bean.create_time}}</label>
               <label class='dot' wx:if="{{bean.hotel_name!=''}}">.</label>
               <label class='hotel_name one-line-overflow' wx:if="{{picinfo.hotel_name!=''}}">{{bean.hotel_name}}</label>
             </view>
-            <view class='operation'>
+            <view class='operation flex-row-center-flex_end'>
               <view wx:if="{{bean.is_collect==1}}">
                 <button bindtap='cancCollect' data-res_id="{{bean.forscreen_id}}" data-openid="{{openid}}" data-res_key="{{index}}">
                   <image src='http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/icon/red_heart.png'></image>

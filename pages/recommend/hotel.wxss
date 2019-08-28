@@ -10,16 +10,8 @@
   font-size: 26rpx;
 }
 
-.page_banner .layout {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-between;
-}
-
 .page_banner .layout > label {
-  margin-left: auto;
-  margin-right: auto;
+  margin: 0 auto;
   display: block;
   width: 500rpx;
 }
@@ -48,11 +40,7 @@
 }
 
 .page_top > view {
-  padding: 0rpx 25rpx 0rpx 25rpx;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-between;
+  padding: 0 25rpx;
 }
 
 .page_top > view .city_show > .icon {
@@ -102,9 +90,6 @@
   padding: 25rpx 25rpx 20rpx 25rpx;
   min-height: 120rpx;
   border-bottom: 1rpx solid #bfbfbf;
-  display: flex;
-  flex-direction: row;
-  align-items: flex-start;
 }
 
 .page_main > .row-item > .cover {
@@ -127,12 +112,6 @@
   width: calc(100% - 145rpx);
 }
 
-.page_main > .row-item > .i-right > .ir-top {
-  display: flex;
-  flex-direction: row;
-  align-items: flex-start;
-}
-
 .page_main > .row-item > .i-right > .ir-top > .irt-left {
   width: calc(100% - 140rpx);
 }
@@ -149,8 +128,6 @@
   height: 50rpx;
   line-height: 50rpx;
   font-size: 24rpx;
-  padding: unset;
-  border: unset;
   border-radius: 25rpx;
 }
 
@@ -170,10 +147,6 @@
   bottom: 10rpx;
   text-align: center;
   position: absolute;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
 }
 
 .flex-for-bottom >.flex-tip {

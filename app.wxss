@@ -17,7 +17,7 @@
 button, button::before, button::after {
   border: unset;
   padding: unset;
-  margin: unset;
+  margin: auto;
 }
 
 button {

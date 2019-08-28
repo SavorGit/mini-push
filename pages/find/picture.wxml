@@ -3,7 +3,7 @@
 <template is="navigationBarForTwoLevel" data='{{statusBarHeight: statusBarHeight,titleText:"热点投屏"}}' />
 
 <!-- 发现视频落地页 -->
-<view class="container theme-container" style='height: calc(100vh - 46px - {{statusBarHeight}}px);'>
+<view class="container flex-column-center-flex_start theme-container" style='height: calc(100vh - 46px - {{statusBarHeight}}px);'>
   <view class='full_width page_top'></view>
   <view class='full_width page_main'>
     <view class='article'>
@@ -29,7 +29,7 @@
           <label wx:if="{{picinfo.hotel_name!=''}}">.</label>
           <label wx:if="{{picinfo.hotel_name!=''}}">{{picinfo.hotel_name}}</label>
         </view>
-        <view class='operation font_666666_24'>
+        <view class='operation flex-row-center-flex_start font_666666_24'>
           <view>
             <button>
               <label class="fa fa-play fa-lg" style="color: #666666;margin-right: 5rpx;"></label>

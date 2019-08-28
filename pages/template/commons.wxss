@@ -96,10 +96,6 @@
   border-radius: 20rpx;
 }
 
-.remoteControlWindow-container .button-hover {
-  opacity: 0.7;
-}
-
 .remoteControlWindow-container .remoteControlWindow-control {
   padding: 20rpx;
   text-align: right;
@@ -120,7 +116,6 @@
   line-height: 100rpx;
   text-align: center;
   font-size: 34rpx;
-  margin: auto;
   border-radius: 60rpx;
   background-color: unset;
 }
@@ -149,7 +144,6 @@
 .remoteControlWindow-container .remoteControlWindow-middle button {
   width: 400rpx;
   height: 400rpx;
-  margin: auto;
   background: unset;
   border-radius: 200rpx;
   z-index: 1;
@@ -199,10 +193,6 @@
   border-radius: 15rpx;
 }
 
-.remoteControlWindow-container .remoteControlWindow-bottom navigator.navigator-hover {
-  opacity: 0.7;
-}
-
 /* ================================= 热点商务联系广告面板 ================================= */
 
 .advert-panel {
@@ -213,7 +203,6 @@
 
 .advert-panel > label, .advert-panel > button {
   display: block;
-  margin: auto;
 }
 
 .advert-panel > button {
@@ -222,16 +211,16 @@
   line-height: 50rpx;
   border-radius: 5rpx;
   font-size: 24rpx;
-  padding: unset;
-  border: unset;
 }
 
 .advert-panel > .fa {
-  margin-right: 0;
+  margin-left: 30rpx;
+  margin-right: 0rpx;
 }
 
 .advert-panel > .msg {
   margin-left: 20rpx;
+  margin-right: 200rpx;
 }
 
 /* ================================= 打断投屏弹窗 ================================= */

@@ -2,12 +2,10 @@
 <import src="/pages/template/commons" />
 <template is="navigationBarForTwoLevel" data='{{statusBarHeight: statusBarHeight,titleText:"热点投屏"}}' />
 
-<view class='container theme-container' style='height: calc(100vh - 46px - {{statusBarHeight}}px);'>
+<view class='container flex-column-center-flex_start theme-container' style='height: calc(100vh - 46px - {{statusBarHeight}}px);'>
   <view class='PageMain full_width'></view>
   <view class='PageBottom full_width'>
     <navigator class='DropMoneyBtn PackingButtonColor PackingButtonFontSize' url='/pages/thematic/money_blessing/packing?openid={{openid}}&box_mac={{box_mac}}'>我要发电视红包</navigator>
-    <!-- <button class='DropMoneyBtn PackingButtonColor PackingButtonFontSize'>我要发电视红包</button> -->
-
     <navigator class='DropMoneyList' url='/pages/thematic/money_blessing/grab_list?openid={{openid}}&box_mac={{box_mac}}'>我发的红包</navigator>
   </view>
 </view>

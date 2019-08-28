@@ -105,7 +105,7 @@
 
 <!-- 热点商务联系广告面板 -->
 <template name="adsPanelForSavorBusinessContacts">
-  <view class="advert-panel flex-row-center-space_between full_width theme-panel-dark">
+  <view class="advert-panel flex-row-center-flex_start full_width theme-panel-dark">
     <label class="fa fa-phone fa-lg"></label>
     <label class="msg">商务合作：010-64185797</label>
     <button class="theme-button" bindtap="phonecallevent" data-tel="010-64185797">拨打</button>

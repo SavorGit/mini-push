@@ -60,13 +60,9 @@
 
 .page_main .article .con_bottom > .operation {
   height: 50rpx;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
 }
 
 .page_main .article .con_bottom > .operation > view {
-  /* margin-left: 15rpx; */
   margin-right: 30rpx;
 }
 
@@ -103,8 +99,6 @@
   line-height: 80rpx;
   border-radius: 10rpx;
   font-size: 28rpx;
-  margin: auto;
-  padding: unset;
 }
 
 .page_bottom {

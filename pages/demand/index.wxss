@@ -11,11 +11,6 @@
   border-radius: 0;
 }
 
-.button-hover, .navigator-hover {
-  background-color: unset;
-  opacity: 1;
-}
-
 .article {
   width: 720rpx;
   margin: 0 0 15rpx 0;

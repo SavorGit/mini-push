@@ -1,4 +1,4 @@
-<!-- <import src="../template/navigation.wxml" /> -->
+<!--pages/demand/index.wxml-->
 <import src="/pages/template/commons" />
 <template is="navigationBarForTopLevel" data='{{statusBarHeight: statusBarHeight,titleText:"热点投屏"}}' />
 

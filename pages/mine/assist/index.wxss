@@ -1,26 +1,11 @@
 /* pages/mine/assist/index.wxss */
 
-.container {
-  justify-content: start;
-}
-
 /* ==================================== 内容信息面板 [他人] ==================================== */
 
 .assist-info-other-panel {
   width: calc(100% - 40rpx);
   height: 505rpx;
   padding: 20rpx 20rpx 25rpx 20rpx;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: start;
-}
-
-.assist-info-other-panel > .people {
-  display: flex;
-  flex-direction: row;
-  align-items: flex-start;
-  justify-content: start;
 }
 
 .assist-info-other-panel > .people > .head-img {
@@ -32,10 +17,6 @@
 
 .assist-info-other-panel > .people > view {
   width: calc(100% - 80rpx);
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  justify-content: start;
 }
 
 .assist-info-other-panel > .people > view > .name {
@@ -72,17 +53,6 @@
   width: calc(100% - 40rpx);
   height: 560rpx;
   padding: 20rpx;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: start;
-}
-
-.assist-info-self-panel > .people {
-  display: flex;
-  flex-direction: row;
-  align-items: flex-start;
-  justify-content: start;
 }
 
 .assist-info-self-panel > .people > .head-img {
@@ -94,10 +64,6 @@
 
 .assist-info-self-panel > .people > view {
   width: calc(100% - 80rpx);
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  justify-content: start;
 }
 
 .assist-info-self-panel > .people > view > .name {
@@ -148,19 +114,11 @@
 .assist-people-panel > .title-bar {
   height: 24rpx;
   padding: 5rpx 20rpx 0 20rpx;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-between;
 }
 
 .assist-people-panel > .list {
   height: 110rpx;
   padding: 0 20rpx;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: start;
 }
 
 .assist-people-panel > .list > .people {
@@ -184,10 +142,6 @@
 
 .recommend-panel > .title-bar {
   padding: 0 20rpx;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-between;
   font-size: 24rpx;
 }
 
@@ -204,10 +158,6 @@
   height: 160rpx;
   padding: 20rpx 0 15rpx 0;
   margin: 0 25rpx;
-  display: flex;
-  flex-direction: row;
-  align-items: flex-start;
-  justify-content: start;
 }
 
 .recommend-panel > .list > .row.line {
@@ -246,94 +196,10 @@
   font-size: 20rpx;
 }
 
-.recommend-panel > .list > .row > .btn::before,
-.recommend-panel > .list > .row > .btn::after {
-  background: unset;
-  border: unset;
-  margin: unset;
-  padding: unset;
-}
-
 .recommend-panel > .list > .row > .btn {
   width: 100rpx;
   height: 40rpx;
   line-height: 40rpx;
   font-size: 20rpx;
   border-radius: 5rpx;
-  border: unset;
-  margin: unset;
-  padding: unset;
-}
-
-/* 
-.recommend-panel > .list {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  justify-content: start;
-}
-
-.recommend-panel > .list > .entry {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: start;
-}
-
-.recommend-panel > .list > .entry > .people {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-around;
-}
-
-.recommend-panel > .list > .entry > .people > .head-img {
-  width: 32rpx;
-  height: 32rpx;
-  border-radius: 50%;
-}
-
-.recommend-panel > .list > .entry > .img {
-  width: 60rpx;
-  height: 60rpx;
-  border-radius: 10rpx;
-}
-
-.recommend-panel > .list > .entry > .rank {
-  font-style: italic;
-} */
-
-/* ==================================== 广告面板 ==================================== */
-
-.advert-panel {
-  height: 90rpx;
-  margin-top: 10rpx;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-between;
-  font-size: 28rpx;
-}
-
-.advert-panel > label, .advert-panel > button {
-  display: block;
-  margin: auto;
-}
-
-.advert-panel > button {
-  width: 100rpx;
-  height: 50rpx;
-  line-height: 50rpx;
-  border-radius: 5rpx;
-  font-size: 24rpx;
-  padding: unset;
-  border: unset;
-}
-
-.advert-panel > .fa {
-  margin-right: 0;
-}
-
-.advert-panel > .msg {
-  margin-left: 20rpx;
 }

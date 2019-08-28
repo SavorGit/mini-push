@@ -1,11 +1,10 @@
 <!--pages/message/index.wxml-->
-<!-- <import src="../template/navigation" /> -->
-<import src="../template/commons" />
+<import src="/pages/template/commons" />
 <template is="navigationBarForTopLevel" data='{{statusBarHeight: statusBarHeight,titleText:"热点投屏"}}' />
 
-<view class="container theme-container" style='height: calc(100vh - 46px - {{statusBarHeight}}px);'>
-  <view class='page_main_v'>
-    <view class='page_main_h'>
+<view class="container flex-column-center-flex_start theme-container" style='height: calc(100vh - 46px - {{statusBarHeight}}px);'>
+  <view class='full_width full_height flex-row-center-flex_start'>
+    <view class='full_width flex-column-center-flex_start'>
       <image mode='widthFix' src='http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/not_open_002.png' style='width: 50vw;margin-bottom: 50rpx;'></image>
       <label class='font_666666_28'>功能正在开发中，敬请期待</label>
       <!--

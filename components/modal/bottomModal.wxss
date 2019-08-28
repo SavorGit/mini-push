@@ -7,9 +7,6 @@
   top: 0;
   bottom: 0;
   padding-bottom: 10rpx;
-  display: flex;
-  justify-content: center;
-  align-items: flex-end;
   background-color: rgba(0, 0, 0, 0.4);
   z-index: 9999;
 }
@@ -18,27 +15,12 @@
   padding: 10rpx;
   height: 100rpx;
   line-height: 100rpx;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-between;
-  /* color: #f6f3ee; */
   font-size: 34rpx;
   font-weight: bold;
   border-bottom: 2rpx solid rgba(246, 243, 238, 0.1);
 }
 
-.modal-content {
-  display: flex;
-  flex-direction: column;
-  /* background-color: #932c3f; */
-}
-
 .modal-btn-wrapper {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-between;
   font-weight: bold;
   border-top: 2rpx solid rgba(246, 243, 238, 0.1);
 }

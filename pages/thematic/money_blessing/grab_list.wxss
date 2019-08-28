@@ -13,17 +13,11 @@
   text-align: center;
 }
 
-.list .navigator-hover {
-  background: unset;
-  color: unset;
-}
-
 .list .item {
   width: 100%;
   height: 90rpx;
   padding: 20rpx 0;
-  margin-left: auto;
-  margin-right: auto;
+  margin: 0 auto;
   border-bottom: 2rpx solid #999;
 }
 

@@ -3,13 +3,13 @@
 <template wx:if="{{inside==0}}" is="navigationBarForShare" data='{{statusBarHeight: statusBarHeight,titleText:"为好友助力"}}' />
 <template wx:if="{{inside==1}}" is="navigationBarForTwoLevel" data='{{statusBarHeight: statusBarHeight,titleText:"邀请好友助力"}}' />
 
-<scroll-view class="container theme-container" style='height: calc(100vh - 46px - {{statusBarHeight}}px);' scroll-y="true" scroll-with-animation="true">
+<scroll-view class="container flex-column-center-flex_start theme-container" style='height: calc(100vh - 46px - {{statusBarHeight}}px);' scroll-y="true" scroll-with-animation="true">
 
   <!-- 内容信息面板 [他人] -->
-  <view wx:if="{{assist_info.status==2 || assist_info.status==3}}" class="assist-info-other-panel theme-panel">
-    <view class="people full_width">
+  <view wx:if="{{assist_info.status==2 || assist_info.status==3}}" class="assist-info-other-panel flex-column-center-flex_start theme-panel">
+    <view class="people flex-row-flex_start-start full_width">
       <image class="head-img" src="{{assist_info.user.avatarUrl}}"></image>
-      <view>
+      <view class="flex-column-flex_start-start">
         <label class="name font_333333_24">{{assist_info.user.nickName}}：</label>
         <label class="msg font_999999_24">“快来帮我助力！</label>
         <label class="msg font_999999_24">我要在全国千家高端餐厅SHOW”</label>
@@ -27,10 +27,10 @@
   </view>
 
   <!-- 内容信息面板 [自己] -->
-  <view wx:if="{{assist_info.status==1}}" class="assist-info-self-panel full_width theme-panel">
-    <view class="people full_width">
+  <view wx:if="{{assist_info.status==1}}" class="assist-info-self-panel flex-column-center-flex_start full_width theme-panel">
+    <view class="people flex-row-flex_start-start full_width">
       <image class="head-img" src="{{assist_info.user.avatarUrl}}"></image>
-      <view>
+      <view class="flex-column-flex_start-start">
         <label class="name font_333333_24">{{assist_info.user.nickName}}：</label>
         <label class="msg font_999999_24">“快来帮我助力！</label>
         <label class="msg font_999999_24">我要在全国千家高端餐厅SHOW”</label>
@@ -53,11 +53,11 @@
 
   <!-- 助力人员面板 -->
   <view wx:if="{{assist_frieds_nums>0}}" class="assist-people-panel full_width theme-panel">
-    <view class="title-bar">
+    <view class="title-bar flex-row-center-space_between">
       <view class="title font_333333_24">已有{{assist_frieds_nums}}名好友帮您助力</view>
       <navigator class="more font_999999_24" url="/pages/mine/assist/assistlist?forscreen_id={{forscreen_id}}">更多...</navigator>
     </view>
-    <view class="list" wx:if="{{assist_frieds.length>0}}">
+    <view class="list flex-row-center-flex_start" wx:if="{{assist_frieds.length>0}}">
       <view class="people" wx:for="{{assist_frieds}}" wx:key="{{key}}" wx:index="{{index}}" wx:for-item="bean">
         <image class="head-img" src="{{bean.avatarUrl}}"></image>
       </view>
@@ -67,13 +67,13 @@
 
   <!-- 推荐面板 -->
   <view wx:if="{{hot_play.length > 0}}" class="recommend-panel full_width">
-    <view class="title-bar">
+    <view class="title-bar flex-row-center-space_between">
       <view class="title font_333333_24">热播内容</view>
       <navigator class="more" open-type="switchTab" url="/pages/find/selected_list">更多...</navigator>
     </view>
     <view class="list">
       <block wx:for="{{hot_play}}" wx:key="key" wx:for-index="index" wx:for-item="bean">
-        <view class="row {{index<2 ? 'like':''}}">
+        <view class="row flex-row-flex_start-start {{index<2 ? 'like':''}}">
           <image class="img" src="{{bean.pubdetail[0].res_url}}"></image>
           <view class="info">
             <view class="rank theme-font5">TOP {{index+1}}</view>
@@ -89,11 +89,8 @@
   <view wx:else class="recommend-panel full_width" style="height: calc(100% - {{inside==0 ? 650 : 705}}rpx);"></view>
 
   <!-- 广告面板 -->
-  <view class="advert-panel full_width theme-panel-dark">
-    <label class="fa fa-phone fa-lg"></label>
-    <label class="msg">商务合作：010-64185797</label>
-    <button class="theme-button" bindtap="phonecallevent" data-tel="010-64185797">拨打</button>
-  </view>
+  <template is="adsPanelForSavorBusinessContacts" />
 </scroll-view>
+
 <!-- 微信授权登录 -->
 <template is="wxAuthLogin" data='{{show: showModal}}' />
