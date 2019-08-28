@@ -1,5 +1,5 @@
 /**app.wxss**/
-@import "font-awesome.wxss";
+@import "/font-awesome.wxss";
 
 /* ================================== 页面 ================================== */
 
@@ -267,8 +267,14 @@ button::before, button::after {
 
 /* ================== 表格布局结束 ================== */
 
-/* 导入模板样式 */
-@import "pages/template/commons.wxss";
+.guided_mask_panel {
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: #000;
+  opacity: 0.9;
+}
 
-/* @import "pages/template/navigation.wxss"; */
-@import "theme.wxss";
+/* 导入模板样式 */
+@import "/pages/template/commons.wxss";
+@import "/theme.wxss";

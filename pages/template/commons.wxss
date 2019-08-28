@@ -203,6 +203,78 @@
   opacity: 0.7;
 }
 
+/* ================================= 热点商务联系广告面板 ================================= */
+
+.advert-panel {
+  height: 90rpx;
+  margin-top: 10rpx;
+  font-size: 28rpx;
+}
+
+.advert-panel > label, .advert-panel > button {
+  display: block;
+  margin: auto;
+}
+
+.advert-panel > button {
+  width: 100rpx;
+  height: 50rpx;
+  line-height: 50rpx;
+  border-radius: 5rpx;
+  font-size: 24rpx;
+  padding: unset;
+  border: unset;
+}
+
+.advert-panel > .fa {
+  margin-right: 0;
+}
+
+.advert-panel > .msg {
+  margin-left: 20rpx;
+}
+
+/* ================================= 打断投屏弹窗 ================================= */
+
+.interrupt-launch-screen-window-container {
+  width: 100%;
+  height: 100%;
+  text-align: left;
+  border-radius: 10rpx;
+}
+
+.interrupt-launch-screen-window-container > .window-top {
+  padding: 50rpx 0rpx 20rpx 0rpx;
+}
+
+.interrupt-launch-screen-window-container > .window-top > .title > label {
+  font-weight: bold;
+  padding-left: 20rpx;
+}
+
+.interrupt-launch-screen-window-container > .window-main {
+  padding: 20rpx 40rpx;
+  margin-bottom: 20rpx;
+}
+
+.interrupt-launch-screen-window-container > .window-main > .content {
+  display: block;
+  margin-bottom: 20rpx;
+}
+
+.interrupt-launch-screen-window-container > .window-bottom {
+  height: 120rpx;
+}
+
+.interrupt-launch-screen-window-container > .window-bottom > button {
+  width: 285rpx;
+  height: 80rpx;
+  line-height: 80rpx;
+  border-radius: 40rpx;
+  display: inline-block;
+  margin: 0rpx 40rpx;
+}
+
 /* ================================= 自定义顶级页面导航栏 ================================= */
 
 .default-navigation-bar {

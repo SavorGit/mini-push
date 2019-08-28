@@ -102,11 +102,3 @@
 .page_bottom {
   height: 100rpx;
 }
-
-/* .page_bottom .option > button {
-  height: 100rpx;
-  line-height: 100rpx;
-  border: unset;
-  border-radius: 0rpx;
-  font-size: 34rpx;
-} */

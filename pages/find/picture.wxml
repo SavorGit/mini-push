@@ -63,11 +63,5 @@
       <button wx:else disabled="true">{{djs}}S</button>
     </view>
   </view>
-  <view class='full_width page_bottom'>
-    <!-- <view class='option'>
-      <button wx:if="{{is_replay_disabel==false}}" bindtap='boxShow' data-forscreen_id='{{picinfo.forscreen_id}}' data-pubdetail='{{picinfo.pubdetail}}' data-forscreen_char='{{picinfo.forscreen_char}}' data-res_type="{{picinfo.res_type}}" data-res_nums="{{picinfo.res_nums}}"
-        data-boxmac="{{box_mac}}" data-openid="{{openid}}" class='theme-button'>电视播放</button>
-      <button wx:else class='theme-button2'>{{djs}}S</button>
-    </view> -->
-  </view>
+  <view class='full_width page_bottom'></view>
 </view>

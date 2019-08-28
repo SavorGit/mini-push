@@ -1,21 +1,14 @@
 <!-- pages/forscreen/forimages/index.wxml -->
 <import src="/pages/template/commons" />
+<import src="/pages/forscreen/launch_media-template" />
 <template is="navigationBarForTwoLevel" data='{{statusBarHeight: statusBarHeight,titleText:"热点投屏"}}' />
 
 
 
 <!-- ================================== 上传图片前 ================================== -->
 <view wx:if="{{!showThird}}" class="container theme-container" style='height: calc(100vh - 46px - {{statusBarHeight}}px);'>
-  <view class="full_width launch_pic_page_b">
-    <!-- <view class="full_width launch_pic_page_b display_{{showThird?'hide':'show'}}"> -->
-    <view class="page_top theme-panel-2">
-      <view class='full_width font_666666_26'>
-        <label class='tip_top_lable'>图片加载成功后，选择照片，电视开始展示</label>
-        <label class='link_relief'>
-          <navigator url="/pages/forscreen/relief">免责声明</navigator>
-        </label>
-      </view>
-    </view>
+  <view class="full_width before_launch">
+    <template is="pageTop" />
     <form bindsubmit="up_forscreen" report-submit="true">
       <view class='page_main'>
         <view class="weui-grids grids-frame">
@@ -45,11 +38,10 @@
 
         <!-- 投图片 -->
         <view class='pic_text'>
-          <!-- <label class='font_333333_30'>为所有照片增加文字（选填）</label> -->
           <textarea class='text_input theme-textarea' name="forscreen_char" maxlength='30' placeholder='电视展示时增加文字...'></textarea>
         </view>
-        <view class='grant_auth'>
-          <checkbox-group class="checkbox-group" bindchange="checkboxChange">
+        <view class='grant_auth flex-column-center-space_between'>
+          <checkbox-group class="checkbox-group flex-column-flex_start-start" bindchange="checkboxChange">
             <label class="items" wx:for="{{item}}" wx:key="key" wx:for-index="index">
               <view wx:if="{{index==0}}">
                 <checkbox class="display_hide" value="{{item.value}}" checked="{{item.checked}}" disabled="{{item.disabled}}">{{item.name}}</checkbox>
@@ -66,45 +58,15 @@
         </view>
         <button class="savor-btn theme-button-dark" form-type="submit" hover-class="none" disabled='{{is_btn_disabel}}'>投屏</button>
       </view>
-      <view class='page_bottom'>
-        <!-- <button class="full_width savor-btn theme-button-dark" form-type="submit" hover-class="none" disabled='{{is_btn_disabel}}'>投屏</button> -->
-      </view>
+      <view class='page_bottom flex-row-center-center'></view>
     </form>
 
     <!-- 打断投屏弹窗 -->
-    <bottomModal show="{{showModal}}" height='auto' width="98%" title-text="" confirm-text="" cancel-text="">
-      <view class='bottom-pop-window-container'>
-        <view class='bottom-pop-window-top'>
-          <view class='title'>
-            <label class='font_333333_34'>确认打断投屏？</label>
-          </view>
-        </view>
-        <view class='bottom-pop-window-main'>
-          <label class='content font_666666_30'>当前电视正在进行投屏，继续投屏有可能打断当前投屏中的内容。</label>
-        </view>
-
-        <view class='bottom-pop-window-bottom'>
-          <button class='savor-btn theme-button' bindtap="">继续投屏</button>
-          <button class='savor-btn theme-button-dark' bindtap="">取消投屏</button>
-        </view>
-      </view>
-    </bottomModal>
+    <template is="interruptLaunchScreenWindow" data='{{popInterruptLaunchScreenWindow: showModal, funConfirm: "", funCancel: ""}}' />
   </view>
 
-  <!-- 引导蒙层 -->
-  <view wx:if="{{showGuidedMaskBeforLaunch}}" class="guided_mask_panel launch_before full_width full_height">
-    <view class="point" style="margin-top: calc(718rpx + 46px + {{statusBarHeight}}px);">
-      <checkbox-group class="checkbox-group">
-        <checkbox disabled="true">公开发表，公众可见</checkbox>
-      </checkbox-group>
-    </view>
-    <image class="arrow" src="/images/imgs/FFFFFF_guide_arrow.png"></image>
-    <view class="explain font_FFFFFF_28">
-      <label>公开不仅可以让更多人看到，</label>
-      <label>还有机会在上千家餐厅电视中播放哦~</label>
-    </view>
-    <button class="theme-button font_FFFFFF_28" bindtap="closeLead" data-type="1">知道了</button>
-  </view>
+  <!-- 投屏之前引导蒙板 -->
+  <template is="beforeLaunchGuidedMask" wx:if="{{showGuidedMaskBeforLaunch}}" data='{{marginTop: "calc(718rpx + 46px + " + statusBarHeight + "px)", dataType: 1, openid: openid}}' />
 </view>
 
 
@@ -113,15 +75,12 @@
 
 <!-- ================================== 上传图片后 ================================== -->
 <view wx:if="{{showThird}}" class="container theme-container" style='height: calc(100vh - 46px - {{statusBarHeight}}px);'>
-  <!-- <view class="full_width full_height launch_pic_page_a display_{{showThird?'show':'hide'}}"> -->
-  <view class="full_width full_height launch_pic_page_a">
-    <view class="page_top theme-panel-2">
-      <view class='full_width font_666666_26'>
-        <label class='tip_top_lable'>图片加载成功后，选择照片，电视开始展示</label>
-        <label class='link_relief'>
-          <navigator url="/pages/forscreen/relief">免责声明</navigator>
-        </label>
-      </view>
+  <view class="full_width full_height after_launch">
+    <view class="page_top theme-panel-2 flex-row-center-flex_start font_666666_26">
+      <label>图片加载成功后，选择照片，电视开始展示</label>
+      <label class='link_relief'>
+        <navigator url="/pages/forscreen/relief">免责声明</navigator>
+      </label>
     </view>
 
     <view class='page_main'>
@@ -157,8 +116,8 @@
     </view>
 
     <!-- 重选 -->
-    <view class="page_bottom theme-panel-2">
-      <view class='button_group'>
+    <view class="page_bottom flex-row-center-center theme-panel-2">
+      <view class='button_group flex-row-center-space_between'>
         <form bindsubmit="assist" report-submit="true" wx:if="{{is_assist==1}}">
           <input class="display_hide" name="box_mac" value="{{box_mac}}"></input>
           <input class="display_hide" name="openid" value="{{openid}}"></input>
@@ -177,7 +136,7 @@
         <!-- 有数据时 -->
         <view class='history_list' wx:if="{{forscreen_history_list !=''}}">
           <view wx:for="{{forscreen_history_list}}" wx:key="key" wx:for-item="bean" wx:for-index="index">
-            <view wx:if="{{bean.res_type==1}}" class="pic">
+            <view wx:if="{{bean.res_type==1}}" class="pic flex-row-flex_start-start">
               <view class="weui-grids">
                 <view class="weui-grid" wx:for="{{bean.list}}" wx:key="pkey" wx:for-item="item" wx:for-index="indexs">
                   <image bindtap="previewImage" data-pkey="{{indexs}}" data-src="{{bean.list}}" mode='aspectFill' src="{{item.imgurl}}"></image>
@@ -187,7 +146,7 @@
                 <button class="theme-button-dark" bindtap="replayHistory" data-res_type='{{bean.res_type}}' data-box_mac='{{box_mac}}' data-openid='{{openid}}' data-res_list='{{bean.list}}'>重投</button>
               </view>
             </view>
-            <view wx:else class="video">
+            <view wx:else class="video flex-row-flex_start-start">
               <view class="cover" wx:for="{{bean.list}}" wx:key="pkey" wx:for-item="item" wx:for-index="indexs">
                 <navigator url="/pages/forscreen/video/launch_video?video_url={{item.res_url}}&video_name=">
                   <image mode='aspectFill' src="{{item.imgurl}}"></image>
@@ -206,8 +165,8 @@
           </view>
         </view>
 
-        <view class='no_data' wx:else>
-          <view class="row-center">
+        <view class='no_data flex-row-center-flex_start' wx:else>
+          <view class="full_width flex-column-center-space_between">
             <view>
               <image style='width: 44rpx;height: 64rpx;' src='http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default_mine.png'></image>
             </view>
@@ -220,28 +179,11 @@
     </view>
 
     <!-- 广告面板 -->
-    <view class="advert-panel full_width theme-panel-dark">
-      <label class="fa fa-phone fa-lg"></label>
-      <label class="msg">商务合作：010-64185797</label>
-      <button class="theme-button" bindtap="phonecallevent" data-tel="010-64185797">拨打</button>
-    </view>
+    <template is="adsPanelForSavorBusinessContacts" />
   </view>
 
-  <!-- 引导蒙层 -->
-  <view wx:if="{{showGuidedMaskAfterLaunch}}" class="guided_mask_panel launch_after full_width full_height">
-    <view class="point" style="margin-top: calc(608rpx + 46px + {{statusBarHeight}}px);">
-      <view>
-        <button class='savor-btn theme-button' form-type="submit">助力全网播放</button>
-      </view>
-    </view>
-    <image class="arrow" src="/images/imgs/FFFFFF_guide_arrow.png"></image>
-    <view class="explain font_FFFFFF_28">
-      <label>您可邀请好友帮您助力，</label>
-      <label>助力人数越多，越有可能在上千家餐厅电视中播放~</label>
-    </view>
-    <button class="theme-button font_FFFFFF_28" bindtap="closeLead" data-type="2">知道了</button>
-  </view>
-
+  <!-- 投屏之后引导蒙板 -->
+  <template is="afterLaunchGuidedMask" wx:if="{{showGuidedMaskAfterLaunch}}" data='{{marginTop: "calc(608rpx + 46px + " + statusBarHeight + "px)", dataType: 2, openid: openid}}' />
 </view>
 
 <!-- 跳转极简版 -->

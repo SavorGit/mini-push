@@ -103,6 +103,35 @@
   </modal>
 </template>
 
+<!-- 热点商务联系广告面板 -->
+<template name="adsPanelForSavorBusinessContacts">
+  <view class="advert-panel flex-row-center-space_between full_width theme-panel-dark">
+    <label class="fa fa-phone fa-lg"></label>
+    <label class="msg">商务合作：010-64185797</label>
+    <button class="theme-button" bindtap="phonecallevent" data-tel="010-64185797">拨打</button>
+  </view>
+</template>
+
+<!-- 打断投屏弹窗 -->
+<template name="interruptLaunchScreenWindow">
+  <bottomModal show="{{popInterruptLaunchScreenWindow}}" height='auto' width="98%" title-text="" confirm-text="" cancel-text="">
+    <view class='interrupt-launch-screen-window-container'>
+      <view class='window-top'>
+        <view class='title'>
+          <label class='font_333333_34'>确认打断投屏？</label>
+        </view>
+      </view>
+      <view class='window-main'>
+        <label class='content font_666666_30'>当前电视正在进行投屏，继续投屏有可能打断当前投屏中的内容。</label>
+      </view>
+      <view class='window-bottom'>
+        <button class='savor-btn theme-button' bindtap="{{funConfirm}}">继续投屏</button>
+        <button class='savor-btn theme-button-dark' bindtap="{{funCancel}}">取消投屏</button>
+      </view>
+    </view>
+  </bottomModal>
+</template>
+
 <!-- 自定义顶级页面导航栏 -->
 <template name="navigationBarForTopLevel">
   <view class='default-navigation-bar theme-navigation'>

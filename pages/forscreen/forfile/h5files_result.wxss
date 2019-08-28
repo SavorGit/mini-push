@@ -1,11 +1,8 @@
 /* pages/forscreen/forfile/h5files_result.wxss */
 
 .weui-grid {
-  position: relative;
-  float: left;
   width: 358rpx;
   height: 358rpx;
-  box-sizing: border-box;
 }
 
 .weui-grid > image {
@@ -93,22 +90,6 @@
   width: 100%;
   height: 100rpx;
   line-height: 100rpx;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
-}
-
-.page-main > .operation > button::before,
-.page-main > .operation > button::after {
-  border: unset;
-  margin: unset;
-  padding: unset;
-  background: unset;
-}
-
-.page-main > .operation > button {
-  border: unset;
 }
 
 .page-main > .operation > .rechoose, .page-main > .operation > .quit {
@@ -125,10 +106,6 @@
   width: 160rpx;
   height: 90rpx;
   line-height: 30rpx;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
   padding: 0;
   border: 0;
   background-color: unset;
