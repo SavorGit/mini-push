@@ -1,4 +1,4 @@
-<!--pages/thematic/birthday/list_constellation.wxml-->
+<!--pages/thematic/birthday/list.wxml-->
 <import src="/pages/template/commons" />
 <template is="navigationBarForTwoLevel" data='{{statusBarHeight: statusBarHeight,titleText:"热点投屏"}}' />
 
@@ -6,13 +6,13 @@
 <view class="container flex-column-center-flex_start theme-container" style='height: calc(100vh - 46px - {{statusBarHeight}}px);'>
   <view class='full_width birthday'>
     <view class='video'>
-      <view class='title theme-font2'>
+      <view class='title flex-row-center-flex_start theme-font2'>
         <label class="fa fa-birthday-cake icon"></label>
         <label>为TA点歌</label>
       </view>
-      <view class='list'>
+      <view class='list flex-row-center-space_between'>
         <block wx:for="{{happylist}}" wx:key="key" wx:for-item="happyinfo" wx:for-index="index">
-          <view class='music theme7' bindtap='showHappy' data-boxmac="{{box_mac}}" data-openid="{{openid}}" data-vediourl="{{happyinfo.res_url}}" data-happyVedioName="{{happyinfo.file_name}}" data-name="{{happyinfo.name}}">
+          <view class='music flex-column-center-center theme7' bindtap='showHappy' data-boxmac="{{box_mac}}" data-openid="{{openid}}" data-vediourl="{{happyinfo.res_url}}" data-happyVedioName="{{happyinfo.file_name}}" data-name="{{happyinfo.name}}">
             <icon class="fa-stack fa-lg icon theme-font">
               <i class="fa fa-circle-thin fa-stack-2x"></i>
               <i class="fa fa-music fa-stack-1x"></i>
@@ -25,8 +25,8 @@
     </view>
   </view>
   <view class='full_width constellation_list'>
-    <view class='sketch_list'>
-      <view class='constellation theme-font2{{choose_constellid==constelinfo.id? " cur" :""}}' wx:for="{{constellationlist}}" wx:key="key" wx:for-item="constelinfo" wx:for-index="index">
+    <view class='sketch_list flex-row-center-center'>
+      <view class='constellation flex-column-center-center theme-font2{{choose_constellid==constelinfo.id? " cur" :""}}' wx:for="{{constellationlist}}" wx:key="key" wx:for-item="constelinfo" wx:for-index="index">
         <image bindtap='switchConstell' data-constellid="{{constelinfo.id}}" src="{{constelinfo.img_url}}"></image>
         <label class='title'>{{constelinfo.name}} ({{constelinfo.date}})</label>
         <label class='summary'>{{constelinfo.intro}}</label>
@@ -38,7 +38,7 @@
           <label class="fa fa-youtube-play icon"></label>
           <label>相关视频</label>
         </view>
-        <view class='list'>
+        <view class='list flex-row-center-space_between'>
           <view class='video' wx:for="{{videolist}}" wx:key="key" wx:for-item="videoinfo">
             <view bindtap='showHappy' data-boxmac="{{box_mac}}" data-openid="{{openid}}" data-vediourl="{{videoinfo.video_url}}" data-name="{{videoinfo.name}}">
               <image src='{{videoinfo.video_img}}'></image>
@@ -55,7 +55,7 @@
           <image src='/images/icon2/666666_star1.png'></image>
           <label>星座详情</label>
         </view>
-        <view class='property theme-font3'>
+        <view class='property flex-row-center-space_between theme-font3'>
           <view class='left'>
             <label>关键词：{{constellation_detail.keywords}}</label>
             <label>掌管宫位：{{constellation_detail.house}}</label>

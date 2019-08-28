@@ -1,4 +1,4 @@
-/* pages/thematic/birthday/list_constellation.wxss */
+/* pages/thematic/birthday/list.wxss */
 
 .birthday {
   width: 92%;
@@ -7,10 +7,6 @@
 
 .birthday .video .title {
   height: 50rpx;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: flex-start;
 }
 
 .birthday .video .title .icon {
@@ -28,19 +24,11 @@
 
 .birthday .video .list {
   height: 200rpx;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-between;
 }
 
 .birthday .video .list .music {
   width: 150rpx;
   height: 150rpx;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
   border-radius: 10rpx;
 }
 
@@ -66,18 +54,10 @@
 
 .constellation_list .sketch_list {
   height: 350rpx;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
 }
 
 .constellation_list .sketch_list .constellation {
   margin: 0rpx 20rpx;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
   font-size: 24rpx;
 }
 
@@ -137,13 +117,6 @@
   margin-left: 10rpx;
 }
 
-.constellation_list .detailed .video_list .list {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-between;
-}
-
 .constellation_list .detailed .video_list .list .video image {
   width: 340rpx;
   height: 255rpx;
@@ -166,18 +139,12 @@
   display: block;
 }
 
-.constellation_list .detailed .video_list .list .video .cover button::before,
-.constellation_list .detailed .video_list .list .video .cover button::after {
-  border: unset;
-}
-
 .constellation_list .detailed .video_list .list .video .cover button {
   width: 100%;
   height: 60rpx;
   line-height: 60rpx;
   font-size: 28rpx;
   border-radius: 0rpx;
-  border: unset;
 }
 
 .constellation_list .detailed .overall .title {
@@ -197,10 +164,6 @@
 }
 
 .constellation_list .detailed .overall .property {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-between;
   font-size: 26rpx;
 }
 
@@ -236,13 +199,9 @@
   width: 98%;
   height: 80rpx;
   line-height: 80rpx;
-  margin-left: auto;
-  margin-right: auto;
   background: #f05649;
   color: #fff;
   font-size: 30rpx;
-  padding: unset;
-  border: unset;
   border-radius: 10rpx;
   text-align: center;
   text-decoration: none;
