@@ -1,0 +1,326 @@
+// pages/find/cards.js
+var app = getApp();
+var util = require("../../utils/util.js")
+
+var touchEvent = [];
+var touchMoveExecuteTrip = 150;
+var systemInfo = {
+  SDKVersion: "",
+  batteryLevel: 0,
+  brand: "",
+  errMsg: "",
+  fontSizeSetting: 16,
+  language: "zh",
+  model: "",
+  pixelRatio: 1,
+  platform: "",
+  statusBarHeight: 0,
+  system: "",
+  version: "",
+  safeArea: {
+    width: 0,
+    height: 0,
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0
+  },
+  window: {
+    width: 0,
+    height: 0
+  },
+  screen: {
+    width: 0,
+    height: 0
+  }
+};
+
+Page({
+
+  /**
+   * 页面的初始数据
+   */
+  data: {
+    statusBarHeight: app.globalData.statusBarHeight,
+    cards_img: [
+      'http://oss.littlehotspot.com/forscreen/resource/1544865904825.jpg',
+      'http://oss.littlehotspot.com/forscreen/resource/1547690338762.jpg',
+      'http://oss.littlehotspot.com/forscreen/resource/1550142746462.mp4?x-oss-process=video/snapshot,t_3000,f_jpg,w_450,m_fast'
+    ],
+    cards: [{
+      x: 0,
+      y: 0
+    }]
+  },
+
+  /**
+   * 生命周期函数--监听页面加载
+   */
+  onLoad: function(options) {
+    var self = this;
+    wx.getSystemInfo({
+      success: function(res) {
+        // console.log(res, app);
+        systemInfo.SDKVersion = res.SDKVersion;
+        systemInfo.batteryLevel = res.batteryLevel;
+        systemInfo.brand = res.brand;
+        systemInfo.errMsg = res.errMsg;
+        systemInfo.fontSizeSetting = res.fontSizeSetting;
+        systemInfo.language = res.language;
+        systemInfo.model = res.model;
+        systemInfo.pixelRatio = res.pixelRatio;
+        systemInfo.platform = res.platform;
+        systemInfo.statusBarHeight = res.statusBarHeight;
+        systemInfo.system = res.system;
+        systemInfo.version = res.version;
+        systemInfo.safeArea.width = res.safeArea.width;
+        systemInfo.safeArea.height = res.safeArea.height;
+        systemInfo.safeArea.top = res.safeArea.top;
+        systemInfo.safeArea.left = res.safeArea.left;
+        systemInfo.safeArea.right = res.safeArea.right;
+        systemInfo.safeArea.bottom = res.safeArea.bottom;
+        systemInfo.window.width = res.windowWidth;
+        systemInfo.window.height = res.windowHeight;
+        systemInfo.screen.width = res.screenWidth;
+        systemInfo.screen.height = res.screenHeight;
+        // console.log(systemInfo);
+
+        self.setData({
+          cards: [{
+            x: 0,
+            y: systemInfo.statusBarHeight + 46
+          }]
+        });
+      }
+    });
+  },
+
+  /**
+   * 生命周期函数--监听页面初次渲染完成
+   */
+  onReady: function() {
+
+  },
+
+  /**
+   * 生命周期函数--监听页面显示
+   */
+  onShow: function(options) {
+
+  },
+
+  /**
+   * 生命周期函数--监听页面隐藏
+   */
+  onHide: function() {
+
+  },
+
+  /**
+   * 生命周期函数--监听页面卸载
+   */
+  onUnload: function() {
+
+  },
+
+  /**
+   * 页面相关事件处理函数--监听用户下拉动作
+   */
+  onPullDownRefresh: function() {
+
+  },
+
+  /**
+   * 页面上拉触底事件的处理函数
+   */
+  onReachBottom: function() {
+
+  },
+
+  /**
+   * 用户点击右上角分享
+   */
+  onShareAppMessage: function() {
+
+  },
+  /**
+   * 点击事件
+   */
+  onClick: function(e) {
+
+  },
+  /**
+   * 手指触摸动作结束
+   */
+  onTouchEnd: function(e) {
+    var self = this;
+    touchEvent["touchEnd"] = touchEvent.pop();
+    this.touchMoveHandler.touchMoveHandle(self, touchEvent["touchStart"], touchEvent["touchEnd"], function(handleEvent, page, startEvent, endEvent, top, left, x) {
+      console.log(handleEvent, page, startEvent, endEvent, top, left, x);
+    });
+  },
+  /**
+   * 手指触摸后移动
+   */
+  onTouchMove: function(e) {
+    var self = this;
+    touchEvent[0] = e;
+    if (typeof(touchEvent["touchStart"]) != 'object' || touchEvent["touchStart"] == null) {
+      touchEvent["touchStart"] = e;
+      return;
+    }
+    if (typeof(touchEvent["touchLastMove"]) != 'object' || touchEvent["touchLastMove"] == null) {
+      touchEvent["touchLastMove"] = e;
+      return;
+    }
+    self.setData({
+      cards: [{
+        x: e.touches[0].pageX - touchEvent["touchStart"].touches[0].pageX,
+        y: e.touches[0].pageY - touchEvent["touchStart"].touches[0].pageY + systemInfo.statusBarHeight + 46
+      }]
+    });
+  },
+  touchMoveHandler: {
+    Event: {
+      Start: 0x00,
+      UndifindedStartTouchEvent: 0x90,
+      UndifindedEndTouchEvent: 0x99,
+      LeftSlide: 0x10,
+      LeftSlideMoved: 0x19,
+      RightSlide: 0x20,
+      RightSlideMoved: 0x29,
+      ReturnToOrigin: 0x80,
+      ReturnToOriginMoved: 0x89
+    },
+    /**
+     * 滑动处理
+     *
+     * @para page                页面对象
+     * @para startEvent          开始滑动的事件
+     * @para endEvent            结束滑动的事件
+     * @para callbackFunction    执行动画完成后回调函数。返回 Argument{
+     *                                                           handleEvent // 处理事件
+     *                                                           page // 页面对象
+     *                                                           startEvent // 手指滑动开始事件
+     *                                                           endEvent // 手指滑动结束事件
+     *                                                           top // 元素上边距
+     *                                                           left // 元素左边距
+     *                                                           x // 元素移动距离
+     *                                                      }
+     */
+    touchMoveHandle: function(page, startEvent, endEvent, callbackFunction) {
+      // console.log(page, startEvent, endEvent);
+      var handler = this;
+      handler.callbackHandel(callbackFunction, handler.Event.Start, page, startEvent, endEvent);
+      if (typeof(startEvent) != 'object' || startEvent == null) {
+        handler.callbackHandel(callbackFunction, handler.Event.UndifindedStartTouchEvent, page, startEvent, endEvent);
+        console.error('start-touch-event is null');
+        return;
+      }
+      if (typeof(endEvent) != 'object' || endEvent == null) {
+        handler.callbackHandel(callbackFunction, handler.Event.UndifindedEndTouchEvent, page, startEvent, endEvent);
+        console.error('end-touch-event is null');
+        return;
+      }
+      var moveExecuteTrip = touchMoveExecuteTrip / systemInfo.pixelRatio;
+      var tripLeft = endEvent.touches[0].pageX - startEvent.touches[0].pageX;
+      var tripTop = endEvent.touches[0].pageY - startEvent.touches[0].pageY + systemInfo.statusBarHeight + 46;
+      var tripX = endEvent.touches[0].pageX - startEvent.touches[0].pageX;
+      var tripY = endEvent.touches[0].pageY - startEvent.touches[0].pageY;
+      if (tripX <= -1 * moveExecuteTrip) { // 向左滑动处理
+        var x = (systemInfo.screen.width + tripLeft) * -1;
+        handler.callbackHandel(callbackFunction, handler.Event.LeftSlide, page, startEvent, endEvent, tripTop, tripLeft, x);
+        this.moveOnhorizontalHandel(page, startEvent, endEvent, tripTop, tripLeft, x);
+        handler.callbackHandel(callbackFunction, handler.Event.LeftSlideMoved, page, startEvent, endEvent, tripTop, tripLeft, x);
+      } else if (tripX >= moveExecuteTrip) { // 向右滑动处理
+        var x = systemInfo.screen.width - tripLeft;
+        handler.callbackHandel(callbackFunction, handler.Event.RightSlide, page, startEvent, endEvent, tripTop, tripLeft, x);
+        this.moveOnhorizontalHandel(page, startEvent, endEvent, tripTop, tripLeft, x);
+        handler.callbackHandel(callbackFunction, handler.Event.RightSlideMoved, page, startEvent, endEvent, tripTop, tripLeft, x);
+      } else {
+        handler.callbackHandel(callbackFunction, handler.Event.ReturnToOrigin, page, startEvent, endEvent, tripTop, tripLeft);
+        this.returnToOriginHandel(page, startEvent, endEvent);
+        handler.callbackHandel(callbackFunction, handler.Event.ReturnToOriginMoved, page, startEvent, endEvent, tripTop, tripLeft);
+      }
+    },
+    /**
+     * 返回原点处理
+     *
+     * @para page                页面对象
+     * @para startEvent          开始滑动的事件
+     * @para endEvent            结束滑动的事件
+     */
+    returnToOriginHandel: function(page, startEvent, endEvent) {
+      var animation = wx.createAnimation({
+        // duration: 100,
+        // timingFunction: 'cubic-bezier(.8,.2,.1,0.8)'
+      });
+      animation.left(0).top(systemInfo.statusBarHeight + 46).step({
+        duration: 100,
+        timingFunction: 'ease'
+      });
+      page.setData({
+        animationData: animation.export()
+      });
+      setTimeout(function() {
+        page.setData({
+          animationData: {},
+          cards: [{
+            x: 0,
+            y: systemInfo.statusBarHeight + 46
+          }]
+        });
+      }, 100);
+    },
+    /**
+     * 水平移动处理
+     *
+     * @para page                页面对象
+     * @para startEvent          开始滑动的事件
+     * @para endEvent            结束滑动的事件
+     * @para top                 上边距
+     * @para left                左边距
+     * @para x                   水平滑动行程
+     */
+    moveOnhorizontalHandel: function(page, startEvent, endEvent, top, left, x) {
+      var animation = wx.createAnimation({
+        // duration: 100,
+        // timingFunction: 'cubic-bezier(.8,.2,.1,0.8)'
+      });
+      animation.left(left).top(top).translateX(x).translateY(0).step({
+        duration: 300,
+        timingFunction: 'linear'
+      });
+      animation.left(0).top(systemInfo.statusBarHeight + 46).translateX(0).translateY(0).step({
+        duration: 0,
+        timingFunction: 'step-start'
+      });
+      page.setData({
+        animationData: animation.export()
+      });
+      setTimeout(function() {
+        page.setData({
+          animationData: {}
+        });
+      }, 300);
+    },
+    /**
+     * 回调处理
+     *
+     * @para callback            执行动画完成后回调函数
+     * @para handleEvent         处理事件
+     * @para page                页面对象
+     * @para startEvent          开始滑动的事件
+     * @para endEvent            结束滑动的事件
+     * @para top                 上边距
+     * @para left                左边距
+     * @para x                   水平滑动行程
+     */
+    callbackHandel: function(callback, handleEvent, page, startEvent, endEvent, top, left, x) {
+      if (typeof(callback) != 'function') {
+        return;
+      }
+      callback(handleEvent, page, startEvent, endEvent, top, left, x);
+    }
+  }
+})

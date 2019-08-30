@@ -1,0 +1,66 @@
+/* pages/find/cards_20190829.wxss */
+
+page {
+  background: #e0e0e0;
+  margin: 0 auto;
+}
+
+.container {
+  overflow: hidden;
+}
+
+.card-wrap {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.card-wrap > .card-item {
+  position: absolute;
+  width: 80%;
+  height: 100%;
+  overflow: hidden;
+  border-radius: 10rpx;
+  padding: 0;
+  box-shadow: 2rpx 18rpx 16rpx 6rpx #ccc;
+}
+
+.card-wrap > .card-item:nth-child(1) {
+  width: 600rpx;
+  height: 950rpx;
+  margin-left: 75rpx;
+  margin-top: 110rpx;
+  z-index: 3;
+}
+
+.card-wrap > .card-item:nth-child(2) {
+  width: 640rpx;
+  height: 910rpx;
+  margin-left: 55rpx;
+  margin-top: 130rpx;
+  z-index: 2;
+}
+
+.card-wrap > .card-item:nth-child(3) {
+  width: 680rpx;
+  height: 870rpx;
+  margin-left: 35rpx;
+  margin-top: 150rpx;
+  z-index: 1;
+}
+
+.card-wrap > .card-item > image {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  border-radius: 10rpx;
+}
+
+.card-wrap > .card-item > span.change-icon > image {
+  position: absolute;
+  width: 70rpx;
+  height: 21rpx;
+  top: 128rpx;
+  left: 305rpx;
+  box-shadow: none;
+}
