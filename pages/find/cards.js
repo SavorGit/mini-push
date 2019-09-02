@@ -256,7 +256,7 @@ Page({
   onClick: function(e) {
     var res_type = e.currentTarget.dataset.res_type;
     if (res_type == 1) { //图片
-      var current = e.target.dataset.src;
+      var current = e.currentTarget.dataset.src;
 
       var urls = [];
       for (var row in current) {

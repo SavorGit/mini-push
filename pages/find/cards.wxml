@@ -15,7 +15,7 @@
           <view wx:if="{{cards_img[0].res_type == 1}}" class="picture flex-row-center-space_around">
             <label class="fa fa-picture-o fa-lg"></label>
             <!-- <image style="width: 60rpx; height: 60rpx; vertical-align: middle;" src="/images/icon2/FFFFFF_picture.png"></image> -->
-            <label>6</label>
+            <label>{{cards_img[0].pubdetail.length}}</label>
           </view>
           <view wx:if="{{cards_img[0].res_type == 2}}" class="video flex-row-center-space_around">
             <label class="fa fa-play-circle-o fa-lg"></label>
@@ -45,7 +45,7 @@
         </view>
       </view>
       <image class='bg-image' src="{{cards_img[0].pubdetail[0].img_url}}"></image>
-      <view class="touch-mask" bindtouchend="onTouchEnd" bindtouchmove="onTouchMove" bindtap="onClick" data-src='{{cards_img[0].pubdetail[0].img_url}}'></view>
+      <view class="touch-mask" bindtouchend="onTouchEnd" bindtouchmove="onTouchMove" bindtap="onClick" data-src='{{cards_img[0].pubdetail}}' data-res_type="{{cards_img[0].res_type}}"></view>
     </view>
     <view class="card-item">
       <image class='bg-image' src="{{cards_img[1].pubdetail[0].img_url}}"></image>
