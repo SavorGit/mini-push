@@ -90,6 +90,11 @@ button[disabled] {
   background-color: #333;
 }
 
+.theme-button-buy {
+  color: #fff;
+  background-color: #eb6877;
+}
+
 .theme-button-disable {
   color: #ebebeb;
   background-color: #bfbfbf;
