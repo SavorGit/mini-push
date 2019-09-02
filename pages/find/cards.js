@@ -1,7 +1,8 @@
 // pages/find/cards.js
 var app = getApp();
 var util = require("../../utils/util.js")
-
+var api_url = app.globalData.api_url;
+var page = 1;
 var touchEvent = [];
 var touchMoveExecuteTrip = 150;
 var systemInfo = {
@@ -93,6 +94,130 @@ Page({
         });
       }
     });
+
+    //获取发现页面数据 
+    if (app.globalData.openid && app.globalData.openid != '') {
+      that.setData({
+        openid: app.globalData.openid
+      })
+      openid = app.globalData.openid;
+      //判断用户是否注册
+      wx.request({
+        url: api_url + '/smallapp21/User/isRegister',
+        data: {
+          "openid": app.globalData.openid,
+          "page_id": 2
+        },
+        header: {
+          'content-type': 'application/json'
+        },
+        success: function(res) {
+          wx.setStorage({
+            key: 'savor_user_info',
+            data: res.data.result.userinfo,
+          })
+        },
+        fail: function(e) {
+          wx.setStorage({
+            key: 'savor_user_info',
+            data: {
+              'openid': app.globalData.openid
+            },
+          })
+        }
+      }); //判断用户是否注册结束
+      wx.request({
+        url: api_url + '/Smallapp/index/isHaveCallBox?openid=' + app.globalData.openid,
+        headers: {
+          'Content-Type': 'application/json'
+        },
+
+        success: function(rest) {
+          var is_have = rest.data.result.is_have;
+          if (is_have == 1) {
+
+            that.setData({
+              is_link: 1,
+              hotel_name: rest.data.result.hotel_name,
+              room_name: rest.data.result.room_name,
+              box_mac: rest.data.result.box_mac,
+              is_open_simple: rest.data.result.is_open_simple,
+            })
+            box_mac = rest.data.result.box_mac;
+
+          } else {
+            that.setData({
+              is_link: 0,
+              box_mac: '',
+            })
+            box_mac = '';
+          }
+
+        }
+      })
+    } else {
+      app.openidCallback = openid => {
+        if (openid != '') {
+          that.setData({
+            openid: openid
+          })
+          openid = openid;
+          //判断用户是否注册
+          wx.request({
+            url: api_url + '/smallapp21/User/isRegister',
+            data: {
+              "openid": app.globalData.openid,
+              "page_id": 2
+            },
+            header: {
+              'content-type': 'application/json'
+            },
+            success: function(res) {
+              wx.setStorage({
+                key: 'savor_user_info',
+                data: res.data.result.userinfo,
+              })
+            },
+            fail: function(e) {
+              wx.setStorage({
+                key: 'savor_user_info',
+                data: {
+                  'openid': openid
+                },
+              })
+            }
+          }); //判断用户是否注册结束
+          wx.request({
+            url: api_url + '/Smallapp/index/isHaveCallBox?openid=' + openid,
+            headers: {
+              'Content-Type': 'application/json'
+            },
+
+            success: function(rest) {
+              var is_have = rest.data.result.is_have;
+              if (is_have == 1) {
+                that.setData({
+                  is_link: 1,
+                  //hotel_name: rest.data.result.hotel_name,
+                  //room_name: rest.data.result.room_name,
+                  box_mac: rest.data.result.box_mac,
+                  is_open_simple: rest.data.result.is_open_simple,
+
+                })
+                box_mac = rest.data.result.box_mac;
+                //getHotelInfo(rest.data.result.box_mac);
+              } else {
+                that.setData({
+                  is_link: 0,
+                  box_mac: '',
+                })
+                box_mac = '';
+              }
+            }
+          })
+        }
+      }
+    }
   },
 
   /**
@@ -183,6 +308,7 @@ Page({
   touchMoveHandler: {
     Event: {
       Start: 0x00,
+      Less3Item: 0x01,
       UndifindedStartTouchEvent: 0x90,
       UndifindedEndTouchEvent: 0x99,
       LeftSlide: 0x10,
@@ -241,6 +367,10 @@ Page({
         handler.callbackHandel(callbackFunction, handler.Event.ReturnToOrigin, page, startEvent, endEvent, tripTop, tripLeft);
         this.returnToOriginHandel(page, startEvent, endEvent);
         handler.callbackHandel(callbackFunction, handler.Event.ReturnToOriginMoved, page, startEvent, endEvent, tripTop, tripLeft);
+      }
+      cards_img.splice(0, 1);
+      if (cards_img < 3) {
+        handler.callbackHandel(callbackFunction, handler.Event.Less3Item, page, startEvent, endEvent, tripTop, tripLeft);
       }
     },
     /**
