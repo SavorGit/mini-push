@@ -8,7 +8,7 @@
     <image class="full_width" mode="widthFix" src="http://e.hiphotos.baidu.com/image/pic/item/10dfa9ec8a1363279e1ed28c9b8fa0ec09fac79a.jpg"></image>
   </scroll-view>
   <view class="page-bottom full_width flex-row-center-space_around theme-panel">
-    <button class="theme-button-dark">电视播放</button>
-    <button class="theme-button-buy">京东购买</button>
+    <button class="theme-button-dark" bindtap="boxShow">电视播放</button>
+    <button class="theme-button-buy" >京东购买</button>
   </view>
 </view>

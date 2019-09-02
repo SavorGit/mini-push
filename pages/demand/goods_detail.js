@@ -1,6 +1,7 @@
 // pages/demand/goods_detail.js
 const app = getApp()
 var api_url = app.globalData.api_url;
+var box_mac;
 Page({
 
   /**
@@ -15,7 +16,7 @@ Page({
    */
   onLoad: function(options) {
     var that = this;
-    var box_mac = options.box_mac;
+    box_mac = options.box_mac;
     var goods_id = options.goods_id;
     wx.request({
       url: api_url + '/aa/bb/cc',
