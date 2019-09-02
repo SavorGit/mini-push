@@ -1,0 +1,48 @@
+<!--pages/find/cards.wxml-->
+<import src="/pages/template/commons" />
+<template is="navigationBarForTopLevel" data='{{statusBarHeight: statusBarHeight,titleText:"热点投屏"}}' />
+
+<view class='container flex-column-center-flex_start theme-container' style='height: calc(100vh - 46px - {{statusBarHeight}}px);'>
+  <view class="card-wrap">
+    <view class="card-item" animation="{{animationData}}" style="left: {{cards[0].x}}px; top: {{cards[0].y}}px;">
+      <!-- <view class="card-info">
+        <view style="height: 55rpx; padding: 30rpx 30rpx 0 30rpx;" class="full_widht flex-row-flex_start-flex_end">
+          <view style="width: 120rpx; height: 50rpx; border-radius: 25rpx; background-color: #f29b76;color:#fff;font-size:24rpx;" class="flex-row-center-center">精选</view>
+          !-- <view style="width: 120rpx; height: 50rpx; border-radius: 25rpx; background-color: #eb6877;color:#fff;font-size:24rpx;" class="flex-row-center-center">官方</view> --
+        </view>
+        <view style="height: 60rpx; padding: 700rpx 30rpx 0 30rpx;color: #fff;font-size: 40rpx;" class="full_widht flex-row-center-flex_end">
+          <label class="fa fa-picture-o"> 6</label>
+          !-- square-o video-camera --
+        </view>
+        <view style="width: 560rpx;height: 110rpx;padding: 0 20rpx; color: #fff;font-size: 28rpx;background-color: #000000; opacity: 0.7;" class="flex-row-center-space_between">
+          <view style="width: 430rpx;height: 90rpx;" class="flex-row-center-flex_start">
+            <image style="width: 90rpx;height:90rpx; border-radius: 50%;" src="http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
+            <view style="width: 320rpx;height:90rpx;padding-left: 20rpx;" class="flex-column-flex_start-start">
+              <view>用户</view>
+              <view class="flex-row-center-center">
+                <view>8月28日</view>
+                <view>.</view>
+                <view style="width: 200rpx;" class="one-line-overflow">海泰食府(皇苑店)</view>
+              </view>
+            </view>
+          </view>
+          <view style="width: 130rpx;height: 90rpx;" class="flex-row-center-space_between">
+            <view>
+              <view class="fa fa-heart-o fa-lg" style="color: #fff;font-size: 28rpx;">50</view>
+            </view>
+            <view>
+              <view class="fa fa-share-square-o fa-lg" style="color: #fff;font-size: 28rpx;">20</view>
+            </view>
+          </view>
+        </view>
+      </view> -->
+      <image class='bg-image' bindtouchend="onTouchEnd" bindtouchmove="onTouchMove" bindtap="onClick" data-src='{{cards_img[0]}}' src="{{cards_img[0]}}"></image>
+    </view>
+    <view class="card-item">
+      <image class='bg-image' src="{{cards_img[1]}}"></image>
+    </view>
+    <view class="card-item">
+      <image class='bg-image' src="{{cards_img[2]}}"></image>
+    </view>
+  </view>
+</view>

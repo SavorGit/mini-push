@@ -1,0 +1,19 @@
+<!--pages/find/cards_20190829.wxml-->
+<import src="/pages/template/commons" />
+<template is="navigationBarForTopLevel" data='{{statusBarHeight: statusBarHeight,titleText:"热点投屏"}}' />
+
+<view class='container flex-column-center-flex_start theme-container' style='height: calc(100vh - 46px - {{statusBarHeight}}px);'>
+  <view class="card-wrap">
+    <view class="card-item" animation="{{animationData}}">
+      <view class="card-info">
+      </view>
+      <image class='bg-image' bindtouchstart="onTouchStart" bindtouchend="onTouchEnd" bindtap="onClick" data-src='{{cards_img[0]}}' src="{{cards_img[0]}}"></image>
+    </view>
+    <view class="card-item">
+      <image class='bg-image' src="{{cards_img[1]}}"></image>
+    </view>
+    <view class="card-item">
+      <image class='bg-image' src="{{cards_img[2]}}"></image>
+    </view>
+  </view>
+</view>

@@ -17,6 +17,7 @@ const formatNumber = n => {
 module.exports = {
   formatTime: formatTime
 }
+
 function throttle(fn, gapTime) {
   if (gapTime == null || gapTime == undefined) {
     gapTime = 1500
@@ -25,10 +26,10 @@ function throttle(fn, gapTime) {
   let _lastTime = null
 
   // 返回新的函数
-  return function () {
-    let _nowTime = + new Date()
+  return function() {
+    let _nowTime = +new Date()
     if (_nowTime - _lastTime > gapTime || !_lastTime) {
-      fn.apply(this, arguments)   //将this和参数传给原函数
+      fn.apply(this, arguments) //将this和参数传给原函数
       _lastTime = _nowTime
     }
   }
@@ -36,4 +37,28 @@ function throttle(fn, gapTime) {
 
 module.exports = {
   throttle: throttle
+}
+
+function PostRequest(url, data, success) {
+  wx.request({
+    url: url,
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    data: data,
+    method: "POST",
+    success: success
+  });
+}
+
+function GetRequest(url, data, success) {
+  wx.request({
+    url: url,
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    data: data,
+    method: "GET",
+    success: success
+  });
 }
