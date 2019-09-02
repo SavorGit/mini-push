@@ -486,5 +486,20 @@ Page({
   //     var res_nums = e.currentTarget.dataset.res_nums;
   //     app.boxShow(box_mac, forscreen_id, pubdetail, res_type, res_nums);
   //   },
-  // }
+  // },
+
+  /**
+   * 点击不喜欢
+   */
+  flyLeft: function(e) {
+    var self = this;
+    this.touchMoveHandler.moveOnhorizontalHandel(self, systemInfo.statusBarHeight + 46, 0, -675 / systemInfo.pixelRatio);
+  },
+  /**
+   * 点击喜欢
+   */
+  flyRight: function(e) {
+    var self = this;
+    this.touchMoveHandler.moveOnhorizontalHandel(self, systemInfo.statusBarHeight + 46, 0, 675 / systemInfo.pixelRatio);
+  }
 })

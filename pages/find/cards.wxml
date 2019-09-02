@@ -55,11 +55,11 @@
     </view>
   </view>
   <view class="btn-group flex-row-center-space_between">
-    <view class="circular theme-button-unlike">
+    <view class="circular theme-button-unlike" bindtap="flyLeft">
       <view class="heart fa fa-heart-o fa-lg"></view>
     </view>
     <view class="on-tv flex-column-center-center theme-button-dark">电视播放</view>
-    <view class="circular theme-button-like">
+    <view class="circular theme-button-like" bindtap="flyRight">
       <view class="heart fa fa-heart fa-lg"></view>
     </view>
   </view>
