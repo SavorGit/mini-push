@@ -41,7 +41,8 @@
     "pages/forscreen/forfile/files",
     "pages/forscreen/forfile/h5files",
     "pages/forscreen/forfile/h5files_result",
-    "pages/h5/index"
+    "pages/h5/index",
+    "pages/demand/goods_detail"
   ],
   "permission": {
     "scope.userLocation": {
@@ -69,7 +70,7 @@
         "selectedIconPath": "/images/icon2/000000_home.png"
       },
       {
-        "pagePath": "pages/find/selected_list",
+        "pagePath": "pages/find/cards",
         "text": "发现",
         "iconPath": "/images/icon2/999999_find.png",
         "selectedIconPath": "/images/icon2/000000_find.png"

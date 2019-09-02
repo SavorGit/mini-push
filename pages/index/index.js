@@ -869,5 +869,12 @@ Page({
    */
   onShareAppMessage: function() {
 
+  },
+  openAdsLink:function(e){
+    var ads_id = e.currentTarget.dataset.ads_id;
+    wx.reportAnalytics('ads_open_report', {
+      ads_id: ads_id,
+      open_num: 1,
+    }); 
   }
 })
