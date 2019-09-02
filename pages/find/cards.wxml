@@ -2,16 +2,16 @@
 <import src="/pages/template/commons" />
 <template is="navigationBarForTopLevel" data='{{statusBarHeight: statusBarHeight,titleText:"热点投屏"}}' />
 
-<view class='container flex-column-center-flex_start theme-container' style='height: calc(100vh - 46px - {{statusBarHeight}}px);'>
+<view class='container flex-column-center-flex_start theme-wxAuthLogin-container' style='height: calc(100vh - 46px - {{statusBarHeight}}px);'>
   <view class="card-wrap">
-    <view class="card-item" animation="{{animationData}}" style="left: {{cards[0].x}}px; top: {{cards[0].y}}px;">
+    <view class="card-item theme-container" animation="{{animationData}}" style="left: {{cards[0].x}}px; top: {{cards[0].y}}px;">
       <view class="card-info">
-        <view class="content-top full_widht flex-row-flex_start-flex_end">
+        <view class="content-top flex-row-flex_start-flex_end">
           <view wx:if="{{cards_img[0].type == 1}}" class="content-type-icon official flex-row-center-center">官方</view>
           <view wx:if="{{cards_img[0].type == 2}}" class="content-type-icon selected flex-row-center-center">精选</view>
           <view wx:if="{{cards_img[0].type == 3}}" class="content-type-icon selected flex-row-center-center">公开</view>
         </view>
-        <view class="content-main full_widht flex-row-center-flex_end">
+        <view class="content-main flex-row-center-flex_end">
           <view wx:if="{{cards_img[0].res_type == 1}}" class="picture flex-row-center-space_around">
             <label class="fa fa-picture-o fa-lg"></label>
             <!-- <image style="width: 60rpx; height: 60rpx; vertical-align: middle;" src="/images/icon2/FFFFFF_picture.png"></image> -->
@@ -25,9 +25,9 @@
         <view class="content-bottom flex-row-center-space_between">
           <view class="user-info flex-row-center-flex_start">
             <image class="user-header-img" src="{{cards_img[0].avatarUrl}}"></image>
-            <view class="info flex-column-flex_start-start">
-              <view class="full_widht one-line-overflow">{{cards_img[0].nickName}}</view>
-              <view class="full_widht flex-row-center-center">
+            <view class="info flex-column-flex_start-space_around">
+              <view class="font_333333_28 full_width one-line-overflow">{{cards_img[0].nickName}}</view>
+              <view class="full_width flex-row-center-flex_start">
                 <view>{{cards_img[0].create_time}}</view>
                 <view>.</view>
                 <view class="address one-line-overflow">{{cards_img[0].hotel_name}}</view>
@@ -36,10 +36,10 @@
           </view>
           <view class="count-list flex-row-center-space_between">
             <view>
-              <view class="heart fa fa-heart-o fa-lg">{{cards_img[0].collect_num}}</view>
+              <view class="heart fa fa-heart-o fa-lg"> {{cards_img[0].collect_num}}</view>
             </view>
             <view>
-              <view class="fa fa-share-square-o fa-lg">{{cards_img[0].share_num}}</view>
+              <view class="fa fa-share-square-o fa-lg"> {{cards_img[0].share_num}}</view>
             </view>
           </view>
         </view>
@@ -47,11 +47,25 @@
       <image class='bg-image' src="{{cards_img[0].pubdetail[0].img_url}}"></image>
       <view class="touch-mask" bindtouchend="onTouchEnd" bindtouchmove="onTouchMove" bindtap="onClick" data-src='{{cards_img[0].pubdetail}}' data-res_type="{{cards_img[0].res_type}}"></view>
     </view>
-    <view class="card-item">
+    <view class="card-item theme-container">
       <image class='bg-image' src="{{cards_img[1].pubdetail[0].img_url}}"></image>
     </view>
-    <view class="card-item">
+    <view class="card-item theme-container">
       <image class='bg-image' src="{{cards_img[2].pubdetail[0].img_url}}"></image>
     </view>
   </view>
+  <view class="btn-group flex-row-center-space_between">
+    <view class="circular theme-button-unlike">
+      <view class="heart fa fa-heart-o fa-lg"></view>
+    </view>
+    <view class="on-tv flex-column-center-center theme-button-dark">电视播放</view>
+    <view class="circular theme-button-like">
+      <view class="heart fa fa-heart fa-lg"></view>
+    </view>
+  </view>
+</view>
+
+<!-- 弹出视频播放页面 -->
+<view wx:if="{{showVideo}}" class='container flex-column-center-center' style='height: calc(100vh - 46px - {{statusBarHeight}}px); background-color: #000000; position: absolute; left: 0; top: calc(46px + {{statusBarHeight}}px); z-index: 10;'>
+  <video class="full_width" autoplay="true" src="http://oss.littlehotspot.com//media/resource/GdxeRaKasX.mp4"></video>
 </view>

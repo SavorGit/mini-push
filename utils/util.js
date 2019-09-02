@@ -175,6 +175,7 @@ module.exports.TouchMoveHandler = function(systemInfo, touchMoveExecuteTrip) {
    * @para x                   水平滑动行程
    */
   this.moveOnhorizontalHandel = function(page, startEvent, endEvent, top, left, x) {
+    console.log(page, startEvent, endEvent, top, left, x);
     var handler = this;
     var animation = wx.createAnimation({
       duration: 400,

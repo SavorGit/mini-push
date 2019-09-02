@@ -1,6 +1,6 @@
 // pages/find/cards.js
 var app = getApp();
-var util = require("../../utils/util.js")
+var utils = require("../../utils/util.js")
 var api_url = app.globalData.api_url;
 var page_num = 1;
 var openid;
@@ -93,6 +93,7 @@ Page({
             y: systemInfo.statusBarHeight + 46
           }]
         });
+        self.touchMoveHandler = new utils.TouchMoveHandler(systemInfo, touchMoveExecuteTrip);
       }
     });
 
@@ -292,11 +293,11 @@ Page({
           success: function(res) {
             if (res.data.code == 10000) {
               var list_info = res.data.result;
-              for(var k=0;k<list_info.length;k++){
+              for (var k = 0; k < list_info.length; k++) {
                 self.data.cards_img.push(list_info[k]);
               }
               //self.data.cards_img.push(res.data.result);
-              
+
             }
           }
         })
@@ -325,165 +326,165 @@ Page({
       }]
     });
   },
-  touchMoveHandler: {
-    Event: {
-      Start: 0x00,
-      Less3Item: 0x01,
-      UndifindedStartTouchEvent: 0x90,
-      UndifindedEndTouchEvent: 0x99,
-      LeftSlide: 0x10,
-      LeftSlideMoved: 0x19,
-      RightSlide: 0x20,
-      RightSlideMoved: 0x29,
-      ReturnToOrigin: 0x80,
-      ReturnToOriginMoved: 0x89
-    },
-    /**
-     * 滑动处理
-     *
-     * @para page                页面对象
-     * @para startEvent          开始滑动的事件
-     * @para endEvent            结束滑动的事件
-     * @para callbackFunction    执行动画完成后回调函数。返回 Argument{
-     *                                                           handleEvent // 处理事件
-     *                                                           page // 页面对象
-     *                                                           startEvent // 手指滑动开始事件
-     *                                                           endEvent // 手指滑动结束事件
-     *                                                           top // 元素上边距
-     *                                                           left // 元素左边距
-     *                                                           x // 元素移动距离
-     *                                                      }
-     */
-    touchMoveHandle: function(page, startEvent, endEvent, callbackFunction) {
-      // console.log(page, startEvent, endEvent);
-      var handler = this;
-      handler.callbackHandel(callbackFunction, handler.Event.Start, page, startEvent, endEvent);
-      if (typeof(startEvent) != 'object' || startEvent == null) {
-        handler.callbackHandel(callbackFunction, handler.Event.UndifindedStartTouchEvent, page, startEvent, endEvent);
-        console.error('start-touch-event is null');
-        return;
-      }
-      if (typeof(endEvent) != 'object' || endEvent == null) {
-        handler.callbackHandel(callbackFunction, handler.Event.UndifindedEndTouchEvent, page, startEvent, endEvent);
-        console.error('end-touch-event is null');
-        return;
-      }
-      var moveExecuteTrip = touchMoveExecuteTrip / systemInfo.pixelRatio;
-      var tripLeft = endEvent.touches[0].pageX - startEvent.touches[0].pageX;
-      var tripTop = endEvent.touches[0].pageY - startEvent.touches[0].pageY + systemInfo.statusBarHeight + 46;
-      var tripX = endEvent.touches[0].pageX - startEvent.touches[0].pageX;
-      var tripY = endEvent.touches[0].pageY - startEvent.touches[0].pageY;
-      if (tripX <= -1 * moveExecuteTrip) { // 向左滑动处理
-        var x = (systemInfo.screen.width + tripLeft) * -1;
-        handler.callbackHandel(callbackFunction, handler.Event.LeftSlide, page, startEvent, endEvent, tripTop, tripLeft, x);
-        this.moveOnhorizontalHandel(page, startEvent, endEvent, tripTop, tripLeft, x);
-        handler.callbackHandel(callbackFunction, handler.Event.LeftSlideMoved, page, startEvent, endEvent, tripTop, tripLeft, x);
-      } else if (tripX >= moveExecuteTrip) { // 向右滑动处理
-        var x = systemInfo.screen.width - tripLeft;
-        handler.callbackHandel(callbackFunction, handler.Event.RightSlide, page, startEvent, endEvent, tripTop, tripLeft, x);
-        this.moveOnhorizontalHandel(page, startEvent, endEvent, tripTop, tripLeft, x);
-        handler.callbackHandel(callbackFunction, handler.Event.RightSlideMoved, page, startEvent, endEvent, tripTop, tripLeft, x);
-      } else {
-        handler.callbackHandel(callbackFunction, handler.Event.ReturnToOrigin, page, startEvent, endEvent, tripTop, tripLeft);
-        this.returnToOriginHandel(page, startEvent, endEvent);
-        handler.callbackHandel(callbackFunction, handler.Event.ReturnToOriginMoved, page, startEvent, endEvent, tripTop, tripLeft);
-      }
-      var cards_img = page.data.cards_img;
-      cards_img.splice(0, 1);
-      page.setData({
-        cards_img: cards_img
-      });
-      if (cards_img.length < 3) {
-        handler.callbackHandel(callbackFunction, handler.Event.Less3Item, page, startEvent, endEvent, tripTop, tripLeft);
-      }
-    },
-    /**
-     * 返回原点处理
-     *
-     * @para page                页面对象
-     * @para startEvent          开始滑动的事件
-     * @para endEvent            结束滑动的事件
-     */
-    returnToOriginHandel: function(page, startEvent, endEvent) {
-      var animation = wx.createAnimation({
-        // duration: 100,
-        // timingFunction: 'cubic-bezier(.8,.2,.1,0.8)'
-      });
-      animation.left(0).top(systemInfo.statusBarHeight + 46).step({
-        duration: 100,
-        timingFunction: 'ease'
-      });
-      page.setData({
-        animationData: animation.export()
-      });
-      setTimeout(function() {
-        page.setData({
-          animationData: {},
-          cards: [{
-            x: 0,
-            y: systemInfo.statusBarHeight + 46
-          }]
-        });
-      }, 100);
-    },
-    /**
-     * 水平移动处理
-     *
-     * @para page                页面对象
-     * @para startEvent          开始滑动的事件
-     * @para endEvent            结束滑动的事件
-     * @para top                 上边距
-     * @para left                左边距
-     * @para x                   水平滑动行程
-     */
-    moveOnhorizontalHandel: function(page, startEvent, endEvent, top, left, x) {
-      var animation = wx.createAnimation({
-        // duration: 100,
-        // timingFunction: 'cubic-bezier(.8,.2,.1,0.8)'
-      });
-      animation.left(left).top(top).translateX(x).translateY(0).step({
-        duration: 300,
-        timingFunction: 'linear'
-      });
-      animation.left(0).top(systemInfo.statusBarHeight + 46).translateX(0).translateY(0).step({
-        duration: 0,
-        timingFunction: 'step-start'
-      });
-      page.setData({
-        animationData: animation.export()
-      });
-      setTimeout(function() {
-        page.setData({
-          animationData: {}
-        });
-      }, 300);
-    },
-    /**
-     * 回调处理
-     *
-     * @para callback            执行动画完成后回调函数
-     * @para handleEvent         处理事件
-     * @para page                页面对象
-     * @para startEvent          开始滑动的事件
-     * @para endEvent            结束滑动的事件
-     * @para top                 上边距
-     * @para left                左边距
-     * @para x                   水平滑动行程
-     */
-    callbackHandel: function(callback, handleEvent, page, startEvent, endEvent, top, left, x) {
-      if (typeof(callback) != 'function') {
-        return;
-      }
-      callback(handleEvent, page, startEvent, endEvent, top, left, x);
-    },
-    //电视播放
-    boxShow: function(e) {
-      var forscreen_id = e.currentTarget.dataset.forscreen_id;
+  // touchMoveHandler: {
+  //   Event: {
+  //     Start: 0x00,
+  //     Less3Item: 0x01,
+  //     UndifindedStartTouchEvent: 0x90,
+  //     UndifindedEndTouchEvent: 0x99,
+  //     LeftSlide: 0x10,
+  //     LeftSlideMoved: 0x19,
+  //     RightSlide: 0x20,
+  //     RightSlideMoved: 0x29,
+  //     ReturnToOrigin: 0x80,
+  //     ReturnToOriginMoved: 0x89
+  //   },
+  //   /**
+  //    * 滑动处理
+  //    *
+  //    * @para page                页面对象
+  //    * @para startEvent          开始滑动的事件
+  //    * @para endEvent            结束滑动的事件
+  //    * @para callbackFunction    执行动画完成后回调函数。返回 Argument{
+  //    *                                                           handleEvent // 处理事件
+  //    *                                                           page // 页面对象
+  //    *                                                           startEvent // 手指滑动开始事件
+  //    *                                                           endEvent // 手指滑动结束事件
+  //    *                                                           top // 元素上边距
+  //    *                                                           left // 元素左边距
+  //    *                                                           x // 元素移动距离
+  //    *                                                      }
+  //    */
+  //   touchMoveHandle: function(page, startEvent, endEvent, callbackFunction) {
+  //     // console.log(page, startEvent, endEvent);
+  //     var handler = this;
+  //     handler.callbackHandel(callbackFunction, handler.Event.Start, page, startEvent, endEvent);
+  //     if (typeof(startEvent) != 'object' || startEvent == null) {
+  //       handler.callbackHandel(callbackFunction, handler.Event.UndifindedStartTouchEvent, page, startEvent, endEvent);
+  //       console.error('start-touch-event is null');
+  //       return;
+  //     }
+  //     if (typeof(endEvent) != 'object' || endEvent == null) {
+  //       handler.callbackHandel(callbackFunction, handler.Event.UndifindedEndTouchEvent, page, startEvent, endEvent);
+  //       console.error('end-touch-event is null');
+  //       return;
+  //     }
+  //     var moveExecuteTrip = touchMoveExecuteTrip / systemInfo.pixelRatio;
+  //     var tripLeft = endEvent.touches[0].pageX - startEvent.touches[0].pageX;
+  //     var tripTop = endEvent.touches[0].pageY - startEvent.touches[0].pageY + systemInfo.statusBarHeight + 46;
+  //     var tripX = endEvent.touches[0].pageX - startEvent.touches[0].pageX;
+  //     var tripY = endEvent.touches[0].pageY - startEvent.touches[0].pageY;
+  //     if (tripX <= -1 * moveExecuteTrip) { // 向左滑动处理
+  //       var x = (systemInfo.screen.width + tripLeft) * -1;
+  //       handler.callbackHandel(callbackFunction, handler.Event.LeftSlide, page, startEvent, endEvent, tripTop, tripLeft, x);
+  //       this.moveOnhorizontalHandel(page, startEvent, endEvent, tripTop, tripLeft, x);
+  //       handler.callbackHandel(callbackFunction, handler.Event.LeftSlideMoved, page, startEvent, endEvent, tripTop, tripLeft, x);
+  //     } else if (tripX >= moveExecuteTrip) { // 向右滑动处理
+  //       var x = systemInfo.screen.width - tripLeft;
+  //       handler.callbackHandel(callbackFunction, handler.Event.RightSlide, page, startEvent, endEvent, tripTop, tripLeft, x);
+  //       this.moveOnhorizontalHandel(page, startEvent, endEvent, tripTop, tripLeft, x);
+  //       handler.callbackHandel(callbackFunction, handler.Event.RightSlideMoved, page, startEvent, endEvent, tripTop, tripLeft, x);
+  //     } else {
+  //       handler.callbackHandel(callbackFunction, handler.Event.ReturnToOrigin, page, startEvent, endEvent, tripTop, tripLeft);
+  //       this.returnToOriginHandel(page, startEvent, endEvent);
+  //       handler.callbackHandel(callbackFunction, handler.Event.ReturnToOriginMoved, page, startEvent, endEvent, tripTop, tripLeft);
+  //     }
+  //     var cards_img = page.data.cards_img;
+  //     cards_img.splice(0, 1);
+  //     page.setData({
+  //       cards_img: cards_img
+  //     });
+  //     if (cards_img.length < 3) {
+  //       handler.callbackHandel(callbackFunction, handler.Event.Less3Item, page, startEvent, endEvent, tripTop, tripLeft);
+  //     }
+  //   },
+  //   /**
+  //    * 返回原点处理
+  //    *
+  //    * @para page                页面对象
+  //    * @para startEvent          开始滑动的事件
+  //    * @para endEvent            结束滑动的事件
+  //    */
+  //   returnToOriginHandel: function(page, startEvent, endEvent) {
+  //     var animation = wx.createAnimation({
+  //       // duration: 100,
+  //       // timingFunction: 'cubic-bezier(.8,.2,.1,0.8)'
+  //     });
+  //     animation.left(0).top(systemInfo.statusBarHeight + 46).step({
+  //       duration: 100,
+  //       timingFunction: 'ease'
+  //     });
+  //     page.setData({
+  //       animationData: animation.export()
+  //     });
+  //     setTimeout(function() {
+  //       page.setData({
+  //         animationData: {},
+  //         cards: [{
+  //           x: 0,
+  //           y: systemInfo.statusBarHeight + 46
+  //         }]
+  //       });
+  //     }, 100);
+  //   },
+  //   /**
+  //    * 水平移动处理
+  //    *
+  //    * @para page                页面对象
+  //    * @para startEvent          开始滑动的事件
+  //    * @para endEvent            结束滑动的事件
+  //    * @para top                 上边距
+  //    * @para left                左边距
+  //    * @para x                   水平滑动行程
+  //    */
+  //   moveOnhorizontalHandel: function(page, startEvent, endEvent, top, left, x) {
+  //     var animation = wx.createAnimation({
+  //       // duration: 100,
+  //       // timingFunction: 'cubic-bezier(.8,.2,.1,0.8)'
+  //     });
+  //     animation.left(left).top(top).translateX(x).translateY(0).step({
+  //       duration: 300,
+  //       timingFunction: 'linear'
+  //     });
+  //     animation.left(0).top(systemInfo.statusBarHeight + 46).translateX(0).translateY(0).step({
+  //       duration: 0,
+  //       timingFunction: 'step-start'
+  //     });
+  //     page.setData({
+  //       animationData: animation.export()
+  //     });
+  //     setTimeout(function() {
+  //       page.setData({
+  //         animationData: {}
+  //       });
+  //     }, 300);
+  //   },
+  //   /**
+  //    * 回调处理
+  //    *
+  //    * @para callback            执行动画完成后回调函数
+  //    * @para handleEvent         处理事件
+  //    * @para page                页面对象
+  //    * @para startEvent          开始滑动的事件
+  //    * @para endEvent            结束滑动的事件
+  //    * @para top                 上边距
+  //    * @para left                左边距
+  //    * @para x                   水平滑动行程
+  //    */
+  //   callbackHandel: function(callback, handleEvent, page, startEvent, endEvent, top, left, x) {
+  //     if (typeof(callback) != 'function') {
+  //       return;
+  //     }
+  //     callback(handleEvent, page, startEvent, endEvent, top, left, x);
+  //   },
+  //   //电视播放
+  //   boxShow: function(e) {
+  //     var forscreen_id = e.currentTarget.dataset.forscreen_id;
 
-      var pubdetail = e.currentTarget.dataset.pubdetail;
-      var res_type = e.currentTarget.dataset.res_type;
-      var res_nums = e.currentTarget.dataset.res_nums;
-      app.boxShow(box_mac, forscreen_id, pubdetail, res_type, res_nums);
-    },
-  }
+  //     var pubdetail = e.currentTarget.dataset.pubdetail;
+  //     var res_type = e.currentTarget.dataset.res_type;
+  //     var res_nums = e.currentTarget.dataset.res_nums;
+  //     app.boxShow(box_mac, forscreen_id, pubdetail, res_type, res_nums);
+  //   },
+  // }
 })
