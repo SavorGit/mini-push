@@ -1,2 +1,14 @@
 <!--pages/demand/goods_detail.wxml-->
-<text>pages/demand/goods_detail.wxml</text>
+<import src="/pages/template/commons" />
+<template is="navigationBarForTwoLevel" data='{{statusBarHeight: statusBarHeight,titleText:"商品详情"}}' />
+
+<view class="container flex-column-center-flex_start theme-container" style='height: calc(100vh - 46px - {{statusBarHeight}}px);'>
+  <video class="goods-video" src="http://oss.littlehotspot.com/forscreen/resource/1550142746462.mp4"></video>
+  <scroll-view class="goods-info full_width flex-column-center-flex_start theme-container" scroll-y="true" scroll-with-animation="true">
+    <image class="full_width" mode="widthFix" src="http://e.hiphotos.baidu.com/image/pic/item/10dfa9ec8a1363279e1ed28c9b8fa0ec09fac79a.jpg"></image>
+  </scroll-view>
+  <view class="page-bottom full_width flex-row-center-space_around theme-panel">
+    <button class="theme-button-dark">电视播放</button>
+    <button class="theme-button-buy">京东购买</button>
+  </view>
+</view>

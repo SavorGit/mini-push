@@ -1,1 +1,22 @@
 /* pages/demand/goods_detail.wxss */
+
+.goods-video {
+  width: 100%;
+  height: 422rpx;
+}
+
+.goods-info {
+  height: calc(100% - 540rpx);
+  margin-top: 20rpx;
+}
+
+.page-bottom {
+  height: 98rpx;
+}
+
+.page-bottom > button {
+  width: 220rpx;
+  height: 55rpx;
+  font-size: 24rpx;
+  border-radius: 5rpx;
+}
