@@ -73,6 +73,7 @@ module.exports.TouchMoveHandler = function(systemInfo, touchMoveExecuteTrip) {
     Less3Item: 0x01,
     UndifindedStartTouchEvent: 0x90,
     UndifindedEndTouchEvent: 0x99,
+    UndifindedSlideType: 0x92,
     LeftSlide: 0x10,
     LeftSlideMoved: 0x19,
     RightSlide: 0x20,
@@ -80,9 +81,13 @@ module.exports.TouchMoveHandler = function(systemInfo, touchMoveExecuteTrip) {
     ReturnToOrigin: 0x80,
     ReturnToOriginMoved: 0x89
   };
+  this.SlideType = {
+    LeftSlide: -1,
+    RightSlide: 1
+  };
 
   /**
-   * 滑动处理
+   * 手指滑动处理
    *
    * @para page                页面对象
    * @para startEvent          开始滑动的事件
@@ -119,17 +124,65 @@ module.exports.TouchMoveHandler = function(systemInfo, touchMoveExecuteTrip) {
     if (tripX <= -1 * moveExecuteTrip) { // 向左滑动处理
       var x = (handler.options.systemInfo.screen.width + tripLeft) * -1;
       handler.callbackHandel(callbackFunction, handler.Event.LeftSlide, page, startEvent, endEvent, tripTop, tripLeft, x);
-      handler.moveOnhorizontalHandel(page, tripTop, tripLeft, x, startEvent, endEvent);
+      handler.moveOnhorizontalHandel(page, tripTop, tripLeft, x, startEvent, endEvent, callbackFunction);
       handler.callbackHandel(callbackFunction, handler.Event.LeftSlideMoved, page, startEvent, endEvent, tripTop, tripLeft, x);
     } else if (tripX >= moveExecuteTrip) { // 向右滑动处理
       var x = handler.options.systemInfo.screen.width - tripLeft;
       handler.callbackHandel(callbackFunction, handler.Event.RightSlide, page, startEvent, endEvent, tripTop, tripLeft, x);
-      handler.moveOnhorizontalHandel(page, tripTop, tripLeft, x, startEvent, endEvent);
+      handler.moveOnhorizontalHandel(page, tripTop, tripLeft, x, startEvent, endEvent, callbackFunction);
       handler.callbackHandel(callbackFunction, handler.Event.RightSlideMoved, page, startEvent, endEvent, tripTop, tripLeft, x);
     } else {
       handler.callbackHandel(callbackFunction, handler.Event.ReturnToOrigin, page, startEvent, endEvent, tripTop, tripLeft);
       handler.returnToOriginHandel(page, startEvent, endEvent);
       handler.callbackHandel(callbackFunction, handler.Event.ReturnToOriginMoved, page, startEvent, endEvent, tripTop, tripLeft);
+    }
+  };
+
+  /**
+   * 点击滑动处理
+   *
+   * @para page                页面对象
+   * @para slideType           滑动类型
+   * @para wechartEvent        微信的事件
+   * @para callbackFunction    执行动画完成后回调函数。返回 Argument{
+   *                                                           handleEvent // 处理事件
+   *                                                           page // 页面对象
+   *                                                           startEvent // 手指滑动开始事件
+   *                                                           endEvent // 手指滑动结束事件
+   *                                                           top // 元素上边距
+   *                                                           left // 元素左边距
+   *                                                           x // 元素移动距离
+   *                                                      }
+   */
+  this.clickMoveHandle = function(page, slideType, trip, wechartEvent, callbackFunction) {
+    // console.log(page, startEvent, endEvent);
+    var handler = this;
+    var startEvent = wechartEvent,
+      endEvent = wechartEvent;
+    handler.callbackHandel(callbackFunction, handler.Event.Start, page, startEvent, endEvent);
+    if (typeof(slideType) != 'number') {
+      handler.callbackHandel(callbackFunction, handler.Event.UndifindedSlideType, page, startEvent, endEvent);
+      console.error('start-event is null');
+      return;
+    }
+    if (typeof(trip) != 'number') {
+      handler.callbackHandel(callbackFunction, handler.Event.UndifindedSlideType, page, startEvent, endEvent);
+      console.error('trip is null');
+      return;
+    }
+    var moveExecuteTrip = handler.options.touchMoveExecuteTrip / handler.options.systemInfo.pixelRatio;
+    var tripLeft = 0;
+    var tripTop = handler.options.systemInfo.statusBarHeight + 46;
+    if (slideType === handler.SlideType.LeftSlide) { // 向左滑动处理
+      var x = trip * -1 / handler.options.systemInfo.pixelRatio;
+      handler.callbackHandel(callbackFunction, handler.Event.LeftSlide, page, startEvent, endEvent, tripTop, tripLeft, x);
+      handler.moveOnhorizontalHandel(page, tripTop, tripLeft, x, startEvent, endEvent, callbackFunction);
+      handler.callbackHandel(callbackFunction, handler.Event.LeftSlideMoved, page, startEvent, endEvent, tripTop, tripLeft, x);
+    } else if (slideType === handler.SlideType.RightSlide) { // 向右滑动处理
+      var x = trip / handler.options.systemInfo.pixelRatio;
+      handler.callbackHandel(callbackFunction, handler.Event.RightSlide, page, startEvent, endEvent, tripTop, tripLeft, x);
+      handler.moveOnhorizontalHandel(page, tripTop, tripLeft, x, startEvent, endEvent, callbackFunction);
+      handler.callbackHandel(callbackFunction, handler.Event.RightSlideMoved, page, startEvent, endEvent, tripTop, tripLeft, x);
     }
   };
 
@@ -173,8 +226,17 @@ module.exports.TouchMoveHandler = function(systemInfo, touchMoveExecuteTrip) {
    * @para top                 上边距
    * @para left                左边距
    * @para x                   水平滑动行程
+   * @para callbackFunction    执行动画完成后回调函数。返回 Argument{
+   *                                                           handleEvent // 处理事件
+   *                                                           page // 页面对象
+   *                                                           startEvent // 手指滑动开始事件
+   *                                                           endEvent // 手指滑动结束事件
+   *                                                           top // 元素上边距
+   *                                                           left // 元素左边距
+   *                                                           x // 元素移动距离
+   *                                                      }
    */
-  this.moveOnhorizontalHandel = function(page, top, left, x, startEvent, endEvent) {
+  this.moveOnhorizontalHandel = function(page, top, left, x, startEvent, endEvent, callbackFunction) {
     console.log(page, startEvent, endEvent, top, left, x);
     var handler = this;
     var animation = wx.createAnimation({
@@ -200,8 +262,8 @@ module.exports.TouchMoveHandler = function(systemInfo, touchMoveExecuteTrip) {
         animationData: {},
         cards_img: cards_img
       });
-      if (cards_img < 3) {
-        handler.callbackHandel(callbackFunction, handler.Event.Less3Item, page, startEvent, endEvent, tripTop, tripLeft, x);
+      if (cards_img.lenght < 3) {
+        handler.callbackHandel(callbackFunction, handler.Event.Less3Item, page, startEvent, endEvent, top, left, x);
       }
     }, 400);
   };
