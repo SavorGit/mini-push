@@ -37,7 +37,7 @@
       <view class='con_bottom flex-row-center-flex_start theme-panel'>
         <view class='launch flex-row-center-flex_start'>
           <view class="flex-row-center-space_between">
-            <navigator class='theme-button' data-name="{{bean.title}}" data-filename='{{bean.filename}}' data-vediourl="{{bean.tx_url}}" data-boxmac="{{box_mac}}" data-openid="{{openid}}" url="/pages/demand/goods_detail">商品详情</navigator>
+            <navigator class='theme-button' data-name="{{bean.title}}" data-filename='{{bean.filename}}' data-vediourl="{{bean.tx_url}}" data-boxmac="{{box_mac}}" data-openid="{{openid}}" url="/pages/demand/goods_detail?box_mac={{box_mac}}&goods_id={{bean.id}}">商品详情</navigator>
             <button class='theme-button' bindtap='boxShow' data-name="{{bean.title}}" data-filename='{{bean.filename}}' data-vediourl="{{bean.tx_url}}" data-boxmac="{{box_mac}}" data-openid="{{openid}}">电视播放</button>
           </view>
         </view>

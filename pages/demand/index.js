@@ -442,7 +442,7 @@ Page({
     //var openid = e.target.dataset.openid;
     var res_id = e.target.dataset.res_id;
     var res_key = e.target.dataset.res_key;
-    var res_type = e.target.dataset.type;
+    var res_type = 4;
     wx.request({
       url: api_url+'/Smallapp/collect/recLogs',
       header: {
@@ -492,7 +492,7 @@ Page({
     var that = this;
     var res_id = e.target.dataset.res_id;
     var res_key = e.target.dataset.res_key;
-    var res_type= e.target.dataset.type;
+    var res_type= 4;
     wx.request({
       url: api_url+'/Smallapp/collect/recLogs',
       header: {
@@ -543,7 +543,7 @@ Page({
     var openid = res.target.dataset.openid;
     var res_id = res.target.dataset.res_id;
     var res_key = res.target.dataset.res_key;
-    var res_type= res.target.dataset.type;
+    
     var video_url = res.target.dataset.video_url;
     var video_name = res.target.dataset.video_name;
     var video_img = res.target.dataset.video_img;
@@ -558,7 +558,7 @@ Page({
         data: {
           'openid': openid,
           'res_id': res_id,
-          'type': 3,
+          'type': 4,
           'status': 1,
         },
         success: function (e) {
