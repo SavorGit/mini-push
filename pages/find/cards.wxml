@@ -34,18 +34,18 @@
               </view>
             </view>
           </view>
-          <view class="count-list flex-row-center-space_between">
+          <button class="count-list flex-row-center-space_between" open-type='share' data-forscreen_id="{{cards_img[0].forscreen_id}}" data-id="{{cards_img[0].id}}" data-type="{{cards_img[0].type}}" data-img_url="{{cards_img[0].pubdetail[0].img_url}}">
             <view>
               <view class="heart fa fa-heart-o fa-lg"> {{cards_img[0].collect_num}}</view>
             </view>
             <view>
               <view class="fa fa-share-square-o fa-lg"> {{cards_img[0].share_num}}</view>
             </view>
-          </view>
+          </button>
         </view>
       </view>
       <image class='bg-image' src="{{cards_img[0].pubdetail[0].img_url}}"></image>
-      <view class="touch-mask" bindtouchend="onTouchEnd" bindtouchmove="onTouchMove" bindtap="onClick" data-src='{{cards_img[0].pubdetail}}' data-res_type="{{cards_img[0].res_type}}" data-id="{{cards_img[0].id}}" data-type="{{cards_img[0].id}}"></view>
+      <view class="touch-mask" bindtouchend="onTouchEnd" bindtouchmove="onTouchMove" bindtap="onClick" data-src='{{cards_img[0].pubdetail}}' data-res_type="{{cards_img[0].res_type}}" data-id="{{cards_img[0].id}}" data-type="{{cards_img[0].type}}"  data-res_url="{{cards_img[0].res_url}}"></view>
     </view>
     <view wx:if="cards_img.length >= 2" class="card-item theme-container">
       <image class='bg-image' src="{{cards_img[1].pubdetail[0].img_url}}"></image>
@@ -58,7 +58,7 @@
     <view class="circular theme-button-unlike" bindtap="flyLeft">
       <view class="heart fa fa-heart-o fa-lg"></view>
     </view>
-    <view class="on-tv flex-column-center-center theme-button-dark">电视播放</view>
+    <view class="on-tv flex-column-center-center theme-button-dark" bindtap="boxShow" data-pubdetail="{{cards_img[0].pubdetail}}" data-res_type="{{cards_img[0].res_type}}" data-res_nums="{{cards_img[0].res_nums}}" data-forscreen_id="{{cards_img[0].id}}">电视播放</view>
     <view class="circular theme-button-like" bindtap="flyRight">
       <view class="heart fa fa-heart fa-lg"></view>
     </view>

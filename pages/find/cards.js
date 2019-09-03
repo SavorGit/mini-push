@@ -281,17 +281,20 @@ Page({
     var type = e.currentTarget.dataset.type
     touchEvent["touchEnd"] = touchEvent.pop();
     this.touchMoveHandler.touchMoveHandle(self, touchEvent["touchStart"], touchEvent["touchEnd"], function(handleEvent, page, startEvent, endEvent, top, left, x) {
-      wx.request({
-        url: api_url +'/Smallapp3/Find/recordViewfind',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        data: {
-          openid: openid,
-          id: id,
-          type:type,
-        },
-      })
+      if (handleEvent == self.touchMoveHandler.Event.LeftSlideMoved || handleEvent == self.touchMoveHandler.Event.RightSlideMoved){
+        wx.request({
+          url: api_url + '/Smallapp3/Find/recordViewfind',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          data: {
+            openid: openid,
+            id: id,
+            type: type,
+          },
+        })
+      }
+      
 
       if (handleEvent == self.touchMoveHandler.Event.Less3Item) {
         page_num++;
@@ -507,13 +510,97 @@ Page({
    */
   flyLeft: function(e) {
     var self = this;
-    this.touchMoveHandler.moveOnhorizontalHandel(self, systemInfo.statusBarHeight + 46, 0, -675 / systemInfo.pixelRatio);
+    self.touchMoveHandler.clickMoveHandle(self, self.touchMoveHandler.SlideType.LeftSlide, 675, e, function (handleEvent, page, startEvent, endEvent, top, left, x) {
+      console.log(handleEvent, page, startEvent, endEvent, top, left, x);
+    });
   },
   /**
    * 点击喜欢
    */
   flyRight: function(e) {
     var self = this;
-    this.touchMoveHandler.moveOnhorizontalHandel(self, systemInfo.statusBarHeight + 46, 0, 675 / systemInfo.pixelRatio);
-  }
+    self.touchMoveHandler.clickMoveHandle(self, self.touchMoveHandler.SlideType.RightSlide, 675, e, function (handleEvent, page, startEvent, endEvent, top, left, x) {
+      console.log(handleEvent, page, startEvent, endEvent, top, left, x);
+    });
+  },
+  //电视播放
+  boxShow: function (e) {
+    console.log(e);
+    var forscreen_id = e.currentTarget.dataset.forscreen_id;
+
+    var pubdetail = e.currentTarget.dataset.pubdetail;
+    var res_type = e.currentTarget.dataset.res_type;
+    var res_nums = e.currentTarget.dataset.res_nums;
+    app.boxShow(box_mac, forscreen_id, pubdetail, res_type, res_nums);
+  },
+  //点击分享按钮
+  onShareAppMessage: function (res) {
+    var that = this;
+    var user_info = wx.getStorageSync('savor_user_info');
+    var openid = user_info.openid;
+    var type   = res.target.dataset.type;
+    var res_type = res.target.dataset.res_type;
+    if(type==1){
+      var res_id = res.target.dataset.id;
+      var c_type = 3;
+      if (res_type == 1) {
+        var share_url = '/pages/share/pic?forscreen_id=' + res_id;
+      } else {
+        var share_url = '/pages/share/video?res_id=' + res_id + '&type=3';
+      }
+      
+    }else if(type==2 || type==3){
+      var res_id = res.target.dataset.forscreen_id;
+      var c_type = 2;
+      if (res_type==1){
+        var share_url = '/pages/share/pic?forscreen_id=' + res_id;
+
+      }else {
+        var share_url = '/pages/share/video?res_id=' + res_id + '&type=2';
+      }
+    }
+    var video_url = res.target.dataset.video_url;
+    var img_url   = res.target.dataset.img_url;
+    var res_url   = res.target.dataset.res_url;
+
+    if (res.from === 'button') {
+      
+      // 转发成功
+      wx.request({
+        url: api_url + '/Smallapp/share/recLogs',
+        header: {
+          'content-type': 'application/json'
+        },
+        data: {
+          'openid': openid,
+          'res_id': res_id,
+          'type': c_type,
+          'status': 1,
+        },
+        success: function (e) {
+          //var cards_img = that.cards_img
+          
+          
+
+        },
+        fail: function ({ errMsg }) {
+          wx.showToast({
+            title: '网络异常，请稍后重试',
+            icon: 'none',
+            duration: 2000
+          })
+        }
+      })
+      // 来自页面内转发按钮
+      return {
+        title: '热点聚焦，投你所好',
+        path: share_url,
+        imageUrl: img_url,
+        success: function (res) {
+
+
+        },
+      }
+    }
+  },// 分享结束
 })
