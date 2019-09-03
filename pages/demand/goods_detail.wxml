@@ -5,17 +5,17 @@
 <view class="container flex-column-center-flex_start theme-container" style='height: calc(100vh - 46px - {{statusBarHeight}}px);'>
   <video class="goods-video" src="{{goods_info.video_url}}"></video>
   <view class='operation flex-row-center-flex_end font_666666_26'>
-    <view>
+    <!-- <view>
       <label class="fa fa-play fa-lg">100</label>
-    </view>
-    <view wx:if="{{is_collect==1}}">
-      <label class="fa fa-heart fa-lg" style="color: #E11E4C;" bindtap='cancCollect' data-res_id="{{res_id}}" data-type='{{res_type}}' data-openid='{{openid}}'>101</label>
+    </view> -->
+    <view wx:if="{{goods_info.is_collect==1}}">
+      <label class="fa fa-heart fa-lg" style="color: #E11E4C;" bindtap='cancCollect' data-res_id="{{goods_info.goods_id}}" data-type='4' data-openid='{{openid}}'>{{goods_info.collect_num}}</label>
     </view>
     <view wx:else>
-      <label class="fa fa-heart-o fa-lg" bindtap='onCollect' data-res_id="{{res_id}}" data-type='{{res_type}}' data-openid='{{openid}}'>102</label>
+      <label class="fa fa-heart-o fa-lg" bindtap='onCollect' data-res_id="{{goods_info.goods_id}}" >{{goods_info.collect_num}}</label>
     </view>
-    <button class="font_666666_26" open-type='share' data-openid="{{openid}}" data-res_id="{{res_id}}" data-type='{{res_type}}' data-video_url="{{video_url}}" data-video_name="{{video_name}}" data-video_img='{{video_img_url}}' data-share_num='{{share_num}}'>
-      <label class="fa fa-share-square-o fa-lg">103</label>
+    <button class="font_666666_26" open-type='share' data-openid="{{openid}}" data-goods_id="{{goods_info.goods_id}}" data-type='4' data-video_url="{{video_url}}"  data-img_url='{{goods_info.pubdetail[0].img_url}}' data-share_num='{{goods_info.share_num}}' >
+      <label class="fa fa-share-square-o fa-lg">{{goods_info.share_num}}</label>
     </button>
   </view>
   <scroll-view class="goods-info full_width flex-column-center-flex_start theme-container" scroll-y="true" scroll-with-animation="true">
