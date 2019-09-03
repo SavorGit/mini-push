@@ -71,9 +71,13 @@
 </view>
 
 <!-- 弹出视频播放页面 -->
-<view wx:if="{{showVideoWindow}}" class='container flex-column-center-center' style='height: calc(100vh - 46px - {{statusBarHeight}}px); background-color: #000000; position: absolute; left: 0; top: calc(46px + {{statusBarHeight}}px); z-index: 10;'>
-<view bindtap="closePopVideo">X</view>
-  <video class="full_width" autoplay="true" src="{{pop_video_url}}"></video>
+<view wx:if="{{showVideoWindow}}" class='container flex-column-center-flex_start' style='height: calc(100vh - 46px - {{statusBarHeight}}px); background-color: #000000; position: absolute; left: 0; top: calc(46px + {{statusBarHeight}}px); z-index: 10;'>
+  <view class="flex-row-flex_start-flex_end font_FFFFFF_34" style="width: calc(100% - 40rpx);height: 60rpx;padding: 20rpx;font-size: 50rpx;">
+    <view class="fa fa-close fa-lg" bindtap="closePopVideo"></view>
+  </view>
+  <view class="full_width flex-column-center-center" style="height: calc(100% - 200rpx);">
+    <video class="full_width" autoplay="true" src="{{pop_video_url}}"></video>
+  </view>
 </view>
 
 <!-- 加载数据不成功时的弹窗 -->
