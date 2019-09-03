@@ -1,6 +1,6 @@
 @font-face {
     font-family: 'FontAwesome';
-    src: url('FontAwesome.eot');
+    src: url('https://oss.littlehotspot.com/WeChat/MiniProgram/FontAwesome/FontAwesome.eot');
     font-weight: normal;
     font-style: normal;
 }
