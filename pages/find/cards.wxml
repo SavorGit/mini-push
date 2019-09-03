@@ -81,6 +81,6 @@
 </view>
 
 <!-- 加载数据不成功时的弹窗 -->
-<modal show="{{showContinueModalPopWindow}}" width="90%" height='300rpx' border-radius="10rpx" title-text='提示' title-color="#333333" confirm-text='继续操作' confirm-color="#F6F3EE" cancel-text='返回首页' cancel-color='#FFFFFF' bindcancel="" bindconfirm=''>
-  <view style="color: #333333; padding: 0 50rpx;">是否继续操作？</view>
+<modal show="{{showContinueModalPopWindow}}" width="90%" height='300rpx' border-radius="10rpx" title-text='提示' title-color="#333333" confirm-text='重试' confirm-color="#F6F3EE" cancel-text='前往优选' cancel-color='#FFFFFF' bindcancel="goHome" bindconfirm='getFindList'>
+  <view style="color: #333333; padding: 0 50rpx;">加载失败，请重试！</view>
 </modal>

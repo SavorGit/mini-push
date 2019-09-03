@@ -189,15 +189,22 @@ Page({
         },
         data: {
           openid: openid,
-          page: 1,
         },
         success: function(res) {
           if (res.data.code == 10000) {
             self.setData({
               cards_img: res.data.result
             })
+          }else {
+            self.setData({
+              showContinueModalPopWindow:true
+            })
           }
 
+        },fail:function(res){
+          self.setData({
+            showContinueModalPopWindow: true
+          })
         }
       })
     }
@@ -251,6 +258,40 @@ Page({
   onShareAppMessage: function() {
 
   },
+  goHome:function(e){
+    wx.reLaunch({
+      url: '/pages/demand/index',
+    })
+  },
+  getFindList:function(e){
+    var that = this;
+    wx.request({
+      url: api_url + '/Smallapp3/Find/findlist',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      data: {
+        openid: openid,
+      },
+      success: function (res) {
+        if (res.data.code == 10000) {
+          
+          that.setData({
+            cards_img: res.data.result
+          })
+        } else {
+          that.setData({
+            showContinueModalPopWindow: true
+          })
+        }
+
+      }, fail: function (res) {
+        that.setData({
+          showContinueModalPopWindow: true
+        })
+      }
+    })
+  },
   /**
    * 点击事件
    */
@@ -303,7 +344,7 @@ Page({
       
 
       if (handleEvent == self.touchMoveHandler.Event.Less3Item) {
-        page_num++;
+        
         wx.request({
           url: api_url + '/Smallapp3/Find/findlist',
           headers: {
@@ -311,7 +352,6 @@ Page({
           },
           data: {
             openid: openid,
-            page: page_num,
           },
           success: function(res) {
             if (res.data.code == 10000) {
@@ -321,7 +361,16 @@ Page({
               }
               //self.data.cards_img.push(res.data.result);
 
+            }else {
+              self.setData({
+                showContinueModalPopWindow: true,
+              })
             }
+          },fail:function(res){
+            page_num--;
+            self.setData({
+              showContinueModalPopWindow:true,
+            })
           }
         })
       }
@@ -534,6 +583,37 @@ Page({
           },
         })
       }
+      if (handleEvent == self.touchMoveHandler.Event.Less3Item) {
+        
+        wx.request({
+          url: api_url + '/Smallapp3/Find/findlist',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          data: {
+            openid: openid,
+          },
+          success: function (res) {
+            if (res.data.code == 10000) {
+              var list_info = res.data.result;
+              for (var k = 0; k < list_info.length; k++) {
+                self.data.cards_img.push(list_info[k]);
+              }
+              //self.data.cards_img.push(res.data.result);
+
+            } else {
+              self.setData({
+                showContinueModalPopWindow: true,
+              })
+            }
+          }, fail: function (res) {
+
+            self.setData({
+              showContinueModalPopWindow: true,
+            })
+          }
+        })
+      }
       
       //console.log(handleEvent, page, startEvent, endEvent, top, left, x);
     });
@@ -556,6 +636,7 @@ Page({
       var c_type = 3
     }
     self.touchMoveHandler.clickMoveHandle(self, self.touchMoveHandler.SlideType.RightSlide, 675, e, function (handleEvent, page, startEvent, endEvent, top, left, x) {
+      console.log("handleEvent=" + handleEvent)
       if (handleEvent == self.touchMoveHandler.Event.RightSlideMoved) {
         wx.request({
           url: api_url + '/Smallapp3/Find/recordViewfind',
@@ -582,7 +663,37 @@ Page({
           },
         })
       }
-      
+      if (handleEvent == self.touchMoveHandler.Event.Less3Item) {
+        console.log(self.data.cards_img);
+        wx.request({
+          url: api_url + '/Smallapp3/Find/findlist',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          data: {
+            openid: openid,
+          },
+          success: function (res) {
+            if (res.data.code == 10000) {
+              var list_info = res.data.result;
+              for (var k = 0; k < list_info.length; k++) {
+                self.data.cards_img.push(list_info[k]);
+              }
+              //self.data.cards_img.push(res.data.result);
+
+            } else {
+              self.setData({
+                showContinueModalPopWindow: true,
+              })
+            }
+          }, fail: function (res) {
+            
+            self.setData({
+              showContinueModalPopWindow: true,
+            })
+          }
+        })
+      }
       //console.log(handleEvent, page, startEvent, endEvent, top, left, x);
     });
   },

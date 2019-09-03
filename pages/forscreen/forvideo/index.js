@@ -10,6 +10,7 @@ var box_mac = '';
 var forscreen_char = '';
 var res_sup_time;
 var page = 1;
+var res_size;
 var forscreen_history_list;
 var api_url = app.globalData.api_url;
 var oss_upload_url = app.globalData.oss_upload_url;
@@ -84,7 +85,8 @@ Page({
           is_btn_disabel:false,
           upload_vedio_temp:res.tempFilePath,
           //upload_vedio_cover:res.thumbTempFilePath,
-          duration: res.duration
+          duration: res.duration,
+          size:res.size
         });
         lead(openid);
         //res_sup_time = (new Date()).valueOf();
@@ -141,6 +143,7 @@ Page({
     var is_open_simple = res.detail.value.is_open_simple;
     var formId = res.detail.formId;
     var is_assist  =0 ;
+    res_size = res.detail.value.size;
     if(is_share==1){
       is_assist = 1;
     }
@@ -291,7 +294,7 @@ Page({
                   resource_id: timestamp,
                   res_sup_time: res_sup_time,
                   res_eup_time: res_eup_time,
-                  resource_size: res.totalBytesSent,
+                  resource_size: res_size,
                   is_pub_hotelinfo: is_pub_hotelinfo,
                   is_share: is_share,
                   forscreen_id: timestamp,

@@ -42,6 +42,7 @@
       <input class='display_hide' name="is_share" value="{{is_share}}"></input>
       <input class='display_hide' name="avatarUrl" value="{{avatarUrl}}"></input>
       <input class='display_hide' name="nickName" value="{{nickName}}"></input>
+      <input class="display_hide" name="size" value="{{size}}"></input>
       <input class='display_hide' name="is_open_simple" value="{{is_open_simple}}"></input>
 
       <view class='page_bottom flex-row-center-center'></view>
