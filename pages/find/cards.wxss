@@ -118,7 +118,7 @@ page {
 }
 
 .card-wrap > .card-item > .card-info > .content-bottom > .user-info {
-  width: calc(100% - 110rpx);
+  width: calc(100% - 170rpx);
   height: 100%;
 }
 
@@ -135,12 +135,12 @@ page {
 }
 
 .card-wrap > .card-item > .card-info > .content-bottom > .user-info > .info .address {
-  width: 260rpx;
+  width: 200rpx;
   min-height: 20rpx;
 }
 
 .card-wrap > .card-item > .card-info > .content-bottom > .count-list {
-  width: 110rpx;
+  width: 170rpx;
   height: 100%;
 }
 
@@ -172,4 +172,11 @@ page {
   height: 60rpx;
   font-size: 24rpx;
   border-radius: 5rpx;
+}
+
+.nodata-msg {
+  margin-top: 100rpx;
+  font-size: 50rpx;
+  font-weight: 900;
+  color: #bebebe;
 }

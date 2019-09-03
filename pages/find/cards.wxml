@@ -2,9 +2,10 @@
 <import src="/pages/template/commons" />
 <template is="navigationBarForTopLevel" data='{{statusBarHeight: statusBarHeight,titleText:"热点投屏"}}' />
 
-<view class='container flex-column-center-flex_start theme-wxAuthLogin-container' style='height: calc(100vh - 46px - {{statusBarHeight}}px);'>
+<!-- 有数据时的页面 -->
+<view wx:if="{{cards_img.length > 0}}" class='container flex-column-center-flex_start theme-wxAuthLogin-container' style='height: calc(100vh - 46px - {{statusBarHeight}}px);'>
   <view class="card-wrap">
-    <view wx:if="cards_img.length >= 1" class="card-item theme-container" animation="{{animationData}}" style="left: {{cards[0].x}}px; top: {{cards[0].y}}px;">
+    <view class="card-item theme-container" animation="{{animationData}}" style="left: {{cards[0].x}}px; top: {{cards[0].y}}px;">
       <view class="card-info">
         <view class="content-top flex-row-flex_start-flex_end">
           <view wx:if="{{cards_img[0].type == 1}}" class="content-type-icon official flex-row-center-center">官方</view>
@@ -34,23 +35,23 @@
               </view>
             </view>
           </view>
-          <button class="count-list flex-row-center-space_between" open-type='share' data-forscreen_id="{{cards_img[0].forscreen_id}}" data-id="{{cards_img[0].id}}" data-type="{{cards_img[0].type}}" data-img_url="{{cards_img[0].pubdetail[0].img_url}}">
+          <button class="count-list flex-row-center-space_between font_666666_20" open-type='share' data-forscreen_id="{{cards_img[0].forscreen_id}}" data-id="{{cards_img[0].id}}" data-type="{{cards_img[0].type}}" data-img_url="{{cards_img[0].pubdetail[0].img_url}}">
             <view>
-              <view class="heart fa fa-heart-o fa-lg"> {{cards_img[0].collect_num}}</view>
+              <view class="heart fa fa-heart-o fa-lg"> {{cards_img[0].collect_num}}00</view>
             </view>
             <view>
-              <view class="fa fa-share-square-o fa-lg"> {{cards_img[0].share_num}}</view>
+              <view class="fa fa-share-square-o fa-lg"> {{cards_img[0].share_num}}00</view>
             </view>
           </button>
         </view>
       </view>
       <image class='bg-image' src="{{cards_img[0].pubdetail[0].img_url}}"></image>
-      <view class="touch-mask" bindtouchend="onTouchEnd" bindtouchmove="onTouchMove" bindtap="onClick" data-src='{{cards_img[0].pubdetail}}' data-res_type="{{cards_img[0].res_type}}" data-id="{{cards_img[0].id}}" data-type="{{cards_img[0].type}}"  data-res_url="{{cards_img[0].res_url}}"></view>
+      <view class="touch-mask" bindtouchend="onTouchEnd" bindtouchmove="onTouchMove" bindtap="onClick" data-src='{{cards_img[0].pubdetail}}' data-res_type="{{cards_img[0].res_type}}" data-id="{{cards_img[0].id}}" data-type="{{cards_img[0].type}}" data-res_url="{{cards_img[0].res_url}}"></view>
     </view>
-    <view wx:if="cards_img.length >= 2" class="card-item theme-container">
+    <view wx:if="{{cards_img.length >= 2}}" class="card-item theme-container">
       <image class='bg-image' src="{{cards_img[1].pubdetail[0].img_url}}"></image>
     </view>
-    <view wx:if="cards_img.length >= 3" class="card-item theme-container">
+    <view wx:if="{{cards_img.length >= 3}}" class="card-item theme-container">
       <image class='bg-image' src="{{cards_img[2].pubdetail[0].img_url}}"></image>
     </view>
   </view>
@@ -64,8 +65,17 @@
     </view>
   </view>
 </view>
+<!-- 无数据的页面 -->
+<view wx:else class='container flex-column-center-flex_start theme-container' style='height: calc(100vh - 46px - {{statusBarHeight}}px);'>
+  <view class="nodata-msg">陛下，您阅人无“数”</view>
+</view>
 
 <!-- 弹出视频播放页面 -->
-<view wx:if="{{showVideo}}" class='container flex-column-center-center' style='height: calc(100vh - 46px - {{statusBarHeight}}px); background-color: #000000; position: absolute; left: 0; top: calc(46px + {{statusBarHeight}}px); z-index: 10;'>
+<view wx:if="{{showVideoWindow}}" class='container flex-column-center-center' style='height: calc(100vh - 46px - {{statusBarHeight}}px); background-color: #000000; position: absolute; left: 0; top: calc(46px + {{statusBarHeight}}px); z-index: 10;'>
   <video class="full_width" autoplay="true" src="http://oss.littlehotspot.com//media/resource/GdxeRaKasX.mp4"></video>
 </view>
+
+<!-- 加载数据不成功时的弹窗 -->
+<modal show="{{showContinueModalPopWindow}}" width="90%" height='300rpx' border-radius="10rpx" title-text='提示' title-color="#333333" confirm-text='继续操作' confirm-color="#F6F3EE" cancel-text='返回首页' cancel-color='#FFFFFF' bindcancel="" bindconfirm=''>
+  <view style="color: #333333; padding: 0 50rpx;">是否继续操作？</view>
+</modal>

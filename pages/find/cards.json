@@ -1,4 +1,7 @@
 {
-  "usingComponents": {},
+  "usingComponents": {
+    "modal": "/components/modal/modal",
+    "bottomModal": "/components/modal/bottomModal"
+  },
   "disableScroll": true
 }

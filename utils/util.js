@@ -46,7 +46,7 @@ module.exports.PostRequest = function(url, data, success) {
     },
     data: data,
     method: "POST",
-    success: success
+    success: typeof(success) == "function" ? success : function() {}
   });
 }
 
@@ -58,7 +58,7 @@ module.exports.GetRequest = function(url, data, success) {
     },
     data: data,
     method: "GET",
-    success: success
+    success: typeof(success) == "function" ? success : function() {}
   });
 }
 
@@ -195,6 +195,11 @@ module.exports.TouchMoveHandler = function(systemInfo, touchMoveExecuteTrip) {
    */
   this.returnToOriginHandel = function(page, startEvent, endEvent) {
     var handler = this;
+    wx.showLoading({
+      title: '加载中',
+      icon: 'loading',
+      duration: 10000
+    });
     var animation = wx.createAnimation({
       // duration: 100,
       // timingFunction: 'cubic-bezier(.8,.2,.1,0.8)'
@@ -214,6 +219,7 @@ module.exports.TouchMoveHandler = function(systemInfo, touchMoveExecuteTrip) {
           y: handler.options.systemInfo.statusBarHeight + 46
         }]
       });
+      wx.hideLoading();
     }, 100);
   };
 
@@ -237,8 +243,13 @@ module.exports.TouchMoveHandler = function(systemInfo, touchMoveExecuteTrip) {
    *                                                      }
    */
   this.moveOnhorizontalHandel = function(page, top, left, x, startEvent, endEvent, callbackFunction) {
-    console.log(page, startEvent, endEvent, top, left, x);
+    console.log("TouchMoveHandler.moveOnhorizontalHandel(page, top, left, x, startEvent, endEvent, callbackFunction)", page, startEvent, endEvent, top, left, x);
     var handler = this;
+    wx.showLoading({
+      title: '加载中',
+      icon: 'loading',
+      duration: 10000
+    });
     var animation = wx.createAnimation({
       duration: 400,
       // timingFunction: 'cubic-bezier(.8,.2,.1,0.8)'
@@ -262,6 +273,8 @@ module.exports.TouchMoveHandler = function(systemInfo, touchMoveExecuteTrip) {
         animationData: {},
         cards_img: cards_img
       });
+      console.log("TouchMoveHandler.moveOnhorizontalHandel(page, top, left, x, startEvent, endEvent, callbackFunction)#setTimeout", cards_img);
+      wx.hideLoading();
       if (cards_img.lenght < 3) {
         handler.callbackHandel(callbackFunction, handler.Event.Less3Item, page, startEvent, endEvent, top, left, x);
       }
