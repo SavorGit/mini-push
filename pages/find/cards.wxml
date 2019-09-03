@@ -35,7 +35,7 @@
               </view>
             </view>
           </view>
-          <button class="count-list flex-row-center-space_between font_666666_20" open-type='share' data-forscreen_id="{{cards_img[0].forscreen_id}}" data-id="{{cards_img[0].id}}" data-type="{{cards_img[0].type}}" data-img_url="{{cards_img[0].pubdetail[0].img_url}}">
+          <button class="count-list flex-row-center-flex_end font_666666_20" open-type='share' data-forscreen_id="{{cards_img[0].forscreen_id}}" data-id="{{cards_img[0].id}}" data-type="{{cards_img[0].type}}" data-img_url="{{cards_img[0].pubdetail[0].img_url}}">
             <view>
               <view class="heart fa fa-heart-o fa-lg"> {{cards_img[0].collect_num}}</view>
             </view>

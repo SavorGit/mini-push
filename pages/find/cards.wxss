@@ -1,5 +1,10 @@
 /* pages/find/cards.wxss */
 
+.button-hover {
+  background-color: unset;
+  opacity: 1;
+}
+
 page {
   background: #fff;
   margin: 0 auto;
@@ -142,6 +147,10 @@ page {
 .card-wrap > .card-item > .card-info > .content-bottom > .count-list {
   width: 170rpx;
   height: 100%;
+}
+
+.card-wrap > .card-item > .card-info > .content-bottom > .count-list > view:nth-child(1) {
+  margin-right: 20rpx;
 }
 
 .card-wrap > .card-item > .touch-mask {

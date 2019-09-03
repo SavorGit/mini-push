@@ -12,13 +12,11 @@
 }
 
 .operation > view, .operation > button {
-  width: 120rpx;
-  margin: unset;
+  max-width: 120rpx;
+  height: 60rpx;
+  line-height: 60rpx;
+  margin: 0 20rpx 0 0;
   text-align: unset;
-}
-
-.operation > view {
-  margin-right: 8rpx;
 }
 
 .goods-info {
