@@ -45,7 +45,7 @@
         </view>
       </view>
       <image class='bg-image' src="{{cards_img[0].pubdetail[0].img_url}}"></image>
-      <view class="touch-mask" bindtouchend="onTouchEnd" bindtouchmove="onTouchMove" bindtap="onClick" data-src='{{cards_img[0].pubdetail}}' data-res_type="{{cards_img[0].res_type}}"></view>
+      <view class="touch-mask" bindtouchend="onTouchEnd" bindtouchmove="onTouchMove" bindtap="onClick" data-src='{{cards_img[0].pubdetail}}' data-res_type="{{cards_img[0].res_type}}" data-id="{{cards_img[0].id}}" data-type="{{cards_img[0].id}}"></view>
     </view>
     <view class="card-item">
       <image class='bg-image' src="{{cards_img[1].pubdetail[0].img_url}}"></image>

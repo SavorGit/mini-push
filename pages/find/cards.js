@@ -276,8 +276,22 @@ Page({
    */
   onTouchEnd: function(e) {
     var self = this;
+    var id = e.currentTarget.dataset.id;
+    var type = e.currentTarget.dataset.type
     touchEvent["touchEnd"] = touchEvent.pop();
     this.touchMoveHandler.touchMoveHandle(self, touchEvent["touchStart"], touchEvent["touchEnd"], function(handleEvent, page, startEvent, endEvent, top, left, x) {
+      wx.request({
+        url: api_url +'/Smallapp3/Find/recordViewfind',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        data: {
+          openid: openid,
+          id: id,
+          type:type,
+        },
+      })
+
       if (handleEvent == self.touchMoveHandler.Event.Less3Item) {
         page_num++;
         wx.request({
