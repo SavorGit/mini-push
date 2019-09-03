@@ -4,12 +4,25 @@
 
 <view class="container flex-column-center-flex_start theme-container" style='height: calc(100vh - 46px - {{statusBarHeight}}px);'>
   <video class="goods-video" src="{{goods_info.video_url}}"></video>
+  <view class='operation flex-row-center-flex_end font_666666_26'>
+    <view>
+      <label class="fa fa-play fa-lg">100</label>
+    </view>
+    <view wx:if="{{is_collect==1}}">
+      <label class="fa fa-heart fa-lg" style="color: #E11E4C;" bindtap='cancCollect' data-res_id="{{res_id}}" data-type='{{res_type}}' data-openid='{{openid}}'>101</label>
+    </view>
+    <view wx:else>
+      <label class="fa fa-heart-o fa-lg" bindtap='onCollect' data-res_id="{{res_id}}" data-type='{{res_type}}' data-openid='{{openid}}'>102</label>
+    </view>
+    <button class="font_666666_26" open-type='share' data-openid="{{openid}}" data-res_id="{{res_id}}" data-type='{{res_type}}' data-video_url="{{video_url}}" data-video_name="{{video_name}}" data-video_img='{{video_img_url}}' data-share_num='{{share_num}}'>
+      <label class="fa fa-share-square-o fa-lg">103</label>
+    </button>
+  </view>
   <scroll-view class="goods-info full_width flex-column-center-flex_start theme-container" scroll-y="true" scroll-with-animation="true">
     <image class="full_width" mode="widthFix" src="{{goods_info.detail_content}}"></image>
   </scroll-view>
   <view class="page-bottom full_width flex-row-center-space_around theme-panel">
     <button class="theme-button-dark" bindtap="boxShow" data-goods_id="{{goods_info.goods_id}}" data-pubdetail="{{goods_info.pubdetail}}" data-media_type="{{goods_info.media_type}}">电视播放</button>
-    <navigator class="theme-button-buy"  target="miniProgram" app-id="{{goods_info.appid}}" path="{{goods_info.jd_url}}">
-    {{goods_info.buybutton}}</navigator>
+    <navigator class="theme-button-buy" target="miniProgram" app-id="{{goods_info.appid}}" path="{{goods_info.jd_url}}">{{goods_info.buybutton}}</navigator>
   </view>
 </view>
