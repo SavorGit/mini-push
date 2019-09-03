@@ -4,7 +4,7 @@
 
 <view class='container flex-column-center-flex_start theme-wxAuthLogin-container' style='height: calc(100vh - 46px - {{statusBarHeight}}px);'>
   <view class="card-wrap">
-    <view class="card-item theme-container" animation="{{animationData}}" style="left: {{cards[0].x}}px; top: {{cards[0].y}}px;">
+    <view wx:if="cards_img.length >= 1" class="card-item theme-container" animation="{{animationData}}" style="left: {{cards[0].x}}px; top: {{cards[0].y}}px;">
       <view class="card-info">
         <view class="content-top flex-row-flex_start-flex_end">
           <view wx:if="{{cards_img[0].type == 1}}" class="content-type-icon official flex-row-center-center">官方</view>
@@ -47,10 +47,10 @@
       <image class='bg-image' src="{{cards_img[0].pubdetail[0].img_url}}"></image>
       <view class="touch-mask" bindtouchend="onTouchEnd" bindtouchmove="onTouchMove" bindtap="onClick" data-src='{{cards_img[0].pubdetail}}' data-res_type="{{cards_img[0].res_type}}"></view>
     </view>
-    <view class="card-item theme-container">
+    <view wx:if="cards_img.length >= 2" class="card-item theme-container">
       <image class='bg-image' src="{{cards_img[1].pubdetail[0].img_url}}"></image>
     </view>
-    <view class="card-item theme-container">
+    <view wx:if="cards_img.length >= 3" class="card-item theme-container">
       <image class='bg-image' src="{{cards_img[2].pubdetail[0].img_url}}"></image>
     </view>
   </view>

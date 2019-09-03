@@ -201,7 +201,7 @@ module.exports.TouchMoveHandler = function(systemInfo, touchMoveExecuteTrip) {
         cards_img: cards_img
       });
       if (cards_img < 3) {
-        handler.callbackHandel(callbackFunction, handler.Event.Less3Item, page, startEvent, endEvent, tripTop, tripLeft);
+        handler.callbackHandel(callbackFunction, handler.Event.Less3Item, page, startEvent, endEvent, tripTop, tripLeft, x);
       }
     }, 400);
   };
