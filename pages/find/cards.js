@@ -255,7 +255,10 @@ Page({
    * 点击事件
    */
   onClick: function(e) {
+    var that = this;
     var res_type = e.currentTarget.dataset.res_type;
+    var pop_video_url = e.currentTarget.dataset.res_url;
+    console.log(pop_video_url);
     if (res_type == 1) { //图片
       var current = e.currentTarget.dataset.src;
 
@@ -269,7 +272,10 @@ Page({
         urls: urls // 需要预览的图片http链接列表
       })
     } else { //视频
-
+      that.setData({
+        showVideoWindow:true,
+        pop_video_url: pop_video_url
+      })
     }
   },
   /**
@@ -541,6 +547,14 @@ Page({
     var openid = user_info.openid;
     var id = e.currentTarget.dataset.id;
     var type = e.currentTarget.dataset.type;
+    var forscreen_id = e.currentTarget.dataset.forscreen_id;
+    if (type == 2 || type==3) {
+      var res_id = forscreen_id;
+      var c_type = 2;
+    } else {
+      var res_id = id;
+      var c_type = 3
+    }
     self.touchMoveHandler.clickMoveHandle(self, self.touchMoveHandler.SlideType.RightSlide, 675, e, function (handleEvent, page, startEvent, endEvent, top, left, x) {
       if (handleEvent == self.touchMoveHandler.Event.RightSlideMoved) {
         wx.request({
@@ -554,6 +568,7 @@ Page({
             type: type,
           },
         })
+        
         wx.request({
           url: api_url + '/Smallapp/collect/recLogs',
           header: {
@@ -562,7 +577,7 @@ Page({
           data: {
             'openid': openid,
             'res_id': res_id,
-            'type': 2,
+            'type': c_type,
             'status': 1,
           },
         })
@@ -651,4 +666,10 @@ Page({
       }
     }
   },// 分享结束
+  closePopVideo:function(e){
+    var that = this;
+    that.setData({
+      showVideoWindow:false
+    })
+  }
 })
