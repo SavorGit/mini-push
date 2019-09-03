@@ -5,6 +5,22 @@
   height: 422rpx;
 }
 
+.operation {
+  width: 100%;
+  height: 80rpx;
+  line-height: 80rpx;
+}
+
+.operation > view, .operation > button {
+  width: 120rpx;
+  margin: unset;
+  text-align: unset;
+}
+
+.operation > view {
+  margin-right: 8rpx;
+}
+
 .goods-info {
   height: calc(100% - 540rpx);
   margin-top: 20rpx;
@@ -14,9 +30,13 @@
   height: 98rpx;
 }
 
-.page-bottom > button {
+.page-bottom > button, .page-bottom > navigator {
   width: 220rpx;
   height: 55rpx;
+  line-height: 55rpx;
+  margin: 0;
+  display: block;
   font-size: 24rpx;
+  text-align: center;
   border-radius: 5rpx;
 }
