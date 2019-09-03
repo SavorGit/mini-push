@@ -119,12 +119,12 @@ module.exports.TouchMoveHandler = function(systemInfo, touchMoveExecuteTrip) {
     if (tripX <= -1 * moveExecuteTrip) { // 向左滑动处理
       var x = (handler.options.systemInfo.screen.width + tripLeft) * -1;
       handler.callbackHandel(callbackFunction, handler.Event.LeftSlide, page, startEvent, endEvent, tripTop, tripLeft, x);
-      handler.moveOnhorizontalHandel(page, startEvent, endEvent, tripTop, tripLeft, x);
+      handler.moveOnhorizontalHandel(page, tripTop, tripLeft, x, startEvent, endEvent);
       handler.callbackHandel(callbackFunction, handler.Event.LeftSlideMoved, page, startEvent, endEvent, tripTop, tripLeft, x);
     } else if (tripX >= moveExecuteTrip) { // 向右滑动处理
       var x = handler.options.systemInfo.screen.width - tripLeft;
       handler.callbackHandel(callbackFunction, handler.Event.RightSlide, page, startEvent, endEvent, tripTop, tripLeft, x);
-      handler.moveOnhorizontalHandel(page, startEvent, endEvent, tripTop, tripLeft, x);
+      handler.moveOnhorizontalHandel(page, tripTop, tripLeft, x, startEvent, endEvent);
       handler.callbackHandel(callbackFunction, handler.Event.RightSlideMoved, page, startEvent, endEvent, tripTop, tripLeft, x);
     } else {
       handler.callbackHandel(callbackFunction, handler.Event.ReturnToOrigin, page, startEvent, endEvent, tripTop, tripLeft);
@@ -174,7 +174,8 @@ module.exports.TouchMoveHandler = function(systemInfo, touchMoveExecuteTrip) {
    * @para left                左边距
    * @para x                   水平滑动行程
    */
-  this.moveOnhorizontalHandel = function(page, startEvent, endEvent, top, left, x) {
+  this.moveOnhorizontalHandel = function(page, top, left, x, startEvent, endEvent) {
+    console.log(page, startEvent, endEvent, top, left, x);
     var handler = this;
     var animation = wx.createAnimation({
       duration: 400,
@@ -200,7 +201,7 @@ module.exports.TouchMoveHandler = function(systemInfo, touchMoveExecuteTrip) {
         cards_img: cards_img
       });
       if (cards_img < 3) {
-        handler.callbackHandel(callbackFunction, handler.Event.Less3Item, page, startEvent, endEvent, tripTop, tripLeft);
+        handler.callbackHandel(callbackFunction, handler.Event.Less3Item, page, startEvent, endEvent, tripTop, tripLeft, x);
       }
     }, 400);
   };

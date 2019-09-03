@@ -90,9 +90,14 @@ button[disabled] {
   background-color: #333;
 }
 
-.theme-button-buy {
+.theme-button-buy, .theme-button-like {
   color: #fff;
   background-color: #eb6877;
+}
+
+.theme-button-unlike {
+  color: #fff;
+  background-color: #999;
 }
 
 .theme-button-disable {
