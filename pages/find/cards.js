@@ -344,7 +344,14 @@ Page({
       
 
       if (handleEvent == self.touchMoveHandler.Event.Less3Item) {
-        
+        var cards_img = self.data.cards_img;
+        var tmp = '[';
+        var space = '';
+        for (var i = 0; i < cards_img.length; i++) {
+          tmp += space + '{"id":' + cards_img[i].id + ',"type":' + cards_img[i].type + '}';
+          space = ',';
+        }
+        tmp += ']';
         wx.request({
           url: api_url + '/Smallapp3/Find/findlist',
           headers: {
@@ -352,6 +359,7 @@ Page({
           },
           data: {
             openid: openid,
+            find_ids,tmp
           },
           success: function(res) {
             if (res.data.code == 10000) {
@@ -584,7 +592,14 @@ Page({
         })
       }
       if (handleEvent == self.touchMoveHandler.Event.Less3Item) {
-        
+        var cards_img = self.data.cards_img;
+        var tmp = '[';
+        var space = '';
+        for(var i=0;i<cards_img.length;i++){
+          tmp += space +'{"id":'+cards_img[i].id+',"type":'+cards_img[i].type+'}';
+          space = ',';
+        }
+        tmp += ']';
         wx.request({
           url: api_url + '/Smallapp3/Find/findlist',
           headers: {
@@ -592,6 +607,7 @@ Page({
           },
           data: {
             openid: openid,
+            find_ids: tmp
           },
           success: function (res) {
             if (res.data.code == 10000) {
@@ -664,7 +680,14 @@ Page({
         })
       }
       if (handleEvent == self.touchMoveHandler.Event.Less3Item) {
-        console.log(self.data.cards_img);
+        var cards_img = self.data.cards_img;
+        var tmp = '[';
+        var space = '';
+        for (var i = 0; i < cards_img.length; i++) {
+          tmp += space + '{"id":' + cards_img[i].id + ',"type":' + cards_img[i].type + '}';
+          space = ',';
+        }
+        tmp += ']';
         wx.request({
           url: api_url + '/Smallapp3/Find/findlist',
           headers: {
@@ -672,6 +695,7 @@ Page({
           },
           data: {
             openid: openid,
+            find_ids: tmp
           },
           success: function (res) {
             if (res.data.code == 10000) {
