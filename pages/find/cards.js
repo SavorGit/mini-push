@@ -509,9 +509,27 @@ Page({
    * 点击不喜欢
    */
   flyLeft: function(e) {
+    var user_info = wx.getStorageSync('savor_user_info');
+    var openid    = user_info.openid;
+    var id        = e.currentTarget.dataset.id;
+    var type      = e.currentTarget.dataset.type;
     var self = this;
     self.touchMoveHandler.clickMoveHandle(self, self.touchMoveHandler.SlideType.LeftSlide, 675, e, function (handleEvent, page, startEvent, endEvent, top, left, x) {
-      console.log(handleEvent, page, startEvent, endEvent, top, left, x);
+      if (handleEvent == self.touchMoveHandler.Event.LeftSlideMoved) {
+        wx.request({
+          url: api_url + '/Smallapp3/Find/recordViewfind',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          data: {
+            openid: openid,
+            id: id,
+            type: type,
+          },
+        })
+      }
+      
+      //console.log(handleEvent, page, startEvent, endEvent, top, left, x);
     });
   },
   /**
@@ -519,8 +537,38 @@ Page({
    */
   flyRight: function(e) {
     var self = this;
+    var user_info = wx.getStorageSync('savor_user_info');
+    var openid = user_info.openid;
+    var id = e.currentTarget.dataset.id;
+    var type = e.currentTarget.dataset.type;
     self.touchMoveHandler.clickMoveHandle(self, self.touchMoveHandler.SlideType.RightSlide, 675, e, function (handleEvent, page, startEvent, endEvent, top, left, x) {
-      console.log(handleEvent, page, startEvent, endEvent, top, left, x);
+      if (handleEvent == self.touchMoveHandler.Event.RightSlideMoved) {
+        wx.request({
+          url: api_url + '/Smallapp3/Find/recordViewfind',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          data: {
+            openid: openid,
+            id: id,
+            type: type,
+          },
+        })
+        wx.request({
+          url: api_url + '/Smallapp/collect/recLogs',
+          header: {
+            'content-type': 'application/json'
+          },
+          data: {
+            'openid': openid,
+            'res_id': res_id,
+            'type': 2,
+            'status': 1,
+          },
+        })
+      }
+      
+      //console.log(handleEvent, page, startEvent, endEvent, top, left, x);
     });
   },
   //电视播放

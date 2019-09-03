@@ -16,17 +16,23 @@ Page({
    */
   onLoad: function(options) {
     var that = this;
+    var user_info = wx.getStorageSync('savor_user_info');
+    var openid  = user_info.openid;
     box_mac = options.box_mac;
     var goods_id = options.goods_id;
     wx.request({
-      url: api_url + '/aa/bb/cc',
+      url: api_url + '/Smallapp3/optimize/detail',
       header: {
         'content-type': 'application/json'
+      },
+      data:{
+        goods_id : goods_id,
+        openid:openid,
       },
       success: function(res) {
         if (res.data.code == 10000) {
           that.setData({
-
+            goods_info :res.data.result
           })
         }
       }
@@ -35,11 +41,11 @@ Page({
   },
   //电视播放
   boxShow: function(e) {
-    var forscreen_id = e.currentTarget.dataset.forscreen_id;
+    var forscreen_id = e.currentTarget.dataset.goods_id;
 
     var pubdetail = e.currentTarget.dataset.pubdetail;
-    var res_type = e.currentTarget.dataset.res_type;
-    var res_nums = e.currentTarget.dataset.res_nums;
+    var res_type = e.currentTarget.dataset.media_type;
+    var res_nums = 1;
     app.boxShow(box_mac, forscreen_id, pubdetail, res_type, res_nums);
   },
 

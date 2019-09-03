@@ -116,7 +116,7 @@ Page({
           box_mac = rest.data.result.box_mac;
           //获取节目单列表
           wx.request({//获取机顶盒节目单列表
-            url: api_url+'/Smallapp3/Demand/getBoxProgramList',
+            url: api_url +'/Smallapp3/optimize/getOptimizeList',
             header: {
               'Content-Type': 'application/json'
             },
@@ -136,7 +136,7 @@ Page({
         } else {
           //获取小程序主节目单列表
           wx.request({
-            url: api_url+'/Smallapp3/Demand/getDemanList',
+            url: api_url +'/Smallapp3/optimize/getOptimizeList',
             data: {
               page: page,
               openid: openid,
@@ -239,7 +239,7 @@ Page({
     if(box_mac=='' || box_mac ==undefined){
       wx.request({
         //url: api_url+'/smallapp/Demand/getList',
-        url: api_url+'/Smallapp3/Demand/getDemanList',
+        url: api_url +'/Smallapp3/optimize/getOptimizeList',
         header: {
           'Content-Type': 'application/json'
         },
@@ -265,7 +265,7 @@ Page({
     }else {
       wx.request({
         //url: api_url+'/Smallapp/BoxProgram/getBoxProgramList',
-        url: api_url+'/Smallapp3/Demand/getBoxProgramList',
+        url: api_url +'/Smallapp3/optimize/getOptimizeList',
         header: {
           'Content-Type': 'application/json'
         },
@@ -598,7 +598,7 @@ Page({
     var box_mac = res.currentTarget.dataset.box_mac;
     var mobile_brand = app.globalData.mobile_brand;
     var mobile_model = app.globalData.mobile_model; 
-    var forscreen_char = res.currentTarget.dataset.title;
+    var forscreen_char = '';
     var imgs = res.currentTarget.dataset.tx_url;
     var resource_id = res.currentTarget.dataset.id
     var timestamp = (new Date()).valueOf();
