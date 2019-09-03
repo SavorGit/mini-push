@@ -61,6 +61,7 @@
 }
 
 .article > .con_bottom > .launch {
+  height: 100%;
   padding-left: 20rpx;
   flex-grow: 1;
 }
@@ -77,12 +78,16 @@
   border-radius: 22rpx;
 }
 
-.article > .con_bottom > .operation > view {
-  margin: 0 15rpx;
+.article > .con_bottom > .operation {
+  width: 230rpx;
+  height: 100%;
 }
 
-.article > .con_bottom > .operation > view .fa {
-  width: 36rpx;
-  height: 32rpx;
-  margin-right: 8rpx;
+.article > .con_bottom > .operation > view,
+.article > .con_bottom > .operation > button {
+  max-width: 120rpx;
+  height: 60rpx;
+  line-height: 60rpx;
+  margin: 0 20rpx 0 0;
+  text-align: unset;
 }

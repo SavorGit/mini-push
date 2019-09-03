@@ -41,25 +41,16 @@
             <button class='theme-button' bindtap='boxShow' data-name="{{bean.title}}" data-filename='{{bean.filename}}' data-vediourl="{{bean.tx_url}}" data-boxmac="{{box_mac}}" data-openid="{{openid}}">电视播放</button>
           </view>
         </view>
-        <view class='operation flex-row-center-end font_666666_26'>
-          <!-- <view>
-            <label class="fa fa-play fa-lg" style="color: #666666;"></label>
-            <label>{{bean.play_num}}</label>
-          </view> -->
+        <view class='operation flex-row-center-flex_end font_666666_26'>
           <view wx:if="{{bean.is_collect==1}}">
-            <label class="fa fa-heart fa-lg" style="color: #E11E4C;" bindtap='cancCollect' data-res_id="{{bean.id}}" data-type='{{bean.type}}' data-res_key="{{index}}"></label>
-            <label>{{bean.collect_num}}</label>
+            <label class="fa fa-heart fa-lg" style="color: #E11E4C;" bindtap='cancCollect' data-res_id="{{bean.id}}" data-type='{{bean.type}}' data-res_key="{{index}}">{{bean.collect_num}}</label>
           </view>
           <view wx:else>
-            <label class="fa fa-heart-o fa-lg" style="color: #666666;" bindtap='onCollect' data-res_id="{{bean.id}}" data-type='{{bean.type}}' data-res_key="{{index}}"></label>
-            <label>{{bean.collect_num}}</label>
+            <label class="fa fa-heart-o fa-lg" style="color: #666666;" bindtap='onCollect' data-res_id="{{bean.id}}" data-type='{{bean.type}}' data-res_key="{{index}}">{{bean.collect_num}}</label>
           </view>
-          <view>
-            <button class="button_none" open-type='share' data-openid="{{openid}}" data-res_id="{{bean.id}}" data-type='{{bean.type}}' data-res_key="{{index}}" data-video_url="{{bean.tx_url}}" data-video_name="{{bean.title}}" data-video_img='{{bean.img_url}}'>
-              <label class="fa fa-share-square-o fa-lg" style="color: #666666;"></label>
-              <label>{{bean.share_num}}</label>
-            </button>
-          </view>
+          <button class="button_none" open-type='share' data-openid="{{openid}}" data-res_id="{{bean.id}}" data-type='{{bean.type}}' data-res_key="{{index}}" data-video_url="{{bean.tx_url}}" data-video_name="{{bean.title}}" data-video_img='{{bean.img_url}}'>
+            <label class="fa fa-share-square-o fa-lg" style="color: #666666;">{{bean.share_num}}</label>
+          </button>
         </view>
       </view>
     </view>

@@ -68,22 +68,22 @@ module.exports.TouchMoveHandler = function(systemInfo, touchMoveExecuteTrip) {
     systemInfo: systemInfo,
     touchMoveExecuteTrip: touchMoveExecuteTrip
   }
-  this.Event = {
-    Start: 0x00,
-    Less3Item: 0x01,
-    UndifindedStartTouchEvent: 0x90,
-    UndifindedEndTouchEvent: 0x99,
-    UndifindedSlideType: 0x92,
-    LeftSlide: 0x10,
-    LeftSlideMoved: 0x19,
-    RightSlide: 0x20,
-    RightSlideMoved: 0x29,
-    ReturnToOrigin: 0x80,
-    ReturnToOriginMoved: 0x89
+  this.Event = { // 滑动事件定义
+    Start: 0x00, // 滑动开始
+    Less3Item: 0x01, // 数据量不足
+    UndifindedStartTouchEvent: 0x90, // 没有开始滑动事件
+    UndifindedEndTouchEvent: 0x99, // 没有结束滑动事件
+    UndifindedSlideType: 0x92, // 没有滑动类型
+    LeftSlide: 0x10, // 向左滑动开始
+    LeftSlideMoved: 0x19, // 向左滑动完成
+    RightSlide: 0x20, // 向右滑动开始
+    RightSlideMoved: 0x29, // 向右滑动完成
+    ReturnToOrigin: 0x80, // 返回原点滑动开始
+    ReturnToOriginMoved: 0x89 // 返回原点滑动完成
   };
-  this.SlideType = {
-    LeftSlide: -1,
-    RightSlide: 1
+  this.SlideType = { // 滑动类型定义
+    LeftSlide: -1, // 向左滑动
+    RightSlide: 1 // 向右滑动
   };
 
   /**
@@ -275,7 +275,7 @@ module.exports.TouchMoveHandler = function(systemInfo, touchMoveExecuteTrip) {
       });
       console.log("TouchMoveHandler.moveOnhorizontalHandel(page, top, left, x, startEvent, endEvent, callbackFunction)#setTimeout", cards_img);
       wx.hideLoading();
-      if (cards_img.length < 3) {
+      if (cards_img.length <= 3) {
         handler.callbackHandel(callbackFunction, handler.Event.Less3Item, page, startEvent, endEvent, top, left, x);
       }
     }, 400);
