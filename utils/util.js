@@ -275,7 +275,7 @@ module.exports.TouchMoveHandler = function(systemInfo, touchMoveExecuteTrip) {
       });
       console.log("TouchMoveHandler.moveOnhorizontalHandel(page, top, left, x, startEvent, endEvent, callbackFunction)#setTimeout", cards_img);
       wx.hideLoading();
-      if (cards_img.lenght < 3) {
+      if (cards_img.length < 3) {
         handler.callbackHandel(callbackFunction, handler.Event.Less3Item, page, startEvent, endEvent, top, left, x);
       }
     }, 400);
