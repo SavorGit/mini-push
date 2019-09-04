@@ -215,10 +215,10 @@ const TouchMoveHandler = function(systemInfo, touchMoveExecuteTrip) {
     setTimeout(function() {
       page.setData({
         animationData: {},
-        cards: [{
-          x: 0,
-          y: handler.options.systemInfo.statusBarHeight + 46
-        }]
+        // cards: [{
+        //   x: 0,
+        //   y: handler.options.systemInfo.statusBarHeight + 46
+        // }]
       });
       wx.hideLoading();
     }, 100);
@@ -272,7 +272,11 @@ const TouchMoveHandler = function(systemInfo, touchMoveExecuteTrip) {
       cards_img.splice(0, 1);
       page.setData({
         animationData: {},
-        cards_img: cards_img
+        cards_img: cards_img,
+        // cards: [{
+        //   x: 0,
+        //   y: handler.options.systemInfo.statusBarHeight + 46
+        // }]
       });
       console.log("TouchMoveHandler.moveOnhorizontalHandel(page, top, left, x, startEvent, endEvent, callbackFunction)#setTimeout", cards_img);
       wx.hideLoading();

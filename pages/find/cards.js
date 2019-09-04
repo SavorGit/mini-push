@@ -49,10 +49,10 @@ Page({
 
 
     ],
-    cards: [{
-      x: 0,
-      y: 0
-    }]
+    // cards: [{
+    //   x: 0,
+    //   y: 0
+    // }]
   },
 
   /**
@@ -87,12 +87,12 @@ Page({
         systemInfo.screen.height = res.screenHeight;
         // console.log(systemInfo);
 
-        self.setData({
-          cards: [{
-            x: 0,
-            y: systemInfo.statusBarHeight + 46
-          }]
-        });
+        // self.setData({
+        //   cards: [{
+        //     x: 0,
+        //     y: systemInfo.statusBarHeight + 46
+        //   }]
+        // });
         self.touchMoveHandler = new utils.TouchMoveHandler(systemInfo, touchMoveExecuteTrip);
       }
     });
@@ -328,7 +328,7 @@ Page({
     var self = this;
     var user_info = wx.getStorageSync('savor_user_info');
     var openid = user_info.openid;
-    
+
     var id = e.currentTarget.dataset.id;
 
     var type = e.currentTarget.dataset.type;
@@ -356,7 +356,7 @@ Page({
           },
         })
       }
-      if (handleEvent == self.touchMoveHandler.Event.RightSlideMoved){
+      if (handleEvent == self.touchMoveHandler.Event.RightSlideMoved) {
         wx.request({
           url: api_url + '/Smallapp/collect/recLogs',
           header: {
@@ -414,6 +414,8 @@ Page({
       }
       //console.log(handleEvent, page, startEvent, endEvent, top, left, x);
     });
+    delete touchEvent["touchStart"];
+    delete touchEvent["touchEnd"];
   },
   /**
    * 手指触摸后移动
@@ -425,16 +427,41 @@ Page({
       touchEvent["touchStart"] = e;
       return;
     }
-    if (typeof(touchEvent["touchLastMove"]) != 'object' || touchEvent["touchLastMove"] == null) {
-      touchEvent["touchLastMove"] = e;
-      return;
-    }
-    self.setData({
-      cards: [{
-        x: e.touches[0].pageX - touchEvent["touchStart"].touches[0].pageX,
-        y: e.touches[0].pageY - touchEvent["touchStart"].touches[0].pageY + systemInfo.statusBarHeight + 46
-      }]
+    // console.log("cards.onTouchMove(e)", {
+    //   x: e.touches[0].pageX - touchEvent["touchStart"].touches[0].pageX,
+    //   y: e.touches[0].pageY - touchEvent["touchStart"].touches[0].pageY + systemInfo.statusBarHeight + 46
+    // }, this.data.cards);
+    // // console.log("cards.onTouchMove(e)", e, touchEvent, {
+    // //   x: e.touches[0].pageX - touchEvent["touchStart"].touches[0].pageX,
+    // //   y: e.touches[0].pageY - touchEvent["touchStart"].touches[0].pageY + systemInfo.statusBarHeight + 46
+    // // });
+
+    // this.setData({
+    //   cards: [{
+    //     x: e.touches[0].pageX - touchEvent["touchStart"].touches[0].pageX,
+    //     y: e.touches[0].pageY - touchEvent["touchStart"].touches[0].pageY + systemInfo.statusBarHeight + 46
+    //   }]
+    // });
+
+    var tripX = e.touches[0].pageX - touchEvent["touchStart"].touches[0].pageX;
+    var tripY = e.touches[0].pageY - touchEvent["touchStart"].touches[0].pageY + systemInfo.statusBarHeight + 46;
+    var animation = wx.createAnimation({
+      duration: 10,
+      // timingFunction: 'cubic-bezier(.8,.2,.1,0.8)',
+      timingFunction: 'linear'
     });
+    animation.left(tripX).top(tripY).step({
+      duration: 10,
+      timingFunction: 'linear'
+    });
+    this.setData({
+      animationData: animation.export()
+    });
+    setTimeout(function() {
+      self.setData({
+        animationData: {}
+      });
+    }, 10);
   },
   /**
    * 点击不喜欢
