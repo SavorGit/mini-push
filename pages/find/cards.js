@@ -326,8 +326,21 @@ Page({
    */
   onTouchEnd: function(e) {
     var self = this;
+    var user_info = wx.getStorageSync('savor_user_info');
+    var openid = user_info.openid;
+    
     var id = e.currentTarget.dataset.id;
-    var type = e.currentTarget.dataset.type
+
+    var type = e.currentTarget.dataset.type;
+    var forscreen_id = e.currentTarget.dataset.forscreen_id;
+    if (type == 2 || type == 3) {
+      var res_id = forscreen_id;
+      var c_type = 2;
+    } else {
+      var res_id = id;
+      var c_type = 3
+    }
+
     touchEvent["touchEnd"] = touchEvent.pop();
     this.touchMoveHandler.touchMoveHandle(self, touchEvent["touchStart"], touchEvent["touchEnd"], function(handleEvent, page, startEvent, endEvent, top, left, x) {
       if (handleEvent == self.touchMoveHandler.Event.LeftSlideMoved || handleEvent == self.touchMoveHandler.Event.RightSlideMoved) {
@@ -343,7 +356,20 @@ Page({
           },
         })
       }
-
+      if (handleEvent == self.touchMoveHandler.Event.RightSlideMoved){
+        wx.request({
+          url: api_url + '/Smallapp/collect/recLogs',
+          header: {
+            'content-type': 'application/json'
+          },
+          data: {
+            'openid': openid,
+            'res_id': res_id,
+            'type': c_type,
+            'status': 1,
+          },
+        })
+      }
 
       if (handleEvent == self.touchMoveHandler.Event.InsufficientData) {
         var cards_img = self.data.cards_img;
