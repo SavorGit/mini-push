@@ -35,7 +35,6 @@ Page({
     box_mac = options.box_mac;
     
     //获取用户信息以及我的公开
-    console.log(box_mac);
     var user_info = wx.getStorageSync("savor_user_info");
     openid = user_info.openid;
     that.setData({
@@ -62,7 +61,7 @@ Page({
       },
       data: { openid: openid },
       success: function (res) {
-        console.log(res);
+        
         publiclist = res.data.result.list;
         
         that.setData({
@@ -639,10 +638,11 @@ Page({
   }, //电视播放结束
   //收藏资源
   onCollect: function (e) {
+    
     var that = this;
-    var openid = e.target.dataset.openid;
-    var res_id = e.target.dataset.res_id;
-    var res_key = e.target.dataset.res_key;
+    var openid = e.currentTarget.dataset.openid;
+    var res_id = e.currentTarget.dataset.res_id;
+    var res_key = e.currentTarget.dataset.res_key;
     wx.request({
       url: api_url+'/Smallapp/collect/recLogs',
       header: {
@@ -693,9 +693,9 @@ Page({
   //取消收藏
   cancCollect: function (e) {
     var that = this;
-    var res_id = e.target.dataset.res_id;
-    var res_key = e.target.dataset.res_key;
-    var openid = e.target.dataset.openid;
+    var res_id = e.currentTarget.dataset.res_id;
+    var res_key = e.currentTarget.dataset.res_key;
+    var openid = e.currentTarget.dataset.openid;
     wx.request({
       url: api_url+'/Smallapp/collect/recLogs',
       header: {
