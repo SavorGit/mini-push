@@ -76,7 +76,7 @@
     <view class="fa fa-close fa-lg" bindtap="closePopVideo"></view>
   </view>
   <view class="full_width flex-column-center-center" style="height: calc(100% - 200rpx);">
-    <video class="full_width" autoplay="true" src="{{pop_video_url}}"></video>
+    <video class="full_width" autoplay="true" src="{{pop_video_url}}" autoplay="true"></video>
   </view>
 </view>
 
