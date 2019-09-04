@@ -301,7 +301,7 @@ Page({
     var that = this;
     var res_type = e.currentTarget.dataset.res_type;
     var pop_video_url = e.currentTarget.dataset.res_url;
-    console.log(pop_video_url);
+    //console.log(pop_video_url);
     if (res_type == 1) { //图片
       var current = e.currentTarget.dataset.src;
 
@@ -354,7 +354,7 @@ Page({
           space = ',';
         }
         tmp += ']';
-        console.log(tmp);
+        //console.log(tmp);
         wx.request({
           url: api_url + '/Smallapp3/Find/findlist',
           headers: {
@@ -495,7 +495,7 @@ Page({
       var c_type = 3
     }
     self.touchMoveHandler.clickMoveHandle(self, self.touchMoveHandler.SlideType.RightSlide, 675, e, function(handleEvent, page, startEvent, endEvent, top, left, x) {
-      console.log("handleEvent=" + handleEvent)
+      //console.log("handleEvent=" + handleEvent)
       if (handleEvent == self.touchMoveHandler.Event.RightSlideMoved) {
         wx.request({
           url: api_url + '/Smallapp3/Find/recordViewfind',
@@ -567,7 +567,7 @@ Page({
   },
   //电视播放
   boxShow: function(e) {
-    console.log(e);
+    //console.log(e);
     var forscreen_id = e.currentTarget.dataset.forscreen_id;
 
     var pubdetail = e.currentTarget.dataset.pubdetail;
@@ -666,7 +666,7 @@ Page({
       var file_name = e.currentTarget.dataset.filename;
       var img_url = e.currentTarget.dataset.img_url;
       path = '/pages/forscreen/video/launch_video?video_url=' + video_url + '&video_name=' + title + '&box_mac=' + box_mac + '&res_id=' + goods_id + '&filename=' + file_name + '&video_img_url=' + img_url;
-      console.log(path)
+      //console.log(path)
     } else {
       if (res_type == 1) { //图片
         path = '/pages/find/picture?forscreen_id=' + forscreen_id + '&box_mac=' + box_mac;
@@ -675,7 +675,7 @@ Page({
       }
 
     }
-    console.log(path);
+    //console.log(path);
     wx.navigateTo({
       url: path,
     })
