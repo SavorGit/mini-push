@@ -30,31 +30,23 @@
           <label wx:if="{{videoinfo.hotel_name!=''}}">.</label>
           <label wx:if="{{videoinfo.hotel_name!=''}}">{{videoinfo.hotel_name}}</label>
         </view>
-        <view class='operation flex-row-center-flex_stsart font_666666_24'>
+        <view class='operation flex-row-center-flex_start font_666666_24'>
           <view>
-            <button>
-              <label class="fa fa-play fa-lg" style="color: #666666;margin-right: 5rpx;"></label>
-              <label>{{play_num}}</label>
-            </button>
+            <label class="fa fa-play fa-lg" style="margin-right: 5rpx;"></label>
+            <label>{{play_num}}</label>
           </view>
-          <view wx:if="{{is_collect=='1'}}">
-            <button bindtap='cancCollect' data-res_id="{{videoinfo.forscreen_id}}" data-openid="{{openid}}" data-type="2">
-              <label class="fa fa-heart fa-lg" style="color: #E11E4C;margin-right: 5rpx;"></label>
-              <label>{{collect_num}}</label>
-            </button>
-          </view>
-          <view wx:else>
-            <button bindtap='onCollect' data-res_id="{{videoinfo.forscreen_id}}" data-openid="{{openid}}" data-type="2">
-              <label class="fa fa-heart-o fa-lg" style="color: #666666;margin-right: 5rpx;"></label>
-              <label>{{collect_num}}</label>
-            </button>
-          </view>
-          <view>
-            <button open-type='share' data-res_id="{{videoinfo.forscreen_id}}" data-pubdetail="{{videoinfo.pubdetail}}" data-openid="{{openid}}" data-res_type="2">
-              <label class="fa fa-share-square-o fa-lg" style="color: #666666;margin-right: 5rpx;"></label>
-              <label>{{share_num}}</label>
-            </button>
-          </view>
+          <button wx:if="{{is_collect=='1'}}" class="flex-row-center-flex_start font_666666_24" bindtap='cancCollect' data-res_id="{{videoinfo.forscreen_id}}" data-openid="{{openid}}" data-type="2">
+            <label class="fa fa-heart fa-lg" style="color: #E11E4C;margin-right: 5rpx;"></label>
+            <label>{{collect_num}}</label>
+          </button>
+          <button wx:else class="flex-row-center-flex_start font_666666_24" bindtap='onCollect' data-res_id="{{videoinfo.forscreen_id}}" data-openid="{{openid}}" data-type="2">
+            <label class="fa fa-heart-o fa-lg" style="margin-right: 5rpx;"></label>
+            <label>{{collect_num}}</label>
+          </button>
+          <button class="flex-row-center-flex_start font_666666_24" open-type='share' data-res_id="{{videoinfo.forscreen_id}}" data-pubdetail="{{videoinfo.pubdetail}}" data-openid="{{openid}}" data-res_type="2">
+            <label class="fa fa-share-square-o fa-lg" style="margin-right: 5rpx;"></label>
+            <label>{{share_num}}</label>
+          </button>
         </view>
       </view>
     </view>

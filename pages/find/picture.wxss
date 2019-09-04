@@ -54,30 +54,9 @@
   height: 50rpx;
 }
 
-.page_main .article .con_bottom > .operation > view {
-  margin-right: 30rpx;
-}
-
-.page_main .article .con_bottom > .operation > view > button,
-.page_main .article .con_bottom > .operation > view > button::before,
-.page_main .article .con_bottom > .operation > view > button::after {
-  margin: unset;
-  padding: unset;
-  background: unset;
-  border: unset;
-}
-
-.page_main .article .con_bottom > .operation > view > button > image {
-  width: 36rpx;
-  height: 32rpx;
-  margin-right: 8rpx;
-  vertical-align: middle;
-}
-
-.page_main .article .con_bottom > .operation > view > button > label {
-  font-size: 24rpx;
-  color: #666;
-  vertical-align: middle;
+.page_main .article .con_bottom > .operation > view,
+.page_main .article .con_bottom > .operation > button {
+  margin: 0 20rpx 0 0;
 }
 
 .page_main > .btn-group {

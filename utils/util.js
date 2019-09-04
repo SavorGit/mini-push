@@ -37,8 +37,7 @@ module.exports.throttle = function(fn, gapTime) {
 }
 
 
-
-module.exports.PostRequest = function(url, data, success) {
+const PostRequest = (url, data, success) => {
   wx.request({
     url: url,
     headers: {
@@ -49,8 +48,9 @@ module.exports.PostRequest = function(url, data, success) {
     success: typeof(success) == "function" ? success : function() {}
   });
 }
+module.exports.PostRequest = PostRequest;
 
-module.exports.GetRequest = function(url, data, success) {
+const GetRequest = (url, data, success) => {
   wx.request({
     url: url,
     headers: {
@@ -61,9 +61,10 @@ module.exports.GetRequest = function(url, data, success) {
     success: typeof(success) == "function" ? success : function() {}
   });
 }
+module.exports.GetRequest = GetRequest;
 
 
-module.exports.TouchMoveHandler = function(systemInfo, touchMoveExecuteTrip) {
+const TouchMoveHandler = function(systemInfo, touchMoveExecuteTrip) {
   this.options = {
     systemInfo: systemInfo,
     touchMoveExecuteTrip: touchMoveExecuteTrip
@@ -104,7 +105,7 @@ module.exports.TouchMoveHandler = function(systemInfo, touchMoveExecuteTrip) {
    */
   this.touchMoveHandle = function(page, startEvent, endEvent, callbackFunction) {
     // console.log(page, startEvent, endEvent);
-    var handler = this;
+    let handler = this;
     handler.callbackHandel(callbackFunction, handler.Event.Start, page, startEvent, endEvent);
     if (typeof(startEvent) != 'object' || startEvent == null) {
       handler.callbackHandel(callbackFunction, handler.Event.UndifindedStartTouchEvent, page, startEvent, endEvent);
@@ -116,18 +117,18 @@ module.exports.TouchMoveHandler = function(systemInfo, touchMoveExecuteTrip) {
       console.error('end-touch-event is null');
       return;
     }
-    var moveExecuteTrip = handler.options.touchMoveExecuteTrip / handler.options.systemInfo.pixelRatio;
-    var tripLeft = endEvent.touches[0].pageX - startEvent.touches[0].pageX;
-    var tripTop = endEvent.touches[0].pageY - startEvent.touches[0].pageY + handler.options.systemInfo.statusBarHeight + 46;
-    var tripX = endEvent.touches[0].pageX - startEvent.touches[0].pageX;
-    var tripY = endEvent.touches[0].pageY - startEvent.touches[0].pageY;
+    let moveExecuteTrip = handler.options.touchMoveExecuteTrip / handler.options.systemInfo.pixelRatio;
+    let tripLeft = endEvent.touches[0].pageX - startEvent.touches[0].pageX;
+    let tripTop = endEvent.touches[0].pageY - startEvent.touches[0].pageY + handler.options.systemInfo.statusBarHeight + 46;
+    let tripX = endEvent.touches[0].pageX - startEvent.touches[0].pageX;
+    let tripY = endEvent.touches[0].pageY - startEvent.touches[0].pageY;
     if (tripX <= -1 * moveExecuteTrip) { // 向左滑动处理
-      var x = (handler.options.systemInfo.screen.width + tripLeft) * -1;
+      let x = (handler.options.systemInfo.screen.width + tripLeft) * -1;
       handler.callbackHandel(callbackFunction, handler.Event.LeftSlide, page, startEvent, endEvent, tripTop, tripLeft, x);
       handler.moveOnhorizontalHandel(page, tripTop, tripLeft, x, startEvent, endEvent, callbackFunction);
       handler.callbackHandel(callbackFunction, handler.Event.LeftSlideMoved, page, startEvent, endEvent, tripTop, tripLeft, x);
     } else if (tripX >= moveExecuteTrip) { // 向右滑动处理
-      var x = handler.options.systemInfo.screen.width - tripLeft;
+      let x = handler.options.systemInfo.screen.width - tripLeft;
       handler.callbackHandel(callbackFunction, handler.Event.RightSlide, page, startEvent, endEvent, tripTop, tripLeft, x);
       handler.moveOnhorizontalHandel(page, tripTop, tripLeft, x, startEvent, endEvent, callbackFunction);
       handler.callbackHandel(callbackFunction, handler.Event.RightSlideMoved, page, startEvent, endEvent, tripTop, tripLeft, x);
@@ -156,8 +157,8 @@ module.exports.TouchMoveHandler = function(systemInfo, touchMoveExecuteTrip) {
    */
   this.clickMoveHandle = function(page, slideType, trip, wechartEvent, callbackFunction) {
     // console.log(page, startEvent, endEvent);
-    var handler = this;
-    var startEvent = wechartEvent,
+    let handler = this;
+    let startEvent = wechartEvent,
       endEvent = wechartEvent;
     handler.callbackHandel(callbackFunction, handler.Event.Start, page, startEvent, endEvent);
     if (typeof(slideType) != 'number') {
@@ -170,16 +171,16 @@ module.exports.TouchMoveHandler = function(systemInfo, touchMoveExecuteTrip) {
       console.error('trip is null');
       return;
     }
-    var moveExecuteTrip = handler.options.touchMoveExecuteTrip / handler.options.systemInfo.pixelRatio;
-    var tripLeft = 0;
-    var tripTop = handler.options.systemInfo.statusBarHeight + 46;
+    let moveExecuteTrip = handler.options.touchMoveExecuteTrip / handler.options.systemInfo.pixelRatio;
+    let tripLeft = 0;
+    let tripTop = handler.options.systemInfo.statusBarHeight + 46;
     if (slideType === handler.SlideType.LeftSlide) { // 向左滑动处理
-      var x = trip * -1 / handler.options.systemInfo.pixelRatio;
+      let x = trip * -1 / handler.options.systemInfo.pixelRatio;
       handler.callbackHandel(callbackFunction, handler.Event.LeftSlide, page, startEvent, endEvent, tripTop, tripLeft, x);
       handler.moveOnhorizontalHandel(page, tripTop, tripLeft, x, startEvent, endEvent, callbackFunction);
       handler.callbackHandel(callbackFunction, handler.Event.LeftSlideMoved, page, startEvent, endEvent, tripTop, tripLeft, x);
     } else if (slideType === handler.SlideType.RightSlide) { // 向右滑动处理
-      var x = trip / handler.options.systemInfo.pixelRatio;
+      let x = trip / handler.options.systemInfo.pixelRatio;
       handler.callbackHandel(callbackFunction, handler.Event.RightSlide, page, startEvent, endEvent, tripTop, tripLeft, x);
       handler.moveOnhorizontalHandel(page, tripTop, tripLeft, x, startEvent, endEvent, callbackFunction);
       handler.callbackHandel(callbackFunction, handler.Event.RightSlideMoved, page, startEvent, endEvent, tripTop, tripLeft, x);
@@ -194,13 +195,13 @@ module.exports.TouchMoveHandler = function(systemInfo, touchMoveExecuteTrip) {
    * @para endEvent            结束滑动的事件
    */
   this.returnToOriginHandel = function(page, startEvent, endEvent) {
-    var handler = this;
+    let handler = this;
     wx.showLoading({
       title: '加载中',
       icon: 'loading',
       duration: 10000
     });
-    var animation = wx.createAnimation({
+    let animation = wx.createAnimation({
       duration: 100,
       // timingFunction: 'cubic-bezier(.8,.2,.1,0.8)'
     });
@@ -244,13 +245,13 @@ module.exports.TouchMoveHandler = function(systemInfo, touchMoveExecuteTrip) {
    */
   this.moveOnhorizontalHandel = function(page, top, left, x, startEvent, endEvent, callbackFunction) {
     console.log("TouchMoveHandler.moveOnhorizontalHandel(page, top, left, x, startEvent, endEvent, callbackFunction)", page, startEvent, endEvent, top, left, x);
-    var handler = this;
+    let handler = this;
     wx.showLoading({
       title: '加载中',
       icon: 'loading',
       duration: 10000
     });
-    var animation = wx.createAnimation({
+    let animation = wx.createAnimation({
       duration: 350,
       // timingFunction: 'cubic-bezier(.8,.2,.1,0.8)'
     });
@@ -267,7 +268,7 @@ module.exports.TouchMoveHandler = function(systemInfo, touchMoveExecuteTrip) {
       animationData: animation.export()
     });
     setTimeout(function() {
-      var cards_img = page.data.cards_img;
+      let cards_img = page.data.cards_img;
       cards_img.splice(0, 1);
       page.setData({
         animationData: {},
@@ -294,10 +295,11 @@ module.exports.TouchMoveHandler = function(systemInfo, touchMoveExecuteTrip) {
    * @para x                   水平滑动行程
    */
   this.callbackHandel = function(callback, handleEvent, page, startEvent, endEvent, top, left, x) {
-    var handler = this;
+    let handler = this;
     if (typeof(callback) != 'function') {
       return;
     }
     callback(handleEvent, page, startEvent, endEvent, top, left, x);
   }
 };
+module.exports.TouchMoveHandler = TouchMoveHandler;
