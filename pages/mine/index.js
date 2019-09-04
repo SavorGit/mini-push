@@ -62,6 +62,7 @@ Page({
       },
       data: { openid: openid },
       success: function (res) {
+        console.log(res);
         publiclist = res.data.result.list;
         
         that.setData({

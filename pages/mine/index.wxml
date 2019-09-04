@@ -32,7 +32,7 @@
 
             <view class="video" wx:else>
               <view wx:for="{{bean.pubdetail}}" wx:key="pkey" wx:for-item="pubdetail" wx:for-index="pindex">
-                <navigator url="/pages/forscreen/video/launch_video?video_url={{pubdetail.res_url}}&video_name=">
+                <navigator url="/pages/find/video?forscreen_id={{bean.forscreen_id}}&box_mac={{box_mac}}" >
                   <image mode='aspectFill' src="{{pubdetail.vide_img}}"></image>
                 </navigator>
                 <view class="cover">
