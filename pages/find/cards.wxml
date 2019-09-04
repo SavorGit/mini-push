@@ -10,7 +10,7 @@
         <view class="content-top flex-row-flex_start-flex_end">
           <view wx:if="{{cards_img[0].type == 1}}" class="content-type-icon official flex-row-center-center">官方</view>
           <view wx:if="{{cards_img[0].type == 2}}" class="content-type-icon selected flex-row-center-center">精选</view>
-          <view wx:if="{{cards_img[0].type == 3}}" class="content-type-icon selected flex-row-center-center">公开</view>
+          <!-- <view wx:if="{{cards_img[0].type == 3}}" class="content-type-icon selected flex-row-center-center">公开</view> -->
         </view>
         <view class="content-main flex-row-center-flex_end">
           <view wx:if="{{cards_img[0].res_type == 1}}" class="picture flex-row-center-space_around">
@@ -23,8 +23,8 @@
             <!-- <image style="width: 60rpx; height: 60rpx; vertical-align: middle;" src="/images/icon2/FFFFFF_video.png"></image> -->
           </view>
         </view>
-        <view class="content-bottom flex-row-center-space_between">
-          <view class="user-info flex-row-center-flex_start">
+        <view class="content-bottom flex-row-center-space_between" >
+          <view class="user-info flex-row-center-flex_start" bindtap="forDetail" data-type="{{cards_img[0].type}}" data-res_type="{{cards_img[0].res_type}}"  data-forscreen_id="{{cards_img[0].forscreen_id}}" data-goods_id="{{cards_img[0].id}}" data-box_mac="{{box_mac}}" data-res_url="{{cards_img[0].pubdetail[0].res_url}}" data-title="{{cards_img[0].title}}" data-filename="{{cards_img[0].pubdetail[0].filename}}" data-img_url="{{cards_img[0].pubdetail[0].img_url}}">
             <image class="user-header-img" src="{{cards_img[0].avatarUrl}}"></image>
             <view class="info flex-column-flex_start-space_around">
               <view class="font_333333_28 full_width one-line-overflow">{{cards_img[0].nickName}}</view>

@@ -22,11 +22,12 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    
     var that = this;
     var user_info = wx.getStorageSync("savor_user_info");
     var res_id     = options.res_id;  //资源id
     var video_url  = options.video_url;
-    var video_name = options.video_name;
+    var video_name = decodeURIComponent(options.video_name);
     box_mac    = options.box_mac;
     openid = user_info.openid;
     var filename = options.filename;

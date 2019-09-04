@@ -343,7 +343,7 @@ Page({
       }
       
 
-      if (handleEvent == self.touchMoveHandler.Event.Less3Item) {
+      if (handleEvent == self.touchMoveHandler.Event.InsufficientData) {
         var cards_img = self.data.cards_img;
         var tmp = '[';
         var space = '';
@@ -352,6 +352,7 @@ Page({
           space = ',';
         }
         tmp += ']';
+        console.log(tmp);
         wx.request({
           url: api_url + '/Smallapp3/Find/findlist',
           headers: {
@@ -359,7 +360,7 @@ Page({
           },
           data: {
             openid: openid,
-            find_ids,tmp
+            find_ids:tmp
           },
           success: function(res) {
             if (res.data.code == 10000) {
@@ -475,7 +476,7 @@ Page({
   //       cards_img: cards_img
   //     });
   //     if (cards_img.length < 3) {
-  //       handler.callbackHandel(callbackFunction, handler.Event.Less3Item, page, startEvent, endEvent, tripTop, tripLeft);
+  //       handler.callbackHandel(callbackFunction, handler.Event.InsufficientData, page, startEvent, endEvent, tripTop, tripLeft);
   //     }
   //   },
   //   /**
@@ -591,7 +592,7 @@ Page({
           },
         })
       }
-      if (handleEvent == self.touchMoveHandler.Event.Less3Item) {
+      if (handleEvent == self.touchMoveHandler.Event.InsufficientData) {
         var cards_img = self.data.cards_img;
         var tmp = '[';
         var space = '';
@@ -679,7 +680,7 @@ Page({
           },
         })
       }
-      if (handleEvent == self.touchMoveHandler.Event.Less3Item) {
+      if (handleEvent == self.touchMoveHandler.Event.InsufficientData) {
         var cards_img = self.data.cards_img;
         var tmp = '[';
         var space = '';
@@ -806,5 +807,32 @@ Page({
     that.setData({
       showVideoWindow:false
     })
-  }
+  },
+  forDetail:function(e){
+    var box_mac = e.currentTarget.dataset.box_mac;
+    var forscreen_id = e.currentTarget.dataset.forscreen_id;
+    var goods_id = e.currentTarget.dataset.goods_id;
+    var type     = e.currentTarget.dataset.type;   //1官方 2精选 3公开
+    var res_type = e.currentTarget.dataset.res_type; //1图片2视频
+    var path = '';
+    if(type==1){
+      var video_url = e.currentTarget.dataset.res_url;
+      var title = encodeURIComponent(e.currentTarget.dataset.title)  ;
+      var file_name = e.currentTarget.dataset.filename;
+      var img_url   = e.currentTarget.dataset.img_url;
+      path = '/pages/forscreen/video/launch_video?video_url=' + video_url + '&video_name=' + title + '&box_mac=' + box_mac + '&res_id=' + goods_id + '&filename=' + file_name+'&video_img_url='+img_url;
+      console.log(path)
+    }else {
+      if(res_type==1){//图片
+        path = '/pages/find/picture?forscreen_id=' + forscreen_id + '&box_mac=' + box_mac;
+      }else {//视频
+        path = '/pages/find/video?forscreen_id=' + forscreen_id + '&box_mac=' + box_mac;
+      }
+      
+    }
+    console.log(path);
+    wx.navigateTo({
+      url: path,
+    })
+  },
 })
