@@ -70,7 +70,7 @@ module.exports.TouchMoveHandler = function(systemInfo, touchMoveExecuteTrip) {
   }
   this.Event = { // 滑动事件定义
     Start: 0x00, // 滑动开始
-    Less3Item: 0x01, // 数据量不足
+    InsufficientData: 0x01, // 数据量不足
     UndifindedStartTouchEvent: 0x90, // 没有开始滑动事件
     UndifindedEndTouchEvent: 0x99, // 没有结束滑动事件
     UndifindedSlideType: 0x92, // 没有滑动类型
@@ -201,7 +201,7 @@ module.exports.TouchMoveHandler = function(systemInfo, touchMoveExecuteTrip) {
       duration: 10000
     });
     var animation = wx.createAnimation({
-      // duration: 100,
+      duration: 100,
       // timingFunction: 'cubic-bezier(.8,.2,.1,0.8)'
     });
     animation.left(0).top(handler.options.systemInfo.statusBarHeight + 46).step({
@@ -251,7 +251,7 @@ module.exports.TouchMoveHandler = function(systemInfo, touchMoveExecuteTrip) {
       duration: 10000
     });
     var animation = wx.createAnimation({
-      duration: 400,
+      duration: 350,
       // timingFunction: 'cubic-bezier(.8,.2,.1,0.8)'
     });
     animation.left(left).top(top).translateX(x).translateY(0).step({
@@ -276,9 +276,9 @@ module.exports.TouchMoveHandler = function(systemInfo, touchMoveExecuteTrip) {
       console.log("TouchMoveHandler.moveOnhorizontalHandel(page, top, left, x, startEvent, endEvent, callbackFunction)#setTimeout", cards_img);
       wx.hideLoading();
       if (cards_img.length <= 3) {
-        handler.callbackHandel(callbackFunction, handler.Event.Less3Item, page, startEvent, endEvent, top, left, x);
+        handler.callbackHandel(callbackFunction, handler.Event.InsufficientData, page, startEvent, endEvent, top, left, x);
       }
-    }, 400);
+    }, 350);
   };
 
   /**
