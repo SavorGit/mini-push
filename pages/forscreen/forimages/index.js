@@ -395,7 +395,8 @@ Page({
                   resource_size: resource_size,
                   is_pub_hotelinfo: is_pub_hotelinfo,
                   is_share: is_share,
-                  resource_type: 1
+                  resource_type: 1,
+                  res_nums: img_len
                 },
                 success: function (ret) {
                   wx.request({

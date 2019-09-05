@@ -299,6 +299,7 @@ Page({
                   is_share: is_share,
                   forscreen_id: timestamp,
                   duration: duration,
+                  res_nums:1
                 },
                 success: function (ret) {
                   wx.request({
