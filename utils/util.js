@@ -65,10 +65,51 @@ module.exports.GetRequest = GetRequest;
 
 
 const TouchMoveHandler = function(systemInfo, touchMoveExecuteTrip) {
+  if (typeof(systemInfo) != "object") {
+    throw '"systemInfo" is not object';
+  }
+
   this.options = {
     systemInfo: systemInfo,
-    touchMoveExecuteTrip: touchMoveExecuteTrip
+    touchMoveExecuteTrip: touchMoveExecuteTrip,
+    moveExecuteTrip: 0
   }
+
+  /**
+   * 输入字符串或数字转换成数字。结果单位为：px。
+   * 
+   * @para argumentName    参数名
+   * @para pixelValue      开始滑动的事件
+   * @return 返回以 PX 为单位的数字。
+   */
+  this.turnPixel = function(argumentName, pixelValue) {
+    let handler = this;
+    let __movePixelValue = 0;
+    if (typeof(pixelValue) == "string") {
+      let pixelValueLength = pixelValue.length;
+      if (pixelValue.endsWith("rpx")) {
+        // __movePixelValue = parseFloat(pixelValue.substr(0, pixelValueLength - 3)) / handler.options.systemInfo.pixelRatio;
+        __movePixelValue = parseFloat(pixelValue) / handler.options.systemInfo.pixelRatio;
+      } else if (pixelValue.endsWith("px")) {
+        // __movePixelValue = parseFloat(pixelValue.substr(0, pixelValueLength - 2));
+        __movePixelValue = parseFloat(pixelValue);
+      }
+    } else if (typeof(pixelValue) == "number") {
+      __movePixelValue = pixelValue;
+    } else {
+      throw '"' + argumentName + '" is wrong';
+    }
+    if (__movePixelValue < 0) {
+      throw '"' + argumentName + '" is out of range';
+    }
+    if (typeof(__movePixelValue) == "number") {
+      return __movePixelValue;
+    } else {
+      throw 'unknow error';
+    }
+  };
+  this.options.moveExecuteTrip = this.turnPixel('touchMoveExecuteTrip', touchMoveExecuteTrip);
+
   this.Event = { // 滑动事件定义
     Start: 0x00, // 滑动开始
     InsufficientData: 0x01, // 数据量不足
@@ -117,17 +158,16 @@ const TouchMoveHandler = function(systemInfo, touchMoveExecuteTrip) {
       console.error('end-touch-event is null');
       return;
     }
-    let moveExecuteTrip = handler.options.touchMoveExecuteTrip / handler.options.systemInfo.pixelRatio;
-    let tripLeft = endEvent.touches[0].pageX - startEvent.touches[0].pageX;
-    let tripTop = endEvent.touches[0].pageY - startEvent.touches[0].pageY + handler.options.systemInfo.statusBarHeight + 46;
     let tripX = endEvent.touches[0].pageX - startEvent.touches[0].pageX;
     let tripY = endEvent.touches[0].pageY - startEvent.touches[0].pageY;
-    if (tripX <= -1 * moveExecuteTrip) { // 向左滑动处理
+    let tripLeft = tripX + 0;
+    let tripTop = tripY + handler.options.systemInfo.statusBarHeight + 46;
+    if (tripX <= -1 * handler.options.moveExecuteTrip) { // 向左滑动处理
       let x = (handler.options.systemInfo.screen.width + tripLeft) * -1;
       handler.callbackHandel(callbackFunction, handler.Event.LeftSlide, page, startEvent, endEvent, tripTop, tripLeft, x);
       handler.moveOnhorizontalHandel(page, tripTop, tripLeft, x, startEvent, endEvent, callbackFunction);
       handler.callbackHandel(callbackFunction, handler.Event.LeftSlideMoved, page, startEvent, endEvent, tripTop, tripLeft, x);
-    } else if (tripX >= moveExecuteTrip) { // 向右滑动处理
+    } else if (tripX >= handler.options.moveExecuteTrip) { // 向右滑动处理
       let x = handler.options.systemInfo.screen.width - tripLeft;
       handler.callbackHandel(callbackFunction, handler.Event.RightSlide, page, startEvent, endEvent, tripTop, tripLeft, x);
       handler.moveOnhorizontalHandel(page, tripTop, tripLeft, x, startEvent, endEvent, callbackFunction);
@@ -144,6 +184,7 @@ const TouchMoveHandler = function(systemInfo, touchMoveExecuteTrip) {
    *
    * @para page                页面对象
    * @para slideType           滑动类型
+   * @para trip                滑动行程
    * @para wechartEvent        微信的事件
    * @para callbackFunction    执行动画完成后回调函数。返回 Argument{
    *                                                           handleEvent // 处理事件
@@ -166,21 +207,15 @@ const TouchMoveHandler = function(systemInfo, touchMoveExecuteTrip) {
       console.error('start-event is null');
       return;
     }
-    if (typeof(trip) != 'number') {
-      handler.callbackHandel(callbackFunction, handler.Event.UndifindedSlideType, page, startEvent, endEvent);
-      console.error('trip is null');
-      return;
-    }
-    let moveExecuteTrip = handler.options.touchMoveExecuteTrip / handler.options.systemInfo.pixelRatio;
     let tripLeft = 0;
     let tripTop = handler.options.systemInfo.statusBarHeight + 46;
     if (slideType === handler.SlideType.LeftSlide) { // 向左滑动处理
-      let x = trip * -1 / handler.options.systemInfo.pixelRatio;
+      let x = this.turnPixel('trip', trip) * -1;
       handler.callbackHandel(callbackFunction, handler.Event.LeftSlide, page, startEvent, endEvent, tripTop, tripLeft, x);
       handler.moveOnhorizontalHandel(page, tripTop, tripLeft, x, startEvent, endEvent, callbackFunction);
       handler.callbackHandel(callbackFunction, handler.Event.LeftSlideMoved, page, startEvent, endEvent, tripTop, tripLeft, x);
     } else if (slideType === handler.SlideType.RightSlide) { // 向右滑动处理
-      let x = trip / handler.options.systemInfo.pixelRatio;
+      let x = this.turnPixel('trip', trip);
       handler.callbackHandel(callbackFunction, handler.Event.RightSlide, page, startEvent, endEvent, tripTop, tripLeft, x);
       handler.moveOnhorizontalHandel(page, tripTop, tripLeft, x, startEvent, endEvent, callbackFunction);
       handler.callbackHandel(callbackFunction, handler.Event.RightSlideMoved, page, startEvent, endEvent, tripTop, tripLeft, x);
