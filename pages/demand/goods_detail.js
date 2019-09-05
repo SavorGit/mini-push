@@ -51,6 +51,26 @@ Page({
     var res_nums = 1;
     app.boxShow(box_mac, forscreen_id, pubdetail, res_type, res_nums);
   },
+  clickBuyGoods:function(e){
+    var user_info = wx.getStorageSync('savor_user_info');
+    var openid = user_info.openid;
+    var goods_id = e.currentTarget.dataset.openid;
+    wx.request({
+      url: api_url +'/Smallapp3/datalog/recordlog',
+      header: {
+        'content-type': 'application/json'
+      },
+      data:{
+        openid:openid,
+        data_id:goods_id,
+        action_type:3,
+        type:2
+      },
+      success:function(res){
+
+      }
+    })
+  },
 
   /**
    * 生命周期函数--监听页面初次渲染完成

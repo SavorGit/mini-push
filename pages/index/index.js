@@ -893,9 +893,28 @@ Page({
   },
   openAdsLink:function(e){
     var ads_id = e.currentTarget.dataset.ads_id;
+    var user_info = wx.getStorageSync('savor_user_info');
+    var openid = user_info.openid;
+
     wx.reportAnalytics('ads_open_report', {
       ads_id: ads_id,
       open_num: 1,
     }); 
+    wx.request({
+      url: api_url +'/Smallapp3/datalog/recordlog',
+      header: {
+        'content-type': 'application/json'
+      },
+      data:{
+        action_type:1,
+        openid: openid,
+        data_id:ads_id,
+        type:1
+
+      },
+      success:function(res){
+
+      }
+    })
   }
 })
