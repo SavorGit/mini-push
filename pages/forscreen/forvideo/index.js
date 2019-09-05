@@ -301,37 +301,37 @@ Page({
                   duration: duration,
                 },
                 success: function (ret) {
+                  wx.request({
+                    url: api_url + '/Smallapp21/ForscreenHistory/getList',
+                    header: {
+                      'content-type': 'application/json'
+                    },
+                    data: {
+                      openid: openid,
+                      box_mac: box_mac,
+                      page: page,
+                    },
+                    success: function (res) {
+                      var hst_list = res.data.result;
 
+                      if (JSON.stringify(hst_list) == "{}") {
+                        that.setData({
+                          forscreen_history_list: ''
+                        })
+                      } else {
+                        that.setData({
+                          forscreen_history_list: res.data.result
+                        })
+                      }
+
+                    }
+                  })
                 }
               });
             },
 
           });
-          wx.request({
-            url: api_url + '/Smallapp21/ForscreenHistory/getList',
-            header: {
-              'content-type': 'application/json'
-            },
-            data: {
-              openid: openid,
-              box_mac: box_mac,
-              page: page,
-            },
-            success: function (res) {
-              var hst_list = res.data.result;
-
-              if (JSON.stringify(hst_list) == "{}") {
-                that.setData({
-                  forscreen_history_list: ''
-                })
-              } else {
-                that.setData({
-                  forscreen_history_list: res.data.result
-                })
-              }
-
-            }
-          })
+          
           
         }
       });

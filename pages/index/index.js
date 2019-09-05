@@ -479,46 +479,61 @@ Page({
     openid = e.currentTarget.dataset.openid;
     box_mac = e.currentTarget.dataset.boxmac;
     var timestamp = (new Date()).valueOf();
-    wx.request({
-      url: api_url + '/Smallapp21/index/breakLink',
-      header: {
-        'content-type': 'application/json'
-      },
-      method: "POST",
-      data: {
-        box_mac: box_mac,
-        openid: openid
-      },
-      success: function(res) {
-        if (res.data.code == 10000) {
-          that.setData({
-            is_link: 0,
-            box_mac: ''
+
+    wx.showModal({
+      title: '提示',
+      content: '确定要断开链接的电视吗？',
+      success(res) {
+        if (res.confirm) {
+          wx.request({
+            url: api_url + '/Smallapp21/index/breakLink',
+            header: {
+              'content-type': 'application/json'
+            },
+            method: "POST",
+            data: {
+              box_mac: box_mac,
+              openid: openid
+            },
+            success: function (res) {
+              if (res.data.code == 10000) {
+                that.setData({
+                  is_link: 0,
+                  box_mac: ''
+                })
+                wx.reLaunch({
+                  url: '../index/index'
+                })
+                wx.showToast({
+                  title: '断开成功',
+                  icon: 'none',
+                  duration: 2000
+                })
+              } else {
+                wx.showToast({
+                  title: '断开失败',
+                  icon: 'none',
+                  duration: 2000
+                })
+              }
+            },
+            fail: function (res) {
+              wx.showToast({
+                title: '网络异常，断开失败',
+                icon: 'none',
+                duration: 2000
+              })
+            }
           })
-          wx.reLaunch({
-            url: '../index/index'
-          })
-          wx.showToast({
-            title: '断开成功',
-            icon: 'none',
-            duration: 2000
-          })
-        } else {
-          wx.showToast({
-            title: '断开失败',
-            icon: 'none',
-            duration: 2000
-          })
+        } else if (res.cancel) {
+          
         }
-      },
-      fail: function(res) {
-        wx.showToast({
-          title: '网络异常，断开失败',
-          icon: 'none',
-          duration: 2000
-        })
       }
     })
+
+
+
+    
   },
   forscreenHistory: function(e) {
     var box_mac = e.currentTarget.dataset.boxmac;
@@ -529,6 +544,12 @@ Page({
       wx.navigateTo({
         url: '/pages/forscreen/history/list?openid=' + openid + '&box_mac=' + box_mac,
       })
+    }
+  },
+  scanQrcode(e){
+    var box_mac = e.currentTarget.dataset.boxmac;
+    if (box_mac == '') {
+      app.scanQrcode();
     }
   },
   //遥控呼大码
