@@ -1,6 +1,6 @@
 //app.js
 App({
-  recordFormId(openid,formId){
+  recordFormId(openid, formId) {
     var that = this;
     if (formId != 'the formId is a mock one') {
       wx.request({
@@ -23,7 +23,7 @@ App({
       this.scanQrcode();
     } else {
       var user_info = wx.getStorageSync("savor_user_info");
-      
+
       var avatarUrl = user_info.avatarUrl;
       var nickName = user_info.nickName;
       var openid = user_info.openid;
@@ -45,13 +45,13 @@ App({
         data: {
           box_mac: box_mac
         },
-        success: function (res) {
+        success: function(res) {
           var is_forscreen = res.data.result.is_forscreen;
           if (is_forscreen == 1) {
             wx.showModal({
               title: '确认要打断投屏',
               content: '当前电视正在进行投屏,继续投屏有可能打断当前投屏中的内容.',
-              success: function (res) {
+              success: function(res) {
                 if (res.confirm) {
 
                   if (res_type == 1) {
@@ -78,7 +78,7 @@ App({
                           is_pub_hotelinfo: 0,
                           is_share: 0
                         },
-                        success: function (ret) { }
+                        success: function(ret) {}
                       }); //end
                       var url = pubdetail[i]['forscreen_url'];
                       var filename = pubdetail[i]['filename'];
@@ -94,7 +94,7 @@ App({
                           box_mac: box_mac,
                           msg: '{ "action": 4, "resource_type":2, "url":"' + url + '","filename":"' + filename + '","openid":"' + openid + '","img_nums":' + res_len + ',"forscreen_char":"' + forscreen_char + '","order":' + order + ',"forscreen_id":"' + forscreen_id + '","img_id":"' + res_id + '","avatarUrl":"' + avatarUrl + '","nickName":"' + nickName + '"}',
                         },
-                        success: function (result) {
+                        success: function(result) {
 
                           wx.showToast({
                             title: '点播成功,电视即将开始播放',
@@ -102,7 +102,7 @@ App({
                             duration: 5000
                           });
                         },
-                        fail: function (res) {
+                        fail: function(res) {
                           wx.showToast({
                             title: '网络异常,点播失败',
                             icon: 'none',
@@ -135,8 +135,7 @@ App({
                           forscreen_id: forscreen_id,
                           duration: pubdetail[i]['duration'],
                         },
-                        success: function (ret) {
-                        }
+                        success: function(ret) {}
                       });
                       wx.request({
                         url: that.globalData.api_url + '/Netty/Index/index',
@@ -148,7 +147,7 @@ App({
                           box_mac: box_mac,
                           msg: '{ "action":2, "url": "' + pubdetail[i]['forscreen_url'] + '", "filename":"' + pubdetail[i]['filename'] + '","openid":"' + openid + '","resource_type":2,"video_id":"' + pubdetail[i]['res_id'] + '","avatarUrl":"' + avatarUrl + '","nickName":"' + nickName + '","forscreen_id":"' + forscreen_id + '"}',
                         },
-                        success: function (result) {
+                        success: function(result) {
 
                           wx.showToast({
                             title: '点播成功,电视即将开始播放',
@@ -156,7 +155,7 @@ App({
                             duration: 2000
                           });
                         },
-                        fail: function (res) {
+                        fail: function(res) {
                           wx.showToast({
                             title: '网络异常,点播失败',
                             icon: 'none',
@@ -176,8 +175,7 @@ App({
                     },
 
                   })
-                } else {
-                }
+                } else {}
               }
             })
           } else {
@@ -205,7 +203,7 @@ App({
                     is_pub_hotelinfo: 0,
                     is_share: 0
                   },
-                  success: function (ret) { }
+                  success: function(ret) {}
                 }); //end
                 var url = pubdetail[i]['forscreen_url'];
                 var filename = pubdetail[i]['filename'];
@@ -220,14 +218,14 @@ App({
                     box_mac: box_mac,
                     msg: '{ "action": 4, "resource_type":2, "url":"' + url + '","filename":"' + filename + '","openid":"' + openid + '","img_nums":' + res_len + ',"forscreen_char":"' + forscreen_char + '","order":' + order + ',"forscreen_id":"' + forscreen_id + '","img_id":"' + res_id + '","avatarUrl":"' + avatarUrl + '","nickName":"' + nickName + '"}',
                   },
-                  success: function (result) {
+                  success: function(result) {
                     wx.showToast({
                       title: '点播成功,电视即将开始播放',
                       icon: 'none',
                       duration: 5000
                     });
                   },
-                  fail: function (res) {
+                  fail: function(res) {
                     wx.showToast({
                       title: '网络异常,点播失败',
                       icon: 'none',
@@ -260,7 +258,7 @@ App({
                     forscreen_id: forscreen_id,
                     duration: pubdetail[i]['duration'],
                   },
-                  success: function (ret) {
+                  success: function(ret) {
 
                   }
                 });
@@ -274,7 +272,7 @@ App({
                     box_mac: box_mac,
                     msg: '{ "action":2, "url": "' + pubdetail[i]['forscreen_url'] + '", "filename":"' + pubdetail[i]['filename'] + '","openid":"' + openid + '","resource_type":2,"video_id":"' + pubdetail[i]['res_id'] + '","avatarUrl":"' + avatarUrl + '","nickName":"' + nickName + '","forscreen_id":"' + forscreen_id + '"}',
                   },
-                  success: function (result) {
+                  success: function(result) {
 
                     wx.showToast({
                       title: '点播成功,电视即将开始播放',
@@ -282,7 +280,7 @@ App({
                       duration: 2000
                     });
                   },
-                  fail: function (res) {
+                  fail: function(res) {
                     wx.showToast({
                       title: '网络异常,点播失败',
                       icon: 'none',
@@ -306,13 +304,13 @@ App({
       });
     }
   }, //电视播放结束
-  controlExitForscreen:function (openid,box_mac) {
+  controlExitForscreen: function(openid, box_mac) {
     var that = this;
     //openid = e.currentTarget.dataset.openid;
     //box_mac = e.currentTarget.dataset.boxmac;
     var timestamp = (new Date()).valueOf();
     wx.request({
-      url: that.globalData.api_url +'/Netty/Index/index',
+      url: that.globalData.api_url + '/Netty/Index/index',
       headers: {
         'Content-Type': 'application/json'
       },
@@ -321,7 +319,7 @@ App({
         box_mac: box_mac,
         msg: '{ "action": 3,"openid":"' + openid + '"}',
       },
-      success: function (res) {
+      success: function(res) {
         // wx.navigateBack({
         //   delta: 1
         // })
@@ -331,7 +329,7 @@ App({
           duration: 2000
         });
       },
-      fail: function (res) {
+      fail: function(res) {
         wx.showToast({
           title: '网络异常，退出失败',
           icon: 'none',
@@ -339,34 +337,36 @@ App({
         })
       }
     })
-  },//退出投屏结束
+  }, //退出投屏结束
   //遥控器呼玛
-  controlCallQrcode: function (openid, box_mac,qrcode_img){
+  controlCallQrcode: function(openid, box_mac, qrcode_img) {
     var that = this;
     //console.log(openid);
     if (box_mac) {
       var timestamp = (new Date()).valueOf();
-      var qrcode_url = that.globalData.api_url +'/Smallapp/index/getBoxQr?box_mac=' + box_mac + '&type=3';
+      var qrcode_url = that.globalData.api_url + '/Smallapp/index/getBoxQr?box_mac=' + box_mac + '&type=3';
       var mobile_brand = this.globalData.mobile_brand;
       var mobile_model = this.globalData.mobile_model;
 
       wx.request({
-        url: that.globalData.api_url +'/smallapp21/User/isForscreenIng',
+        url: that.globalData.api_url + '/smallapp21/User/isForscreenIng',
         headers: {
           'Content-Type': 'application/json'
         },
         method: "POST",
-        data: { box_mac: box_mac },
-        success: function (res) {
+        data: {
+          box_mac: box_mac
+        },
+        success: function(res) {
           var is_forscreen = res.data.result.is_forscreen;
           if (is_forscreen == 1) {
             wx.showModal({
               title: '确认要打断投屏',
               content: '当前电视正在进行投屏,继续投屏有可能打断当前投屏中的内容.',
-              success: function (res) {
+              success: function(res) {
                 if (res.confirm) {
                   wx.request({
-                    url: that.globalData.api_url +'/Netty/Index/index',
+                    url: that.globalData.api_url + '/Netty/Index/index',
                     headers: {
                       'Content-Type': 'application/json'
                     },
@@ -375,14 +375,14 @@ App({
                       box_mac: box_mac,
                       msg: '{ "action": 9,"url":"' + qrcode_url + '"}',
                     },
-                    success: function () {
+                    success: function() {
                       wx.showToast({
                         title: '呼玛成功，电视即将展示',
                         icon: 'none',
                         duration: 2000
                       });
                       wx.request({
-                        url: that.globalData.api_url +'/Smallapp/index/recordForScreenPics',
+                        url: that.globalData.api_url + '/Smallapp/index/recordForScreenPics',
                         header: {
                           'content-type': 'application/json'
                         },
@@ -405,7 +405,7 @@ App({
             })
           } else {
             wx.request({
-              url: that.globalData.api_url +'/Netty/Index/index',
+              url: that.globalData.api_url + '/Netty/Index/index',
               headers: {
                 'Content-Type': 'application/json'
               },
@@ -414,14 +414,14 @@ App({
                 box_mac: box_mac,
                 msg: '{ "action": 9,"url":"' + qrcode_url + '"}',
               },
-              success: function () {
+              success: function() {
                 wx.showToast({
                   title: '呼玛成功，电视即将展示',
                   icon: 'none',
                   duration: 2000
                 });
                 wx.request({
-                  url: that.globalData.api_url +'/Smallapp/index/recordForScreenPics',
+                  url: that.globalData.api_url + '/Smallapp/index/recordForScreenPics',
                   header: {
                     'content-type': 'application/json'
                   },
@@ -443,11 +443,11 @@ App({
     }
   },
   //遥控器控制音量
-  controlChangeVolume: function (box_mac,change_type) {
+  controlChangeVolume: function(box_mac, change_type) {
     var that = this;
     var timestamp = (new Date()).valueOf();
     wx.request({
-      url: that.globalData.api_url +'/Netty/Index/index',
+      url: that.globalData.api_url + '/Netty/Index/index',
       headers: {
         'Content-Type': 'application/json'
       },
@@ -459,11 +459,11 @@ App({
     })
   },
   //遥控控制节目
-  controlChangeProgram:function(box_mac,change_type){
+  controlChangeProgram: function(box_mac, change_type) {
     var that = this;
     var timestamp = (new Date()).valueOf();
     wx.request({
-      url: that.globalData.api_url +'/Netty/Index/index',
+      url: that.globalData.api_url + '/Netty/Index/index',
       headers: {
         'Content-Type': 'application/json'
       },
@@ -475,27 +475,27 @@ App({
     })
   },
   //扫码
-  scanQrcode:function(){
+  scanQrcode: function() {
     var that = this;
     wx.showModal({
       title: '提示',
       content: "您可扫码链接热点合作餐厅电视,使用此功能",
       showCancel: true,
       confirmText: '立即扫码',
-      success: function (res) {
+      success: function(res) {
         if (res.confirm == true) {
           wx.scanCode({
             onlyFromCamera: true,
             success: (res) => {
-              if (res.scanType =='QR_CODE'){
+              if (res.scanType == 'QR_CODE') {
                 var selemite = res.result.indexOf("?");
                 var params = res.result.substring(selemite, res.result.length);
-                
-                params = '/pages/forscreen/forscreen'+params;
+
+                params = '/pages/forscreen/forscreen' + params;
                 wx.navigateTo({
                   url: params
                 })
-              } else if (res.scanType == 'WX_CODE'){
+              } else if (res.scanType == 'WX_CODE') {
                 wx.navigateTo({
                   url: '/' + res.path
                 })
@@ -505,21 +505,21 @@ App({
         }
       }
     });
-    
+
 
   },
   onLaunch: function() {
     // 获取小程序更新机制兼容
     if (wx.canIUse('getUpdateManager')) {
       const updateManager = wx.getUpdateManager()
-      updateManager.onCheckForUpdate(function (res) {
+      updateManager.onCheckForUpdate(function(res) {
         // 请求完新版本信息的回调
         if (res.hasUpdate) {
-          updateManager.onUpdateReady(function () {
+          updateManager.onUpdateReady(function() {
             wx.showModal({
               title: '更新提示',
               content: '新版本已经准备好，是否重启应用？',
-              success: function (res) {
+              success: function(res) {
                 if (res.confirm) {
                   // 新的版本已经下载好，调用 applyUpdate 应用新版本并重启
                   updateManager.applyUpdate()
@@ -527,7 +527,7 @@ App({
               }
             })
           })
-          updateManager.onUpdateFailed(function () {
+          updateManager.onUpdateFailed(function() {
             // 新的版本下载失败
             wx.showModal({
               title: '已经有新版本了哟~',
@@ -551,7 +551,7 @@ App({
       success: res => {
         var code = res.code; //返回code
         wx.request({
-          url: that.globalData.api_url +'/smallapp/index/getOpenid',
+          url: that.globalData.api_url + '/smallapp/index/getOpenid',
           data: {
             "code": code
           },
@@ -581,10 +581,40 @@ App({
     wx.getSystemInfo({
       success: function(res) {
         app.globalData.statusBarHeight = res.statusBarHeight;
+        app.SystemInfo = {
+          SDKVersion: res.SDKVersion,
+          batteryLevel: res.batteryLevel,
+          brand: res.brand,
+          errMsg: res.errMsg,
+          fontSizeSetting: res.fontSizeSetting,
+          language: res.language,
+          model: res.model,
+          pixelRatio: res.pixelRatio,
+          platform: res.platform,
+          statusBarHeight: res.statusBarHeight,
+          system: res.system,
+          version: res.version,
+          safeArea: res.safeArea,
+          windowWidth: res.windowWidth,
+          windowHeight: res.windowHeight,
+          window: {
+            width: res.windowWidth,
+            height: res.windowHeight
+          },
+          screenWidth: res.screenWidth,
+          screenHeight: res.screenHeight,
+          screen: {
+            width: res.screenWidth,
+            height: res.screenHeight
+          },
+          screenBottomSpace: (res.screenHeight - res.safeArea.bottom),
+          documentWidth: res.safeArea.width,
+          documentHeight: res.safeArea.height
+        };
       }
     })
   },
-  checkMobile: function (mobile) {
+  checkMobile: function(mobile) {
 
     var myreg = /^(((13[0-9]{1})|(15[0-9]{1})|(18[0-9]{1})|(17[0-9]{1}))+\d{8})$/;
     if (mobile.length == 0) {
@@ -614,19 +644,19 @@ App({
   },
   globalData: {
     openid: '',
-    session_key:'',
+    session_key: '',
     box_mac: '',
     mobile_brand: '',
     mobile_model: '',
     statusBarHeight: 0,
-    rest_appid:'wxc395eb4b44563af1',
-    jijian_appid:'wx7883a4327329a67c',
-    jd_appid:'wx91d27dbf599dff74',
-    api_url:'https://dev-mobile.littlehotspot.com',
+    rest_appid: 'wxc395eb4b44563af1',
+    jijian_appid: 'wx7883a4327329a67c',
+    jd_appid: 'wx91d27dbf599dff74',
+    api_url: 'https://dev-mobile.littlehotspot.com',
     oss_upload_url: 'https://dev-image.littlehotspot.com',
     netty_url: 'https://dev-netty-push.littlehotspot.com',
     oss_url: 'https://dev-oss.littlehotspot.com',
-    oss_bucket:'redian-produce',
-    oss_access_key_id:'LTAITjXOpRHKflOX',
+    oss_bucket: 'redian-produce',
+    oss_access_key_id: 'LTAITjXOpRHKflOX',
   }
 })

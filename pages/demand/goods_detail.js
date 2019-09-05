@@ -10,7 +10,8 @@ Page({
    */
   data: {
     statusBarHeight: getApp().globalData.statusBarHeight,
-    goods_info:[]
+    documentHeight: app.SystemInfo.documentHeight,
+    goods_info: []
   },
 
   /**
@@ -19,7 +20,7 @@ Page({
   onLoad: function(options) {
     var that = this;
     var user_info = wx.getStorageSync('savor_user_info');
-    var openid  = user_info.openid;
+    var openid = user_info.openid;
     box_mac = options.box_mac;
     var goods_id = options.goods_id;
     wx.request({
@@ -27,15 +28,15 @@ Page({
       header: {
         'content-type': 'application/json'
       },
-      data:{
-        goods_id : goods_id,
-        openid:openid,
+      data: {
+        goods_id: goods_id,
+        openid: openid,
       },
       success: function(res) {
         if (res.data.code == 10000) {
           goods_info = res.data.result
           that.setData({
-            goods_info :res.data.result
+            goods_info: res.data.result
           })
         }
       }
@@ -51,22 +52,22 @@ Page({
     var res_nums = 1;
     app.boxShow(box_mac, forscreen_id, pubdetail, res_type, res_nums);
   },
-  clickBuyGoods:function(e){
+  clickBuyGoods: function(e) {
     var user_info = wx.getStorageSync('savor_user_info');
     var openid = user_info.openid;
     var goods_id = e.currentTarget.dataset.goods_id;
     wx.request({
-      url: api_url +'/Smallapp3/datalog/recordlog',
+      url: api_url + '/Smallapp3/datalog/recordlog',
       header: {
         'content-type': 'application/json'
       },
-      data:{
-        openid:openid,
-        data_id:goods_id,
-        action_type:3,
-        type:2
+      data: {
+        openid: openid,
+        data_id: goods_id,
+        action_type: 3,
+        type: 2
       },
-      success:function(res){
+      success: function(res) {
 
       }
     })
@@ -114,7 +115,7 @@ Page({
 
   },
   //电视播放
-  boxShow: function (e) {
+  boxShow: function(e) {
     console.log(e);
     var forscreen_id = e.currentTarget.dataset.gods_id;
 
@@ -124,7 +125,7 @@ Page({
     app.boxShow(box_mac, forscreen_id, pubdetail, res_type, res_nums);
   },
   //收藏资源
-  onCollect: function (e) {
+  onCollect: function(e) {
     var that = this;
     //var openid = e.target.dataset.openid;
     var res_id = e.target.dataset.res_id;
@@ -142,7 +143,7 @@ Page({
         'type': res_type,
         'status': 1,
       },
-      success: function (e) {
+      success: function(e) {
         goods_info.is_collect = 1;
         goods_info.collect_num = e.data.result.nums;
         that.setData({
@@ -162,7 +163,9 @@ Page({
           })
         }*/
       },
-      fial: function ({ errMsg }) {
+      fial: function({
+        errMsg
+      }) {
         wx.showToast({
           title: '网络异常，请稍后重试',
           icon: 'none',
@@ -170,9 +173,9 @@ Page({
         })
       }
     })
-  },//收藏资源结束
+  }, //收藏资源结束
   //取消收藏
-  cancCollect: function (e) {
+  cancCollect: function(e) {
     var that = this;
     var res_id = e.target.dataset.res_id;
     var user_info = wx.getStorageSync('savor_user_info');
@@ -189,8 +192,8 @@ Page({
         'type': res_type,
         'status': 0,
       },
-      success: function (e) {
-        goods_info.is_collect=0;
+      success: function(e) {
+        goods_info.is_collect = 0;
         goods_info.collect_num = e.data.result.nums;
         that.setData({
           goods_info: goods_info
@@ -209,7 +212,9 @@ Page({
           })
         }*/
       },
-      fial: function ({ errMsg }) {
+      fial: function({
+        errMsg
+      }) {
         wx.showToast({
           title: '网络异常，请稍后重试',
           icon: 'none',
@@ -217,7 +222,7 @@ Page({
         })
       }
     })
-  },//取消收藏结束
+  }, //取消收藏结束
   /**
    * 用户点击右上角分享
    */
@@ -243,16 +248,18 @@ Page({
           'type': 4,
           'status': 1,
         },
-        success: function (e) {
-          goods_info.share_num ++;
+        success: function(e) {
+          goods_info.share_num++;
 
-          
+
           that.setData({
             goods_info: goods_info
           })
 
         },
-        fail: function ({ errMsg }) {
+        fail: function({
+          errMsg
+        }) {
           wx.showToast({
             title: '网络异常，请稍后重试',
             icon: 'none',
@@ -265,7 +272,7 @@ Page({
         title: '热点聚焦，投你所好',
         path: '/pages/demand/goods_detail?goods_id=' + goods_id + '&box_mac=',
         imageUrl: img_url,
-        success: function (res) {
+        success: function(res) {
 
 
         },

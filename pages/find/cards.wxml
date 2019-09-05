@@ -3,7 +3,8 @@
 <template is="navigationBarForTopLevel" data='{{statusBarHeight: statusBarHeight,titleText:"热点投屏"}}' />
 
 <!-- 有数据时的页面 -->
-<view wx:if="{{cards_img.length > 0}}" class='container flex-column-center-flex_start theme-wxAuthLogin-container' style='height: calc(100vh - 46px - {{statusBarHeight}}px);'>
+<!-- <view wx:if="{{cards_img.length > 0}}" class='container flex-column-center-flex_start theme-wxAuthLogin-container' style='height: calc(100vh - 46px - {{statusBarHeight}}px);'> -->
+<view wx:if="{{cards_img.length > 0}}" class='container flex-column-center-flex_start theme-wxAuthLogin-container' style='height: calc({{documentHeight}}px - 46px);'>
   <view class="card-wrap">
     <!-- <view class="card-item theme-container" animation="{{animationData}}" style="left: {{cards[0].x}}px; top: {{cards[0].y}}px;"> -->
     <view class="card-item theme-container" animation="{{animationData}}">
@@ -70,12 +71,14 @@
   </view>
 </view>
 <!-- 无数据的页面 -->
-<view wx:else class='container flex-column-center-flex_start theme-container' style='height: calc(100vh - 46px - {{statusBarHeight}}px);'>
+<!-- <view wx:else class='container flex-column-center-flex_start theme-container' style='height: calc(100vh - 46px - {{statusBarHeight}}px);'> -->
+<view wx:else class='container flex-column-center-flex_start theme-container' style='height: calc({{documentHeight}}px - 46px);'>
   <view class="nodata-msg">陛下，您阅人无“数”</view>
 </view>
 
 <!-- 弹出视频播放页面 -->
-<view wx:if="{{showVideoWindow}}" class='container flex-column-center-flex_start' style='height: calc(100vh - 46px - {{statusBarHeight}}px); background-color: #000000; position: absolute; left: 0; top: calc(46px + {{statusBarHeight}}px); z-index: 10;'>
+<!-- <view wx:if="{{showVideoWindow}}" class='container flex-column-center-flex_start' style='height: calc(100vh - 46px - {{statusBarHeight}}px); background-color: #000000; position: absolute; left: 0; top: calc(46px + {{statusBarHeight}}px); z-index: 10;'> -->
+<view wx:if="{{showVideoWindow}}" class='container flex-column-center-flex_start' style='height: calc({{documentHeight}}px - 46px); background-color: #000000; position: absolute; left: 0; top: calc(46px + {{statusBarHeight}}px); z-index: 10;'>
   <view class="flex-row-flex_start-flex_end font_FFFFFF_34" style="width: calc(100% - 40rpx);height: 60rpx;padding: 20rpx;font-size: 50rpx;">
     <view class="fa fa-close fa-lg" bindtap="closePopVideo"></view>
   </view>

@@ -7,36 +7,37 @@ var openid;
 var box_mac;
 var touchEvent = [];
 var touchMoveExecuteTrip = '150rpx';
-var systemInfo = {
-  SDKVersion: "",
-  batteryLevel: 0,
-  brand: "",
-  errMsg: "",
-  fontSizeSetting: 16,
-  language: "zh",
-  model: "",
-  pixelRatio: 1,
-  platform: "",
-  statusBarHeight: 0,
-  system: "",
-  version: "",
-  safeArea: {
-    width: 0,
-    height: 0,
-    top: 0,
-    left: 0,
-    right: 0,
-    bottom: 0
-  },
-  window: {
-    width: 0,
-    height: 0
-  },
-  screen: {
-    width: 0,
-    height: 0
-  }
-};
+var systemInfo = app.SystemInfo;
+// var systemInfo = {
+//   SDKVersion: "",
+//   batteryLevel: 0,
+//   brand: "",
+//   errMsg: "",
+//   fontSizeSetting: 16,
+//   language: "zh",
+//   model: "",
+//   pixelRatio: 1,
+//   platform: "",
+//   statusBarHeight: 0,
+//   system: "",
+//   version: "",
+//   safeArea: {
+//     width: 0,
+//     height: 0,
+//     top: 0,
+//     left: 0,
+//     right: 0,
+//     bottom: 0
+//   },
+//   window: {
+//     width: 0,
+//     height: 0
+//   },
+//   screen: {
+//     width: 0,
+//     height: 0
+//   }
+// };
 
 Page({
 
@@ -45,10 +46,9 @@ Page({
    */
   data: {
     statusBarHeight: app.globalData.statusBarHeight,
-    cards_img: [
-
-
-    ],
+    documentHeight: app.SystemInfo.documentHeight,
+    screenBottomSpace: systemInfo.screenBottomSpace,
+    cards_img: [],
     // cards: [{
     //   x: 0,
     //   y: 0
@@ -60,42 +60,44 @@ Page({
    */
   onLoad: function(options) {
     var self = this;
-    wx.getSystemInfo({
-      success: function(res) {
-        // console.log(res, app);
-        systemInfo.SDKVersion = res.SDKVersion;
-        systemInfo.batteryLevel = res.batteryLevel;
-        systemInfo.brand = res.brand;
-        systemInfo.errMsg = res.errMsg;
-        systemInfo.fontSizeSetting = res.fontSizeSetting;
-        systemInfo.language = res.language;
-        systemInfo.model = res.model;
-        systemInfo.pixelRatio = res.pixelRatio;
-        systemInfo.platform = res.platform;
-        systemInfo.statusBarHeight = res.statusBarHeight;
-        systemInfo.system = res.system;
-        systemInfo.version = res.version;
-        systemInfo.safeArea.width = res.safeArea.width;
-        systemInfo.safeArea.height = res.safeArea.height;
-        systemInfo.safeArea.top = res.safeArea.top;
-        systemInfo.safeArea.left = res.safeArea.left;
-        systemInfo.safeArea.right = res.safeArea.right;
-        systemInfo.safeArea.bottom = res.safeArea.bottom;
-        systemInfo.window.width = res.windowWidth;
-        systemInfo.window.height = res.windowHeight;
-        systemInfo.screen.width = res.screenWidth;
-        systemInfo.screen.height = res.screenHeight;
-        // console.log(systemInfo);
+    // wx.getSystemInfo({
+    //   success: function(res) {
+    //     console.log(res, app);
+    //     systemInfo.SDKVersion = res.SDKVersion;
+    //     systemInfo.batteryLevel = res.batteryLevel;
+    //     systemInfo.brand = res.brand;
+    //     systemInfo.errMsg = res.errMsg;
+    //     systemInfo.fontSizeSetting = res.fontSizeSetting;
+    //     systemInfo.language = res.language;
+    //     systemInfo.model = res.model;
+    //     systemInfo.pixelRatio = res.pixelRatio;
+    //     systemInfo.platform = res.platform;
+    //     systemInfo.statusBarHeight = res.statusBarHeight;
+    //     systemInfo.system = res.system;
+    //     systemInfo.version = res.version;
+    //     systemInfo.safeArea.width = res.safeArea.width;
+    //     systemInfo.safeArea.height = res.safeArea.height;
+    //     systemInfo.safeArea.top = res.safeArea.top;
+    //     systemInfo.safeArea.left = res.safeArea.left;
+    //     systemInfo.safeArea.right = res.safeArea.right;
+    //     systemInfo.safeArea.bottom = res.safeArea.bottom;
+    //     systemInfo.window.width = res.windowWidth;
+    //     systemInfo.window.height = res.windowHeight;
+    //     systemInfo.screen.width = res.screenWidth;
+    //     systemInfo.screen.height = res.screenHeight;
+    //     // console.log(systemInfo);
 
-        // self.setData({
-        //   cards: [{
-        //     x: 0,
-        //     y: systemInfo.statusBarHeight + 46
-        //   }]
-        // });
-        self.touchMoveHandler = new utils.TouchMoveHandler(systemInfo, touchMoveExecuteTrip);
-      }
-    });
+    //     // self.setData({
+    //     //   cards: [{
+    //     //     x: 0,
+    //     //     y: systemInfo.statusBarHeight + 46
+    //     //   }]
+    //     // });
+    //     self.touchMoveHandler = new utils.TouchMoveHandler(systemInfo, touchMoveExecuteTrip);
+    //   }
+    // });
+    console.log(systemInfo, app);
+    self.touchMoveHandler = new utils.TouchMoveHandler(systemInfo, touchMoveExecuteTrip);
 
     //获取发现页面数据 
     if (app.globalData.openid && app.globalData.openid != '') {

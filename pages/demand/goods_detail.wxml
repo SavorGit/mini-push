@@ -2,7 +2,8 @@
 <import src="/pages/template/commons" />
 <template is="navigationBarForTwoLevel" data='{{statusBarHeight: statusBarHeight,titleText:"商品详情"}}' />
 
-<view class="container flex-column-center-flex_start theme-container" style='height: calc(100vh - 46px - {{statusBarHeight}}px);'>
+<!-- <view class="container flex-column-center-flex_start theme-container" style='height: calc(100vh - 46px - {{statusBarHeight}}px);'> -->
+<view class="container flex-column-center-flex_start theme-container" style='height: calc({{documentHeight}}px - 46px);'>
   <video class="goods-video" src="{{goods_info.video_url}}"></video>
   <view class='operation flex-row-center-flex_end font_666666_26'>
     <view wx:if="{{goods_info.is_collect==1}}">
@@ -20,7 +21,6 @@
   </scroll-view>
   <view class="page-bottom full_width flex-row-center-space_around theme-panel">
     <button class="theme-button-dark" bindtap="boxShow" data-goods_id="{{goods_info.goods_id}}" data-pubdetail="{{goods_info.pubdetail}}" data-media_type="{{goods_info.media_type}}">电视播放</button>
-    <navigator bindtap="clickBuyGoods" data-goods_id="{{goods_info.goods_id}}" 
-   class="theme-button-buy" target="miniProgram" app-id="{{goods_info.appid}}" path="{{goods_info.jd_url}}">{{goods_info.buybutton}}</navigator>
+    <navigator bindtap="clickBuyGoods" data-goods_id="{{goods_info.goods_id}}" class="theme-button-buy" target="miniProgram" app-id="{{goods_info.appid}}" path="{{goods_info.jd_url}}">{{goods_info.buybutton}}</navigator>
   </view>
 </view>
