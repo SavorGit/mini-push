@@ -196,11 +196,11 @@ const TouchMoveHandler = function(systemInfo, touchMoveExecuteTrip) {
    */
   this.returnToOriginHandel = function(page, startEvent, endEvent) {
     let handler = this;
-    wx.showLoading({
-      title: '加载中',
-      icon: 'loading',
-      duration: 10000
-    });
+    // wx.showLoading({
+    //   title: '加载中',
+    //   icon: 'loading',
+    //   duration: 10000
+    // });
     let animation = wx.createAnimation({
       duration: 100,
       // timingFunction: 'cubic-bezier(.8,.2,.1,0.8)'
@@ -220,7 +220,7 @@ const TouchMoveHandler = function(systemInfo, touchMoveExecuteTrip) {
         //   y: handler.options.systemInfo.statusBarHeight + 46
         // }]
       });
-      wx.hideLoading();
+      // wx.hideLoading();
     }, 100);
   };
 
@@ -246,11 +246,11 @@ const TouchMoveHandler = function(systemInfo, touchMoveExecuteTrip) {
   this.moveOnhorizontalHandel = function(page, top, left, x, startEvent, endEvent, callbackFunction) {
     console.log("TouchMoveHandler.moveOnhorizontalHandel(page, top, left, x, startEvent, endEvent, callbackFunction)", page, startEvent, endEvent, top, left, x);
     let handler = this;
-    wx.showLoading({
-      title: '加载中',
-      icon: 'loading',
-      duration: 10000
-    });
+    // wx.showLoading({
+    //   title: '加载中',
+    //   icon: 'loading',
+    //   duration: 10000
+    // });
     let animation = wx.createAnimation({
       duration: 350,
       // timingFunction: 'cubic-bezier(.8,.2,.1,0.8)'
@@ -279,7 +279,7 @@ const TouchMoveHandler = function(systemInfo, touchMoveExecuteTrip) {
         // }]
       });
       console.log("TouchMoveHandler.moveOnhorizontalHandel(page, top, left, x, startEvent, endEvent, callbackFunction)#setTimeout", cards_img);
-      wx.hideLoading();
+      // wx.hideLoading();
       if (cards_img.length <= 3) {
         handler.callbackHandel(callbackFunction, handler.Event.InsufficientData, page, startEvent, endEvent, top, left, x);
       }

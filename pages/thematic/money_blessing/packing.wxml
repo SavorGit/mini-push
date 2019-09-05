@@ -17,13 +17,13 @@
               <input name="totalcount" bindinput='setTotalCount' class='input' type='digit' placeholder='0.00 (1-500元)'></input>
             </view>
           </view>
-          <view>
+          <view class="flex-row-stretch-flex_start">
             <label class='RowLabel'>红包个数</label>
             <view class='right'>
               <input name="totalnums" bindinput='setTotalNums' class='input' type='number' placeholder='填写个数 (1-500个)'></input>
             </view>
           </view>
-          <view>
+          <view class="flex-row-stretch-flex_start">
             <label class='RowLabel'>祝</label>
             <view class='right'>
               <input name="surname" class='input surname' maxlength="1" type='text' placeholder=''></input>
@@ -33,7 +33,7 @@
               </radio-group>
             </view>
           </view>
-          <view>
+          <view class="flex-row-stretch-flex_start">
             <label class='RowLabel'>祝福语</label>
             <view class='right'>
               <picker bindchange='bindBlessPickerChange' class="picker" value="{{blessingIndex}}" range="{{blessingArray}}">
@@ -42,7 +42,7 @@
               </picker>
             </view>
           </view>
-          <view>
+          <view class="flex-row-stretch-flex_start">
             <label class='RowLabel'>发送范围</label>
             <view class='right'>
               <picker bindchange='bindRangePickerChange' class="picker" value="{{rangeIndex}}" range="{{rangeArray}}">

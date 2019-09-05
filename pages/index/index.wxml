@@ -113,7 +113,7 @@
     </view>
     <view class="list">
       <block wx:for="{{hot_play}}" wx:key="item" wx:for-index="index" wx:for-item="bean">
-        <view class="row flex-row-flex_start-start {{index<4?'line':''}}">
+        <view class="row flex-row-flex_start-start {{index < hot_play.length - 1 ? 'line' : ''}}">
           <image class="img" src="{{bean.pubdetail[0].res_url}}"></image>
           <view class="info">
             <view class="rank theme-font5">TOP {{index+1}}</view>

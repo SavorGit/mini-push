@@ -106,7 +106,7 @@
 /* ==================================== 推荐面板 ==================================== */
 
 .recommend-panel {
-  height: 1003rpx;
+  max-height: 1003rpx;
 }
 
 .recommend-panel > .title-bar {
