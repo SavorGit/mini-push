@@ -54,7 +54,7 @@ Page({
   clickBuyGoods:function(e){
     var user_info = wx.getStorageSync('savor_user_info');
     var openid = user_info.openid;
-    var goods_id = e.currentTarget.dataset.openid;
+    var goods_id = e.currentTarget.dataset.goods_id;
     wx.request({
       url: api_url +'/Smallapp3/datalog/recordlog',
       header: {
