@@ -17,6 +17,7 @@ page {
 .card-wrap {
   width: 100%;
   height: 850rpx;
+  /* margin-top: calc(100% - 1010rpx); */
   overflow: hidden;
 }
 
@@ -57,6 +58,14 @@ page {
 .card-wrap > .card-item > image {
   width: 580rpx;
   height: 680rpx;
+  margin: 0;
+  border-radius: 10rpx;
+  background-color: #e0e0e0;
+}
+
+.card-wrap > .card-item:nth-child(2) > image {
+  width: 600rpx;
+  height: 660rpx;
   margin: 0;
   border-radius: 10rpx;
   background-color: #e0e0e0;

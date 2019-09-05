@@ -231,11 +231,6 @@ const TouchMoveHandler = function(systemInfo, touchMoveExecuteTrip) {
    */
   this.returnToOriginHandel = function(page, startEvent, endEvent) {
     let handler = this;
-    // wx.showLoading({
-    //   title: '加载中',
-    //   icon: 'loading',
-    //   duration: 10000
-    // });
     let animation = wx.createAnimation({
       duration: 100,
       // timingFunction: 'cubic-bezier(.8,.2,.1,0.8)'
@@ -249,13 +244,8 @@ const TouchMoveHandler = function(systemInfo, touchMoveExecuteTrip) {
     });
     setTimeout(function() {
       page.setData({
-        animationData: {},
-        // cards: [{
-        //   x: 0,
-        //   y: handler.options.systemInfo.statusBarHeight + 46
-        // }]
+        animationData: {}
       });
-      // wx.hideLoading();
     }, 100);
   };
 
@@ -281,44 +271,53 @@ const TouchMoveHandler = function(systemInfo, touchMoveExecuteTrip) {
   this.moveOnhorizontalHandel = function(page, top, left, x, startEvent, endEvent, callbackFunction) {
     console.log("TouchMoveHandler.moveOnhorizontalHandel(page, top, left, x, startEvent, endEvent, callbackFunction)", page, startEvent, endEvent, top, left, x);
     let handler = this;
-    // wx.showLoading({
-    //   title: '加载中',
-    //   icon: 'loading',
-    //   duration: 10000
-    // });
     let animation = wx.createAnimation({
-      duration: 350,
+      duration: 200,
       // timingFunction: 'cubic-bezier(.8,.2,.1,0.8)'
     });
     animation.left(left).top(top).translateX(x).translateY(0).step({
-      duration: 300,
+      duration: 200,
       timingFunction: 'linear'
     });
-    animation.left(0).top(handler.options.systemInfo.statusBarHeight + 46).translateX(0).translateY(0).step({
-      duration: 10,
-      // timingFunction: 'step-start'
-      timingFunction: 'ease-out'
-    });
+    // animation.left(0).top(handler.options.systemInfo.statusBarHeight + 46).translateX(0).translateY(0).step({
+    //   duration: 10,
+    //   // timingFunction: 'step-start'
+    //   timingFunction: 'ease-out'
+    // });
     page.setData({
       animationData: animation.export()
     });
     setTimeout(function() {
       let cards_img = page.data.cards_img;
-      cards_img.splice(0, 1);
+      // cards_img.splice(0, 1);
+      cards_img.shift();
+
+      let backupAnimation = wx.createAnimation({
+        duration: 200,
+        // timingFunction: 'cubic-bezier(.8,.2,.1,0.8)'
+      });
+      backupAnimation.left(0).top(handler.options.systemInfo.statusBarHeight + 46).translateX(0).translateY(0).step({
+        duration: 10,
+        timingFunction: 'step-start'
+        // timingFunction: 'ease-out'
+      });
       page.setData({
-        animationData: {},
+        animationData: backupAnimation.export()
+      });
+      setTimeout(function() {
+        page.setData({
+          animationData: {}
+        });
+      }, 10);
+      page.setData({
         cards_img: cards_img,
-        // cards: [{
-        //   x: 0,
-        //   y: handler.options.systemInfo.statusBarHeight + 46
-        // }]
+        animationData: {}
       });
       console.log("TouchMoveHandler.moveOnhorizontalHandel(page, top, left, x, startEvent, endEvent, callbackFunction)#setTimeout", cards_img);
-      // wx.hideLoading();
       if (cards_img.length <= 3) {
         handler.callbackHandel(callbackFunction, handler.Event.InsufficientData, page, startEvent, endEvent, top, left, x);
       }
-    }, 350);
+    }, 200);
   };
 
   /**
