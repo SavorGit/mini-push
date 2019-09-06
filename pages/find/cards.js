@@ -49,6 +49,7 @@ Page({
     documentHeight: app.SystemInfo.documentHeight,
     screenBottomSpace: systemInfo.screenBottomSpace,
     cards_img: [],
+    box_mac: '',
     // cards: [{
     //   x: 0,
     //   y: 0
@@ -734,5 +735,49 @@ Page({
     wx.navigateTo({
       url: path,
     })
+  },
+  //遥控呼大码
+  callQrCode: utils.throttle(function (e) {
+    openid = e.currentTarget.dataset.openid;
+    box_mac = e.currentTarget.dataset.box_mac;
+    var qrcode_img = e.currentTarget.dataset.qrcode_img;
+    app.controlCallQrcode(openid, box_mac, qrcode_img);
+  }, 3000),//呼大码结束
+  //打开遥控器
+  openControl: function (e) {
+    var that = this;
+    var qrcode_url = api_url + '/Smallapp/index/getBoxQr?box_mac=' + box_mac + '&type=3';
+    console.log(qrcode_url);
+    that.setData({
+      showControl: true,
+      qrcode_img: qrcode_url
+    })
+  },
+  //关闭遥控
+  closeControl: function (e) {
+    var that = this;
+    that.setData({
+      showControl: false,
+    })
+
+  },
+  //遥控退出投屏
+  exitForscreen: function (e) {
+    openid = e.currentTarget.dataset.openid;
+    box_mac = e.currentTarget.dataset.box_mac;
+    app.controlExitForscreen(openid, box_mac);
+  },
+  //遥控调整音量
+  changeVolume: function (e) {
+    box_mac = e.currentTarget.dataset.box_mac;
+    var change_type = e.currentTarget.dataset.change_type;
+    app.controlChangeVolume(box_mac, change_type);
+
+  },
+  //遥控切换节目
+  changeProgram: function (e) {
+    box_mac = e.currentTarget.dataset.box_mac;
+    var change_type = e.currentTarget.dataset.change_type;
+    app.controlChangeProgram(box_mac, change_type);
   },
 })
