@@ -295,7 +295,8 @@ const TouchMoveHandler = function(systemInfo, touchMoveExecuteTrip) {
           duration: 1,
           // timingFunction: 'cubic-bezier(.8,.2,.1,0.8)'
         });
-        backupAnimation.left(0).top(handler.options.systemInfo.statusBarHeight + 46).translateX(0).translateY(0).step({
+        // backupAnimation.left(0).top(handler.options.systemInfo.statusBarHeight + 46).translateX(0).translateY(0).step({
+        backupAnimation.left(0).top(handler.options.systemInfo.statusBarHeight + 46).step({
           duration: 1,
           timingFunction: 'step-start'
           // timingFunction: 'ease-out'
