@@ -24,6 +24,11 @@
   margin-top: 20rpx;
 }
 
+.goods-info image {
+  width: 100%;
+  display: flex;
+}
+
 .page-bottom {
   height: 98rpx;
 }

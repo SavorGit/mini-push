@@ -297,7 +297,7 @@ const TouchMoveHandler = function(systemInfo, touchMoveExecuteTrip) {
         // timingFunction: 'cubic-bezier(.8,.2,.1,0.8)'
       });
       backupAnimation.left(0).top(handler.options.systemInfo.statusBarHeight + 46).translateX(0).translateY(0).step({
-        duration: 10,
+        duration: 1,
         timingFunction: 'step-start'
         // timingFunction: 'ease-out'
       });
@@ -308,7 +308,7 @@ const TouchMoveHandler = function(systemInfo, touchMoveExecuteTrip) {
         page.setData({
           animationData: {}
         });
-      }, 10);
+      }, 1);
       page.setData({
         cards_img: cards_img,
         animationData: {}

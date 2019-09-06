@@ -8,36 +8,6 @@ var box_mac;
 var touchEvent = [];
 var touchMoveExecuteTrip = '150rpx';
 var systemInfo = app.SystemInfo;
-// var systemInfo = {
-//   SDKVersion: "",
-//   batteryLevel: 0,
-//   brand: "",
-//   errMsg: "",
-//   fontSizeSetting: 16,
-//   language: "zh",
-//   model: "",
-//   pixelRatio: 1,
-//   platform: "",
-//   statusBarHeight: 0,
-//   system: "",
-//   version: "",
-//   safeArea: {
-//     width: 0,
-//     height: 0,
-//     top: 0,
-//     left: 0,
-//     right: 0,
-//     bottom: 0
-//   },
-//   window: {
-//     width: 0,
-//     height: 0
-//   },
-//   screen: {
-//     width: 0,
-//     height: 0
-//   }
-// };
 
 Page({
 
@@ -49,11 +19,7 @@ Page({
     documentHeight: app.SystemInfo.documentHeight,
     screenBottomSpace: systemInfo.screenBottomSpace,
     cards_img: [],
-    box_mac: '',
-    // cards: [{
-    //   x: 0,
-    //   y: 0
-    // }]
+    box_mac: ''
   },
 
   /**
@@ -61,43 +27,6 @@ Page({
    */
   onLoad: function(options) {
     var self = this;
-    // wx.getSystemInfo({
-    //   success: function(res) {
-    //     console.log(res, app);
-    //     systemInfo.SDKVersion = res.SDKVersion;
-    //     systemInfo.batteryLevel = res.batteryLevel;
-    //     systemInfo.brand = res.brand;
-    //     systemInfo.errMsg = res.errMsg;
-    //     systemInfo.fontSizeSetting = res.fontSizeSetting;
-    //     systemInfo.language = res.language;
-    //     systemInfo.model = res.model;
-    //     systemInfo.pixelRatio = res.pixelRatio;
-    //     systemInfo.platform = res.platform;
-    //     systemInfo.statusBarHeight = res.statusBarHeight;
-    //     systemInfo.system = res.system;
-    //     systemInfo.version = res.version;
-    //     systemInfo.safeArea.width = res.safeArea.width;
-    //     systemInfo.safeArea.height = res.safeArea.height;
-    //     systemInfo.safeArea.top = res.safeArea.top;
-    //     systemInfo.safeArea.left = res.safeArea.left;
-    //     systemInfo.safeArea.right = res.safeArea.right;
-    //     systemInfo.safeArea.bottom = res.safeArea.bottom;
-    //     systemInfo.window.width = res.windowWidth;
-    //     systemInfo.window.height = res.windowHeight;
-    //     systemInfo.screen.width = res.screenWidth;
-    //     systemInfo.screen.height = res.screenHeight;
-    //     // console.log(systemInfo);
-
-    //     // self.setData({
-    //     //   cards: [{
-    //     //     x: 0,
-    //     //     y: systemInfo.statusBarHeight + 46
-    //     //   }]
-    //     // });
-    //     self.touchMoveHandler = new utils.TouchMoveHandler(systemInfo, touchMoveExecuteTrip);
-    //   }
-    // });
-    console.log(systemInfo, app);
     self.touchMoveHandler = new utils.TouchMoveHandler(systemInfo, touchMoveExecuteTrip);
 
     //获取发现页面数据 
@@ -430,21 +359,6 @@ Page({
       touchEvent["touchStart"] = e;
       return;
     }
-    // console.log("cards.onTouchMove(e)", {
-    //   x: e.touches[0].pageX - touchEvent["touchStart"].touches[0].pageX,
-    //   y: e.touches[0].pageY - touchEvent["touchStart"].touches[0].pageY + systemInfo.statusBarHeight + 46
-    // }, this.data.cards);
-    // // console.log("cards.onTouchMove(e)", e, touchEvent, {
-    // //   x: e.touches[0].pageX - touchEvent["touchStart"].touches[0].pageX,
-    // //   y: e.touches[0].pageY - touchEvent["touchStart"].touches[0].pageY + systemInfo.statusBarHeight + 46
-    // // });
-
-    // this.setData({
-    //   cards: [{
-    //     x: e.touches[0].pageX - touchEvent["touchStart"].touches[0].pageX,
-    //     y: e.touches[0].pageY - touchEvent["touchStart"].touches[0].pageY + systemInfo.statusBarHeight + 46
-    //   }]
-    // });
 
     var tripX = e.touches[0].pageX - touchEvent["touchStart"].touches[0].pageX;
     var tripY = e.touches[0].pageY - touchEvent["touchStart"].touches[0].pageY + systemInfo.statusBarHeight + 46;
@@ -737,14 +651,14 @@ Page({
     })
   },
   //遥控呼大码
-  callQrCode: utils.throttle(function (e) {
+  callQrCode: utils.throttle(function(e) {
     openid = e.currentTarget.dataset.openid;
     box_mac = e.currentTarget.dataset.box_mac;
     var qrcode_img = e.currentTarget.dataset.qrcode_img;
     app.controlCallQrcode(openid, box_mac, qrcode_img);
-  }, 3000),//呼大码结束
+  }, 3000), //呼大码结束
   //打开遥控器
-  openControl: function (e) {
+  openControl: function(e) {
     var that = this;
     var qrcode_url = api_url + '/Smallapp/index/getBoxQr?box_mac=' + box_mac + '&type=3';
     console.log(qrcode_url);
@@ -754,7 +668,7 @@ Page({
     })
   },
   //关闭遥控
-  closeControl: function (e) {
+  closeControl: function(e) {
     var that = this;
     that.setData({
       showControl: false,
@@ -762,20 +676,20 @@ Page({
 
   },
   //遥控退出投屏
-  exitForscreen: function (e) {
+  exitForscreen: function(e) {
     openid = e.currentTarget.dataset.openid;
     box_mac = e.currentTarget.dataset.box_mac;
     app.controlExitForscreen(openid, box_mac);
   },
   //遥控调整音量
-  changeVolume: function (e) {
+  changeVolume: function(e) {
     box_mac = e.currentTarget.dataset.box_mac;
     var change_type = e.currentTarget.dataset.change_type;
     app.controlChangeVolume(box_mac, change_type);
 
   },
   //遥控切换节目
-  changeProgram: function (e) {
+  changeProgram: function(e) {
     box_mac = e.currentTarget.dataset.box_mac;
     var change_type = e.currentTarget.dataset.change_type;
     app.controlChangeProgram(box_mac, change_type);

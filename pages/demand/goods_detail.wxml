@@ -17,8 +17,8 @@
     </button>
   </view>
   <scroll-view class="goods-info full_width flex-column-center-flex_start theme-container" scroll-y="true" scroll-with-animation="true">
-    <block wx:for="{{goods_info.detail_content}}" wx:key="item" wx:for-index="index" >
-    <image class="full_width" mode="widthFix" src="{{item}}"></image>
+    <block wx:for="{{goods_info.detail_content}}" wx:key="item" wx:for-index="index">
+      <image mode="widthFix" src="{{item}}"></image>
     </block>
   </scroll-view>
   <view class="page-bottom full_width flex-row-center-space_around theme-panel">
