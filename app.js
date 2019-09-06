@@ -609,7 +609,7 @@ App({
           },
           screenBottomSpace: (res.screenHeight - res.safeArea.bottom),
           documentWidth: res.safeArea.width,
-          documentHeight: res.safeArea.height
+          documentHeight: res.safeArea.bottom - res.statusBarHeight
         };
       }
     })
