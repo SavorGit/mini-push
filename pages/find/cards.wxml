@@ -54,6 +54,42 @@
         data-forscreen_id="{{cards_img[0].forscreen_id}}"></view>
     </view>
     <view wx:if="{{cards_img.length >= 2}}" class="card-item theme-container">
+      <view class="card-info">
+        <view class="content-top flex-row-flex_start-flex_end">
+          <view wx:if="{{cards_img[1].type == 1}}" class="content-type-icon official flex-row-center-center">官方</view>
+          <view wx:if="{{cards_img[1].type == 2}}" class="content-type-icon selected flex-row-center-center">精选</view>
+        </view>
+        <view class="content-main flex-row-center-flex_end">
+          <view wx:if="{{cards_img[1].res_type == 1}}" class="picture flex-row-center-space_around">
+            <label class="fa fa-picture-o fa-lg"></label>
+            <label>{{cards_img[1].pubdetail.length}}</label>
+          </view>
+          <view wx:if="{{cards_img[1].res_type == 2}}" class="video flex-row-center-space_around">
+            <label class="fa fa-play-circle-o fa-lg"></label>
+          </view>
+        </view>
+        <view class="content-bottom flex-row-center-space_between">
+          <view class="user-info flex-row-center-flex_start">
+            <image class="user-header-img" src="{{cards_img[1].avatarUrl}}"></image>
+            <view class="info flex-column-flex_start-space_around">
+              <view class="font_333333_28 full_width one-line-overflow">{{cards_img[1].nickName}}</view>
+              <view class="full_width flex-row-center-flex_start">
+                <view>{{cards_img[1].create_time}}</view>
+                <view>.</view>
+                <view class="address one-line-overflow">{{cards_img[1].hotel_name}}</view>
+              </view>
+            </view>
+          </view>
+          <view class="count-list flex-row-center-flex_end font_666666_20">
+            <view>
+              <view class="heart fa fa-heart-o fa-lg"> {{cards_img[1].collect_num}}</view>
+            </view>
+            <view>
+              <view class="fa fa-share-square-o fa-lg"> {{cards_img[1].share_num}}</view>
+            </view>
+          </view>
+        </view>
+      </view>
       <image class='bg-image' mode="aspectFill" src="{{cards_img[1].pubdetail[0].img_url}}"></image>
     </view>
     <view wx:if="{{cards_img.length >= 3}}" class="card-item theme-container">
@@ -91,3 +127,11 @@
 <modal show="{{showContinueModalPopWindow}}" width="90%" height='300rpx' border-radius="10rpx" title-text='提示' title-color="#333333" confirm-text='重试' confirm-color="#F6F3EE" cancel-text='前往优选' cancel-color='#FFFFFF' bindcancel="goHome" bindconfirm='getFindList'>
   <view style="color: #333333; padding: 0 50rpx;">加载失败，请重试！</view>
 </modal>
+
+<!-- 遥控器 -->
+<template is="remoteControlWindow" data='{{popRemoteControlWindow: showControl, qrcode_img:qrcode_img, box_mac:box_mac, openid:openid, is_open_simple:is_open_simple}}' />
+
+<!-- 固定悬浮按钮组 -->
+<view wx:if="{{box_mac !=''}}">
+  <template is="fixedSuspensionButtonGroup" />
+</view>

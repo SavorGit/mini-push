@@ -31,41 +31,9 @@ page {
   border: 1rpx solid #d6d6d6;
 }
 
-.card-wrap > .card-item:nth-child(1) {
-  width: 580rpx;
-  height: 790rpx;
-  margin-left: 75rpx;
-  margin-top: 40rpx;
-  z-index: 3;
-}
-
-.card-wrap > .card-item:nth-child(2) {
-  width: 600rpx;
-  height: 770rpx;
-  margin-left: 65rpx;
-  margin-top: 50rpx;
-  z-index: 2;
-}
-
-.card-wrap > .card-item:nth-child(3) {
-  width: 620rpx;
-  height: 750rpx;
-  margin-left: 55rpx;
-  margin-top: 60rpx;
-  z-index: 1;
-}
-
 .card-wrap > .card-item > image {
   width: 580rpx;
   height: 680rpx;
-  margin: 0;
-  border-radius: 10rpx;
-  background-color: #e0e0e0;
-}
-
-.card-wrap > .card-item:nth-child(2) > image {
-  width: 600rpx;
-  height: 660rpx;
   margin: 0;
   border-radius: 10rpx;
   background-color: #e0e0e0;
@@ -160,6 +128,43 @@ page {
 
 .card-wrap > .card-item > .card-info > .content-bottom > .count-list > view:nth-child(1) {
   margin-right: 20rpx;
+}
+
+.card-wrap > .card-item:nth-child(1) {
+  width: 580rpx;
+  height: 790rpx;
+  margin-left: 75rpx;
+  margin-top: 40rpx;
+  z-index: 3;
+}
+
+.card-wrap > .card-item:nth-child(2) {
+  width: 600rpx;
+  height: 770rpx;
+  margin-left: 65rpx;
+  margin-top: 50rpx;
+  z-index: 2;
+}
+
+.card-wrap > .card-item:nth-child(2) > image {
+  width: 600rpx;
+  height: 660rpx;
+}
+
+.card-wrap > .card-item:nth-child(2) > .card-info > .content-main {
+  padding: 560rpx 25rpx 0 25rpx;
+}
+
+.card-wrap > .card-item:nth-child(2) > .card-info > .content-bottom {
+  width: 580rpx;
+}
+
+.card-wrap > .card-item:nth-child(3) {
+  width: 620rpx;
+  height: 750rpx;
+  margin-left: 55rpx;
+  margin-top: 60rpx;
+  z-index: 1;
 }
 
 .card-wrap > .card-item > .touch-mask {
