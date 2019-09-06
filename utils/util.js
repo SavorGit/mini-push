@@ -272,44 +272,48 @@ const TouchMoveHandler = function(systemInfo, touchMoveExecuteTrip) {
     console.log("TouchMoveHandler.moveOnhorizontalHandel(page, top, left, x, startEvent, endEvent, callbackFunction)", page, startEvent, endEvent, top, left, x);
     let handler = this;
     let animation = wx.createAnimation({
-      duration: 200,
+      duration: 100,
       // timingFunction: 'cubic-bezier(.8,.2,.1,0.8)'
     });
     animation.left(left).top(top).translateX(x).translateY(0).step({
-      duration: 200,
+      duration: 100,
       timingFunction: 'linear'
     });
     page.setData({
       animationData: animation.export()
     });
     setTimeout(function() {
-      let cards_img = page.data.cards_img;
-      // cards_img.splice(0, 1);
-      cards_img.shift();
-
-      let backupAnimation = wx.createAnimation({
-        duration: 10,
-        // timingFunction: 'cubic-bezier(.8,.2,.1,0.8)'
-      });
-      backupAnimation.left(0).top(handler.options.systemInfo.statusBarHeight + 46).translateX(0).translateY(0).step({
-        duration: 10,
-        timingFunction: 'step-start'
-        // timingFunction: 'ease-out'
-      });
       page.setData({
-        cards_img: cards_img,
-        animationData: backupAnimation.export()
+        'cards_img[0]': page.data.cards_img[1],
+        animationData: {}
       });
       setTimeout(function() {
-        page.setData({
-          animationData: {}
+        let cards_img = page.data.cards_img;
+        cards_img.splice(1, 1);
+        let backupAnimation = wx.createAnimation({
+          duration: 10,
+          // timingFunction: 'cubic-bezier(.8,.2,.1,0.8)'
         });
-        console.log("TouchMoveHandler.moveOnhorizontalHandel(page, top, left, x, startEvent, endEvent, callbackFunction)#setTimeout", cards_img);
-        if (cards_img.length <= 3) {
-          handler.callbackHandel(callbackFunction, handler.Event.InsufficientData, page, startEvent, endEvent, top, left, x);
-        }
-      }, 10);
-    }, 200);
+        backupAnimation.left(0).top(handler.options.systemInfo.statusBarHeight + 46).translateX(0).translateY(0).step({
+          duration: 10,
+          timingFunction: 'step-start'
+          // timingFunction: 'ease-out'
+        });
+        page.setData({
+          cards_img: cards_img,
+          animationData: backupAnimation.export()
+        });
+        setTimeout(function() {
+          page.setData({
+            animationData: {}
+          });
+          console.log("TouchMoveHandler.moveOnhorizontalHandel(page, top, left, x, startEvent, endEvent, callbackFunction)#setTimeout", cards_img);
+          if (cards_img.length <= 3) {
+            handler.callbackHandel(callbackFunction, handler.Event.InsufficientData, page, startEvent, endEvent, top, left, x);
+          }
+        }, 10);
+      }, 200);
+    }, 100);
   };
 
   /**
