@@ -17,7 +17,7 @@ App({
     }
   },
   //电视播放
-  boxShow(box_mac = '', forscreen_id, pubdetail, res_type, res_len) {
+  boxShow(box_mac = '', forscreen_id, pubdetail, res_type, res_len,action) {
     var that = this;
     if (box_mac == '') {
       this.scanQrcode();
@@ -30,11 +30,13 @@ App({
       var forscreen_char = '';
       var mobile_brand = that.globalData.mobile_brand;
       var mobile_model = that.globalData.mobile_model;
-      if (res_type == 1) {
-        var action = 11; //发现图片点播
-      } else if (res_type == 2) {
-        var action = 12; //发现视频点播
-      }
+      // if (res_type == 1) {
+      //   var action = 11; //发现图片点播
+      // } else if (res_type == 2) {
+      //   var action = 12; //发现视频点播
+      // } else if(res_type==3){
+      //   var action = 12;
+      // }
       var forscreen_id = (new Date()).valueOf();
       wx.request({
         url: that.globalData.api_url + '/smallapp21/User/isForscreenIng',

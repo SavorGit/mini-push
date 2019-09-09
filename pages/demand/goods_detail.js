@@ -44,14 +44,14 @@ Page({
 
   },
   //电视播放
-  boxShow: function(e) {
+  /*boxShow: function(e) {
     var forscreen_id = e.currentTarget.dataset.goods_id;
 
     var pubdetail = e.currentTarget.dataset.pubdetail;
     var res_type = e.currentTarget.dataset.media_type;
     var res_nums = 1;
-    app.boxShow(box_mac, forscreen_id, pubdetail, res_type, res_nums);
-  },
+    app.boxShow(box_mac, forscreen_id, pubdetail, res_type, res_nums,5);
+  },*/
   clickBuyGoods: function(e) {
     var user_info = wx.getStorageSync('savor_user_info');
     var openid = user_info.openid;
@@ -122,7 +122,7 @@ Page({
     var pubdetail = e.currentTarget.dataset.pubdetail;
     var res_type = 2;
     var res_nums = 1;
-    app.boxShow(box_mac, forscreen_id, pubdetail, res_type, res_nums);
+    app.boxShow(box_mac, forscreen_id, pubdetail, res_type, res_nums,5);
   },
   //收藏资源
   onCollect: function(e) {

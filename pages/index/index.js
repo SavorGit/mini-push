@@ -835,7 +835,12 @@ Page({
     var pubdetail = e.currentTarget.dataset.pubdetail;
     var res_type = e.currentTarget.dataset.res_type;
     var res_nums  = e.currentTarget.dataset.res_nums;
-    app.boxShow(box_mac, forscreen_id, pubdetail, res_type, res_nums);
+    if (res_type == 1) {
+      var action = 11; //发现图片点播
+    } else if (res_type == 2) {
+      var action = 12; //发现视频点播
+    }
+    app.boxShow(box_mac, forscreen_id, pubdetail, res_type, res_nums, action);
   },
   phonecallevent: function (e) {
     var tel = e.target.dataset.tel;
