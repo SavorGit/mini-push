@@ -1,5 +1,14 @@
 /* pages/find/cards.wxss */
 
+.guided_mask_panel {
+  z-index: 10;
+}
+
+.guided_mask_panel > image {
+  width: 200rpx;
+  height: 180rpx;
+}
+
 .button-hover {
   background-color: unset;
   opacity: 1;
@@ -220,6 +229,6 @@ page {
   color: #bebebe;
 }
 
-.card-item.theme-container {
+/* .card-item.theme-container {
   transition: none !important;
-}
+} */

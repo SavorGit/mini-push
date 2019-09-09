@@ -106,10 +106,17 @@
     <view class="circular" bindtap="collectRes" data-id="{{cards_img[0].id}}" data-forscreen_id="{{cards_img[0].forscreen_id}}" data-type="{{cards_img[0].type}}" data-cards_img="{{cards_img}}">
       <image src="/images/icon2/FF757D_like.png"></image>
     </view>
-    <button class="circular"  open-type='share' data-forscreen_id="{{cards_img[0].forscreen_id}}" data-id="{{cards_img[0].id}}" data-type="{{cards_img[0].type}}" data-img_url="{{cards_img[0].pubdetail[0].img_url}}">
+    <button class="circular" open-type='share' data-forscreen_id="{{cards_img[0].forscreen_id}}" data-id="{{cards_img[0].id}}" data-type="{{cards_img[0].type}}" data-img_url="{{cards_img[0].pubdetail[0].img_url}}">
       <image src="/images/icon2/65E0A2_share.png"></image>
     </button>
   </view>
+
+  <!-- 引导蒙板 -->
+  <view wx:if="{{findCardListGuidedMask}}" class="guided_mask_panel launch_before flex-column-center-center full_width full_height">
+    <image src="/images/imgs/FFFFFF_LeftRightSlip.png"></image>
+    <view class="explain flex-column-center-flex_start font_FFFFFF_28">滑动查看下一内容</view>
+  </view>
+
 </view>
 <!-- 无数据的页面 -->
 <view wx:else class='container flex-column-center-flex_start theme-container' style='height: calc({{documentHeight}}px - 46px);'>
