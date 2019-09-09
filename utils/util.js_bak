@@ -272,66 +272,52 @@ const TouchMoveHandler = function(systemInfo, touchMoveExecuteTrip) {
     console.log("TouchMoveHandler.moveOnhorizontalHandel(page, top, left, x, startEvent, endEvent, callbackFunction)", page, startEvent, endEvent, top, left, x);
     let handler = this;
     let animation = wx.createAnimation({
-      duration: 200,
+      duration: 150,
       // timingFunction: 'cubic-bezier(.8,.2,.1,0.8)'
     });
     animation.left(left).top(top).translateX(x + 10).translateY(0).step({
-      duration: 200,
+      duration: 150,
       timingFunction: 'linear'
     });
-    let __cardsModelData = page.data.cards_img;
-    __cardsModelData.shift();
+    // let __cardsModelData = page.data.cards_img;
+    // __cardsModelData.shift();
     page.setData({
-      __cardsModelData: __cardsModelData,
+      // __cardsModelData: __cardsModelData,
       animationData: animation.export()
     });
     setTimeout(function() {
-      if (page.data.__cardsModelData.length > 0) {
-        page.setData({
-          'cards_img[0]': page.data.__cardsModelData[0],
-          animationData: {}
-        });
-      } else {
-        page.setData({
-          animationData: {}
-        });
-      }
+      page.setData({
+        'cards_img[0]': page.data.cards_img[1],
+        animationData: {}
+      });
       setTimeout(function() {
         let backupAnimation = wx.createAnimation({
           duration: 0,
           // timingFunction: 'cubic-bezier(.8,.2,.1,0.8)'
         });
-        backupAnimation.left(0).top(handler.options.systemInfo.statusBarHeight + 46).translateX(0).translateY(0).step({
+        // backupAnimation.left(0).top(handler.options.systemInfo.statusBarHeight + 46).translateX(0).translateY(0).step({
+        backupAnimation.left(0).top(handler.options.systemInfo.statusBarHeight + 46).step({
           duration: 0,
-          timingFunction: 'step-start',
-          // timingFunction: 'ease-out',
-          transformOrigin: '100% 0 0'
+          timingFunction: 'step-start'
+          // timingFunction: 'ease-out'
         });
         page.setData({
           animationData: backupAnimation.export()
         });
         setTimeout(function() {
-          if (page.data.__cardsModelData.length >= 3) {
-            page.setData({
-              'cards_img[1]': page.data.__cardsModelData[1],
-              'cards_img[2]': page.data.__cardsModelData[2],
-              animationData: {}
-            });
-          } else {
-            // let cards_img = page.data.cards_img;
-            // cards_img.splice(1, 1);
-            page.setData({
-              cards_img: page.data.__cardsModelData,
-              animationData: {}
-            });
-          }
-          console.log("TouchMoveHandler.moveOnhorizontalHandel(page, top, left, x, startEvent, endEvent, callbackFunction)#setTimeout", page.data.cards_img, page.data.__cardsModelData);
-          if (page.data.__cardsModelData.length <= 3) {
+          let cards_img = page.data.cards_img;
+          cards_img.splice(1, 1);
+          page.setData({
+            cards_img: cards_img,
+            animationData: {}
+          });
+          console.log("TouchMoveHandler.moveOnhorizontalHandel(page, top, left, x, startEvent, endEvent, callbackFunction)#setTimeout", cards_img);
+          if (cards_img.length <= 3) {
             handler.callbackHandel(callbackFunction, handler.Event.InsufficientData, page, startEvent, endEvent, top, left, x);
           }
         }, 0);
-      }, 200);
-    }, 150);
+      }, 100);
+    }, 200);
   };
 
   /**
