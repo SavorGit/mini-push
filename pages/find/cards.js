@@ -39,6 +39,7 @@ Page({
       isregister(app.globalData.openid);
       ishavecallbox(app.globalData.openid);
       getJxcontents(app.globalData.openid);
+      lead(app.globalData.openid);
     } else {
       app.openidCallback = openid => {
         if (openid != '') {
@@ -49,12 +50,38 @@ Page({
           isregister(openid);
           ishavecallbox(openid);
           getJxcontents(openid);
+          lead(openid);
         }
       }
     }
 
 
+    //引导蒙层
+    function lead(openid) {
+      
+      var user_info = wx.getStorageSync('savor_user_info');
+      var guide_prompt = user_info.guide_prompt;
+      if (guide_prompt.length == 0) {
+        self.setData({
+          findCardListGuidedMask: true,
+        })
+      } else {
+        var is_lead = 1;
+        for (var i = 0; i < guide_prompt.length; i++) {
+          if (guide_prompt[i] == 5) {
+            is_lead = 0;
+            break;
+          }
+        }
+        if (is_lead == 1) {
+          self.setData({
+            findCardListGuidedMask: true
+          })
+        }
+      }
+      
 
+    }
     function isregister(openid) {
       wx.request({
         url: api_url + '/smallapp21/User/isRegister',
@@ -185,12 +212,7 @@ Page({
 
   },
 
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function() {
-
-  },
+  
   goHome: function(e) {
     wx.reLaunch({
       url: '/pages/demand/index',
@@ -604,6 +626,7 @@ Page({
   },
   //点击分享按钮
   onShareAppMessage: function(res) {
+    console.log(res);
     var that = this;
     var user_info = wx.getStorageSync('savor_user_info');
     var openid = user_info.openid;
@@ -621,6 +644,7 @@ Page({
     } else if (type == 2 || type == 3) {
       var res_id = res.target.dataset.forscreen_id;
       var c_type = 2;
+      console.log(res_type);
       if (res_type == 1) {
         var share_url = '/pages/share/pic?forscreen_id=' + res_id;
 
@@ -628,6 +652,7 @@ Page({
         var share_url = '/pages/share/video?res_id=' + res_id + '&type=2';
       }
     }
+    console.log(share_url);
     var video_url = res.target.dataset.video_url;
     var img_url = res.target.dataset.img_url;
     var res_url = res.target.dataset.res_url;
@@ -750,5 +775,33 @@ Page({
     box_mac = e.currentTarget.dataset.box_mac;
     var change_type = e.currentTarget.dataset.change_type;
     app.controlChangeProgram(box_mac, change_type);
+  },
+  closeLead: function (e) {
+    var that = this;
+    var type = 5;
+    that.setData({
+      findCardListGuidedMask: false,
+    })
+    
+    
+    wx.request({
+      url: api_url + '/Smallapp3/content/guidePrompt',
+      header: {
+        'Content-Type': 'application/json'
+      },
+      data: {
+        openid: openid,
+        type: type,
+      },
+      success: function (res) {
+        if (res.data.code == 10000) {
+          var user_info = wx.getStorageSync('savor_user_info');
+
+          user_info.guide_prompt.push(type);
+          wx.setStorageSync('savor_user_info', user_info);
+
+        }
+      }
+    })
   },
 })
