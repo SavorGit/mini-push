@@ -363,12 +363,12 @@ Page({
     var tripX = e.touches[0].pageX - touchEvent["touchStart"].touches[0].pageX;
     var tripY = e.touches[0].pageY - touchEvent["touchStart"].touches[0].pageY + systemInfo.statusBarHeight + 46;
     var animation = wx.createAnimation({
-      duration: 10,
+      duration: 0,
       // timingFunction: 'cubic-bezier(.8,.2,.1,0.8)',
       timingFunction: 'linear'
     });
     animation.left(tripX).top(tripY).step({
-      duration: 10,
+      duration: 0,
       timingFunction: 'linear'
     });
     this.setData({
@@ -378,7 +378,7 @@ Page({
       self.setData({
         animationData: {}
       });
-    }, 10);
+    }, 0);
   },
   /**
    * 点击不喜欢
