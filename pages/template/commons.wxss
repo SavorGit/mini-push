@@ -71,7 +71,7 @@
 .fixedSuspensionButtonGroup {
   position: fixed;
   right: 0;
-  bottom: 150rpx;
+  bottom: 300rpx;
   width: 110rpx;
   height: 100rpx;
   z-index: 99;
