@@ -141,6 +141,9 @@ Page({
     }
 
     function getJxcontents(openid) {
+      wx.showLoading({
+        title: '数据加载中,请稍后',
+      })
       wx.request({
         url: api_url + '/Smallapp3/Find/findlist',
         headers: {
@@ -159,12 +162,13 @@ Page({
               showContinueModalPopWindow: true
             })
           }
-
+          wx.hideLoading();
         },
         fail: function(res) {
           self.setData({
             showContinueModalPopWindow: true
           })
+          wx.hideLoading();
         }
       })
     }
