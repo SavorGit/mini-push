@@ -288,20 +288,7 @@ Page({
           },
         })
       }
-      if (handleEvent == self.touchMoveHandler.Event.RightSlideMoved) {
-        wx.request({
-          url: api_url + '/Smallapp/collect/recLogs',
-          header: {
-            'content-type': 'application/json'
-          },
-          data: {
-            'openid': openid,
-            'res_id': res_id,
-            'type': c_type,
-            'status': 1,
-          },
-        })
-      }
+      
 
       if (handleEvent == self.touchMoveHandler.Event.InsufficientData) {
         var cards_img = self.data.cards_img;
@@ -534,6 +521,66 @@ Page({
       }
       //console.log(handleEvent, page, startEvent, endEvent, top, left, x);
     });
+  },
+  collectRes:function(e){
+    var that = this;
+    var user_info = wx.getStorageSync('savor_user_info');
+    var openid = user_info.openid;
+    var id = e.currentTarget.dataset.id;
+    var type = e.currentTarget.dataset.type;
+    var forscreen_id = e.currentTarget.dataset.forscreen_id;
+    var cards_img = e.currentTarget.dataset.cards_img;
+    
+    if (type == 2 || type == 3) {
+      var res_id = forscreen_id;
+      var c_type = 2;
+    } else {
+      var res_id = id;
+      var c_type = 3
+    }
+
+    wx.request({
+      url: api_url + '/Smallapp/collect/recLogs',
+      header: {
+        'content-type': 'application/json'
+      },
+      data: {
+        'openid': openid,
+        'res_id': res_id,
+        'type': c_type,
+        'status': 1,
+        'only_co':1,
+      },
+      success:function(res){
+        if(res.data.code==10000){
+          wx.showToast({
+            title: '收藏成功',
+            icon: 'success',
+            duration: 2000
+          })
+          for (var jk = 0; jk < 1; jk++) {
+            cards_img[jk].collect_num++;
+          }
+          that.setData({
+            cards_img: cards_img
+          })
+        }else {
+          wx.showToast({
+            title: '您已经收藏过了',
+            icon: 'none',
+            duration: 2000
+          })
+        }
+        
+      },fail:function(res){
+        wx.showToast({
+          title: '收藏失败，请重试',
+          icon: 'none',
+          duration: 2000
+        })
+      }
+    })
+    
   },
   //电视播放
   boxShow: function(e) {
