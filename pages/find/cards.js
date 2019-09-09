@@ -479,7 +479,7 @@ Page({
           },
         })
 
-        wx.request({
+        /*wx.request({
           url: api_url + '/Smallapp/collect/recLogs',
           header: {
             'content-type': 'application/json'
@@ -490,7 +490,7 @@ Page({
             'type': c_type,
             'status': 1,
           },
-        })
+        })*/
       }
       if (handleEvent == self.touchMoveHandler.Event.InsufficientData) {
         var cards_img = self.data.cards_img;
