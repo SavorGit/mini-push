@@ -129,7 +129,7 @@
   <view class="flex-row-flex_start-flex_end font_FFFFFF_30" style="width: calc(100% - 40rpx);height: 60rpx;padding: 20rpx;font-size: 50rpx;">
     <view class="" bindtap="closePopVideo"> X </view>
   </view>
-  <view class="full_width flex-column-center-center" style="height: calc(100% - 400rpx);">
+  <view class="full_width flex-column-center-flex_start" style="height: calc(100% - 400rpx);padding-top: 200rpx;">
     <video class="full_width" autoplay="true" src="{{pop_video_url}}" autoplay="true"></video>
   </view>
 </view>
