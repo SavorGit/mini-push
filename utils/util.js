@@ -272,13 +272,15 @@ const TouchMoveHandler = function(systemInfo, touchMoveExecuteTrip) {
     console.log("TouchMoveHandler.moveOnhorizontalHandel(page, top, left, x, startEvent, endEvent, callbackFunction)", page, startEvent, endEvent, top, left, x);
     let handler = this;
     let animation = wx.createAnimation({
-      duration: 200,
+      duration: 300,
+      timingFunction: 'linear'
       // timingFunction: 'cubic-bezier(.8,.2,.1,0.8)'
     });
-    animation.left(left).top(top).translateX(x + 10).translateY(0).step({
-      duration: 200,
-      timingFunction: 'linear'
-    });
+    animation.left(left).top(top).translateX(x).translateY(0).step();
+    // animation.left(left).top(top).translateX(x ).translateY(0).step({
+    //   duration: 100,
+    //   timingFunction: 'linear'
+    // });
     let __cardsModelData = page.data.cards_img;
     __cardsModelData.shift();
     page.setData({
@@ -305,7 +307,7 @@ const TouchMoveHandler = function(systemInfo, touchMoveExecuteTrip) {
           duration: 0,
           timingFunction: 'step-start',
           // timingFunction: 'ease-out',
-          transformOrigin: '100% 0 0'
+          // transformOrigin: '100% 0 0'
         });
         page.setData({
           animationData: backupAnimation.export()
@@ -331,7 +333,7 @@ const TouchMoveHandler = function(systemInfo, touchMoveExecuteTrip) {
           }
         }, 0);
       }, 200);
-    }, 150);
+    }, 300);
   };
 
   /**

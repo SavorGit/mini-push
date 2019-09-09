@@ -389,7 +389,7 @@ Page({
     var id = e.currentTarget.dataset.id;
     var type = e.currentTarget.dataset.type;
     var self = this;
-    self.touchMoveHandler.clickMoveHandle(self, self.touchMoveHandler.SlideType.LeftSlide, '675rpx', e, function(handleEvent, page, startEvent, endEvent, top, left, x) {
+    self.touchMoveHandler.clickMoveHandle(self, self.touchMoveHandler.SlideType.LeftSlide, '1350rpx', e, function(handleEvent, page, startEvent, endEvent, top, left, x) {
       if (handleEvent == self.touchMoveHandler.Event.LeftSlideMoved) {
         wx.request({
           url: api_url + '/Smallapp3/Find/recordViewfind',
@@ -464,7 +464,7 @@ Page({
       var res_id = id;
       var c_type = 3
     }
-    self.touchMoveHandler.clickMoveHandle(self, self.touchMoveHandler.SlideType.RightSlide, '675rpx', e, function(handleEvent, page, startEvent, endEvent, top, left, x) {
+    self.touchMoveHandler.clickMoveHandle(self, self.touchMoveHandler.SlideType.RightSlide, '1350rpx', e, function(handleEvent, page, startEvent, endEvent, top, left, x) {
       //console.log("handleEvent=" + handleEvent)
       if (handleEvent == self.touchMoveHandler.Event.RightSlideMoved) {
         wx.request({

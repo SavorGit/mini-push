@@ -91,6 +91,7 @@
     <view wx:if="{{cards_img.length >= 3}}" class="card-item theme-container">
       <image class='bg-image' mode="aspectFill" src="{{cards_img[2].pubdetail[0].img_url}}"></image>
     </view>
+    <view wx:if="{{cards_img.length >= 3}}" class="card-item theme-container"></view>
   </view>
   <view class="btn-group flex-row-center-space_between">
     <!-- <view class="circular theme-button-unlike" bindtap="flyLeft" data-id="{{cards_img[0].id}}" data-forscreen_id="{{cards_img[0].forscreen_id}}" data-type="{{cards_img[0].type}}"> -->

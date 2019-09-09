@@ -65,9 +65,9 @@
     "list": [
       {
         "pagePath": "pages/demand/index",
-        "text": "首页",
-        "iconPath": "/images/icon2/999999_home.png",
-        "selectedIconPath": "/images/icon2/000000_home.png"
+        "text": "优选",
+        "iconPath": "/images/icon2/999999_diamonds.png",
+        "selectedIconPath": "/images/icon2/000000_diamonds.png"
       },
       {
         "pagePath": "pages/find/cards",
