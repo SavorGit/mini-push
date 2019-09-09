@@ -543,10 +543,15 @@ Page({
     var pubdetail = e.currentTarget.dataset.pubdetail;
     var res_type = e.currentTarget.dataset.res_type;
     var res_nums = e.currentTarget.dataset.res_nums;
-    if(res_type==1){
-      var action = 11; //发现图片点播
-    }else if(res_type==2){
-      var action = 12; //发现视频点播
+    var type = e.currentTarget.dataset.type;
+    if(type==1){
+      var action = 5;
+    }else {
+      if (res_type == 1) {
+        var action = 11; //发现图片点播
+      } else if (res_type == 2) {
+        var action = 12; //发现视频点播
+      }
     }
     app.boxShow(box_mac, forscreen_id, pubdetail, res_type, res_nums, action);
   },
