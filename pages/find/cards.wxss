@@ -80,14 +80,19 @@ page {
   width: 80rpx;
   height: 30rpx;
   border-radius: 5rpx;
-  background-color: rgba(0, 0, 0, 0.6);
+  /* background-color: rgba(0, 0, 0, 0.6); */
+}
+
+.card-wrap > .card-item > .card-info > .content-main > .picture > image {
+  width: 30rpx;
+  height: 30rpx;
 }
 
 .card-wrap > .card-item > .card-info > .content-main > .video {
   width: 50rpx;
   height: 30rpx;
   border-radius: 5rpx;
-  background-color: rgba(0, 0, 0, 0.6);
+  /* background-color: rgba(0, 0, 0, 0.6); */
 }
 
 .card-wrap > .card-item > .card-info > .content-bottom {
@@ -189,6 +194,11 @@ page {
   border-radius: 50%;
 }
 
+.btn-group > .circular > image {
+  width: 100rpx;
+  height: 100rpx;
+}
+
 .btn-group > .on-tv {
   width: 260rpx;
   height: 60rpx;
@@ -202,6 +212,7 @@ page {
   font-weight: 900;
   color: #bebebe;
 }
+
 .card-item.theme-container{
   transition: none !important
 }

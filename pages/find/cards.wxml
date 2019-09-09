@@ -13,7 +13,8 @@
         </view>
         <view class="content-main flex-row-center-flex_end">
           <view wx:if="{{cards_img[0].res_type == 1}}" class="picture flex-row-center-space_around">
-            <label class="fa fa-picture-o fa-lg"></label>
+            <!-- <label class="fa fa-picture-o fa-lg"></label> -->
+            <image src="/images/icon2/FFFFFF_picture_2.png"></image>
             <label>{{cards_img[0].pubdetail.length}}</label>
           </view>
           <view wx:if="{{cards_img[0].res_type == 2}}" class="video flex-row-center-space_around">
@@ -55,7 +56,8 @@
         </view>
         <view class="content-main flex-row-center-flex_end">
           <view wx:if="{{cards_img[1].res_type == 1}}" class="picture flex-row-center-space_around">
-            <label class="fa fa-picture-o fa-lg"></label>
+            <!-- <label class="fa fa-picture-o fa-lg"></label> -->
+            <image src="/images/icon2/FFFFFF_picture_2.png"></image>
             <label>{{cards_img[1].pubdetail.length}}</label>
           </view>
           <view wx:if="{{cards_img[1].res_type == 2}}" class="video flex-row-center-space_around">
@@ -91,12 +93,16 @@
     </view>
   </view>
   <view class="btn-group flex-row-center-space_between">
-    <view class="circular theme-button-unlike" bindtap="flyLeft" data-id="{{cards_img[0].id}}" data-forscreen_id="{{cards_img[0].forscreen_id}}" data-type="{{cards_img[0].type}}">
-      <view class="heart fa fa-heart-o fa-lg"></view>
+    <!-- <view class="circular theme-button-unlike" bindtap="flyLeft" data-id="{{cards_img[0].id}}" data-forscreen_id="{{cards_img[0].forscreen_id}}" data-type="{{cards_img[0].type}}"> -->
+    <view class="circular" bindtap="flyLeft" data-id="{{cards_img[0].id}}" data-forscreen_id="{{cards_img[0].forscreen_id}}" data-type="{{cards_img[0].type}}">
+      <!-- <view class="heart fa fa-heart-o fa-lg"></view> -->
+      <image src="/images/icon2/CDCDCD_unlike.png"></image>
     </view>
     <view class="on-tv flex-column-center-center theme-button-dark" bindtap="boxShow" data-pubdetail="{{cards_img[0].pubdetail}}" data-res_type="{{cards_img[0].res_type}}" data-res_nums="{{cards_img[0].res_nums}}" data-forscreen_id="{{cards_img[0].id}}">电视播放</view>
-    <view class="circular theme-button-like" bindtap="flyRight" data-id="{{cards_img[0].id}}" data-forscreen_id="{{cards_img[0].forscreen_id}}" data-type="{{cards_img[0].type}}">
-      <view class="heart fa fa-heart fa-lg"></view>
+    <!-- <view class="circular theme-button-like" bindtap="flyRight" data-id="{{cards_img[0].id}}" data-forscreen_id="{{cards_img[0].forscreen_id}}" data-type="{{cards_img[0].type}}"> -->
+    <view class="circular" bindtap="flyRight" data-id="{{cards_img[0].id}}" data-forscreen_id="{{cards_img[0].forscreen_id}}" data-type="{{cards_img[0].type}}">
+      <!-- <view class="heart fa fa-heart fa-lg"></view> -->
+      <image src="/images/icon2/FF757D_like.png"></image>
     </view>
   </view>
 </view>
