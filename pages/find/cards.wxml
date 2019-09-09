@@ -94,17 +94,21 @@
     <view wx:if="{{cards_img.length >= 3}}" class="card-item theme-container"></view>
   </view>
   <view class="btn-group flex-row-center-space_between">
-    <!-- <view class="circular theme-button-unlike" bindtap="flyLeft" data-id="{{cards_img[0].id}}" data-forscreen_id="{{cards_img[0].forscreen_id}}" data-type="{{cards_img[0].type}}"> -->
-    <view class="circular" bindtap="flyLeft" data-id="{{cards_img[0].id}}" data-forscreen_id="{{cards_img[0].forscreen_id}}" data-type="{{cards_img[0].type}}">
-      <!-- <view class="heart fa fa-heart-o fa-lg"></view> -->
+    <!-- <view class="circular" bindtap="flyLeft" data-id="{{cards_img[0].id}}" data-forscreen_id="{{cards_img[0].forscreen_id}}" data-type="{{cards_img[0].type}}">
       <image src="/images/icon2/CDCDCD_unlike.png"></image>
     </view>
     <view class="on-tv flex-column-center-center theme-button-dark" bindtap="boxShow" data-pubdetail="{{cards_img[0].pubdetail}}" data-res_type="{{cards_img[0].res_type}}" data-res_nums="{{cards_img[0].res_nums}}" data-forscreen_id="{{cards_img[0].id}}" data-type="{{cards_img[0].type}}">电视播放</view>
-    <!-- <view class="circular theme-button-like" bindtap="flyRight" data-id="{{cards_img[0].id}}" data-forscreen_id="{{cards_img[0].forscreen_id}}" data-type="{{cards_img[0].type}}"> -->
     <view class="circular" bindtap="flyRight" data-id="{{cards_img[0].id}}" data-forscreen_id="{{cards_img[0].forscreen_id}}" data-type="{{cards_img[0].type}}">
-      <!-- <view class="heart fa fa-heart fa-lg"></view> -->
+      <image src="/images/icon2/FF757D_like.png"></image>
+    </view> -->
+
+    <view class="on-tv flex-column-center-center theme-button-dark" bindtap="boxShow" data-pubdetail="{{cards_img[0].pubdetail}}" data-res_type="{{cards_img[0].res_type}}" data-res_nums="{{cards_img[0].res_nums}}" data-forscreen_id="{{cards_img[0].id}}" data-type="{{cards_img[0].type}}">电视播放</view>
+    <view class="circular" bindtap="flyRight" data-id="{{cards_img[0].id}}" data-forscreen_id="{{cards_img[0].forscreen_id}}" data-type="{{cards_img[0].type}}">
       <image src="/images/icon2/FF757D_like.png"></image>
     </view>
+    <button class="circular" bindtap="flyLeft" data-id="{{cards_img[0].id}}" data-forscreen_id="{{cards_img[0].forscreen_id}}" data-type="{{cards_img[0].type}}">
+      <image src="/images/icon2/65E0A2_share.png"></image>
+    </button>
   </view>
 </view>
 <!-- 无数据的页面 -->

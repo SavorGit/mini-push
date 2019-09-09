@@ -16,7 +16,7 @@ page {
 
 .card-wrap {
   width: 100%;
-  height: 850rpx;
+  height: 950rpx;
   overflow: hidden;
 }
 
@@ -32,7 +32,7 @@ page {
 
 .card-wrap > .card-item > image {
   width: 580rpx;
-  height: 680rpx;
+  height: 780rpx;
   margin: 0;
   border-radius: 10rpx;
   background-color: #e0e0e0;
@@ -71,7 +71,7 @@ page {
 
 .card-wrap > .card-item > .card-info > .content-main {
   height: 45rpx;
-  padding: 580rpx 25rpx 0 25rpx;
+  padding: 680rpx 25rpx 0 25rpx;
   color: #fff;
   font-size: 24rpx;
 }
@@ -138,7 +138,7 @@ page {
 
 .card-wrap > .card-item:nth-child(1), .card-wrap > .card-item:nth-child(2) {
   width: 580rpx;
-  height: 790rpx;
+  height: 890rpx;
   margin-left: 75rpx;
   margin-top: 40rpx;
   z-index: 3;
@@ -150,7 +150,7 @@ page {
 
 .card-wrap > .card-item:nth-child(3) {
   width: 600rpx;
-  height: 770rpx;
+  height: 870rpx;
   margin-left: 65rpx;
   margin-top: 50rpx;
   z-index: 2;
@@ -158,11 +158,11 @@ page {
 
 .card-wrap > .card-item:nth-child(3) > image {
   width: 600rpx;
-  height: 660rpx;
+  height: 760rpx;
 }
 
 .card-wrap > .card-item:nth-child(3) > .card-info > .content-main {
-  padding: 560rpx 25rpx 0 25rpx;
+  padding: 660rpx 25rpx 0 25rpx;
 }
 
 .card-wrap > .card-item:nth-child(3) > .card-info > .content-bottom {
@@ -171,7 +171,7 @@ page {
 
 .card-wrap > .card-item:nth-child(4) {
   width: 620rpx;
-  height: 750rpx;
+  height: 850rpx;
   margin-left: 55rpx;
   margin-top: 60rpx;
   z-index: 1;
@@ -180,34 +180,35 @@ page {
 .card-wrap > .card-item > .touch-mask {
   position: absolute;
   width: 100%;
-  height: 690rpx;
+  height: 790rpx;
   top: 0;
   left: 0;
   box-shadow: none;
 }
 
 .btn-group {
-  width: 520rpx;
+  width: 600rpx;
   height: 100rpx;
-  padding: 60rpx 115rpx 0 115rpx;
+  padding: 30rpx 75rpx 0 75rpx;
 }
 
 .btn-group > .circular {
-  width: 100rpx;
-  height: 100rpx;
-  line-height: 100rpx;
+  width: 80rpx;
+  height: 80rpx;
+  line-height: 80rpx;
   text-align: center;
   border-radius: 50%;
+  margin: 0;
 }
 
 .btn-group > .circular > image {
-  width: 100rpx;
-  height: 100rpx;
+  width: 80rpx;
+  height: 80rpx;
 }
 
 .btn-group > .on-tv {
-  width: 260rpx;
-  height: 60rpx;
+  width: 400rpx;
+  height: 70rpx;
   font-size: 24rpx;
   border-radius: 5rpx;
 }
