@@ -86,6 +86,7 @@ page {
 .card-wrap > .card-item > .card-info > .content-main > .picture > image {
   width: 30rpx;
   height: 30rpx;
+  margin-right: 8rpx;
 }
 
 .card-wrap > .card-item > .card-info > .content-main > .video {
