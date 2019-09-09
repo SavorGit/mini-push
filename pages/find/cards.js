@@ -36,9 +36,10 @@ Page({
       })
       openid = app.globalData.openid;
       //判断用户是否注册
+      getJxcontents(app.globalData.openid);
       isregister(app.globalData.openid);
       ishavecallbox(app.globalData.openid);
-      getJxcontents(app.globalData.openid);
+      
       lead(app.globalData.openid);
     } else {
       app.openidCallback = openid => {
@@ -47,9 +48,10 @@ Page({
             openid: openid
           })
           openid = openid;
+          getJxcontents(openid);
           isregister(openid);
           ishavecallbox(openid);
-          getJxcontents(openid);
+          
           lead(openid);
         }
       }
@@ -142,7 +144,7 @@ Page({
 
     function getJxcontents(openid) {
       wx.showLoading({
-        title: '数据加载中,请稍后',
+        title: '数据加载中',
       })
       wx.request({
         url: api_url + '/Smallapp3/Find/findlist',
