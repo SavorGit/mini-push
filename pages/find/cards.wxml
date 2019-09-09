@@ -34,7 +34,8 @@
               </view>
             </view>
           </view>
-          <button class="count-list flex-row-center-flex_end font_666666_20" open-type='share' data-forscreen_id="{{cards_img[0].forscreen_id}}" data-id="{{cards_img[0].id}}" data-type="{{cards_img[0].type}}" data-img_url="{{cards_img[0].pubdetail[0].img_url}}" data-res_type="{{cards_img[0].res_type}}">
+          <button class="count-list flex-row-center-flex_end font_666666_20" open-type='share' data-forscreen_id="{{cards_img[0].forscreen_id}}" data-id="{{cards_img[0].id}}" data-type="{{cards_img[0].type}}" data-img_url="{{cards_img[0].pubdetail[0].img_url}}"
+            data-res_type="{{cards_img[0].res_type}}">
             <view>
               <view class="heart fa fa-heart-o fa-lg"> {{cards_img[0].collect_num}}</view>
             </view>
@@ -125,10 +126,10 @@
 
 <!-- 弹出视频播放页面 -->
 <view wx:if="{{showVideoWindow}}" class='container flex-column-center-flex_start' style='height: calc({{documentHeight}}px - 46px); background-color: #000000; position: absolute; left: 0; top: calc(46px + {{statusBarHeight}}px); z-index: 10;'>
-  <view class="flex-row-flex_start-flex_end font_FFFFFF_34" style="width: calc(100% - 40rpx);height: 60rpx;padding: 20rpx;font-size: 50rpx;">
-    <view class="fa fa-close fa-lg" bindtap="closePopVideo"></view>
+  <view class="flex-row-flex_start-flex_end font_FFFFFF_30" style="width: calc(100% - 40rpx);height: 60rpx;padding: 20rpx;font-size: 50rpx;">
+    <view class="" bindtap="closePopVideo"> X </view>
   </view>
-  <view class="full_width flex-column-center-center" style="height: calc(100% - 200rpx);">
+  <view class="full_width flex-column-center-center" style="height: calc(100% - 400rpx);">
     <video class="full_width" autoplay="true" src="{{pop_video_url}}" autoplay="true"></video>
   </view>
 </view>
