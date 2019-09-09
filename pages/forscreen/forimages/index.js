@@ -1,5 +1,5 @@
 const app = getApp();
-var tmp;
+//var tmp;
 var openid;
 var policy;
 var signature;
@@ -9,7 +9,7 @@ var upimgs = [];
 var imgsize = [];
 var post_imgs = [];
 var img_lenth = 0;
-var oss_img = [];
+//var oss_img = [];
 var tmp_percent = [];
 var forscreen_char = '';
 var pic_show_cur = [];
