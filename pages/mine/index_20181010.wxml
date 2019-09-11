@@ -2,125 +2,123 @@
 <import src="/pages/template/commons" />
 <template is="navigationBarForTopLevel" data='{{statusBarHeight: statusBarHeight,titleText:"热点投屏"}}' />
 
-<view class="container flex-column-center-flex_start theme-container" style='height: calc(100vh - 46px - {{statusBarHeight}}px);'>
-  <scroll-view class='page_main' scroll-y="true" scroll-with-animation="true" bindscrolltolower="loadMore" data-openid='{{openid}}'>
-    <view class='page_top flex-row-center-flex_start'>
-      <view class='user'>
-        <view class='head'>
-          <image wx:if="{{userinfo.avatarUrl ==''}}" src="http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default_user_head.png" lazy-load='http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/icon/grey_interact.png'></image>
-          <image wx:else src="{{userinfo.avatarUrl}}" lazy-load='http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/icon/grey_interact.png'></image>
-        </view>
-        <view class='info'>
-          <label class='font_999999_36' wx:if="{{userinfo.nickName ==''}}">热点用户</label>
-          <label class='font_999999_36' wx:else>{{userinfo.nickName}}</label>
-          <label class='font_666666_24'>ID:{{userinfo.id}}</label>
-        </view>
+<scroll-view class="container flex-column-center-flex_start theme-container" style='height: calc(100vh - 46px - {{statusBarHeight}}px);' scroll-y="true" scroll-with-animation="true" bindscrolltolower="loadMore" data-openid='{{openid}}'>
+  <view class='page_top flex-row-center-flex_start'>
+    <view class='user'>
+      <view class='head'>
+        <image wx:if="{{userinfo.avatarUrl ==''}}" src="http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default_user_head.png" lazy-load='http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/icon/grey_interact.png'></image>
+        <image wx:else src="{{userinfo.avatarUrl}}" lazy-load='http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/icon/grey_interact.png'></image>
       </view>
-      <view class='right flex-row-center-flex_end'></view>
+      <view class='info'>
+        <label class='font_999999_36' wx:if="{{userinfo.nickName ==''}}">热点用户</label>
+        <label class='font_999999_36' wx:else>{{userinfo.nickName}}</label>
+        <label class='font_666666_24'>ID:{{userinfo.id}}</label>
+      </view>
     </view>
+    <view class='right flex-row-center-flex_end'></view>
+  </view>
 
 
-    <!-- 我的公开 -->
-    <view class='theme-panel-2'>
-      <view class='swiper-tab font_666666_28'>
-        <view class="swiper-tab-item active">我的公开</view>
+  <!-- 我的公开 -->
+  <view class='theme-panel-2'>
+    <view class='swiper-tab font_666666_28'>
+      <view class="swiper-tab-item active">我的公开</view>
 
-        <!-- 如果没有数据更多不显示 -->
-        <navigator wx:if="{{publiclist  !=''}}" class="swiper-tab-item font_666666_24" style='margin-left: 340rpx;margin-right: 0rpx;' url='/pages/mine/index?box_mac={{box_mac}}'>查看更多>></navigator>
-      </view>
-      <view class='content'>
-        <view class='con_main flex-row-center-space_between'>
+      <!-- 如果没有数据更多不显示 -->
+      <navigator wx:if="{{publiclist  !=''}}" class="swiper-tab-item font_666666_24" style='margin-left: 340rpx;margin-right: 0rpx;' url='/pages/mine/index?box_mac={{box_mac}}'>查看更多>></navigator>
+    </view>
+    <view class='content'>
+      <view class='con_main flex-row-center-space_between'>
 
-          <!-- 有数据时-->
-          <view wx:if="{{publiclist != ''}}" class="weui-grids full_width">
-            <view class="weui-grid" wx:for="{{publiclist}}" wx:key="key" wx:for-item="bean" wx:for-index="index">
-              <view class='yingtao'>
-                <navigator url="/pages/mine/index?box_mac={{box_mac}}">
-                  <image class="pic_show" mode='aspectFill' src="{{bean.imgurl}}"></image>
-                  <view class='cover'>
-                    <view class='share font_FFFFFF_32'>
-                      <label wx:if="{{bean.is_collect == 1}}" class="fa fa-heart fa-lg" style="color: #E11E4C;"></label>
-                      <label wx:else class="fa fa-heart-o fa-lg" style="color: #FFFFFF;"></label>
-                      <label>{{bean.collect_num}}</label>
-                    </view>
+        <!-- 有数据时-->
+        <view wx:if="{{publiclist != ''}}" class="weui-grids full_width">
+          <view class="weui-grid" wx:for="{{publiclist}}" wx:key="key" wx:for-item="bean" wx:for-index="index">
+            <view class='yingtao'>
+              <navigator url="/pages/mine/index?box_mac={{box_mac}}">
+                <image class="pic_show" mode='aspectFill' src="{{bean.imgurl}}"></image>
+                <view class='cover'>
+                  <view class='share font_FFFFFF_32'>
+                    <label wx:if="{{bean.is_collect == 1}}" class="fa fa-heart fa-lg" style="color: #E11E4C;"></label>
+                    <label wx:else class="fa fa-heart-o fa-lg" style="color: #FFFFFF;"></label>
+                    <label>{{bean.collect_num}}</label>
                   </view>
-                </navigator>
-              </view>
+                </view>
+              </navigator>
             </view>
           </view>
-
-          <!-- 无数据 -->
-          <view wx:else class="full_width flex-column-center-space_between font_666666_30">你还没有公开过作品~</view>
-
         </view>
 
+        <!-- 无数据 -->
+        <view wx:else class="full_width flex-column-center-space_between font_666666_30">你还没有公开过作品~</view>
+
       </view>
+
     </view>
+  </view>
 
-    <view style='height: 20rpx;'></view>
+  <view style='height: 20rpx;'></view>
 
-    <!-- 我的收藏 -->
-    <view class='theme-panel-2'>
-      <view class='swiper-tab font_333333_28'>
-        <view class="swiper-tab-item active">我喜欢</view>
+  <!-- 我的收藏 -->
+  <view class='theme-panel-2'>
+    <view class='swiper-tab font_333333_28'>
+      <view class="swiper-tab-item active">我喜欢</view>
 
-        <!-- 如果没有数据更多不显示 -->
-        <navigator wx:if="{{collectlist !=''}}" class="swiper-tab-item font_666666_24" style='margin-left: 340rpx;margin-right: 0rpx;' url='/pages/mine/favorite?box_mac={{box_mac}}'>查看更多>></navigator>
-      </view>
-      <view class='content'>
-        <view class='con_main flex-row-center-space_between'>
+      <!-- 如果没有数据更多不显示 -->
+      <navigator wx:if="{{collectlist !=''}}" class="swiper-tab-item font_666666_24" style='margin-left: 340rpx;margin-right: 0rpx;' url='/pages/mine/favorite?box_mac={{box_mac}}'>查看更多>></navigator>
+    </view>
+    <view class='content'>
+      <view class='con_main flex-row-center-space_between'>
 
-          <!-- 有数据时 -->
-          <view wx:if="{{collectlist !=''}}" class="weui-grids full_width">
-            <view class="weui-grid" wx:for="{{collectlist}}" wx:key="key" wx:for-item="bean" wx:for-index="index">
-              <view class='yingtao' wx:if="{{bean.res_type=='1'}}">
-                <navigator class='full_width full_height' url="/pages/find/picture?forscreen_id={{bean.res_id}}&box_mac={{box_mac}}">
-                  <image class="pic_show" mode='aspectFill' src="{{bean.imgurl}}"></image>
-                  <view class='cover'>
-                    <view class='share font_FFFFFF_32'>
-                      <label class="fa fa-heart fa-lg" style="color: #E11E4C;"></label>
-                      <label>{{bean.collect_num}}</label>
-                    </view>
+        <!-- 有数据时 -->
+        <view wx:if="{{collectlist !=''}}" class="weui-grids full_width">
+          <view class="weui-grid" wx:for="{{collectlist}}" wx:key="key" wx:for-item="bean" wx:for-index="index">
+            <view class='yingtao' wx:if="{{bean.res_type=='1'}}">
+              <navigator class='full_width full_height' url="/pages/find/picture?forscreen_id={{bean.res_id}}&box_mac={{box_mac}}">
+                <image class="pic_show" mode='aspectFill' src="{{bean.imgurl}}"></image>
+                <view class='cover'>
+                  <view class='share font_FFFFFF_32'>
+                    <label class="fa fa-heart fa-lg" style="color: #E11E4C;"></label>
+                    <label>{{bean.collect_num}}</label>
                   </view>
-                </navigator>
-              </view>
-              <view class='yingtao' wx:else>
-                <navigator wx:if="{{bean.type==1 || bean.type==3}}" url="/pages/forscreen/video/launch_video?video_url={{bean.res_url}}&video_name={{bean.title}}&box_mac={{box_mac}}&res_id={{bean.res_id}}&filename={{bean.filename}}&video_img_url={{bean.imgurl}}">
-                  <image class="pic_show" mode='aspectFill' src="{{bean.imgurl}}"></image>
-                  <view class='cover'>
-                    <view class='share font_FFFFFF_32'>
-                      <label class="fa fa-heart fa-lg" style="color: #E11E4C;"></label>
-                      <label>{{bean.collect_num}}</label>
-                    </view>
+                </view>
+              </navigator>
+            </view>
+            <view class='yingtao' wx:else>
+              <navigator wx:if="{{bean.type==1 || bean.type==3}}" url="/pages/forscreen/video/launch_video?video_url={{bean.res_url}}&video_name={{bean.title}}&box_mac={{box_mac}}&res_id={{bean.res_id}}&filename={{bean.filename}}&video_img_url={{bean.imgurl}}">
+                <image class="pic_show" mode='aspectFill' src="{{bean.imgurl}}"></image>
+                <view class='cover'>
+                  <view class='share font_FFFFFF_32'>
+                    <label class="fa fa-heart fa-lg" style="color: #E11E4C;"></label>
+                    <label>{{bean.collect_num}}</label>
                   </view>
-                </navigator>
+                </view>
+              </navigator>
 
-                <navigator wx:if="{{bean.type==2}}" class='full_width full_height' url="/pages/find/video?forscreen_id={{bean.res_id}}&box_mac={{box_mac}}">
-                  <image class="pic_show" mode='aspectFill' src="{{bean.imgurl}}"></image>
-                  <view class='cover'>
-                    <view class='share font_FFFFFF_32'>
-                      <label class="fa fa-heart fa-lg" style="color: #E11E4C;"></label>
-                      <label>{{bean.collect_num}}</label>
-                    </view>
+              <navigator wx:if="{{bean.type==2}}" class='full_width full_height' url="/pages/find/video?forscreen_id={{bean.res_id}}&box_mac={{box_mac}}">
+                <image class="pic_show" mode='aspectFill' src="{{bean.imgurl}}"></image>
+                <view class='cover'>
+                  <view class='share font_FFFFFF_32'>
+                    <label class="fa fa-heart fa-lg" style="color: #E11E4C;"></label>
+                    <label>{{bean.collect_num}}</label>
                   </view>
-                </navigator>
-              </view>
+                </view>
+              </navigator>
             </view>
           </view>
-
-          <!--无数据 -->
-          <view wx:else class="full_width flex-column-center-space_between font_666666_30">你赞过的作品都会放到这里哦~</view>
-
         </view>
 
+        <!--无数据 -->
+        <view wx:else class="full_width flex-column-center-space_between font_666666_30">你赞过的作品都会放到这里哦~</view>
+
       </view>
+
     </view>
+  </view>
 
-    <!-- 滚动页面底部留白 -->
-    <view class='nav_bottom_space'></view>
+  <!-- 滚动页面底部留白 -->
+  <view class='nav_bottom_space'></view>
 
-  </scroll-view>
-</view>
+</scroll-view>
 
 <!-- 遥控器 -->
 <template is="remoteControlWindow" data='{{popRemoteControlWindow: showControl, qrcode_img:qrcode_img, box_mac:box_mac, openid:openid, is_open_simple:is_open_simple}}' />
