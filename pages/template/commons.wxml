@@ -1,6 +1,6 @@
 <!--pages/template/commons.wxml-->
 
-<!-- 微信授权登录 -->
+<!-- 微信授权登录 强制授权 -->
 <template name="wxAuthLogin">
   <modal show="{{show}}" height='420rpx' width="90%" background-color='unset' border-radius="0rpx" title-text="" confirm-text="" cancel-text="">
     <view class='wxAuthLogin-container theme-wxAuthLogin-container'>
@@ -18,6 +18,31 @@
         </label>
       </view>
       <view class='wxAuthLogin-bottom'>
+        <button class='savor-btn theme-button' open-type="getUserInfo" bindgetuserinfo="onGetUserInfo">微信授权登录</button>
+      </view>
+    </view>
+  </modal>
+</template>
+
+<!-- 微信授权登录 非强制授权-->
+<template name="wxAuthLoginOp">
+  <modal show="{{showOp}}" height='420rpx' width="90%" background-color='unset' border-radius="0rpx" title-text="" confirm-text="" cancel-text="">
+    <view class='wxAuthLogin-container theme-wxAuthLogin-container'>
+      <view class='wxAuthLogin-top'>
+        <view class='opt'>
+        </view>
+        <view class='title'>
+          <label class='font_1CBEB6_34'>温馨提示</label>
+        </view>
+      </view>
+      <view class='wxAuthLogin-middle'>
+        <label class='content font_333333_30'>使用"热点投屏"过程中,请遵守相关法律法规。</label>
+        <label class='link_relief'>
+          <navigator url="/pages/forscreen/relief">免责声明</navigator>
+        </label>
+      </view>
+      <view class='wxAuthLogin-bottom'>
+        <button class='savor-btn theme-button'  bindtap="closeWxAuth">暂不登陆</button>
         <button class='savor-btn theme-button' open-type="getUserInfo" bindgetuserinfo="onGetUserInfo">微信授权登录</button>
       </view>
     </view>

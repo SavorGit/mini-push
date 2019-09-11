@@ -69,9 +69,9 @@ Page({
             data: res.data.result.userinfo,
           })
           if (res.data.result.userinfo.is_wx_auth != 3) {
-            that.setData({
+            /*that.setData({
               showModal: true
-            })
+            })*/
           }
         },
         fail: function(e) {
@@ -133,9 +133,9 @@ Page({
                 data: res.data.result.userinfo,
               })
               if (res.data.result.userinfo.is_wx_auth != 3) {
-                that.setData({
+                /*that.setData({
                   showModal: true
-                })
+                })*/
               }
             },
             fail: function(e) {
@@ -920,6 +920,12 @@ Page({
       success:function(res){
 
       }
+    })
+  },
+  closeWxAuth:function(e){
+    var that = this;
+    that.setData({
+      showModal:false,
     })
   }
 })
