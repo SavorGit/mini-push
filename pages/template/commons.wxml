@@ -41,9 +41,9 @@
           <navigator url="/pages/forscreen/relief">免责声明</navigator>
         </label>
       </view>
-      <view class='wxAuthLogin-bottom'>
-        <button class='savor-btn theme-button'  bindtap="closeWxAuth">暂不登陆</button>
-        <button class='savor-btn theme-button' open-type="getUserInfo" bindgetuserinfo="onGetUserInfo">微信授权登录</button>
+      <view class='wxAuthLogin-bottom flex-row-center-space_between'>
+        <button class='savor-btn theme-button-dark' style="width: 40%;" bindtap="closeWxAuth">暂不登陆</button>
+        <button class='savor-btn theme-button' style="width: 40%;" open-type="getUserInfo" bindgetuserinfo="onGetUserInfo">微信授权登录</button>
       </view>
     </view>
   </modal>
