@@ -19,7 +19,8 @@ Page({
     documentHeight: app.SystemInfo.documentHeight,
     screenBottomSpace: systemInfo.screenBottomSpace,
     cards_img: [],
-    box_mac: ''
+    box_mac: '',
+    marked_words:'暂无数据'
   },
 
   /**
@@ -236,7 +237,11 @@ Page({
       },
       success: function(res) {
         if (res.data.code == 10000) {
-
+          if(res.data.result.length==0){
+            that.setData({
+              marked_words:'亲～别划了，已经没有了^_^'
+            })
+          }
           that.setData({
             cards_img: res.data.result
           })
@@ -343,6 +348,11 @@ Page({
               for (var k = 0; k < list_info.length; k++) {
                 self.data.cards_img.push(list_info[k]);
               }
+              if(res.data.result.length==0){
+                self.setData({
+                  marked_words:'亲～别划了，已经没有了^_^'
+                })
+              }
               //self.data.cards_img.push(res.data.result);
 
             } else {
@@ -442,6 +452,11 @@ Page({
               for (var k = 0; k < list_info.length; k++) {
                 self.data.cards_img.push(list_info[k]);
               }
+              if(res.data.result.list_info==0){
+                self.setData({
+                  marked_words:'亲～别划了，已经没有了^_^'
+                })
+              }
               //self.data.cards_img.push(res.data.result);
 
             } else {
@@ -532,7 +547,11 @@ Page({
                 self.data.cards_img.push(list_info[k]);
               }
               //self.data.cards_img.push(res.data.result);
-
+              if(res.data.result.length==0){
+                self.setData({
+                  marked_words:'亲～别划了，已经没有了^_^'
+                })
+              }
             } else {
               self.setData({
                 showContinueModalPopWindow: true,

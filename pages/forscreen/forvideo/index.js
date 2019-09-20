@@ -50,6 +50,7 @@ Page({
     is_open_control: false,
     showGuidedMaskBeforLaunch: false,
     showGuidedMaskAfterLaunch: false,
+    res_head_desc: '视频',
   },
 
   /**
@@ -261,7 +262,9 @@ Page({
         success: function (res) {
           clearInterval(timer8_0);
           var res_eup_time = (new Date()).valueOf();
-          
+          that.setData({
+            showVedio: false,
+          })
           wx.request({
             url: api_url + '/Netty/Index/index',
             headers: {
@@ -345,7 +348,7 @@ Page({
         if (res.progress == 100) {
           
           that.setData({
-            showVedio:false,
+            //showVedio:false,
             oss_video_url: oss_url + "/forscreen/resource/" + timestamp + postf_t,
             upload_vedio_temp:'',
             is_view_control: true,
@@ -357,11 +360,11 @@ Page({
         }
 
       });
-      that.setData({
-        replay_video_url: "forscreen/resource/" + timestamp + postf_t,
-        showVedio: true,
-        upload_vedio_temp: filename,
-      });
+      // that.setData({
+      //   replay_video_url: "forscreen/resource/" + timestamp + postf_t,
+      //   showVedio: true,
+      //   upload_vedio_temp: filename,
+      // });
     }
     //引导蒙层
     function lead(openid) {
@@ -1185,7 +1188,7 @@ Page({
     app.recordFormId(openid, formId);
     if (typeof (forscreen_id) == 'undefined') {
       wx.showToast({
-        title: '助力参数异常，请重选照片',
+        title: '助力参数异常，请重试或重选视频',
         icon: 'none',
         duration: 2000
       })

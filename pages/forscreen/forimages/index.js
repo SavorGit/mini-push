@@ -43,6 +43,7 @@ Page({
     is_assist:0,       //是否助力
     showGuidedMaskBeforLaunch:false,
     showGuidedMaskAfterLaunch:false,
+    res_head_desc:'图片',
   },
   /**
    * 生命周期函数--监听页面加载
@@ -359,7 +360,11 @@ Page({
           if (order == img_len) {
             clearTimeout(timer8_0);
           }
-          
+          that.setData({
+            showThird: true,
+            showTpBt: false,
+            forscreen_id: forscreen_id,
+          });
           var res_eup_time = (new Date()).valueOf();
           wx.request({
             url: api_url + '/Netty/Index/index',
@@ -438,8 +443,16 @@ Page({
             tmp_percent: tmp_percent
           })
         },
-        fial: function ({ errMsg }) {
-          console.log('uploadImage fial,errMsg is', errMsg)
+        fail: function ({ errMsg }) {
+          //console.log('uploadImage fial,errMsg is', errMsg)
+          wx.navigateBack({
+            delta: 1
+          })
+          wx.showToast({
+            title: '投屏失败，请重试',
+            icon:'none',
+            duration:2000
+          })
         },
       });
       upload_task.onProgressUpdate((res) => {
@@ -489,11 +502,7 @@ Page({
         //第二步
         uploadOssNew(policy, signature, filename, resource_size, box_mac, openid, timestamp, i, img_len, forscreen_char, forscreen_id, res_sup_time, avatarUrl, nickName, public_text, timer8_0, tmp_imgs);
       }
-      that.setData({
-        showThird: true,
-        showTpBt: false,
-        forscreen_id: forscreen_id,
-      });
+      
     }
     //引导蒙层
     function lead(openid, is_share) {
@@ -1012,7 +1021,7 @@ Page({
     app.recordFormId(openid, formId);
     if (typeof (forscreen_id)=='undefined'){
       wx.showToast({
-        title: '助力参数异常，请重选照片',
+        title: '助力参数异常，请重试或重选照片',
         icon:'none',
         duration:2000
       })

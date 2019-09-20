@@ -8,7 +8,7 @@
 <!-- ================================== 上传图片前 ================================== -->
 <view wx:if="{{!showThird}}" class="container flex-column-center-flex_start theme-container" style='height: calc(100vh - 46px - {{statusBarHeight}}px);'>
   <view class="full_width before_launch">
-    <template is="pageTop" />
+    <template is="pageTop" data="{{res_head_desc:res_head_desc}}" />
     <form bindsubmit="up_forscreen" report-submit="true">
       <view class='page_main'>
         <view class="weui-grids grids-frame">

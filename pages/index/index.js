@@ -254,7 +254,12 @@ Page({
       success: function(res) {
         if (res.data.code == 10000) {
           var imgUrls = res.data.result[2];
-          var imgUrls_mid = res.data.result[3];
+          var imgUrls_mid = [];
+          
+          if(typeof(res.data.result[3])!='undefined'){
+            var imgUrls_mid = res.data.result[3];
+          }
+          
           //console.log(res);
           that.setData({
             imgUrls: imgUrls,
