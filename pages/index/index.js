@@ -109,7 +109,7 @@ Page({
         }
       });
       //是否显示活动
-      isShowAct();
+      isShowAct(app.globalData.openid);
     } else {
       app.openidCallback = openid => {
         if (openid != '') {
@@ -173,12 +173,12 @@ Page({
             }
           });
           //是否显示活动
-          isShowAct();
+          isShowAct(openid);
         }
       }
     }
     //是否显示活动
-    function isShowAct(){
+    function isShowAct(openid){
       var goods_info = wx.getStorageSync('savor_goods_info');
       if(goods_info=='' || typeof(goods_info)=='undefined'){
         //************************上线去掉 */
@@ -188,6 +188,7 @@ Page({
       }else {
         var goods_id = goods_info.goods_id;
         var goods_box_mac = goods_info.goods_box_mac;
+        var uid      = goods_info.uid;
         that.setData({
           goods_id:goods_id,
           goods_box_mac:goods_box_mac,
@@ -199,6 +200,8 @@ Page({
           },
           data: {
             goods_id: goods_id,
+            uid:uid,
+            openid:openid
           },
           success:function(res){
             //console.log(res);
@@ -217,6 +220,7 @@ Page({
                 showButton4JD:is_jd,
                 showButton4Favorites:is_jd
               });
+              
             }
             
           }
@@ -752,6 +756,24 @@ Page({
           
         }
       }
+    })
+  },
+  //第三方购买（京东）
+  tpBuyGoods:function(e){
+    var goods_id = e.currentTarget.dataset.goods_id;
+    var user_info = wx.getStorageSync("savor_user_info");
+    openid = user_info.openid;
+    wx.request({
+      url: api_url +'/Smallapp3/datalog/recordlog',
+      header: {
+        'content-type': 'application/json'
+      },
+      data:{
+        action_type:3,
+        data_id:goods_id,
+        openid: openid,
+        type:2,
+      },
     })
   },
   //收藏商品

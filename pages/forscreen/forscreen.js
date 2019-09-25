@@ -76,7 +76,13 @@ Page({
 
       var pams_arr = pams.split('_');
       if (pams_arr[0] =='ag'){
-        var goods_info = {"goods_id":pams_arr[3] ,"goods_box_mac":pams_arr[1]};
+        if(pams_arr.length==4){
+          var goods_info = { "goods_id": pams_arr[3], "goods_box_mac": pams_arr[1], "uid":0 };
+          
+        } else if (pams_arr.length == 5){
+          var goods_info = { "goods_id": pams_arr[3], "goods_box_mac": pams_arr[1],"uid":pams_arr[4]};
+          
+        }
         wx.setStorageSync('savor_goods_info', goods_info)
         var box_mac = pams_arr[1];
         var code_type = pams_arr[2] ;
@@ -146,9 +152,15 @@ Page({
         })
       }
     } else if (typeof (options.g) != 'undefined'){ //小程序内部扫销售端商品活动码
+      console.log(options.g)
       var g = options.g;
       var g_arr = g.split('_');
-      var goods_info = {"goods_id": g_arr[3] ,"goods_box_mac":g_arr[1]};
+      
+      if (g_arr.length == 4) {
+        var goods_info = { "goods_id": g_arr[3], "goods_box_mac": g_arr[1], "uid": 0 }
+      } else if (g_arr.length == 5) {
+        var goods_info = { "goods_id": g_arr[3], "goods_box_mac": g_arr[1], "uid": g_arr[4] };
+      }
       var box_mac = g_arr[1];
       var code_type = g_arr[2];
       wx.setStorageSync('savor_goods_info', goods_info)
