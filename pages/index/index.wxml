@@ -173,7 +173,7 @@
     <view class="flex-column-center-start" style="width: 100%;height: calc(100% - 160rpx);color: #666666;">
       <image style="width: 480rpx;height: 270rpx;" src="{{goods_info.img_url}}"></image>
       <view class="one-line-overflow" style="width: 480rpx;height: calc(100% - 320rpx);line-height: 3;text-align: center;">{{goods_info.name}}</view>
-      <view class="flex-row-center-center" style="width: 100%;height: 80rpx;border-top: 2rpx solid #ededed;">
+      <!-- <view class="flex-row-center-center" style="width: 100%;height: 80rpx;border-top: 2rpx solid #ededed;">
         <label style="width: 70rpx;">数量</label>
         <view style="width: 32rpx; height: 32rpx;" bindtap="changeActNums" data-type="1">
           <label class="fa fa-plus-square-o fa-lg" style="width: 32rpx; height: 32rpx; color: #666666;"></label>
@@ -182,18 +182,18 @@
         <view style="width: 32rpx; height: 32rpx;" bindtap="changeActNums" data-type="2">
           <label class="fa fa-minus-square-o fa-lg" style="width: 32rpx; height: 32rpx; color: #666666;"></label>
         </view>
-      </view>
+      </view> -->
     </view>
     <view class="flex-row-center-center" style="width: 100%;height: 80rpx;border-top: 2rpx solid #ededed;font-size: 28rpx;">
-      <view style="width: 100%;height: 80rpx;line-height: 80rpx; color: #448ACA; text-align: center;" bindtap="shopBuyGoods" data-goods_id="{{goods_id}}" data-goods_nums="{{goods_nums}}" data-goods_box_mac="{{goods_box_mac}}" data-buy_type="1">店内购买</view>
+      <!-- <view style="width: 100%;height: 80rpx;line-height: 80rpx; color: #448ACA; text-align: center;" bindtap="shopBuyGoods" data-goods_id="{{goods_id}}" data-goods_nums="{{goods_nums}}" data-goods_box_mac="{{goods_box_mac}}" data-buy_type="1">店内购买</view> -->
       <!-- <view wx:if='{{showButton4JD}}' style="width: 100%;height: 80rpx;line-height: 80rpx; color: #666666; text-align: center;border-left: 2rpx solid #ededed;" bindtap="jdBuy" data-h5_url="{{jd_url}}">京东购买</view> -->
-      <navigator bindtap="tpBuyGoods" data-goods_id="{{goods_id}}" data-goods_nums="{{goods_nums}}" data-goods_box_mac="{{goods_box_mac}}" data-buy_type="2" wx:if='{{showButton4JD}}' style="width: 100%;height: 80rpx;line-height: 80rpx; color: #666666; text-align: center;border-left: 2rpx solid #ededed;"
-        target="miniProgram" app-id="{{goods_info.appid}}" path="{{jd_url}}">京东购买</navigator>
+      <navigator  bindtap="tpBuyGoods" data-goods_id="{{goods_id}}" data-goods_nums="{{goods_nums}}" data-goods_box_mac="{{goods_box_mac}}" data-buy_type="2" wx:if='{{showButton4JD}}' style="width: 100%;height: 80rpx;line-height: 80rpx; color: #666666; text-align: center;border-left: 2rpx solid #ededed;"
+        target="miniProgram" app-id="{{goods_info.appid}}" path="{{jd_url}}">{{goods_info.buybutton}}</navigator>
     </view>
   </view>
-  <view wx:if='{{showButton4Favorites}}' style="width: 600rpx;height: 80rpx;margin-top: 25rpx;font-size: 24rpx;">
+  <!-- <view wx:if='{{showButton4Favorites}}' style="width: 600rpx;height: 80rpx;margin-top: 25rpx;font-size: 24rpx;">
     <button style="width: 100%;height: 100%; line-height: 80rpx; color: #FFFFFF; background-color: {{showFavoritesPanel ? '#999999' : '#eb6877'}}; border-radius: 10rpx;font-size: 24rpx;" bindtap="collectGoods" data-goods_id="{{goods_id}}" data-goods_box_mac="{{goods_box_mac}}">收藏</button>
-  </view>
+  </view> -->
   <view wx:if='{{showFavoritesPanel}}' class="flex-row-center-space_between" style="width: 600rpx;height: 70rpx;margin-top: 10rpx;font-size: 24rpx;">
     <input type="number" bindinput="mobileOnInput" placeholder="请输入手机号" style="width: 385rpx;height: 70rpx; line-height: 70rpx; border-radius: 5rpx; color: #333333; background-color: #FFFFFF;padding-left: 10rpx;" placeholder-style="padding-left: 10rpx; color: #999999;"></input>
     <button bindtap="sendGoodsLink" data-goods_id="{{goods_id}}" data-mobile="{{mobile}}" style="width: 200rpx;height: 70rpx;line-height: 70rpx;color: #FFFFFF; background-color: #eb6877;font-size: 24rpx;">发送商品链接</button>
