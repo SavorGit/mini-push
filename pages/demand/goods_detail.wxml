@@ -23,6 +23,7 @@
   </scroll-view>
   <view class="page-bottom full_width flex-row-center-space_around theme-panel">
     <button class="theme-button-dark" bindtap="boxShow" data-goods_id="{{goods_info.goods_id}}" data-pubdetail="{{goods_info.pubdetail}}" data-media_type="{{goods_info.media_type}}">电视播放</button>
-    <navigator bindtap="clickBuyGoods" data-goods_id="{{goods_info.goods_id}}" class="theme-button-buy" target="miniProgram" app-id="{{goods_info.appid}}" path="{{goods_info.jd_url}}">{{goods_info.buybutton}}</navigator>
+    <button class="theme-button-buy">店内购买</button>
+    <navigator class="theme-button-buy" bindtap="clickBuyGoods" data-goods_id="{{goods_info.goods_id}}" target="miniProgram" app-id="{{goods_info.appid}}" path="{{goods_info.jd_url}}">{{goods_info.buybutton}}</navigator>
   </view>
 </view>
