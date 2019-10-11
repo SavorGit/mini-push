@@ -78,16 +78,17 @@ Page({
       if (pams_arr[0] =='ag'){
         if(pams_arr.length==4){
           var goods_info = { "goods_id": pams_arr[3], "goods_box_mac": pams_arr[1], "uid":0 };
-          
+          var launch_url = '/pages/index/index';
+          wx.setStorageSync('savor_goods_info', goods_info)
         } else if (pams_arr.length == 5){
-          var goods_info = { "goods_id": pams_arr[3], "goods_box_mac": pams_arr[1],"uid":pams_arr[4]};
-          
+          //var goods_info = { "goods_id": pams_arr[3], "goods_box_mac": pams_arr[1],"uid":pams_arr[4]};
+          var launch_url = '/pages/demand/goods_detail?goods_id=' + pams_arr[3] + '&goods_box_mac=' + pams_arr[1] + '&uid=' + pams_arr[4];
         }
-        wx.setStorageSync('savor_goods_info', goods_info)
+        
         var box_mac = pams_arr[1];
         var code_type = pams_arr[2] ;
         wx.reLaunch({
-          url: '/pages/index/index',
+          url: launch_url,
         })
         wx.login({
           success: res => {
@@ -158,14 +159,17 @@ Page({
       
       if (g_arr.length == 4) {
         var goods_info = { "goods_id": g_arr[3], "goods_box_mac": g_arr[1], "uid": 0 }
+        wx.setStorageSync('savor_goods_info', goods_info)
+        var launch_url = '/pages/index/index';
       } else if (g_arr.length == 5) {
-        var goods_info = { "goods_id": g_arr[3], "goods_box_mac": g_arr[1], "uid": g_arr[4] };
+        //var goods_info = { "goods_id": g_arr[3], "goods_box_mac": g_arr[1], "uid": g_arr[4] };
+        var launch_url = '/pages/demand/goods_detail?goods_id=' + g_arr[3] + '&goods_box_mac=' + g_arr[1] + '&uid=' + g_arr[4];
       }
       var box_mac = g_arr[1];
       var code_type = g_arr[2];
-      wx.setStorageSync('savor_goods_info', goods_info)
+      
       wx.reLaunch({
-        url: '/pages/index/index',
+        url: launch_url,
       })
       wx.login({
         success: res => {
