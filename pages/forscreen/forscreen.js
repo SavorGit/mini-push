@@ -76,46 +76,26 @@ Page({
 
       var pams_arr = pams.split('_');
       if (pams_arr[0] =='ag'){
-        if(pams_arr.length==4){
-          var goods_info = { "goods_id": pams_arr[3], "goods_box_mac": pams_arr[1], "uid":0 };
-          var launch_url = '/pages/index/index';
-          wx.setStorageSync('savor_goods_info', goods_info)
-        } else if (pams_arr.length == 5){
-          //var goods_info = { "goods_id": pams_arr[3], "goods_box_mac": pams_arr[1],"uid":pams_arr[4]};
-          var launch_url = '/pages/demand/goods_detail?goods_id=' + pams_arr[3] + '&goods_box_mac=' + pams_arr[1] + '&uid=' + pams_arr[4];
-        }
+        
         
         var box_mac = pams_arr[1];
         var code_type = pams_arr[2] ;
+
+        if(code_type==22){//普通购物
+          var goods_info = { "goods_id": pams_arr[3], "goods_box_mac": pams_arr[1], "uid": 0 };
+          var launch_url = '/pages/index/index';
+          wx.setStorageSync('savor_goods_info', goods_info)
+          var pass_time = pams_arr[4];
+        }else if(code_type==23){//京东联盟购物
+          var launch_url = '/pages/demand/goods_detail?goods_id=' + pams_arr[3] + '&goods_box_mac=' + pams_arr[1] + '&uid=' + pams_arr[4] + '&is_header=1&box_mac='+pams_arr[1];
+          var pass_time = pams_arr[5];
+        }
+        var linck_box_info = box_mac + '_' + code_type + '_' + pass_time;
+        linkSaleHotelBox(box_mac,code_type,pass_time)
         wx.reLaunch({
           url: launch_url,
         })
-        wx.login({
-          success: res => {
-            var code = res.code; //返回code
-            wx.request({
-              url: api_url + '/smallapp/index/getOpenid',
-              data: { "code": code },
-              header: {
-                'content-type': 'application/json'
-              },
-              success: function (res) {
-                wx.request({
-                  url: api_url + '/smallapp21/index/recOverQrcodeLog',
-                  data: {
-                    "openid": res.data.result.openid,
-                    "box_mac": box_mac,
-                    "type": code_type,
-                    "is_overtime": 0
-                  },
-                  header: {
-                    'content-type': 'application/json'
-                  },
-                })
-              }
-            })
-          }
-        })
+        
       }else {
         wx.request({
           url: api_url + '/Smallapp21/index/getQrcontent',
@@ -156,21 +136,29 @@ Page({
       console.log(options.g)
       var g = options.g;
       var g_arr = g.split('_');
-      
-      if (g_arr.length == 4) {
+
+      var box_mac = g_arr[1];
+      var code_type = g_arr[2];
+      if(code_type==22){
         var goods_info = { "goods_id": g_arr[3], "goods_box_mac": g_arr[1], "uid": 0 }
         wx.setStorageSync('savor_goods_info', goods_info)
         var launch_url = '/pages/index/index';
-      } else if (g_arr.length == 5) {
-        //var goods_info = { "goods_id": g_arr[3], "goods_box_mac": g_arr[1], "uid": g_arr[4] };
-        var launch_url = '/pages/demand/goods_detail?goods_id=' + g_arr[3] + '&goods_box_mac=' + g_arr[1] + '&uid=' + g_arr[4];
+        var pass_time = g_arr[4];
+      }else if(code_type==23){
+        var launch_url = '/pages/demand/goods_detail?goods_id=' + g_arr[3] + '&goods_box_mac=' + g_arr[1] + '&uid=' + g_arr[4] + '&is_header=1&box_mac='+g_arr[1];
+        var pass_time = g_arr[5];
       }
-      var box_mac = g_arr[1];
-      var code_type = g_arr[2];
-      
+      linkSaleHotelBox(box_mac, code_type, pass_time)
       wx.reLaunch({
         url: launch_url,
       })
+      
+    }else{
+      wx.reLaunch({
+        url: '/pages/index/index',
+      })
+    }
+    function linkSaleHotelBox(box_mac,code_type,jz_time){
       wx.login({
         success: res => {
           var code = res.code; //返回code
@@ -181,26 +169,48 @@ Page({
               'content-type': 'application/json'
             },
             success: function (res) {
-              wx.request({
-                url: api_url + '/smallapp21/index/recOverQrcodeLog',
-                data: {
-                  "openid": res.data.result.openid,
-                  "box_mac": box_mac,
-                  "type": code_type,
-                  "is_overtime": 0
-                },
-                header: {
-                  'content-type': 'application/json'
-                },
-              })
+
+              if (jz_time) {//判断二维码时间是否超过两个小时
+                //var fztime = 7200000;
+                var fztime = sysconfig.exp_time;
+                var difftime = nowtime - jz_time;
+                if (difftime > fztime) {
+                  wx.request({
+                    url: api_url + '/smallapp21/index/recOverQrcodeLog',
+                    data: {
+                      "openid": res.data.result.openid,
+                      "box_mac": box_mac,
+                      "type": code_type,
+                      "is_overtime": 1
+                    },
+                    header: {
+                      'content-type': 'application/json'
+                    },
+                  })
+                  
+                }else {
+                  wx.request({
+                    url: api_url + '/Smallapp21/Index/genCode',
+                    headers: {
+                      'Content-Type': 'application/json'
+                    },
+                    data: {
+                      'box_mac': box_mac,
+                      'openid': res.data.result.openid,
+                      'type': code_type
+                    },
+                    method: "POST",
+                    success: function (res) {
+
+                    }
+                  })
+                }
+              }
+              
             }
           })
         }
-      })
-    }else{
-      wx.reLaunch({
-        url: '/pages/index/index',
-      })
+      });
     }
     function linkHotelBox(scene){
       var scene_arr = scene.split('_');

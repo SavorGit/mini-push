@@ -1,7 +1,7 @@
 <!--pages/demand/goods_detail.wxml-->
 <import src="/pages/template/commons" />
-<template is="navigationBarForTwoLevel" data='{{statusBarHeight: statusBarHeight,titleText:"商品详情"}}' />
-<template is="navigationBarForShare" data='{{statusBarHeight: statusBarHeight,titleText:"商品详情"}}' />
+<template wx:if="{{is_header==0}}" is="navigationBarForTwoLevel" data='{{statusBarHeight: statusBarHeight,titleText:"商品详情"}}' />
+<template wx:if="{{is_header==1}}" is="navigationBarForShare" data='{{statusBarHeight: statusBarHeight,titleText:"商品详情"}}' />
 
 <!-- <view class="container flex-column-center-flex_start theme-container" style='height: calc(100vh - 46px - {{statusBarHeight}}px);'> -->
 <view class="container flex-column-center-flex_start theme-container" style='height: calc({{documentHeight}}px - 46px);'>

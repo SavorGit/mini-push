@@ -25,15 +25,20 @@ Page({
     var goods_id = options.goods_id;
     var goods_box_mac = '';
     var uid = '';
+    var is_header = 0;
     if(typeof(options.goods_box_mac) !='undefined'){
       goods_box_mac = options.goods_box_mac;
     }
     if(typeof(options.uid) !='undefined'){
       uid = options.uid;
     }
+    if(typeof(options.is_header)!='undefined'){
+      is_header = 1;
+    }
     that.setData({
       goods_box_mac:goods_box_mac,
       uid:uid,
+      is_header: is_header
     })
     wx.request({
       url: api_url + '/Smallapp3/optimize/detail',
@@ -283,7 +288,7 @@ Page({
       // 来自页面内转发按钮
       return {
         title: '热点聚焦，投你所好',
-        path: '/pages/demand/goods_detail?goods_id=' + goods_id + '&box_mac=',
+        path: '/pages/demand/goods_detail?goods_id=' + goods_id + '&box_mac=&is_header=1',
         imageUrl: img_url,
         success: function(res) {
 

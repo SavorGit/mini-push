@@ -541,12 +541,9 @@ Page({
   onShareAppMessage: function (res) {
     var that = this;
     var openid = res.target.dataset.openid;
-    var res_id = res.target.dataset.res_id;
+    var goods_id = res.target.dataset.res_id;
     var res_key = res.target.dataset.res_key;
-    
-    var video_url = res.target.dataset.video_url;
-    var video_name = res.target.dataset.video_name;
-    var video_img = res.target.dataset.video_img;
+    var img_url = res.target.dataset.img_url;
     
     if (res.from === 'button') {
       // 转发成功
@@ -557,7 +554,7 @@ Page({
         },
         data: {
           'openid': openid,
-          'res_id': res_id,
+          'res_id': goods_id,
           'type': 4,
           'status': 1,
         },
@@ -582,9 +579,10 @@ Page({
       })
       // 来自页面内转发按钮
       return {
-        title: video_name,
-        path: '/pages/share/video?res_id='+res_id+'&type=3',
-        imageUrl: video_img,
+        title: '热点聚焦，投你所好',
+        //path: '/pages/share/video?res_id='+res_id+'&type=3',
+        path: '/pages/demand/goods_detail?goods_id=' + goods_id + '&box_mac=&is_header=1',
+        imageUrl: img_url,
         success: function (res) {
           
           
