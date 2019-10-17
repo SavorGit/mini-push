@@ -28,6 +28,8 @@ Page({
     var is_header = 0;
     if(typeof(options.goods_box_mac) !='undefined'){
       goods_box_mac = options.goods_box_mac;
+    }else {
+      goods_box_mac = box_mac
     }
     if(typeof(options.uid) !='undefined'){
       uid = options.uid;
