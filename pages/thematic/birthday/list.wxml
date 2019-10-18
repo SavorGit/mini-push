@@ -6,7 +6,7 @@
 <view class="container flex-column-center-flex_start theme-container" style='height: calc(100vh - 46px - {{statusBarHeight}}px);'>
   <view class='full_width birthday'>
     <view class='video'>
-      <view class='title flex-row-center-flex_start theme-font2'>
+      <view class='title flex-row-center-flex_start theme-font1'>
         <label class="fa fa-birthday-cake icon"></label>
         <label>为TA点歌</label>
       </view>
@@ -26,7 +26,7 @@
   </view>
   <view class='full_width constellation_list'>
     <view class='sketch_list flex-row-center-center'>
-      <view class='constellation flex-column-center-center theme-font2{{choose_constellid==constelinfo.id? " cur" :""}}' wx:for="{{constellationlist}}" wx:key="key" wx:for-item="constelinfo" wx:for-index="index">
+      <view class='constellation flex-column-center-center theme-font6{{choose_constellid==constelinfo.id? " cur" :""}}' wx:for="{{constellationlist}}" wx:key="key" wx:for-item="constelinfo" wx:for-index="index">
         <image bindtap='switchConstell' data-constellid="{{constelinfo.id}}" src="{{constelinfo.img_url}}"></image>
         <label class='title'>{{constelinfo.name}} ({{constelinfo.date}})</label>
         <label class='summary'>{{constelinfo.intro}}</label>
@@ -34,7 +34,7 @@
     </view>
     <scroll-view class='full_width detailed' scroll-y="true" scroll-with-animation="true">
       <view class='video_list'>
-        <view class='title theme-font2'>
+        <view class='title theme-font1'>
           <label class="fa fa-youtube-play icon"></label>
           <label>相关视频</label>
         </view>
@@ -51,11 +51,11 @@
         </view>
       </view>
       <view class='overall'>
-        <view class='title theme-font2'>
+        <view class='title theme-font1'>
           <image src='/images/icon2/666666_star1.png'></image>
           <label>星座详情</label>
         </view>
-        <view class='property flex-row-center-space_between theme-font3'>
+        <view class='property flex-row-center-space_between theme-font2'>
           <view class='left'>
             <label>关键词：{{constellation_detail.keywords}}</label>
             <label>掌管宫位：{{constellation_detail.house}}</label>
@@ -75,7 +75,7 @@
             <label>幸运号码：{{constellation_detail.lucknum}}</label>
           </view>
         </view>
-        <view class='describtion theme-font3'>
+        <view class='describtion theme-font2'>
           <label>{{constellation_detail.desc}}
             <navigator class='theme-font' url="/pages/thematic/birthday/detail?url={{constellation_detail.detail_url}}&constellname={{constellation_detail.name}}">[详情]</navigator>
           </label>
