@@ -16,7 +16,7 @@ Page({
   onLoad: function(options) {
     var that = this;
     that.setData({
-      detail_url: options.url + '?miniProgram=' + encodeURIComponent('{"navigationBarTitleText":"' + options.constellname + '","statusBarHeight":' + getApp().globalData.statusBarHeight+',"backgroundColor":"#05101A","color":"#FFFFFF"}')
+      detail_url: options.url + '?miniProgram=' + encodeURIComponent('{"navigationBarTitleText":"' + options.constellname + '","statusBarHeight":' + getApp().globalData.statusBarHeight+',"backgroundColor":"#EDEDED","color":"#333333"}')
     })
   },
 
