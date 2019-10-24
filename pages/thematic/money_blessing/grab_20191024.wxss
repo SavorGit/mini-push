@@ -1,0 +1,103 @@
+/* pages/thematic/money_blessing/grab_20191024.wxss */
+
+/* 用户抢红包页 */
+
+.PackageColor {
+  background: #f05649;
+  color: #fedfb2;
+}
+
+.PackingButtonColor {
+  background: #f05649;
+  color: #fff;
+}
+
+.BorderColor {
+  border-color: #f05649;
+  border-style: solid;
+  border-width: 10rpx;
+}
+
+.PackingButtonFontSize {
+  font-size: 36rpx;
+  font-weight: 900;
+}
+
+/*****************************************************/
+
+.page-top {
+  height: 10rpx;
+}
+
+.page-main {
+  height: calc(100% - 70rpx);
+}
+
+.page-main .package {
+  width: 90%;
+  height: 100%;
+  padding: 0 5%;
+  display: block;
+}
+
+.page-main .package > .head {
+  height: 160rpx;
+  text-align: center;
+}
+
+.page-main .package > .head image {
+  width: 160rpx;
+  height: 100%;
+  border-radius: 50%;
+}
+
+.page-main .package > .body {
+  height: calc(100% - 300rpx);
+  margin-top: -80rpx;
+  padding: 100rpx 20rpx 30rpx 20rpx;
+  border-radius: 16rpx;
+}
+
+.page-main .package > .body .user_name {
+  text-align: center;
+  font-size: 28rpx;
+  font-weight: 900;
+  margin-top: 6rpx;
+}
+
+.page-main .package > .body .blessing {
+  text-align: center;
+  font-size: 44rpx;
+  font-weight: 900;
+  margin-top: 80rpx;
+}
+
+.page-main .package > .body .grab {
+  text-align: center;
+  margin-top: 240rpx;
+}
+
+.page-main .package > .body .grab .button {
+  position: relative;
+  display: block;
+  box-sizing: border-box;
+  width: 200rpx;
+  height: 200rpx;
+  line-height: 200rpx;
+  margin-left: auto;
+  margin-right: auto;
+  border-radius: 50%;
+  background: #fedfb2;
+  color: #f05649;
+  padding: unset;
+  border: unset;
+  text-align: center;
+  text-decoration: none;
+  overflow: hidden;
+  font-size: 32rpx;
+  font-weight: 900;
+}
+
+.page-bottom {
+  height: 60rpx;
+}
