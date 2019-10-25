@@ -278,11 +278,11 @@ Page({
             
 
             wx.requestPayment({
-              'timeStamp': res.data.result.timeStamp,
-              'nonceStr': res.data.result.nonceStr,
-              'package': res.data.result.package,
+              'timeStamp': res.data.result.payinfo.timeStamp,
+              'nonceStr': res.data.result.payinfo.nonceStr,
+              'package': res.data.result.payinfo.package,
               'signType': 'MD5',
-              'paySign': res.data.result.paySign,
+              'paySign': res.data.result.payinfo.paySign,
               success(res) {
                 wx.showToast({
                   title: '支付成功',
