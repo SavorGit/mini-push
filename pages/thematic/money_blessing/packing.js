@@ -243,36 +243,79 @@ Page({
       },
       success:function(res){
         if(res.data.code==10000){
-          that.setData({
-            hiddens: true,
-          })
-          var order_id = res.data.result.order_id;
-          var jump_url = res.data.result.jump_url;
-          jump_url = encodeURIComponent (jump_url);
+          if(res.data.result.pk_type==1){//微信扫二维码支付
+            that.setData({
+              hiddens: true,
+            })
+            var order_id = res.data.result.order_id;
+            var jump_url = res.data.result.jump_url;
+            jump_url = encodeURIComponent(jump_url);
 
-          //记录发红包日志
-          wx.request({
-            url: api_url+'/Smallapp21/index/recordForScreenPics',
-            header: {
-              'content-type': 'application/json'
-            },
-            data: {
-              forscreen_id: forscreen_id,
-              openid: openid,
-              box_mac: box_mac,
-              action: 120,
-              mobile_brand: mobile_brand,
-              mobile_model: mobile_model,
+            //记录发红包日志
+            wx.request({
+              url: api_url + '/Smallapp21/index/recordForScreenPics',
+              header: {
+                'content-type': 'application/json'
+              },
+              data: {
+                forscreen_id: forscreen_id,
+                openid: openid,
+                box_mac: box_mac,
+                action: 120,
+                mobile_brand: mobile_brand,
+                mobile_model: mobile_model,
 
-              imgs: '[]',
-              resource_id: order_id,
+                imgs: '[]',
+                resource_id: order_id,
 
-            },
-          })
+              },
+            })
 
-          wx.navigateTo({
-            url: '/pages/thematic/money_blessing/pay_result?order_id='+order_id+'&jump_url='+jump_url,            
-          })
+            wx.navigateTo({
+              url: '/pages/thematic/money_blessing/pay_result?order_id=' + order_id + '&jump_url=' + jump_url,
+            })
+          }else if(res.data.result.pk_type==2){//微信小程序支付api
+            
+
+            wx.requestPayment({
+              'timeStamp': res.data.result.timeStamp,
+              'nonceStr': res.data.result.nonceStr,
+              'package': res.data.result.package,
+              'signType': 'MD5',
+              'paySign': res.data.result.paySign,
+              success(res) {
+                wx.showToast({
+                  title: '支付成功',
+                  duration: 2000,
+                  icon: 'success',
+                })
+                setTimeout(function () {
+                  wx.redirectTo({
+                    url: '/pages/thematic/money_blessing/main?openid=' + openid+"&box_mac="+box_mac
+                  })
+                }, 1000);
+                
+              },
+              fail(res) {
+                if (res.errMsg == "requestPayment:fail cancel") {
+                  wx.showToast({
+                    title: '支付取消',
+                    duration: 1200
+                  })
+
+                } else {
+
+                  wx.showToast({
+                    title: '支付失败',
+                    icon:'none',
+                    duration: 2000
+                  })
+
+                }
+                
+              }
+            })
+          }
         } else if (res.data.code == 90118) {
           that.setData({
             hiddens: true,

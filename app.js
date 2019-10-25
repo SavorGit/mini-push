@@ -626,7 +626,7 @@ App({
   },
   checkMobile: function(mobile) {
 
-    var myreg = /^(((13[0-9]{1})|(15[0-9]{1})|(18[0-9]{1})|(17[0-9]{1}))+\d{8})$/;
+    var myreg = /^(((13[0-9]{1})|(14[0-9]{1})|(15[0-9]{1})|(16[0-9]{1})|(18[0-9]{1})|(17[0-9]{1})|(19[0-9]{1}))+\d{8})$/;
     if (mobile.length == 0) {
 
       wx.showToast({
@@ -662,10 +662,10 @@ App({
     rest_appid: 'wxc395eb4b44563af1',
     jijian_appid: 'wx7883a4327329a67c',
     jd_appid: 'wx91d27dbf599dff74',
-    api_url: 'https://mobile.littlehotspot.com',
-    oss_upload_url: 'https://image.littlehotspot.com',
-    netty_url: 'https://netty-push.littlehotspot.com',
-    oss_url: 'https://oss.littlehotspot.com',
+    api_url: 'https://dev-mobile.littlehotspot.com',
+    oss_upload_url: 'https://dev-image.littlehotspot.com',
+    netty_url: 'https://dev-netty-push.littlehotspot.com',
+    oss_url: 'https://dev-oss.littlehotspot.com',
     oss_bucket: 'redian-produce',
     oss_access_key_id: 'LTAITBjXOpORHKfXlOX',
   }

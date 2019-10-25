@@ -307,6 +307,7 @@ Page({
     var goods_nums = e.currentTarget.dataset.goods_nums;
     var goods_box_mac = e.currentTarget.dataset.goods_box_mac;
     var buy_type = e.currentTarget.dataset.buy_type;
+    var uid      = e.currentTarget.dataset.uid;
     var user_info = wx.getStorageSync("savor_user_info");
     var openid = user_info.openid;
     wx.request({
@@ -319,7 +320,8 @@ Page({
         box_mac: goods_box_mac,
         amount: 1,
         openid: openid,
-        buy_type: buy_type
+        buy_type: buy_type,
+        uid: uid
       },
       success: function (res) {
         if (res.data.code == 10000) {

@@ -82,7 +82,7 @@ Page({
         var code_type = pams_arr[2] ;
 
         if(code_type==22){//普通购物
-          var goods_info = { "goods_id": pams_arr[3], "goods_box_mac": pams_arr[1], "uid": 0 };
+          var goods_info = { "goods_id": pams_arr[3], "goods_box_mac": pams_arr[1], "uid": pams_arr[4]};
           var launch_url = '/pages/index/index';
           wx.setStorageSync('savor_goods_info', goods_info)
           var pass_time = pams_arr[4];
@@ -140,7 +140,7 @@ Page({
       var box_mac = g_arr[1];
       var code_type = g_arr[2];
       if(code_type==22){
-        var goods_info = { "goods_id": g_arr[3], "goods_box_mac": g_arr[1], "uid": 0 }
+        var goods_info = { "goods_id": g_arr[3], "goods_box_mac": g_arr[1], "uid": g_arr[4] }
         wx.setStorageSync('savor_goods_info', goods_info)
         var launch_url = '/pages/index/index';
         var pass_time = g_arr[4];

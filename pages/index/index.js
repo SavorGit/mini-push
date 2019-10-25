@@ -192,6 +192,7 @@ Page({
         that.setData({
           goods_id:goods_id,
           goods_box_mac:goods_box_mac,
+          uid:uid,
         })
         wx.request({
           url: api_url +'/Smallsale/goods/getdetail',
@@ -722,6 +723,7 @@ Page({
     var goods_box_mac = e.currentTarget.dataset.goods_box_mac;
     var buy_type = e.currentTarget.dataset.buy_type;
     var user_info = wx.getStorageSync("savor_user_info");
+    var uid      = e.currentTarget.dataset.uid;
     openid = user_info.openid;
     wx.request({
       url: api_url +'/Smallsale/order/addOrder',
@@ -733,7 +735,8 @@ Page({
         box_mac:goods_box_mac,
         amount:goods_nums,
         openid:openid,
-        buy_type: buy_type
+        buy_type: buy_type,
+        uid:uid
       },
       success:function(res){
         if(res.data.code==10000){

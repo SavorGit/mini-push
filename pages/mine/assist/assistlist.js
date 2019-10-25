@@ -29,7 +29,7 @@ Page({
       data: {
         forscreen_id: forscreen_id,
         page: 1,
-        pagesize:10
+        pagesize:20
       },
       method: "POST",
       success: function(res) {
@@ -41,7 +41,7 @@ Page({
       }
     })
   },
-  loadModel: function(res) {
+  loadMore: function(e) {
     var that = this;
     var forscreen_id = e.target.dataset.forscreen_id;
     wx.showLoading({
@@ -55,11 +55,13 @@ Page({
       },
       data: {
         forscreen_id: forscreen_id,
-        page: page
+        page: page,
+        pagesize:20
       },
       method: "POST",
       success: function(res) {
         if (res.data.code == 10000) {
+          wx.hideLoading()
           that.setData({
             assist_friend_list: res.data.result.datalist
           })
