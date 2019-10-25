@@ -6,7 +6,8 @@
 }
 
 .birthday .video .title {
-  height: 50rpx;
+  height: 60rpx;
+  line-height: 70rpx;
 }
 
 .birthday .video .title .icon {

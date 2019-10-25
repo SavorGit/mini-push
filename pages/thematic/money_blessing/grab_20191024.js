@@ -1,23 +1,20 @@
-// pages/thematic/birthday/detail.js
-const app = getApp();
+// pages/thematic/money_blessing/grab_20191024.js
+// 用户抢红包页
+
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    statusBarHeight: getApp().globalData.statusBarHeight,
-    detail_url: '',
+
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
-    var that = this;
-    that.setData({
-      detail_url: options.url + '?miniProgram=' + encodeURIComponent('{"navigationBarTitleText":"' + options.constellname + '","statusBarHeight":' + getApp().globalData.statusBarHeight+',"backgroundColor":"#EDEDED","color":"#333333"}')
-    })
+
   },
 
   /**
