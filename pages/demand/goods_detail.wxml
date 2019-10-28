@@ -28,3 +28,30 @@
     <navigator class="theme-button-buy" bindtap="clickBuyGoods" data-goods_id="{{goods_info.goods_id}}" target="miniProgram" app-id="{{goods_info.appid}}" path="{{goods_info.jd_url}}">{{goods_info.buybutton}}</navigator>
   </view>
 </view>
+
+<!-- 店内数量 -->
+<modal show="{{showInputGoodsCount}}" width="600rpx" height='240rpx' border-radius="10rpx" title-text='' confirm-text='' cancel-text='' background-color='unset'>
+  <view style="width: 600rpx;height: 240rpx; border-radius: 10rpx; background-color: #FFFFFF;font-size: 24rpx;">
+    <view style="width: calc(100% - 90rpx);height: 80rpx;padding-left: 60rpx;padding-right: 30rpx;">
+      <label style="width: calc(100% - 32rpx);height: 80rpx;line-height: 80rpx;display: inline-block;font-size: 30rpx; color: #333333;text-align: center;">商品数量</label>
+      <view style="width: 32rpx; height: 80rpx; display: inline-block;" bindtap="closeAct">
+        <label class="fa fa-close fa-lg" style="width: 32rpx; height: 32rpx; color: #666666;"></label>
+      </view>
+    </view>
+    <view class="flex-column-center-start" style="width: 100%;height: calc(100% - 160rpx);color: #666666;">
+      <view class="flex-row-center-center" style="width: 100%;height: 80rpx;border-top: 2rpx solid #ededed;">
+        <label style="width: 70rpx;">数量</label>
+        <view style="width: 32rpx; height: 32rpx;" bindtap="changeActNums" data-type="1">
+          <label class="fa fa-plus-square-o fa-lg" style="width: 32rpx; height: 32rpx; color: #666666;"></label>
+        </view>
+        <label style="width: 70rpx;text-align: center;">{{goods_nums? goods_nums : 0}}</label>
+        <view style="width: 32rpx; height: 32rpx;" bindtap="changeActNums" data-type="2">
+          <label class="fa fa-minus-square-o fa-lg" style="width: 32rpx; height: 32rpx; color: #666666;"></label>
+        </view>
+      </view>
+    </view>
+    <view class="flex-row-center-center" style="width: 100%;height: 80rpx;border-top: 2rpx solid #ededed;font-size: 28rpx;">
+      <view style="width: 100%;height: 80rpx;line-height: 80rpx; color: #448ACA; text-align: center;" bindtap="shopBuyGoods" data-goods_id="{{goods_id}}" data-goods_nums="{{goods_nums}}" data-goods_box_mac="{{goods_box_mac}}" data-buy_type="1" data-uid="{{uid}}">确定</view>
+    </view>
+  </view>
+</modal>
