@@ -316,9 +316,10 @@ Page({
         duration:2000,
       })
     }else {
+      goods_nums = 1;
       that.setData({
         showInputGoodsCount: true,
-        goods_nums :1
+        goods_nums: goods_nums
       })
     } 
     
