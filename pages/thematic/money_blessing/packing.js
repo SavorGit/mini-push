@@ -284,6 +284,9 @@ Page({
               'signType': 'MD5',
               'paySign': res.data.result.payinfo.paySign,
               success(res) {
+                that.setData({
+                  hiddens: true,
+                })
                 wx.showToast({
                   title: '支付成功',
                   duration: 2000,
@@ -312,7 +315,9 @@ Page({
                   })
 
                 }
-                
+                that.setData({
+                  hiddens: true,
+                })
               }
             })
           }
