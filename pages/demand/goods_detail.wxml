@@ -31,7 +31,7 @@
 
 <!-- 店内数量 -->
 <modal show="{{showInputGoodsCount}}" width="600rpx" height='240rpx' border-radius="10rpx" title-text='' confirm-text='' cancel-text='' background-color='unset'>
-  <view style="width: 600rpx;height: 240rpx; border-radius: 10rpx; background-color: #FFFFFF;font-size: 24rpx;">
+  <view style="width: 600rpx;height: 240rpx; border-radius: 10rpx; background-color: #FFFFFF;font-size: 30rpx;">
     <view style="width: calc(100% - 90rpx);height: 80rpx;padding-left: 60rpx;padding-right: 30rpx;">
       <label style="width: calc(100% - 32rpx);height: 80rpx;line-height: 80rpx;display: inline-block;font-size: 30rpx; color: #333333;text-align: center;">商品数量</label>
       <view style="width: 32rpx; height: 80rpx; display: inline-block;" bindtap="closeAct">
@@ -41,12 +41,12 @@
     <view class="flex-column-center-start" style="width: 100%;height: calc(100% - 160rpx);color: #666666;">
       <view class="flex-row-center-center" style="width: 100%;height: 80rpx;border-top: 2rpx solid #ededed;">
         <label style="width: 70rpx;">数量</label>
-        <view style="width: 32rpx; height: 32rpx;" bindtap="changeActNums" data-type="1">
-          <label class="fa fa-plus-square-o fa-lg" style="width: 32rpx; height: 32rpx; color: #666666;"></label>
+        <view style="width: 40rpx; height: 40rpx;" bindtap="changeActNums" data-type="1">
+          <label class="fa fa-plus-square-o fa-lg" style="width: 40rpx; height: 40rpx; color: #666666;"></label>
         </view>
         <label style="width: 70rpx;text-align: center;">{{goods_nums? goods_nums : 1}}</label>
-        <view style="width: 32rpx; height: 32rpx;" bindtap="changeActNums" data-type="2">
-          <label class="fa fa-minus-square-o fa-lg" style="width: 32rpx; height: 32rpx; color: #666666;"></label>
+        <view style="width: 40rpx; height: 40rpx;" bindtap="changeActNums" data-type="2">
+          <label class="fa fa-minus-square-o fa-lg" style="width: 40rpx; height: 40rpx; color: #666666;"></label>
         </view>
       </view>
     </view>
