@@ -318,6 +318,7 @@ Page({
     }else {
       that.setData({
         showInputGoodsCount: true,
+        goods_nums :1
       })
     } 
     
