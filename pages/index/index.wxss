@@ -18,12 +18,17 @@
 }
 
 .link-box-panel > .tip > button {
-  width: 60rpx;
-  height: 24rpx;
-  line-height: 20rpx;
-  margin: 20rpx auto auto auto;
+  width: 120rpx;
+  height: 50rpx;
+  line-height: 50rpx;
+  margin: auto;
   background: unset;
   font-size: unset;
+}
+
+.link-box-panel > .tip > button > image {
+  width: 60rpx;
+  height: 24rpx;
 }
 
 /* ==================================== 中部横幅图面板 ==================================== */
