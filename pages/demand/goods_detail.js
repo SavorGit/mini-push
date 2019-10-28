@@ -3,6 +3,7 @@ const app = getApp()
 var api_url = app.globalData.api_url;
 var box_mac;
 var goods_info;
+var goods_nums = 1;
 Page({
 
   /**
@@ -11,7 +12,9 @@ Page({
   data: {
     statusBarHeight: getApp().globalData.statusBarHeight,
     documentHeight: app.SystemInfo.documentHeight,
-    goods_info: []
+    goods_info: [],
+    showInputGoodsCount:false,
+    goods_nums:1
   },
 
   /**
@@ -299,6 +302,61 @@ Page({
       }
     }
   },
+  showTc:function(e){
+    var that = this;
+    var goods_box_mac= e.currentTarget.dataset.goods_box_mac;
+    var uid = e.currentTarget.dataset.uid;
+    if(goods_box_mac==''){
+      app.scanQrcode();
+    }else if(uid==''){
+      
+      wx.showToast({
+        title: '店内商品购买有误',
+        icon:'none',
+        duration:2000,
+      })
+    }else {
+      that.setData({
+        showInputGoodsCount: true,
+      })
+    } 
+    
+  },
+  closeAct:function(res){
+    var that = this;
+    that.setData({
+      showInputGoodsCount: false,
+    })
+  },
+  changeActNums: function (e) {
+    var that = this;
+    var type = e.currentTarget.dataset.type;
+    if (type == 1) {//数量增加
+      if (goods_nums == 10) {
+        wx.showToast({
+          title: '数量不能大于10',
+          icon: 'none',
+          duration: 2000,
+        })
+      } else {
+        goods_nums += 1;
+        //console.log(goods_nums);
+      }
+    } else if (type == 2) { //数量减少
+      if (goods_nums == 1) {
+        wx.showToast({
+          title: '数量不能小于1',
+          icon: 'none',
+          duration: 2000,
+        })
+      } else {
+        goods_nums -= 1;
+      }
+    }
+    that.setData({
+      goods_nums: goods_nums,
+    })
+  },
   //店内购买
   shopBuyGoods: function (e) {
     //console.log(e);
@@ -332,16 +390,21 @@ Page({
               duration: 2000,
             })
           }
-
+          that.setData({
+            showInputGoodsCount: false,
+          })
+          
         } else {
           if (buy_type == 1) {
             wx.showToast({
               title: res.data.msg,
               icon: 'none',
-              duration: 2000,
+              duration: 3000,
             })
           }
-
+          that.setData({
+            showInputGoodsCount: false,
+          })
         }
       }
     })
