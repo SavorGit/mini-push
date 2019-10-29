@@ -113,7 +113,7 @@
 
       </view>
       <view class='footer'>
-        <navigator url="/pages/find/selected_list" open-type='switchTab' class='theme-font'>查看更多...</navigator>
+        <navigator url="/pages/find/cards" open-type='switchTab' class='theme-font'>查看更多...</navigator>
       </view>
     </view>
   </scroll-view>
@@ -236,7 +236,7 @@
 
       </view>
       <view class='footer'>
-        <navigator url="/pages/find/selected_list" open-type='switchTab' class='theme-font'>查看更多...</navigator>
+        <navigator url="/pages/find/cards" open-type='switchTab' class='theme-font'>查看更多...</navigator>
       </view>
     </view>
   </scroll-view>
