@@ -254,11 +254,14 @@
 
 .con_bottom > .hotel_info {
   flex-grow: 1;
-  width: calc(100% - 160rpx);
+  width: calc(100% - 200rpx);
 }
 
 .con_bottom > .hotel_info > .hotel_name {
-  width: 310rpx;
+  width: 280rpx;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .con_bottom > .operation {
@@ -266,8 +269,8 @@
 }
 
 .con_bottom > .operation > view {
-  margin-left: 15rpx;
-  margin-right: 15rpx;
+  margin-left: 5rpx;
+  margin-right: 5rpx;
 }
 
 .con_bottom > .operation > view > button,
