@@ -74,14 +74,15 @@ Page({
       sizeType: ['original', 'compressed'], // 可以指定是原图还是压缩图，默认二者都有
       sourceType: ['album', 'camera'], // 可以指定来源是相册还是相机，默认二者都有
       success: function (res) {
-        uploadInfos(res, box_mac, openid);
-        lead(openid);
         that.setData({
           showTpBt: true,
           showThird: false,
-          showSecond:true,
+          showSecond: true,
           is_btn_disabel: false
         })
+        uploadInfos(res, box_mac, openid);
+        lead(openid);
+        
       },
       fail:function(res){
         wx.navigateBack({
