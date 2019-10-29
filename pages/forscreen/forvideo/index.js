@@ -106,25 +106,28 @@ Page({
 
       var user_info = wx.getStorageSync('savor_user_info');
       var guide_prompt = user_info.guide_prompt;
-      if (guide_prompt.length == 0) {
-        that.setData({
-          showGuidedMaskBeforLaunch: true,
-        })
-      } else {
-        var is_lead = 1;
-        for (var i = 0; i < guide_prompt.length; i++) {
-          if (guide_prompt[i] == 3) {
-            is_lead = 0;
-            
-            break;
-          }
-        }
-        if(is_lead==1){
+      if (typeof (guide_prompt) !='undefined'){
+        if (guide_prompt.length == 0) {
           that.setData({
             showGuidedMaskBeforLaunch: true,
           })
+        } else {
+          var is_lead = 1;
+          for (var i = 0; i < guide_prompt.length; i++) {
+            if (guide_prompt[i] == 3) {
+              is_lead = 0;
+
+              break;
+            }
+          }
+          if (is_lead == 1) {
+            that.setData({
+              showGuidedMaskBeforLaunch: true,
+            })
+          }
         }
       }
+      
     }
   },
 
@@ -372,25 +375,28 @@ Page({
       if(is_share==1){
         var user_info = wx.getStorageSync('savor_user_info');
         var guide_prompt = user_info.guide_prompt;
-        if (guide_prompt.length == 0) {
-          that.setData({
-            showGuidedMaskAfterLaunch: true,
-          })
-        } else {
-          var is_lead = 1;
-          for (var i = 0; i < guide_prompt.length; i++) {
-            if (guide_prompt[i] == 4) {
-              is_lead = 0;
-
-              break;
-            }
-          }
-          if (is_lead == 1) {
+        if (typeof (guide_prompt) !='undefined'){
+          if (guide_prompt.length == 0) {
             that.setData({
               showGuidedMaskAfterLaunch: true,
             })
+          } else {
+            var is_lead = 1;
+            for (var i = 0; i < guide_prompt.length; i++) {
+              if (guide_prompt[i] == 4) {
+                is_lead = 0;
+
+                break;
+              }
+            }
+            if (is_lead == 1) {
+              that.setData({
+                showGuidedMaskAfterLaunch: true,
+              })
+            }
           }
         }
+        
       }
       
     }
