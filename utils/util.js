@@ -5,7 +5,6 @@ const formatTime = date => {
   const hour = date.getHours()
   const minute = date.getMinutes()
   const second = date.getSeconds()
-
   return [year, month, day].map(formatNumber).join('/') + ' ' + [hour, minute, second].map(formatNumber).join(':')
 }
 
@@ -23,9 +22,7 @@ module.exports.throttle = function(fn, gapTime) {
   if (gapTime == null || gapTime == undefined) {
     gapTime = 1500
   }
-
   let _lastTime = null
-
   // 返回新的函数
   return function() {
     let _nowTime = +new Date()
@@ -36,33 +33,168 @@ module.exports.throttle = function(fn, gapTime) {
   }
 }
 
-
-const PostRequest = (url, data, success) => {
-  wx.request({
-    url: url,
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    data: data,
-    method: "POST",
-    success: typeof(success) == "function" ? success : function() {}
+const HttpRequest = (options) => {
+  wx.showLoading({
+    title: '加载中',
+    icon: 'loading',
+    mask: true
   });
-}
+  if (typeof(options) != 'object' || options == null) {
+    throw "The request arguments is wrong";
+  }
+  let requestUrl = options.url;
+  if (typeof(requestUrl) != 'string') {
+    throw "The request 'url' is wrong";
+  }
+  let requestHeaders = options.header;
+  if (typeof(requestHeaders) != 'object') {
+    requestHeaders = {};
+  }
+  let requestMethod = options.method;
+  let requestOptions = {
+    url: requestUrl,
+    headers: requestHeaders,
+    data: options.data,
+    method: options.method,
+    dataType: options.dataType,
+    responseType: options.responseType,
+    success: function() {
+      var successFnArgumentArray = [].slice.call(arguments);
+      wx.hideLoading();
+      if (typeof(options.success) == "function") {
+        try {
+          options.success.apply(requestOptions, successFnArgumentArray);
+        } catch (err) {
+          requestOptions.error.call(requestOptions, err);
+        }
+      }
+    },
+    fail: function() {
+      var failFnArgumentArray = [].slice.call(arguments);
+      wx.hideLoading();
+      if (typeof(options.fail) == "function") {
+        try {
+          options.fail.apply(requestOptions, failFnArgumentArray);
+        } catch (err) {
+          requestOptions.error.call(requestOptions, err);
+        }
+      }
+    },
+    error: function(err) {
+      console.error(err);
+    },
+    complete: function() {
+      var completeFnArgumentArray = [].slice.call(arguments);
+      if (typeof(options.complete) == "function") {
+        try {
+          options.complete.apply(requestOptions, completeFnArgumentArray);
+        } catch (err) {
+          requestOptions.error.call(requestOptions, err);
+        }
+      }
+    }
+  };
+  wx.request(requestOptions);
+};
+module.exports.HttpRequest = HttpRequest;
+
+const HttpRequestForLHS = (options) => {
+  HttpRequest({
+    url: options.url,
+    data: options.data,
+    method: options.method,
+    success: function(res) {
+      var httpRequst = this;
+      var statusCode = res.statusCode;
+      if (parseInt(statusCode / 100) != 2) {
+        httpRequst.fail.call(httpRequst, {
+          'errMsg': 'statusCode:' + statusCode
+        });
+        return;
+      }
+      var responseData = res.data;
+      if (typeof(responseData) != 'object' || responseData == null) {
+        // wx.showLoading({
+        //   mask: true
+        // });
+        httpRequst.fail.call(httpRequst, {
+          'errMsg': "Response 'data' is wrong"
+        });
+        return;
+      }
+      if (responseData.code != 10000) {
+        wx.showToast({
+          title: responseData.msg,
+          icon: 'none',
+          mask: true,
+          duration: 5000,
+          complete: function() {
+            setTimeout(function() {
+              // wx.showLoading({
+              //   mask: true
+              // });
+              httpRequst.fail.call(httpRequst, {
+                'code': responseData.code,
+                'errMsg': responseData.msg
+              });
+            }, 5000);
+          }
+        });
+        return;
+      }
+      var responseHeaders = res.header;
+      var responseCookies = res.cookies;
+      var errMsg = res.errMsg;
+      if (typeof(options.success) == "function") {
+        options.success.call(this, responseData, responseHeaders, responseCookies, errMsg, statusCode);
+      }
+    },
+    fail: function(res) {
+      var failFnArgumentArray = [].slice.call(arguments);
+      if (typeof(options.fail) == "function") {
+        if (!res.code) {
+          wx.showToast({
+            title: "出错了！请用联系管理员。",
+            icon: 'none',
+            mask: true,
+            duration: 2000,
+            complete: function() {
+              setTimeout(function() {
+                options.fail.apply(this, failFnArgumentArray);
+              }, 2000);
+            }
+          });
+        } else {
+          options.fail.apply(this, failFnArgumentArray);
+        }
+      }
+    },
+    complete: options.complete
+  });
+};
+module.exports.HttpRequestForLHS = HttpRequestForLHS;
+
+const PostRequest = (url, data, successFn, failFn) => {
+  HttpRequestForLHS({
+    url: url,
+    data: data,
+    method: 'POST',
+    success: successFn,
+    fail: failFn
+  });
+};
 module.exports.PostRequest = PostRequest;
 
-const GetRequest = (url, data, success) => {
-  wx.request({
+const GetRequest = (url, data, successFn, failFn) => {
+  HttpRequestForLHS({
     url: url,
-    headers: {
-      'Content-Type': 'application/json'
-    },
     data: data,
-    method: "GET",
-    success: typeof(success) == "function" ? success : function() {}
+    method: 'GET',
+    success: successFn,
+    fail: failFn
   });
-}
+};
 module.exports.GetRequest = GetRequest;
-
 
 const TouchMoveHandler = function(systemInfo, touchMoveExecuteTrip) {
   if (typeof(systemInfo) != "object") {
