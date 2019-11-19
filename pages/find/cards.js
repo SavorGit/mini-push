@@ -64,24 +64,27 @@ Page({
       
       var user_info = wx.getStorageSync('savor_user_info');
       var guide_prompt = user_info.guide_prompt;
-      if (guide_prompt.length == 0) {
-        self.setData({
-          findCardListGuidedMask: true,
-        })
-      } else {
-        var is_lead = 1;
-        for (var i = 0; i < guide_prompt.length; i++) {
-          if (guide_prompt[i] == 5) {
-            is_lead = 0;
-            break;
+      if (typeof (guide_prompt) != 'undefined') {
+        if (guide_prompt.length == 0) {
+          self.setData({
+            findCardListGuidedMask: true,
+          })
+        } else {
+          var is_lead = 1;
+          for (var i = 0; i < guide_prompt.length; i++) {
+            if (guide_prompt[i] == 5) {
+              is_lead = 0;
+              break;
+            }
+          }
+          if (is_lead == 1) {
+            self.setData({
+              findCardListGuidedMask: true
+            })
           }
         }
-        if (is_lead == 1) {
-          self.setData({
-            findCardListGuidedMask: true
-          })
-        }
       }
+      
       
 
     }
