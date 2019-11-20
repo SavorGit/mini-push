@@ -6,6 +6,7 @@ var box_mac;
 var api_url = app.globalData.api_url;
 var goods_nums = 1;
 var jd_appid = app.globalData.jd_appid;
+var cache_key = app.globalData.cache_key;
 Page({
 
   /**
@@ -19,21 +20,16 @@ Page({
     room_name: '', //包间名称
     box_mac: '', //机顶盒mac
     is_link: 0, //是否连接酒楼电视
-    happy_vedio_url: '', //生日视频url
-    happy_vedio_name: '', //生日视频名称
-    happy_vedio_title: '', //生日视频标题
+    
     showModal: false, //显示授权登陆弹窗
     showActgoods: false, // 显示活动促销
+    showButton4JD: false, // 显示京东购买按钮
+    showButton4Favorites: true, // 显示收藏按钮
+    showFavoritesPanel: false, // 显示收藏面板
     
-      showButton4JD: false, // 显示京东购买按钮
-      showButton4Favorites: true, // 显示收藏按钮
-      showFavoritesPanel: false, // 显示收藏面板
-    
-    is_game_banner: 0, //是否显示猴子爬树游戏banner
     is_open_simple: 0,
     imgUrls: [],   //顶部广告位
     imgUrls_mid:[],//中部广告位
-
     indicatorDots: true, //是否显示面板指示点
     autoplay: true, //是否自动切换
     interval: 3000, //自动切换时间间隔
@@ -41,6 +37,10 @@ Page({
     goods_nums:1,
     jd_appid:jd_appid,
     hot_play:[]    //热播内容
+    //is_game_banner: 0, //是否显示猴子爬树游戏banner
+    //happy_vedio_url: '', //生日视频url
+    //happy_vedio_name: '', //生日视频名称
+    //happy_vedio_title: '', //生日视频标题
   },
 
   /**
@@ -68,11 +68,6 @@ Page({
             key: 'savor_user_info',
             data: res.data.result.userinfo,
           })
-          if (res.data.result.userinfo.is_wx_auth != 3) {
-            /*that.setData({
-              showModal: true
-            })*/
-          }
         },
         fail: function(e) {
           wx.setStorage({
@@ -91,6 +86,9 @@ Page({
         success: function(rest) {
           var is_have = rest.data.result.is_have;
           if (is_have == 1) { //已经扫码链接电视
+
+            select_link_way(rest.data.result);
+
             that.setData({
               is_link: 1,
               hotel_name: rest.data.result.hotel_name,
@@ -155,6 +153,7 @@ Page({
             success: function(rest) {
               var is_have = rest.data.result.is_have;
               if (is_have == 1) {
+                select_link_way(rest.data.result);
                 that.setData({
                   is_link: 1,
                   hotel_name: rest.data.result.hotel_name,
@@ -250,6 +249,69 @@ Page({
           })
         }
       })
+    }
+    //选择链接方式
+    function select_link_way(hotel_info){
+      var is_minimal = wx.getStorageSync(cache_key +'is_minimal');//是否扫码标准版
+      var room_ssid = hotel_info.wifi_name;
+      
+      
+      if(typeof(is_minimal)=='undefined' || is_minimal==''){//非极简版
+        if(hotel_info.is_jj==1){//后台推荐用极简版
+          console.log(hotel_info);
+          
+
+          //第一步  判断客户端基础库版本
+          var sys_info = app.globalData.sys_info;
+          if (app.compareVersion(sys_info.SDKVersion, app.globalData.min_sdk_version) >= 0) {
+            //客户端基础库版本 支持链接wifi
+
+
+            //第二步  判断当前连接的wifi是否为当前包间wifi
+            wx.startWifi({
+              success:function(res){
+                wx.getConnectedWifi({
+                  success: function (res) {
+                    console.log(res);
+                    if (res.errMsg =='getConnectedWifi:ok'){
+                      if (res.wifi.SSID == room_ssid) {//链接的是本包间wifi
+                        app.globalData.link_type = 2;
+                      } else {//链接的不是本包间wifi
+                        app.linkHotelWifi();
+                        console.log('not this  room  wifi');
+
+                      }
+                    }else {
+                      console.log('getConnectedWifi')
+                      console.log(res);
+                    }
+                    
+                  }, fail: function (res) {
+                    console.log('wx.getConnectedWifi.fail')
+                    console.log(res);
+                    if (res.errCode == 12005){ //安卓特有  未打开wifi
+                        that.setData({
+                          tips_info:{'is_open':1,'msg':'请打开您手机的'}
+                        })
+                    }
+                  },
+                })
+              },fail:function(res){
+                console.log('wx.startWifi.fail')
+                console.log(res);
+              }
+            })
+            
+          } else {//客户端基础库版本不支持链接wifi 直接使用标准版
+            
+          }
+        }else {//后台推荐用标准版 
+            //不做任何改变
+        }
+        
+      }else {//扫极简版
+
+      }
     }
     wx.request({
       url: api_url + '/Smallapp3/Adsposition/getAdspositionList',
