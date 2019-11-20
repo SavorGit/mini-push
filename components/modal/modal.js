@@ -4,22 +4,28 @@
  * 自定义modal浮层
  * 使用方法：
  *   
-<modal show="{{showModal}}" width="98%" height='60%'  border-radius="0rpx" title-text='Title' title-color="#f6f3ee" confirm-text='确定' confirm-color="#f6f3ee" cancel-text='取消' cancel-color='rgba(7,17,27,0.6)' bindclickMask='modalClickMask' bindcancel="modalCancel" bindconfirm='modalConfirm'>
+<modal show="{{showModal}}" width="98%" height='60%'  border-radius="0rpx" title-text='Title' title-color="#f6f3ee" title-background-color="unset" title-border-radius="0rpx" confirm-text='确定' confirm-color="#f6f3ee" confirm-background-color="unset" confirm-border-radius="0rpx" cancel-text='取消' cancel-color='rgba(7,17,27,0.6)' cancel-background-color="unset" cancel-border-radius="0rpx" bindclickMask='modalClickMask' bindcancel="modalCancel" bindconfirm='modalConfirm'>
   <view>你自己需要展示的内容</view>
 </modal>
  
 属性说明：
- show：            控制modal显示与隐藏
- backgroundColor:  modal的背景色
- width：           modal的宽度
- height：          modal的高度
- borderRadius：    modal的圆角
- titleText：       modal的标题
- titleColor：      modal的标题颜色
- confirmText：     modal的确定按钮文本
- confirmColor：    modal的确定按钮文本颜色
- cancelText：      modal的取消按钮文本
- cancelColor：     modal的取消按钮文本颜色
+ show：                      控制modal显示与隐藏
+ backgroundColor:            modal的背景色
+ width：                     modal的宽度
+ height：                    modal的高度
+ borderRadius：              modal的圆角
+ titleText：                 modal的标题
+ titleColor：                modal的标题文本颜色
+ titleBackgroundColor：      modal的标题背景颜色
+ titleBorderRadius：         modal的标题圆角
+ confirmText：               modal的确定按钮文本
+ confirmColor：              modal的确定按钮文本颜色
+ confirmBackgroundColor：    modal的确定按钮背景颜色
+ confirmBorderRadius：       modal的确定按钮圆角
+ cancelText：                modal的取消按钮文本
+ cancelColor：               modal的取消按钮文本颜色
+ cancelBackgroundColor：     modal的取消按钮背景颜色
+ cancelBorderRadius：        modal的取消按钮圆角
 
 事件说明：
  bindclickMask: 点击遮盖层的回调函数
@@ -75,6 +81,14 @@ Component({
       type: String,
       value: '#1CBEB6'
     },
+    titleBackgroundColor: {
+      type: String,
+      value: 'unset'
+    },
+    titleBorderRadius: {
+      type: String,
+      value: '0rpx'
+    },
     confirmText: {
       type: String,
       value: '确定'
@@ -83,6 +97,14 @@ Component({
       type: String,
       value: '#333333'
     },
+    confirmBackgroundColor: {
+      type: String,
+      value: 'unset'
+    },
+    confirmBorderRadius: {
+      type: String,
+      value: '0rpx'
+    },
     cancelText: {
       type: String,
       value: '取消'
@@ -90,6 +112,14 @@ Component({
     cancelColor: {
       type: String,
       value: '#333333'
+    },
+    cancelBackgroundColor: {
+      type: String,
+      value: 'unset'
+    },
+    cancelBorderRadius: {
+      type: String,
+      value: '0rpx'
     }
   },
 
