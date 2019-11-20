@@ -33,6 +33,22 @@ module.exports.throttle = function(fn, gapTime) {
   }
 }
 
+/**
+ * 发起 HTTPS 网络请求。封装
+ * 
+ * @para: options Object。  请求能数对象。格式：
+ *                {
+ *                  url: string,                     // 必填。开发者服务器接口地址
+ *                  headers: Object,                 // 设置请求的 header，header 中不能设置 Referer。content-type 默认为 application/json
+ *                  data: string/object/ArrayBuffer, // 请求的参数
+ *                  method: string,                  // HTTP 请求方法。默认为 GET
+ *                  dataType: string,                // 返回的数据格式。默认为 Json
+ *                  responseType: string,            // 响应的数据类型。默认为 Text
+ *                  success: function,               // 接口调用成功的回调函数。function(res)
+ *                  fail: function,                  // 接口调用失败的回调函数。function(res)
+ *                  complete: function               // 接口调用结束的回调函数（调用成功、失败都会执行）。function(res)
+ *                }
+ */
 const HttpRequest = (options) => {
   wx.showLoading({
     title: '加载中',
@@ -80,7 +96,7 @@ const HttpRequest = (options) => {
         }
       }
     },
-    error: function(err) {
+    error: err => {
       console.error(err);
     },
     complete: function() {
@@ -98,102 +114,132 @@ const HttpRequest = (options) => {
 };
 module.exports.HttpRequest = HttpRequest;
 
-const HttpRequestForLHS = (options) => {
-  HttpRequest({
-    url: options.url,
-    data: options.data,
-    method: options.method,
-    success: function(res) {
-      var httpRequst = this;
-      var statusCode = res.statusCode;
-      if (parseInt(statusCode / 100) != 2) {
-        httpRequst.fail.call(httpRequst, {
-          'errMsg': 'statusCode:' + statusCode
-        });
-        return;
-      }
-      var responseData = res.data;
-      if (typeof(responseData) != 'object' || responseData == null) {
-        // wx.showLoading({
-        //   mask: true
-        // });
-        httpRequst.fail.call(httpRequst, {
-          'errMsg': "Response 'data' is wrong"
-        });
-        return;
-      }
-      if (responseData.code != 10000) {
+/**
+ * 发起 HTTPS 网络请求。封装为热点使用
+ *
+ * @para: options Object。  请求能数对象。格式：
+ *                {
+ *                  url: string,                     // 必填。开发者服务器接口地址
+ *                  headers: Object,                 // 设置请求的 header，header 中不能设置 Referer。content-type 默认为 application/json
+ *                  data: string/object/ArrayBuffer, // 请求的参数
+ *                  method: string,                  // HTTP 请求方法。默认为 GET
+ *                  dataType: string,                // 返回的数据格式。默认为 Json
+ *                  responseType: string,            // 响应的数据类型。默认为 Text
+ *                  success: function,               // 接口调用成功的回调函数。function(data, headers, cookies, errMsg, statusCode)
+ *                  fail: function,                  // 接口调用失败的回调函数。function(res)
+ *                  complete: function               // 接口调用结束的回调函数（调用成功、失败都会执行）。function(res)
+ *                }
+ * }
+ */
+const HttpRequestForLHS = (options) => HttpRequest({
+  url: options.url,
+  headers: options.headers,
+  data: options.data,
+  method: options.method,
+  dataType: options.dataType,
+  responseType: options.responseType,
+  success: res => {
+    var httpRequst = this;
+    var statusCode = res.statusCode;
+    if (parseInt(statusCode / 100) != 2) {
+      httpRequst.fail.call(httpRequst, {
+        'errMsg': 'statusCode:' + statusCode
+      });
+      return;
+    }
+    var responseData = res.data;
+    if (typeof(responseData) != 'object' || responseData == null) {
+      // wx.showLoading({
+      //   mask: true
+      // });
+      httpRequst.fail.call(httpRequst, {
+        'errMsg': "Response 'data' is wrong"
+      });
+      return;
+    }
+    if (responseData.code != 10000) {
+      wx.showToast({
+        title: responseData.msg,
+        icon: 'none',
+        mask: true,
+        duration: 5000,
+        complete: function() {
+          setTimeout(function() {
+            // wx.showLoading({
+            //   mask: true
+            // });
+            httpRequst.fail.call(httpRequst, {
+              'code': responseData.code,
+              'errMsg': responseData.msg
+            });
+          }, 5000);
+        }
+      });
+      return;
+    }
+    var responseHeaders = res.header;
+    var responseCookies = res.cookies;
+    var errMsg = res.errMsg;
+    if (typeof(options.success) == "function") {
+      options.success.call(this, responseData, responseHeaders, responseCookies, errMsg, statusCode);
+    }
+  },
+  fail: res => {
+    var failFnArgumentArray = [].slice.call(arguments);
+    if (typeof(options.fail) == "function") {
+      if (!res.code) {
         wx.showToast({
-          title: responseData.msg,
+          title: "出错了！请用联系管理员。",
           icon: 'none',
           mask: true,
-          duration: 5000,
+          duration: 2000,
           complete: function() {
             setTimeout(function() {
-              // wx.showLoading({
-              //   mask: true
-              // });
-              httpRequst.fail.call(httpRequst, {
-                'code': responseData.code,
-                'errMsg': responseData.msg
-              });
-            }, 5000);
+              options.fail.apply(this, failFnArgumentArray);
+            }, 2000);
           }
         });
-        return;
+      } else {
+        options.fail.apply(this, failFnArgumentArray);
       }
-      var responseHeaders = res.header;
-      var responseCookies = res.cookies;
-      var errMsg = res.errMsg;
-      if (typeof(options.success) == "function") {
-        options.success.call(this, responseData, responseHeaders, responseCookies, errMsg, statusCode);
-      }
-    },
-    fail: function(res) {
-      var failFnArgumentArray = [].slice.call(arguments);
-      if (typeof(options.fail) == "function") {
-        if (!res.code) {
-          wx.showToast({
-            title: "出错了！请用联系管理员。",
-            icon: 'none',
-            mask: true,
-            duration: 2000,
-            complete: function() {
-              setTimeout(function() {
-                options.fail.apply(this, failFnArgumentArray);
-              }, 2000);
-            }
-          });
-        } else {
-          options.fail.apply(this, failFnArgumentArray);
-        }
-      }
-    },
-    complete: options.complete
-  });
-};
+    }
+  },
+  complete: options.complete
+});
 module.exports.HttpRequestForLHS = HttpRequestForLHS;
 
-const PostRequest = (url, data, successFn, failFn) => {
-  HttpRequestForLHS({
-    url: url,
-    data: data,
-    method: 'POST',
-    success: successFn,
-    fail: failFn
-  });
-};
+/**
+ * 发起 HTTPS 网络 POST 请求。
+ *
+ * @para: url        string。                    必填。开发者服务器接口地址
+ * @para: data       string/object/ArrayBuffer。 请求的参数
+ * @para: successFn  function。                  接口调用成功的回调函数
+ * @para: failFn     function。                  接口调用失败的回调函数
+ */
+const PostRequest = (url, data, successFn, failFn) => HttpRequestForLHS({
+  url: url,
+  data: data,
+  method: 'POST',
+  success: successFn,
+  fail: failFn
+});
 module.exports.PostRequest = PostRequest;
 
-const GetRequest = (url, data, successFn, failFn) => {
-  HttpRequestForLHS({
-    url: url,
-    data: data,
-    method: 'GET',
-    success: successFn,
-    fail: failFn
-  });
-};
+/**
+ * 发起 HTTPS 网络 GET 请求。
+ *
+ * @para: url        string。                    必填。开发者服务器接口地址
+ * @para: data       string/object/ArrayBuffer。 请求的参数
+ * @para: successFn  function。                  接口调用成功的回调函数
+ * @para: failFn     function。                  接口调用失败的回调函数
+ */
+const GetRequest = (url, data, successFn, failFn) => HttpRequestForLHS({
+  url: url,
+  data: data,
+  method: 'GET',
+  success: successFn,
+  fail: failFn
+});
 module.exports.GetRequest = GetRequest;
 
 const TouchMoveHandler = function(systemInfo, touchMoveExecuteTrip) {
