@@ -677,6 +677,135 @@ App({
 
     return 0
   },
+  
+
+  linkHotelWifi:function(hotel_info,that){
+    var aps = this;
+    var is_minimal = wx.getStorageSync(aps.globalData.cache_key + 'is_minimal');//是否扫码标准版
+    var room_ssid = hotel_info.wifi_name;
+    if (typeof (is_minimal) == 'undefined' || is_minimal == '') {//非极简版
+      if (hotel_info.is_jj == 1) {//后台推荐用极简版
+        console.log(hotel_info);
+        aps.jugeLinkType(hotel_info,that);
+
+        
+      } else {//后台推荐用标准版 
+        //不做任何改变
+        that.setData({
+          link_type: 1,
+          wifiErr: { 'is_open': 0, 'msg': '', 'confirm': '确定', 'calcle': '取消', 'type': 0 },
+        })
+      }
+
+    } else {//扫极简版
+      aps.jugeLinkType(hotel_info, that);
+    }
+  },
+  jugeLinkType: function (hotel_info,that){
+    var aps = this;
+    //第一步  判断客户端基础库版本
+    var sys_info = aps.globalData.sys_info;
+    console.log(sys_info);
+    if (aps.compareVersion(sys_info.SDKVersion, aps.globalData.min_sdk_version) >= 0) {
+      //客户端基础库版本 支持链接wifi
+      var wifi_name = hotel_info.wifi_name;
+      var wifi_mac = hotel_info.wifi_mac;
+      var use_wifi_password = hotel_info.wifi_password
+
+      //第二步  判断当前连接的wifi是否为当前包间wifi
+      wx.startWifi({
+        success: function (res) {
+          wx.getConnectedWifi({
+            success: function (res) {
+              console.log(res);
+              if (res.errMsg == 'getConnectedWifi:ok') {
+                if (res.wifi.SSID == wifi_name) {//链接的是本包间wifi
+                  that.setData({
+                    link_type : 2,
+                    wifiErr: { 'is_open': 0, 'msg': '', 'confirm': '确定', 'calcle': '取消', 'type': 0 }
+                  })
+                  aps.globalData.link_type = 2;
+                  
+                } else {//链接的不是本包间wifi
+                  console.log('not this  room  wifi');
+                  aps.connectWifi(wifi_name, wifi_mac, use_wifi_password, that);
+
+                }
+              } else {
+                //当前打开wifi 但是没有链接任何wifi
+                console.log('getConnectedWifi')
+                console.log(res);
+                aps.connectWifi(wifi_name, wifi_mac, use_wifi_password, that);
+              }
+
+            }, fail: function (res) {
+              console.log('wx.getConnectedWifi.fail')
+              console.log(res);
+              if (res.errCode == 12005) { //安卓特有  未打开wifi
+                that.setData({
+                  wifiErr: { 'is_open': 1, 'msg': '亲，使用此小程序前需要打开您手机的wifi,链接wifi投屏更快哦！', 'confirm': '确定', 'calcle': '取消', 'type': 1 }
+                })
+              } else if (res.errCode == 12006) {
+                that.setData({
+                  wifiErr: { 'is_open': 1, 'msg': '亲，使用此小程序前需要打开您手机的GPS定位,链接wifi投屏更快哦！', 'confirm': '确定', 'calcle': '取消', 'type': 2 }
+                })
+              }
+            },
+          })
+        }, fail: function (res) {
+          //未获取成功 重试弹窗
+          
+        }
+      })
+    } else {//客户端基础库版本不支持链接wifi 直接使用标准版
+      that.setData({
+        link_type: 1,
+        wifiErr: { 'is_open': 0, 'msg': '', 'confirm': '确定', 'calcle': '取消', 'type': 0 },
+      })
+    }
+  },
+  connectWifi: function (wifi_name, wifi_mac, use_wifi_password, that) {
+    var aps = this;
+    wx.startWifi({
+      success: function (res) {
+        wx.showLoading({
+          title: 'wifi链接中',
+        })
+        wx.connectWifi({
+          SSID: wifi_name,
+          BSSID: wifi_mac,
+          password: use_wifi_password,
+          success: function (reswifi) {
+
+            aps.globalData.link_type = 2;
+            that.setData({
+              link_type: 2
+            })
+            wx.showToast({
+              title: 'wifi链接成功',
+              icon: 'success',
+              duration: 2000
+            });
+            that.setData({
+              wifiErr: { 'is_open': 0, 'msg': '', 'confirm': '确定', 'calcle': '取消', 'type': 0 }
+            })
+            wx.hideLoading()
+          }, fail: function (res) {
+            that.setData({
+              wifiErr: { 'is_open': 1, 'msg': '亲，使用此小程序前需要链接包间wifi,链接wifi投屏更快哦！', 'confirm': '重试', 'calcle': '', 'type': 3 }
+            })
+            wx.hideLoading();
+          }, complete: function (res) {
+            wx.hideLoading()
+
+            console.log('err');
+          }
+        })
+      },complete:function(){
+        //wx.hideLoading();
+      }
+    })
+  },
   globalData: {
     openid: '',
     session_key: '',
@@ -697,5 +826,6 @@ App({
     sys_info: wx.getSystemInfoSync(),
     cache_key:'savor_',
     min_sdk_version:'1.6.0',
+    wifiErr: { 'is_open': 0, 'msg': '','confirm':'确定','calcle':'取消','type':0 }
   }
 })

@@ -36,11 +36,14 @@ Page({
     lb_duration: 1000, //滑动动画时长
     goods_nums:1,
     jd_appid:jd_appid,
-    hot_play:[]    //热播内容
+    hot_play:[],    //热播内容
+    link_type:app.globalData.link_type,
+    wifiErr: app.globalData.wifiErr,
     //is_game_banner: 0, //是否显示猴子爬树游戏banner
     //happy_vedio_url: '', //生日视频url
     //happy_vedio_name: '', //生日视频名称
     //happy_vedio_title: '', //生日视频标题
+    
   },
 
   /**
@@ -86,17 +89,17 @@ Page({
         success: function(rest) {
           var is_have = rest.data.result.is_have;
           if (is_have == 1) { //已经扫码链接电视
-
-            select_link_way(rest.data.result);
-
+            app.linkHotelWifi(rest.data.result,that);
             that.setData({
               is_link: 1,
+              hotel_room: rest.data.result.hotel_name + rest.data.result.room_name,
               hotel_name: rest.data.result.hotel_name,
               room_name: rest.data.result.room_name,
               box_mac: rest.data.result.box_mac,
+              hotel_info: rest.data.result,
             })
             box_mac = rest.data.result.box_mac;
-            getHotelInfo(rest.data.result.box_mac);
+            //getHotelInfo(rest.data.result.box_mac);
           } else {
             that.setData({
               is_link: 0,
@@ -153,15 +156,18 @@ Page({
             success: function(rest) {
               var is_have = rest.data.result.is_have;
               if (is_have == 1) {
-                select_link_way(rest.data.result);
+                app.linkHotelWifi(rest.data.result, that);
+                //select_link_way(rest.data.result);
                 that.setData({
                   is_link: 1,
+                  hotel_room: rest.data.result.hotel_name + rest.data.result.room_name,
                   hotel_name: rest.data.result.hotel_name,
                   room_name: rest.data.result.room_name,
                   box_mac: rest.data.result.box_mac,
+                  hotel_info:rest.data.result,
                 })
                 box_mac = rest.data.result.box_mac;
-                getHotelInfo(rest.data.result.box_mac);
+                //getHotelInfo(rest.data.result.box_mac);
               } else {
                 that.setData({
                   is_link: 0,
@@ -219,101 +225,13 @@ Page({
                 showActgoods: true,
                 showButton4JD:is_jd,
                 showButton4Favorites:is_jd
-              });
-              
-            }
-            
+              }); 
+            }  
           }
-        })
-        
-      }
-      
+        }) 
+      } 
     }
-    function getHotelInfo(box_mac) { //获取链接的酒楼信息
-      wx.request({
-        url: api_url + '/Smallapp/Index/getHotelInfo',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        data: {
-          box_mac: box_mac,
-        },
-        method: "POST",
-        success: function(res) {
-          that.setData({
-            hotel_room: res.data.result.hotel_name + res.data.result.room_name,
-            happy_vedio_url: res.data.result.vedio_url,
-            happy_vedio_name: res.data.result.file_name,
-            happy_vedio_title: res.data.result.name,
-            is_open_simple: res.data.result.is_open_simple
-          })
-        }
-      })
-    }
-    //选择链接方式
-    function select_link_way(hotel_info){
-      var is_minimal = wx.getStorageSync(cache_key +'is_minimal');//是否扫码标准版
-      var room_ssid = hotel_info.wifi_name;
-      
-      
-      if(typeof(is_minimal)=='undefined' || is_minimal==''){//非极简版
-        if(hotel_info.is_jj==1){//后台推荐用极简版
-          console.log(hotel_info);
-          
-
-          //第一步  判断客户端基础库版本
-          var sys_info = app.globalData.sys_info;
-          if (app.compareVersion(sys_info.SDKVersion, app.globalData.min_sdk_version) >= 0) {
-            //客户端基础库版本 支持链接wifi
-
-
-            //第二步  判断当前连接的wifi是否为当前包间wifi
-            wx.startWifi({
-              success:function(res){
-                wx.getConnectedWifi({
-                  success: function (res) {
-                    console.log(res);
-                    if (res.errMsg =='getConnectedWifi:ok'){
-                      if (res.wifi.SSID == room_ssid) {//链接的是本包间wifi
-                        app.globalData.link_type = 2;
-                      } else {//链接的不是本包间wifi
-                        app.linkHotelWifi();
-                        console.log('not this  room  wifi');
-
-                      }
-                    }else {
-                      console.log('getConnectedWifi')
-                      console.log(res);
-                    }
-                    
-                  }, fail: function (res) {
-                    console.log('wx.getConnectedWifi.fail')
-                    console.log(res);
-                    if (res.errCode == 12005){ //安卓特有  未打开wifi
-                        that.setData({
-                          tips_info:{'is_open':1,'msg':'请打开您手机的'}
-                        })
-                    }
-                  },
-                })
-              },fail:function(res){
-                console.log('wx.startWifi.fail')
-                console.log(res);
-              }
-            })
-            
-          } else {//客户端基础库版本不支持链接wifi 直接使用标准版
-            
-          }
-        }else {//后台推荐用标准版 
-            //不做任何改变
-        }
-        
-      }else {//扫极简版
-
-      }
-    }
-    wx.request({
+    wx.request({//banner图
       url: api_url + '/Smallapp3/Adsposition/getAdspositionList',
       data: {
         position: '2,3',
@@ -335,8 +253,7 @@ Page({
         }
       }
     })
-    //热播内容
-    wx.request({
+    wx.request({//热播内容
       url: api_url + '/Smallapp3/content/getHotplaylist',
       headers: {
         'Content-Type': 'application/json'
@@ -483,10 +400,16 @@ Page({
 
         app.scanQrcode();
       } else {
-        wx.navigateTo({
-          url: '/pages/forscreen/forimages/index?box_mac=' + box_mac + '&openid=' + openid + '&is_open_simple=' + is_open_simple,
-        })
-        app.recordFormId(openid, formId);
+        var hotel_info = e.detail.value.hotel_info;
+        if(app.globalData.link_type==1){
+          wx.navigateTo({
+            url: '/pages/forscreen/forimages/index?box_mac=' + box_mac + '&openid=' + openid + '&is_open_simple=' + is_open_simple,
+          })
+          app.recordFormId(openid, formId);
+        }else {
+          console.log('直连投屏')
+        }
+       
       }
     }
   },
@@ -506,10 +429,15 @@ Page({
       if (box_mac == '') {
         app.scanQrcode();
       } else {
-        wx.navigateTo({
-          url: '/pages/forscreen/forvideo/index?box_mac=' + box_mac + '&openid=' + openid + '&is_open_simple=' + is_open_simple,
-        })
-        app.recordFormId(openid, formId);
+        if(app.globalData.link_type==1){
+          wx.navigateTo({
+            url: '/pages/forscreen/forvideo/index?box_mac=' + box_mac + '&openid=' + openid + '&is_open_simple=' + is_open_simple,
+          })
+          app.recordFormId(openid, formId);
+        }else {
+          console.log('直连投屏')
+        }
+        
       }
     }
 
@@ -939,6 +867,12 @@ Page({
     wx.makePhoneCall({
       phoneNumber: tel
     })
+  },
+  modalConfirm:function(e){
+    console.log(e);
+    var that = this;
+    var hotel_info = e.target.dataset.hotel_info;
+    app.linkHotelWifi(hotel_info,that);
   },
   /**
    * 生命周期函数--监听页面初次渲染完成

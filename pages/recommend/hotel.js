@@ -35,6 +35,8 @@ Page({
     hiddens: true, //加载更多
     box_mac: '', //机顶盒mac
     close_hotel_hint: 1,
+    link_type:app.globalData.link_type,
+    wifiErr: app.globalData.wifiErr
     
 
   },
@@ -284,8 +286,10 @@ Page({
       success: function(rest) {
         var is_have = rest.data.result.is_have;
         if (is_have == 1) {
+          app.linkHotelWifi(rest.data.result, that);
           that.setData({
             is_link: 1,
+            hotel_info:rest.data.result,
             hotel_name: rest.data.result.hotel_name,
             room_name: rest.data.result.room_name,
             box_mac: rest.data.result.box_mac,
@@ -595,6 +599,12 @@ Page({
     box_mac = e.currentTarget.dataset.box_mac;
     var change_type = e.currentTarget.dataset.change_type;
     app.controlChangeProgram(box_mac, change_type);
+  },
+  modalConfirm: function (e) {
+    console.log(e);
+    var that = this;
+    var hotel_info = e.target.dataset.hotel_info;
+    app.linkHotelWifi(hotel_info, that);
   },
   /**
    * 生命周期函数--监听页面初次渲染完成

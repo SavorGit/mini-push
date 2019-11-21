@@ -80,6 +80,10 @@
 <!-- 遥控器 -->
 <template is="remoteControlWindow" data='{{popRemoteControlWindow: showControl, qrcode_img:qrcode_img, box_mac:box_mac, openid:openid, is_open_simple:is_open_simple}}' />
 
+<modal show="{{wifiErr.is_open==1 ? true : false}}" width="98%" height='60%'  border-radius="0rpx" title-text='Title' title-color="#f6f3ee" title-background-color="unset" title-border-radius="0rpx" confirm-text='{{wifiErr.confirm}}' confirm-color="#f6f3ee" confirm-background-color="unset" confirm-border-radius="0rpx" cancel-text='{{wifiErr.cancel}}' cancel-color='rgba(7,17,27,0.6)' cancel-background-color="unset" cancel-border-radius="0rpx" bindclickMask='modalClickMask' bindcancel="modalCancel" data-hotel_info="{{hotel_info}}" bindconfirm='modalConfirm'>
+  <view>{{wifiErr.msg}}</view>
+</modal>
+
 <!-- 固定悬浮按钮组 -->
 <view wx:if="{{box_mac !=''}}">
   <template is="fixedSuspensionButtonGroup" />

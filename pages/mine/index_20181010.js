@@ -17,6 +17,7 @@ Page({
     publiclist:[],
     collectlist:[],
     box_mac:'',
+    wifiErr: app.globalData.wifiErr
   },
 
   /**
@@ -24,6 +25,7 @@ Page({
    */
   onLoad: function (options) {
     //wx.hideShareMenu();
+    console.log(app.globalData);
     var that = this;
     if (app.globalData.openid && app.globalData.openid != '') {
       that.setData({
@@ -62,6 +64,7 @@ Page({
         success: function (rest) {
           var is_have = rest.data.result.is_have;
           if (is_have == 1) {
+            app.linkHotelWifi(rest.data.result, that);
             that.setData({
               box_mac: rest.data.result.box_mac,
               is_open_simple: rest.data.result.is_open_simple,
@@ -118,6 +121,7 @@ Page({
             success: function (rest) {
               var is_have = rest.data.result.is_have;
               if (is_have == 1) {
+                app.linkHotelWifi(rest.data.result, that);
                 that.setData({
                   is_link: 1,
                   
