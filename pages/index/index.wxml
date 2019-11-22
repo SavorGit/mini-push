@@ -51,7 +51,7 @@
         <input class="display_hide" name="boxmac" value="{{box_mac}}"></input>
         <input class="display_hide" name="openid" value="{{openid}}"></input>
         <input class="display_hide" name="is_open_simple" value="{{is_open_simple}}"></input>
-        <input class="display_hide" name="hotel_info" value="{{hotel_info}}"></input>
+        <input class="display_hide" name="intranet_ip" value="{{hotel_info.intranet_ip}}"></input>
         <button class="theme-font2" form-type="submit">
           <view class="icon flex-column-center-center pic">
             <image src='/images/icon2/FFFFFF_picture.png'></image>
@@ -62,6 +62,7 @@
       <form bindsubmit="chooseVedio" report-submit="true">
         <input class="display_hide" name="boxmac" value="{{box_mac}}"></input>
         <input class="display_hide" name="openid" value="{{openid}}"></input>
+        <input class="display_hide" name="intranet_ip" value="{{hotel_info.intranet_ip}}"></input>
         <input class="display_hide" name="is_open_simple" value="{{is_open_simple}}"></input>
         <button class="theme-font2" form-type="submit">
           <view class="icon flex-column-center-center video">
@@ -83,7 +84,7 @@
       </form>
     </view>
     <view class="row flex-row-center-space_around full_width">
-      <view bindtap='showHappy'  data-boxmac="{{box_mac}}" data-openid="{{openid}}">
+      <view bindtap='showHappy'  data-boxmac="{{box_mac}}" data-openid="{{openid}}" data-intranet_ip="{{hotel_info.intranet_ip}}">
         <view class="icon flex-column-center-center birthday">
           <image src='/images/icon2/FFFFFF_birthday.png'></image>
         </view>

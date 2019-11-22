@@ -60,6 +60,7 @@ Page({
     })
   },
   up_forscreen: function (e) {
+    console.log(e);
     var that = this;
     that.setData({
       is_btn_disabel: true,

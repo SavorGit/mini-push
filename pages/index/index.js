@@ -384,7 +384,6 @@ Page({
 
   //选择照片上电视
   chooseImage(e) {
-    //console.log(e);
     var that = this;
     var user_info = wx.getStorageSync("savor_user_info");
     if (user_info.is_wx_auth != 3) {
@@ -400,14 +399,14 @@ Page({
 
         app.scanQrcode();
       } else {
-        var hotel_info = e.detail.value.hotel_info;
+        
         if(app.globalData.link_type==1){
           wx.navigateTo({
             url: '/pages/forscreen/forimages/index?box_mac=' + box_mac + '&openid=' + openid + '&is_open_simple=' + is_open_simple,
           })
           app.recordFormId(openid, formId);
-        }else {
-          var intranet_ip = hotel_info.intranet_ip;
+        }else if(app.globalData.link_type==2){
+          var intranet_ip = e.detail.value.intranet_ip;
           wx.navigateTo({
             url: '/pages/forscreen/forimages/wifi?box_mac=' + box_mac + '&openid=' + openid + '&intranet_ip=' + intranet_ip,
           })
@@ -439,7 +438,10 @@ Page({
           })
           app.recordFormId(openid, formId);
         }else {
-          console.log('直连投屏')
+          var intranet_ip = e.detail.value.intranet_ip;
+          wx.navigateTo({
+            url: '/pages/forscreen/forvideo/wifi?box_mac=' + box_mac + '&openid=' + openid + '&intranet_ip=' + intranet_ip,
+          })
         }
         
       }
@@ -451,11 +453,12 @@ Page({
   showHappy(e) { //视频点播让盒子播放
     var box_mac = e.currentTarget.dataset.boxmac;
     var openid = e.currentTarget.dataset.openid;
+    var intranet_ip = e.currentTarget.dataset.intranet_ip;
     if (box_mac == '') {
       app.scanQrcode();
     } else {
       wx.navigateTo({
-        url: '/pages/thematic/birthday/list?openid=' + openid + '&box_mac=' + box_mac,
+        url: '/pages/thematic/birthday/list?openid=' + openid + '&box_mac=' + box_mac + "&intranet_ip=" + intranet_ip,
       })
     }
   },
