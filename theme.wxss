@@ -38,6 +38,10 @@ button[disabled] {
   background-color: #fff;
 }
 
+.theme-bg-FFFFFF {
+  background-color: #fff;
+}
+
 .theme8 {
   color: #333;
   background-color: #999;
@@ -164,6 +168,14 @@ button[disabled] {
 
 .theme-font-FFFFFF {
   color: #fff;
+}
+
+.theme-font-000000 {
+  color: #000;
+}
+
+.theme-font-666666 {
+  color: #666;
 }
 
 .theme-font-999999 {

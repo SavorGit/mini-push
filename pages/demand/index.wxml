@@ -20,8 +20,100 @@
   <!-- 轮播图结束 -->
 
   <view class='flex-column-center-flex_start'>
+
+    <view class='card' wx:for="{{program_list}}" wx:key="key" wx:for-item="bean" wx:for-index="index">
+      <view wx:if='{{bean.type==1}}' class="model-1">
+        <navigator class="body flex-column-center-flex_start theme-panel" bindtap='demandLog' data-openid='{{openid}}' data-box_mac='{{box_mac}}' data-title='{{bean.title}}' data-tx_url='{{bean.tx_url}}' data-id='{{bean.id}}' data-duration="{{bean.duration}}"
+          url="/pages/demand/goods_detail?box_mac={{box_mac}}&goods_id={{bean.id}}">
+          <image class="goods-pic" src='{{bean.img_url}}'></image>
+          <view class="goods-title theme-font-000000">{{bean.title}}</view>
+          <view class="goods-detail theme-font-666666">{{bean.detail}}</view>
+          <view class="goods-tags flex-row-center-flex_start">
+            <view class="goods-tag" wx:for="{{bean.tags}}" wx:key="tag_key" wx:for-item="tag" wx:for-index="tag_index">{{tag}}</view>
+          </view>
+        </navigator>
+        <view class="foot theme-panel flex-row-center-flex_start">
+          <view wx:if="{{bean.is_collect==1}}" class="play">
+            <label class="fa fa-heart fa-lg" style="color: #E11E4C;" bindtap='cancCollect' data-res_id="{{bean.id}}" data-type='{{bean.type}}' data-res_key="{{index}}"></label>
+            <label class="num-text">{{bean.collect_num}}</label>
+          </view>
+          <view wx:else class="play">
+            <label class="fa fa-heart-o fa-lg" style="color: #666666;" bindtap='onCollect' data-res_id="{{bean.id}}" data-type='{{bean.type}}' data-res_key="{{index}}"></label>
+            <label class="num-text">{{bean.collect_num}}</label>
+          </view>
+          <button class="share button_none" open-type='share' data-openid="{{openid}}" data-res_id="{{bean.id}}" data-type='{{bean.type}}' data-res_key="{{index}}" data-video_url="{{bean.tx_url}}" data-video_name="{{bean.title}}" data-video_img='{{bean.img_url}}'>
+            <label class="fa fa-share-square-o fa-lg" style="color: #666666;"></label>
+            <label class="num-text">{{bean.share_num}}</label>
+          </button>
+          <view class="launch-tv theme-button-dark" data-goods_id="{{bean.id}}" data-name="{{bean.title}}" data-filename='{{bean.filename}}' data-vediourl="{{bean.tx_url}}" data-boxmac="{{box_mac}}" data-openid="{{openid}}" data-duration="{{bean.duration}}" data-hotel_info="{{hotel_info}}"
+            bindtap='boxShow'>电视播放</view>
+        </view>
+      </view>
+      <view wx:if='{{bean.type==2}}' class="model-2">
+        <navigator class="body flex-row-center-flex_start theme-panel" bindtap='demandLog' data-openid='{{openid}}' data-box_mac='{{box_mac}}' data-title='{{bean.title}}' data-tx_url='{{bean.tx_url}}' data-id='{{bean.id}}' data-duration="{{bean.duration}}" url="/pages/demand/goods_detail?box_mac={{box_mac}}&goods_id={{bean.id}}">
+          <view class="left">
+            <view class="goods-title theme-font-000000">{{bean.title}}</view>
+            <view class="goods-tags flex-row-center-flex_start">
+              <view class="goods-tag" wx:for="{{bean.tags}}" wx:key="tag_key" wx:for-item="tag" wx:for-index="tag_index">{{tag}}</view>
+            </view>
+          </view>
+          <image class="goods-pic" src='{{bean.img_url}}'></image>
+        </navigator>
+        <view class="foot theme-panel flex-row-center-flex_start">
+          <view wx:if="{{bean.is_collect==1}}" class="play">
+            <label class="fa fa-heart fa-lg" style="color: #E11E4C;" bindtap='cancCollect' data-res_id="{{bean.id}}" data-type='{{bean.type}}' data-res_key="{{index}}"></label>
+            <label class="num-text">{{bean.collect_num}}</label>
+          </view>
+          <view wx:else class="play">
+            <label class="fa fa-heart-o fa-lg" style="color: #666666;" bindtap='onCollect' data-res_id="{{bean.id}}" data-type='{{bean.type}}' data-res_key="{{index}}"></label>
+            <label class="num-text">{{bean.collect_num}}</label>
+          </view>
+          <button class="share button_none" open-type='share' data-openid="{{openid}}" data-res_id="{{bean.id}}" data-type='{{bean.type}}' data-res_key="{{index}}" data-video_url="{{bean.tx_url}}" data-video_name="{{bean.title}}" data-video_img='{{bean.img_url}}'>
+            <label class="fa fa-share-square-o fa-lg" style="color: #666666;"></label>
+            <label class="num-text">{{bean.share_num}}</label>
+          </button>
+          <view class="launch-tv theme-button-dark" data-goods_id="{{bean.id}}" data-name="{{bean.title}}" data-filename='{{bean.filename}}' data-vediourl="{{bean.tx_url}}" data-boxmac="{{box_mac}}" data-openid="{{openid}}" data-duration="{{bean.duration}}" data-hotel_info="{{hotel_info}}"
+            bindtap='boxShow'>电视播放</view>
+        </view>
+      </view>
+      <view wx:if='{{bean.type==3}}' class="model-3">
+        <navigator class="body flex-row-center-flex_start theme-panel" bindtap='demandLog' data-openid='{{openid}}' data-box_mac='{{box_mac}}' data-title='{{bean.title}}' data-tx_url='{{bean.tx_url}}' data-id='{{bean.id}}' data-duration="{{bean.duration}}" url="/pages/demand/goods_detail?box_mac={{box_mac}}&goods_id={{bean.id}}">
+          <view wx:if='{{bean.title!=""}}' class="goods-title theme-font-000000">{{bean.title}}</view>
+          <view class="pic-group flex-row-center-flex_start">
+            <image src='{{bean.img_url}}'></image>
+            <view class="small-group flex-column-center-flex_start">
+              <image src='{{bean.img_url}}'></image>
+              <image src='{{bean.img_url}}'></image>
+            </view>
+          </view>
+          <view wx:if='{{bean.detail!=""}}' class="goods-detail theme-font-666666">{{bean.detail}}</view>
+          <view wx:if='{{bean.tags!="" && bean.tags.length>0}}' class="goods-tags flex-row-center-flex_start">
+            <view class="goods-tag" wx:for="{{bean.tags}}" wx:key="tag_key" wx:for-item="tag" wx:for-index="tag_index">{{tag}}</view>
+          </view>
+        </navigator>
+        <view class="foot theme-panel flex-row-center-flex_start">
+          <view wx:if="{{bean.is_collect==1}}" class="play">
+            <label class="fa fa-heart fa-lg" style="color: #E11E4C;" bindtap='cancCollect' data-res_id="{{bean.id}}" data-type='{{bean.type}}' data-res_key="{{index}}"></label>
+            <label class="num-text">{{bean.collect_num}}</label>
+          </view>
+          <view wx:else class="play">
+            <label class="fa fa-heart-o fa-lg" style="color: #666666;" bindtap='onCollect' data-res_id="{{bean.id}}" data-type='{{bean.type}}' data-res_key="{{index}}"></label>
+            <label class="num-text">{{bean.collect_num}}</label>
+          </view>
+          <button class="share button_none" open-type='share' data-openid="{{openid}}" data-res_id="{{bean.id}}" data-type='{{bean.type}}' data-res_key="{{index}}" data-video_url="{{bean.tx_url}}" data-video_name="{{bean.title}}" data-video_img='{{bean.img_url}}'>
+            <label class="fa fa-share-square-o fa-lg" style="color: #666666;"></label>
+            <label class="num-text">{{bean.share_num}}</label>
+          </button>
+          <view class="launch-tv theme-button-dark" data-goods_id="{{bean.id}}" data-name="{{bean.title}}" data-filename='{{bean.filename}}' data-vediourl="{{bean.tx_url}}" data-boxmac="{{box_mac}}" data-openid="{{openid}}" data-duration="{{bean.duration}}" data-hotel_info="{{hotel_info}}"
+            bindtap='boxShow'>电视播放</view>
+        </view>
+      </view>
+    </view>
+
     <!-- 循环开始 -->
     <view class='article' wx:for="{{program_list}}" wx:key="key" wx:for-item="bean" wx:for-index="index">
+
+      <!-- 旧开始 -->
       <view class='cover full_width flex-column-center-flex_start'>
         <navigator class="full_width full_height" url="/pages/demand/goods_detail?box_mac={{box_mac}}&goods_id={{bean.id}}">
           <image class='full_width full_height theme2' mode='aspectFill' src='{{bean.img_url}}'></image>
@@ -38,7 +130,8 @@
         <view class='launch flex-row-center-flex_start'>
           <view class="flex-row-center-space_between">
             <navigator class='theme-button' data-name="{{bean.title}}" data-filename='{{bean.filename}}' data-vediourl="{{bean.tx_url}}" data-boxmac="{{box_mac}}" data-openid="{{openid}}" url="/pages/demand/goods_detail?box_mac={{box_mac}}&goods_id={{bean.id}}">商品详情</navigator>
-            <button class='theme-button' bindtap='boxShow' data-goods_id="{{bean.id}}" data-name="{{bean.title}}" data-filename='{{bean.filename}}' data-vediourl="{{bean.tx_url}}" data-boxmac="{{box_mac}}" data-openid="{{openid}}" data-duration="{{bean.duration}}" data-hotel_info="{{hotel_info}}">电视播放</button>
+            <button class='theme-button' bindtap='boxShow' data-goods_id="{{bean.id}}" data-name="{{bean.title}}" data-filename='{{bean.filename}}' data-vediourl="{{bean.tx_url}}" data-boxmac="{{box_mac}}" data-openid="{{openid}}" data-duration="{{bean.duration}}"
+              data-hotel_info="{{hotel_info}}">电视播放</button>
           </view>
         </view>
         <view class='operation flex-row-center-flex_end font_666666_26'>
@@ -53,6 +146,8 @@
           </button>
         </view>
       </view>
+      <!-- 旧结束 -->
+
     </view>
     <!-- 循环结束 -->
 
