@@ -306,39 +306,67 @@ App({
       });
     }
   }, //电视播放结束
-  controlExitForscreen: function(openid, box_mac) {
+  controlExitForscreen: function (openid, box_mac, hotel_info) {
     var that = this;
+    var link_type = that.globalData.link_type;
     //openid = e.currentTarget.dataset.openid;
     //box_mac = e.currentTarget.dataset.boxmac;
-    var timestamp = (new Date()).valueOf();
-    wx.request({
-      url: that.globalData.api_url + '/Netty/Index/index',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      method: "POST",
-      data: {
-        box_mac: box_mac,
-        msg: '{ "action": 3,"openid":"' + openid + '"}',
-      },
-      success: function(res) {
-        // wx.navigateBack({
-        //   delta: 1
-        // })
-        wx.showToast({
-          title: '退出成功',
-          icon: 'none',
-          duration: 2000
-        });
-      },
-      fail: function(res) {
-        wx.showToast({
-          title: '网络异常，退出失败',
-          icon: 'none',
-          duration: 2000
-        })
-      }
-    })
+    if (link_type==1){
+      var timestamp = (new Date()).valueOf();
+      wx.request({
+        url: that.globalData.api_url + '/Netty/Index/index',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        method: "POST",
+        data: {
+          box_mac: box_mac,
+          msg: '{ "action": 3,"openid":"' + openid + '"}',
+        },
+        success: function (res) {
+          wx.showToast({
+            title: '退出成功',
+            icon: 'none',
+            duration: 2000
+          });
+        },
+        fail: function (res) {
+          wx.showToast({
+            title: '网络异常，退出失败',
+            icon: 'none',
+            duration: 2000
+          })
+        }
+      })
+    } else if (link_type==2){
+      wx.request({
+        url: "http://" + hotel_info.intranet_ip + ":8080/h5/stop?deviceId=" + openid + "&web=true",
+        success: function (res) {
+          console.log(res);
+          if (res.data.result==0){
+            wx.showToast({
+              title: '退出成功',
+              icon: 'none',
+              duration: 2000
+            });
+          }else {
+            wx.showToast({
+              title: '退出失败',
+              icon: 'none',
+              duration: 2000
+            });
+          }
+        },
+        fial: function ({ errMsg }) {
+          wx.showToast({
+            title: '网络异常，退出失败',
+            icon: 'none',
+            duration: 2000
+          });
+        },
+      })
+    }
+    
   }, //退出投屏结束
   //遥控器呼玛
   controlCallQrcode: function(openid, box_mac, qrcode_img) {
@@ -445,36 +473,102 @@ App({
     }
   },
   //遥控器控制音量
-  controlChangeVolume: function(box_mac, change_type) {
+  controlChangeVolume: function (openid,box_mac, change_type,hotel_info) {
     var that = this;
-    var timestamp = (new Date()).valueOf();
-    wx.request({
-      url: that.globalData.api_url + '/Netty/Index/index',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      method: "POST",
-      data: {
-        box_mac: box_mac,
-        msg: '{"action":31,"change_type":' + change_type + '}',
-      },
-    })
+    var link_type = that.globalData.link_type;
+    if(link_type==1){
+      wx.request({
+        url: that.globalData.api_url + '/Netty/Index/index',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        method: "POST",
+        data: {
+          box_mac: box_mac,
+          msg: '{"action":31,"change_type":' + change_type + '}',
+        },
+      })
+    }else if(link_type==2){
+      var timestamp = (new Date()).valueOf();
+      var change_type_name = '';
+      if (change_type == 1) {
+        change_type = 3
+        change_type_name = '减小音量'
+      } else if (change_type == 2) {
+        change_type = 4
+        change_type_name = '增大音量'
+      }
+      wx.request({
+        url: "http://" + hotel_info.intranet_ip + ":8080/volume?action=" + change_type + "&deviceId=" + openid + "&projectId=" + timestamp + "&web=true",
+        success: function (res) {
+          if (res.data.result == 0) {
+            wx.showToast({
+              title: change_type_name + '成功',
+              icon: 'none',
+              duration: 2000
+            })
+          } else {
+            wx.showToast({
+              title: '投屏过程中才可控制音量',
+              icon: 'none',
+              duration: 2000
+            })
+          }
+        }, fail: function () {
+          wx.showToast({
+            title: '投屏过程中才可控制音量',
+            icon: 'none',
+            duration: 2000
+          })
+        }
+      })
+    }
   },
   //遥控控制节目
-  controlChangeProgram: function(box_mac, change_type) {
+  controlChangeProgram: function(openid,box_mac, change_type,hotel_info) {
     var that = this;
-    var timestamp = (new Date()).valueOf();
-    wx.request({
-      url: that.globalData.api_url + '/Netty/Index/index',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      method: "POST",
-      data: {
-        box_mac: box_mac,
-        msg: '{"action":32,"change_type":' + change_type + '}',
-      },
-    })
+    var link_type = that.globalData.link_type;
+    if(link_type==1){
+      
+      wx.request({
+        url: that.globalData.api_url + '/Netty/Index/index',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        method: "POST",
+        data: {
+          box_mac: box_mac,
+          msg: '{"action":32,"change_type":' + change_type + '}',
+        },
+      })
+    }else if(link_type==2){
+      var timestamp = (new Date()).valueOf();
+      wx.request({
+        url: "http://" + hotel_info.intranet_ip + ":8080/switchProgram?action=" + change_type + "&deviceId=" + openid + "&box_mac="+box_mac+"&projectId=" + timestamp + "&web=true",
+        success: function (res) {
+          if (res.data.result == 0) {
+            wx.showToast({
+              title: '切换成功',
+              icon: 'none',
+              duration: 2000
+            })
+          } else {
+            wx.showToast({
+              title: '电视投屏中，切换无效',
+              icon: 'none',
+              duration: 2000
+            })
+          }
+        }, fail: function () {
+          wx.showToast({
+            title: '切换节目失败',
+            icon: 'none',
+            duration: 2000
+          })
+        }
+      })
+    }
+    
   },
   //扫码
   scanQrcode: function() {
@@ -507,8 +601,6 @@ App({
         }
       }
     });
-
-
   },
   onLaunch: function() {
     var oss_tmp_key = this.globalData.oss_access_key_id;
@@ -553,9 +645,6 @@ App({
         content: '当前微信版本过低，无法使用该功能，请升级到最新微信版本后重试。'
       })
     }
-
-
-
     var that = this
     wx.login({
       success: res => {
@@ -766,6 +855,10 @@ App({
         }, fail: function (res) {
           //未获取成功 重试弹窗
           wx.hideLoading()
+        },complete:function(res){
+          wx.stopWifi({
+
+          })
         }
       })
     } else {//客户端基础库版本不支持链接wifi 直接使用标准版

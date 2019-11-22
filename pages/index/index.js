@@ -582,20 +582,24 @@ Page({
   exitForscreen: function(e) {
     openid = e.currentTarget.dataset.openid;
     box_mac = e.currentTarget.dataset.box_mac;
-    app.controlExitForscreen(openid, box_mac);
+    var hotel_info = e.currentTarget.dataset.hotel_info;
+    app.controlExitForscreen(openid, box_mac,hotel_info);
   },
   //遥控调整音量
   changeVolume: function(e) {
     box_mac = e.currentTarget.dataset.box_mac;
+    openid = e.currentTarget.dataset.openid;
     var change_type = e.currentTarget.dataset.change_type;
-    app.controlChangeVolume(box_mac, change_type);
-
+    var hotel_info = e.currentTarget.dataset.hotel_info;
+    app.controlChangeVolume(openid,box_mac, change_type, hotel_info);
   },
   //遥控切换节目
   changeProgram: function(e) {
     box_mac = e.currentTarget.dataset.box_mac;
+    openid  = e.currentTarget.dataset.openid;
     var change_type = e.currentTarget.dataset.change_type;
-    app.controlChangeProgram(box_mac, change_type);
+    var hotel_info = e.currentTarget.dataset.hotel_info;
+    app.controlChangeProgram(openid,box_mac, change_type, hotel_info);
   },
   //文件投屏
   forfiles: function(e) {

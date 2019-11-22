@@ -84,25 +84,25 @@
       </view>
       <view class='remoteControlWindow-top'>
         <view class='opt flex-row-center-flex_start'>
-          <button bindtap='changeProgram' data-box_mac='{{box_mac}}' data-change_type='1'>
+          <button bindtap='changeProgram' data-openid='{{openid}}' data-box_mac='{{box_mac}}' data-hotel_info="{{hotel_info}}" data-change_type='1'>
             <icon class="fa-stack fa-lg">
               <image src='/images/icon2/small-button.png'></image>
               <i class="fa fa-step-backward fa-stack-1x theme-font4"></i>
             </icon>
           </button>
-          <button bindtap='changeProgram' data-box_mac='{{box_mac}}' data-change_type='2'>
+          <button bindtap='changeProgram' data-openid='{{openid}}' data-box_mac='{{box_mac}}' data-hotel_info="{{hotel_info}}" data-change_type='2'>
             <icon class="fa-stack fa-lg">
               <image src='/images/icon2/small-button.png'></image>
               <i class="fa fa-step-forward fa-stack-1x theme-font4"></i>
             </icon>
           </button>
-          <button bindtap='changeVolume' data-box_mac='{{box_mac}}' data-change_type='1'>
+          <button bindtap='changeVolume' data-openid='{{openid}}' data-box_mac='{{box_mac}}' data-hotel_info="{{hotel_info}}" data-change_type='1'>
             <icon class="fa-stack fa-lg">
               <image src='/images/icon2/small-button.png'></image>
               <i class="fa fa-volume-down fa-stack-1x theme-font4"></i>
             </icon>
           </button>
-          <button bindtap='changeVolume' data-box_mac='{{box_mac}}' data-change_type='2'>
+          <button bindtap='changeVolume' data-openid='{{openid}}' data-box_mac='{{box_mac}}' data-hotel_info="{{hotel_info}}" data-change_type='2'>
             <icon class="fa-stack fa-lg">
               <image src='/images/icon2/small-button.png'></image>
               <i class="fa fa-volume-up fa-stack-1x theme-font4"></i>
@@ -111,7 +111,7 @@
         </view>
       </view>
       <view class='remoteControlWindow-middle'>
-        <button bindtap='callQrCode' data-openid='{{openid}}' data-box_mac="{{box_mac}}" data-qrcode_img='{{qrcode_img}}'>
+        <button bindtap='callQrCode' data-openid='{{openid}}' data-box_mac="{{box_mac}}" data-hotel_info="{{hotel_info}}" data-qrcode_img='{{qrcode_img}}'>
           <image src='/images/icon2/big-button.png'></image>
           <image src='{{qrcode_img}}' style='width: 310rpx; height: 310rpx; padding: 13rpx; border-radius: 50%; top: 33rpx; left: 33rpx; background-color: #FFFFFF;'></image>
         </button>
@@ -121,7 +121,7 @@
         </view>
       </view>
       <view class='remoteControlWindow-bottom flex-row-center-center'>
-        <button bindtap="exitForscreen" data-openid='{{openid}}' data-box_mac="{{box_mac}}" class='theme-button3'>退出投屏</button>
+        <button bindtap="exitForscreen" data-openid='{{openid}}' data-box_mac="{{box_mac}}" data-hotel_info="{{hotel_info}}" class='theme-button3'>退出投屏</button>
         <!-- <navigator class='theme-button4' wx:if="{{box_mac !='' && is_open_simple>0}}" target="miniProgram" app-id="wx7883a4327329a67c" path="pages/index/index?box_mac={{box_mac}}" version="release">前往极简版</navigator> -->
       </view>
     </view>
