@@ -1,0 +1,60 @@
+<!--pages/find/full_scroll.wxml-->
+<import src="/pages/template/commons" />
+
+<view class="container-fill">
+  <!-- <view class="scroll-fullpage" bindtouchstart="scrollTouchstart" bindtouchend="scrollTouchend" style="transform: translateY(-{{scrollIndex * 100}}%); margin-top: {{margintop}}px;"> -->
+  <view class="full_height" bindtouchstart="onTouchStart" bindtouchend="onTouchEnd" animation="{{animationData}}">
+
+    <block wx:for="{{mediaObjectList}}" wx:key="key" wx:for-item="bean" wx:for-index="index">
+      <view class="full_height {{scrollIndex == index ? 'active' : ''}}">
+        <block wx:if="{{bean.res_type == 1}}">
+          <image class="full_width full_height" mode="aspectFit" src="{{bean.pubdetail[0].res_url}}"></image>
+          <view class='img-content'>
+            <view class='content-body'>
+              <view>one</view>
+            </view>
+          </view>
+        </block>
+        <block wx:if="{{bean.res_type == 2}}">
+          <video id="JohnVideo{{index}}" class="full_width full_height" show-center-play-btn="{{false}}" autoplay="{{false}}" controls="{{false}}" event-model="bubble" bindprogress="onLoadProgress" bindtimeupdate="onTimeUpdate" bindwaiting="onWaiting" binderror="onError"
+            src="{{bean.pubdetail[0].res_url}}" data-index="{{index}}">
+            <view class="default-navigation-bar flex-row-center-center theme-font-FFFFFF" style="height: 46px; padding-top: {{statusBarHeight}}px;">
+              <view class='text'>热点投屏</view>
+            </view>
+            <view class='page-top flex-row-center-center'>
+              <label>视频</label>
+              <image src='/images/icon2/FFFFFF_vertical.png'></image>
+              <cover-view class="theme-font-999999" bindtap="goToFindPictures">图片</cover-view>
+            </view>
+            <view class='page-main flex-column-flex_end-center'>
+              <view class="right-btn-group flex-column-center-flex_start fadeInRight">
+                <image class="user-hader-img" src="{{bean.avatarUrl == '' ? 'http://oss.littlehotspot.com/Html5/favicon.ico' : bean.avatarUrl}}"></image>
+                <cover-image wx:if="{{bean.is_collect=='1'}}" class="btn-favorite" src="/images/imgs/FF757D_Favorite.png" data-forscreen_id="{{bean.forscreen_id}}" data-index="{{index}}" bindtap="cancCollect"></cover-image>
+                <cover-image wx:else class="btn-favorite" src="/images/imgs/FFFFFF_Favorite.png" data-forscreen_id="{{bean.forscreen_id}}" data-index="{{index}}" bindtap="onCollect"></cover-image>
+                <label>{{bean.collect_num}}</label>
+                <cover-view class="btn-share">
+                  <button open-type='share' data-forscreen_id="{{bean.forscreen_id}}" data-openid="{{openid}}">
+                    <cover-image src="/images/imgs/FFFFFF_Share.png"></cover-image>
+                  </button>
+                </cover-view>
+                <label>{{bean.share_num}}</label>
+                <cover-image class="btn-tv" src="/images/imgs/FFFFFF_TV.png" data-forscreen_id="{{bean.forscreen_id}}" data-index="{{index}}" bindtap='boxShow'></cover-image>
+                <label>投屏</label>
+              </view>
+            </view>
+            <view class='video-content flex-column-flex_start-start'>
+              <view class="content-header">
+                <label>{{bean.nickName}}</label>
+              </view>
+              <view class='content-body'>
+                <view>我两个是乱石山碧波潭万圣龙王差巡塔的。他叫做奔波儿霸，我叫做灞波儿奔。。</view>
+              </view>
+            </view>
+            <progress class="full_width" percent="{{playProgress[index] * 100}}" stroke-width="5rpx" activeColor="#1BBEB6" backgroundColor="#EDEDED"></progress>
+          </video>
+        </block>
+      </view>
+    </block>
+
+  </view>
+</view>

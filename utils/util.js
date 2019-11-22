@@ -96,7 +96,7 @@ const HttpRequest = (options) => {
         }
       }
     },
-    error: err => {
+    error: function(err) {
       console.error(err);
     },
     complete: function() {
@@ -138,7 +138,7 @@ const HttpRequestForLHS = (options) => HttpRequest({
   method: options.method,
   dataType: options.dataType,
   responseType: options.responseType,
-  success: res => {
+  success: function(res) {
     var httpRequst = this;
     var statusCode = res.statusCode;
     if (parseInt(statusCode / 100) != 2) {
@@ -184,7 +184,7 @@ const HttpRequestForLHS = (options) => HttpRequest({
       options.success.call(this, responseData, responseHeaders, responseCookies, errMsg, statusCode);
     }
   },
-  fail: res => {
+  fail: function(res) {
     var failFnArgumentArray = [].slice.call(arguments);
     if (typeof(options.fail) == "function") {
       if (!res.code) {
@@ -213,8 +213,8 @@ module.exports.HttpRequestForLHS = HttpRequestForLHS;
  *
  * @para: url        string。                    必填。开发者服务器接口地址
  * @para: data       string/object/ArrayBuffer。 请求的参数
- * @para: successFn  function。                  接口调用成功的回调函数
- * @para: failFn     function。                  接口调用失败的回调函数
+ * @para: successFn  function。                  接口调用成功的回调函数。function(data, headers, cookies, errMsg, statusCode)
+ * @para: failFn     function。                  接口调用失败的回调函数。function(res)
  */
 const PostRequest = (url, data, successFn, failFn) => HttpRequestForLHS({
   url: url,
@@ -230,8 +230,8 @@ module.exports.PostRequest = PostRequest;
  *
  * @para: url        string。                    必填。开发者服务器接口地址
  * @para: data       string/object/ArrayBuffer。 请求的参数
- * @para: successFn  function。                  接口调用成功的回调函数
- * @para: failFn     function。                  接口调用失败的回调函数
+ * @para: successFn  function。                  接口调用成功的回调函数。function(data, headers, cookies, errMsg, statusCode)
+ * @para: failFn     function。                  接口调用失败的回调函数。function(res)
  */
 const GetRequest = (url, data, successFn, failFn) => HttpRequestForLHS({
   url: url,
@@ -514,6 +514,46 @@ const TouchMoveHandler = function(systemInfo, touchMoveExecuteTrip) {
   };
 
   /**
+   * 垂直移动处理
+   *
+   * @para page                页面对象
+   * @para startEvent          开始滑动的事件
+   * @para endEvent            结束滑动的事件
+   * @para top                 上边距
+   * @para left                左边距
+   * @para y                   垂直滑动行程
+   * @para callbackFunction    执行动画完成后回调函数。返回 Argument{
+   *                                                           handleEvent // 处理事件
+   *                                                           page // 页面对象
+   *                                                           startEvent // 手指滑动开始事件
+   *                                                           endEvent // 手指滑动结束事件
+   *                                                           top // 元素上边距
+   *                                                           left // 元素左边距
+   *                                                           x // 元素移动距离
+   *                                                      }
+   */
+  this.moveOnVerticalHandel = function(page, top, left, y, startEvent, endEvent, callbackFunction) {
+    console.log("TouchMoveHandler.moveOnVerticalHandel(page, top, left, y, startEvent, endEvent, callbackFunction)", page, startEvent, endEvent, top, left, x);
+    let handler = this;
+    let animation = wx.createAnimation({
+      duration: 150,
+      timingFunction: 'linear'
+    });
+    animation.left(left).top(top).translateX(0).translateY(y).step({
+      duration: 150,
+      timingFunction: 'linear'
+    });
+    page.setData({
+      animationData: animation.export()
+    });
+    setTimeout(function() {
+      page.setData({
+        animationData: {}
+      });
+    }, 150);
+  };
+
+  /**
    * 回调处理
    *
    * @para callback            执行动画完成后回调函数
@@ -534,3 +574,16 @@ const TouchMoveHandler = function(systemInfo, touchMoveExecuteTrip) {
   }
 };
 module.exports.TouchMoveHandler = TouchMoveHandler;
+
+module.exports.ObjectUtil = {
+  extend: (original, extend) => {
+    let obj = {};
+    for (let propertyIndex in original) {
+      obj[propertyIndex] = original[propertyIndex];
+    }
+    for (let propertyIndex in extend) {
+      obj[propertyIndex] = extend[propertyIndex];
+    }
+    return obj;
+  }
+}

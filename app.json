@@ -10,6 +10,7 @@
     "pages/find/selected_list",
     "pages/find/cards",
     "pages/find/index",
+    "pages/find/full_scroll",
     "pages/find/waterfall",
     "pages/find/video",
     "pages/find/picture",
@@ -70,7 +71,7 @@
         "selectedIconPath": "/images/icon2/000000_diamonds.png"
       },
       {
-        "pagePath": "pages/find/selected_list",
+        "pagePath": "pages/find/full_scroll",
         "text": "发现",
         "iconPath": "/images/icon2/999999_find.png",
         "selectedIconPath": "/images/icon2/000000_find.png"

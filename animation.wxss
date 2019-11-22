@@ -1,0 +1,29 @@
+/* 淡入 */
+@-webkit-keyframes fadeIn {0% {opacity: 0;}100% {opacity: 1;}}
+@keyframes fadeIn {0% {opacity: 0;}100% {opacity: 1;}}
+.fadeIn {-webkit-animation-name: fadeIn;animation-name: fadeIn;}
+
+/* 从上向下淡入 */
+@-webkit-keyframes fadeInUp {0% {opacity: 0;-webkit-transform: translate3d(0, -100%, 0);transform: translate3d(0, -100%, 0);}100% {opacity: 1;-webkit-transform: none;transform: none;}}
+@keyframes fadeInUp {0% {opacity: 0;-webkit-transform: translate3d(0, -100%, 0);-ms-transform: translate3d(0, -100%, 0);transform: translate3d(0, -100%, 0);}100% {opacity: 1;-webkit-transform: none;-ms-transform: none;transform: none;}}
+.fadeInUp {-webkit-animation-name: fadeInUp;animation-name: fadeInUp;}
+
+/* 从下向上淡入 */
+@-webkit-keyframes fadeInDown {0% {opacity: 0;-webkit-transform: translate3d(0, 100%, 0);transform: translate3d(0, 100%, 0);}100% {opacity: 1;-webkit-transform: none;transform: none;}}
+@keyframes fadeInDown {0% {opacity: 0;-webkit-transform: translate3d(0, 100%, 0);-ms-transform: translate3d(0, 100%, 0);transform: translate3d(0, 100%, 0);}100% {opacity: 1;-webkit-transform: none;-ms-transform: none;transform: none;}}
+.fadeInDown {-webkit-animation-name: fadeInDown;animation-name: fadeInDown;}
+
+/* 从左向右淡入 */
+@-webkit-keyframes fadeInLeft {0% {opacity: 0;-webkit-transform: translate3d(-100%, 0, 0);transform: translate3d(-100%, 0, 0);}100% {opacity: 1;-webkit-transform: none;transform: none;}}
+@keyframes fadeInLeft {0% {opacity: 0;-webkit-transform: translate3d(-100%, 0, 0);transform: translate3d(-100%, 0, 0);}100% {opacity: 1;-webkit-transform: none;transform: none;}}
+.fadeInLeft {-webkit-animation-name: fadeInLeft;animation-name: fadeInLeft;}
+
+/* 从右向左淡入 */
+@-webkit-keyframes fadeInRight {0% {opacity: 0;-webkit-transform: translate3d(100%, 0, 0);transform: translate3d(100%, 0, 0);}100% {opacity: 1;transform: none;}}
+@keyframes fadeInRight {0% {opacity: 0;-webkit-transform: translate3d(100%, 0, 0);transform: translate3d(100%, 0, 0);}100% {opacity: 1;-webkit-transform: none;transform: none;}}
+.fadeInRight {-webkit-animation-name: fadeInRight;animation-name: fadeInRight;}
+
+/* 脉冲 */
+@-webkit-keyframes pulse {0% {-webkit-transform: translate(0, 0);transform: translate(0, 0);}50% {-webkit-transform: translate(0, 10px);transform: translate(0, 10px);}100% {-webkit-transform: translate(0, 0);transform: translate(0, 0);}}
+@keyframes pulse {0% {-webkit-transform: translate(0, 0);transform: translate(0, 0);}50% {-webkit-transform: translate(0, 10px);transform: translate(0, 10px);}100% {-webkit-transform: translate(0, 0);transform: translate(0, 0);}}
+
