@@ -710,7 +710,8 @@ App({
       //客户端基础库版本 支持链接wifi
       var wifi_name = hotel_info.wifi_name;
       var wifi_mac = hotel_info.wifi_mac;
-      var use_wifi_password = hotel_info.wifi_password
+      var use_wifi_password = hotel_info.wifi_password;
+      var box_mac = hotel_info.box_mac
 
       //第二步  判断当前连接的wifi是否为当前包间wifi
       wx.startWifi({
@@ -728,19 +729,21 @@ App({
                   
                 } else {//链接的不是本包间wifi
                   console.log('not this  room  wifi');
-                  aps.connectWifi(wifi_name, wifi_mac, use_wifi_password, that);
+                  aps.connectWifi(wifi_name, wifi_mac, use_wifi_password, box_mac,that);
 
                 }
               } else {
                 //当前打开wifi 但是没有链接任何wifi
                 console.log('getConnectedWifi')
                 console.log(res);
-                aps.connectWifi(wifi_name, wifi_mac, use_wifi_password, that);
+                aps.connectWifi(wifi_name, wifi_mac, use_wifi_password,box_mac, that);
               }
-
+              wx.hideLoading()
             }, fail: function (res) {
+              wx.hideLoading()
               console.log('wx.getConnectedWifi.fail')
               console.log(res);
+              
               if (res.errCode == 12005) { //安卓特有  未打开wifi
                 that.setData({
                   wifiErr: { 'is_open': 1, 'msg': '亲，使用此小程序前需要打开您手机的wifi,链接wifi投屏更快哦！', 'confirm': '确定', 'calcle': '取消', 'type': 1 }
@@ -750,11 +753,19 @@ App({
                   wifiErr: { 'is_open': 1, 'msg': '亲，使用此小程序前需要打开您手机的GPS定位,链接wifi投屏更快哦！', 'confirm': '确定', 'calcle': '取消', 'type': 2 }
                 })
               }
+              var err_info = JSON.stringify(res);
+              wx.request({
+                url: aps.globalData.api_url + '/Smallappsimple/Index/recordWifiErr',
+                data: {
+                  err_info: err_info,
+                  box_mac: hotel_info.box_mac
+                }
+              })
             },
           })
         }, fail: function (res) {
           //未获取成功 重试弹窗
-          
+          wx.hideLoading()
         }
       })
     } else {//客户端基础库版本不支持链接wifi 直接使用标准版
@@ -764,7 +775,7 @@ App({
       })
     }
   },
-  connectWifi: function (wifi_name, wifi_mac, use_wifi_password, that) {
+  connectWifi: function (wifi_name, wifi_mac, use_wifi_password, box_mac, that) {
     var aps = this;
     wx.startWifi({
       success: function (res) {
@@ -791,14 +802,22 @@ App({
             })
             wx.hideLoading()
           }, fail: function (res) {
+            console.log(res);
             that.setData({
               wifiErr: { 'is_open': 1, 'msg': '亲，使用此小程序前需要链接包间wifi,链接wifi投屏更快哦！', 'confirm': '重试', 'calcle': '', 'type': 3 }
             })
             wx.hideLoading();
+            var err_info = JSON.stringify(res);
+            wx.request({
+              url: aps.globalData.api_url +'/Smallappsimple/Index/recordWifiErr',
+              data: {
+                err_info: err_info,
+                box_mac: box_mac
+              }
+            })
           }, complete: function (res) {
             wx.hideLoading()
 
-            console.log('err');
           }
         })
       },complete:function(){

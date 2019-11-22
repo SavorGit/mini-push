@@ -66,6 +66,7 @@ Page({
           if (is_have == 1) {
             app.linkHotelWifi(rest.data.result, that);
             that.setData({
+              hotel_info: rest.data.result,
               box_mac: rest.data.result.box_mac,
               is_open_simple: rest.data.result.is_open_simple,
             })
@@ -212,6 +213,12 @@ Page({
     box_mac = e.currentTarget.dataset.box_mac;
     var change_type = e.currentTarget.dataset.change_type;
     app.controlChangeProgram(box_mac, change_type);
+  },
+  modalConfirm: function (e) {
+    console.log(e);
+    var that = this;
+    var hotel_info = e.target.dataset.hotel_info;
+    app.linkHotelWifi(hotel_info, that);
   },
   /**
    * 生命周期函数--监听页面初次渲染完成

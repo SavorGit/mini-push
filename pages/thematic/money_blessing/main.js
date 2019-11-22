@@ -17,13 +17,29 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
-    var that = this;
-    openid = options.openid;
-    box_mac= options.box_mac;
-    that.setData({
-      openid:openid,
-      box_mac:box_mac
-    })
+    if (app.globalData.link_type == 2) {
+      
+      wx.navigateBack({
+        delta: 1,
+        success:function(res){
+          wx.showToast({
+            title: '直连方式不可发红包',
+            icon: 'none',
+            duration: 3000,
+          })
+        }
+      })
+      
+    } else {
+      var that = this;
+      openid = options.openid;
+      box_mac = options.box_mac;
+      that.setData({
+        openid: openid,
+        box_mac: box_mac
+      })
+    }
+    
   },
 
   /**

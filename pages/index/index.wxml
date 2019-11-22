@@ -7,15 +7,7 @@
   <!-- 轮播图面板 -->
   <swiper wx:if="{{imgUrls.length > 0}}" class="banner-loop-panel full_width" indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{lb_duration}}">
     <block wx:for="{{imgUrls}}" wx:key="item" wx:for-index="index">
-      <swiper-item class="full_width full_height" wx:if="{{link_type==2 && item.id !=5 && item.id!=6}}">
-        <navigator wx:if="{{item.clicktype == 1}}" class='full_width full_height' target="miniProgram" app-id="{{item.appid}}" path="{{item.linkcontent}}" bindtap="openAdsLink" data-ads_id="{{item.id}}">
-          <image mode='aspectFill' src="{{item.oss_addr}}" class="full_width full_height" />
-        </navigator>
-        <button wx:if="{{item.clicktype == 2}}" class='full_width full_height' bindtap='{{item.bindtap}}' data-boxmac="{{box_mac}}" data-openid="{{openid}}" data-index='{{index}}' data-linkcontent='{{item.linkcontent}}'>
-          <image mode='aspectFill' src="{{item.oss_addr}}" class="full_width full_height" />
-        </button>
-      </swiper-item>
-      <swiper-item class="full_width full_height" wx:if="{{link_type==1}}">
+      <swiper-item class="full_width full_height">
         <navigator wx:if="{{item.clicktype == 1}}" class='full_width full_height' target="miniProgram" app-id="{{item.appid}}" path="{{item.linkcontent}}" bindtap="openAdsLink" data-ads_id="{{item.id}}">
           <image mode='aspectFill' src="{{item.oss_addr}}" class="full_width full_height" />
         </navigator>
