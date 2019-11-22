@@ -38,7 +38,7 @@
         <view class='launch flex-row-center-flex_start'>
           <view class="flex-row-center-space_between">
             <navigator class='theme-button' data-name="{{bean.title}}" data-filename='{{bean.filename}}' data-vediourl="{{bean.tx_url}}" data-boxmac="{{box_mac}}" data-openid="{{openid}}" url="/pages/demand/goods_detail?box_mac={{box_mac}}&goods_id={{bean.id}}">商品详情</navigator>
-            <button class='theme-button' bindtap='boxShow' data-name="{{bean.title}}" data-filename='{{bean.filename}}' data-vediourl="{{bean.tx_url}}" data-boxmac="{{box_mac}}" data-openid="{{openid}}">电视播放</button>
+            <button class='theme-button' bindtap='boxShow' data-goods_id="{{bean.id}}" data-name="{{bean.title}}" data-filename='{{bean.filename}}' data-vediourl="{{bean.tx_url}}" data-boxmac="{{box_mac}}" data-openid="{{openid}}" data-duration="{{bean.duration}}" data-hotel_info="{{hotel_info}}">电视播放</button>
           </view>
         </view>
         <view class='operation flex-row-center-flex_end font_666666_26'>

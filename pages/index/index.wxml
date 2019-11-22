@@ -119,7 +119,7 @@
             <view class="people theme-font1">{{bean.nickName}}</view>
             <view class="msg">累计播放 {{bean.play_nums}} 次</view>
           </view>
-          <button bindtap="boxShow" class="btn theme-button-dark" data-res_type="{{bean.res_type}}" data-res_nums="{{bean.res_nums}}" data-pubdetail="{{bean.pubdetail}}" data-boxmac="{{box_mac}}" data-openid="{{openid}}" data-forscreen_id="{{bean.forscreen_id}}">电视播放</button>
+          <button bindtap="boxShow" class="btn theme-button-dark" data-res_type="{{bean.res_type}}" data-res_nums="{{bean.res_nums}}" data-pubdetail="{{bean.pubdetail}}" data-boxmac="{{box_mac}}" data-openid="{{openid}}" data-forscreen_id="{{bean.forscreen_id}}" data-hotel_info="{{hotel_info}}">电视播放</button>
         </view>
       </block>
 

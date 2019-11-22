@@ -41,7 +41,8 @@
     "pages/forscreen/forfile/h5files",
     "pages/forscreen/forfile/h5files_result",
     "pages/h5/index",
-    "pages/demand/goods_detail"
+    "pages/demand/goods_detail",
+    "pages/forscreen/forimages/wifi"
   ],
   "permission": {
     "scope.userLocation": {

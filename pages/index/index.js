@@ -407,7 +407,11 @@ Page({
           })
           app.recordFormId(openid, formId);
         }else {
-          console.log('直连投屏')
+          var intranet_ip = hotel_info.intranet_ip;
+          wx.navigateTo({
+            url: '/pages/forscreen/forimages/wifi?box_mac=' + box_mac + '&openid=' + openid + '&intranet_ip=' + intranet_ip,
+          })
+          //console.log('直连投屏')
         }
        
       }
@@ -859,12 +863,13 @@ Page({
     var pubdetail = e.currentTarget.dataset.pubdetail;
     var res_type = e.currentTarget.dataset.res_type;
     var res_nums  = e.currentTarget.dataset.res_nums;
+    var hotel_info = e.currentTarget.dataset.hotel_info;
     if (res_type == 1) {
       var action = 11; //发现图片点播
     } else if (res_type == 2) {
       var action = 12; //发现视频点播
     }
-    app.boxShow(box_mac, forscreen_id, pubdetail, res_type, res_nums, action);
+    app.boxShow(box_mac, forscreen_id, pubdetail, res_type, res_nums, action, hotel_info);
   },
   phonecallevent: function (e) {
     var tel = e.target.dataset.tel;

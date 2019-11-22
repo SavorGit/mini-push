@@ -1,0 +1,91 @@
+<!--pages/launch/pic/index.wxml-->
+<import src="/pages/template/commons" />
+
+<view class="container" wx:if="{{is_upload==0}}">
+  <view class='full_width flex_row_center page-top'>
+    <label>照片上传成功后，电视下载完毕开始播放</label>
+  </view>
+  <form class='full_width upoad-form' bindsubmit="up_forscreen">
+    <view class='full_width page-main'>
+      <view class="weui-grids grids-frame">
+
+        <view class="weui-grid" wx:for="{{up_imgs}}" wx:key="key" wx:for-item="img" wx:for-index="index">
+          <view class="pic_show">
+            <image class='pic_show' mode='aspectFill' src="{{img.tmp_img}}"></image>
+            <!--           
+            <view class='upload_success_frame'>
+              <image style='margin:0 0 0 0;width:38rpx;height:38rpx;' src='/images/icon/check_alt_512x512.png'></image>
+            </view>
+            <view class='upload_mask'>
+              <label>20%</label>
+            </view> -->
+            <input class="display_hide" name="upimgs{{index}}" value="{{img.tmp_img}}"></input>
+            <input class="display_hide" name="upimgsize{{index}}" value="{{img.resource_size}}"></input>
+          </view>
+        </view>
+
+      </view>
+      <input class="display_hide" name="box_mac" value="{{box_mac}}"></input>
+      <input class="display_hide" name="openid" value="{{openid}}"></input>
+      <input class='display_hide' name="img_lenth" value="{{img_lenth}}"></input>
+      <input class='display_hide' name="intranet_ip" value="{{intranet_ip}}"> </input>
+      <view class='pic_text'>
+        <label class='font_333333_30'>为所有照片增加文字（选填）</label>
+        <textarea class='text_input' name="forscreen_char" maxlength='30' placeholder='1-30字'></textarea>
+      </view>
+    </view>
+    <view class='full_width page-bottom'>
+      <button form-type="submit" class='button_1' disabled='{{is_btn_disabel}}'>投屏</button>
+    </view>
+  </form>
+  <view class="body-view">
+    <loading hidden="{{hiddens}}" bindchange="loadingChange">亲^_^投屏中,请稍后...</loading>
+  </view>
+</view>
+<!-- 上传照片后 -->
+<view class="container" wx:if="{{is_upload>0}}">
+  <view class='full_width flex_row_center page-top'>
+    <label>照片上传成功后，电视下载完毕开始播放</label>
+  </view>
+  <view class='full_width page-main'>
+    <view class="weui-grids grids-frame">
+
+      <view class="weui-grid" wx:for="{{up_imgs}}" wx:key="key" wx:for-item="bean" wx:for-index="index">
+        <view class="pic_show" bindtap='up_single_pic' data-boxmac="{{box_mac}}" data-openid="{{openid}}" data-img_url="{{bean.img_url}}" data-intranet_ip='{{intranet_ip}}' data-filename='{{filename_arr[index]}}' data-forscreen_char='{{forscreen_char}}' data-resouce_size="{{bean.img_size}}"
+          data-choose_key="{{index}}">
+
+          <image wx:if="{{choose_key==index}}" class='pic_show pic_show_cur' mode='aspectFill' src="{{bean.img_url}}"></image>
+          <image wx:else class='pic_show' mode='aspectFill' src="{{bean.img_url}}"></image>
+        </view>
+      </view>
+
+    </view>
+  </view>
+  <view class='full_width page-bottom'>
+    <button class='button_2' bindtap="chooseImage" data-intranet_ip='{{intranet_ip}}' data-boxmac="{{box_mac}}" data-openid="{{openid}}">重选照片</button>
+    <!-- <button class='button_2'>再次播放</button> -->
+    <button class='button_2' style='background-color:rgb(153, 153, 153);' bindtap='exitForscreend' data-intranet_ip='{{intranet_ip}}' data-boxmac="{{box_mac}}" data-openid="{{openid}}">退出投屏</button>
+  </view>
+</view>
+
+
+<!-- 连接WIFI重试 - 弹窗 -->
+<modal show='{{showRetryModal}}' width="80vw" height="300rpx" title-text="" confirmText="" cancelText="">
+  <view style='display: flex;flex-direction: column;align-items: center; font-size: 30rpx;padding-top:60rpx;padding-bottom:50rpx;'>
+    <label style='height: 50rpx;'>当前无线局域网"{{wifi_name}}"</label>
+    <label style='height: 50rpx;'>暂时无法连接</label>
+  </view>
+  <view style='display: flex;flex-direction: row;align-items: center;'>
+    <button style='width: 260rpx; height: 60rpx; line-height: 60rpx; color: #FFF; font-size: 28rpx; margin: auto; padding: 0; border: 0; background-color: rgb(28, 190, 182); border-radius: 30rpx;text-align:center;' bindtap='netRetry'>重试</button>
+    <navigator style='width: 260rpx; height: 60rpx; line-height: 60rpx; color: #FFF; font-size: 28rpx; margin: auto; padding: 0; border: 0; background-color: rgb(28, 190, 182); border-radius: 30rpx;text-align:center;' target="miniProgram" app-id="wxfdf0346934bb672f"
+      path="pages/index/index">进入普通版</navigator>
+  </view>
+</modal>
+
+<!-- 固定悬浮按钮组 -->
+<view wx:if="{{box_mac !=''}}">
+  <template is="fixedSuspensionButtonGroup" />
+</view>
+
+<!-- 遥控器 -->
+<template is="remoteControlWindow" data='{{popRemoteControlWindow: popRemoteControlWindow, qrcode_img: qrcode_img, box_mac: box_mac, openid: openid, is_open_standard: is_open_standard}}' />
