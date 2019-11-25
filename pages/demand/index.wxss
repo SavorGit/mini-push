@@ -117,11 +117,13 @@
 }
 
 .card > .model-1 > .body > .goods-title {
+  width: 100%;
   margin-top: 30rpx;
   font-size: 32rpx;
 }
 
 .card > .model-1 > .body > .goods-detail {
+  width: 100%;
   margin-top: 30rpx;
   font-size: 24rpx;
   overflow: hidden;
@@ -132,6 +134,7 @@
 }
 
 .card > .model-1 > .body > .goods-tags {
+  width: 100%;
   margin-top: 40rpx;
 }
 
@@ -173,6 +176,7 @@
 }
 
 .card > .model-2 > .body > .left > .goods-tags {
+  width: 100%;
   margin-top: 40rpx;
 }
 
@@ -210,6 +214,7 @@
 }
 
 .card > .model-3 > .body > .goods-title {
+  width: 100%;
   font-size: 32rpx;
 }
 
@@ -238,6 +243,36 @@
 
 .card > .model-3 > .body > .pic-group > .small-group > image:first-child {
   margin-top: 0;
+}
+
+.card > .model-3 > .body > .goods-detail {
+  width: 100%;
+  margin-top: 30rpx;
+  font-size: 24rpx;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+}
+
+.card > .model-3 > .body > .goods-tags {
+  width: 100%;
+  margin-top: 40rpx;
+}
+
+.card > .model-3 > .body > .goods-tags > .goods-tag {
+  width: 100rpx;
+  height: 30rpx;
+  line-height: 30rpx;
+  margin-left: 30rpx;
+  text-align: center;
+  font-size: 20rpx;
+  color: #eb6877;
+  background-color: rgba(235, 104, 119, 0.1);
+}
+
+.card > .model-3 > .body > .goods-tags > .goods-tag:first-child {
+  margin-left: 0;
 }
 
 .card .foot {

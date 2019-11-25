@@ -1,12 +1,15 @@
 <!--pages/demand/goods_detail.wxml-->
 <import src="/pages/template/commons" />
-<template wx:if="{{is_header==0}}" is="navigationBarForTwoLevel" data='{{statusBarHeight: statusBarHeight,titleText:"商品详情"}}' />
-<template wx:if="{{is_header==1}}" is="navigationBarForShare" data='{{statusBarHeight: statusBarHeight,titleText:"商品详情"}}' />
+<template wx:if="{{is_header==0}}" is="navigationBarForTwoLevel" data='{{statusBarHeight: statusBarHeight,titleText:goods_info.name}}' />
+<template wx:if="{{is_header==1}}" is="navigationBarForShare" data='{{statusBarHeight: statusBarHeight,titleText:goods_info.name}}' />
 
 <!-- <view class="container flex-column-center-flex_start theme-container" style='height: calc(100vh - 46px - {{statusBarHeight}}px);'> -->
 <view class="container flex-column-center-flex_start theme-container" style='height: calc({{documentHeight}}px - 46px);'>
   <video class="goods-video" src="{{goods_info.video_url}}"></video>
   <view class='operation flex-row-center-flex_end font_666666_26'>
+    <view>
+      <label class="fa fa-television fa-lg">{{goods_info.play_num}}</label>
+    </view>
     <view wx:if="{{goods_info.is_collect==1}}">
       <label class="fa fa-heart fa-lg" style="color: #E11E4C;" bindtap='cancCollect' data-res_id="{{goods_info.goods_id}}" data-type='4' data-openid='{{openid}}'>{{goods_info.collect_num}}</label>
     </view>
@@ -17,6 +20,7 @@
       <label class="fa fa-share-square-o fa-lg">{{goods_info.share_num}}</label>
     </button>
   </view>
+  <!-- <view class="goods-title">{{goods_info.name}}</view> -->
   <scroll-view class="goods-info full_width flex-column-center-flex_start theme-container" scroll-y="true" scroll-with-animation="true">
     <block wx:for="{{goods_info.detail_content}}" wx:key="item" wx:for-index="index">
       <image mode="widthFix" src="{{item}}"></image>
