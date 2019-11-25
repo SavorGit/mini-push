@@ -329,9 +329,10 @@ App({
             })
           }
         }else if(action==5){//优选
+          var timestamp = (new Date()).valueOf();
           for (var i = 0; i < res_len; i++) {
             wx.request({
-              url: "http://" + hotel_info.intranet_ip + ":8080/h5/goods_ondemand?deviceId=" + user_info.openid + "&web=true&media_id=" + forscreen_id + "&media_name=" + pubdetail[0]['filename'] + "&media_url="+pubdetail[0]['res_url'],
+              url: "http://" + hotel_info.intranet_ip + ":8080/h5/goods_ondemand?deviceId=" + user_info.openid + "&web=true&media_id=" + forscreen_id + "&media_name=" + pubdetail[0]['filename'] + "&media_url=" + pubdetail[0]['res_url'] + '&froscreen_id=' + timestamp,
               success:function(res){
                 if(res.data.result==0){
                   wx.showToast({
@@ -848,9 +849,8 @@ App({
   jugeLinkType: function (hotel_info,that){
     var aps = this;
     //第一步  判断客户端基础库版本
-    var sys_info = aps.globalData.sys_info;
-    console.log(sys_info);
-    if (aps.compareVersion(sys_info.SDKVersion, aps.globalData.min_sdk_version) >= 0) {
+    var sdk_version = aps.globalData.sys_info.SDKVersion;
+    if (aps.compareVersion(sdk_version, aps.globalData.min_sdk_version) >= 0) {
       //客户端基础库版本 支持链接wifi
       var wifi_name = hotel_info.wifi_name;
       var wifi_mac = hotel_info.wifi_mac;
