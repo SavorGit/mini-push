@@ -13,8 +13,8 @@ Page({
     statusBarHeight: getApp().globalData.statusBarHeight,
     documentHeight: app.SystemInfo.documentHeight,
     goods_info: [],
-    showInputGoodsCount:false,
-    goods_nums:1
+    showInputGoodsCount: false,
+    goods_nums: 1
   },
 
   /**
@@ -29,24 +29,25 @@ Page({
     var goods_box_mac = '';
     var uid = '';
     var is_header = 0;
-    if(typeof(options.goods_box_mac) !='undefined'){
+    if (typeof(options.goods_box_mac) != 'undefined') {
       goods_box_mac = options.goods_box_mac;
-    }else {
+    } else {
       goods_box_mac = box_mac
     }
-    if(typeof(options.uid) !='undefined'){
+    if (typeof(options.uid) != 'undefined') {
       uid = options.uid;
     }
-    if(typeof(options.is_header)!='undefined'){
+    if (typeof(options.is_header) != 'undefined') {
       is_header = 1;
     }
     that.setData({
-      goods_box_mac:goods_box_mac,
-      uid:uid,
+      goods_box_mac: goods_box_mac,
+      uid: uid,
       is_header: is_header
     })
     wx.request({
-      url: api_url + '/Smallapp3/optimize/detail',
+      // url: api_url + '/Smallapp3/optimize/detail',
+      url: api_url + '/Smallapp4/optimize/detail',
       header: {
         'content-type': 'application/json'
       },
@@ -145,7 +146,20 @@ Page({
     var pubdetail = e.currentTarget.dataset.pubdetail;
     var res_type = 2;
     var res_nums = 1;
-    app.boxShow(box_mac, forscreen_id, pubdetail, res_type, res_nums,5);
+    app.boxShow(box_mac, forscreen_id, pubdetail, res_type, res_nums, 5);
+
+    // 调用记录播放次数接口
+    utils.PostRequest(api_url + '/Smallapp4/demand/recordPlaynum', {
+      openid: openid,
+      res_id: forscreen_id
+    }, (data, headers, cookies, errMsg, statusCode) => {
+      let program_list = self.data.program_list;
+      program_list[listIndex].play_num = data.result.play_num;
+      self.setData({
+        program_list: program_list
+      });
+    });
+
   },
   //收藏资源
   onCollect: function(e) {
@@ -302,38 +316,38 @@ Page({
       }
     }
   },
-  showTc:function(e){
+  showTc: function(e) {
     var that = this;
-    var goods_box_mac= e.currentTarget.dataset.goods_box_mac;
+    var goods_box_mac = e.currentTarget.dataset.goods_box_mac;
     var uid = e.currentTarget.dataset.uid;
-    if(goods_box_mac==''){
+    if (goods_box_mac == '') {
       app.scanQrcode();
-    }else if(uid==''){
-      
+    } else if (uid == '') {
+
       wx.showToast({
         title: '店内商品购买有误',
-        icon:'none',
-        duration:2000,
+        icon: 'none',
+        duration: 2000,
       })
-    }else {
+    } else {
       goods_nums = 1;
       that.setData({
         showInputGoodsCount: true,
         goods_nums: goods_nums
       })
-    } 
-    
+    }
+
   },
-  closeAct:function(res){
+  closeAct: function(res) {
     var that = this;
     that.setData({
       showInputGoodsCount: false,
     })
   },
-  changeActNums: function (e) {
+  changeActNums: function(e) {
     var that = this;
     var type = e.currentTarget.dataset.type;
-    if (type == 1) {//数量增加
+    if (type == 1) { //数量增加
       if (goods_nums == 10) {
         wx.showToast({
           title: '数量不能大于10',
@@ -360,14 +374,14 @@ Page({
     })
   },
   //店内购买
-  shopBuyGoods: function (e) {
+  shopBuyGoods: function(e) {
     //console.log(e);
     var that = this;
     var goods_id = e.currentTarget.dataset.goods_id;
     var goods_nums = e.currentTarget.dataset.goods_nums;
     var goods_box_mac = e.currentTarget.dataset.goods_box_mac;
     var buy_type = e.currentTarget.dataset.buy_type;
-    var uid      = e.currentTarget.dataset.uid;
+    var uid = e.currentTarget.dataset.uid;
     var user_info = wx.getStorageSync("savor_user_info");
     var openid = user_info.openid;
     wx.request({
@@ -383,7 +397,7 @@ Page({
         buy_type: buy_type,
         uid: uid
       },
-      success: function (res) {
+      success: function(res) {
         if (res.data.code == 10000) {
           if (buy_type == 1) {
             wx.showToast({
@@ -395,7 +409,7 @@ Page({
           that.setData({
             showInputGoodsCount: false,
           })
-          
+
         } else {
           if (buy_type == 1) {
             wx.showToast({
