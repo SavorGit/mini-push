@@ -52,6 +52,9 @@
         <input class="display_hide" name="openid" value="{{openid}}"></input>
         <input class="display_hide" name="is_open_simple" value="{{is_open_simple}}"></input>
         <input class="display_hide" name="intranet_ip" value="{{hotel_info.intranet_ip}}"></input>
+        <input class="display_hide" name="wifi_mac" value="{{hotel_info.wifi_mac}}"></input>
+        <input class="display_hide" name="wifi_name" value="{{hotel_info.wifi_name}}"></input>
+        <input class="display_hide" name="wifi_password" value="{{hotel_info.wifi_password}}"></input>
         <button class="theme-font2" form-type="submit">
           <view class="icon flex-column-center-center pic">
             <image src='/images/icon2/FFFFFF_picture.png'></image>
@@ -63,7 +66,9 @@
         <input class="display_hide" name="boxmac" value="{{box_mac}}"></input>
         <input class="display_hide" name="openid" value="{{openid}}"></input>
         <input class="display_hide" name="intranet_ip" value="{{hotel_info.intranet_ip}}"></input>
-        <input class="display_hide" name="is_open_simple" value="{{is_open_simple}}"></input>
+        <input class="display_hide" name="wifi_mac" value="{{hotel_info.wifi_mac}}"></input>
+        <input class="display_hide" name="wifi_name" value="{{hotel_info.wifi_name}}"></input>
+        <input class="display_hide" name="wifi_password" value="{{hotel_info.wifi_password}}"></input>
         <button class="theme-font2" form-type="submit">
           <view class="icon flex-column-center-center video">
             <image src='/images/icon2/FFFFFF_video.png'></image>

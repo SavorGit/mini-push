@@ -217,8 +217,15 @@ Page({
       box_mac = scene_arr[0];
       code_type = scene_arr[1];
       var jz_time = scene_arr[2];
-      //console.log(scene_arr);
-      //return false;
+      if(typeof(scene_arr[3])!='undefined' && scene_arr[3]==1){
+        wx.setStorageSync('savor_is_minimal', 1);
+      }else {
+        try {
+          wx.removeStorageSync('savor_is_minimal')
+        } catch (e) {
+          // Do something when catch error
+        }
+      }
       var that = this
       wx.login({
         success: res => {

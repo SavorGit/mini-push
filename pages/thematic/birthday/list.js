@@ -151,7 +151,6 @@ Page({
 
   },
   showHappy:function(e){
-    console.log(e);
     var box_mac = e.currentTarget.dataset.boxmac;
     var openid = e.currentTarget.dataset.openid;
     var vediourl = e.currentTarget.dataset.vediourl;

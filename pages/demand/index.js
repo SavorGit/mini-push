@@ -323,6 +323,7 @@ Page({
         pubdetail[0].file_name     = file_name;
       }
       var hotel_info = e.currentTarget.dataset.hotel_info;
+      console.log(pubdetail);
       app.boxShow(box_mac, forscreen_id, pubdetail, res_type, res_nums, 5,hotel_info);
       
     }

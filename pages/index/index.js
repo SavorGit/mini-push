@@ -97,6 +97,7 @@ Page({
               room_name: rest.data.result.room_name,
               box_mac: rest.data.result.box_mac,
               hotel_info: rest.data.result,
+              hotel_info_json: JSON.stringify(rest.data.result),
             })
             box_mac = rest.data.result.box_mac;
             //getHotelInfo(rest.data.result.box_mac);
@@ -165,6 +166,7 @@ Page({
                   room_name: rest.data.result.room_name,
                   box_mac: rest.data.result.box_mac,
                   hotel_info:rest.data.result,
+                  hotel_info_json: JSON.stringify(rest.data.result),
                 })
                 box_mac = rest.data.result.box_mac;
                 //getHotelInfo(rest.data.result.box_mac);
@@ -406,9 +408,13 @@ Page({
           })
           app.recordFormId(openid, formId);
         }else if(app.globalData.link_type==2){
+                 
           var intranet_ip = e.detail.value.intranet_ip;
+          var wifi_mac = e.detail.value.wifi_mac;
+          var wifi_name = e.detail.value.wifi_name;
+          var wifi_password = e.detail.value.wifi_password;
           wx.navigateTo({
-            url: '/pages/forscreen/forimages/wifi?box_mac=' + box_mac + '&openid=' + openid + '&intranet_ip=' + intranet_ip,
+            url: '/pages/forscreen/forimages/wifi?box_mac=' + box_mac + '&openid=' + openid + '&intranet_ip=' + intranet_ip + '&wifi_mac=' + wifi_mac + '&wifi_name=' + wifi_name + '&wifi_password=' + wifi_password,
           })
           //console.log('直连投屏')
         }
@@ -439,8 +445,12 @@ Page({
           app.recordFormId(openid, formId);
         }else {
           var intranet_ip = e.detail.value.intranet_ip;
+          var wifi_mac = e.detail.value.wifi_mac;
+          var wifi_name = e.detail.value.wifi_name;
+          var wifi_password = e.detail.value.wifi_password;
+
           wx.navigateTo({
-            url: '/pages/forscreen/forvideo/wifi?box_mac=' + box_mac + '&openid=' + openid + '&intranet_ip=' + intranet_ip,
+            url: '/pages/forscreen/forvideo/wifi?box_mac=' + box_mac + '&openid=' + openid + '&intranet_ip=' + intranet_ip + '&wifi_mac=' + wifi_mac + '&wifi_name=' + wifi_name + '&wifi_password=' + wifi_password,
           })
         }
         
@@ -587,26 +597,29 @@ Page({
   },
   //遥控退出投屏
   exitForscreen: function(e) {
+    var that = this;
     openid = e.currentTarget.dataset.openid;
     box_mac = e.currentTarget.dataset.box_mac;
     var hotel_info = e.currentTarget.dataset.hotel_info;
-    app.controlExitForscreen(openid, box_mac,hotel_info);
+    app.controlExitForscreen(openid, box_mac,hotel_info,that);
   },
   //遥控调整音量
   changeVolume: function(e) {
+    var that = this;
     box_mac = e.currentTarget.dataset.box_mac;
     openid = e.currentTarget.dataset.openid;
     var change_type = e.currentTarget.dataset.change_type;
     var hotel_info = e.currentTarget.dataset.hotel_info;
-    app.controlChangeVolume(openid,box_mac, change_type, hotel_info);
+    app.controlChangeVolume(openid, box_mac, change_type, hotel_info, that);
   },
   //遥控切换节目
   changeProgram: function(e) {
+    var that = this;
     box_mac = e.currentTarget.dataset.box_mac;
     openid  = e.currentTarget.dataset.openid;
     var change_type = e.currentTarget.dataset.change_type;
     var hotel_info = e.currentTarget.dataset.hotel_info;
-    app.controlChangeProgram(openid,box_mac, change_type, hotel_info);
+    app.controlChangeProgram(openid, box_mac, change_type, hotel_info, that);
   },
   //文件投屏
   forfiles: function(e) {

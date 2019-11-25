@@ -4,6 +4,10 @@ const app = getApp()
 var box_mac;
 var openid;
 var intranet_ip;
+var wifi_mac;
+var wifi_name;
+var wifi_password;
+var hotel_info = { 'intranet_ip': '', 'wifi_mac': '', 'wifi_name': '', 'wifi_password': '', is_jj:'1'};
 var qrcode_url;
 Page({
 
@@ -29,10 +33,19 @@ Page({
     box_mac = options.box_mac;
     openid = options.openid;
     intranet_ip = options.intranet_ip;
+    wifi_mac = options.wifi_mac;
+    wifi_name = options.wifi_name;
+    wifi_password = options.wifi_password;
+    hotel_info.intranet_ip = intranet_ip;
+    hotel_info.wifi_mac   = wifi_mac;
+    hotel_info.wifi_name  = wifi_name;
+    hotel_info.wifi_password = wifi_password;
+    
     that.setData({
       box_mac: box_mac,
       openid: openid,
       is_btn_disabel: true,
+      hotel_info:hotel_info,
     })
     wx.chooseImage({
       count: 6, // 默认9
@@ -60,13 +73,14 @@ Page({
     })
   },
   up_forscreen: function (e) {
-    console.log(e);
+
     var that = this;
     that.setData({
       is_btn_disabel: true,
       hiddens: true,
     })
     //console.log(res.detail.value);
+    var box_mac = e.detail.value.box_mac;
     var user_info = wx.getStorageSync('savor_user_info');
     var avatarUrl = user_info.avatarUrl;
     var nickName = user_info.nickName;
@@ -109,7 +123,6 @@ Page({
     }
     var forscreen_id = (new Date()).valueOf();
     var filename_arr = [];
-
     for (var i = 0; i < img_lenth; i++) {
 
       var img_url = upimgs[i].img_url;
@@ -118,18 +131,26 @@ Page({
       filename_arr[i] = filename;
 
       wx.uploadFile({
-        url: "http://" + intranet_ip + ":8080/picH5?isThumbnail=1&imageId=20170301&deviceId=" + openid + "&deviceName=" + mobile_brand + "&rotation=90&imageType=1&web=true&forscreen_id=" + forscreen_id + '&forscreen_char=' + forscreen_char + '&filename=' + filename + '&device_model=' + mobile_model + '&resource_size=' + img_size + '&action=4&resource_type=0&avatarUrl=' + avatarUrl + "&nickName=" + nickName + "&forscreen_nums=" + img_lenth,
+        url: "http://" + intranet_ip + ":8080/picH5?isThumbnail=1&imageId=20170301&deviceId=" + openid + "&box_mac="+box_mac+"&deviceName=" + mobile_brand + "&rotation=90&imageType=1&web=true&forscreen_id=" + forscreen_id + '&forscreen_char=' + forscreen_char + '&filename=' + filename + '&device_model=' + mobile_model + '&resource_size=' + img_size + '&action=4&resource_type=0&avatarUrl=' + avatarUrl + "&nickName=" + nickName + "&forscreen_nums=" + img_lenth,
         filePath: img_url,
         name: 'fileUpload',
         success: function (res) {
-          console.log(filename_arr);
-          console.log(res)
-        },
-        complete: function (es) {
-          console.log(es)
+          
+          if (i == img_lenth ){
+            var info_rt = JSON.parse(res.data);
+            if(info_rt.result==1001){
+              that.setData({
+                wifiErr: { 'is_open': 1, 'msg': '亲，使用此小程序前需要链接包间wifi,链接wifi投屏更快哦！', 'confirm': '重试', 'calcle': '', 'type': 3 }
+              })
+            }
+          }
         },
         fail: function ({ errMsg }) {
-          console.log('uploadImage fail,errMsg is', errMsg)
+          if (i == img_lenth) {
+            that.setData({
+              wifiErr: { 'is_open': 1, 'msg': '亲，使用此小程序前需要链接包间wifi,链接wifi投屏更快哦！', 'confirm': '重试', 'calcle': '', 'type': 3 }
+            })
+          }
         },
       });
       sleep(1);
@@ -212,21 +233,20 @@ Page({
       choose_key: choose_key
     })
     wx.uploadFile({
-      url: "http://" + intranet_ip + ":8080/h5/singleImg?isThumbnail=1&imageId=20170301&deviceId=" + openid + "&deviceName=" + mobile_brand + "&rotation=90&imageType=1&web=true&forscreen_id=" + forscreen_id + '&forscreen_char=' + forscreen_char + '&filename=' + filename + '&device_model=' + mobile_model + '&resource_size=' + resouce_size + '&action=2&resource_type=1&avatarUrl=' + avatarUrl + "&nickName=" + nickName,
+      url: "http://" + intranet_ip + ":8080/h5/singleImg?isThumbnail=1&imageId=20170301&deviceId=" + openid + "&box_mac="+box_mac+"&deviceName=" + mobile_brand + "&rotation=90&imageType=1&web=true&forscreen_id=" + forscreen_id + '&forscreen_char=' + forscreen_char + '&filename=' + filename + '&device_model=' + mobile_model + '&resource_size=' + resouce_size + '&action=2&resource_type=1&avatarUrl=' + avatarUrl + "&nickName=" + nickName,
       filePath: img_url,
       name: 'fileUpload',
       success: function (res) {
-        console.log(res)
-      },
-      complete: function (es) {
-        console.log(es)
-      },
-      fail: function ({ errMsg }) {
-        wx.showToast({
-          title: '投屏失败,请检查您链接的的wifi',
-          icon: 'none',
-          duration: 2000
-        });
+        var info_rt = JSON.parse(res.data);
+        if (info_rt.result == 1001) {
+          that.setData({
+            wifiErr: { 'is_open': 1, 'msg': '亲，使用此小程序前需要链接包间wifi,链接wifi投屏更快哦！', 'confirm': '重试', 'calcle': '', 'type': 3 }
+          })
+        }
+      },fail: function ({ errMsg }) {
+        that.setData({
+          wifiErr: { 'is_open': 1, 'msg': '亲，使用此小程序前需要链接包间wifi,链接wifi投屏更快哦！', 'confirm': '重试', 'calcle': '', 'type': 3 }
+        })
 
       },
     });
@@ -239,27 +259,33 @@ Page({
     intranet_ip = res.currentTarget.dataset.intranet_ip;
 
     wx.request({
-      url: "http://" + intranet_ip + ":8080/h5/stop?deviceId=" + openid + "&web=true",
+      url: "http://" + intranet_ip + ":8080/h5/stop?deviceId=" + openid + "&box_mac="+box_mac+"&web=true",
       success: function (res) {
         console.log(res);
-        wx.navigateBack({
-          delta: 1
-        })
-        wx.showToast({
-          title: '退出成功',
-          icon: 'none',
-          duration: 2000
-        });
+        if(res.data.result==0){
+          wx.navigateBack({
+            delta: 1
+          })
+          wx.showToast({
+            title: '退出成功',
+            icon: 'none',
+            duration: 2000
+          });
+        }else if(res.data.result==1001){
+          that.setData({
+            wifiErr: { 'is_open': 1, 'msg': '亲，使用此小程序前需要链接包间wifi,链接wifi投屏更快哦！', 'confirm': '重试', 'calcle': '', 'type': 3 }
+          })
+        }
+        
       },
       fail: function ({ errMsg }) {
-
         wx.showToast({
           title: '退出失败',
           icon: 'none',
           duration: 2000
         });
-        wx.reLaunch({
-          url: '/pages/index/index?box_mac=' + box_mac,
+        wx.navigateBack({
+          delta: 1,
         })
       },
     })
@@ -293,20 +319,28 @@ Page({
   },
   //遥控退出投屏
   exitForscreen: function (e) {
-    app.controlExitForscreen(intranet_ip, openid);
+    var that = this;
+    app.controlExitForscreen(openid, box_mac, hotel_info, that);
   },
   //遥控调整音量
   changeVolume: function (e) {
-
+    var that = this;
     var change_type = e.currentTarget.dataset.change_type;
-    app.controlChangeVolume(intranet_ip, openid, change_type);
-
+    //app.controlChangeVolume(intranet_ip, openid, change_type);
+    console.log(hotel_info);
+    app.controlChangeVolume(openid, box_mac, change_type, hotel_info, that);
   },
   //遥控切换节目
   changeProgram: function (e) {
-
+    var that = this;
     var change_type = e.currentTarget.dataset.change_type;
-    app.controlChangeProgram(intranet_ip, openid, change_type);
+    app.controlChangeProgram(openid, box_mac, change_type, hotel_info, that);
+  },
+  modalConfirm: function (e) {
+    console.log(e);
+    var that = this;
+    var hotel_info = e.target.dataset.hotel_info;
+    app.linkHotelWifi(hotel_info, that);
   },
   /**
    * 生命周期函数--监听页面初次渲染完成

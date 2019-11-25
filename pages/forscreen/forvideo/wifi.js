@@ -4,6 +4,10 @@ const app = getApp()
 var openid;
 var box_mac;
 var intranet_ip;
+var wifi_mac;
+var wifi_name;
+var wifi_password;
+var hotel_info = { 'intranet_ip': '', 'wifi_mac': '', 'wifi_name': '', 'wifi_password': '', is_jj: '1' };
 var qrcode_url;
 Page({
 
@@ -30,9 +34,18 @@ Page({
     box_mac = res.box_mac;
     openid = res.openid;
     intranet_ip = res.intranet_ip;
+    wifi_mac = res.wifi_mac;
+    wifi_name = res.wifi_name;
+    wifi_password = res.wifi_password;
+    hotel_info.intranet_ip = intranet_ip;
+    hotel_info.wifi_mac = wifi_mac;
+    hotel_info.wifi_name = wifi_name;
+    hotel_info.wifi_password = wifi_password;
+
     that.setData({
       box_mac: box_mac,
-      openid: openid
+      openid: openid,
+      hotel_info:hotel_info
     })
     var forscreen_id = (new Date()).valueOf();
     var filename = (new Date()).valueOf();
@@ -61,6 +74,7 @@ Page({
     })
   },
   forscreen_video: function (res) {
+    console.log(res);
     var that = this;
     that.setData({
       is_forscreen: 0,
@@ -79,34 +93,40 @@ Page({
     var duration = res.currentTarget.dataset.duration;
     var forscreen_id = (new Date()).valueOf();
     var filename = (new Date()).valueOf();
-
+    console.log('http://' + intranet_ip + ':8080/videoH5?deviceId=' + openid + '&box_mac=' + box_mac + '&deviceName=' + mobile_brand + '&web=true&forscreen_id=' + forscreen_id + '&filename=' + filename + '&device_model=' + mobile_model + '&resource_size=' + resouce_size + '&duration=' + duration + '&action=2&resource_type=2&avatarUrl=' + avatarUrl + "&nickName=" + nickName);
     wx.uploadFile({
-      url: 'http://' + intranet_ip + ':8080/videoH5?deviceId=' + openid + '&deviceName=' + mobile_brand + '&web=true&forscreen_id=' + forscreen_id + '&filename=' + filename + '&device_model=' + mobile_model + '&resource_size=' + resouce_size + '&duration=' + duration + '&action=2&resource_type=2&avatarUrl=' + avatarUrl + "&nickName=" + nickName,
+      url: 'http://' + intranet_ip + ':8080/videoH5?deviceId=' + openid + '&box_mac='+box_mac+'&deviceName=' + mobile_brand + '&web=true&forscreen_id=' + forscreen_id + '&filename=' + filename + '&device_model=' + mobile_model + '&resource_size=' + resouce_size + '&duration=' + duration + '&action=2&resource_type=2&avatarUrl=' + avatarUrl + "&nickName=" + nickName,
       filePath: video_url,
       name: 'fileUpload',
       success: function (res) {
-        that.setData({
-          is_upload: 1,
-          vedio_url: video_url,
-          filename: filename,
-          resouce_size: resouce_size,
-          duration: duration,
-          intranet_ip: intranet_ip,
-          hiddens: true,
-        })
+        console.log(res)
+        var info_rt = JSON.parse(res.data);
+        if(info_rt.result==0){
+          that.setData({
+            is_upload: 1,
+            vedio_url: video_url,
+            filename: filename,
+            resouce_size: resouce_size,
+            duration: duration,
+            intranet_ip: intranet_ip,
+            hiddens: true,
+          })
+        }else if(info_rt.result==1001){
+
+          that.setData({
+            hiddens: true,
+            is_forscreen:1,
+            wifiErr: { 'is_open': 1, 'msg': '亲，使用此小程序前需要链接包间wifi,链接wifi投屏更快哦！', 'confirm': '重试', 'calcle': '', 'type': 3 }
+          })
+        }
+        
       }, fail: function ({ errMsg }) {
         that.setData({
           hiddens: true,
+          is_forscreen: 1,
+          wifiErr: { 'is_open': 1, 'msg': '亲，使用此小程序前需要链接包间wifi,链接wifi投屏更快哦！', 'confirm': '重试', 'calcle': '', 'type': 3 }
         })
-        wx.showToast({
-          title: '视频投屏失败',
-          icon: 'none',
-          duration: 2000
-        });
-        wx.reLaunch({
-          url: '/pages/index/index?box_mac=' + box_mac,
-        })
-      },
+      }
     })
   },
   exitForscreend: function (res) {
@@ -116,27 +136,29 @@ Page({
     intranet_ip = res.currentTarget.dataset.intranet_ip;
 
     wx.request({
-      url: "http://" + intranet_ip + ":8080/h5/stop?deviceId=" + openid + "&web=true",
+      url: "http://" + intranet_ip + ":8080/h5/stop?deviceId=" + openid + "&box_mac="+box_mac+"&web=true",
       success: function (res) {
-        //console.log(res);
-        wx.navigateBack({
-          delta: 1
-        })
-        wx.showToast({
-          title: '退出成功',
-          icon: 'none',
-          duration: 2000
-        });
+        if(res.data.result==0){
+          wx.navigateBack({
+            delta: 1
+          })
+          wx.showToast({
+            title: '退出成功',
+            icon: 'none',
+            duration: 2000
+          });
+        }else if(res.data.result==1001){
+          that.setData({
+            hiddens: true,
+            wifiErr: { 'is_open': 1, 'msg': '亲，使用此小程序前需要链接包间wifi,链接wifi投屏更快哦！', 'confirm': '重试', 'calcle': '', 'type': 3 }
+          })
+        }
       },
       fail: function ({ errMsg }) {
 
-        wx.showToast({
-          title: '退出失败',
-          icon: 'none',
-          duration: 2000
-        });
-        wx.reLaunch({
-          url: '/pages/index/index?box_mac=' + box_mac,
+        that.setData({
+          hiddens: true,
+          wifiErr: { 'is_open': 1, 'msg': '亲，使用此小程序前需要链接包间wifi,链接wifi投屏更快哦！', 'confirm': '重试', 'calcle': '', 'type': 3 }
         })
       },
     })
@@ -170,23 +192,6 @@ Page({
           video_size: res.size,
           is_forscreen: 1
         })
-        /*wx.uploadFile({
-          url: 'http://' + intranet_ip + ':8080/videoH5?deviceId=' + openid + '&deviceName=MI5&web=true&forscreen_id=' + forscreen_id + '&filename=' + filename,
-          filePath: video_url,
-          name: 'fileUpload',
-          success: function (res) {
-            that.setData({
-              is_upload: 1,
-              vedio_url: video_url,
-            })
-          },
-          complete: function (es) {
-            console.log(es)
-          },
-          fial: function ({ errMsg }) {
-            console.log('uploadImage fial,errMsg is', errMsg)
-          },
-        })*/
       }
     })
   },
@@ -226,37 +231,33 @@ Page({
     var vedio_url = res.target.dataset.vedio_url;
     var box_mac = res.target.dataset.box_mac;
     wx.uploadFile({
-      url: 'http://' + intranet_ip + ':8080/videoH5?deviceId=' + openid + '&deviceName=' + mobile_brand + '&web=true&forscreen_id=' + forscreen_id + '&filename=' + filename + '&device_model=' + mobile_model + '&resource_size=' + resouce_size + '&duration=' + duration + '&action=2&resource_type=2&avatarUrl=' + avatarUrl + "&nickName=" + nickName,
+      url: 'http://' + intranet_ip + ':8080/videoH5?deviceId=' + openid + '&box_mac=' + box_mac+'&deviceName=' + mobile_brand + '&web=true&forscreen_id=' + forscreen_id + '&filename=' + filename + '&device_model=' + mobile_model + '&resource_size=' + resouce_size + '&duration=' + duration + '&action=2&resource_type=2&avatarUrl=' + avatarUrl + "&nickName=" + nickName,
       filePath: vedio_url,
       name: 'fileUpload',
       success: function (res) {
-        /*that.setData({
-          is_upload: 1,
-          vedio_url: video_url,
-          filename: filename,
-          resouce_size: resouce_size,
-          duration: duration,
-          intranet_ip: intranet_ip,
-          hiddens: true,
-        })*/
-        wx.showToast({
-          title: '重投成功',
-          icon: 'none',
-          duration: 2000,
-        })
+        var info_rt = JSON.parse(res.data);
+        if (info_rt.result == 0) {
+          that.setData({
+            is_upload: 1,
+            vedio_url: video_url,
+            filename: filename,
+            resouce_size: resouce_size,
+            duration: duration,
+            intranet_ip: intranet_ip,
+            hiddens: true,
+          })
+        } else if (info_rt.result == 1001) {
+
+          that.setData({
+            hiddens: true,
+            wifiErr: { 'is_open': 1, 'msg': '亲，使用此小程序前需要链接包间wifi,链接wifi投屏更快哦！', 'confirm': '重试', 'calcle': '', 'type': 3 }
+          })
+        }
 
       }, fail: function ({ errMsg }) {
         that.setData({
           hiddens: true,
-        })
-        wx.showToast({
-          title: '视频投屏失败',
-          icon: 'none',
-          duration: 2000
-        });
-
-        wx.reLaunch({
-          url: '/pages/index/index?box_mac=' + box_mac,
+          wifiErr: { 'is_open': 1, 'msg': '亲，使用此小程序前需要链接包间wifi,链接wifi投屏更快哦！', 'confirm': '重试', 'calcle': '', 'type': 3 }
         })
       },
     })
@@ -291,20 +292,27 @@ Page({
   },
   //遥控退出投屏
   exitForscreen: function (e) {
-    app.controlExitForscreen(intranet_ip, openid);
+    var that = this;
+    app.controlExitForscreen(openid, box_mac, hotel_info, that);
   },
   //遥控调整音量
   changeVolume: function (e) {
-
+    var that = this;
     var change_type = e.currentTarget.dataset.change_type;
-    app.controlChangeVolume(intranet_ip, openid, change_type);
-
+    app.controlChangeVolume(openid, box_mac, change_type, hotel_info, that);
   },
   //遥控切换节目
   changeProgram: function (e) {
 
+    var that = this;
     var change_type = e.currentTarget.dataset.change_type;
-    app.controlChangeProgram(intranet_ip, openid, change_type);
+    app.controlChangeProgram(openid, box_mac, change_type, hotel_info, that);
+  },
+  modalConfirm: function (e) {
+    console.log(e);
+    var that = this;
+    var hotel_info = e.target.dataset.hotel_info;
+    app.linkHotelWifi(hotel_info, that);
   },
   /**
    * 生命周期函数--监听页面初次渲染完成
