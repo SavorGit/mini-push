@@ -197,22 +197,30 @@ Page({
   },
   //遥控退出投屏
   exitForscreen: function (e) {
+    var that = this;
     openid = e.currentTarget.dataset.openid;
     box_mac = e.currentTarget.dataset.box_mac;
-    app.controlExitForscreen(openid, box_mac);
+    var hotel_info = e.currentTarget.dataset.hotel_info;
+    app.controlExitForscreen(openid, box_mac, hotel_info, that);
   },
   //遥控调整音量
   changeVolume: function (e) {
+    var that = this;
     box_mac = e.currentTarget.dataset.box_mac;
+    openid = e.currentTarget.dataset.openid;
     var change_type = e.currentTarget.dataset.change_type;
-    app.controlChangeVolume(box_mac, change_type);
+    var hotel_info = e.currentTarget.dataset.hotel_info;
+    app.controlChangeVolume(openid, box_mac, change_type, hotel_info, that);
 
   },
   //遥控切换节目
   changeProgram: function (e) {
+    var that = this;
     box_mac = e.currentTarget.dataset.box_mac;
+    openid = e.currentTarget.dataset.openid;
     var change_type = e.currentTarget.dataset.change_type;
-    app.controlChangeProgram(box_mac, change_type);
+    var hotel_info = e.currentTarget.dataset.hotel_info;
+    app.controlChangeProgram(openid, box_mac, change_type, hotel_info, that);
   },
   modalConfirm: function (e) {
     console.log(e);
