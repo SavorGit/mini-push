@@ -167,7 +167,7 @@ Page({
   //打开遥控器
   openControl: function(e) {
     var self = this;
-    var qrcode_url = api_url + '/Smallapp/index/getBoxQr?box_mac=' + box_mac + '&type=3';
+    var qrcode_url = api_url + '/Smallapp4/index/getBoxQr?box_mac=' + box_mac + '&type=3';
     self.setData({
       showControl: true,
       qrcode_img: qrcode_url

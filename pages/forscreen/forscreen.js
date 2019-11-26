@@ -110,16 +110,7 @@ Page({
               var scene = res.data.result.content;
               linkHotelBox(scene);
             } else {
-              /*wx.switchTab({
-                url: '../index/index',
-                success: function (e) {
-                  wx.showToast({
-                    title: '二维码已过期',
-                    icon: 'none',
-                    duration: 2000
-                  });
-                }
-              });*/
+              
               wx.reLaunch({
                 url: '/pages/index/index',
               })
@@ -213,11 +204,12 @@ Page({
       });
     }
     function linkHotelBox(scene){
+      console.log(scene);
       var scene_arr = scene.split('_');
       box_mac = scene_arr[0];
       code_type = scene_arr[1];
       var jz_time = scene_arr[2];
-      if(typeof(scene_arr[3])!='undefined' && scene_arr[3]==1){
+      if(typeof(scene_arr[3])!='undefined' && scene_arr[3]==2){
         wx.setStorageSync('savor_is_minimal', 1);
       }else {
         try {

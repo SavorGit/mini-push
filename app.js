@@ -770,13 +770,11 @@ App({
   
 
   linkHotelWifi:function(hotel_info,that){
-    console.log(hotel_info);
     var aps = this;
     var is_minimal = wx.getStorageSync(aps.globalData.cache_key + 'is_minimal');//是否扫码标准版
     var room_ssid = hotel_info.wifi_name;
     if (typeof (is_minimal) == 'undefined' || is_minimal == '') {//非极简版
       if (hotel_info.forscreen_type == 2) {//后台推荐用极简版
-        console.log(hotel_info);
         aps.jugeLinkType(hotel_info,that);
 
         
@@ -852,8 +850,14 @@ App({
                   wifiErr: { 'is_open': 1, 'msg': '亲，使用此小程序前需要打开您手机的wifi,链接wifi投屏更快哦！', 'confirm': '确定', 'calcle': '取消', 'type': 1 }
                 })
               }else {
+                if(hotel_info.wifi_password==''){
+                  var us_wifi_password = '空';
+                }else {
+                  var us_wifi_password = hotel_info.wifi_password;
+                }
+                var msg ='请连接wifi:'+hotel_info.wifi_name+',密码为'+us_wifi_password;
                 that.setData({
-                  wifiErr: { 'is_open': 1, 'msg': '亲，包间wifi链接失败！', 'confirm': '重试', 'type': 4 }
+                  wifiErr: { 'is_open': 1, 'msg': msg, 'confirm': '重试', 'type': 4 }
                 })
               }
 
