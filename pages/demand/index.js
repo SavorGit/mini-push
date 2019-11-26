@@ -73,7 +73,7 @@ Page({
     var user_info = wx.getStorageSync("savor_user_info");
     openid = user_info.openid;
     wx.request({
-      url: api_url + '/Smallapp/index/isHaveCallBox?openid=' + openid,
+      url: api_url + '/Smallapp4/index/isHaveCallBox?openid=' + openid,
       headers: {
         'Content-Type': 'application/json'
       },

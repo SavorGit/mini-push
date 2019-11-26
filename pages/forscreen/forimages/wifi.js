@@ -7,7 +7,7 @@ var intranet_ip;
 var wifi_mac;
 var wifi_name;
 var wifi_password;
-var hotel_info = { 'intranet_ip': '', 'wifi_mac': '', 'wifi_name': '', 'wifi_password': '', is_jj:'1'};
+var hotel_info = { 'intranet_ip': '', 'wifi_mac': '', 'wifi_name': '', 'wifi_password': '', 'forscreen_type':'2'};
 var qrcode_url;
 Page({
 

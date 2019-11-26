@@ -298,7 +298,7 @@ Page({
                 })
               } else {
                 wx.request({
-                  url: api_url + '/smallapp21/index/isHaveCallBox',
+                  url: api_url + '/smallapp4/index/isHaveCallBox',
                   data: { "openid": res.data.result.openid },
                   header: {
                     'content-type': 'application/json'

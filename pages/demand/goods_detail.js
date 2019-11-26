@@ -49,7 +49,7 @@ Page({
       uid: uid,
       is_header: is_header
     })
-    utils.PostRequest(api_url + '/Smallapp/index/isHaveCallBox', {
+    utils.PostRequest(api_url + '/Smallapp4/index/isHaveCallBox', {
       openid: openid
     }, (data, headers, cookies, errMsg, statusCode) => {
       hotel_info:data.result;

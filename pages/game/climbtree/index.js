@@ -24,6 +24,7 @@ Page({
       wx.navigateBack({
         delta: 1,
         success: function (res) {
+          
           wx.showToast({
             title: '直连方式该游戏功能不可用',
             icon: 'none',
