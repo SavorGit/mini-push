@@ -61,8 +61,9 @@ App({
         }else if(action==5){//优选
           var timestamp = (new Date()).valueOf();
           for (var i = 0; i < res_len; i++) {
+            
             wx.request({
-              url: "http://" + hotel_info.intranet_ip + ":8080/h5/goods_ondemand?deviceId=" + user_info.openid + "&box_mac=" + box_mac + "&web=true&media_id=" + forscreen_id + "&forscreen_id=" + timestamp+"&media_name=" + pubdetail[0]['filename'] + "&media_url=" + pubdetail[0]['res_url'] + '&froscreen_id=' + timestamp,
+              url: "http://" + hotel_info.intranet_ip + ":8080/h5/goods_ondemand?deviceId=" + user_info.openid + "&box_mac=" + box_mac + "&web=true&media_id=" + forscreen_id + "&forscreen_id=" + timestamp + "&media_name=" + pubdetail[0]['filename'] + "&media_url=" + pubdetail[0]['res_url'],
               success:function(res){
                 if(res.data.result==0){
                   wx.showToast({
@@ -95,7 +96,7 @@ App({
   tpst: function (box_mac = '', forscreen_id, pubdetail, res_type, res_len, action, hotel_info){
     var that = this;
     
-    var forscreen_id = (new Date()).valueOf();
+    //var forscreen_id = (new Date()).valueOf();
     wx.request({
       url: that.globalData.api_url + '/smallapp21/User/isForscreenIng',
       headers: {
@@ -134,6 +135,9 @@ App({
     var forscreen_char = '';
     var mobile_brand = that.globalData.mobile_brand;
     var mobile_model = that.globalData.mobile_model;
+    var res_id = forscreen_id;
+    var forscreen_id = (new Date()).valueOf();
+    
     if (res_type == 1) {
       for (var i = 0; i < pubdetail.length; i++) {
         var order = i + 1;
@@ -163,7 +167,6 @@ App({
         var url = pubdetail[i]['forscreen_url'];
         var filename = pubdetail[i]['filename'];
         var res_id = pubdetail[i]['res_id'];
-        
         wx.request({
           url: that.globalData.api_url + '/Netty/Index/index',
           headers: {
@@ -175,7 +178,6 @@ App({
             msg: '{ "action": 4, "resource_type":2, "url":"' + url + '","filename":"' + filename + '","openid":"' + openid + '","img_nums":' + res_len + ',"forscreen_char":"' + forscreen_char + '","order":' + order + ',"forscreen_id":"' + forscreen_id + '","img_id":"' + res_id + '","avatarUrl":"' + avatarUrl + '","nickName":"' + nickName + '"}',
           },
           success: function (result) {
-            
             wx.showToast({
               title: '点播成功,电视即将开始播放',
               icon: 'none',
@@ -192,7 +194,9 @@ App({
         })
       }
     } else { //视频投屏
+      console.log(res_len);
       for (var i = 0; i < res_len; i++) {
+        console.log('11222');
         wx.request({
           url: that.globalData.api_url + '/Smallapp/index/recordForScreenPics',
           header: {
@@ -217,6 +221,7 @@ App({
           },
           success: function (ret) { }
         });
+        
         wx.request({
           url: that.globalData.api_url + '/Netty/Index/index',
           headers: {
@@ -228,7 +233,7 @@ App({
             msg: '{ "action":2, "url": "' + pubdetail[i]['forscreen_url'] + '", "filename":"' + pubdetail[i]['filename'] + '","openid":"' + openid + '","resource_type":2,"video_id":"' + pubdetail[i]['res_id'] + '","avatarUrl":"' + avatarUrl + '","nickName":"' + nickName + '","forscreen_id":"' + forscreen_id + '"}',
           },
           success: function (result) {
-
+            
             wx.showToast({
               title: '点播成功,电视即将开始播放',
               icon: 'none',
@@ -251,7 +256,7 @@ App({
         'Content-Type': 'application/json'
       },
       data: {
-        res_id: forscreen_id
+        res_id: res_id
       },
 
     })

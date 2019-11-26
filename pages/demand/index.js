@@ -306,7 +306,8 @@ Page({
       var duration = e.currentTarget.dataset.duration;
       var resource_size = e.currentTarget.dataset.resource_size;
       var forscreen_url = e.currentTarget.dataset.forscreen_url;
-      var file_name = e.currentTarget.dataset.filename;
+      var filename = e.currentTarget.dataset.filename;
+      var tx_url = e.currentTarget.dataset.tx_url;
       var pubdetail = [{
         'duration': 0,
         'resource_size': 0,
@@ -318,7 +319,8 @@ Page({
         pubdetail[0].resource_size = resource_size;
         pubdetail[0].forscreen_url = forscreen_url;
         pubdetail[0].res_id = forscreen_id;
-        pubdetail[0].file_name = file_name;
+        pubdetail[0].filename = filename;
+        pubdetail[0].res_url = tx_url;
       }
       var hotel_info = e.currentTarget.dataset.hotel_info;
       app.boxShow(box_mac, forscreen_id, pubdetail, res_type, res_nums, 5, hotel_info);

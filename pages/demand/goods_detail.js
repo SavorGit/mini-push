@@ -153,13 +153,15 @@ Page({
   },
   //电视播放
   boxShow: function(e) {
-    console.log(e);
+    var self = this;
     var forscreen_id = e.currentTarget.dataset.goods_id;
 
     var pubdetail = e.currentTarget.dataset.pubdetail;
     var hotel_info = e.currentTarget.dataset.hotel_info;
     var res_type = 2;
     var res_nums = 1;
+    
+
     app.boxShow(box_mac, forscreen_id, pubdetail, res_type, res_nums, 5,hotel_info);
 
     // 调用记录播放次数接口
@@ -167,10 +169,10 @@ Page({
       openid: openid,
       res_id: forscreen_id
     }, (data, headers, cookies, errMsg, statusCode) => {
-      let program_list = self.data.program_list;
-      program_list[listIndex].play_num = data.result.play_num;
+      let goods_info = self.data.goods_info;
+      goods_info.play_num = data.result.play_num;
       self.setData({
-        program_list: program_list
+        goods_info: goods_info
       });
     });
 
