@@ -837,7 +837,17 @@ App({
                 that.setData({
                   wifiErr: { 'is_open': 1, 'msg': '亲，使用此小程序前需要打开您手机的GPS定位,链接wifi投屏更快哦！', 'confirm': '确定', 'calcle': '取消', 'type': 2 }
                 })
+              } else if (res.errMsg =='getConnectedWifi:fail:currentWifi is null'){
+                that.setData({
+                  wifiErr: { 'is_open': 1, 'msg': '亲，使用此小程序前需要链接包间wifi,链接wifi投屏更快哦！', 'confirm': '重试', 'calcle': '', 'type': 3 }
+                })
+              } 
+              else if (res.errMsg =='getConnectedWifi:fail no wifi is connected.'){
+                that.setData({
+                  wifiErr: { 'is_open': 1, 'msg': '亲，使用此小程序前需要打开您手机的wifi,链接wifi投屏更快哦！', 'confirm': '确定', 'calcle': '取消', 'type': 1 }
+                })
               }
+
               var err_info = JSON.stringify(res);
               wx.request({
                 url: aps.globalData.api_url + '/Smallappsimple/Index/recordWifiErr',
@@ -866,6 +876,7 @@ App({
   },
   connectWifi: function (wifi_name, wifi_mac, use_wifi_password, box_mac, that) {
     var aps = this;
+    
     wx.startWifi({
       success: function (res) {
         wx.showLoading({
@@ -876,20 +887,27 @@ App({
           BSSID: wifi_mac,
           password: use_wifi_password,
           success: function (reswifi) {
-
-            aps.globalData.link_type = 2;
-            that.setData({
-              link_type: 2
-            })
-            wx.showToast({
-              title: 'wifi链接成功',
-              icon: 'success',
-              duration: 2000
-            });
             that.setData({
               wifiErr: { 'is_open': 0, 'msg': '', 'confirm': '确定', 'calcle': '取消', 'type': 0 }
             })
-            wx.hideLoading()
+
+            that.setData({ wifiErr: { 'is_open': 0, 'msg': '', 'confirm': '确定', 'calcle': '取消', 'type': 0 }, link_type: 2 }, () => {
+              console.log('赋值成功')
+              aps.globalData.link_type = 2;
+
+              wx.showToast({
+                title: 'wifi链接成功',
+                icon: 'success',
+                duration: 2000
+              });
+
+              wx.hideLoading()
+            })
+
+
+
+
+            
           }, fail: function (res) {
             console.log(res);
             that.setData({
@@ -905,7 +923,7 @@ App({
               }
             })
           }, complete: function (res) {
-            wx.hideLoading()
+            //wx.hideLoading()
 
           }
         })
