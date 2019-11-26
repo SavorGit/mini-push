@@ -130,8 +130,12 @@ let SavorUtils = {
 
     // 投屏媒体
     launchMedia: (pageContext, forscreenId, indexInList) => {
-      let mediaObject = pageContext.data.mediaObjectList[indexInList];
-      
+      let mediaObject = null;
+      if (pageContext.data.pageType == 1) {
+        mediaObject = pageContext.data.pictureObjectList[indexInList];
+      } else {
+        mediaObject = pageContext.data.mediaObjectList[indexInList];
+      }
       SavorUtils.User.launchMediaSubGroup(pageContext, mediaObject);
       utils.PostRequest(api_url + '/Smallapp21/CollectCount/recCount', {
         res_id: forscreenId
@@ -381,7 +385,7 @@ Page({
     console.log(e);
     let self = this;
     let forscreenId = e.currentTarget.dataset.forscreen_id;
-    
+
     let index = e.currentTarget.dataset.index;
     SavorUtils.User.favorite(self, forscreenId, index, 0);
   },
