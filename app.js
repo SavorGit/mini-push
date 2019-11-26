@@ -869,6 +869,9 @@ App({
                   box_mac: hotel_info.box_mac
                 }
               })
+              wx.stopWifi({
+
+              })
             },
           })
         }, fail: function (res) {
@@ -937,13 +940,21 @@ App({
             })
           }, complete: function (res) {
             //wx.hideLoading()
+            wx.stopWifi({
 
+            })
           }
         })
       },complete:function(){
         //wx.hideLoading();
       }
     })
+    setTimeout(function () {
+      wx.stopWifi({
+
+      })
+    }, 10000)
+    
   },
   globalData: {
     openid: '',

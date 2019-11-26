@@ -239,7 +239,7 @@ Page({
         if (info_rt.result == 0) {
           that.setData({
             is_upload: 1,
-            vedio_url: video_url,
+            vedio_url: vedio_url,
             filename: filename,
             resouce_size: resouce_size,
             duration: duration,
@@ -278,7 +278,7 @@ Page({
     var that = this;
 
     //默认图
-    qrcode_url = '/images/icon/huma.jpg';
+    qrcode_url = '/images/icon2/huma.jpg';
     that.setData({
       popRemoteControlWindow: true,
       qrcode_img: qrcode_url,
