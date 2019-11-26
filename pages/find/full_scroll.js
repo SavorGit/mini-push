@@ -131,6 +131,7 @@ let SavorUtils = {
     // 投屏媒体
     launchMedia: (pageContext, forscreenId, indexInList) => {
       let mediaObject = pageContext.data.mediaObjectList[indexInList];
+      
       SavorUtils.User.launchMediaSubGroup(pageContext, mediaObject);
       utils.PostRequest(api_url + '/Smallapp21/CollectCount/recCount', {
         res_id: forscreenId
@@ -367,22 +368,27 @@ Page({
 
   //收藏资源
   onCollect: function(e) {
+    console.log(e);
     let self = this;
-    let forscreenId = e.target.dataset.forscreen_id;
-    let index = e.target.dataset.index;
+    let forscreenId = e.currentTarget.dataset.forscreen_id;
+
+    let index = e.currentTarget.dataset.index;
     SavorUtils.User.favorite(self, forscreenId, index, 1);
   },
 
   //取消收藏
   cancCollect: function(e) {
+    console.log(e);
     let self = this;
-    let forscreenId = e.target.dataset.forscreen_id;
-    let index = e.target.dataset.index;
+    let forscreenId = e.currentTarget.dataset.forscreen_id;
+    
+    let index = e.currentTarget.dataset.index;
     SavorUtils.User.favorite(self, forscreenId, index, 0);
   },
 
   //电视播放
   boxShow(e) {
+    console.log(e);
     let self = this;
     let forscreenId = e.target.dataset.forscreen_id;
     let indexInList = e.target.dataset.index;

@@ -28,7 +28,7 @@
           <view class="foot flex-row-center-space_between theme-font3">
             <view wx:if='{{bean.hotel_name != ""}}' class="time-hotel">{{bean.create_time}}.{{bean.hotel_name}}</view>
             <view wx:if="{{bean.isOpen == true}}" class="btn-group flex-row-center-space_between theme-panel-pop-menu-dark">
-              <view class="launch-tv">电视播放</view>
+              <view class="launch-tv" bindtap='boxShow'  data-forscreen_id="{{bean.forscreen_id}}" data-index="{{index}}">电视播放</view>
               <view class="flex-row-center-space_around">
                 <view wx:if="{{bean.is_collect==1}}" class="heart" data-forscreen_id="{{bean.forscreen_id}}" data-index="{{index}}" bindtap="cancCollect">
                   <label class="fa fa-heart fa-lg theme-font5"></label>
