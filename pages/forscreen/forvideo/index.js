@@ -179,7 +179,7 @@ Page({
             content: '当前电视正在进行投屏,继续投屏有可能打断当前投屏中的内容.',
             success: function (res) {
               if (res.confirm) {
-                if (is_open_simple > 0) {
+                /*if (is_open_simple > 0) {
                   timer8_0 = setTimeout(function () {
                     that.setData({
                       is_show_jump: true,
@@ -187,7 +187,7 @@ Page({
 
                     })
                   }, 10000);
-                }
+                }*/
                 uploadVedio(video, box_mac, openid, res_sup_time, is_pub_hotelinfo, is_share, duration, avatarUrl, nickName, public_text, timer8_0);
                 app.recordFormId(openid,formId);
               } else if (res.cancel) {
@@ -201,7 +201,7 @@ Page({
             }
           })
         }else {
-          if (is_open_simple > 0) {
+          /*if (is_open_simple > 0) {
             timer8_0 = setTimeout(function () {
               that.setData({
                 is_show_jump: true,
@@ -209,7 +209,7 @@ Page({
 
               })
             }, 10000);
-          }
+          }*/
           uploadVedio(video, box_mac, openid, res_sup_time, is_pub_hotelinfo, is_share, duration, avatarUrl, nickName, public_text, timer8_0);
           app.recordFormId(openid, formId);
         }
@@ -263,7 +263,7 @@ Page({
 
         },
         success: function (res) {
-          clearInterval(timer8_0);
+          //clearInterval(timer8_0);
           var res_eup_time = (new Date()).valueOf();
           that.setData({
             showVedio: false,

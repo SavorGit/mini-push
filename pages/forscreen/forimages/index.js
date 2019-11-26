@@ -266,16 +266,15 @@ Page({
             content: '当前电视正在进行投屏,继续投屏有可能打断当前投屏中的内容.',
             success: function (res) {
               if (res.confirm) {
-                if (is_open_simple > 0) {
+                /*if (is_open_simple > 0) {
                   timer8_0 = setTimeout(function () {
                     that.setData({
                       is_show_jump: true,
                       show: true
 
                     })
-                    //clearInterval(timer8_0);
                   }, 10000);
-                }
+                }*/
                 wx.request({
                   url: api_url+'/Smallapp/Index/getOssParams',
                   headers: {
@@ -300,16 +299,16 @@ Page({
             }
           })
         }else {
-          if (is_open_simple > 0) {
+          /*if (is_open_simple > 0) {
             timer8_0 = setTimeout(function () {
               that.setData({
                 is_show_jump: true,
                 show: true
 
               })
-              //clearInterval(timer8_0);
+              
             }, 10000);
-          }
+          }*/
           wx.request({
             url: api_url+'/Smallapp/Index/getOssParams',
             headers: {
@@ -361,9 +360,9 @@ Page({
         },
 
         success: function (res) {
-          if (order == img_len) {
+          /*if (order == img_len) {
             clearTimeout(timer8_0);
-          }
+          }*/
           that.setData({
             showThird: true,
             showTpBt: false,
