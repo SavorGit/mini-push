@@ -559,10 +559,12 @@ Page({
   },
   //遥控呼大码
   callQrCode: util.throttle(function (e) {
+    var that = this;
     openid = e.currentTarget.dataset.openid;
     box_mac = e.currentTarget.dataset.box_mac;
     var qrcode_img = e.currentTarget.dataset.qrcode_img;
-    app.controlCallQrcode(openid, box_mac, qrcode_img);
+    var hotel_info = e.currentTarget.dataset.hotel_info;
+    app.controlCallQrcode(openid, box_mac, qrcode_img, hotel_info, that);
   }, 3000),//呼大码结束
   //打开遥控器
   openControl: function (e) {

@@ -322,107 +322,145 @@ App({
     
   }, //退出投屏结束
   //遥控器呼玛
-  controlCallQrcode: function(openid, box_mac, qrcode_img) {
+  controlCallQrcode: function(openid, box_mac, qrcode_img,hotel_info,aps) {
     var that = this;
     //console.log(openid);
     if (box_mac) {
-      var timestamp = (new Date()).valueOf();
-      var qrcode_url = that.globalData.api_url + '/Smallapp/index/getBoxQr?box_mac=' + box_mac + '&type=3';
-      var mobile_brand = this.globalData.mobile_brand;
-      var mobile_model = this.globalData.mobile_model;
+      var link_type = that.globalData.link_type;
+      if(link_type==1){
+        var timestamp = (new Date()).valueOf();
+        var qrcode_url = that.globalData.api_url + '/Smallapp/index/getBoxQr?box_mac=' + box_mac + '&type=3';
+        var mobile_brand = this.globalData.mobile_brand;
+        var mobile_model = this.globalData.mobile_model;
 
-      wx.request({
-        url: that.globalData.api_url + '/smallapp21/User/isForscreenIng',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        method: "POST",
-        data: {
-          box_mac: box_mac
-        },
-        success: function(res) {
-          var is_forscreen = res.data.result.is_forscreen;
-          if (is_forscreen == 1) {
-            wx.showModal({
-              title: '确认要打断投屏',
-              content: '当前电视正在进行投屏,继续投屏有可能打断当前投屏中的内容.',
-              success: function(res) {
-                if (res.confirm) {
-                  wx.request({
-                    url: that.globalData.api_url + '/Netty/Index/index',
-                    headers: {
-                      'Content-Type': 'application/json'
-                    },
-                    method: "POST",
-                    data: {
-                      box_mac: box_mac,
-                      msg: '{ "action": 9,"url":"' + qrcode_url + '"}',
-                    },
-                    success: function() {
-                      wx.showToast({
-                        title: '呼玛成功，电视即将展示',
-                        icon: 'none',
-                        duration: 2000
-                      });
-                      wx.request({
-                        url: that.globalData.api_url + '/Smallapp/index/recordForScreenPics',
-                        header: {
-                          'content-type': 'application/json'
-                        },
-                        data: {
-                          openid: openid,
-                          box_mac: box_mac,
-                          action: 9,
-                          mobile_brand: mobile_brand,
-                          mobile_model: mobile_model,
-                          imgs: '[]'
-                        },
+        wx.request({
+          url: that.globalData.api_url + '/smallapp21/User/isForscreenIng',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          method: "POST",
+          data: {
+            box_mac: box_mac
+          },
+          success: function (res) {
+            var is_forscreen = res.data.result.is_forscreen;
+            if (is_forscreen == 1) {
+              wx.showModal({
+                title: '确认要打断投屏',
+                content: '当前电视正在进行投屏,继续投屏有可能打断当前投屏中的内容.',
+                success: function (res) {
+                  if (res.confirm) {
+                    wx.request({
+                      url: that.globalData.api_url + '/Netty/Index/index',
+                      headers: {
+                        'Content-Type': 'application/json'
+                      },
+                      method: "POST",
+                      data: {
+                        box_mac: box_mac,
+                        msg: '{ "action": 9,"url":"' + qrcode_url + '"}',
+                      },
+                      success: function () {
+                        wx.showToast({
+                          title: '呼玛成功，电视即将展示',
+                          icon: 'none',
+                          duration: 2000
+                        });
+                        wx.request({
+                          url: that.globalData.api_url + '/Smallapp/index/recordForScreenPics',
+                          header: {
+                            'content-type': 'application/json'
+                          },
+                          data: {
+                            openid: openid,
+                            box_mac: box_mac,
+                            action: 9,
+                            mobile_brand: mobile_brand,
+                            mobile_model: mobile_model,
+                            imgs: '[]'
+                          },
 
-                      })
-                    }
-                  })
-                } else {
+                        })
+                      }
+                    })
+                  } else {
 
+                  }
                 }
-              }
-            })
-          } else {
-            wx.request({
-              url: that.globalData.api_url + '/Netty/Index/index',
-              headers: {
-                'Content-Type': 'application/json'
-              },
-              method: "POST",
-              data: {
-                box_mac: box_mac,
-                msg: '{ "action": 9,"url":"' + qrcode_url + '"}',
-              },
-              success: function() {
-                wx.showToast({
-                  title: '呼玛成功，电视即将展示',
-                  icon: 'none',
-                  duration: 2000
-                });
-                wx.request({
-                  url: that.globalData.api_url + '/Smallapp/index/recordForScreenPics',
-                  header: {
-                    'content-type': 'application/json'
-                  },
-                  data: {
-                    openid: openid,
-                    box_mac: box_mac,
-                    action: 9,
-                    mobile_brand: mobile_brand,
-                    mobile_model: mobile_model,
-                    imgs: '[]'
-                  },
-
-                })
-              }
-            })
+              })
+            } else {
+              wx.request({
+                url: that.globalData.api_url + '/Netty/Index/index',
+                headers: {
+                  'Content-Type': 'application/json'
+                },
+                method: "POST",
+                data: {
+                  box_mac: box_mac,
+                  msg: '{ "action": 9,"url":"' + qrcode_url + '"}',
+                },
+                success: function () {
+                  wx.showToast({
+                    title: '呼玛成功，电视即将展示',
+                    icon: 'none',
+                    duration: 2000
+                  });
+                  wx.request({
+                    url: that.globalData.api_url + '/Smallapp/index/recordForScreenPics',
+                    header: {
+                      'content-type': 'application/json'
+                    },
+                    data: {
+                      openid: openid,
+                      box_mac: box_mac,
+                      action: 9,
+                      mobile_brand: mobile_brand,
+                      mobile_model: mobile_model,
+                      imgs: '[]'
+                    },
+                  })
+                }
+              })
+            }
           }
-        }
-      })
+        })
+      }else {
+        wx.request({
+          url: "http://" + hotel_info.intranet_ip + ":8080/showMiniProgramCode?deviceId=" + openid + "&box_mac="+box_mac+"&web=true",
+          success: function (res) {
+            if (res.data.result == 0) {
+              wx.showToast({
+                title: '呼码成功',
+                icon: 'none',
+                duration: 2000
+              });
+            }else if(res.data.result==1001){
+              aps.setData({
+                wifiErr: { 'is_open': 1, 'msg': '亲，使用此小程序前需要链接包间wifi,链接wifi投屏更快哦！', 'confirm': '重试', 'calcle': '', 'type': 3 }
+              })
+            }else {
+              wx.showToast({
+                title: '呼码失败',
+                icon: 'none',
+                duration: 2000
+              });
+            }
+
+          },
+          fial: function ({ errMsg }) {
+            wx.showToast({
+              title: '呼码失败',
+              icon: 'none',
+              duration: 2000
+            });
+            aps.setData({
+              wifiErr: { 'is_open': 1, 'msg': '亲，使用此小程序前需要链接包间wifi,链接wifi投屏更快哦！', 'confirm': '重试', 'calcle': '', 'type': 3 }
+            })
+          },
+        })
+      }
+      
+      
     }
   },
   //遥控器控制音量
