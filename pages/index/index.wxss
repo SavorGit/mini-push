@@ -56,6 +56,11 @@
   background: unset;
 }
 
+.functional-module-panel > .row button[disabled] {
+  color: #bebebe !important;
+  background: unset !important;
+}
+
 .functional-module-panel > .row > view > .icon,
 .functional-module-panel > .row button > .icon {
   width: 74rpx;
