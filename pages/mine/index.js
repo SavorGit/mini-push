@@ -48,8 +48,10 @@ Page({
       },
       success: function (res) {
         if (res.data.code == 10000 && res.data.result.is_have == 1) {
+          
           that.setData({
             is_open_simple: res.data.result.is_open_simple,
+            hotel_info:res.data.result,
           })
         }
       }
@@ -73,10 +75,12 @@ Page({
   },
   //遥控呼大码
   callQrCode: util.throttle(function (e) {
+    var that = this;
     openid = e.currentTarget.dataset.openid;
     box_mac = e.currentTarget.dataset.box_mac;
     var qrcode_img = e.currentTarget.dataset.qrcode_img;
-    app.controlCallQrcode(openid, box_mac, qrcode_img);
+    var hotel_info = e.currentTarget.dataset.hotel_info;
+    app.controlCallQrcode(openid, box_mac, qrcode_img,hotel_info);
   }, 3000),//呼大码结束
   //打开遥控器
   openControl: function (e) {
@@ -99,22 +103,36 @@ Page({
   },
   //遥控退出投屏
   exitForscreen: function (e) {
+    var that = this;
     openid = e.currentTarget.dataset.openid;
     box_mac = e.currentTarget.dataset.box_mac;
-    app.controlExitForscreen(openid, box_mac);
+    var hotel_info = e.currentTarget.dataset.hotel_info;
+    app.controlExitForscreen(openid, box_mac, hotel_info, that);
   },
   //遥控调整音量
   changeVolume: function (e) {
+    var that = this;
     box_mac = e.currentTarget.dataset.box_mac;
+    openid = e.currentTarget.dataset.openid;
     var change_type = e.currentTarget.dataset.change_type;
-    app.controlChangeVolume(box_mac, change_type);
+    var hotel_info = e.currentTarget.dataset.hotel_info;
+    app.controlChangeVolume(openid, box_mac, change_type, hotel_info, that);
 
   },
   //遥控切换节目
   changeProgram: function (e) {
+    var that = this;
     box_mac = e.currentTarget.dataset.box_mac;
+    openid = e.currentTarget.dataset.openid;
     var change_type = e.currentTarget.dataset.change_type;
-    app.controlChangeProgram(box_mac, change_type);
+    var hotel_info = e.currentTarget.dataset.hotel_info;
+    app.controlChangeProgram(openid, box_mac, change_type, hotel_info, that);
+  },
+  modalConfirm: function (e) {
+    console.log(e);
+    var that = this;
+    var hotel_info = e.target.dataset.hotel_info;
+    app.linkHotelWifi(hotel_info, that);
   },
   /**
    * 生命周期函数--监听页面初次渲染完成

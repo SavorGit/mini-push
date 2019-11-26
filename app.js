@@ -62,7 +62,7 @@ App({
           var timestamp = (new Date()).valueOf();
           for (var i = 0; i < res_len; i++) {
             wx.request({
-              url: "http://" + hotel_info.intranet_ip + ":8080/h5/goods_ondemand?deviceId=" + user_info.openid + "&web=true&media_id=" + forscreen_id + "&media_name=" + pubdetail[0]['filename'] + "&media_url=" + pubdetail[0]['res_url'] + '&froscreen_id=' + timestamp,
+              url: "http://" + hotel_info.intranet_ip + ":8080/h5/goods_ondemand?deviceId=" + user_info.openid + "&box_mac=" + box_mac + "&web=true&media_id=" + forscreen_id + "&forscreen_id=" + timestamp+"&media_name=" + pubdetail[0]['filename'] + "&media_url=" + pubdetail[0]['res_url'] + '&froscreen_id=' + timestamp,
               success:function(res){
                 if(res.data.result==0){
                   wx.showToast({

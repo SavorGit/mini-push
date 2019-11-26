@@ -848,16 +848,18 @@ Page({
   },
   //遥控调整音量
   changeVolume: function (e) {
+    openid = e.currentTarget.dataset.openid;
     box_mac = e.currentTarget.dataset.box_mac;
     var change_type = e.currentTarget.dataset.change_type;
-    app.controlChangeVolume(box_mac, change_type);
+    app.controlChangeVolume(openid,box_mac, change_type);
 
   },
   //遥控切换节目
   changeProgram: function (e) {
+    openid = e.currentTarget.dataset.openid;
     box_mac = e.currentTarget.dataset.box_mac;
     var change_type = e.currentTarget.dataset.change_type;
-    app.controlChangeProgram(box_mac, change_type);
+    app.controlChangeProgram(openid,box_mac, change_type);
   },
   /**
    * 生命周期函数--监听页面初次渲染完成

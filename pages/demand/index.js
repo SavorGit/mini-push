@@ -204,6 +204,12 @@ Page({
     var hotel_info = e.currentTarget.dataset.hotel_info;
     app.controlChangeProgram(openid, box_mac, change_type, hotel_info, that);
   },
+  modalConfirm: function (e) {
+    console.log(e);
+    var that = this;
+    var hotel_info = e.target.dataset.hotel_info;
+    app.linkHotelWifi(hotel_info, that);
+  },
   /**
    * 生命周期函数--监听页面显示
    */

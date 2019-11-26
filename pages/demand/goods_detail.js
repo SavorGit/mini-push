@@ -1,9 +1,12 @@
 // pages/demand/goods_detail.js
+const utils = require('../../utils/util.js')
 const app = getApp()
 var api_url = app.globalData.api_url;
 var box_mac;
+var openid;
 var goods_info;
 var goods_nums = 1;
+var hotel_info;
 Page({
 
   /**
@@ -23,7 +26,7 @@ Page({
   onLoad: function(options) {
     var that = this;
     var user_info = wx.getStorageSync('savor_user_info');
-    var openid = user_info.openid;
+    openid = user_info.openid;
     box_mac = options.box_mac;
     var goods_id = options.goods_id;
     var goods_box_mac = '';
@@ -34,6 +37,7 @@ Page({
     } else {
       goods_box_mac = box_mac
     }
+    
     if (typeof(options.uid) != 'undefined') {
       uid = options.uid;
     }
@@ -45,6 +49,15 @@ Page({
       uid: uid,
       is_header: is_header
     })
+    utils.PostRequest(api_url + '/Smallapp/index/isHaveCallBox', {
+      openid: openid
+    }, (data, headers, cookies, errMsg, statusCode) => {
+      hotel_info:data.result;
+      that.setData({
+        hotel_info:data.result
+      })
+    });
+
     wx.request({
       // url: api_url + '/Smallapp3/optimize/detail',
       url: api_url + '/Smallapp4/optimize/detail',
@@ -141,12 +154,13 @@ Page({
   //电视播放
   boxShow: function(e) {
     console.log(e);
-    var forscreen_id = e.currentTarget.dataset.gods_id;
+    var forscreen_id = e.currentTarget.dataset.goods_id;
 
     var pubdetail = e.currentTarget.dataset.pubdetail;
+    var hotel_info = e.currentTarget.dataset.hotel_info;
     var res_type = 2;
     var res_nums = 1;
-    app.boxShow(box_mac, forscreen_id, pubdetail, res_type, res_nums, 5);
+    app.boxShow(box_mac, forscreen_id, pubdetail, res_type, res_nums, 5,hotel_info);
 
     // 调用记录播放次数接口
     utils.PostRequest(api_url + '/Smallapp4/demand/recordPlaynum', {

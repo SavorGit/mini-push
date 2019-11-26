@@ -53,7 +53,7 @@ Page({
         if (res.data.code == 10000 && res.data.result.is_have == 1) {
           that.setData({
             is_open_simple: res.data.result.is_open_simple,
-            hotel_info:hotel_info,
+            hotel_info: res.data.result,
           })
         }
       }
@@ -691,6 +691,12 @@ Page({
     var change_type = e.currentTarget.dataset.change_type;
     var hotel_info = e.currentTarget.dataset.hotel_info;
     app.controlChangeProgram(openid, box_mac, change_type, hotel_info, that);
+  },
+  modalConfirm: function (e) {
+    console.log(e);
+    var that = this;
+    var hotel_info = e.target.dataset.hotel_info;
+    app.linkHotelWifi(hotel_info, that);
   },
   /**
    * 生命周期函数--监听页面初次渲染完成
