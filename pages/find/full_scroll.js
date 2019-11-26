@@ -156,6 +156,14 @@ let SavorUtils = {
         if (!(mediaObjectList instanceof Array)) {
           mediaObjectList = new Array();
         }
+        if (!(data.result instanceof Array)) {
+          wx.showToast({
+            title: '没有视频了，赶快上传几个吧！',
+            icon: 'none',
+            duration: 2000
+          });
+          return;
+        }
         pageContext.setData({
           mediaPageNo: pageNo,
           pageType: 0,
@@ -175,6 +183,14 @@ let SavorUtils = {
         let pictureObjectList = pageContext.data.pictureObjectList;
         if (!(pictureObjectList instanceof Array)) {
           pictureObjectList = new Array();
+        }
+        if (!(data.result instanceof Array)) {
+          wx.showToast({
+            title: '没有图片了，赶快上传几张吧！',
+            icon: 'none',
+            duration: 2000
+          });
+          return;
         }
         pageContext.setData({
           picturePageNo: pageNo,
