@@ -51,12 +51,21 @@ let SavorUtils = {
       'type': 2,
       'status': status,
     }, (data, headers, cookies, errMsg, statusCode) => {
-      let mediaObjectList = pageContext.data.mediaObjectList;
-      mediaObjectList[index].is_collect = status;
-      mediaObjectList[index].collect_num = data.result.nums;
-      pageContext.setData({
-        mediaObjectList: mediaObjectList
-      });
+      if (pageContext.data.pageType == 1) {
+        let pictureObjectList = pageContext.data.pictureObjectList;
+        pictureObjectList[index].is_collect = status;
+        pictureObjectList[index].collect_num = data.result.nums;
+        pageContext.setData({
+          pictureObjectList: pictureObjectList
+        });
+      } else {
+        let mediaObjectList = pageContext.data.mediaObjectList;
+        mediaObjectList[index].is_collect = status;
+        mediaObjectList[index].collect_num = data.result.nums;
+        pageContext.setData({
+          mediaObjectList: mediaObjectList
+        });
+      }
     }, ({
       errMsg
     }) => wx.showToast({
@@ -130,11 +139,12 @@ let SavorUtils = {
   },
   Page: {
 
-    // 加载数据
-    loadData: function(pageContext) {
+    // 加载视频数据
+    loadMediaData: function(pageContext) {
       let user_info = wx.getStorageSync("savor_user_info");
-      utils.PostRequest(api_url + '/smallapp/Discovery/index', {
-        page: pageContext.data.pageNo,
+      let pageNo = ++pageContext.data.mediaPageNo;
+      utils.PostRequest(api_url + '/Smallapp4/find/videos', {
+        page: pageNo,
         openid: user_info.openid
       }, (data, headers, cookies, errMsg, statusCode) => {
         let mediaObjectList = pageContext.data.mediaObjectList;
@@ -142,7 +152,29 @@ let SavorUtils = {
           mediaObjectList = new Array();
         }
         pageContext.setData({
+          mediaPageNo: pageNo,
+          pageType: 0,
           mediaObjectList: mediaObjectList.concat(data.result)
+        });
+      });
+    },
+
+    // 加载图片数据
+    loadPictureData: function(pageContext) {
+      let user_info = wx.getStorageSync("savor_user_info");
+      let pageNo = ++pageContext.data.picturePageNo;
+      utils.PostRequest(api_url + '/Smallapp4/find/images', {
+        page: pageNo,
+        openid: user_info.openid
+      }, (data, headers, cookies, errMsg, statusCode) => {
+        let pictureObjectList = pageContext.data.pictureObjectList;
+        if (!(pictureObjectList instanceof Array)) {
+          pictureObjectList = new Array();
+        }
+        pageContext.setData({
+          picturePageNo: pageNo,
+          pageType: 1,
+          pictureObjectList: pictureObjectList.concat(data.result)
         });
       });
     },
@@ -172,10 +204,13 @@ Page({
   data: {
     statusBarHeight: app.globalData.statusBarHeight,
     openid: '',
-    pageNo: 1,
-    scrollIndex: 0, //当前页面的索引值
+    pageType: 0, // 页面类型。0：视频：1：图片。
+    mediaScrollIndex: 0, //当前页面的索引值
     playProgress: [],
-    mediaObjectList: []
+    mediaObjectList: [], // 视频列表
+    mediaPageNo: 0,
+    pictureObjectList: [], // 图片列表
+    picturePageNo: 0,
   },
   /**
    * 生命周期函数--监听页面加载
@@ -204,7 +239,7 @@ Page({
     // let box_mac = self.data.box_mac;
 
     // 加载数据
-    SavorUtils.Page.loadData(self);
+    SavorUtils.Page.loadMediaData(self);
     wx.createVideoContext('JohnVideo0').play();
     wx.setNavigationBarColor({
       frontColor: '#ffffff',
@@ -246,12 +281,12 @@ Page({
       endEvent = e;
     let moveExecuteTrip = self.touchMoveHandler.turnPixel('touchMoveExecuteTrip', touchMoveExecuteTrip);
     let tripY = endEvent.touches[0].pageY - startEvent.touches[0].pageY;
-    let lastScrollIndex = self.data.scrollIndex;
-    let scrollIndex = lastScrollIndex;
-    if (tripY > moveExecuteTrip && self.data.scrollIndex > 0) {
-      scrollIndex--;
-    } else if (tripY < -(moveExecuteTrip) && self.data.scrollIndex < self.data.mediaObjectList.length - 1) {
-      scrollIndex++;
+    let lastScrollIndex = self.data.mediaScrollIndex;
+    let mediaScrollIndex = lastScrollIndex;
+    if (tripY > moveExecuteTrip && self.data.mediaScrollIndex > 0) {
+      mediaScrollIndex--;
+    } else if (tripY < -(moveExecuteTrip) && self.data.mediaScrollIndex < self.data.mediaObjectList.length - 1) {
+      mediaScrollIndex++;
     } else {
       return;
     }
@@ -260,12 +295,12 @@ Page({
       duration: 150,
       timingFunction: 'linear'
     });
-    animation.left(0).top(0).translateX(0).translateY('-' + (scrollIndex * 100) + '%').step({
+    animation.left(0).top(0).translateX(0).translateY('-' + (mediaScrollIndex * 100) + '%').step({
       duration: 150,
       timingFunction: 'linear'
     });
     self.setData({
-      scrollIndex: scrollIndex,
+      mediaScrollIndex: mediaScrollIndex,
       animationData: animation
     });
     setTimeout(function() {
@@ -278,9 +313,9 @@ Page({
     delete touchEvent["touchEnd"];
 
     wx.createVideoContext('JohnVideo' + lastScrollIndex).pause();
-    wx.createVideoContext('JohnVideo' + scrollIndex).play();
-    if (self.data.mediaObjectList.length - 1 == self.data.scrollIndex) {
-      SavorUtils.Page.loadData(self);
+    wx.createVideoContext('JohnVideo' + mediaScrollIndex).play();
+    if (self.data.mediaObjectList.length - 1 == self.data.mediaScrollIndex) {
+      SavorUtils.Page.loadMediaData(self);
     }
   },
 
@@ -305,21 +340,29 @@ Page({
 
   // 跳转到发布图片页
   goToFindPictures: function(e) {
-    wx.showLoading({
-      title: '跳转中...',
-      mask: true,
-      success: function(res) {},
-      fail: function(res) {},
-      complete: function(res) {},
-    });
-    wx.navigateTo({
-      url: '/pages/find/waterfall',
-      success: function(res) {},
-      fail: function(res) {},
-      complete: function(res) {
-        wx.hideLoading();
-      },
-    });
+    let self = this;
+    wx.createVideoContext('JohnVideo' + self.data.mediaScrollIndex).pause();
+    if (self.data.pictureObjectList.length < 1) {
+      SavorUtils.Page.loadPictureData(self);
+    } else {
+      self.setData({
+        pageType: 1
+      });
+    }
+  },
+
+  // 跳转到发布视频页
+  goToFindMedias: function(e) {
+    let self = this;
+    if (self.data.mediaObjectList.length < 1) {
+      SavorUtils.Page.loadMediaData(self);
+    } else {
+      self.setData({
+        mediaScrollIndex: 0,
+        pageType: 0
+      });
+    }
+    wx.createVideoContext('JohnVideo' + self.data.mediaScrollIndex).play();
   },
 
   //收藏资源
@@ -335,7 +378,6 @@ Page({
     let self = this;
     let forscreenId = e.target.dataset.forscreen_id;
     let index = e.target.dataset.index;
-    // alert(arguments.callee.caller.name)
     SavorUtils.User.favorite(self, forscreenId, index, 0);
   },
 
@@ -367,4 +409,22 @@ Page({
       });
     }
   }, //电视播放结束
+
+  // 加载更多图片
+  loadMorePictures: function(e) {
+    let self = this;
+    SavorUtils.Page.loadPictureData(self);
+  },
+
+  // 点击更多按钮 - 图片
+  clickPictureMenuMore: function(e) {
+    let self = this;
+    let forscreenId = e.target.dataset.forscreen_id;
+    let index = e.target.dataset.index;
+    let pictureObjectList = self.data.pictureObjectList;
+    pictureObjectList[index].isOpen = !(pictureObjectList[index].isOpen);
+    self.setData({
+      pictureObjectList: pictureObjectList
+    });
+  }
 });

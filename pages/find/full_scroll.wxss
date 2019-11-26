@@ -7,23 +7,22 @@ page {
   color: #fff;
 }
 
-.container-fill {
+.picture-page, .media-page {
+  width: 100%;
   height: 100%;
-  overflow: hidden;
 }
 
-.default-navigation-bar .text {
-  font-size: 16px;
-  font-weight: bold;
-}
+/* ============================================ 图片展示 ============================================ */
 
-.page-top {
+.picture-page .page-head {
+  width: 100%;
   height: 40rpx;
   padding-top: 20rpx;
   font-size: 28rpx;
 }
 
-.page-top cover-view, .page-top image, .page-top label {
+.picture-page .page-head view, .picture-page .page-head image,
+.picture-page .page-head label {
   width: 80rpx;
   height: 40rpx;
   line-height: 40rpx;
@@ -31,15 +30,241 @@ page {
   text-align: center;
 }
 
-.page-top image {
+.picture-page .page-head image {
   width: 2rpx;
 }
 
-.page-main {
+.picture-page .page-body {
+  width: 100%;
+  height: calc(100% - 60rpx);
+}
+
+.picture-page .page-body .card {
+  width: 100%;
+  max-height: 660rpx;
+  margin-bottom: 20rpx;
+}
+
+.picture-page .page-body .card > .body {
+  width: calc(100% - 40rpx);
+  max-height: calc(100% - 110rpx);
+  padding: 25rpx 20rpx 0 20rpx;
+}
+
+.picture-page .page-body .card > .body > .user-hader-img {
+  width: 80rpx;
+  height: 80rpx;
+  border-radius: 50%;
+}
+
+.picture-page .page-body .card > .body > .right {
+  width: calc(100% - 100rpx);
+  height: 100%;
+  margin-left: 20rpx;
+}
+
+.picture-page .page-body .card > .body > .right > .user-nickname {
+  width: 100%;
+  height: 80rpx;
+  line-height: 80rpx;
+  /* text-align: center; */
+  font-size: 30rpx;
+  font-weight: bold;
+}
+
+.picture-page .page-body .card > .body > .right > .desc {
+  width: 100%;
+  font-size: 24rpx;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  overflow: hidden;
+}
+
+.picture-page .page-body .card > .body > .right > .pic-group {
+  width: 100%;
+  margin-top: 20rpx;
+}
+
+.picture-page .page-body .card > .body > .right > .pic-group > .pic-size-1 {
+  width: 400rpx;
+  height: 400rpx;
+}
+
+.picture-page .page-body .card > .body > .right > .pic-group > .pic-size-1 > image {
+  width: 400rpx;
+  height: 400rpx;
+  border-radius: 10rpx;
+}
+
+.picture-page .page-body .card > .body > .right > .pic-group > .pic-size-2 {
+  width: 260rpx;
+  height: 250rpx;
+}
+
+.picture-page .page-body .card > .body > .right > .pic-group > .pic-size-2 > image {
+  width: 250rpx;
+  height: 250rpx;
+  border-radius: 10rpx;
+}
+
+.picture-page .page-body .card > .body > .right > .pic-group > .pic-size-3 {
+  width: 200rpx;
+  height: 205rpx;
+}
+
+.picture-page .page-body .card > .body > .right > .pic-group > .pic-size-3:first-child {
+  width: 310rpx;
+  height: 400rpx;
+}
+
+.picture-page .page-body .card > .body > .right > .pic-group > .pic-size-3:last-child {
+  height: 195rpx;
+}
+
+.picture-page .page-body .card > .body > .right > .pic-group > .pic-size-3 > image {
+  width: 200rpx;
+  height: 195rpx;
+  border-radius: 10rpx;
+}
+
+.picture-page .page-body .card > .body > .right > .pic-group > .pic-size-3:first-child > image {
+  width: 300rpx;
+  height: 400rpx;
+  border-radius: 10rpx;
+}
+
+.picture-page .page-body .card > .body > .right > .pic-group > .pic-size-4 {
+  width: 260rpx;
+  height: 260rpx;
+}
+
+.picture-page .page-body .card > .body > .right > .pic-group > .pic-size-4:nth-child(3),
+.picture-page .page-body .card > .body > .right > .pic-group > .pic-size-4:nth-child(4) {
+  height: 250rpx;
+}
+
+.picture-page .page-body .card > .body > .right > .pic-group > .pic-size-4 > image {
+  width: 250rpx;
+  height: 250rpx;
+  border-radius: 10rpx;
+}
+
+.picture-page .page-body .card > .body > .right > .pic-group > .pic-size-5,
+.picture-page .page-body .card > .body > .right > .pic-group > .pic-size-6 {
+  width: 190rpx;
+  height: 180rpx;
+}
+
+.picture-page .page-body .card > .body > .right > .pic-group > .pic-size-5:nth-child(1),
+.picture-page .page-body .card > .body > .right > .pic-group > .pic-size-5:nth-child(2),
+.picture-page .page-body .card > .body > .right > .pic-group > .pic-size-5:nth-child(3),
+.picture-page .page-body .card > .body > .right > .pic-group > .pic-size-6:nth-child(1),
+.picture-page .page-body .card > .body > .right > .pic-group > .pic-size-6:nth-child(2),
+.picture-page .page-body .card > .body > .right > .pic-group > .pic-size-6:nth-child(3) {
+  height: 190rpx;
+}
+
+.picture-page .page-body .card > .body > .right > .pic-group > .pic-size-5 > image,
+.picture-page .page-body .card > .body > .right > .pic-group > .pic-size-6 > image {
+  width: 180rpx;
+  height: 180rpx;
+  border-radius: 10rpx;
+}
+
+.picture-page .page-body .card > .foot {
+  width: calc(100% - 145rpx);
+  height: 85rpx;
+  padding-left: 120rpx;
+  padding-right: 25rpx;
+  font-size: 24rpx;
+}
+
+.picture-page .page-body .card > .foot > .time-hotel {
+  width: calc(100% - 80rpx);
+}
+
+.picture-page .page-body .card > .foot > .btn-group {
+  width: 400rpx;
+  height: 60rpx;
+  border-radius: 5rpx;
+  position: absolute;
+  right: 110rpx;
+}
+
+.picture-page .page-body .card > .foot > .btn-group > .launch-tv {
+  width: 130rpx;
+  height: 60rpx;
+  line-height: 60rpx;
+  text-align: center;
+  border-right: 1rpx solid #fff;
+}
+
+.picture-page .page-body .card > .foot > .btn-group > view:nth-child(2) {
+  width: calc(100% - 132rpx);
+}
+
+.picture-page .page-body .card > .foot > .btn-group .fa {
+  margin-right: 10rpx;
+}
+
+.picture-page .page-body .card > .foot > .more {
+  width: 80rpx;
+  height: 40rpx;
+  line-height: 0.06;
+  text-align: center;
+  font-size: 64rpx;
+}
+
+.picture-page .page-body .card > .foot > .more.close {
+  border-radius: 20rpx;
+  color: #666;
+  background-color: #ededed;
+}
+
+.picture-page .page-body .card > .foot > .more.open {
+  border-radius: 12rpx;
+  color: #999;
+  background-color: #666;
+}
+
+/* ============================================ 视频展示 ============================================ */
+
+.media-page .container-fill {
+  height: 100%;
+  overflow: hidden;
+}
+
+.media-page .default-navigation-bar .text {
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.media-page .page-top {
+  width: 100%;
+  height: 40rpx;
+  padding-top: 20rpx;
+  font-size: 28rpx;
+}
+
+.media-page .page-top cover-view, .media-page .page-top image,
+.media-page .page-top label {
+  width: 80rpx;
+  height: 40rpx;
+  line-height: 40rpx;
+  display: block;
+  text-align: center;
+}
+
+.media-page .page-top image {
+  width: 2rpx;
+}
+
+.media-page .page-main {
   height: calc(100% - 66px - 265rpx);
 }
 
-.page-main > .right-btn-group {
+.media-page .page-main > .right-btn-group {
   width: 84rpx;
   height: 497rpx;
   margin-right: 15rpx;
@@ -47,23 +272,23 @@ page {
   border-radius: 10rpx;
 }
 
-.page-main > .right-btn-group > .user-hader-img {
+.media-page .page-main > .right-btn-group > .user-hader-img {
   width: 80rpx;
   height: 80rpx;
   border: 2rpx solid #fff;
   border-radius: 50%;
 }
 
-.page-main > .right-btn-group > .btn-favorite,
-.page-main > .right-btn-group > .btn-share,
-.page-main > .right-btn-group > .btn-tv {
+.media-page .page-main > .right-btn-group > .btn-favorite,
+.media-page .page-main > .right-btn-group > .btn-share,
+.media-page .page-main > .right-btn-group > .btn-tv {
   width: 60rpx;
   height: 60rpx;
   margin-top: 40rpx;
 }
 
-.page-main > .right-btn-group > .btn-share button,
-.page-main > .right-btn-group > .btn-share button image {
+.media-page .page-main > .right-btn-group > .btn-share button,
+.media-page .page-main > .right-btn-group > .btn-share button image {
   width: 60rpx;
   height: 60rpx;
   border: 0;
@@ -75,27 +300,27 @@ page {
   bottom: 0;
 }
 
-.page-main > .right-btn-group > .btn-share button {
+.media-page .page-main > .right-btn-group > .btn-share button {
   background: unset;
 }
 
-.page-main > .right-btn-group > .btn-favorite {
+.media-page .page-main > .right-btn-group > .btn-favorite {
   height: 54rpx;
   margin-top: 60rpx;
 }
 
-.page-main > .right-btn-group > .btn-tv {
+.media-page .page-main > .right-btn-group > .btn-tv {
   height: 57rpx;
 }
 
-.page-main > .right-btn-group > label {
+.media-page .page-main > .right-btn-group > label {
   height: 24rpx;
   line-height: 24rpx;
   margin-top: 10rpx;
   font-size: 24rpx;
 }
 
-.active .img-content, .active .video-content {
+.media-page .active .video-content {
   -webkit-animation-duration: 0.5s;
   animation-duration: 0.5s;
   -webkit-animation-fill-mode: both;
@@ -104,12 +329,7 @@ page {
   animation-name: fadeInDown;
 }
 
-.img-content, .video-content {
-  width: 100%;
-  height: 100%;
-}
-
-.video-content {
+.media-page .video-content {
   width: calc(100% - 50rpx);
   height: 200rpx;
   margin: 0 auto;
@@ -121,12 +341,7 @@ page {
   background-color: rgba(0, 0, 0, 0.1);
 }
 
-.img-content {
-  position: relative;
-  margin-top: -100vh;
-}
-
-.video-content .content-header {
+.media-page .video-content .content-header {
   width: calc(100% - 135rpx);
   height: 50rpx;
   line-height: 50rpx;
@@ -135,7 +350,7 @@ page {
   padding-right: 135rpx;
 }
 
-.img-content .content-body, .video-content .content-body {
+.media-page .video-content .content-body {
   width: calc(100% - 135rpx);
   height: calc(100% - 70rpx);
   line-height: 26rpx;
@@ -144,7 +359,7 @@ page {
   font-size: 24rpx;
 }
 
-/* ================================= */
+/* ================================= 
 
 .controls {
   position: relative;
@@ -170,4 +385,4 @@ page {
   width: 40px;
   height: 40px;
   margin: 5px auto;
-}
+}*/

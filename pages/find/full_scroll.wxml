@@ -1,60 +1,109 @@
 <!--pages/find/full_scroll.wxml-->
 <import src="/pages/template/commons" />
 
-<view class="container-fill">
-  <!-- <view class="scroll-fullpage" bindtouchstart="scrollTouchstart" bindtouchend="scrollTouchend" style="transform: translateY(-{{scrollIndex * 100}}%); margin-top: {{margintop}}px;"> -->
-  <view class="full_height" bindtouchstart="onTouchStart" bindtouchend="onTouchEnd" animation="{{animationData}}">
-
-    <block wx:for="{{mediaObjectList}}" wx:key="key" wx:for-item="bean" wx:for-index="index">
-      <view class="full_height {{scrollIndex == index ? 'active' : ''}}">
+<!-- 图片页 - 开始 -->
+<view wx:if="{{pageType==1}}" class="picture-page">
+  <template is="navigationBarForTopLevel" data='{{statusBarHeight: statusBarHeight,titleText:"热点投屏"}}' />
+  <view class='container flex-column-center-flex_start theme-container' style='height: calc(100vh - 46px - {{statusBarHeight}}px);'>
+    <view class="page-head flex-row-center-center theme-panel">
+      <view class="theme-font-999999" bindtap="goToFindMedias">视频</view>
+      <image src='/images/icon2/666666_vertical.png'></image>
+      <label>图片</label>
+    </view>
+    <scroll-view class="page-body" scroll-y="true" scroll-with-animation="true" bindscrolltolower="loadMorePictures">
+      <view class="card theme-panel" wx:for="{{pictureObjectList}}" wx:key="key" wx:for-item="bean" wx:for-index="index">
         <block wx:if="{{bean.res_type == 1}}">
-          <image class="full_width full_height" mode="aspectFit" src="{{bean.pubdetail[0].res_url}}"></image>
-          <view class='img-content'>
-            <view class='content-body'>
-              <view>one</view>
+          <view class="body flex-row-flex_start-start">
+            <image class="user-hader-img" src="{{bean.avatarUrl == '' ? 'http://oss.littlehotspot.com/Html5/favicon.ico' : bean.avatarUrl}}"></image>
+            <view class="right">
+              <view class="user-nickname theme-font-000000">{{bean.nickName}}</view>
+              <view class="desc theme-font2">{{bean.content}}</view>
+              <view class="pic-group weui-grids">
+                <view class="weui-grid pic-size-{{bean.pubdetail.length}}" wx:for="{{bean.pubdetail}}" wx:key="picKey" wx:for-item="pic" wx:for-index="picIndex">
+                  <image mode="aspectFill" src="{{pic.img_url}}"></image>
+                </view>
+              </view>
             </view>
           </view>
-        </block>
-        <block wx:if="{{bean.res_type == 2}}">
-          <video id="JohnVideo{{index}}" class="full_width full_height" show-center-play-btn="{{false}}" autoplay="{{false}}" controls="{{false}}" event-model="bubble" bindprogress="onLoadProgress" bindtimeupdate="onTimeUpdate" bindwaiting="onWaiting" binderror="onError"
-            src="{{bean.pubdetail[0].res_url}}" data-index="{{index}}">
-            <view class="default-navigation-bar flex-row-center-center theme-font-FFFFFF" style="height: 46px; padding-top: {{statusBarHeight}}px;">
-              <view class='text'>热点投屏</view>
-            </view>
-            <view class='page-top flex-row-center-center'>
-              <label>视频</label>
-              <image src='/images/icon2/FFFFFF_vertical.png'></image>
-              <cover-view class="theme-font-999999" bindtap="goToFindPictures">图片</cover-view>
-            </view>
-            <view class='page-main flex-column-flex_end-center'>
-              <view class="right-btn-group flex-column-center-flex_start fadeInRight">
-                <image class="user-hader-img" src="{{bean.avatarUrl == '' ? 'http://oss.littlehotspot.com/Html5/favicon.ico' : bean.avatarUrl}}"></image>
-                <cover-image wx:if="{{bean.is_collect=='1'}}" class="btn-favorite" src="/images/imgs/FF757D_Favorite.png" data-forscreen_id="{{bean.forscreen_id}}" data-index="{{index}}" bindtap="cancCollect"></cover-image>
-                <cover-image wx:else class="btn-favorite" src="/images/imgs/FFFFFF_Favorite.png" data-forscreen_id="{{bean.forscreen_id}}" data-index="{{index}}" bindtap="onCollect"></cover-image>
-                <label>{{bean.collect_num}}</label>
-                <cover-view class="btn-share">
-                  <button open-type='share' data-forscreen_id="{{bean.forscreen_id}}" data-openid="{{openid}}">
-                    <cover-image src="/images/imgs/FFFFFF_Share.png"></cover-image>
-                  </button>
-                </cover-view>
-                <label>{{bean.share_num}}</label>
-                <cover-image class="btn-tv" src="/images/imgs/FFFFFF_TV.png" data-forscreen_id="{{bean.forscreen_id}}" data-index="{{index}}" bindtap='boxShow'></cover-image>
-                <label>投屏</label>
+          <view class="foot flex-row-center-space_between theme-font3">
+            <view wx:if='{{bean.hotel_name != ""}}' class="time-hotel">{{bean.create_time}}.{{bean.hotel_name}}</view>
+            <view wx:if="{{bean.isOpen == true}}" class="btn-group flex-row-center-space_between theme-panel-pop-menu-dark">
+              <view class="launch-tv">电视播放</view>
+              <view class="flex-row-center-space_around">
+                <view wx:if="{{bean.is_collect==1}}" class="heart" data-forscreen_id="{{bean.forscreen_id}}" data-index="{{index}}" bindtap="cancCollect">
+                  <label class="fa fa-heart fa-lg theme-font5"></label>
+                  <label class="text">喜欢</label>
+                </view>
+                <view wx:else class="heart" data-forscreen_id="{{bean.forscreen_id}}" data-index="{{index}}" bindtap="onCollect">
+                  <label class="fa fa-heart-o fa-lg"></label>
+                  <label class="text">喜欢</label>
+                </view>
+                <button class="button_none" open-type='share' data-res_id="{{bean.forscreen_id}}" data-res_key="{{index}}" data-pubdetail="{{bean.pubdetail}}" data-openid="{{openid}}" data-res_type="{{bean.res_type}}">
+                  <label class="fa fa-share-square-o fa-lg"></label>
+                  <label class="text">分享</label>
+                </button>
               </view>
             </view>
-            <view class='video-content flex-column-flex_start-start'>
-              <view class="content-header">
-                <label>{{bean.nickName}}</label>
-              </view>
-              <view class='content-body'>
-                <view>我两个是乱石山碧波潭万圣龙王差巡塔的。他叫做奔波儿霸，我叫做灞波儿奔。。</view>
-              </view>
-            </view>
-            <progress class="full_width" percent="{{playProgress[index] * 100}}" stroke-width="5rpx" activeColor="#1BBEB6" backgroundColor="#EDEDED"></progress>
-          </video>
+            <view class="more theme-button-more {{bean.isOpen == true ? 'open' : 'close'}}" data-forscreen_id="{{bean.forscreen_id}}" data-index="{{index}}" bindtap="clickPictureMenuMore">...</view>
+          </view>
         </block>
       </view>
-    </block>
-
+    </scroll-view>
   </view>
 </view>
+<!-- 图片页 - 结束 -->
+
+<!-- 视频页 - 开始 -->
+<view wx:else class="media-page">
+  <view class="container-fill">
+    <!-- <view class="scroll-fullpage" bindtouchstart="scrollTouchstart" bindtouchend="scrollTouchend" style="transform: translateY(-{{scrollIndex * 100}}%); margin-top: {{margintop}}px;"> -->
+    <view class="full_height" bindtouchstart="onTouchStart" bindtouchend="onTouchEnd" animation="{{animationData}}">
+
+      <block wx:for="{{mediaObjectList}}" wx:key="key" wx:for-item="bean" wx:for-index="index">
+        <view class="full_height {{mediaScrollIndex == index ? 'active' : ''}}">
+          <block wx:if="{{bean.res_type == 2}}">
+            <video id="JohnVideo{{index}}" class="full_width full_height" show-center-play-btn="{{false}}" autoplay="{{false}}" controls="{{false}}" event-model="bubble" bindprogress="onLoadProgress" bindtimeupdate="onTimeUpdate" bindwaiting="onWaiting" binderror="onError"
+              src="{{bean.pubdetail[0].res_url}}" data-index="{{index}}">
+              <view class="default-navigation-bar flex-row-center-center theme-font-FFFFFF" style="height: 46px; padding-top: {{statusBarHeight}}px;">
+                <view class='text'>热点投屏</view>
+              </view>
+              <view class='page-top flex-row-center-center'>
+                <label>视频</label>
+                <image src='/images/icon2/FFFFFF_vertical.png'></image>
+                <cover-view class="theme-font-999999" bindtap="goToFindPictures">图片</cover-view>
+              </view>
+              <view class='page-main flex-column-flex_end-center'>
+                <view class="right-btn-group flex-column-center-flex_start fadeInRight">
+                  <image class="user-hader-img" src="{{bean.avatarUrl == '' ? 'http://oss.littlehotspot.com/Html5/favicon.ico' : bean.avatarUrl}}"></image>
+                  <cover-image wx:if="{{bean.is_collect=='1'}}" class="btn-favorite" src="/images/imgs/FF757D_Favorite.png" data-forscreen_id="{{bean.forscreen_id}}" data-index="{{index}}" bindtap="cancCollect"></cover-image>
+                  <cover-image wx:else class="btn-favorite" src="/images/imgs/FFFFFF_Favorite.png" data-forscreen_id="{{bean.forscreen_id}}" data-index="{{index}}" bindtap="onCollect"></cover-image>
+                  <label>{{bean.collect_num}}</label>
+                  <cover-view class="btn-share">
+                    <button open-type='share' data-res_id="{{bean.forscreen_id}}" data-res_key="{{index}}" data-pubdetail="{{bean.pubdetail}}" data-openid="{{openid}}" data-res_type="{{bean.res_type}}">
+                      <cover-image src="/images/imgs/FFFFFF_Share.png"></cover-image>
+                    </button>
+                  </cover-view>
+                  <label>{{bean.share_num}}</label>
+                  <cover-image class="btn-tv" src="/images/imgs/FFFFFF_TV.png" data-forscreen_id="{{bean.forscreen_id}}" data-index="{{index}}" bindtap='boxShow'></cover-image>
+                  <label>投屏</label>
+                </view>
+              </view>
+              <view class='video-content flex-column-flex_start-start'>
+                <view class="content-header">
+                  <label>{{bean.nickName}}</label>
+                </view>
+                <view class='content-body'>
+                  <view>{{bean.content}}</view>
+                  <view wx:if='{{bean.hotel_name != ""}}'>{{bean.create_time}}.{{bean.hotel_name}}</view>
+                </view>
+              </view>
+              <progress class="full_width" percent="{{playProgress[index] * 100}}" stroke-width="5rpx" activeColor="#1BBEB6" backgroundColor="#EDEDED"></progress>
+            </video>
+          </block>
+        </view>
+      </block>
+
+    </view>
+  </view>
+</view>
+<!-- 视频页 - 结束 -->

@@ -74,6 +74,11 @@ button[disabled] {
   background-color: #333;
 }
 
+.theme-panel-pop-menu-dark {
+  color: #fff;
+  background-color: #666;
+}
+
 .theme-panel-2 {
   color: #fff;
   background-color: #edf0f2;
@@ -107,6 +112,11 @@ button[disabled] {
 .theme-button-disable {
   color: #ebebeb;
   background-color: #bfbfbf;
+}
+
+.theme-button-more {
+  color: #666;
+  background-color: #ededed;
 }
 
 .theme-textarea {
