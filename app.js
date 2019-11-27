@@ -38,7 +38,8 @@ App({
             wx.request({
               url: 'http://' + hotel_info.intranet_ip + ":8080/h5/discover_ondemand?deviceId=" + user_info.openid + "&box_mac=" + box_mac + "&web=true&media_id=" + forscreen_id + "&resource_type=" + res_type + "&forscreen_id=" + timestamp + "&media_name=" + pubdetail[i].filename + "&media_url=" + pubdetail[i].res_url + '&avatarUrl=' + user_info.avatarUrl + "&nickName=" + user_info.nickName,
               success:function(res){
-                if(res.data.code==0){
+
+                if(res.data.result==0){
                   wx.showToast({
                     title: '点播成功,电视即将开始播放',
                     icon: 'none',
