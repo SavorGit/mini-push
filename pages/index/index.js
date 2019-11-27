@@ -1,5 +1,6 @@
 // pages/interact/index.js
 const util = require('../../utils/util.js')
+var mta = require('../../utils/mta_analysis.js')
 const app = getApp()
 var openid;
 var box_mac;
@@ -51,6 +52,7 @@ Page({
    */
   onLoad: function(options) {
     var that = this;
+    //mta.Page.init()
     if (app.globalData.openid && app.globalData.openid != '') {
       that.setData({
         openid: app.globalData.openid
@@ -914,6 +916,8 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function() {
+    var user_info = wx.getStorageSync(cache_key+'user_info');
+    mta.Event.stat('showfind', { 'openid': user_info.openid })
     this.onLoad()
   },
 

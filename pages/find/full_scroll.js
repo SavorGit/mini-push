@@ -3,6 +3,7 @@
 let app = getApp();
 let systemInfo = app.SystemInfo;
 let utils = require("../../utils/util.js")
+var mta = require('../../utils/mta_analysis.js')
 let touchEvent = [];
 let touchMoveExecuteTrip = '160rpx';
 

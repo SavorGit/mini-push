@@ -1,5 +1,7 @@
 //app.js
+var mta = require('./utils/mta_analysis.js');
 App({
+  
   recordFormId(openid, formId) {
     var that = this;
     if (formId != 'the formId is a mock one') {
@@ -615,6 +617,16 @@ App({
       }
     }
     this.globalData.oss_access_key_id = oss_access_key_id
+    mta.App.init({
+      "appID": "500700115",
+      "eventID": "500704113",
+      "autoReport": true,
+      "statParam": true,
+      "ignoreParams": [],
+      "statPullDownFresh": true,
+      "statShareApp": true,
+      "statReachBottom": true
+    });
     // 获取小程序更新机制兼容
     if (wx.canIUse('getUpdateManager')) {
       const updateManager = wx.getUpdateManager()
