@@ -257,7 +257,6 @@ Page({
         }
       };
     }
-    // let box_mac = self.data.box_mac;
 
     // 加载数据
     SavorUtils.Page.loadMediaData(self);
@@ -354,9 +353,48 @@ Page({
     });
   },
 
+  // 当开始/继续播放时触发play事件
+  onVideoPlay: function(e) {
+    // console.log('onVideoPlay', e);
+  },
+
+  // 当暂停播放时触发 pause 事件
+  onVideoPause: function(e) {
+    // console.log('onVideoPause', e);
+  },
+
+  // 当播放到末尾时触发 ended 事件
+  onVideoEnded: function(e) {
+    // console.log('onVideoEnded', e);
+  },
+
+  // 视频元数据加载完成时触发。
+  onVideoLoadedMetadata: function(e) {
+    // console.log('onVideoLoadedMetadata', e);
+  },
+
+  // 视频播放出错时触发
+  onVideoError: function(e) {
+    // console.log('onVideoError', e);
+  },
+
+  // 视频出现缓冲时触发
+  onVideoWaiting: function(e) {
+    // console.log('onVideoWaiting', e);
+    // wx.showLoading({
+    //   title: '视频加载中...'
+    // });
+    wx.showToast({
+      title: '网络异常，请稍后重试',
+      icon: 'none',
+      duration: 5000
+    });
+  },
+
   // 加载进度
   onLoadProgress: function(e) {
-    // console.log(e);
+    // console.log('onLoadProgress', e);
+    // wx.hideLoading();
   },
 
   // 跳转到发布图片页

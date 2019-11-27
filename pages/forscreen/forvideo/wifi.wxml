@@ -1,25 +1,21 @@
 <!--pages/launch/video/index.wxml-->
 <import src="/pages/template/commons" />
+<template is="navigationBarForTwoLevel" data='{{statusBarHeight: statusBarHeight,titleText:"热点投屏"}}' />
 
 <!-- 视频上传前 -->
-<view class="container" wx:if="{{is_upload ==0}}">
-  <view class='full_width flex_row_center page-top'>
-    <label>视频上传成功后，电视下载完毕开始播放</label>
+<view wx:if="{{is_upload ==0}}" class="container" style='height: calc(100vh - 46px - {{statusBarHeight}}px);'>
+  <view class='page-top theme-panel-2 flex-row-center-flex_start font_666666_26'>
+    <label>照片上传成功后，电视下载完毕开始播放</label>
+    <label class='link_relief'>
+      <navigator url="/pages/forscreen/relief">免责声明</navigator>
+    </label>
   </view>
   <view class='full_width page-main'>
     <video wx:if="{{is_open_control==false}}" class='full_width' src='{{video_url}}'></video>
-
-
-    <!-- <view class='full_width upload-progress'>
-      <progress active-color="rgba(28, 190, 182, 0.66)" background-color="#FFFFFF" percent="30"></progress>
-      <label class="font_932C3F_34">0%</label>
-    </view>  -->
-
+    <button class="savor-btn theme-button-dark" form-type="submit" hover-class="none" disabled='{{is_btn_disabel}}' data-video_url="{{video_url}}" data-intranet_ip='{{intranet_ip}}' data-box_mac="{{box_mac}}" data-openid="{{openid}}" data-duration="{{is_forscreen==0}}"
+      data-video_size="{{video_size}}" bindtap="forscreen_video">投屏</button>
   </view>
-  <view class='full_width page-bottom'>
-    <button class='button_1' wx:if="{{is_forscreen==1}}" bindtap="forscreen_video" data-video_url="{{video_url}}" data-intranet_ip='{{intranet_ip}}' data-box_mac="{{box_mac}}" data-openid="{{openid}}" data-duration="{{duration}}" data-video_size="{{video_size}}">投屏</button>
-    <button class='button_1' wx:if="{{is_forscreen==0}}" style='background-color: rgba(28, 190, 182, 0.66);'>投屏</button>
-  </view>
+  <view class='full_width page-bottom'></view>
   <view class="body-view">
     <loading hidden="{{hiddens}}" bindchange="loadingChange">亲^_^投屏中,请稍后...</loading>
   </view>
@@ -27,22 +23,29 @@
 
 
 <!-- 视频上传成功 -->
-<view class="container" wx:if="{{is_upload >0}}">
-  <view class='full_width flex_row_center page-top'>
-    <label>视频上传成功后，电视下载完毕开始播放</label>
+<view wx:if="{{is_upload >0}}" class="container" style='height: calc(100vh - 46px - {{statusBarHeight}}px);'>
+  <view class='page-top theme-panel-2 flex-row-center-flex_start font_666666_26'>
+    <label>照片上传成功后，电视下载完毕开始播放</label>
+    <label class='link_relief'>
+      <navigator url="/pages/forscreen/relief">免责声明</navigator>
+    </label>
   </view>
   <view class='full_width page-main'>
     <video wx:if="{{is_open_control==false}}" class='full_width' src="{{vedio_url}}"></video>
   </view>
-  <view class='full_width page-bottom'>
-    <button class='button_2' bindtap='chooseVedio' data-intranet_ip='{{intranet_ip}}' data-box_mac="{{box_mac}}" data-openid="{{openid}}">重选视频</button>
-    <button wx:if="{{replay_btn==1}}" class='button_2 disable'  data-vedio_url='{{vedio_url}}' data-filename='{{filename}}' data-resouce_size='{{resouce_size}}' data-duration='{{duration}}' data-intranet_ip='{{intranet_ip}}'>{{djs}}s</button>
-    <button wx:else="{{replay_btn==0}}" class='button_2' bindtap='replayVedio' data-vedio_url='{{vedio_url}}' data-filename='{{filename}}' data-resouce_size='{{resouce_size}}' data-duration='{{duration}}' data-intranet_ip='{{intranet_ip}}' data-box_mac="{{box_mac}}">再次播放</button>
-    <button class='button_2' style='background-color:rgb(153, 153, 153);' bindtap='exitForscreend' data-intranet_ip='{{intranet_ip}}' data-boxmac="{{box_mac}}" data-openid="{{openid}}">退出投屏</button>
+  <view class='full_width page-bottom flex-column-center-center theme-panel-2'>
+    <view class='button_group flex-row-center-space_between'>
+      <button class='savor-btn theme-button-dark' data-intranet_ip='{{intranet_ip}}' data-box_mac="{{box_mac}}" data-openid="{{openid}}" bindtap='chooseVedio'>重选视频</button>
+      <button wx:if="{{replay_btn==1}}" class='savor-btn theme-button-dark' disabled="disabled" data-vedio_url='{{vedio_url}}' data-filename='{{filename}}' data-resouce_size='{{resouce_size}}' data-duration='{{duration}}' data-intranet_ip='{{intranet_ip}}'>{{djs}}s</button>
+      <button wx:else="{{replay_btn==0}}" class='savor-btn theme-button-dark' bindtap='replayVedio' data-vedio_url='{{vedio_url}}' data-filename='{{filename}}' data-resouce_size='{{resouce_size}}' data-duration='{{duration}}' data-intranet_ip='{{intranet_ip}}'
+        data-box_mac="{{box_mac}}">再次播放</button>
+      <button class='savor-btn theme-button-dark' data-intranet_ip='{{intranet_ip}}' data-boxmac="{{box_mac}}" data-openid="{{openid}}" bindtap='exitForscreend'>退出投屏</button>
+    </view>
   </view>
 </view>
 
-<modal show="{{wifiErr.is_open==1 ? true : false}}" width="650rpx" height='350rpx' border-radius="10rpx" title-text='提示' title-color="#333333" title-background-color="unset" title-border-radius="0rpx" confirm-text='{{wifiErr.confirm}}' confirm-color="#FFFFFF" confirm-background-color="#1cbeb6" confirm-border-radius="10rpx" cancel-text='{{wifiErr.cancel}}' cancel-color='#FFFFFF' cancel-background-color="#333333" cancel-border-radius="10rpx" bindcancel="modalCancel" data-hotel_info="{{hotel_info}}" bindconfirm='modalConfirm'>
+<modal show="{{wifiErr.is_open==1 ? true : false}}" width="650rpx" height='350rpx' border-radius="10rpx" title-text='提示' title-color="#333333" title-background-color="unset" title-border-radius="0rpx" confirm-text='{{wifiErr.confirm}}' confirm-color="#FFFFFF"
+  confirm-background-color="#1cbeb6" confirm-border-radius="10rpx" cancel-text='{{wifiErr.cancel}}' cancel-color='#FFFFFF' cancel-background-color="#333333" cancel-border-radius="10rpx" bindcancel="modalCancel" data-hotel_info="{{hotel_info}}" bindconfirm='modalConfirm'>
   <view class="theme-font1" style="padding:0 20rpx;font-size:24rpx;">{{wifiErr.msg}}</view>
 </modal>
 
@@ -69,6 +72,7 @@
 <template is="remoteControlWindow" data='{{popRemoteControlWindow: popRemoteControlWindow,qrcode_img:qrcode_img,box_mac:box_mac,openid:openid,hotel_info:hotel_info}}' />
 
 <!--wifi链接错误提示-->
-<modal show="{{wifiErr.is_open==1 ? true : false}}" width="650rpx" height='350rpx' border-radius="10rpx" title-text='提示' title-color="#333333" title-background-color="unset" title-border-radius="0rpx" confirm-text='{{wifiErr.confirm}}' confirm-color="#FFFFFF" confirm-background-color="#1cbeb6" confirm-border-radius="10rpx" cancel-text='{{wifiErr.cancel}}' cancel-color='#FFFFFF' cancel-background-color="#333333" cancel-border-radius="10rpx" bindcancel="modalCancel" data-hotel_info="{{hotel_info}}" bindconfirm='modalConfirm'>
+<modal show="{{wifiErr.is_open==1 ? true : false}}" width="650rpx" height='350rpx' border-radius="10rpx" title-text='提示' title-color="#333333" title-background-color="unset" title-border-radius="0rpx" confirm-text='{{wifiErr.confirm}}' confirm-color="#FFFFFF"
+  confirm-background-color="#1cbeb6" confirm-border-radius="10rpx" cancel-text='{{wifiErr.cancel}}' cancel-color='#FFFFFF' cancel-background-color="#333333" cancel-border-radius="10rpx" bindcancel="modalCancel" data-hotel_info="{{hotel_info}}" bindconfirm='modalConfirm'>
   <view class="theme-font1" style="padding:0 20rpx;font-size:24rpx;">{{wifiErr.msg}}</view>
 </modal>

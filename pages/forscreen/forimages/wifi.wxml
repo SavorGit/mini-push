@@ -1,74 +1,70 @@
 <!--pages/launch/pic/index.wxml-->
 <import src="/pages/template/commons" />
+<template is="navigationBarForTwoLevel" data='{{statusBarHeight: statusBarHeight,titleText:"热点投屏"}}' />
 
-<view class="container" wx:if="{{is_upload==0}}">
-  <view class='full_width flex_row_center page-top'>
+<view wx:if="{{is_upload==0}}" class="container" style='height: calc(100vh - 46px - {{statusBarHeight}}px);'>
+  <view class='page-top theme-panel-2 flex-row-center-flex_start font_666666_26'>
     <label>照片上传成功后，电视下载完毕开始播放</label>
+    <label class='link_relief'>
+      <navigator url="/pages/forscreen/relief">免责声明</navigator>
+    </label>
   </view>
   <form class='full_width upoad-form' bindsubmit="up_forscreen">
     <view class='full_width page-main'>
       <view class="weui-grids grids-frame">
-
         <view class="weui-grid" wx:for="{{up_imgs}}" wx:key="key" wx:for-item="img" wx:for-index="index">
           <view class="pic_show">
             <image class='pic_show' mode='aspectFill' src="{{img.tmp_img}}"></image>
-            <!--           
-            <view class='upload_success_frame'>
-              <image style='margin:0 0 0 0;width:38rpx;height:38rpx;' src='/images/icon/check_alt_512x512.png'></image>
-            </view>
-            <view class='upload_mask'>
-              <label>20%</label>
-            </view> -->
             <input class="display_hide" name="upimgs{{index}}" value="{{img.tmp_img}}"></input>
             <input class="display_hide" name="upimgsize{{index}}" value="{{img.resource_size}}"></input>
           </view>
         </view>
-
       </view>
       <input class="display_hide" name="box_mac" value="{{box_mac}}"></input>
       <input class="display_hide" name="openid" value="{{openid}}"></input>
       <input class='display_hide' name="img_lenth" value="{{img_lenth}}"></input>
       <input class='display_hide' name="intranet_ip" value="{{intranet_ip}}"> </input>
       <view class='pic_text'>
-        <label class='font_333333_30'>为所有照片增加文字（选填）</label>
-        <textarea class='text_input' name="forscreen_char" maxlength='30' placeholder='1-30字'></textarea>
+        <textarea class='text_input theme-textarea' name="forscreen_char" maxlength='30' placeholder='电视展示时增加文字...'></textarea>
       </view>
+      <button class="savor-btn theme-button-dark" form-type="submit" hover-class="none" disabled='{{is_btn_disabel}}'>投屏</button>
     </view>
-    <view class='full_width page-bottom'>
-      <button form-type="submit" class='button_1' disabled='{{is_btn_disabel}}'>投屏</button>
-    </view>
+    <view class='full_width page-bottom'></view>
   </form>
   <view class="body-view">
     <loading hidden="{{hiddens}}" bindchange="loadingChange">亲^_^投屏中,请稍后...</loading>
   </view>
 </view>
-<!-- 上传照片后 -->
-<view class="container" wx:if="{{is_upload>0}}">
-  <view class='full_width flex_row_center page-top'>
-    <label>照片上传成功后，电视下载完毕开始播放</label>
-  </view>
-  <view class='full_width page-main'>
-    <view class="weui-grids grids-frame">
 
+<!-- 上传照片后 -->
+<view wx:if="{{is_upload>0}}" class="container" style='height: calc(100vh - 46px - {{statusBarHeight}}px);'>
+  <view class='page-top theme-panel-2 flex-row-center-flex_start font_666666_26'>
+    <label>图片加载成功后，选择照片，电视开始展示</label>
+    <label class='link_relief'>
+      <navigator url="/pages/forscreen/relief">免责声明</navigator>
+    </label>
+  </view>
+  <view class='full_width page-main' style="height:calc(100% - 170rpx);">
+    <view class="weui-grids grids-frame">
       <view class="weui-grid" wx:for="{{up_imgs}}" wx:key="key" wx:for-item="bean" wx:for-index="index">
         <view class="pic_show" bindtap='up_single_pic' data-boxmac="{{box_mac}}" data-openid="{{openid}}" data-img_url="{{bean.img_url}}" data-intranet_ip='{{intranet_ip}}' data-filename='{{filename_arr[index]}}' data-forscreen_char='{{forscreen_char}}' data-resouce_size="{{bean.img_size}}"
           data-choose_key="{{index}}">
-
           <image wx:if="{{choose_key==index}}" class='pic_show pic_show_cur' mode='aspectFill' src="{{bean.img_url}}"></image>
           <image wx:else class='pic_show' mode='aspectFill' src="{{bean.img_url}}"></image>
         </view>
       </view>
-
     </view>
   </view>
-  <view class='full_width page-bottom'>
-    <button class='button_2' bindtap="chooseImage" data-intranet_ip='{{intranet_ip}}' data-boxmac="{{box_mac}}" data-openid="{{openid}}">重选照片</button>
-    <!-- <button class='button_2'>再次播放</button> -->
-    <button class='button_2' style='background-color:rgb(153, 153, 153);' bindtap='exitForscreend' data-intranet_ip='{{intranet_ip}}' data-boxmac="{{box_mac}}" data-openid="{{openid}}">退出投屏</button>
+  <view class='full_width page-bottom flex-column-center-center theme-panel-2'>
+    <view class='button_group flex-row-center-space_between'>
+      <button class='savor-btn theme-button-dark' data-intranet_ip='{{intranet_ip}}' data-boxmac="{{box_mac}}" data-openid="{{openid}}" bindtap="chooseImage">重选照片</button>
+      <button class='savor-btn theme-button-dark' data-intranet_ip='{{intranet_ip}}' data-boxmac="{{box_mac}}" data-openid="{{openid}}" bindtap="exitForscreen">退出投屏</button>
+    </view>
   </view>
 </view>
 
-<modal show="{{wifiErr.is_open==1 ? true : false}}" width="650rpx" height='350rpx' border-radius="10rpx" title-text='提示' title-color="#333333" title-background-color="unset" title-border-radius="0rpx" confirm-text='{{wifiErr.confirm}}' confirm-color="#FFFFFF" confirm-background-color="#1cbeb6" confirm-border-radius="10rpx" cancel-text='{{wifiErr.cancel}}' cancel-color='#FFFFFF' cancel-background-color="#333333" cancel-border-radius="10rpx" bindcancel="modalCancel" data-hotel_info="{{hotel_info}}" bindconfirm='modalConfirm'>
+<modal show="{{wifiErr.is_open==1 ? true : false}}" width="650rpx" height='350rpx' border-radius="10rpx" title-text='提示' title-color="#333333" title-background-color="unset" title-border-radius="0rpx" confirm-text='{{wifiErr.confirm}}' confirm-color="#FFFFFF"
+  confirm-background-color="#1cbeb6" confirm-border-radius="10rpx" cancel-text='{{wifiErr.cancel}}' cancel-color='#FFFFFF' cancel-background-color="#333333" cancel-border-radius="10rpx" bindcancel="modalCancel" data-hotel_info="{{hotel_info}}" bindconfirm='modalConfirm'>
   <view class="theme-font1" style="padding:0 20rpx;font-size:24rpx;">{{wifiErr.msg}}</view>
 </modal>
 
@@ -96,6 +92,7 @@
 <template is="remoteControlWindow" data='{{popRemoteControlWindow: popRemoteControlWindow,qrcode_img:qrcode_img,box_mac:box_mac,openid:openid,hotel_info:hotel_info}}' />
 
 <!--wifi链接错误提示-->
-<modal show="{{wifiErr.is_open==1 ? true : false}}" width="650rpx" height='350rpx' border-radius="10rpx" title-text='提示' title-color="#333333" title-background-color="unset" title-border-radius="0rpx" confirm-text='{{wifiErr.confirm}}' confirm-color="#FFFFFF" confirm-background-color="#1cbeb6" confirm-border-radius="10rpx" cancel-text='{{wifiErr.cancel}}' cancel-color='#FFFFFF' cancel-background-color="#333333" cancel-border-radius="10rpx" bindcancel="modalCancel" data-hotel_info="{{hotel_info}}" bindconfirm='modalConfirm'>
+<modal show="{{wifiErr.is_open==1 ? true : false}}" width="650rpx" height='350rpx' border-radius="10rpx" title-text='提示' title-color="#333333" title-background-color="unset" title-border-radius="0rpx" confirm-text='{{wifiErr.confirm}}' confirm-color="#FFFFFF"
+  confirm-background-color="#1cbeb6" confirm-border-radius="10rpx" cancel-text='{{wifiErr.cancel}}' cancel-color='#FFFFFF' cancel-background-color="#333333" cancel-border-radius="10rpx" bindcancel="modalCancel" data-hotel_info="{{hotel_info}}" bindconfirm='modalConfirm'>
   <view class="theme-font1" style="padding:0 20rpx;font-size:24rpx;">{{wifiErr.msg}}</view>
 </modal>

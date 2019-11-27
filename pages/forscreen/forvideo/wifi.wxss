@@ -1,10 +1,11 @@
 /* pages/launch/video/index.wxss */
 
 .page-top {
-  height: 88rpx;
-  color: rgba(255, 255, 255, 0.8);
-  background-color: rgb(0, 5, 8);
-  font-size: 14px;
+  width: 100%;
+  height: 50rpx;
+  line-height: 50rpx;
+  padding-top: 10rpx;
+  padding-bottom: 10rpx;
 }
 
 .page-top label {
@@ -18,19 +19,14 @@
   align-items: flex-start;
 }
 
-.upload-progress {
-  margin-top: 63rpx;
-  margin-bottom: 100rpx;
-  text-align: center;
-}
-
-.upload-progress progress {
-  margin-top: 16rpx;
-  margin-left: calc((100% - 450rpx) / 2);
-  width: 450rpx;
-  height: 5px;
-  border-radius: 2px;
-  overflow: hidden;
+.page-main > .savor-btn {
+  width: 400rpx;
+  height: 80rpx;
+  line-height: 80rpx;
+  border-radius: 10rpx;
+  font-size: 28rpx;
+  margin: 30rpx auto auto auto;
+  padding: unset;
 }
 
 .page-bottom {
@@ -38,27 +34,18 @@
   text-align: center;
 }
 
-.page-bottom .button_1 {
-  width: 99%;
-  height: 114rpx;
-  line-height: 114rpx;
-  font-size: 16px;
-  color: rgb(255, 255, 255);
-  background-color: rgb(28, 190, 182);
+.page-bottom > .button_group {
+  width: calc(100% - 80rpx);
+  padding: 0 40rpx;
 }
 
-.page-bottom .button_2 {
-  display: inline-block;
-  width: 32.2%;
-  height: 112rpx;
-  line-height: 112rpx;
-  margin: 0rpx 0.45%;
-  font-size: 16px;
-  color: rgb(255, 255, 255);
-  background-color: rgb(28, 190, 182);
-}
-
-.page-bottom .button_2.disable {
-  color: rgb(255, 255, 255);
-  background-color: rgb(153, 153, 153);
+.page-bottom > .button_group button {
+  width: 150rpx;
+  height: 50rpx;
+  line-height: 50rpx;
+  border-radius: 25rpx;
+  margin: auto 0;
+  padding: unset;
+  border: unset;
+  font-size: 28rpx;
 }

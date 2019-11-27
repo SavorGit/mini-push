@@ -7,7 +7,13 @@ var intranet_ip;
 var wifi_mac;
 var wifi_name;
 var wifi_password;
-var hotel_info = { 'intranet_ip': '', 'wifi_mac': '', 'wifi_name': '', 'wifi_password': '', 'forscreen_type':'2'};
+var hotel_info = {
+  'intranet_ip': '',
+  'wifi_mac': '',
+  'wifi_name': '',
+  'wifi_password': '',
+  'forscreen_type': '2'
+};
 var qrcode_url;
 Page({
 
@@ -15,6 +21,7 @@ Page({
    * 页面的初始数据
    */
   data: {
+    statusBarHeight: getApp().globalData.statusBarHeight,
     is_upload: 0,
     img_lenth: 0,
     intranet_ip: '',
@@ -28,7 +35,7 @@ Page({
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function (options) {
+  onLoad: function(options) {
     var that = this;
     box_mac = options.box_mac;
     openid = options.openid;
@@ -37,26 +44,29 @@ Page({
     wifi_name = options.wifi_name;
     wifi_password = options.wifi_password;
     hotel_info.intranet_ip = intranet_ip;
-    hotel_info.wifi_mac   = wifi_mac;
-    hotel_info.wifi_name  = wifi_name;
+    hotel_info.wifi_mac = wifi_mac;
+    hotel_info.wifi_name = wifi_name;
     hotel_info.wifi_password = wifi_password;
-    
+
     that.setData({
       box_mac: box_mac,
       openid: openid,
       is_btn_disabel: true,
-      hotel_info:hotel_info,
+      hotel_info: hotel_info,
     })
     wx.chooseImage({
       count: 6, // 默认9
       sizeType: ['original', 'compressed'], // 可以指定是原图还是压缩图，默认二者都有
       sourceType: ['album', 'camera'], // 可以指定来源是相册还是相机，默认二者都有
 
-      success: function (res) {
+      success: function(res) {
         var img_len = res.tempFilePaths.length;
         var tmp_imgs = [];
         for (var i = 0; i < img_len; i++) {
-          tmp_imgs[i] = { "tmp_img": res.tempFilePaths[i], "resource_size": res.tempFiles[i].size };
+          tmp_imgs[i] = {
+            "tmp_img": res.tempFilePaths[i],
+            "resource_size": res.tempFiles[i].size
+          };
         }
         that.setData({
           up_imgs: tmp_imgs,
@@ -65,14 +75,14 @@ Page({
           is_btn_disabel: false,
         })
       },
-      fail: function (e) {
+      fail: function(e) {
         wx.navigateBack({
           delta: 1,
         })
       }
     })
   },
-  up_forscreen: function (e) {
+  up_forscreen: function(e) {
 
     var that = this;
     that.setData({
@@ -93,33 +103,60 @@ Page({
 
     if (e.detail.value.upimgs0 != '' && e.detail.value.upimgs0 != undefined) {
 
-      upimgs[0] = { 'img_url': e.detail.value.upimgs0, 'img_size': e.detail.value.upimgsize0 };
+      upimgs[0] = {
+        'img_url': e.detail.value.upimgs0,
+        'img_size': e.detail.value.upimgsize0
+      };
 
 
     }
     if (e.detail.value.upimgs1 != '' && e.detail.value.upimgs1 != undefined) {
-      upimgs[1] = { 'img_url': e.detail.value.upimgs1, 'img_size': e.detail.value.upimgsize1 };
+      upimgs[1] = {
+        'img_url': e.detail.value.upimgs1,
+        'img_size': e.detail.value.upimgsize1
+      };
     }
     if (e.detail.value.upimgs2 != '' && e.detail.value.upimgs2 != undefined) {
-      upimgs[2] = { 'img_url': e.detail.value.upimgs2, 'img_size': e.detail.value.upimgsize2 };
+      upimgs[2] = {
+        'img_url': e.detail.value.upimgs2,
+        'img_size': e.detail.value.upimgsize2
+      };
     }
     if (e.detail.value.upimgs3 != '' && e.detail.value.upimgs3 != undefined) {
-      upimgs[3] = { 'img_url': e.detail.value.upimgs3, 'img_size': e.detail.value.upimgsize3 };
+      upimgs[3] = {
+        'img_url': e.detail.value.upimgs3,
+        'img_size': e.detail.value.upimgsize3
+      };
     }
     if (e.detail.value.upimgs4 != '' && e.detail.value.upimgs4 != undefined) {
-      upimgs[4] = { 'img_url': e.detail.value.upimgs4, 'img_size': e.detail.value.upimgsize4 };
+      upimgs[4] = {
+        'img_url': e.detail.value.upimgs4,
+        'img_size': e.detail.value.upimgsize4
+      };
     }
     if (e.detail.value.upimgs5 != '' && e.detail.value.upimgs5 != undefined) {
-      upimgs[5] = { 'img_url': e.detail.value.upimgs5, 'img_size': e.detail.value.upimgsize5 };
+      upimgs[5] = {
+        'img_url': e.detail.value.upimgs5,
+        'img_size': e.detail.value.upimgsize5
+      };
     }
     if (e.detail.value.upimgs6 != '' && e.detail.value.upimgs6 != undefined) {
-      upimgs[6] = { 'img_url': e.detail.value.upimgs6, 'img_size': e.detail.value.upimgsize6 };
+      upimgs[6] = {
+        'img_url': e.detail.value.upimgs6,
+        'img_size': e.detail.value.upimgsize6
+      };
     }
     if (e.detail.value.upimgs7 != '' && e.detail.value.upimgs7 != undefined) {
-      upimgs[7] = { 'img_url': e.detail.value.upimgs7, 'img_size': e.detail.value.upimgsize7 };
+      upimgs[7] = {
+        'img_url': e.detail.value.upimgs7,
+        'img_size': e.detail.value.upimgsize7
+      };
     }
     if (e.detail.value.upimgs8 != '' && e.detail.value.upimgs8 != undefined) {
-      upimgs[8] = { 'img_url': e.detail.value.upimgs8, 'img_size': e.detail.value.upimgsize8 };
+      upimgs[8] = {
+        'img_url': e.detail.value.upimgs8,
+        'img_size': e.detail.value.upimgsize8
+      };
     }
     var forscreen_id = (new Date()).valueOf();
     var filename_arr = [];
@@ -131,30 +168,45 @@ Page({
       filename_arr[i] = filename;
 
       wx.uploadFile({
-        url: "http://" + intranet_ip + ":8080/picH5?isThumbnail=1&imageId=20170301&deviceId=" + openid + "&box_mac="+box_mac+"&deviceName=" + mobile_brand + "&rotation=90&imageType=1&web=true&forscreen_id=" + forscreen_id + '&forscreen_char=' + forscreen_char + '&filename=' + filename + '&device_model=' + mobile_model + '&resource_size=' + img_size + '&action=4&resource_type=0&avatarUrl=' + avatarUrl + "&nickName=" + nickName + "&forscreen_nums=" + img_lenth,
+        url: "http://" + intranet_ip + ":8080/picH5?isThumbnail=1&imageId=20170301&deviceId=" + openid + "&box_mac=" + box_mac + "&deviceName=" + mobile_brand + "&rotation=90&imageType=1&web=true&forscreen_id=" + forscreen_id + '&forscreen_char=' + forscreen_char + '&filename=' + filename + '&device_model=' + mobile_model + '&resource_size=' + img_size + '&action=4&resource_type=0&avatarUrl=' + avatarUrl + "&nickName=" + nickName + "&forscreen_nums=" + img_lenth,
         filePath: img_url,
         name: 'fileUpload',
-        success: function (res) {
-          
-          if (i == img_lenth ){
+        success: function(res) {
+
+          if (i == img_lenth) {
             var info_rt = JSON.parse(res.data);
-            if(info_rt.result==1001){
+            if (info_rt.result == 1001) {
               that.setData({
-                wifiErr: { 'is_open': 1, 'msg': '亲，使用此小程序前需要链接包间wifi,链接wifi投屏更快哦！', 'confirm': '重试', 'calcle': '', 'type': 3 }
+                wifiErr: {
+                  'is_open': 1,
+                  'msg': '亲，使用此小程序前需要链接包间wifi,链接wifi投屏更快哦！',
+                  'confirm': '重试',
+                  'calcle': '',
+                  'type': 3
+                }
               })
             }
           }
         },
-        fail: function ({ errMsg }) {
+        fail: function({
+          errMsg
+        }) {
           if (i == img_lenth) {
             that.setData({
-              wifiErr: { 'is_open': 1, 'msg': '亲，使用此小程序前需要链接包间wifi,链接wifi投屏更快哦！', 'confirm': '重试', 'calcle': '', 'type': 3 }
+              wifiErr: {
+                'is_open': 1,
+                'msg': '亲，使用此小程序前需要链接包间wifi,链接wifi投屏更快哦！',
+                'confirm': '重试',
+                'calcle': '',
+                'type': 3
+              }
             })
           }
         },
       });
       sleep(1);
     }
+
     function sleep(delay) {
       var start = (new Date()).getTime();
       while ((new Date()).getTime() - start < delay) {
@@ -171,7 +223,7 @@ Page({
     })
 
   },
-  chooseImage: function (res) {
+  chooseImage: function(res) {
     var that = this;
     openid = res.currentTarget.dataset.openid;
     box_mac = res.currentTarget.dataset.box_mac;
@@ -191,7 +243,7 @@ Page({
       count: 6, // 默认9
       sizeType: ['original', 'compressed'], // 可以指定是原图还是压缩图，默认二者都有
       sourceType: ['album', 'camera'], // 可以指定来源是相册还是相机，默认二者都有
-      success: function (res) {
+      success: function(res) {
         that.setData({
           up_imgs: [],
         })
@@ -199,7 +251,10 @@ Page({
 
         var tmp_imgs = [];
         for (var i = 0; i < img_len; i++) {
-          tmp_imgs[i] = { "tmp_img": res.tempFilePaths[i], "resource_size": res.tempFiles[i].size };
+          tmp_imgs[i] = {
+            "tmp_img": res.tempFilePaths[i],
+            "resource_size": res.tempFiles[i].size
+          };
         }
         that.setData({
           up_imgs: tmp_imgs,
@@ -211,7 +266,7 @@ Page({
       }
     })
   },
-  up_single_pic: function (res) {
+  up_single_pic: function(res) {
     var that = this;
     //console.log(res);
     openid = res.currentTarget.dataset.openid;
@@ -233,36 +288,51 @@ Page({
       choose_key: choose_key
     })
     wx.uploadFile({
-      url: "http://" + intranet_ip + ":8080/h5/singleImg?isThumbnail=1&imageId=20170301&deviceId=" + openid + "&box_mac="+box_mac+"&deviceName=" + mobile_brand + "&rotation=90&imageType=1&web=true&forscreen_id=" + forscreen_id + '&forscreen_char=' + forscreen_char + '&filename=' + filename + '&device_model=' + mobile_model + '&resource_size=' + resouce_size + '&action=2&resource_type=1&avatarUrl=' + avatarUrl + "&nickName=" + nickName,
+      url: "http://" + intranet_ip + ":8080/h5/singleImg?isThumbnail=1&imageId=20170301&deviceId=" + openid + "&box_mac=" + box_mac + "&deviceName=" + mobile_brand + "&rotation=90&imageType=1&web=true&forscreen_id=" + forscreen_id + '&forscreen_char=' + forscreen_char + '&filename=' + filename + '&device_model=' + mobile_model + '&resource_size=' + resouce_size + '&action=2&resource_type=1&avatarUrl=' + avatarUrl + "&nickName=" + nickName,
       filePath: img_url,
       name: 'fileUpload',
-      success: function (res) {
+      success: function(res) {
         var info_rt = JSON.parse(res.data);
         if (info_rt.result == 1001) {
           that.setData({
-            wifiErr: { 'is_open': 1, 'msg': '亲，使用此小程序前需要链接包间wifi,链接wifi投屏更快哦！', 'confirm': '重试', 'calcle': '', 'type': 3 }
+            wifiErr: {
+              'is_open': 1,
+              'msg': '亲，使用此小程序前需要链接包间wifi,链接wifi投屏更快哦！',
+              'confirm': '重试',
+              'calcle': '',
+              'type': 3
+            }
           })
         }
-      },fail: function ({ errMsg }) {
+      },
+      fail: function({
+        errMsg
+      }) {
         that.setData({
-          wifiErr: { 'is_open': 1, 'msg': '亲，使用此小程序前需要链接包间wifi,链接wifi投屏更快哦！', 'confirm': '重试', 'calcle': '', 'type': 3 }
+          wifiErr: {
+            'is_open': 1,
+            'msg': '亲，使用此小程序前需要链接包间wifi,链接wifi投屏更快哦！',
+            'confirm': '重试',
+            'calcle': '',
+            'type': 3
+          }
         })
 
       },
     });
   },
 
-  exitForscreend: function (res) {
+  exitForscreend: function(res) {
     var that = this;
     openid = res.currentTarget.dataset.openid;
     box_mac = res.currentTarget.dataset.boxmac;
     intranet_ip = res.currentTarget.dataset.intranet_ip;
 
     wx.request({
-      url: "http://" + intranet_ip + ":8080/h5/stop?deviceId=" + openid + "&box_mac="+box_mac+"&web=true",
-      success: function (res) {
+      url: "http://" + intranet_ip + ":8080/h5/stop?deviceId=" + openid + "&box_mac=" + box_mac + "&web=true",
+      success: function(res) {
         console.log(res);
-        if(res.data.result==0){
+        if (res.data.result == 0) {
           wx.navigateBack({
             delta: 1
           })
@@ -271,14 +341,22 @@ Page({
             icon: 'none',
             duration: 2000
           });
-        }else if(res.data.result==1001){
+        } else if (res.data.result == 1001) {
           that.setData({
-            wifiErr: { 'is_open': 1, 'msg': '亲，使用此小程序前需要链接包间wifi,链接wifi投屏更快哦！', 'confirm': '重试', 'calcle': '', 'type': 3 }
+            wifiErr: {
+              'is_open': 1,
+              'msg': '亲，使用此小程序前需要链接包间wifi,链接wifi投屏更快哦！',
+              'confirm': '重试',
+              'calcle': '',
+              'type': 3
+            }
           })
         }
-        
+
       },
-      fail: function ({ errMsg }) {
+      fail: function({
+        errMsg
+      }) {
         wx.showToast({
           title: '退出失败',
           icon: 'none',
@@ -293,7 +371,7 @@ Page({
 
   },
   //遥控呼大码
-  callQrCode: util.throttle(function (e) {
+  callQrCode: util.throttle(function(e) {
     //app.controlCallQrcode(intranet_ip, openid);
     var that = this;
     openid = e.currentTarget.dataset.openid;
@@ -302,9 +380,9 @@ Page({
     var hotel_info = e.currentTarget.dataset.hotel_info;
     console.log(hotel_info);
     app.controlCallQrcode(openid, box_mac, qrcode_img, hotel_info, that);
-  }, 3000),//呼大码结束
+  }, 3000), //呼大码结束
   //打开遥控器
-  openControl: function (e) {
+  openControl: function(e) {
     var that = this;
 
     //默认图
@@ -316,7 +394,7 @@ Page({
     })
   },
   //关闭遥控
-  closeControl: function (e) {
+  closeControl: function(e) {
     var that = this;
     that.setData({
 
@@ -325,12 +403,12 @@ Page({
 
   },
   //遥控退出投屏
-  exitForscreen: function (e) {
+  exitForscreen: function(e) {
     var that = this;
     app.controlExitForscreen(openid, box_mac, hotel_info, that);
   },
   //遥控调整音量
-  changeVolume: function (e) {
+  changeVolume: function(e) {
     var that = this;
     var change_type = e.currentTarget.dataset.change_type;
     //app.controlChangeVolume(intranet_ip, openid, change_type);
@@ -338,12 +416,12 @@ Page({
     app.controlChangeVolume(openid, box_mac, change_type, hotel_info, that);
   },
   //遥控切换节目
-  changeProgram: function (e) {
+  changeProgram: function(e) {
     var that = this;
     var change_type = e.currentTarget.dataset.change_type;
     app.controlChangeProgram(openid, box_mac, change_type, hotel_info, that);
   },
-  modalConfirm: function (e) {
+  modalConfirm: function(e) {
     console.log(e);
     var that = this;
     var hotel_info = e.target.dataset.hotel_info;
@@ -352,49 +430,49 @@ Page({
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
-  onReady: function () {
+  onReady: function() {
 
   },
 
   /**
    * 生命周期函数--监听页面显示
    */
-  onShow: function () {
+  onShow: function() {
 
   },
 
   /**
    * 生命周期函数--监听页面隐藏
    */
-  onHide: function () {
+  onHide: function() {
 
   },
 
   /**
    * 生命周期函数--监听页面卸载
    */
-  onUnload: function () {
+  onUnload: function() {
 
   },
 
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
-  onPullDownRefresh: function () {
+  onPullDownRefresh: function() {
 
   },
 
   /**
    * 页面上拉触底事件的处理函数
    */
-  onReachBottom: function () {
+  onReachBottom: function() {
 
   },
 
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage: function () {
+  onShareAppMessage: function() {
 
   }
 })
