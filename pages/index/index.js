@@ -256,7 +256,7 @@ Page({
       }
     })
     wx.request({//热播内容
-      url: api_url + '/Smallapp3/content/getHotplaylist',
+      url: api_url + '/Smallapp4/content/getHotplaylist',
       headers: {
         'Content-Type': 'application/json'
       },
@@ -893,6 +893,7 @@ Page({
     } else if (res_type == 2) {
       var action = 12; //发现视频点播
     }
+    
     app.boxShow(box_mac, forscreen_id, pubdetail, res_type, res_nums, action, hotel_info);
   },
   phonecallevent: function (e) {

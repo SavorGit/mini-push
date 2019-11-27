@@ -31,10 +31,12 @@ App({
         
         
       }else {
+        var timestamp = (new Date()).valueOf();
         if(action==11 || action==12 ){
-          for(var i=0;i<res_len;i++){
+          console.log(pubdetail);
+          for(var i=0;i<pubdetail.length;i++){
             wx.request({
-              url: 'http://' + hotel_info.intranet_ip +":8080/h5/discover_ondemand?deviceId=861322036428460&web=true&media_id=32&media_type&forscreen_id=12&media_name=SQESKEEpf4.mp4&media_url=http://oss.littlehotspot.com/media/resource/SQESKEEpf4.mp4",
+              url: 'http://' + hotel_info.intranet_ip + ":8080/h5/discover_ondemand?deviceId=" + user_info.openid + "&box_mac=" + box_mac + "&web=true&media_id=" + forscreen_id + "&resource_type=" + res_type + "&forscreen_id=" + timestamp + "&media_name=" + pubdetail[i].filename + "&media_url=" + pubdetail[i].res_url + '&avatarUrl=' + user_info.avatarUrl + "&nickName=" + user_info.nickName,
               success:function(res){
                 if(res.data.code==0){
                   wx.showToast({
@@ -59,11 +61,11 @@ App({
             })
           }
         }else if(action==5){//优选
-          var timestamp = (new Date()).valueOf();
+          
           for (var i = 0; i < res_len; i++) {
             
             wx.request({
-              url: "http://" + hotel_info.intranet_ip + ":8080/h5/goods_ondemand?deviceId=" + user_info.openid + "&box_mac=" + box_mac + "&web=true&media_id=" + forscreen_id + "&forscreen_id=" + timestamp + "&media_name=" + pubdetail[0]['filename'] + "&media_url=" + pubdetail[0]['res_url'],
+              url: "http://" + hotel_info.intranet_ip + ":8080/h5/goods_ondemand?deviceId=" + user_info.openid + "&box_mac=" + box_mac + "&web=true&media_id=" + forscreen_id + "&forscreen_id=" + timestamp + "&media_name=" + pubdetail[0]['filename'] + "&media_url=" + pubdetail[0]['res_url'] + '&avatarUrl=' + user_info.avatarUrl + "&nickName=" + user_info.nickName,
               success:function(res){
                 if(res.data.result==0){
                   wx.showToast({
@@ -849,7 +851,10 @@ App({
                 that.setData({
                   wifiErr: { 'is_open': 1, 'msg': '亲，使用此小程序前需要打开您手机的wifi,链接wifi投屏更快哦！', 'confirm': '确定', 'calcle': '取消', 'type': 1 }
                 })
-              }else {
+              } else if (res.errMsg =='getConnectedWifi:fail:not invoke startWifi'){
+
+              }
+              else {
                 if(hotel_info.wifi_password==''){
                   var us_wifi_password = '空';
                 }else {

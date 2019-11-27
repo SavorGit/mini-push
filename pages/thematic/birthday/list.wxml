@@ -12,7 +12,7 @@
       </view>
       <view class='list flex-row-center-space_between'>
         <block wx:for="{{happylist}}" wx:key="key" wx:for-item="happyinfo" wx:for-index="index">
-          <view class='music flex-column-center-center theme7' bindtap='showHappy' data-boxmac="{{box_mac}}" data-openid="{{openid}}" data-vediourl="{{happyinfo.res_url}}" data-happyVedioName="{{happyinfo.file_name}}" data-name="{{happyinfo.name}}">
+          <view class='music flex-column-center-center theme7' bindtap='showHappy' data-boxmac="{{box_mac}}" data-openid="{{openid}}" data-vediourl="{{happyinfo.res_url}}" data-happyVedioName="{{happyinfo.file_name}}" data-name="{{happyinfo.name}}" data-hotel_info="{{hotel_info}}">
             <icon class="fa-stack fa-lg icon theme-font">
               <i class="fa fa-circle-thin fa-stack-2x"></i>
               <i class="fa fa-music fa-stack-1x"></i>

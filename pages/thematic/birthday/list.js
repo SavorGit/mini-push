@@ -5,6 +5,7 @@ var box_mac;
 var openid;
 var intranet_ip;
 var api_url = app.globalData.api_url;
+var cache_key = app.globalData.cache_key;
 Page({
 
   /**
@@ -62,15 +63,10 @@ Page({
     var that = this;
     openid = options.openid;
     box_mac= options.box_mac;
-    if (typeof (options.intranet_ip)=='undefined'){
-      intranet_ip = options.intranet_ip;
-    }else {
-      intranet_ip = '';
-    }
+    
     that.setData({
       openid:openid,
       box_mac:box_mac,
-      intranet_ip: intranet_ip
     })
     wx.request({
       url: api_url+'/Smallapp4/index/isHaveCallBox?openid=' + openid,
@@ -152,18 +148,22 @@ Page({
 
   },
   showHappy:function(e){
+    var user_info = wx.getStorageSync(cache_key +'user_info');
     var box_mac = e.currentTarget.dataset.boxmac;
     var openid = e.currentTarget.dataset.openid;
     var vediourl = e.currentTarget.dataset.vediourl;
-    var filename = e.currentTarget.dataset.happyVedioName;
+    //var filename = e.currentTarget.dataset.happyvedioname;
+    var hotel_info = e.currentTarget.dataset.hotel_info;
     
+    var forscreen_char = 'Happy Birthday';
+    console.log(e);
+    var index1 = vediourl.lastIndexOf("/");
+    var index2 = vediourl.length;
+    var filename = vediourl.substring(index1 + 1, index2);//后缀名
+
     if(app.globalData.link_type==1){
       
-      var forscreen_char = 'Happy Birthday';
-
-      var index1 = vediourl.lastIndexOf("/");
-      var index2 = vediourl.length;
-      var filename = vediourl.substring(index1 + 1, index2);//后缀名
+      
       var timestamp = (new Date()).valueOf();
       var mobile_brand = app.globalData.mobile_brand;
       var mobile_model = app.globalData.mobile_model;
@@ -278,7 +278,7 @@ Page({
     }else if(app.globalData.link_type==2){
       
       wx.request({
-        url: "http://" + intranet_ip + ":8080/h5/birthday_ondemand?deviceId=" + openid + "&web=true&media_name=" + filename + "&media_url=" + vediourl,
+        url: "http://" + hotel_info.intranet_ip + ":8080/h5/birthday_ondemand?deviceId=" + openid + "&box_mac=" + box_mac + "&web=true&media_name=" + filename + "&media_url=" + vediourl +'&avatarUrl='+user_info.avatarUrl+'&nickName='+user_info.nickName,
         success: function (res) {
           if (res.statusCode == 200) {
             wx.showToast({
