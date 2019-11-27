@@ -57,7 +57,7 @@
 }
 
 .functional-module-panel > .row button[disabled] {
-  color: #bebebe !important;
+  color: #999 !important;
   background: unset !important;
 }
 
@@ -105,6 +105,10 @@
   background-color: #8f82bc;
 }
 
+.functional-module-panel > .row button[disabled] > view {
+  background-color: #999 !important;
+}
+
 .functional-module-panel > .row > view > label,
 .functional-module-panel > .row button > label {
   height: 60rpx;
@@ -116,7 +120,8 @@
 /* ==================================== 推荐面板 ==================================== */
 
 .recommend-panel {
-  max-height: 1003rpx;
+  max-height: 1410rpx;
+  margin-top: 20rpx;
 }
 
 .recommend-panel > .title-bar {
@@ -134,6 +139,75 @@
   border-bottom: 6rpx solid #333;
 }
 
+.recommend-panel > .weui-grids {
+  width: calc(100% - 60rpx);
+  height: 1290rpx;
+  padding: 30rpx;
+}
+
+.recommend-panel > .weui-grids > .weui-grid {
+  width: 350rpx;
+  height: 430rpx;
+}
+
+.recommend-panel > .weui-grids > .weui-grid:nth-child(even) {
+  width: 340rpx;
+}
+
+.recommend-panel > .weui-grids > .weui-grid > .card {
+  width: 340rpx;
+  height: 400rpx;
+  background-color: rgba(245, 246, 248, 0.5);
+  border-radius: 5rpx;
+}
+
+.recommend-panel > .weui-grids > .weui-grid > .card > image {
+  width: 340rpx;
+  height: 250rpx;
+  border-radius: 5rpx;
+}
+
+.recommend-panel > .weui-grids > .weui-grid > .card > .people,
+.recommend-panel > .weui-grids > .weui-grid > .card > .msg {
+  width: 100%;
+  text-align: center;
+}
+
+.recommend-panel > .weui-grids > .weui-grid > .card > .people {
+  height: 50rpx;
+  line-height: 50rpx;
+  font-size: 24rpx;
+}
+
+.recommend-panel > .weui-grids > .weui-grid > .card > .msg {
+  height: 30rpx;
+  line-height: 30rpx;
+  font-size: 18rpx;
+}
+
+.recommend-panel > .weui-grids > .weui-grid > .card > .flex-row-center-space_between {
+  width: calc(100% - 45rpx);
+  height: 60rpx;
+  padding-left: 25rpx;
+  padding-right: 20rpx;
+}
+
+.recommend-panel > .weui-grids > .weui-grid > .card > .flex-row-center-space_between > .rank {
+  font-size: 24rpx;
+}
+
+.recommend-panel > .weui-grids > .weui-grid > .card > .flex-row-center-space_between > .btn {
+  width: 100rpx;
+  height: 40rpx;
+  line-height: 40rpx;
+  text-align: center;
+  padding: 0;
+  margin: 0;
+  border: 0;
+  font-size: 24rpx;
+}
+
+/*
 .recommend-panel > .list > .row {
   height: 160rpx;
   padding: 20rpx 0 10rpx 0;
@@ -183,6 +257,7 @@
   font-size: 20rpx;
   border-radius: 5rpx;
 }
+*/
 
 /* 扫描弹窗提示内容 */
 

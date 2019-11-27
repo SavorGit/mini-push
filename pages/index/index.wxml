@@ -112,10 +112,25 @@
   </view>
 
   <!-- 推荐面板 -->
-  <view class="recommend-panel full_width" wx:if="{{hot_play.length>0}}">
+  <view class="recommend-panel full_width theme-panel" wx:if="{{hot_play.length>0}}">
     <view class="title-bar">
       <label class="title theme-font1">热播内容</label>
     </view>
+    <view class="weui-grids">
+      <view wx:for="{{hot_play}}" wx:key="item" wx:for-index="index" wx:for-item="bean" class="weui-grid">
+        <view class="card">
+          <image src="{{bean.pubdetail[0].img_url}}"></image>
+          <view class="people theme-font1">{{bean.nickName}}</view>
+          <view class="msg theme-font3">累计播放 {{bean.play_nums}} 次</view>
+          <view class="flex-row-center-space_between">
+            <view class="rank theme-font5">TOP {{index+1}}</view>
+            <button bindtap="boxShow" class="btn theme-button-dark" data-res_type="{{bean.res_type}}" data-res_nums="{{bean.res_nums}}" data-pubdetail="{{bean.pubdetail}}" data-boxmac="{{box_mac}}" data-openid="{{openid}}" data-forscreen_id="{{bean.forscreen_id}}"
+              data-hotel_info="{{hotel_info}}">电视播放</button>
+          </view>
+        </view>
+      </view>
+    </view>
+    <!--
     <view class="list">
       <block wx:for="{{hot_play}}" wx:key="item" wx:for-index="index" wx:for-item="bean">
         <view class="row flex-row-flex_start-start {{index < hot_play.length - 1 ? 'line' : ''}}">
@@ -129,8 +144,8 @@
             data-hotel_info="{{hotel_info}}">电视播放</button>
         </view>
       </block>
-
     </view>
+    -->
   </view>
 </scroll-view>
 
@@ -150,7 +165,8 @@
   <view class='scan_tip'>您需要扫描热点合作餐厅电视中的二维码链接电视，链接成功后可使用此功能。</view>
 </modal>
 
-<modal show="{{wifiErr.is_open==1 ? true : false}}" width="650rpx" height='350rpx' border-radius="10rpx" title-text='提示' title-color="#333333" title-background-color="unset" title-border-radius="0rpx" confirm-text='{{wifiErr.confirm}}' confirm-color="#FFFFFF" confirm-background-color="#1cbeb6" confirm-border-radius="10rpx" cancel-text='{{wifiErr.cancel}}' cancel-color='#FFFFFF' cancel-background-color="#333333" cancel-border-radius="10rpx" bindcancel="modalCancel" data-hotel_info="{{hotel_info}}" bindconfirm='modalConfirm'>
+<modal show="{{wifiErr.is_open==1 ? true : false}}" width="650rpx" height='350rpx' border-radius="10rpx" title-text='提示' title-color="#333333" title-background-color="unset" title-border-radius="0rpx" confirm-text='{{wifiErr.confirm}}' confirm-color="#FFFFFF"
+  confirm-background-color="#1cbeb6" confirm-border-radius="10rpx" cancel-text='{{wifiErr.cancel}}' cancel-color='#FFFFFF' cancel-background-color="#333333" cancel-border-radius="10rpx" bindcancel="modalCancel" data-hotel_info="{{hotel_info}}" bindconfirm='modalConfirm'>
   <view class="theme-font1" style="padding:0 20rpx;font-size:24rpx;">{{wifiErr.msg}}</view>
 </modal>
 
