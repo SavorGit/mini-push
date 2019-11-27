@@ -317,7 +317,7 @@ App({
             });
           }
         },
-        fial: function ({ errMsg }) {
+        fail: function ({ errMsg }) {
           aps.setData({
             wifiErr: { 'is_open': 1, 'msg': '亲，使用此小程序前需要链接包间wifi,链接wifi投屏更快哦！', 'confirm': '重试', 'calcle': '', 'type': 3 }
           })
@@ -877,6 +877,9 @@ App({
         }, fail: function (res) {
           //未获取成功 重试弹窗
           wx.hideLoading()
+          wx.stopWifi({
+
+          })
         },complete:function(res){
           wx.stopWifi({
 
@@ -939,7 +942,7 @@ App({
               }
             })
           }, complete: function (res) {
-            //wx.hideLoading()
+            wx.hideLoading()
             wx.stopWifi({
 
             })
