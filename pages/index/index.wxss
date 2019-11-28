@@ -185,6 +185,29 @@
   font-size: 18rpx;
 }
 
+.recommend-panel > .weui-grids > .weui-grid > .card > .flex-row-center-space_between > .user {
+  width: calc(100% - 100rpx);
+  font-size: 22rpx;
+}
+
+.recommend-panel > .weui-grids > .weui-grid > .card > .flex-row-center-space_between > .user > image {
+  width: 36rpx;
+  height: 36rpx;
+  border: 1rpx solid #999;
+  border-radius: 50%;
+}
+
+.recommend-panel > .weui-grids > .weui-grid > .card > .flex-row-center-space_between > .user > view {
+  width: calc(100% - 41rpx);
+  margin-left: 5rpx;
+}
+
+.recommend-panel > .weui-grids > .weui-grid > .card > .flex-row-center-space_between > .sta {
+  width: 100rpx;
+  font-size: 22rpx;
+  text-align: right;
+}
+
 .recommend-panel > .weui-grids > .weui-grid > .card > .flex-row-center-space_between {
   width: calc(100% - 45rpx);
   height: 60rpx;
@@ -204,7 +227,7 @@
   padding: 0;
   margin: 0;
   border: 0;
-  font-size: 24rpx;
+  font-size: 20rpx;
 }
 
 /*
