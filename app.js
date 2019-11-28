@@ -39,7 +39,7 @@ App({
           var media_url_str = '[';
           var space = '';
           for(var i=0;i<pubdetail.length;i++){
-            media_url_str += space+'{"'+pubdetail[i].forscreen_url+'","'+pubdetail[i].filename+'"}';
+            media_url_str += space + '{"forscreen_url":"' + pubdetail[i].forscreen_url +'","filename":"'+pubdetail[i].filename+'"}';
             space = ',';
           }
           media_url_str += ']';

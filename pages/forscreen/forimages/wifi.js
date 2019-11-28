@@ -386,7 +386,7 @@ Page({
     var that = this;
 
     //默认图
-    qrcode_url = '/images/icon2/huma.jpg';
+    qrcode_url = '/images/imgs/dstp.png';
     that.setData({
       popRemoteControlWindow: true,
       qrcode_img: qrcode_url,
