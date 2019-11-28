@@ -561,9 +561,7 @@ Page({
         } else {
           app.globalData.link_type = 1;
           that.setData({
-            is_link: 0,
             box_mac: '',
-            link_type: 1
           })
           
         }
