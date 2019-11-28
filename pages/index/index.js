@@ -1108,7 +1108,45 @@ Page({
    */
   onShow: function() {
 
+    var that = this;
+    if (app.globalData.openid && app.globalData.openid != '') {
+      utils.PostRequest(api_url + '/Smallapp4/index/isHaveCallBox', {
+        openid: app.globalData.openid
+      }, (data, headers, cookies, errMsg, statusCode) => {
+        if (data.result.is_have == 1) {
 
+        } else {
+          app.globalData.link_type = 1;
+          box_mac= ''
+          that.setData({
+            is_link: 0,
+            box_mac: '',
+            link_type: 1
+          })
+
+        }
+        //console.log(data);
+      });
+    } else {
+      app.openidCallback = openid => {
+        utils.PostRequest(api_url + '/Smallapp4/index/isHaveCallBox', {
+          openid: openid
+        }, (data, headers, cookies, errMsg, statusCode) => {
+          if (data.result.is_have == 1) {
+
+          } else {
+            box_mac = ''
+            app.globalData.link_type = 1;
+            that.setData({
+              is_link:0,
+              box_mac: '',
+              link_type:1
+            })
+
+          }
+        });
+      }
+    }
 
     //this.onLoad()
   },

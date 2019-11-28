@@ -576,7 +576,6 @@ Page({
 
           } else {
             that.setData({
-              is_link: 0,
               box_mac: '',
             })
             
