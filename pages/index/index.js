@@ -1126,7 +1126,7 @@ Page({
 
         }
         //console.log(data);
-      });
+        }, re => { }, { isShowLoading: false });
     } else {
       app.openidCallback = openid => {
         utils.PostRequest(api_url + '/Smallapp4/index/isHaveCallBox', {
@@ -1144,7 +1144,7 @@ Page({
             })
 
           }
-        });
+        },re => { }, { isShowLoading: false });
       }
     }
 

@@ -646,12 +646,14 @@ Page({
           box_mac = '';
         }
         //console.log(data);
-      });
+        }, re => { }, { isShowLoading:false});
     } else {
       app.openidCallback = openid => {
         utils.PostRequest(api_url + '/Smallapp4/index/isHaveCallBox', {
           openid: openid
-        }, (data, headers, cookies, errMsg, statusCode) => {
+        }, 
+        (data, headers, cookies, errMsg, statusCode) => 
+        {
           if (data.result.is_have == 1) {
 
           } else {
@@ -664,7 +666,9 @@ Page({
             })
             box_mac = '';
           }
-        });
+        }, 
+          re => { }, { isShowLoading: false }
+        );
       }
     }
   },
