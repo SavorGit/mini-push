@@ -61,14 +61,9 @@ Page({
       uid: uid,
       goods_id: goods_id,
       openid: openid,
-    }, (data, headers, cookies, errMsg, statusCode) => {
-      if (data.code == 10000) {
-        goods_info = data.result
-        that.setData({
-          goods_info: data.result
-        })
-      }
-    });
+    }, (data, headers, cookies, errMsg, statusCode) => that.setData({
+      goods_info: data.result
+    }));
     // wx.request({
     //   // url: api_url + '/Smallapp3/optimize/detail',
     //   url: api_url + '/Smallapp4/optimize/detail',
@@ -495,7 +490,7 @@ Page({
           showInputGoodsCount: false,
         });
       }
-    });
+    }, res = {}, false);
     // wx.request({
     //   url: api_url + '/Smallsale/order/addOrder',
     //   header: {

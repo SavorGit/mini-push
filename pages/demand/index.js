@@ -99,14 +99,9 @@ Page({
         utils.PostRequest(api_url + '/Smallapp4/optimize/getOptimizeList', {
           page: page,
           openid: openid,
-        }, (boxData, boxHeaders, boxCookies, boxErrMsg, boxStatusCode) => {
-          if (boxData.code == 10000) {
-            program_list = boxData.result
-            self.setData({
-              program_list: boxData.result,
-            });
-          }
-        });
+        }, (boxData, boxHeaders, boxCookies, boxErrMsg, boxStatusCode) => self.setData({
+          program_list: boxData.result,
+        }));
         self.setData({
           box_mac: '',
         })
@@ -115,14 +110,9 @@ Page({
     });
     utils.PostRequest(api_url + '/Smallapp3/Adsposition/getAdspositionList', {
       position: 1,
-    }, (data, headers, cookies, errMsg, statusCode) => {
-      if (data.code == 10000) {
-        var imgUrls = data.result;
-        self.setData({
-          imgUrls: data.result
-        });
-      }
-    });
+    }, (data, headers, cookies, errMsg, statusCode) => self.setData({
+      imgUrls: data.result
+    }));
     // wx.request({
     //   url: api_url + '/Smallapp4/index/isHaveCallBox?openid=' + openid,
     //   headers: {
@@ -319,12 +309,10 @@ Page({
         page: page,
         openid: openid,
       }, (data, headers, cookies, errMsg, statusCode) => {
-        if (data.code == 10000) {
-          self.setData({
-            program_list: data.result
-          })
-          program_list = data.result
-        }
+        self.setData({
+          program_list: data.result
+        })
+        program_list = data.result
       });
       // wx.request({
       //   //url: api_url+'/smallapp/Demand/getList',

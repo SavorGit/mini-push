@@ -141,13 +141,13 @@
 
 .recommend-panel > .weui-grids {
   width: calc(100% - 60rpx);
-  height: 1290rpx;
+  height: 1230rpx;
   padding: 30rpx;
 }
 
 .recommend-panel > .weui-grids > .weui-grid {
   width: 350rpx;
-  height: 430rpx;
+  height: 410rpx;
 }
 
 .recommend-panel > .weui-grids > .weui-grid:nth-child(even) {
@@ -156,7 +156,7 @@
 
 .recommend-panel > .weui-grids > .weui-grid > .card {
   width: 340rpx;
-  height: 400rpx;
+  height: 380rpx;
   background-color: rgba(245, 246, 248, 0.5);
   border-radius: 5rpx;
 }
@@ -191,14 +191,14 @@
 }
 
 .recommend-panel > .weui-grids > .weui-grid > .card > .flex-row-center-space_between > .user > image {
-  width: 36rpx;
-  height: 36rpx;
-  border: 1rpx solid #999;
+  width: 32rpx;
+  height: 32rpx;
+  border: 1rpx solid #ddd;
   border-radius: 50%;
 }
 
 .recommend-panel > .weui-grids > .weui-grid > .card > .flex-row-center-space_between > .user > view {
-  width: calc(100% - 41rpx);
+  width: calc(100% - 37rpx);
   margin-left: 5rpx;
 }
 
