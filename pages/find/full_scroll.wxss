@@ -339,7 +339,7 @@ page {
   position: relative;
   top: 0;
   left: 0;
-  background-color: rgba(0, 0, 0, 0.1);
+  /* background-color: rgba(0, 0, 0, 0.1); */
 }
 
 .media-page .video-content .content-header {
