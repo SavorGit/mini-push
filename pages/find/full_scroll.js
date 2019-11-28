@@ -533,7 +533,7 @@ Page({
   onShow: function(options) {
     var that = this;
     if (app.globalData.openid && app.globalData.openid != '') {
-      util.PostRequest(api_url + '/Smallapp4/index/isHaveCallBox', {
+      utils.PostRequest(api_url + '/Smallapp4/index/isHaveCallBox', {
         openid: app.globalData.openid
       }, (data, headers, cookies, errMsg, statusCode) => {
         if (data.result.is_have == 1) {
@@ -545,13 +545,13 @@ Page({
             box_mac: '',
             link_type: 1
           })
-          box_mac = '';
+          
         }
         //console.log(data);
       });
     } else {
       app.openidCallback = openid => {
-        util.PostRequest(api_url + '/Smallapp4/index/isHaveCallBox', {
+        utils.PostRequest(api_url + '/Smallapp4/index/isHaveCallBox', {
           openid: openid
         }, (data, headers, cookies, errMsg, statusCode) => {
           if (data.result.is_have == 1) {
@@ -561,7 +561,7 @@ Page({
               is_link: 0,
               box_mac: '',
             })
-            box_mac = '';
+            
           }
         });
       }
