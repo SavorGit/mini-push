@@ -2,7 +2,8 @@
 @import "/animation.wxss";
 
 page {
-  height: 100%;
+  width: 100vw;
+  height: 100vh;
   background: 000;
   color: #fff;
 }
@@ -261,7 +262,7 @@ page {
 }
 
 .media-page .page-main {
-  height: calc(100% - 66px - 265rpx);
+  max-height: calc(100% - 46px - 266rpx);
 }
 
 .media-page .page-main > .right-btn-group {

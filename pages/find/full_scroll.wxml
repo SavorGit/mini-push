@@ -38,7 +38,7 @@
                   <label class="fa fa-heart-o fa-lg"></label>
                   <label class="text">喜欢</label>
                 </view>
-                <button class="button_none" open-type='share'  data-res_key="{{index}}" data-forscreen_id="{{bean.forscreen_id}}" data-id="{{bean.id}}" data-res_key="{{index}}" data-pubdetail="{{bean.pubdetail}}" data-openid="{{openid}}" data-res_type="1" data-type="2">
+                <button class="button_none" open-type='share' data-res_key="{{index}}" data-forscreen_id="{{bean.forscreen_id}}" data-id="{{bean.id}}" data-res_key="{{index}}" data-pubdetail="{{bean.pubdetail}}" data-openid="{{openid}}" data-res_type="1" data-type="2">
                   <label class="fa fa-share-square-o fa-lg"></label>
                   <label class="text">分享</label>
                 </button>
@@ -61,8 +61,9 @@
 
       <block wx:for="{{mediaObjectList}}" wx:key="key" wx:for-item="bean" wx:for-index="index">
         <view class="full_height {{mediaScrollIndex == index ? 'active' : ''}}">
-          <video wx:if="{{mediaScrollIndex == index}}" id="JohnVideo{{index}}" class="full_width full_height" show-center-play-btn="{{false}}" autoplay="{{false}}" controls="{{false}}" src="{{bean.pubdetail[0].res_url}}" poster="{{bean.pubdetail[0].img_url}}" data-index="{{index}}" data-id="{{bean.id}}" data-type="{{bean.type}}"
-            event-model="bubble" bindprogress="onLoadProgress" bindtimeupdate="onTimeUpdate" bindplay="onVideoPlay" bindpause="onVideoPause" bindended="onVideoEnded" bindwaiting="onVideoWaiting" binderror="onVideoError" bindloadedmetadata="onVideoLoadedMetadata">
+          <video wx:if="{{mediaScrollIndex == index}}" id="JohnVideo{{index}}" class="full_width full_height" show-center-play-btn="{{false}}" autoplay="{{false}}" controls="{{false}}" src="{{bean.pubdetail[0].res_url}}" poster="{{bean.pubdetail[0].img_url}}" data-index="{{index}}"
+            data-id="{{bean.id}}" data-type="{{bean.type}}" event-model="bubble" bindprogress="onLoadProgress" bindtimeupdate="onTimeUpdate" bindplay="onVideoPlay" bindpause="onVideoPause" bindended="onVideoEnded" bindwaiting="onVideoWaiting" binderror="onVideoError"
+            bindloadedmetadata="onVideoLoadedMetadata">
             <view class="default-navigation-bar flex-row-center-center theme-font-FFFFFF" style="height: 46px; padding-top: {{statusBarHeight}}px;">
               <view class='text'>热点投屏</view>
             </view>
@@ -71,14 +72,14 @@
               <image src='/images/icon2/FFFFFF_vertical.png'></image>
               <cover-view class="theme-font-999999" bindtap="goToFindPictures">图片</cover-view>
             </view>
-            <view class='page-main flex-column-flex_end-center'>
+            <view class='page-main flex-column-flex_end-center' style="height: calc(100% - 46px - {{statusBarHeight}}px - 266rpx);">
               <view class="right-btn-group flex-column-center-flex_start fadeInRight">
                 <image class="user-hader-img" src="{{bean.avatarUrl == '' ? 'http://oss.littlehotspot.com/Html5/favicon.ico' : bean.avatarUrl}}"></image>
                 <cover-image wx:if="{{bean.is_collect=='1'}}" class="btn-favorite" src="/images/imgs/FF757D_Favorite.png" data-id="{{bean.id}}" data-type="{{bean.type}}" data-forscreen_id="{{bean.forscreen_id}}" data-index="{{index}}" bindtap="cancCollect"></cover-image>
                 <cover-image wx:else class="btn-favorite" src="/images/imgs/FFFFFF_Favorite.png" data-id="{{bean.id}}" data-type="{{bean.type}}" data-forscreen_id="{{bean.forscreen_id}}" data-index="{{index}}" bindtap="onCollect"></cover-image>
                 <label>{{bean.collect_num}}</label>
                 <cover-view class="btn-share">
-                  <button open-type='share'   data-forscreen_id="{{bean.forscreen_id}}" data-id="{{bean.id}}" data-res_key="{{index}}" data-pubdetail="{{bean.pubdetail}}" data-openid="{{openid}}" data-res_type="{{bean.res_type}}" data-type="{{bean.type}}">
+                  <button open-type='share' data-forscreen_id="{{bean.forscreen_id}}" data-id="{{bean.id}}" data-res_key="{{index}}" data-pubdetail="{{bean.pubdetail}}" data-openid="{{openid}}" data-res_type="{{bean.res_type}}" data-type="{{bean.type}}">
                     <cover-image src="/images/imgs/FFFFFF_Share.png"></cover-image>
                   </button>
                 </cover-view>

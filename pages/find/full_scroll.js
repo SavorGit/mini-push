@@ -46,7 +46,7 @@ let SavorUtils = {
     }),
 
     // 收藏/取消收藏
-    favorite: (pageContext, forscreenId,type, index, status) => utils.PostRequest(api_url + '/Smallapp/collect/recLogs', {
+    favorite: (pageContext, forscreenId, type, index, status) => utils.PostRequest(api_url + '/Smallapp/collect/recLogs', {
       'openid': pageContext.data.openid,
       'res_id': forscreenId,
       'type': type,
@@ -292,7 +292,7 @@ Page({
    */
   onTouchEnd: function(e) {
     let self = this;
-    var user_info = wx.getStorageSync(cache_key+'user_info');
+    var user_info = wx.getStorageSync(cache_key + 'user_info');
     if (!(e.changedTouches instanceof Array) || e.changedTouches.length < 1) {
       e.changedTouches = e.touches;
     }
@@ -309,11 +309,15 @@ Page({
     if (tripY > moveExecuteTrip && self.data.mediaScrollIndex > 0) {
       //看上一个
       mediaScrollIndex--;
-      mta.Event.stat('findvideoglide', { 'openid': user_info.openid })
+      mta.Event.stat('findvideoglide', {
+        'openid': user_info.openid
+      })
     } else if (tripY < -(moveExecuteTrip) && self.data.mediaScrollIndex < self.data.mediaObjectList.length - 1) {
       //看下一个
       mediaScrollIndex++;
-      mta.Event.stat('findvideoupglide', { 'openid': user_info.openid })
+      mta.Event.stat('findvideoupglide', {
+        'openid': user_info.openid
+      })
     } else {
       return;
     }
@@ -373,11 +377,15 @@ Page({
   // 当播放到末尾时触发 ended 事件
   onVideoEnded: function(e) {
     //console.log('onVideoEnded', e);
-    var user_info = wx.getStorageSync(cache_key+'user_info');
+    var user_info = wx.getStorageSync(cache_key + 'user_info');
     var id = e.currentTarget.dataset.id;
     var type = e.currentTarget.dataset.type;
-    mta.Event.stat('onVideoEnded', { 'id': id, 'types': type, 'openid': user_info.openid })  //1官方 2精选 3公开
-    
+    mta.Event.stat('onVideoEnded', {
+      'id': id,
+      'types': type,
+      'openid': user_info.openid
+    }) //1官方 2精选 3公开
+
   },
 
   // 视频元数据加载完成时触发。
@@ -393,13 +401,14 @@ Page({
   // 视频出现缓冲时触发
   onVideoWaiting: function(e) {
     // console.log('onVideoWaiting', e);
-    // wx.showLoading({
-    //   title: '视频加载中...'
-    // });
-    wx.showToast({
-      title: '网络异常，请稍后重试',
-      icon: 'none',
-      duration: 5000
+    wx.onNetworkStatusChange(function(res) {
+      if (res.isConnected == false) {
+        wx.showToast({
+          title: '网络已断开',
+          icon: 'none',
+          duration: 5000
+        });
+      }
     });
   },
 
@@ -468,7 +477,7 @@ Page({
       var c_type = 3
     }
     let index = e.currentTarget.dataset.index;
-    SavorUtils.User.favorite(self, res_id,c_type, index, 0);
+    SavorUtils.User.favorite(self, res_id, c_type, index, 0);
   },
 
   //电视播放
@@ -521,12 +530,14 @@ Page({
   /**
    * 生命周期函数--监听页面显示
    */
-  onShow: function (options) {
+  onShow: function(options) {
     var user_info = wx.getStorageSync(cache_key + 'user_info');
-    mta.Event.stat('showfind', { 'openid': user_info.openid })
+    mta.Event.stat('showfind', {
+      'openid': user_info.openid
+    })
   },
   //点击分享按钮
-  onShareAppMessage: function (res) {
+  onShareAppMessage: function(res) {
     console.log(res);
     var that = this;
     var user_info = wx.getStorageSync('savor_user_info');
@@ -572,13 +583,13 @@ Page({
           'type': c_type,
           'status': 1,
         },
-        success: function (e) {
+        success: function(e) {
           //var cards_img = that.cards_img
 
 
 
         },
-        fail: function ({
+        fail: function({
           errMsg
         }) {
           wx.showToast({
@@ -593,7 +604,7 @@ Page({
         title: '热点聚焦，投你所好',
         path: share_url,
         imageUrl: img_url,
-        success: function (res) {
+        success: function(res) {
 
 
         },

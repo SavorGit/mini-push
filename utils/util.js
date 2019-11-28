@@ -125,7 +125,9 @@ module.exports.HttpRequest = HttpRequest;
  *                  method: string,                  // HTTP 请求方法。默认为 GET
  *                  dataType: string,                // 返回的数据格式。默认为 Json
  *                  responseType: string,            // 响应的数据类型。默认为 Text
+ *                  isShowToastForSuccess:boolean,   // 是否在 success 方法中弹出系统Toast
  *                  success: function,               // 接口调用成功的回调函数。function(data, headers, cookies, errMsg, statusCode)
+ *                  isShowToastForFail:boolean,      // 是否在 fail 方法中弹出系统Toast
  *                  fail: function,                  // 接口调用失败的回调函数。function(res)
  *                  complete: function               // 接口调用结束的回调函数（调用成功、失败都会执行）。function(res)
  *                }
@@ -157,7 +159,7 @@ const HttpRequestForLHS = (options) => HttpRequest({
       });
       return;
     }
-    if (responseData.code != 10000) {
+    if (options.isShowToastForSuccess != false && responseData.code != 10000) {
       wx.showToast({
         title: responseData.msg,
         icon: 'none',
@@ -187,7 +189,7 @@ const HttpRequestForLHS = (options) => HttpRequest({
   fail: function(res) {
     var failFnArgumentArray = [].slice.call(arguments);
     if (typeof(options.fail) == "function") {
-      if (!res.code) {
+      if (options.isShowToastForFail != false && !res.code) {
         wx.showToast({
           title: "出错了！请用联系管理员。",
           icon: 'none',
@@ -211,16 +213,20 @@ module.exports.HttpRequestForLHS = HttpRequestForLHS;
 /**
  * 发起 HTTPS 网络 POST 请求。
  *
- * @para: url        string。                    必填。开发者服务器接口地址
- * @para: data       string/object/ArrayBuffer。 请求的参数
- * @para: successFn  function。                  接口调用成功的回调函数。function(data, headers, cookies, errMsg, statusCode)
- * @para: failFn     function。                  接口调用失败的回调函数。function(res)
+ * @para: url                   string。                    必填。开发者服务器接口地址
+ * @para: data                  string/object/ArrayBuffer。 请求的参数
+ * @para: successFn             function。                  接口调用成功的回调函数。function(data, headers, cookies, errMsg, statusCode)
+ * @para: failFn                function。                  接口调用失败的回调函数。function(res)
+ * @para: isShowToastForSuccess boolean,                    是否在 success 方法中弹出系统Toast
+ * @para: isShowToastForFail    boolean,                    是否在 fail 方法中弹出系统Toast
  */
-const PostRequest = (url, data, successFn, failFn) => HttpRequestForLHS({
+const PostRequest = (url, data, successFn, failFn, isShowToastForSuccess, isShowToastForFail) => HttpRequestForLHS({
   url: url,
   data: data,
   method: 'POST',
+  isShowToastForSuccess: isShowToastForSuccess,
   success: successFn,
+  isShowToastForFail: isShowToastForFail,
   fail: failFn
 });
 module.exports.PostRequest = PostRequest;
@@ -228,16 +234,20 @@ module.exports.PostRequest = PostRequest;
 /**
  * 发起 HTTPS 网络 GET 请求。
  *
- * @para: url        string。                    必填。开发者服务器接口地址
- * @para: data       string/object/ArrayBuffer。 请求的参数
- * @para: successFn  function。                  接口调用成功的回调函数。function(data, headers, cookies, errMsg, statusCode)
- * @para: failFn     function。                  接口调用失败的回调函数。function(res)
+ * @para: url                   string。                    必填。开发者服务器接口地址
+ * @para: data                  string/object/ArrayBuffer。 请求的参数
+ * @para: successFn             function。                  接口调用成功的回调函数。function(data, headers, cookies, errMsg, statusCode)
+ * @para: failFn                function。                  接口调用失败的回调函数。function(res)
+ * @para: isShowToastForSuccess boolean,                    是否在 success 方法中弹出系统Toast
+ * @para: isShowToastForFail    boolean,                    是否在 fail 方法中弹出系统Toast
  */
-const GetRequest = (url, data, successFn, failFn) => HttpRequestForLHS({
+const GetRequest = (url, data, successFn, failFn, isShowToastForSuccess, isShowToastForFail) => HttpRequestForLHS({
   url: url,
   data: data,
   method: 'GET',
+  isShowToastForSuccess: isShowToastForSuccess,
   success: successFn,
+  isShowToastForFail: isShowToastForFail,
   fail: failFn
 });
 module.exports.GetRequest = GetRequest;
