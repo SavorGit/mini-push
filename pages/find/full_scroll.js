@@ -60,10 +60,12 @@ let SavorUtils = {
         pageContext.setData({
           pictureObjectList: pictureObjectList
         });
-        if(status==1){
-          mta.Event.stat('findCollectPic', { 'openid': pageContext.data.openid })
+        if (status == 1) {
+          mta.Event.stat('findCollectPic', {
+            'openid': pageContext.data.openid
+          })
         }
-        
+
       } else {
         let mediaObjectList = pageContext.data.mediaObjectList;
         mediaObjectList[index].is_collect = status;
@@ -71,10 +73,12 @@ let SavorUtils = {
         pageContext.setData({
           mediaObjectList: mediaObjectList
         });
-        if(status==1){
-          mta.Event.stat('findCollectVideo', { 'openid': pageContext.data.openid })
+        if (status == 1) {
+          mta.Event.stat('findCollectVideo', {
+            'openid': pageContext.data.openid
+          })
         }
-        
+
       }
     }, ({
       errMsg
@@ -136,10 +140,14 @@ let SavorUtils = {
         SavorUtils.User.recordForScreenPics(pageContext, extendData, currentTime, pubdetailList[index]);
         SavorUtils.Netty.push(pageContext, nettyMessageContent); // 向机顶盒推送消息
       }
-      if (mediaSubGroupType==1){
-        mta.Event.stat('findBoxShowpic', { 'openid': pageContext.data.openid })
-      }else {
-        mta.Event.stat('findBoxShowVideo', { 'openid': pageContext.data.openid })
+      if (mediaSubGroupType == 1) {
+        mta.Event.stat('findBoxShowpic', {
+          'openid': pageContext.data.openid
+        })
+      } else {
+        mta.Event.stat('findBoxShowVideo', {
+          'openid': pageContext.data.openid
+        })
       }
     },
 
@@ -242,6 +250,7 @@ Page({
     statusBarHeight: app.globalData.statusBarHeight,
     openid: '',
     pageType: 0, // 页面类型。0：视频：1：图片。
+    isShowMediaPlayButton: true, // 是否显示播放按钮
     mediaScrollIndex: 0, //当前页面的索引值
     playProgress: [],
     mediaObjectList: [], // 视频列表
@@ -380,17 +389,29 @@ Page({
 
   // 当开始/继续播放时触发play事件
   onVideoPlay: function(e) {
+    let self = this;
     // console.log('onVideoPlay', e);
+    self.setData({
+      isShowMediaPlayButton: false
+    });
   },
 
   // 当暂停播放时触发 pause 事件
   onVideoPause: function(e) {
+    let self = this;
     // console.log('onVideoPause', e);
+    self.setData({
+      isShowMediaPlayButton: true
+    });
   },
 
   // 当播放到末尾时触发 ended 事件
   onVideoEnded: function(e) {
+    let self = this;
     //console.log('onVideoEnded', e);
+    self.setData({
+      isShowMediaPlayButton: true
+    });
     var user_info = wx.getStorageSync(cache_key + 'user_info');
     var id = e.currentTarget.dataset.id;
     var type = e.currentTarget.dataset.type;
@@ -398,8 +419,7 @@ Page({
       'id': id,
       'types': type,
       'openid': user_info.openid
-    }) //1官方 2精选 3公开
-
+    }); //1官方 2精选 3公开
   },
 
   // 视频元数据加载完成时触发。
@@ -432,6 +452,16 @@ Page({
     // wx.hideLoading();
   },
 
+  // 点击播放按钮
+  onClickVideoPalyButton: function(e) {
+    let self = this;
+    if (self.data.isShowMediaPlayButton == true) {
+      wx.createVideoContext('JohnVideo' + self.data.mediaScrollIndex).play();
+    } else {
+      wx.createVideoContext('JohnVideo' + self.data.mediaScrollIndex).pause();
+    }
+  },
+
   // 跳转到发布图片页
   goToFindPictures: function(e) {
     let self = this;
@@ -443,7 +473,9 @@ Page({
         pageType: 1
       });
     }
-    mta.Event.stat('findSwichPic', { 'openid': self.data.openid })
+    mta.Event.stat('findSwichPic', {
+      'openid': self.data.openid
+    })
   },
 
   // 跳转到发布视频页
@@ -537,15 +569,17 @@ Page({
     let forscreenId = e.target.dataset.forscreen_id;
     let index = e.target.dataset.index;
     let pictureObjectList = self.data.pictureObjectList;
-    if (!pictureObjectList[index].isOpen) {//打开操作菜单
-      mta.Event.stat('findClickOpenMenu', { 'openid': self.data.openid })
-    } 
-    
+    if (!pictureObjectList[index].isOpen) { //打开操作菜单
+      mta.Event.stat('findClickOpenMenu', {
+        'openid': self.data.openid
+      })
+    }
+
     pictureObjectList[index].isOpen = !(pictureObjectList[index].isOpen);
     self.setData({
       pictureObjectList: pictureObjectList
     });
-    
+
   },
   /**
    * 生命周期函数--监听页面显示
@@ -563,10 +597,12 @@ Page({
           that.setData({
             box_mac: '',
           })
-          
+
         }
         //console.log(data);
-      }, re => { }, { isShowLoading: false });
+      }, re => {}, {
+        isShowLoading: false
+      });
     } else {
       app.openidCallback = openid => {
         utils.PostRequest(api_url + '/Smallapp4/index/isHaveCallBox', {
@@ -578,9 +614,11 @@ Page({
             that.setData({
               box_mac: '',
             })
-            
+
           }
-        }, re => { }, { isShowLoading: false });
+        }, re => {}, {
+          isShowLoading: false
+        });
       }
     }
     var user_info = wx.getStorageSync(cache_key + 'user_info');
@@ -588,20 +626,24 @@ Page({
       'openid': user_info.openid
     })
   },
-  
+
   //点击分享按钮
   onShareAppMessage: function(res) {
     var that = this;
     //mta.Event.stat('findShare', { 'openid': that.data.openid })
-    
+
     var user_info = wx.getStorageSync('savor_user_info');
     var openid = user_info.openid;
     var type = res.target.dataset.type;
     var res_type = res.target.dataset.res_type;
-    if(res_type==1){
-      mta.Event.stat('findSharePic', { 'openid': that.data.openid })
-    }else if(res_type==2){
-      mta.Event.stat('findShareVideo', { 'openid': that.data.openid })
+    if (res_type == 1) {
+      mta.Event.stat('findSharePic', {
+        'openid': that.data.openid
+      })
+    } else if (res_type == 2) {
+      mta.Event.stat('findShareVideo', {
+        'openid': that.data.openid
+      })
     }
 
     if (type == 1) {
@@ -670,6 +712,6 @@ Page({
         },
       }
     }
-    
+
   }, // 分享结束
 });

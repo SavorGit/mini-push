@@ -265,6 +265,24 @@ page {
   max-height: calc(100% - 46px - 266rpx);
 }
 
+.media-page .page-main > .video-option-area {
+  width: calc(100% - 198rpx);
+  height: 100%;
+}
+
+.media-page .page-main > .video-option-area .btn-play {
+  width: 80rpx;
+  height: 80rpx;
+  border-radius: 50%;
+  background-color: rgba(0, 0, 0, 0.65);
+}
+
+.media-page .page-main > .video-option-area .btn-play .fa-play {
+  margin-top: 5rpx;
+  margin-left: 15rpx;
+  font-size: 60rpx;
+}
+
 .media-page .page-main > .right-btn-group {
   width: 84rpx;
   height: 497rpx;

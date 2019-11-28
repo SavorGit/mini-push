@@ -71,7 +71,12 @@
               <image src='/images/icon2/FFFFFF_vertical.png'></image>
               <cover-view class="theme-font-999999" bindtap="goToFindPictures">图片</cover-view>
             </view>
-            <view class='page-main flex-column-flex_end-center' style="height: calc(100% - 46px - {{statusBarHeight}}px - 266rpx);">
+            <view class='page-main flex-row-center-flex_end' style="height: calc(100% - 46px - {{statusBarHeight}}px - 266rpx);">
+              <cover-view class="video-option-area flex-column-center-center" bindtap="onClickVideoPalyButton">
+                <cover-view wx:if="{{isShowMediaPlayButton}}" class="btn-play flex-row-center-center">
+                  <cover-view class="fa fa-play"></cover-view>
+                </cover-view>
+              </cover-view>
               <view class="right-btn-group flex-column-center-flex_start fadeInRight">
                 <image class="user-hader-img" src="{{bean.avatarUrl == '' ? 'http://oss.littlehotspot.com/Html5/favicon.ico' : bean.avatarUrl}}"></image>
                 <cover-image wx:if="{{bean.is_collect=='1'}}" class="btn-favorite" src="/images/imgs/FF757D_Favorite.png" data-id="{{bean.id}}" data-type="{{bean.type}}" data-forscreen_id="{{bean.forscreen_id}}" data-index="{{index}}" bindtap="cancCollect"></cover-image>
