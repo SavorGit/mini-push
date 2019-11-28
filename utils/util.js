@@ -43,6 +43,7 @@ module.exports.throttle = function(fn, gapTime) {
  *                  data: string/object/ArrayBuffer, // 请求的参数
  *                  method: string,                  // HTTP 请求方法。默认为 GET
  *                  dataType: string,                // 返回的数据格式。默认为 Json
+ *                  isShowLoading: boolean,          // 是否展示 Loading
  *                  responseType: string,            // 响应的数据类型。默认为 Text
  *                  success: function,               // 接口调用成功的回调函数。function(res)
  *                  fail: function,                  // 接口调用失败的回调函数。function(res)
@@ -50,11 +51,13 @@ module.exports.throttle = function(fn, gapTime) {
  *                }
  */
 const HttpRequest = (options) => {
-  wx.showLoading({
-    title: '加载中',
-    icon: 'loading',
-    mask: true
-  });
+  if (options.isShowLoading != false) {
+    wx.showLoading({
+      title: '加载中',
+      icon: 'loading',
+      mask: true
+    });
+  }
   if (typeof(options) != 'object' || options == null) {
     throw "The request arguments is wrong";
   }
@@ -76,7 +79,9 @@ const HttpRequest = (options) => {
     responseType: options.responseType,
     success: function() {
       var successFnArgumentArray = [].slice.call(arguments);
-      wx.hideLoading();
+      if (options.isShowLoading != false) {
+        wx.hideLoading();
+      }
       if (typeof(options.success) == "function") {
         try {
           options.success.apply(requestOptions, successFnArgumentArray);
@@ -87,7 +92,9 @@ const HttpRequest = (options) => {
     },
     fail: function() {
       var failFnArgumentArray = [].slice.call(arguments);
-      wx.hideLoading();
+      if (options.isShowLoading != false) {
+        wx.hideLoading();
+      }
       if (typeof(options.fail) == "function") {
         try {
           options.fail.apply(requestOptions, failFnArgumentArray);
@@ -125,6 +132,7 @@ module.exports.HttpRequest = HttpRequest;
  *                  method: string,                  // HTTP 请求方法。默认为 GET
  *                  dataType: string,                // 返回的数据格式。默认为 Json
  *                  responseType: string,            // 响应的数据类型。默认为 Text
+ *                  isShowLoading: boolean,          // 是否展示 Loading
  *                  isShowToastForSuccess:boolean,   // 是否在 success 方法中弹出系统Toast
  *                  success: function,               // 接口调用成功的回调函数。function(data, headers, cookies, errMsg, statusCode)
  *                  isShowToastForFail:boolean,      // 是否在 fail 方法中弹出系统Toast
@@ -140,6 +148,7 @@ const HttpRequestForLHS = (options) => HttpRequest({
   method: options.method,
   dataType: options.dataType,
   responseType: options.responseType,
+  isShowLoading: options.isShowLoading,
   success: function(res) {
     var httpRequst = this;
     var statusCode = res.statusCode;
@@ -217,18 +226,27 @@ module.exports.HttpRequestForLHS = HttpRequestForLHS;
  * @para: data                  string/object/ArrayBuffer。 请求的参数
  * @para: successFn             function。                  接口调用成功的回调函数。function(data, headers, cookies, errMsg, statusCode)
  * @para: failFn                function。                  接口调用失败的回调函数。function(res)
- * @para: isShowToastForSuccess boolean,                    是否在 success 方法中弹出系统Toast
- * @para: isShowToastForFail    boolean,                    是否在 fail 方法中弹出系统Toast
+ * @para: options               object,                     {
+ *                                                              isShowLoading:          boolean,    // 是否展示 Loading
+ *                                                              isShowToastForSuccess:  boolean,    // 是否在 success 方法中弹出系统Toast
+ *                                                              isShowToastForFail:     boolean,    // 是否在 fail 方法中弹出系统Toast
+ *                                                          }             
  */
-const PostRequest = (url, data, successFn, failFn, isShowToastForSuccess, isShowToastForFail) => HttpRequestForLHS({
-  url: url,
-  data: data,
-  method: 'POST',
-  isShowToastForSuccess: isShowToastForSuccess,
-  success: successFn,
-  isShowToastForFail: isShowToastForFail,
-  fail: failFn
-});
+const PostRequest = (url, data, successFn, failFn, options) => {
+  if (typeof(options) != 'object') {
+    options = {};
+  }
+  HttpRequestForLHS({
+    url: url,
+    data: data,
+    method: 'POST',
+    isShowLoading: options.isShowLoading,
+    isShowToastForSuccess: options.isShowToastForSuccess,
+    success: successFn,
+    isShowToastForFail: options.isShowToastForFail,
+    fail: failFn
+  });
+};
 module.exports.PostRequest = PostRequest;
 
 /**
@@ -238,18 +256,27 @@ module.exports.PostRequest = PostRequest;
  * @para: data                  string/object/ArrayBuffer。 请求的参数
  * @para: successFn             function。                  接口调用成功的回调函数。function(data, headers, cookies, errMsg, statusCode)
  * @para: failFn                function。                  接口调用失败的回调函数。function(res)
- * @para: isShowToastForSuccess boolean,                    是否在 success 方法中弹出系统Toast
- * @para: isShowToastForFail    boolean,                    是否在 fail 方法中弹出系统Toast
+ * @para: options               object,                     {
+ *                                                              isShowLoading:          boolean,    // 是否展示 Loading
+ *                                                              isShowToastForSuccess:  boolean,    // 是否在 success 方法中弹出系统Toast
+ *                                                              isShowToastForFail:     boolean,    // 是否在 fail 方法中弹出系统Toast
+ *                                                          }
  */
-const GetRequest = (url, data, successFn, failFn, isShowToastForSuccess, isShowToastForFail) => HttpRequestForLHS({
-  url: url,
-  data: data,
-  method: 'GET',
-  isShowToastForSuccess: isShowToastForSuccess,
-  success: successFn,
-  isShowToastForFail: isShowToastForFail,
-  fail: failFn
-});
+const GetRequest = (url, data, successFn, failFn, isShowToastForSuccess, isShowToastForFail) => {
+  if (typeof(options) != 'object') {
+    options = {};
+  }
+  HttpRequestForLHS({
+    url: url,
+    data: data,
+    method: 'GET',
+    isShowLoading: options.isShowLoading,
+    isShowToastForSuccess: options.isShowToastForSuccess,
+    success: successFn,
+    isShowToastForFail: options.isShowToastForFail,
+    fail: failFn
+  });
+};
 module.exports.GetRequest = GetRequest;
 
 const TouchMoveHandler = function(systemInfo, touchMoveExecuteTrip) {

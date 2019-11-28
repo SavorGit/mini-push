@@ -490,7 +490,9 @@ Page({
           showInputGoodsCount: false,
         });
       }
-    }, res = {}, false);
+    }, res = {}, {
+      isShowToastForSuccess: false
+    });
     // wx.request({
     //   url: api_url + '/Smallsale/order/addOrder',
     //   header: {
