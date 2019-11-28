@@ -6,7 +6,7 @@ let utils = require("../../utils/util.js")
 var mta = require('../../utils/mta_analysis.js')
 let touchEvent = [];
 let touchMoveExecuteTrip = '160rpx';
-
+var cache_key = app.globalData.cache_key;
 let api_url = app.globalData.api_url;
 let SavorUtils = {
   User: {
@@ -46,11 +46,12 @@ let SavorUtils = {
     }),
 
     // 收藏/取消收藏
-    favorite: (pageContext, forscreenId, index, status) => utils.PostRequest(api_url + '/Smallapp/collect/recLogs', {
+    favorite: (pageContext, forscreenId,type, index, status) => utils.PostRequest(api_url + '/Smallapp/collect/recLogs', {
       'openid': pageContext.data.openid,
       'res_id': forscreenId,
-      'type': 2,
+      'type': type,
       'status': status,
+      //'only_co': status,
     }, (data, headers, cookies, errMsg, statusCode) => {
       if (pageContext.data.pageType == 1) {
         let pictureObjectList = pageContext.data.pictureObjectList;
@@ -291,6 +292,7 @@ Page({
    */
   onTouchEnd: function(e) {
     let self = this;
+    var user_info = wx.getStorageSync(cache_key+'user_info');
     if (!(e.changedTouches instanceof Array) || e.changedTouches.length < 1) {
       e.changedTouches = e.touches;
     }
@@ -305,9 +307,13 @@ Page({
     let lastScrollIndex = self.data.mediaScrollIndex;
     let mediaScrollIndex = lastScrollIndex;
     if (tripY > moveExecuteTrip && self.data.mediaScrollIndex > 0) {
+      //看上一个
       mediaScrollIndex--;
+      mta.Event.stat('findvideoglide', { 'openid': user_info.openid })
     } else if (tripY < -(moveExecuteTrip) && self.data.mediaScrollIndex < self.data.mediaObjectList.length - 1) {
+      //看下一个
       mediaScrollIndex++;
+      mta.Event.stat('findvideoupglide', { 'openid': user_info.openid })
     } else {
       return;
     }
@@ -366,7 +372,12 @@ Page({
 
   // 当播放到末尾时触发 ended 事件
   onVideoEnded: function(e) {
-    // console.log('onVideoEnded', e);
+    //console.log('onVideoEnded', e);
+    var user_info = wx.getStorageSync(cache_key+'user_info');
+    var id = e.currentTarget.dataset.id;
+    var type = e.currentTarget.dataset.type;
+    mta.Event.stat('onVideoEnded', { 'id': id, 'types': type, 'openid': user_info.openid })  //1官方 2精选 3公开
+    
   },
 
   // 视频元数据加载完成时触发。
@@ -429,20 +440,35 @@ Page({
   onCollect: function(e) {
     console.log(e);
     let self = this;
-    let forscreenId = e.currentTarget.dataset.forscreen_id;
+
+    let type = e.currentTarget.dataset.type;
+    if (type == 2 || type == 3) {
+      var res_id = e.currentTarget.dataset.forscreen_id;
+      var c_type = 2;
+    } else {
+      var res_id = e.currentTarget.dataset.id;
+      var c_type = 3
+    }
 
     let index = e.currentTarget.dataset.index;
-    SavorUtils.User.favorite(self, forscreenId, index, 1);
+    SavorUtils.User.favorite(self, res_id, c_type, index, 1);
   },
 
   //取消收藏
   cancCollect: function(e) {
     console.log(e);
     let self = this;
-    let forscreenId = e.currentTarget.dataset.forscreen_id;
-
+    console.log('dddd');
+    let type = e.currentTarget.dataset.type;
+    if (type == 2 || type == 3) {
+      var res_id = e.currentTarget.dataset.forscreen_id;
+      var c_type = 2;
+    } else {
+      var res_id = e.currentTarget.dataset.id;
+      var c_type = 3
+    }
     let index = e.currentTarget.dataset.index;
-    SavorUtils.User.favorite(self, forscreenId, index, 0);
+    SavorUtils.User.favorite(self, res_id,c_type, index, 0);
   },
 
   //电视播放
@@ -491,5 +517,87 @@ Page({
     self.setData({
       pictureObjectList: pictureObjectList
     });
-  }
+  },
+  /**
+   * 生命周期函数--监听页面显示
+   */
+  onShow: function (options) {
+    var user_info = wx.getStorageSync(cache_key + 'user_info');
+    mta.Event.stat('showfind', { 'openid': user_info.openid })
+  },
+  //点击分享按钮
+  onShareAppMessage: function (res) {
+    console.log(res);
+    var that = this;
+    var user_info = wx.getStorageSync('savor_user_info');
+    var openid = user_info.openid;
+    var type = res.target.dataset.type;
+    var res_type = res.target.dataset.res_type;
+    if (type == 1) {
+      var res_id = res.target.dataset.id;
+      var c_type = 3;
+      if (res_type == 1) {
+        var share_url = '/pages/share/pic?forscreen_id=' + res_id;
+      } else {
+        var share_url = '/pages/share/video?res_id=' + res_id + '&type=3';
+      }
+
+    } else if (type == 2 || type == 3) {
+      var res_id = res.target.dataset.forscreen_id;
+      var c_type = 2;
+      if (res_type == 1) {
+        var share_url = '/pages/share/pic?forscreen_id=' + res_id;
+
+      } else {
+        var share_url = '/pages/share/video?res_id=' + res_id + '&type=2';
+      }
+    }
+    console.log(share_url);
+    //var video_url = res.target.dataset.video_url;
+    var pubdetail = res.target.dataset.pubdetail;
+    var img_url = pubdetail[0].img_url;
+    //var res_url = res.target.dataset.res_url;
+
+    if (res.from === 'button') {
+
+      // 转发成功
+      wx.request({
+        url: api_url + '/Smallapp/share/recLogs',
+        header: {
+          'content-type': 'application/json'
+        },
+        data: {
+          'openid': openid,
+          'res_id': res_id,
+          'type': c_type,
+          'status': 1,
+        },
+        success: function (e) {
+          //var cards_img = that.cards_img
+
+
+
+        },
+        fail: function ({
+          errMsg
+        }) {
+          wx.showToast({
+            title: '网络异常，请稍后重试',
+            icon: 'none',
+            duration: 2000
+          })
+        }
+      })
+      // 来自页面内转发按钮
+      return {
+        title: '热点聚焦，投你所好',
+        path: share_url,
+        imageUrl: img_url,
+        success: function (res) {
+
+
+        },
+      }
+    }
+  }, // 分享结束
 });

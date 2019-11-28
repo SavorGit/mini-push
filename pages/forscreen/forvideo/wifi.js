@@ -88,7 +88,7 @@ Page({
       hiddens: false,
     })
     openid = res.currentTarget.dataset.openid;
-    box_mac = res.currentTarget.dataset.boxmac;
+    box_mac = res.currentTarget.dataset.box_mac;
     intranet_ip = res.currentTarget.dataset.intranet_ip;
     var user_info = wx.getStorageSync('savor_user_info');
     var avatarUrl = user_info.avatarUrl;

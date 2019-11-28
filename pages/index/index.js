@@ -916,8 +916,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function() {
-    var user_info = wx.getStorageSync(cache_key+'user_info');
-    mta.Event.stat('showfind', { 'openid': user_info.openid })
+    
     this.onLoad()
   },
 
