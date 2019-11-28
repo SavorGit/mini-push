@@ -41,7 +41,7 @@ Page({
     canIUse: wx.canIUse('button.open-type.getUserInfo'),
     showView: true,
     imgUrls: [],
-    hiddens: true,
+    // hiddens: true,
     box_mac: '',
     popRemoteControlWindow: false,
 
@@ -72,86 +72,137 @@ Page({
     }
     var user_info = wx.getStorageSync("savor_user_info");
     openid = user_info.openid;
-    wx.request({
-      url: api_url + '/Smallapp4/index/isHaveCallBox?openid=' + openid,
-      headers: {
-        'Content-Type': 'application/json'
-      },
-
-      success: function(rest) {
-        var is_have = rest.data.result.is_have;
-        if (is_have == 1) {
-          app.linkHotelWifi(rest.data.result, self);
+    utils.PostRequest(api_url + '/Smallapp4/index/isHaveCallBox?openid=' + openid, {}, (data, headers, cookies, errMsg, statusCode) => {
+      var is_have = data.result.is_have;
+      if (is_have == 1) {
+        app.linkHotelWifi(data.result, self);
+        self.setData({
+          box_mac: data.result.box_mac,
+          is_open_simple: data.result.is_open_simple,
+          hotel_info: data.result,
+        });
+        box_mac = data.result.box_mac;
+        //获取节目单列表
+        utils.PostRequest(api_url + '/Smallapp4/optimize/getOptimizeList', {
+          box_mac: box_mac,
+          page: page,
+          openid: openid,
+        }, (boxData, boxHeaders, boxCookies, boxErrMsg, boxStatusCode) => {
+          console.log(boxData.result);
+          program_list = boxData.result
           self.setData({
-            box_mac: rest.data.result.box_mac,
-            is_open_simple: rest.data.result.is_open_simple,
-            hotel_info: rest.data.result,
-          });
-          box_mac = rest.data.result.box_mac;
-          //获取节目单列表
-          wx.request({ //获取机顶盒节目单列表
-            // url: api_url + '/Smallapp3/optimize/getOptimizeList',
-            url: api_url + '/Smallapp4/optimize/getOptimizeList',
-            header: {
-              'Content-Type': 'application/json'
-            },
-            data: {
-              box_mac: box_mac,
-              page: page,
-              openid: openid,
-            },
-            method: "POST",
-            success: function(res) {
-              console.log(res.data.result);
-              program_list = res.data.result
-              self.setData({
-                program_list: res.data.result
-              })
-            }
+            program_list: boxData.result
           })
-        } else {
-          //获取小程序主节目单列表
-          wx.request({
-            // url: api_url + '/Smallapp3/optimize/getOptimizeList',
-            url: api_url + '/Smallapp4/optimize/getOptimizeList',
-            data: {
-              page: page,
-              openid: openid,
-            },
-            header: {
-              'content-type': 'application/json'
-            },
-            success: function(res) {
-              if (res.data.code == 10000) {
-                program_list = res.data.result
-                self.setData({
-                  program_list: res.data.result,
-                })
-
-              }
-            }
-          });
-          self.setData({
-            box_mac: '',
-          })
-          box_mac = '';
-        }
+        });
+      } else {
+        //获取小程序主节目单列表
+        utils.PostRequest(api_url + '/Smallapp4/optimize/getOptimizeList', {
+          page: page,
+          openid: openid,
+        }, (boxData, boxHeaders, boxCookies, boxErrMsg, boxStatusCode) => {
+          if (boxData.code == 10000) {
+            program_list = boxData.result
+            self.setData({
+              program_list: boxData.result,
+            });
+          }
+        });
+        self.setData({
+          box_mac: '',
+        })
+        box_mac = '';
       }
-    })
-    wx.request({
-      url: api_url + '/Smallapp3/Adsposition/getAdspositionList',
-      data: {
-        position: 1,
-      },
-      success: function(res) {
-        if (res.data.code == 10000) {
-          var imgUrls = res.data.result;
-          self.setData({
-            imgUrls: res.data.result
-          })
-        }
+    });
+    utils.PostRequest(api_url + '/Smallapp3/Adsposition/getAdspositionList', {
+      position: 1,
+    }, (data, headers, cookies, errMsg, statusCode) => {
+      if (data.code == 10000) {
+        var imgUrls = data.result;
+        self.setData({
+          imgUrls: data.result
+        });
       }
-    })
+    });
+    // wx.request({
+    //   url: api_url + '/Smallapp4/index/isHaveCallBox?openid=' + openid,
+    //   headers: {
+    //     'Content-Type': 'application/json'
+    //   },
+
+    //   success: function(rest) {
+    //     var is_have = rest.data.result.is_have;
+    //     if (is_have == 1) {
+    //       app.linkHotelWifi(rest.data.result, self);
+    //       self.setData({
+    //         box_mac: rest.data.result.box_mac,
+    //         is_open_simple: rest.data.result.is_open_simple,
+    //         hotel_info: rest.data.result,
+    //       });
+    //       box_mac = rest.data.result.box_mac;
+    //       //获取节目单列表
+    //       wx.request({ //获取机顶盒节目单列表
+    //         // url: api_url + '/Smallapp3/optimize/getOptimizeList',
+    //         url: api_url + '/Smallapp4/optimize/getOptimizeList',
+    //         header: {
+    //           'Content-Type': 'application/json'
+    //         },
+    //         data: {
+    //           box_mac: box_mac,
+    //           page: page,
+    //           openid: openid,
+    //         },
+    //         method: "POST",
+    //         success: function(res) {
+    //           console.log(res.data.result);
+    //           program_list = res.data.result
+    //           self.setData({
+    //             program_list: res.data.result
+    //           })
+    //         }
+    //       })
+    //     } else {
+    //       //获取小程序主节目单列表
+    //       wx.request({
+    //         // url: api_url + '/Smallapp3/optimize/getOptimizeList',
+    //         url: api_url + '/Smallapp4/optimize/getOptimizeList',
+    //         data: {
+    //           page: page,
+    //           openid: openid,
+    //         },
+    //         header: {
+    //           'content-type': 'application/json'
+    //         },
+    //         success: function(res) {
+    //           if (res.data.code == 10000) {
+    //             program_list = res.data.result
+    //             self.setData({
+    //               program_list: res.data.result,
+    //             })
+
+    //           }
+    //         }
+    //       });
+    //       self.setData({
+    //         box_mac: '',
+    //       })
+    //       box_mac = '';
+    //     }
+    //   }
+    // })
+    // wx.request({
+    //   url: api_url + '/Smallapp3/Adsposition/getAdspositionList',
+    //   data: {
+    //     position: 1,
+    //   },
+    //   success: function(res) {
+    //     if (res.data.code == 10000) {
+    //       var imgUrls = res.data.result;
+    //       self.setData({
+    //         imgUrls: res.data.result
+    //       })
+    //     }
+    //   }
+    // })
 
   },
   //遥控呼大码
@@ -161,7 +212,7 @@ Page({
     box_mac = e.currentTarget.dataset.box_mac;
     var qrcode_img = e.currentTarget.dataset.qrcode_img;
     var hotel_info = e.currentTarget.dataset.hotel_info;
-    app.controlCallQrcode(openid, box_mac, qrcode_img, hotel_info,that);
+    app.controlCallQrcode(openid, box_mac, qrcode_img, hotel_info, that);
   }, 3000),
   //呼大码结束
   //打开遥控器
@@ -206,7 +257,7 @@ Page({
     var hotel_info = e.currentTarget.dataset.hotel_info;
     app.controlChangeProgram(openid, box_mac, change_type, hotel_info, that);
   },
-  modalConfirm: function (e) {
+  modalConfirm: function(e) {
     console.log(e);
     var that = this;
     var hotel_info = e.target.dataset.hotel_info;
@@ -263,58 +314,76 @@ Page({
     var self = this;
     var box_mac = e.currentTarget.dataset.boxmac;
     page = page + 1;
-    self.setData({
-      hiddens: false,
-    })
     if (box_mac == '' || box_mac == undefined) {
-      wx.request({
-        //url: api_url+'/smallapp/Demand/getList',
-        // url: api_url + '/Smallapp3/optimize/getOptimizeList',
-        url: api_url + '/Smallapp4/optimize/getOptimizeList',
-        header: {
-          'Content-Type': 'application/json'
-        },
-        data: {
-          page: page,
-          openid: openid,
-        },
-        method: "POST",
-        success: function(res) {
-          if (res.data.code == 10000) {
-            self.setData({
-              program_list: res.data.result,
-              hiddens: true,
-            })
-            program_list = res.data.result
-          } else {
-            self.setData({
-              hiddens: true,
-            })
-          }
-        }
-      })
-    } else {
-      wx.request({
-        //url: api_url+'/Smallapp/BoxProgram/getBoxProgramList',
-        // url: api_url + '/Smallapp3/optimize/getOptimizeList',
-        url: api_url + '/Smallapp4/optimize/getOptimizeList',
-        header: {
-          'Content-Type': 'application/json'
-        },
-        data: {
-          box_mac: box_mac,
-          page: page,
-          openid: openid,
-        },
-        method: "POST",
-        success: function(res) {
-          program_list = res.data.result
+      utils.PostRequest(api_url + '/Smallapp4/optimize/getOptimizeList', {
+        page: page,
+        openid: openid,
+      }, (data, headers, cookies, errMsg, statusCode) => {
+        if (data.code == 10000) {
           self.setData({
-            program_list: res.data.result,
-            hiddens: true,
+            program_list: data.result
           })
+          program_list = data.result
         }
-      })
+      });
+      // wx.request({
+      //   //url: api_url+'/smallapp/Demand/getList',
+      //   // url: api_url + '/Smallapp3/optimize/getOptimizeList',
+      //   url: api_url + '/Smallapp4/optimize/getOptimizeList',
+      //   header: {
+      //     'Content-Type': 'application/json'
+      //   },
+      //   data: {
+      //     page: page,
+      //     openid: openid,
+      //   },
+      //   method: "POST",
+      //   success: function(res) {
+      //     if (res.data.code == 10000) {
+      //       self.setData({
+      //         program_list: res.data.result,
+      //         hiddens: true,
+      //       })
+      //       program_list = res.data.result
+      //     } else {
+      //       self.setData({
+      //         hiddens: true,
+      //       })
+      //     }
+      //   }
+      // })
+    } else {
+      utils.PostRequest(api_url + '/Smallapp4/optimize/getOptimizeList', {
+        box_mac: box_mac,
+        page: page,
+        openid: openid,
+      }, (data, headers, cookies, errMsg, statusCode) => {
+        program_list = data.result
+        self.setData({
+          program_list: data.result
+        })
+      });
+      // wx.request({
+      //   //url: api_url+'/Smallapp/BoxProgram/getBoxProgramList',
+      //   // url: api_url + '/Smallapp3/optimize/getOptimizeList',
+      //   url: api_url + '/Smallapp4/optimize/getOptimizeList',
+      //   header: {
+      //     'Content-Type': 'application/json'
+      //   },
+      //   data: {
+      //     box_mac: box_mac,
+      //     page: page,
+      //     openid: openid,
+      //   },
+      //   method: "POST",
+      //   success: function(res) {
+      //     program_list = res.data.result
+      //     self.setData({
+      //       program_list: res.data.result,
+      //       hiddens: true,
+      //     })
+      //   }
+      // })
     }
 
   },
@@ -385,51 +454,71 @@ Page({
     var res_id = e.target.dataset.res_id;
     var res_key = e.target.dataset.res_key;
     var res_type = 4;
-    wx.request({
-      url: api_url + '/Smallapp/collect/recLogs',
-      header: {
-        'content-type': 'application/json'
-      },
-      data: {
-        'openid': openid,
-        'res_id': res_id,
-        'type': res_type,
-        'status': 1,
-      },
-      success: function(e) {
-        for (var i = 0; i < program_list.length; i++) {
-          if (i == res_key) {
-            program_list[i].is_collect = 1;
-            program_list[i].collect_num++;
-          }
+    utils.PostRequest(api_url + '/Smallapp/collect/recLogs', {
+      'openid': openid,
+      'res_id': res_id,
+      'type': res_type,
+      'status': 1,
+    }, (data, headers, cookies, errMsg, statusCode) => {
+      for (var i = 0; i < program_list.length; i++) {
+        if (i == res_key) {
+          program_list[i].is_collect = 1;
+          program_list[i].collect_num++;
         }
-        self.setData({
-          program_list: program_list
-        })
-        /*if (e.data.code == 10000) {
-          wx.showToast({
-            title: '收藏成功',
-            icon: 'none',
-            duration: 2000
-          })
-        } else {
-          wx.showToast({
-            title: '收藏失败，请稍后重试',
-            icon: 'none',
-            duration: 2000
-          })
-        }*/
-      },
-      fial: function({
-        errMsg
-      }) {
-        wx.showToast({
-          title: '网络异常，请稍后重试',
-          icon: 'none',
-          duration: 2000
-        })
       }
-    })
+      self.setData({
+        program_list: program_list
+      });
+    }, res => wx.showToast({
+      title: '网络异常，请稍后重试',
+      icon: 'none',
+      duration: 2000
+    }));
+    // wx.request({
+    //   url: api_url + '/Smallapp/collect/recLogs',
+    //   header: {
+    //     'content-type': 'application/json'
+    //   },
+    //   data: {
+    //     'openid': openid,
+    //     'res_id': res_id,
+    //     'type': res_type,
+    //     'status': 1,
+    //   },
+    //   success: function(e) {
+    //     for (var i = 0; i < program_list.length; i++) {
+    //       if (i == res_key) {
+    //         program_list[i].is_collect = 1;
+    //         program_list[i].collect_num++;
+    //       }
+    //     }
+    //     self.setData({
+    //       program_list: program_list
+    //     })
+    //     /*if (e.data.code == 10000) {
+    //       wx.showToast({
+    //         title: '收藏成功',
+    //         icon: 'none',
+    //         duration: 2000
+    //       })
+    //     } else {
+    //       wx.showToast({
+    //         title: '收藏失败，请稍后重试',
+    //         icon: 'none',
+    //         duration: 2000
+    //       })
+    //     }*/
+    //   },
+    //   fial: function({
+    //     errMsg
+    //   }) {
+    //     wx.showToast({
+    //       title: '网络异常，请稍后重试',
+    //       icon: 'none',
+    //       duration: 2000
+    //     })
+    //   }
+    // })
   }, //收藏资源结束
   //取消收藏
   cancCollect: function(e) {
@@ -437,51 +526,71 @@ Page({
     var res_id = e.target.dataset.res_id;
     var res_key = e.target.dataset.res_key;
     var res_type = 4;
-    wx.request({
-      url: api_url + '/Smallapp/collect/recLogs',
-      header: {
-        'content-type': 'application/json'
-      },
-      data: {
-        'openid': openid,
-        'res_id': res_id,
-        'type': res_type,
-        'status': 0,
-      },
-      success: function(e) {
-        for (var i = 0; i < program_list.length; i++) {
-          if (i == res_key) {
-            program_list[i].is_collect = 0;
-            program_list[i].collect_num--;
-          }
+    utils.PostRequest(api_url + '/Smallapp/collect/recLogs', {
+      'openid': openid,
+      'res_id': res_id,
+      'type': res_type,
+      'status': 0,
+    }, (data, headers, cookies, errMsg, statusCode) => {
+      for (var i = 0; i < program_list.length; i++) {
+        if (i == res_key) {
+          program_list[i].is_collect = 0;
+          program_list[i].collect_num--;
         }
-        self.setData({
-          program_list: program_list
-        })
-        /*if (e.data.code == 10000) {
-          wx.showToast({
-            title: '取消收藏成功',
-            icon: 'none',
-            duration: 2000
-          })
-        } else {
-          wx.showToast({
-            title: '取消收藏失败，请稍后重试',
-            icon: 'none',
-            duration: 2000
-          })
-        }*/
-      },
-      fial: function({
-        errMsg
-      }) {
-        wx.showToast({
-          title: '网络异常，请稍后重试',
-          icon: 'none',
-          duration: 2000
-        })
       }
-    })
+      self.setData({
+        program_list: program_list
+      });
+    }, res => wx.showToast({
+      title: '网络异常，请稍后重试',
+      icon: 'none',
+      duration: 2000
+    }));
+    // wx.request({
+    //   url: api_url + '/Smallapp/collect/recLogs',
+    //   header: {
+    //     'content-type': 'application/json'
+    //   },
+    //   data: {
+    //     'openid': openid,
+    //     'res_id': res_id,
+    //     'type': res_type,
+    //     'status': 0,
+    //   },
+    //   success: function(e) {
+    //     for (var i = 0; i < program_list.length; i++) {
+    //       if (i == res_key) {
+    //         program_list[i].is_collect = 0;
+    //         program_list[i].collect_num--;
+    //       }
+    //     }
+    //     self.setData({
+    //       program_list: program_list
+    //     })
+    //     /*if (e.data.code == 10000) {
+    //       wx.showToast({
+    //         title: '取消收藏成功',
+    //         icon: 'none',
+    //         duration: 2000
+    //       })
+    //     } else {
+    //       wx.showToast({
+    //         title: '取消收藏失败，请稍后重试',
+    //         icon: 'none',
+    //         duration: 2000
+    //       })
+    //     }*/
+    //   },
+    //   fial: function({
+    //     errMsg
+    //   }) {
+    //     wx.showToast({
+    //       title: '网络异常，请稍后重试',
+    //       icon: 'none',
+    //       duration: 2000
+    //     })
+    //   }
+    // })
   }, //取消收藏结束
   //点击分享按钮
   onShareAppMessage: function(res) {
@@ -493,38 +602,57 @@ Page({
 
     if (res.from === 'button') {
       // 转发成功
-      wx.request({
-        url: api_url + '/Smallapp/share/recLogs',
-        header: {
-          'content-type': 'application/json'
-        },
-        data: {
-          'openid': openid,
-          'res_id': goods_id,
-          'type': 4,
-          'status': 1,
-        },
-        success: function(e) {
-          for (var i = 0; i < program_list.length; i++) {
-            if (i == res_key) {
-              program_list[i].share_num++;
-            }
+      utils.PostRequest(api_url + '/Smallapp/share/recLogs', {
+        'openid': openid,
+        'res_id': goods_id,
+        'type': 4,
+        'status': 1,
+      }, (data, headers, cookies, errMsg, statusCode) => {
+        for (var i = 0; i < program_list.length; i++) {
+          if (i == res_key) {
+            program_list[i].share_num++;
           }
-          self.setData({
-            program_list: program_list
-          })
-
-        },
-        fail: function({
-          errMsg
-        }) {
-          wx.showToast({
-            title: '网络异常，请稍后重试',
-            icon: 'none',
-            duration: 2000
-          })
         }
-      })
+        self.setData({
+          program_list: program_list
+        });
+      }, res => wx.showToast({
+        title: '网络异常，请稍后重试',
+        icon: 'none',
+        duration: 2000
+      }));
+      // wx.request({
+      //   url: api_url + '/Smallapp/share/recLogs',
+      //   header: {
+      //     'content-type': 'application/json'
+      //   },
+      //   data: {
+      //     'openid': openid,
+      //     'res_id': goods_id,
+      //     'type': 4,
+      //     'status': 1,
+      //   },
+      //   success: function(e) {
+      //     for (var i = 0; i < program_list.length; i++) {
+      //       if (i == res_key) {
+      //         program_list[i].share_num++;
+      //       }
+      //     }
+      //     self.setData({
+      //       program_list: program_list
+      //     })
+
+      //   },
+      //   fail: function({
+      //     errMsg
+      //   }) {
+      //     wx.showToast({
+      //       title: '网络异常，请稍后重试',
+      //       icon: 'none',
+      //       duration: 2000
+      //     })
+      //   }
+      // })
       // 来自页面内转发按钮
       return {
         title: '热点聚焦，投你所好',
@@ -549,30 +677,48 @@ Page({
     var resource_id = res.currentTarget.dataset.id
     var timestamp = (new Date()).valueOf();
     var duration = res.currentTarget.dataset.duration;
-    wx.request({
-      url: api_url + '/Smallapp/index/recordForScreenPics',
-      header: {
-        'content-type': 'application/json'
-      },
-      data: {
-        openid: openid,
-        box_mac: box_mac,
-        action: 21,
-        resource_type: 2,
-        mobile_brand: mobile_brand,
-        mobile_model: mobile_model,
-        forscreen_char: forscreen_char,
-        imgs: '["' + imgs + '"]',
-        resource_id: resource_id,
-        res_sup_time: 0,
-        res_eup_time: 0,
-        resource_size: 0,
-        is_pub_hotelinfo: 0,
-        is_share: 0,
-        forscreen_id: timestamp,
-        duration: duration,
-      },
+    utils.PostRequest(api_url + '/Smallapp/index/recordForScreenPics', {
+      openid: openid,
+      box_mac: box_mac,
+      action: 21,
+      resource_type: 2,
+      mobile_brand: mobile_brand,
+      mobile_model: mobile_model,
+      forscreen_char: forscreen_char,
+      imgs: '["' + imgs + '"]',
+      resource_id: resource_id,
+      res_sup_time: 0,
+      res_eup_time: 0,
+      resource_size: 0,
+      is_pub_hotelinfo: 0,
+      is_share: 0,
+      forscreen_id: timestamp,
+      duration: duration,
     });
+    // wx.request({
+    //   url: api_url + '/Smallapp/index/recordForScreenPics',
+    //   header: {
+    //     'content-type': 'application/json'
+    //   },
+    //   data: {
+    //     openid: openid,
+    //     box_mac: box_mac,
+    //     action: 21,
+    //     resource_type: 2,
+    //     mobile_brand: mobile_brand,
+    //     mobile_model: mobile_model,
+    //     forscreen_char: forscreen_char,
+    //     imgs: '["' + imgs + '"]',
+    //     resource_id: resource_id,
+    //     res_sup_time: 0,
+    //     res_eup_time: 0,
+    //     resource_size: 0,
+    //     is_pub_hotelinfo: 0,
+    //     is_share: 0,
+    //     forscreen_id: timestamp,
+    //     duration: duration,
+    //   },
+    // });
   },
 
 })

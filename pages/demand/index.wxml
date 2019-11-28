@@ -101,9 +101,9 @@
 
     
 
-    <view class="body-view">
+    <!-- <view class="body-view">
       <loading hidden="{{hiddens}}" bindchange="loadingChange">加载中...</loading>
-    </view>
+    </view> -->
   </view>
 
   <!-- 滚动页面底部留白 -->

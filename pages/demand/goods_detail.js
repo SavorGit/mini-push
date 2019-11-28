@@ -37,7 +37,7 @@ Page({
     } else {
       goods_box_mac = box_mac
     }
-    
+
     if (typeof(options.uid) != 'undefined') {
       uid = options.uid;
     }
@@ -52,32 +52,43 @@ Page({
     utils.PostRequest(api_url + '/Smallapp4/index/isHaveCallBox', {
       openid: openid
     }, (data, headers, cookies, errMsg, statusCode) => {
-      hotel_info:data.result;
+      hotel_info: data.result;
       that.setData({
-        hotel_info:data.result
+        hotel_info: data.result
       })
     });
-
-    wx.request({
-      // url: api_url + '/Smallapp3/optimize/detail',
-      url: api_url + '/Smallapp4/optimize/detail',
-      header: {
-        'content-type': 'application/json'
-      },
-      data: {
-        uid: uid,
-        goods_id: goods_id,
-        openid: openid,
-      },
-      success: function(res) {
-        if (res.data.code == 10000) {
-          goods_info = res.data.result
-          that.setData({
-            goods_info: res.data.result
-          })
-        }
+    utils.PostRequest(api_url + '/Smallapp4/optimize/detail', {
+      uid: uid,
+      goods_id: goods_id,
+      openid: openid,
+    }, (data, headers, cookies, errMsg, statusCode) => {
+      if (data.code == 10000) {
+        goods_info = data.result
+        that.setData({
+          goods_info: data.result
+        })
       }
-    })
+    });
+    // wx.request({
+    //   // url: api_url + '/Smallapp3/optimize/detail',
+    //   url: api_url + '/Smallapp4/optimize/detail',
+    //   header: {
+    //     'content-type': 'application/json'
+    //   },
+    //   data: {
+    //     uid: uid,
+    //     goods_id: goods_id,
+    //     openid: openid,
+    //   },
+    //   success: function(res) {
+    //     if (res.data.code == 10000) {
+    //       goods_info = res.data.result
+    //       that.setData({
+    //         goods_info: res.data.result
+    //       })
+    //     }
+    //   }
+    // })
 
   },
   //电视播放
@@ -93,21 +104,27 @@ Page({
     var user_info = wx.getStorageSync('savor_user_info');
     var openid = user_info.openid;
     var goods_id = e.currentTarget.dataset.goods_id;
-    wx.request({
-      url: api_url + '/Smallapp3/datalog/recordlog',
-      header: {
-        'content-type': 'application/json'
-      },
-      data: {
-        openid: openid,
-        data_id: goods_id,
-        action_type: 3,
-        type: 2
-      },
-      success: function(res) {
+    utils.PostRequest(api_url + '/Smallapp3/datalog/recordlog', {
+      openid: openid,
+      data_id: goods_id,
+      action_type: 3,
+      type: 2
+    });
+    // wx.request({
+    //   url: api_url + '/Smallapp3/datalog/recordlog',
+    //   header: {
+    //     'content-type': 'application/json'
+    //   },
+    //   data: {
+    //     openid: openid,
+    //     data_id: goods_id,
+    //     action_type: 3,
+    //     type: 2
+    //   },
+    //   success: function(res) {
 
-      }
-    })
+    //   }
+    // })
   },
 
   /**
@@ -160,9 +177,9 @@ Page({
     var hotel_info = e.currentTarget.dataset.hotel_info;
     var res_type = 2;
     var res_nums = 1;
-    
 
-    app.boxShow(box_mac, forscreen_id, pubdetail, res_type, res_nums, 5,hotel_info);
+
+    app.boxShow(box_mac, forscreen_id, pubdetail, res_type, res_nums, 5, hotel_info);
 
     // 调用记录播放次数接口
     utils.PostRequest(api_url + '/Smallapp4/demand/recordPlaynum', {
@@ -185,47 +202,63 @@ Page({
     var user_info = wx.getStorageSync('savor_user_info');
     var openid = user_info.openid;
     var res_type = 4;
-    wx.request({
-      url: api_url + '/Smallapp/collect/recLogs',
-      header: {
-        'content-type': 'application/json'
-      },
-      data: {
-        'openid': openid,
-        'res_id': res_id,
-        'type': res_type,
-        'status': 1,
-      },
-      success: function(e) {
-        goods_info.is_collect = 1;
-        goods_info.collect_num = e.data.result.nums;
-        that.setData({
-          goods_info: goods_info
-        })
-        /*if (e.data.code == 10000) {
-          wx.showToast({
-            title: '收藏成功',
-            icon: 'none',
-            duration: 2000
-          })
-        } else {
-          wx.showToast({
-            title: '收藏失败，请稍后重试',
-            icon: 'none',
-            duration: 2000
-          })
-        }*/
-      },
-      fial: function({
-        errMsg
-      }) {
-        wx.showToast({
-          title: '网络异常，请稍后重试',
-          icon: 'none',
-          duration: 2000
-        })
-      }
-    })
+    utils.PostRequest(api_url + '/Smallapp/collect/recLogs', {
+      'openid': openid,
+      'res_id': res_id,
+      'type': res_type,
+      'status': 1,
+    }, (data, headers, cookies, errMsg, statusCode) => {
+      goods_info.is_collect = 1;
+      goods_info.collect_num = data.result.nums;
+      that.setData({
+        goods_info: goods_info
+      });
+    }, res => wx.showToast({
+      title: '网络异常，请稍后重试',
+      icon: 'none',
+      duration: 2000
+    }));
+    // wx.request({
+    //   url: api_url + '/Smallapp/collect/recLogs',
+    //   header: {
+    //     'content-type': 'application/json'
+    //   },
+    //   data: {
+    //     'openid': openid,
+    //     'res_id': res_id,
+    //     'type': res_type,
+    //     'status': 1,
+    //   },
+    //   success: function(e) {
+    //     goods_info.is_collect = 1;
+    //     goods_info.collect_num = e.data.result.nums;
+    //     that.setData({
+    //       goods_info: goods_info
+    //     })
+    //     /*if (e.data.code == 10000) {
+    //       wx.showToast({
+    //         title: '收藏成功',
+    //         icon: 'none',
+    //         duration: 2000
+    //       })
+    //     } else {
+    //       wx.showToast({
+    //         title: '收藏失败，请稍后重试',
+    //         icon: 'none',
+    //         duration: 2000
+    //       })
+    //     }*/
+    //   },
+    //   fial: function({
+    //     errMsg
+    //   }) {
+    //     wx.showToast({
+    //       title: '网络异常，请稍后重试',
+    //       icon: 'none',
+    //       duration: 2000
+    //     })
+    //   }
+    // })
   }, //收藏资源结束
   //取消收藏
   cancCollect: function(e) {
@@ -234,47 +267,63 @@ Page({
     var user_info = wx.getStorageSync('savor_user_info');
     var openid = user_info.openid;
     var res_type = 4;
-    wx.request({
-      url: api_url + '/Smallapp/collect/recLogs',
-      header: {
-        'content-type': 'application/json'
-      },
-      data: {
-        'openid': openid,
-        'res_id': res_id,
-        'type': res_type,
-        'status': 0,
-      },
-      success: function(e) {
-        goods_info.is_collect = 0;
-        goods_info.collect_num = e.data.result.nums;
-        that.setData({
-          goods_info: goods_info
-        })
-        /*if (e.data.code == 10000) {
-          wx.showToast({
-            title: '取消收藏成功',
-            icon: 'none',
-            duration: 2000
-          })
-        } else {
-          wx.showToast({
-            title: '取消收藏失败，请稍后重试',
-            icon: 'none',
-            duration: 2000
-          })
-        }*/
-      },
-      fial: function({
-        errMsg
-      }) {
-        wx.showToast({
-          title: '网络异常，请稍后重试',
-          icon: 'none',
-          duration: 2000
-        })
-      }
-    })
+    utils.PostRequest(api_url + '/Smallapp/collect/recLogs', {
+      'openid': openid,
+      'res_id': res_id,
+      'type': res_type,
+      'status': 0,
+    }, (data, headers, cookies, errMsg, statusCode) => {
+      goods_info.is_collect = 0;
+      goods_info.collect_num = data.result.nums;
+      that.setData({
+        goods_info: goods_info
+      });
+    }, res => wx.showToast({
+      title: '网络异常，请稍后重试',
+      icon: 'none',
+      duration: 2000
+    }));
+    // wx.request({
+    //   url: api_url + '/Smallapp/collect/recLogs',
+    //   header: {
+    //     'content-type': 'application/json'
+    //   },
+    //   data: {
+    //     'openid': openid,
+    //     'res_id': res_id,
+    //     'type': res_type,
+    //     'status': 0,
+    //   },
+    //   success: function(e) {
+    //     goods_info.is_collect = 0;
+    //     goods_info.collect_num = e.data.result.nums;
+    //     that.setData({
+    //       goods_info: goods_info
+    //     })
+    //     /*if (e.data.code == 10000) {
+    //       wx.showToast({
+    //         title: '取消收藏成功',
+    //         icon: 'none',
+    //         duration: 2000
+    //       })
+    //     } else {
+    //       wx.showToast({
+    //         title: '取消收藏失败，请稍后重试',
+    //         icon: 'none',
+    //         duration: 2000
+    //       })
+    //     }*/
+    //   },
+    //   fial: function({
+    //     errMsg
+    //   }) {
+    //     wx.showToast({
+    //       title: '网络异常，请稍后重试',
+    //       icon: 'none',
+    //       duration: 2000
+    //     })
+    //   }
+    // })
   }, //取消收藏结束
   /**
    * 用户点击右上角分享
@@ -290,36 +339,51 @@ Page({
 
     if (res.from === 'button') {
       // 转发成功
-      wx.request({
-        url: api_url + '/Smallapp/share/recLogs',
-        header: {
-          'content-type': 'application/json'
-        },
-        data: {
-          'openid': openid,
-          'res_id': goods_id,
-          'type': 4,
-          'status': 1,
-        },
-        success: function(e) {
-          goods_info.share_num++;
+      utils.PostRequest(api_url + '/Smallapp/share/recLogs', {
+        'openid': openid,
+        'res_id': goods_id,
+        'type': 4,
+        'status': 1,
+      }, (data, headers, cookies, errMsg, statusCode) => {
+        goods_info.share_num++;
+        that.setData({
+          goods_info: goods_info
+        });
+      }, res => wx.showToast({
+        title: '网络异常，请稍后重试',
+        icon: 'none',
+        duration: 2000
+      }));
+      // wx.request({
+      //   url: api_url + '/Smallapp/share/recLogs',
+      //   header: {
+      //     'content-type': 'application/json'
+      //   },
+      //   data: {
+      //     'openid': openid,
+      //     'res_id': goods_id,
+      //     'type': 4,
+      //     'status': 1,
+      //   },
+      //   success: function(e) {
+      //     goods_info.share_num++;
 
 
-          that.setData({
-            goods_info: goods_info
-          })
+      //     that.setData({
+      //       goods_info: goods_info
+      //     })
 
-        },
-        fail: function({
-          errMsg
-        }) {
-          wx.showToast({
-            title: '网络异常，请稍后重试',
-            icon: 'none',
-            duration: 2000
-          })
-        }
-      })
+      //   },
+      //   fail: function({
+      //     errMsg
+      //   }) {
+      //     wx.showToast({
+      //       title: '网络异常，请稍后重试',
+      //       icon: 'none',
+      //       duration: 2000
+      //     })
+      //   }
+      // })
       // 来自页面内转发按钮
       return {
         title: '热点聚焦，投你所好',
@@ -400,45 +464,77 @@ Page({
     var uid = e.currentTarget.dataset.uid;
     var user_info = wx.getStorageSync("savor_user_info");
     var openid = user_info.openid;
-    wx.request({
-      url: api_url + '/Smallsale/order/addOrder',
-      header: {
-        'content-type': 'application/json'
-      },
-      data: {
-        goods_id: goods_id,
-        box_mac: goods_box_mac,
-        amount: 1,
-        openid: openid,
-        buy_type: buy_type,
-        uid: uid
-      },
-      success: function(res) {
-        if (res.data.code == 10000) {
-          if (buy_type == 1) {
-            wx.showToast({
-              title: '购买成功',
-              icon: 'none',
-              duration: 2000,
-            })
-          }
-          that.setData({
-            showInputGoodsCount: false,
-          })
-
-        } else {
-          if (buy_type == 1) {
-            wx.showToast({
-              title: res.data.msg,
-              icon: 'none',
-              duration: 3000,
-            })
-          }
-          that.setData({
-            showInputGoodsCount: false,
-          })
+    utils.PostRequest(api_url + '/Smallsale/order/addOrder', {
+      goods_id: goods_id,
+      box_mac: goods_box_mac,
+      amount: 1,
+      openid: openid,
+      buy_type: buy_type,
+      uid: uid
+    }, (data, headers, cookies, errMsg, statusCode) => {
+      if (data.code == 10000) {
+        if (buy_type == 1) {
+          wx.showToast({
+            title: '购买成功',
+            icon: 'none',
+            duration: 2000,
+          });
         }
+        that.setData({
+          showInputGoodsCount: false,
+        });
+      } else {
+        if (buy_type == 1) {
+          wx.showToast({
+            title: data.msg,
+            icon: 'none',
+            duration: 3000,
+          });
+        }
+        that.setData({
+          showInputGoodsCount: false,
+        });
       }
-    })
+    });
+    // wx.request({
+    //   url: api_url + '/Smallsale/order/addOrder',
+    //   header: {
+    //     'content-type': 'application/json'
+    //   },
+    //   data: {
+    //     goods_id: goods_id,
+    //     box_mac: goods_box_mac,
+    //     amount: 1,
+    //     openid: openid,
+    //     buy_type: buy_type,
+    //     uid: uid
+    //   },
+    //   success: function(res) {
+    //     if (res.data.code == 10000) {
+    //       if (buy_type == 1) {
+    //         wx.showToast({
+    //           title: '购买成功',
+    //           icon: 'none',
+    //           duration: 2000,
+    //         })
+    //       }
+    //       that.setData({
+    //         showInputGoodsCount: false,
+    //       })
+
+    //     } else {
+    //       if (buy_type == 1) {
+    //         wx.showToast({
+    //           title: res.data.msg,
+    //           icon: 'none',
+    //           duration: 3000,
+    //         })
+    //       }
+    //       that.setData({
+    //         showInputGoodsCount: false,
+    //       })
+    //     }
+    //   }
+    // })
   },
 })
