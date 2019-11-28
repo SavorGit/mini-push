@@ -125,7 +125,7 @@
 </modal>
 
 <!-- 遥控器 -->
-<template is="remoteControlWindow" data='{{popRemoteControlWindow: showControl, qrcode_img:qrcode_img, box_mac:box_mac, openid:openid, hotel_info:hotel_info}}' />
+<template is="remoteControlWindow" data='{{popRemoteControlWindow: popRemoteControlWindow, qrcode_img:qrcode_img, box_mac:box_mac, openid:openid, hotel_info:hotel_info}}' />
 
 <!-- 固定悬浮按钮组 -->
 <view wx:if="{{box_mac !=''}}">

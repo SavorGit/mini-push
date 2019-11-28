@@ -866,6 +866,13 @@ App({
                 })
               } else if (res.errMsg =='getConnectedWifi:fail:not invoke startWifi'){
 
+              } else if (res.errMsg =='connectWifi:fail:duplicated request'){
+                that.setData({
+                  wifiErr: { 'is_open': 1, 'msg': '亲，使用此小程序前需要打开您手机的wifi,链接wifi投屏更快哦！', 'confirm': '确定', 'calcle': '取消', 'type': 1 }
+                })
+                wx.showToast({
+                  title: 'wifi链接失败',
+                })
               }
               else {
                 if(hotel_info.wifi_password==''){

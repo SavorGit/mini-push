@@ -1,5 +1,5 @@
 // pages/interact/index.js
-const util = require('../../utils/util.js')
+const utils = require('../../utils/util.js')
 var mta = require('../../utils/mta_analysis.js')
 const app = getApp()
 var openid;
@@ -572,7 +572,7 @@ Page({
     }
   },
   //遥控呼大码
-  callQrCode: util.throttle(function(e) {
+  callQrCode: utils.throttle(function(e) {
     var that = this;
     openid = e.currentTarget.dataset.openid;
     box_mac = e.currentTarget.dataset.box_mac;
@@ -916,8 +916,48 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function() {
+    var that = this;
+    if (app.globalData.openid && app.globalData.openid != '') {
+      utils.PostRequest(api_url + '/Smallapp4/index/isHaveCallBox', {
+        openid: app.globalData.openid
+      }, (data, headers, cookies, errMsg, statusCode) => {
+        if (data.result.is_have == 1) {
+
+        } else {
+          app.globalData.link_type = 1;
+          that.setData({
+            is_link: 0,
+            box_mac: '',
+            link_type: 1,
+            popRemoteControlWindow: false
+          })
+          box_mac = '';
+        }
+        //console.log(data);
+      });
+    } else {
+      app.openidCallback = openid => {
+        utils.PostRequest(api_url + '/Smallapp4/index/isHaveCallBox', {
+          openid: openid
+        }, (data, headers, cookies, errMsg, statusCode) => {
+          if (data.result.is_have == 1) {
+
+          } else {
+            app.globalData.link_type = 1;
+            that.setData({
+              is_link: 0,
+              box_mac: '',
+              link_type: 1,
+              popRemoteControlWindow: false
+            })
+            box_mac = '';
+          }
+        });
+      }
+    }
     
-    this.onLoad()
+    
+    //this.onLoad()
   },
 
   /**

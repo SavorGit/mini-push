@@ -43,7 +43,7 @@ Page({
     imgUrls: [],
     hiddens: true,
     box_mac: '',
-    showControl: false,
+    popRemoteControlWindow: false,
 
     indicatorDots: true, //是否显示面板指示点
     autoplay: true, //是否自动切换
@@ -169,7 +169,7 @@ Page({
     var self = this;
     var qrcode_url = api_url + '/Smallapp4/index/getBoxQr?box_mac=' + box_mac + '&type=3';
     self.setData({
-      showControl: true,
+      popRemoteControlWindow: true,
       qrcode_img: qrcode_url
     })
   },
@@ -177,7 +177,7 @@ Page({
   closeControl: function(e) {
     var self = this;
     self.setData({
-      showControl: false,
+      popRemoteControlWindow: false,
     })
 
   },
@@ -216,6 +216,45 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function() {
+    var that = this;
+    if (app.globalData.openid && app.globalData.openid != '') {
+      utils.PostRequest(api_url + '/Smallapp4/index/isHaveCallBox', {
+        openid: app.globalData.openid
+      }, (data, headers, cookies, errMsg, statusCode) => {
+        if (data.result.is_have == 1) {
+
+        } else {
+          app.globalData.link_type = 1;
+          that.setData({
+            is_link: 0,
+            box_mac: '',
+            link_type: 1,
+            popRemoteControlWindow: false
+          })
+          box_mac = '';
+        }
+        //console.log(data);
+      });
+    } else {
+      app.openidCallback = openid => {
+        utils.PostRequest(api_url + '/Smallapp4/index/isHaveCallBox', {
+          openid: openid
+        }, (data, headers, cookies, errMsg, statusCode) => {
+          if (data.result.is_have == 1) {
+
+          } else {
+            app.globalData.link_type = 1;
+            that.setData({
+              is_link: 0,
+              box_mac: '',
+              link_type: 1,
+              popRemoteControlWindow: false
+            })
+            box_mac = '';
+          }
+        });
+      }
+    }
     //this.onLoad()
   },
 

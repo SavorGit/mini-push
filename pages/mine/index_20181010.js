@@ -1,5 +1,5 @@
 // pages/mine/index_20181010.js
-const util = require('../../utils/util.js')
+const utils = require('../../utils/util.js')
 const app = getApp();
 var openid;
 var box_mac;
@@ -172,7 +172,7 @@ Page({
     this.onLoad();
   },
   //遥控呼大码
-  callQrCode: util.throttle(function (e){
+  callQrCode: utils.throttle(function (e){
     var that = this;
     openid = e.currentTarget.dataset.openid;
     box_mac = e.currentTarget.dataset.box_mac;
@@ -185,7 +185,7 @@ Page({
     var that = this;
     var qrcode_url = api_url+'/Smallapp4/index/getBoxQr?box_mac=' + box_mac + '&type=3';
     that.setData({
-      showControl: true,
+      popRemoteControlWindow: true,
       qrcode_img: qrcode_url
     })
   },
@@ -193,7 +193,7 @@ Page({
   closeControl: function (e) {
     var that = this;
     that.setData({
-      showControl: false,
+      popRemoteControlWindow: false,
     })
 
   },
@@ -241,7 +241,45 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
+    var that = this;
+    if (app.globalData.openid && app.globalData.openid != '') {
+      utils.PostRequest(api_url + '/Smallapp4/index/isHaveCallBox', {
+        openid: app.globalData.openid
+      }, (data, headers, cookies, errMsg, statusCode) => {
+        if (data.result.is_have == 1) {
 
+        } else {
+          app.globalData.link_type = 1;
+          that.setData({
+            is_link: 0,
+            box_mac: '',
+            link_type: 1,
+            popRemoteControlWindow: false
+          })
+          box_mac = '';
+        }
+        //console.log(data);
+      });
+    } else {
+      app.openidCallback = openid => {
+        utils.PostRequest(api_url + '/Smallapp4/index/isHaveCallBox', {
+          openid: openid
+        }, (data, headers, cookies, errMsg, statusCode) => {
+          if (data.result.is_have == 1) {
+
+          } else {
+            app.globalData.link_type = 1;
+            that.setData({
+              is_link: 0,
+              box_mac: '',
+              link_type: 1,
+              popRemoteControlWindow: false
+            })
+            box_mac = '';
+          }
+        });
+      }
+    }
   },
 
   /**
