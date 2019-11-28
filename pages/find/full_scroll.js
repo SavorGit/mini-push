@@ -60,6 +60,10 @@ let SavorUtils = {
         pageContext.setData({
           pictureObjectList: pictureObjectList
         });
+        if(status==1){
+          mta.Event.stat('findCollectPic', { 'openid': pageContext.data.openid })
+        }
+        
       } else {
         let mediaObjectList = pageContext.data.mediaObjectList;
         mediaObjectList[index].is_collect = status;
@@ -67,6 +71,10 @@ let SavorUtils = {
         pageContext.setData({
           mediaObjectList: mediaObjectList
         });
+        if(status==1){
+          mta.Event.stat('findCollectVideo', { 'openid': pageContext.data.openid })
+        }
+        
       }
     }, ({
       errMsg
@@ -128,6 +136,11 @@ let SavorUtils = {
         SavorUtils.User.recordForScreenPics(pageContext, extendData, currentTime, pubdetailList[index]);
         SavorUtils.Netty.push(pageContext, nettyMessageContent); // 向机顶盒推送消息
       }
+      if (mediaSubGroupType==1){
+        mta.Event.stat('findBoxShowpic', { 'openid': pageContext.data.openid })
+      }else {
+        mta.Event.stat('findBoxShowVideo', { 'openid': pageContext.data.openid })
+      }
     },
 
     // 投屏媒体
@@ -142,6 +155,7 @@ let SavorUtils = {
       utils.PostRequest(api_url + '/Smallapp21/CollectCount/recCount', {
         res_id: forscreenId
       });
+      //mta.Event.stat('findBoxShow', { 'openid': pageContext.data.openid })
     }
   },
   Page: {
@@ -429,6 +443,7 @@ Page({
         pageType: 1
       });
     }
+    mta.Event.stat('findSwichPic', { 'openid': self.data.openid })
   },
 
   // 跳转到发布视频页
@@ -461,6 +476,7 @@ Page({
 
     let index = e.currentTarget.dataset.index;
     SavorUtils.User.favorite(self, res_id, c_type, index, 1);
+    //mta.Event.stat('findCollect', { 'openid': self.data.openid })
   },
 
   //取消收藏
@@ -482,7 +498,6 @@ Page({
 
   //电视播放
   boxShow(e) {
-    console.log(e);
     let self = this;
     let forscreenId = e.target.dataset.forscreen_id;
     let indexInList = e.target.dataset.index;
@@ -522,10 +537,15 @@ Page({
     let forscreenId = e.target.dataset.forscreen_id;
     let index = e.target.dataset.index;
     let pictureObjectList = self.data.pictureObjectList;
+    if (!pictureObjectList[index].isOpen) {//打开操作菜单
+      mta.Event.stat('findClickOpenMenu', { 'openid': self.data.openid })
+    } 
+    
     pictureObjectList[index].isOpen = !(pictureObjectList[index].isOpen);
     self.setData({
       pictureObjectList: pictureObjectList
     });
+    
   },
   /**
    * 生命周期函数--监听页面显示
@@ -574,12 +594,19 @@ Page({
   
   //点击分享按钮
   onShareAppMessage: function(res) {
-    console.log(res);
     var that = this;
+    //mta.Event.stat('findShare', { 'openid': that.data.openid })
+    
     var user_info = wx.getStorageSync('savor_user_info');
     var openid = user_info.openid;
     var type = res.target.dataset.type;
     var res_type = res.target.dataset.res_type;
+    if(res_type==1){
+      mta.Event.stat('findSharePic', { 'openid': that.data.openid })
+    }else if(res_type==2){
+      mta.Event.stat('findShareVideo', { 'openid': that.data.openid })
+    }
+
     if (type == 1) {
       var res_id = res.target.dataset.id;
       var c_type = 3;
@@ -646,5 +673,6 @@ Page({
         },
       }
     }
+    
   }, // 分享结束
 });
