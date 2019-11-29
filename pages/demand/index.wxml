@@ -25,7 +25,7 @@
       <view wx:if='{{bean.cover_imgs.length == 1 && bean.intro != ""}}' class="model-1">
         <navigator class="body flex-column-center-flex_start theme-panel" bindtap='demandLog' data-openid='{{openid}}' data-box_mac='{{box_mac}}' data-title='{{bean.title}}' data-tx_url='{{bean.tx_url}}' data-id='{{bean.id}}' data-duration="{{bean.duration}}"
           url="/pages/demand/goods_detail?box_mac={{box_mac}}&goods_id={{bean.id}}">
-          <image class="goods-pic" src='{{bean.cover_imgs[0]}}'></image>
+          <image class="goods-pic" mode="aspectFill" src='{{bean.cover_imgs[0]}}'></image>
           <view class="goods-title theme-font-000000">{{bean.name}}</view>
           <view class="goods-detail theme-font-666666">{{bean.intro}}</view>
           <view wx:if='{{bean.label != "" && bean.label.length > 0}}' class="goods-tags flex-row-center-flex_start">
@@ -53,7 +53,7 @@
               <view class="goods-tag" wx:for="{{bean.label}}" wx:key="tag_key" wx:for-item="tag" wx:for-index="tag_index">{{tag}}</view>
             </view>
           </view>
-          <image class="goods-pic" src='{{bean.cover_imgs[0]}}'></image>
+          <image class="goods-pic" mode="aspectFill" src='{{bean.cover_imgs[0]}}'></image>
         </navigator>
         <view class="foot theme-panel flex-row-center-flex_start">
           <view class="play">
@@ -73,10 +73,10 @@
           url="/pages/demand/goods_detail?box_mac={{box_mac}}&goods_id={{bean.id}}">
           <view class="goods-title theme-font-000000">{{bean.name}}</view>
           <view class="pic-group flex-row-center-flex_start">
-            <image src='{{bean.cover_imgs[0]}}'></image>
+            <image mode="aspectFill" src='{{bean.cover_imgs[0]}}'></image>
             <view class="small-group flex-column-center-flex_start">
-              <image src='{{bean.cover_imgs[1]}}'></image>
-              <image src='{{bean.cover_imgs[2]}}'></image>
+              <image mode="aspectFill" src='{{bean.cover_imgs[1]}}'></image>
+              <image mode="aspectFill" src='{{bean.cover_imgs[2]}}'></image>
             </view>
           </view>
           <view wx:if='{{bean.intro != ""}}' class="goods-detail theme-font-666666">{{bean.intro}}</view>
@@ -99,7 +99,7 @@
       </view>
     </view>
 
-    
+
 
     <!-- <view class="body-view">
       <loading hidden="{{hiddens}}" bindchange="loadingChange">加载中...</loading>
@@ -113,7 +113,8 @@
 <!-- 遥控器 -->
 <template is="remoteControlWindow" data='{{popRemoteControlWindow: popRemoteControlWindow, qrcode_img:qrcode_img, box_mac:box_mac, openid:openid, hotel_info:hotel_info}}' />
 <!--wifi链接错误提示-->
-<modal show="{{wifiErr.is_open==1 ? true : false}}" width="650rpx" height='350rpx' border-radius="10rpx" title-text='提示' title-color="#333333" title-background-color="unset" title-border-radius="0rpx" confirm-text='{{wifiErr.confirm}}' confirm-color="#FFFFFF" confirm-background-color="#1cbeb6" confirm-border-radius="10rpx" cancel-text='{{wifiErr.cancel}}' cancel-color='#FFFFFF' cancel-background-color="#333333" cancel-border-radius="10rpx" bindcancel="modalCancel" data-hotel_info="{{hotel_info}}" bindconfirm='modalConfirm'>
+<modal show="{{wifiErr.is_open==1 ? true : false}}" width="650rpx" height='350rpx' border-radius="10rpx" title-text='提示' title-color="#333333" title-background-color="unset" title-border-radius="0rpx" confirm-text='{{wifiErr.confirm}}' confirm-color="#FFFFFF"
+  confirm-background-color="#1cbeb6" confirm-border-radius="10rpx" cancel-text='{{wifiErr.cancel}}' cancel-color='#FFFFFF' cancel-background-color="#333333" cancel-border-radius="10rpx" bindcancel="modalCancel" data-hotel_info="{{hotel_info}}" bindconfirm='modalConfirm'>
   <view class="theme-font1" style="padding:0 20rpx;font-size:24rpx;">{{wifiErr.msg}}</view>
 </modal>
 <!-- 固定悬浮按钮组 -->
