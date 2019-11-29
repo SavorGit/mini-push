@@ -251,6 +251,7 @@ Page({
     openid: '',
     pageType: 0, // 页面类型。0：视频：1：图片。
     isShowMediaPlayButton: true, // 是否显示播放按钮
+    isShowMediaLoading: false, // 是否展示 Loading
     mediaScrollIndex: 0, //当前页面的索引值
     playProgress: [],
     mediaObjectList: [], // 视频列表
@@ -285,6 +286,9 @@ Page({
 
     // 加载数据
     SavorUtils.Page.loadMediaData(self);
+    self.setData({
+      isShowMediaPlayButton: false
+    });
     wx.createVideoContext('JohnVideo0').play();
     wx.setNavigationBarColor({
       frontColor: '#ffffff',
@@ -367,6 +371,9 @@ Page({
     delete touchEvent["touchEnd"];
 
     wx.createVideoContext('JohnVideo' + lastScrollIndex).pause();
+    self.setData({
+      isShowMediaPlayButton: false
+    });
     wx.createVideoContext('JohnVideo' + mediaScrollIndex).play();
     if (self.data.mediaObjectList.length - 1 == self.data.mediaScrollIndex) {
       SavorUtils.Page.loadMediaData(self);
@@ -391,18 +398,12 @@ Page({
   onVideoPlay: function(e) {
     let self = this;
     // console.log('onVideoPlay', e);
-    self.setData({
-      isShowMediaPlayButton: false
-    });
   },
 
   // 当暂停播放时触发 pause 事件
   onVideoPause: function(e) {
     let self = this;
     // console.log('onVideoPause', e);
-    self.setData({
-      isShowMediaPlayButton: true
-    });
   },
 
   // 当播放到末尾时触发 ended 事件
@@ -434,9 +435,16 @@ Page({
 
   // 视频出现缓冲时触发
   onVideoWaiting: function(e) {
+    let self = this;
+    self.setData({
+      isShowMediaLoading: true
+    });
     // console.log('onVideoWaiting', e);
     wx.onNetworkStatusChange(function(res) {
       if (res.isConnected == false) {
+        self.setData({
+          isShowMediaLoading: false
+        });
         wx.showToast({
           title: '网络已断开',
           icon: 'none',
@@ -448,16 +456,26 @@ Page({
 
   // 加载进度
   onLoadProgress: function(e) {
+    let self = this;
     // console.log('onLoadProgress', e);
     // wx.hideLoading();
+    self.setData({
+      isShowMediaLoading: false
+    });
   },
 
   // 点击播放按钮
   onClickVideoPalyButton: function(e) {
     let self = this;
     if (self.data.isShowMediaPlayButton == true) {
+      self.setData({
+        isShowMediaPlayButton: false
+      });
       wx.createVideoContext('JohnVideo' + self.data.mediaScrollIndex).play();
     } else {
+      self.setData({
+        isShowMediaPlayButton: true
+      });
       wx.createVideoContext('JohnVideo' + self.data.mediaScrollIndex).pause();
     }
   },
@@ -556,6 +574,33 @@ Page({
       });
     }
   }, //电视播放结束
+
+  // 点击进入满地页 - 图片
+  onInputPictureDetail: function(e) {
+    let self = this;
+    let boxMac = e.currentTarget.dataset.box_mac;
+    let index = e.currentTarget.dataset.index;
+    let pictureObject = self.data.pictureObjectList[index];
+    let forscreenId = pictureObject.forscreen_id;
+    wx.navigateTo({
+      url: '/pages/find/picture?forscreen_id=' + forscreenId + '&box_mac=' + boxMac
+    })
+  },
+
+  //预览图片
+  previewImages: function(e) {
+    let self = this;
+    let pictures = e.target.dataset.pictures;
+    let pictureIndex = e.target.dataset.picture_index;
+    let urls = [];
+    for (let row in pictures) {
+      urls[row] = pictures[row]['res_url']
+    }
+    wx.previewImage({
+      current: urls[pictureIndex], // 当前显示图片的http链接
+      urls: urls // 需要预览的图片http链接列表
+    })
+  },
 
   // 加载更多图片
   loadMorePictures: function(e) {
