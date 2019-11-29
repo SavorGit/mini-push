@@ -13,20 +13,25 @@
     <scroll-view class="page-body" scroll-y="true" scroll-with-animation="true" bindscrolltolower="loadMorePictures">
       <view class="card theme-panel" wx:for="{{pictureObjectList}}" wx:key="key" wx:for-item="bean" wx:for-index="index">
         <block wx:if="{{bean.res_type == 1}}">
-          <view class="body flex-row-flex_start-start">
-            <image class="user-hader-img" src="{{bean.avatarUrl == '' ? 'http://oss.littlehotspot.com/Html5/favicon.ico' : bean.avatarUrl}}"></image>
-            <view class="right">
-              <view class="user-nickname theme-font-000000">{{bean.nickName}}</view>
-              <view class="desc theme-font2">{{bean.content}}</view>
-              <view class="pic-group weui-grids">
+          <view class="body flex-column-flex_start-start">
+            <view class="user flex-row-center-flex_start" data-index="{{index}}" data-box_mac="{{box_mac}}" bindtap="onInputPictureDetail">
+              <image class="hader-img" src="{{bean.avatarUrl == '' ? 'http://oss.littlehotspot.com/Html5/favicon.ico' : bean.avatarUrl}}"></image>
+              <view class="nickname one-line-overflow theme-font-000000">{{bean.nickName}}</view>
+            </view>
+            <view wx:if="{{bean.content != ''}}" class="desc theme-font2" data-index="{{index}}" data-box_mac="{{box_mac}}" bindtap="onInputPictureDetail">{{bean.content}}</view>
+            <view class="main flex-row-center-flex_start">
+              <view class="grid-space-left pic-size-{{bean.pubdetail.length}}" data-index="{{index}}" data-box_mac="{{box_mac}}" bindtap="onInputPictureDetail"></view>
+              <view class="weui-grids">
                 <view class="weui-grid pic-size-{{bean.pubdetail.length}}" wx:for="{{bean.pubdetail}}" wx:key="picKey" wx:for-item="pic" wx:for-index="picIndex">
-                  <image mode="aspectFill" src="{{pic.img_url}}"></image>
+                  <image mode="aspectFill" src="{{pic.img_url}}" data-pictures="{{bean.pubdetail}}" data-picture_index="{{index}}" bindtap="previewImages"></image>
                 </view>
+                <view wx:if="{{bean.pubdetail.length == 5}}" class="weui-grid pic-size-{{bean.pubdetail.length}}" data-index="{{index}}" data-box_mac="{{box_mac}}" bindtap="onInputPictureDetail"></view>
+                <view class="grid-space-right pic-size-{{bean.pubdetail.length}}" data-index="{{index}}" data-box_mac="{{box_mac}}" bindtap="onInputPictureDetail"></view>
               </view>
             </view>
           </view>
           <view class="foot flex-row-center-space_between theme-font3">
-            <view wx:if='{{bean.hotel_name != ""}}' class="time-hotel">{{bean.create_time}}.{{bean.hotel_name}}</view>
+            <view wx:if='{{bean.hotel_name != ""}}' class="time-hotel" data-index="{{index}}" data-box_mac="{{box_mac}}" bindtap="onInputPictureDetail">{{bean.create_time}}.{{bean.hotel_name}}</view>
             <view wx:if="{{bean.isOpen == true}}" class="btn-group flex-row-center-space_between theme-panel-pop-menu-dark">
               <view class="launch-tv" bindtap='boxShow' data-forscreen_id="{{bean.forscreen_id}}" data-index="{{index}}">电视播放</view>
               <view class="flex-row-center-space_around">
@@ -76,6 +81,9 @@
               <view class="video-option-area flex-column-center-center">
                 <view wx:if="{{isShowMediaPlayButton}}" class="btn-play flex-row-center-center">
                   <view class="fa fa-play"></view>
+                </view>
+                <view wx:if="{{isShowMediaLoading}}" class="btn-play flex-row-center-center">
+                  <view class="fa fa-refresh fa-spin"></view>
                 </view>
               </view>
               <view class="right-btn-group flex-column-center-flex_start fadeInRight">
