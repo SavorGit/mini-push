@@ -119,7 +119,7 @@
     <view class="weui-grids">
       <view wx:for="{{hot_play}}" wx:key="item" wx:for-index="index" wx:for-item="bean" class="weui-grid">
         <view class="card">
-          <image src="{{bean.pubdetail[0].img_url}}"></image>
+          <image mode="aspectFill" src="{{bean.pubdetail[0].img_url}}"></image>
           <view class="flex-row-center-space_between">
             <view class="user flex-row-center-space_between">
               <image src="{{bean.avatarUrl}}"></image>
