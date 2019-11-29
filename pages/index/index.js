@@ -117,35 +117,7 @@ Page({
           box_mac = '';
         }
       });
-      // wx.request({
-      //   url: api_url + '/Smallapp4/index/isHaveCallBox?openid=' + app.globalData.openid,
-      //   headers: {
-      //     'Content-Type': 'application/json'
-      //   },
-      //   success: function(rest) {
-      //     var is_have = rest.data.result.is_have;
-      //     if (is_have == 1) { //已经扫码链接电视
-      //       app.linkHotelWifi(rest.data.result, that);
-      //       that.setData({
-      //         is_link: 1,
-      //         hotel_room: rest.data.result.hotel_name + rest.data.result.room_name,
-      //         hotel_name: rest.data.result.hotel_name,
-      //         room_name: rest.data.result.room_name,
-      //         box_mac: rest.data.result.box_mac,
-      //         hotel_info: rest.data.result,
-      //         hotel_info_json: JSON.stringify(rest.data.result),
-      //       })
-      //       box_mac = rest.data.result.box_mac;
-      //       //getHotelInfo(rest.data.result.box_mac);
-      //     } else {
-      //       that.setData({
-      //         is_link: 0,
-      //         box_mac: '',
-      //       })
-      //       box_mac = '';
-      //     }
-      //   }
-      // });
+      
       //是否显示活动
       isShowAct(app.globalData.openid);
     } else {
@@ -1109,15 +1081,25 @@ Page({
   onShow: function() {
 
     var that = this;
-    if (app.globalData.openid && app.globalData.openid != '') {
+    var user_info = wx.getStorageSync(cache_key+"user_info");
+    if(typeof(user_info.openid)!='undefined'){
       utils.PostRequest(api_url + '/Smallapp4/index/isHaveCallBox', {
-        openid: app.globalData.openid
+        openid: user_info.openid
       }, (data, headers, cookies, errMsg, statusCode) => {
         if (data.result.is_have == 1) {
-
+          that.setData({
+            is_link: 1,
+            hotel_room: data.result.hotel_name + data.result.room_name,
+            hotel_name: data.result.hotel_name,
+            room_name: data.result.room_name,
+            box_mac: data.result.box_mac,
+            hotel_info: data.result,
+            hotel_info_json: JSON.stringify(data.result),
+          })
+          box_mac = data.result.box_mac;
         } else {
           app.globalData.link_type = 1;
-          box_mac= ''
+          box_mac = ''
           that.setData({
             is_link: 0,
             box_mac: '',
@@ -1126,27 +1108,9 @@ Page({
 
         }
         //console.log(data);
-        }, re => { }, { isShowLoading: false });
-    } else {
-      app.openidCallback = openid => {
-        utils.PostRequest(api_url + '/Smallapp4/index/isHaveCallBox', {
-          openid: openid
-        }, (data, headers, cookies, errMsg, statusCode) => {
-          if (data.result.is_have == 1) {
-
-          } else {
-            box_mac = ''
-            app.globalData.link_type = 1;
-            that.setData({
-              is_link:0,
-              box_mac: '',
-              link_type:1
-            })
-
-          }
-        },re => { }, { isShowLoading: false });
-      }
+      }, re => { }, { isShowLoading: false });
     }
+    
 
     //this.onLoad()
   },
