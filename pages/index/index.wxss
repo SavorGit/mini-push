@@ -210,9 +210,14 @@
 
 .recommend-panel > .weui-grids > .weui-grid > .card > .flex-row-center-space_between {
   width: calc(100% - 45rpx);
-  height: 60rpx;
+  height: 58rpx;
   padding-left: 25rpx;
   padding-right: 20rpx;
+}
+
+.recommend-panel > .weui-grids > .weui-grid > .card > .flex-row-center-space_between:last-child {
+  border-top: 2rpx solid #fff;
+  height: 60rpx;
 }
 
 .recommend-panel > .weui-grids > .weui-grid > .card > .flex-row-center-space_between > .rank {
