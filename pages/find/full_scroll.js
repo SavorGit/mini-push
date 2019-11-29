@@ -169,7 +169,7 @@ let SavorUtils = {
   Page: {
 
     // 加载视频数据
-    loadMediaData: function(pageContext) {
+    loadMediaData: pageContext => {
       let user_info = wx.getStorageSync("savor_user_info");
       let pageNo = ++pageContext.data.mediaPageNo;
       utils.PostRequest(api_url + '/Smallapp4/find/videos', {
@@ -197,7 +197,7 @@ let SavorUtils = {
     },
 
     // 加载图片数据
-    loadPictureData: function(pageContext) {
+    loadPictureData: pageContext => {
       let user_info = wx.getStorageSync("savor_user_info");
       let pageNo = ++pageContext.data.picturePageNo;
       utils.PostRequest(api_url + '/Smallapp4/find/images', {
@@ -223,6 +223,23 @@ let SavorUtils = {
         });
       });
     },
+
+    // 初始化页面数据
+    initPageData: pageContext => {
+      SavorUtils.Page.loadMediaData(pageContext);
+      pageContext.setData({
+        isShowMediaPlayButton: false
+      });
+      wx.createVideoContext('JohnVideo0').play();
+      wx.setNavigationBarColor({
+        frontColor: '#ffffff',
+        backgroundColor: '#000000',
+        animation: {
+          duration: 30,
+          timingFunc: 'linear'
+        }
+      });
+    }
   },
 
   Netty: {
@@ -285,19 +302,7 @@ Page({
     }
 
     // 加载数据
-    SavorUtils.Page.loadMediaData(self);
-    self.setData({
-      isShowMediaPlayButton: false
-    });
-    wx.createVideoContext('JohnVideo0').play();
-    wx.setNavigationBarColor({
-      frontColor: '#ffffff',
-      backgroundColor: '#000000',
-      animation: {
-        duration: 30,
-        timingFunc: 'linear'
-      }
-    });
+    SavorUtils.Page.initPageData(self)
   },
 
   /**
@@ -491,6 +496,14 @@ Page({
         pageType: 1
       });
     }
+    wx.setNavigationBarColor({
+      frontColor: '#000000',
+      backgroundColor: '#ffffff',
+      animation: {
+        duration: 30,
+        timingFunc: 'linear'
+      }
+    });
     mta.Event.stat('findSwichPic', {
       'openid': self.data.openid
     })
@@ -507,6 +520,14 @@ Page({
         pageType: 0
       });
     }
+    wx.setNavigationBarColor({
+      frontColor: '#ffffff',
+      backgroundColor: '#000000',
+      animation: {
+        duration: 30,
+        timingFunc: 'linear'
+      }
+    });
     wx.createVideoContext('JohnVideo' + self.data.mediaScrollIndex).play();
   },
 
