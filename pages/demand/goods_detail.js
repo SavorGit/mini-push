@@ -61,9 +61,14 @@ Page({
       uid: uid,
       goods_id: goods_id,
       openid: openid,
-    }, (data, headers, cookies, errMsg, statusCode) => that.setData({
-      goods_info: data.result
-    }));
+    }, (data, headers, cookies, errMsg, statusCode) => {
+      goods_info = data.result
+      that.setData({
+        goods_info: data.result
+      })
+    }
+      
+    );
     // wx.request({
     //   // url: api_url + '/Smallapp3/optimize/detail',
     //   url: api_url + '/Smallapp4/optimize/detail',
@@ -175,23 +180,26 @@ Page({
 
 
     app.boxShow(box_mac, forscreen_id, pubdetail, res_type, res_nums, 5, hotel_info);
-
-    // 调用记录播放次数接口
-    utils.PostRequest(api_url + '/Smallapp4/demand/recordPlaynum', {
-      openid: openid,
-      res_id: forscreen_id
-    }, (data, headers, cookies, errMsg, statusCode) => {
-      let goods_info = self.data.goods_info;
-      goods_info.play_num = data.result.play_num;
-      self.setData({
-        goods_info: goods_info
+    if(box_mac){
+      // 调用记录播放次数接口
+      utils.PostRequest(api_url + '/Smallapp4/demand/recordPlaynum', {
+        openid: openid,
+        res_id: forscreen_id
+      }, (data, headers, cookies, errMsg, statusCode) => {
+        let goods_info = self.data.goods_info;
+        goods_info.play_num = data.result.play_num;
+        self.setData({
+          goods_info: goods_info
+        });
       });
-    });
+    }
+    
 
   },
   //收藏资源
   onCollect: function(e) {
     var that = this;
+    console.log(e);
     //var openid = e.target.dataset.openid;
     var res_id = e.target.dataset.res_id;
     var user_info = wx.getStorageSync('savor_user_info');
@@ -203,6 +211,7 @@ Page({
       'type': res_type,
       'status': 1,
     }, (data, headers, cookies, errMsg, statusCode) => {
+      console.log(goods_info);
       goods_info.is_collect = 1;
       goods_info.collect_num = data.result.nums;
       that.setData({
