@@ -1,6 +1,19 @@
 <!--pages/demand/goods_detail.wxml-->
 <import src="/pages/template/commons" />
-<template wx:if="{{is_header==0}}" is="navigationBarForTwoLevel" data='{{statusBarHeight: statusBarHeight,titleText:goods_info.name}}' />
+<!-- <template wx:if="{{is_header==0}}" is="navigationBarForTwoLevel" data='{{statusBarHeight: statusBarHeight,titleText:goods_info.name}}' /> -->
+<view wx:if="{{is_header==0}}" class='default-navigation-bar theme-navigation'>
+  <view class='status-bar' style='height:{{statusBarHeight}}px;'></view>
+  <view class='navigation-bar flex-row-center-flex_start'>
+    <view class='btn flex-row-center-flex_start' style="width:35px;">
+      <navigator class='go-back' open-type='navigateBack' delta='1'>
+        <label class="fa fa-angle-left fa-2x" title="Back"></label>
+      </navigator>
+    </view>
+    <view class='title flex-column-center-space_between'>
+      <label class='text one-line-overflow' style="width:450rpx;">{{goods_info.name}}</label>
+    </view>
+  </view>
+</view>
 <template wx:if="{{is_header==1}}" is="navigationBarForShare" data='{{statusBarHeight: statusBarHeight,titleText:goods_info.name}}' />
 
 <!-- <view class="container flex-column-center-flex_start theme-container" style='height: calc(100vh - 46px - {{statusBarHeight}}px);'> -->
