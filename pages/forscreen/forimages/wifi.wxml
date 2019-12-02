@@ -58,7 +58,7 @@
   <view class='full_width page-bottom flex-column-center-center theme-panel-2'>
     <view class='button_group flex-row-center-space_between'>
       <button class='savor-btn theme-button-dark' data-intranet_ip='{{intranet_ip}}' data-boxmac="{{box_mac}}" data-openid="{{openid}}" bindtap="chooseImage">重选照片</button>
-      <button class='savor-btn theme-button-dark' data-intranet_ip='{{intranet_ip}}' data-boxmac="{{box_mac}}" data-openid="{{openid}}" bindtap="exitForscreen">退出投屏</button>
+      <button class='savor-btn theme-button-dark' data-intranet_ip='{{intranet_ip}}' data-boxmac="{{box_mac}}" data-openid="{{openid}}" bindtap="exitForscreend">退出投屏</button>
     </view>
   </view>
 </view>

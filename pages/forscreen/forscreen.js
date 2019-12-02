@@ -24,6 +24,9 @@ Page({
         })
       }
     })
+    wx.showToast({
+      title: '扫码中，请稍后',
+    })
     var sysconfig = wx.getStorageSync("savor_now_time");
     nowtime = sysconfig.sys_time;
     
