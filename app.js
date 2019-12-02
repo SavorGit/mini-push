@@ -1019,6 +1019,7 @@ App({
     cache_key:'savor_',
     min_sdk_version:'1.6.0',
     wifiErr: { 'is_open': 0, 'msg': '','confirm':'确定','calcle':'取消','type':0 },
+    hotel_info:{},
     optimize_data:[],    //优选列表
     public_list:[],      //我的公开
     collect_list:[],     //我的收藏 

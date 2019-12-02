@@ -56,9 +56,14 @@ Page({
     console.log(app.globalData.optimize_data);
     
     let self = this;
-    self.setData({
-      program_list: app.globalData.optimize_data
-    })
+    if(app.globalData.link_type==2){
+      self.setData({
+        program_list: app.globalData.optimize_data,
+        hotel_info: app.globalData.hotel_info
+      })
+      
+    }
+    
     if (app.globalData.openid && app.globalData.openid != '') {
       //注册用户
       self.setData({

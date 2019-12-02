@@ -87,6 +87,7 @@ Page({
         var is_have = data.result.is_have;
         if (is_have == 1) { //已经扫码链接电视
           app.linkHotelWifi(data.result, that);
+          app.globalData.hotel_info = data.result;
           that.setData({
             is_link: 1,
             hotel_room: data.result.hotel_name + data.result.room_name,
