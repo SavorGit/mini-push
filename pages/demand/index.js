@@ -53,6 +53,7 @@ Page({
 
   onLoad: function() {
     //wx.hideShareMenu();
+    console.log(app.globalData.optimize_data);
     let self = this;
     if (app.globalData.openid && app.globalData.openid != '') {
       //注册用户
@@ -88,7 +89,6 @@ Page({
           page: page,
           openid: openid,
         }, (boxData, boxHeaders, boxCookies, boxErrMsg, boxStatusCode) => {
-          console.log(boxData.result);
           program_list = boxData.result
           self.setData({
             program_list: boxData.result
@@ -113,86 +113,7 @@ Page({
     }, (data, headers, cookies, errMsg, statusCode) => self.setData({
       imgUrls: data.result
     }));
-    // wx.request({
-    //   url: api_url + '/Smallapp4/index/isHaveCallBox?openid=' + openid,
-    //   headers: {
-    //     'Content-Type': 'application/json'
-    //   },
-
-    //   success: function(rest) {
-    //     var is_have = rest.data.result.is_have;
-    //     if (is_have == 1) {
-    //       app.linkHotelWifi(rest.data.result, self);
-    //       self.setData({
-    //         box_mac: rest.data.result.box_mac,
-    //         is_open_simple: rest.data.result.is_open_simple,
-    //         hotel_info: rest.data.result,
-    //       });
-    //       box_mac = rest.data.result.box_mac;
-    //       //获取节目单列表
-    //       wx.request({ //获取机顶盒节目单列表
-    //         // url: api_url + '/Smallapp3/optimize/getOptimizeList',
-    //         url: api_url + '/Smallapp4/optimize/getOptimizeList',
-    //         header: {
-    //           'Content-Type': 'application/json'
-    //         },
-    //         data: {
-    //           box_mac: box_mac,
-    //           page: page,
-    //           openid: openid,
-    //         },
-    //         method: "POST",
-    //         success: function(res) {
-    //           console.log(res.data.result);
-    //           program_list = res.data.result
-    //           self.setData({
-    //             program_list: res.data.result
-    //           })
-    //         }
-    //       })
-    //     } else {
-    //       //获取小程序主节目单列表
-    //       wx.request({
-    //         // url: api_url + '/Smallapp3/optimize/getOptimizeList',
-    //         url: api_url + '/Smallapp4/optimize/getOptimizeList',
-    //         data: {
-    //           page: page,
-    //           openid: openid,
-    //         },
-    //         header: {
-    //           'content-type': 'application/json'
-    //         },
-    //         success: function(res) {
-    //           if (res.data.code == 10000) {
-    //             program_list = res.data.result
-    //             self.setData({
-    //               program_list: res.data.result,
-    //             })
-
-    //           }
-    //         }
-    //       });
-    //       self.setData({
-    //         box_mac: '',
-    //       })
-    //       box_mac = '';
-    //     }
-    //   }
-    // })
-    // wx.request({
-    //   url: api_url + '/Smallapp3/Adsposition/getAdspositionList',
-    //   data: {
-    //     position: 1,
-    //   },
-    //   success: function(res) {
-    //     if (res.data.code == 10000) {
-    //       var imgUrls = res.data.result;
-    //       self.setData({
-    //         imgUrls: res.data.result
-    //       })
-    //     }
-    //   }
-    // })
+    
 
   },
   //遥控呼大码
@@ -248,7 +169,6 @@ Page({
     app.controlChangeProgram(openid, box_mac, change_type, hotel_info, that);
   },
   modalConfirm: function(e) {
-    console.log(e);
     var that = this;
     var hotel_info = e.target.dataset.hotel_info;
     app.linkHotelWifi(hotel_info, that);
@@ -274,7 +194,6 @@ Page({
           })
           box_mac = '';
         }
-        //console.log(data);
       }, re => { }, { isShowLoading: false });
     } else {
       app.openidCallback = openid => {

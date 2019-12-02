@@ -71,30 +71,18 @@ Page({
           'openid': app.globalData.openid
         }
       }));
-      // wx.request({
-      //   url: api_url + '/smallapp21/User/isRegister',
-      //   data: {
-      //     "openid": app.globalData.openid,
-      //     "page_id": 3
-      //   },
-      //   header: {
-      //     'content-type': 'application/json'
-      //   },
-      //   success: function(res) {
-      //     wx.setStorage({
-      //       key: 'savor_user_info',
-      //       data: res.data.result.userinfo,
-      //     })
-      //   },
-      //   fail: function(e) {
-      //     wx.setStorage({
-      //       key: 'savor_user_info',
-      //       data: {
-      //         'openid': app.globalData.openid
-      //       },
-      //     })
-      //   }
-      // }); //判断用户是否注册结束
+      utils.PostRequest(api_url + '/Smallapp4/content/initdata', {
+        "openid": app.globalData.openid,
+        
+      }, (data, headers, cookies, errMsg, statusCode) => {
+        console.log('sss');
+        app.globalData.optimize_data = data.result.optimize_data;
+        app.globalData.public_list = data.result.public_list;
+        app.globalData.collect_list = data.result.collect_list;
+      }, res => {
+
+      });
+      
       utils.PostRequest(api_url + '/Smallapp4/index/isHaveCallBox?openid=' + app.globalData.openid, {}, (data, headers, cookies, errMsg, statusCode) => {
         var is_have = data.result.is_have;
         if (is_have == 1) { //已经扫码链接电视
@@ -129,7 +117,7 @@ Page({
           openid = openid;
           //判断用户是否注册
           utils.PostRequest(api_url + '/smallapp21/User/isRegister', {
-            "openid": app.globalData.openid,
+            "openid": openid,
             "page_id": 3
           }, (data, headers, cookies, errMsg, statusCode) => wx.setStorage({
             key: 'savor_user_info',
@@ -140,35 +128,18 @@ Page({
               'openid': openid
             },
           }));
-          // wx.request({
-          //   url: api_url + '/smallapp21/User/isRegister',
-          //   data: {
-          //     "openid": app.globalData.openid,
-          //     "page_id": 3
-          //   },
-          //   header: {
-          //     'content-type': 'application/json'
-          //   },
-          //   success: function(res) {
-          //     wx.setStorage({
-          //       key: 'savor_user_info',
-          //       data: res.data.result.userinfo,
-          //     })
-          //     if (res.data.result.userinfo.is_wx_auth != 3) {
-          //       /*that.setData({
-          //         showModal: true
-          //       })*/
-          //     }
-          //   },
-          //   fail: function(e) {
-          //     wx.setStorage({
-          //       key: 'savor_user_info',
-          //       data: {
-          //         'openid': openid
-          //       },
-          //     })
-          //   }
-          // }); //判断用户是否注册结束
+          utils.PostRequest(api_url + '/Smallapp4/content/initdata', {
+            "openid": openid,
+
+          }, (data, headers, cookies, errMsg, statusCode) => {
+            console.log('dddd');
+            app.globalData.optimize_data = data.result.optimize_data;
+            app.globalData.public_list = data.result.public_list;
+            app.globalData.collect_list = data.result.collect_list;
+          }, res => {
+
+          });
+          
           utils.PostRequest(api_url + '/Smallapp4/index/isHaveCallBox?openid=' + openid, {}, (data, headers, cookies, errMsg, statusCode) => {
             var is_have = data.result.is_have;
             if (is_have == 1) {

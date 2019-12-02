@@ -55,7 +55,7 @@
         <input class="display_hide" name="wifi_mac" value="{{hotel_info.wifi_mac}}"></input>
         <input class="display_hide" name="wifi_name" value="{{hotel_info.wifi_name}}"></input>
         <input class="display_hide" name="wifi_password" value="{{hotel_info.wifi_password}}"></input>
-        <button class="theme-font2" form-type="submit">
+        <button disabled="{{link_type>0?false:true}}" class="theme-font2" form-type="submit">
           <view class="icon flex-column-center-center pic">
             <image src='/images/icon2/FFFFFF_picture.png'></image>
           </view>
@@ -69,7 +69,7 @@
         <input class="display_hide" name="wifi_mac" value="{{hotel_info.wifi_mac}}"></input>
         <input class="display_hide" name="wifi_name" value="{{hotel_info.wifi_name}}"></input>
         <input class="display_hide" name="wifi_password" value="{{hotel_info.wifi_password}}"></input>
-        <button class="theme-font2" form-type="submit">
+        <button disabled="{{link_type>0?false:true}}" class="theme-font2" form-type="submit">
           <view class="icon flex-column-center-center video">
             <image src='/images/icon2/FFFFFF_video.png'></image>
           </view>
@@ -80,7 +80,13 @@
         <input class="display_hide" name="boxmac" value="{{box_mac}}"></input>
         <input class="display_hide" name="openid" value="{{openid}}"></input>
         <input class="display_hide" name="is_open_simple" value="{{is_open_simple}}"></input>
-        <button disabled="{{link_type==2?true:false}}" class="theme-font2" form-type="submit">
+        <button wx:if="{{link_type==0 || link_type==2}}" disabled="true" class="theme-font2" form-type="submit">
+          <view class="icon flex-column-center-center file">
+            <image src='/images/icon2/FFFFFF_files.png'></image>
+          </view>
+          <label>文件上电视</label>
+        </button>
+        <button wx:else class="theme-font2" form-type="submit">
           <view class="icon flex-column-center-center file">
             <image src='/images/icon2/FFFFFF_files.png'></image>
           </view>
@@ -89,19 +95,43 @@
       </form>
     </view>
     <view class="row flex-row-center-space_around full_width">
-      <view class="theme-font2" bindtap='showHappy' data-boxmac="{{box_mac}}" data-openid="{{openid}}" data-intranet_ip="{{hotel_info.intranet_ip}}">
+      <botton wx:if="{{link_type==0 || link_type==2}}" disabled="true"  class="theme-font2" bindtap='showHappy' data-boxmac="{{box_mac}}" data-openid="{{openid}}" data-intranet_ip="{{hotel_info.intranet_ip}}">
         <view class="icon flex-column-center-center birthday">
           <image src='/images/icon2/FFFFFF_birthday.png'></image>
         </view>
         <label>生日歌点播</label>
-      </view>
-      <button class="theme-font2" bindtap='hdgames' disabled="{{link_type==2?true:false}}" data-linkcontent='/pages/game/climbtree/index' data-boxmac="{{box_mac}}" data-openid="{{openid}}">
+      </botton>
+      <botton wx:else  class="theme-font2" bindtap='showHappy' data-boxmac="{{box_mac}}" data-openid="{{openid}}" data-intranet_ip="{{hotel_info.intranet_ip}}">
+        <view class="icon flex-column-center-center birthday">
+          <image src='/images/icon2/FFFFFF_birthday.png'></image>
+        </view>
+        <label>生日歌点播</label>
+      </botton>
+      <!-- <button class="theme-font2" bindtap='hdgames' disabled="{{link_type==2?true:false}}" data-linkcontent='/pages/game/climbtree/index' data-boxmac="{{box_mac}}" data-openid="{{openid}}">
+        <view class="icon flex-column-center-center game">
+          <image src='/images/icon2/FFFFFF_game.png'></image>
+        </view>
+        <label>互动小游戏</label>
+      </button> -->
+      <button class="theme-font2" bindtap='hdgames' wx:if="{{link_type==0 || link_type==2}}" disabled="true" data-linkcontent='/pages/game/climbtree/index' data-boxmac="{{box_mac}}" data-openid="{{openid}}">
         <view class="icon flex-column-center-center game">
           <image src='/images/icon2/FFFFFF_game.png'></image>
         </view>
         <label>互动小游戏</label>
       </button>
-      <button class="theme-font2" bindtap='forscreenHistory' disabled="{{link_type==2?true:false}}" data-boxmac="{{box_mac}}" data-openid="{{openid}}">
+      <button class="theme-font2" bindtap='hdgames' wx:if="{{link_type==1 }}" data-linkcontent='/pages/game/climbtree/index' data-boxmac="{{box_mac}}" data-openid="{{openid}}">
+        <view class="icon flex-column-center-center game">
+          <image src='/images/icon2/FFFFFF_game.png'></image>
+        </view>
+        <label>互动小游戏</label>
+      </button>
+      <button class="theme-font2" bindtap='forscreenHistory'  wx:if="{{link_type==0 || link_type==2}}" disabled="true"  data-boxmac="{{box_mac}}" data-openid="{{openid}}">
+        <view class="icon flex-column-center-center history">
+          <image src='/images/icon2/FFFFFF_history.png'></image>
+        </view>
+        <label>投屏历史</label>
+      </button>
+      <button class="theme-font2" bindtap='forscreenHistory'  wx:if="{{link_type==1}}"   data-boxmac="{{box_mac}}" data-openid="{{openid}}">
         <view class="icon flex-column-center-center history">
           <image src='/images/icon2/FFFFFF_history.png'></image>
         </view>

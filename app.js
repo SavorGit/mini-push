@@ -792,6 +792,7 @@ App({
 
   linkHotelWifi:function(hotel_info,that){
     var aps = this;
+    console.log(hotel_info);
     var is_minimal = wx.getStorageSync(aps.globalData.cache_key + 'is_minimal');//是否扫码标准版
     var room_ssid = hotel_info.wifi_name;
     if (typeof (is_minimal) == 'undefined' || is_minimal == '') {//非极简版
@@ -801,6 +802,7 @@ App({
         
       } else {//后台推荐用标准版 
         //不做任何改变
+        aps.globalData.link_type = 1;
         that.setData({
           link_type: 1,
           wifiErr: { 'is_open': 0, 'msg': '', 'confirm': '确定', 'calcle': '取消', 'type': 0 },
@@ -1006,10 +1008,13 @@ App({
     oss_url: 'https://dev-oss.littlehotspot.com',
     oss_bucket: 'redian-produce',
     oss_access_key_id: 'LTAITBjXOpORHKfXlOX',
-    link_type:1,  //1:外网投屏  2：直连投屏
+    link_type:0,  //1:外网投屏  2：直连投屏
     sys_info: wx.getSystemInfoSync(),
     cache_key:'savor_',
     min_sdk_version:'1.6.0',
-    wifiErr: { 'is_open': 0, 'msg': '','confirm':'确定','calcle':'取消','type':0 }
+    wifiErr: { 'is_open': 0, 'msg': '','confirm':'确定','calcle':'取消','type':0 },
+    optimize_data:[],    //优选列表
+    public_list:[],      //我的公开
+    collect_list:[],     //我的收藏 
   }
 })

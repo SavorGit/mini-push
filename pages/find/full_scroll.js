@@ -46,7 +46,7 @@ let SavorUtils = {
     }),
 
     // 收藏/取消收藏
-    favorite: (pageContext, forscreenId, type, index, status) => utils.PostRequest(api_url + '/Smallapp/collect/recLogs', {
+    favorite: (pageContext, forscreenId, type, index, status) => utils.PostRequest(api_url + '/Smallapp4/collect/recLogs', {
       'openid': pageContext.data.openid,
       'res_id': forscreenId,
       'type': type,
