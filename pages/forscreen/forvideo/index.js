@@ -1104,7 +1104,7 @@ Page({
                   msg: '{ "action":2, "url": "' + res_list[i]['forscreen_url'] + '", "filename":"' + res_list[i]['filename'] + '","openid":"' + openid + '","resource_type":2,"video_id":"' + res_list[i]['resource_id'] + '","avatarUrl":"' + avatarUrl + '","nickName":"' + nickName + '","forscreen_id":'+forscreen_id+'}',
                 },
                 success: function (result) {
-                  if(result.data.code==10000){
+                  if(result.data.code!=10000){
                     wx.showToast({
                       title: '重投失败',
                       icon: 'none',

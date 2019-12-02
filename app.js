@@ -792,7 +792,7 @@ App({
 
   linkHotelWifi:function(hotel_info,that){
     var aps = this;
-    console.log(hotel_info);
+    
     var is_minimal = wx.getStorageSync(aps.globalData.cache_key + 'is_minimal');//是否扫码标准版
     var room_ssid = hotel_info.wifi_name;
     if (typeof (is_minimal) == 'undefined' || is_minimal == '') {//非极简版
@@ -823,102 +823,108 @@ App({
       var wifi_mac = hotel_info.wifi_mac;
       var use_wifi_password = hotel_info.wifi_password;
       var box_mac = hotel_info.box_mac
-
-      //第二步  判断当前连接的wifi是否为当前包间wifi
-      wx.startWifi({
-        success: function (res) {
-          wx.getConnectedWifi({
-            success: function (res) {
-              console.log(res);
-              if (res.errMsg == 'getConnectedWifi:ok') {
-                if (res.wifi.SSID == wifi_name) {//链接的是本包间wifi
-                  that.setData({
-                    link_type : 2,
-                    wifiErr: { 'is_open': 0, 'msg': '', 'confirm': '确定', 'calcle': '取消', 'type': 0 }
-                  })
-                  aps.globalData.link_type = 2;
-                  
-                } else {//链接的不是本包间wifi
-                  console.log('not this  room  wifi');
-                  aps.connectWifi(wifi_name, wifi_mac, use_wifi_password, box_mac,that);
-
-                }
-              } else {
-                //当前打开wifi 但是没有链接任何wifi
-                console.log('getConnectedWifi')
+      if(hotel_info.wifi_name!=''){
+        //第二步  判断当前连接的wifi是否为当前包间wifi
+        wx.startWifi({
+          success: function (res) {
+            wx.getConnectedWifi({
+              success: function (res) {
                 console.log(res);
-                aps.connectWifi(wifi_name, wifi_mac, use_wifi_password,box_mac, that);
-              }
-              wx.hideLoading()
-            }, fail: function (res) {
-              wx.hideLoading()
-              console.log('wx.getConnectedWifi.fail')
-              console.log(res);
-              
-              if (res.errCode == 12005) { //安卓特有  未打开wifi
-                that.setData({
-                  wifiErr: { 'is_open': 1, 'msg': '亲，使用此小程序前需要打开您手机的wifi,链接wifi投屏更快哦！', 'confirm': '确定', 'calcle': '取消', 'type': 1 }
-                })
-              } else if (res.errCode == 12006) {
-                that.setData({
-                  wifiErr: { 'is_open': 1, 'msg': '亲，使用此小程序前需要打开您手机的GPS定位,链接wifi投屏更快哦！', 'confirm': '确定', 'calcle': '取消', 'type': 2 }
-                })
-              } else if (res.errMsg =='getConnectedWifi:fail:currentWifi is null'){
-                that.setData({
-                  wifiErr: { 'is_open': 1, 'msg': '亲，使用此小程序前需要链接包间wifi,链接wifi投屏更快哦！', 'confirm': '重试', 'calcle': '', 'type': 3 }
-                })
-              } 
-              else if (res.errMsg =='getConnectedWifi:fail no wifi is connected.'){
-                that.setData({
-                  wifiErr: { 'is_open': 1, 'msg': '亲，使用此小程序前需要打开您手机的wifi,链接wifi投屏更快哦！', 'confirm': '确定', 'calcle': '取消', 'type': 1 }
-                })
-              } else if (res.errMsg =='getConnectedWifi:fail:not invoke startWifi'){
+                if (res.errMsg == 'getConnectedWifi:ok') {
+                  if (res.wifi.SSID == wifi_name) {//链接的是本包间wifi
+                    that.setData({
+                      link_type: 2,
+                      wifiErr: { 'is_open': 0, 'msg': '', 'confirm': '确定', 'calcle': '取消', 'type': 0 }
+                    })
+                    aps.globalData.link_type = 2;
 
-              } else if (res.errMsg =='connectWifi:fail:duplicated request'){
-                that.setData({
-                  wifiErr: { 'is_open': 1, 'msg': '亲，使用此小程序前需要打开您手机的wifi,链接wifi投屏更快哦！', 'confirm': '确定', 'calcle': '取消', 'type': 1 }
-                })
-                wx.showToast({
-                  title: 'wifi链接失败',
-                })
-              }
-              else {
-                if(hotel_info.wifi_password==''){
-                  var us_wifi_password = '空';
-                }else {
-                  var us_wifi_password = hotel_info.wifi_password;
+                  } else {//链接的不是本包间wifi
+                    console.log('not this  room  wifi');
+                    aps.connectWifi(wifi_name, wifi_mac, use_wifi_password, box_mac, that);
+
+                  }
+                } else {
+                  //当前打开wifi 但是没有链接任何wifi
+                  console.log('getConnectedWifi')
+                  console.log(res);
+                  aps.connectWifi(wifi_name, wifi_mac, use_wifi_password, box_mac, that);
                 }
-                var msg ='请连接wifi:'+hotel_info.wifi_name+',密码为'+us_wifi_password;
-                that.setData({
-                  wifiErr: { 'is_open': 1, 'msg': msg, 'confirm': '重试', 'type': 4 }
-                })
-              }
+                wx.hideLoading()
+              }, fail: function (res) {
+                wx.hideLoading()
+                console.log('wx.getConnectedWifi.fail')
+                console.log(res);
 
-              var err_info = JSON.stringify(res);
-              wx.request({
-                url: aps.globalData.api_url + '/Smallappsimple/Index/recordWifiErr',
-                data: {
-                  err_info: err_info,
-                  box_mac: hotel_info.box_mac
+                if (res.errCode == 12005) { //安卓特有  未打开wifi
+                  that.setData({
+                    wifiErr: { 'is_open': 1, 'msg': '亲，使用此小程序前需要打开您手机的wifi,链接wifi投屏更快哦！', 'confirm': '确定', 'calcle': '取消', 'type': 1 }
+                  })
+                } else if (res.errCode == 12006) {
+                  that.setData({
+                    wifiErr: { 'is_open': 1, 'msg': '亲，使用此小程序前需要打开您手机的GPS定位,链接wifi投屏更快哦！', 'confirm': '确定', 'calcle': '取消', 'type': 2 }
+                  })
+                } else if (res.errMsg == 'getConnectedWifi:fail:currentWifi is null') {
+                  that.setData({
+                    wifiErr: { 'is_open': 1, 'msg': '亲，使用此小程序前需要链接包间wifi,链接wifi投屏更快哦！', 'confirm': '重试', 'calcle': '', 'type': 3 }
+                  })
                 }
-              })
-              wx.stopWifi({
+                else if (res.errMsg == 'getConnectedWifi:fail no wifi is connected.') {
+                  that.setData({
+                    wifiErr: { 'is_open': 1, 'msg': '亲，使用此小程序前需要打开您手机的wifi,链接wifi投屏更快哦！', 'confirm': '确定', 'calcle': '取消', 'type': 1 }
+                  })
+                } else if (res.errMsg == 'getConnectedWifi:fail:not invoke startWifi') {
 
-              })
-            },
-          })
-        }, fail: function (res) {
-          //未获取成功 重试弹窗
-          wx.hideLoading()
-          wx.stopWifi({
+                } else if (res.errMsg == 'connectWifi:fail:duplicated request') {
+                  that.setData({
+                    wifiErr: { 'is_open': 1, 'msg': '亲，使用此小程序前需要打开您手机的wifi,链接wifi投屏更快哦！', 'confirm': '确定', 'calcle': '取消', 'type': 1 }
+                  })
+                  wx.showToast({
+                    title: 'wifi链接失败',
+                  })
+                }
+                else {
+                  if (hotel_info.wifi_password == '') {
+                    var us_wifi_password = '空';
+                  } else {
+                    var us_wifi_password = hotel_info.wifi_password;
+                  }
+                  var msg = '请连接wifi:' + hotel_info.wifi_name + ',密码为' + us_wifi_password;
+                  that.setData({
+                    wifiErr: { 'is_open': 1, 'msg': msg, 'confirm': '重试', 'type': 4 }
+                  })
+                }
 
-          })
-        },complete:function(res){
-          wx.stopWifi({
+                var err_info = JSON.stringify(res);
+                wx.request({
+                  url: aps.globalData.api_url + '/Smallappsimple/Index/recordWifiErr',
+                  data: {
+                    err_info: err_info,
+                    box_mac: hotel_info.box_mac
+                  }
+                })
+                wx.stopWifi({
 
-          })
-        }
-      })
+                })
+              },
+            })
+          }, fail: function (res) {
+            //未获取成功 重试弹窗
+            wx.hideLoading()
+            wx.stopWifi({
+
+            })
+          }, complete: function (res) {
+            wx.stopWifi({
+
+            })
+          }
+        })
+      }else {
+        that.setData({
+          wifiErr: { 'is_open': 1, 'msg': '亲，该包间电视暂不能投屏，请更换其他包间', 'confirm': '', 'type': 4 }
+        })
+      }
+      
     } else {//客户端基础库版本不支持链接wifi 直接使用标准版
       that.setData({
         link_type: 1,
