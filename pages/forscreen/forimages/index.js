@@ -382,6 +382,14 @@ Page({
 
             },
             success: function (result) {
+              if(result.data.code!=10000){
+                wx.showToast({
+                  title: '投屏失败!',
+                  icon:'none',
+                  duration:2000,
+
+                })
+              }
               wx.request({
                 url: api_url + '/Smallapp21/index/recordForScreenPics',
                 header: {
@@ -584,6 +592,14 @@ Page({
         msg: '{ "action": 2,"resource_type":1, "url": "' + forscreen_img + '", "filename":"' + filename + '","openid":"' + openid + '","avatarUrl":"' + avatarUrl + '","nickName":"' + nickName +'","forscreen_id":"'+forscreen_id+'"}',
       },
       success: function (result) {
+        if(result.data.code!=10000){
+          wx.showToast({
+            title: '投屏失败!',
+            icon: 'none',
+            duration: 2000,
+
+          })
+        }
         wx.request({
           url: api_url+'/Smallapp21/index/recordForScreenPics',
           header: {
@@ -760,16 +776,24 @@ Page({
                         msg: '{ "action": 4, "resource_type":2, "url":"' + url + '","filename":"' + filename + '","openid":"' + openid + '","img_nums":' + res_len + ',"forscreen_char":"' + forscreen_char + '","order":' + order + ',"forscreen_id":"' + forscreen_id + '","img_id":"' + res_id + '","avatarUrl":"' + avatarUrl + '","nickName":"' + nickName + '"}',
                       },
                       success: function (result) {
-
-                        wx.showToast({
-                          title: '重投成功,电视即将开始播放',
-                          icon: 'none',
-                          duration: 5000
-                        });
+                        if(result.data.code==10000){
+                          wx.showToast({
+                            title: '重投成功,电视即将开始播放',
+                            icon: 'none',
+                            duration: 5000
+                          });
+                        }else {
+                          wx.showToast({
+                            title: '网络异常,重投失败',
+                            icon: 'none',
+                            duration: 2000
+                          })
+                        }
+                        
                       },
                       fail: function (res) {
                         wx.showToast({
-                          title: '网络异常,点播失败',
+                          title: '网络异常,重投失败',
                           icon: 'none',
                           duration: 2000
                         })
@@ -819,16 +843,24 @@ Page({
                         msg: '{ "action":2, "url": "' + res_list[i]['forscreen_url'] + '", "filename":"' + res_list[i]['filename'] + '","openid":"' + openid + '","resource_type":2,"video_id":"' + res_list[i]['resource_id'] + '","avatarUrl":"' + avatarUrl + '","nickName":"' + nickName + '","forscreen_id":'+forscreen_id+'}',
                       },
                       success: function (result) {
-
-                        wx.showToast({
-                          title: '重投成功,电视即将开始播放',
-                          icon: 'none',
-                          duration: 2000
-                        });
+                        if(result.data.code==10000){
+                          wx.showToast({
+                            title: '重投成功,电视即将开始播放',
+                            icon: 'none',
+                            duration: 2000
+                          });
+                        }else {
+                          wx.showToast({
+                            title: '网络异常,重投失败',
+                            icon: 'none',
+                            duration: 2000
+                          })
+                        }
+                        
                       },
                       fail: function (res) {
                         wx.showToast({
-                          title: '网络异常,点播失败',
+                          title: '网络异常,重投失败',
                           icon: 'none',
                           duration: 2000
                         })
