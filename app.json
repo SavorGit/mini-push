@@ -59,6 +59,10 @@
     "backgroundColor": "#FFFFFF",
     "navigationStyle": "custom"
   },
+  "networkTimeout": {
+    "request": 15000,
+    "downloadFile": 15000
+  },
   "tabBar": {
     "color": "#999999",
     "selectedColor": "#000000",
