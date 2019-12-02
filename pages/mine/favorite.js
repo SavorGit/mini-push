@@ -59,7 +59,7 @@ Page({
       }
     })
     wx.request({
-      url: api_url+'/Smallapp3/User/getMyCollect',
+      url: api_url+'/Smallapp4/User/getMyCollect',
       headers: {
         'Content-Type': 'application/json'
       },
@@ -873,7 +873,7 @@ Page({
       hiddens: false,
     })
     wx.request({
-      url: api_url+'/smallapp3/user/getMyCollect',
+      url: api_url+'/smallapp4/user/getMyCollect',
       header: {
         'Content-Type': 'application/json'
       },
