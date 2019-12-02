@@ -629,6 +629,29 @@ Page({
     SavorUtils.Page.loadPictureData(self);
   },
 
+  // 加载默认头像 - 图片
+  loadingPicturesDefaultUserImg: function(e) {
+    let self = this;
+    let index = e.target.dataset.index;
+    let pictureObjectList = self.data.pictureObjectList;
+    pictureObjectList[index].avatarUrl = '/images/imgs/default-user.ico';
+    self.setData({
+      pictureObjectList: pictureObjectList
+    });
+  },
+
+  // 加载默认图片 - 图片
+  loadingPicturesDefaultUserImg: function(e) {
+    let self = this;
+    let index = e.target.dataset.index;
+    let pictureIndex = e.target.dataset.picture_index;
+    let pictureObjectList = self.data.pictureObjectList;
+    pictureObjectList[index].pubdetail[pictureIndex] = '/images/imgs/default-pic.png';
+    self.setData({
+      pictureObjectList: pictureObjectList
+    });
+  },
+
   // 点击更多按钮 - 图片
   clickPictureMenuMore: function(e) {
     let self = this;

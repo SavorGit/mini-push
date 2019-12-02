@@ -499,6 +499,7 @@ page {
 
 .media-page .page-top image {
   width: 2rpx;
+  opacity: 0.6;
 }
 
 .media-page .page-main {
