@@ -44,9 +44,9 @@
   </view>
 </view>
 
-<modal show="{{wifiErr.is_open==1 ? true : false}}" width="650rpx" height='350rpx' border-radius="10rpx" title-text='提示' title-color="#333333" title-background-color="unset" title-border-radius="0rpx" confirm-text='{{wifiErr.confirm}}' confirm-color="#FFFFFF"
+<modal show="{{wifiErr.is_open==1 ? true : false}}" width="650rpx" height='380rpx' border-radius="10rpx" title-text='提示' title-color="#333333" title-background-color="unset" title-border-radius="0rpx" confirm-text='{{wifiErr.confirm}}' confirm-color="#FFFFFF"
   confirm-background-color="#1cbeb6" confirm-border-radius="10rpx" cancel-text='{{wifiErr.cancel}}' cancel-color='#FFFFFF' cancel-background-color="#333333" cancel-border-radius="10rpx" bindcancel="modalCancel" data-hotel_info="{{hotel_info}}" bindconfirm='modalConfirm'>
-  <view class="theme-font1" style="padding:0 20rpx;font-size:24rpx;">{{wifiErr.msg}}</view>
+  <view class="theme-font1" style="padding:0 50rpx;font-size:28rpx;">{{wifiErr.msg}}</view>
 </modal>
 
 <!-- 连接WIFI重试 - 弹窗 -->
@@ -72,7 +72,7 @@
 <template is="remoteControlWindow" data='{{popRemoteControlWindow: popRemoteControlWindow,qrcode_img:qrcode_img,box_mac:box_mac,openid:openid,hotel_info:hotel_info}}' />
 
 <!--wifi链接错误提示-->
-<modal show="{{wifiErr.is_open==1 ? true : false}}" width="650rpx" height='350rpx' border-radius="10rpx" title-text='提示' title-color="#333333" title-background-color="unset" title-border-radius="0rpx" confirm-text='{{wifiErr.confirm}}' confirm-color="#FFFFFF"
+<modal show="{{wifiErr.is_open==1 ? true : false}}" width="650rpx" height='380rpx' border-radius="10rpx" title-text='提示' title-color="#333333" title-background-color="unset" title-border-radius="0rpx" confirm-text='{{wifiErr.confirm}}' confirm-color="#FFFFFF"
   confirm-background-color="#1cbeb6" confirm-border-radius="10rpx" cancel-text='{{wifiErr.cancel}}' cancel-color='#FFFFFF' cancel-background-color="#333333" cancel-border-radius="10rpx" bindcancel="modalCancel" data-hotel_info="{{hotel_info}}" bindconfirm='modalConfirm'>
-  <view class="theme-font1" style="padding:0 20rpx;font-size:24rpx;">{{wifiErr.msg}}</view>
+  <view class="theme-font1" style="padding:0 50rpx;font-size:28rpx;">{{wifiErr.msg}}</view>
 </modal>
