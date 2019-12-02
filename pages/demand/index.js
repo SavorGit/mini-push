@@ -54,7 +54,11 @@ Page({
   onLoad: function() {
     //wx.hideShareMenu();
     console.log(app.globalData.optimize_data);
+    
     let self = this;
+    self.setData({
+      program_list: app.globalData.optimize_data
+    })
     if (app.globalData.openid && app.globalData.openid != '') {
       //注册用户
       self.setData({
@@ -93,7 +97,7 @@ Page({
           self.setData({
             program_list: boxData.result
           })
-        });
+        }, function () { }, { isShowLoading: false });
       } else {
         //获取小程序主节目单列表
         utils.PostRequest(api_url + '/Smallapp4/optimize/getOptimizeList', {
@@ -101,18 +105,18 @@ Page({
           openid: openid,
         }, (boxData, boxHeaders, boxCookies, boxErrMsg, boxStatusCode) => self.setData({
           program_list: boxData.result,
-        }));
+        }), function () { }, { isShowLoading: false });
         self.setData({
           box_mac: '',
         })
         box_mac = '';
       }
-    });
-    utils.PostRequest(api_url + '/Smallapp3/Adsposition/getAdspositionList', {
-      position: 1,
-    }, (data, headers, cookies, errMsg, statusCode) => self.setData({
-      imgUrls: data.result
-    }));
+    }, function () { }, { isShowLoading:false});
+    // utils.PostRequest(api_url + '/Smallapp3/Adsposition/getAdspositionList', {
+    //   position: 1,
+    // }, (data, headers, cookies, errMsg, statusCode) => self.setData({
+    //   imgUrls: data.result
+    // }));
     
 
   },

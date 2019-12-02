@@ -12,7 +12,7 @@ var hotel_info = {
   'wifi_mac': '',
   'wifi_name': '',
   'wifi_password': '',
-  'forscreen_type': '1'
+  'forscreen_type': '2'
 };
 var qrcode_url;
 Page({
