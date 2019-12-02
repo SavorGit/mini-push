@@ -200,7 +200,7 @@ const HttpRequestForLHS = (options) => HttpRequest({
     if (typeof(options.fail) == "function") {
       if (options.isShowToastForFail != false && !res.code) {
         wx.showToast({
-          title: "出错了！请用联系管理员。",
+          title: "网络异常！请稍后重试",
           icon: 'none',
           mask: true,
           duration: 2000,

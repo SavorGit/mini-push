@@ -15,7 +15,7 @@
         <block wx:if="{{bean.res_type == 1}}">
           <view class="body flex-column-flex_start-start">
             <view class="user flex-row-center-flex_start" data-index="{{index}}" data-box_mac="{{box_mac}}" bindtap="onInputPictureDetail">
-              <image class="hader-img" src="{{bean.avatarUrl == '' ? '/images/imgs/default-user.ico' : bean.avatarUrl}}" data-index="{{index}}" binderror='loadingPicturesDefaultUserImg'></image>
+              <image class="hader-img" src="{{bean.avatarUrl == '' ? '/images/imgs/default-user.png' : bean.avatarUrl}}" data-index="{{index}}" binderror='loadingPicturesDefaultUserImg'></image>
               <view class="nickname one-line-overflow theme-font-000000">{{bean.nickName}}</view>
             </view>
             <view wx:if="{{bean.content != ''}}" class="desc theme-font2" data-index="{{index}}" data-box_mac="{{box_mac}}" bindtap="onInputPictureDetail">{{bean.content}}</view>
@@ -87,12 +87,12 @@
                 </view>
               </view>
               <view class="right-btn-group flex-column-center-flex_start fadeInRight">
-                <image class="user-hader-img" src="{{bean.avatarUrl == '' ? '/images/imgs/default-user.ico' : bean.avatarUrl}}"></image>
+                <image class="user-hader-img" src="{{bean.avatarUrl == '' ? '/images/imgs/default-user.png' : bean.avatarUrl}}"></image>
                 <cover-image wx:if="{{bean.is_collect=='1'}}" class="btn-favorite" src="/images/imgs/FF757D_Favorite.png" data-id="{{bean.id}}" data-type="{{bean.type}}" data-forscreen_id="{{bean.forscreen_id}}" data-index="{{index}}" bindtap="cancCollect"></cover-image>
                 <cover-image wx:else class="btn-favorite" src="/images/imgs/FFFFFF_Favorite.png" data-id="{{bean.id}}" data-type="{{bean.type}}" data-forscreen_id="{{bean.forscreen_id}}" data-index="{{index}}" bindtap="onCollect"></cover-image>
                 <label>{{bean.collect_num}}</label>
                 <cover-view class="btn-share">
-                  <button open-type='share' data-forscreen_id="{{bean.forscreen_id}}" data-id="{{bean.id}}" data-res_key="{{index}}" data-pubdetail="{{bean.pubdetail}}" data-openid="{{openid}}" data-res_type="{{bean.res_type}}" data-type="{{bean.type}}">
+                  <button open-type='share' data-index="{{index}}" data-forscreen_id="{{bean.forscreen_id}}" data-id="{{bean.id}}" data-res_key="{{index}}" data-pubdetail="{{bean.pubdetail}}" data-openid="{{openid}}" data-res_type="{{bean.res_type}}" data-type="{{bean.type}}">
                     <cover-image src="/images/imgs/FFFFFF_Share.png"></cover-image>
                   </button>
                 </cover-view>

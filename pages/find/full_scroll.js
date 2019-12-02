@@ -720,6 +720,7 @@ Page({
   onShareAppMessage: function(res) {
     var that = this;
     //mta.Event.stat('findShare', { 'openid': that.data.openid })
+    let index = res.target.dataset.index;
 
     var user_info = wx.getStorageSync('savor_user_info');
     var openid = user_info.openid;
@@ -749,7 +750,6 @@ Page({
       var c_type = 2;
       if (res_type == 1) {
         var share_url = '/pages/share/pic?forscreen_id=' + res_id;
-
       } else {
         var share_url = '/pages/share/video?res_id=' + res_id + '&type=2';
       }
@@ -763,41 +763,33 @@ Page({
     if (res.from === 'button') {
 
       // 转发成功
-      wx.request({
-        url: api_url + '/Smallapp/share/recLogs',
-        header: {
-          'content-type': 'application/json'
-        },
-        data: {
-          'openid': openid,
-          'res_id': res_id,
-          'type': c_type,
-          'status': 1,
-        },
-        success: function(e) {
-          //var cards_img = that.cards_img
-
-
-
-        },
-        fail: function({
-          errMsg
-        }) {
-          wx.showToast({
-            title: '网络异常，请稍后重试',
-            icon: 'none',
-            duration: 2000
-          })
+      utils.PostRequest(api_url + '/Smallapp4/share/recLogs', {
+        'openid': openid,
+        'res_id': res_id,
+        'type': c_type,
+        'status': 1,
+      }, (data, headers, cookies, errMsg, statusCode) => {
+        if (res_type == 1) {
+          let pictureObjectList = that.data.pictureObjectList;
+          pictureObjectList[index].share_num = data.result.share_num;
+          that.setData({
+            pictureObjectList: pictureObjectList
+          });
+        } else {
+          let mediaObjectList = that.data.mediaObjectList;
+          mediaObjectList[index].share_num = data.result.share_nums;
+          that.setData({
+            mediaObjectList: mediaObjectList
+          });
         }
-      })
+      });
       // 来自页面内转发按钮
       return {
         title: '热点聚焦，投你所好',
         path: share_url,
         imageUrl: img_url,
         success: function(res) {
-
-
+          // console.log('onShareAppMessage','return', e);
         },
       }
     }
