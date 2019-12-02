@@ -24,7 +24,7 @@ let SavorUtils = {
       data: {
         openid: app.globalData.openid
       }
-    })),
+    }),{ isShowLoading: false }),
   },
   Page: {},
 
@@ -361,6 +361,7 @@ Page({
   //收藏资源
   onCollect: function(e) {
     var self = this;
+    console.log(e);
     //var openid = e.target.dataset.openid;
     var res_id = e.target.dataset.res_id;
     var res_key = e.target.dataset.res_key;
