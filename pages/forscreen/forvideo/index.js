@@ -279,6 +279,13 @@ Page({
               msg: '{ "action":2, "url": "forscreen/resource/' + timestamp + postf_t + '", "filename":"' + timestamp + postf_t + '","openid":"' + openid + '","resource_type":2,"video_id":"' + timestamp + '","avatarUrl":"' + avatarUrl + '","nickName":"' + nickName + '","forscreen_id":"' + timestamp + '"}',
             },
             success: function (result) {
+              if(result.data.code!=10000){
+                wx.showToast({
+                  title: '投屏失败',
+                  icon:'none',
+                  duration:2000,
+                })
+              }
               that.setData({
                 upload_vedio_cover: oss_url + '/forscreen/resource/' + timestamp + postf_t + '?x-oss-process=video/snapshot,t_2000,f_jpg,w_450,m_fast',
               })
@@ -669,6 +676,13 @@ Page({
                     msg: '{ "action":2, "url":"' + replay_video_url + '", "filename":"' + filename + '","openid":"' + openid + '","resource_type":2,"video_id":"' + video_id + '","avatarUrl":"' + user_info.avatarUrl + '","nickName":"' + user_info.nickName + '","forscreen_id":' + timestamp+'}',
                   },
                   success: function (result) {
+                    if(result.data.code!=10000){
+                      wx.showToast({
+                        title: '投屏失败',
+                        icon:'none',
+                        duration:2000,
+                      })
+                    }
                     that.setData({
                       is_replay_disabel: true
                     })
@@ -733,6 +747,13 @@ Page({
               msg: '{ "action":2, "url":"' + replay_video_url + '", "filename":"' + filename + '","openid":"' + openid + '","resource_type":2,"video_id":"' + video_id + '","avatarUrl":"' + user_info.avatarUrl + '","nickName":"' + user_info.nickName + '"}',
             },
             success: function (result) {
+              if(result.data.code!=10000){
+                wx.showToast({
+                  title: '投屏失败',
+                  icon:'none',
+                  duration:2000,
+                })
+              }
               that.setData({
                 is_replay_disabel: true
               })
@@ -875,12 +896,20 @@ Page({
                         msg: '{ "action": 4, "resource_type":2, "url":"' + url + '","filename":"' + filename + '","openid":"' + openid + '","img_nums":' + res_len + ',"forscreen_char":"' + forscreen_char + '","order":' + order + ',"forscreen_id":"' + forscreen_id + '","img_id":"' + res_id + '","avatarUrl":"' + avatarUrl + '","nickName":"' + nickName + '"}',
                       },
                       success: function (result) {
-
-                        wx.showToast({
-                          title: '重投成功,电视即将开始播放',
-                          icon: 'none',
-                          duration: 5000
-                        });
+                        if(result.data.code!=10000){
+                          wx.showToast({
+                            title: '重投失败',
+                            icon: 'none',
+                            duration: 2000,
+                          })
+                        }else {
+                          wx.showToast({
+                            title: '重投成功,电视即将开始播放',
+                            icon: 'none',
+                            duration: 5000
+                          });
+                        }
+                        
                       },
                       fail: function (res) {
                         wx.showToast({
@@ -934,12 +963,20 @@ Page({
                         msg: '{ "action":2, "url": "' + res_list[i]['forscreen_url'] + '", "filename":"' + res_list[i]['filename'] + '","openid":"' + openid + '","resource_type":2,"video_id":"' + res_list[i]['resource_id'] + '","avatarUrl":"' + avatarUrl + '","nickName":"' + nickName + '","forscreen_id":'+forscreen_id+'}',
                       },
                       success: function (result) {
-
-                        wx.showToast({
-                          title: '重投成功,电视即将开始播放',
-                          icon: 'none',
-                          duration: 2000
-                        });
+                        if(result.data.code!=10000){
+                          wx.showToast({
+                            title: '重投失败',
+                            icon: 'none',
+                            duration: 2000
+                          });
+                        }else {
+                          wx.showToast({
+                            title: '重投成功,电视即将开始播放',
+                            icon: 'none',
+                            duration: 2000
+                          });
+                        }
+                        
                       },
                       fail: function (res) {
                         wx.showToast({
@@ -1000,12 +1037,20 @@ Page({
                   msg: '{ "action": 4, "resource_type":2, "url":"' + url + '","filename":"' + filename + '","openid":"' + openid + '","img_nums":' + res_len + ',"forscreen_char":"' + forscreen_char + '","order":' + order + ',"forscreen_id":"' + forscreen_id + '","img_id":"' + res_id + '","avatarUrl":"' + avatarUrl + '","nickName":"' + nickName + '"}',
                 },
                 success: function (result) {
-
-                  wx.showToast({
-                    title: '重投成功,电视即将开始播放',
-                    icon: 'none',
-                    duration: 5000
-                  });
+                  if(result.data.code!=10000){
+                    wx.showToast({
+                      title: '重投失败',
+                      icon: 'none',
+                      duration: 2000
+                    });
+                  }else {
+                    wx.showToast({
+                      title: '重投成功,电视即将开始播放',
+                      icon: 'none',
+                      duration: 5000
+                    });
+                  }
+                  
                 },
                 fail: function (res) {
                   wx.showToast({
@@ -1059,12 +1104,20 @@ Page({
                   msg: '{ "action":2, "url": "' + res_list[i]['forscreen_url'] + '", "filename":"' + res_list[i]['filename'] + '","openid":"' + openid + '","resource_type":2,"video_id":"' + res_list[i]['resource_id'] + '","avatarUrl":"' + avatarUrl + '","nickName":"' + nickName + '","forscreen_id":'+forscreen_id+'}',
                 },
                 success: function (result) {
-
-                  wx.showToast({
-                    title: '重投成功,电视即将开始播放',
-                    icon: 'none',
-                    duration: 2000
-                  });
+                  if(result.data.code==10000){
+                    wx.showToast({
+                      title: '重投失败',
+                      icon: 'none',
+                      duration: 2000
+                    });
+                  }else {
+                    wx.showToast({
+                      title: '重投成功,电视即将开始播放',
+                      icon: 'none',
+                      duration: 5000
+                    });
+                  }
+                  
                 },
                 fail: function (res) {
                   wx.showToast({
