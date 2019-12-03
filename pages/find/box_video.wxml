@@ -6,9 +6,8 @@
     <view class="full_height" bindtouchstart="onTouchStart" bindtouchend="onTouchEnd" animation="{{animationData}}">
       <block wx:for="{{mediaObjectList}}" wx:key="key" wx:for-item="bean" wx:for-index="index">
         <view class="full_height {{mediaScrollIndex == index ? 'active' : ''}}">
-          <video wx:if="{{mediaScrollIndex == index}}" id="JohnVideo{{index}}" class="full_width full_height" show-center-play-btn="{{false}}" autoplay="{{false}}" controls="{{false}}" src="{{bean.pubdetail[0].res_url}}" data-index="{{index}}" data-id="{{bean.id}}"
-            data-type="{{bean.type}}" event-model="bubble" bindprogress="onLoadProgress" bindtimeupdate="onTimeUpdate" bindplay="onVideoPlay" bindpause="onVideoPause" bindended="onVideoEnded" bindwaiting="onVideoWaiting" binderror="onVideoError" bindloadedmetadata="onVideoLoadedMetadata"
-            bindtap="onClickVideoPalyButton">
+          <video wx:if="{{mediaScrollIndex == index}}" id="JohnVideo{{index}}" class="full_width full_height" show-center-play-btn="{{false}}" autoplay="{{false}}" controls="{{false}}" src="{{bean.url}}" data-index="{{index}}" event-model="bubble" bindprogress="onLoadProgress"
+            bindtimeupdate="onTimeUpdate" bindplay="onVideoPlay" bindpause="onVideoPause" bindended="onVideoEnded" bindwaiting="onVideoWaiting" binderror="onVideoError" bindloadedmetadata="onVideoLoadedMetadata" bindtap="onClickVideoPalyButton">
             <view class="default-navigation-bar theme-font-FFFFFF" style="height: 46px; padding-top: {{statusBarHeight}}px;">
               <view class='navigation-bar flex-row-center-flex_start'>
                 <cover-view class='btn flex-row-center-flex_start'>

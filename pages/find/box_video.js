@@ -94,7 +94,7 @@ let SavorUtils = {
     loadMediaData: pageContext => {
       let user_info = wx.getStorageSync("savor_user_info");
       let pageNo = ++pageContext.data.mediaPageNo;
-      utils.PostRequest(api_url + '/Smallapp4/find/videos', {
+      utils.PostRequest('http://' + app.globalData.hotel_info.intranet_ip + ':8080/h5/findDiscover?box_mac=' + app.globalData.hotel_info.box_mac + '&web=true&deviceId=' + user_info.openid, {
         page: pageNo,
         openid: user_info.openid
       }, (data, headers, cookies, errMsg, statusCode) => {

@@ -288,7 +288,8 @@ Page({
     let self = this;
     self.touchMoveHandler = new utils.TouchMoveHandler(systemInfo, touchMoveExecuteTrip);
 
-    console.log('onLoad', 'self.data.link_type', self.data.link_type);
+    // console.log('onLoad', 'app.globalData.hotel_info', app.globalData.hotel_info);
+    // console.log('onLoad', 'self.data.link_type', self.data.link_type);
     if (self.data.link_type == 2) {
       return;
     }
@@ -543,7 +544,6 @@ Page({
 
   //收藏资源
   onCollect: function(e) {
-    console.log(e);
     let self = this;
 
     let type = e.currentTarget.dataset.type;
@@ -562,9 +562,7 @@ Page({
 
   //取消收藏
   cancCollect: function(e) {
-    console.log(e);
     let self = this;
-    console.log('dddd');
     let type = e.currentTarget.dataset.type;
     if (type == 2 || type == 3) {
       var res_id = e.currentTarget.dataset.forscreen_id;
@@ -764,7 +762,7 @@ Page({
         var share_url = '/pages/share/video?res_id=' + res_id + '&type=2';
       }
     }
-    console.log(share_url);
+    // console.log(share_url);
     //var video_url = res.target.dataset.video_url;
     var pubdetail = res.target.dataset.pubdetail;
     var img_url = pubdetail[0].img_url;
