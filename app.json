@@ -14,6 +14,7 @@
     "pages/find/waterfall",
     "pages/find/video",
     "pages/find/picture",
+    "pages/find/box_video",
     "pages/message/index",
     "pages/mine/index_20181010",
     "pages/mine/index",

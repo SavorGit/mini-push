@@ -650,3 +650,27 @@ page {
   height: 40px;
   margin: 5px auto;
 }*/
+
+/* ============================================ 无网页面 ============================================ */
+
+.no-net {
+  width: 480rpx;
+  height: 500rpx;
+}
+
+.no-net > image {
+  width: 200rpx;
+  height: 138rpx;
+}
+
+.no-net > text {
+  margin-top: 30rpx;
+  font-size: 28rpx;
+  font-weight: bold;
+}
+
+.no-net > view > .theme-button-dark, .no-net > view > .theme-button-dark {
+  width: 200rpx;
+  height: 60rpx;
+  font-size: 24rpx;
+}

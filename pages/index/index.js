@@ -238,7 +238,7 @@ Page({
     
     utils.PostRequest(api_url + '/Smallapp4/content/getHotplaylist', {
       page: 1,
-      pagesize: 5
+      pagesize: 6
     }, (data, headers, cookies, errMsg, statusCode) => {
       that.setData({
         hot_play: data.result.datalist

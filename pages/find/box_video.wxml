@@ -1,0 +1,35 @@
+<!--pages/find/box_video.wxml-->
+<import src="/pages/template/commons" />
+
+<view class="media-page">
+  <view class="container-fill">
+    <view class="full_height" bindtouchstart="onTouchStart" bindtouchend="onTouchEnd" animation="{{animationData}}">
+      <block wx:for="{{mediaObjectList}}" wx:key="key" wx:for-item="bean" wx:for-index="index">
+        <view class="full_height {{mediaScrollIndex == index ? 'active' : ''}}">
+          <video wx:if="{{mediaScrollIndex == index}}" id="JohnVideo{{index}}" class="full_width full_height" show-center-play-btn="{{false}}" autoplay="{{false}}" controls="{{false}}" src="{{bean.pubdetail[0].res_url}}" data-index="{{index}}" data-id="{{bean.id}}"
+            data-type="{{bean.type}}" event-model="bubble" bindprogress="onLoadProgress" bindtimeupdate="onTimeUpdate" bindplay="onVideoPlay" bindpause="onVideoPause" bindended="onVideoEnded" bindwaiting="onVideoWaiting" binderror="onVideoError" bindloadedmetadata="onVideoLoadedMetadata"
+            bindtap="onClickVideoPalyButton">
+            <view class="default-navigation-bar flex-row-center-center theme-font-FFFFFF" style="height: 46px; padding-top: {{statusBarHeight}}px;">
+              <view class='text'>热点投屏</view>
+            </view>
+            <view class='page-top flex-row-center-center'></view>
+            <view class='page-main flex-row-center-flex_end' style="height: calc(100% - 46px - {{statusBarHeight}}px - 266rpx);">
+              <view class="video-option-area flex-column-center-center">
+                <view wx:if="{{isShowMediaPlayButton}}" class="btn-play flex-row-center-center">
+                  <view class="fa fa-play"></view>
+                </view>
+                <view wx:if="{{isShowMediaLoading}}" class="btn-play flex-row-center-center">
+                  <view class="fa fa-spinner fa-pulse"></view>
+                </view>
+              </view>
+              <view class="right-btn-group flex-column-center-flex_start fadeInRight"></view>
+            </view>
+            <view class='video-content flex-column-flex_start-start'></view>
+            <progress class="full_width" percent="{{playProgress[index] * 100}}" stroke-width="5rpx" activeColor="#1BBEB6" backgroundColor="#EDEDED"></progress>
+          </video>
+        </view>
+      </block>
+    </view>
+  </view>
+</view>
+<!-- 视频页[直联] - 结束 -->

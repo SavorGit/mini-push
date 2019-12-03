@@ -1,5 +1,4 @@
-// pages/find/full_scroll.js
-
+// pages/find/box_video.js
 let app = getApp();
 let systemInfo = app.SystemInfo;
 let utils = require("../../utils/util.js")
@@ -10,87 +9,6 @@ var cache_key = app.globalData.cache_key;
 let api_url = app.globalData.api_url;
 let SavorUtils = {
   User: {
-
-    // 判断用户是否注册
-    isRegister: pageContext => utils.PostRequest(api_url + '/smallapp21/User/isRegister', {
-      openid: pageContext.data.openid,
-      page_id: 2
-    }, (data, headers, cookies, errMsg, statusCode) => wx.setStorage({
-      key: 'savor_user_info',
-      data: data.result.userinfo,
-    }), res => {
-      if (app.globalData.link_type != 2) {
-        wx.setStorage({
-          key: 'savor_user_info',
-          data: {
-            openid: app.globalData.openid
-          }
-        });
-      }
-    }),
-
-    // 获取版位信息
-    isHaveCallBox: (pageContext) => utils.PostRequest(api_url + '/Smallapp/index/isHaveCallBox?openid=' + pageContext.data.openid, {}, (data, headers, cookies, errMsg, statusCode) => {
-      let is_have = data.result.is_have;
-      if (is_have == 1) {
-        app.linkHotelWifi(data.result, pageContext);
-        pageContext.setData({
-          is_link: 1,
-          hotel_name: data.result.hotel_name,
-          room_name: data.result.room_name,
-          box_mac: data.result.box_mac,
-          is_open_simple: data.result.is_open_simple
-        });
-      } else {
-        pageContext.setData({
-          is_link: 0,
-          box_mac: ''
-        });
-      }
-    }),
-
-    // 收藏/取消收藏
-    favorite: (pageContext, forscreenId, type, index, status) => utils.PostRequest(api_url + '/Smallapp4/collect/recLogs', {
-      'openid': pageContext.data.openid,
-      'res_id': forscreenId,
-      'type': type,
-      'status': status,
-      //'only_co': status,
-    }, (data, headers, cookies, errMsg, statusCode) => {
-      if (pageContext.data.pageType == 1) {
-        let pictureObjectList = pageContext.data.pictureObjectList;
-        pictureObjectList[index].is_collect = status;
-        pictureObjectList[index].collect_num = data.result.nums;
-        pageContext.setData({
-          pictureObjectList: pictureObjectList
-        });
-        if (status == 1) {
-          mta.Event.stat('findCollectPic', {
-            'openid': pageContext.data.openid
-          })
-        }
-
-      } else {
-        let mediaObjectList = pageContext.data.mediaObjectList;
-        mediaObjectList[index].is_collect = status;
-        mediaObjectList[index].collect_num = data.result.nums;
-        pageContext.setData({
-          mediaObjectList: mediaObjectList
-        });
-        if (status == 1) {
-          mta.Event.stat('findCollectVideo', {
-            'openid': pageContext.data.openid
-          })
-        }
-
-      }
-    }, ({
-      errMsg
-    }) => wx.showToast({
-      title: '网络异常，请稍后重试',
-      icon: 'none',
-      duration: 2000
-    })),
 
     // 投屏单个媒体
     recordForScreenPics: (pageContext, extendData, forscreenId, pubdetail) => {
@@ -200,34 +118,6 @@ let SavorUtils = {
       });
     },
 
-    // 加载图片数据
-    loadPictureData: pageContext => {
-      let user_info = wx.getStorageSync("savor_user_info");
-      let pageNo = ++pageContext.data.picturePageNo;
-      utils.PostRequest(api_url + '/Smallapp4/find/images', {
-        page: pageNo,
-        openid: user_info.openid
-      }, (data, headers, cookies, errMsg, statusCode) => {
-        let pictureObjectList = pageContext.data.pictureObjectList;
-        if (!(pictureObjectList instanceof Array)) {
-          pictureObjectList = new Array();
-        }
-        if (!(data.result instanceof Array)) {
-          wx.showToast({
-            title: '没有图片了，赶快上传几张吧！',
-            icon: 'none',
-            duration: 2000
-          });
-          return;
-        }
-        pageContext.setData({
-          picturePageNo: pageNo,
-          pageType: 1,
-          pictureObjectList: pictureObjectList.concat(data.result)
-        });
-      });
-    },
-
     // 初始化页面数据
     initPageData: pageContext => {
       SavorUtils.Page.loadMediaData(pageContext);
@@ -278,8 +168,6 @@ Page({
     playProgress: [],
     mediaObjectList: [], // 视频列表
     mediaPageNo: 0,
-    pictureObjectList: [], // 图片列表
-    picturePageNo: 0,
   },
   /**
    * 生命周期函数--监听页面加载
@@ -287,32 +175,6 @@ Page({
   onLoad: function(options) {
     let self = this;
     self.touchMoveHandler = new utils.TouchMoveHandler(systemInfo, touchMoveExecuteTrip);
-
-    if (self.data.link_type == 2) {
-      // self.setData({
-      //   link_type: app.globalData.link_type
-      // });
-      console.log('onLoad', 'self.data.link_type', self.data.link_type);
-      return;
-    }
-
-    if (app.globalData.openid && app.globalData.openid != '') {
-      self.setData({
-        openid: app.globalData.openid
-      });
-      SavorUtils.User.isRegister(self); //判断用户是否注册
-      SavorUtils.User.isHaveCallBox(self);
-    } else {
-      app.openidCallback = openid => {
-        if (openid != '') {
-          self.setData({
-            openid: openid
-          });
-          SavorUtils.User.isRegister(self); //判断用户是否注册
-          SavorUtils.User.isHaveCallBox(self);
-        }
-      };
-    }
 
     // 加载数据
     SavorUtils.Page.initPageData(self)
@@ -498,88 +360,6 @@ Page({
     }
   },
 
-  // 跳转到发现页 - 图片
-  goToFindPictures: function(e) {
-    let self = this;
-    wx.createVideoContext('JohnVideo' + self.data.mediaScrollIndex).pause();
-    if (self.data.pictureObjectList.length < 1) {
-      SavorUtils.Page.loadPictureData(self);
-    } else {
-      self.setData({
-        pageType: 1
-      });
-    }
-    wx.setNavigationBarColor({
-      frontColor: '#000000',
-      backgroundColor: '#ffffff',
-      animation: {
-        duration: 30,
-        timingFunc: 'linear'
-      }
-    });
-    mta.Event.stat('findSwichPic', {
-      'openid': self.data.openid
-    })
-  },
-
-  // 跳转到发现页 - 视频
-  goToFindMedias: function(e) {
-    let self = this;
-    if (self.data.mediaObjectList.length < 1) {
-      SavorUtils.Page.loadMediaData(self);
-    } else {
-      self.setData({
-        mediaScrollIndex: 0,
-        pageType: 0
-      });
-    }
-    wx.setNavigationBarColor({
-      frontColor: '#ffffff',
-      backgroundColor: '#000000',
-      animation: {
-        duration: 30,
-        timingFunc: 'linear'
-      }
-    });
-    wx.createVideoContext('JohnVideo' + self.data.mediaScrollIndex).play();
-  },
-
-  //收藏资源
-  onCollect: function(e) {
-    console.log(e);
-    let self = this;
-
-    let type = e.currentTarget.dataset.type;
-    if (type == 2 || type == 3) {
-      var res_id = e.currentTarget.dataset.forscreen_id;
-      var c_type = 2;
-    } else {
-      var res_id = e.currentTarget.dataset.id;
-      var c_type = 3
-    }
-
-    let index = e.currentTarget.dataset.index;
-    SavorUtils.User.favorite(self, res_id, c_type, index, 1);
-    //mta.Event.stat('findCollect', { 'openid': self.data.openid })
-  },
-
-  //取消收藏
-  cancCollect: function(e) {
-    console.log(e);
-    let self = this;
-    console.log('dddd');
-    let type = e.currentTarget.dataset.type;
-    if (type == 2 || type == 3) {
-      var res_id = e.currentTarget.dataset.forscreen_id;
-      var c_type = 2;
-    } else {
-      var res_id = e.currentTarget.dataset.id;
-      var c_type = 3
-    }
-    let index = e.currentTarget.dataset.index;
-    SavorUtils.User.favorite(self, res_id, c_type, index, 0);
-  },
-
   //电视播放
   boxShow(e) {
     let self = this;
@@ -609,80 +389,6 @@ Page({
     }
   }, //电视播放结束
 
-  // 点击进入落地页 - 图片
-  onInputPictureDetail: function(e) {
-    let self = this;
-    let boxMac = e.currentTarget.dataset.box_mac;
-    let index = e.currentTarget.dataset.index;
-    let pictureObject = self.data.pictureObjectList[index];
-    let forscreenId = pictureObject.forscreen_id;
-    wx.navigateTo({
-      url: '/pages/find/picture?forscreen_id=' + forscreenId + '&box_mac=' + boxMac
-    })
-  },
-
-  //预览图片
-  previewImages: function(e) {
-    let self = this;
-    let pictures = e.target.dataset.pictures;
-    let pictureIndex = e.target.dataset.picture_index;
-    let urls = [];
-    for (let row in pictures) {
-      urls[row] = pictures[row]['res_url']
-    }
-    wx.previewImage({
-      current: urls[pictureIndex], // 当前显示图片的http链接
-      urls: urls // 需要预览的图片http链接列表
-    })
-  },
-
-  // 加载更多图片
-  loadMorePictures: function(e) {
-    let self = this;
-    SavorUtils.Page.loadPictureData(self);
-  },
-
-  // 加载默认头像 - 图片
-  loadingPicturesDefaultUserImg: function(e) {
-    let self = this;
-    let index = e.target.dataset.index;
-    let pictureObjectList = self.data.pictureObjectList;
-    pictureObjectList[index].avatarUrl = '/images/imgs/default-user.ico';
-    self.setData({
-      pictureObjectList: pictureObjectList
-    });
-  },
-
-  // 加载默认图片 - 图片
-  loadingPicturesDefaultUserImg: function(e) {
-    let self = this;
-    let index = e.target.dataset.index;
-    let pictureIndex = e.target.dataset.picture_index;
-    let pictureObjectList = self.data.pictureObjectList;
-    pictureObjectList[index].pubdetail[pictureIndex] = '/images/imgs/default-pic.png';
-    self.setData({
-      pictureObjectList: pictureObjectList
-    });
-  },
-
-  // 点击更多按钮 - 图片
-  clickPictureMenuMore: function(e) {
-    let self = this;
-    let forscreenId = e.target.dataset.forscreen_id;
-    let index = e.target.dataset.index;
-    let pictureObjectList = self.data.pictureObjectList;
-    if (!pictureObjectList[index].isOpen) { //打开操作菜单
-      mta.Event.stat('findClickOpenMenu', {
-        'openid': self.data.openid
-      })
-    }
-
-    pictureObjectList[index].isOpen = !(pictureObjectList[index].isOpen);
-    self.setData({
-      pictureObjectList: pictureObjectList
-    });
-
-  },
   /**
    * 生命周期函数--监听页面显示
    */
@@ -728,84 +434,4 @@ Page({
       'openid': user_info.openid
     })
   },
-
-  //点击分享按钮
-  onShareAppMessage: function(res) {
-    var that = this;
-    //mta.Event.stat('findShare', { 'openid': that.data.openid })
-    let index = res.target.dataset.index;
-
-    var user_info = wx.getStorageSync('savor_user_info');
-    var openid = user_info.openid;
-    var type = res.target.dataset.type;
-    var res_type = res.target.dataset.res_type;
-    if (res_type == 1) {
-      mta.Event.stat('findSharePic', {
-        'openid': that.data.openid
-      })
-    } else if (res_type == 2) {
-      mta.Event.stat('findShareVideo', {
-        'openid': that.data.openid
-      })
-    }
-
-    if (type == 1) {
-      var res_id = res.target.dataset.id;
-      var c_type = 3;
-      if (res_type == 1) {
-        var share_url = '/pages/share/pic?forscreen_id=' + res_id;
-      } else {
-        var share_url = '/pages/share/video?res_id=' + res_id + '&type=3';
-      }
-
-    } else if (type == 2 || type == 3) {
-      var res_id = res.target.dataset.forscreen_id;
-      var c_type = 2;
-      if (res_type == 1) {
-        var share_url = '/pages/share/pic?forscreen_id=' + res_id;
-      } else {
-        var share_url = '/pages/share/video?res_id=' + res_id + '&type=2';
-      }
-    }
-    console.log(share_url);
-    //var video_url = res.target.dataset.video_url;
-    var pubdetail = res.target.dataset.pubdetail;
-    var img_url = pubdetail[0].img_url;
-    //var res_url = res.target.dataset.res_url;
-
-    if (res.from === 'button') {
-
-      // 转发成功
-      utils.PostRequest(api_url + '/Smallapp4/share/recLogs', {
-        'openid': openid,
-        'res_id': res_id,
-        'type': c_type,
-        'status': 1,
-      }, (data, headers, cookies, errMsg, statusCode) => {
-        if (res_type == 1) {
-          let pictureObjectList = that.data.pictureObjectList;
-          pictureObjectList[index].share_num = data.result.share_num;
-          that.setData({
-            pictureObjectList: pictureObjectList
-          });
-        } else {
-          let mediaObjectList = that.data.mediaObjectList;
-          mediaObjectList[index].share_num = data.result.share_nums;
-          that.setData({
-            mediaObjectList: mediaObjectList
-          });
-        }
-      });
-      // 来自页面内转发按钮
-      return {
-        title: '热点聚焦，投你所好',
-        path: share_url,
-        imageUrl: img_url,
-        success: function(res) {
-          // console.log('onShareAppMessage','return', e);
-        },
-      }
-    }
-
-  }, // 分享结束
 });
