@@ -9,8 +9,9 @@ Page({
    */
   data: {
     statusBarHeight: getApp().globalData.statusBarHeight,
-    picinfo:[],
-    is_replay_disabel:false,
+    link_type: app.globalData.link_type, //1:外网投屏  2：直连投屏
+    picinfo: [],
+    is_replay_disabel: false,
   },
 
   /**
@@ -18,34 +19,40 @@ Page({
    */
   onLoad: function(options) {
     var that = this;
+
+    // console.log('onLoad', 'that.data.link_type', that.data.link_type);
+    if (that.data.link_type == 2) {
+      return;
+    }
+
     var user_info = wx.getStorageSync("savor_user_info");
     var openid = user_info.openid;
     var box_mac = options.box_mac;
-    
+
     //wx.hideShareMenu();
     var forscreen_id = options.forscreen_id;
     wx.request({
-      url: api_url+'/Smallapp3/Find/showPic',
-      data:{
-        forscreen_id:forscreen_id,
-        openid:openid,
-        
+      url: api_url + '/Smallapp3/Find/showPic',
+      data: {
+        forscreen_id: forscreen_id,
+        openid: openid,
+
       },
-      success:function(res){
+      success: function(res) {
         that.setData({
-          picinfo:res.data.result,
-          play_num:res.data.result.play_num,
-          collect_num:res.data.result.collect_num,
+          picinfo: res.data.result,
+          play_num: res.data.result.play_num,
+          collect_num: res.data.result.collect_num,
           share_num: res.data.result.share_num,
           is_collect: res.data.result.is_collect,
-          openid:openid,
+          openid: openid,
           box_mac: box_mac,
         })
       }
     })
   },
   //预览图片
-  previewImage: function (e) {
+  previewImage: function(e) {
     var current = e.target.dataset.src;
     var pkey = e.target.dataset.pkey;
     var urls = [];
@@ -60,14 +67,14 @@ Page({
     })
   },
   //收藏资源
-  onCollect: function (e) {
+  onCollect: function(e) {
     var that = this;
     var openid = e.target.dataset.openid;
     var res_id = e.target.dataset.res_id;
 
     var res_type = e.target.dataset.type;
     wx.request({
-      url: api_url+'/Smallapp/collect/recLogs',
+      url: api_url + '/Smallapp/collect/recLogs',
       header: {
         'content-type': 'application/json'
       },
@@ -77,13 +84,15 @@ Page({
         'type': res_type,
         'status': 1,
       },
-      success: function (e) {
+      success: function(e) {
         that.setData({
           is_collect: 1,
           collect_num: e.data.result.nums,
         })
       },
-      fial: function ({ errMsg }) {
+      fial: function({
+        errMsg
+      }) {
         wx.showToast({
           title: '网络异常，请稍后重试',
           icon: 'none',
@@ -91,16 +100,16 @@ Page({
         })
       }
     })
-  },//收藏资源结束
+  }, //收藏资源结束
   //取消收藏
-  cancCollect: function (e) {
+  cancCollect: function(e) {
     var that = this;
     var openid = e.target.dataset.openid;
     var res_id = e.target.dataset.res_id;
 
     var res_type = e.target.dataset.type;
     wx.request({
-      url: api_url+'/Smallapp/collect/recLogs',
+      url: api_url + '/Smallapp/collect/recLogs',
       header: {
         'content-type': 'application/json'
       },
@@ -110,7 +119,7 @@ Page({
         'type': res_type,
         'status': 0,
       },
-      success: function (e) {
+      success: function(e) {
 
 
         that.setData({
@@ -119,7 +128,9 @@ Page({
         })
 
       },
-      fial: function ({ errMsg }) {
+      fial: function({
+        errMsg
+      }) {
         wx.showToast({
           title: '网络异常，请稍后重试',
           icon: 'none',
@@ -127,18 +138,18 @@ Page({
         })
       }
     })
-  },//取消收藏结束
+  }, //取消收藏结束
   //点击分享按钮
-  onShareAppMessage: function (res) {
+  onShareAppMessage: function(res) {
     var that = this;
     var openid = res.target.dataset.openid;
     var res_id = res.target.dataset.res_id;
 
-    var res_type  = res.target.dataset.type;
+    var res_type = res.target.dataset.type;
     var pubdetail = res.target.dataset.pubdetail;
-    var img_url   = pubdetail[0]['res_url'];
+    var img_url = pubdetail[0]['res_url'];
     console.log(img_url);
-    
+
     var share_num = res.target.dataset.share_num;
 
     if (res.from === 'button') {
@@ -146,7 +157,7 @@ Page({
       // 转发成功
       share_num = share_num++;
       wx.request({
-        url: api_url+'/Smallapp3/share/recLogs',
+        url: api_url + '/Smallapp3/share/recLogs',
         header: {
           'content-type': 'application/json'
         },
@@ -156,7 +167,7 @@ Page({
           'type': res_type,
           'status': 1,
         },
-        success: function (e) {
+        success: function(e) {
           if (e.data.code == 10000) {
             that.setData({
               share_num: e.data.result.share_nums,
@@ -165,7 +176,9 @@ Page({
 
 
         },
-        fail: function ({ errMsg }) {
+        fail: function({
+          errMsg
+        }) {
           wx.showToast({
             title: '网络异常，请稍后重试',
             icon: 'none',
@@ -179,12 +192,12 @@ Page({
         title: '发现一个好玩的东西',
         path: '/pages/share/pic?forscreen_id=' + res_id,
         imageUrl: img_url,
-        success: function (res) {
+        success: function(res) {
 
         }
       }
     }
-  },// 分享结束
+  }, // 分享结束
   //电视播放
   boxShow(e) {
     var that = this;
@@ -204,27 +217,29 @@ Page({
       var mobile_brand = app.globalData.mobile_brand;
       var mobile_model = app.globalData.mobile_model;
       if (res_type == 1) {
-        var action = 11;   //发现图片点播
+        var action = 11; //发现图片点播
       } else if (res_type == 2) {
-        var action = 12;  //发现视频点播
+        var action = 12; //发现视频点播
       }
       var res_len = e.currentTarget.dataset.res_nums;
       var forscreen_id = (new Date()).valueOf();
 
       wx.request({
-        url: api_url+'/smallapp21/User/isForscreenIng',
+        url: api_url + '/smallapp21/User/isForscreenIng',
         headers: {
           'Content-Type': 'application/json'
         },
         method: "POST",
-        data: { box_mac: box_mac },
-        success: function (res) {
+        data: {
+          box_mac: box_mac
+        },
+        success: function(res) {
           var is_forscreen = res.data.result.is_forscreen;
           if (is_forscreen == 1) {
             wx.showModal({
               title: '确认要打断投屏',
               content: '当前电视正在进行投屏,继续投屏有可能打断当前投屏中的内容.',
-              success: function (res) {
+              success: function(res) {
                 if (res.confirm) {
                   var djs = 10;
                   that.setData({
@@ -234,7 +249,7 @@ Page({
                   that.setData({
                     djs: djs
                   })
-                  var timer8_0 = setInterval(function () {
+                  var timer8_0 = setInterval(function() {
                     djs -= 1;
                     that.setData({
                       djs: djs
@@ -250,8 +265,8 @@ Page({
                   if (res_type == 1) {
                     for (var i = 0; i < res_len; i++) {
                       var order = i + 1;
-                      wx.request({//start
-                        url: api_url+'/Smallapp/index/recordForScreenPics',
+                      wx.request({ //start
+                        url: api_url + '/Smallapp/index/recordForScreenPics',
                         header: {
                           'content-type': 'application/json'
                         },
@@ -271,18 +286,17 @@ Page({
                           is_pub_hotelinfo: 0,
                           is_share: 0
                         },
-                        success: function (ret) {
-                        }
+                        success: function(ret) {}
 
 
 
-                      });//end
+                      }); //end
                       var url = pubdetail[i]['forscreen_url'];
                       var filename = pubdetail[i]['filename'];
                       var res_id = pubdetail[i]['res_id'];
 
                       wx.request({
-                        url: api_url+'/Netty/Index/index',
+                        url: api_url + '/Netty/Index/index',
                         headers: {
                           'Content-Type': 'application/json'
                         },
@@ -291,7 +305,7 @@ Page({
                           box_mac: box_mac,
                           msg: '{ "action": 4, "resource_type":2, "url":"' + url + '","filename":"' + filename + '","openid":"' + openid + '","img_nums":' + res_len + ',"forscreen_char":"' + forscreen_char + '","order":' + order + ',"forscreen_id":"' + forscreen_id + '","img_id":"' + res_id + '","avatarUrl":"' + avatarUrl + '","nickName":"' + nickName + '"}',
                         },
-                        success: function (result) {
+                        success: function(result) {
 
                           wx.showToast({
                             title: '点播成功,电视即将开始播放',
@@ -299,7 +313,7 @@ Page({
                             duration: 5000
                           });
                         },
-                        fail: function (res) {
+                        fail: function(res) {
                           wx.showToast({
                             title: '网络异常,点播失败',
                             icon: 'none',
@@ -309,13 +323,13 @@ Page({
                       })
 
                     }
-                    
 
-                  } else {//视频投屏
-                    
+
+                  } else { //视频投屏
+
                     for (var i = 0; i < res_len; i++) {
                       wx.request({
-                        url: api_url+'/Smallapp/index/recordForScreenPics',
+                        url: api_url + '/Smallapp/index/recordForScreenPics',
                         header: {
                           'content-type': 'application/json'
                         },
@@ -337,13 +351,13 @@ Page({
                           forscreen_id: forscreen_id,
                           duration: pubdetail[i]['duration'],
                         },
-                        success: function (ret) {
+                        success: function(ret) {
 
                         }
                       });
 
                       wx.request({
-                        url: api_url+'/Netty/Index/index',
+                        url: api_url + '/Netty/Index/index',
                         headers: {
                           'Content-Type': 'application/json'
                         },
@@ -352,7 +366,7 @@ Page({
                           box_mac: box_mac,
                           msg: '{ "action":2, "url": "' + pubdetail[i]['forscreen_url'] + '", "filename":"' + pubdetail[i]['filename'] + '","openid":"' + openid + '","resource_type":2,"video_id":"' + pubdetail[i]['res_id'] + '","avatarUrl":"' + avatarUrl + '","nickName":"' + nickName + '","forscreen_id":"' + forscreen_id + '"}',
                         },
-                        success: function (result) {
+                        success: function(result) {
 
                           wx.showToast({
                             title: '点播成功,电视即将开始播放',
@@ -360,7 +374,7 @@ Page({
                             duration: 2000
                           });
                         },
-                        fail: function (res) {
+                        fail: function(res) {
                           wx.showToast({
                             title: '网络异常,点播失败',
                             icon: 'none',
@@ -369,10 +383,10 @@ Page({
                         }
                       });
                     }
-                    
+
                   }
                   wx.request({
-                    url: api_url+'/Smallapp21/CollectCount/recCount',
+                    url: api_url + '/Smallapp21/CollectCount/recCount',
                     headers: {
                       'Content-Type': 'application/json'
                     },
@@ -395,7 +409,7 @@ Page({
             that.setData({
               djs: djs
             })
-            var timer8_0 = setInterval(function () {
+            var timer8_0 = setInterval(function() {
               djs -= 1;
               that.setData({
                 djs: djs
@@ -411,8 +425,8 @@ Page({
             if (res_type == 1) {
               for (var i = 0; i < res_len; i++) {
                 var order = i + 1;
-                wx.request({//start
-                  url: api_url+'/Smallapp/index/recordForScreenPics',
+                wx.request({ //start
+                  url: api_url + '/Smallapp/index/recordForScreenPics',
                   header: {
                     'content-type': 'application/json'
                   },
@@ -432,18 +446,17 @@ Page({
                     is_pub_hotelinfo: 0,
                     is_share: 0
                   },
-                  success: function (ret) {
-                  }
+                  success: function(ret) {}
 
 
 
-                });//end
+                }); //end
                 var url = pubdetail[i]['forscreen_url'];
                 var filename = pubdetail[i]['filename'];
                 var res_id = pubdetail[i]['res_id'];
 
                 wx.request({
-                  url: api_url+'/Netty/Index/index',
+                  url: api_url + '/Netty/Index/index',
                   headers: {
                     'Content-Type': 'application/json'
                   },
@@ -452,7 +465,7 @@ Page({
                     box_mac: box_mac,
                     msg: '{ "action": 4, "resource_type":2, "url":"' + url + '","filename":"' + filename + '","openid":"' + openid + '","img_nums":' + res_len + ',"forscreen_char":"' + forscreen_char + '","order":' + order + ',"forscreen_id":"' + forscreen_id + '","img_id":"' + res_id + '","avatarUrl":"' + avatarUrl + '","nickName":"' + nickName + '"}',
                   },
-                  success: function (result) {
+                  success: function(result) {
 
                     wx.showToast({
                       title: '点播成功,电视即将开始播放',
@@ -460,7 +473,7 @@ Page({
                       duration: 5000
                     });
                   },
-                  fail: function (res) {
+                  fail: function(res) {
                     wx.showToast({
                       title: '网络异常,点播失败',
                       icon: 'none',
@@ -471,10 +484,10 @@ Page({
 
               }
 
-            } else {//视频投屏
+            } else { //视频投屏
               for (var i = 0; i < res_len; i++) {
                 wx.request({
-                  url: api_url+'/Smallapp/index/recordForScreenPics',
+                  url: api_url + '/Smallapp/index/recordForScreenPics',
                   header: {
                     'content-type': 'application/json'
                   },
@@ -496,13 +509,13 @@ Page({
                     forscreen_id: forscreen_id,
                     duration: pubdetail[i]['duration'],
                   },
-                  success: function (ret) {
+                  success: function(ret) {
 
                   }
                 });
 
                 wx.request({
-                  url: api_url+'/Netty/Index/index',
+                  url: api_url + '/Netty/Index/index',
                   headers: {
                     'Content-Type': 'application/json'
                   },
@@ -511,7 +524,7 @@ Page({
                     box_mac: box_mac,
                     msg: '{ "action":2, "url": "' + pubdetail[i]['forscreen_url'] + '", "filename":"' + pubdetail[i]['filename'] + '","openid":"' + openid + '","resource_type":2,"video_id":"' + pubdetail[i]['res_id'] + '","avatarUrl":"' + avatarUrl + '","nickName":"' + nickName + '","forscreen_id":"' + forscreen_id + '"}',
                   },
-                  success: function (result) {
+                  success: function(result) {
 
                     wx.showToast({
                       title: '点播成功,电视即将开始播放',
@@ -519,7 +532,7 @@ Page({
                       duration: 2000
                     });
                   },
-                  fail: function (res) {
+                  fail: function(res) {
                     wx.showToast({
                       title: '网络异常,点播失败',
                       icon: 'none',
@@ -530,7 +543,7 @@ Page({
               }
             }
             wx.request({
-              url: api_url+'/Smallapp21/CollectCount/recCount',
+              url: api_url + '/Smallapp21/CollectCount/recCount',
               headers: {
                 'Content-Type': 'application/json'
               },
@@ -546,7 +559,7 @@ Page({
 
 
     }
-  },//电视播放结束
+  }, //电视播放结束
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
@@ -589,5 +602,5 @@ Page({
 
   },
 
-  
+
 })

@@ -15,6 +15,7 @@ Page({
    */
   data: {
     statusBarHeight: getApp().globalData.statusBarHeight,
+    link_type: app.globalData.link_type, //1:外网投屏  2：直连投屏
     cityArray: ['北京'],
     objectCityArray: [],
     cityIndex: 0,
@@ -35,10 +36,10 @@ Page({
     hiddens: true, //加载更多
     box_mac: '', //机顶盒mac
     close_hotel_hint: 1,
-    link_type:app.globalData.link_type,
+    link_type: app.globalData.link_type,
     wifiErr: app.globalData.wifiErr,
-    link_type:app.globalData.link_type,
-    
+    link_type: app.globalData.link_type,
+
 
   },
   //城市切换 
@@ -56,7 +57,7 @@ Page({
       //获取当前城市的区域
       var area_id = city_list[picCityIndex].id;
       wx.request({
-        url: api_url+'/Smallapp21/Area/getSecArea',
+        url: api_url + '/Smallapp21/Area/getSecArea',
         header: {
           'content-type': 'application/json'
         },
@@ -84,7 +85,7 @@ Page({
 
       function getHotelList(area_id, county_id, food_style_id, avg_exp_id) {
         wx.request({
-          url: api_url+'/smallapp21/Hotel/recList',
+          url: api_url + '/smallapp21/Hotel/recList',
           header: {
             'content-type': 'application/json'
           },
@@ -130,7 +131,7 @@ Page({
 
     function getHotelList(area_id, county_id, food_style_id, avg_exp_id) {
       wx.request({
-        url: api_url+'/smallapp21/Hotel/recList',
+        url: api_url + '/smallapp21/Hotel/recList',
         header: {
           'content-type': 'application/json'
         },
@@ -175,7 +176,7 @@ Page({
 
     function getHotelList(area_id, county_id, food_style_id, avg_exp_id) {
       wx.request({
-        url: api_url+'/smallapp21/Hotel/recList',
+        url: api_url + '/smallapp21/Hotel/recList',
         header: {
           'content-type': 'application/json'
         },
@@ -222,7 +223,7 @@ Page({
 
     function getHotelList(area_id, county_id, food_style_id, avg_exp_id) {
       wx.request({
-        url: api_url+'/smallapp21/Hotel/recList',
+        url: api_url + '/smallapp21/Hotel/recList',
         header: {
           'content-type': 'application/json'
         },
@@ -253,21 +254,27 @@ Page({
   onLoad: function(options) {
     //wx.hideShareMenu();
     var that = this;
-    if(app.globalData.link_type==2){
+
+    // console.log('onLoad', 'that.data.link_type', that.data.link_type);
+    if (that.data.link_type == 2) {
+      return;
+    }
+
+    if (app.globalData.link_type == 2) {
       that.setData({
-        link_type:app.globalData.link_type,
+        link_type: app.globalData.link_type,
         hotel_list: app.globalData.hotels
       })
     }
     var user_info = wx.getStorageSync("savor_user_info");
     openid = user_info.openid;
     that.setData({
-      openid:openid,
+      openid: openid,
       rest_appid: rest_appid,
       jijian_appid: jijian_appid,
     })
     wx.request({
-      url: api_url+'/smallapp21/User/isRegister',
+      url: api_url + '/smallapp21/User/isRegister',
       data: {
         "openid": openid,
         "page_id": 4
@@ -275,8 +282,8 @@ Page({
       header: {
         'content-type': 'application/json'
       },
-      success:function(res){
-        if(res.data.code==10000){
+      success: function(res) {
+        if (res.data.code == 10000) {
           that.setData({
             close_hotel_hint: res.data.result.userinfo.close_hotel_hint,
           })
@@ -285,7 +292,7 @@ Page({
     }); //判断用户是否注册结束
 
     wx.request({
-      url: api_url+'/Smallapp4/index/isHaveCallBox?openid=' + openid,
+      url: api_url + '/Smallapp4/index/isHaveCallBox?openid=' + openid,
       headers: {
         'Content-Type': 'application/json'
       },
@@ -296,7 +303,7 @@ Page({
           app.linkHotelWifi(rest.data.result, that);
           that.setData({
             is_link: 1,
-            hotel_info:rest.data.result,
+            hotel_info: rest.data.result,
             hotel_name: rest.data.result.hotel_name,
             room_name: rest.data.result.room_name,
             box_mac: rest.data.result.box_mac,
@@ -315,7 +322,7 @@ Page({
     })
     //获取城市列表
     wx.request({
-      url: api_url+'/Smallapp21/Area/getAreaList',
+      url: api_url + '/Smallapp21/Area/getAreaList',
       header: {
         'content-type': 'application/json'
       },
@@ -335,7 +342,7 @@ Page({
         var latitude = res.latitude;
         var longitude = res.longitude;
         wx.request({
-          url: api_url+'/Smallapp21/Area/getAreaid',
+          url: api_url + '/Smallapp21/Area/getAreaid',
           header: {
             'content-type': 'application/json'
           },
@@ -349,7 +356,7 @@ Page({
             })
             var area_id = res.data.result.area_id;
             wx.request({
-              url: api_url+'/Smallapp21/Area/getSecArea',
+              url: api_url + '/Smallapp21/Area/getSecArea',
               header: {
                 'content-type': 'application/json'
               },
@@ -365,7 +372,7 @@ Page({
             });
             //获取酒楼列表
             wx.request({
-              url: api_url+'/smallapp21/Hotel/recList',
+              url: api_url + '/smallapp21/Hotel/recList',
               header: {
                 'content-type': 'application/json'
               },
@@ -392,7 +399,7 @@ Page({
         })
         var area_id = 1;
         wx.request({
-          url: api_url+'/Smallapp21/Area/getSecArea',
+          url: api_url + '/Smallapp21/Area/getSecArea',
           header: {
             'content-type': 'application/json'
           },
@@ -408,7 +415,7 @@ Page({
         });
         //获取酒楼列表
         wx.request({
-          url: api_url+'/smallapp21/Hotel/recList',
+          url: api_url + '/smallapp21/Hotel/recList',
           header: {
             'content-type': 'application/json'
           },
@@ -430,7 +437,7 @@ Page({
     })
     //获取菜系列表
     wx.request({
-      url: api_url+'/Smallapp21/FoodStyle/getList',
+      url: api_url + '/Smallapp21/FoodStyle/getList',
       header: {
         'content-type': 'application/json'
       },
@@ -443,7 +450,7 @@ Page({
     })
     //获取人均消费
     wx.request({
-      url: api_url+'/Smallapp21/Hotel/getExplist',
+      url: api_url + '/Smallapp21/Hotel/getExplist',
       header: {
         'content-type': 'application/json'
       },
@@ -458,7 +465,7 @@ Page({
 
     //获取酒楼信息
     wx.request({
-      url: api_url+'/Smallapp21/Hotel/recList',
+      url: api_url + '/Smallapp21/Hotel/recList',
       data: {
         page: page,
         openid: openid,
@@ -506,7 +513,7 @@ Page({
 
     function getHotelList(area_id, county_id, food_style_id, avg_exp_id) {
       wx.request({
-        url: api_url+'/smallapp21/Hotel/recList',
+        url: api_url + '/smallapp21/Hotel/recList',
         header: {
           'content-type': 'application/json'
         },
@@ -533,7 +540,7 @@ Page({
       })
     }
   },
-  
+
   previewImage: function(e) {
     var current = e.currentTarget.dataset.src;
     var urls = [];
@@ -545,45 +552,45 @@ Page({
       urls: urls // 需要预览的图片http链接列表
     })
   },
-  closeHotelHind:function(e){
+  closeHotelHind: function(e) {
     var that = this;
     var openid = e.currentTarget.dataset.openid;
     wx.request({
-      url: api_url+'/Smallapp3/user/closeHotelHind',
+      url: api_url + '/Smallapp3/user/closeHotelHind',
       header: {
         'content-type': 'application/json'
       },
-      data:{
-        openid:openid
+      data: {
+        openid: openid
       },
-      success:function(res){
+      success: function(res) {
         that.setData({
-          close_hotel_hint:1
+          close_hotel_hint: 1
         })
       }
     })
-    
+
   },
   //遥控呼大码
-  callQrCode: utils.throttle(function (e) {
+  callQrCode: utils.throttle(function(e) {
     var that = this;
     openid = e.currentTarget.dataset.openid;
     box_mac = e.currentTarget.dataset.box_mac;
     var qrcode_img = e.currentTarget.dataset.qrcode_img;
     var hotel_info = e.currentTarget.dataset.hotel_info;
     app.controlCallQrcode(openid, box_mac, qrcode_img, hotel_info, that);
-  }, 3000),//呼大码结束
+  }, 3000), //呼大码结束
   //打开遥控器
-  openControl: function (e) {
+  openControl: function(e) {
     var that = this;
-    var qrcode_url = api_url+'/Smallapp4/index/getBoxQr?box_mac=' + box_mac + '&type=3';
+    var qrcode_url = api_url + '/Smallapp4/index/getBoxQr?box_mac=' + box_mac + '&type=3';
     that.setData({
       popRemoteControlWindow: true,
       qrcode_img: qrcode_url
     })
   },
   //关闭遥控
-  closeControl: function (e) {
+  closeControl: function(e) {
     var that = this;
     that.setData({
       popRemoteControlWindow: false,
@@ -591,7 +598,7 @@ Page({
 
   },
   //遥控退出投屏
-  exitForscreen: function (e) {
+  exitForscreen: function(e) {
     var that = this;
     openid = e.currentTarget.dataset.openid;
     box_mac = e.currentTarget.dataset.box_mac;
@@ -599,7 +606,7 @@ Page({
     app.controlExitForscreen(openid, box_mac, hotel_info, that);
   },
   //遥控调整音量
-  changeVolume: function (e) {
+  changeVolume: function(e) {
     var that = this;
     box_mac = e.currentTarget.dataset.box_mac;
     openid = e.currentTarget.dataset.openid;
@@ -609,7 +616,7 @@ Page({
 
   },
   //遥控切换节目
-  changeProgram: function (e) {
+  changeProgram: function(e) {
     console.log(e);
     var that = this;
     box_mac = e.currentTarget.dataset.box_mac;
@@ -618,7 +625,7 @@ Page({
     var hotel_info = e.currentTarget.dataset.hotel_info;
     app.controlChangeProgram(openid, box_mac, change_type, hotel_info, that);
   },
-  modalConfirm: function (e) {
+  modalConfirm: function(e) {
     console.log(e);
     var that = this;
     var hotel_info = e.target.dataset.hotel_info;
@@ -653,28 +660,31 @@ Page({
           box_mac = '';
         }
         //console.log(data);
-        }, re => { }, { isShowLoading:false});
+      }, re => {}, {
+        isShowLoading: false
+      });
     } else {
       app.openidCallback = openid => {
         utils.PostRequest(api_url + '/Smallapp4/index/isHaveCallBox', {
-          openid: openid
-        }, 
-        (data, headers, cookies, errMsg, statusCode) => 
-        {
-          if (data.result.is_have == 1) {
+            openid: openid
+          },
+          (data, headers, cookies, errMsg, statusCode) => {
+            if (data.result.is_have == 1) {
 
-          } else {
-            app.globalData.link_type = 1;
-            that.setData({
-              is_link: 0,
-              box_mac: '',
-              link_type: 1,
-              popRemoteControlWindow: false
-            })
-            box_mac = '';
+            } else {
+              app.globalData.link_type = 1;
+              that.setData({
+                is_link: 0,
+                box_mac: '',
+                link_type: 1,
+                popRemoteControlWindow: false
+              })
+              box_mac = '';
+            }
+          },
+          re => {}, {
+            isShowLoading: false
           }
-        }, 
-          re => { }, { isShowLoading: false }
         );
       }
     }

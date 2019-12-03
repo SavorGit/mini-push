@@ -1,5 +1,6 @@
 <!--pages/demand/goods_detail.wxml-->
 <import src="/pages/template/commons" />
+
 <!-- <template wx:if="{{is_header==0}}" is="navigationBarForTwoLevel" data='{{statusBarHeight: statusBarHeight,titleText:goods_info.name}}' /> -->
 <view wx:if="{{is_header==0}}" class='default-navigation-bar theme-navigation'>
   <view class='status-bar' style='height:{{statusBarHeight}}px;'></view>
@@ -16,35 +17,40 @@
 </view>
 <template wx:if="{{is_header==1}}" is="navigationBarForShare" data='{{statusBarHeight: statusBarHeight,titleText:goods_info.name}}' />
 
-<!-- <view class="container flex-column-center-flex_start theme-container" style='height: calc(100vh - 46px - {{statusBarHeight}}px);'> -->
-<view class="container flex-column-center-flex_start theme-container" style='height: calc({{documentHeight}}px - 46px);'>
-  <video class="goods-video" src="{{goods_info.video_url}}"></video>
-  <view class='operation flex-row-center-flex_end font_666666_26'>
-    <view>
-      <label class="fa fa-television fa-lg">{{goods_info.play_num}}</label>
+<block wx:if="{{link_type != 2}}">
+  <!-- <view class="container flex-column-center-flex_start theme-container" style='height: calc(100vh - 46px - {{statusBarHeight}}px);'> -->
+  <view class="container flex-column-center-flex_start theme-container" style='height: calc({{documentHeight}}px - 46px);'>
+    <video class="goods-video" src="{{goods_info.video_url}}"></video>
+    <view class='operation flex-row-center-flex_end font_666666_26'>
+      <view>
+        <label class="fa fa-television fa-lg">{{goods_info.play_num}}</label>
+      </view>
+      <view wx:if="{{goods_info.is_collect==1}}">
+        <label class="fa fa-heart fa-lg" style="color: #E11E4C;" bindtap='cancCollect' data-res_id="{{goods_info.goods_id}}" data-type='4' data-openid='{{openid}}'>{{goods_info.collect_num}}</label>
+      </view>
+      <view wx:else>
+        <label class="fa fa-heart-o fa-lg" bindtap='onCollect' data-res_id="{{goods_info.goods_id}}">{{goods_info.collect_num}}</label>
+      </view>
+      <button class="font_666666_26" open-type='share' data-openid="{{openid}}" data-goods_id="{{goods_info.goods_id}}" data-type='4' data-video_url="{{video_url}}" data-img_url='{{goods_info.pubdetail[0].img_url}}' data-share_num='{{goods_info.share_num}}'>
+        <label class="fa fa-share-square-o fa-lg">{{goods_info.share_num}}</label>
+      </button>
     </view>
-    <view wx:if="{{goods_info.is_collect==1}}">
-      <label class="fa fa-heart fa-lg" style="color: #E11E4C;" bindtap='cancCollect' data-res_id="{{goods_info.goods_id}}" data-type='4' data-openid='{{openid}}'>{{goods_info.collect_num}}</label>
+    <!-- <view class="goods-title">{{goods_info.name}}</view> -->
+    <scroll-view class="goods-info full_width flex-column-center-flex_start theme-container" scroll-y="true" scroll-with-animation="true">
+      <block wx:for="{{goods_info.detail_content}}" wx:key="item" wx:for-index="index">
+        <image mode="widthFix" src="{{item}}"></image>
+      </block>
+    </scroll-view>
+    <view class="page-bottom full_width flex-row-center-space_around theme-panel">
+      <button class="theme-button-dark" bindtap="boxShow" data-goods_id="{{goods_info.goods_id}}" data-pubdetail="{{goods_info.pubdetail}}" data-media_type="{{goods_info.media_type}}" data-hotel_info="{{hotel_info}}">电视播放</button>
+      <button wx:if="{{goods_info.is_storebuy==1 && uid!=''}}" bindtap="showTc" class="theme-button-buy" data-goods_id="{{goods_info.goods_id}}" data-goods_box_mac="{{goods_box_mac}}" data-buy_type="1" data-uid="{{uid}}">店内购买</button>
+      <navigator class="theme-button-buy" bindtap="clickBuyGoods" data-goods_id="{{goods_info.goods_id}}" target="miniProgram" app-id="{{goods_info.appid}}" path="{{goods_info.jd_url}}">{{goods_info.buybutton}}</navigator>
     </view>
-    <view wx:else>
-      <label class="fa fa-heart-o fa-lg" bindtap='onCollect' data-res_id="{{goods_info.goods_id}}">{{goods_info.collect_num}}</label>
-    </view>
-    <button class="font_666666_26" open-type='share' data-openid="{{openid}}" data-goods_id="{{goods_info.goods_id}}" data-type='4' data-video_url="{{video_url}}" data-img_url='{{goods_info.pubdetail[0].img_url}}' data-share_num='{{goods_info.share_num}}'>
-      <label class="fa fa-share-square-o fa-lg">{{goods_info.share_num}}</label>
-    </button>
   </view>
-  <!-- <view class="goods-title">{{goods_info.name}}</view> -->
-  <scroll-view class="goods-info full_width flex-column-center-flex_start theme-container" scroll-y="true" scroll-with-animation="true">
-    <block wx:for="{{goods_info.detail_content}}" wx:key="item" wx:for-index="index">
-      <image mode="widthFix" src="{{item}}"></image>
-    </block>
-  </scroll-view>
-  <view class="page-bottom full_width flex-row-center-space_around theme-panel">
-    <button class="theme-button-dark" bindtap="boxShow" data-goods_id="{{goods_info.goods_id}}" data-pubdetail="{{goods_info.pubdetail}}" data-media_type="{{goods_info.media_type}}" data-hotel_info="{{hotel_info}}">电视播放</button>
-    <button wx:if="{{goods_info.is_storebuy==1 && uid!=''}}" bindtap="showTc" class="theme-button-buy" data-goods_id="{{goods_info.goods_id}}" data-goods_box_mac="{{goods_box_mac}}" data-buy_type="1" data-uid="{{uid}}">店内购买</button>
-    <navigator class="theme-button-buy" bindtap="clickBuyGoods" data-goods_id="{{goods_info.goods_id}}" target="miniProgram" app-id="{{goods_info.appid}}" path="{{goods_info.jd_url}}">{{goods_info.buybutton}}</navigator>
-  </view>
-</view>
+</block>
+<block wx:else>
+  <template is="pageForNoNet" data='{{statusBarHeight: statusBarHeight,titleText:"热点投屏"}}' />
+</block>
 
 <!-- 店内数量 -->
 <modal show="{{showInputGoodsCount}}" width="600rpx" height='240rpx' border-radius="10rpx" title-text='' confirm-text='' cancel-text='' background-color='unset'>

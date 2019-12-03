@@ -15,6 +15,7 @@ Page({
   data: {
     statusBarHeight: getApp().globalData.statusBarHeight,
     documentHeight: app.SystemInfo.documentHeight,
+    link_type: app.globalData.link_type, //1:外网投屏  2：直连投屏
     goods_info: [],
     showInputGoodsCount: false,
     goods_nums: 1
@@ -25,6 +26,12 @@ Page({
    */
   onLoad: function(options) {
     var that = this;
+
+    // console.log('onLoad', 'that.data.link_type', that.data.link_type);
+    if (that.data.link_type == 2) {
+      return;
+    }
+
     var user_info = wx.getStorageSync('savor_user_info');
     openid = user_info.openid;
     box_mac = options.box_mac;
@@ -58,16 +65,17 @@ Page({
       })
     });
     utils.PostRequest(api_url + '/Smallapp4/optimize/detail', {
-      uid: uid,
-      goods_id: goods_id,
-      openid: openid,
-    }, (data, headers, cookies, errMsg, statusCode) => {
-      goods_info = data.result
-      that.setData({
-        goods_info: data.result
-      })
-    }
-      
+        uid: uid,
+        goods_id: goods_id,
+        openid: openid,
+        box_mac: goods_box_mac
+      }, (data, headers, cookies, errMsg, statusCode) => {
+        goods_info = data.result
+        that.setData({
+          goods_info: data.result
+        })
+      }
+
     );
     // wx.request({
     //   // url: api_url + '/Smallapp3/optimize/detail',
@@ -180,7 +188,7 @@ Page({
 
 
     app.boxShow(box_mac, forscreen_id, pubdetail, res_type, res_nums, 5, hotel_info);
-    if(box_mac){
+    if (box_mac) {
       // 调用记录播放次数接口
       utils.PostRequest(api_url + '/Smallapp4/demand/recordPlaynum', {
         openid: openid,
@@ -193,7 +201,7 @@ Page({
         });
       });
     }
-    
+
 
   },
   //收藏资源
