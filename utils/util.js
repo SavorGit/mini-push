@@ -262,7 +262,7 @@ module.exports.PostRequest = PostRequest;
  *                                                              isShowToastForFail:     boolean,    // 是否在 fail 方法中弹出系统Toast
  *                                                          }
  */
-const GetRequest = (url, data, successFn, failFn, isShowToastForSuccess, isShowToastForFail) => {
+const GetRequest = (url, data, successFn, failFn, options) => {
   if (typeof(options) != 'object') {
     options = {};
   }
