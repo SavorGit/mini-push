@@ -9,8 +9,18 @@
           <video wx:if="{{mediaScrollIndex == index}}" id="JohnVideo{{index}}" class="full_width full_height" show-center-play-btn="{{false}}" autoplay="{{false}}" controls="{{false}}" src="{{bean.pubdetail[0].res_url}}" data-index="{{index}}" data-id="{{bean.id}}"
             data-type="{{bean.type}}" event-model="bubble" bindprogress="onLoadProgress" bindtimeupdate="onTimeUpdate" bindplay="onVideoPlay" bindpause="onVideoPause" bindended="onVideoEnded" bindwaiting="onVideoWaiting" binderror="onVideoError" bindloadedmetadata="onVideoLoadedMetadata"
             bindtap="onClickVideoPalyButton">
-            <view class="default-navigation-bar flex-row-center-center theme-font-FFFFFF" style="height: 46px; padding-top: {{statusBarHeight}}px;">
-              <view class='text'>热点投屏</view>
+            <view class="default-navigation-bar theme-font-FFFFFF" style="height: 46px; padding-top: {{statusBarHeight}}px;">
+              <view class='navigation-bar flex-row-center-flex_start'>
+                <cover-view class='btn flex-row-center-flex_start'>
+                  <navigator class='go-back flex-row-center-flex_start' open-type='navigateBack' delta='1'>
+                    <cover-image src="/images/icon2/FFFFFF_angle-left.png"></cover-image>
+                    <cover-view class="text">返回</cover-view>
+                  </navigator>
+                </cover-view>
+                <view class='title flex-column-center-space_between'>
+                  <label class='text'>热点投屏</label>
+                </view>
+              </view>
             </view>
             <view class='page-top flex-row-center-center'></view>
             <view class='page-main flex-row-center-flex_end' style="height: calc(100% - 46px - {{statusBarHeight}}px - 266rpx);">

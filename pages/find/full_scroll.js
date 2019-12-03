@@ -289,10 +289,7 @@ Page({
     self.touchMoveHandler = new utils.TouchMoveHandler(systemInfo, touchMoveExecuteTrip);
 
     if (self.data.link_type == 2) {
-      // self.setData({
-      //   link_type: app.globalData.link_type
-      // });
-      console.log('onLoad', 'self.data.link_type', self.data.link_type);
+      // console.log('onLoad', 'self.data.link_type', self.data.link_type);
       return;
     }
 
@@ -808,4 +805,16 @@ Page({
     }
 
   }, // 分享结束
+
+  // 重试 - 无网
+  onReload(e) {
+    this.onLoad();
+  },
+
+  // 跳转到机顶盒视频 - 无网
+  gotoBoxVideoPage(e) {
+    wx.navigateTo({
+      url: '/pages/find/box_video',
+    })
+  }
 });
