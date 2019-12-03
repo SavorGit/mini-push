@@ -60,12 +60,15 @@ Page({
           }
         },
         fail: function (e) {
-          wx.setStorage({
-            key: 'savor_user_info',
-            data: {
-              'openid': app.globalData.openid
-            },
-          })
+          if(app.globalData.link_type!=2){
+            wx.setStorage({
+              key: 'savor_user_info',
+              data: {
+                'openid': app.globalData.openid
+              },
+            })
+          }
+          
         }
       }); //判断用户是否注册结束
       //获取助力的内容

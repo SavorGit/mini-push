@@ -4,6 +4,7 @@ const app = getApp();
 var openid;
 var box_mac;
 var api_url = app.globalData.api_url;
+var cache_key = app.globalData.cache_key;
 Page({
 
   /**
@@ -25,8 +26,19 @@ Page({
    */
   onLoad: function (options) {
     //wx.hideShareMenu();
-    console.log(app.globalData);
     var that = this;
+    
+    if (app.globalData.link_type == 2) {
+      var userinfo = wx.getStorageSync(cache_key+'user_info');
+      userinfo.id = userinfo.user_id;
+      that.setData({
+        publiclist:app.globalData.public_list,
+        collectlist:app.globalData.collect_list,
+        userinfo: userinfo
+      })
+      
+    }
+    
     if (app.globalData.openid && app.globalData.openid != '') {
       that.setData({
         openid: app.globalData.openid
@@ -49,10 +61,13 @@ Page({
           })
         },
         fail: function (e) {
-          wx.setStorage({
-            key: 'savor_user_info',
-            data: { 'openid': app.globalData.openid },
-          })
+          if(app.globalData.link_type!=2){
+            wx.setStorage({
+              key: 'savor_user_info',
+              data: { 'openid': app.globalData.openid },
+            })
+          }
+          
         }
       });//判断用户是否注册结束
       wx.request({
@@ -107,10 +122,13 @@ Page({
               })
             },
             fail: function (e) {
-              wx.setStorage({
-                key: 'savor_user_info',
-                data: { 'openid': openid },
-              })
+              if(app.globalData.link_type!=2){
+                wx.setStorage({
+                  key: 'savor_user_info',
+                  data: { 'openid': openid },
+                })
+              }
+              
             }
           });//判断用户是否注册结束
           wx.request({

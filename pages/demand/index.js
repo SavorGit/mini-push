@@ -19,12 +19,17 @@ let SavorUtils = {
     }, (data, headers, cookies, errMsg, statusCode) => wx.setStorage({
       key: 'savor_user_info',
       data: data.result.userinfo,
-    }), res => wx.setStorage({
-      key: 'savor_user_info',
-      data: {
-        openid: app.globalData.openid
+    }),function () { 
+      if(app.globalData.link_type!=2){
+        wx.setStorage({
+          key: 'savor_user_info',
+          data: {
+            openid: app.globalData.openid
+          }
+        })
       }
-    }),{ isShowLoading: false }),
+      
+    },{ isShowLoading: false }),
   },
   Page: {},
 
@@ -59,7 +64,8 @@ Page({
     if(app.globalData.link_type==2){
       self.setData({
         program_list: app.globalData.optimize_data,
-        hotel_info: app.globalData.hotel_info
+        hotel_info: app.globalData.hotel_info,
+        box_mac: app.globalData.hotel_info.box_mac,
       })
       
     }

@@ -252,6 +252,20 @@ Page({
   onLoad: function(options) {
     //wx.hideShareMenu();
     var that = this;
+    console.log(app.globalData);
+    if(app.globalData.link_type==2){
+      that.setData({
+        cityArray:app.globalData.city_name_list,
+        objectAreaArray:app.globalData.city_list,
+        areaArray:app.globalData.area_name_list,
+        objectAreaArray:app.globalData.area_list,
+        cuisineArray:app.globalData.food_name_list,
+        objectCuisineArray:app.globalData.food_list,
+        perCapitaPayArray:app.globalData.agv_name,
+        objectPerCapitaPayArray:app.globalData.agv_lisg,
+        hotel_list: app.globalData.hotels
+      })
+    }
     var user_info = wx.getStorageSync("savor_user_info");
     openid = user_info.openid;
     that.setData({

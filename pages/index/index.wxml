@@ -96,7 +96,7 @@
     </view>
     <view class="row flex-row-center-space_around full_width">
       <view>
-        <button wx:if="{{link_type==0 || link_type==2}}" disabled="true" class="theme-font2" bindtap='showHappy' data-boxmac="{{box_mac}}" data-openid="{{openid}}" data-intranet_ip="{{hotel_info.intranet_ip}}">
+        <button wx:if="{{link_type==0}}" disabled="true" class="theme-font2" bindtap='showHappy' data-boxmac="{{box_mac}}" data-openid="{{openid}}" data-intranet_ip="{{hotel_info.intranet_ip}}">
           <view class="icon flex-column-center-center birthday">
             <image src='/images/icon2/FFFFFF_birthday.png'></image>
           </view>

@@ -62,50 +62,58 @@ Page({
       utils.PostRequest(api_url + '/smallapp21/User/isRegister', {
         "openid": app.globalData.openid,
         "page_id": 3
-      }, (data, headers, cookies, errMsg, statusCode) => wx.setStorage({
-        key: 'savor_user_info',
-        data: data.result.userinfo,
-      }), res => wx.setStorage({
-        key: 'savor_user_info',
-        data: {
-          'openid': app.globalData.openid
-        }
-      }));
-      utils.PostRequest(api_url + '/Smallapp4/content/initdata', {
-        "openid": app.globalData.openid,
-        
-      }, (data, headers, cookies, errMsg, statusCode) => {
-        console.log('sss');
-        app.globalData.optimize_data = data.result.optimize_data;
-        app.globalData.public_list = data.result.public_list;
-        app.globalData.collect_list = data.result.collect_list;
-      }, res => {
+      }, (data, headers, cookies, errMsg, statusCode) =>{
+        wx.setStorage({
+          key: 'savor_user_info',
+          data: data.result.userinfo,
 
-      });
+        })
+        utils.PostRequest(api_url + '/Smallapp4/content/initdata', {
+          "openid": app.globalData.openid,
+
+        }, (data, headers, cookies, errMsg, statusCode) => {
+          
+          console.log('sss');
+          app.globalData.optimize_data = data.result.optimize_data;
+          app.globalData.public_list = data.result.public_list;
+          app.globalData.collect_list = data.result.collect_list;
+          app.globalData.city_name_list = data.result.forscreen_hotels.city_name_list;
+          app.globalData.city_list = data.result.forscreen_hotels.city_list;
+          app.globalData.food_name_list = data.result.forscreen_hotels.food_name_list;
+          app.globalData.food_list = data.result.forscreen_hotels.food_list;
+          app.globalData.agv_name = data.result.forscreen_hotels.agv_name;
+          app.globalData.agv_lisg = data.result.forscreen_hotels.agv_lisg;
+          app.globalData.hotels = data.result.forscreen_hotels.hotels;
+        }, res => {
+
+        });
+
+        utils.PostRequest(api_url + '/Smallapp4/index/isHaveCallBox?openid=' + app.globalData.openid, {}, (data, headers, cookies, errMsg, statusCode) => {
+          var is_have = data.result.is_have;
+          if (is_have == 1) { //已经扫码链接电视
+            app.linkHotelWifi(data.result, that);
+            app.globalData.hotel_info = data.result;
+            that.setData({
+              is_link: 1,
+              hotel_room: data.result.hotel_name + data.result.room_name,
+              hotel_name: data.result.hotel_name,
+              room_name: data.result.room_name,
+              box_mac: data.result.box_mac,
+              hotel_info: data.result,
+              hotel_info_json: JSON.stringify(data.result),
+            })
+            box_mac = data.result.box_mac;
+          } else {
+            that.setData({
+              is_link: 0,
+              box_mac: '',
+            })
+            box_mac = '';
+          }
+        });
+
+      } );
       
-      utils.PostRequest(api_url + '/Smallapp4/index/isHaveCallBox?openid=' + app.globalData.openid, {}, (data, headers, cookies, errMsg, statusCode) => {
-        var is_have = data.result.is_have;
-        if (is_have == 1) { //已经扫码链接电视
-          app.linkHotelWifi(data.result, that);
-          app.globalData.hotel_info = data.result;
-          that.setData({
-            is_link: 1,
-            hotel_room: data.result.hotel_name + data.result.room_name,
-            hotel_name: data.result.hotel_name,
-            room_name: data.result.room_name,
-            box_mac: data.result.box_mac,
-            hotel_info: data.result,
-            hotel_info_json: JSON.stringify(data.result),
-          })
-          box_mac = data.result.box_mac;
-        } else {
-          that.setData({
-            is_link: 0,
-            box_mac: '',
-          })
-          box_mac = '';
-        }
-      });
       
       //是否显示活动
       isShowAct(app.globalData.openid);
@@ -120,80 +128,58 @@ Page({
           utils.PostRequest(api_url + '/smallapp21/User/isRegister', {
             "openid": openid,
             "page_id": 3
-          }, (data, headers, cookies, errMsg, statusCode) => wx.setStorage({
-            key: 'savor_user_info',
-            data: data.result.userinfo,
-          }), res => wx.setStorage({
-            key: 'savor_user_info',
-            data: {
-              'openid': openid
-            },
-          }));
-          utils.PostRequest(api_url + '/Smallapp4/content/initdata', {
-            "openid": openid,
+          }, (data, headers, cookies, errMsg, statusCode) =>{
+            console.log(data);
+            wx.setStorage({
+              key: 'savor_user_info',
+              data: data.result.userinfo,
+            })
+            utils.PostRequest(api_url + '/Smallapp4/content/initdata', {
+              "openid": openid,
 
-          }, (data, headers, cookies, errMsg, statusCode) => {
-            console.log('dddd');
-            app.globalData.optimize_data = data.result.optimize_data;
-            app.globalData.public_list = data.result.public_list;
-            app.globalData.collect_list = data.result.collect_list;
-          }, res => {
+            }, (data, headers, cookies, errMsg, statusCode) => {
+              
+              app.globalData.optimize_data = data.result.optimize_data;
+              app.globalData.public_list = data.result.public_list;
+              app.globalData.collect_list = data.result.collect_list;
+              app.globalData.city_name_list = data.result.forscreen_hotels.city_name_list;
+              app.globalData.city_list = data.result.forscreen_hotels.city_list;
+              app.globalData.food_name_list = data.result.forscreen_hotels.food_name_list;
+              app.globalData.food_list = data.result.forscreen_hotels.food_list;
+              app.globalData.agv_name = data.result.forscreen_hotels.agv_name;
+              app.globalData.agv_lisg = data.result.forscreen_hotels.agv_lisg;
+              app.globalData.hotels = data.result.forscreen_hotels.hotels;
+            }, res => {
 
-          });
+            });
+
+            utils.PostRequest(api_url + '/Smallapp4/index/isHaveCallBox?openid=' + openid, {}, (data, headers, cookies, errMsg, statusCode) => {
+              var is_have = data.result.is_have;
+              if (is_have == 1) {
+                app.linkHotelWifi(data.result, that);
+                app.globalData.hotel_info = data.result;
+                that.setData({
+                  is_link: 1,
+                  hotel_room: data.result.hotel_name + data.result.room_name,
+                  hotel_name: data.result.hotel_name,
+                  room_name: data.result.room_name,
+                  box_mac: data.result.box_mac,
+                  hotel_info: data.result,
+                  hotel_info_json: JSON.stringify(data.result),
+                })
+                box_mac = data.result.box_mac;
+              } else {
+                that.setData({
+                  is_link: 0,
+                  box_mac: '',
+                })
+                box_mac = '';
+              }
+            });
+
+          } );
           
-          utils.PostRequest(api_url + '/Smallapp4/index/isHaveCallBox?openid=' + openid, {}, (data, headers, cookies, errMsg, statusCode) => {
-            var is_have = data.result.is_have;
-            if (is_have == 1) {
-              app.linkHotelWifi(data.result, that);
-              that.setData({
-                is_link: 1,
-                hotel_room: data.result.hotel_name + data.result.room_name,
-                hotel_name: data.result.hotel_name,
-                room_name: data.result.room_name,
-                box_mac: data.result.box_mac,
-                hotel_info: data.result,
-                hotel_info_json: JSON.stringify(data.result),
-              })
-              box_mac = data.result.box_mac;
-            } else {
-              that.setData({
-                is_link: 0,
-                box_mac: '',
-              })
-              box_mac = '';
-            }
-          });
-          // wx.request({
-          //   url: api_url + '/Smallapp4/index/isHaveCallBox?openid=' + openid,
-          //   headers: {
-          //     'Content-Type': 'application/json'
-          //   },
-          //   success: function(rest) {
-          //     var is_have = rest.data.result.is_have;
-          //     if (is_have == 1) {
-          //       app.linkHotelWifi(rest.data.result, that);
-          //       //select_link_way(rest.data.result);
-          //       that.setData({
-          //         is_link: 1,
-          //         hotel_room: rest.data.result.hotel_name + rest.data.result.room_name,
-          //         hotel_name: rest.data.result.hotel_name,
-          //         room_name: rest.data.result.room_name,
-          //         box_mac: rest.data.result.box_mac,
-          //         hotel_info: rest.data.result,
-          //         hotel_info_json: JSON.stringify(rest.data.result),
-          //       })
-          //       box_mac = rest.data.result.box_mac;
-          //       //getHotelInfo(rest.data.result.box_mac);
-          //     } else {
-          //       that.setData({
-          //         is_link: 0,
-          //         box_mac: '',
-          //       })
-          //       box_mac = '';
-          //     }
-          //   }
-          // });
-          //是否显示活动
+          
           isShowAct(openid);
         }
       }
@@ -233,36 +219,7 @@ Page({
             showButton4Favorites: is_jd
           });
         });
-        // wx.request({
-        //   url: api_url + '/Smallsale/goods/getdetail',
-        //   headers: {
-        //     'Content-Type': 'application/json'
-        //   },
-        //   data: {
-        //     goods_id: goods_id,
-        //     uid: uid,
-        //     openid: openid
-        //   },
-        //   success: function(res) {
-        //     //console.log(res);
-        //     if (res.data.code == 10000) {
-        //       //console.log(res);
-        //       if (res.data.result.jd_url == '') {
-        //         var is_jd = false;
-        //       } else {
-        //         is_jd = true;
-        //       }
-        //       //console.log(is_jd);
-        //       that.setData({
-        //         jd_url: res.data.result.jd_url,
-        //         goods_info: res.data.result,
-        //         showActgoods: true,
-        //         showButton4JD: is_jd,
-        //         showButton4Favorites: is_jd
-        //       });
-        //     }
-        //   }
-        // })
+        
       }
     }
     utils.PostRequest(api_url + '/Smallapp3/Adsposition/getAdspositionList', {
@@ -278,28 +235,7 @@ Page({
         imgUrls_mid: imgUrls_mid
       });
     });
-    // wx.request({ //banner图
-    //   url: api_url + '/Smallapp3/Adsposition/getAdspositionList',
-    //   data: {
-    //     position: '2,3',
-    //   },
-    //   success: function(res) {
-    //     if (res.data.code == 10000) {
-    //       var imgUrls = res.data.result[2];
-    //       var imgUrls_mid = [];
-
-    //       if (typeof(res.data.result[3]) != 'undefined') {
-    //         var imgUrls_mid = res.data.result[3];
-    //       }
-
-    //       //console.log(res);
-    //       that.setData({
-    //         imgUrls: imgUrls,
-    //         imgUrls_mid: imgUrls_mid
-    //       })
-    //     }
-    //   }
-    // })
+    
     utils.PostRequest(api_url + '/Smallapp4/content/getHotplaylist', {
       page: 1,
       pagesize: 5
@@ -308,25 +244,7 @@ Page({
         hot_play: data.result.datalist
       });
     });
-    // wx.request({ //热播内容
-    //   url: api_url + '/Smallapp4/content/getHotplaylist',
-    //   headers: {
-    //     'Content-Type': 'application/json'
-    //   },
-    //   method: "POST",
-    //   data: {
-    //     page: 1,
-    //     pagesize: 5
-    //   },
-    //   success: function(res) {
-    //     if (res.data.code == 10000) {
-    //       //onsole.log(res.data.result);
-    //       that.setData({
-    //         hot_play: res.data.result.datalist
-    //       })
-    //     }
-    //   }
-    // })
+    
   },
   onGetUserInfo: function(res) {
     var that = this;
@@ -475,6 +393,7 @@ Page({
   chooseImage(e) {
     var that = this;
     var user_info = wx.getStorageSync("savor_user_info");
+    console.log(user_info);
     if (user_info.is_wx_auth != 3) {
       that.setData({
         showModal: true
