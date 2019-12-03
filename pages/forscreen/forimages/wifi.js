@@ -172,7 +172,7 @@ Page({
         filePath: img_url,
         name: 'fileUpload',
         success: function(res) {
-
+          console.log(res)
           if (i == img_lenth) {
             //var info_rt = JSON.parse(res.data);
             if (res.data.code == 1001) {
@@ -332,7 +332,7 @@ Page({
       url: "http://" + intranet_ip + ":8080/h5/stop?deviceId=" + openid + "&box_mac=" + box_mac + "&web=true",
       success: function(res) {
         console.log(res);
-        if (res.data.code == 0) {
+        if (res.data.code == 10000) {
           wx.navigateBack({
             delta: 1
           })

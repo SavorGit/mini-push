@@ -68,7 +68,7 @@ Page({
         url: inner_url,
         success:function(res){
           console.log(res);
-          if(res.data.code==0){
+          if(res.data.code==10000){
             var yx_list = res.data.result;
             var program_list = app.globalData.optimize_data;
             for(var i=0; i< program_list.length;i++){
@@ -78,8 +78,7 @@ Page({
                 program_list[i].is_show = 0;
               }
             }
-            console.log(program_list);
-            console.log(app.globalData.link_type);
+            
             self.setData({
               program_list: program_list,
               link_type:app.globalData.link_type

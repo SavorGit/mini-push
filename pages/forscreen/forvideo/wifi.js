@@ -1,5 +1,5 @@
 // pages/launch/video/index.js
-const util = require('../../../utils/util.js')
+const utils = require('../../../utils/util.js')
 const app = getApp()
 var openid;
 var box_mac;
@@ -108,7 +108,7 @@ Page({
       success: function(res) {
         console.log(res)
         //var info_rt = JSON.parse(res.data);
-        if (res.data.code == 0) {
+        if (res.data.code == 10000) {
           that.setData({
             is_upload: 1,
             vedio_url: video_url,
@@ -160,7 +160,7 @@ Page({
     wx.request({
       url: "http://" + intranet_ip + ":8080/h5/stop?deviceId=" + openid + "&box_mac=" + box_mac + "&web=true",
       success: function(res) {
-        if (res.data.code == 0) {
+        if (res.data.code == 10000) {
           wx.navigateBack({
             delta: 1
           })
@@ -272,7 +272,7 @@ Page({
       name: 'fileUpload',
       success: function(res) {
         //var info_rt = JSON.parse(res.data);
-        if (res.data.code == 0) {
+        if (res.data.code == 10000) {
           that.setData({
             is_upload: 1,
             vedio_url: vedio_url,
@@ -316,7 +316,7 @@ Page({
   },
 
   //遥控呼大码
-  callQrCode: util.throttle(function(e) {
+  callQrCode: utils.throttle(function(e) {
     var that = this;
     openid = e.currentTarget.dataset.openid;
     box_mac = e.currentTarget.dataset.box_mac;

@@ -134,8 +134,13 @@
         </button>
       </view>
       <view>
-        
-        <button class="theme-font2" bindtap='hdgames' wx:if="{{(link_type==0 || link_type==2) && is_link==1}}" disabled="true" data-linkcontent='/pages/game/climbtree/index' data-boxmac="{{box_mac}}" data-openid="{{openid}}">
+        <button class="theme-font2" bindtap='hdgames' wx:if="{{is_link==0}}" data-linkcontent='/pages/game/climbtree/index' data-boxmac="{{box_mac}}" data-openid="{{openid}}">
+          <view class="icon flex-column-center-center game">
+            <image src='/images/icon2/FFFFFF_game.png'></image>
+          </view>
+          <label>互动小游戏</label>
+        </button>
+        <button class="theme-font2" bindtap='hdgames' wx:elif="{{link_type==0 || link_type==2}}" disabled="true" data-linkcontent='/pages/game/climbtree/index' data-boxmac="{{box_mac}}" data-openid="{{openid}}">
           <view class="icon flex-column-center-center game">
             <image src='/images/icon2/FFFFFF_game.png'></image>
           </view>
@@ -149,13 +154,20 @@
         </button>
       </view>
       <view>
-        <button class="theme-font2" bindtap='forscreenHistory' wx:if="{{link_type==0 || link_type==2}}" disabled="true" data-boxmac="{{box_mac}}" data-openid="{{openid}}">
+        <button class="theme-font2" bindtap='forscreenHistory' wx:if="{{is_link==0}}" data-boxmac="{{box_mac}}" data-openid="{{openid}}">
           <view class="icon flex-column-center-center history">
             <image src='/images/icon2/FFFFFF_history.png'></image>
           </view>
           <label>投屏历史</label>
         </button>
-        <button class="theme-font2" bindtap='forscreenHistory' wx:if="{{link_type==1}}" data-boxmac="{{box_mac}}" data-openid="{{openid}}">
+
+        <button class="theme-font2" bindtap='forscreenHistory' wx:elif="{{link_type==0 || link_type==2}}" disabled="true" data-boxmac="{{box_mac}}" data-openid="{{openid}}">
+          <view class="icon flex-column-center-center history">
+            <image src='/images/icon2/FFFFFF_history.png'></image>
+          </view>
+          <label>投屏历史</label>
+        </button>
+        <button class="theme-font2" bindtap='forscreenHistory' wx:elif="{{link_type==1}}" data-boxmac="{{box_mac}}" data-openid="{{openid}}">
           <view class="icon flex-column-center-center history">
             <image src='/images/icon2/FFFFFF_history.png'></image>
           </view>

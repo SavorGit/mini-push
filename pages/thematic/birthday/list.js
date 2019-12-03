@@ -280,7 +280,7 @@ Page({
       wx.request({
         url: "http://" + hotel_info.intranet_ip + ":8080/h5/birthday_ondemand?deviceId=" + openid + "&box_mac=" + box_mac + "&web=true&media_name=" + filename + "&media_url=" + vediourl +'&avatarUrl='+user_info.avatarUrl+'&nickName='+user_info.nickName,
         success: function (res) {
-          if (res.statusCode == 200) {
+          if (res.data.code == 10000) {
             wx.showToast({
               title: '点播成功',
               icon: 'none',

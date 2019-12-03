@@ -54,6 +54,9 @@ Page({
     var that = this;
     //mta.Page.init()
     if (app.globalData.openid && app.globalData.openid != '') {
+      wx.showLoading({
+        title: '数据加载中，请稍后',
+      })
       that.setData({
         openid: app.globalData.openid
       })
@@ -63,6 +66,7 @@ Page({
         "openid": app.globalData.openid,
         "page_id": 3
       }, (data, headers, cookies, errMsg, statusCode) =>{
+        wx.hideLoading();
         wx.setStorage({
           key: 'savor_user_info',
           data: data.result.userinfo,
@@ -80,7 +84,7 @@ Page({
           
           app.globalData.hotels = data.result.forscreen_hotels.hotels;
         }, res => {
-
+          wx.hideLoading();
         });
 
         utils.PostRequest(api_url + '/Smallapp4/index/isHaveCallBox?openid=' + app.globalData.openid, {}, (data, headers, cookies, errMsg, statusCode) => {
@@ -113,6 +117,9 @@ Page({
       //是否显示活动
       isShowAct(app.globalData.openid);
     } else {
+      wx.showLoading({
+        title: '数据加载中，请稍后',
+      })
       app.openidCallback = openid => {
         if (openid != '') {
           that.setData({
@@ -124,7 +131,7 @@ Page({
             "openid": openid,
             "page_id": 3
           }, (data, headers, cookies, errMsg, statusCode) =>{
-            console.log(data);
+            wx.hideLoading();
             wx.setStorage({
               key: 'savor_user_info',
               data: data.result.userinfo,
@@ -140,7 +147,7 @@ Page({
               
               app.globalData.hotels = data.result.forscreen_hotels.hotels;
             }, res => {
-
+              wx.hideLoading();
             });
 
             utils.PostRequest(api_url + '/Smallapp4/index/isHaveCallBox?openid=' + openid, {}, (data, headers, cookies, errMsg, statusCode) => {
