@@ -654,23 +654,34 @@ page {
 /* ============================================ 无网页面 ============================================ */
 
 .no-net {
-  width: 480rpx;
+  width: 500rpx;
   height: 500rpx;
 }
 
 .no-net > image {
   width: 200rpx;
-  height: 138rpx;
+  height: 200rpx;
 }
 
 .no-net > text {
-  margin-top: 30rpx;
+  height: 30rpx;
+  line-height: 30rpx;
+  text-align: center;
   font-size: 28rpx;
   font-weight: bold;
 }
 
-.no-net > view > .theme-button-dark, .no-net > view > .theme-button-dark {
+.no-net > view {
+  width: 100%;
+  height: 60rpx;
+  margin-top: 160rpx;
+}
+
+.no-net > view > .theme-button-dark, .no-net > view > .theme-button-like {
   width: 200rpx;
   height: 60rpx;
+  line-height: 60rpx;
+  text-align: center;
   font-size: 24rpx;
+  border-radius: 10rpx;
 }
