@@ -139,9 +139,10 @@
 }
 
 .card > .model-1 > .body > .goods-tags > .goods-tag {
-  width: 100rpx;
+  max-width: 130rpx;
   height: 30rpx;
   line-height: 30rpx;
+  padding: 0 15rpx;
   margin-left: 30rpx;
   text-align: center;
   font-size: 20rpx;
@@ -183,9 +184,10 @@
 }
 
 .card > .model-2 > .body > .left > .goods-tags > .goods-tag {
-  width: 100rpx;
+  max-width: 130rpx;
   height: 30rpx;
   line-height: 30rpx;
+  padding: 0 15rpx;
   margin-left: 30rpx;
   text-align: center;
   font-size: 20rpx;
@@ -263,8 +265,9 @@
 }
 
 .card > .model-3 > .body > .goods-tags > .goods-tag {
-  width: 100rpx;
+  max-width: 130rpx;
   height: 30rpx;
+  padding: 0 15rpx;
   line-height: 30rpx;
   margin-left: 30rpx;
   text-align: center;

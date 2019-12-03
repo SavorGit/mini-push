@@ -34,16 +34,19 @@
         </navigator>
         <view class="foot theme-panel flex-row-center-flex_start">
           <view class="play">
-            <label class="fa fa-television fa-lg" style="color: #666666;" bindtap='onCollect' data-res_id="{{bean.id}}" data-type='{{bean.type}}' data-res_key="{{index}}"></label>
+            <!-- <label class="fa fa-television fa-lg" style="color: #666666;" bindtap='onCollect' data-res_id="{{bean.id}}" data-type='{{bean.type}}' data-res_key="{{index}}"></label> -->
+            <image src="/images/icon2/666666_television.png" style="width:32rpx;height:32rpx;" bindtap='onCollect' data-res_id="{{bean.id}}" data-type='{{bean.type}}' data-res_key="{{index}}"></image>
             <label class="num-text">{{bean.play_num}}</label>
           </view>
           <button class="share button_none" open-type='share' data-openid="{{openid}}" data-res_id="{{bean.id}}" data-type='{{bean.type}}' data-res_key="{{index}}" data-video_url="{{bean.tx_url}}" data-video_name="{{bean.title}}" data-video_img='{{bean.img_url}}'>
-            <label class="fa fa-share-square-o fa-lg" style="color: #666666;"></label>
+            <!-- <label class="fa fa-share-square-o fa-lg" style="color: #666666;"></label> -->
+            <image src="/images/icon2/666666_share.png" style="width:32rpx;height:32rpx;"></image>
             <label class="num-text">{{bean.share_num}}</label>
           </button>
-          <view wx:if="{{(bean.is_show==1 && link_type==2)}}" class="launch-tv theme-button-dark" data-index="{{index}}" data-goods_id="{{bean.id}}" data-name="{{bean.title}}" data-filename='{{bean.filename}}' data-vediourl="{{bean.tx_url}}" data-boxmac="{{box_mac}}" data-openid="{{openid}}" data-duration="{{bean.duration}}"
-            data-hotel_info="{{hotel_info}}" data-forscreen_url="{{bean.forscreen_url}}" data-resource_size="{{bean.resource_size}}" data-filename="{{bean.filename}}" data-tx_url="{{bean.tx_url}}" bindtap='boxShow'>电视播放</view>
-            <view wx:else class="launch-tv theme-button-dark" data-index="{{index}}" data-goods_id="{{bean.id}}" data-name="{{bean.title}}" data-filename='{{bean.filename}}' data-vediourl="{{bean.tx_url}}" data-boxmac="{{box_mac}}" data-openid="{{openid}}" data-duration="{{bean.duration}}"
+          <view wx:if="{{(bean.is_show==1 && link_type==2)}}" class="launch-tv theme-button-dark" data-index="{{index}}" data-goods_id="{{bean.id}}" data-name="{{bean.title}}" data-filename='{{bean.filename}}' data-vediourl="{{bean.tx_url}}" data-boxmac="{{box_mac}}"
+            data-openid="{{openid}}" data-duration="{{bean.duration}}" data-hotel_info="{{hotel_info}}" data-forscreen_url="{{bean.forscreen_url}}" data-resource_size="{{bean.resource_size}}" data-filename="{{bean.filename}}" data-tx_url="{{bean.tx_url}}"
+            bindtap='boxShow'>电视播放</view>
+          <view wx:else class="launch-tv theme-button-dark" data-index="{{index}}" data-goods_id="{{bean.id}}" data-name="{{bean.title}}" data-filename='{{bean.filename}}' data-vediourl="{{bean.tx_url}}" data-boxmac="{{box_mac}}" data-openid="{{openid}}" data-duration="{{bean.duration}}"
             data-hotel_info="{{hotel_info}}" data-forscreen_url="{{bean.forscreen_url}}" data-resource_size="{{bean.resource_size}}" data-filename="{{bean.filename}}" data-tx_url="{{bean.tx_url}}" bindtap='boxShow'>电视播放</view>
         </view>
       </view>
@@ -59,16 +62,19 @@
         </navigator>
         <view class="foot theme-panel flex-row-center-flex_start">
           <view class="play">
-            <label class="fa fa-television fa-lg" style="color: #666666;" bindtap='onCollect' data-res_id="{{bean.id}}" data-type='{{bean.type}}' data-res_key="{{index}}"></label>
+            <!-- <label class="fa fa-television fa-lg" style="color: #666666;" bindtap='onCollect' data-res_id="{{bean.id}}" data-type='{{bean.type}}' data-res_key="{{index}}"></label> -->
+            <image src="/images/icon2/666666_television.png" style="width:32rpx;height:32rpx;" bindtap='onCollect' data-res_id="{{bean.id}}" data-type='{{bean.type}}' data-res_key="{{index}}"></image>
             <label class="num-text">{{bean.play_num}}</label>
           </view>
           <button class="share button_none" open-type='share' data-openid="{{openid}}" data-res_id="{{bean.id}}" data-type='{{bean.type}}' data-res_key="{{index}}" data-video_url="{{bean.tx_url}}" data-video_name="{{bean.title}}" data-video_img='{{bean.img_url}}'>
-            <label class="fa fa-share-square-o fa-lg" style="color: #666666;"></label>
+            <!-- <label class="fa fa-share-square-o fa-lg" style="color: #666666;"></label> -->
+            <image src="/images/icon2/666666_share.png" style="width:32rpx;height:32rpx;"></image>
             <label class="num-text">{{bean.share_num}}</label>
           </button>
-          <view wx:if="{{(bean.is_show==1 && link_type==2)}}" class="launch-tv theme-button-dark" data-index="{{index}}" data-goods_id="{{bean.id}}" data-name="{{bean.title}}" data-filename='{{bean.filename}}' data-vediourl="{{bean.tx_url}}" data-boxmac="{{box_mac}}" data-openid="{{openid}}" data-duration="{{bean.duration}}"
-            data-hotel_info="{{hotel_info}}" data-forscreen_url="{{bean.forscreen_url}}" data-resource_size="{{bean.resource_size}}" data-filename="{{bean.filename}}" data-tx_url="{{bean.tx_url}}" bindtap='boxShow'>电视播放</view>
-            <view wx:else class="launch-tv theme-button-dark" data-index="{{index}}" data-goods_id="{{bean.id}}" data-name="{{bean.title}}" data-filename='{{bean.filename}}' data-vediourl="{{bean.tx_url}}" data-boxmac="{{box_mac}}" data-openid="{{openid}}" data-duration="{{bean.duration}}"
+          <view wx:if="{{(bean.is_show==1 && link_type==2)}}" class="launch-tv theme-button-dark" data-index="{{index}}" data-goods_id="{{bean.id}}" data-name="{{bean.title}}" data-filename='{{bean.filename}}' data-vediourl="{{bean.tx_url}}" data-boxmac="{{box_mac}}"
+            data-openid="{{openid}}" data-duration="{{bean.duration}}" data-hotel_info="{{hotel_info}}" data-forscreen_url="{{bean.forscreen_url}}" data-resource_size="{{bean.resource_size}}" data-filename="{{bean.filename}}" data-tx_url="{{bean.tx_url}}"
+            bindtap='boxShow'>电视播放</view>
+          <view wx:else class="launch-tv theme-button-dark" data-index="{{index}}" data-goods_id="{{bean.id}}" data-name="{{bean.title}}" data-filename='{{bean.filename}}' data-vediourl="{{bean.tx_url}}" data-boxmac="{{box_mac}}" data-openid="{{openid}}" data-duration="{{bean.duration}}"
             data-hotel_info="{{hotel_info}}" data-forscreen_url="{{bean.forscreen_url}}" data-resource_size="{{bean.resource_size}}" data-filename="{{bean.filename}}" data-tx_url="{{bean.tx_url}}" bindtap='boxShow'>电视播放</view>
         </view>
       </view>
@@ -90,16 +96,19 @@
         </navigator>
         <view class="foot theme-panel flex-row-center-flex_start">
           <view class="play">
-            <label class="fa fa-television fa-lg" style="color: #666666;" bindtap='onCollect' data-res_id="{{bean.id}}" data-type='{{bean.type}}' data-res_key="{{index}}"></label>
+            <!-- <label class="fa fa-television fa-lg" style="color: #666666;" bindtap='onCollect' data-res_id="{{bean.id}}" data-type='{{bean.type}}' data-res_key="{{index}}"></label> -->
+            <image src="/images/icon2/666666_television.png" style="width:32rpx;height:32rpx;" bindtap='onCollect' data-res_id="{{bean.id}}" data-type='{{bean.type}}' data-res_key="{{index}}"></image>
             <label class="num-text">{{bean.play_num}}</label>
           </view>
           <button class="share button_none" open-type='share' data-openid="{{openid}}" data-res_id="{{bean.id}}" data-type='{{bean.type}}' data-res_key="{{index}}" data-video_url="{{bean.tx_url}}" data-video_name="{{bean.title}}" data-video_img='{{bean.img_url}}'>
-            <label class="fa fa-share-square-o fa-lg" style="color: #666666;"></label>
+            <!-- <label class="fa fa-share-square-o fa-lg" style="color: #666666;"></label> -->
+            <image src="/images/icon2/666666_share.png" style="width:32rpx;height:32rpx;"></image>
             <label class="num-text">{{bean.share_num}}</label>
           </button>
-          <view wx:if="{{(bean.is_show==1 && link_type==2)}}" class="launch-tv theme-button-dark" data-index="{{index}}" data-goods_id="{{bean.id}}" data-name="{{bean.title}}" data-filename='{{bean.filename}}' data-vediourl="{{bean.tx_url}}" data-boxmac="{{box_mac}}" data-openid="{{openid}}" data-duration="{{bean.duration}}"
-            data-hotel_info="{{hotel_info}}" data-forscreen_url="{{bean.forscreen_url}}" data-resource_size="{{bean.resource_size}}" data-filename="{{bean.filename}}" data-tx_url="{{bean.tx_url}}" bindtap='boxShow'>电视播放</view>
-            <view wx:else class="launch-tv theme-button-dark" data-index="{{index}}" data-goods_id="{{bean.id}}" data-name="{{bean.title}}" data-filename='{{bean.filename}}' data-vediourl="{{bean.tx_url}}" data-boxmac="{{box_mac}}" data-openid="{{openid}}" data-duration="{{bean.duration}}"
+          <view wx:if="{{(bean.is_show==1 && link_type==2)}}" class="launch-tv theme-button-dark" data-index="{{index}}" data-goods_id="{{bean.id}}" data-name="{{bean.title}}" data-filename='{{bean.filename}}' data-vediourl="{{bean.tx_url}}" data-boxmac="{{box_mac}}"
+            data-openid="{{openid}}" data-duration="{{bean.duration}}" data-hotel_info="{{hotel_info}}" data-forscreen_url="{{bean.forscreen_url}}" data-resource_size="{{bean.resource_size}}" data-filename="{{bean.filename}}" data-tx_url="{{bean.tx_url}}"
+            bindtap='boxShow'>电视播放</view>
+          <view wx:else class="launch-tv theme-button-dark" data-index="{{index}}" data-goods_id="{{bean.id}}" data-name="{{bean.title}}" data-filename='{{bean.filename}}' data-vediourl="{{bean.tx_url}}" data-boxmac="{{box_mac}}" data-openid="{{openid}}" data-duration="{{bean.duration}}"
             data-hotel_info="{{hotel_info}}" data-forscreen_url="{{bean.forscreen_url}}" data-resource_size="{{bean.resource_size}}" data-filename="{{bean.filename}}" data-tx_url="{{bean.tx_url}}" bindtap='boxShow'>电视播放</view>
         </view>
       </view>
