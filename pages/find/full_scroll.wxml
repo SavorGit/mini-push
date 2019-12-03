@@ -1,7 +1,7 @@
 <!--pages/find/full_scroll.wxml-->
 <import src="/pages/template/commons" />
 
-<block wx:if="{{link_type == 1}}">
+<block wx:if="{{link_type != 2}}">
   <!-- 图片页 - 开始 -->
   <view wx:if="{{pageType==1}}" class="picture-page">
     <template is="navigationBarForTopLevel" data='{{statusBarHeight: statusBarHeight,titleText:"热点投屏"}}' />

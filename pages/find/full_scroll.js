@@ -288,8 +288,8 @@ Page({
     let self = this;
     self.touchMoveHandler = new utils.TouchMoveHandler(systemInfo, touchMoveExecuteTrip);
 
+    console.log('onLoad', 'self.data.link_type', self.data.link_type);
     if (self.data.link_type == 2) {
-      // console.log('onLoad', 'self.data.link_type', self.data.link_type);
       return;
     }
 
