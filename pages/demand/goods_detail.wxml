@@ -49,6 +49,7 @@
   </view>
 </block>
 <block wx:else>
+  <template is="navigationBarForTwoLevel" data='{{statusBarHeight: statusBarHeight,titleText:"热点投屏"}}' />
   <template is="pageForNoNet" data='{{statusBarHeight: statusBarHeight,titleText:"热点投屏"}}' />
 </block>
 

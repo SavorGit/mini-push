@@ -264,8 +264,8 @@
 
 .card > .model-3 > .body > .goods-tags > .goods-tag {
   width: 100rpx;
-  height: 35rpx;
-  line-height: 35rpx;
+  height: 30rpx;
+  line-height: 30rpx;
   margin-left: 30rpx;
   text-align: center;
   font-size: 20rpx;
