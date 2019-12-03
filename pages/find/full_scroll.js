@@ -288,7 +288,7 @@ Page({
     let self = this;
     self.touchMoveHandler = new utils.TouchMoveHandler(systemInfo, touchMoveExecuteTrip);
 
-    // console.log('onLoad', 'app.globalData.hotel_info', app.globalData.hotel_info);
+    console.log('onLoad', 'app.globalData.hotel_info', app.globalData.hotel_info);
     // console.log('onLoad', 'self.data.link_type', self.data.link_type);
     if (self.data.link_type == 2) {
       return;
@@ -811,11 +811,11 @@ Page({
 
   // 跳转到机顶盒视频 - 无网
   gotoBoxVideoPage(e) {
-    // wx.navigateTo({
-    //   url: '/pages/find/box_video',
-    // });
-    wx.switchTab({
-      url: '/pages/index/index',
+    wx.navigateTo({
+      url: '/pages/find/box_video',
     });
+    // wx.switchTab({
+    //   url: '/pages/index/index',
+    // });
   }
 });

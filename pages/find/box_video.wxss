@@ -100,3 +100,12 @@ page {
   top: 0;
   left: 0;
 }
+
+.media-page .video-content .theme-button-like {
+  width: 200rpx;
+  height: 60rpx;
+  line-height: 60rpx;
+  text-align: center;
+  font-size: 24rpx;
+  border-radius: 10rpx;
+}

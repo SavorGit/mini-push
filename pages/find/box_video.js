@@ -7,6 +7,7 @@ let touchEvent = [];
 let touchMoveExecuteTrip = '160rpx';
 var cache_key = app.globalData.cache_key;
 let api_url = app.globalData.api_url;
+let httpReg = new RegExp('^http(s)?://', 'i');
 let SavorUtils = {
   User: {
 
@@ -92,29 +93,54 @@ let SavorUtils = {
 
     // 加载视频数据
     loadMediaData: pageContext => {
+      console.log('box_video.customer.Page.loadMediaData', 'app.globalData.hotel_info', app.globalData.hotel_info);
+      if (typeof(app.globalData.hotel_info) != 'object' || typeof(app.globalData.hotel_info.intranet_ip) != 'string') {
+        wx.showToast({
+          title: '请连接电视',
+          icon: 'none',
+          duration: 3000
+        });
+        setTimeout(function() {
+          wx.navigateBack();
+        }, 3000);
+        return;
+      }
       let user_info = wx.getStorageSync("savor_user_info");
       let pageNo = ++pageContext.data.mediaPageNo;
       utils.PostRequest('http://' + app.globalData.hotel_info.intranet_ip + ':8080/h5/findDiscover?box_mac=' + app.globalData.hotel_info.box_mac + '&web=true&deviceId=' + user_info.openid, {
         page: pageNo,
         openid: user_info.openid
       }, (data, headers, cookies, errMsg, statusCode) => {
+        console.log('box_video.customer.Page.loadMediaData', 'success', app.globalData.hotel_info.intranet_ip, app.globalData.hotel_info.box_mac, user_info.openid, data);
         let mediaObjectList = pageContext.data.mediaObjectList;
         if (!(mediaObjectList instanceof Array)) {
           mediaObjectList = new Array();
         }
         if (!(data.result instanceof Array)) {
           wx.showToast({
-            title: '没有视频了，赶快上传几个吧！',
+            title: '没有视频了！',
             icon: 'none',
             duration: 2000
           });
           return;
         }
+        // for (let index in data.result) {
+        //   let value = data.result[index];
+        //   if (typeof(value) != 'object' || typeof(value.url) != 'string') {
+        //     continue;
+        //   }
+        //   if (httpReg.test(value.url)) {} else {
+        //     value.url = 'http://' + value.url;
+        //   }
+        //   mediaObjectList.push(value);
+        // }
         pageContext.setData({
           mediaPageNo: pageNo,
           pageType: 0,
           mediaObjectList: mediaObjectList.concat(data.result)
         });
+      }, res => {
+        wx.navigateBack();
       });
     },
 
@@ -434,4 +460,17 @@ Page({
       'openid': user_info.openid
     })
   },
+
+  onLaunchtTV: function(e) {
+    let self = this;
+    let url = e.target.dataset.url;
+    let filename = url.substring(url.lastIndexOf('/') + 1);
+    let user_info = wx.getStorageSync("savor_user_info");
+    console.log('box_video.Page.onLaunchtTV', url, filename, app.globalData.hotel_info, user_info);
+    utils.PostRequest('http://' + app.globalData.hotel_info.intranet_ip + ':8080/h5/discover_ondemand_nonetwork?box_mac=' + app.globalData.hotel_info.box_mac + '&web=true&deviceId=' + user_info.openid + '&filename=' + filename, {}, (data, headers, cookies, errMsg, statusCode) => {
+      console.log('box_video.customer.Page.loadMediaData', 'success', app.globalData.hotel_info.intranet_ip, app.globalData.hotel_info.box_mac, user_info.openid, data);
+    }, res => {
+      wx.navigateBack();
+    });
+  }
 });

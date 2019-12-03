@@ -31,9 +31,11 @@
                   <view class="fa fa-spinner fa-pulse"></view>
                 </view>
               </view>
-              <view class="right-btn-group flex-column-center-flex_start fadeInRight"></view>
+              <view class="right-btn-group flex-column-center-center fadeInRight"></view>
             </view>
-            <view class='video-content flex-column-flex_start-start'></view>
+            <view class='video-content flex-column-center-center'>
+              <cover-view class="theme-button-like" data-url="{{bean.url}}" bindtap="onLaunchtTV">电视播放</cover-view>
+            </view>
             <progress class="full_width" percent="{{playProgress[index] * 100}}" stroke-width="5rpx" activeColor="#1BBEB6" backgroundColor="#EDEDED"></progress>
           </video>
         </view>
