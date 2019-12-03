@@ -36,7 +36,8 @@ Page({
     box_mac: '', //机顶盒mac
     close_hotel_hint: 1,
     link_type:app.globalData.link_type,
-    wifiErr: app.globalData.wifiErr
+    wifiErr: app.globalData.wifiErr,
+    link_type:app.globalData.link_type,
     
 
   },
@@ -252,17 +253,9 @@ Page({
   onLoad: function(options) {
     //wx.hideShareMenu();
     var that = this;
-    console.log(app.globalData);
     if(app.globalData.link_type==2){
       that.setData({
-        cityArray:app.globalData.city_name_list,
-        objectAreaArray:app.globalData.city_list,
-        areaArray:app.globalData.area_name_list,
-        objectAreaArray:app.globalData.area_list,
-        cuisineArray:app.globalData.food_name_list,
-        objectCuisineArray:app.globalData.food_list,
-        perCapitaPayArray:app.globalData.agv_name,
-        objectPerCapitaPayArray:app.globalData.agv_lisg,
+        link_type:app.globalData.link_type,
         hotel_list: app.globalData.hotels
       })
     }

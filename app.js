@@ -1023,12 +1023,7 @@ App({
     optimize_data:[],    //优选列表
     public_list:[],      //我的公开
     collect_list:[],     //我的收藏 
-    city_name_list:[],
-    city_list:[],
-    food_name_list:[],
-    food_list:[],
-    agv_name:[],
-    agv_lisg:[],
+    
     hotels:[],
   }
 })

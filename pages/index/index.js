@@ -77,12 +77,7 @@ Page({
           app.globalData.optimize_data = data.result.optimize_data;
           app.globalData.public_list = data.result.public_list;
           app.globalData.collect_list = data.result.collect_list;
-          app.globalData.city_name_list = data.result.forscreen_hotels.city_name_list;
-          app.globalData.city_list = data.result.forscreen_hotels.city_list;
-          app.globalData.food_name_list = data.result.forscreen_hotels.food_name_list;
-          app.globalData.food_list = data.result.forscreen_hotels.food_list;
-          app.globalData.agv_name = data.result.forscreen_hotels.agv_name;
-          app.globalData.agv_lisg = data.result.forscreen_hotels.agv_lisg;
+          
           app.globalData.hotels = data.result.forscreen_hotels.hotels;
         }, res => {
 
@@ -142,12 +137,7 @@ Page({
               app.globalData.optimize_data = data.result.optimize_data;
               app.globalData.public_list = data.result.public_list;
               app.globalData.collect_list = data.result.collect_list;
-              app.globalData.city_name_list = data.result.forscreen_hotels.city_name_list;
-              app.globalData.city_list = data.result.forscreen_hotels.city_list;
-              app.globalData.food_name_list = data.result.forscreen_hotels.food_name_list;
-              app.globalData.food_list = data.result.forscreen_hotels.food_list;
-              app.globalData.agv_name = data.result.forscreen_hotels.agv_name;
-              app.globalData.agv_lisg = data.result.forscreen_hotels.agv_lisg;
+              
               app.globalData.hotels = data.result.forscreen_hotels.hotels;
             }, res => {
 
@@ -265,7 +255,7 @@ Page({
           }, (data, headers, cookies, errMsg, statusCode) => {
             wx.setStorage({
               key: 'savor_user_info',
-              data: res.data.result,
+              data: data.result,
             });
             that.setData({
               showModal: false,
@@ -275,47 +265,7 @@ Page({
             icon: 'none',
             duration: 2000
           }));
-          // wx.request({
-          //   url: api_url + '/smallapp3/User/registerCom',
-          //   data: {
-          //     'openid': openid,
-          //     'avatarUrl': rets.userInfo.avatarUrl,
-          //     'nickName': rets.userInfo.nickName,
-          //     'gender': rets.userInfo.gender,
-          //     'session_key': app.globalData.session_key,
-          //     'iv': rets.iv,
-          //     'encryptedData': rets.encryptedData
-          //   },
-          //   header: {
-          //     'content-type': 'application/json'
-          //   },
-          //   success: function(res) {
-          //     if (res.data.code == 10000) {
-          //       wx.setStorage({
-          //         key: 'savor_user_info',
-          //         data: res.data.result,
-          //       });
-          //       that.setData({
-          //         showModal: false,
-          //       })
-          //     } else {
-          //       wx.showToast({
-          //         title: '微信授权登陆失败，请重试',
-          //         icon: 'none',
-          //         duration: 2000,
-
-          //       })
-          //     }
-
-          //   },
-          //   fail: function(res) {
-          //     wx.showToast({
-          //       title: '微信登陆失败，请重试',
-          //       icon: 'none',
-          //       duration: 2000
-          //     });
-          //   }
-          // })
+          
         }
       })
     } else {
@@ -328,32 +278,7 @@ Page({
           data: user_info,
         })
       });
-      // wx.request({
-      //   url: api_url + '/smallapp21/User/refuseRegister',
-      //   data: {
-      //     'openid': openid,
-      //   },
-      //   header: {
-      //     'content-type': 'application/json'
-      //   },
-      //   success: function(res) {
-      //     if (res.data.code == 10000) {
-      //       user_info['is_wx_auth'] = 1;
-      //       wx.setStorage({
-      //         key: 'savor_user_info',
-      //         data: user_info,
-      //       })
-
-      //     } else {
-      //       wx.showToast({
-      //         title: '拒绝失败,请重试',
-      //         icon: 'none',
-      //         duration: 2000
-      //       });
-      //     }
-
-      //   }
-      // })
+      
     }
 
 
@@ -394,7 +319,7 @@ Page({
     var that = this;
     var user_info = wx.getStorageSync("savor_user_info");
     console.log(user_info);
-    if (user_info.is_wx_auth != 3) {
+    if (user_info.is_wx_auth != 3 && app.globalData.link_type!=2) {
       that.setData({
         showModal: true
       })
@@ -432,7 +357,7 @@ Page({
   chooseVedio(e) {
     var that = this
     var user_info = wx.getStorageSync("savor_user_info");
-    if (user_info.is_wx_auth != 3) {
+    if (user_info.is_wx_auth != 3 && app.globalData.link_type != 2) {
       that.setData({
         showModal: true
       })

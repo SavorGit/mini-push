@@ -65,10 +65,7 @@ Page({
     var avatarUrl = user_info.avatarUrl;
     var nickName  = user_info.nickName;
     var is_open_simple = e.is_open_simple;
-    hotel_info.intranet_ip = intranet_ip;
-    hotel_info.wifi_mac = wifi_mac;
-    hotel_info.wifi_name = wifi_name;
-    hotel_info.wifi_password = wifi_password;
+    
     
     that.setData({
       openid: openid,

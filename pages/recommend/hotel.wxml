@@ -10,7 +10,7 @@
       <!-- <navigator version="trial" target="miniProgram" app-id="{{jijian_appid}}" path="pages/index/index?box_mac={{box_mac}}" class='theme-button'>前往极简版</navigator> -->
     </view>
   </view>
-  <view class='page_top'>
+  <view class='page_top' wx:if="{{link_type!=2}}">
     <view class='v-structure flex-row-center-space_between theme-panel-2 font_666666_28'>
       <picker bindchange="bindCityPickerChange" value="{{cityIndex}}" range="{{cityArray}}">
         <view class='city_show'>
