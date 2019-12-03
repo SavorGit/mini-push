@@ -16,6 +16,7 @@
 }
 
 .user > view {
+  width: 190rpx;
   position: relative;
   float: left;
 }
@@ -41,6 +42,7 @@
 }
 
 .user > .info {
+  width: calc(100% - 190rpx);
   margin-top: -25rpx;
 }
 
