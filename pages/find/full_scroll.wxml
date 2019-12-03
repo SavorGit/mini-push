@@ -65,10 +65,10 @@
       <!-- <view class="scroll-fullpage" bindtouchstart="scrollTouchstart" bindtouchend="scrollTouchend" style="transform: translateY(-{{scrollIndex * 100}}%); margin-top: {{margintop}}px;"> -->
       <view class="full_height" bindtouchstart="onTouchStart" bindtouchend="onTouchEnd" animation="{{animationData}}">
         <block wx:for="{{mediaObjectList}}" wx:key="key" wx:for-item="bean" wx:for-index="index">
-          <view class="full_height {{mediaScrollIndex == index ? 'active' : ''}}">
-            <video wx:if="{{mediaScrollIndex == index}}" id="JohnVideo{{index}}" class="full_width full_height" show-center-play-btn="{{false}}" autoplay="{{false}}" controls="{{false}}" src="{{bean.pubdetail[0].res_url}}" data-index="{{index}}" data-id="{{bean.id}}"
-              data-type="{{bean.type}}" event-model="bubble" bindprogress="onLoadProgress" bindtimeupdate="onTimeUpdate" bindplay="onVideoPlay" bindpause="onVideoPause" bindended="onVideoEnded" bindwaiting="onVideoWaiting" binderror="onVideoError" bindloadedmetadata="onVideoLoadedMetadata"
-              bindtap="onClickVideoPalyButton">
+          <view class="full_height {{mediaScrollIndex == index ? 'active' : ''}}" style="background-color: #000000;">
+            <video wx:if="{{mediaScrollIndex == index || mediaScrollIndex - 1 == index || mediaScrollIndex + 1 == index}}" id="JohnVideo{{index}}" class="full_width full_height" show-center-play-btn="{{false}}" autoplay="{{false}}" controls="{{false}}" src="{{bean.pubdetail[0].res_url}}"
+              data-index="{{index}}" data-id="{{bean.id}}" data-type="{{bean.type}}" event-model="bubble" bindprogress="onLoadProgress" bindtimeupdate="onTimeUpdate" bindplay="onVideoPlay" bindpause="onVideoPause" bindended="onVideoEnded" bindwaiting="onVideoWaiting"
+              binderror="onVideoError" bindloadedmetadata="onVideoLoadedMetadata" bindtap="onClickVideoPalyButton">
               <view class="default-navigation-bar flex-row-center-center theme-font-FFFFFF" style="height: 46px; padding-top: {{statusBarHeight}}px;">
                 <view class='text'>热点投屏</view>
               </view>
@@ -126,10 +126,10 @@
   <view class="container flex-column-center-center theme-container" style='height: calc(100vh - 46px - {{statusBarHeight}}px);'>
     <view class="no-net flex-column-center-flex_start">
       <image src="/images/imgs/default-bg.png"></image>
-      <text class="theme-font1">网络异常，请检查网络</text>
+      <text class="theme-font1">网络不太好，请稍候再试</text>
       <view class="flex-row-center-space_between">
         <view class="theme-button-dark" bindtap="onReload">重试</view>
-        <view class="theme-button-like" bindtap="gotoBoxVideoPage">电视内容</view>
+        <view class="theme-button-like" bindtap="gotoBoxVideoPage">去投屏</view>
       </view>
     </view>
   </view>

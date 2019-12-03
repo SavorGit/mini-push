@@ -813,8 +813,11 @@ Page({
 
   // 跳转到机顶盒视频 - 无网
   gotoBoxVideoPage(e) {
-    wx.navigateTo({
-      url: '/pages/find/box_video',
-    })
+    // wx.navigateTo({
+    //   url: '/pages/find/box_video',
+    // });
+    wx.switchTab({
+      url: '/pages/index/index',
+    });
   }
 });
