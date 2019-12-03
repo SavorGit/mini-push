@@ -863,6 +863,7 @@ Page({
   },
   //电视播放
   boxShow: function(e) {
+    var that = this;
     var forscreen_id = e.currentTarget.dataset.forscreen_id;
 
     var pubdetail = e.currentTarget.dataset.pubdetail;
@@ -875,7 +876,7 @@ Page({
       var action = 12; //发现视频点播
     }
 
-    app.boxShow(box_mac, forscreen_id, pubdetail, res_type, res_nums, action, hotel_info);
+    app.boxShow(box_mac, forscreen_id, pubdetail, res_type, res_nums, action, hotel_info, that);
   },
   phonecallevent: function(e) {
     var tel = e.target.dataset.tel;

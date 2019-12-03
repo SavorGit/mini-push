@@ -19,7 +19,7 @@ App({
     }
   },
   //电视播放
-  boxShow(box_mac = '', forscreen_id, pubdetail, res_type, res_len,action,hotel_info) {
+  boxShow(box_mac = '', forscreen_id, pubdetail, res_type, res_len,action,hotel_info,aps) {
     var that = this;
     
     if (box_mac == '') {
@@ -43,11 +43,11 @@ App({
             space = ',';
           }
           media_url_str += ']';
-
+          console.log('http://' + hotel_info.intranet_ip + ":8080/h5/discover_ondemand?deviceId=" + user_info.openid + "&box_mac=" + box_mac + "&web=true&media_id=" + forscreen_id + "&resource_type=" + res_type + "&forscreen_id=" + timestamp + "&media_url=" + media_url_str + '&avatarUrl=' + user_info.avatarUrl + "&nickName=" + user_info.nickName);
           wx.request({
             url: 'http://' + hotel_info.intranet_ip + ":8080/h5/discover_ondemand?deviceId=" + user_info.openid + "&box_mac=" + box_mac + "&web=true&media_id=" + forscreen_id + "&resource_type=" + res_type + "&forscreen_id=" + timestamp + "&media_url=" + media_url_str + '&avatarUrl=' + user_info.avatarUrl + "&nickName=" + user_info.nickName,
             success: function (res) {
-
+              console.log(res);
               if (res.data.result == 0) {
                 wx.showToast({
                   title: '点播成功,电视即将开始播放',
@@ -55,6 +55,7 @@ App({
                   duration: 2000
                 });
               } else {
+                that.linkHotelWifi(hotel_info, aps)
                 wx.showToast({
                   title: '网络异常,点播失败',
                   icon: 'none',
@@ -62,6 +63,8 @@ App({
                 })
               }
             }, fail: function (res) {
+              that.linkHotelWifi(hotel_info, aps)
+              console.log(res);
               wx.showToast({
                 title: '网络异常,点播失败',
                 icon: 'none',
@@ -83,6 +86,7 @@ App({
                     duration: 2000
                   });
                 }else {
+                  that.linkHotelWifi(hotel_info, aps)
                   wx.showToast({
                     title: '网络异常,点播失败',
                     icon: 'none',
@@ -90,6 +94,7 @@ App({
                   })
                 }
               },fail:function(res){
+                that.linkHotelWifi(hotel_info, aps)
                 wx.showToast({
                   title: '网络异常,点播失败',
                   icon: 'none',

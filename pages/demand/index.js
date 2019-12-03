@@ -353,7 +353,7 @@ Page({
         pubdetail[0].res_url = tx_url;
       }
       var hotel_info = e.currentTarget.dataset.hotel_info;
-      app.boxShow(box_mac, forscreen_id, pubdetail, res_type, res_nums, 5, hotel_info);
+      app.boxShow(box_mac, forscreen_id, pubdetail, res_type, res_nums, 5, hotel_info, self);
 
       // 调用记录播放次数接口
       utils.PostRequest(api_url + '/Smallapp4/demand/recordPlaynum', {
