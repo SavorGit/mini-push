@@ -54,6 +54,7 @@ Page({
     autoplay: true, //是否自动切换
     interval: 3000, //自动切换时间间隔
     lb_duration: 1000, //滑动动画时长
+    link_type:app.globalData.link_type,
   },
 
   onLoad: function() {
@@ -62,8 +63,39 @@ Page({
     
     let self = this;
     if(app.globalData.link_type==2){
+      var inner_url = 'http://192.168.99.2:8080/h5/findGoods?box_mac=' + app.globalData.hotel_info.box_mac+'&deviceId=1234&web=true';
+      wx.request({
+        url: inner_url,
+        success:function(res){
+          console.log(res);
+          if(res.data.result==0){
+            var yx_list = JSON.parse(res.data.content);
+            var program_list = app.globalData.optimize_data;
+            for(var i=0; i< program_list.length;i++){
+              if(app.in_array(program_list[i].id, yx_list,'goods_id')){
+                program_list[i].is_show = 1;
+              }else {
+                program_list[i].is_show = 0;
+              }
+            }
+            console.log(program_list);
+            console.log(app.globalData.link_type);
+            self.setData({
+              program_list: program_list,
+              link_type:app.globalData.link_type
+            })
+          }else {
+            self.setData({
+              program_list: app.globalData.optimize_data,
+              link_type: app.globalData.link_type
+            })
+          }
+        }
+      })
+      
+
       self.setData({
-        program_list: app.globalData.optimize_data,
+        //program_list: app.globalData.optimize_data,
         hotel_info: app.globalData.hotel_info,
         box_mac: app.globalData.hotel_info.box_mac,
       })

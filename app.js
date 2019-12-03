@@ -793,7 +793,20 @@ App({
 
     return 0
   },
-  
+  in_array:function(stringToSearch, arrayToSearch,keys='') {
+    for(var s = 0; s<arrayToSearch.length; s++) {
+      if(keys!=''){
+        var thisEntry = arrayToSearch[s][keys].toString();
+      }else {
+        var thisEntry = arrayToSearch[s].toString();
+      }
+      
+      if (thisEntry == stringToSearch) {
+        return true;
+      }
+   }
+    return false;
+  },
 
   linkHotelWifi:function(hotel_info,that){
     var aps = this;
