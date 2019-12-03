@@ -237,6 +237,7 @@ Page({
       var nickName = user_info.nickName;
       var openid = e.currentTarget.dataset.openid;
       pubdetail = e.currentTarget.dataset.pubdetail;
+      console.log(pubdetail);
       var forscreen_char = '';
       var res_type = e.currentTarget.dataset.res_type;
       var mobile_brand = app.globalData.mobile_brand;
@@ -503,7 +504,7 @@ Page({
                   method: "POST",
                   data: {
                     box_mac: box_mac,
-                    msg: '{ "action":2, "url": "' + pubdetail['forscreen_url'] + '", "filename":"' + pubdetail['filename'] + '","openid":"' + openid + '","resource_type":2,"video_id":"' + pubdetail['res_id'] + '","avatarUrl":"' + avatarUrl + '","nickName":"' + nickName + '","forscreen_id":"' + forscreen_id + '"}',
+                    msg: '{ "action":2, "url": "' + pubdetail[i]['forscreen_url'] + '", "filename":"' + pubdetail[i]['filename'] + '","openid":"' + openid + '","resource_type":2,"video_id":"' + pubdetail['res_id'] + '","avatarUrl":"' + avatarUrl + '","nickName":"' + nickName + '","forscreen_id":"' + forscreen_id + '"}',
                   },
                   success: function (result) {
 
