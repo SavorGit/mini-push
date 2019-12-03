@@ -63,13 +63,13 @@ Page({
     
     let self = this;
     if(app.globalData.link_type==2){
-      var inner_url = 'http://192.168.99.2:8080/h5/findGoods?box_mac=' + app.globalData.hotel_info.box_mac+'&deviceId=1234&web=true';
+      var inner_url = 'http://'+app.globalData.hotel_info.intranet_ip+':8080/h5/findGoods?box_mac=' + app.globalData.hotel_info.box_mac+'&deviceId=1234&web=true';
       wx.request({
         url: inner_url,
         success:function(res){
           console.log(res);
-          if(res.data.result==0){
-            var yx_list = JSON.parse(res.data.content);
+          if(res.data.code==0){
+            var yx_list = res.data.result;
             var program_list = app.globalData.optimize_data;
             for(var i=0; i< program_list.length;i++){
               if(app.in_array(program_list[i].id, yx_list,'goods_id')){

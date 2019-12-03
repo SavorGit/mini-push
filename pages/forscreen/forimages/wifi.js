@@ -174,8 +174,8 @@ Page({
         success: function(res) {
 
           if (i == img_lenth) {
-            var info_rt = JSON.parse(res.data);
-            if (info_rt.result == 1001) {
+            //var info_rt = JSON.parse(res.data);
+            if (res.data.code == 1001) {
               that.setData({
                 wifiErr: {
                   'is_open': 1,
@@ -292,8 +292,8 @@ Page({
       filePath: img_url,
       name: 'fileUpload',
       success: function(res) {
-        var info_rt = JSON.parse(res.data);
-        if (info_rt.result == 1001) {
+        //var info_rt = JSON.parse(res.data);
+        if (res.data.code == 1001) {
           that.setData({
             wifiErr: {
               'is_open': 1,
@@ -332,7 +332,7 @@ Page({
       url: "http://" + intranet_ip + ":8080/h5/stop?deviceId=" + openid + "&box_mac=" + box_mac + "&web=true",
       success: function(res) {
         console.log(res);
-        if (res.data.result == 0) {
+        if (res.data.code == 0) {
           wx.navigateBack({
             delta: 1
           })
@@ -341,7 +341,7 @@ Page({
             icon: 'none',
             duration: 2000
           });
-        } else if (res.data.result == 1001) {
+        } else if (res.data.code == 1001) {
           that.setData({
             wifiErr: {
               'is_open': 1,

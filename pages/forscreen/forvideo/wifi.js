@@ -107,8 +107,8 @@ Page({
       name: 'fileUpload',
       success: function(res) {
         console.log(res)
-        var info_rt = JSON.parse(res.data);
-        if (info_rt.result == 0) {
+        //var info_rt = JSON.parse(res.data);
+        if (res.data.code == 0) {
           that.setData({
             is_upload: 1,
             vedio_url: video_url,
@@ -118,7 +118,7 @@ Page({
             intranet_ip: intranet_ip,
             hiddens: true,
           })
-        } else if (info_rt.result == 1001) {
+        } else if (res.data.code == 1001) {
 
           that.setData({
             hiddens: true,
@@ -160,7 +160,7 @@ Page({
     wx.request({
       url: "http://" + intranet_ip + ":8080/h5/stop?deviceId=" + openid + "&box_mac=" + box_mac + "&web=true",
       success: function(res) {
-        if (res.data.result == 0) {
+        if (res.data.code == 0) {
           wx.navigateBack({
             delta: 1
           })
@@ -169,7 +169,7 @@ Page({
             icon: 'none',
             duration: 2000
           });
-        } else if (res.data.result == 1001) {
+        } else if (res.data.code == 1001) {
           that.setData({
             hiddens: true,
             wifiErr: {
@@ -271,8 +271,8 @@ Page({
       filePath: vedio_url,
       name: 'fileUpload',
       success: function(res) {
-        var info_rt = JSON.parse(res.data);
-        if (info_rt.result == 0) {
+        //var info_rt = JSON.parse(res.data);
+        if (res.data.code == 0) {
           that.setData({
             is_upload: 1,
             vedio_url: vedio_url,
@@ -282,7 +282,7 @@ Page({
             intranet_ip: intranet_ip,
             hiddens: true,
           })
-        } else if (info_rt.result == 1001) {
+        } else if (res.data.code == 1001) {
 
           that.setData({
             hiddens: true,

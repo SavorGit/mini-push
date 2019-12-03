@@ -43,12 +43,12 @@ App({
             space = ',';
           }
           media_url_str += ']';
-          console.log('http://' + hotel_info.intranet_ip + ":8080/h5/discover_ondemand?deviceId=" + user_info.openid + "&box_mac=" + box_mac + "&web=true&media_id=" + forscreen_id + "&resource_type=" + res_type + "&forscreen_id=" + timestamp + "&media_url=" + media_url_str + '&avatarUrl=' + user_info.avatarUrl + "&nickName=" + user_info.nickName);
+          
           wx.request({
             url: 'http://' + hotel_info.intranet_ip + ":8080/h5/discover_ondemand?deviceId=" + user_info.openid + "&box_mac=" + box_mac + "&web=true&media_id=" + forscreen_id + "&resource_type=" + res_type + "&forscreen_id=" + timestamp + "&media_url=" + media_url_str + '&avatarUrl=' + user_info.avatarUrl + "&nickName=" + user_info.nickName,
             success: function (res) {
               console.log(res);
-              if (res.data.result == 0) {
+              if (res.data.code == 10000) {
                 wx.showToast({
                   title: '点播成功,电视即将开始播放',
                   icon: 'none',
@@ -79,7 +79,7 @@ App({
             wx.request({
               url: "http://" + hotel_info.intranet_ip + ":8080/h5/goods_ondemand?deviceId=" + user_info.openid + "&box_mac=" + box_mac + "&web=true&media_id=" + forscreen_id + "&forscreen_id=" + timestamp + "&media_name=" + pubdetail[0]['filename'] + "&media_url=" + pubdetail[0]['res_url'] + '&avatarUrl=' + user_info.avatarUrl + "&nickName=" + user_info.nickName,
               success:function(res){
-                if(res.data.result==0){
+                if(res.data.code==10000){
                   wx.showToast({
                     title: '点播成功,电视即将开始播放',
                     icon: 'none',
@@ -314,13 +314,13 @@ App({
         url: "http://" + hotel_info.intranet_ip + ":8080/h5/stop?deviceId=" + openid + "&box_mac=" + box_mac+"&web=true",
         success: function (res) {
           console.log(res);
-          if (res.data.result==0){
+          if (res.data.code==10000){
             wx.showToast({
               title: '退出成功',
               icon: 'none',
               duration: 2000
             });
-          }else if(res.data.result==1001){
+          }else if(res.data.code==1001){
             aps.setData({
               wifiErr: { 'is_open': 1, 'msg': '亲，使用此小程序前需要链接包间wifi,链接wifi投屏更快哦！', 'confirm': '重试', 'calcle': '', 'type': 3 }
             })
@@ -449,13 +449,13 @@ App({
         wx.request({
           url: "http://" + hotel_info.intranet_ip + ":8080/showMiniProgramCode?deviceId=" + openid + "&box_mac="+box_mac+"&web=true",
           success: function (res) {
-            if (res.data.result == 0) {
+            if (res.data.code == 10000) {
               wx.showToast({
                 title: '呼码成功',
                 icon: 'none',
                 duration: 2000
               });
-            }else if(res.data.result==1001){
+            }else if(res.data.code==1001){
               aps.setData({
                 wifiErr: { 'is_open': 1, 'msg': '亲，使用此小程序前需要链接包间wifi,链接wifi投屏更快哦！', 'confirm': '重试', 'calcle': '', 'type': 3 }
               })
@@ -513,7 +513,7 @@ App({
       wx.request({
         url: "http://" + hotel_info.intranet_ip + ":8080/volume?action=" + change_type + "&deviceId=" + openid + "&box_mac=" + box_mac+"&projectId=" + timestamp + "&web=true",
         success: function (res) {
-          if (res.data.result == 0) {
+          if (res.data.code == 10000) {
             wx.showToast({
               title: change_type_name + '成功',
               icon: 'none',
@@ -561,13 +561,13 @@ App({
         url: "http://" + hotel_info.intranet_ip + ":8080/switchProgram?action=" + change_type + "&deviceId=" + openid + "&box_mac="+box_mac+"&projectId=" + timestamp + "&web=true",
         success: function (res) {
           
-          if (res.data.result == 0) {
+          if (res.data.code == 10000) {
             wx.showToast({
               title: '切换成功',
               icon: 'none',
               duration: 2000
             })
-          } else if (res.data.result == 1001) {
+          } else if (res.data.code == 1001) {
             aps.setData({
               wifiErr: { 'is_open': 1, 'msg': '亲，使用此小程序前需要链接包间wifi,链接wifi投屏更快哦！', 'confirm': '重试', 'calcle': '', 'type': 3 }
             })
