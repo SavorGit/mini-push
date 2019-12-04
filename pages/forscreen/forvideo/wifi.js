@@ -107,8 +107,8 @@ Page({
       name: 'fileUpload',
       success: function(res) {
         console.log(res)
-        //var info_rt = JSON.parse(res.data);
-        if (res.data.code == 10000) {
+        var info_rt = JSON.parse(res.data);
+        if (info_rt.code == 10000) {
           that.setData({
             is_upload: 1,
             vedio_url: video_url,

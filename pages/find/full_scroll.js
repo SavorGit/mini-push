@@ -286,6 +286,9 @@ Page({
    */
   onLoad: function(options) {
     let self = this;
+    self.setData({
+      link_type:app.globalData.link_type
+    })
     self.touchMoveHandler = new utils.TouchMoveHandler(systemInfo, touchMoveExecuteTrip);
 
     console.log('full_scroll.Page.onLoad', 'app.globalData.hotel_info', app.globalData.hotel_info);
