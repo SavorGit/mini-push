@@ -99,6 +99,11 @@ button[disabled] {
   background-color: #333;
 }
 
+.theme-button-white {
+  color: #333;
+  background-color: #fff;
+}
+
 .theme-button-buy, .theme-button-like {
   color: #fff;
   background-color: #eb6877;
