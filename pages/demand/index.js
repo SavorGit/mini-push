@@ -630,57 +630,37 @@ Page({
   }, // 分享结束
   //查看视频播放记录日志
   demandLog: function(res) {
-    var openid = res.currentTarget.dataset.openid;
-    var box_mac = res.currentTarget.dataset.box_mac;
-    var mobile_brand = app.globalData.mobile_brand;
-    var mobile_model = app.globalData.mobile_model;
-    var forscreen_char = '';
-    var imgs = res.currentTarget.dataset.tx_url;
-    var resource_id = res.currentTarget.dataset.id
-    var timestamp = (new Date()).valueOf();
-    var duration = res.currentTarget.dataset.duration;
-    utils.PostRequest(api_url + '/Smallapp/index/recordForScreenPics', {
-      openid: openid,
-      box_mac: box_mac,
-      action: 21,
-      resource_type: 2,
-      mobile_brand: mobile_brand,
-      mobile_model: mobile_model,
-      forscreen_char: forscreen_char,
-      imgs: '["' + imgs + '"]',
-      resource_id: resource_id,
-      res_sup_time: 0,
-      res_eup_time: 0,
-      resource_size: 0,
-      is_pub_hotelinfo: 0,
-      is_share: 0,
-      forscreen_id: timestamp,
-      duration: duration,
-    });
-    // wx.request({
-    //   url: api_url + '/Smallapp/index/recordForScreenPics',
-    //   header: {
-    //     'content-type': 'application/json'
-    //   },
-    //   data: {
-    //     openid: openid,
-    //     box_mac: box_mac,
-    //     action: 21,
-    //     resource_type: 2,
-    //     mobile_brand: mobile_brand,
-    //     mobile_model: mobile_model,
-    //     forscreen_char: forscreen_char,
-    //     imgs: '["' + imgs + '"]',
-    //     resource_id: resource_id,
-    //     res_sup_time: 0,
-    //     res_eup_time: 0,
-    //     resource_size: 0,
-    //     is_pub_hotelinfo: 0,
-    //     is_share: 0,
-    //     forscreen_id: timestamp,
-    //     duration: duration,
-    //   },
-    // });
+    if(app.globalData.link_type!=2){
+      var openid = res.currentTarget.dataset.openid;
+      var box_mac = res.currentTarget.dataset.box_mac;
+      var mobile_brand = app.globalData.mobile_brand;
+      var mobile_model = app.globalData.mobile_model;
+      var forscreen_char = '';
+      var imgs = res.currentTarget.dataset.tx_url;
+      var resource_id = res.currentTarget.dataset.id
+      var timestamp = (new Date()).valueOf();
+      var duration = res.currentTarget.dataset.duration;
+      utils.PostRequest(api_url + '/Smallapp/index/recordForScreenPics', {
+        openid: openid,
+        box_mac: box_mac,
+        action: 21,
+        resource_type: 2,
+        mobile_brand: mobile_brand,
+        mobile_model: mobile_model,
+        forscreen_char: forscreen_char,
+        imgs: '["' + imgs + '"]',
+        resource_id: resource_id,
+        res_sup_time: 0,
+        res_eup_time: 0,
+        resource_size: 0,
+        is_pub_hotelinfo: 0,
+        is_share: 0,
+        forscreen_id: timestamp,
+        duration: duration,
+      });
+    }
+    
+    
   },
 
 })

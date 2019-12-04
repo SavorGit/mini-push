@@ -23,7 +23,7 @@
 
     <view class='card' wx:for="{{program_list}}" wx:key="key" wx:for-item="bean" wx:for-index="index">
       <view wx:if='{{bean.cover_imgs.length == 1 && bean.intro != ""}}' class="model-1">
-        <navigator class="body flex-column-center-flex_start theme-panel" bindtap='demandLog' data-openid='{{openid}}' data-box_mac='{{box_mac}}' data-title='{{bean.title}}' data-tx_url='{{bean.tx_url}}' data-id='{{bean.id}}' data-duration="{{bean.duration}}"
+        <navigator class="body flex-column-center-flex_start theme-panel"  data-openid='{{openid}}' data-box_mac='{{box_mac}}' data-title='{{bean.title}}' data-tx_url='{{bean.tx_url}}' data-id='{{bean.id}}' data-duration="{{bean.duration}}"
           url="/pages/demand/goods_detail?box_mac={{box_mac}}&goods_id={{bean.id}}">
           <image wx:if="{{link_type!=2}}" class="goods-pic" mode="aspectFill" src='{{bean.cover_imgs[0]}}'></image>
           <image wx:else class="goods-pic" mode="aspectFill" src='/images/imgs/default-pic.png'></image>
