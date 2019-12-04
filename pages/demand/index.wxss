@@ -285,7 +285,7 @@
 .card .foot {
   width: 690rpx;
   height: 74rpx;
-  margin-top: 1rpx;
+  border-top: 2rpx solid #ededed;
   padding: 0 30rpx;
 }
 
