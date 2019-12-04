@@ -39,7 +39,7 @@ Page({
         collectlist:app.globalData.collect_list,
         userinfo: userinfo,
         box_mac:app.globalData.hotel_info.box_mac,
-        openid:user_info.openid,
+        openid: userinfo.openid,
         hotel_info:app.globalData.hotel_info
       })
       
