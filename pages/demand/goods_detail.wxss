@@ -15,7 +15,7 @@
   max-width: 120rpx;
   height: 60rpx;
   line-height: 60rpx;
-  margin: 0 20rpx 0 0;
+  margin: 0 70rpx 0 0;
   text-align: unset;
 }
 
