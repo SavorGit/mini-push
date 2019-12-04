@@ -59,9 +59,12 @@ Page({
 
   onLoad: function() {
     //wx.hideShareMenu();
-    console.log(app.globalData.optimize_data);
+    //console.log(app.globalData.optimize_data);
     
     let self = this;
+    self.setData({
+      link_type:app.globalData.link_type,
+    })
     if(app.globalData.link_type==2){
       var inner_url = 'http://'+app.globalData.hotel_info.intranet_ip+':8080/h5/findGoods?box_mac=' + app.globalData.hotel_info.box_mac+'&deviceId=1234&web=true';
       wx.request({
@@ -99,66 +102,69 @@ Page({
         box_mac: app.globalData.hotel_info.box_mac,
       })
       
-    }
-    
-    if (app.globalData.openid && app.globalData.openid != '') {
-      //注册用户
-      self.setData({
-        openid: app.globalData.openid
-      });
-      SavorUtils.User.isRegister(self); //判断用户是否注册
-    } else {
-      app.openidCallback = openid => {
-        if (openid != '') {
-          self.setData({
-            openid: openid
-          });
-          SavorUtils.User.isRegister(self); //判断用户是否注册
+    }else {
+      if (app.globalData.openid && app.globalData.openid != '') {
+        //注册用户
+        self.setData({
+          openid: app.globalData.openid
+        });
+        SavorUtils.User.isRegister(self); //判断用户是否注册
+      } else {
+        app.openidCallback = openid => {
+          if (openid != '') {
+            self.setData({
+              openid: openid
+            });
+            SavorUtils.User.isRegister(self); //判断用户是否注册
+          }
         }
       }
-    }
-    var user_info = wx.getStorageSync("savor_user_info");
-    openid = user_info.openid;
-    utils.PostRequest(api_url + '/Smallapp4/index/isHaveCallBox?openid=' + openid, {}, (data, headers, cookies, errMsg, statusCode) => {
-      var is_have = data.result.is_have;
-      if (is_have == 1) {
-        //app.linkHotelWifi(data.result, self);
-        self.setData({
-          box_mac: data.result.box_mac,
-          is_open_simple: data.result.is_open_simple,
-          hotel_info: data.result,
-        });
-        box_mac = data.result.box_mac;
-        //获取节目单列表
-        utils.PostRequest(api_url + '/Smallapp4/optimize/getOptimizeList', {
-          box_mac: box_mac,
-          page: page,
-          openid: openid,
-        }, (boxData, boxHeaders, boxCookies, boxErrMsg, boxStatusCode) => {
-          program_list = boxData.result
+      var user_info = wx.getStorageSync("savor_user_info");
+      openid = user_info.openid;
+      utils.PostRequest(api_url + '/Smallapp4/index/isHaveCallBox?openid=' + openid, {}, (data, headers, cookies, errMsg, statusCode) => {
+        var is_have = data.result.is_have;
+        if (is_have == 1) {
+          //app.linkHotelWifi(data.result, self);
           self.setData({
-            program_list: boxData.result
+            box_mac: data.result.box_mac,
+            is_open_simple: data.result.is_open_simple,
+            hotel_info: data.result,
+          });
+          box_mac = data.result.box_mac;
+          //获取节目单列表
+          utils.PostRequest(api_url + '/Smallapp4/optimize/getOptimizeList', {
+            box_mac: box_mac,
+            page: page,
+            openid: openid,
+          }, (boxData, boxHeaders, boxCookies, boxErrMsg, boxStatusCode) => {
+            program_list = boxData.result
+            self.setData({
+              program_list: boxData.result
+            })
+          }, function () { }, { isShowLoading: false });
+        } else {
+          //获取小程序主节目单列表
+          utils.PostRequest(api_url + '/Smallapp4/optimize/getOptimizeList', {
+            page: page,
+            openid: openid,
+          }, (boxData, boxHeaders, boxCookies, boxErrMsg, boxStatusCode) => self.setData({
+            program_list: boxData.result,
+          }), function () { }, { isShowLoading: false });
+          self.setData({
+            box_mac: '',
           })
-        }, function () { }, { isShowLoading: false });
-      } else {
-        //获取小程序主节目单列表
-        utils.PostRequest(api_url + '/Smallapp4/optimize/getOptimizeList', {
-          page: page,
-          openid: openid,
-        }, (boxData, boxHeaders, boxCookies, boxErrMsg, boxStatusCode) => self.setData({
-          program_list: boxData.result,
-        }), function () { }, { isShowLoading: false });
-        self.setData({
-          box_mac: '',
-        })
-        box_mac = '';
-      }
-    }, function () { }, { isShowLoading:false});
-    // utils.PostRequest(api_url + '/Smallapp3/Adsposition/getAdspositionList', {
-    //   position: 1,
-    // }, (data, headers, cookies, errMsg, statusCode) => self.setData({
-    //   imgUrls: data.result
-    // }));
+          box_mac = '';
+        }
+      }, function () { }, { isShowLoading: false });
+      utils.PostRequest(api_url + '/Smallapp3/Adsposition/getAdspositionList', {
+       position: 1,
+      }, (data, headers, cookies, errMsg, statusCode) => self.setData({
+        imgUrls: data.result
+      }));
+    }
+    
+    
+    
     
 
   },
@@ -266,6 +272,9 @@ Page({
 
   //上拉刷新
   loadMore: function(e) {
+    if(app.globalData.link_type==2){
+      return false;
+    }
     var self = this;
     var box_mac = e.currentTarget.dataset.boxmac;
     page = page + 1;

@@ -27,7 +27,9 @@ Page({
   onLoad: function (options) {
     //wx.hideShareMenu();
     var that = this;
-    
+    that.setData({
+      link_type:app.globalData.link_type,
+    })
     if (app.globalData.link_type == 2) {
       var userinfo = wx.getStorageSync(cache_key+'user_info');
       userinfo.id = userinfo.user_id;
@@ -37,147 +39,149 @@ Page({
         userinfo: userinfo
       })
       
-    }
-    
-    if (app.globalData.openid && app.globalData.openid != '') {
-      that.setData({
-        openid: app.globalData.openid
-      })
-      openid = app.globalData.openid;
-      //判断用户是否注册
-      wx.request({
-        url: api_url+'/smallapp21/User/isRegister',
-        data: {
-          "openid": app.globalData.openid,
-          "page_id": 5
-        },
-        header: {
-          'content-type': 'application/json'
-        },
-        success: function (res) {
-          wx.setStorage({
-            key: 'savor_user_info',
-            data: res.data.result.userinfo,
-          })
-        },
-        fail: function (e) {
-          if(app.globalData.link_type!=2){
+    }else {
+      if (app.globalData.openid && app.globalData.openid != '') {
+        that.setData({
+          openid: app.globalData.openid
+        })
+        openid = app.globalData.openid;
+        //判断用户是否注册
+        wx.request({
+          url: api_url + '/smallapp21/User/isRegister',
+          data: {
+            "openid": app.globalData.openid,
+            "page_id": 5
+          },
+          header: {
+            'content-type': 'application/json'
+          },
+          success: function (res) {
             wx.setStorage({
               key: 'savor_user_info',
-              data: { 'openid': app.globalData.openid },
+              data: res.data.result.userinfo,
+            })
+          },
+          fail: function (e) {
+            if (app.globalData.link_type != 2) {
+              wx.setStorage({
+                key: 'savor_user_info',
+                data: { 'openid': app.globalData.openid },
+              })
+            }
+
+          }
+        });//判断用户是否注册结束
+        wx.request({
+          url: api_url + '/Smallapp4/index/isHaveCallBox?openid=' + app.globalData.openid,
+          headers: {
+            'Content-Type': 'application/json'
+          },
+
+          success: function (rest) {
+            var is_have = rest.data.result.is_have;
+            if (is_have == 1) {
+              app.linkHotelWifi(rest.data.result, that);
+              that.setData({
+                hotel_info: rest.data.result,
+                box_mac: rest.data.result.box_mac,
+                is_open_simple: rest.data.result.is_open_simple,
+              })
+              box_mac = rest.data.result.box_mac;
+
+            } else {
+              that.setData({
+                is_link: 0,
+                box_mac: '',
+              })
+              box_mac = '';
+            }
+
+          }
+        })
+
+      } else {
+        app.openidCallback = openid => {
+          if (openid != '') {
+            that.setData({
+              openid: openid
+            })
+            openid = openid;
+            //判断用户是否注册
+            wx.request({
+              url: api_url + '/smallapp21/User/isRegister',
+              data: {
+                "openid": app.globalData.openid,
+                "page_id": 5
+              },
+              header: {
+                'content-type': 'application/json'
+              },
+              success: function (res) {
+                wx.setStorage({
+                  key: 'savor_user_info',
+                  data: res.data.result.userinfo,
+                })
+              },
+              fail: function (e) {
+                if (app.globalData.link_type != 2) {
+                  wx.setStorage({
+                    key: 'savor_user_info',
+                    data: { 'openid': openid },
+                  })
+                }
+
+              }
+            });//判断用户是否注册结束
+            wx.request({
+              url: api_url + '/Smallapp4/index/isHaveCallBox?openid=' + openid,
+              headers: {
+                'Content-Type': 'application/json'
+              },
+
+              success: function (rest) {
+                var is_have = rest.data.result.is_have;
+                if (is_have == 1) {
+                  app.linkHotelWifi(rest.data.result, that);
+                  that.setData({
+                    is_link: 1,
+
+                    box_mac: rest.data.result.box_mac,
+                  })
+                  box_mac = rest.data.result.box_mac;
+                  //getHotelInfo(rest.data.result.box_mac);
+                } else {
+                  that.setData({
+                    is_link: 0,
+                    box_mac: '',
+                  })
+                  box_mac = '';
+                }
+              }
             })
           }
-          
         }
-      });//判断用户是否注册结束
+      }
+      //获取用户信息以及我的公开
+
+      var user_info = wx.getStorageSync("savor_user_info");
+      openid = user_info.openid;
       wx.request({
-        url: api_url+'/Smallapp4/index/isHaveCallBox?openid=' + app.globalData.openid,
+        url: api_url + '/Smallapp3/User/index',
         headers: {
           'Content-Type': 'application/json'
         },
-
-        success: function (rest) {
-          var is_have = rest.data.result.is_have;
-          if (is_have == 1) {
-            app.linkHotelWifi(rest.data.result, that);
-            that.setData({
-              hotel_info: rest.data.result,
-              box_mac: rest.data.result.box_mac,
-              is_open_simple: rest.data.result.is_open_simple,
-            })
-            box_mac = rest.data.result.box_mac;
-            
-          } else {
-            that.setData({
-              is_link: 0,
-              box_mac: '',
-            })
-            box_mac = '';
-          }
-
+        data: { openid: openid },
+        success: function (res) {
+          that.setData({
+            userinfo: res.data.result.user_info,
+            publiclist: res.data.result.public_list,
+            collectlist: res.data.result.collect_list
+          })
         }
       })
 
-    } else {
-      app.openidCallback = openid => {
-        if (openid != '') {
-          that.setData({
-            openid: openid
-          })
-          openid = openid;
-          //判断用户是否注册
-          wx.request({
-            url: api_url+'/smallapp21/User/isRegister',
-            data: {
-              "openid": app.globalData.openid,
-              "page_id": 5
-            },
-            header: {
-              'content-type': 'application/json'
-            },
-            success: function (res) {
-              wx.setStorage({
-                key: 'savor_user_info',
-                data: res.data.result.userinfo,
-              })
-            },
-            fail: function (e) {
-              if(app.globalData.link_type!=2){
-                wx.setStorage({
-                  key: 'savor_user_info',
-                  data: { 'openid': openid },
-                })
-              }
-              
-            }
-          });//判断用户是否注册结束
-          wx.request({
-            url: api_url+'/Smallapp4/index/isHaveCallBox?openid=' + openid,
-            headers: {
-              'Content-Type': 'application/json'
-            },
-
-            success: function (rest) {
-              var is_have = rest.data.result.is_have;
-              if (is_have == 1) {
-                app.linkHotelWifi(rest.data.result, that);
-                that.setData({
-                  is_link: 1,
-                  
-                  box_mac: rest.data.result.box_mac,
-                })
-                box_mac = rest.data.result.box_mac;
-                //getHotelInfo(rest.data.result.box_mac);
-              }else {
-                that.setData({
-                  is_link: 0,
-                  box_mac: '',
-                })
-                box_mac = '';
-              }
-            }
-          })
-        }
-      }
     }
-    //获取用户信息以及我的公开
-
-    var user_info = wx.getStorageSync("savor_user_info");
-    openid = user_info.openid;
-    wx.request({
-      url: api_url+'/Smallapp3/User/index',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      data: { openid: openid },
-      success: function (res) {
-        that.setData({
-          userinfo: res.data.result.user_info,
-          publiclist: res.data.result.public_list,
-          collectlist: res.data.result.collect_list
-        })
-      }
-    })
+    
   },
   
 

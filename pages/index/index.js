@@ -113,7 +113,28 @@ Page({
 
       } );
       
-      
+      utils.PostRequest(api_url + '/Smallapp3/Adsposition/getAdspositionList', {
+        position: '2,3',
+      }, (data, headers, cookies, errMsg, statusCode) => {
+        var imgUrls = data.result[2];
+        var imgUrls_mid = [];
+        if (typeof (data.result[3]) != 'undefined') {
+          var imgUrls_mid = data.result[3];
+        }
+        that.setData({
+          imgUrls: imgUrls,
+          imgUrls_mid: imgUrls_mid
+        });
+      });
+
+      utils.PostRequest(api_url + '/Smallapp4/content/getHotplaylist', {
+        page: 1,
+        pagesize: 6
+      }, (data, headers, cookies, errMsg, statusCode) => {
+        that.setData({
+          hot_play: data.result.datalist
+        });
+      });
       //是否显示活动
       isShowAct(app.globalData.openid);
     } else {
@@ -176,7 +197,28 @@ Page({
 
           } );
           
-          
+          utils.PostRequest(api_url + '/Smallapp3/Adsposition/getAdspositionList', {
+            position: '2,3',
+          }, (data, headers, cookies, errMsg, statusCode) => {
+            var imgUrls = data.result[2];
+            var imgUrls_mid = [];
+            if (typeof (data.result[3]) != 'undefined') {
+              var imgUrls_mid = data.result[3];
+            }
+            that.setData({
+              imgUrls: imgUrls,
+              imgUrls_mid: imgUrls_mid
+            });
+          });
+
+          utils.PostRequest(api_url + '/Smallapp4/content/getHotplaylist', {
+            page: 1,
+            pagesize: 6
+          }, (data, headers, cookies, errMsg, statusCode) => {
+            that.setData({
+              hot_play: data.result.datalist
+            });
+          });
           isShowAct(openid);
         }
       }
@@ -219,28 +261,7 @@ Page({
         
       }
     }
-    utils.PostRequest(api_url + '/Smallapp3/Adsposition/getAdspositionList', {
-      position: '2,3',
-    }, (data, headers, cookies, errMsg, statusCode) => {
-      var imgUrls = data.result[2];
-      var imgUrls_mid = [];
-      if (typeof(data.result[3]) != 'undefined') {
-        var imgUrls_mid = data.result[3];
-      }
-      that.setData({
-        imgUrls: imgUrls,
-        imgUrls_mid: imgUrls_mid
-      });
-    });
     
-    utils.PostRequest(api_url + '/Smallapp4/content/getHotplaylist', {
-      page: 1,
-      pagesize: 6
-    }, (data, headers, cookies, errMsg, statusCode) => {
-      that.setData({
-        hot_play: data.result.datalist
-      });
-    });
     
   },
   onGetUserInfo: function(res) {
