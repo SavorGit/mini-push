@@ -8,7 +8,20 @@ let touchEvent = [];
 let touchMoveExecuteTrip = '160rpx';
 var cache_key = app.globalData.cache_key;
 let api_url = app.globalData.api_url;
+let httpReg = new RegExp('^http(s)?://', 'i');
 let SavorUtils = {
+  Constant: {
+    LinkType: {
+      INIT: 0, // 初始化
+      NET: 1, // 外网
+      BOX: 2 // 直联
+    },
+    MediaType: {
+      UNKNOW: 0,
+      PICTURE: 1,
+      VIDEO: 2
+    }
+  },
   User: {
 
     // 判断用户是否注册
@@ -131,7 +144,7 @@ let SavorUtils = {
         let filename = pubdetailList[index]['filename'];
         let res_id = pubdetailList[index]['res_id'];
         let nettyMessageContent = '{"resource_type":2,"url":"' + url + '","filename":"' + filename + '","openid":"' + pageContext.data.openid + '","avatarUrl":"' + avatarUrl + '","nickName":"' + nickName + '","forscreen_id":"' + currentTime + '"';
-        if (mediaSubGroupType == 1) { // 图片
+        if (mediaSubGroupType == SavorUtils.Constant.MediaType.PICTURE) { // 图片
           extendData.action = 11; //发现图片点播
           delete extendData.duration;
           nettyMessageContent += ',"action":4,"img_id":"' + res_id + '","img_nums":' + mediaSubGroupSize + ',"forscreen_char":"","order":' + order;
@@ -144,7 +157,7 @@ let SavorUtils = {
         SavorUtils.User.recordForScreenPics(pageContext, extendData, currentTime, pubdetailList[index]);
         SavorUtils.Netty.push(pageContext, nettyMessageContent); // 向机顶盒推送消息
       }
-      if (mediaSubGroupType == 1) {
+      if (mediaSubGroupType == SavorUtils.Constant.MediaType.PICTURE) {
         mta.Event.stat('findBoxShowpic', {
           'openid': pageContext.data.openid
         })
@@ -200,6 +213,56 @@ let SavorUtils = {
       });
     },
 
+    // 加载视频数据
+    loadBoxMediaData: pageContext => {
+      console.log('box_video.customer.Page.loadMediaData', 'app.globalData.hotel_info', app.globalData.hotel_info);
+      if (typeof(app.globalData.hotel_info) != 'object' || typeof(app.globalData.hotel_info.intranet_ip) != 'string') {
+        wx.showToast({
+          title: '请连接电视',
+          icon: 'none',
+          duration: 3000
+        });
+        setTimeout(function() {
+          wx.switchTab({
+            url: '/index/index'
+          });
+        }, 3000);
+        return;
+      }
+      let user_info = wx.getStorageSync("savor_user_info");
+      // let pageNo = ++pageContext.data.mediaPageNo;
+      utils.PostRequest('http://' + app.globalData.hotel_info.intranet_ip + ':8080/h5/findDiscover?box_mac=' + app.globalData.hotel_info.box_mac + '&web=true&deviceId=' + user_info.openid, {
+        // page: pageNo,
+        // openid: user_info.openid
+      }, (data, headers, cookies, errMsg, statusCode) => {
+        console.log('box_video.customer.Page.loadMediaData', 'success', app.globalData.hotel_info.intranet_ip, app.globalData.hotel_info.box_mac, user_info.openid, data);
+        let mediaObjectList = pageContext.data.mediaObjectList;
+        if (!(mediaObjectList instanceof Array)) {
+          mediaObjectList = new Array();
+        }
+        if (!(data.result instanceof Array)) {
+          wx.showToast({
+            title: '没有视频了！',
+            icon: 'none',
+            duration: 2000
+          });
+          return;
+        }
+        pageContext.setData({
+          // mediaPageNo: pageNo,
+          pageType: 0,
+          mediaObjectList: mediaObjectList.concat(data.result)
+        });
+      }, res => {
+        if (typeof(res.errMsg) == 'string') {
+          // pageContext.apiFail = true;
+          pageContext.setData({
+            apiStatus: 221
+          });
+        }
+      });
+    },
+
     // 加载图片数据
     loadPictureData: pageContext => {
       let user_info = wx.getStorageSync("savor_user_info");
@@ -229,8 +292,7 @@ let SavorUtils = {
     },
 
     // 初始化页面数据
-    initPageData: pageContext => {
-      SavorUtils.Page.loadMediaData(pageContext);
+    initPageSetData: pageContext => {
       pageContext.setData({
         isShowMediaPlayButton: false
       });
@@ -286,17 +348,23 @@ Page({
    */
   onLoad: function(options) {
     let self = this;
-    self.setData({
-      link_type:app.globalData.link_type
-    })
     self.touchMoveHandler = new utils.TouchMoveHandler(systemInfo, touchMoveExecuteTrip);
+    self.setData({
+      link_type: app.globalData.link_type
+    });
 
     console.log('full_scroll.Page.onLoad', 'app.globalData.hotel_info', app.globalData.hotel_info);
-    console.log('full_scroll.Page.onLoad', 'self.data.link_type', self.data.link_type);
-    if (self.data.link_type == 2) {
+    console.log('full_scroll.Page.onLoad', 'self.data.link_type', self.data.link_type, app.globalData.link_type);
+    if (self.data.link_type == SavorUtils.Constant.LinkType.BOX) { // 直联方式
+      self.setData({
+        funFrom: 'onLoad'
+      });
+      SavorUtils.Page.loadBoxMediaData(self);
+      SavorUtils.Page.initPageSetData(self)
       return;
     }
 
+    // 非直联方式
     if (app.globalData.openid && app.globalData.openid != '') {
       self.setData({
         openid: app.globalData.openid
@@ -316,7 +384,8 @@ Page({
     }
 
     // 加载数据
-    SavorUtils.Page.initPageData(self)
+    SavorUtils.Page.loadMediaData(self);
+    SavorUtils.Page.initPageSetData(self)
   },
 
   /**
@@ -814,11 +883,25 @@ Page({
 
   // 跳转到机顶盒视频 - 无网
   gotoBoxVideoPage(e) {
-    wx.navigateTo({
-      url: '/pages/find/box_video',
-    });
-    // wx.switchTab({
-    //   url: '/pages/index/index',
+    // wx.navigateTo({
+    //   url: '/pages/find/box_video',
     // });
+    wx.switchTab({
+      url: '/pages/index/index',
+    });
+  },
+
+  // 投屏到电视 - 直联
+  onLaunchtTV: function(e) {
+    let self = this;
+    let url = e.target.dataset.url;
+    let filename = url.substring(url.lastIndexOf('/') + 1);
+    let user_info = wx.getStorageSync("savor_user_info");
+    console.log('box_video.Page.onLaunchtTV', url, filename, app.globalData.hotel_info, user_info);
+    utils.PostRequest('http://' + app.globalData.hotel_info.intranet_ip + ':8080/h5/discover_ondemand_nonetwork?box_mac=' + app.globalData.hotel_info.box_mac + '&web=true&deviceId=' + user_info.openid + '&filename=' + filename, {}, (data, headers, cookies, errMsg, statusCode) => {
+      console.log('box_video.customer.Page.loadMediaData', 'success', app.globalData.hotel_info.intranet_ip, app.globalData.hotel_info.box_mac, user_info.openid, data);
+    }, res => {
+      wx.navigateBack();
+    });
   }
 });
