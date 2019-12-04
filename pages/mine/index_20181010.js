@@ -30,13 +30,17 @@ Page({
     that.setData({
       link_type:app.globalData.link_type,
     })
+    console.log(app.globalData);
     if (app.globalData.link_type == 2) {
       var userinfo = wx.getStorageSync(cache_key+'user_info');
       userinfo.id = userinfo.user_id;
       that.setData({
         publiclist:app.globalData.public_list,
         collectlist:app.globalData.collect_list,
-        userinfo: userinfo
+        userinfo: userinfo,
+        box_mac:app.globalData.hotel_info.box_mac,
+        openid:user_info.openid,
+        hotel_info:app.globalData.hotel_info
       })
       
     }else {

@@ -56,7 +56,7 @@ Page({
     //mta.Page.init()
     if (app.globalData.openid && app.globalData.openid != '') {
       wx.showLoading({
-        title: '数据加载中，请稍后',
+        title: '数据加载中..',
       })
       that.setData({
         openid: app.globalData.openid
@@ -169,7 +169,7 @@ Page({
       isShowAct(app.globalData.openid);
     } else {
       wx.showLoading({
-        title: '数据加载中，请稍后',
+        title: '数据加载中',
       })
       app.openidCallback = openid => {
         if (openid != '') {
@@ -661,6 +661,21 @@ Page({
   modalConfirm: function(e) {
     console.log(e);
     var that = this;
+    var type = e.target.dataset.type;
+    if(type==5){
+      var user_info = wx.getStorageSync(cache_key+'user_info');
+      that.setData({
+        wifiErr: { 'is_open': 0, 'msg': '', 'confirm': '', 'calcle': '', 'type': 0 },
+      })
+      utils.PostRequest(api_url + '/Smallapp21/index/breakLink', {
+        box_mac: box_mac,
+        openid: user_info.openid
+      }, (data, headers, cookies, errMsg, statusCode) => {
+        wx.reLaunch({
+          url: '../index/index'
+        });
+      });
+    }
     var hotel_info = e.target.dataset.hotel_info;
     app.linkHotelWifi(hotel_info, that);
   },

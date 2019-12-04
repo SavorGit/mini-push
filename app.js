@@ -850,6 +850,10 @@ App({
                 console.log(res);
                 if (res.errMsg == 'getConnectedWifi:ok') {
                   if (res.wifi.SSID == wifi_name) {//链接的是本包间wifi
+                    if (aps.wifiOkCallback) {
+
+                      aps.wifiOkCallback(1);
+                    }
                     that.setData({
                       link_type: 2,
                       wifiErr: { 'is_open': 0, 'msg': '', 'confirm': '确定', 'calcle': '取消', 'type': 0 }
@@ -946,7 +950,7 @@ App({
     } else {//客户端基础库版本不支持链接wifi 直接使用标准版
       that.setData({
         link_type: 1,
-        wifiErr: { 'is_open': 0, 'msg': '', 'confirm': '确定', 'calcle': '取消', 'type': 0 },
+        wifiErr: { 'is_open': 1, 'msg': '当前微信版本过低,升级后才能使用本小程序', 'confirm': '我知道了', 'calcle': '', 'type': 5 },
       })
     }
   },
@@ -963,6 +967,10 @@ App({
           BSSID: wifi_mac,
           password: use_wifi_password,
           success: function (reswifi) {
+            if (aps.wifiOkCallback) {
+
+              aps.wifiOkCallback(1);
+            }
             that.setData({
               wifiErr: { 'is_open': 0, 'msg': '', 'confirm': '确定', 'calcle': '取消', 'type': 0 }
             })
