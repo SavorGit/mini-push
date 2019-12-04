@@ -15,7 +15,6 @@ Page({
    */
   data: {
     statusBarHeight: getApp().globalData.statusBarHeight,
-    link_type: app.globalData.link_type, //1:外网投屏  2：直连投屏
     cityArray: ['北京'],
     objectCityArray: [],
     cityIndex: 0,
@@ -43,7 +42,7 @@ Page({
 
   },
   //城市切换 
-  bindCityPickerChange: function(e) {
+  bindCityPickerChange: function (e) {
     var that = this;
     var city_list = that.data.objectCityArray;
     var picCityIndex = e.detail.value //切换之后城市key
@@ -64,7 +63,7 @@ Page({
         data: {
           area_id: area_id
         },
-        success: function(res) {
+        success: function (res) {
           that.setData({
             areaArray: res.data.result.area_name_list,
             objectAreaArray: res.data.result.area_list
@@ -96,7 +95,7 @@ Page({
             food_style_id: food_style_id,
             avg_exp_id: avg_exp_id
           },
-          success: function(res) {
+          success: function (res) {
             that.setData({
               hotel_list: res.data.result
             })
@@ -106,7 +105,7 @@ Page({
     }
   },
   //切换区域
-  bindAreaPickerChange: function(e) {
+  bindAreaPickerChange: function (e) {
     var that = this;
     var area_list = that.data.objectAreaArray;
     var areaIndex = e.detail.value;
@@ -142,7 +141,7 @@ Page({
           food_style_id: food_style_id,
           avg_exp_id: avg_exp_id
         },
-        success: function(res) {
+        success: function (res) {
           that.setData({
             hotel_list: res.data.result
           })
@@ -151,7 +150,7 @@ Page({
     }
   },
   //切换菜系
-  bindCuiPickerChange: function(e) {
+  bindCuiPickerChange: function (e) {
     var that = this;
     var cui_list = that.data.objectCuisineArray;
     var cuisineIndex = e.detail.value
@@ -187,7 +186,7 @@ Page({
           food_style_id: food_style_id,
           avg_exp_id: avg_exp_id
         },
-        success: function(res) {
+        success: function (res) {
           that.setData({
             hotel_list: res.data.result
           })
@@ -198,7 +197,7 @@ Page({
 
   },
   //切换消费水平
-  bindPayPickerChange: function(e) {
+  bindPayPickerChange: function (e) {
     var that = this;
     var pay_list = that.data.objectPerCapitaPayArray;
     var perCapitaPayIndex = e.detail.value
@@ -234,7 +233,7 @@ Page({
           food_style_id: food_style_id,
           avg_exp_id: avg_exp_id
         },
-        success: function(res) {
+        success: function (res) {
           that.setData({
             hotel_list: res.data.result
           })
@@ -242,7 +241,7 @@ Page({
       })
     }
   },
-  phonecallevent: function(e) {
+  phonecallevent: function (e) {
     var tel = e.target.dataset.tel;
     wx.makePhoneCall({
       phoneNumber: tel
@@ -251,15 +250,9 @@ Page({
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function(options) {
+  onLoad: function (options) {
     //wx.hideShareMenu();
     var that = this;
-
-    // console.log('onLoad', 'that.data.link_type', that.data.link_type);
-    if (that.data.link_type == 2) {
-      return;
-    }
-
     if (app.globalData.link_type == 2) {
       that.setData({
         link_type: app.globalData.link_type,
@@ -282,7 +275,7 @@ Page({
       header: {
         'content-type': 'application/json'
       },
-      success: function(res) {
+      success: function (res) {
         if (res.data.code == 10000) {
           that.setData({
             close_hotel_hint: res.data.result.userinfo.close_hotel_hint,
@@ -297,7 +290,7 @@ Page({
         'Content-Type': 'application/json'
       },
 
-      success: function(rest) {
+      success: function (rest) {
         var is_have = rest.data.result.is_have;
         if (is_have == 1) {
           app.linkHotelWifi(rest.data.result, that);
@@ -326,7 +319,7 @@ Page({
       header: {
         'content-type': 'application/json'
       },
-      success: function(res) {
+      success: function (res) {
         that.setData({
           cityArray: res.data.result.city_name_list,
           objectCityArray: res.data.result.city_list
@@ -350,7 +343,7 @@ Page({
             latitude: latitude,
             longitude: longitude
           },
-          success: function(res) {
+          success: function (res) {
             that.setData({
               cityIndex: res.data.result.cityindex
             })
@@ -363,7 +356,7 @@ Page({
               data: {
                 area_id: area_id
               },
-              success: function(res) {
+              success: function (res) {
                 that.setData({
                   areaArray: res.data.result.area_name_list,
                   objectAreaArray: res.data.result.area_list
@@ -383,7 +376,7 @@ Page({
                 food_style_id: 0,
                 avg_exp_id: 0
               },
-              success: function(res) {
+              success: function (res) {
                 //console.log(res);
                 that.setData({
                   hotel_list: res.data.result
@@ -393,7 +386,7 @@ Page({
           }
         })
       },
-      fail: function(e) {
+      fail: function (e) {
         that.setData({
           cityIndex: 0
         })
@@ -406,7 +399,7 @@ Page({
           data: {
             area_id: area_id
           },
-          success: function(res) {
+          success: function (res) {
             that.setData({
               areaArray: res.data.result.area_name_list,
               objectAreaArray: res.data.result.area_list
@@ -426,7 +419,7 @@ Page({
             food_style_id: 0,
             avg_exp_id: 0
           },
-          success: function(res) {
+          success: function (res) {
             //console.log(res);
             that.setData({
               hotel_list: res.data.result
@@ -441,7 +434,7 @@ Page({
       header: {
         'content-type': 'application/json'
       },
-      success: function(res) {
+      success: function (res) {
         that.setData({
           cuisineArray: res.data.result.food_name_list,
           objectCuisineArray: res.data.result.food_list
@@ -454,7 +447,7 @@ Page({
       header: {
         'content-type': 'application/json'
       },
-      success: function(res) {
+      success: function (res) {
 
         that.setData({
           perCapitaPayArray: res.data.result.agv_name,
@@ -473,7 +466,7 @@ Page({
       header: {
         'content-type': 'application/json'
       },
-      success: function(res) {
+      success: function (res) {
         if (res.data.code == 10000) {
           hotel_list = res.data.result
 
@@ -485,7 +478,7 @@ Page({
     });
   },
   //上拉刷新
-  loadMore: function(e) {
+  loadMore: function (e) {
     var that = this;
 
     page = page + 1;
@@ -524,7 +517,7 @@ Page({
           food_style_id: food_style_id,
           avg_exp_id: avg_exp_id
         },
-        success: function(res) {
+        success: function (res) {
           if (res.data.code == 10000) {
             that.setData({
               hotel_list: res.data.result,
@@ -541,7 +534,7 @@ Page({
     }
   },
 
-  previewImage: function(e) {
+  previewImage: function (e) {
     var current = e.currentTarget.dataset.src;
     var urls = [];
     for (var i = 0; i < 1; i++) {
@@ -552,7 +545,7 @@ Page({
       urls: urls // 需要预览的图片http链接列表
     })
   },
-  closeHotelHind: function(e) {
+  closeHotelHind: function (e) {
     var that = this;
     var openid = e.currentTarget.dataset.openid;
     wx.request({
@@ -563,7 +556,7 @@ Page({
       data: {
         openid: openid
       },
-      success: function(res) {
+      success: function (res) {
         that.setData({
           close_hotel_hint: 1
         })
@@ -572,16 +565,16 @@ Page({
 
   },
   //遥控呼大码
-  callQrCode: utils.throttle(function(e) {
+  callQrCode: utils.throttle(function (e) {
     var that = this;
     openid = e.currentTarget.dataset.openid;
     box_mac = e.currentTarget.dataset.box_mac;
     var qrcode_img = e.currentTarget.dataset.qrcode_img;
     var hotel_info = e.currentTarget.dataset.hotel_info;
     app.controlCallQrcode(openid, box_mac, qrcode_img, hotel_info, that);
-  }, 3000), //呼大码结束
+  }, 3000),//呼大码结束
   //打开遥控器
-  openControl: function(e) {
+  openControl: function (e) {
     var that = this;
     var qrcode_url = api_url + '/Smallapp4/index/getBoxQr?box_mac=' + box_mac + '&type=3';
     that.setData({
@@ -590,7 +583,7 @@ Page({
     })
   },
   //关闭遥控
-  closeControl: function(e) {
+  closeControl: function (e) {
     var that = this;
     that.setData({
       popRemoteControlWindow: false,
@@ -598,7 +591,7 @@ Page({
 
   },
   //遥控退出投屏
-  exitForscreen: function(e) {
+  exitForscreen: function (e) {
     var that = this;
     openid = e.currentTarget.dataset.openid;
     box_mac = e.currentTarget.dataset.box_mac;
@@ -606,7 +599,7 @@ Page({
     app.controlExitForscreen(openid, box_mac, hotel_info, that);
   },
   //遥控调整音量
-  changeVolume: function(e) {
+  changeVolume: function (e) {
     var that = this;
     box_mac = e.currentTarget.dataset.box_mac;
     openid = e.currentTarget.dataset.openid;
@@ -616,7 +609,7 @@ Page({
 
   },
   //遥控切换节目
-  changeProgram: function(e) {
+  changeProgram: function (e) {
     console.log(e);
     var that = this;
     box_mac = e.currentTarget.dataset.box_mac;
@@ -625,7 +618,7 @@ Page({
     var hotel_info = e.currentTarget.dataset.hotel_info;
     app.controlChangeProgram(openid, box_mac, change_type, hotel_info, that);
   },
-  modalConfirm: function(e) {
+  modalConfirm: function (e) {
     console.log(e);
     var that = this;
     var hotel_info = e.target.dataset.hotel_info;
@@ -634,14 +627,14 @@ Page({
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
-  onReady: function() {
+  onReady: function () {
 
   },
 
   /**
    * 生命周期函数--监听页面显示
    */
-  onShow: function() {
+  onShow: function () {
     var that = this;
     if (app.globalData.openid && app.globalData.openid != '') {
       utils.PostRequest(api_url + '/Smallapp4/index/isHaveCallBox', {
@@ -660,14 +653,12 @@ Page({
           box_mac = '';
         }
         //console.log(data);
-      }, re => {}, {
-        isShowLoading: false
-      });
+      }, re => { }, { isShowLoading: false });
     } else {
       app.openidCallback = openid => {
         utils.PostRequest(api_url + '/Smallapp4/index/isHaveCallBox', {
-            openid: openid
-          },
+          openid: openid
+        },
           (data, headers, cookies, errMsg, statusCode) => {
             if (data.result.is_have == 1) {
 
@@ -682,9 +673,7 @@ Page({
               box_mac = '';
             }
           },
-          re => {}, {
-            isShowLoading: false
-          }
+          re => { }, { isShowLoading: false }
         );
       }
     }
@@ -693,35 +682,35 @@ Page({
   /**
    * 生命周期函数--监听页面隐藏
    */
-  onHide: function() {
+  onHide: function () {
 
   },
 
   /**
    * 生命周期函数--监听页面卸载
    */
-  onUnload: function() {
+  onUnload: function () {
 
   },
 
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
-  onPullDownRefresh: function() {
+  onPullDownRefresh: function () {
 
   },
 
   /**
    * 页面上拉触底事件的处理函数
    */
-  onReachBottom: function() {
+  onReachBottom: function () {
 
   },
 
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage: function() {
+  onShareAppMessage: function () {
 
   }
 })
