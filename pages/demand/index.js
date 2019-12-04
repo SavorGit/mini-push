@@ -65,7 +65,9 @@ Page({
     self.setData({
       link_type:app.globalData.link_type,
     })
+    console.log(app.globalData);
     if(app.globalData.link_type==2){
+      console.log('http://' + app.globalData.hotel_info.intranet_ip + ':8080/h5/findGoods?box_mac=' + app.globalData.hotel_info.box_mac + '&deviceId=1234&web=true');
       var inner_url = 'http://'+app.globalData.hotel_info.intranet_ip+':8080/h5/findGoods?box_mac=' + app.globalData.hotel_info.box_mac+'&deviceId=1234&web=true';
       wx.request({
         url: inner_url,
@@ -91,12 +93,17 @@ Page({
               link_type: app.globalData.link_type
             })
           }
+        },faile:function(res){
+          self.setData({
+            program_list: app.globalData.optimize_data,
+            link_type: app.globalData.link_type
+          })
         }
       })
       
 
       self.setData({
-        //program_list: app.globalData.optimize_data,
+        program_list: app.globalData.optimize_data,
         hotel_info: app.globalData.hotel_info,
         box_mac: app.globalData.hotel_info.box_mac,
       })
