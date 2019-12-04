@@ -209,7 +209,8 @@ Page({
     var that = this;
     console.log(e);
     //var openid = e.target.dataset.openid;
-    var res_id = e.target.dataset.res_id;
+    //var res_id = e.target.dataset.res_id;
+    var res_id = e.currentTarget.dataset.res_id;
     var user_info = wx.getStorageSync('savor_user_info');
     var openid = user_info.openid;
     var res_type = 4;
@@ -275,7 +276,8 @@ Page({
   //取消收藏
   cancCollect: function(e) {
     var that = this;
-    var res_id = e.target.dataset.res_id;
+    //var res_id = e.target.dataset.res_id;
+    var res_id = e.currentTarget.dataset.res_id;
     var user_info = wx.getStorageSync('savor_user_info');
     var openid = user_info.openid;
     var res_type = 4;

@@ -28,7 +28,7 @@
             <view class="full_width weui-grids" wx:if="{{bean.res_type=='1'}}">
               <view class="weui-grid" wx:for="{{bean.list}}" wx:key="pkey" wx:for-item="pubdetail" wx:for-index="pindex">
                 <navigator url="/pages/find/picture?forscreen_id={{bean.res_id}}&box_mac={{box_mac}}">
-                  <image class="pic_show" mode='aspectFill' src="{{pubdetail.res_url}}"></image>
+                  <image class="pic_show" mode='aspectFill' src="{{pubdetail[0].res_url}}"></image>
                 </navigator>
               </view>
 

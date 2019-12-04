@@ -143,6 +143,7 @@ Page({
             page: page,
             openid: openid,
           }, (boxData, boxHeaders, boxCookies, boxErrMsg, boxStatusCode) => {
+            console.log(program_list)
             program_list = boxData.result
             self.setData({
               program_list: boxData.result
