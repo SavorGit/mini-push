@@ -288,8 +288,8 @@ Page({
     let self = this;
     self.touchMoveHandler = new utils.TouchMoveHandler(systemInfo, touchMoveExecuteTrip);
 
-    console.log('onLoad', 'app.globalData.hotel_info', app.globalData.hotel_info);
-    // console.log('onLoad', 'self.data.link_type', self.data.link_type);
+    console.log('full_scroll.Page.onLoad', 'app.globalData.hotel_info', app.globalData.hotel_info);
+    console.log('full_scroll.Page.onLoad', 'self.data.link_type', self.data.link_type);
     if (self.data.link_type == 2) {
       return;
     }
