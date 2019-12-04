@@ -81,7 +81,6 @@ Page({
                 program_list[i].is_show = 0;
               }
             }
-            
             self.setData({
               program_list: program_list,
               link_type:app.globalData.link_type

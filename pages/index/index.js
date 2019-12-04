@@ -3,6 +3,7 @@ const utils = require('../../utils/util.js')
 var mta = require('../../utils/mta_analysis.js')
 const app = getApp()
 var openid;
+var wifiOk;
 var box_mac;
 var api_url = app.globalData.api_url;
 var goods_nums = 1;
@@ -131,9 +132,38 @@ Page({
         page: 1,
         pagesize: 6
       }, (data, headers, cookies, errMsg, statusCode) => {
+        var hot_play = data.result.datalist;
         that.setData({
           hot_play: data.result.datalist
         });
+        app.wifiOkCallback = wifiOk => {
+          var hotel_info = app.globalData.hotel_info;
+          if (Object.keys(hotel_info).length > 0) {
+            var inner_url = 'http://' + hotel_info.intranet_ip + ':8080/h5/findHotShow?box_mac=' + hotel_info.box_mac + '&web=true&deviceId=123456';
+            wx.request({
+              url: inner_url,
+              success: function (rest) {
+                if (rest.data.code == 10000) {
+
+                  var rb_list = rest.data.result;
+                  for (var i = 0; i < hot_play.length; i++) {
+                    if (app.in_array(hot_play[i].forscreen_id, rb_list, 'media_id')) {
+                      console.log(1);
+                      hot_play[i].is_show = 1;
+                    } else {
+                      console.log(1);
+                      hot_play[i].is_show = 0;
+                    }
+                  }
+                  that.setData({
+                    hot_play: hot_play
+                  });
+                }
+
+              }
+            })
+          }
+        }
       });
       //是否显示活动
       isShowAct(app.globalData.openid);
@@ -215,9 +245,38 @@ Page({
             page: 1,
             pagesize: 6
           }, (data, headers, cookies, errMsg, statusCode) => {
+            var hot_play = data.result.datalist;
             that.setData({
               hot_play: data.result.datalist
             });
+            app.wifiOkCallback = wifiOk => {
+              var hotel_info = app.globalData.hotel_info;
+              if(Object.keys(hotel_info).length>0){
+                var inner_url = 'http://' + hotel_info.intranet_ip +':8080/h5/findHotShow?box_mac='+hotel_info.box_mac+'&web=true&deviceId=123456';
+                wx.request({
+                  url: inner_url,
+                  success:function(rest){
+                    if(rest.data.code==10000){
+                      
+                      var rb_list = rest.data.result;
+                      for (var i = 0; i < hot_play.length; i++) {
+                        if (app.in_array(hot_play[i].forscreen_id, rb_list, 'media_id')) {
+                          console.log(1);
+                          hot_play[i].is_show = 1;
+                        } else {
+                          console.log(1);
+                          hot_play[i].is_show = 0;
+                        }
+                      }
+                      that.setData({
+                        hot_play: hot_play
+                      });
+                    }
+                    
+                  }
+                })
+                }
+            }
           });
           isShowAct(openid);
         }
