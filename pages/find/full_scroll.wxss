@@ -643,13 +643,24 @@ page {
   font-size: 24rpx;
 }
 
-.media-page .video-content .theme-button-like {
+/* .media-page .video-content .launch-tv {
+  width: 200rpx;
+  height: 80rpx;
+  font-size: 24rpx;
+} */
+
+.media-page .video-content .launch-tv {
   width: 200rpx;
   height: 60rpx;
   line-height: 60rpx;
   text-align: center;
   font-size: 24rpx;
   border-radius: 10rpx;
+}
+
+.media-page .video-content .launch-tv .btn-tv {
+  width: 60rpx;
+  height: 57rpx;
 }
 
 /* ================================= 

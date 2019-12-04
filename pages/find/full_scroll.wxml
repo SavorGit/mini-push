@@ -117,11 +117,14 @@
                 </view>
                 <view class='video-content flex-column-flex_start-start'>
                   <view class="content-header">
-                    <label>{{bean.nickName}}</label>
+                    <label>@{{bean.nickName}}</label>
                   </view>
                   <view class='content-body'>
                     <view>{{bean.content}}</view>
-                    <view wx:if='{{bean.hotel_name != ""}}'>{{bean.create_time}}.{{bean.hotel_name}}</view>
+                    <view wx:if='{{bean.hotel_name != ""}}' class="flex-row-center-flex_start theme-font3" style="margin-top:15rpx;">
+                      <image src="/images/icon2/1CBEB6_map-mark.png" style="width:24rpx;height:24rpx;margin-right:5rpx;"></image>
+                      <label>{{bean.create_time}}.{{bean.hotel_name}}</label>
+                    </view>
                   </view>
                 </view>
                 <progress class="full_width" percent="{{playProgress[index] * 100}}" stroke-width="5rpx" activeColor="#1BBEB6" backgroundColor="#EDEDED"></progress>
@@ -173,10 +176,26 @@
                       <view class="fa fa-spinner fa-pulse"></view>
                     </view>
                   </view>
-                  <view class="right-btn-group flex-column-center-center fadeInRight"></view>
+                  <view class="right-btn-group flex-column-center-center fadeInRight">
+                    <image class="user-hader-img" src="/images/imgs/default-user.png"></image>
+                    <cover-image class="btn-favorite" src="/images/imgs/999999_Favorite.png"></cover-image>
+                    <label class="theme-font3">喜欢</label>
+                    <cover-view class="btn-share">
+                      <button>
+                        <cover-image src="/images/imgs/999999_Share.png"></cover-image>
+                      </button>
+                    </cover-view>
+                    <label class="theme-font3">分享</label>
+                    <cover-image class="btn-tv" src="/images/imgs/FFFFFF_TV.png" data-url="{{bean.url}}" bindtap="onLaunchtTV"></cover-image>
+                    <label class="theme-font4">投屏</label>
+                  </view>
                 </view>
                 <view class='video-content flex-column-center-center'>
-                  <cover-view class="theme-button-like" data-url="{{bean.url}}" bindtap="onLaunchtTV">电视播放</cover-view>
+                  <!-- <cover-view class="launch-tv theme-button" data-url="{{bean.url}}" bindtap="onLaunchtTV">电视播放</cover-view> -->
+                  <!-- <cover-view class="launch-tv flex-column-center-center" data-url="{{bean.url}}" bindtap="onLaunchtTV">
+                    <cover-image class="btn-tv" src="/images/imgs/FFFFFF_TV.png"></cover-image>
+                    <label>电视播放</label>
+                  </cover-view> -->
                 </view>
                 <progress class="full_width" percent="{{playProgress[index] * 100}}" stroke-width="5rpx" activeColor="#1BBEB6" backgroundColor="#EDEDED"></progress>
               </video>

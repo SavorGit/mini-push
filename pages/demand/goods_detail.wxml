@@ -22,17 +22,25 @@
   <view class="container flex-column-center-flex_start theme-container" style='height: calc({{documentHeight}}px - 46px);'>
     <video class="goods-video" src="{{goods_info.video_url}}"></video>
     <view class='operation flex-row-center-flex_end font_666666_26'>
-      <view>
-        <label class="fa fa-television fa-lg">{{goods_info.play_num}}</label>
+      <view class="flex-row-center-flex_start">
+        <!-- <label class="fa fa-television fa-lg">{{goods_info.play_num}}</label> -->
+        <image src="/images/icon2/666666_television.png" style="width:32rpx;height:32rpx;"></image>
+        <label>{{goods_info.play_num}}</label>
       </view>
-      <view wx:if="{{goods_info.is_collect==1}}">
-        <label class="fa fa-heart fa-lg" style="color: #E11E4C;" bindtap='cancCollect' data-res_id="{{goods_info.goods_id}}" data-type='4' data-openid='{{openid}}'>{{goods_info.collect_num}}</label>
+      <view wx:if="{{goods_info.is_collect==1}}" class="flex-row-center-flex_start" bindtap='cancCollect' data-res_id="{{goods_info.goods_id}}" data-type='4' data-openid='{{openid}}'>
+        <!-- <label class="fa fa-heart fa-lg" style="color: #E11E4C;" bindtap='cancCollect' data-res_id="{{goods_info.goods_id}}" data-type='4' data-openid='{{openid}}'>{{goods_info.collect_num}}</label> -->
+        <image src="/images/icon2/FF757D_Favorite.png" style="width:32rpx;height:32rpx;"></image>
+        <label>{{goods_info.collect_num}}</label>
       </view>
-      <view wx:else>
-        <label class="fa fa-heart-o fa-lg" bindtap='onCollect' data-res_id="{{goods_info.goods_id}}">{{goods_info.collect_num}}</label>
+      <view wx:else class="flex-row-center-flex_start" bindtap='onCollect' data-res_id="{{goods_info.goods_id}}">
+        <!-- <label class="fa fa-heart-o fa-lg" bindtap='onCollect' data-res_id="{{goods_info.goods_id}}">{{goods_info.collect_num}}</label> -->
+        <image src="/images/icon2/666666_Favorite.png" style="width:32rpx;height:32rpx;"></image>
+        <label>{{goods_info.collect_num}}</label>
       </view>
-      <button class="font_666666_26" open-type='share' data-openid="{{openid}}" data-goods_id="{{goods_info.goods_id}}" data-type='4' data-video_url="{{video_url}}" data-img_url='{{goods_info.pubdetail[0].img_url}}' data-share_num='{{goods_info.share_num}}'>
-        <label class="fa fa-share-square-o fa-lg">{{goods_info.share_num}}</label>
+      <button class="flex-row-center-flex_start" class="font_666666_26" open-type='share' data-openid="{{openid}}" data-goods_id="{{goods_info.goods_id}}" data-type='4' data-video_url="{{video_url}}" data-img_url='{{goods_info.pubdetail[0].img_url}}' data-share_num='{{goods_info.share_num}}'>
+        <!-- <label class="fa fa-share-square-o fa-lg">{{goods_info.share_num}}</label> -->
+        <image src="/images/icon2/666666_share.png" style="width:32rpx;height:32rpx;"></image>
+        <label>{{goods_info.share_num}}</label>
       </button>
     </view>
     <!-- <view class="goods-title">{{goods_info.name}}</view> -->

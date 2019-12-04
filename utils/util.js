@@ -79,6 +79,7 @@ const HttpRequest = (options) => {
     responseType: options.responseType,
     success: function() {
       var successFnArgumentArray = [].slice.call(arguments);
+      console.log('util.HttpRequest.success', 'function', successFnArgumentArray);
       if (options.isShowLoading != false) {
         wx.hideLoading();
       }
@@ -92,6 +93,7 @@ const HttpRequest = (options) => {
     },
     fail: function() {
       var failFnArgumentArray = [].slice.call(arguments);
+      console.log('util.HttpRequest.fail', 'function', failFnArgumentArray);
       if (options.isShowLoading != false) {
         wx.hideLoading();
       }
@@ -108,6 +110,7 @@ const HttpRequest = (options) => {
     },
     complete: function() {
       var completeFnArgumentArray = [].slice.call(arguments);
+      console.log('util.HttpRequest.complete', 'function', completeFnArgumentArray);
       if (typeof(options.complete) == "function") {
         try {
           options.complete.apply(requestOptions, completeFnArgumentArray);
@@ -151,6 +154,7 @@ const HttpRequestForLHS = (options) => HttpRequest({
   isShowLoading: options.isShowLoading,
   success: function(res) {
     var httpRequst = this;
+    console.log('util.HttpRequestForLHS.success', 'function', res);
     var statusCode = res.statusCode;
     if (parseInt(statusCode / 100) != 2) {
       httpRequst.fail.call(httpRequst, {
@@ -197,6 +201,7 @@ const HttpRequestForLHS = (options) => HttpRequest({
   },
   fail: function(res) {
     var failFnArgumentArray = [].slice.call(arguments);
+    console.log('util.HttpRequestForLHS.fail', 'function', res, failFnArgumentArray);
     if (typeof(options.fail) == "function") {
       if (options.isShowToastForFail != false && !res.code) {
         wx.showToast({
