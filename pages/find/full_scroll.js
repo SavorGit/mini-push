@@ -359,8 +359,8 @@ Page({
     let self = this;
 
     if (utils.verbose == true) {
-      console.log('full_scroll.Page.onLoad', 'app.globalData.hotel_info', app.globalData.hotel_info);
-      console.log('full_scroll.Page.onLoad', 'self.data.link_type', self.data.link_type, app.globalData.link_type, SavorUtils.Constant.LinkType.BOX);
+      console.log('full_scroll.Page.onReady', 'app.globalData.hotel_info', app.globalData.hotel_info);
+      console.log('full_scroll.Page.onReady', 'self.data.link_type', self.data.link_type, app.globalData.link_type, SavorUtils.Constant.LinkType.BOX);
     }
     if (self.data.link_type == SavorUtils.Constant.LinkType.BOX) { // 直联方式
       if (typeof(app.globalData.hotel_info) != 'object' || typeof(app.globalData.hotel_info.intranet_ip) != 'string') {
@@ -378,7 +378,7 @@ Page({
       }
       box_api_domain = 'http://' + app.globalData.hotel_info.intranet_ip + ':8080';
       self.setData({
-        funFrom: 'onLoad'
+        funFrom: 'onReady'
       });
       SavorUtils.Page.loadBoxMediaData(self);
       SavorUtils.Page.initPageSetData(self)
@@ -904,7 +904,7 @@ Page({
 
   // 重试 - 无网
   onReload(e) {
-    this.onLoad();
+    this.onReady();
   },
 
   // 跳转到机顶盒视频 - 无网
