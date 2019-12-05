@@ -1,4 +1,4 @@
-const verbose = true; // true: 开；false: 关。
+const verbose = false; // true: 开；false: 关。
 
 const formatTime = date => {
   const year = date.getFullYear()
