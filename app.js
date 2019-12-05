@@ -939,7 +939,7 @@ App({
         })
       }else {
         that.setData({
-          wifiErr: { 'is_open': 1, 'msg': '亲，该包间电视暂不能投屏，请更换其他包间', 'confirm': '', 'type': 4 }
+          wifiErr: { 'is_open': 1, 'msg': '亲，该包间电视暂不能投屏，请更换其他包间', 'confirm': '我知道了', 'type': 5 }
         })
       }
       
