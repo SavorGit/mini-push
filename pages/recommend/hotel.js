@@ -377,7 +377,6 @@ Page({
                   avg_exp_id: 0
                 },
                 success: function (res) {
-                  //console.log(res);
                   that.setData({
                     hotel_list: res.data.result
                   })
@@ -420,7 +419,6 @@ Page({
               avg_exp_id: 0
             },
             success: function (res) {
-              //console.log(res);
               that.setData({
                 hotel_list: res.data.result
               })
@@ -616,7 +614,6 @@ Page({
   },
   //遥控切换节目
   changeProgram: function (e) {
-    console.log(e);
     var that = this;
     box_mac = e.currentTarget.dataset.box_mac;
     openid = e.currentTarget.dataset.openid;
@@ -625,7 +622,6 @@ Page({
     app.controlChangeProgram(openid, box_mac, change_type, hotel_info, that);
   },
   modalConfirm: function (e) {
-    console.log(e);
     var that = this;
     var hotel_info = e.target.dataset.hotel_info;
     app.linkHotelWifi(hotel_info, that);
@@ -658,7 +654,6 @@ Page({
           })
           box_mac = '';
         }
-        //console.log(data);
       }, re => { }, { isShowLoading: false });
     } else {
       app.openidCallback = openid => {

@@ -58,21 +58,16 @@ Page({
   },
 
   onLoad: function() {
-    //wx.hideShareMenu();
-    //console.log(app.globalData.optimize_data);
-    
     let self = this;
     self.setData({
       link_type:app.globalData.link_type,
     })
-    console.log(app.globalData);
     if(app.globalData.link_type==2){
-      console.log('http://' + app.globalData.hotel_info.intranet_ip + ':8080/h5/findGoods?box_mac=' + app.globalData.hotel_info.box_mac + '&deviceId=1234&web=true');
+      
       var inner_url = 'http://'+app.globalData.hotel_info.intranet_ip+':8080/h5/findGoods?box_mac=' + app.globalData.hotel_info.box_mac+'&deviceId=1234&web=true';
       wx.request({
         url: inner_url,
         success:function(res){
-          console.log(res);
           if(res.data.code==10000){
             var yx_list = res.data.result;
             var program_list = app.globalData.optimize_data;
@@ -143,7 +138,6 @@ Page({
             page: page,
             openid: openid,
           }, (boxData, boxHeaders, boxCookies, boxErrMsg, boxStatusCode) => {
-            console.log(program_list)
             program_list = boxData.result
             self.setData({
               program_list: boxData.result
@@ -238,12 +232,11 @@ Page({
   onShow: function() {
     var that = this;
     if (app.globalData.link_type == 2) {
-      console.log('http://' + app.globalData.hotel_info.intranet_ip + ':8080/h5/findGoods?box_mac=' + app.globalData.hotel_info.box_mac + '&deviceId=1234&web=true');
+      
       var inner_url = 'http://' + app.globalData.hotel_info.intranet_ip + ':8080/h5/findGoods?box_mac=' + app.globalData.hotel_info.box_mac + '&deviceId=1234&web=true';
       wx.request({
         url: inner_url,
         success: function (res) {
-          console.log(res);
           if (res.data.code == 10000) {
             var yx_list = res.data.result;
             var program_list = app.globalData.optimize_data;
@@ -419,7 +412,6 @@ Page({
   //收藏资源
   onCollect: function(e) {
     var self = this;
-    console.log(e);
     //var openid = e.target.dataset.openid;
     var res_id = e.target.dataset.res_id;
     var res_key = e.target.dataset.res_key;

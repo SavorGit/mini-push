@@ -31,10 +31,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
-    //wx.hideShareMenu();
     var that = this;
-
-    // console.log('onLoad', 'that.data.link_type', that.data.link_type);
     if (that.data.link_type == 2) {
       return;
     }
@@ -137,7 +134,6 @@ Page({
     app.controlChangeProgram(openid, box_mac, change_type, hotel_info, that);
   },
   modalConfirm: function(e) {
-    console.log(e);
     var that = this;
     var hotel_info = e.target.dataset.hotel_info;
     app.linkHotelWifi(hotel_info, that);
@@ -194,7 +190,6 @@ Page({
     var res_type = res.target.dataset.res_type;
     var openid = res.target.dataset.openid;
     var pubdetail = res.target.dataset.pubdetail;
-    //console.log(publiclist);
     if (res_type == 1) {
       var img_url = pubdetail[0]['res_url'];
       var share_url = '/pages/share/pic?forscreen_id=' + res_id;
@@ -299,7 +294,6 @@ Page({
       urls[row] = current[row]['res_url']
 
     }
-    //console.log(pkey);
     wx.previewImage({
       current: urls[pkey], // 当前显示图片的http链接
       urls: urls // 需要预览的图片http链接列表
@@ -354,7 +348,6 @@ Page({
       app.scanQrcode();
     } else {
       var user_info = wx.getStorageSync("savor_user_info");
-      //console.log(user_info);
       var avatarUrl = user_info.avatarUrl;
       var nickName = user_info.nickName;
       var openid = e.currentTarget.dataset.openid;

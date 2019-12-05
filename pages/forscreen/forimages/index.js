@@ -93,8 +93,6 @@ Page({
     
     function uploadInfos(res, box_mac, openid) {
       var img_len = res.tempFilePaths.length;
-      
-      console.log(res);
       if (img_len > 0 && img_len < 10) {
         var tmp_imgs = [];
         for (var i = 0; i < img_len; i++) {
@@ -198,7 +196,6 @@ Page({
   },//重新选择照片结束
 
   up_forscreen(e) {//多张图片投屏开始(不分享到发现)
-    console.log(e);
     var that = this;
     var formId = e.detail.formId;
     img_lenth = e.detail.value.img_lenth;
@@ -222,7 +219,6 @@ Page({
       is_share: is_share,
       is_assist:is_assist
     })
-    console.log(e);
     if (e.detail.value.upimgs0 != '' && e.detail.value.upimgs0 != undefined){
       
       upimgs[0] = e.detail.value.upimgs0;
@@ -339,8 +335,6 @@ Page({
       var order = flag + 1;
       var postf_t = filename.substring(index1, index2);//后缀名
       var postf_w = filename.substring(index1 + 1, index2);//后缀名
-      //console.log(postf_w);
-      console.log(resource_size);
       var upload_task = wx.uploadFile({
         url: oss_upload_url,
         filePath: img_url,
@@ -455,7 +449,6 @@ Page({
           })
         },
         fail: function ({ errMsg }) {
-          //console.log('uploadImage fial,errMsg is', errMsg)
           wx.navigateBack({
             delta: 1
           })
@@ -468,14 +461,12 @@ Page({
       });
       upload_task.onProgressUpdate((res) => {
         tmp_percent[flag] = { "percent": res.progress };
-        //console.log(res.progress);
         that.setData({
           tmp_percent: tmp_percent
         });
         if (res.progress==100){
           
           tmp_imgs[flag].is_sing_forscreen = 1;
-          console.log(tmp_imgs);
           that.setData({
             tmp_imgs:tmp_imgs,
             showFirst: false,
@@ -656,7 +647,6 @@ Page({
   //是否公开显示餐厅信息
   checkboxChange:function(e){
     var that = this;
-    //console.log(e.detail.value.length);
     var check_lenth = e.detail.value.length;
     var check_arr = e.detail.value;
     if(check_lenth==2){
@@ -694,7 +684,6 @@ Page({
       urls[row] = current[row]['res_url']
 
     }
-    //console.log(pkey);
     wx.previewImage({
       current: urls[pkey], // 当前显示图片的http链接
       urls: urls // 需要预览的图片http链接列表
@@ -703,13 +692,11 @@ Page({
   replayHistory: function (e) {
     var that = this;
     var user_info = wx.getStorageSync("savor_user_info");
-    //console.log(user_info);
     var avatarUrl = user_info.avatarUrl;
     var nickName = user_info.nickName;
     var forscreen_char = '';
     var mobile_brand = app.globalData.mobile_brand;
     var mobile_model = app.globalData.mobile_model;
-    //console.log(e);
     var openid = e.target.dataset.openid;
     var box_mac = e.target.dataset.box_mac;
     var res_type = e.target.dataset.res_type;
@@ -1050,7 +1037,6 @@ Page({
   },
   //我要助力
   assist:function(e){
-    console.log(e);
     var that = this;
     var openid = e.detail.value.openid;
     var box_mac = e.detail.value.box_mac;
@@ -1105,7 +1091,6 @@ Page({
     })
   },
   closeLead:function (e){
-    console.log(e);
     var that = this;
     var type = e.currentTarget.dataset.type;
     if(type==1){

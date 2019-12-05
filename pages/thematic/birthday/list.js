@@ -89,7 +89,6 @@ Page({
         'content-type': 'application/json'
       },
       success:function(res){
-        //console.log(res);
         that.setData({
           happylist:res.data.result
         })
@@ -156,7 +155,6 @@ Page({
     var hotel_info = e.currentTarget.dataset.hotel_info;
     
     var forscreen_char = 'Happy Birthday';
-    console.log(e);
     var index1 = vediourl.lastIndexOf("/");
     var index2 = vediourl.length;
     var filename = vediourl.substring(index1 + 1, index2);//后缀名
@@ -194,7 +192,6 @@ Page({
                       msg: '{ "action": 6,"url":"' + vediourl + '","filename":"' + filename + '","forscreen_id":"' + timestamp + '","resource_type":2}',
                     },
                     success: function (res) {
-                      console.log(res);
                       wx.showToast({
                         title: '点播成功,电视即将开始播放',
                         icon: 'none',
@@ -504,7 +501,6 @@ Page({
     app.controlChangeProgram(openid, box_mac, change_type, hotel_info, that);
   },
   modalConfirm: function (e) {
-    console.log(e);
     var that = this;
     var hotel_info = e.target.dataset.hotel_info;
     app.linkHotelWifi(hotel_info, that);

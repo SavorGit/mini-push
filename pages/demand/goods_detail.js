@@ -26,8 +26,6 @@ Page({
    */
   onLoad: function(options) {
     var that = this;
-
-    // console.log('onLoad', 'that.data.link_type', that.data.link_type);
     if (that.data.link_type == 2) {
       return;
     }
@@ -174,7 +172,6 @@ Page({
   //收藏资源
   onCollect: function(e) {
     var that = this;
-    console.log(e);
     //var openid = e.target.dataset.openid;
     //var res_id = e.target.dataset.res_id;
     var res_id = e.currentTarget.dataset.res_id;
@@ -187,7 +184,6 @@ Page({
       'type': res_type,
       'status': 1,
     }, (data, headers, cookies, errMsg, statusCode) => {
-      console.log(goods_info);
       goods_info.is_collect = 1;
       goods_info.collect_num = data.result.nums;
       that.setData({
@@ -308,7 +304,6 @@ Page({
         })
       } else {
         goods_nums += 1;
-        //console.log(goods_nums);
       }
     } else if (type == 2) { //数量减少
       if (goods_nums == 1) {
@@ -327,7 +322,6 @@ Page({
   },
   //店内购买
   shopBuyGoods: function(e) {
-    //console.log(e);
     var that = this;
     var goods_id = e.currentTarget.dataset.goods_id;
     var goods_nums = e.currentTarget.dataset.goods_nums;

@@ -35,8 +35,6 @@ Page({
   onLoad: function(options) {
     //wx.hideShareMenu();
     var that = this;
-
-    // console.log('onLoad', 'that.data.link_type', that.data.link_type);
     if (that.data.link_type == 2) {
       return;
     }
@@ -118,7 +116,6 @@ Page({
               content: '当前电视正在进行投屏,继续投屏有可能打断当前投屏中的内容.',
               success: function(res) {
                 if (res.confirm) {
-                  //console.log('用户点击确定')
                   wx.request({
                     url: api_url + '/Netty/Index/index',
                     headers: {
@@ -170,7 +167,6 @@ Page({
                     }
                   })
                 } else if (res.cancel) {
-                  //console.log('用户点击取消')
                 }
               }
             })
@@ -247,7 +243,6 @@ Page({
       var nickName = user_info.nickName;
       var openid = e.currentTarget.dataset.openid;
       pubdetail = e.currentTarget.dataset.pubdetail;
-      console.log(pubdetail);
       var forscreen_char = '';
       var res_type = e.currentTarget.dataset.res_type;
       var mobile_brand = app.globalData.mobile_brand;
@@ -706,7 +701,6 @@ Page({
     app.controlChangeProgram(openid, box_mac, change_type, hotel_info, that);
   },
   modalConfirm: function(e) {
-    console.log(e);
     var that = this;
     var hotel_info = e.target.dataset.hotel_info;
     app.linkHotelWifi(hotel_info, that);
@@ -765,7 +759,6 @@ Page({
     var pubdetail = res.target.dataset.pubdetail;
     var filename = res.target.dataset.filename;
     var type = res.target.dataset.type;
-    //console.log(publiclist);
     if (type == 3) {
       var img_url = pubdetail.imgurl;
       var video_url = pubdetail.res_url;
@@ -832,7 +825,6 @@ Page({
   popDel: function(e) {
     var forscreen_id = e.currentTarget.dataset.forscreen_id;
     var keys = e.currentTarget.dataset.keys;
-    //console.log(forscreen_id);
     this.setData({
       showModal: true,
       forscreen_id: forscreen_id,
@@ -869,7 +861,6 @@ Page({
       urls[row] = current[row]['res_url']
 
     }
-    //console.log(pkey);
     wx.previewImage({
       current: urls[pkey], // 当前显示图片的http链接
       urls: urls // 需要预览的图片http链接列表

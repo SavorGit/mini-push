@@ -89,7 +89,6 @@ Page({
       is_btn_disabel: true,
       hiddens: true,
     })
-    //console.log(res.detail.value);
     var box_mac = e.detail.value.box_mac;
     var user_info = wx.getStorageSync('savor_user_info');
     var avatarUrl = user_info.avatarUrl;
@@ -172,7 +171,6 @@ Page({
         filePath: img_url,
         name: 'fileUpload',
         success: function(res) {
-          console.log(res)
           if (i == img_lenth) {
             //var info_rt = JSON.parse(res.data);
             if (res.data.code == 1001) {
@@ -268,7 +266,6 @@ Page({
   },
   up_single_pic: function(res) {
     var that = this;
-    //console.log(res);
     openid = res.currentTarget.dataset.openid;
     box_mac = res.currentTarget.dataset.boxmac;
     intranet_ip = res.currentTarget.dataset.intranet_ip
@@ -331,7 +328,6 @@ Page({
     wx.request({
       url: "http://" + intranet_ip + ":8080/h5/stop?deviceId=" + openid + "&box_mac=" + box_mac + "&web=true",
       success: function(res) {
-        console.log(res);
         if (res.data.code == 10000) {
           wx.navigateBack({
             delta: 1
@@ -378,7 +374,6 @@ Page({
     box_mac = e.currentTarget.dataset.box_mac;
     var qrcode_img = e.currentTarget.dataset.qrcode_img;
     var hotel_info = e.currentTarget.dataset.hotel_info;
-    console.log(hotel_info);
     app.controlCallQrcode(openid, box_mac, qrcode_img, hotel_info, that);
   }, 3000), //呼大码结束
   //打开遥控器
@@ -411,8 +406,6 @@ Page({
   changeVolume: function(e) {
     var that = this;
     var change_type = e.currentTarget.dataset.change_type;
-    //app.controlChangeVolume(intranet_ip, openid, change_type);
-    console.log(hotel_info);
     app.controlChangeVolume(openid, box_mac, change_type, hotel_info, that);
   },
   //遥控切换节目
@@ -422,7 +415,6 @@ Page({
     app.controlChangeProgram(openid, box_mac, change_type, hotel_info, that);
   },
   modalConfirm: function(e) {
-    console.log(e);
     var that = this;
     var hotel_info = e.target.dataset.hotel_info;
     app.linkHotelWifi(hotel_info, that);

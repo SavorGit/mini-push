@@ -35,7 +35,6 @@ App({
       }else {
         var timestamp = (new Date()).valueOf();
         if(action==11 || action==12 ){
-          console.log(pubdetail);
           var media_url_str = '[';
           var space = '';
           for(var i=0;i<pubdetail.length;i++){
@@ -47,7 +46,6 @@ App({
           wx.request({
             url: 'http://' + hotel_info.intranet_ip + ":8080/h5/discover_ondemand?deviceId=" + user_info.openid + "&box_mac=" + box_mac + "&web=true&media_id=" + forscreen_id + "&resource_type=" + res_type + "&forscreen_id=" + timestamp + "&media_url=" + media_url_str + '&avatarUrl=' + user_info.avatarUrl + "&nickName=" + user_info.nickName,
             success: function (res) {
-              console.log(res);
               if (res.data.code == 10000) {
                 wx.showToast({
                   title: '点播成功,电视即将开始播放',
@@ -64,7 +62,6 @@ App({
               }
             }, fail: function (res) {
               that.linkHotelWifi(hotel_info, aps)
-              console.log(res);
               wx.showToast({
                 title: '网络异常,点播失败',
                 icon: 'none',
@@ -210,9 +207,7 @@ App({
         })
       }
     } else { //视频投屏
-      console.log(res_len);
       for (var i = 0; i < res_len; i++) {
-        console.log('11222');
         wx.request({
           url: that.globalData.api_url + '/Smallapp/index/recordForScreenPics',
           header: {
@@ -313,7 +308,6 @@ App({
       wx.request({
         url: "http://" + hotel_info.intranet_ip + ":8080/h5/stop?deviceId=" + openid + "&box_mac=" + box_mac+"&web=true",
         success: function (res) {
-          console.log(res);
           if (res.data.code==10000){
             wx.showToast({
               title: '退出成功',
@@ -345,7 +339,6 @@ App({
   //遥控器呼玛
   controlCallQrcode: function(openid, box_mac, qrcode_img,hotel_info,aps) {
     var that = this;
-    //console.log(openid);
     if (box_mac) {
       var link_type = that.globalData.link_type;
       if(link_type==1){
@@ -847,7 +840,6 @@ App({
           success: function (res) {
             wx.getConnectedWifi({
               success: function (res) {
-                console.log(res);
                 if (res.errMsg == 'getConnectedWifi:ok') {
                   if (res.wifi.SSID == wifi_name) {//链接的是本包间wifi
                     if (aps.wifiOkCallback) {
@@ -861,21 +853,17 @@ App({
                     aps.globalData.link_type = 2;
 
                   } else {//链接的不是本包间wifi
-                    console.log('not this  room  wifi');
                     aps.connectWifi(wifi_name, wifi_mac, use_wifi_password, box_mac, that);
 
                   }
                 } else {
                   //当前打开wifi 但是没有链接任何wifi
-                  console.log('getConnectedWifi')
-                  console.log(res);
+                  
                   aps.connectWifi(wifi_name, wifi_mac, use_wifi_password, box_mac, that);
                 }
                 wx.hideLoading()
               }, fail: function (res) {
                 wx.hideLoading()
-                console.log('wx.getConnectedWifi.fail')
-                console.log(res);
 
                 if (res.errCode == 12005) { //安卓特有  未打开wifi
                   that.setData({
@@ -976,7 +964,7 @@ App({
             })
 
             that.setData({ wifiErr: { 'is_open': 0, 'msg': '', 'confirm': '确定', 'calcle': '取消', 'type': 0 }, link_type: 2 }, () => {
-              console.log('赋值成功')
+              
               aps.globalData.link_type = 2;
 
               wx.showToast({
@@ -993,7 +981,6 @@ App({
 
             
           }, fail: function (res) {
-            console.log(res);
             that.setData({
               wifiErr: { 'is_open': 1, 'msg': '亲，使用此小程序前需要链接包间wifi,链接wifi投屏更快哦！', 'confirm': '重试', 'calcle': '', 'type': 3 }
             })

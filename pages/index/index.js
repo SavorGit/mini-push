@@ -75,7 +75,7 @@ Page({
 
         }, (data, headers, cookies, errMsg, statusCode) => {
           
-          console.log('sss');
+          wx.hideLoading();
           app.globalData.optimize_data = data.result.optimize_data;
           app.globalData.public_list = data.result.public_list;
           app.globalData.collect_list = data.result.collect_list;
@@ -145,10 +145,10 @@ Page({
                   var rb_list = rest.data.result;
                   for (var i = 0; i < hot_play.length; i++) {
                     if (app.in_array(hot_play[i].forscreen_id, rb_list, 'media_id')) {
-                      console.log(1);
+                      
                       hot_play[i].is_show = 1;
                     } else {
-                      console.log(1);
+                      
                       hot_play[i].is_show = 0;
                     }
                   }
@@ -258,10 +258,10 @@ Page({
                       var rb_list = rest.data.result;
                       for (var i = 0; i < hot_play.length; i++) {
                         if (app.in_array(hot_play[i].forscreen_id, rb_list, 'media_id')) {
-                          console.log(1);
+                          
                           hot_play[i].is_show = 1;
                         } else {
-                          console.log(1);
+                          
                           hot_play[i].is_show = 0;
                         }
                       }
@@ -376,7 +376,6 @@ Page({
     })
     var user_info = wx.getStorageSync("savor_user_info");
     openid = user_info.openid;
-    //console.log(box_mac);
     if (box_mac == 'undefined' || box_mac == undefined) {
       box_mac = '';
     }
@@ -392,7 +391,6 @@ Page({
   chooseImage(e) {
     var that = this;
     var user_info = wx.getStorageSync("savor_user_info");
-    console.log(user_info);
     if (user_info.is_wx_auth != 3 && app.globalData.link_type!=2) {
       that.setData({
         showModal: true
@@ -421,7 +419,6 @@ Page({
           wx.navigateTo({
             url: '/pages/forscreen/forimages/wifi?box_mac=' + box_mac + '&openid=' + openid + '&intranet_ip=' + intranet_ip + '&wifi_mac=' + wifi_mac + '&wifi_name=' + wifi_name + '&wifi_password=' + wifi_password,
           })
-          //console.log('直连投屏')
         }
 
       }
@@ -607,7 +604,6 @@ Page({
     app.controlChangeProgram(openid, box_mac, change_type, hotel_info, that);
   },
   modalConfirm: function(e) {
-    console.log(e);
     var that = this;
     var type = e.target.dataset.type;
     if(type==5){
@@ -701,7 +697,6 @@ Page({
         })
       } else {
         goods_nums += 1;
-        //console.log(goods_nums);
       }
     } else if (type == 2) { //数量减少
       if (goods_nums == 1) {
@@ -728,7 +723,6 @@ Page({
   },
   //店内购买
   shopBuyGoods: function(e) {
-    //console.log(e);
     var that = this;
     var goods_id = e.currentTarget.dataset.goods_id;
     var goods_nums = e.currentTarget.dataset.goods_nums;
@@ -818,7 +812,6 @@ Page({
   },
   //活动商品京东购买
   jdBuy: function(e) {
-    //console.log(e);
     var h5_url = e.currentTarget.dataset.h5_url;
     h5_url = encodeURIComponent(h5_url);
     wx.navigateTo({
@@ -888,7 +881,6 @@ Page({
           })
 
         }
-        //console.log(data);
       }, re => { }, { isShowLoading: false });
     }
     

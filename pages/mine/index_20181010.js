@@ -30,7 +30,6 @@ Page({
     that.setData({
       link_type:app.globalData.link_type,
     })
-    console.log(app.globalData);
     if (app.globalData.link_type == 2) {
       var userinfo = wx.getStorageSync(cache_key+'user_info');
       userinfo.id = userinfo.user_id;
@@ -251,7 +250,6 @@ Page({
     app.controlChangeProgram(openid, box_mac, change_type, hotel_info, that);
   },
   modalConfirm: function (e) {
-    console.log(e);
     var that = this;
     var hotel_info = e.target.dataset.hotel_info;
     app.linkHotelWifi(hotel_info, that);
@@ -284,7 +282,6 @@ Page({
           })
           box_mac = '';
         }
-        //console.log(data);
       }, re => { }, { isShowLoading: false });
     } else {
       app.openidCallback = openid => {

@@ -81,7 +81,6 @@ Page({
     })
   },
   forscreen_video: function(res) {
-    console.log(res);
     var that = this;
     that.setData({
       is_forscreen: 0,
@@ -106,7 +105,6 @@ Page({
       filePath: video_url,
       name: 'fileUpload',
       success: function(res) {
-        console.log(res)
         var info_rt = JSON.parse(res.data);
         if (info_rt.code == 10000) {
           that.setData({
@@ -201,7 +199,6 @@ Page({
   },
   chooseVedio: function(res) {
     var that = this;
-    //console.log(res);
     box_mac = res.currentTarget.dataset.box_mac;
     openid = res.currentTarget.dataset.openid;
     that.setData({
@@ -366,7 +363,6 @@ Page({
     app.controlChangeProgram(openid, box_mac, change_type, hotel_info, that);
   },
   modalConfirm: function(e) {
-    console.log(e);
     var that = this;
     var hotel_info = e.target.dataset.hotel_info;
     app.linkHotelWifi(hotel_info, that);
