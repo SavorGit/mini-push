@@ -219,7 +219,6 @@ let SavorUtils = {
       let user_info = wx.getStorageSync("savor_user_info");
       // let pageNo = ++pageContext.data.mediaPageNo;
       let request_url = box_api_domain + '/h5/findDiscover?box_mac=' + app.globalData.hotel_info.box_mac + '&web=true&deviceId=' + user_info.openid;
-      console.log(verbose)
       if (utils.verbose == true) {
         console.log('full_scroll.customer.Page.loadMediaData', 'app.globalData.hotel_info', app.globalData.hotel_info, request_url);
       }
@@ -353,7 +352,7 @@ Page({
 
     if (utils.verbose == true) {
       console.log('full_scroll.Page.onLoad', 'app.globalData.hotel_info', app.globalData.hotel_info);
-      console.log('full_scroll.Page.onLoad', 'self.data.link_type', self.data.link_type, app.globalData.link_type);
+      console.log('full_scroll.Page.onLoad', 'self.data.link_type', self.data.link_type, app.globalData.link_type, SavorUtils.Constant.LinkType.BOX);
     }
     if (self.data.link_type == SavorUtils.Constant.LinkType.BOX) { // 直联方式
       if (typeof(app.globalData.hotel_info) != 'object' || typeof(app.globalData.hotel_info.intranet_ip) != 'string') {
