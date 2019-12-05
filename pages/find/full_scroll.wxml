@@ -1,7 +1,7 @@
 <!--pages/find/full_scroll.wxml-->
 <import src="/pages/template/commons" />
 
-<block wx:if="{{funFrom == 'onLoad' && apiStatus == 221}}">
+<block wx:if="{{funFrom == 'onReady' && apiStatus == 221}}">
   <template is="navigationBarForTopLevel" data='{{statusBarHeight: statusBarHeight,titleText:"热点投屏"}}' />
   <view class="container flex-column-center-center theme-container" style='height: calc(100vh - 46px - {{statusBarHeight}}px);'>
     <view class="no-net flex-column-center-flex_start">
