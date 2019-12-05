@@ -836,6 +836,9 @@ App({
       var box_mac = hotel_info.box_mac
       if(hotel_info.wifi_name!=''){
         //第二步  判断当前连接的wifi是否为当前包间wifi
+        that.setData({
+          wifi_hidden: false,
+        })
         wx.startWifi({
           success: function (res) {
             wx.getConnectedWifi({
@@ -864,7 +867,9 @@ App({
                 wx.hideLoading()
               }, fail: function (res) {
                 wx.hideLoading()
-
+                that.setData({
+                  wifi_hidden: true,
+                })
                 if (res.errCode == 12005) { //安卓特有  未打开wifi
                   that.setData({
                     wifiErr: { 'is_open': 1, 'msg': '亲，使用此小程序前需要打开您手机的wifi,链接wifi投屏更快哦！', 'confirm': '确定', 'calcle': '取消', 'type': 1 }
@@ -920,6 +925,9 @@ App({
           }, fail: function (res) {
             //未获取成功 重试弹窗
             wx.hideLoading()
+            that.setData({
+              wifi_hidden: true,
+            })
             wx.stopWifi({
 
             })
@@ -947,9 +955,9 @@ App({
     
     wx.startWifi({
       success: function (res) {
-        wx.showLoading({
+        /*wx.showLoading({
           title: 'wifi链接中',
-        })
+        })*/
         wx.connectWifi({
           SSID: wifi_name,
           BSSID: wifi_mac,
@@ -964,7 +972,9 @@ App({
             })
 
             that.setData({ wifiErr: { 'is_open': 0, 'msg': '', 'confirm': '确定', 'calcle': '取消', 'type': 0 }, link_type: 2 }, () => {
-              
+              that.setData({
+                wifi_hidden: true,
+              })
               aps.globalData.link_type = 2;
 
               wx.showToast({
@@ -972,7 +982,7 @@ App({
                 icon: 'success',
                 duration: 2000
               });
-
+              
               wx.hideLoading()
             })
 
@@ -985,6 +995,9 @@ App({
               wifiErr: { 'is_open': 1, 'msg': '亲，使用此小程序前需要链接包间wifi,链接wifi投屏更快哦！', 'confirm': '重试', 'calcle': '', 'type': 3 }
             })
             wx.hideLoading();
+            that.setData({
+              wifi_hidden: true,
+            })
             var err_info = JSON.stringify(res);
             wx.request({
               url: aps.globalData.api_url +'/Smallappsimple/Index/recordWifiErr',
@@ -995,6 +1008,9 @@ App({
             })
           }, complete: function (res) {
             wx.hideLoading()
+            that.setData({
+              wifi_hidden: true,
+            })
             wx.stopWifi({
 
             })

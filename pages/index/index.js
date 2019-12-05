@@ -41,6 +41,7 @@ Page({
     hot_play: [], //热播内容
     link_type: app.globalData.link_type,
     wifiErr: app.globalData.wifiErr,
+    wifi_hidden:true,
     
 
   },
@@ -88,6 +89,7 @@ Page({
         utils.PostRequest(api_url + '/Smallapp4/index/isHaveCallBox?openid=' + app.globalData.openid, {}, (data, headers, cookies, errMsg, statusCode) => {
           var is_have = data.result.is_have;
           if (is_have == 1) { //已经扫码链接电视
+          
             app.linkHotelWifi(data.result, that);
             app.globalData.hotel_info = data.result;
             that.setData({
@@ -98,6 +100,7 @@ Page({
               box_mac: data.result.box_mac,
               hotel_info: data.result,
               hotel_info_json: JSON.stringify(data.result),
+              
             })
             box_mac = data.result.box_mac;
           } else {
@@ -136,6 +139,9 @@ Page({
         app.wifiOkCallback = wifiOk => {
           var hotel_info = app.globalData.hotel_info;
           if (Object.keys(hotel_info).length > 0) {
+            that.setData({
+              wifi_hidden: true
+            })
             var inner_url = 'http://' + hotel_info.intranet_ip + ':8080/h5/findHotShow?box_mac=' + hotel_info.box_mac + '&web=true&deviceId=123456';
             wx.request({
               url: inner_url,
@@ -211,6 +217,7 @@ Page({
                   box_mac: data.result.box_mac,
                   hotel_info: data.result,
                   hotel_info_json: JSON.stringify(data.result),
+                  wifi_hidden: true
                 })
                 box_mac = data.result.box_mac;
               } else {
@@ -249,6 +256,9 @@ Page({
             app.wifiOkCallback = wifiOk => {
               var hotel_info = app.globalData.hotel_info;
               if(Object.keys(hotel_info).length>0){
+                that.setData({
+                  wifi_hidden: true
+                })
                 var inner_url = 'http://' + hotel_info.intranet_ip +':8080/h5/findHotShow?box_mac='+hotel_info.box_mac+'&web=true&deviceId=123456';
                 wx.request({
                   url: inner_url,
