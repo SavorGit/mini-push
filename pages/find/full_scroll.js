@@ -269,9 +269,9 @@ let SavorUtils = {
         openid: user_info.openid
       }, (data, headers, cookies, errMsg, statusCode) => {
         let pictureObjectList = pageContext.data.pictureObjectList;
-        if (!(pictureObjectList instanceof Array)) {
-          pictureObjectList = new Array();
-        }
+        // if (!(pictureObjectList instanceof Array)) {
+        //   pictureObjectList = new Array();
+        // }
         if (!(data.result instanceof Array)) {
           wx.showToast({
             title: '没有图片了，赶快上传几张吧！',
@@ -283,7 +283,8 @@ let SavorUtils = {
         pageContext.setData({
           picturePageNo: pageNo,
           pageType: 1,
-          pictureObjectList: pictureObjectList.concat(data.result)
+          // pictureObjectList: pictureObjectList.concat(data.result)
+          pictureObjectList: data.result
         });
       });
     },
