@@ -87,7 +87,7 @@ Page({
               that.setData({
                 hotel_info: rest.data.result,
                 box_mac: rest.data.result.box_mac,
-                is_open_simple: rest.data.result.is_open_simple,
+                //is_open_simple: rest.data.result.is_open_simple,
               })
               box_mac = rest.data.result.box_mac;
 

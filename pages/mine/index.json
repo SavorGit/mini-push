@@ -2,5 +2,7 @@
   "usingComponents": {
     "bottomModal": "/components/modal/bottomModal",
     "modal": "/components/modal/modal"
-  }
+  },
+  "enablePullDownRefresh": false,
+  "disableScroll": true
 }
