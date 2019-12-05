@@ -30,7 +30,7 @@
             <block wx:if="{{bean.res_type == 1}}">
               <view class="body flex-column-flex_start-start">
                 <view class="user flex-row-center-flex_start" data-index="{{index}}" data-box_mac="{{box_mac}}" bindtap="onInputPictureDetail">
-                  <image class="hader-img" src="{{bean.avatarUrl == '' ? '/images/imgs/default-user.png' : bean.avatarUrl}}" data-index="{{index}}" binderror='loadingPicturesDefaultUserImg'></image>
+                  <image webp='{{true}}' class="hader-img" src="{{bean.avatarUrl == '' ? '/images/imgs/default-user.png' : bean.avatarUrl}}" data-index="{{index}}" binderror='loadingPicturesDefaultUserImg'></image>
                   <view class="nickname one-line-overflow theme-font-000000">{{bean.nickName}}</view>
                 </view>
                 <view wx:if="{{bean.content != ''}}" class="desc theme-font2" data-index="{{index}}" data-box_mac="{{box_mac}}" bindtap="onInputPictureDetail">{{bean.content}}</view>
@@ -38,7 +38,7 @@
                   <view class="grid-space-left pic-size-{{bean.pubdetail.length}}" data-index="{{index}}" data-box_mac="{{box_mac}}" bindtap="onInputPictureDetail"></view>
                   <view class="weui-grids">
                     <view class="weui-grid pic-size-{{bean.pubdetail.length}}" wx:for="{{bean.pubdetail}}" wx:key="picKey" wx:for-item="pic" wx:for-index="picIndex">
-                      <image mode="aspectFill" src="{{pic.img_url}}" data-index="{{index}}" data-pictures="{{bean.pubdetail}}" data-picture_index="{{picIndex}}" bindtap="previewImages"></image>
+                      <image mode="aspectFill" webp='{{true}}' src="{{pic.img_url}}" data-index="{{index}}" data-pictures="{{bean.pubdetail}}" data-picture_index="{{picIndex}}" bindtap="previewImages"></image>
                     </view>
                     <view wx:if="{{bean.pubdetail.length == 5}}" class="weui-grid pic-size-{{bean.pubdetail.length}}" data-index="{{index}}" data-box_mac="{{box_mac}}" bindtap="onInputPictureDetail"></view>
                     <view class="grid-space-right pic-size-{{bean.pubdetail.length}}" data-index="{{index}}" data-box_mac="{{box_mac}}" bindtap="onInputPictureDetail"></view>
@@ -101,7 +101,7 @@
                     </view>
                   </view>
                   <view class="right-btn-group flex-column-center-flex_start fadeInRight">
-                    <image class="user-hader-img" src="{{bean.avatarUrl == '' ? '/images/imgs/default-user.png' : bean.avatarUrl}}"></image>
+                    <image webp='{{true}}' class="user-hader-img" src="{{bean.avatarUrl == '' ? '/images/imgs/default-user.png' : bean.avatarUrl}}"></image>
                     <cover-image wx:if="{{bean.is_collect=='1'}}" class="btn-favorite" src="/images/imgs/FF757D_Favorite.png" data-id="{{bean.id}}" data-type="{{bean.type}}" data-forscreen_id="{{bean.forscreen_id}}" data-index="{{index}}" bindtap="cancCollect"></cover-image>
                     <cover-image wx:else class="btn-favorite" src="/images/imgs/FFFFFF_Favorite.png" data-id="{{bean.id}}" data-type="{{bean.type}}" data-forscreen_id="{{bean.forscreen_id}}" data-index="{{index}}" bindtap="onCollect"></cover-image>
                     <label>{{bean.collect_num}}</label>
