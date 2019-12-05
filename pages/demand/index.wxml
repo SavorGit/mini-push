@@ -35,7 +35,7 @@
         <view class="foot theme-panel flex-row-center-flex_start">
           <view class="play flex-row-center-flex_start">
             <!-- <label class="fa fa-television fa-lg" style="color: #666666;" bindtap='onCollect' data-res_id="{{bean.id}}" data-type='{{bean.type}}' data-res_key="{{index}}"></label> -->
-            <image src="/images/icon2/666666_television.png" style="width:32rpx;height:32rpx;" bindtap='onCollect' data-res_id="{{bean.id}}" data-type='{{bean.type}}' data-res_key="{{index}}"></image>
+            <image src="/images/icon2/666666_television.png" style="width:32rpx;height:32rpx;" ></image>
             <label class="num-text">{{bean.play_num}}</label>
           </view>
           <button class="share button_none flex-row-center-flex_start" open-type='share' data-openid="{{openid}}" data-res_id="{{bean.id}}" data-type='{{bean.type}}' data-res_key="{{index}}" data-video_url="{{bean.tx_url}}" data-video_name="{{bean.title}}" data-video_img='{{bean.img_url}}'>
@@ -66,7 +66,7 @@
         <view class="foot theme-panel flex-row-center-flex_start">
           <view class="play flex-row-center-flex_start">
             <!-- <label class="fa fa-television fa-lg" style="color: #666666;" bindtap='onCollect' data-res_id="{{bean.id}}" data-type='{{bean.type}}' data-res_key="{{index}}"></label> -->
-            <image src="/images/icon2/666666_television.png" style="width:32rpx;height:32rpx;" bindtap='onCollect' data-res_id="{{bean.id}}" data-type='{{bean.type}}' data-res_key="{{index}}"></image>
+            <image src="/images/icon2/666666_television.png" style="width:32rpx;height:32rpx;" ></image>
             <label class="num-text">{{bean.play_num}}</label>
           </view>
           <button class="share button_none flex-row-center-flex_start" open-type='share' data-openid="{{openid}}" data-res_id="{{bean.id}}" data-type='{{bean.type}}' data-res_key="{{index}}" data-video_url="{{bean.tx_url}}" data-video_name="{{bean.title}}" data-video_img='{{bean.img_url}}'>
@@ -110,7 +110,7 @@
         <view class="foot theme-panel flex-row-center-flex_start">
           <view class="play flex-row-center-flex_start">
             <!-- <label class="fa fa-television fa-lg" style="color: #666666;" bindtap='onCollect' data-res_id="{{bean.id}}" data-type='{{bean.type}}' data-res_key="{{index}}"></label> -->
-            <image src="/images/icon2/666666_television.png" style="width:32rpx;height:32rpx;" bindtap='onCollect' data-res_id="{{bean.id}}" data-type='{{bean.type}}' data-res_key="{{index}}"></image>
+            <image src="/images/icon2/666666_television.png" style="width:32rpx;height:32rpx;" ></image>
             <label class="num-text">{{bean.play_num}}</label>
           </view>
           <button class="share button_none flex-row-center-flex_start" open-type='share' data-openid="{{openid}}" data-res_id="{{bean.id}}" data-type='{{bean.type}}' data-res_key="{{index}}" data-video_url="{{bean.tx_url}}" data-video_name="{{bean.title}}" data-video_img='{{bean.img_url}}'>

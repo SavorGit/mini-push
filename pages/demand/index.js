@@ -237,27 +237,52 @@ Page({
    */
   onShow: function() {
     var that = this;
-    if (app.globalData.openid && app.globalData.openid != '') {
-      utils.PostRequest(api_url + '/Smallapp4/index/isHaveCallBox', {
-        openid: app.globalData.openid
-      }, (data, headers, cookies, errMsg, statusCode) => {
-        if (data.result.is_have == 1) {
-
-        } else {
-          app.globalData.link_type = 1;
-          that.setData({
-            is_link: 0,
-            box_mac: '',
-            link_type: 1,
-            popRemoteControlWindow: false
+    if (app.globalData.link_type == 2) {
+      console.log('http://' + app.globalData.hotel_info.intranet_ip + ':8080/h5/findGoods?box_mac=' + app.globalData.hotel_info.box_mac + '&deviceId=1234&web=true');
+      var inner_url = 'http://' + app.globalData.hotel_info.intranet_ip + ':8080/h5/findGoods?box_mac=' + app.globalData.hotel_info.box_mac + '&deviceId=1234&web=true';
+      wx.request({
+        url: inner_url,
+        success: function (res) {
+          console.log(res);
+          if (res.data.code == 10000) {
+            var yx_list = res.data.result;
+            var program_list = app.globalData.optimize_data;
+            for (var i = 0; i < program_list.length; i++) {
+              if (app.in_array(program_list[i].id, yx_list, 'goods_id')) {
+                program_list[i].is_show = 1;
+              } else {
+                program_list[i].is_show = 0;
+              }
+            }
+            self.setData({
+              program_list: program_list,
+              link_type: app.globalData.link_type
+            })
+          } else {
+            self.setData({
+              program_list: app.globalData.optimize_data,
+              link_type: app.globalData.link_type
+            })
+          }
+        }, faile: function (res) {
+          self.setData({
+            program_list: app.globalData.optimize_data,
+            link_type: app.globalData.link_type
           })
-          box_mac = '';
         }
-      }, re => { }, { isShowLoading: false });
-    } else {
-      app.openidCallback = openid => {
+      })
+
+
+      self.setData({
+        program_list: app.globalData.optimize_data,
+        hotel_info: app.globalData.hotel_info,
+        box_mac: app.globalData.hotel_info.box_mac,
+      })
+
+    }else {
+      if (app.globalData.openid && app.globalData.openid != '') {
         utils.PostRequest(api_url + '/Smallapp4/index/isHaveCallBox', {
-          openid: openid
+          openid: app.globalData.openid
         }, (data, headers, cookies, errMsg, statusCode) => {
           if (data.result.is_have == 1) {
 
@@ -272,8 +297,28 @@ Page({
             box_mac = '';
           }
         }, re => { }, { isShowLoading: false });
+      } else {
+        app.openidCallback = openid => {
+          utils.PostRequest(api_url + '/Smallapp4/index/isHaveCallBox', {
+            openid: openid
+          }, (data, headers, cookies, errMsg, statusCode) => {
+            if (data.result.is_have == 1) {
+
+            } else {
+              app.globalData.link_type = 1;
+              that.setData({
+                is_link: 0,
+                box_mac: '',
+                link_type: 1,
+                popRemoteControlWindow: false
+              })
+              box_mac = '';
+            }
+          }, re => { }, { isShowLoading: false });
+        }
       }
     }
+    
     //this.onLoad()
   },
 
