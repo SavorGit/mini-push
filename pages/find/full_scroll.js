@@ -340,6 +340,7 @@ Page({
     pictureObjectList: [], // 图片列表
     picturePageNo: 0,
   },
+
   /**
    * 生命周期函数--监听页面加载
    */
@@ -349,6 +350,13 @@ Page({
     self.setData({
       link_type: app.globalData.link_type
     });
+  },
+
+  /**
+   * 生命周期回调—监听页面初次渲染完成
+   */
+  onReady: function(options) {
+    let self = this;
 
     if (utils.verbose == true) {
       console.log('full_scroll.Page.onLoad', 'app.globalData.hotel_info', app.globalData.hotel_info);
@@ -542,7 +550,8 @@ Page({
   onVideoWaiting: function(e) {
     let self = this;
     self.setData({
-      isShowMediaLoading: true
+      isShowMediaLoading: true,
+      isShowMediaPlayButton: false
     });
     // console.log('full_scroll.Page.onVideoWaiting', e);
     wx.onNetworkStatusChange(function(res) {
