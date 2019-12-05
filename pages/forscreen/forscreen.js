@@ -50,17 +50,6 @@ Page({
             var scene = res.data.result.content;
             linkHotelBox(scene);
           }else {
-            /*wx.switchTab({
-              url: '../index/index',
-              success: function (e) {
-                
-                wx.showToast({
-                  title: '二维码已过期',
-                  icon: 'none',
-                  duration: 2000
-                });
-              }
-            });*/
             wx.reLaunch({
               url: '/pages/index/index',
             })
@@ -97,8 +86,7 @@ Page({
         linkSaleHotelBox(box_mac,code_type,pass_time)
         wx.reLaunch({
           url: launch_url,
-        })
-        
+        }) 
       }else {
         wx.request({
           url: api_url + '/Smallapp21/index/getQrcontent',
@@ -130,7 +118,6 @@ Page({
       console.log(options.g)
       var g = options.g;
       var g_arr = g.split('_');
-
       var box_mac = g_arr[1];
       var code_type = g_arr[2];
       if(code_type==22){
@@ -146,7 +133,6 @@ Page({
       wx.reLaunch({
         url: launch_url,
       })
-      
     }else{
       wx.reLaunch({
         url: '/pages/index/index',
@@ -200,7 +186,6 @@ Page({
                   })
                 }
               }
-              
             }
           })
         }
@@ -250,19 +235,6 @@ Page({
                       'content-type': 'application/json'
                     },
                   })
-                  /*wx.switchTab({
-                    url: '../index/index',
-                    success: function (e) {
-                      var page = getCurrentPages().pop();
-                      if (page == undefined || page == null) return;
-                      page.onLoad();
-                      wx.showToast({
-                        title: '小程序码已过期',
-                        icon: 'none',
-                        duration: 2000
-                      });
-                    }
-                  });*/
                   wx.reLaunch({
                     url: '/pages/index/index',
                   })
