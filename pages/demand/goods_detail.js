@@ -77,26 +77,7 @@ Page({
       }
 
     );
-    // wx.request({
-    //   // url: api_url + '/Smallapp3/optimize/detail',
-    //   url: api_url + '/Smallapp4/optimize/detail',
-    //   header: {
-    //     'content-type': 'application/json'
-    //   },
-    //   data: {
-    //     uid: uid,
-    //     goods_id: goods_id,
-    //     openid: openid,
-    //   },
-    //   success: function(res) {
-    //     if (res.data.code == 10000) {
-    //       goods_info = res.data.result
-    //       that.setData({
-    //         goods_info: res.data.result
-    //       })
-    //     }
-    //   }
-    // })
+    
 
   },
   //电视播放
@@ -118,21 +99,7 @@ Page({
       action_type: 3,
       type: 2
     });
-    // wx.request({
-    //   url: api_url + '/Smallapp3/datalog/recordlog',
-    //   header: {
-    //     'content-type': 'application/json'
-    //   },
-    //   data: {
-    //     openid: openid,
-    //     data_id: goods_id,
-    //     action_type: 3,
-    //     type: 2
-    //   },
-    //   success: function(res) {
-
-    //   }
-    // })
+    
   },
 
   /**
@@ -231,47 +198,7 @@ Page({
       icon: 'none',
       duration: 2000
     }));
-    // wx.request({
-    //   url: api_url + '/Smallapp/collect/recLogs',
-    //   header: {
-    //     'content-type': 'application/json'
-    //   },
-    //   data: {
-    //     'openid': openid,
-    //     'res_id': res_id,
-    //     'type': res_type,
-    //     'status': 1,
-    //   },
-    //   success: function(e) {
-    //     goods_info.is_collect = 1;
-    //     goods_info.collect_num = e.data.result.nums;
-    //     that.setData({
-    //       goods_info: goods_info
-    //     })
-    //     /*if (e.data.code == 10000) {
-    //       wx.showToast({
-    //         title: '收藏成功',
-    //         icon: 'none',
-    //         duration: 2000
-    //       })
-    //     } else {
-    //       wx.showToast({
-    //         title: '收藏失败，请稍后重试',
-    //         icon: 'none',
-    //         duration: 2000
-    //       })
-    //     }*/
-    //   },
-    //   fial: function({
-    //     errMsg
-    //   }) {
-    //     wx.showToast({
-    //       title: '网络异常，请稍后重试',
-    //       icon: 'none',
-    //       duration: 2000
-    //     })
-    //   }
-    // })
+    
   }, //收藏资源结束
   //取消收藏
   cancCollect: function(e) {
@@ -297,47 +224,7 @@ Page({
       icon: 'none',
       duration: 2000
     }));
-    // wx.request({
-    //   url: api_url + '/Smallapp/collect/recLogs',
-    //   header: {
-    //     'content-type': 'application/json'
-    //   },
-    //   data: {
-    //     'openid': openid,
-    //     'res_id': res_id,
-    //     'type': res_type,
-    //     'status': 0,
-    //   },
-    //   success: function(e) {
-    //     goods_info.is_collect = 0;
-    //     goods_info.collect_num = e.data.result.nums;
-    //     that.setData({
-    //       goods_info: goods_info
-    //     })
-    //     /*if (e.data.code == 10000) {
-    //       wx.showToast({
-    //         title: '取消收藏成功',
-    //         icon: 'none',
-    //         duration: 2000
-    //       })
-    //     } else {
-    //       wx.showToast({
-    //         title: '取消收藏失败，请稍后重试',
-    //         icon: 'none',
-    //         duration: 2000
-    //       })
-    //     }*/
-    //   },
-    //   fial: function({
-    //     errMsg
-    //   }) {
-    //     wx.showToast({
-    //       title: '网络异常，请稍后重试',
-    //       icon: 'none',
-    //       duration: 2000
-    //     })
-    //   }
-    // })
+    
   }, //取消收藏结束
   /**
    * 用户点击右上角分享
@@ -368,36 +255,7 @@ Page({
         icon: 'none',
         duration: 2000
       }));
-      // wx.request({
-      //   url: api_url + '/Smallapp/share/recLogs',
-      //   header: {
-      //     'content-type': 'application/json'
-      //   },
-      //   data: {
-      //     'openid': openid,
-      //     'res_id': goods_id,
-      //     'type': 4,
-      //     'status': 1,
-      //   },
-      //   success: function(e) {
-      //     goods_info.share_num++;
-
-
-      //     that.setData({
-      //       goods_info: goods_info
-      //     })
-
-      //   },
-      //   fail: function({
-      //     errMsg
-      //   }) {
-      //     wx.showToast({
-      //       title: '网络异常，请稍后重试',
-      //       icon: 'none',
-      //       duration: 2000
-      //     })
-      //   }
-      // })
+      
       // 来自页面内转发按钮
       return {
         title: '热点聚焦，投你所好',
@@ -512,45 +370,6 @@ Page({
     }, res = {}, {
       isShowToastForSuccess: false
     });
-    // wx.request({
-    //   url: api_url + '/Smallsale/order/addOrder',
-    //   header: {
-    //     'content-type': 'application/json'
-    //   },
-    //   data: {
-    //     goods_id: goods_id,
-    //     box_mac: goods_box_mac,
-    //     amount: 1,
-    //     openid: openid,
-    //     buy_type: buy_type,
-    //     uid: uid
-    //   },
-    //   success: function(res) {
-    //     if (res.data.code == 10000) {
-    //       if (buy_type == 1) {
-    //         wx.showToast({
-    //           title: '购买成功',
-    //           icon: 'none',
-    //           duration: 2000,
-    //         })
-    //       }
-    //       that.setData({
-    //         showInputGoodsCount: false,
-    //       })
-
-    //     } else {
-    //       if (buy_type == 1) {
-    //         wx.showToast({
-    //           title: res.data.msg,
-    //           icon: 'none',
-    //           duration: 3000,
-    //         })
-    //       }
-    //       that.setData({
-    //         showInputGoodsCount: false,
-    //       })
-    //     }
-    //   }
-    // })
+    
   },
 })

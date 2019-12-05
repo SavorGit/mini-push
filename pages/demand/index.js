@@ -340,32 +340,7 @@ Page({
         })
         program_list = data.result
       });
-      // wx.request({
-      //   //url: api_url+'/smallapp/Demand/getList',
-      //   // url: api_url + '/Smallapp3/optimize/getOptimizeList',
-      //   url: api_url + '/Smallapp4/optimize/getOptimizeList',
-      //   header: {
-      //     'Content-Type': 'application/json'
-      //   },
-      //   data: {
-      //     page: page,
-      //     openid: openid,
-      //   },
-      //   method: "POST",
-      //   success: function(res) {
-      //     if (res.data.code == 10000) {
-      //       self.setData({
-      //         program_list: res.data.result,
-      //         hiddens: true,
-      //       })
-      //       program_list = res.data.result
-      //     } else {
-      //       self.setData({
-      //         hiddens: true,
-      //       })
-      //     }
-      //   }
-      // })
+      
     } else {
       utils.PostRequest(api_url + '/Smallapp4/optimize/getOptimizeList', {
         box_mac: box_mac,
@@ -377,27 +352,7 @@ Page({
           program_list: data.result
         })
       });
-      // wx.request({
-      //   //url: api_url+'/Smallapp/BoxProgram/getBoxProgramList',
-      //   // url: api_url + '/Smallapp3/optimize/getOptimizeList',
-      //   url: api_url + '/Smallapp4/optimize/getOptimizeList',
-      //   header: {
-      //     'Content-Type': 'application/json'
-      //   },
-      //   data: {
-      //     box_mac: box_mac,
-      //     page: page,
-      //     openid: openid,
-      //   },
-      //   method: "POST",
-      //   success: function(res) {
-      //     program_list = res.data.result
-      //     self.setData({
-      //       program_list: res.data.result,
-      //       hiddens: true,
-      //     })
-      //   }
-      // })
+      
     }
 
   },
@@ -489,51 +444,7 @@ Page({
       icon: 'none',
       duration: 2000
     }));
-    // wx.request({
-    //   url: api_url + '/Smallapp/collect/recLogs',
-    //   header: {
-    //     'content-type': 'application/json'
-    //   },
-    //   data: {
-    //     'openid': openid,
-    //     'res_id': res_id,
-    //     'type': res_type,
-    //     'status': 1,
-    //   },
-    //   success: function(e) {
-    //     for (var i = 0; i < program_list.length; i++) {
-    //       if (i == res_key) {
-    //         program_list[i].is_collect = 1;
-    //         program_list[i].collect_num++;
-    //       }
-    //     }
-    //     self.setData({
-    //       program_list: program_list
-    //     })
-    //     /*if (e.data.code == 10000) {
-    //       wx.showToast({
-    //         title: '收藏成功',
-    //         icon: 'none',
-    //         duration: 2000
-    //       })
-    //     } else {
-    //       wx.showToast({
-    //         title: '收藏失败，请稍后重试',
-    //         icon: 'none',
-    //         duration: 2000
-    //       })
-    //     }*/
-    //   },
-    //   fial: function({
-    //     errMsg
-    //   }) {
-    //     wx.showToast({
-    //       title: '网络异常，请稍后重试',
-    //       icon: 'none',
-    //       duration: 2000
-    //     })
-    //   }
-    // })
+    
   }, //收藏资源结束
   //取消收藏
   cancCollect: function(e) {
@@ -561,51 +472,7 @@ Page({
       icon: 'none',
       duration: 2000
     }));
-    // wx.request({
-    //   url: api_url + '/Smallapp/collect/recLogs',
-    //   header: {
-    //     'content-type': 'application/json'
-    //   },
-    //   data: {
-    //     'openid': openid,
-    //     'res_id': res_id,
-    //     'type': res_type,
-    //     'status': 0,
-    //   },
-    //   success: function(e) {
-    //     for (var i = 0; i < program_list.length; i++) {
-    //       if (i == res_key) {
-    //         program_list[i].is_collect = 0;
-    //         program_list[i].collect_num--;
-    //       }
-    //     }
-    //     self.setData({
-    //       program_list: program_list
-    //     })
-    //     /*if (e.data.code == 10000) {
-    //       wx.showToast({
-    //         title: '取消收藏成功',
-    //         icon: 'none',
-    //         duration: 2000
-    //       })
-    //     } else {
-    //       wx.showToast({
-    //         title: '取消收藏失败，请稍后重试',
-    //         icon: 'none',
-    //         duration: 2000
-    //       })
-    //     }*/
-    //   },
-    //   fial: function({
-    //     errMsg
-    //   }) {
-    //     wx.showToast({
-    //       title: '网络异常，请稍后重试',
-    //       icon: 'none',
-    //       duration: 2000
-    //     })
-    //   }
-    // })
+    
   }, //取消收藏结束
   //点击分享按钮
   onShareAppMessage: function(res) {
@@ -636,38 +503,7 @@ Page({
         icon: 'none',
         duration: 2000
       }));
-      // wx.request({
-      //   url: api_url + '/Smallapp/share/recLogs',
-      //   header: {
-      //     'content-type': 'application/json'
-      //   },
-      //   data: {
-      //     'openid': openid,
-      //     'res_id': goods_id,
-      //     'type': 4,
-      //     'status': 1,
-      //   },
-      //   success: function(e) {
-      //     for (var i = 0; i < program_list.length; i++) {
-      //       if (i == res_key) {
-      //         program_list[i].share_num++;
-      //       }
-      //     }
-      //     self.setData({
-      //       program_list: program_list
-      //     })
-
-      //   },
-      //   fail: function({
-      //     errMsg
-      //   }) {
-      //     wx.showToast({
-      //       title: '网络异常，请稍后重试',
-      //       icon: 'none',
-      //       duration: 2000
-      //     })
-      //   }
-      // })
+      
       // 来自页面内转发按钮
       return {
         title: '热点聚焦，投你所好',

@@ -41,10 +41,7 @@ Page({
     hot_play: [], //热播内容
     link_type: app.globalData.link_type,
     wifiErr: app.globalData.wifiErr,
-    //is_game_banner: 0, //是否显示猴子爬树游戏banner
-    //happy_vedio_url: '', //生日视频url
-    //happy_vedio_name: '', //生日视频名称
-    //happy_vedio_title: '', //生日视频标题
+    
 
   },
 
@@ -387,17 +384,7 @@ Page({
       openid: openid,
       box_mac: box_mac,
     });
-    // wx.request({
-    //   url: api_url + '/Smallapp21/index/closeauthLog',
-    //   header: {
-    //     'content-type': 'application/json'
-    //   },
-    //   data: {
-    //     openid: openid,
-    //     box_mac: box_mac,
-    //   },
-
-    // })
+    
   },
 
 
@@ -537,46 +524,7 @@ Page({
               duration: 2000
             });
           });
-          // wx.request({
-          //   url: api_url + '/Smallapp21/index/breakLink',
-          //   header: {
-          //     'content-type': 'application/json'
-          //   },
-          //   method: "POST",
-          //   data: {
-          //     box_mac: box_mac,
-          //     openid: openid
-          //   },
-          //   success: function(res) {
-          //     if (res.data.code == 10000) {
-          //       that.setData({
-          //         is_link: 0,
-          //         box_mac: ''
-          //       })
-          //       wx.reLaunch({
-          //         url: '../index/index'
-          //       })
-          //       wx.showToast({
-          //         title: '断开成功',
-          //         icon: 'none',
-          //         duration: 2000
-          //       })
-          //     } else {
-          //       wx.showToast({
-          //         title: '断开失败',
-          //         icon: 'none',
-          //         duration: 2000
-          //       })
-          //     }
-          //   },
-          //   fail: function(res) {
-          //     wx.showToast({
-          //       title: '网络异常，断开失败',
-          //       icon: 'none',
-          //       duration: 2000
-          //     })
-          //   }
-          // })
+          
         } else if (res.cancel) {
 
         }
@@ -702,15 +650,7 @@ Page({
         app.recordFormId(openid, formId);
       }
 
-      //微信好友文件投屏
-      /*if (box_mac == '') {
-
-        app.scanQrcode();
-      } else {
-        wx.navigateTo({
-          url: '/pages/forscreen/forfile/files?box_mac=' + box_mac + '&openid=' + openid + "&is_open_simple=" + is_open_simple ,
-        })
-      }*/
+      
 
     }
   },
@@ -813,41 +753,7 @@ Page({
         })
       }
     });
-    // wx.request({
-    //   url: api_url + '/Smallsale/order/addOrder',
-    //   header: {
-    //     'content-type': 'application/json'
-    //   },
-    //   data: {
-    //     goods_id: goods_id,
-    //     box_mac: goods_box_mac,
-    //     amount: goods_nums,
-    //     openid: openid,
-    //     buy_type: buy_type,
-    //     uid: uid
-    //   },
-    //   success: function(res) {
-    //     if (res.data.code == 10000) {
-    //       if (buy_type == 1) {
-    //         wx.showToast({
-    //           title: '购买成功',
-    //           icon: 'none',
-    //           duration: 2000,
-    //         })
-    //       }
-
-    //     } else {
-    //       if (buy_type == 1) {
-    //         wx.showToast({
-    //           title: res.data.msg,
-    //           icon: 'none',
-    //           duration: 2000,
-    //         })
-    //       }
-
-    //     }
-    //   }
-    // })
+    
   },
   //第三方购买（京东）
   tpBuyGoods: function(e) {
@@ -860,18 +766,7 @@ Page({
       openid: openid,
       type: 2,
     });
-    // wx.request({
-    //   url: api_url + '/Smallapp3/datalog/recordlog',
-    //   header: {
-    //     'content-type': 'application/json'
-    //   },
-    //   data: {
-    //     action_type: 3,
-    //     data_id: goods_id,
-    //     openid: openid,
-    //     type: 2,
-    //   },
-    // })
+    
   },
   //收藏商品
   collectGoods: function(e) {
@@ -919,40 +814,7 @@ Page({
       icon: 'none',
       duration: 2000,
     }));
-    // wx.request({
-    //   url: api_url + '/Smallsale/collection/addGoodscollection',
-    //   header: {
-    //     'content-type': 'application/json'
-    //   },
-    //   data: {
-    //     goods_id: goods_id,
-    //     phone: mobile,
-    //     openid: openid,
-    //   },
-    //   success: function(res) {
-    //     if (res.data.code == 10000) {
-    //       wx.showToast({
-    //         title: '商品链接已发送到您的手机',
-    //         icon: 'none',
-    //         duration: 2000,
-    //       })
-    //     } else {
-    //       var err_msg = res.data.msg;
-    //       wx.showToast({
-    //         title: err_msg,
-    //         icon: 'none',
-    //         duration: 2000,
-    //       })
-    //     }
-    //   },
-    //   fail: function(res) {
-    //     wx.showToast({
-    //       title: '商品链接发送失败，请稍后重试',
-    //       icon: 'none',
-    //       duration: 2000,
-    //     })
-    //   }
-    // })
+    
   },
   //活动商品京东购买
   jdBuy: function(e) {
@@ -1083,22 +945,7 @@ Page({
       data_id: ads_id,
       type: 1
     });
-    // wx.request({
-    //   url: api_url + '/Smallapp3/datalog/recordlog',
-    //   header: {
-    //     'content-type': 'application/json'
-    //   },
-    //   data: {
-    //     action_type: 1,
-    //     openid: openid,
-    //     data_id: ads_id,
-    //     type: 1
-
-    //   },
-    //   success: function(res) {
-
-    //   }
-    // })
+    
   },
   closeWxAuth: function(e) {
     var that = this;
