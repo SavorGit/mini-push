@@ -83,7 +83,7 @@ const HttpRequest = (options) => {
     success: function() {
       var successFnArgumentArray = [].slice.call(arguments);
       if (verbose == true) {
-        console.log('util.HttpRequest.success', 'function', successFnArgumentArray);
+        console.log('util.HttpRequest.success', 'function', requestUrl, options.data, options.method, successFnArgumentArray);
       }
       if (options.isShowLoading != false) {
         wx.hideLoading();
@@ -99,7 +99,7 @@ const HttpRequest = (options) => {
     fail: function() {
       var failFnArgumentArray = [].slice.call(arguments);
       if (verbose == true) {
-        console.log('util.HttpRequest.fail', 'function', failFnArgumentArray);
+        console.log('util.HttpRequest.fail', 'function', requestUrl, options.data, options.method, failFnArgumentArray);
       }
       if (options.isShowLoading != false) {
         wx.hideLoading();
@@ -118,7 +118,7 @@ const HttpRequest = (options) => {
     complete: function() {
       var completeFnArgumentArray = [].slice.call(arguments);
       if (verbose == true) {
-        console.log('util.HttpRequest.complete', 'function', completeFnArgumentArray);
+        console.log('util.HttpRequest.complete', 'function', requestUrl, options.data, options.method, completeFnArgumentArray);
       }
       if (typeof(options.complete) == "function") {
         try {
@@ -164,7 +164,7 @@ const HttpRequestForLHS = (options) => HttpRequest({
   success: function(res) {
     var httpRequst = this;
     if (verbose == true) {
-      console.log('util.HttpRequestForLHS.success', 'function', res);
+      console.log('util.HttpRequestForLHS.success', 'function', options.url, options.data, options.method, res);
     }
     var statusCode = res.statusCode;
     if (parseInt(statusCode / 100) != 2) {
@@ -213,7 +213,7 @@ const HttpRequestForLHS = (options) => HttpRequest({
   fail: function(res) {
     var failFnArgumentArray = [].slice.call(arguments);
     if (verbose == true) {
-      console.log('util.HttpRequestForLHS.fail', 'function', res, failFnArgumentArray);
+      console.log('util.HttpRequestForLHS.fail', 'function', options.url, options.data, options.method, res, failFnArgumentArray);
     }
     if (typeof(options.fail) == "function") {
       if (options.isShowToastForFail != false && !res.code) {
@@ -502,7 +502,9 @@ const TouchMoveHandler = function(systemInfo, touchMoveExecuteTrip) {
    *                                                      }
    */
   this.moveOnhorizontalHandel = function(page, top, left, x, startEvent, endEvent, callbackFunction) {
-    console.log("TouchMoveHandler.moveOnhorizontalHandel(page, top, left, x, startEvent, endEvent, callbackFunction)", page, startEvent, endEvent, top, left, x);
+    if (verbose == true) {
+      console.log("TouchMoveHandler.moveOnhorizontalHandel(page, top, left, x, startEvent, endEvent, callbackFunction)", page, startEvent, endEvent, top, left, x);
+    }
     let handler = this;
     let animation = wx.createAnimation({
       duration: 150,
@@ -559,7 +561,9 @@ const TouchMoveHandler = function(systemInfo, touchMoveExecuteTrip) {
               animationData: {}
             });
           }
-          console.log("TouchMoveHandler.moveOnhorizontalHandel(page, top, left, x, startEvent, endEvent, callbackFunction)#setTimeout", page.data.cards_img, page.data.__cardsModelData);
+          if (verbose == true) {
+            console.log("TouchMoveHandler.moveOnhorizontalHandel(page, top, left, x, startEvent, endEvent, callbackFunction)#setTimeout", page.data.cards_img, page.data.__cardsModelData);
+          }
           if (page.data.__cardsModelData.length <= 3) {
             handler.callbackHandel(callbackFunction, handler.Event.InsufficientData, page, startEvent, endEvent, top, left, x);
           }
@@ -588,7 +592,9 @@ const TouchMoveHandler = function(systemInfo, touchMoveExecuteTrip) {
    *                                                      }
    */
   this.moveOnVerticalHandel = function(page, top, left, y, startEvent, endEvent, callbackFunction) {
-    console.log("TouchMoveHandler.moveOnVerticalHandel(page, top, left, y, startEvent, endEvent, callbackFunction)", page, startEvent, endEvent, top, left, x);
+    if (verbose == true) {
+      console.log("TouchMoveHandler.moveOnVerticalHandel(page, top, left, y, startEvent, endEvent, callbackFunction)", page, startEvent, endEvent, top, left, x);
+    }
     let handler = this;
     let animation = wx.createAnimation({
       duration: 150,
