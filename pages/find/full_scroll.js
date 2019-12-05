@@ -219,12 +219,17 @@ let SavorUtils = {
       let user_info = wx.getStorageSync("savor_user_info");
       // let pageNo = ++pageContext.data.mediaPageNo;
       let request_url = box_api_domain + '/h5/findDiscover?box_mac=' + app.globalData.hotel_info.box_mac + '&web=true&deviceId=' + user_info.openid;
-      console.log('full_scroll.customer.Page.loadMediaData', 'app.globalData.hotel_info', app.globalData.hotel_info, request_url);
+      console.log(verbose)
+      if (utils.verbose == true) {
+        console.log('full_scroll.customer.Page.loadMediaData', 'app.globalData.hotel_info', app.globalData.hotel_info, request_url);
+      }
       utils.PostRequest(request_url, {
         // page: pageNo,
         // openid: user_info.openid
       }, (data, headers, cookies, errMsg, statusCode) => {
-        console.log('full_scroll.customer.Page.loadMediaData', 'success', app.globalData.hotel_info.intranet_ip, app.globalData.hotel_info.box_mac, user_info.openid, request_url, data);
+        if (utils.verbose == true) {
+          console.log('full_scroll.customer.Page.loadMediaData', 'success', app.globalData.hotel_info.intranet_ip, app.globalData.hotel_info.box_mac, user_info.openid, request_url, data);
+        }
         let mediaObjectList = pageContext.data.mediaObjectList;
         if (!(mediaObjectList instanceof Array)) {
           mediaObjectList = new Array();
@@ -243,7 +248,9 @@ let SavorUtils = {
           mediaObjectList: mediaObjectList.concat(data.result)
         });
       }, res => {
-        console.log('full_scroll.customer.Page.loadMediaData', 'fail', app.globalData.hotel_info.intranet_ip, app.globalData.hotel_info.box_mac, user_info.openid, request_url, res);
+        if (utils.verbose == true) {
+          console.log('full_scroll.customer.Page.loadMediaData', 'fail', app.globalData.hotel_info.intranet_ip, app.globalData.hotel_info.box_mac, user_info.openid, request_url, res);
+        }
         if (typeof(res.errMsg) == 'string') {
           // pageContext.apiFail = true;
           pageContext.setData({
@@ -343,8 +350,10 @@ Page({
       link_type: app.globalData.link_type
     });
 
-    console.log('full_scroll.Page.onLoad', 'app.globalData.hotel_info', app.globalData.hotel_info);
-    console.log('full_scroll.Page.onLoad', 'self.data.link_type', self.data.link_type, app.globalData.link_type);
+    if (utils.verbose == true) {
+      console.log('full_scroll.Page.onLoad', 'app.globalData.hotel_info', app.globalData.hotel_info);
+      console.log('full_scroll.Page.onLoad', 'self.data.link_type', self.data.link_type, app.globalData.link_type);
+    }
     if (self.data.link_type == SavorUtils.Constant.LinkType.BOX) { // 直联方式
       if (typeof(app.globalData.hotel_info) != 'object' || typeof(app.globalData.hotel_info.intranet_ip) != 'string') {
         wx.showToast({
@@ -906,11 +915,17 @@ Page({
     let filename = url.substring(url.lastIndexOf('/') + 1);
     let user_info = wx.getStorageSync("savor_user_info");
     let request_url = box_api_domain + '/h5/discover_ondemand_nonetwork?box_mac=' + app.globalData.hotel_info.box_mac + '&web=true&deviceId=' + user_info.openid + '&filename=' + filename;
-    console.log('full_scroll.Page.onLaunchtTV', request_url, url, filename, app.globalData.hotel_info, user_info);
+    if (utils.verbose == true) {
+      console.log('full_scroll.Page.onLaunchtTV', request_url, url, filename, app.globalData.hotel_info, user_info);
+    }
     utils.PostRequest(request_url, {}, (data, headers, cookies, errMsg, statusCode) => {
-      console.log('full_scroll.Page.loadMediaData', 'success', app.globalData.hotel_info.intranet_ip, app.globalData.hotel_info.box_mac, user_info.openid, request_url, data);
+      if (utils.verbose == true) {
+        console.log('full_scroll.Page.loadMediaData', 'success', app.globalData.hotel_info.intranet_ip, app.globalData.hotel_info.box_mac, user_info.openid, request_url, data);
+      }
     }, res => {
-      console.log('full_scroll.Page.loadMediaData', 'fail', app.globalData.hotel_info.intranet_ip, app.globalData.hotel_info.box_mac, user_info.openid, request_url, res);
+      if (utils.verbose == true) {
+        console.log('full_scroll.Page.loadMediaData', 'fail', app.globalData.hotel_info.intranet_ip, app.globalData.hotel_info.box_mac, user_info.openid, request_url, res);
+      }
       // wx.navigateBack();
     });
   }

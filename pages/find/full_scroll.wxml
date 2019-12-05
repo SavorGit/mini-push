@@ -121,7 +121,7 @@
                   </view>
                   <view class='content-body'>
                     <view>{{bean.content}}</view>
-                    <view wx:if='{{bean.hotel_name != ""}}' class="flex-row-center-flex_start theme-font3" style="margin-top:15rpx;">
+                    <view wx:if='{{bean.hotel_name != ""}}' class="flex-row-center-flex_start" style="margin-top:15rpx;">
                       <image src="/images/icon2/1CBEB6_map-mark.png" style="width:24rpx;height:24rpx;margin-right:5rpx;"></image>
                       <label>{{bean.create_time}}.{{bean.hotel_name}}</label>
                     </view>

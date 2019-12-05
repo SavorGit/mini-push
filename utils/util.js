@@ -1,3 +1,5 @@
+const verbose = false; // true: 开；false: 关。
+
 const formatTime = date => {
   const year = date.getFullYear()
   const month = date.getMonth() + 1
@@ -15,7 +17,8 @@ const formatNumber = n => {
 
 module.exports = {
   formatTime: formatTime,
-  formatNumber: formatNumber
+  formatNumber: formatNumber,
+  verbose: verbose
 }
 
 module.exports.throttle = function(fn, gapTime) {
@@ -79,7 +82,9 @@ const HttpRequest = (options) => {
     responseType: options.responseType,
     success: function() {
       var successFnArgumentArray = [].slice.call(arguments);
-      console.log('util.HttpRequest.success', 'function', successFnArgumentArray);
+      if (verbose == true) {
+        console.log('util.HttpRequest.success', 'function', successFnArgumentArray);
+      }
       if (options.isShowLoading != false) {
         wx.hideLoading();
       }
@@ -93,7 +98,9 @@ const HttpRequest = (options) => {
     },
     fail: function() {
       var failFnArgumentArray = [].slice.call(arguments);
-      console.log('util.HttpRequest.fail', 'function', failFnArgumentArray);
+      if (verbose == true) {
+        console.log('util.HttpRequest.fail', 'function', failFnArgumentArray);
+      }
       if (options.isShowLoading != false) {
         wx.hideLoading();
       }
@@ -110,7 +117,9 @@ const HttpRequest = (options) => {
     },
     complete: function() {
       var completeFnArgumentArray = [].slice.call(arguments);
-      console.log('util.HttpRequest.complete', 'function', completeFnArgumentArray);
+      if (verbose == true) {
+        console.log('util.HttpRequest.complete', 'function', completeFnArgumentArray);
+      }
       if (typeof(options.complete) == "function") {
         try {
           options.complete.apply(requestOptions, completeFnArgumentArray);
@@ -154,7 +163,9 @@ const HttpRequestForLHS = (options) => HttpRequest({
   isShowLoading: options.isShowLoading,
   success: function(res) {
     var httpRequst = this;
-    console.log('util.HttpRequestForLHS.success', 'function', res);
+    if (verbose == true) {
+      console.log('util.HttpRequestForLHS.success', 'function', res);
+    }
     var statusCode = res.statusCode;
     if (parseInt(statusCode / 100) != 2) {
       httpRequst.fail.call(httpRequst, {
@@ -201,7 +212,9 @@ const HttpRequestForLHS = (options) => HttpRequest({
   },
   fail: function(res) {
     var failFnArgumentArray = [].slice.call(arguments);
-    console.log('util.HttpRequestForLHS.fail', 'function', res, failFnArgumentArray);
+    if (verbose == true) {
+      console.log('util.HttpRequestForLHS.fail', 'function', res, failFnArgumentArray);
+    }
     if (typeof(options.fail) == "function") {
       if (options.isShowToastForFail != false && !res.code) {
         wx.showToast({
