@@ -87,7 +87,7 @@
                   <view class='text'>热点投屏</view>
                 </view>
                 <view class='page-top flex-row-center-center'>
-                  <label>视频</label>
+                  <cover-view>视频</cover-view>
                   <image src='/images/icon2/FFFFFF_vertical.png'></image>
                   <cover-view class="theme-font-999999" bindtap="goToFindPictures">图片</cover-view>
                 </view>
