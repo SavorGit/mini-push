@@ -322,6 +322,12 @@ let SavorUtils = {
 };
 
 Page({
+  // 触摸开始时间
+  touchStartTimeOnVideo: 0,
+  // 触摸结束时间
+  touchEndTimeOnVideo: 0,
+  // 最后一次单击事件点击发生时间
+  lastTapTimeOnVideo: 0,
 
   /**
    * 页面的初始数据
@@ -339,6 +345,7 @@ Page({
     mediaPageNo: 0,
     pictureObjectList: [], // 图片列表
     picturePageNo: 0,
+    btnFavoriteClickTime: 0
   },
 
   /**
@@ -445,12 +452,14 @@ Page({
     if (tripY > moveExecuteTrip && self.data.mediaScrollIndex > 0) {
       //看上一个
       mediaScrollIndex--;
+      // wx.showTabBar({});
       mta.Event.stat('findvideoglide', {
         'openid': user_info.openid
       })
     } else if (tripY < -(moveExecuteTrip) && self.data.mediaScrollIndex < self.data.mediaObjectList.length - 1) {
       //看下一个
       mediaScrollIndex++;
+      // wx.hideTabBar({});
       mta.Event.stat('findvideoupglide', {
         'openid': user_info.openid
       })
@@ -578,8 +587,8 @@ Page({
     });
   },
 
-  // 点击播放按钮
-  onClickVideoPalyButton: function(e) {
+  // 点击视频
+  onClickVideo: function(e) {
     let self = this;
     if (self.data.isShowMediaPlayButton == true) {
       self.setData({
@@ -594,9 +603,63 @@ Page({
     }
   },
 
+  // 双击视频
+  onDoubleClickVideo: function(e) {
+    let self = this;
+
+    let type = e.currentTarget.dataset.type;
+    if (type == 2 || type == 3) {
+      var res_id = e.currentTarget.dataset.forscreen_id;
+      var c_type = 2;
+    } else {
+      var res_id = e.currentTarget.dataset.id;
+      var c_type = 3
+    }
+
+    let index = e.currentTarget.dataset.index;
+    SavorUtils.User.favorite(self, res_id, c_type, index, 1);
+  },
+  /// 按钮触摸开始触发的事件
+  touchStartOnVideo: function(e) {
+    this.touchStartTimeOnVideo = e.timeStamp;
+  },
+
+  /// 按钮触摸结束触发的事件
+  touchEndOnVideo: function(e) {
+    this.touchEndTimeOnVideo = e.timeStamp;
+  },
+
+  /// 单击、双击
+  videoMultipleTap: function(e) {
+    let self = this;
+    // 控制点击事件在350ms内触发，加这层判断是为了防止长按时会触发点击事件
+    if (self.touchEndTimeOnVideo - self.touchStartTimeOnVideo < 350) {
+      // 当前点击的时间
+      let currentTime = e.timeStamp
+      let lastTapTimeOnVideo = self.lastTapTimeOnVideo
+      // 更新最后一次点击时间
+      self.lastTapTimeOnVideo = currentTime
+
+      // 如果两次点击时间在300毫秒内，则认为是双击事件
+      if (currentTime - lastTapTimeOnVideo < 300) {
+        console.log("double tap")
+        // 成功触发双击事件时，取消单击事件的执行
+        clearTimeout(self.lastTapTimeoutFunc);
+        self.onDoubleClickVideo(e);
+      } else {
+        // 单击事件延时300毫秒执行，这和最初的浏览器的点击300ms延时有点像。
+        self.lastTapTimeoutFunc = setTimeout(function() {
+          console.log("tap")
+          self.onClickVideo(e);
+        }, 300);
+      }
+    }
+  },
+
   // 跳转到发现页 - 图片
   goToFindPictures: function(e) {
     let self = this;
+    // wx.showTabBar({});
     wx.createVideoContext('JohnVideo' + self.data.mediaScrollIndex).pause();
     if (self.data.pictureObjectList.length < 1) {
       SavorUtils.Page.loadPictureData(self);
@@ -621,6 +684,7 @@ Page({
   // 跳转到发现页 - 视频
   goToFindMedias: function(e) {
     let self = this;
+    // wx.hideTabBar({});
     if (self.data.mediaObjectList.length < 1) {
       SavorUtils.Page.loadMediaData(self);
     } else {
