@@ -69,7 +69,7 @@
   <view wx:if="{{hot_play.length > 0}}" class="recommend-panel full_width">
     <view class="title-bar flex-row-center-space_between">
       <view class="title font_333333_24">热播内容</view>
-      <navigator class="more" open-type="switchTab" url="/pages/find/cards">更多...</navigator>
+      <navigator class="more" open-type="switchTab" url="/pages/find/full_scroll">更多...</navigator>
     </view>
     <view class="list">
       <block wx:for="{{hot_play}}" wx:key="key" wx:for-index="index" wx:for-item="bean">
