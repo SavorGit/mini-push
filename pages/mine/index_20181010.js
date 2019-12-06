@@ -330,6 +330,55 @@ Page({
     // 停止下拉动作
     wx.stopPullDownRefresh();
   },
+  bindImgErro:function(e){
+    var that = this;
+    var index_key = e.currentTarget.dataset.index;
+    var type = e.currentTarget.dataset.type;  // pub:公开   col:收藏
+    
+    if(type=='pub'){
+      var list = that.data.publiclist;
+    }else if(type=='col'){
+      var list = that.data.collectlist;
+    }
+    for (var i = 0; i < list.length; i++) {
+      list[index_key].imgurl = '/images/imgs/default-pic.png';
+    }
+    if(type=='pub'){
+      that.setData({
+        publiclist: list
+      })
+    }else if(type=='col'){
+      that.setData({
+        collectlist: list
+      })
+    }
+    
+  },
+  tts:function(e){
+    console.log(e);
+    var that = this;
+    var index_key = e.currentTarget.dataset.index;
+    var type = e.currentTarget.dataset.type;  // pub:公开   col:收藏
+
+    if (type == 'pub') {
+      var list = that.data.publiclist;
+    } else if (type == 'col') {
+      var list = that.data.collectlist;
+    }
+    console.log(list);
+    for (var i = 0; i < list.length; i++) {
+      list[index_key].imgurl = '/images/imgs/default-pic.png';
+    }
+    if (type == 'pub') {
+      that.setData({
+        publiclist: list
+      })
+    } else if (type == 'col') {
+      that.setData({
+        collectlist: list
+      })
+    }
+  },
 
   /**
    * 页面上拉触底事件的处理函数
