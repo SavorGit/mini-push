@@ -68,9 +68,10 @@ Page({
       wx.request({
         url: inner_url,
         success:function(res){
+          var program_list = app.globalData.optimize_data;
           if(res.data.code==10000){
             var yx_list = res.data.result;
-            var program_list = app.globalData.optimize_data;
+            
             for(var i=0; i< program_list.length;i++){
               if(app.in_array(program_list[i].id, yx_list,'goods_id')){
                 program_list[i].is_show = 1;
@@ -83,14 +84,21 @@ Page({
               link_type:app.globalData.link_type
             })
           }else {
+            for (var i=0;i<program_list.length;i++){
+              program_list[i].is_show = 0;
+            }
             self.setData({
-              program_list: app.globalData.optimize_data,
+              program_list: program_list,
               link_type: app.globalData.link_type
             })
           }
         },faile:function(res){
+          var program_list = app.globalData.optimize_data;
+          for (var i = 0; i < program_list.length; i++) {
+            program_list[i].is_show = 0;
+          }
           self.setData({
-            program_list: app.globalData.optimize_data,
+            program_list: program_list,
             link_type: app.globalData.link_type
           })
         }
@@ -237,9 +245,10 @@ Page({
       wx.request({
         url: inner_url,
         success: function (res) {
+          var program_list = app.globalData.optimize_data;
           if (res.data.code == 10000) {
             var yx_list = res.data.result;
-            var program_list = app.globalData.optimize_data;
+            
             for (var i = 0; i < program_list.length; i++) {
               if (app.in_array(program_list[i].id, yx_list, 'goods_id')) {
                 program_list[i].is_show = 1;
@@ -247,18 +256,22 @@ Page({
                 program_list[i].is_show = 0;
               }
             }
-            self.setData({
+            that.setData({
               program_list: program_list,
               link_type: app.globalData.link_type
             })
           } else {
-            self.setData({
-              program_list: app.globalData.optimize_data,
+            for (var i = 0; i < program_list.length; i++) {
+              program_list[i].is_show = 0;
+            }
+            that.setData({
+              program_list: program_list,
               link_type: app.globalData.link_type
             })
           }
         }, faile: function (res) {
-          self.setData({
+          var program_list = app.globalData.optimize_data;
+          that.setData({
             program_list: app.globalData.optimize_data,
             link_type: app.globalData.link_type
           })
@@ -266,7 +279,7 @@ Page({
       })
 
 
-      self.setData({
+      that.setData({
         program_list: app.globalData.optimize_data,
         hotel_info: app.globalData.hotel_info,
         box_mac: app.globalData.hotel_info.box_mac,
@@ -543,5 +556,19 @@ Page({
     
     
   },
-
+  bindImgErro:function(e){
+    var that = this;
+    var index_key = e.currentTarget.dataset.index;
+    var num = e.currentTarget.dataset.num;
+    var program_list = that.data.program_list;
+    for(var i=0;i<program_list.length;i++){
+      if(num==1){
+        program_list[index_key]['cover_imgs'][0] = '/images/imgs/default-pic.png';
+      }
+    }
+    console.log(program_list);
+    that.setData({
+      program_list: program_list
+    })
+  }
 })

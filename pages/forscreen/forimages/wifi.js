@@ -172,8 +172,8 @@ Page({
         name: 'fileUpload',
         success: function(res) {
           if (i == img_lenth) {
-            //var info_rt = JSON.parse(res.data);
-            if (res.data.code == 1001) {
+            var info_rt = JSON.parse(res.data);
+            if (info_rt.code == 1001) {
               that.setData({
                 wifiErr: {
                   'is_open': 1,
@@ -289,8 +289,8 @@ Page({
       filePath: img_url,
       name: 'fileUpload',
       success: function(res) {
-        //var info_rt = JSON.parse(res.data);
-        if (res.data.code == 1001) {
+        var info_rt = JSON.parse(res.data);
+        if (info_rt.code == 1001) {
           that.setData({
             wifiErr: {
               'is_open': 1,

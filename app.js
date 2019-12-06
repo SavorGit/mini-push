@@ -854,7 +854,9 @@ App({
                       wifiErr: { 'is_open': 0, 'msg': '', 'confirm': '确定', 'calcle': '取消', 'type': 0 }
                     })
                     aps.globalData.link_type = 2;
-
+                    that.setData({
+                      wifi_hidden: true,
+                    })
                   } else {//链接的不是本包间wifi
                     aps.connectWifi(wifi_name, wifi_mac, use_wifi_password, box_mac, that);
 

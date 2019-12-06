@@ -679,6 +679,22 @@ Page({
       }
     }
   },
+  bindImgErro: function (e) {
+    var that = this;
+
+    var index_key = e.currentTarget.dataset.index;
+    
+    var hotel_list = that.data.hotel_list;
+    for (var i = 0; i < hotel_list.length; i++) {
+      
+      hotel_list[index_key]['img_url'] = '/images/imgs/default-pic.png';
+      
+    }
+
+    that.setData({
+      hotel_list: hotel_list
+    })
+  },
 
   /**
    * 生命周期函数--监听页面隐藏

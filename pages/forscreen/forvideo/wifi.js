@@ -116,7 +116,7 @@ Page({
             intranet_ip: intranet_ip,
             hiddens: true,
           })
-        } else if (res.data.code == 1001) {
+        } else if (res.code == 1001) {
 
           that.setData({
             hiddens: true,

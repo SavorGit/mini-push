@@ -55,6 +55,7 @@ Page({
     if (app.globalData.openid && app.globalData.openid != '') {
       wx.showLoading({
         title: '数据加载中..',
+        mask:true
       })
       that.setData({
         openid: app.globalData.openid
@@ -65,7 +66,7 @@ Page({
         "openid": app.globalData.openid,
         "page_id": 3
       }, (data, headers, cookies, errMsg, statusCode) =>{
-        wx.hideLoading();
+        //wx.hideLoading();
         wx.setStorage({
           key: 'savor_user_info',
           data: data.result.userinfo,
@@ -76,12 +77,62 @@ Page({
 
         }, (data, headers, cookies, errMsg, statusCode) => {
           
-          wx.hideLoading();
+          
           app.globalData.optimize_data = data.result.optimize_data;
           app.globalData.public_list = data.result.public_list;
           app.globalData.collect_list = data.result.collect_list;
           
           app.globalData.hotels = data.result.forscreen_hotels.hotels;
+          utils.PostRequest(api_url + '/Smallapp4/content/getHotplaylist', {
+            page: 1,
+            pagesize: 6
+          }, (data, headers, cookies, errMsg, statusCode) => {
+           
+            var hot_play = data.result.datalist;
+            that.setData({
+              hot_play: data.result.datalist
+            });
+            setTimeout(function () {
+              wx.hideLoading();
+            }, 1000)
+            
+            app.wifiOkCallback = wifiOk => {
+              var hotel_info = app.globalData.hotel_info;
+              if (Object.keys(hotel_info).length > 0) {
+                that.setData({
+                  wifi_hidden: true
+                })
+                var inner_url = 'http://' + hotel_info.intranet_ip + ':8080/h5/findHotShow?box_mac=' + hotel_info.box_mac + '&web=true&deviceId=123456';
+                wx.request({
+                  url: inner_url,
+                  success: function (rest) {
+                    if (rest.data.code == 10000) {
+
+                      var rb_list = rest.data.result;
+                      for (var i = 0; i < hot_play.length; i++) {
+                        if (app.in_array(hot_play[i].forscreen_id, rb_list, 'media_id')) {
+
+                          hot_play[i].is_show = 1;
+                        } else {
+
+                          hot_play[i].is_show = 0;
+                        }
+                      }
+
+                    } else {
+                      for (var i = 0; i < hot_play.length; i++) {
+                        hot_play[i].is_show = 0;
+                      }
+                    }
+                    console.log(hot_play);
+                    that.setData({
+                      hot_play: hot_play
+                    });
+                  }
+                })
+              }
+            }
+          });
         }, res => {
           wx.hideLoading();
         });
@@ -128,51 +179,13 @@ Page({
         });
       });
 
-      utils.PostRequest(api_url + '/Smallapp4/content/getHotplaylist', {
-        page: 1,
-        pagesize: 6
-      }, (data, headers, cookies, errMsg, statusCode) => {
-        var hot_play = data.result.datalist;
-        that.setData({
-          hot_play: data.result.datalist
-        });
-        app.wifiOkCallback = wifiOk => {
-          var hotel_info = app.globalData.hotel_info;
-          if (Object.keys(hotel_info).length > 0) {
-            that.setData({
-              wifi_hidden: true
-            })
-            var inner_url = 'http://' + hotel_info.intranet_ip + ':8080/h5/findHotShow?box_mac=' + hotel_info.box_mac + '&web=true&deviceId=123456';
-            wx.request({
-              url: inner_url,
-              success: function (rest) {
-                if (rest.data.code == 10000) {
-
-                  var rb_list = rest.data.result;
-                  for (var i = 0; i < hot_play.length; i++) {
-                    if (app.in_array(hot_play[i].forscreen_id, rb_list, 'media_id')) {
-                      
-                      hot_play[i].is_show = 1;
-                    } else {
-                      
-                      hot_play[i].is_show = 0;
-                    }
-                  }
-                  that.setData({
-                    hot_play: hot_play
-                  });
-                }
-
-              }
-            })
-          }
-        }
-      });
+      
       //是否显示活动
       isShowAct(app.globalData.openid);
     } else {
       wx.showLoading({
-        title: '数据加载中',
+        title: '数据加载中..',
+        mask: true
       })
       app.openidCallback = openid => {
         if (openid != '') {
@@ -185,7 +198,7 @@ Page({
             "openid": openid,
             "page_id": 3
           }, (data, headers, cookies, errMsg, statusCode) =>{
-            wx.hideLoading();
+            //wx.hideLoading();
             wx.setStorage({
               key: 'savor_user_info',
               data: data.result.userinfo,
@@ -200,6 +213,56 @@ Page({
               app.globalData.collect_list = data.result.collect_list;
               
               app.globalData.hotels = data.result.forscreen_hotels.hotels;
+
+              utils.PostRequest(api_url + '/Smallapp4/content/getHotplaylist', {
+                page: 1,
+                pagesize: 6
+              }, (data, headers, cookies, errMsg, statusCode) => {
+                
+                var hot_play = data.result.datalist;
+                that.setData({
+                  hot_play: data.result.datalist
+                });
+                setTimeout(function () {
+                  wx.hideLoading();
+                }, 1000)
+                app.wifiOkCallback = wifiOk => {
+                  var hotel_info = app.globalData.hotel_info;
+                  if (Object.keys(hotel_info).length > 0) {
+                    that.setData({
+                      wifi_hidden: true
+                    })
+                    var inner_url = 'http://' + hotel_info.intranet_ip + ':8080/h5/findHotShow?box_mac=' + hotel_info.box_mac + '&web=true&deviceId=123456';
+                    wx.request({
+                      url: inner_url,
+                      success: function (rest) {
+                        if (rest.data.code == 10000) {
+
+                          var rb_list = rest.data.result;
+                          for (var i = 0; i < hot_play.length; i++) {
+                            if (app.in_array(hot_play[i].forscreen_id, rb_list, 'media_id')) {
+
+                              hot_play[i].is_show = 1;
+                            } else {
+
+                              hot_play[i].is_show = 0;
+                            }
+                          }
+                        } else {
+                          for (var i = 0; i < hot_play.length; i++) {
+                            hot_play[i].is_show = 0;
+                          }
+                        }
+                        that.setData({
+                          hot_play: hot_play
+                        });
+
+                      }
+                    })
+                  }
+                }
+              });
+
             }, res => {
               wx.hideLoading();
             });
@@ -245,46 +308,7 @@ Page({
             });
           });
 
-          utils.PostRequest(api_url + '/Smallapp4/content/getHotplaylist', {
-            page: 1,
-            pagesize: 6
-          }, (data, headers, cookies, errMsg, statusCode) => {
-            var hot_play = data.result.datalist;
-            that.setData({
-              hot_play: data.result.datalist
-            });
-            app.wifiOkCallback = wifiOk => {
-              var hotel_info = app.globalData.hotel_info;
-              if(Object.keys(hotel_info).length>0){
-                that.setData({
-                  wifi_hidden: true
-                })
-                var inner_url = 'http://' + hotel_info.intranet_ip +':8080/h5/findHotShow?box_mac='+hotel_info.box_mac+'&web=true&deviceId=123456';
-                wx.request({
-                  url: inner_url,
-                  success:function(rest){
-                    if(rest.data.code==10000){
-                      
-                      var rb_list = rest.data.result;
-                      for (var i = 0; i < hot_play.length; i++) {
-                        if (app.in_array(hot_play[i].forscreen_id, rb_list, 'media_id')) {
-                          
-                          hot_play[i].is_show = 1;
-                        } else {
-                          
-                          hot_play[i].is_show = 0;
-                        }
-                      }
-                      that.setData({
-                        hot_play: hot_play
-                      });
-                    }
-                    
-                  }
-                })
-                }
-            }
-          });
+          
           isShowAct(openid);
         }
       }
