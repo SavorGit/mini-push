@@ -14,7 +14,8 @@
               <label>小热点</label>
             </view>
             <view wx:else class='user_info font_333333_36'>
-              <image src='{{bean.avatarUrl}}'></image>
+              <image wx:if="{{bean.avatarUrl==''}}" src='http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default_user_head.png'></image>
+              <image wx:else src='{{bean.avatarUrl}}'></image>
               <label>{{bean.nickName}}</label>
             </view>
             <view wx:if="{{bean.type==1 || bean.type==3}}" class='operation flex-row-center-flex_end'>
