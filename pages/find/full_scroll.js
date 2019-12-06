@@ -606,18 +606,18 @@ Page({
   // 双击视频
   onDoubleClickVideo: function(e) {
     let self = this;
-
-    let type = e.currentTarget.dataset.type;
-    if (type == 2 || type == 3) {
-      var res_id = e.currentTarget.dataset.forscreen_id;
-      var c_type = 2;
-    } else {
-      var res_id = e.currentTarget.dataset.id;
-      var c_type = 3
-    }
-
     let index = e.currentTarget.dataset.index;
-    SavorUtils.User.favorite(self, res_id, c_type, index, 1);
+    let type = e.currentTarget.dataset.type;
+    if (self.data.mediaObjectList[index].is_collect != 1) {
+      if (type == 2 || type == 3) {
+        var res_id = e.currentTarget.dataset.forscreen_id;
+        var c_type = 2;
+      } else {
+        var res_id = e.currentTarget.dataset.id;
+        var c_type = 3
+      }
+      SavorUtils.User.favorite(self, res_id, c_type, index, 1);
+    }
   },
   /// 按钮触摸开始触发的事件
   touchStartOnVideo: function(e) {
