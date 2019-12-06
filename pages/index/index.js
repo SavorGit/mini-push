@@ -875,7 +875,14 @@ Page({
       phoneNumber: tel
     })
   },
-
+  onPullDownRefresh: function () {
+    this.onLoad();
+    //wx.showNavigationBarLoading();
+    // 隐藏导航栏加载框
+    //wx.hideNavigationBarLoading();
+    // 停止下拉动作
+    wx.stopPullDownRefresh();
+  },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
@@ -936,12 +943,6 @@ Page({
 
   },
 
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function() {
-
-  },
 
   /**
    * 页面上拉触底事件的处理函数
