@@ -564,6 +564,25 @@ Page({
     for(var i=0;i<program_list.length;i++){
       if(num==1){
         program_list[index_key]['cover_imgs'][0] = '/images/imgs/default-pic.png';
+      }else if(num==3){
+        program_list[index_key]['cover_imgs'][0] = '/images/imgs/default-pic.png';
+        program_list[index_key]['cover_imgs'][1] = '/images/imgs/default-pic.png';
+        program_list[index_key]['cover_imgs'][2] = '/images/imgs/default-pic.png';
+      }
+    }
+    console.log(program_list);
+    that.setData({
+      program_list: program_list
+    })
+  },
+  tts:function(e){
+    var that = this;
+    var index_key = e.currentTarget.dataset.index;
+    var program_list = that.data.program_list;
+    var num = 1;
+    for (var i = 0; i < program_list.length; i++) {
+      if (num == 1) {
+        program_list[index_key]['cover_imgs'][0] = '/images/imgs/default-pic.png';
       }
     }
     console.log(program_list);

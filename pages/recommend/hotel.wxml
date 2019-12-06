@@ -45,7 +45,7 @@
           <!-- <image wx:if="{{link_type!=2}}" src='{{bean.img_url}}'></image>
           <image wx:else src='/images/imgs/default-pic.png'></image> -->
           <image  src='{{bean.img_url}}' binderror="bindImgErro"  data-index="{{index}}"></image>
-          
+          <!-- <view bindtap="tts"  data-index="{{index}}">aaaa</view> -->
         </view>
         <view class='i-right'>
           <view class='ir-top flex-row-flex_start-start'>
