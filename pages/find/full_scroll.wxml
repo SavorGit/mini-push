@@ -81,8 +81,8 @@
           <block wx:for="{{mediaObjectList}}" wx:key="key" wx:for-item="bean" wx:for-index="index">
             <view class="full_height {{mediaScrollIndex == index ? 'active' : ''}}" style="background-color: #000000;">
               <video wx:if="{{mediaScrollIndex == index || mediaScrollIndex - 1 == index || mediaScrollIndex + 1 == index}}" id="JohnVideo{{index}}" class="full_width full_height" show-center-play-btn="{{false}}" autoplay="{{false}}" controls="{{false}}" src="{{bean.pubdetail[0].res_url}}"
-                data-index="{{index}}" data-id="{{bean.id}}" data-type="{{bean.type}}" event-model="bubble" bindprogress="onLoadProgress" bindtimeupdate="onTimeUpdate" bindplay="onVideoPlay" bindpause="onVideoPause" bindended="onVideoEnded" bindwaiting="onVideoWaiting"
-                binderror="onVideoError" bindloadedmetadata="onVideoLoadedMetadata" bindtap="videoMultipleTap" bindtouchstart="touchStartOnVideo" bindtouchend="touchEndOnVideo">
+                data-forscreen_id="{{bean.forscreen_id}}" data-index="{{index}}" data-id="{{bean.id}}" data-type="{{bean.type}}" event-model="bubble" bindprogress="onLoadProgress" bindtimeupdate="onTimeUpdate" bindplay="onVideoPlay" bindpause="onVideoPause"
+                bindended="onVideoEnded" bindwaiting="onVideoWaiting" binderror="onVideoError" bindloadedmetadata="onVideoLoadedMetadata" bindtap="videoMultipleTap" bindtouchstart="touchStartOnVideo" bindtouchend="touchEndOnVideo">
                 <view class="default-navigation-bar flex-row-center-center theme-font-FFFFFF" style="height: 46px; padding-top: {{statusBarHeight}}px;">
                   <view class='text'>热点投屏</view>
                 </view>
