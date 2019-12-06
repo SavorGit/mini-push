@@ -289,11 +289,11 @@ Page({
                           mobile_brand: mobile_brand,
                           mobile_model: mobile_model,
                           forscreen_char: forscreen_char,
-                          imgs: '["' + pubdetail[i]['res_url'] + '"]',
-                          resource_id: pubdetail[i]['res_id'],
+                          imgs: '["' + pubdetail[i].forscreen_url + '"]',
+                          resource_id: pubdetail[i].res_id,
                           res_sup_time: 0,
                           res_eup_time: 0,
-                          resource_size: pubdetail[i]['resource_size'],
+                          resource_size: pubdetail[i].resource_size,
                           is_pub_hotelinfo: 0,
                           is_share: 0
                         },
@@ -302,9 +302,9 @@ Page({
 
 
                       }); //end
-                      var url = pubdetail[i]['res_url'];
-                      var filename = pubdetail[i]['filename'];
-                      var res_id = pubdetail[i]['res_id'];
+                      var url = pubdetail[i].forscreen_url;
+                      var filename = pubdetail[i].filename;
+                      var res_id = pubdetail[i].res_id;
 
                       wx.request({
                         url: api_url + '/Netty/Index/index',
@@ -409,8 +409,9 @@ Page({
               }
             })
           } else {
+            //console.log(pubdetail[0]);
             if (res_type == 1) {
-              for (i = 0; i < res_len; i++) {
+              for (i = 0; i < pubdetail.length; i++) {
                 var order = i + 1;
                 wx.request({ //start
                   url: api_url + '/Smallapp/index/recordForScreenPics',
@@ -425,11 +426,11 @@ Page({
                     mobile_brand: mobile_brand,
                     mobile_model: mobile_model,
                     forscreen_char: forscreen_char,
-                    imgs: '["' + pubdetail[i]['forscreen_url'] + '"]',
-                    resource_id: pubdetail[i]['res_id'],
+                    imgs: '["' + pubdetail[i].forscreen_url+ '"]',
+                    resource_id: pubdetail[i].res_id,
                     res_sup_time: 0,
                     res_eup_time: 0,
-                    resource_size: pubdetail[i]['resource_size'],
+                    resource_size: pubdetail[i].resource_size,
                     is_pub_hotelinfo: 0,
                     is_share: 0
                   },
@@ -438,10 +439,10 @@ Page({
 
 
                 }); //end
-                var url = pubdetail[i]['forscreen_url'];
-                var filename = pubdetail[i]['filename'];
-                var res_id = pubdetail[i]['res_id'];
-
+                var url = pubdetail[i].forscreen_url;
+                var filename = pubdetail[i].filename;
+                var res_id = pubdetail[i].res_id;
+                
                 wx.request({
                   url: api_url + '/Netty/Index/index',
                   headers: {
