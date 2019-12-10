@@ -860,6 +860,7 @@ App({
                     that.setData({
                       wifi_hidden: true,
                     })
+                    wx.hideLoading()
                   } else {//链接的不是本包间wifi
                     wx.stopWifi({
 
@@ -981,7 +982,10 @@ App({
               wifiErr: { 'is_open': 0, 'msg': '', 'confirm': '确定', 'calcle': '取消', 'type': 0 }
             })
 
-            that.setData({ wifiErr: { 'is_open': 0, 'msg': '', 'confirm': '确定', 'calcle': '取消', 'type': 0 }, link_type: 2 }, () => {
+            that.setData({ 
+              wifiErr: { 'is_open': 0, 'msg': '', 'confirm': '确定', 'calcle': '取消', 'type': 0 }, 
+              link_type: 2 
+              },() => {
               that.setData({
                 wifi_hidden: true,
               })
@@ -996,7 +1000,18 @@ App({
               wx.hideLoading()
             })
 
+            that.setData({
+              wifi_hidden: true,
+            })
+            aps.globalData.link_type = 2;
 
+            wx.showToast({
+              title: 'wifi链接成功',
+              icon: 'success',
+              duration: 2000
+            });
+
+            wx.hideLoading()
 
 
             

@@ -51,6 +51,7 @@ Page({
    */
   onLoad: function(options) {
     var that = this;
+    wx.hideLoading()
     //mta.Page.init()
     if (app.globalData.openid && app.globalData.openid != '') {
       wx.showLoading({
@@ -894,7 +895,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function() {
-
+    
     var that = this;
     var user_info = wx.getStorageSync(cache_key+"user_info");
     if(typeof(user_info.openid)!='undefined'){
