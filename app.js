@@ -845,6 +845,9 @@ App({
               success: function (res) {
                 if (res.errMsg == 'getConnectedWifi:ok') {
                   if (res.wifi.SSID == wifi_name) {//链接的是本包间wifi
+                    wx.stopWifi({
+                      
+                    })
                     if (aps.wifiOkCallback) {
 
                       aps.wifiOkCallback(1);
@@ -858,12 +861,17 @@ App({
                       wifi_hidden: true,
                     })
                   } else {//链接的不是本包间wifi
+                    wx.stopWifi({
+
+                    })
                     aps.connectWifi(wifi_name, wifi_mac, use_wifi_password, box_mac, that);
 
                   }
                 } else {
                   //当前打开wifi 但是没有链接任何wifi
-                  
+                  wx.stopWifi({
+
+                  })
                   aps.connectWifi(wifi_name, wifi_mac, use_wifi_password, box_mac, that);
                 }
                 wx.hideLoading()
@@ -1018,7 +1026,19 @@ App({
             })
           }
         })
-      },complete:function(){
+      },fail:function(){
+        that.setData({
+          wifiErr: { 'is_open': 1, 'msg': '亲，使用此小程序前需要链接包间wifi,链接wifi投屏更快哦！', 'confirm': '重试', 'calcle': '', 'type': 3 }
+        })
+        wx.hideLoading()
+        that.setData({
+          wifi_hidden: true,
+        })
+        wx.stopWifi({
+
+        })
+      },
+      complete:function(){
         //wx.hideLoading();
       }
     })
