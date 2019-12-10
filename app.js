@@ -862,17 +862,13 @@ App({
                     })
                     wx.hideLoading()
                   } else {//链接的不是本包间wifi
-                    wx.stopWifi({
-
-                    })
+                    
                     aps.connectWifi(wifi_name, wifi_mac, use_wifi_password, box_mac, that);
 
                   }
                 } else {
                   //当前打开wifi 但是没有链接任何wifi
-                  wx.stopWifi({
-
-                  })
+                  
                   aps.connectWifi(wifi_name, wifi_mac, use_wifi_password, box_mac, that);
                 }
                 wx.hideLoading()
@@ -943,9 +939,7 @@ App({
 
             })
           }, complete: function (res) {
-            wx.stopWifi({
-
-            })
+            
           }
         })
       }else {
@@ -964,87 +958,73 @@ App({
   connectWifi: function (wifi_name, wifi_mac, use_wifi_password, box_mac, that) {
     var aps = this;
     
-    wx.startWifi({
-      success: function (res) {
-        /*wx.showLoading({
-          title: 'wifi链接中',
-        })*/
-        wx.connectWifi({
-          SSID: wifi_name,
-          BSSID: wifi_mac,
-          password: use_wifi_password,
-          success: function (reswifi) {
-            if (aps.wifiOkCallback) {
+    wx.connectWifi({
+      SSID: wifi_name,
+      BSSID: wifi_mac,
+      password: use_wifi_password,
+      success: function (reswifi) {
+        if (aps.wifiOkCallback) {
 
-              aps.wifiOkCallback(1);
-            }
-            that.setData({
-              wifiErr: { 'is_open': 0, 'msg': '', 'confirm': '确定', 'calcle': '取消', 'type': 0 }
-            })
-
-            that.setData({ 
-              wifiErr: { 'is_open': 0, 'msg': '', 'confirm': '确定', 'calcle': '取消', 'type': 0 }, 
-              link_type: 2 
-              },() => {
-              that.setData({
-                wifi_hidden: true,
-              })
-              aps.globalData.link_type = 2;
-
-              wx.showToast({
-                title: 'wifi链接成功',
-                icon: 'success',
-                duration: 2000
-              });
-              
-              wx.hideLoading()
-            })
-
-            that.setData({
-              wifi_hidden: true,
-            })
-            aps.globalData.link_type = 2;
-
-            wx.showToast({
-              title: 'wifi链接成功',
-              icon: 'success',
-              duration: 2000
-            });
-
-            wx.hideLoading()
-
-
-            
-          }, fail: function (res) {
-            that.setData({
-              wifiErr: { 'is_open': 1, 'msg': '亲，使用此小程序前需要链接包间wifi,链接wifi投屏更快哦！', 'confirm': '重试', 'calcle': '', 'type': 3 }
-            })
-            wx.hideLoading();
-            that.setData({
-              wifi_hidden: true,
-            })
-            var err_info = JSON.stringify(res);
-            wx.request({
-              url: aps.globalData.api_url +'/Smallappsimple/Index/recordWifiErr',
-              data: {
-                err_info: err_info,
-                box_mac: box_mac
-              }
-            })
-          }, complete: function (res) {
-            wx.hideLoading()
-            that.setData({
-              wifi_hidden: true,
-            })
-            wx.stopWifi({
-
-            })
-          }
+          aps.wifiOkCallback(1);
+        }
+        that.setData({
+          wifiErr: { 'is_open': 0, 'msg': '', 'confirm': '确定', 'calcle': '取消', 'type': 0 }
         })
-      },fail:function(){
+
+        that.setData({
+          wifiErr: { 'is_open': 0, 'msg': '', 'confirm': '确定', 'calcle': '取消', 'type': 0 },
+          link_type: 2
+        }, () => {
+          that.setData({
+            wifi_hidden: true,
+          })
+          aps.globalData.link_type = 2;
+
+          wx.showToast({
+            title: 'wifi链接成功',
+            icon: 'success',
+            duration: 2000
+          });
+
+          wx.hideLoading()
+        })
+
+        that.setData({
+          wifi_hidden: true,
+        })
+        aps.globalData.link_type = 2;
+
+        wx.showToast({
+          title: 'wifi链接成功',
+          icon: 'success',
+          duration: 2000
+        });
+
+        wx.hideLoading()
+
+
+
+      }, fail: function (res) {
+        wx.stopWifi({
+
+        })
+        wx.hideLoading();
+        that.setData({
+          wifi_hidden: true,
+        })
         that.setData({
           wifiErr: { 'is_open': 1, 'msg': '亲，使用此小程序前需要链接包间wifi,链接wifi投屏更快哦！', 'confirm': '重试', 'calcle': '', 'type': 3 }
         })
+
+        var err_info = JSON.stringify(res);
+        wx.request({
+          url: aps.globalData.api_url + '/Smallappsimple/Index/recordWifiErr',
+          data: {
+            err_info: err_info,
+            box_mac: box_mac
+          }
+        })
+      }, complete: function (res) {
         wx.hideLoading()
         that.setData({
           wifi_hidden: true,
@@ -1052,9 +1032,6 @@ App({
         wx.stopWifi({
 
         })
-      },
-      complete:function(){
-        //wx.hideLoading();
       }
     })
     setTimeout(function () {

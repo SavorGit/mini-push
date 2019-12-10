@@ -264,7 +264,8 @@ Page({
                   }
                 })
               } else {
-                wx.request({
+                console.log('ddddd');
+                /*wx.request({
                   url: api_url + '/smallapp4/index/isHaveCallBox',
                   data: { "openid": res.data.result.openid },
                   header: {
@@ -277,7 +278,7 @@ Page({
                       })
                     }
                   }
-                });
+                });*/
                 setInfos(box_mac, res.data.result.openid, code_type);
               }
               //console.log(res.data.result.openid);
@@ -288,6 +289,7 @@ Page({
     }
     function setInfos(box_mac, openid,code_type) {
       //发送随机码给电视显示 (默认用户不用填写三位呼玛)
+      
       wx.request({
         url: api_url+'/Smallapp21/Index/genCode',
         headers: {
@@ -325,12 +327,15 @@ Page({
               }
             })
           } else if (is_have == 1) {
-            wx.reLaunch({
-              url: '../index/index',
-            })
+            
           }
+          wx.reLaunch({
+            url: '../index/index',
+          })
         }
+        
       })
+      
     }
   },
 })
