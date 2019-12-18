@@ -9,6 +9,7 @@ var user_id;
 var program_list; //点播列表
 var openid; //用户openid
 var api_url = app.globalData.api_url;
+var pageid  = 1;
 let SavorUtils = {
   User: {
 
@@ -370,7 +371,7 @@ Page({
 
 
     if (box_mac == '') {
-      app.scanQrcode();
+      app.scanQrcode(pageid);
     } else {
       var openid = e.currentTarget.dataset.openid;
       var vediourl = e.currentTarget.dataset.vediourl;

@@ -4,6 +4,7 @@ const app = getApp()
 var box_mac;
 var openid;
 var api_url = app.globalData.api_url;
+var pageid  = 31;
 Page({
 
   /**
@@ -208,7 +209,7 @@ Page({
     var box_mac = e.target.dataset.boxmac;
     
     if (box_mac == '') {
-      app.scanQrcode();
+      app.scanQrcode(pageid);
     } else {
       var openid = e.currentTarget.dataset.openid;
       var vediourl = e.currentTarget.dataset.vediourl;

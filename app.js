@@ -581,7 +581,7 @@ App({
     
   },
   //扫码
-  scanQrcode: function() {
+  scanQrcode: function(pageid = 1) {
     var that = this;
     wx.showModal({
       title: '提示',
@@ -609,9 +609,13 @@ App({
               }
             }
           })
+          mta.Event.stat('scanQrcode', { 'scantype': 1, 'pageid': pageid })
+        }else {
+          mta.Event.stat('scanQrcode', { 'scantype': 0, 'pageid': pageid })
         }
       }
     });
+    mta.Event.stat('popScanQrcode', { 'pageid': pageid })
   },
   onLaunch: function() {
     var oss_tmp_key = this.globalData.oss_access_key_id;

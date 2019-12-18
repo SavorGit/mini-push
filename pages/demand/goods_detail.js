@@ -7,6 +7,7 @@ var openid;
 var goods_info;
 var goods_nums = 1;
 var hotel_info;
+var pageid = 11;
 Page({
 
   /**
@@ -269,7 +270,7 @@ Page({
     var goods_box_mac = e.currentTarget.dataset.goods_box_mac;
     var uid = e.currentTarget.dataset.uid;
     if (goods_box_mac == '') {
-      app.scanQrcode();
+      app.scanQrcode(pageid);
     } else if (uid == '') {
 
       wx.showToast({

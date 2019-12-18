@@ -8,6 +8,7 @@ let touchMoveExecuteTrip = '160rpx';
 var cache_key = app.globalData.cache_key;
 let api_url = app.globalData.api_url;
 let httpReg = new RegExp('^http(s)?://', 'i');
+let pageid  = 23;
 let SavorUtils = {
   User: {
 
@@ -392,7 +393,7 @@ Page({
     let forscreenId = e.target.dataset.forscreen_id;
     let indexInList = e.target.dataset.index;
     if (self.data.box_mac == '') {
-      app.scanQrcode();
+      app.scanQrcode(pageid);
     } else {
       utils.PostRequest(api_url + '/smallapp21/User/isForscreenIng', {
         box_mac: self.data.box_mac

@@ -265,6 +265,7 @@ Page({
 
         },
         success: function (res) {
+          console.log(res)
           //clearInterval(timer8_0);
           var res_eup_time = (new Date()).valueOf();
           that.setData({

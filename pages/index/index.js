@@ -9,6 +9,7 @@ var api_url = app.globalData.api_url;
 var goods_nums = 1;
 var jd_appid = app.globalData.jd_appid;
 var cache_key = app.globalData.cache_key;
+var pageid =3;
 Page({
 
   /**
@@ -440,7 +441,7 @@ Page({
       var formId = e.detail.formId;
       if (box_mac == '') {
 
-        app.scanQrcode();
+        app.scanQrcode(pageid);
       } else {
 
         if (app.globalData.link_type == 1) {
@@ -460,6 +461,7 @@ Page({
         }
 
       }
+      mta.Event.stat('gotoForscreenImg', { 'linktype': app.globalData.link_type,'boxmac':box_mac })
     }
   },
   //选择视频投屏
@@ -477,7 +479,7 @@ Page({
       var is_open_simple = e.detail.value.is_open_simple;
       var formId = e.detail.formId;
       if (box_mac == '') {
-        app.scanQrcode();
+        app.scanQrcode(pageid);
       } else {
         if (app.globalData.link_type == 1) {
           wx.navigateTo({
@@ -497,7 +499,8 @@ Page({
 
       }
     }
-
+    console.log(app.globalData);
+    mta.Event.stat('gotoForscreenVideo', { 'linktype': app.globalData.link_type,'boxmac':box_mac })
 
   },
 
@@ -506,12 +509,13 @@ Page({
     var openid = e.currentTarget.dataset.openid;
     var intranet_ip = e.currentTarget.dataset.intranet_ip;
     if (box_mac == '') {
-      app.scanQrcode();
+      app.scanQrcode(pageid);
     } else {
       wx.navigateTo({
         url: '/pages/thematic/birthday/list?openid=' + openid + '&box_mac=' + box_mac + "&intranet_ip=" + intranet_ip,
       })
     }
+    mta.Event.stat('gotoHappyList', { 'linktype': app.globalData.link_type,'boxmac':box_mac })
   },
   //互动游戏
   hdgames(e) {
@@ -520,7 +524,7 @@ Page({
     var linkcontent = e.currentTarget.dataset.linkcontent;
 
     if (box_mac == '') {
-      app.scanQrcode();
+      app.scanQrcode(pageid);
     } else {
       var mobile_brand = app.globalData.mobile_brand;
       var mobile_model = app.globalData.mobile_model;
@@ -529,7 +533,8 @@ Page({
         url: linkcontent + '?box_mac=' + box_mac + '&openid=' + openid + '&game_id=2'
       })
     }
-
+    mta.Event.stat('clickTopAds', { 'linktype': app.globalData.link_type,"box_mac":box_mac })
+    mta.Event.stat('gotoHdGame', { 'linktype': app.globalData.link_type, "box_mac": box_mac })
   },
   //断开连接
   breakLink: function(e) {
@@ -575,17 +580,18 @@ Page({
     var box_mac = e.currentTarget.dataset.boxmac;
     var openid = e.currentTarget.dataset.openid;
     if (box_mac == '') {
-      app.scanQrcode();
+      app.scanQrcode(pageid);
     } else {
       wx.navigateTo({
         url: '/pages/forscreen/history/list?openid=' + openid + '&box_mac=' + box_mac,
       })
     }
+    mta.Event.stat('gotoForscreenHis', { 'linktype': app.globalData.link_type,"boxmac":box_mac })
   },
   scanQrcode(e) {
     var box_mac = e.currentTarget.dataset.boxmac;
     if (box_mac == '') {
-      app.scanQrcode();
+      app.scanQrcode(pageid);
     }
   },
   //遥控呼大码
@@ -678,17 +684,15 @@ Page({
       var formId = e.detail.formId;
       //微信好友文件投屏+h5文件投屏
       if (box_mac == '') {
-        app.scanQrcode();
+        app.scanQrcode(pageid);
       } else {
         that.setData({
           showMe: true,
         })
         app.recordFormId(openid, formId);
       }
-
-      
-
     }
+    mta.Event.stat('gotoForscreenFile', { 'linktype': app.globalData.link_type,"boxmac":box_mac })
   },
   //微信好友文件
   wxFriendfiles: function(e) {
@@ -867,6 +871,7 @@ Page({
     var res_type = e.currentTarget.dataset.res_type;
     var res_nums = e.currentTarget.dataset.res_nums;
     var hotel_info = e.currentTarget.dataset.hotel_info;
+    var index    = e.currentTarget.dataset.index;
     if (res_type == 1) {
       var action = 11; //发现图片点播
     } else if (res_type == 2) {
@@ -874,6 +879,9 @@ Page({
     }
 
     app.boxShow(box_mac, forscreen_id, pubdetail, res_type, res_nums, action, hotel_info, that);
+
+    var order = index+1;
+    mta.Event.stat('clickHotPlay', { 'linktype': app.globalData.link_type, 'boxmac': box_mac,"order":order })
   },
   phonecallevent: function(e) {
     var tel = e.target.dataset.tel;
@@ -919,12 +927,12 @@ Page({
           })
           box_mac = data.result.box_mac;
         } else {
-          app.globalData.link_type = 1;
+          app.globalData.link_type = 0;
           box_mac = ''
           that.setData({
             is_link: 0,
             box_mac: '',
-            link_type: 1
+            link_type: 0
           })
 
         }
@@ -978,7 +986,8 @@ Page({
       data_id: ads_id,
       type: 1
     });
-    
+    console.log(box_mac);
+    mta.Event.stat('clickTopAds', { 'linktype': app.globalData.link_type, "boxmac": box_mac})
   },
   closeWxAuth: function(e) {
     var that = this;

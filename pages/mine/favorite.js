@@ -8,6 +8,7 @@ var i;
 var box_mac;
 var sharelist;
 var api_url = app.globalData.api_url;
+var pageid = 52;
 Page({
 
   /**
@@ -85,7 +86,7 @@ Page({
 
 
     if (box_mac == '') {
-      app.scanQrcode();
+      app.scanQrcode(pageid);
     } else {
       var openid = e.currentTarget.dataset.openid;
       var vediourl = e.currentTarget.dataset.vediourl;
@@ -234,7 +235,7 @@ Page({
     var box_mac = e.target.dataset.boxmac;
     var find_id = e.target.dataset.forscreen_id
     if (box_mac == '') {
-      app.scanQrcode();
+      app.scanQrcode(pageid);
     } else {
       var user_info = wx.getStorageSync("savor_user_info");
 

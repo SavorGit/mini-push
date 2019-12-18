@@ -5,6 +5,7 @@ var pubdetail;
 var box_mac;
 var openid;
 var api_url = app.globalData.api_url;
+var pageid  = 22;
 Page({
 
   /**
@@ -206,7 +207,7 @@ Page({
     var find_id = e.target.dataset.forscreen_id
 
     if (box_mac == '') {
-      app.scanQrcode();
+      app.scanQrcode(pageid);
     } else {
       var user_info = wx.getStorageSync("savor_user_info");
       //console.log(user_info);

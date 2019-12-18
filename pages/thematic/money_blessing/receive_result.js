@@ -7,6 +7,7 @@ var i;
 var is_open_simple;
 var api_url = app.globalData.api_url;
 var netty_url = app.globalData.netty_url;
+var pageid = 62;
 Page({
 
   /**
@@ -106,7 +107,7 @@ Page({
     var openid = e.currentTarget.dataset.openid;
     var is_open_simple = e.currentTarget.dataset.is_open_simple;
     if (box_mac == '') {
-      app.scanQrcode();
+      app.scanQrcode(pageid);
     } else {
       wx.navigateTo({
         url: '/pages/forscreen/forimages/index?box_mac=' + box_mac + '&openid=' + openid + '&is_open_simple=' + is_open_simple,
@@ -121,7 +122,7 @@ Page({
     var openid = e.currentTarget.dataset.openid;
     var is_open_simple = e.currentTarget.dataset.is_open_simple;
     if (box_mac == '' || box_mac == 'undefined') {
-      app.scanQrcode();
+      app.scanQrcode(pageid);
     } else {
       wx.navigateTo({
         url: '/pages/forscreen/forvideo/index?box_mac=' + box_mac + '&openid=' + openid + '&is_open_simple=' + is_open_simple,
@@ -134,7 +135,7 @@ Page({
     var box_mac = e.currentTarget.dataset.box_mac;
     var openid = e.currentTarget.dataset.openid;
     if (box_mac == '' || box_mac == 'undefined') {
-      app.scanQrcode();
+      app.scanQrcode(pageid);
     } else {
       wx.navigateTo({
         url: '/pages/thematic/birthday/list?openid=' + openid + '&box_mac=' + box_mac,
@@ -149,7 +150,7 @@ Page({
   boxShow(e) {//视频点播让盒子播放 生日歌
     var box_mac = e.currentTarget.dataset.boxmac;
     if (box_mac == '') {
-      app.scanQrcode();
+      app.scanQrcode(pageid);
     } else {
       var openid = e.currentTarget.dataset.openid;
       var vediourl = e.currentTarget.dataset.vediourl;
@@ -211,7 +212,7 @@ Page({
     var box_mac = e.target.dataset.boxmac;
     var find_id = e.target.dataset.forscreen_id
     if (box_mac == '') {
-      app.scanQrcode();
+      app.scanQrcode(pageid);
     } else {
       var user_info = wx.getStorageSync("savor_user_info");
       //console.log(user_info);

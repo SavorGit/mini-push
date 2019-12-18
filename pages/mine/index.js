@@ -8,6 +8,7 @@ var pubdetail;
 var publiclist;
 var i;
 var api_url = app.globalData.api_url;
+var pageid = 51;
 Page({
 
   /**
@@ -345,7 +346,7 @@ Page({
     var box_mac = e.target.dataset.boxmac;
     var find_id = e.target.dataset.forscreen_id
     if (box_mac == '') {
-      app.scanQrcode();
+      app.scanQrcode(pageid);
     } else {
       var user_info = wx.getStorageSync("savor_user_info");
       var avatarUrl = user_info.avatarUrl;
