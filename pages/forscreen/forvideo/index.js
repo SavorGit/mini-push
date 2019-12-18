@@ -81,7 +81,7 @@ Page({
       maxDuration: 60,
       camera: 'back',
       success: function (res) {
-        //console.log(res);
+        console.log(res);
 
         that.setData({
           showVedio: true,
@@ -433,12 +433,15 @@ Page({
       maxDuration: 60,
       camera: 'back',
       success: function (res) {
+        
         that.setData({
           showVedio: true,
           is_btn_disabel:false,
           upload_vedio_temp: res.tempFilePath,
           //upload_vedio_cover: res.thumbTempFilePath,
-          vedio_percent:0
+          vedio_percent:0,
+          duration: res.duration,
+          size: res.size
         });
         //uploadVedio(res, box_mac, openid);
       },fail:function(res){

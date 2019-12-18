@@ -593,6 +593,7 @@ App({
           wx.scanCode({
             onlyFromCamera: true,
             success: (res) => {
+              console.log(res)
               if (res.scanType == 'QR_CODE') {
                 var selemite = res.result.indexOf("?");
                 var params = res.result.substring(selemite, res.result.length);
