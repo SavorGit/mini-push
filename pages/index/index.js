@@ -360,6 +360,7 @@ Page({
 
     var user_info = wx.getStorageSync("savor_user_info");
     openid = user_info.openid;
+    mta.Event.stat("clickonwxauth", {})
     if (res.detail.errMsg == 'getUserInfo:ok') {
       wx.getUserInfo({
         success(rets) {
@@ -387,6 +388,7 @@ Page({
           
         }
       })
+      mta.Event.stat("allowauth", {})
     } else {
       utils.PostRequest(api_url + '/smallapp21/User/refuseRegister', {
         'openid': openid,
@@ -397,7 +399,7 @@ Page({
           data: user_info,
         })
       });
-      
+      mta.Event.stat("refuseauth", {})
     }
 
 
@@ -418,7 +420,7 @@ Page({
       openid: openid,
       box_mac: box_mac,
     });
-    
+    mta.Event.stat("closewxauth", {})
   },
 
 
@@ -430,6 +432,7 @@ Page({
       that.setData({
         showModal: true
       })
+      mta.Event.stat("showwxauth", {})
     } else {
       var box_mac = e.detail.value.boxmac;
       var openid = e.detail.value.openid;
@@ -467,6 +470,7 @@ Page({
       that.setData({
         showModal: true
       })
+      mta.Event.stat("showwxauth", {})
     } else {
       var box_mac = e.detail.value.boxmac;
       var openid = e.detail.value.openid;
@@ -666,6 +670,7 @@ Page({
       that.setData({
         showModal: true
       })
+      mta.Event.stat("showwxauth", {})
     } else {
       var box_mac = e.detail.value.boxmac;
       var openid = e.detail.value.openid;

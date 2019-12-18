@@ -1,4 +1,5 @@
 // pages/mine/assist/index.js
+var mta = require('../../../utils/mta_analysis.js')
 const app = getApp()
 var api_url = app.globalData.api_url;
 var openid;
@@ -57,6 +58,7 @@ Page({
             that.setData({
               showModal: true
             })
+            mta.Event.stat("showwxauth", {})
           }
         },
         fail: function (e) {
@@ -100,6 +102,7 @@ Page({
                 that.setData({
                   showModal: true
                 })
+                mta.Event.stat("showwxauth", {})
               }
             },
             fail: function (e) {
@@ -215,6 +218,7 @@ Page({
       that.setData({
         showModel:true
       })
+      mta.Event.stat("showwxauth", {})
     }else {
       wx.request({
         url: api_url +'/Smallapp3/ForscreenHelp/addhelp',
@@ -284,6 +288,7 @@ Page({
 
     var user_info = wx.getStorageSync("savor_user_info");
     openid = user_info.openid;
+    mta.Event.stat("clickonwxauth", {})
     if (res.detail.errMsg == 'getUserInfo:ok') {
       wx.getUserInfo({
         success(rets) {
@@ -330,6 +335,7 @@ Page({
           })
         }
       })
+      mta.Event.stat("allowauth", {})
     } else {
       wx.request({
         url: api_url + '/smallapp21/User/refuseRegister',
@@ -357,6 +363,7 @@ Page({
 
         }
       })
+      mta.Event.stat("refuseauth", {})
     }
 
 
@@ -381,6 +388,7 @@ Page({
       },
 
     })
+    mta.Event.stat("closewxauth", {})
   },
   phonecallevent: function (e) {
     var tel = e.target.dataset.tel;

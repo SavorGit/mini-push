@@ -810,8 +810,8 @@ App({
     if (typeof (is_minimal) == 'undefined' || is_minimal == '') {//非极简版
       if (hotel_info.forscreen_type == 2) {//后台推荐用极简版
         aps.jugeLinkType(hotel_info,that);
-
         
+        mta.Event.stat('linkMode', { 'linktype': '2' })
       } else {//后台推荐用标准版 
         //不做任何改变
         aps.globalData.link_type = 1;
@@ -820,9 +820,10 @@ App({
           wifiErr: { 'is_open': 0, 'msg': '', 'confirm': '确定', 'calcle': '取消', 'type': 0 },
         })
       }
-
+      mta.Event.stat('linkMode', { 'linktype': '1' })
     } else {//扫极简版
       aps.jugeLinkType(hotel_info, that);
+      mta.Event.stat('linkMode', { 'linktype': '2' })
     }
   },
   jugeLinkType: function (hotel_info,that){

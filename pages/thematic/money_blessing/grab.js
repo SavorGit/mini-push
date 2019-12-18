@@ -1,4 +1,5 @@
 // 抢红包-抢红包 pages/thematic/money_blessing/grab.js
+var mta = require('../../../utils/mta_analysis.js');
 const app = getApp();
 var openid;
 var box_mac;
@@ -105,6 +106,7 @@ Page({
                       that.setData({
                         showModal: true
                       })
+                      mta.Event.stat("showwxauth", {})
                     } else {
                       //如果已授权   请求获取扫电视红包小程序码结果
                       wx.request({
@@ -261,6 +263,7 @@ Page({
                           that.setData({
                             showModal: true
                           })
+                          mta.Event.stat("showwxauth", {})
                         } else {
                           //如果已授权   请求获取扫电视红包小程序码结果
                           wx.request({
@@ -422,6 +425,7 @@ Page({
     var user_info = wx.getStorageSync("savor_user_info");
     openid = user_info.openid;
     is_open_simple = user_info.is_open_simple;
+    mta.Event.stat("clickonwxauth", {})
     if (res.detail.errMsg == 'getUserInfo:ok') {
       wx.getUserInfo({
         success(rets) {
@@ -549,6 +553,7 @@ Page({
           })
         }
       })
+      mta.Event.stat("allowauth", {})
     }else {
       wx.request({
         url: api_url+'/smallapp21/User/refuseRegister',
@@ -576,6 +581,7 @@ Page({
 
         }
       })
+      mta.Event.stat("refuseauth", {})
     }  
     function getRedpacketJx(openid) {
       wx.request({
@@ -623,6 +629,7 @@ Page({
     wx.reLaunch({
       url: '/pages/index/index',
     })
+    mta.Event.stat("closewxauth", {})
   },
   //预览图片
   previewImage: function (e) {

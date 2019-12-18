@@ -1,5 +1,6 @@
 // pages/thematic/birthday/list.js
 const util = require('../../../utils/util.js')
+var mta = require('../../../utils/mta_analysis.js')
 const app = getApp()
 var box_mac;
 var openid;
@@ -311,6 +312,7 @@ Page({
       that.setData({
         showModal: true
       })
+      mta.Event.stat("showwxauth", {})
     } else {
       wx.navigateTo({
         url: '/pages/thematic/money_blessing/main?openid=' + openid + '&box_mac=' + box_mac,
@@ -349,6 +351,7 @@ Page({
     }*/
     var user_info = wx.getStorageSync("savor_user_info");
     openid = user_info.openid;
+    mta.Event.stat("clickonwxauth", {})
     if (res.detail.errMsg == 'getUserInfo:ok') {
       wx.getUserInfo({
         success(rets) {
@@ -391,6 +394,7 @@ Page({
           })
         }
       })
+      mta.Event.stat("allowauth", {})
     }else {
       wx.request({
         url: api_url+'/smallapp21/User/refuseRegister',
@@ -418,6 +422,7 @@ Page({
 
         }
       })
+      mta.Event.stat("refuseauth", {})
     }
     
     
@@ -443,6 +448,7 @@ Page({
       },
 
     })
+    mta.Event.stat("closewxauth", {})
   },
 
 
