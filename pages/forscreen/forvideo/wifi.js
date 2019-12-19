@@ -1,5 +1,6 @@
 // pages/launch/video/index.js
 const utils = require('../../../utils/util.js')
+var mta = require('../../../utils/mta_analysis.js')
 const app = getApp()
 var openid;
 var box_mac;
@@ -334,6 +335,7 @@ Page({
       intranet_ip: intranet_ip,
       is_open_control: true,
     })
+    mta.Event.stat("opencontrol", {})
   },
   //关闭遥控
   closeControl: function(e) {
@@ -342,7 +344,7 @@ Page({
       is_open_control: false,
       popRemoteControlWindow: false,
     })
-
+    mta.Event.stat("closecontrol", {})
   },
   //遥控退出投屏
   exitForscreen: function(e) {

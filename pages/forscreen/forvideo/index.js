@@ -1,5 +1,6 @@
 // pages/forscreen/forvideo/index.js
 const util = require('../../../utils/util.js')
+var mta = require('../../../utils/mta_analysis.js')
 const app = getApp();
 var tmp;
 var openid;
@@ -1213,6 +1214,7 @@ Page({
       popRemoteControlWindow: true,
       qrcode_img: qrcode_url
     })
+    mta.Event.stat("opencontrol", {})
   },
   //关闭遥控
   closeControl: function (e) {
@@ -1221,7 +1223,7 @@ Page({
       is_open_control: false,
       popRemoteControlWindow: false,
     })
-
+    mta.Event.stat("closecontrol", {})
   },
   //遥控退出投屏
   exitForscreen: function (e) {

@@ -1,6 +1,7 @@
 //index.js
 //获取应用实例
 const utils = require('../../utils/util.js')
+var mta = require('../../utils/mta_analysis.js')
 const app = getApp()
 var timestamp = (new Date()).valueOf();
 var box_mac; //当前连接机顶盒mac
@@ -196,6 +197,7 @@ Page({
       popRemoteControlWindow: true,
       qrcode_img: qrcode_url
     })
+    mta.Event.stat("opencontrol", {})
   },
   //关闭遥控
   closeControl: function(e) {
@@ -203,7 +205,7 @@ Page({
     self.setData({
       popRemoteControlWindow: false,
     })
-
+    mta.Event.stat("closecontrol", {})
   },
   //遥控退出投屏
   exitForscreen: function(e) {

@@ -1,5 +1,6 @@
 // pages/forscreen/forfile/h5files_result.js
 const util = require('../../../utils/util.js')
+var mta = require('../../../utils/mta_analysis.js')
 const app = getApp()
 var api_url = app.globalData.api_url;
 var openid;
@@ -561,6 +562,7 @@ Page({
       showControl: true,
       qrcode_img: qrcode_url
     })
+    mta.Event.stat("opencontrol", {})
   },
   //关闭遥控
   closeControl: function (e) {
@@ -568,7 +570,7 @@ Page({
     that.setData({
       showControl: false,
     })
-
+    mta.Event.stat("closecontrol", {})
   },
   //遥控退出投屏
   exitForscreen: function (e) {

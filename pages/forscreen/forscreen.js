@@ -1,5 +1,6 @@
 // pages/forscreen/forscreen.js
 const app = getApp();
+var mta = require('../../utils/mta_analysis.js')
 var openid;                     //用户小程序唯一标识
 var box_mac = '';               //机顶盒mac
 var code_type ='';
@@ -326,8 +327,9 @@ Page({
                 } 
               }
             })
+            mta.Event.stat('scanQrcodeResult', { 'linktype': 0 })
           } else if (is_have == 1) {
-            
+            mta.Event.stat('scanQrcodeResult', { 'linktype': 1 })
           }
           wx.reLaunch({
             url: '../index/index',

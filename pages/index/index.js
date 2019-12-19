@@ -612,6 +612,7 @@ Page({
       popRemoteControlWindow: true,
       qrcode_img: qrcode_url
     })
+    mta.Event.stat("opencontrol", {})
   },
   //关闭遥控
   closeControl: function(e) {
@@ -620,7 +621,7 @@ Page({
 
       popRemoteControlWindow: false,
     })
-
+    mta.Event.stat("closecontrol", {})
   },
   //遥控退出投屏
   exitForscreen: function(e) {
