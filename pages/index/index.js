@@ -565,9 +565,9 @@ Page({
               duration: 2000
             });
           });
-          
+          mta.Event.stat('breakLink', { 'linktype': app.globalData.link_type,'breakstatus':1 })
         } else if (res.cancel) {
-
+          mta.Event.stat('breakLink', { 'linktype': app.globalData.link_type, 'breakstatus': 0 })
         }
       }
     })
@@ -941,7 +941,7 @@ Page({
         }
       }, re => { }, { isShowLoading: false });
     }
-    
+    mta.Event.stat('showIndex', { 'linktype': app.globalData.link_type })
 
     //this.onLoad()
   },
