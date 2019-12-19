@@ -388,7 +388,7 @@ Page({
       qrcode_img: qrcode_url,
       intranet_ip: intranet_ip
     })
-    mta.Event.stat("opencontrol", {})
+    mta.Event.stat('openControl', { 'linktype': app.globalData.link_type })
   },
   //关闭遥控
   closeControl: function(e) {

@@ -666,7 +666,7 @@ Page({
       showControl: true,
       qrcode_img: qrcode_url
     })
-    mta.Event.stat("opencontrol", {})
+    mta.Event.stat('openControl', { 'linktype': app.globalData.link_type })
   },
   //关闭遥控
   closeControl: function(e) {
