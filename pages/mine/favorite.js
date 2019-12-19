@@ -854,7 +854,7 @@ Page({
     })
   },
   modalCancel: function(e) {
-
+    
   },
   //预览图片
   previewImage: function(e) {

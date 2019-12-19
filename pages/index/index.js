@@ -668,6 +668,7 @@ Page({
     }
     var hotel_info = e.target.dataset.hotel_info;
     app.linkHotelWifi(hotel_info, that);
+    mta.Event.stat("retrylinkwifi", {})
   },
   //文件投屏
   forfiles: function(e) {
@@ -729,6 +730,7 @@ Page({
     that.setData({
       showMe: false,
     })
+    mta.Event.stat("cancellinkwifi", {})
   },
   changeActNums: function(e) {
     var that = this;

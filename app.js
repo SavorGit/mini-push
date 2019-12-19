@@ -334,7 +334,7 @@ App({
         },
       })
     }
-    
+    mta.Event.stat("controlexitforscreen", {})
   }, //退出投屏结束
   //遥控器呼玛
   controlCallQrcode: function(openid, box_mac, qrcode_img,hotel_info,aps) {
@@ -476,6 +476,7 @@ App({
       
       
     }
+    mta.Event.stat("controlcallqrcode", {})
   },
   //遥控器控制音量
   controlChangeVolume: function (openid,box_mac, change_type,hotel_info,aps) {
@@ -530,6 +531,13 @@ App({
         }
       })
     }
+    if (change_type==3){
+      change_type = 1;
+    }
+    if (change_type==4){
+      change_type = 2;
+    }
+    mta.Event.stat('controlChangeVolume', { 'changetype': change_type })
   },
   //遥控控制节目
   controlChangeProgram: function (openid, box_mac, change_type, hotel_info, aps) {
@@ -578,7 +586,7 @@ App({
         }
       })
     }
-    
+    mta.Event.stat('controlChangePro', { 'changetype': change_type })
   },
   //扫码
   scanQrcode: function(pageid = 1) {
@@ -933,6 +941,7 @@ App({
                 wx.stopWifi({
 
                 })
+                mta.Event.stat('linkWifiErro', { 'wifierrocode': res.errCode, 'wifierromsg': res.errMsg })
               },
             })
           }, fail: function (res) {
