@@ -1,5 +1,7 @@
 // pages/thematic/birthday/detail.js
+var mta = require('../../../utils/mta_analysis.js')
 const app = getApp();
+var constellation_name;
 Page({
 
   /**
@@ -18,6 +20,8 @@ Page({
     that.setData({
       detail_url: options.url + '?miniProgram=' + encodeURIComponent('{"navigationBarTitleText":"' + options.constellname + '","statusBarHeight":' + getApp().globalData.statusBarHeight+',"backgroundColor":"#EDEDED","color":"#333333"}')
     })
+    constellation_name = options.constellname
+    mta.Event.stat('constellationDetail', { 'name': constellation_name, 'ctype': 1 })
   },
 
   /**
@@ -38,7 +42,7 @@ Page({
    * 生命周期函数--监听页面隐藏
    */
   onHide: function() {
-
+    mta.Event.stat('constellationDetail', { 'name': constellation_name, 'ctype': 2 })
   },
 
   /**

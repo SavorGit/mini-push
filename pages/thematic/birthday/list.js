@@ -103,9 +103,12 @@ Page({
       success:function(res){
         that.setData({
           constellationlist:res.data.result,
-          choose_constellid:res.data.result[0]['id']
+          choose_constellid:res.data.result[0]['id'],
+          choose_constellname: res.data.result[0]['name'],
+          choose_constellisnow: 1
         })
         if (that.data.choose_constellid) {
+          mta.Event.stat('viewConstellation', { 'name': that.data.choose_constellname })
           that.getContellDetail(that.data.choose_constellid)
         }
       }
@@ -141,19 +144,28 @@ Page({
   switchConstell:function(e){
     var that = this;
     var constellid = e.currentTarget.dataset.constellid;
+    var constellisnow = e.currentTarget.dataset.isnow;
+    var constellname = e.currentTarget.dataset.name;
     that.setData({
-      choose_constellid:constellid
+      choose_constellid:constellid,
+      choose_constellisnow:constellisnow,
+      choose_constellname:constellname
     })
     that.getContellDetail(constellid)
-
+    if(constellisnow==1){
+      mta.Event.stat('viewConstellation', { 'name': constellname })
+    }else{
+      mta.Event.stat('viewNextConstellation', { 'name': constellname })
+    }
   },
   showHappy:function(e){
     var user_info = wx.getStorageSync(cache_key +'user_info');
     var box_mac = e.currentTarget.dataset.boxmac;
     var openid = e.currentTarget.dataset.openid;
     var vediourl = e.currentTarget.dataset.vediourl;
-    //var filename = e.currentTarget.dataset.happyvedioname;
     var hotel_info = e.currentTarget.dataset.hotel_info;
+    var source = e.currentTarget.dataset.source
+    var rname = e.currentTarget.dataset.name;
     
     var forscreen_char = 'Happy Birthday';
     var index1 = vediourl.lastIndexOf("/");
@@ -161,8 +173,6 @@ Page({
     var filename = vediourl.substring(index1 + 1, index2);//后缀名
 
     if(app.globalData.link_type==1){
-      
-      
       var timestamp = (new Date()).valueOf();
       var mobile_brand = app.globalData.mobile_brand;
       var mobile_model = app.globalData.mobile_model;
@@ -272,6 +282,7 @@ Page({
             })
           }
         }
+        
       })
     }else if(app.globalData.link_type==2){
       
@@ -301,10 +312,22 @@ Page({
         }
       })
     }
+    if(source==1){
+      mta.Event.stat('clickBirthdayMusic', { 'name': rname })
+    } else if (source == 2){
+      var that = this;
+      if (that.data.choose_constellisnow == 1) {
+        mta.Event.stat('playConstellationVideo', { 'name': that.data.choose_constellname, 'videoname': rname })
+      }else{
+        mta.Event.stat('playNextConstellationVideo', { 'name': that.data.choose_constellname, 'videoname': rname })
+      }
+    }
     
   },
   //点击红包送祝福
   clickRedPacket:function(e){
+    mta.Event.stat("clickredpacket", {})
+
     var that = this;
     var user_info = wx.getStorageSync("savor_user_info");
     if (user_info.is_wx_auth != 3) {
@@ -530,7 +553,7 @@ Page({
    * 生命周期函数--监听页面隐藏
    */
   onHide: function() {
-
+    mta.Event.stat("birthdayclickback", {})
   },
 
   /**

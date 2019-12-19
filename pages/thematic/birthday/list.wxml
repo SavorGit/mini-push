@@ -12,7 +12,7 @@
       </view>
       <view class='list flex-row-center-space_between'>
         <block wx:for="{{happylist}}" wx:key="key" wx:for-item="happyinfo" wx:for-index="index">
-          <view class='music flex-column-center-center theme7' bindtap='showHappy' data-boxmac="{{box_mac}}" data-openid="{{openid}}" data-vediourl="{{happyinfo.res_url}}" data-happyVedioName="{{happyinfo.file_name}}" data-name="{{happyinfo.name}}" data-hotel_info="{{hotel_info}}">
+          <view class='music flex-column-center-center theme7' bindtap='showHappy' data-boxmac="{{box_mac}}" data-openid="{{openid}}" data-vediourl="{{happyinfo.res_url}}" data-happyVedioName="{{happyinfo.file_name}}" data-name="{{happyinfo.name}}" data-source="1" data-hotel_info="{{hotel_info}}">
             <icon class="fa-stack fa-lg icon theme-font">
               <i class="fa fa-circle-thin fa-stack-2x"></i>
               <i class="fa fa-music fa-stack-1x"></i>
@@ -27,7 +27,7 @@
   <view class='full_width constellation_list'>
     <view class='sketch_list flex-row-center-center'>
       <view class='constellation flex-column-center-center theme-font6{{choose_constellid==constelinfo.id? " cur" :""}}' wx:for="{{constellationlist}}" wx:key="key" wx:for-item="constelinfo" wx:for-index="index">
-        <image bindtap='switchConstell' data-constellid="{{constelinfo.id}}" src="{{constelinfo.img_url}}"></image>
+        <image bindtap='switchConstell' data-constellid="{{constelinfo.id}}" src="{{constelinfo.img_url}}" data-isnow="{{constelinfo.is_now}}" data-name="{{constelinfo.name}}" ></image>
         <label class='title'>{{constelinfo.name}} ({{constelinfo.date}})</label>
         <label class='summary'>{{constelinfo.intro}}</label>
       </view>
@@ -40,7 +40,7 @@
         </view>
         <view class='list flex-row-center-space_between'>
           <view class='video' wx:for="{{videolist}}" wx:key="key" wx:for-item="videoinfo">
-            <view bindtap='showHappy' data-boxmac="{{box_mac}}" data-openid="{{openid}}" data-vediourl="{{videoinfo.video_url}}" data-name="{{videoinfo.name}}">
+            <view bindtap='showHappy' data-boxmac="{{box_mac}}" data-openid="{{openid}}" data-source="2" data-vediourl="{{videoinfo.video_url}}" data-name="{{videoinfo.name}}">
               <image src='{{videoinfo.video_img}}'></image>
               <view class='cover'>
                 <label class='title'></label>
