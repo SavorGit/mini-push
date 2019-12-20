@@ -8,7 +8,7 @@
       <view>
         <!--循环开始 -->
         <view class='content content_bottom_border' wx:for="{{sharelist}}" wx:key="key" wx:for-item="bean" wx:for-index="index">
-          <view class='con_top flex-row-center-flex_start'>
+          <view class='con_top flex-row-center-flex_start' bindtap="onClickItem">
             <view wx:if="{{bean.type==1 || bean.type==3}}" class='user_info flex-row-center-flex_start font_333333_36'>
               <image src='http://oss.littlehotspot.com/media/resource/5dh67ffRXM.png'></image>
               <label>小热点</label>
@@ -25,7 +25,7 @@
               <button bindtap='boxShowForscreen' data-res_type="{{bean.res_type}}" data-res_nums="{{bean.res_nums}}" data-pubdetail="{{bean.list}}" data-boxmac="{{box_mac}}" data-openid="{{openid}}" data-forscreen_id="{{bean.res_id}}" class='theme-button'>电视播放</button>
             </view>
           </view>
-          <view class='con_main'>
+          <view class='con_main' bindtap="onClickItem">
             <view class="full_width weui-grids" wx:if="{{bean.res_type=='1'}}">
               <view class="weui-grid" wx:for="{{bean.list}}" wx:key="pkey" wx:for-item="pubdetail" wx:for-index="pindex">
                 <navigator url="/pages/find/picture?forscreen_id={{bean.res_id}}&box_mac={{box_mac}}">

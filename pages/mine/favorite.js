@@ -1,5 +1,5 @@
 // pages/mine/favorite.js
-const util = require('../../utils/util.js')
+const utils = require('../../utils/util.js')
 var mta = require('../../utils/mta_analysis.js')
 const app = getApp();
 var openid;
@@ -36,8 +36,8 @@ Page({
    */
   onLoad: function(options) {
     //wx.hideShareMenu();
-    var that = this;
-    if (that.data.link_type == 2) {
+    var self = this;
+    if (self.data.link_type == 2) {
       return;
     }
     box_mac = options.box_mac;
@@ -46,7 +46,7 @@ Page({
 
     var user_info = wx.getStorageSync("savor_user_info");
     openid = user_info.openid;
-    that.setData({
+    self.setData({
       box_mac: box_mac,
       openid: openid,
     })
@@ -57,7 +57,7 @@ Page({
       },
       success: function(res) {
         if (res.data.code == 10000 && res.data.result.is_have == 1) {
-          that.setData({
+          self.setData({
             is_open_simple: res.data.result.is_open_simple,
             hotel_info: res.data.result,
           })
@@ -74,7 +74,7 @@ Page({
       },
       success: function(res) {
         sharelist = res.data.result.list;
-        that.setData({
+        self.setData({
           //userinfo: res.data.result.user_info,
           sharelist: res.data.result.list,
         })
@@ -168,8 +168,7 @@ Page({
                       })
                     }
                   })
-                } else if (res.cancel) {
-                }
+                } else if (res.cancel) {}
               }
             })
           } else {
@@ -428,7 +427,7 @@ Page({
                     mobile_brand: mobile_brand,
                     mobile_model: mobile_model,
                     forscreen_char: forscreen_char,
-                    imgs: '["' + pubdetail[i].forscreen_url+ '"]',
+                    imgs: '["' + pubdetail[i].forscreen_url + '"]',
                     resource_id: pubdetail[i].res_id,
                     res_sup_time: 0,
                     res_eup_time: 0,
@@ -444,7 +443,7 @@ Page({
                 var url = pubdetail[i].forscreen_url;
                 var filename = pubdetail[i].filename;
                 var res_id = pubdetail[i].res_id;
-                
+
                 wx.request({
                   url: api_url + '/Netty/Index/index',
                   headers: {
@@ -552,11 +551,15 @@ Page({
   }, //电视播放投屏结束
   //收藏资源
   onCollect: function(res) {
-    var that = this;
+    var self = this;
     var res_id = res.currentTarget.dataset.res_id;
     var res_key = res.currentTarget.dataset.res_key;
     var openid = res.currentTarget.dataset.openid;
     var type = res.currentTarget.dataset.type;
+    utils.tryCatch(mta.Event.stat('MineFav_List_Favorite', {
+      'openid': openid,
+      'status': true
+    }));
     wx.request({
       url: api_url + '/Smallapp/collect/recLogs',
       header: {
@@ -576,7 +579,7 @@ Page({
             sharelist[i].collect_num = collect_nums;
           }
         }
-        that.setData({
+        self.setData({
           sharelist: sharelist
         })
         /*if (e.data.code == 10000) {
@@ -606,13 +609,15 @@ Page({
   }, //收藏资源结束
   //取消收藏
   cancCollect: function(res) {
-
-    var that = this;
+    var self = this;
     var res_id = res.currentTarget.dataset.res_id;
     var res_key = res.currentTarget.dataset.res_key;
     var openid = res.currentTarget.dataset.openid;
     var type = res.currentTarget.dataset.type;
-
+    utils.tryCatch(mta.Event.stat('MineFav_List_Favorite', {
+      'openid': openid,
+      'status': false
+    }));
     wx.request({
       url: api_url + '/Smallapp/collect/recLogs',
       header: {
@@ -632,7 +637,7 @@ Page({
             sharelist[i].collect_num = collect_nums;
           }
         }
-        that.setData({
+        self.setData({
           sharelist: sharelist
         })
 
@@ -649,29 +654,31 @@ Page({
     })
   }, //取消收藏结束
   //遥控呼大码
-  callQrCode: util.throttle(function(e) {
-    var that = this;
+  callQrCode: utils.throttle(function(e) {
+    var self = this;
     openid = e.currentTarget.dataset.openid;
     box_mac = e.currentTarget.dataset.box_mac;
     var qrcode_img = e.currentTarget.dataset.qrcode_img;
     var hotel_info = e.currentTarget.dataset.hotel_info;
-    app.controlCallQrcode(openid, box_mac, qrcode_img, hotel_info, that);
+    app.controlCallQrcode(openid, box_mac, qrcode_img, hotel_info, self);
   }, 3000), //呼大码结束
   //打开遥控器
   openControl: function(e) {
-    var that = this;
+    var self = this;
     var qrcode_url = api_url + '/Smallapp4/index/getBoxQr?box_mac=' + box_mac + '&type=3';
-    that.setData({
+    self.setData({
 
       showControl: true,
       qrcode_img: qrcode_url
     })
-    mta.Event.stat('openControl', { 'linktype': app.globalData.link_type })
+    mta.Event.stat('openControl', {
+      'linktype': app.globalData.link_type
+    })
   },
   //关闭遥控
   closeControl: function(e) {
-    var that = this;
-    that.setData({
+    var self = this;
+    self.setData({
 
       showControl: false,
     })
@@ -679,35 +686,35 @@ Page({
   },
   //遥控退出投屏
   exitForscreen: function(e) {
-    var that = this;
+    var self = this;
     openid = e.currentTarget.dataset.openid;
     box_mac = e.currentTarget.dataset.box_mac;
     var hotel_info = e.currentTarget.dataset.hotel_info;
-    app.controlExitForscreen(openid, box_mac, hotel_info, that);
+    app.controlExitForscreen(openid, box_mac, hotel_info, self);
   },
   //遥控调整音量
   changeVolume: function(e) {
-    var that = this;
+    var self = this;
     box_mac = e.currentTarget.dataset.box_mac;
     openid = e.currentTarget.dataset.openid;
     var change_type = e.currentTarget.dataset.change_type;
     var hotel_info = e.currentTarget.dataset.hotel_info;
-    app.controlChangeVolume(openid, box_mac, change_type, hotel_info, that);
+    app.controlChangeVolume(openid, box_mac, change_type, hotel_info, self);
 
   },
   //遥控切换节目
   changeProgram: function(e) {
-    var that = this;
+    var self = this;
     box_mac = e.currentTarget.dataset.box_mac;
     openid = e.currentTarget.dataset.openid;
     var change_type = e.currentTarget.dataset.change_type;
     var hotel_info = e.currentTarget.dataset.hotel_info;
-    app.controlChangeProgram(openid, box_mac, change_type, hotel_info, that);
+    app.controlChangeProgram(openid, box_mac, change_type, hotel_info, self);
   },
   modalConfirm: function(e) {
-    var that = this;
+    var self = this;
     var hotel_info = e.target.dataset.hotel_info;
-    app.linkHotelWifi(hotel_info, that);
+    app.linkHotelWifi(hotel_info, self);
   },
   /**
    * 生命周期函数--监听页面初次渲染完成
@@ -755,7 +762,7 @@ Page({
    * 用户点击右上角分享
    */
   onShareAppMessage: function(res) {
-    var that = this;
+    var self = this;
     var res_id = res.target.dataset.res_id;
     var res_key = res.target.dataset.res_key;
     var res_type = res.target.dataset.res_type;
@@ -763,6 +770,9 @@ Page({
     var pubdetail = res.target.dataset.pubdetail;
     var filename = res.target.dataset.filename;
     var type = res.target.dataset.type;
+    utils.tryCatch(mta.Event.stat('MineFav_List_Share', {
+      'openid': openid
+    }));
     if (type == 3) {
       var img_url = pubdetail.imgurl;
       var video_url = pubdetail.res_url;
@@ -798,7 +808,7 @@ Page({
               sharelist[i].share_num++;
             }
           }
-          that.setData({
+          self.setData({
             sharelist: sharelist
           })
 
@@ -836,7 +846,7 @@ Page({
     });
   },
   modalConfirm: function(e) {
-    var that = this;
+    var self = this;
     var forscreen_id = e.currentTarget.dataset.forscreen_id;
 
     wx.request({
@@ -849,12 +859,18 @@ Page({
         res_id: forscreen_id
       },
       success: function(res) {
-        that.onLoad()
+        self.onLoad()
       }
     })
   },
   modalCancel: function(e) {
-    
+
+  },
+  onClickItem: function(e) {
+    var self = this;
+    utils.tryCatch(mta.Event.stat('MineFav_List_ClickItem', {
+      'openid': self.data.openid
+    }));
   },
   //预览图片
   previewImage: function(e) {
@@ -872,10 +888,10 @@ Page({
   },
   //上拉刷新
   loadMore: function(e) {
-    var that = this;
+    var self = this;
 
     page = page + 1;
-    that.setData({
+    self.setData({
       hiddens: false,
     })
     wx.request({
@@ -891,14 +907,14 @@ Page({
       success: function(res) {
         if (res.data.code == 10000) {
           sharelist = res.data.result.list;
-          that.setData({
+          self.setData({
             //userinfo: res.data.result.user_info,
             sharelist: res.data.result.list,
             hiddens: true,
           })
 
         } else {
-          that.setData({
+          self.setData({
             hiddens: true,
           })
         }
