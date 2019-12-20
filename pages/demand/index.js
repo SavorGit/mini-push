@@ -340,29 +340,19 @@ Page({
     var box_mac = e.currentTarget.dataset.boxmac;
     page = page + 1;
     if (box_mac == '' || box_mac == undefined) {
-      utils.PostRequest(api_url + '/Smallapp4/optimize/getOptimizeList', {
-        page: page,
-        openid: openid,
-      }, (data, headers, cookies, errMsg, statusCode) => {
-        self.setData({
-          program_list: data.result
-        })
-        program_list = data.result
-      });
-      
-    } else {
-      utils.PostRequest(api_url + '/Smallapp4/optimize/getOptimizeList', {
-        box_mac: box_mac,
-        page: page,
-        openid: openid,
-      }, (data, headers, cookies, errMsg, statusCode) => {
-        program_list = data.result
-        self.setData({
-          program_list: data.result
-        })
-      });
-      
+      box_mac = ''      
     }
+    utils.PostRequest(api_url + '/Smallapp4/optimize/getOptimizeList', {
+      box_mac: box_mac,
+      page: page,
+      openid: openid,
+    }, (data, headers, cookies, errMsg, statusCode) => {
+      program_list = data.result
+      self.setData({
+        program_list: data.result
+      })
+    });
+    mta.Event.stat("optimizationswipeup", {})
 
   },
   //电视播放
@@ -378,8 +368,6 @@ Page({
       var openid = e.currentTarget.dataset.openid;
       var vediourl = e.currentTarget.dataset.vediourl;
       var forscreen_char = e.currentTarget.dataset.name;
-
-
       var filename = e.currentTarget.dataset.filename; //文件名
       var timestamp = (new Date()).valueOf();
       var mobile_brand = app.globalData.mobile_brand;
@@ -410,7 +398,7 @@ Page({
       }
       var hotel_info = e.currentTarget.dataset.hotel_info;
       app.boxShow(box_mac, forscreen_id, pubdetail, res_type, res_nums, 5, hotel_info, self);
-
+      
       // 调用记录播放次数接口
       utils.PostRequest(api_url + '/Smallapp4/demand/recordPlaynum', {
         openid: openid,
@@ -422,6 +410,8 @@ Page({
           program_list: program_list
         });
       });
+
+      mta.Event.stat('optimizationClickTvPlay', { 'goodsid': forscreen_id })
 
     }
   }, //电视播放结束
@@ -491,6 +481,9 @@ Page({
     var img_url = res.target.dataset.img_url;
 
     if (res.from === 'button') {
+
+      mta.Event.stat('optimizationClickShare', { 'goodsid': goods_id  })
+      
       // 转发成功
       utils.PostRequest(api_url + '/Smallapp/share/recLogs', {
         'openid': openid,
@@ -556,8 +549,10 @@ Page({
         duration: duration,
       });
     }
-    
-    
+  },
+  detailLog: function (e) {
+    var goods_id=e.currentTarget.dataset.id;
+    mta.Event.stat('clickContent', { 'goodsid': goods_id })
   },
   bindImgErro:function(e){
     var that = this;
@@ -573,7 +568,6 @@ Page({
         program_list[index_key]['cover_imgs'][2] = '/images/imgs/default-pic.png';
       }
     }
-    console.log(program_list);
     that.setData({
       program_list: program_list
     })
@@ -588,7 +582,6 @@ Page({
         program_list[index_key]['cover_imgs'][0] = '/images/imgs/default-pic.png';
       }
     }
-    console.log(program_list);
     that.setData({
       program_list: program_list
     })

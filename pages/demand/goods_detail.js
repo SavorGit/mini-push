@@ -1,5 +1,6 @@
 // pages/demand/goods_detail.js
 const utils = require('../../utils/util.js')
+var mta = require('../../utils/mta_analysis.js')
 const app = getApp()
 var api_url = app.globalData.api_url;
 var box_mac;
@@ -73,6 +74,7 @@ Page({
         that.setData({
           goods_info: data.result
         })
+        mta.Event.stat('enterContent', { 'goodsid': goods_id })
       }
 
     );
@@ -98,8 +100,37 @@ Page({
       action_type: 3,
       type: 2
     });
-    
+    mta.Event.stat('clickAddJdorder', { 'openid': openid, 'goodsid': goods_id })
   },
+  playGoodsVideo: function (e) {
+    let self = this;
+    var user_info = wx.getStorageSync('savor_user_info');
+    var openid = user_info.openid;
+    mta.Event.stat('detailPageClickPlay', {
+      'openid': openid,
+      'videourl': self.data.video_url
+    });
+  },
+  pauseGoodsVideo: function (e) {
+    let self = this;
+    var user_info = wx.getStorageSync('savor_user_info');
+    var openid = user_info.openid;
+    mta.Event.stat('detailPageClickPause', {
+      'openid': openid,
+      'videourl': self.data.video_url
+    });
+  },
+  fullscreenGoodsVideo: function (e) {
+    let self = this;
+    var user_info = wx.getStorageSync('savor_user_info');
+    var openid = user_info.openid;
+    mta.Event.stat('detailPageClickFullScreen', {
+      'openid': self.data.openid,
+      'video': self.data.oss_video_url,
+      'fullscreen': e.detail.fullScreen
+    });
+  },
+  
 
   /**
    * 生命周期函数--监听页面初次渲染完成
@@ -119,14 +150,14 @@ Page({
    * 生命周期函数--监听页面隐藏
    */
   onHide: function() {
-
+    
   },
 
   /**
    * 生命周期函数--监听页面卸载
    */
   onUnload: function() {
-
+    mta.Event.stat("detailpageclickback", {})
   },
 
   /**
@@ -167,8 +198,7 @@ Page({
         });
       });
     }
-
-
+    mta.Event.stat('detailPageclickTvPlay', { 'openid': openid, 'goodsid': forscreen_id })
   },
   //收藏资源
   onCollect: function(e) {
@@ -195,7 +225,7 @@ Page({
       icon: 'none',
       duration: 2000
     }));
-    
+    mta.Event.stat('detailPageClickCollect', { 'openid': openid, 'goodsid': res_id,'liketype':1 })
   }, //收藏资源结束
   //取消收藏
   cancCollect: function(e) {
@@ -221,7 +251,7 @@ Page({
       icon: 'none',
       duration: 2000
     }));
-    
+    mta.Event.stat('detailPageClickCollect', { 'openid': openid, 'goodsid': res_id, 'liketype': 2 })
   }, //取消收藏结束
   /**
    * 用户点击右上角分享
@@ -252,7 +282,7 @@ Page({
         icon: 'none',
         duration: 2000
       }));
-      
+      mta.Event.stat('detailPageClickShare', { 'openid': openid, 'goodsid': goods_id })
       // 来自页面内转发按钮
       return {
         title: '热点聚焦，投你所好',
@@ -269,6 +299,9 @@ Page({
     var that = this;
     var goods_box_mac = e.currentTarget.dataset.goods_box_mac;
     var uid = e.currentTarget.dataset.uid;
+    var user_info = wx.getStorageSync('savor_user_info');
+    var openid = user_info.openid;
+    var goods_id = e.currentTarget.dataset.goods_id;
     if (goods_box_mac == '') {
       app.scanQrcode(pageid);
     } else if (uid == '') {
@@ -285,7 +318,7 @@ Page({
         goods_nums: goods_nums
       })
     }
-
+    mta.Event.stat('clickAddorder', { 'openid': openid,'goods_id':goods_id })
   },
   closeAct: function(res) {
     var that = this;
