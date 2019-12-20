@@ -746,6 +746,14 @@ App({
       }
     })
   },
+  onHide:function(e){
+    let pages = getCurrentPages();
+    let currPage = null;
+    if (pages.length) {
+      currPage = pages[pages.length - 1];
+    }
+    mta.Event.stat('onAppHide', { 'url': currPage.__route__ })  
+  },
   checkMobile: function(mobile) {
 
     var myreg = /^(((13[0-9]{1})|(14[0-9]{1})|(15[0-9]{1})|(16[0-9]{1})|(18[0-9]{1})|(17[0-9]{1})|(19[0-9]{1}))+\d{8})$/;
