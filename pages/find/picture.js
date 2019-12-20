@@ -12,6 +12,7 @@ Page({
    */
   data: {
     statusBarHeight: getApp().globalData.statusBarHeight,
+    pageFrom: null, // 来源页面地址
     link_type: app.globalData.link_type, //1:外网投屏  2：直连投屏
     picinfo: [],
     is_replay_disabel: false,
@@ -21,10 +22,20 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
-    var that = this;
+    var self = this;
+    let pages = getCurrentPages(); //当前页面栈
+    if (pages.length > 1) {
+      self.setData({
+        pageFrom: pages[1].route
+      });
+    } else {
+      self.setData({
+        pageFrom: ''
+      });
+    }
 
-    // console.log('onLoad', 'that.data.link_type', that.data.link_type);
-    if (that.data.link_type == 2) {
+    // console.log('onLoad', 'self.data.link_type', self.data.link_type);
+    if (self.data.link_type == 2) {
       return;
     }
 
@@ -42,7 +53,7 @@ Page({
 
       },
       success: function(res) {
-        that.setData({
+        self.setData({
           picinfo: res.data.result,
           play_num: res.data.result.play_num,
           collect_num: res.data.result.collect_num,
@@ -62,7 +73,6 @@ Page({
     var urls = [];
     for (var row in current) {
       urls[row] = current[row]['res_url']
-
     }
     //console.log(pkey);
     wx.previewImage({
@@ -71,12 +81,14 @@ Page({
       success: function(res) {
         utils.tryCatch(mta.Event.stat('FindPic_PicDetail_PreviewImage', {
           'openid': self.data.openid,
+          'from': self.data.pageFrom,
           'status': 'success'
         }));
       },
       fail: function(e) {
         utils.tryCatch(mta.Event.stat('FindPic_PicDetail_PreviewImage', {
           'openid': self.data.openid,
+          'from': self.data.pageFrom,
           'status': 'fail'
         }));
       }
@@ -84,14 +96,15 @@ Page({
   },
   //收藏资源
   onCollect: function(e) {
-    var that = this;
+    var self = this;
     var openid = e.target.dataset.openid;
     var res_id = e.target.dataset.res_id;
 
     var res_type = e.target.dataset.type;
     utils.tryCatch(mta.Event.stat('FindPic_PicDetail_Favorite', {
-      'openid': that.data.openid,
-      'boxmac': that.data.box_mac,
+      'openid': self.data.openid,
+      'from': self.data.pageFrom,
+      'boxmac': self.data.box_mac,
       'status': true
     }));
     wx.request({
@@ -106,7 +119,7 @@ Page({
         'status': 1,
       },
       success: function(e) {
-        that.setData({
+        self.setData({
           is_collect: 1,
           collect_num: e.data.result.nums,
         })
@@ -124,14 +137,15 @@ Page({
   }, //收藏资源结束
   //取消收藏
   cancCollect: function(e) {
-    var that = this;
+    var self = this;
     var openid = e.target.dataset.openid;
     var res_id = e.target.dataset.res_id;
 
     var res_type = e.target.dataset.type;
     utils.tryCatch(mta.Event.stat('FindPic_PicDetail_Favorite', {
-      'openid': that.data.openid,
-      'boxmac': that.data.box_mac,
+      'openid': self.data.openid,
+      'from': self.data.pageFrom,
+      'boxmac': self.data.box_mac,
       'status': false
     }));
     wx.request({
@@ -148,7 +162,7 @@ Page({
       success: function(e) {
 
 
-        that.setData({
+        self.setData({
           is_collect: 0,
           collect_num: e.data.result.nums,
         })
@@ -167,7 +181,7 @@ Page({
   }, //取消收藏结束
   //点击分享按钮
   onShareAppMessage: function(res) {
-    var that = this;
+    var self = this;
     var openid = res.target.dataset.openid;
     var res_id = res.target.dataset.res_id;
 
@@ -176,8 +190,9 @@ Page({
     var img_url = pubdetail[0]['res_url'];
     // console.log(img_url);
     utils.tryCatch(mta.Event.stat('FindPic_PicDetail_Share', {
-      'openid': that.data.openid,
-      'boxmac': that.data.box_mac
+      'openid': self.data.openid,
+      'from': self.data.pageFrom,
+      'boxmac': self.data.box_mac
     }));
     var share_num = res.target.dataset.share_num;
 
@@ -198,7 +213,7 @@ Page({
         },
         success: function(e) {
           if (e.data.code == 10000) {
-            that.setData({
+            self.setData({
               share_num: e.data.result.share_nums,
             })
           }
@@ -229,12 +244,13 @@ Page({
   }, // 分享结束
   //电视播放
   boxShow(e) {
-    var that = this;
+    var self = this;
     var box_mac = e.target.dataset.boxmac;
     var find_id = e.target.dataset.forscreen_id
     utils.tryCatch(mta.Event.stat('FindPic_PicDetail_LaunchTV', {
-      'openid': that.data.openid,
-      'boxmac': that.data.box_mac
+      'openid': self.data.openid,
+      'from': self.data.pageFrom,
+      'boxmac': self.data.box_mac
     }));
     if (box_mac == '') {
       app.scanQrcode(pageid);
@@ -275,20 +291,20 @@ Page({
               success: function(res) {
                 if (res.confirm) {
                   var djs = 10;
-                  that.setData({
+                  self.setData({
                     is_replay_disabel: true
                   })
 
-                  that.setData({
+                  self.setData({
                     djs: djs
                   })
                   var timer8_0 = setInterval(function() {
                     djs -= 1;
-                    that.setData({
+                    self.setData({
                       djs: djs
                     });
                     if (djs == 0) {
-                      that.setData({
+                      self.setData({
                         is_replay_disabel: false,
                       })
                       clearInterval(timer8_0);
@@ -435,20 +451,20 @@ Page({
             })
           } else {
             var djs = 10;
-            that.setData({
+            self.setData({
               is_replay_disabel: true
             })
 
-            that.setData({
+            self.setData({
               djs: djs
             })
             var timer8_0 = setInterval(function() {
               djs -= 1;
-              that.setData({
+              self.setData({
                 djs: djs
               });
               if (djs == 0) {
-                that.setData({
+                self.setData({
                   is_replay_disabel: false,
                 })
                 clearInterval(timer8_0);

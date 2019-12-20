@@ -11,7 +11,7 @@
         <view wx:for="{{publiclist}}" wx:key="key" wx:for-item="bean" wx:for-index="index">
 
           <view class='content content_bottom_border'>
-            <view class='con_top flex-row-center-flex_start'>
+            <view class='con_top flex-row-center-flex_start' bindtap="onClickItem">
               <view class='user_info flex-row-center-flex_start font_333333_36'>
                 <image src='{{userinfo.avatarUrl}}'></image>
                 <label>{{userinfo.nickName}}</label>
@@ -20,7 +20,7 @@
                 <button bindtap='boxShow' data-res_type="{{bean.res_type}}" data-res_nums="{{bean.res_nums}}" data-pubdetail="{{bean.pubdetail}}" data-boxmac="{{box_mac}}" data-openid="{{openid}}" data-forscreen_id="{{bean.forscreen_id}}" class='theme-button'>电视播放</button>
               </view>
             </view>
-            <view class='con_main'>
+            <view class='con_main' bindtap="onClickItem">
               <view class="full_width weui-grids" wx:if="{{bean.res_type=='1'}}">
 
                 <view class="weui-grid" wx:for="{{bean.pubdetail}}" wx:key="pkey" wx:for-item="pubdetail" wx:for-index="pindex">
@@ -102,18 +102,18 @@
 
 <!-- 遥控器 -->
 <template is="remoteControlWindow" data='{{popRemoteControlWindow: showControl, qrcode_img:qrcode_img, box_mac:box_mac, openid:openid, hotel_info:hotel_info}}' />
-<!--wifi链接错误提示-->
+<!--wifi链接错误提示
 <modal show="{{wifiErr.is_open==1 ? true : false}}" width="650rpx" height='380rpx' border-radius="10rpx" title-text='提示' title-color="#333333" title-background-color="unset" title-border-radius="0rpx" confirm-text='{{wifiErr.confirm}}' confirm-color="#FFFFFF"
   confirm-background-color="#1cbeb6" confirm-border-radius="10rpx" cancel-text='{{wifiErr.cancel}}' cancel-color='#FFFFFF' cancel-background-color="#333333" cancel-border-radius="10rpx" bindcancel="modalCancel" data-hotel_info="{{hotel_info}}" bindconfirm='modalConfirm'>
   <view class="theme-font1" style="padding:0 50rpx;font-size:28rpx;">{{wifiErr.msg}}</view>
-</modal>
+</modal>-->
 <!-- 固定悬浮按钮组 -->
 <view wx:if="{{box_mac !=''}}">
   <template is="fixedSuspensionButtonGroup" />
 </view>
 
 <!-- 弹窗 -->
-<bottomModal show="{{showModal}}" data-openid="{{openid}}" data-forscreen_id="{{forscreen_id}}" height='auto' width="98%" title-text="" confirm-text="" cancel-text="" bindcancel="modalCancel" bindconfirm='modalConfirm'>
+<bottomModal show="{{showModal}}" data-openid="{{openid}}" data-forscreen_id="{{forscreen_id}}" height='auto' width="98%" title-text="" confirm-text="" cancel-text="">
   <view class='delete-container'>
     <view class='delete-top'>
       <view class='title'>

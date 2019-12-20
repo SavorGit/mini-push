@@ -1,5 +1,5 @@
 // pages/mine/index.js
-const util = require('../../utils/util.js')
+const utils = require('../../utils/util.js')
 var mta = require('../../utils/mta_analysis.js')
 const app = getApp();
 var openid;
@@ -33,16 +33,15 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
-    var that = this;
-    if (that.data.link_type == 2) {
+    var self = this;
+    if (self.data.link_type == 2) {
       return;
     }
     box_mac = options.box_mac;
-
     //获取用户信息以及我的公开
     var user_info = wx.getStorageSync("savor_user_info");
     openid = user_info.openid;
-    that.setData({
+    self.setData({
       box_mac: box_mac,
       openid: openid,
     })
@@ -54,7 +53,7 @@ Page({
       success: function(res) {
         if (res.data.code == 10000 && res.data.result.is_have == 1) {
 
-          that.setData({
+          self.setData({
             is_open_simple: res.data.result.is_open_simple,
             hotel_info: res.data.result,
           })
@@ -73,7 +72,7 @@ Page({
 
         publiclist = res.data.result.list;
 
-        that.setData({
+        self.setData({
           userinfo: res.data.result.user_info,
           publiclist: res.data.result.list,
         })
@@ -81,65 +80,65 @@ Page({
     })
   },
   //遥控呼大码
-  callQrCode: util.throttle(function(e) {
-    var that = this;
+  callQrCode: utils.throttle(function(e) {
+    var self = this;
     openid = e.currentTarget.dataset.openid;
     box_mac = e.currentTarget.dataset.box_mac;
     var qrcode_img = e.currentTarget.dataset.qrcode_img;
     var hotel_info = e.currentTarget.dataset.hotel_info;
-    app.controlCallQrcode(openid, box_mac, qrcode_img, hotel_info, that);
+    app.controlCallQrcode(openid, box_mac, qrcode_img, hotel_info, self);
   }, 3000), //呼大码结束
   //打开遥控器
   openControl: function(e) {
-    var that = this;
+    var self = this;
     var qrcode_url = api_url + '/Smallapp4/index/getBoxQr?box_mac=' + box_mac + '&type=3';
-    that.setData({
-
+    self.setData({
       showControl: true,
       qrcode_img: qrcode_url
-    })
-    mta.Event.stat('openControl', { 'linktype': app.globalData.link_type })
+    });
+    utils.tryCatch(mta.Event.stat('openControl', {
+      'linktype': app.globalData.link_type
+    }));
   },
   //关闭遥控
   closeControl: function(e) {
-    var that = this;
-    that.setData({
-
+    var self = this;
+    self.setData({
       showControl: false,
     })
-    mta.Event.stat("closecontrol", {})
+    utils.tryCatch(mta.Event.stat("closecontrol", {}));
   },
   //遥控退出投屏
   exitForscreen: function(e) {
-    var that = this;
+    var self = this;
     openid = e.currentTarget.dataset.openid;
     box_mac = e.currentTarget.dataset.box_mac;
     var hotel_info = e.currentTarget.dataset.hotel_info;
-    app.controlExitForscreen(openid, box_mac, hotel_info, that);
+    app.controlExitForscreen(openid, box_mac, hotel_info, self);
   },
   //遥控调整音量
   changeVolume: function(e) {
-    var that = this;
+    var self = this;
     box_mac = e.currentTarget.dataset.box_mac;
     openid = e.currentTarget.dataset.openid;
     var change_type = e.currentTarget.dataset.change_type;
     var hotel_info = e.currentTarget.dataset.hotel_info;
-    app.controlChangeVolume(openid, box_mac, change_type, hotel_info, that);
+    app.controlChangeVolume(openid, box_mac, change_type, hotel_info, self);
 
   },
   //遥控切换节目
   changeProgram: function(e) {
-    var that = this;
+    var self = this;
     box_mac = e.currentTarget.dataset.box_mac;
     openid = e.currentTarget.dataset.openid;
     var change_type = e.currentTarget.dataset.change_type;
     var hotel_info = e.currentTarget.dataset.hotel_info;
-    app.controlChangeProgram(openid, box_mac, change_type, hotel_info, that);
+    app.controlChangeProgram(openid, box_mac, change_type, hotel_info, self);
   },
   modalConfirm: function(e) {
-    var that = this;
+    var self = this;
     var hotel_info = e.target.dataset.hotel_info;
-    app.linkHotelWifi(hotel_info, that);
+    app.linkHotelWifi(hotel_info, self);
   },
   /**
    * 生命周期函数--监听页面初次渲染完成
@@ -152,7 +151,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function() {
-
+    let self = this;
   },
 
   /**
@@ -187,12 +186,15 @@ Page({
    * 用户点击右上角分享
    */
   onShareAppMessage: function(res) {
-    var that = this;
+    var self = this;
     var res_id = res.target.dataset.res_id;
     var res_key = res.target.dataset.res_key;
     var res_type = res.target.dataset.res_type;
     var openid = res.target.dataset.openid;
     var pubdetail = res.target.dataset.pubdetail;
+    utils.tryCatch(mta.Event.stat('MinePub_List_Share', {
+      'openid': openid
+    }));
     if (res_type == 1) {
       var img_url = pubdetail[0]['res_url'];
       var share_url = '/pages/share/pic?forscreen_id=' + res_id;
@@ -220,7 +222,7 @@ Page({
               publiclist[i].share_num++;
             }
           }
-          that.setData({
+          self.setData({
             publiclist: publiclist
           })
 
@@ -260,10 +262,14 @@ Page({
     });
   },
   modalConfirm: function(e) {
-    var that = this;
+    var self = this;
     var forscreen_id = e.currentTarget.dataset.forscreen_id;
     var keys = e.currentTarget.dataset.keys;
     var publiclist = e.currentTarget.dataset.publiclist;
+    utils.tryCatch(mta.Event.stat('MinePub_List_Del', {
+      'openid': self.data.openid,
+      'status': true
+    }));
     wx.request({
       url: api_url + '/Smallapp/User/delMyPublic',
       headers: {
@@ -275,7 +281,7 @@ Page({
       },
       success: function(res) {
 
-        that.setData({
+        self.setData({
           showModal: false,
         })
         for (var i = 0; i < publiclist.length; i++) {
@@ -283,11 +289,17 @@ Page({
             publiclist.splice(keys, 1);
           }
         }
-        that.setData({
+        self.setData({
           publiclist: publiclist,
         })
       }
     })
+  },
+  onClickItem: function(e) {
+    var self = this;
+    utils.tryCatch(mta.Event.stat('MinePub_List_ClickItem', {
+      'openid': self.data.openid
+    }));
   },
   previewImage: function(e) {
     var current = e.target.dataset.src;
@@ -303,17 +315,21 @@ Page({
     })
   },
   modalCancel: function(e) {
+    var self = this;
+    utils.tryCatch(mta.Event.stat('MinePub_List_Del', {
+      'openid': self.data.openid,
+      'status': true
+    }));
     this.setData({
       showModal: false,
-
     });
   },
   //上拉刷新
   loadMore: function(e) {
-    var that = this;
+    var self = this;
 
     page = page + 1;
-    that.setData({
+    self.setData({
       hiddens: false,
     })
     wx.request({
@@ -329,14 +345,14 @@ Page({
       success: function(res) {
         if (res.data.code == 10000) {
           publiclist = res.data.result.list;
-          that.setData({
+          self.setData({
             userinfo: res.data.result.user_info,
             publiclist: res.data.result.list,
             hiddens: true,
           })
 
         } else {
-          that.setData({
+          self.setData({
             hiddens: true,
           })
         }
@@ -661,11 +677,14 @@ Page({
   }, //电视播放结束
   //收藏资源
   onCollect: function(e) {
-
-    var that = this;
+    var self = this;
     var openid = e.currentTarget.dataset.openid;
     var res_id = e.currentTarget.dataset.res_id;
     var res_key = e.currentTarget.dataset.res_key;
+    utils.tryCatch(mta.Event.stat('MinePub_List_Favorite', {
+      'openid': openid,
+      'status': true
+    }));
     wx.request({
       url: api_url + '/Smallapp/collect/recLogs',
       header: {
@@ -685,7 +704,7 @@ Page({
             publiclist[i].collect_num = collect_nums;
           }
         }
-        that.setData({
+        self.setData({
           publiclist: publiclist
         })
         /*if (e.data.code == 10000) {
@@ -715,10 +734,14 @@ Page({
   }, //收藏资源结束
   //取消收藏
   cancCollect: function(e) {
-    var that = this;
+    var self = this;
     var res_id = e.currentTarget.dataset.res_id;
     var res_key = e.currentTarget.dataset.res_key;
     var openid = e.currentTarget.dataset.openid;
+    utils.tryCatch(mta.Event.stat('MinePub_List_Favorite', {
+      'openid': openid,
+      'status': false
+    }));
     wx.request({
       url: api_url + '/Smallapp/collect/recLogs',
       header: {
@@ -738,7 +761,7 @@ Page({
             publiclist[i].collect_num = collect_nums;
           }
         }
-        that.setData({
+        self.setData({
           publiclist: publiclist
         })
         /*if (e.data.code == 10000) {

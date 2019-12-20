@@ -6,7 +6,7 @@ var pubdetail;
 var box_mac;
 var openid;
 var api_url = app.globalData.api_url;
-var pageid  = 22;
+var pageid = 22;
 Page({
 
   /**
@@ -14,6 +14,7 @@ Page({
    */
   data: {
     statusBarHeight: getApp().globalData.statusBarHeight,
+    pageFrom: null, // 来源页面地址
     link_type: app.globalData.link_type, //1:外网投屏  2：直连投屏
     is_replay_disabel: false,
     showControl: false,
@@ -24,10 +25,20 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
-    var that = this;
+    var self = this;
+    let pages = getCurrentPages(); //当前页面栈
+    if (pages.length > 1) {
+      self.setData({
+        pageFrom: pages[1].route
+      });
+    } else {
+      self.setData({
+        pageFrom: ''
+      });
+    }
 
-    // console.log('onLoad', 'that.data.link_type', that.data.link_type);
-    if (that.data.link_type == 2) {
+    // console.log('onLoad', 'self.data.link_type', self.data.link_type);
+    if (self.data.link_type == 2) {
       return;
     }
 
@@ -44,7 +55,7 @@ Page({
       },
       success: function(res) {
         if (res.data.code == 10000 && res.data.result.is_have == 1) {
-          that.setData({
+          self.setData({
             is_open_simple: res.data.result.is_open_simple,
             hotel_info: res.data.result,
           })
@@ -59,7 +70,7 @@ Page({
 
       },
       success: function(res) {
-        that.setData({
+        self.setData({
           videoinfo: res.data.result,
           play_num: res.data.result.play_num,
           collect_num: res.data.result.collect_num,
@@ -73,7 +84,7 @@ Page({
   },
   //收藏资源
   onCollect: function(e) {
-    var that = this;
+    var self = this;
     var openid = e.target.dataset.openid;
     var res_id = e.target.dataset.res_id;
 
@@ -90,7 +101,7 @@ Page({
         'status': 1,
       },
       success: function(e) {
-        that.setData({
+        self.setData({
           is_collect: 1,
           collect_num: e.data.result.nums,
         })
@@ -108,7 +119,7 @@ Page({
   }, //收藏资源结束
   //取消收藏
   cancCollect: function(e) {
-    var that = this;
+    var self = this;
     var openid = e.target.dataset.openid;
     var res_id = e.target.dataset.res_id;
 
@@ -127,7 +138,7 @@ Page({
       success: function(e) {
 
 
-        that.setData({
+        self.setData({
           is_collect: 0,
           collect_num: e.data.result.nums,
         })
@@ -146,7 +157,7 @@ Page({
   }, //取消收藏结束
   //点击分享按钮
   onShareAppMessage: function(res) {
-    var that = this;
+    var self = this;
     var openid = res.target.dataset.openid;
     var res_id = res.target.dataset.res_id;
 
@@ -172,7 +183,7 @@ Page({
         },
         success: function(e) {
           if (e.data.code == 10000) {
-            that.setData({
+            self.setData({
               share_num: e.data.result.share_nums,
             })
           }
@@ -203,7 +214,7 @@ Page({
   }, // 分享结束
   //电视播放
   boxShow(e) {
-    var that = this;
+    var self = this;
     var box_mac = e.target.dataset.boxmac;
     var find_id = e.target.dataset.forscreen_id
 
@@ -247,20 +258,20 @@ Page({
                 if (res.confirm) {
 
                   var djs = 10;
-                  that.setData({
+                  self.setData({
                     is_replay_disabel: true
                   })
 
-                  that.setData({
+                  self.setData({
                     djs: djs
                   })
                   var timer8_0 = setInterval(function() {
                     djs -= 1;
-                    that.setData({
+                    self.setData({
                       djs: djs
                     });
                     if (djs == 0) {
-                      that.setData({
+                      self.setData({
                         is_replay_disabel: false,
                       })
                       clearInterval(timer8_0);
@@ -330,7 +341,7 @@ Page({
                     }
 
                   } else { //视频投屏
-                    that.setData({
+                    self.setData({
                       is_box_show: true,
                     })
                     for (var i = 0; i < res_len; i++) {
@@ -407,20 +418,20 @@ Page({
             })
           } else {
             var djs = 10;
-            that.setData({
+            self.setData({
               is_replay_disabel: true
             })
 
-            that.setData({
+            self.setData({
               djs: djs
             })
             var timer8_0 = setInterval(function() {
               djs -= 1;
-              that.setData({
+              self.setData({
                 djs: djs
               });
               if (djs == 0) {
-                that.setData({
+                self.setData({
                   is_replay_disabel: false,
                 })
                 clearInterval(timer8_0);
@@ -490,7 +501,7 @@ Page({
               }
 
             } else { //视频投屏
-              that.setData({
+              self.setData({
                 is_box_show: true,
               })
               for (var i = 0; i < res_len; i++) {
@@ -570,28 +581,30 @@ Page({
   }, //电视播放结束
   //遥控呼大码
   callQrCode: util.throttle(function(e) {
-    var that = this;
+    var self = this;
     openid = e.currentTarget.dataset.openid;
     box_mac = e.currentTarget.dataset.box_mac;
     var qrcode_img = e.currentTarget.dataset.qrcode_img;
     var hotel_info = e.currentTarget.dataset.hotel_info;
-    app.controlCallQrcode(openid, box_mac, qrcode_img, hotel_info, that);
+    app.controlCallQrcode(openid, box_mac, qrcode_img, hotel_info, self);
   }, 3000), //呼大码结束
   //打开遥控器
   openControl: function(e) {
-    var that = this;
+    var self = this;
     var qrcode_url = api_url + '/Smallapp4/index/getBoxQr?box_mac=' + box_mac + '&type=3';
-    that.setData({
+    self.setData({
 
       showControl: true,
       qrcode_img: qrcode_url
     })
-    mta.Event.stat('openControl', { 'linktype': app.globalData.link_type })
+    mta.Event.stat('openControl', {
+      'linktype': app.globalData.link_type
+    })
   },
   //关闭遥控
   closeControl: function(e) {
-    var that = this;
-    that.setData({
+    var self = this;
+    self.setData({
 
       showControl: false,
     })
@@ -599,34 +612,34 @@ Page({
   },
   //遥控退出投屏
   exitForscreen: function(e) {
-    var that = this;
+    var self = this;
     openid = e.currentTarget.dataset.openid;
     box_mac = e.currentTarget.dataset.box_mac;
     var hotel_info = e.currentTarget.dataset.hotel_info;
-    app.controlExitForscreen(openid, box_mac, hotel_info, that);
+    app.controlExitForscreen(openid, box_mac, hotel_info, self);
   },
   //遥控调整音量
   changeVolume: function(e) {
-    var that = this;
+    var self = this;
     box_mac = e.currentTarget.dataset.box_mac;
     var change_type = e.currentTarget.dataset.change_type;
     var hotel_info = e.currentTarget.dataset.hotel_info;
-    app.controlChangeVolume(openid, box_mac, change_type, hotel_info, that);
+    app.controlChangeVolume(openid, box_mac, change_type, hotel_info, self);
 
   },
   //遥控切换节目
   changeProgram: function(e) {
-    var that = this;
+    var self = this;
     box_mac = e.currentTarget.dataset.box_mac;
     var change_type = e.currentTarget.dataset.change_type;
     var hotel_info = e.currentTarget.dataset.hotel_info;
-    app.controlChangeProgram(openid, box_mac, change_type, hotel_info, that);
+    app.controlChangeProgram(openid, box_mac, change_type, hotel_info, self);
   },
   modalConfirm: function(e) {
     console.log(e);
-    var that = this;
+    var self = this;
     var hotel_info = e.target.dataset.hotel_info;
-    app.linkHotelWifi(hotel_info, that);
+    app.linkHotelWifi(hotel_info, self);
   },
   /**
    * 生命周期函数--监听页面初次渲染完成
