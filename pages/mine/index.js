@@ -135,11 +135,7 @@ Page({
     var hotel_info = e.currentTarget.dataset.hotel_info;
     app.controlChangeProgram(openid, box_mac, change_type, hotel_info, self);
   },
-  modalConfirm: function(e) {
-    var self = this;
-    var hotel_info = e.target.dataset.hotel_info;
-    app.linkHotelWifi(hotel_info, self);
-  },
+  
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
