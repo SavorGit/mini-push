@@ -652,3 +652,13 @@ module.exports.ObjectUtil = {
     return obj;
   }
 }
+
+// 对异常处理
+const tryCatch = function(fun) {
+  try {
+    fun;
+  } catch (error) {
+    console.warn(error);
+  }
+}
+module.exports.tryCatch = tryCatch;

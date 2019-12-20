@@ -10,7 +10,7 @@ var cache_key = app.globalData.cache_key;
 let api_url = app.globalData.api_url;
 let box_api_domain = '';
 let httpReg = new RegExp('^http(s)?://', 'i');
-let pageid  = 2;
+let pageid = 2;
 let SavorUtils = {
   Constant: {
     LinkType: {
@@ -80,9 +80,9 @@ let SavorUtils = {
           pictureObjectList: pictureObjectList
         });
         if (status == 1) {
-          mta.Event.stat('findCollectPic', {
+          utils.tryCatch(mta.Event.stat('findCollectPic', {
             'openid': pageContext.data.openid
-          })
+          }));
         }
 
       } else {
@@ -93,9 +93,9 @@ let SavorUtils = {
           mediaObjectList: mediaObjectList
         });
         if (status == 1) {
-          mta.Event.stat('findCollectVideo', {
+          utils.tryCatch(mta.Event.stat('findCollectVideo', {
             'openid': pageContext.data.openid
-          })
+          }));
         }
 
       }
@@ -160,13 +160,13 @@ let SavorUtils = {
         SavorUtils.Netty.push(pageContext, nettyMessageContent); // 向机顶盒推送消息
       }
       if (mediaSubGroupType == SavorUtils.Constant.MediaType.PICTURE) {
-        mta.Event.stat('findBoxShowpic', {
+        utils.tryCatch(mta.Event.stat('findBoxShowpic', {
           'openid': pageContext.data.openid
-        })
+        }));
       } else {
-        mta.Event.stat('findBoxShowVideo', {
+        utils.tryCatch(mta.Event.stat('findBoxShowVideo', {
           'openid': pageContext.data.openid
-        })
+        }));
       }
     },
 
@@ -182,7 +182,7 @@ let SavorUtils = {
       utils.PostRequest(api_url + '/Smallapp21/CollectCount/recCount', {
         res_id: forscreenId
       });
-      //mta.Event.stat('findBoxShow', { 'openid': pageContext.data.openid })
+      //utils.tryCatch(mta.Event.stat('findBoxShow', { 'openid': pageContext.data.openid }));
     }
   },
   Page: {
@@ -454,16 +454,16 @@ Page({
       //看上一个
       mediaScrollIndex--;
       // wx.showTabBar({});
-      mta.Event.stat('findvideoglide', {
+      utils.tryCatch(mta.Event.stat('findvideoglide', {
         'openid': user_info.openid
-      })
+      }));
     } else if (tripY < -(moveExecuteTrip) && self.data.mediaScrollIndex < self.data.mediaObjectList.length - 1) {
       //看下一个
       mediaScrollIndex++;
       // wx.hideTabBar({});
-      mta.Event.stat('findvideoupglide', {
+      utils.tryCatch(mta.Event.stat('findvideoupglide', {
         'openid': user_info.openid
-      })
+      }));
     } else {
       return;
     }
@@ -539,11 +539,11 @@ Page({
     var user_info = wx.getStorageSync(cache_key + 'user_info');
     var id = e.currentTarget.dataset.id;
     var type = e.currentTarget.dataset.type;
-    mta.Event.stat('onVideoEnded', {
+    utils.tryCatch(mta.Event.stat('onVideoEnded', {
       'id': id,
       'types': type,
       'openid': user_info.openid
-    }); //1官方 2精选 3公开
+    })); //1官方 2精选 3公开
   },
 
   // 视频元数据加载完成时触发。
@@ -677,9 +677,9 @@ Page({
         timingFunc: 'linear'
       }
     });
-    mta.Event.stat('findSwichPic', {
+    utils.tryCatch(mta.Event.stat('findSwichPic', {
       'openid': self.data.openid
-    })
+    }));
   },
 
   // 跳转到发现页 - 视频
@@ -720,7 +720,7 @@ Page({
 
     let index = e.currentTarget.dataset.index;
     SavorUtils.User.favorite(self, res_id, c_type, index, 1);
-    //mta.Event.stat('findCollect', { 'openid': self.data.openid })
+    //utils.tryCatch(mta.Event.stat('findCollect', { 'openid': self.data.openid }));
   },
 
   //取消收藏
@@ -786,12 +786,24 @@ Page({
     let pictureIndex = e.target.dataset.picture_index;
     let urls = [];
     for (let row in pictures) {
-      urls[row] = pictures[row]['res_url']
+      urls[row] = pictures[row]['res_url'];
     }
     wx.previewImage({
       current: urls[pictureIndex], // 当前显示图片的http链接
-      urls: urls // 需要预览的图片http链接列表
-    })
+      urls: urls, // 需要预览的图片http链接列表
+      success: function(res) {
+        utils.tryCatch(mta.Event.stat('FindPic_PicList_PreviewImage', {
+          'openid': self.data.openid,
+          'status': 'success'
+        }));
+      },
+      fail: function(e) {
+        utils.tryCatch(mta.Event.stat('FindPic_PicList_PreviewImage', {
+          'openid': self.data.openid,
+          'status': 'fail'
+        }));
+      }
+    });
   },
 
   // 加载更多图片
@@ -830,9 +842,9 @@ Page({
     let index = e.target.dataset.index;
     let pictureObjectList = self.data.pictureObjectList;
     if (!pictureObjectList[index].isOpen) { //打开操作菜单
-      mta.Event.stat('findClickOpenMenu', {
+      utils.tryCatch(mta.Event.stat('findClickOpenMenu', {
         'openid': self.data.openid
-      })
+      }));
     }
 
     pictureObjectList[index].isOpen = !(pictureObjectList[index].isOpen);
@@ -882,15 +894,15 @@ Page({
       }
     }
     var user_info = wx.getStorageSync(cache_key + 'user_info');
-    mta.Event.stat('showfind', {
+    utils.tryCatch(mta.Event.stat('showfind', {
       'openid': user_info.openid
-    })
+    }));
   },
 
   //点击分享按钮
   onShareAppMessage: function(res) {
     var that = this;
-    //mta.Event.stat('findShare', { 'openid': that.data.openid })
+    //utils.tryCatch(mta.Event.stat('findShare', { 'openid': that.data.openid }));
     let index = res.target.dataset.index;
 
     var user_info = wx.getStorageSync('savor_user_info');
@@ -898,13 +910,13 @@ Page({
     var type = res.target.dataset.type;
     var res_type = res.target.dataset.res_type;
     if (res_type == 1) {
-      mta.Event.stat('findSharePic', {
+      utils.tryCatch(mta.Event.stat('findSharePic', {
         'openid': that.data.openid
-      })
+      }));
     } else if (res_type == 2) {
-      mta.Event.stat('findShareVideo', {
+      utils.tryCatch(mta.Event.stat('findShareVideo', {
         'openid': that.data.openid
-      })
+      }));
     }
 
     if (type == 1) {
