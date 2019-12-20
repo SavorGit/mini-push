@@ -12,7 +12,7 @@
     <form bindsubmit="forscreen_video">
       <view class='page_main'>
         <view wx:if="{{is_open_control==false}}" class='cover full_width'>
-          <video src='{{upload_vedio_temp}}'></video>
+          <video src='{{upload_vedio_temp}}' bindplay="onPlayBeforeLauch"></video>
         </view>
 
         <!-- 投视频 -->
@@ -70,7 +70,7 @@
     </view>
     <view class='page_main'>
       <view wx:if="{{is_open_control==false}}" class='cover full_width full_height'>
-        <video class="full_width full_height" src='{{oss_video_url}}'></video>
+        <video class="full_width full_height" src='{{oss_video_url}}' bindplay='onPlayAfterLauch' bindpause='onPauseAfterLauch' bindfullscreenchange='onFullScreenChangeAfterLauch'></video>
       </view>
     </view>
 

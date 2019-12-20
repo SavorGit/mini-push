@@ -248,6 +248,7 @@ module.exports.HttpRequestForLHS = HttpRequestForLHS;
  *                                                              isShowLoading:          boolean,    // 是否展示 Loading
  *                                                              isShowToastForSuccess:  boolean,    // 是否在 success 方法中弹出系统Toast
  *                                                              isShowToastForFail:     boolean,    // 是否在 fail 方法中弹出系统Toast
+ *                                                              complete:               function,   // 完成方法
  *                                                          }             
  */
 const PostRequest = (url, data, successFn, failFn, options) => {
@@ -262,7 +263,8 @@ const PostRequest = (url, data, successFn, failFn, options) => {
     isShowToastForSuccess: options.isShowToastForSuccess,
     success: successFn,
     isShowToastForFail: options.isShowToastForFail,
-    fail: failFn
+    fail: failFn,
+    complete: options.complete
   });
 };
 module.exports.PostRequest = PostRequest;
@@ -278,6 +280,7 @@ module.exports.PostRequest = PostRequest;
  *                                                              isShowLoading:          boolean,    // 是否展示 Loading
  *                                                              isShowToastForSuccess:  boolean,    // 是否在 success 方法中弹出系统Toast
  *                                                              isShowToastForFail:     boolean,    // 是否在 fail 方法中弹出系统Toast
+ *                                                              complete:               function,   // 完成方法
  *                                                          }
  */
 const GetRequest = (url, data, successFn, failFn, options) => {
@@ -292,7 +295,8 @@ const GetRequest = (url, data, successFn, failFn, options) => {
     isShowToastForSuccess: options.isShowToastForSuccess,
     success: successFn,
     isShowToastForFail: options.isShowToastForFail,
-    fail: failFn
+    fail: failFn,
+    complete: options.complete
   });
 };
 module.exports.GetRequest = GetRequest;
