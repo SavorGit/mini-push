@@ -617,13 +617,29 @@ App({
               }
             }
           })
-          mta.Event.stat('scanQrcode', { 'scantype': 1, 'pageid': pageid })
+          let pages = getCurrentPages();
+          let currPage = null;
+          if (pages.length) {
+            currPage = pages[pages.length - 1];
+          }
+          mta.Event.stat('scanQrcode', { 'scantype': 1, 'url': currPage.__route__ })
         }else {
-          mta.Event.stat('scanQrcode', { 'scantype': 0, 'pageid': pageid })
+          let pages = getCurrentPages();
+          let currPage = null;
+          if (pages.length) {
+            currPage = pages[pages.length - 1];
+          }
+          mta.Event.stat('scanQrcode', { 'scantype': 0, 'url': currPage.__route__ })
         }
       }
     });
-    mta.Event.stat('popScanQrcode', { 'pageid': pageid })
+
+    let pages = getCurrentPages();
+    let currPage = null;
+    if (pages.length) {
+      currPage = pages[pages.length - 1];
+    }
+    mta.Event.stat('popScanQrcode', { 'url': currPage.__route__ })
   },
   onLaunch: function() {
     var oss_tmp_key = this.globalData.oss_access_key_id;
