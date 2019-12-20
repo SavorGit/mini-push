@@ -75,11 +75,13 @@ Page({
           intranet_ip: intranet_ip,
           is_btn_disabel: false,
         })
+        mta.Event.stat('wifiChoosePic', { 'status': 1 })
       },
       fail: function(e) {
         wx.navigateBack({
           delta: 1,
         })
+        mta.Event.stat('wifiChoosePic', { 'status': 0 })
       }
     })
   },
@@ -318,6 +320,7 @@ Page({
 
       },
     });
+    mta.Event.stat("wifichoosepic", {})
   },
 
   exitForscreend: function(res) {
