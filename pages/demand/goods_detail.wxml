@@ -20,7 +20,7 @@
 <block wx:if="{{link_type != 2}}">
   <!-- <view class="container flex-column-center-flex_start theme-container" style='height: calc(100vh - 46px - {{statusBarHeight}}px);'> -->
   <view class="container flex-column-center-flex_start theme-container" style='height: calc({{documentHeight}}px - 46px);'>
-    <video class="goods-video" src="{{goods_info.video_url}}"></video>
+    <video class="goods-video" src="{{goods_info.video_url}}" bindplay="playGoodsVideo" bindpause="pauseGoodsVideo" bindfullscreenchange="fullscreenGoodsVideo" ></video>
     <view class='operation flex-row-center-flex_end font_666666_26'>
       <view class="flex-row-center-flex_start">
         <!-- <label class="fa fa-television fa-lg">{{goods_info.play_num}}</label> -->

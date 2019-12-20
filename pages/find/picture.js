@@ -1,8 +1,10 @@
 // pages/find/picture.js
 const app = getApp();
+let utils = require("../../utils/util.js");
+let mta = require('../../utils/mta_analysis.js');
 var pubdetail;
 var api_url = app.globalData.api_url;
-var pageid  = 21;
+var pageid = 21;
 Page({
 
   /**
@@ -54,6 +56,7 @@ Page({
   },
   //预览图片
   previewImage: function(e) {
+    let self = this;
     var current = e.target.dataset.src;
     var pkey = e.target.dataset.pkey;
     var urls = [];
@@ -64,7 +67,19 @@ Page({
     //console.log(pkey);
     wx.previewImage({
       current: urls[pkey], // 当前显示图片的http链接
-      urls: urls // 需要预览的图片http链接列表
+      urls: urls, // 需要预览的图片http链接列表
+      success: function(res) {
+        utils.tryCatch(mta.Event.stat('FindPic_PicDetail_PreviewImage', {
+          'openid': self.data.openid,
+          'status': 'success'
+        }));
+      },
+      fail: function(e) {
+        utils.tryCatch(mta.Event.stat('FindPic_PicDetail_PreviewImage', {
+          'openid': self.data.openid,
+          'status': 'fail'
+        }));
+      }
     })
   },
   //收藏资源
@@ -74,6 +89,11 @@ Page({
     var res_id = e.target.dataset.res_id;
 
     var res_type = e.target.dataset.type;
+    utils.tryCatch(mta.Event.stat('FindPic_PicDetail_Favorite', {
+      'openid': that.data.openid,
+      'boxmac': that.data.box_mac,
+      'status': true
+    }));
     wx.request({
       url: api_url + '/Smallapp/collect/recLogs',
       header: {
@@ -109,6 +129,11 @@ Page({
     var res_id = e.target.dataset.res_id;
 
     var res_type = e.target.dataset.type;
+    utils.tryCatch(mta.Event.stat('FindPic_PicDetail_Favorite', {
+      'openid': that.data.openid,
+      'boxmac': that.data.box_mac,
+      'status': false
+    }));
     wx.request({
       url: api_url + '/Smallapp/collect/recLogs',
       header: {
@@ -149,8 +174,11 @@ Page({
     var res_type = res.target.dataset.type;
     var pubdetail = res.target.dataset.pubdetail;
     var img_url = pubdetail[0]['res_url'];
-    console.log(img_url);
-
+    // console.log(img_url);
+    utils.tryCatch(mta.Event.stat('FindPic_PicDetail_Share', {
+      'openid': that.data.openid,
+      'boxmac': that.data.box_mac
+    }));
     var share_num = res.target.dataset.share_num;
 
     if (res.from === 'button') {
@@ -204,6 +232,10 @@ Page({
     var that = this;
     var box_mac = e.target.dataset.boxmac;
     var find_id = e.target.dataset.forscreen_id
+    utils.tryCatch(mta.Event.stat('FindPic_PicDetail_LaunchTV', {
+      'openid': that.data.openid,
+      'boxmac': that.data.box_mac
+    }));
     if (box_mac == '') {
       app.scanQrcode(pageid);
     } else {

@@ -2,8 +2,8 @@
 
 let app = getApp();
 let systemInfo = app.SystemInfo;
-let utils = require("../../utils/util.js")
-var mta = require('../../utils/mta_analysis.js')
+let utils = require("../../utils/util.js");
+var mta = require('../../utils/mta_analysis.js');
 let touchEvent = [];
 let touchMoveExecuteTrip = '160rpx';
 var cache_key = app.globalData.cache_key;
@@ -84,7 +84,11 @@ let SavorUtils = {
             'openid': pageContext.data.openid
           }));
         }
-
+        utils.tryCatch(mta.Event.stat('FindPic_PicList_Favorite', {
+          'openid': pageContext.data.openid,
+          'boxmac': pageContext.data.box_mac,
+          'status': status == 1
+        }));
       } else {
         let mediaObjectList = pageContext.data.mediaObjectList;
         mediaObjectList[index].is_collect = status;
@@ -97,7 +101,11 @@ let SavorUtils = {
             'openid': pageContext.data.openid
           }));
         }
-
+        utils.tryCatch(mta.Event.stat('FindVideo_VideoList_Favorite', {
+          'openid': pageContext.data.openid,
+          'boxmac': pageContext.data.box_mac,
+          'status': status == 1
+        }));
       }
     }, ({
       errMsg
@@ -520,13 +528,23 @@ Page({
   // 当开始/继续播放时触发play事件
   onVideoPlay: function(e) {
     let self = this;
-    // console.log('full_scroll.Page.onVideoPlay', e);
+    if (utils.verbose == true) {
+      console.log('full_scroll.Page.onVideoPlay', e);
+    }
+    utils.tryCatch(mta.Event.stat('FindVideo_VideoList_Play', {
+      'openid': self.data.openid
+    }));
   },
 
   // 当暂停播放时触发 pause 事件
   onVideoPause: function(e) {
     let self = this;
-    // console.log('full_scroll.Page.onVideoPause', e);
+    if (utils.verbose == true) {
+      console.log('full_scroll.Page.onVideoPause', e);
+    }
+    utils.tryCatch(mta.Event.stat('FindVideo_VideoList_Pause', {
+      'openid': self.data.openid
+    }));
   },
 
   // 当播放到末尾时触发 ended 事件
@@ -703,6 +721,9 @@ Page({
       }
     });
     wx.createVideoContext('JohnVideo' + self.data.mediaScrollIndex).play();
+    utils.tryCatch(mta.Event.stat('FindPic_PicList_GotoVideoList', {
+      'openid': self.data.openid
+    }));
   },
 
   //收藏资源
@@ -846,7 +867,10 @@ Page({
         'openid': self.data.openid
       }));
     }
-
+    utils.tryCatch(mta.Event.stat('FindPic_PicList_OptionMore', {
+      'openid': self.data.openid,
+      'status': !pictureObjectList[index].isOpen ? 'open' : 'close'
+    }));
     pictureObjectList[index].isOpen = !(pictureObjectList[index].isOpen);
     self.setData({
       pictureObjectList: pictureObjectList
@@ -918,7 +942,6 @@ Page({
         'openid': that.data.openid
       }));
     }
-
     if (type == 1) {
       var res_id = res.target.dataset.id;
       var c_type = 3;
