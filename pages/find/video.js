@@ -1,6 +1,6 @@
 // pages/find/video.js
 const app = getApp();
-const util = require('../../utils/util.js')
+const utils = require('../../utils/util.js')
 var mta = require('../../utils/mta_analysis.js')
 var pubdetail;
 var box_mac;
@@ -89,6 +89,11 @@ Page({
     var res_id = e.target.dataset.res_id;
 
     var res_type = e.target.dataset.type;
+    utils.tryCatch(mta.Event.stat('FindVideo_VideoDetail_Favorite', {
+      'openid': openid,
+      'from': self.data.pageFrom,
+      'status': true
+    }));
     wx.request({
       url: api_url + '/Smallapp/collect/recLogs',
       header: {
@@ -124,6 +129,11 @@ Page({
     var res_id = e.target.dataset.res_id;
 
     var res_type = e.target.dataset.type;
+    utils.tryCatch(mta.Event.stat('FindVideo_VideoDetail_Favorite', {
+      'openid': openid,
+      'from': self.data.pageFrom,
+      'status': false
+    }));
     wx.request({
       url: api_url + '/Smallapp/collect/recLogs',
       header: {
@@ -167,6 +177,10 @@ Page({
 
     var share_num = res.target.dataset.share_num;
 
+    utils.tryCatch(mta.Event.stat('FindVideo_VideoDetail_Share', {
+      'openid': openid,
+      'from': self.data.pageFrom
+    }));
     if (res.from === 'button') {
       // 转发成功
       share_num = share_num++;
@@ -212,12 +226,26 @@ Page({
       }
     }
   }, // 分享结束
+
+  onVideoPlay: function(e) {
+    var self = this;
+    utils.tryCatch(mta.Event.stat('FindVideo_VideoDetail_Play', {
+      'openid': openid,
+      'from': self.data.pageFrom
+    }));
+  },
+
   //电视播放
   boxShow(e) {
     var self = this;
     var box_mac = e.target.dataset.boxmac;
     var find_id = e.target.dataset.forscreen_id
 
+    utils.tryCatch(mta.Event.stat('FindVideo_VideoDetail_LaunchTV', {
+      'openid': openid,
+      'from': self.data.pageFrom,
+      'boxmac': box_mac
+    }));
     if (box_mac == '') {
       app.scanQrcode(pageid);
     } else {
@@ -580,7 +608,7 @@ Page({
     }
   }, //电视播放结束
   //遥控呼大码
-  callQrCode: util.throttle(function(e) {
+  callQrCode: utils.throttle(function(e) {
     var self = this;
     openid = e.currentTarget.dataset.openid;
     box_mac = e.currentTarget.dataset.box_mac;

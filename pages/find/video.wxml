@@ -19,7 +19,7 @@
             <label class="one-line-overflow">{{videoinfo.public_text}}</label>
           </view>
           <view wx:if="{{is_box_show==false}}" class='media'>
-            <video src="{{videoinfo.pubdetail[0].res_url}}"></video>
+            <video src="{{videoinfo.pubdetail[0].res_url}}" bindplay="onVideoPlay"></video>
           </view>
           <view wx:else class='media'>
             <image mode='aspectFit' src='{{videoinfo.pubdetail[0].vide_img}}'></image>
