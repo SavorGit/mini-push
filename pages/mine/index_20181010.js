@@ -256,6 +256,18 @@ Page({
     var hotel_info = e.target.dataset.hotel_info;
     app.linkHotelWifi(hotel_info, that);
   },
+  clickPublicContent: function(e){
+    mta.Event.stat("clickpubliccontent", {})
+  },
+  clickPublicContentMore: function(e){
+    mta.Event.stat("clickpubliccontentmore", {})
+  },
+  clickLikeContent: function(e){
+    mta.Event.stat("clicklikecontent", {})
+  },
+  clickLikeContentMore:function(e){
+    mta.Event.stat("clicklikecontentmore", {})
+  },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
@@ -325,6 +337,7 @@ Page({
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function () {
+    mta.Event.stat("pulltorefresh", {})
     this.onLoad();
     //wx.showNavigationBarLoading();
     // 隐藏导航栏加载框

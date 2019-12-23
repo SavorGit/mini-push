@@ -25,7 +25,7 @@
       <view class="swiper-tab-item active">我的公开</view>
 
       <!-- 如果没有数据更多不显示 -->
-      <navigator wx:if="{{publiclist  !=''}}" class="swiper-tab-item font_666666_24" style='margin-left: 340rpx;margin-right: 0rpx;' url='/pages/mine/index?box_mac={{box_mac}}'>查看更多>></navigator>
+      <navigator wx:if="{{publiclist  !=''}}" class="swiper-tab-item font_666666_24" style='margin-left: 340rpx;margin-right: 0rpx;' url='/pages/mine/index?box_mac={{box_mac}}'bindtap="clickPublicContentMore">查看更多>></navigator>
     </view>
     <view class='content'>
       <view class='con_main flex-row-center-space_between'>
@@ -36,7 +36,7 @@
             <!-- <view bindtap="tts" data-type="pub"  data-index="{{index}}">ddddd</view> -->
             <view class='yingtao'>
               
-              <navigator url="/pages/mine/index?box_mac={{box_mac}}">
+              <navigator url="/pages/mine/index?box_mac={{box_mac}}" bindtap="clickPublicContent" >
                 <!-- <image wx:if="{{link_type!=2}}" class="pic_show" mode='aspectFill' src="{{bean.imgurl}}"></image>
                 <image wx:else class="pic_show" mode='aspectFill' src="/images/imgs/default-pic.png"></image> -->
                 <image binderror="bindImgErro" data-type="pub"  data-index="{{index}}" class="pic_show" mode='aspectFill' src="{{bean.imgurl}}"></image>
@@ -69,7 +69,7 @@
       <view class="swiper-tab-item active">我喜欢</view>
 
       <!-- 如果没有数据更多不显示 -->
-      <navigator wx:if="{{collectlist !=''}}" class="swiper-tab-item font_666666_24" style='margin-left: 340rpx;margin-right: 0rpx;' url='/pages/mine/favorite?box_mac={{box_mac}}'>查看更多>></navigator>
+      <navigator wx:if="{{collectlist !=''}}" class="swiper-tab-item font_666666_24" style='margin-left: 340rpx;margin-right: 0rpx;' url='/pages/mine/favorite?box_mac={{box_mac}}' bindtap="clickLikeContentMore">查看更多>></navigator>
     </view>
     <view class='content'>
       <view class='con_main flex-row-center-space_between'>
@@ -79,7 +79,7 @@
           <view class="weui-grid" wx:for="{{collectlist}}" wx:key="key" wx:for-item="bean" wx:for-index="index">
             <!-- <view bindtap="tts" data-type="col"  data-index="{{index}}">ddddd</view> -->
             <view class='yingtao' wx:if="{{bean.res_type=='1'}}">
-              <navigator class='full_width full_height' url="/pages/find/picture?forscreen_id={{bean.res_id}}&box_mac={{box_mac}}">
+              <navigator class='full_width full_height' url="/pages/find/picture?forscreen_id={{bean.res_id}}&box_mac={{box_mac}}" bindtap="clickLikeContent">
                 <!-- <image wx:if="{{link_type!=2}}" class="pic_show" mode='aspectFill' src="{{bean.imgurl}}"></image>
                 <image wx:else class="pic_show" mode='aspectFill' src="/images/imgs/default-pic.png"></image> -->
                 <image binderror="bindImgErro" data-type="col"  data-index="{{index}}" class="pic_show" mode='aspectFill' src="{{bean.imgurl}}"></image>
@@ -94,7 +94,7 @@
               </navigator>
             </view>
             <view class='yingtao' wx:else>
-              <navigator wx:if="{{bean.type==1 || bean.type==3}}" url="/pages/forscreen/video/launch_video?video_url={{bean.res_url}}&video_name={{bean.title}}&box_mac={{box_mac}}&res_id={{bean.res_id}}&filename={{bean.filename}}&video_img_url={{bean.imgurl}}">
+              <navigator wx:if="{{bean.type==1 || bean.type==3}}" url="/pages/forscreen/video/launch_video?video_url={{bean.res_url}}&video_name={{bean.title}}&box_mac={{box_mac}}&res_id={{bean.res_id}}&filename={{bean.filename}}&video_img_url={{bean.imgurl}}" bindtap="clickLikeContent">
                 <image wx:if="{{link_type!=2}}" class="pic_show" mode='aspectFill' src="{{bean.imgurl}}"></image>
                 <image wx:else class="pic_show" mode='aspectFill' src="/images/imgs/default-pic.png"></image>
                 <view class='cover'>
@@ -105,7 +105,7 @@
                 </view>
               </navigator>
 
-              <navigator wx:if="{{bean.type==2}}" class='full_width full_height' url="/pages/find/video?forscreen_id={{bean.res_id}}&box_mac={{box_mac}}">
+              <navigator wx:if="{{bean.type==2}}" class='full_width full_height' url="/pages/find/video?forscreen_id={{bean.res_id}}&box_mac={{box_mac}}" bindtap="clickLikeContent">
                 <image wx:if="{{link_type!=2}}" class="pic_show" mode='aspectFill' src="{{bean.imgurl}}"></image>
                 <image wx:else class="pic_show" mode='aspectFill' src="/images/imgs/default-pic.png"></image>
                 <view class='cover'>
