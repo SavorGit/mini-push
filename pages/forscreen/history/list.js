@@ -405,7 +405,8 @@ Page({
   onFullScreenChange: function(e) {
     var self = this;
     utils.tryCatch(mta.Event.stat('LaunchHistory_Video_FullScreen', {
-      'openid': self.data.openid
+      'openid': self.data.openid,
+      'fullscreen': e.detail.fullScreen
     }));
   },
   //上拉刷新
