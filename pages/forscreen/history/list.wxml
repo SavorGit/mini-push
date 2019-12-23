@@ -22,25 +22,20 @@
             <image bindtap="previewImage" data-pkey="{{indexs}}" data-src="{{bean.list}}" mode='aspectFill' src="{{item.imgurl}}"></image>
           </view>
         </view>
-
         <view class="weui-grids" wx:if="{{bean.res_type == 1 && (bean.res_nums=='2' || bean.res_nums=='3' || bean.res_nums=='5' || bean.res_nums=='6')}}">
-
           <view class="weui-grid" wx:for="{{bean.list}}" wx:key="pkey" wx:for-item="item" wx:for-index="indexs">
             <image bindtap="previewImage" data-pkey="{{indexs}}" data-src="{{bean.list}}" class="pic_show" mode='aspectFill' src="{{item.res_url}}"></image>
           </view>
         </view>
-
         <view class="weui-grids" wx:if="{{bean.res_type == 1 && bean.res_nums=='4'}}">
           <view class="weui-grid_4" wx:for="{{bean.list}}" wx:key="pkey" wx:for-item="item" wx:for-index="indexs">
             <image bindtap="previewImage" data-pkey="{{indexs}}" data-src="{{bean.pubdetail}}" class="pic_show" mode='aspectFill' src="{{item.res_url}}"></image>
           </view>
-
         </view>
         <view class="video" wx:if="{{bean.res_type == 2 }}">
           <view wx:for="{{bean.list}}" wx:key="pkey" wx:for-item="item" wx:for-index="indexs">
             <navigator bindtap='findLog' data-openid='{{openid}}' data-box_mac='{{box_mac}}' data-title='' data-tx_url='{{item.forscreen_url}}' data-id='{{bean.forscreen_id}}' data-duration="{{item.duration}}" url="">
-
-              <video src="{{item.res_url}}"></video>
+              <video src="{{item.res_url}}" bindplay="onVideoPlay" bindpause="onVideoPause" bindfullscreenchange="onFullScreenChange"></video>
             </navigator>
           </view>
         </view>
