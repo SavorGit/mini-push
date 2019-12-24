@@ -1,3 +1,5 @@
+const utils = require('../../../utils/util.js')
+var mta = require('../../../utils/mta_analysis.js')
 const app = getApp();
 //var tmp;
 var openid;
@@ -82,12 +84,13 @@ Page({
         })
         uploadInfos(res, box_mac, openid);
         lead(openid);
-        
+        utils.tryCatch(mta.Event.stat('choosePic', { 'status': 1 }))
       },
       fail:function(res){
         wx.navigateBack({
           delta: 1
         })
+        utils.tryCatch(mta.Event.stat('choosePic', { 'status': 0 }))
       }
     })
     
@@ -172,6 +175,9 @@ Page({
           showThird: false,
           is_btn_disabel:false,
         })
+        utils.tryCatch(mta.Event.stat('reChoosePic', { 'status': 1 }))
+      },fail:function(res){
+        utils.tryCatch(mta.Event.stat('reChoosePic', { 'status': 0 }))
       }
     })
     function uploadInfos(res, box_mac, openid) {
@@ -294,6 +300,12 @@ Page({
               }
             }
           })
+          if (public_text == '' || typeof (public_text) == 'undefined') {
+            var ispublictext = 0;
+          } else {
+            var ispublictext = 1;
+          }
+          utils.tryCatch(mta.Event.stat('forscreenImg', { 'picnums': upimgs.length, 'forscreenchar': forscreen_char, 'ispublictext': ispublictext, 'is_share': is_share, 'isforscreen': 1 }))
         }else {
           /*if (is_open_simple > 0) {
             timer8_0 = setTimeout(function () {
@@ -320,11 +332,17 @@ Page({
           });
           app.recordFormId(openid,formId);
           
-
+          if (public_text == '' || typeof (public_text) == 'undefined') {
+            var ispublictext = 0;
+          } else {
+            var ispublictext = 1;
+          }
+          utils.tryCatch(mta.Event.stat('forscreenImg', { 'picnums': upimgs.length, 'forscreenchar': forscreen_char, 'ispublictext': ispublictext, 'is_share': is_share,'isforscreen':0 }))
         }
       }
     })
-
+    
+    
     
     function uploadOssNew(policy, signature, img_url, resource_size,box_mac, openid, timestamp, flag, img_len, forscreen_char, forscreen_id, res_sup_time, avatarUrl, nickName, public_text, timer8_0, tmp_imgs) {
       var filename = img_url;
@@ -357,6 +375,7 @@ Page({
           /*if (order == img_len) {
             clearTimeout(timer8_0);
           }*/
+          
           that.setData({
             showThird: true,
             showTpBt: false,
@@ -440,7 +459,12 @@ Page({
             },
           });
           
+          if (order == img_len) {
+            var end_time = (new Date()).valueOf();
+            var diff_time = end_time - forscreen_id;
 
+            utils.tryCatch(mta.Event.stat('forscreenImgWastTime', { 'uploadtime': diff_time })); 
+          }
         },
         complete: function (es) {
           tmp_percent[flag] = { "percent": 100 };
@@ -607,6 +631,7 @@ Page({
             imgs: '["' + forscreen_img + '"]'
           },
         });
+        utils.tryCatch(mta.Event.stat("switchpic", {}))
       },
     })
   },//指定单张图片投屏结束
@@ -634,6 +659,7 @@ Page({
           icon: 'none',
           duration: 2000
         });
+        utils.tryCatch(mta.Event.stat('exitForscreen', { 'status': 1 }))
       },
       fail: function (res) {
         wx.showToast({
@@ -641,6 +667,7 @@ Page({
           icon: 'none',
           duration: 2000
         })
+        utils.tryCatch(mta.Event.stat('exitForscreen', { 'status': 0 }))
       }
     })
   },//退出投屏结束
@@ -788,6 +815,8 @@ Page({
                     })
 
                   }
+                  utils.tryCatch(mta.Event.stat('replayForImgHistory', { 'isforscreen': 1,'restype':1 }));
+                  
                 } else {//视频投屏
                   for (var i = 0; i < res_len; i++) {
                     wx.request({
@@ -854,6 +883,7 @@ Page({
                       }
                     });
                   }
+                  utils.tryCatch(mta.Event.stat('replayForImgHistory', { 'isforscreen': 1, 'restype': 2 }));
                 }
               } 
             },
@@ -919,6 +949,7 @@ Page({
               })
 
             }
+            utils.tryCatch(mta.Event.stat('replayForImgHistory', { 'isforscreen': 0, 'restype': 1 }));
           } else {//视频投屏
             for (var i = 0; i < res_len; i++) {
               wx.request({
@@ -977,6 +1008,7 @@ Page({
                 }
               });
             }
+            utils.tryCatch(mta.Event.stat('replayForImgHistory', { 'isforscreen': 0, 'restype': 2 }));
           }
         }
       }
@@ -1087,7 +1119,12 @@ Page({
   phonecallevent: function (e) {
     var tel = e.target.dataset.tel;
     wx.makePhoneCall({
-      phoneNumber: tel
+      phoneNumber: tel,
+      success:function(res){
+        utils.tryCatch(mta.Event.stat('forImgPhoneCall', { 'status': 1 }))
+      },fail:function(res){
+        utils.tryCatch(mta.Event.stat('forImgPhoneCall', { 'status': 0 }))
+      }
     })
   },
   closeLead:function (e){
@@ -1122,4 +1159,14 @@ Page({
       }
     })
   },
+  goToBack:function(e){
+    var that = this;
+    var params = that.data.showThird
+    if(params==true){
+      var status =1;
+    }else {
+      var status = 0;  
+    }
+    app.goToBack(status);
+  }
 })

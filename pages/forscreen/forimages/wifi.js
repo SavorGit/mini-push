@@ -1,5 +1,5 @@
 // pages/launch/pic/index.js
-const util = require('../../../utils/util.js')
+const utils = require('../../../utils/util.js')
 var mta = require('../../../utils/mta_analysis.js')
 const app = getApp()
 var box_mac;
@@ -162,6 +162,7 @@ Page({
       };
     }
     var forscreen_id = (new Date()).valueOf();
+    var start_time   = (new Date()).getTime();
     var filename_arr = [];
     for (var i = 0; i < img_lenth; i++) {
 
@@ -176,6 +177,8 @@ Page({
         name: 'fileUpload',
         success: function(res) {
           if (i == img_lenth) {
+            var end_time = (new Date()).getTime();
+            var diff_time =  end_time - start_time;
             var info_rt = JSON.parse(res.data);
             if (info_rt.code == 1001) {
               that.setData({
@@ -188,6 +191,7 @@ Page({
                 }
               })
             }
+            utils.tryCatch(mta.Event.stat('wifiPicUploadWasteTime', { 'wasttime': diff_time }));
           }
         },
         fail: function({
@@ -208,6 +212,7 @@ Page({
       });
       sleep(1);
     }
+    
 
     function sleep(delay) {
       var start = (new Date()).getTime();
@@ -223,7 +228,7 @@ Page({
       forscreen_char: forscreen_char,
       hiddens: true,
     })
-
+    utils.tryCatch(mta.Event.stat('wifiPicForscreen', { 'picnums': upimgs.length }));
   },
   chooseImage: function(res) {
     var that = this;
@@ -265,6 +270,9 @@ Page({
           is_upload: 0,
           is_btn_disabel: false,
         })
+        utils.tryCatch(mta.Event.stat('wifiPicRechoose', { 'status': 1 }));
+      },fail:function(res){
+        utils.tryCatch(mta.Event.stat('wifiPicRechoose', { 'status': 0 }));
       }
     })
   },
@@ -321,7 +329,7 @@ Page({
 
       },
     });
-    mta.Event.stat("wifichoosepic", {})
+    utils.tryCatch(mta.Event.stat("wifiswitchpic", {}));
   },
 
   exitForscreend: function(res) {
@@ -342,6 +350,7 @@ Page({
             icon: 'none',
             duration: 2000
           });
+          utils.tryCatch(mta.Event.stat('wifiPicExitForscreen', { 'status': 1 }));
         } else if (res.data.code == 1001) {
           that.setData({
             wifiErr: {
@@ -352,6 +361,7 @@ Page({
               'type': 3
             }
           })
+          utils.tryCatch(mta.Event.stat('wifiPicExitForscreen', { 'status': 0 }));
         }
 
       },
@@ -366,13 +376,14 @@ Page({
         wx.navigateBack({
           delta: 1,
         })
+        utils.tryCatch(mta.Event.stat('wifiPicExitForscreen', { 'status': 0 }));
       },
     })
-
-
+    
+    
   },
   //遥控呼大码
-  callQrCode: util.throttle(function(e) {
+  callQrCode: utils.throttle(function(e) {
     //app.controlCallQrcode(intranet_ip, openid);
     var that = this;
     openid = e.currentTarget.dataset.openid;
@@ -425,6 +436,11 @@ Page({
     var hotel_info = e.target.dataset.hotel_info;
     app.linkHotelWifi(hotel_info, that);
   },
+  goToBack:function(e){
+    var that = this;
+    var is_upload = that.data.is_upload;
+    app.goToBack(is_upload);
+  },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
@@ -443,7 +459,7 @@ Page({
    * 生命周期函数--监听页面隐藏
    */
   onHide: function() {
-
+    
   },
 
   /**
