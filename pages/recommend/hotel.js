@@ -48,7 +48,6 @@ Page({
     var city_list = that.data.objectCityArray;
     var picCityIndex = e.detail.value //切换之后城市key
     var cityIndex = that.data.cityIndex; //切换之前城市key
-
     if (picCityIndex != cityIndex) {
       that.setData({
         cityIndex: picCityIndex,
@@ -104,6 +103,7 @@ Page({
         })
       }
     }
+    mta.Event.stat('chooseCity', { 'cityname': city_list[picCityIndex].region_name })
   },
   //切换区域
   bindAreaPickerChange: function (e) {
@@ -117,7 +117,6 @@ Page({
     var city_list = that.data.objectCityArray;
     var cityIndex = that.data.cityIndex; //城市key
     var area_id = city_list[cityIndex].id; //城市id
-
     var county_id = area_list[areaIndex].id; //区域id
 
     var food_style_list = that.data.objectCuisineArray;
@@ -149,6 +148,7 @@ Page({
         }
       })
     }
+    mta.Event.stat('chooseArea', { 'cityname': city_list[cityIndex].region_name, 'areaname': area_list[areaIndex].region_name })
   },
   //切换菜系
   bindCuiPickerChange: function (e) {
@@ -167,7 +167,6 @@ Page({
     var county_id = county_list[areaIndex].id; //区域id
 
     var food_style_id = cui_list[cuisineIndex].id; //菜系id
-
     var avg_exp_list = that.data.objectPerCapitaPayArray;
     var perCapitaPayIndex = that.data.perCapitaPayIndex;
     var avg_exp_id = avg_exp_list[perCapitaPayIndex].id; //人均消费id
@@ -194,8 +193,7 @@ Page({
         }
       })
     }
-
-
+    mta.Event.stat('chooseCuisines', { 'name': cui_list[cuisineIndex].name })
   },
   //切换消费水平
   bindPayPickerChange: function (e) {
@@ -206,7 +204,6 @@ Page({
       perCapitaPayIndex: perCapitaPayIndex
     })
     var avg_exp_id = pay_list[perCapitaPayIndex].id //人均消费id
-
     var city_list = that.data.objectCityArray;
     var cityIndex = that.data.cityIndex; //城市key
     var area_id = city_list[cityIndex].id; //城市id
@@ -241,12 +238,14 @@ Page({
         }
       })
     }
+    mta.Event.stat('chooseAvgprice', { 'price': pay_list[perCapitaPayIndex].name })
   },
   phonecallevent: function (e) {
     var tel = e.target.dataset.tel;
     wx.makePhoneCall({
       phoneNumber: tel
     })
+    mta.Event.stat('clickHotelTel', { 'hotelid': e.target.dataset.hotelid, 'tel': tel })
   },
   /**
    * 生命周期函数--监听页面加载
@@ -385,6 +384,7 @@ Page({
               })
             }
           })
+          mta.Event.stat('getLocationInfo', { 'ltype': 2 })
         },
         fail: function (e) {
           that.setData({
@@ -425,6 +425,7 @@ Page({
               })
             }
           })
+          mta.Event.stat('getLocationInfo', { 'ltype': 1 })
         }
       })
       //获取菜系列表
@@ -536,7 +537,7 @@ Page({
         })
       }
     }
-    
+    mta.Event.stat("hotelswipeup", {})
   },
 
   previewImage: function (e) {
@@ -549,6 +550,7 @@ Page({
       current: urls[0], // 当前显示图片的http链接
       urls: urls // 需要预览的图片http链接列表
     })
+    mta.Event.stat('clickHotelImg', { 'hotelid': e.currentTarget.dataset.hotelid })
   },
   closeHotelHind: function (e) {
     var that = this;
