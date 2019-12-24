@@ -135,7 +135,7 @@ Page({
     var hotel_info = e.currentTarget.dataset.hotel_info;
     app.controlChangeProgram(openid, box_mac, change_type, hotel_info, self);
   },
-  
+
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
@@ -785,4 +785,7 @@ Page({
       }
     })
   }, //取消收藏结束
+  goToBack: function(e) {
+    app.goToBack();
+  }
 })

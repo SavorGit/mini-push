@@ -540,5 +540,8 @@ Page({
    */
   onShareAppMessage: function() {
 
+  },
+  goToBack: function(e) {
+    app.goToBack();
   }
 })

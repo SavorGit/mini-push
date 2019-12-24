@@ -710,4 +710,7 @@ Page({
   onReachBottom: function() {
 
   },
+  goToBack: function(e) {
+    app.goToBack();
+  }
 })
