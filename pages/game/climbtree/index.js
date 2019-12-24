@@ -1,4 +1,6 @@
 // pages/game/climbtree/index.js
+const utils = require('../../../utils/util.js')
+var mta = require('../../../utils/mta_analysis.js')
 const app = getApp()
 var djs = 60;
 var api_url = app.globalData.api_url;
@@ -11,20 +13,20 @@ Page({
     statusBarHeight: getApp().globalData.statusBarHeight,
     box_mac: '',
     game_id: '',
-    showButton:true,
+    showButton: true,
     hiddens: true,
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function (options) {
+  onLoad: function(options) {
     //wx.hideShareMenu();
-    if(app.globalData.link_type==2){
+    if (app.globalData.link_type == 2) {
       wx.navigateBack({
         delta: 1,
-        success: function (res) {
-          
+        success: function(res) {
+
           wx.showToast({
             title: '直连方式该游戏功能不可用',
             icon: 'none',
@@ -32,7 +34,7 @@ Page({
           })
         }
       })
-    }else {
+    } else {
       var that = this;
       var box_mac = options.box_mac;
       var game_id = options.game_id;
@@ -42,11 +44,12 @@ Page({
       })
     }
   },
-  lunchGame:function(res){
+  lunchGame: function(res) {
     djs = 60;
     var that = this;
-    
-    
+    let userInfo = wx.getStorageSync("savor_user_info");
+    let openId = userInfo.openid;
+
     // wx.showToast({
     //   title: '房间创建中，请稍后...',
     //   icon: 'none',
@@ -54,14 +57,19 @@ Page({
     // })
     var box_mac = res.target.dataset.box_mac;
     var game_id = res.target.dataset.game_id;
+    utils.tryCatch(mta.Event.stat('Game_Detail_Launch', {
+      'openid': openId,
+      'gameid': game_id,
+      'boxmac': box_mac
+    }));
     wx.request({
-      url: api_url+'/Games/Index/getGameInfo',
-      data:{
-        game_id:game_id
+      url: api_url + '/Games/Index/getGameInfo',
+      data: {
+        game_id: game_id
       },
-      success:function(res){
-        if(res.data.code==10000){
-          var game_h5_url = "http://"+res.data.result.game_url + box_mac;
+      success: function(res) {
+        if (res.data.code == 10000) {
+          var game_h5_url = "http://" + res.data.result.game_url + box_mac;
           var game_m_h5_url = "https://" + res.data.result.game_url + box_mac + '/' + res.data.result.game_m_url;
           // wx.request({
           //   url: api_url+'/Games/ClimbTree/clearLaunchGame',
@@ -71,41 +79,41 @@ Page({
           // })
 
           wx.request({
-            url: api_url+'/Games/ClimbTree/isHaveGameimg',
+            url: api_url + '/Games/ClimbTree/isHaveGameimg',
             data: {
               box_mac: box_mac,
             },
-            success:function(rtt){
+            success: function(rtt) {
               var is_gaming = rtt.data.result.is_gaming;
-              if(is_gaming==1){
+              if (is_gaming == 1) {
                 wx.showToast({
                   title: '该房间已经创建游戏!',
                   icon: 'none',
                   duration: 2000
                 })
-              }else {
+              } else {
                 that.setData({
                   showButton: false,
                   hiddens: false,
                 })
-                
+
                 wx.request({
-                  url: api_url+'/Netty/index/index',
+                  url: api_url + '/Netty/index/index',
                   data: {
                     box_mac: box_mac,
                     msg: '{"action":110,"url":"' + game_h5_url + '"}'
                   },
-                  success: function (rtt) {
+                  success: function(rtt) {
 
 
-                    var interval = setInterval(function () {
+                    var interval = setInterval(function() {
 
                       wx.request({
-                        url: api_url+'/Games/ClimbTree/isHaveLaunchGame',
+                        url: api_url + '/Games/ClimbTree/isHaveLaunchGame',
                         data: {
                           box_mac: box_mac,
                         },
-                        success: function (tmps) {
+                        success: function(tmps) {
                           if (tmps.data.code == 10000) {
                             that.setData({
                               hiddens: true,
@@ -113,7 +121,7 @@ Page({
                             })
                             clearInterval(interval);
                             wx.request({
-                              url: api_url+'/Games/ClimbTree/clearLaunchGame',
+                              url: api_url + '/Games/ClimbTree/clearLaunchGame',
                               data: {
                                 box_mac: box_mac,
                               },
@@ -138,8 +146,8 @@ Page({
                 })
               }
             }
-          }) 
-        }else {
+          })
+        } else {
           wx.showToast({
             title: '该游戏不存在',
             icon: 'none',
@@ -152,55 +160,55 @@ Page({
       }
     })
 
-    
+
   },
 
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
-  onReady: function () {
+  onReady: function() {
 
   },
 
   /**
    * 生命周期函数--监听页面显示
    */
-  onShow: function () {
+  onShow: function() {
 
   },
 
   /**
    * 生命周期函数--监听页面隐藏
    */
-  onHide: function () {
+  onHide: function() {
 
   },
 
   /**
    * 生命周期函数--监听页面卸载
    */
-  onUnload: function () {
+  onUnload: function() {
 
   },
 
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
-  onPullDownRefresh: function () {
+  onPullDownRefresh: function() {
 
   },
 
   /**
    * 页面上拉触底事件的处理函数
    */
-  onReachBottom: function () {
+  onReachBottom: function() {
 
   },
 
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage: function () {
+  onShareAppMessage: function() {
 
   }
 })
