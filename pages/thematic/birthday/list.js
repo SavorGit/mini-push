@@ -192,6 +192,7 @@ Page({
               content: '当前电视正在进行投屏,继续投屏有可能打断当前投屏中的内容.',
               success: function (res) {
                 if (res.confirm) {
+                  mta.Event.stat('breakForscreen', { 'isbreak':1 })
                   wx.request({
                     url: api_url + '/Netty/Index/index',
                     headers: {
@@ -234,7 +235,7 @@ Page({
                     }
                   })
                 } else {
-
+                  mta.Event.stat('breakForscreen', { 'isbreak': 0 })
                 }
               }
             })
@@ -548,7 +549,9 @@ Page({
   onShow: function() {
 
   },
-
+  goToBack: function (e) {
+    app.goToBack();
+  },
   /**
    * 生命周期函数--监听页面隐藏
    */
