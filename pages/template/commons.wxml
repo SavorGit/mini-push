@@ -176,7 +176,7 @@
   <view class='default-navigation-bar theme-navigation'>
     <view class='status-bar' style='height:{{statusBarHeight}}px;'></view>
     <view class='navigation-bar flex-row-center-flex_start'>
-      <view class='btn flex-row-center-flex_start'>
+      <view class='btn flex-row-center-flex_start' bindtap="goToBack">
         <navigator class='go-back' open-type='navigateBack' delta='1'>
           <label class="fa fa-angle-left fa-2x" title="Back"></label>
         </navigator>
@@ -193,7 +193,7 @@
   <view class='default-navigation-bar theme-navigation'>
     <view class='status-bar' style='height:{{statusBarHeight}}px;'></view>
     <view class='navigation-bar flex-row-center-flex_start'>
-      <view class='btn flex-row-center-flex_start'>
+      <view class='btn flex-row-center-flex_start' bindtap="goToBack">
         <navigator class='go-back' open-type='navigateBack' delta='1'>
           <label class="fa fa-angle-left fa-2x" title="Back"></label>
         </navigator>

@@ -73,11 +73,13 @@ Page({
           video_size: res.size,
           is_forscreen: 1
         })
+        utils.tryCatch(mta.Event.stat('wifiVideoChoose', { 'status': 1 }));
       },
       fail: function(e) {
         wx.navigateBack({
           delta: 1,
         })
+        utils.tryCatch(mta.Event.stat('wifiVideoChoose', { 'status': 0 }));
       }
     })
   },
@@ -100,7 +102,7 @@ Page({
     var duration = res.currentTarget.dataset.duration;
     var forscreen_id = (new Date()).valueOf();
     var filename = (new Date()).valueOf();
-
+    var start_time = (new Date()).valueOf(); 
     wx.uploadFile({
       url: 'http://' + intranet_ip + ':8080/videoH5?deviceId=' + openid + '&box_mac=' + box_mac + '&deviceName=' + mobile_brand + '&web=true&forscreen_id=' + forscreen_id + '&filename=' + filename + '&device_model=' + mobile_model + '&resource_size=' + resouce_size + '&duration=' + duration + '&action=2&resource_type=2&avatarUrl=' + avatarUrl + "&nickName=" + nickName,
       filePath: video_url,
@@ -117,6 +119,16 @@ Page({
             intranet_ip: intranet_ip,
             hiddens: true,
           })
+          utils.tryCatch(mta.Event.stat('wifiVideoForscreen', { 'status': 1 }));
+
+          var end_time = (new Date()).valueOf(); 
+          var diff_time = end_time - start_time;
+          utils.tryCatch(mta.Event.stat('wifiVideoUploadWastTime', { 'uploadtime': diff_time }));
+        } else if (res.code == 1001) {
+
+          var end_time = (new Date()).valueOf(); 
+          var diff_time = end_time - start_time;
+          utils.tryCatch(mta.Event.stat('wifiVideoUploadWastTime', { 'uploadtime': diff_time }));
         } else if (res.code == 1001) {
 
           that.setData({
@@ -130,6 +142,7 @@ Page({
               'type': 3
             }
           })
+          utils.tryCatch(mta.Event.stat('wifiVideoForscreen', { 'status': 0 }));
         }
 
       },
@@ -147,6 +160,7 @@ Page({
             'type': 3
           }
         })
+        utils.tryCatch(mta.Event.stat('wifiVideoForscreen', { 'status': 0 }));
       }
     })
   },
@@ -168,6 +182,8 @@ Page({
             icon: 'none',
             duration: 2000
           });
+          utils.tryCatch(mta.Event.stat('wifiVideoExitForscreen', { 'status': 1 }));
+         
         } else if (res.data.code == 1001) {
           that.setData({
             hiddens: true,
@@ -179,6 +195,7 @@ Page({
               'type': 3
             }
           })
+          utils.tryCatch(mta.Event.stat('wifiVideoExitForscreen', { 'status': 0 }));
         }
       },
       fail: function({
@@ -195,6 +212,7 @@ Page({
             'type': 3
           }
         })
+        utils.tryCatch(mta.Event.stat('wifiVideoExitForscreen', { 'status': 0 }));
       },
     })
   },
@@ -226,6 +244,10 @@ Page({
           video_size: res.size,
           is_forscreen: 1
         })
+        utils.tryCatch(mta.Event.stat('wifiVideoRechoose', { 'status': 1 }));
+        
+      },fail:function(e){
+        utils.tryCatch(mta.Event.stat('wifiVideoRechoose', { 'status': 0 }));
       }
     })
   },
@@ -264,6 +286,7 @@ Page({
     var duration = res.target.dataset.duration;
     var vedio_url = res.target.dataset.vedio_url;
     var box_mac = res.target.dataset.box_mac;
+    var start_time = (new Date()).valueOf();
     wx.uploadFile({
       url: 'http://' + intranet_ip + ':8080/videoH5?deviceId=' + openid + '&box_mac=' + box_mac + '&deviceName=' + mobile_brand + '&web=true&forscreen_id=' + forscreen_id + '&filename=' + filename + '&device_model=' + mobile_model + '&resource_size=' + resouce_size + '&duration=' + duration + '&action=2&resource_type=2&avatarUrl=' + avatarUrl + "&nickName=" + nickName,
       filePath: vedio_url,
@@ -280,6 +303,9 @@ Page({
             intranet_ip: intranet_ip,
             hiddens: true,
           })
+          var end_time = (new Date()).valueOf();
+          var diff_time = end_time - start_time;
+          utils.tryCatch(mta.Event.stat('wifiVideoUploadWastTime', { 'uploadtime': diff_time }));
         } else if (res.data.code == 1001) {
 
           that.setData({
@@ -369,6 +395,28 @@ Page({
     var hotel_info = e.target.dataset.hotel_info;
     app.linkHotelWifi(hotel_info, that);
   },
+  videoPlay:function(e){
+    var that = this;
+
+
+    utils.tryCatch(mta.Event.stat('wifiVideoPlay', { 'isforscreen': that.data.is_upload }));
+  },
+  videoPause:function(e){
+    var that = this;
+    utils.tryCatch(mta.Event.stat('wifiVideoPause', { 'isforscreen': that.data.is_upload }));
+  },
+  videoFullscreen:function(e){
+    var that = this;
+    var fullScreen = e.detail.fullScreen;
+    if(fullScreen==true){
+      utils.tryCatch(mta.Event.stat('wifiVideoFullscreen', { 'isfull': 1,  'isforscreen':that.data.is_upload }));
+      
+    } else if (fullScreen==false){
+      utils.tryCatch(mta.Event.stat('wifiVideoFullscreen', { 'isfull': 0, 'isforscreen': that.data.is_upload }));
+      
+    }
+  },
+
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
@@ -387,7 +435,7 @@ Page({
    * 生命周期函数--监听页面隐藏
    */
   onHide: function() {
-
+    
   },
 
   /**

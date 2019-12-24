@@ -770,6 +770,15 @@ App({
     }
     mta.Event.stat('onAppHide', { 'url': currPage.__route__ })  
   },
+  goToBack:function(params=0){
+    let pages = getCurrentPages();
+    let currPage = null;
+    if (pages.length) {
+      currPage = pages[pages.length - 1];
+    }
+    console.log(currPage);
+    mta.Event.stat('goToBack', { 'url': currPage.__route__, 'params': params })  
+  },
   checkMobile: function(mobile) {
 
     var myreg = /^(((13[0-9]{1})|(14[0-9]{1})|(15[0-9]{1})|(16[0-9]{1})|(18[0-9]{1})|(17[0-9]{1})|(19[0-9]{1}))+\d{8})$/;

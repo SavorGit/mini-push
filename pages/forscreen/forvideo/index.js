@@ -1,5 +1,5 @@
 // pages/forscreen/forvideo/index.js
-const util = require('../../../utils/util.js')
+const utils = require('../../../utils/util.js')
 var mta = require('../../../utils/mta_analysis.js')
 const app = getApp();
 var tmp;
@@ -244,6 +244,13 @@ Page({
                 }*/
                 uploadVedio(video, box_mac, openid, res_sup_time, is_pub_hotelinfo, is_share, duration, avatarUrl, nickName, public_text, timer8_0);
                 app.recordFormId(openid, formId);
+
+                if (public_text = '' || typeof (public_text) == 'undefined') {
+                  public_text = 0;
+                } else {
+                  public_text = 1;
+                }
+                utils.tryCatch(mta.Event.stat('forscreenVedio', { 'ispublictext': public_text, 'ispublic': is_share, 'isforscreen': 1 }));
               } else if (res.cancel) {
                 that.setData({
                   hiddens: true,
@@ -251,21 +258,28 @@ Page({
                 wx.navigateBack({
                   delta: 1
                 })
+
+                if (public_text = '' || typeof (public_text) == 'undefined') {
+                  public_text = 0;
+                } else {
+                  public_text = 1;
+                }
+                utils.tryCatch(mta.Event.stat('forscreenVedio', { 'ispublictext': public_text, 'ispublic': is_share, 'isforscreen': 0 }));
               }
             }
           })
+          
+          
         } else {
-          /*if (is_open_simple > 0) {
-            timer8_0 = setTimeout(function () {
-              that.setData({
-                is_show_jump: true,
-                show: true
-
-              })
-            }, 10000);
-          }*/
+          
           uploadVedio(video, box_mac, openid, res_sup_time, is_pub_hotelinfo, is_share, duration, avatarUrl, nickName, public_text, timer8_0);
           app.recordFormId(openid, formId);
+          if (public_text = '' || typeof (public_text) == 'undefined') {
+            public_text = 0;
+          } else {
+            public_text = 1;
+          }
+          utils.tryCatch(mta.Event.stat('forscreenVedio', { 'ispublictext': public_text, 'ispublic': is_share, 'isforscreen': 0 }));
         }
       }
     })
@@ -686,6 +700,8 @@ Page({
           icon: 'none',
           duration: 2000
         });
+        utils.tryCatch(mta.Event.stat('forVideoExit', { 'status': 1 }));
+        
       },
       fail: function(res) {
         wx.showToast({
@@ -693,6 +709,7 @@ Page({
           icon: 'none',
           duration: 2000
         })
+        utils.tryCatch(mta.Event.stat('forVideoExit', { 'status': 0 }));
       }
     })
   },
@@ -1020,6 +1037,7 @@ Page({
                     })
 
                   }
+                  utils.tryCatch(mta.Event.stat('replayForVideoHistory', { 'restype': res_type, 'isbreak': 1 }));
                 } else { //视频投屏
                   for (var i = 0; i < res_len; i++) {
                     wx.request({
@@ -1086,9 +1104,10 @@ Page({
                       }
                     });
                   }
+                  utils.tryCatch(mta.Event.stat('replayForVideoHistory', { 'restype': res_type, 'isbreak': 1 }));
                 }
               } else {
-
+                utils.tryCatch(mta.Event.stat('replayForVideoHistory', { 'restype': res_type, 'isbreak': 0 }));
               }
             }
           })
@@ -1160,6 +1179,7 @@ Page({
               })
 
             }
+            utils.tryCatch(mta.Event.stat('replayForVideoHistory', { 'restype': res_type, 'isbreak': 0 }));
           } else { //视频投屏
             for (var i = 0; i < res_len; i++) {
               wx.request({
@@ -1226,6 +1246,7 @@ Page({
                 }
               });
             }
+            utils.tryCatch(mta.Event.stat('replayForVideoHistory', { 'restype': res_type, 'isbreak': 0 }));
           }
         }
       }
@@ -1282,6 +1303,8 @@ Page({
         msg: '{"action":31,"change_type":' + change_type + '}',
       },
     })
+    utils.tryCatch(mta.Event.stat('controlChangeVolume', { 'changetype': change_type }))
+    
   },
   closeJump: function(e) {
     var that = this;
@@ -1290,7 +1313,7 @@ Page({
     })
   },
   //遥控呼大码
-  callQrCode: util.throttle(function(e) {
+  callQrCode: utils.throttle(function(e) {
     openid = e.currentTarget.dataset.openid;
     box_mac = e.currentTarget.dataset.box_mac;
     var qrcode_img = e.currentTarget.dataset.qrcode_img;
@@ -1305,9 +1328,12 @@ Page({
       popRemoteControlWindow: true,
       qrcode_img: qrcode_url
     })
-    mta.Event.stat('openControl', {
+    utils.tryCatch(
+      mta.Event.stat('openControl', {
       'linktype': app.globalData.link_type
-    })
+      })
+    );
+    
   },
   //关闭遥控
   closeControl: function(e) {
@@ -1395,7 +1421,13 @@ Page({
   phonecallevent: function(e) {
     var tel = e.target.dataset.tel;
     wx.makePhoneCall({
-      phoneNumber: tel
+      phoneNumber: tel,
+      success:function(res){
+        utils.tryCatch(mta.Event.stat('forVideoPhoneCall', { 'status': 1 }));
+        
+      },fail:function(res){
+        utils.tryCatch(mta.Event.stat('forVideoPhoneCall', { 'status': 0 }));
+      }
     })
   },
   closeLead: function(e) {
@@ -1429,6 +1461,16 @@ Page({
         }
       }
     })
+  },
+  goToBack: function (e) {
+    var that = this;
+    var showVedio = that.data.showVedio;
+    if (showVedio==true){
+      var status = 0; 
+    }else {
+      var status = 1;
+    }
+    app.goToBack(status);
   },
   /**
    * 生命周期函数--监听页面初次渲染完成
