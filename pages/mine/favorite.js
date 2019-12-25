@@ -921,4 +921,7 @@ Page({
       }
     })
   },
+  goToBack: function(e) {
+    app.goToBack();
+  }
 })
