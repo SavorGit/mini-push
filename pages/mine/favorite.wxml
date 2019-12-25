@@ -43,7 +43,10 @@
                 <image mode='aspectFill' src="{{bean.list[0].imgurl}}"></image>
               </navigator>
               <view class="cover">
-                <navigator url="/pages/forscreen/video/launch_video?video_url={{bean.list.res_url}}&video_name={{bean.title}}&box_mac={{box_mac}}&res_id={{bean.res_id}}&filename={{bean.list.filename}}&video_img_url={{bean.list.imgurl}}">
+                <navigator wx:if="{{bean.type==1 || bean.type==3}}"  url="/pages/forscreen/video/launch_video?video_url={{bean.list.res_url}}&video_name={{bean.title}}&box_mac={{box_mac}}&res_id={{bean.res_id}}&filename={{bean.list.filename}}&video_img_url={{bean.list.imgurl}}">
+                  <label class="fa fa-play-circle-o icon theme-font4"></label>
+                </navigator>
+                <navigator wx:if="{{bean.type==2}}" url="/pages/find/video?forscreen_id={{bean.res_id}}&box_mac={{box_mac}}">
                   <label class="fa fa-play-circle-o icon theme-font4"></label>
                 </navigator>
                 <view>
