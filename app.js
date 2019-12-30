@@ -1,7 +1,7 @@
 //app.js
 var mta = require('./utils/mta_analysis.js');
 App({
-  
+
   recordFormId(openid, formId) {
     var that = this;
     if (formId != 'the formId is a mock one') {
@@ -19,30 +19,30 @@ App({
     }
   },
   //电视播放
-  boxShow(box_mac = '', forscreen_id, pubdetail, res_type, res_len,action,hotel_info,aps) {
+  boxShow(box_mac = '', forscreen_id, pubdetail, res_type, res_len, action, hotel_info, aps) {
     var that = this;
-    
+
     if (box_mac == '') {
       this.scanQrcode();
     } else {
       var user_info = wx.getStorageSync("savor_user_info");
-      if(that.globalData.link_type==1){
-        
+      if (that.globalData.link_type == 1) {
 
-        that.tpst(box_mac , forscreen_id, pubdetail, res_type, res_len, action, hotel_info);
-        
-        
-      }else {
+
+        that.tpst(box_mac, forscreen_id, pubdetail, res_type, res_len, action, hotel_info);
+
+
+      } else {
         var timestamp = (new Date()).valueOf();
-        if(action==11 || action==12 ){
+        if (action == 11 || action == 12) {
           var media_url_str = '[';
           var space = '';
-          for(var i=0;i<pubdetail.length;i++){
-            media_url_str += space + '{"forscreen_url":"' + pubdetail[i].forscreen_url +'","filename":"'+pubdetail[i].filename+'"}';
+          for (var i = 0; i < pubdetail.length; i++) {
+            media_url_str += space + '{"forscreen_url":"' + pubdetail[i].forscreen_url + '","filename":"' + pubdetail[i].filename + '"}';
             space = ',';
           }
           media_url_str += ']';
-          
+
           wx.request({
             url: 'http://' + hotel_info.intranet_ip + ":8080/h5/discover_ondemand?deviceId=" + user_info.openid + "&box_mac=" + box_mac + "&web=true&media_id=" + forscreen_id + "&resource_type=" + res_type + "&forscreen_id=" + timestamp + "&media_url=" + media_url_str + '&avatarUrl=' + user_info.avatarUrl + "&nickName=" + user_info.nickName,
             success: function (res) {
@@ -69,20 +69,20 @@ App({
               })
             }
           })
-        }else if(action==5){//优选
-          
+        } else if (action == 5) {//优选
+
           for (var i = 0; i < res_len; i++) {
-            
+
             wx.request({
               url: "http://" + hotel_info.intranet_ip + ":8080/h5/goods_ondemand?deviceId=" + user_info.openid + "&box_mac=" + box_mac + "&web=true&media_id=" + forscreen_id + "&forscreen_id=" + timestamp + "&media_name=" + pubdetail[0]['filename'] + "&media_url=" + pubdetail[0]['res_url'] + '&avatarUrl=' + user_info.avatarUrl + "&nickName=" + user_info.nickName,
-              success:function(res){
-                if(res.data.code==10000){
+              success: function (res) {
+                if (res.data.code == 10000) {
                   wx.showToast({
                     title: '点播成功,电视即将开始播放',
                     icon: 'none',
                     duration: 2000
                   });
-                }else {
+                } else {
                   that.linkHotelWifi(hotel_info, aps)
                   wx.showToast({
                     title: '网络异常,点播失败',
@@ -90,7 +90,7 @@ App({
                     duration: 2000
                   })
                 }
-              },fail:function(res){
+              }, fail: function (res) {
                 that.linkHotelWifi(hotel_info, aps)
                 wx.showToast({
                   title: '网络异常,点播失败',
@@ -103,12 +103,12 @@ App({
 
         }
       }
-      
+
     }
   }, //电视播放结束
-  tpst: function (box_mac = '', forscreen_id, pubdetail, res_type, res_len, action, hotel_info){
+  tpst: function (box_mac = '', forscreen_id, pubdetail, res_type, res_len, action, hotel_info) {
     var that = this;
-    
+
     //var forscreen_id = (new Date()).valueOf();
     wx.request({
       url: that.globalData.api_url + '/smallapp21/User/isForscreenIng',
@@ -127,19 +127,19 @@ App({
             content: '当前电视正在进行投屏,继续投屏有可能打断当前投屏中的内容.',
             success: function (res) {
               if (res.confirm) {
-                
+
                 that.tprc(box_mac, forscreen_id, pubdetail, res_type, res_len, action, hotel_info);
               } else { }
             }
           })
         } else {
-          
+
           that.tprc(box_mac, forscreen_id, pubdetail, res_type, res_len, action, hotel_info);
         }
       }
     });
   },
-  tprc: function (box_mac = '', forscreen_id, pubdetail, res_type, res_len, action, hotel_info){
+  tprc: function (box_mac = '', forscreen_id, pubdetail, res_type, res_len, action, hotel_info) {
     var that = this;
     var user_info = wx.getStorageSync("savor_user_info");
     var avatarUrl = user_info.avatarUrl;
@@ -150,7 +150,7 @@ App({
     var mobile_model = that.globalData.mobile_model;
     var res_id = forscreen_id;
     var forscreen_id = (new Date()).valueOf();
-    
+
     if (res_type == 1) {
       for (var i = 0; i < pubdetail.length; i++) {
         var order = i + 1;
@@ -232,7 +232,7 @@ App({
           },
           success: function (ret) { }
         });
-        
+
         wx.request({
           url: that.globalData.api_url + '/Netty/Index/index',
           headers: {
@@ -244,7 +244,7 @@ App({
             msg: '{ "action":2, "url": "' + pubdetail[i]['forscreen_url'] + '", "filename":"' + pubdetail[i]['filename'] + '","openid":"' + openid + '","resource_type":2,"video_id":"' + pubdetail[i]['res_id'] + '","avatarUrl":"' + avatarUrl + '","nickName":"' + nickName + '","forscreen_id":"' + forscreen_id + '"}',
           },
           success: function (result) {
-            
+
             wx.showToast({
               title: '点播成功,电视即将开始播放',
               icon: 'none',
@@ -272,12 +272,12 @@ App({
 
     })
   },
-  controlExitForscreen: function (openid, box_mac, hotel_info,aps) {
+  controlExitForscreen: function (openid, box_mac, hotel_info, aps) {
     var that = this;
     var link_type = that.globalData.link_type;
     //openid = e.currentTarget.dataset.openid;
     //box_mac = e.currentTarget.dataset.boxmac;
-    if (link_type==1){
+    if (link_type == 1) {
       var timestamp = (new Date()).valueOf();
       wx.request({
         url: that.globalData.api_url + '/Netty/Index/index',
@@ -304,17 +304,17 @@ App({
           })
         }
       })
-    } else if (link_type==2){
+    } else if (link_type == 2) {
       wx.request({
-        url: "http://" + hotel_info.intranet_ip + ":8080/h5/stop?deviceId=" + openid + "&box_mac=" + box_mac+"&web=true",
+        url: "http://" + hotel_info.intranet_ip + ":8080/h5/stop?deviceId=" + openid + "&box_mac=" + box_mac + "&web=true",
         success: function (res) {
-          if (res.data.code==10000){
+          if (res.data.code == 10000) {
             wx.showToast({
               title: '退出成功',
               icon: 'none',
               duration: 2000
             });
-          }else if(res.data.code==1001){
+          } else if (res.data.code == 1001) {
             aps.setData({
               wifiErr: { 'is_open': 1, 'msg': '亲，使用此小程序前需要链接包间wifi,链接wifi投屏更快哦！', 'confirm': '重试', 'calcle': '', 'type': 3 }
             })
@@ -337,11 +337,11 @@ App({
     mta.Event.stat("controlexitforscreen", {})
   }, //退出投屏结束
   //遥控器呼玛
-  controlCallQrcode: function(openid, box_mac, qrcode_img,hotel_info,aps) {
+  controlCallQrcode: function (openid, box_mac, qrcode_img, hotel_info, aps) {
     var that = this;
     if (box_mac) {
       var link_type = that.globalData.link_type;
-      if(link_type==1){
+      if (link_type == 1) {
         var timestamp = (new Date()).valueOf();
         var qrcode_url = that.globalData.api_url + '/Smallapp/index/getBoxQr?box_mac=' + box_mac + '&type=3';
         var mobile_brand = this.globalData.mobile_brand;
@@ -438,9 +438,9 @@ App({
             }
           }
         })
-      }else {
+      } else {
         wx.request({
-          url: "http://" + hotel_info.intranet_ip + ":8080/showMiniProgramCode?deviceId=" + openid + "&box_mac="+box_mac+"&web=true",
+          url: "http://" + hotel_info.intranet_ip + ":8080/showMiniProgramCode?deviceId=" + openid + "&box_mac=" + box_mac + "&web=true",
           success: function (res) {
             if (res.data.code == 10000) {
               wx.showToast({
@@ -448,11 +448,11 @@ App({
                 icon: 'none',
                 duration: 2000
               });
-            }else if(res.data.code==1001){
+            } else if (res.data.code == 1001) {
               aps.setData({
                 wifiErr: { 'is_open': 1, 'msg': '亲，使用此小程序前需要链接包间wifi,链接wifi投屏更快哦！', 'confirm': '重试', 'calcle': '', 'type': 3 }
               })
-            }else {
+            } else {
               wx.showToast({
                 title: '呼码失败',
                 icon: 'none',
@@ -473,16 +473,16 @@ App({
           },
         })
       }
-      
-      
+
+
     }
     mta.Event.stat("controlcallqrcode", {})
   },
   //遥控器控制音量
-  controlChangeVolume: function (openid,box_mac, change_type,hotel_info,aps) {
+  controlChangeVolume: function (openid, box_mac, change_type, hotel_info, aps) {
     var that = this;
     var link_type = that.globalData.link_type;
-    if(link_type==1){
+    if (link_type == 1) {
       wx.request({
         url: that.globalData.api_url + '/Netty/Index/index',
         headers: {
@@ -494,7 +494,7 @@ App({
           msg: '{"action":31,"change_type":' + change_type + '}',
         },
       })
-    }else if(link_type==2){
+    } else if (link_type == 2) {
       var timestamp = (new Date()).valueOf();
       var change_type_name = '';
       if (change_type == 1) {
@@ -505,7 +505,7 @@ App({
         change_type_name = '增大音量'
       }
       wx.request({
-        url: "http://" + hotel_info.intranet_ip + ":8080/volume?action=" + change_type + "&deviceId=" + openid + "&box_mac=" + box_mac+"&projectId=" + timestamp + "&web=true",
+        url: "http://" + hotel_info.intranet_ip + ":8080/volume?action=" + change_type + "&deviceId=" + openid + "&box_mac=" + box_mac + "&projectId=" + timestamp + "&web=true",
         success: function (res) {
           if (res.data.code == 10000) {
             wx.showToast({
@@ -513,11 +513,11 @@ App({
               icon: 'none',
               duration: 2000
             })
-          } else if (res.data.result==1001){
+          } else if (res.data.result == 1001) {
             aps.setData({
               wifiErr: { 'is_open': 1, 'msg': '亲，使用此小程序前需要链接包间wifi,链接wifi投屏更快哦！', 'confirm': '重试', 'calcle': '', 'type': 3 }
             })
-          }else {
+          } else {
             wx.showToast({
               title: '投屏过程中才可控制音量',
               icon: 'none',
@@ -531,10 +531,10 @@ App({
         }
       })
     }
-    if (change_type==3){
+    if (change_type == 3) {
       change_type = 1;
     }
-    if (change_type==4){
+    if (change_type == 4) {
       change_type = 2;
     }
     mta.Event.stat('controlChangeVolume', { 'changetype': change_type })
@@ -543,8 +543,8 @@ App({
   controlChangeProgram: function (openid, box_mac, change_type, hotel_info, aps) {
     var that = this;
     var link_type = that.globalData.link_type;
-    if(link_type==1){
-      
+    if (link_type == 1) {
+
       wx.request({
         url: that.globalData.api_url + '/Netty/Index/index',
         headers: {
@@ -556,12 +556,12 @@ App({
           msg: '{"action":32,"change_type":' + change_type + '}',
         },
       })
-    }else if(link_type==2){
+    } else if (link_type == 2) {
       var timestamp = (new Date()).valueOf();
       wx.request({
-        url: "http://" + hotel_info.intranet_ip + ":8080/switchProgram?action=" + change_type + "&deviceId=" + openid + "&box_mac="+box_mac+"&projectId=" + timestamp + "&web=true",
+        url: "http://" + hotel_info.intranet_ip + ":8080/switchProgram?action=" + change_type + "&deviceId=" + openid + "&box_mac=" + box_mac + "&projectId=" + timestamp + "&web=true",
         success: function (res) {
-          
+
           if (res.data.code == 10000) {
             wx.showToast({
               title: '切换成功',
@@ -589,14 +589,14 @@ App({
     mta.Event.stat('controlChangePro', { 'changetype': change_type })
   },
   //扫码
-  scanQrcode: function(pageid = 1) {
+  scanQrcode: function (pageid = 1) {
     var that = this;
     wx.showModal({
       title: '提示',
       content: "您可扫码链接热点合作餐厅电视,使用此功能",
       showCancel: true,
       confirmText: '立即扫码',
-      success: function(res) {
+      success: function (res) {
         if (res.confirm == true) {
           wx.scanCode({
             onlyFromCamera: true,
@@ -623,7 +623,7 @@ App({
             currPage = pages[pages.length - 1];
           }
           mta.Event.stat('scanQrcode', { 'scantype': 1, 'url': currPage.__route__ })
-        }else {
+        } else {
           let pages = getCurrentPages();
           let currPage = null;
           if (pages.length) {
@@ -641,7 +641,7 @@ App({
     }
     mta.Event.stat('popScanQrcode', { 'url': currPage.__route__ })
   },
-  onLaunch: function() {
+  onLaunch: function () {
     var oss_tmp_key = this.globalData.oss_access_key_id;
     var oss_access_key_id = '';
     for (var n = 0; n < oss_tmp_key.length; n++) {
@@ -663,14 +663,14 @@ App({
     // 获取小程序更新机制兼容
     if (wx.canIUse('getUpdateManager')) {
       const updateManager = wx.getUpdateManager()
-      updateManager.onCheckForUpdate(function(res) {
+      updateManager.onCheckForUpdate(function (res) {
         // 请求完新版本信息的回调
         if (res.hasUpdate) {
-          updateManager.onUpdateReady(function() {
+          updateManager.onUpdateReady(function () {
             wx.showModal({
               title: '更新提示',
               content: '新版本已经准备好，是否重启应用？',
-              success: function(res) {
+              success: function (res) {
                 if (res.confirm) {
                   // 新的版本已经下载好，调用 applyUpdate 应用新版本并重启
                   updateManager.applyUpdate()
@@ -678,7 +678,7 @@ App({
               }
             })
           })
-          updateManager.onUpdateFailed(function() {
+          updateManager.onUpdateFailed(function () {
             // 新的版本下载失败
             wx.showModal({
               title: '已经有新版本了哟~',
@@ -706,7 +706,7 @@ App({
           header: {
             'content-type': 'application/json'
           },
-          success: function(res) {
+          success: function (res) {
             that.globalData.openid = res.data.result.openid;
             that.globalData.session_key = res.data.result.session_key;
             if (that.openidCallback) {
@@ -718,16 +718,16 @@ App({
       }
     })
     wx.getSystemInfo({
-      success: function(res) {
+      success: function (res) {
         that.globalData.mobile_brand = res.brand;
         that.globalData.mobile_model = res.model;
       }
     })
   },
-  onShow: function(options) {
+  onShow: function (options) {
     var app = this;
     wx.getSystemInfo({
-      success: function(res) {
+      success: function (res) {
         app.globalData.statusBarHeight = res.statusBarHeight;
         app.SystemInfo = {
           SDKVersion: res.SDKVersion,
@@ -762,24 +762,24 @@ App({
       }
     })
   },
-  onHide:function(e){
+  onHide: function (e) {
     let pages = getCurrentPages();
     let currPage = null;
     if (pages.length) {
       currPage = pages[pages.length - 1];
     }
-    mta.Event.stat('onAppHide', { 'url': currPage.__route__ })  
+    mta.Event.stat('onAppHide', { 'url': currPage.__route__ })
   },
-  goToBack:function(params=0){
+  goToBack: function (params = 0) {
     let pages = getCurrentPages();
     let currPage = null;
     if (pages.length) {
       currPage = pages[pages.length - 1];
     }
     console.log(currPage);
-    mta.Event.stat('goToBack', { 'url': currPage.__route__, 'params': params })  
+    mta.Event.stat('goToBack', { 'url': currPage.__route__, 'params': params })
   },
-  checkMobile: function(mobile) {
+  checkMobile: function (mobile) {
 
     var myreg = /^(((13[0-9]{1})|(14[0-9]{1})|(15[0-9]{1})|(16[0-9]{1})|(18[0-9]{1})|(17[0-9]{1})|(19[0-9]{1}))+\d{8})$/;
     if (mobile.length == 0) {
@@ -807,19 +807,19 @@ App({
     }
     return true;
   },
-  compareVersion:function (v1, v2) {
+  compareVersion: function (v1, v2) {
     v1 = v1.split('.')
     v2 = v2.split('.')
     const len = Math.max(v1.length, v2.length)
 
-    while(v1.length <len) {
-        v1.push('0')
-      }
-    while(v2.length <len) {
-        v2.push('0')
-      }
+    while (v1.length < len) {
+      v1.push('0')
+    }
+    while (v2.length < len) {
+      v2.push('0')
+    }
 
-    for(let i = 0; i<len; i++) {
+    for (let i = 0; i < len; i++) {
       const num1 = parseInt(v1[i])
       const num2 = parseInt(v2[i])
 
@@ -832,30 +832,30 @@ App({
 
     return 0
   },
-  in_array:function(stringToSearch, arrayToSearch,keys='') {
-    for(var s = 0; s<arrayToSearch.length; s++) {
-      if(keys!=''){
+  in_array: function (stringToSearch, arrayToSearch, keys = '') {
+    for (var s = 0; s < arrayToSearch.length; s++) {
+      if (keys != '') {
         var thisEntry = arrayToSearch[s][keys].toString();
-      }else {
+      } else {
         var thisEntry = arrayToSearch[s].toString();
       }
-      
+
       if (thisEntry == stringToSearch) {
         return true;
       }
-   }
+    }
     return false;
   },
 
-  linkHotelWifi:function(hotel_info,that){
+  linkHotelWifi: function (hotel_info, that) {
     var aps = this;
-    
+
     var is_minimal = wx.getStorageSync(aps.globalData.cache_key + 'is_minimal');//是否扫码标准版
     var room_ssid = hotel_info.wifi_name;
     if (typeof (is_minimal) == 'undefined' || is_minimal == '') {//非极简版
       if (hotel_info.forscreen_type == 2) {//后台推荐用极简版
-        aps.jugeLinkType(hotel_info,that);
-        
+        aps.jugeLinkType(hotel_info, that);
+
         mta.Event.stat('linkMode', { 'linktype': '2' })
       } else {//后台推荐用标准版 
         //不做任何改变
@@ -871,7 +871,7 @@ App({
       mta.Event.stat('linkMode', { 'linktype': '2' })
     }
   },
-  jugeLinkType: function (hotel_info,that){
+  jugeLinkType: function (hotel_info, that) {
     var aps = this;
     //第一步  判断客户端基础库版本
     var sdk_version = aps.globalData.sys_info.SDKVersion;
@@ -881,7 +881,7 @@ App({
       var wifi_mac = hotel_info.wifi_mac;
       var use_wifi_password = hotel_info.wifi_password;
       var box_mac = hotel_info.box_mac
-      if(hotel_info.wifi_name!=''){
+      if (hotel_info.wifi_name != '') {
         //第二步  判断当前连接的wifi是否为当前包间wifi
         that.setData({
           wifi_hidden: false,
@@ -893,7 +893,7 @@ App({
                 if (res.errMsg == 'getConnectedWifi:ok') {
                   if (res.wifi.SSID == wifi_name) {//链接的是本包间wifi
                     wx.stopWifi({
-                      
+
                     })
                     if (aps.wifiOkCallback) {
 
@@ -909,13 +909,13 @@ App({
                     })
                     wx.hideLoading()
                   } else {//链接的不是本包间wifi
-                    
+
                     aps.connectWifi(wifi_name, wifi_mac, use_wifi_password, box_mac, that);
 
                   }
                 } else {
                   //当前打开wifi 但是没有链接任何wifi
-                  
+
                   aps.connectWifi(wifi_name, wifi_mac, use_wifi_password, box_mac, that);
                 }
                 wx.hideLoading()
@@ -987,15 +987,15 @@ App({
 
             })
           }, complete: function (res) {
-            
+
           }
         })
-      }else {
+      } else {
         that.setData({
           wifiErr: { 'is_open': 1, 'msg': '亲，该包间电视暂不能投屏，请更换其他包间', 'confirm': '我知道了', 'type': 5 }
         })
       }
-      
+
     } else {//客户端基础库版本不支持链接wifi 直接使用标准版
       that.setData({
         link_type: 1,
@@ -1005,7 +1005,7 @@ App({
   },
   connectWifi: function (wifi_name, wifi_mac, use_wifi_password, box_mac, that) {
     var aps = this;
-    
+
     wx.connectWifi({
       SSID: wifi_name,
       BSSID: wifi_mac,
@@ -1087,7 +1087,7 @@ App({
 
       })
     }, 10000)
-    
+
   },
   globalData: {
     openid: '',
@@ -1105,16 +1105,16 @@ App({
     oss_url: 'https://oss.littlehotspot.com',
     oss_bucket: 'redian-produce',
     oss_access_key_id: 'LTAITBjXOpORHKfXlOX',
-    link_type:0,  //1:外网投屏  2：直连投屏
+    link_type: 0,  //1:外网投屏  2：直连投屏
     sys_info: wx.getSystemInfoSync(),
-    cache_key:'savor_',
-    min_sdk_version:'1.6.0',
-    wifiErr: { 'is_open': 0, 'msg': '','confirm':'确定','calcle':'取消','type':0 },
-    hotel_info:{},
-    optimize_data:[],    //优选列表
-    public_list:[],      //我的公开
-    collect_list:[],     //我的收藏 
-    
-    hotels:[],
+    cache_key: 'savor_',
+    min_sdk_version: '1.6.0',
+    wifiErr: { 'is_open': 0, 'msg': '', 'confirm': '确定', 'calcle': '取消', 'type': 0 },
+    hotel_info: {},
+    optimize_data: [],    //优选列表
+    public_list: [],      //我的公开
+    collect_list: [],     //我的收藏 
+
+    hotels: [],
   }
 })
