@@ -152,6 +152,11 @@ App({
     var forscreen_id = (new Date()).valueOf();
 
     if (res_type == 1) {
+      
+      //图集
+      var res_obj = [];
+      
+      var msg = { action: 10,  openid: openid, img_nums: res_len, forscreen_char: forscreen_char, forscreen_id: forscreen_id, avatarUrl: avatarUrl, nickName: nickName}
       for (var i = 0; i < pubdetail.length; i++) {
         var order = i + 1;
         wx.request({ //start
@@ -174,38 +179,45 @@ App({
             resource_size: pubdetail[i]['resource_size'],
             is_pub_hotelinfo: 0,
             is_share: 0
-          },
-          success: function (ret) { }
+          },success: function (ret) {
+
+          }
         }); //end
         var url = pubdetail[i]['forscreen_url'];
         var filename = pubdetail[i]['filename'];
         var res_id = pubdetail[i]['res_id'];
-        wx.request({
-          url: that.globalData.api_url + '/Netty/Index/index',
-          headers: {
-            'Content-Type': 'application/json'
-          },
-          method: "POST",
-          data: {
-            box_mac: box_mac,
-            msg: '{ "action": 4, "resource_type":2, "url":"' + url + '","filename":"' + filename + '","openid":"' + openid + '","img_nums":' + res_len + ',"forscreen_char":"' + forscreen_char + '","order":' + order + ',"forscreen_id":"' + forscreen_id + '","img_id":"' + res_id + '","avatarUrl":"' + avatarUrl + '","nickName":"' + nickName + '"}',
-          },
-          success: function (result) {
-            wx.showToast({
-              title: '点播成功,电视即将开始播放',
-              icon: 'none',
-              duration: 5000
-            });
-          },
-          fail: function (res) {
-            wx.showToast({
-              title: '网络异常,点播失败',
-              icon: 'none',
-              duration: 2000
-            })
-          }
-        })
+        res_obj [i]= {url: url ,filename: filename ,order: order ,img_id:res_id };
       }
+      //res_obj = JSON.stringify(res_obj)
+      
+      msg.img_list = res_obj
+      msg = JSON.stringify(msg)
+      wx.request({
+        url: that.globalData.api_url + '/Netty/Index/index',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        method: "POST",
+        data: {
+          box_mac: box_mac,
+          msg: msg
+        },
+        success: function (result) {
+          wx.showToast({
+            title: '点播成功,电视即将开始播放',
+            icon: 'none',
+            duration: 5000
+          });
+        },
+        fail: function (res) {
+          wx.showToast({
+            title: '网络异常,点播失败',
+            icon: 'none',
+            duration: 2000
+          })
+        }
+      })
+
     } else { //视频投屏
       for (var i = 0; i < res_len; i++) {
         wx.request({
@@ -216,7 +228,7 @@ App({
           data: {
             openid: openid,
             box_mac: box_mac,
-            action: 12,
+            action: action,
             mobile_brand: mobile_brand,
             mobile_model: mobile_model,
             forscreen_char: forscreen_char,
@@ -849,7 +861,6 @@ App({
 
   linkHotelWifi: function (hotel_info, that) {
     var aps = this;
-
     var is_minimal = wx.getStorageSync(aps.globalData.cache_key + 'is_minimal');//是否扫码标准版
     var room_ssid = hotel_info.wifi_name;
     if (typeof (is_minimal) == 'undefined' || is_minimal == '') {//非极简版
@@ -1099,10 +1110,10 @@ App({
     rest_appid: 'wxc395eb4b44563af1',
     jijian_appid: 'wx7883a4327329a67c',
     jd_appid: 'wx91d27dbf599dff74',
-    api_url: 'https://mobile.littlehotspot.com',
-    oss_upload_url: 'https://image.littlehotspot.com',
-    netty_url: 'https://netty-push.littlehotspot.com',
-    oss_url: 'https://oss.littlehotspot.com',
+    api_url: 'https://dev-mobile.littlehotspot.com',
+    oss_upload_url: 'https://dev-image.littlehotspot.com',
+    netty_url: 'https://dev-netty-push.littlehotspot.com',
+    oss_url: 'https://dev-oss.littlehotspot.com',
     oss_bucket: 'redian-produce',
     oss_access_key_id: 'LTAITBjXOpORHKfXlOX',
     link_type: 0,  //1:外网投屏  2：直连投屏

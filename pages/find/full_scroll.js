@@ -138,7 +138,8 @@ let SavorUtils = {
     },
 
     // 投屏媒体组
-    launchMediaSubGroup: (pageContext, mediaObject) => {
+    launchMediaSubGroup: (pageContext, mediaObject, forscreen_id) => {
+      var that =  this;
       let user_info = wx.getStorageSync("savor_user_info");
       let avatarUrl = user_info.avatarUrl;
       let nickName = user_info.nickName;
@@ -146,27 +147,49 @@ let SavorUtils = {
       let pubdetailList = mediaObject.pubdetail;
       let mediaSubGroupSize = mediaObject.res_nums;
       let currentTime = (new Date()).valueOf();
-      for (let index = 0; index < mediaSubGroupSize; index++) {
-        let extendData = {};
-        let action = -1;
-        let order = index + 1;
-        let url = pubdetailList[index]['forscreen_url'];
-        let filename = pubdetailList[index]['filename'];
-        let res_id = pubdetailList[index]['res_id'];
-        let nettyMessageContent = '{"resource_type":2,"url":"' + url + '","filename":"' + filename + '","openid":"' + pageContext.data.openid + '","avatarUrl":"' + avatarUrl + '","nickName":"' + nickName + '","forscreen_id":"' + currentTime + '"';
-        if (mediaSubGroupType == SavorUtils.Constant.MediaType.PICTURE) { // 图片
-          extendData.action = 11; //发现图片点播
-          delete extendData.duration;
-          nettyMessageContent += ',"action":4,"img_id":"' + res_id + '","img_nums":' + mediaSubGroupSize + ',"forscreen_char":"","order":' + order;
-        } else { // 视频
-          extendData.action = 12; //发现视频点播
-          extendData.duration = pubdetailList[index]['duration']
-          nettyMessageContent += ',"action":2,"video_id":"' + res_id + '"';
-        }
-        nettyMessageContent += '}';
-        SavorUtils.User.recordForScreenPics(pageContext, extendData, currentTime, pubdetailList[index]);
-        SavorUtils.Netty.push(pageContext, nettyMessageContent); // 向机顶盒推送消息
+      
+      var box_mac = pageContext.data.box_mac
+      var pubdetail = mediaObject.pubdetail;
+      var res_nums = pubdetail.length;
+      var res_type = mediaSubGroupType
+      if(res_type==1){
+        var action = 11;
+      }else {
+        var action = 12;
       }
+
+      app.boxShow(box_mac, forscreen_id, pubdetail, res_type, res_nums, action, '', that);
+
+      /*if (mediaSubGroupType == SavorUtils.Constant.MediaType.PICTURE){
+        var box_mac = pageContext.data.box_mac
+        var pubdetail = mediaObject.pubdetail;
+        var res_nums = pubdetail.length;
+        var res_type = 1;
+        console.log(pageContext)
+        app.boxShow(box_mac, forscreen_id, pubdetail, res_type, res_nums, 11, '', that);
+      }else {
+        for (let index = 0; index < mediaSubGroupSize; index++) {
+          let extendData = {};
+          let action = -1;
+          let order = index + 1;
+          let url = pubdetailList[index]['forscreen_url'];
+          let filename = pubdetailList[index]['filename'];
+          let res_id = pubdetailList[index]['res_id'];
+          let nettyMessageContent = '{"resource_type":2,"url":"' + url + '","filename":"' + filename + '","openid":"' + pageContext.data.openid + '","avatarUrl":"' + avatarUrl + '","nickName":"' + nickName + '","forscreen_id":"' + currentTime + '"';
+          if (mediaSubGroupType == SavorUtils.Constant.MediaType.PICTURE) { // 图片
+            extendData.action = 11; //发现图片点播
+            delete extendData.duration;
+            nettyMessageContent += ',"action":4,"img_id":"' + res_id + '","img_nums":' + mediaSubGroupSize + ',"forscreen_char":"","order":' + order;
+          } else { // 视频
+            extendData.action = 12; //发现视频点播
+            extendData.duration = pubdetailList[index]['duration']
+            nettyMessageContent += ',"action":2,"video_id":"' + res_id + '"';
+          }
+          nettyMessageContent += '}';
+          SavorUtils.User.recordForScreenPics(pageContext, extendData, currentTime, pubdetailList[index]);
+          SavorUtils.Netty.push(pageContext, nettyMessageContent); // 向机顶盒推送消息
+        }*/
+      
       if (mediaSubGroupType == SavorUtils.Constant.MediaType.PICTURE) {
         utils.tryCatch(mta.Event.stat('findBoxShowpic', {
           'openid': pageContext.data.openid
@@ -186,7 +209,7 @@ let SavorUtils = {
       } else {
         mediaObject = pageContext.data.mediaObjectList[indexInList];
       }
-      SavorUtils.User.launchMediaSubGroup(pageContext, mediaObject);
+      SavorUtils.User.launchMediaSubGroup(pageContext, mediaObject, forscreenId);
       utils.PostRequest(api_url + '/Smallapp21/CollectCount/recCount', {
         res_id: forscreenId
       });
@@ -767,7 +790,8 @@ Page({
     if (self.data.box_mac == '') {
       app.scanQrcode(pageid);
     } else {
-      utils.PostRequest(api_url + '/smallapp21/User/isForscreenIng', {
+      SavorUtils.User.launchMedia(self, forscreenId, indexInList);
+      /*utils.PostRequest(api_url + '/smallapp21/User/isForscreenIng', {
         box_mac: self.data.box_mac
       }, (data, headers, cookies, errMsg, statusCode) => {
         let is_forscreen = data.result.is_forscreen;
@@ -777,14 +801,14 @@ Page({
             content: '当前电视正在进行投屏,继续投屏有可能打断当前投屏中的内容.',
             success: function(res) {
               if (res.confirm) {
-                SavorUtils.User.launchMedia(self, forscreenId, indexInList);
+               
               }
             }
           })
         } else {
           SavorUtils.User.launchMedia(self, forscreenId, indexInList);
         }
-      });
+      });*/
     }
   }, //电视播放结束
 
