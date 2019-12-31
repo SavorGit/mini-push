@@ -997,5 +997,6 @@ Page({
     that.setData({
       showModal: false,
     })
+    mta.Event.stat("closewxauth",{})
   }
 })
