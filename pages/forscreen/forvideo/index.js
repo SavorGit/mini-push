@@ -103,7 +103,6 @@ Page({
         });
         lead(openid);
         //res_sup_time = (new Date()).valueOf();
-        //uploadVedio(res, box_mac, openid, res_sup_time);
         mta.Event.stat('LaunchVideoWithNet_Launch_ChooseVideo', {
           'status': 'success'
         });
@@ -214,7 +213,7 @@ Page({
       is_assist: is_assist
     })
 
-    res_sup_time = (new Date()).valueOf();
+    
 
     wx.request({
       url: api_url + '/smallapp21/User/isForscreenIng',
@@ -234,16 +233,9 @@ Page({
             content: '当前电视正在进行投屏,继续投屏有可能打断当前投屏中的内容.',
             success: function(res) {
               if (res.confirm) {
-                /*if (is_open_simple > 0) {
-                  timer8_0 = setTimeout(function () {
-                    that.setData({
-                      is_show_jump: true,
-                      show: true
-
-                    })
-                  }, 10000);
-                }*/
-                uploadVedio(video, box_mac, openid, res_sup_time, is_pub_hotelinfo, is_share, duration, avatarUrl, nickName, public_text, timer8_0);
+                
+                
+                uploadVedio(video, box_mac, openid, is_pub_hotelinfo, is_share, duration, avatarUrl, nickName, public_text, timer8_0);
                 app.recordFormId(openid, formId);
 
                 if (public_text = '' || typeof (public_text) == 'undefined') {
@@ -273,7 +265,7 @@ Page({
           
         } else {
           
-          uploadVedio(video, box_mac, openid, res_sup_time, is_pub_hotelinfo, is_share, duration, avatarUrl, nickName, public_text, timer8_0);
+          uploadVedio(video, box_mac, openid, is_pub_hotelinfo, is_share, duration, avatarUrl, nickName, public_text, timer8_0);
           app.recordFormId(openid, formId);
           if (public_text = '' || typeof (public_text) == 'undefined') {
             public_text = 0;
@@ -289,7 +281,7 @@ Page({
 
 
 
-    function uploadVedio(video, box_mac, openid, res_sup_time, is_pub_hotelinfo, is_share, duration, avatarUrl, nickName, public_text, timer8_0) {
+    function uploadVedio(video, box_mac, openid, is_pub_hotelinfo, is_share, duration, avatarUrl, nickName, public_text, timer8_0) {
 
       wx.request({
         url: api_url + '/Smallapp/Index/getOssParams',
@@ -299,12 +291,12 @@ Page({
         success: function(rest) {
           policy = rest.data.policy;
           signature = rest.data.signature;
-          uploadOssVedio(policy, signature, video, box_mac, openid, res_sup_time, is_pub_hotelinfo, is_share, duration, avatarUrl, nickName, public_text, timer8_0);
+          uploadOssVedio(policy, signature, video, box_mac, openid, is_pub_hotelinfo, is_share, duration, avatarUrl, nickName, public_text, timer8_0);
         }
       });
     }
 
-    function uploadOssVedio(policy, signature, video, box_mac, openid, res_sup_time, is_pub_hotelinfo, is_share, duration, avatarUrl, nickName, public_text, timer8_0) {
+    function uploadOssVedio(policy, signature, video, box_mac, openid, is_pub_hotelinfo, is_share, duration, avatarUrl, nickName, public_text, timer8_0) {
 
       var filename = video; //视频url
 
@@ -316,7 +308,7 @@ Page({
       var mobile_model = app.globalData.mobile_model;
       var postf_t = filename.substring(index1, index2); //后缀名
       var timestamp = (new Date()).valueOf();
-
+      res_sup_time = timestamp;
       var upload_task = wx.uploadFile({
         url: oss_upload_url,
         filePath: filename,
@@ -533,7 +525,6 @@ Page({
           duration: res.duration,
           size: res.size
         });
-        //uploadVedio(res, box_mac, openid);
         mta.Event.stat('LaunchVideoWithNet_Launch_ChooseVideo', {
           'status': 'success'
         });
@@ -549,131 +540,6 @@ Page({
       }
     });
 
-    function uploadVedio(video, box_mac, openid) {
-      wx.request({
-        url: api_url + '/Smallapp/Index/getOssParams',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        success: function(rest) {
-          policy = rest.data.policy;
-          signature = rest.data.signature;
-          uploadOssVedio(policy, signature, video, box_mac, openid);
-        }
-      });
-    }
-
-    function uploadOssVedio(policy, signature, video, box_mac, openid) {
-
-      var filename = video.tempFilePath; //视频url
-      //var filename_img = video.thumbTempFilePath; //视频封面图
-      //console.log(video);
-      var index1 = filename.lastIndexOf(".");
-      var index2 = filename.length;
-      var mobile_brand = app.globalData.mobile_brand;
-      var mobile_model = app.globalData.mobile_model;
-      var postf_t = filename.substring(index1, index2); //后缀名
-      var timestamp = (new Date()).valueOf();
-
-      var upload_task = wx.uploadFile({
-        url: oss_upload_url,
-        filePath: filename,
-        name: 'file',
-
-        formData: {
-          Bucket: "redian-produce",
-          name: filename,
-          key: "forscreen/resource/" + timestamp + postf_t,
-          policy: policy,
-          OSSAccessKeyId: app.globalData.oss_access_key_id,
-          sucess_action_status: "200",
-          signature: signature
-
-        },
-        success: function(res) {
-          let res_eup_time = (new Date()).valueOf();
-
-          /*wx.request({
-            url: "https://netty-push.littlehotspot.com/push/box",
-            header: {
-              "Content-Type": "application/x-www-form-urlencoded"
-            },
-            method: "POST",
-            data: {
-              box_mac: box_mac,
-              cmd: 'call-mini-program',
-              msg: '{ "action":2, "url": "forscreen/resource/' + timestamp + postf_t + '", "filename":"' + timestamp + postf_t + '","openid":"' + openid + '","resource_type":2,"video_id":"' + timestamp+'"}',
-              req_id: timestamp
-            },
-            success: function (result) {
-             
-
-            },
-          });*/
-          try {
-            let consumeDuration = res_eup_time - timestamp;
-            mta.Event.stat('LaunchVideoWithNet_Launching_OSSDuration', {
-              'duration': Math.round(parseInt(consumeDuration) / 100) / 10
-            });
-          } catch (e) {
-            //TODO nothing
-          }
-        }
-      });
-      upload_task.onProgressUpdate((res) => {
-        //console.log(res.progress);
-        that.setData({
-          vedio_percent: res.progress
-        })
-        if (res.progress == 100) {
-          var res_eup_time = (new Date()).valueOf();
-          //console.log(res_eup_time);
-
-          wx.request({
-            url: api_url + '/Smallapp21/index/recordForScreenPics',
-            header: {
-              'content-type': 'application/json'
-            },
-            data: {
-              openid: openid,
-              box_mac: box_mac,
-              action: 2,
-              resource_type: 2,
-              mobile_brand: mobile_brand,
-              mobile_model: mobile_model,
-              forscreen_char: forscreen_char,
-              imgs: '["forscreen/resource/' + timestamp + postf_t + '"]',
-              resource_id: timestamp,
-              res_sup_time: res_sup_time,
-              res_eup_time: res_eup_time,
-              resource_size: res.totalBytesSent
-            },
-            success: function(ret) {
-              wx.request({
-                url: api_url + '/Netty/Index/index',
-                headers: {
-                  'Content-Type': 'application/json'
-                },
-                method: "POST",
-                data: {
-                  box_mac: box_mac,
-                  msg: '{ "action":2, "url": "forscreen/resource/' + timestamp + postf_t + '", "filename":"' + timestamp + postf_t + '","openid":"' + openid + '","resource_type":2,"video_id":"' + timestamp + '"}',
-                },
-                success: function(result) {
-
-
-                },
-              });
-            }
-          });
-        }
-
-      });
-      that.setData({
-        showVedio: true,
-        upload_vedio_temp: filename
-      });
-    }
   },
 
   //退出投屏
