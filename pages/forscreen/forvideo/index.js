@@ -331,7 +331,7 @@ Page({
             showVedio: false,
           })
           wx.request({
-            url: api_url + '/Netty/Index/index',
+            url: api_url + '/Netty/Index/pushnetty',
             headers: {
               'Content-Type': 'application/json'
             },
@@ -549,7 +549,7 @@ Page({
     box_mac = e.currentTarget.dataset.boxmac;
     var timestamp = (new Date()).valueOf();
     wx.request({
-      url: api_url + '/Netty/Index/index',
+      url: api_url + '/Netty/Index/pushnetty',
       headers: {
         'Content-Type': 'application/json'
       },
@@ -648,7 +648,7 @@ Page({
             success: function(res) {
               if (res.confirm) {
                 wx.request({
-                  url: api_url + '/Netty/Index/index',
+                  url: api_url + '/Netty/Index/pushnetty',
                   headers: {
                     'Content-Type': 'application/json'
                   },
@@ -719,7 +719,7 @@ Page({
           })
         } else {
           wx.request({
-            url: api_url + '/Netty/Index/index',
+            url: api_url + '/Netty/Index/pushnetty',
             headers: {
               'Content-Type': 'application/json'
             },
@@ -870,7 +870,7 @@ Page({
     var change_type = e.target.dataset.change_type;
     var timestamp = (new Date()).valueOf();
     wx.request({
-      url: api_url + '/Netty/Index/index',
+      url: api_url + '/Netty/Index/pushnetty',
       headers: {
         'Content-Type': 'application/json'
       },

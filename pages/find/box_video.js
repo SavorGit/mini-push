@@ -164,7 +164,7 @@ let SavorUtils = {
   },
 
   Netty: {
-    push: (pageContext, message) => utils.PostRequest(api_url + '/Netty/Index/index', {
+    push: (pageContext, message) => utils.PostRequest(api_url + '/Netty/Index/pushnetty', {
       box_mac: pageContext.data.box_mac,
       msg: message
     }, (data, headers, cookies, errMsg, statusCode) => wx.showToast({

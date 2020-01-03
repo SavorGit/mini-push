@@ -193,7 +193,7 @@ App({
       msg.img_list = res_obj
       msg = JSON.stringify(msg)
       wx.request({
-        url: that.globalData.api_url + '/Netty/Index/index',
+        url: that.globalData.api_url + '/Netty/Index/pushnetty',
         headers: {
           'Content-Type': 'application/json'
         },
@@ -246,7 +246,7 @@ App({
         });
 
         wx.request({
-          url: that.globalData.api_url + '/Netty/Index/index',
+          url: that.globalData.api_url + '/Netty/Index/pushnetty',
           headers: {
             'Content-Type': 'application/json'
           },
@@ -292,7 +292,7 @@ App({
     if (link_type == 1) {
       var timestamp = (new Date()).valueOf();
       wx.request({
-        url: that.globalData.api_url + '/Netty/Index/index',
+        url: that.globalData.api_url + '/Netty/Index/pushnetty',
         headers: {
           'Content-Type': 'application/json'
         },
@@ -377,14 +377,14 @@ App({
                 success: function (res) {
                   if (res.confirm) {
                     wx.request({
-                      url: that.globalData.api_url + '/Netty/Index/index',
+                      url: that.globalData.api_url + '/Netty/Index/pushnetty',
                       headers: {
                         'Content-Type': 'application/json'
                       },
                       method: "POST",
                       data: {
                         box_mac: box_mac,
-                        msg: '{ "action": 9,"url":"' + qrcode_url + '"}',
+                        msg: '{ "action": 9,"url":"' + qrcode_url + '","openid":"'+openid+'","forscreen_id":"'+timestamp+'"}',
                       },
                       success: function () {
                         wx.showToast({
@@ -398,6 +398,7 @@ App({
                             'content-type': 'application/json'
                           },
                           data: {
+                            forscreen_id:timestamp,
                             openid: openid,
                             box_mac: box_mac,
                             action: 9,
@@ -416,14 +417,14 @@ App({
               })
             } else {
               wx.request({
-                url: that.globalData.api_url + '/Netty/Index/index',
+                url: that.globalData.api_url + '/Netty/Index/pushnetty',
                 headers: {
                   'Content-Type': 'application/json'
                 },
                 method: "POST",
                 data: {
                   box_mac: box_mac,
-                  msg: '{ "action": 9,"url":"' + qrcode_url + '"}',
+                  msg: '{ "action": 9,"url":"' + qrcode_url + '","openid":"'+openid+'","forscreen_id":"'+timestamp+'"}',
                 },
                 success: function () {
                   wx.showToast({
@@ -437,6 +438,7 @@ App({
                       'content-type': 'application/json'
                     },
                     data: {
+                      forscreen_id:timestamp,
                       openid: openid,
                       box_mac: box_mac,
                       action: 9,
@@ -496,7 +498,7 @@ App({
     var link_type = that.globalData.link_type;
     if (link_type == 1) {
       wx.request({
-        url: that.globalData.api_url + '/Netty/Index/index',
+        url: that.globalData.api_url + '/Netty/Index/pushnetty',
         headers: {
           'Content-Type': 'application/json'
         },
@@ -558,7 +560,7 @@ App({
     if (link_type == 1) {
 
       wx.request({
-        url: that.globalData.api_url + '/Netty/Index/index',
+        url: that.globalData.api_url + '/Netty/Index/pushnetty',
         headers: {
           'Content-Type': 'application/json'
         },

@@ -119,7 +119,7 @@ Page({
               success: function(res) {
                 if (res.confirm) {
                   wx.request({
-                    url: api_url + '/Netty/Index/index',
+                    url: api_url + '/Netty/Index/pushnetty',
                     headers: {
                       'Content-Type': 'application/json'
                     },
@@ -173,7 +173,7 @@ Page({
             })
           } else {
             wx.request({
-              url: api_url + '/Netty/Index/index',
+              url: api_url + '/Netty/Index/pushnetty',
               headers: {
                 'Content-Type': 'application/json'
               },

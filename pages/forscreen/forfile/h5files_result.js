@@ -325,7 +325,7 @@ Page({
 
       //单张图片投屏
       wx.request({
-        url: api_url + '/Netty/Index/index',
+        url: api_url + '/Netty/Index/pushnetty',
         headers: {
           'Content-Type': 'application/json'
         },
@@ -421,7 +421,7 @@ Page({
 
       //单张图片投屏
       wx.request({
-        url: api_url + '/Netty/Index/index',
+        url: api_url + '/Netty/Index/pushnetty',
         headers: {
           'Content-Type': 'application/json'
         },
@@ -475,7 +475,7 @@ Page({
     var filename = file_arr[file_length - 2] + '_' + file_arr[file_length - 1] + '_' + file_arr[file_length];
     //单张图片投屏
     wx.request({
-      url: api_url + '/Netty/Index/index',
+      url: api_url + '/Netty/Index/pushnetty',
       headers: {
         'Content-Type': 'application/json'
       },
@@ -519,7 +519,7 @@ Page({
     box_mac = e.currentTarget.dataset.box_mac;
     var timestamp = (new Date()).valueOf();
     wx.request({
-      url: api_url + '/Netty/Index/index',
+      url: api_url + '/Netty/Index/pushnetty',
       headers: {
         'Content-Type': 'application/json'
       },

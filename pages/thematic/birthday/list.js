@@ -194,7 +194,7 @@ Page({
                 if (res.confirm) {
                   mta.Event.stat('breakForscreen', { 'isbreak':1 })
                   wx.request({
-                    url: api_url + '/Netty/Index/index',
+                    url: api_url + '/Netty/Index/pushnetty',
                     headers: {
                       'Content-Type': 'application/json'
                     },
@@ -241,7 +241,7 @@ Page({
             })
           } else {
             wx.request({
-              url: api_url + '/Netty/Index/index',
+              url: api_url + '/Netty/Index/pushnetty',
               headers: {
                 'Content-Type': 'application/json'
               },

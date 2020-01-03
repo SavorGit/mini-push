@@ -260,7 +260,7 @@ Page({
 
                   }, 1000);
                   wx.request({
-                    url: api_url+'/Netty/Index/index',
+                    url: api_url+'/Netty/Index/pushnetty',
                     headers: {
                       'Content-Type': 'application/json'
                     },
@@ -331,7 +331,7 @@ Page({
 
             }, 1000);
             wx.request({
-              url: api_url+'/Netty/Index/index',
+              url: api_url+'/Netty/Index/pushnetty',
               headers: {
                 'Content-Type': 'application/json'
               },

@@ -98,7 +98,7 @@ Page({
                 })
 
                 wx.request({
-                  url: api_url + '/Netty/index/index',
+                  url: api_url + '/Netty/Index/pushnetty',
                   data: {
                     box_mac: box_mac,
                     msg: '{"action":110,"url":"' + game_h5_url + '"}'

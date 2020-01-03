@@ -308,7 +308,7 @@ Page({
           if (is_have == 0) {
             var code = res.data.result.code;
             wx.request({
-              url: api_url+'/Netty/Index/index',
+              url: api_url+'/Netty/Index/pushnetty',
               headers: {
                 'Content-Type': 'application/json'
               },

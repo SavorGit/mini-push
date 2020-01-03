@@ -340,7 +340,7 @@ Page({
                       var res_id = pubdetail[i]['res_id'];
 
                       wx.request({
-                        url: api_url + '/Netty/Index/index',
+                        url: api_url + '/Netty/Index/pushnetty',
                         headers: {
                           'Content-Type': 'application/json'
                         },
@@ -402,7 +402,7 @@ Page({
                       });
 
                       wx.request({
-                        url: api_url + '/Netty/Index/index',
+                        url: api_url + '/Netty/Index/pushnetty',
                         headers: {
                           'Content-Type': 'application/json'
                         },
@@ -500,7 +500,7 @@ Page({
                 var res_id = pubdetail[i]['res_id'];
 
                 wx.request({
-                  url: api_url + '/Netty/Index/index',
+                  url: api_url + '/Netty/Index/pushnetty',
                   headers: {
                     'Content-Type': 'application/json'
                   },
@@ -562,7 +562,7 @@ Page({
                 });
 
                 wx.request({
-                  url: api_url + '/Netty/Index/index',
+                  url: api_url + '/Netty/Index/pushnetty',
                   headers: {
                     'Content-Type': 'application/json'
                   },
