@@ -196,6 +196,7 @@ Page({
                   },
                   data:{
                     task_id: task_id,
+                    forscreen_id:forscreen_id
                   },
                   success: function (res) {
                     //console.log(res);
@@ -647,6 +648,7 @@ Page({
                   },
                   data: {
                     task_id: task_id,
+                    forscreen_id:forscreen_id
                   },
                   success: function (res) {
                     //console.log(res);
