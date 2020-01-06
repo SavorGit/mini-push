@@ -3,13 +3,13 @@
 <template is="navigationBarForTopLevel" data='{{statusBarHeight: statusBarHeight,titleText:"热点投屏"}}' />
 
 <view class="container flex-column-center-flex_start theme-container" style='height: calc(100vh - 46px - {{statusBarHeight}}px);'>
-  <view wx:if="{{is_link==1}}" class='page_banner theme7 theme-font'>
+  <!-- <view wx:if="{{is_link==1}}" class='page_banner theme7 theme-font'>
     <view class='layout flex-row-center-space_between'>
       <label class="one-line-overflow">您已经连接{{room_name}}电视</label>
       <navigator target="miniProgram" app-id="{{rest_appid}}" path="pages/index/index?box_mac={{box_mac}}" class='theme-button'>前往餐厅版</navigator>
-      <!-- <navigator version="trial" target="miniProgram" app-id="{{jijian_appid}}" path="pages/index/index?box_mac={{box_mac}}" class='theme-button'>前往极简版</navigator> -->
+      <navigator version="trial" target="miniProgram" app-id="{{jijian_appid}}" path="pages/index/index?box_mac={{box_mac}}" class='theme-button'>前往极简版</navigator>
     </view>
-  </view>
+  </view> -->
   <view class='page_top' wx:if="{{link_type!=2}}">
     <view class='v-structure flex-row-center-space_between theme-panel-2 font_666666_28'>
       <picker bindchange="bindCityPickerChange" value="{{cityIndex}}" range="{{cityArray}}">
