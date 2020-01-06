@@ -178,7 +178,8 @@ App({
             res_eup_time: 0,
             resource_size: pubdetail[i]['resource_size'],
             is_pub_hotelinfo: 0,
-            is_share: 0
+            is_share: 0,
+            resource_type:1
           },success: function (ret) {
 
           }
@@ -241,6 +242,7 @@ App({
             is_share: 0,
             forscreen_id: forscreen_id,
             duration: pubdetail[i]['duration'],
+            resource_type:2
           },
           success: function (ret) { }
         });

@@ -126,7 +126,7 @@ Page({
                     method: "POST",
                     data: {
                       box_mac: box_mac,
-                      msg: '{ "action": 5,"url":"' + vediourl + '","filename":"' + filename + '","forscreen_id":' + timestamp + ',"resource_id":' + timestamp + '}',
+                      msg: '{ "action": 5,"url":"' + vediourl + '","filename":"' + filename + '","forscreen_id":' + timestamp + ',"resource_id":' + timestamp + ',"openid":"'+openid+'"}',
                     },
                     success: function(res) {
                       if (res.data.code == 10000) {
@@ -180,7 +180,7 @@ Page({
               method: "POST",
               data: {
                 box_mac: box_mac,
-                msg: '{ "action": 5,"url":"' + vediourl + '","filename":"' + filename + '","forscreen_id":' + timestamp + ',"resource_id":' + timestamp + '}',
+                msg: '{ "action": 5,"url":"' + vediourl + '","filename":"' + filename + '","forscreen_id":' + timestamp + ',"resource_id":' + timestamp + ',"openid":"'+openid+'"}',
               },
               success: function(res) {
                 if (res.data.code == 10000) {
