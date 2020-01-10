@@ -85,7 +85,7 @@ Page({
     var res_type = e.target.dataset.res_type;
     var res_list = e.target.dataset.historylist;
     var res_nums = res_list.length;
-    
+    pubdetail = []
     for(var i=0;i<res_nums;i++){
       var tmp = {forscreen_url:'',res_id:'',filename:'',resource_size:'',duration:0};
       tmp.forscreen_url = res_list[i].forscreen_url;
