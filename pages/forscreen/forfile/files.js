@@ -299,6 +299,7 @@ Page({
       var avatarUrl = user_info.avatarUrl;
       var nickName = user_info.nickName;
 
+      var timestamp = (new Date()).valueOf();
       //单张图片投屏
       wx.request({
         url: api_url + '/Netty/Index/pushnetty',
@@ -308,7 +309,7 @@ Page({
         method: "POST",
         data: {
           box_mac: box_mac,
-          msg: '{ "action": 7,"resource_type":1, "url": "' + forscreen_img + '", "filename":"' + filename + '","openid":"' + openid + '","avatarUrl":"' + avatarUrl + '","nickName":"' + nickName + '","forscreen_id":"' + forscreen_id + '"}',
+          msg: '{ "action": 7,"resource_type":1, "url": "' + forscreen_img + '", "filename":"' + filename + '","openid":"' + openid + '","avatarUrl":"' + avatarUrl + '","nickName":"' + nickName + '","forscreen_id":"' + forscreen_id + '","resource_id":"'+timestamp+'"}',
         },
         success: function (result) {
           wx.request({
@@ -324,7 +325,8 @@ Page({
               resource_type: 1,
               mobile_brand: mobile_brand,
               mobile_model: mobile_model,
-              imgs: '["' + forscreen_img + '"]'
+              imgs: '["' + forscreen_img + '"]',
+              resource_id:timestamp,
             },
           });
         },
@@ -396,7 +398,7 @@ Page({
         toView: target
       })
 
-
+      var timestamp = (new Date()).valueOf();
 
       //单张图片投屏
       wx.request({
@@ -407,7 +409,7 @@ Page({
         method: "POST",
         data: {
           box_mac: box_mac,
-          msg: '{ "action": 7,"resource_type":1, "url": "' + forscreen_img + '", "filename":"' + filename + '","openid":"' + openid + '","avatarUrl":"' + avatarUrl + '","nickName":"' + nickName + '","forscreen_id":"' + forscreen_id + '"}',
+          msg: '{ "action": 7,"resource_type":1, "url": "' + forscreen_img + '", "filename":"' + filename + '","openid":"' + openid + '","avatarUrl":"' + avatarUrl + '","nickName":"' + nickName + '","forscreen_id":"' + forscreen_id + '","resource_id":"'+timestamp+'"}',
         },
         success: function (result) {
           wx.request({
@@ -423,7 +425,8 @@ Page({
               resource_type: 1,
               mobile_brand: mobile_brand,
               mobile_model: mobile_model,
-              imgs: '["' + forscreen_img + '"]'
+              imgs: '["' + forscreen_img + '"]',
+              resource_id:timestamp
             },
           });
         },
@@ -452,6 +455,7 @@ Page({
     var file_arr = forscreen_img.split('/');
     var file_length = file_arr.length - 1;
     var filename = file_arr[file_length - 2] + '_' + file_arr[file_length - 1] + '_' + file_arr[file_length];
+    var timestamp = (new Date()).valueOf();
     //单张图片投屏
     wx.request({
       url: api_url + '/Netty/Index/pushnetty',
@@ -461,7 +465,7 @@ Page({
       method: "POST",
       data: {
         box_mac: box_mac,
-        msg: '{ "action": 7,"resource_type":1, "url": "' + forscreen_img + '", "filename":"' + filename + '","openid":"' + openid + '","avatarUrl":"' + avatarUrl + '","nickName":"' + nickName + '","forscreen_id":"' + forscreen_id + '"}',
+        msg: '{ "action": 7,"resource_type":1, "url": "' + forscreen_img + '", "filename":"' + filename + '","openid":"' + openid + '","avatarUrl":"' + avatarUrl + '","nickName":"' + nickName + '","forscreen_id":"' + forscreen_id + '","resource_id":"'+timestamp+'"}',
       },
       success: function (result) {
         wx.request({
@@ -477,7 +481,8 @@ Page({
             resource_type: 1,
             mobile_brand: mobile_brand,
             mobile_model: mobile_model,
-            imgs: '["' + forscreen_img + '"]'
+            imgs: '["' + forscreen_img + '"]',
+            resource_id:timestamp
           },
         });
       },
@@ -749,7 +754,7 @@ Page({
       var user_info = wx.getStorageSync("savor_user_info");
       var avatarUrl = user_info.avatarUrl;
       var nickName = user_info.nickName;
-
+      var timestamp = (new Date()).valueOf();
       //单张图片投屏
       wx.request({
         url: api_url + '/Netty/Index/pushnetty',
@@ -759,7 +764,7 @@ Page({
         method: "POST",
         data: {
           box_mac: box_mac,
-          msg: '{ "action": 7,"resource_type":1, "url": "' + forscreen_img + '", "filename":"' + filename + '","openid":"' + openid + '","avatarUrl":"' + avatarUrl + '","nickName":"' + nickName + '","forscreen_id":"' + forscreen_id + '"}',
+          msg: '{ "action": 7,"resource_type":1, "url": "' + forscreen_img + '", "filename":"' + filename + '","openid":"' + openid + '","avatarUrl":"' + avatarUrl + '","nickName":"' + nickName + '","forscreen_id":"' + forscreen_id + '","resource_id":"'+timestamp+'"}',
         },
         success: function (result) {
           wx.request({
@@ -775,7 +780,8 @@ Page({
               resource_type: 1,
               mobile_brand: mobile_brand,
               mobile_model: mobile_model,
-              imgs: '["' + forscreen_img + '"]'
+              imgs: '["' + forscreen_img + '"]',
+              resource_id:timestamp
             },
           });
         },
