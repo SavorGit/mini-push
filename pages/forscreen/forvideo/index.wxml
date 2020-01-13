@@ -108,11 +108,11 @@
             </view>
             <view wx:else class="video flex-row-flex_start-start">
               <view class="cover" wx:for="{{bean.list}}" wx:key="pkey" wx:for-item="item" wx:for-index="indexs">
-                <navigator url="/pages/forscreen/video/launch_video?video_url={{item.res_url}}&video_name=&box_mac={{box_mac}}&res_id={{item.resource_id}}&filename={{item.filename}}&video_img_url={{item.imgurl}}">
+                <navigator url="">
                   <image mode='aspectFill' src="{{item.imgurl}}"></image>
                 </navigator>
                 <view>
-                  <navigator url="/pages/forscreen/video/launch_video?video_url={{item.res_url}}&video_name=&box_mac={{box_mac}}&res_id={{item.resource_id}}&filename={{item.filename}}&video_img_url={{item.imgurl}}">
+                  <navigator url="">
                     <label class="fa fa-play-circle-o icon theme-font4"></label>
                   </navigator>
                 </view>
