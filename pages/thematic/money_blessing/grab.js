@@ -32,7 +32,6 @@ Page({
     var that = this;
     scene = decodeURIComponent(options.scene);
     var tims = (new Date()).valueOf();
-    scene = '1042_00226D2FB22E_'+tims;
     var scene_arr = scene.split('_');
     order_id = scene_arr[0];
     box_mac = scene_arr[1];

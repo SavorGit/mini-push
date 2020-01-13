@@ -627,6 +627,7 @@ App({
                   url: params
                 })
               } else if (res.scanType == 'WX_CODE') {
+                console.log(res)
                 wx.navigateTo({
                   url: '/' + res.path
                 })
