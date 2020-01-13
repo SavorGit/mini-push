@@ -69,7 +69,7 @@ Page({
       },
       success: function(res) {
         if (res.data.code == 10000) {
-          var game_h5_url = "http://" + res.data.result.game_url + box_mac;
+          var game_h5_url = "https://" + res.data.result.game_url + box_mac;
           var game_m_h5_url = "https://" + res.data.result.game_url + box_mac + '/' + res.data.result.game_m_url;
           // wx.request({
           //   url: api_url+'/Games/ClimbTree/clearLaunchGame',
