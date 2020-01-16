@@ -246,7 +246,13 @@ App({
           },
           success: function (ret) { }
         });
-
+        if(action==5){
+          var netty_action = 5
+          var url = that.globalData.oss_url+"/"+pubdetail[i]['forscreen_url']
+        }else {
+          var netty_action = 2
+          var url = pubdetail[i]['forscreen_url']
+        }
         wx.request({
           url: that.globalData.api_url + '/Netty/Index/pushnetty',
           headers: {
@@ -255,7 +261,7 @@ App({
           method: "POST",
           data: {
             box_mac: box_mac,
-            msg: '{ "action":2, "url": "' + pubdetail[i]['forscreen_url'] + '", "filename":"' + pubdetail[i]['filename'] + '","openid":"' + openid + '","resource_type":2,"video_id":"' + pubdetail[i]['res_id'] + '","avatarUrl":"' + avatarUrl + '","nickName":"' + nickName + '","forscreen_id":"' + forscreen_id + '"}',
+            msg: '{ "action":'+netty_action+', "url": "' + url+ '", "filename":"' + pubdetail[i]['filename'] + '","openid":"' + openid + '","resource_type":2,"video_id":"' + pubdetail[i]['res_id'] + '","avatarUrl":"' + avatarUrl + '","nickName":"' + nickName + '","forscreen_id":"' + forscreen_id + '"}',
           },
           success: function (result) {
 

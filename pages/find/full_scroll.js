@@ -140,6 +140,7 @@ let SavorUtils = {
     // 投屏媒体组
     launchMediaSubGroup: (pageContext, mediaObject, forscreen_id) => {
       var that =  this;
+      console.log(mediaObject);
       let user_info = wx.getStorageSync("savor_user_info");
       let avatarUrl = user_info.avatarUrl;
       let nickName = user_info.nickName;
@@ -152,11 +153,17 @@ let SavorUtils = {
       var pubdetail = mediaObject.pubdetail;
       var res_nums = pubdetail.length;
       var res_type = mediaSubGroupType
-      if(res_type==1){
-        var action = 11;
-      }else {
-        var action = 12;
+      
+      if(mediaObject.type==1){
+        action = 5;
+      }else{
+        if(res_type==1){
+          var action = 11;
+        }else {
+          var action = 12;
+        }
       }
+      
 
       app.boxShow(box_mac, forscreen_id, pubdetail, res_type, res_nums, action, '', that);
 
