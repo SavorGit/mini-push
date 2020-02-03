@@ -4,210 +4,215 @@
 
 <scroll-view class="container flex-column-center-flex_start theme-container" style='height: calc(100vh - 46px - {{statusBarHeight}}px);' scroll-y="true" scroll-with-animation="true">
 
-  <!-- 轮播图面板 -->
-  <swiper wx:if="{{imgUrls.length > 0}}" class="banner-loop-panel full_width" indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{lb_duration}}">
-    <block wx:for="{{imgUrls}}" wx:key="item" wx:for-index="index">
-      <swiper-item class="full_width full_height">
-        <navigator wx:if="{{item.clicktype == 1}}" class='full_width full_height' target="miniProgram" app-id="{{item.appid}}" path="{{item.linkcontent}}" bindtap="openAdsLink" data-ads_id="{{item.id}}">
-          <image mode='aspectFill' src="{{item.oss_addr}}" class="full_width full_height" />
-        </navigator>
-        <button wx:if="{{item.clicktype == 2}}" class='full_width full_height' bindtap='{{item.bindtap}}' data-boxmac="{{box_mac}}" data-openid="{{openid}}" data-index='{{index}}' data-linkcontent='{{item.linkcontent}}'>
-          <image mode='aspectFill' src="{{item.oss_addr}}" class="full_width full_height" />
-        </button>
-      </swiper-item>
-    </block>
-  </swiper>
+	<!-- 轮播图面板 -->
+	<swiper wx:if="{{imgUrls.length > 0}}" class="banner-loop-panel full_width" indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{lb_duration}}">
+		<block wx:for="{{imgUrls}}" wx:key="item" wx:for-index="index">
+			<swiper-item class="full_width full_height">
+				<navigator wx:if="{{item.clicktype == 1}}" class='full_width full_height' target="miniProgram" app-id="{{item.appid}}" path="{{item.linkcontent}}" bindtap="openAdsLink" data-ads_id="{{item.id}}">
+					<image mode='aspectFill' src="{{item.oss_addr}}" class="full_width full_height" />
+				</navigator>
+				<button wx:if="{{item.clicktype == 2}}" class='full_width full_height' bindtap='{{item.bindtap}}' data-boxmac="{{box_mac}}" data-openid="{{openid}}" data-index='{{index}}' data-linkcontent='{{item.linkcontent}}'>
+					<image mode='aspectFill' src="{{item.oss_addr}}" class="full_width full_height" />
+				</button>
+			</swiper-item>
+		</block>
+	</swiper>
 
-  <!-- 连接信息面板 -->
-  <view class="link-box-panel full_width theme-panel">
-    <view wx:if="{{is_link > 0}}" class='full_width full_height tip flex-column-center-start'>
-      <button bindtap="breakLink" data-boxmac="{{box_mac}}" data-openid="{{openid}}">
-        <image class="full_width full_height" src="/images/icon2/1CBEB6_link.png"></image>
-      </button>
-      <label class='font_666666_24'>您已链接【{{hotel_name}}】的{{room_name}}电视</label>
-    </view>
-    <view wx:else class='full_width full_height tip flex-column-center-start'>
-      <button bindtap="scanQrcode" data-boxmac="{{box_mac}}" data-openid="{{openid}}">
-        <image class="full_width full_height" src="/images/icon2/666666_link.png"></image>
-      </button>
-      <label class='font_666666_24'>当前暂未链接电视，链接后即可使用投屏功能</label>
-    </view>
-  </view>
-  <!-- 中部横幅图面板 -->
-  <view wx:if="{{imgUrls_mid.length > 0}}" class="middle-banner-panel full_width">
-    <block wx:for="{{imgUrls_mid}}" wx:key="item" wx:for-index="index">
-      <view class="full_width full_height" wx:if="{{item.clicktype == 2}}" bindtap='{{item.bindtap}}' data-boxmac="{{box_mac}}" data-openid="{{openid}}" data-index='{{index}}' data-linkcontent='{{item.linkcontent}}'>
-        <image class="full_width full_height" src="{{item.oss_addr}}"></image>
-      </view>
-      <navigator class="full_width full_height" wx:if="{{item.clicktype == 1}}" target="miniProgram" app-id="{{item.appid}}" path="{{item.linkcontent}}">
-        <image class="full_width full_height" src="{{item.oss_addr}}"></image>
-      </navigator>
-    </block>
-  </view>
-  <!-- 功能模块面板 -->
-  <view class='functional-module-panel flex-column-center-center full_width theme-panel'>
-    <view class="row flex-row-center-space_around full_width">
-      <form bindsubmit="chooseImage" report-submit="true">
-        <input class="display_hide" name="boxmac" value="{{box_mac}}"></input>
-        <input class="display_hide" name="openid" value="{{openid}}"></input>
-        <input class="display_hide" name="is_open_simple" value="{{is_open_simple}}"></input>
-        <input class="display_hide" name="intranet_ip" value="{{hotel_info.intranet_ip}}"></input>
-        <input class="display_hide" name="wifi_mac" value="{{hotel_info.wifi_mac}}"></input>
-        <input class="display_hide" name="wifi_name" value="{{hotel_info.wifi_name}}"></input>
-        <input class="display_hide" name="wifi_password" value="{{hotel_info.wifi_password}}"></input>
-        <button wx:if="{{is_link==0}}"  class="theme-font2" form-type="submit">
-          <view class="icon flex-column-center-center pic">
-            <image src='/images/icon2/FFFFFF_picture.png'></image>
-          </view>
-          <label>照片上电视</label>
-        </button>
-        <button wx:else disabled="{{link_type>0?false:true}}" class="theme-font2" form-type="submit">
-          <view class="icon flex-column-center-center pic">
-            <image src='/images/icon2/FFFFFF_picture.png'></image>
-          </view>
-          <label>照片上电视</label>
-        </button>
-      </form>
-      <form bindsubmit="chooseVedio" report-submit="true">
-        <input class="display_hide" name="boxmac" value="{{box_mac}}"></input>
-        <input class="display_hide" name="openid" value="{{openid}}"></input>
-        <input class="display_hide" name="intranet_ip" value="{{hotel_info.intranet_ip}}"></input>
-        <input class="display_hide" name="wifi_mac" value="{{hotel_info.wifi_mac}}"></input>
-        <input class="display_hide" name="wifi_name" value="{{hotel_info.wifi_name}}"></input>
-        <input class="display_hide" name="wifi_password" value="{{hotel_info.wifi_password}}"></input>
-        <button wx:if="{{is_link==0}}" class="theme-font2" form-type="submit">
-          <view class="icon flex-column-center-center video">
-            <image src='/images/icon2/FFFFFF_video.png'></image>
-          </view>
-          <label>视频上电视</label>
-        </button>
-        <button wx:else disabled="{{link_type>0?false:true}}" class="theme-font2" form-type="submit">
-          <view class="icon flex-column-center-center video">
-            <image src='/images/icon2/FFFFFF_video.png'></image>
-          </view>
-          <label>视频上电视</label>
-        </button>
-      </form>
-      <form bindsubmit="forfiles" report-submit="true">
-        <input class="display_hide" name="boxmac" value="{{box_mac}}"></input>
-        <input class="display_hide" name="openid" value="{{openid}}"></input>
-        <input class="display_hide" name="is_open_simple" value="{{is_open_simple}}"></input>
-        <button wx:if="{{is_link==0}}" class="theme-font2" form-type="submit">
-          <view class="icon flex-column-center-center file">
-            <image src='/images/icon2/FFFFFF_files.png'></image>
-          </view>
-          <label>文件上电视</label>
-        </button>
-        <button wx:elif="{{link_type==0 || link_type==2}}" disabled="true" class="theme-font2" form-type="submit">
-          <view class="icon flex-column-center-center file">
-            <image src='/images/icon2/FFFFFF_files.png'></image>
-          </view>
-          <label>文件上电视</label>
-        </button>
-        <button wx:else class="theme-font2" form-type="submit">
-          <view class="icon flex-column-center-center file">
-            <image src='/images/icon2/FFFFFF_files.png'></image>
-          </view>
-          <label>文件上电视</label>
-        </button>
-      </form>
-    </view>
-    <view class="row flex-row-center-space_around full_width">
-      <view>
-        <button wx:if="{{(link_type==0 || link_type==2) && is_link==1}}" disabled="true" class="theme-font2" bindtap='showHappy' data-boxmac="{{box_mac}}" data-openid="{{openid}}" data-intranet_ip="{{hotel_info.intranet_ip}}">
-          <view class="icon flex-column-center-center birthday">
-            <image src='/images/icon2/FFFFFF_birthday.png'></image>
-          </view>
-          <label>生日歌点播</label>
-        </button>
-        <button wx:elif="{{is_link==0}}" class="theme-font2" bindtap='showHappy' data-boxmac="{{box_mac}}" data-openid="{{openid}}" data-intranet_ip="{{hotel_info.intranet_ip}}">
-          <view class="icon flex-column-center-center birthday">
-            <image src='/images/icon2/FFFFFF_birthday.png'></image>
-          </view>
-          <label>生日歌点播</label>
-        </button>
-        <button wx:else class="theme-font2" bindtap='showHappy' data-boxmac="{{box_mac}}" data-openid="{{openid}}" data-intranet_ip="{{hotel_info.intranet_ip}}">
-          <view class="icon flex-column-center-center birthday">
-            <image src='/images/icon2/FFFFFF_birthday.png'></image>
-          </view>
-          <label>生日歌点播</label>
-        </button>
-      </view>
-      <view>
-        <button class="theme-font2" bindtap='hdgames' wx:if="{{is_link==0}}" data-linkcontent='/pages/game/climbtree/index' data-boxmac="{{box_mac}}" data-openid="{{openid}}">
-          <view class="icon flex-column-center-center game">
-            <image src='/images/icon2/FFFFFF_game.png'></image>
-          </view>
-          <label>互动小游戏</label>
-        </button>
-        <button class="theme-font2" bindtap='hdgames' wx:elif="{{link_type==0 || link_type==2}}" disabled="true" data-linkcontent='/pages/game/climbtree/index' data-boxmac="{{box_mac}}" data-openid="{{openid}}">
-          <view class="icon flex-column-center-center game">
-            <image src='/images/icon2/FFFFFF_game.png'></image>
-          </view>
-          <label>互动小游戏</label>
-        </button>
-        <button class="theme-font2" bindtap='hdgames' wx:elif="{{link_type==1 }}" data-linkcontent='/pages/game/climbtree/index' data-boxmac="{{box_mac}}" data-openid="{{openid}}">
-          <view class="icon flex-column-center-center game">
-            <image src='/images/icon2/FFFFFF_game.png'></image>
-          </view>
-          <label>互动小游戏</label>
-        </button>
-      </view>
-      <view>
-        <button class="theme-font2" bindtap='forscreenHistory' wx:if="{{is_link==0}}" data-boxmac="{{box_mac}}" data-openid="{{openid}}">
-          <view class="icon flex-column-center-center history">
-            <image src='/images/icon2/FFFFFF_history.png'></image>
-          </view>
-          <label>投屏历史</label>
-        </button>
+	<!-- 连接信息面板 -->
+	<view class="link-box-panel full_width theme-panel">
+		<view wx:if="{{is_link > 0}}" class='full_width full_height tip flex-column-center-start'>
+			<button bindtap="breakLink" data-boxmac="{{box_mac}}" data-openid="{{openid}}">
+				<image class="full_width full_height" src="/images/icon2/1CBEB6_link.png"></image>
+			</button>
+			<label class='font_666666_24'>您已链接【{{hotel_name}}】的{{room_name}}电视</label>
+		</view>
+		<view wx:else class='full_width full_height tip flex-column-center-start'>
+			<button bindtap="scanQrcode" data-boxmac="{{box_mac}}" data-openid="{{openid}}">
+				<image class="full_width full_height" src="/images/icon2/666666_link.png"></image>
+			</button>
+			<label class='font_666666_24'>当前暂未链接电视，链接后即可使用投屏功能</label>
+		</view>
+	</view>
 
-        <button class="theme-font2" bindtap='forscreenHistory' wx:elif="{{link_type==0 || link_type==2}}" disabled="true" data-boxmac="{{box_mac}}" data-openid="{{openid}}">
-          <view class="icon flex-column-center-center history">
-            <image src='/images/icon2/FFFFFF_history.png'></image>
-          </view>
-          <label>投屏历史</label>
-        </button>
-        <button class="theme-font2" bindtap='forscreenHistory' wx:elif="{{link_type==1}}" data-boxmac="{{box_mac}}" data-openid="{{openid}}">
-          <view class="icon flex-column-center-center history">
-            <image src='/images/icon2/FFFFFF_history.png'></image>
-          </view>
-          <label>投屏历史</label>
-        </button>
-      </view>
-      <!-- <navigator url="/pages/thematic/money_blessing/grab">test</navigator> -->
-      <!-- <navigator target="miniProgram" app-id="wxf96ad76f27597d65" path="packages/goods/detail/index?alias=1y5c6oa8cduzn&dc_ps=2328936063642568704.200001" class='theme-button'>前往故宫书店</navigator> -->
-    </view>
-  </view>
+	<!-- 服务员评价入口 -->
+	<view class="hotel-waiter-evaluate-panel theme-rad-panel">
+		<view class="btn-waiter-evaluate flex-row-center-center" bindtap="gotoPageHotelWaiterEvaluate">评价服务员</view>
+	</view>
 
-  <!-- 推荐面板 -->
-  <view class="recommend-panel full_width theme-panel" wx:if="{{hot_play.length>0}}">
-    <view class="title-bar">
-      <label class="title theme-font1">热播内容</label>
-    </view>
-    <view class="weui-grids">
-      <view wx:for="{{hot_play}}" wx:key="item" wx:for-index="index" wx:for-item="bean" class="weui-grid">
-        <view class="card">
-          <image mode="aspectFill" src="{{bean.pubdetail[0].img_url}}"></image>
-          <view class="flex-row-center-space_between">
-            <view class="user flex-row-center-space_between">
-              <image src="{{bean.avatarUrl}}"></image>
-              <view class="one-line-overflow">{{bean.nickName}}</view>
-            </view>
-            <view class="sta theme-font3">{{bean.play_nums}} 次</view>
-          </view>
-          <!--
+	<!-- 中部横幅图面板 -->
+	<view wx:if="{{imgUrls_mid.length > 0}}" class="middle-banner-panel full_width">
+		<block wx:for="{{imgUrls_mid}}" wx:key="item" wx:for-index="index">
+			<view class="full_width full_height" wx:if="{{item.clicktype == 2}}" bindtap='{{item.bindtap}}' data-boxmac="{{box_mac}}" data-openid="{{openid}}" data-index='{{index}}' data-linkcontent='{{item.linkcontent}}'>
+				<image class="full_width full_height" src="{{item.oss_addr}}"></image>
+			</view>
+			<navigator class="full_width full_height" wx:if="{{item.clicktype == 1}}" target="miniProgram" app-id="{{item.appid}}" path="{{item.linkcontent}}">
+				<image class="full_width full_height" src="{{item.oss_addr}}"></image>
+			</navigator>
+		</block>
+	</view>
+	<!-- 功能模块面板 -->
+	<view class='functional-module-panel flex-column-center-center full_width theme-panel'>
+		<view class="row flex-row-center-space_around full_width">
+			<form bindsubmit="chooseImage" report-submit="true">
+				<input class="display_hide" name="boxmac" value="{{box_mac}}"></input>
+				<input class="display_hide" name="openid" value="{{openid}}"></input>
+				<input class="display_hide" name="is_open_simple" value="{{is_open_simple}}"></input>
+				<input class="display_hide" name="intranet_ip" value="{{hotel_info.intranet_ip}}"></input>
+				<input class="display_hide" name="wifi_mac" value="{{hotel_info.wifi_mac}}"></input>
+				<input class="display_hide" name="wifi_name" value="{{hotel_info.wifi_name}}"></input>
+				<input class="display_hide" name="wifi_password" value="{{hotel_info.wifi_password}}"></input>
+				<button wx:if="{{is_link==0}}" class="theme-font2" form-type="submit">
+					<view class="icon flex-column-center-center pic">
+						<image src='/images/icon2/FFFFFF_picture.png'></image>
+					</view>
+					<label>照片上电视</label>
+				</button>
+				<button wx:else disabled="{{link_type>0?false:true}}" class="theme-font2" form-type="submit">
+					<view class="icon flex-column-center-center pic">
+						<image src='/images/icon2/FFFFFF_picture.png'></image>
+					</view>
+					<label>照片上电视</label>
+				</button>
+			</form>
+			<form bindsubmit="chooseVedio" report-submit="true">
+				<input class="display_hide" name="boxmac" value="{{box_mac}}"></input>
+				<input class="display_hide" name="openid" value="{{openid}}"></input>
+				<input class="display_hide" name="intranet_ip" value="{{hotel_info.intranet_ip}}"></input>
+				<input class="display_hide" name="wifi_mac" value="{{hotel_info.wifi_mac}}"></input>
+				<input class="display_hide" name="wifi_name" value="{{hotel_info.wifi_name}}"></input>
+				<input class="display_hide" name="wifi_password" value="{{hotel_info.wifi_password}}"></input>
+				<button wx:if="{{is_link==0}}" class="theme-font2" form-type="submit">
+					<view class="icon flex-column-center-center video">
+						<image src='/images/icon2/FFFFFF_video.png'></image>
+					</view>
+					<label>视频上电视</label>
+				</button>
+				<button wx:else disabled="{{link_type>0?false:true}}" class="theme-font2" form-type="submit">
+					<view class="icon flex-column-center-center video">
+						<image src='/images/icon2/FFFFFF_video.png'></image>
+					</view>
+					<label>视频上电视</label>
+				</button>
+			</form>
+			<form bindsubmit="forfiles" report-submit="true">
+				<input class="display_hide" name="boxmac" value="{{box_mac}}"></input>
+				<input class="display_hide" name="openid" value="{{openid}}"></input>
+				<input class="display_hide" name="is_open_simple" value="{{is_open_simple}}"></input>
+				<button wx:if="{{is_link==0}}" class="theme-font2" form-type="submit">
+					<view class="icon flex-column-center-center file">
+						<image src='/images/icon2/FFFFFF_files.png'></image>
+					</view>
+					<label>文件上电视</label>
+				</button>
+				<button wx:elif="{{link_type==0 || link_type==2}}" disabled="true" class="theme-font2" form-type="submit">
+					<view class="icon flex-column-center-center file">
+						<image src='/images/icon2/FFFFFF_files.png'></image>
+					</view>
+					<label>文件上电视</label>
+				</button>
+				<button wx:else class="theme-font2" form-type="submit">
+					<view class="icon flex-column-center-center file">
+						<image src='/images/icon2/FFFFFF_files.png'></image>
+					</view>
+					<label>文件上电视</label>
+				</button>
+			</form>
+		</view>
+		<view class="row flex-row-center-space_around full_width">
+			<view>
+				<button wx:if="{{(link_type==0 || link_type==2) && is_link==1}}" disabled="true" class="theme-font2" bindtap='showHappy' data-boxmac="{{box_mac}}" data-openid="{{openid}}" data-intranet_ip="{{hotel_info.intranet_ip}}">
+					<view class="icon flex-column-center-center birthday">
+						<image src='/images/icon2/FFFFFF_birthday.png'></image>
+					</view>
+					<label>生日歌点播</label>
+				</button>
+				<button wx:elif="{{is_link==0}}" class="theme-font2" bindtap='showHappy' data-boxmac="{{box_mac}}" data-openid="{{openid}}" data-intranet_ip="{{hotel_info.intranet_ip}}">
+					<view class="icon flex-column-center-center birthday">
+						<image src='/images/icon2/FFFFFF_birthday.png'></image>
+					</view>
+					<label>生日歌点播</label>
+				</button>
+				<button wx:else class="theme-font2" bindtap='showHappy' data-boxmac="{{box_mac}}" data-openid="{{openid}}" data-intranet_ip="{{hotel_info.intranet_ip}}">
+					<view class="icon flex-column-center-center birthday">
+						<image src='/images/icon2/FFFFFF_birthday.png'></image>
+					</view>
+					<label>生日歌点播</label>
+				</button>
+			</view>
+			<view>
+				<button class="theme-font2" bindtap='hdgames' wx:if="{{is_link==0}}" data-linkcontent='/pages/game/climbtree/index' data-boxmac="{{box_mac}}" data-openid="{{openid}}">
+					<view class="icon flex-column-center-center game">
+						<image src='/images/icon2/FFFFFF_game.png'></image>
+					</view>
+					<label>互动小游戏</label>
+				</button>
+				<button class="theme-font2" bindtap='hdgames' wx:elif="{{link_type==0 || link_type==2}}" disabled="true" data-linkcontent='/pages/game/climbtree/index' data-boxmac="{{box_mac}}" data-openid="{{openid}}">
+					<view class="icon flex-column-center-center game">
+						<image src='/images/icon2/FFFFFF_game.png'></image>
+					</view>
+					<label>互动小游戏</label>
+				</button>
+				<button class="theme-font2" bindtap='hdgames' wx:elif="{{link_type==1 }}" data-linkcontent='/pages/game/climbtree/index' data-boxmac="{{box_mac}}" data-openid="{{openid}}">
+					<view class="icon flex-column-center-center game">
+						<image src='/images/icon2/FFFFFF_game.png'></image>
+					</view>
+					<label>互动小游戏</label>
+				</button>
+			</view>
+			<view>
+				<button class="theme-font2" bindtap='forscreenHistory' wx:if="{{is_link==0}}" data-boxmac="{{box_mac}}" data-openid="{{openid}}">
+					<view class="icon flex-column-center-center history">
+						<image src='/images/icon2/FFFFFF_history.png'></image>
+					</view>
+					<label>投屏历史</label>
+				</button>
+
+				<button class="theme-font2" bindtap='forscreenHistory' wx:elif="{{link_type==0 || link_type==2}}" disabled="true" data-boxmac="{{box_mac}}" data-openid="{{openid}}">
+					<view class="icon flex-column-center-center history">
+						<image src='/images/icon2/FFFFFF_history.png'></image>
+					</view>
+					<label>投屏历史</label>
+				</button>
+				<button class="theme-font2" bindtap='forscreenHistory' wx:elif="{{link_type==1}}" data-boxmac="{{box_mac}}" data-openid="{{openid}}">
+					<view class="icon flex-column-center-center history">
+						<image src='/images/icon2/FFFFFF_history.png'></image>
+					</view>
+					<label>投屏历史</label>
+				</button>
+			</view>
+			<!-- <navigator url="/pages/thematic/money_blessing/grab">test</navigator> -->
+			<!-- <navigator target="miniProgram" app-id="wxf96ad76f27597d65" path="packages/goods/detail/index?alias=1y5c6oa8cduzn&dc_ps=2328936063642568704.200001" class='theme-button'>前往故宫书店</navigator> -->
+		</view>
+	</view>
+
+	<!-- 推荐面板 -->
+	<view class="recommend-panel full_width theme-panel" wx:if="{{hot_play.length>0}}">
+		<view class="title-bar">
+			<label class="title theme-font1">热播内容</label>
+		</view>
+		<view class="weui-grids">
+			<view wx:for="{{hot_play}}" wx:key="item" wx:for-index="index" wx:for-item="bean" class="weui-grid">
+				<view class="card">
+					<image mode="aspectFill" src="{{bean.pubdetail[0].img_url}}"></image>
+					<view class="flex-row-center-space_between">
+						<view class="user flex-row-center-space_between">
+							<image src="{{bean.avatarUrl}}"></image>
+							<view class="one-line-overflow">{{bean.nickName}}</view>
+						</view>
+						<view class="sta theme-font3">{{bean.play_nums}} 次</view>
+					</view>
+					<!--
           <view class="people theme-font1">{{bean.nickName}}</view>
           <view class="msg theme-font3">累计播放 {{bean.play_nums}} 次</view>
           -->
-          <view class="flex-row-center-space_between">
-            <view class="rank theme-font5">TOP {{index+1}}</view>
-            <button wx:if="{{bean.is_show==1}}" bindtap="boxShow" class="btn theme-button-dark" data-res_type="{{bean.res_type}}" data-res_nums="{{bean.res_nums}}" data-pubdetail="{{bean.pubdetail}}" data-boxmac="{{box_mac}}" data-openid="{{openid}}" data-forscreen_id="{{bean.forscreen_id}}"
-              data-hotel_info="{{hotel_info}}" data-index="{{index}}">电视播放</button>
-          </view>
-        </view>
-      </view>
-    </view>
-    <!--
+					<view class="flex-row-center-space_between">
+						<view class="rank theme-font5">TOP {{index+1}}</view>
+						<button wx:if="{{bean.is_show==1}}" bindtap="boxShow" class="btn theme-button-dark" data-res_type="{{bean.res_type}}" data-res_nums="{{bean.res_nums}}" data-pubdetail="{{bean.pubdetail}}" data-boxmac="{{box_mac}}" data-openid="{{openid}}" data-forscreen_id="{{bean.forscreen_id}}" data-hotel_info="{{hotel_info}}" data-index="{{index}}">电视播放</button>
+					</view>
+				</view>
+			</view>
+		</view>
+		<!--
     <view class="list">
       <block wx:for="{{hot_play}}" wx:key="item" wx:for-index="index" wx:for-item="bean">
         <view class="row flex-row-flex_start-start {{index < hot_play.length - 1 ? 'line' : ''}}">
@@ -223,11 +228,11 @@
       </block>
     </view>
     -->
-  </view>
+	</view>
 </scroll-view>
 <view class="body-view">
-    <loading hidden="{{wifi_hidden}}" bindchange="loadingChange">正在连接包间wifi,请稍后...</loading>
-  </view>
+	<loading hidden="{{wifi_hidden}}" bindchange="loadingChange">正在连接包间wifi,请稍后...</loading>
+</view>
 <!-- 微信授权登录 -->
 <template is="wxAuthLoginOp" data='{{showOp: showModal}}' />
 
@@ -236,71 +241,69 @@
 
 <!-- 固定悬浮按钮组 -->
 <view wx:if="{{box_mac !=''}}">
-  <template is="fixedSuspensionButtonGroup" />
+	<template is="fixedSuspensionButtonGroup" />
 </view>
 
 <!-- 扫描二维码提示弹窗 -->
 <modal show="{{showScanModal}}" width="90vw" height="360rpx" border-radius="20rpx" title-text="温馨提示" confirm-text="立即扫码">
-  <view class='scan_tip'>您需要扫描热点合作餐厅电视中的二维码链接电视，链接成功后可使用此功能。</view>
+	<view class='scan_tip'>您需要扫描热点合作餐厅电视中的二维码链接电视，链接成功后可使用此功能。</view>
 </modal>
 
-<modal show="{{wifiErr.is_open==1 ? true : false}}" width="650rpx" height='380rpx' border-radius="10rpx" title-text='提示' title-color="#333333" title-background-color="unset" title-border-radius="0rpx" confirm-text='{{wifiErr.confirm}}' confirm-color="#FFFFFF"
-  confirm-background-color="#1cbeb6" confirm-border-radius="10rpx" cancel-text='{{wifiErr.cancel}}' cancel-color='#FFFFFF' cancel-background-color="#333333" cancel-border-radius="10rpx" bindcancel="modalCancel" data-type="{{wifiErr.type}}" data-hotel_info="{{hotel_info}}" bindconfirm='modalConfirm'>
-  <view class="theme-font1" style="padding:0 50rpx;font-size:28rpx;">{{wifiErr.msg}}</view>
+<modal show="{{wifiErr.is_open==1 ? true : false}}" width="650rpx" height='380rpx' border-radius="10rpx" title-text='提示' title-color="#333333" title-background-color="unset" title-border-radius="0rpx" confirm-text='{{wifiErr.confirm}}' confirm-color="#FFFFFF" confirm-background-color="#1cbeb6" confirm-border-radius="10rpx" cancel-text='{{wifiErr.cancel}}' cancel-color='#FFFFFF' cancel-background-color="#333333" cancel-border-radius="10rpx" bindcancel="modalCancel" data-type="{{wifiErr.type}}" data-hotel_info="{{hotel_info}}" bindconfirm='modalConfirm'>
+	<view class="theme-font1" style="padding:0 50rpx;font-size:28rpx;">{{wifiErr.msg}}</view>
 </modal>
 
 <!-- 选择文件弹窗 -->
 <bottomModal show="{{showMe}}" width="98%" height='340rpx' background-color='#FFFFFF' border-radius="20rpx" title-text='' title-color="" confirm-text='' confirm-color="#f6f3ee" cancel-text='' cancel-color='' bindcancel="modalCancel">
-  <view class="flex-column-center-space_between" style='padding: 10rpx; height: 60rpx; line-height: 60rpx; border-bottom: 2rpx solid rgba(246, 243, 238, 0.1);font-size: 30rpx; color: #666666;'>
-    <label>选择要投屏的文件</label>
-  </view>
-  <view class="flex-column-center-center" style="width: 100%; font-size: 32rpx; color: #0076FF;">
-    <view style="width: 100%; border-top: 1rpx solid rgba(7,17,27,0.1);">
-      <button bindtap="wxFriendfiles" data-boxmac="{{box_mac}}" data-openid="{{openid}}" data-is_open_simple="{{is_open_simple}}" class="button_none" style="margin: 0;padding: 0; border: 0;border-radius: 0;">微信好友文件</button>
-    </view>
-    <view style="width: 100%; border-top: 1rpx solid rgba(7,17,27,0.1); border-bottom: 10rpx solid rgba(7,17,27,0.05);">
-      <button bindtap="phonefiles" data-boxmac="{{box_mac}}" data-openid="{{openid}}" data-is_open_simple="{{is_open_simple}}" class="button_none" style="margin: 0;padding: 0; border: 0;border-radius: 0;">手机中的文件</button>
-    </view>
-  </view>
-  <view class='cancel-btn' style='flex: 1; margin-top: 10rpx; width: 100%; height: 60rpx; line-height: 60rpx; text-align: center; font-size: 30rpx; color: rgba(7,17,27,0.6);' bindtap='modalCancel'>取消</view>
+	<view class="flex-column-center-space_between" style='padding: 10rpx; height: 60rpx; line-height: 60rpx; border-bottom: 2rpx solid rgba(246, 243, 238, 0.1);font-size: 30rpx; color: #666666;'>
+		<label>选择要投屏的文件</label>
+	</view>
+	<view class="flex-column-center-center" style="width: 100%; font-size: 32rpx; color: #0076FF;">
+		<view style="width: 100%; border-top: 1rpx solid rgba(7,17,27,0.1);">
+			<button bindtap="wxFriendfiles" data-boxmac="{{box_mac}}" data-openid="{{openid}}" data-is_open_simple="{{is_open_simple}}" class="button_none" style="margin: 0;padding: 0; border: 0;border-radius: 0;">微信好友文件</button>
+		</view>
+		<view style="width: 100%; border-top: 1rpx solid rgba(7,17,27,0.1); border-bottom: 10rpx solid rgba(7,17,27,0.05);">
+			<button bindtap="phonefiles" data-boxmac="{{box_mac}}" data-openid="{{openid}}" data-is_open_simple="{{is_open_simple}}" class="button_none" style="margin: 0;padding: 0; border: 0;border-radius: 0;">手机中的文件</button>
+		</view>
+	</view>
+	<view class='cancel-btn' style='flex: 1; margin-top: 10rpx; width: 100%; height: 60rpx; line-height: 60rpx; text-align: center; font-size: 30rpx; color: rgba(7,17,27,0.6);' bindtap='modalCancel'>取消</view>
 </bottomModal>
 
 
 <!-- 销售页 -->
 <modal show="{{showActgoods}}" width="600rpx" height='750rpx' border-radius="10rpx" title-text='' confirm-text='' cancel-text='' background-color='unset'>
-  <view style="width: 600rpx;height: 560rpx; border-radius: 10rpx; background-color: #FFFFFF;font-size: 24rpx;">
-    <view style="width: 100%;height: 80rpx;padding-left: 60rpx;padding-right: 30rpx;">
-      <label style="width: calc(100% - 122rpx);height: 80rpx;line-height: 80rpx;display: inline-block;font-size: 30rpx; color: #333333;text-align: center;">下单提示</label>
-      <view style="width: 32rpx; height: 80rpx; display: inline-block;" bindtap="closeAct">
-        <label class="fa fa-close fa-lg" style="width: 32rpx; height: 32rpx; color: #666666;"></label>
-      </view>
-    </view>
-    <view class="flex-column-center-start" style="width: 100%;height: calc(100% - 160rpx);color: #666666;">
-      <image style="width: 480rpx;height: 270rpx;" src="{{goods_info.img_url}}"></image>
-      <view class="one-line-overflow" style="width: 480rpx;height: calc(100% - 320rpx);line-height: 3;text-align: center;">{{goods_info.name}}</view>
-      <view class="flex-row-center-center" style="width: 100%;height: 80rpx;border-top: 2rpx solid #ededed;">
-        <label style="width: 70rpx;">数量</label>
-        <view style="width: 40rpx; height: 40rpx;font-size: 30rpx;" bindtap="changeActNums" data-type="1">
-          <label class="fa fa-plus-square-o fa-lg" style="width: 40rpx; height: 40rpx; color: #666666;"></label>
-        </view>
-        <label style="width: 70rpx;text-align: center;">{{goods_nums}}</label>
-        <view style="width: 40rpx; height: 40rpx;font-size: 30rpx;" bindtap="changeActNums" data-type="2">
-          <label class="fa fa-minus-square-o fa-lg" style="width: 40rpx; height: 40rpx; color: #666666;"></label>
-        </view>
-      </view>
-    </view>
-    <view class="flex-row-center-center" style="width: 100%;height: 80rpx;border-top: 2rpx solid #ededed;font-size: 28rpx;">
-      <view style="width: 100%;height: 80rpx;line-height: 80rpx; color: #448ACA; text-align: center;" bindtap="shopBuyGoods" data-goods_id="{{goods_id}}" data-goods_nums="{{goods_nums}}" data-goods_box_mac="{{goods_box_mac}}" data-buy_type="1" data-uid="{{uid}}">店内购买</view>
-      <!-- <view wx:if='{{showButton4JD}}' style="width: 100%;height: 80rpx;line-height: 80rpx; color: #666666; text-align: center;border-left: 2rpx solid #ededed;" bindtap="jdBuy" data-h5_url="{{jd_url}}">京东购买</view> -->
-      <navigator bindtap="tpBuyGoods" data-goods_id="{{goods_id}}" data-goods_nums="{{goods_nums}}" data-goods_box_mac="{{goods_box_mac}}" data-buy_type="2" wx:if='{{showButton4JD}}' style="width: 100%;height: 80rpx;line-height: 80rpx; color: #448ACA; text-align: center;border-left: 2rpx solid #ededed;"
-        target="miniProgram" app-id="{{goods_info.appid}}" path="{{jd_url}}">{{goods_info.buybutton}}</navigator>
-    </view>
-  </view>
-  <!-- <view wx:if='{{showButton4Favorites}}' style="width: 600rpx;height: 80rpx;margin-top: 25rpx;font-size: 24rpx;">
+	<view style="width: 600rpx;height: 560rpx; border-radius: 10rpx; background-color: #FFFFFF;font-size: 24rpx;">
+		<view style="width: 100%;height: 80rpx;padding-left: 60rpx;padding-right: 30rpx;">
+			<label style="width: calc(100% - 122rpx);height: 80rpx;line-height: 80rpx;display: inline-block;font-size: 30rpx; color: #333333;text-align: center;">下单提示</label>
+			<view style="width: 32rpx; height: 80rpx; display: inline-block;" bindtap="closeAct">
+				<label class="fa fa-close fa-lg" style="width: 32rpx; height: 32rpx; color: #666666;"></label>
+			</view>
+		</view>
+		<view class="flex-column-center-start" style="width: 100%;height: calc(100% - 160rpx);color: #666666;">
+			<image style="width: 480rpx;height: 270rpx;" src="{{goods_info.img_url}}"></image>
+			<view class="one-line-overflow" style="width: 480rpx;height: calc(100% - 320rpx);line-height: 3;text-align: center;">{{goods_info.name}}</view>
+			<view class="flex-row-center-center" style="width: 100%;height: 80rpx;border-top: 2rpx solid #ededed;">
+				<label style="width: 70rpx;">数量</label>
+				<view style="width: 40rpx; height: 40rpx;font-size: 30rpx;" bindtap="changeActNums" data-type="1">
+					<label class="fa fa-plus-square-o fa-lg" style="width: 40rpx; height: 40rpx; color: #666666;"></label>
+				</view>
+				<label style="width: 70rpx;text-align: center;">{{goods_nums}}</label>
+				<view style="width: 40rpx; height: 40rpx;font-size: 30rpx;" bindtap="changeActNums" data-type="2">
+					<label class="fa fa-minus-square-o fa-lg" style="width: 40rpx; height: 40rpx; color: #666666;"></label>
+				</view>
+			</view>
+		</view>
+		<view class="flex-row-center-center" style="width: 100%;height: 80rpx;border-top: 2rpx solid #ededed;font-size: 28rpx;">
+			<view style="width: 100%;height: 80rpx;line-height: 80rpx; color: #448ACA; text-align: center;" bindtap="shopBuyGoods" data-goods_id="{{goods_id}}" data-goods_nums="{{goods_nums}}" data-goods_box_mac="{{goods_box_mac}}" data-buy_type="1" data-uid="{{uid}}">店内购买</view>
+			<!-- <view wx:if='{{showButton4JD}}' style="width: 100%;height: 80rpx;line-height: 80rpx; color: #666666; text-align: center;border-left: 2rpx solid #ededed;" bindtap="jdBuy" data-h5_url="{{jd_url}}">京东购买</view> -->
+			<navigator bindtap="tpBuyGoods" data-goods_id="{{goods_id}}" data-goods_nums="{{goods_nums}}" data-goods_box_mac="{{goods_box_mac}}" data-buy_type="2" wx:if='{{showButton4JD}}' style="width: 100%;height: 80rpx;line-height: 80rpx; color: #448ACA; text-align: center;border-left: 2rpx solid #ededed;" target="miniProgram" app-id="{{goods_info.appid}}" path="{{jd_url}}">{{goods_info.buybutton}}</navigator>
+		</view>
+	</view>
+	<!-- <view wx:if='{{showButton4Favorites}}' style="width: 600rpx;height: 80rpx;margin-top: 25rpx;font-size: 24rpx;">
     <button style="width: 100%;height: 100%; line-height: 80rpx; color: #FFFFFF; background-color: {{showFavoritesPanel ? '#999999' : '#eb6877'}}; border-radius: 10rpx;font-size: 24rpx;" bindtap="collectGoods" data-goods_id="{{goods_id}}" data-goods_box_mac="{{goods_box_mac}}">收藏</button>
   </view> -->
-  <view wx:if='{{showFavoritesPanel}}' class="flex-row-center-space_between" style="width: 600rpx;height: 70rpx;margin-top: 10rpx;font-size: 24rpx;">
-    <input type="number" bindinput="mobileOnInput" placeholder="请输入手机号" style="width: 385rpx;height: 70rpx; line-height: 70rpx; border-radius: 5rpx; color: #333333; background-color: #FFFFFF;padding-left: 10rpx;" placeholder-style="padding-left: 10rpx; color: #999999;"></input>
-    <button bindtap="sendGoodsLink" data-goods_id="{{goods_id}}" data-mobile="{{mobile}}" style="width: 200rpx;height: 70rpx;line-height: 70rpx;color: #FFFFFF; background-color: #eb6877;font-size: 24rpx;">发送商品链接</button>
-  </view>
+	<view wx:if='{{showFavoritesPanel}}' class="flex-row-center-space_between" style="width: 600rpx;height: 70rpx;margin-top: 10rpx;font-size: 24rpx;">
+		<input type="number" bindinput="mobileOnInput" placeholder="请输入手机号" style="width: 385rpx;height: 70rpx; line-height: 70rpx; border-radius: 5rpx; color: #333333; background-color: #FFFFFF;padding-left: 10rpx;" placeholder-style="padding-left: 10rpx; color: #999999;"></input>
+		<button bindtap="sendGoodsLink" data-goods_id="{{goods_id}}" data-mobile="{{mobile}}" style="width: 200rpx;height: 70rpx;line-height: 70rpx;color: #FFFFFF; background-color: #eb6877;font-size: 24rpx;">发送商品链接</button>
+	</view>
 </modal>

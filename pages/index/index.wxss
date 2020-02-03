@@ -17,7 +17,7 @@
   height: 90rpx;
 }
 
-.link-box-panel > .tip > button {
+.link-box-panel>.tip>button {
   width: 120rpx;
   height: 50rpx;
   line-height: 50rpx;
@@ -26,9 +26,23 @@
   font-size: unset;
 }
 
-.link-box-panel > .tip > button > image {
+.link-box-panel>.tip>button>image {
   width: 60rpx;
   height: 24rpx;
+}
+
+/* ==================================== 服务员评价入口 ==================================== */
+.hotel-waiter-evaluate-panel {
+  width: 100%;
+  height: 120rpx;
+  margin: 20rpx 0;
+}
+
+.hotel-waiter-evaluate-panel>.btn-waiter-evaluate {
+  width: 100%;
+  height: 100%;
+  font-size: 40rpx;
+  font-weight: bold;
 }
 
 /* ==================================== 中部横幅图面板 ==================================== */
@@ -44,73 +58,74 @@
   height: 320rpx;
 }
 
-.functional-module-panel > .row > view, .functional-module-panel > .row > form {
+.functional-module-panel>.row>view,
+.functional-module-panel>.row>form {
   width: 33.33333333333%;
   display: block;
   text-align: center;
   padding: 10rpx 0rpx;
 }
 
-.functional-module-panel > .row button {
+.functional-module-panel>.row button {
   line-height: unset;
   background: unset;
 }
 
-.functional-module-panel > .row button[disabled] {
+.functional-module-panel>.row button[disabled] {
   color: #999 !important;
   background: unset !important;
 }
 
-.functional-module-panel > .row > view > .icon,
-.functional-module-panel > .row button > .icon {
+.functional-module-panel>.row>view>.icon,
+.functional-module-panel>.row button>.icon {
   width: 74rpx;
   height: 74rpx;
   margin: 0 auto;
   border-radius: 10rpx;
 }
 
-.functional-module-panel > .row > view > .icon > image,
-.functional-module-panel > .row button > .icon > image {
+.functional-module-panel>.row>view>.icon>image,
+.functional-module-panel>.row button>.icon>image {
   width: 48rpx;
   height: 48rpx;
 }
 
-.functional-module-panel > .row > view > .pic,
-.functional-module-panel > .row button > .pic {
+.functional-module-panel>.row>view>.pic,
+.functional-module-panel>.row button>.pic {
   background-color: #ef6877;
 }
 
-.functional-module-panel > .row > view > .video,
-.functional-module-panel > .row button > .video {
+.functional-module-panel>.row>view>.video,
+.functional-module-panel>.row button>.video {
   background-color: #84ccc9;
 }
 
-.functional-module-panel > .row > view > .file,
-.functional-module-panel > .row button > .file {
+.functional-module-panel>.row>view>.file,
+.functional-module-panel>.row button>.file {
   background-color: #f19ec2;
 }
 
-.functional-module-panel > .row > view > .birthday,
-.functional-module-panel > .row button > .birthday {
+.functional-module-panel>.row>view>.birthday,
+.functional-module-panel>.row button>.birthday {
   background-color: #448aca;
 }
 
-.functional-module-panel > .row > view > .game,
-.functional-module-panel > .row button > .game {
+.functional-module-panel>.row>view>.game,
+.functional-module-panel>.row button>.game {
   background-color: #f29b76;
 }
 
-.functional-module-panel > .row > view > .history,
-.functional-module-panel > .row button > .history {
+.functional-module-panel>.row>view>.history,
+.functional-module-panel>.row button>.history {
   background-color: #8f82bc;
 }
 
-.functional-module-panel > .row button[disabled] > view {
+.functional-module-panel>.row button[disabled]>view {
   background-color: #999 !important;
 }
 
-.functional-module-panel > .row > view > label,
-.functional-module-panel > .row button > label {
+.functional-module-panel>.row>view>label,
+.functional-module-panel>.row button>label {
   height: 60rpx;
   line-height: 60rpx;
   margin-left: 10rpx;
@@ -124,13 +139,13 @@
   margin-top: 20rpx;
 }
 
-.recommend-panel > .title-bar {
+.recommend-panel>.title-bar {
   height: 40rpx;
   padding-top: 20rpx;
   padding-left: 25rpx;
 }
 
-.recommend-panel > .title-bar > .title {
+.recommend-panel>.title-bar>.title {
   width: 100rpx;
   display: block;
   text-align: center;
@@ -139,92 +154,92 @@
   border-bottom: 6rpx solid #333;
 }
 
-.recommend-panel > .weui-grids {
+.recommend-panel>.weui-grids {
   width: calc(100% - 60rpx);
   height: 1230rpx;
   padding: 30rpx;
 }
 
-.recommend-panel > .weui-grids > .weui-grid {
+.recommend-panel>.weui-grids>.weui-grid {
   width: 350rpx;
   height: 410rpx;
 }
 
-.recommend-panel > .weui-grids > .weui-grid:nth-child(even) {
+.recommend-panel>.weui-grids>.weui-grid:nth-child(even) {
   width: 340rpx;
 }
 
-.recommend-panel > .weui-grids > .weui-grid > .card {
+.recommend-panel>.weui-grids>.weui-grid>.card {
   width: 340rpx;
   height: 380rpx;
   background-color: rgba(245, 246, 248, 0.5);
   border-radius: 5rpx;
 }
 
-.recommend-panel > .weui-grids > .weui-grid > .card > image {
+.recommend-panel>.weui-grids>.weui-grid>.card>image {
   width: 340rpx;
   height: 250rpx;
   border-radius: 5rpx;
 }
 
-.recommend-panel > .weui-grids > .weui-grid > .card > .people,
-.recommend-panel > .weui-grids > .weui-grid > .card > .msg {
+.recommend-panel>.weui-grids>.weui-grid>.card>.people,
+.recommend-panel>.weui-grids>.weui-grid>.card>.msg {
   width: 100%;
   text-align: center;
 }
 
-.recommend-panel > .weui-grids > .weui-grid > .card > .people {
+.recommend-panel>.weui-grids>.weui-grid>.card>.people {
   height: 50rpx;
   line-height: 50rpx;
   font-size: 24rpx;
 }
 
-.recommend-panel > .weui-grids > .weui-grid > .card > .msg {
+.recommend-panel>.weui-grids>.weui-grid>.card>.msg {
   height: 30rpx;
   line-height: 30rpx;
   font-size: 18rpx;
 }
 
-.recommend-panel > .weui-grids > .weui-grid > .card > .flex-row-center-space_between > .user {
+.recommend-panel>.weui-grids>.weui-grid>.card>.flex-row-center-space_between>.user {
   width: calc(100% - 100rpx);
   font-size: 22rpx;
 }
 
-.recommend-panel > .weui-grids > .weui-grid > .card > .flex-row-center-space_between > .user > image {
+.recommend-panel>.weui-grids>.weui-grid>.card>.flex-row-center-space_between>.user>image {
   width: 32rpx;
   height: 32rpx;
   border: 1rpx solid #ddd;
   border-radius: 50%;
 }
 
-.recommend-panel > .weui-grids > .weui-grid > .card > .flex-row-center-space_between > .user > view {
+.recommend-panel>.weui-grids>.weui-grid>.card>.flex-row-center-space_between>.user>view {
   width: calc(100% - 37rpx);
   margin-left: 5rpx;
 }
 
-.recommend-panel > .weui-grids > .weui-grid > .card > .flex-row-center-space_between > .sta {
+.recommend-panel>.weui-grids>.weui-grid>.card>.flex-row-center-space_between>.sta {
   width: 100rpx;
   font-size: 22rpx;
   text-align: right;
 }
 
-.recommend-panel > .weui-grids > .weui-grid > .card > .flex-row-center-space_between {
+.recommend-panel>.weui-grids>.weui-grid>.card>.flex-row-center-space_between {
   width: calc(100% - 45rpx);
   height: 58rpx;
   padding-left: 25rpx;
   padding-right: 20rpx;
 }
 
-.recommend-panel > .weui-grids > .weui-grid > .card > .flex-row-center-space_between:last-child {
+.recommend-panel>.weui-grids>.weui-grid>.card>.flex-row-center-space_between:last-child {
   border-top: 2rpx solid #fff;
   height: 60rpx;
 }
 
-.recommend-panel > .weui-grids > .weui-grid > .card > .flex-row-center-space_between > .rank {
+.recommend-panel>.weui-grids>.weui-grid>.card>.flex-row-center-space_between>.rank {
   font-size: 24rpx;
 }
 
-.recommend-panel > .weui-grids > .weui-grid > .card > .flex-row-center-space_between > .btn {
+.recommend-panel>.weui-grids>.weui-grid>.card>.flex-row-center-space_between>.btn {
   width: 100rpx;
   height: 40rpx;
   line-height: 40rpx;

@@ -1,0 +1,142 @@
+/* pages/hotel/waiter_evaluate.wxss */
+.container {
+  z-index: 1;
+}
+
+.waiter-evaluate-info-panel {
+  width: 100%;
+  height: 100px;
+}
+
+.waiter-evaluate-info-panel>.wapper {
+  width: 250px;
+}
+
+.waiter-evaluate-info-panel>.wapper>.phone {
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+}
+
+.waiter-evaluate-info-panel>.wapper>.info {
+  padding-left: 10px;
+}
+
+.waiter-evaluate-info-panel>.wapper>.info>.name {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.waiter-evaluate-info-panel>.wapper>.info>.title {
+  font-size: 12px;
+}
+
+.waiter-evaluate-score-panel {
+  width: 100%;
+  height: 25px;
+}
+
+.waiter-evaluate-score-panel>.wapper {
+  width: 250px;
+}
+
+.waiter-evaluate-score-panel>.wapper>.lable {
+  width: 80px;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.waiter-evaluate-score-panel>.wapper>.star-group {
+  width: 100px;
+  font-size: 15px;
+}
+
+.waiter-evaluate-comment-panel {
+  width: 100%;
+  padding: 10px 0;
+}
+
+.waiter-evaluate-comment-panel>.tags {
+  width: 250px;
+  max-height: 250px;
+  font-size: 12px;
+  padding-bottom: 20px;
+  margin-top: -15px;
+  overflow: hidden;
+}
+
+.waiter-evaluate-comment-panel>.tags>.tag {
+  float: left;
+  height: 25px;
+  line-height: 25px;
+  padding: 0 10px;
+  margin-top: 15px;
+  margin-right: 15px;
+  border: 1px solid #ededed;
+}
+
+.waiter-evaluate-comment-panel>.tags>.tag.selected {
+  border: 1px solid #eb6877;
+}
+
+.waiter-evaluate-comment-panel>textarea {
+  width: 242px;
+  height: 142px;
+  padding: 3px;
+  border: 1px solid #ededed;
+  font-size: 12px;
+  z-index: 1;
+}
+
+.waiter-evaluate-btn-panel {
+  width: 100%;
+  height: 80px;
+}
+
+.waiter-evaluate-btn-panel>.btn-submit {
+  width: 250px;
+  height: 50px;
+  line-height: 50px;
+  text-align: center;
+  border-radius: 3px;
+}
+
+.mask {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.6);
+  z-index: 5;
+}
+
+.mask>.wapper {
+  width: 100%;
+  height: 150px;
+  margin-top: 300px;
+}
+
+.mask>.wapper>.btn-collected {
+  width: 200px;
+  height: 30px;
+  line-height: 30px;
+  text-align: center;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 16px;
+  border-radius: 3px;
+}
+
+.mask>.wapper>.btn-collected::after,
+.mask>.wapper>.btn-collected::before {
+  background: unset;
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+.mask>.wapper>.btn-collected.button-hover {
+  opacity: 1;
+}

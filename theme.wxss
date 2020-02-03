@@ -104,7 +104,7 @@ button[disabled] {
   background-color: #fff;
 }
 
-.theme-button-buy, .theme-button-like {
+.theme-button-buy, .theme-button-like,.theme-rad-panel {
   color: #fff;
   background-color: #eb6877;
 }

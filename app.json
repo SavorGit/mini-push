@@ -21,6 +21,8 @@
     "pages/thematic/birthday/detail",
     "pages/thematic/birthday/video",
     "pages/recommend/hotel",
+    "pages/hotel/waiter_evaluate",
+    "pages/hotel/waiter_evaluate_h5",
     "pages/share/pic",
     "pages/share/video",
     "pages/game/climbtree/index",
