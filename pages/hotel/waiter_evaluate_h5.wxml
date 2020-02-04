@@ -1,2 +1,2 @@
 <!--pages/hotel/waiter_evaluate_h5.wxml-->
-<web-view src=""></web-view>
+<web-view src="https://oss.littlehotspot.com/Html5/script/mini-push/pages/hotel/waiter_evaluate/evaluate.html"></web-view>

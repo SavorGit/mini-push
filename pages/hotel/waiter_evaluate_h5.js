@@ -12,13 +12,13 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    let self = this;
+    /*let self = this;
     console.log('waiter_evaluate_h5', 'onLoad');
     if (self.data.isCollectOfficialAccount == false) {
       wx.navigateTo({
         url: '/pages/hotel/waiter_evaluate',
       });
-    }
+    }*/
   },
 
   /**
