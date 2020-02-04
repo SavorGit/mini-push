@@ -1001,8 +1001,12 @@ Page({
   },
   // 跳转到服务员评价页
   gotoPageHotelWaiterEvaluate: function (e) {
-    wx.navigateTo({
-      url: '/pages/hotel/waiter_evaluate_h5',
-    });
+    if (box_mac == '') {
+      app.scanQrcode(pageid);
+    }else {
+      wx.navigateTo({
+        url: '/pages/hotel/waiter_evaluate_h5',
+      });
+    } 
   }
 })
