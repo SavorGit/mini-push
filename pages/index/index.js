@@ -43,7 +43,7 @@ Page({
     link_type: app.globalData.link_type,
     wifiErr: app.globalData.wifiErr,
     wifi_hidden: true,
-
+    is_view_eval_waiter:false,  //是否显示评价服务员
 
   },
 
@@ -141,8 +141,11 @@ Page({
 
         utils.PostRequest(api_url + '/Smallapp4/index/isHaveCallBox?openid=' + app.globalData.openid, {}, (data, headers, cookies, errMsg, statusCode) => {
           var is_have = data.result.is_have;
+          
+          
           if (is_have == 1) { //已经扫码链接电视
-
+            var box_id = data.result.box_id;
+            is_view_eval_waiter(box_id);
             app.linkHotelWifi(data.result, that);
             app.globalData.hotel_info = data.result;
             that.setData({
@@ -272,6 +275,8 @@ Page({
             utils.PostRequest(api_url + '/Smallapp4/index/isHaveCallBox?openid=' + openid, {}, (data, headers, cookies, errMsg, statusCode) => {
               var is_have = data.result.is_have;
               if (is_have == 1) {
+                var box_id = data.result.box_id;
+                is_view_eval_waiter(box_id);
                 app.linkHotelWifi(data.result, that);
                 app.globalData.hotel_info = data.result;
                 that.setData({
@@ -353,7 +358,18 @@ Page({
 
       }
     }
-
+    //是否显示评价入口
+    function is_view_eval_waiter(box_id){
+      utils.PostRequest(api_url + '/Smallapp4/index/getConfig', {
+        box_id: box_id,
+      }, (data, headers, cookies, errMsg, statusCode) => {
+        var is_view_eval_waiter = data.result.is_comment;
+        that.setData({
+          box_id:box_id,
+          is_view_eval_waiter: is_view_eval_waiter
+        })
+      });
+    }
 
   },
   onGetUserInfo: function (res) {
@@ -1001,17 +1017,14 @@ Page({
   },
   // 跳转到服务员评价页
   gotoPageHotelWaiterEvaluate: function (e) {
-    /*if (box_mac == '') {
+    var box_id = e.currentTarget.dataset.box_id
+    var openid = e.currentTarget.dataset.openid
+    if (box_mac == '') {
       app.scanQrcode(pageid);
     }else {
       wx.navigateTo({
-        url: '/pages/hotel/waiter_evaluate_h5',
+        url: '/pages/hotel/waiter_evaluate_h5?openid='+openid+'&box_id='+box_id,
       });
-    } */
-
-    wx.navigateTo({
-      url: '/pages/hotel/waiter_evaluate_h5',
-    });
-   
+    } 
   }
 })

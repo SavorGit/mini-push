@@ -61,6 +61,6 @@
 <view class="mask">
 	<view class="wapper flex-column-center-space_between">
 		<official-account style="width:300px;height:84px;"></official-account>
-		<cover-view class="btn-collected theme-button" bindtap="gotoPageHotelWaiterEvaluate">已关注，去评价</cover-view>
+		<cover-view class="btn-collected theme-button" bindtap="gotoPageHotelWaiterEvaluate" data-openid="{{openid}}" data-box_id="{{box_id}}">已关注，去评价</cover-view>
 	</view>
 </view>

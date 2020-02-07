@@ -1,4 +1,5 @@
 // pages/hotel/waiter_evaluate_h5.js
+const app = getApp()
 Page({
 
   /**
@@ -19,6 +20,14 @@ Page({
         url: '/pages/hotel/waiter_evaluate',
       });
     }*/
+    var that = this;
+    var box_id = options.box_id;
+    var openid = options.openid;
+    var l_url = app.api_url;
+    var web_url = l_url +'/h5/comment/info/p/'+openid+'_'+box_id;
+    that.setData({
+      web_url:web_url,
+    })
   },
 
   /**

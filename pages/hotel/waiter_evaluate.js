@@ -18,7 +18,13 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    let self = this;
+    var that = this;
+    var openid = options.openid;
+    var box_id = options.box_id;
+    that.setData({
+      openid:openid,
+      box_id:box_id,
+    })
   },
 
   /**
@@ -71,10 +77,12 @@ Page({
   },
   // 跳转到服务员评价页
   gotoPageHotelWaiterEvaluate: function (e) {
-    let self = this;
-    console.log('waiter_evaluate', 'gotoPageHotelWaiterEvaluate');
+    let that = this;
+    var box_id = e.currentTarget.dataset.box_id
+    var openid = e.currentTarget.dataset.openid
+    
     wx.navigateTo({
-      url: '/pages/hotel/waiter_evaluate_h5',
+      url: '/pages/hotel/waiter_evaluate_h5?openid='+openid+'&box_id='+box_id,
     });
   }
 })
