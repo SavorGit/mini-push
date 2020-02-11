@@ -34,10 +34,10 @@
 		</view>
 	</view>
 
-	<!-- 服务员评价入口 -->
+	<!-- 服务员评价入口 
 	<view class="hotel-waiter-evaluate-panel theme-rad-panel" wx:if="{{is_view_eval_waiter==true}}">
 		<view class="btn-waiter-evaluate flex-row-center-center" bindtap="gotoPageHotelWaiterEvaluate" data-openid="{{openid}}" data-box_id="{{box_id}}">评价服务员</view>
-	</view>
+	</view>-->
 
 	<!-- 中部横幅图面板 -->
 	<view wx:if="{{imgUrls_mid.length > 0}}" class="middle-banner-panel full_width">
