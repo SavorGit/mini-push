@@ -23,8 +23,9 @@ Page({
     var that = this;
     var box_id = options.box_id;
     var openid = options.openid;
-    var l_url = app.api_url;
-    var web_url = l_url +'/h5/comment/info/p/'+openid+'_'+box_id;
+    var l_url = app.globalData.api_url;
+    var web_url = l_url +'/h5/comment/info/p/'+openid+'@'+box_id;
+    console.log(web_url)
     that.setData({
       web_url:web_url,
     })
