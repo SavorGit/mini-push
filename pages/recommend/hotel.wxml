@@ -48,7 +48,7 @@
 					<image src='{{bean.img_url}}' binderror="bindImgErro" data-index="{{index}}"></image>
 					<!-- <view bindtap="tts"  data-index="{{index}}">aaaa</view> -->
 					<view class="flex-column-center-flex_end">
-						<view class="flex-column-center-center theme-remote-control">支持外卖</view>
+						<view class="flex-column-center-center theme-button-buy">支持外卖</view>
 					</view>
 				</view>
 				<view class='i-right'>
