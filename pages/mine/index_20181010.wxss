@@ -15,13 +15,13 @@
   height: 100%;
 }
 
-.user > view {
+.user>view {
   width: 190rpx;
   position: relative;
   float: left;
 }
 
-.user > .head > image {
+.user>.head>image {
   margin-left: 35rpx;
   margin-right: 35rpx;
   width: 120rpx;
@@ -31,7 +31,7 @@
   vertical-align: middle;
 }
 
-.user > .head > image::before {
+.user>.head>image::before {
   margin-left: 35rpx;
   margin-right: 35rpx;
   width: 120rpx;
@@ -41,12 +41,12 @@
   vertical-align: middle;
 }
 
-.user > .info {
+.user>.info {
   width: calc(100% - 190rpx);
   margin-top: -25rpx;
 }
 
-.user > .info  > label {
+.user>.info>label {
   height: 36rpx;
   padding: 10rpx 0rpx 10rpx 0rpx;
   display: block;
@@ -58,8 +58,22 @@
   line-height: 100%;
 }
 
-/* =============== 选项卡开始 =============== */
+/* ================================ 活动商品管理面板 ================================ */
+.promotion-goods-manage-panel {
+  height: 100rpx;
+  padding: 0 30rpx;
+  border-top: 2rpx solid #ededed;
+  font-size: 28rpx;
+}
 
+.promotion-goods-manage-panel>navigator {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* =============== 选项卡开始 =============== */
 .swiper-tab {
   width: 100%;
   height: 70rpx;
@@ -129,13 +143,13 @@
   line-height: 50rpx;
 }
 
-.con_main .weui-grid .yingtao .cover .share > image {
+.con_main .weui-grid .yingtao .cover .share>image {
   width: 32rpx;
   height: 32rpx;
   vertical-align: middle;
 }
 
-.con_main .weui-grid .yingtao .cover .share > label {
+.con_main .weui-grid .yingtao .cover .share>label {
   margin-left: 10rpx;
   vertical-align: middle;
 }
