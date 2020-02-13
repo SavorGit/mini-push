@@ -110,19 +110,6 @@
   border-radius: 5rpx;
 }
 
-.page_main>.row-item>.cover>view {
-  width: 120rpx;
-  height: 120rpx;
-  font-size: 22rpx;
-  margin-top: -120rpx;
-}
-
-.page_main>.row-item>.cover>view>view {
-  width: 100%;
-  height: 30rpx;
-  border-radius: 0 0 5rpx 5rpx;
-}
-
 .page_main>.row-item>.i-right {
   width: calc(100% - 145rpx);
 }
