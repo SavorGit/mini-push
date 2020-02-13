@@ -1,1 +1,149 @@
 /* pages/hotel/index.wxss */
+
+
+/* =========================== 页面头部 =========================== */
+.page_banner {
+  display: block;
+  width: 100%;
+  height: 100rpx;
+  line-height: 100rpx;
+  font-size: 26rpx;
+}
+
+.page_banner .layout>label {
+  margin: 0 auto;
+  display: block;
+  width: 500rpx;
+}
+
+.page_banner .layout>navigator {
+  width: 180rpx;
+  height: 50rpx;
+  line-height: 50rpx;
+  border-radius: 30rpx;
+  position: relative;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 0rpx;
+  box-sizing: border-box;
+  text-align: center;
+  text-decoration: none;
+  -webkit-tap-highlight-color: transparent;
+  overflow: hidden;
+}
+
+.page_top {
+  width: 100%;
+  height: 70rpx;
+  line-height: 70rpx;
+}
+
+.page_top>view {
+  padding: 0 25rpx;
+}
+
+.page_top>view .city_show>.icon {
+  width: 38rpx;
+  height: 30rpx;
+  font-size: 30rpx;
+  vertical-align: middle;
+}
+
+.page_top>view .city_show>label {
+  vertical-align: middle;
+}
+
+.page_top>view .area_show>.icon {
+  width: 20rpx;
+  height: 20rpx;
+  vertical-align: middle;
+}
+
+.page_top>view .cuisine_show>.icon {
+  width: 20rpx;
+  height: 20rpx;
+  vertical-align: middle;
+}
+
+.page_top>view .perCapitaPay_show>.icon {
+  width: 20rpx;
+  height: 20rpx;
+  vertical-align: middle;
+}
+
+.page_top>view>.fa {
+  width: 30rpx;
+  height: 30rpx;
+  font-size: 28rpx;
+}
+
+/* =========================== 页面主体 =========================== */
+.page_main_scroll {
+  height: calc(100% - 70rpx);
+}
+
+.page_main_scroll_banner {
+  height: calc(100% - 170rpx);
+}
+
+.page_main {
+  min-height: 100%;
+}
+
+.page_main>.row-item {
+  padding: 25rpx 25rpx 20rpx 25rpx;
+  min-height: 120rpx;
+  border-bottom: 1rpx solid #bfbfbf;
+}
+
+.page_main>.row-item>.cover {
+  width: 120rpx;
+  height: 120rpx;
+  margin-right: 25rpx;
+}
+
+.page_main>.row-item>.cover>image {
+  width: 120rpx;
+  height: 120rpx;
+  border-radius: 5rpx;
+}
+
+.page_main>.row-item>.cover>view {
+  width: 120rpx;
+  height: 120rpx;
+  font-size: 22rpx;
+  margin-top: -120rpx;
+}
+
+.page_main>.row-item>.cover>view>view {
+  width: 100%;
+  height: 30rpx;
+  border-radius: 0 0 5rpx 5rpx;
+}
+
+.page_main>.row-item>.i-right {
+  width: calc(100% - 145rpx);
+}
+
+.page_main>.row-item>.i-right {
+  width: calc(100% - 145rpx);
+}
+
+.page_main>.row-item>.i-right>.ir-top>.irt-left {
+  width: calc(100% - 140rpx);
+}
+
+.page_main>.row-item>.i-right>.ir-top>.irt-left>.irtl-bottom {
+  margin: 6rpx 0 6rpx 0;
+}
+
+.page_main>.row-item>.i-right>.address>.icon {
+  width: 20rpx;
+  height: 20rpx;
+  vertical-align: middle;
+}
+
+.page_main>.row-item>.i-right>.address>label {
+  vertical-align: middle;
+}

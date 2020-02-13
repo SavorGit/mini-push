@@ -36,7 +36,6 @@
 					<label class="fa fa-caret-down icon"></label>
 				</view>
 			</picker>
-			<view class="fa fa-search" aria-hidden="true"></view>
 		</view>
 	</view>
 	<scroll-view class='{{is_link==1 ? "page_main_scroll_banner": "page_main_scroll" }}' scroll-y="true" scroll-with-animation="true" bindscrolltolower="loadMore">
@@ -47,9 +46,6 @@
           <image wx:else src='/images/imgs/default-pic.png'></image> -->
 					<image src='{{bean.img_url}}' binderror="bindImgErro" data-index="{{index}}"></image>
 					<!-- <view bindtap="tts"  data-index="{{index}}">aaaa</view> -->
-					<view class="flex-column-center-flex_end">
-						<view class="flex-column-center-center theme-button-buy">支持外卖</view>
-					</view>
 				</view>
 				<view class='i-right'>
 					<view class='ir-top flex-row-flex_start-start'>
