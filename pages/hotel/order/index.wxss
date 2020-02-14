@@ -1,1 +1,114 @@
 /* pages/hotel/order/index.wxss */
+.tab-bar {
+  width: calc(100% - 80rpx);
+  height: 88rpx;
+  padding: 0 40rpx;
+}
+
+.tab {
+  width: 140rpx;
+  height: 50rpx;
+  line-height: 50rpx;
+  text-align: center;
+  font-size: 32rpx;
+  font-weight: bold;
+}
+
+.tab.selecte {
+  height: 45rpx;
+  border-bottom: 5rpx solid #a18668;
+}
+
+.scroll-view {
+  width: 100%;
+  height: calc(100% - 93rpx);
+  margin-top: 5rpx;
+}
+
+.list {
+  width: 100%;
+  height: 100%;
+}
+
+.row {
+  width: 100%;
+  height: 350rpx;
+}
+
+.row>.head,
+.row>.body,
+.row>.foot {
+  width: calc(100% - 80rpx);
+  height: 60rpx;
+  padding: 0 40rpx;
+  font-size: 24rpx;
+}
+
+.row>.body {
+  height: 234rpx;
+  border-top: 3rpx solid #ededed;
+  border-bottom: 3rpx solid #ededed;
+}
+
+.row>.body>.left {
+  width: 200rpx;
+  height: 200rpx;
+}
+
+.row>.body>.left>.pic {
+  width: 200rpx;
+  height: 200rpx;
+}
+
+.row>.body>.left>.pic>image {
+  width: 200rpx;
+  height: 200rpx;
+  border-radius: 5rpx;
+}
+
+.row>.body>.left>.price {
+  width: 200rpx;
+  height: 30rpx;
+  line-height: 30rpx;
+  text-align: center;
+  border-radius: 0 0 5rpx 5rpx;
+  margin-top: -27rpx;
+}
+
+.row>.body>.right {
+  width: 445rpx;
+  height: 200rpx;
+}
+
+.row>.body>.right>view {
+  width: 100%;
+}
+
+.row>.body>.right>view:first-child {
+  font-size: 30rpx;
+}
+
+.row>.body>.right>view:nth-child(2)>view:first-child {
+  width: 120rpx;
+}
+
+.row>.foot {
+  width: calc(100% - 40rpx);
+  height: 50rpx;
+  padding-right: 0;
+}
+
+.row>.foot>.order-number {
+  white-space: nowrap;
+}
+
+.row>.foot>.btn {
+  width: 150rpx;
+  height: 50rpx;
+  line-height: 50rpx;
+  text-align: center;
+}
+
+.row.bottom-space {
+  margin-bottom: 10rpx;
+}

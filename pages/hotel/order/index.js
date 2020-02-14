@@ -14,6 +14,8 @@ Page({
    * 页面的初始数据
    */
   data: {
+    statusBarHeight: getApp().globalData.statusBarHeight,
+    selectedTab: 'all',
     order_status: 0
   },
 
@@ -42,7 +44,7 @@ Page({
     //处理中的订单
     utils.PostRequest(api_url + '/Smallapp4/order/dishOrderlist', {
       openid: openid,
-      
+
       page: 1,
       status: 1
     }, (data, headers, cookies, errMsg, statusCode) => {
@@ -151,5 +153,10 @@ Page({
    */
   onShareAppMessage: function () {
 
+  },
+  switchTab: function (e) {
+    let self = this;
+    let selectedTab = e.currentTarget.dataset.tab;
+    self.setData({ selectedTab: selectedTab });
   }
 })
