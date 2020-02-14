@@ -5,6 +5,28 @@ const mta = require('../../utils/mta_analysis.js')
 var api_url = app.globalData.api_url;
 var merchant_id;
 var page = 1;
+let SavorUtils = {
+  User: {
+
+    // 判断用户是否注册
+    isRegister: pageContext => utils.PostRequest(api_url + '/smallapp21/User/isRegister', {
+      openid: pageContext.data.openid,
+      page_id: 41
+    }, (data, headers, cookies, errMsg, statusCode) => wx.setStorage({
+      key: 'savor_user_info',
+      data: data.result.userinfo,
+    }), function () {
+      wx.setStorage({
+        key: 'savor_user_info',
+        data: {
+          openid: app.globalData.openid
+        }
+      })
+
+    }, { isShowLoading: false }),
+  },
+  
+};
 Page({
 
   /**
@@ -28,20 +50,38 @@ Page({
       merchant_id = pams_arr[1];
     } else {
       merchant_id = options.merchant_id;
+
+    }
+
+    if (app.globalData.openid && app.globalData.openid != '') {
+      //注册用户
+      that.setData({
+        openid: app.globalData.openid
+      });
+      SavorUtils.User.isRegister(that); //判断用户是否注册
+    } else {
+      app.openidCallback = openid => {
+        if (openid != '') {
+          that.setData({
+            openid: openid
+          });
+          SavorUtils.User.isRegister(that); //判断用户是否注册
+        }
+      }
     }
 
     //商家详情
-    utils.PostRequest(api_url + '/Smallsale18/merchant/info', {
+    utils.PostRequest(api_url + '/Smallapp4/merchant/info', {
       merchant_id: merchant_id,
-    }, (data, headers, cookies, errMsg, statusCode) => self.setData({
+    }, (data, headers, cookies, errMsg, statusCode) => that.setData({
       hotel_info: data.result
     }));
 
     //菜品列表
-    utils.PostRequest(api_url + '/Smallsale18/dish/goodslist', {
+    utils.PostRequest(api_url + '/Smallapp4/dish/goodslist', {
       merchant_id: merchant_id,
       page: 1
-    }, (data, headers, cookies, errMsg, statusCode) => self.setData({
+    }, (data, headers, cookies, errMsg, statusCode) => that.setData({
       dishes_list: data.result
     }));
   },
@@ -59,10 +99,10 @@ Page({
     var that = this;
     page += 1;
     //菜品列表
-    utils.PostRequest(api_url + '/Smallsale18/dish/goodslist', {
+    utils.PostRequest(api_url + '/Smallapp4/dish/goodslist', {
       merchant_id: merchant_id,
       page: page
-    }, (data, headers, cookies, errMsg, statusCode) => self.setData({
+    }, (data, headers, cookies, errMsg, statusCode) => that.setData({
       dishes_list: data.result
     }));
   },
@@ -115,19 +155,27 @@ Page({
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
-
+    var that = this;
+    page += 1;
+    //菜品列表
+    utils.PostRequest(api_url + '/Smallapp4/dish/goodslist', {
+      merchant_id: merchant_id,
+      page: page
+    }, (data, headers, cookies, errMsg, statusCode) => that.setData({
+      dishes_list: data.result
+    }));
   },
 
   /**
    * 用户点击右上角分享
    */
   onShareAppMessage: function (e) {
-    var img_url = e.currentTarget.dataset.img_url;
-    if (res.from === 'button') {
+    var img_url = e.target.dataset.img_url;
+    if (e.from === 'button') {
       // 来自页面内转发按钮
       return {
         title: '热点聚焦，投你所好',
-        path: '/pages/hotel/index?merchant_id=' + merchant_id,
+        path: '/pages/hotel/detail?merchant_id=' + merchant_id,
         imageUrl: img_url,
         success: function (res) {
         },

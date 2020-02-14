@@ -585,5 +585,11 @@ Page({
     that.setData({
       program_list: program_list
     })
+  },
+  bannerGo:function(e){
+    var linkcontent = e.currentTarget.dataset.linkcontent;
+    wx.navigateTo({
+      url: linkcontent 
+    })
   }
 })

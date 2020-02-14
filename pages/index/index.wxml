@@ -180,7 +180,7 @@
 					<label>投屏历史</label>
 				</button>
 			</view>
-			<navigator url="/pages/hotel/detail">test</navigator> 
+			<navigator url="/pages/hotel/index">test</navigator>
 			<!-- <navigator target="miniProgram" app-id="wxf96ad76f27597d65" path="packages/goods/detail/index?alias=1y5c6oa8cduzn&dc_ps=2328936063642568704.200001" class='theme-button'>前往故宫书店</navigator> -->
 		</view>
 	</view>
