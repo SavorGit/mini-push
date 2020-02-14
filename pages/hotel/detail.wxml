@@ -6,7 +6,7 @@
 	<view class="wapper">
 		<view class="shop theme-panel">
 			<view class="info flex-row-center-space_between">
-				<image class="pic" mode="aspectFull" src="http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
+				<image class="pic" mode="aspectFill" src="http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
 				<view class="right flex-column-flex_start-space_between">
 					<view class="name one-line-overflow">淮扬府（安定门店）</view>
 					<view class="flex-row-center-flex_start theme-font3">
@@ -29,7 +29,7 @@
 		</view>
 		<view class="goods-list weui-grids">
 			<view class="goods weui-grid flex-column-center-space_between theme-panel">
-				<image class="pic" mode="aspectFull" src="http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
+				<image class="pic" mode="aspectFill" src="http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
 				<view class="name two-line-overflow">老北京八大碗，超值6人套餐，企业特供</view>
 				<view class="flex-row-center-space_between">
 					<view>￥288</view>
@@ -37,7 +37,7 @@
 				</view>
 			</view>
 			<view class="goods weui-grid flex-column-center-space_between theme-panel">
-				<image class="pic" mode="aspectFull" src="http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
+				<image class="pic" mode="aspectFill" src="http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
 				<view class="name two-line-overflow">老北京八大碗，超值6人套餐，企业特供</view>
 				<view class="flex-row-center-space_between">
 					<view>￥288</view>
@@ -45,7 +45,7 @@
 				</view>
 			</view>
 			<view class="goods weui-grid flex-column-center-space_between theme-panel">
-				<image class="pic" mode="aspectFull" src="http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
+				<image class="pic" mode="aspectFill" src="http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
 				<view class="name two-line-overflow">老北京八大碗，超值6人套餐，企业特供</view>
 				<view class="flex-row-center-space_between">
 					<view>￥288</view>
@@ -53,7 +53,7 @@
 				</view>
 			</view>
 			<view class="goods weui-grid flex-column-center-space_between theme-panel">
-				<image class="pic" mode="aspectFull" src="http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
+				<image class="pic" mode="aspectFill" src="http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
 				<view class="name two-line-overflow">老北京八大碗，超值6人套餐，企业特供</view>
 				<view class="flex-row-center-space_between">
 					<view>￥288</view>
@@ -61,7 +61,7 @@
 				</view>
 			</view>
 			<view class="goods weui-grid flex-column-center-space_between theme-panel">
-				<image class="pic" mode="aspectFull" src="http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
+				<image class="pic" mode="aspectFill" src="http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
 				<view class="name two-line-overflow">老北京八大碗，超值6人套餐，企业特供</view>
 				<view class="flex-row-center-space_between">
 					<view>￥288</view>
@@ -69,7 +69,7 @@
 				</view>
 			</view>
 			<view class="goods weui-grid flex-column-center-space_between theme-panel">
-				<image class="pic" mode="aspectFull" src="http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
+				<image class="pic" mode="aspectFill" src="http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
 				<view class="name two-line-overflow">老北京八大碗，超值6人套餐，企业特供</view>
 				<view class="flex-row-center-space_between">
 					<view>￥288</view>
@@ -77,7 +77,7 @@
 				</view>
 			</view>
 			<view class="goods weui-grid flex-column-center-space_between theme-panel">
-				<image class="pic" mode="aspectFull" src="http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
+				<image class="pic" mode="aspectFill" src="http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
 				<view class="name two-line-overflow">老北京八大碗，超值6人套餐，企业特供</view>
 				<view class="flex-row-center-space_between">
 					<view>￥288</view>
@@ -85,7 +85,7 @@
 				</view>
 			</view>
 			<view class="goods weui-grid flex-column-center-space_between theme-panel">
-				<image class="pic" mode="aspectFull" src="http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
+				<image class="pic" mode="aspectFill" src="http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
 				<view class="name two-line-overflow">老北京八大碗，超值6人套餐，企业特供</view>
 				<view class="flex-row-center-space_between">
 					<view>￥288</view>
@@ -93,7 +93,7 @@
 				</view>
 			</view>
 			<view class="goods weui-grid flex-column-center-space_between theme-panel">
-				<image class="pic" mode="aspectFull" src="http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
+				<image class="pic" mode="aspectFill" src="http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
 				<view class="name two-line-overflow">老北京八大碗，超值6人套餐，企业特供</view>
 				<view class="flex-row-center-space_between">
 					<view>￥288</view>
@@ -101,7 +101,7 @@
 				</view>
 			</view>
 			<view class="goods weui-grid flex-column-center-space_between theme-panel">
-				<image class="pic" mode="aspectFull" src="http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
+				<image class="pic" mode="aspectFill" src="http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
 				<view class="name two-line-overflow">老北京八大碗，超值6人套餐，企业特供</view>
 				<view class="flex-row-center-space_between">
 					<view>￥288</view>
@@ -109,7 +109,7 @@
 				</view>
 			</view>
 			<view class="goods weui-grid flex-column-center-space_between theme-panel">
-				<image class="pic" mode="aspectFull" src="http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
+				<image class="pic" mode="aspectFill" src="http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
 				<view class="name two-line-overflow">老北京八大碗，超值6人套餐，企业特供</view>
 				<view class="flex-row-center-space_between">
 					<view>￥288</view>
@@ -117,7 +117,7 @@
 				</view>
 			</view>
 			<view class="goods weui-grid flex-column-center-space_between theme-panel">
-				<image class="pic" mode="aspectFull" src="http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
+				<image class="pic" mode="aspectFill" src="http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
 				<view class="name two-line-overflow">老北京八大碗，超值6人套餐，企业特供</view>
 				<view class="flex-row-center-space_between">
 					<view>￥288</view>
@@ -125,7 +125,7 @@
 				</view>
 			</view>
 			<view class="goods weui-grid flex-column-center-space_between theme-panel">
-				<image class="pic" mode="aspectFull" src="http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
+				<image class="pic" mode="aspectFill" src="http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
 				<view class="name two-line-overflow">老北京八大碗，超值6人套餐，企业特供</view>
 				<view class="flex-row-center-space_between">
 					<view>￥288</view>
@@ -133,7 +133,7 @@
 				</view>
 			</view>
 			<view class="goods weui-grid flex-column-center-space_between theme-panel">
-				<image class="pic" mode="aspectFull" src="http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
+				<image class="pic" mode="aspectFill" src="http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
 				<view class="name two-line-overflow">老北京八大碗，超值6人套餐，企业特供</view>
 				<view class="flex-row-center-space_between">
 					<view>￥288</view>
@@ -141,7 +141,7 @@
 				</view>
 			</view>
 			<view class="goods weui-grid flex-column-center-space_between theme-panel">
-				<image class="pic" mode="aspectFull" src="http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
+				<image class="pic" mode="aspectFill" src="http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
 				<view class="name two-line-overflow">老北京八大碗，超值6人套餐，企业特供</view>
 				<view class="flex-row-center-space_between">
 					<view>￥288</view>
@@ -149,7 +149,7 @@
 				</view>
 			</view>
 			<view class="goods weui-grid flex-column-center-space_between theme-panel">
-				<image class="pic" mode="aspectFull" src="http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
+				<image class="pic" mode="aspectFill" src="http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
 				<view class="name two-line-overflow">老北京八大碗，超值6人套餐，企业特供</view>
 				<view class="flex-row-center-space_between">
 					<view>￥288</view>
@@ -157,7 +157,7 @@
 				</view>
 			</view>
 			<view class="goods weui-grid flex-column-center-space_between theme-panel">
-				<image class="pic" mode="aspectFull" src="http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
+				<image class="pic" mode="aspectFill" src="http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
 				<view class="name two-line-overflow">老北京八大碗，超值6人套餐，企业特供</view>
 				<view class="flex-row-center-space_between">
 					<view>￥288</view>
@@ -165,7 +165,7 @@
 				</view>
 			</view>
 			<view class="goods weui-grid flex-column-center-space_between theme-panel">
-				<image class="pic" mode="aspectFull" src="http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
+				<image class="pic" mode="aspectFill" src="http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
 				<view class="name two-line-overflow">老北京八大碗，超值6人套餐，企业特供</view>
 				<view class="flex-row-center-space_between">
 					<view>￥288</view>
@@ -173,7 +173,7 @@
 				</view>
 			</view>
 			<view class="goods weui-grid flex-column-center-space_between theme-panel">
-				<image class="pic" mode="aspectFull" src="http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
+				<image class="pic" mode="aspectFill" src="http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
 				<view class="name two-line-overflow">老北京八大碗，超值6人套餐，企业特供</view>
 				<view class="flex-row-center-space_between">
 					<view>￥288</view>
@@ -181,7 +181,7 @@
 				</view>
 			</view>
 			<view class="goods weui-grid flex-column-center-space_between theme-panel">
-				<image class="pic" mode="aspectFull" src="http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
+				<image class="pic" mode="aspectFill" src="http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
 				<view class="name two-line-overflow">老北京八大碗，超值6人套餐，企业特供</view>
 				<view class="flex-row-center-space_between">
 					<view>￥288</view>
@@ -189,7 +189,7 @@
 				</view>
 			</view>
 			<view class="goods weui-grid flex-column-center-space_between theme-panel">
-				<image class="pic" mode="aspectFull" src="http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
+				<image class="pic" mode="aspectFill" src="http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
 				<view class="name two-line-overflow">老北京八大碗，超值6人套餐，企业特供</view>
 				<view class="flex-row-center-space_between">
 					<view>￥288</view>
@@ -197,7 +197,7 @@
 				</view>
 			</view>
 			<view class="goods weui-grid flex-column-center-space_between theme-panel">
-				<image class="pic" mode="aspectFull" src="http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
+				<image class="pic" mode="aspectFill" src="http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
 				<view class="name two-line-overflow">老北京八大碗，超值6人套餐，企业特供</view>
 				<view class="flex-row-center-space_between">
 					<view>￥288</view>
@@ -205,7 +205,7 @@
 				</view>
 			</view>
 			<view class="goods weui-grid flex-column-center-space_between theme-panel">
-				<image class="pic" mode="aspectFull" src="http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
+				<image class="pic" mode="aspectFill" src="http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
 				<view class="name two-line-overflow">老北京八大碗，超值6人套餐，企业特供</view>
 				<view class="flex-row-center-space_between">
 					<view>￥288</view>

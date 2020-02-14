@@ -1,1 +1,114 @@
 /* pages/hotel/order/account.wxss */
+
+input,
+textarea {
+  width: 454rpx;
+  border: 3rpx solid #bebebe;
+  font-size: 24rpx;
+}
+
+input {
+  height: 54rpx;
+}
+
+textarea {
+  height: 114rpx
+}
+
+.page-wapper {
+  width: 100%;
+  padding-top: 10rpx;
+}
+
+.input-panel {
+  width: 100%;
+  margin-top: 10rpx;
+}
+
+.input-panel>view {
+  height: 90rpx;
+  padding: 0 60rpx;
+}
+
+.input-panel>view>.lable {
+  width: 120rpx;
+  font-size: 28rpx;
+}
+
+.consignee-info {
+  height: 370;
+  margin-top: 0;
+}
+
+.consignee-info>.name,
+.consignee-info>.phone {
+  width: calc(100% - 120rpx);
+  border-bottom: 1px solid #ededed;
+}
+
+.consignee-info>.address {
+  width: calc(100% - 120rpx);
+  height: 150rpx;
+  margin-top: 15rpx;
+}
+
+.arrive-time {
+  height: 90rpx;
+}
+
+.goods-info {
+  height: 350rpx;
+}
+
+.goods-info>view {
+  width: calc(100% - 100rpx);
+  padding: 0 50rpx;
+}
+
+.goods-info>.head {
+  height: 70rpx;
+  line-height: 80rpx;
+  font-size: 28rpx;
+  border-bottom: 1px solid #ededed;
+}
+
+.goods-info>.body {
+  height: calc(100% - 110rpx);
+  border-bottom: 1px solid #ededed;
+}
+
+.goods-info>.body>.pic {
+  width: 200rpx;
+  height: 200rpx;
+  border-radius: 10rpx;
+}
+
+.goods-info>.body>view {
+  width: calc(100% - 230rpx);
+  height: 200rpx;
+  font-size: 32rpx;
+}
+
+.goods-info>.body>view>view {
+  width: 100%;
+}
+
+.goods-info>.body>view>view:last-child {
+  margin-top: 35rpx;
+}
+
+.goods-info>.foot {
+  height: 35rpx;
+  line-height: 35rpx;
+  font-size: 24rpx;
+}
+
+.btn-buy {
+  width: 100%;
+  height: 88rpx;
+  line-height: 88rpx;
+  text-align: center;
+  font-size: 32rpx;
+  position: absolute;
+  bottom: 0;
+}
