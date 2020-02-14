@@ -19,15 +19,14 @@ Page({
    */
   onLoad: function (options) {
     var that = this;
-    
-    if (1==1) {
+    if (typeof (options.q) != 'undefined') {
       var q = decodeURIComponent(options.q);
-      q = "?p=dish_89_24";
       var selemite = q.indexOf("?");
       var pams = q.substring(selemite + 3, q.length);
+
       var pams_arr = pams.split('_');
       merchant_id = pams_arr[1];
-    }else {
+    } else {
       merchant_id = options.merchant_id;
     }
     
@@ -39,7 +38,7 @@ Page({
     }));
 
     //菜品列表
-    utils.PostRequest(api_url + '/aa/bb/cc', {
+    utils.PostRequest(api_url + '/Smallsale18/dish/goodslist', {
       merchant_id: merchant_id,
       page:1
     }, (data, headers, cookies, errMsg, statusCode) => self.setData({
@@ -60,12 +59,22 @@ Page({
     var that = this;
     page +=1;
     //菜品列表
-    utils.PostRequest(api_url + '/aa/bb/cc', {
+    utils.PostRequest(api_url + '/Smallsale18/dish/goodslist', {
       merchant_id: merchant_id,
       page: page
     }, (data, headers, cookies, errMsg, statusCode) => self.setData({
       dishes_list: data.result
     }));
+  },
+  /**
+   * 下单
+   */
+  placeOrder:function(e){
+    var goods_id = e.currentTarget.dataset.goods_id;
+    wx.navigateTo({
+      url: '/pages/hotel/dishes/detail?goods_id='+goods_id,
+    })
+
   },
   /**
    * 生命周期函数--监听页面初次渲染完成

@@ -27,6 +27,7 @@
     "pages/hotel/index",
     "pages/hotel/detail",
     "pages/hotel/dishes/detail",
+    "pages/hotel/order/index",
     "pages/hotel/order/account",
     "pages/share/pic",
     "pages/share/video",
