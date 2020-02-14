@@ -1,1 +1,97 @@
 /* pages/hotel/detail.wxss */
+.wapper {
+  width: 100%;
+}
+
+.shop {
+  width: 100%;
+  height: 330rpx;
+}
+
+.shop>.info {
+  width: calc(100% - 40rpx);
+  height: calc(100% - 90rpx);
+  padding: 0 20rpx;
+}
+
+.shop>.info>.pic {
+  width: 200rpx;
+  height: 200rpx;
+  border-radius: 10rpx;
+}
+
+.shop>.info>.right {
+  width: calc(100% - 250rpx);
+  height: 200rpx;
+}
+
+.shop>.info>.right>.name {
+  font-size: 32rpx;
+}
+
+.shop>.info>.right>view {
+  width: 100%;
+  font-size: 28rpx;
+}
+
+.shop>.info>.right>view:nth-child(2)>view {
+  width: 120rpx;
+}
+
+.shop>.btn-group {
+  width: 100%;
+  height: 90rpx;
+  border-top: 1px solid #ededed;
+}
+
+.shop>.btn-group>.btn {
+  width: 50%;
+  height: 80%;
+  font-size: 28rpx;
+}
+
+.shop>.btn-group>.btn:last-child {
+  border-left: 1px solid #ededed;
+}
+
+.shop>.btn-group>.btn>.fa {
+  margin-right: 20rpx;
+}
+
+.goods-list {
+  width: calc(100% - 30rpx);
+  padding: 25rpx 30rpx;
+}
+
+.goods-list>.goods {
+  width: 330rpx;
+  height: 400rpx;
+  margin: 10rpx;
+  padding-bottom: 15rpx;
+  border-radius: 10rpx;
+}
+
+.goods-list>.goods>.pic {
+  width: 330rpx;
+  height: 220rpx;
+  border-radius: 10rpx 10rpx 0 0;
+}
+
+.goods-list>.goods>.name {
+  padding: 0 20rpx;
+  font-size: 28rpx;
+}
+
+.goods-list>.goods>view:last-child {
+  width: calc(100% - 40rpx);
+  padding: 0 20rpx;
+  font-size: 28rpx;
+}
+
+.goods-list>.goods>view:last-child>.btn {
+  width: 120rpx;
+  height: 50rpx;
+  line-height: 50rpx;
+  text-align: center;
+  border-radius: 5rpx;
+}

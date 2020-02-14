@@ -11,7 +11,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-
+    statusBarHeight: getApp().globalData.statusBarHeight,
   },
 
   /**
@@ -29,7 +29,7 @@ Page({
     } else {
       merchant_id = options.merchant_id;
     }
-    
+
     //商家详情
     utils.PostRequest(api_url + '/Smallsale18/merchant/info', {
       merchant_id: merchant_id,
@@ -40,7 +40,7 @@ Page({
     //菜品列表
     utils.PostRequest(api_url + '/Smallsale18/dish/goodslist', {
       merchant_id: merchant_id,
-      page:1
+      page: 1
     }, (data, headers, cookies, errMsg, statusCode) => self.setData({
       dishes_list: data.result
     }));
@@ -53,11 +53,11 @@ Page({
     wx.makePhoneCall({
       phoneNumber: tel
     })
-    
+
   },
-  loadMore:function(e){
+  loadMore: function (e) {
     var that = this;
-    page +=1;
+    page += 1;
     //菜品列表
     utils.PostRequest(api_url + '/Smallsale18/dish/goodslist', {
       merchant_id: merchant_id,
@@ -69,10 +69,10 @@ Page({
   /**
    * 下单
    */
-  placeOrder:function(e){
+  placeOrder: function (e) {
     var goods_id = e.currentTarget.dataset.goods_id;
     wx.navigateTo({
-      url: '/pages/hotel/dishes/detail?goods_id='+goods_id,
+      url: '/pages/hotel/dishes/detail?goods_id=' + goods_id,
     })
 
   },
