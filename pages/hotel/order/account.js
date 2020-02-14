@@ -10,20 +10,21 @@ Page({
    * 页面的初始数据
    */
   data: {
-
+    statusBarHeight: getApp().globalData.statusBarHeight,
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    let self = this;
     goods_id = options.goods_id;
-
+    self.setData({ showBuyConfirmPopWindow: true });
   },
   /**
    * 下单
    */
-  placeOrder:function(e){
+  placeOrder: function (e) {
     var that = this;
     //下单
     utils.PostRequest(api_url + '/Smallapp4/order/addDishorder', {
@@ -36,9 +37,9 @@ Page({
       phone: phone,
       remark: remark
     }, (data, headers, cookies, errMsg, statusCode) => self.setData({
-      
+
     }));
-    
+
   },
   /**
    * 生命周期函数--监听页面初次渲染完成

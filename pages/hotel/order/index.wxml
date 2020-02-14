@@ -19,7 +19,7 @@
 				</view>
 				<view class="body flex-row-center-space_between">
 					<view class="left flex-column-center-flex_start">
-						<image class="pic" src="http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
+						<image class="pic" mode="aspectFill" src="http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
 						<view class="price theme-rad-panel">￥668</view>
 					</view>
 					<view class="right flex-column-flex_start-space_between">
@@ -43,7 +43,7 @@
 				</view>
 				<view class="body flex-row-center-space_between">
 					<view class="left flex-column-center-flex_start">
-						<image class="pic" src="http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
+						<image class="pic" mode="aspectFill" src="http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
 						<view class="price theme-rad-panel">￥668</view>
 					</view>
 					<view class="right flex-column-flex_start-space_between">
@@ -67,7 +67,7 @@
 				</view>
 				<view class="body flex-row-center-space_between">
 					<view class="left flex-column-center-flex_start">
-						<image class="pic" src="http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
+						<image class="pic" mode="aspectFill" src="http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
 						<view class="price theme-rad-panel">￥668</view>
 					</view>
 					<view class="right flex-column-flex_start-space_between">
@@ -91,7 +91,7 @@
 				</view>
 				<view class="body flex-row-center-space_between">
 					<view class="left flex-column-center-flex_start">
-						<image class="pic" src="http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
+						<image class="pic" mode="aspectFill" src="http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
 						<view class="price theme-rad-panel">￥668</view>
 					</view>
 					<view class="right flex-column-flex_start-space_between">
@@ -115,7 +115,7 @@
 				</view>
 				<view class="body flex-row-center-space_between">
 					<view class="left flex-column-center-flex_start">
-						<image class="pic" src="http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
+						<image class="pic" mode="aspectFill" src="http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
 						<view class="price theme-rad-panel">￥668</view>
 					</view>
 					<view class="right flex-column-flex_start-space_between">
@@ -139,7 +139,7 @@
 				</view>
 				<view class="body flex-row-center-space_between">
 					<view class="left flex-column-center-flex_start">
-						<image class="pic" src="http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
+						<image class="pic" mode="aspectFill" src="http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
 						<view class="price theme-rad-panel">￥668</view>
 					</view>
 					<view class="right flex-column-flex_start-space_between">
@@ -169,7 +169,7 @@
 				</view>
 				<view class="body flex-row-center-space_between">
 					<view class="left flex-column-center-flex_start">
-						<image class="pic" src="http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
+						<image class="pic" mode="aspectFill" src="http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
 						<view class="price theme-rad-panel">￥668</view>
 					</view>
 					<view class="right flex-column-flex_start-space_between">
@@ -193,7 +193,7 @@
 				</view>
 				<view class="body flex-row-center-space_between">
 					<view class="left flex-column-center-flex_start">
-						<image class="pic" src="http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
+						<image class="pic" mode="aspectFill" src="http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
 						<view class="price theme-rad-panel">￥668</view>
 					</view>
 					<view class="right flex-column-flex_start-space_between">
@@ -217,7 +217,7 @@
 				</view>
 				<view class="body flex-row-center-space_between">
 					<view class="left flex-column-center-flex_start">
-						<image class="pic" src="http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
+						<image class="pic" mode="aspectFill" src="http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
 						<view class="price theme-rad-panel">￥668</view>
 					</view>
 					<view class="right flex-column-flex_start-space_between">
@@ -241,7 +241,7 @@
 				</view>
 				<view class="body flex-row-center-space_between">
 					<view class="left flex-column-center-flex_start">
-						<image class="pic" src="http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
+						<image class="pic" mode="aspectFill" src="http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
 						<view class="price theme-rad-panel">￥668</view>
 					</view>
 					<view class="right flex-column-flex_start-space_between">
@@ -265,7 +265,7 @@
 				</view>
 				<view class="body flex-row-center-space_between">
 					<view class="left flex-column-center-flex_start">
-						<image class="pic" src="http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
+						<image class="pic" mode="aspectFill" src="http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
 						<view class="price theme-rad-panel">￥668</view>
 					</view>
 					<view class="right flex-column-flex_start-space_between">
@@ -289,7 +289,7 @@
 				</view>
 				<view class="body flex-row-center-space_between">
 					<view class="left flex-column-center-flex_start">
-						<image class="pic" src="http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
+						<image class="pic" mode="aspectFill" src="http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
 						<view class="price theme-rad-panel">￥668</view>
 					</view>
 					<view class="right flex-column-flex_start-space_between">
@@ -319,7 +319,7 @@
 				</view>
 				<view class="body flex-row-center-space_between">
 					<view class="left flex-column-center-flex_start">
-						<image class="pic" src="http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
+						<image class="pic" mode="aspectFill" src="http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
 						<view class="price theme-rad-panel">￥668</view>
 					</view>
 					<view class="right flex-column-flex_start-space_between">
@@ -343,7 +343,7 @@
 				</view>
 				<view class="body flex-row-center-space_between">
 					<view class="left flex-column-center-flex_start">
-						<image class="pic" src="http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
+						<image class="pic" mode="aspectFill" src="http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
 						<view class="price theme-rad-panel">￥668</view>
 					</view>
 					<view class="right flex-column-flex_start-space_between">
@@ -367,7 +367,7 @@
 				</view>
 				<view class="body flex-row-center-space_between">
 					<view class="left flex-column-center-flex_start">
-						<image class="pic" src="http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
+						<image class="pic" mode="aspectFill" src="http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
 						<view class="price theme-rad-panel">￥668</view>
 					</view>
 					<view class="right flex-column-flex_start-space_between">
@@ -391,7 +391,7 @@
 				</view>
 				<view class="body flex-row-center-space_between">
 					<view class="left flex-column-center-flex_start">
-						<image class="pic" src="http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
+						<image class="pic" mode="aspectFill" src="http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
 						<view class="price theme-rad-panel">￥668</view>
 					</view>
 					<view class="right flex-column-flex_start-space_between">
@@ -415,7 +415,7 @@
 				</view>
 				<view class="body flex-row-center-space_between">
 					<view class="left flex-column-center-flex_start">
-						<image class="pic" src="http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
+						<image class="pic" mode="aspectFill" src="http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
 						<view class="price theme-rad-panel">￥668</view>
 					</view>
 					<view class="right flex-column-flex_start-space_between">
@@ -439,7 +439,7 @@
 				</view>
 				<view class="body flex-row-center-space_between">
 					<view class="left flex-column-center-flex_start">
-						<image class="pic" src="http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
+						<image class="pic" mode="aspectFill" src="http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
 						<view class="price theme-rad-panel">￥668</view>
 					</view>
 					<view class="right flex-column-flex_start-space_between">

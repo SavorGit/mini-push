@@ -1,2 +1,50 @@
 <!--pages/hotel/order/account.wxml-->
-<text>pages/hotel/order/account.wxml</text>
+<import src="/pages/template/commons" />
+<template is="navigationBarForTwoLevel" data='{{statusBarHeight: statusBarHeight,titleText:"热点投屏"}}' />
+
+<scroll-view class='container theme-container' style='height: calc(100vh - 46px - {{statusBarHeight}}px);' scroll-y="true" scroll-with-animation="true">
+	<view class="page-wapper" style='height: calc(100vh - 46px - {{statusBarHeight}}px -10rpx);'>
+		<view class="consignee-info input-panel theme-panel">
+			<view class="name flex-row-center-space_between">
+				<view class="lable">收货人</view>
+				<input placeholder="请输入"></input>
+			</view>
+			<view class="phone flex-row-center-space_between">
+				<view class="lable">联系电话</view>
+				<input placeholder="请输入"></input>
+			</view>
+			<view class="address flex-row-flex_start-space_between">
+				<view class="lable">收货地址</view>
+				<textarea placeholder="请输入"></textarea>
+			</view>
+		</view>
+		<view class="arrive-time input-panel theme-panel">
+			<view class="name flex-row-center-space_between">
+				<view class="lable">送达时间</view>
+				<picker mode="date">
+					<view class="flex-row-center-center" style="width:100%;height:60rpx;">2020.02.02</view>
+				</picker>
+			</view>
+		</view>
+		<view class="goods-info input-panel theme-panel">
+			<view class="head">订单信息</view>
+			<view class="body flex-row-center-space_between">
+				<image class="pic" mode="aspectFill" src="http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
+				<view>
+					<view class="two-line-overflow">特惠10人套餐，含8荤6素，专供疫情期间开业企业</view>
+					<view class="theme-font5">￥668</view>
+				</view>
+			</view>
+			<view class="foot theme-font3">花家怡园（世贸店）</view>
+		</view>
+		<view class="btn-buy theme-button-buy">下单</view>
+	</view>
+</scroll-view>
+
+<!-- 下单确认弹窗 -->
+<modal show="{{showBuyConfirmPopWindow}}" width="600rpx" height='350rpx' border-radius="10rpx" title-text='确认订单' title-color="#333333" title-background-color="unset" title-border-radius="0rpx" confirm-text='我知道了' confirm-color="#FFFFFF" confirm-background-color="#eb6877" confirm-border-radius="10rpx" cancel-text='' bindconfirm='modalConfirm'>
+	<view class="flex-column-center-center font_333333_28">
+		<view>您的订单消息已经通知“xxxxxxx”餐厅。</view>
+		<view>请等待餐厅人员的电话确认。</view>
+	</view>
+</modal>
