@@ -19,11 +19,12 @@ Page({
    */
   onLoad: function (options) {
     var that = this;
-    if (typeof (options.q) != 'undefined') {
+    
+    if (1==1) {
       var q = decodeURIComponent(options.q);
+      q = "?p=dish_89_24";
       var selemite = q.indexOf("?");
       var pams = q.substring(selemite + 3, q.length);
-
       var pams_arr = pams.split('_');
       merchant_id = pams_arr[1];
     }else {
@@ -31,7 +32,7 @@ Page({
     }
     
     //商家详情
-    utils.PostRequest(api_url + '/aa/bb/cc', {
+    utils.PostRequest(api_url + '/Smallsale18/merchant/info', {
       merchant_id: merchant_id,
     }, (data, headers, cookies, errMsg, statusCode) => self.setData({
       hotel_info: data.result
@@ -120,8 +121,6 @@ Page({
         path: '/pages/hotel/index?merchant_id=' + merchant_id,
         imageUrl: img_url,
         success: function (res) {
-
-
         },
       }
     }
