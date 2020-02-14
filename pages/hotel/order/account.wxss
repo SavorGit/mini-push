@@ -1,13 +1,15 @@
 /* pages/hotel/order/account.wxss */
 
 input,
+picker,
 textarea {
   width: 454rpx;
   border: 3rpx solid #bebebe;
   font-size: 24rpx;
 }
 
-input {
+input,
+picker {
   height: 54rpx;
 }
 
