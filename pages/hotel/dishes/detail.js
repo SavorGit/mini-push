@@ -79,7 +79,19 @@ Page({
     }, (data, headers, cookies, errMsg, statusCode) => that.setData({
       goods_info: data.result,
       merchant: data.result.merchant
-    }));
+      }), function () { 
+        var is_share = that.data.is_share
+        if(is_share==true){
+          wx.reLaunch({
+            url: '/pages/demand/index',
+          })
+          
+        }else {
+          wx.navigateBack({
+            delta: 1
+          })
+        }
+    });
   },
   /**
    * 拨打订餐电话

@@ -38,7 +38,7 @@ Page({
       status: 0
     }, (data, headers, cookies, errMsg, statusCode) => {
       that.setData({
-        all_order_list: data.result
+        all_order_list: data.result.datalist
       })
     })
     //处理中的订单
@@ -49,7 +49,7 @@ Page({
       status: 1
     }, (data, headers, cookies, errMsg, statusCode) => {
       that.setData({
-        deal_order_list: data.result
+        deal_order_list: data.result.datalist
       })
     })
     //已完成的订单
@@ -59,7 +59,7 @@ Page({
       status: 2
     }, (data, headers, cookies, errMsg, statusCode) => {
       that.setData({
-        complete_order_list: data.result
+        complete_order_list: data.result.datalist
       })
     })
   },
@@ -75,7 +75,7 @@ Page({
     var that = this;
     var order_status = that.data.order_status
     if (order_status == 0) {
-      page_all + 1;
+      page_all +=1;
       page = page_all;
     } else if (order_status == 1) {
       page_dealing += 1;
@@ -92,18 +92,24 @@ Page({
     }, (data, headers, cookies, errMsg, statusCode) => {
       if (order_status == 0) {
         that.setData({
-          all_order_list: data.result
+          all_order_list: data.result.datalist
         })
       } else if (order_status == 1) {
         that.setData({
-          deal_order_list: data.result
+          deal_order_list: data.result.datalist
         })
       } else if (order_status == 3) {
         that.setData({
-          complete_order_list: data.result
+          complete_order_list: data.result.datalist
         })
       }
 
+    })
+  },
+  gotoDishDetail:function(e){
+    var goods_id = e.currentTarget.dataset.goods_id;
+    wx.navigateTo({
+      url: '/pages/hotel/dishes/detail?goods_id='+goods_id,
     })
   },
   /**
