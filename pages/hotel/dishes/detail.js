@@ -4,6 +4,28 @@ const utils = require('../../../utils/util.js')
 const mta = require('../../../utils/mta_analysis.js')
 var api_url = app.globalData.api_url;
 var goods_id;
+let SavorUtils = {
+  User: {
+
+    // 判断用户是否注册
+    isRegister: pageContext => utils.PostRequest(api_url + '/smallapp21/User/isRegister', {
+      openid: pageContext.data.openid,
+      page_id: 41
+    }, (data, headers, cookies, errMsg, statusCode) => wx.setStorage({
+      key: 'savor_user_info',
+      data: data.result.userinfo,
+    }), function () {
+      wx.setStorage({
+        key: 'savor_user_info',
+        data: {
+          openid: app.globalData.openid
+        }
+      })
+
+    }, { isShowLoading: false }),
+  },
+
+};
 Page({
 
   /**
@@ -28,11 +50,29 @@ Page({
     } else {
       goods_id = options.goods_id;
     }
+    if (app.globalData.openid && app.globalData.openid != '') {
+      //注册用户
+      that.setData({
+        openid: app.globalData.openid
+      });
+      SavorUtils.User.isRegister(that); //判断用户是否注册
+    } else {
+      app.openidCallback = openid => {
+        if (openid != '') {
+          that.setData({
+            openid: openid
+          });
+          SavorUtils.User.isRegister(that); //判断用户是否注册
+        }
+      }
+    }
+
     //菜品详情
-    utils.PostRequest(api_url + '/Smallsale18/dish/detail', {
+    utils.PostRequest(api_url + '/Smallapp4/dish/detail', {
       goods_id: goods_id,
-    }, (data, headers, cookies, errMsg, statusCode) => self.setData({
-      goods_info: data.result
+    }, (data, headers, cookies, errMsg, statusCode) => that.setData({
+      goods_info: data.result,
+      merchant: data.result.merchant
     }));
   },
   /**
@@ -44,6 +84,19 @@ Page({
       phoneNumber: tel
     })
 
+  },
+  gotoHotelDetail:function(e){
+    var merchant_id = e.currentTarget.dataset.merchant_id;
+    wx.navigateTo({
+      url: '/pages/hotel/detail?merchant_id=' + merchant_id,
+    })
+  },
+  gotoPlaceOrder:function(e){
+    var goods_id = e.currentTarget.dataset.goods_id;
+    var openid = e.currentTarget.dataset.openid;
+    wx.navigateTo({
+      url: '/pages/hotel/order/account?goods_id='+goods_id+"&openid="+openid,
+    })
   },
   /**
    * 生命周期函数--监听页面初次渲染完成

@@ -4,6 +4,7 @@ const utils = require('../../../utils/util.js')
 const mta = require('../../../utils/mta_analysis.js')
 var api_url = app.globalData.api_url;
 var goods_id;
+var openid;
 Page({
 
   /**
@@ -11,6 +12,7 @@ Page({
    */
   data: {
     statusBarHeight: getApp().globalData.statusBarHeight,
+    showBuyConfirmPopWindow:false,
   },
 
   /**
@@ -19,7 +21,16 @@ Page({
   onLoad: function (options) {
     let self = this;
     goods_id = options.goods_id;
-    self.setData({ showBuyConfirmPopWindow: true });
+    openid = options.openid;
+    //self.setData({ showBuyConfirmPopWindow: true });
+
+    //菜品详情
+    utils.PostRequest(api_url + '/Smallapp4/dish/detail', {
+      goods_id: goods_id,
+    }, (data, headers, cookies, errMsg, statusCode) => that.setData({
+      goods_info: data.result,
+      merchant: data.result.merchant
+    }));
   },
   /**
    * 下单
