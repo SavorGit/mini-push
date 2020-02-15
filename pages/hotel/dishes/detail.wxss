@@ -9,12 +9,12 @@
   height: 400rpx;
 }
 
-.goods-info>.pic-group>.pic {
+.goods-info>.pic-group .pic {
   width: 100vw;
   height: 400rpx;
 }
 
-.goods-info>.pic-group>.pic>image {
+.goods-info>.pic-group .pic>image {
   width: 100%;
   height: 100%;
 }

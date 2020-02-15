@@ -35,7 +35,7 @@
 }
 
 .shop>.info>.right>view:nth-child(2)>view {
-  width: 120rpx;
+  min-width: 120rpx;
 }
 
 .shop>.btn-group {
