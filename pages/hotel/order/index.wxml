@@ -52,7 +52,7 @@
 				</view>
 				<view class="body flex-row-center-space_between">
 					<view class="left flex-column-center-flex_start">
-						<image class="pic" mode="aspectFill" src="{{bean.goods_img}}"></image>
+						<image bindtap="gotoDishDetail" data-goods_id="{{bean.goods_id}}" class="pic" mode="aspectFill" src="{{bean.goods_img}}"></image>
 						<view class="price theme-rad-panel">￥{{bean.price}}</view>
 					</view>
 					<view class="right flex-column-flex_start-space_between">
@@ -83,7 +83,7 @@
 				</view>
 				<view class="body flex-row-center-space_between">
 					<view class="left flex-column-center-flex_start">
-						<image class="pic" mode="aspectFill" src="{{bean.goods_img}}"></image>
+						<image bindtap="gotoDishDetail" data-goods_id="{{bean.goods_id}}" class="pic" mode="aspectFill" src="{{bean.goods_img}}"></image>
 						<view class="price theme-rad-panel">￥{{bean.price}}</view>
 					</view>
 					<view class="right flex-column-flex_start-space_between">
