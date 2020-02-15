@@ -1,5 +1,6 @@
 <!--pages/hotel/detail.wxml-->
 <import src="/pages/template/commons" />
+<template is="navigationBarForShare" data='{{statusBarHeight: statusBarHeight,titleText:"热点投屏"}}' />
 <template is="navigationBarForTwoLevel" data='{{statusBarHeight: statusBarHeight,titleText:"热点投屏"}}' />
 
 <scroll-view class='container theme-container' scroll-y="true" scroll-with-animation="true" >
