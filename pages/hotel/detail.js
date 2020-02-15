@@ -48,9 +48,14 @@ Page({
 
       var pams_arr = pams.split('_');
       merchant_id = pams_arr[1];
+      that.setData({
+        is_share:true
+      })
     } else {
       merchant_id = options.merchant_id;
-
+      that.setData({
+        is_share: false
+      })
     }
 
     if (app.globalData.openid && app.globalData.openid != '') {
@@ -111,8 +116,9 @@ Page({
    */
   placeOrder: function (e) {
     var goods_id = e.currentTarget.dataset.goods_id;
+    var openid = e.currentTarget.dataset.openid;
     wx.navigateTo({
-      url: '/pages/hotel/order/account?goods_id=' + goods_id,
+      url: '/pages/hotel/order/account?goods_id=' + goods_id+"&openid="+openid,
     })
 
   },

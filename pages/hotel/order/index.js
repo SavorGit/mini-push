@@ -53,7 +53,7 @@ Page({
       })
     })
     //已完成的订单
-    utils.PostRequest(api_v_url + '/Smallapp4/order/dishOrderlist', {
+    utils.PostRequest(api_url + '/Smallapp4/order/dishOrderlist', {
       openid: openid,
       page: 1,
       status: 2
@@ -85,7 +85,7 @@ Page({
       page = page_complete;
     }
     //订单分页
-    utils.PostRequest(api_v_url + '/Smallapp4/order/dishOrderlist', {
+    utils.PostRequest(api_url + '/Smallapp4/order/dishOrderlist', {
       openid: openid,
       page: page,
       status: order_status

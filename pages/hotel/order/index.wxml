@@ -4,9 +4,9 @@
 
 <view class='container theme-container'>
 	<view class="tab-bar flex-row-center-flex_start theme-font1 theme7">
-		<view class="tab all {{selectedTab == 'all' ? 'selecte' :''}}" bindtap="switchTab" data-tab="all">全部订单</view>
-		<view class="tab pending {{selectedTab == 'pending' ? 'selecte' :''}}" bindtap="switchTab" data-tab="pending">待处理</view>
-		<view class="tab completed {{selectedTab == 'completed' ? 'selecte' :''}}" bindtap="switchTab" data-tab="completed">已完成</view>
+		<view class="tab all {{order_status == 0 ? 'selecte' :''}}" bindtap="switchTab" data-tab="all">全部订单</view>
+		<view class="tab pending {{order_status == 1 ? 'selecte' :''}}" bindtap="switchTab" data-tab="pending">待处理</view>
+		<view class="tab completed {{order_status == 2 ? 'selecte' :''}}" bindtap="switchTab" data-tab="completed">已完成</view>
 	</view>
 
 	<!-- 全部订单 -->

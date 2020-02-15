@@ -47,8 +47,14 @@ Page({
 
       var pams_arr = pams.split('_');
       goods_id = pams_arr[1];
+      that.setData({
+        is_share:true
+      })
     } else {
       goods_id = options.goods_id;
+      that.setData({
+        is_share: false
+      })
     }
     if (app.globalData.openid && app.globalData.openid != '') {
       //注册用户

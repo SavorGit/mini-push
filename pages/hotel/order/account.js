@@ -19,7 +19,8 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    let self = this;
+    let that = this;
+    console.log(options);
     goods_id = options.goods_id;
     openid = options.openid;
     //self.setData({ showBuyConfirmPopWindow: true });
@@ -37,20 +38,76 @@ Page({
    */
   placeOrder: function (e) {
     var that = this;
+    var contact = e.detail.value.contact;
+    var address = e.detail.value.address;
+    var phone = e.detail.value.phone;
+    var delivery_date = e.detail.value.delivery_date;
+    var delivery_time = e.detail.value.delivery_time;
+
+    if(contact==''){
+      app.showToast('请输入收货人名称');
+      return false;
+    }
+    if (phone==''){
+      app.showToast('请输入联系电话');
+      return false;
+    }
+    if (address==''){
+      app.showToast('请输入收货地址');
+      return false;
+    }
+    if (delivery_date==''){
+      app.showToast('请选择送达日期');
+      return false;
+    }
+    if (delivery_time==''){
+      app.showToast('请选择送达时间');
+      return false;
+    }
+    var is_mobile = app.checkMobile(phone);
+    if (!is_mobile) {
+      return false;
+    }
+    var delivery_time = delivery_date + ' ' + delivery_time;
+
     //下单
     utils.PostRequest(api_url + '/Smallapp4/order/addDishorder', {
       address: address,
-      amount: amount,
+      amount: 1,
       contact: contact,
       delivery_time: delivery_time,
       goods_id: goods_id,
       openid: openid,
       phone: phone,
-      remark: remark
-    }, (data, headers, cookies, errMsg, statusCode) => self.setData({
+    }, (data, headers, cookies, errMsg, statusCode) => {
 
-    }));
+      that.setData({
+        showBuyConfirmPopWindow: true,
+        order_msg1: data.result.message1,
+        order_msg2: data.result.message2,
+      })
+    })
 
+  },
+  bindDateChange:function(e){
+    var that = this;
+    var type = e.currentTarget.dataset.type;
+    if(type==1){
+      var delivery_date = e.detail.value;
+      that.setData({
+        delivery_date: delivery_date
+      })
+    }else if(type==2){
+      var delivery_time = e.detail.value;
+      that.setData({
+        delivery_time: delivery_time
+      })
+    }
+  },
+  modalConfirm:function(e){
+    wx.navigateBack({
+      delta:1
+    })
   },
   /**
    * 生命周期函数--监听页面初次渲染完成

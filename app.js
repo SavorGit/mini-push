@@ -1111,6 +1111,14 @@ App({
     }, 10000)
 
   },
+  showToast: function (title, duration = 2000, icon = 'none', mask = 'false') {
+    wx.showToast({
+      title: title,
+      icon: icon,
+      duration: duration,
+      mask: mask,
+    })
+  },
   globalData: {
     openid: '',
     session_key: '',

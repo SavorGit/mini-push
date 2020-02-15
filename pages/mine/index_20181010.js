@@ -394,7 +394,16 @@ Page({
       })
     }
   },
-
+  /**
+   * 我的订单
+   */
+  gotoOrder:function(e){
+    console.log(e);
+    var  openid = this.data.openid;
+    wx.navigateTo({
+      url: '/pages/hotel/order/index?openid=' + openid +"&order_status=0",
+    })
+  },
   /**
    * 页面上拉触底事件的处理函数
    */

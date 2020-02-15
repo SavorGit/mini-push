@@ -1,7 +1,7 @@
 <!--pages/hotel/detail.wxml-->
 <import src="/pages/template/commons" />
-<template is="navigationBarForShare" data='{{statusBarHeight: statusBarHeight,titleText:"热点投屏"}}' />
-<template is="navigationBarForTwoLevel" data='{{statusBarHeight: statusBarHeight,titleText:"热点投屏"}}' />
+<template is="navigationBarForShare" data='{{statusBarHeight: statusBarHeight,titleText:"热点投屏"}}' wx:if="{{is_share==true}}" />
+<template is="navigationBarForTwoLevel" data='{{statusBarHeight: statusBarHeight,titleText:"热点投屏"}}' wx:if="{{is_share==false}}" />
 
 <scroll-view class='container theme-container' scroll-y="true" scroll-with-animation="true" >
 	<view class="wapper">
@@ -40,7 +40,7 @@
 				
         <view class="flex-row-center-space_between">
 					<view>￥{{bean.price}}</view>
-					<view class="btn theme-button-buy" bindtap="placeOrder" data-goods_id="{{bean.id}}">下单</view>
+					<view class="btn theme-button-buy" bindtap="placeOrder" data-goods_id="{{bean.id}}" data-openid="{{openid}}">下单</view>
 				</view>
 			</view>
       </block>

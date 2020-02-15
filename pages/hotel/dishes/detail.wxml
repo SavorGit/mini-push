@@ -1,20 +1,15 @@
 <!--pages/hotel/dishes/detail.wxml-->
 <import src="/pages/template/commons" />
-<template is="navigationBarForShare" data='{{statusBarHeight: statusBarHeight,titleText:"热点投屏"}}' />
-<template is="navigationBarForTwoLevel" data='{{statusBarHeight: statusBarHeight,titleText:"热点投屏"}}' />
+<template is="navigationBarForShare" data='{{statusBarHeight: statusBarHeight,titleText:"热点投屏"}}' wx:if="{{is_share==true}}" />
+<template is="navigationBarForTwoLevel" data='{{statusBarHeight: statusBarHeight,titleText:"热点投屏"}}' wx:if="{{is_share==false}}" />
 
 <scroll-view class='container theme-container' scroll-y="true" scroll-with-animation="true">
 	<view class="goods-info theme-panel">
 		<swiper class="pic-group" indicator-dots="true" autoplay="true">
-			<swiper-item class="pic">
-				<image mode="aspectFill" src="http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
+			<swiper-item class="pic" wx:for="{{goods_info.cover_imgs}}"  wx:key="key" wx:for-item="bean" wx:for-index="index">
+				<image mode="aspectFill" src="{{bean}}"></image>
 			</swiper-item>
-			<swiper-item class="pic">
-				<image mode="aspectFill" src="http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
-			</swiper-item>
-			<swiper-item class="pic">
-				<image mode="aspectFill" src="http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
-			</swiper-item>
+
 		</swiper>
 		<view class="flex-column-flex_start-space_around">
 			<view class="name one-line-overflow">{{goods_info.name}}</view>
@@ -41,5 +36,5 @@
 			</block>
 		</view>
 	</view>
-	<view class="btn-buy theme-button-buy" bindtap="gotoPlaceOrder" data-goods_id="{{goods_info.id}}" data-openid="{{openid}}">下单</view>
+	<view class="btn-buy theme-button-buy" bindtap="gotoPlaceOrder" data-goods_id="{{goods_info.goods_id}}" data-openid="{{openid}}">下单</view>
 </scroll-view>
