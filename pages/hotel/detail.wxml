@@ -24,7 +24,7 @@
 				</button>
         <!-- <button class='theme-button' bindtap='phonecallevent' data-tel="{{bean.tel}}" data-hotelid="{{bean.hotel_id}}">预订电话</button> -->
 
-				<button class="btn flex-row-center-center" bindtap='phonecallevent' data-tel="{{hotel_info.tel}}">
+				<button class="btn flex-row-center-center" bindtap='phonecallevent' data-tel="{{hotel_info.mobile}}">
 					<view class="fa fa-phone fa-lg" aria-hidden="true"></view>
 					<view>电话订餐</view>
 				</button>
