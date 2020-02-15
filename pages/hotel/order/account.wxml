@@ -1,52 +1,54 @@
 <!--pages/hotel/order/account.wxml-->
 <import src="/pages/template/commons" />
-<template is="navigationBarForTwoLevel" data='{{statusBarHeight: statusBarHeight,titleText:"热点投屏"}}' />
+<template is="navigationBarForTwoLevel" data='{{statusBarHeight: statusBarHeight,titleText:"创建订单"}}' />
 
 <scroll-view class='container theme-container' style='height: calc(100vh - 46px - {{statusBarHeight}}px);' scroll-y="true" scroll-with-animation="true">
 	<form bindsubmit="placeOrder">
-  <view class="page-wapper" style='height: calc(100vh - 46px - {{statusBarHeight}}px -10rpx);'>
-		<view class="consignee-info input-panel theme-panel">
-			<view class="name flex-row-center-space_between">
-				<view class="lable">收货人</view>
-				<input placeholder="请输入" name="contact"></input>
-			</view>
-			<view class="phone flex-row-center-space_between">
-				<view class="lable">联系电话</view>
-				<input placeholder="请输入" name="phone"></input>
-			</view>
-			<view class="address flex-row-flex_start-space_between">
-				<view class="lable">收货地址</view>
-				<textarea placeholder="请输入" name="address"></textarea>
-			</view>
-		</view>
-		<view class="arrive-time input-panel theme-panel">
-			<view class="name flex-row-center-space_between">
-				<view class="lable">送达时间</view>
-				<picker mode="date" bindchange="bindDateChange" start="2020-01-01" end="2050-12-31" data-type="1">
-					<view class="flex-row-center-center" style="width:100%;height:60rpx;">{{delivery_date}}</view>
-				</picker>
-
-        <picker mode="time" bindchange="bindDateChange" data-type="2">
-					<view class="flex-row-center-center" style="width:100%;height:60rpx;">{{delivery_time}}</view>
-				</picker>
-			</view>
-		</view>
-		<view class="goods-info input-panel theme-panel">
-			<view class="head">订单信息</view>
-			<view class="body flex-row-center-space_between">
-				<image class="pic" mode="aspectFill" src="{{goods_info.cover_imgs[0]}}"></image>
-				<view>
-					<view class="two-line-overflow">{{goods_info.name}}</view>
-					<view class="theme-font5">￥{{goods_info.price}}</view>
+		<view class="page-wapper" style='height: calc(100vh - 46px - {{statusBarHeight}}px -10rpx);'>
+			<view class="consignee-info input-panel theme-panel">
+				<view class="name flex-row-center-space_between">
+					<view class="lable">收货人</view>
+					<input placeholder="请输入" name="contact"></input>
+				</view>
+				<view class="phone flex-row-center-space_between">
+					<view class="lable">联系电话</view>
+					<input placeholder="请输入" name="phone"></input>
+				</view>
+				<view class="address flex-row-flex_start-space_between">
+					<view class="lable">收货地址</view>
+					<textarea placeholder="请输入" name="address"></textarea>
 				</view>
 			</view>
-			<view class="foot theme-font3">{{merchant.name}}</view>
+			<view class="arrive-time input-panel theme-panel">
+				<view class="flex-row-center-space_between">
+					<view class="lable">送达时间</view>
+					<view class="flex-row-center-space_between">
+						<picker mode="date" bindchange="bindDateChange" start="2020-01-01" end="2050-12-31" data-type="1">
+							<view class="flex-row-center-center" style="width:100%;height:60rpx;">{{delivery_date.length==10?delivery_date:'请选择日期'}}</view>
+						</picker>
+						<picker mode="time" bindchange="bindDateChange" data-type="2">
+							<view class="flex-row-center-center" style="width:100%;height:60rpx;">{{delivery_time.length==5?delivery_time:'请选择时间'}}</view>
+						</picker>
+						<view class="fa fa-calendar" aria-hidden="true"></view>
+					</view>
+				</view>
+			</view>
+			<view class="goods-info input-panel theme-panel">
+				<view class="head">订单信息</view>
+				<view class="body flex-row-center-space_between">
+					<image class="pic" mode="aspectFill" src="{{goods_info.cover_imgs[0]}}"></image>
+					<view>
+						<view class="two-line-overflow">{{goods_info.name}}</view>
+						<view class="theme-font5">￥{{goods_info.price}}</view>
+					</view>
+				</view>
+				<view class="foot theme-font3">{{merchant.name}}</view>
+			</view>
+			<button class="btn-buy theme-button-buy" form-type="submit">下单</button>
 		</view>
-		<button class="btn-buy theme-button-buy" form-type="submit">下单</button>
-	</view>
-  <input class='display_hide' name="delivery_date" value="{{delivery_date}}"> </input>
-  <input class='display_hide' name="delivery_time" value="{{delivery_time}}"></input>
-  </form>
+		<input class='display_hide' name="delivery_date" value="{{delivery_date}}"> </input>
+		<input class='display_hide' name="delivery_time" value="{{delivery_time}}"></input>
+	</form>
 </scroll-view>
 
 <!-- 下单确认弹窗 -->

@@ -58,6 +58,23 @@ textarea {
   height: 90rpx;
 }
 
+.arrive-time>view>view:last-child {
+  width: 454rpx;
+  height: 54rpx;
+  border: 3rpx solid #bebebe;
+  font-size: 24rpx;
+}
+
+.arrive-time>view>view>picker {
+  width: calc(50% - 50rpx);
+  border: 0;
+}
+
+.arrive-time>view>view>.fa-calendar {
+  margin-right: 20rpx;
+  font-size: 28rpx;
+}
+
 .goods-info {
   height: 350rpx;
 }
