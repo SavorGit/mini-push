@@ -109,6 +109,11 @@ Page({
       delta:1
     })
   },
+  gotoDisheDetail:function(e){
+    wx.navigateTo({
+      url: '/pages/hotel/dishes/detail?goods_id='+goods_id,
+    })
+  },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
