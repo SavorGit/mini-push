@@ -1,6 +1,6 @@
 <!--pages/hotel/order/index.wxml-->
 <import src="/pages/template/commons" />
-<template is="navigationBarForTwoLevel" data='{{statusBarHeight: statusBarHeight,titleText:"热点投屏"}}' />
+<template is="navigationBarForTwoLevel" data='{{statusBarHeight: statusBarHeight,titleText:"订单列表"}}' />
 
 <view class='container theme-container'>
 	<view class="tab-bar flex-row-center-flex_start theme-font1 theme7">
