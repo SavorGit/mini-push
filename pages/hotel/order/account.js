@@ -38,8 +38,8 @@ Page({
    */
   placeOrder: function (e) {
     var that = this;
-    var contact = e.detail.value.contact;
-    var address = e.detail.value.address;
+    var contact = e.detail.value.contact.replace(/\s+/g, '');
+    var address = e.detail.value.address.replace(/\s+/g, '');
     var phone = e.detail.value.phone;
     var delivery_date = e.detail.value.delivery_date;
     var delivery_time = e.detail.value.delivery_time;
