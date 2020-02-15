@@ -33,7 +33,7 @@
 					</view>
 				</view>
 			</view>
-			<view class="goods-info input-panel theme-panel" bindtap="gotoDisheDetail" >
+			<view class="goods-info input-panel theme-panel" bindtap="gotoDisheDetail">
 				<view class="head">订单信息</view>
 				<view class="body flex-row-center-space_between">
 					<image class="pic" mode="aspectFill" src="{{goods_info.cover_imgs[0]}}"></image>

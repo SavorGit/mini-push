@@ -6,7 +6,7 @@
 <scroll-view class="container flex-column-center-flex_start theme-container" style='height: calc(100vh - 46px - {{statusBarHeight}}px);' scroll-y="true" scroll-with-animation="true">
 	<view class="waiter-evaluate-info-panel flex-column-center-center theme-panel">
 		<view class="wapper flex-row-center-flex_start">
-			<image class="phone" src="https://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
+			<image class="phone" mode="aspectFill" src="https://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
 			<view class="info flex-column-flex_start-center">
 				<view class="name theme-font1">张三{{isCollectOfficialAccount}}</view>
 				<view class="title theme-font3">销售经理</view>

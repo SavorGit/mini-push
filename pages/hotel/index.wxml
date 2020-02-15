@@ -36,32 +36,32 @@
 	</view>
 	<scroll-view class='{{is_link==1 ? "page_main_scroll_banner": "page_main_scroll" }}' scroll-y="true" scroll-with-animation="true" bindscrolltolower="loadMore">
 		<view class='page_main'>
-      <block wx:for="{{hotel_list}}" wx:key="key" wx:for-item="bean" wx:for-index="index">
-			<view class='row-item flex-row-flex_start-start' bindtap="gotoHotelDetail" data-merchant_id="{{bean.merchant_id}}">
-				<view class='cover' bindtap="previewImage" data-src="{{bean.img_url}}" data-hotelid="{{bean.hotel_id}}">
-					<image src='{{bean.img_url}}' binderror="bindImgErro" data-index="{{index}}"></image>
-					<view class="flex-column-center-flex_end" wx:if="{{bean.is_takeout==1}}">
-						<view class="flex-column-center-center theme-button-buy">支持外卖</view>
-					</view>
-				</view>
-				<view class='i-right'>
-					<view class='ir-top flex-row-flex_start-start'>
-						<view class='irt-left'>
-							<label class='font_999999_28'>{{bean.name}}</label>
-							<view class='irtl-bottom font_666666_24'>
-								<label>{{bean.food_name}}</label>
-								<label style='margin-left:50rpx;' wx:if="{{bean.avg_expense>0}}">￥{{bean.avg_expense}}/人</label>
-								<label style='margin-left:50rpx;' wx:else></label>
-							</view>
+			<block wx:for="{{hotel_list}}" wx:key="key" wx:for-item="bean" wx:for-index="index">
+				<view class='row-item flex-row-flex_start-start' bindtap="gotoHotelDetail" data-merchant_id="{{bean.merchant_id}}">
+					<view class='cover' bindtap="previewImage" data-src="{{bean.img_url}}" data-hotelid="{{bean.hotel_id}}">
+						<image mode="aspectFill" src='{{bean.img_url}}' binderror="bindImgErro" data-index="{{index}}"></image>
+						<view class="flex-column-center-flex_end" wx:if="{{bean.is_takeout==1}}">
+							<view class="flex-column-center-center theme-button-buy">支持外卖</view>
 						</view>
 					</view>
-					<view class='address font_666666_24'>
-						<label class="fa fa-map-marker icon"></label>
-						<label>{{bean.addr}}</label>
+					<view class='i-right'>
+						<view class='ir-top flex-row-flex_start-start'>
+							<view class='irt-left'>
+								<label class='font_999999_28'>{{bean.name}}</label>
+								<view class='irtl-bottom font_666666_24'>
+									<label>{{bean.food_name}}</label>
+									<label style='margin-left:50rpx;' wx:if="{{bean.avg_expense>0}}">￥{{bean.avg_expense}}/人</label>
+									<label style='margin-left:50rpx;' wx:else></label>
+								</view>
+							</view>
+						</view>
+						<view class='address font_666666_24'>
+							<label class="fa fa-map-marker icon"></label>
+							<label>{{bean.addr}}</label>
+						</view>
 					</view>
 				</view>
-			</view>
-      </block>
+			</block>
 		</view>
 	</scroll-view>
 	<view class="body-view">
