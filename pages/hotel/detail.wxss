@@ -14,10 +14,24 @@
   padding: 0 20rpx;
 }
 
-.shop>.info>.pic {
+.shop>.info>.pic-wapper {
+  width: 200rpx;
+  height: 200rpx;
+}
+
+.shop>.info>.pic-wapper>.pic {
   width: 200rpx;
   height: 200rpx;
   border-radius: 10rpx;
+}
+
+.shop>.info>.pic-wapper>.flag {
+  width: 60rpx;
+  height: 60rpx;
+  margin-top: -200rpx;
+  /* margin-top: -220rpx;
+  margin-left: -10rpx; */
+  display: flex;
 }
 
 .shop>.info>.right {
