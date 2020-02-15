@@ -20,7 +20,7 @@
 			<image class="pic" mode="aspectFill" src="{{merchant.img}}"></image>
 			<view class="info flex-column-flex_start-space_between">
 				<view class="name one-line-overflow">{{merchant.name}}</view>
-				<view class="one-line-overflow theme-font7">供发布了{{merchant.num}}个菜品</view>
+				<view class="one-line-overflow theme-font7">共发布了{{merchant.num}}个菜品</view>
 			</view>
 			<view class="btn-group flex-column-center-flex_end" bindtap="gotoHotelDetail" data-merchant_id="{{merchant.merchant_id}}">
 				<view class="btn theme-font7">进入</view>

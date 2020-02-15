@@ -41,6 +41,7 @@
 
 .shop>.info>.right>.name {
   font-size: 32rpx;
+  font-weight: bold;
 }
 
 .shop>.info>.right>view {
@@ -62,6 +63,10 @@
   width: 50%;
   height: 80%;
   font-size: 28rpx;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: unset;
 }
 
 .shop>.btn-group>.btn:last-child {
