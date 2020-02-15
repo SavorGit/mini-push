@@ -3,7 +3,8 @@
 /* ================================== 列表页 1.2.0 ================================== */
 
 .swiper {
-  height: 315rpx;
+  /* height: 315rpx; */
+  height: 420rpx;
 }
 
 .swiper button {
@@ -17,23 +18,23 @@
   padding: 0;
 }
 
-.article > .cover {
+.article>.cover {
   width: 720rpx;
   height: 405rpx;
   margin-top: 15rpx;
 }
 
-.article > .cover > navigator > image {
+.article>.cover>navigator>image {
   border-radius: 12rpx 12rpx 0rpx 0rpx;
   z-index: 1;
 }
 
-.article > .cover > .full {
+.article>.cover>.full {
   height: 405rpx;
   margin-top: -400rpx;
 }
 
-.article > .cover > .full > label {
+.article>.cover>.full>label {
   height: 50rpx;
   line-height: 50rpx;
   padding-left: 25rpx;
@@ -41,13 +42,13 @@
   z-index: 2;
 }
 
-.article > .cover > .full > .play {
+.article>.cover>.full>.play {
   margin-top: calc(405rpx - 118rpx);
   text-align: right;
   z-index: 2;
 }
 
-.article > .cover > .full > .play > .icon {
+.article>.cover>.full>.play>.icon {
   width: 60rpx;
   height: 60rpx;
   font-size: 60rpx;
@@ -55,19 +56,19 @@
   z-index: 3;
 }
 
-.article > .con_bottom {
+.article>.con_bottom {
   height: 75rpx;
   border-radius: 0rpx 0rpx 12rpx 12rpx;
 }
 
-.article > .con_bottom > .launch {
+.article>.con_bottom>.launch {
   height: 100%;
   padding-left: 20rpx;
   flex-grow: 1;
 }
 
-.article > .con_bottom > .launch > view >  navigator,
-.article > .con_bottom > .launch > view >  button {
+.article>.con_bottom>.launch>view>navigator,
+.article>.con_bottom>.launch>view>button {
   width: 130rpx;
   height: 45rpx;
   margin-right: 10rpx;
@@ -78,13 +79,13 @@
   border-radius: 22rpx;
 }
 
-.article > .con_bottom > .operation {
+.article>.con_bottom>.operation {
   width: 230rpx;
   height: 100%;
 }
 
-.article > .con_bottom > .operation > view,
-.article > .con_bottom > .operation > button {
+.article>.con_bottom>.operation>view,
+.article>.con_bottom>.operation>button {
   max-width: 120rpx;
   height: 60rpx;
   line-height: 60rpx;
@@ -98,31 +99,31 @@
   width: 100%;
 }
 
-.card > .model-1 {
+.card>.model-1 {
   width: 100%;
   /* height: 785rpx; */
   margin-bottom: 20rpx;
 }
 
-.card > .model-1 > .body {
+.card>.model-1>.body {
   width: 690rpx;
   /* height: 650rpx; */
   padding: 30rpx 30rpx 15rpx 30rpx;
 }
 
-.card > .model-1 > .body > .goods-pic {
+.card>.model-1>.body>.goods-pic {
   width: 690rpx;
   height: 390rpx;
   border-radius: 5rpx;
 }
 
-.card > .model-1 > .body > .goods-title {
+.card>.model-1>.body>.goods-title {
   width: 100%;
   margin-top: 30rpx;
   font-size: 32rpx;
 }
 
-.card > .model-1 > .body > .goods-detail {
+.card>.model-1>.body>.goods-detail {
   width: 100%;
   margin-top: 30rpx;
   font-size: 24rpx;
@@ -133,12 +134,12 @@
   -webkit-box-orient: vertical;
 }
 
-.card > .model-1 > .body > .goods-tags {
+.card>.model-1>.body>.goods-tags {
   width: 100%;
   margin-top: 30rpx;
 }
 
-.card > .model-1 > .body > .goods-tags > .goods-tag {
+.card>.model-1>.body>.goods-tags>.goods-tag {
   max-width: 130rpx;
   height: 30rpx;
   line-height: 30rpx;
@@ -152,38 +153,38 @@
   border-radius: 5rpx;
 }
 
-.card > .model-1 > .body > .goods-tags > .goods-tag:first-child {
+.card>.model-1>.body>.goods-tags>.goods-tag:first-child {
   margin-left: 0;
 }
 
-.card > .model-2 {
+.card>.model-2 {
   width: 100%;
   /* height: 330rpx; */
   margin-bottom: 20rpx;
 }
 
-.card > .model-2 > .body {
+.card>.model-2>.body {
   width: 690rpx;
   /* height: 185rpx; */
   padding: 35rpx 30rpx;
 }
 
-.card > .model-2 > .body > .left {
+.card>.model-2>.body>.left {
   width: 340rpx;
   height: 100%;
   margin-right: 50rpx;
 }
 
-.card > .model-2 > .body > .left > .goods-title {
+.card>.model-2>.body>.left>.goods-title {
   font-size: 32rpx;
 }
 
-.card > .model-2 > .body > .left > .goods-tags {
+.card>.model-2>.body>.left>.goods-tags {
   width: 100%;
   margin-top: 40rpx;
 }
 
-.card > .model-2 > .body > .left > .goods-tags > .goods-tag {
+.card>.model-2>.body>.left>.goods-tags>.goods-tag {
   max-width: 130rpx;
   height: 30rpx;
   line-height: 30rpx;
@@ -195,61 +196,61 @@
   background-color: rgba(235, 104, 119, 0.1);
 }
 
-.card > .model-2 > .body > .left > .goods-tags > .goods-tag:first-child {
+.card>.model-2>.body>.left>.goods-tags>.goods-tag:first-child {
   margin-left: 0;
 }
 
-.card > .model-2 > .body > .goods-pic {
+.card>.model-2>.body>.goods-pic {
   width: 300rpx;
   height: 180rpx;
   border-radius: 5rpx;
 }
 
-.card > .model-3 {
+.card>.model-3 {
   width: 100%;
   max-height: 810rpx;
   margin-bottom: 20rpx;
 }
 
-.card > .model-3 > .body {
+.card>.model-3>.body {
   width: 690rpx;
   max-height: 665rpx;
   padding: 30rpx 35rpx 15rpx 35rpx;
 }
 
-.card > .model-3 > .body > .goods-title {
+.card>.model-3>.body>.goods-title {
   width: 100%;
   font-size: 32rpx;
 }
 
-.card > .model-3 > .body > .pic-group {
+.card>.model-3>.body>.pic-group {
   width: 100%;
   height: 400rpx;
   margin-top: 30rpx;
 }
 
-.card > .model-3 > .body > .pic-group > image {
+.card>.model-3>.body>.pic-group>image {
   width: 400rpx;
   height: 400rpx;
   border-radius: 5rpx;
 }
 
-.card > .model-3 > .body > .pic-group > .small-group {
+.card>.model-3>.body>.pic-group>.small-group {
   margin-left: 10rpx;
 }
 
-.card > .model-3 > .body > .pic-group > .small-group > image {
+.card>.model-3>.body>.pic-group>.small-group>image {
   width: 280rpx;
   height: 195rpx;
   margin-top: 10rpx;
   border-radius: 5rpx;
 }
 
-.card > .model-3 > .body > .pic-group > .small-group > image:first-child {
+.card>.model-3>.body>.pic-group>.small-group>image:first-child {
   margin-top: 0;
 }
 
-.card > .model-3 > .body > .goods-detail {
+.card>.model-3>.body>.goods-detail {
   width: 100%;
   margin-top: 30rpx;
   font-size: 24rpx;
@@ -259,12 +260,12 @@
   -webkit-box-orient: vertical;
 }
 
-.card > .model-3 > .body > .goods-tags {
+.card>.model-3>.body>.goods-tags {
   width: 100%;
   margin-top: 30rpx;
 }
 
-.card > .model-3 > .body > .goods-tags > .goods-tag {
+.card>.model-3>.body>.goods-tags>.goods-tag {
   max-width: 130rpx;
   height: 30rpx;
   padding: 0 15rpx;
@@ -278,7 +279,7 @@
   border-radius: 5rpx;
 }
 
-.card > .model-3 > .body > .goods-tags > .goods-tag:first-child {
+.card>.model-3>.body>.goods-tags>.goods-tag:first-child {
   margin-left: 0;
 }
 
@@ -289,7 +290,8 @@
   padding: 0 30rpx;
 }
 
-.card .foot > .play, .card .foot > .share {
+.card .foot>.play,
+.card .foot>.share {
   width: 184rpx;
   height: 32rpx;
   line-height: 32rpx;
@@ -305,7 +307,7 @@
   margin-left: 10rpx;
 }
 
-.card .foot > .launch-tv {
+.card .foot>.launch-tv {
   width: 140rpx;
   height: 55rpx;
   line-height: 55rpx;
