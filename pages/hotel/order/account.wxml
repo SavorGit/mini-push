@@ -44,7 +44,7 @@
 				</view>
 				<view class="foot theme-font3">{{merchant.name}}</view>
 			</view>
-			<button class="btn-buy theme-button-buy" form-type="submit">下单</button>
+			<button class="btn-buy theme-button-buy" form-type="submit" disabled="{{addDisabled}}">下单</button>
 		</view>
 		<input class='display_hide' name="delivery_date" value="{{delivery_date}}"> </input>
 		<input class='display_hide' name="delivery_time" value="{{delivery_time}}"></input>

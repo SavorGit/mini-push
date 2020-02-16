@@ -13,6 +13,7 @@ Page({
   data: {
     statusBarHeight: getApp().globalData.statusBarHeight,
     showBuyConfirmPopWindow:false,
+    addDisabled:false,
   },
 
   /**
@@ -74,6 +75,9 @@ Page({
     }
     var delivery_time = delivery_date + ' ' + delivery_time;
 
+    that.setData({
+      addDisabled:true
+    })
     //下单
     utils.PostRequest(api_url + '/Smallapp4/order/addDishorder', {
       address: address,
@@ -89,6 +93,11 @@ Page({
         showBuyConfirmPopWindow: true,
         order_msg1: data.result.message1,
         order_msg2: data.result.message2,
+        addDisabled:false
+      })
+    },function(){
+      that.setData({
+        addDisabled: false
       })
     })
 
