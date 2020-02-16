@@ -30,7 +30,7 @@
 							<view>{{bean.contact}}</view>
 							<view>{{bean.phone}}</view>
 						</view>
-						<view class="two-line-overflow theme-font7">{{bean.address}}</view>
+						<view class="four-line-overflow theme-font7">{{bean.address}}</view>
 						<view class="theme-font8">希望送达时间: {{bean.delivery_time}}</view>
 					</view>
 				</view>
@@ -61,7 +61,7 @@
 							<view>{{bean.contact}}</view>
 							<view>{{bean.phone}}</view>
 						</view>
-						<view class="two-line-overflow theme-font7">{{bean.address}}</view>
+						<view class="four-line-overflow theme-font7">{{bean.address}}</view>
 						<view class="theme-font8">希望送达时间: {{bean.delivery_time}}</view>
 					</view>
 				</view>
@@ -92,7 +92,7 @@
 							<view>{{bean.contact}}</view>
 							<view>{{bean.phone}}</view>
 						</view>
-						<view class="two-line-overflow theme-font7">{{bean.address}}</view>
+						<view class="four-line-overflow theme-font7">{{bean.address}}</view>
 						<view class="theme-font8">希望送达时间: {{bean.delivery_time}}</view>
 					</view>
 				</view>
