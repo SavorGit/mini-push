@@ -12,8 +12,8 @@ Page({
    */
   data: {
     statusBarHeight: getApp().globalData.statusBarHeight,
-    showBuyConfirmPopWindow:false,
-    addDisabled:false,
+    showBuyConfirmPopWindow: false,
+    addDisabled: false,
   },
 
   /**
@@ -32,9 +32,9 @@ Page({
     }, (data, headers, cookies, errMsg, statusCode) => that.setData({
       goods_info: data.result,
       merchant: data.result.merchant
-    }),function(){
+    }), function () {
       wx.navigateBack({
-        delta:1
+        delta: 1
       })
     });
   },
@@ -49,23 +49,23 @@ Page({
     var delivery_date = e.detail.value.delivery_date;
     var delivery_time = e.detail.value.delivery_time;
 
-    if(contact==''){
+    if (contact == '') {
       app.showToast('请输入收货人名称');
       return false;
     }
-    if (phone==''){
+    if (phone == '') {
       app.showToast('请输入联系电话');
       return false;
     }
-    if (address==''){
+    if (address == '') {
       app.showToast('请输入收货地址');
       return false;
     }
-    if (delivery_date==''){
+    if (delivery_date == '') {
       app.showToast('请选择送达日期');
       return false;
     }
-    if (delivery_time==''){
+    if (delivery_time == '') {
       app.showToast('请选择送达时间');
       return false;
     }
@@ -76,7 +76,7 @@ Page({
     var delivery_time = delivery_date + ' ' + delivery_time;
 
     that.setData({
-      addDisabled:true
+      addDisabled: true
     })
     //下单
     utils.PostRequest(api_url + '/Smallapp4/order/addDishorder', {
@@ -93,38 +93,38 @@ Page({
         showBuyConfirmPopWindow: true,
         order_msg1: data.result.message1,
         order_msg2: data.result.message2,
-        addDisabled:false
+        addDisabled: false
       })
-    },function(){
+    }, function () {
       that.setData({
         addDisabled: false
       })
     })
 
   },
-  bindDateChange:function(e){
+  bindDateChange: function (e) {
     var that = this;
     var type = e.currentTarget.dataset.type;
-    if(type==1){
+    if (type == 1) {
       var delivery_date = e.detail.value;
       that.setData({
         delivery_date: delivery_date
       })
-    }else if(type==2){
+    } else if (type == 2) {
       var delivery_time = e.detail.value;
       that.setData({
         delivery_time: delivery_time
       })
     }
   },
-  modalConfirm:function(e){
+  modalConfirm: function (e) {
     wx.navigateBack({
-      delta:1
+      delta: 1
     })
   },
-  gotoDisheDetail:function(e){
+  gotoDisheDetail: function (e) {
     wx.navigateTo({
-      url: '/pages/hotel/dishes/detail?goods_id='+goods_id,
+      url: '/pages/hotel/dishes/detail?goods_id=' + goods_id,
     })
   },
   /**
@@ -174,5 +174,11 @@ Page({
    */
   onShareAppMessage: function () {
 
+  },
+
+  // 关闭订单确认弹窗
+  closeBuyConfirmPopWindow: function (e) {
+    let self = this;
+    self.setData({ showBuyConfirmPopWindow: false });
   }
 })

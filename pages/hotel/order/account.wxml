@@ -51,10 +51,26 @@
 	</form>
 </scroll-view>
 
-<!-- 下单确认弹窗 -->
-<modal show="{{showBuyConfirmPopWindow}}" width="600rpx" height='350rpx' border-radius="10rpx" title-text='确认订单' title-color="#333333" title-background-color="unset" title-border-radius="0rpx" confirm-text='我知道了' confirm-color="#FFFFFF" confirm-background-color="#eb6877" confirm-border-radius="10rpx" cancel-text='' bindconfirm='modalConfirm'>
+
+<!-- 下单确认弹窗 
+<modal show="{{showBuyConfirmPopWindow}}" width="600rpx" height='400rpx' border-radius="10rpx" title-text='确认订单' title-color="#333333" title-background-color="unset" title-border-radius="0rpx" confirm-text='我知道了' confirm-color="#FFFFFF" confirm-background-color="#eb6877" confirm-border-radius="10rpx" cancel-text='' bindconfirm='modalConfirm'>
 	<view class="flex-column-center-center font_333333_28">
-		<view>{{order_msg1}}</view>
-		<view>{{order_msg2}}</view>
+		<view style="width:calc(100% - 100rpx);padding;0 50rpx;text-align:center;">{{order_msg1}}{{order_msg2}}</view>
+	</view>
+</modal>-->
+<modal show="{{showBuyConfirmPopWindow}}" width="600rpx" height='400rpx' title-text='' confirm-text='' cancel-text=''>
+	<view class="flex-column-center-center" style="width:100%;height:100rpx;padding-bottom:40rpx;">
+		<view class="flex-row-center-flex_end font_333333_34" style="width:calc(100% - 50rpx);padding:25rpx 25rpx 0 25rpx;">
+			<view class="fa fa-times fa-lg" aria-hidden="true" bindtap="closeBuyConfirmPopWindow"></view>
+		</view>
+		<view class="flex-column-center-center font_333333_32" style="font-weight: bold;">温馨提示</view>
+	</view>
+	<view class="flex-column-center-space_between font_333333_28" style="width:100%;height:calc(100% - 280rpx);">
+		<view>您的订单消息已经通知餐厅，</view>
+		<view>稍后会有餐厅人员与您进行电话确认，</view>
+		<view>请保持通话畅通。</view>
+	</view>
+	<view class="flex-column-center-center" style="width:100%;height:140rpx">
+		<view class="theme-button-buy" style="width:250rpx;height:60rpx;line-height:60rpx;text-align:center;font-size:28rpx;border-radius:10rpx;" bindtap="modalConfirm">我知道了</view>
 	</view>
 </modal>
