@@ -31,7 +31,11 @@ Page({
     }, (data, headers, cookies, errMsg, statusCode) => that.setData({
       goods_info: data.result,
       merchant: data.result.merchant
-    }));
+    }),function(){
+      wx.navigateBack({
+        delta:1
+      })
+    });
   },
   /**
    * 下单

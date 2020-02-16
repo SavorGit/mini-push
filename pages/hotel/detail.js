@@ -139,7 +139,14 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    var that = this;
+    //菜品列表
+    utils.PostRequest(api_url + '/Smallapp4/dish/goodslist', {
+      merchant_id: merchant_id,
+      page: page
+    }, (data, headers, cookies, errMsg, statusCode) => that.setData({
+      dishes_list: data.result
+    }));
   },
 
   /**

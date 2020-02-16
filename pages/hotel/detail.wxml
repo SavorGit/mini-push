@@ -39,7 +39,7 @@
 				<view class="goods weui-grid flex-column-center-space_between theme-panel">
 
 					<image class="pic" mode="aspectFill" src="{{bean.img_url}}" bindtap="gotoDisheDetail" data-goods_id="{{bean.id}}"></image>
-					<view class="name two-line-overflow">{{bean.name}}</view>
+					<view class="name two-line-overflow" bindtap="gotoDisheDetail" data-goods_id="{{bean.id}}">{{bean.name}}</view>
 
 					<view class="flex-row-center-space_between">
 						<view>￥{{bean.price}}</view>
