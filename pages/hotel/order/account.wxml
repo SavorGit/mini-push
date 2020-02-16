@@ -8,7 +8,7 @@
 			<view class="consignee-info input-panel theme-panel">
 				<view class="name flex-row-center-space_between">
 					<view class="lable">收货人</view>
-					<input placeholder="请输入" name="contact"></input>
+					<input placeholder="请输入" name="contact" maxlength="10"></input>
 				</view>
 				<view class="phone flex-row-center-space_between">
 					<view class="lable">联系电话</view>
@@ -16,7 +16,7 @@
 				</view>
 				<view class="address flex-row-flex_start-space_between">
 					<view class="lable">收货地址</view>
-					<textarea placeholder="请输入" name="address"></textarea>
+					<textarea placeholder="请输入" name="address" maxlength="100"></textarea>
 				</view>
 			</view>
 			<view class="arrive-time input-panel theme-panel">
