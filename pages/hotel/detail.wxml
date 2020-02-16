@@ -21,7 +21,7 @@
 				</view>
 			</view>
 			<view class="btn-group flex-row-center-center">
-				<button class="btn flex-row-center-center" open-type='share' data-img_url="{{hotel_info.img}}">
+				<button class="btn flex-row-center-center" open-type='share' data-img_url="{{hotel_info.img}}" data-hotel_name="{{hotel_info.name}}" >
 					<view class="fa fa-external-link fa-lg" aria-hidden="true"></view>
 					<view>分享店铺</view>
 				</button>

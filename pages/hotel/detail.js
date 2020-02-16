@@ -190,10 +190,11 @@ Page({
    */
   onShareAppMessage: function (e) {
     var img_url = e.target.dataset.img_url;
+    var hotel_name = e.target.dataset.hotel_name;
     if (e.from === 'button') {
       // 来自页面内转发按钮
       return {
-        title: '热点聚焦，投你所好',
+        title: hotel_name+'推出了特惠菜品',
         path: '/pages/hotel/detail?merchant_id=' + merchant_id,
         imageUrl: img_url,
         success: function (res) {
