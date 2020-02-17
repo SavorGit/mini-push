@@ -52,9 +52,15 @@ Page({
       })
     } else {
       goods_id = options.goods_id;
-      that.setData({
-        is_share: false
-      })
+      if (typeof (options.is_share) != 'undefined' && options.is_share == 1) {
+        that.setData({
+          is_share: true
+        })
+      } else {
+        that.setData({
+          is_share: false
+        })
+      }
     }
     if (app.globalData.openid && app.globalData.openid != '') {
       //注册用户
@@ -161,7 +167,30 @@ Page({
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage: function () {
-
+  onShareAppMessage: function (e) {
+    var that = this;
+    var img_url = that.data.goods_info.cover_imgs[0];
+    var goods_name = that.data.goods_info.name;
+    var hotel_name = that.data.merchant.name;
+    var goods_id = that.data.goods_info.goods_id;
+    //console.log(e)
+    if (e.from === 'button') {
+      // 来自页面内转发按钮
+      return {
+        title: hotel_name + '推出了特惠菜品-'+goods_name,
+        path: '/pages/hotel/dishes/detail?goods_id=' + goods_id + "&is_share=1",
+        imageUrl: img_url,
+        success: function (res) {
+        },
+      }
+    }else {
+      return {
+        title: hotel_name + '推出了特惠菜品-' + goods_name,
+        path: '/pages/hotel/dishes/detail?goods_id=' + goods_id + "&is_share=1",
+        imageUrl: img_url,
+        success: function (res) {
+        },
+      }
+    } 
   }
 })

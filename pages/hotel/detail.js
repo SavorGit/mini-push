@@ -53,9 +53,15 @@ Page({
       })
     } else {
       merchant_id = options.merchant_id;
-      that.setData({
-        is_share: false
-      })
+      if (typeof (options.is_share)!='undefined' && options.is_share==1){
+        that.setData({
+          is_share: true
+        })
+      }else {
+        that.setData({
+          is_share: false
+        })
+      }
     }
 
     if (app.globalData.openid && app.globalData.openid != '') {
@@ -189,13 +195,25 @@ Page({
    * 用户点击右上角分享
    */
   onShareAppMessage: function (e) {
-    var img_url = e.target.dataset.img_url;
-    var hotel_name = e.target.dataset.hotel_name;
+    var that = this;
+    
+    var img_url = that.data.hotel_info.img;
+    var hotel_name = that.data.hotel_info.name;
+    //console.log(e)
+    //console.log(that.data)
     if (e.from === 'button') {
       // 来自页面内转发按钮
       return {
         title: hotel_name+'推出了特惠菜品',
-        path: '/pages/hotel/detail?merchant_id=' + merchant_id,
+        path: '/pages/hotel/detail?merchant_id=' + merchant_id+"&is_share=1",
+        imageUrl: img_url,
+        success: function (res) {
+        },
+      }
+    }else {
+      return {
+        title: hotel_name + '推出了特惠菜品',
+        path: '/pages/hotel/detail?merchant_id=' + merchant_id + "&is_share=1",
         imageUrl: img_url,
         success: function (res) {
         },
