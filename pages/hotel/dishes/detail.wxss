@@ -46,9 +46,13 @@
 
 .hotel-info>.info {
   width: calc(100% - 300rpx);
-  height: 94rpx;
+  height: 120rpx;
   padding-left: 20rpx;
   font-size: 32rpx;
+}
+
+.hotel-info>.info>view {
+  width: 100%;
 }
 
 .hotel-info>.info>view:last-child {
