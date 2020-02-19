@@ -344,9 +344,15 @@ Page({
               longitude: longitude
             },
             success: function (res) {
-              that.setData({
-                cityIndex: res.data.result.cityindex
-              })
+              if (res.data.result.cityindex == null) {
+                that.setData({
+                  cityIndex: 0
+                })
+              } else {
+                that.setData({
+                  cityIndex: res.data.result.cityindex
+                })
+              }
               var area_id = res.data.result.area_id;
               wx.request({
                 url: api_url + '/Smallapp21/Area/getSecArea',

@@ -34,6 +34,7 @@ Page({
    */
   data: {
     statusBarHeight: getApp().globalData.statusBarHeight,
+    is_share:false,
   },
 
   /**
@@ -41,35 +42,49 @@ Page({
    */
   onLoad: function (options) {
     var that = this;
-    if (typeof (options.q) != 'undefined') {
-      var q = decodeURIComponent(options.q);
-      var selemite = q.indexOf("?");
-      var pams = q.substring(selemite + 3, q.length);
-
-      var pams_arr = pams.split('_');
-      merchant_id = pams_arr[1];
-      that.setData({
-        is_share:true
-      })
-    } else {
-      merchant_id = options.merchant_id;
-      if (typeof (options.is_share)!='undefined' && options.is_share==1){
-        that.setData({
-          is_share: true
-        })
-      }else {
-        that.setData({
-          is_share: false
-        })
-      }
-    }
-
+    
+    
     if (app.globalData.openid && app.globalData.openid != '') {
       //注册用户
       that.setData({
         openid: app.globalData.openid
       });
       SavorUtils.User.isRegister(that); //判断用户是否注册
+
+      if (typeof (options.q) != 'undefined') {
+        var q = decodeURIComponent(options.q);
+        var selemite = q.indexOf("?");
+        var pams = q.substring(selemite + 3, q.length);
+
+        var pams_arr = pams.split('_');
+        merchant_id = pams_arr[1];
+        that.setData({
+          is_share: true
+        })
+        mta.Event.stat('openShareMerchant', { 'merchantid': merchant_id, 'openid': app.globalData.openid })
+      } else {
+        merchant_id = options.merchant_id;
+        if (typeof (options.is_share) != 'undefined' && options.is_share == 1) {
+          that.setData({
+            is_share: true
+          })
+          mta.Event.stat('openShareMerchant', { 'merchantid': merchant_id, 'openid': app.globalData.openid })
+        } else {
+          that.setData({
+            is_share: false
+          })
+        }
+      }
+
+      //商家详情
+      that.getMerchantInfo(merchant_id);
+
+      //菜品列表
+      that.getDishInfo(merchant_id)
+
+
+
+
     } else {
       app.openidCallback = openid => {
         if (openid != '') {
@@ -77,18 +92,55 @@ Page({
             openid: openid
           });
           SavorUtils.User.isRegister(that); //判断用户是否注册
+
+
+
+          if (typeof (options.q) != 'undefined') {
+            var q = decodeURIComponent(options.q);
+            var selemite = q.indexOf("?");
+            var pams = q.substring(selemite + 3, q.length);
+
+            var pams_arr = pams.split('_');
+            merchant_id = pams_arr[1];
+            that.setData({
+              is_share: true
+            })
+            mta.Event.stat('openShareMerchant', { 'merchantid': merchant_id, 'openid':openid })
+          } else {
+            merchant_id = options.merchant_id;
+            if (typeof (options.is_share) != 'undefined' && options.is_share == 1) {
+              that.setData({
+                is_share: true
+              })
+              mta.Event.stat('openShareMerchant', { 'merchantid': merchant_id, 'openid':openid })
+            } else {
+              that.setData({
+                is_share: false
+              })
+            }
+          }
+
+          //商家详情
+          that.getMerchantInfo(merchant_id);
+
+          //菜品列表
+          that.getDishInfo(merchant_id)
         }
       }
     }
 
-    //商家详情
+    
+  },
+  getMerchantInfo: function (merchant_id){
+    var that = this;
     utils.PostRequest(api_url + '/Smallapp4/merchant/info', {
       merchant_id: merchant_id,
     }, (data, headers, cookies, errMsg, statusCode) => that.setData({
       hotel_info: data.result
     }));
-
-    //菜品列表
+  },
+  getDishInfo: function (merchant_id){
+    var that = this;
     utils.PostRequest(api_url + '/Smallapp4/dish/goodslist', {
       merchant_id: merchant_id,
       page: 1
@@ -133,6 +185,18 @@ Page({
     wx.navigateTo({
       url: '/pages/hotel/dishes/detail?goods_id=' + goods_id,
     })
+  },
+  previewImage: function (e) {
+    var current = e.currentTarget.dataset.src;
+    var urls = [];
+    for (var i = 0; i < 1; i++) {
+      urls[i] = current;
+    }
+    wx.previewImage({
+      current: urls[0], // 当前显示图片的http链接
+      urls: urls // 需要预览的图片http链接列表
+    })
+    
   },
   /**
    * 生命周期函数--监听页面初次渲染完成
@@ -201,6 +265,7 @@ Page({
     var hotel_name = that.data.hotel_info.name;
     //console.log(e)
     //console.log(that.data)
+    mta.Event.stat('shareMerchant', { 'merchantid': merchant_id, 'openid': that.data.openid, 'types': 1 })
     if (e.from === 'button') {
       // 来自页面内转发按钮
       return {
@@ -219,5 +284,6 @@ Page({
         },
       }
     }
+    
   }
 })
