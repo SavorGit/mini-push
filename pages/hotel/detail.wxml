@@ -3,7 +3,7 @@
 <template is="navigationBarForShare" data='{{statusBarHeight: statusBarHeight,titleText:"餐厅详情"}}' wx:if="{{is_share==true}}" />
 <template is="navigationBarForTwoLevel" data='{{statusBarHeight: statusBarHeight,titleText:"餐厅详情"}}' wx:if="{{is_share==false}}" />
 
-<scroll-view class='container theme-container' style='height: calc(100vh - 46px - {{statusBarHeight}}px);' scroll-y="true" scroll-with-animation="true">
+<scroll-view class='container theme-container' style='height: calc(100vh - 46px - {{statusBarHeight}}px);' scroll-y="true" scroll-with-animation="true" bindscrolltolower="loadMore">
 	<view class="wapper">
 		<view class="shop theme-panel">
 			<view class="info flex-row-center-space_between">
