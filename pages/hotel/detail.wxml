@@ -3,51 +3,55 @@
 <template is="navigationBarForShare" data='{{statusBarHeight: statusBarHeight,titleText:"餐厅详情"}}' wx:if="{{is_share==true}}" />
 <template is="navigationBarForTwoLevel" data='{{statusBarHeight: statusBarHeight,titleText:"餐厅详情"}}' wx:if="{{is_share==false}}" />
 
-<scroll-view class='container theme-container' style='height: calc(100vh - 46px - {{statusBarHeight}}px);' scroll-y="true" scroll-with-animation="true" bindscrolltolower="loadMore">
-	<view class="wapper">
-		<view class="shop theme-panel">
-			<view class="info flex-row-center-space_between">
-				<view class="pic-wapper">
-					<image class="pic" mode="aspectFill" bindtap="previewImage" data-src="{{hotel_info.img}}" src="{{hotel_info.img}}"></image>
-					<image class="flag" mode="aspectFill" src="https://oss.littlehotspot.com/WeChat/MiniProgram/images/waimai.png"></image>
-				</view>
-				<view class="right flex-column-flex_start-space_between">
-					<view class="name one-line-overflow">{{hotel_info.name}}</view>
-					<view class="flex-row-center-flex_start theme-font3">
-						<view class="style">{{hotel_info.food_style}}</view>
-						<view class="price">￥{{hotel_info.avg_expense}}/人</view>
+<view class='container theme-container' style='height: calc(100vh - 46px - {{statusBarHeight}}px);'>
+	<scroll-view class="scroll-view" scroll-y="true" scroll-with-animation="true" bindscrolltolower="loadMore">
+		<view class="wapper">
+			<view class="shop theme-panel">
+				<view class="info flex-row-center-space_between">
+					<view class="pic-wapper">
+						<image class="pic" mode="aspectFill" bindtap="previewImage" data-src="{{hotel_info.img}}" src="{{hotel_info.img}}"></image>
+						<image class="flag" mode="aspectFill" src="https://oss.littlehotspot.com/WeChat/MiniProgram/images/waimai.png"></image>
 					</view>
-					<view class="address two-line-overflow">地址：{{hotel_info.addr}}</view>
-				</view>
-			</view>
-			<view class="btn-group flex-row-center-center">
-				<button class="btn flex-row-center-center" open-type='share' data-img_url="{{hotel_info.img}}" data-hotel_name="{{hotel_info.name}}" >
-					<view class="fa fa-external-link fa-lg" aria-hidden="true"></view>
-					<view>分享店铺</view>
-				</button>
-				<!-- <button class='theme-button' bindtap='phonecallevent' data-tel="{{bean.tel}}" data-hotelid="{{bean.hotel_id}}">预订电话</button> -->
-
-				<button class="btn flex-row-center-center" bindtap='phonecallevent' data-tel="{{hotel_info.mobile}}">
-					<view class="fa fa-phone fa-lg" aria-hidden="true"></view>
-					<view>电话订餐</view>
-				</button>
-			</view>
-		</view>
-
-		<view class="goods-list weui-grids">
-			<block wx:for="{{dishes_list}}" wx:key="key" wx:for-item="bean" wx:for-index="index">
-				<view class="goods weui-grid flex-column-center-space_between theme-panel">
-
-					<image class="pic" mode="aspectFill" src="{{bean.img_url}}" bindtap="gotoDisheDetail" data-goods_id="{{bean.id}}"></image>
-					<view class="name two-line-overflow" bindtap="gotoDisheDetail" data-goods_id="{{bean.id}}">{{bean.name}}</view>
-
-					<view class="flex-row-center-space_between">
-						<view>￥{{bean.price}}</view>
-						<view class="btn theme-button-buy" bindtap="placeOrder" data-goods_id="{{bean.id}}" data-openid="{{openid}}">下单</view>
+					<view class="right flex-column-flex_start-space_between">
+						<view class="name one-line-overflow">{{hotel_info.name}}</view>
+						<view class="flex-row-center-flex_start theme-font3">
+							<view class="style">{{hotel_info.food_style}}</view>
+							<view class="price">￥{{hotel_info.avg_expense}}/人</view>
+						</view>
+						<view class="address two-line-overflow">地址：{{hotel_info.addr}}</view>
 					</view>
 				</view>
-			</block>
-			<!-- <view class="goods weui-grid flex-column-center-space_between theme-panel">
+				<view class="btn-group flex-row-center-center">
+					<button class="btn flex-row-center-center">
+						<view class="fa fa-shopping-bag fa-lg" aria-hidden="true"></view>
+						<view>其他平台</view>
+					</button>
+					<button class="btn flex-row-center-center" open-type='share' data-img_url="{{hotel_info.img}}" data-hotel_name="{{hotel_info.name}}">
+						<view class="fa fa-external-link fa-lg" aria-hidden="true"></view>
+						<view>分享店铺</view>
+					</button>
+					<!-- <button class='theme-button' bindtap='phonecallevent' data-tel="{{bean.tel}}" data-hotelid="{{bean.hotel_id}}">预订电话</button> -->
+					<button class="btn flex-row-center-center" bindtap='phonecallevent' data-tel="{{hotel_info.mobile}}">
+						<view class="fa fa-phone fa-lg" aria-hidden="true"></view>
+						<view>电话订餐</view>
+					</button>
+				</view>
+			</view>
+
+			<view class="goods-list weui-grids">
+				<block wx:for="{{dishes_list}}" wx:key="key" wx:for-item="bean" wx:for-index="index">
+					<view class="goods weui-grid flex-column-center-space_between theme-panel">
+
+						<image class="pic" mode="aspectFill" src="{{bean.img_url}}" bindtap="gotoDisheDetail" data-goods_id="{{bean.id}}"></image>
+						<view class="name two-line-overflow" bindtap="gotoDisheDetail" data-goods_id="{{bean.id}}">{{bean.name}}</view>
+
+						<view class="flex-row-center-space_between">
+							<view>￥{{bean.price}}</view>
+							<view class="btn theme-button-buy" bindtap="placeOrder" data-goods_id="{{bean.id}}" data-openid="{{openid}}">下单</view>
+						</view>
+					</view>
+				</block>
+				<!-- <view class="goods weui-grid flex-column-center-space_between theme-panel">
 				<image class="pic" mode="aspectFill" src="http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
 				<view class="name two-line-overflow">老北京八大碗，超值6人套餐，企业特供</view>
 				<view class="flex-row-center-space_between">
@@ -223,6 +227,20 @@
 					<view class="btn theme-button-buy">下单</view>
 				</view>
 			</view> -->
+			</view>
+		</view>
+	</scroll-view>
+	<view class="page-bottom flex-row-center-center">
+		<view class="cart-bar flex-row-center-space_between theme-rad-panel">
+			<view class="left flex-row-center-flex_start">
+				<view class="icon flex-column-center-center theme-button-like">
+					<view class="fa fa-cart-plus" aria-hidden="true"></view>
+				</view>
+				<view class="info">已添加5件菜品</view>
+			</view>
+			<view class="right flex-row-center-flex_end">
+				<view class="btn buy theme-font5 theme-bg-FFFFFF">下单</view>
+			</view>
 		</view>
 	</view>
-</scroll-view>
+</view>
