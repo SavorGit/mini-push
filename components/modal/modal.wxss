@@ -35,22 +35,24 @@
 .modal-btn-wrapper {
   display: flex;
   flex-direction: row;
-  height: 110rpx;
-  line-height: 110rpx;
+  height: 100rpx;
+  line-height: 100rpx;
   font-weight: bold;
   border-top: 2rpx solid rgba(246, 243, 238, 0.1);
 }
 
 .modal-btn-wrapper button {
-  width: 260rpx;
-  height: 80rpx;
-  line-height: 80rpx;
+  width: 50%;
+  height: 100rpx;
+  line-height: 100rpx;
+  margin: unset;
   padding: unset;
   border: unset;
   border-radius: 40rpx;
 }
 
-.cancel-btn, .confirm-btn {
+.cancel-btn,
+.confirm-btn {
   background-color: #1cbeb6;
   color: #fff;
   text-align: center;

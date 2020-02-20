@@ -1,1 +1,158 @@
 /* pages/hotel/address/add.wxss */
+.panel {
+  width: 100%;
+  margin-top: 20rpx;
+}
+
+.panel>.title-bar {
+  width: calc(100% - 80rpx);
+  height: 80rpx;
+  padding: 0 40rpx;
+}
+
+.panel>.title-bar>.title {
+  font-size: 32rpx;
+  font-weight: bold;
+}
+
+.panel>.body {
+  width: 100%;
+  height: calc(100% - 120rpx);
+  padding: 20rpx 0;
+}
+
+.panel>.body>.row {
+  width: calc(100%- 80rpx);
+  height: 70rpx;
+  padding: 0 40rpx;
+}
+
+.panel>.body>.row>.label-group,
+.panel>.body>.pic-row>.label-group {
+  width: 150rpx;
+  height: 70rpx;
+}
+
+.panel>.body>.row>.label-group>.label,
+.panel>.body>.row>.label-group>.flag,
+.panel>.body>.pic-row>.label-group>.label,
+.panel>.body>.pic-row>.label-group>.flag {
+  font-size: 28rpx;
+}
+
+.panel>.body>.row>.label-group>.flag,
+.panel>.body>.pic-row>.label-group>.flag {
+  margin-left: 5rpx;
+}
+
+.panel>.body>.row>.input-group {
+  width: calc(100% - 150rpx);
+}
+
+.panel>.body>.row>.input-group>.input {
+  width: 100%;
+  height: 50rpx;
+  line-height: 50rpx;
+  font-size: 28rpx;
+  border: 1px solid #bebebe;
+}
+
+.panel>.body>.row>.input-group>.input view {
+  width: 100%;
+  height: 50rpx;
+  line-height: 50rpx;
+}
+
+.panel>.body>.pic-row {
+  width: calc(100%- 80rpx);
+  height: 160rpx;
+  padding: 10rpx 40rpx;
+}
+
+.panel>.body>.pic-row>.input-group {
+  width: calc(100% - 150rpx);
+  height: 100%;
+}
+
+.panel>.body>.pic-row>.input-group>.frame {
+  width: 120rpx;
+  height: 160rpx;
+  margin-left: 50rpx;
+}
+
+.panel>.body>.pic-row>.input-group>.frame:first-child {
+  margin-left: 0;
+}
+
+.panel>.body>.pic-row>.input-group>.frame>.input {
+  width: 114rpx;
+  height: 114rpx;
+  border: 3rpx solid #bebebe;
+}
+
+.panel>.body>.pic-row>.input-group>.frame>.input>.fa {
+  font-size: 36rpx;
+}
+
+.panel>.body>.pic-row>.input-group>.frame>.input>.pic {
+  width: 100%;
+  height: 100%;
+}
+
+.panel>.body>.pic-row>.input-group>.frame>.explain {
+  width: 100%;
+  height: 40rpx;
+  line-height: 40rpx;
+  text-align: center;
+  font-size: 28rpx;
+}
+
+.basic {
+  height: 100%;
+  margin-top: 0;
+}
+
+.basic>.body>.city>.input-group>.input {
+  width: 45%;
+}
+
+.basic>.body>.city>.input-group>.input:last-child {
+  margin-right: -3rpx;
+}
+
+.basic>.body>.address {
+  margin-top: 10rpx;
+  height: 130rpx;
+}
+
+.basic>.body>.address>.input-group {
+  height: 100%;
+}
+
+.basic>.body>.address>.input-group>.input {
+  height: 100%;
+}
+
+.basic>.body>.set-default {
+  height: 80rpx;
+}
+
+.basic>.body>.set-default>.input-group>.input {
+  border: unset;
+}
+
+.basic>.body>.btn-group {
+  height: 150rpx;
+}
+
+.basic>.body>.btn-group>.btn {
+  width: 300rpx;
+  height: 70rpx;
+  line-height: 70rpx;
+  text-align: center;
+  font-size: 32rpx;
+  border-radius: 10rpx;
+  margin: 0;
+  padding: 0;
+  border: 0;
+}

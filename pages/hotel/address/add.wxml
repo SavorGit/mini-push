@@ -1,2 +1,78 @@
 <!--pages/hotel/address/add.wxml-->
-<text>pages/hotel/address/add.wxml</text>
+<import src="/pages/template/commons" />
+<template is="navigationBarForTwoLevel" data='{{statusBarHeight: statusBarHeight,titleText:"新增收货地址"}}' />
+
+<scroll-view class='container theme-container' style='height: calc(100vh - 46px - {{statusBarHeight}}px);' scroll-y="true" scroll-with-animation="true" bindscrolltolower="loadMore">
+	<form>
+		<view class="wapper">
+			<view class="panel basic theme7">
+				<!--
+				<view class="title-bar flex-row-center-flex_start theme-font7">
+					<view class="title">基本信息</view>
+				</view>
+        -->
+				<view class="body">
+					<view class="row flex-row-center-space_between">
+						<view class="label-group flex-row-center-flex_start">
+							<view class="label theme-font1">收货人</view>
+							<view class="flag theme-font5"></view>
+						</view>
+						<view class="input-group">
+							<input class="input" name="name" placeholder="请输入收货人姓名"></input>
+						</view>
+					</view>
+					<view class="row flex-row-center-space_between">
+						<view class="label-group flex-row-center-flex_start">
+							<view class="label theme-font1">手机号码</view>
+							<view class="flag theme-font5"></view>
+						</view>
+						<view class="input-group">
+							<input class="input" name="phone" placeholder="请输入手机号码"></input>
+						</view>
+					</view>
+					<view class="row city flex-row-center-space_between">
+						<view class="label-group flex-row-center-flex_start">
+							<view class="label theme-font1">省市地区</view>
+							<view class="flag theme-font5"></view>
+						</view>
+						<view class="input-group flex-row-center-space_between">
+							<picker class="input">
+								<view>北京市</view>
+							</picker>
+							<picker class="input">
+								<view>朝阳区</view>
+							</picker>
+						</view>
+					</view>
+					<view class="row address flex-row-flex_start-space_between">
+						<view class="label-group flex-row-center-flex_start">
+							<view class="label theme-font1">详细地址</view>
+							<view class="flag theme-font5"></view>
+						</view>
+						<view class="input-group">
+							<textarea class="input" placeholder="多行输入" name='addr' maxlength="200" focus="{{addr_focus}}"></textarea>
+						</view>
+					</view>
+					<view class="row set-default flex-row-center-space_between">
+						<view class="label-group flex-row-center-flex_start">
+							<view class="label theme-font1">设置默认</view>
+							<view class="flag theme-font5"></view>
+						</view>
+						<view class="input-group">
+							<switch class="input" checked="true" />
+						</view>
+					</view>
+					<view class="row btn-group flex-row-center-center">
+						<button class="btn submit theme-button-buy" type="submit">保存</button>
+					</view>
+				</view>
+			</view>
+		</view>
+	</form>
+</scroll-view>
+
+
+<!-- 删除确认 -->
+<modal show="{{showDeleteConfirmPopWindow}}" width="540rpx" height='360rpx' background-color='unset' border-radius="10rpx" title-text='请再次确认' title-color="#333333" title-background-color="#FFFFFF" title-border-radius="10rpx 10rpx 0 0" confirm-text='确定' confirm-color="#FFFFFF" confirm-background-color="#1cbeb6" confirm-border-radius="0 0 10rpx 0" cancel-text='取消' cancel-color='#FFFFFF' cancel-background-color="#BEBEBE" cancel-border-radius="0 0 0 10rpx" bindcancel="modalCancel" bindconfirm='modalConfirm'>
+	<view class="theme-panel" style="width:calc(100% - 100rpx);height:100%;padding:0 50rpx;font-size:28rpx;">司马大郎，13800138000，北京调朝阳区北京调朝阳区北京调朝阳区北京调朝阳区北京调朝阳区北京调朝阳区</view>
+</modal>

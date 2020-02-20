@@ -1,2 +1,625 @@
 <!--pages/hotel/address/index.wxml-->
-<text>pages/hotel/address/index.wxml</text>
+<import src="/pages/template/commons" />
+<template is="navigationBarForTwoLevel" data='{{statusBarHeight: statusBarHeight,titleText:"我的收货地址"}}' />
+
+<!-- 收货地址列表 - 有数据 -->
+<view wx:if="{{list}}" class='container theme-container' style='height: calc(100vh - 46px - {{statusBarHeight}}px);'>
+	<scroll-view class="scroll-view" scroll-y="true" scroll-with-animation="true" bindscrolltolower="loadMore">
+		<view class="wapper">
+			<view class="row theme-panel">
+				<view class="info">
+					<view class="top flex-row-center-space_between">
+						<view class="name one-line-overflow">张三</view>
+						<view class="phone one-line-overflow theme-font2">187****1234</view>
+					</view>
+					<view class="address two-line-overflow theme-font3">北京市朝阳区郞家园北京市朝阳区郞家园北京市朝阳区郞家园北京市朝阳区郞家园北京市朝阳区郞家园北京市朝阳区郞家园北京市朝阳区郞家园北京市朝阳区郞家园</view>
+				</view>
+				<view class="btn-group flex-row-center-space_between">
+					<view class="left flex-row-center-flex_start">
+						<checkbox>默认地址</checkbox>
+					</view>
+					<view class="right flex-row-center-flex_end">
+						<view class="btn edit theme-button">编辑</view>
+						<view class="btn delete theme-button">删除</view>
+					</view>
+				</view>
+			</view>
+			<view class="row theme-panel">
+				<view class="info">
+					<view class="top flex-row-center-space_between">
+						<view class="name one-line-overflow">张三</view>
+						<view class="phone one-line-overflow theme-font2">187****1234</view>
+					</view>
+					<view class="address two-line-overflow theme-font3">北京市朝阳区郞家园</view>
+				</view>
+				<view class="btn-group flex-row-center-space_between">
+					<view class="left flex-row-center-flex_start">
+						<checkbox checked="checked">默认地址</checkbox>
+					</view>
+					<view class="right flex-row-center-flex_end">
+						<view class="btn edit theme-button">编辑</view>
+						<view class="btn delete theme-button">删除</view>
+					</view>
+				</view>
+			</view>
+			<view class="row theme-panel">
+				<view class="info">
+					<view class="top flex-row-center-space_between">
+						<view class="name one-line-overflow">张三</view>
+						<view class="phone one-line-overflow theme-font2">187****1234</view>
+					</view>
+					<view class="address two-line-overflow theme-font3">北京市朝阳区郞家园</view>
+				</view>
+				<view class="btn-group flex-row-center-space_between">
+					<view class="left flex-row-center-flex_start">
+						<checkbox>默认地址</checkbox>
+					</view>
+					<view class="right flex-row-center-flex_end">
+						<view class="btn edit theme-button">编辑</view>
+						<view class="btn delete theme-button">删除</view>
+					</view>
+				</view>
+			</view>
+			<view class="row theme-panel">
+				<view class="info">
+					<view class="top flex-row-center-space_between">
+						<view class="name one-line-overflow">张三</view>
+						<view class="phone one-line-overflow theme-font2">187****1234</view>
+					</view>
+					<view class="address two-line-overflow theme-font3">北京市朝阳区郞家园</view>
+				</view>
+				<view class="btn-group flex-row-center-space_between">
+					<view class="left flex-row-center-flex_start">
+						<checkbox>默认地址</checkbox>
+					</view>
+					<view class="right flex-row-center-flex_end">
+						<view class="btn edit theme-button">编辑</view>
+						<view class="btn delete theme-button">删除</view>
+					</view>
+				</view>
+			</view>
+			<view class="row theme-panel">
+				<view class="info">
+					<view class="top flex-row-center-space_between">
+						<view class="name one-line-overflow">张三</view>
+						<view class="phone one-line-overflow theme-font2">187****1234</view>
+					</view>
+					<view class="address two-line-overflow theme-font3">北京市朝阳区郞家园</view>
+				</view>
+				<view class="btn-group flex-row-center-space_between">
+					<view class="left flex-row-center-flex_start">
+						<checkbox>默认地址</checkbox>
+					</view>
+					<view class="right flex-row-center-flex_end">
+						<view class="btn edit theme-button">编辑</view>
+						<view class="btn delete theme-button">删除</view>
+					</view>
+				</view>
+			</view>
+			<view class="row theme-panel">
+				<view class="info">
+					<view class="top flex-row-center-space_between">
+						<view class="name one-line-overflow">张三</view>
+						<view class="phone one-line-overflow theme-font2">187****1234</view>
+					</view>
+					<view class="address two-line-overflow theme-font3">北京市朝阳区郞家园</view>
+				</view>
+				<view class="btn-group flex-row-center-space_between">
+					<view class="left flex-row-center-flex_start">
+						<checkbox>默认地址</checkbox>
+					</view>
+					<view class="right flex-row-center-flex_end">
+						<view class="btn edit theme-button">编辑</view>
+						<view class="btn delete theme-button">删除</view>
+					</view>
+				</view>
+			</view>
+			<view class="row theme-panel">
+				<view class="info">
+					<view class="top flex-row-center-space_between">
+						<view class="name one-line-overflow">张三</view>
+						<view class="phone one-line-overflow theme-font2">187****1234</view>
+					</view>
+					<view class="address two-line-overflow theme-font3">北京市朝阳区郞家园</view>
+				</view>
+				<view class="btn-group flex-row-center-space_between">
+					<view class="left flex-row-center-flex_start">
+						<checkbox>默认地址</checkbox>
+					</view>
+					<view class="right flex-row-center-flex_end">
+						<view class="btn edit theme-button">编辑</view>
+						<view class="btn delete theme-button">删除</view>
+					</view>
+				</view>
+			</view>
+			<view class="row theme-panel">
+				<view class="info">
+					<view class="top flex-row-center-space_between">
+						<view class="name one-line-overflow">张三</view>
+						<view class="phone one-line-overflow theme-font2">187****1234</view>
+					</view>
+					<view class="address two-line-overflow theme-font3">北京市朝阳区郞家园</view>
+				</view>
+				<view class="btn-group flex-row-center-space_between">
+					<view class="left flex-row-center-flex_start">
+						<checkbox>默认地址</checkbox>
+					</view>
+					<view class="right flex-row-center-flex_end">
+						<view class="btn edit theme-button">编辑</view>
+						<view class="btn delete theme-button">删除</view>
+					</view>
+				</view>
+			</view>
+			<view class="row theme-panel">
+				<view class="info">
+					<view class="top flex-row-center-space_between">
+						<view class="name one-line-overflow">张三</view>
+						<view class="phone one-line-overflow theme-font2">187****1234</view>
+					</view>
+					<view class="address two-line-overflow theme-font3">北京市朝阳区郞家园</view>
+				</view>
+				<view class="btn-group flex-row-center-space_between">
+					<view class="left flex-row-center-flex_start">
+						<checkbox>默认地址</checkbox>
+					</view>
+					<view class="right flex-row-center-flex_end">
+						<view class="btn edit theme-button">编辑</view>
+						<view class="btn delete theme-button">删除</view>
+					</view>
+				</view>
+			</view>
+			<view class="row theme-panel">
+				<view class="info">
+					<view class="top flex-row-center-space_between">
+						<view class="name one-line-overflow">张三</view>
+						<view class="phone one-line-overflow theme-font2">187****1234</view>
+					</view>
+					<view class="address two-line-overflow theme-font3">北京市朝阳区郞家园</view>
+				</view>
+				<view class="btn-group flex-row-center-space_between">
+					<view class="left flex-row-center-flex_start">
+						<checkbox>默认地址</checkbox>
+					</view>
+					<view class="right flex-row-center-flex_end">
+						<view class="btn edit theme-button">编辑</view>
+						<view class="btn delete theme-button">删除</view>
+					</view>
+				</view>
+			</view>
+			<view class="row theme-panel">
+				<view class="info">
+					<view class="top flex-row-center-space_between">
+						<view class="name one-line-overflow">张三</view>
+						<view class="phone one-line-overflow theme-font2">187****1234</view>
+					</view>
+					<view class="address two-line-overflow theme-font3">北京市朝阳区郞家园</view>
+				</view>
+				<view class="btn-group flex-row-center-space_between">
+					<view class="left flex-row-center-flex_start">
+						<checkbox>默认地址</checkbox>
+					</view>
+					<view class="right flex-row-center-flex_end">
+						<view class="btn edit theme-button">编辑</view>
+						<view class="btn delete theme-button">删除</view>
+					</view>
+				</view>
+			</view>
+			<view class="row theme-panel">
+				<view class="info">
+					<view class="top flex-row-center-space_between">
+						<view class="name one-line-overflow">张三</view>
+						<view class="phone one-line-overflow theme-font2">187****1234</view>
+					</view>
+					<view class="address two-line-overflow theme-font3">北京市朝阳区郞家园</view>
+				</view>
+				<view class="btn-group flex-row-center-space_between">
+					<view class="left flex-row-center-flex_start">
+						<checkbox>默认地址</checkbox>
+					</view>
+					<view class="right flex-row-center-flex_end">
+						<view class="btn edit theme-button">编辑</view>
+						<view class="btn delete theme-button">删除</view>
+					</view>
+				</view>
+			</view>
+			<view class="row theme-panel">
+				<view class="info">
+					<view class="top flex-row-center-space_between">
+						<view class="name one-line-overflow">张三</view>
+						<view class="phone one-line-overflow theme-font2">187****1234</view>
+					</view>
+					<view class="address two-line-overflow theme-font3">北京市朝阳区郞家园</view>
+				</view>
+				<view class="btn-group flex-row-center-space_between">
+					<view class="left flex-row-center-flex_start">
+						<checkbox>默认地址</checkbox>
+					</view>
+					<view class="right flex-row-center-flex_end">
+						<view class="btn edit theme-button">编辑</view>
+						<view class="btn delete theme-button">删除</view>
+					</view>
+				</view>
+			</view>
+			<view class="row theme-panel">
+				<view class="info">
+					<view class="top flex-row-center-space_between">
+						<view class="name one-line-overflow">张三</view>
+						<view class="phone one-line-overflow theme-font2">187****1234</view>
+					</view>
+					<view class="address two-line-overflow theme-font3">北京市朝阳区郞家园</view>
+				</view>
+				<view class="btn-group flex-row-center-space_between">
+					<view class="left flex-row-center-flex_start">
+						<checkbox>默认地址</checkbox>
+					</view>
+					<view class="right flex-row-center-flex_end">
+						<view class="btn edit theme-button">编辑</view>
+						<view class="btn delete theme-button">删除</view>
+					</view>
+				</view>
+			</view>
+			<view class="row theme-panel">
+				<view class="info">
+					<view class="top flex-row-center-space_between">
+						<view class="name one-line-overflow">张三</view>
+						<view class="phone one-line-overflow theme-font2">187****1234</view>
+					</view>
+					<view class="address two-line-overflow theme-font3">北京市朝阳区郞家园</view>
+				</view>
+				<view class="btn-group flex-row-center-space_between">
+					<view class="left flex-row-center-flex_start">
+						<checkbox>默认地址</checkbox>
+					</view>
+					<view class="right flex-row-center-flex_end">
+						<view class="btn edit theme-button">编辑</view>
+						<view class="btn delete theme-button">删除</view>
+					</view>
+				</view>
+			</view>
+			<view class="row theme-panel">
+				<view class="info">
+					<view class="top flex-row-center-space_between">
+						<view class="name one-line-overflow">张三</view>
+						<view class="phone one-line-overflow theme-font2">187****1234</view>
+					</view>
+					<view class="address two-line-overflow theme-font3">北京市朝阳区郞家园</view>
+				</view>
+				<view class="btn-group flex-row-center-space_between">
+					<view class="left flex-row-center-flex_start">
+						<checkbox>默认地址</checkbox>
+					</view>
+					<view class="right flex-row-center-flex_end">
+						<view class="btn edit theme-button">编辑</view>
+						<view class="btn delete theme-button">删除</view>
+					</view>
+				</view>
+			</view>
+			<view class="row theme-panel">
+				<view class="info">
+					<view class="top flex-row-center-space_between">
+						<view class="name one-line-overflow">张三</view>
+						<view class="phone one-line-overflow theme-font2">187****1234</view>
+					</view>
+					<view class="address two-line-overflow theme-font3">北京市朝阳区郞家园</view>
+				</view>
+				<view class="btn-group flex-row-center-space_between">
+					<view class="left flex-row-center-flex_start">
+						<checkbox>默认地址</checkbox>
+					</view>
+					<view class="right flex-row-center-flex_end">
+						<view class="btn edit theme-button">编辑</view>
+						<view class="btn delete theme-button">删除</view>
+					</view>
+				</view>
+			</view>
+			<view class="row theme-panel">
+				<view class="info">
+					<view class="top flex-row-center-space_between">
+						<view class="name one-line-overflow">张三</view>
+						<view class="phone one-line-overflow theme-font2">187****1234</view>
+					</view>
+					<view class="address two-line-overflow theme-font3">北京市朝阳区郞家园</view>
+				</view>
+				<view class="btn-group flex-row-center-space_between">
+					<view class="left flex-row-center-flex_start">
+						<checkbox>默认地址</checkbox>
+					</view>
+					<view class="right flex-row-center-flex_end">
+						<view class="btn edit theme-button">编辑</view>
+						<view class="btn delete theme-button">删除</view>
+					</view>
+				</view>
+			</view>
+			<view class="row theme-panel">
+				<view class="info">
+					<view class="top flex-row-center-space_between">
+						<view class="name one-line-overflow">张三</view>
+						<view class="phone one-line-overflow theme-font2">187****1234</view>
+					</view>
+					<view class="address two-line-overflow theme-font3">北京市朝阳区郞家园</view>
+				</view>
+				<view class="btn-group flex-row-center-space_between">
+					<view class="left flex-row-center-flex_start">
+						<checkbox>默认地址</checkbox>
+					</view>
+					<view class="right flex-row-center-flex_end">
+						<view class="btn edit theme-button">编辑</view>
+						<view class="btn delete theme-button">删除</view>
+					</view>
+				</view>
+			</view>
+			<view class="row theme-panel">
+				<view class="info">
+					<view class="top flex-row-center-space_between">
+						<view class="name one-line-overflow">张三</view>
+						<view class="phone one-line-overflow theme-font2">187****1234</view>
+					</view>
+					<view class="address two-line-overflow theme-font3">北京市朝阳区郞家园</view>
+				</view>
+				<view class="btn-group flex-row-center-space_between">
+					<view class="left flex-row-center-flex_start">
+						<checkbox>默认地址</checkbox>
+					</view>
+					<view class="right flex-row-center-flex_end">
+						<view class="btn edit theme-button">编辑</view>
+						<view class="btn delete theme-button">删除</view>
+					</view>
+				</view>
+			</view>
+			<view class="row theme-panel">
+				<view class="info">
+					<view class="top flex-row-center-space_between">
+						<view class="name one-line-overflow">张三</view>
+						<view class="phone one-line-overflow theme-font2">187****1234</view>
+					</view>
+					<view class="address two-line-overflow theme-font3">北京市朝阳区郞家园</view>
+				</view>
+				<view class="btn-group flex-row-center-space_between">
+					<view class="left flex-row-center-flex_start">
+						<checkbox>默认地址</checkbox>
+					</view>
+					<view class="right flex-row-center-flex_end">
+						<view class="btn edit theme-button">编辑</view>
+						<view class="btn delete theme-button">删除</view>
+					</view>
+				</view>
+			</view>
+			<view class="row theme-panel">
+				<view class="info">
+					<view class="top flex-row-center-space_between">
+						<view class="name one-line-overflow">张三</view>
+						<view class="phone one-line-overflow theme-font2">187****1234</view>
+					</view>
+					<view class="address two-line-overflow theme-font3">北京市朝阳区郞家园</view>
+				</view>
+				<view class="btn-group flex-row-center-space_between">
+					<view class="left flex-row-center-flex_start">
+						<checkbox>默认地址</checkbox>
+					</view>
+					<view class="right flex-row-center-flex_end">
+						<view class="btn edit theme-button">编辑</view>
+						<view class="btn delete theme-button">删除</view>
+					</view>
+				</view>
+			</view>
+			<view class="row theme-panel">
+				<view class="info">
+					<view class="top flex-row-center-space_between">
+						<view class="name one-line-overflow">张三</view>
+						<view class="phone one-line-overflow theme-font2">187****1234</view>
+					</view>
+					<view class="address two-line-overflow theme-font3">北京市朝阳区郞家园</view>
+				</view>
+				<view class="btn-group flex-row-center-space_between">
+					<view class="left flex-row-center-flex_start">
+						<checkbox>默认地址</checkbox>
+					</view>
+					<view class="right flex-row-center-flex_end">
+						<view class="btn edit theme-button">编辑</view>
+						<view class="btn delete theme-button">删除</view>
+					</view>
+				</view>
+			</view>
+			<view class="row theme-panel">
+				<view class="info">
+					<view class="top flex-row-center-space_between">
+						<view class="name one-line-overflow">张三</view>
+						<view class="phone one-line-overflow theme-font2">187****1234</view>
+					</view>
+					<view class="address two-line-overflow theme-font3">北京市朝阳区郞家园</view>
+				</view>
+				<view class="btn-group flex-row-center-space_between">
+					<view class="left flex-row-center-flex_start">
+						<checkbox>默认地址</checkbox>
+					</view>
+					<view class="right flex-row-center-flex_end">
+						<view class="btn edit theme-button">编辑</view>
+						<view class="btn delete theme-button">删除</view>
+					</view>
+				</view>
+			</view>
+			<view class="row theme-panel">
+				<view class="info">
+					<view class="top flex-row-center-space_between">
+						<view class="name one-line-overflow">张三</view>
+						<view class="phone one-line-overflow theme-font2">187****1234</view>
+					</view>
+					<view class="address two-line-overflow theme-font3">北京市朝阳区郞家园</view>
+				</view>
+				<view class="btn-group flex-row-center-space_between">
+					<view class="left flex-row-center-flex_start">
+						<checkbox>默认地址</checkbox>
+					</view>
+					<view class="right flex-row-center-flex_end">
+						<view class="btn edit theme-button">编辑</view>
+						<view class="btn delete theme-button">删除</view>
+					</view>
+				</view>
+			</view>
+			<view class="row theme-panel">
+				<view class="info">
+					<view class="top flex-row-center-space_between">
+						<view class="name one-line-overflow">张三</view>
+						<view class="phone one-line-overflow theme-font2">187****1234</view>
+					</view>
+					<view class="address two-line-overflow theme-font3">北京市朝阳区郞家园</view>
+				</view>
+				<view class="btn-group flex-row-center-space_between">
+					<view class="left flex-row-center-flex_start">
+						<checkbox>默认地址</checkbox>
+					</view>
+					<view class="right flex-row-center-flex_end">
+						<view class="btn edit theme-button">编辑</view>
+						<view class="btn delete theme-button">删除</view>
+					</view>
+				</view>
+			</view>
+			<view class="row theme-panel">
+				<view class="info">
+					<view class="top flex-row-center-space_between">
+						<view class="name one-line-overflow">张三</view>
+						<view class="phone one-line-overflow theme-font2">187****1234</view>
+					</view>
+					<view class="address two-line-overflow theme-font3">北京市朝阳区郞家园</view>
+				</view>
+				<view class="btn-group flex-row-center-space_between">
+					<view class="left flex-row-center-flex_start">
+						<checkbox>默认地址</checkbox>
+					</view>
+					<view class="right flex-row-center-flex_end">
+						<view class="btn edit theme-button">编辑</view>
+						<view class="btn delete theme-button">删除</view>
+					</view>
+				</view>
+			</view>
+			<view class="row theme-panel">
+				<view class="info">
+					<view class="top flex-row-center-space_between">
+						<view class="name one-line-overflow">张三</view>
+						<view class="phone one-line-overflow theme-font2">187****1234</view>
+					</view>
+					<view class="address two-line-overflow theme-font3">北京市朝阳区郞家园</view>
+				</view>
+				<view class="btn-group flex-row-center-space_between">
+					<view class="left flex-row-center-flex_start">
+						<checkbox>默认地址</checkbox>
+					</view>
+					<view class="right flex-row-center-flex_end">
+						<view class="btn edit theme-button">编辑</view>
+						<view class="btn delete theme-button">删除</view>
+					</view>
+				</view>
+			</view>
+			<view class="row theme-panel">
+				<view class="info">
+					<view class="top flex-row-center-space_between">
+						<view class="name one-line-overflow">张三</view>
+						<view class="phone one-line-overflow theme-font2">187****1234</view>
+					</view>
+					<view class="address two-line-overflow theme-font3">北京市朝阳区郞家园</view>
+				</view>
+				<view class="btn-group flex-row-center-space_between">
+					<view class="left flex-row-center-flex_start">
+						<checkbox>默认地址</checkbox>
+					</view>
+					<view class="right flex-row-center-flex_end">
+						<view class="btn edit theme-button">编辑</view>
+						<view class="btn delete theme-button">删除</view>
+					</view>
+				</view>
+			</view>
+			<view class="row theme-panel">
+				<view class="info">
+					<view class="top flex-row-center-space_between">
+						<view class="name one-line-overflow">张三</view>
+						<view class="phone one-line-overflow theme-font2">187****1234</view>
+					</view>
+					<view class="address two-line-overflow theme-font3">北京市朝阳区郞家园</view>
+				</view>
+				<view class="btn-group flex-row-center-space_between">
+					<view class="left flex-row-center-flex_start">
+						<checkbox>默认地址</checkbox>
+					</view>
+					<view class="right flex-row-center-flex_end">
+						<view class="btn edit theme-button">编辑</view>
+						<view class="btn delete theme-button">删除</view>
+					</view>
+				</view>
+			</view>
+			<view class="row theme-panel">
+				<view class="info">
+					<view class="top flex-row-center-space_between">
+						<view class="name one-line-overflow">张三</view>
+						<view class="phone one-line-overflow theme-font2">187****1234</view>
+					</view>
+					<view class="address two-line-overflow theme-font3">北京市朝阳区郞家园</view>
+				</view>
+				<view class="btn-group flex-row-center-space_between">
+					<view class="left flex-row-center-flex_start">
+						<checkbox>默认地址</checkbox>
+					</view>
+					<view class="right flex-row-center-flex_end">
+						<view class="btn edit theme-button">编辑</view>
+						<view class="btn delete theme-button">删除</view>
+					</view>
+				</view>
+			</view>
+			<view class="row theme-panel">
+				<view class="info">
+					<view class="top flex-row-center-space_between">
+						<view class="name one-line-overflow">张三</view>
+						<view class="phone one-line-overflow theme-font2">187****1234</view>
+					</view>
+					<view class="address two-line-overflow theme-font3">北京市朝阳区郞家园</view>
+				</view>
+				<view class="btn-group flex-row-center-space_between">
+					<view class="left flex-row-center-flex_start">
+						<checkbox>默认地址</checkbox>
+					</view>
+					<view class="right flex-row-center-flex_end">
+						<view class="btn edit theme-button">编辑</view>
+						<view class="btn delete theme-button">删除</view>
+					</view>
+				</view>
+			</view>
+			<view class="row theme-panel">
+				<view class="info">
+					<view class="top flex-row-center-space_between">
+						<view class="name one-line-overflow">张三</view>
+						<view class="phone one-line-overflow theme-font2">187****1234</view>
+					</view>
+					<view class="address two-line-overflow theme-font3">北京市朝阳区郞家园</view>
+				</view>
+				<view class="btn-group flex-row-center-space_between">
+					<view class="left flex-row-center-flex_start">
+						<checkbox>默认地址</checkbox>
+					</view>
+					<view class="right flex-row-center-flex_end">
+						<view class="btn edit theme-button">编辑</view>
+						<view class="btn delete theme-button">删除</view>
+					</view>
+				</view>
+			</view>
+		</view>
+	</scroll-view>
+	<view class="page-bottom">
+		<view class="btn add theme-button-buy">添加新地址</view>
+	</view>
+</view>
+
+<!-- 收货地址列表 - 无数据 -->
+<view wx:else style='height: calc(100vh - 46px - {{statusBarHeight}}px);' class='container theme-container'>
+	<view class="full_width full_height flex-column-center-center">
+		<view class="theme-rad-panel flex-column-center-center" style="width:150rpx;height:150rpx;margin-bottom:50rpx;border-radius:50%;font-size:50rpx;">
+			<view class="fa fa-close fa-lg"></view>
+		</view>
+		<view style="font-size:32rpx;font-weight:bold;">暂未设置</view>
+		<view class="theme-font2" style="height:80rpx;line-height:80rpx;font-size:28rpx;">没有收货地址寄不了快递哦~</view>
+		<view class="theme-font5" style="width:150rpx;height:50rpx;line-height:50rpx;text-align:center;font-size:32rpx;border-radius: 5rpx;border:3rpx solid #eb6877;">新增地址</view>
+	</view>
+</view>
+
+<!-- 删除确认 -->
+<modal show="{{showDeleteConfirmPopWindow}}" width="450rpx" height='300rpx' background-color='unset' border-radius="10rpx" title-text='删除确认' title-color="#333333" title-background-color="#FFFFFF" title-border-radius="10rpx 10rpx 0 0" confirm-text='确定' confirm-color="#FFFFFF" confirm-background-color="#1cbeb6" confirm-border-radius="0 0 10rpx 0" cancel-text='取消' cancel-color='#FFFFFF' cancel-background-color="#BEBEBE" cancel-border-radius="0 0 0 10rpx" bindcancel="modalCancel" bindconfirm='modalConfirm'>
+	<view class="theme-panel" style="width:calc(100% - 100rpx);height:100%;padding:0 50rpx;font-size:28rpx;">确定要删除该收货地址吗？</view>
+</modal>

@@ -1,5 +1,26 @@
 /** theme.wxss **/
 
+radio .wx-radio-input {
+  border: 4rpx solid #58525c;
+}
+
+radio .wx-radio-input.wx-radio-input-checked {
+  border: 4rpx solid #58525c !important;
+}
+
+radio .wx-radio-input.wx-radio-input-checked::before {
+  background-color: #58525c;
+}
+
+checkbox .wx-checkbox-input.wx-checkbox-input-checked {
+  background: #58525c;
+  border-color: #58525c;
+}
+
+checkbox .wx-checkbox-input.wx-checkbox-input-checked::before {
+  color: #fff;
+}
+
 button[disabled] {
   color: rgba(255, 255, 255, 0.6) !important;
   background-color: rgba(0, 0, 0, 0.6) !important;

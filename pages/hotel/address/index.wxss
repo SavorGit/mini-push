@@ -1,1 +1,80 @@
 /* pages/hotel/address/index.wxss */
+
+.wapper {
+  width: 100%;
+}
+
+.row {
+  width: 100%;
+  height: 240rpx;
+  margin-top: 20rpx;
+}
+
+.row>.info {
+  width: calc(100% - 100rpx);
+  height: 150rpx;
+  padding: 10rpx 50rpx;
+}
+
+.row>.info>.top {
+  width: 100%;
+  height: 70rpx;
+}
+
+.row>.info>.top>.name {
+  font-size: 32rpx;
+}
+
+.row>.info>.top>.phone {
+  font-size: 28rpx;
+}
+
+.row>.info>.address {
+  width: 100%;
+  font-size: 24rpx;
+}
+
+.row>.btn-group {
+  width: calc(100% - 80rpx);
+  height: 70rpx;
+  padding: 0 40rpx;
+  border-top: 3rpx solid #ededed;
+}
+
+.row>.btn-group>.left,
+.row>.btn-group>.right {
+  width: 50%;
+}
+
+.row>.btn-group>.left>checkbox {
+  font-size: 28rpx;
+}
+
+.row>.btn-group>.right>.btn {
+  width: 120rpx;
+  height: 50rpx;
+  line-height: 50rpx;
+  text-align: center;
+  margin-left: 10rpx;
+  font-size: 28rpx;
+  border-radius: 5rpx;
+}
+
+
+.scroll-view {
+  width: 100%;
+  height: calc(100% - 88rpx);
+}
+
+.page-bottom {
+  width: 100%;
+  height: 88rpx;
+}
+
+.page-bottom>.btn {
+  width: 100%;
+  height: 88rpx;
+  line-height: 88rpx;
+  text-align: center;
+  font-size: 32rpx;
+}

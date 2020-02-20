@@ -2,6 +2,69 @@
 @import "/font-awesome.wxss";
 
 /* ================================== 页面 ================================== */
+radio .wx-radio-input.wx-radio-input-checked {
+  background: none;
+}
+
+radio .wx-radio-input.wx-radio-input-checked::before {
+  width: 60%;
+  height: 60%;
+  border-radius: 50%;
+  content: '';
+  transform: translate(-50%, -50%) scale(1);
+  -webkit-transform: translate(-50%, -50%) scale(1);
+}
+
+radio .wx-radio-input {
+  width: 30rpx;
+  height: 30rpx;
+  border-radius: 50%;
+  background: none;
+}
+
+checkbox {
+  font-size: 28rpx;
+}
+
+checkbox .wx-checkbox-input {
+  width: 30rpx;
+  height: 30rpx;
+  background: unset;
+}
+
+checkbox .wx-checkbox-input.wx-checkbox-input-checked::before {
+  width: 28rpx;
+  height: 28rpx;
+  line-height: 28rpx;
+  text-align: center;
+  font-size: 22rpx;
+  background: transparent;
+  transform: translate(-50%, -50%) scale(1);
+  -webkit-transform: translate(-50%, -50%) scale(1);
+}
+
+.wx-switch-input {
+  width: 42px !important;
+  height: 20px !important;
+}
+
+.wx-switch-input::before {
+  width: 41px !important;
+  height: 20px !important;
+}
+
+.wx-switch-input::after {
+  width: 18px !important;
+  height: 18px !important;
+}
+
+button::after,
+button::before {
+  margin: unset;
+  padding: unset;
+  border: unset;
+  background-color: unset;
+}
 
 /* view:focus, view:active, view::selection, view:hover {
   background: unset;
