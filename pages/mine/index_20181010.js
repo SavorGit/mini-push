@@ -405,6 +405,15 @@ Page({
     })
   },
   /**
+   * 我的收货地址
+   */
+  gotoAdress:function(e){
+    var openid = this.data.openid;
+    wx.navigateTo({
+      url: '/pages/mine/address/index?openid='+openid,
+    })
+  },
+  /**
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
