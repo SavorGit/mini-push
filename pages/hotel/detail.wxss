@@ -112,12 +112,19 @@
   font-size: 28rpx;
 }
 
+/*
 .goods-list>.goods>view:last-child>.btn {
   width: 120rpx;
   height: 50rpx;
   line-height: 50rpx;
   text-align: center;
   border-radius: 5rpx;
+}
+*/
+.goods-list>.goods>view:last-child>.btn {
+  width: 50rpx;
+  height: 50rpx;
+  font-size: 50rpx;
 }
 
 .scroll-view {

@@ -2,10 +2,12 @@
 <import src="/pages/template/commons" />
 <template is="navigationBarForTwoLevel" data='{{statusBarHeight: statusBarHeight,titleText:"创建订单"}}' />
 
-<scroll-view class='container theme-container' style='height: calc(100vh - 46px - {{statusBarHeight}}px);' scroll-y="true" scroll-with-animation="true">
+<view class='container theme-container' style='height: calc(100vh - 46px - {{statusBarHeight}}px);'>
 	<form bindsubmit="placeOrder">
-		<view class="page-wapper" style='height: calc(100vh - 46px - {{statusBarHeight}}px -10rpx);'>
-			<view class="consignee-info input-panel theme-panel">
+		<scroll-view class="scroll-view" scroll-y="true" scroll-with-animation="true">
+			<view class="page-wapper" style='height: calc(100vh - 46px - {{statusBarHeight}}px -10rpx);'>
+				<view wx:if="{{consignee}}" class="consignee-info input-panel theme-panel">
+					<!--
 				<view class="name flex-row-center-space_between">
 					<view class="lable">收货人</view>
 					<input placeholder="请输入" name="contact" maxlength="10"></input>
@@ -18,38 +20,81 @@
 					<view class="lable">收货地址</view>
 					<textarea placeholder="请输入" name="address" maxlength="100"></textarea>
 				</view>
-			</view>
-			<view class="arrive-time input-panel theme-panel">
-				<view class="flex-row-center-space_between">
-					<view class="lable">送达时间</view>
+				-->
+					<view class="choose-consignee flex-row-center-space_between">
+						<view class="lable">请选择收货地址</view>
+						<view class="btn flex-row-center-flex_end">
+							<view class="fa fa-angle-right" aria-hidden="true"></view>
+						</view>
+					</view>
+				</view>
+				<view wx:else class="consignee-info input-panel theme-panel">
+					<view class="head flex-row-center-space_between">
+						<view>收货地址</view>
+						<view class="fa fa-angle-right" aria-hidden="true"></view>
+					</view>
+					<view class="body flex-column-center-space_between">
+						<view class="flex-row-center-flex_start">
+							<view class="name">司马上天</view>
+							<view class="phone">13800138000</view>
+						</view>
+						<view class="address two-line-overflow">北京市朝阳区北京市朝阳区北京市朝阳区北京市朝阳区北京市朝阳区北京市朝阳区北京市朝阳区北京市朝阳区北京市朝阳区北京市朝阳区</view>
+					</view>
+				</view>
+				<view class="arrive-time input-panel theme-panel">
 					<view class="flex-row-center-space_between">
-						<picker mode="date" bindchange="bindDateChange" start="2020-01-01" end="2050-12-31" data-type="1">
-							<view class="flex-row-center-center" style="width:100%;height:60rpx;">{{delivery_date.length==10?delivery_date:'请选择日期'}}</view>
-						</picker>
-						<picker mode="time" bindchange="bindDateChange" data-type="2">
-							<view class="flex-row-center-center" style="width:100%;height:60rpx;">{{delivery_time.length==5?delivery_time:'请选择时间'}}</view>
-						</picker>
-						<view class="fa fa-calendar" aria-hidden="true"></view>
+						<view class="lable">送达时间</view>
+						<view class="flex-row-center-space_between">
+							<picker mode="date" bindchange="bindDateChange" start="2020-01-01" end="2050-12-31" data-type="1">
+								<view class="flex-row-center-center" style="width:100%;height:60rpx;">{{delivery_date.length==10?delivery_date:'请选择日期'}}</view>
+							</picker>
+							<picker mode="time" bindchange="bindDateChange" data-type="2">
+								<view class="flex-row-center-center" style="width:100%;height:60rpx;">{{delivery_time.length==5?delivery_time:'请选择时间'}}</view>
+							</picker>
+							<view class="fa fa-calendar" aria-hidden="true"></view>
+						</view>
+					</view>
+				</view>
+				<view class="goods-info input-panel theme-panel" bindtap="gotoDisheDetail">
+					<view class="head">订单信息</view>
+					<view class="body flex-column-center-space_between">
+						<view class="hotel theme-font7">由{{merchant.name}}提供</view>
+						<view class="row flex-row-center-space_between">
+							<image class="pic" mode="aspectFill" src="{{goods_info.cover_imgs[0]}}"></image>
+							<view class="center">
+								<view class="name two-line-overflow">{{goods_info.name}}</view>
+								<view class="price theme-font5">￥{{goods_info.price}}</view>
+							</view>
+							<view class="right flex-row-center-flex_end">
+								<view class="count one-line-overflow">X1</view>
+							</view>
+						</view>
+						<view class="row flex-row-center-space_between">
+							<image class="pic" mode="aspectFill" src="{{goods_info.cover_imgs[0]}}"></image>
+							<view class="center">
+								<view class="name two-line-overflow">{{goods_info.name}}</view>
+								<view class="price theme-font5">￥{{goods_info.price}}</view>
+							</view>
+							<view class="right flex-row-center-flex_end">
+								<view class="count one-line-overflow">X2</view>
+							</view>
+						</view>
+					</view>
+					<view class="foot flex-row-center-space_between">
+						<view class="theme-font2">合计：3件菜品</view>
+						<view class="theme-font5">￥988</view>
 					</view>
 				</view>
 			</view>
-			<view class="goods-info input-panel theme-panel" bindtap="gotoDisheDetail">
-				<view class="head">订单信息</view>
-				<view class="body flex-row-center-space_between">
-					<image class="pic" mode="aspectFill" src="{{goods_info.cover_imgs[0]}}"></image>
-					<view>
-						<view class="two-line-overflow">{{goods_info.name}}</view>
-						<view class="theme-font5">￥{{goods_info.price}}</view>
-					</view>
-				</view>
-				<view class="foot theme-font3">{{merchant.name}}</view>
-			</view>
-			<button class="btn-buy theme-button-buy" form-type="submit" disabled="{{addDisabled}}">下单</button>
-		</view>
-		<input class='display_hide' name="delivery_date" value="{{delivery_date}}"> </input>
-		<input class='display_hide' name="delivery_time" value="{{delivery_time}}"></input>
+			<input class='display_hide' name="delivery_date" value="{{delivery_date}}"> </input>
+			<input class='display_hide' name="delivery_time" value="{{delivery_time}}"></input>
+		</scroll-view>
+		<button class="btn-buy theme-button-buy" form-type="submit" disabled="{{addDisabled}}">
+			<view>下单</view>
+			<view>下单后会由餐厅经理与您联系</view>
+		</button>
 	</form>
-</scroll-view>
+</view>
 
 
 <!-- 下单确认弹窗 

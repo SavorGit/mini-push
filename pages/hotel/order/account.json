@@ -1,4 +1,6 @@
 {
+  "navigationBarTitleText": "创建订单",
+  "disableScroll": true,
   "usingComponents": {
     "modal": "/components/modal/modal",
     "bottomModal": "/components/modal/bottomModal"
