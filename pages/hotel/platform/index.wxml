@@ -5,15 +5,15 @@
 <scroll-view class='container theme-container' style='height: calc(100vh - 46px - {{statusBarHeight}}px);' scroll-y="true" scroll-with-animation="true" bindscrolltolower="loadMore">
 	<view class="wapper">
 		<view class="row flex-column-center-center">
-			<image class="pic" src="https://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
+			<image class="pic" mode="aspectFill" src="https://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
 			<view class="name one-line-overflow theme-panel">美团</view>
 		</view>
 		<view class="row flex-column-center-center">
-			<image class="pic" src="https://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
+			<image class="pic" mode="aspectFill" src="https://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
 			<view class="name one-line-overflow theme-panel">饿了么</view>
 		</view>
 		<view class="row flex-column-center-center">
-			<image class="pic" src="https://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
+			<image class="pic" mode="aspectFill" src="https://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
 			<view class="name one-line-overflow theme-panel">XXXXXXXXXX</view>
 		</view>
 	</view>
