@@ -70,7 +70,7 @@
 							</view>
 						</view>
 						<view class="row flex-row-center-space_between">
-							<image class="pic" mode="aspectFill" src="{{goods_info.cover_imgs[0]}}"></image>
+							<image class="pic" mode="aspectFill" src="https://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
 							<view class="center">
 								<view class="name two-line-overflow">{{goods_info.name}}</view>
 								<view class="price theme-font5">￥{{goods_info.price}}</view>
