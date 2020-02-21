@@ -47,7 +47,8 @@
 
 						<view class="flex-row-center-space_between">
 							<view>￥{{bean.price}}</view>
-							<view class="btn theme-button-buy" bindtap="placeOrder" data-goods_id="{{bean.id}}" data-openid="{{openid}}">下单</view>
+							<!-- <view class="btn theme-button-buy" bindtap="placeOrder" data-goods_id="{{bean.id}}" data-openid="{{openid}}">下单</view> -->
+							<view class="btn fa fa-plus-circle theme-font5" aria-hidden="true"></view>
 						</view>
 					</view>
 				</block>
