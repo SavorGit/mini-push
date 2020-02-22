@@ -19,15 +19,19 @@ Page({
     objectCityArray: [],
     cityIndex: 0,
 
-    areaArray: [],
+    areaArray: ['请选择'],
     objectAreaArray: [],
     areaIndex: 0,
+    receiver_focus:false,
+    mobile_focus:false,
+    addr_focus:false,
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    console.log(options)
     var that = this;
     openid = options.openid;
     var address_id = options.address_id;
@@ -48,13 +52,20 @@ Page({
       })
     }else {//编辑收货地址
       
-      utils.PostRequest(api_url + '/Smallapp4/aa/bb', {
+      utils.PostRequest(api_url + '/Smallapp4/address/detail', {
         openid: openid,
         address_id: address_id
       }, (data, headers, cookies, errMsg, statusCode) => {
+        var is_default = data.result.is_default;
+        if(is_default==1){
+          is_default = true;
+        }else {
+          is_default = false
+        }
         that.setData({
           address_info:data.result,
-          address_id:address_id
+          address_id:address_id,
+          is_default: is_default
         })
       },function(){
         wx.navigateBack({
@@ -116,6 +127,7 @@ Page({
    * 新增收货地址
    */
   saveAddress:function(e){
+    console.log(e)
     var that = this;
     var address_id = that.data.address_id;
     var receiver = e.detail.value.receiver.replace(/\s+/g, '');
@@ -126,9 +138,15 @@ Page({
 
     if(receiver==''){
       app.showToast('请输入您的收货人名称');
+      that.setData({
+        receiver_focus:true
+      })
       return false;
     }
-    if (!checkMobile(mobile)){
+    if (!app.checkMobile(mobile)){
+      that.setData({
+        mobile_focus: true
+      })
       return false;
     }
     if (cityIndex == 0) {
@@ -141,21 +159,28 @@ Page({
     }
     if(addr==''){
       app.showToast('请输入您的详细地址')
+      that.setData({
+        addr_focus: true
+      })
+      return false;
     }
     var area_list = that.data.objectCityArray;
     var area_id = area_list[cityIndex].id;
 
     var county_list = that.data.objectAreaArray;
 
-    var county_id = county_list[cityIndex].id;
+    var county_id = county_list[areaIndex].id;
 
+    var all_address = area_list[cityIndex].region_name + county_list[areaIndex].region_name+addr
 
     that.setData({
       receiver: receiver,
       mobile: mobile,
       area_id: area_id,
       county_id: county_id,
-      addr: addr
+      addr: addr,
+      showDeleteConfirmPopWindow:true,
+      all_address: all_address
     })
   },
   /**
@@ -185,13 +210,16 @@ Page({
     utils.PostRequest(api_all_url, {
       openid: openid,
       address_id: address_id,
-      receiver: receiver,
-      mobile: mobile,
+      consignee: receiver,
+      phone: mobile,
       area_id: area_id,
       county_id: county_id,
-      addr: addr,
+      address: addr,
       is_default: is_default
     }, (data, headers, cookies, errMsg, statusCode) => {
+      that.setData({
+        showDeleteConfirmPopWindow: false,
+      })
       app.showToast('保存成功');
       wx.navigateBack({
         delta:1

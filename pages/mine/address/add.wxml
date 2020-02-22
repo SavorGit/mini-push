@@ -18,7 +18,7 @@
 							<view class="flag theme-font5"></view>
 						</view>
 						<view class="input-group">
-							<input class="input" name="name" placeholder="请输入收货人姓名" value="{{address_info.receiver}}"></input>
+							<input class="input" name="receiver" placeholder="请输入收货人姓名"  focus="{{receiver_focus}}" value="{{address_info.consignee}}"></input>
 						</view>
 					</view>
 					<view class="row flex-row-center-space_between">
@@ -27,7 +27,7 @@
 							<view class="flag theme-font5"></view>
 						</view>
 						<view class="input-group">
-							<input class="input" name="phone" placeholder="请输入手机号码" value="{{address_info.mobile}}"></input>
+							<input class="input" name="mobile" placeholder="请输入手机号码" value="{{address_info.phone}}" focus="{{mobile_focus}}" ></input>
 						</view>
 					</view>
 					<view class="row city flex-row-center-space_between">
@@ -50,7 +50,7 @@
 							<view class="flag theme-font5"></view>
 						</view>
 						<view class="input-group">
-							<textarea class="input" placeholder="多行输入" name='addr' maxlength="200" focus="{{addr_focus}}" value="{{address_info.addr}}"></textarea>
+							<textarea class="input" placeholder="多行输入" name='addr' maxlength="200" focus="{{addr_focus}}" value="{{address_info.address}}" ></textarea>
 						</view>
 					</view>
 					<view class="row set-default flex-row-center-space_between">
@@ -59,7 +59,8 @@
 							<view class="flag theme-font5"></view>
 						</view>
 						<view class="input-group">
-							<switch class="input" checked="true" bindchange="changeSwitch" />
+							<switch class="input" wx:if="{{is_default==true}}" checked="true" bindchange="changeSwitch" />
+              <switch class="input" wx:else  bindchange="changeSwitch" />
 						</view>
 					</view>
 					<view class="row btn-group flex-row-center-center">
@@ -75,5 +76,5 @@
 
 <!-- 删除确认 -->
 <modal show="{{showDeleteConfirmPopWindow}}" width="540rpx" height='360rpx' background-color='unset' border-radius="10rpx" title-text='请再次确认' title-color="#333333" title-background-color="#FFFFFF" title-border-radius="10rpx 10rpx 0 0" confirm-text='确定' confirm-color="#FFFFFF" confirm-background-color="#1cbeb6" confirm-border-radius="0 0 10rpx 0" cancel-text='取消' cancel-color='#FFFFFF' cancel-background-color="#BEBEBE" cancel-border-radius="0 0 0 10rpx" bindcancel="modalCancel" bindconfirm='modalConfirm'>
-	<view class="theme-panel" style="width:calc(100% - 100rpx);height:100%;padding:0 50rpx;font-size:28rpx;">司马大郎，13800138000，北京调朝阳区北京调朝阳区北京调朝阳区北京调朝阳区北京调朝阳区北京调朝阳区</view>
+	<view class="theme-panel" style="width:calc(100% - 100rpx);height:100%;padding:0 50rpx;font-size:28rpx;">{{receiver}}，{{mobile}}，{{all_address}}</view>
 </modal>

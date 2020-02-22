@@ -84,7 +84,7 @@ Page({
     var address_id = that.data.address_id;
     var keys = that.data.keys;
     if(typeof(address_id)!='undefined'){
-      utils.PostRequest(api_url + '/Smallapp4/address/delAddressb', {
+      utils.PostRequest(api_url + '/Smallapp4/address/delAddress', {
         openid: openid,
         address_id: address_id
       }, (data, headers, cookies, errMsg, statusCode) => {
