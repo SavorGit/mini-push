@@ -133,6 +133,18 @@ button[disabled] {
   background-color: #eb6877;
 }
 
+.theme-button-welcome,
+.broadcast-panel {
+  color: #fff;
+  background-color: #a18668;
+}
+
+.theme-button-welcome-dark,
+.theme-panel-welcome-dark {
+  color: #fff;
+  background-color: #58525c;
+}
+
 .theme-button-unlike {
   color: #fff;
   background-color: #999;

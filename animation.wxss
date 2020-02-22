@@ -19,9 +19,34 @@
 .fadeInLeft {-webkit-animation-name: fadeInLeft;animation-name: fadeInLeft;}
 
 /* 从右向左淡入 */
-@-webkit-keyframes fadeInRight {0% {opacity: 0;-webkit-transform: translate3d(100%, 0, 0);transform: translate3d(100%, 0, 0);}100% {opacity: 1;transform: none;}}
+@-webkit-keyframes fadeInRight {0% {opacity: 0;-webkit-transform: translate3d(100%, 0, 0);transform: translate3d(100%, 0, 0);}100% {opacity: 1;-webkit-transform: none;transform: none;}}
 @keyframes fadeInRight {0% {opacity: 0;-webkit-transform: translate3d(100%, 0, 0);transform: translate3d(100%, 0, 0);}100% {opacity: 1;-webkit-transform: none;transform: none;}}
 .fadeInRight {-webkit-animation-name: fadeInRight;animation-name: fadeInRight;}
+
+/* 淡出 */
+@-webkit-keyframes fadeOut {0% {opacity: 1;}100% {opacity: 0;}}
+@keyframes fadeOut {0% {opacity: 1;}100% {opacity: 0;}}
+.fadeOut {-webkit-animation-name: fadeOut;animation-name: fadeOut;}
+
+/* 从上向下淡出 */
+@-webkit-keyframes fadeOutUp {0% {opacity: 1;-webkit-transform: none;transform: none;}100% {opacity: 0;-webkit-transform: translate3d(0, 100%, 0);transform: translate3d(0, 100%, 0);}}
+@keyframes fadeOutUp {0% {opacity: 1;-webkit-transform: none;-ms-transform: none;transform: none;}100% {opacity: 1;-webkit-transform: translate3d(0, 100%, 0);-ms-transform: translate3d(0, 100%, 0);transform: translate3d(0, 100%, 0);}}
+.fadeOutUp {-webkit-animation-name: fadeOutUp;animation-name: fadeOutUp;}
+
+/* 从下向上淡出 */
+@-webkit-keyframes fadeOutDown {0% {opacity: 1;-webkit-transform: none;transform: none;}100% {opacity: 0;-webkit-transform: translate3d(0, -100%, 0);transform: translate3d(0, -100%, 0);}}
+@keyframes fadeOutDown {0% {opacity: 1;-webkit-transform: none;-ms-transform: none;transform: none;}100% {opacity: 0;-webkit-transform: translate3d(0, -100%, 0);-ms-transform: translate3d(0, -100%, 0);transform: translate3d(0, -100%, 0);}}
+.fadeOutDown {-webkit-animation-name: fadeOutDown;animation-name: fadeOutDown;}
+
+/* 从左向右淡出 */
+@-webkit-keyframes fadeOutLeft {0% {opacity: 1;-webkit-transform: none;transform: none;}100% {opacity: 0;-webkit-transform: translate3d(100%, 0, 0);transform: translate3d(100%, 0, 0);}}
+@keyframes fadeOutLeft {0% {opacity: 1;-webkit-transform: none;transform: none;}100% {opacity: 0;-webkit-transform: translate3d(100%, 0, 0);transform: translate3d(100%, 0, 0);}}
+.fadeOutLeft {-webkit-animation-name: fadeOutLeft;animation-name: fadeOutLeft;}
+
+/* 从右向左淡出 */
+@-webkit-keyframes fadeOutRight {0% {opacity: 1;-webkit-transform: none;transform: none;}100% {opacity: 0;-webkit-transform: translate3d(-100%, 0, 0);transform: translate3d(-100%, 0, 0);}}
+@keyframes fadeOutRight {0% {opacity: 1;-webkit-transform: none;transform: none;}100% {opacity: 0;-webkit-transform: translate3d(-100%, 0, 0);transform: translate3d(-100%, 0, 0);}}
+.fadeOutRight {-webkit-animation-name: fadeOutRight;animation-name: fadeOutRight;}
 
 /* 脉冲 */
 @-webkit-keyframes pulse {0% {-webkit-transform: translate(0, 0);transform: translate(0, 0);}50% {-webkit-transform: translate(0, 10px);transform: translate(0, 10px);}100% {-webkit-transform: translate(0, 0);transform: translate(0, 0);}}

@@ -22,10 +22,6 @@
 					</view>
 				</view>
 				<view class="btn-group flex-row-center-center">
-					<button class="btn flex-row-center-center" bindtap="gotoPlatform">
-						<view class="fa fa-shopping-bag fa-lg" aria-hidden="true"></view>
-						<view>其他平台</view>
-					</button>
 					<button class="btn flex-row-center-center" open-type='share' data-img_url="{{hotel_info.img}}" data-hotel_name="{{hotel_info.name}}">
 						<view class="fa fa-external-link fa-lg" aria-hidden="true"></view>
 						<view>分享店铺</view>
@@ -34,6 +30,10 @@
 					<button class="btn flex-row-center-center" bindtap='phonecallevent' data-tel="{{hotel_info.mobile}}">
 						<view class="fa fa-phone fa-lg" aria-hidden="true"></view>
 						<view>电话订餐</view>
+					</button>
+					<button class="btn flex-row-center-center" bindtap="gotoPlatform">
+						<view class="fa fa-cubes fa-lg" aria-hidden="true"></view>
+						<view>其他平台</view>
 					</button>
 				</view>
 			</view>
@@ -232,16 +232,171 @@
 		</view>
 	</scroll-view>
 	<view class="page-bottom flex-row-center-center">
-		<view class="cart-bar flex-row-center-space_between theme-rad-panel">
-			<view class="left flex-row-center-flex_start">
-				<view class="icon flex-column-center-center theme-button-like">
-					<view class="fa fa-cart-plus" aria-hidden="true"></view>
+		<view class="cart-bar flex-row-center-space_between">
+			<view class="left flex-row-center-flex_start theme-panel-welcome-dark">
+				<view class="icon-group" bindtap="openShoppingCartWindow">
+					<view class="icon shopping-bag flex-column-center-center broadcast-panel">
+						<view class="fa fa-shopping-bag fa-lg" aria-hidden="true"></view>
+					</view>
+					<view class="icon new-count flex-column-flex_end-flex_start">
+						<view class="show-new-count theme-rad-panel">2</view>
+					</view>
 				</view>
 				<view class="info">已添加5件菜品</view>
 			</view>
 			<view class="right flex-row-center-flex_end">
-				<view class="btn buy theme-font5 theme-bg-FFFFFF">下单</view>
+				<view class="btn buy theme-button-welcome">下单</view>
 			</view>
 		</view>
+	</view>
+</view>
+
+<!-- 购物车窗口 -->
+<view wx:if="{{showShoppingCartPopWindow}}" class="shopping-cart-window">
+	<view class="mask" bindtap="closeShoppingCartWindow"></view>
+	<view class="window {{showShoppingCartWindow?'fadeInDown':'fadeOutUp'}}">
+		<view class="title-bar flex-row-center-space_between">
+			<view class="title theme-font2">去结算</view>
+			<view class="btn clean flex-row-center-space_around theme-font7" bindtap="cleanShoppingCart">
+				<view class="fa fa-trash-o fa-lg" aria-hidden="true"></view>
+				<view>清空</view>
+			</view>
+		</view>
+		<scroll-view class="body theme-panel" scroll-y="true" scroll-with-animation="true">
+			<view class="list">
+				<view class="item flex-row-center-flex_start">
+					<view class="name two-line-overflow">干锅土豆-中辣</view>
+					<view class="price theme-font5">
+						<label>￥</label>
+						<text>11</text>
+					</view>
+					<view class="count-chooser flex-row-center-space_between">
+						<view class="fa fa-minus-circle" aria-hidden="true"></view>
+						<input value="1" />
+						<view class="fa fa-plus-circle" aria-hidden="true"></view>
+					</view>
+				</view>
+				<view class="item flex-row-center-flex_start">
+					<view class="name two-line-overflow">干锅土豆-中辣干锅土豆-中辣干锅土豆-中辣干锅土豆-中辣干锅土豆-中辣干锅土豆-中辣</view>
+					<view class="price theme-font5">
+						<label>￥</label>
+						<text>11</text>
+					</view>
+					<view class="count-chooser flex-row-center-space_between">
+						<view class="fa fa-minus-circle" aria-hidden="true"></view>
+						<input value="1" />
+						<view class="fa fa-plus-circle" aria-hidden="true"></view>
+					</view>
+				</view>
+				<view class="item flex-row-center-flex_start">
+					<view class="name two-line-overflow">干锅土豆-中辣</view>
+					<view class="price theme-font5">
+						<label>￥</label>
+						<text>11</text>
+					</view>
+					<view class="count-chooser flex-row-center-space_between">
+						<view class="fa fa-minus-circle" aria-hidden="true"></view>
+						<input value="1" />
+						<view class="fa fa-plus-circle" aria-hidden="true"></view>
+					</view>
+				</view>
+				<view class="item flex-row-center-flex_start">
+					<view class="name two-line-overflow">干锅土豆-中辣</view>
+					<view class="price theme-font5">
+						<label>￥</label>
+						<text>11</text>
+					</view>
+					<view class="count-chooser flex-row-center-space_between">
+						<view class="fa fa-minus-circle" aria-hidden="true"></view>
+						<input value="1" />
+						<view class="fa fa-plus-circle" aria-hidden="true"></view>
+					</view>
+				</view>
+				<view class="item flex-row-center-flex_start">
+					<view class="name two-line-overflow">干锅土豆-中辣</view>
+					<view class="price theme-font5">
+						<label>￥</label>
+						<text>11</text>
+					</view>
+					<view class="count-chooser flex-row-center-space_between">
+						<view class="fa fa-minus-circle" aria-hidden="true"></view>
+						<input value="1" />
+						<view class="fa fa-plus-circle" aria-hidden="true"></view>
+					</view>
+				</view>
+				<view class="item flex-row-center-flex_start">
+					<view class="name two-line-overflow">干锅土豆-中辣</view>
+					<view class="price theme-font5">
+						<label>￥</label>
+						<text>11</text>
+					</view>
+					<view class="count-chooser flex-row-center-space_between">
+						<view class="fa fa-minus-circle" aria-hidden="true"></view>
+						<input value="1" />
+						<view class="fa fa-plus-circle" aria-hidden="true"></view>
+					</view>
+				</view>
+				<view class="item flex-row-center-flex_start">
+					<view class="name two-line-overflow">干锅土豆-中辣</view>
+					<view class="price theme-font5">
+						<label>￥</label>
+						<text>11</text>
+					</view>
+					<view class="count-chooser flex-row-center-space_between">
+						<view class="fa fa-minus-circle" aria-hidden="true"></view>
+						<input value="1" />
+						<view class="fa fa-plus-circle" aria-hidden="true"></view>
+					</view>
+				</view>
+				<view class="item flex-row-center-flex_start">
+					<view class="name two-line-overflow">干锅土豆-中辣</view>
+					<view class="price theme-font5">
+						<label>￥</label>
+						<text>11</text>
+					</view>
+					<view class="count-chooser flex-row-center-space_between">
+						<view class="fa fa-minus-circle" aria-hidden="true"></view>
+						<input value="1" />
+						<view class="fa fa-plus-circle" aria-hidden="true"></view>
+					</view>
+				</view>
+				<view class="item flex-row-center-flex_start">
+					<view class="name two-line-overflow">干锅土豆-中辣</view>
+					<view class="price theme-font5">
+						<label>￥</label>
+						<text>11</text>
+					</view>
+					<view class="count-chooser flex-row-center-space_between">
+						<view class="fa fa-minus-circle" aria-hidden="true"></view>
+						<input value="1" />
+						<view class="fa fa-plus-circle" aria-hidden="true"></view>
+					</view>
+				</view>
+				<view class="item flex-row-center-flex_start">
+					<view class="name two-line-overflow">干锅土豆-中辣</view>
+					<view class="price theme-font5">
+						<label>￥</label>
+						<text>11</text>
+					</view>
+					<view class="count-chooser flex-row-center-space_between">
+						<view class="fa fa-minus-circle" aria-hidden="true"></view>
+						<input value="1" />
+						<view class="fa fa-plus-circle" aria-hidden="true"></view>
+					</view>
+				</view>
+				<view class="item flex-row-center-flex_start">
+					<view class="name two-line-overflow">干锅土豆-中辣</view>
+					<view class="price theme-font5">
+						<label>￥</label>
+						<text>11</text>
+					</view>
+					<view class="count-chooser flex-row-center-space_between">
+						<view class="fa fa-minus-circle" aria-hidden="true"></view>
+						<input value="1" />
+						<view class="fa fa-plus-circle" aria-hidden="true"></view>
+					</view>
+				</view>
+			</view>
+		</scroll-view>
 	</view>
 </view>

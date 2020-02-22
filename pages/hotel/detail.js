@@ -25,7 +25,7 @@ let SavorUtils = {
 
     }, { isShowLoading: false }),
   },
-  
+
 };
 Page({
 
@@ -34,7 +34,7 @@ Page({
    */
   data: {
     statusBarHeight: getApp().globalData.statusBarHeight,
-    is_share:false,
+    is_share: false,
   },
 
   /**
@@ -42,8 +42,8 @@ Page({
    */
   onLoad: function (options) {
     var that = this;
-    
-    
+
+
     if (app.globalData.openid && app.globalData.openid != '') {
       //注册用户
       that.setData({
@@ -105,14 +105,14 @@ Page({
             that.setData({
               is_share: true
             })
-            mta.Event.stat('openShareMerchant', { 'merchantid': merchant_id, 'openid':openid })
+            mta.Event.stat('openShareMerchant', { 'merchantid': merchant_id, 'openid': openid })
           } else {
             merchant_id = options.merchant_id;
             if (typeof (options.is_share) != 'undefined' && options.is_share == 1) {
               that.setData({
                 is_share: true
               })
-              mta.Event.stat('openShareMerchant', { 'merchantid': merchant_id, 'openid':openid })
+              mta.Event.stat('openShareMerchant', { 'merchantid': merchant_id, 'openid': openid })
             } else {
               that.setData({
                 is_share: false
@@ -129,9 +129,9 @@ Page({
       }
     }
 
-    
+
   },
-  getMerchantInfo: function (merchant_id){
+  getMerchantInfo: function (merchant_id) {
     var that = this;
     utils.PostRequest(api_url + '/Smallapp4/merchant/info', {
       merchant_id: merchant_id,
@@ -139,7 +139,7 @@ Page({
       hotel_info: data.result
     }));
   },
-  getDishInfo: function (merchant_id){
+  getDishInfo: function (merchant_id) {
     var that = this;
     utils.PostRequest(api_url + '/Smallapp4/dish/goodslist', {
       merchant_id: merchant_id,
@@ -176,11 +176,11 @@ Page({
     var goods_id = e.currentTarget.dataset.goods_id;
     var openid = e.currentTarget.dataset.openid;
     wx.navigateTo({
-      url: '/pages/hotel/order/account?goods_id=' + goods_id+"&openid="+openid,
+      url: '/pages/hotel/order/account?goods_id=' + goods_id + "&openid=" + openid,
     })
 
   },
-  gotoDisheDetail:function(e){
+  gotoDisheDetail: function (e) {
     var goods_id = e.currentTarget.dataset.goods_id;
     wx.navigateTo({
       url: '/pages/hotel/dishes/detail?goods_id=' + goods_id,
@@ -196,14 +196,14 @@ Page({
       current: urls[0], // 当前显示图片的http链接
       urls: urls // 需要预览的图片http链接列表
     })
-    
+
   },
   /**
    * 第三方平台
    */
-  gotoPlatform:function(e){
+  gotoPlatform: function (e) {
     wx.navigateTo({
-      url: '/pages/hotel/platform/index?merchant_id='+merchant_id,
+      url: '/pages/hotel/platform/index?merchant_id=' + merchant_id,
     })
   },
   /**
@@ -268,7 +268,7 @@ Page({
    */
   onShareAppMessage: function (e) {
     var that = this;
-    
+
     var img_url = that.data.hotel_info.img;
     var hotel_name = that.data.hotel_info.name;
     //console.log(e)
@@ -277,13 +277,13 @@ Page({
     if (e.from === 'button') {
       // 来自页面内转发按钮
       return {
-        title: hotel_name+'推出了特惠菜品',
-        path: '/pages/hotel/detail?merchant_id=' + merchant_id+"&is_share=1",
+        title: hotel_name + '推出了特惠菜品',
+        path: '/pages/hotel/detail?merchant_id=' + merchant_id + "&is_share=1",
         imageUrl: img_url,
         success: function (res) {
         },
       }
-    }else {
+    } else {
       return {
         title: hotel_name + '推出了特惠菜品',
         path: '/pages/hotel/detail?merchant_id=' + merchant_id + "&is_share=1",
@@ -292,6 +292,26 @@ Page({
         },
       }
     }
-    
+
+  },
+
+  // 打开购物车弹窗
+  openShoppingCartWindow: function (e) {
+    let self = this;
+    self.setData({ showShoppingCartPopWindow: true, showShoppingCartWindow: true });
+  },
+
+  // 关闭购物车弹窗
+  closeShoppingCartWindow: function (e) {
+    let self = this;
+    self.setData({ showShoppingCartWindow: false });
+    setTimeout(function () {
+      self.setData({ showShoppingCartPopWindow: false });
+    }, 500);
+  },
+
+  // 清空购物车
+  cleanShoppingCart: function (e) {
+    let self = this;
   }
 })
