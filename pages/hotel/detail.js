@@ -210,37 +210,45 @@ Page({
   /**
    * 添加购物车
    */
-  addCart:function(e){
+  addCart: function (e) {
     var that = this;
+    let index = e.currentTarget.dataset.index;
     var goods_info = e.currentTarget.dataset.goods_info;
     var cart_list = wx.getStorageSync(cache_key + 'cart_' + merchant_id)
-    if(cart_list==''){
+    let dishesList = that.data.dishes_list;
+    dishesList[index].addToCart = true;
+    that.setData({ dishes_list: dishesList });
+    setTimeout(function () {
+      delete dishesList[index].addToCart;
+      that.setData({ dishes_list: dishesList });
+    }, 500);
+    if (cart_list == '') {
       cart_list = [];
       goods_info.amount = 1;
-      
+
       cart_list.unshift(goods_info);
       console.log(cart_list)
       cart_list = JSON.stringify(cart_list);
       wx.setStorageSync(cache_key + 'cart_' + merchant_id, cart_list)
-    }else {
+    } else {
       cart_list = JSON.parse(cart_list)
-      
-      var is_have= 0 ;
-      for(var i=0;i<cart_list.length;i++){
-        if(cart_list[i].id== goods_info.id){
-          cart_list[i].amount +=1;
-          is_have=1;
+
+      var is_have = 0;
+      for (var i = 0; i < cart_list.length; i++) {
+        if (cart_list[i].id == goods_info.id) {
+          cart_list[i].amount += 1;
+          is_have = 1;
           break;
         }
       }
-      if(is_have==0){
+      if (is_have == 0) {
         goods_info.amount = 1;
         cart_list.unshift(goods_info);
       }
       console.log(cart_list)
       cart_list = JSON.stringify(cart_list);
       wx.setStorageSync(cache_key + 'cart_' + merchant_id, cart_list)
-      
+
     }
     app.showToast('购物车添加成功', 2000, 'success')
   },

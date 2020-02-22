@@ -40,7 +40,7 @@
 
 			<view class="goods-list weui-grids">
 				<block wx:for="{{dishes_list}}" wx:key="key" wx:for-item="bean" wx:for-index="index">
-					<view class="goods weui-grid flex-column-center-space_between theme-panel">
+					<view class="goods weui-grid flex-column-center-space_between theme-panel {{bean.addToCart==true?'add-to-cart':''}}">
 
 						<image class="pic" mode="aspectFill" src="{{bean.img_url}}" bindtap="gotoDisheDetail" data-goods_id="{{bean.id}}"></image>
 						<view class="name two-line-overflow" bindtap="gotoDisheDetail" data-goods_id="{{bean.id}}">{{bean.name}}</view>
@@ -48,11 +48,11 @@
 						<view class="flex-row-center-space_between">
 							<view>￥{{bean.price}}</view>
 							<!-- <view class="btn theme-button-buy" bindtap="placeOrder" data-goods_id="{{bean.id}}" data-openid="{{openid}}">下单</view> -->
-							<view class="btn fa fa-plus-circle theme-font5" aria-hidden="true" bindtap="addCart" data-goods_info="{{bean}}"></view>
+							<view class="btn fa fa-plus-circle theme-font5" aria-hidden="true" bindtap="addCart" data-index="{{index}}" data-goods_info="{{bean}}"></view>
 						</view>
 					</view>
 				</block>
-				
+
 			</view>
 		</view>
 	</scroll-view>
