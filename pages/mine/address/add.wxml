@@ -3,7 +3,7 @@
 <template is="navigationBarForTwoLevel" data='{{statusBarHeight: statusBarHeight,titleText:"新增收货地址"}}' />
 
 <scroll-view class='container theme-container' style='height: calc(100vh - 46px - {{statusBarHeight}}px);' scroll-y="true" scroll-with-animation="true" bindscrolltolower="loadMore">
-	<form>
+	<form bindsubmit="saveAddress">
 		<view class="wapper">
 			<view class="panel basic theme7">
 				<!--
@@ -36,11 +36,11 @@
 							<view class="flag theme-font5"></view>
 						</view>
 						<view class="input-group flex-row-center-space_between">
-							<picker class="input">
-								<view>北京市</view>
+							<picker class="input" bindchange="bindCityPickerChange" value="{{cityIndex}}" range="{{cityArray}}">
+								<view>{{cityArray[cityIndex]}}</view>
 							</picker>
-							<picker class="input">
-								<view>朝阳区</view>
+							<picker class="input" bindchange="bindAreaPickerChange" value="{{areaIndex}}" range="{{areaArray}}">
+								<view>{{areaArray[areaIndex]}}</view>
 							</picker>
 						</view>
 					</view>

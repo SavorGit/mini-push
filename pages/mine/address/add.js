@@ -14,6 +14,14 @@ Page({
     showDeleteConfirmPopWindow:false,
     is_default:true,
     address_id:0,
+
+    cityArray: ['请选择'],
+    objectCityArray: [],
+    cityIndex: 0,
+
+    areaArray: [],
+    objectAreaArray: [],
+    areaIndex: 0,
   },
 
   /**
@@ -23,8 +31,21 @@ Page({
     var that = this;
     openid = options.openid;
     var address_id = options.address_id;
+
+    //获取城市列表
+    utils.PostRequest(api_url + '/smallsale18/Area/getAreaList', {
+    }, (data, headers, cookies, errMsg, statusCode) => {
+      console.log(data)
+      that.setData({
+        cityArray: data.result.city_name_list,
+        objectCityArray: data.result.city_list
+      })
+    }) 
+
     if(typeof(address_id) =='undefined'){//新增收货地址
-      
+      that.setData({
+        address_id:''
+      })
     }else {//编辑收货地址
       
       utils.PostRequest(api_url + '/Smallapp4/aa/bb', {
@@ -42,11 +63,50 @@ Page({
       });
     }
   },
+  //城市切换 
+  bindCityPickerChange: function (e) {
+    var that = this;
+    var city_list = that.data.objectCityArray;
+    var picCityIndex = e.detail.value //切换之后城市key
+    var cityIndex = that.data.cityIndex; //切换之前城市key
+    if (picCityIndex != cityIndex) {
+      that.setData({
+        cityIndex: picCityIndex,
+        areaIndex: 0
+      })
+      //获取当前城市的区域
+      var area_id = city_list[picCityIndex].id;
+
+      //获取城市列表
+      utils.PostRequest(api_url + '/smallsale18/Area/getSecArea', {
+        area_id: area_id
+      }, (data, headers, cookies, errMsg, statusCode) => {
+        console.log(data)
+        that.setData({
+          areaArray: data.result.area_name_list,
+          objectAreaArray: data.result.area_list
+        })
+      })
+    }
+  },
+  //切换区域
+  bindAreaPickerChange: function (e) {
+    var that = this;
+    var area_list = that.data.objectAreaArray;
+    var areaIndex = e.detail.value;
+    that.setData({
+      areaIndex: e.detail.value
+    })
+
+
+
+  },
   /**
    * 设置默认地址
    */
   changeSwitch:function(e){
-    that = this;
+    console.log(e)
+    var that = this;
     var is_default = e.detail.value;
     that.setData({
       is_default: is_default
@@ -110,7 +170,19 @@ Page({
     var addr = that.data.addr;
     var address_id = that.data.address_id;
     var is_default = that.data.is_default;
-    utils.PostRequest(api_url + '/Smallapp4/aa/bb', {
+    console.log(that.data)
+    if(is_default==true){
+      is_default = 1;
+    }else {
+      is_default = 0;
+    }
+    if(address_id==''){
+      var api_all_url = api_url +'/Smallapp4/address/addAddress'
+    }else {
+      var api_all_url ='/Smallapp4/address/editAddress'
+    }
+
+    utils.PostRequest(api_all_url, {
       openid: openid,
       address_id: address_id,
       receiver: receiver,

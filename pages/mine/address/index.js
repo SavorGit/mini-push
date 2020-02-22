@@ -12,7 +12,7 @@ Page({
    */
   data: {
     statusBarHeight: getApp().globalData.statusBarHeight,
-    address_list:[1],
+    address_list:[],
     showDeleteConfirmPopWindow:false,
     
   },
@@ -24,7 +24,7 @@ Page({
     var that = this;
     console.log(that.data.address_id)
     openid = options.openid;
-    utils.PostRequest(api_url + '/Smallapp4/aa/bb', {
+    utils.PostRequest(api_url + '/Smallapp4/address/addresslist', {
       openid: openid,
       page :1
     }, (data, headers, cookies, errMsg, statusCode) => that.setData({
@@ -46,7 +46,7 @@ Page({
   loadMore:function(e){
     var that = this;
     page +=1;
-    utils.PostRequest(api_url + '/Smallapp4/aa/bb', {
+    utils.PostRequest(api_url + '/Smallapp4/address/addresslist', {
       openid: openid,
       page: page
     }, (data, headers, cookies, errMsg, statusCode) => that.setData({
@@ -84,7 +84,7 @@ Page({
     var address_id = that.data.address_id;
     var keys = that.data.keys;
     if(typeof(address_id)!='undefined'){
-      utils.PostRequest(api_url + '/Smallapp4/aa/bb', {
+      utils.PostRequest(api_url + '/Smallapp4/address/delAddressb', {
         openid: openid,
         address_id: address_id
       }, (data, headers, cookies, errMsg, statusCode) => {
@@ -103,6 +103,36 @@ Page({
     }
   },
   /**
+   * 修改默认地址
+   */
+  checkboxChange:function(e){
+    console.log(e)
+    var that = this;
+    if(e.detail.value[0]==1){
+      var keys = e.currentTarget.dataset.keys;
+      var address_list = that.data.address_list;
+      var address_id  = e.currentTarget.dataset.address_id;
+      
+      utils.PostRequest(api_url + '/Smallapp4/address/setDefaultAddress', {
+        openid: openid,
+        address_id: address_id,
+        is_default:1
+      }, (data, headers, cookies, errMsg, statusCode) => {
+        for (i = 0; i < address_list.length; i++) {
+          if (address_list[i].is_default) {
+            address_list[i].is_default == 0;
+          }
+          if (i == keys) {
+            address_list[keys].is_default == 1;
+          }
+        }
+        that.setData({
+          address_list: address_list
+        })
+      });
+    }
+  },
+  /**
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
@@ -114,7 +144,7 @@ Page({
    */
   onShow: function () {
     var that = this;
-    utils.PostRequest(api_url + '/Smallapp4/aa/bb', {
+    utils.PostRequest(api_url + '/Smallapp4/address/addresslist', {
       openid: openid,
       page: page
     }, (data, headers, cookies, errMsg, statusCode) => that.setData({

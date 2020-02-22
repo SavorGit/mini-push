@@ -32,8 +32,6 @@
     "pages/hotel/order/index",
     "pages/hotel/order/detail",
     "pages/hotel/order/account",
-    "pages/hotel/address/index",
-    "pages/hotel/address/add",
     "pages/hotel/platform/index",
     "pages/share/pic",
     "pages/share/video",
