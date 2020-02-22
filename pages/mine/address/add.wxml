@@ -18,7 +18,7 @@
 							<view class="flag theme-font5"></view>
 						</view>
 						<view class="input-group">
-							<input class="input" name="name" placeholder="请输入收货人姓名"></input>
+							<input class="input" name="name" placeholder="请输入收货人姓名" value="{{address_info.receiver}}"></input>
 						</view>
 					</view>
 					<view class="row flex-row-center-space_between">
@@ -27,7 +27,7 @@
 							<view class="flag theme-font5"></view>
 						</view>
 						<view class="input-group">
-							<input class="input" name="phone" placeholder="请输入手机号码"></input>
+							<input class="input" name="phone" placeholder="请输入手机号码" value="{{address_info.mobile}}"></input>
 						</view>
 					</view>
 					<view class="row city flex-row-center-space_between">
@@ -50,7 +50,7 @@
 							<view class="flag theme-font5"></view>
 						</view>
 						<view class="input-group">
-							<textarea class="input" placeholder="多行输入" name='addr' maxlength="200" focus="{{addr_focus}}"></textarea>
+							<textarea class="input" placeholder="多行输入" name='addr' maxlength="200" focus="{{addr_focus}}" value="{{address_info.addr}}"></textarea>
 						</view>
 					</view>
 					<view class="row set-default flex-row-center-space_between">
@@ -59,11 +59,12 @@
 							<view class="flag theme-font5"></view>
 						</view>
 						<view class="input-group">
-							<switch class="input" checked="true" />
+							<switch class="input" checked="true" bindchange="changeSwitch" />
 						</view>
 					</view>
 					<view class="row btn-group flex-row-center-center">
-						<button class="btn submit theme-button-buy" type="submit">保存</button>
+          <input class='display_hide' name="address_id" value="{{address_id}}"> </input>
+						<button class="btn submit theme-button-buy" form-type="submit">保存</button>
 					</view>
 				</view>
 			</view>

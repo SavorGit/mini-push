@@ -199,6 +199,14 @@ Page({
     
   },
   /**
+   * 第三方平台
+   */
+  gotoPlatform:function(e){
+    wx.navigateTo({
+      url: '/pages/hotel/platform/index?merchant_id='+merchant_id,
+    })
+  },
+  /**
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {

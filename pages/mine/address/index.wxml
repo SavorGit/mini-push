@@ -3,7 +3,7 @@
 <template is="navigationBarForTwoLevel" data='{{statusBarHeight: statusBarHeight,titleText:"我的收货地址"}}' />
 
 <!-- 收货地址列表 - 有数据 -->
-<view wx:if="{{list}}" class='container theme-container' style='height: calc(100vh - 46px - {{statusBarHeight}}px);'>
+<view wx:if="{{address_list.length>0}}" class='container theme-container' style='height: calc(100vh - 46px - {{statusBarHeight}}px);'>
 	<scroll-view class="scroll-view" scroll-y="true" scroll-with-animation="true" bindscrolltolower="loadMore">
 		<view class="wapper">
 			<view class="row theme-panel">
@@ -20,7 +20,7 @@
 					</view>
 					<view class="right flex-row-center-flex_end">
 						<view class="btn edit theme-button">编辑</view>
-						<view class="btn delete theme-button">删除</view>
+						<view class="btn delete theme-button" bindtap="delAddress">删除</view>
 					</view>
 				</view>
 			</view>
@@ -603,7 +603,7 @@
 		</view>
 	</scroll-view>
 	<view class="page-bottom">
-		<view class="btn add theme-button-buy">添加新地址</view>
+		<view class="btn add theme-button-buy" bindtap="gotoAddAdress">添加新地址</view>
 	</view>
 </view>
 
@@ -615,7 +615,7 @@
 		</view>
 		<view style="font-size:32rpx;font-weight:bold;">暂未设置</view>
 		<view class="theme-font2" style="height:80rpx;line-height:80rpx;font-size:28rpx;">没有收货地址寄不了快递哦~</view>
-		<view class="theme-font5" style="width:150rpx;height:50rpx;line-height:50rpx;text-align:center;font-size:32rpx;border-radius: 5rpx;border:3rpx solid #eb6877;">新增地址</view>
+		<view class="theme-font5" style="width:150rpx;height:50rpx;line-height:50rpx;text-align:center;font-size:32rpx;border-radius: 5rpx;border:3rpx solid #eb6877;" bindtap="gotoAddAdress" >新增地址</view>
 	</view>
 </view>
 

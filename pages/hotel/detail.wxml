@@ -22,7 +22,7 @@
 					</view>
 				</view>
 				<view class="btn-group flex-row-center-center">
-					<button class="btn flex-row-center-center">
+					<button class="btn flex-row-center-center" bindtap="gotoPlatform">
 						<view class="fa fa-shopping-bag fa-lg" aria-hidden="true"></view>
 						<view>其他平台</view>
 					</button>

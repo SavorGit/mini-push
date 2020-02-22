@@ -1,4 +1,9 @@
 // pages/hotel/platform/index.js
+const app = getApp()
+const utils = require('../../../utils/util.js')
+const mta = require('../../../utils/mta_analysis.js')
+var api_url = app.globalData.api_url;
+var merchant_id;
 Page({
 
   /**
@@ -12,7 +17,14 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    var that = this;
+    merchant_id = options.merchant_id;
+    utils.PostRequest(api_url + '/Smallapp4/aa/bb', {
+      merchant_id: merchant_id,
+    }, (data, headers, cookies, errMsg, statusCode) => that.setData({
+      img_list:data.result
+    })
+    );
   },
 
   /**
