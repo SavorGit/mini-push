@@ -3,6 +3,7 @@ const app = getApp()
 const utils = require('../../../utils/util.js')
 const mta = require('../../../utils/mta_analysis.js')
 var api_url = app.globalData.api_url;
+var cache_key = app.globalData.cache_key;
 var goods_id;
 let SavorUtils = {
   User: {
@@ -174,7 +175,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    wx.removeStorageSync(cache_key + 'select_address_info')
   },
 
   /**

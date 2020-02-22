@@ -3,6 +3,7 @@ const app = getApp()
 const utils = require('../../utils/util.js')
 const mta = require('../../utils/mta_analysis.js')
 var api_url = app.globalData.api_url;
+var cache_key = app.globalData.cache_key;
 var merchant_id;
 var page = 1;
 let SavorUtils = {
@@ -205,6 +206,43 @@ Page({
     wx.navigateTo({
       url: '/pages/hotel/platform/index?merchant_id=' + merchant_id,
     })
+  },
+  /**
+   * 添加购物车
+   */
+  addCart:function(e){
+    var that = this;
+    var goods_info = e.currentTarget.dataset.goods_info;
+    var cart_list = wx.getStorageSync(cache_key + 'cart_' + merchant_id)
+    if(cart_list==''){
+      cart_list = [];
+      goods_info.amount = 1;
+      
+      cart_list.unshift(goods_info);
+      console.log(cart_list)
+      cart_list = JSON.stringify(cart_list);
+      wx.setStorageSync(cache_key + 'cart_' + merchant_id, cart_list)
+    }else {
+      cart_list = JSON.parse(cart_list)
+      
+      var is_have= 0 ;
+      for(var i=0;i<cart_list.length;i++){
+        if(cart_list[i].id== goods_info.id){
+          cart_list[i].amount +=1;
+          is_have=1;
+          break;
+        }
+      }
+      if(is_have==0){
+        goods_info.amount = 1;
+        cart_list.unshift(goods_info);
+      }
+      console.log(cart_list)
+      cart_list = JSON.stringify(cart_list);
+      wx.setStorageSync(cache_key + 'cart_' + merchant_id, cart_list)
+      
+    }
+    app.showToast('购物车添加成功', 2000, 'success')
   },
   /**
    * 生命周期函数--监听页面初次渲染完成
