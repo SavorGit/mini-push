@@ -2,7 +2,7 @@
 <import src="/pages/template/commons" />
 <template is="navigationBarForTwoLevel" data='{{statusBarHeight: statusBarHeight,titleText:"订单列表"}}' />
 
-<view class='container theme-container'>
+<view class='container theme-container' style='height: calc(100vh - 46px - {{statusBarHeight}}px);'>
 	<view class="tab-bar flex-row-center-flex_start theme-font1 theme7">
 		<view class="tab all {{order_status == 0 ? 'selecte' :''}}" bindtap="switchTab" data-tab="all" bindtap="swichOrderList" data-order_status="0">全部订单</view>
 		<view class="tab pending {{order_status == 1 ? 'selecte' :''}}" bindtap="switchTab" data-tab="pending" bindtap="swichOrderList" data-order_status="1">待处理</view>
@@ -11,31 +11,86 @@
 
 	<!-- 全部订单 -->
 	<scroll-view wx:if="{{order_status == 0}}" class="scroll-view" scroll-y="true" scroll-with-animation="true" bindscrolltolower="loadMore">
-		<view class="list all">
+		<view class="list all flex-column-center-flex_start">
 
-			<view class="row flex-column-center-space_between theme7 bottom-space" wx:for="{{all_order_list}}" wx:key="key" wx:for-item="bean" wx:for-index="index">
-				<view class="head flex-row-center-space_between theme-font8">
-					<view>{{bean.add_time}}</view>
-					<view wx:if="{{bean.status==1}}">待处理</view>
-					<view wx:if="{{bean.status==2}}">已完成</view>
+			<view class="row flex-column-center-space_between theme-panel" wx:for="{{all_order_list}}" wx:key="key" wx:for-item="bean" wx:for-index="index">
+				<view class="head flex-row-flex_start-space_between theme-font8">
+					<image class="hotel-pic" mode="aspectFill" src="https://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
+					<view class="hotel-name one-line-overflow">花家怡园（世贸店）</view>
+					<view wx:if="{{bean.status==1}}" class="order-status theme-button">
+						<view class="theme-button">待处理</view>
+					</view>
+					<view wx:if="{{bean.status==2}}" class="order-status theme-button-buy">
+						<view class="theme-button-buy">已完成</view>
+					</view>
 				</view>
 				<view class="body flex-row-center-space_between">
-					<view class="left flex-column-center-flex_start">
+					<view class="left flex-row-center-flex_start">
 						<image bindtap="gotoDishDetail" data-goods_id="{{bean.goods_id}}" class="pic" mode="aspectFill" src="{{bean.goods_img}}"></image>
-						<view class="price theme-rad-panel">￥{{bean.price}}</view>
 					</view>
-					<view class="right flex-column-flex_start-space_between">
+					<view class="center flex-column-flex_start-center">
 						<view class="one-line-overflow theme-font1">{{bean.goods_name}}</view>
-						<view class="flex-row-center-flex_start theme-font7">
-							<view>{{bean.contact}}</view>
-							<view>{{bean.phone}}</view>
-						</view>
-						<view class="four-line-overflow theme-font7">{{bean.address}}</view>
-						<view class="theme-font8">希望送达时间: {{bean.delivery_time}}</view>
+					</view>
+					<view class="right flex-column-center-center">
+						<view class="price theme-font1">￥{{bean.price}}</view>
+						<view class="count theme-font3">共1件</view>
 					</view>
 				</view>
 				<view class="foot flex-row-center-space_between">
-					<view class="order-number theme-font3">订单号: {{bean.order_id}}</view>
+					<view>{{bean.add_time}}</view>
+					<view wx:if="{{bean.status==2}}" class="btn all theme-button-buy">再次购买</view>
+				</view>
+			</view>
+			<view class="row flex-column-center-space_between theme-panel" wx:for="{{deal_order_list}}" wx:key="key" wx:for-item="bean" wx:for-index="index">
+				<view class="head flex-row-flex_start-space_between theme-font8">
+					<image class="hotel-pic" mode="aspectFill" src="https://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
+					<view class="hotel-name one-line-overflow">花家怡园（世贸店）</view>
+					<view class="order-status theme-button">
+						<view class="theme-button">待处理</view>
+					</view>
+				</view>
+				<view class="body flex-row-center-space_between">
+					<view class="left multiple-goods flex-row-center-flex_start">
+						<image class="pic" mode="aspectFill" src="https://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
+						<image class="pic" mode="aspectFill" src="https://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
+					</view>
+					<view class="center multiple-goods flex-column-center-center">
+						<view class="fa fa-chevron-circle-right fa-lg theme-font3" aria-hidden="true"></view>
+					</view>
+					<view class="right flex-column-center-center">
+						<view class="price theme-font1">￥666</view>
+						<view class="count theme-font3">共2件</view>
+					</view>
+				</view>
+				<view class="foot flex-row-center-space_between">
+					<view>{{bean.add_time}}</view>
+				</view>
+			</view>
+			<view class="row flex-column-center-space_between theme-panel" wx:for="{{deal_order_list}}" wx:key="key" wx:for-item="bean" wx:for-index="index">
+				<view class="head flex-row-flex_start-space_between theme-font8">
+					<image class="hotel-pic" mode="aspectFill" src="https://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
+					<view class="hotel-name one-line-overflow">花家怡园（世贸店）</view>
+					<view class="order-status theme-button-buy">
+						<view class="theme-button-buy">已完成</view>
+					</view>
+				</view>
+				<view class="body flex-row-center-space_between">
+					<view class="left multiple-goods flex-row-center-flex_start">
+						<image class="pic" mode="aspectFill" src="https://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
+						<image class="pic" mode="aspectFill" src="https://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
+						<image class="pic" mode="aspectFill" src="https://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
+					</view>
+					<view class="center multiple-goods flex-column-center-center">
+						<view class="fa fa-chevron-circle-right fa-lg theme-font3" aria-hidden="true"></view>
+					</view>
+					<view class="right flex-column-center-center">
+						<view class="price theme-font1">￥888</view>
+						<view class="count theme-font3">共6件</view>
+					</view>
+				</view>
+				<view class="foot flex-row-center-space_between">
+					<view>{{bean.add_time}}</view>
+					<view class="btn all theme-button-buy">再次购买</view>
 				</view>
 			</view>
 
@@ -44,29 +99,55 @@
 
 	<!-- 待处理订单 -->
 	<scroll-view wx:if="{{order_status == 1}}" class="scroll-view" scroll-y="true" scroll-with-animation="true" bindscrolltolower="loadMore">
-		<view class="list all">
-			<view class="row flex-column-center-space_between theme7 bottom-space" wx:for="{{deal_order_list}}" wx:key="key" wx:for-item="bean" wx:for-index="index">
-				<view class="head flex-row-center-space_between theme-font8">
-					<view>{{bean.add_time}}</view>
-					<view>待处理</view>
+		<view class="list pending flex-column-center-flex_start">
+			<view class="row flex-column-center-space_between theme-panel" wx:for="{{deal_order_list}}" wx:key="key" wx:for-item="bean" wx:for-index="index">
+				<view class="head flex-row-flex_start-space_between theme-font8">
+					<image class="hotel-pic" mode="aspectFill" src="https://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
+					<view class="hotel-name one-line-overflow">花家怡园（世贸店）</view>
+					<view class="order-status theme-button">
+						<view class="theme-button">待处理</view>
+					</view>
 				</view>
 				<view class="body flex-row-center-space_between">
-					<view class="left flex-column-center-flex_start">
+					<view class="left flex-row-center-flex_start">
 						<image bindtap="gotoDishDetail" data-goods_id="{{bean.goods_id}}" class="pic" mode="aspectFill" src="{{bean.goods_img}}"></image>
-						<view class="price theme-rad-panel">￥{{bean.price}}</view>
 					</view>
-					<view class="right flex-column-flex_start-space_between">
+					<view class="center flex-column-flex_start-center">
 						<view class="one-line-overflow theme-font1">{{bean.goods_name}}</view>
-						<view class="flex-row-center-flex_start theme-font7">
-							<view>{{bean.contact}}</view>
-							<view>{{bean.phone}}</view>
-						</view>
-						<view class="four-line-overflow theme-font7">{{bean.address}}</view>
-						<view class="theme-font8">希望送达时间: {{bean.delivery_time}}</view>
+					</view>
+					<view class="right flex-column-center-center">
+						<view class="price theme-font1">￥{{bean.price}}</view>
+						<view class="count theme-font3">共1件</view>
 					</view>
 				</view>
 				<view class="foot flex-row-center-space_between">
-					<view class="order-number theme-font3">订单号: {{bean.order_id}}</view>
+					<view>{{bean.add_time}}</view>
+				</view>
+			</view>
+			<view class="row flex-column-center-space_between theme-panel" wx:for="{{deal_order_list}}" wx:key="key" wx:for-item="bean" wx:for-index="index">
+				<view class="head flex-row-flex_start-space_between theme-font8">
+					<image class="hotel-pic" mode="aspectFill" src="https://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
+					<view class="hotel-name one-line-overflow">花家怡园（世贸店）</view>
+					<view class="order-status theme-button">
+						<view class="theme-button">待处理</view>
+					</view>
+				</view>
+				<view class="body flex-row-center-space_between">
+					<view class="left multiple-goods flex-row-center-flex_start">
+						<image class="pic" mode="aspectFill" src="https://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
+						<image class="pic" mode="aspectFill" src="https://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
+						<image class="pic" mode="aspectFill" src="https://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
+					</view>
+					<view class="center multiple-goods flex-column-center-center">
+						<view class="fa fa-chevron-circle-right fa-lg theme-font3" aria-hidden="true"></view>
+					</view>
+					<view class="right flex-column-center-center">
+						<view class="price theme-font1">￥{{bean.price}}</view>
+						<view class="count theme-font3">共1件</view>
+					</view>
+				</view>
+				<view class="foot flex-row-center-space_between">
+					<view>{{bean.add_time}}</view>
 				</view>
 			</view>
 
@@ -75,29 +156,56 @@
 
 	<!-- 已完成订单 -->
 	<scroll-view wx:if="{{order_status == 2}}" class="scroll-view" scroll-y="true" scroll-with-animation="true" bindscrolltolower="loadMore">
-		<view class="list all">
-			<view class="row flex-column-center-space_between theme7 bottom-space" wx:for="{{complete_order_list}}" wx:key="key" wx:for-item="bean" wx:for-index="index">
-				<view class="head flex-row-center-space_between theme-font8">
-					<view>{{bean.add_time}}</view>
-					<view>已完成</view>
+		<view class="list completed flex-column-center-flex_start">
+			<view class="row flex-column-center-space_between theme-panel" wx:for="{{complete_order_list}}" wx:key="key" wx:for-item="bean" wx:for-index="index">
+				<view class="head flex-row-flex_start-space_between theme-font8">
+					<image class="hotel-pic" mode="aspectFill" src="https://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
+					<view class="hotel-name one-line-overflow">花家怡园（世贸店）</view>
+					<view class="order-status theme-button-buy">
+						<view class="theme-button-buy">已完成</view>
+					</view>
 				</view>
 				<view class="body flex-row-center-space_between">
-					<view class="left flex-column-center-flex_start">
+					<view class="left flex-row-center-flex_start">
 						<image bindtap="gotoDishDetail" data-goods_id="{{bean.goods_id}}" class="pic" mode="aspectFill" src="{{bean.goods_img}}"></image>
-						<view class="price theme-rad-panel">￥{{bean.price}}</view>
 					</view>
-					<view class="right flex-column-flex_start-space_between">
+					<view class="center flex-column-flex_start-center">
 						<view class="one-line-overflow theme-font1">{{bean.goods_name}}</view>
-						<view class="flex-row-center-flex_start theme-font7">
-							<view>{{bean.contact}}</view>
-							<view>{{bean.phone}}</view>
-						</view>
-						<view class="four-line-overflow theme-font7">{{bean.address}}</view>
-						<view class="theme-font8">希望送达时间: {{bean.delivery_time}}</view>
+					</view>
+					<view class="right flex-column-center-center">
+						<view class="price theme-font1">￥{{bean.price}}</view>
+						<view class="count theme-font3">共1件</view>
 					</view>
 				</view>
 				<view class="foot flex-row-center-space_between">
-					<view class="order-number theme-font3">订单号: {{bean.order_id}}</view>
+					<view>{{bean.add_time}}</view>
+					<view class="btn completed theme-button-buy">再次购买</view>
+				</view>
+			</view>
+			<view class="row flex-column-center-space_between theme-panel" wx:for="{{deal_order_list}}" wx:key="key" wx:for-item="bean" wx:for-index="index">
+				<view class="head flex-row-flex_start-space_between theme-font8">
+					<image class="hotel-pic" mode="aspectFill" src="https://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
+					<view class="hotel-name one-line-overflow">花家怡园（世贸店）</view>
+					<view class="order-status theme-button">
+						<view class="theme-button">待处理</view>
+					</view>
+				</view>
+				<view class="body flex-row-center-space_between">
+					<view class="left multiple-goods flex-row-center-flex_start">
+						<image class="pic" mode="aspectFill" src="https://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
+						<image class="pic" mode="aspectFill" src="https://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
+						<image class="pic" mode="aspectFill" src="https://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
+					</view>
+					<view class="center multiple-goods flex-column-center-center">
+						<view class="fa fa-chevron-circle-right fa-lg theme-font3" aria-hidden="true"></view>
+					</view>
+					<view class="right flex-column-center-center">
+						<view class="price theme-font1">￥{{bean.price}}</view>
+						<view class="count theme-font3">共1件</view>
+					</view>
+				</view>
+				<view class="foot flex-row-center-space_between">
+					<view>{{bean.add_time}}</view>
 				</view>
 			</view>
 
