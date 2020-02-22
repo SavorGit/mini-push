@@ -410,7 +410,7 @@ Page({
   gotoAdress:function(e){
     var openid = this.data.openid;
     wx.navigateTo({
-      url: '/pages/mine/address/index?openid='+openid,
+      url: '/pages/mine/address/index?openid='+openid+'&isOrder=0',
     })
   },
   /**

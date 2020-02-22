@@ -36,26 +36,30 @@ Page({
     openid = options.openid;
     var address_id = options.address_id;
 
-    //获取城市列表
-    utils.PostRequest(api_url + '/smallsale18/Area/getAreaList', {
-    }, (data, headers, cookies, errMsg, statusCode) => {
-      console.log(data)
-      that.setData({
-        cityArray: data.result.city_name_list,
-        objectCityArray: data.result.city_list
-      })
-    }) 
+    
 
     if(typeof(address_id) =='undefined'){//新增收货地址
+      //获取城市列表
+      utils.PostRequest(api_url + '/smallsale18/Area/getAreaList', {
+      }, (data, headers, cookies, errMsg, statusCode) => {
+        console.log(data)
+        that.setData({
+          cityArray: data.result.city_name_list,
+          objectCityArray: data.result.city_list
+        })
+      }) 
       that.setData({
         address_id:''
       })
     }else {//编辑收货地址
       
+      
       utils.PostRequest(api_url + '/Smallapp4/address/detail', {
         openid: openid,
         address_id: address_id
       }, (data, headers, cookies, errMsg, statusCode) => {
+        var area_id = data.result.area_id;
+        var county_id = data.result.county_id;
         var is_default = data.result.is_default;
         if(is_default==1){
           is_default = true;
@@ -67,6 +71,51 @@ Page({
           address_id:address_id,
           is_default: is_default
         })
+
+        //获取城市列表
+        utils.PostRequest(api_url + '/smallsale18/Area/getAreaList', {
+        }, (data, headers, cookies, errMsg, statusCode) => {
+          var city_list = data.result.city_list
+          
+          for(var i=0;i<city_list.length;i++){
+            if (city_list[i].id == area_id){
+              var cityIndex = i;
+              break;
+            }
+            
+          }
+          
+          that.setData({
+            cityIndex: cityIndex,
+            cityArray: data.result.city_name_list,
+            objectCityArray: data.result.city_list
+          })
+        }) 
+        //获取区域列表
+        utils.PostRequest(api_url + '/smallsale18/Area/getSecArea', {
+          area_id: area_id
+        }, (data, headers, cookies, errMsg, statusCode) => {
+          
+          var area_list = data.result.area_list
+          for(var i=0;i<area_list.length;i++){
+            if (county_id==area_list[i].id){
+              var areaIndex = i;
+              break;
+            }
+            
+          }
+
+
+          that.setData({
+            areaIndex: areaIndex,
+            areaArray: data.result.area_name_list,
+            objectAreaArray: data.result.area_list
+          })
+        })
+
+
+
+
       },function(){
         wx.navigateBack({
           delta:1
@@ -204,7 +253,7 @@ Page({
     if(address_id==''){
       var api_all_url = api_url +'/Smallapp4/address/addAddress'
     }else {
-      var api_all_url ='/Smallapp4/address/editAddress'
+      var api_all_url = api_url+'/Smallapp4/address/editAddress'
     }
 
     utils.PostRequest(api_all_url, {

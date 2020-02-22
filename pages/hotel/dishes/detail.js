@@ -160,7 +160,7 @@ Page({
     var goods_id = e.currentTarget.dataset.goods_id;
     var openid = e.currentTarget.dataset.openid;
     wx.navigateTo({
-      url: '/pages/hotel/order/account?goods_id='+goods_id+"&openid="+openid,
+      url: '/pages/hotel/order/account?goods_id='+goods_id+"&openid="+openid+'&ordre_type=1',
     })
   },
   /**

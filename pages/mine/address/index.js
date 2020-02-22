@@ -3,8 +3,10 @@ const app = getApp()
 const utils = require('../../../utils/util.js')
 const mta = require('../../../utils/mta_analysis.js')
 var api_url = app.globalData.api_url;
+var cache_key = app.globalData.cache_key;
 var openid = openid;
 var page = 1;
+var isOrder = 0;
 Page({
 
   /**
@@ -14,7 +16,7 @@ Page({
     statusBarHeight: getApp().globalData.statusBarHeight,
     address_list:[],
     showDeleteConfirmPopWindow:false,
-    
+    isOrder: 0 
   },
 
   /**
@@ -24,11 +26,13 @@ Page({
     var that = this;
     console.log(that.data.address_id)
     openid = options.openid;
+    isOrder = options.isOrder;
     utils.PostRequest(api_url + '/Smallapp4/address/addresslist', {
       openid: openid,
       page :1
     }, (data, headers, cookies, errMsg, statusCode) => that.setData({
       address_list: data.result,
+      isOrder: isOrder
     }));
   },
   /**
@@ -131,6 +135,22 @@ Page({
         })
       });
     }
+  },
+  selectAddress:function(e){
+    var that = this;
+    var keys = e.currentTarget.dataset.keys
+    var address_list = that.data.address_list;
+    var address_info = address_list[keys];
+    address_info = JSON.stringify(address_info);
+    wx.setStorage({
+      key: cache_key+'select_address_info',
+      data: address_info,
+      success:function(e){
+        wx.navigateBack({
+          delta:1
+        })
+      }
+    })
   },
   /**
    * 生命周期函数--监听页面初次渲染完成

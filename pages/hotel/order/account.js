@@ -3,8 +3,10 @@ const app = getApp()
 const utils = require('../../../utils/util.js')
 const mta = require('../../../utils/mta_analysis.js')
 var api_url = app.globalData.api_url;
+var cache_key = app.globalData.cache_key;
 var goods_id;
 var openid;
+var order_type = 1;  
 Page({
 
   /**
@@ -14,6 +16,7 @@ Page({
     statusBarHeight: getApp().globalData.statusBarHeight,
     showBuyConfirmPopWindow: false,
     addDisabled: false,
+    is_have_default_address:false,
   },
 
   /**
@@ -23,21 +26,33 @@ Page({
     wx.hideShareMenu();
     let that = this;
     console.log(options);
-    goods_id = options.goods_id;
+    
     openid = options.openid;
-    //self.setData({ showBuyConfirmPopWindow: true });
-
-    //菜品详情
-    utils.PostRequest(api_url + '/Smallapp4/dish/detail', {
-      goods_id: goods_id,
-    }, (data, headers, cookies, errMsg, statusCode) => that.setData({
-      goods_info: data.result,
-      merchant: data.result.merchant
-    }), function () {
-      wx.navigateBack({
-        delta: 1
-      })
+    order_type = options.order_type;  //1单品下单 2购物车下单
+    //获取默认地址
+    utils.PostRequest(api_url + '/Smallapp4/address/getDefaultAddress', {
+      openid: openid,
+    }, (data, headers, cookies, errMsg, statusCode) => {
+      var address_info = data.result;
+      if(address_info !=''){
+        that.setData({
+          is_have_default_address:false
+        })
+      }else {
+        that.setData({
+          is_have_default_address:true,
+          address_info:data.result
+        })
+      }
     });
+
+    if(order_type==1){//单品下单
+      goods_id = options.goods_id;
+      //订单详情
+      
+    }else if(order_type==2){ //购物车下单
+      //订单详情
+    }
   },
   /**
    * 下单
@@ -129,6 +144,14 @@ Page({
     })
   },
   /**
+   * 选择收货地址
+   */
+  selectAddress:function(e){
+    wx.navigateTo({
+      url: '/pages/mine/address/index?openid='+openid+'&isOrder=1',
+    })
+  },
+  /**
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
@@ -139,14 +162,23 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    var that = this;
+    var address_info = wx.getStorageSync(cache_key + 'select_address_info')
+    if(address_info!=''){
+      address_info = JSON.parse(address_info)
+      that.setData({
+        is_have_default_address: true,
+        address_info: address_info
+      })
+    }
+    
   },
 
   /**
    * 生命周期函数--监听页面隐藏
    */
   onHide: function () {
-
+    wx.removeStorageSync(cache_key + 'select_address_info')
   },
 
   /**
