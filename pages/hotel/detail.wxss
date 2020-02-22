@@ -293,6 +293,7 @@
   line-height: 42rpx;
   text-align: center;
   font-size: 46rpx;
+  color: #f0c02b;
 }
 
 .shopping-cart-window>.window>.body .list>.item>.count-chooser>input {
