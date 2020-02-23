@@ -2,19 +2,19 @@
 <import src="/pages/template/commons" />
 <template is="navigationBarForTwoLevel" data='{{statusBarHeight: statusBarHeight,titleText:"第三方平台"}}' />
 
-<scroll-view class='container theme-container' style='height: calc(100vh - 46px - {{statusBarHeight}}px);' scroll-y="true" scroll-with-animation="true" bindscrolltolower="loadMore">
+<scroll-view class='container theme-container' style='height: calc(100vh - 46px - {{statusBarHeight}}px);' scroll-y="true" scroll-with-animation="true" >
 	<view class="wapper">
-		<view class="row flex-column-center-center">
-			<image class="pic" mode="aspectFill" src="https://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
-			<view class="name one-line-overflow theme-panel">美团</view>
+		<view class="row flex-column-center-center" wx:for="{{platform_list}}" wx:key="key" wx:for-item="bean" wx:for-index="index" >
+			<image class="pic" mode="aspectFill" src="{{bean.img_url}}"></image>
+			<view class="name one-line-overflow theme-panel">{{bean.name}}</view>
 		</view>
-		<view class="row flex-column-center-center">
-			<image class="pic" mode="aspectFill" src="https://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
+		<!-- <view class="row flex-column-center-center" wx:if="{{img2!=''}}">
+			<image class="pic" mode="aspectFill" src="{{img2}}"></image>
 			<view class="name one-line-overflow theme-panel">饿了么</view>
 		</view>
-		<view class="row flex-column-center-center">
-			<image class="pic" mode="aspectFill" src="https://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
+		<view class="row flex-column-center-center" wx:if="{{img3!=''}}">
+			<image class="pic" mode="aspectFill" src="{{img3}}"></image>
 			<view class="name one-line-overflow theme-panel">XXXXXXXXXX</view>
-		</view>
+		</view> -->
 	</view>
 </scroll-view>

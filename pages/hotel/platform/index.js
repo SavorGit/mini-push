@@ -11,6 +11,9 @@ Page({
    */
   data: {
     statusBarHeight: getApp().globalData.statusBarHeight,
+    img1:'',
+    img2: '',
+    img3: '',
   },
 
   /**
@@ -19,10 +22,10 @@ Page({
   onLoad: function (options) {
     var that = this;
     merchant_id = options.merchant_id;
-    utils.PostRequest(api_url + '/Smallapp4/aa/bb', {
+    utils.PostRequest(api_url + '/Smallapp4/dish/getPlatform', {
       merchant_id: merchant_id,
     }, (data, headers, cookies, errMsg, statusCode) => that.setData({
-      img_list:data.result
+      platform_list :data.result
     })
     );
   },

@@ -63,13 +63,13 @@
 					<view class="icon shopping-bag flex-column-center-center broadcast-panel">
 						<view class="fa fa-shopping-bag fa-lg" aria-hidden="true"></view>
 					</view>
-					<view class="icon new-count flex-column-flex_end-flex_start">
-						<view class="show-new-count theme-rad-panel">2</view>
+					<view class="icon new-count flex-column-flex_end-flex_start" wx:if="{{cart_list.length>0}}">
+						<view class="show-new-count theme-rad-panel"></view>
 					</view>
 				</view>
-				<view class="info">已添加5件菜品</view>
+				<view class="info">已添加{{cart_list.length}}件菜品</view>
 			</view>
-			<view class="right flex-row-center-flex_end">
+			<view class="right flex-row-center-flex_end" bindtap="gotoOrder">
 				<view class="btn buy theme-button-welcome">下单</view>
 			</view>
 		</view>
@@ -81,15 +81,27 @@
 	<view class="mask" bindtap="closeShoppingCartWindow"></view>
 	<view class="window {{showShoppingCartWindow?'fadeInDown':'fadeOutUp'}}">
 		<view class="title-bar flex-row-center-space_between">
-			<view class="title theme-font2">去结算</view>
-			<view class="btn clean flex-row-center-space_around theme-font7" bindtap="cleanShoppingCart">
+			<view class="title theme-font2" bindtap="gotoOrder">去结算</view>
+			<view class="btn clean flex-row-center-space_around theme-font7" bindtap="clearCart">
 				<view class="fa fa-trash-o fa-lg" aria-hidden="true"></view>
 				<view>清空</view>
 			</view>
 		</view>
 		<scroll-view class="body theme-panel" scroll-y="true" scroll-with-animation="true">
 			<view class="list">
-				<view class="item flex-row-center-flex_start">
+				<view class="item flex-row-center-flex_start"  wx:for="{{cart_list}}" wx:key="key" wx:for-item="bean" wx:for-index="index">
+					<view class="name two-line-overflow">{{bean.name}}</view>
+					<view class="price theme-font5">
+						<label>￥</label>
+						<text>{{bean.price}}</text>
+					</view>
+					<view class="count-chooser flex-row-center-space_between">
+						<view class="fa fa-minus-circle" aria-hidden="true" bindtap="cutNum" data-keys="{{index}}"></view>
+						<input value="{{bean.amount}}" />
+						<view class="fa fa-plus-circle" aria-hidden="true" bindtap="addNum" data-keys="{{index}}"></view>
+					</view>
+				</view>
+				<!-- <view class="item flex-row-center-flex_start">
 					<view class="name two-line-overflow">干锅土豆-中辣</view>
 					<view class="price theme-font5">
 						<label>￥</label>
@@ -100,127 +112,7 @@
 						<input value="1" />
 						<view class="fa fa-plus-circle" aria-hidden="true"></view>
 					</view>
-				</view>
-				<view class="item flex-row-center-flex_start">
-					<view class="name two-line-overflow">干锅土豆-中辣干锅土豆-中辣干锅土豆-中辣干锅土豆-中辣干锅土豆-中辣干锅土豆-中辣</view>
-					<view class="price theme-font5">
-						<label>￥</label>
-						<text>11</text>
-					</view>
-					<view class="count-chooser flex-row-center-space_between">
-						<view class="fa fa-minus-circle" aria-hidden="true"></view>
-						<input value="1" />
-						<view class="fa fa-plus-circle" aria-hidden="true"></view>
-					</view>
-				</view>
-				<view class="item flex-row-center-flex_start">
-					<view class="name two-line-overflow">干锅土豆-中辣</view>
-					<view class="price theme-font5">
-						<label>￥</label>
-						<text>11</text>
-					</view>
-					<view class="count-chooser flex-row-center-space_between">
-						<view class="fa fa-minus-circle" aria-hidden="true"></view>
-						<input value="1" />
-						<view class="fa fa-plus-circle" aria-hidden="true"></view>
-					</view>
-				</view>
-				<view class="item flex-row-center-flex_start">
-					<view class="name two-line-overflow">干锅土豆-中辣</view>
-					<view class="price theme-font5">
-						<label>￥</label>
-						<text>11</text>
-					</view>
-					<view class="count-chooser flex-row-center-space_between">
-						<view class="fa fa-minus-circle" aria-hidden="true"></view>
-						<input value="1" />
-						<view class="fa fa-plus-circle" aria-hidden="true"></view>
-					</view>
-				</view>
-				<view class="item flex-row-center-flex_start">
-					<view class="name two-line-overflow">干锅土豆-中辣</view>
-					<view class="price theme-font5">
-						<label>￥</label>
-						<text>11</text>
-					</view>
-					<view class="count-chooser flex-row-center-space_between">
-						<view class="fa fa-minus-circle" aria-hidden="true"></view>
-						<input value="1" />
-						<view class="fa fa-plus-circle" aria-hidden="true"></view>
-					</view>
-				</view>
-				<view class="item flex-row-center-flex_start">
-					<view class="name two-line-overflow">干锅土豆-中辣</view>
-					<view class="price theme-font5">
-						<label>￥</label>
-						<text>11</text>
-					</view>
-					<view class="count-chooser flex-row-center-space_between">
-						<view class="fa fa-minus-circle" aria-hidden="true"></view>
-						<input value="1" />
-						<view class="fa fa-plus-circle" aria-hidden="true"></view>
-					</view>
-				</view>
-				<view class="item flex-row-center-flex_start">
-					<view class="name two-line-overflow">干锅土豆-中辣</view>
-					<view class="price theme-font5">
-						<label>￥</label>
-						<text>11</text>
-					</view>
-					<view class="count-chooser flex-row-center-space_between">
-						<view class="fa fa-minus-circle" aria-hidden="true"></view>
-						<input value="1" />
-						<view class="fa fa-plus-circle" aria-hidden="true"></view>
-					</view>
-				</view>
-				<view class="item flex-row-center-flex_start">
-					<view class="name two-line-overflow">干锅土豆-中辣</view>
-					<view class="price theme-font5">
-						<label>￥</label>
-						<text>11</text>
-					</view>
-					<view class="count-chooser flex-row-center-space_between">
-						<view class="fa fa-minus-circle" aria-hidden="true"></view>
-						<input value="1" />
-						<view class="fa fa-plus-circle" aria-hidden="true"></view>
-					</view>
-				</view>
-				<view class="item flex-row-center-flex_start">
-					<view class="name two-line-overflow">干锅土豆-中辣</view>
-					<view class="price theme-font5">
-						<label>￥</label>
-						<text>11</text>
-					</view>
-					<view class="count-chooser flex-row-center-space_between">
-						<view class="fa fa-minus-circle" aria-hidden="true"></view>
-						<input value="1" />
-						<view class="fa fa-plus-circle" aria-hidden="true"></view>
-					</view>
-				</view>
-				<view class="item flex-row-center-flex_start">
-					<view class="name two-line-overflow">干锅土豆-中辣</view>
-					<view class="price theme-font5">
-						<label>￥</label>
-						<text>11</text>
-					</view>
-					<view class="count-chooser flex-row-center-space_between">
-						<view class="fa fa-minus-circle" aria-hidden="true"></view>
-						<input value="1" />
-						<view class="fa fa-plus-circle" aria-hidden="true"></view>
-					</view>
-				</view>
-				<view class="item flex-row-center-flex_start">
-					<view class="name two-line-overflow">干锅土豆-中辣</view>
-					<view class="price theme-font5">
-						<label>￥</label>
-						<text>11</text>
-					</view>
-					<view class="count-chooser flex-row-center-space_between">
-						<view class="fa fa-minus-circle" aria-hidden="true"></view>
-						<input value="1" />
-						<view class="fa fa-plus-circle" aria-hidden="true"></view>
-					</view>
-				</view>
+				</view> -->
 			</view>
 		</scroll-view>
 	</view>

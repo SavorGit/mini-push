@@ -6,7 +6,8 @@ var api_url = app.globalData.api_url;
 var cache_key = app.globalData.cache_key;
 var goods_id;
 var openid;
-var order_type = 1;  
+var order_type; 
+var merchant_id; 
 Page({
 
   /**
@@ -17,6 +18,7 @@ Page({
     showBuyConfirmPopWindow: false,
     addDisabled: false,
     is_have_default_address:false,
+    address_id:''
   },
 
   /**
@@ -25,10 +27,14 @@ Page({
   onLoad: function (options) {
     wx.hideShareMenu();
     let that = this;
-    console.log(options);
-    
     openid = options.openid;
     order_type = options.order_type;  //1单品下单 2购物车下单
+    
+    var merchant_name = options.merchant_name;
+    merchant_id    = options.merchant_id;
+    that.setData({
+      merchant_name: merchant_name
+    })
     //获取默认地址
     utils.PostRequest(api_url + '/Smallapp4/address/getDefaultAddress', {
       openid: openid,
@@ -36,22 +42,54 @@ Page({
       var address_info = data.result;
       if(address_info !=''){
         that.setData({
-          is_have_default_address:false
+          is_have_default_address: true,
+          address_info: data.result,
+          address_id: data.result.address_id
         })
+        
       }else {
         that.setData({
-          is_have_default_address:true,
-          address_info:data.result
+          is_have_default_address: false
         })
       }
     });
 
-    if(order_type==1){//单品下单
+    if (order_type==1){//单品下单
       goods_id = options.goods_id;
-      //订单详情
+      console.log('fdsafdasfdasfds')
+      //菜品详情
+      utils.PostRequest(api_url + '/Smallapp4/dish/detail', {
+        goods_id: goods_id,
+      }, (data, headers, cookies, errMsg, statusCode) => {
+        var goods_info = data.result;
+        goods_info.img_url = goods_info.cover_imgs[0];
+        goods_info.amount  = 1;
+        var goods_list = [];
+        goods_list.push(goods_info)
+        var total_price = goods_info.price;
+        that.setData({
+          goods_list:goods_list,
+          total_price:total_price
+        })
+
+      });
       
     }else if(order_type==2){ //购物车下单
-      //订单详情
+      
+      var cart_list = wx.getStorageSync(cache_key + 'cart_' + merchant_id);
+      cart_list = JSON.parse(cart_list)
+      var total_price = 0;
+      var goods_price = 0;
+      for(var i=0;i<cart_list.length;i++){
+        goods_price = app.accMul(cart_list[i].price,cart_list[i].amount)
+        
+        total_price = app.plus(total_price,goods_price)
+        console.log(total_price)
+      }
+      that.setData({
+        goods_list: cart_list,
+        total_price: total_price
+      })
     }
   },
   /**
@@ -59,22 +97,29 @@ Page({
    */
   placeOrder: function (e) {
     var that = this;
-    var contact = e.detail.value.contact.replace(/\s+/g, '');
-    var address = e.detail.value.address.replace(/\s+/g, '');
-    var phone = e.detail.value.phone;
+    //var contact = e.detail.value.contact.replace(/\s+/g, '');
+    //var address = e.detail.value.address.replace(/\s+/g, '');
+    //var phone = e.detail.value.phone;
+    var address_id = e.detail.value.address_id;
     var delivery_date = e.detail.value.delivery_date;
     var delivery_time = e.detail.value.delivery_time;
+    var cart_list = wx.getStorageSync(cache_key + 'cart_' + merchant_id);
+    var carts = []
+    if(cart_list!=''){
+      cart_list = JSON.parse(cart_list)
+      for(var i=0;i<cart_list.length;i++){
+        var tmp = {};
+        tmp.id = cart_list[i].id
+        tmp.amount = cart_list[i].amount;
+        carts.push(tmp)
+      }
+     
+    }
+    carts = JSON.stringify(carts);
 
-    if (contact == '') {
-      app.showToast('请输入收货人名称');
-      return false;
-    }
-    if (phone == '') {
-      app.showToast('请输入联系电话');
-      return false;
-    }
-    if (address == '') {
-      app.showToast('请输入收货地址');
+
+    if (address_id==''){
+      app.showToast('请选择收货地址')
       return false;
     }
     if (delivery_date == '') {
@@ -85,10 +130,7 @@ Page({
       app.showToast('请选择送达时间');
       return false;
     }
-    var is_mobile = app.checkMobile(phone);
-    if (!is_mobile) {
-      return false;
-    }
+    
     var delivery_time = delivery_date + ' ' + delivery_time;
 
     that.setData({
@@ -96,21 +138,27 @@ Page({
     })
     //下单
     utils.PostRequest(api_url + '/Smallapp4/order/addDishorder', {
-      address: address,
+      address_id:address_id,
       amount: 1,
-      contact: contact,
       delivery_time: delivery_time,
       goods_id: goods_id,
       openid: openid,
-      phone: phone,
+      carts: carts
     }, (data, headers, cookies, errMsg, statusCode) => {
-
-      that.setData({
-        showBuyConfirmPopWindow: true,
-        order_msg1: data.result.message1,
-        order_msg2: data.result.message2,
-        addDisabled: false
+      wx.removeStorage({
+        key: cache_key + 'cart_' + merchant_id,
+        success(res) {
+          that.setData({
+            showBuyConfirmPopWindow: true,
+            order_msg1: data.result.message1,
+            order_msg2: data.result.message2,
+            addDisabled: false
+          })
+        }, fail: function () {
+          
+        }
       })
+      
     }, function () {
       that.setData({
         addDisabled: false
@@ -168,7 +216,8 @@ Page({
       address_info = JSON.parse(address_info)
       that.setData({
         is_have_default_address: true,
-        address_info: address_info
+        address_info: address_info,
+        address_id: address_info.address_id
       })
     }
     

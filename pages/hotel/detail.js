@@ -36,6 +36,7 @@ Page({
   data: {
     statusBarHeight: getApp().globalData.statusBarHeight,
     is_share: false,
+    cart_list:[]
   },
 
   /**
@@ -83,7 +84,8 @@ Page({
       //菜品列表
       that.getDishInfo(merchant_id)
 
-
+      //购物车列表
+      that.getCartInfo(merchant_id);
 
 
     } else {
@@ -126,6 +128,8 @@ Page({
 
           //菜品列表
           that.getDishInfo(merchant_id)
+          //购物车列表
+          that.getCartInfo(merchant_id);
         }
       }
     }
@@ -148,6 +152,17 @@ Page({
     }, (data, headers, cookies, errMsg, statusCode) => that.setData({
       dishes_list: data.result
     }));
+  },
+  getCartInfo:function(merchant_id){
+    var that = this;
+    var cart_list = wx.getStorageSync(cache_key + 'cart_' + merchant_id)
+    if(cart_list!=''){
+      cart_list = JSON.parse(cart_list);
+      that.setData({
+        cart_list:cart_list
+      })
+    }
+    
   },
   /**
    * 拨打订餐电话
@@ -219,7 +234,9 @@ Page({
       goods_info.amount = 1;
       
       cart_list.unshift(goods_info);
-      console.log(cart_list)
+      that.setData({
+        cart_list: cart_list
+      })
       cart_list = JSON.stringify(cart_list);
       wx.setStorageSync(cache_key + 'cart_' + merchant_id, cart_list)
     }else {
@@ -237,18 +254,103 @@ Page({
         goods_info.amount = 1;
         cart_list.unshift(goods_info);
       }
-      console.log(cart_list)
+      that.setData({
+        cart_list: cart_list
+      })
       cart_list = JSON.stringify(cart_list);
       wx.setStorageSync(cache_key + 'cart_' + merchant_id, cart_list)
       
     }
     app.showToast('购物车添加成功', 2000, 'success')
   },
+  cutNum:function(e){
+    var that = this;
+    var keys = e.currentTarget.dataset.keys;
+    var cart_list = wx.getStorageSync(cache_key + 'cart_' + merchant_id)
+    if (cart_list != '') {
+      cart_list = JSON.parse(cart_list);
+      for(var i=0;i<cart_list.length;i++){
+        if(i==keys){
+          if(cart_list[i].amount==1){
+            cart_list.splice(keys,1);
+          }else {
+            console.log(cart_list);
+            cart_list[i].amount -=1;
+            console.log(cart_list)
+          }
+          break;
+        }
+      }
+      that.setData({
+        cart_list: cart_list
+      })
+      if(cart_list.length==0){
+        try {
+          wx.removeStorageSync(cache_key + 'cart_' + merchant_id);
+        } catch (e) {
+          
+        }
+      }else {
+        cart_list = JSON.stringify(cart_list);
+        wx.setStorageSync(cache_key + 'cart_' + merchant_id, cart_list)
+      }
+      
+    }
+  },
+  addNum:function(e){
+    var that = this;
+    var keys = e.currentTarget.dataset.keys;
+    var cart_list = wx.getStorageSync(cache_key + 'cart_' + merchant_id)
+    if (cart_list != '') {
+      cart_list = JSON.parse(cart_list);
+      for (var i = 0; i < cart_list.length; i++) {
+        if (i == keys) {
+          cart_list[i].amount += 1;
+          break;
+        }
+      }
+      that.setData({
+        cart_list: cart_list
+      })
+      cart_list = JSON.stringify(cart_list);
+      wx.setStorageSync(cache_key + 'cart_' + merchant_id, cart_list)
+    }
+  },
+  /**
+   * 清空购物车
+   */
+  clearCart:function(e){
+    var that = this;
+    wx.removeStorage({
+      key: cache_key + 'cart_' + merchant_id,
+      success(res) {
+        that.setData({
+          cart_list:[]
+        })
+        app.showToast('清空成功',2000,'success')
+      },fail:function(){
+        app.showToast('清空成功')
+      }
+    })
+  },
+  /**
+   * 去结算
+   */
+  gotoOrder:function(e){
+    var cart_list = wx.getStorageSync(cache_key + 'cart_' + merchant_id);
+    if(cart_list!=''){
+      wx.navigateTo({
+        url: '/pages/hotel/order/account?openid='+this.data.openid+'&merchant_id='+merchant_id+'&merchant_name='+this.data.hotel_info.name+'&order_type=2',
+      })
+    }else {
+      app.showToast('购物车没有商品');
+    }
+  },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
-  onReady: function () {
-
+  onReady: function (e) {
+    
   },
 
   /**
@@ -263,6 +365,17 @@ Page({
     }, (data, headers, cookies, errMsg, statusCode) => that.setData({
       dishes_list: data.result
     }));
+    var cart_list = wx.getStorageSync(cache_key + 'cart_' + merchant_id)
+    if (cart_list != '') {
+      cart_list = JSON.parse(cart_list);
+      that.setData({
+        cart_list: cart_list
+      })
+    }else {
+      that.setData({
+        cart_list: []
+      })
+    }
   },
 
   /**
@@ -337,6 +450,7 @@ Page({
   openShoppingCartWindow: function (e) {
     let self = this;
     self.setData({ showShoppingCartPopWindow: true, showShoppingCartWindow: true });
+    
   },
 
   // 关闭购物车弹窗
@@ -347,9 +461,4 @@ Page({
       self.setData({ showShoppingCartPopWindow: false });
     }, 500);
   },
-
-  // 清空购物车
-  cleanShoppingCart: function (e) {
-    let self = this;
-  }
 })
