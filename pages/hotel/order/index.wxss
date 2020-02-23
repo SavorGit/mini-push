@@ -27,75 +27,128 @@
 
 .list {
   width: 100%;
-  height: 100%;
+  padding-bottom: 25rpx;
 }
 
 .row {
-  width: 100%;
+  width: 700rpx;
   height: 350rpx;
+  margin-top: 25rpx;
+  border-radius: 10rpx;
 }
 
 .row>.head,
 .row>.body,
 .row>.foot {
-  width: calc(100% - 80rpx);
-  height: 60rpx;
-  padding: 0 40rpx;
+  width: calc(100% - 50rpx);
+  margin: 0 25rpx;
   font-size: 24rpx;
 }
 
+.row>.head {
+  height: 70rpx;
+  padding-top: 25rpx;
+  padding-bottom: 20rpx;
+  border-bottom: 3rpx dashed #ededed;
+}
+
+.row>.head>.hotel-pic {
+  width: 70rpx;
+  height: 70rpx;
+  border-radius: 8rpx;
+}
+
+.row>.head>.hotel-name {
+  width: calc(100% - 185rpx);
+  height: 70rpx;
+  line-height: 70rpx;
+  margin-left: 15rpx;
+  font-size: 32rpx;
+}
+
+.row>.head>.order-status {
+  width: 15rpx;
+  height: 50rpx;
+  margin-right: -35rpx;
+  border-radius: 0;
+  /* transform: rotate(-15deg); */
+  transform: skewY(-30deg);
+}
+
+.row>.head>.order-status>view {
+  width: 100rpx;
+  height: 50rpx;
+  line-height: 50rpx;
+  padding-left: 20rpx;
+  margin-left: -80rpx;
+  border-radius: 10rpx 0 0 10rpx;
+  transform: skewY(30deg) translate(-20rpx, -20rpx);
+}
+
 .row>.body {
-  min-height: 234rpx;
-  border-top: 3rpx solid #ededed;
-  border-bottom: 3rpx solid #ededed;
+  height: calc(100% - 180rpx);
 }
 
 .row>.body>.left {
-  width: 200rpx;
-  height: 200rpx;
+  width: 120rpx;
+  height: 120rpx;
 }
 
 .row>.body>.left>.pic {
-  width: 200rpx;
-  height: 200rpx;
-}
-
-.row>.body>.left>.pic>image {
-  width: 200rpx;
-  height: 200rpx;
+  width: 100%;
+  height: 100%;
   border-radius: 5rpx;
 }
 
-.row>.body>.left>.price {
-  width: 200rpx;
-  height: 30rpx;
-  line-height: 30rpx;
-  text-align: center;
-  border-radius: 0 0 5rpx 5rpx;
-  margin-top: -27rpx;
+.row>.body>.left.multiple-goods {
+  width: calc(100% - 200rpx);
 }
 
-.row>.body>.right {
-  width: 445rpx;
-  min-height: 200rpx;
+.row>.body>.left.multiple-goods>.pic {
+  width: 120rpx;
+  margin-right: 20rpx;
 }
 
-.row>.body>.right>view {
+.row>.body>.center {
+  width: calc(100% - 240rpx);
+  height: 100%;
+  margin-left: 15rpx;
+}
+
+.row>.body>.center>view {
   width: 100%;
 }
 
-.row>.body>.right>view:first-child {
-  font-size: 30rpx;
+.row>.body>.center>view:first-child {
+  font-size: 28rpx;
 }
 
-.row>.body>.right>view:nth-child(2)>view:first-child {
-  width: 120rpx;
+.row>.body>.center.multiple-goods {
+  width: 45rpx;
+}
+
+.row>.body>.center.multiple-goods>view:first-child {
+  font-size: 42rpx;
+}
+
+.row>.body>.right {
+  width: 155rpx;
+  height: 100%;
+}
+
+.row>.body>.right>.price {
+  font-size: 36rpx;
+}
+
+.row>.body>.right>.count {
+  font-size: 24rpx;
 }
 
 .row>.foot {
-  width: calc(100% - 40rpx);
-  height: 50rpx;
-  padding-right: 0;
+  width: calc(100% - 45rpx);
+  height: 65rpx;
+  margin-right: 20rpx;
+  border-top: 3rpx dashed #ededed;
 }
 
 .row>.foot>.order-number {
@@ -107,8 +160,6 @@
   height: 50rpx;
   line-height: 50rpx;
   text-align: center;
-}
-
-.row.bottom-space {
-  margin-bottom: 10rpx;
+  font-size: 28rpx;
+  border-radius: 5rpx;
 }
