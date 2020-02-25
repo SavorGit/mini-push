@@ -113,6 +113,21 @@ Page({
       url: '/pages/hotel/dishes/detail?goods_id='+goods_id,
     })
   },
+  reBuy:function(e){
+    var that = this ;
+    var order_id = e.currentTarget.dataset.order_id;
+    var merchant_id = e.currentTarget.dataset.merchant_id;
+    var merchant_name = e.currentTarget.dataset.merchant_name;
+    wx.navigateTo({
+      url: '/pages/hotel/order/account?openid=' + openid + '&merchant_id=' + merchant_id + '&merchant_name=' + merchant_name + '&order_type=3&order_id='+order_id,
+    })
+  },
+  gotoOrderDetail:function(e){
+    var order_id = e.currentTarget.dataset.order_id;
+    wx.navigateTo({
+      url: '/pages/hotel/order/detail?openid='+openid+'&order_id='+order_id,
+    })
+  },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */

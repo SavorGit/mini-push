@@ -90,6 +90,34 @@ Page({
         goods_list: cart_list,
         total_price: total_price
       })
+    }else if(order_type==3){
+      var order_id = options.order_id;
+      //订单详情
+      utils.PostRequest(api_url + '/Smallapp4/order/dishOrderdetail', {
+        order_id: order_id,
+        openid:openid,
+      }, (data, headers, cookies, errMsg, statusCode) => {
+        var order_list = data.result.goods;
+        var total_price = 0;
+        var goods_price = 0;
+        var goods_list = [];
+        for(var i=0;i<order_list.length;i++){
+          if (order_list[i].status == 1){
+            order_list[i].img_url = order_list[i].img
+            goods_list.push(order_list[i]);
+            goods_price = app.accMul(order_list[i].price, order_list[i].amount)
+
+            total_price = app.plus(total_price, goods_price)
+
+          }
+          
+        }
+        console.log(goods_list)
+        that.setData({
+          goods_list: goods_list,
+          total_price: total_price
+        })
+      });
     }
   },
   /**
@@ -103,18 +131,30 @@ Page({
     var address_id = e.detail.value.address_id;
     var delivery_date = e.detail.value.delivery_date;
     var delivery_time = e.detail.value.delivery_time;
-    var cart_list = wx.getStorageSync(cache_key + 'cart_' + merchant_id);
-    var carts = []
-    if(cart_list!=''){
-      cart_list = JSON.parse(cart_list)
-      for(var i=0;i<cart_list.length;i++){
+    if(order_type==2){
+      var cart_list = wx.getStorageSync(cache_key + 'cart_' + merchant_id);
+      var carts = []
+      if (cart_list != '') {
+        cart_list = JSON.parse(cart_list)
+        for (var i = 0; i < cart_list.length; i++) {
+          var tmp = {};
+          tmp.id = cart_list[i].id
+          tmp.amount = cart_list[i].amount;
+          carts.push(tmp)
+        }
+
+      }
+    }else if(order_type==3){
+      var carts = []
+      var goods_list = that.data.goods_list
+      for (var i = 0; i < goods_list.length; i++) {
         var tmp = {};
-        tmp.id = cart_list[i].id
-        tmp.amount = cart_list[i].amount;
+        tmp.id = goods_list[i].id
+        tmp.amount = goods_list[i].amount;
         carts.push(tmp)
       }
-     
     }
+    
     carts = JSON.stringify(carts);
 
 
@@ -145,26 +185,36 @@ Page({
       openid: openid,
       carts: carts
     }, (data, headers, cookies, errMsg, statusCode) => {
-      wx.removeStorage({
-        key: cache_key + 'cart_' + merchant_id,
-        success(res) {
-          that.setData({
-            showBuyConfirmPopWindow: true,
-            order_msg1: data.result.message1,
-            order_msg2: data.result.message2,
-            addDisabled: false
-          })
-        }, fail: function () {
-          
-        }
-      })
+      if(order_type==2){
+        wx.removeStorage({
+          key: cache_key + 'cart_' + merchant_id,
+          success(res) {
+            that.setData({
+              showBuyConfirmPopWindow: true,
+              order_msg1: data.result.message1,
+              order_msg2: data.result.message2,
+              addDisabled: false
+            })
+          }, fail: function () {
+
+          }
+        })
+      }else {
+        that.setData({
+          showBuyConfirmPopWindow: true,
+          order_msg1: data.result.message1,
+          order_msg2: data.result.message2,
+          addDisabled: false
+        })
+      }
+      
       
     }, function () {
       that.setData({
         addDisabled: false
       })
     })
-
+    mta.Event.stat('orderConfirm', { 'openid': openid })
   },
   bindDateChange: function (e) {
     var that = this;
@@ -185,6 +235,7 @@ Page({
     wx.navigateBack({
       delta: 1
     })
+    mta.Event.stat('orderSuccess', { 'openid': openid })
   },
   gotoDisheDetail: function (e) {
     wx.navigateTo({

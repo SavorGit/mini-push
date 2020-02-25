@@ -189,10 +189,15 @@ Page({
    * 下单
    */
   placeOrder: function (e) {
+    var that = this;
     var goods_id = e.currentTarget.dataset.goods_id;
     var openid = e.currentTarget.dataset.openid;
     wx.navigateTo({
       url: '/pages/hotel/order/account?goods_id=' + goods_id + "&openid=" + openid,
+    })
+    that.setData({
+      showShoppingCartPopWindow:false,
+      showShoppingCartWindow:false,
     })
 
   },
@@ -270,6 +275,7 @@ Page({
 
     }
     app.showToast('购物车添加成功', 2000, 'success')
+    mta.Event.stat('addCart', { 'openid': that.data.openid,'goodsid':goods_info.id })
   },
   cutNum:function(e){
     var that = this;
@@ -350,6 +356,7 @@ Page({
       wx.navigateTo({
         url: '/pages/hotel/order/account?openid='+this.data.openid+'&merchant_id='+merchant_id+'&merchant_name='+this.data.hotel_info.name+'&order_type=2',
       })
+      mta.Event.stat('gotoAccounts', { 'openid': this.data.openid })
     }else {
       app.showToast('购物车没有商品');
     }

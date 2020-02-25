@@ -163,6 +163,7 @@ Page({
     wx.navigateTo({
       url: '/pages/hotel/order/account?goods_id=' + goods_id + "&openid=" + openid + '&order_type=1&merchant_name=' + this.data.merchant.name + '&merchant_id='+this.data.merchant.merchant_id,
     })
+    mta.Event.stat('dishDetailPlaceOrder', { 'openid': openid,'goodsid':goods_id })
   },
   /**
    * 生命周期函数--监听页面初次渲染完成

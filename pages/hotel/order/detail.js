@@ -1,4 +1,10 @@
 // pages/hotel/order/detail.js
+const app = getApp()
+const utils = require('../../../utils/util.js')
+const mta = require('../../../utils/mta_analysis.js')
+var api_url = app.globalData.api_url;
+var order_id;
+var openid;
 Page({
 
   /**
@@ -12,7 +18,18 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    var that = this;
+    openid = options.openid;
+    order_id = options.order_id;
+    //订单详情
+    utils.PostRequest(api_url + '/Smallapp4/order/dishOrderdetail', {
+      openid: openid,
+      order_id:order_id,
+    }, (data, headers, cookies, errMsg, statusCode) => {
+      that.setData({
+        order_info:data.result
+      })
+    });
   },
 
   /**
