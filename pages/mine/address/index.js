@@ -122,12 +122,13 @@ Page({
         address_id: address_id,
         is_default:1
       }, (data, headers, cookies, errMsg, statusCode) => {
-        for (i = 0; i < address_list.length; i++) {
-          if (address_list[i].is_default) {
-            address_list[i].is_default == 0;
+        console.log(address_list)
+        for (var i = 0; i < address_list.length; i++) {
+          if (address_list[i].is_default==1) {
+            address_list[i].is_default = 0;
           }
           if (i == keys) {
-            address_list[keys].is_default == 1;
+            address_list[keys].is_default = 1;
           }
         }
         that.setData({
