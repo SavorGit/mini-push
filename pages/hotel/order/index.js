@@ -139,7 +139,28 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    var that = this;
+    //全部订单
+    utils.PostRequest(api_url + '/Smallapp4/order/dishOrderlist', {
+      openid: openid,
+      page: page_all,
+      status: 0
+    }, (data, headers, cookies, errMsg, statusCode) => {
+      that.setData({
+        all_order_list: data.result.datalist
+      })
+    })
+    
+    //已完成的订单
+    utils.PostRequest(api_url + '/Smallapp4/order/dishOrderlist', {
+      openid: openid,
+      page: page_complete,
+      status: 2
+    }, (data, headers, cookies, errMsg, statusCode) => {
+      that.setData({
+        complete_order_list: data.result.datalist
+      })
+    })
   },
 
   /**

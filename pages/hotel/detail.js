@@ -351,11 +351,17 @@ Page({
    * 去结算
    */
   gotoOrder:function(e){
+    let self = this;
     var cart_list = wx.getStorageSync(cache_key + 'cart_' + merchant_id);
     if(cart_list!=''){
       wx.navigateTo({
         url: '/pages/hotel/order/account?openid='+this.data.openid+'&merchant_id='+merchant_id+'&merchant_name='+this.data.hotel_info.name+'&order_type=2',
       })
+
+      self.setData({ showShoppingCartWindow: false });
+      setTimeout(function () {
+        self.setData({ showShoppingCartPopWindow: false });
+      }, 500);
       mta.Event.stat('gotoAccounts', { 'openid': this.data.openid })
     }else {
       app.showToast('购物车没有商品');
