@@ -170,6 +170,28 @@ textarea {
   font-size: 32rpx;
 }
 
+.goods-info>.body>.row>.right>.count-chooser {
+  width: 144rpx;
+  font-size: 32rpx;
+}
+
+.goods-info>.body>.row>.right>.count-chooser>view {
+  width: 42rpx;
+  height: 42rpx;
+  line-height: 42rpx;
+  text-align: center;
+  font-size: 46rpx;
+  color: #f0c02b;
+}
+
+.goods-info>.body>.row>.right>.count-chooser>input {
+  width: 60rpx;
+  height: 42rpx;
+  line-height: 42rpx;
+  text-align: center;
+  border: unset;
+}
+
 .goods-info>.foot {
   height: 60rpx;
   line-height: 60rpx;
