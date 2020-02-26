@@ -29,7 +29,18 @@ Page({
     })
     );
   },
-
+  previewImage: function (e) {
+    var current = e.currentTarget.dataset.src;
+    var urls = [];
+    for (var i = 0; i < 1; i++) {
+      urls[i] = current;
+    }
+    wx.previewImage({
+      current: urls[0], // 当前显示图片的http链接
+      urls: urls // 需要预览的图片http链接列表
+    })
+   
+  },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */

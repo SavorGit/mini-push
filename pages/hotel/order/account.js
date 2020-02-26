@@ -42,16 +42,16 @@ Page({
       openid: openid,
     }, (data, headers, cookies, errMsg, statusCode) => {
       var address_info = data.result;
-      if(address_info !=''){
+      if (JSON.stringify(address_info) == '{}'){
         that.setData({
-          is_have_default_address: true,
-          address_info: data.result,
-          address_id: data.result.address_id
+          is_have_default_address: false
         })
         
       }else {
         that.setData({
-          is_have_default_address: false
+          is_have_default_address: true,
+          address_info: data.result,
+          address_id: data.result.address_id
         })
       }
     });
@@ -148,7 +148,7 @@ Page({
       //var cart_list = wx.getStorageSync(cache_key + 'cart_' + merchant_id);
       var carts = []
       if (cart_list != '') {
-        cart_list = JSON.parse(cart_list)
+        //cart_list = JSON.parse(cart_list)
         for (var i = 0; i < cart_list.length; i++) {
           var tmp = {};
           tmp.id = cart_list[i].id

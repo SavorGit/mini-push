@@ -458,7 +458,9 @@ Page({
       })
     }else {
       that.setData({
-        cart_list: []
+        cart_list: [],
+        cart_dish_nums:0,
+        total_price:0
       })
     }
   },
