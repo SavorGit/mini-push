@@ -36,7 +36,9 @@ Page({
   data: {
     statusBarHeight: getApp().globalData.statusBarHeight,
     is_share: false,
-    cart_list:[]
+    cart_list:[],
+    cart_dish_nums:0,
+    total_price:0
   },
 
   /**
@@ -158,8 +160,20 @@ Page({
     var cart_list = wx.getStorageSync(cache_key + 'cart_' + merchant_id)
     if(cart_list!=''){
       cart_list = JSON.parse(cart_list);
+      var total_price = 0;
+      var goods_price = 0;
+      var cart_dish_nums = 0;
+      for (var i = 0; i < cart_list.length; i++) {
+        goods_price = app.accMul(cart_list[i].price, cart_list[i].amount)
+
+        total_price = app.plus(total_price, goods_price)
+        cart_dish_nums += cart_list[i].amount;
+        
+      }
       that.setData({
-        cart_list:cart_list
+        cart_list:cart_list,
+        cart_dish_nums: cart_dish_nums,
+        total_price: total_price,
       })
     }
     
@@ -242,13 +256,25 @@ Page({
       delete dishesList[index].addToCart;
       that.setData({ dishes_list: dishesList });
     }, 500);
+    var cart_dish_nums = 0;
+    var goods_price = 0;
+    var total_price = 0;
     if (cart_list == '') {
       cart_list = [];
       goods_info.amount = 1;
 
       cart_list.unshift(goods_info);
+      
+      for (var i = 0; i < cart_list.length; i++) {
+        goods_price = app.accMul(cart_list[i].price, cart_list[i].amount)
+
+        total_price = app.plus(total_price, goods_price)
+        cart_dish_nums += cart_list[i].amount;
+      }
       that.setData({
-        cart_list: cart_list
+        cart_list: cart_list,
+        cart_dish_nums: cart_dish_nums,
+        total_price: total_price
       })
       cart_list = JSON.stringify(cart_list);
       wx.setStorageSync(cache_key + 'cart_' + merchant_id, cart_list)
@@ -267,8 +293,17 @@ Page({
         goods_info.amount = 1;
         cart_list.unshift(goods_info);
       }
+      
+      for(var i=0;i<cart_list.length;i++){
+        goods_price = app.accMul(cart_list[i].price, cart_list[i].amount)
+
+        total_price = app.plus(total_price, goods_price)
+        cart_dish_nums +=cart_list[i].amount;
+      }
       that.setData({
-        cart_list: cart_list
+        cart_list: cart_list,
+        cart_dish_nums: cart_dish_nums,
+        total_price: total_price
       })
       cart_list = JSON.stringify(cart_list);
       wx.setStorageSync(cache_key + 'cart_' + merchant_id, cart_list)
@@ -283,6 +318,9 @@ Page({
     var cart_list = wx.getStorageSync(cache_key + 'cart_' + merchant_id)
     if (cart_list != '') {
       cart_list = JSON.parse(cart_list);
+      var cart_dish_nums = 0;
+      var goods_price =0;
+      var total_price =0;
       for(var i=0;i<cart_list.length;i++){
         if(i==keys){
           if(cart_list[i].amount==1){
@@ -291,12 +329,25 @@ Page({
             console.log(cart_list);
             cart_list[i].amount -=1;
             console.log(cart_list)
+            cart_dish_nums += cart_list[i].amount;
+
+            goods_price = app.accMul(cart_list[i].price, cart_list[i].amount)
+
+            total_price = app.plus(total_price, goods_price)
+
           }
-          break;
+          //break;
+        }else {
+          cart_dish_nums += cart_list[i].amount;
+          goods_price = app.accMul(cart_list[i].price, cart_list[i].amount)
+
+          total_price = app.plus(total_price, goods_price)
         }
       }
       that.setData({
-        cart_list: cart_list
+        cart_list: cart_list,
+        cart_dish_nums: cart_dish_nums,
+        total_price: total_price
       })
       if(cart_list.length==0){
         try {
@@ -317,14 +368,25 @@ Page({
     var cart_list = wx.getStorageSync(cache_key + 'cart_' + merchant_id)
     if (cart_list != '') {
       cart_list = JSON.parse(cart_list);
+
+      var cart_dish_nums = 0;
+      
+      var total_price = 0;
+      var goods_price = 0;
       for (var i = 0; i < cart_list.length; i++) {
         if (i == keys) {
           cart_list[i].amount += 1;
-          break;
+          
         }
+        goods_price = app.accMul(cart_list[i].price, cart_list[i].amount)
+
+        total_price = app.plus(total_price, goods_price)
+        cart_dish_nums += cart_list[i].amount;
       }
       that.setData({
-        cart_list: cart_list
+        cart_list: cart_list,
+        cart_dish_nums: cart_dish_nums,
+        total_price:total_price
       })
       cart_list = JSON.stringify(cart_list);
       wx.setStorageSync(cache_key + 'cart_' + merchant_id, cart_list)
@@ -339,7 +401,9 @@ Page({
       key: cache_key + 'cart_' + merchant_id,
       success(res) {
         that.setData({
-          cart_list:[]
+          cart_list:[],
+          cart_dish_nums:0,
+          total_price:0,
         })
         app.showToast('清空成功',2000,'success')
       },fail:function(){

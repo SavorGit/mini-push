@@ -42,18 +42,18 @@
 						</view>
 					</view>
 				</view>
-				<view class="goods-info input-panel theme-panel" bindtap="gotoDisheDetail">
+				<view class="goods-info input-panel theme-panel" >
 					<view class="head">订单信息</view>
 					<view class="body flex-column-center-space_between">
 						<view class="hotel theme-font7">由{{merchant_name}}提供</view>
 						<view class="row flex-row-center-space_between" wx:for="{{goods_list}}" wx:key="key" wx:for-item="bean" wx:for-index="index">
-							<image class="pic" mode="aspectFill" src="{{bean.img_url}}"></image>
-							<view class="center">
+							<image class="pic" mode="aspectFill" src="{{bean.img_url}}" bindtap="gotoDisheDetail" data-goods_id="{{bean.id}}"></image>
+							<view class="center" bindtap="gotoDisheDetail" data-goods_id="{{bean.id}}">
 								<view class="name two-line-overflow">{{bean.name}}</view>
 								<view class="price theme-font5">￥{{bean.price}}</view>
 							</view>
 							<view class="right flex-row-center-flex_end">
-								<view wx:if="{{fromShoppingCart}}" class="count one-line-overflow">X{{bean.amount}}</view>
+								<view wx:if="{{order_type==2}}" class="count one-line-overflow">X{{bean.amount}}</view>
 								<view wx:else class="count-chooser flex-row-center-space_between">
 									<view class="fa fa-minus-circle" aria-hidden="true" bindtap="cutNum" data-keys="{{index}}"></view>
 									<input value="{{bean.amount}}" />
@@ -73,7 +73,7 @@
 						</view> -->
 					</view>
 					<view class="foot flex-row-center-space_between">
-						<view class="theme-font2">合计：{{goods_list.length}}件菜品</view>
+						<view class="theme-font2">合计：{{cart_dish_nums}}件菜品</view>
 						<view class="theme-font5">￥{{total_price}}</view>
 					</view>
 				</view>
@@ -81,6 +81,7 @@
 			<input class='display_hide' name="delivery_date" value="{{delivery_date}}"> </input>
 			<input class='display_hide' name="address_id" value="{{address_id}}"> </input>
 			<input class='display_hide' name="delivery_time" value="{{delivery_time}}"></input>
+      <input class='display_hide' name="amount" value="{{amount}}"></input>
 		</scroll-view>
 		<button class="btn-buy theme-button-buy" form-type="submit" disabled="{{addDisabled}}">
 			<view>下单</view>

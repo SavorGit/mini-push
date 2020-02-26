@@ -18,7 +18,8 @@ Page({
     showBuyConfirmPopWindow: false,
     addDisabled: false,
     is_have_default_address:false,
-    address_id:''
+    address_id:'',
+    amount:1,
   },
 
   /**
@@ -33,7 +34,8 @@ Page({
     var merchant_name = options.merchant_name;
     merchant_id    = options.merchant_id;
     that.setData({
-      merchant_name: merchant_name
+      merchant_name: merchant_name,
+      order_type: order_type
     })
     //获取默认地址
     utils.PostRequest(api_url + '/Smallapp4/address/getDefaultAddress', {
@@ -69,7 +71,8 @@ Page({
         var total_price = goods_info.price;
         that.setData({
           goods_list:goods_list,
-          total_price:total_price
+          total_price:total_price,
+          cart_dish_nums: 1
         })
 
       });
@@ -80,15 +83,17 @@ Page({
       cart_list = JSON.parse(cart_list)
       var total_price = 0;
       var goods_price = 0;
+      var cart_dish_nums = 0;
       for(var i=0;i<cart_list.length;i++){
         goods_price = app.accMul(cart_list[i].price,cart_list[i].amount)
         
         total_price = app.plus(total_price,goods_price)
-        console.log(total_price)
+        cart_dish_nums +=cart_list[i].amount
       }
       that.setData({
         goods_list: cart_list,
-        total_price: total_price
+        total_price: total_price,
+        cart_dish_nums: cart_dish_nums
       })
     }else if(order_type==3){
       var order_id = options.order_id;
@@ -101,6 +106,7 @@ Page({
         var total_price = 0;
         var goods_price = 0;
         var goods_list = [];
+        var cart_dish_nums =0;
         for(var i=0;i<order_list.length;i++){
           if (order_list[i].status == 1){
             order_list[i].img_url = order_list[i].img
@@ -108,14 +114,15 @@ Page({
             goods_price = app.accMul(order_list[i].price, order_list[i].amount)
 
             total_price = app.plus(total_price, goods_price)
-
+            cart_dish_nums += parseInt(order_list[i].amount)
           }
           
         }
         console.log(goods_list)
         that.setData({
           goods_list: goods_list,
-          total_price: total_price
+          total_price: total_price,
+          cart_dish_nums: cart_dish_nums
         })
       });
     }
@@ -131,8 +138,14 @@ Page({
     var address_id = e.detail.value.address_id;
     var delivery_date = e.detail.value.delivery_date;
     var delivery_time = e.detail.value.delivery_time;
+    if(order_type==1){
+      var amount = e.detail.value.amount;
+    }else {
+      var amount = 1;
+    }
     if(order_type==2){
-      var cart_list = wx.getStorageSync(cache_key + 'cart_' + merchant_id);
+      var cart_list = that.data.goods_list
+      //var cart_list = wx.getStorageSync(cache_key + 'cart_' + merchant_id);
       var carts = []
       if (cart_list != '') {
         cart_list = JSON.parse(cart_list)
@@ -179,7 +192,7 @@ Page({
     //下单
     utils.PostRequest(api_url + '/Smallapp4/order/addDishorder', {
       address_id:address_id,
-      amount: 1,
+      amount: amount,
       delivery_time: delivery_time,
       goods_id: goods_id,
       openid: openid,
@@ -238,8 +251,13 @@ Page({
     mta.Event.stat('orderSuccess', { 'openid': openid })
   },
   gotoDisheDetail: function (e) {
+    if(order_type==1){
+      var id = goods_id;
+    }else {
+      var id = e.currentTarget.dataset.goods_id;
+    }
     wx.navigateTo({
-      url: '/pages/hotel/dishes/detail?goods_id=' + goods_id,
+      url: '/pages/hotel/dishes/detail?goods_id=' + id,
     })
   },
   /**
@@ -248,6 +266,74 @@ Page({
   selectAddress:function(e){
     wx.navigateTo({
       url: '/pages/mine/address/index?openid='+openid+'&isOrder=1',
+    })
+  },
+  addNum:function(e){
+    var that = this;
+    var keys = e.currentTarget.dataset.keys;
+    var goods_list = that.data.goods_list;
+    var total_price = 0;
+    var goods_price = 0;
+    var cart_dish_nums = 0;
+    //console.log(goods_list)
+    //console.log(keys)
+    for (var i = 0; i < goods_list.length; i++) {
+      if (i == keys) {
+        goods_list[i].amount += 1;
+      }
+      goods_price = app.accMul(goods_list[i].price, goods_list[i].amount)
+      total_price = app.plus(total_price, goods_price)
+      cart_dish_nums += goods_list[i].amount
+    }
+    if(order_type==1){
+      var amount = goods_list[0].amount
+    }else {
+      var amount = 1;
+    }
+    that.setData({
+      goods_list: goods_list,
+      total_price: total_price,
+      cart_dish_nums: cart_dish_nums,
+      amount: amount
+    })
+  },
+  cutNum:function(e){
+    var that = this;
+    var keys = e.currentTarget.dataset.keys;
+    var goods_list = that.data.goods_list;
+
+    var total_price = 0;
+    var goods_price = 0;
+    var cart_dish_nums = 0;
+    //console.log(goods_list)
+    //console.log(keys)
+    var is_empty = 0;
+    for (var i = 0; i < goods_list.length; i++) {
+      if (i == keys) {
+        if(goods_list[i].amount==1){
+          is_empty = 1;
+          break;
+        }
+        goods_list[i].amount -= 1;
+      }
+      goods_price = app.accMul(goods_list[i].price, goods_list[i].amount)
+      total_price = app.plus(total_price, goods_price)
+      cart_dish_nums += goods_list[i].amount
+    }
+    if(is_empty==1){
+      app.showToast('最少选择一个');
+      return false;
+    }
+    if (order_type == 1) {
+      var amount = goods_list[0].amount
+    } else {
+      var amount = 1;
+    }
+    that.setData({
+      goods_list: goods_list,
+      total_price: total_price,
+      cart_dish_nums: cart_dish_nums,
+      amount: amount
     })
   },
   /**

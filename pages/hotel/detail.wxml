@@ -67,7 +67,7 @@
 						<view class="show-new-count theme-rad-panel"></view>
 					</view>
 				</view>
-				<view class="info">已添加{{cart_list.length}}件菜品</view>
+				<view class="info">已添加{{cart_dish_nums}}件菜品，合计{{total_price}}元</view>
 			</view>
 			<view class="right flex-row-center-flex_end" bindtap="gotoOrder">
 				<view class="btn buy theme-button-welcome">下单</view>
