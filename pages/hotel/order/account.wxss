@@ -216,7 +216,7 @@ textarea {
   text-align: center;
   font-size: 28rpx;
   position: absolute;
-  bottom: 0;
+  /* bottom: 0; */
   border-radius: 0;
 }
 

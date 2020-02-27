@@ -14,7 +14,8 @@ Page({
    * 页面的初始数据
    */
   data: {
-    statusBarHeight: getApp().globalData.statusBarHeight,
+    SystemInfo:app.SystemInfo,
+    statusBarHeight: app.globalData.statusBarHeight,
     showBuyConfirmPopWindow: false,
     addDisabled: false,
     is_have_default_address:false,
