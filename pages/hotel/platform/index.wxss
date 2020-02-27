@@ -6,7 +6,7 @@
 
 .row {
   width: 100%;
-  height: 540rpx;
+  height: 770rpx;
   margin-top: 30rpx;
 }
 
@@ -16,7 +16,7 @@
 
 .row>.pic {
   width: 690rpx;
-  height: 460rpx;
+  height: 690rpx;
   border-radius: 10rpx 10rpx 0 0;
 }
 
