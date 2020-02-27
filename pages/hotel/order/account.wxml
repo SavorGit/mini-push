@@ -3,7 +3,7 @@
 <template is="navigationBarForTwoLevel" data='{{statusBarHeight: statusBarHeight,titleText:"确认订单"}}' />
 
 <!-- <view class='container theme-container' style='height: calc(100vh - 46px - {{statusBarHeight}}px);'> -->
-<view class='container theme-container' style='height: {{SystemInfo.safeArea.height - 46}}px;'>
+<view class='container theme-container' style='height: calc(100vh - 46px - {{statusBarHeight + SystemInfo.screenBottomSpace}}px);'>
 	<form bindsubmit="placeOrder">
 		<scroll-view class="scroll-view" scroll-y="true" scroll-with-animation="true">
 			<view class="page-wapper" style='height: calc(100vh - 46px - {{statusBarHeight}}px -10rpx);'>
