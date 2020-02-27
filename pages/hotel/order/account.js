@@ -142,6 +142,7 @@ Page({
       var amount = e.detail.value.amount;
     }else {
       var amount = 1;
+      goods_id = '';
     }
     if(order_type==2){
       var cart_list = that.data.goods_list

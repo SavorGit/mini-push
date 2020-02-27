@@ -56,7 +56,7 @@
 								<view wx:if="{{order_type==2}}" class="count one-line-overflow">X{{bean.amount}}</view>
 								<view wx:else class="count-chooser flex-row-center-space_between">
 									<view class="fa fa-minus-circle" aria-hidden="true" bindtap="cutNum" data-keys="{{index}}"></view>
-									<input value="{{bean.amount}}" />
+									<input value="{{bean.amount}}" disabled="true"/>
 									<view class="fa fa-plus-circle" aria-hidden="true" bindtap="addNum" data-keys="{{index}}"></view>
 								</view>
 							</view>
