@@ -356,6 +356,27 @@ Page({
         address_info: address_info,
         address_id: address_info.address_id
       })
+    }else {
+      //获取默认地址
+      utils.PostRequest(api_url + '/Smallapp4/address/getDefaultAddress', {
+        openid: openid,
+      }, (data, headers, cookies, errMsg, statusCode) => {
+        var address_info = data.result;
+        if (JSON.stringify(address_info) == '{}') {
+          that.setData({
+            is_have_default_address: false,
+            address_id:''
+          })
+
+        } else {
+          that.setData({
+            is_have_default_address: true,
+            address_info: data.result,
+            address_id: data.result.address_id
+          })
+        }
+      });
+
     }
     
   },

@@ -93,6 +93,15 @@ Page({
         address_id: address_id
       }, (data, headers, cookies, errMsg, statusCode) => {
         address_list.splice(keys,1);
+        var address_info = wx.getStorageSync(cache_key + 'select_address_info')
+        
+        if (address_info != ''){
+          address_info = JSON.parse(address_info)
+          if(address_info.address_id == address_id){
+            wx.removeStorageSync(cache_key + 'select_address_info')
+          }
+          
+        }
         that.setData({
           showDeleteConfirmPopWindow:false,
           address_list:address_list
