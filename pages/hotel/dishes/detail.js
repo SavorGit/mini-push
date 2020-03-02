@@ -34,7 +34,7 @@ Page({
    */
   data: {
     statusBarHeight: getApp().globalData.statusBarHeight,
-    is_share:false
+    is_share: false
   },
 
   /**
@@ -42,7 +42,7 @@ Page({
    */
   onLoad: function (options) {
     var that = this;
-    
+
     if (app.globalData.openid && app.globalData.openid != '') {
       //注册用户
       that.setData({
@@ -118,9 +118,9 @@ Page({
       }
     }
 
-    
+
   },
-  getDishInfo:function(goods_id){
+  getDishInfo: function (goods_id) {
     var that = this;
     utils.PostRequest(api_url + '/Smallapp4/dish/detail', {
       goods_id: goods_id,
@@ -151,19 +151,31 @@ Page({
     })
 
   },
-  gotoHotelDetail:function(e){
+  gotoHotelDetail: function (e) {
     var merchant_id = e.currentTarget.dataset.merchant_id;
     wx.navigateTo({
       url: '/pages/hotel/detail?merchant_id=' + merchant_id,
     })
   },
-  gotoPlaceOrder:function(e){
+  gotoPlaceOrder: function (e) {
+    var self = this;
     var goods_id = e.currentTarget.dataset.goods_id;
     var openid = e.currentTarget.dataset.openid;
-    wx.navigateTo({
-      url: '/pages/hotel/order/account?goods_id=' + goods_id + "&openid=" + openid + '&order_type=1&merchant_name=' + this.data.merchant.name + '&merchant_id='+this.data.merchant.merchant_id,
-    })
-    mta.Event.stat('dishDetailPlaceOrder', { 'openid': openid,'goodsid':goods_id })
+    if (self.data.showChangeOrderGoodsPopWindow) {
+      wx.navigateTo({
+        url: '/pages/hotel/order/account?goods_id=' + goods_id + "&openid=" + openid + '&order_type=1&merchant_name=' + this.data.merchant.name + '&merchant_id=' + this.data.merchant.merchant_id,
+        success: function (res) {
+          self.closeChangeOrderGoodsWindow(e);
+        }
+      })
+      mta.Event.stat('dishDetailPlaceOrder', { 'openid': openid, 'goodsid': goods_id });
+    } else {
+      self.openChangeOrderGoodsWindow(e);
+    }
+    // wx.navigateTo({
+    //   url: '/pages/hotel/order/account?goods_id=' + goods_id + "&openid=" + openid + '&order_type=1&merchant_name=' + this.data.merchant.name + '&merchant_id=' + this.data.merchant.merchant_id,
+    // })
+    // mta.Event.stat('dishDetailPlaceOrder', { 'openid': openid, 'goodsid': goods_id })
   },
   /**
    * 生命周期函数--监听页面初次渲染完成
@@ -217,17 +229,9 @@ Page({
     var hotel_name = that.data.merchant.name;
     var goods_id = that.data.goods_info.goods_id;
     //console.log(e)
-    mta.Event.stat('shareDishes', { 'goodsid': goods_id,'openid':that.data.openid })
+    mta.Event.stat('shareDishes', { 'goodsid': goods_id, 'openid': that.data.openid })
     if (e.from === 'button') {
       // 来自页面内转发按钮
-      return {
-        title: hotel_name + '推出了特惠菜品-'+goods_name,
-        path: '/pages/hotel/dishes/detail?goods_id=' + goods_id + "&is_share=1",
-        imageUrl: img_url,
-        success: function (res) {
-        },
-      }
-    }else {
       return {
         title: hotel_name + '推出了特惠菜品-' + goods_name,
         path: '/pages/hotel/dishes/detail?goods_id=' + goods_id + "&is_share=1",
@@ -235,6 +239,30 @@ Page({
         success: function (res) {
         },
       }
-    } 
+    } else {
+      return {
+        title: hotel_name + '推出了特惠菜品-' + goods_name,
+        path: '/pages/hotel/dishes/detail?goods_id=' + goods_id + "&is_share=1",
+        imageUrl: img_url,
+        success: function (res) {
+        },
+      }
+    }
+  },
+
+  // 打开更改订单商品弹窗
+  openChangeOrderGoodsWindow: function (e) {
+    let self = this;
+    self.setData({ showChangeOrderGoodsPopWindow: true, showChangeOrderGoodsWindow: true });
+
+  },
+
+  // 关闭更改订单商品弹窗
+  closeChangeOrderGoodsWindow: function (e) {
+    let self = this;
+    self.setData({ showChangeOrderGoodsWindow: false });
+    setTimeout(function () {
+      self.setData({ showChangeOrderGoodsPopWindow: false });
+    }, 500);
   }
 })
