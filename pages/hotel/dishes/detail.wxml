@@ -3,7 +3,7 @@
 <template is="navigationBarForShare" data='{{statusBarHeight: statusBarHeight,titleText:"菜品详情"}}' wx:if="{{is_share==true}}" />
 <template is="navigationBarForTwoLevel" data='{{statusBarHeight: statusBarHeight,titleText:"菜品详情"}}' wx:if="{{is_share==false}}" />
 
-<view class='container flex-column-center-flex_start theme-container' style='height: calc(100vh - 46px - {{statusBarHeight}}px);'>
+<view class='container theme-container' style='height: calc(100vh - 46px - {{statusBarHeight}}px);'>
 	<scroll-view class='scroll-view' scroll-y="true" scroll-with-animation="true">
 		<view class="goods-info theme-panel">
 			<swiper class="pic-group" indicator-dots="true" autoplay="true">
@@ -36,35 +36,5 @@
 			</view>
 		</view>
 	</scroll-view>
-	<view class="btn-buy flex-column-center-center theme-button-buy" bindtap="gotoPlaceOrder" data-goods_id="{{goods_info.goods_id}}" data-openid="{{openid}}">下单</view>
-</view>
-
-<!-- 更改订单商品窗口 -->
-<view wx:if="{{showChangeOrderGoodsPopWindow}}" class="change-order-goods-window">
-	<view class="mask"></view>
-	<view class="window {{showChangeOrderGoodsWindow?'fadeInDown':'fadeOutUp'}}">
-		<view class="title-bar flex-row-center-space_between">
-			<view class="title theme-font2" bindtap="gotoOrder">选择菜品数量</view>
-			<view class="btn clean flex-row-center-space_around theme-font7" bindtap="clearCart">
-				<view></view>
-				<view class="fa fa-close fa-lg" aria-hidden="true" bindtap="closeChangeOrderGoodsWindow"></view>
-			</view>
-		</view>
-		<scroll-view class="body theme-panel" scroll-y="true" scroll-with-animation="true">
-			<view class="list">
-				<view class="item flex-row-center-flex_start">
-					<view class="name two-line-overflow">{{goods_info.name}}</view>
-					<view class="price theme-font5">
-						<label>￥</label>
-						<text>{{goods_info.price}}</text>
-					</view>
-					<view class="count-chooser flex-row-center-space_between">
-						<view class="fa fa-minus-circle" aria-hidden="true"></view>
-						<input value="1" disabled="true" />
-						<view class="fa fa-plus-circle" aria-hidden="true"></view>
-					</view>
-				</view>
-			</view>
-		</scroll-view>
-	</view>
+	<view class="btn-buy theme-button-buy" bindtap="gotoPlaceOrder" data-goods_id="{{goods_info.goods_id}}" data-openid="{{openid}}">下单</view>
 </view>
