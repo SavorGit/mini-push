@@ -1,0 +1,75 @@
+<!--pages/hotel/cooperation.wxml-->
+<import src="../template/commons" />
+<template is="navigationBarForTwoLevel" data='{{statusBarHeight: statusBarHeight,titleText:"合作餐厅"}}' />
+
+<view class="container flex-column-center-flex_start theme-container" style='height: calc(100vh - 46px - {{statusBarHeight}}px);'>
+	<view class='page_top' wx:if="{{link_type!=2}}">
+		<view class='v-structure flex-row-center-space_between theme-panel-2 font_666666_28'>
+			<picker bindchange="bindCityPickerChange" value="{{cityIndex}}" range="{{cityArray}}">
+				<view class='city_show'>
+					<label class="fa fa-map-o icon"></label>
+					<label>{{cityArray[cityIndex]}}</label>
+				</view>
+			</picker>
+			<picker bindchange="bindAreaPickerChange" value="{{areaIndex}}" range="{{areaArray}}">
+				<view class='area_show'>
+					<label>{{areaArray[areaIndex]}}</label>
+					<label class="fa fa-caret-down icon"></label>
+				</view>
+			</picker>
+			<picker bindchange="bindCuiPickerChange" value="{{cuisineIndex}}" range="{{cuisineArray}}">
+				<view class='cuisine_show'>
+					<label>{{cuisineArray[cuisineIndex]}}</label>
+					<label class="fa fa-caret-down icon"></label>
+				</view>
+			</picker>
+			<picker bindchange="bindPayPickerChange" value="{{perCapitaPayIndex}}" range="{{perCapitaPayArray}}">
+				<view class='perCapitaPay_show'>
+					<label>{{perCapitaPayArray[perCapitaPayIndex]}}</label>
+					<label class="fa fa-caret-down icon"></label>
+				</view>
+			</picker>
+		</view>
+	</view>
+	<scroll-view class='{{is_link==1 ? "page_main_scroll_banner": "page_main_scroll" }}' scroll-y="true" scroll-with-animation="true" bindscrolltolower="loadMore">
+		<view class='page_main'>
+			<view class='row-item flex-column-flex_start-space_between theme-panel' wx:for="{{hotel_list}}" wx:key="key" wx:for-item="bean" wx:for-index="index">
+				<view class="row-top flex-row-flex_start-start">
+					<view class='cover flex-column-center-flex_start' bindtap="previewImage" data-src="{{bean.img_url}}" data-hotelid="{{bean.hotel_id}}">
+						<image mode="aspectFill" src='{{bean.img_url}}' binderror="bindImgErro" data-index="{{index}}"></image>
+						<view class="theme-rad-panel">支持外卖</view>
+					</view>
+					<view class='i-right flex-column-flex_start-space_between'>
+						<view class='ir-top flex-row-flex_start-start'>
+							<view class='irt-left'>
+								<label class='hotel-name'>{{bean.name}}</label>
+								<view class='irtl-bottom theme-font3'>
+									<label>{{bean.food_name}}</label>
+									<label wx:if="{{bean.avg_expense>0}}">￥{{bean.avg_expense}}/人</label>
+									<label wx:else></label>
+								</view>
+							</view>
+							<view class='option' wx:if="{{bean.tel !=''}}">
+								<button class="fa fa-phone-square theme-font5" aria-hidden="true" bindtap='phonecallevent' data-tel="{{bean.tel}}" data-hotelid="{{bean.hotel_id}}"></button>
+							</view>
+						</view>
+						<view class='address'>
+							<label class="fa fa-map-marker icon"></label>
+							<label>{{bean.addr}}</label>
+						</view>
+					</view>
+				</view>
+				<view class="row-bottom">
+					<image mode="aspectFill" src="https://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
+					<image mode="aspectFill" src="https://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
+					<image mode="aspectFill" src="https://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
+					<image mode="aspectFill" src="https://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
+					<image mode="aspectFill" src="https://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
+				</view>
+			</view>
+		</view>
+	</scroll-view>
+	<view class="body-view">
+		<loading hidden="{{hiddens}}" bindchange="loadingChange">加载中...</loading>
+	</view>
+</view>
