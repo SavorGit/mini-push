@@ -28,7 +28,10 @@
 		</view>
 		<view class="goods-detail theme-panel">
 			<view class="title">详情</view>
-			<view class="detail-text">{{goods_info.intro}}</view>
+			<view class="detail-text">
+      <text>
+      {{goods_info.intro}}
+      </text></view>
 			<view class="detail-pic flex-column-center-flex_start">
 				<block wx:for="{{goods_info.detail_imgs}}" wx:key="key" wx:for-item="bean" wx:for-index="index">
 					<image class="pic" mode="widthFix" src="{{bean}}"></image>
@@ -36,7 +39,7 @@
 			</view>
 		</view>
 	</scroll-view>
-	<view class="btn-buy flex-column-center-center theme-button-buy" bindtap="gotoPlaceOrder" data-goods_id="{{goods_info.goods_id}}" data-openid="{{openid}}">下单</view>
+	<view class="btn-buy flex-column-center-center theme-button-buy" bindtap="gotoPlaceOrder" data-goods_id="{{goods_info.goods_id}}" data-openid="{{openid}}" data-amount="{{amount}}">下单</view>
 </view>
 
 <!-- 更改订单商品窗口 -->
@@ -59,9 +62,9 @@
 						<text>{{goods_info.price}}</text>
 					</view>
 					<view class="count-chooser flex-row-center-space_between">
-						<view class="fa fa-minus-circle" aria-hidden="true"></view>
-						<input value="1" disabled="true" />
-						<view class="fa fa-plus-circle" aria-hidden="true"></view>
+						<view class="fa fa-minus-circle" aria-hidden="true" bindtap="cutNum"></view>
+						<input value="{{amount}}" disabled="true" />
+						<view class="fa fa-plus-circle" aria-hidden="true" bindtap="addNum"></view>
 					</view>
 				</view>
 			</view>

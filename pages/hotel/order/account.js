@@ -59,21 +59,21 @@ Page({
 
     if (order_type==1){//单品下单
       goods_id = options.goods_id;
-      console.log('fdsafdasfdasfds')
+      var amount = options.amount;
       //菜品详情
       utils.PostRequest(api_url + '/Smallapp4/dish/detail', {
         goods_id: goods_id,
       }, (data, headers, cookies, errMsg, statusCode) => {
         var goods_info = data.result;
         goods_info.img_url = goods_info.cover_imgs[0];
-        goods_info.amount  = 1;
+        goods_info.amount =  Number(amount);
         var goods_list = [];
         goods_list.push(goods_info)
-        var total_price = goods_info.price;
+        var total_price = app.accMul(goods_info.price,amount);
         that.setData({
           goods_list:goods_list,
           total_price:total_price,
-          cart_dish_nums: 1
+          cart_dish_nums: amount
         })
 
       });
@@ -169,9 +169,14 @@ Page({
         carts.push(tmp)
       }
     }
-    
+    if (order_type == 2 || order_type == 3) {
+      if (carts.length==0){
+        app.showToast('购买商品已下架');
+        return false;
+      }
+    }
     carts = JSON.stringify(carts);
-
+    
 
     if (address_id==''){
       app.showToast('请选择收货地址')
@@ -323,7 +328,7 @@ Page({
       cart_dish_nums += goods_list[i].amount
     }
     if(is_empty==1){
-      app.showToast('最少选择一个');
+      app.showToast('数量不能小于1');
       return false;
     }
     if (order_type == 1) {
@@ -422,5 +427,8 @@ Page({
   closeBuyConfirmPopWindow: function (e) {
     let self = this;
     self.setData({ showBuyConfirmPopWindow: false });
+    wx.navigateBack({
+      delta: 1
+    })
   }
 })

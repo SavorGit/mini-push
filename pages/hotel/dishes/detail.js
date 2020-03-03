@@ -34,7 +34,8 @@ Page({
    */
   data: {
     statusBarHeight: getApp().globalData.statusBarHeight,
-    is_share: false
+    is_share: false,
+    amount: 1,
   },
 
   /**
@@ -161,9 +162,10 @@ Page({
     var self = this;
     var goods_id = e.currentTarget.dataset.goods_id;
     var openid = e.currentTarget.dataset.openid;
+    var amount = e.currentTarget.dataset.amount;
     if (self.data.showChangeOrderGoodsPopWindow) {
       wx.navigateTo({
-        url: '/pages/hotel/order/account?goods_id=' + goods_id + "&openid=" + openid + '&order_type=1&merchant_name=' + this.data.merchant.name + '&merchant_id=' + this.data.merchant.merchant_id,
+        url: '/pages/hotel/order/account?goods_id=' + goods_id + "&openid=" + openid + '&order_type=1&merchant_name=' + this.data.merchant.name + '&merchant_id=' + this.data.merchant.merchant_id+'&amount='+amount,
         success: function (res) {
           self.closeChangeOrderGoodsWindow(e);
         }
@@ -176,6 +178,25 @@ Page({
     //   url: '/pages/hotel/order/account?goods_id=' + goods_id + "&openid=" + openid + '&order_type=1&merchant_name=' + this.data.merchant.name + '&merchant_id=' + this.data.merchant.merchant_id,
     // })
     // mta.Event.stat('dishDetailPlaceOrder', { 'openid': openid, 'goodsid': goods_id })
+  },
+  cutNum:function(e){
+    var amount = this.data.amount;
+    if(amount==1){
+      app.showToast('数量不能小于1');
+      return false;
+    } 
+    amount -=1;
+    this.setData({
+      amount:amount
+    })
+
+  },
+  addNum:function(e){
+    var amount = this.data.amount;
+    amount += 1;
+    this.setData({
+      amount:amount
+    })
   },
   /**
    * 生命周期函数--监听页面初次渲染完成
