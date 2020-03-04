@@ -97,8 +97,8 @@
         "selectedIconPath": "/images/icon2/000000_interact.png"
       },
       {
-        "pagePath": "pages/recommend/hotel",
-        "text": "投屏餐厅",
+        "pagePath": "pages/hotel/cooperation",
+        "text": "合作餐厅",
         "iconPath": "/images/icon2/999999_star.png",
         "selectedIconPath": "/images/icon2/000000_star.png"
       },
