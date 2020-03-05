@@ -290,47 +290,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    var that = this;
-    if (app.globalData.openid && app.globalData.openid != '') {
-      utils.PostRequest(api_url + '/Smallapp4/index/isHaveCallBox', {
-        openid: app.globalData.openid
-      }, (data, headers, cookies, errMsg, statusCode) => {
-        if (data.result.is_have == 1) {
-
-        } else {
-          app.globalData.link_type = 1;
-          that.setData({
-            is_link: 0,
-            box_mac: '',
-            link_type: 1,
-            popRemoteControlWindow: false
-          })
-          box_mac = '';
-        }
-      }, re => { }, { isShowLoading: false });
-    } else {
-      app.openidCallback = openid => {
-        utils.PostRequest(api_url + '/Smallapp4/index/isHaveCallBox', {
-          openid: openid
-        },
-          (data, headers, cookies, errMsg, statusCode) => {
-            if (data.result.is_have == 1) {
-
-            } else {
-              app.globalData.link_type = 1;
-              that.setData({
-                is_link: 0,
-                box_mac: '',
-                link_type: 1,
-                popRemoteControlWindow: false
-              })
-              box_mac = '';
-            }
-          },
-          re => { }, { isShowLoading: false }
-        );
-      }
-    }
+    
   },
 
   /**
@@ -666,14 +626,26 @@ Page({
   },
   gotoMerchant:function(e){
     var merchant_id = e.currentTarget.dataset.merchant_id;
-    wx.navigateTo({
-      url: '/pages/hotel/detail?merchant_id='+merchant_id,
-    })
+    if(merchant_id=='' || typeof(merchant_id)=='undefined'){
+      app.showToast('数据加载中...')
+      return false;
+    }else {
+      wx.navigateTo({
+        url: '/pages/hotel/detail?merchant_id=' + merchant_id,
+      })
+    }
+    
   },
   gotoDishes:function(e){
     var goods_id = e.currentTarget.dataset.goods_id;
-    wx.navigateTo({
-      url: '/pages/hotel/dishes/detail?goods_id='+goods_id,
-    })
+    if(goods_id=='' || typeof(goods_id)=='undefined'){
+      app.showToast('数据加载中...')
+      return false;
+    }else {
+      wx.navigateTo({
+        url: '/pages/hotel/dishes/detail?goods_id=' + goods_id,
+      })
+    }
+    
   }
 })

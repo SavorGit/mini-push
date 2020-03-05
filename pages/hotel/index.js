@@ -583,60 +583,7 @@ Page({
     })
 
   },
-  //遥控呼大码
-  callQrCode: utils.throttle(function (e) {
-    var that = this;
-    openid = e.currentTarget.dataset.openid;
-    box_mac = e.currentTarget.dataset.box_mac;
-    var qrcode_img = e.currentTarget.dataset.qrcode_img;
-    var hotel_info = e.currentTarget.dataset.hotel_info;
-    app.controlCallQrcode(openid, box_mac, qrcode_img, hotel_info, that);
-  }, 3000),//呼大码结束
-  //打开遥控器
-  openControl: function (e) {
-    var that = this;
-    var qrcode_url = api_url + '/Smallapp4/index/getBoxQr?box_mac=' + box_mac + '&type=3';
-    that.setData({
-      popRemoteControlWindow: true,
-      qrcode_img: qrcode_url
-    })
-    mta.Event.stat('openControl', { 'linktype': app.globalData.link_type })
-  },
-  //关闭遥控
-  closeControl: function (e) {
-    var that = this;
-    that.setData({
-      popRemoteControlWindow: false,
-    })
-    mta.Event.stat("closecontrol", {})
-  },
-  //遥控退出投屏
-  exitForscreen: function (e) {
-    var that = this;
-    openid = e.currentTarget.dataset.openid;
-    box_mac = e.currentTarget.dataset.box_mac;
-    var hotel_info = e.currentTarget.dataset.hotel_info;
-    app.controlExitForscreen(openid, box_mac, hotel_info, that);
-  },
-  //遥控调整音量
-  changeVolume: function (e) {
-    var that = this;
-    box_mac = e.currentTarget.dataset.box_mac;
-    openid = e.currentTarget.dataset.openid;
-    var change_type = e.currentTarget.dataset.change_type;
-    var hotel_info = e.currentTarget.dataset.hotel_info;
-    app.controlChangeVolume(openid, box_mac, change_type, hotel_info, that);
-
-  },
-  //遥控切换节目
-  changeProgram: function (e) {
-    var that = this;
-    box_mac = e.currentTarget.dataset.box_mac;
-    openid = e.currentTarget.dataset.openid;
-    var change_type = e.currentTarget.dataset.change_type;
-    var hotel_info = e.currentTarget.dataset.hotel_info;
-    app.controlChangeProgram(openid, box_mac, change_type, hotel_info, that);
-  },
+  
   modalConfirm: function (e) {
     var that = this;
     var hotel_info = e.target.dataset.hotel_info;
@@ -653,47 +600,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    var that = this;
-    if (app.globalData.openid && app.globalData.openid != '') {
-      utils.PostRequest(api_url + '/Smallapp4/index/isHaveCallBox', {
-        openid: app.globalData.openid
-      }, (data, headers, cookies, errMsg, statusCode) => {
-        if (data.result.is_have == 1) {
-
-        } else {
-          app.globalData.link_type = 1;
-          that.setData({
-            is_link: 0,
-            box_mac: '',
-            link_type: 1,
-            popRemoteControlWindow: false
-          })
-          box_mac = '';
-        }
-      }, re => { }, { isShowLoading: false });
-    } else {
-      app.openidCallback = openid => {
-        utils.PostRequest(api_url + '/Smallapp4/index/isHaveCallBox', {
-          openid: openid
-        },
-          (data, headers, cookies, errMsg, statusCode) => {
-            if (data.result.is_have == 1) {
-
-            } else {
-              app.globalData.link_type = 1;
-              that.setData({
-                is_link: 0,
-                box_mac: '',
-                link_type: 1,
-                popRemoteControlWindow: false
-              })
-              box_mac = '';
-            }
-          },
-          re => { }, { isShowLoading: false }
-        );
-      }
-    }
+    
   },
   bindImgErro: function (e) {
     var that = this;
@@ -706,24 +613,19 @@ Page({
       hotel_list: hotel_list
     })
   },
-  tts: function (e) {
-    var that = this;
-    var index_key = e.currentTarget.dataset.index;
-    var hotel_list = that.data.hotel_list;
-    for (var i = 0; i < hotel_list.length; i++) {
-      hotel_list[index_key].img_url = '/images/imgs/default-pic.png';
-    }
-    that.setData({
-      hotel_list: hotel_list
-    })
-  },
+  
   gotoHotelDetail:function(e){
     var that = this;
     var merchant_id = e.currentTarget.dataset.merchant_id;
-    var openid = that.data.openid;
-    wx.navigateTo({
-      url: '/pages/hotel/detail?merchant_id=' + merchant_id+"&openid="+openid,
-    })
+    if(merchant_id=='' || typeof(merchant_id)=='undefined'){
+      app.showToast('数据加载中...')
+      return false;
+    }else {
+      var openid = that.data.openid;
+      wx.navigateTo({
+        url: '/pages/hotel/detail?merchant_id=' + merchant_id + "&openid=" + openid,
+      })
+    }
   },
   /**
    * 生命周期函数--监听页面隐藏
