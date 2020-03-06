@@ -181,6 +181,7 @@ Page({
   },
   cutNum:function(e){
     var amount = this.data.amount;
+    amount = Number(amount);
     if(amount==1){
       app.showToast('数量不能小于1');
       return false;
@@ -193,6 +194,7 @@ Page({
   },
   addNum:function(e){
     var amount = this.data.amount;
+    amount = Number(amount);
     amount += 1;
     this.setData({
       amount:amount
