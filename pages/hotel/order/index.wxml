@@ -39,7 +39,7 @@
 					</view>
 
 
-					<view class="center flex-column-flex_start-center" wx:if="{{bean.goods.length==1}}">
+					<view bindtap="gotoDishDetail" data-goods_id="{{bean.goods_id}}" class="center flex-column-flex_start-center" wx:if="{{bean.goods.length==1}}">
 						<view class="one-line-overflow theme-font1">{{bean.goods_name}}</view>
 					</view>
 					<view class="right flex-column-center-center">
@@ -83,7 +83,7 @@
 					</view>
 
 
-					<view class="center flex-column-flex_start-center" wx:if="{{bean.goods.length==1}}">
+					<view bindtap="gotoDishDetail" data-goods_id="{{bean.goods_id}}" class="center flex-column-flex_start-center" wx:if="{{bean.goods.length==1}}">
 						<view class="one-line-overflow theme-font1">{{bean.goods_name}}</view>
 					</view>
 					<view class="right flex-column-center-center">
@@ -126,7 +126,7 @@
 					</view>
 
 
-					<view class="center flex-column-flex_start-center" wx:if="{{bean.goods.length==1}}">
+					<view bindtap="gotoDishDetail" data-goods_id="{{bean.goods_id}}" class="center flex-column-flex_start-center" wx:if="{{bean.goods.length==1}}">
 						<view class="one-line-overflow theme-font1">{{bean.goods_name}}</view>
 					</view>
 					<view class="right flex-column-center-center">
