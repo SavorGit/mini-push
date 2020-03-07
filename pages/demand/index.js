@@ -588,8 +588,18 @@ Page({
   },
   bannerGo:function(e){
     var linkcontent = e.currentTarget.dataset.linkcontent;
-    wx.navigateTo({
+    /*wx.navigateTo({
       url: linkcontent 
+    })*/
+    wx.switchTab({
+      url: linkcontent 
+    })
+  },
+  gotoDetail:function(e){
+    var goods_id = e.currentTarget.dataset.goods_id;
+    var box_mac  = e.currentTarget.dataset.box_mac;
+    wx.navigateTo({
+      url: '/pages/demand/goods_detail?goods_id='+goods_id+'&box_mac='+box_mac,
     })
   }
 })

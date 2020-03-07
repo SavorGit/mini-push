@@ -118,6 +118,28 @@ Page({
     var order_id = e.currentTarget.dataset.order_id;
     var merchant_id = e.currentTarget.dataset.merchant_id;
     var merchant_name = e.currentTarget.dataset.merchant_name;
+    var keys = e.currentTarget.dataset.keys;
+    var order_status = that.data.order_status;
+    if(order_status==0){//全部订单
+      var order_list = that.data.all_order_list
+      var goods_list = order_list[keys].goods;
+    
+    }else if(order_status ==2){
+      var order_list = that.data.complete_order_list;
+      var goods_list = order_list[keys].goods;
+    }
+    var can_buy = 0;
+    for(var i=0;i<goods_list.length;i++){
+      if(goods_list[i].status==1){
+        can_buy = 1;
+        break;
+      }
+    }
+    if(can_buy==0){
+      app.showToast('已下架,不可购买');
+      return false;
+    }
+
     wx.navigateTo({
       url: '/pages/hotel/order/account?openid=' + openid + '&merchant_id=' + merchant_id + '&merchant_name=' + merchant_name + '&order_type=3&order_id='+order_id,
     })
@@ -127,6 +149,14 @@ Page({
     wx.navigateTo({
       url: '/pages/hotel/order/detail?openid='+openid+'&order_id='+order_id,
     })
+  },
+  gotoMerchant:function(e){
+    var merchant_id = e.currentTarget.dataset.merchant_id;
+    if(merchant_id !='' && typeof(merchant_id)){
+      wx.navigateTo({
+        url: '/pages/hotel/detail?merchant_id='+merchant_id,
+      })
+    }
   },
   /**
    * 生命周期函数--监听页面初次渲染完成

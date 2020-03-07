@@ -47,8 +47,13 @@
 							<label class="num-text">{{bean.share_num}}</label>
 						</block>
 					</button>
+
+          <view  class="launch-tv theme-button-dark" bindtap="gotoDetail" data-goods_id="{{bean.id}}" box_mac="{{box_mac}}">购买</view>
+
 					<view wx:if="{{(bean.is_show==1 && link_type==2)}}" class="launch-tv theme-button-dark" data-index="{{index}}" data-goods_id="{{bean.id}}" data-name="{{bean.name}}" data-filename='{{bean.filename}}' data-vediourl="{{bean.tx_url}}" data-boxmac="{{box_mac}}" data-openid="{{openid}}" data-duration="{{bean.duration}}" data-hotel_info="{{hotel_info}}" data-forscreen_url="{{bean.forscreen_url}}" data-resource_size="{{bean.resource_size}}" data-filename="{{bean.filename}}" data-tx_url="{{bean.tx_url}}" bindtap='boxShow'>电视播放</view>
 					<view wx:else class="launch-tv theme-button-dark" data-index="{{index}}" data-goods_id="{{bean.id}}" data-name="{{bean.name}}" data-filename='{{bean.filename}}' data-vediourl="{{bean.tx_url}}" data-boxmac="{{box_mac}}" data-openid="{{openid}}" data-duration="{{bean.duration}}" data-hotel_info="{{hotel_info}}" data-forscreen_url="{{bean.forscreen_url}}" data-resource_size="{{bean.resource_size}}" data-filename="{{bean.filename}}" data-tx_url="{{bean.tx_url}}" bindtap='boxShow'>电视播放</view>
+
+          
 				</view>
 			</view>
 			<view wx:if='{{bean.cover_imgs.length == 1 && bean.intro == ""}}' class="model-2">
