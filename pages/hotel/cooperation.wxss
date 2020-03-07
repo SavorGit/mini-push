@@ -68,7 +68,7 @@
 
 .page_main>.row-item>.row-top {
   width: 100%;
-  height: 200rpx;
+  /* height: 200rpx; */
 }
 
 .page_main>.row-item>.row-top>.cover,
@@ -98,12 +98,12 @@
 
 .page_main>.row-item>.row-top>.i-right {
   width: calc(100% - 230rpx);
-  height: 100%;
+  /* height: 100%; */
 }
 
 .page_main>.row-item>.row-top>.i-right>.ir-top {
   width: 100%;
-  height: 100%;
+  /* height: 100%; */
 }
 
 .page_main>.row-item>.row-top>.i-right>.ir-top>.irt-left {
