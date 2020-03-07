@@ -307,12 +307,16 @@
   margin-left: 10rpx;
 }
 
-.card .foot>.launch-tv {
+.card .foot>.btn {
   width: 140rpx;
   height: 55rpx;
   line-height: 55rpx;
-  margin-left: calc(100% - 508rpx);
+  margin-left: calc(100% - 668rpx);
   text-align: center;
   font-size: 24rpx;
   border-radius: 5rpx;
+}
+
+.card .foot>.launch-tv {
+  margin-left: 20rpx;
 }
