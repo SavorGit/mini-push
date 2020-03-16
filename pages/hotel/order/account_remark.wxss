@@ -1,0 +1,45 @@
+/* pages/hotel/order/account_remark.wxss */
+/**
+ * 确认订单备注页面
+ */
+
+
+.page {
+  width: 100%;
+}
+
+.input {
+  padding: 5rpx;
+  margin: 20rpx;
+  font-size: 28rpx;
+  border: 3rpx solid #bebebe;
+}
+
+.quick-pnael {
+  width: calc(100% - 40rpx);
+  padding: 20rpx;
+  margin-top: 10rpx;
+}
+
+.quick-pnael>.head {
+  height: 60rpx;
+  font-size: 32rpx;
+}
+
+.quick-pnael>.body {
+  width: calc(100% - 20rpx);
+  padding: 0 10rpx;
+}
+
+.quick-pnael>.body>.tags {
+  width: 100%;
+}
+
+.quick-pnael>.body>.tags>.tag {
+  display: inline-block;
+  padding: 10rpx 20rpx;
+  margin-left: 20rpx;
+  margin-bottom: 10rpx;
+  border: 3rpx solid #bebebe;
+  font-size: 24rpx;
+}

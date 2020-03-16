@@ -1,0 +1,61 @@
+<!--pages/hotel/introduction.wxml-->
+<!--
+ | 餐厅介绍页面
+ |-->
+
+
+<import src="/pages/template/commons" />
+<template is="navigationBarForTwoLevel" data='{{statusBarHeight: statusBarHeight,titleText:"餐厅介绍"}}' />
+
+<scroll-view class='container theme-container' style='height: calc(100vh - 46px - {{statusBarHeight}}px);' scroll-y="true" scroll-with-animation="true">
+	<view class="page">
+		<view class="basic flex-row-center-space_between theme-panel">
+			<image class="pic" mode="aspectFill" src="https://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
+			<view class="right flex-column-flex_start-space_between">
+				<view class="name one-line-overflow">淮扬府（安定门店）</view>
+				<view class="flex-row-center-flex_start">
+					<view class="style theme-font3">淮扬菜</view>
+					<view class="price theme-font3">￥217/人</view>
+				</view>
+				<view class="address three-line-overflow theme-font3">地址： 安定门外大街198号（地坛西门北侧）xxxxxxxxxxxxx</view>
+			</view>
+		</view>
+		<view class="notice panel theme-panel">
+			<view class="title-bar flex-row-center-flex_start">
+				<view class="icon fa fa-bullhorn theme-font5" aria-hidden="true"></view>
+				<view class="title">公告</view>
+			</view>
+			<view class="body">
+				<view class="content">顾客朋友大家好，由于现在疫情严重，有个别小区不让骑手出入的顾客，自己也不能出小区拿外卖的顾客慎重下单，以免给您...</view>
+			</view>
+		</view>
+		<view class="manage panel theme-panel">
+			<view class="title-bar flex-row-center-flex_start">
+				<view class="icon fa fa-clock-o theme-font5" aria-hidden="true"></view>
+				<view class="title">营业时间</view>
+			</view>
+			<view class="body">
+				<view class="content">午餐：11:00-14:00</view>
+				<view class="content">晚餐：18:00-24:00</view>
+			</view>
+		</view>
+		<view class="tel panel theme-panel">
+			<view class="title-bar flex-row-center-flex_start">
+				<view class="icon fa fa-phone theme-font5" aria-hidden="true"></view>
+				<view class="title">订单电话</view>
+			</view>
+			<view class="body">
+				<view class="content">010-12345678</view>
+			</view>
+		</view>
+		<view class="qualifications panel theme-panel">
+			<view class="title-bar flex-row-center-flex_start">
+				<view class="title">商家资质</view>
+			</view>
+			<view class="body flex-row-center-space_between">
+				<image class="pic" mode="aspectFill" src="https://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
+				<image class="pic" mode="aspectFill" src="https://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
+			</view>
+		</view>
+	</view>
+</scroll-view>

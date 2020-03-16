@@ -1,0 +1,29 @@
+<!--pages/hotel/order/account_remark.wxml-->
+<!--
+ | 确认订单备注页面
+ |-->
+
+
+<import src="/pages/template/commons" />
+<template is="navigationBarForTwoLevel" data='{{statusBarHeight: statusBarHeight,titleText:"订单备注"}}' />
+
+<view class='container theme-container' style='height: calc(100vh - 46px - {{statusBarHeight + SystemInfo.screenBottomSpace}}px);'>
+	<view class="page theme-panel">
+		<textarea class="input" placeholder="填写额外对商家和骑手小哥的备注信息"></textarea>
+		<view class="quick-pnael">
+			<view class="head">快捷输入</view>
+			<view class="body">
+				<view class="tags">
+					<view class="tag">不要辣</view>
+					<view class="tag">不辣</view>
+					<view class="tag">辣</view>
+					<view class="tag">不要辣</view>
+					<view class="tag">不要辣不要辣</view>
+					<view class="tag">不要辣</view>
+					<view class="tag">不要辣</view>
+					<view class="tag">不要辣</view>
+				</view>
+			</view>
+		</view>
+	</view>
+</view>
