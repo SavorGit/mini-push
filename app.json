@@ -33,6 +33,7 @@
     "pages/hotel/order/index",
     "pages/hotel/order/detail",
     "pages/hotel/order/account",
+    "pages/hotel/order/account_invoice",
     "pages/hotel/order/account_remark",
     "pages/hotel/platform/index",
     "pages/hotel/cooperation",
