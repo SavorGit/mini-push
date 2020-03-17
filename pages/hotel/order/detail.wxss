@@ -1,4 +1,8 @@
 /* pages/hotel/order/detail.wxss */
+/**
+ * 订单详情页面
+ */
+
 
 .page-wapper {
   width: 100%;
@@ -38,6 +42,45 @@
 .input-panel>.body>.row>.view {
   width: calc(100% - 150rpx);
   font-size: 28rpx;
+}
+
+.status-panel>.head>.status {
+  font-size: 32rpx;
+}
+
+.status-panel>.head>.distance {
+  font-size: 24rpx;
+}
+
+.status-panel>.body {
+  width: 100%;
+  padding: 0;
+}
+
+.status-panel>.body>map {
+  width: 100%;
+  height: 400rpx;
+}
+
+.status-panel>.body>.tip {
+  width: 100%;
+  height: 80rpx;
+  line-height: 80rpx;
+  text-align: center;
+  font-size: 32rpx;
+  font-weight: bold;
+}
+
+.goods-info>.head>.btn {
+  width: 160rpx;
+  height: 50rpx;
+  line-height: 50rpx;
+  text-align: center;
+  border-radius: 5rpx;
+  font-size: 28rpx;
+  padding: 0;
+  margin: 0;
+  border: 0;
 }
 
 .goods-info>.body {

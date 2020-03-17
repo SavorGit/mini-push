@@ -1,4 +1,9 @@
 /* pages/hotel/detail.wxss */
+/**
+ * 餐厅详情页面
+ */
+
+
 @import "/animation.wxss";
 
 .wapper {
@@ -41,18 +46,38 @@
   height: 200rpx;
 }
 
-.shop>.info>.right>.name {
-  font-size: 32rpx;
-  font-weight: bold;
-}
-
 .shop>.info>.right>view {
   width: 100%;
   font-size: 28rpx;
 }
 
-.shop>.info>.right>view:nth-child(2)>view {
+.shop>.info>.right>.name {
+  height: 50rpx;
+  line-height: 50rpx;
+  font-size: 32rpx;
+  font-weight: bold;
+}
+
+.shop>.info>.right>.r-bottom {
+  height: calc(100% - 50rpx);
+}
+
+.shop>.info>.right>.r-bottom>view:first-child>view {
   min-width: 120rpx;
+}
+
+.shop>.info>.right>.r-bottom>.notice {
+  width: 100%;
+}
+
+.shop>.info>.right>.r-bottom>.notice>.icon {
+  width: 50rpx;
+  min-width: unset;
+  font-size: 32rpx;
+}
+
+.shop>.info>.right>.r-bottom>.notice>.content {
+  width: calc(100% - 50rpx);
 }
 
 .shop>.btn-group {
