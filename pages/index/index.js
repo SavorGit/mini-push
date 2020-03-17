@@ -43,7 +43,7 @@ Page({
     link_type: app.globalData.link_type,
     wifiErr: app.globalData.wifiErr,
     wifi_hidden: true,
-    is_view_eval_waiter:false,  //是否显示评价服务员
+    is_view_eval_waiter:0,  //是否显示评价服务员
 
   },
 
