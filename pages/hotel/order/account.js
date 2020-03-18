@@ -1,9 +1,4 @@
 // pages/hotel/order/account.js
-/**
- * 确认订单页面
- */
-
-
 const app = getApp()
 const utils = require('../../../utils/util.js')
 const mta = require('../../../utils/mta_analysis.js')
@@ -11,22 +6,21 @@ var api_url = app.globalData.api_url;
 var cache_key = app.globalData.cache_key;
 var goods_id;
 var openid;
-var order_type;
-var merchant_id;
+var order_type; 
+var merchant_id; 
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    SystemInfo: app.SystemInfo,
+    SystemInfo:app.SystemInfo,
     statusBarHeight: app.globalData.statusBarHeight,
-    tab: 'take-out',
     showBuyConfirmPopWindow: false,
     addDisabled: false,
-    is_have_default_address: false,
-    address_id: '',
-    amount: 1,
+    is_have_default_address:false,
+    address_id:'',
+    amount:1,
   },
 
   /**
@@ -37,9 +31,9 @@ Page({
     let that = this;
     openid = options.openid;
     order_type = options.order_type;  //1单品下单 2购物车下单
-
+    
     var merchant_name = options.merchant_name;
-    merchant_id = options.merchant_id;
+    merchant_id    = options.merchant_id;
     that.setData({
       merchant_name: merchant_name,
       order_type: order_type
@@ -49,12 +43,12 @@ Page({
       openid: openid,
     }, (data, headers, cookies, errMsg, statusCode) => {
       var address_info = data.result;
-      if (JSON.stringify(address_info) == '{}') {
+      if (JSON.stringify(address_info) == '{}'){
         that.setData({
           is_have_default_address: false
         })
-
-      } else {
+        
+      }else {
         that.setData({
           is_have_default_address: true,
           address_info: data.result,
@@ -63,7 +57,7 @@ Page({
       }
     });
 
-    if (order_type == 1) {//单品下单
+    if (order_type==1){//单品下单
       goods_id = options.goods_id;
       var amount = options.amount;
       //菜品详情
@@ -72,50 +66,50 @@ Page({
       }, (data, headers, cookies, errMsg, statusCode) => {
         var goods_info = data.result;
         goods_info.img_url = goods_info.cover_imgs[0];
-        goods_info.amount = Number(amount);
+        goods_info.amount =  Number(amount);
         var goods_list = [];
         goods_list.push(goods_info)
-        var total_price = app.accMul(goods_info.price, amount);
+        var total_price = app.accMul(goods_info.price,amount);
         that.setData({
-          goods_list: goods_list,
-          total_price: total_price,
+          goods_list:goods_list,
+          total_price:total_price,
           cart_dish_nums: amount
         })
 
       });
-
-    } else if (order_type == 2) { //购物车下单
-
+      
+    }else if(order_type==2){ //购物车下单
+      
       var cart_list = wx.getStorageSync(cache_key + 'cart_' + merchant_id);
       cart_list = JSON.parse(cart_list)
       var total_price = 0;
       var goods_price = 0;
       var cart_dish_nums = 0;
-      for (var i = 0; i < cart_list.length; i++) {
-        goods_price = app.accMul(cart_list[i].price, cart_list[i].amount)
-
-        total_price = app.plus(total_price, goods_price)
-        cart_dish_nums += cart_list[i].amount
+      for(var i=0;i<cart_list.length;i++){
+        goods_price = app.accMul(cart_list[i].price,cart_list[i].amount)
+        
+        total_price = app.plus(total_price,goods_price)
+        cart_dish_nums +=cart_list[i].amount
       }
       that.setData({
         goods_list: cart_list,
         total_price: total_price,
         cart_dish_nums: cart_dish_nums
       })
-    } else if (order_type == 3) {
+    }else if(order_type==3){
       var order_id = options.order_id;
       //订单详情
       utils.PostRequest(api_url + '/Smallapp4/order/dishOrderdetail', {
         order_id: order_id,
-        openid: openid,
+        openid:openid,
       }, (data, headers, cookies, errMsg, statusCode) => {
         var order_list = data.result.goods;
         var total_price = 0;
         var goods_price = 0;
         var goods_list = [];
-        var cart_dish_nums = 0;
-        for (var i = 0; i < order_list.length; i++) {
-          if (order_list[i].status == 1) {
+        var cart_dish_nums =0;
+        for(var i=0;i<order_list.length;i++){
+          if (order_list[i].status == 1){
             order_list[i].img_url = order_list[i].img
             goods_list.push(order_list[i]);
             goods_price = app.accMul(order_list[i].price, order_list[i].amount)
@@ -123,7 +117,7 @@ Page({
             total_price = app.plus(total_price, goods_price)
             cart_dish_nums += parseInt(order_list[i].amount)
           }
-
+          
         }
         console.log(goods_list)
         that.setData({
@@ -145,13 +139,13 @@ Page({
     var address_id = e.detail.value.address_id;
     var delivery_date = e.detail.value.delivery_date;
     var delivery_time = e.detail.value.delivery_time;
-    if (order_type == 1) {
+    if(order_type==1){
       var amount = e.detail.value.amount;
-    } else {
+    }else {
       var amount = 1;
       goods_id = '';
     }
-    if (order_type == 2) {
+    if(order_type==2){
       var cart_list = that.data.goods_list
       //var cart_list = wx.getStorageSync(cache_key + 'cart_' + merchant_id);
       var carts = []
@@ -165,7 +159,7 @@ Page({
         }
 
       }
-    } else if (order_type == 3) {
+    }else if(order_type==3){
       var carts = []
       var goods_list = that.data.goods_list
       for (var i = 0; i < goods_list.length; i++) {
@@ -176,15 +170,15 @@ Page({
       }
     }
     if (order_type == 2 || order_type == 3) {
-      if (carts.length == 0) {
+      if (carts.length==0){
         app.showToast('购买商品已下架');
         return false;
       }
     }
     carts = JSON.stringify(carts);
+    
 
-
-    if (address_id == '') {
+    if (address_id==''){
       app.showToast('请选择收货地址')
       return false;
     }
@@ -196,7 +190,7 @@ Page({
       app.showToast('请选择送达时间');
       return false;
     }
-
+    
     var delivery_time = delivery_date + ' ' + delivery_time;
 
     that.setData({
@@ -204,14 +198,14 @@ Page({
     })
     //下单
     utils.PostRequest(api_url + '/Smallapp4/order/addDishorder', {
-      address_id: address_id,
+      address_id:address_id,
       amount: amount,
       delivery_time: delivery_time,
       goods_id: goods_id,
       openid: openid,
       carts: carts
     }, (data, headers, cookies, errMsg, statusCode) => {
-      if (order_type == 2) {
+      if(order_type==2){
         wx.removeStorage({
           key: cache_key + 'cart_' + merchant_id,
           success(res) {
@@ -225,7 +219,7 @@ Page({
 
           }
         })
-      } else {
+      }else {
         that.setData({
           showBuyConfirmPopWindow: true,
           order_msg1: data.result.message1,
@@ -233,8 +227,8 @@ Page({
           addDisabled: false
         })
       }
-
-
+      
+      
     }, function () {
       that.setData({
         addDisabled: false
@@ -264,9 +258,9 @@ Page({
     mta.Event.stat('orderSuccess', { 'openid': openid })
   },
   gotoDisheDetail: function (e) {
-    if (order_type == 1) {
+    if(order_type==1){
       var id = goods_id;
-    } else {
+    }else {
       var id = e.currentTarget.dataset.goods_id;
     }
     wx.navigateTo({
@@ -276,12 +270,12 @@ Page({
   /**
    * 选择收货地址
    */
-  selectAddress: function (e) {
+  selectAddress:function(e){
     wx.navigateTo({
-      url: '/pages/mine/address/index?openid=' + openid + '&isOrder=1',
+      url: '/pages/mine/address/index?openid='+openid+'&isOrder=1',
     })
   },
-  addNum: function (e) {
+  addNum:function(e){
     var that = this;
     var keys = e.currentTarget.dataset.keys;
     var goods_list = that.data.goods_list;
@@ -298,9 +292,9 @@ Page({
       total_price = app.plus(total_price, goods_price)
       cart_dish_nums += goods_list[i].amount
     }
-    if (order_type == 1) {
+    if(order_type==1){
       var amount = goods_list[0].amount
-    } else {
+    }else {
       var amount = 1;
     }
     that.setData({
@@ -310,7 +304,7 @@ Page({
       amount: amount
     })
   },
-  cutNum: function (e) {
+  cutNum:function(e){
     var that = this;
     var keys = e.currentTarget.dataset.keys;
     var goods_list = that.data.goods_list;
@@ -323,7 +317,7 @@ Page({
     var is_empty = 0;
     for (var i = 0; i < goods_list.length; i++) {
       if (i == keys) {
-        if (goods_list[i].amount == 1) {
+        if(goods_list[i].amount==1){
           is_empty = 1;
           break;
         }
@@ -333,7 +327,7 @@ Page({
       total_price = app.plus(total_price, goods_price)
       cart_dish_nums += goods_list[i].amount
     }
-    if (is_empty == 1) {
+    if(is_empty==1){
       app.showToast('数量不能小于1');
       return false;
     }
@@ -362,14 +356,14 @@ Page({
   onShow: function () {
     var that = this;
     var address_info = wx.getStorageSync(cache_key + 'select_address_info')
-    if (address_info != '') {
+    if(address_info!=''){
       address_info = JSON.parse(address_info)
       that.setData({
         is_have_default_address: true,
         address_info: address_info,
         address_id: address_info.address_id
       })
-    } else {
+    }else {
       //获取默认地址
       utils.PostRequest(api_url + '/Smallapp4/address/getDefaultAddress', {
         openid: openid,
@@ -378,7 +372,7 @@ Page({
         if (JSON.stringify(address_info) == '{}') {
           that.setData({
             is_have_default_address: false,
-            address_id: ''
+            address_id:''
           })
 
         } else {
@@ -391,14 +385,14 @@ Page({
       });
 
     }
-
+    
   },
 
   /**
    * 生命周期函数--监听页面隐藏
    */
   onHide: function () {
-
+    
   },
 
   /**
@@ -436,13 +430,5 @@ Page({
     wx.navigateBack({
       delta: 1
     })
-  },
-
-
-  // 选项卡选择
-  showTab: function (e) {
-    let self = this;
-    let tabType = e.currentTarget.dataset.tab;
-    self.setData({ tab: tabType });
   }
 })

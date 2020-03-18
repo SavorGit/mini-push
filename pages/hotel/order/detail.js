@@ -1,9 +1,4 @@
 // pages/hotel/order/detail.js
-/**
- * 订单详情页面
- */
-
-
 const app = getApp()
 const utils = require('../../../utils/util.js')
 const mta = require('../../../utils/mta_analysis.js')
@@ -17,37 +12,6 @@ Page({
    */
   data: {
     statusBarHeight: getApp().globalData.statusBarHeight,
-    markers: [{
-      iconPath: "/images/imgs/default-user.png",
-      id: 0,
-      latitude: 23.099994,
-      longitude: 113.324520,
-      width: 50,
-      height: 50
-    }],
-    polyline: [{
-      points: [{
-        longitude: 113.3245211,
-        latitude: 23.10229
-      }, {
-        longitude: 113.324520,
-        latitude: 23.21229
-      }],
-      color: "#FF0000DD",
-      width: 2,
-      dottedLine: true
-    }],
-    controls: [{
-      id: 1,
-      iconPath: '/images/imgs/default-pic.png',
-      position: {
-        left: 0,
-        top: 300 - 50,
-        width: 50,
-        height: 50
-      },
-      clickable: true
-    }]
   },
 
   /**
@@ -60,17 +24,17 @@ Page({
     //订单详情
     utils.PostRequest(api_url + '/Smallapp4/order/dishOrderdetail', {
       openid: openid,
-      order_id: order_id,
+      order_id:order_id,
     }, (data, headers, cookies, errMsg, statusCode) => {
       that.setData({
-        order_info: data.result
+        order_info:data.result
       })
     });
   },
-  gotoDeshes: function (e) {
+  gotoDeshes:function(e){
     console.log(e)
     var goods_id = e.currentTarget.dataset.goods_id;
-    if (goods_id != '' && typeof (goods_id) != 'undefined') {
+    if(goods_id !='' && typeof(goods_id)!='undefined'){
       wx.navigateTo({
         url: '/pages/hotel/dishes/detail?goods_id=' + goods_id,
       })

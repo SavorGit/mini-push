@@ -1,9 +1,4 @@
 <!--pages/hotel/detail.wxml-->
-<!--
- | 餐厅详情页面
- |-->
-
-
 <import src="/pages/template/commons" />
 <template is="navigationBarForShare" data='{{statusBarHeight: statusBarHeight,titleText:"餐厅详情"}}' wx:if="{{is_share==true}}" />
 <template is="navigationBarForTwoLevel" data='{{statusBarHeight: statusBarHeight,titleText:"餐厅详情"}}' wx:if="{{is_share==false}}" />
@@ -19,22 +14,11 @@
 					</view>
 					<view class="right flex-column-flex_start-space_between">
 						<view class="name one-line-overflow">{{hotel_info.name}}</view>
-						<!-- 无公告 -->
-						<view class="r-bottom flex-column-flex_start-space_around">
-							<view class="flex-row-center-flex_start theme-font3">
-								<view class="style">{{hotel_info.food_style}}</view>
-								<view class="price">￥{{hotel_info.avg_expense}}/人</view>
-							</view>
-							<view class="address two-line-overflow">地址：{{hotel_info.addr}}</view>
+						<view class="flex-row-center-flex_start theme-font3">
+							<view class="style">{{hotel_info.food_style}}</view>
+							<view class="price">￥{{hotel_info.avg_expense}}/人</view>
 						</view>
-						<!-- 有公告 
-						<view class="r-bottom flex-column-flex_start-flex_end">
-							<view class="notice flex-row-flex_start-flex_start">
-								<view class="icon fa fa-bullhorn theme-font5" aria-hidden="true"></view>
-								<view class="content four-line-overflow">顾客朋友大家好，由于现在疫情严重，有个别小区不让骑手出入的顾客，自己也不能出小区拿外卖的顾客慎重下单，以免给您</view>
-							</view>
-						</view>
-						-->
+						<view class="address two-line-overflow">地址：{{hotel_info.addr}}</view>
 					</view>
 				</view>
 				<view class="btn-group flex-row-center-center">
@@ -47,7 +31,7 @@
 						<view class="fa fa-phone fa-lg" aria-hidden="true"></view>
 						<view>电话订餐</view>
 					</button>
-					<button wx:else class="btn flex-row-center-center" bindtap='phonecallevent' data-tel="{{hotel_info.mobile}}">
+          <button wx:else class="btn flex-row-center-center" bindtap='phonecallevent' data-tel="{{hotel_info.mobile}}">
 						<view class="fa fa-phone fa-lg" aria-hidden="true"></view>
 						<view>电话订餐</view>
 					</button>

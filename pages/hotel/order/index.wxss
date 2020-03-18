@@ -1,9 +1,4 @@
 /* pages/hotel/order/index.wxss */
-/**
- * 订单列表页面
- */
-
-
 .tab-bar {
   width: calc(100% - 80rpx);
   height: 88rpx;
