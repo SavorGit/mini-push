@@ -35,6 +35,8 @@
 .modal-btn-wrapper {
   display: flex;
   flex-direction: row;
+  align-items: center;
+  justify-content: center;
   height: 100rpx;
   line-height: 100rpx;
   font-weight: bold;
@@ -42,10 +44,10 @@
 }
 
 .modal-btn-wrapper button {
-  width: 50%;
+  width: calc(50% - 5rpx);
   height: 100rpx;
   line-height: 100rpx;
-  margin: unset;
+  margin: 0 5rpx;
   padding: unset;
   border: unset;
   border-radius: 40rpx;
