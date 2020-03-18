@@ -25,5 +25,8 @@
 				</view>
 			</view>
 		</view>
+		<view class="bottom">
+			<view class="btn save theme-button-buy">保存</view>
+		</view>
 	</view>
 </view>
