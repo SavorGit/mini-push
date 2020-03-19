@@ -4,7 +4,7 @@
  * 自定义modal浮层
  * 使用方法：
  *   
-<modal show="{{showModal}}" width="98%" height='60%'  border-radius="0rpx" title-text='Title' title-color="#f6f3ee" title-background-color="unset" title-border-radius="0rpx" confirm-text='确定' confirm-color="#f6f3ee" confirm-background-color="unset" confirm-border-radius="0rpx" cancel-text='取消' cancel-color='rgba(7,17,27,0.6)' cancel-background-color="unset" cancel-border-radius="0rpx" bindclickMask='modalClickMask' bindcancel="modalCancel" bindconfirm='modalConfirm'>
+<modal show="{{showModal}}" width="98%" height='60%'  border-radius="0rpx" title-text='Title' title-color="#f6f3ee" title-background-color="unset" title-border-radius="0rpx" buttonWapperPadding='0' confirm-text='确定' confirm-color="#f6f3ee" confirm-background-color="unset" confirm-border-radius="0rpx" cancel-text='取消' cancel-color='rgba(7,17,27,0.6)' cancel-background-color="unset" cancel-border-radius="0rpx" bindclickMask='modalClickMask' bindcancel="modalCancel" bindconfirm='modalConfirm'>
   <view>你自己需要展示的内容</view>
 </modal>
  
@@ -18,6 +18,7 @@
  titleColor：                modal的标题文本颜色
  titleBackgroundColor：      modal的标题背景颜色
  titleBorderRadius：         modal的标题圆角
+ buttonWapperPadding:        modal的底部按钮组内边距
  confirmText：               modal的确定按钮文本
  confirmColor：              modal的确定按钮文本颜色
  confirmBackgroundColor：    modal的确定按钮背景颜色
@@ -92,6 +93,10 @@ Component({
     confirmText: {
       type: String,
       value: '确定'
+    },
+    buttonWapperPadding: {
+      type: String,
+      value: '0'
     },
     confirmColor: {
       type: String,

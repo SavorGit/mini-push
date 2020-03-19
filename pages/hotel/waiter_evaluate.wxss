@@ -79,7 +79,8 @@
   border: 1px solid #eb6877;
 }
 
-.waiter-evaluate-comment-panel>textarea {
+.waiter-evaluate-comment-panel>textarea,
+.waiter-evaluate-comment-panel>.textarea {
   width: 242px;
   height: 142px;
   padding: 3px;

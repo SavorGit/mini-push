@@ -49,7 +49,8 @@
 			<view class="tag">好</view>
       -->
 		</view>
-		<textarea>您的建议是我们前进的动力...（300字以内）</textarea>
+		<view class="textarea">您的建议是我们前进的动力...（300字以内）</view>
+		<!-- <textarea>您的建议是我们前进的动力...（300字以内）</textarea> -->
 	</view>
 
 	<view class="waiter-evaluate-btn-panel flex-column-center-flex_start theme-panel">
