@@ -34,9 +34,12 @@
 		</view>
 	</view>
 
-	<!-- 服务员评价入口 -->
+	<!-- 服务员评价入口 
 	<view class="hotel-waiter-evaluate-panel theme-rad-panel" wx:if="{{is_view_eval_waiter==1}}">
 		<view class="btn-waiter-evaluate flex-row-center-center" bindtap="gotoPageHotelWaiterEvaluate" data-openid="{{openid}}" data-box_id="{{box_id}}">评价服务员</view>
+	</view>-->
+	<view class="hotel-waiter-evaluate-panel theme-rad-panel" wx:if="{{is_view_eval_waiter==1}}">
+		<image class="btn-waiter-evaluate flex-row-center-center" mode="aspectFill" src="https://oss.littlehotspot.com/Html5/script/mini-push/pages/index/index/waiter_enter.jpg" data-openid="{{openid}}" data-box_id="{{box_id}}" bindtap="gotoPageHotelWaiterEvaluate"></image>
 	</view>
 
 	<!-- 中部横幅图面板 -->
