@@ -20,14 +20,30 @@
 				</view>
 				<view class="body flex-column-center-flex_start">
 					<view class="row">
-						<input class="input" placeholder="企业名称"></input>
+						<view class="tab-bar flex-row-center-center">
+							<view class="tab company{{tab=='company'?' selected':''}}" data-tab="company" bindtap="showTab">企业发票</view>
+							<view class="tab people{{tab=='people'?' selected':''}}" data-tab="people" bindtap="showTab">个人发票</view>
+						</view>
 					</view>
-					<view class="row">
-						<input class="input" placeholder="企业税号"></input>
-					</view>
-					<view class="row">
-						<view class="show theme-font3">发票金额：2345元</view>
-					</view>
+					<block wx:if="{{tab=='company'}}">
+						<view class="row">
+							<input class="input" placeholder="企业名称"></input>
+						</view>
+						<view class="row">
+							<input class="input" placeholder="企业税号"></input>
+						</view>
+						<view class="row">
+							<view class="show theme-font3">发票金额：2345元</view>
+						</view>
+					</block>
+					<block wx:if="{{tab=='people'}}">
+						<view class="row">
+							<input class="input" placeholder="姓名"></input>
+						</view>
+						<view class="row">
+							<view class="show theme-font3">发票金额：2345元</view>
+						</view>
+					</block>
 				</view>
 			</view>
 		</view>

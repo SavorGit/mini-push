@@ -68,6 +68,34 @@
   font-size: 28rpx;
 }
 
+.panel>.body>.row>.tab-bar {
+  width: 100%;
+  height: 60rpx;
+}
+
+.panel>.body>.row>.tab-bar>.tab {
+  width: 160rpx;
+  height: 50rpx;
+  line-height: 50rpx;
+  text-align: center;
+  font-size: 32rpx;
+  color: #EB6877;
+  border: 3rpx solid #EB6877;
+}
+
+.panel>.body>.row>.tab-bar>.company {
+  border-radius: 10rpx 0 0 10rpx;
+}
+
+.panel>.body>.row>.tab-bar>.people {
+  border-radius: 0 10rpx 10rpx 0;
+}
+
+.panel>.body>.row>.tab-bar>.selected {
+  color: #fff;
+  background-color: #eb6877;
+}
+
 .bottom,
 .bottom>.btn {
   width: 100%;

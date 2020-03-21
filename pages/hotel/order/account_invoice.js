@@ -12,6 +12,7 @@ Page({
   data: {
     SystemInfo: getApp().SystemInfo,
     statusBarHeight: getApp().globalData.statusBarHeight,
+    tab: 'company'
   },
 
   /**
@@ -68,5 +69,12 @@ Page({
    */
   onShareAppMessage: function () {
 
+  },
+
+  // 选择选项卡
+  showTab: function (e) {
+    let self = this;
+    let tab = e.currentTarget.dataset.tab;
+    self.setData({ tab: tab });
   }
 })
