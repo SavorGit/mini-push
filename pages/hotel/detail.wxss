@@ -58,6 +58,15 @@
   font-weight: bold;
 }
 
+.shop>.info>.right>.name>view {
+  width: calc(100% - 50rpx);
+}
+
+.shop>.info>.right>.name>.fa {
+  width: 50rpx;
+  text-align: right;
+}
+
 .shop>.info>.right>.r-bottom {
   height: calc(100% - 50rpx);
 }
