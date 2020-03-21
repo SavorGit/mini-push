@@ -2,8 +2,13 @@
 /**
  * 餐厅介绍页面
  */
-
-
+const app = getApp()
+const utils = require('../../utils/util.js')
+const mta = require('../../utils/mta_analysis.js')
+var api_url = app.globalData.api_url;
+var cache_key = app.globalData.cache_key;
+var merchant_id;
+var openid;
 Page({
 
   /**
@@ -18,7 +23,13 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    open_id = options.openid;
+    merchant_id = options.merchant_id;
+    utils.PostRequest(api_url + '/Smallapp4/merchant/info', {
+      merchant_id: merchant_id,
+    }, (data, headers, cookies, errMsg, statusCode) => that.setData({
+      hotel_info: data.result
+    }));
   },
 
   /**

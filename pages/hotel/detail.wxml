@@ -19,22 +19,23 @@
 					</view>
 					<view class="right flex-column-flex_start-space_between">
 						<view class="name one-line-overflow">{{hotel_info.name}}</view>
-						<!-- 无公告 -->
-						<view class="r-bottom flex-column-flex_start-space_around">
+						<!-- 有公告 -->
+						<view class="r-bottom flex-column-flex_start-flex_end" wx:if="{{hotel_info.notice !=''}}" >
+							<view class="notice flex-row-flex_start-flex_start">
+								<view class="icon fa fa-bullhorn theme-font5" aria-hidden="true"></view>
+								<view class="content four-line-overflow">{{hotel_info.notice}}</view>
+							</view>
+						</view>
+            <!-- 无公告 -->
+						<view class="r-bottom flex-column-flex_start-space_around" wx:else>
 							<view class="flex-row-center-flex_start theme-font3">
 								<view class="style">{{hotel_info.food_style}}</view>
 								<view class="price">￥{{hotel_info.avg_expense}}/人</view>
 							</view>
 							<view class="address two-line-overflow">地址：{{hotel_info.addr}}</view>
 						</view>
-						<!-- 有公告 
-						<view class="r-bottom flex-column-flex_start-flex_end">
-							<view class="notice flex-row-flex_start-flex_start">
-								<view class="icon fa fa-bullhorn theme-font5" aria-hidden="true"></view>
-								<view class="content four-line-overflow">顾客朋友大家好，由于现在疫情严重，有个别小区不让骑手出入的顾客，自己也不能出小区拿外卖的顾客慎重下单，以免给您</view>
-							</view>
-						</view>
-						-->
+						
+						
 					</view>
 				</view>
 				<view class="btn-group flex-row-center-center">
