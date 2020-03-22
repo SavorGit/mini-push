@@ -44,6 +44,7 @@ Page({
       merchant_name: merchant_name,
       order_type: order_type
     })
+    wx.removeStorageSync(cache_key + 'order:remark')
     //获取默认地址
     utils.PostRequest(api_url + '/Smallapp4/address/getDefaultAddress', {
       openid: openid,
@@ -349,6 +350,16 @@ Page({
       amount: amount
     })
   },
+  gotoRemark:function(e){
+    wx.navigateTo({
+      url: '/pages/hotel/order/account_remark',
+    })
+  },
+  gotoInvoice:function(e){
+    wx.navigateTo({
+      url: '/pages/hotel/order/account_invoice',
+    })
+  },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
@@ -391,7 +402,22 @@ Page({
       });
 
     }
-
+    //获取订单备注
+    var remark_str = wx.getStorageSync(cache_key + 'order:remark')
+    if(remark_str!=''){
+      that.setData({
+        remark_str: remark_str
+      })
+    }
+    
+    //获取发票信息
+    var bill_info = wx.getStorageSync(cache_key + 'order:bill');
+    if(bill_info!=''){
+      bill_info = JSON.parse(bill_info);
+      that.setData({
+        bill_info:bill_info
+      })
+    }
   },
 
   /**
