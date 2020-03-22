@@ -221,18 +221,7 @@ Page({
       url: '/pages/hotel/dishes/detail?goods_id=' + goods_id,
     })
   },
-  previewImage: function (e) {
-    var current = e.currentTarget.dataset.src;
-    var urls = [];
-    for (var i = 0; i < 1; i++) {
-      urls[i] = current;
-    }
-    wx.previewImage({
-      current: urls[0], // 当前显示图片的http链接
-      urls: urls // 需要预览的图片http链接列表
-    })
-
-  },
+  
   /**
    * 第三方平台
    */
@@ -430,6 +419,15 @@ Page({
     }else {
       app.showToast('购物车没有商品');
     }
+  },
+  /**
+   * 商家介绍页面
+   */
+  gotoMerDetail:function(e){
+    var openid = e.currentTarget.dataset.openid;
+    wx.navigateTo({
+      url: '/pages/hotel/introduction?merchant_id='+merchant_id+'&openid'+openid,
+    })
   },
   /**
    * 生命周期函数--监听页面初次渲染完成
