@@ -27,6 +27,9 @@ Page({
     is_have_default_address: false,
     address_id: '',
     amount: 1,
+    delivery_fee:0,
+    delivery_platform:0,
+    total_price:0,
   },
 
   /**
@@ -54,86 +57,124 @@ Page({
         that.setData({
           is_have_default_address: false
         })
-
+        var address_id = '';
       } else {
+        var address_id = data.result.address_id
         that.setData({
           is_have_default_address: true,
           address_info: data.result,
           address_id: data.result.address_id
         })
       }
-    });
+      if (order_type == 1) {//单品下单
+        goods_id = options.goods_id;
+        var amount = options.amount;
+        //菜品详情
+        utils.PostRequest(api_url + '/Smallapp4/dish/detail', {
+          goods_id: goods_id,
+        }, (data, headers, cookies, errMsg, statusCode) => {
+          var goods_info = data.result;
+          goods_info.img_url = goods_info.cover_imgs[0];
+          goods_info.amount = Number(amount);
+          var goods_list = [];
+          goods_list.push(goods_info)
+          var total_price = app.accMul(goods_info.price, amount);
+          that.setData({
+            goods_list: goods_list,
+            total_price: total_price,
+            cart_dish_nums: amount
+          })
+          //获取订单准备数据
+          that.getPrepareData(merchant_id, total_price, address_id);
+        });
 
-    if (order_type == 1) {//单品下单
-      goods_id = options.goods_id;
-      var amount = options.amount;
-      //菜品详情
-      utils.PostRequest(api_url + '/Smallapp4/dish/detail', {
-        goods_id: goods_id,
-      }, (data, headers, cookies, errMsg, statusCode) => {
-        var goods_info = data.result;
-        goods_info.img_url = goods_info.cover_imgs[0];
-        goods_info.amount = Number(amount);
-        var goods_list = [];
-        goods_list.push(goods_info)
-        var total_price = app.accMul(goods_info.price, amount);
-        that.setData({
-          goods_list: goods_list,
-          total_price: total_price,
-          cart_dish_nums: amount
-        })
+      } else if (order_type == 2) { //购物车下单
 
-      });
-
-    } else if (order_type == 2) { //购物车下单
-
-      var cart_list = wx.getStorageSync(cache_key + 'cart_' + merchant_id);
-      cart_list = JSON.parse(cart_list)
-      var total_price = 0;
-      var goods_price = 0;
-      var cart_dish_nums = 0;
-      for (var i = 0; i < cart_list.length; i++) {
-        goods_price = app.accMul(cart_list[i].price, cart_list[i].amount)
-
-        total_price = app.plus(total_price, goods_price)
-        cart_dish_nums += cart_list[i].amount
-      }
-      that.setData({
-        goods_list: cart_list,
-        total_price: total_price,
-        cart_dish_nums: cart_dish_nums
-      })
-    } else if (order_type == 3) {
-      var order_id = options.order_id;
-      //订单详情
-      utils.PostRequest(api_url + '/Smallapp4/order/dishOrderdetail', {
-        order_id: order_id,
-        openid: openid,
-      }, (data, headers, cookies, errMsg, statusCode) => {
-        var order_list = data.result.goods;
+        var cart_list = wx.getStorageSync(cache_key + 'cart_' + merchant_id);
+        cart_list = JSON.parse(cart_list)
         var total_price = 0;
         var goods_price = 0;
-        var goods_list = [];
         var cart_dish_nums = 0;
-        for (var i = 0; i < order_list.length; i++) {
-          if (order_list[i].status == 1) {
-            order_list[i].img_url = order_list[i].img
-            goods_list.push(order_list[i]);
-            goods_price = app.accMul(order_list[i].price, order_list[i].amount)
+        for (var i = 0; i < cart_list.length; i++) {
+          goods_price = app.accMul(cart_list[i].price, cart_list[i].amount)
 
-            total_price = app.plus(total_price, goods_price)
-            cart_dish_nums += parseInt(order_list[i].amount)
-          }
-
+          total_price = app.plus(total_price, goods_price)
+          cart_dish_nums += cart_list[i].amount
         }
-        console.log(goods_list)
         that.setData({
-          goods_list: goods_list,
+          goods_list: cart_list,
           total_price: total_price,
           cart_dish_nums: cart_dish_nums
         })
-      });
-    }
+
+        //获取订单准备数据
+        that.getPrepareData(merchant_id, total_price, address_id);
+      } else if (order_type == 3) {
+        var order_id = options.order_id;
+        //订单详情
+        utils.PostRequest(api_url + '/Smallapp4/order/dishOrderdetail', {
+          order_id: order_id,
+          openid: openid,
+        }, (data, headers, cookies, errMsg, statusCode) => {
+          var order_list = data.result.goods;
+          var total_price = 0;
+          var goods_price = 0;
+          var goods_list = [];
+          var cart_dish_nums = 0;
+          for (var i = 0; i < order_list.length; i++) {
+            if (order_list[i].status == 1) {
+              order_list[i].img_url = order_list[i].img
+              goods_list.push(order_list[i]);
+              goods_price = app.accMul(order_list[i].price, order_list[i].amount)
+
+              total_price = app.plus(total_price, goods_price)
+              cart_dish_nums += parseInt(order_list[i].amount)
+            }
+
+          }
+          that.setData({
+            goods_list: goods_list,
+            total_price: total_price,
+            cart_dish_nums: cart_dish_nums
+          })
+
+          //获取订单准备数据
+          that.getPrepareData(merchant_id, total_price, address_id);
+        });
+      }
+    });
+
+  },
+  getPrepareData: function (merchant_id, total_price, address_id){
+    var that = this;
+    //获取下单预备数据(包括配送类型和支付方式)
+    utils.PostRequest(api_url + '/smallapp43/order/getPrepareData', {
+      merchant_id: merchant_id,
+    }, (data, headers, cookies, errMsg, statusCode) => {
+      var delivery_types = data.result.delivery_types;
+      var delivery_platform = data.result.delivery_platform
+      var pay_types = data.result.pay_types
+      var tableware = data.result.tableware
+
+      if (delivery_platform == 1 && address_id!='') {//获取配送费
+        utils.PostRequest(api_url + '/smallapp43/order/getDeliveryfee', {
+          address_id: address_id,
+          merchant_id: merchant_id,
+          money: total_price,
+          openid: openid
+        }, (data, headers, cookies, errMsg, statusCode) => {
+          that.setData({
+            delivery_fee: data.result.fee
+          })
+        });
+      }
+      that.setData({
+        delivery_types: delivery_types,
+        delivery_platform: delivery_platform,
+        pay_types: pay_types,
+        tableware: tableware
+      })
+    });
   },
   /**
    * 下单
@@ -380,6 +421,22 @@ Page({
         address_info: address_info,
         address_id: address_info.address_id
       })
+      var address_id = address_info.address_id;
+      var delivery_platform = that.data.delivery_platform;
+      var total_price = that.data.total_price;
+      if (delivery_platform == 0 && address_id > 0 && total_price>0){
+        utils.PostRequest(api_url + '/smallapp43/order/getDeliveryfee', {
+          address_id: address_id,
+          merchant_id: merchant_id,
+          money: total_price,
+          openid: openid
+        }, (data, headers, cookies, errMsg, statusCode) => {
+          that.setData({
+            delivery_fee: data.result.fee
+          })
+        });
+      }
+      
     } else {
       //获取默认地址
       utils.PostRequest(api_url + '/Smallapp4/address/getDefaultAddress', {

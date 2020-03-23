@@ -26,7 +26,7 @@ Page({
     var that = this;
     openid = options.openid;
     merchant_id = options.merchant_id;
-    utils.PostRequest(api_url + '/Smallapp4/merchant/info', {
+    utils.PostRequest(api_url + '/Smallapp43/merchant/info', {
       merchant_id: merchant_id,
     }, (data, headers, cookies, errMsg, statusCode) => that.setData({
       hotel_info: data.result

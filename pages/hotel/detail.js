@@ -140,7 +140,7 @@ Page({
   },
   getMerchantInfo: function (merchant_id) {
     var that = this;
-    utils.PostRequest(api_url + '/Smallapp4/merchant/info', {
+    utils.PostRequest(api_url + '/smallapp43/merchant/info', {
       merchant_id: merchant_id,
     }, (data, headers, cookies, errMsg, statusCode) => that.setData({
       hotel_info: data.result

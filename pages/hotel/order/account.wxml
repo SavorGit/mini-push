@@ -12,7 +12,7 @@
 	<form bindsubmit="placeOrder">
 		<scroll-view class="scroll-view" scroll-y="true" scroll-with-animation="true">
 			<view class="page-wapper" style='height: calc(100vh - 46px - {{statusBarHeight}}px -10rpx);'>
-				<view class="tab-bar flex-row-center-center theme-panel">
+				<view class="tab-bar flex-row-center-center theme-panel" wx:if="{{delivery_types.length>1}}">
 					<view class="tab take-out{{tab == 'take-out' ? ' selected' : ''}}" data-tab="take-out" bindtap="showTab">外卖配送</view>
 					<view class="tab hotel{{tab == 'hotel' ? ' selected' : ''}}" data-tab="hotel" bindtap="showTab">到店自提</view>
 				</view>
@@ -117,10 +117,10 @@
 						<view class="theme-font5">￥{{total_price}}</view>
 					</view>
 				</view>
-				<view class="delivery input-panel theme-panel">
+				<view class="delivery input-panel theme-panel" wx:if='{{delivery_fee>0}}'>
 					<view class="head flex-row-center-space_between" bindtap="selectAddress">
 						<view>配送费用</view>
-						<view class="fee theme-font5">￥30</view>
+						<view class="fee theme-font5">￥{{delivery_fee}}</view>
 					</view>
 					<!--
 					<view class="body flex-column-center-space_between">
