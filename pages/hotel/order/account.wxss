@@ -182,11 +182,26 @@ textarea {
 .arrive-time>.body>view>view:last-child {
   width: 454rpx;
   height: 54rpx;
-  border: 3rpx solid #bebebe;
+  /* border: 3rpx solid #bebebe; */
   font-size: 24rpx;
 }
 
-.arrive-time>.body>view>view>picker {
+/* 
+.arrive-time>.body>view {
+  width: calc(100% - 60rpx);
+  padding: 0 30rpx;
+}
+
+.arrive-time>.body>view>view:last-child>view:first-child {
+  width: calc(100% - 50rpx);
+}
+
+.arrive-time>.body>view>view:last-child>view>picker {
+  width: 200rpx;
+  border: 0;
+} */
+
+/* .arrive-time>.body>view>view>picker {
   width: calc(50% - 50rpx);
   border: 0;
 }
@@ -194,7 +209,7 @@ textarea {
 .arrive-time>.body>view>view>.fa-calendar {
   margin-right: 20rpx;
   font-size: 28rpx;
-}
+} */
 
 .goods-info {
   /* height: 350rpx; */
