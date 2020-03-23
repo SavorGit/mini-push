@@ -61,17 +61,12 @@
 					<view class="arrive-time input-panel theme-panel">
 						<view class="body flex-column-center-space_between">
 							<view class="flex-row-center-space_between">
-								<view class="label">立即送出</view>
-								<view class="flex-row-center-space_between">
-									<!--
-									<view class="flex-row-center-flex_end">
-										<picker mode="time" bindchange="bindDateChange" data-type="2">
-											<view class="flex-row-center-center theme-font5" style="width:100%;height:60rpx;line-height:60rpx;">大约 {{delivery_time.length==5?delivery_time:'00:00'}} 送达</view>
-										</picker>
+								<picker mode="selector">
+									<view class="flex-row-center-space_between" style="width:100%;height:60rpx;">
+										<view>{{delivery_time=='立即配送'?delivery_time:'预约配送 '+delivery_time}}</view>
+										<view class="fa fa-angle-right" aria-hidden="true"></view>
 									</view>
-									<view class="fa fa-angle-right" aria-hidden="true"></view>
-									-->
-								</view>
+								</picker>
 							</view>
 						</view>
 					</view>
@@ -195,26 +190,29 @@
 				</view>
 				<view class="misc input-panel theme-panel">
 					<view class="body flex-column-center-space_between">
-						<view class="flex-row-center-space_between" bindtap="">
-							<view class="label">餐具份数</view>
-							<view class="value flex-row-center-space_between">
-								<picker class="input" mode="selector">
-									<view class="flex-row-center-center" style="width:100%;height:40rpx;">未选择</view>
-								</picker>
-							</view>
-						</view>
 						<view class="flex-row-center-space_between" bindtap="gotoRemark">
 							<view class="label">订单备注</view>
-							<view class="btn flex-row-center-flex_end">
-								<view class="choosed theme-font3">口味、偏好</view>
+							<view class="btn flex-row-center-space_between">
+								<view class="choosed one-line-overflow theme-font3">口味、偏好</view>
 								<view class="fa fa-angle-right" aria-hidden="true"></view>
 							</view>
 						</view>
 						<view class="flex-row-center-space_between" bindtap="gotoInvoice">
 							<view class="label">发票信息</view>
-							<view class="btn flex-row-center-flex_end">
-								<view class="choosed theme-font3">未选择</view>
+							<view class="btn flex-row-center-space_between">
+								<view class="choosed one-line-overflow theme-font3">未选择</view>
 								<view class="fa fa-angle-right" aria-hidden="true"></view>
+							</view>
+						</view>
+						<view class="flex-row-center-space_between" bindtap="">
+							<view class="label">餐具份数</view>
+							<view class="value flex-row-center-space_between">
+								<picker class="input" mode="selector">
+									<view class="flex-row-center-space_between" style="width:calc(100% - 10rpx);height:40rpx;padding:0 5rpx;">
+										<view>1份</view>
+										<view class="fa fa-caret-down"></view>
+									</view>
+								</picker>
 							</view>
 						</view>
 					</view>

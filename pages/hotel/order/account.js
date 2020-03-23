@@ -30,6 +30,7 @@ Page({
     delivery_fee:0,
     delivery_platform:0,
     total_price:0,
+    delivery_time:'立即配送'
   },
 
   /**
