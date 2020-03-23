@@ -30,6 +30,8 @@ Page({
     delivery_fee:0,
     delivery_platform:0,
     total_price:0,
+    tableware_index:0,
+    delivery_index:0,
     delivery_time:'立即配送'
   },
 
@@ -156,6 +158,10 @@ Page({
       var delivery_platform = data.result.delivery_platform
       var pay_types = data.result.pay_types
       var tableware = data.result.tableware
+      var tableware_arr = [];
+      for(var i=0;i<tableware.length;i++){
+        tableware_arr.push(tableware[i].name);
+      }
 
       if (delivery_platform == 1 && address_id!='') {//获取配送费
         utils.PostRequest(api_url + '/smallapp43/order/getDeliveryfee', {
@@ -171,9 +177,27 @@ Page({
       }
       that.setData({
         delivery_types: delivery_types,
+        delivery_type: delivery_types[0].id,
         delivery_platform: delivery_platform,
         pay_types: pay_types,
-        tableware: tableware
+        tableware: tableware,
+        tableware_arr: tableware_arr
+      })
+    });
+    //获取配送时间列表
+    utils.PostRequest(api_url + '/Smallapp43/order/getDeliveryTime', {
+      merchant_id: merchant_id,
+    }, (data, headers, cookies, errMsg, statusCode) => {
+      
+      var deliveryTime = data.result;
+      var delevery_arr = [];
+      for (var i = 0; i < deliveryTime.length;i++){
+        delevery_arr.push(deliveryTime[i].name);
+      }
+
+      that.setData({
+        deliveryTime: data.result,
+        delevery_arr: delevery_arr
       })
     });
   },
@@ -425,7 +449,7 @@ Page({
       var address_id = address_info.address_id;
       var delivery_platform = that.data.delivery_platform;
       var total_price = that.data.total_price;
-      if (delivery_platform == 0 && address_id > 0 && total_price>0){
+      if (delivery_platform == 1 && address_id > 0 && total_price>0){
         utils.PostRequest(api_url + '/smallapp43/order/getDeliveryfee', {
           address_id: address_id,
           merchant_id: merchant_id,
@@ -461,10 +485,10 @@ Page({
 
     }
     //获取订单备注
-    var remark_str = wx.getStorageSync(cache_key + 'order:remark')
-    if(remark_str!=''){
+    var remark_strs = wx.getStorageSync(cache_key + 'order:remark')
+    if(remark_strs!=''){
       that.setData({
-        remark_str: remark_str
+        remark_strs: remark_strs
       })
     }
     
@@ -476,6 +500,33 @@ Page({
         bill_info:bill_info
       })
     }
+  },
+  /**
+   * 支付方式
+   */
+  selectDeliveryType:function(e){
+    var delivery_type = e.detail.value;
+    this.setData({
+      delivery_type: delivery_type,
+    })
+  },
+  /**
+   * 选择配送时间
+   */
+  selectDeleveryTime:function(e){
+    var delivery_index = e.detail.value;
+    this.setData({
+      delivery_index: delivery_index
+    })
+  },
+  /**
+   * 选择餐具份数
+   */
+  selectTabWare:function(e){
+    var tableware_index = e.detail.value;
+    this.setData({
+      tableware_index: tableware_index
+    })
   },
 
   /**

@@ -25,7 +25,14 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    utils.PostRequest(api_url + '/Smallapp4/aa/bb', {
+    var that = this;
+    var remark_strs = wx.getStorageSync(cache_key + 'order:remark')
+    if(remark_strs!=''){
+      that.setData({
+        remark_strs: remark_strs
+      })
+    }
+    utils.PostRequest(api_url + '/Smallapp43/order/getRemarks', {
       
     }, (data, headers, cookies, errMsg, statusCode) => that.setData({
       remark_list: data.result
@@ -34,23 +41,30 @@ Page({
   selectRemark:function(e){
     var remark_list = this.data.remark_list;
     var keys = e.currentTarget.dataset.keys;
-    var remrk_strs = this.data.remark_strs;
+    var remark_strs  = this.data.remark_strs;
     if(remark_strs==''){
       remark_strs = remark_list[keys].name;
     }else {
-      remark_strs = '、'+remark_list[keys].name;
+      remark_strs += '、'+remark_list[keys].name;
     }
     this.setData({
       remark_strs:remark_strs,
     })
   },
   saveRemark:function(e){
-    var remark_str = this.data.remark_str;
-    if(remark_str!=''){
-      wx.setStorageSync(cache_key+'order:remark', remark_str);
+    var remark_strs  = this.data.remark_strs ;
+    if (remark_strs !=''){
+      wx.setStorageSync(cache_key + 'order:remark', remark_strs );
     }
     wx.navigateBack({
       delta: 1
+    })
+  },
+  setInputRemark:function(e){
+    var that = this;
+    var remark_strs = e.detail.value;
+    this.setData({
+      remark_strs: remark_strs
     })
   },
   /**

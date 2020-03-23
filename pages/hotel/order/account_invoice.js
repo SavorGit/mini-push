@@ -23,7 +23,19 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    
+    var bill_info = wx.getStorageSync(cache_key+'order:bill');
+    if(bill_info!=''){
+      bill_info = JSON.parse(bill_info);
+      if(bill_info.type==0){
+        var tab = 'company';
+      }else {
+        var tab ='people';
+      }
+      this.setData({
+        tab: tab,
+        bill_info:bill_info
+      })
+    }
   },
   getWxinvoice:function(){
     var that = this;
@@ -54,10 +66,11 @@ Page({
     })
   },
   saveBillInfo:function(e){
+    console.log(e)
     var bill_info = {};
     var tab = this.data.tab;
     var title = e.detail.value.title.replace(/\s+/g, '');
-    var taxNumber = e.detail.value.taxNumber.replace(/\s+/g, '');
+    
     
     if (tab =='company'){
       var type = 0;
@@ -69,6 +82,7 @@ Page({
         app.showToast('请输入企业税号');
         return false;
       }
+      var taxNumber = e.detail.value.taxNumber.replace(/\s+/g, '');
       bill_info.title =  title;
       bill_info.taxNumber = taxNumber;
       bill_info.type= 0;

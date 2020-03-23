@@ -8,7 +8,9 @@
 <template is="navigationBarForTwoLevel" data='{{statusBarHeight: statusBarHeight,titleText:"订单发票"}}' />
 
 <view class='container theme-container' style='height: calc(100vh - 46px - {{statusBarHeight + SystemInfo.screenBottomSpace}}px);'>
-	<view class="page">
+	<form bindsubmit="saveBillInfo">
+  <view class="page">
+    
 		<view class="main flex-column-center-center">
 			<view class="panel theme-panel">
 				<view class="title-bar flex-row-center-space_between">
@@ -27,10 +29,10 @@
 					</view>
 					<block wx:if="{{tab=='company'}}">
 						<view class="row">
-							<input class="input" placeholder="企业名称" value="{{bill_info.title}}"></input>
+							<input class="input" name="title" placeholder="企业名称" value="{{bill_info.title}}"></input>
 						</view>
 						<view class="row">
-							<input class="input" placeholder="企业税号" value="{{bill_info.taxNumber}}"></input>
+							<input class="input" name='taxNumber' placeholder="企业税号" value="{{bill_info.taxNumber}}"></input>
 						</view>
 						<view class="row">
 							<view class="show theme-font3">发票金额：2345元</view>
@@ -38,7 +40,7 @@
 					</block>
 					<block wx:if="{{tab=='people'}}">
 						<view class="row">
-							<input class="input" placeholder="姓名" value="{{bill_info.title}}"></input>
+							<input class="input" name="title" placeholder="姓名" value="{{bill_info.title}}"></input>
 						</view>
 						<view class="row">
 							<view class="show theme-font3">发票金额：2345元</view>
@@ -48,7 +50,8 @@
 			</view>
 		</view>
 		<view class="bottom">
-			<view class="btn save theme-button-buy" bindtap="">保存</view>
+			<button class="btn save theme-button-buy" form-type="submit">保存</button>
 		</view>
 	</view>
+  </form>
 </view>

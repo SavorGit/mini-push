@@ -61,9 +61,9 @@
 					<view class="arrive-time input-panel theme-panel">
 						<view class="body flex-column-center-space_between">
 							<view class="flex-row-center-space_between">
-								<picker mode="selector">
+								<picker mode="selector" range="{{delevery_arr}}" bindchange="selectDeleveryTime">
 									<view class="flex-row-center-space_between" style="width:100%;height:60rpx;">
-										<view>{{delivery_time=='立即配送'?delivery_time:'预约配送 '+delivery_time}}</view>
+										<view>{{delevery_arr[delivery_index]}}</view>
 										<view class="fa fa-angle-right" aria-hidden="true"></view>
 									</view>
 								</picker>
@@ -162,19 +162,21 @@
 					-->
 				</view>
 				<view class="pay input-panel theme-panel">
-					<radio-group class="body flex-column-center-space_between">
-						<view class="row flex-row-center-space_between">
+					<radio-group class="body flex-column-center-space_between" bindchange="selectDeliveryType">
+						<view class="row flex-row-center-space_between" wx:for="{{pay_types}}" wx:key="key" wx:for-item="bean" wx:for-index="index">
 							<view class="left flex-row-center-flex_start">
-								<view class="icon fa fa-weixin" aria-hidden="true"></view>
+								<view class="icon fa fa-weixin" aria-hidden="true" wx:if="{{bean.id==10}}"></view>
+                <view class="icon fa fa-universal-access" aria-hidden="true" wx:else></view>
 								<view class="label flex-column-flex_start-center">
-									<view class="title">微信支付</view>
+									<view class="title">{{bean.name}}</view>
 								</view>
 							</view>
 							<view class="right flex-row-center-space_between">
-								<radio checked="true"></radio>
+								<radio wx:if="{{index==0}}" checked="true" value="{{bean.id}}"></radio>
+                <radio wx:else value="{{bean.id}}"></radio>
 							</view>
 						</view>
-						<view class="row flex-row-center-space_between">
+						<!-- <view class="row flex-row-center-space_between">
 							<view class="left flex-row-center-flex_start">
 								<view class="icon fa fa-universal-access" aria-hidden="true"></view>
 								<view class="label flex-column-flex_start-center">
@@ -185,7 +187,7 @@
 							<view class="right flex-row-center-space_between">
 								<radio></radio>
 							</view>
-						</view>
+						</view> -->
 					</radio-group>
 				</view>
 				<view class="misc input-panel theme-panel">
@@ -193,23 +195,24 @@
 						<view class="flex-row-center-space_between" bindtap="gotoRemark">
 							<view class="label">订单备注</view>
 							<view class="btn flex-row-center-space_between">
-								<view class="choosed one-line-overflow theme-font3">口味、偏好</view>
+								<view class="choosed one-line-overflow theme-font3">{{remark_strs}}</view>
 								<view class="fa fa-angle-right" aria-hidden="true"></view>
 							</view>
 						</view>
 						<view class="flex-row-center-space_between" bindtap="gotoInvoice">
 							<view class="label">发票信息</view>
 							<view class="btn flex-row-center-space_between">
-								<view class="choosed one-line-overflow theme-font3">未选择</view>
+								<view class="choosed one-line-overflow theme-font3" wx:if="{{bill_info.title!=''}}">{{bill_info.title}}</view>
+                <view class="choosed one-line-overflow theme-font3" wx:else>{{bill_info.title}}</view>
 								<view class="fa fa-angle-right" aria-hidden="true"></view>
 							</view>
 						</view>
 						<view class="flex-row-center-space_between" bindtap="">
 							<view class="label">餐具份数</view>
 							<view class="value flex-row-center-space_between">
-								<picker class="input" mode="selector">
+								<picker class="input" mode="selector" range="{{tableware_arr}}" bindchange="selectTabWare">
 									<view class="flex-row-center-space_between" style="width:calc(100% - 10rpx);height:40rpx;padding:0 5rpx;">
-										<view>1份</view>
+										<view>{{tableware_arr[tableware_index]}}</view>
 										<view class="fa fa-caret-down"></view>
 									</view>
 								</picker>

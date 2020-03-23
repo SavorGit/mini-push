@@ -9,7 +9,7 @@
 
 <view class='container theme-container' style='height: calc(100vh - 46px - {{statusBarHeight + SystemInfo.screenBottomSpace}}px);'>
 	<view class="page theme-panel">
-		<textarea class="input" placeholder="填写额外对商家和骑手小哥的备注信息" value="{{remark_strs}}" maxlength="50"></textarea>
+		<textarea class="input" placeholder="填写额外对商家和骑手小哥的备注信息" value="{{remark_strs}}" maxlength="50" bindinput="setInputRemark"></textarea>
 		<view class="quick-pnael">
 			<view class="head">快捷输入</view>
 			<view class="body">
