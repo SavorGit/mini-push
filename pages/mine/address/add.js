@@ -54,7 +54,7 @@ Page({
     }else {//编辑收货地址
       
       
-      utils.PostRequest(api_url + '/Smallapp4/address/detail', {
+      utils.PostRequest(api_url + '/Smallapp43/address/detail', {
         openid: openid,
         address_id: address_id
       }, (data, headers, cookies, errMsg, statusCode) => {
@@ -251,9 +251,9 @@ Page({
       is_default = 0;
     }
     if(address_id==''){
-      var api_all_url = api_url +'/Smallapp4/address/addAddress'
+      var api_all_url = api_url +'/Smallapp43/address/addAddress'
     }else {
-      var api_all_url = api_url+'/Smallapp4/address/editAddress'
+      var api_all_url = api_url+'/Smallapp43/address/editAddress'
     }
 
     utils.PostRequest(api_all_url, {

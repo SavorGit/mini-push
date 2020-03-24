@@ -17,7 +17,7 @@ Page({
    */
   data: {
     statusBarHeight: getApp().globalData.statusBarHeight,
-    markers: [{
+    /*markers: [{
       iconPath: "/images/imgs/default-user.png",
       id: 0,
       latitude: 23.099994,
@@ -47,7 +47,8 @@ Page({
         height: 50
       },
       clickable: true
-    }]
+    }]*/
+    
   },
 
   /**
@@ -62,8 +63,13 @@ Page({
       openid: openid,
       order_id: order_id,
     }, (data, headers, cookies, errMsg, statusCode) => {
+      //var hotel_location = data.result.hotel_location;
+      ///var user_location = data.result.user_location;
+      
       that.setData({
-        order_info: data.result
+        //user_location: user_location,
+        order_info: data.result,
+        markers: data.result.markers
       })
     });
   },

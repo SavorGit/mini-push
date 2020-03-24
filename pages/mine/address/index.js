@@ -27,7 +27,7 @@ Page({
     console.log(that.data.address_id)
     openid = options.openid;
     isOrder = options.isOrder;
-    utils.PostRequest(api_url + '/Smallapp4/address/addresslist', {
+    utils.PostRequest(api_url + '/Smallapp43/address/addresslist', {
       openid: openid,
       page :1
     }, (data, headers, cookies, errMsg, statusCode) => that.setData({
@@ -50,7 +50,7 @@ Page({
   loadMore:function(e){
     var that = this;
     page +=1;
-    utils.PostRequest(api_url + '/Smallapp4/address/addresslist', {
+    utils.PostRequest(api_url + '/Smallapp43/address/addresslist', {
       openid: openid,
       page: page
     }, (data, headers, cookies, errMsg, statusCode) => that.setData({
@@ -88,7 +88,7 @@ Page({
     var address_id = that.data.address_id;
     var keys = that.data.keys;
     if(typeof(address_id)!='undefined'){
-      utils.PostRequest(api_url + '/Smallapp4/address/delAddress', {
+      utils.PostRequest(api_url + '/Smallapp43/address/delAddress', {
         openid: openid,
         address_id: address_id
       }, (data, headers, cookies, errMsg, statusCode) => {
@@ -126,7 +126,7 @@ Page({
       var address_list = that.data.address_list;
       var address_id  = e.currentTarget.dataset.address_id;
       
-      utils.PostRequest(api_url + '/Smallapp4/address/setDefaultAddress', {
+      utils.PostRequest(api_url + '/Smallapp43/address/setDefaultAddress', {
         openid: openid,
         address_id: address_id,
         is_default:1
@@ -174,7 +174,7 @@ Page({
    */
   onShow: function () {
     var that = this;
-    utils.PostRequest(api_url + '/Smallapp4/address/addresslist', {
+    utils.PostRequest(api_url + '/Smallapp43/address/addresslist', {
       openid: openid,
       page: page
     }, (data, headers, cookies, errMsg, statusCode) => that.setData({
