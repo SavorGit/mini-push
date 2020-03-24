@@ -32,6 +32,7 @@ Page({
     total_price:0,
     tableware_index:0,
     delivery_index:0,
+    pay_type:'',//支付方式
     delivery_time:'立即配送'
   },
 
@@ -151,6 +152,9 @@ Page({
   getPrepareData: function (merchant_id, total_price, address_id){
     var that = this;
     //获取下单预备数据(包括配送类型和支付方式)
+    that.setData({
+      addDisabled: true
+    })
     utils.PostRequest(api_url + '/smallapp43/order/getPrepareData', {
       merchant_id: merchant_id,
     }, (data, headers, cookies, errMsg, statusCode) => {
@@ -176,8 +180,9 @@ Page({
         });
       }
       that.setData({
+        addDisabled: false,
         delivery_types: delivery_types,
-        delivery_type: delivery_types[0].id,
+        //delivery_type: delivery_types[0].id,
         delivery_platform: delivery_platform,
         pay_types: pay_types,
         tableware: tableware,
@@ -210,8 +215,6 @@ Page({
     //var address = e.detail.value.address.replace(/\s+/g, '');
     //var phone = e.detail.value.phone;
     var address_id = e.detail.value.address_id;
-    var delivery_date = e.detail.value.delivery_date;
-    var delivery_time = e.detail.value.delivery_time;
     if (order_type == 1) {
       var amount = e.detail.value.amount;
     } else {
@@ -250,21 +253,46 @@ Page({
     }
     carts = JSON.stringify(carts);
 
-
-    if (address_id == '') {
+    var tab = that.data.tab;
+    if (tab =='take-out'){
+      var delivery_type = 1;
+    } else if (tab = 'hotel'){
+      var delivery_type = 2;
+    }
+    if (address_id == '' && tab =='take-out') {
       app.showToast('请选择收货地址')
       return false;
     }
-    if (delivery_date == '') {
-      app.showToast('请选择送达日期');
-      return false;
-    }
-    if (delivery_time == '') {
-      app.showToast('请选择送达时间');
-      return false;
-    }
+    //配送时间
+    var delivery_index = that.data.delivery_index
+    var deliveryTime = that.data.deliveryTime;
+    var delivery_time = deliveryTime[delivery_index].value;
 
-    var delivery_time = delivery_date + ' ' + delivery_time;
+    //支付方式
+    var pay_types = that.data.pay_types;
+    var pay_type = that.data.pay_type;
+    if(pay_type==''){
+      pay_type = pay_types[0].id
+    }
+    //订单备注
+    var remark = wx.getStorageSync(cache_key+'order:remark');
+    //发票信息
+    var bill_cache = wx.getStorageSync(cache_key+'order:bill');
+    var company = '';
+    var credit_code = '';
+    var title_type ='';
+    if(bill_cache !=''){
+      var bill_info = JSON.parse(bill_cache);
+      company = bill_info.title;
+      credit_code = bill_info.taxNumber
+      title_type = bill_info. type;
+    }
+    //餐具份数
+    var tableware_index = that.data.tableware_index
+    var tableware_obj = that.data.tableware;
+    
+    var tableware = tableware_obj[tableware_index].id;
+
 
     that.setData({
       addDisabled: true
@@ -273,10 +301,18 @@ Page({
     utils.PostRequest(api_url + '/Smallapp4/order/addDishorder', {
       address_id: address_id,
       amount: amount,
+      carts: carts,
+      company: company,
+      credit_code: credit_code,
       delivery_time: delivery_time,
+      delivery_type: delivery_type,
+      
       goods_id: goods_id,
       openid: openid,
-      carts: carts
+      pay_type: pay_type,
+      remark: remark,
+      tableware: tableware,
+      title_type, title_type
     }, (data, headers, cookies, errMsg, statusCode) => {
       if (order_type == 2) {
         wx.removeStorage({
@@ -309,7 +345,7 @@ Page({
     })
     mta.Event.stat('orderConfirm', { 'openid': openid })
   },
-  bindDateChange: function (e) {
+  /*bindDateChange: function (e) {
     var that = this;
     var type = e.currentTarget.dataset.type;
     if (type == 1) {
@@ -323,7 +359,7 @@ Page({
         delivery_time: delivery_time
       })
     }
-  },
+  },*/
   modalConfirm: function (e) {
     wx.navigateBack({
       delta: 1
@@ -504,10 +540,10 @@ Page({
   /**
    * 支付方式
    */
-  selectDeliveryType:function(e){
-    var delivery_type = e.detail.value;
+  selectPayType:function(e){
+    var pay_type = e.detail.value;
     this.setData({
-      delivery_type: delivery_type,
+      pay_type: pay_type,
     })
   },
   /**
