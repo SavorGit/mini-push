@@ -33,6 +33,7 @@ Page({
     tableware_index:0,
     delivery_index:0,
     pay_type:'',//支付方式
+    selfpick_time:'',//自提时间
     delivery_time:'立即配送'
   },
 
@@ -254,10 +255,23 @@ Page({
     carts = JSON.stringify(carts);
 
     var tab = that.data.tab;
+    var phone = '';
+    var selfpick_time ='';
     if (tab =='take-out'){
       var delivery_type = 1;
     } else if (tab = 'hotel'){
       var delivery_type = 2;
+      phone = e.detail.value.phone;
+      selfpick_time = that.data.selfpick_time
+
+      if(phone==''){
+        app.showToast('请输入预留手机号');
+        return false;
+      }
+      if(selfpick_time==''){
+        app.showToast('请选择自提时间');
+        return false;
+      }
     }
     if (address_id == '' && tab =='take-out') {
       app.showToast('请选择收货地址')
@@ -298,7 +312,7 @@ Page({
       addDisabled: true
     })
     //下单
-    utils.PostRequest(api_url + '/Smallapp4/order/addDishorder', {
+    utils.PostRequest(api_url + '/smallapp43/order/addOrder', {
       address_id: address_id,
       amount: amount,
       carts: carts,
@@ -310,32 +324,66 @@ Page({
       goods_id: goods_id,
       openid: openid,
       pay_type: pay_type,
+      phone: phone,
       remark: remark,
+      selfpick_time: selfpick_time,
       tableware: tableware,
       title_type, title_type
     }, (data, headers, cookies, errMsg, statusCode) => {
-      if (order_type == 2) {
-        wx.removeStorage({
-          key: cache_key + 'cart_' + merchant_id,
+      //支付流程
+      var order_id = data.result.order_id;
+      if(data.result.pay_type==10){
+        wx.requestPayment({
+          'timeStamp': data.result.payinfo.timeStamp,
+          'nonceStr': data.result.payinfo.nonceStr,
+          'package': data.result.payinfo.package,
+          'signType': 'MD5',
+          'paySign': data.result.payinfo.paySign,
           success(res) {
-            that.setData({
-              showBuyConfirmPopWindow: true,
-              order_msg1: data.result.message1,
-              order_msg2: data.result.message2,
-              addDisabled: false
-            })
-          }, fail: function () {
+            if (order_type == 2) {
+              wx.removeStorage({
+                key: cache_key + 'cart_' + merchant_id,
+                success(res) {
+                  that.setData({
+                    //showBuyConfirmPopWindow: true,
+                    //order_msg1: data.result.message1,
+                    //order_msg2: data.result.message2,
+                    addDisabled: false
+                  })
+                }, fail: function () {
 
+                }
+              })
+            } else {
+              that.setData({
+                //showBuyConfirmPopWindow: true,
+                //order_msg1: data.result.message1,
+                //order_msg2: data.result.message2,
+                addDisabled: false
+              })
+            }
+            app.showToast('支付成功', 2000,'success')
+            wx.navigateTo({
+              url: '/pages/hotel/order/detail?order_id=' + order_id+'&openid='+openid,
+            })
+          },
+          fail(res) {
+            if (res.errMsg == "requestPayment:fail cancel") {
+              app.showToast('支付取消');
+              that.setData({
+                addDisabled: false
+              })
+            } else {
+              app.showToast('支付失败');
+              that.setData({
+                addDisabled: false
+              })
+            }
+            
           }
         })
-      } else {
-        that.setData({
-          showBuyConfirmPopWindow: true,
-          order_msg1: data.result.message1,
-          order_msg2: data.result.message2,
-          addDisabled: false
-        })
       }
+      
 
 
     }, function () {
@@ -564,7 +612,13 @@ Page({
       tableware_index: tableware_index
     })
   },
-
+  //选择自取时间
+  selectSelfPick:function(e){
+    var selfpick_time = e.detail.value;
+    this.setData({
+      selfpick_time: selfpick_time
+    })
+  },
   /**
    * 生命周期函数--监听页面隐藏
    */

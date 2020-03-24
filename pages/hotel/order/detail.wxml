@@ -9,8 +9,20 @@
 
 <scroll-view class='container theme-container' style='height: calc(100vh - 46px - {{statusBarHeight}}px);' scroll-y="true" scroll-with-animation="true">
 	<view class="page-wapper">
+    <view class="status-panel input-panel theme-panel" wx:if="{{order_info.status==13 || order_info.status==14 || order_info.status==15 || order_info.status==18 || order_info.status==19}}">
+			<view class="head flex-row-center-space_between">
+				<view class="status" wx:if="{{order_info.status==13}}">待商家确认></view>
+        <view class="status" wx:elif="{{order_info.status==14}}">待骑手接单></view>
+        <view class="status" wx:elif="{{order_info.status==15}}">待取货></view>
+        <view class="status" wx:elif="{{order_info.status==18}}">商家取消></view>
+        <view class="status" wx:elif="{{order_info.status==19}}">用户取消></view>
+			</view>
+			<!-- <view class="body">
+				<view class="tip theme-font5">感谢您对小热点的信任，期待您再次光临</view>
+			</view> -->
+		</view>
 		<!-- 派送中 -->
-		<view class="status-panel input-panel theme-panel">
+		<view class="status-panel input-panel theme-panel" wx:elif="{{order_info.status==16}}">
 			<view class="head flex-row-center-space_between">
 				<view class="status">派送中></view>
 				<view class="distance">车手距您还有1.2km</view>
@@ -19,8 +31,8 @@
 				<map id="map" longitude="113.324520" latitude="23.099994" scale="14" controls="{{controls}}" bindcontroltap="controltap" markers="{{markers}}" bindmarkertap="markertap" polyline="{{polyline}}" bindregionchange="regionchange" show-location style="width: 100%; height: 300px;"></map>
 			</view>
 		</view>
-		<!-- 已送达 
-		<view class="status-panel input-panel theme-panel">
+		<!-- 已送达 -->
+		<view class="status-panel input-panel theme-panel" wx:elif="{{order_info.status==17}}">
 			<view class="head flex-row-center-space_between">
 				<view class="status">订单已送达></view>
 			</view>
@@ -28,12 +40,12 @@
 				<view class="tip theme-font5">感谢您对小热点的信任，期待您再次光临</view>
 			</view>
 		</view>
-		-->
+		
 		<view class="goods-info input-panel theme-panel">
 			<view class="head flex-row-center-space_between">
 				<view class="title">菜品信息</view>
 				<view class="btn theme-button">
-					<view class="fa fa-phone" aria-hidden="true"> 联系餐厅</view>
+					<button class="fa fa-phone" aria-hidden="true" bindtap='phonecallevent' data-tel="{{order_info.merchant.tel}}"> 联系餐厅</button>
 				</view>
 			</view>
 			<view class="body flex-column-center-space_between">

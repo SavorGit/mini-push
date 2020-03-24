@@ -58,7 +58,7 @@ Page({
     openid = options.openid;
     order_id = options.order_id;
     //订单详情
-    utils.PostRequest(api_url + '/Smallapp4/order/dishOrderdetail', {
+    utils.PostRequest(api_url + '/smallapp43/order/detail', {
       openid: openid,
       order_id: order_id,
     }, (data, headers, cookies, errMsg, statusCode) => {
@@ -75,6 +75,16 @@ Page({
         url: '/pages/hotel/dishes/detail?goods_id=' + goods_id,
       })
     }
+  },
+  /**
+   * 拨打订餐电话
+   */
+  phonecallevent: function (e) {
+    var tel = e.target.dataset.tel;
+    wx.makePhoneCall({
+      phoneNumber: tel
+    })
+
   },
   /**
    * 生命周期函数--监听页面初次渲染完成
