@@ -9,49 +9,48 @@
 
 <view class='container theme-container' style='height: calc(100vh - 46px - {{statusBarHeight + SystemInfo.screenBottomSpace}}px);'>
 	<form bindsubmit="saveBillInfo">
-  <view class="page">
-    
-		<view class="main flex-column-center-center">
-			<view class="panel theme-panel">
-				<view class="title-bar flex-row-center-space_between">
-					<view class="title">发票信息</view>
-					<view class="right flex-row-center-space_between" bindtap="getWxinvoice">
-						<view class="icon fa fa-weixin" aria-hidden="true"></view>
-						<view class="name">获取微信发票抬头</view>
-					</view>
-				</view>
-				<view class="body flex-column-center-flex_start">
-					<view class="row">
-						<view class="tab-bar flex-row-center-center">
-							<view class="tab company{{tab=='company'?' selected':''}}" data-tab="company" bindtap="showTab">企业发票</view>
-							<view class="tab people{{tab=='people'?' selected':''}}" data-tab="people" bindtap="showTab">个人发票</view>
+		<view class="page">
+			<view class="main flex-column-center-center">
+				<view class="panel theme-panel">
+					<view class="title-bar flex-row-center-space_between">
+						<view class="title">发票信息</view>
+						<view class="right flex-row-center-space_between" bindtap="getWxinvoice">
+							<view class="icon fa fa-weixin" aria-hidden="true"></view>
+							<view class="name">获取微信发票抬头</view>
 						</view>
 					</view>
-					<block wx:if="{{tab=='company'}}">
+					<view class="body flex-column-center-flex_start">
 						<view class="row">
-							<input class="input" name="title" placeholder="企业名称" value="{{bill_info.title}}"></input>
+							<view class="tab-bar flex-row-center-center">
+								<view class="tab company{{tab=='company'?' selected':''}}" data-tab="company" bindtap="showTab">企业发票</view>
+								<view class="tab people{{tab=='people'?' selected':''}}" data-tab="people" bindtap="showTab">个人发票</view>
+							</view>
 						</view>
-						<view class="row">
-							<input class="input" name='taxNumber' placeholder="企业税号" value="{{bill_info.taxNumber}}"></input>
-						</view>
-						<view class="row">
-							<view class="show theme-font3">发票金额：2345元</view>
-						</view>
-					</block>
-					<block wx:if="{{tab=='people'}}">
-						<view class="row">
-							<input class="input" name="title" placeholder="姓名" value="{{bill_info.title}}"></input>
-						</view>
-						<view class="row">
-							<view class="show theme-font3">发票金额：2345元</view>
-						</view>
-					</block>
+						<block wx:if="{{tab=='company'}}">
+							<view class="row">
+								<input class="input" name="title" placeholder="企业名称" value="{{bill_info.title}}"></input>
+							</view>
+							<view class="row">
+								<input class="input" name='taxNumber' placeholder="企业税号" value="{{bill_info.taxNumber}}"></input>
+							</view>
+							<view class="row">
+								<view class="show theme-font3">发票金额：2345元</view>
+							</view>
+						</block>
+						<block wx:if="{{tab=='people'}}">
+							<view class="row">
+								<input class="input" name="title" placeholder="姓名" value="{{bill_info.title}}"></input>
+							</view>
+							<view class="row">
+								<view class="show theme-font3">发票金额：2345元</view>
+							</view>
+						</block>
+					</view>
 				</view>
 			</view>
+			<view class="bottom">
+				<button class="btn save theme-button-buy" form-type="submit">保存</button>
+			</view>
 		</view>
-		<view class="bottom">
-			<button class="btn save theme-button-buy" form-type="submit">保存</button>
-		</view>
-	</view>
-  </form>
+	</form>
 </view>

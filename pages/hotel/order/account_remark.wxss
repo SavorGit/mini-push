@@ -19,9 +19,9 @@
 
 .quick-pnael {
   width: calc(100% - 40rpx);
-  height: calc(100% - 488rpx);
+  height: calc(100% - 478rpx);
   padding: 20rpx;
-  margin-top: 10rpx;
+  /* margin-top: 10rpx; */
 }
 
 .quick-pnael>.head {
@@ -60,4 +60,5 @@
   margin: 0;
   padding: 0;
   border: 0;
+  border-radius: 0;
 }
