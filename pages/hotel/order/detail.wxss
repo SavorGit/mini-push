@@ -68,6 +68,7 @@
   line-height: 80rpx;
   text-align: center;
   font-size: 32rpx;
+  border-radius: 0;
 }
 
 .status-panel>.body>.tip {
