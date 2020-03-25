@@ -95,6 +95,10 @@
 					<view class="lable theme-font3">配送时间</view>
 					<view class="view">{{order_info.delivery_time}}</view>
 				</view>
+        <view class="row flex-row-center-space_between">
+					<view class="lable theme-font3">配送费用</view>
+					<view class="view">{{order_info.delivery_fee}}</view>
+				</view>
 			</view>
 		</view>
 		<view class="input-panel theme-panel">
@@ -111,6 +115,10 @@
 				<view class="row flex-row-center-space_between">
 					<view class="lable theme-font3">完成时间</view>
 					<view class="view">{{order_info.finish_time}}</view>
+				</view>
+        <view class="row flex-row-center-space_between">
+					<view class="lable theme-font3">订单金额</view>
+					<view class="view">{{order_info.total_fee}}</view>
 				</view>
 			</view>
 		</view>
