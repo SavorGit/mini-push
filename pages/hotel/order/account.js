@@ -382,6 +382,23 @@ Page({
             
           }
         })
+      }else {
+        if (order_type == 2) {
+          wx.removeStorage({
+            key: cache_key + 'cart_' + merchant_id,
+            success(res) {
+              
+            }, fail: function () {
+
+            }
+          })
+        }
+        that.setData({
+          showBuyConfirmPopWindow: true,
+          order_msg1: data.result.message1,
+          order_msg2: data.result.message2,
+          addDisabled: false
+        })
       }
       
 
