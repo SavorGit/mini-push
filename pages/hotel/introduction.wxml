@@ -35,8 +35,8 @@
 				<view class="title">营业时间</view>
 			</view>
 			<view class="body">
-				<view class="content">午餐：{{business_dinnerhours}}</view>
-				<view class="content">晚餐：{{business_lunchhours}}</view>
+				<view class="content">午餐：{{hotel_info.business_lunchhours}}</view>
+				<view class="content">晚餐：{{hotel_info.business_dinnerhours}}</view>
 			</view>
 		</view>
 		<view class="tel panel theme-panel">

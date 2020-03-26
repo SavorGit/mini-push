@@ -132,7 +132,7 @@
 					</view>
 				</view>
 				<view class="delivery input-panel theme-panel" wx:if='{{delivery_fee>0 && tab == "take-out"}}'>
-					<view class="head flex-row-center-space_between" bindtap="selectAddress">
+					<view class="head flex-row-center-space_between" >
 						<view>配送费用</view>
 						<view class="fee theme-font5">￥{{delivery_fee}}</view>
 					</view>
