@@ -143,7 +143,7 @@
 				</view>
 				<view class="foot flex-row-center-space_between">
 					<view>{{bean.add_time}}</view>
-					<view class="btn completed theme-button-buy" bindtap="reBuy" data-order_id="{{bean.order_id}}" data-merchant_id="{{bean.merchant_id}}" data-merchant_name="{{bean.merchant.name}}">再次购买</view>
+					<view class="btn completed theme-button-buy" bindtap="reBuy" data-order_id="{{bean.order_id}}" data-merchant_id="{{bean.merchant_id}}" data-merchant_name="{{bean.merchant.name}}" data-keys="{{index}}">再次购买</view>
 				</view>
 			</view>
 

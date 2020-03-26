@@ -117,7 +117,7 @@ Page({
       } else if (order_type == 3) {
         var order_id = options.order_id;
         //订单详情
-        utils.PostRequest(api_url + '/Smallapp4/order/dishOrderdetail', {
+        utils.PostRequest(api_url + '/smallapp43/order/detail', {
           order_id: order_id,
           openid: openid,
         }, (data, headers, cookies, errMsg, statusCode) => {

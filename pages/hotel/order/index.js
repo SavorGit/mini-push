@@ -126,6 +126,8 @@ Page({
     
     }else if(order_status ==2){
       var order_list = that.data.complete_order_list;
+      console.log(order_list)
+      console.log(keys)
       var goods_list = order_list[keys].goods;
     }
     var can_buy = 0;
