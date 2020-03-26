@@ -132,7 +132,7 @@
 					</view>
 				</view>
 				<view class="delivery input-panel theme-panel" wx:if='{{delivery_fee>0 && tab == "take-out"}}'>
-					<view class="head flex-row-center-space_between" >
+					<view class="head flex-row-center-space_between">
 						<view>配送费用</view>
 						<view class="fee theme-font5">￥{{delivery_fee}}</view>
 					</view>
@@ -166,14 +166,14 @@
 						<view class="row flex-row-center-space_between" wx:for="{{pay_types}}" wx:key="key" wx:for-item="bean" wx:for-index="index">
 							<view class="left flex-row-center-flex_start">
 								<view class="icon fa fa-weixin" aria-hidden="true" wx:if="{{bean.id==10}}"></view>
-                <view class="icon fa fa-universal-access" aria-hidden="true" wx:else></view>
+								<view class="icon fa fa-universal-access" aria-hidden="true" wx:else></view>
 								<view class="label flex-column-flex_start-center">
 									<view class="title">{{bean.name}}</view>
 								</view>
 							</view>
 							<view class="right flex-row-center-space_between">
 								<radio wx:if="{{index==0}}" checked="true" value="{{bean.id}}"></radio>
-                <radio wx:else value="{{bean.id}}"></radio>
+								<radio wx:else value="{{bean.id}}"></radio>
 							</view>
 						</view>
 						<!-- <view class="row flex-row-center-space_between">
@@ -203,7 +203,7 @@
 							<view class="label">发票信息</view>
 							<view class="btn flex-row-center-space_between">
 								<view class="choosed one-line-overflow theme-font3" wx:if="{{bill_info.title!=''}}">{{bill_info.title}}</view>
-                <view class="choosed one-line-overflow theme-font3" wx:else>{{bill_info.title}}</view>
+								<view class="choosed one-line-overflow theme-font3" wx:else>{{bill_info.title}}</view>
 								<view class="fa fa-angle-right" aria-hidden="true"></view>
 							</view>
 						</view>
@@ -226,10 +226,10 @@
 			<input class='display_hide' name="delivery_time" value="{{delivery_time}}"></input>
 			<input class='display_hide' name="amount" value="{{amount}}"></input>
 		</scroll-view>
-		<button class="btn-buy theme-button-buy" form-type="submit" disabled="{{addDisabled}}">
-			<view>下单</view>
-			<view>下单后会由餐厅经理与您联系</view>
-		</button>
+		<view class="bottom flex-row-flex_start-center">
+			<view class="price theme-font5 theme-bg-FFFFFF">￥1080</view>
+			<button class="btn theme-button-buy" form-type="submit" disabled="{{addDisabled}}">下单</button>
+		</view>
 	</form>
 </view>
 
