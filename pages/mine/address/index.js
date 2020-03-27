@@ -24,7 +24,6 @@ Page({
    */
   onLoad: function (options) {
     var that = this;
-    console.log(that.data.address_id)
     openid = options.openid;
     isOrder = options.isOrder;
     utils.PostRequest(api_url + '/Smallapp43/address/addresslist', {

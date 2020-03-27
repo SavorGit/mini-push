@@ -157,6 +157,7 @@ Page({
     that.setData({
       addDisabled: true
     })
+    var money = total_price;
     utils.PostRequest(api_url + '/smallapp43/order/getPrepareData', {
       merchant_id: merchant_id,
     }, (data, headers, cookies, errMsg, statusCode) => {
@@ -168,19 +169,16 @@ Page({
       for(var i=0;i<tableware.length;i++){
         tableware_arr.push(tableware[i].name);
       }
-
       if (delivery_platform == 1 && address_id!='') {//获取配送费
         utils.PostRequest(api_url + '/smallapp43/order/getDeliveryfee', {
           address_id: address_id,
           merchant_id: merchant_id,
-          money: total_price,
+          money: money,
           openid: openid
         }, (data, headers, cookies, errMsg, statusCode) => {
           var tab = that.data.tab;
           var total_price = that.data.total_price;
-          console.log(tab)
-          console.log(data.result.fee)
-          console.log(total_price)
+          
           if (tab =='take-out'){
             var order_price = app.plus(total_price,data.result.fee)
           }else {
@@ -192,6 +190,11 @@ Page({
             order_price: order_price
           })
         });
+      }else{
+        var total_price = that.data.total_price;
+        that.setData({
+          order_price: total_price
+        })
       }
       that.setData({
         addDisabled: false,
@@ -555,6 +558,7 @@ Page({
     var address_info = wx.getStorageSync(cache_key + 'select_address_info')
     if (address_info != '') {
       address_info = JSON.parse(address_info)
+      address_info.address = address_info.detail_address
       that.setData({
         is_have_default_address: true,
         address_info: address_info,
@@ -563,15 +567,26 @@ Page({
       var address_id = address_info.address_id;
       var delivery_platform = that.data.delivery_platform;
       var total_price = that.data.total_price;
+    
       if (delivery_platform == 1 && address_id > 0 && total_price>0){
+        
         utils.PostRequest(api_url + '/smallapp43/order/getDeliveryfee', {
           address_id: address_id,
           merchant_id: merchant_id,
           money: total_price,
           openid: openid
         }, (data, headers, cookies, errMsg, statusCode) => {
+          var tab = that.data.tab;
+          var total_price = that.data.total_price;
+
+          if (tab == 'take-out') {
+            var order_price = app.plus(total_price, data.result.fee)
+          } else {
+            var order_price = total_price
+          }
           that.setData({
-            delivery_fee: data.result.fee
+            delivery_fee: data.result.fee,
+            order_price: order_price
           })
         });
       }
