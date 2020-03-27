@@ -600,10 +600,45 @@ Page({
         if (JSON.stringify(address_info) == '{}') {
           that.setData({
             is_have_default_address: false,
-            address_id: ''
+            address_id: '',
+            order_price: that.data.total_price,
+            delivery_fee:0,
           })
 
         } else {
+          var delivery_platform = that.data.delivery_platform;
+          var address_id = address_info.address_id;
+          var money = that.data.total_price;
+          if (delivery_platform == 1 && address_id != '') {//获取配送费
+            utils.PostRequest(api_url + '/smallapp43/order/getDeliveryfee', {
+              address_id: address_id,
+              merchant_id: merchant_id,
+              money: money,
+              openid: openid
+            }, (data, headers, cookies, errMsg, statusCode) => {
+              var tab = that.data.tab;
+              var total_price = that.data.total_price;
+
+              if (tab == 'take-out') {
+                var order_price = app.plus(total_price, data.result.fee)
+              } else {
+                var order_price = total_price
+              }
+              console.log(order_price)
+              that.setData({
+                delivery_fee: data.result.fee,
+                order_price: order_price
+              })
+            });
+          } else {
+            var total_price = that.data.total_price;
+            that.setData({
+              delivery_fee:0,
+              order_price: total_price
+            })
+          }
+
+
           that.setData({
             is_have_default_address: true,
             address_info: data.result,
