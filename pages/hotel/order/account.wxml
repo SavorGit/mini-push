@@ -227,7 +227,7 @@
 			<input class='display_hide' name="amount" value="{{amount}}"></input>
 		</scroll-view>
 		<view class="bottom flex-row-flex_start-center">
-			<view class="price theme-font5 theme-bg-FFFFFF">￥1080</view>
+			<view class="price theme-font5 theme-bg-FFFFFF">￥{{order_price}}</view>
 			<button class="btn theme-button-buy" form-type="submit" disabled="{{addDisabled}}">下单</button>
 		</view>
 	</form>

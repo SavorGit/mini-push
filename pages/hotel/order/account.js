@@ -34,7 +34,8 @@ Page({
     delivery_index:0,
     pay_type:'',//支付方式
     selfpick_time:'',//自提时间
-    delivery_time:'立即配送'
+    delivery_time:'立即配送',
+    order_price:0
   },
 
   /**
@@ -175,8 +176,20 @@ Page({
           money: total_price,
           openid: openid
         }, (data, headers, cookies, errMsg, statusCode) => {
+          var tab = that.data.tab;
+          var total_price = that.data.total_price;
+          console.log(tab)
+          console.log(data.result.fee)
+          console.log(total_price)
+          if (tab =='take-out'){
+            var order_price = app.plus(total_price,data.result.fee)
+          }else {
+            var order_price = total_price
+          }
+          console.log(order_price)
           that.setData({
-            delivery_fee: data.result.fee
+            delivery_fee: data.result.fee,
+            order_price: order_price
           })
         });
       }
@@ -686,5 +699,15 @@ Page({
     let self = this;
     let tabType = e.currentTarget.dataset.tab;
     self.setData({ tab: tabType });
+    var total_price = self.data.total_price;
+    var delivery_fee = self.data.delivery_fee;
+    if (tabType =='take-out'){
+      var order_price = app.plus(total_price,delivery_fee);
+    }else {
+      var order_price = total_price;
+    }
+    self.setData({
+      order_price: order_price
+    })
   }
 })
