@@ -64,7 +64,7 @@
 }
 
 .row>.head>.hotel-name {
-  width: calc(100% - 185rpx);
+  width: calc(100% - 250rpx);
   height: 70rpx;
   line-height: 70rpx;
   margin-left: 15rpx;
@@ -81,13 +81,16 @@
 }
 
 .row>.head>.order-status>view {
-  width: 100rpx;
+  width: 120rpx;
   height: 50rpx;
   line-height: 50rpx;
+  margin-left: -122rpx;
   padding-left: 20rpx;
-  margin-left: -80rpx;
+  padding-right: 20rpx;
+  font-size: 24rpx;
+  overflow: hidden;
   border-radius: 10rpx 0 0 10rpx;
-  transform: skewY(30deg) translate(-20rpx, -20rpx);
+  transform: skewY(30deg) translate(-20rpx, -34rpx);
 }
 
 .row>.body {
