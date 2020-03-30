@@ -23,7 +23,7 @@
 					<image class="hotel-pic" mode="aspectFill" src="{{bean.merchant.img}}"></image>
 					<view class="hotel-name one-line-overflow">{{bean.merchant.name}}</view>
 					<view class="order-status theme-button">
-						<view class="theme-button">{{bean.status_str}}啊啊默契</view>
+						<view class="theme-button">{{bean.status_str}}</view>
 					</view>
 					
 				</view>

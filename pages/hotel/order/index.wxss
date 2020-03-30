@@ -84,6 +84,7 @@
   width: 120rpx;
   height: 50rpx;
   line-height: 50rpx;
+  text-align: center;
   margin-left: -122rpx;
   padding-left: 20rpx;
   padding-right: 20rpx;
