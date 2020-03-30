@@ -58,6 +58,7 @@
   height: 60rpx;
   line-height: 60rpx;
   text-align: center;
+  font-size: 36rpx;
   margin: 0;
   padding: 0;
   border: 0;
