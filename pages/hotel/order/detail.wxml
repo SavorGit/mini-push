@@ -55,7 +55,7 @@
 				<view class="head flex-row-center-space_between">
 					<view class="status">派送中></view>
 					<view class="distance flex-row-center-space_between">
-						<view>骑手距您还有{{order_info.distance}}</view>
+						<view class="content one-line-overflow">骑手距您还有{{order_info.distance}}</view>
 						<view class="btn fa fa-refresh theme-font theme-bg-FFFFFF" bindtap="reFreshOrder"></view>
 					</view>
 				</view>
