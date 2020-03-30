@@ -92,6 +92,24 @@ Page({
     })
 
   },
+  reFreshOrder:function(e){
+    var that = this;
+    //订单详情
+    utils.PostRequest(api_url + '/smallapp43/order/detail', {
+      openid: openid,
+      order_id: order_id,
+    }, (data, headers, cookies, errMsg, statusCode) => {
+      //var hotel_location = data.result.hotel_location;
+      ///var user_location = data.result.user_location;
+
+      that.setData({
+        //user_location: user_location,
+        order_info: data.result,
+        markers: data.result.markers
+      })
+      app.showToast('刷新成功');
+    });
+  },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
