@@ -120,6 +120,7 @@ Page({
     var merchant_name = e.currentTarget.dataset.merchant_name;
     var keys = e.currentTarget.dataset.keys;
     var order_status = that.data.order_status;
+    var area_id = e.currentTarget.dataset.area_id;
     if(order_status==0){//全部订单
       var order_list = that.data.all_order_list
       var goods_list = order_list[keys].goods;
@@ -143,7 +144,7 @@ Page({
     }
 
     wx.navigateTo({
-      url: '/pages/hotel/order/account?openid=' + openid + '&merchant_id=' + merchant_id + '&merchant_name=' + merchant_name + '&order_type=3&order_id='+order_id,
+      url: '/pages/hotel/order/account?openid=' + openid + '&merchant_id=' + merchant_id + '&merchant_name=' + merchant_name + '&order_type=3&order_id=' + order_id +'&area_id='+area_id,
     })
   },
   gotoOrderDetail:function(e){

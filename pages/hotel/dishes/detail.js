@@ -165,7 +165,7 @@ Page({
     var amount = e.currentTarget.dataset.amount;
     if (self.data.showChangeOrderGoodsPopWindow) {
       wx.navigateTo({
-        url: '/pages/hotel/order/account?goods_id=' + goods_id + "&openid=" + openid + '&order_type=1&merchant_name=' + this.data.merchant.name + '&merchant_id=' + this.data.merchant.merchant_id+'&amount='+amount,
+        url: '/pages/hotel/order/account?goods_id=' + goods_id + "&openid=" + openid + '&order_type=1&merchant_name=' + this.data.merchant.name + '&merchant_id=' + this.data.merchant.merchant_id+'&amount='+amount+'&area_id='+this.data.merchant.area_id,
         success: function (res) {
           self.closeChangeOrderGoodsWindow(e);
         }

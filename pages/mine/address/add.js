@@ -4,6 +4,7 @@ const utils = require('../../../utils/util.js')
 const mta = require('../../../utils/mta_analysis.js')
 var api_url = app.globalData.api_url;
 var openid = openid;
+var area_id = 0;
 Page({
 
   /**
@@ -34,6 +35,9 @@ Page({
     console.log(options)
     var that = this;
     openid = options.openid;
+    if(typeof(options.area_id)!='undefined'){
+      area_id = options.area_id;
+    }
     var address_id = options.address_id;
 
     
@@ -41,6 +45,7 @@ Page({
     if(typeof(address_id) =='undefined'){//新增收货地址
       //获取城市列表
       utils.PostRequest(api_url + '/smallsale18/Area/getAreaList', {
+        area_id: area_id
       }, (data, headers, cookies, errMsg, statusCode) => {
         console.log(data)
         that.setData({
@@ -74,6 +79,7 @@ Page({
 
         //获取城市列表
         utils.PostRequest(api_url + '/smallsale18/Area/getAreaList', {
+          area_id: area_id
         }, (data, headers, cookies, errMsg, statusCode) => {
           var city_list = data.result.city_list
           

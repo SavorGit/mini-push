@@ -13,6 +13,7 @@ var goods_id;
 var openid;
 var order_type;
 var merchant_id;
+var area_id;
 Page({
 
   /**
@@ -45,8 +46,8 @@ Page({
     wx.hideShareMenu();
     let that = this;
     openid = options.openid;
-    order_type = options.order_type;  //1单品下单 2购物车下单
-
+    order_type = options.order_type;  //1单品下单 2购物车下单  3再次购买
+    area_id    = options.area_id;
     var merchant_name = options.merchant_name;
     merchant_id = options.merchant_id;
     that.setData({
@@ -462,7 +463,7 @@ Page({
    */
   selectAddress: function (e) {
     wx.navigateTo({
-      url: '/pages/mine/address/index?openid=' + openid + '&isOrder=1',
+      url: '/pages/mine/address/index?openid=' + openid + '&isOrder=1&area_id='+area_id,
     })
   },
   addNum: function (e) {

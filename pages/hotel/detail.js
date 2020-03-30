@@ -408,7 +408,7 @@ Page({
     var cart_list = wx.getStorageSync(cache_key + 'cart_' + merchant_id);
     if(cart_list!=''){
       wx.navigateTo({
-        url: '/pages/hotel/order/account?openid='+this.data.openid+'&merchant_id='+merchant_id+'&merchant_name='+this.data.hotel_info.name+'&order_type=2',
+        url: '/pages/hotel/order/account?openid='+this.data.openid+'&merchant_id='+merchant_id+'&merchant_name='+this.data.hotel_info.name+'&order_type=2&area_id='+this.data.hotel_info.area_id,
       })
 
       self.setData({ showShoppingCartWindow: false });

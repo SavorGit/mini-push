@@ -7,6 +7,7 @@ var cache_key = app.globalData.cache_key;
 var openid = openid;
 var page = 1;
 var isOrder = 0;
+var area_id = 0;
 Page({
 
   /**
@@ -26,9 +27,14 @@ Page({
     var that = this;
     openid = options.openid;
     isOrder = options.isOrder;
+    console.log(options)
+    if(typeof(options.area_id)!='undefined'){
+      area_id = options.area_id;
+    }
     utils.PostRequest(api_url + '/Smallapp43/address/addresslist', {
       openid: openid,
-      page :1
+      page :1,
+      area_id: area_id,
     }, (data, headers, cookies, errMsg, statusCode) => that.setData({
       address_list: data.result,
       isOrder: isOrder
@@ -40,7 +46,7 @@ Page({
   gotoAddAdress:function(e){
     var that = this;
     wx.navigateTo({
-      url: '/pages/mine/address/add?openid='+openid,
+      url: '/pages/mine/address/add?openid=' + openid + '&area_id=' + area_id,
     })
   },
   /**
@@ -51,7 +57,8 @@ Page({
     page +=1;
     utils.PostRequest(api_url + '/Smallapp43/address/addresslist', {
       openid: openid,
-      page: page
+      page: page,
+      area_id:area_id
     }, (data, headers, cookies, errMsg, statusCode) => that.setData({
       address_list: data.result,
     }));
@@ -175,7 +182,8 @@ Page({
     var that = this;
     utils.PostRequest(api_url + '/Smallapp43/address/addresslist', {
       openid: openid,
-      page: page
+      page: page,
+      area_id:area_id
     }, (data, headers, cookies, errMsg, statusCode) => that.setData({
       address_list: data.result,
     }));
