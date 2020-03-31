@@ -140,7 +140,7 @@ Page({
   },
   getMerchantInfo: function (merchant_id) {
     var that = this;
-    utils.PostRequest(api_url + '/Smallapp4/merchant/info', {
+    utils.PostRequest(api_url + '/smallapp43/merchant/info', {
       merchant_id: merchant_id,
     }, (data, headers, cookies, errMsg, statusCode) => that.setData({
       hotel_info: data.result
@@ -221,18 +221,7 @@ Page({
       url: '/pages/hotel/dishes/detail?goods_id=' + goods_id,
     })
   },
-  previewImage: function (e) {
-    var current = e.currentTarget.dataset.src;
-    var urls = [];
-    for (var i = 0; i < 1; i++) {
-      urls[i] = current;
-    }
-    wx.previewImage({
-      current: urls[0], // 当前显示图片的http链接
-      urls: urls // 需要预览的图片http链接列表
-    })
-
-  },
+  
   /**
    * 第三方平台
    */
@@ -419,7 +408,7 @@ Page({
     var cart_list = wx.getStorageSync(cache_key + 'cart_' + merchant_id);
     if(cart_list!=''){
       wx.navigateTo({
-        url: '/pages/hotel/order/account?openid='+this.data.openid+'&merchant_id='+merchant_id+'&merchant_name='+this.data.hotel_info.name+'&order_type=2',
+        url: '/pages/hotel/order/account?openid='+this.data.openid+'&merchant_id='+merchant_id+'&merchant_name='+this.data.hotel_info.name+'&order_type=2&area_id='+this.data.hotel_info.area_id,
       })
 
       self.setData({ showShoppingCartWindow: false });
@@ -430,6 +419,15 @@ Page({
     }else {
       app.showToast('购物车没有商品');
     }
+  },
+  /**
+   * 商家介绍页面
+   */
+  gotoMerDetail:function(e){
+    var openid = e.currentTarget.dataset.openid;
+    wx.navigateTo({
+      url: '/pages/hotel/introduction?merchant_id='+merchant_id+'&openid'+openid,
+    })
   },
   /**
    * 生命周期函数--监听页面初次渲染完成

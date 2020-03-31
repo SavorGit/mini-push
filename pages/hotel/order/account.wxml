@@ -1,4 +1,9 @@
 <!--pages/hotel/order/account.wxml-->
+<!--
+ | 确认订单页面
+ |-->
+
+
 <import src="/pages/template/commons" />
 <template is="navigationBarForTwoLevel" data='{{statusBarHeight: statusBarHeight,titleText:"确认订单"}}' />
 
@@ -7,42 +12,90 @@
 	<form bindsubmit="placeOrder">
 		<scroll-view class="scroll-view" scroll-y="true" scroll-with-animation="true">
 			<view class="page-wapper" style='height: calc(100vh - 46px - {{statusBarHeight}}px -10rpx);'>
-				<view wx:if="{{is_have_default_address==false}}" class="consignee-info input-panel theme-panel">
-
-					<view class="choose-consignee flex-row-center-space_between" bindtap="selectAddress">
-						<view class="lable">请选择收货地址</view>
-						<view class="btn flex-row-center-flex_end">
+				<view class="tab-bar flex-row-center-center theme-panel" wx:if="{{delivery_types.length>1}}">
+					<view class="tab take-out{{tab == 'take-out' ? ' selected' : ''}}" data-tab="take-out" bindtap="showTab">外卖配送</view>
+					<view class="tab hotel{{tab == 'hotel' ? ' selected' : ''}}" data-tab="hotel" bindtap="showTab">到店自提</view>
+				</view>
+				<block wx:if="{{tab == 'take-out'}}">
+					<view wx:if="{{is_have_default_address==false}}" class="consignee-info input-panel theme-panel">
+						<view class="body flex-column-center-space_between">
+							<view class="choose-consignee flex-row-center-space_between" bindtap="selectAddress">
+								<view class="label">请选择收货地址</view>
+								<view class="btn flex-row-center-flex_end">
+									<view class="fa fa-angle-right" aria-hidden="true"></view>
+								</view>
+							</view>
+						</view>
+					</view>
+					<view wx:else class="consignee-info input-panel theme-panel">
+						<view class="head flex-row-center-space_between" bindtap="selectAddress">
+							<view>收货地址</view>
 							<view class="fa fa-angle-right" aria-hidden="true"></view>
 						</view>
-					</view>
-				</view>
-				<view wx:else class="consignee-info input-panel theme-panel">
-					<view class="head flex-row-center-space_between" bindtap="selectAddress">
-						<view>收货地址</view>
-						<view class="fa fa-angle-right" aria-hidden="true"></view>
-					</view>
-					<view class="body flex-column-center-space_between">
-						<view class="flex-row-center-flex_start">
-							<view class="name">{{address_info.consignee}}</view>
-							<view class="phone">{{address_info.phone}}</view>
-						</view>
-						<view class="address two-line-overflow">{{address_info.address}}</view>
-					</view>
-				</view>
-				<view class="arrive-time input-panel theme-panel">
-					<view class="flex-row-center-space_between">
-						<view class="lable">送达时间</view>
-						<view class="flex-row-center-space_between">
-							<picker mode="date" bindchange="bindDateChange" start="2020-01-01" end="2050-12-31" data-type="1">
-								<view class="flex-row-center-center" style="width:100%;height:60rpx;">{{delivery_date.length==10?delivery_date:'请选择日期'}}</view>
-							</picker>
-							<picker mode="time" bindchange="bindDateChange" data-type="2">
-								<view class="flex-row-center-center" style="width:100%;height:60rpx;">{{delivery_time.length==5?delivery_time:'请选择时间'}}</view>
-							</picker>
-							<view class="fa fa-calendar" aria-hidden="true"></view>
+						<view class="body flex-column-center-space_between">
+							<view class="flex-row-center-flex_start">
+								<view class="name">{{address_info.consignee}}</view>
+								<view class="phone">{{address_info.phone}}</view>
+							</view>
+							<view class="address two-line-overflow">{{address_info.address}}</view>
 						</view>
 					</view>
-				</view>
+					<!--
+					<view class="arrive-time input-panel theme-panel">
+						<view class="body flex-column-center-space_between">
+							<view class="flex-row-center-space_between">
+								<view class="label">送达时间</view>
+								<view class="flex-row-center-space_between">
+									<picker mode="date" bindchange="bindDateChange" start="2020-01-01" end="2050-12-31" data-type="1">
+										<view class="flex-row-center-center" style="width:100%;height:60rpx;">{{delivery_date.length==10?delivery_date:'请选择日期'}}</view>
+									</picker>
+									<picker mode="time" bindchange="bindDateChange" data-type="2">
+										<view class="flex-row-center-center" style="width:100%;height:60rpx;">{{delivery_time.length==5?delivery_time:'请选择时间'}}</view>
+									</picker>
+									<view class="fa fa-calendar" aria-hidden="true"></view>
+								</view>
+							</view>
+						</view>
+					</view>
+					-->
+					<view class="arrive-time input-panel theme-panel">
+						<view class="body flex-column-center-space_between">
+							<view class="flex-row-center-space_between">
+								<picker mode="selector" range="{{delevery_arr}}" bindchange="selectDeleveryTime">
+									<view class="flex-row-center-space_between" style="width:100%;height:60rpx;">
+										<view>{{delevery_arr[delivery_index]}}</view>
+										<view class="fa fa-angle-right" aria-hidden="true"></view>
+									</view>
+								</picker>
+							</view>
+						</view>
+					</view>
+				</block>
+				<block wx:if="{{tab == 'hotel'}}">
+					<view class="consignee-info input-panel theme-panel">
+						<view class="body flex-column-center-space_between">
+							<view class="row flex-row-center-flex_start">
+								<view class="icon fa fa-map-marker" aria-hidden="true"></view>
+								<view class="address two-line-overflow">{{address_info.address}}</view>
+							</view>
+							<view class="row flex-row-center-space_between">
+								<view class="label">预留手机</view>
+								<view class="flex-row-center-space_between">
+									<input class="input phone" name="phone" value="{{address_info.phone}}"></input>
+								</view>
+							</view>
+							<view class="row flex-row-center-space_between">
+								<view class="label">自提时间</view>
+								<view class="flex-row-center-space_between">
+									<picker mode="time" bindchange="selectSelfPick">
+										<view class="flex-row-center-center" style="width:100%;height:60rpx;">{{selfpick_time==''?'请选择时间':selfpick_time}}</view>
+									</picker>
+								</view>
+							</view>
+						</view>
+					</view>
+				</block>
+
 				<view class="goods-info input-panel theme-panel">
 					<view class="head">订单信息</view>
 					<view class="body flex-column-center-space_between">
@@ -78,16 +131,105 @@
 						<view class="theme-font5">￥{{total_price}}</view>
 					</view>
 				</view>
+				<view class="delivery input-panel theme-panel" wx:if='{{delivery_fee>0 && tab == "take-out"}}'>
+					<view class="head flex-row-center-space_between">
+						<view>配送费用</view>
+						<view class="fee theme-font5">￥{{delivery_fee}}</view>
+					</view>
+					<!--
+					<view class="body flex-column-center-space_between">
+						<view class="row flex-row-center-space_between">
+							<view class="label">基础配送费</view>
+							<view class="flex-row-center-space_between">￥8</view>
+							<view class="block rule theme-font7" bindtap="">计费规则</view>
+						</view>
+						<view class="row flex-row-center-space_between">
+							<view class="label">距离附加</view>
+							<view class="flex-row-center-space_between">￥18</view>
+							<view class="block"></view>
+						</view>
+						<view class="row flex-row-center-space_between">
+							<view class="label">高峰时段</view>
+							<view class="flex-row-center-space_between">￥2</view>
+							<view class="block"></view>
+						</view>
+						<view class="row flex-row-center-space_between">
+							<view class="label">夜间配送</view>
+							<view class="flex-row-center-space_between">￥2</view>
+							<view class="block"></view>
+						</view>
+					</view>
+					-->
+				</view>
+				<view class="pay input-panel theme-panel">
+					<radio-group class="body flex-column-center-space_between" bindchange="selectPayType">
+						<view class="row flex-row-center-space_between" wx:for="{{pay_types}}" wx:key="key" wx:for-item="bean" wx:for-index="index">
+							<view class="left flex-row-center-flex_start">
+								<view class="icon fa fa-weixin" aria-hidden="true" wx:if="{{bean.id==10}}"></view>
+								<view class="icon fa fa-universal-access" aria-hidden="true" wx:else></view>
+								<view class="label flex-column-flex_start-center">
+									<view class="title">{{bean.name}}</view>
+								</view>
+							</view>
+							<view class="right flex-row-center-space_between">
+								<radio wx:if="{{index==0}}" checked="true" value="{{bean.id}}"></radio>
+								<radio wx:else value="{{bean.id}}"></radio>
+							</view>
+						</view>
+						<!-- <view class="row flex-row-center-space_between">
+							<view class="left flex-row-center-flex_start">
+								<view class="icon fa fa-universal-access" aria-hidden="true"></view>
+								<view class="label flex-column-flex_start-center">
+									<view class="title">线下支付</view>
+									<view class="desc theme-font3">下单后，餐厅与您联系</view>
+								</view>
+							</view>
+							<view class="right flex-row-center-space_between">
+								<radio></radio>
+							</view>
+						</view> -->
+					</radio-group>
+				</view>
+				<view class="misc input-panel theme-panel">
+					<view class="body flex-column-center-space_between">
+						<view class="flex-row-center-space_between" bindtap="gotoRemark">
+							<view class="label">订单备注</view>
+							<view class="btn flex-row-center-space_between">
+								<view class="choosed one-line-overflow theme-font3">{{remark_strs}}</view>
+								<view class="fa fa-angle-right" aria-hidden="true"></view>
+							</view>
+						</view>
+						<view class="flex-row-center-space_between" bindtap="gotoInvoice">
+							<view class="label">发票信息</view>
+							<view class="btn flex-row-center-space_between">
+								<view class="choosed one-line-overflow theme-font3" wx:if="{{bill_info.title!=''}}">{{bill_info.title}}</view>
+								<view class="choosed one-line-overflow theme-font3" wx:else>{{bill_info.title}}</view>
+								<view class="fa fa-angle-right" aria-hidden="true"></view>
+							</view>
+						</view>
+						<view class="flex-row-center-space_between" bindtap="">
+							<view class="label">餐具份数</view>
+							<view class="value flex-row-center-space_between">
+								<picker class="input" mode="selector" range="{{tableware_arr}}" bindchange="selectTabWare">
+									<view class="flex-row-center-space_between" style="width:calc(100% - 10rpx);height:40rpx;padding:0 5rpx;">
+										<view>{{tableware_arr[tableware_index]}}</view>
+										<view class="fa fa-caret-down"></view>
+									</view>
+								</picker>
+							</view>
+						</view>
+					</view>
+				</view>
 			</view>
 			<input class='display_hide' name="delivery_date" value="{{delivery_date}}"> </input>
 			<input class='display_hide' name="address_id" value="{{address_id}}"> </input>
 			<input class='display_hide' name="delivery_time" value="{{delivery_time}}"></input>
 			<input class='display_hide' name="amount" value="{{amount}}"></input>
 		</scroll-view>
-		<button class="btn-buy theme-button-buy" form-type="submit" disabled="{{addDisabled}}">
-			<view>下单</view>
-			<view>下单后会由餐厅经理与您联系</view>
-		</button>
+		<view class="bottom flex-row-flex_start-center">
+			<view class="price theme-font5 theme-bg-FFFFFF">￥{{order_price}}</view>
+			<button class="btn theme-button-buy" form-type="submit" disabled="{{addDisabled}}">下单</button>
+		</view>
 	</form>
 </view>
 

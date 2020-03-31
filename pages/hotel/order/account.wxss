@@ -1,4 +1,8 @@
 /* pages/hotel/order/account.wxss */
+/**
+ * 确认订单页面
+ */
+
 
 input,
 picker,
@@ -17,9 +21,48 @@ textarea {
   height: 114rpx
 }
 
+.fa-weixin {
+  color: rgb(74, 204, 60);
+}
+
+.fa-universal-access {
+  color: rgb(16, 16, 16);
+}
+
 .page-wapper {
   width: 100%;
   padding-top: 10rpx;
+  padding-bottom: 100rpx;
+}
+
+.tab-bar {
+  width: 100%;
+  height: 80rpx;
+}
+
+.tab-bar>.tab {
+  width: 150rpx;
+  height: 50rpx;
+  line-height: 50rpx;
+  text-align: center;
+  color: #eb6877;
+  border: 3rpx solid #eb6877;
+  font-size: 32rpx;
+  margin: 0;
+  padding: 0;
+}
+
+.tab-bar>.tab.selected {
+  color: #fff;
+  background-color: #eb6877;
+}
+
+.tab-bar>.take-out {
+  border-radius: 10rpx 0 0 10rpx;
+}
+
+.tab-bar>.hotel {
+  border-radius: 0 10rpx 10rpx 0;
 }
 
 .input-panel {
@@ -27,13 +70,62 @@ textarea {
   margin-top: 10rpx;
 }
 
-.input-panel>view {
+.input-panel>.head {
+  width: calc(100% - 60rpx);
+  height: 70rpx;
+  line-height: 80rpx;
+  padding: 0 30rpx;
+  font-size: 28rpx;
+}
+
+/* .input-panel>view {
+  padding: 0 60rpx;
+} */
+
+.input-panel>.body {
+  width: 100%;
+}
+
+.input-panel>.body>view {
+  width: calc(100% - 120rpx);
   height: 90rpx;
   padding: 0 60rpx;
 }
 
-.input-panel>view>.lable {
+.input-panel>.body>view>.label {
   width: 120rpx;
+  font-size: 28rpx;
+}
+
+.input-panel>.body>view>.icon {
+  font-size: 34rpx;
+  margin-right: 10rpx;
+}
+
+.input-panel>.body>view>.btn>.choosed {
+  font-size: 28rpx;
+}
+
+.input-panel>.body>view>.btn>.fa {
+  width: 60rpx;
+  text-align: right;
+  font-size: 32rpx;
+}
+
+.input-panel>.body>.row>.left>.icon {
+  font-size: 36rpx;
+  margin-right: 10rpx;
+}
+
+.input-panel>.body>.row>.left>.label>.title {
+  font-size: 28rpx;
+}
+
+.input-panel>.body>.row>.left>.label>.desc {
+  font-size: 24rpx;
+}
+
+.input-panel>.body>.row>.right {
   font-size: 28rpx;
 }
 
@@ -49,12 +141,11 @@ textarea {
 }
 
 .consignee-info>.body {
-  height: 120rpx;
+  min-height: 120rpx;
   padding-bottom: 30rpx;
 }
 
 .consignee-info>.body>view {
-  width: 100%;
   font-size: 28rpx;
 }
 
@@ -76,34 +167,40 @@ textarea {
   margin-top: 15rpx;
 }
 */
-.consignee-info>.choose-consignee {
+.consignee-info>.body>.choose-consignee {
   height: 120rpx;
 }
 
-.consignee-info>.choose-consignee>.lable {
+.consignee-info>.body>.choose-consignee>.label {
   width: 210rpx;
 }
 
 .arrive-time {
   height: 90rpx;
+  line-height: 90rpx;
 }
 
-.arrive-time>view>view:last-child {
+.arrive-time>.body>view>picker {
+  width: 100%;
+  border: 0;
+}
+
+/* 
+.arrive-time>.body>view>view:last-child {
   width: 454rpx;
   height: 54rpx;
   border: 3rpx solid #bebebe;
   font-size: 24rpx;
 }
-
-.arrive-time>view>view>picker {
+.arrive-time>.body>view>view>picker {
   width: calc(50% - 50rpx);
   border: 0;
 }
 
-.arrive-time>view>view>.fa-calendar {
+.arrive-time>.body>view>view>.fa-calendar {
   margin-right: 20rpx;
   font-size: 28rpx;
-}
+} */
 
 .goods-info {
   /* height: 350rpx; */
@@ -115,11 +212,6 @@ textarea {
   padding: 0 30rpx;
 }
 
-.goods-info>.head {
-  height: 70rpx;
-  line-height: 80rpx;
-  font-size: 28rpx;
-}
 
 .goods-info>.body {
   width: calc(100% - 80rpx);
@@ -203,11 +295,96 @@ textarea {
   font-weight: bold;
 }
 
+.delivery>.head>.fee {
+  font-size: 32rpx;
+  font-weight: bold;
+}
+
+.delivery>.body>.row>view {
+  width: 100rpx;
+  font-size: 28rpx;
+}
+
+.delivery>.body>.row>.label {
+  width: 150rpx;
+}
+
+.delivery>.body>.row>.block {
+  width: 120rpx;
+  text-align: right;
+}
+
+.delivery>.body>.row>.rule {
+  text-decoration: underline;
+}
+
+/* .misc>.body>view {
+  width: calc(100% - 150rpx);
+} */
+
+.misc>.body>view>.btn {
+  width: calc(100% - 140rpx);
+}
+
+.misc>.body>view>.btn>.choosed {
+  width: calc(100% - 40rpx);
+  text-align: right;
+}
+
+.misc>.body>view>.btn>.fa {
+  width: 40rpx;
+  font-size: 28rpx;
+}
+
+.misc>.body>view>.value>.input {
+  width: 120rpx;
+  height: 40rpx;
+  border: 3rpx solid #dedede;
+}
+
+
+.scroll-view {
+  width: 100%;
+  height: 100%;
+}
+
+.bottom {
+  width: calc(100% - 60rpx);
+  height: 70rpx;
+  padding: 0 30rpx 28rpx 30rpx;
+  position: absolute;
+  bottom: 0;
+}
+
+.bottom>.price {
+  width: calc(100% - 160rpx);
+  height: 70rpx;
+  line-height: 70rpx;
+  padding-left: 60rpx;
+  font-size: 32rpx;
+  border-radius: 34rpx 0 0 34rpx;
+  box-shadow: 2px 2px 8px #DEDEDE;
+}
+
+.bottom>.btn {
+  width: 160rpx;
+  height: 70rpx;
+  line-height: 70rpx;
+  text-align: center;
+  font-size: 32rpx;
+  border-radius: 0 34rpx 34rpx 0;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  box-shadow: 2px 2px 8px #DEDEDE;
+}
+
+/* 
+
 .scroll-view {
   width: 100%;
   height: calc(100% - 88rpx);
 }
-
 .btn-buy {
   width: 100%;
   height: 88rpx;
@@ -216,10 +393,10 @@ textarea {
   text-align: center;
   font-size: 28rpx;
   position: absolute;
-  /* bottom: 0; */
   border-radius: 0;
 }
 
 .btn-buy>view:last-child {
   font-size: 22rpx;
 }
+*/

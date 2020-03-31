@@ -1,4 +1,9 @@
 <!--pages/hotel/order/index.wxml-->
+<!--
+ | 订单列表页面
+ |-->
+
+
 <import src="/pages/template/commons" />
 <template is="navigationBarForTwoLevel" data='{{statusBarHeight: statusBarHeight,titleText:"订单列表"}}' />
 
@@ -17,29 +22,27 @@
 				<view class="head flex-row-flex_start-space_between theme-font8" bindtap="gotoMerchant" data-merchant_id="{{bean.merchant_id}}">
 					<image class="hotel-pic" mode="aspectFill" src="{{bean.merchant.img}}"></image>
 					<view class="hotel-name one-line-overflow">{{bean.merchant.name}}</view>
-					<view wx:if="{{bean.status==1}}" class="order-status theme-button">
-						<view class="theme-button">待处理</view>
+					<view class="order-status theme-button">
+						<view class="theme-button">{{bean.status_str}}</view>
 					</view>
-					<view wx:if="{{bean.status==2}}" class="order-status theme-button-buy">
-						<view class="theme-button-buy">已完成</view>
-					</view>
+					
 				</view>
 				<view class="body flex-row-center-space_between" bindtap="gotoOrderDetail" data-order_id="{{bean.order_id}}">
 					<view class="left flex-row-center-flex_start" wx:if="{{bean.goods.length==1}}">
-						<image  class="pic" mode="aspectFill" src="{{bean.goods_img}}"></image>
+						<image class="pic" mode="aspectFill" src="{{bean.goods_img}}"></image>
 					</view>
 
-          <view class="left multiple-goods flex-row-center-flex_start" wx:if="{{bean.goods.length>1}}">
-            <block wx:for="{{bean.goods}}" wx:key="kk" wx:for-item="item" wx:for-index="idx">
-						<image wx:if="{{idx<4}}"  class="pic" mode="aspectFill" src="{{item.img}}"></image>
-            </block>
-					</view>	
-          <view  class="center multiple-goods flex-column-center-center" wx:if="{{bean.goods.length>4}}">
+					<view class="left multiple-goods flex-row-center-flex_start" wx:if="{{bean.goods.length>1}}">
+						<block wx:for="{{bean.goods}}" wx:key="kk" wx:for-item="item" wx:for-index="idx">
+							<image wx:if="{{idx<4}}" class="pic" mode="aspectFill" src="{{item.img}}"></image>
+						</block>
+					</view>
+					<view class="center multiple-goods flex-column-center-center" wx:if="{{bean.goods.length>4}}">
 						<view class="fa fa-chevron-circle-right fa-lg theme-font3" aria-hidden="true"></view>
 					</view>
 
 
-					<view  class="center flex-column-flex_start-center" wx:if="{{bean.goods.length==1}}">
+					<view class="center flex-column-flex_start-center" wx:if="{{bean.goods.length==1}}">
 						<view class="one-line-overflow theme-font1">{{bean.goods_name}}</view>
 					</view>
 					<view class="right flex-column-center-center">
@@ -49,10 +52,11 @@
 				</view>
 				<view class="foot flex-row-center-space_between">
 					<view>{{bean.add_time}}</view>
-					<view wx:if="{{bean.status==2}}" class="btn all theme-button-buy" bindtap="reBuy" data-order_id="{{bean.order_id}}"  data-merchant_id="{{bean.merchant_id}}" data-merchant_name="{{bean.merchant.name}}" data-keys="{{index}}">再次购买</view>
+					<view class="btn all theme-button-dark" wx:if="{{bean.status==13}}" bindtap="cancelOrder" data-order_id="{{bean.order_id}}" data-keys="{{index}}">取消订单</view>
+					<view wx:if="{{bean.status==2 || bean.status==17}}" class="btn all theme-button-buy" bindtap="reBuy" data-order_id="{{bean.order_id}}" data-merchant_id="{{bean.merchant_id}}" data-merchant_name="{{bean.merchant.name}}" data-keys="{{index}}" data-area_id="{{bean.merchant.area_id}}">再次购买</view>
 				</view>
 			</view>
-			
+
 
 		</view>
 	</scroll-view>
@@ -70,20 +74,20 @@
 				</view>
 				<view class="body flex-row-center-space_between" bindtap="gotoOrderDetail" data-order_id="{{bean.order_id}}">
 					<view class="left flex-row-center-flex_start" wx:if="{{bean.goods.length==1}}">
-						<image  class="pic" mode="aspectFill" src="{{bean.goods_img}}"></image>
+						<image class="pic" mode="aspectFill" src="{{bean.goods_img}}"></image>
 					</view>
 
-          <view class="left multiple-goods flex-row-center-flex_start" wx:if="{{bean.goods.length>1}}">
-            <block wx:for="{{bean.goods}}" wx:key="kk" wx:for-item="item" wx:for-index="idx">
-						<image wx:if="{{idx<4}}"  class="pic" mode="aspectFill" src="{{item.img}}"></image>
-            </block>
-					</view>	
-          <view  class="center multiple-goods flex-column-center-center" wx:if="{{bean.goods.length>4}}">
+					<view class="left multiple-goods flex-row-center-flex_start" wx:if="{{bean.goods.length>1}}">
+						<block wx:for="{{bean.goods}}" wx:key="kk" wx:for-item="item" wx:for-index="idx">
+							<image wx:if="{{idx<4}}" class="pic" mode="aspectFill" src="{{item.img}}"></image>
+						</block>
+					</view>
+					<view class="center multiple-goods flex-column-center-center" wx:if="{{bean.goods.length>4}}">
 						<view class="fa fa-chevron-circle-right fa-lg theme-font3" aria-hidden="true"></view>
 					</view>
 
 
-					<view  class="center flex-column-flex_start-center" wx:if="{{bean.goods.length==1}}">
+					<view class="center flex-column-flex_start-center" wx:if="{{bean.goods.length==1}}">
 						<view class="one-line-overflow theme-font1">{{bean.goods_name}}</view>
 					</view>
 					<view class="right flex-column-center-center">
@@ -93,9 +97,10 @@
 				</view>
 				<view class="foot flex-row-center-space_between">
 					<view>{{bean.add_time}}</view>
+					<view  class="btn pending theme-button-dark" wx:if="{{bean.status==13}}" bindtap="cancelOrder" data-order_id="{{bean.order_id}}" data-keys="{{index}}">取消订单</view>
 				</view>
 			</view>
-			
+
 
 		</view>
 	</scroll-view>
@@ -108,25 +113,25 @@
 					<image class="hotel-pic" mode="aspectFill" src="{{bean.merchant.img}}"></image>
 					<view class="hotel-name one-line-overflow">{{bean.merchant.name}}</view>
 					<view class="order-status theme-button-buy">
-						<view class="theme-button-buy">已完成</view>
+						<view class="theme-button-buy">{{bean.status_str}}</view>
 					</view>
 				</view>
 				<view class="body flex-row-center-space_between" bindtap="gotoOrderDetail" data-order_id="{{bean.order_id}}">
 					<view class="left flex-row-center-flex_start" wx:if="{{bean.goods.length==1}}">
-						<image  class="pic" mode="aspectFill" src="{{bean.goods_img}}"></image>
+						<image class="pic" mode="aspectFill" src="{{bean.goods_img}}"></image>
 					</view>
 
-          <view class="left multiple-goods flex-row-center-flex_start" wx:if="{{bean.goods.length>1}}">
-            <block wx:for="{{bean.goods}}" wx:key="kk" wx:for-item="item" wx:for-index="idx">
-						<image wx:if="{{idx<4}}"  class="pic" mode="aspectFill" src="{{item.img}}"></image>
-            </block>
-					</view>	
-          <view  class="center multiple-goods flex-column-center-center" wx:if="{{bean.goods.length>4}}">
+					<view class="left multiple-goods flex-row-center-flex_start" wx:if="{{bean.goods.length>1}}">
+						<block wx:for="{{bean.goods}}" wx:key="kk" wx:for-item="item" wx:for-index="idx">
+							<image wx:if="{{idx<4}}" class="pic" mode="aspectFill" src="{{item.img}}"></image>
+						</block>
+					</view>
+					<view class="center multiple-goods flex-column-center-center" wx:if="{{bean.goods.length>4}}">
 						<view class="fa fa-chevron-circle-right fa-lg theme-font3" aria-hidden="true"></view>
 					</view>
 
 
-					<view  class="center flex-column-flex_start-center" wx:if="{{bean.goods.length==1}}">
+					<view class="center flex-column-flex_start-center" wx:if="{{bean.goods.length==1}}">
 						<view class="one-line-overflow theme-font1">{{bean.goods_name}}</view>
 					</view>
 					<view class="right flex-column-center-center">
@@ -136,10 +141,10 @@
 				</view>
 				<view class="foot flex-row-center-space_between">
 					<view>{{bean.add_time}}</view>
-					<view class="btn completed theme-button-buy" bindtap="reBuy" data-order_id="{{bean.order_id}}"  data-merchant_id="{{bean.merchant_id}}" data-merchant_name="{{bean.merchant.name}}">再次购买</view>
+					<view class="btn completed theme-button-buy" bindtap="reBuy" data-order_id="{{bean.order_id}}" data-merchant_id="{{bean.merchant_id}}" data-merchant_name="{{bean.merchant.name}}" data-keys="{{index}}">再次购买</view>
 				</view>
 			</view>
-			
+
 
 		</view>
 	</scroll-view>

@@ -1,11 +1,88 @@
 <!--pages/hotel/order/detail.wxml-->
+<!--
+ | 订单详情页面
+ |-->
+
+
 <import src="/pages/template/commons" />
 <template is="navigationBarForTwoLevel" data='{{statusBarHeight: statusBarHeight,titleText:"订单详情"}}' />
 
 <scroll-view class='container theme-container' style='height: calc(100vh - 46px - {{statusBarHeight}}px);' scroll-y="true" scroll-with-animation="true">
 	<view class="page-wapper">
+		<!-- 食客自提 -->
+		<block wx:if="{{order_info.delivery_type==2}}">
+			<view class="status-panel input-panel theme-panel" wx:if="{{order_info.status==10 || order_info.status==13 || order_info.status==18 || order_info.status==19}}">
+				<view class="head flex-row-center-space_between">
+					<view class="status">{{order_info.status_str}}></view>
+				</view>
+			</view>
+			<!-- 已完成 -->
+			<view class="status-panel input-panel theme-panel" wx:elif="{{order_info.status==17}}">
+				<view class="head flex-row-center-space_between">
+					<view class="status">订单已送达></view>
+				</view>
+				<view class="body">
+					<view class="tip theme-font5">感谢您对小热点的信任，期待您再次光临</view>
+				</view>
+			</view>
+			<!-- 自取地址信息(此板块不受状态影响) -->
+			<view class="input-panel theme-panel">
+				<view class="head">自取地址</view>
+				<view class="body flex-column-center-space_between">
+					<view class="row flex-row-center-space_between">
+						<!-- 注意：行首空格不能删除 -->
+						<view class="view fa fa-map-marker" style="width:100%;" aria-hidden="true"> {{order_info.address}}</view>
+					</view>
+					<view class="row flex-row-center-space_between">
+						<view class="lable theme-font3">预留手机</view>
+						<view class="view">{{order_info.phone}}</view>
+					</view>
+				</view>
+			</view>
+		</block>
+		<!-- 外卖配送 -->
+		<block wx:elif="{{order_info.delivery_type==1}}">
+			<view class="status-panel input-panel theme-panel" wx:if="{{ order_info.status==10 || order_info.status==13 || order_info.status==14 || order_info.status==15 || order_info.status==18 || order_info.status==19}}">
+				<view class="head flex-row-center-space_between">
+					<view class="status">{{order_info.status_str}}></view>
+				</view>
+				<!-- <view class="body">
+				<view class="tip theme-font5">感谢您对小热点的信任，期待您再次光临</view>
+			</view> -->
+			</view>
+			<!-- 派送中 -->
+			<view class="status-panel input-panel theme-panel" wx:elif="{{order_info.status==16}}">
+				<view class="head flex-row-center-space_between">
+					<view class="status">派送中></view>
+					<view class="distance flex-row-center-space_between">
+						<view class="content one-line-overflow">骑手距您还有{{order_info.distance}}</view>
+						<view class="btn fa fa-refresh theme-font theme-bg-FFFFFF" bindtap="reFreshOrder"></view>
+					</view>
+				</view>
+				<view class="body">
+					<map id="map" longitude="{{order_info.user_location.lng}}" latitude="{{order_info.user_location.lat}}" scale="14" bindcontroltap="controltap" markers="{{markers}}" bindmarkertap="markertap" polyline="{{order_info.polyline}}" bindregionchange="regionchange" show-location style="width: 100%; height: 300px;"></map>
+					<button class="btn theme-button" bindtap='phonecallevent' data-tel="{{order_info.transporter.phone}}">
+						<view class="fa fa-phone" aria-hidden="true"> 联系骑手</view>
+					</button>
+				</view>
+			</view>
+			<!-- 已送达 -->
+			<view class="status-panel input-panel theme-panel" wx:elif="{{order_info.status==17}}">
+				<view class="head flex-row-center-space_between">
+					<view class="status">订单已送达></view>
+				</view>
+				<view class="body">
+					<view class="tip theme-font5">感谢您对小热点的信任，期待您再次光临</view>
+				</view>
+			</view>
+		</block>
 		<view class="goods-info input-panel theme-panel">
-			<view class="head">菜品信息</view>
+			<view class="head flex-row-center-space_between">
+				<view class="title">菜品信息</view>
+				<button class="btn theme-button" bindtap='phonecallevent' data-tel="{{order_info.merchant.tel}}">
+					<view class="fa fa-phone" aria-hidden="true"> 联系餐厅</view>
+				</button>
+			</view>
 			<view class="body flex-column-center-space_between">
 				<view class="hotel theme-font7">由{{order_info.merchant.name}}提供</view>
 				<view class="row flex-row-center-space_between" wx:for="{{order_info.goods}}" wx:key="key" wx:for-item="bean" wx:for-index="index">
@@ -36,7 +113,14 @@
 		</view>
 		<view class="input-panel theme-panel">
 			<view class="head">配送信息</view>
-			<view class="body flex-column-center-space_between">
+			<!-- 食客自提 -->
+			<view class="body flex-column-center-space_between" wx:if="{{order_info.delivery_type==2}}">
+				<view class="row flex-row-center-space_between">
+					<view class="view" style="width:100%;">到店自提,自提时间：{{order_info.selfpick_time}}</view>
+				</view>
+			</view>
+			<!-- 外卖配送 -->
+			<view class="body flex-column-center-space_between" wx:if="{{order_info.delivery_type==1}}">
 				<view class="row flex-row-center-space_between">
 					<view class="lable theme-font3">联系人</view>
 					<view class="view">{{order_info.contact}}</view>
@@ -52,6 +136,10 @@
 				<view class="row flex-row-center-space_between">
 					<view class="lable theme-font3">配送时间</view>
 					<view class="view">{{order_info.delivery_time}}</view>
+				</view>
+				<view class="row flex-row-center-space_between">
+					<view class="lable theme-font3">配送费用</view>
+					<view class="view">{{order_info.delivery_fee}}</view>
 				</view>
 			</view>
 		</view>
@@ -69,6 +157,55 @@
 				<view class="row flex-row-center-space_between">
 					<view class="lable theme-font3">完成时间</view>
 					<view class="view">{{order_info.finish_time}}</view>
+				</view>
+				<view class="row flex-row-center-space_between">
+					<view class="lable theme-font3">订单金额</view>
+					<view class="view">{{order_info.total_fee}}</view>
+				</view>
+			</view>
+		</view>
+		<view class="input-panel theme-panel">
+			<view class="head">发票信息</view>
+			<view class="body flex-column-center-space_between">
+				<!-- 企业 -->
+				<block wx:if="{{order_info.invoice.title_type==1}}">
+					<view class="row flex-row-center-space_between">
+						<view class="lable theme-font3">企业名称</view>
+						<view class="view">{{order_info.invoice.company}}</view>
+					</view>
+					<view class="row flex-row-center-space_between">
+						<view class="lable theme-font3">企业税号</view>
+						<view class="view">{{order_info.invoice.credit_code}}</view>
+					</view>
+				</block>
+				<block wx:elif="{{order_info.invoice.title_type==2}}">
+					<!-- 个人 -->
+					<view class="row flex-row-center-space_between">
+						<view class="lable theme-font3">个人姓名</view>
+						<view class="view">{{order_info.invoice.company}}</view>
+					</view>
+				</block>
+			</view>
+		</view>
+		<view class="input-panel theme-panel">
+			<view class="head">餐具</view>
+			<view class="body flex-column-center-space_between">
+				<!--
+				<view class="row flex-row-center-space_between">
+					<view class="lable theme-font3">数量</view>
+					<view class="view">2</view>
+				</view>
+				-->
+				<view class="row flex-row-center-space_between" wx:if="{{order_info.tableware>0}}">
+					<view class="view">{{order_info.tableware}}份</view>
+				</view>
+			</view>
+		</view>
+		<view class="input-panel theme-panel">
+			<view class="head">订单备注</view>
+			<view class="body flex-column-center-space_between">
+				<view class="row flex-row-center-space_between" style="height:unset;">
+					<view class="view" style="width:100%;">{{order_info.remark}}</view>
 				</view>
 			</view>
 		</view>

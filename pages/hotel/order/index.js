@@ -33,7 +33,7 @@ Page({
 
 
     //全部订单
-    utils.PostRequest(api_url + '/Smallapp4/order/dishOrderlist', {
+    utils.PostRequest(api_url + '/smallapp43/order/orderlist', {
       openid: openid,
       page: 1,
       status: 0
@@ -43,7 +43,7 @@ Page({
       })
     })
     //处理中的订单
-    utils.PostRequest(api_url + '/Smallapp4/order/dishOrderlist', {
+    utils.PostRequest(api_url + '/smallapp43/order/orderlist', {
       openid: openid,
 
       page: 1,
@@ -54,7 +54,7 @@ Page({
       })
     })
     //已完成的订单
-    utils.PostRequest(api_url + '/Smallapp4/order/dishOrderlist', {
+    utils.PostRequest(api_url + '/smallapp43/order/orderlist', {
       openid: openid,
       page: 1,
       status: 2
@@ -86,7 +86,7 @@ Page({
       page = page_complete;
     }
     //订单分页
-    utils.PostRequest(api_url + '/Smallapp4/order/dishOrderlist', {
+    utils.PostRequest(api_url + '/smallapp43/order/orderlist', {
       openid: openid,
       page: page,
       status: order_status
@@ -120,12 +120,15 @@ Page({
     var merchant_name = e.currentTarget.dataset.merchant_name;
     var keys = e.currentTarget.dataset.keys;
     var order_status = that.data.order_status;
+    var area_id = e.currentTarget.dataset.area_id;
     if(order_status==0){//全部订单
       var order_list = that.data.all_order_list
       var goods_list = order_list[keys].goods;
     
     }else if(order_status ==2){
       var order_list = that.data.complete_order_list;
+      console.log(order_list)
+      console.log(keys)
       var goods_list = order_list[keys].goods;
     }
     var can_buy = 0;
@@ -141,7 +144,7 @@ Page({
     }
 
     wx.navigateTo({
-      url: '/pages/hotel/order/account?openid=' + openid + '&merchant_id=' + merchant_id + '&merchant_name=' + merchant_name + '&order_type=3&order_id='+order_id,
+      url: '/pages/hotel/order/account?openid=' + openid + '&merchant_id=' + merchant_id + '&merchant_name=' + merchant_name + '&order_type=3&order_id=' + order_id +'&area_id='+area_id,
     })
   },
   gotoOrderDetail:function(e){
@@ -158,6 +161,75 @@ Page({
       })
     }
   },
+  //取消订单
+  cancelOrder:function(e){
+    var that = this;
+    var order_id = e.currentTarget.dataset.order_id;
+    var keys = e.currentTarget.dataset.keys;
+    var order_status = that.data.order_status; 
+
+    wx.showModal({
+      title: '提示',
+      content: '确认取消订单吗?',
+      success: function (res) {
+        if (res.confirm) {
+          utils.PostRequest(api_url + '/smallapp43/order/cancel', {
+            openid: openid,
+            order_id: order_id,
+          }, (data, headers, cookies, errMsg, statusCode) => {
+            if (order_status == 0) {//全部订单
+              var order_list = that.data.all_order_list;
+              order_list.splice(keys,1)
+              that.setData({
+                all_order_list:order_list
+              })
+              //处理中的订单
+              utils.PostRequest(api_url + '/smallapp43/order/orderlist', {
+                openid: openid,
+
+                page: page_dealing,
+                status: 1
+              }, (data, headers, cookies, errMsg, statusCode) => {
+                that.setData({
+                  deal_order_list: data.result.datalist
+                })
+              })
+            } else if (order_status == 1) {//待处理
+              var order_list = that.data.deal_order_list;
+              order_list.splice(keys,1)
+              that.setData({
+                deal_order_list: order_list
+              })
+            }
+            //全部
+            utils.PostRequest(api_url + '/smallapp43/order/orderlist', {
+              openid: openid,
+
+              page: page_all,
+              status: 0
+            }, (data, headers, cookies, errMsg, statusCode) => {
+              that.setData({
+                all_order_list: data.result.datalist
+              })
+            })
+            //获取已完成的订单列表
+            //订单分页
+            utils.PostRequest(api_url + '/smallapp43/order/orderlist', {
+              openid: openid,
+              page: page_complete,
+              status: 2
+            }, (data, headers, cookies, errMsg, statusCode) => {
+              that.setData({
+                complete_order_list: data.result.datalist
+              })
+
+            })
+          })
+        }
+      }
+    })
+    
+  },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
@@ -171,7 +243,7 @@ Page({
   onShow: function () {
     var that = this;
     //全部订单
-    utils.PostRequest(api_url + '/Smallapp4/order/dishOrderlist', {
+    utils.PostRequest(api_url + '/smallapp43/order/orderlist', {
       openid: openid,
       page: page_all,
       status: 0
@@ -182,7 +254,7 @@ Page({
     })
     
     //已完成的订单
-    utils.PostRequest(api_url + '/Smallapp4/order/dishOrderlist', {
+    utils.PostRequest(api_url + '/smallapp43/order/orderlist', {
       openid: openid,
       page: page_complete,
       status: 2

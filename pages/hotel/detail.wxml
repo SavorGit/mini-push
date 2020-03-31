@@ -1,4 +1,9 @@
 <!--pages/hotel/detail.wxml-->
+<!--
+ | 餐厅详情页面
+ |-->
+
+
 <import src="/pages/template/commons" />
 <template is="navigationBarForShare" data='{{statusBarHeight: statusBarHeight,titleText:"餐厅详情"}}' wx:if="{{is_share==true}}" />
 <template is="navigationBarForTwoLevel" data='{{statusBarHeight: statusBarHeight,titleText:"餐厅详情"}}' wx:if="{{is_share==false}}" />
@@ -9,16 +14,31 @@
 			<view class="shop theme-panel">
 				<view class="info flex-row-center-space_between">
 					<view class="pic-wapper">
-						<image class="pic" mode="aspectFill" bindtap="previewImage" data-src="{{hotel_info.img}}" src="{{hotel_info.img}}"></image>
+						<image class="pic" mode="aspectFill" src="{{hotel_info.img}}" bindtap="gotoMerDetail" data-openid="{{openid}}"></image>
 						<image class="flag" mode="aspectFill" src="https://oss.littlehotspot.com/WeChat/MiniProgram/images/waimai.png"></image>
 					</view>
 					<view class="right flex-column-flex_start-space_between">
-						<view class="name one-line-overflow">{{hotel_info.name}}</view>
-						<view class="flex-row-center-flex_start theme-font3">
-							<view class="style">{{hotel_info.food_style}}</view>
-							<view class="price">￥{{hotel_info.avg_expense}}/人</view>
+						<view class="name flex-row-center-space_between" bindtap="gotoMerDetail" data-openid="{{openid}}">
+							<view class="one-line-overflow">{{hotel_info.name}}</view>
+							<view class="fa fa-angle-right" aria-hidden="true"></view>
 						</view>
-						<view class="address two-line-overflow">地址：{{hotel_info.addr}}</view>
+						<!-- 有公告 -->
+						<view class="r-bottom flex-column-flex_start-flex_end" wx:if="{{hotel_info.notice !=''}}" >
+							<view class="notice flex-row-flex_start-flex_start">
+								<view class="icon fa fa-bullhorn theme-font5" aria-hidden="true"></view>
+								<view class="content four-line-overflow">{{hotel_info.notice}}</view>
+							</view>
+						</view>
+            <!-- 无公告 -->
+						<view class="r-bottom flex-column-flex_start-space_around" wx:else>
+							<view class="flex-row-center-flex_start theme-font3">
+								<view class="style">{{hotel_info.food_style}}</view>
+								<view class="price">￥{{hotel_info.avg_expense}}/人</view>
+							</view>
+							<view class="address two-line-overflow">地址：{{hotel_info.addr}}</view>
+						</view>
+						
+						
 					</view>
 				</view>
 				<view class="btn-group flex-row-center-center">
@@ -31,7 +51,7 @@
 						<view class="fa fa-phone fa-lg" aria-hidden="true"></view>
 						<view>电话订餐</view>
 					</button>
-          <button wx:else class="btn flex-row-center-center" bindtap='phonecallevent' data-tel="{{hotel_info.mobile}}">
+					<button wx:else class="btn flex-row-center-center" bindtap='phonecallevent' data-tel="{{hotel_info.mobile}}">
 						<view class="fa fa-phone fa-lg" aria-hidden="true"></view>
 						<view>电话订餐</view>
 					</button>
