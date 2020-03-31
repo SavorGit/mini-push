@@ -183,6 +183,17 @@ Page({
               that.setData({
                 all_order_list:order_list
               })
+              //处理中的订单
+              utils.PostRequest(api_url + '/smallapp43/order/orderlist', {
+                openid: openid,
+
+                page: page_dealing,
+                status: 1
+              }, (data, headers, cookies, errMsg, statusCode) => {
+                that.setData({
+                  deal_order_list: data.result.datalist
+                })
+              })
             } else if (order_status == 1) {//待处理
               var order_list = that.data.deal_order_list;
               order_list.splice(keys,1)
@@ -190,6 +201,17 @@ Page({
                 deal_order_list: order_list
               })
             }
+            //全部
+            utils.PostRequest(api_url + '/smallapp43/order/orderlist', {
+              openid: openid,
+
+              page: page_all,
+              status: 0
+            }, (data, headers, cookies, errMsg, statusCode) => {
+              that.setData({
+                all_order_list: data.result.datalist
+              })
+            })
             //获取已完成的订单列表
             //订单分页
             utils.PostRequest(api_url + '/smallapp43/order/orderlist', {

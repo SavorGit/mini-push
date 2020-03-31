@@ -30,7 +30,10 @@ Page({
     console.log(options)
     if(typeof(options.area_id)!='undefined'){
       area_id = options.area_id;
+    }else {
+      area_id = 0;
     }
+    console.log(area_id)
     utils.PostRequest(api_url + '/Smallapp43/address/addresslist', {
       openid: openid,
       page :1,

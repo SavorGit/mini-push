@@ -101,7 +101,7 @@
       },
       {
         "pagePath": "pages/hotel/cooperation",
-        "text": "合作餐厅",
+        "text": "外卖",
         "iconPath": "/images/icon2/999999_star.png",
         "selectedIconPath": "/images/icon2/000000_star.png"
       },
