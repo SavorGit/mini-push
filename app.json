@@ -18,7 +18,6 @@
     "pages/mine/assist/assistlist",
     "pages/mine/address/index",
     "pages/mine/address/add",
-    "pages/mine/order/index",
     "pages/demand/index",
     "pages/thematic/birthday/list",
     "pages/thematic/birthday/detail",
