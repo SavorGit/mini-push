@@ -102,8 +102,8 @@
       {
         "pagePath": "pages/hotel/cooperation",
         "text": "外卖",
-        "iconPath": "/images/icon2/999999_star.png",
-        "selectedIconPath": "/images/icon2/000000_star.png"
+        "iconPath": "/images/icon2/wm_wxz.png",
+        "selectedIconPath": "/images/icon2/wm_xz.png"
       },
       {
         "pagePath": "pages/mine/index_20181010",
