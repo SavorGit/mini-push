@@ -50,6 +50,7 @@ Page({
     area_id    = options.area_id;
     var merchant_name = options.merchant_name;
     merchant_id = options.merchant_id;
+    that.getMerchantInfo(merchant_id);
     that.setData({
       merchant_name: merchant_name,
       order_type: order_type
@@ -151,6 +152,14 @@ Page({
       }
     });
 
+  },
+  getMerchantInfo: function (merchant_id) {
+    var that = this;
+    utils.PostRequest(api_url + '/smallapp43/merchant/info', {
+      merchant_id: merchant_id,
+    }, (data, headers, cookies, errMsg, statusCode) => that.setData({
+      hotel_info: data.result
+    }));
   },
   getPrepareData: function (merchant_id, total_price, address_id){
     var that = this;
