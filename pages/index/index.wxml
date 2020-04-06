@@ -17,7 +17,7 @@
 			</swiper-item>
 		</block>
 	</swiper>
-
+	<navigator url="/mall/pages/goods/detail">商城页面</navigator>
 	<!-- 连接信息面板 -->
 	<view class="link-box-panel full_width theme-panel">
 		<view wx:if="{{is_link > 0}}" class='full_width full_height tip flex-column-center-start'>

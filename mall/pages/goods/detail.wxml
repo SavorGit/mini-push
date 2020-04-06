@@ -1,0 +1,155 @@
+<!--mall/pages/goods/detail.wxml-->
+<!--
+ | 【商城】商品详情页面
+ |-->
+
+
+<import src="/pages/template/commons" />
+<template is="navigationBarForTwoLevel" data='{{statusBarHeight: statusBarHeight,titleText:"商品详情"}}' />
+
+<view class='container theme-container' style='height: calc(100vh - 46px - {{statusBarHeight + SystemInfo.screenBottomSpace}}px);'>
+	<scroll-view class='scroll-view' scroll-y="true" scroll-with-animation="true">
+
+		<!-- 商品简介面板 -->
+		<view class="goods-smple-info flex-column-center-flex_start theme-panel">
+			<view class="top flex-column-center-flex_start">
+				<image class="pic" mode="aspectFill" src="https://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
+			</view>
+			<view class="bottom flex-row-center-space_between">
+				<view class="left flex-column-flex_start-space_between">
+					<view class="name two-line-overflow">【十人套餐】8荤6素超值员工餐</view>
+					<view class="bottom flex-row-center-flex_start">
+						<view class="price theme-font5">￥<text class="one-line-overflow">198</text></view>
+						<view class="price market one-line-overflow theme-font3">￥298</view>
+					</view>
+				</view>
+				<view class="right">
+					<view class="btn flex-column-center-flex_start" bindtap="">
+						<view class="fa fa-share-square-o theme-font5" aria-hidden="true"></view>
+						<view class="content theme-font3">分享</view>
+					</view>
+				</view>
+			</view>
+		</view>
+
+		<!-- 商铺面板 -->
+		<view class="shop-panel flex-row-center-flex_start theme-panel">
+			<view class="left">
+				<image class="pic" mode="aspectFill" src="https://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
+			</view>
+			<view class="center flex-column-flex_start-space_around">
+				<view class="name two-line-overflow">花家怡园（世茂店）</view>
+				<view class="info theme-font3 one-line-overflow">共发布了10件菜品</view>
+			</view>
+			<view class="right">
+				<view class="btn" bindtap="">进店</view>
+			</view>
+		</view>
+
+		<!-- 优选推荐面板 -->
+		<view class="panel recommend theme-panel">
+			<view class="title-bar">
+				<view class="title">优选推荐</view>
+			</view>
+			<scroll-view class="scroll-view" scroll-x="true" scroll-with-animation="true">
+				<view class="list flex-row-center-flex_start">
+					<view class="item flex-column-center-flex_start">
+						<view class="top">
+							<image class="pic" mode="aspectFill" src="https://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
+						</view>
+						<view class="bottom flex-column-flex_start-space_between">
+							<view class="name two-line-overflow">经典口味，口感醇</view>
+							<view class="bottom flex-row-center-space_between">
+								<view class="price theme-font5 one-line-overflow">￥123</view>
+								<view class="btn fa fa-cart-plus theme-font5" aria-hidden="true"></view>
+							</view>
+						</view>
+					</view>
+					<view class="item flex-column-center-flex_start">
+						<view class="top">
+							<image class="pic" mode="aspectFill" src="https://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
+						</view>
+						<view class="bottom flex-column-flex_start-space_between">
+							<view class="name two-line-overflow">经典口味，口感醇经典口味，口感醇经典口味，口感醇经典口味，口感醇经典口味，口感醇经典口味，口感醇经典口味，口感醇经典口味，口感醇经典口味，口感醇经典口味，口感醇经典口味，口感醇</view>
+							<view class="bottom flex-row-center-space_between">
+								<view class="price theme-font5 one-line-overflow">￥123</view>
+								<view class="btn fa fa-cart-plus theme-font5" aria-hidden="true"></view>
+							</view>
+						</view>
+					</view>
+					<view class="item flex-column-center-flex_start">
+						<view class="top">
+							<image class="pic" mode="aspectFill" src="https://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
+						</view>
+						<view class="bottom flex-column-flex_start-space_between">
+							<view class="name two-line-overflow">经典口味，口感醇</view>
+							<view class="bottom flex-row-center-space_between">
+								<view class="price theme-font5 one-line-overflow">￥123</view>
+								<view class="btn fa fa-cart-plus theme-font5" aria-hidden="true"></view>
+							</view>
+						</view>
+					</view>
+					<view class="item flex-column-center-flex_start">
+						<view class="top">
+							<image class="pic" mode="aspectFill" src="https://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
+						</view>
+						<view class="bottom flex-column-flex_start-space_between">
+							<view class="name two-line-overflow">经典口味，口感醇</view>
+							<view class="bottom flex-row-center-space_between">
+								<view class="price theme-font5 one-line-overflow">￥123</view>
+								<view class="btn fa fa-cart-plus theme-font5" aria-hidden="true"></view>
+							</view>
+						</view>
+					</view>
+				</view>
+			</scroll-view>
+		</view>
+
+		<!-- 商品介绍面板 -->
+		<view class="information-panel theme-panel">
+			<view class="title-bar">
+				<view class="title theme-font3">商品介绍</view>
+			</view>
+			<view class="panel-body">
+				<view class="panel">
+					<view class="title-bar">
+						<view class="title">商品视频</view>
+					</view>
+					<view class="body">
+						<video class="video"></video>
+					</view>
+				</view>
+				<view class="panel info">
+					<view class="title-bar">
+						<view class="title">商品详情</view>
+					</view>
+					<view class="body flex-column-center-flex_start">
+						<view class="text">1.XXXXXXX 2.XXXXXXX 3.XXXXXXX 4.XXXXXXXXXXXXXXXXXXXXX</view>
+						<view class="pics flex-column-center-flex_start">
+							<image class="pic" mode="widthFix" src="https://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
+							<image class="pic" mode="widthFix" src="https://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
+							<image class="pic" mode="widthFix" src="https://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
+						</view>
+					</view>
+				</view>
+			</view>
+		</view>
+
+	</scroll-view>
+	<view class="page-bottom flex-row-center-space_between theme-panel">
+		<view class="left flex-row-center-flex_start">
+			<view class="btn phone flex-column-center-space_between">
+				<view class="fa fa-phone theme-font2" aria-hidden="true"></view>
+				<view class="content theme-font2">电话</view>
+			</view>
+			<view class="btn cart flex-column-center-space_between">
+				<view class="fa fa-shopping-cart theme-font2" aria-hidden="true"></view>
+				<view class="content theme-font2">购物车</view>
+			</view>
+		</view>
+		<view class="right flex-row-center-space_between">
+			<view class="btn theme-button-orange">加入购物车</view>
+			<view class="btn theme-button-red">立即购买</view>
+		</view>
+	</view>
+</view>

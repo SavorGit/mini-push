@@ -128,9 +128,15 @@ button[disabled] {
 
 .theme-button-buy,
 .theme-button-like,
+.theme-button-red,
 .theme-rad-panel {
   color: #fff;
-  background-color: #eb6877;
+  background-color: #EB6877;
+}
+
+.theme-button-orange {
+  color: #fff;
+  background-color: #F68855;
 }
 
 .theme-button-welcome,
@@ -210,7 +216,7 @@ button[disabled] {
 }
 
 .theme-font5 {
-  color: #eb6877;
+  color: #F44444;
 }
 
 .theme-font6 {

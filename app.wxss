@@ -172,6 +172,7 @@ button::after {
 .flex-row-flex_end-flex_end,
 .flex-row-flex_end-end,
 .flex-column-stretch-flex_start,
+.flex-column-flex_start-flex_start,
 .flex-column-flex_start-start,
 .flex-column-flex_start-center,
 .flex-column-flex_start-flex_end,
@@ -209,6 +210,7 @@ button::after {
 }
 
 .flex-column-stretch-flex_start,
+.flex-column-flex_start-flex_start,
 .flex-column-flex_start-start,
 .flex-column-flex_start-center,
 .flex-column-flex_start-flex_end,
@@ -237,6 +239,7 @@ button::after {
 .flex-row-flex_start-center,
 .flex-row-flex_start-end,
 .flex-row-flex_start-space_between,
+.flex-column-flex_start-flex_start,
 .flex-column-flex_start-start,
 .flex-column-flex_start-center,
 .flex-column-flex_start-flex_end,
@@ -274,6 +277,7 @@ button::after {
 .flex-row-stretch-flex_start,
 .flex-column-center-flex_start,
 .flex-column-stretch-flex_start,
+.flex-column-flex_start-flex_start,
 .flex-column-flex_end-flex_start {
   justify-content: flex-start;
 }

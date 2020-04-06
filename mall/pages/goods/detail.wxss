@@ -1,0 +1,316 @@
+/* mall/pages/goods/detail.wxss */
+/**
+ * 【商城】首页
+ */
+
+
+.scroll-view {
+  width: 100%;
+  height: calc(100% - 80rpx);
+}
+
+.panel>.title-bar {
+  width: calc(100% - 60rpx);
+  height: 60rpx;
+  padding: 0 30rpx;
+}
+
+.panel>.title-bar>.title {
+  height: 35rpx;
+  padding: 20rpx 10rpx 0 10rpx;
+  display: inline-block;
+  border-bottom: 5rpx solid #F44444;
+  font-size: 24rpx;
+}
+
+.page-bottom {
+  width: 100%;
+  height: 80rpx;
+}
+
+.page-bottom>.left>.btn {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background-color: unset;
+}
+
+.page-bottom>.left>.btn>.fa {
+  width: 30rpx;
+  height: 30rpx;
+  line-height: 30rpx;
+  text-align: center;
+  font-size: 30rpx;
+}
+
+.page-bottom>.left>.btn>.fa-phone {
+  border-radius: 50%;
+  border: 3rpx solid #666666;
+  font-size: 28rpx;
+}
+
+.page-bottom>.left>.btn>.content {
+  height: 30rpx;
+  line-height: 30rpx;
+  text-align: center;
+  font-size: 18rpx;
+}
+
+.page-bottom>.left>.phone {
+  margin-left: 40rpx;
+}
+
+.page-bottom>.left>.cart {
+  margin-left: 50rpx;
+}
+
+.page-bottom>.right {
+  width: 403rpx;
+  height: 100%;
+}
+
+.page-bottom>.right>.btn {
+  width: 200rpx;
+  height: 80rpx;
+  line-height: 80rpx;
+  text-align: center;
+  margin-left: 3rpx;
+  font-size: 24rpx;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+}
+
+/* ===================================== 商品简介面板 ===================================== */
+.goods-smple-info {
+  width: 100%;
+  height: 580rpx;
+}
+
+.goods-smple-info>.top,
+.goods-smple-info>.top>.pic {
+  width: 100%;
+  height: 420rpx;
+}
+
+.goods-smple-info>.bottom {
+  width: calc(100% - 60rpx);
+  height: calc(100% - 460rpx);
+  padding: 20rpx 30rpx;
+}
+
+.goods-smple-info>.bottom>.left {
+  width: calc(100% - 90rpx);
+  height: 100%;
+}
+
+.goods-smple-info>.bottom>.left>.name {
+  font-size: 28rpx;
+}
+
+.goods-smple-info>.bottom>.left>.bottom>.price {
+  font-size: 20rpx;
+}
+
+.goods-smple-info>.bottom>.left>.bottom>.price>text {
+  margin-left: 5rpx;
+  font-size: 32rpx;
+}
+
+.goods-smple-info>.bottom>.left>.bottom>.market {
+  margin-left: 30rpx;
+  text-decoration: line-through;
+}
+
+.goods-smple-info>.bottom>.right {
+  width: 50rpx;
+  height: 100%;
+}
+
+.goods-smple-info>.bottom>.right>.btn {
+  width: 50rpx;
+  padding: 0;
+  margin: 0;
+  border: 0;
+  background-color: unset;
+}
+
+.goods-smple-info>.bottom>.right>.btn>.fa {
+  width: 30rpx;
+  height: 30rpx;
+  line-height: 30rpx;
+  text-align: center;
+  font-size: 30rpx;
+}
+
+.goods-smple-info>.bottom>.right>.btn>.content {
+  font-size: 20rpx;
+}
+
+/* ===================================== 商铺面板 ===================================== */
+.shop-panel {
+  width: calc(100% - 70rpx);
+  height: 120rpx;
+  padding: 20rpx 40rpx 20rpx 30rpx;
+  margin-top: 10rpx;
+}
+
+.shop-panel>.left,
+.shop-panel>.left>.pic {
+  width: 120rpx;
+  height: 120rpx;
+}
+
+.shop-panel>.left>.pic {
+  border-radius: 50%;
+}
+
+.shop-panel>.center {
+  width: calc(100% - 270rpx);
+  height: 120rpx;
+  margin-left: 30rpx;
+}
+
+.shop-panel>.center>.name {
+  font-size: 28rpx;
+}
+
+.shop-panel>.center>.info {
+  font-size: 24rpx;
+}
+
+.shop-panel>.right {
+  width: 80rpx;
+  height: 90rpx;
+  margin-left: 40rpx;
+}
+
+.shop-panel>.right>.btn {
+  width: 74rpx;
+  height: 40rpx;
+  line-height: 40rpx;
+  text-align: center;
+  border-radius: 10rpx;
+  color: #F44444;
+  border: 3rpx solid #F44444;
+  font-size: 28rpx;
+  padding: 0;
+  margin: 0;
+  background-color: unset;
+}
+
+/* ===================================== 优选推荐面板 ===================================== */
+.recommend {
+  width: 100%;
+  height: 380rpx;
+  margin-top: 10rpx;
+}
+
+.recommend>.scroll-view {
+  width: calc(100% - 60rpx);
+  height: calc(100% - 50rpx);
+  padding: 0 30rpx;
+  white-space: nowrap;
+}
+
+.recommend>.scroll-view .list {
+  height: calc(100% - 40rpx);
+  padding: 20rpx 0;
+}
+
+.recommend>.scroll-view .list>.item {
+  width: 220rpx;
+  height: 100%;
+  margin-right: 15rpx;
+}
+
+.recommend>.scroll-view .list>.item>.top,
+.recommend>.scroll-view .list>.item>.top>.pic {
+  width: 220rpx;
+  height: 165rpx;
+}
+
+.recommend>.scroll-view .list>.item>.bottom {
+  width: calc(100% - 20rpx);
+  height: calc(100% - 205rpx);
+  padding: 20rpx 10rpx;
+}
+
+.recommend>.scroll-view .list>.item>.bottom>.name {
+  width: 100%;
+  font-size: 20rpx;
+  white-space: normal;
+}
+
+.recommend>.scroll-view .list>.item>.bottom>.bottom {
+  width: 100%;
+}
+
+.recommend>.scroll-view .list>.item>.bottom>.bottom>.price {
+  font-size: 20rpx;
+}
+
+.recommend>.scroll-view .list>.item>.bottom>.bottom>.btn {
+  width: 30rpx;
+  height: 30rpx;
+}
+
+.recommend>.scroll-view .list>.item>.bottom>.bottom>.fa {
+  line-height: 30rpx;
+  text-align: center;
+  color: #F44444;
+  border: 3rpx solid #F44444;
+  border-radius: 50rpx;
+  font-size: 24rpx;
+}
+
+/* ===================================== 商品介绍面板 ===================================== */
+.information-panel {
+  width: 100%;
+  margin-top: 10rpx;
+}
+
+.information-panel>.title-bar {
+  width: 100%;
+  height: 60rpx;
+  line-height: 60rpx;
+  text-align: center;
+  border-bottom: 3rpx solid #EDEDED;
+}
+
+.information-panel>.title-bar>.title {
+  font-size: 24rpx;
+}
+
+.information-panel>.panel-body,
+.information-panel>.panel-body>.panel {
+  width: 100%;
+}
+
+.information-panel>.panel-body>.panel>.body {
+  width: calc(100% - 60rpx);
+  padding: 10rpx 30rpx;
+}
+
+.information-panel>.panel-body>.panel>.body>.video {
+  width: 690rpx;
+  height: 400rpx;
+}
+
+.information-panel>.panel-body>.info>.body {
+  width: calc(100% - 80rpx);
+  padding: 40rpx;
+}
+
+.information-panel>.panel-body>.info>.body>.text {
+  font-size: 24rpx;
+}
+
+.information-panel>.panel-body>.info>.body>.pics {
+  padding-top: 30rpx;
+}
+
+.information-panel>.panel-body>.info>.body>.pics>.pic {
+  width: 690rpx;
+}

@@ -58,10 +58,12 @@
     {
       "root": "mall",
       "pages": [
+        "pages/shopping/index",
+        "pages/shopping/search_result",
+        "pages/goods/detail",
         "pages/test"
       ]
     }
-    
   ],
   "permission": {
     "scope.userLocation": {
