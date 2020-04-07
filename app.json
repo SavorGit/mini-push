@@ -1,27 +1,27 @@
 {
   "pages": [
+    "pages/shopping/index",
     "pages/index/index",
+    "pages/demand/goods_detail",
+    "pages/demand/index",
+    "pages/find/box_video",
+    "pages/find/full_scroll",
+    "pages/find/video",
+    "pages/find/picture",
     "pages/forscreen/forscreen",
     "pages/forscreen/relief",
     "pages/forscreen/video/launch_video",
     "pages/forscreen/forimages/index",
     "pages/forscreen/forvideo/index",
     "pages/forscreen/history/list",
-    "pages/find/full_scroll",
-    "pages/find/video",
-    "pages/find/picture",
-    "pages/find/box_video",
-    "pages/mine/index_20181010",
-    "pages/mine/index",
-    "pages/mine/favorite",
-    "pages/mine/assist/index",
-    "pages/mine/assist/assistlist",
-    "pages/mine/address/index",
-    "pages/mine/address/add",
-    "pages/demand/index",
-    "pages/thematic/birthday/list",
-    "pages/thematic/birthday/detail",
-    "pages/thematic/birthday/video",
+    "pages/forscreen/forfile/files",
+    "pages/forscreen/forfile/h5files",
+    "pages/forscreen/forfile/h5files_result",
+    "pages/forscreen/forimages/wifi",
+    "pages/forscreen/forvideo/wifi",
+    "pages/game/climbtree/index",
+    "pages/game/climbtree/climbtree",
+    "pages/h5/index",
     "pages/hotel/waiter_evaluate_h5",
     "pages/hotel/index",
     "pages/hotel/detail",
@@ -34,10 +34,18 @@
     "pages/hotel/order/account_remark",
     "pages/hotel/platform/index",
     "pages/hotel/cooperation",
+    "pages/mine/index_20181010",
+    "pages/mine/index",
+    "pages/mine/favorite",
+    "pages/mine/assist/index",
+    "pages/mine/assist/assistlist",
+    "pages/mine/address/index",
+    "pages/mine/address/add",
     "pages/share/pic",
     "pages/share/video",
-    "pages/game/climbtree/index",
-    "pages/game/climbtree/climbtree",
+    "pages/thematic/birthday/list",
+    "pages/thematic/birthday/detail",
+    "pages/thematic/birthday/video",
     "pages/thematic/money_blessing/main",
     "pages/thematic/money_blessing/packing",
     "pages/thematic/money_blessing/grab",
@@ -45,26 +53,15 @@
     "pages/thematic/money_blessing/grab_list",
     "pages/thematic/money_blessing/pay_result",
     "pages/thematic/money_blessing/receive_h5",
-    "pages/thematic/money_blessing/receive_result",
-    "pages/forscreen/forfile/files",
-    "pages/forscreen/forfile/h5files",
-    "pages/forscreen/forfile/h5files_result",
-    "pages/h5/index",
-    "pages/demand/goods_detail",
-    "pages/forscreen/forimages/wifi",
-    "pages/forscreen/forvideo/wifi"
+    "pages/thematic/money_blessing/receive_result"
   ],
-  "subpackages": [
-    {
-      "root": "mall",
-      "pages": [
-        "pages/shopping/index",
-        "pages/shopping/search_result",
-        "pages/goods/detail",
-        "pages/test"
-      ]
-    }
-  ],
+  "subpackages": [{
+    "root": "mall",
+    "pages": [
+      "pages/goods/detail",
+      "pages/goods/search_result"
+    ]
+  }],
   "permission": {
     "scope.userLocation": {
       "desc": "你的位置信息将用于小程序位置接口的效果展示"
@@ -87,8 +84,7 @@
     "selectedColor": "#000000",
     "backgroundColor": "#FFFFFF",
     "borderStyle": "white",
-    "list": [
-      {
+    "list": [{
         "pagePath": "pages/demand/index",
         "text": "优选",
         "iconPath": "/images/icon2/999999_diamonds.png",

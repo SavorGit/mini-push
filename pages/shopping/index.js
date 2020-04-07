@@ -1,4 +1,4 @@
-// mall/pages/shopping/index.js
+// pages/shopping/index.js
 /**
  * 【商城】首页
  */
@@ -17,8 +17,7 @@ Page({
       autoplay: true,
       interval: 3000,
       duration: 300,
-      list: [
-        {
+      list: [{
           id: '001',
           // title: '广告01',
           pic: 'https://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg'
@@ -91,5 +90,21 @@ Page({
    */
   onShareAppMessage: function () {
 
+  },
+
+  // 打开购买弹窗
+  openBuyGoodsPopWindow: function (e) {
+    let self = this;
+    self.setData({
+      showBuyGoodsPopWindow: true
+    });
+  },
+
+  // 关闭购买弹窗
+  closeBuyGoodsPopWindow: function (e) {
+    let self = this;
+    self.setData({
+      showBuyGoodsPopWindow: false
+    });
   }
 })
