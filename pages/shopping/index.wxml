@@ -13,10 +13,18 @@
 		<!-- 顶部轮播图片 -->
 		<swiper wx:if="{{topBanners.list.length > 0}}" class="top-banners" indicator-dots="{{topBanners.indicatorDots}}" autoplay="{{topBanners.autoplay}}" interval="{{topBanners.interval}}" duration="{{topBanners.duration}}">
 			<swiper-item wx:for="{{topBanners.list}}" wx:key="item" wx:for-index="index">
-				<view class="banner flex-column-center-flex_start">
-					<image class="pic" mode="aspectFill" src="{{item.pic}}"></image>
-					<view wx:if="{{item.title.length>0}}" class="title one-line-overflow">{{item.title}}</view>
-				</view>
+				<navigator wx:if="{{item.clicktype == 1}}" class='full_width full_height navigator-hover' target="miniProgram" app-id="{{item.appid}}" path="{{item.linkcontent}}">
+          <view class="banner flex-column-center-flex_start">
+            <image class="pic" mode="aspectFill" src="{{item.oss_addr}}"></image>
+            <view wx:if="{{item.name.length>0}}" class="title one-line-overflow">{{item.name}}</view>
+          </view>
+        </navigator>
+        <button wx:if="{{item.clicktype == 2}}" class='full_width full_height' bindtap='{{item.bindtap}}' data-boxmac="{{box_mac}}" data-openid="{{openid}}" data-index='{{index}}' data-linkcontent='{{item.linkcontent}}'>
+          <view class="banner flex-column-center-flex_start">
+            <image class="pic" mode="aspectFill" src="{{item.oss_addr}}"></image>
+            <view wx:if="{{item.name.length>0}}" class="title one-line-overflow">{{item.name}}</view>
+          </view>
+        </button>
 			</swiper-item>
 		</swiper>
 

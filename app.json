@@ -1,6 +1,5 @@
 {
   "pages": [
-    "pages/shopping/index",
     "pages/index/index",
     "pages/demand/goods_detail",
     "pages/demand/index",
@@ -43,6 +42,7 @@
     "pages/mine/address/add",
     "pages/share/pic",
     "pages/share/video",
+    "pages/shopping/index",
     "pages/thematic/birthday/list",
     "pages/thematic/birthday/detail",
     "pages/thematic/birthday/video",
@@ -58,8 +58,7 @@
   "subpackages": [{
     "root": "mall",
     "pages": [
-      "pages/goods/detail",
-      "pages/goods/search_result"
+      "pages/goods/detail"
     ]
   }],
   "permission": {
@@ -85,7 +84,7 @@
     "backgroundColor": "#FFFFFF",
     "borderStyle": "white",
     "list": [{
-        "pagePath": "pages/demand/index",
+        "pagePath": "pages/shopping/index",
         "text": "优选",
         "iconPath": "/images/icon2/999999_diamonds.png",
         "selectedIconPath": "/images/icon2/000000_diamonds.png"
