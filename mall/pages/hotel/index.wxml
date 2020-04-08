@@ -1,0 +1,226 @@
+<!--mall/pages/hotel/index.wxml-->
+<!--
+ | 【商城】店铺页面
+ |-->
+
+
+<import src="/pages/template/commons" />
+<template is="navigationBarForTwoLevel" data='{{statusBarHeight: statusBarHeight,titleText:"店铺"}}' />
+
+<view class='container theme-container' style='height: calc(100vh - {{46 + statusBarHeight + SystemInfo.screenBottomSpace}}px);'>
+	<scroll-view class="scroll-view" style="height:calc(100% - {{tab=='foods'?105:0}}rpx);" scroll-y="true" scroll-with-animation="true">
+		<view class="page">
+			<!-- 店铺简介面板 -->
+			<view class="shop-panel flex-row-center-space_between theme-panel">
+				<view class="left flex-column-center-flex_start">
+					<image class="pic" mode="aspectFill" src="http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
+				</view>
+				<view class="right flex-column-flex_start-space_between">
+					<view class="name two-line-overflow">淮扬府（安定门店）</view>
+					<view class="middle flex-row-center-flex_start">
+						<view class="cuisine one-line-overflow theme-font3">淮扬菜</view>
+						<view class="price one-line-overflow theme-font3">￥336/人</view>
+					</view>
+					<view class="bottom flex-row-flex_start-flex_start">
+						<view class="fa fa-map-marker" aria-hidden="true"></view>
+						<view class="address two-line-overflow theme-font3">安定门外大街198号（地坛西门北侧）xxxxxxxxxxxxx</view>
+					</view>
+				</view>
+			</view>
+
+			<!-- 选项卡面板 -->
+			<view class="tab-panel flex-column-center-flex_start">
+				<view class="tab-bar flex-row-center-flex_start theme-panel">
+					<view class="tab goods{{tab=='goods'?' selected':''}}" data-tab="goods" bindtap="showTab">商城</view>
+					<view class="tab foods{{tab=='foods'?' selected':''}}" data-tab="foods" bindtap="showTab">外卖</view>
+					<view class="tab shop-info{{tab=='shop-info'?' selected':''}}" data-tab="shop-info" bindtap="showTab">商家详情</view>
+				</view>
+
+				<!-- 商城 -->
+				<view wx:if="{{tab=='goods'}}" class="tab-body goods">
+					<view class="list flex-column-center-flex_start">
+						<view class="item flex-column-center-flex_start theme-panel">
+							<view class="top flex-column-flex_start-flex_start">
+								<image class="pic" mode="aspectFill" src="https://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
+							</view>
+							<view class="bottom flex-column-flex_start-flex_start">
+								<view class="name two-line-overflow">大董 年货礼盒限量款2400g 烤鸭糕点年糕组合</view>
+								<view class="bottom flex-row-center-space_between">
+									<view class="left flex-row-center-flex_start">
+										<view class="price theme-font5">￥<text>198</text></view>
+										<view class="price market theme-font3">￥298</view>
+									</view>
+									<view class="right flex-row-center-flex_end">
+										<view class="fa fa-cart-plus theme-font5" aria-hidden="true"></view>
+									</view>
+								</view>
+							</view>
+						</view>
+						<view class="item flex-column-center-flex_start theme-panel">
+							<view class="top flex-column-flex_start-flex_start">
+								<image class="pic" mode="aspectFill" src="https://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
+								<view class="marker theme-rad-panel">优选</view>
+							</view>
+							<view class="bottom flex-column-flex_start-flex_start">
+								<view class="name two-line-overflow">大董 年货礼盒限量款2400g 烤鸭糕点年糕组合</view>
+								<view class="bottom flex-row-center-space_between">
+									<view class="left flex-row-center-flex_start">
+										<view class="price theme-font5">￥<text>198</text></view>
+										<view class="price market theme-font3">￥298</view>
+									</view>
+									<view class="right flex-row-center-flex_end">
+										<view class="fa fa-sign-in theme-font5" aria-hidden="true"></view>
+									</view>
+								</view>
+							</view>
+						</view>
+						<view class="item flex-column-center-flex_start theme-panel">
+							<view class="top flex-column-flex_start-flex_start">
+								<image class="pic" mode="aspectFill" src="https://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
+								<view class="marker theme-rad-panel">优选</view>
+							</view>
+							<view class="bottom flex-column-flex_start-flex_start">
+								<view class="name two-line-overflow">大董 年货礼盒限量款2400g 烤鸭糕点年糕组合</view>
+								<view class="bottom flex-row-center-space_between">
+									<view class="left flex-row-center-flex_start">
+										<view class="price theme-font5">￥<text>198</text></view>
+										<view class="price market theme-font3">￥298</view>
+									</view>
+									<view class="right flex-row-center-flex_end">
+										<view class="fa fa-sign-in theme-font5" aria-hidden="true"></view>
+									</view>
+								</view>
+							</view>
+						</view>
+						<view class="item flex-column-center-flex_start theme-panel">
+							<view class="top flex-column-flex_start-flex_start">
+								<image class="pic" mode="aspectFill" src="https://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
+							</view>
+							<view class="bottom flex-column-flex_start-flex_start">
+								<view class="name two-line-overflow">大董 年货礼盒限量款2400g 烤鸭糕点年糕组合</view>
+								<view class="bottom flex-row-center-space_between">
+									<view class="left flex-row-center-flex_start">
+										<view class="price theme-font5">￥<text>198</text></view>
+										<view class="price market theme-font3">￥298</view>
+									</view>
+									<view class="right flex-row-center-flex_end">
+										<view class="fa fa-cart-plus theme-font5" aria-hidden="true"></view>
+									</view>
+								</view>
+							</view>
+						</view>
+					</view>
+				</view>
+
+				<!-- 外卖 -->
+				<view wx:if="{{tab=='foods'}}" class="tab-body foods">
+					<view class="list weui-grids">
+						<block wx:for="{{dishesList}}" wx:key="key" wx:for-item="bean" wx:for-index="index">
+							<view class="goods weui-grid flex-column-center-space_between theme-panel {{bean.addToCart==true?'add-to-dishes_cart':''}}">
+								<image class="pic" mode="aspectFill" src="{{bean.imgUrl}}" bindtap="gotoDisheDetail" data-goods_id="{{bean.id}}"></image>
+								<view class="name two-line-overflow" bindtap="gotoDisheDetail" data-goods_id="{{bean.id}}">{{bean.name}}</view>
+								<view class="flex-row-center-space_between">
+									<view>￥{{bean.price}}</view>
+									<!-- <view class="btn theme-button-buy" bindtap="placeOrder" data-goods_id="{{bean.id}}" data-openid="{{openid}}">下单</view> -->
+									<view class="btn fa fa-plus-circle theme-font5" aria-hidden="true" bindtap="addDishesCart" data-index="{{index}}" data-goods_info="{{bean}}"></view>
+								</view>
+							</view>
+						</block>
+					</view>
+				</view>
+
+				<!-- 商家详情 -->
+				<view wx:if="{{tab=='shop-info'}}" class="tab-body shop-info">
+					<view class="notice panel theme-panel" wx:if="{{hotel_info.notice!='' && typeof(hotel_info.notice)!='undefined'}}">
+						<view class="title-bar flex-row-center-flex_start">
+							<view class="icon fa fa-bullhorn theme-font5" aria-hidden="true"></view>
+							<view class="title">公告</view>
+						</view>
+						<view class="body">
+							<view class="content">{{hotel_info.notice}}</view>
+						</view>
+					</view>
+					<view class="manage panel theme-panel">
+						<view class="title-bar flex-row-center-flex_start">
+							<view class="icon fa fa-clock-o theme-font5" aria-hidden="true"></view>
+							<view class="title">营业时间</view>
+						</view>
+						<view class="body">
+							<view class="content">午餐：{{hotel_info.business_lunchhours}}</view>
+							<view class="content">晚餐：{{hotel_info.business_dinnerhours}}</view>
+						</view>
+					</view>
+					<view class="tel panel theme-panel">
+						<view class="title-bar flex-row-center-flex_start">
+							<view class="icon fa fa-phone theme-font5" aria-hidden="true"></view>
+							<view class="title">订餐电话</view>
+						</view>
+						<view class="body">
+							<view class="content">{{hotel_info.tel}}</view>
+						</view>
+					</view>
+					<view class="qualifications panel theme-panel">
+						<view class="title-bar flex-row-center-flex_start">
+							<view class="title">商家资质</view>
+						</view>
+						<view class="body flex-row-center-space_between">
+							<image class="pic" mode="aspectFill" src="{{hotel_info.charter[0]}}"></image>
+							<image class="pic" mode="aspectFill" src="{{hotel_info.charter[1]}}"></image>
+						</view>
+					</view>
+				</view>
+			</view>
+		</view>
+	</scroll-view>
+	<view wx:if="{{tab=='foods'}}" class="foods-page-bottom flex-row-center-center">
+		<view class="cart-bar flex-row-center-space_between">
+			<view class="left flex-row-center-flex_start theme-panel-welcome-dark">
+				<view class="icon-group" bindtap="openDishesCartWindow">
+					<view class="icon shopping-bag flex-column-center-center broadcast-panel">
+						<view class="fa fa-shopping-bag fa-lg" aria-hidden="true"></view>
+					</view>
+					<view class="icon new-count flex-column-flex_end-flex_start" wx:if="{{dishesCart.list.length>0}}">
+						<view class="show-new-count theme-rad-panel"></view>
+					</view>
+				</view>
+				<view class="info">已添加{{dishesCart.dishesCount}}件菜品，合计{{dishesCart.totalPrice}}元</view>
+			</view>
+			<view class="right flex-row-center-flex_end" bindtap="gotoOrder">
+				<view class="btn buy theme-button-welcome">下单</view>
+			</view>
+		</view>
+	</view>
+</view>
+
+
+
+
+<!-- 购物车窗口 - 菜品 -->
+<view wx:if="{{showDishesCartPopWindow}}" class="dishes-cart-window">
+	<view class="mask" bindtap="closeDishesCartWindow"></view>
+	<view class="window {{showDishesCartWindow?'fadeInDown':'fadeOutUp'}}">
+		<view class="title-bar flex-row-center-space_between">
+			<view class="title theme-font2" bindtap="gotoOrder">去结算</view>
+			<view class="btn clean flex-row-center-space_around theme-font7" bindtap="clearDishesCart">
+				<view class="fa fa-trash-o fa-lg" aria-hidden="true"></view>
+				<view>清空</view>
+			</view>
+		</view>
+		<scroll-view class="body theme-panel" scroll-y="true" scroll-with-animation="true">
+			<view class="list">
+				<view class="item flex-row-center-flex_start" wx:for="{{dishesCart.list}}" wx:key="key" wx:for-item="bean" wx:for-index="index">
+					<view class="name two-line-overflow">{{bean.name}}</view>
+					<view class="price theme-font5">
+						<label>￥</label>
+						<text>{{bean.price}}</text>
+					</view>
+					<view class="count-chooser flex-row-center-space_between">
+						<view class="fa fa-minus-circle" aria-hidden="true" bindtap="cutNum" data-keys="{{index}}"></view>
+						<input value="{{bean.amount}}" disabled="true" />
+						<view class="fa fa-plus-circle" aria-hidden="true" bindtap="addNum" data-keys="{{index}}"></view>
+					</view>
+				</view>
+			</view>
+		</scroll-view>
+	</view>
+</view>

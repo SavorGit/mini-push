@@ -60,7 +60,10 @@
       "root": "mall",
       "pages": [
         "pages/goods/detail",
-        "pages/goods/search_result"
+        "pages/goods/search_result",
+        "pages/goods/recommendation",
+        "pages/goods/shopping_cart",
+        "pages/hotel/index"
       ]
     }
   ],
