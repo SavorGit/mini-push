@@ -1,6 +1,5 @@
 {
   "pages": [
-    "pages/shopping/index",
     "pages/index/index",
     "pages/demand/goods_detail",
     "pages/demand/index",
@@ -43,6 +42,7 @@
     "pages/mine/address/add",
     "pages/share/pic",
     "pages/share/video",
+    "pages/shopping/index",
     "pages/thematic/birthday/list",
     "pages/thematic/birthday/detail",
     "pages/thematic/birthday/video",
