@@ -85,7 +85,7 @@
     "borderStyle": "white",
     "list": [{
         "pagePath": "pages/shopping/index",
-        "text": "优选",
+        "text": "商城",
         "iconPath": "/images/icon2/999999_diamonds.png",
         "selectedIconPath": "/images/icon2/000000_diamonds.png"
       },
