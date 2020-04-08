@@ -14,17 +14,17 @@
 		<swiper wx:if="{{topBanners.list.length > 0}}" class="top-banners" indicator-dots="{{topBanners.indicatorDots}}" autoplay="{{topBanners.autoplay}}" interval="{{topBanners.interval}}" duration="{{topBanners.duration}}">
 			<swiper-item wx:for="{{topBanners.list}}" wx:key="item" wx:for-index="index">
 				<navigator wx:if="{{item.clicktype == 1}}" class='full_width full_height navigator-hover' target="miniProgram" app-id="{{item.appid}}" path="{{item.linkcontent}}">
-          <view class="banner flex-column-center-flex_start">
-            <image class="pic" mode="aspectFill" src="{{item.oss_addr}}"></image>
-            <view wx:if="{{item.name.length>0}}" class="title one-line-overflow">{{item.name}}</view>
-          </view>
-        </navigator>
-        <button wx:if="{{item.clicktype == 2}}" class='full_width full_height' bindtap='{{item.bindtap}}' data-boxmac="{{box_mac}}" data-openid="{{openid}}" data-index='{{index}}' data-linkcontent='{{item.linkcontent}}'>
-          <view class="banner flex-column-center-flex_start">
-            <image class="pic" mode="aspectFill" src="{{item.oss_addr}}"></image>
-            <view wx:if="{{item.name.length>0}}" class="title one-line-overflow">{{item.name}}</view>
-          </view>
-        </button>
+					<view class="banner flex-column-center-flex_start">
+						<image class="pic" mode="aspectFill" src="{{item.oss_addr}}"></image>
+						<view wx:if="{{item.name.length>0}}" class="title one-line-overflow">{{item.name}}</view>
+					</view>
+				</navigator>
+				<button wx:if="{{item.clicktype == 2}}" class='full_width full_height' bindtap='{{item.bindtap}}' data-boxmac="{{box_mac}}" data-openid="{{openid}}" data-index='{{index}}' data-linkcontent='{{item.linkcontent}}'>
+					<view class="banner flex-column-center-flex_start">
+						<image class="pic" mode="aspectFill" src="{{item.oss_addr}}"></image>
+						<view wx:if="{{item.name.length>0}}" class="title one-line-overflow">{{item.name}}</view>
+					</view>
+				</button>
 			</swiper-item>
 		</swiper>
 
@@ -44,18 +44,18 @@
 		<view class="main-panel flex-column-center-flex_start">
 			<scroll-view class="tab-bar theme-panel" scroll-x="true" scroll-with-animation="true">
 				<view class="tab-list">
-          <block wx:for="{{category_list}}" wx:key="key" wx:for-item="bean" wx:for-index="index">
-					<view wx:if="{{category_id==bean.id}}" class="tab selected">{{bean.name}}</view>
-          <view wx:else class="tab " bindtap="selectCate" data-category_id="{{bean.id}}">{{bean.name}}</view>
+					<block wx:for="{{category_list}}" wx:key="key" wx:for-item="bean" wx:for-index="index">
+						<view wx:if="{{category_id==bean.id}}" class="tab selected">{{bean.name}}</view>
+						<view wx:else class="tab " bindtap="selectCate" data-category_id="{{bean.id}}">{{bean.name}}</view>
 					</block>
 				</view>
 			</scroll-view>
 			<view class="tab-body flex-column-center-flex_start">
 				<view class="list flex-column-center-flex_start">
 					<view class="item flex-column-center-flex_start theme-panel" wx:for="{{goods_list}}" wx:key="key" wx:for-item="bean" wx:for-index="index">
-						<view class="top flex-column-flex_start-flex_start"  bindtap="gotoDetail" data-goods_id="{{bean.id}}" data-box_mac="{{box_mac}}" data-type="{{bean.type}}">
+						<view class="top flex-column-flex_start-flex_start" bindtap="gotoDetail" data-goods_id="{{bean.id}}" data-box_mac="{{box_mac}}" data-type="{{bean.type}}">
 							<image class="pic" mode="aspectFill" src="{{bean.img_url}}"></image>
-              <view class="marker theme-rad-panel" wx:if="{{bean.type==10}}">优选</view>
+							<view class="marker theme-rad-panel" wx:if="{{bean.type==10}}">优选</view>
 						</view>
 						<view class="bottom flex-column-flex_start-flex_start">
 							<view class="name two-line-overflow">{{bean.name}}</view>
@@ -65,13 +65,14 @@
 									<view class="price market theme-font3" wx:if="{{bean.line_price>0}}">￥{{bean.line_price}}</view>
 								</view>
 								<view class="right flex-row-center-flex_end">
-									<view class="fa fa-television theme-font5" aria-hidden="true"  wx:if="{{bean.is_tv==1}}" data-index="{{index}}" data-goods_id="{{bean.id}}" data-name="{{bean.name}}" data-filename='{{bean.filename}}' data-vediourl="{{bean.tx_url}}" data-boxmac="{{box_mac}}" data-openid="{{openid}}" data-duration="{{bean.duration}}" data-hotel_info="{{hotel_info}}" data-forscreen_url="{{bean.forscreen_url}}" data-resource_size="{{bean.resource_size}}" data-filename="{{bean.filename}}" data-tx_url="{{bean.tx_url}}" bindtap='boxShow'></view>
-									<view class="fa fa-cart-plus theme-font5" aria-hidden="true" bindtap="openBuyGoodsPopWindow" wx:if="{{bean.type!=10}}"></view>
+									<view class="fa fa-television theme-font5" aria-hidden="true" wx:if="{{bean.is_tv==1}}" data-index="{{index}}" data-goods_id="{{bean.id}}" data-name="{{bean.name}}" data-filename='{{bean.filename}}' data-vediourl="{{bean.tx_url}}" data-boxmac="{{box_mac}}" data-openid="{{openid}}" data-duration="{{bean.duration}}" data-hotel_info="{{hotel_info}}" data-forscreen_url="{{bean.forscreen_url}}" data-resource_size="{{bean.resource_size}}" data-filename="{{bean.filename}}" data-tx_url="{{bean.tx_url}}" bindtap='boxShow'></view>
+									<view class="fa fa-sign-in theme-font5" aria-hidden="true" bindtap="" wx:if="{{bean.type==10}}"></view>
+									<view class="fa fa-cart-plus theme-font5" aria-hidden="true" bindtap="openBuyGoodsPopWindow" wx:else></view>
 								</view>
 							</view>
 						</view>
 					</view>
-					
+
 				</view>
 			</view>
 		</view>
