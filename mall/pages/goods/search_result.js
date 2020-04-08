@@ -20,6 +20,7 @@ Page({
     statusBarHeight: getApp().globalData.statusBarHeight,
     keywords:'',
     mall_cart_nums:0,
+    box_mac:'',
   },
 
   /**
@@ -184,6 +185,20 @@ Page({
     }
 
     app.showToast('添加购物车成功');
+  },
+  //查看详情
+  gotoDetail: function (e) {
+    var goods_id = e.currentTarget.dataset.goods_id;
+    var box_mac = e.currentTarget.dataset.box_mac;
+    var type = e.currentTarget.dataset.type;
+    if (type == 10) {
+      var url = '/pages/demand/goods_detail?goods_id=' + goods_id + '&box_mac=' + box_mac
+    } else if (type == 22) {
+      var url = '/mall/pages/goods/detail?goods_id=' + goods_id;
+    }
+    wx.navigateTo({
+      url: url,
+    })
   },
   /**
    * 生命周期函数--监听页面初次渲染完成

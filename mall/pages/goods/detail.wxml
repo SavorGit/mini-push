@@ -5,7 +5,8 @@
 
 
 <import src="/pages/template/commons" />
-<template is="navigationBarForTwoLevel" data='{{statusBarHeight: statusBarHeight,titleText:"商品详情"}}' />
+<template is="navigationBarForShare" data='{{statusBarHeight: statusBarHeight,titleText:"菜品详情"}}' wx:if="{{is_share==true}}" />
+<template is="navigationBarForTwoLevel" data='{{statusBarHeight: statusBarHeight,titleText:"商品详情"}}' wx:if="{{is_share==false}}" />
 
 <view class='container theme-container' style='height: calc(100vh - 46px - {{statusBarHeight + SystemInfo.screenBottomSpace}}px);'>
 	<scroll-view class='scroll-view' scroll-y="true" scroll-with-animation="true">
@@ -13,21 +14,27 @@
 		<!-- 商品简介面板 -->
 		<view class="goods-smple-info flex-column-center-flex_start theme-panel">
 			<view class="top flex-column-center-flex_start">
-				<image class="pic" mode="aspectFill" src="https://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
+				<!-- <image class="pic" mode="aspectFill" src="https://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image> -->
+
+        <swiper class="pic-group" indicator-dots="true" autoplay="true">
+				<swiper-item class="pic" wx:for="{{goods_info.cover_imgs}}" wx:key="key" wx:for-item="bean" wx:for-index="index">
+					<image mode="aspectFill" src="{{bean}}"></image>
+				</swiper-item>
+			  </swiper>
 			</view>
 			<view class="bottom flex-row-center-space_between">
 				<view class="left flex-column-flex_start-space_between">
-					<view class="name two-line-overflow">【十人套餐】8荤6素超值员工餐</view>
+					<view class="name two-line-overflow">{{goods_info.name}}</view>
 					<view class="bottom flex-row-center-flex_start">
-						<view class="price theme-font5">￥<text class="one-line-overflow">198</text></view>
-						<view class="price market one-line-overflow theme-font3">￥298</view>
+						<view class="price theme-font5">￥<text class="one-line-overflow">{{goods_info.price}}</text></view>
+						<view class="price market one-line-overflow theme-font3" wx:if="{{goods_info.line_price>0}}">￥{{goods_info.line_price}}</view>
 					</view>
 				</view>
 				<view class="right">
-					<view class="btn flex-column-center-flex_start" bindtap="">
+					<button class="btn flex-column-center-flex_start" open-type='share'>
 						<view class="fa fa-share-square-o theme-font5" aria-hidden="true"></view>
 						<view class="content theme-font3">分享</view>
-					</view>
+					</button>
 				</view>
 			</view>
 		</view>
@@ -35,11 +42,11 @@
 		<!-- 商铺面板 -->
 		<view class="shop-panel flex-row-center-flex_start theme-panel">
 			<view class="left">
-				<image class="pic" mode="aspectFill" src="https://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
+				<image class="pic" mode="aspectFill" src="{{merchant.img}}"></image>
 			</view>
 			<view class="center flex-column-flex_start-space_around">
-				<view class="name two-line-overflow">花家怡园（世茂店）</view>
-				<view class="info theme-font3 one-line-overflow">共发布了10件菜品</view>
+				<view class="name two-line-overflow">{{merchant.name}}</view>
+				<view class="info theme-font3 one-line-overflow">共发布了{{merchant.num}}件菜品</view>
 			</view>
 			<view class="right">
 				<view class="btn" bindtap="">进店</view>
@@ -116,7 +123,7 @@
 						<view class="title">商品视频</view>
 					</view>
 					<view class="body">
-						<video class="video"></video>
+						<video class="video" src="{{goods_info.video_url}}"></video>
 					</view>
 				</view>
 				<view class="panel info">
@@ -124,11 +131,15 @@
 						<view class="title">商品详情</view>
 					</view>
 					<view class="body flex-column-center-flex_start">
-						<view class="text">1.XXXXXXX 2.XXXXXXX 3.XXXXXXX 4.XXXXXXXXXXXXXXXXXXXXX</view>
+						<view class="text">
+              <text>
+                {{goods_info.intro}}
+              </text>
+            </view>
 						<view class="pics flex-column-center-flex_start">
-							<image class="pic" mode="widthFix" src="https://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
-							<image class="pic" mode="widthFix" src="https://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
-							<image class="pic" mode="widthFix" src="https://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
+								<block wx:for="{{goods_info.detail_imgs}}" wx:key="key" wx:for-item="bean" wx:for-index="index">
+					        <image class="pic" mode="widthFix" src="{{bean}}"></image>
+				        </block>
 						</view>
 					</view>
 				</view>

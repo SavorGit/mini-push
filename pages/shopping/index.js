@@ -283,15 +283,10 @@ Page({
     var goods_id = e.currentTarget.dataset.goods_id;
     var box_mac = e.currentTarget.dataset.box_mac;
     var type = e.currentTarget.dataset.type;
-    console.log(e);
-    return false;
     if(type==10){
       var url = '/pages/demand/goods_detail?goods_id=' + goods_id + '&box_mac=' + box_mac
-      wx.navigateTo({
-        url: '/pages/demand/goods_detail?goods_id=' + goods_id + '&box_mac=' + box_mac,
-      })
     }else if(type==22){
-      var url = '/mall/pages/goods/detail?goods_id' + goods_id;
+      var url = '/mall/pages/goods/detail?goods_id=' + goods_id;
     }
     wx.navigateTo({
       url: url,
