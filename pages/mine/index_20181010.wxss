@@ -91,7 +91,7 @@
 
 .active {
   color: #666;
-  border-bottom: 5rpx solid #1cbeb6;
+  border-bottom: 5rpx solid #F44444;
 }
 
 .content {
