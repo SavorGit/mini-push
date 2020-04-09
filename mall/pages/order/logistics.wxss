@@ -1,0 +1,180 @@
+/* mall/pages/order/logistics.wxss */
+@import "/animation.wxss";
+/**
+ * 物流详情页面
+ */
+
+
+.pages {
+  background: #fff;
+  overflow-x: hidden;
+  position: absolute;
+  top: 0;
+  width: 100%;
+}
+
+.head {
+  width: calc(100% - 40rpx);
+  padding: 30rpx 20rpx;
+  border-bottom: 20rpx solid #eee;
+}
+
+.simple-icon,
+.simple-title,
+.simple-title-no {
+  font-size: 32rpx;
+  padding: 0 15rpx;
+}
+
+.simple-icon {
+  font-size: 48rpx;
+}
+
+/* 收货图片 */
+.head_img {
+  width: 160rpx;
+  height: 160rpx;
+  border-radius: 5rpx;
+}
+
+.tabulate {
+  width: calc(100% - 180rpx);
+  height: 160rpx;
+}
+
+/* 快递状态 */
+.head_name {
+  font-size: 26rpx;
+}
+
+/* 快递编号 */
+.head_title {
+  font-size: 26rpx;
+}
+
+.head_tel_name {
+  font-size: 26rpx;
+}
+
+/* 追踪 */
+.logisit {
+  width: 100%;
+  margin-left: 10rpx;
+  margin-top: 50rpx;
+}
+
+.express-middle-axis {
+  width: 48rpx;
+  position: relative;
+  top: -218rpx;
+  left: -3rpx;
+}
+
+.express-status-address {
+  font-size: 28rpx;
+}
+
+.express-statusing {
+  font-size: 22rpx;
+}
+
+.express-logistics-status {
+  font-size: 32rpx;
+  font-weight: bold;
+}
+
+.express-left {
+  width: 200rpx;
+}
+
+.express-left>.date,
+.express-left>.time,
+.express-left>.datetime {
+  width: 100%;
+  font-size: 32rpx;
+  text-align: center;
+}
+
+.online-top-closing {
+  width: 3rpx;
+  height: 180rpx;
+  background: #d7d7d7;
+  position: absolute;
+  top: 40rpx;
+  left: 21rpx;
+}
+
+.dot-closing {
+  width: 30rpx;
+  height: 30rpx;
+  line-height: 28rpx;
+  text-align: center;
+  border-radius: 50%;
+  margin-top: 50rpx;
+  border: 3rpx solid #d7d7d7;
+  font-size: 30rpx;
+  color: #d7d7d7;
+  position: absolute;
+  top: 175rpx;
+  left: 4rpx;
+}
+
+.dot-closing_two {
+  width: 30rpx;
+  height: 30rpx;
+  border-radius: 50%;
+  margin-top: 50rpx;
+  border: 3rpx solid #d7d7d7;
+  background: #d7d7d7;
+  position: absolute;
+  top: 175rpx;
+  left: 4rpx;
+}
+
+.dot-shou {
+  width: 30rpx;
+  height: 30rpx;
+  border-radius: 50%;
+  border: 3rpx solid #50D2C2;
+  background: #50D2C2;
+  margin-left: 0rpx;
+  margin-top: 6rpx;
+}
+
+.dot-warn {
+  -webkit-animation: warn 2s ease-out;
+  -moz-animation: warn 2s ease-out;
+  animation: warn 2s ease-out;
+  -webkit-animation-iteration-count: infinite;
+  -moz-animation-iteration-count: infinite;
+  animation-iteration-count: infinite;
+}
+
+.max-dot {
+  width: 30rpx;
+  height: 30rpx;
+  border-radius: 50%;
+  background: #363636;
+}
+
+.express-right {
+  /* width: 90%; */
+  height: 170rpx;
+  margin-left: 20rpx;
+  margin-right: 40rpx;
+}
+
+.logisit:first-child>.express-right {
+  font-weight: bold;
+}
+
+.line {
+  height: 180rpx;
+}
+
+.buttom {
+  width: 100%;
+  height: 400rpx;
+  line-height: 400rpx;
+  text-align: center;
+}
