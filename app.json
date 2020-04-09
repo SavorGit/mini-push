@@ -63,7 +63,10 @@
         "pages/goods/search_result",
         "pages/goods/recommendation",
         "pages/goods/shopping_cart",
-        "pages/hotel/index"
+        "pages/hotel/index",
+        "pages/order/confirmation",
+        "pages/order/confirmation_remark",
+        "pages/order/payment"
       ]
     }
   ],
