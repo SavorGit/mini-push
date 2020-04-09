@@ -395,6 +395,15 @@ Page({
       })
     }
   },
+  buyOne:function(e){
+    var that = this;
+    var goods_info = that.data.goods_info;
+    var user_info = wx.getStorageSync("savor_user_info");
+    var openid = user_info.openid;
+    wx.navigateTo({
+      url: '/mall/pages/order/confirmation?goods_id=' + goods_info.id +'&openid='+openid+'&order_type=1&amount='+goods_info.amount,
+    })
+  },
   /**
    * 生命周期函数--监听页面隐藏
    */

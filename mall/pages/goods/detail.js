@@ -40,6 +40,7 @@ Page({
   data: {
     SystemInfo: getApp().SystemInfo,
     statusBarHeight: getApp().globalData.statusBarHeight,
+    rec_list:[],
   },
 
   /**
@@ -90,6 +91,9 @@ Page({
 
     //获取商品详情
     self.getGoodsInfo(goods_id);
+    //优选推荐
+    self.getRecommend(goods_id,1,3);
+    
   },
   getGoodsInfo:function(goods_id){
     var that = this;
@@ -101,6 +105,102 @@ Page({
         merchant: data.result.merchant
       })
     });
+  },
+  getRecommend: function (goods_id,page,pagesize){
+    var that = this;
+    utils.PostRequest(api_v_url + '/shop/recommend', {
+      page: page,
+      pagesize:pagesize,
+      goods_id: goods_id
+    }, (data, headers, cookies, errMsg, statusCode) => {
+      that.setData({
+        rec_list:data.result,
+      })
+    });
+  },
+  gotoMerchant:function(e){
+    var merchant_id = e.currentTarget.dataset.merchant_id;
+    wx.navigateTo({
+      url: '/mall/pages/hotel/index?merchant_id='+merchant_id,
+    })
+  },
+  phonecallevent:function(e){
+    var tel = e.target.dataset.tel;
+    app.phonecallevent(tel)
+  },
+  addMallCart:function(e){
+    var that = this;
+    var type= e.currentTarget.dataset.type;
+    var goods_info = {};
+    if(type==1){
+      var temp = that.data.goods_info;
+      goods_info.id = temp.goods_id;
+      goods_info.name = temp.name;
+      goods_info.price = temp.price;
+      goods_info.line_price = temp.line_price;
+      goods_info.stock_num = temp.stock_num;
+      goods_info.type = temp.type;
+      goods_info.img_url = temp.cover_imgs[0];
+      goods_info.amount = 1;
+    }else if(type==2){
+      var temp = e.currentTarget.dataset.goods_info
+      goods_info.id = temp.id;
+      goods_info.name = temp.name;
+      goods_info.price = temp.price;
+      goods_info.stock_num = temp.stock_num;
+      goods_info.type = temp.type;
+      goods_info.img_url = temp.img_url;
+      goods_info.amount = 1;
+    }
+    var user_info = wx.getStorageSync("savor_user_info");
+    var openid = user_info.openid;
+    var mall_cart_list = wx.getStorageSync(cache_key + 'mall_cart_' + openid);
+    if (mall_cart_list == '') {
+      mall_cart_list = [];
+      mall_cart_list.unshift(goods_info);
+      mall_cart_list = JSON.stringify(mall_cart_list);
+      wx.setStorageSync(cache_key + 'mall_cart_' + openid, mall_cart_list)
+      that.setData({
+        mall_cart_nums: goods_info.amount
+      })
+    } else {
+      mall_cart_list = JSON.parse(mall_cart_list)
+
+      var is_have = 0;
+      for (var i = 0; i < mall_cart_list.length; i++) {
+        if (mall_cart_list[i].id == goods_info.id) {
+          mall_cart_list[i].amount += goods_info.amount;
+          is_have = 1;
+          break;
+        }
+      }
+      if (is_have == 0) {
+        mall_cart_list.unshift(goods_info);
+      }
+      var mall_cart_nums = 0;
+      for (let index in mall_cart_list) {
+        mall_cart_nums += mall_cart_list[index].amount;
+      }
+      that.setData({
+        mall_cart_nums: mall_cart_nums
+      })
+
+      mall_cart_list = JSON.stringify(mall_cart_list);
+      wx.setStorageSync(cache_key + 'mall_cart_' + openid, mall_cart_list)
+    }
+
+    app.showToast('添加购物车成功');
+  },
+  gotoGoodsDetail:function(e){
+    var goods_id = e.currentTarget.dataset.goods_id;
+    wx.navigateTo({
+      url: '/mall/pages/goods/detail?goods_id=' + goods_id,
+    })
+  },
+  gotoRecList:function(e){
+    wx.navigateTo({
+      url: '/mall/pages/goods/recommendation',
+    })
   },
   /**
    * 生命周期函数--监听页面初次渲染完成

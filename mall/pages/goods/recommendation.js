@@ -3,6 +3,14 @@
  * 【商城】商品推荐页面
  */
 
+const utils = require('../../../utils/util.js')
+var mta = require('../../../utils/mta_analysis.js')
+const app = getApp()
+var api_url = app.globalData.api_url;
+var api_v_url = app.globalData.api_v_url;
+var cache_key = app.globalData.cache_key;
+var page = 1;
+var pagesize = 10;
 
 Page({
 
@@ -18,9 +26,20 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    var that = this;
+    that.getRecList(page,pagesize);
   },
-
+  getRecList: function (page) {
+    var that = this;
+    utils.PostRequest(api_v_url + '/shop/recommend', {
+      page: page,
+      pagesize: pagesize
+    }, (data, headers, cookies, errMsg, statusCode) => {
+      that.setData({
+        rec_list: data.result,
+      })
+    });
+  },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */

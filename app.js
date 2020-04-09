@@ -1145,6 +1145,17 @@ App({
       mask: mask,
     })
   },
+  /**
+   * 拨打订餐电话
+   */
+  phonecallevent: function (tel) {
+    wx.makePhoneCall({
+      phoneNumber: tel,
+      success:function(e){
+      },fail:function(e){
+      }
+    })
+  },
   globalData: {
     openid: '',
     session_key: '',

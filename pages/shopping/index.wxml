@@ -111,7 +111,7 @@
 		</view>
 		<view class="bottom flex-row-center-space_between">
 			<view class="btn theme-button-orange" bindtap="addMallCart" >加入购物车</view>
-			<view class="btn theme-button-red">立即购买</view>
+			<view class="btn theme-button-red" bindtap="buyOne">立即购买</view>
 		</view>
 	</view>
 </view>
