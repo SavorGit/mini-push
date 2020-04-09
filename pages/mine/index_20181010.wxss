@@ -8,7 +8,6 @@
 .page_top {
   height: 190rpx;
   line-height: 190rpx;
-  margin-bottom: 10rpx;
 }
 
 .user {
