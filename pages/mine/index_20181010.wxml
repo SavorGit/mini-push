@@ -21,7 +21,13 @@
 	<!-- 订单列表面板 -->
 	<view class="promotion-goods-manage-panel theme-font2 theme-panel-2" bindtap="gotoOrder">
 		<view class="full_width full_height flex-row-center-space_between">
-			<view>我的订单</view>
+			<view>外卖订单</view>
+			<view class="fa fa-angle-right" aria-hidden="true"></view>
+		</view>
+	</view>
+	<view class="promotion-goods-manage-panel theme-font2 theme-panel-2" bindtap="">
+		<view class="full_width full_height flex-row-center-space_between">
+			<view>商城订单</view>
 			<view class="fa fa-angle-right" aria-hidden="true"></view>
 		</view>
 	</view>

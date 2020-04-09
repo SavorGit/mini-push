@@ -1,0 +1,373 @@
+<!--mall/pages/order/list.wxml-->
+<!--
+ | 【商城】订单列表页面
+ |-->
+
+
+<import src="/pages/template/commons" />
+<template is="navigationBarForTwoLevel" data='{{statusBarHeight: statusBarHeight,titleText:"订单列表"}}' />
+
+<view class='container theme-container' style='height: calc(100vh - {{statusBarHeight + SystemInfo.screenBottomSpace + 46}}px);'>
+	<view class="tab-bar flex-row-center-flex_start theme-font1 theme7">
+		<view class="tab all{{tab=='all' ? ' selected' :''}}" data-tab="all" bindtap="showTab">全部订单</view>
+		<view class="tab pending{{tab=='pending' ? ' selected' :''}}" data-tab="pending" bindtap="showTab">待处理</view>
+		<view class="tab shipping{{tab=='shipping' ? ' selected' :''}}" data-tab="shipping" bindtap="showTab">待发货</view>
+		<view class="tab completed{{tab=='completed' ? ' selected' :''}}" data-tab="completed" bindtap="showTab">已完成</view>
+	</view>
+
+	<!-- 全部订单 -->
+	<scroll-view wx:if="{{tab=='all'}}" class="scroll-view" scroll-y="true" scroll-with-animation="true" bindscrolltolower="">
+		<view class="list all flex-column-center-flex_start">
+
+			<view class="row flex-column-center-space_between theme-panel">
+				<view class="head flex-row-flex_start-space_between theme-font8" bindtap="">
+					<image class="hotel-pic" mode="aspectFill" src="https://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
+					<view class="hotel-name one-line-overflow">淮扬府（安定门店）</view>
+					<view class="order-status theme-button">
+						<view class="theme-button">待处理</view>
+					</view>
+				</view>
+				<view class="body flex-row-center-space_between" bindtap="">
+					<view class="left flex-row-center-flex_start">
+						<image class="pic" mode="aspectFill" src="https://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
+					</view>
+					<view class="center flex-column-flex_start-center">
+						<view class="one-line-overflow theme-font1">麻辣小龙虾一份（大份），38只，限量供应</view>
+					</view>
+					<view class="right flex-column-center-center">
+						<view class="price theme-font1">￥123</view>
+						<view class="count theme-font3">共1件</view>
+					</view>
+				</view>
+				<view class="foot flex-row-center-space_between">
+					<view>2018-01-23 08:40</view>
+					<view class="btn all theme-button-dark" bindtap="">取消订单</view>
+					<view class="btn all theme-button-buy" bindtap="">再次购买</view>
+				</view>
+			</view>
+
+			<view class="row flex-column-center-space_between theme-panel">
+				<view class="head flex-row-flex_start-space_between theme-font8" bindtap="">
+					<image class="hotel-pic" mode="aspectFill" src="https://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
+					<view class="hotel-name one-line-overflow">淮扬府（安定门店）</view>
+					<view class="order-status theme-button-buy">
+						<view class="theme-button-buy">已完成</view>
+					</view>
+				</view>
+				<view class="body flex-row-center-space_between" bindtap="">
+					<view class="left multiple-goods flex-row-center-flex_start">
+						<image class="pic" mode="aspectFill" src="https://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
+						<image class="pic" mode="aspectFill" src="https://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
+						<image class="pic" mode="aspectFill" src="https://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
+					</view>
+					<view class="center multiple-goods flex-column-center-center">
+						<view class="fa fa-chevron-circle-right fa-lg theme-font3" aria-hidden="true"></view>
+					</view>
+					<view class="right flex-column-center-center">
+						<view class="price theme-font1">￥369</view>
+						<view class="count theme-font3">共3件</view>
+					</view>
+				</view>
+				<view class="foot flex-row-center-space_between">
+					<view>2018-01-23 08:40</view>
+					<view class="btn all theme-button-buy" bindtap="">再次购买</view>
+				</view>
+			</view>
+
+			<view class="row flex-column-center-space_between theme-panel">
+				<view class="head flex-row-flex_start-space_between theme-font8" bindtap="">
+					<image class="hotel-pic" mode="aspectFill" src="https://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
+					<view class="hotel-name one-line-overflow">淮扬府（安定门店）</view>
+					<view class="order-status theme-button">
+						<view class="theme-button">待处理</view>
+					</view>
+				</view>
+				<view class="body flex-row-center-space_between" bindtap="">
+					<view class="left multiple-goods flex-row-center-flex_start">
+						<image class="pic" mode="aspectFill" src="https://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
+						<image class="pic" mode="aspectFill" src="https://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
+						<image class="pic" mode="aspectFill" src="https://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
+					</view>
+					<view class="center multiple-goods flex-column-center-center">
+						<view class="fa fa-chevron-circle-right fa-lg theme-font3" aria-hidden="true"></view>
+					</view>
+					<view class="right flex-column-center-center">
+						<view class="price theme-font1">￥369</view>
+						<view class="count theme-font3">共3件</view>
+					</view>
+				</view>
+				<view class="foot flex-row-center-space_between">
+					<view>2018-01-23 08:40</view>
+					<view class="btn all theme-button-dark" bindtap="">取消订单</view>
+					<view class="btn all theme-button-buy" bindtap="">再次购买</view>
+				</view>
+			</view>
+
+			<view class="row flex-column-center-space_between theme-panel">
+				<view class="head flex-row-flex_start-space_between theme-font8" bindtap="">
+					<image class="hotel-pic" mode="aspectFill" src="https://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
+					<view class="hotel-name one-line-overflow">淮扬府（安定门店）</view>
+					<view class="order-status theme-button-buy">
+						<view class="theme-button-buy">已完成</view>
+					</view>
+				</view>
+				<view class="body flex-row-center-space_between" bindtap="">
+					<view class="left flex-row-center-flex_start">
+						<image class="pic" mode="aspectFill" src="https://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
+					</view>
+					<view class="center flex-column-flex_start-center">
+						<view class="one-line-overflow theme-font1">麻辣小龙虾一份（大份），38只，限量供应</view>
+					</view>
+					<view class="right flex-column-center-center">
+						<view class="price theme-font1">￥123</view>
+						<view class="count theme-font3">共1件</view>
+					</view>
+				</view>
+				<view class="foot flex-row-center-space_between">
+					<view>2018-01-23 08:40</view>
+					<view class="btn all theme-button-buy" bindtap="">再次购买</view>
+				</view>
+			</view>
+
+			<view class="row flex-column-center-space_between theme-panel">
+				<view class="head flex-row-flex_start-space_between theme-font8" bindtap="">
+					<image class="hotel-pic" mode="aspectFill" src="https://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
+					<view class="hotel-name one-line-overflow">淮扬府（安定门店）</view>
+					<view class="order-status theme-button">
+						<view class="theme-button">待发货</view>
+					</view>
+				</view>
+				<view class="body flex-row-center-space_between" bindtap="">
+					<view class="left multiple-goods flex-row-center-flex_start">
+						<image class="pic" mode="aspectFill" src="https://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
+						<image class="pic" mode="aspectFill" src="https://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
+						<image class="pic" mode="aspectFill" src="https://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
+					</view>
+					<view class="center multiple-goods flex-column-center-center">
+						<view class="fa fa-chevron-circle-right fa-lg theme-font3" aria-hidden="true"></view>
+					</view>
+					<view class="right flex-column-center-center">
+						<view class="price theme-font1">￥369</view>
+						<view class="count theme-font3">共3件</view>
+					</view>
+				</view>
+				<view class="foot flex-row-center-space_between">
+					<view>2018-01-23 08:40</view>
+					<view class="btn all theme-button-buy" bindtap="">再次购买</view>
+				</view>
+			</view>
+
+			<view class="row flex-column-center-space_between theme-panel">
+				<view class="head flex-row-flex_start-space_between theme-font8" bindtap="">
+					<image class="hotel-pic" mode="aspectFill" src="https://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
+					<view class="hotel-name one-line-overflow">淮扬府（安定门店）</view>
+					<view class="order-status theme-button">
+						<view class="theme-button">待发货</view>
+					</view>
+				</view>
+				<view class="body flex-row-center-space_between" bindtap="">
+					<view class="left flex-row-center-flex_start">
+						<image class="pic" mode="aspectFill" src="https://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
+					</view>
+					<view class="center flex-column-flex_start-center">
+						<view class="one-line-overflow theme-font1">麻辣小龙虾一份（大份），38只，限量供应</view>
+					</view>
+					<view class="right flex-column-center-center">
+						<view class="price theme-font1">￥123</view>
+						<view class="count theme-font3">共1件</view>
+					</view>
+				</view>
+				<view class="foot flex-row-center-space_between">
+					<view>2018-01-23 08:40</view>
+					<view class="btn all theme-button-buy" bindtap="">再次购买</view>
+				</view>
+			</view>
+
+		</view>
+	</scroll-view>
+
+	<!-- 待处理订单 -->
+	<scroll-view wx:if="{{tab=='pending'}}" class="scroll-view" scroll-y="true" scroll-with-animation="true" bindscrolltolower="">
+		<view class="list pending flex-column-center-flex_start">
+
+			<view class="row flex-column-center-space_between theme-panel">
+				<view class="head flex-row-flex_start-space_between theme-font8" bindtap="">
+					<image class="hotel-pic" mode="aspectFill" src="https://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
+					<view class="hotel-name one-line-overflow">淮扬府（安定门店）</view>
+					<view class="order-status theme-button">
+						<view class="theme-button">待处理</view>
+					</view>
+				</view>
+				<view class="body flex-row-center-space_between" bindtap="">
+					<view class="left flex-row-center-flex_start">
+						<image class="pic" mode="aspectFill" src="https://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
+					</view>
+					<view class="center flex-column-flex_start-center">
+						<view class="one-line-overflow theme-font1">麻辣小龙虾一份（大份），38只，限量供应</view>
+					</view>
+					<view class="right flex-column-center-center">
+						<view class="price theme-font1">￥123</view>
+						<view class="count theme-font3">共1件</view>
+					</view>
+				</view>
+				<view class="foot flex-row-center-space_between">
+					<view>2018-01-23 08:40</view>
+					<view class="btn all theme-button-dark" bindtap="">取消订单</view>
+					<view class="btn all theme-button-buy" bindtap="">再次购买</view>
+				</view>
+			</view>
+
+			<view class="row flex-column-center-space_between theme-panel">
+				<view class="head flex-row-flex_start-space_between theme-font8" bindtap="">
+					<image class="hotel-pic" mode="aspectFill" src="https://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
+					<view class="hotel-name one-line-overflow">淮扬府（安定门店）</view>
+					<view class="order-status theme-button">
+						<view class="theme-button">待处理</view>
+					</view>
+				</view>
+				<view class="body flex-row-center-space_between" bindtap="">
+					<view class="left multiple-goods flex-row-center-flex_start">
+						<image class="pic" mode="aspectFill" src="https://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
+						<image class="pic" mode="aspectFill" src="https://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
+						<image class="pic" mode="aspectFill" src="https://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
+					</view>
+					<view class="center multiple-goods flex-column-center-center">
+						<view class="fa fa-chevron-circle-right fa-lg theme-font3" aria-hidden="true"></view>
+					</view>
+					<view class="right flex-column-center-center">
+						<view class="price theme-font1">￥369</view>
+						<view class="count theme-font3">共3件</view>
+					</view>
+				</view>
+				<view class="foot flex-row-center-space_between">
+					<view>2018-01-23 08:40</view>
+					<view class="btn all theme-button-dark" bindtap="">取消订单</view>
+					<view class="btn all theme-button-buy" bindtap="">再次购买</view>
+				</view>
+			</view>
+
+		</view>
+	</scroll-view>
+
+	<!-- 待发货订单 -->
+	<scroll-view wx:if="{{tab=='shipping'}}" class="scroll-view" scroll-y="true" scroll-with-animation="true" bindscrolltolower="">
+		<view class="list pending flex-column-center-flex_start">
+
+			<view class="row flex-column-center-space_between theme-panel">
+				<view class="head flex-row-flex_start-space_between theme-font8" bindtap="">
+					<image class="hotel-pic" mode="aspectFill" src="https://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
+					<view class="hotel-name one-line-overflow">淮扬府（安定门店）</view>
+					<view class="order-status theme-button">
+						<view class="theme-button">待发货</view>
+					</view>
+				</view>
+				<view class="body flex-row-center-space_between" bindtap="">
+					<view class="left multiple-goods flex-row-center-flex_start">
+						<image class="pic" mode="aspectFill" src="https://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
+						<image class="pic" mode="aspectFill" src="https://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
+						<image class="pic" mode="aspectFill" src="https://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
+					</view>
+					<view class="center multiple-goods flex-column-center-center">
+						<view class="fa fa-chevron-circle-right fa-lg theme-font3" aria-hidden="true"></view>
+					</view>
+					<view class="right flex-column-center-center">
+						<view class="price theme-font1">￥369</view>
+						<view class="count theme-font3">共3件</view>
+					</view>
+				</view>
+				<view class="foot flex-row-center-space_between">
+					<view>2018-01-23 08:40</view>
+					<view class="btn all theme-button-buy" bindtap="">再次购买</view>
+				</view>
+			</view>
+
+			<view class="row flex-column-center-space_between theme-panel">
+				<view class="head flex-row-flex_start-space_between theme-font8" bindtap="">
+					<image class="hotel-pic" mode="aspectFill" src="https://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
+					<view class="hotel-name one-line-overflow">淮扬府（安定门店）</view>
+					<view class="order-status theme-button">
+						<view class="theme-button">待发货</view>
+					</view>
+				</view>
+				<view class="body flex-row-center-space_between" bindtap="">
+					<view class="left flex-row-center-flex_start">
+						<image class="pic" mode="aspectFill" src="https://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
+					</view>
+					<view class="center flex-column-flex_start-center">
+						<view class="one-line-overflow theme-font1">麻辣小龙虾一份（大份），38只，限量供应</view>
+					</view>
+					<view class="right flex-column-center-center">
+						<view class="price theme-font1">￥123</view>
+						<view class="count theme-font3">共1件</view>
+					</view>
+				</view>
+				<view class="foot flex-row-center-space_between">
+					<view>2018-01-23 08:40</view>
+					<view class="btn all theme-button-buy" bindtap="">再次购买</view>
+				</view>
+			</view>
+
+		</view>
+	</scroll-view>
+
+	<!-- 已完成订单 -->
+	<scroll-view wx:if="{{tab=='completed'}}" class="scroll-view" scroll-y="true" scroll-with-animation="true" bindscrolltolower="">
+		<view class="list completed flex-column-center-flex_start">
+
+			<view class="row flex-column-center-space_between theme-panel">
+				<view class="head flex-row-flex_start-space_between theme-font8" bindtap="">
+					<image class="hotel-pic" mode="aspectFill" src="https://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
+					<view class="hotel-name one-line-overflow">淮扬府（安定门店）</view>
+					<view class="order-status theme-button-buy">
+						<view class="theme-button-buy">已完成</view>
+					</view>
+				</view>
+				<view class="body flex-row-center-space_between" bindtap="">
+					<view class="left flex-row-center-flex_start">
+						<image class="pic" mode="aspectFill" src="https://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
+					</view>
+					<view class="center flex-column-flex_start-center">
+						<view class="one-line-overflow theme-font1">麻辣小龙虾一份（大份），38只，限量供应</view>
+					</view>
+					<view class="right flex-column-center-center">
+						<view class="price theme-font1">￥123</view>
+						<view class="count theme-font3">共1件</view>
+					</view>
+				</view>
+				<view class="foot flex-row-center-space_between">
+					<view>2018-01-23 08:40</view>
+					<view class="btn all theme-button-buy" bindtap="">再次购买</view>
+				</view>
+			</view>
+
+			<view class="row flex-column-center-space_between theme-panel">
+				<view class="head flex-row-flex_start-space_between theme-font8" bindtap="">
+					<image class="hotel-pic" mode="aspectFill" src="https://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
+					<view class="hotel-name one-line-overflow">淮扬府（安定门店）</view>
+					<view class="order-status theme-button-buy">
+						<view class="theme-button-buy">已完成</view>
+					</view>
+				</view>
+				<view class="body flex-row-center-space_between" bindtap="">
+					<view class="left multiple-goods flex-row-center-flex_start">
+						<image class="pic" mode="aspectFill" src="https://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
+						<image class="pic" mode="aspectFill" src="https://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
+						<image class="pic" mode="aspectFill" src="https://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
+					</view>
+					<view class="center multiple-goods flex-column-center-center">
+						<view class="fa fa-chevron-circle-right fa-lg theme-font3" aria-hidden="true"></view>
+					</view>
+					<view class="right flex-column-center-center">
+						<view class="price theme-font1">￥369</view>
+						<view class="count theme-font3">共3件</view>
+					</view>
+				</view>
+				<view class="foot flex-row-center-space_between">
+					<view>2018-01-23 08:40</view>
+					<view class="btn all theme-button-buy" bindtap="">再次购买</view>
+				</view>
+			</view>
+
+		</view>
+	</scroll-view>
+</view>
