@@ -144,7 +144,7 @@ Page({
   },
   demand: function (res) {//点播节目
     wx.switchTab({
-      url: '/pages/demand/index',
+      url: '/pages/shopping/index',
     })
   },
   

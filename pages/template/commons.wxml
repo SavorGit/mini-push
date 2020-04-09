@@ -212,7 +212,7 @@
     <view class='status-bar' style='height:{{statusBarHeight}}px;'></view>
     <view class='navigation-bar flex-row-center-flex_start'>
       <view class='btn flex-row-center-flex_start'>
-        <navigator class='to-home' open-type="switchTab" url='/pages/demand/index'>
+        <navigator class='to-home' open-type="switchTab" url='/pages/shopping/index'>
           <label class="fa fa-home fa-2x"></label>
         </navigator>
       </view>

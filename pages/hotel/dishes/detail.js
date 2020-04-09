@@ -132,7 +132,7 @@ Page({
       var is_share = that.data.is_share
       if (is_share == true) {
         wx.reLaunch({
-          url: '/pages/demand/index',
+          url: '/pages/shopping/index',
         })
 
       } else {
