@@ -2,7 +2,6 @@
   "pages": [
     "pages/index/index",
     "pages/demand/goods_detail",
-    "pages/demand/index",
     "pages/find/box_video",
     "pages/find/full_scroll",
     "pages/find/video",
