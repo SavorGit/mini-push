@@ -8,7 +8,7 @@
 <template is="navigationBarForTwoLevel" data='{{statusBarHeight: statusBarHeight,titleText:"确认订单"}}' />
 
 <view class='container theme-container' style='height: calc(100vh - {{46 + statusBarHeight + SystemInfo.screenBottomSpace}}px);'>
-	<form bindsubmit="">
+	<form bindsubmit="addMallOrder">
 		<scroll-view class="scroll-view" scroll-y="true" scroll-with-animation="true">
 			<view class="page-wapper" style='height: calc(100vh - 46px - {{statusBarHeight}}px -10rpx);'>
 				<view class="consignee-info input-panel theme-panel" wx:if="{{is_have_default_address==false}}">
@@ -84,24 +84,26 @@
 						<view class="flex-row-center-space_between" bindtap="gotoRemark">
 							<view class="label">订单备注</view>
 							<view class="btn flex-row-center-space_between">
-								<view class="choosed one-line-overflow theme-font3">未填写</view>
+								<view class="choosed one-line-overflow theme-font3" >{{remark_strs?remark_strs:'未填写'}}</view>
 								<view class="fa fa-angle-right" aria-hidden="true"></view>
 							</view>
 						</view>
-						<view class="flex-row-center-space_between" bindtap="">
+						<view class="flex-row-center-space_between" bindtap="gotoInvoice">
 							<view class="label">发票信息</view>
 							<view class="btn flex-row-center-space_between">
-								<view class="choosed one-line-overflow theme-font3">未选择</view>
+                <view class="choosed one-line-overflow theme-font3" wx:if="{{bill_info.title!=''}}">{{bill_info.title}}</view>
+								<view class="choosed one-line-overflow theme-font3" wx:else>{{bill_info.title}}</view>
 								<view class="fa fa-angle-right" aria-hidden="true"></view>
 							</view>
 						</view>
 					</view>
 				</view>
 			</view>
+      <input class='display_hide' name="address_id" value="{{address_id}}"> </input>
 		</scroll-view>
 		<view class="bottom flex-row-flex_start-center">
 			<view class="price theme-font5 theme-bg-FFFFFF">￥{{total_fee}}</view>
-			<button class="btn theme-button-buy" form-type="submit" bindtap="">下单</button>
+			<button class="btn theme-button-buy" form-type="submit" disabled="{{addDisabled}}">下单</button>
 		</view>
 	</form>
 </view>

@@ -323,6 +323,7 @@ Page({
   addMallCart:function(e){
     var that = this;
     var goods_info = that.data.goods_info;
+    goods_info.ischecked = true;
     var user_info = wx.getStorageSync("savor_user_info");
     var openid = user_info.openid;
     var mall_cart_list = wx.getStorageSync(cache_key + 'mall_cart_' + openid);
@@ -341,6 +342,7 @@ Page({
       for (var i = 0; i < mall_cart_list.length; i++) {
         if (mall_cart_list[i].id == goods_info.id) {
           mall_cart_list[i].amount += goods_info.amount;
+          mall_cart_list[i].ischecked = true;
           is_have = 1;
           break;
         }
@@ -402,6 +404,11 @@ Page({
     var openid = user_info.openid;
     wx.navigateTo({
       url: '/mall/pages/order/confirmation?goods_id=' + goods_info.id +'&openid='+openid+'&order_type=1&amount='+goods_info.amount,
+    })
+  },
+  gotoMallCart:function(e){
+    wx.navigateTo({
+      url: '/mall/pages/goods/shopping_cart',
     })
   },
   /**

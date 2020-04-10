@@ -11,7 +11,7 @@
 	<!-- 物流信息 -->
 	<!-- 外层pages -->
 	<view class='pages'>
-		<block wx:if="{{a}}">
+		<block wx:if="{{express_info.length>0}}">
 			<!-- 头部[详细] 
       <view class='head flex-row-center-space_between'>
         <image class='head_img' mode="aspectFill" src='https://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg'></image>
@@ -25,32 +25,34 @@
 			<!-- 头部[简约] -->
 			<view class='head flex-row-center-center'>
 				<view class="simple-icon fa fa-truck" aria-hidden="true"></view>
-				<view class="simple-title">圆通</view>
-				<view class="simple-title-no">V030344422</view>
+				<view class="simple-title">{{express_info.company}}</view>
+				<view class="simple-title-no">{{express_info.enum}}</view>
 			</view>
 			<!-- 追踪 -->
 			<view>
-				<view class='logisit flex-row-stretch-flex_start'>
+				<block wx:for="{{expres_list}}" wx:for-item="bean" wx:key="key" wx:for-index="index">
+				<view class='logisit flex_row_stretch_flexStart' wx:if="{{index==0}}">
 					<!-- 左边子容器 -->
-					<view class="express-left flex-column-center-center">
+					<view class="express-left flex_column_center_center">
 						<view class="date">2012-08-28</view>
 						<view class="time">16:33:19</view>
 					</view>
 					<!-- 显示顶部收的圆点 -->
-					<view class='dot-shou flex-column-center-center'>
+					<view class='dot-shou flex_column_center_center'>
 						<!-- 签收后不显示下面这行 -->
 						<view class="max-dot dot-warn"></view>
 					</view>
 					<!-- 右边子容器 -->
 					<view class='express-right'>
-						<view class="express-logistics-status theme-font1">派送中</view>
-						<view class='express-status-address theme-font1'>上海分拨中心/装件入车扫描</view>
-						<view class='express-statusing theme-font1'>2012-08-28 16:33:19</view>
+						<view class="express-logistics-status theme-font1">{{bean.status}}</view>
+						<view class='express-status-address theme-font1'>{{bean.context}}</view>
+						<view class='express-statusing theme-font1'>{{bean.time}}</view>
 					</view>
 				</view>
-				<view class='logisit flex-row-stretch-flex_start'>
+
+        <view class='logisit flex_row_stretch_flexStart' wx:if="{{index !=0 && express_list.length!=index+1}}">
 					<!-- 左边子容器 -->
-					<view class="express-left flex-column-center-center">
+					<view class="express-left flex_column_center_center">
 						<view class="date">08-27</view>
 						<view class="time">23:22</view>
 					</view>
@@ -61,14 +63,17 @@
 					</view>
 					<!-- 右边子容器 -->
 					<view class='express-right'>
-						<view class="express-logistics-status theme-font1">运输中</view>
-						<view class='express-status-address theme-font3'>上海分拨中心/下车扫描</view>
-						<view class='express-statusing theme-font3'>2012-08-27 23:22:42</view>
+						<view class="express-logistics-status theme-font1">{{bean.status}}</view>
+						<view class='express-status-address theme-font3'>{{bean.context}}</view>
+						<view class='express-statusing theme-font3'>{{bean.time}}</view>
 					</view>
 				</view>
-				<view class='logisit flex-row-stretch-flex_start'>
+
+
+
+        <view class='logisit flex_row_stretch_flexStart' wx:if="{{index!=0 &&  expres_list.length==index+1 }}">
 					<!-- 左边子容器 -->
-					<view class="express-left flex-column-center-center">
+					<view class="express-left flex_column_center_center">
 						<view class="date">2012-08-27</view>
 						<view class="time">23:22:42</view>
 					</view>
@@ -79,11 +84,12 @@
 					</view>
 					<!-- 右边子容器 -->
 					<view class='express-right'>
-						<view class="express-logistics-status theme-font1">揽收</view>
-						<view class='express-status-address theme-font3'>上海分拨中心/下车扫描</view>
-						<view class='express-statusing theme-font3'>2012-08-27 23:22:42</view>
+						<view class="express-logistics-status theme-font1">{{bean.status}}</view>
+						<view class='express-status-address theme-font3'>{{bean.context}}</view>
+						<view class='express-statusing theme-font3'>{{bean.time}}</view>
 					</view>
 				</view>
+        </block>
 			</view>
 		</block>
 

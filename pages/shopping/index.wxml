@@ -36,7 +36,7 @@
 
         
 			</view>
-			<view class="shopping-cart flex-column-flex_start-flex_start">
+			<view class="shopping-cart flex-column-flex_start-flex_start" bindtap="gotoMallCart">
 				<view class="fa fa-shopping-cart" aria-hidden="true"></view>
 				<view class="marker">{{mall_cart_nums}}</view>
 			</view>

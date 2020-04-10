@@ -10,151 +10,85 @@
 <view class='container flex-column-center-flex_start theme-container' style='height: calc(100vh - 46px - {{statusBarHeight + SystemInfo.screenBottomSpace}}px);'>
 	<scroll-view class='scroll-view' scroll-y="true" scroll-with-animation="true">
 		<view class="panel-list">
-			<view class="panel shop theme-panel">
+			<view class="panel shop theme-panel" wx:for="{{goods_online_list}}" wx:for-item="bean" wx:key="key" wx:for-index="index">
 				<view class="title-bar flex-row-center-space_between">
-					<checkbox>
+					<checkbox-group bindchange='selectMerchant' data-index="{{index}}">
+          <checkbox value="{{index}}" checked="{{bean.ischecked}}">
 						<view class="flex-row-center-flex_start">
 							<view class="fa fa-shopping-basket" aria-hidden="true"></view>
-							<view class="name one-line-overflow">大董烤鸭店</view>
+							<view class="name one-line-overflow">{{bean.name}}</view>
 						</view>
 					</checkbox>
+          </checkbox-group>
 				</view>
 				<view class="goods-list">
-					<view class="item flex-row-center-flex_start {{list[0].isTouchMove?'touch-move-active':'touch-move-unactive'}}" data-index="0" bindtouchstart="touchstart" bindtouchmove="touchmove">
+          <block wx:for="{{bean.goods}}" wx:for-item="item" wx:key="kk" wx:for-index="idx">
+					<view class="item flex-row-center-flex_start {{list[idx].isTouchMove?'touch-move-active':'touch-move-unactive'}}" data-index="{{idx}}" bindtouchstart="touchstart" bindtouchmove="touchmove" >
 						<view class="goods flex-row-center-space_between">
-							<checkbox class="checkbox"></checkbox>
-							<image class="pic" mode="aspectFill" src="http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
+              <checkbox-group bindchange='selectGoods' data-index="{{index}}" data-keys="{{idx}}" data-goods_id="{{item.id}}">
+							<checkbox class="checkbox" value="{{item.id}}" checked="{{item.ischecked}}"></checkbox>
+              </checkbox-group>
+							<image class="pic" mode="aspectFill" src="{{item.img_url}}"></image>
 							<view class="right flex-column-flex_start-space_between">
-								<view class="name two-line-overflow">大董 年货礼盒限量款2400g 烤鸭糕点</view>
+								<view class="name two-line-overflow">{{item.name}}</view>
 								<view class="stock one-line-overflow theme-font3"></view>
 								<view class="count flex-row-center-flex_end">
-									<view class="btn" bindtap="">-</view>
-									<input value="3"></input>
-									<view class="btn" bindtap="">+</view>
+									<view class="btn" bindtap="cutNum" data-index="{{index}}" data-keys="{{idx}}" data-goods_id="{{item.id}}">-</view>
+									<input value="{{item.amount}}"></input>
+									<view class="btn" bindtap="addNum" data-index="{{index}}" data-keys="{{idx}}" data-goods_id="{{item.id}}">+</view>
 								</view>
 							</view>
 						</view>
 						<view class="btn del theme-button-red" bindtap="">删除</view>
 					</view>
-					<view class="item flex-row-center-flex_start {{list[1].isTouchMove?'touch-move-active':'touch-move-unactive'}}" data-index="1" bindtouchstart="touchstart" bindtouchmove="touchmove">
-						<view class="goods flex-row-center-space_between">
-							<checkbox class="checkbox"></checkbox>
-							<image class="pic" mode="aspectFill" src="http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
-							<view class="right flex-column-flex_start-space_between">
-								<view class="name two-line-overflow">大董 年货礼盒限量款2400g 烤鸭糕点</view>
-								<view class="stock one-line-overflow theme-font3"></view>
-								<view class="count flex-row-center-flex_end">
-									<view class="btn" bindtap="">-</view>
-									<input value="3"></input>
-									<view class="btn" bindtap="">+</view>
-								</view>
-							</view>
-						</view>
-						<view class="btn del theme-button-red" bindtap="">删除</view>
-					</view>
+          </block>
+					
 				</view>
 			</view>
 
-			<view class="panel shop theme-panel">
-				<view class="title-bar flex-row-center-space_between">
-					<checkbox>
-						<view class="flex-row-center-flex_start">
-							<view class="fa fa-shopping-basket" aria-hidden="true"></view>
-							<view class="name one-line-overflow">大董烤鸭店</view>
-						</view>
-					</checkbox>
-				</view>
-				<view class="goods-list">
-					<view class="item flex-row-center-flex_start {{list[2].isTouchMove?'touch-move-active':'touch-move-unactive'}}" data-index="2" bindtouchstart="touchstart" bindtouchmove="touchmove">
-						<view class="goods flex-row-center-space_between">
-							<checkbox class="checkbox"></checkbox>
-							<image class="pic" mode="aspectFill" src="http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
-							<view class="right flex-column-flex_start-space_between">
-								<view class="name two-line-overflow">大董 年货礼盒限量款2400g 烤鸭糕点</view>
-								<view class="stock one-line-overflow theme-font3"></view>
-								<view class="count flex-row-center-flex_end">
-									<view class="btn" bindtap="">-</view>
-									<input value="3"></input>
-									<view class="btn" bindtap="">+</view>
-								</view>
-							</view>
-						</view>
-						<view class="btn del theme-button-red" bindtap="">删除</view>
-					</view>
-					<view class="item flex-row-center-flex_start {{list[3].isTouchMove?'touch-move-active':'touch-move-unactive'}}" data-index="3" bindtouchstart="touchstart" bindtouchmove="touchmove">
-						<view class="goods flex-row-center-space_between">
-							<checkbox class="checkbox"></checkbox>
-							<image class="pic" mode="aspectFill" src="http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
-							<view class="right flex-column-flex_start-space_between">
-								<view class="name two-line-overflow">大董 年货礼盒限量款2400g 烤鸭糕点</view>
-								<view class="stock one-line-overflow theme-font3"></view>
-								<view class="count flex-row-center-flex_end">
-									<view class="btn" bindtap="">-</view>
-									<input value="3"></input>
-									<view class="btn" bindtap="">+</view>
-								</view>
-							</view>
-						</view>
-						<view class="btn del theme-button-red" bindtap="">删除</view>
-					</view>
-				</view>
-			</view>
 
 			<!-- 已经下架商品 -->
-			<view class="panel shop theme-panel">
+			<view class="panel shop theme-panel" wx:if="{{goods_offline_list.length>0}}">
 				<view class="title-bar flex-row-center-space_between">
 					<view class="name one-line-overflow">已下架商品</view>
-					<view class="btn flex-row-center-center" bindtap="">
+					<view class="btn flex-row-center-center" bindtap="clearOffLineGoods">
 						<view class="fa fa-trash-o theme-font5" aria-hidden="true"></view>
 						<view class="content theme-font5"> 清空</view>
 					</view>
 				</view>
-				<view class="goods-list">
-					<view class="item flex-row-center-flex_start {{list[4].isTouchMove?'touch-move-active':'touch-move-unactive'}}" data-index="4" bindtouchstart="touchstart" bindtouchmove="touchmove">
+				<view class="goods-list" >
+					<view class="item flex-row-center-flex_start" wx:for="{{goods_offline_list}}" wx:for-item="bean" wx:key="key" wx:for-index="index">
 						<view class="goods flex-row-center-space_between">
 							<view class="checkbox"></view>
-							<image class="pic" mode="aspectFill" src="http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
+							<image class="pic" mode="aspectFill" src="{{bean.img_url}}"></image>
 							<view class="right flex-column-flex_start-space_between">
-								<view class="name two-line-overflow theme-font3">大董 年货礼盒限量款2400g 烤鸭糕点大董 年货礼盒限量款2400g 烤鸭糕点大董 年货礼盒限量款2400g 烤鸭糕点大董 年货礼盒限量款2400g 烤鸭糕点大董 年货礼盒限量款2400g 烤鸭糕点大董 年货礼盒限量款2400g 烤鸭糕点大董 年货礼盒限量款2400g 烤鸭糕点</view>
+								<view class="name two-line-overflow theme-font3">{{bean.name}}</view>
 								<view class="stock one-line-overflow theme-font3"></view>
-								<view class="count flex-row-center-flex_end">
+								<!-- <view class="count flex-row-center-flex_end">
 									<view class="btn" bindtap="">-</view>
 									<input value="3"></input>
 									<view class="btn" bindtap="">+</view>
-								</view>
+								</view> -->
 							</view>
 						</view>
-						<view class="btn del theme-button-red" bindtap="">删除</view>
+						<!-- <view class="btn del theme-button-red" bindtap="">删除</view> -->
 					</view>
-					<view class="item flex-row-center-flex_start {{list[5].isTouchMove?'touch-move-active':'touch-move-unactive'}}" data-index="5" bindtouchstart="touchstart" bindtouchmove="touchmove">
-						<view class="goods flex-row-center-space_between">
-							<view class="checkbox"></view>
-							<image class="pic" mode="aspectFill" src="http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
-							<view class="right flex-column-flex_start-space_between">
-								<view class="name two-line-overflow theme-font3">大董 年货礼盒限量款2400g 烤鸭糕点</view>
-								<view class="stock one-line-overflow theme-font3"></view>
-								<view class="count flex-row-center-flex_end">
-									<view class="btn" bindtap="">-</view>
-									<input value="3"></input>
-									<view class="btn" bindtap="">+</view>
-								</view>
-							</view>
-						</view>
-						<view class="btn del theme-button-red" bindtap="">删除</view>
-					</view>
+					
 				</view>
 			</view>
 		</view>
 	</scroll-view>
 	<view class="page-bottom flex-row-center-space_between theme-panel">
 		<view class="left flex-row-center-flex_end">
-			<checkbox>全选</checkbox>
+      <checkbox-group bindchange="selectAll">
+			<checkbox value='1' checked="{{is_checked_all}}">全选</checkbox>
+      </checkbox-group>
 		</view>
 		<view class="center flex-row-center-flex_end">
 			<view class="price-label">合计：</view>
-			<view class="price-value theme-font5">￥123</view>
+			<view class="price-value theme-font5">￥{{total_fee}}</view>
 		</view>
-		<view class="right flex-row-center-flex_end">
+		<view class="right flex-row-center-flex_end" bindtap="confirmOrder">
 			<view class="btn theme-button-red">提交订单</view>
 		</view>
 	</view>

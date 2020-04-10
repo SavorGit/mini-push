@@ -41,6 +41,7 @@ Page({
     SystemInfo: getApp().SystemInfo,
     statusBarHeight: getApp().globalData.statusBarHeight,
     rec_list:[],
+    showBuyGoodsPopWindow:false,
   },
 
   /**
@@ -200,6 +201,63 @@ Page({
   gotoRecList:function(e){
     wx.navigateTo({
       url: '/mall/pages/goods/recommendation',
+    })
+  },
+  // 打开购买弹窗
+  openBuyGoodsPopWindow: function (e) {
+    let that = this;
+    var goods_info = that.data.goods_info;
+    goods_info.amount = 1;
+    that.setData({
+      showBuyGoodsPopWindow: true,
+      goods_info: goods_info
+    });
+  },
+
+  // 关闭购买弹窗
+  closeBuyGoodsPopWindow: function (e) {
+    let self = this;
+    self.setData({
+      showBuyGoodsPopWindow: false
+    });
+  },
+  //购物车减数量
+  cutNum: function (e) {
+    var that = this;
+    var goods_info = that.data.goods_info;
+    var stock_num = goods_info.stock_num; //库存
+    if (goods_info.amount == 1) {
+      app.showToast('至少选择一件商品');
+      return false;
+    }
+    goods_info.amount -= 1;
+    that.setData({
+      goods_info: goods_info,
+    })
+  },
+  //购物车增数量
+  addNum: function (e) {
+    var that = this;
+    var goods_info = that.data.goods_info;
+    var stock_num = goods_info.stock_num; //库存
+    if (goods_info.amount == stock_num) {
+      app.showToast('该商品库存不足');
+      return false;
+    }
+    goods_info.amount += 1;
+    that.setData({
+      goods_info: goods_info,
+    })
+  },
+  buyOne:function(e){
+    var user_info = wx.getStorageSync("savor_user_info");
+    var openid = user_info.openid;
+    var goods_info = this.data.goods_info;
+    var goods_id = goods_info.goods_id;
+    var amount = goods_info.amount;
+    var order_type = 1;
+    wx.navigateTo({
+      url: '/mall/pages/order/confirmation?goods_id='+goods_id+'&openid='+openid+'&amount='+amount+'&order_type='+order_type,
     })
   },
   /**

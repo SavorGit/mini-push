@@ -40,6 +40,18 @@ Page({
       })
     });
   },
+  loadMore:function(e){
+    var that = this;
+    page +=1;
+    that.getRecList(page);
+  },
+  gotoDetail:function(e){
+    var goods_id = e.currentTarget.dataset.goods_id;
+    wx.navigateTo({
+      url: '/mall/pages/goods/detail?goods_id=' + goods_id,
+    })
+    
+  },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
