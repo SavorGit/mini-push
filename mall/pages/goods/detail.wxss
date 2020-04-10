@@ -32,6 +32,15 @@
   font-size: 24rpx;
 }
 
+.panel>.title-bar>.more {
+  font-size: 22rpx;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background-color: unset;
+}
+
 .page-bottom {
   width: 100%;
   height: 80rpx;
@@ -98,9 +107,15 @@
 }
 
 .goods-smple-info>.top,
-.goods-smple-info>.top>.pic {
+.goods-smple-info>.top>.pic,
+.goods-smple-info>.top>.pic-group {
   width: 100%;
   height: 420rpx;
+}
+
+.goods-smple-info>.top>.pic-group .pic {
+  width: 100%;
+  height: 100%;
 }
 
 .goods-smple-info>.bottom {
@@ -130,6 +145,11 @@
 .goods-smple-info>.bottom>.left>.bottom>.market {
   margin-left: 30rpx;
   text-decoration: line-through;
+}
+
+.goods-smple-info>.bottom>.left>.bottom>.tip {
+  margin-left: 30rpx;
+  font-size: 20rpx;
 }
 
 .goods-smple-info>.bottom>.right {
