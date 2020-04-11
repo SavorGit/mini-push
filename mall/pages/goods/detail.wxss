@@ -343,6 +343,7 @@
 .information-panel>.panel-body>.info>.body>.pics>.pic {
   width: 690rpx;
 }
+
 /* ======================================== 购买商品弹窗 ======================================== */
 .buy-goods-window {
   width: 100%;
@@ -436,7 +437,8 @@
 }
 
 .buy-goods-window>.bottom>.btn {
-  width: calc(50% - 2rpx);
+  width: 100%;
+  /* width: calc(50% - 2rpx); */
   height: 80rpx;
   line-height: 80rpx;
   text-align: center;
