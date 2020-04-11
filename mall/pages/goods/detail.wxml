@@ -158,7 +158,7 @@
 				<view class="label">购买数量：</view>
 				<view class="value flex-row-center-space_between">
 					<view class="btn" bindtap="cutNum">-</view>
-					<input value="{{goods_info.amount}}"></input>
+					<input value="{{goods_info.amount}}"  disabled="true"></input>
 					<view class="btn" bindtap="addNum">+</view>
 				</view>
 			</view>
