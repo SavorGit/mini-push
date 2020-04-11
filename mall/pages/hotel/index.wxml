@@ -173,7 +173,7 @@
 </view>
 
 <!-- 购买商品弹窗 -->
-<view wx:if="{{showBuyGoodsPopWindow}}" class="mask">
+<view wx:if="{{showBuyGoodsPopWindow}}" class="buy-goods-window-mask">
 	<view class="buy-goods-window theme-panel">
 		<view class="top flex-row-flex_end-space_between">
 			<image class="pic" mode="aspectFill" src="{{goods_info.img_url}}"></image>

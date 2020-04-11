@@ -2,15 +2,7 @@
 /**
  * 【商城】店铺页面
  */
-.mask {
-  position: absolute;
-  left: 0;
-  right: 0;
-  top: 0;
-  bottom: 0;
-  background-color: rgba(0, 0, 0, 0.4);
-  z-index: 10;
-}
+
 
 .page,
 .scroll-view {
@@ -495,7 +487,18 @@
     transform: translate3d(0, 100%, 0) scale(0) translate(0, 80vh);
   }
 }
+
 /* ======================================== 购买商品弹窗 ======================================== */
+.buy-goods-window-mask {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.4);
+  z-index: 10;
+}
+
 .buy-goods-window {
   width: 100%;
   height: 400rpx;
