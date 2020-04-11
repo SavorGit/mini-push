@@ -127,7 +127,7 @@
 				<view class="fa fa-phone theme-font2" aria-hidden="true"></view>
 				<view class="content theme-font2">电话</view>
 			</button>
-			<view class="btn cart flex-column-center-space_between">
+			<view class="btn cart flex-column-center-space_between" bindtap="gotoMallCart">
 				<view class="fa fa-shopping-cart theme-font2" aria-hidden="true"></view>
 				<view class="content theme-font2">购物车</view>
 			</view>

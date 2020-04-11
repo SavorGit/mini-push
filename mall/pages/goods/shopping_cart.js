@@ -151,53 +151,62 @@ Page({
     
     
     var mall_cart_list = wx.getStorageSync(cache_key + 'mall_cart_' + openid);
-    mall_cart_list = JSON.parse(mall_cart_list);
-    
-    console.log(mall_cart_list)
-    
-    
-    
-    
-    
-    
-    var total_fee = 0;
-    var is_checked_all = true;
-    for(let i in goods_online_list){
-      
-      var ischecked = true;
-      
-      for(let j in goods_online_list[i].goods){
+    if(mall_cart_list!=''){
+      mall_cart_list = JSON.parse(mall_cart_list);
 
-        for(let x in mall_cart_list){
-          if (goods_online_list[i].goods[j].id== mall_cart_list[x].id){
-            mall_cart_list[x].ischecked = goods_online_list[i].goods[j].ischecked
+      console.log(mall_cart_list)
+
+
+
+
+
+
+      var total_fee = 0;
+      var is_checked_all = true;
+      for (let i in goods_online_list) {
+
+        var ischecked = true;
+
+        for (let j in goods_online_list[i].goods) {
+
+          for (let x in mall_cart_list) {
+            if (goods_online_list[i].goods[j].id == mall_cart_list[x].id) {
+              mall_cart_list[x].ischecked = goods_online_list[i].goods[j].ischecked
+            }
           }
-        }
 
-        if (goods_online_list[i].goods[j].ischecked==false){
-          ischecked = false
-          is_checked_all = false;
-        }else {
-          var price = goods_online_list[i].goods[j].price;
-          var amount = goods_online_list[i].goods[j].amount;
-          total_fee += app.accMul(price, amount)
+          if (goods_online_list[i].goods[j].ischecked == false) {
+            ischecked = false
+            is_checked_all = false;
+          } else {
+            var price = goods_online_list[i].goods[j].price;
+            var amount = goods_online_list[i].goods[j].amount;
+            total_fee += app.accMul(price, amount)
+          }
+
+
+
         }
-        
-        
-        
+        goods_online_list[i].ischecked = ischecked
       }
-      goods_online_list[i].ischecked = ischecked
+      mall_cart_list = JSON.stringify(mall_cart_list)
+      wx.setStorage({
+        key: cache_key + 'mall_cart_' + openid,
+        data: mall_cart_list,
+      })
+      that.setData({
+        goods_online_list: goods_online_list,
+        total_fee: total_fee,
+        is_checked_all: is_checked_all
+      })
+    }else {
+      that.setData({
+        goods_online_list:[],
+        total_fee:0,
+        is_checked_all:false
+      })
     }
-    mall_cart_list = JSON.stringify(mall_cart_list)
-    wx.setStorage({
-      key: cache_key + 'mall_cart_' + openid,
-      data: mall_cart_list,
-    })
-    that.setData({
-      goods_online_list: goods_online_list,
-      total_fee: total_fee,
-      is_checked_all: is_checked_all
-    })
+    
   },
 
   //购物车减数量
@@ -254,6 +263,83 @@ Page({
         url: '/mall/pages/order/confirmation?openid='+openid+'&order_type=2',
       })
     }
+  },
+  gotoGoodsDetail:function(e){
+    var goods_id = e.currentTarget.dataset.goods_id;
+    wx.navigateTo({
+      url: '/mall/pages/goods/detail?goods_id='+goods_id,
+    })
+  },
+  delCartGoods:function(e){
+    var that = this;
+    var goods_id = e.currentTarget.dataset.goods_id;
+    var goods_online_list = that.data.goods_online_list 
+    for(let i in goods_online_list){
+      for(let j in goods_online_list[i].goods){
+        if(goods_online_list[i].goods[j].id==goods_id){
+          goods_online_list[i].goods.splice(j,1);
+        }
+      }
+      if(goods_online_list[i].goods.length==0){
+        goods_online_list.splice(i,1)
+      }
+    }
+    var mall_cart_list = wx.getStorageSync(cache_key + 'mall_cart_' + openid);
+    if(mall_cart_list!=''){
+      mall_cart_list = JSON.parse(mall_cart_list);
+      for(let i in mall_cart_list){
+        if(mall_cart_list[i].id==goods_id){
+          mall_cart_list.splice(i,1);
+        }
+      }
+    }
+
+    if (mall_cart_list.length > 0) {
+      mall_cart_list = JSON.stringify(mall_cart_list);
+      wx.setStorage({
+        key: cache_key + 'mall_cart_' + openid,
+        data: mall_cart_list,
+      })
+    } else {
+      wx.removeStorage({
+        key: cache_key + 'mall_cart_' + openid,
+        success: function (res) { },
+      })
+    }
+    that.getToalFee(goods_online_list);
+    
+  },
+  clearOffLineGoods:function(e){
+    var mall_cart_list = wx.getStorageSync(cache_key + 'mall_cart_' + openid);
+    var that = this;
+    var goods_offline_list = that.data.goods_offline_list;
+    if(mall_cart_list!=''){
+      mall_cart_list = JSON.parse(mall_cart_list);
+      for(let i in goods_offline_list){
+        for(let j in mall_cart_list){
+          if(goods_offline_list[i].id==mall_cart_list[j].id){
+            mall_cart_list.splice(j,1);
+            
+          }
+        }
+      }
+      if(mall_cart_list.length>0){
+        mall_cart_list = JSON.stringify(mall_cart_list);
+        wx.setStorage({
+          key: cache_key + 'mall_cart_' + openid,
+          data: mall_cart_list,
+        })
+      }else{
+        wx.removeStorage({
+          key: cache_key + 'mall_cart_' + openid,
+          success: function(res) {},
+        })
+      }
+
+    }
+    that.setData({
+      goods_offline_list:[]
+    })
   },
   /**
    * 生命周期函数--监听页面初次渲染完成

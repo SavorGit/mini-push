@@ -143,6 +143,7 @@ Page({
       goods_info.type = temp.type;
       goods_info.img_url = temp.cover_imgs[0];
       goods_info.amount = 1;
+      goods_info.ischecked = true;
     }else if(type==2){
       var temp = e.currentTarget.dataset.goods_info
       goods_info.id = temp.id;
@@ -152,6 +153,7 @@ Page({
       goods_info.type = temp.type;
       goods_info.img_url = temp.img_url;
       goods_info.amount = 1;
+      goods_info.ischecked = true;
     }
     var user_info = wx.getStorageSync("savor_user_info");
     var openid = user_info.openid;
@@ -258,6 +260,11 @@ Page({
     var order_type = 1;
     wx.navigateTo({
       url: '/mall/pages/order/confirmation?goods_id='+goods_id+'&openid='+openid+'&amount='+amount+'&order_type='+order_type,
+    })
+  },
+  gotoMallCart: function (e) {
+    wx.navigateTo({
+      url: '/mall/pages/goods/shopping_cart',
     })
   },
   /**

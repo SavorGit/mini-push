@@ -70,7 +70,7 @@
 									<view class="fa fa-television theme-font5" aria-hidden="true" wx:if="{{bean.is_tv==1}}" data-index="{{index}}" data-goods_id="{{bean.id}}" data-name="{{bean.name}}" data-filename='{{bean.filename}}' data-vediourl="{{bean.tx_url}}" data-boxmac="{{box_mac}}" data-openid="{{openid}}" data-duration="{{bean.duration}}" data-hotel_info="{{hotel_info}}" data-forscreen_url="{{bean.forscreen_url}}" data-resource_size="{{bean.resource_size}}" data-filename="{{bean.filename}}" data-tx_url="{{bean.tx_url}}" bindtap='boxShow'></view>
 									<view class="fa fa-sign-in theme-font5" aria-hidden="true" bindtap="gotoDetail" data-goods_id="{{bean.id}}" data-box_mac="{{box_mac}}" data-type="{{bean.type}}" wx:if="{{bean.type==10}}"></view>
 									<!---购物车按钮-->
-									<view wx:else class="fa fa-cart-plus theme-font5" aria-hidden="true" bindtap="openBuyGoodsPopWindow" data-goods_info="{{bean}}"></view>
+									<view wx:else class="fa fa-cart-plus theme-font5" aria-hidden="true" bindtap="openBuyGoodsPopWindow" data-goods_info="{{bean}}" data-type="2"></view>
 								</view>
 							</view>
 						</view>

@@ -13,7 +13,7 @@ var amount ;
 var openid;
 var order_type;
 var merchant_id;
-var carts = [];
+var carts;
 Page({
 
   /**
@@ -37,6 +37,7 @@ Page({
     var that = this;
     wx.hideShareMenu();
     var goods_ids = [];
+    carts = [];
     openid = options.openid;
     order_type = options.order_type;  //1单品下单 2购物车下单  3再次购买
 
@@ -56,7 +57,8 @@ Page({
       var mall_cart_list = wx.getStorageSync(cache_key + 'mall_cart_' + openid);
       
       mall_cart_list = JSON.parse(mall_cart_list);
-      
+      console.log(goods_ids)
+      console.log(mall_cart_list)
       for(let i in mall_cart_list){
         var goods_info = {};
         if(mall_cart_list[i].ischecked==true){

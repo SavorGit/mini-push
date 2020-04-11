@@ -631,8 +631,9 @@ Page({
       return false;
     }else {
       wx.navigateTo({
-        url: '/pages/hotel/detail?merchant_id=' + merchant_id,
+        url: '/mall/pages/hotel/index?merchant_id=' + merchant_id +'&tab=foods',
       })
+      
     }
     
   },

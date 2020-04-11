@@ -27,7 +27,22 @@ Page({
     var that = this;
     order_id = options.order_id;
     openid   = options.openid;
-
+    that.getOrderInfo(order_id);
+  },
+  getOrderInfo(){
+    var that = this;
+    utils.PostRequest(api_v_url + '/order/detail', {
+      openid: openid,
+      order_id: order_id,
+    }, (data, headers, cookies, errMsg, statusCode) => {
+      var express = data.result.express;
+      console.log(express)
+      that.setData({
+        order_info:data.result,
+        express: data.result.express,
+        merchant:data.result.merchant
+      })
+    })
   },
   phonecallevent:function(e){
     var tel = e.detail.value;

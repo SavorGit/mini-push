@@ -147,6 +147,7 @@ Page({
   addMallCart: function (e) {
     var that = this;
     var goods_info = that.data.goods_info;
+    goods_info.ischecked = true;
     var user_info = wx.getStorageSync("savor_user_info");
     var openid = user_info.openid;
     var mall_cart_list = wx.getStorageSync(cache_key + 'mall_cart_' + openid);
@@ -198,6 +199,26 @@ Page({
     }
     wx.navigateTo({
       url: url,
+    })
+  },
+  gotoMallCart: function (e) {
+    wx.navigateTo({
+      url: '/mall/pages/goods/shopping_cart',
+    })
+  },
+  loadMore:function(e){
+    var that = this;
+    var keywords = that.data.keywords;
+    page +=1;
+    that.getGoodsList(keywords, page);
+  },
+  buyOne: function (e) {
+    var that = this;
+    var goods_info = that.data.goods_info;
+    var user_info = wx.getStorageSync("savor_user_info");
+    var openid = user_info.openid;
+    wx.navigateTo({
+      url: '/mall/pages/order/confirmation?goods_id=' + goods_info.id + '&openid=' + openid + '&order_type=1&amount=' + goods_info.amount,
     })
   },
   /**
