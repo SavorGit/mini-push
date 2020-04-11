@@ -71,8 +71,10 @@ Page({
 
         var pams_arr = pams.split('_');
         merchant_id = pams_arr[1];
+        var tab = pams_arr[3];
         that.setData({
-          is_share: true
+          is_share: true,
+          tab: tab,
         })
         mta.Event.stat('openShareMerchant', { 'merchantid': merchant_id, 'openid': app.globalData.openid })
       } else {
@@ -118,8 +120,10 @@ Page({
 
             var pams_arr = pams.split('_');
             merchant_id = pams_arr[1];
+            var tab = pams_arr[3];
             that.setData({
-              is_share: true
+              is_share: true,
+              tab: tab
             })
             mta.Event.stat('openShareMerchant', { 'merchantid': merchant_id, 'openid': openid })
           } else {
