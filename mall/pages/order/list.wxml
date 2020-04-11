@@ -16,7 +16,7 @@
 	</view>
 
 	<!-- 全部订单 -->
-	<scroll-view wx:if="{{tab=='0'}}" class="scroll-view" scroll-y="true" scroll-with-animation="true" bindscrolltolower="">
+	<scroll-view wx:if="{{tab=='0'}}" class="scroll-view" scroll-y="true" scroll-with-animation="true" bindscrolltolower="loadMore">
 		<view class="list all flex-column-center-flex_start">
 
 			<view class="row flex-column-center-space_between theme-panel" wx:for="{{all_order_list}}" wx:key="key" wx:for-item="bean" wx:for-index="index">
@@ -67,7 +67,7 @@
 	</scroll-view>
 
 	<!-- 待处理订单 -->
-	<scroll-view wx:if="{{tab=='1'}}" class="scroll-view" scroll-y="true" scroll-with-animation="true" bindscrolltolower="">
+	<scroll-view wx:if="{{tab=='1'}}" class="scroll-view" scroll-y="true" scroll-with-animation="true" bindscrolltolower="loadMore">
 		<view class="list pending flex-column-center-flex_start">
 
 			<view class="row flex-column-center-space_between theme-panel" wx:for="{{deal_order_list}}" wx:key="key" wx:for-item="bean" wx:for-index="index">
@@ -172,7 +172,7 @@
 	</scroll-view>
 
 	<!-- 已完成订单 -->
-	<scroll-view wx:if="{{tab=='2'}}" class="scroll-view" scroll-y="true" scroll-with-animation="true" bindscrolltolower="">
+	<scroll-view wx:if="{{tab=='2'}}" class="scroll-view" scroll-y="true" scroll-with-animation="true" bindscrolltolower="loadMore">
 		<view class="list completed flex-column-center-flex_start">
 
 			<view class="row flex-column-center-space_between theme-panel" wx:for="{{complete_order_list}}" wx:key="key" wx:for-item="bean" wx:for-index="index">

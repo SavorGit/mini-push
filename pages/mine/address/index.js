@@ -3,6 +3,7 @@ const app = getApp()
 const utils = require('../../../utils/util.js')
 const mta = require('../../../utils/mta_analysis.js')
 var api_url = app.globalData.api_url;
+var api_v_url = app.globalData.api_v_url;
 var cache_key = app.globalData.cache_key;
 var openid = openid;
 var page = 1;
@@ -17,7 +18,8 @@ Page({
     statusBarHeight: getApp().globalData.statusBarHeight,
     address_list:[],
     showDeleteConfirmPopWindow:false,
-    isOrder: 0 
+    isOrder: 0 ,
+    showModal: false, //显示授权登陆弹窗
   },
 
   /**
@@ -27,7 +29,12 @@ Page({
     var that = this;
     openid = options.openid;
     isOrder = options.isOrder;
-    console.log(options)
+    var user_info = wx.getStorageSync(cache_key+'user_info');
+    if(user_info.is_wx_auth!=3){
+      that.setData({
+        showModal:true
+      })
+    }
     if(typeof(options.area_id)!='undefined'){
       area_id = options.area_id;
     }else {
@@ -169,6 +176,64 @@ Page({
           delta:1
         })
       }
+    })
+  },
+  onGetUserInfo: function (res) {
+    var that = this;
+
+    var user_info = wx.getStorageSync("savor_user_info");
+    openid = user_info.openid;
+    mta.Event.stat("clickonwxauth", {})
+    if (res.detail.errMsg == 'getUserInfo:ok') {
+      wx.getUserInfo({
+        success(rets) {
+          utils.PostRequest(api_url + '/smallapp3/User/registerCom', {
+            'openid': openid,
+            'avatarUrl': rets.userInfo.avatarUrl,
+            'nickName': rets.userInfo.nickName,
+            'gender': rets.userInfo.gender,
+            'session_key': app.globalData.session_key,
+            'iv': rets.iv,
+            'encryptedData': rets.encryptedData
+          }, (data, headers, cookies, errMsg, statusCode) => {
+            wx.setStorage({
+              key: 'savor_user_info',
+              data: data.result,
+            });
+            that.setData({
+              showModal: false,
+            })
+          }, res => wx.showToast({
+            title: '微信登陆失败，请重试',
+            icon: 'none',
+            duration: 2000
+          }));
+
+        }
+      })
+    } else {
+      utils.PostRequest(api_url + '/smallapp21/User/refuseRegister', {
+        'openid': openid,
+      }, (data, headers, cookies, errMsg, statusCode) => {
+        user_info['is_wx_auth'] = 1;
+        wx.setStorage({
+          key: 'savor_user_info',
+          data: user_info,
+        })
+      });
+    }
+
+
+  },
+  //关闭授权弹窗
+  closeWxAuth: function () {
+    //关闭授权登陆埋点
+    var that = this;
+    that.setData({
+      showModal: false,
+    })
+    wx.navigateBack({
+      delta:1
     })
   },
   /**

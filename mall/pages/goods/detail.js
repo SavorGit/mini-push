@@ -9,6 +9,7 @@ var api_url = app.globalData.api_url;
 var api_v_url = app.globalData.api_v_url;
 var cache_key = app.globalData.cache_key;
 var goods_id;
+var pur_uid;
 let SavorUtils = {
   User: {
 
@@ -49,6 +50,7 @@ Page({
    */
   onLoad: function (options) {
     var self = this;
+    pur_uid = '';
     if (app.globalData.openid && app.globalData.openid != '') {
       //注册用户
       self.setData({
@@ -72,6 +74,7 @@ Page({
 
       var pams_arr = pams.split('_');
       goods_id = pams_arr[1];
+      pur_uid = pams_arr[3];
       self.setData({
         is_share: true
       })
@@ -259,7 +262,7 @@ Page({
     var amount = goods_info.amount;
     var order_type = 1;
     wx.navigateTo({
-      url: '/mall/pages/order/confirmation?goods_id='+goods_id+'&openid='+openid+'&amount='+amount+'&order_type='+order_type,
+      url: '/mall/pages/order/confirmation?goods_id=' + goods_id + '&openid=' + openid + '&amount=' + amount + '&order_type=' + order_type + '&pur_uid=' + pur_uid,
     })
   },
   gotoMallCart: function (e) {

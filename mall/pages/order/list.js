@@ -124,6 +124,24 @@ Page({
     })
 
   },
+  loadMore:function(e){
+    var that = this;
+    var order_status = that.data.tab
+    if (order_status == 0) {
+      page_all += 1;
+      page = page_all;
+    } else if (order_status == 1) {
+      page_dealing += 1;
+      page = page_dealing;
+    } else if (order_status == 3) {
+      page_ship += 1;
+      page = page_ship;
+    } else if (order_status == 2) {
+      page_complete += 1;
+      page = page_complete;
+    }
+    that.getOrderList(order_status, page);
+  },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */

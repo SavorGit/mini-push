@@ -14,6 +14,7 @@ var openid;
 var order_type;
 var merchant_id;
 var carts;
+var pur_uid;
 Page({
 
   /**
@@ -38,6 +39,11 @@ Page({
     wx.hideShareMenu();
     var goods_ids = [];
     carts = [];
+    if (typeof (options.pur_uid)!='undefined'){
+      pur_uid = options.pur_uid
+    }else {
+      pur_uid=''
+    }
     openid = options.openid;
     order_type = options.order_type;  //1单品下单 2购物车下单  3再次购买
 
@@ -231,7 +237,8 @@ Page({
       openid: openid,
       pay_type: pay_type,
       remark: remark,
-      title_type, title_type
+      title_type, title_type,
+      uid:pur_uid
     }, (data, headers, cookies, errMsg, statusCode) => {
       //支付流程
       var order_id = data.result.order_id;
