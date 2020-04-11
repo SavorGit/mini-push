@@ -18,6 +18,7 @@ Page({
   data: {
     SystemInfo: getApp().SystemInfo,
     statusBarHeight: getApp().globalData.statusBarHeight,
+    is_have_express: false,
   },
 
   /**
@@ -35,9 +36,15 @@ Page({
       openid: openid,
       order_id: order_id,
     }, (data, headers, cookies, errMsg, statusCode) => {
+      
       var express = data.result.express;
-      console.log(express)
+      if (JSON.stringify(express) == '{}') {
+        var is_have_express = false;
+      } else {
+        var is_have_express = true;
+      }
       that.setData({
+        is_have_express: is_have_express,
         order_info:data.result,
         express: data.result.express,
         merchant:data.result.merchant
