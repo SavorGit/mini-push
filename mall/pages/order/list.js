@@ -97,7 +97,9 @@ Page({
           }, (data, headers, cookies, errMsg, statusCode) => {
             if (order_status == 0) {//全部订单
               var order_list = that.data.all_order_list;
-              order_list.splice(keys, 1)
+              order_list[keys].status = 54;
+              order_list[keys].status_str = '用户取消';
+              
               that.setData({
                 all_order_list: order_list
               })

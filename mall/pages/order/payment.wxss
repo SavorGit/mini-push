@@ -2,7 +2,15 @@
 /**
  * 【商城】支付页面
  */
-
+.mask {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.4);
+  z-index: 10;
+}
 
 .page {
   width: 100%;
@@ -146,4 +154,107 @@
   margin: 0;
   padding: 0;
   background: unset;
+}
+/* ======================================== 购买商品弹窗 ======================================== */
+.buy-goods-window {
+  width: 100%;
+  height: 400rpx;
+  z-index: 11;
+  position: absolute;
+  bottom: 0;
+}
+
+.buy-goods-window>.top {
+  width: calc(100% - 50rpx);
+  height: 110rpx;
+  padding: 20rpx 20rpx 20rpx 30rpx;
+  border-bottom: 3rpx solid #EDEDED;
+}
+
+.buy-goods-window>.top>.pic {
+  width: 156rpx;
+  height: 156rpx;
+  border: 3rpx solid #FFFFFF;
+  margin-top: -50rpx;
+}
+
+.buy-goods-window>.top>.center {
+  width: calc(100% - 230rpx);
+  height: 100%;
+}
+
+.buy-goods-window>.top>.center>.name {
+  width: 100%;
+  font-size: 28rpx;
+}
+
+.buy-goods-window>.top>.center>.price {
+  width: 100%;
+  font-size: 28rpx;
+}
+
+.buy-goods-window>.top>.right {
+  width: 40rpx;
+  height: 100%;
+}
+
+.buy-goods-window>.top>.right>.fa {
+  font-size: 40rpx;
+}
+
+.buy-goods-window>.middle {
+  width: calc(100% - 80rpx);
+  height: calc(100% - 308rpx);
+  padding: 40rpx;
+}
+
+.buy-goods-window>.middle>.count {
+  width: 100%;
+}
+
+.buy-goods-window>.middle>.count>.label {
+  font-size: 24rpx;
+}
+
+.buy-goods-window>.middle>.count>.value>.btn {
+  width: 34rpx;
+  height: 34rpx;
+  line-height: 34rpx;
+  text-align: center;
+  font-size: 32rpx;
+  color: #BEBEBE;
+  border: 3rpx solid #BEBEBE;
+  border-radius: 5rpx;
+  margin: 0;
+  padding: 0;
+}
+
+.buy-goods-window>.middle>.count>.value>input {
+  width: 60rpx;
+  height: 40rpx;
+  line-height: 40rpx;
+  text-align: center;
+  font-size: 24rpx;
+}
+
+.buy-goods-window>.middle>.stock {
+  width: 100%;
+  font-size: 24rpx;
+}
+
+.buy-goods-window>.bottom {
+  width: 100%;
+  height: 80rpx;
+}
+
+.buy-goods-window>.bottom>.btn {
+  width: calc(50% - 2rpx);
+  height: 80rpx;
+  line-height: 80rpx;
+  text-align: center;
+  font-size: 24rpx;
+  border-radius: 0;
+  border: 0;
+  margin: 0;
+  padding: 0;
 }
