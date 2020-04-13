@@ -58,7 +58,8 @@ Page({
       goods_info.id = goods_id;
       goods_info.amount = amount ;
       goods_ids.push(goods_info);
-      
+      goods_ids = JSON.stringify(goods_ids);
+      that.getOrderList(goods_ids)
     }else if(order_type==2){
       var mall_cart_list = wx.getStorageSync(cache_key + 'mall_cart_' + openid);
       
@@ -75,11 +76,28 @@ Page({
         }
         
       }
-    }else if(order_type==3){
-
+      goods_ids = JSON.stringify(goods_ids);
+      that.getOrderList(goods_ids)
+    }else if(order_type==3){//再次购买
+      var order_id = options.order_id
+      //订单详情
+      utils.PostRequest(api_url + '/smallapp43/order/detail', {
+        openid: openid,
+        order_id: order_id,
+      }, (data, headers, cookies, errMsg, statusCode) => {
+        var order_goods_list = data.result.goods;
+        for(let i in order_goods_list){
+          var goods_info = {};
+          goods_info.id = order_goods_list[i].id;
+          goods_info.amount = order_goods_list[i].amount;
+          goods_ids.push(goods_info);
+          carts.push(goods_info)
+        }
+        goods_ids = JSON.stringify(goods_ids);
+        that.getOrderList(goods_ids)
+      })
     }
-    goods_ids= JSON.stringify(goods_ids);
-    that.getOrderList(goods_ids)
+    
     //获取支付方式
     that.getPrepareData()
   },

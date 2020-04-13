@@ -59,7 +59,7 @@
 				<view class="foot flex-row-center-space_between">
 					<view>{{bean.add_time}}</view>
 					<view class="btn all theme-button-dark" wx:if="{{bean.status==51}}" bindtap="cancleOrder" data-order_id="{{bean.order_id}}" data-keys="{{index}}">取消订单</view>
-					<view class="btn all theme-button-buy" wx:if="{{bean.status==53}}" bindtap="">再次购买</view>
+					<view class="btn all theme-button-buy" wx:if="{{bean.status==53}}" bindtap="reBuy" data-order_id="{{bean.order_id}}">再次购买</view>
 				</view>
 			</view>
 
@@ -110,7 +110,7 @@
 				<view class="foot flex-row-center-space_between">
 					<view>{{bean.add_time}}</view>
 					<view class="btn all theme-button-dark" wx:if="{{bean.status==51}}" bindtap="cancleOrder" data-order_id="{{bean.order_id}}" data-keys="{{index}}">取消订单</view>
-					<view class="btn all theme-button-buy" wx:if="{{bean.status==53}}" bindtap="">再次购买</view>
+					<view class="btn all theme-button-buy" wx:if="{{bean.status==53}}" bindtap="reBuy" data-order_id="{{bean.order_id}}">再次购买</view>
 				</view>
 			</view>
 
@@ -163,7 +163,7 @@
 				<view class="foot flex-row-center-space_between">
 					<view>{{bean.add_time}}</view>
 					<view class="btn all theme-button-dark" wx:if="{{bean.status==51}}" bindtap="">取消订单</view>
-					<view class="btn all theme-button-buy" wx:if="{{bean.status==53}}" bindtap="">再次购买</view>
+					<view class="btn all theme-button-buy" wx:if="{{bean.status==53}}" bindtap="reBuy" data-order_id="{{bean.order_id}}">再次购买</view>
 				</view>
 			</view>
 
@@ -215,7 +215,7 @@
 				<view class="foot flex-row-center-space_between">
 					<view>{{bean.add_time}}</view>
 					<view class="btn all theme-button-dark" wx:if="{{bean.status==51}}" bindtap="">取消订单</view>
-					<view class="btn all theme-button-buy" wx:if="{{bean.status==53}}" bindtap="">再次购买</view>
+					<view class="btn all theme-button-buy" wx:if="{{bean.status==53}}" bindtap="reBuy" data-order_id="{{bean.order_id}}">再次购买</view>
 				</view>
 			</view>
 		</view>

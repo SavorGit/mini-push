@@ -144,6 +144,12 @@ Page({
     }
     that.getOrderList(order_status, page);
   },
+  reBuy:function(e){
+    var order_id = e.currentTarget.dataset.order_id;
+    wx.navigateTo({
+      url: '/mall/pages/order/confirmation?order_id='+order_id+'&openid='+openid+'&order_type=3',
+    })
+  },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */

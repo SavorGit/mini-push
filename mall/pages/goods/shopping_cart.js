@@ -172,6 +172,7 @@ Page({
           for (let x in mall_cart_list) {
             if (goods_online_list[i].goods[j].id == mall_cart_list[x].id) {
               mall_cart_list[x].ischecked = goods_online_list[i].goods[j].ischecked
+              mall_cart_list[x].amount    = goods_online_list[i].goods[j].amount
             }
           }
 
