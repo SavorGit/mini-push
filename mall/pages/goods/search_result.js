@@ -8,7 +8,7 @@ const app = getApp()
 var api_url = app.globalData.api_url;
 var api_v_url = app.globalData.api_v_url;
 var cache_key = app.globalData.cache_key;
-var openid ;
+var openid;
 var page = 1;
 Page({
 
@@ -18,9 +18,9 @@ Page({
   data: {
     SystemInfo: getApp().SystemInfo,
     statusBarHeight: getApp().globalData.statusBarHeight,
-    keywords:'',
-    mall_cart_nums:0,
-    box_mac:'',
+    keywords: '',
+    mall_cart_nums: 0,
+    box_mac: '',
   },
 
   /**
@@ -35,7 +35,7 @@ Page({
       keywords: keywords,
     })
     //获取商品列表
-    that.getGoodsList(keywords,1);
+    that.getGoodsList(keywords, 1);
   },
   //商品列表
   getGoodsList: function (keywords, page) {
@@ -95,6 +95,10 @@ Page({
       that.setData({
         mall_cart_nums: mall_cart_nums
       })
+    } else {
+      that.setData({
+        mall_cart_nums: 0
+      });
     }
   },
   // 打开购买弹窗
@@ -184,7 +188,7 @@ Page({
       mall_cart_list = JSON.stringify(mall_cart_list);
       wx.setStorageSync(cache_key + 'mall_cart_' + openid, mall_cart_list)
     }
-
+    that.setData({ showBuyGoodsPopWindow: false });
     app.showToast('添加购物车成功');
   },
   //查看详情
@@ -206,10 +210,10 @@ Page({
       url: '/mall/pages/goods/shopping_cart',
     })
   },
-  loadMore:function(e){
+  loadMore: function (e) {
     var that = this;
     var keywords = that.data.keywords;
-    page +=1;
+    page += 1;
     that.getGoodsList(keywords, page);
   },
   buyOne: function (e) {

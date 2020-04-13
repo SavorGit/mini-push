@@ -395,6 +395,10 @@ Page({
       that.setData({
         mall_cart_nums: mall_cart_nums
       })
+    } else {
+      that.setData({
+        mall_cart_nums: 0
+      });
     }
   },
   buyOne: function (e) {

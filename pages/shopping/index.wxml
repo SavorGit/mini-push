@@ -38,7 +38,7 @@
 			</view>
 			<view class="shopping-cart flex-column-flex_start-flex_start" bindtap="gotoMallCart">
 				<view class="fa fa-shopping-cart" aria-hidden="true"></view>
-				<view class="marker">{{mall_cart_nums}}</view>
+				<view wx:if="{{mall_cart_nums>0}}" class="marker">{{mall_cart_nums}}</view>
 			</view>
 		</view>
 

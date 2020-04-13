@@ -14,11 +14,11 @@
 		<view class="search-panel flex-row-center-space_between theme-panel">
 			<view class="search-bar flex-row-center-space_between">
 				<view class="fa fa-search theme-font3" aria-hidden="true"></view>
-				<input confirm-type="search" class="search theme-font3" placeholder="搜索商品" value="{{keywords}}" bindinput="inputSearch" bindconfirm="searchGoods" ></input>
+				<input confirm-type="search" class="search theme-font3" placeholder="搜索商品" value="{{keywords}}" bindinput="inputSearch" bindconfirm="searchGoods"></input>
 			</view>
 			<view class="shopping-cart flex-column-flex_start-flex_start" bindtap="gotoMallCart">
 				<view class="fa fa-shopping-cart" aria-hidden="true"></view>
-				<view class="marker">{{mall_cart_nums}}</view>
+				<view wx:if="{{mall_cart_nums>0}}" class="marker">{{mall_cart_nums}}</view>
 			</view>
 		</view>
 
@@ -43,9 +43,9 @@
 								</view>
 								<view class="right flex-row-center-flex_end">
 									<view class="fa fa-television theme-font" aria-hidden="true" wx:if="{{bean.is_tv==1}}" data-index="{{index}}" data-goods_id="{{bean.id}}" data-name="{{bean.name}}" data-filename='{{bean.filename}}' data-vediourl="{{bean.tx_url}}" data-boxmac="{{box_mac}}" data-openid="{{openid}}" data-duration="{{bean.duration}}" data-hotel_info="{{hotel_info}}" data-forscreen_url="{{bean.forscreen_url}}" data-resource_size="{{bean.resource_size}}" data-filename="{{bean.filename}}" data-tx_url="{{bean.tx_url}}" bindtap='boxShow'></view>
-                  <view class="fa fa-sign-in theme-font5" aria-hidden="true" bindtap="gotoDetail" data-goods_id="{{bean.id}}" data-box_mac="{{box_mac}}" data-type="{{bean.type}}" wx:if="{{bean.type==10}}"></view>
+									<view class="fa fa-sign-in theme-font5" aria-hidden="true" bindtap="gotoDetail" data-goods_id="{{bean.id}}" data-box_mac="{{box_mac}}" data-type="{{bean.type}}" wx:if="{{bean.type==10}}"></view>
 
-									<view wx:else  class="fa fa-cart-plus theme-font5" aria-hidden="true" bindtap="openBuyGoodsPopWindow" data-goods_info="{{bean}}"></view>
+									<view wx:else class="fa fa-cart-plus theme-font5" aria-hidden="true" bindtap="openBuyGoodsPopWindow" data-goods_info="{{bean}}"></view>
 								</view>
 							</view>
 						</view>
@@ -74,14 +74,14 @@
 				<view class="label">购买数量：</view>
 				<view class="value flex-row-center-space_between">
 					<view class="btn" bindtap="cutNum">-</view>
-					<input value="{{goods_info.amount}}"  disabled="true"></input>
+					<input value="{{goods_info.amount}}" disabled="true"></input>
 					<view class="btn" bindtap="addNum">+</view>
 				</view>
 			</view>
 			<view class="stock one-line-overflow theme-font3">剩余{{goods_info.stock_num}}件</view>
 		</view>
 		<view class="bottom flex-row-center-space_between">
-			<view class="btn theme-button-orange" bindtap="addMallCart" >加入购物车</view>
+			<view class="btn theme-button-orange" bindtap="addMallCart">加入购物车</view>
 			<view class="btn theme-button-red" bindtap="buyOne">立即购买</view>
 		</view>
 	</view>
