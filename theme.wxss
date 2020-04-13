@@ -131,7 +131,7 @@ button[disabled] {
 .theme-button-red,
 .theme-rad-panel {
   color: #fff;
-  background-color: #EB6877;
+  background-color: #F44444;
 }
 
 .theme-button-orange {

@@ -10,7 +10,7 @@
 <scroll-view class='container theme-container' style='height: calc(100vh - 46px - {{statusBarHeight + SystemInfo.screenBottomSpace}}px);' scroll-y="true" scroll-with-animation="true">
 	<view class="page theme-panel">
 		<view class="main">
-			<textarea class="input" placeholder="填写额外对商家和骑手小哥的备注信息" value="{{remark_strs}}" maxlength="50" bindinput="setInputRemark"></textarea>
+			<textarea class="input" placeholder="请输入..." value="{{remark_strs}}" maxlength="50" bindinput="setInputRemark"></textarea>
 		</view>
 		<view class="bottom" bindtap="saveRemark">
 			<view class="btn save theme-button-buy">保存</view>
