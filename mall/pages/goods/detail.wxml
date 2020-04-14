@@ -28,7 +28,7 @@
 					<view class="bottom flex-row-center-flex_start">
 						<view class="price theme-font5">￥<text class="one-line-overflow">{{goods_info.price}}</text></view>
 						<view class="price market one-line-overflow theme-font3" wx:if="{{goods_info.line_price>0}}">￥{{goods_info.line_price}}</view>
-						<view class="tip theme-font5">仅售上海市</view>
+						<view class="tip theme-font5" wx:if="{{goods_info.localsale_str!=''}}">{{goods_info.localsale_str}}</view>
 					</view>
 				</view>
 				<view class="right">
