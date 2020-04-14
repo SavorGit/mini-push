@@ -49,6 +49,10 @@
   font-size: 24rpx;
 }
 
+.shop-panel>.right>.bottom {
+  width: 100%;
+}
+
 .shop-panel>.right>.bottom>.fa {
   width: 30rpx;
   font-size: 28rpx;
