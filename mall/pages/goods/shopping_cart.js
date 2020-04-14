@@ -129,53 +129,21 @@ Page({
   getToalFee: function (goods_online_list){
     
     var that = this;
-    
-    
-    /*var mall_cart_list = wx.getStorageSync(cache_key + 'mall_cart_' + openid);
-    mall_cart_list = JSON.parse(mall_cart_list);
-    for(let i in mall_cart_list){
-      if(mall_cart_list[i].id==goods_id){
-        if(type==1){
-          mall_cart_list[i].amount = amount
-        }else if(type==2){
-          mall_cart_list[i].ischecked = ischecked
-        }
-        
-      }
-    }
-    mall_cart_list = JSON.stringify(mall_cart_list);
-    wx.setStorage({
-      key: cache_key + 'mall_cart_' + openid,
-      data: mall_cart_list,
-    })*/
-    
-    
     var mall_cart_list = wx.getStorageSync(cache_key + 'mall_cart_' + openid);
     if(mall_cart_list!=''){
       mall_cart_list = JSON.parse(mall_cart_list);
-
-      console.log(mall_cart_list)
-
-
-
-
-
-
       var total_fee = 0;
       var is_checked_all = true;
+      var flag = 0;
       for (let i in goods_online_list) {
-
         var ischecked = true;
-
         for (let j in goods_online_list[i].goods) {
-
           for (let x in mall_cart_list) {
             if (goods_online_list[i].goods[j].id == mall_cart_list[x].id) {
               mall_cart_list[x].ischecked = goods_online_list[i].goods[j].ischecked
               mall_cart_list[x].amount    = goods_online_list[i].goods[j].amount
             }
           }
-
           if (goods_online_list[i].goods[j].ischecked == false) {
             ischecked = false
             is_checked_all = false;
@@ -184,9 +152,8 @@ Page({
             var amount = goods_online_list[i].goods[j].amount;
             total_fee += app.accMul(price, amount)
           }
-
-
-
+          goods_online_list[i].goods[j].flag = flag;
+          flag +=1
         }
         goods_online_list[i].ischecked = ischecked
       }
@@ -195,6 +162,9 @@ Page({
         key: cache_key + 'mall_cart_' + openid,
         data: mall_cart_list,
       })
+      if (total_fee == 0.30000000000000004){
+        total_fee = 0.3
+      }
       that.setData({
         goods_online_list: goods_online_list,
         total_fee: total_fee,
@@ -353,7 +323,22 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    var that = this;
+    //获取购物车
+    var mall_cart_list = wx.getStorageSync(cache_key + 'mall_cart_' + openid);
+    if (mall_cart_list != '') {
+      mall_cart_list = JSON.parse(mall_cart_list);
+      var goods_ids = [];
+      for (let index in mall_cart_list) {
+        var item = {};
+        item.id = mall_cart_list[index].id;
+        item.amount = mall_cart_list[index].amount;
+        item.ischecked = mall_cart_list[index].ischecked;
+        goods_ids.push(item);
+      }
+      goods_ids = JSON.stringify(goods_ids);
+      that.getCartList(goods_ids);
+    }
   },
 
   /**

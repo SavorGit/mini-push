@@ -23,7 +23,7 @@
 				</view>
 				<view class="goods-list">
 					<block wx:for="{{bean.goods}}" wx:for-item="item" wx:key="kk" wx:for-index="idx">
-						<view class="item flex-row-center-flex_start {{list[idx].isTouchMove?'touch-move-active':'touch-move-unactive'}}" data-index="{{idx}}" bindtouchstart="touchstart" bindtouchmove="touchmove">
+						<view class="item flex-row-center-flex_start {{list[item.flag].isTouchMove?'touch-move-active':'touch-move-unactive'}}" data-index="{{item.flag}}" bindtouchstart="touchstart" bindtouchmove="touchmove">
 							<view class="goods flex-row-center-space_between">
 								<checkbox-group bindchange='selectGoods' data-index="{{index}}" data-keys="{{idx}}" data-goods_id="{{item.id}}">
 									<checkbox class="checkbox" value="{{item.id}}" checked="{{item.ischecked}}"></checkbox>

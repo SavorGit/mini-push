@@ -49,7 +49,7 @@ Page({
 
     wx.removeStorageSync(cache_key + 'mall_order:remark')
 
-
+    
     that.getDefaultAddr();
     if(order_type==1){
       var goods_info ={};
@@ -64,8 +64,7 @@ Page({
       var mall_cart_list = wx.getStorageSync(cache_key + 'mall_cart_' + openid);
       
       mall_cart_list = JSON.parse(mall_cart_list);
-      console.log(goods_ids)
-      console.log(mall_cart_list)
+
       for(let i in mall_cart_list){
         var goods_info = {};
         if(mall_cart_list[i].ischecked==true){
@@ -97,7 +96,6 @@ Page({
         that.getOrderList(goods_ids)
       })
     }
-    
     //获取支付方式
     that.getPrepareData()
   },
@@ -272,6 +270,11 @@ Page({
               addDisabled: false
             })
             app.showToast('支付成功', 2000, 'success')
+            if(order_type==2){
+              console.log('222222222222')
+              //清空购物车的商品
+              that.clearMallCart();
+            }
             wx.navigateTo({
               url: '/mall/pages/order/payment?order_id='+order_id+'&openid='+openid,
             })
@@ -293,6 +296,26 @@ Page({
         })
       }
     })
+  },
+  clearMallCart:function(){
+    //console.log(carts)
+    var tmp = JSON.parse(carts);
+    var mall_cart_list = wx.getStorageSync(cache_key + 'mall_cart_' + openid);
+    mall_cart_list = JSON.parse(mall_cart_list);
+    for(let i in mall_cart_list){
+      for (let j in tmp){
+        if (tmp[j].id==mall_cart_list[i].id){
+          mall_cart_list.splice(i,1);
+        }
+      }
+    }
+    //console.log(mall_cart_list)
+    if(mall_cart_list.length==0){
+      wx.removeStorageSync(cache_key + 'mall_cart_' + openid)
+    }else {
+      mall_cart_list = JSON.stringify(mall_cart_list);
+      wx.setStorageSync(cache_key + 'mall_cart_' + openid, mall_cart_list)
+    }
   },
   /**
    * 生命周期函数--监听页面隐藏
