@@ -41,7 +41,7 @@
 										<view class="price theme-font5">￥{{item.price}}</view>
 										<view class="count flex-row-center-flex_end">
 											<view class="btn" bindtap="cutNum" data-index="{{index}}" data-keys="{{idx}}" data-goods_id="{{item.id}}">-</view>
-											<input value="{{item.amount}}"></input>
+											<input value="{{item.amount}}" disabled="true"></input>
 											<view class="btn" bindtap="addNum" data-index="{{index}}" data-keys="{{idx}}" data-goods_id="{{item.id}}">+</view>
 										</view>
 									</view>

@@ -162,9 +162,8 @@ Page({
         key: cache_key + 'mall_cart_' + openid,
         data: mall_cart_list,
       })
-      if (total_fee == 0.30000000000000004){
-        total_fee = 0.3
-      }
+      total_fee = total_fee.toFixed(2); 
+      
       that.setData({
         goods_online_list: goods_online_list,
         total_fee: total_fee,
