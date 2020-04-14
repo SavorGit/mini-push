@@ -130,7 +130,7 @@
 }
 
 .goods-smple-info>.bottom>.left>.name {
-  font-size: 28rpx;
+  font-size: 32rpx;
   font-weight: bold;
 }
 
@@ -263,13 +263,13 @@
 
 .recommend>.scroll-view .list>.item>.bottom {
   width: calc(100% - 20rpx);
-  height: calc(100% - 205rpx);
-  padding: 20rpx 10rpx;
+  height: calc(100% - 185rpx);
+  padding: 10rpx 10rpx;
 }
 
 .recommend>.scroll-view .list>.item>.bottom>.name {
   width: 100%;
-  font-size: 20rpx;
+  font-size: 24rpx;
   white-space: normal;
 }
 
@@ -278,7 +278,7 @@
 }
 
 .recommend>.scroll-view .list>.item>.bottom>.bottom>.price {
-  font-size: 20rpx;
+  font-size: 24rpx;
 }
 
 .recommend>.scroll-view .list>.item>.bottom>.bottom>.btn {
@@ -291,7 +291,7 @@
   text-align: center;
   color: #F44444;
   border: 3rpx solid #F44444;
-  border-radius: 50rpx;
+  border-radius: 50%;
   font-size: 24rpx;
 }
 
