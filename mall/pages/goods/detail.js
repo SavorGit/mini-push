@@ -135,9 +135,10 @@ Page({
   addMallCart:function(e){
     var that = this;
     var type= e.currentTarget.dataset.type;
+    var is_self = that.data.is_self;
     var goods_info = {};
-    if(type==1){
-      var temp = that.data.goods_info;
+    if(is_self==1){
+      var temp = that.data.goods_cart_info;
       goods_info.id = temp.goods_id;
       goods_info.name = temp.name;
       goods_info.price = temp.price;
@@ -145,17 +146,17 @@ Page({
       goods_info.stock_num = temp.stock_num;
       goods_info.type = temp.type;
       goods_info.img_url = temp.cover_imgs[0];
-      goods_info.amount = 1;
+      goods_info.amount = temp.amount;
       goods_info.ischecked = true;
-    }else if(type==2){
-      var temp = e.currentTarget.dataset.goods_info
+    }else if(is_self==2){
+      var temp = that.data.goods_cart_info;
       goods_info.id = temp.id;
       goods_info.name = temp.name;
       goods_info.price = temp.price;
       goods_info.stock_num = temp.stock_num;
       goods_info.type = temp.type;
       goods_info.img_url = temp.img_url;
-      goods_info.amount = 1;
+      goods_info.amount = temp.amount;
       goods_info.ischecked = true;
     }
     var user_info = wx.getStorageSync("savor_user_info");
@@ -194,7 +195,7 @@ Page({
       mall_cart_list = JSON.stringify(mall_cart_list);
       wx.setStorageSync(cache_key + 'mall_cart_' + openid, mall_cart_list)
     }
-
+    that.setData({ showBuyGoodsPopWindow:false})
     app.showToast('添加购物车成功');
   },
   gotoGoodsDetail:function(e){
@@ -211,11 +212,21 @@ Page({
   // 打开购买弹窗
   openBuyGoodsPopWindow: function (e) {
     let that = this;
-    var goods_info = that.data.goods_info;
-    goods_info.amount = 1;
+    var is_self = e.currentTarget.dataset.is_self;
+    if(is_self==1){
+      var goods_cart_info = that.data.goods_info;
+    }else {
+      var goods_cart_info = e.currentTarget.dataset.goods_info;
+    }
+    
+    var action = e.currentTarget.dataset.action
+    
+    goods_cart_info.amount = 1;
     that.setData({
       showBuyGoodsPopWindow: true,
-      goods_info: goods_info
+      goods_cart_info: goods_cart_info,
+      action: action,
+      is_self: is_self,
     });
   },
 
@@ -229,29 +240,30 @@ Page({
   //购物车减数量
   cutNum: function (e) {
     var that = this;
-    var goods_info = that.data.goods_info;
-    var stock_num = goods_info.stock_num; //库存
-    if (goods_info.amount == 1) {
+    var goods_cart_info = that.data.goods_cart_info;
+    var stock_num = goods_cart_info.stock_num; //库存
+    if (goods_cart_info.amount == 1) {
       app.showToast('至少选择一件商品');
       return false;
     }
-    goods_info.amount -= 1;
+    goods_cart_info.amount -= 1;
     that.setData({
-      goods_info: goods_info,
+      goods_cart_info: goods_cart_info,
     })
   },
   //购物车增数量
   addNum: function (e) {
     var that = this;
-    var goods_info = that.data.goods_info;
-    var stock_num = goods_info.stock_num; //库存
-    if (goods_info.amount == stock_num) {
+    //var goods_info = that.data.goods_info;
+    var goods_cart_info = that.data.goods_cart_info;
+    var stock_num = goods_cart_info.stock_num; //库存
+    if (goods_cart_info.amount == stock_num) {
       app.showToast('该商品库存不足');
       return false;
     }
-    goods_info.amount += 1;
+    goods_cart_info.amount += 1;
     that.setData({
-      goods_info: goods_info,
+      goods_cart_info: goods_cart_info,
     })
   },
   buyOne:function(e){

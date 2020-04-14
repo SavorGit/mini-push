@@ -70,7 +70,7 @@
 							<view class="name two-line-overflow">{{bean.name}}</view>
 							<view class="bottom flex-row-center-space_between">
 								<view class="price theme-font5 one-line-overflow">￥{{bean.price}}</view>
-								<view class="btn fa fa-cart-plus theme-font5" aria-hidden="true" bindtap="addMallCart" data-goods_info="{{bean}}" data-type="2"></view>
+								<view class="btn fa fa-cart-plus theme-font5" aria-hidden="true" bindtap="openBuyGoodsPopWindow" data-action='1' data-is_self="2" data-goods_info="{{bean}}" ></view>
 							</view>
 						</view>
 					</view>
@@ -133,8 +133,9 @@
 			</view>
 		</view>
 		<view class="right flex-row-center-space_between">
-			<view class="btn theme-button-orange" bindtap="addMallCart" data-type="1">加入购物车</view>
-			<view class="btn theme-button-red" bindtap="openBuyGoodsPopWindow">立即购买</view>
+			<!-- <view class="btn theme-button-orange" bindtap="addMallCart" data-type="1">加入购物车</view> -->
+      <view class="btn theme-button-orange" bindtap="openBuyGoodsPopWindow" data-action='1' data-is_self="1">加入购物车</view>
+			<view class="btn theme-button-red" bindtap="openBuyGoodsPopWindow" data-action='2' data-is_self="1">立即购买</view>
 		</view>
 	</view>
 </view>
@@ -143,11 +144,12 @@
 <!-- 购买商品弹窗 -->
 <view wx:if="{{showBuyGoodsPopWindow}}" class="mask">
 	<view class="buy-goods-window theme-panel">
-		<view class="top flex-row-flex_end-space_between">
-			<image class="pic" mode="aspectFill" src="{{goods_info.cover_imgs[0]}}"></image>
+		<view class="top flex-row-flex_end-space_between" >
+			<image wx:if="{{is_self==1}}" class="pic" mode="aspectFill" src="{{goods_cart_info.cover_imgs[0]}}"></image>
+      <image wx:if="{{is_self==2}}" class="pic" mode="aspectFill" src="{{goods_cart_info.img_url}}"></image>
 			<view class="center flex-column-flex_start-space_between">
-				<view class="name one-line-overflow">{{goods_info.name}}</view>
-				<view class="price one-line-overflow theme-font5">￥{{goods_info.price}}</view>
+				<view class="name one-line-overflow">{{goods_cart_info.name}}</view>
+				<view class="price one-line-overflow theme-font5">￥{{goods_cart_info.price}}</view>
 			</view>
 			<view class="right flex-column-center-flex_start">
 				<view class="btn fa fa-times-circle-o" aria-hidden="true" bindtap="closeBuyGoodsPopWindow"></view>
@@ -158,15 +160,20 @@
 				<view class="label">购买数量：</view>
 				<view class="value flex-row-center-space_between">
 					<view class="btn" bindtap="cutNum">-</view>
-					<input value="{{goods_info.amount}}"  disabled="true"></input>
+					<input value="{{goods_cart_info.amount}}"  disabled="true"></input>
 					<view class="btn" bindtap="addNum">+</view>
 				</view>
 			</view>
-			<view class="stock one-line-overflow theme-font3">剩余{{goods_info.stock_num}}件</view>
+			<view class="stock one-line-overflow theme-font3">剩余{{goods_cart_info.stock_num}}件</view>
 		</view>
-		<view class="bottom flex-row-center-space_between">
+		<view class="bottom flex-row-center-space_between" wx:if="{{action==2}}">
 			<!-- <view class="btn theme-button-orange" bindtap="addMallCart" >加入购物车</view> -->
 			<view class="btn theme-button-red" bindtap="buyOne">下一步</view>
+		</view>
+
+    <view class="bottom flex-row-center-space_between" wx:if="{{action==1}}">
+			<view class="btn theme-button-orange" bindtap="addMallCart" >加入购物车</view> 
+			
 		</view>
 	</view>
 </view>

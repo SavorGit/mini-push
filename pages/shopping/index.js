@@ -341,7 +341,7 @@ Page({
       var is_have = 0;
       for (var i = 0; i < mall_cart_list.length; i++) {
         if (mall_cart_list[i].id == goods_info.id) {
-          mall_cart_list[i].amount += goods_info.amount;
+          mall_cart_list[i].amount += Number(goods_info.amount);
           mall_cart_list[i].ischecked = true;
           is_have = 1;
           break;
@@ -352,7 +352,7 @@ Page({
       }
       var mall_cart_nums = 0;
       for (let index in mall_cart_list) {
-        mall_cart_nums += mall_cart_list[index].amount;
+        mall_cart_nums += Number(mall_cart_list[index].amount);
       }
       that.setData({
         mall_cart_nums: mall_cart_nums
@@ -389,9 +389,12 @@ Page({
     if (mall_cart_list != '') {
       var mall_cart_nums = 0
       mall_cart_list = JSON.parse(mall_cart_list);
+      console.log(mall_cart_list);
       for (let index in mall_cart_list) {
-        mall_cart_nums += mall_cart_list[index].amount;
+        
+        mall_cart_nums += Number(mall_cart_list[index].amount) ;
       }
+      console.log(mall_cart_nums)
       that.setData({
         mall_cart_nums: mall_cart_nums
       })
