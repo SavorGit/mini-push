@@ -267,6 +267,7 @@ Page({
     })
   },
   buyOne:function(e){
+    var that = this;
     var user_info = wx.getStorageSync("savor_user_info");
     var openid = user_info.openid;
     var goods_info = this.data.goods_info;
@@ -275,6 +276,11 @@ Page({
     var order_type = 1;
     wx.navigateTo({
       url: '/mall/pages/order/confirmation?goods_id=' + goods_id + '&openid=' + openid + '&amount=' + amount + '&order_type=' + order_type + '&pur_uid=' + pur_uid,
+      success:function(res){
+        that.setData({
+          showBuyGoodsPopWindow:false,
+        })
+      }
     })
   },
   gotoMallCart: function (e) {
