@@ -131,6 +131,7 @@
 
 .goods-smple-info>.bottom>.left>.name {
   font-size: 28rpx;
+  font-weight: bold;
 }
 
 .goods-smple-info>.bottom>.left>.bottom>.price {
