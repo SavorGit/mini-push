@@ -11,7 +11,7 @@
 	<!-- 物流信息 -->
 	<!-- 外层pages -->
 	<view class='pages'>
-		<block wx:if="{{express_info.length>0}}">
+		<block wx:if="{{express_info.state!=''}}">
 			<!-- 头部[详细] 
       <view class='head flex-row-center-space_between'>
         <image class='head_img' mode="aspectFill" src='https://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg'></image>
