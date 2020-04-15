@@ -49,15 +49,16 @@
 
 .search-panel {
   width: calc(100% - 20rpx);
-  height: 68;
+  height: 68rpx;
   padding: 10rpx;
   margin-bottom: 10rpx;
 }
 
 .search-panel>.search-bar {
-  width: 630rpx;
+  width: 590rpx;
   height: 40rpx;
   padding: 10rpx 20rpx;
+  margin-left: calc((100% - 700rpx) / 2);
   border-radius: 29rpx;
   background-color: #EDEDED;
 }
@@ -188,7 +189,7 @@
 }
 
 .main-panel>.tab-body .list>.item>.bottom>.bottom>.left>.price {
-  font-size: 28rpx;
+  font-size: 20rpx;
 }
 
 .main-panel>.tab-body .list>.item>.bottom>.bottom>.left>.price>text {

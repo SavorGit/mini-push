@@ -189,7 +189,9 @@ Page({
     var category_id = e.currentTarget.dataset.category_id;
     that.setData({
       category_id: category_id
-    })
+    }, function () {
+      try { that.switchCategoryTabBar(e); } catch (error) { console.error(error) }
+    });
     var page_arr = that.data.page_arr;
     var select_page = 1;
     for (let index in page_arr) {
@@ -368,7 +370,22 @@ Page({
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-
+    let self = this;
+    self.tabBar = { category: { scrollViewWidth: 750 } };
+    wx.createSelectorQuery().select('.tab-bar').boundingClientRect((rect) => {
+      self.tabBar.category.scrollViewWidth = Math.round(rect.width);
+    }).exec();
+  },
+  switchCategoryTabBar(e) {
+    let self = this;
+    let offsetLeft = e.currentTarget.offsetLeft;
+    wx.createSelectorQuery().select('.tab-bar .selected').fields({
+      size: true
+    }, function (res) {
+      self.setData({
+        scrollLeft: offsetLeft - (self.tabBar.category.scrollViewWidth - res.width) / 2
+      });
+    }).exec();
   },
 
   /**
@@ -391,8 +408,7 @@ Page({
       mall_cart_list = JSON.parse(mall_cart_list);
       console.log(mall_cart_list);
       for (let index in mall_cart_list) {
-        
-        mall_cart_nums += Number(mall_cart_list[index].amount) ;
+        mall_cart_nums += Number(mall_cart_list[index].amount);
       }
       console.log(mall_cart_nums)
       that.setData({

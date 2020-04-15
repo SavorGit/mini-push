@@ -120,8 +120,8 @@
 
 .goods-smple-info>.bottom {
   width: calc(100% - 60rpx);
-  height: calc(100% - 460rpx);
-  padding: 20rpx 30rpx;
+  height: calc(100% - 450rpx);
+  padding: 15rpx 30rpx;
 }
 
 .goods-smple-info>.bottom>.left {
