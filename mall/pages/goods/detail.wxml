@@ -139,8 +139,8 @@
 
 
 <!-- 购买商品弹窗 -->
-<view wx:if="{{showBuyGoodsPopWindow}}" class="mask" style="bottom:{{SystemInfo.screenBottomSpace}}px;">
-	<view class="buy-goods-window theme-panel">
+<view wx:if="{{showBuyGoodsPopWindow}}" class="mask" style="bottom:{{SystemInfo.screenBottomSpace}}px;" bindtap='closeBuyGoodsPopWindow'>
+	<view class="buy-goods-window {{showBuyGoodsPopWindowAnimation?'window-open':'window-close'}} theme-panel">
 		<view class="top flex-row-flex_end-space_between">
 			<image wx:if="{{is_self==1}}" class="pic" mode="aspectFill" src="{{goods_cart_info.cover_imgs[0]}}"></image>
 			<image wx:if="{{is_self==2}}" class="pic" mode="aspectFill" src="{{goods_cart_info.img_url}}"></image>

@@ -1,4 +1,6 @@
 /* mall/pages/goods/detail.wxss */
+@import "/animation.wxss";
+
 /**
  * 【商城】首页
  */
@@ -10,6 +12,24 @@
   bottom: 0;
   background-color: rgba(0, 0, 0, 0.4);
   z-index: 10;
+}
+
+.window-open {
+  -webkit-animation-duration: 0.5s;
+  animation-duration: 0.5s;
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
+  -webkit-animation-name: fadeInDown;
+  animation-name: fadeInDown;
+}
+
+.window-close {
+  -webkit-animation-duration: 0.5s;
+  animation-duration: 0.5s;
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
+  -webkit-animation-name: fadeOutUp;
+  animation-name: fadeOutUp;
 }
 
 .scroll-view {

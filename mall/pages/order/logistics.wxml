@@ -31,65 +31,63 @@
 			<!-- 追踪 -->
 			<view>
 				<block wx:for="{{expres_list}}" wx:for-item="bean" wx:key="key" wx:for-index="index">
-				<view class='logisit flex_row_stretch_flexStart' wx:if="{{index==0}}">
-					<!-- 左边子容器 -->
-					<view class="express-left flex_column_center_center">
-						<view class="date">2012-08-28</view>
-						<view class="time">16:33:19</view>
+					<view class='logisit flex-row-stretch-flex_start' wx:if="{{index==0}}">
+						<!-- 左边子容器 -->
+						<view class="express-left flex-column-center-center">
+							<view class="date">2012-08-28</view>
+							<view class="time">16:33:19</view>
+						</view>
+						<!-- 显示顶部收的圆点 -->
+						<view class='dot-shou flex-column-center-center'>
+							<!-- 签收后不显示下面这行 -->
+							<view class="max-dot dot-warn"></view>
+						</view>
+						<!-- 右边子容器 -->
+						<view class='express-right'>
+							<view class="express-logistics-status theme-font1">{{bean.status}}</view>
+							<view class='express-status-address theme-font1'>{{bean.context}}</view>
+							<view class='express-statusing theme-font1'>{{bean.time}}</view>
+						</view>
 					</view>
-					<!-- 显示顶部收的圆点 -->
-					<view class='dot-shou flex_column_center_center'>
-						<!-- 签收后不显示下面这行 -->
-						<view class="max-dot dot-warn"></view>
-					</view>
-					<!-- 右边子容器 -->
-					<view class='express-right'>
-						<view class="express-logistics-status theme-font1">{{bean.status}}</view>
-						<view class='express-status-address theme-font1'>{{bean.context}}</view>
-						<view class='express-statusing theme-font1'>{{bean.time}}</view>
-					</view>
-				</view>
 
-        <view class='logisit flex_row_stretch_flexStart' wx:if="{{index !=0 && express_list.length!=index+1}}">
-					<!-- 左边子容器 -->
-					<view class="express-left flex_column_center_center">
-						<view class="date">08-27</view>
-						<view class="time">23:22</view>
+					<view class='logisit flex-row-stretch-flex_start' wx:if="{{index !=0 && express_list.length!=index+1}}">
+						<!-- 左边子容器 -->
+						<view class="express-left flex-column-center-center">
+							<view class="date">08-27</view>
+							<view class="time">23:22</view>
+						</view>
+						<!-- 显示顶部收的圆点 -->
+						<view class='express-middle-axis'>
+							<view class='fa fa-angle-up dot-closing' aria-hidden="true"></view>
+							<view class='online-top-closing'></view>
+						</view>
+						<!-- 右边子容器 -->
+						<view class='express-right'>
+							<view class="express-logistics-status theme-font1">{{bean.status}}</view>
+							<view class='express-status-address theme-font3'>{{bean.context}}</view>
+							<view class='express-statusing theme-font3'>{{bean.time}}</view>
+						</view>
 					</view>
-					<!-- 显示顶部收的圆点 -->
-					<view class='express-middle-axis'>
-						<view class='fa fa-angle-up dot-closing' aria-hidden="true"></view>
-						<view class='online-top-closing'></view>
-					</view>
-					<!-- 右边子容器 -->
-					<view class='express-right'>
-						<view class="express-logistics-status theme-font1">{{bean.status}}</view>
-						<view class='express-status-address theme-font3'>{{bean.context}}</view>
-						<view class='express-statusing theme-font3'>{{bean.time}}</view>
-					</view>
-				</view>
 
-
-
-        <view class='logisit flex_row_stretch_flexStart' wx:if="{{index!=0 &&  expres_list.length==index+1 }}">
-					<!-- 左边子容器 -->
-					<view class="express-left flex_column_center_center">
-						<view class="date">2012-08-27</view>
-						<view class="time">23:22:42</view>
+					<view class='logisit flex-row-stretch-flex_start' wx:if="{{index!=0 &&  expres_list.length==index+1 }}">
+						<!-- 左边子容器 -->
+						<view class="express-left flex-column-center-center">
+							<view class="date">2012-08-27</view>
+							<view class="time">23:22:42</view>
+						</view>
+						<!-- 显示顶部收的圆点 -->
+						<view class='express-middle-axis'>
+							<view class='dot-closing_two'></view>
+							<view class='online-top-closing'></view>
+						</view>
+						<!-- 右边子容器 -->
+						<view class='express-right'>
+							<view class="express-logistics-status theme-font1">{{bean.status}}</view>
+							<view class='express-status-address theme-font3'>{{bean.context}}</view>
+							<view class='express-statusing theme-font3'>{{bean.time}}</view>
+						</view>
 					</view>
-					<!-- 显示顶部收的圆点 -->
-					<view class='express-middle-axis'>
-						<view class='dot-closing_two'></view>
-						<view class='online-top-closing'></view>
-					</view>
-					<!-- 右边子容器 -->
-					<view class='express-right'>
-						<view class="express-logistics-status theme-font1">{{bean.status}}</view>
-						<view class='express-status-address theme-font3'>{{bean.context}}</view>
-						<view class='express-statusing theme-font3'>{{bean.time}}</view>
-					</view>
-				</view>
-        </block>
+				</block>
 			</view>
 		</block>
 

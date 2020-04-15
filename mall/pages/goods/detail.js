@@ -41,8 +41,8 @@ Page({
   data: {
     SystemInfo: getApp().SystemInfo,
     statusBarHeight: getApp().globalData.statusBarHeight,
-    rec_list:[],
-    showBuyGoodsPopWindow:false,
+    rec_list: [],
+    showBuyGoodsPopWindow: false,
   },
 
   /**
@@ -78,8 +78,8 @@ Page({
       self.setData({
         is_share: true
       })
-      
-    }else{
+
+    } else {
       goods_id = options.goods_id;
       if (typeof (options.is_share) != 'undefined' && options.is_share == 1) {
         self.setData({
@@ -96,48 +96,48 @@ Page({
     //获取商品详情
     self.getGoodsInfo(goods_id);
     //优选推荐
-    self.getRecommend(goods_id,1,3);
-    
+    self.getRecommend(goods_id, 1, 3);
+
   },
-  getGoodsInfo:function(goods_id){
+  getGoodsInfo: function (goods_id) {
     var that = this;
     utils.PostRequest(api_v_url + '/dish/detail', {
-      goods_id:goods_id
+      goods_id: goods_id
     }, (data, headers, cookies, errMsg, statusCode) => {
       that.setData({
-        goods_info:data.result,
+        goods_info: data.result,
         merchant: data.result.merchant
       })
     });
   },
-  getRecommend: function (goods_id,page,pagesize){
+  getRecommend: function (goods_id, page, pagesize) {
     var that = this;
     utils.PostRequest(api_v_url + '/shop/recommend', {
       page: page,
-      pagesize:pagesize,
+      pagesize: pagesize,
       goods_id: goods_id
     }, (data, headers, cookies, errMsg, statusCode) => {
       that.setData({
-        rec_list:data.result,
+        rec_list: data.result,
       })
     });
   },
-  gotoMerchant:function(e){
+  gotoMerchant: function (e) {
     var merchant_id = e.currentTarget.dataset.merchant_id;
     wx.navigateTo({
-      url: '/mall/pages/hotel/index?merchant_id='+merchant_id,
+      url: '/mall/pages/hotel/index?merchant_id=' + merchant_id,
     })
   },
-  phonecallevent:function(e){
+  phonecallevent: function (e) {
     var tel = e.target.dataset.tel;
     app.phonecallevent(tel)
   },
-  addMallCart:function(e){
+  addMallCart: function (e) {
     var that = this;
-    var type= e.currentTarget.dataset.type;
+    var type = e.currentTarget.dataset.type;
     var is_self = that.data.is_self;
     var goods_info = {};
-    if(is_self==1){
+    if (is_self == 1) {
       var temp = that.data.goods_cart_info;
       goods_info.id = temp.goods_id;
       goods_info.name = temp.name;
@@ -148,7 +148,7 @@ Page({
       goods_info.img_url = temp.cover_imgs[0];
       goods_info.amount = temp.amount;
       goods_info.ischecked = true;
-    }else if(is_self==2){
+    } else if (is_self == 2) {
       var temp = that.data.goods_cart_info;
       goods_info.id = temp.id;
       goods_info.name = temp.name;
@@ -195,16 +195,16 @@ Page({
       mall_cart_list = JSON.stringify(mall_cart_list);
       wx.setStorageSync(cache_key + 'mall_cart_' + openid, mall_cart_list)
     }
-    that.setData({ showBuyGoodsPopWindow:false})
+    that.setData({ showBuyGoodsPopWindow: false })
     app.showToast('添加购物车成功');
   },
-  gotoGoodsDetail:function(e){
+  gotoGoodsDetail: function (e) {
     var goods_id = e.currentTarget.dataset.goods_id;
     wx.navigateTo({
       url: '/mall/pages/goods/detail?goods_id=' + goods_id,
     })
   },
-  gotoRecList:function(e){
+  gotoRecList: function (e) {
     wx.navigateTo({
       url: '/mall/pages/goods/recommendation',
     })
@@ -213,17 +213,18 @@ Page({
   openBuyGoodsPopWindow: function (e) {
     let that = this;
     var is_self = e.currentTarget.dataset.is_self;
-    if(is_self==1){
+    if (is_self == 1) {
       var goods_cart_info = that.data.goods_info;
-    }else {
+    } else {
       var goods_cart_info = e.currentTarget.dataset.goods_info;
     }
-    
+
     var action = e.currentTarget.dataset.action
-    
+
     goods_cart_info.amount = 1;
     that.setData({
       showBuyGoodsPopWindow: true,
+      showBuyGoodsPopWindowAnimation: true,
       goods_cart_info: goods_cart_info,
       action: action,
       is_self: is_self,
@@ -234,7 +235,13 @@ Page({
   closeBuyGoodsPopWindow: function (e) {
     let self = this;
     self.setData({
-      showBuyGoodsPopWindow: false
+      showBuyGoodsPopWindowAnimation: false,
+    }, function () {
+      setTimeout(function () {
+        self.setData({
+          showBuyGoodsPopWindow: false
+        });
+      }, 500);
     });
   },
   //购物车减数量
@@ -266,7 +273,7 @@ Page({
       goods_cart_info: goods_cart_info,
     })
   },
-  buyOne:function(e){
+  buyOne: function (e) {
     var that = this;
     var user_info = wx.getStorageSync("savor_user_info");
     var openid = user_info.openid;
@@ -276,9 +283,9 @@ Page({
     var order_type = 1;
     wx.navigateTo({
       url: '/mall/pages/order/confirmation?goods_id=' + goods_id + '&openid=' + openid + '&amount=' + amount + '&order_type=' + order_type + '&pur_uid=' + pur_uid,
-      success:function(res){
+      success: function (res) {
         that.setData({
-          showBuyGoodsPopWindow:false,
+          showBuyGoodsPopWindow: false,
         })
       }
     })
@@ -335,7 +342,7 @@ Page({
    */
   onShareAppMessage: function (e) {
     var that = this;
-    
+
     var img_url = that.data.goods_info.cover_imgs[0];
     var goods_name = that.data.goods_info.name;
     var hotel_name = that.data.merchant.name;

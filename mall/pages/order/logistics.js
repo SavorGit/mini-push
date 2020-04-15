@@ -19,7 +19,7 @@ Page({
   data: {
     SystemInfo: getApp().SystemInfo,
     statusBarHeight: getApp().globalData.statusBarHeight,
-    a:true
+    a: true
   },
 
   /**
@@ -28,10 +28,11 @@ Page({
   onLoad: function (options) {
     var that = this;
     order_id = options.order_id;
-    openid   = options.openid;
-    that.getExInfo(order_id,openid);
+    openid = options.openid;
+    that.getExInfo(order_id, openid);
   },
-  getExInfo:function(order_id,openid){
+  getExInfo: function (order_id, openid) {
+    var that = this;
     utils.PostRequest(api_v_url + '/express/getExpress', {
       openid: openid,
       order_id: order_id
