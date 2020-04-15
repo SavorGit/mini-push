@@ -32,8 +32,10 @@
 			<view class="tab-panel flex-column-center-flex_start">
 				<view class="tab-bar flex-row-center-flex_start theme-panel">
 					<view class="tab goods{{tab=='goods'?' selected':''}}" data-tab="goods" bindtap="showTab">商城</view>
+					<block wx:if="{{mtype==1}}">
 					<view class="tab foods{{tab=='foods'?' selected':''}}" data-tab="foods" bindtap="showTab">外卖</view>
 					<view class="tab shop-info{{tab=='shop-info'?' selected':''}}" data-tab="shop-info" bindtap="showTab">商家详情</view>
+					</block>
 				</view>
 
 				<!-- 商城 -->

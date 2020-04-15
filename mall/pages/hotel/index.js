@@ -168,9 +168,20 @@ Page({
     var that = this;
     utils.PostRequest(api_v_url + '/merchant/info', {
       merchant_id: merchant_id,
-    }, (data, headers, cookies, errMsg, statusCode) => that.setData({
-      hotel_info: data.result
-    }));
+    }, (data, headers, cookies, errMsg, statusCode) =>{
+      var mtype = data.result.mtype;
+      if(mtype==2){
+        var tab ='goods';
+        that.setData({
+          tab:tab,
+        })
+      }
+      that.setData({
+        mtype:data.result.mtype,
+        hotel_info: data.result
+      })
+
+    });
   },
   getDishInfo: function (merchant_id,type,page) {
     var that = this;
