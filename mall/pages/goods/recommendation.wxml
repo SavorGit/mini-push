@@ -14,7 +14,7 @@
 			<view class="body flex-column-center-flex_start">
 				<view class="list flex-column-center-flex_start">
 					<view class="item flex-column-center-flex_start theme-panel" wx:for="{{rec_list}}" wx:key="key" wx:for-item="bean" wx:for-index="index">
-						<view class="top flex-column-flex_start-flex_start" bindtap="gotoDetail" data-goods_id="{{bean.id}}" >
+						<view class="top flex-column-flex_start-flex_start" bindtap="gotoDetail" data-goods_id="{{bean.id}}">
 							<image class="pic" mode="aspectFill" src="{{bean.img_url}}"></image>
 						</view>
 						<view class="bottom flex-column-flex_start-flex_start">
@@ -37,8 +37,8 @@
 </scroll-view>
 
 <!-- 购买商品弹窗 -->
-<view wx:if="{{showBuyGoodsPopWindow}}" class="mask">
-	<view class="buy-goods-window theme-panel">
+<view wx:if="{{showBuyGoodsPopWindow}}" class="mask" style="bottom:{{SystemInfo.screenBottomSpace}}px;" bindtap="closeBuyGoodsPopWindow">
+	<view class="buy-goods-window {{showBuyGoodsPopWindowAnimation?'window-open':'window-close'}} theme-panel">
 		<view class="top flex-row-flex_end-space_between">
 			<image class="pic" mode="aspectFill" src="{{goods_info.img_url}}"></image>
 			<view class="center flex-column-flex_start-space_between">
@@ -54,7 +54,7 @@
 				<view class="label">购买数量：</view>
 				<view class="value flex-row-center-space_between">
 					<view class="btn" bindtap="cutNum">-</view>
-					<input value="{{goods_info.amount}}"  disabled="true"></input>
+					<input value="{{goods_info.amount}}" disabled="true"></input>
 					<view class="btn" bindtap="addNum">+</view>
 				</view>
 			</view>

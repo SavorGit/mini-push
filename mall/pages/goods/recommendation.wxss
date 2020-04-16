@@ -1,7 +1,10 @@
 /* mall/pages/goods/recommendation.wxss */
+@import "/animation.wxss";
 /**
  * 【商城】商品推荐页面
  */
+
+
 .mask {
   position: absolute;
   left: 0;
@@ -10,6 +13,24 @@
   bottom: 0;
   background-color: rgba(0, 0, 0, 0.4);
   z-index: 10;
+}
+
+.window-open {
+  -webkit-animation-duration: 0.5s;
+  animation-duration: 0.5s;
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
+  -webkit-animation-name: fadeInDown;
+  animation-name: fadeInDown;
+}
+
+.window-close {
+  -webkit-animation-duration: 0.5s;
+  animation-duration: 0.5s;
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
+  -webkit-animation-name: fadeOutUp;
+  animation-name: fadeOutUp;
 }
 
 .page {
@@ -106,6 +127,7 @@
 .main-panel>.body .list>.item:last-child {
   margin-bottom: 120rpx;
 }
+
 /* ======================================== 购买商品弹窗 ======================================== */
 .buy-goods-window {
   width: 100%;
