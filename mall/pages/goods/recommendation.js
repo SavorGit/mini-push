@@ -27,7 +27,7 @@ Page({
    */
   onLoad: function (options) {
     var that = this;
-    that.getRecList(page,pagesize);
+    that.getRecList(page, pagesize);
   },
   getRecList: function (page) {
     var that = this;
@@ -40,17 +40,17 @@ Page({
       })
     });
   },
-  loadMore:function(e){
+  loadMore: function (e) {
     var that = this;
-    page +=1;
+    page += 1;
     that.getRecList(page);
   },
-  gotoDetail:function(e){
+  gotoDetail: function (e) {
     var goods_id = e.currentTarget.dataset.goods_id;
     wx.navigateTo({
       url: '/mall/pages/goods/detail?goods_id=' + goods_id,
     })
-    
+
   },
 
   // 打开购买弹窗
@@ -60,6 +60,7 @@ Page({
     goods_info.amount = 1;
     self.setData({
       showBuyGoodsPopWindow: true,
+      showBuyGoodsPopWindowAnimation: true,
       goods_info: goods_info
     });
   },
@@ -68,9 +69,16 @@ Page({
   closeBuyGoodsPopWindow: function (e) {
     let self = this;
     self.setData({
-      showBuyGoodsPopWindow: false
+      showBuyGoodsPopWindowAnimation: false,
+    }, function () {
+      setTimeout(function () {
+        self.setData({
+          showBuyGoodsPopWindow: false
+        });
+      }, 500);
     });
   },
+
   //购物车减数量
   cutNum: function (e) {
     var that = this;
