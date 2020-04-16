@@ -11,6 +11,7 @@ var cache_key = app.globalData.cache_key;
 
 var openid;
 var order_id;
+var jump_type;
 var page = 1;
 var pagesize = 20;
 Page({
@@ -31,6 +32,8 @@ Page({
     console.log(options)
     order_id = options.order_id;
     openid   = options.openid;
+    jump_type = options.jump_type;
+    that.setData({jump_type,jump_type})
     that.getRecommend('', 1, 3);
   },
   getRecommend: function (goods_id, page, pagesize) {
@@ -47,8 +50,13 @@ Page({
   },
   gotoOrderDetail:function(e){
     var that = this;
+    if(jump_type==1){
+      var url = '/mall/pages/order/list?openid='+openid+'&order_status=0'
+    }else if(jump_type==2){
+      var url = '/mall/pages/order/detail?order_id='+order_id+'&openid='+openid
+    }
     wx.navigateTo({
-      url: '/mall/pages/order/detail?order_id='+order_id+'&openid='+openid,
+      url: url,
     })
   },
   gotoIndex:function(e){

@@ -38,6 +38,7 @@ Page({
     var that = this;
     wx.hideShareMenu();
     var goods_ids = [];
+    goods_id = '';
     carts = [];
     if (typeof (options.pur_uid)!='undefined'){
       pur_uid = options.pur_uid
@@ -258,6 +259,7 @@ Page({
     }, (data, headers, cookies, errMsg, statusCode) => {
       //支付流程
       var order_id = data.result.order_id;
+      var jump_type = data.result.jump_type;
       if (data.result.pay_type == 10) {
         wx.requestPayment({
           'timeStamp': data.result.payinfo.timeStamp,
@@ -276,7 +278,7 @@ Page({
               that.clearMallCart();
             }
             wx.navigateTo({
-              url: '/mall/pages/order/payment?order_id='+order_id+'&openid='+openid,
+              url: '/mall/pages/order/payment?order_id='+order_id+'&openid='+openid+'&jump_type='+jump_type,
             })
           },
           fail(res) {
