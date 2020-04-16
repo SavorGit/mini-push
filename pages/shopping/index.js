@@ -12,6 +12,7 @@ var api_url = app.globalData.api_url;
 var api_v_url = app.globalData.api_v_url;
 var cache_key = app.globalData.cache_key;
 var pageid = 1;
+var goods_list;
 let SavorUtils = {
   User: {
 
@@ -66,6 +67,7 @@ Page({
    */
   onLoad: function (options) {
     var self = this;
+    goods_list = [];
     if (app.globalData.openid && app.globalData.openid != '') {
       //注册用户
       self.setData({
@@ -178,9 +180,23 @@ Page({
       openid: openid,
       page: page
     }, (data, headers, cookies, errMsg, statusCode) => {
-      that.setData({
-        goods_list: data.result.datalist,
-      })
+      if(typeof(goods_list[category_id])!='undefined'){
+        var rts = data.result.datalist
+        if(goods_list[category_id].length == rts.length){
+
+        }else {
+          goods_list[category_id] = data.result.datalist;
+          that.setData({
+            goods_list: goods_list,
+          })
+        }
+      }else {
+        goods_list[category_id] = data.result.datalist;
+          that.setData({
+            goods_list: goods_list,
+          })
+      }
+      
     });
   },
   //选择分类
@@ -199,7 +215,10 @@ Page({
         select_page = page_arr[index];
       }
     }
-    that.getGoodsList(category_id, select_page);
+    if(typeof(goods_list[category_id])=='undefined'){
+      that.getGoodsList(category_id, select_page);
+    }
+    
   },
   loadMore: function (e) {
     var that = this;
