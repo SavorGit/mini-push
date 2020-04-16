@@ -590,8 +590,38 @@ Page({
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage: function () {
+  onShareAppMessage: function (e) {
+    var that = this;
 
+    var img_url = that.data.hotel_info.img;
+    var hotel_name = that.data.hotel_info.name;
+    var tab = that.data.tab;
+    if(tab=='goods'){
+      var title = hotel_name + '推出了特惠商品'
+    }else if(tab=='foods'){
+      var title = hotel_name + '推出了特惠菜品'
+    }
+    //console.log(e)
+    //console.log(that.data)
+    mta.Event.stat('shareMerchant', { 'merchantid': merchant_id, 'openid': that.data.openid, 'types': 1 })
+    if (e.from === 'button') {
+      // 来自页面内转发按钮
+      return {
+        title: title,
+        path: '/mall/pages/hotel/index?merchant_id=' + merchant_id + "&is_share=1&tab="+tab,
+        imageUrl: img_url,
+        success: function (res) {
+        },
+      }
+    } else {
+      return {
+        title: title,
+        path: '/mall/pages/hotel/index?merchant_id=' + merchant_id + "&is_share=1&tab="+tab,
+        imageUrl: img_url,
+        success: function (res) {
+        },
+      }
+    }
   },
 
   

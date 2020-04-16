@@ -52,7 +52,7 @@ Page({
     })
   },
   phonecallevent:function(e){
-    var tel = e.detail.value;
+    var tel = e.currentTarget.dataset.tel;
     app.phonecallevent(tel);
   },
   gotoExinfo:function(e){
