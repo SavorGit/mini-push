@@ -68,6 +68,10 @@ Page({
   onLoad: function (options) {
     var self = this;
     goods_list = [];
+    self.setData({
+      category_id:0,
+      keywords:''
+    })
     if (app.globalData.openid && app.globalData.openid != '') {
       //注册用户
       self.setData({
@@ -391,6 +395,15 @@ Page({
     that.setData({ showBuyGoodsPopWindow: false });
     app.showToast('添加购物车成功');
   },
+  onPullDownRefresh: function () {
+    mta.Event.stat("pulltorefresh", {})
+    this.onLoad();
+    //wx.showNavigationBarLoading();
+    // 隐藏导航栏加载框
+    //wx.hideNavigationBarLoading();
+    // 停止下拉动作
+    wx.stopPullDownRefresh();
+  },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
@@ -473,12 +486,6 @@ Page({
 
   },
 
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-
-  },
 
   /**
    * 页面上拉触底事件的处理函数

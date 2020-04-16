@@ -108,6 +108,18 @@ Page({
         goods_info: data.result,
         merchant: data.result.merchant
       })
+    },function(){
+        var is_share = that.data.is_share
+        if (is_share == true) {
+          wx.reLaunch({
+            url: '/pages/shopping/index',
+          })
+  
+        } else {
+          wx.navigateBack({
+            delta: 1
+          })
+        }
     });
   },
   getRecommend: function (goods_id, page, pagesize) {

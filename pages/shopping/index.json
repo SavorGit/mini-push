@@ -1,7 +1,6 @@
 {
-  "navigationBarTitleText": "商城",
-  "disableScroll": true,
+  "enablePullDownRefresh": true,
   "usingComponents": {
-    "bottomModal": "/components/modal/bottomModal"
+    "modal": "/components/modal/modal"
   }
 }
