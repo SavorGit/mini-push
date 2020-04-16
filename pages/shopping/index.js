@@ -74,6 +74,9 @@ Page({
         openid: app.globalData.openid
       });
       SavorUtils.User.isRegister(self); //判断用户是否注册
+
+      //商品列表
+    self.getGoodsList(0, 1,app.globalData.openid);
     } else {
       app.openidCallback = openid => {
         if (openid != '') {
@@ -81,6 +84,8 @@ Page({
             openid: openid
           });
           SavorUtils.User.isRegister(self); //判断用户是否注册
+          //商品列表
+          self.getGoodsList(0, 1,openid);
         }
       }
     }
@@ -89,8 +94,7 @@ Page({
     self.getBannerList();
     //获取商品分类
     self.getCategoryList();
-    //商品列表
-    self.getGoodsList(0, 1);
+    
   },
   isHaveCallBox: function (openid) {
     var that = this;
@@ -173,7 +177,7 @@ Page({
     });
   },
   //商品列表
-  getGoodsList: function (category_id, page) {
+  getGoodsList: function (category_id, page,openid) {
     var that = this;
     utils.PostRequest(api_v_url + '/shop/goods', {
       category_id: category_id,
@@ -203,6 +207,7 @@ Page({
   selectCate: function (e) {
     var that = this;
     var category_id = e.currentTarget.dataset.category_id;
+    var user_info = wx.getStorageSync(cache_key+'user_info')
     that.setData({
       category_id: category_id
     }, function () {
@@ -216,7 +221,7 @@ Page({
       }
     }
     if(typeof(goods_list[category_id])=='undefined'){
-      that.getGoodsList(category_id, select_page);
+      that.getGoodsList(category_id, select_page,user_info.openid);
     }
     
   },
@@ -225,6 +230,7 @@ Page({
     var category_id = that.data.category_id;
     var page_arr = that.data.page_arr;
     var select_page = 1;
+    var user_info = wx.getStorageSync(cache_key+'user_info')
     for (let index in page_arr) {
       if (index == category_id) {
         select_page = page_arr[index] + 1;
@@ -235,7 +241,7 @@ Page({
     that.setData({
       page_arr: page_arr,
     })
-    that.getGoodsList(category_id, select_page)
+    that.getGoodsList(category_id, select_page,user_info.openid)
   },
   //电视播放
   boxShow(e) {
