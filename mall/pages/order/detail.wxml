@@ -21,8 +21,6 @@
 					</view>
 					<view class="fa fa-chevron-right" style="width:50rpx;font-size:32rpx;text-align:center;" aria-hidden="true" bindtap="gotoExinfo"></view>
 				</view>
-
-
 				<view class="row flex-row-center-space_between" style="height:unset;">
 					<view class="fa fa-map-marker theme-font5" style="width:50rpx;font-size:32rpx;text-align:center;" aria-hidden="true"></view>
 					<view class="view flex-column-flex_start-space_between" style="width:calc(100% - 70rpx);height:unset;padding:20rpx 0;">
@@ -57,7 +55,6 @@
 						<view class="count one-line-overflow">X{{bean.amount}}</view>
 					</view>
 				</view>
-
 			</view>
 			<view class="foot flex-row-center-space_between">
 				<view class="theme-font2">合计：{{order_info.amount}}件商品</view>
@@ -94,18 +91,18 @@
 			<view class="body flex-column-center-space_between">
 				<!-- 企业 -->
 				<block wx:if="{{order_info.invoice.title_type==1}}">
-					<view class="row flex_row_center_spaceBetween">
+					<view class="row flex-row-center-space_between">
 						<view class="lable theme-font3">企业名称</view>
 						<view class="view">{{order_info.invoice.company}}</view>
 					</view>
-					<view class="row flex_row_center_spaceBetween">
+					<view class="row flex-row-center-space_between">
 						<view class="lable theme-font3">企业税号</view>
 						<view class="view">{{order_info.invoice.credit_code}}</view>
 					</view>
 				</block>
 				<block wx:elif="{{order_info.invoice.title_type==2}}">
 					<!-- 个人 -->
-					<view class="row flex_row_center_spaceBetween">
+					<view class="row flex-row-center-space_between">
 						<view class="lable theme-font3">个人姓名</view>
 						<view class="view">{{order_info.invoice.company}}</view>
 					</view>
