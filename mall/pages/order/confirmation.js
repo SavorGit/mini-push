@@ -242,12 +242,13 @@ Page({
       credit_code = bill_info.taxNumber
       title_type = bill_info.type;
     }
-    carts = JSON.stringify(carts)
+    //carts = JSON.stringify(carts)
+    var order_cats = JSON.stringify(carts)
     //下单
     utils.PostRequest(api_v_url + '/order/addShoporder', {
       address_id: address_id,
       amount: amount,
-      carts: carts,
+      carts: order_cats,
       company: company,
       credit_code: credit_code,
       goods_id: goods_id,
