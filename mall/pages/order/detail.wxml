@@ -107,6 +107,10 @@
 						<view class="view">{{order_info.invoice.company}}</view>
 					</view>
 				</block>
+				<view class="row flex-row-center-space_between">
+						<view class="lable theme-font3">邮箱</view>
+						<view class="view">{{order_info.invoice.email}}</view>
+					</view>
 			</view>
 		</view>
 		<view class="input-panel theme-panel">

@@ -236,11 +236,13 @@ Page({
     var company = '';
     var credit_code = '';
     var title_type = '';
+    var email = '';
     if (bill_cache != '') {
       var bill_info = JSON.parse(bill_cache);
       company = bill_info.title;
       credit_code = bill_info.taxNumber
       title_type = bill_info.type;
+      email      = bill_info.email;
     }
     //carts = JSON.stringify(carts)
     var order_cats = JSON.stringify(carts)
@@ -251,6 +253,7 @@ Page({
       carts: order_cats,
       company: company,
       credit_code: credit_code,
+      email:email,
       goods_id: goods_id,
       openid: openid,
       pay_type: pay_type,
@@ -301,8 +304,8 @@ Page({
     })
   },
   clearMallCart:function(){
-    //console.log(carts)
-    var tmp = JSON.parse(carts);
+    console.log(carts)
+    var tmp = carts;
     var mall_cart_list = wx.getStorageSync(cache_key + 'mall_cart_' + openid);
     mall_cart_list = JSON.parse(mall_cart_list);
     for(let i in mall_cart_list){
