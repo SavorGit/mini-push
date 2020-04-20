@@ -74,7 +74,10 @@ Page({
 
       var pams_arr = pams.split('_');
       goods_id = pams_arr[1];
-      pur_uid = pams_arr[3];
+      if(typeof(pams_arr[3])!='undefined'){
+        pur_uid = pams_arr[3];
+      }
+      
       self.setData({
         is_share: true
       })
