@@ -33,8 +33,8 @@
 				<view class="tab-bar flex-row-center-flex_start theme-panel">
 					<view class="tab goods{{tab=='goods'?' selected':''}}" data-tab="goods" bindtap="showTab">商城</view>
 					<block wx:if="{{mtype==1}}">
-					<view class="tab foods{{tab=='foods'?' selected':''}}" data-tab="foods" bindtap="showTab">外卖</view>
-					<view class="tab shop-info{{tab=='shop-info'?' selected':''}}" data-tab="shop-info" bindtap="showTab">商家详情</view>
+						<view class="tab foods{{tab=='foods'?' selected':''}}" data-tab="foods" bindtap="showTab">外卖</view>
+						<view class="tab shop-info{{tab=='shop-info'?' selected':''}}" data-tab="shop-info" bindtap="showTab">商家详情</view>
 					</block>
 				</view>
 
@@ -132,7 +132,7 @@
 						<view class="show-new-count theme-rad-panel"></view>
 					</view>
 				</view>
-				<view class="info">已添加{{cart_dish_nums}}件菜品，合计{{total_price}}元</view>
+				<view class="info two-line-overflow">已添加{{cart_dish_nums}}件菜品，合计{{total_price}}元</view>
 			</view>
 			<view class="right flex-row-center-flex_end" bindtap="gotoOrder">
 				<view class="btn buy theme-button-welcome">下单</view>
@@ -192,7 +192,7 @@
 				<view class="label">购买数量：</view>
 				<view class="value flex-row-center-space_between">
 					<view class="btn" bindtap="cutMallNum">-</view>
-					<input value="{{goods_info.amount}}"  disabled="true"></input>
+					<input value="{{goods_info.amount}}" disabled="true"></input>
 					<view class="btn" bindtap="addMallNum">+</view>
 				</view>
 			</view>
