@@ -317,7 +317,7 @@ Page({
     if (type == 10) {
       var url = '/pages/demand/goods_detail?goods_id=' + goods_id + '&box_mac=' + box_mac
     } else if (type == 22) {
-      var url = '/mall/pages/goods/detail?goods_id=' + goods_id;
+      var url = '/pages/hotel/goods/detail?goods_id=' + goods_id;
     }
     wx.navigateTo({
       url: url,

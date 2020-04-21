@@ -72,7 +72,7 @@ Page({
   gotoGoodsDetail: function (e) {
     var goods_id = e.currentTarget.dataset.goods_id;
     wx.navigateTo({
-      url: '/mall/pages/goods/detail?goods_id=' + goods_id,
+      url: '/pages/hotel/goods/detail?goods_id=' + goods_id,
     })
   },
   loadMore:function(e){

@@ -155,7 +155,7 @@ Page({
   gotoHotelDetail: function (e) {
     var merchant_id = e.currentTarget.dataset.merchant_id;
     wx.navigateTo({
-      url: '/pages/hotel/detail?merchant_id=' + merchant_id,
+      url: '/pages/hotel/shop?merchant_id=' + merchant_id+'&tab=foods',
     })
   },
   gotoPlaceOrder: function (e) {

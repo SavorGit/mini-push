@@ -84,7 +84,7 @@
 				<view class="title theme-font3">商品介绍</view>
 			</view>
 			<view class="panel-body">
-				<view class="panel" wx:if="{{goods_info.video_url!=''}}">
+				<view class="panel" wx:if="{{video_url !=''}}">
 					<view class="title-bar">
 						<view class="title">商品视频</view>
 					</view>

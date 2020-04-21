@@ -43,6 +43,7 @@ Page({
     statusBarHeight: getApp().globalData.statusBarHeight,
     rec_list: [],
     showBuyGoodsPopWindow: false,
+    video_url:''
   },
 
   /**
@@ -107,7 +108,9 @@ Page({
     utils.PostRequest(api_v_url + '/dish/detail', {
       goods_id: goods_id
     }, (data, headers, cookies, errMsg, statusCode) => {
+      
       that.setData({
+        video_url:data.result.video_url,
         goods_info: data.result,
         merchant: data.result.merchant
       })
@@ -216,7 +219,7 @@ Page({
   gotoGoodsDetail: function (e) {
     var goods_id = e.currentTarget.dataset.goods_id;
     wx.navigateTo({
-      url: '/mall/pages/goods/detail?goods_id=' + goods_id,
+      url: '/pages/hotel/goods/detail?goods_id=' + goods_id,
     })
   },
   gotoRecList: function (e) {
@@ -366,7 +369,7 @@ Page({
       // 来自页面内转发按钮
       return {
         title: hotel_name + '推出了特惠商品-' + goods_name,
-        path: '/mall/pages/goods/detail?goods_id=' + goods_id + "&is_share=1",
+        path: '/pages/hotel/goods/detail?goods_id=' + goods_id + "&is_share=1",
         imageUrl: img_url,
         success: function (res) {
         },
@@ -374,7 +377,7 @@ Page({
     } else {
       return {
         title: hotel_name + '推出了特惠商品-' + goods_name,
-        path: '/mall/pages/goods/detail?goods_id=' + goods_id + "&is_share=1",
+        path: '/pages/hotel/goods/detail?goods_id=' + goods_id + "&is_share=1",
         imageUrl: img_url,
         success: function (res) {
         },
