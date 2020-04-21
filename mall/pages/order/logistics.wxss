@@ -56,18 +56,17 @@
   font-size: 26rpx;
 }
 
+.body {
+  padding: 50rpx 0;
+}
+
 /* 追踪 */
 .logisit {
   width: 100%;
-  margin-left: 10rpx;
-  margin-top: 50rpx;
 }
 
 .express-middle-axis {
   width: 48rpx;
-  position: relative;
-  top: -218rpx;
-  left: -3rpx;
 }
 
 .express-status-address {
@@ -84,7 +83,8 @@
 }
 
 .express-left {
-  width: 200rpx;
+  width: 180rpx;
+  padding: 35rpx 10rpx 35rpx 10rpx;
 }
 
 .express-left>.date,
@@ -97,11 +97,8 @@
 
 .online-top-closing {
   width: 3rpx;
-  height: 180rpx;
+  height: calc(100% - 30rpx);
   background: #d7d7d7;
-  position: absolute;
-  top: 40rpx;
-  left: 21rpx;
 }
 
 .dot-closing {
@@ -110,25 +107,17 @@
   line-height: 28rpx;
   text-align: center;
   border-radius: 50%;
-  margin-top: 50rpx;
   border: 3rpx solid #d7d7d7;
   font-size: 30rpx;
   color: #d7d7d7;
-  position: absolute;
-  top: 175rpx;
-  left: 4rpx;
 }
 
 .dot-closing_two {
   width: 30rpx;
   height: 30rpx;
   border-radius: 50%;
-  margin-top: 50rpx;
   border: 3rpx solid #d7d7d7;
   background: #d7d7d7;
-  position: absolute;
-  top: 175rpx;
-  left: 4rpx;
 }
 
 .dot-shou {
@@ -137,8 +126,6 @@
   border-radius: 50%;
   border: 3rpx solid #50D2C2;
   background: #50D2C2;
-  margin-left: -5rpx;
-  margin-top: 6rpx;
 }
 
 .dot-warn {
@@ -159,9 +146,7 @@
 
 .express-right {
   width: calc(100% - 248rpx);
-  height: 170rpx;
-  margin-left: 20rpx;
-  margin-right: 40rpx;
+  padding: 35rpx 30rpx 35rpx 10rpx;
 }
 
 .logisit:first-child>.express-right {

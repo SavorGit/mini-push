@@ -29,7 +29,7 @@
 				<view class="simple-title-no">{{express_info.enum}}</view>
 			</view>
 			<!-- 追踪 -->
-			<view>
+			<view class="body flex-column-center-flex_start">
 				<block wx:for="{{expres_list}}" wx:for-item="bean" wx:key="key" wx:for-index="index">
 					<view class='logisit flex-row-stretch-flex_start' wx:if="{{index==0}}">
 						<!-- 左边子容器 -->
@@ -38,9 +38,12 @@
 							<view class="time">16:33:19</view>
 						</view>
 						<!-- 显示顶部收的圆点 -->
-						<view class='dot-shou flex-column-center-center'>
-							<!-- 签收后不显示下面这行 -->
-							<view class="max-dot dot-warn"></view>
+						<view class='express-middle-axis flex-column-center-flex_start'>
+							<view class='dot-shou flex-column-center-center'>
+								<!-- 签收后不显示下面这行 -->
+								<view class="max-dot dot-warn"></view>
+							</view>
+							<view class='online-top-closing'></view>
 						</view>
 						<!-- 右边子容器 -->
 						<view class='express-right'>
@@ -57,7 +60,7 @@
 							<view class="time">23:22</view>
 						</view>
 						<!-- 显示顶部收的圆点 -->
-						<view class='express-middle-axis'>
+						<view class='express-middle-axis flex-column-center-flex_start'>
 							<view class='fa fa-angle-up dot-closing' aria-hidden="true"></view>
 							<view class='online-top-closing'></view>
 						</view>
@@ -76,9 +79,8 @@
 							<view class="time">23:22:42</view>
 						</view>
 						<!-- 显示顶部收的圆点 -->
-						<view class='express-middle-axis'>
+						<view class='express-middle-axis flex-column-center-flex_start'>
 							<view class='dot-closing_two'></view>
-							<view class='online-top-closing'></view>
 						</view>
 						<!-- 右边子容器 -->
 						<view class='express-right'>

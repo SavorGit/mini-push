@@ -27,8 +27,16 @@ Page({
    */
   onLoad: function (options) {
     var that = this;
+    if (typeof (options) != 'object') {
+      that.showToastAndNavigateBack('未知订单');
+      return;
+    }
     order_id = options.order_id;
     openid = options.openid;
+    if (typeof (order_id) != 'string' || order_id.trim() == '') {
+      that.showToastAndNavigateBack('未知订单号');
+      return;
+    }
     that.getExInfo(order_id, openid);
   },
   getExInfo: function (order_id, openid) {
@@ -37,6 +45,10 @@ Page({
       openid: openid,
       order_id: order_id
     }, (data, headers, cookies, errMsg, statusCode) => {
+      if (typeof (data.result.data) != 'object') {
+        that.showToastAndNavigateBack('此订单无物流信息');
+        return;
+      }
       that.setData({
         express_info: data.result,
         expres_list: data.result.data,
@@ -91,5 +103,18 @@ Page({
    */
   onShareAppMessage: function () {
 
+  },
+
+  showToastAndNavigateBack: function (title) {
+    let duration = 2000;
+    wx.showToast({
+      title: title,
+      duration: duration,
+      icon: "none",
+      mask: true
+    });
+    setTimeout(function () {
+      wx.navigateBack();
+    }, duration);
   }
 })
