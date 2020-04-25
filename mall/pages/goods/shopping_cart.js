@@ -271,10 +271,8 @@ Page({
         data: mall_cart_list,
       })
     } else {
-      wx.removeStorage({
-        key: cache_key + 'mall_cart_' + openid,
-        success: function (res) { },
-      })
+      wx.removeStorageSync(cache_key + 'mall_cart_' + openid)
+      
     }
     that.getToalFee(goods_online_list);
     
