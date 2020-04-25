@@ -108,7 +108,8 @@ Page({
       var address_info = data.result;
       if (JSON.stringify(address_info) == '{}') {
         that.setData({
-          is_have_default_address: false
+          is_have_default_address: false,
+          address_id:''
         })
         var address_id = '';
       } else {
