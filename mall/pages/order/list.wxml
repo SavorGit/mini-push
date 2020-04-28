@@ -28,32 +28,35 @@
 					</view>
 				</view>
 				<view class="body flex-row-center-space_between" bindtap="gotoOrderDetail" data-order_id="{{bean.order_id}}">
-					
-          <!--单商品订单-->
-          <block wx:if="{{bean.goods.length==1}}" >
-          <view class="left flex-row-center-flex_start" >
-						<image class="pic" mode="aspectFill" src="{{bean.goods[0].img}}"></image>
-					</view>
-					<view class="center flex-column-flex_start-center">
-						<view class="one-line-overflow theme-font1">{{bean.goods[0].name}}</view>
-					</view>
-          </block>
-          <!---多商品订单--->
-          <block wx:else >
-          <view class="left multiple-goods flex-row-center-flex_start">
-						<block wx:for="{{bean.goods}}" wx:key="kk" wx:for-item="item" wx:for-index="idx">
-            <image wx:if="{{idx<4}}" class="pic" mode="aspectFill" src="{{item.img}}"></image>
-            </block>
-					</view>
-					<view class="center multiple-goods flex-column-center-center">
-						<view class="fa fa-chevron-circle-right fa-lg theme-font3" aria-hidden="true" bindtap="gotoOrderDetail" data-order_id="{{bean.order_id}}"></view>
-					</view>
-          </block>
-          <!---多商品订单结束--->
+
+					<!--单商品订单-->
+					<block wx:if="{{bean.goods.length==1}}">
+						<view class="left flex-row-center-flex_start">
+							<image class="pic" mode="aspectFill" src="{{bean.goods[0].img}}"></image>
+						</view>
+						<view class="center flex-column-flex_start-center">
+							<view class="name one-line-overflow theme-font1">{{bean.goods[0].name}}</view>
+							<view class="bottom flex-row-center-flex_start">
+								<view class="specs theme-button-more">2斤简装</view>
+							</view>
+						</view>
+					</block>
+					<!---多商品订单--->
+					<block wx:else>
+						<view class="left multiple-goods flex-row-center-flex_start">
+							<block wx:for="{{bean.goods}}" wx:key="kk" wx:for-item="item" wx:for-index="idx">
+								<image wx:if="{{idx<4}}" class="pic" mode="aspectFill" src="{{item.img}}"></image>
+							</block>
+						</view>
+						<view class="center multiple-goods flex-column-center-center">
+							<view class="fa fa-chevron-circle-right fa-lg theme-font3" aria-hidden="true" bindtap="gotoOrderDetail" data-order_id="{{bean.order_id}}"></view>
+						</view>
+					</block>
+					<!---多商品订单结束--->
 
 					<view class="right flex-column-center-center">
-						<view class="price theme-font1">￥{{bean.total_fee}}</view>
-						<view class="count theme-font3">共{{bean.amount}}件</view>
+						<view class="price one-line-overflow theme-font1">￥{{bean.total_fee}}</view>
+						<view class="count one-line-overflow theme-font3">共{{bean.amount}}件</view>
 					</view>
 				</view>
 				<view class="foot flex-row-center-space_between">
@@ -79,32 +82,35 @@
 					</view>
 				</view>
 				<view class="body flex-row-center-space_between" bindtap="gotoOrderDetail" data-order_id="{{bean.order_id}}">
-					
-          <!--单商品订单-->
-          <block wx:if="{{bea.goods.length==1}}">
-          <view class="left flex-row-center-flex_start">
-						<image class="pic" mode="aspectFill" src="{{bean.goods[0].img}}"></image>
-					</view>
-					<view class="center flex-column-flex_start-center">
-						<view class="one-line-overflow theme-font1">{{bean.goods[0].name}}</view>
-					</view>
-          </block>
-          <!---多商品订单--->
-          <block wx:else>
-          <view class="left multiple-goods flex-row-center-flex_start">
-						<block wx:for="{{bean.goods}}" wx:key="kk" wx:for-item="item" wx:for-index="idx">
-            <image wx:if="{{idx<4}}" class="pic" mode="aspectFill" src="{{item.img}}"></image>
-            </block>
-					</view>
-					<view class="center multiple-goods flex-column-center-center">
-						<view class="fa fa-chevron-circle-right fa-lg theme-font3" aria-hidden="true" bindtap="gotoOrderDetail" data-order_id="{{bean.order_id}}"></view>
-					</view>
-          </block>
-          <!---多商品订单结束--->
+
+					<!--单商品订单-->
+					<block wx:if="{{bea.goods.length==1}}">
+						<view class="left flex-row-center-flex_start">
+							<image class="pic" mode="aspectFill" src="{{bean.goods[0].img}}"></image>
+						</view>
+						<view class="center flex-column-flex_start-center">
+							<view class="name one-line-overflow theme-font1">{{bean.goods[0].name}}</view>
+							<view class="bottom flex-row-center-flex_start">
+								<view class="specs theme-button-more">2斤简装</view>
+							</view>
+						</view>
+					</block>
+					<!---多商品订单--->
+					<block wx:else>
+						<view class="left multiple-goods flex-row-center-flex_start">
+							<block wx:for="{{bean.goods}}" wx:key="kk" wx:for-item="item" wx:for-index="idx">
+								<image wx:if="{{idx<4}}" class="pic" mode="aspectFill" src="{{item.img}}"></image>
+							</block>
+						</view>
+						<view class="center multiple-goods flex-column-center-center">
+							<view class="fa fa-chevron-circle-right fa-lg theme-font3" aria-hidden="true" bindtap="gotoOrderDetail" data-order_id="{{bean.order_id}}"></view>
+						</view>
+					</block>
+					<!---多商品订单结束--->
 
 					<view class="right flex-column-center-center">
-						<view class="price theme-font1">￥{{bean.total_fee}}</view>
-						<view class="count theme-font3">共{{bean.amount}}件</view>
+						<view class="price one-line-overflow theme-font1">￥{{bean.total_fee}}</view>
+						<view class="count one-line-overflow theme-font3">共{{bean.amount}}件</view>
 					</view>
 				</view>
 				<view class="foot flex-row-center-space_between">
@@ -113,9 +119,6 @@
 					<view class="btn all theme-button-buy" wx:if="{{bean.status==53}}" bindtap="reBuy" data-order_id="{{bean.order_id}}">再次购买</view>
 				</view>
 			</view>
-
-			
-
 		</view>
 	</scroll-view>
 
@@ -132,32 +135,35 @@
 					</view>
 				</view>
 				<view class="body flex-row-center-space_between" bindtap="gotoOrderDetail" data-order_id="{{bean.order_id}}">
-					
-          <!--单商品订单-->
-          <block wx:if="{{bea.goods.length==1}}">
-          <view class="left flex-row-center-flex_start">
-						<image class="pic" mode="aspectFill" src="{{bean.goods[0].img}}"></image>
-					</view>
-					<view class="center flex-column-flex_start-center">
-						<view class="one-line-overflow theme-font1">{{bean.goods[0].name}}</view>
-					</view>
-          </block>
-          <!---多商品订单--->
-          <block wx:else>
-          <view class="left multiple-goods flex-row-center-flex_start">
-						<block wx:for="{{bean.goods}}" wx:key="kk" wx:for-item="item" wx:for-index="idx">
-            <image wx:if="{{idx<4}}" class="pic" mode="aspectFill" src="{{item.img}}"></image>
-            </block>
-					</view>
-					<view class="center multiple-goods flex-column-center-center">
-						<view class="fa fa-chevron-circle-right fa-lg theme-font3" aria-hidden="true" bindtap="gotoOrderDetail" data-order_id="{{bean.order_id}}"></view>
-					</view>
-          </block>
-          <!---多商品订单结束--->
+
+					<!--单商品订单-->
+					<block wx:if="{{bea.goods.length==1}}">
+						<view class="left flex-row-center-flex_start">
+							<image class="pic" mode="aspectFill" src="{{bean.goods[0].img}}"></image>
+						</view>
+						<view class="center flex-column-flex_start-center">
+							<view class="name one-line-overflow theme-font1">{{bean.goods[0].name}}</view>
+							<view class="bottom flex-row-center-flex_start">
+								<view class="specs theme-button-more">2斤简装</view>
+							</view>
+						</view>
+					</block>
+					<!---多商品订单--->
+					<block wx:else>
+						<view class="left multiple-goods flex-row-center-flex_start">
+							<block wx:for="{{bean.goods}}" wx:key="kk" wx:for-item="item" wx:for-index="idx">
+								<image wx:if="{{idx<4}}" class="pic" mode="aspectFill" src="{{item.img}}"></image>
+							</block>
+						</view>
+						<view class="center multiple-goods flex-column-center-center">
+							<view class="fa fa-chevron-circle-right fa-lg theme-font3" aria-hidden="true" bindtap="gotoOrderDetail" data-order_id="{{bean.order_id}}"></view>
+						</view>
+					</block>
+					<!---多商品订单结束--->
 
 					<view class="right flex-column-center-center">
-						<view class="price theme-font1">￥{{bean.total_fee}}</view>
-						<view class="count theme-font3">共{{bean.amount}}件</view>
+						<view class="price one-line-overflow theme-font1">￥{{bean.total_fee}}</view>
+						<view class="count one-line-overflow theme-font3">共{{bean.amount}}件</view>
 					</view>
 				</view>
 				<view class="foot flex-row-center-space_between">
@@ -184,32 +190,35 @@
 					</view>
 				</view>
 				<view class="body flex-row-center-space_between" bindtap="gotoOrderDetail" data-order_id="{{bean.order_id}}">
-					
-          <!--单商品订单-->
-          <block wx:if="{{bea.goods.length==1}}">
-          <view class="left flex-row-center-flex_start">
-						<image class="pic" mode="aspectFill" src="{{bean.goods[0].img}}"></image>
-					</view>
-					<view class="center flex-column-flex_start-center">
-						<view class="one-line-overflow theme-font1">{{bean.goods[0].name}}</view>
-					</view>
-          </block>
-          <!---多商品订单--->
-          <block wx:else>
-          <view class="left multiple-goods flex-row-center-flex_start">
-						<block wx:for="{{bean.goods}}" wx:key="kk" wx:for-item="item" wx:for-index="idx">
-            <image wx:if="{{idx<4}}" class="pic" mode="aspectFill" src="{{item.img}}"></image>
-            </block>
-					</view>
-					<view class="center multiple-goods flex-column-center-center">
-						<view class="fa fa-chevron-circle-right fa-lg theme-font3" aria-hidden="true" bindtap="gotoOrderDetail" data-order_id="{{bean.order_id}}"></view>
-					</view>
-          </block>
-          <!---多商品订单结束--->
+
+					<!--单商品订单-->
+					<block wx:if="{{bea.goods.length==1}}">
+						<view class="left flex-row-center-flex_start">
+							<image class="pic" mode="aspectFill" src="{{bean.goods[0].img}}"></image>
+						</view>
+						<view class="center flex-column-flex_start-center">
+							<view class="name one-line-overflow theme-font1">{{bean.goods[0].name}}</view>
+							<view class="bottom flex-row-center-flex_start">
+								<view class="specs theme-button-more">2斤简装</view>
+							</view>
+						</view>
+					</block>
+					<!---多商品订单--->
+					<block wx:else>
+						<view class="left multiple-goods flex-row-center-flex_start">
+							<block wx:for="{{bean.goods}}" wx:key="kk" wx:for-item="item" wx:for-index="idx">
+								<image wx:if="{{idx<4}}" class="pic" mode="aspectFill" src="{{item.img}}"></image>
+							</block>
+						</view>
+						<view class="center multiple-goods flex-column-center-center">
+							<view class="fa fa-chevron-circle-right fa-lg theme-font3" aria-hidden="true" bindtap="gotoOrderDetail" data-order_id="{{bean.order_id}}"></view>
+						</view>
+					</block>
+					<!---多商品订单结束--->
 
 					<view class="right flex-column-center-center">
-						<view class="price theme-font1">￥{{bean.total_fee}}</view>
-						<view class="count theme-font3">共{{bean.amount}}件</view>
+						<view class="price one-line-overflow theme-font1">￥{{bean.total_fee}}</view>
+						<view class="count one-line-overflow theme-font3">共{{bean.amount}}件</view>
 					</view>
 				</view>
 				<view class="foot flex-row-center-space_between">

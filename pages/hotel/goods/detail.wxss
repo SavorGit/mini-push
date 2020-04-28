@@ -198,12 +198,52 @@
   font-size: 20rpx;
 }
 
-/* ===================================== 商铺面板 ===================================== */
-.shop-panel {
+.panel {
   width: calc(100% - 70rpx);
-  height: 120rpx;
   padding: 20rpx 40rpx 20rpx 30rpx;
   margin-top: 10rpx;
+}
+
+/* ===================================== 公告面板 ===================================== */
+.notice-panel>.body>.line {
+  font-size: 32rpx;
+  font-weight: bold;
+}
+
+/* ===================================== 规格面板 ===================================== */
+.specs-panel>.left {
+  width: 60rpx;
+  font-size: 28rpx;
+  font-weight: bold;
+}
+
+.specs-panel>.specs-group {
+  width: calc(100% - 220rpx);
+}
+
+.specs-panel>.specs-group>.specs {
+  height: 40rpx;
+  line-height: 40rpx;
+  padding: 5rpx 15rpx;
+  font-size: 28rpx;
+  border-radius: 24rpx;
+}
+
+.specs-panel>.specs-group>.specs.selected {
+  color: #F44444;
+  background-color: rgba(244, 68, 68, 0.3);
+}
+
+.specs-panel>.right {
+  width: 140rpx;
+  text-align: right;
+  font-size: 24rpx;
+}
+
+/* ===================================== 商铺面板 ===================================== */
+
+.shop-panel {
+  height: 120rpx;
 }
 
 .shop-panel>.left,

@@ -114,8 +114,17 @@ checkbox .wx-checkbox-input.wx-checkbox-input-checked {
   height: 30rpx;
 }
 
+.panel>.goods-list>.item>.goods>.right>.middle>.specs {
+  height: 30rpx;
+  line-height: 30rpx;
+  padding: 5rpx 10rpx;
+  font-size: 20rpx;
+  border-radius: 20rpx;
+}
+
 .panel>.goods-list>.item>.goods>.right>.middle>.stock {
   height: 30rpx;
+  margin-left: 30rpx;
   font-size: 20rpx;
 }
 

@@ -132,6 +132,18 @@
   font-size: 28rpx;
 }
 
+.row>.body>.center>.bottom {
+  margin-top: 20rpx;
+}
+
+.row>.body>.center>.bottom>.specs {
+  height: 30rpx;
+  line-height: 30rpx;
+  padding: 5rpx 15rpx;
+  font-size: 20rpx;
+  border-radius: 20rpx;
+}
+
 .row>.body>.center.multiple-goods {
   width: 45rpx;
 }
@@ -146,7 +158,7 @@
 }
 
 .row>.body>.right>.price {
-  font-size: 36rpx;
+  font-size: 28rpx;
 }
 
 .row>.body>.right>.count {

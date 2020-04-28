@@ -40,8 +40,30 @@
 			</view>
 		</view>
 
+		<!-- 公告面板 -->
+		<view class="notice-panel panel flex-column-stretch-flex_start theme-panel">
+			<view class="title-bar flex-row-center-flex_start">
+				<view class="icon fa fa-bullhorn theme-font5" aria-hidden="true"></view>
+			</view>
+			<view class="body flex-column-center-center">
+				<view class="line two-line-overflow">江浙沪包邮</view>
+				<view class="line one-line-overflow">其他地区需补10元差价</view>
+			</view>
+		</view>
+
+		<!-- 规格面板 -->
+		<view class="specs-panel panel flex-row-center-space_between theme-panel">
+			<view class="left">规格</view>
+			<view class="specs-group flex-row-center-space_around">
+				<view class="specs selected">1斤简装</view>
+				<view class="specs theme-button-more">2斤简装</view>
+				<view class="specs theme-button-more">3斤简装</view>
+			</view>
+			<view class="right theme-font3">共10种可选</view>
+		</view>
+
 		<!-- 商铺面板 -->
-		<view class="shop-panel flex-row-center-flex_start theme-panel">
+		<view class="shop-panel panel flex-row-center-flex_start theme-panel">
 			<view class="left">
 				<image class="pic" mode="aspectFill" src="{{merchant.img}}"></image>
 			</view>

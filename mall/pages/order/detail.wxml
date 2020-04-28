@@ -49,9 +49,12 @@
 					<image class="pic" mode="aspectFill" src="{{bean.img}}"></image>
 					<view class="center" bindtap="">
 						<view class="name two-line-overflow">{{bean.name}}</view>
-						<view class="price theme-font5">￥{{bean.price}}</view>
+						<view class="bottom flex-row-center-flex_start">
+							<view class="specs theme-button-more">2斤简装</view>
+						</view>
 					</view>
-					<view class="right flex-row-center-flex_end" bindtap="">
+					<view class="right flex-column-flex_end-center" bindtap="">
+						<view class="price one-line-overflow theme-font5">￥{{bean.price}}</view>
 						<view class="count one-line-overflow">X{{bean.amount}}</view>
 					</view>
 				</view>
@@ -108,9 +111,9 @@
 					</view>
 				</block>
 				<view class="row flex-row-center-space_between">
-						<view class="lable theme-font3">邮箱</view>
-						<view class="view">{{order_info.invoice.email}}</view>
-					</view>
+					<view class="lable theme-font3">邮箱</view>
+					<view class="view">{{order_info.invoice.email}}</view>
+				</view>
 			</view>
 		</view>
 		<view class="input-panel theme-panel">

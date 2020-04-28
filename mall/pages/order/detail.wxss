@@ -159,7 +159,7 @@
 }
 
 .goods-info>.body>.row>.center {
-  width: calc(100% - 290rpx);
+  width: calc(100% - 320rpx);
   height: 160rpx;
   font-size: 32rpx;
   padding: 0 15rpx;
@@ -169,12 +169,28 @@
   width: 100%;
 }
 
-.goods-info>.body>.row>.center>.price {
-  margin-top: 35rpx;
+.goods-info>.body>.row>.center>.bottom {
+  margin-top: 30rpx;
+}
+
+.goods-info>.body>.row>.center>.bottom>.specs {
+  height: 30rpx;
+  line-height: 30rpx;
+  padding: 5rpx 15rpx;
+  font-size: 20rpx;
+  border-radius: 20rpx;
+}
+
+.goods-info>.body>.row>.center>.bottom>.price {
+  margin-left: 10rpx;
 }
 
 .goods-info>.body>.row>.right {
-  width: 100rpx;
+  width: 130rpx;
+}
+
+.goods-info>.body>.row>.right>.price {
+  font-size: 28rpx;
 }
 
 .goods-info>.body>.row>.right>.count {
