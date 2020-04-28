@@ -227,7 +227,8 @@
 /* ======================================== 购买商品弹窗 ======================================== */
 .buy-goods-window {
   width: 100%;
-  height: 400rpx;
+  /* height: 400rpx; */
+  max-height: 80wh;
   z-index: 11;
   position: absolute;
   bottom: 0;
@@ -275,6 +276,41 @@
   width: calc(100% - 80rpx);
   height: calc(100% - 308rpx);
   padding: 40rpx;
+}
+
+.buy-goods-window>.middle>.specs-panel {
+  width: 100%;
+  padding: 10rpx 0;
+}
+
+.buy-goods-window>.middle>.specs-panel>.title-bar {
+  padding: 5rpx 0;
+}
+
+.buy-goods-window>.middle>.specs-panel>.title-bar>.title {
+  font-size: 28rpx;
+}
+
+.buy-goods-window>.middle>.specs-panel>.body {
+  padding: 5rpx 0;
+}
+
+.buy-goods-window>.middle>.specs-panel>.body>.specs {
+  height: 30rpx;
+  line-height: 30rpx;
+  padding: 5rpx 15rpx;
+  margin-left: 20rpx;
+  font-size: 24rpx;
+  border-radius: 20rpx;
+}
+
+.buy-goods-window>.middle>.specs-panel>.body>.specs.selected {
+  color: #F44444;
+  background-color: rgba(244, 68, 68, 0.3);
+}
+
+.buy-goods-window>.middle>.specs-panel>.body>.specs:first-child {
+  margin-left: 0;
 }
 
 .buy-goods-window>.middle>.count {

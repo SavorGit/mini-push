@@ -162,7 +162,12 @@ button[disabled] {
 }
 
 .theme-button-more {
-  color: #666;
+  color: #666666;
+  background-color: #ededed;
+}
+
+.theme-button-none {
+  color: #BEBEBE;
   background-color: #ededed;
 }
 
