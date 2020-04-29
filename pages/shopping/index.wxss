@@ -295,22 +295,26 @@
   padding: 5rpx 0;
 }
 
-.buy-goods-window>.middle>.specs-panel>.body>.specs {
+.buy-goods-window>.middle>.specs-panel>.body>.specs-group {
+  width: 100%;
+  max-height: 150rpx;
+  overflow: hidden;
+}
+
+.buy-goods-window>.middle>.specs-panel>.body>.specs-group>.specs {
   height: 30rpx;
   line-height: 30rpx;
   padding: 5rpx 15rpx;
   margin-left: 20rpx;
+  display: inline-block;
+  /* box-sizing: border-box; */
   font-size: 24rpx;
   border-radius: 20rpx;
 }
 
-.buy-goods-window>.middle>.specs-panel>.body>.specs.selected {
+.buy-goods-window>.middle>.specs-panel>.body>.specs-group>.specs.selected {
   color: #F44444;
   background-color: rgba(244, 68, 68, 0.3);
-}
-
-.buy-goods-window>.middle>.specs-panel>.body>.specs:first-child {
-  margin-left: 0;
 }
 
 .buy-goods-window>.middle>.count {

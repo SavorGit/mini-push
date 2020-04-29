@@ -33,7 +33,9 @@ let SavorUtils = {
         })
       }
 
-    }, { isShowLoading: false }),
+    }, {
+      isShowLoading: false
+    }),
   },
   Page: {},
 
@@ -69,8 +71,8 @@ Page({
     var self = this;
     goods_list = [];
     self.setData({
-      category_id:0,
-      keywords:''
+      category_id: 0,
+      keywords: ''
     })
     if (app.globalData.openid && app.globalData.openid != '') {
       //注册用户
@@ -80,7 +82,7 @@ Page({
       SavorUtils.User.isRegister(self); //判断用户是否注册
 
       //商品列表
-    self.getGoodsList(0, 1,app.globalData.openid);
+      self.getGoodsList(0, 1, app.globalData.openid);
     } else {
       app.openidCallback = openid => {
         if (openid != '') {
@@ -89,7 +91,7 @@ Page({
           });
           SavorUtils.User.isRegister(self); //判断用户是否注册
           //商品列表
-          self.getGoodsList(0, 1,openid);
+          self.getGoodsList(0, 1, openid);
         }
       }
     }
@@ -98,7 +100,7 @@ Page({
     self.getBannerList();
     //获取商品分类
     self.getCategoryList();
-    
+
   },
   isHaveCallBox: function (openid) {
     var that = this;
@@ -166,8 +168,7 @@ Page({
   //商品分类
   getCategoryList: function () {
     var that = this;
-    utils.PostRequest(api_v_url + '/category/categorylist', {
-    }, (data, headers, cookies, errMsg, statusCode) => {
+    utils.PostRequest(api_v_url + '/category/categorylist', {}, (data, headers, cookies, errMsg, statusCode) => {
       var category_list = data.result.category_list
       var page_arr = that.data.page_arr;
       for (var i = 0; i < category_list.length; i++) {
@@ -181,41 +182,45 @@ Page({
     });
   },
   //商品列表
-  getGoodsList: function (category_id, page,openid) {
+  getGoodsList: function (category_id, page, openid) {
     var that = this;
     utils.PostRequest(api_v_url + '/shop/goods', {
       category_id: category_id,
       openid: openid,
       page: page
     }, (data, headers, cookies, errMsg, statusCode) => {
-      if(typeof(goods_list[category_id])!='undefined'){
+      if (typeof (goods_list[category_id]) != 'undefined') {
         var rts = data.result.datalist
-        if(goods_list[category_id].length == rts.length){
+        if (goods_list[category_id].length == rts.length) {
 
-        }else {
+        } else {
           goods_list[category_id] = data.result.datalist;
           that.setData({
             goods_list: goods_list,
           })
         }
-      }else {
+      } else {
         goods_list[category_id] = data.result.datalist;
-          that.setData({
-            goods_list: goods_list,
-          })
+        that.setData({
+          goods_list: goods_list,
+        })
       }
-      
+
     });
   },
   //选择分类
   selectCate: function (e) {
     var that = this;
     var category_id = e.currentTarget.dataset.category_id;
-    var user_info = wx.getStorageSync(cache_key+'user_info')
+    var user_info = wx.getStorageSync(cache_key + 'user_info')
     that.setData({
       category_id: category_id
     }, function () {
-      try { that.switchCategoryTabBar(e); } catch (error) { console.error(error) }
+      try {
+        that.switchCategoryTabBar(e);
+      } catch (error) {
+        console.error(error)
+      }
     });
     var page_arr = that.data.page_arr;
     var select_page = 1;
@@ -224,17 +229,17 @@ Page({
         select_page = page_arr[index];
       }
     }
-    if(typeof(goods_list[category_id])=='undefined'){
-      that.getGoodsList(category_id, select_page,user_info.openid);
+    if (typeof (goods_list[category_id]) == 'undefined') {
+      that.getGoodsList(category_id, select_page, user_info.openid);
     }
-    
+
   },
   loadMore: function (e) {
     var that = this;
     var category_id = that.data.category_id;
     var page_arr = that.data.page_arr;
     var select_page = 1;
-    var user_info = wx.getStorageSync(cache_key+'user_info')
+    var user_info = wx.getStorageSync(cache_key + 'user_info')
     for (let index in page_arr) {
       if (index == category_id) {
         select_page = page_arr[index] + 1;
@@ -245,7 +250,7 @@ Page({
     that.setData({
       page_arr: page_arr,
     })
-    that.getGoodsList(category_id, select_page,user_info.openid)
+    that.getGoodsList(category_id, select_page, user_info.openid)
   },
   //电视播放
   boxShow(e) {
@@ -303,7 +308,9 @@ Page({
         });
       });
 
-      mta.Event.stat('optimizationClickTvPlay', { 'goodsid': forscreen_id })
+      mta.Event.stat('optimizationClickTvPlay', {
+        'goodsid': forscreen_id
+      })
 
     }
   }, //电视播放结束
@@ -392,7 +399,9 @@ Page({
       mall_cart_list = JSON.stringify(mall_cart_list);
       wx.setStorageSync(cache_key + 'mall_cart_' + openid, mall_cart_list)
     }
-    that.setData({ showBuyGoodsPopWindow: false });
+    that.setData({
+      showBuyGoodsPopWindow: false
+    });
     app.showToast('添加购物车成功');
   },
   onPullDownRefresh: function () {
@@ -409,7 +418,11 @@ Page({
    */
   onReady: function () {
     let self = this;
-    self.tabBar = { category: { scrollViewWidth: 750 } };
+    self.tabBar = {
+      category: {
+        scrollViewWidth: 750
+      }
+    };
     wx.createSelectorQuery().select('.tab-bar').boundingClientRect((rect) => {
       self.tabBar.category.scrollViewWidth = Math.round(rect.width);
     }).exec();
@@ -518,5 +531,7 @@ Page({
     self.setData({
       showBuyGoodsPopWindow: false
     });
-  }
+  },
+
+  noneActive: function (e) {}
 })
