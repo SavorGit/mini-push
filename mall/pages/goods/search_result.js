@@ -276,5 +276,7 @@ Page({
    */
   onShareAppMessage: function () {
 
-  }
+  },
+
+  noneActive: function (e) {}
 })
