@@ -33,8 +33,8 @@
 				<view class="tab-bar flex-row-center-flex_start theme-panel">
 					<view class="tab goods{{tab=='goods'?' selected':''}}" data-tab="goods" bindtap="showTab">商城</view>
 					<block wx:if="{{mtype==1}}">
-					<view class="tab foods{{tab=='foods'?' selected':''}}" data-tab="foods" bindtap="showTab">外卖</view>
-					<view class="tab shop-info{{tab=='shop-info'?' selected':''}}" data-tab="shop-info" bindtap="showTab">商家详情</view>
+						<view class="tab foods{{tab=='foods'?' selected':''}}" data-tab="foods" bindtap="showTab">外卖</view>
+						<view class="tab shop-info{{tab=='shop-info'?' selected':''}}" data-tab="shop-info" bindtap="showTab">商家详情</view>
 					</block>
 				</view>
 
@@ -188,11 +188,72 @@
 			</view>
 		</view>
 		<view class="middle flex-column-flex_start-space_between">
+			<view class="specs-panel">
+				<view class="title-bar">
+					<view class="title">种类</view>
+				</view>
+				<view class="body flex-row-center-flex_start">
+					<view class="specs-group">
+						<view class="specs selected">烤鸭</view>
+						<view class="specs theme-button-more">烤鸡</view>
+						<view class="specs theme-button-more">烤鹅</view>
+					</view>
+				</view>
+			</view>
+			<view class="specs-panel">
+				<view class="title-bar">
+					<view class="title">重量</view>
+				</view>
+				<view class="body flex-row-center-flex_start">
+					<view class="specs-group">
+						<view class="specs selected">1斤</view>
+						<view class="specs theme-button-none">2斤</view>
+						<view class="specs theme-button-more">3斤</view>
+						<view class="specs theme-button-more">4斤</view>
+						<view class="specs theme-button-more">5斤</view>
+						<view class="specs theme-button-more">6斤</view>
+						<view class="specs theme-button-more">7斤</view>
+						<view class="specs theme-button-more">8斤</view>
+						<view class="specs theme-button-none">2斤</view>
+						<view class="specs theme-button-more">3斤</view>
+						<view class="specs theme-button-more">4斤</view>
+						<view class="specs theme-button-more">5斤</view>
+						<view class="specs theme-button-more">6斤</view>
+						<view class="specs theme-button-more">7斤</view>
+						<view class="specs theme-button-more">8斤</view>
+						<view class="specs theme-button-none">2斤</view>
+						<view class="specs theme-button-more">3斤</view>
+						<view class="specs theme-button-more">4斤</view>
+						<view class="specs theme-button-more">5斤</view>
+						<view class="specs theme-button-more">6斤</view>
+						<view class="specs theme-button-more">7斤</view>
+						<view class="specs theme-button-more">8斤</view>
+						<view class="specs theme-button-none">2斤</view>
+						<view class="specs theme-button-more">3斤</view>
+						<view class="specs theme-button-more">4斤</view>
+						<view class="specs theme-button-more">5斤</view>
+						<view class="specs theme-button-more">6斤</view>
+						<view class="specs theme-button-more">7斤</view>
+						<view class="specs theme-button-more">8斤</view>
+					</view>
+				</view>
+			</view>
+			<view class="specs-panel">
+				<view class="title-bar">
+					<view class="title">包装</view>
+				</view>
+				<view class="body flex-row-center-flex_start">
+					<view class="specs-group">
+						<view class="specs selected">精装</view>
+						<view class="specs theme-button-more">简装</view>
+					</view>
+				</view>
+			</view>
 			<view class="count flex-row-center-space_between">
 				<view class="label">购买数量：</view>
 				<view class="value flex-row-center-space_between">
 					<view class="btn" bindtap="cutMallNum">-</view>
-					<input value="{{goods_info.amount}}"  disabled="true"></input>
+					<input value="{{goods_info.amount}}" disabled="true"></input>
 					<view class="btn" bindtap="addMallNum">+</view>
 				</view>
 			</view>
