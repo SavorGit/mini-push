@@ -48,8 +48,11 @@
 		</view>
 	</view>
 </scroll-view>
+
 <!-- 购买商品弹窗 -->
-<view wx:if="{{showBuyGoodsPopWindow}}" class="mask">
+<block wx:if="{{showBuyGoodsPopWindow}}">
+	<!-- <view wx:if="{{showBuyGoodsPopWindow}}" class="mask"> -->
+	<view class="mask" bindtap="closeBuyGoodsPopWindow" style="bottom:{{SystemInfo.screenBottomSpace}}px;"></view>
 	<view class="buy-goods-window theme-panel">
 		<view class="top flex-row-flex_end-space_between">
 			<image class="pic" mode="aspectFill" src="{{goods_info.img_url}}"></image>
@@ -138,4 +141,5 @@
 			<view class="btn theme-button-red" bindtap="buyOne">立即购买</view>
 		</view>
 	</view>
-</view>
+	<!-- </view> -->
+</block>
