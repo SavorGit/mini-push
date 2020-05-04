@@ -33,7 +33,7 @@
 									<block bindtap="gotoGoodsDetail" data-goods_id="{{item.id}}">
 										<view class="name two-line-overflow">{{item.name}}</view>
 										<view class="middle flex-row-center-flex_start">
-											<view class="specs theme-button-more">2斤简装</view>
+											<view class="specs theme-button-more" wx:if="{{item.gtype==2}}">{{item.attr_name}}</view>
 											<view class="stock one-line-overflow theme-font3">剩余{{item.stock_num}}件</view>
 											<view class="tip theme-font5" wx:if="{{item.localsale_str!=''}}">{{item.localsale_str}}</view>
 										</view>
@@ -73,9 +73,9 @@
 							<view class="right flex-column-flex_start-space_between">
 								<view class="name two-line-overflow theme-font3">{{bean.name}}</view>
 								<view class="middle flex-row-center-flex_start">
-									<view class="specs theme-button-more">2斤简装</view>
+									<view class="specs theme-button-more" wx:if="{{bean.gtype==2}}">{{bean.attr_name}}</view>
 									<view class="stock one-line-overflow theme-font3">剩余{{bean.stock_num}}件</view>
-									<view class="tip theme-font5" wx:if="{{item.localsale_str!=''}}">{{item.item.localsale_str}}</view>
+									<view class="tip theme-font5" wx:if="{{bean.localsale_str!=''}}">{{bean.localsale_str}}</view>
 								</view>
 								<view class="bottom flex-row-center-space_between">
 									<view class="price theme-font5">￥{{bean.price}}</view>

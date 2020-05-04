@@ -78,7 +78,7 @@
 									<view class="fa fa-television theme-font5" aria-hidden="true" wx:if="{{bean.is_tv==1}}" data-index="{{index}}" data-goods_id="{{bean.id}}" data-name="{{bean.name}}" data-filename='{{bean.filename}}' data-vediourl="{{bean.tx_url}}" data-boxmac="{{box_mac}}" data-openid="{{openid}}" data-duration="{{bean.duration}}" data-hotel_info="{{hotel_info}}" data-forscreen_url="{{bean.forscreen_url}}" data-resource_size="{{bean.resource_size}}" data-filename="{{bean.filename}}" data-tx_url="{{bean.tx_url}}" bindtap='boxShow'></view>
 									<view class="fa fa-sign-in theme-font5" aria-hidden="true" bindtap="gotoDetail" data-goods_id="{{bean.id}}" data-box_mac="{{box_mac}}" data-type="{{bean.type}}" wx:if="{{bean.type==10}}"></view>
 									<!---购物车按钮-->
-									<view wx:else class="fa fa-cart-plus theme-font5" aria-hidden="true" bindtap="openBuyGoodsPopWindow" data-goods_info="{{bean}}" data-type="2"></view>
+									<view wx:else class="fa fa-cart-plus theme-font5" aria-hidden="true" bindtap="openBuyGoodsPopWindow" data-goods_info="{{bean}}" data-type="2" data-goods_id="{{bean.id}}"></view>
 								</view>
 							</view>
 						</view>
@@ -99,7 +99,8 @@
 	<view class="mask" bindtap="closeBuyGoodsPopWindow" style="bottom:{{SystemInfo.screenBottomSpace}}px;"></view>
 	<view class="buy-goods-window theme-panel">
 		<view class="top flex-row-flex_end-space_between">
-			<image class="pic" mode="aspectFill" src="{{goods_info.img_url}}"></image>
+			<image class="pic" mode="aspectFill" src="{{goods_info.img_url}}" wx:if="{{goods_info.gtype==1}}"></image>
+			<image class="pic" mode="aspectFill" src="{{goods_info.model_img}}" wx:else></image>
 			<view class="center flex-column-flex_start-space_between">
 				<view class="name one-line-overflow">{{goods_info.name}}</view>
 				<view class="price one-line-overflow theme-font5">￥{{goods_info.price}}</view>
@@ -109,19 +110,22 @@
 			</view>
 		</view>
 		<view class="middle flex-column-flex_start-space_between">
-			<view class="specs-panel">
+			<view class="specs-panel" wx:for="{{goods_info.attrs}}" wx:key="key" wx:for-item="bean" wx:for-index="index">
 				<view class="title-bar">
-					<view class="title">种类</view>
+					<view class="title">{{bean.name}}</view>
 				</view>
 				<view class="body flex-row-center-flex_start">
 					<view class="specs-group">
-						<view class="specs selected">烤鸭</view>
-						<view class="specs theme-button-more">烤鸡</view>
-						<view class="specs theme-button-more">烤鹅</view>
+						<block wx:for="{{bean.attrs}}" wx:key="kk" wx:for-item="item" wx:for-index="idx">
+						<view class="specs selected" wx:if="{{item.is_select==1}}">{{item.name}}</view>
+						<view class="specs theme-button-more" wx:else  bindtap="selectModel" data-index="{{index}}" data-idx="{{idx}}">{{item.name}}</view>
+						</block>
+						<!-- <view class="specs theme-button-more">烤鸡</view>
+						<view class="specs theme-button-more">烤鹅</view> -->
 					</view>
 				</view>
 			</view>
-			<view class="specs-panel">
+			<!-- <view class="specs-panel">
 				<view class="title-bar">
 					<view class="title">重量</view>
 				</view>
@@ -169,7 +173,7 @@
 						<view class="specs theme-button-more">简装</view>
 					</view>
 				</view>
-			</view>
+			</view> -->
 			<view class="count flex-row-center-space_between">
 				<view class="label">购买数量：</view>
 				<view class="value flex-row-center-space_between">

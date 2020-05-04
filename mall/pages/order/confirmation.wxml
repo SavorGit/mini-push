@@ -44,7 +44,7 @@
 							<view class="center flex-column-stretch-flex_start" bindtap="">
 								<view class="name two-line-overflow">{{item.name}}</view>
 								<view class="c-bottom flex-row-center-flex_start">
-									<view class="specs theme-button-more">2斤简装</view>
+									<view class="specs theme-button-more" wx:if="{{item.gtype==2}}">{{item.attr_name}}</view>
 								</view>
 							</view>
 							<view class="right flex-column-flex_end-center">

@@ -50,7 +50,7 @@
 					<view class="center" bindtap="">
 						<view class="name two-line-overflow">{{bean.name}}</view>
 						<view class="bottom flex-row-center-flex_start">
-							<view class="specs theme-button-more">2斤简装</view>
+							<view class="specs theme-button-more" wx:if="{{bean.gtype==2}}">{{bean.attr_name}}</view>
 						</view>
 					</view>
 					<view class="right flex-column-flex_end-center" bindtap="">
