@@ -44,6 +44,7 @@ Page({
     rec_list: [],
     showBuyGoodsPopWindow: false,
     video_url:'',
+    goods_id:0,
   },
 
   /**
@@ -112,7 +113,8 @@ Page({
       that.setData({
         video_url:data.result.video_url,
         goods_info: data.result,
-        merchant: data.result.merchant
+        merchant: data.result.merchant,
+        goods_id: data.result.goods_id
       })
     },function(){
         var is_share = that.data.is_share
@@ -243,8 +245,10 @@ Page({
     var is_self = e.currentTarget.dataset.is_self;
     if (is_self == 1) {
       var goods_cart_info = that.data.goods_info;
+      var goods_id = e.currentTarget.dataset.goods_id
     } else {
       var goods_cart_info = e.currentTarget.dataset.goods_info;
+      var goods_id = goods_cart_info.id; 
     }
 
     var action = e.currentTarget.dataset.action
@@ -256,6 +260,7 @@ Page({
       goods_cart_info: goods_cart_info,
       action: action,
       is_self: is_self,
+      goods_id:goods_id
     });
   },
 
@@ -324,7 +329,8 @@ Page({
     })
   },
   selectModel:function(e){
-    var goods_info = that.data.goods;
+    var that = this;
+    var goods_info = that.data.goods_info;
     var index = e.currentTarget.dataset.index;  //规格分类
     var idx   = e.currentTarget.dataset.idx;    //规格类型
     for(let j in goods_info.attrs[index].attrs){
@@ -358,8 +364,11 @@ Page({
         attr: attr,
         goods_id:goods_id
       }, (data, headers, cookies, errMsg, statusCode) => {
+        var goods_info = data.result;
+        goods_info.amount = 1;
         that.setData({
-          goods_info:data.result
+          goods_info:goods_info,
+          goods_cart_info:goods_info
         })
       }, re => { }, { isShowLoading: false });
     }

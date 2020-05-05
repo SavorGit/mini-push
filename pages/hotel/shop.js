@@ -452,6 +452,7 @@ Page({
     var goods_info = e.currentTarget.dataset.goods_info;
     var goods_id = e.currentTarget.dataset.goods_id;
     goods_info.amount = 1;
+    console.log(goods_info)
     self.setData({
       showBuyGoodsPopWindow: true,
       goods_info: goods_info,
@@ -566,7 +567,8 @@ Page({
     })
   },
   selectModel:function(e){
-    var goods_info = that.data.goods;
+    var that = this;
+    var goods_info = that.data.goods_info;
     var index = e.currentTarget.dataset.index;  //规格分类
     var idx   = e.currentTarget.dataset.idx;    //规格类型
     for(let j in goods_info.attrs[index].attrs){
@@ -600,8 +602,10 @@ Page({
         attr: attr,
         goods_id:goods_id
       }, (data, headers, cookies, errMsg, statusCode) => {
+        var goods_info = data.result;
+        goods_info.amount = 1;
         that.setData({
-          goods_info:data.result
+          goods_info:goods_info
         })
       }, re => { }, { isShowLoading: false });
     }
