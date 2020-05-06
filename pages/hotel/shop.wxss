@@ -589,6 +589,11 @@
   border-radius: 20rpx;
 }
 
+.buy-goods-window>.middle>.specs-panel>.body>.specs-group>.specs.selected {
+  color: #F44444;
+  background-color: rgba(244, 68, 68, 0.3);
+}
+
 .buy-goods-window>.middle>.count {
   width: 100%;
 }
