@@ -292,8 +292,9 @@
 
 /* ===================================== 优选推荐面板 ===================================== */
 .recommend {
-  width: 100%;
+  width: calc(100% - 60rpx);
   height: 380rpx;
+  padding: 20rpx 30rpx;
   margin-top: 10rpx;
 }
 
@@ -376,6 +377,7 @@
 .information-panel>.panel-body,
 .information-panel>.panel-body>.panel {
   width: 100%;
+  padding: 20rpx 0;
 }
 
 .information-panel>.panel-body>.panel>.body {
