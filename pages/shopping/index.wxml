@@ -117,8 +117,9 @@
 				<view class="body flex-row-center-flex_start">
 					<view class="specs-group">
 						<block wx:for="{{bean.attrs}}" wx:key="kk" wx:for-item="item" wx:for-index="idx">
-						<view class="specs selected" wx:if="{{item.is_select==1}}">{{item.name}}</view>
-						<view class="specs theme-button-more" wx:else  bindtap="selectModel" data-index="{{index}}" data-idx="{{idx}}">{{item.name}}</view>
+						<view class="specs selected" wx:if="{{item.is_select==1 && item.is_disable==0}}">{{item.name}}</view>
+						<view class="specs theme-button-more" wx:if="{{item.is_select==0 && item.is_disable==0}}"  bindtap="selectModel" data-index="{{index}}" data-idx="{{idx}}">{{item.name}}</view>
+						<view class="specs theme-button-none" wx:if="{{item.is_disable==1}}">{{item.name}}</view>
 						</block>
 						<!-- <view class="specs theme-button-more">烤鸡</view>
 						<view class="specs theme-button-more">烤鹅</view> -->
