@@ -131,7 +131,7 @@
 /* ======================================== 购买商品弹窗 ======================================== */
 .buy-goods-window {
   width: 100%;
-  /* height: 400rpx; */
+  height: 80vh;
   z-index: 11;
   position: absolute;
   bottom: 0;
@@ -178,57 +178,57 @@
 .buy-goods-window>.middle {
   width: calc(100% - 80rpx);
   height: calc(100% - 308rpx);
-  padding: 40rpx;
+  padding: 10rpx 40rpx;
 }
 
-.buy-goods-window>.middle>.specs-panel {
+.buy-goods-window>.middle .specs-panel {
   width: 100%;
   padding: 10rpx 0;
 }
 
-.buy-goods-window>.middle>.specs-panel>.title-bar {
+.buy-goods-window>.middle .specs-panel>.title-bar {
   padding: 5rpx 0;
 }
 
-.buy-goods-window>.middle>.specs-panel>.title-bar>.title {
+.buy-goods-window>.middle .specs-panel>.title-bar>.title {
   font-size: 28rpx;
 }
 
-.buy-goods-window>.middle>.specs-panel>.body {
+.buy-goods-window>.middle .specs-panel>.body {
   padding: 5rpx 0;
 }
 
-.buy-goods-window>.middle>.specs-panel>.body>.specs-group {
+.buy-goods-window>.middle .specs-panel>.body>.specs-group {
   width: 100%;
   max-height: 150rpx;
   overflow: hidden;
 }
 
-.buy-goods-window>.middle>.specs-panel>.body>.specs-group>.specs {
-  height: 30rpx;
-  line-height: 30rpx;
+.buy-goods-window>.middle .specs-panel>.body>.specs-group>.specs {
+  height: 40rpx;
+  line-height: 40rpx;
   padding: 5rpx 15rpx;
   margin-left: 20rpx;
+  margin-bottom: 10rpx;
   display: inline-block;
-  /* box-sizing: border-box; */
   font-size: 24rpx;
-  border-radius: 20rpx;
+  border-radius: 25rpx;
 }
 
-.buy-goods-window>.middle>.specs-panel>.body>.specs-group>.specs.selected {
+.buy-goods-window>.middle .specs-panel>.body>.specs-group>.specs.selected {
   color: #F44444;
   background-color: rgba(244, 68, 68, 0.3);
 }
 
-.buy-goods-window>.middle>.count {
+.buy-goods-window>.middle .count {
   width: 100%;
 }
 
-.buy-goods-window>.middle>.count>.label {
-  font-size: 24rpx;
+.buy-goods-window>.middle .count>.label {
+  font-size: 28rpx;
 }
 
-.buy-goods-window>.middle>.count>.value>.btn {
+.buy-goods-window>.middle .count>.value>.btn {
   width: 34rpx;
   height: 34rpx;
   line-height: 34rpx;
@@ -241,7 +241,7 @@
   padding: 0;
 }
 
-.buy-goods-window>.middle>.count>.value>input {
+.buy-goods-window>.middle .count>.value>input {
   width: 60rpx;
   height: 40rpx;
   line-height: 40rpx;
@@ -249,9 +249,10 @@
   font-size: 24rpx;
 }
 
-.buy-goods-window>.middle>.stock {
+.buy-goods-window>.middle .stock {
   width: 100%;
   font-size: 24rpx;
+  padding-bottom: 10rpx;
 }
 
 .buy-goods-window>.bottom {

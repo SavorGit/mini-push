@@ -154,7 +154,68 @@
 				<view class="btn fa fa-times-circle-o" aria-hidden="true" bindtap="closeBuyGoodsPopWindow"></view>
 			</view>
 		</view>
-		<view class="middle flex-column-flex_start-space_between">
+		<scroll-view class="middle flex-column-flex_start-space_between" scroll-y="true" scroll-with-animation="true">
+			<view class="specs-panel">
+				<view class="title-bar">
+					<view class="title">种类</view>
+				</view>
+				<view class="body flex-row-center-flex_start">
+					<view class="specs-group">
+						<view class="specs selected">烤鸭</view>
+						<view class="specs theme-button-more">烤鸡</view>
+						<view class="specs theme-button-more">烤鹅</view>
+					</view>
+				</view>
+			</view>
+			<view class="specs-panel">
+				<view class="title-bar">
+					<view class="title">重量</view>
+				</view>
+				<view class="body flex-row-center-flex_start">
+					<view class="specs-group">
+						<view class="specs selected">1斤</view>
+						<view class="specs theme-button-none">2斤</view>
+						<view class="specs theme-button-more">3斤</view>
+						<view class="specs theme-button-more">4斤</view>
+						<view class="specs theme-button-more">5斤</view>
+						<view class="specs theme-button-more">6斤</view>
+						<view class="specs theme-button-more">7斤</view>
+						<view class="specs theme-button-more">8斤</view>
+						<view class="specs theme-button-none">2斤</view>
+						<view class="specs theme-button-more">3斤</view>
+						<view class="specs theme-button-more">4斤</view>
+						<view class="specs theme-button-more">5斤</view>
+						<view class="specs theme-button-more">6斤</view>
+						<view class="specs theme-button-more">7斤</view>
+						<view class="specs theme-button-more">8斤</view>
+						<view class="specs theme-button-none">2斤</view>
+						<view class="specs theme-button-more">3斤</view>
+						<view class="specs theme-button-more">4斤</view>
+						<view class="specs theme-button-more">5斤</view>
+						<view class="specs theme-button-more">6斤</view>
+						<view class="specs theme-button-more">7斤</view>
+						<view class="specs theme-button-more">8斤</view>
+						<view class="specs theme-button-none">2斤</view>
+						<view class="specs theme-button-more">3斤</view>
+						<view class="specs theme-button-more">4斤</view>
+						<view class="specs theme-button-more">5斤</view>
+						<view class="specs theme-button-more">6斤</view>
+						<view class="specs theme-button-more">7斤</view>
+						<view class="specs theme-button-more">8斤</view>
+					</view>
+				</view>
+			</view>
+			<view class="specs-panel">
+				<view class="title-bar">
+					<view class="title">包装</view>
+				</view>
+				<view class="body flex-row-center-flex_start">
+					<view class="specs-group">
+						<view class="specs selected">精装</view>
+						<view class="specs theme-button-more">简装</view>
+					</view>
+				</view>
+			</view>
 			<view class="count flex-row-center-space_between">
 				<view class="label">购买数量：</view>
 				<view class="value flex-row-center-space_between">
@@ -164,7 +225,7 @@
 				</view>
 			</view>
 			<view class="stock one-line-overflow theme-font3">剩余{{goods_cart_info.stock_num}}件</view>
-		</view>
+		</scroll-view>
 		<view class="bottom flex-row-center-space_between" wx:if="{{action==2}}">
 			<view class="btn theme-button-red" bindtap="buyOne">下一步</view>
 		</view>
