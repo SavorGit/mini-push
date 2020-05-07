@@ -67,6 +67,11 @@
   height: 80rpx;
 }
 
+.page-bottom>.left {
+  height: 80rpx;
+  line-height: 80rpx;
+}
+
 .page-bottom>.left>.btn {
   margin: 0;
   padding: 0;
@@ -75,11 +80,11 @@
 }
 
 .page-bottom>.left>.btn>.fa {
-  width: 30rpx;
-  height: 30rpx;
-  line-height: 30rpx;
+  width: 40rpx;
+  height: 40rpx;
+  line-height: 40rpx;
   text-align: center;
-  font-size: 30rpx;
+  font-size: 36rpx;
 }
 
 .page-bottom>.left>.btn>.fa-phone {
@@ -92,7 +97,7 @@
   height: 30rpx;
   line-height: 30rpx;
   text-align: center;
-  font-size: 18rpx;
+  font-size: 20rpx;
 }
 
 .page-bottom>.left>.phone {
@@ -113,7 +118,7 @@
   height: 80rpx;
   line-height: 80rpx;
   text-align: center;
-  margin-left: 3rpx;
+  margin-left: 2rpx;
   font-size: 24rpx;
   margin: 0;
   padding: 0;
@@ -141,8 +146,8 @@
 
 .goods-smple-info>.bottom {
   width: calc(100% - 60rpx);
-  height: calc(100% - 450rpx);
-  padding: 15rpx 30rpx;
+  height: calc(100% - 440rpx);
+  padding: 10rpx 30rpx;
 }
 
 .goods-smple-info>.bottom>.left {
@@ -153,6 +158,10 @@
 .goods-smple-info>.bottom>.left>.name {
   font-size: 32rpx;
   font-weight: bold;
+}
+
+.goods-smple-info>.bottom>.left>.bottom {
+  margin-top: 10rpx;
 }
 
 .goods-smple-info>.bottom>.left>.bottom>.price {
@@ -481,8 +490,6 @@
 
 .buy-goods-window>.middle .specs-panel>.body>.specs-group {
   width: 100%;
-  max-height: 150rpx;
-  overflow: hidden;
 }
 
 .buy-goods-window>.middle .specs-panel>.body>.specs-group>.specs {

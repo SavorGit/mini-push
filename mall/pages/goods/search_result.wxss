@@ -238,8 +238,6 @@
 
 .buy-goods-window>.middle .specs-panel>.body>.specs-group {
   width: 100%;
-  max-height: 150rpx;
-  overflow: hidden;
 }
 
 .buy-goods-window>.middle .specs-panel>.body>.specs-group>.specs {
