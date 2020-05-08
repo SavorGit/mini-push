@@ -198,6 +198,7 @@
 }
 
 .main-panel>.tab-body .list>.item>.bottom>.bottom>.left>.market {
+  padding: 5rpx;
   margin-left: 30rpx;
   text-decoration: line-through;
 }
