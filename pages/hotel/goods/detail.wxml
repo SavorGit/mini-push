@@ -42,10 +42,13 @@
 
 		<!-- 公告面板 -->
 		<view class="notice-panel panel flex-column-stretch-flex_start theme-panel" wx:if="{{notice !=''}}">
+			<!--
 			<view class="title-bar flex-row-center-flex_start">
 				<view class="icon fa fa-bullhorn theme-font5" aria-hidden="true"></view>
 			</view>
-			<view class="body flex-column-center-center">
+			-->
+			<view class="body flex-row-flex_start-flex_start">
+				<view class="icon fa fa-bullhorn theme-font5" aria-hidden="true"></view>
 				<view class="content">{{notice}}</view>
 			</view>
 		</view>
@@ -53,15 +56,15 @@
 		<!-- 规格面板 -->
 		<view class="specs-panel panel flex-row-center-space_between theme-panel" wx:if="{{specification_goods.length>0}}" bindtap="openBuyGoodsPopWindow" data-action='1' data-is_self="1" data-goods_id="{{goods_id}}">
 			<view class="left">规格</view>
-			<view class="specs-group" >
+			<view class="specs-group">
 				<block wx:for="{{specification_goods}}" wx:key="key" wx:for-item="bean" wx:for-index="index">
 					<block wx:if="{{index<3}}">
 						<!-- <view class="specs selected" wx:if="{{index==selectAttrIndex}}" >{{bean.name}}</view> -->
-						<view class="specs theme-button-more"  >{{bean.name}}</view>
+						<view class="specs theme-button-more">{{bean.name}}</view>
 					</block>
 				</block>
 			</view>
-			<view class="right theme-font3" >共{{specification_goods.length}}种可选</view>
+			<view class="right theme-font3">共{{specification_goods.length}}种可选</view>
 		</view>
 
 		<!-- 商铺面板 -->

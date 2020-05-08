@@ -233,9 +233,17 @@
   width: 100%;
 }
 
+.notice-panel>.body>.icon {
+  width: 40rpx;
+  height: 40rpx;
+  line-height: 40rpx;
+  text-align: center;
+  font-size: 38rpx;
+}
+
 .notice-panel>.body>.content {
-  width: calc(100% - 160rpx);
-  padding: 0 80rpx;
+  width: calc(100% - 40rpx);
+  padding: 0 60rpx 0 20rpx;
   text-align: center;
   font-size: 32rpx;
   font-weight: bold;
