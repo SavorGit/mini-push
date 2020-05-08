@@ -466,7 +466,15 @@ Page({
     that.isHaveCallBox(user_info.openid);
     //购物车数量
     that.getMallCartNums(user_info.openid);
-
+    var category_id = that.data.category_id;
+    
+    var page_arr = that.data.page_arr;
+    if(page_arr.length>0){
+      var select_page = page_arr[category_id];
+    //
+    that.getGoodsList(category_id, select_page, user_info.openid);
+    }
+    
   },
   getMallCartNums: function (openid) {
     var that = this;
