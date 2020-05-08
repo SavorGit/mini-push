@@ -101,7 +101,7 @@ Page({
       app.showToast('请输入邮箱');
       return false;
     }else {
-      var reg = /^([a-zA-Z]|[0-9])(\w|\-)+@[a-zA-Z0-9]+\.([a-zA-Z]{2,4})$/;
+      var reg = /^([a-zA-Z]|[0-9])(\w|\-|\.)+@[a-zA-Z0-9]+\.([a-zA-Z]{2,4})$/;
       if(!reg.test(email)){
         app.showToast('请输入正确的邮箱');
         return false;
