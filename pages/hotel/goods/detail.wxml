@@ -56,8 +56,8 @@
 			<view class="specs-group" bindtap="openBuyGoodsPopWindow" data-action='1' data-is_self="1" data-goods_id="{{goods_id}}">
 				<block wx:for="{{specification_goods}}" wx:key="key" wx:for-item="bean" wx:for-index="index">
 					<block wx:if="{{index<3}}">
-						<view class="specs selected" wx:if="{{index==selectAttrIndex}}" >{{bean.name}}</view>
-						<view class="specs theme-button-more" wx:else >{{bean.name}}</view>
+						<!-- <view class="specs selected" wx:if="{{index==selectAttrIndex}}" >{{bean.name}}</view> -->
+						<view class="specs theme-button-more"  >{{bean.name}}</view>
 					</block>
 				</block>
 			</view>
