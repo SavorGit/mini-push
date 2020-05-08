@@ -551,7 +551,7 @@
 
 .buy-goods-window>.middle {
   width: calc(100% - 80rpx);
-  height: calc(100% - 308rpx);
+  height: calc(100% - 250rpx);
   padding: 10rpx 40rpx;
 }
 
