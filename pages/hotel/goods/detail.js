@@ -45,6 +45,9 @@ Page({
     showBuyGoodsPopWindow: false,
     video_url:'',
     goods_id:0,
+    selectAttrIndex:'',
+    specification_goods:[],
+    notice:''
   },
 
   /**
@@ -111,6 +114,8 @@ Page({
     }, (data, headers, cookies, errMsg, statusCode) => {
       
       that.setData({
+        notice:data.result.notice,
+        specification_goods:data.result.specification_goods,
         video_url:data.result.video_url,
         goods_info: data.result,
         merchant: data.result.merchant,
@@ -342,14 +347,9 @@ Page({
     goods_info.attrs[index].attrs[idx].is_select = 1;
     
     //通过接口获取对应规格的商品信息
-    that.getGoodsDetailByAttrs(goods_info.attrs);
-
-  },
-  getGoodsDetailByAttrs:function(attrs){
-    var that = this;
-    
     var attr = '';
     var space = '';
+    var attrs = goods_info.attrs;
     for(let i in attrs){
       for (let j in attrs[i].attrs){
         if(attrs[i].attrs[j].is_select==1){
@@ -358,6 +358,13 @@ Page({
         }
       }
     }
+    that.getGoodsDetailByAttrs(attr);
+
+  },
+  getGoodsDetailByAttrs:function(attr){
+    var that = this;
+    
+    
     if(attr !=''){
       var goods_id = that.data.goods_id;
       utils.PostRequest(api_v_url + '/goods/getDetailByAttr', {
@@ -372,6 +379,40 @@ Page({
         })
       }, re => { }, { isShowLoading: false });
     }
+  },
+  selectAttrs:function(e){
+    var that = this;
+    console.log(e)
+    var index = e.currentTarget.dataset.index;
+    var attr_ids = e.currentTarget.dataset.attr_ids;
+
+    var goods_id = that.data.goods_id;
+      utils.PostRequest(api_v_url + '/goods/getDetailByAttr', {
+        attr: attr_ids,
+        goods_id:goods_id
+      }, (data, headers, cookies, errMsg, statusCode) => {
+        var goods_info = data.result;
+        goods_info.amount = 1;
+        that.setData({
+          goods_info:goods_info,
+          goods_cart_info:goods_info,
+          selectAttrIndex:index,
+          showBuyGoodsPopWindow: true,
+          showBuyGoodsPopWindowAnimation: true,
+        })
+      }, re => { }, { isShowLoading: false });
+
+
+
+   
+    /*that.setData({
+      showBuyGoodsPopWindow: true,
+      showBuyGoodsPopWindowAnimation: true,
+      goods_cart_info: goods_cart_info,
+      action: action,
+      is_self: is_self,
+      goods_id:goods_id
+    });*/
   },
   /**
    * 生命周期函数--监听页面初次渲染完成

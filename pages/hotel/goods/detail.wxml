@@ -41,14 +41,14 @@
 		</view>
 
 		<!-- 公告面板 -->
-		<view class="notice-panel panel flex-column-stretch-flex_start theme-panel" wx:if="{{goods_info.notice !='' && typeof(goods_info.notice!='undefined')}}">
+		<view class="notice-panel panel flex-column-stretch-flex_start theme-panel" wx:if="{{notice !=''}}">
 			<view class="title-bar flex-row-center-flex_start">
 				<view class="icon fa fa-bullhorn theme-font5" aria-hidden="true"></view>
 			</view>
 			<view class="body flex-column-center-center">
 				<view class="line one-line-overflow">
 					<text>
-					{{goods_info.notice}}
+					{{notice}}
 					</text>
 				</view>
 				<!-- <view class="line two-line-overflow">江浙沪包邮</view>
@@ -56,16 +56,21 @@
 			</view>
 		</view>
 
-		<!-- 规格面板 
-		<view class="specs-panel panel flex-row-center-space_between theme-panel">
+		<!-- 规格面板 -->
+		<view class="specs-panel panel flex-row-center-space_between theme-panel" wx:if="{{specification_goods.length>0}}">
 			<view class="left">规格</view>
 			<view class="specs-group flex-row-center-space_around">
-				<view class="specs selected">1斤简装</view>
-				<view class="specs theme-button-more">2斤简装</view>
-				<view class="specs theme-button-more">3斤简装</view>
+			  <block wx:for="{{specification_goods}}"  wx:key="key" wx:for-item="bean" wx:for-index="index">
+				<block wx:if="{{index<3}}">
+				<view class="specs selected" wx:if="{{index==selectAttrIndex}}" bindtap="selectAttrs" data-attr_ids="{{bean.attr_ids}}" data-index="{{index}}">{{bean.name}}</view>
+				<view class="specs theme-button-more" wx:else bindtap="selectAttrs" data-attr_ids="{{bean.attr_ids}}" data-index="{{index}}">{{bean.name}}</view>
+				</block>
+				</block>
+				<!-- <view class="specs theme-button-more">2斤简装</view>
+				<view class="specs theme-button-more">3斤简装</view> -->
 			</view>
-			<view class="right theme-font3">共10种可选</view>
-		</view>-->
+			<view class="right theme-font3">共{{specification_goods.length}}种可选</view>
+		</view>
 
 		<!-- 商铺面板 -->
 		<view class="shop-panel panel flex-row-center-flex_start theme-panel">
