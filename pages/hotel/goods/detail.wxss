@@ -43,6 +43,13 @@
   padding: 0 30rpx;
 }
 
+.panel>.title-bar>.fa {
+  width: 40rpx;
+  height: 40rpx;
+  line-height: 40rpx;
+  text-align: center;
+}
+
 
 .panel>.title-bar>.title {
   height: 35rpx;
@@ -216,7 +223,19 @@
 }
 
 /* ===================================== 公告面板 ===================================== */
-.notice-panel>.body>.line {
+.notice-panel {
+  width: calc(100% - 60rpx);
+  padding: 20rpx 30rpx;
+}
+
+.notice-panel>.body {
+  width: 100%;
+}
+
+.notice-panel>.body>.content {
+  width: calc(100% - 160rpx);
+  padding: 0 80rpx;
+  text-align: center;
   font-size: 32rpx;
   font-weight: bold;
 }
@@ -229,13 +248,17 @@
 }
 
 .specs-panel>.specs-group {
-  width: calc(100% - 220rpx);
+  width: calc(100% - 200rpx);
+  height: 60rpx;
+  overflow: hidden;
 }
 
 .specs-panel>.specs-group>.specs {
   height: 40rpx;
   line-height: 40rpx;
   padding: 5rpx 15rpx;
+  margin-left: 20rpx;
+  display: inline-block;
   font-size: 28rpx;
   border-radius: 24rpx;
 }
