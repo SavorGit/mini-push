@@ -83,7 +83,7 @@ Page({
       SavorUtils.User.isRegister(self); //判断用户是否注册
 
       //商品列表
-      self.getGoodsList(0, 1, app.globalData.openid);
+      self.getGoodsList(0, 1, app.globalData.openid,1);
     } else {
       app.openidCallback = openid => {
         if (openid != '') {
@@ -92,7 +92,7 @@ Page({
           });
           SavorUtils.User.isRegister(self); //判断用户是否注册
           //商品列表
-          self.getGoodsList(0, 1, openid);
+          self.getGoodsList(0, 1, openid,1);
         }
       }
     }
@@ -183,12 +183,13 @@ Page({
     });
   },
   //商品列表
-  getGoodsList: function (category_id, page, openid) {
+  getGoodsList: function (category_id, page, openid ,action='') {
     var that = this;
     utils.PostRequest(api_v_url + '/shop/goods', {
       category_id: category_id,
       openid: openid,
-      page: page
+      page: page,
+      action:action
     }, (data, headers, cookies, errMsg, statusCode) => {
       if (typeof (goods_list[category_id]) != 'undefined') {
         var rts = data.result.datalist
@@ -472,7 +473,7 @@ Page({
     if(page_arr.length>0){
       var select_page = page_arr[category_id];
     //
-    that.getGoodsList(category_id, select_page, user_info.openid);
+    that.getGoodsList(category_id, select_page, user_info.openid,1);
     }
     
   },

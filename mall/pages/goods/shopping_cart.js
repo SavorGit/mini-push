@@ -43,15 +43,32 @@ Page({
         goods_ids.push(item);
       }
       goods_ids = JSON.stringify(goods_ids);
-      that.getCartList(goods_ids);
+      that.getCartList(goods_ids,mall_cart_list);
     }
   },
-  getCartList:function(goods_ids){
+  getCartList:function(goods_ids,mall_cart_list){
     var that = this;
     utils.PostRequest(api_v_url + '/shop/getcartgoods', {
       goods_ids: goods_ids
     }, (data, headers, cookies, errMsg, statusCode) => {
       var goods_online_list = data.result.online
+      var goods_offline_list = data.result.offline
+      if(goods_offline_list.length>0){
+        var is_have = 0;
+        for(let i in mall_cart_list){
+          for(let j in goods_offline_list){
+            if(mall_cart_list[i].id == goods_offline_list[j].id && mall_cart_list[i].ischecked==true){
+              
+              is_have = 1;
+              mall_cart_list[i].ischecked=false;
+            }
+          }
+        }
+        if(is_have==1){
+          mall_cart_list = JSON.stringify(mall_cart_list);
+          wx.setStorageSync(cache_key + 'mall_cart_' + openid, mall_cart_list) 
+        }
+      }
       that.setData({
         //goods_online_list: data.result.online,
         goods_offline_list: data.result.offline
