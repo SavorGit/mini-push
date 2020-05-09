@@ -199,13 +199,22 @@
   height: 100%;
 }
 
-.buy-goods-window>.top>.right>.fa {
+.buy-goods-window>.top>.right>.btn {
+  width: 40rpx;
+  height: 40rpx;
+  line-height: 40rpx;
+  text-align: center;
   font-size: 40rpx;
+}
+
+.buy-goods-window>.top>.right>.btn.circle {
+  border-radius: 50%;
+  border: 3rpx solid #333333;
 }
 
 .buy-goods-window>.middle {
   width: calc(100% - 80rpx);
-  height: calc(100% - 250rpx);
+  height: calc(100% - 245rpx);
   padding: 10rpx 40rpx;
 }
 
@@ -257,7 +266,7 @@
 .buy-goods-window>.middle .count>.value>.btn {
   width: 34rpx;
   height: 34rpx;
-  line-height: 34rpx;
+  line-height: 30rpx;
   text-align: center;
   font-size: 32rpx;
   color: #BEBEBE;

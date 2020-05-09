@@ -49,7 +49,8 @@
 				<view class="price one-line-overflow theme-font5">￥{{goods_info.price}}</view>
 			</view>
 			<view class="right flex-column-center-flex_start">
-				<view class="btn fa fa-times-circle-o" aria-hidden="true" bindtap="closeBuyGoodsPopWindow"></view>
+				<!-- <view class="btn fa fa-times-circle-o" aria-hidden="true" bindtap="closeBuyGoodsPopWindow"></view> -->
+				<image class="btn" src="/images/icon2/ededed_close.png" bindtap="closeBuyGoodsPopWindow"></image>
 			</view>
 		</view>
 		<scroll-view class="middle flex-column-flex_start-space_between" scroll-y="true" scroll-with-animation="true">
