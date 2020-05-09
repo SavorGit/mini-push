@@ -183,7 +183,7 @@ Page({
     });
   },
   //商品列表
-  getGoodsList: function (category_id, page, openid ,action='') {
+  getGoodsList: function (category_id, page, openid ,action=0) {
     var that = this;
     utils.PostRequest(api_v_url + '/shop/goods', {
       category_id: category_id,
