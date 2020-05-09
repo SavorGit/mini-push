@@ -83,7 +83,9 @@ Page({
       SavorUtils.User.isRegister(self); //判断用户是否注册
 
       //商品列表
-      self.getGoodsList(0, 1, app.globalData.openid,1);
+      //self.getGoodsList(0, 1, app.globalData.openid,1);
+      //获取商品分类
+      self.getCategoryList(app.globalData.openid);
     } else {
       app.openidCallback = openid => {
         if (openid != '') {
@@ -91,16 +93,17 @@ Page({
             openid: openid
           });
           SavorUtils.User.isRegister(self); //判断用户是否注册
+          //获取商品分类
+          self.getCategoryList(openid);
           //商品列表
-          self.getGoodsList(0, 1, openid,1);
+          //self.getGoodsList(0, 1, openid,1);
         }
       }
     }
 
     //轮播图
     self.getBannerList();
-    //获取商品分类
-    self.getCategoryList();
+    
 
   },
   isHaveCallBox: function (openid) {
@@ -167,16 +170,19 @@ Page({
     })
   },
   //商品分类
-  getCategoryList: function () {
+  getCategoryList: function (openid) {
     var that = this;
     utils.PostRequest(api_v_url + '/category/categorylist', {}, (data, headers, cookies, errMsg, statusCode) => {
       var category_list = data.result.category_list
       var page_arr = that.data.page_arr;
+      var category_id = category_list[0].id;
       for (var i = 0; i < category_list.length; i++) {
         var id = category_list[i].id;
         page_arr[id] = 1;
       }
+      that.getGoodsList(category_id, 1, openid,1);
       that.setData({
+        category_id:category_id,
         page_arr: page_arr,
         category_list: category_list,
       })
