@@ -137,7 +137,7 @@
 				<view class="body flex-row-center-space_between" bindtap="gotoOrderDetail" data-order_id="{{bean.order_id}}">
 
 					<!--单商品订单-->
-					<block wx:if="{{bea.goods.length==1}}">
+					<block wx:if="{{bean.goods.length==1}}">
 						<view class="left flex-row-center-flex_start">
 							<image class="pic" mode="aspectFill" src="{{bean.goods[0].img}}"></image>
 						</view>
@@ -192,7 +192,7 @@
 				<view class="body flex-row-center-space_between" bindtap="gotoOrderDetail" data-order_id="{{bean.order_id}}">
 
 					<!--单商品订单-->
-					<block wx:if="{{bea.goods.length==1}}">
+					<block wx:if="{{bean.goods.length==1}}">
 						<view class="left flex-row-center-flex_start">
 							<image class="pic" mode="aspectFill" src="{{bean.goods[0].img}}"></image>
 						</view>
