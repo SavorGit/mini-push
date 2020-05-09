@@ -60,7 +60,7 @@
 				<block wx:for="{{specification_goods}}" wx:key="key" wx:for-item="bean" wx:for-index="index">
 					<block wx:if="{{index<3}}">
 						<view class="specs selected" wx:if="{{index==selectAttrIndex}}">{{bean.name}}</view>
-						<view class="specs theme-button-more" wx:else>{{bean.name}}</view>
+						<view class="specs theme-button-000000-EDF0F2" wx:else>{{bean.name}}</view>
 					</block>
 				</block>
 			</view>
@@ -196,7 +196,7 @@
 					<view class="specs-group">
 						<block wx:for="{{bean.attrs}}" wx:key="kk" wx:for-item="item" wx:for-index="idx">
 							<view class="specs selected" wx:if="{{item.is_select==1 && item.is_disable==0}}">{{item.name}}</view>
-							<view class="specs theme-button-more" wx:if="{{item.is_select==0 && item.is_disable==0}}" bindtap="selectModel" data-index="{{index}}" data-idx="{{idx}}">{{item.name}}</view>
+							<view class="specs theme-button-000000-EDF0F2" wx:if="{{item.is_select==0 && item.is_disable==0}}" bindtap="selectModel" data-index="{{index}}" data-idx="{{idx}}">{{item.name}}</view>
 							<view class="specs theme-button-none" wx:if="{{item.is_disable==1}}">{{item.name}}</view>
 						</block>
 					</view>

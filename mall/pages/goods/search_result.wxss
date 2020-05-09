@@ -180,6 +180,7 @@
   z-index: 11;
   position: absolute;
   bottom: 0;
+  border-radius: 20rpx 20rpx 0 0;
 }
 
 .buy-goods-window>.top {
@@ -194,6 +195,7 @@
   height: 156rpx;
   border: 3rpx solid #FFFFFF;
   margin-top: -50rpx;
+  border-radius: 5rpx;
 }
 
 .buy-goods-window>.top>.center {

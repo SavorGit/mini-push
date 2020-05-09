@@ -18,7 +18,7 @@ checkbox .wx-checkbox-input.wx-checkbox-input-checked {
 }
 
 checkbox .wx-checkbox-input.wx-checkbox-input-checked::before {
-  color: #fff;
+  color: #FFFFFF;
 }
 
 button[disabled] {
@@ -37,7 +37,7 @@ button[disabled] {
 }
 
 .theme2 {
-  background-color: #000;
+  background-color: #000000;
 }
 
 .theme3 {
@@ -57,103 +57,108 @@ button[disabled] {
 }
 
 .theme7 {
-  background-color: #fff;
+  background-color: #FFFFFF;
 }
 
 .theme-bg-FFFFFF {
-  background-color: #fff;
+  background-color: #FFFFFF;
 }
 
 .theme8 {
-  color: #333;
-  background-color: #999;
+  color: #333333;
+  background-color: #999999;
 }
 
 /* ----------------------- */
 
 .theme-wxAuthLogin-container {
-  color: #333;
-  background-color: #fff;
+  color: #333333;
+  background-color: #FFFFFF;
 }
 
 .theme-container {
-  color: #666;
+  color: #666666;
   background-color: #f5f6f8;
 }
 
 .theme-remote-control {
-  color: #fff;
+  color: #FFFFFF;
   background-color: #1cbeb6;
 }
 
 .theme-panel {
-  color: #333;
-  background-color: #fff;
+  color: #333333;
+  background-color: #FFFFFF;
 }
 
 .theme-panel-dark {
-  color: #fff;
-  background-color: #333;
+  color: #FFFFFF;
+  background-color: #333333;
 }
 
 .theme-panel-pop-menu-dark {
-  color: #fff;
-  background-color: #666;
+  color: #FFFFFF;
+  background-color: #666666;
 }
 
 .theme-panel-2 {
-  color: #fff;
-  background-color: #edf0f2;
+  color: #FFFFFF;
+  background-color: #EDF0F2;
 }
 
 .theme-navigation {
-  color: #333;
-  background-color: #fff;
+  color: #333333;
+  background-color: #FFFFFF;
 }
 
 .theme-button {
-  color: #fff;
+  color: #FFFFFF;
   background-color: #1cbeb6;
 }
 
 .theme-button-dark {
-  color: #fff;
-  background-color: #333;
+  color: #FFFFFF;
+  background-color: #333333;
 }
 
 .theme-button-white {
-  color: #333;
-  background-color: #fff;
+  color: #333333;
+  background-color: #FFFFFF;
+}
+
+.theme-button-000000-EDF0F2 {
+  color: #333333;
+  background-color: #EDF0F2;
 }
 
 .theme-button-buy,
 .theme-button-like,
 .theme-button-red,
 .theme-rad-panel {
-  color: #fff;
+  color: #FFFFFF;
   background-color: #F44444;
 }
 
 .theme-button-orange {
-  color: #fff;
+  color: #FFFFFF;
   background-color: #F68855;
 }
 
 .theme-button-welcome,
 .broadcast-panel {
-  color: #fff;
+  color: #FFFFFF;
   background-color: #a18668;
 }
 
 .theme-button-welcome-dark,
 .theme-panel-welcome-dark {
-  color: #fff;
+  color: #FFFFFF;
   background-color: #58525c;
 }
 
 .theme-button-unlike {
-  color: #fff;
-  background-color: #999;
+  color: #FFFFFF;
+  background-color: #999999;
 }
 
 .theme-button-disable {
@@ -172,8 +177,8 @@ button[disabled] {
 }
 
 .theme-textarea {
-  color: #333;
-  background-color: #edf0f2;
+  color: #333333;
+  background-color: #EDF0F2;
 }
 
 .theme-menu {
@@ -181,23 +186,23 @@ button[disabled] {
 }
 
 .theme-button2 {
-  color: #fff;
+  color: #FFFFFF;
   background-color: #25635f;
 }
 
 .theme-button3 {
-  color: #fff;
+  color: #FFFFFF;
   background-color: #0e1c29;
 }
 
 .theme-button4 {
-  color: #fff;
+  color: #FFFFFF;
   background-color: #05101a;
 }
 
 .theme-button5 {
-  color: #fff;
-  background-color: #999;
+  color: #FFFFFF;
+  background-color: #999999;
 }
 
 .theme-font {
@@ -205,19 +210,19 @@ button[disabled] {
 }
 
 .theme-font1 {
-  color: #333;
+  color: #333333;
 }
 
 .theme-font2 {
-  color: #666;
+  color: #666666;
 }
 
 .theme-font3 {
-  color: #999;
+  color: #999999;
 }
 
 .theme-font4 {
-  color: #fff;
+  color: #FFFFFF;
 }
 
 .theme-font5 {
@@ -225,7 +230,7 @@ button[disabled] {
 }
 
 .theme-font6 {
-  color: #111;
+  color: #111111;
 }
 
 .theme-font7 {
@@ -237,121 +242,121 @@ button[disabled] {
 }
 
 .theme-font-FFFFFF {
-  color: #fff;
+  color: #FFFFFF;
 }
 
 .theme-font-000000 {
-  color: #000;
+  color: #000000;
 }
 
 .theme-font-666666 {
-  color: #666;
+  color: #666666;
 }
 
 .theme-font-999999 {
-  color: #999;
+  color: #999999;
 }
 
 /* ================================== 文字 ================================== */
 
 .font_333333_20 {
   font-size: 20rpx;
-  color: #333;
+  color: #333333;
 }
 
 .font_333333_22 {
   font-size: 22rpx;
-  color: #333;
+  color: #333333;
 }
 
 .font_333333_24 {
   font-size: 24rpx;
-  color: #333;
+  color: #333333;
 }
 
 .font_333333_26 {
   font-size: 26rpx;
-  color: #333;
+  color: #333333;
 }
 
 .font_333333_28 {
   font-size: 28rpx;
-  color: #333;
+  color: #333333;
 }
 
 .font_333333_30 {
   font-size: 30rpx;
-  color: #333;
+  color: #333333;
 }
 
 .font_333333_32 {
   font-size: 32rpx;
-  color: #333;
+  color: #333333;
 }
 
 .font_333333_34 {
   font-size: 34rpx;
-  color: #333;
+  color: #333333;
 }
 
 .font_333333_36 {
   font-size: 36rpx;
-  color: #333;
+  color: #333333;
 }
 
 .font_666666_20 {
   font-size: 20rpx;
-  color: #666;
+  color: #666666;
 }
 
 .font_666666_24 {
   font-size: 24rpx;
-  color: #666;
+  color: #666666;
 }
 
 .font_666666_26 {
   font-size: 26rpx;
-  color: #666;
+  color: #666666;
 }
 
 .font_666666_28 {
   font-size: 28rpx;
-  color: #666;
+  color: #666666;
 }
 
 .font_666666_30 {
   font-size: 30rpx;
-  color: #666;
+  color: #666666;
 }
 
 .font_999999_24 {
   font-size: 24rpx;
-  color: #999;
+  color: #999999;
 }
 
 .font_999999_26 {
   font-size: 26rpx;
-  color: #999;
+  color: #999999;
 }
 
 .font_999999_28 {
   font-size: 28rpx;
-  color: #999;
+  color: #999999;
 }
 
 .font_999999_30 {
   font-size: 30rpx;
-  color: #999;
+  color: #999999;
 }
 
 .font_999999_34 {
   font-size: 34rpx;
-  color: #999;
+  color: #999999;
 }
 
 .font_999999_36 {
   font-size: 36rpx;
-  color: #999;
+  color: #999999;
 }
 
 .font_F6F6F6_34 {
@@ -391,37 +396,37 @@ button[disabled] {
 
 .font_FFFFFF_24 {
   font-size: 24rpx;
-  color: #fff;
+  color: #FFFFFF;
 }
 
 .font_FFFFFF_26 {
   font-size: 26rpx;
-  color: #fff;
+  color: #FFFFFF;
 }
 
 .font_FFFFFF_28 {
   font-size: 28rpx;
-  color: #fff;
+  color: #FFFFFF;
 }
 
 .font_FFFFFF_30 {
   font-size: 30rpx;
-  color: #fff;
+  color: #FFFFFF;
 }
 
 .font_FFFFFF_32 {
   font-size: 32rpx;
-  color: #fff;
+  color: #FFFFFF;
 }
 
 .font_FFFFFF_34 {
   font-size: 34rpx;
-  color: #fff;
+  color: #FFFFFF;
 }
 
 .font_FFFFFF_36 {
   font-size: 36rpx;
-  color: #fff;
+  color: #FFFFFF;
 }
 
 .font_1CBEB6_34 {
