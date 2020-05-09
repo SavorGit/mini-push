@@ -17,8 +17,9 @@
 				<input confirm-type="search" class="search theme-font3" placeholder="搜索商品" value="{{keywords}}" bindinput="inputSearch" bindconfirm="searchGoods"></input>
 			</view>
 			<view class="shopping-cart flex-column-flex_start-flex_start" bindtap="gotoMallCart">
-				<view class="fa fa-shopping-cart" aria-hidden="true"></view>
-				<view wx:if="{{mall_cart_nums>0}}" class="marker">{{mall_cart_nums}}</view>
+				<!-- <view class="btn fa fa-shopping-cart" aria-hidden="true"></view> -->
+				<image class="btn" src="/images/icon2/111111_cart.png"></image>
+				<view wx:if="{{mall_cart_nums>0}}" class="marker theme-button-red">{{mall_cart_nums}}</view>
 			</view>
 		</view>
 
@@ -43,9 +44,9 @@
 								</view>
 								<view class="right flex-row-center-flex_end">
 									<view class="fa fa-television theme-font" aria-hidden="true" wx:if="{{bean.is_tv==1}}" data-index="{{index}}" data-goods_id="{{bean.id}}" data-name="{{bean.name}}" data-filename='{{bean.filename}}' data-vediourl="{{bean.tx_url}}" data-boxmac="{{box_mac}}" data-openid="{{openid}}" data-duration="{{bean.duration}}" data-hotel_info="{{hotel_info}}" data-forscreen_url="{{bean.forscreen_url}}" data-resource_size="{{bean.resource_size}}" data-filename="{{bean.filename}}" data-tx_url="{{bean.tx_url}}" bindtap='boxShow'></view>
-									<view class="fa fa-sign-in theme-font5" aria-hidden="true" bindtap="gotoDetail" data-goods_id="{{bean.id}}" data-box_mac="{{box_mac}}" data-type="{{bean.type}}" wx:if="{{bean.type==10}}"></view>
-
-									<view wx:else class="fa fa-cart-plus theme-font5" aria-hidden="true" bindtap="openBuyGoodsPopWindow" data-goods_info="{{bean}}" data-goods_id="{{bean.id}}"></view>
+									<view wx:if="{{bean.type==10}}" class="btn fa fa-sign-in theme-font5" aria-hidden="true" bindtap="gotoDetail" data-goods_id="{{bean.id}}" data-box_mac="{{box_mac}}" data-type="{{bean.type}}"></view>
+									<!-- <view wx:else class="btn fa fa-cart-plus theme-font5" aria-hidden="true" bindtap="openBuyGoodsPopWindow" data-goods_info="{{bean}}" data-goods_id="{{bean.id}}"></view> -->
+									<image wx:else class="btn" aria-hidden="true" bindtap="openBuyGoodsPopWindow" data-goods_info="{{bean}}" data-goods_id="{{bean.id}}" src="/images/icon2/F44444_cart.png"></image>
 								</view>
 							</view>
 						</view>

@@ -86,7 +86,7 @@
   background-color: unset;
 }
 
-.page-bottom>.left>.btn>.fa {
+.page-bottom>.left>.btn>.btn {
   width: 40rpx;
   height: 40rpx;
   line-height: 40rpx;
@@ -137,6 +137,7 @@
 .goods-smple-info {
   width: 100%;
   /* height: 590rpx; */
+  border-radius: 0 0 20rpx 20rpx;
 }
 
 .goods-smple-info>.top,
@@ -221,6 +222,7 @@
   width: calc(100% - 70rpx);
   padding: 20rpx 40rpx 20rpx 30rpx;
   margin-top: 10rpx;
+  border-radius: 20rpx;
 }
 
 /* ===================================== 公告面板 ===================================== */
@@ -403,6 +405,7 @@
 .information-panel {
   width: 100%;
   margin-top: 10rpx;
+  border-radius: 20rpx;
 }
 
 .information-panel>.title-bar {

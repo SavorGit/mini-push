@@ -45,7 +45,7 @@
   height: 50rpx;
 }
 
-.search-panel>.shopping-cart>.fa {
+.search-panel>.shopping-cart>.btn {
   width: 50rpx;
   height: 50rpx;
   line-height: 50rpx;
@@ -61,8 +61,8 @@
   padding: 0 5rpx;
   font-size: 16rpx;
   border-radius: 5rpx;
-  color: #F44444;
-  border: 3rpx solid #EF485B;
+  /* color: #F44444;
+  border: 3rpx solid #EF485B; */
 }
 
 .main-panel {
@@ -132,6 +132,7 @@
 
 .main-panel>.body .list>.item>.bottom>.bottom>.left>.price {
   font-size: 28rpx;
+  font-weight: bold;
 }
 
 .main-panel>.body .list>.item>.bottom>.bottom>.left>.price>text {
@@ -144,12 +145,18 @@
   text-decoration: line-through;
 }
 
-.main-panel>.body .list>.item>.bottom>.bottom>.right>.fa {
-  width: 40rpx;
-  height: 40rpx;
-  line-height: 40rpx;
+.main-panel>.body .list>.item>.bottom>.bottom>.right>.btn {
+  width: 34rpx;
+  height: 34rpx;
+  line-height: 34rpx;
   text-align: center;
   font-size: 40rpx;
+}
+
+.main-panel>.body .list>.item>.bottom>.bottom>.right>image.btn {
+  padding: 8rpx;
+  border: 3rpx solid #F44444;
+  border-radius: 50%;
 }
 
 .main-panel>.body .list>.item>.bottom>.bottom>.right>.fa-television {
