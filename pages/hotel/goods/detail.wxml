@@ -22,7 +22,7 @@
 					</swiper-item>
 				</swiper>
 			</view>
-			<view class="bottom flex-row-center-space_between">
+			<view class="bottom flex-row-flex_start-space_between">
 				<view class="left flex-column-flex_start-space_between">
 					<view class="name two-line-overflow">{{goods_info.name}}</view>
 					<view class="bottom flex-row-flex_end-flex_start">
@@ -96,8 +96,9 @@
 						<view class="bottom flex-column-flex_start-space_between">
 							<view class="name two-line-overflow">{{bean.name}}</view>
 							<view class="bottom flex-row-center-space_between">
-								<view class="price theme-font5 one-line-overflow">￥{{bean.price}}</view>
-								<view class="btn fa fa-cart-plus theme-font5" aria-hidden="true" bindtap="openBuyGoodsPopWindow" data-action='1' data-is_self="2" data-goods_info="{{bean}}"></view>
+								<view class="price theme-font1 one-line-overflow">￥{{bean.price}}</view>
+								<!-- <view class="btn fa fa-cart-plus theme-font5" aria-hidden="true" bindtap="openBuyGoodsPopWindow" data-action='1' data-is_self="2" data-goods_info="{{bean}}"></view> -->
+								<!-- <image class="btn" aria-hidden="true" bindtap="openBuyGoodsPopWindow" data-action='1' data-is_self="2" data-goods_info="{{bean}}" src="/images/icon2/F44444_cart.png"></image> -->
 							</view>
 						</view>
 					</view>

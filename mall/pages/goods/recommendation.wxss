@@ -124,6 +124,17 @@
   border-radius: 50%;
 }
 
+.main-panel>.body .list>.item>.bottom>.bottom>.right>.btn {
+  width: 34rpx;
+  height: 34rpx;
+  border: 3rpx solid #F44444;
+  border-radius: 50%;
+}
+
+.main-panel>.body .list>.item>.bottom>.bottom>.right>image.btn {
+  padding: 8rpx;
+}
+
 .main-panel>.body .list>.item:last-child {
   margin-bottom: 120rpx;
 }

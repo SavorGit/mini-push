@@ -56,7 +56,7 @@
 .search-panel>.shopping-cart>.marker {
   height: 20rpx;
   line-height: 20rpx;
-  margin-left: 35rpx;
+  margin-left: 40rpx;
   margin-top: -50rpx;
   padding: 0 5rpx;
   font-size: 16rpx;

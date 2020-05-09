@@ -25,7 +25,8 @@
 									<view class="price market theme-font3" wx:if="{{bean.line_price>0}}">￥{{bean.line_price}}</view>
 								</view>
 								<view class="right flex-row-center-flex_end" bindtap="openBuyGoodsPopWindow" data-goods_info="{{bean}}" data-type="2" data-goods_id="{{bean.id}}">
-									<view class="fa fa-cart-plus theme-font5" aria-hidden="true"></view>
+									<!-- <view class="fa fa-cart-plus theme-font5" aria-hidden="true"></view> -->
+									<image class="btn" aria-hidden="true" src="/images/icon2/F44444_cart.png"></image>
 								</view>
 							</view>
 						</view>
