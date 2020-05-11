@@ -1,7 +1,6 @@
 {
+  "enablePullDownRefresh": true,
   "usingComponents": {
     "modal": "/components/modal/modal"
-  },
-  "enablePullDownRefresh": false,
-  "disableScroll": true
+  }
 }

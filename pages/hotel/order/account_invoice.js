@@ -70,7 +70,7 @@ Page({
     var bill_info = {};
     var tab = this.data.tab;
     var title = e.detail.value.title.replace(/\s+/g, '');
-    
+    var email = e.detail.value.email.replace(/\s+/g,'');
     
     if (tab =='company'){
       var type = 0;
@@ -78,11 +78,12 @@ Page({
         app.showToast('请输入企业名称')
         return false;
       }
+      var taxNumber = e.detail.value.taxNumber.replace(/\s+/g, '');
+
       if(taxNumber==''){
         app.showToast('请输入企业税号');
         return false;
       }
-      var taxNumber = e.detail.value.taxNumber.replace(/\s+/g, '');
       bill_info.title =  title;
       bill_info.taxNumber = taxNumber;
       bill_info.type= 0;
@@ -96,6 +97,17 @@ Page({
       bill_info.taxNumber = '';
       bill_info.type = 1;
     }
+    if(email==''){
+      app.showToast('请输入邮箱');
+      return false;
+    }else {
+      var reg = /^([a-zA-Z]|[0-9])(\w|\-|\.)+@[a-zA-Z0-9]+\.([a-zA-Z]{2,4})$/;
+      if(!reg.test(email)){
+        app.showToast('请输入正确的邮箱');
+        return false;
+      }
+    }
+    bill_info.email = email;
     bill_info = JSON.stringify(bill_info);
     wx.setStorageSync(cache_key+'order:bill', bill_info);
 

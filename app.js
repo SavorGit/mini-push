@@ -1145,6 +1145,17 @@ App({
       mask: mask,
     })
   },
+  /**
+   * 拨打订餐电话
+   */
+  phonecallevent: function (tel) {
+    wx.makePhoneCall({
+      phoneNumber: tel,
+      success:function(e){
+      },fail:function(e){
+      }
+    })
+  },
   globalData: {
     openid: '',
     session_key: '',
@@ -1156,6 +1167,7 @@ App({
     jijian_appid: 'wx7883a4327329a67c',
     jd_appid: 'wx91d27dbf599dff74',
     api_url: 'https://mobile.littlehotspot.com',
+    api_v_url:'https://mobile.littlehotspot.com/Smallapp44',
     oss_upload_url: 'https://image.littlehotspot.com',
     netty_url: 'https://netty-push.littlehotspot.com',
     oss_url: 'https://oss.littlehotspot.com',

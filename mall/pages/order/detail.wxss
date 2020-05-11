@@ -1,0 +1,209 @@
+/* mall/pages/order/detail.wxss */
+/**
+ * 【商城】订单详情页面
+ */
+
+
+.page-wapper {
+  width: 100%;
+  padding-top: 10rpx;
+  padding-bottom: 30rpx;
+}
+
+.input-panel {
+  width: 100%;
+  margin-top: 10rpx;
+  padding: 10rpx 0;
+}
+
+.input-panel>view {
+  width: calc(100% - 120rpx);
+  padding: 0 60rpx;
+}
+
+.input-panel>.head {
+  width: calc(100% - 60rpx);
+  height: 70rpx;
+  padding: 0 30rpx;
+  line-height: 80rpx;
+  font-size: 32rpx;
+}
+
+.input-panel>.body>.row {
+  width: 100%;
+  height: 70rpx;
+}
+
+.input-panel>.body>.row>.lable {
+  width: 150rpx;
+  font-size: 28rpx;
+}
+
+.input-panel>.body>.row>.view {
+  width: calc(100% - 150rpx);
+  font-size: 28rpx;
+}
+
+.input-panel>.body>.row>.view>.tip {
+  font-size: 28rpx;
+}
+
+.input-panel>.body>.row>.view>.btn {
+  font-size: 32rpx;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: unset;
+}
+
+.status-panel>.head>.status {
+  font-size: 32rpx;
+}
+
+.status-panel>.head>.distance {
+  width: 300rpx;
+  font-size: 24rpx;
+}
+
+.status-panel>.head>.distance>.content {
+  width: calc(100% - 60rpx);
+}
+
+.status-panel>.head>.distance>.btn {
+  width: 60rpx;
+  height: 60rpx;
+  line-height: 60rpx;
+  text-align: center;
+  font-size: 36rpx;
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+.status-panel>.body {
+  width: 100%;
+  padding: 0;
+}
+
+.status-panel>.body>map {
+  width: 100%;
+  height: 400rpx;
+}
+
+.status-panel>.body>.btn {
+  width: 100%;
+  height: 80rpx;
+  line-height: 80rpx;
+  text-align: center;
+  font-size: 32rpx;
+  border-radius: 0;
+}
+
+.status-panel>.body>.tip {
+  width: 100%;
+  height: 80rpx;
+  line-height: 80rpx;
+  text-align: center;
+  font-size: 32rpx;
+  font-weight: bold;
+}
+
+.goods-info>.head>.btn {
+  width: 160rpx;
+  height: 50rpx;
+  line-height: 50rpx;
+  text-align: center;
+  border-radius: 5rpx;
+  font-size: 28rpx;
+  padding: 0;
+  margin: 0;
+  border: 0;
+}
+
+.goods-info>.body {
+  width: calc(100% - 80rpx);
+  padding: 0 40rpx;
+  border-top: 1px solid #ededed;
+  border-bottom: 1px solid #ededed;
+}
+
+.goods-info>.body>.hotel {
+  width: 100%;
+  height: 70rpx;
+  padding-top: 25rpx;
+  padding-bottom: 20rpx;
+  border-bottom: 3rpx dashed #ededed;
+}
+
+.goods-info>.body>.hotel>.pic {
+  width: 70rpx;
+  height: 70rpx;
+  border-radius: 8rpx;
+}
+
+.goods-info>.body>.hotel>.name {
+  width: calc(100% - 100rpx);
+  font-size: 24rpx;
+}
+
+.goods-info>.body>.row {
+  width: 100%;
+  height: 200rpx;
+}
+
+.goods-info>.body>.row>.pic {
+  width: 160rpx;
+  height: 160rpx;
+  border-radius: 10rpx;
+}
+
+.goods-info>.body>.row>.center {
+  width: calc(100% - 320rpx);
+  height: 160rpx;
+  font-size: 32rpx;
+  padding: 0 15rpx;
+}
+
+.goods-info>.body>.row>.center>view {
+  width: 100%;
+}
+
+.goods-info>.body>.row>.center>.bottom {
+  margin-top: 30rpx;
+}
+
+.goods-info>.body>.row>.center>.bottom>.specs {
+  height: 30rpx;
+  line-height: 30rpx;
+  padding: 5rpx 15rpx;
+  font-size: 20rpx;
+  border-radius: 20rpx;
+}
+
+.goods-info>.body>.row>.center>.bottom>.price {
+  margin-left: 10rpx;
+}
+
+.goods-info>.body>.row>.right {
+  width: 130rpx;
+}
+
+.goods-info>.body>.row>.right>.price {
+  font-size: 28rpx;
+}
+
+.goods-info>.body>.row>.right>.count {
+  font-size: 32rpx;
+}
+
+.goods-info>.foot {
+  height: 60rpx;
+  line-height: 60rpx;
+  font-size: 24rpx;
+}
+
+.goods-info>.foot>view:last-child {
+  font-size: 32rpx;
+  font-weight: bold;
+}

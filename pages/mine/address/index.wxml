@@ -57,3 +57,6 @@
 <modal show="{{showDeleteConfirmPopWindow}}" width="450rpx" height='300rpx' background-color='unset' border-radius="10rpx" title-text='删除确认' title-color="#333333" title-background-color="#FFFFFF" title-border-radius="10rpx 10rpx 0 0" confirm-text='确定' confirm-color="#FFFFFF" confirm-background-color="#1cbeb6" confirm-border-radius="0 0 10rpx 0" cancel-text='取消' cancel-color='#FFFFFF' cancel-background-color="#BEBEBE" cancel-border-radius="0 0 0 10rpx" bindcancel="modalCancel" bindconfirm='modalConfirm'>
 	<view class="theme-panel" style="width:calc(100% - 100rpx);height:100%;padding:0 50rpx;font-size:28rpx;">确定要删除该收货地址吗？</view>
 </modal>
+
+<!-- 微信授权登录 -->
+<template is="wxAuthLoginOp" data='{{showOp: showModal}}' />

@@ -398,10 +398,16 @@ Page({
    * 我的订单
    */
   gotoOrder:function(e){
-    console.log(e);
+    
     var  openid = this.data.openid;
+    var type = e.currentTarget.dataset.type;
+    if(type==3){
+      var url = '/pages/hotel/order/index?openid=' + openid + "&order_status=0";
+    }else if(type==5){
+      var url = '/mall/pages/order/list?openid=' + openid + "&order_status=0";
+    }
     wx.navigateTo({
-      url: '/pages/hotel/order/index?openid=' + openid +"&order_status=0",
+      url: url,
     })
   },
   /**

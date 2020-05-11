@@ -1,0 +1,106 @@
+<!--mall/pages/goods/shopping_cart.wxml-->
+<!--
+ | 【商城】购物车页面
+ |-->
+
+
+<import src="/pages/template/commons" />
+<template is="navigationBarForTwoLevel" data='{{statusBarHeight: statusBarHeight,titleText:"购物车"}}' />
+
+<view class='container flex-column-center-flex_start theme-container' style='height: calc(100vh - 46px - {{statusBarHeight + SystemInfo.screenBottomSpace}}px);'>
+	<scroll-view class='scroll-view' scroll-y="true" scroll-with-animation="true">
+		<view class="panel-list">
+			<view class="panel shop theme-panel" wx:for="{{goods_online_list}}" wx:for-item="bean" wx:key="key" wx:for-index="index">
+				<view class="title-bar flex-row-center-space_between">
+					<checkbox-group bindchange='selectMerchant' data-index="{{index}}">
+						<checkbox value="{{index}}" checked="{{bean.ischecked}}">
+							<view class="flex-row-center-flex_start">
+								<view class="fa fa-shopping-basket" aria-hidden="true"></view>
+								<view class="name one-line-overflow">{{bean.name}}</view>
+							</view>
+						</checkbox>
+					</checkbox-group>
+				</view>
+				<view class="goods-list">
+					<block wx:for="{{bean.goods}}" wx:for-item="item" wx:key="kk" wx:for-index="idx">
+						<view class="item flex-row-center-flex_start {{list[item.flag].isTouchMove?'touch-move-active':'touch-move-unactive'}}" data-index="{{item.flag}}" bindtouchstart="touchstart" bindtouchmove="touchmove">
+							<view class="goods flex-row-center-space_between">
+								<checkbox-group bindchange='selectGoods' data-index="{{index}}" data-keys="{{idx}}" data-goods_id="{{item.id}}">
+									<checkbox class="checkbox" value="{{item.id}}" checked="{{item.ischecked}}"></checkbox>
+								</checkbox-group>
+								<image bindtap="gotoGoodsDetail" data-goods_id="{{item.id}}" class="pic" mode="aspectFill" src="{{item.img_url}}"></image>
+								<view class="right flex-column-flex_start-space_between">
+									<block bindtap="gotoGoodsDetail" data-goods_id="{{item.id}}">
+										<view class="name two-line-overflow">{{item.name}}</view>
+										<view class="middle flex-row-center-flex_start">
+											<view class="specs theme-button-more" wx:if="{{item.gtype==2}}">{{item.attr_name}}</view>
+											<view class="stock one-line-overflow theme-font3">剩余{{item.stock_num}}件</view>
+											<view class="tip theme-font5" wx:if="{{item.localsale_str!=''}}">{{item.localsale_str}}</view>
+										</view>
+									</block>
+									<view class="bottom flex-row-center-space_between">
+										<view class="price theme-font5">￥{{item.price}}</view>
+										<view class="count flex-row-center-flex_end">
+											<view class="btn" bindtap="cutNum" data-index="{{index}}" data-keys="{{idx}}" data-goods_id="{{item.id}}">-</view>
+											<input value="{{item.amount}}" disabled="true"></input>
+											<view class="btn" bindtap="addNum" data-index="{{index}}" data-keys="{{idx}}" data-goods_id="{{item.id}}">+</view>
+										</view>
+									</view>
+								</view>
+							</view>
+							<view class="btn del theme-button-red" bindtap="delCartGoods" data-goods_id="{{item.id}}">删除</view>
+						</view>
+					</block>
+
+				</view>
+			</view>
+
+
+			<!-- 已经下架商品 -->
+			<view class="panel shop theme-panel" wx:if="{{goods_offline_list.length>0}}">
+				<view class="title-bar flex-row-center-space_between">
+					<view class="name one-line-overflow">已下架商品</view>
+					<view class="btn flex-row-center-center" bindtap="clearOffLineGoods">
+						<view class="fa fa-trash-o theme-font5" aria-hidden="true"></view>
+						<view class="content theme-font5"> 清空</view>
+					</view>
+				</view>
+				<view class="goods-list">
+					<view class="item flex-row-center-flex_start touch-move-unactive" wx:for="{{goods_offline_list}}" wx:for-item="bean" wx:key="key" wx:for-index="index">
+						<view class="goods flex-row-center-space_between">
+							<view class="checkbox"></view>
+							<image class="pic" mode="aspectFill" src="{{bean.img_url}}"></image>
+							<view class="right flex-column-flex_start-space_between">
+								<view class="name two-line-overflow theme-font3">{{bean.name}}</view>
+								<view class="middle flex-row-center-flex_start">
+									<view class="specs theme-button-more" wx:if="{{bean.gtype==2}}">{{bean.attr_name}}</view>
+									<view class="stock one-line-overflow theme-font3">剩余{{bean.stock_num}}件</view>
+									<view class="tip theme-font5" wx:if="{{bean.localsale_str!=''}}">{{bean.localsale_str}}</view>
+								</view>
+								<view class="bottom flex-row-center-space_between">
+									<view class="price theme-font5">￥{{bean.price}}</view>
+								</view>
+							</view>
+						</view>
+						<!-- <view class="btn del theme-button-red" bindtap="">删除</view> -->
+					</view>
+
+				</view>
+			</view>
+		</view>
+	</scroll-view>
+	<view class="page-bottom flex-row-center-space_between theme-panel">
+		<view class="left flex-row-center-flex_end">
+			<checkbox-group bindchange="selectAll">
+				<checkbox value='1' checked="{{is_checked_all}}">全选</checkbox>
+			</checkbox-group>
+		</view>
+		<view class="center flex-row-center-flex_end">
+			<view class="price-label">合计：</view>
+			<view class="price-value theme-font5">￥{{total_fee}}</view>
+		</view>
+		<view class="right flex-row-center-flex_end" bindtap="confirmOrder">
+			<view class="btn theme-button-red">提交订单</view>
+		</view>
+	</view>
+</view>

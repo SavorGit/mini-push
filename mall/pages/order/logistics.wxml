@@ -1,0 +1,102 @@
+<!--mall/pages/order/logistics.wxml-->
+<!--
+ | 物流详情页面
+ |-->
+
+
+<import src="/pages/template/commons" />
+<template is="navigationBarForTwoLevel" data='{{statusBarHeight: statusBarHeight,titleText:"物流详情"}}' />
+
+<scroll-view class='container theme-container' style='height: calc(100vh - {{46 + statusBarHeight + SystemInfo.screenBottomSpace}}px);' scroll-y="true" scroll-with-animation="true">
+	<!-- 物流信息 -->
+	<!-- 外层pages -->
+	<view class='pages'>
+		<block wx:if="{{express_info.state!=''}}">
+			<!-- 头部[详细] 
+      <view class='head flex-row-center-space_between'>
+        <image class='head_img' mode="aspectFill" src='https://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg'></image>
+        <view class='tabulate flex-column-flex_start-space_between'>
+          <label class='head_name theme-font2'>物流状态：<text class="theme-font1">在途</text> </label>
+          <label class='head_title theme-font2'>物流公司：<text class="theme-font1">圆通</text></label>
+          <label class='head_tel_name theme-font2'>快递单号: <text class="theme-font1">V030344422</text></label>
+        </view>
+      </view>
+      -->
+			<!-- 头部[简约] -->
+			<view class='head flex-row-center-center'>
+				<view class="simple-icon fa fa-truck" aria-hidden="true"></view>
+				<view class="simple-title">{{express_info.company}}</view>
+				<view class="simple-title-no">{{express_info.enum}}</view>
+			</view>
+			<!-- 追踪 -->
+			<view class="body flex-column-center-flex_start">
+				<block wx:for="{{expres_list}}" wx:for-item="bean" wx:key="key" wx:for-index="index">
+					<view class='logisit flex-row-stretch-flex_start' wx:if="{{index==0}}">
+						<!-- 左边子容器 -->
+						<view class="express-left flex-column-center-center">
+							<view class="date">2012-08-28</view>
+							<view class="time">16:33:19</view>
+						</view>
+						<!-- 显示顶部收的圆点 -->
+						<view class='express-middle-axis flex-column-center-flex_start'>
+							<view class='dot-shou flex-column-center-center'>
+								<!-- 签收后不显示下面这行 -->
+								<view class="max-dot dot-warn"></view>
+							</view>
+							<view class='online-top-closing'></view>
+						</view>
+						<!-- 右边子容器 -->
+						<view class='express-right'>
+							<view class="express-logistics-status theme-font1">{{bean.status}}</view>
+							<view class='express-status-address theme-font1'>{{bean.context}}</view>
+							<view class='express-statusing theme-font1'>{{bean.time}}</view>
+						</view>
+					</view>
+
+					<view class='logisit flex-row-stretch-flex_start' wx:if="{{index !=0 && express_list.length!=index+1}}">
+						<!-- 左边子容器 -->
+						<view class="express-left flex-column-center-center">
+							<view class="date">08-27</view>
+							<view class="time">23:22</view>
+						</view>
+						<!-- 显示顶部收的圆点 -->
+						<view class='express-middle-axis flex-column-center-flex_start'>
+							<view class='fa fa-angle-up dot-closing' aria-hidden="true"></view>
+							<view class='online-top-closing'></view>
+						</view>
+						<!-- 右边子容器 -->
+						<view class='express-right'>
+							<view class="express-logistics-status theme-font1">{{bean.status}}</view>
+							<view class='express-status-address theme-font3'>{{bean.context}}</view>
+							<view class='express-statusing theme-font3'>{{bean.time}}</view>
+						</view>
+					</view>
+
+					<view class='logisit flex-row-stretch-flex_start' wx:if="{{index!=0 &&  expres_list.length==index+1 }}">
+						<!-- 左边子容器 -->
+						<view class="express-left flex-column-center-center">
+							<view class="date">2012-08-27</view>
+							<view class="time">23:22:42</view>
+						</view>
+						<!-- 显示顶部收的圆点 -->
+						<view class='express-middle-axis flex-column-center-flex_start'>
+							<view class='dot-closing_two'></view>
+						</view>
+						<!-- 右边子容器 -->
+						<view class='express-right'>
+							<view class="express-logistics-status theme-font1">{{bean.status}}</view>
+							<view class='express-status-address theme-font3'>{{bean.context}}</view>
+							<view class='express-statusing theme-font3'>{{bean.time}}</view>
+						</view>
+					</view>
+				</block>
+			</view>
+		</block>
+
+		<!-- 无物流信息 -->
+		<view wx:else class='buttom'>
+			<text>暂时没有物流信息,请稍后再来~</text>
+		</view>
+
+	</view>
+</scroll-view>

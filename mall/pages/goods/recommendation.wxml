@@ -1,0 +1,88 @@
+<!--mall/pages/goods/recommendation.wxml-->
+<!--
+ | 【商城】商品推荐页面
+ |-->
+
+
+<import src="/pages/template/commons" />
+<template is="navigationBarForTwoLevel" data='{{statusBarHeight: statusBarHeight,titleText:"商品推荐"}}' />
+
+<scroll-view class='container theme-container' style='height: calc(100vh - 46px - {{statusBarHeight + SystemInfo.screenBottomSpace}}px);' scroll-y="true" scroll-with-animation="true" bindscrolltolower="loadMore">
+	<view class="page flex-column-center-flex_start">
+		<!-- 主面板 -->
+		<view class="main-panel flex-column-center-flex_start">
+			<view class="body flex-column-center-flex_start">
+				<view class="list flex-column-center-flex_start">
+					<view class="item flex-column-center-flex_start theme-panel" wx:for="{{rec_list}}" wx:key="key" wx:for-item="bean" wx:for-index="index">
+						<view class="top flex-column-flex_start-flex_start" bindtap="gotoDetail" data-goods_id="{{bean.id}}">
+							<image class="pic" mode="aspectFill" src="{{bean.img_url}}"></image>
+						</view>
+						<view class="bottom flex-column-flex_start-flex_start">
+							<view class="name two-line-overflow">{{bean.name}}</view>
+							<view class="bottom flex-row-center-space_between">
+								<view class="left flex-row-center-flex_start">
+									<view class="price theme-font5">￥<text>{{bean.price}}</text></view>
+									<view class="price market theme-font3" wx:if="{{bean.line_price>0}}">￥{{bean.line_price}}</view>
+								</view>
+								<view class="right flex-row-center-flex_end" bindtap="openBuyGoodsPopWindow" data-goods_info="{{bean}}" data-type="2" data-goods_id="{{bean.id}}">
+									<!-- <view class="fa fa-cart-plus theme-font5" aria-hidden="true"></view> -->
+									<image class="btn" aria-hidden="true" src="/images/icon2/F44444_cart.png"></image>
+								</view>
+							</view>
+						</view>
+					</view>
+				</view>
+			</view>
+		</view>
+	</view>
+</scroll-view>
+
+<!-- 购买商品弹窗 -->
+<block wx:if="{{showBuyGoodsPopWindow}}">
+	<!-- <view wx:if="{{showBuyGoodsPopWindow}}" class="mask" style="bottom:{{SystemInfo.screenBottomSpace}}px;" bindtap="closeBuyGoodsPopWindow"> -->
+	<view class="mask" bindtap="closeBuyGoodsPopWindow" style="bottom:{{SystemInfo.screenBottomSpace}}px;"></view>
+	<view class="buy-goods-window {{showBuyGoodsPopWindowAnimation?'window-open':'window-close'}} theme-panel" style="bottom:{{SystemInfo.screenBottomSpace}}px;">
+		<view class="top flex-row-flex_end-space_between">
+			<image class="pic" mode="aspectFill" src="{{goods_info.img_url}}" wx:if="{{goods_info.gtype==1}}"></image>
+			<image class="pic" mode="aspectFill" src="{{goods_info.model_img}}" wx:else></image>
+			<view class="center flex-column-flex_start-space_between">
+				<view class="name one-line-overflow">{{goods_info.name}}</view>
+				<view class="price one-line-overflow theme-font5">￥{{goods_info.price}}</view>
+			</view>
+			<view class="right flex-column-center-flex_start">
+				<!-- <view class="btn fa fa-times-circle-o" aria-hidden="true" bindtap="closeBuyGoodsPopWindow"></view> -->
+				<image class="btn" src="/images/icon2/ededed_close.png" bindtap="closeBuyGoodsPopWindow"></image>
+			</view>
+		</view>
+		<scroll-view class="middle flex-column-flex_start-space_between" scroll-y="true" scroll-with-animation="true">
+			<view class="specs-panel" wx:for="{{goods_info.attrs}}" wx:key="key" wx:for-item="bean" wx:for-index="index">
+				<view class="title-bar">
+					<view class="title">{{bean.name}}</view>
+				</view>
+				<view class="body flex-row-center-flex_start">
+					<view class="specs-group">
+						<block wx:for="{{bean.attrs}}" wx:key="kk" wx:for-item="item" wx:for-index="idx">
+							<view class="specs selected" wx:if="{{item.is_select==1 && item.is_disable==0}}">{{item.name}}</view>
+							<view class="specs theme-button-000000-EDF0F2" wx:if="{{item.is_select==0 && item.is_disable==0}}" bindtap="selectModel" data-index="{{index}}" data-idx="{{idx}}">{{item.name}}</view>
+							<view class="specs theme-button-none" wx:if="{{item.is_disable==1}}">{{item.name}}</view>
+						</block>
+					</view>
+				</view>
+			</view>
+			<view class="count flex-row-center-space_between">
+				<view class="label">购买数量：</view>
+				<view class="value flex-row-center-space_between">
+					<view class="btn" bindtap="cutNum">-</view>
+					<input value="{{goods_info.amount}}" disabled="true"></input>
+					<view class="btn" bindtap="addNum">+</view>
+				</view>
+			</view>
+			<view class="stock one-line-overflow theme-font3">剩余{{goods_info.stock_num}}件</view>
+		</scroll-view>
+		<view class="bottom flex-row-center-space_between">
+			<view class="btn theme-button-orange" bindtap="addMallCart">加入购物车</view>
+			<view class="btn theme-button-red" bindtap="buyOne">立即购买</view>
+		</view>
+	</view>
+	<!-- </view> -->
+</block>

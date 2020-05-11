@@ -1,0 +1,112 @@
+<!--mall/pages/order/confirmation.wxml-->
+<!--
+ | 【商城】订单确认页面
+ |-->
+
+
+<import src="/pages/template/commons" />
+<template is="navigationBarForTwoLevel" data='{{statusBarHeight: statusBarHeight,titleText:"确认订单"}}' />
+
+<view class='container theme-container' style='height: calc(100vh - {{46 + statusBarHeight + SystemInfo.screenBottomSpace}}px);'>
+	<form bindsubmit="addMallOrder">
+		<scroll-view class="scroll-view" scroll-y="true" scroll-with-animation="true">
+			<view class="page-wapper" style='height: calc(100vh - 46px - {{statusBarHeight}}px -10rpx);'>
+				<view class="consignee-info input-panel theme-panel" wx:if="{{is_have_default_address==false}}">
+					<view class="body flex-column-center-space_between">
+						<view class="choose-consignee flex-row-center-space_between" bindtap="selectAddress">
+							<view class="label">请选择收货地址</view>
+							<view class="btn flex-row-center-flex_end">
+								<view class="fa fa-angle-right" aria-hidden="true"></view>
+							</view>
+						</view>
+					</view>
+				</view>
+				<view class="consignee-info input-panel theme-panel" wx:else>
+					<view class="head flex-row-center-space_between" bindtap="selectAddress">
+						<view>收货地址</view>
+						<view class="fa fa-angle-right" aria-hidden="true"></view>
+					</view>
+					<view class="body flex-column-center-space_between">
+						<view class="flex-row-center-flex_start">
+							<view class="name">{{address_info.consignee}}</view>
+							<view class="phone">{{address_info.phone}}</view>
+						</view>
+						<view class="address two-line-overflow">{{address_info.address}}</view>
+					</view>
+				</view>
+
+				<view class="goods-info input-panel theme-panel" wx:for="{{order_goods_list}}" wx:key="key" wx:for-item="bean" wx:for-index="index">
+					<view class="head">订单信息</view>
+					<view class="body flex-column-center-space_between">
+						<view class="hotel theme-font7">由{{bean.name}}提供</view>
+						<view class="row flex-row-center-space_between" wx:for="{{bean.goods}}" wx:key="kk" wx:for-item="item" wx:for-index="idx">
+							<image class="pic" mode="aspectFill" src="{{item.img_url}}" bindtap=""></image>
+							<view class="center flex-column-stretch-flex_start" bindtap="">
+								<view class="name two-line-overflow">{{item.name}}</view>
+								<view class="c-bottom flex-row-center-flex_start">
+									<view class="specs theme-button-more" wx:if="{{item.gtype==2}}">{{item.attr_name}}</view>
+								</view>
+							</view>
+							<view class="right flex-column-flex_end-center">
+								<view class="price theme-font5">￥{{item.price}}</view>
+								<view class="count one-line-overflow">X{{item.amount}}</view>
+							</view>
+						</view>
+
+					</view>
+					<view class="foot flex-row-center-space_between">
+						<view class="theme-font2">合计：{{bean.amount}}件商品</view>
+						<view class="theme-font5">￥{{bean.money}}元</view>
+					</view>
+				</view>
+
+
+				<view class="pay input-panel theme-panel">
+					<view class="head">支付方式</view>
+					<radio-group class="body flex-column-center-space_between" bindchange="selectPayType">
+						<view class="row flex-row-center-space_between" wx:for="{{pay_types}}" wx:key="key" wx:for-item="bean" wx:for-index="index">
+							<view class="left flex-row-center-flex_start">
+								<view class="icon fa fa-weixin" aria-hidden="true" wx:if="{{bean.id==10}}"></view>
+								<view class="icon fa fa-universal-access" aria-hidden="true" wx:else></view>
+
+								<view class="label flex-column-flex_start-center">
+									<view class="title">{{bean.name}}</view>
+									<view class="desc theme-font3"></view>
+								</view>
+							</view>
+							<view class="right flex-row-center-space_between">
+								<radio wx:if="{{index==0}}" checked="true" value="{{bean.id}}"></radio>
+								<radio wx:else value="{{bean.id}}"></radio>
+							</view>
+						</view>
+
+					</radio-group>
+				</view>
+				<view class="misc input-panel theme-panel">
+					<view class="body flex-column-center-space_between">
+						<view class="flex-row-center-space_between" bindtap="gotoRemark">
+							<view class="label">订单备注</view>
+							<view class="btn flex-row-center-space_between">
+								<view class="choosed one-line-overflow theme-font3">{{remark_strs?remark_strs:'未填写'}}</view>
+								<view class="fa fa-angle-right" aria-hidden="true"></view>
+							</view>
+						</view>
+						<view class="flex-row-center-space_between" bindtap="gotoInvoice">
+							<view class="label">发票信息</view>
+							<view class="btn flex-row-center-space_between">
+								<view class="choosed one-line-overflow theme-font3" wx:if="{{bill_info.title!=''}}">{{bill_info.title}}</view>
+								<view class="choosed one-line-overflow theme-font3" wx:else>{{bill_info.title}}</view>
+								<view class="fa fa-angle-right" aria-hidden="true"></view>
+							</view>
+						</view>
+					</view>
+				</view>
+			</view>
+			<input class='display_hide' name="address_id" value="{{address_id}}"> </input>
+		</scroll-view>
+		<view class="bottom flex-row-flex_start-center">
+			<view class="price theme-font5 theme-bg-FFFFFF">￥{{total_fee}}</view>
+			<button class="btn theme-button-buy" form-type="submit" disabled="{{addDisabled}}">下单</button>
+		</view>
+	</form>
+</view>

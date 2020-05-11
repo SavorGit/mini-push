@@ -1,0 +1,19 @@
+<!--mall/pages/order/confirmation_remark.wxml-->
+<!--
+ | 【商城】订单确认备注页面
+ |-->
+
+
+<import src="/pages/template/commons" />
+<template is="navigationBarForTwoLevel" data='{{statusBarHeight: statusBarHeight,titleText:"确认订单-备注"}}' />
+
+<scroll-view class='container theme-container' style='height: calc(100vh - 46px - {{statusBarHeight + SystemInfo.screenBottomSpace}}px);' scroll-y="true" scroll-with-animation="true">
+	<view class="page theme-panel">
+		<view class="main">
+			<textarea class="input" placeholder="请输入..." value="{{remark_strs}}" maxlength="50" bindinput="setInputRemark"></textarea>
+		</view>
+		<view class="bottom" bindtap="saveRemark">
+			<view class="btn save theme-button-buy">保存</view>
+		</view>
+	</view>
+</scroll-view>

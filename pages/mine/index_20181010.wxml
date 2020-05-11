@@ -3,7 +3,7 @@
 <template is="navigationBarForTopLevel" data='{{statusBarHeight: statusBarHeight,titleText:"热点投屏"}}' />
 
 <scroll-view class="container flex-column-center-flex_start theme-container" style='height: calc(100vh - 46px - {{statusBarHeight}}px);' scroll-y="true" scroll-with-animation="true" bindscrolltolower="loadMore" data-openid='{{openid}}'>
-	<view class='page_top flex-row-center-flex_start'>
+	<view class='page_top flex-row-center-flex_start theme-panel'>
 		<view class='user'>
 			<view class='head'>
 				<image wx:if="{{userinfo.avatarUrl ==''}}" src="http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default_user_head.png" lazy-load='http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/icon/grey_interact.png'></image>
@@ -19,25 +19,29 @@
 	</view>
 
 	<!-- 订单列表面板 -->
-	<view class="promotion-goods-manage-panel theme-font2 theme-panel-2" bindtap="gotoOrder">
+	<view class="promotion-goods-manage-panel theme-font2 theme-panel" style='margin-top: 10rpx;border-top: 0;' bindtap="gotoOrder" data-type='3'>
 		<view class="full_width full_height flex-row-center-space_between">
-			<view>我的订单</view>
+			<view>外卖订单</view>
+			<view class="fa fa-angle-right" aria-hidden="true"></view>
+		</view>
+	</view>
+	<view class="promotion-goods-manage-panel theme-font2 theme-panel" bindtap="gotoOrder" data-type="5">
+		<view class="full_width full_height flex-row-center-space_between">
+			<view>商城订单</view>
 			<view class="fa fa-angle-right" aria-hidden="true"></view>
 		</view>
 	</view>
 
 	<!-- 收货地址列表面板 -->
-	<view class="promotion-goods-manage-panel theme-font2 theme-panel-2" bindtap="gotoAdress">
+	<view class="promotion-goods-manage-panel theme-font2 theme-panel" bindtap="gotoAdress">
 		<view class="full_width full_height flex-row-center-space_between">
 			<view>我的收货地址</view>
 			<view class="fa fa-angle-right" aria-hidden="true"></view>
 		</view>
 	</view>
 
-	<view style='height: 20rpx;'></view>
-
 	<!-- 我的公开 -->
-	<view class='theme-panel-2'>
+	<view class='theme-panel' style='margin-top: 10rpx;'>
 		<view class='swiper-tab font_666666_28'>
 			<view class="swiper-tab-item active">我的公开</view>
 
@@ -78,10 +82,8 @@
 		</view>
 	</view>
 
-	<view style='height: 20rpx;'></view>
-
 	<!-- 我的收藏 -->
-	<view class='theme-panel-2'>
+	<view class='theme-panel' style='margin-top: 10rpx;'>
 		<view class='swiper-tab font_333333_28'>
 			<view class="swiper-tab-item active">我喜欢</view>
 

@@ -33,6 +33,9 @@
 							<view class="row">
 								<input class="input" name='taxNumber' placeholder="企业税号" value="{{bill_info.taxNumber}}"></input>
 							</view>
+							<view class="row">
+								<input class="input" name='email' placeholder="邮箱" value="{{bill_info.email}}"></input>
+							</view>
 							<!-- <view class="row">
 								<view class="show theme-font3">发票金额：2345元</view>
 							</view> -->
@@ -40,6 +43,9 @@
 						<block wx:if="{{tab=='people'}}">
 							<view class="row">
 								<input class="input" name="title" placeholder="姓名" value="{{bill_info.title}}"></input>
+							</view>
+							<view class="row">
+								<input class="input" name='email' placeholder="邮箱" value="{{bill_info.email}}"></input>
 							</view>
 							<!-- <view class="row">
 								<view class="show theme-font3">发票金额：2345元</view>
