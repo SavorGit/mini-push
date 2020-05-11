@@ -44,7 +44,7 @@
     "pages/mine/address/add",
     "pages/share/pic",
     "pages/share/video",
-    
+
     "pages/thematic/birthday/list",
     "pages/thematic/birthday/detail",
     "pages/thematic/birthday/video",
@@ -57,24 +57,25 @@
     "pages/thematic/money_blessing/receive_h5",
     "pages/thematic/money_blessing/receive_result"
   ],
-  "subpackages": [
-    {
-      "root": "mall",
-      "pages": [
-        "pages/goods/detail",
-        "pages/goods/search_result",
-        "pages/goods/recommendation",
-        "pages/goods/shopping_cart",
-        "pages/hotel/index",
-        "pages/order/confirmation",
-        "pages/order/confirmation_remark",
-        "pages/order/payment",
-        "pages/order/list",
-        "pages/order/detail",
-        "pages/order/logistics"
-      ]
-    }
-  ],
+  "subpackages": [{
+    "root": "mall",
+    "pages": [
+      "pages/goods/detail",
+      "pages/goods/search_result",
+      "pages/goods/recommendation",
+      "pages/goods/shopping_cart",
+      "pages/hotel/index",
+      "pages/order/confirmation",
+      "pages/order/confirmation_remark",
+      "pages/order/payment",
+      "pages/order/list",
+      "pages/order/detail",
+      "pages/order/logistics",
+      "pages/order/gift_list",
+      "pages/order/gift_detail_send",
+      "pages/order/gift_detail_receive"
+    ]
+  }],
   "permission": {
     "scope.userLocation": {
       "desc": "你的位置信息将用于小程序位置接口的效果展示"
@@ -97,8 +98,7 @@
     "selectedColor": "#000000",
     "backgroundColor": "#FFFFFF",
     "borderStyle": "white",
-    "list": [
-      {
+    "list": [{
         "pagePath": "pages/shopping/index",
         "text": "商城",
         "iconPath": "/images/icon2/999999_diamonds.png",

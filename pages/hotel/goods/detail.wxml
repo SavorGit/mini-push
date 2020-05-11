@@ -49,7 +49,21 @@
 			-->
 			<view class="body flex-row-flex_start-flex_start">
 				<view class="icon fa fa-bullhorn theme-font5" aria-hidden="true"></view>
-				<view class="content">{{notice}}</view>
+				<view class="content">
+					<text>{{notice}}</text>
+				</view>
+			</view>
+		</view>
+
+		<!-- 促销活动面板 -->
+		<view class="promotion-panel panel flex-row-center-space_between theme-panel" bindtap="">
+			<view class="left">活动</view>
+			<view class="center flex-row-center-space_between">
+				<view class="label theme-font5">赠品</view>
+				<view class="content one-line-overflow theme-font1">xxxxx礼盒</view>
+			</view>
+			<view class="right">
+				<view class="fa fa-chevron-right" aria-hidden="true"></view>
 			</view>
 		</view>
 
