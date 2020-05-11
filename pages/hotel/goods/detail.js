@@ -10,6 +10,7 @@ var api_v_url = app.globalData.api_v_url;
 var cache_key = app.globalData.cache_key;
 var goods_id;
 var pur_uid;
+var openid;
 let SavorUtils = {
   User: {
 
@@ -47,7 +48,8 @@ Page({
     goods_id:0,
     selectAttrIndex:'',
     specification_goods:[],
-    notice:''
+    notice:'',
+    showModal: false, //显示授权登陆弹窗
   },
 
   /**
@@ -246,6 +248,7 @@ Page({
   },
   // 打开购买弹窗
   openBuyGoodsPopWindow: function (e) {
+    console.log(e)
     let that = this;
     var is_self = e.currentTarget.dataset.is_self;
     if (is_self == 1) {
@@ -255,10 +258,22 @@ Page({
       var goods_cart_info = e.currentTarget.dataset.goods_info;
       var goods_id = goods_cart_info.id; 
     }
-
-    var action = e.currentTarget.dataset.action
-
     goods_cart_info.amount = 1;
+    var action = e.currentTarget.dataset.action
+    if(action==3){
+      var user_info = wx.getStorageSync(cache_key+'user_info');
+      if(user_info.is_wx_auth !=3){
+        that.setData({
+          showModal:true,
+          goods_cart_info: goods_cart_info,
+          action: action,
+          is_self: is_self,
+          goods_id:goods_id
+        })
+        return false
+      }
+    }
+    
     that.setData({
       showBuyGoodsPopWindow: true,
       showBuyGoodsPopWindowAnimation: true,
@@ -319,14 +334,28 @@ Page({
     var goods_id = goods_info.goods_id;
     var amount = goods_info.amount;
     var order_type = 1;
-    wx.navigateTo({
-      url: '/mall/pages/order/confirmation?goods_id=' + goods_id + '&openid=' + openid + '&amount=' + amount + '&order_type=' + order_type + '&pur_uid=' + pur_uid,
-      success: function (res) {
-        that.setData({
-          showBuyGoodsPopWindow: false,
-        })
-      }
-    })
+
+    var action = that.data.action;
+    if(action ==2){//立即购买
+      wx.navigateTo({
+        url: '/mall/pages/order/confirmation?goods_id=' + goods_id + '&openid=' + openid + '&amount=' + amount + '&order_type=' + order_type + '&pur_uid=' + pur_uid,
+        success: function (res) {
+          that.setData({
+            showBuyGoodsPopWindow: false,
+          })
+        }
+      })
+    }else if (action==3){//赠送好友
+      wx.navigateTo({
+        url: '/mall/pages/order/present?goods_id=' + goods_id + '&openid=' + openid + '&amount=' + amount ,
+        success: function (res) {
+          that.setData({
+            showBuyGoodsPopWindow: false,
+          })
+        }
+      })
+    }
+    
   },
   gotoMallCart: function (e) {
     wx.navigateTo({
@@ -413,6 +442,71 @@ Page({
       is_self: is_self,
       goods_id:goods_id
     });*/
+  },
+  //赠送好友
+  present:function(e){
+    var that = this;
+    wx.navigateTo({
+      url: '/mall/pages/order/present?goods_id=' + goods_id + '&openid=' + openid + '&amount=1',
+    })
+  },
+  closeWxAuth: function (e) {
+    var that = this;
+    that.setData({
+      showModal: false,
+    })
+    mta.Event.stat("closewxauth", {})
+  },
+  onGetUserInfo: function (res) {
+    var that = this;
+
+    var user_info = wx.getStorageSync("savor_user_info");
+    openid = user_info.openid;
+    mta.Event.stat("clickonwxauth", {})
+    if (res.detail.errMsg == 'getUserInfo:ok') {
+      wx.getUserInfo({
+        success(rets) {
+          utils.PostRequest(api_url + '/smallapp3/User/registerCom', {
+            'openid': openid,
+            'avatarUrl': rets.userInfo.avatarUrl,
+            'nickName': rets.userInfo.nickName,
+            'gender': rets.userInfo.gender,
+            'session_key': app.globalData.session_key,
+            'iv': rets.iv,
+            'encryptedData': rets.encryptedData
+          }, (data, headers, cookies, errMsg, statusCode) => {
+            wx.setStorage({
+              key: 'savor_user_info',
+              data: data.result,
+            });
+            that.setData({
+              showModal: false,
+              showBuyGoodsPopWindow: true,
+              showBuyGoodsPopWindowAnimation: true,
+            })
+          }, res => wx.showToast({
+            title: '微信登陆失败，请重试',
+            icon: 'none',
+            duration: 2000
+          }));
+
+        }
+      })
+      mta.Event.stat("allowauth", {})
+    } else {
+      utils.PostRequest(api_url + '/smallapp21/User/refuseRegister', {
+        'openid': openid,
+      }, (data, headers, cookies, errMsg, statusCode) => {
+        user_info['is_wx_auth'] = 1;
+        wx.setStorage({
+          key: 'savor_user_info',
+          data: user_info,
+        })
+      });
+      mta.Event.stat("refuseauth", {})
+    }
+
+
   },
   /**
    * 生命周期函数--监听页面初次渲染完成

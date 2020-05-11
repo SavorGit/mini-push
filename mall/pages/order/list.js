@@ -15,6 +15,7 @@ var page_all;
 var page_dealing;
 var page_ship ;
 var page_complete;
+var page_cancel;
 Page({
 
   /**
@@ -35,6 +36,7 @@ Page({
     page_dealing =1;
     page_ship =1;
     page_complete =1;
+    page_cancel = 1;
     openid = options.openid;
     var order_status = options.order_status;
     that.setData({
@@ -44,6 +46,7 @@ Page({
     that.getOrderList(1, 1)
     that.getOrderList(3, 1)
     that.getOrderList(2, 1)
+    that.getOrderList(4,1)
   },
   getOrderList:function(status,page,){
     var that = this;
@@ -68,6 +71,10 @@ Page({
       } else if (status == 2) {
         that.setData({
           complete_order_list: data.result.datalist
+        })
+      }else if(status == 4){
+        that.setData({
+          cancel_order_list:data.result.datalist
         })
       }
       
@@ -116,8 +123,9 @@ Page({
               that.getOrderList(0, page_all);
             }
             //已完成
-            that.getOrderList(2,page_complete);
-            
+            //that.getOrderList(2,page_complete);
+            //已取消
+            that.getOrderList(4,page_cancel);
             
             
           })
@@ -141,6 +149,9 @@ Page({
     } else if (order_status == 2) {
       page_complete += 1;
       page = page_complete;
+    }else if(order_status == 4){
+      page_cancel +=1;
+      page = page_cancel;
     }
     that.getOrderList(order_status, page);
   },

@@ -59,7 +59,7 @@ Page({
     },
     box_mac: '',
     page_arr: [],
-    category_id: 0,
+    category_id: '',
     keywords: '',
     mall_cart_nums: 0,
     goods_id:0,

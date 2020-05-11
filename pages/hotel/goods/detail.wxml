@@ -158,6 +158,16 @@
 				<image class="btn" src="/images/icon2/666666_cart.png"></image>
 				<view class="content theme-font2">购物车</view>
 			</view>
+			<view class="btn cart flex-column-center-space_between" wx:if="{{goods_info.gtype==2}}" bindtap="openBuyGoodsPopWindow" data-action='3' data-is_self="1" data-goods_id="{{goods_id}}">
+				<!-- <view class="btn fa fa-shopping-cart theme-font2" aria-hidden="true"></view> -->
+				<image class="btn" src="/images/icon2/666666_cart.png"></image>
+				<view class="content theme-font2">赠送好友</view>
+			</view>
+			<view class="btn cart flex-column-center-space_between" wx:else bindtap="present"  data-goods_id="{{goods_id}}">
+				<!-- <view class="btn fa fa-shopping-cart theme-font2" aria-hidden="true"></view> -->
+				<image class="btn" src="/images/icon2/666666_cart.png"></image>
+				<view class="content theme-font2">赠送好友</view>
+			</view>
 		</view>
 		<view class="right flex-row-center-space_between">
 			<!-- <view class="btn theme-button-orange" bindtap="addMallCart" data-type="1">加入购物车</view> -->
@@ -212,7 +222,7 @@
 			</view>
 			<view class="stock one-line-overflow theme-font3">剩余{{goods_cart_info.stock_num}}件</view>
 		</scroll-view>
-		<view class="bottom flex-row-center-space_between" wx:if="{{action==2}}">
+		<view class="bottom flex-row-center-space_between" wx:if="{{action==2 || action==3}}">
 			<view class="btn theme-button-red" bindtap="buyOne">下一步</view>
 		</view>
 		<view class="bottom flex-row-center-space_between" wx:if="{{action==1}}">
@@ -221,3 +231,5 @@
 	</view>
 	<!-- </view> -->
 </block>
+<!-- 微信授权登录 -->
+<template is="wxAuthLoginOp" data='{{showOp: showModal}}' />

@@ -71,7 +71,9 @@
         "pages/order/payment",
         "pages/order/list",
         "pages/order/detail",
-        "pages/order/logistics"
+        "pages/order/logistics",
+        "pages/order/present",
+        "pages/order/gift"
       ]
     }
   ],
