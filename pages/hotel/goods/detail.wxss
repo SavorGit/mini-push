@@ -252,6 +252,33 @@
   font-weight: bold;
 }
 
+/* ===================================== 促销活动面板 ===================================== */
+.promotion-panel>.left {
+  width: 60rpx;
+  font-size: 28rpx;
+  font-weight: bold;
+}
+
+.promotion-panel>.center {
+  width: calc(100% - 140rpx);
+  padding-left: 40rpx;
+}
+
+.promotion-panel>.center>.label {
+  width: 60rpx;
+  font-size: 28rpx;
+}
+
+.promotion-panel>.center>.content {
+  width: calc(100% - 80rpx);
+  font-size: 28rpx;
+}
+
+.promotion-panel>.right {
+  width: 40rpx;
+  font-size: 32rpx;
+}
+
 /* ===================================== 规格面板 ===================================== */
 .specs-panel>.left {
   width: 60rpx;

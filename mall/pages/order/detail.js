@@ -19,6 +19,7 @@ Page({
     SystemInfo: getApp().SystemInfo,
     statusBarHeight: getApp().globalData.statusBarHeight,
     is_have_express: false,
+    logisticsTab: 1
   },
 
   /**
@@ -27,16 +28,15 @@ Page({
   onLoad: function (options) {
     var that = this;
     order_id = options.order_id;
-    openid   = options.openid;
+    openid = options.openid;
     that.getOrderInfo(order_id);
   },
-  getOrderInfo(){
+  getOrderInfo() {
     var that = this;
     utils.PostRequest(api_v_url + '/order/detail', {
       openid: openid,
       order_id: order_id,
     }, (data, headers, cookies, errMsg, statusCode) => {
-      
       var express = data.result.express;
       if (JSON.stringify(express) == '{}') {
         var is_have_express = false;
@@ -45,19 +45,20 @@ Page({
       }
       that.setData({
         is_have_express: is_have_express,
-        order_info:data.result,
+        order_info: data.result,
         express: data.result.express,
-        merchant:data.result.merchant
+        merchant: data.result.merchant,
+        logisticsList: [{}, {}, {}]
       })
     })
   },
-  phonecallevent:function(e){
+  phonecallevent: function (e) {
     var tel = e.currentTarget.dataset.tel;
     app.phonecallevent(tel);
   },
-  gotoExinfo:function(e){
+  gotoExinfo: function (e) {
     wx.navigateTo({
-      url: '/mall/pages/order/logistics?order_id='+order_id+'&openid='+openid,
+      url: '/mall/pages/order/logistics?order_id=' + order_id + '&openid=' + openid,
     })
   },
   /**
@@ -107,5 +108,14 @@ Page({
    */
   onShareAppMessage: function () {
 
-  }
+  },
+
+  // 选项卡选择
+  showLogisticsTab: function (e) {
+    let self = this;
+    let tabType = e.currentTarget.dataset.tab;
+    self.setData({
+      logisticsTab: tabType
+    });
+  },
 })
