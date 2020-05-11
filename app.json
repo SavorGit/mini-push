@@ -44,7 +44,7 @@
     "pages/mine/address/add",
     "pages/share/pic",
     "pages/share/video",
-    
+
     "pages/thematic/birthday/list",
     "pages/thematic/birthday/detail",
     "pages/thematic/birthday/video",
@@ -74,6 +74,9 @@
         "pages/order/logistics",
         "pages/order/present",
         "pages/order/gift"
+		"pages/order/gift_list",
+		"pages/order/gift_detail_send",
+		"pages/order/gift_detail_receive"
       ]
     }
   ],
@@ -99,8 +102,7 @@
     "selectedColor": "#000000",
     "backgroundColor": "#FFFFFF",
     "borderStyle": "white",
-    "list": [
-      {
+    "list": [{
         "pagePath": "pages/shopping/index",
         "text": "商城",
         "iconPath": "/images/icon2/999999_diamonds.png",
