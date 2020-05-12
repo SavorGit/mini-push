@@ -1,0 +1,186 @@
+/* mall/pages/order/gift_list.wxss */
+/**
+ * 【商城】赠品订单列表页面
+ */
+
+
+ .tab-bar {
+  width: calc(100% - 80rpx);
+  height: 88rpx;
+  padding: 0 40rpx;
+}
+
+.tab {
+  width: 140rpx;
+  height: 50rpx;
+  line-height: 50rpx;
+  text-align: center;
+  font-size: 32rpx;
+  font-weight: bold;
+}
+
+.tab.selected {
+  height: 45rpx;
+  border-bottom: 5rpx solid #a18668;
+}
+
+.scroll-view {
+  width: 100%;
+  height: calc(100% - 93rpx);
+  margin-top: 5rpx;
+}
+
+.list {
+  width: 100%;
+  padding-bottom: 25rpx;
+}
+
+.row {
+  width: 700rpx;
+  height: 350rpx;
+  margin-top: 25rpx;
+  border-radius: 10rpx;
+}
+
+.row>.head,
+.row>.body,
+.row>.foot {
+  width: calc(100% - 50rpx);
+  margin: 0 25rpx;
+  font-size: 24rpx;
+}
+
+.row>.head {
+  height: 70rpx;
+  padding-top: 25rpx;
+  padding-bottom: 20rpx;
+  border-bottom: 3rpx dashed #ededed;
+}
+
+.row>.head>.hotel-pic {
+  width: 70rpx;
+  height: 70rpx;
+  border-radius: 8rpx;
+}
+
+.row>.head>.hotel-name {
+  width: calc(100% - 250rpx);
+  height: 70rpx;
+  line-height: 70rpx;
+  margin-left: 15rpx;
+  font-size: 32rpx;
+}
+
+.row>.head>.order-status {
+  width: 15rpx;
+  height: 50rpx;
+  margin-right: -35rpx;
+  border-radius: 0;
+  /* transform: rotate(-15deg); */
+  transform: skewY(-30deg);
+}
+
+.row>.head>.order-status>view {
+  width: 120rpx;
+  height: 50rpx;
+  line-height: 50rpx;
+  text-align: center;
+  margin-left: -122rpx;
+  padding-left: 20rpx;
+  padding-right: 20rpx;
+  font-size: 24rpx;
+  overflow: hidden;
+  border-radius: 10rpx 0 0 10rpx;
+  transform: skewY(30deg) translate(-20rpx, -34rpx);
+}
+
+.row>.body {
+  height: calc(100% - 180rpx);
+}
+
+.row>.body>.left {
+  width: 120rpx;
+  height: 120rpx;
+}
+
+.row>.body>.left>.pic {
+  width: 100%;
+  height: 100%;
+  border-radius: 5rpx;
+}
+
+.row>.body>.left.multiple-goods {
+  width: calc(100% - 200rpx);
+}
+
+.row>.body>.left.multiple-goods>.pic {
+  width: 120rpx;
+  margin-right: 20rpx;
+}
+
+.row>.body>.center {
+  width: calc(100% - 290rpx);
+  height: 100%;
+  margin-left: 15rpx;
+}
+
+.row>.body>.center>view {
+  width: 100%;
+}
+
+.row>.body>.center>view:first-child {
+  font-size: 28rpx;
+}
+
+.row>.body>.center>.bottom {
+  margin-top: 20rpx;
+}
+
+.row>.body>.center>.bottom>.specs {
+  height: 30rpx;
+  line-height: 30rpx;
+  padding: 5rpx 15rpx;
+  font-size: 20rpx;
+  border-radius: 20rpx;
+}
+
+.row>.body>.center.multiple-goods {
+  width: 45rpx;
+}
+
+.row>.body>.center.multiple-goods>view:first-child {
+  font-size: 42rpx;
+}
+
+.row>.body>.right {
+  width: 155rpx;
+  height: 100%;
+}
+
+.row>.body>.right>.price {
+  font-size: 28rpx;
+}
+
+.row>.body>.right>.count {
+  font-size: 24rpx;
+}
+
+.row>.foot {
+  width: calc(100% - 45rpx);
+  height: 65rpx;
+  margin-right: 20rpx;
+  border-top: 3rpx dashed #ededed;
+}
+
+.row>.foot>.order-number {
+  white-space: nowrap;
+}
+
+.row>.foot>.btn {
+  width: 150rpx;
+  height: 50rpx;
+  line-height: 50rpx;
+  text-align: center;
+  font-size: 28rpx;
+  border-radius: 5rpx;
+}

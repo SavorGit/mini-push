@@ -73,11 +73,12 @@
         "pages/order/list",
         "pages/order/detail",
         "pages/order/logistics",
-        "pages/order/present",
-        "pages/order/gift",
-		    "pages/order/gift_list",
-		    "pages/order/gift_detail_send",
-		    "pages/order/gift_detail_receive"
+
+        "pages/gift/order/present",
+        "pages/gift/order/gift",
+		    "pages/gift/order/gift_list",
+		    "pages/gift/order/gift_detail_send",
+		    "pages/gift/order/gift_detail_receive"
       ]
     }
   ],
