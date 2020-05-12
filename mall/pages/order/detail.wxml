@@ -10,7 +10,10 @@
 <scroll-view class='container theme-container' style='height: calc(100vh - {{46 + statusBarHeight + SystemInfo.screenBottomSpace}}px);' scroll-y="true" scroll-with-animation="true">
 	<view class="page-wapper">
 		<view class="input-panel logistics theme-panel">
-			<view class="head">配送信息</view>
+			<view class="head flex-row-flex_end-flex_start">
+				<view class="title">配送信息</view>
+				<view class="tip theme-font3">您的订单已拆分为多个运单</view>
+			</view>
 			<view class="body flex-column-center-space_between">
 				<view class="tab-bar flex-row-center-flex_start">
 					<block wx:for="{{logisticsList}}" wx:for-index="index" wx:for-item="logistics" wx:key="key">
