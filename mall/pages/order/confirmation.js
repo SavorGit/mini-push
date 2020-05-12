@@ -136,10 +136,14 @@ Page({
   },
   getPrepareData:function(e){
     var that = this;
+    that.setData({
+      addDisabled: true
+    })
     utils.PostRequest(api_v_url + '/order/getPrepareData', {
       type:2
     }, (data, headers, cookies, errMsg, statusCode) => {
       that.setData({
+        addDisabled:false,
         pay_types: data.result.pay_types,
       })
     })
@@ -214,6 +218,10 @@ Page({
   },
   addMallOrder:function(e){
     var that = this;
+    that.setData({
+      addDisabled: true
+
+    })
     var address_id = e.detail.value.address_id;
     if (address_id==''){
       app.showToast('请选择您的收货地址');
@@ -222,7 +230,7 @@ Page({
     if(order_type==1){
 
     }
-
+    
 
     //支付方式
     var pay_types = that.data.pay_types;
@@ -300,6 +308,10 @@ Page({
             }
 
           }
+        })
+      }else {
+        that.setData({
+          addDisabled: false
         })
       }
     })

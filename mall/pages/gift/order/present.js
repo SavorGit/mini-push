@@ -13,7 +13,13 @@ Page({
    * 页面的初始数据
    */
   data: {
+    SystemInfo: getApp().SystemInfo,
+    statusBarHeight: getApp().globalData.statusBarHeight,
     pay_type:'',
+    remark_strs:'', //备注信息
+    addDisabled: false,
+
+    
   },
 
   /**
@@ -51,10 +57,12 @@ Page({
   },
   getPrepareData:function(e){
     var that = this;
+    that.setData({addDisabled:true})
     utils.PostRequest(api_v_url + '/order/getPrepareData', {
       type:2
     }, (data, headers, cookies, errMsg, statusCode) => {
       that.setData({
+        addDisabled:false,
         pay_types: data.result.pay_types,
       })
     })
@@ -116,6 +124,9 @@ Page({
   },
   addOrder:function(e){
     var that = this;
+    that.setData({
+      addDisabled:true
+    })
     utils.PostRequest(api_v_url + '/aaa/bbb', {
       openid:openid,
       goods_id: goods_id,
@@ -153,6 +164,10 @@ Page({
             }
 
           }
+        })
+      }else {
+        that.setData({
+          addDisabled: false
         })
       }
     })

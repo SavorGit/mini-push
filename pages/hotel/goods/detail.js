@@ -347,7 +347,7 @@ Page({
       })
     }else if (action==3){//赠送好友
       wx.navigateTo({
-        url: '/mall/pages/order/present?goods_id=' + goods_id + '&openid=' + openid + '&amount=' + amount ,
+        url: '/mall/pages/gift/order/present?goods_id=' + goods_id + '&openid=' + openid + '&amount=' + amount ,
         success: function (res) {
           that.setData({
             showBuyGoodsPopWindow: false,
@@ -449,7 +449,7 @@ Page({
     var user_info = wx.getStorageSync(cache_key+"user_info");
     var openid = user_info.openid;
     wx.navigateTo({
-      url: '/mall/pages/order/present?goods_id=' + goods_id + '&openid=' + openid + '&amount=1',
+      url: '/mall/pages/gift/order/present?goods_id=' + goods_id + '&openid=' + openid + '&amount=1',
     })
   },
   closeWxAuth: function (e) {

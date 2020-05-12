@@ -11,10 +11,16 @@ let SavorUtils = {
     // 判断用户是否注册
     isRegister: pageContext => utils.PostRequest(api_v_url + '/User/isRegister', {
       openid: pageContext.data.openid, 
-    }, (data, headers, cookies, errMsg, statusCode) => wx.setStorage({
-      key: 'savor_user_info',
-      data: data.result.userinfo,
-    }), function () {
+    }, (data, headers, cookies, errMsg, statusCode) =>{
+      pageContext.setData({
+        user_info:data.result.userinfo
+      })
+      wx.setStorage({
+        key: 'savor_user_info',
+        data: data.result.userinfo,
+      })
+
+    } , function () {
       wx.setStorage({
         key: 'savor_user_info',
         data: {
@@ -22,7 +28,7 @@ let SavorUtils = {
         }
       })
 
-    }, { isShowLoading: false }),
+    }),
   },
 
 };
