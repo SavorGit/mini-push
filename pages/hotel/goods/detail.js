@@ -446,6 +446,8 @@ Page({
   //赠送好友
   present:function(e){
     var that = this;
+    var user_info = wx.getStorageSync(cache_key+"user_info");
+    var openid = user_info.openid;
     wx.navigateTo({
       url: '/mall/pages/order/present?goods_id=' + goods_id + '&openid=' + openid + '&amount=1',
     })
