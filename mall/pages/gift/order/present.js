@@ -127,10 +127,43 @@ Page({
     that.setData({
       addDisabled:true
     })
-    utils.PostRequest(api_v_url + '/aaa/bbb', {
-      openid:openid,
-      goods_id: goods_id,
+    var amount = that.data.amount; //数量
+    var present_amount = that.data.present_amount;
+    //支付方式
+    var pay_types = that.data.pay_types;
+    var pay_type = that.data.pay_type;
+    if (pay_type == '') {
+      pay_type = pay_types[0].id
+    }
+    //订单备注
+    var remark = wx.getStorageSync(cache_key + 'mall_order:remark');
+    //发票信息
+    var bill_cache = wx.getStorageSync(cache_key + 'order:bill');
+    var company = '';
+    var credit_code = '';
+    var title_type = '';
+    var email = '';
+    if (bill_cache != '') {
+      var bill_info = JSON.parse(bill_cache);
+      company = bill_info.title;
+      credit_code = bill_info.taxNumber
+      title_type = bill_info.type;
+      email      = bill_info.email;
+    }
+
+
+    utils.PostRequest(api_v_url + '/order/addGiftorder', {
       amount:amount,
+      company:company,
+      credit_code:credit_code,
+      email:email,
+      goods_id: goods_id,
+      openid:openid,
+      pay_type:pay_type,
+      person_upnum:present_amount,
+      remark:remark,
+      title_type:title_type
+      
     }, (data, headers, cookies, errMsg, statusCode) => {
       var order_id = data.result.order_id;
       if (data.result.pay_type == 10) {
