@@ -1,11 +1,17 @@
 // mall/pages/order/gift_detail_send.js
+/**
+ * 【商城】赠送订单详情页面
+ */
+
+
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-
+    SystemInfo: getApp().SystemInfo,
+    statusBarHeight: getApp().globalData.statusBarHeight,
   },
 
   /**
