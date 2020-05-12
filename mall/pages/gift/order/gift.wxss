@@ -1,1 +1,198 @@
 /* mall/pages/gift/order/gift.wxss */
+/**
+ * 【商城】赠品支付完成页面
+ */
+
+
+.status-panel {
+  width: calc(100% - 150rpx);
+  height: 130rpx;
+  padding: 50rpx 40rpx 20rpx 110rpx;
+}
+
+.status-panel>.status>.icon {
+  width: 80rpx;
+  height: 80rpx;
+  font-size: 80rpx;
+  color: rgb(59, 191, 3);
+}
+
+.status-panel>.status>.content {
+  margin-left: 30rpx;
+  font-size: 36rpx;
+}
+
+.status-panel>.tip {
+  padding-left: 110rpx;
+  font-size: 22rpx;
+}
+
+.main-panel {
+  width: 710rpx;
+  height: 550rpx;
+  margin-top: 20rpx;
+  border-radius: 10rpx;
+}
+
+.main-panel>.goods-info {
+  width: 635rpx;
+  height: 200rpx;
+  margin-top: 20rpx;
+  padding: 20rpx 20rpx 20rpx 15rpx;
+  background-color: #FAF3E6;
+  border-radius: 5rpx;
+}
+
+.main-panel>.goods-info>.hotel {
+  font-size: 24rpx;
+}
+
+.main-panel>.goods-info>.row {
+  height: 150rpx;
+  padding-top: 20rpx;
+}
+
+.main-panel>.goods-info>.row>.pic {
+  width: 150rpx;
+  height: 150rpx;
+  border-radius: 5rpx;
+}
+
+.main-panel>.goods-info>.row>.center {
+  width: calc(100% - 310rpx);
+  height: 100%;
+  margin-left: 20rpx;
+}
+
+.main-panel>.goods-info>.row>.center>.name {
+  font-size: 24rpx;
+}
+
+.main-panel>.goods-info>.row>.center>.bottom {
+  padding-bottom: 15rpx;
+}
+
+.main-panel>.goods-info>.row>.center>.bottom>.specs {
+  font-size: 24rpx;
+}
+
+.main-panel>.goods-info>.row>.right {
+  width: 140rpx;
+  height: 100%;
+}
+
+.main-panel>.goods-info>.row>.right>.price {
+  width: 100%;
+  text-align: right;
+  font-size: 28rpx;
+}
+
+.main-panel>.message-block {
+  width: calc(100% - 70rpx);
+  padding: 25rpx 35rpx;
+}
+
+.main-panel>.message-block .title-bar {
+  width: calc(100% - 3rpx);
+  padding-right: 3rpx;
+}
+
+.main-panel>.message-block .title-bar>.title {
+  font-size: 28rpx;
+}
+
+.main-panel>.message-block .title-bar>.btn {
+  width: 30rpx;
+  height: 30rpx;
+  font-size: 30rpx;
+  color: #FBBBBB;
+  border-bottom: 4rpx solid #FBBBBB;
+}
+
+.main-panel>.message-block .content {
+  padding: 20rpx 0;
+}
+
+.main-panel>.message-block .content>.input,
+.main-panel>.message-block .content>.view {
+  width: 100%;
+}
+
+.main-panel>.message-block .content>.input {
+  min-height: 40rpx;
+  max-height: 80rpx;
+  font-size: 30rpx;
+  border: 3rpx solid #EDEDED;
+}
+
+.main-panel>.message-block .content>.view {
+  font-size: 32rpx;
+  font-weight: bold;
+}
+
+.main-panel>.sender {
+  width: calc(100% - 40rpx);
+  height: 64rpx;
+  padding: 15rpx 20rpx;
+}
+
+.main-panel>.sender>.isp>.icon {
+  width: 64rpx;
+  height: 64rpx;
+  border-radius: 5rpx;
+}
+
+.main-panel>.sender>.isp>.name {
+  margin-left: 15rpx;
+  font-size: 24rpx;
+}
+
+.main-panel>.sender>.nikename {
+  font-size: 28rpx;
+}
+
+.goto-panel {
+  width: 100%;
+  margin-top: 50rpx;
+}
+
+.goto-panel>.btn {
+  width: 600rpx;
+  height: 80rpx;
+  line-height: 80rpx;
+  text-align: center;
+  font-size: 28rpx;
+  border-radius: 40rpx;
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+.goto-panel>.link {
+  margin-top: 30rpx;
+  font-size: 24rpx;
+}
+
+.rule-panel {
+  width: calc(100% - 100rpx);
+  margin-top: 30rpx;
+  padding: 50rpx;
+}
+
+.rule-panel>.title-bar {
+  width: 100%;
+  padding: 20rpx 0;
+}
+
+.rule-panel>.title-bar>.title {
+  font-size: 28rpx;
+}
+
+.rule-panel>.body {
+  width: 100%;
+  padding: 20rpx 0;
+}
+
+.rule-panel>.body>.line {
+  font-size: 28rpx;
+}

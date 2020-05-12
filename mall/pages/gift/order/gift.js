@@ -13,6 +13,8 @@ Page({
    * 页面的初始数据
    */
   data: {
+    SystemInfo: getApp().SystemInfo,
+    statusBarHeight: getApp().globalData.statusBarHeight,
     is_edit_send_word:false, //是否修改寄语
     send_word:'',            //寄语
   },

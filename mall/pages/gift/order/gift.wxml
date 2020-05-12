@@ -1,2 +1,82 @@
 <!--mall/pages/gift/order/gift.wxml-->
-<text>mall/pages/gift/order/gift.wxml</text>
+<!--
+ | 【商城】赠品支付完成页面
+ |-->
+
+
+<import src="/pages/template/commons" />
+<template is="navigationBarForTwoLevel" data='{{statusBarHeight: statusBarHeight,titleText:"支付完成"}}' />
+
+<view class='container theme-container' style='height: calc(100vh - {{46 + statusBarHeight + SystemInfo.screenBottomSpace}}px);'>
+	<scroll-view class="full_width full_height" scroll-y="true" scroll-with-animation="true">
+		<view class="full_width full_height flex-column-center-flex_start">
+			<view class="status-panel theme-panel">
+				<view class="status flex-row-center-flex_start">
+					<view class="icon fa fa-check-circle" aria-hidden="true"></view>
+					<view class="content one-line-overflow theme-font6">成功预定10份礼品</view>
+				</view>
+				<view class="tip two-line-overflow theme-font3">按实际送出进行核算，预定礼品中未送出部分的定金将原路返回您的微信账户中。</view>
+			</view>
+
+			<view class="main-panel flex-column-center-flex_start theme-panel">
+				<view class="goods-info">
+					<view class="hotel theme-font7">由花家怡园（世茂店）提供</view>
+					<view class="row flex-row-center-space_between">
+						<image class="pic" mode="aspectFill" src="http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
+						<view class="center flex-column-flex_start-space_between" bindtap="">
+							<view class="name two-line-overflow">麻辣小龙虾一份（大份），38只，限量供应</view>
+							<view class="bottom flex-row-center-flex_start">
+								<view class="specs theme-font3">2斤简装</view>
+							</view>
+						</view>
+						<view class="right flex-column-flex_end-flex_start" bindtap="">
+							<view class="price one-line-overflow theme-font5">￥1018</view>
+						</view>
+					</view>
+				</view>
+				<view wx:if="{{editMessage}}" class="message-block">
+					<form>
+						<view class="title-bar flex-row-center-space_between">
+							<view class="title theme-font2">寄语</view>
+							<view class="btn theme-button-welcome" style="width:80rpx;height:30rpx;line-height:30rpx;text-align:center;border-radius:5rpx;font-size:20rpx;color:#FFFFFF;border:0;" aria-hidden="true" bindtap="">保存</view>
+						</view>
+						<view class="content">
+							<textarea class="input">这份我最爱的礼物，送给与我同行路上的同路人，愿你万事顺遂～</textarea>
+						</view>
+					</form>
+				</view>
+				<view wx:else class="message-block">
+					<view class="title-bar flex-row-center-space_between">
+						<view class="title theme-font2">寄语</view>
+						<view class="btn fa fa-pencil" aria-hidden="true" bindtap=""></view>
+					</view>
+					<view class="content">
+						<view class="view two-line-overflow theme-font5">这份我最爱的礼物，送给与我同行路上的同路人，愿你万事顺遂～</view>
+					</view>
+				</view>
+				<view class="sender flex-row-center-space_between">
+					<view class="isp flex-row-center-flex_start">
+						<image class="icon" mode="aspectFill" src="http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
+						<view class="name theme-font3">小热点</view>
+					</view>
+					<view class="nikename theme-font1">昵称</view>
+				</view>
+			</view>
+			<view class="goto-panel flex-column-center-flex_start">
+				<button class="btn theme-button-red">微信送给好友</button>
+				<view class="link theme-font5">查看赠送进度>></view>
+			</view>
+			<view class="rule-panel">
+				<view class="title-bar">
+					<view class="title theme-font1">赠送须知：</view>
+				</view>
+				<view class="body">
+					<view class="line theme-font1">1.请于5天内赠送好友，赠送有效期至：2020.01.01；</view>
+					<view class="line theme-font1">2.过期后将无法领取商品，未领取部分将在过期后3天内退款至您的微信钱包；</view>
+					<view class="line theme-font1">3.每个微信用户可领取不超过您指定份数上限的商品；</view>
+					<view class="line theme-font1">4.赠送链接可进行转发，转发后亦可进行领取赠品，直至所有份数的赠品领完。</view>
+				</view>
+			</view>
+		</view>
+	</scroll-view>
+</view>
