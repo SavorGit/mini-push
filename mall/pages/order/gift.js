@@ -21,11 +21,15 @@ Page({
    */
   onLoad: function (options) {
     var that = this;
+    wx.hideShareMenu();
     openid = options.openid;
     order_id = options.order_id;
+    that.getOrderInfo(openid,order_id);
     
   },
-
+  getOrderInfo:function(openid,order_id){
+    var that = this;
+  },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
