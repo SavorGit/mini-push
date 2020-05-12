@@ -8,41 +8,41 @@
 <template is="navigationBarForTwoLevel" data='{{statusBarHeight: statusBarHeight,titleText:"确认赠品订单"}}' />
 
 <view class='container theme-container' style='height: calc(100vh - {{46 + statusBarHeight + SystemInfo.screenBottomSpace}}px);'>
-	<form bindsubmit="addMallOrder">
+	<form bindsubmit="addOrder">
 		<scroll-view class="scroll-view" scroll-y="true" scroll-with-animation="true">
 			<view class="page-wapper" style='height: calc(100vh - 46px - {{statusBarHeight}}px -10rpx);'>
 
 				<view class="goods-info input-panel theme-panel">
 					<view class="head">订单信息</view>
 					<view class="body flex-column-center-space_between">
-						<view class="hotel theme-font7">由花家怡园（世茂店）提供</view>
-						<view class="row flex-row-center-space_between">
-							<image class="pic" mode="aspectFill" src="http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg" bindtap=""></image>
+						<view class="hotel theme-font7">由{{order_goods_list.name}}提供</view>
+						<view class="row flex-row-center-space_between" wx:for="{{order_goods_list.goods}}" wx:key="key" wx:for-item="bean" wx:for-index="index">
+							<image class="pic" mode="aspectFill" src="{{bean.img_url}}" bindtap=""></image>
 							<view class="center flex-column-stretch-flex_start" bindtap="">
-								<view class="name two-line-overflow">麻辣小龙虾一份（大份），38只，限量供应</view>
-								<view class="c-bottom flex-row-flex_start-flex_start">
-									<view class="specs theme-button-more">2斤简装</view>
+								<view class="name two-line-overflow">{{bean.name}}}</view>
+								<view class="c-bottom flex-row-flex_start-flex_start" wx:if="{{bean.gtype==2}}">
+									<view class="specs theme-button-more">{{bean.attr_name}}</view>
 								</view>
 							</view>
 							<view class="right flex-column-flex_end-center">
-								<view class="price theme-font5">￥1018</view>
+								<view class="price theme-font5">￥{{bean.price}}</view>
 							</view>
 						</view>
 					</view>
 					<view class="foot flex-row-center-space_between">
 						<view class="label theme-font1">总购买份数</view>
 						<view class="count-warper flex-row-center-flex_end">
-							<view class="btn">-</view>
-							<input class="input" value="3"></input>
-							<view class="btn">+</view>
+							<view class="btn" bindtap="cutNum" data-type="1">-</view>
+							<input class="input" value="{{amount}}" disabled="true"></input>
+							<view class="btn" bindtap="addNum" data-type="1">+</view>
 						</view>
 					</view>
 					<view class="foot flex-row-center-space_between">
 						<view class="label theme-font1">每人领取份数上限</view>
 						<view class="count-warper flex-row-center-flex_end">
-							<view class="btn">-</view>
-							<input class="input" value="3"></input>
-							<view class="btn">+</view>
+							<view class="btn" bindtap="cutNum" data-type="2">-</view>
+							<input class="input" value="{{present_amount}}" disabled="true"></input>
+							<view class="btn" bindtap="addNum" data-type="2">+</view>
 						</view>
 					</view>
 				</view>

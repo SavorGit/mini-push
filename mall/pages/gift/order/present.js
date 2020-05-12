@@ -18,7 +18,7 @@ Page({
     pay_type:'',
     remark_strs:'', //备注信息
     addDisabled: false,
-
+    present_amount:1,  //没人凌秋菊分数上线
     
   },
 
@@ -50,7 +50,8 @@ Page({
       goods_ids: goods_ids,
     }, (data, headers, cookies, errMsg, statusCode) => {
       that.setData({
-        order_goods_list:data.result.goods,
+        order_goods_list:data.result.goods[0],
+        amount :data.result.amount,
         total_fee:data.result.total_fee
       })
     })
@@ -72,16 +73,19 @@ Page({
     var type = e.currentTarget.dataset.type;
     var amount = that.data.amount;
     var present_amount = that.data.present_amount;
-    var price = that.data.goods_info.price;
+    var price = that.data.order_goods_list.goods[0].price;
     if(type==1){//购买数量
       if (amount == 1) {
         app.showToast('至少选择一件商品');
         return false;
       }
       amount -= 1;
+      if(amount<present_amount){
+        present_amount = amount;
+      }
     }else if(type==2){//没人领取份数上限
       if(present_amount ==1){
-        app.showToast('至少选择一件商品');
+        app.showToast('至少领取一件商品');
         return false;
       }
       present_amount -=1;
@@ -99,8 +103,8 @@ Page({
     var type = e.currentTarget.dataset.type;
     var amount = that.data.amount;
     var present_amount = that.data.present_amount;
-    var stock_num = that.data.goods_info.stock_num;
-    var price = that.data.goods_info.price;
+    var stock_num = that.data.order_goods_list.goods[0].stock_num;
+    var price = that.data.order_goods_list.goods[0].price;
     if(type==1){//购买数量
       if (amount == stock_num) {
         app.showToast('该商品库存不足');
@@ -180,7 +184,7 @@ Page({
             app.showToast('支付成功', 2000, 'success')
            
             wx.navigateTo({
-              url: '/mall/pages/order/gift?order_id='+order_id+'&openid='+openid,
+              url: '/mall/pages/gift/order/gift?order_id='+order_id+'&openid='+openid,
             })
           },
           fail(res) {
@@ -228,6 +232,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
+    var that = this;
     //获取订单备注
     var remark_strs = wx.getStorageSync(cache_key + 'mall_order:remark')
     if (remark_strs != '') {

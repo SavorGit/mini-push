@@ -29,7 +29,7 @@ Page({
   },
   getOrderInfo:function(openid,order_id){
     var that = this;
-    utils.PostRequest(api_v_url + '/aa/bb', {
+    utils.PostRequest(api_v_url + '/order/reserveResult', {
       openid: openid,
       order_id:order_id
     }, (data, headers, cookies, errMsg, statusCode) => {

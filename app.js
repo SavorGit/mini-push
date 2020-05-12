@@ -1167,7 +1167,7 @@ App({
     jijian_appid: 'wx7883a4327329a67c',
     jd_appid: 'wx91d27dbf599dff74',
     api_url: 'https://dev-mobile.littlehotspot.com',
-    api_v_url:'https://dev-mobile.littlehotspot.com/Smallapp44',
+    api_v_url:'https://dev-mobile.littlehotspot.com/Smallapp45',
     oss_upload_url: 'https://dev-image.littlehotspot.com',
     netty_url: 'https://dev-netty-push.littlehotspot.com',
     oss_url: 'https://dev-oss.littlehotspot.com',
