@@ -38,15 +38,15 @@
 }
 
 .choose-address-panel>.left>.icon {
-  width: 40rpx;
-  height: 40rpx;
-  line-height: 40rpx;
-  font-size: 40rpx;
+  width: 34rpx;
+  height: 34rpx;
+  line-height: 34rpx;
+  font-size: 34rpx;
 }
 
-.choose-address-panel>.left>.address {
-  width: calc(100% - 60rpx);
-  margin-left: 20rpx;
+.choose-address-panel>.left>.title {
+  width: calc(100% - 50rpx);
+  margin-left: 16rpx;
   font-size: 28rpx;
 }
 
@@ -64,6 +64,58 @@
   margin: 0;
   padding: 0;
   border: 0;
+}
+
+.consignee-info {
+  width: 100%;
+  margin-top: 20rpx;
+  padding: 20rpx 0;
+}
+
+.consignee-info>.head {
+  width: calc(100% - 60rpx);
+  padding: 0 30rpx;
+}
+
+.consignee-info>.head>.title {
+  font-size: 28rpx;
+}
+
+.consignee-info>.head>.btn {
+  width: 40rpx;
+  height: 40rpx;
+  line-height: 40rpx;
+  text-align: right;
+  font-size: 40rpx;
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+.consignee-info>.body {
+  width: 100%;
+  min-height: 120rpx;
+  padding-bottom: 30rpx;
+}
+
+.consignee-info>.body>view {
+  width: calc(100% - 120rpx);
+  height: 90rpx;
+  padding: 0 60rpx;
+  font-size: 28rpx;
+}
+
+.consignee-info>.body>view:first-child>.phone {
+  width: 200rpx;
+  margin-left: 30rpx;
+}
+
+.consignee-info>.body>.choose-consignee {
+  height: 120rpx;
+}
+
+.consignee-info>.body>.choose-consignee>.label {
+  width: 210rpx;
 }
 
 .goto-panel {

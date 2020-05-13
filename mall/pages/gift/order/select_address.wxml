@@ -17,25 +17,25 @@
 			<view class="choose-address-panel flex-row-center-space_between theme-panel" wx:if="{{is_have_default_address==false}}">
 				<view class="left flex-row-center-flex_start">
 					<view class="icon fa fa-map-marker" aria-hidden="true"></view>
-					<view class="address one-line-overflow">选择收货地址</view>
+					<view class="title one-line-overflow">选择收货地址</view>
 				</view>
 				<view class="right">
-					<view class="btn fa fa-chevron-right" aria-hidden="true"></view>
+					<view class="btn fa fa-angle-right" aria-hidden="true"></view>
 				</view>
 			</view>
-			<view class="consignee-info input-panel theme-panel" wx:else>
-					<view class="head flex-row-center-space_between" bindtap="selectAddress">
-						<view>收货地址</view>
-						<view class="fa fa-angle-right" aria-hidden="true"></view>
-					</view>
-					<view class="body flex-column-center-space_between">
-						<view class="flex-row-center-flex_start">
-							<view class="name">{{address_info.consignee}}</view>
-							<view class="phone">{{address_info.phone}}</view>
-						</view>
-						<view class="address two-line-overflow">{{address_info.address}}</view>
-					</view>
+			<view class="consignee-info theme-panel" wx:else>
+				<view class="head flex-row-center-space_between" bindtap="selectAddress">
+					<view class="title one-line-overflow">收货地址</view>
+					<view class="btn fa fa-angle-right" aria-hidden="true"></view>
 				</view>
+				<view class="body flex-column-center-space_between">
+					<view class="flex-row-center-flex_start">
+						<view class="name">{{address_info.consignee}}</view>
+						<view class="phone">{{address_info.phone}}</view>
+					</view>
+					<view class="address two-line-overflow">{{address_info.address}}</view>
+				</view>
+			</view>
 			<view class="goto-panel flex-column-center-center">
 				<button class="btn theme-button-orange" wx:if="{{user_info.mobile==''}}" open-type="getPhoneNumber" bindgetphonenumber="getPhoneNumber">确定收货地址</button>
 				<button class="btn theme-button-orange" wx:else bindtap="receiveGift">确定收货地址</button>
