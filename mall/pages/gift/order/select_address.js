@@ -73,17 +73,22 @@ Page({
     })
   },
   getPhoneNumber: function (e) {
+    var that = this;
+    console.log(e)
     if ("getPhoneNumber:ok" != e.detail.errMsg) {
-      wx.showTost('获取用户手机号失败')
+      app.showToast('获取用户手机号失败')
       return false;
     }
     var iv = e.detail.iv;
     var encryptedData = e.detail.encryptedData;
-    utils.PostRequest(api_url + '/aa/bb', {
+    utils.PostRequest(api_v_url + '/user/bindMobile', {
+      openid:openid,
       iv: iv,
       encryptedData: encryptedData,
       session_key: app.globalData.session_key,
     }, (data, headers, cookies, errMsg, statusCode) => {
+
+      console.log(data);
       //更新缓存
       var user_info = wx.getStorageSync(cache_key + 'user_info');
       user_info.mobile = data.result.phoneNumber;

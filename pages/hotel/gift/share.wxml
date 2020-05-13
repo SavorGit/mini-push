@@ -67,7 +67,7 @@
 						<view class="row flex-row-center-space_between" wx:for="{{records}}" wx:key="key" wx:for-item="bean" wx:for-index="index" >
 							<view class="left flex-row-center-flex_start">
 								<image class="pic" mode="aspectFill" src="{{bean.avatarUrl}}"></image>
-								<view class="name">{{bean.nickName}}}</view>
+								<view class="name">{{bean.nickName}}</view>
 							</view>
 							<view class="right">
 								<view class="time theme-font3">{{bean.time_str}}领取{{bean.amount}}份</view>
