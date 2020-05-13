@@ -10,6 +10,7 @@ var discovery_list; //发现列表
 var pubdetail;
 var i;
 var api_url = app.globalData.api_url;
+var api_v_url = app.globalData.api_v_url
 var netty_url = app.globalData.netty_url;
 var pageid=61;
 Page({
@@ -433,7 +434,7 @@ Page({
         success(rets) {
 
           wx.request({
-            url: api_url+'/smallapp3/User/registerCom',
+            url: api_v_url+'/User/registerCom',
             data: {
               'openid': openid,
               'avatarUrl': rets.userInfo.avatarUrl,
@@ -558,7 +559,7 @@ Page({
       mta.Event.stat("allowauth", {})
     }else {
       wx.request({
-        url: api_url+'/smallapp21/User/refuseRegister',
+        url: api_v_url+'/User/refuseRegister',
         data: {
           'openid': openid,
         },

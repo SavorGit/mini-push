@@ -6,6 +6,7 @@ var pubdetail;
 var info;
 var i;
 var api_url = app.globalData.api_url;
+var api_v_url = app.globalData.api_v_url;
 Page({
 
   /**
@@ -33,7 +34,7 @@ Page({
       openid = app.globalData.openid;
       //判断用户是否注册
       wx.request({
-        url: api_url+'/smallapp21/User/isRegister',
+        url: api_v_url+'/User/isRegister',
         data: {
           "openid": app.globalData.openid,
           
@@ -64,7 +65,7 @@ Page({
           openid = openid;
           //判断用户是否注册
           wx.request({
-            url: api_url+'/smallapp21/User/isRegister',
+            url: api_v_url+'/User/isRegister',
             data: {
               "openid": app.globalData.openid,
               

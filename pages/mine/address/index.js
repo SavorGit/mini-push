@@ -187,7 +187,7 @@ Page({
     if (res.detail.errMsg == 'getUserInfo:ok') {
       wx.getUserInfo({
         success(rets) {
-          utils.PostRequest(api_url + '/smallapp3/User/registerCom', {
+          utils.PostRequest(api_v_url + '/User/registerCom', {
             'openid': openid,
             'avatarUrl': rets.userInfo.avatarUrl,
             'nickName': rets.userInfo.nickName,
@@ -212,7 +212,7 @@ Page({
         }
       })
     } else {
-      utils.PostRequest(api_url + '/smallapp21/User/refuseRegister', {
+      utils.PostRequest(api_v_url + '/User/refuseRegister', {
         'openid': openid,
       }, (data, headers, cookies, errMsg, statusCode) => {
         user_info['is_wx_auth'] = 1;

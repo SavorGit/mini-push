@@ -6,6 +6,7 @@ var openid;
 var wifiOk;
 var box_mac;
 var api_url = app.globalData.api_url;
+var api_v_url = app.globalData.api_v_url;
 var goods_nums = 1;
 var jd_appid = app.globalData.jd_appid;
 var cache_key = app.globalData.cache_key;
@@ -64,7 +65,7 @@ Page({
       })
       openid = app.globalData.openid;
       //判断用户是否注册
-      utils.PostRequest(api_url + '/smallapp21/User/isRegister', {
+      utils.PostRequest(api_v_url + '/User/isRegister', {
         "openid": app.globalData.openid,
         "page_id": 3
       }, (data, headers, cookies, errMsg, statusCode) => {
@@ -199,7 +200,7 @@ Page({
           })
           openid = openid;
           //判断用户是否注册
-          utils.PostRequest(api_url + '/smallapp21/User/isRegister', {
+          utils.PostRequest(api_v_url + '/User/isRegister', {
             "openid": openid,
             "page_id": 3
           }, (data, headers, cookies, errMsg, statusCode) => {
@@ -381,7 +382,7 @@ Page({
     if (res.detail.errMsg == 'getUserInfo:ok') {
       wx.getUserInfo({
         success(rets) {
-          utils.PostRequest(api_url + '/smallapp3/User/registerCom', {
+          utils.PostRequest(api_v_url + '/User/registerCom', {
             'openid': openid,
             'avatarUrl': rets.userInfo.avatarUrl,
             'nickName': rets.userInfo.nickName,
@@ -407,7 +408,7 @@ Page({
       })
       mta.Event.stat("allowauth", {})
     } else {
-      utils.PostRequest(api_url + '/smallapp21/User/refuseRegister', {
+      utils.PostRequest(api_v_url + '/User/refuseRegister', {
         'openid': openid,
       }, (data, headers, cookies, errMsg, statusCode) => {
         user_info['is_wx_auth'] = 1;

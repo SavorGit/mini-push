@@ -9,6 +9,7 @@ var box_mac;
 var rest_appid = app.globalData.rest_appid;
 var jijian_appid = app.globalData.jijian_appid;
 var api_url = app.globalData.api_url;
+var api_v_url = app.globalData.api_v_url;
 Page({
 
   /**
@@ -61,7 +62,7 @@ Page({
         jijian_appid: jijian_appid,
       })
       wx.request({
-        url: api_url + '/smallapp21/User/isRegister',
+        url: api_v_url + '/User/isRegister',
         data: {
           "openid": openid,
           "page_id": 4

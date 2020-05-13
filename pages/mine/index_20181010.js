@@ -5,6 +5,7 @@ const app = getApp();
 var openid;
 var box_mac;
 var api_url = app.globalData.api_url;
+var api_v_url = app.globalData.api_v_url
 var cache_key = app.globalData.cache_key;
 Page({
 
@@ -51,7 +52,7 @@ Page({
         openid = app.globalData.openid;
         //判断用户是否注册
         wx.request({
-          url: api_url + '/smallapp21/User/isRegister',
+          url: api_v_url + '/User/isRegister',
           data: {
             "openid": app.globalData.openid,
             "page_id": 5
@@ -112,7 +113,7 @@ Page({
             openid = openid;
             //判断用户是否注册
             wx.request({
-              url: api_url + '/smallapp21/User/isRegister',
+              url: api_v_url + '/User/isRegister',
               data: {
                 "openid": app.globalData.openid,
                 "page_id": 5

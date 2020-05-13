@@ -2,6 +2,7 @@
 var mta = require('../../../utils/mta_analysis.js')
 const app = getApp()
 var api_url = app.globalData.api_url;
+var api_v_url = app.globalData.api_v_url;
 var openid;
 var inside = 0;
 Page({
@@ -42,7 +43,7 @@ Page({
       openid = app.globalData.openid;
       //判断用户是否注册
       wx.request({
-        url: api_url + '/smallapp21/User/isRegister',
+        url: api_v_url + '/User/isRegister',
         data: {
           "openid": app.globalData.openid,
         },
@@ -86,7 +87,7 @@ Page({
           openid = openid;
           //判断用户是否注册
           wx.request({
-            url: api_url + '/smallapp21/User/isRegister',
+            url: api_v_url + '/User/isRegister',
             data: {
               "openid": app.globalData.openid,
             },
@@ -293,7 +294,7 @@ Page({
       wx.getUserInfo({
         success(rets) {
           wx.request({
-            url: api_url + '/smallapp3/User/registerCom',
+            url: api_v_url + '/User/registerCom',
             data: {
               'openid': openid,
               'avatarUrl': rets.userInfo.avatarUrl,
@@ -338,7 +339,7 @@ Page({
       mta.Event.stat("allowauth", {})
     } else {
       wx.request({
-        url: api_url + '/smallapp21/User/refuseRegister',
+        url: api_v_url + '/User/refuseRegister',
         data: {
           'openid': openid,
         },

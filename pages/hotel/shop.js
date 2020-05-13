@@ -16,7 +16,7 @@ let SavorUtils = {
   User: {
 
     // 判断用户是否注册
-    isRegister: pageContext => utils.PostRequest(api_url + '/smallapp21/User/isRegister', {
+    isRegister: pageContext => utils.PostRequest(api_v_url + '/User/isRegister', {
       openid: pageContext.data.openid,
       page_id: 41
     }, (data, headers, cookies, errMsg, statusCode) => wx.setStorage({

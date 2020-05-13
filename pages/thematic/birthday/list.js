@@ -6,6 +6,7 @@ var box_mac;
 var openid;
 var intranet_ip;
 var api_url = app.globalData.api_url;
+var api_v_url = app.globalData.api_v_url
 var cache_key = app.globalData.cache_key;
 Page({
 
@@ -380,7 +381,7 @@ Page({
       wx.getUserInfo({
         success(rets) {
           wx.request({
-            url: api_url+'/smallapp3/User/registerCom',
+            url: api_v_url+'/User/registerCom',
             data: {
               'openid': openid,
               'avatarUrl': rets.userInfo.avatarUrl,
@@ -421,7 +422,7 @@ Page({
       mta.Event.stat("allowauth", {})
     }else {
       wx.request({
-        url: api_url+'/smallapp21/User/refuseRegister',
+        url: api_v_url+'/User/refuseRegister',
         data: {
           'openid': openid,
         },
