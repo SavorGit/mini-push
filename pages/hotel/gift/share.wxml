@@ -1,2 +1,90 @@
 <!--pages/hotel/gift/share.wxml-->
-<text>pages/hotel/gift/share.wxml</text>
+<!--
+ | 【商城】赠品领取页面
+ |-->
+
+
+<import src="/pages/template/commons" />
+<template is="navigationBarForShare" data='{{statusBarHeight: statusBarHeight,titleText:"赠品领取"}}' />
+
+<view class='container' style='height: calc(100vh - {{46 + statusBarHeight + SystemInfo.screenBottomSpace}}px);'>
+	<scroll-view class="full_width full_height" scroll-y="true" scroll-with-animation="true">
+		<view class="full_width full_height flex-column-center-flex_start">
+			<view class="main-panel flex-column-center-flex_start">
+				<view class="goods-info">
+					<view class="hotel theme-font7">由花家怡园（世茂店）提供</view>
+					<view class="row flex-row-center-space_between">
+						<image class="pic" mode="aspectFill" src="http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
+						<view class="center flex-column-flex_start-space_between" bindtap="">
+							<view class="name two-line-overflow theme-font1">麻辣小龙虾一份（大份），38只，限量供应</view>
+							<view class="bottom flex-row-center-flex_start">
+								<view class="specs theme-font3">2斤简装</view>
+							</view>
+						</view>
+						<view class="right flex-column-flex_end-flex_start" bindtap="">
+							<view class="price one-line-overflow theme-font5">￥1018</view>
+						</view>
+					</view>
+				</view>
+				<view class="message-block">
+					<view class="title-bar flex-row-center-space_between">
+						<view class="title">寄语</view>
+					</view>
+					<view class="content">
+						<view class="view two-line-overflow">这份我最爱的礼物，送给与我同行的同路人，愿xx xx xxxx xxxxxxxxx</view>
+					</view>
+				</view>
+				<view class="sender flex-row-center-space_between">
+					<view class="isp flex-row-center-flex_start">
+						<image class="icon" mode="aspectFill" src="/images/imgs/default-user.png"></image>
+						<view class="name">小热点</view>
+					</view>
+					<view class="nikename theme-font-FFFFFF">昵称</view>
+				</view>
+			</view>
+			<view class="count-panel flex-row-center-center">
+				<view class="label font_333333_28">我要领取</view>
+				<view class="count-warper flex-row-center-center">
+					<view class="btn">-</view>
+					<view class="input">3</view>
+					<view class="btn">+</view>
+				</view>
+			</view>
+			<view class="goto-panel flex-column-center-flex_start">
+				<button class="btn theme-button-red" open-type='share'>微信送给好友</button>
+			</view>
+			<view class="get-record-panel">
+				<view class="title-bar">
+					<view class="big flex-row-center-space_between">
+						<view class="line"></view>
+						<view class="title one-line-overflow theme-font6">共10份，已被领取3份</view>
+						<view class="line"></view>
+					</view>
+					<view class="small title one-line-overflow theme-font5">领取有效期至：2020.01.01</view>
+				</view>
+				<view class="body">
+					<view class="list">
+						<view class="row flex-row-center-space_between">
+							<view class="left flex-row-center-flex_start">
+								<image class="pic" mode="aspectFill" src="http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
+								<view class="name">昵称</view>
+							</view>
+							<view class="right">
+								<view class="time theme-font3">3分钟前领取1份</view>
+							</view>
+						</view>
+						<view class="row flex-row-center-space_between">
+							<view class="left flex-row-center-flex_start">
+								<image class="pic" mode="aspectFill" src="http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
+								<view class="name theme-font1">昵称</view>
+							</view>
+							<view class="right">
+								<view class="time theme-font3">3分钟前领取2份</view>
+							</view>
+						</view>
+					</view>
+				</view>
+			</view>
+		</view>
+	</scroll-view>
+</view>

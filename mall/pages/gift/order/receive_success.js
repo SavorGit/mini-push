@@ -1,10 +1,17 @@
 // mall/pages/gift/order/receive_success.js
+/**
+ * 【商城】赠品领取成功页面
+ */
+
+
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
+    SystemInfo: getApp().SystemInfo,
+    statusBarHeight: getApp().globalData.statusBarHeight,
 
   },
 

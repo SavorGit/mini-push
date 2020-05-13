@@ -1,1 +1,248 @@
 /* pages/hotel/gift/share.wxss */
+/**
+ * 【商城】赠品领取页面
+ */
+
+
+.main-panel {
+  width: 710rpx;
+  height: 550rpx;
+  margin-top: 20rpx;
+  border-radius: 10rpx;
+  background-color: #E75859;
+}
+
+.main-panel>.goods-info {
+  width: 635rpx;
+  height: 200rpx;
+  margin-top: 20rpx;
+  padding: 20rpx 20rpx 20rpx 15rpx;
+  background-color: #FAF3E6;
+  border-radius: 5rpx;
+}
+
+.main-panel>.goods-info>.hotel {
+  font-size: 24rpx;
+}
+
+.main-panel>.goods-info>.row {
+  height: 150rpx;
+  padding-top: 20rpx;
+}
+
+.main-panel>.goods-info>.row>.pic {
+  width: 150rpx;
+  height: 150rpx;
+  border-radius: 5rpx;
+}
+
+.main-panel>.goods-info>.row>.center {
+  width: calc(100% - 310rpx);
+  height: 100%;
+  margin-left: 20rpx;
+}
+
+.main-panel>.goods-info>.row>.center>.name {
+  font-size: 24rpx;
+}
+
+.main-panel>.goods-info>.row>.center>.bottom {
+  padding-bottom: 15rpx;
+}
+
+.main-panel>.goods-info>.row>.center>.bottom>.specs {
+  font-size: 24rpx;
+}
+
+.main-panel>.goods-info>.row>.right {
+  width: 140rpx;
+  height: 100%;
+}
+
+.main-panel>.goods-info>.row>.right>.price {
+  width: 100%;
+  text-align: right;
+  font-size: 28rpx;
+}
+
+.main-panel>.message-block {
+  width: calc(100% - 70rpx);
+  padding: 25rpx 35rpx;
+}
+
+.main-panel>.message-block .title-bar {
+  width: calc(100% - 3rpx);
+  padding-right: 3rpx;
+}
+
+.main-panel>.message-block .title-bar>.title {
+  font-size: 28rpx;
+  color: #EDB0B0;
+}
+
+.main-panel>.message-block .title-bar>.btn {
+  width: 30rpx;
+  height: 30rpx;
+  font-size: 30rpx;
+  color: #FBBBBB;
+  border-bottom: 4rpx solid #FBBBBB;
+}
+
+.main-panel>.message-block .content {
+  padding: 20rpx 0;
+}
+
+.main-panel>.message-block .content>.input,
+.main-panel>.message-block .content>.view {
+  width: 100%;
+}
+
+.main-panel>.message-block .content>.input {
+  min-height: 40rpx;
+  max-height: 80rpx;
+  font-size: 30rpx;
+  border: 3rpx solid #EDEDED;
+}
+
+.main-panel>.message-block .content>.view {
+  color: #FAF3E6;
+  font-size: 32rpx;
+  font-weight: bold;
+}
+
+.main-panel>.sender {
+  width: calc(100% - 40rpx);
+  height: 64rpx;
+  padding: 15rpx 20rpx;
+}
+
+.main-panel>.sender>.isp>.icon {
+  width: 50rpx;
+  height: 50rpx;
+  border-radius: 5rpx;
+}
+
+.main-panel>.sender>.isp>.name {
+  margin-left: 15rpx;
+  font-size: 24rpx;
+  color: #F8A9AA;
+}
+
+.main-panel>.sender>.nikename {
+  font-size: 28rpx;
+}
+
+.count-panel {
+  height: 40rpx;
+  margin-top: 54rpx;
+}
+
+.count-panel>.count-warper {
+  width: 150rpx;
+  height: 40rpx;
+  margin-left: 30rpx;
+}
+
+.count-panel>.count-warper>.btn {
+  width: 34rpx;
+  height: 34rpx;
+  line-height: 34rpx;
+  text-align: center;
+  font-size: 28rpx;
+  border-radius: 50rpx;
+  border: 3rpx solid #F44444;
+  color: #F44444;
+  margin: 0;
+  padding: 0;
+}
+
+.count-panel>.count-warper>.input {
+  width: 70rpx;
+  height: 40rpx;
+  line-height: 40rpx;
+  text-align: center;
+  font-size: 28rpx;
+}
+
+.goto-panel {
+  width: 100%;
+  margin-top: 44rpx;
+}
+
+.goto-panel>.btn {
+  width: 600rpx;
+  height: 80rpx;
+  line-height: 80rpx;
+  text-align: center;
+  font-size: 28rpx;
+  border-radius: 40rpx;
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+.get-record-panel {
+  width: 100%;
+  padding: 78rpx 0;
+}
+
+.get-record-panel>.title-bar {
+  width: calc(100% - 100rpx);
+  padding: 0 50rpx;
+}
+
+.get-record-panel>.title-bar .title {
+  text-align: center;
+}
+
+.get-record-panel>.title-bar>.big,
+.get-record-panel>.title-bar>.small {
+  width: 100%;
+  padding: 12rpx 0;
+}
+
+.get-record-panel>.title-bar>.big>.line {
+  width: 150rpx;
+  height: 2rpx;
+  background-color: #EDEDED;
+}
+
+.get-record-panel>.title-bar>.big>.title {
+  width: calc(100% - 300rpx);
+  font-size: 32rpx;
+}
+
+.get-record-panel>.title-bar>.small.title {
+  width: 100%;
+  font-size: 24rpx;
+}
+
+.get-record-panel>.body {
+  width: calc(100% - 40rpx);
+  padding: 20rpx;
+}
+
+.get-record-panel>.body>.list {
+  width: calc(100% - 10rpx);
+  padding: 0 5rpx;
+}
+
+.get-record-panel>.body>.list>.row {
+  width: calc(100% - 10rpx);
+  padding: 10rpx 0 10rpx 10rpx;
+}
+
+.get-record-panel>.body>.list>.row>.left>.pic {
+  width: 90rpx;
+  height: 90rpx;
+  border-radius: 50%;
+}
+
+.get-record-panel>.body>.list>.row>.left>.name {
+  margin-left: 30rpx;
+  font-size: 28rpx;
+}
+
+.get-record-panel>.body>.list>.row>.right>.time {
+  font-size: 28rpx
+}
