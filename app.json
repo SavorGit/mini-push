@@ -78,7 +78,9 @@
         "pages/gift/order/gift",
 		    "pages/gift/order/gift_list",
 		    "pages/gift/order/gift_detail_send",
-		    "pages/gift/order/gift_detail_receive"
+        "pages/gift/order/gift_detail_receive",
+        "pages/gift/order/select_address",
+        "pages/gift/order/receive_success"
       ]
     }
   ],

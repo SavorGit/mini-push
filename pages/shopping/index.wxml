@@ -40,7 +40,7 @@
 				<view wx:if="{{mall_cart_nums>0}}" class="marker theme-button-red">{{mall_cart_nums}}</view>
 			</view>
 		</view>
-
+<navigator url='/pages/hotel/gift/share?order_id=50074&openid=ofYZG4yZJHaV2h3lJHG5wOB9MzxE'>dddd</navigator>
 		<!-- 主面板 -->
 		<view class="main-panel flex-column-center-flex_start">
 			<scroll-view class="tab-bar theme-panel" scroll-left="{{scrollLeft}}" scroll-x="true" scroll-with-animation="true">

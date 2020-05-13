@@ -13,20 +13,20 @@
 			<view class="status-panel theme-panel">
 				<view class="status flex-row-center-flex_start">
 					<view class="icon fa fa-check-circle" aria-hidden="true"></view>
-					<view class="content one-line-overflow theme-font6">成功预定10份礼品</view>
+					<view class="content one-line-overflow theme-font6">成功预定{{order_info.amount}}份礼品</view>
 				</view>
 				<view class="tip two-line-overflow theme-font3">按实际送出进行核算，预定礼品中未送出部分的定金将原路返回您的微信账户中。</view>
 			</view>
 
 			<view class="main-panel flex-column-center-flex_start theme-panel">
 				<view class="goods-info">
-					<view class="hotel theme-font7">由花家怡园（世茂店）提供</view>
+					<view class="hotel theme-font7">由{{merchant_info.name}}提供</view>
 					<view class="row flex-row-center-space_between">
-						<image class="pic" mode="aspectFill" src="http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
+						<image class="pic" mode="aspectFill" src="{{order_goods_info.img}}"></image>
 						<view class="center flex-column-flex_start-space_between" bindtap="">
-							<view class="name two-line-overflow">麻辣小龙虾一份（大份），38只，限量供应</view>
+							<view class="name two-line-overflow">{{order_goods_info.name}}</view>
 							<view class="bottom flex-row-center-flex_start">
-								<view class="specs theme-font3">2斤简装</view>
+								<view class="specs theme-font3">{{order_goods_info.attr_name}}</view>
 							</view>
 						</view>
 						<view class="right flex-column-flex_end-flex_start" bindtap="">
@@ -34,36 +34,37 @@
 						</view>
 					</view>
 				</view>
-				<view wx:if="{{editMessage}}" class="message-block">
-					<form>
+				<view wx:if="{{is_edit_send_word}}" class="message-block">
+					<form bindsubmit="saveSendWord">
 						<view class="title-bar flex-row-center-space_between">
 							<view class="title theme-font2">寄语</view>
-							<view class="btn theme-button-welcome" style="width:80rpx;height:30rpx;line-height:30rpx;text-align:center;border-radius:5rpx;font-size:20rpx;color:#FFFFFF;border:0;" aria-hidden="true" bindtap="">保存</view>
+							<!-- <view class="btn theme-button-welcome" style="width:80rpx;height:30rpx;line-height:30rpx;text-align:center;border-radius:5rpx;font-size:20rpx;color:#FFFFFF;border:0;" aria-hidden="true" bindtap="">保存</view> -->
+							<button form-type="submit" class="btn theme-button-welcome" style="width:80rpx;height:30rpx;line-height:30rpx;text-align:center;border-radius:5rpx;font-size:20rpx;color:#FFFFFF;border:0;" aria-hidden="true" >保存</button>
 						</view>
 						<view class="content">
-							<textarea class="input">这份我最爱的礼物，送给与我同行路上的同路人，愿你万事顺遂～</textarea>
+							<textarea class="input" name="send_word" value="{{send_word}}"></textarea>
 						</view>
 					</form>
 				</view>
 				<view wx:else class="message-block">
 					<view class="title-bar flex-row-center-space_between">
 						<view class="title theme-font2">寄语</view>
-						<view class="btn fa fa-pencil" aria-hidden="true" bindtap=""></view>
+						<view class="btn fa fa-pencil" aria-hidden="true" bindtap="editSendWord"></view>
 					</view>
 					<view class="content">
-						<view class="view two-line-overflow theme-font5">这份我最爱的礼物，送给与我同行路上的同路人，愿你万事顺遂～</view>
+						<view class="view two-line-overflow theme-font5">{{send_word}}</view>
 					</view>
 				</view>
 				<view class="sender flex-row-center-space_between">
 					<view class="isp flex-row-center-flex_start">
-						<image class="icon" mode="aspectFill" src="http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
+						<image class="icon" mode="aspectFill" src="/images/imgs/default-user.png"></image>
 						<view class="name theme-font3">小热点</view>
 					</view>
-					<view class="nikename theme-font1">昵称</view>
+					<view class="nikename theme-font1">{{order_info.nickName}}</view>
 				</view>
 			</view>
 			<view class="goto-panel flex-column-center-flex_start">
-				<button class="btn theme-button-red">微信送给好友</button>
+				<button class="btn theme-button-red" open-type='share'>微信送给好友</button>
 				<view class="link theme-font5">查看赠送进度>></view>
 			</view>
 			<view class="rule-panel">

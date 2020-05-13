@@ -64,7 +64,7 @@ Page({
       }
       SavorUtils.User.isRegister(that);                           //判断用户是否注册
       that.getGiftInfo(openid,order_id);                          //获取礼品信息
-      that.getGiftReceiveList(openid,order_id);                   //获取领取列表
+      //that.getGiftReceiveList(openid,order_id);                   //获取领取列表
     }
   },
   /**
@@ -74,20 +74,30 @@ Page({
    */
   getGiftInfo:function(openid,order_id){
     var that = this;
-    utils.PostRequest(api_v_url + '/aa/bb', {
+    utils.PostRequest(api_v_url + '/gift/info', {
       openid:openid,
       order_id: order_id,
     }, (data, headers, cookies, errMsg, statusCode) =>{
       
-      //判断是否领取过但是未填写地址
-      //领取过 未填写地址 跳转到填写收货地址页面
-      //领取过  但未领取到上线
-      //领取过  已达到上线
-      //已被领取完
+      var records = data.result.records    //领取列表
+      var amount  = data.result.amount
+      var person_upnum = data.result.person_upnum;  //最大领取分数
+      var goods_info = data.result.goods;
+      var merchant_info = data.result.merchant;
+      var receive_type = data.result.receive_type;
       that.setData({
-        goods_info:data.result
+        order_info:data.result,
+        records:records,
+        amount:amount,
+        goods_info:goods_info,
+        person_upnum:person_upnum,
+        merchant_info:merchant_info,
+        receive_type:receive_type
       })
-
+      //判断是否领取过但是未填写地址
+      if(receive_type==3){
+        
+      }
     }, function () {
       wx.reLaunch({
         url: '/pages/shopping/index',
@@ -95,26 +105,11 @@ Page({
       
     });
   },
-  /***
-   * @desc 获取领取礼品列表
-   * @param {*} openid     当前用户openid
-   * @param {*} order_id   礼品订单id
-   */
-  getGiftReceiveList:function(openid,order_id){
-    var that = this;
-    utils.PostRequest(api_url + '/aa/bb', {
-      openid:openid,
-      order_id: order_id,
-    }, (data, headers, cookies, errMsg, statusCode) =>{
-      that.setData({
-        receiveList:data.result,
-      })
-    })
-  },
+  
   cutReceiveAmount:function(e){
     //判断领取数量是否超过最大值 或者剩余数量
     var remian_num = that.data.remian_num;
-    var max_receive_num = that.data.max_receive_num;
+    var person_upnum = that.data.person_upnum;
     var receive_num = that.data.receive_num;
     if(receive_num==1){
       app.showtoast('最少领取一份');
@@ -127,14 +122,14 @@ Page({
   },
   addReceiveAmount:function(e){
     var remian_num = that.data.remian_num;
-    var max_receive_num = that.data.max_receive_num;
+    var person_upnum = that.data.person_upnum;
     var receive_num = that.data.receive_num;
     if(receive_num>= remian_num ){
       app.showtoast('剩余数量不足');
       return false;
     }
-    if(receive_num>=max_receive_num){
-      app.showtoast('每个人最多领'+max_receive_num+'份');
+    if(receive_num>=person_upnum){
+      app.showtoast('每个人最多领'+person_upnum+'份');
       return false;
     }
     receive_num +=1;

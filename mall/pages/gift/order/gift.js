@@ -36,7 +36,10 @@ Page({
       order_id:order_id
     }, (data, headers, cookies, errMsg, statusCode) => {
       that.setData({
-        order_goods_list:data.result.goods,
+        order_goods_info:data.result.goods,
+        order_info:data.result,
+        merchant_info:data.result.merchant,
+        send_word:data.result.message
       })
     })
   },
@@ -51,12 +54,17 @@ Page({
   saveSendWord:function(e){
     var that = this;
     var send_word = e.detail.value.send_word;
-    utils.PostRequest(api_v_url + '/aa/bb', {
+    if(send_word==''){
+      app.showToast('请输入寄语');
+      return false;
+    }
+    utils.PostRequest(api_v_url + '/order/modifyMessage', {
       openid: openid,
       order_id:order_id,
-      send_word:send_word,
+      message:send_word,
     }, (data, headers, cookies, errMsg, statusCode) => {
       that.setData({
+        is_edit_send_word:false,
         send_word:send_word,
       })
     })
@@ -117,8 +125,8 @@ Page({
     var user_info = wx.getStorageSync(cache_key+'user_info');
 
     var nickName   = user_info.nickName
-    var goods_name = that.data.goods_name;
-    var img_url    = that.data.img_url
+    var goods_name = that.data.order_goods_info.name;
+    var img_url    = that.data.order_goods_info.img
     var title = nickName+'送你小热点好物'+goods_name;
     if (e.from === 'button') {
       // 来自页面内转发按钮
