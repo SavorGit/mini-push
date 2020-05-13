@@ -1,11 +1,16 @@
 // mall/pages/gift/order/select_address.js
-const utils   = require('../../../../utils/util.js')
-var mta       = require('../../../../utils/mta_analysis.js')
-const app     = getApp()
-var api_url   = app.globalData.api_url;
+/**
+ * 【商城】赠品选择收货地址页面
+ */
+
+
+const utils = require('../../../../utils/util.js')
+var mta = require('../../../../utils/mta_analysis.js')
+const app = getApp()
+var api_url = app.globalData.api_url;
 var api_v_url = app.globalData.api_v_url;
 var cache_key = app.globalData.cache_key;
-var order_id ;
+var order_id;
 var openid;
 Page({
 
@@ -13,6 +18,8 @@ Page({
    * 页面的初始数据
    */
   data: {
+    SystemInfo: getApp().SystemInfo,
+    statusBarHeight: getApp().globalData.statusBarHeight,
     is_have_default_address: false,
     address_id: '',
   },
@@ -24,13 +31,15 @@ Page({
     var that = this;
     wx.hideShareMenu();
     order_id = options.order_id;
-    var user_info = wx.getStorageSync(cache_key+'user_info');
-    openid   = options.openid;
-    that.setData({user_info:user_info})
+    var user_info = wx.getStorageSync(cache_key + 'user_info');
+    openid = options.openid;
+    that.setData({
+      user_info: user_info
+    })
     that.getDefaultAddr();
   },
 
-  getDefaultAddr:function(){
+  getDefaultAddr: function () {
     var that = this; //获取默认地址
     utils.PostRequest(api_v_url + '/address/getDefaultAddress', {
       openid: openid,
@@ -39,7 +48,7 @@ Page({
       if (JSON.stringify(address_info) == '{}') {
         that.setData({
           is_have_default_address: false,
-          address_id:''
+          address_id: ''
         })
         var address_id = '';
       } else {
@@ -52,41 +61,41 @@ Page({
       }
     });
   },
-  getPhoneNumber:function(e){
-    if ("getPhoneNumber:ok" != e.detail.errMsg){
+  getPhoneNumber: function (e) {
+    if ("getPhoneNumber:ok" != e.detail.errMsg) {
       wx.showTost('获取用户手机号失败')
       return false;
     }
     var iv = e.detail.iv;
     var encryptedData = e.detail.encryptedData;
     utils.PostRequest(api_url + '/aa/bb', {
-      iv:iv,
+      iv: iv,
       encryptedData: encryptedData,
       session_key: app.globalData.session_key,
-    }, (data, headers, cookies, errMsg, statusCode) =>{
+    }, (data, headers, cookies, errMsg, statusCode) => {
       //更新缓存
-      var user_info = wx.getStorageSync(cache_key+'user_info');
+      var user_info = wx.getStorageSync(cache_key + 'user_info');
       user_info.mobile = data.result.phoneNumber;
-      wx.setStorageSync(cache_key+'user_info', user_info)
+      wx.setStorageSync(cache_key + 'user_info', user_info)
       //确定收货地址领取礼品
       that.receiveGift();
     })
   },
-  receiveGift:function(){
+  receiveGift: function () {
     var that = this;
     var address_id = that.data.address_id;
-    if(address_id==''){
+    if (address_id == '') {
       app.showTost('请选择您的收货地址');
       return false;
     }
     utils.PostRequest(api_v_url + '/gift/confirmAddress/', {
-      openid:openid,
+      openid: openid,
       order_id: order_id,
-      address_id:address_id,
-    }, (data, headers, cookies, errMsg, statusCode) =>{
+      address_id: address_id,
+    }, (data, headers, cookies, errMsg, statusCode) => {
       var order_id = data.result.order_id;
       wx.redirectTo({
-        url: '/mall/pages/gift/order/receive_success?order_id='+order_id+'&openid='+openid,
+        url: '/mall/pages/gift/order/receive_success?order_id=' + order_id + '&openid=' + openid,
       })
     })
   },
@@ -112,7 +121,7 @@ Page({
         address_info: address_info,
         address_id: address_info.address_id
       })
-    }else {
+    } else {
       that.getDefaultAddr();
     }
   },

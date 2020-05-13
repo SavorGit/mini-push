@@ -1,4 +1,9 @@
 // pages/hotel/gift/share.js
+/**
+ * 【商城】赠品领取页面
+ */
+
+
 const app = getApp()
 const utils = require('../../../utils/util.js')
 const mta = require('../../../utils/mta_analysis.js')
@@ -10,17 +15,17 @@ let SavorUtils = {
 
     // 判断用户是否注册
     isRegister: pageContext => utils.PostRequest(api_v_url + '/User/isRegister', {
-      openid: pageContext.data.openid, 
-    }, (data, headers, cookies, errMsg, statusCode) =>{
+      openid: pageContext.data.openid,
+    }, (data, headers, cookies, errMsg, statusCode) => {
       pageContext.setData({
-        user_info:data.result.userinfo
+        user_info: data.result.userinfo
       })
       wx.setStorage({
         key: 'savor_user_info',
         data: data.result.userinfo,
       })
 
-    } , function () {
+    }, function () {
       wx.setStorage({
         key: 'savor_user_info',
         data: {
@@ -38,8 +43,10 @@ Page({
    * 页面的初始数据
    */
   data: {
-    receive_num:1,//领取礼品数量
-    openid:'',
+    SystemInfo: getApp().SystemInfo,
+    statusBarHeight: getApp().globalData.statusBarHeight,
+    receive_num: 1, //领取礼品数量
+    openid: '',
     showModal: false, //显示授权登陆弹窗
   },
 
@@ -53,9 +60,9 @@ Page({
       that.setData({
         openid: app.globalData.openid
       });
-      SavorUtils.User.isRegister(that);                           //判断用户是否注册
-      that.getGiftInfo(app.globalData.openid,order_id);           //获取礼品信息
-    }else {
+      SavorUtils.User.isRegister(that); //判断用户是否注册
+      that.getGiftInfo(app.globalData.openid, order_id); //获取礼品信息
+    } else {
       app.openidCallback = openid => {
         if (openid != '') {
           that.setData({
@@ -63,8 +70,8 @@ Page({
           });
         }
       }
-      SavorUtils.User.isRegister(that);                           //判断用户是否注册
-      that.getGiftInfo(openid,order_id);                          //获取礼品信息
+      SavorUtils.User.isRegister(that); //判断用户是否注册
+      that.getGiftInfo(openid, order_id); //获取礼品信息
     }
   },
   /**
@@ -72,74 +79,76 @@ Page({
    * @param {*} openid    当前用户openid
    * @param {*} order_id  礼品订单id
    */
-  getGiftInfo:function(openid,order_id){
+  getGiftInfo: function (openid, order_id) {
     var that = this;
     utils.PostRequest(api_v_url + '/gift/info', {
-      openid:openid,
+      openid: openid,
       order_id: order_id,
-    }, (data, headers, cookies, errMsg, statusCode) =>{
-      
-      var records = data.result.records    //领取列表
-      var amount  = data.result.amount
-      var person_upnum = data.result.person_upnum;  //最大领取分数
+    }, (data, headers, cookies, errMsg, statusCode) => {
+
+      var records = data.result.records //领取列表
+      var amount = data.result.amount
+      var person_upnum = data.result.person_upnum; //最大领取分数
       var goods_info = data.result.goods;
       var merchant_info = data.result.merchant;
       var receive_type = data.result.receive_type;
-      
+
       that.setData({
-        order_info:data.result,
-        records:records,
-        amount:amount,
-        goods_info:goods_info,
-        person_upnum:person_upnum,
-        merchant_info:merchant_info,
-        receive_type:receive_type
+        order_info: data.result,
+        records: records,
+        amount: amount,
+        goods_info: goods_info,
+        person_upnum: person_upnum,
+        merchant_info: merchant_info,
+        receive_type: receive_type
       })
       //判断是否领取过但是未填写地址
-      if(receive_type==3){
+      if (receive_type == 3) {
         var receive_order_id = data.result.order_id
         wx.navigateTo({
-          url: '/mall/pages/gift/order/select_address?order_id='+receive_order_id+'&openid='+openid,
+          url: '/mall/pages/gift/order/select_address?order_id=' + receive_order_id + '&openid=' + openid,
         })
       }
     }, function () {
       wx.reLaunch({
         url: '/pages/shopping/index',
       })
-      
+
     });
   },
-  
-  cutReceiveAmount:function(e){
+
+  cutReceiveAmount: function (e) {
     //判断领取数量是否超过最大值 或者剩余数量
     //var remian_num = that.data.remian_num;
     var person_upnum = that.data.person_upnum;
     var receive_num = that.data.receive_num;
-    if(receive_num==1){
+    if (receive_num == 1) {
       app.showtoast('最少领取一份');
       return false;
     }
-    receive_num -=1;
+    receive_num -= 1;
     that.setData({
-      receive_num:receive_num
+      receive_num: receive_num
     })
   },
-  addReceiveAmount:function(e){
+  addReceiveAmount: function (e) {
     //var remian_num = that.data.remian_num;
     var person_upnum = that.data.person_upnum;
     var receive_num = that.data.receive_num;
-    
-    if(receive_num>=person_upnum){
-      app.showtoast('每个人最多领'+person_upnum+'份');
+
+    if (receive_num >= person_upnum) {
+      app.showtoast('每个人最多领' + person_upnum + '份');
       return false;
     }
-    receive_num +=1;
-    that.setData({receive_num:receive_num})
+    receive_num += 1;
+    that.setData({
+      receive_num: receive_num
+    })
   },
   onGetUserInfo: function (res) {
     var that = this;
 
-    var user_info = wx.getStorageSync(cache_key+"user_info");
+    var user_info = wx.getStorageSync(cache_key + "user_info");
     var openid = user_info.openid;
     mta.Event.stat("clickonwxauth", {})
     if (res.detail.errMsg == 'getUserInfo:ok') {
@@ -155,7 +164,7 @@ Page({
             'encryptedData': rets.encryptedData
           }, (data, headers, cookies, errMsg, statusCode) => {
             wx.setStorage({
-              key: cache_key+'user_info',
+              key: cache_key + 'user_info',
               data: data.result,
             });
             that.setData({
@@ -209,40 +218,40 @@ Page({
       that.receiveGift();
     })
   },*/
-  receiveGift:function(){
+  receiveGift: function () {
     var that = this;
-   
+
     var openid = that.data.openid
     var receive_num = that.data.receive_num
     utils.PostRequest(api_v_url + '/gift/receive/', {
-      openid:openid,
+      openid: openid,
       order_id: order_id,
-      receive_num:receive_num,
-    }, (data, headers, cookies, errMsg, statusCode) =>{
+      receive_num: receive_num,
+    }, (data, headers, cookies, errMsg, statusCode) => {
       var receive_order_id = data.result.order_id;
-      var receive_type     = data.result.receive_type;
-      if(receive_type==3){
+      var receive_type = data.result.receive_type;
+      if (receive_type == 3) {
         wx.navigateTo({
-          url: '/mall/pages/gift/order/select_address?order_id='+receive_order_id+'&openid='+openid,
+          url: '/mall/pages/gift/order/select_address?order_id=' + receive_order_id + '&openid=' + openid,
         })
-      }else if(receive_type==1){
+      } else if (receive_type == 1) {
         utils.PostRequest(api_v_url + '/gift/receiveResult', {
-          openid:openid,
+          openid: openid,
           order_id: receive_order_id,
-          receive_num:receive_num,
-        }, (data, headers, cookies, errMsg, statusCode) =>{
+          receive_num: receive_num,
+        }, (data, headers, cookies, errMsg, statusCode) => {
           var receive_type = data.result.receive_type;
           var receive_order_id = data.result.order_id;
-          if(receive_type==3){
+          if (receive_type == 3) {
             wx.navigateTo({
-              url: '/mall/pages/gift/order/select_address?order_id='+receive_order_id+'&openid='+openid,
+              url: '/mall/pages/gift/order/select_address?order_id=' + receive_order_id + '&openid=' + openid,
             })
           }
         })
-        
+
       }
 
-      
+
     });
   },
   /**
@@ -257,8 +266,8 @@ Page({
    */
   onShow: function () {
     var openid = that.data.openid;
-    if(openid!=''){
-      that.getGiftInfo(openid,order_id);
+    if (openid != '') {
+      that.getGiftInfo(openid, order_id);
     }
   },
 
