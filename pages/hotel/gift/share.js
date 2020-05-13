@@ -39,6 +39,8 @@ Page({
    */
   data: {
     receive_num:1,//领取礼品数量
+    openid:'',
+    showModal: false, //显示授权登陆弹窗
   },
 
   /**
@@ -53,7 +55,6 @@ Page({
       });
       SavorUtils.User.isRegister(that);                           //判断用户是否注册
       that.getGiftInfo(app.globalData.openid,order_id);           //获取礼品信息
-      that.getGiftReceiveList(app.globalData.openid,order_id);    //获取领取列表
     }else {
       app.openidCallback = openid => {
         if (openid != '') {
@@ -64,7 +65,6 @@ Page({
       }
       SavorUtils.User.isRegister(that);                           //判断用户是否注册
       that.getGiftInfo(openid,order_id);                          //获取礼品信息
-      //that.getGiftReceiveList(openid,order_id);                   //获取领取列表
     }
   },
   /**
@@ -85,6 +85,7 @@ Page({
       var goods_info = data.result.goods;
       var merchant_info = data.result.merchant;
       var receive_type = data.result.receive_type;
+      
       that.setData({
         order_info:data.result,
         records:records,
@@ -96,7 +97,10 @@ Page({
       })
       //判断是否领取过但是未填写地址
       if(receive_type==3){
-        
+        var receive_order_id = data.result.order_id
+        wx.navigateTo({
+          url: '/mall/pages/gift/order/select_address?order_id='+receive_order_id+'&openid='+openid,
+        })
       }
     }, function () {
       wx.reLaunch({
@@ -108,7 +112,7 @@ Page({
   
   cutReceiveAmount:function(e){
     //判断领取数量是否超过最大值 或者剩余数量
-    var remian_num = that.data.remian_num;
+    //var remian_num = that.data.remian_num;
     var person_upnum = that.data.person_upnum;
     var receive_num = that.data.receive_num;
     if(receive_num==1){
@@ -121,13 +125,10 @@ Page({
     })
   },
   addReceiveAmount:function(e){
-    var remian_num = that.data.remian_num;
+    //var remian_num = that.data.remian_num;
     var person_upnum = that.data.person_upnum;
     var receive_num = that.data.receive_num;
-    if(receive_num>= remian_num ){
-      app.showtoast('剩余数量不足');
-      return false;
-    }
+    
     if(receive_num>=person_upnum){
       app.showtoast('每个人最多领'+person_upnum+'份');
       return false;
@@ -135,7 +136,60 @@ Page({
     receive_num +=1;
     that.setData({receive_num:receive_num})
   },
-  getPhoneNumber:function(e){
+  onGetUserInfo: function (res) {
+    var that = this;
+
+    var user_info = wx.getStorageSync(cache_key+"user_info");
+    var openid = user_info.openid;
+    mta.Event.stat("clickonwxauth", {})
+    if (res.detail.errMsg == 'getUserInfo:ok') {
+      wx.getUserInfo({
+        success(rets) {
+          utils.PostRequest(api_v_url + '/User/registerCom', {
+            'openid': openid,
+            'avatarUrl': rets.userInfo.avatarUrl,
+            'nickName': rets.userInfo.nickName,
+            'gender': rets.userInfo.gender,
+            'session_key': app.globalData.session_key,
+            'iv': rets.iv,
+            'encryptedData': rets.encryptedData
+          }, (data, headers, cookies, errMsg, statusCode) => {
+            wx.setStorage({
+              key: cache_key+'user_info',
+              data: data.result,
+            });
+            that.setData({
+              showModal: false,
+            })
+            //领取礼品
+            that.receiveGift();
+          }, res => wx.showToast({
+            title: '微信登陆失败，请重试',
+            icon: 'none',
+            duration: 2000
+          }));
+
+        }
+      })
+      mta.Event.stat("allowauth", {})
+    } else {
+      utils.PostRequest(api_v_url + '/User/refuseRegister', {
+        'openid': openid,
+      }, (data, headers, cookies, errMsg, statusCode) => {
+        user_info.is_wx_auth = 1;
+        wx.setStorage({
+          key: 'savor_user_info',
+          data: user_info,
+        })
+      });
+      mta.Event.stat("refuseauth", {})
+    }
+
+
+  },
+
+
+  /*getPhoneNumber:function(e){
     if ("getPhoneNumber:ok" != e.detail.errMsg){
       wx.showTost('获取用户手机号失败')
       return false;
@@ -148,23 +202,47 @@ Page({
       session_key: app.globalData.session_key,
     }, (data, headers, cookies, errMsg, statusCode) =>{
       //更新缓存
+      var user_info = wx.getStorageSync(cache_key+'user_info');
+      user_info.mobile = data.result.phoneNumber;
+      wx.setStorageSync(cache_key+'user_info', user_info)
       //领取礼品
       that.receiveGift();
     })
-  },
+  },*/
   receiveGift:function(){
     var that = this;
    
     var openid = that.data.openid
-    utils.PostRequest(api_v_url + '/aa/bb/', {
+    var receive_num = that.data.receive_num
+    utils.PostRequest(api_v_url + '/gift/receive/', {
       openid:openid,
       order_id: order_id,
+      receive_num:receive_num,
     }, (data, headers, cookies, errMsg, statusCode) =>{
-      //判断是否领取过但是未填写地址
-      //领取过 未填写地址 跳转到填写收货地址页面
-      //领取过  但未领取到上线
-      //领取过  已达到上线
-      //已被领取完
+      var receive_order_id = data.result.order_id;
+      var receive_type     = data.result.receive_type;
+      if(receive_type==3){
+        wx.navigateTo({
+          url: '/mall/pages/gift/order/select_address?order_id='+receive_order_id+'&openid='+openid,
+        })
+      }else if(receive_type==1){
+        utils.PostRequest(api_v_url + '/gift/receiveResult', {
+          openid:openid,
+          order_id: receive_order_id,
+          receive_num:receive_num,
+        }, (data, headers, cookies, errMsg, statusCode) =>{
+          var receive_type = data.result.receive_type;
+          var receive_order_id = data.result.order_id;
+          if(receive_type==3){
+            wx.navigateTo({
+              url: '/mall/pages/gift/order/select_address?order_id='+receive_order_id+'&openid='+openid,
+            })
+          }
+        })
+        
+      }
+
+      
     });
   },
   /**
@@ -178,7 +256,10 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    var openid = that.data.openid;
+    if(openid!=''){
+      that.getGiftInfo(openid,order_id);
+    }
   },
 
   /**
