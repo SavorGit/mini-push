@@ -12,6 +12,7 @@ var api_v_url = app.globalData.api_v_url;
 var cache_key = app.globalData.cache_key;
 var order_id;
 var openid;
+var nickName;
 Page({
 
   /**
@@ -31,10 +32,12 @@ Page({
     var that = this;
     wx.hideShareMenu();
     order_id = options.order_id;
+    nickName = options.nickName;
     var user_info = wx.getStorageSync(cache_key + 'user_info');
     openid = options.openid;
     that.setData({
-      user_info: user_info
+      user_info: user_info,
+      nickName:nickName
     })
     that.getDefaultAddr();
   },
@@ -60,6 +63,14 @@ Page({
         })
       }
     });
+  },
+  /**
+   * 选择收货地址
+   */
+  selectAddress: function (e) {
+    wx.navigateTo({
+      url: '/pages/mine/address/index?openid=' + openid + '&isOrder=1',
+    })
   },
   getPhoneNumber: function (e) {
     if ("getPhoneNumber:ok" != e.detail.errMsg) {

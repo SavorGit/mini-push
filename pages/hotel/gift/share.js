@@ -55,6 +55,7 @@ Page({
    */
   onLoad: function (options) {
     var that = this;
+    wx.hideShareMenu()
     order_id = options.order_id;
     if (app.globalData.openid && app.globalData.openid != '') {
       that.setData({
@@ -92,21 +93,26 @@ Page({
       var goods_info = data.result.goods;
       var merchant_info = data.result.merchant;
       var receive_type = data.result.receive_type;
-
+      var expire_date = data.result.expire_date;
+      var message = data.result.message;
+      var nickName = data.result.nickName;
       that.setData({
         order_info: data.result,
         records: records,
         amount: amount,
+        expire_date:expire_date,
         goods_info: goods_info,
         person_upnum: person_upnum,
         merchant_info: merchant_info,
-        receive_type: receive_type
+        receive_type: receive_type,
+        message:message,
+        nickName:nickName
       })
       //判断是否领取过但是未填写地址
       if (receive_type == 3) {
         var receive_order_id = data.result.order_id
         wx.navigateTo({
-          url: '/mall/pages/gift/order/select_address?order_id=' + receive_order_id + '&openid=' + openid,
+          url: '/mall/pages/gift/order/select_address?order_id=' + receive_order_id + '&openid=' + openid+'&nickName='+nickName,
         })
       }
     }, function () {
@@ -118,12 +124,13 @@ Page({
   },
 
   cutReceiveAmount: function (e) {
+    var that = this;
     //判断领取数量是否超过最大值 或者剩余数量
     //var remian_num = that.data.remian_num;
     var person_upnum = that.data.person_upnum;
     var receive_num = that.data.receive_num;
     if (receive_num == 1) {
-      app.showtoast('最少领取一份');
+      app.showToast('最少领取一份');
       return false;
     }
     receive_num -= 1;
@@ -132,12 +139,13 @@ Page({
     })
   },
   addReceiveAmount: function (e) {
+    var that = this;
     //var remian_num = that.data.remian_num;
     var person_upnum = that.data.person_upnum;
     var receive_num = that.data.receive_num;
 
     if (receive_num >= person_upnum) {
-      app.showtoast('每个人最多领' + person_upnum + '份');
+      app.showToast('最多可领取' + person_upnum + '份');
       return false;
     }
     receive_num += 1;
@@ -196,7 +204,13 @@ Page({
 
 
   },
-
+  closeWxAuth: function (e) {
+    var that = this;
+    that.setData({
+      showModal: false,
+    })
+    mta.Event.stat("closewxauth", {})
+  },
 
   /*getPhoneNumber:function(e){
     if ("getPhoneNumber:ok" != e.detail.errMsg){
@@ -220,9 +234,14 @@ Page({
   },*/
   receiveGift: function () {
     var that = this;
-
-    var openid = that.data.openid
-    var receive_num = that.data.receive_num
+    var user_info = wx.getStorageSync(cache_key+'user_info');
+    var openid = user_info.openid;
+    if(user_info.is_wx_auth!=3){
+      that.setData({
+        showModal:true
+      })
+    }else {
+      var receive_num = that.data.receive_num
     utils.PostRequest(api_v_url + '/gift/receive/', {
       openid: openid,
       order_id: order_id,
@@ -230,9 +249,11 @@ Page({
     }, (data, headers, cookies, errMsg, statusCode) => {
       var receive_order_id = data.result.order_id;
       var receive_type = data.result.receive_type;
+      var nickName = that.data.nickName;
       if (receive_type == 3) {
+        
         wx.navigateTo({
-          url: '/mall/pages/gift/order/select_address?order_id=' + receive_order_id + '&openid=' + openid,
+          url: '/mall/pages/gift/order/select_address?order_id=' + receive_order_id + '&openid=' + openid+'&nickName='+nickName,
         })
       } else if (receive_type == 1) {
         utils.PostRequest(api_v_url + '/gift/receiveResult', {
@@ -244,7 +265,7 @@ Page({
           var receive_order_id = data.result.order_id;
           if (receive_type == 3) {
             wx.navigateTo({
-              url: '/mall/pages/gift/order/select_address?order_id=' + receive_order_id + '&openid=' + openid,
+              url: '/mall/pages/gift/order/select_address?order_id=' + receive_order_id + '&openid=' + openid+'&nickName='+nickName,
             })
           }
         })
@@ -253,6 +274,8 @@ Page({
 
 
     });
+    }
+    
   },
   /**
    * 生命周期函数--监听页面初次渲染完成
@@ -265,6 +288,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
+    var that = this;
     var openid = that.data.openid;
     if (openid != '') {
       that.getGiftInfo(openid, order_id);

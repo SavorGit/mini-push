@@ -1,5 +1,7 @@
 {
   "navigationBarTitleText": "赠品领取",
   "disableScroll": true,
-  "usingComponents": {}
+  "usingComponents": {
+    "modal": "/components/modal/modal"
+  }
 }
