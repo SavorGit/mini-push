@@ -12,8 +12,8 @@
 		<view class="tab all{{tab=='0' ? ' selected' :''}}" data-tab="0" bindtap="showTab">全部订单</view>
 		<view class="tab pending{{tab=='1' ? ' selected' :''}}" data-tab="1" bindtap="showTab">待处理</view>
 		<view class="tab shipping{{tab=='3' ? ' selected' :''}}" data-tab="3" bindtap="showTab">待发货</view>
-		<view class="tab completed{{tab=='2' ? ' selected' :''}}" data-tab="2" bindtap="showTab">已发货</view>
-		<view class="tab completed{{tab=='4' ? ' selected' :''}}" data-tab="4" bindtap="showTab">已取消</view>
+		<view class="tab completed{{tab=='4' ? ' selected' :''}}" data-tab="4" bindtap="showTab">已发货</view>
+		<view class="tab completed{{tab=='5' ? ' selected' :''}}" data-tab="5" bindtap="showTab">已取消</view>
 	</view>
 
 	<!-- 全部订单 -->
@@ -179,7 +179,7 @@
 	</scroll-view>
 
 	<!-- 已完成订单 -->
-	<scroll-view wx:if="{{tab=='2'}}" class="scroll-view" scroll-y="true" scroll-with-animation="true" bindscrolltolower="loadMore">
+	<scroll-view wx:if="{{tab=='4'}}" class="scroll-view" scroll-y="true" scroll-with-animation="true" bindscrolltolower="loadMore">
 		<view class="list completed flex-column-center-flex_start">
 
 			<view class="row flex-column-center-space_between theme-panel" wx:for="{{complete_order_list}}" wx:key="key" wx:for-item="bean" wx:for-index="index">
@@ -231,7 +231,7 @@
 		</view>
 	</scroll-view>
 	<!-- 已取消 -->
-	<scroll-view wx:if="{{tab=='4'}}" class="scroll-view" scroll-y="true" scroll-with-animation="true" bindscrolltolower="loadMore">
+	<scroll-view wx:if="{{tab=='5'}}" class="scroll-view" scroll-y="true" scroll-with-animation="true" bindscrolltolower="loadMore">
 		<view class="list completed flex-column-center-flex_start">
 
 			<view class="row flex-column-center-space_between theme-panel" wx:for="{{cancel_order_list}}" wx:key="key" wx:for-item="bean" wx:for-index="index">

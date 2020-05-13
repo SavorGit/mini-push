@@ -45,8 +45,9 @@ Page({
     that.getOrderList(0,1)
     that.getOrderList(1, 1)
     that.getOrderList(3, 1)
-    that.getOrderList(2, 1)
+    ///that.getOrderList(2, 1)
     that.getOrderList(4,1)
+    that.getOrderList(5,1)
   },
   getOrderList:function(status,page,){
     var that = this;
@@ -68,11 +69,11 @@ Page({
         that.setData({
           ship_order_list: data.result.datalist
         })
-      } else if (status == 2) {
+      } else if (status == 4) {
         that.setData({
           complete_order_list: data.result.datalist
         })
-      }else if(status == 4){
+      }else if(status == 5){
         that.setData({
           cancel_order_list:data.result.datalist
         })
@@ -125,7 +126,7 @@ Page({
             //已完成
             //that.getOrderList(2,page_complete);
             //已取消
-            that.getOrderList(4,page_cancel);
+            that.getOrderList(5,page_cancel);
             
             
           })
@@ -146,10 +147,10 @@ Page({
     } else if (order_status == 3) {
       page_ship += 1;
       page = page_ship;
-    } else if (order_status == 2) {
+    } else if (order_status == 4) {
       page_complete += 1;
       page = page_complete;
-    }else if(order_status == 4){
+    }else if(order_status == 5){
       page_cancel +=1;
       page = page_cancel;
     }
