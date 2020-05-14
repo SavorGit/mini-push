@@ -12,26 +12,26 @@
 		<view class="panel">
 			<view class="body flex-row-center-flex_start" style="height:100rpx;padding:0 30rpx;">
 				<view class="fa fa-forward" aria-hidden="true" style="width:60rpx;color:rgb(251, 107, 33);font-size:36rpx;"></view>
-				<view class="status one-line-overflow theme-font1" style="width:calc(100% - 60rpx);font-size:36rpx;">赠送中...</view>
+				<view class="status one-line-overflow theme-font1" style="width:calc(100% - 60rpx);font-size:36rpx;">{{order_info.status_str}}</view>
 			</view>
 		</view>
 		<view class="goods-info input-panel theme-panel">
 			<view class="body flex-column-center-space_between">
 				<view class="buy-info flex-column-center-space_between" style="background-color: rgb(250, 243, 230);">
 					<view class="hotel flex-row-center-space_between theme-font7">
-						<image class="pic" mode="aspectFill" src="http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
-						<view class="name one-line-overflow">由花家怡园（世茂店）提供</view>
+						<image class="pic" mode="aspectFill" src="{{merchant.img}}"></image>
+						<view class="name one-line-overflow">由{{merchant.name}}提供</view>
 					</view>
 					<view class="row flex-row-center-space_between">
-						<image class="pic" mode="aspectFill" src="http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
+						<image class="pic" mode="aspectFill" src="{{goods.img}}"></image>
 						<view class="center" bindtap="">
-							<view class="name two-line-overflow">麻辣小龙虾一份（大份），38只，限量供应</view>
+							<view class="name two-line-overflow">{{goods.name}}</view>
 							<view class="bottom flex-row-center-flex_start">
-								<view class="specs theme-font2">2斤简装</view>
+								<view class="specs theme-font2">{{goods.attr_name}}</view>
 							</view>
 						</view>
 						<view class="right flex-column-flex_end-center" bindtap="">
-							<view class="price one-line-overflow theme-font5">￥1018</view>
+							<view class="price one-line-overflow theme-font5">￥{{goods.price}}</view>
 							<view class="count one-line-overflow theme-font2">X1</view>
 						</view>
 					</view>
@@ -42,22 +42,22 @@
 				</view>
 				<view class="give flex-row-center-space_between">
 					<view class="isp flex-row-center-flex_start">
-						<image class="icon" mode="aspectFill" src="http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
+						<image class="icon" mode="aspectFill" src="/images/imgs/default-user.png"></image>
 						<view class="name theme-font1">小热点</view>
 					</view>
 					<view class="nikename theme-font1">昵称</view>
 				</view>
 			</view>
 			<view class="foot flex-row-center-space_between">
-				<view class="theme-font1">￥1018*1份</view>
-				<view class="theme-font1">合计：￥1018元</view>
+				<view class="theme-font1">￥{{goods.price}}*{{order_info.amount}}份</view>
+				<view class="theme-font1">合计：￥{{order_info.total_fee}}元</view>
 			</view>
 		</view>
 		<view class="panel get theme-panel">
 			<view class="head flex-row-center-space_between">
 				<view class="left">
-					<view class="title">共10份，已领取3份</view>
-					<view class="expiry-date">领取有效期至：2020.01.01</view>
+					<view class="title">共{{order_info.amount}}份，已领取{{gift_records.length}}份</view>
+					<view class="expiry-date">领取有效期至：{{order_info.expire_date}}</view>
 				</view>
 				<view class="right">
 					<button class="btn theme-button-orange" bindtap=''>送给好友</button>
@@ -65,33 +65,16 @@
 			</view>
 			<view class="body">
 				<view class="list">
-					<view class="row flex-row-center-space_between">
+					<view class="row flex-row-center-space_between" wx:for="{{gift_records}}" wx:key="key" wx:for-item="bean" wx:for-index="index">
 						<view class="left flex-row-center-flex_start">
-							<image class="pic" mode="aspectFill" src="http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
-							<view class="nikename">昵称</view>
+							<image class="pic" mode="aspectFill" src="{{bean.avatarUrl}}"></image>
+							<view class="nikename">{{bean.nickName}}</view>
 						</view>
 						<view class="right">
-							<view class="get-time theme-font2">3分钟前领取</view>
+							<view class="get-time theme-font2">{{bean.time_str}}领取</view>
 						</view>
 					</view>
-					<view class="row flex-row-center-space_between">
-						<view class="left flex-row-center-flex_start">
-							<image class="pic" mode="aspectFill" src="http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
-							<view class="nikename">昵称</view>
-						</view>
-						<view class="right">
-							<view class="get-time theme-font2">3小时前领取</view>
-						</view>
-					</view>
-					<view class="row flex-row-center-space_between">
-						<view class="left flex-row-center-flex_start">
-							<image class="pic" mode="aspectFill" src="http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
-							<view class="nikename">昵称</view>
-						</view>
-						<view class="right">
-							<view class="get-time theme-font2">3天前领取</view>
-						</view>
-					</view>
+					
 				</view>
 			</view>
 		</view>

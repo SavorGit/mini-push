@@ -3,7 +3,14 @@
  * 【商城】赠送订单详情页面
  */
 
-
+const utils = require('../../../../utils/util.js')
+var mta = require('../../../../utils/mta_analysis.js')
+const app = getApp()
+var api_url = app.globalData.api_url;
+var api_v_url = app.globalData.api_v_url;
+var cache_key = app.globalData.cache_key;
+var order_id ;
+var openid ;
 Page({
 
   /**
@@ -18,9 +25,30 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    var that = this;
+    order_id = options.order_id;
+    openid   = options.openid;
+    that.getOrderInfo(order_id,openid);
   },
-
+  getOrderInfo:function(e){
+    var that = this;
+    utils.PostRequest(api_v_url + '/order/detail', {
+      openid:openid,
+      order_id:order_id
+    }, (data, headers, cookies, errMsg, statusCode) => {
+      var goods   = data.result.goods[0];
+      var merchant= data.result.merchant;
+      var order_info = data.result;
+      var gift_records = data.result.gift_records;
+      var message = data.result.message
+      that.setData({
+        goods:goods,
+        merchant:merchant,
+        order_info:order_info,
+        gift_records:gift_records
+      })
+    })
+  },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
@@ -67,6 +95,29 @@ Page({
    * 用户点击右上角分享
    */
   onShareAppMessage: function () {
+    var that = this;
+    var nickName   = that.data.oorder_info.nickName
+    var goods_name = that.data.goods.name;
+    var img_url    = that.data.goods.img
+    var title = nickName+'送你小热点好物'+goods_name;
+    if (e.from === 'button') {
+      // 来自页面内转发按钮
+      return {
+        title: title,
+        path: '/pages/hotel/gift/share?order_id=' + order_id,
+        imageUrl: img_url,
+        success: function (res) {
+        },
+      }
+    } else {
+      return {
+        title: title,
+        path: '/pages/hotel/gift/share?order_id=' + order_id,
+        imageUrl: img_url,
+        success: function (res) {
+        },
+      }
+    }
 
   }
 })

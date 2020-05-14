@@ -400,12 +400,15 @@ Page({
    */
   gotoOrder:function(e){
     
-    var  openid = this.data.openid;
+    var userinfo = wx.getStorageSync(cache_key+'user_info');
+    var openid = userinfo.openid
     var type = e.currentTarget.dataset.type;
     if(type==3){
       var url = '/pages/hotel/order/index?openid=' + openid + "&order_status=0";
     }else if(type==5){
       var url = '/mall/pages/order/list?openid=' + openid + "&order_status=0";
+    }else if(type==6){
+      var url = '/mall/pages/gift/order/gift_list?openid=' + openid + "&order_status=0";
     }
     wx.navigateTo({
       url: url,

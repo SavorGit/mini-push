@@ -9,22 +9,22 @@
 
 <scroll-view class='container theme-container' style='height: calc(100vh - {{46 + statusBarHeight + SystemInfo.screenBottomSpace}}px);' scroll-y="true" scroll-with-animation="true">
 	<view class="page-wapper">
-		<view class="input-panel logistics theme-panel">
+		<view class="input-panel logistics theme-panel" wx:if="{{express.length>0}}">
 			<view class="head">配送信息</view>
 			<view class="body flex-column-center-space_between">
 				<view class="tab-bar flex-row-center-flex_start">
-					<block wx:for="{{logisticsList}}" wx:for-index="index" wx:for-item="logistics" wx:key="key">
-						<view class="tab{{logisticsTab==index+1?' selected':''}}" data-index="{{index}}" data-tab="{{index+1}}" bindtap="showLogisticsTab">运单{{index+1}}</view>
+					<block wx:for="{{express}}" wx:for-index="index" wx:for-item="bean" wx:key="key">
+						<view class="tab{{logisticsTab==index+1?' selected':''}}" data-index="{{index}}" data-tab="{{index+1}}" bindtap="showLogisticsTab">{{bean.name}}</view>
 					</block>
 				</view>
-				<block wx:for="{{logisticsList}}" wx:for-index="index" wx:for-item="logistics" wx:key="key">
+				<block wx:for="{{express}}" wx:for-index="index" wx:for-item="bean" wx:key="key">
 					<view wx:if="{{logisticsTab==index+1}}" data-index="{{index}}" class="tab-body">
-						<view class="row flex-row-center-space_between" style="height:unset;" wx:if="{{order_info.status==53 &&is_have_express==true}}" bindtap="gotoExinfo">
+						<view class="row flex-row-center-space_between" style="height:unset;"  bindtap="gotoExinfo" data-express_id="{{bean.express_id}}">
 							<view class="fa fa-truck theme-font" style="width:50rpx;font-size:32rpx;text-align:center;" aria-hidden="true"></view>
 							<view class="view flex-column-flex_start-space_between" style="width:calc(100% - 120rpx);height:unset;padding:20rpx 0;">
-								<view class="one-line-overflow">{{express.state_str}}</view>
-								<view class="two-line-overflow theme-font2">{{express.data[0].context}}</view>
-								<view class="one-line-overflow theme-font3">{{express.data[0].time}}</view>
+								<view class="one-line-overflow">{{bean.data[0].state_str}}</view>
+								<view class="two-line-overflow theme-font2">{{bean.data[0].context}}</view>
+								<view class="one-line-overflow theme-font3">{{bean.data[0].time}}</view>
 							</view>
 							<view class="fa fa-chevron-right" style="width:50rpx;font-size:32rpx;text-align:center;" aria-hidden="true"></view>
 						</view>
@@ -55,7 +55,7 @@
 					<image class="pic" mode="aspectFill" src="{{merchant.img}}"></image>
 					<view class="name one-line-overflow">{{merchant.name}}</view>
 				</view>
-				<view class="row flex-row-center-space_between" wx:for="{{order_info.goods}}" wx:key="key" wx:for-item="bean" wx:for-index="index">
+				<view class="row flex-row-center-space_between" wx:for="{{goods}}" wx:key="key" wx:for-item="bean" wx:for-index="index">
 					<image class="pic" mode="aspectFill" src="{{bean.img}}"></image>
 					<view class="center" bindtap="">
 						<view class="name two-line-overflow">{{bean.name}}</view>
@@ -83,7 +83,7 @@
 				</view>
 				<view class="row flex-row-center-space_between">
 					<view class="lable theme-font3">领取时间</view>
-					<view class="view">2018-01-23 08:40</view>
+					<view class="view">{{order_info.add_time}}</view>
 				</view>
 				<view class="row flex-row-center-space_between">
 					<view class="lable theme-font3">赠送人</view>

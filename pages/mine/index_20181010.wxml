@@ -31,7 +31,7 @@
 			<view class="fa fa-angle-right" aria-hidden="true"></view>
 		</view>
 	</view>
-	<view class="promotion-goods-manage-panel theme-font2 theme-panel" bindtap="">
+	<view class="promotion-goods-manage-panel theme-font2 theme-panel" bindtap="gotoOrder" data-type="6">
 		<view class="full_width full_height flex-row-center-space_between">
 			<view>赠送订单</view>
 			<view class="fa fa-angle-right" aria-hidden="true"></view>
