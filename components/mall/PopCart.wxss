@@ -1,0 +1,188 @@
+/* components/mall/PopCart.wxss */
+@import "/font-awesome.wxss";
+@import "/animation.wxss";
+@import "/app.wxss";
+@import "/theme.wxss";
+/**
+ * [组件] 商城购物车弹窗
+ */
+
+
+.mask {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.4);
+  z-index: 10;
+}
+
+.window {
+  width: 100%;
+  height: 80vh;
+  z-index: 11;
+  position: absolute;
+  bottom: 0;
+  border-radius: 20rpx 20rpx 0 0;
+}
+
+.window.open {
+  -webkit-animation-duration: 0.5s;
+  animation-duration: 0.5s;
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
+  -webkit-animation-name: fadeInDown;
+  animation-name: fadeInDown;
+}
+
+.window.close {
+  -webkit-animation-duration: 0.5s;
+  animation-duration: 0.5s;
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
+  -webkit-animation-name: fadeOutUp;
+  animation-name: fadeOutUp;
+}
+
+.window>.top {
+  width: calc(100% - 50rpx);
+  height: 110rpx;
+  padding: 20rpx 20rpx 20rpx 30rpx;
+  border-bottom: 3rpx solid #EDEDED;
+}
+
+.window>.top>.pic {
+  width: 156rpx;
+  height: 156rpx;
+  border: 3rpx solid #FFFFFF;
+  margin-top: -50rpx;
+  border-radius: 5rpx;
+}
+
+.window>.top>.center {
+  width: calc(100% - 230rpx);
+  height: 100%;
+}
+
+.window>.top>.center>.name {
+  width: 100%;
+  font-size: 28rpx;
+}
+
+.window>.top>.center>.price {
+  width: 100%;
+  font-size: 28rpx;
+}
+
+.window>.top>.right {
+  width: 40rpx;
+  height: 100%;
+}
+
+.window>.top>.right>.btn {
+  width: 40rpx;
+  height: 40rpx;
+  line-height: 40rpx;
+  text-align: center;
+  font-size: 40rpx;
+}
+
+.window>.top>.right>.btn.circle {
+  border-radius: 50%;
+  border: 3rpx solid #333333;
+}
+
+.window>.middle {
+  width: calc(100% - 80rpx);
+  height: calc(100% - 245rpx);
+  padding: 10rpx 40rpx;
+}
+
+.window>.middle .specs-panel {
+  width: 100%;
+}
+
+.window>.middle .specs-panel>.title-bar {
+  padding: 5rpx 0;
+}
+
+.window>.middle .specs-panel>.title-bar>.title {
+  font-size: 28rpx;
+}
+
+.window>.middle .specs-panel>.body {
+  padding: 5rpx 0;
+}
+
+.window>.middle .specs-panel>.body>.specs-group {
+  width: 100%;
+}
+
+.window>.middle .specs-panel>.body>.specs-group>.specs {
+  height: 40rpx;
+  line-height: 40rpx;
+  padding: 5rpx 15rpx;
+  margin-left: 20rpx;
+  margin-bottom: 10rpx;
+  display: inline-block;
+  font-size: 24rpx;
+  border-radius: 25rpx;
+}
+
+.window>.middle .specs-panel>.body>.specs-group>.specs.selected {
+  color: #F44444;
+  background-color: rgba(244, 68, 68, 0.3);
+}
+
+.window>.middle .count {
+  width: 100%;
+}
+
+.window>.middle .count>.label {
+  font-size: 28rpx;
+}
+
+.window>.middle .count>.value>.btn {
+  width: 34rpx;
+  height: 34rpx;
+  line-height: 30rpx;
+  text-align: center;
+  font-size: 32rpx;
+  color: #BEBEBE;
+  border: 3rpx solid #BEBEBE;
+  border-radius: 5rpx;
+  margin: 0;
+  padding: 0;
+}
+
+.window>.middle .count>.value>input {
+  width: 60rpx;
+  height: 40rpx;
+  line-height: 40rpx;
+  text-align: center;
+  font-size: 24rpx;
+}
+
+.window>.middle .stock {
+  width: 100%;
+  font-size: 24rpx;
+  padding-bottom: 10rpx;
+}
+
+.window>.bottom {
+  width: 100%;
+  height: 80rpx;
+}
+
+.window>.bottom>.btn {
+  width: calc(50% - 2rpx);
+  height: 80rpx;
+  line-height: 80rpx;
+  text-align: center;
+  font-size: 24rpx;
+  border-radius: 0;
+  border: 0;
+  margin: 0;
+  padding: 0;
+}

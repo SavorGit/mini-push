@@ -1,5 +1,7 @@
 {
   "navigationBarTitleText": "领取成功",
   "disableScroll": true,
-  "usingComponents": {}
+  "usingComponents": {
+    "PopAddCartWindow": "/components/mall/PopCart"
+  }
 }

@@ -1,0 +1,43 @@
+<!--components/modal/CascadeSelection.wxml-->
+<!--
+ | [组件] 级联选择
+ |-->
+
+
+<!-- <view wx:if="{{show}}" class="page"> -->
+<view wx:if="{{maskShow}}" class="mask" bindtap='clickMask'></view>
+<view wx:if="{{windowShow}}" class="window {{openWindow?'open':'close'}}" style="top:{{76 + statusBarHeight}}px;">
+	<view class="title-bar">
+		<view class="title">{{titleText}}</view>
+		<view class="btn fa fa-times" aria-hidden="true" bindtap="clickCloseBtton"></view>
+	</view>
+	<view class="body">
+		<view class="panel chosed">
+			<view class="body">
+				<block wx:for="{{chosedList}}" wx:for-item="item" wx:key="key" wx:for-index="index">
+					<view class="item{{index >= chosedList.length - 1 ? ' cur' : ''}}">{{item}}</view>
+				</block>
+			</view>
+		</view>
+		<scroll-view class="scroll-view" scroll-y="true" scroll-with-animation="true">
+			<view class="panel hoted">
+				<view wx:if="{{hotedTitle!=''}}" class="title-bar">
+					<view class="title">{{hotedTitle}}</view>
+				</view>
+				<view class="body">
+					<block wx:for="{{hotedList}}" wx:for-item="item" wx:key="key" wx:for-index="index">
+						<view class="item" data-index="{{index}}" bindtap="clickHotedItem">{{item.name}}</view>
+					</block>
+				</view>
+			</view>
+			<view class="panel list">
+				<view class="body">
+					<block wx:for="{{list}}" wx:for-item="item" wx:key="key" wx:for-index="index">
+						<view class="item" data-index="{{index}}" bindtap="clickItem">{{item.name}}</view>
+					</block>
+				</view>
+			</view>
+		</scroll-view>
+	</view>
+</view>
+<!-- </view> -->

@@ -29,12 +29,12 @@ Page({
     var that = this;
     wx.hideShareMenu()
     order_id = options.order_id;
-    openid   = options.openid;
+    openid = options.openid;
     goods_id = options.goods_id;
     that.setData({
-      order_id:order_id,
-      openid:openid,
-      goods_id:goods_id
+      order_id: order_id,
+      openid: openid,
+      goods_id: goods_id
     })
     that.getRecommend(goods_id, 1, 4);
   },
@@ -50,22 +50,22 @@ Page({
       })
     });
   },
-  gotoOrderDetail:function(e){
+  gotoOrderDetail: function (e) {
     wx.navigateTo({
-      url: '/mall/pages/gift/order/gift_detail_receive?order_id='+order_id+'&openid='+openid,
+      url: '/mall/pages/gift/order/gift_detail_receive?order_id=' + order_id + '&openid=' + openid,
     })
   },
-  present:function(e){
+  present: function (e) {
     wx.navigateTo({
-      url: '/mall/pages/gift/order/present?goods_id='+goods_id+'&openid='+openid+'&amount=1',
+      url: '/mall/pages/gift/order/present?goods_id=' + goods_id + '&openid=' + openid + '&amount=1',
     })
   },
-  gotoIndex:function(e){
+  gotoIndex: function (e) {
     wx.reLaunch({
       url: '/pages/shopping/index',
     })
   },
-  gotoRecList:function(e){
+  gotoRecList: function (e) {
     wx.navigateTo({
       url: '/mall/pages/goods/recommendation',
     })
@@ -113,17 +113,17 @@ Page({
     cart_info.price = goods_info.price;
     cart_info.line_price = goods_info.line_price;
     cart_info.stock_num = goods_info.stock_num;
-    cart_info.type  = goods_info.type;
-    if(cart_info.gtype==2){
+    cart_info.type = goods_info.type;
+    if (cart_info.gtype == 2) {
       cart_info.img_url = goods_info.model_img
-    }else{
+    } else {
       cart_info.img_url = goods_info.img_url;
     }
     cart_info.amount = goods_info.amount;
 
 
     cart_info.ischecked = true;
-    
+
     var user_info = wx.getStorageSync("savor_user_info");
     var openid = user_info.openid;
     var mall_cart_list = wx.getStorageSync(cache_key + 'mall_cart_' + openid);
@@ -170,12 +170,12 @@ Page({
   openBuyGoodsPopWindow: function (e) {
     let self = this;
     var goods_info = e.currentTarget.dataset.goods_info;
-    var goods_id  = e.currentTarget.dataset.goods_id;
+    var goods_id = e.currentTarget.dataset.goods_id;
     goods_info.amount = 1;
     self.setData({
       showBuyGoodsPopWindow: true,
       goods_info: goods_info,
-      goods_id:goods_id
+      goods_id: goods_id
     });
   },
 
@@ -195,48 +195,52 @@ Page({
       url: '/mall/pages/order/confirmation?goods_id=' + goods_info.id + '&openid=' + openid + '&order_type=1&amount=' + goods_info.amount,
     })
   },
-  selectModel:function(e){
+  selectModel: function (e) {
     var that = this;
     var goods_info = that.data.goods_info;
-    var index = e.currentTarget.dataset.index;  //规格分类
-    var idx   = e.currentTarget.dataset.idx;    //规格类型
-    for(let j in goods_info.attrs[index].attrs){
-      if(goods_info.attrs[index].attrs[j].is_select==1){
+    // var index = e.currentTarget.dataset.index;  //规格分类
+    // var idx   = e.currentTarget.dataset.idx;    //规格类型
+    var index = e.detail.dataset.groupIndex; //规格分类
+    var idx = e.detail.dataset.itemIndex; //规格类型
+    for (let j in goods_info.attrs[index].attrs) {
+      if (goods_info.attrs[index].attrs[j].is_select == 1) {
         goods_info.attrs[index].attrs[j].is_select = 0;
         break;
       }
     }
     goods_info.attrs[index].attrs[idx].is_select = 1;
-    
+
     //通过接口获取对应规格的商品信息
     that.getGoodsDetailByAttrs(goods_info.attrs);
 
   },
-  getGoodsDetailByAttrs:function(attrs){
+  getGoodsDetailByAttrs: function (attrs) {
     var that = this;
-    
+
     var attr = '';
     var space = '';
-    for(let i in attrs){
-      for (let j in attrs[i].attrs){
-        if(attrs[i].attrs[j].is_select==1){
+    for (let i in attrs) {
+      for (let j in attrs[i].attrs) {
+        if (attrs[i].attrs[j].is_select == 1) {
           attr += space + attrs[i].attrs[j].id;
           space = '_';
         }
       }
     }
-    if(attr !=''){
+    if (attr != '') {
       var goods_id = that.data.goods_id;
       utils.PostRequest(api_v_url + '/goods/getDetailByAttr', {
         attr: attr,
-        goods_id:goods_id
+        goods_id: goods_id
       }, (data, headers, cookies, errMsg, statusCode) => {
         var goods_info = data.result;
         goods_info.amount = 1;
         that.setData({
-          goods_info:goods_info
+          goods_info: goods_info
         })
-      }, re => { }, { isShowLoading: false });
+      }, re => {}, {
+        isShowLoading: false
+      });
     }
   },
   /**

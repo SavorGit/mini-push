@@ -38,12 +38,7 @@
 								</view>
 							</view>
 						</view>
-						
-					
-						
-						
-						
-						
+
 					</view>
 				</view>
 			</view>
@@ -52,8 +47,9 @@
 </view>
 
 <!-- 购买商品弹窗 -->
+<PopAddCartWindow show="{{showBuyGoodsPopWindow}}" goods="{{goods_info}}" tags="{{goods_info.attrs}}" bindClickMask="closeBuyGoodsPopWindow" bindSelectSpecs="selectModel" bindAddCount="addNum" bindCutCount="cutNum" bindAddCart="addMallCart" bindBuyNow="buyOne" />
+<!-- 购买商品弹窗 
 <block wx:if="{{showBuyGoodsPopWindow}}">
-	<!-- <view wx:if="{{showBuyGoodsPopWindow}}" class="mask"> -->
 	<view class="mask" bindtap="closeBuyGoodsPopWindow" style="bottom:{{SystemInfo.screenBottomSpace}}px;"></view>
 	<view class="buy-goods-window theme-panel">
 		<view class="top flex-row-flex_end-space_between">
@@ -64,7 +60,6 @@
 				<view class="price one-line-overflow theme-font5">￥{{goods_info.price}}</view>
 			</view>
 			<view class="right flex-column-center-flex_start">
-				<!-- <view class="btn fa fa-times-circle-o" aria-hidden="true" bindtap="closeBuyGoodsPopWindow"></view> -->
 				<image class="btn" src="/images/icon2/ededed_close.png" bindtap="closeBuyGoodsPopWindow"></image>
 			</view>
 		</view>
@@ -98,5 +93,5 @@
 			<view class="btn theme-button-red" bindtap="buyOne">立即购买</view>
 		</view>
 	</view>
-	<!-- </view> -->
 </block>
+-->

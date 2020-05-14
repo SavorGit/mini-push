@@ -1,0 +1,162 @@
+/* components/modal/CascadeSelection.wxss */
+@import "/font-awesome.wxss";
+@import "/animation.wxss";
+/**
+ * [组件] 级联选择
+ */
+
+
+/* .page {
+  width: 0;
+  height: 0;
+} */
+
+.mask {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.4);
+  z-index: 9999;
+}
+
+.window {
+  width: 100%;
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 80px;
+  bottom: 0;
+  background-color: #FFFFFF;
+  z-index: 10000;
+}
+
+.window.open {
+  -webkit-animation-duration: 0.5s;
+  animation-duration: 0.5s;
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
+  -webkit-animation-name: fadeInDown;
+  animation-name: fadeInDown;
+}
+
+.window.close {
+  -webkit-animation-duration: 0.5s;
+  animation-duration: 0.5s;
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
+  -webkit-animation-name: fadeOutUp;
+  animation-name: fadeOutUp;
+}
+
+.title-bar {
+  width: calc(100% - 60rpx);
+  height: 70rpx;
+  padding: 15rpx 30rpx;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.title-bar>.title {
+  font-size: 36rpx;
+  font-weight: bold;
+}
+
+.title-bar>.btn {
+  width: 60rpx;
+  height: 60rpx;
+  line-height: 60rpx;
+  text-align: center;
+  font-size: 64rpx;
+}
+
+.body {
+  width: 100%;
+  height: calc(100% - 100rpx);
+}
+
+.panel {
+  width: calc(100% - 40rpx);
+  padding: 10rpx 20rpx;
+}
+
+.panel>.title-bar {
+  width: 100%;
+  height: 40rpx;
+  padding: 10rpx 0;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.panel>.title-bar>.title {
+  font-size: 32rpx;
+  font-weight: bold;
+  color: #999999;
+}
+
+.panel>.body {
+  width: 100%;
+}
+
+.chosed {
+  height: 50rpx;
+}
+
+.chosed>.body {
+  width: 100%;
+  height: 50rpx;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.chosed>.body>.item {
+  height: 50rpx;
+  line-height: 50rpx;
+  padding: 0 10rpx;
+  color: #333333;
+  font-size: 32rpx;
+}
+
+.chosed>.body>.cur {
+  height: 45rpx;
+  color: #F44444;
+  border-bottom: 5rpx solid #F44444;
+}
+
+.body>.scroll-view {
+  width: 100%;
+  height: calc(100% - 70rpx);
+}
+
+.hoted>.body>.item {
+  height: 40rpx;
+  line-height: 40rpx;
+  text-align: center;
+  padding: 0 20rpx;
+  margin-left: 20rpx;
+  border-radius: 25rpx;
+  font-size: 28rpx;
+  display: inline-block;
+  box-sizing: border-box;
+  color: #333333;
+  background-color: #EFEFEF;
+}
+
+.list>.body>.item {
+  width: calc(100% - 80rpx);
+  height: 50rpx;
+  line-height: 50rpx;
+  padding: 10rpx 40rpx;
+  font-size: 28rpx;
+  color: #333333;
+}
