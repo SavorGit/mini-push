@@ -2,7 +2,7 @@
 /**
  * 【商城】赠品领取成功页面
  */
- .mask {
+.mask {
   position: absolute;
   left: 0;
   right: 0;
@@ -95,12 +95,13 @@
 }
 
 .recommend-panel>.body {
-  width: calc(100% - 40rpx);
-  padding: 20rpx;
+  width: 100%;
 }
 
+/*
 .recommend-panel>.body>.list {
-  width: 100%;
+  width: calc(100% - 40rpx);
+  padding: 20rpx;
 }
 
 .recommend-panel>.body>.list>.item {
@@ -151,8 +152,99 @@
   padding: 0;
   background: unset;
 }
+*/
+.recommend-panel>.body>.list {
+  width: 100%;
+}
 
-/* ======================================== 购买商品弹窗 ======================================== */
+.recommend-panel>.body>.list>.item {
+  width: calc(100% - 40rpx);
+  margin: 20rpx 20rpx 0 20rpx;
+  border-radius: 10rpx;
+}
+
+.recommend-panel>.body>.list>.item>.top,
+.recommend-panel>.body>.list>.item>.top>.pic {
+  width: 100%;
+  height: 400rpx;
+}
+
+.recommend-panel>.body>.list>.item>.top>.pic {
+  border-radius: 10rpx 10rpx 0 0;
+}
+
+.recommend-panel>.body>.list>.item>.top>.marker {
+  width: 80rpx;
+  height: 43rpx;
+  line-height: 43rpx;
+  text-align: center;
+  margin-top: -380rpx;
+  margin-left: -10rpx;
+  border-radius: 5rpx;
+  font-size: 32rpx;
+}
+
+.recommend-panel>.body>.list>.item>.bottom {
+  width: calc(100% - 60rpx);
+  padding: 20rpx 30rpx;
+}
+
+.recommend-panel>.body>.list>.item>.bottom>.name {
+  font-size: 28rpx;
+}
+
+.recommend-panel>.body>.list>.item>.bottom>.bottom {
+  width: 100%;
+  padding-top: 20rpx;
+}
+
+.recommend-panel>.body>.list>.item>.bottom>.bottom>.left>.price {
+  font-size: 20rpx;
+  font-weight: bold;
+}
+
+.recommend-panel>.body>.list>.item>.bottom>.bottom>.left>.price>text {
+  margin-left: 5rpx;
+  font-size: 32rpx;
+}
+
+.recommend-panel>.body>.list>.item>.bottom>.bottom>.left>.market {
+  padding: 5rpx;
+  margin-left: 30rpx;
+  text-decoration: line-through;
+}
+
+.recommend-panel>.body>.list>.item>.bottom>.bottom>.right>.btn {
+  width: 34rpx;
+  height: 34rpx;
+  line-height: 34rpx;
+  text-align: center;
+  font-size: 40rpx;
+}
+
+.recommend-panel>.body>.list>.item>.bottom>.bottom>.right>image.btn {
+  padding: 8rpx;
+  border: 3rpx solid #F44444;
+  border-radius: 50%;
+}
+
+.recommend-panel>.body>.list>.item>.bottom>.bottom>.right>.fa-television {
+  margin-right: 50rpx;
+}
+
+.recommend-panel>.body>.list>.item>.bottom>.bottom>.right>.fa-cart-plus {
+  font-size: 32rpx;
+  border: 3rpx solid #F44444;
+  border-radius: 50%;
+}
+
+.recommend-panel>.body>.list>.item:last-child {
+  margin-bottom: 20rpx;
+}
+
+/*
+*/
+/* ======================================== 购买商品弹窗 ======================================== 
 .buy-goods-window {
   width: 100%;
   height: 80vh;
@@ -304,3 +396,4 @@
   margin: 0;
   padding: 0;
 }
+*/
