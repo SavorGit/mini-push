@@ -10,6 +10,7 @@ const mta = require('../../../utils/mta_analysis.js')
 var api_v_url = app.globalData.api_v_url;
 var cache_key = app.globalData.cache_key;
 var order_id;
+var openid; //用户openid
 let SavorUtils = {
   User: {
 
@@ -56,11 +57,14 @@ Page({
   onLoad: function (options) {
     var that = this;
     wx.hideShareMenu()
-    order_id = options.order_id;
+    
     if (app.globalData.openid && app.globalData.openid != '') {
       that.setData({
         openid: app.globalData.openid
       });
+      
+      order_id = options.order_id;
+      console.log('order_id_'+order_id)
       SavorUtils.User.isRegister(that); //判断用户是否注册
       that.getGiftInfo(app.globalData.openid, order_id); //获取礼品信息
     } else {
@@ -69,10 +73,15 @@ Page({
           that.setData({
             openid: openid
           });
+          SavorUtils.User.isRegister(that); //判断用户是否注册
+          order_id = options.order_id;
+          console.log('order_id'+order_id)
+          console.log('openid'+openid)
+          that.getGiftInfo(openid, order_id); //获取礼品信息
         }
       }
-      SavorUtils.User.isRegister(that); //判断用户是否注册
-      that.getGiftInfo(openid, order_id); //获取礼品信息
+      
+      
     }
   },
   /**
@@ -112,7 +121,7 @@ Page({
       if (receive_type == 3) {
         var receive_order_id = data.result.order_id
         wx.navigateTo({
-          url: '/mall/pages/gift/order/select_address?order_id=' + receive_order_id + '&openid=' + openid+'&nickName='+nickName,
+          url: '/mall/pages/gift/order/select_address?order_id=' + receive_order_id + '&openid=' + openid+'&nickName='+nickName+'&goods_id='+goods_info.id,
         })
       }
     }, function () {
@@ -250,10 +259,11 @@ Page({
       var receive_order_id = data.result.order_id;
       var receive_type = data.result.receive_type;
       var nickName = that.data.nickName;
+      var good_info = that.data.goods_info;
       if (receive_type == 3) {
         
         wx.navigateTo({
-          url: '/mall/pages/gift/order/select_address?order_id=' + receive_order_id + '&openid=' + openid+'&nickName='+nickName,
+          url: '/mall/pages/gift/order/select_address?order_id=' + receive_order_id + '&openid=' + openid+'&nickName='+nickName+'&goods_id='+good_info.id,
         })
       } else if (receive_type == 1) {
         utils.PostRequest(api_v_url + '/gift/receiveResult', {
@@ -265,7 +275,7 @@ Page({
           var receive_order_id = data.result.order_id;
           if (receive_type == 3) {
             wx.navigateTo({
-              url: '/mall/pages/gift/order/select_address?order_id=' + receive_order_id + '&openid=' + openid+'&nickName='+nickName,
+              url: '/mall/pages/gift/order/select_address?order_id=' + receive_order_id + '&openid=' + openid+'&nickName='+nickName+'&goods_id='+good_info.id,
             })
           }
         })

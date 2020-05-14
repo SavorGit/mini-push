@@ -12,6 +12,7 @@ var api_v_url = app.globalData.api_v_url;
 var cache_key = app.globalData.cache_key;
 var order_id;
 var openid;
+var goods_id;
 var nickName;
 Page({
 
@@ -35,6 +36,7 @@ Page({
     nickName = options.nickName;
     var user_info = wx.getStorageSync(cache_key + 'user_info');
     openid = options.openid;
+    goods_id = options.goods_id;
     that.setData({
       user_info: user_info,
       nickName:nickName
@@ -111,7 +113,7 @@ Page({
     }, (data, headers, cookies, errMsg, statusCode) => {
       var order_id = data.result.order_id;
       wx.redirectTo({
-        url: '/mall/pages/gift/order/receive_success?order_id=' + order_id + '&openid=' + openid,
+        url: '/mall/pages/gift/order/receive_success?order_id=' + order_id + '&openid=' + openid+'&goods_id='+goods_id,
       })
     })
   },
