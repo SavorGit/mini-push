@@ -1,2 +1,118 @@
 <!--mall/pages/gift/order/receive_success.wxml-->
-<text>mall/pages/gift/order/receive_success.wxml</text>
+<!--
+ | 【商城】赠品选择收货地址页面
+ |-->
+
+
+<import src="/pages/template/commons" />
+<template is="navigationBarForTwoLevel" data='{{statusBarHeight: statusBarHeight,titleText:"领取成功"}}' />
+
+<view class='container theme-container' style='height: calc(100vh - {{46 + statusBarHeight + SystemInfo.screenBottomSpace}}px);'>
+	<scroll-view class="full_width full_height" scroll-y="true" scroll-with-animation="true">
+		<view class="full_width full_height flex-column-center-flex_start">
+			<view class="status-panel flex-column-center-center theme-panel">
+				<view class="icon fa fa-smile-o" aria-hidden="true"></view>
+				<view class="content">收货地址已确认，请注意查收</view>
+			</view>
+			<view class="goto-panel flex-row-flex_start-space_around theme-panel">
+				<view class="btn gift-list theme-font1">查看礼品订单</view>
+				<view class="btn theme-button-red">我也要送</view>
+				<view class="btn goto-index">返回首页</view>
+			</view>
+			<view class="recommend-panel">
+				<view class="title-bar flex-row-center-space_between theme-panel">
+					<view class="title">优选推荐</view>
+					<view class="btn more" bindtap="gotoRecList" wx:if="{{rec_list.length>0}}">更多...</view>
+				</view>
+				<view class="body">
+					<view class="list weui-grids">
+						<view class="item weui-grid">
+							<view class="top">
+								<image class="pic" mode="aspectFill" src="http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
+							</view>
+							<view class="bottom flex-column-center-space_between theme-panel">
+								<view class="name two-line-overflow">经典口味，口感醇厚 金爸爸经典10条装</view>
+								<view class="bottom flex-row-center-space_between">
+									<view class="price theme-font5">￥66.6</view>
+									<view class="btn fa fa-cart-plus theme-font5" aria-hidden="true"></view>
+								</view>
+							</view>
+						</view>
+						<view class="item weui-grid">
+							<view class="top">
+								<image class="pic" mode="aspectFill" src="http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
+							</view>
+							<view class="bottom flex-column-center-space_between theme-panel">
+								<view class="name two-line-overflow">经典口味，口感醇厚 金爸爸经典10条装</view>
+								<view class="bottom flex-row-center-space_between">
+									<view class="price theme-font5">￥66.6</view>
+									<view class="btn fa fa-cart-plus theme-font5" aria-hidden="true"></view>
+								</view>
+							</view>
+						</view>
+						<view class="item weui-grid">
+							<view class="top">
+								<image class="pic" mode="aspectFill" src="http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
+							</view>
+							<view class="bottom flex-column-center-space_between theme-panel">
+								<view class="name two-line-overflow">经典口味，口感醇厚 金爸爸经典10条装</view>
+								<view class="bottom flex-row-center-space_between">
+									<view class="price theme-font5">￥66.6</view>
+									<view class="btn fa fa-cart-plus theme-font5" aria-hidden="true"></view>
+								</view>
+							</view>
+						</view>
+						<view class="item weui-grid">
+							<view class="top">
+								<image class="pic" mode="aspectFill" src="http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
+							</view>
+							<view class="bottom flex-column-center-space_between theme-panel">
+								<view class="name two-line-overflow">经典口味，口感醇厚 金爸爸经典10条装</view>
+								<view class="bottom flex-row-center-space_between">
+									<view class="price theme-font5">￥66.6</view>
+									<view class="btn fa fa-cart-plus theme-font5" aria-hidden="true"></view>
+								</view>
+							</view>
+						</view>
+						<view class="item weui-grid">
+							<view class="top">
+								<image class="pic" mode="aspectFill" src="http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
+							</view>
+							<view class="bottom flex-column-center-space_between theme-panel">
+								<view class="name two-line-overflow">经典口味，口感醇厚 金爸爸经典10条装</view>
+								<view class="bottom flex-row-center-space_between">
+									<view class="price theme-font5">￥66.6</view>
+									<view class="btn fa fa-cart-plus theme-font5" aria-hidden="true"></view>
+								</view>
+							</view>
+						</view>
+						<view class="item weui-grid">
+							<view class="top">
+								<image class="pic" mode="aspectFill" src="http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
+							</view>
+							<view class="bottom flex-column-center-space_between theme-panel">
+								<view class="name two-line-overflow">经典口味，口感醇厚 金爸爸经典10条装</view>
+								<view class="bottom flex-row-center-space_between">
+									<view class="price theme-font5">￥66.6</view>
+									<view class="btn fa fa-cart-plus theme-font5" aria-hidden="true"></view>
+								</view>
+							</view>
+						</view>
+						<view class="item weui-grid">
+							<view class="top">
+								<image class="pic" mode="aspectFill" src="http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
+							</view>
+							<view class="bottom flex-column-center-space_between theme-panel">
+								<view class="name two-line-overflow">经典口味，口感醇厚 金爸爸经典10条装</view>
+								<view class="bottom flex-row-center-space_between">
+									<view class="price theme-font5">￥66.6</view>
+									<view class="btn fa fa-cart-plus theme-font5" aria-hidden="true"></view>
+								</view>
+							</view>
+						</view>
+					</view>
+				</view>
+			</view>
+		</view>
+	</scroll-view>
+</view>
