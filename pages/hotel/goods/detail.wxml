@@ -9,7 +9,7 @@
 <template is="navigationBarForTwoLevel" data='{{statusBarHeight: statusBarHeight,titleText:"商品详情"}}' wx:if="{{is_share==false}}" />
 
 <view class='container theme-container' style='height: calc(100vh - {{46 + statusBarHeight + SystemInfo.screenBottomSpace}}px);'>
-	<scroll-view class='scroll-view' scroll-y="true" scroll-with-animation="true">
+	<scroll-view class='scroll-view' scroll-y="true" scroll-with-animation="true" style="{{goods_info.type==23?'height:100%;':''}}">
 
 		<!-- 商品简介面板 -->
 		<view class="goods-smple-info flex-column-center-flex_start theme-panel">
@@ -177,7 +177,7 @@
 				<image class="btn" src="/images/icon2/666666_cart.png"></image>
 				<view class="content theme-font2">赠送好友</view>
 			</view>
-			<view class="btn cart flex-column-center-space_between" wx:else bindtap="present"  data-goods_id="{{goods_id}}">
+			<view class="btn cart flex-column-center-space_between" wx:else bindtap="present" data-goods_id="{{goods_id}}">
 				<!-- <view class="btn fa fa-shopping-cart theme-font2" aria-hidden="true"></view> -->
 				<image class="btn" src="/images/icon2/666666_cart.png"></image>
 				<view class="content theme-font2">赠送好友</view>
