@@ -43,8 +43,6 @@
 							</view>
 						</view>
 					</block>
-					
-
 					<view class="right flex-column-center-center">
 						<view class="price one-line-overflow theme-font1">￥{{bean.total_fee}}</view>
 						<view class="count one-line-overflow theme-font3">共{{bean.amount}}件</view>
@@ -54,7 +52,7 @@
 					<view>{{bean.add_time}}</view>
 					<view class="btn all theme-button-dark" wx:if="{{bean.status==12}}" bindtap="cancleOrder" data-order_id="{{bean.order_id}}" data-keys="{{index}}">取消订单</view>
 					<view class="btn all theme-button-buy" wx:if="{{bean.status==12 || bean.status==17 || bean.status==61 || bean.status==62 }}" bindtap="reBuy" data-goods_info="{{bean.goods}}" data-order_id="{{bean.order_id}}">再次购买</view>
-					<button open-type="share" wx:if="{{bean.status==12 || bean.status==61 }}" data-goods_info="{{bean.goods}}" data-order_id="{{bean.order_id}}" >送给好友</button>
+					<button class="btn all theme-button-orange" open-type="share" wx:if="{{bean.status==12 || bean.status==61 }}" data-goods_info="{{bean.goods}}" data-order_id="{{bean.order_id}}">送给好友</button>
 				</view>
 			</view>
 
@@ -87,8 +85,6 @@
 							</view>
 						</view>
 					</block>
-					
-
 					<view class="right flex-column-center-center">
 						<view class="price one-line-overflow theme-font1">￥{{bean.total_fee}}</view>
 						<view class="count one-line-overflow theme-font3">共{{bean.amount}}件</view>
@@ -96,9 +92,9 @@
 				</view>
 				<view class="foot flex-row-center-space_between">
 					<view>{{bean.add_time}}</view>
-					<view class="btn all theme-button-dark" wx:if="{{bean.status==12}}" bindtap="cancleOrder" data-order_id="{{bean.order_id}}" data-keys="{{index}}">取消订单</view>
-					<view class="btn all theme-button-buy" wx:if="{{bean.status==12 || bean.status==17 || bean.status==61 || bean.status==62 }}" bindtap="reBuy" data-goods_info="{{bean.goods}}" data-order_id="{{bean.order_id}}">再次购买</view>
-					<button open-type="share" wx:if="{{bean.status==12 || bean.status==61}}" data-goods_info="{{bean.goods}}" data-order_id="{{bean.order_id}}" >送给好友</button>
+					<view class="btn pending theme-button-dark" wx:if="{{bean.status==12}}" bindtap="cancleOrder" data-order_id="{{bean.order_id}}" data-keys="{{index}}">取消订单</view>
+					<view class="btn pending theme-button-buy" wx:if="{{bean.status==12 || bean.status==17 || bean.status==61 || bean.status==62 }}" bindtap="reBuy" data-goods_info="{{bean.goods}}" data-order_id="{{bean.order_id}}">再次购买</view>
+					<button class="btn pending theme-button-orange" open-type="share" wx:if="{{bean.status==12 || bean.status==61}}" data-goods_info="{{bean.goods}}" data-order_id="{{bean.order_id}}">送给好友</button>
 				</view>
 			</view>
 		</view>
@@ -130,8 +126,6 @@
 							</view>
 						</view>
 					</block>
-					
-
 					<view class="right flex-column-center-center">
 						<view class="price one-line-overflow theme-font1">￥{{bean.total_fee}}</view>
 						<view class="count one-line-overflow theme-font3">共{{bean.amount}}件</view>
@@ -139,9 +133,9 @@
 				</view>
 				<view class="foot flex-row-center-space_between">
 					<view>{{bean.add_time}}</view>
-					<view class="btn all theme-button-dark" wx:if="{{bean.status==12}}" bindtap="cancleOrder" data-order_id="{{bean.order_id}}" data-keys="{{index}}">取消订单</view>
-					<view class="btn all theme-button-buy" wx:if="{{bean.status==12 || bean.status==17 || bean.status==61 || bean.status==62 }}" bindtap="reBuy" data-goods_info="{{bean.goods}}" data-order_id="{{bean.order_id}}">再次购买</view>
-					<button open-type="share" wx:if="{{bean.status==12 || bean.status==61}}" data-goods_info="{{bean.goods}}" data-order_id="{{bean.order_id}}" >送给好友</button>
+					<view class="btn completed theme-button-dark" wx:if="{{bean.status==12}}" bindtap="cancleOrder" data-order_id="{{bean.order_id}}" data-keys="{{index}}">取消订单</view>
+					<view class="btn completed theme-button-buy" wx:if="{{bean.status==12 || bean.status==17 || bean.status==61 || bean.status==62 }}" bindtap="reBuy" data-goods_info="{{bean.goods}}" data-order_id="{{bean.order_id}}">再次购买</view>
+					<button class="btn completed theme-button-orange" open-type="share" wx:if="{{bean.status==12 || bean.status==61}}" data-goods_info="{{bean.goods}}" data-order_id="{{bean.order_id}}">送给好友</button>
 				</view>
 			</view>
 		</view>
@@ -173,8 +167,6 @@
 							</view>
 						</view>
 					</block>
-					
-
 					<view class="right flex-column-center-center">
 						<view class="price one-line-overflow theme-font1">￥{{bean.total_fee}}</view>
 						<view class="count one-line-overflow theme-font3">共{{bean.amount}}件</view>
@@ -182,12 +174,11 @@
 				</view>
 				<view class="foot flex-row-center-space_between">
 					<view>{{bean.add_time}}</view>
-					<view class="btn all theme-button-dark" wx:if="{{bean.status==12}}" bindtap="cancleOrder" data-order_id="{{bean.order_id}}" data-keys="{{index}}">取消订单</view>
-					<view class="btn all theme-button-buy" wx:if="{{bean.status==12 || bean.status==17 || bean.status==61 || bean.status==62 }}" bindtap="reBuy" data-goods_info="{{bean.goods}}" data-order_id="{{bean.order_id}}">再次购买</view>
-					<button open-type="share" wx:if="{{bean.status==12 || bean.status==61}}" data-goods_info="{{bean.goods}}" data-order_id="{{bean.order_id}}" >送给好友</button>
+					<view class="btn cancelled theme-button-dark" wx:if="{{bean.status==12}}" bindtap="cancleOrder" data-order_id="{{bean.order_id}}" data-keys="{{index}}">取消订单</view>
+					<view class="btn cancelled theme-button-buy" wx:if="{{bean.status==12 || bean.status==17 || bean.status==61 || bean.status==62 }}" bindtap="reBuy" data-goods_info="{{bean.goods}}" data-order_id="{{bean.order_id}}">再次购买</view>
+					<button class="btn cancelled theme-button-orange" open-type="share" wx:if="{{bean.status==12 || bean.status==61}}" data-goods_info="{{bean.goods}}" data-order_id="{{bean.order_id}}">送给好友</button>
 				</view>
 			</view>
-
 
 		</view>
 	</scroll-view>
@@ -218,8 +209,6 @@
 							</view>
 						</view>
 					</block>
-					
-
 					<view class="right flex-column-center-center">
 						<view class="price one-line-overflow theme-font1">￥{{bean.total_fee}}</view>
 						<view class="count one-line-overflow theme-font3">共{{bean.amount}}件</view>
@@ -227,12 +216,11 @@
 				</view>
 				<view class="foot flex-row-center-space_between">
 					<view>{{bean.add_time}}</view>
-					<view class="btn all theme-button-dark" wx:if="{{bean.status==12}}" bindtap="cancleOrder" data-order_id="{{bean.order_id}}" data-keys="{{index}}">取消订单</view>
-					<view class="btn all theme-button-buy" wx:if="{{bean.status==12 || bean.status==17 || bean.status==61 || bean.status==62 }}" bindtap="reBuy" data-goods_info="{{bean.goods}}" data-order_id="{{bean.order_id}}">再次购买</view>
-					<button open-type="share" wx:if="{{bean.status==12 || bean.status==61}}" data-goods_info="{{bean.goods}}" data-order_id="{{bean.order_id}}" >送给好友</button>
+					<view class="btn expired theme-button-dark" wx:if="{{bean.status==12}}" bindtap="cancleOrder" data-order_id="{{bean.order_id}}" data-keys="{{index}}">取消订单</view>
+					<view class="btn expired theme-button-buy" wx:if="{{bean.status==12 || bean.status==17 || bean.status==61 || bean.status==62 }}" bindtap="reBuy" data-goods_info="{{bean.goods}}" data-order_id="{{bean.order_id}}">再次购买</view>
+					<button class="btn expired theme-button-orange" open-type="share" wx:if="{{bean.status==12 || bean.status==61}}" data-goods_info="{{bean.goods}}" data-order_id="{{bean.order_id}}">送给好友</button>
 				</view>
 			</view>
-
 
 		</view>
 	</scroll-view>
@@ -263,7 +251,7 @@
 							</view>
 						</view>
 					</block>
-					
+
 
 					<view class="right flex-column-center-center">
 						<view class="price one-line-overflow theme-font1">￥{{bean.total_fee}}</view>
@@ -274,7 +262,7 @@
 					<view>{{bean.add_time}}</view>
 					<view class="btn all theme-button-dark" wx:if="{{bean.status==12}}" bindtap="cancleOrder" data-order_id="{{bean.order_id}}" data-keys="{{index}}">取消订单</view>
 					<view class="btn all theme-button-buy" wx:if="{{bean.status==12 || bean.status==17 || bean.status==61 || bean.status==62 }}" bindtap="reBuy" data-goods_info="{{bean.goods}}" data-order_id="{{bean.order_id}}">再次购买</view>
-					<button open-type="share" wx:if="{{bean.status==12 || bean.status==61}}" data-goods_info="{{bean.goods}}" data-order_id="{{bean.order_id}}" >送给好友</button>
+					<button open-type="share" wx:if="{{bean.status==12 || bean.status==61}}" data-goods_info="{{bean.goods}}" data-order_id="{{bean.order_id}}">送给好友</button>
 				</view>
 			</view>
 

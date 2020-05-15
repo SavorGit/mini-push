@@ -4,7 +4,7 @@
  */
 
 
- .tab-bar {
+.tab-bar {
   width: calc(100% - 80rpx);
   height: 88rpx;
   padding: 0 40rpx;
@@ -166,9 +166,11 @@
 }
 
 .row>.foot {
-  width: calc(100% - 45rpx);
+  width: calc(100% - 20rpx);
   height: 65rpx;
-  margin-right: 20rpx;
+  margin: 0;
+  padding: 0 10rpx;
+  /* margin-right: 20rpx; */
   border-top: 3rpx dashed #ededed;
 }
 
@@ -183,4 +185,7 @@
   text-align: center;
   font-size: 28rpx;
   border-radius: 5rpx;
+  border: 0;
+  margin: 0;
+  padding: 0;
 }
