@@ -7,6 +7,7 @@ var api_v_url = app.globalData.api_v_url;
 var cache_key = app.globalData.cache_key;
 var openid;
 var goods_id ;
+var pur_uid;
 Page({
   
   /**
@@ -32,6 +33,11 @@ Page({
     openid = options.openid;
     goods_id = options.goods_id;
     var amount = options.amount;
+    if (typeof (options.pur_uid)!='undefined'){
+      pur_uid = options.pur_uid
+    }else {
+      pur_uid=''
+    }
     wx.removeStorageSync(cache_key + 'mall_order:remark') //清楚订单备注
     that.setData({amount:amount,present_amount:1})
     //获取购买商品信息
@@ -166,7 +172,8 @@ Page({
       pay_type:pay_type,
       person_upnum:present_amount,
       remark:remark,
-      title_type:title_type
+      title_type:title_type,
+      uid:pur_uid
       
     }, (data, headers, cookies, errMsg, statusCode) => {
       var order_id = data.result.order_id;

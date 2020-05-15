@@ -355,7 +355,7 @@ Page({
       })
     }else if (action==3){//赠送好友
       wx.navigateTo({
-        url: '/mall/pages/gift/order/present?goods_id=' + goods_id + '&openid=' + openid + '&amount=' + amount ,
+        url: '/mall/pages/gift/order/present?goods_id=' + goods_id + '&openid=' + openid + '&amount=' + amount + '&pur_uid=' + pur_uid,
         success: function (res) {
           that.setData({
             showBuyGoodsPopWindow: false,
