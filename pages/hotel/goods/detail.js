@@ -456,6 +456,8 @@ Page({
     var that = this;
     var user_info = wx.getStorageSync(cache_key+"user_info");
     var openid = user_info.openid;
+    var goods_info = this.data.goods_info;
+    var goods_id = goods_info.goods_id;
     wx.navigateTo({
       url: '/mall/pages/gift/order/present?goods_id=' + goods_id + '&openid=' + openid + '&amount=1',
     })
