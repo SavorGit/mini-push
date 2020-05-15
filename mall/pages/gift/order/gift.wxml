@@ -65,14 +65,14 @@
 			</view>
 			<view class="goto-panel flex-column-center-flex_start">
 				<button class="btn theme-button-red" open-type='share'>微信送给好友</button>
-				<view class="link theme-font5">查看赠送进度>></view>
+				<view class="link theme-font5" bindtap="viewOrderDetail" >查看赠送进度>></view>
 			</view>
 			<view class="rule-panel">
 				<view class="title-bar">
 					<view class="title theme-font1">赠送须知：</view>
 				</view>
 				<view class="body">
-					<view class="line theme-font1">1.请于5天内赠送好友，赠送有效期至：2020.01.01；</view>
+					<view class="line theme-font1">1.请于5天内赠送好友，赠送有效期至：{{order_info.expire_date}}；</view>
 					<view class="line theme-font1">2.过期后将无法领取商品，未领取部分将在过期后3天内退款至您的微信钱包；</view>
 					<view class="line theme-font1">3.每个微信用户可领取不超过您指定份数上限的商品；</view>
 					<view class="line theme-font1">4.赠送链接可进行转发，转发后亦可进行领取赠品，直至所有份数的赠品领完。</view>

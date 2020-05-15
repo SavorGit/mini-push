@@ -157,6 +157,7 @@ Page({
   },
   reBuy:function(e){
     var goods_info = e.currentTarget.dataset.goods_info;
+
     wx.navigateTo({
       url: '/pages/hotel/goods/detail?goods_id='+goods_info[0].id,
     })
@@ -173,6 +174,40 @@ Page({
     wx.navigateTo({
       url: url,
     })
+  },
+  //取消订单
+  cancleOrder: function (e) {
+    var that = this;
+    var order_id = e.currentTarget.dataset.order_id;
+    var keys = e.currentTarget.dataset.keys;
+    var order_status = that.data.tab;
+
+    wx.showModal({
+      title: '提示',
+      content: '确认取消订单吗?',
+      success: function (res) {
+        if (res.confirm) {
+          utils.PostRequest(api_v_url + '/order/cancel', {
+            openid: openid,
+            order_id: order_id,
+          }, (data, headers, cookies, errMsg, statusCode) => {
+            if (order_status == 0) {//全部订单
+              var order_list = that.data.all_order_list;
+              order_list[keys].status = 19;
+              order_list[keys].status_str = '用户取消';
+              
+              that.setData({
+                all_order_list: order_list
+              })
+              //处理中的订单
+              that.getOrderList(page_cancel,5);
+            } 
+            
+          })
+        }
+      }
+    })
+
   },
   /**
    * 生命周期函数--监听页面初次渲染完成

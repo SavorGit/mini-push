@@ -22,7 +22,7 @@
 						<image class="pic" mode="aspectFill" src="{{merchant.img}}"></image>
 						<view class="name one-line-overflow">由{{merchant.name}}提供</view>
 					</view>
-					<view class="row flex-row-center-space_between">
+					<view class="row flex-row-center-space_between" bindtap="gotoGoodsDetail" data-goods_id="{{goods.id}}">
 						<image class="pic" mode="aspectFill" src="{{goods.img}}"></image>
 						<view class="center" bindtap="">
 							<view class="name two-line-overflow">{{goods.name}}</view>
@@ -38,14 +38,14 @@
 				</view>
 				<view class="message">
 					<view class="title theme-font1">寄语</view>
-					<view class="content three-line-overflow">这份我最爱的礼物，送给与我同行的同路人，愿x xxx xx xx xx xx xx xxx</view>
+					<view class="content three-line-overflow">{{order_info.message}}</view>
 				</view>
 				<view class="give flex-row-center-space_between">
 					<view class="isp flex-row-center-flex_start">
 						<image class="icon" mode="aspectFill" src="/images/imgs/default-user.png"></image>
 						<view class="name theme-font1">小热点</view>
 					</view>
-					<view class="nikename theme-font1">昵称</view>
+					<view class="nikename theme-font1">{{order_info.nickName}}</view>
 				</view>
 			</view>
 			<view class="foot flex-row-center-space_between">
@@ -60,7 +60,7 @@
 					<view class="expiry-date">领取有效期至：{{order_info.expire_date}}</view>
 				</view>
 				<view class="right">
-					<button class="btn theme-button-orange" bindtap=''>送给好友</button>
+					<button class="btn theme-button-orange" open-type='share'>送给好友</button>
 				</view>
 			</view>
 			<view class="body">

@@ -27,7 +27,7 @@
 				</button>
 			</swiper-item>
 		</swiper>
-
+<navigator url="/pages/hotel/gift/share?order_id=50094">ddd</navigator>
 		<!-- 搜索面板 -->
 		<view class="search-panel flex-row-center-space_between theme-panel">
 			<view class="search-bar flex-row-center-space_between">

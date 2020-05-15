@@ -49,6 +49,12 @@ Page({
       })
     })
   },
+  gotoGoodsDetail:function(e){
+    var goods_id = e.currentTarget.dataset.goods_id;
+    wx.navigateTo({
+      url: '/pages/hotel/goods/detail?goods_id='+goods_id,
+    })
+  },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
@@ -94,9 +100,10 @@ Page({
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage: function () {
+  onShareAppMessage: function (e) {
     var that = this;
-    var nickName   = that.data.oorder_info.nickName
+    console.log(that.data)
+    var nickName   = that.data.order_info.nickName
     var goods_name = that.data.goods.name;
     var img_url    = that.data.goods.img
     var title = nickName+'送你小热点好物'+goods_name;
