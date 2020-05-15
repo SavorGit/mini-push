@@ -50,6 +50,7 @@ Page({
     specification_goods:[],
     notice:'',
     showModal: false, //显示授权登陆弹窗
+    is_have_gift:false,
   },
 
   /**
@@ -114,14 +115,21 @@ Page({
     utils.PostRequest(api_v_url + '/dish/detail', {
       goods_id: goods_id
     }, (data, headers, cookies, errMsg, statusCode) => {
-      
+      var gift = data.result.gift
+      if (JSON.stringify(gift) == '{}') {
+        var is_have_gift = false;
+      } else {
+        var is_have_gift = true;
+      }
       that.setData({
         notice:data.result.notice,
         specification_goods:data.result.specification_goods,
         video_url:data.result.video_url,
         goods_info: data.result,
         merchant: data.result.merchant,
-        goods_id: data.result.goods_id
+        goods_id: data.result.goods_id,
+        gift:data.result.gift,
+        is_have_gift:is_have_gift
       })
     },function(){
         var is_share = that.data.is_share
@@ -509,6 +517,12 @@ Page({
     }
 
 
+  },
+  gotoGiftDetail:function(e){
+    var gift_id = e.currentTarget.dataset.gift_id;
+    wx.navigateTo({
+      url: '/pages/hotel/goods/detail?goods_id='+gift_id,
+    })
   },
   /**
    * 生命周期函数--监听页面初次渲染完成

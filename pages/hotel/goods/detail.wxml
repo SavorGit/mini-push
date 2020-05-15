@@ -31,7 +31,7 @@
 						<view class="tip theme-font5" wx:if="{{goods_info.localsale_str!=''}}">{{goods_info.localsale_str}}</view>
 					</view>
 				</view>
-				<view class="right">
+				<view class="right" wx:if="{{goods_info.type!=23}}">
 					<button class="btn flex-column-center-flex_start" open-type='share'>
 						<view class="fa fa-share-square-o theme-font5" aria-hidden="true"></view>
 						<view class="content theme-font3">分享</view>
@@ -56,11 +56,11 @@
 		</view>
 
 		<!-- 促销活动面板 -->
-		<view class="promotion-panel panel flex-row-center-space_between theme-panel" bindtap="">
+		<view class="promotion-panel panel flex-row-center-space_between theme-panel" bindtap="gotoGiftDetail" data-gift_id="{{gift.id}}" wx:if="{{is_have_gift==true}}">
 			<view class="left">活动</view>
 			<view class="center flex-row-center-space_between">
 				<view class="label theme-font5">赠品</view>
-				<view class="content one-line-overflow theme-font1">xxxxx礼盒</view>
+				<view class="content one-line-overflow theme-font1">{{gift.name}}</view>
 			</view>
 			<view class="right">
 				<view class="fa fa-chevron-right" aria-hidden="true"></view>
@@ -155,7 +155,7 @@
 		</view>
 
 	</scroll-view>
-	<view class="page-bottom flex-row-center-space_between theme-panel">
+	<view class="page-bottom flex-row-center-space_between theme-panel" wx:if="{{goods_info.type!=23}}">
 		<view class="left flex-row-center-flex_start">
 			<button class="btn phone flex-column-center-space_between" wx:if="{{merchant.tel!=''}}" bindtap='phonecallevent' data-tel="{{merchant.tel}}">
 				<!-- <view class="btn fa fa-phone-square theme-font2" aria-hidden="true"></view> -->

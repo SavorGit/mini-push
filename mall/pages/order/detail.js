@@ -38,17 +38,21 @@ Page({
       order_id: order_id,
     }, (data, headers, cookies, errMsg, statusCode) => {
       var express = data.result.express;
-      if (JSON.stringify(express) == '{}') {
+      /*if (JSON.stringify(express) == '{}') {
         var is_have_express = false;
       } else {
         var is_have_express = true;
+      }*/
+      if(express.length>0){
+        var is_have_express = true;
+      }else {
+        var is_have_express = false;
       }
       that.setData({
         is_have_express: is_have_express,
         order_info: data.result,
         express: data.result.express,
         merchant: data.result.merchant,
-        logisticsList: [{}, {}, {}]
       })
     })
   },
@@ -57,8 +61,9 @@ Page({
     app.phonecallevent(tel);
   },
   gotoExinfo: function (e) {
+    var express_id = e.currentTarget.dataset.express_id
     wx.navigateTo({
-      url: '/mall/pages/order/logistics?order_id=' + order_id + '&openid=' + openid,
+      url: '/mall/pages/order/logistics?order_id=' + order_id + '&openid=' + openid+"&express_id="+express_id,
     })
   },
   /**

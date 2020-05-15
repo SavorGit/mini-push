@@ -10,7 +10,7 @@ var api_v_url = app.globalData.api_v_url;
 var cache_key = app.globalData.cache_key;
 var order_id;
 var openid;
-
+var express_id;
 Page({
 
   /**
@@ -37,13 +37,18 @@ Page({
       that.showToastAndNavigateBack('未知订单号');
       return;
     }
-    that.getExInfo(order_id, openid);
+    express_id = '';
+    if(typeof(options.express_id)!='undefined'){
+      express_id = options.express_id
+    }
+    that.getExInfo(order_id, openid,express_id);
   },
-  getExInfo: function (order_id, openid) {
+  getExInfo: function (order_id, openid,express_id) {
     var that = this;
     utils.PostRequest(api_v_url + '/express/getExpress', {
       openid: openid,
-      order_id: order_id
+      order_id: order_id,
+      express_id:express_id
     }, (data, headers, cookies, errMsg, statusCode) => {
       if (typeof (data.result.data) != 'object') {
         that.showToastAndNavigateBack('此订单无物流信息');
