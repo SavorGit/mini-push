@@ -113,48 +113,7 @@ Page({
     }
     that.getOrderList(order_status, page);
   },
-  cancelOrder:function(e){
-    var that = this;
-    var order_id = e.currentTarget.dataset.order_id;
-    var keys = e.currentTarget.dataset.keys;
-    var order_status = that.data.tab;
-
-    wx.showModal({
-      title: '提示',
-      content: '确认取消订单吗?',
-      success: function (res) {
-        if (res.confirm) {
-          utils.PostRequest(api_v_url + '/order/cancel', {
-            openid: openid,
-            order_id: order_id,
-          }, (data, headers, cookies, errMsg, statusCode) => {
-            if (order_status == 0) {//全部订单
-              var order_list = that.data.all_order_list;
-              order_list[keys].status = 54;
-              order_list[keys].status_str = '用户取消';
-              
-              that.setData({
-                all_order_list: order_list
-              })
-              //赠送中订单
-              that.getOrderList(6,page_sending);
-              
-            } else if (order_status == 6) {//待处理
-              var order_list = that.data.sending_order_list;
-              order_list.splice(keys, 1)
-              that.setData({
-                sending_order_list: order_list
-              })
-              //全部订单
-              that.getOrderList(0, page_all);
-            }
-            //已取消
-            that.getOrderList(5,page_cancel);
-          })
-        }
-      }
-    })
-  },
+  
   reBuy:function(e){
     var goods_info = e.currentTarget.dataset.goods_info;
 
@@ -200,7 +159,7 @@ Page({
                 all_order_list: order_list
               })
               //处理中的订单
-              that.getOrderList(page_cancel,5);
+              that.getOrderList(5,page_cancel);
             } 
             
           })

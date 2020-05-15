@@ -52,7 +52,9 @@
 			</view>
 			<view class="goto-panel flex-column-center-flex_start">
 				<button class="btn theme-button-red" bindtap="receiveGift"  wx:if="{{receive_type ==1}}">我要领取</button>
-        <button class="btn theme-button-red" disabled="true" wx:else>我要领取</button>
+				<button class="btn theme-button-red" disabled="true"  wx:if="{{receive_type ==2 || receive_type ==3}}">已领取</button>
+				<button class="btn theme-button-red" disabled="true"  wx:if="{{receive_type ==4}}">已领完</button>
+				<button class="btn theme-button-red" disabled="true"  wx:if="{{receive_type ==5}}">已过期</button>
 			</view>
 			<view class="get-record-panel">
 				<view class="title-bar">

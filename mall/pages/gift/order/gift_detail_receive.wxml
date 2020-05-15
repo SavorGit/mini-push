@@ -87,7 +87,7 @@
 				</view>
 				<view class="row flex-row-center-space_between">
 					<view class="lable theme-font3">赠送人</view>
-					<view class="view">张三</view>
+					<view class="view">{{order_info.nickName}}</view>
 				</view>
 			</view>
 		</view>

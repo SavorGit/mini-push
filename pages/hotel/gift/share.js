@@ -91,6 +91,7 @@ Page({
    */
   getGiftInfo: function (openid, order_id) {
     var that = this;
+    console.log(order_id)
     utils.PostRequest(api_v_url + '/gift/info', {
       openid: openid,
       order_id: order_id,
@@ -261,10 +262,10 @@ Page({
       var nickName = that.data.nickName;
       var good_info = that.data.goods_info;
       if (receive_type == 3) {
-        
         wx.navigateTo({
           url: '/mall/pages/gift/order/select_address?order_id=' + receive_order_id + '&openid=' + openid+'&nickName='+nickName+'&goods_id='+good_info.id,
         })
+        
       } else if (receive_type == 1) {
         utils.PostRequest(api_v_url + '/gift/receiveResult', {
           openid: openid,
