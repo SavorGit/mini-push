@@ -19,7 +19,7 @@
 				</view>
 				<block wx:for="{{express}}" wx:for-index="index" wx:for-item="bean" wx:key="key">
 					<view wx:if="{{logisticsTab==index+1}}" data-index="{{index}}" class="tab-body">
-						<view class="row flex-row-center-space_between" style="height:unset;"  bindtap="gotoExinfo" data-express_id="{{bean.express_id}}">
+						<view class="row flex-row-center-space_between" style="height:unset;" bindtap="gotoExinfo" data-express_id="{{bean.express_id}}">
 							<view class="fa fa-truck theme-font" style="width:50rpx;font-size:32rpx;text-align:center;" aria-hidden="true"></view>
 							<view class="view flex-column-flex_start-space_between" style="width:calc(100% - 120rpx);height:unset;padding:20rpx 0;">
 								<view class="one-line-overflow">{{bean.data[0].state_str}}</view>
@@ -47,7 +47,7 @@
 			<view class="head flex-row-center-space_between">
 				<view class="title">商品信息</view>
 				<button class="btn theme-button" bindtap='phonecallevent' data-tel="{{merchant.mobile}}">
-					<view class="fa fa-phone" aria-hidden="true"> 联系餐厅</view>
+					<view class="fa fa-phone" aria-hidden="true"> 联系商家</view>
 				</button>
 			</view>
 			<view class="body flex-column-center-space_between">
@@ -59,8 +59,14 @@
 					<image class="pic" mode="aspectFill" src="{{bean.img}}"></image>
 					<view class="center" bindtap="gotoGoodsDetail" data-goods_id="{{bean.id}}">
 						<view class="name two-line-overflow">{{bean.name}}</view>
-						<view class="bottom flex-row-center-flex_start">
-							<view class="specs theme-button-more" wx:if="{{bean.gtype==2}}">{{bean.attr_name}}</view>
+						<view class="bottom flex-column-flex_start-space_between">
+							<view class="specs-group flex-row-center-flex_start">
+								<view class="specs theme-button-more" wx:if="{{bean.gtype==2}}">{{bean.attr_name}}</view>
+							</view>
+							<view class="gift flex-row-center-flex_start theme-button-more">
+								<view class="theme-font5">赠品</view>
+								<view class="theme-font9 one-line-overflow">xxxxxxxx礼盒</view>
+							</view>
 						</view>
 					</view>
 					<view class="right flex-column-flex_end-center" bindtap="gotoGoodsDetail" data-goods_id="{{bean.id}}">
