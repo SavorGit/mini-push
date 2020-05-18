@@ -124,10 +124,10 @@ Page({
   gotoOrderDetail:function(e){
     console.log(e)
     var order_id = e.currentTarget.dataset.order_id;
-    var status = e.currentTarget.dataset.status;
-    if(status==63){
+    var give_type = e.currentTarget.dataset.give_type;
+    if(give_type==2){
       var url = '/mall/pages/gift/order/gift_detail_receive?order_id='+order_id+'&openid='+openid;
-    }else {
+    }else if(give_type==1){
       var url = '/mall/pages/gift/order/gift_detail_send?order_id='+order_id+'&openid='+openid;
     }
     wx.navigateTo({
