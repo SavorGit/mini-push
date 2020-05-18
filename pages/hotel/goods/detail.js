@@ -408,9 +408,18 @@ Page({
         attr: attr,
         goods_id:goods_id
       }, (data, headers, cookies, errMsg, statusCode) => {
+        
+        var gift = data.result.gift
+        if (JSON.stringify(gift) == '{}') {
+          var is_have_gift = false;
+        } else {
+          var is_have_gift = true;
+        }
         var goods_info = data.result;
         goods_info.amount = 1;
         that.setData({
+          is_have_gift:is_have_gift,
+          gift:gift,
           goods_info:goods_info,
           goods_cart_info:goods_info
         })
