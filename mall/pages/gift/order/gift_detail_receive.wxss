@@ -4,7 +4,7 @@
  */
 
 
- .page-wapper {
+.page-wapper {
   width: 100%;
   padding-top: 10rpx;
   padding-bottom: 30rpx;
@@ -190,12 +190,13 @@
 .goods-info>.body>.row>.pic {
   width: 160rpx;
   height: 160rpx;
+  margin-bottom: 10rpx;
   border-radius: 10rpx;
 }
 
 .goods-info>.body>.row>.center {
   width: calc(100% - 320rpx);
-  height: 160rpx;
+  height: 170rpx;
   font-size: 32rpx;
   padding: 0 15rpx;
 }
@@ -205,10 +206,18 @@
 }
 
 .goods-info>.body>.row>.center>.bottom {
-  margin-top: 30rpx;
+  margin-top: 5rpx;
 }
 
-.goods-info>.body>.row>.center>.bottom>.specs {
+.goods-info>.body>.row>.center>.bottom>.price {
+  margin-left: 10rpx;
+}
+
+.goods-info>.body>.row>.center>.bottom>.specs-group {
+  margin: 5rpx 0;
+}
+
+.goods-info>.body>.row>.center>.bottom>.specs-group>.specs {
   height: 30rpx;
   line-height: 30rpx;
   padding: 5rpx 15rpx;
@@ -216,8 +225,19 @@
   border-radius: 20rpx;
 }
 
-.goods-info>.body>.row>.center>.bottom>.price {
-  margin-left: 10rpx;
+.goods-info>.body>.row>.center>.bottom>.gift {
+  margin: 5rpx 0;
+  padding: 0 10rpx;
+  font-size: 28rpx;
+  border-radius: 10rpx;
+}
+
+.goods-info>.body>.row>.center>.bottom>.gift>view {
+  margin-left: 20rpx;
+}
+
+.goods-info>.body>.row>.center>.bottom>.gift>view:first-child {
+  margin-left: 0;
 }
 
 .goods-info>.body>.row>.right {
