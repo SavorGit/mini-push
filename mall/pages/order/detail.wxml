@@ -68,7 +68,7 @@
 							</view>
 							<view class="gift flex-row-center-flex_start theme-button-more">
 								<view class="theme-font5">赠品</view>
-								<view class="theme-font9 one-line-overflow">xxxxxxxx礼盒</view>
+								<view class="gift-name theme-font9 one-line-overflow">xx x xx xxx礼盒x x  xx xx xx礼盒xx xx x xxx礼盒xx xxx xxx礼盒</view>
 							</view>
 						</view>
 					</view>
