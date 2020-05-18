@@ -24,7 +24,7 @@
 			</view>
 			<view class="bottom flex-row-flex_start-space_between">
 				<view class="left flex-column-flex_start-space_between">
-					<view class="name two-line-overflow">{{goods_info.name}}</view>
+					<view class="name two-line-overflow"><label wx:if="{{goods_info.type==23}}" class="flag theme-button-orange">赠品</label>{{goods_info.name}}</view>
 					<view class="bottom flex-row-flex_end-flex_start">
 						<view class="price theme-font5">￥<text class="one-line-overflow">{{goods_info.price}}</text></view>
 						<view class="price market one-line-overflow theme-font3" wx:if="{{goods_info.line_price>0}}">￥{{goods_info.line_price}}</view>

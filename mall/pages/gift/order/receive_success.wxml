@@ -9,7 +9,7 @@
 
 <view class='container theme-container' style='height: calc(100vh - {{46 + statusBarHeight + SystemInfo.screenBottomSpace}}px);'>
 	<scroll-view class="full_width full_height" scroll-y="true" scroll-with-animation="true">
-		<view class="full_width full_height flex-column-center-flex_start">
+		<view class="full_width flex-column-center-flex_start">
 			<view class="status-panel flex-column-center-center theme-panel">
 				<view class="icon fa fa-smile-o" aria-hidden="true"></view>
 				<view class="content">收货地址已确认，请注意查收</view>

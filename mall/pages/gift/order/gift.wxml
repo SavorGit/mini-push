@@ -9,7 +9,7 @@
 
 <view class='container theme-container' style='height: calc(100vh - {{46 + statusBarHeight + SystemInfo.screenBottomSpace}}px);'>
 	<scroll-view class="full_width full_height" scroll-y="true" scroll-with-animation="true">
-		<view class="full_width full_height flex-column-center-flex_start">
+		<view class="full_width flex-column-center-flex_start">
 			<view class="status-panel theme-panel">
 				<view class="status flex-row-center-flex_start">
 					<view class="icon fa fa-check-circle" aria-hidden="true"></view>
@@ -39,7 +39,7 @@
 						<view class="title-bar flex-row-center-space_between">
 							<view class="title theme-font2">寄语</view>
 							<!-- <view class="btn theme-button-welcome" style="width:80rpx;height:30rpx;line-height:30rpx;text-align:center;border-radius:5rpx;font-size:20rpx;color:#FFFFFF;border:0;" aria-hidden="true" bindtap="">保存</view> -->
-							<button form-type="submit" class="btn theme-button-welcome" style="width:80rpx;height:30rpx;line-height:30rpx;text-align:center;border-radius:5rpx;font-size:20rpx;color:#FFFFFF;border:0;" aria-hidden="true" >保存</button>
+							<button form-type="submit" class="btn theme-button-welcome" style="width:80rpx;height:30rpx;line-height:30rpx;text-align:center;border-radius:5rpx;font-size:20rpx;color:#FFFFFF;border:0;" aria-hidden="true">保存</button>
 						</view>
 						<view class="content">
 							<textarea class="input" name="send_word" value="{{send_word}}"></textarea>
@@ -65,7 +65,7 @@
 			</view>
 			<view class="goto-panel flex-column-center-flex_start">
 				<button class="btn theme-button-red" open-type='share'>微信送给好友</button>
-				<view class="link theme-font5" bindtap="viewOrderDetail" >查看赠送进度>></view>
+				<view class="link theme-font5" bindtap="viewOrderDetail">查看赠送进度>></view>
 			</view>
 			<view class="rule-panel">
 				<view class="title-bar">

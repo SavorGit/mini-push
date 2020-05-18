@@ -169,6 +169,15 @@
   font-weight: bold;
 }
 
+.goods-smple-info>.bottom>.left>.name>.flag {
+  height: 30rpx;
+  line-height: 30rpx;
+  text-align: center;
+  font-size: 28rpx;
+  padding: 0 10rpx;
+  margin-right: 10rpx;
+}
+
 .goods-smple-info>.bottom>.left>.bottom {
   margin-top: 10rpx;
 }
