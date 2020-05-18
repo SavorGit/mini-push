@@ -63,9 +63,9 @@
 							<view class="specs-group flex-row-center-flex_start">
 								<view class="specs theme-button-more" wx:if="{{bean.gtype==2}}">{{bean.attr_name}}</view>
 							</view>
-							<view class="gift flex-row-center-flex_start theme-button-more">
+							<view class="gift flex-row-center-flex_start theme-button-more" wx:for="{{gifts}}" wx:key="key" wx:for-item="bean" wx:for-index="index" >
 								<view class="theme-font5">赠品</view>
-								<view class="gift-name theme-font9 one-line-overflow">xxxxxxxx礼盒</view>
+								<view class="gift-name theme-font9 one-line-overflow">{{bean.name}}</view>
 							</view>
 						</view>
 					</view>

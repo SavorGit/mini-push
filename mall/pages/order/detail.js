@@ -48,11 +48,13 @@ Page({
       }else {
         var is_have_express = false;
       }
+      var gifts = data.result.gifts
       that.setData({
         is_have_express: is_have_express,
         order_info: data.result,
         express: data.result.express,
         merchant: data.result.merchant,
+        gifts:gifts
       })
     })
   },
@@ -64,6 +66,12 @@ Page({
     var express_id = e.currentTarget.dataset.express_id
     wx.navigateTo({
       url: '/mall/pages/order/logistics?order_id=' + order_id + '&openid=' + openid+"&express_id="+express_id,
+    })
+  },
+  gotoGoodsDetail:function(e){
+    var goods_id = e.currentTarget.dataset.goods_id;
+    wx.navigateTo({
+      url: '/pages/hotel/goods/detail?goods_id='+goods_id,
     })
   },
   /**

@@ -132,11 +132,31 @@ Page({
       total_fee:total_fee
     })
   },
-  addOrder:function(e){
+  confirmOrder:function(e){
+    var that = this;
+    var tips = that.data.order_goods_list.goods[0].tips
+    if(tips==''){
+      that.addOrder();
+    }else{
+      wx.showModal({
+        title: '确认下单',
+        content: tips,
+        success: function(res) {
+          if (res.confirm) {
+            that.addOrder();
+          }
+        }
+      })
+    }
+  },
+  addOrder:function(){
     var that = this;
     that.setData({
       addDisabled:true
     })
+    
+    
+
     var amount = that.data.amount; //数量
     var present_amount = that.data.present_amount;
     //支付方式

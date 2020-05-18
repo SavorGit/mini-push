@@ -43,11 +43,13 @@ Page({
       var goods   = data.result.goods;
       var merchant= data.result.merchant;
       var order_info = data.result;
+      var gifts = data.result.gifts
       that.setData({
         express:express,
         goods:goods,
         merchant:merchant,
-        order_info:order_info
+        order_info:order_info,
+        gifts:gifts
       })
     })
   },
