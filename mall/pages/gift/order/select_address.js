@@ -95,6 +95,9 @@ Page({
       var user_info = wx.getStorageSync(cache_key + 'user_info');
       user_info.mobile = data.result.phoneNumber;
       wx.setStorageSync(cache_key + 'user_info', user_info)
+      that.setData({
+        user_info:user_info
+      })
       //确定收货地址领取礼品
       that.receiveGift();
     })
@@ -103,7 +106,7 @@ Page({
     var that = this;
     var address_id = that.data.address_id;
     if (address_id == '') {
-      app.showTost('请选择您的收货地址');
+      app.showToast('请选择您的收货地址');
       return false;
     }
     utils.PostRequest(api_v_url + '/gift/confirmAddress/', {

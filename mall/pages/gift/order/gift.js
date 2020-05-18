@@ -53,7 +53,7 @@ Page({
   //保存寄语
   saveSendWord:function(e){
     var that = this;
-    var send_word = e.detail.value.send_word;
+    var send_word = e.detail.value.send_word.replace(/\s+/g, '');
     if(send_word==''){
       app.showToast('请输入寄语');
       return false;
