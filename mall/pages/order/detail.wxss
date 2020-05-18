@@ -234,6 +234,7 @@
 }
 
 .goods-info>.body>.row>.center>.bottom>.gift {
+  width: 100%;
   margin: 5rpx 0;
   padding: 0 10rpx;
   font-size: 28rpx;
@@ -245,7 +246,13 @@
 }
 
 .goods-info>.body>.row>.center>.bottom>.gift>view:first-child {
+  width: 60rpx;
   margin-left: 0;
+  overflow: hidden;
+}
+
+.goods-info>.body>.row>.center>.bottom>.gift>.gift-name {
+  width: calc(100% - 80rpx);
 }
 
 .goods-info>.body>.row>.right {
