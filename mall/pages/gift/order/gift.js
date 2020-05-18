@@ -72,7 +72,7 @@ Page({
   //查看赠送进度
   viewOrderDetail:function(e){
     wx.navigateTo({
-      url: '/mall/pages/order/gift_detail_send?order_id='+order_id+'&openid='+openid,
+      url: '/mall/pages/gift/order/gift_detail_send?order_id='+order_id+'&openid='+openid,
     })
   },
   /**
