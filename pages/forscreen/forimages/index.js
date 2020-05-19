@@ -56,8 +56,7 @@ Page({
   onLoad: function (e) {
     //wx.hideShareMenu();
     var that = this;
-    netty_push_info={};
-    netty_push_img = [];
+    
     var user_info = wx.getStorageSync("savor_user_info");
     var is_open_simple = e.is_open_simple;
     openid = e.openid;
@@ -207,6 +206,8 @@ Page({
   },//重新选择照片结束
 
   up_forscreen(e) {//多张图片投屏开始(不分享到发现)
+    netty_push_info={};
+    netty_push_img = [];
     var that = this;
     var formId = e.detail.formId;
     img_lenth = e.detail.value.img_lenth;
@@ -535,6 +536,7 @@ Page({
 
             utils.tryCatch(mta.Event.stat('forscreenImgWastTime', { 'uploadtime': diff_time })); 
             netty_push_info.img_list = netty_push_img;
+
             netty_push_info = JSON.stringify(netty_push_info);
 
             wx.request({
