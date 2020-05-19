@@ -281,6 +281,9 @@ Page({
           }
         })
 
+      }else if(receive_type==4){
+        app.showToast('亲,该商品已领完~');
+        that.onLoad();
       }
 
 

@@ -158,8 +158,8 @@ Page({
               that.setData({
                 all_order_list: order_list
               })
-              //全部订单
-              that.getOrderList(0,page_all);
+              //赠送中
+              that.getOrderList(6,page_sending);
 
               //取消订单
               that.getOrderList(5,page_cancel);
