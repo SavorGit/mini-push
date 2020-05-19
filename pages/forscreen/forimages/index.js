@@ -20,6 +20,8 @@ var forscreen_history_list;
 var api_url = app.globalData.api_url;
 var oss_upload_url = app.globalData.oss_upload_url;
 var pubdetail = [];
+var netty_push_info;
+var netty_push_img;
 Page({
   data: {
     statusBarHeight: getApp().globalData.statusBarHeight,
@@ -383,7 +385,7 @@ Page({
             forscreen_id: forscreen_id,
           });
           var res_eup_time = (new Date()).valueOf();
-          wx.request({
+          /*wx.request({
             url: api_url + '/Netty/Index/pushnetty',
             headers: {
               'Content-Type': 'application/json'
@@ -458,8 +460,64 @@ Page({
               });
 
             },
+          });*/
+          wx.request({
+            url: api_url + '/Smallapp21/index/recordForScreenPics',
+            header: {
+              'content-type': 'application/json'
+            },
+            data: {
+              forscreen_id: forscreen_id,
+              openid: openid,
+              box_mac: box_mac,
+              action: 4,
+              mobile_brand: mobile_brand,
+              mobile_model: mobile_model,
+              forscreen_char: forscreen_char,
+              public_text: public_text,
+              imgs: '["forscreen/resource/' + timestamp + postf_t + '"]',
+              resource_id: timestamp,
+              res_sup_time: res_sup_time,
+              res_eup_time: res_eup_time,
+              resource_size: resource_size,
+              is_pub_hotelinfo: is_pub_hotelinfo,
+              is_share: is_share,
+              resource_type: 1,
+              res_nums: img_len
+            },
+            success: function (ret) {
+              wx.request({
+                url: api_url + '/Smallapp21/ForscreenHistory/getList',
+                header: {
+                  'content-type': 'application/json'
+                },
+                data: {
+                  openid: openid,
+                  box_mac: box_mac,
+                  page: page,
+                },
+                success: function (res) {
+                  var hst_list = res.data.result;
+
+                  if (JSON.stringify(hst_list) == "{}") {
+                    that.setData({
+                      forscreen_history_list: ''
+                    })
+                  } else {
+                    that.setData({
+                      forscreen_history_list: res.data.result
+                    })
+                  }
+
+                }
+              })
+            }
           });
-          
+
+
+
+
+
           if (order == img_len) {
             var end_time = (new Date()).valueOf();
             var diff_time = end_time - forscreen_id;
@@ -509,7 +567,8 @@ Page({
     function uploadOss_multy(policy, signature, upimgs, imgsize,box_mac, openid, img_len, forscreen_char, avatarUrl, nickName, public_text, timer8_0) {
       var tmp_imgs = [];
       var forscreen_id = (new Date()).valueOf();
-      
+      netty_push_info.action = 4;
+      nett
       for (var i = 0; i < img_len; i++) {
         
         var res_sup_time = (new Date()).valueOf();
