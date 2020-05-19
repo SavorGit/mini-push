@@ -314,6 +314,10 @@ Page({
           addDisabled: false
         })
       }
+    },function(){
+      that.setData({
+        addDisabled: false
+      })
     })
   },
   clearMallCart:function(){
