@@ -107,6 +107,8 @@
   font-size: 30rpx;
   color: #FBBBBB;
   border-bottom: 4rpx solid #FBBBBB;
+  margin: 0;
+  padding: 0;
 }
 
 .main-panel>.message-block .content {
