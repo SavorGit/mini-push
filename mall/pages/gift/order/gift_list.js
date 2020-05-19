@@ -158,7 +158,28 @@ Page({
               that.setData({
                 all_order_list: order_list
               })
-              //处理中的订单
+              //全部订单
+              that.getOrderList(0,page_all);
+
+              //取消订单
+              that.getOrderList(5,page_cancel);
+
+            }else if(order_status ==6 ){//赠送中订单
+              var order_list = that.data.sending_order_list;
+              order_list[keys].status = 19;
+              order_list[keys].status_str = '用户取消';
+
+              var order_list = that.data.sending_order_list;
+              order_list.splice(keys, 1)
+             
+
+              that.setData({
+                sending_order_list: order_list
+              })
+              
+              //全部订单
+              that.getOrderList(0,page_all);
+              //取消订单
               that.getOrderList(5,page_cancel);
             } 
             
