@@ -4,18 +4,18 @@
 
 <scroll-view class="container flex-column-center-flex_start theme-container" style='height: calc(100vh - 46px - {{statusBarHeight}}px);' scroll-y="true" scroll-with-animation="true" bindscrolltolower="loadMore" data-openid='{{openid}}'>
 	<view class='page_top flex-row-center-flex_start theme-panel'>
-		<view class='user'>
+		<view class='user flex-row-center-flex_start'>
 			<view class='head'>
 				<image wx:if="{{userinfo.avatarUrl ==''}}" src="http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default_user_head.png" lazy-load='http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/icon/grey_interact.png'></image>
 				<image wx:else src="{{userinfo.avatarUrl}}" lazy-load='http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/icon/grey_interact.png'></image>
 			</view>
-			<view class='info'>
+			<view class='info flex-column-flex_start-space_around'>
 				<label class='font_999999_36' wx:if="{{userinfo.nickName ==''}}">热点用户</label>
-				<label class='font_999999_36' wx:else>{{userinfo.nickName}}</label>
+				<label class='one-line-overflow font_999999_36' wx:else>{{userinfo.nickName}}</label>
 				<label class='font_666666_24'>ID:{{userinfo.id}}</label>
 			</view>
 		</view>
-		<view class='right flex-row-center-flex_end'></view>
+		<!-- <view class='right flex-row-center-flex_end'></view> -->
 	</view>
 
 	<!-- 订单列表面板 -->
