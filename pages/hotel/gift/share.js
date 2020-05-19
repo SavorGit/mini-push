@@ -300,6 +300,12 @@ Page({
     }
     
   },
+  gotoGoodsDetail:function(e){
+    var goods_id = e.currentTarget.dataset.goods_id;
+    wx.navigateTo({
+      url: '/pages/hotel/goods/detail?goods_id='+goods_id,
+    })
+  },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
