@@ -37,6 +37,7 @@ Page({
   onLoad: function (options) {
     var that = this;
     wx.hideShareMenu();
+    wx.removeStorageSync(cache_key + 'select_address_info')
     var goods_ids = [];
     goods_id = '';
     carts = [];
