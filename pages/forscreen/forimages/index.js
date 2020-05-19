@@ -20,8 +20,8 @@ var forscreen_history_list;
 var api_url = app.globalData.api_url;
 var oss_upload_url = app.globalData.oss_upload_url;
 var pubdetail = [];
-var netty_push_info;
-var netty_push_img;
+var netty_push_info ;
+var netty_push_img ;
 Page({
   data: {
     statusBarHeight: getApp().globalData.statusBarHeight,
@@ -56,6 +56,8 @@ Page({
   onLoad: function (e) {
     //wx.hideShareMenu();
     var that = this;
+    netty_push_info={};
+    netty_push_img = [];
     var user_info = wx.getStorageSync("savor_user_info");
     var is_open_simple = e.is_open_simple;
     openid = e.openid;
@@ -385,10 +387,15 @@ Page({
             forscreen_id: forscreen_id,
           });
           var res_eup_time = (new Date()).valueOf();
-          netty_push_img[flag].url = "forscreen/resource/" + timestamp + postf_t;
-          netty_push_img[flag].filename = timestamp + postf_t ;
-          netty_push_img[flag].order = flag;
-          netty_push_img[flag].img_id = timestamp;
+          var netty_tmp = {};
+          netty_tmp.url = "forscreen/resource/" + timestamp + postf_t;
+          netty_tmp.filename = filename = timestamp + postf_t ;
+          netty_tmp.order    = flag;
+          netty_tmp.img_id   = timestamp;
+
+          netty_push_img[flag] = netty_tmp;
+          
+          
           /*wx.request({
             url: api_url + '/Netty/Index/pushnetty',
             headers: {
@@ -529,6 +536,8 @@ Page({
             utils.tryCatch(mta.Event.stat('forscreenImgWastTime', { 'uploadtime': diff_time })); 
             netty_push_info.img_list = netty_push_img;
             console.log(netty_push_info);
+            netty_push_info = JSON.stringify(netty_push_info);
+            console.log(netty_push_info)
           }
         },
         complete: function (es) {
@@ -580,8 +589,6 @@ Page({
       netty_push_info.forscreen_char = forscreen_char;
       netty_push_info.avatarUrl = avatarUrl;
       netty_push_info.nickName  = nickName;
-
-
       for (var i = 0; i < img_len; i++) {
         
         var res_sup_time = (new Date()).valueOf();
