@@ -535,9 +535,31 @@ Page({
 
             utils.tryCatch(mta.Event.stat('forscreenImgWastTime', { 'uploadtime': diff_time })); 
             netty_push_info.img_list = netty_push_img;
-            console.log(netty_push_info);
             netty_push_info = JSON.stringify(netty_push_info);
-            console.log(netty_push_info)
+
+            wx.request({
+              url: api_url + '/Netty/Index/pushnetty',
+              headers: {
+                'Content-Type': 'application/json'
+              },
+              method: "POST",
+              data: {
+                box_mac: box_mac,
+  
+                msg: netty_push_info,
+  
+              },
+              success: function (result) {
+                if(result.data.code!=10000){
+                  wx.showToast({
+                    title: '投屏失败!',
+                    icon:'none',
+                    duration:2000,
+  
+                  })
+                }
+              }
+            })
           }
         },
         complete: function (es) {
