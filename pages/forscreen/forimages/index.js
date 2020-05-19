@@ -568,7 +568,9 @@ Page({
       var tmp_imgs = [];
       var forscreen_id = (new Date()).valueOf();
       netty_push_info.action = 4;
-      nett
+      netty_push_info.resource_type = 2;
+      netty_push_info.openid = openid;
+      
       for (var i = 0; i < img_len; i++) {
         
         var res_sup_time = (new Date()).valueOf();
