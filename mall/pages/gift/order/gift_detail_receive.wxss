@@ -229,7 +229,7 @@
   width: 100%;
   margin: 5rpx 0;
   padding: 0 10rpx;
-  font-size: 28rpx;
+  font-size: 20rpx;
   border-radius: 10rpx;
 }
 
