@@ -48,13 +48,12 @@ Page({
       }else {
         var is_have_express = false;
       }
-      var gifts = data.result.gifts
+      
       that.setData({
         is_have_express: is_have_express,
         order_info: data.result,
         express: data.result.express,
         merchant: data.result.merchant,
-        gifts:gifts
       })
     })
   },
