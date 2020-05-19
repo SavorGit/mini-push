@@ -207,10 +207,23 @@ textarea {
   height: 200rpx;
 }
 
-.goods-info>.body>.row>.pic {
+.goods-info>.body>.row>.pic-warpper,
+.goods-info>.body>.row>.pic-warpper>.pic {
   width: 160rpx;
   height: 160rpx;
   border-radius: 10rpx;
+}
+
+.goods-info>.body>.row>.pic-warpper>.tip {
+  width: 100%;
+  height: 32rpx;
+  line-height: 32rpx;
+  margin-top: -32rpx;
+  text-align: center;
+  font-size: 20rpx;
+  color: #FFFFFF;
+  background-color: rgba(0, 0, 0, 0.6);
+  border-radius: 0 0 10rpx 10rpx;
 }
 
 .goods-info>.body>.row>.center {
