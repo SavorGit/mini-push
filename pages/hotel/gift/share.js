@@ -261,6 +261,7 @@ Page({
       var receive_type = data.result.receive_type;
       var nickName = that.data.nickName;
       var good_info = that.data.goods_info;
+      that.setData({receive_type:receive_type})
       if (receive_type == 3) {
         wx.navigateTo({
           url: '/mall/pages/gift/order/select_address?order_id=' + receive_order_id + '&openid=' + openid+'&nickName='+nickName+'&goods_id='+good_info.id,
@@ -289,6 +290,9 @@ Page({
         app.showToast('亲,该商品已领完~');
         var openid = that.data.openid;
         that.getGiftInfo(openid, order_id); //获取礼品信息
+      }else if(receive_type==5){
+        that.setData({receive_type:receive_type})
+        app.showToast('亲,该商品订单已过期')
       }
 
 

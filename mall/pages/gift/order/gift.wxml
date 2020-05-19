@@ -30,7 +30,7 @@
 							</view>
 						</view>
 						<view class="right flex-column-flex_end-flex_start" bindtap="">
-							<view class="price one-line-overflow theme-font5">￥1018</view>
+							<view class="price one-line-overflow theme-font5">￥{{order_goods_info.price}}</view>
 						</view>
 					</view>
 				</view>

@@ -19,7 +19,7 @@
 						<view class="row flex-row-center-space_between" wx:for="{{order_goods_list.goods}}" wx:key="key" wx:for-item="bean" wx:for-index="index">
 							<image class="pic" mode="aspectFill" src="{{bean.img_url}}" bindtap=""></image>
 							<view class="center flex-column-stretch-flex_start" bindtap="">
-								<view class="name two-line-overflow">{{bean.name}}}</view>
+								<view class="name two-line-overflow">{{bean.name}}</view>
 								<view class="c-bottom flex-row-flex_start-flex_start" wx:if="{{bean.gtype==2}}">
 									<view class="specs theme-button-more">{{bean.attr_name}}</view>
 								</view>

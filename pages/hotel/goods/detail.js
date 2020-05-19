@@ -464,12 +464,21 @@ Page({
   present:function(e){
     var that = this;
     var user_info = wx.getStorageSync(cache_key+"user_info");
-    var openid = user_info.openid;
-    var goods_info = this.data.goods_info;
-    var goods_id = goods_info.goods_id;
-    wx.navigateTo({
-      url: '/mall/pages/gift/order/present?goods_id=' + goods_id + '&openid=' + openid + '&amount=1',
-    })
+    if(user_info.is_wx_auth !=3){
+      that.setData({
+        showModal:true,
+        
+      })
+      return false
+    }else {
+      var openid = user_info.openid;
+      var goods_info = this.data.goods_info;
+      var goods_id = goods_info.goods_id;
+      wx.navigateTo({
+        url: '/mall/pages/gift/order/present?goods_id=' + goods_id + '&openid=' + openid + '&amount=1',
+      })
+    }
+    
   },
   closeWxAuth: function (e) {
     var that = this;
@@ -500,11 +509,23 @@ Page({
               key: 'savor_user_info',
               data: data.result,
             });
-            that.setData({
-              showModal: false,
-              showBuyGoodsPopWindow: true,
-              showBuyGoodsPopWindowAnimation: true,
-            })
+            
+            var goods_info = that.data.goods_info;
+            if(goods_info.gtype==2){
+              that.setData({
+                showModal: false,
+                showBuyGoodsPopWindow: true,
+                showBuyGoodsPopWindowAnimation: true,
+              })
+            }else {
+              that.setData({
+                showModal: false,
+              })
+              wx.navigateTo({
+                url: '/mall/pages/gift/order/present?goods_id=' + goods_info.goods_id + '&openid=' + openid + '&amount=1',
+              })
+            }
+            
           }, res => wx.showToast({
             title: '微信登陆失败，请重试',
             icon: 'none',
