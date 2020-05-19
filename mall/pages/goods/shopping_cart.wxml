@@ -30,7 +30,7 @@
 								</checkbox-group>
 								<view class="pic-warpper flex-column-center-flex_start">
 									<image bindtap="gotoGoodsDetail" data-goods_id="{{item.id}}" class="pic" mode="aspectFill" src="{{item.img_url}}"></image>
-									<view class="tip theme-font5" wx:if="{{item.localsale_str!=''}}">{{item.localsale_str}}</view>
+									<view class="tip" wx:if="{{item.localsale_str!=''}}">{{item.localsale_str}}</view>
 								</view>
 								<view class="right flex-column-flex_start-space_between">
 									<block bindtap="gotoGoodsDetail" data-goods_id="{{item.id}}">

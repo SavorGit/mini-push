@@ -107,7 +107,8 @@ checkbox .wx-checkbox-input.wx-checkbox-input-checked {
   margin-top: -32rpx;
   text-align: center;
   font-size: 20rpx;
-  background-color: rgba(0, 0, 0, 0.3);
+  color: #FFFFFF;
+  background-color: rgba(0, 0, 0, 0.6);
 }
 
 .panel>.goods-list>.item>.goods>.right {
