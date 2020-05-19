@@ -267,6 +267,8 @@ Page({
         })
         
       } else if (receive_type == 1) {
+        var user_info = wx.getStorageSync(cache_key+'user_info');
+        var openid = user_info.openid;
         utils.PostRequest(api_v_url + '/gift/receiveResult', {
           openid: openid,
           order_id: receive_order_id,
@@ -282,8 +284,11 @@ Page({
         })
 
       }else if(receive_type==4){
+        that.setData({receive_type:receive_type})
+
         app.showToast('亲,该商品已领完~');
-        that.onLoad();
+        var openid = that.data.openid;
+        that.getGiftInfo(openid, order_id); //获取礼品信息
       }
 
 
