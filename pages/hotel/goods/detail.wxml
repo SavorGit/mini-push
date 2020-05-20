@@ -174,12 +174,12 @@
 			</view>
 			<view class="btn cart flex-column-center-space_between" wx:if="{{goods_info.gtype==2}}" bindtap="openBuyGoodsPopWindow" data-action='3' data-is_self="1" data-goods_id="{{goods_id}}">
 				<!-- <view class="btn fa fa-shopping-cart theme-font2" aria-hidden="true"></view> -->
-				<image class="btn" src="/images/icon2/666666_cart.png"></image>
+				<image class="btn" src="/images/icon2/666666_gift.png"></image>
 				<view class="content theme-font2">赠送好友</view>
 			</view>
 			<view class="btn cart flex-column-center-space_between" wx:else bindtap="present" data-goods_id="{{goods_id}}">
 				<!-- <view class="btn fa fa-shopping-cart theme-font2" aria-hidden="true"></view> -->
-				<image class="btn" src="/images/icon2/666666_cart.png"></image>
+				<image class="btn" src="/images/icon2/666666_gift.png"></image>
 				<view class="content theme-font2">赠送好友</view>
 			</view>
 		</view>
