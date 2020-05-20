@@ -32,6 +32,8 @@ Page({
   onLoad: function (options) {
     var that = this;
     wx.hideShareMenu();
+    //var address_info = wx.getStorageSync(cache_key + 'select_address_info')
+    wx.removeStorageSync(cache_key + 'select_address_info')
     order_id = options.order_id;
     nickName = options.nickName;
     var user_info = wx.getStorageSync(cache_key + 'user_info');
