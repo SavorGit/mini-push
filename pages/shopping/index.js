@@ -111,7 +111,7 @@ Page({
     utils.PostRequest(api_url + '/Smallapp4/index/isHaveCallBox?openid=' + openid, {}, (data, headers, cookies, errMsg, statusCode) => {
       var is_have = data.result.is_have;
       if (is_have == 1) {
-        self.setData({
+        that.setData({
           box_mac: data.result.box_mac,
           hotel_info: data.result,
         });
