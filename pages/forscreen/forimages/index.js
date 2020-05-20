@@ -394,8 +394,7 @@ Page({
           netty_tmp.order    = flag;
           netty_tmp.img_id   = timestamp;
 
-          netty_push_img[flag] = netty_tmp;
-          
+          netty_push_img.push(netty_tmp);
           
           /*wx.request({
             url: api_url + '/Netty/Index/pushnetty',
@@ -530,7 +529,7 @@ Page({
 
 
 
-          if (order == img_len) {
+          if (netty_push_img.length == img_len) {
             var end_time = (new Date()).valueOf();
             var diff_time = end_time - forscreen_id;
 
