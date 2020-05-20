@@ -157,7 +157,8 @@ Page({
     var merchant_id = e.currentTarget.dataset.merchant_id;
     if(merchant_id !='' && typeof(merchant_id)){
       wx.navigateTo({
-        url: '/pages/hotel/detail?merchant_id='+merchant_id,
+        //url: '/pages/hotel/detail?merchant_id='+merchant_id,
+        url:'/pages/hotel/shop?merchant_id='+merchant_id+'&tab=foods',
       })
     }
   },
