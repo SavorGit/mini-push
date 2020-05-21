@@ -36,6 +36,7 @@ Page({
       order_id:order_id
     }, (data, headers, cookies, errMsg, statusCode) => {
       that.setData({
+        share_title :data.result.share_title,
         order_goods_info:data.result.goods,
         order_info:data.result,
         merchant_info:data.result.merchant,
@@ -125,10 +126,11 @@ Page({
     var user_info = wx.getStorageSync(cache_key+'user_info');
 
     var nickName   = user_info.nickName
-    var goods_name = that.data.order_goods_info.name;
+    //var goods_name = that.data.order_goods_info.name;
     //var img_url    = that.data.order_goods_info.img
     var img_url = 'https://oss.littlehotspot.com/WeChat/resource/share.jpg';
-    var title = nickName+'送你小热点好物'+goods_name;
+    //var title = nickName+'送你小热点好物'+goods_name;
+    var title = that.data.share_title;
     if (e.from === 'button') {
       // 来自页面内转发按钮
       return {

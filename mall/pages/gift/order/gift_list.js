@@ -235,16 +235,10 @@ Page({
    * 用户点击右上角分享
    */
   onShareAppMessage: function (e) {
-    console.log(e)
-    var goods_info = e.target.dataset.goods_info;
+    var share_title = e.target.dataset.share_title;
     var order_id = e.target.dataset.order_id;
-    var user_info = wx.getStorageSync(cache_key+'user_info');
-
-    var nickName   = user_info.nickName
-    var goods_name = goods_info[0].name;
-    //var img_url    = goods_info[0].img
     var img_url = 'https://oss.littlehotspot.com/WeChat/resource/share.jpg';
-    var title = nickName+'送你小热点好物'+goods_name;
+    var title = share_title;
     if (e.from === 'button') {
       // 来自页面内转发按钮
       return {
