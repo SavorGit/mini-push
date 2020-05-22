@@ -396,82 +396,7 @@ Page({
 
           netty_push_img.push(netty_tmp);
           
-          /*wx.request({
-            url: api_url + '/Netty/Index/pushnetty',
-            headers: {
-              'Content-Type': 'application/json'
-            },
-            method: "POST",
-            data: {
-              box_mac: box_mac,
-
-              msg: '{ "action": 4, "resource_type":2, "url": "forscreen/resource/' + timestamp + postf_t + '", "filename":"' + timestamp + postf_t + '","openid":"' + openid + '","img_nums":' + img_len + ',"forscreen_char":"' + forscreen_char + '","order":' + order + ',"forscreen_id":"' + forscreen_id + '","img_id":"' + timestamp + '","avatarUrl":"' + avatarUrl + '","nickName":"' + nickName + '","res_sup_time":"'+res_sup_time+'","res_eup_time":"'+res_eup_time+'"}',
-
-            },
-            success: function (result) {
-              if(result.data.code!=10000){
-                wx.showToast({
-                  title: '投屏失败!',
-                  icon:'none',
-                  duration:2000,
-
-                })
-              }
-              wx.request({
-                url: api_url + '/Smallapp21/index/recordForScreenPics',
-                header: {
-                  'content-type': 'application/json'
-                },
-                data: {
-                  forscreen_id: forscreen_id,
-                  openid: openid,
-                  box_mac: box_mac,
-                  action: 4,
-                  mobile_brand: mobile_brand,
-                  mobile_model: mobile_model,
-                  forscreen_char: forscreen_char,
-                  public_text: public_text,
-                  imgs: '["forscreen/resource/' + timestamp + postf_t + '"]',
-                  resource_id: timestamp,
-                  res_sup_time: res_sup_time,
-                  res_eup_time: res_eup_time,
-                  resource_size: resource_size,
-                  is_pub_hotelinfo: is_pub_hotelinfo,
-                  is_share: is_share,
-                  resource_type: 1,
-                  res_nums: img_len
-                },
-                success: function (ret) {
-                  wx.request({
-                    url: api_url + '/Smallapp21/ForscreenHistory/getList',
-                    header: {
-                      'content-type': 'application/json'
-                    },
-                    data: {
-                      openid: openid,
-                      box_mac: box_mac,
-                      page: page,
-                    },
-                    success: function (res) {
-                      var hst_list = res.data.result;
-
-                      if (JSON.stringify(hst_list) == "{}") {
-                        that.setData({
-                          forscreen_history_list: ''
-                        })
-                      } else {
-                        that.setData({
-                          forscreen_history_list: res.data.result
-                        })
-                      }
-
-                    }
-                  })
-                }
-              });
-
-            },
-          });*/
+          
           wx.request({
             url: api_url + '/Smallapp21/index/recordForScreenPics',
             header: {
@@ -524,10 +449,6 @@ Page({
               })
             }
           });
-
-
-
-
 
           if (netty_push_img.length == img_len) {
             var end_time = (new Date()).valueOf();
@@ -623,7 +544,7 @@ Page({
         postf = filename.substring(index1, index2);//后缀名
         post_imgs[i] = "forscreen/resource/" + timestamp + postf;
 
-        tmp_imgs[i] = { "oss_img": post_imgs[i] };
+        tmp_imgs[i] = { "oss_img": post_imgs[i],'img_id':timestamp };
         // that.setData({
         //   tmp_imgs: tmp_imgs
         // });
@@ -674,6 +595,7 @@ Page({
     box_mac = e.target.dataset.boxmac;
     openid = e.target.dataset.openid;
     var forscreen_img = e.target.dataset.img;
+    var img_id  = e.target.dataset.img_id;
     var pos = forscreen_img.lastIndexOf('/');
     var filename = forscreen_img.substring(pos + 1);
     var timestamp = (new Date()).valueOf();
@@ -699,6 +621,26 @@ Page({
       })
     }
     var forscreen_id = (new Date()).valueOf();
+    var push_img = [];
+    var push_info = {};
+    push_info.forscreen_id = forscreen_id;
+    push_info.action = 4;
+    push_info.resource_type = 2;
+    push_info.openid = openid;
+    push_info.forscreen_char = forscreen_char;
+    push_info.avatarUrl = avatarUrl;
+    push_info.nickName  = nickName;
+
+    var netty_tmp = {};
+    netty_tmp.url = forscreen_img ;
+    netty_tmp.filename = filename ;
+    netty_tmp.img_id   = img_id;
+
+    push_img.push(netty_tmp);
+
+    push_info.img_list = push_img;
+
+    push_info = JSON.stringify(push_info);
     wx.request({
       url: api_url+'/Netty/Index/pushnetty',
       headers: {
@@ -707,7 +649,7 @@ Page({
       method: "POST",
       data: {
         box_mac: box_mac,
-        msg: '{ "action": 2,"resource_type":1, "url": "' + forscreen_img + '", "filename":"' + filename + '","openid":"' + openid + '","avatarUrl":"' + avatarUrl + '","nickName":"' + nickName +'","forscreen_id":"'+forscreen_id+'"}',
+        msg: push_info,
       },
       success: function (result) {
         if(result.data.code!=10000){
