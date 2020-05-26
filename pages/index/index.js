@@ -935,6 +935,10 @@ Page({
         openid: user_info.openid
       }, (data, headers, cookies, errMsg, statusCode) => {
         if (data.result.is_have == 1) {
+          if(app.globalData.link_type==0){
+            app.linkHotelWifi(data.result, that);
+            app.globalData.hotel_info = data.result;
+          }
           that.setData({
             is_link: 1,
             hotel_room: data.result.hotel_name + data.result.room_name,
