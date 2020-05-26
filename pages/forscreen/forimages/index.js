@@ -393,6 +393,7 @@ Page({
           netty_tmp.filename = filename = timestamp + postf_t ;
           netty_tmp.order    = flag;
           netty_tmp.img_id   = timestamp;
+          
 
           netty_push_img.push(netty_tmp);
           
@@ -453,12 +454,12 @@ Page({
           if (netty_push_img.length == img_len) {
             var end_time = (new Date()).valueOf();
             var diff_time = end_time - forscreen_id;
-
+            netty_push_info.res_eup_time = (new Date()).valueOf();
             utils.tryCatch(mta.Event.stat('forscreenImgWastTime', { 'uploadtime': diff_time })); 
             netty_push_info.img_list = netty_push_img;
 
             netty_push_info = JSON.stringify(netty_push_info);
-
+            
             wx.request({
               url: api_url + '/Netty/Index/pushnetty',
               headers: {
@@ -533,6 +534,7 @@ Page({
       netty_push_info.forscreen_char = forscreen_char;
       netty_push_info.avatarUrl = avatarUrl;
       netty_push_info.nickName  = nickName;
+      netty_push_info.res_sup_time = (new Date()).valueOf();
       for (var i = 0; i < img_len; i++) {
         
         var res_sup_time = (new Date()).valueOf();
