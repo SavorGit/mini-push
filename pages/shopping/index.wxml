@@ -40,7 +40,7 @@
 				<view wx:if="{{mall_cart_nums>0}}" class="marker theme-button-red">{{mall_cart_nums}}</view>
 			</view>
 		</view>
-
+		
 		<!-- 主面板 -->
 		<view class="main-panel flex-column-center-flex_start">
 			<scroll-view class="tab-bar theme-panel" scroll-left="{{scrollLeft}}" scroll-x="true" scroll-with-animation="true">
