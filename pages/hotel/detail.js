@@ -442,13 +442,16 @@ Page({
    */
   onShow: function () {
     var that = this;
-    //菜品列表
-    utils.PostRequest(api_url + '/Smallapp4/dish/goodslist', {
-      merchant_id: merchant_id,
-      page: page
-    }, (data, headers, cookies, errMsg, statusCode) => that.setData({
-      dishes_list: data.result
-    }));
+    if(merchant_id !='' && typeof(merchant_id)!='undefined'){
+      //菜品列表
+      utils.PostRequest(api_url + '/Smallapp4/dish/goodslist', {
+        merchant_id: merchant_id,
+        page: page
+      }, (data, headers, cookies, errMsg, statusCode) => that.setData({
+        dishes_list: data.result
+      }));
+    }
+    
     var cart_list = wx.getStorageSync(cache_key + 'cart_' + merchant_id)
     if (cart_list != '') {
       cart_list = JSON.parse(cart_list);
