@@ -1,7 +1,7 @@
 {
   "pages": [
-    "pages/shopping/index",
     "pages/index/index",
+    "pages/shopping/index",
     "pages/demand/goods_detail",
     "pages/find/full_scroll",
     "pages/find/video",

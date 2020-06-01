@@ -37,7 +37,7 @@
         </view>
         <view bindtap='demand' class='entrance flex-column-center-flex_start'>
           <image src='http://oss.littlehotspot.com/media/resource/SsRSWYz5mB.png'></image>
-          <view>节目点播</view>
+          <view>商城首页</view>
         </view>
       </view>
     </view>
@@ -160,7 +160,7 @@
         </view>
         <view bindtap='demand' class='entrance flex-column-center-flex_start'>
           <image src='http://oss.littlehotspot.com/media/resource/SsRSWYz5mB.png'></image>
-          <view>节目点播</view>
+          <view>商城首页</view>
         </view>
       </view>
     </view>
