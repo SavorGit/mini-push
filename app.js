@@ -1172,7 +1172,8 @@ App({
     netty_url: 'https://netty-push.littlehotspot.com',
     oss_url: 'https://oss.littlehotspot.com',
     oss_bucket: 'redian-produce',
-    oss_access_key_id: 'LTAITBjXOpORHKfXlOX',
+    //oss_access_key_id: 'LTAITBjXOpORHKfXlOX',
+    oss_access_key_id:'LTAI4SFjj1AsowpVFZNXOBCVqRHDs',
     link_type: 0,  //1:外网投屏  2：直连投屏
     sys_info: wx.getSystemInfoSync(),
     cache_key: 'savor_',
