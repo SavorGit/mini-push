@@ -1145,6 +1145,12 @@ App({
       mask: mask,
     })
   },
+  sleep:function(delay) {
+    var start = (new Date()).getTime();
+    while ((new Date()).getTime() - start < delay) {
+      continue;
+    }
+  },
   /**
    * 拨打订餐电话
    */

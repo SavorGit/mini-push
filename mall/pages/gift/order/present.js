@@ -8,6 +8,7 @@ var cache_key = app.globalData.cache_key;
 var openid;
 var goods_id ;
 var pur_uid;
+var box_mac;
 Page({
   
   /**
@@ -37,6 +38,11 @@ Page({
       pur_uid = options.pur_uid
     }else {
       pur_uid=''
+    }
+    if(typeof(options.box_mac)!='undefined'){
+      box_mac = options.box_mac;
+    }else {
+      box_mac = '';
     }
     wx.removeStorageSync(cache_key + 'mall_order:remark') //清楚订单备注
     that.setData({amount:amount,present_amount:1})

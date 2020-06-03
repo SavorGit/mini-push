@@ -553,6 +553,7 @@ Page({
         
         //第二步
         uploadOssNew(policy, signature, filename, resource_size, box_mac, openid, timestamp, i, img_len, forscreen_char, forscreen_id, res_sup_time, avatarUrl, nickName, public_text, timer8_0, tmp_imgs);
+        app.sleep(1)
       }
       
     }

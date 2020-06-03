@@ -15,6 +15,7 @@ var order_type;
 var merchant_id;
 var carts;
 var pur_uid;
+var box_mac;
 Page({
 
   /**
@@ -45,6 +46,11 @@ Page({
       pur_uid = options.pur_uid
     }else {
       pur_uid=''
+    }
+    if(typeof(options.box_mac)!='undefined'){
+      box_mac = options.box_mac;
+    }else {
+      box_mac = '';
     }
     openid = options.openid;
     order_type = options.order_type;  //1单品下单 2购物车下单  3再次购买

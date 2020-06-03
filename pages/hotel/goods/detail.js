@@ -11,6 +11,7 @@ var cache_key = app.globalData.cache_key;
 var goods_id;
 var pur_uid;
 var openid;
+var box_mac;
 let SavorUtils = {
   User: {
 
@@ -59,6 +60,7 @@ Page({
   onLoad: function (options) {
     var self = this;
     pur_uid = '';
+    box_mac = '';
     if (app.globalData.openid && app.globalData.openid != '') {
       //注册用户
       self.setData({
@@ -84,6 +86,9 @@ Page({
       goods_id = pams_arr[1];
       if(typeof(pams_arr[3])!='undefined'){
         pur_uid = pams_arr[3];
+      }
+      if(typeof(pams_arr[4])!='undefined'){
+        box_mac = pams_arr[4];
       }
       
       self.setData({
@@ -346,7 +351,7 @@ Page({
     var action = that.data.action;
     if(action ==2){//立即购买
       wx.navigateTo({
-        url: '/mall/pages/order/confirmation?goods_id=' + goods_id + '&openid=' + openid + '&amount=' + amount + '&order_type=' + order_type + '&pur_uid=' + pur_uid,
+        url: '/mall/pages/order/confirmation?goods_id=' + goods_id + '&openid=' + openid + '&amount=' + amount + '&order_type=' + order_type + '&pur_uid=' + pur_uid+'&box_mac='+box_mac,
         success: function (res) {
           that.setData({
             showBuyGoodsPopWindow: false,
@@ -355,7 +360,7 @@ Page({
       })
     }else if (action==3){//赠送好友
       wx.navigateTo({
-        url: '/mall/pages/gift/order/present?goods_id=' + goods_id + '&openid=' + openid + '&amount=' + amount + '&pur_uid=' + pur_uid,
+        url: '/mall/pages/gift/order/present?goods_id=' + goods_id + '&openid=' + openid + '&amount=' + amount + '&pur_uid=' + pur_uid+'&box_mac='+box_mac,
         success: function (res) {
           that.setData({
             showBuyGoodsPopWindow: false,
