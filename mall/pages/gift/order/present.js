@@ -199,7 +199,8 @@ Page({
       person_upnum:present_amount,
       remark:remark,
       title_type:title_type,
-      uid:pur_uid
+      uid:pur_uid,
+      box_mac:box_mac
       
     }, (data, headers, cookies, errMsg, statusCode) => {
       var order_id = data.result.order_id;
