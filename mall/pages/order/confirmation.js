@@ -42,15 +42,13 @@ Page({
     var goods_ids = [];
     goods_id = '';
     carts = [];
+    box_id= 0;
+    pur_uid = '';
     if (typeof (options.pur_uid)!='undefined'){
       pur_uid = options.pur_uid
-    }else {
-      pur_uid=''
     }
     if(typeof(options.box_id)!='undefined'){
       box_id = options.box_id;
-    }else {
-      box_id = '';
     }
     openid = options.openid;
     order_type = options.order_type;  //1单品下单 2购物车下单  3再次购买
