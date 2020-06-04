@@ -11,7 +11,7 @@ var cache_key = app.globalData.cache_key;
 var goods_id;
 var pur_uid;
 var openid;
-var box_mac;
+var box_id;
 let SavorUtils = {
   User: {
 
@@ -60,7 +60,7 @@ Page({
   onLoad: function (options) {
     var self = this;
     pur_uid = '';
-    box_mac = '';
+    box_id = '';
     if (app.globalData.openid && app.globalData.openid != '') {
       //注册用户
       self.setData({
@@ -84,17 +84,18 @@ Page({
 
       var pams_arr = pams.split('_');
       goods_id = pams_arr[1];
+      var goods_type = pams_arr[2];
       if(typeof(pams_arr[3])!='undefined'){
         pur_uid = pams_arr[3];
       }
       if(typeof(pams_arr[4])!='undefined'){
-        box_mac = pams_arr[4];
+        box_id = pams_arr[4];
       }
       
       self.setData({
         is_share: true
       })
-
+      mta.Event.stat('scanGoodsQrcode',{'goodsid':goods_id,'goodstype':goods_type,'boxid':box_id})
     } else {
       goods_id = options.goods_id;
       if (typeof (options.is_share) != 'undefined' && options.is_share == 1) {
@@ -106,6 +107,7 @@ Page({
           is_share: false
         })
       }
+      mta.Event.stat('jumpGoodsDetail',{'goodsid':goods_id})
     }
 
 
@@ -351,7 +353,7 @@ Page({
     var action = that.data.action;
     if(action ==2){//立即购买
       wx.navigateTo({
-        url: '/mall/pages/order/confirmation?goods_id=' + goods_id + '&openid=' + openid + '&amount=' + amount + '&order_type=' + order_type + '&pur_uid=' + pur_uid+'&box_mac='+box_mac,
+        url: '/mall/pages/order/confirmation?goods_id=' + goods_id + '&openid=' + openid + '&amount=' + amount + '&order_type=' + order_type + '&pur_uid=' + pur_uid+'&box_id='+box_id,
         success: function (res) {
           that.setData({
             showBuyGoodsPopWindow: false,
@@ -360,7 +362,7 @@ Page({
       })
     }else if (action==3){//赠送好友
       wx.navigateTo({
-        url: '/mall/pages/gift/order/present?goods_id=' + goods_id + '&openid=' + openid + '&amount=' + amount + '&pur_uid=' + pur_uid+'&box_mac='+box_mac,
+        url: '/mall/pages/gift/order/present?goods_id=' + goods_id + '&openid=' + openid + '&amount=' + amount + '&pur_uid=' + pur_uid+'&box_id='+box_id,
         success: function (res) {
           that.setData({
             showBuyGoodsPopWindow: false,
