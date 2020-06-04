@@ -60,7 +60,7 @@ Page({
   onLoad: function (options) {
     var self = this;
     pur_uid = '';
-    box_id = '';
+    box_id = 0;
     if (app.globalData.openid && app.globalData.openid != '') {
       //注册用户
       self.setData({
@@ -482,7 +482,7 @@ Page({
       var goods_info = this.data.goods_info;
       var goods_id = goods_info.goods_id;
       wx.navigateTo({
-        url: '/mall/pages/gift/order/present?goods_id=' + goods_id + '&openid=' + openid + '&amount=1',
+        url: '/mall/pages/gift/order/present?goods_id=' + goods_id + '&openid=' + openid + '&amount=1'+ '&pur_uid=' + pur_uid+'&box_id='+box_id,
       })
     }
     
@@ -529,7 +529,7 @@ Page({
                 showModal: false,
               })
               wx.navigateTo({
-                url: '/mall/pages/gift/order/present?goods_id=' + goods_info.goods_id + '&openid=' + openid + '&amount=1',
+                url: '/mall/pages/gift/order/present?goods_id=' + goods_info.goods_id + '&openid=' + openid + '&amount=1'+ '&pur_uid=' + pur_uid+'&box_id='+box_id,
               })
             }
             
