@@ -1016,7 +1016,8 @@ App({
                   url: aps.globalData.api_url + '/Smallappsimple/Index/recordWifiErr',
                   data: {
                     err_info: err_info,
-                    box_mac: hotel_info.box_mac
+                    box_mac: hotel_info.box_mac,
+                    openid:aps.globalData.openid
                   }
                 })
                 wx.stopWifi({
@@ -1117,7 +1118,8 @@ App({
           url: aps.globalData.api_url + '/Smallappsimple/Index/recordWifiErr',
           data: {
             err_info: err_info,
-            box_mac: box_mac
+            box_mac: box_mac,
+            openid:aps.globalData.openid
           }
         })
       }, complete: function (res) {
