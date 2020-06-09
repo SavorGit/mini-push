@@ -56,10 +56,6 @@
 						<view>电话订餐</view>
 					</button>
 
-					<button class="btn flex-row-center-center" bindtap="gotoPlatform">
-						<view class="fa fa-cubes fa-lg" aria-hidden="true"></view>
-						<view>其他平台</view>
-					</button>
 				</view>
 			</view>
 

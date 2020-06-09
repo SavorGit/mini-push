@@ -425,6 +425,7 @@ Page({
    * 商家介绍页面
    */
   gotoMerDetail:function(e){
+    return false;
     var openid = e.currentTarget.dataset.openid;
     wx.navigateTo({
       url: '/pages/hotel/introduction?merchant_id='+merchant_id+'&openid'+openid,
