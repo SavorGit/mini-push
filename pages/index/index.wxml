@@ -142,19 +142,19 @@
 				</button>
 			</view>
 			<view>
-				<button class="theme-font2" bindtap='hdgames' wx:if="{{is_link==0}}" data-linkcontent='/pages/game/climbtree/index' data-boxmac="{{box_mac}}" data-openid="{{openid}}">
+				<button class="theme-font2" bindtap='hdgames' wx:if="{{is_link==0}}" data-linkcontent='/games/pages/gamelist' data-boxmac="{{box_mac}}" data-openid="{{openid}}">
 					<view class="icon flex-column-center-center game">
 						<image src='/images/icon2/FFFFFF_game.png'></image>
 					</view>
 					<label>互动小游戏</label>
 				</button>
-				<button class="theme-font2" bindtap='hdgames' wx:elif="{{link_type==0 || link_type==2}}" disabled="true" data-linkcontent='/pages/game/climbtree/index' data-boxmac="{{box_mac}}" data-openid="{{openid}}">
+				<button class="theme-font2" bindtap='hdgames' wx:elif="{{link_type==0 || link_type==2}}" disabled="true" data-linkcontent='/games/pages/gamelist' data-boxmac="{{box_mac}}" data-openid="{{openid}}">
 					<view class="icon flex-column-center-center game">
 						<image src='/images/icon2/FFFFFF_game.png'></image>
 					</view>
 					<label>互动小游戏</label>
 				</button>
-				<button class="theme-font2" bindtap='hdgames' wx:elif="{{link_type==1 }}" data-linkcontent='/pages/game/climbtree/index' data-boxmac="{{box_mac}}" data-openid="{{openid}}">
+				<button class="theme-font2" bindtap='hdgames' wx:elif="{{link_type==1 }}" data-linkcontent='/games/pages/gamelist' data-boxmac="{{box_mac}}" data-openid="{{openid}}">
 					<view class="icon flex-column-center-center game">
 						<image src='/images/icon2/FFFFFF_game.png'></image>
 					</view>
