@@ -79,6 +79,12 @@
         "pages/gift/order/select_address",
         "pages/gift/order/receive_success"
       ]
+    },
+    {
+      "root": "games",
+      "pages": [
+        "pages/gamelist"
+      ]
     }
   ],
   "permission": {
