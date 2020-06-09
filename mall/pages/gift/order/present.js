@@ -8,6 +8,7 @@ var cache_key = app.globalData.cache_key;
 var openid;
 var goods_id ;
 var pur_uid;
+var box_id;
 Page({
   
   /**
@@ -33,10 +34,13 @@ Page({
     openid = options.openid;
     goods_id = options.goods_id;
     var amount = options.amount;
+    pur_uid=''
     if (typeof (options.pur_uid)!='undefined'){
       pur_uid = options.pur_uid
-    }else {
-      pur_uid=''
+    }
+    box_id = 0;
+    if(typeof(options.box_id)!='undefined'){
+      box_id = options.box_id;
     }
     wx.removeStorageSync(cache_key + 'mall_order:remark') //清楚订单备注
     that.setData({amount:amount,present_amount:1})
@@ -193,7 +197,8 @@ Page({
       person_upnum:present_amount,
       remark:remark,
       title_type:title_type,
-      uid:pur_uid
+      uid:pur_uid,
+      box_id:box_id
       
     }, (data, headers, cookies, errMsg, statusCode) => {
       var order_id = data.result.order_id;

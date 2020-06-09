@@ -15,6 +15,7 @@ var order_type;
 var merchant_id;
 var carts;
 var pur_uid;
+var box_id;
 Page({
 
   /**
@@ -41,10 +42,13 @@ Page({
     var goods_ids = [];
     goods_id = '';
     carts = [];
+    box_id= 0;
+    pur_uid = '';
     if (typeof (options.pur_uid)!='undefined'){
       pur_uid = options.pur_uid
-    }else {
-      pur_uid=''
+    }
+    if(typeof(options.box_id)!='undefined'){
+      box_id = options.box_id;
     }
     openid = options.openid;
     order_type = options.order_type;  //1单品下单 2购物车下单  3再次购买
@@ -269,7 +273,8 @@ Page({
       pay_type: pay_type,
       remark: remark,
       title_type, title_type,
-      uid:pur_uid
+      uid:pur_uid,
+      box_id:box_id
     }, (data, headers, cookies, errMsg, statusCode) => {
       //支付流程
       var order_id = data.result.order_id;
