@@ -1,11 +1,18 @@
 // mall/pages/gift/accept/index.js
+/**
+ * 【商城】转赠页面
+ */
+
+
+var app = getApp();
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-
+    statusBarHeight: getApp().globalData.statusBarHeight,
+    SystemInfo: getApp().SystemInfo
   },
 
   /**
