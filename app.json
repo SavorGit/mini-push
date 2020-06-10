@@ -78,7 +78,8 @@
         "pages/gift/order/gift_detail_receive",
         "pages/gift/order/select_address",
         "pages/gift/order/receive_success",
-        "pages/gift/accept/index"
+        "pages/gift/accept/index",
+        "pages/gift/accept/multy_gift"
       ]
     },
     {
