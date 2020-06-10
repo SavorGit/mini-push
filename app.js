@@ -974,15 +974,15 @@ App({
                 })
                 if (res.errCode == 12005) { //安卓特有  未打开wifi
                   that.setData({
-                    wifiErr: { 'is_open': 1, 'msg': '亲，使用此小程序前需要打开您手机的wifi,链接wifi投屏更快哦！', 'confirm': '确定', 'calcle': '取消', 'type': 1 }
+                    wifiErr: { 'is_open': 1, 'msg': '亲，使用此小程序前需要打开您手机的wifi,连上wifi投屏更快哦！', 'confirm': '确定', 'calcle': '取消', 'type': 1 }
                   })
                 } else if (res.errCode == 12006) {//Android 特有，未打开 GPS 定位开关
                   that.setData({
-                    wifiErr: { 'is_open': 1, 'msg': '亲，使用此小程序前需要打开您手机的GPS定位,链接wifi投屏更快哦！', 'confirm': '确定', 'calcle': '取消', 'type': 2 }
+                    wifiErr: { 'is_open': 1, 'msg': '亲，使用此小程序前需要打开您手机的GPS定位,连上wifi投屏更快哦！', 'confirm': '确定', 'calcle': '取消', 'type': 2 }
                   })
                 } else if(res.errCode == 12007){//用户拒绝授权链接 Wi-Fi
                   that.setData({
-                    wifiErr: { 'is_open': 1, 'msg': '亲，使用此小程序前需要链接包间wifi,链接wifi投屏更快哦！', 'confirm': '重试', 'calcle': '', 'type': 3 }
+                    wifiErr: { 'is_open': 1, 'msg': '亲，使用此小程序前需要链接包间wifi,连上wifi投屏更快哦！', 'confirm': '重试', 'calcle': '', 'type': 3 }
                   })
                 }
                 /*else if (res.errMsg == 'getConnectedWifi:fail:currentWifi is null') {
@@ -1010,7 +1010,7 @@ App({
                   } else {
                     var us_wifi_password = hotel_info.wifi_password;
                   }
-                  var msg = '请连接wifi:' + hotel_info.wifi_name + ',密码为' + us_wifi_password+'。链接wifi投屏更快哦！';
+                  var msg = '请手动连接包间wifi:' + hotel_info.wifi_name + ',密码为' + us_wifi_password+'。连上wifi投屏更快哦！';
                   that.setData({
                     wifiErr: { 'is_open': 1, 'msg': msg, 'confirm': '重试', 'type': 4 }
                   })
