@@ -61,3 +61,56 @@
   padding: 0;
   border: 0;
 }
+
+
+/* --------------------- 多个赠品 --------------------- */
+.setting-panel {
+  width: 100%;
+  margin-top: 10rpx;
+}
+
+.setting-panel>.row {
+  width: 350rpx;
+  height: 100rpx;
+  padding: 0 200rpx;
+  border-bottom: 3rpx solid #EDEDED;
+}
+
+.setting-panel>.row:last-child {
+  border-bottom: 0;
+}
+
+.setting-panel>.row>.label {
+  font-size: 28rpx;
+}
+
+.setting-panel>.row>.count {
+  width: 220rpx;
+}
+
+.setting-panel>.row>.count>.btn {
+  width: 54rpx;
+  height: 54rpx;
+  line-height: 54rpx;
+  text-align: center;
+  font-size: 28rpx;
+  border: 3rpx solid rgb(216, 220, 230);
+}
+
+.setting-panel>.row>.count>.subt {
+  border-radius: 10rpx 0 0 10rpx;
+}
+
+.setting-panel>.row>.count>.plus {
+  border-radius: 0 10rpx 10rpx 0;
+}
+
+.setting-panel>.row>.count>.value {
+  width: calc(100% - 120rpx);
+  height: 54rpx;
+  line-height: 54rpx;
+  text-align: center;
+  font-size: 28rpx;
+  border-top: 3rpx solid rgb(216, 220, 230);
+  border-bottom: 3rpx solid rgb(216, 220, 230);
+}
