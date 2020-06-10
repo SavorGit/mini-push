@@ -58,6 +58,14 @@ Page({
       }
     });
   },
+  /**
+   * 选择收货地址
+   */
+  selectAddress: function (e) {
+    wx.navigateTo({
+      url: '/pages/mine/address/index?openid=' + openid + '&isOrder=1',
+    })
+  },
   receiveGift: function () {
     var that = this;
     var address_id = that.data.address_id;
