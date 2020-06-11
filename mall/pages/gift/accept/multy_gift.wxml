@@ -1,2 +1,86 @@
 <!--mall/pages/gift/accept/multy_gift.wxml-->
-<text>mall/pages/gift/accept/multy_gift.wxml</text>
+<!--
+ | 【商城】赠品转赠-收货地址
+ |-->
+
+
+<import src="/pages/template/commons" />
+<template is="navigationBarForTwoLevel" data='{{statusBarHeight: statusBarHeight,titleText:"赠品转赠-收货地址"}}' />
+
+<!-- 多个赠品 -->
+<view class='container theme-container' style='height:calc(100vh - {{46 + statusBarHeight + SystemInfo.screenBottomSpace}}px);'>
+	<scroll-view class='scroll-view full-page' scroll-y="true" scroll-with-animation="true">
+		<view class="page-warpper flex-column-flex_start-center">
+			<view class="panel status-panel flex-column-center-flex_start theme-panel">
+				<view class="status flex-column-center-flex_start">
+					<view class="icon fa fa-smile-o" aria-hidden="true"></view>
+					<view class="msg">恭喜您领取到了xxx的赠品</view>
+				</view>
+				<view class="tip">您可在【我的-赠送订单】中查看具体的运单及转增信息</view>
+			</view>
+			<view class="panel mine-address flex-column-center-flex_start theme-panel">
+				<view class="title-bar flex-row-center-space_between">
+					<view class="title theme-font3">自己领取 xx 件</view>
+					<view class="btn theme-button-orange">确定收货地址</view>
+				</view>
+				<view class="body">
+					<view class="row flex-row-center-space_between">
+						<view class="left flex-row-center-space_between">
+							<view class="icon fa fa-map-marker" aria-hidden="true"></view>
+							<view class="value">选择收货地址</view>
+						</view>
+						<view class="right flex-row-center-flex_end">
+							<view class="btn fa fa-chevron-right" aria-hidden="true"></view>
+						</view>
+					</view>
+				</view>
+			</view>
+			<view wx:if="{{a}}" class="panel mine-address flex-column-center-flex_start theme-panel">
+				<view class="title-bar flex-row-center-space_between">
+					<view class="title theme-font3">自己领取 xx 件</view>
+					<view class="btn theme-button-orange">确定收货地址</view>
+				</view>
+				<view class="body">
+					<view class="row flex-row-center-space_between">
+						<view class="left flex-row-center-space_between">
+							<view class="icon fa fa-map-marker" aria-hidden="true"></view>
+							<view class="choosed">
+								<view class="consignee flex-row-center-flex_start">
+									<view class="name one-line-overflow">李三三</view>
+									<view class="phone one-line-overflow">13800138000</view>
+								</view>
+								<view class="address two-line-overflow">北京市朝阳区永峰写字楼601</view>
+							</view>
+						</view>
+						<view class="right flex-row-center-flex_end">
+							<view class="btn fa fa-chevron-right" aria-hidden="true"></view>
+						</view>
+					</view>
+				</view>
+			</view>
+			<view wx:if="{{a}}" class="panel mine-address flex-column-center-flex_start theme-panel">
+				<view class="title-bar flex-row-center-space_between">
+					<view class="title theme-font3">自己领取 xx 件</view>
+				</view>
+				<view class="body">
+					<view class="row flex-row-center-space_between">
+						<view class="left flex-row-center-space_between" style="width:100%;">
+							<view class="icon fa fa-map-marker" aria-hidden="true"></view>
+							<view class="choosed">
+								<view class="consignee flex-row-center-flex_start">
+									<view class="name one-line-overflow">李三三</view>
+									<view class="phone one-line-overflow">13800138000</view>
+								</view>
+								<view class="address two-line-overflow">北京市朝阳区永峰写字楼601</view>
+							</view>
+						</view>
+					</view>
+				</view>
+			</view>
+			<view class="panel option-panel flex-column-center-flex_start">
+				<view class="btn theme-button-red">填写收货地址</view>
+				<view class="btn theme-button-welcome-dark">转增给好友</view>
+			</view>
+		</view>
+	</scroll-view>
+</view>

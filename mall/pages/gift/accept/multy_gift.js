@@ -1,4 +1,9 @@
 // mall/pages/gift/accept/multy_gift.js
+/**
+ * 【商城】赠品转赠-收货地址
+ */
+
+
 const utils = require('../../../../utils/util.js')
 var mta = require('../../../../utils/mta_analysis.js')
 const app = getApp()
@@ -13,9 +18,11 @@ Page({
    * 页面的初始数据
    */
   data: {
-    is_have_default_address:false,
-    is_edit_send_word:false, //是否修改寄语
-    send_word:'',            //寄语
+    statusBarHeight: getApp().globalData.statusBarHeight,
+    SystemInfo: getApp().SystemInfo,
+    is_have_default_address: false,
+    is_edit_send_word: false, //是否修改寄语
+    send_word: '', //寄语
   },
 
   /**
@@ -23,15 +30,15 @@ Page({
    */
   onLoad: function (options) {
     var that = this;
-    openid   = options.openid;
+    openid = options.openid;
     order_id = options.order_id;
     that.getOrderInfo();
   },
-  getOrderInfo:function(){
+  getOrderInfo: function () {
     var that = this;
     utils.PostRequest(api_v_url + '/aa/bb', {
-      order_id   : order_id,
-      openid     : openid
+      order_id: order_id,
+      openid: openid
     }, (data, headers, cookies, errMsg, statusCode) => {
       //that.getDefaultAddr()
     });
@@ -78,32 +85,32 @@ Page({
       order_id: order_id,
       address_id: address_id,
     }, (data, headers, cookies, errMsg, statusCode) => {
-      
+
     })
   },
   //点击笔头修改寄语
-  editSendWord:function(e){
+  editSendWord: function (e) {
     var that = this;
     that.setData({
-      is_edit_send_word:true,
+      is_edit_send_word: true,
     })
   },
   //保存寄语
-  saveSendWord:function(e){
+  saveSendWord: function (e) {
     var that = this;
     var send_word = e.detail.value.send_word.replace(/\s+/g, '');
-    if(send_word==''){
+    if (send_word == '') {
       app.showToast('请输入寄语');
       return false;
     }
     utils.PostRequest(api_v_url + '/order/modifyMessage', {
       openid: openid,
-      order_id:order_id,
-      message:send_word,
+      order_id: order_id,
+      message: send_word,
     }, (data, headers, cookies, errMsg, statusCode) => {
       that.setData({
-        is_edit_send_word:false,
-        send_word:send_word,
+        is_edit_send_word: false,
+        send_word: send_word,
       })
     })
   },
@@ -166,9 +173,9 @@ Page({
    */
   onShareAppMessage: function () {
     var that = this;
-    var user_info = wx.getStorageSync(cache_key+'user_info');
+    var user_info = wx.getStorageSync(cache_key + 'user_info');
 
-    var nickName   = user_info.nickName
+    var nickName = user_info.nickName
     //var goods_name = that.data.order_goods_info.name;
     //var img_url    = that.data.order_goods_info.img
     var img_url = 'https://oss.littlehotspot.com/WeChat/resource/share.jpg';
@@ -180,16 +187,14 @@ Page({
         title: title,
         path: '/pages/hotel/gift/share?order_id=' + order_id,
         imageUrl: img_url,
-        success: function (res) {
-        },
+        success: function (res) {},
       }
     } else {
       return {
         title: title,
         path: '/pages/hotel/gift/share?order_id=' + order_id,
         imageUrl: img_url,
-        success: function (res) {
-        },
+        success: function (res) {},
       }
     }
   }
