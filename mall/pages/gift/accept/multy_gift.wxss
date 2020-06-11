@@ -145,3 +145,128 @@
   padding: 0;
   background-color: unset;
 }
+
+.gift-panel>.body {
+  width: 100%;
+  height: 550rpx;
+  padding-bottom: 50rpx;
+}
+
+.gift-panel>.body>.goods-info {
+  width: calc(100% - 80rpx);
+  height: 200rpx;
+  margin: 20rpx 20rpx 0 20rpx;
+  padding: 20rpx;
+  background-color: #FAF3E6;
+  border-radius: 5rpx;
+}
+
+.gift-panel>.body>.goods-info>.hotel {
+  font-size: 24rpx;
+}
+
+.gift-panel>.body>.goods-info>.row {
+  height: 150rpx;
+  padding-top: 20rpx;
+}
+
+.gift-panel>.body>.goods-info>.row>.pic {
+  width: 150rpx;
+  height: 150rpx;
+  border-radius: 5rpx;
+}
+
+.gift-panel>.body>.goods-info>.row>.center {
+  width: calc(100% - 310rpx);
+  height: 100%;
+  margin-left: 20rpx;
+}
+
+.gift-panel>.body>.goods-info>.row>.center>.name {
+  font-size: 24rpx;
+}
+
+.gift-panel>.body>.goods-info>.row>.center>.bottom {
+  padding-bottom: 15rpx;
+}
+
+.gift-panel>.body>.goods-info>.row>.center>.bottom>.specs {
+  font-size: 24rpx;
+}
+
+.gift-panel>.body>.goods-info>.row>.right {
+  width: 140rpx;
+  height: 100%;
+}
+
+.gift-panel>.body>.goods-info>.row>.right>.price {
+  width: 100%;
+  text-align: right;
+  font-size: 28rpx;
+}
+
+.gift-panel>.body>.message-block {
+  width: calc(100% - 70rpx);
+  padding: 25rpx 35rpx;
+}
+
+.gift-panel>.body>.message-block .title-bar {
+  width: calc(100% - 3rpx);
+  padding-right: 3rpx;
+}
+
+.gift-panel>.body>.message-block .title-bar>.title {
+  font-size: 28rpx;
+}
+
+.gift-panel>.body>.message-block .title-bar>.btn {
+  width: 30rpx;
+  height: 30rpx;
+  font-size: 30rpx;
+  color: #FBBBBB;
+  border-bottom: 4rpx solid #FBBBBB;
+  margin: 0;
+  padding: 0;
+}
+
+.gift-panel>.body>.message-block .content {
+  padding: 20rpx 0;
+}
+
+.gift-panel>.body>.message-block .content>.input,
+.gift-panel>.body>.message-block .content>.view {
+  width: 100%;
+}
+
+.gift-panel>.body>.message-block .content>.input {
+  min-height: 40rpx;
+  max-height: 80rpx;
+  font-size: 30rpx;
+  border: 3rpx solid #EDEDED;
+}
+
+.gift-panel>.body>.message-block .content>.view {
+  font-size: 32rpx;
+  font-weight: bold;
+}
+
+.gift-panel>.body>.sender {
+  width: calc(100% - 40rpx);
+  height: 64rpx;
+  padding: 15rpx 20rpx;
+}
+
+.gift-panel>.body>.sender>.isp>.icon {
+  width: 64rpx;
+  height: 64rpx;
+  border-radius: 5rpx;
+}
+
+.gift-panel>.body>.sender>.isp>.name {
+  margin-left: 15rpx;
+  font-size: 24rpx;
+}
+
+.gift-panel>.body>.sender>.nikename {
+  font-size: 28rpx;
+}

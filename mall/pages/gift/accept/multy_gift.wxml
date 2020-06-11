@@ -77,9 +77,55 @@
 					</view>
 				</view>
 			</view>
-			<view class="panel option-panel flex-column-center-flex_start">
-				<view class="btn theme-button-red">填写收货地址</view>
-				<view class="btn theme-button-welcome-dark">转增给好友</view>
+			<view class="panel gift-panel flex-column-center-flex_start theme-panel">
+				<view class="title-bar flex-row-center-space_between">
+					<view class="title theme-font3">送给好友 xx 件</view>
+					<view class="btn theme-button-orange">微信送给好友</view>
+				</view>
+				<view class="body">
+					<view class="goods-info">
+						<view class="hotel theme-font7">由花家怡园（世茂店）提供</view>
+						<view class="row flex-row-center-space_between">
+							<image class="pic" mode="aspectFill" src="http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
+							<view class="center flex-column-flex_start-space_between" bindtap="">
+								<view class="name two-line-overflow">麻辣小龙虾一份（大份），38只，限量供应</view>
+								<view class="bottom flex-row-center-flex_start">
+									<view class="specs theme-font3">2斤简装</view>
+								</view>
+							</view>
+							<view class="right flex-column-flex_end-flex_start" bindtap="">
+								<view class="price one-line-overflow theme-font3">X5</view>
+							</view>
+						</view>
+					</view>
+					<view wx:if="{{is_edit_send_word}}" class="message-block">
+						<form bindsubmit="">
+							<view class="title-bar flex-row-center-space_between">
+								<view class="title theme-font2">寄语</view>
+								<button form-type="submit" class="btn theme-button-welcome" style="width:100rpx;height:40rpx;line-height:40rpx;text-align:center;border-radius:5rpx;font-size:24rpx;color:#FFFFFF;border:0;" aria-hidden="true">保存</button>
+							</view>
+							<view class="content">
+								<textarea class="input" name="send_word" value="这份我最爱的礼物，送给与我同行路上的同路人，愿你万事顺遂～"></textarea>
+							</view>
+						</form>
+					</view>
+					<view wx:else class="message-block">
+						<view class="title-bar flex-row-center-space_between">
+							<view class="title theme-font2">寄语</view>
+							<view class="btn fa fa-pencil" aria-hidden="true" bindtap=""></view>
+						</view>
+						<view class="content">
+							<view class="view two-line-overflow theme-font5">这份我最爱的礼物，送给与我同行路上的同路人，愿你万事顺遂～</view>
+						</view>
+					</view>
+					<view class="sender flex-row-center-space_between">
+						<view class="isp flex-row-center-flex_start">
+							<image class="icon" mode="aspectFill" src="/images/imgs/default-user.png"></image>
+							<view class="name theme-font3">小热点</view>
+						</view>
+						<view class="nikename theme-font1">昵称</view>
+					</view>
+				</view>
 			</view>
 		</view>
 	</scroll-view>
