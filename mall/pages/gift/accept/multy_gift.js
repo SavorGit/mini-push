@@ -33,14 +33,55 @@ Page({
     openid = options.openid;
     order_id = options.order_id;
     that.getOrderInfo();
+    that.getDefaultAddr();
   },
   getOrderInfo: function () {
     var that = this;
-    utils.PostRequest(api_v_url + '/aa/bb', {
+    utils.PostRequest(api_v_url + '/gift/getsuccess', {
       order_id: order_id,
       openid: openid
     }, (data, headers, cookies, errMsg, statusCode) => {
-      //that.getDefaultAddr()
+      var records = data.result.records //领取列表
+      var amount = data.result.amount
+      var give_num = data.result.give_num; //赠送礼品份数
+      var selfreceive_num = data.result.selfreceive_num; //自己领取礼品份数
+      var goods_info = data.result.goods;
+      var merchant_info = data.result.merchant;
+      var receive_type = data.result.receive_type;
+      var expire_date = data.result.expire_date;
+      var message = data.result.message;
+      var nickName = data.result.nickName;
+      var receive_num = data.result.receive_num;
+      var address = data.result.address;
+      var receive_order_id = data.result.receive_order_id;
+      var give_order_id = data.result.give_order_id;
+      var send_word = data.result.message;
+      var share_title = data.result.share_title;
+      if(address.length==0){
+        var is_have_receive = 0;
+      }else {
+        var is_have_receive = 1;
+      }
+      that.setData({
+        order_info: data.result,
+        records: records,
+        amount: amount,
+        expire_date:expire_date,
+        goods_info: goods_info,
+        give_num: give_num,
+        merchant_info: merchant_info,
+        receive_type: receive_type,
+        message:message,
+        nickName:nickName,
+        receive_num:receive_num,
+        selfreceive_num:selfreceive_num,
+        address:address,
+        receive_order_id:receive_order_id,
+        give_order_id:give_order_id,
+        is_have_receive:is_have_receive,
+        send_word:send_word,
+        share_title:share_title
+      })
     });
   },
   getDefaultAddr: function () {
@@ -80,12 +121,17 @@ Page({
       app.showToast('请选择您的收货地址');
       return false;
     }
+    var receive_order_id = that.data.receive_order_id;
     utils.PostRequest(api_v_url + '/gift/confirmAddress/', {
       openid: openid,
-      order_id: order_id,
+      order_id: receive_order_id,
       address_id: address_id,
     }, (data, headers, cookies, errMsg, statusCode) => {
-
+      that.setData({
+        is_have_receive:1
+      })
+      var message= data.result.message;
+      app.showToast(message)
     })
   },
   //点击笔头修改寄语
@@ -98,6 +144,7 @@ Page({
   //保存寄语
   saveSendWord: function (e) {
     var that = this;
+    var give_order_id = that.data.give_order_id;
     var send_word = e.detail.value.send_word.replace(/\s+/g, '');
     if (send_word == '') {
       app.showToast('请输入寄语');
@@ -105,7 +152,7 @@ Page({
     }
     utils.PostRequest(api_v_url + '/order/modifyMessage', {
       openid: openid,
-      order_id: order_id,
+      order_id: give_order_id,
       message: send_word,
     }, (data, headers, cookies, errMsg, statusCode) => {
       that.setData({
@@ -171,7 +218,7 @@ Page({
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage: function () {
+  onShareAppMessage: function (e) {
     var that = this;
     var user_info = wx.getStorageSync(cache_key + 'user_info');
 
@@ -190,6 +237,7 @@ Page({
         success: function (res) {},
       }
     } else {
+
       return {
         title: title,
         path: '/pages/hotel/gift/share?order_id=' + order_id,
@@ -197,5 +245,6 @@ Page({
         success: function (res) {},
       }
     }
-  }
+  },
+  
 })

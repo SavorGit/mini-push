@@ -9,10 +9,10 @@ var api_url = app.globalData.api_url;
 var api_v_url = app.globalData.api_v_url;
 var cache_key = app.globalData.cache_key;
 var order_id;
-var openid;
-var goods_id;
-var nickName;
-var goods_num;
+var openid;      
+var goods_id;    //赠送礼品id
+var nickName;    //赠送人昵称
+var receive_num; //已领取礼品数量
 Page({
 
   /**
@@ -40,24 +40,69 @@ Page({
     var user_info = wx.getStorageSync(cache_key + 'user_info');
     openid = options.openid;
     goods_id = options.goods_id;
-    goods_num = options.goods_num;  //领取礼物的数量
-    if(goods_num>1){
+    receive_num = options.receive_num;  //领取礼物的数量
+    if(receive_num>1){
       wx.hideShareMenu();
+    }else if(receive_num==1){
+      that.getOrderInfo()
     }
     
     that.setData({
       user_info: user_info,
       nickName:nickName,
-      goods_num:goods_num,
-      accept_num:goods_num,
+      receive_num:receive_num,
+      accept_num:receive_num,
     })
+  },
+  getOrderInfo: function () {
+    var that = this;
+    utils.PostRequest(api_v_url + '/gift/info', {
+      order_id: order_id,
+      openid: openid
+    }, (data, headers, cookies, errMsg, statusCode) => {
+      var records = data.result.records //领取列表
+      var amount = data.result.amount
+      var give_num = data.result.give_num; //赠送礼品份数
+      var selfreceive_num = data.result.selfreceive_num; //自己领取礼品份数
+      var goods_info = data.result.goods;
+      var merchant_info = data.result.merchant;
+      var receive_type = data.result.receive_type;
+      var expire_date = data.result.expire_date;
+      var message = data.result.message;
+      var nickName = data.result.nickName;
+      var address = data.result.address;
+      var receive_order_id = data.result.receive_order_id;
+      var give_order_id = data.result.give_order_id;
+      if(address.length==0){
+        var is_have_receive = 0;
+      }else {
+        var is_have_receive = 1;
+      }
+      that.setData({
+        order_info: data.result,
+        records: records,
+        amount: amount,
+        expire_date:expire_date,
+        goods_info: goods_info,
+        give_num: give_num,
+        merchant_info: merchant_info,
+        receive_type: receive_type,
+        message:message,
+        nickName:nickName,
+        selfreceive_num:selfreceive_num,
+        address:address,
+        receive_order_id:receive_order_id,
+        give_order_id:give_order_id,
+        is_have_receive:is_have_receive
+      })
+    });
   },
   /**
    * 选择收货地址
    */
   selectAddress: function (e) {
     wx.navigateTo({
-      url: '/mall/pages/order/select_address?openid=' + openid + '&order_id='+order_id+'&nickName='+nickName+'&goods_id='+goods_id,
+      url: '/mall/pages/gift/order/select_address?openid=' + openid + '&order_id='+order_id+'&nickName='+nickName+'&goods_id='+goods_id,
     })
   },
   addNums:function(e){
@@ -66,15 +111,15 @@ Page({
     var accept_num = that.data.accept_num;
     var gift_num = that.data.gift_num;
     if(type==1){//自己领取
-      if(accept_num>=goods_num){
-        app.showToast('最多可领取'+goods_num+'份');
+      if(accept_num>=receive_num){
+        app.showToast('最多可领取'+receive_num+'份');
         return false;
       }
       accept_num +=1;
       gift_num   -=1;
     }else if(type==2){//送给好友
-      if(gift_num>=goods_num){
-        app.showToast('最多可领取'+goods_num+'份');
+      if(gift_num>=receive_num){
+        app.showToast('最多可领取'+receive_num+'份');
         return false;
       }
       gift_num +=1;
@@ -91,13 +136,13 @@ Page({
     var accept_num = that.data.accept_num;
     var gift_num = that.data.gift_num;
     if(type==1){//自己领取
-      if(accept_num<0){
+      if(accept_num<=0){
         return false;
       }
       accept_num -=1;
       gift_num   +=1;
     }else if(type==2) {//送给好友
-      if(gift_num<0){
+      if(gift_num<=0){
         return false;
       }
       gift_num   -=1;
@@ -112,14 +157,14 @@ Page({
     var that = this;
     var accept_num = that.data.accept_num;
     var gift_num   = that.data.gift_num;
-    utils.PostRequest(api_v_url + '/aa/bb', {
-      order_id   : order_id,
-      openid     : openid,
-      accept_num : accept_num,
-      gift_num   : gift_num,
+    utils.PostRequest(api_v_url + '/gift/confirmReceive', {
+      order_id    : order_id,
+      openid      : openid,
+      receive_num : accept_num,  //自己领取份数
+      give_num    : gift_num,    //赠送份数
       
     }, (data, headers, cookies, errMsg, statusCode) => {
-      var order_id = data.result.order_id;
+      //var order_id = data.result.order_id;
       wx.navigateTo({
         url: '/mall/pages/gift/accept/multy_gift?order_id='+order_id+'&openid='+openid,
       })
@@ -170,36 +215,49 @@ Page({
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage: function () {
+  onShareAppMessage: function (e) {
     var that = this;
     var user_info = wx.getStorageSync(cache_key+'user_info');
     var nickName   = user_info.nickName
     var img_url = 'https://oss.littlehotspot.com/WeChat/resource/share.jpg';
+    var goods_info = that.data.goods_info
+    var title = nickName+'送你小热点好物-'+goods_info.name;
 
-    utils.PostRequest(api_v_url + '/aa/bb', {
+    if (e.from === 'button') {
+      that.shareGift();
+      // 来自页面内转发按钮
+      return {
+        title: title,
+        path: '/pages/hotel/gift/share?order_id=' + order_id,
+        imageUrl: img_url,
+        success: function (res) {
+          
+        },
+      }
+      
+    } else {
+      that.shareGift();
+      return {
+        title: title,
+        path: '/pages/hotel/gift/share?order_id=' + order_id,
+        imageUrl: img_url,
+        success: function (res) {
+          
+        },
+      }
+      
+    }
+
+
+    
+  },
+  shareGift:function(){
+    utils.PostRequest(api_v_url + '/gift/give', {
       openid: openid,
       order_id:order_id
     }, (data, headers, cookies, errMsg, statusCode) => {
-      var title = date.result.share_title;
-      if (e.from === 'button') {
-        // 来自页面内转发按钮
-        return {
-          title: title,
-          path: '/pages/hotel/gift/share?order_id=' + order_id,
-          imageUrl: img_url,
-          success: function (res) {
-
-          },
-        }
-      } else {
-        return {
-          title: title,
-          path: '/pages/hotel/gift/share?order_id=' + order_id,
-          imageUrl: img_url,
-          success: function (res) {
-          },
-        }
-      }
+      
+      
     })
   }
 })
