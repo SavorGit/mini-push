@@ -1106,6 +1106,7 @@ App({
 
 
       }, fail: function (res) {
+        console.log(res)
         wx.stopWifi({
 
         })
@@ -1113,9 +1114,31 @@ App({
         that.setData({
           wifi_hidden: true,
         })
-        that.setData({
-          wifiErr: { 'is_open': 1, 'msg': '亲，使用此小程序前需要链接包间wifi,链接wifi投屏更快哦！', 'confirm': '重试', 'calcle': '', 'type': 3 }
-        })
+        if (res.errCode == 12005) { //安卓特有  未打开wifi
+          that.setData({
+            wifiErr: { 'is_open': 1, 'msg': '亲，使用此小程序前需要打开您手机的wifi,连上wifi投屏更快哦！', 'confirm': '确定', 'calcle': '取消', 'type': 1 }
+          })
+        } else if (res.errCode == 12006) {//Android 特有，未打开 GPS 定位开关
+          that.setData({
+            wifiErr: { 'is_open': 1, 'msg': '亲，使用此小程序前需要打开您手机的GPS定位,连上wifi投屏更快哦！', 'confirm': '确定', 'calcle': '取消', 'type': 2 }
+          })
+        } else if(res.errCode == 12007){//用户拒绝授权链接 Wi-Fi
+          that.setData({
+            wifiErr: { 'is_open': 1, 'msg': '亲，使用此小程序前需要链接包间wifi,连上wifi投屏更快哦！', 'confirm': '重试', 'calcle': '', 'type': 3 }
+          })
+        }
+        
+        else {
+          if (use_wifi_password == '') {
+            var wifi_password_str = '空';
+          } else {
+            var wifi_password_str = use_wifi_password;
+          }
+          var msg = '请手动连接包间wifi:' + wifi_name + ',密码为' + wifi_password_str+'。连上wifi投屏更快哦！';
+          that.setData({
+            wifiErr: { 'is_open': 1, 'msg': msg, 'confirm': '重试', 'type': 4 }
+          })
+        }
 
         var err_info = JSON.stringify(res);
         wx.request({
@@ -1171,11 +1194,11 @@ App({
     rest_appid: 'wxc395eb4b44563af1',
     jijian_appid: 'wx7883a4327329a67c',
     jd_appid: 'wx91d27dbf599dff74',
-    api_url: 'https://dev-mobile.littlehotspot.com',
-    api_v_url:'https://dev-mobile.littlehotspot.com/Smallapp45',
-    oss_upload_url: 'https://dev-image.littlehotspot.com',
-    netty_url: 'https://dev-netty-push.littlehotspot.com',
-    oss_url: 'https://dev-oss.littlehotspot.com',
+    api_url: 'https://mobile.littlehotspot.com',
+    api_v_url:'https://mobile.littlehotspot.com/Smallapp45',
+    oss_upload_url: 'https://image.littlehotspot.com',
+    netty_url: 'https://netty-push.littlehotspot.com',
+    oss_url: 'https://oss.littlehotspot.com',
     oss_bucket: 'redian-produce',
     //oss_access_key_id: 'LTAITBjXOpORHKfXlOX',
     oss_access_key_id:'LTAI4SFjj1AsowpVFZNXOBCVqRHDs',
