@@ -3,6 +3,7 @@ const app = getApp();
 var openid;
 var box_mac;
 var api_url = app.globalData.api_url;
+var api_v_url = app.globalData.api_v_url;
 Page({
 
   /**
@@ -37,7 +38,7 @@ Page({
     })
     //获取发送红包 祝福语 发送范围配置
     wx.request({
-      url: api_url+'/Smallapp3/Redpacket/getConfig',
+      url: api_v_url+'/Redpacket/getConfig',
       header: {
         'content-type': 'application/json'
       },
@@ -227,7 +228,7 @@ Page({
     })
     //发送电视红包
     wx.request({
-      url: api_url+'/Smallapp3/redpacket/sendTvbonus',
+      url: api_v_url+'/redpacket/sendTvbonus',
       header: {
         'content-type': 'application/json'
       },

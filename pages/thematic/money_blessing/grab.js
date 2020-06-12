@@ -113,7 +113,7 @@ Page({
                     } else {
                       //如果已授权   请求获取扫电视红包小程序码结果
                       wx.request({
-                        url: api_url+'/Smallapp3/redpacket/getScanresult',
+                        url: api_v_url+'/redpacket/getScanresult',
                         header: {
                           'content-type': 'application/json'
                         },
@@ -144,7 +144,7 @@ Page({
 
                             } else if (order_status == 3) {
                               wx.request({
-                                url: api_url+'/Smallapp3/redpacket/grabBonusResult',
+                                url: api_v_url+'/redpacket/grabBonusResult',
                                 header: {
                                   'content-type': 'application/json'
                                 },
@@ -270,7 +270,7 @@ Page({
                         } else {
                           //如果已授权   请求获取扫电视红包小程序码结果
                           wx.request({
-                            url: api_url+'/Smallapp3/redpacket/getScanresult',
+                            url: api_v_url+'/redpacket/getScanresult',
                             header: {
                               'content-type': 'application/json'
                             },
@@ -300,7 +300,7 @@ Page({
                                   getRedpacketJx(openid);
                                 } else if (order_status == 3) {
                                   wx.request({
-                                    url: api_url+'/Smallapp3/redpacket/grabBonusResult',
+                                    url: api_v_url+'/redpacket/grabBonusResult',
                                     header: {
                                       'content-type': 'application/json'
                                     },
@@ -464,7 +464,7 @@ Page({
                 //that.reload();
                 //如果已授权   请求获取扫电视红包小程序码结果
                 wx.request({
-                  url: api_url+'/Smallapp3/redpacket/getScanresult',
+                  url: api_v_url+'/redpacket/getScanresult',
                   header: {
                     'content-type': 'application/json'
                   },
@@ -494,7 +494,7 @@ Page({
                         getRedpacketJx(openid);
                       } else if (order_status == 3) {
                         wx.request({
-                          url: api_url+'/Smallapp3/redpacket/grabBonusResult',
+                          url: api_v_url+'/redpacket/grabBonusResult',
                           header: {
                             'content-type': 'application/json'
                           },

@@ -4,6 +4,7 @@ var openid;
 var page = 1;
 var box_mac;
 var api_url = app.globalData.api_url;
+var api_v_url = app.globalData.api_v_url;
 Page({
 
   /**
@@ -23,7 +24,7 @@ Page({
     openid = user_info.openid;
     box_mac = options.box_mac;
     wx.request({
-      url: api_url+'/Smallapp3/redpacket/sendList',
+      url: api_v_url+'/redpacket/sendList',
       header: {
         'content-type': 'application/json'
       },
@@ -61,7 +62,7 @@ Page({
       hiddens: false,
     })
     wx.request({
-      url: api_url+'/Smallapp3/redpacket/sendList',
+      url: api_v_url+'/redpacket/sendList',
       header: {
         'Content-Type': 'application/json'
       },

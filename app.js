@@ -187,7 +187,12 @@ App({
         var url = pubdetail[i]['forscreen_url'];
         var filename = pubdetail[i]['filename'];
         var res_id = pubdetail[i]['res_id'];
-        res_obj [i]= {url: url ,filename: filename ,order: order ,img_id:res_id };
+        if(typeof(pubdetail[i]['resource_size'])!='undefined'){
+          var resource_size = pubdetail[i]['resource_size'];
+        }else {
+          var resource_size = 0;
+        }
+        res_obj [i]= {url: url ,filename: filename ,order: order ,img_id:res_id,resource_size:resource_size };
       }
       //res_obj = JSON.stringify(res_obj)
       

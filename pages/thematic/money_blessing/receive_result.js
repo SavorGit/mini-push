@@ -6,6 +6,7 @@ var pubdetail;
 var i;
 var is_open_simple;
 var api_url = app.globalData.api_url;
+var api_v_url = app.globalData.api_v_url;
 var netty_url = app.globalData.netty_url;
 var pageid = 62;
 Page({
@@ -29,7 +30,7 @@ Page({
     openid = user_info.openid;
     is_open_simple = user_info.is_open_simple;
     wx.request({
-      url: api_url+'/Smallapp3/redpacket/grabBonusResult',
+      url: api_v_url+'/redpacket/grabBonusResult',
       header: {
         'content-type': 'application/json'
       },

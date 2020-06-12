@@ -9,6 +9,7 @@ var mta = require('../../utils/mta_analysis.js')
 const app = getApp()
 var api_url = app.globalData.api_url;
 var api_v_url = app.globalData.api_v_url;
+var api_url  = app.globalData.api_url;
 var cache_key = app.globalData.cache_key;
 var box_mac;
 var openid;
@@ -37,11 +38,11 @@ Page({
   },
   getGameList: function () {
     var that = this;
-    utils.PostRequest(api_v_url + '/aa/bb', {
+    utils.PostRequest(api_url + '/games/index/gameList', {
       page: page
     }, (data, headers, cookies, errMsg, statusCode) => {
       that.setData({
-        gameList: data.result.datalist,
+        gameList: data.result,
       })
 
     });

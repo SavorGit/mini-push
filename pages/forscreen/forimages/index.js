@@ -778,7 +778,7 @@ Page({
       tmp.forscreen_url = res_list[i].forscreen_url;
       tmp.res_id        = res_list[i].resource_id;
       tmp.filename      = res_list[i].filename;
-      tmp.resource_size = 0;
+      tmp.resource_size = res_list[i].resource_size;
       tmp.duration      = 0;
       pubdetail[i] = tmp;
     }
