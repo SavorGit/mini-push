@@ -165,7 +165,15 @@ Page({
       
     }, (data, headers, cookies, errMsg, statusCode) => {
       //var order_id = data.result.order_id;
-      wx.navigateTo({
+      // wx.navigateTo({
+      //   url: '/mall/pages/gift/accept/multy_gift?order_id='+order_id+'&openid='+openid,
+      // })
+      wx.redirectTo({
+        url: '/mall/pages/gift/accept/multy_gift?order_id='+order_id+'&openid='+openid,
+      })
+    },function(){
+      app.showToast('您已分配该礼品的领取数量')
+      wx.redirectTo({
         url: '/mall/pages/gift/accept/multy_gift?order_id='+order_id+'&openid='+openid,
       })
     });

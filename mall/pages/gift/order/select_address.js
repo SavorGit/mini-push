@@ -120,6 +120,10 @@ Page({
       wx.redirectTo({
         url: '/mall/pages/gift/order/receive_success?order_id=' + order_id + '&openid=' + openid+'&goods_id='+goods_id,
       })
+    },function(){
+      wx.navigateBack({
+        delta:1
+      })
     })
   },
 
