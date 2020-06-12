@@ -228,11 +228,12 @@ Page({
     var img_url = 'https://oss.littlehotspot.com/WeChat/resource/share.jpg';
     //var title = nickName+'送你小热点好物'+goods_name;
     var title = that.data.share_title;
+    var give_order_id = that.data.give_order_id;
     if (e.from === 'button') {
       // 来自页面内转发按钮
       return {
         title: title,
-        path: '/pages/hotel/gift/share?order_id=' + order_id,
+        path: '/pages/hotel/gift/share?order_id=' + give_order_id,
         imageUrl: img_url,
         success: function (res) {},
       }
@@ -240,7 +241,7 @@ Page({
 
       return {
         title: title,
-        path: '/pages/hotel/gift/share?order_id=' + order_id,
+        path: '/pages/hotel/gift/share?order_id=' + give_order_id,
         imageUrl: img_url,
         success: function (res) {},
       }

@@ -70,7 +70,7 @@ Page({
       var receive_type = data.result.receive_type;
       var expire_date = data.result.expire_date;
       var message = data.result.message;
-      var nickName = data.result.nickName;
+      //var nickName = data.result.nickName;
       var address = data.result.address;
       var receive_order_id = data.result.receive_order_id;
       var give_order_id = data.result.give_order_id;
@@ -89,7 +89,7 @@ Page({
         merchant_info: merchant_info,
         receive_type: receive_type,
         message:message,
-        nickName:nickName,
+        //nickName:nickName,
         selfreceive_num:selfreceive_num,
         address:address,
         receive_order_id:receive_order_id,
@@ -156,6 +156,11 @@ Page({
   },
   confirmOrder:function(){
     var that = this;
+    var is_have_receive = that.data.is_have_receive;
+    if(is_have_receive==1){
+      app.showToast('该礼品您已领取完成');
+      return false;
+    }
     var accept_num = that.data.accept_num;
     var gift_num   = that.data.gift_num;
     utils.PostRequest(api_v_url + '/gift/confirmReceive', {
@@ -191,7 +196,24 @@ Page({
    */
   onShow: function () {
     var that = this;
-    that.getOrderInfo();
+    that.getSuccess();
+  },
+  getSuccess:function(){
+    var that = this;
+    utils.PostRequest(api_v_url + '/gift/getsuccess', {
+      order_id: order_id,
+      openid: openid
+    }, (data, headers, cookies, errMsg, statusCode) => {
+      var address = data.result.address;
+      if(address.length==0){
+        var is_have_receive = 0;
+      }else {
+        var is_have_receive = 1;
+      }
+      that.setData({
+        is_have_receive:is_have_receive
+      })
+    })
   },
 
   /**
