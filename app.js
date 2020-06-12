@@ -266,7 +266,7 @@ App({
           method: "POST",
           data: {
             box_mac: box_mac,
-            msg: '{ "action":'+netty_action+', "url": "' + url+ '", "filename":"' + pubdetail[i]['filename'] + '","openid":"' + openid + '","resource_type":2,"video_id":"' + pubdetail[i]['res_id'] + '","avatarUrl":"' + avatarUrl + '","nickName":"' + nickName + '","forscreen_id":"' + forscreen_id + '"}',
+            msg: '{ "action":'+netty_action+', "url": "' + url+ '", "filename":"' + pubdetail[i]['filename'] + '","openid":"' + openid + '","resource_type":2,"video_id":"' + pubdetail[i]['res_id'] + '","avatarUrl":"' + avatarUrl + '","nickName":"' + nickName + '","forscreen_id":"' + forscreen_id + '","resource_size":"'+pubdetail[i]['resource_size']+'"}',
           },
           success: function (result) {
 
