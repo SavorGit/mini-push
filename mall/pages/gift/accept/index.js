@@ -37,15 +37,18 @@ Page({
     //var address_info = wx.getStorageSync(cache_key + 'select_address_info')
     wx.removeStorageSync(cache_key + 'select_address_info')
     order_id = options.order_id;
+    console.log("accept_order_id:"+order_id);
     nickName = options.nickName;
     var user_info = wx.getStorageSync(cache_key + 'user_info');
     openid = options.openid;
     goods_id = options.goods_id;
     receive_num = options.receive_num;  //领取礼物的数量
+    console.log('receive_num'+receive_num)
     if(receive_num>1){
       wx.hideShareMenu();
     }else if(receive_num==1){
       that.getOrderInfo()
+      that.getShreOrderInfo();
     }
     
     that.setData({
@@ -53,6 +56,18 @@ Page({
       nickName:nickName,
       receive_num:receive_num,
       accept_num:receive_num,
+    })
+  },
+  getShreOrderInfo:function(){
+    var that = this;
+    utils.PostRequest(api_v_url + '/gift/give', {
+      order_id: order_id,
+      openid: openid
+    }, (data, headers, cookies, errMsg, statusCode) => {
+      console.log('gift/give/give_order_id:'+data.result.order_id)
+      that.setData({
+        give_order_id:data.result.order_id
+      })
     })
   },
   getOrderInfo: function () {
@@ -73,7 +88,7 @@ Page({
       //var nickName = data.result.nickName;
       var address = data.result.address;
       var receive_order_id = data.result.receive_order_id;
-      var give_order_id = data.result.give_order_id;
+      
       if(address.length==0){
         var is_have_receive = 0;
       }else {
@@ -93,7 +108,7 @@ Page({
         selfreceive_num:selfreceive_num,
         address:address,
         receive_order_id:receive_order_id,
-        give_order_id:give_order_id,
+        
         is_have_receive:is_have_receive
       })
     });
@@ -254,13 +269,12 @@ Page({
     var img_url = 'https://oss.littlehotspot.com/WeChat/resource/share.jpg';
     var goods_info = that.data.goods_info
     var title = nickName+'送你小热点好物-'+goods_info.name;
-
+    var give_order_id = that.data.give_order_id;
     if (e.from === 'button') {
-      that.shareGift();
       // 来自页面内转发按钮
       return {
         title: title,
-        path: '/pages/hotel/gift/share?order_id=' + order_id,
+        path: '/pages/hotel/gift/share?order_id=' + give_order_id,
         imageUrl: img_url,
         success: function (res) {
           
@@ -268,10 +282,9 @@ Page({
       }
       
     } else {
-      that.shareGift();
       return {
         title: title,
-        path: '/pages/hotel/gift/share?order_id=' + order_id,
+        path: '/pages/hotel/gift/share?order_id=' + give_order_id,
         imageUrl: img_url,
         success: function (res) {
           
@@ -283,13 +296,5 @@ Page({
 
     
   },
-  shareGift:function(){
-    utils.PostRequest(api_v_url + '/gift/give', {
-      openid: openid,
-      order_id:order_id
-    }, (data, headers, cookies, errMsg, statusCode) => {
-      
-      
-    })
-  }
+  
 })

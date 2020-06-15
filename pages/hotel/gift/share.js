@@ -57,14 +57,12 @@ Page({
   onLoad: function (options) {
     var that = this;
     wx.hideShareMenu()
-    
     if (app.globalData.openid && app.globalData.openid != '') {
       that.setData({
         openid: app.globalData.openid
       });
       
       order_id = options.order_id;
-      console.log('order_id_'+order_id)
       SavorUtils.User.isRegister(that); //判断用户是否注册
       that.getGiftInfo(app.globalData.openid, order_id); //获取礼品信息
     } else {
@@ -75,8 +73,6 @@ Page({
           });
           SavorUtils.User.isRegister(that); //判断用户是否注册
           order_id = options.order_id;
-          console.log('order_id'+order_id)
-          console.log('openid'+openid)
           that.getGiftInfo(openid, order_id); //获取礼品信息
         }
       }
@@ -142,7 +138,6 @@ Page({
         })
       }
       else if( receive_type==8){
-        console.log(11111)
         wx.navigateTo({
           url: '/mall/pages/gift/accept/multy_gift?order_id=' + receive_order_id + '&openid=' + openid+'&nickName='+nickName+'&goods_id='+goods_info.id+'&receive_num='+receive_num,
         })
@@ -273,6 +268,7 @@ Page({
       } else if (receive_type == 1) {
         var user_info = wx.getStorageSync(cache_key+'user_info');
         var openid = user_info.openid;
+        
         utils.PostRequest(api_v_url + '/gift/receiveResult', {
           openid: openid,
           order_id: order_id,
