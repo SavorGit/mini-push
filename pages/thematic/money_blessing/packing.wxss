@@ -16,47 +16,47 @@
   padding: 0 5%;
 }
 
-.PageMain .package > .head {
+.PageMain .package>.head {
   height: 200rpx;
   text-align: center;
 }
 
-.PageMain .package > .head image {
+.PageMain .package>.head image {
   width: 200rpx;
   height: 100%;
   border-radius: 50%;
 }
 
-.PageMain .package > .body {
+.PageMain .package>.body {
   margin-top: -100rpx;
   padding: 150rpx 50rpx 30rpx 50rpx;
   border-radius: 20rpx;
 }
 
-.PageMain .package > .body > view {
+.PageMain .package>.body>view {
   height: 80rpx;
 }
 
-.PageMain .package > .body > view > .RowLabel {
+.PageMain .package>.body>view>.RowLabel {
   width: 150rpx;
   font-size: 30rpx;
   font-weight: 600;
 }
 
-.PageMain .package > .body > view > .right {
+.PageMain .package>.body>view>.right {
   width: calc(100% - 150rpx);
 }
 
-.PageMain .package > .body > view input,
-.PageMain .package > .body > view picker {
+.PageMain .package>.body>view input,
+.PageMain .package>.body>view picker {
   background-color: #fff;
   border: 1rpx solid #fefefe;
   border-radius: 5rpx;
 }
 
-.PageMain .package > .body > view input.input,
-.PageMain .package > .body > view radio-group,
-.PageMain .package > .body > view picker.picker {
+.PageMain .package>.body>view input.input,
+.PageMain .package>.body>view radio-group,
+.PageMain .package>.body>view picker.picker {
   font-size: 28rpx;
   height: 50rpx;
   min-height: 50rpx;
@@ -64,44 +64,55 @@
   vertical-align: middle;
 }
 
-.PageMain .package > .body > view input.input {
+.PageMain .package>.body>view input.input {
   text-align: right;
   color: #333;
 }
 
-.PageMain .package > .body > view .surname {
+.PageMain .package>.body>view .surname {
   width: 100rpx;
   display: inline-block;
 }
 
-.PageMain .package > .body > view radio-group {
+.PageMain .package>.body>view radio-group {
   width: 320rpx;
   display: inline-block;
 }
 
-.PageMain .package > .body > view radio-group  radio {
+.PageMain .package>.body>view radio-group radio {
   margin-left: 20rpx;
   margin-right: 20rpx;
   font-size: 28rpx;
 }
 
-.PageMain .package > .body > view radio-group radio .wx-radio-input {
+.PageMain .package>.body>view radio-group radio .wx-radio-input {
   width: 30rpx;
   height: 30rpx;
   vertical-align: middle;
 }
 
-.PageMain .package > .body > view picker.picker {
+.PageMain .package>.body>view picker.picker {
   color: #bebebe;
 }
 
-.PageMain .package > .body > view picker.picker image {
+.PageMain .package>.body>view picker.picker .inner {
+  width: 100%;
+  height: 50rpx;
+}
+
+.PageMain .package>.body>view picker.picker .inner>image {
   width: 26rpx;
   height: 26rpx;
 }
 
-.PageMain .package > .body > view picker.picker view {
+.PageMain .package>.body>view picker.picker .inner>view {
   width: calc(100% - 28rpx);
+  display: inline-block;
+}
+
+.PageMain .package>.body>view picker.picker .inner>.fa {
+  width: 28rpx;
+  text-align: center;
   display: inline-block;
 }
 
