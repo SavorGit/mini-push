@@ -5,7 +5,7 @@
 
 
 <import src="/pages/template/commons" />
-<template is="navigationBarForTwoLevel" data='{{statusBarHeight: statusBarHeight,titleText:"赠品转赠"}}' />
+<template is="navigationBarForBackAndHome" data='{{statusBarHeight: statusBarHeight,titleText:"赠品转赠",isGotoBack:true,isGotoHome:true}}' />
 
 <!-- 单个赠品 -->
 <view wx:if="{{receive_num==1}}" class='container theme-container' style='height:calc(100vh - {{46 + statusBarHeight + SystemInfo.screenBottomSpace}}px);'>
@@ -20,7 +20,7 @@
 			</view>
 			<view class="option-panel flex-column-center-flex_start">
 				<view class="btn theme-button-red" bindtap="selectAddress" wx:if="{{is_have_receive==0}}">填写收货地址</view>
-				<button open-type="share" class="btn theme-button-welcome-dark" >转增给好友</button>
+				<button open-type="share" class="btn theme-button-welcome-dark">转增给好友</button>
 			</view>
 		</view>
 	</scroll-view>

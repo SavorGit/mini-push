@@ -2,254 +2,276 @@
 
 <!-- 微信授权登录 强制授权 -->
 <template name="wxAuthLogin">
-  <modal show="{{show}}" height='420rpx' width="90%" background-color='unset' border-radius="0rpx" title-text="" confirm-text="" cancel-text="">
-    <view class='wxAuthLogin-container theme-wxAuthLogin-container'>
-      <view class='wxAuthLogin-top'>
-        <view class='opt'>
-        </view>
-        <view class='title'>
-          <label class='font_1CBEB6_34'>温馨提示</label>
-        </view>
-      </view>
-      <view class='wxAuthLogin-middle'>
-        <label class='content font_333333_30'>使用"热点投屏"过程中,请遵守相关法律法规。</label>
-        <label class='link_relief'>
-          <navigator url="/pages/forscreen/relief">免责声明</navigator>
-        </label>
-      </view>
-      <view class='wxAuthLogin-bottom'>
-        <button class='savor-btn theme-button' open-type="getUserInfo" bindgetuserinfo="onGetUserInfo">微信授权登录</button>
-      </view>
-    </view>
-  </modal>
+	<modal show="{{show}}" height='420rpx' width="90%" background-color='unset' border-radius="0rpx" title-text="" confirm-text="" cancel-text="">
+		<view class='wxAuthLogin-container theme-wxAuthLogin-container'>
+			<view class='wxAuthLogin-top'>
+				<view class='opt'>
+				</view>
+				<view class='title'>
+					<label class='font_1CBEB6_34'>温馨提示</label>
+				</view>
+			</view>
+			<view class='wxAuthLogin-middle'>
+				<label class='content font_333333_30'>使用"热点投屏"过程中,请遵守相关法律法规。</label>
+				<label class='link_relief'>
+					<navigator url="/pages/forscreen/relief">免责声明</navigator>
+				</label>
+			</view>
+			<view class='wxAuthLogin-bottom'>
+				<button class='savor-btn theme-button' open-type="getUserInfo" bindgetuserinfo="onGetUserInfo">微信授权登录</button>
+			</view>
+		</view>
+	</modal>
 </template>
 
 <!-- 微信授权登录 非强制授权-->
 <template name="wxAuthLoginOp">
-  <modal show="{{showOp}}" height='420rpx' width="90%" background-color='unset' border-radius="0rpx" title-text="" confirm-text="" cancel-text="">
-    <view class='wxAuthLogin-container theme-wxAuthLogin-container'>
-      <view class='wxAuthLogin-top'>
-        <view class='opt'>
-        </view>
-        <view class='title'>
-          <label class='font_1CBEB6_34'>温馨提示</label>
-        </view>
-      </view>
-      <view class='wxAuthLogin-middle'>
-        <label class='content font_333333_30'>使用"热点投屏"过程中,请遵守相关法律法规。</label>
-        <label class='link_relief'>
-          <navigator url="/pages/forscreen/relief">免责声明</navigator>
-        </label>
-      </view>
-      <view class='wxAuthLogin-bottom flex-row-center-space_between'>
-        <button class='savor-btn theme-button-dark' style="width: 40%;" bindtap="closeWxAuth">暂不登陆</button>
-        <button class='savor-btn theme-button' style="width: 40%;" open-type="getUserInfo" bindgetuserinfo="onGetUserInfo">微信授权登录</button>
-      </view>
-    </view>
-  </modal>
+	<modal show="{{showOp}}" height='420rpx' width="90%" background-color='unset' border-radius="0rpx" title-text="" confirm-text="" cancel-text="">
+		<view class='wxAuthLogin-container theme-wxAuthLogin-container'>
+			<view class='wxAuthLogin-top'>
+				<view class='opt'>
+				</view>
+				<view class='title'>
+					<label class='font_1CBEB6_34'>温馨提示</label>
+				</view>
+			</view>
+			<view class='wxAuthLogin-middle'>
+				<label class='content font_333333_30'>使用"热点投屏"过程中,请遵守相关法律法规。</label>
+				<label class='link_relief'>
+					<navigator url="/pages/forscreen/relief">免责声明</navigator>
+				</label>
+			</view>
+			<view class='wxAuthLogin-bottom flex-row-center-space_between'>
+				<button class='savor-btn theme-button-dark' style="width: 40%;" bindtap="closeWxAuth">暂不登陆</button>
+				<button class='savor-btn theme-button' style="width: 40%;" open-type="getUserInfo" bindgetuserinfo="onGetUserInfo">微信授权登录</button>
+			</view>
+		</view>
+	</modal>
 </template>
 
 <!-- 跳转极简版 -->
 <template name="jumpSimple">
-  <bottomModal show="{{show}}" height='500rpx' width="98%" border-radius="10rpx" title-text="温馨提示" title-color='#000000' confirm-text="" cancel-text="">
-    <view class='wxAuthLogin-container' style='border-radius: 0rpx 0rpx 10rpx 10rpx;'>
-      <view class='wxAuthLogin-middle'>
-        <label class='content font_333333_32'>亲，您当前所在的网络环境有可能较差，</label>
-        <label class='content font_333333_32'>需体验极速投屏，</label>
-        <label class='content font_333333_32'>请前往小热点极简版哦。</label>
-      </view>
-      <view class='wxAuthLogin-bottom flex-row-center-space_between' style='height: 110rpx; padding: 0rpx 100rpx;'>
-        <navigator bindtap='closeJump' class='savor-btn theme-button' style='width: 220rpx; height:80rpx; line-height:80rpx; border-radius: 10rpx; display: block; background-color: #BEBEBE;'>不需要</navigator>
-        <navigator target="miniProgram" app-id="wx7883a4327329a67c" path="pages/index/index?box_mac={{box_mac}}" version="release" class='savor-btn theme-button' style='width: 220rpx; height:80rpx; line-height:80rpx; border-radius: 10rpx; display: block; -webkit-animation: rotate2 1.8s linear;'>前往极简版</navigator>
-      </view>
-    </view>
-  </bottomModal>
+	<bottomModal show="{{show}}" height='500rpx' width="98%" border-radius="10rpx" title-text="温馨提示" title-color='#000000' confirm-text="" cancel-text="">
+		<view class='wxAuthLogin-container' style='border-radius: 0rpx 0rpx 10rpx 10rpx;'>
+			<view class='wxAuthLogin-middle'>
+				<label class='content font_333333_32'>亲，您当前所在的网络环境有可能较差，</label>
+				<label class='content font_333333_32'>需体验极速投屏，</label>
+				<label class='content font_333333_32'>请前往小热点极简版哦。</label>
+			</view>
+			<view class='wxAuthLogin-bottom flex-row-center-space_between' style='height: 110rpx; padding: 0rpx 100rpx;'>
+				<navigator bindtap='closeJump' class='savor-btn theme-button' style='width: 220rpx; height:80rpx; line-height:80rpx; border-radius: 10rpx; display: block; background-color: #BEBEBE;'>不需要</navigator>
+				<navigator target="miniProgram" app-id="wx7883a4327329a67c" path="pages/index/index?box_mac={{box_mac}}" version="release" class='savor-btn theme-button' style='width: 220rpx; height:80rpx; line-height:80rpx; border-radius: 10rpx; display: block; -webkit-animation: rotate2 1.8s linear;'>前往极简版</navigator>
+			</view>
+		</view>
+	</bottomModal>
 </template>
 
 <!-- 固定悬浮按钮组 -->
 <template name="fixedSuspensionButtonGroup">
-  <view class='fixedSuspensionButtonGroup'>
-    <view class='scan_tdc' bindtap='openControl'>
-      <image src="/images/icon2/remote_control.png"></image>
-    </view>
-  </view>
+	<view class='fixedSuspensionButtonGroup'>
+		<view class='scan_tdc' bindtap='openControl'>
+			<image src="/images/icon2/remote_control.png"></image>
+		</view>
+	</view>
 </template>
 
 <!-- 遥控器窗口 -->
 <template name="remoteControlWindow">
-  <modal show="{{popRemoteControlWindow}}" height='990rpx' width="620rpx" background-color='unset' border-radius="0rpx" title-text="" confirm-text="" cancel-text="">
-    <view class='remoteControlWindow-container theme-remote-control'>
-      <view bindtap='closeControl' class='remoteControlWindow-control'>
-        <label class="fa fa-close fa-lg"></label>
-      </view>
-      <view class='remoteControlWindow-top'>
-        <view class='opt flex-row-center-flex_start'>
-          <button bindtap='changeProgram' data-openid='{{openid}}' data-box_mac='{{box_mac}}' data-hotel_info="{{hotel_info}}" data-change_type='1'>
-            <icon class="fa-stack fa-lg">
-              <image src='/images/icon2/small-button.png'></image>
-              <i class="fa fa-step-backward fa-stack-1x theme-font4"></i>
-            </icon>
-          </button>
-          <button bindtap='changeProgram' data-openid='{{openid}}' data-box_mac='{{box_mac}}' data-hotel_info="{{hotel_info}}" data-change_type='2'>
-            <icon class="fa-stack fa-lg">
-              <image src='/images/icon2/small-button.png'></image>
-              <i class="fa fa-step-forward fa-stack-1x theme-font4"></i>
-            </icon>
-          </button>
-          <button bindtap='changeVolume' data-openid='{{openid}}' data-box_mac='{{box_mac}}' data-hotel_info="{{hotel_info}}" data-change_type='1'>
-            <icon class="fa-stack fa-lg">
-              <image src='/images/icon2/small-button.png'></image>
-              <i class="fa fa-volume-down fa-stack-1x theme-font4"></i>
-            </icon>
-          </button>
-          <button bindtap='changeVolume' data-openid='{{openid}}' data-box_mac='{{box_mac}}' data-hotel_info="{{hotel_info}}" data-change_type='2'>
-            <icon class="fa-stack fa-lg">
-              <image src='/images/icon2/small-button.png'></image>
-              <i class="fa fa-volume-up fa-stack-1x theme-font4"></i>
-            </icon>
-          </button>
-        </view>
-      </view>
-      <view class='remoteControlWindow-middle'>
-        <button bindtap='callQrCode' data-openid='{{openid}}' data-box_mac="{{box_mac}}" data-hotel_info="{{hotel_info}}" data-qrcode_img='{{qrcode_img}}'>
-          <image src='/images/icon2/big-button.png'></image>
-          <image src='{{qrcode_img}}' style='width: 310rpx; height: 310rpx; padding: 13rpx; border-radius: 50%; top: 33rpx; left: 33rpx; background-color: #FFFFFF;'></image>
-        </button>
-        <view class='btn-tip flex-column-center-center'>
-          <image src='/images/icon2/click-hand.png'></image>
-          <label>点TA，让TA上电视</label>
-        </view>
-      </view>
-      <view class='remoteControlWindow-bottom flex-row-center-center'>
-        <button bindtap="exitForscreen" data-openid='{{openid}}' data-box_mac="{{box_mac}}" data-hotel_info="{{hotel_info}}" class='theme-button3'>退出投屏</button>
-        <!-- <navigator class='theme-button4' wx:if="{{box_mac !='' && is_open_simple>0}}" target="miniProgram" app-id="wx7883a4327329a67c" path="pages/index/index?box_mac={{box_mac}}" version="release">前往极简版</navigator> -->
-      </view>
-    </view>
-  </modal>
+	<modal show="{{popRemoteControlWindow}}" height='990rpx' width="620rpx" background-color='unset' border-radius="0rpx" title-text="" confirm-text="" cancel-text="">
+		<view class='remoteControlWindow-container theme-remote-control'>
+			<view bindtap='closeControl' class='remoteControlWindow-control'>
+				<label class="fa fa-close fa-lg"></label>
+			</view>
+			<view class='remoteControlWindow-top'>
+				<view class='opt flex-row-center-flex_start'>
+					<button bindtap='changeProgram' data-openid='{{openid}}' data-box_mac='{{box_mac}}' data-hotel_info="{{hotel_info}}" data-change_type='1'>
+						<icon class="fa-stack fa-lg">
+							<image src='/images/icon2/small-button.png'></image>
+							<i class="fa fa-step-backward fa-stack-1x theme-font4"></i>
+						</icon>
+					</button>
+					<button bindtap='changeProgram' data-openid='{{openid}}' data-box_mac='{{box_mac}}' data-hotel_info="{{hotel_info}}" data-change_type='2'>
+						<icon class="fa-stack fa-lg">
+							<image src='/images/icon2/small-button.png'></image>
+							<i class="fa fa-step-forward fa-stack-1x theme-font4"></i>
+						</icon>
+					</button>
+					<button bindtap='changeVolume' data-openid='{{openid}}' data-box_mac='{{box_mac}}' data-hotel_info="{{hotel_info}}" data-change_type='1'>
+						<icon class="fa-stack fa-lg">
+							<image src='/images/icon2/small-button.png'></image>
+							<i class="fa fa-volume-down fa-stack-1x theme-font4"></i>
+						</icon>
+					</button>
+					<button bindtap='changeVolume' data-openid='{{openid}}' data-box_mac='{{box_mac}}' data-hotel_info="{{hotel_info}}" data-change_type='2'>
+						<icon class="fa-stack fa-lg">
+							<image src='/images/icon2/small-button.png'></image>
+							<i class="fa fa-volume-up fa-stack-1x theme-font4"></i>
+						</icon>
+					</button>
+				</view>
+			</view>
+			<view class='remoteControlWindow-middle'>
+				<button bindtap='callQrCode' data-openid='{{openid}}' data-box_mac="{{box_mac}}" data-hotel_info="{{hotel_info}}" data-qrcode_img='{{qrcode_img}}'>
+					<image src='/images/icon2/big-button.png'></image>
+					<image src='{{qrcode_img}}' style='width: 310rpx; height: 310rpx; padding: 13rpx; border-radius: 50%; top: 33rpx; left: 33rpx; background-color: #FFFFFF;'></image>
+				</button>
+				<view class='btn-tip flex-column-center-center'>
+					<image src='/images/icon2/click-hand.png'></image>
+					<label>点TA，让TA上电视</label>
+				</view>
+			</view>
+			<view class='remoteControlWindow-bottom flex-row-center-center'>
+				<button bindtap="exitForscreen" data-openid='{{openid}}' data-box_mac="{{box_mac}}" data-hotel_info="{{hotel_info}}" class='theme-button3'>退出投屏</button>
+				<!-- <navigator class='theme-button4' wx:if="{{box_mac !='' && is_open_simple>0}}" target="miniProgram" app-id="wx7883a4327329a67c" path="pages/index/index?box_mac={{box_mac}}" version="release">前往极简版</navigator> -->
+			</view>
+		</view>
+	</modal>
 </template>
 
 <!-- 热点商务联系广告面板 -->
 <template name="adsPanelForSavorBusinessContacts">
-  <view class="advert-panel flex-row-center-flex_start full_width theme-panel-dark">
-    <label class="fa fa-phone fa-lg"></label>
-    <label class="msg">商务合作：010-64185797</label>
-    <button class="theme-button" bindtap="phonecallevent" data-tel="010-64185797">拨打</button>
-  </view>
+	<view class="advert-panel flex-row-center-flex_start full_width theme-panel-dark">
+		<label class="fa fa-phone fa-lg"></label>
+		<label class="msg">商务合作：010-64185797</label>
+		<button class="theme-button" bindtap="phonecallevent" data-tel="010-64185797">拨打</button>
+	</view>
 </template>
 
 <!-- 打断投屏弹窗 -->
 <template name="interruptLaunchScreenWindow">
-  <bottomModal show="{{popInterruptLaunchScreenWindow}}" height='auto' width="98%" title-text="" confirm-text="" cancel-text="">
-    <view class='interrupt-launch-screen-window-container'>
-      <view class='window-top'>
-        <view class='title'>
-          <label class='font_333333_34'>确认打断投屏？</label>
-        </view>
-      </view>
-      <view class='window-main'>
-        <label class='content font_666666_30'>当前电视正在进行投屏，继续投屏有可能打断当前投屏中的内容。</label>
-      </view>
-      <view class='window-bottom'>
-        <button class='savor-btn theme-button' bindtap="{{funConfirm}}">继续投屏</button>
-        <button class='savor-btn theme-button-dark' bindtap="{{funCancel}}">取消投屏</button>
-      </view>
-    </view>
-  </bottomModal>
+	<bottomModal show="{{popInterruptLaunchScreenWindow}}" height='auto' width="98%" title-text="" confirm-text="" cancel-text="">
+		<view class='interrupt-launch-screen-window-container'>
+			<view class='window-top'>
+				<view class='title'>
+					<label class='font_333333_34'>确认打断投屏？</label>
+				</view>
+			</view>
+			<view class='window-main'>
+				<label class='content font_666666_30'>当前电视正在进行投屏，继续投屏有可能打断当前投屏中的内容。</label>
+			</view>
+			<view class='window-bottom'>
+				<button class='savor-btn theme-button' bindtap="{{funConfirm}}">继续投屏</button>
+				<button class='savor-btn theme-button-dark' bindtap="{{funCancel}}">取消投屏</button>
+			</view>
+		</view>
+	</bottomModal>
 </template>
 
 <!-- 自定义顶级页面导航栏 -->
 <template name="navigationBarForTopLevel">
-  <view class='default-navigation-bar theme-navigation'>
-    <view class='status-bar' style='height:{{statusBarHeight}}px;'></view>
-    <view class='navigation-bar flex-row-center-flex_start'>
-      <view class='btn flex-row-center-flex_start'>
-      </view>
-      <view class='title flex-column-center-space_between'>
-        <label class='text'>{{titleText}}</label>
-      </view>
-    </view>
-  </view>
+	<view class='default-navigation-bar theme-navigation'>
+		<view class='status-bar' style='height:{{statusBarHeight}}px;'></view>
+		<view class='navigation-bar flex-row-center-flex_start'>
+			<view class='btn flex-row-center-flex_start'>
+			</view>
+			<view class='title flex-column-center-space_between'>
+				<label class='text'>{{titleText}}</label>
+			</view>
+		</view>
+	</view>
 </template>
 
 <!-- 自定义二级页面导航栏 -->
 <template name="navigationBarForTwoLevel">
-  <view class='default-navigation-bar theme-navigation'>
-    <view class='status-bar' style='height:{{statusBarHeight}}px;'></view>
-    <view class='navigation-bar flex-row-center-flex_start'>
-      <view class='btn flex-row-center-flex_start' bindtap="goToBack">
-        <navigator class='go-back' open-type='navigateBack' delta='1'>
-          <label class="fa fa-angle-left fa-2x" title="Back"></label>
-        </navigator>
-      </view>
-      <view class='title flex-column-center-space_between'>
-        <label class='text'>{{titleText}}</label>
-      </view>
-    </view>
-  </view>
+	<view class='default-navigation-bar theme-navigation'>
+		<view class='status-bar' style='height:{{statusBarHeight}}px;'></view>
+		<view class='navigation-bar flex-row-center-flex_start'>
+			<view class='btn flex-row-center-flex_start' bindtap="goToBack">
+				<navigator class='go-back' open-type='navigateBack' delta='1'>
+					<label class="fa fa-angle-left fa-2x" title="Back"></label>
+				</navigator>
+			</view>
+			<view class='title flex-column-center-space_between'>
+				<label class='text'>{{titleText}}</label>
+			</view>
+		</view>
+	</view>
 </template>
 
 <!-- 自定义二级页面导航栏 -->
 <template name="navigationBarForVideoLevel">
-  <view class='default-navigation-bar theme-navigation'>
-    <view class='status-bar' style='height:{{statusBarHeight}}px;'></view>
-    <view class='navigation-bar flex-row-center-flex_start'>
-      <view class='btn flex-row-center-flex_start' bindtap="goToBack">
-        <navigator class='go-back' open-type='navigateBack' delta='1'>
-          <label class="fa fa-angle-left fa-2x" title="Back"></label>
-        </navigator>
-      </view>
-      <view class='title flex-column-center-space_between'>
-        <label class='text'>{{titleText}}</label>
-      </view>
-    </view>
-  </view>
+	<view class='default-navigation-bar theme-navigation'>
+		<view class='status-bar' style='height:{{statusBarHeight}}px;'></view>
+		<view class='navigation-bar flex-row-center-flex_start'>
+			<view class='btn flex-row-center-flex_start' bindtap="goToBack">
+				<navigator class='go-back' open-type='navigateBack' delta='1'>
+					<label class="fa fa-angle-left fa-2x" title="Back"></label>
+				</navigator>
+			</view>
+			<view class='title flex-column-center-space_between'>
+				<label class='text'>{{titleText}}</label>
+			</view>
+		</view>
+	</view>
 </template>
 
 
 <!-- 自定义分享页面导航栏 -->
 <template name="navigationBarForShare">
-  <view class='default-navigation-bar theme-navigation'>
-    <view class='status-bar' style='height:{{statusBarHeight}}px;'></view>
-    <view class='navigation-bar flex-row-center-flex_start'>
-      <view class='btn flex-row-center-flex_start'>
-        <navigator class='to-home' open-type="switchTab" url='/pages/shopping/index'>
-          <label class="fa fa-home fa-2x"></label>
-        </navigator>
-      </view>
-      <view class='title flex-column-center-space_between'>
-        <label class='text'>{{titleText}}</label>
-      </view>
-    </view>
-  </view>
+	<view class='default-navigation-bar theme-navigation'>
+		<view class='status-bar' style='height:{{statusBarHeight}}px;'></view>
+		<view class='navigation-bar flex-row-center-flex_start'>
+			<view class='btn flex-row-center-flex_start'>
+				<navigator class='to-home' open-type="switchTab" url='/pages/shopping/index'>
+					<label class="fa fa-home fa-2x"></label>
+				</navigator>
+			</view>
+			<view class='title flex-column-center-space_between'>
+				<label class='text'>{{titleText}}</label>
+			</view>
+		</view>
+	</view>
 </template>
 
 
 <!-- 自定义二级游戏页面导航栏 -->
 <template name="navigationBarForTwoLevelInGame">
-  <view class='default-navigation-bar theme-navigation' style='position: absolute; background-color: unset;'>
-    <view class='status-bar' style='height:{{statusBarHeight}}px; background-color: {{statusBarBGColor}}'></view>
-    <view class='navigation-bar flex-row-center-flex_start' style='background-color: unset;'>
-      <view class='btn flex-row-center-flex_start'>
-        <navigator class='go-back' open-type='navigateBack' delta='100'>
-          <label class="fa fa-angle-left fa-2x" title="Back"></label>
-        </navigator>
-      </view>
-      <view class='title flex-column-center-space_between'>
-        <label class='text'>{{titleText}}</label>
-      </view>
-    </view>
-  </view>
+	<view class='default-navigation-bar theme-navigation' style='position: absolute; background-color: unset;'>
+		<view class='status-bar' style='height:{{statusBarHeight}}px; background-color: {{statusBarBGColor}}'></view>
+		<view class='navigation-bar flex-row-center-flex_start' style='background-color: unset;'>
+			<view class='btn flex-row-center-flex_start'>
+				<navigator class='go-back' open-type='navigateBack' delta='100'>
+					<label class="fa fa-angle-left fa-2x" title="Back"></label>
+				</navigator>
+			</view>
+			<view class='title flex-column-center-space_between'>
+				<label class='text'>{{titleText}}</label>
+			</view>
+		</view>
+	</view>
+</template>
+
+
+<!-- 自定义页面导航栏 [返回|首页] -->
+<template name="navigationBarForBackAndHome">
+	<view class='default-navigation-bar theme-navigation'>
+		<view class='status-bar' style='height:{{statusBarHeight}}px;'></view>
+		<view class='navigation-bar flex-row-center-flex_start'>
+			<view class='btn flex-row-center-flex_start'>
+				<navigator wx:if="{{isGotoBack}}" class='go-back' open-type='navigateBack' delta='100'>
+					<label class="fa fa-angle-left fa-2x" title="Back"></label>
+				</navigator>
+				<navigator wx:if="{{isGotoHome}}" class='to-home' open-type="switchTab" url='/pages/shopping/index'>
+					<label class="fa fa-home fa-2x"></label>
+				</navigator>
+			</view>
+			<view class='title flex-column-center-space_between'>
+				<label class='text'>{{titleText}}</label>
+			</view>
+			<view style="width:60px;height:2px;padding-right:20rpx;"></view>
+		</view>
+	</view>
 </template>
 
 <!-- 没有网络的页面 -->
 <template name="pageForNoNet">
-  <view class="container flex-column-center-center theme-container" style='height: calc(100vh - 46px - {{statusBarHeight}}px);'>
-    <view class="no-net flex-column-center-flex_start">
-      <image src="/images/imgs/default-bg.png"></image>
-      <text class="theme-font1">网络异常，请检查网络</text>
-      <view class="flex-row-center-center">
-        <view class="theme-button-dark" bindtap="onReload">重试</view>
-      </view>
-    </view>
-  </view>
+	<view class="container flex-column-center-center theme-container" style='height: calc(100vh - 46px - {{statusBarHeight}}px);'>
+		<view class="no-net flex-column-center-flex_start">
+			<image src="/images/imgs/default-bg.png"></image>
+			<text class="theme-font1">网络异常，请检查网络</text>
+			<view class="flex-row-center-center">
+				<view class="theme-button-dark" bindtap="onReload">重试</view>
+			</view>
+		</view>
+	</view>
 </template>

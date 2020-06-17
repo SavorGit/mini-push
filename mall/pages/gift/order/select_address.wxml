@@ -5,7 +5,7 @@
 
 
 <import src="/pages/template/commons" />
-<template is="navigationBarForTwoLevel" data='{{statusBarHeight: statusBarHeight,titleText:"选择收货地址"}}' />
+<template is="navigationBarForBackAndHome" data='{{statusBarHeight: statusBarHeight,titleText:"选择收货地址",isGotoBack:true,isGotoHome:true}}' />
 
 <view class='container theme-container' style='height: calc(100vh - {{46 + statusBarHeight + SystemInfo.screenBottomSpace}}px);'>
 	<scroll-view class="full_width full_height" scroll-y="true" scroll-with-animation="true">
@@ -15,7 +15,7 @@
 				<view class="content">恭喜您领取到了{{nickName}}的赠品，请选择您的收货地址</view>
 			</view>
 			<view class="choose-address-panel flex-row-center-space_between theme-panel" wx:if="{{is_have_default_address==false}}" bindtap="selectAddress">
-				
+
 				<view class="left flex-row-center-flex_start">
 					<view class="icon fa fa-map-marker" aria-hidden="true"></view>
 					<view class="title one-line-overflow">选择收货地址</view>
