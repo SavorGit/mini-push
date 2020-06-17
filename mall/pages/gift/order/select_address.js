@@ -39,6 +39,8 @@ Page({
     var user_info = wx.getStorageSync(cache_key + 'user_info');
     openid = options.openid;
     goods_id = options.goods_id;
+    console.log('dddddd'+order_id)
+    console.log('ddddd'+openid)
     that.setData({
       user_info: user_info,
       nickName:nickName
@@ -116,13 +118,27 @@ Page({
       order_id: order_id,
       address_id: address_id,
     }, (data, headers, cookies, errMsg, statusCode) => {
+      
       var order_id = data.result.order_id;
-      wx.redirectTo({
-        url: '/mall/pages/gift/order/receive_success?order_id=' + order_id + '&openid=' + openid+'&goods_id='+goods_id,
-      })
-    },function(){
-      wx.navigateBack({
-        delta:1
+      var receive_order_id = data.result.receive_order_id;
+      console.log(order_id+'收货地址:'+receive_order_id)
+      if(receive_order_id>0 && typeof(receive_order_id)!='undefined'){
+        wx.redirectTo({
+          url: '/pages/hotel/gift/share?order_id='+receive_order_id,
+        })
+      }else {
+        wx.redirectTo({
+          url: '/mall/pages/gift/order/receive_success?order_id=' + order_id + '&openid=' + openid+'&goods_id='+goods_id,
+        })
+      }
+      
+    },function(e){
+      console.log(e)
+      // wx.navigateBack({
+      //   delta:2
+      // })
+      wx.reLaunch({
+        url: '/pages/shopping/index',
       })
     })
   },

@@ -48,7 +48,7 @@ Page({
       wx.hideShareMenu();
     }else if(receive_num==1){
       that.getOrderInfo()
-      that.getShreOrderInfo();
+      //that.getShreOrderInfo();
     }
     
     that.setData({
@@ -269,12 +269,12 @@ Page({
     var img_url = 'https://oss.littlehotspot.com/WeChat/resource/share.jpg';
     var goods_info = that.data.goods_info
     var title = nickName+'送你小热点好物-'+goods_info.name;
-    var give_order_id = that.data.give_order_id;
+    // = that.data.give_order_id;
     if (e.from === 'button') {
       // 来自页面内转发按钮
       return {
         title: title,
-        path: '/pages/hotel/gift/share?order_id=' + give_order_id,
+        path: '/pages/hotel/gift/share?order_id=' + order_id,
         imageUrl: img_url,
         success: function (res) {
           
@@ -284,7 +284,7 @@ Page({
     } else {
       return {
         title: title,
-        path: '/pages/hotel/gift/share?order_id=' + give_order_id,
+        path: '/pages/hotel/gift/share?order_id=' + order_id,
         imageUrl: img_url,
         success: function (res) {
           

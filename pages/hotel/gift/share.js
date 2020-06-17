@@ -87,7 +87,7 @@ Page({
    */
   getGiftInfo: function (openid, order_id) {
     var that = this;
-    console.log(order_id)
+    console.log('领取详情:'+order_id)
     utils.PostRequest(api_v_url + '/gift/info', {
       openid: openid,
       order_id: order_id,
