@@ -158,7 +158,7 @@ Page({
     var person_upnum = that.data.person_upnum;
     var receive_num = that.data.receive_num;
     if (receive_num == 1) {
-      app.showToast('最少领取一份');
+      app.showToast('最少领取1份');
       return false;
     }
     receive_num -= 1;
