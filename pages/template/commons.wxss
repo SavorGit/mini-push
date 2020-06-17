@@ -9,17 +9,17 @@
   border-radius: 20rpx;
 }
 
-.wxAuthLogin-container > .wxAuthLogin-top {
+.wxAuthLogin-container>.wxAuthLogin-top {
   padding: 50rpx 0rpx 10rpx 0rpx;
 }
 
-.wxAuthLogin-container > .wxAuthLogin-top > .opt {
+.wxAuthLogin-container>.wxAuthLogin-top>.opt {
   margin-top: -20rpx;
 }
 
-.wxAuthLogin-container > .wxAuthLogin-top > .opt > .close,
-.wxAuthLogin-container > .wxAuthLogin-top > .opt > .close::before,
-.wxAuthLogin-container > .wxAuthLogin-top > .opt > .close::after {
+.wxAuthLogin-container>.wxAuthLogin-top>.opt>.close,
+.wxAuthLogin-container>.wxAuthLogin-top>.opt>.close::before,
+.wxAuthLogin-container>.wxAuthLogin-top>.opt>.close::after {
   position: fixed;
   right: 60rpx;
   margin: 0;
@@ -31,37 +31,37 @@
   line-height: 0;
 }
 
-.wxAuthLogin-container > .wxAuthLogin-top > .opt > .close > image {
+.wxAuthLogin-container>.wxAuthLogin-top>.opt>.close>image {
   margin-right: 10rpx;
   width: 100%;
   height: 100%;
 }
 
-.wxAuthLogin-container > .wxAuthLogin-top > .title > label {
+.wxAuthLogin-container>.wxAuthLogin-top>.title>label {
   font-weight: bold;
 }
 
-.wxAuthLogin-container > .wxAuthLogin-middle {
+.wxAuthLogin-container>.wxAuthLogin-middle {
   padding: 20rpx 40rpx 20rpx 40rpx;
   margin-bottom: 20rpx;
 }
 
-.wxAuthLogin-container > .wxAuthLogin-middle > .content {
+.wxAuthLogin-container>.wxAuthLogin-middle>.content {
   display: block;
   margin-bottom: 20rpx;
 }
 
-.wxAuthLogin-container > .wxAuthLogin-middle > .link_relief {
+.wxAuthLogin-container>.wxAuthLogin-middle>.link_relief {
   height: 60rpx;
   line-height: 60rpx;
 }
 
-.wxAuthLogin-container > .wxAuthLogin-middle > .link_relief > navigator {
+.wxAuthLogin-container>.wxAuthLogin-middle>.link_relief>navigator {
   font-size: 30rpx;
   text-decoration: underline;
 }
 
-.wxAuthLogin-container > .wxAuthLogin-bottom > button {
+.wxAuthLogin-container>.wxAuthLogin-bottom>button {
   width: 50%;
   border-radius: 40rpx;
 }
@@ -77,12 +77,12 @@
   z-index: 99;
 }
 
-.fixedSuspensionButtonGroup > .scan_tdc {
+.fixedSuspensionButtonGroup>.scan_tdc {
   width: 100%;
   height: 100%;
 }
 
-.fixedSuspensionButtonGroup > .scan_tdc > image {
+.fixedSuspensionButtonGroup>.scan_tdc>image {
   width: 100%;
   height: 100%;
 }
@@ -120,18 +120,18 @@
   background-color: unset;
 }
 
-.remoteControlWindow-container .remoteControlWindow-top .opt > button icon {
+.remoteControlWindow-container .remoteControlWindow-top .opt>button icon {
   width: 100rpx;
   height: 100rpx;
 }
 
-.remoteControlWindow-container .remoteControlWindow-top .opt > button icon image {
+.remoteControlWindow-container .remoteControlWindow-top .opt>button icon image {
   width: 100rpx;
   height: 100rpx;
   border-radius: 49rpx;
 }
 
-.remoteControlWindow-container .remoteControlWindow-top .opt > button icon .fa-stack-1x {
+.remoteControlWindow-container .remoteControlWindow-top .opt>button icon .fa-stack-1x {
   line-height: 2.4;
 }
 
@@ -201,11 +201,12 @@
   font-size: 28rpx;
 }
 
-.advert-panel > label, .advert-panel > button {
+.advert-panel>label,
+.advert-panel>button {
   display: block;
 }
 
-.advert-panel > button {
+.advert-panel>button {
   width: 100rpx;
   height: 50rpx;
   line-height: 50rpx;
@@ -213,12 +214,12 @@
   font-size: 24rpx;
 }
 
-.advert-panel > .fa {
+.advert-panel>.fa {
   margin-left: 30rpx;
   margin-right: 0rpx;
 }
 
-.advert-panel > .msg {
+.advert-panel>.msg {
   margin-left: 20rpx;
   margin-right: 200rpx;
 }
@@ -232,30 +233,30 @@
   border-radius: 10rpx;
 }
 
-.interrupt-launch-screen-window-container > .window-top {
+.interrupt-launch-screen-window-container>.window-top {
   padding: 50rpx 0rpx 20rpx 0rpx;
 }
 
-.interrupt-launch-screen-window-container > .window-top > .title > label {
+.interrupt-launch-screen-window-container>.window-top>.title>label {
   font-weight: bold;
   padding-left: 20rpx;
 }
 
-.interrupt-launch-screen-window-container > .window-main {
+.interrupt-launch-screen-window-container>.window-main {
   padding: 20rpx 40rpx;
   margin-bottom: 20rpx;
 }
 
-.interrupt-launch-screen-window-container > .window-main > .content {
+.interrupt-launch-screen-window-container>.window-main>.content {
   display: block;
   margin-bottom: 20rpx;
 }
 
-.interrupt-launch-screen-window-container > .window-bottom {
+.interrupt-launch-screen-window-container>.window-bottom {
   height: 120rpx;
 }
 
-.interrupt-launch-screen-window-container > .window-bottom > button {
+.interrupt-launch-screen-window-container>.window-bottom>button {
   width: 285rpx;
   height: 80rpx;
   line-height: 80rpx;
@@ -270,49 +271,49 @@
   width: 100vw;
 }
 
-.default-navigation-bar > .status-bar {
+.default-navigation-bar>.status-bar {
   font-size: 24px;
 }
 
-.default-navigation-bar > .navigation-bar {
+.default-navigation-bar>.navigation-bar {
   height: 46px;
 }
 
-.default-navigation-bar > .navigation-bar > .btn {
+.default-navigation-bar>.navigation-bar>.btn {
   width: 60px;
 }
 
-.default-navigation-bar > .navigation-bar > .title {
-  width: calc(100% - 120px);
+.default-navigation-bar>.navigation-bar>.title {
+  width: calc(100% - 120px - 40rpx);
 }
 
-.default-navigation-bar > .navigation-bar > .title > .text {
+.default-navigation-bar>.navigation-bar>.title>.text {
   font-size: 16px;
   font-weight: bold;
 }
 
 /* ================================= 自定义二级页面导航栏 ================================= */
 
-.default-navigation-bar > .navigation-bar > .btn {
+.default-navigation-bar>.navigation-bar>.btn {
   padding-left: 20rpx;
 }
 
-.default-navigation-bar > .navigation-bar > .btn > .go-back,
-.default-navigation-bar > .navigation-bar > .btn > .to-home {
+.default-navigation-bar>.navigation-bar>.btn>.go-back,
+.default-navigation-bar>.navigation-bar>.btn>.to-home {
   padding-left: 5px;
   padding-right: 5px;
   font-size: 12px;
 }
 
-.default-navigation-bar > .navigation-bar > .btn > .go-back > image,
-.default-navigation-bar > .navigation-bar > .btn > .to-home > image {
+.default-navigation-bar>.navigation-bar>.btn>.go-back>image,
+.default-navigation-bar>.navigation-bar>.btn>.to-home>image {
   width: 24px;
   height: 24px;
   vertical-align: middle;
 }
 
-.default-navigation-bar > .navigation-bar > .btn > .go-back > label,
-.default-navigation-bar > .navigation-bar > .btn > .to-home > label {
+.default-navigation-bar>.navigation-bar>.btn>.go-back>label,
+.default-navigation-bar>.navigation-bar>.btn>.to-home>label {
   width: 24px;
   height: 24px;
 }
@@ -324,12 +325,12 @@
   height: 500rpx;
 }
 
-.no-net > image {
+.no-net>image {
   width: 200rpx;
   height: 200rpx;
 }
 
-.no-net > text {
+.no-net>text {
   height: 30rpx;
   line-height: 30rpx;
   text-align: center;
@@ -337,13 +338,14 @@
   font-weight: bold;
 }
 
-.no-net > view {
+.no-net>view {
   width: 100%;
   height: 60rpx;
   margin-top: 160rpx;
 }
 
-.no-net > view > .theme-button-dark, .no-net > view > .theme-button-like {
+.no-net>view>.theme-button-dark,
+.no-net>view>.theme-button-like {
   width: 200rpx;
   height: 60rpx;
   line-height: 60rpx;

@@ -5,7 +5,7 @@
 
 
 <import src="/pages/template/commons" />
-<template is="navigationBarForTwoLevel" data='{{statusBarHeight: statusBarHeight,titleText:"赠品转赠-收货地址"}}' />
+<template is="navigationBarForBackAndHome" data='{{statusBarHeight: statusBarHeight,titleText:"赠品转赠-收货地址",isGotoBack:true,isGotoHome:true}}' />
 
 <!-- 多个赠品 -->
 <view class='container theme-container' style='height:calc(100vh - {{46 + statusBarHeight + SystemInfo.screenBottomSpace}}px);'>
@@ -20,22 +20,22 @@
 			</view>
 			<!-- 自己领取份数大于0 -->
 			<block wx:if="{{selfreceive_num>0}}">
-			
-			<view  class="panel mine-address flex-column-center-flex_start theme-panel" >
-				<view class="title-bar flex-row-center-space_between">
-					<view class="title theme-font3">自己领取{{selfreceive_num}}件</view>
-					<view class="btn theme-button-orange" wx:if="{{is_have_receive==0}}" bindtap="receiveGift">确定收货地址</view>
-				</view>
-				<view class="body">
-					<view class="row flex-row-center-space_between">
-						
-							<view class="left flex-row-center-space_between" wx:if="{{is_have_default_address==false}}" >
+
+				<view class="panel mine-address flex-column-center-flex_start theme-panel">
+					<view class="title-bar flex-row-center-space_between">
+						<view class="title theme-font3">自己领取{{selfreceive_num}}件</view>
+						<view class="btn theme-button-orange" wx:if="{{is_have_receive==0}}" bindtap="receiveGift">确定收货地址</view>
+					</view>
+					<view class="body">
+						<view class="row flex-row-center-space_between">
+
+							<view class="left flex-row-center-space_between" wx:if="{{is_have_default_address==false}}">
 								<view class="icon fa fa-map-marker" aria-hidden="true"></view>
 								<view class="value">选择收货地址</view>
 							</view>
-							
-							
-							<view class="left flex-row-center-space_between" wx:else >
+
+
+							<view class="left flex-row-center-space_between" wx:else>
 								<view class="icon fa fa-map-marker" aria-hidden="true"></view>
 								<view class="choosed">
 									<view class="consignee flex-row-center-flex_start">
@@ -46,15 +46,15 @@
 								</view>
 							</view>
 
-							
+
 							<view class="right flex-row-center-flex_end" bindtap="selectAddress" wx:if="{{is_have_receive==0}}">
 								<view class="btn fa fa-chevron-right" aria-hidden="true"></view>
 							</view>
-						
+
+						</view>
 					</view>
 				</view>
-			</view>
-			<!-- <view  class="panel mine-address flex-column-center-flex_start theme-panel">
+				<!-- <view  class="panel mine-address flex-column-center-flex_start theme-panel">
 				<view class="title-bar flex-row-center-space_between">
 					<view class="title theme-font3">自己领取 xx 件</view>
 				</view>
@@ -76,56 +76,56 @@
 			</block>
 			<!-- 赠送好友份数大于0-->
 			<block wx:if="{{give_num>0}}">
-			<view class="panel gift-panel flex-column-center-flex_start theme-panel">
-				<view class="title-bar flex-row-center-space_between">
-					<view class="title theme-font3">送给好友{{give_num}}件</view>
-					<button open-type="share" class="btn theme-button-orange">微信送给好友</button>
-				</view>
-				<view class="body">
-					<view class="goods-info">
-						<view class="hotel theme-font7">由{{merchant.name}}提供</view>
-						<view class="row flex-row-center-space_between">
-							<image class="pic" mode="aspectFill" src="{{goods_info.img}}"></image>
-							<view class="center flex-column-flex_start-space_between" bindtap="">
-								<view class="name two-line-overflow">{{goods_info.name}}</view>
-								<view class="bottom flex-row-center-flex_start">
-									<view class="specs theme-font3">{{goods_info.attr_name}}</view>
+				<view class="panel gift-panel flex-column-center-flex_start theme-panel">
+					<view class="title-bar flex-row-center-space_between">
+						<view class="title theme-font3">送给好友{{give_num}}件</view>
+						<button open-type="share" class="btn theme-button-orange">微信送给好友</button>
+					</view>
+					<view class="body">
+						<view class="goods-info">
+							<view class="hotel theme-font7">由{{merchant.name}}提供</view>
+							<view class="row flex-row-center-space_between">
+								<image class="pic" mode="aspectFill" src="{{goods_info.img}}"></image>
+								<view class="center flex-column-flex_start-space_between" bindtap="">
+									<view class="name two-line-overflow">{{goods_info.name}}</view>
+									<view class="bottom flex-row-center-flex_start">
+										<view class="specs theme-font3">{{goods_info.attr_name}}</view>
+									</view>
+								</view>
+								<view class="right flex-column-flex_end-flex_start" bindtap="">
+									<view class="price one-line-overflow theme-font3">X{{give_num}}</view>
 								</view>
 							</view>
-							<view class="right flex-column-flex_end-flex_start" bindtap="">
-								<view class="price one-line-overflow theme-font3">X{{give_num}}</view>
-							</view>
 						</view>
-					</view>
-					<view wx:if="{{is_edit_send_word}}" class="message-block">
-						<form bindsubmit="saveSendWord">
+						<view wx:if="{{is_edit_send_word}}" class="message-block">
+							<form bindsubmit="saveSendWord">
+								<view class="title-bar flex-row-center-space_between">
+									<view class="title theme-font2">寄语</view>
+									<button form-type="submit" class="btn theme-button-welcome" style="width:100rpx;height:40rpx;line-height:40rpx;text-align:center;border-radius:5rpx;font-size:24rpx;color:#FFFFFF;border:0;" aria-hidden="true">保存</button>
+								</view>
+								<view class="content">
+									<textarea class="input" name="send_word" value="{{send_word}}"></textarea>
+								</view>
+							</form>
+						</view>
+						<view wx:else class="message-block">
 							<view class="title-bar flex-row-center-space_between">
 								<view class="title theme-font2">寄语</view>
-								<button form-type="submit" class="btn theme-button-welcome" style="width:100rpx;height:40rpx;line-height:40rpx;text-align:center;border-radius:5rpx;font-size:24rpx;color:#FFFFFF;border:0;" aria-hidden="true">保存</button>
+								<view class="btn fa fa-pencil" aria-hidden="true" bindtap="editSendWord"></view>
 							</view>
 							<view class="content">
-								<textarea class="input" name="send_word" value="{{send_word}}"></textarea>
+								<view class="view two-line-overflow theme-font5">{{send_word}}</view>
 							</view>
-						</form>
-					</view>
-					<view wx:else class="message-block">
-						<view class="title-bar flex-row-center-space_between">
-							<view class="title theme-font2">寄语</view>
-							<view class="btn fa fa-pencil" aria-hidden="true" bindtap="editSendWord"></view>
 						</view>
-						<view class="content">
-							<view class="view two-line-overflow theme-font5">{{send_word}}</view>
+						<view class="sender flex-row-center-space_between">
+							<view class="isp flex-row-center-flex_start">
+								<image class="icon" mode="aspectFill" src="/images/imgs/default-user.png"></image>
+								<view class="name theme-font3">小热点</view>
+							</view>
+							<view class="nikename theme-font1">{{nickName}}</view>
 						</view>
-					</view>
-					<view class="sender flex-row-center-space_between">
-						<view class="isp flex-row-center-flex_start">
-							<image class="icon" mode="aspectFill" src="/images/imgs/default-user.png"></image>
-							<view class="name theme-font3">小热点</view>
-						</view>
-						<view class="nikename theme-font1">{{nickName}}</view>
 					</view>
 				</view>
-			</view>
 			</block>
 		</view>
 	</scroll-view>
