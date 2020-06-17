@@ -56,9 +56,12 @@ Page({
     var that = this;
     var keys = e.currentTarget.dataset.keys;
     var gameList = that.data.gameList;
+
     var jumpUrl = gameList[keys].url;
-    var game_id = gameList[keys].id;
+    var game_id = gameList[keys].game_id;
+
     jumpUrl += '?openid=' + openid + '&box_mac=' + box_mac + '&game_id=' + game_id;
+
     wx.navigateTo({
       url: jumpUrl,
     })
