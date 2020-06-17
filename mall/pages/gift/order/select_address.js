@@ -123,9 +123,15 @@ Page({
       var receive_order_id = data.result.receive_order_id;
       console.log(order_id+'收货地址:'+receive_order_id)
       if(receive_order_id>0 && typeof(receive_order_id)!='undefined'){
-        wx.redirectTo({
-          url: '/pages/hotel/gift/share?order_id='+receive_order_id,
-        })
+        app.showToast('该礼品已被领取');
+        setTimeout(function() {
+          wx.redirectTo({
+            url: '/pages/hotel/gift/share?order_id='+receive_order_id,
+            
+          })
+        }, 1000);
+        
+        
       }else {
         wx.redirectTo({
           url: '/mall/pages/gift/order/receive_success?order_id=' + order_id + '&openid=' + openid+'&goods_id='+goods_id,

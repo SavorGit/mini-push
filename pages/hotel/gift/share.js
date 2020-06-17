@@ -118,6 +118,7 @@ Page({
       })
       
       var receive_num      = data.result.receive_num;
+      var selfreceive_num = data.result.selfreceive_num;
       //判断是否领取过但是未填写地址
       
       var receive_order_id = data.result.order_id
@@ -127,19 +128,19 @@ Page({
       if(receive_type == 3 ){//已领取1个待添加收货地址
         
         wx.navigateTo({
-          url: '/mall/pages/gift/accept/index?order_id=' + receive_order_id + '&openid=' + openid+'&nickName='+nickName+'&goods_id='+goods_info.id+'&receive_num='+receive_num,
+          url: '/mall/pages/gift/accept/index?order_id=' + receive_order_id + '&openid=' + openid+'&nickName='+nickName+'&goods_id='+goods_info.id+'&receive_num='+selfreceive_num,
         })
 
       }else if(receive_type==7){
         
         
         wx.navigateTo({
-          url: '/mall/pages/gift/accept/index?order_id=' + receive_order_id + '&openid=' + openid+'&nickName='+nickName+'&goods_id='+goods_info.id+'&receive_num='+receive_num,
+          url: '/mall/pages/gift/accept/index?order_id=' + receive_order_id + '&openid=' + openid+'&nickName='+nickName+'&goods_id='+goods_info.id+'&receive_num='+selfreceive_num,
         })
       }
       else if( receive_type==8){
         wx.navigateTo({
-          url: '/mall/pages/gift/accept/multy_gift?order_id=' + receive_order_id + '&openid=' + openid+'&nickName='+nickName+'&goods_id='+goods_info.id+'&receive_num='+receive_num,
+          url: '/mall/pages/gift/accept/multy_gift?order_id=' + receive_order_id + '&openid=' + openid+'&nickName='+nickName+'&goods_id='+goods_info.id+'&receive_num='+selfreceive_num,
         })
       }
     }, function () {
