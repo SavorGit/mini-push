@@ -5,7 +5,8 @@
 
 
 <import src="/pages/template/commons" />
-<template is="navigationBarForTwoLevel" data='{{statusBarHeight: statusBarHeight,titleText:"领取成功"}}' />
+<!-- <template is="navigationBarForTwoLevel" data='{{statusBarHeight: statusBarHeight,titleText:"领取成功"}}' /> -->
+<template is="navigationBarForShare" data='{{statusBarHeight: statusBarHeight,titleText:"领取成功"}}' />
 
 <view class='container theme-container' style='height: calc(100vh - {{46 + statusBarHeight + SystemInfo.screenBottomSpace}}px);'>
 	<scroll-view class="full_width full_height" scroll-y="true" scroll-with-animation="true">
