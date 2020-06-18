@@ -261,6 +261,7 @@ Page({
       
       var goods_info = that.data.goods_info;
       that.setData({receive_type:receive_type})
+      console.log('领取receive_type：'+receive_type)
       if (receive_type == 3 ) {
         wx.navigateTo({
           url: '/mall/pages/gift/accept/index?order_id=' + order_id + '&openid=' + openid+'&nickName='+nickName+'&goods_id='+goods_info.id+'&receive_num='+receive_num,

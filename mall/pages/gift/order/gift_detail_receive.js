@@ -29,6 +29,7 @@ Page({
     wx.hideShareMenu()
     order_id = options.order_id;
     openid   = options.openid;
+    console.log('接收:'+order_id)
     that.getOrderInfo(order_id,openid);
 
 
