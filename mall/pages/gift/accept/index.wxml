@@ -1,0 +1,63 @@
+<!--mall/pages/gift/accept/index.wxml-->
+<!--
+ | 【商城】转赠页面
+ |-->
+
+
+<import src="/pages/template/commons" />
+<template is="navigationBarForBackAndHome" data='{{statusBarHeight: statusBarHeight,titleText:"赠品转赠",isGotoBack:true,isGotoHome:true}}' />
+
+<!-- 单个赠品 -->
+<view wx:if="{{receive_num==1}}" class='container theme-container' style='height:calc(100vh - {{46 + statusBarHeight + SystemInfo.screenBottomSpace}}px);'>
+	<scroll-view class='scroll-view full-page' scroll-y="true" scroll-with-animation="true">
+		<view class="page-warpper flex-column-flex_start-center">
+			<view class="status-panel flex-column-center-flex_start theme-panel">
+				<view class="status flex-column-center-flex_start">
+					<view class="icon fa fa-smile-o" aria-hidden="true"></view>
+					<view class="msg">恭喜您领取到了{{nickName}}的赠品</view>
+				</view>
+				<view class="tip">共1件商品，您可选择自己领取或转赠给好友</view>
+			</view>
+			<view class="option-panel flex-column-center-flex_start">
+				<view class="btn theme-button-red" bindtap="selectAddress" wx:if="{{is_have_receive==0}}">填写收货地址</view>
+				<button open-type="share" class="btn theme-button-welcome-dark">转赠给好友</button>
+			</view>
+		</view>
+	</scroll-view>
+</view>
+
+<!-- 多个赠品 -->
+<view wx:else class='container theme-container' style='height:calc(100vh - {{46 + statusBarHeight + SystemInfo.screenBottomSpace}}px);'>
+	<scroll-view class='scroll-view full-page' scroll-y="true" scroll-with-animation="true">
+		<view class="page-warpper flex-column-flex_start-center">
+			<view class="status-panel flex-column-center-flex_start theme-panel">
+				<view class="status flex-column-center-flex_start">
+					<view class="icon fa fa-smile-o" aria-hidden="true"></view>
+					<view class="msg">恭喜您领取到了{{nickName}}的赠品</view>
+				</view>
+				<view class="tip">共{{receive_num}}件商品，您可选择自己领取或转增给好友</view>
+			</view>
+			<view class="setting-panel flex-column-center-flex_start theme-panel">
+				<view class="row flex-row-center-space_between">
+					<view class="label">自己领取</view>
+					<view class="count flex-row-center-center">
+						<view class="btn subt theme-button-000000-EDF0F2" bindtap="cutNums" data-type="1">-</view>
+						<view class="value">{{accept_num}}</view>
+						<view class="btn plus theme-button-000000-EDF0F2" bindtap="addNums" data-type="1">+</view>
+					</view>
+				</view>
+				<view class="row flex-row-center-space_between">
+					<view class="label">送给好友</view>
+					<view class="count flex-row-center-center">
+						<view class="btn subt theme-button-000000-EDF0F2" bindtap="cutNums" data-type="2">-</view>
+						<view class="value">{{gift_num}}</view>
+						<view class="btn plus theme-button-000000-EDF0F2" bindtap="addNums" data-type="2">+</view>
+					</view>
+				</view>
+			</view>
+			<view class="option-panel flex-column-center-flex_start" bindtap="confirmOrder">
+				<view class="btn theme-button-red">确定</view>
+			</view>
+		</view>
+	</scroll-view>
+</view>

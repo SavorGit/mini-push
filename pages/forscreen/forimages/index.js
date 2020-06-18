@@ -393,6 +393,7 @@ Page({
           netty_tmp.filename = filename = timestamp + postf_t ;
           netty_tmp.order    = flag;
           netty_tmp.img_id   = timestamp;
+          netty_tmp.resource_size = resource_size;
           
 
           netty_push_img.push(netty_tmp);
@@ -778,7 +779,7 @@ Page({
       tmp.forscreen_url = res_list[i].forscreen_url;
       tmp.res_id        = res_list[i].resource_id;
       tmp.filename      = res_list[i].filename;
-      tmp.resource_size = 0;
+      tmp.resource_size = res_list[i].resource_size;
       tmp.duration      = 0;
       pubdetail[i] = tmp;
     }

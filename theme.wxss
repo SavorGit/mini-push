@@ -86,12 +86,15 @@ button[disabled] {
   background-color: #1cbeb6;
 }
 
-.theme-panel {
+.theme-panel,
+.theme-button-white,
+.theme-navigation {
   color: #333333;
   background-color: #FFFFFF;
 }
 
-.theme-panel-dark {
+.theme-panel-dark,
+.theme-button-dark {
   color: #FFFFFF;
   background-color: #333333;
 }
@@ -106,24 +109,9 @@ button[disabled] {
   background-color: #EDF0F2;
 }
 
-.theme-navigation {
-  color: #333333;
-  background-color: #FFFFFF;
-}
-
 .theme-button {
   color: #FFFFFF;
   background-color: #1cbeb6;
-}
-
-.theme-button-dark {
-  color: #FFFFFF;
-  background-color: #333333;
-}
-
-.theme-button-white {
-  color: #333333;
-  background-color: #FFFFFF;
 }
 
 .theme-button-000000-EDF0F2 {

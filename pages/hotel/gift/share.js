@@ -49,6 +49,7 @@ Page({
     receive_num: 1, //领取礼品数量
     openid: '',
     showModal: false, //显示授权登陆弹窗
+    receive_btn_disable:false,
   },
 
   /**
@@ -57,14 +58,12 @@ Page({
   onLoad: function (options) {
     var that = this;
     wx.hideShareMenu()
-    
     if (app.globalData.openid && app.globalData.openid != '') {
       that.setData({
         openid: app.globalData.openid
       });
       
       order_id = options.order_id;
-      console.log('order_id_'+order_id)
       SavorUtils.User.isRegister(that); //判断用户是否注册
       that.getGiftInfo(app.globalData.openid, order_id); //获取礼品信息
     } else {
@@ -75,8 +74,6 @@ Page({
           });
           SavorUtils.User.isRegister(that); //判断用户是否注册
           order_id = options.order_id;
-          console.log('order_id'+order_id)
-          console.log('openid'+openid)
           that.getGiftInfo(openid, order_id); //获取礼品信息
         }
       }
@@ -91,7 +88,7 @@ Page({
    */
   getGiftInfo: function (openid, order_id) {
     var that = this;
-    console.log(order_id)
+    console.log('领取详情:'+order_id)
     utils.PostRequest(api_v_url + '/gift/info', {
       openid: openid,
       order_id: order_id,
@@ -106,6 +103,7 @@ Page({
       var expire_date = data.result.expire_date;
       var message = data.result.message;
       var nickName = data.result.nickName;
+      var have_receive_num = data.result.receive_num;
       that.setData({
         order_info: data.result,
         records: records,
@@ -116,13 +114,34 @@ Page({
         merchant_info: merchant_info,
         receive_type: receive_type,
         message:message,
-        nickName:nickName
+        nickName:nickName,
+        have_receive_num:have_receive_num
       })
+      
+      var receive_num      = data.result.receive_num;
+      var selfreceive_num = data.result.selfreceive_num;
       //判断是否领取过但是未填写地址
-      if (receive_type == 3) {
-        var receive_order_id = data.result.order_id
+      
+      var receive_order_id = data.result.order_id
+      
+      
+
+      if(receive_type == 3 ){//已领取1个待添加收货地址
+        
         wx.navigateTo({
-          url: '/mall/pages/gift/order/select_address?order_id=' + receive_order_id + '&openid=' + openid+'&nickName='+nickName+'&goods_id='+goods_info.id,
+          url: '/mall/pages/gift/accept/index?order_id=' + receive_order_id + '&openid=' + openid+'&nickName='+nickName+'&goods_id='+goods_info.id+'&receive_num='+selfreceive_num,
+        })
+
+      }else if(receive_type==7){
+        
+        
+        wx.navigateTo({
+          url: '/mall/pages/gift/accept/index?order_id=' + receive_order_id + '&openid=' + openid+'&nickName='+nickName+'&goods_id='+goods_info.id+'&receive_num='+selfreceive_num,
+        })
+      }
+      else if( receive_type==8){
+        wx.navigateTo({
+          url: '/mall/pages/gift/accept/multy_gift?order_id=' + receive_order_id + '&openid=' + openid+'&nickName='+nickName+'&goods_id='+goods_info.id+'&receive_num='+selfreceive_num,
         })
       }
     }, function () {
@@ -140,7 +159,7 @@ Page({
     var person_upnum = that.data.person_upnum;
     var receive_num = that.data.receive_num;
     if (receive_num == 1) {
-      app.showToast('最少领取一份');
+      app.showToast('最少领取1份');
       return false;
     }
     receive_num -= 1;
@@ -222,28 +241,12 @@ Page({
     mta.Event.stat("closewxauth", {})
   },
 
-  /*getPhoneNumber:function(e){
-    if ("getPhoneNumber:ok" != e.detail.errMsg){
-      wx.showTost('获取用户手机号失败')
-      return false;
-    }
-    var iv = e.detail.iv;
-    var encryptedData = e.detail.encryptedData;
-    utils.PostRequest(api_url + '/aa/bb', {
-      iv:iv,
-      encryptedData: encryptedData,
-      session_key: app.globalData.session_key,
-    }, (data, headers, cookies, errMsg, statusCode) =>{
-      //更新缓存
-      var user_info = wx.getStorageSync(cache_key+'user_info');
-      user_info.mobile = data.result.phoneNumber;
-      wx.setStorageSync(cache_key+'user_info', user_info)
-      //领取礼品
-      that.receiveGift();
-    })
-  },*/
+  
   receiveGift: function () {
     var that = this;
+    that.setData({
+      receive_btn_disable:true
+    })
     var user_info = wx.getStorageSync(cache_key+'user_info');
     var openid = user_info.openid;
     if(user_info.is_wx_auth!=3){
@@ -257,31 +260,40 @@ Page({
       order_id: order_id,
       receive_num: receive_num,
     }, (data, headers, cookies, errMsg, statusCode) => {
-      var receive_order_id = data.result.order_id;
       var receive_type = data.result.receive_type;
       var nickName = that.data.nickName;
-      var good_info = that.data.goods_info;
+      
+      var goods_info = that.data.goods_info;
       that.setData({receive_type:receive_type})
-      if (receive_type == 3) {
+      console.log('领取receive_type：'+receive_type)
+      if (receive_type == 3 ) {
         wx.navigateTo({
-          url: '/mall/pages/gift/order/select_address?order_id=' + receive_order_id + '&openid=' + openid+'&nickName='+nickName+'&goods_id='+good_info.id,
+          url: '/mall/pages/gift/accept/index?order_id=' + order_id + '&openid=' + openid+'&nickName='+nickName+'&goods_id='+goods_info.id+'&receive_num='+receive_num,
         })
         
       } else if (receive_type == 1) {
         var user_info = wx.getStorageSync(cache_key+'user_info');
         var openid = user_info.openid;
+        
         utils.PostRequest(api_v_url + '/gift/receiveResult', {
           openid: openid,
-          order_id: receive_order_id,
+          order_id: order_id,
           receive_num: receive_num,
         }, (data, headers, cookies, errMsg, statusCode) => {
-          var receive_type = data.result.receive_type;
-          var receive_order_id = data.result.order_id;
-          if (receive_type == 3) {
+          var receive_order_id = data.result.order_id
+          var receive_type     = data.result.receive_type;
+          console.log('gift/receiveResult领取receive_type：'+receive_type)
+          if (receive_type == 3 ) {
+            
             wx.navigateTo({
-              url: '/mall/pages/gift/order/select_address?order_id=' + receive_order_id + '&openid=' + openid+'&nickName='+nickName+'&goods_id='+good_info.id,
+              url: '/mall/pages/gift/accept/index?order_id=' +receive_order_id + '&openid=' + openid+'&nickName='+nickName+'&goods_id='+goods_info.id+'&receive_num='+receive_num,
+            })
+          }else {
+            that.setData({
+              receive_type:receive_type
             })
           }
+          
         })
 
       }else if(receive_type==4){

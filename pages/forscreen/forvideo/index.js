@@ -338,7 +338,7 @@ Page({
             method: "POST",
             data: {
               box_mac: box_mac,
-              msg: '{ "action":2, "url": "forscreen/resource/' + timestamp + postf_t + '", "filename":"' + timestamp + postf_t + '","openid":"' + openid + '","resource_type":2,"video_id":"' + timestamp + '","avatarUrl":"' + avatarUrl + '","nickName":"' + nickName + '","forscreen_id":"' + timestamp + '","res_sup_time":"'+res_sup_time+'","res_eup_time":"'+res_eup_time+'"}',
+              msg: '{ "action":2, "url": "forscreen/resource/' + timestamp + postf_t + '", "filename":"' + timestamp + postf_t + '","openid":"' + openid + '","resource_type":2,"video_id":"' + timestamp + '","avatarUrl":"' + avatarUrl + '","nickName":"' + nickName + '","forscreen_id":"' + timestamp + '","res_sup_time":"'+res_sup_time+'","res_eup_time":"'+res_eup_time+'","resource_size":'+res_size+'}',
             },
             success: function(result) {
               if (result.data.code != 10000) {
@@ -821,7 +821,7 @@ Page({
       tmp.forscreen_url = res_list[i].forscreen_url;
       tmp.res_id        = res_list[i].resource_id;
       tmp.filename      = res_list[i].filename;
-      tmp.resource_size = 0;
+      tmp.resource_size = res_list[i].resource_size;
       tmp.duration      = 0;
       pubdetail[i] = tmp;
     }

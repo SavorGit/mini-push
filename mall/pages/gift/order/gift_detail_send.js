@@ -105,7 +105,8 @@ Page({
     console.log(that.data)
     var nickName   = that.data.order_info.nickName
     var goods_name = that.data.goods.name;
-    var img_url    = that.data.goods.img
+    //var img_url    = that.data.goods.img
+    var img_url = 'https://oss.littlehotspot.com/WeChat/resource/share.jpg';
     var title = nickName+'送你小热点好物'+goods_name;
     if (e.from === 'button') {
       // 来自页面内转发按钮

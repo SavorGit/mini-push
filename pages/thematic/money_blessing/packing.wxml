@@ -3,68 +3,72 @@
 <template is="navigationBarForTwoLevel" data='{{statusBarHeight: statusBarHeight,titleText:"热点投屏"}}' />
 
 <view class='container flex-column-center-flex_start theme-container' style='height: calc(100vh - 46px - {{statusBarHeight}}px);'>
-  <form class='full_width full_height' bindsubmit="sendRedPacket">
-    <view class='PageTop full_width'></view>
-    <view class='PageMain full_width'>
-      <view class='package'>
-        <view class='head'>
-          <image class='BorderColor' src='{{avatarUrl}}'></image>
-        </view>
-        <view class='body PackageColor'>
-          <view class="flex-row-stretch-flex_start">
-            <label class='RowLabel'>总金额</label>
-            <view class='right'>
-              <input name="totalcount" bindinput='setTotalCount' class='input' type='digit' placeholder='0.00 (1-500元)'></input>
-            </view>
-          </view>
-          <view class="flex-row-stretch-flex_start">
-            <label class='RowLabel'>红包个数</label>
-            <view class='right'>
-              <input name="totalnums" bindinput='setTotalNums' class='input' type='number' placeholder='填写个数 (1-500个)'></input>
-            </view>
-          </view>
-          <view class="flex-row-stretch-flex_start">
-            <label class='RowLabel'>祝</label>
-            <view class='right'>
-              <input name="surname" class='input surname' maxlength="1" type='text' placeholder=''></input>
-              <radio-group bindchange="sexChange">
-                <radio value='1' checked='true'>先生</radio>
-                <radio value='2'>女士</radio>
-              </radio-group>
-            </view>
-          </view>
-          <view class="flex-row-stretch-flex_start">
-            <label class='RowLabel'>祝福语</label>
-            <view class='right'>
-              <picker bindchange='bindBlessPickerChange' class="picker" value="{{blessingIndex}}" range="{{blessingArray}}">
-                <view>{{blessingArray[blessingIndex]}}</view>
-                <label class="fa fa-caret-down"></label>
-              </picker>
-            </view>
-          </view>
-          <view class="flex-row-stretch-flex_start">
-            <label class='RowLabel'>发送范围</label>
-            <view class='right'>
-              <picker bindchange='bindRangePickerChange' class="picker" value="{{rangeIndex}}" range="{{rangeArray}}">
-                <view>{{rangeArray[rangeIndex]}}</view>
-                <label class="fa fa-caret-down"></label>
-              </picker>
-            </view>
-          </view>
-        </view>
-      </view>
-    </view>
-    <view class='PageBottom full_width'>
-      <!-- <navigator class='PackingBtn PackingButtonColor PackingButtonFontSize' url='/pages/thematic/money_blessing/grab'>发送电视红包</navigator> -->
-      <button class='PackingBtn PackingButtonColor PackingButtonFontSize' form-type="submit">发送电视红包</button>
-    </view>
-    <input type="hidden" name="sex" value="{{sex}}" />
-    <input type="hidden" name="blessid" value="{{blessid}}" />
-    <input type="hidden" name="rangeid" value="{{rangeid}}" />
-    <input type="hidden" name="openid" value="{{openid}}" />
-    <input type="hidden" name="box_mac" value="{{box_mac}}" />
-  </form>
-  <view class="body-view">
-    <loading hidden="{{hiddens}}" bindchange="loadingChange">数据提交中，请稍后!</loading>
-  </view>
+	<form class='full_width full_height' bindsubmit="sendRedPacket">
+		<view class='PageTop full_width'></view>
+		<view class='PageMain full_width'>
+			<view class='package'>
+				<view class='head'>
+					<image class='BorderColor' src='{{avatarUrl}}'></image>
+				</view>
+				<view class='body PackageColor'>
+					<view class="flex-row-stretch-flex_start">
+						<label class='RowLabel'>总金额</label>
+						<view class='right'>
+							<input name="totalcount" bindinput='setTotalCount' class='input' type='digit' placeholder='0.00 (1-500元)'></input>
+						</view>
+					</view>
+					<view class="flex-row-stretch-flex_start">
+						<label class='RowLabel'>红包个数</label>
+						<view class='right'>
+							<input name="totalnums" bindinput='setTotalNums' class='input' type='number' placeholder='填写个数 (1-500个)'></input>
+						</view>
+					</view>
+					<view class="flex-row-stretch-flex_start">
+						<label class='RowLabel'>祝</label>
+						<view class='right'>
+							<input name="surname" class='input surname' maxlength="1" type='text' placeholder=''></input>
+							<radio-group bindchange="sexChange">
+								<radio value='1' checked='true'>先生</radio>
+								<radio value='2'>女士</radio>
+							</radio-group>
+						</view>
+					</view>
+					<view class="flex-row-stretch-flex_start">
+						<label class='RowLabel'>祝福语</label>
+						<view class='right'>
+							<picker bindchange='bindBlessPickerChange' class="picker" value="{{blessingIndex}}" range="{{blessingArray}}">
+								<view class="inner flex-row-center-flex_start">
+									<view class="one-line-overflow">{{blessingArray[blessingIndex]}}</view>
+									<label class="fa fa-caret-down"></label>
+								</view>
+							</picker>
+						</view>
+					</view>
+					<view class="flex-row-stretch-flex_start">
+						<label class='RowLabel'>发送范围</label>
+						<view class='right'>
+							<picker bindchange='bindRangePickerChange' class="picker" value="{{rangeIndex}}" range="{{rangeArray}}">
+								<view class="inner flex-row-center-flex_start">
+									<view class="one-line-overflow">{{rangeArray[rangeIndex]}}</view>
+									<label class="fa fa-caret-down"></label>
+								</view>
+							</picker>
+						</view>
+					</view>
+				</view>
+			</view>
+		</view>
+		<view class='PageBottom full_width'>
+			<!-- <navigator class='PackingBtn PackingButtonColor PackingButtonFontSize' url='/pages/thematic/money_blessing/grab'>发送电视红包</navigator> -->
+			<button class='PackingBtn PackingButtonColor PackingButtonFontSize' form-type="submit">发送电视红包</button>
+		</view>
+		<input type="hidden" name="sex" value="{{sex}}" />
+		<input type="hidden" name="blessid" value="{{blessid}}" />
+		<input type="hidden" name="rangeid" value="{{rangeid}}" />
+		<input type="hidden" name="openid" value="{{openid}}" />
+		<input type="hidden" name="box_mac" value="{{box_mac}}" />
+	</form>
+	<view class="body-view">
+		<loading hidden="{{hiddens}}" bindchange="loadingChange">数据提交中，请稍后!</loading>
+	</view>
 </view>
