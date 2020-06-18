@@ -16,11 +16,11 @@
 					<view class="icon fa fa-smile-o" aria-hidden="true"></view>
 					<view class="msg">恭喜您领取到了{{nickName}}的赠品</view>
 				</view>
-				<view class="tip">共1件商品，您可选择自己领取或转增给好友</view>
+				<view class="tip">共1件商品，您可选择自己领取或转赠给好友</view>
 			</view>
 			<view class="option-panel flex-column-center-flex_start">
 				<view class="btn theme-button-red" bindtap="selectAddress" wx:if="{{is_have_receive==0}}">填写收货地址</view>
-				<button open-type="share" class="btn theme-button-welcome-dark">转增给好友</button>
+				<button open-type="share" class="btn theme-button-welcome-dark">转赠给好友</button>
 			</view>
 		</view>
 	</scroll-view>
