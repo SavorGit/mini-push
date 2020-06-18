@@ -26,7 +26,7 @@ App({
       this.scanQrcode();
     } else {
       var user_info = wx.getStorageSync("savor_user_info");
-      if (that.globalData.link_type == 1) {
+      if (that.globalData.link_type == 1 || that.globalData.link_type == 0) {
 
 
         that.tpst(box_mac, forscreen_id, pubdetail, res_type, res_len, action, hotel_info);

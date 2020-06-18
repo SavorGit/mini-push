@@ -49,6 +49,7 @@ Page({
     receive_num: 1, //领取礼品数量
     openid: '',
     showModal: false, //显示授权登陆弹窗
+    receive_btn_disable:false,
   },
 
   /**
@@ -243,6 +244,9 @@ Page({
   
   receiveGift: function () {
     var that = this;
+    that.setData({
+      receive_btn_disable:true
+    })
     var user_info = wx.getStorageSync(cache_key+'user_info');
     var openid = user_info.openid;
     if(user_info.is_wx_auth!=3){
@@ -278,12 +282,18 @@ Page({
         }, (data, headers, cookies, errMsg, statusCode) => {
           var receive_order_id = data.result.order_id
           var receive_type     = data.result.receive_type;
+          console.log('gift/receiveResult领取receive_type：'+receive_type)
           if (receive_type == 3 ) {
             
             wx.navigateTo({
               url: '/mall/pages/gift/accept/index?order_id=' +receive_order_id + '&openid=' + openid+'&nickName='+nickName+'&goods_id='+goods_info.id+'&receive_num='+receive_num,
             })
+          }else {
+            that.setData({
+              receive_type:receive_type
+            })
           }
+          
         })
 
       }else if(receive_type==4){
