@@ -547,7 +547,7 @@ Page({
         postf = filename.substring(index1, index2);//后缀名
         post_imgs[i] = "forscreen/resource/" + timestamp + postf;
 
-        tmp_imgs[i] = { "oss_img": post_imgs[i],'img_id':timestamp };
+        tmp_imgs[i] = { "oss_img": post_imgs[i],'img_id':timestamp,"resource_size":resource_size };
         // that.setData({
         //   tmp_imgs: tmp_imgs
         // });
@@ -607,6 +607,7 @@ Page({
     var mobile_model = app.globalData.mobile_model;
     var img_index = e.target.dataset.imgindex;
     var img_len = e.target.dataset.imglen;
+    var resource_size = e.target.dataset.resource_size
 
     var user_info = wx.getStorageSync("savor_user_info");
     var avatarUrl = user_info.avatarUrl;
@@ -634,11 +635,11 @@ Page({
     push_info.forscreen_char = forscreen_char;
     push_info.avatarUrl = avatarUrl;
     push_info.nickName  = nickName;
-
     var netty_tmp = {};
     netty_tmp.url = forscreen_img ;
     netty_tmp.filename = filename ;
     netty_tmp.img_id   = img_id;
+    netty_tmp.resource_size = resource_size;
 
     push_img.push(netty_tmp);
 
