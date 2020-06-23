@@ -648,3 +648,24 @@
   margin: 0;
   padding: 0;
 }
+
+.flex-right {
+  width: 100rpx;
+  height: 100rpx;
+  position: absolute;
+  right: 10rpx;
+  bottom: 100rpx;
+}
+
+.flex-right>.btn {
+  width: 85rpx;
+  height: 85rpx;
+  border-radius: 50%;
+  background-color: #FFFFFF;
+}
+
+.flex-right>.btn>.icon {
+  width: 80rpx;
+  height: 80rpx;
+  border-radius: 50%;
+}
