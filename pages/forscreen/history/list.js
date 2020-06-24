@@ -7,6 +7,7 @@ var box_mac = '';
 var page = 1;
 var forscreen_history_list;
 var api_url = app.globalData.api_url;
+var api_v_url = app.globalData.api_v_url;
 var pubdetail = [];
 Page({
 
@@ -32,8 +33,8 @@ Page({
       box_mac: box_mac
     })
 
-    wx.request({
-      url: api_url + '/Smallapp4/index/isHaveCallBox?openid=' + openid,
+    /*wx.request({
+      url: api_v_url + '/index/isHaveCallBox?openid=' + openid,
       headers: {
         'Content-Type': 'application/json'
       },
@@ -44,7 +45,7 @@ Page({
           })
         }
       }
-    })
+    })*/
     //获取投屏历史
     wx.request({
       url: api_url + '/Smallapp21/ForscreenHistory/getList',

@@ -140,7 +140,7 @@ Page({
           wx.hideLoading();
         });
 
-        utils.PostRequest(api_url + '/Smallapp4/index/isHaveCallBox?openid=' + app.globalData.openid, {}, (data, headers, cookies, errMsg, statusCode) => {
+        utils.PostRequest(api_v_url + '/index/isHaveCallBox?openid=' + app.globalData.openid, {}, (data, headers, cookies, errMsg, statusCode) => {
           var is_have = data.result.is_have;
           
           
@@ -157,7 +157,7 @@ Page({
               box_mac: data.result.box_mac,
               hotel_info: data.result,
               hotel_info_json: JSON.stringify(data.result),
-
+              is_compress:data.result.is_compress
             })
             box_mac = data.result.box_mac;
           } else {
@@ -273,7 +273,7 @@ Page({
               wx.hideLoading();
             });
 
-            utils.PostRequest(api_url + '/Smallapp4/index/isHaveCallBox?openid=' + openid, {}, (data, headers, cookies, errMsg, statusCode) => {
+            utils.PostRequest(api_v_url + '/index/isHaveCallBox?openid=' + openid, {}, (data, headers, cookies, errMsg, statusCode) => {
               var is_have = data.result.is_have;
               if (is_have == 1) {
                 var box_id = data.result.box_id;
@@ -288,7 +288,8 @@ Page({
                   box_mac: data.result.box_mac,
                   hotel_info: data.result,
                   hotel_info_json: JSON.stringify(data.result),
-                  wifi_hidden: true
+                  wifi_hidden: true,
+                  is_compress:data.result.is_compress
                 })
                 box_mac = data.result.box_mac;
               } else {
@@ -499,8 +500,9 @@ Page({
         app.scanQrcode(pageid);
       } else {
         if (app.globalData.link_type == 1) {
+          var is_compress = that.data.is_compress;
           wx.navigateTo({
-            url: '/pages/forscreen/forvideo/index?box_mac=' + box_mac + '&openid=' + openid + '&is_open_simple=' + is_open_simple,
+            url: '/pages/forscreen/forvideo/index?box_mac=' + box_mac + '&openid=' + openid + '&is_open_simple=' + is_open_simple+'&is_compress='+is_compress,
           })
           app.recordFormId(openid, formId);
         } else {
@@ -932,7 +934,7 @@ Page({
     var that = this;
     var user_info = wx.getStorageSync(cache_key + "user_info");
     if (typeof (user_info.openid) != 'undefined') {
-      utils.PostRequest(api_url + '/Smallapp4/index/isHaveCallBox', {
+      utils.PostRequest(api_v_url + '/index/isHaveCallBox', {
         openid: user_info.openid
       }, (data, headers, cookies, errMsg, statusCode) => {
         if (data.result.is_have == 1) {
@@ -948,6 +950,7 @@ Page({
             box_mac: data.result.box_mac,
             hotel_info: data.result,
             hotel_info_json: JSON.stringify(data.result),
+            is_compress:data.result.is_compress
           })
           box_mac = data.result.box_mac;
         } else {

@@ -71,7 +71,7 @@ Page({
       box_mac:box_mac,
     })
     wx.request({
-      url: api_url+'/Smallapp4/index/isHaveCallBox?openid=' + openid,
+      url: api_v_url+'/index/isHaveCallBox?openid=' + openid,
       headers: {
         'Content-Type': 'application/json'
       },
