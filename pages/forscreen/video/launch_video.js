@@ -235,7 +235,7 @@ Page({
               success: function (res) {
                 if (res.confirm) {
                   that.setData({
-                    is_box_show: true,
+                    //is_box_show: true,
                   })
                   //console.log('用户点击确定')
                   var djs = 10;
@@ -315,7 +315,7 @@ Page({
 
             that.setData({
               djs: djs,
-              is_box_show: true,
+              //is_box_show: true,
             })
             var timer8_0 = setInterval(function () {
               djs -= 1;
