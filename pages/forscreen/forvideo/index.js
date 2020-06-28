@@ -62,6 +62,7 @@ Page({
     showGuidedMaskBeforLaunch: false,
     showGuidedMaskAfterLaunch: false,
     res_head_desc: '视频',
+    compressed:true,  //默认压缩
   },
 
   /**
@@ -86,7 +87,7 @@ Page({
     }else if(is_compress==0){
       var compressed = false;
     }
-
+    
     that.setData({
       openid: openid,
       box_mac: box_mac,
@@ -491,6 +492,13 @@ Page({
   //重新选择视频
   chooseVedio(e) {
     var that = this;
+
+    var is_compress = that.data.is_compress;
+    if(is_compress==1){
+      var compressed = true;
+    }else if(is_compress==0){
+      var compressed = false;
+    }
     try {
       mta.Event.stat('LaunchVideoWithNet_AfterLaunch_RechooseVideo', {
         'openid': that.data.openid
@@ -525,6 +533,7 @@ Page({
       sourceType: ['album', 'camera'],
       maxDuration: 60,
       camera: 'back',
+      compressed:compressed,
       success: function(res) {
 
         that.setData({
