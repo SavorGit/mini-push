@@ -266,20 +266,7 @@ Page({
                 })
               } else {
                 console.log('ddddd');
-                /*wx.request({
-                  url: api_url + '/smallapp4/index/isHaveCallBox',
-                  data: { "openid": res.data.result.openid },
-                  header: {
-                    'content-type': 'application/json'
-                  },
-                  success: function (rets) {
-                    if (rets.data.result.is_have == 1) {
-                      wx.reLaunch({
-                        url: '../index/index',
-                      })
-                    }
-                  }
-                });*/
+                
                 setInfos(box_mac, res.data.result.openid, code_type);
               }
               //console.log(res.data.result.openid);

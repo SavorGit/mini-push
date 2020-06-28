@@ -5,6 +5,7 @@ const app = getApp()
 var box_mac;
 var openid;
 var api_url = app.globalData.api_url;
+var api_v_url = app.globalData.api_v_url;
 var pageid  = 31;
 Page({
 
@@ -36,8 +37,8 @@ Page({
     var video_img_url = options.video_img_url;
     //wx.hideShareMenu();
 
-    wx.request({
-      url: api_url+'/Smallapp4/index/isHaveCallBox?openid=' + openid,
+    /*wx.request({
+      url: api_v_url+'/index/isHaveCallBox?openid=' + openid,
       headers: {
         'Content-Type': 'application/json'
       },
@@ -48,7 +49,7 @@ Page({
           })
         }
       }
-    })
+    })*/
     
 
     var that = this;

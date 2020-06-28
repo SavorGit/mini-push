@@ -46,7 +46,7 @@ let SavorUtils = {
     }),
 
     // 获取版位信息
-    isHaveCallBox: (pageContext) => utils.PostRequest(api_url + '/Smallapp/index/isHaveCallBox?openid=' + pageContext.data.openid, {}, (data, headers, cookies, errMsg, statusCode) => {
+    isHaveCallBox: (pageContext) => utils.PostRequest(api_v_url + '/index/isHaveCallBox?openid=' + pageContext.data.openid, {}, (data, headers, cookies, errMsg, statusCode) => {
       let is_have = data.result.is_have;
       if (is_have == 1) {
         app.linkHotelWifi(data.result, pageContext);
@@ -915,7 +915,7 @@ Page({
   onShow: function(options) {
     var that = this;
     if (app.globalData.openid && app.globalData.openid != '') {
-      utils.PostRequest(api_url + '/Smallapp4/index/isHaveCallBox', {
+      utils.PostRequest(api_v_url + '/index/isHaveCallBox', {
         openid: app.globalData.openid
       }, (data, headers, cookies, errMsg, statusCode) => {
         if (data.result.is_have == 1) {
@@ -933,7 +933,7 @@ Page({
       });
     } else {
       app.openidCallback = openid => {
-        utils.PostRequest(api_url + '/Smallapp4/index/isHaveCallBox', {
+        utils.PostRequest(api_v_url + '/index/isHaveCallBox', {
           openid: openid
         }, (data, headers, cookies, errMsg, statusCode) => {
           if (data.result.is_have == 1) {
