@@ -6,7 +6,7 @@ var pubdetail;
 var box_mac;
 var openid;
 var api_url = app.globalData.api_url;
-var api_url = app.globalData.api_v_url;
+var api_v_url = app.globalData.api_v_url;
 var pageid = 22;
 Page({
 
