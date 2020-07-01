@@ -6,6 +6,7 @@ var pubdetail;
 var pub_info;
 var i;
 var api_url = app.globalData.api_url;
+var api_v_url = app.globalData.api_v_url;
 Page({
 
   /**
@@ -40,7 +41,7 @@ Page({
       }
     })
     wx.request({
-      url: api_url+'/Smallapp4/index/isHaveCallBox?openid=' + openid,
+      url: api_v_url+'/index/isHaveCallBox?openid=' + openid,
       headers: {
         'Content-Type': 'application/json'
       },

@@ -125,8 +125,27 @@ Page({
     if (box_mac == '' || box_mac == 'undefined') {
       app.scanQrcode(pageid);
     } else {
-      wx.navigateTo({
+      /*wx.navigateTo({
         url: '/pages/forscreen/forvideo/index?box_mac=' + box_mac + '&openid=' + openid + '&is_open_simple=' + is_open_simple,
+      })*/
+      utils.PostRequest(api_v_url + '/index/isHaveCallBox', {
+        openid: user_info.openid
+      }, (data, headers, cookies, errMsg, statusCode) => {
+        var is_have = data.result.is_have;
+        if(is_have==1){
+          var is_compress = data.result.is_compress;
+          wx.navigateTo({
+            url: '/pages/forscreen/forvideo/index?box_mac=' + box_mac + '&openid=' + openid + '&is_open_simple=' + is_open_simple+'&is_compress='+is_compress,
+          })
+        }else {
+          wx.reLaunch({
+            url: '/pages/index/index',
+          })
+        }
+      },function(e){
+        wx.reLaunch({
+          url: '/pages/index/index',
+        })
       })
     }
 

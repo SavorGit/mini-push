@@ -150,7 +150,11 @@ App({
     var mobile_model = that.globalData.mobile_model;
     var res_id = forscreen_id;
     var forscreen_id = (new Date()).valueOf();
-
+    if(action==8){
+      var title = '重投成功，电视即将播放';
+    }else {
+      var title = '点播成功,电视即将开始播放';
+    }
     if (res_type == 1) {
       
       //图集
@@ -209,8 +213,9 @@ App({
           msg: msg
         },
         success: function (result) {
+          
           wx.showToast({
-            title: '点播成功,电视即将开始播放',
+            title: title,
             icon: 'none',
             duration: 5000
           });
@@ -269,11 +274,10 @@ App({
             msg: '{ "action":'+netty_action+', "url": "' + url+ '", "filename":"' + pubdetail[i]['filename'] + '","openid":"' + openid + '","resource_type":2,"video_id":"' + pubdetail[i]['res_id'] + '","avatarUrl":"' + avatarUrl + '","nickName":"' + nickName + '","forscreen_id":"' + forscreen_id + '","resource_size":"'+pubdetail[i]['resource_size']+'"}',
           },
           success: function (result) {
-
             wx.showToast({
-              title: '点播成功,电视即将开始播放',
+              title: title,
               icon: 'none',
-              duration: 2000
+              duration: 5000
             });
           },
           fail: function (res) {
@@ -1207,11 +1211,11 @@ App({
     rest_appid: 'wxc395eb4b44563af1',
     jijian_appid: 'wx7883a4327329a67c',
     jd_appid: 'wx91d27dbf599dff74',
-    api_url: 'https://dev-mobile.littlehotspot.com',
-    api_v_url:'https://dev-mobile.littlehotspot.com/Smallapp46',
-    oss_upload_url: 'https://dev-image.littlehotspot.com',
-    netty_url: 'https://dev-netty-push.littlehotspot.com',
-    oss_url: 'https://dev-oss.littlehotspot.com',
+    api_url: 'https://mobile.littlehotspot.com',
+    api_v_url:'https://mobile.littlehotspot.com/Smallapp46',
+    oss_upload_url: 'https://image.littlehotspot.com',
+    netty_url: 'https://netty-push.littlehotspot.com',
+    oss_url: 'https://oss.littlehotspot.com',
     oss_bucket: 'redian-produce',
     oss_access_key_id:'LTAI4SFjj1AsowpVFZNXOBCVqRHDs',
     link_type: 0,  //1:外网投屏  2：直连投屏

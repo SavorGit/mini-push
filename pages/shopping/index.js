@@ -108,7 +108,7 @@ Page({
   },
   isHaveCallBox: function (openid) {
     var that = this;
-    utils.PostRequest(api_url + '/Smallapp4/index/isHaveCallBox?openid=' + openid, {}, (data, headers, cookies, errMsg, statusCode) => {
+    utils.PostRequest(api_v_url + '/index/isHaveCallBox?openid=' + openid, {}, (data, headers, cookies, errMsg, statusCode) => {
       var is_have = data.result.is_have;
       if (is_have == 1) {
         that.setData({

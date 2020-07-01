@@ -62,6 +62,7 @@ Page({
     showGuidedMaskBeforLaunch: false,
     showGuidedMaskAfterLaunch: false,
     res_head_desc: '视频',
+    compressed:true,  //默认压缩
   },
 
   /**
@@ -76,21 +77,32 @@ Page({
     var avatarUrl = user_info.avatarUrl;
     var nickName = user_info.nickName;
     var is_open_simple = e.is_open_simple;
-
-
+    if(typeof(e.is_compress)!='undefined'){
+      var is_compress = e.is_compress
+    }else {
+      var is_compress = 1
+    }
+    if(is_compress==1){
+      var compressed = true;
+    }else if(is_compress==0){
+      var compressed = false;
+    }
+    
     that.setData({
       openid: openid,
       box_mac: box_mac,
       upload_vedio_temp: '',
       avatarUrl: avatarUrl,
       nickName: nickName,
-      is_open_simple: is_open_simple
+      is_open_simple: is_open_simple,
+      is_compress:is_compress
     })
 
     wx.chooseVideo({
       sourceType: ['album', 'camera'],
       maxDuration: 60,
       camera: 'back',
+      compressed:compressed,
       success: function(res) {
         // console.log(res);
         that.setData({
@@ -480,6 +492,13 @@ Page({
   //重新选择视频
   chooseVedio(e) {
     var that = this;
+
+    var is_compress = that.data.is_compress;
+    if(is_compress==1){
+      var compressed = true;
+    }else if(is_compress==0){
+      var compressed = false;
+    }
     try {
       mta.Event.stat('LaunchVideoWithNet_AfterLaunch_RechooseVideo', {
         'openid': that.data.openid
@@ -514,6 +533,7 @@ Page({
       sourceType: ['album', 'camera'],
       maxDuration: 60,
       camera: 'back',
+      compressed:compressed,
       success: function(res) {
 
         that.setData({

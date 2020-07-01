@@ -3,6 +3,7 @@ const utils = require('../../utils/util.js')
 var mta = require('../../utils/mta_analysis.js')
 const app = getApp()
 var api_url = app.globalData.api_url;
+var api_v_url = app.globalData.api_v_url;
 var box_mac;
 var openid;
 var goods_info;
@@ -56,7 +57,7 @@ Page({
       uid: uid,
       is_header: is_header
     })
-    utils.PostRequest(api_url + '/Smallapp4/index/isHaveCallBox', {
+    utils.PostRequest(api_v_url + '/index/isHaveCallBox', {
       openid: openid
     }, (data, headers, cookies, errMsg, statusCode) => {
       hotel_info: data.result;
