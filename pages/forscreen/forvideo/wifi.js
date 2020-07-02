@@ -126,11 +126,6 @@ Page({
           utils.tryCatch(mta.Event.stat('wifiVideoUploadWastTime', { 'uploadtime': diff_time }));
         } else if (res.code == 1001) {
 
-          var end_time = (new Date()).valueOf(); 
-          var diff_time = end_time - start_time;
-          utils.tryCatch(mta.Event.stat('wifiVideoUploadWastTime', { 'uploadtime': diff_time }));
-        } else if (res.code == 1001) {
-
           that.setData({
             hiddens: true,
             is_forscreen: 1,
@@ -143,6 +138,12 @@ Page({
             }
           })
           utils.tryCatch(mta.Event.stat('wifiVideoForscreen', { 'status': 0 }));
+        }else if(res.code==-1){
+          that.setData({
+            hiddens: true,
+            is_forscreen: 1,
+          })
+          app.showToast('系统繁忙，请重试');
         }
 
       },
@@ -196,6 +197,8 @@ Page({
             }
           })
           utils.tryCatch(mta.Event.stat('wifiVideoExitForscreen', { 'status': 0 }));
+        } else if(res.data.code==-1){
+          app.showToast('系统繁忙，请重试');
         }
       },
       fail: function({
@@ -292,21 +295,9 @@ Page({
       filePath: vedio_url,
       name: 'fileUpload',
       success: function(res) {
-        //var info_rt = JSON.parse(res.data);
-        if (res.data.code == 10000) {
-          that.setData({
-            is_upload: 1,
-            vedio_url: vedio_url,
-            filename: filename,
-            resouce_size: resouce_size,
-            duration: duration,
-            intranet_ip: intranet_ip,
-            hiddens: true,
-          })
-          var end_time = (new Date()).valueOf();
-          var diff_time = end_time - start_time;
-          utils.tryCatch(mta.Event.stat('wifiVideoUploadWastTime', { 'uploadtime': diff_time }));
-        } else if (res.data.code == 1001) {
+        var info_rt = JSON.parse(res.data);
+        
+        if (info_rt.code == 1001) {
 
           that.setData({
             hiddens: true,
@@ -318,6 +309,8 @@ Page({
               'type': 3
             }
           })
+        }else if(info_rt.code==-1){
+          app.showToast('系统繁忙，请重试');
         }
 
       },

@@ -312,6 +312,8 @@ Page({
               'type': 3
             }
           })
+        }else if(info_rt.code==-1){
+          app.showToast('系统繁忙,请重试');
         }
       },
       fail: function({
@@ -362,6 +364,8 @@ Page({
             }
           })
           utils.tryCatch(mta.Event.stat('wifiPicExitForscreen', { 'status': 0 }));
+        }else if(res.data.code ==-1){
+          app.showToast('系统繁忙,请重试');
         }
 
       },
