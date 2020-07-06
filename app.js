@@ -1027,11 +1027,14 @@ App({
 
                 var err_info = JSON.stringify(res);
                 wx.request({
-                  url: aps.globalData.api_url + '/Smallappsimple/Index/recordWifiErr',
+                  url: aps.globalData.api_v_url + '/datalog/recordWifiErr',
                   data: {
                     err_info: err_info,
                     box_mac: hotel_info.box_mac,
-                    openid:aps.globalData.openid
+                    openid:aps.globalData.openid,
+                    mobile_brand:aps.globalData.sys_info.brand,
+                    mobile_model:aps.globalData.sys_info.model,
+                    platform:aps.globalData.sys_info.platform
                   }
                 })
                 wx.stopWifi({
@@ -1152,11 +1155,14 @@ App({
 
         var err_info = JSON.stringify(res);
         wx.request({
-          url: aps.globalData.api_url + '/Smallappsimple/Index/recordWifiErr',
+          url: aps.globalData.api_v_url + '/datalog/recordWifiErr',
           data: {
             err_info: err_info,
             box_mac: box_mac,
-            openid:aps.globalData.openid
+            openid:aps.globalData.openid,
+            mobile_brand:aps.globalData.sys_info.brand,
+            mobile_model:aps.globalData.sys_info.model,
+            platform:aps.globalData.sys_info.platform,
           }
         })
       }, complete: function (res) {
