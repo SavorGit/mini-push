@@ -44,7 +44,7 @@ App({
           media_url_str += ']';
 
           wx.request({
-            url: 'http://' + hotel_info.intranet_ip + ":8080/h5/discover_ondemand?deviceId=" + user_info.openid + "&box_mac=" + box_mac + "&web=true&media_id=" + forscreen_id + "&resource_type=" + res_type + "&forscreen_id=" + timestamp + "&media_url=" + media_url_str + '&avatarUrl=' + user_info.avatarUrl + "&nickName=" + user_info.nickName,
+            url: 'http://' + hotel_info.intranet_ip + ":8080/h5/discover_ondemand?deviceId=" + user_info.openid + "&box_mac=" + box_mac + "&web=true&media_id=" + forscreen_id + "&resource_type=" + res_type + "&forscreen_id=" + timestamp + "&media_url=" + media_url_str + '&avatarUrl=' + user_info.avatarUrl + "&nickName=" + user_info.nickName+'&serial_number='+that.globalData.serial_number,
             success: function (res) {
               if (res.data.code == 10000) {
                 wx.showToast({
@@ -74,7 +74,7 @@ App({
           for (var i = 0; i < res_len; i++) {
 
             wx.request({
-              url: "http://" + hotel_info.intranet_ip + ":8080/h5/goods_ondemand?deviceId=" + user_info.openid + "&box_mac=" + box_mac + "&web=true&media_id=" + forscreen_id + "&forscreen_id=" + timestamp + "&media_name=" + pubdetail[0]['filename'] + "&media_url=" + pubdetail[0]['res_url'] + '&avatarUrl=' + user_info.avatarUrl + "&nickName=" + user_info.nickName,
+              url: "http://" + hotel_info.intranet_ip + ":8080/h5/goods_ondemand?deviceId=" + user_info.openid + "&box_mac=" + box_mac + "&web=true&media_id=" + forscreen_id + "&forscreen_id=" + timestamp + "&media_name=" + pubdetail[0]['filename'] + "&media_url=" + pubdetail[0]['res_url'] + '&avatarUrl=' + user_info.avatarUrl + "&nickName=" + user_info.nickName+'&serial_number='+that.globalData.serial_number,
               success: function (res) {
                 if (res.data.code == 10000) {
                   wx.showToast({
@@ -183,7 +183,8 @@ App({
             resource_size: pubdetail[i]['resource_size'],
             is_pub_hotelinfo: 0,
             is_share: 0,
-            resource_type:1
+            resource_type:1,
+            serial_number:that.globalData.serial_number
           },success: function (ret) {
 
           }
@@ -199,6 +200,7 @@ App({
         res_obj [i]= {url: url ,filename: filename ,order: order ,img_id:res_id,resource_size:resource_size };
       }
       //res_obj = JSON.stringify(res_obj)
+      
       
       msg.img_list = res_obj
       msg = JSON.stringify(msg)
@@ -252,7 +254,8 @@ App({
             is_share: 0,
             forscreen_id: forscreen_id,
             duration: pubdetail[i]['duration'],
-            resource_type:2
+            resource_type:2,
+            serial_number:that.globalData.serial_number
           },
           success: function (ret) { }
         });
@@ -421,7 +424,8 @@ App({
                             action: 9,
                             mobile_brand: mobile_brand,
                             mobile_model: mobile_model,
-                            imgs: '[]'
+                            imgs: '[]',
+                            serial_number:that.globalData.serial_number
                           },
 
                         })
@@ -461,7 +465,8 @@ App({
                       action: 9,
                       mobile_brand: mobile_brand,
                       mobile_model: mobile_model,
-                      imgs: '[]'
+                      imgs: '[]',
+                      serial_number:that.globalData.serial_number
                     },
                   })
                 }
@@ -471,7 +476,7 @@ App({
         })
       } else {
         wx.request({
-          url: "http://" + hotel_info.intranet_ip + ":8080/showMiniProgramCode?deviceId=" + openid + "&box_mac=" + box_mac + "&web=true",
+          url: "http://" + hotel_info.intranet_ip + ":8080/showMiniProgramCode?deviceId=" + openid + "&box_mac=" + box_mac + "&web=true&serial_number="+that.globalData.serial_number,
           success: function (res) {
             if (res.data.code == 10000) {
               wx.showToast({
@@ -536,7 +541,7 @@ App({
         change_type_name = '增大音量'
       }
       wx.request({
-        url: "http://" + hotel_info.intranet_ip + ":8080/volume?action=" + change_type + "&deviceId=" + openid + "&box_mac=" + box_mac + "&projectId=" + timestamp + "&web=true",
+        url: "http://" + hotel_info.intranet_ip + ":8080/volume?action=" + change_type + "&deviceId=" + openid + "&box_mac=" + box_mac + "&projectId=" + timestamp + "&web=true&serial_number="+that.globalData.serial_number,
         success: function (res) {
           if (res.data.code == 10000) {
             wx.showToast({
@@ -590,7 +595,7 @@ App({
     } else if (link_type == 2) {
       var timestamp = (new Date()).valueOf();
       wx.request({
-        url: "http://" + hotel_info.intranet_ip + ":8080/switchProgram?action=" + change_type + "&deviceId=" + openid + "&box_mac=" + box_mac + "&projectId=" + timestamp + "&web=true",
+        url: "http://" + hotel_info.intranet_ip + ":8080/switchProgram?action=" + change_type + "&deviceId=" + openid + "&box_mac=" + box_mac + "&projectId=" + timestamp + "&web=true&serial_number="+that.globalData.serial_number,
         success: function (res) {
 
           if (res.data.code == 10000) {
@@ -682,6 +687,8 @@ App({
       }
     }
     this.globalData.oss_access_key_id = oss_access_key_id
+    
+    
     mta.App.init({
       "appID": "500700115",
       "eventID": "500704113",
@@ -739,10 +746,13 @@ App({
             'content-type': 'application/json'
           },
           success: function (res) {
+            
             that.globalData.openid = res.data.result.openid;
             that.globalData.session_key = res.data.result.session_key;
             if (that.openidCallback) {
-
+              if(that.globalData.serial_number==''){
+                that.globalData.serial_number = that.globalData.not_link_box_pre+res.data.result.openid+'_'+(new Date()).valueOf();
+              }
               that.openidCallback(res.data.result.openid);
             }
           }
@@ -1217,11 +1227,11 @@ App({
     rest_appid: 'wxc395eb4b44563af1',
     jijian_appid: 'wx7883a4327329a67c',
     jd_appid: 'wx91d27dbf599dff74',
-    api_url: 'https://dev-mobile.littlehotspot.com',
-    api_v_url:'https://dev-mobile.littlehotspot.com/Smallapp46',
-    oss_upload_url: 'https://dev-image.littlehotspot.com',
-    netty_url: 'https://dev-netty-push.littlehotspot.com',
-    oss_url: 'https://dev-oss.littlehotspot.com',
+    api_url: 'https://mobile.littlehotspot.com',
+    api_v_url:'https://mobile.littlehotspot.com/Smallapp46',
+    oss_upload_url: 'https://image.littlehotspot.com',
+    netty_url: 'https://netty-push.littlehotspot.com',
+    oss_url: 'https://oss.littlehotspot.com',
     oss_bucket: 'redian-produce',
     oss_access_key_id:'LTAI4SFjj1AsowpVFZNXOBCVqRHDs',
     link_type: 0,  //1:外网投屏  2：直连投屏
@@ -1235,5 +1245,8 @@ App({
     collect_list: [],     //我的收藏 
 
     hotels: [],
+    not_link_box_pre:'N_',
+    have_link_box_pre:'Y_',
+    serial_number:''
   }
 })
