@@ -268,6 +268,7 @@ Page({
 
                 imgs: '[]',
                 resource_id: order_id,
+                serial_number:app.globalData.serial_number
 
               },
             })

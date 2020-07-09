@@ -421,7 +421,8 @@ Page({
               is_pub_hotelinfo: is_pub_hotelinfo,
               is_share: is_share,
               resource_type: 1,
-              res_nums: img_len
+              res_nums: img_len,
+              serial_number:app.globalData.serial_number
             },
             success: function (ret) {
               wx.request({
@@ -678,7 +679,8 @@ Page({
             resource_type: 1,
             mobile_brand: mobile_brand,
             mobile_model: mobile_model,
-            imgs: '["' + forscreen_img + '"]'
+            imgs: '["' + forscreen_img + '"]',
+            serial_number : app.globalData.serial_number
           },
         });
         utils.tryCatch(mta.Event.stat("switchpic", {}))

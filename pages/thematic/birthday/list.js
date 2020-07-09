@@ -223,7 +223,8 @@ Page({
                           mobile_brand: mobile_brand,
                           mobile_model: mobile_model,
                           forscreen_char: forscreen_char,
-                          imgs: '["media/resource/' + filename + '"]'
+                          imgs: '["media/resource/' + filename + '"]',
+                          serial_number:app.globalData.serial_number
                         },
                       });
                     },
@@ -270,7 +271,8 @@ Page({
                     mobile_brand: mobile_brand,
                     mobile_model: mobile_model,
                     forscreen_char: forscreen_char,
-                    imgs: '["media/resource/' + filename + '"]'
+                    imgs: '["media/resource/' + filename + '"]',
+                    serial_number:app.globalData.serial_number
                   },
                 });
               },

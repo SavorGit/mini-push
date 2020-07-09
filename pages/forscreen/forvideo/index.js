@@ -220,7 +220,7 @@ Page({
       load_fresh_char: '亲^_^投屏中,请稍后...',
       hiddens: false,
       is_btn_disabel: true,
-      is_open_control: true,
+      //is_open_control: true,
       is_share: is_share,
       is_assist: is_assist
     })
@@ -386,7 +386,8 @@ Page({
                   is_share: is_share,
                   forscreen_id: timestamp,
                   duration: duration,
-                  res_nums: 1
+                  res_nums: 1,
+                  serial_number:app.globalData.serial_number
                 },
                 success: function(ret) {
                   wx.request({
@@ -633,181 +634,7 @@ Page({
 
 
   }, //是否公开显示餐厅信息结束
-  //重播
-  replayVideo: function(e) {
-    var that = this;
-    var user_info = wx.getStorageSync("savor_user_info");
-
-    var box_mac = e.target.dataset.box_mac;
-    var replay_video_url = e.target.dataset.replay_video_url;
-    var openid = e.target.dataset.openid;
-    var video_arr = replay_video_url.split('/');
-    var filename = video_arr[2];
-    var tmp_arr = filename.split('.');
-    var video_id = tmp_arr[0];
-    var timestamp = (new Date()).valueOf();
-    var mobile_brand = app.globalData.mobile_brand;
-    var mobile_model = app.globalData.mobile_model;
-    var duration = 10;
-
-    wx.request({
-      url: api_url + '/smallapp21/User/isForscreenIng',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      method: "POST",
-      data: {
-        box_mac: box_mac
-      },
-      success: function(res) {
-        var is_forscreen = res.data.result.is_forscreen;
-        if (is_forscreen == 1) {
-          wx.showModal({
-            title: '确认要打断投屏',
-            content: '当前电视正在进行投屏,继续投屏有可能打断当前投屏中的内容.',
-            success: function(res) {
-              if (res.confirm) {
-                wx.request({
-                  url: api_url + '/Netty/Index/pushnetty',
-                  headers: {
-                    'Content-Type': 'application/json'
-                  },
-                  method: "POST",
-                  data: {
-                    box_mac: box_mac,
-                    msg: '{ "action":2, "url":"' + replay_video_url + '", "filename":"' + filename + '","openid":"' + openid + '","resource_type":2,"video_id":"' + video_id + '","avatarUrl":"' + user_info.avatarUrl + '","nickName":"' + user_info.nickName + '","forscreen_id":' + timestamp + '}',
-                  },
-                  success: function(result) {
-                    if (result.data.code != 10000) {
-                      wx.showToast({
-                        title: '投屏失败',
-                        icon: 'none',
-                        duration: 2000,
-                      })
-                    }
-                    that.setData({
-                      is_replay_disabel: true
-                    })
-                    var djs = duration;
-                    that.setData({
-                      djs: djs
-                    })
-                    var timer8_0 = setInterval(function() {
-                      djs -= 1;
-                      that.setData({
-                        djs: djs
-                      });
-                      if (djs == 0) {
-                        that.setData({
-                          is_replay_disabel: false,
-                        })
-                        clearInterval(timer8_0);
-                      }
-
-                    }, 1000);
-                    //记录
-                    wx.request({
-                      url: api_url + '/Smallapp21/index/recordForScreenPics',
-                      header: {
-                        'content-type': 'application/json'
-                      },
-                      data: {
-                        openid: openid,
-                        box_mac: box_mac,
-                        action: 8,
-                        resource_type: 2,
-                        mobile_brand: mobile_brand,
-                        mobile_model: mobile_model,
-                        forscreen_char: '',
-                        imgs: '["' + replay_video_url + '"]',
-                        resource_id: video_id,
-                        res_sup_time: 0,
-                        res_eup_time: 0,
-                        resource_size: 0,
-                        is_pub_hotelinfo: 0,
-                        is_share: 0,
-                        forscreen_id: timestamp,
-
-                      },
-                    });
-                  },
-                });
-              } else {
-
-              }
-            }
-          })
-        } else {
-          wx.request({
-            url: api_url + '/Netty/Index/pushnetty',
-            headers: {
-              'Content-Type': 'application/json'
-            },
-            method: "POST",
-            data: {
-              box_mac: box_mac,
-              msg: '{ "action":2, "url":"' + replay_video_url + '", "filename":"' + filename + '","openid":"' + openid + '","resource_type":2,"video_id":"' + video_id + '","avatarUrl":"' + user_info.avatarUrl + '","nickName":"' + user_info.nickName + '"}',
-            },
-            success: function(result) {
-              if (result.data.code != 10000) {
-                wx.showToast({
-                  title: '投屏失败',
-                  icon: 'none',
-                  duration: 2000,
-                })
-              }
-              that.setData({
-                is_replay_disabel: true
-              })
-              var djs = duration;
-              that.setData({
-                djs: djs
-              })
-              var timer8_0 = setInterval(function() {
-                djs -= 1;
-                that.setData({
-                  djs: djs
-                });
-                if (djs == 0) {
-                  that.setData({
-                    is_replay_disabel: false,
-                  })
-                  clearInterval(timer8_0);
-                }
-
-              }, 1000);
-              //记录
-              wx.request({
-                url: api_url + '/Smallapp21/index/recordForScreenPics',
-                header: {
-                  'content-type': 'application/json'
-                },
-                data: {
-                  openid: openid,
-                  box_mac: box_mac,
-                  action: 8,
-                  resource_type: 2,
-                  mobile_brand: mobile_brand,
-                  mobile_model: mobile_model,
-                  forscreen_char: '',
-                  imgs: '["' + replay_video_url + '"]',
-                  resource_id: video_id,
-                  res_sup_time: 0,
-                  res_eup_time: 0,
-                  resource_size: 0,
-                  is_pub_hotelinfo: 0,
-                  is_share: 0,
-                  forscreen_id: timestamp,
-
-                },
-              });
-            },
-          });
-        }
-      }
-    })
-
-  },
+  
   previewImage: function(e) {
     var current = e.target.dataset.src;
     var pkey = e.target.dataset.pkey;
@@ -823,11 +650,6 @@ Page({
     })
   },
   replayHistory: function(e) {
-   
-    
-
-
-
     var that = this;
     var box_mac = e.target.dataset.box_mac;
     var action = 8; //重新播放

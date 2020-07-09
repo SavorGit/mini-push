@@ -350,7 +350,8 @@ Page({
               mobile_brand: mobile_brand,
               mobile_model: mobile_model,
               imgs: '["' + forscreen_img + '"]',
-              resource_id:timestamp
+              resource_id:timestamp,
+              serial_number:app.globalData.serial_number
             },
           });
         },
@@ -447,7 +448,8 @@ Page({
               mobile_brand: mobile_brand,
               mobile_model: mobile_model,
               imgs: '["' + forscreen_img + '"]',
-              resource_id:timestamp
+              resource_id:timestamp,
+              serial_number:app.globalData.serial_number
             },
           });
         },
@@ -504,7 +506,8 @@ Page({
             mobile_brand: mobile_brand,
             mobile_model: mobile_model,
             imgs: '["' + forscreen_img + '"]',
-            resource_id:timestamp
+            resource_id:timestamp,
+            serial_number:app.globalData.serial_number
           },
         });
       },

@@ -124,6 +124,7 @@ Page({
                         },
                         success: function (res) {
                           if (res.data.code == 10000) {
+                            app.globalData.serial_number = app.globalData.have_link_box_pre+openid+'_'+(new Date()).valueOf();
                             var order_status = res.data.result.status;
                             if (order_status == 4 || order_status == 0) {
                               wx.redirectTo({
@@ -281,6 +282,7 @@ Page({
                             },
                             success: function (res) {
                               if (res.data.code == 10000) {
+                                app.globalData.serial_number = app.globalData.have_link_box_pre+openid+'_'+(new Date()).valueOf();
                                 var order_status = res.data.result.status;
                                 if (order_status == 4 || order_status == 0) {
                                   wx.redirectTo({
@@ -475,6 +477,7 @@ Page({
                   },
                   success: function (res) {
                     if (res.data.code == 10000) {
+                      app.globalData.serial_number = app.globalData.have_link_box_pre+openid+'_'+(new Date()).valueOf();
                       var order_status = res.data.result.status;
                       if (order_status == 4 || order_status == 0) {
                         wx.redirectTo({

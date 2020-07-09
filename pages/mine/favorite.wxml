@@ -19,7 +19,7 @@
               <label>{{bean.nickName}}</label>
             </view>
             <view wx:if="{{bean.type==1 || bean.type==3}}" class='operation flex-row-center-flex_end'>
-              <button bindtap='boxShowProgram' data-name="" data-filename='{{bean.list.filename}}' data-vediourl="{{bean.list.res_url}}" data-boxmac="{{box_mac}}" data-openid="{{openid}}" class='theme-button'>电视播放</button>
+              <button bindtap='boxShowProgram' data-res_id="{{bean.list.id}}" data-name="" data-filename='{{bean.list.filename}}' data-vediourl="{{bean.list.res_url}}" data-boxmac="{{box_mac}}" data-openid="{{openid}}" class='theme-button'>电视播放</button>
             </view>
             <view wx:if="{{bean.type==2}}" class='operation flex-row-center-flex_end'>
               <button bindtap='boxShowForscreen' data-res_type="{{bean.res_type}}" data-res_nums="{{bean.res_nums}}" data-pubdetail="{{bean.list}}" data-boxmac="{{box_mac}}" data-openid="{{openid}}" data-forscreen_id="{{bean.res_id}}" class='theme-button'>电视播放</button>
