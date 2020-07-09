@@ -14,6 +14,7 @@ var page = 1;
 var res_size;
 var forscreen_history_list;
 var api_url = app.globalData.api_url;
+var api_v_url = app.globalData.api_v_url;
 var oss_upload_url = app.globalData.oss_upload_url;
 var oss_url = app.globalData.oss_url;
 var pubdetail = [];
@@ -364,7 +365,7 @@ Page({
                 upload_vedio_cover: oss_url + '/forscreen/resource/' + timestamp + postf_t + '?x-oss-process=video/snapshot,t_2000,f_jpg,w_450,m_fast',
               })
               wx.request({
-                url: api_url + '/Smallapp21/index/recordForScreenPics',
+                url: api_v_url + '/index/recordForScreenPics',
                 header: {
                   'content-type': 'application/json'
                 },

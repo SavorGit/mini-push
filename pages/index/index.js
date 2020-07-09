@@ -194,6 +194,7 @@ Page({
         mask: true
       })
       app.openidCallback = openid => {
+        console.log(app.globalData.serial_number)
         if (openid != '') {
           that.setData({
             openid: openid

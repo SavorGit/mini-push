@@ -18,6 +18,7 @@ var pic_show_cur = [];
 var page = 1;
 var forscreen_history_list;
 var api_url = app.globalData.api_url;
+var api_v_url = app.globalData.api_v_url;
 var oss_upload_url = app.globalData.oss_upload_url;
 var pubdetail = [];
 var netty_push_info ;
@@ -400,7 +401,7 @@ Page({
           
           
           wx.request({
-            url: api_url + '/Smallapp21/index/recordForScreenPics',
+            url: api_v_url + '/index/recordForScreenPics',
             header: {
               'content-type': 'application/json'
             },
@@ -667,7 +668,7 @@ Page({
           })
         }
         wx.request({
-          url: api_url+'/Smallapp21/index/recordForScreenPics',
+          url: api_v_url+'/index/recordForScreenPics',
           header: {
             'content-type': 'application/json'
           },

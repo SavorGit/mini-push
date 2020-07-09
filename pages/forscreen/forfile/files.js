@@ -2,6 +2,7 @@ const util = require('../../../utils/util.js')
 var mta = require('../../../utils/mta_analysis.js')
 const app = getApp()
 var api_url = app.globalData.api_url;
+var api_v_url = app.globalData.api_v_url;
 var openid;
 var box_mac;
 var is_open_simple;
@@ -313,7 +314,7 @@ Page({
         },
         success: function (result) {
           wx.request({
-            url: api_url + '/Smallapp21/index/recordForScreenPics',
+            url: api_v_url + '/index/recordForScreenPics',
             header: {
               'content-type': 'application/json'
             },
@@ -414,7 +415,7 @@ Page({
         },
         success: function (result) {
           wx.request({
-            url: api_url + '/Smallapp21/index/recordForScreenPics',
+            url: api_v_url + '/index/recordForScreenPics',
             header: {
               'content-type': 'application/json'
             },
@@ -471,7 +472,7 @@ Page({
       },
       success: function (result) {
         wx.request({
-          url: api_url + '/Smallapp21/index/recordForScreenPics',
+          url: api_v_url + '/index/recordForScreenPics',
           header: {
             'content-type': 'application/json'
           },
@@ -771,7 +772,7 @@ Page({
         },
         success: function (result) {
           wx.request({
-            url: api_url + '/Smallapp21/index/recordForScreenPics',
+            url: api_v_url + '/index/recordForScreenPics',
             header: {
               'content-type': 'application/json'
             },

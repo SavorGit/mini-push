@@ -211,7 +211,7 @@ Page({
                         duration: 5000
                       });
                       wx.request({
-                        url: api_url + '/Smallapp/index/recordForScreenPics',
+                        url: api_v_url + '/index/recordForScreenPics',
                         header: {
                           'content-type': 'application/json'
                         },
@@ -259,7 +259,7 @@ Page({
                   duration: 5000
                 });
                 wx.request({
-                  url: api_url + '/Smallapp/index/recordForScreenPics',
+                  url: api_v_url + '/index/recordForScreenPics',
                   header: {
                     'content-type': 'application/json'
                   },

@@ -254,7 +254,7 @@ Page({
 
             //记录发红包日志
             wx.request({
-              url: api_url + '/Smallapp21/index/recordForScreenPics',
+              url: api_v_url + '/index/recordForScreenPics',
               header: {
                 'content-type': 'application/json'
               },
