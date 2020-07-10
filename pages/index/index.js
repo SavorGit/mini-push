@@ -277,6 +277,11 @@ Page({
             utils.PostRequest(api_v_url + '/index/isHaveCallBox?openid=' + openid, {}, (data, headers, cookies, errMsg, statusCode) => {
               var is_have = data.result.is_have;
               if (is_have == 1) {
+                var serial_number = app.globalData.serial_number;
+                var head_serial_number = serial_number.substring(0,2);
+                if(head_serial_number==app.globalData.not_link_box_pre){
+                  app.globalData.serial_number = app.globalData.have_link_box_pre+openid+'_'+(new Date()).valueOf();
+                }
                 var box_id = data.result.box_id;
                 is_view_eval_waiter(box_id);
                 app.linkHotelWifi(data.result, that);

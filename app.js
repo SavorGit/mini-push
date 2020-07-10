@@ -164,7 +164,7 @@ App({
       for (var i = 0; i < pubdetail.length; i++) {
         var order = i + 1;
         wx.request({ //start
-          url: that.globalData.api_url + '/Smallapp/index/recordForScreenPics',
+          url: that.globalData.api_v_url + '/index/recordForScreenPics',
           header: {
             'content-type': 'application/json'
           },
@@ -234,7 +234,7 @@ App({
     } else { //视频投屏
       for (var i = 0; i < res_len; i++) {
         wx.request({
-          url: that.globalData.api_url + '/Smallapp/index/recordForScreenPics',
+          url: that.globalData.api_v_url + '/index/recordForScreenPics',
           header: {
             'content-type': 'application/json'
           },
