@@ -966,14 +966,12 @@ App({
                     })
                     wx.hideLoading()
                   } else {//链接的不是本包间wifi
-
                     aps.connectWifi(wifi_name, wifi_mac, use_wifi_password, box_mac, that);
-
                   }
                 } else {
                   //当前打开wifi 但是没有链接任何wifi
-
                   aps.connectWifi(wifi_name, wifi_mac, use_wifi_password, box_mac, that);
+                  
                 }
                 wx.hideLoading()
               }, fail: function (res) {
@@ -1034,7 +1032,9 @@ App({
                     openid:aps.globalData.openid,
                     mobile_brand:aps.globalData.sys_info.brand,
                     mobile_model:aps.globalData.sys_info.model,
-                    platform:aps.globalData.sys_info.platform
+                    platform:aps.globalData.sys_info.platform,
+                    version:aps.globalData.sys_info.version,
+                    system:aps.globalData.sys_info.system
                   }
                 })
                 wx.stopWifi({
@@ -1163,6 +1163,8 @@ App({
             mobile_brand:aps.globalData.sys_info.brand,
             mobile_model:aps.globalData.sys_info.model,
             platform:aps.globalData.sys_info.platform,
+            version:aps.globalData.sys_info.version,
+            system:aps.globalData.sys_info.system
           }
         })
       }, complete: function (res) {
