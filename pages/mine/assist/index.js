@@ -256,7 +256,7 @@ Page({
               }
             })
             wx.request({
-              url: api_url + '/Smallapp/index/recordForScreenPics',
+              url: api_v_url + '/index/recordForScreenPics',
               header: {
                 'content-type': 'application/json'
               },
@@ -268,7 +268,8 @@ Page({
                 mobile_brand: mobile_brand,
                 mobile_model: mobile_model,
                 imgs: '["' + forscreen_url+'"]',
-                resource_type: resource_type
+                resource_type: resource_type,
+                serial_number:app.globalData.serial_number
               }
               
             })
