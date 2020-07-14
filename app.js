@@ -957,7 +957,6 @@ App({
           success: function (res) {
             wx.getConnectedWifi({
               success: function (res) {
-                console.log(res)
                 if (res.errMsg == 'getConnectedWifi:ok') {
                   if (res.wifi.SSID == wifi_name) {//链接的是本包间wifi
                     wx.stopWifi({
@@ -988,10 +987,7 @@ App({
                 }
                 wx.hideLoading()
               }, fail: function (res) {
-                if(res.errMsg=='getConnectedWifi:fail:currentWifi is null'){
-                  aps.connectWifi(wifi_name, wifi_mac, use_wifi_password, box_mac, that);
-                }else {
-                  wx.hideLoading()
+                wx.hideLoading()
                 that.setData({
                   wifi_hidden: true,
                 })
@@ -1008,6 +1004,25 @@ App({
                     wifiErr: { 'is_open': 1, 'msg': '亲，使用此小程序前需要链接包间wifi,连上wifi投屏更快哦！', 'confirm': '重试', 'calcle': '', 'type': 3 }
                   })
                 }
+                /*else if (res.errMsg == 'getConnectedWifi:fail:currentWifi is null') {
+                  that.setData({
+                    wifiErr: { 'is_open': 1, 'msg': '亲，使用此小程序前需要链接包间wifi,链接wifi投屏更快哦！', 'confirm': '重试', 'calcle': '', 'type': 3 }
+                  })
+                }
+                else if (res.errMsg == 'getConnectedWifi:fail no wifi is connected.') {
+                  that.setData({
+                    wifiErr: { 'is_open': 1, 'msg': '亲，使用此小程序前需要打开您手机的wifi,链接wifi投屏更快哦！', 'confirm': '确定', 'calcle': '取消', 'type': 1 }
+                  })
+                } else if (res.errMsg == 'getConnectedWifi:fail:not invoke startWifi') {
+
+                } else if (res.errMsg == 'connectWifi:fail:duplicated request') {
+                  that.setData({
+                    wifiErr: { 'is_open': 1, 'msg': '亲，使用此小程序前需要打开您手机的wifi,链接wifi投屏更快哦！', 'confirm': '确定', 'calcle': '取消', 'type': 1 }
+                  })
+                  wx.showToast({
+                    title: 'wifi链接失败',
+                  })
+                }*/
                 else {
                   if (hotel_info.wifi_password == '') {
                     var us_wifi_password = '空';
@@ -1036,8 +1051,6 @@ App({
 
                 })
                 mta.Event.stat('linkWifiErro', { 'wifierrocode': res.errCode, 'wifierromsg': res.errMsg })
-                }
-                
               },
             })
           }, fail: function (res) {
