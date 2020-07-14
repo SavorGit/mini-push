@@ -188,8 +188,19 @@ Page({
                   'confirm': '重试',
                   'calcle': '',
                   'type': 3
-                }
+                },
+                is_btn_disabel:false
               })
+            }else {
+              that.setData({
+                up_imgs: upimgs,
+                filename_arr: filename_arr,
+                is_upload: 1,
+                forscreen_char: forscreen_char,
+                hiddens: true,
+              })
+              utils.tryCatch(mta.Event.stat('wifiPicForscreen', { 'picnums': upimgs.length }));
+
             }
             utils.tryCatch(mta.Event.stat('wifiPicUploadWasteTime', { 'wasttime': diff_time }));
           }
@@ -205,7 +216,8 @@ Page({
                 'confirm': '重试',
                 'calcle': '',
                 'type': 3
-              }
+              },
+              is_btn_disabel:false
             })
           }
         },
@@ -221,14 +233,7 @@ Page({
       }
     }
 
-    that.setData({
-      up_imgs: upimgs,
-      filename_arr: filename_arr,
-      is_upload: 1,
-      forscreen_char: forscreen_char,
-      hiddens: true,
-    })
-    utils.tryCatch(mta.Event.stat('wifiPicForscreen', { 'picnums': upimgs.length }));
+    
   },
   chooseImage: function(res) {
     var that = this;

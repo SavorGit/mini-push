@@ -940,9 +940,7 @@ App({
       var box_mac = hotel_info.box_mac
       if (hotel_info.wifi_name != '') {
         //第二步  判断当前连接的wifi是否为当前包间wifi
-        that.setData({
-          wifi_hidden: false,
-        })
+        
         wx.startWifi({
           success: function (res) {
             wx.getConnectedWifi({
@@ -964,7 +962,7 @@ App({
                     that.setData({
                       wifi_hidden: true,
                     })
-                    wx.hideLoading()
+                    //wx.hideLoading()
                   } else {//链接的不是本包间wifi
                     aps.connectWifi(wifi_name, wifi_mac, use_wifi_password, box_mac, that);
                   }
@@ -973,79 +971,66 @@ App({
                   aps.connectWifi(wifi_name, wifi_mac, use_wifi_password, box_mac, that);
                   
                 }
-                wx.hideLoading()
+                //wx.hideLoading()
               }, fail: function (res) {
-                wx.hideLoading()
-                that.setData({
-                  wifi_hidden: true,
-                })
-                if (res.errCode == 12005) { //安卓特有  未打开wifi
-                  that.setData({
-                    wifiErr: { 'is_open': 1, 'msg': '亲，使用此小程序前需要打开您手机的wifi,连上wifi投屏更快哦！', 'confirm': '确定', 'calcle': '取消', 'type': 1 }
-                  })
-                } else if (res.errCode == 12006) {//Android 特有，未打开 GPS 定位开关
-                  that.setData({
-                    wifiErr: { 'is_open': 1, 'msg': '亲，使用此小程序前需要打开您手机的GPS定位,连上wifi投屏更快哦！', 'confirm': '确定', 'calcle': '取消', 'type': 2 }
-                  })
-                } else if(res.errCode == 12007){//用户拒绝授权链接 Wi-Fi
-                  that.setData({
-                    wifiErr: { 'is_open': 1, 'msg': '亲，使用此小程序前需要链接包间wifi,连上wifi投屏更快哦！', 'confirm': '重试', 'calcle': '', 'type': 3 }
-                  })
-                }
-                /*else if (res.errMsg == 'getConnectedWifi:fail:currentWifi is null') {
-                  that.setData({
-                    wifiErr: { 'is_open': 1, 'msg': '亲，使用此小程序前需要链接包间wifi,链接wifi投屏更快哦！', 'confirm': '重试', 'calcle': '', 'type': 3 }
-                  })
-                }
-                else if (res.errMsg == 'getConnectedWifi:fail no wifi is connected.') {
-                  that.setData({
-                    wifiErr: { 'is_open': 1, 'msg': '亲，使用此小程序前需要打开您手机的wifi,链接wifi投屏更快哦！', 'confirm': '确定', 'calcle': '取消', 'type': 1 }
-                  })
-                } else if (res.errMsg == 'getConnectedWifi:fail:not invoke startWifi') {
-
-                } else if (res.errMsg == 'connectWifi:fail:duplicated request') {
-                  that.setData({
-                    wifiErr: { 'is_open': 1, 'msg': '亲，使用此小程序前需要打开您手机的wifi,链接wifi投屏更快哦！', 'confirm': '确定', 'calcle': '取消', 'type': 1 }
-                  })
-                  wx.showToast({
-                    title: 'wifi链接失败',
-                  })
-                }*/
-                else {
-                  if (hotel_info.wifi_password == '') {
-                    var us_wifi_password = '空';
-                  } else {
-                    var us_wifi_password = hotel_info.wifi_password;
+                console.log(res);
+                if(res.errMsg == 'getConnectedWifi:fail:currentWifi is null' || res.errMsg=='getConnectedWifi:fail no wifi is connected.'){
+                  aps.connectWifi(wifi_name, wifi_mac, use_wifi_password, box_mac, that);
+                }else {
+                  if (res.errCode == 12005) { //安卓特有  未打开wifi
+                    that.setData({
+                      wifiErr: { 'is_open': 1, 'msg': '亲，使用此小程序前需要打开您手机的wifi,连上wifi投屏更快哦！', 'confirm': '确定', 'calcle': '取消', 'type': 1 }
+                    })
+                  } else if (res.errCode == 12006) {//Android 特有，未打开 GPS 定位开关
+                    that.setData({
+                      wifiErr: { 'is_open': 1, 'msg': '亲，使用此小程序前需要打开您手机的GPS定位,连上wifi投屏更快哦！', 'confirm': '确定', 'calcle': '取消', 'type': 2 }
+                    })
+                  } else if(res.errCode == 12007){//用户拒绝授权链接 Wi-Fi
+                    that.setData({
+                      wifiErr: { 'is_open': 1, 'msg': '亲，使用此小程序前需要链接包间wifi,连上wifi投屏更快哦！', 'confirm': '重试', 'calcle': '', 'type': 3 }
+                    })
+                  }else {
+                    if (hotel_info.wifi_password == '') {
+                      var us_wifi_password = '空';
+                    } else {
+                      var us_wifi_password = hotel_info.wifi_password;
+                    }
+                    var msg = '请手动连接包间wifi:' + hotel_info.wifi_name + ',密码为' + us_wifi_password+'。连上wifi投屏更快哦！';
+                    that.setData({
+                      wifiErr: { 'is_open': 1, 'msg': msg, 'confirm': '重试', 'type': 4 }
+                    })
                   }
-                  var msg = '请手动连接包间wifi:' + hotel_info.wifi_name + ',密码为' + us_wifi_password+'。连上wifi投屏更快哦！';
-                  that.setData({
-                    wifiErr: { 'is_open': 1, 'msg': msg, 'confirm': '重试', 'type': 4 }
+  
+                  var err_info = JSON.stringify(res);
+                  wx.request({
+                    url: aps.globalData.api_v_url + '/datalog/recordWifiErr',
+                    data: {
+                      err_info: err_info,
+                      box_mac: hotel_info.box_mac,
+                      openid:aps.globalData.openid,
+                      mobile_brand:aps.globalData.sys_info.brand,
+                      mobile_model:aps.globalData.sys_info.model,
+                      platform:aps.globalData.sys_info.platform,
+                      version:aps.globalData.sys_info.version,
+                      system:aps.globalData.sys_info.system
+                    }
                   })
+                  //wx.hideLoading()
+                  that.setData({
+                    wifi_hidden: true,
+                  })
+                  
+                  wx.stopWifi({
+
+                  })
+                  mta.Event.stat('linkWifiErro', { 'wifierrocode': res.errCode, 'wifierromsg': res.errMsg })
                 }
-
-                var err_info = JSON.stringify(res);
-                wx.request({
-                  url: aps.globalData.api_v_url + '/datalog/recordWifiErr',
-                  data: {
-                    err_info: err_info,
-                    box_mac: hotel_info.box_mac,
-                    openid:aps.globalData.openid,
-                    mobile_brand:aps.globalData.sys_info.brand,
-                    mobile_model:aps.globalData.sys_info.model,
-                    platform:aps.globalData.sys_info.platform,
-                    version:aps.globalData.sys_info.version,
-                    system:aps.globalData.sys_info.system
-                  }
-                })
-                wx.stopWifi({
-
-                })
-                mta.Event.stat('linkWifiErro', { 'wifierrocode': res.errCode, 'wifierromsg': res.errMsg })
+                
               },
             })
           }, fail: function (res) {
             //未获取成功 重试弹窗
-            wx.hideLoading()
+            //wx.hideLoading()
             that.setData({
               wifi_hidden: true,
             })
@@ -1071,7 +1056,9 @@ App({
   },
   connectWifi: function (wifi_name, wifi_mac, use_wifi_password, box_mac, that) {
     var aps = this;
-
+    that.setData({
+      wifi_hidden: false,
+    })
     wx.connectWifi({
       SSID: wifi_name,
       BSSID: wifi_mac,
@@ -1100,7 +1087,7 @@ App({
             duration: 2000
           });
 
-          wx.hideLoading()
+          //wx.hideLoading()
         })
 
         that.setData({
@@ -1114,7 +1101,7 @@ App({
           duration: 2000
         });
 
-        wx.hideLoading()
+        //wx.hideLoading()
 
 
 
@@ -1123,7 +1110,7 @@ App({
         wx.stopWifi({
 
         })
-        wx.hideLoading();
+        //wx.hideLoading();
         that.setData({
           wifi_hidden: true,
         })
@@ -1168,13 +1155,13 @@ App({
           }
         })
       }, complete: function (res) {
-        wx.hideLoading()
+        //wx.hideLoading()
         that.setData({
           wifi_hidden: true,
         })
-        wx.stopWifi({
+        /*wx.stopWifi({
 
-        })
+        })*/
       }
     })
     setTimeout(function () {
