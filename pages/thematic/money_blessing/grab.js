@@ -1,5 +1,6 @@
 // 抢红包-抢红包 pages/thematic/money_blessing/grab.js
 var mta = require('../../../utils/mta_analysis.js');
+const utils = require('../../../utils/util.js')
 const app = getApp();
 var openid;
 var box_mac;

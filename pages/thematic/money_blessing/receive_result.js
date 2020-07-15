@@ -1,4 +1,5 @@
 // pages//thematic/money_blessing/receive_result.js
+const utils = require('../../../utils/util.js')
 const app = getApp();
 var openid;
 var discovery_list; //发现列表
