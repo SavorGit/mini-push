@@ -88,6 +88,7 @@ Page({
     that.setData({
       is_forscreen: 0,
       hiddens: false,
+      is_btn_disabel: true,
     })
     openid = res.currentTarget.dataset.openid;
     box_mac = res.currentTarget.dataset.box_mac;
@@ -126,12 +127,7 @@ Page({
           utils.tryCatch(mta.Event.stat('wifiVideoUploadWastTime', { 'uploadtime': diff_time }));
         } else if (res.code == 1001) {
 
-          var end_time = (new Date()).valueOf(); 
-          var diff_time = end_time - start_time;
-          utils.tryCatch(mta.Event.stat('wifiVideoUploadWastTime', { 'uploadtime': diff_time }));
-        } else if (res.code == 1001) {
-
-          that.setData({
+          /*that.setData({
             hiddens: true,
             is_forscreen: 1,
             wifiErr: {
@@ -141,7 +137,13 @@ Page({
               'calcle': '',
               'type': 3
             }
+          })*/
+          that.setData({
+            is_btn_disabel: false,
+            hiddens: true,
           })
+          app.showToast('投屏失败，请重试！')
+          
           utils.tryCatch(mta.Event.stat('wifiVideoForscreen', { 'status': 0 }));
         }
 
@@ -149,7 +151,7 @@ Page({
       fail: function({
         errMsg
       }) {
-        that.setData({
+        /*that.setData({
           hiddens: true,
           is_forscreen: 1,
           wifiErr: {
@@ -159,7 +161,12 @@ Page({
             'calcle': '',
             'type': 3
           }
+        })*/
+        wx.navigateBack({
+          delta: 1,
         })
+        app.showToast('投屏失败,请确认是否连接本包间wifi！',3000,'none',true);
+        
         utils.tryCatch(mta.Event.stat('wifiVideoForscreen', { 'status': 0 }));
       }
     })
@@ -185,7 +192,7 @@ Page({
           utils.tryCatch(mta.Event.stat('wifiVideoExitForscreen', { 'status': 1 }));
          
         } else if (res.data.code == 1001) {
-          that.setData({
+          /*that.setData({
             hiddens: true,
             wifiErr: {
               'is_open': 1,
@@ -194,7 +201,9 @@ Page({
               'calcle': '',
               'type': 3
             }
-          })
+          })*/
+          app.showToast('退出失败,请重试！')
+          
           utils.tryCatch(mta.Event.stat('wifiVideoExitForscreen', { 'status': 0 }));
         }
       },
@@ -202,7 +211,7 @@ Page({
         errMsg
       }) {
 
-        that.setData({
+        /*that.setData({
           hiddens: true,
           wifiErr: {
             'is_open': 1,
@@ -211,7 +220,12 @@ Page({
             'calcle': '',
             'type': 3
           }
+        })*/
+        
+        wx.navigateBack({
+          delta: 1,
         })
+        app.showToast('退出失败,请确认是否连接本包间wifi！',3000,'none',true);
         utils.tryCatch(mta.Event.stat('wifiVideoExitForscreen', { 'status': 0 }));
       },
     })
@@ -308,7 +322,7 @@ Page({
           utils.tryCatch(mta.Event.stat('wifiVideoUploadWastTime', { 'uploadtime': diff_time }));
         } else if (res.data.code == 1001) {
 
-          that.setData({
+          /*that.setData({
             hiddens: true,
             wifiErr: {
               'is_open': 1,
@@ -317,14 +331,16 @@ Page({
               'calcle': '',
               'type': 3
             }
-          })
+          })*/
+          app.showToast('重投失败,请重试！')
+          
         }
 
       },
       fail: function({
         errMsg
       }) {
-        that.setData({
+        /*that.setData({
           hiddens: true,
           wifiErr: {
             'is_open': 1,
@@ -333,7 +349,12 @@ Page({
             'calcle': '',
             'type': 3
           }
+        })*/
+        
+        wx.navigateBack({
+          delta: 1,
         })
+        app.showToast('重投失败,请确认是否连接本包间wifi！',3000,'none',true);
       },
     })
 

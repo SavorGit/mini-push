@@ -912,12 +912,12 @@ Page({
     })
   },
   onPullDownRefresh: function () {
-    this.onLoad();
+    //this.onLoad();
     //wx.showNavigationBarLoading();
     // 隐藏导航栏加载框
     //wx.hideNavigationBarLoading();
     // 停止下拉动作
-    wx.stopPullDownRefresh();
+    //wx.stopPullDownRefresh();
   },
   /**
    * 生命周期函数--监听页面初次渲染完成
@@ -938,6 +938,7 @@ Page({
         openid: user_info.openid
       }, (data, headers, cookies, errMsg, statusCode) => {
         if (data.result.is_have == 1) {
+          console.log(app.globalData.link_type)
           if(app.globalData.link_type==2){
             app.linkHotelWifi(data.result, that);
             app.globalData.hotel_info = data.result;

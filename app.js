@@ -1159,9 +1159,6 @@ App({
         that.setData({
           wifi_hidden: true,
         })
-        /*wx.stopWifi({
-
-        })*/
       }
     })
     setTimeout(function () {

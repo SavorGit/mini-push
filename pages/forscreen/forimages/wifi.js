@@ -91,7 +91,7 @@ Page({
     var that = this;
     that.setData({
       is_btn_disabel: true,
-      hiddens: true,
+      hiddens: false,
     })
     var box_mac = e.detail.value.box_mac;
     var user_info = wx.getStorageSync('savor_user_info');
@@ -181,7 +181,7 @@ Page({
             var diff_time =  end_time - start_time;
             var info_rt = JSON.parse(res.data);
             if (info_rt.code == 1001) {
-              that.setData({
+              /*that.setData({
                 wifiErr: {
                   'is_open': 1,
                   'msg': '亲，使用此小程序前需要链接包间wifi,链接wifi投屏更快哦！',
@@ -190,7 +190,13 @@ Page({
                   'type': 3
                 },
                 is_btn_disabel:false
+              })*/
+              that.setData({
+                is_btn_disabel: false,
+                hiddens: true,
               })
+              app.showToast('投屏失败，请重试！')
+              
             }else {
               that.setData({
                 up_imgs: upimgs,
@@ -209,7 +215,7 @@ Page({
           errMsg
         }) {
           if (i == img_lenth) {
-            that.setData({
+            /*that.setData({
               wifiErr: {
                 'is_open': 1,
                 'msg': '亲，使用此小程序前需要链接包间wifi,链接wifi投屏更快哦！',
@@ -218,7 +224,14 @@ Page({
                 'type': 3
               },
               is_btn_disabel:false
+            })*/
+            wx.navigateBack({
+              delta: 1,
+              success:function(){
+                app.showToast('投屏失败,请确认是否连接本包间wifi！',3000,'none',true);
+              }
             })
+            
           }
         },
       });
@@ -308,7 +321,7 @@ Page({
       success: function(res) {
         var info_rt = JSON.parse(res.data);
         if (info_rt.code == 1001) {
-          that.setData({
+          /*that.setData({
             wifiErr: {
               'is_open': 1,
               'msg': '亲，使用此小程序前需要链接包间wifi,链接wifi投屏更快哦！',
@@ -316,13 +329,15 @@ Page({
               'calcle': '',
               'type': 3
             }
-          })
+          })*/
+          app.showToast('投屏失败，请重试！')
+          
         }
       },
       fail: function({
         errMsg
       }) {
-        that.setData({
+        /*that.setData({
           wifiErr: {
             'is_open': 1,
             'msg': '亲，使用此小程序前需要链接包间wifi,链接wifi投屏更快哦！',
@@ -330,7 +345,12 @@ Page({
             'calcle': '',
             'type': 3
           }
+        })*/
+        wx.navigateBack({
+          delta: 1,
         })
+        app.showToast('投屏失败,请确认是否连接本包间wifi！',3000,'none',true);
+        
 
       },
     });
@@ -357,7 +377,7 @@ Page({
           });
           utils.tryCatch(mta.Event.stat('wifiPicExitForscreen', { 'status': 1 }));
         } else if (res.data.code == 1001) {
-          that.setData({
+          /*that.setData({
             wifiErr: {
               'is_open': 1,
               'msg': '亲，使用此小程序前需要链接包间wifi,链接wifi投屏更快哦！',
@@ -365,6 +385,10 @@ Page({
               'calcle': '',
               'type': 3
             }
+          })*/
+          app.showToast('退出失败，请重试！')
+          wx.navigateBack({
+            delta: 1,
           })
           utils.tryCatch(mta.Event.stat('wifiPicExitForscreen', { 'status': 0 }));
         }
@@ -373,14 +397,11 @@ Page({
       fail: function({
         errMsg
       }) {
-        wx.showToast({
-          title: '退出失败',
-          icon: 'none',
-          duration: 2000
-        });
         wx.navigateBack({
           delta: 1,
         })
+        app.showToast('退出失败,请确认是否连接本包间wifi！',3000,'none',true);
+        
         utils.tryCatch(mta.Event.stat('wifiPicExitForscreen', { 'status': 0 }));
       },
     })
