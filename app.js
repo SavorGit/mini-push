@@ -233,6 +233,9 @@ App({
 
     } else { //视频投屏
       for (var i = 0; i < res_len; i++) {
+        if(typeof(pubdetail[i]['duration'])=='undefined' || pubdetail[i]['duration']==''){
+          pubdetail[i]['duration'] = 0;
+        }
         wx.request({
           url: that.globalData.api_v_url + '/index/recordForScreenPics',
           header: {
@@ -253,7 +256,7 @@ App({
             is_pub_hotelinfo: 0,
             is_share: 0,
             forscreen_id: forscreen_id,
-            duration: pubdetail[i]['duration'],
+            duration: parseInt(pubdetail[i]['duration']),
             resource_type:2,
             serial_number:that.globalData.serial_number
           },
