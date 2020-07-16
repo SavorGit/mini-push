@@ -166,6 +166,7 @@ Page({
           resource_name: file_name,
           resource_size: file_size,
           resource_type:3,
+          serial_number:app.globalData.serial_number,
         }, 
         success: function (res) {
           //console.log(res);

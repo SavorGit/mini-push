@@ -413,7 +413,7 @@ App({
                           duration: 2000
                         });
                         wx.request({
-                          url: that.globalData.api_url + '/Smallapp/index/recordForScreenPics',
+                          url: that.globalData.api_v_url + '/Smallapp/index/recordForScreenPics',
                           header: {
                             'content-type': 'application/json'
                           },
@@ -454,7 +454,7 @@ App({
                     duration: 2000
                   });
                   wx.request({
-                    url: that.globalData.api_url + '/Smallapp/index/recordForScreenPics',
+                    url: that.globalData.api_v_url + '/index/recordForScreenPics',
                     header: {
                       'content-type': 'application/json'
                     },
