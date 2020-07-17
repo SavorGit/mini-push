@@ -104,7 +104,7 @@ Page({
         console.log('aaaa');
         var forscreen_id = options.forscreen_id;
         wx.request({
-          url: api_url +'/Smallapp3/Fileforscreen/getforscreenbyid',
+          url: api_v_url +'/Fileforscreen/getforscreenbyid',
           data:{
             forscreen_id: forscreen_id,
           },
@@ -163,7 +163,7 @@ Page({
       file_name = file_name.substring(0, index1);
       //首先调用文件处理接口  if 如果返回文件处理完成则结束  else 轮询调用获取文件处理的图片接口
       wx.request({
-        url: api_url + '/Smallapp3/Fileforscreen/fileconversion',   //调用文件处理接口
+        url: api_v_url + '/Fileforscreen/fileconversion',   //调用文件处理接口
         headers: {
           'Content-Type': 'application/json'
         },
@@ -205,7 +205,7 @@ Page({
                 polling_time -= 1;
                 console.log(polling_time);
                 wx.request({
-                  url: api_url + '/Smallapp3/Fileforscreen/getresult',  //轮询获取文件处理结果接口
+                  url: api_v_url + '/Fileforscreen/getresult',  //轮询获取文件处理结果接口
                   headers: {
                     'Content-Type': 'application/json'
                   },
