@@ -1,0 +1,67 @@
+<!--pages/hotel/waiter_evaluate.wxml-->
+<!-- 服务员评价页 -->
+<import src="/pages/template/commons" />
+<template is="navigationBarForTwoLevel" data='{{statusBarHeight: statusBarHeight,titleText:"服务员评分"}}' />
+
+<scroll-view class="container flex-column-center-flex_start theme-container" style='height: calc(100vh - 46px - {{statusBarHeight}}px);' scroll-y="true" scroll-with-animation="true">
+	<view class="waiter-evaluate-info-panel flex-column-center-center theme-panel">
+		<view class="wapper flex-row-center-flex_start">
+			<image class="phone" mode="aspectFill" src="https://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default.jpeg"></image>
+			<view class="info flex-column-flex_start-center">
+				<view class="name theme-font1">张三{{isCollectOfficialAccount}}</view>
+				<view class="title theme-font3">销售经理</view>
+			</view>
+		</view>
+	</view>
+
+	<view class="waiter-evaluate-score-panel flex-column-center-center theme-panel">
+		<view class="wapper flex-row-center-flex_start">
+			<view class="lable">服务评分</view>
+			<view class="star-group flex-row-center-space_between theme-font1">
+				<view class="fa fa-star-o" aria-hidden="true"></view>
+				<view class="fa fa-star-o" aria-hidden="true"></view>
+				<view class="fa fa-star-o" aria-hidden="true"></view>
+				<view class="fa fa-star-o" aria-hidden="true"></view>
+				<view class="fa fa-star-o" aria-hidden="true"></view>
+			</view>
+		</view>
+	</view>
+
+	<view class="waiter-evaluate-comment-panel flex-column-center-flex_start theme-panel">
+		<view class="tags">
+			<view class="tag">服务态度好</view>
+			<view class="tag selected">环境优雅</view>
+			<view class="tag">菜品优质</view>
+			<view class="tag">人好</view>
+			<view class="tag">优</view>
+			<!--
+      <view class="tag">良</view>
+			<view class="tag">勤快</view>
+			<view class="tag">境好菜好人更好</view>
+			<view class="tag">1</view>
+			<view class="tag">不错</view>
+			<view class="tag">好</view>
+			<view class="tag">良</view>
+			<view class="tag">勤快</view>
+			<view class="tag">境好菜好人更好</view>
+			<view class="tag">1</view>
+			<view class="tag">不错</view>
+			<view class="tag">好</view>
+      -->
+		</view>
+		<view class="textarea">您的建议是我们前进的动力...（300字以内）</view>
+		<!-- <textarea>您的建议是我们前进的动力...（300字以内）</textarea> -->
+	</view>
+
+	<view class="waiter-evaluate-btn-panel flex-column-center-flex_start theme-panel">
+		<view class="btn-submit theme-button">提交</view>
+	</view>
+</scroll-view>
+<!--
+-->
+<view class="mask">
+	<view class="wapper flex-column-center-space_between">
+		<official-account style="width:300px;height:84px;"></official-account>
+		<cover-view class="btn-collected theme-button" bindtap="gotoPageHotelWaiterEvaluate" data-openid="{{openid}}" data-box_id="{{box_id}}">已关注，去评价</cover-view>
+	</view>
+</view>
