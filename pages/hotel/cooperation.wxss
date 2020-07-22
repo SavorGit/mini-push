@@ -49,7 +49,7 @@
 /* =========================== 页面主体 =========================== */
 
 .page_main_scroll {
-  height: calc(100% - 70rpx);
+  height: calc(100% - 88rpx);
 }
 
 .page_main_scroll_banner {

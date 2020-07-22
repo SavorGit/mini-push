@@ -25,7 +25,6 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    
     var that = this;
     var user_info = wx.getStorageSync("savor_user_info");
     var res_id     = options.res_id;  //资源id
@@ -220,163 +219,21 @@ Page({
       var timestamp = (new Date()).valueOf();
       var mobile_brand = app.globalData.mobile_brand;
       var mobile_model = app.globalData.mobile_model;
-      wx.request({
-        url: api_url+'/smallapp21/User/isForscreenIng',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        method: "POST",
-        data: { box_mac: box_mac },
-        success: function (res) {
-          var is_forscreen = res.data.result.is_forscreen;
-          if (is_forscreen == 1) {
-            wx.showModal({
-              title: '确认要打断投屏',
-              content: '当前电视正在进行投屏,继续投屏有可能打断当前投屏中的内容.',
-              success: function (res) {
-                if (res.confirm) {
-                  that.setData({
-                    //is_box_show: true,
-                  })
-                  //console.log('用户点击确定')
-                  var djs = 10;
-                  that.setData({
-                    is_replay_disabel: true
-                  })
 
-                  that.setData({
-                    djs: djs
-                  })
-                  var timer8_0 = setInterval(function () {
-                    djs -= 1;
-                    that.setData({
-                      djs: djs
-                    });
-                    if (djs == 0) {
-                      that.setData({
-                        is_replay_disabel: false,
-                      })
-                      clearInterval(timer8_0);
-                    }
 
-                  }, 1000);
-                  wx.request({
-                    url: api_url+'/Netty/Index/pushnetty',
-                    headers: {
-                      'Content-Type': 'application/json'
-                    },
-                    method: "POST",
-                    data: {
-                      box_mac: box_mac,
-                      msg: '{ "action": 5,"url":"' + vediourl + '","filename":"' + filename + '","forscreen_id":' + timestamp + ',"resource_id":' + timestamp + '}',
-                    },
-                    success: function (res) {
-                      wx.showToast({
-                        title: '点播成功,电视即将开始播放',
-                        icon: 'none',
-                        duration: 2000
-                      });
-                      wx.request({
-                        url: api_url+'/Smallapp/index/recordForScreenPics',
-                        header: {
-                          'content-type': 'application/json'
-                        },
-                        data: {
-                          openid: openid,
-                          box_mac: box_mac,
-                          action: 5,
-                          mobile_brand: mobile_brand,
-                          mobile_model: mobile_model,
-                          forscreen_char: forscreen_char,
-                          forscreen_id: timestamp,
-                          resource_id: timestamp,
-                          imgs: '["media/resource/' + filename + '"]'
-                        },
-                      });
-                    },
-                    fail: function (res) {
-                      wx.showToast({
-                        title: '网络异常,点播失败',
-                        icon: 'none',
-                        duration: 2000
-                      })
-                    }
-                  })
-                } else if (res.cancel) {
-                  //console.log('用户点击取消')
-                }
-              }
-            })
-          } else {
-            
-            var djs = 10;
-            that.setData({
-              is_replay_disabel: true
-            })
+      var res_id = that.data.res_id;
+      var res_type = 2;
+      var action = 5;
+      var media_info = {};
+      media_info.forscreen_url = "media/resource/"+ filename;
+      media_info.filename      = filename;
+      media_info.res_id = res_id;
+      media_info.resource_size = 0;
+      media_info.duration = 0;
+      var pubdetail = [];
+      pubdetail.push(media_info);
+      app.boxShow(box_mac, res_id, pubdetail, res_type, 1, action, '', self);
 
-            that.setData({
-              djs: djs,
-              //is_box_show: true,
-            })
-            var timer8_0 = setInterval(function () {
-              djs -= 1;
-              that.setData({
-                djs: djs
-              });
-              if (djs == 0) {
-                that.setData({
-                  is_replay_disabel: false,
-                })
-                clearInterval(timer8_0);
-              }
-
-            }, 1000);
-            wx.request({
-              url: api_url+'/Netty/Index/pushnetty',
-              headers: {
-                'Content-Type': 'application/json'
-              },
-              method: "POST",
-              data: {
-                box_mac: box_mac,
-                msg: '{ "action": 5,"url":"' + vediourl + '","filename":"' + filename + '","forscreen_id":' + timestamp + ',"resource_id":' + timestamp + '}',
-              },
-              success: function (res) {
-                wx.showToast({
-                  title: '点播成功,电视即将开始播放',
-                  icon: 'none',
-                  duration: 2000
-                });
-                wx.request({
-                  url: api_url+'/Smallapp/index/recordForScreenPics',
-                  header: {
-                    'content-type': 'application/json'
-                  },
-                  data: {
-                    openid: openid,
-                    box_mac: box_mac,
-                    action: 5,
-                    mobile_brand: mobile_brand,
-                    mobile_model: mobile_model,
-                    forscreen_char: forscreen_char,
-                    forscreen_id: timestamp,
-                    resource_id: timestamp,
-                    imgs: '["media/resource/' + filename + '"]'
-                  },
-                });
-              },
-              fail: function (res) {
-                wx.showToast({
-                  title: '网络异常,点播失败',
-                  icon: 'none',
-                  duration: 2000
-                })
-              }
-            })
-          }
-        }
-      })
-      //return false;
 
     }
   },//电视播放结束

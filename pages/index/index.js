@@ -194,6 +194,7 @@ Page({
         mask: true
       })
       app.openidCallback = openid => {
+        console.log(app.globalData.serial_number)
         if (openid != '') {
           that.setData({
             openid: openid
@@ -276,6 +277,11 @@ Page({
             utils.PostRequest(api_v_url + '/index/isHaveCallBox?openid=' + openid, {}, (data, headers, cookies, errMsg, statusCode) => {
               var is_have = data.result.is_have;
               if (is_have == 1) {
+                var serial_number = app.globalData.serial_number;
+                var head_serial_number = serial_number.substring(0,2);
+                if(head_serial_number==app.globalData.not_link_box_pre){
+                  app.globalData.serial_number = app.globalData.have_link_box_pre+openid+'_'+(new Date()).valueOf();
+                }
                 var box_id = data.result.box_id;
                 is_view_eval_waiter(box_id);
                 app.linkHotelWifi(data.result, that);
@@ -937,14 +943,19 @@ Page({
       utils.PostRequest(api_v_url + '/index/isHaveCallBox', {
         openid: user_info.openid
       }, (data, headers, cookies, errMsg, statusCode) => {
-        if (data.result.is_have == 1) {
-          console.log(app.globalData.link_type)
+        if (data.result.is_have == 1) {//如果已连接盒子
+          var serial_number = app.globalData.serial_number;
+          var head_serial_number = serial_number.substring(0,2);
+          if(head_serial_number==app.globalData.not_link_box_pre){
+            app.globalData.serial_number = app.globalData.have_link_box_pre+user_info.openid+'_'+(new Date()).valueOf();
+          }
           if(app.globalData.link_type==2){
             app.linkHotelWifi(data.result, that);
             app.globalData.hotel_info = data.result;
           }
           that.setData({
             is_link: 1,
+            link_type:data.result.forscreen_type,
             hotel_room: data.result.hotel_name + data.result.room_name,
             hotel_name: data.result.hotel_name,
             room_name: data.result.room_name,
@@ -954,7 +965,12 @@ Page({
             is_compress:data.result.is_compress
           })
           box_mac = data.result.box_mac;
-        } else {
+        } else {//如果未连接盒子
+          var serial_number = app.globalData.serial_number;
+          var head_serial_number = serial_number.substring(0,2);
+          if(head_serial_number==app.globalData.have_link_box_pre){
+            app.globalData.serial_number = app.globalData.not_link_box_pre+user_info.openid+'_'+(new Date()).valueOf();
+          }
           app.globalData.link_type = 0;
           box_mac = ''
           that.setData({

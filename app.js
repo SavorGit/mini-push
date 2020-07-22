@@ -44,7 +44,7 @@ App({
           media_url_str += ']';
 
           wx.request({
-            url: 'http://' + hotel_info.intranet_ip + ":8080/h5/discover_ondemand?deviceId=" + user_info.openid + "&box_mac=" + box_mac + "&web=true&media_id=" + forscreen_id + "&resource_type=" + res_type + "&forscreen_id=" + timestamp + "&media_url=" + media_url_str + '&avatarUrl=' + user_info.avatarUrl + "&nickName=" + user_info.nickName,
+            url: 'http://' + hotel_info.intranet_ip + ":8080/h5/discover_ondemand?deviceId=" + user_info.openid + "&box_mac=" + box_mac + "&web=true&media_id=" + forscreen_id + "&resource_type=" + res_type + "&forscreen_id=" + timestamp + "&media_url=" + media_url_str + '&avatarUrl=' + user_info.avatarUrl + "&nickName=" + user_info.nickName+'&serial_number='+that.globalData.serial_number,
             success: function (res) {
               if (res.data.code == 10000) {
                 wx.showToast({
@@ -74,7 +74,7 @@ App({
           for (var i = 0; i < res_len; i++) {
 
             wx.request({
-              url: "http://" + hotel_info.intranet_ip + ":8080/h5/goods_ondemand?deviceId=" + user_info.openid + "&box_mac=" + box_mac + "&web=true&media_id=" + forscreen_id + "&forscreen_id=" + timestamp + "&media_name=" + pubdetail[0]['filename'] + "&media_url=" + pubdetail[0]['res_url'] + '&avatarUrl=' + user_info.avatarUrl + "&nickName=" + user_info.nickName,
+              url: "http://" + hotel_info.intranet_ip + ":8080/h5/goods_ondemand?deviceId=" + user_info.openid + "&box_mac=" + box_mac + "&web=true&media_id=" + forscreen_id + "&forscreen_id=" + timestamp + "&media_name=" + pubdetail[0]['filename'] + "&media_url=" + pubdetail[0]['res_url'] + '&avatarUrl=' + user_info.avatarUrl + "&nickName=" + user_info.nickName+'&serial_number='+that.globalData.serial_number,
               success: function (res) {
                 if (res.data.code == 10000) {
                   wx.showToast({
@@ -164,7 +164,7 @@ App({
       for (var i = 0; i < pubdetail.length; i++) {
         var order = i + 1;
         wx.request({ //start
-          url: that.globalData.api_url + '/Smallapp/index/recordForScreenPics',
+          url: that.globalData.api_v_url + '/index/recordForScreenPics',
           header: {
             'content-type': 'application/json'
           },
@@ -183,7 +183,8 @@ App({
             resource_size: pubdetail[i]['resource_size'],
             is_pub_hotelinfo: 0,
             is_share: 0,
-            resource_type:1
+            resource_type:1,
+            serial_number:that.globalData.serial_number
           },success: function (ret) {
 
           }
@@ -199,6 +200,7 @@ App({
         res_obj [i]= {url: url ,filename: filename ,order: order ,img_id:res_id,resource_size:resource_size };
       }
       //res_obj = JSON.stringify(res_obj)
+      
       
       msg.img_list = res_obj
       msg = JSON.stringify(msg)
@@ -231,8 +233,11 @@ App({
 
     } else { //视频投屏
       for (var i = 0; i < res_len; i++) {
+        if(typeof(pubdetail[i]['duration'])=='undefined' || pubdetail[i]['duration']==''){
+          pubdetail[i]['duration'] = 0;
+        }
         wx.request({
-          url: that.globalData.api_url + '/Smallapp/index/recordForScreenPics',
+          url: that.globalData.api_v_url + '/index/recordForScreenPics',
           header: {
             'content-type': 'application/json'
           },
@@ -251,8 +256,9 @@ App({
             is_pub_hotelinfo: 0,
             is_share: 0,
             forscreen_id: forscreen_id,
-            duration: pubdetail[i]['duration'],
-            resource_type:2
+            duration: parseInt(pubdetail[i]['duration']),
+            resource_type:2,
+            serial_number:that.globalData.serial_number
           },
           success: function (ret) { }
         });
@@ -410,7 +416,7 @@ App({
                           duration: 2000
                         });
                         wx.request({
-                          url: that.globalData.api_url + '/Smallapp/index/recordForScreenPics',
+                          url: that.globalData.api_v_url + '/Smallapp/index/recordForScreenPics',
                           header: {
                             'content-type': 'application/json'
                           },
@@ -421,7 +427,8 @@ App({
                             action: 9,
                             mobile_brand: mobile_brand,
                             mobile_model: mobile_model,
-                            imgs: '[]'
+                            imgs: '[]',
+                            serial_number:that.globalData.serial_number
                           },
 
                         })
@@ -450,7 +457,7 @@ App({
                     duration: 2000
                   });
                   wx.request({
-                    url: that.globalData.api_url + '/Smallapp/index/recordForScreenPics',
+                    url: that.globalData.api_v_url + '/index/recordForScreenPics',
                     header: {
                       'content-type': 'application/json'
                     },
@@ -461,7 +468,8 @@ App({
                       action: 9,
                       mobile_brand: mobile_brand,
                       mobile_model: mobile_model,
-                      imgs: '[]'
+                      imgs: '[]',
+                      serial_number:that.globalData.serial_number
                     },
                   })
                 }
@@ -471,7 +479,7 @@ App({
         })
       } else {
         wx.request({
-          url: "http://" + hotel_info.intranet_ip + ":8080/showMiniProgramCode?deviceId=" + openid + "&box_mac=" + box_mac + "&web=true",
+          url: "http://" + hotel_info.intranet_ip + ":8080/showMiniProgramCode?deviceId=" + openid + "&box_mac=" + box_mac + "&web=true&serial_number="+that.globalData.serial_number,
           success: function (res) {
             if (res.data.code == 10000) {
               wx.showToast({
@@ -536,7 +544,7 @@ App({
         change_type_name = '增大音量'
       }
       wx.request({
-        url: "http://" + hotel_info.intranet_ip + ":8080/volume?action=" + change_type + "&deviceId=" + openid + "&box_mac=" + box_mac + "&projectId=" + timestamp + "&web=true",
+        url: "http://" + hotel_info.intranet_ip + ":8080/volume?action=" + change_type + "&deviceId=" + openid + "&box_mac=" + box_mac + "&projectId=" + timestamp + "&web=true&serial_number="+that.globalData.serial_number,
         success: function (res) {
           if (res.data.code == 10000) {
             wx.showToast({
@@ -590,7 +598,7 @@ App({
     } else if (link_type == 2) {
       var timestamp = (new Date()).valueOf();
       wx.request({
-        url: "http://" + hotel_info.intranet_ip + ":8080/switchProgram?action=" + change_type + "&deviceId=" + openid + "&box_mac=" + box_mac + "&projectId=" + timestamp + "&web=true",
+        url: "http://" + hotel_info.intranet_ip + ":8080/switchProgram?action=" + change_type + "&deviceId=" + openid + "&box_mac=" + box_mac + "&projectId=" + timestamp + "&web=true&serial_number="+that.globalData.serial_number,
         success: function (res) {
 
           if (res.data.code == 10000) {
@@ -682,6 +690,8 @@ App({
       }
     }
     this.globalData.oss_access_key_id = oss_access_key_id
+    
+    
     mta.App.init({
       "appID": "500700115",
       "eventID": "500704113",
@@ -739,10 +749,13 @@ App({
             'content-type': 'application/json'
           },
           success: function (res) {
+            
             that.globalData.openid = res.data.result.openid;
             that.globalData.session_key = res.data.result.session_key;
             if (that.openidCallback) {
-
+              if(that.globalData.serial_number==''){
+                that.globalData.serial_number = that.globalData.not_link_box_pre+res.data.result.openid+'_'+(new Date()).valueOf();
+              }
               that.openidCallback(res.data.result.openid);
             }
           }
@@ -1025,7 +1038,23 @@ App({
                   })
                   mta.Event.stat('linkWifiErro', { 'wifierrocode': res.errCode, 'wifierromsg': res.errMsg })
                 }
-                
+
+                var err_info = JSON.stringify(res);
+                wx.request({
+                  url: aps.globalData.api_v_url + '/datalog/recordWifiErr',
+                  data: {
+                    err_info: err_info,
+                    box_mac: hotel_info.box_mac,
+                    openid:aps.globalData.openid,
+                    mobile_brand:aps.globalData.sys_info.brand,
+                    mobile_model:aps.globalData.sys_info.model,
+                    platform:aps.globalData.sys_info.platform
+                  }
+                })
+                wx.stopWifi({
+
+                })
+                mta.Event.stat('linkWifiErro', { 'wifierrocode': res.errCode, 'wifierromsg': res.errMsg })
               },
             })
           }, fail: function (res) {
@@ -1221,5 +1250,8 @@ App({
     collect_list: [],     //我的收藏 
 
     hotels: [],
+    not_link_box_pre:'N_',
+    have_link_box_pre:'Y_',
+    serial_number:''
   }
 })

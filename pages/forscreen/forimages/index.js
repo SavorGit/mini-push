@@ -18,6 +18,7 @@ var pic_show_cur = [];
 var page = 1;
 var forscreen_history_list;
 var api_url = app.globalData.api_url;
+var api_v_url = app.globalData.api_v_url;
 var oss_upload_url = app.globalData.oss_upload_url;
 var pubdetail = [];
 var netty_push_info ;
@@ -400,7 +401,7 @@ Page({
           
           
           wx.request({
-            url: api_url + '/Smallapp21/index/recordForScreenPics',
+            url: api_v_url + '/index/recordForScreenPics',
             header: {
               'content-type': 'application/json'
             },
@@ -421,7 +422,8 @@ Page({
               is_pub_hotelinfo: is_pub_hotelinfo,
               is_share: is_share,
               resource_type: 1,
-              res_nums: img_len
+              res_nums: img_len,
+              serial_number:app.globalData.serial_number
             },
             success: function (ret) {
               wx.request({
@@ -666,7 +668,7 @@ Page({
           })
         }
         wx.request({
-          url: api_url+'/Smallapp21/index/recordForScreenPics',
+          url: api_v_url+'/index/recordForScreenPics',
           header: {
             'content-type': 'application/json'
           },
@@ -678,7 +680,8 @@ Page({
             resource_type: 1,
             mobile_brand: mobile_brand,
             mobile_model: mobile_model,
-            imgs: '["' + forscreen_img + '"]'
+            imgs: '["' + forscreen_img + '"]',
+            serial_number : app.globalData.serial_number
           },
         });
         utils.tryCatch(mta.Event.stat("switchpic", {}))

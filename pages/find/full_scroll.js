@@ -164,40 +164,7 @@ let SavorUtils = {
           var action = 12;
         }
       }
-      
-
       app.boxShow(box_mac, forscreen_id, pubdetail, res_type, res_nums, action, '', that);
-
-      /*if (mediaSubGroupType == SavorUtils.Constant.MediaType.PICTURE){
-        var box_mac = pageContext.data.box_mac
-        var pubdetail = mediaObject.pubdetail;
-        var res_nums = pubdetail.length;
-        var res_type = 1;
-        console.log(pageContext)
-        app.boxShow(box_mac, forscreen_id, pubdetail, res_type, res_nums, 11, '', that);
-      }else {
-        for (let index = 0; index < mediaSubGroupSize; index++) {
-          let extendData = {};
-          let action = -1;
-          let order = index + 1;
-          let url = pubdetailList[index]['forscreen_url'];
-          let filename = pubdetailList[index]['filename'];
-          let res_id = pubdetailList[index]['res_id'];
-          let nettyMessageContent = '{"resource_type":2,"url":"' + url + '","filename":"' + filename + '","openid":"' + pageContext.data.openid + '","avatarUrl":"' + avatarUrl + '","nickName":"' + nickName + '","forscreen_id":"' + currentTime + '"';
-          if (mediaSubGroupType == SavorUtils.Constant.MediaType.PICTURE) { // 图片
-            extendData.action = 11; //发现图片点播
-            delete extendData.duration;
-            nettyMessageContent += ',"action":4,"img_id":"' + res_id + '","img_nums":' + mediaSubGroupSize + ',"forscreen_char":"","order":' + order;
-          } else { // 视频
-            extendData.action = 12; //发现视频点播
-            extendData.duration = pubdetailList[index]['duration']
-            nettyMessageContent += ',"action":2,"video_id":"' + res_id + '"';
-          }
-          nettyMessageContent += '}';
-          SavorUtils.User.recordForScreenPics(pageContext, extendData, currentTime, pubdetailList[index]);
-          SavorUtils.Netty.push(pageContext, nettyMessageContent); // 向机顶盒推送消息
-        }*/
-      
       if (mediaSubGroupType == SavorUtils.Constant.MediaType.PICTURE) {
         utils.tryCatch(mta.Event.stat('findBoxShowpic', {
           'openid': pageContext.data.openid
@@ -344,21 +311,6 @@ let SavorUtils = {
       });
     }
   },
-
-  Netty: {
-    push: (pageContext, message) => utils.PostRequest(api_url + '/Netty/Index/pushnetty', {
-      box_mac: pageContext.data.box_mac,
-      msg: message
-    }, (data, headers, cookies, errMsg, statusCode) => wx.showToast({
-      title: '点播成功,电视即将开始播放',
-      icon: 'none',
-      duration: 2000
-    }), res => wx.showToast({
-      title: '网络异常,点播失败',
-      icon: 'none',
-      duration: 2000
-    }))
-  }
 };
 
 Page({

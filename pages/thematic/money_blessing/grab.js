@@ -69,7 +69,7 @@ Page({
               var mobile_model = app.globalData.mobile_model;
               //记录扫码抢红包日志
               wx.request({
-                url: api_url+'/Smallapp21/index/recordForScreenPics',
+                url: api_v_url+'/index/recordForScreenPics',
                 header: {
                   'content-type': 'application/json'
                 },
@@ -83,6 +83,7 @@ Page({
 
                   imgs: '[]',
                   resource_id: order_id,
+                  serial_number:app.globalData.serial_number
 
                 },
               })
@@ -125,6 +126,7 @@ Page({
                         },
                         success: function (res) {
                           if (res.data.code == 10000) {
+                            app.globalData.serial_number = app.globalData.have_link_box_pre+openid+'_'+(new Date()).valueOf();
                             var order_status = res.data.result.status;
                             if (order_status == 4 || order_status == 0) {
                               wx.redirectTo({
@@ -228,7 +230,7 @@ Page({
                   var mobile_model = app.globalData.mobile_model;
                   //记录扫码抢红包日志
                   wx.request({
-                    url: api_url+'/Smallapp21/index/recordForScreenPics',
+                    url: api_v_url+'/index/recordForScreenPics',
                     header: {
                       'content-type': 'application/json'
                     },
@@ -242,6 +244,7 @@ Page({
 
                       imgs: '[]',
                       resource_id: order_id,
+                      serial_number:app.globalData.serial_number
 
                     },
                   })
@@ -282,6 +285,7 @@ Page({
                             },
                             success: function (res) {
                               if (res.data.code == 10000) {
+                                app.globalData.serial_number = app.globalData.have_link_box_pre+openid+'_'+(new Date()).valueOf();
                                 var order_status = res.data.result.status;
                                 if (order_status == 4 || order_status == 0) {
                                   wx.redirectTo({
@@ -476,6 +480,7 @@ Page({
                   },
                   success: function (res) {
                     if (res.data.code == 10000) {
+                      app.globalData.serial_number = app.globalData.have_link_box_pre+openid+'_'+(new Date()).valueOf();
                       var order_status = res.data.result.status;
                       if (order_status == 4 || order_status == 0) {
                         wx.redirectTo({

@@ -105,7 +105,7 @@ Page({
     var filename = (new Date()).valueOf();
     var start_time = (new Date()).valueOf(); 
     wx.uploadFile({
-      url: 'http://' + intranet_ip + ':8080/videoH5?deviceId=' + openid + '&box_mac=' + box_mac + '&deviceName=' + mobile_brand + '&web=true&forscreen_id=' + forscreen_id + '&filename=' + filename + '&device_model=' + mobile_model + '&resource_size=' + resouce_size + '&duration=' + duration + '&action=2&resource_type=2&avatarUrl=' + avatarUrl + "&nickName=" + nickName,
+      url: 'http://' + intranet_ip + ':8080/videoH5?deviceId=' + openid + '&box_mac=' + box_mac + '&deviceName=' + mobile_brand + '&web=true&forscreen_id=' + forscreen_id + '&filename=' + filename + '&device_model=' + mobile_model + '&resource_size=' + resouce_size + '&duration=' + duration + '&action=2&resource_type=2&avatarUrl=' + avatarUrl + "&nickName=" + nickName+'&serial_number='+app.globalData.serial_number,
       filePath: video_url,
       name: 'fileUpload',
       success: function(res) {
@@ -127,17 +127,6 @@ Page({
           utils.tryCatch(mta.Event.stat('wifiVideoUploadWastTime', { 'uploadtime': diff_time }));
         } else if (res.code == 1001) {
 
-          /*that.setData({
-            hiddens: true,
-            is_forscreen: 1,
-            wifiErr: {
-              'is_open': 1,
-              'msg': '亲，使用此小程序前需要链接包间wifi,链接wifi投屏更快哦！',
-              'confirm': '重试',
-              'calcle': '',
-              'type': 3
-            }
-          })*/
           that.setData({
             is_btn_disabel: false,
             hiddens: true,
@@ -145,6 +134,12 @@ Page({
           app.showToast('投屏失败，请重试！')
           
           utils.tryCatch(mta.Event.stat('wifiVideoForscreen', { 'status': 0 }));
+        }else if(res.code==-1){
+          that.setData({
+            hiddens: true,
+            is_forscreen: 1,
+          })
+          app.showToast('系统繁忙，请重试');
         }
 
       },
@@ -178,7 +173,7 @@ Page({
     intranet_ip = res.currentTarget.dataset.intranet_ip;
 
     wx.request({
-      url: "http://" + intranet_ip + ":8080/h5/stop?deviceId=" + openid + "&box_mac=" + box_mac + "&web=true",
+      url: "http://" + intranet_ip + ":8080/h5/stop?deviceId=" + openid + "&box_mac=" + box_mac + "&web=true&serial_number="+app.globalData.serial_number,
       success: function(res) {
         if (res.data.code == 10000) {
           wx.navigateBack({
@@ -205,6 +200,8 @@ Page({
           app.showToast('退出失败,请重试！')
           
           utils.tryCatch(mta.Event.stat('wifiVideoExitForscreen', { 'status': 0 }));
+        } else if(res.data.code==-1){
+          app.showToast('系统繁忙，请重试');
         }
       },
       fail: function({
@@ -302,38 +299,19 @@ Page({
     var box_mac = res.target.dataset.box_mac;
     var start_time = (new Date()).valueOf();
     wx.uploadFile({
-      url: 'http://' + intranet_ip + ':8080/videoH5?deviceId=' + openid + '&box_mac=' + box_mac + '&deviceName=' + mobile_brand + '&web=true&forscreen_id=' + forscreen_id + '&filename=' + filename + '&device_model=' + mobile_model + '&resource_size=' + resouce_size + '&duration=' + duration + '&action=2&resource_type=2&avatarUrl=' + avatarUrl + "&nickName=" + nickName,
+      url: 'http://' + intranet_ip + ':8080/videoH5?deviceId=' + openid + '&box_mac=' + box_mac + '&deviceName=' + mobile_brand + '&web=true&forscreen_id=' + forscreen_id + '&filename=' + filename + '&device_model=' + mobile_model + '&resource_size=' + resouce_size + '&duration=' + duration + '&action=2&resource_type=2&avatarUrl=' + avatarUrl + "&nickName=" + nickName+'&serial_number='+app.globalData.serial_number,
       filePath: vedio_url,
       name: 'fileUpload',
       success: function(res) {
-        //var info_rt = JSON.parse(res.data);
-        if (res.data.code == 10000) {
-          that.setData({
-            is_upload: 1,
-            vedio_url: vedio_url,
-            filename: filename,
-            resouce_size: resouce_size,
-            duration: duration,
-            intranet_ip: intranet_ip,
-            hiddens: true,
-          })
-          var end_time = (new Date()).valueOf();
-          var diff_time = end_time - start_time;
-          utils.tryCatch(mta.Event.stat('wifiVideoUploadWastTime', { 'uploadtime': diff_time }));
-        } else if (res.data.code == 1001) {
+        var info_rt = JSON.parse(res.data);
+        
+        if (info_rt.code == 1001) {
 
-          /*that.setData({
-            hiddens: true,
-            wifiErr: {
-              'is_open': 1,
-              'msg': '亲，使用此小程序前需要链接包间wifi,链接wifi投屏更快哦！',
-              'confirm': '重试',
-              'calcle': '',
-              'type': 3
-            }
-          })*/
+          
           app.showToast('重投失败,请重试！')
           
+        }else if(info_rt.code==-1){
+          app.showToast('系统繁忙，请重试');
         }
 
       },

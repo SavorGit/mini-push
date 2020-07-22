@@ -172,7 +172,7 @@ Page({
       filename_arr[i] = filename;
 
       wx.uploadFile({
-        url: "http://" + intranet_ip + ":8080/picH5?isThumbnail=1&imageId=20170301&deviceId=" + openid + "&box_mac=" + box_mac + "&deviceName=" + mobile_brand + "&rotation=90&imageType=1&web=true&forscreen_id=" + forscreen_id + '&forscreen_char=' + forscreen_char + '&filename=' + filename + '&device_model=' + mobile_model + '&resource_size=' + img_size + '&action=4&resource_type=0&avatarUrl=' + avatarUrl + "&nickName=" + nickName + "&forscreen_nums=" + img_lenth,
+        url: "http://" + intranet_ip + ":8080/picH5?isThumbnail=1&imageId=20170301&deviceId=" + openid + "&box_mac=" + box_mac + "&deviceName=" + mobile_brand + "&rotation=90&imageType=1&web=true&forscreen_id=" + forscreen_id + '&forscreen_char=' + forscreen_char + '&filename=' + filename + '&device_model=' + mobile_model + '&resource_size=' + img_size + '&action=4&resource_type=0&avatarUrl=' + avatarUrl + "&nickName=" + nickName + "&forscreen_nums=" + img_lenth+"&serial_number="+app.globalData.serial_number,
         filePath: img_url,
         name: 'fileUpload',
         success: function(res) {
@@ -315,23 +315,17 @@ Page({
       choose_key: choose_key
     })
     wx.uploadFile({
-      url: "http://" + intranet_ip + ":8080/h5/singleImg?isThumbnail=1&imageId=20170301&deviceId=" + openid + "&box_mac=" + box_mac + "&deviceName=" + mobile_brand + "&rotation=90&imageType=1&web=true&forscreen_id=" + forscreen_id + '&forscreen_char=' + forscreen_char + '&filename=' + filename + '&device_model=' + mobile_model + '&resource_size=' + resouce_size + '&action=2&resource_type=1&avatarUrl=' + avatarUrl + "&nickName=" + nickName,
+      url: "http://" + intranet_ip + ":8080/h5/singleImg?isThumbnail=1&imageId=20170301&deviceId=" + openid + "&box_mac=" + box_mac + "&deviceName=" + mobile_brand + "&rotation=90&imageType=1&web=true&forscreen_id=" + forscreen_id + '&forscreen_char=' + forscreen_char + '&filename=' + filename + '&device_model=' + mobile_model + '&resource_size=' + resouce_size + '&action=2&resource_type=1&avatarUrl=' + avatarUrl + "&nickName=" + nickName+"&serial_number="+app.globalData.serial_number,
       filePath: img_url,
       name: 'fileUpload',
       success: function(res) {
         var info_rt = JSON.parse(res.data);
         if (info_rt.code == 1001) {
-          /*that.setData({
-            wifiErr: {
-              'is_open': 1,
-              'msg': '亲，使用此小程序前需要链接包间wifi,链接wifi投屏更快哦！',
-              'confirm': '重试',
-              'calcle': '',
-              'type': 3
-            }
-          })*/
-          app.showToast('投屏失败，请重试！')
           
+          app.showToast('投屏失败，请重试！')
+  
+        }else if(info_rt.code==-1){
+          app.showToast('系统繁忙,请重试');
         }
       },
       fail: function({
@@ -364,7 +358,7 @@ Page({
     intranet_ip = res.currentTarget.dataset.intranet_ip;
 
     wx.request({
-      url: "http://" + intranet_ip + ":8080/h5/stop?deviceId=" + openid + "&box_mac=" + box_mac + "&web=true",
+      url: "http://" + intranet_ip + ":8080/h5/stop?deviceId=" + openid + "&box_mac=" + box_mac + "&web=true&serial_number="+app.globalData.serial_number,
       success: function(res) {
         if (res.data.code == 10000) {
           wx.navigateBack({
@@ -391,6 +385,8 @@ Page({
             delta: 1,
           })
           utils.tryCatch(mta.Event.stat('wifiPicExitForscreen', { 'status': 0 }));
+        }else if(res.data.code ==-1){
+          app.showToast('系统繁忙,请重试');
         }
 
       },

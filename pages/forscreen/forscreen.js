@@ -182,7 +182,7 @@ Page({
                     },
                     method: "POST",
                     success: function (res) {
-
+                      app.globalData.serial_number = app.globalData.have_link_box_pre+ res.data.result.openid+'_'+(new Date()).valueOf();
                     }
                   })
                 }
@@ -265,7 +265,6 @@ Page({
                   }
                 })
               } else {
-                console.log('ddddd');
                 
                 setInfos(box_mac, res.data.result.openid, code_type);
               }
@@ -293,38 +292,18 @@ Page({
           var timestamp = (new Date()).valueOf();
           var is_have = res.data.result.is_have;
           if (is_have == 0) {
-            var code = res.data.result.code;
-            wx.request({
-              url: api_url+'/Netty/Index/pushnetty',
-              headers: {
-                'Content-Type': 'application/json'
-              },
-              method: "POST",
-              data: {
-                box_mac: box_mac,
-                msg: '{"action":1,"code":' + code + ',"openid":"' + openid + '"}',
-              },
-              success:function(rt){
-                if (rt.data.code != 10000) {
-                  wx.showToast({
-                    title: '该电视暂不能投屏',
-                    icon: 'none',
-                    duration: 2000
-                  })
-                } 
-              }
-            })
+            
             mta.Event.stat('scanQrcodeResult', { 'linktype': 0 })
           } else if (is_have == 1) {
             mta.Event.stat('scanQrcodeResult', { 'linktype': 1 })
           }
+          app.globalData.serial_number = app.globalData.have_link_box_pre+openid+'_'+(new Date()).valueOf();
+                                         
           wx.reLaunch({
             url: '../index/index',
           })
         }
-        
       })
-      
     }
   },
 })

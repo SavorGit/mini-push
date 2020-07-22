@@ -211,7 +211,7 @@ Page({
                         duration: 5000
                       });
                       wx.request({
-                        url: api_url + '/Smallapp/index/recordForScreenPics',
+                        url: api_v_url + '/index/recordForScreenPics',
                         header: {
                           'content-type': 'application/json'
                         },
@@ -223,7 +223,8 @@ Page({
                           mobile_brand: mobile_brand,
                           mobile_model: mobile_model,
                           forscreen_char: forscreen_char,
-                          imgs: '["media/resource/' + filename + '"]'
+                          imgs: '["media/resource/' + filename + '"]',
+                          serial_number:app.globalData.serial_number
                         },
                       });
                     },
@@ -258,7 +259,7 @@ Page({
                   duration: 5000
                 });
                 wx.request({
-                  url: api_url + '/Smallapp/index/recordForScreenPics',
+                  url: api_v_url + '/index/recordForScreenPics',
                   header: {
                     'content-type': 'application/json'
                   },
@@ -270,7 +271,8 @@ Page({
                     mobile_brand: mobile_brand,
                     mobile_model: mobile_model,
                     forscreen_char: forscreen_char,
-                    imgs: '["media/resource/' + filename + '"]'
+                    imgs: '["media/resource/' + filename + '"]',
+                    serial_number:app.globalData.serial_number
                   },
                 });
               },
