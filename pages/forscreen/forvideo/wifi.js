@@ -233,7 +233,8 @@ Page({
     openid = res.currentTarget.dataset.openid;
     that.setData({
       box_mac: box_mac,
-      openid: openid
+      openid: openid,
+      is_btn_disabel:false,
     })
     var intranet_ip = res.currentTarget.dataset.intranet_ip;
     var forscreen_id = (new Date()).valueOf();
