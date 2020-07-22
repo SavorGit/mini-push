@@ -632,7 +632,7 @@ App({
     var that = this;
     wx.showModal({
       title: '提示',
-      content: "您可扫码链接热点合作餐厅电视,使用此功能",
+      content: "您可扫码链接\n热点合作餐厅电视使用此功能",
       showCancel: true,
       confirmText: '立即扫码',
       success: function (res) {
