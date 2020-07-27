@@ -334,7 +334,7 @@ Page({
         method: "POST",
         data: {
           box_mac: box_mac,
-          msg: '{ "action": 7,"resource_type":1, "url": "' + forscreen_img + '", "filename":"' + filename + '","openid":"' + openid + '","avatarUrl":"' + avatarUrl + '","nickName":"' + nickName + '","forscreen_id":"' + forscreen_id + '","resource_id":"'+timestamp+'"}',
+          msg: '{ "action": 7,"resource_type":1, "url": "' + forscreen_img + '", "filename":"' + filename + '","openid":"' + openid + '","avatarUrl":"' + avatarUrl + '","nickName":"' + nickName + '","forscreen_id":"' + forscreen_id + '","resource_id":"'+timestamp+'","serial_number":"'+app.globalData.serial_number+'"}',
         },
         success: function (result) {
           wx.request({
@@ -432,7 +432,7 @@ Page({
         method: "POST",
         data: {
           box_mac: box_mac,
-          msg: '{ "action": 7,"resource_type":1, "url": "' + forscreen_img + '", "filename":"' + filename + '","openid":"' + openid + '","avatarUrl":"' + avatarUrl + '","nickName":"' + nickName + '","forscreen_id":"' + forscreen_id + '","resource_id":"'+timestamp+'"}',
+          msg: '{ "action": 7,"resource_type":1, "url": "' + forscreen_img + '", "filename":"' + filename + '","openid":"' + openid + '","avatarUrl":"' + avatarUrl + '","nickName":"' + nickName + '","forscreen_id":"' + forscreen_id + '","resource_id":"'+timestamp+'","serial_number":"'+app.globalData.serial_number+'"}',
         },
         success: function (result) {
           wx.request({
@@ -490,7 +490,7 @@ Page({
       method: "POST",
       data: {
         box_mac: box_mac,
-        msg: '{ "action": 7,"resource_type":1, "url": "' + forscreen_img + '", "filename":"' + filename + '","openid":"' + openid + '","avatarUrl":"' + avatarUrl + '","nickName":"' + nickName + '","forscreen_id":"' + forscreen_id + '","resource_id":"'+timestamp+'"}',
+        msg: '{ "action": 7,"resource_type":1, "url": "' + forscreen_img + '", "filename":"' + filename + '","openid":"' + openid + '","avatarUrl":"' + avatarUrl + '","nickName":"' + nickName + '","forscreen_id":"' + forscreen_id + '","resource_id":"'+timestamp+'","serial_number":"'+app.globalData.serial_number+'"}',
       },
       success: function (result) {
         wx.request({

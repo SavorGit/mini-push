@@ -148,6 +148,7 @@ App({
     var forscreen_char = '';
     var mobile_brand = that.globalData.mobile_brand;
     var mobile_model = that.globalData.mobile_model;
+    var serial_number = that.globalData.serial_number;
     var res_id = forscreen_id;
     var forscreen_id = (new Date()).valueOf();
     if(action==8){
@@ -160,7 +161,7 @@ App({
       //图集
       var res_obj = [];
       
-      var msg = { action: 10,  openid: openid, img_nums: res_len, forscreen_char: forscreen_char, forscreen_id: forscreen_id, avatarUrl: avatarUrl, nickName: nickName}
+      var msg = { action: 10,  openid: openid, img_nums: res_len, forscreen_char: forscreen_char, forscreen_id: forscreen_id, avatarUrl: avatarUrl, nickName: nickName,serial_number:serial_number}
       for (var i = 0; i < pubdetail.length; i++) {
         var order = i + 1;
         wx.request({ //start
@@ -258,7 +259,7 @@ App({
             forscreen_id: forscreen_id,
             duration: parseInt(pubdetail[i]['duration']),
             resource_type:2,
-            serial_number:that.globalData.serial_number
+            serial_number:serial_number
           },
           success: function (ret) { }
         });
@@ -277,7 +278,7 @@ App({
           method: "POST",
           data: {
             box_mac: box_mac,
-            msg: '{ "action":'+netty_action+', "url": "' + url+ '", "filename":"' + pubdetail[i]['filename'] + '","openid":"' + openid + '","resource_type":2,"video_id":"' + pubdetail[i]['res_id'] + '","avatarUrl":"' + avatarUrl + '","nickName":"' + nickName + '","forscreen_id":"' + forscreen_id + '","resource_size":"'+pubdetail[i]['resource_size']+'"}',
+            msg: '{ "action":'+netty_action+', "url": "' + url+ '", "filename":"' + pubdetail[i]['filename'] + '","openid":"' + openid + '","resource_type":2,"video_id":"' + pubdetail[i]['res_id'] + '","avatarUrl":"' + avatarUrl + '","nickName":"' + nickName + '","forscreen_id":"' + forscreen_id + '","resource_size":"'+pubdetail[i]['resource_size']+'","serial_number":"'+serial_number+'"}',
           },
           success: function (result) {
             wx.showToast({
@@ -407,7 +408,7 @@ App({
                       method: "POST",
                       data: {
                         box_mac: box_mac,
-                        msg: '{ "action": 9,"url":"' + qrcode_url + '","openid":"'+openid+'","forscreen_id":"'+timestamp+'"}',
+                        msg: '{ "action": 9,"url":"' + qrcode_url + '","openid":"'+openid+'","forscreen_id":"'+timestamp+'","serial_number":"'+that.globalData.serial_number+'"}',
                       },
                       success: function () {
                         wx.showToast({
@@ -448,7 +449,7 @@ App({
                 method: "POST",
                 data: {
                   box_mac: box_mac,
-                  msg: '{ "action": 9,"url":"' + qrcode_url + '","openid":"'+openid+'","forscreen_id":"'+timestamp+'"}',
+                  msg: '{ "action": 9,"url":"' + qrcode_url + '","openid":"'+openid+'","forscreen_id":"'+timestamp+'","serial_number":"'+that.globalData.serial_number+'"}',
                 },
                 success: function () {
                   wx.showToast({

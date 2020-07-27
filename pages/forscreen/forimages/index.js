@@ -458,6 +458,7 @@ Page({
             var end_time = (new Date()).valueOf();
             var diff_time = end_time - forscreen_id;
             netty_push_info.res_eup_time = (new Date()).valueOf();
+            netty_push_info.serial_number = app.globalData.serial_number;
             utils.tryCatch(mta.Event.stat('forscreenImgWastTime', { 'uploadtime': diff_time })); 
             netty_push_info.img_list = netty_push_img;
 
@@ -637,6 +638,7 @@ Page({
     push_info.forscreen_char = forscreen_char;
     push_info.avatarUrl = avatarUrl;
     push_info.nickName  = nickName;
+    push_info.serial_number = app.globalData.serial_number;
     var netty_tmp = {};
     netty_tmp.url = forscreen_img ;
     netty_tmp.filename = filename ;

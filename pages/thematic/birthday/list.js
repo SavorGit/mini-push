@@ -202,7 +202,7 @@ Page({
                     method: "POST",
                     data: {
                       box_mac: box_mac,
-                      msg: '{ "action": 6,"url":"' + vediourl + '","filename":"' + filename + '","forscreen_id":"' + timestamp + '","resource_type":2,"openid":"'+openid+'"}',
+                      msg: '{ "action": 6,"url":"' + vediourl + '","filename":"' + filename + '","forscreen_id":"' + timestamp + '","resource_type":2,"openid":"'+openid+'","serial_number":"'+app.globalData.serial_number+'"}',
                     },
                     success: function (res) {
                       wx.showToast({
@@ -250,7 +250,7 @@ Page({
               method: "POST",
               data: {
                 box_mac: box_mac,
-                msg: '{ "action": 6,"url":"' + vediourl + '","filename":"' + filename + '","forscreen_id":"' + timestamp + '","resource_type":2,"openid":"'+openid+'"}',
+                msg: '{ "action": 6,"url":"' + vediourl + '","filename":"' + filename + '","forscreen_id":"' + timestamp + '","resource_type":2,"openid":"'+openid+'","serial_number":"'+app.globalData.serial_number+'"}',
               },
               success: function (res) {
                 wx.showToast({
