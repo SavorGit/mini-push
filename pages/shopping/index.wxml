@@ -7,7 +7,7 @@
 <import src="/pages/template/commons" />
 <template is="navigationBarForTopLevel" data='{{statusBarHeight: statusBarHeight,titleText:"商城"}}' />
 
-<scroll-view class='container theme-container' style='height: calc(100vh - 46px - {{statusBarHeight + SystemInfo.screenBottomSpace}}px);' scroll-y="true" scroll-with-animation="true" bindscrolltolower="loadMore">
+<scroll-view class='container theme-container' style='height: calc(100vh - {{statusBarHeight + 46}}px);' scroll-y="true" scroll-with-animation="true" bindscrolltolower="loadMore">
 	<view class="page flex-column-center-flex_start">
 
 		<!-- 顶部轮播图片 -->
@@ -142,3 +142,6 @@
 	</view>
 	<!-- </view> -->
 </block>
+
+<!-- 关注公众号 -->
+<template is="followOfficialAccount" />

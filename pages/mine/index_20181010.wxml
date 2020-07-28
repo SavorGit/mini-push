@@ -168,3 +168,6 @@
 <view wx:if="{{box_mac !=''}}">
 	<template is="fixedSuspensionButtonGroup" />
 </view>
+
+<!-- 关注公众号 -->
+<template is="followOfficialAccount" />
