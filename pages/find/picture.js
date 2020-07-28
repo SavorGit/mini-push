@@ -59,28 +59,30 @@ Page({
             
           })
         }
-      }
-    })
-    wx.request({
-      url: api_url + '/Smallapp3/Find/showPic',
-      data: {
-        forscreen_id: forscreen_id,
-        openid: openid,
-
-      },
-      success: function(res) {
-        self.setData({
-          picinfo: res.data.result,
-          play_num: res.data.result.play_num,
-          collect_num: res.data.result.collect_num,
-          share_num: res.data.result.share_num,
-          is_collect: res.data.result.is_collect,
-          openid: openid,
-          box_mac: box_mac,
-          is_replay_disabel:false,
+      },complete:function(){
+        wx.request({
+          url: api_url + '/Smallapp3/Find/showPic',
+          data: {
+            forscreen_id: forscreen_id,
+            openid: openid,
+    
+          },
+          success: function(res) {
+            self.setData({
+              picinfo: res.data.result,
+              play_num: res.data.result.play_num,
+              collect_num: res.data.result.collect_num,
+              share_num: res.data.result.share_num,
+              is_collect: res.data.result.is_collect,
+              openid: openid,
+              box_mac: box_mac,
+              is_replay_disabel:false,
+            })
+          }
         })
       }
     })
+    
   },
   //预览图片
   previewImage: function(e) {
