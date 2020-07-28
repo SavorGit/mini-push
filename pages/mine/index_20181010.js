@@ -20,7 +20,8 @@ Page({
     publiclist:[],
     collectlist:[],
     box_mac:'',
-    wifiErr: app.globalData.wifiErr
+    wifiErr: app.globalData.wifiErr,
+    is_view_official_account:app.globalData.is_view_official_account, //是否显示关注公众号
   },
 
   /**
@@ -61,6 +62,18 @@ Page({
             'content-type': 'application/json'
           },
           success: function (res) {
+
+            var user_info = res.data.result.userinfo;
+            var colose_official_account = wx.getStorageSync(cache_key+'colose_official_account');
+            if(user_info.subscribe==0 && colose_official_account ==''){
+              that.setData({
+                is_view_official_account:true
+              })
+            }else {
+              that.setData({
+                is_view_official_account:false
+              })
+            }
             wx.setStorage({
               key: 'savor_user_info',
               data: res.data.result.userinfo,
@@ -122,6 +135,17 @@ Page({
                 'content-type': 'application/json'
               },
               success: function (res) {
+                var user_info = res.data.result.userinfo;
+                var colose_official_account = wx.getStorageSync(cache_key+'colose_official_account');
+                if(user_info.wx_mpopenid=='' && colose_official_account ==''){
+                  that.setData({
+                    is_view_official_account:true
+                  })
+                }else {
+                  that.setData({
+                    is_view_official_account:false
+                  })
+                }
                 wx.setStorage({
                   key: 'savor_user_info',
                   data: res.data.result.userinfo,
@@ -298,6 +322,7 @@ Page({
           box_mac = '';
         }
       }, re => { }, { isShowLoading: false });
+      app.isRegister(app.globalData.openid,that);
     } else {
       app.openidCallback = openid => {
         utils.PostRequest(api_v_url + '/index/isHaveCallBox', {
@@ -316,8 +341,10 @@ Page({
             box_mac = '';
           }
         }, re => { }, { isShowLoading: false });
+        app.isRegister(openid,that);
       }
     }
+    
   },
 
   /**
@@ -421,6 +448,18 @@ Page({
     var openid = this.data.openid;
     wx.navigateTo({
       url: '/pages/mine/address/index?openid='+openid+'&isOrder=0',
+    })
+  },
+  closeFollowOfficialAccount:function(e){
+    this.setData({
+      is_view_official_account:false
+    })
+    wx.setStorageSync(cache_key+'colose_official_account',1);
+  },
+  nowFollowOfficialAccount:function(){
+    var openid= this.data.openid;
+    wx.navigateTo({
+      url: '/pages/h5/index?h5_url='+app.globalData.Ofiicial_account_url+openid,
     })
   },
   /**

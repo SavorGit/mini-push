@@ -13,6 +13,7 @@ Page({
    */
   onLoad: function (options) {
     var that = this;
+    console.log(options)
     var h5_url = decodeURIComponent(options.h5_url);
     that.setData({
       h5_url:h5_url,

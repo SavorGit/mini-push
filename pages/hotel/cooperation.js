@@ -10,6 +10,7 @@ var rest_appid = app.globalData.rest_appid;
 var jijian_appid = app.globalData.jijian_appid;
 var api_url = app.globalData.api_url;
 var api_v_url = app.globalData.api_v_url;
+var cache_key = app.globalData.cache_key;
 Page({
 
   /**
@@ -40,6 +41,7 @@ Page({
     link_type: app.globalData.link_type,
     wifiErr: app.globalData.wifiErr,
     link_type: app.globalData.link_type,
+    is_view_official_account:app.globalData.is_view_official_account
   },
 
   /**
@@ -72,6 +74,17 @@ Page({
         },
         success: function (res) {
           if (res.data.code == 10000) {
+            var user_info = res.data.result.userinfo;
+            var colose_official_account = wx.getStorageSync(cache_key+'colose_official_account');
+            if(user_info.subscribe==0 && colose_official_account ==''){
+              that.setData({
+                is_view_official_account:true
+              })
+            }else {
+              that.setData({
+                is_view_official_account:false
+              })
+            }
             that.setData({
               close_hotel_hint: res.data.result.userinfo.close_hotel_hint,
             })
@@ -291,7 +304,9 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    
+    var that = this;
+    var user_info = wx.getStorageSync("savor_user_info");
+    app.isRegister(user_info.openid,that);
   },
 
   /**
@@ -649,5 +664,17 @@ Page({
       })
     }
     
-  }
+  },
+  closeFollowOfficialAccount:function(e){
+    this.setData({
+      is_view_official_account:false
+    })
+    wx.setStorageSync(cache_key+'colose_official_account',1);
+  },
+  nowFollowOfficialAccount:function(){
+    var openid= this.data.openid;
+    wx.navigateTo({
+      url: '/pages/h5/index?h5_url='+app.globalData.Ofiicial_account_url+openid,
+    })
+  },
 })

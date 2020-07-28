@@ -369,7 +369,8 @@ Page({
     } else if (res_type == 2) {
       var action = 12; //发现视频点播
     }
-    app.boxShow(box_mac, find_id, pubdetail, res_type, res_nums, action, '', that);
+    var hotel_info = that.data.hotel_info
+    app.boxShow(box_mac, find_id, pubdetail, res_type, res_nums, action, hotel_info, that);
     
     
     

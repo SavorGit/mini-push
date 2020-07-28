@@ -45,6 +45,7 @@ Page({
     wifiErr: app.globalData.wifiErr,
     wifi_hidden: true,
     is_view_eval_waiter:0,  //是否显示评价服务员
+    is_view_official_account:app.globalData.is_view_official_account, //是否显示关注公众号
 
   },
 
@@ -52,6 +53,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    wx.removeStorageSync(cache_key+'colose_official_account');
     var that = this;
     wx.hideLoading()
     //mta.Page.init()
@@ -69,7 +71,17 @@ Page({
         "openid": app.globalData.openid,
         "page_id": 3
       }, (data, headers, cookies, errMsg, statusCode) => {
-        //wx.hideLoading();
+        var user_info = data.result.userinfo;
+        var colose_official_account = wx.getStorageSync(cache_key+'colose_official_account');
+        if(user_info.subscribe==0 && colose_official_account ==''){
+          that.setData({
+            is_view_official_account:true
+          })
+        }else {
+          that.setData({
+            is_view_official_account:false
+          })
+        }
         wx.setStorage({
           key: 'savor_user_info',
           data: data.result.userinfo,
@@ -205,7 +217,18 @@ Page({
             "openid": openid,
             "page_id": 3
           }, (data, headers, cookies, errMsg, statusCode) => {
-            //wx.hideLoading();
+            var user_info = data.result.userinfo;
+            
+            var colose_official_account = wx.getStorageSync(cache_key+'colose_official_account');
+            if(user_info.subscribe=='' && colose_official_account ==''){
+              that.setData({
+                is_view_official_account:true
+              })
+            }else {
+              that.setData({
+                is_view_official_account:false
+              })
+            }
             wx.setStorage({
               key: 'savor_user_info',
               data: data.result.userinfo,
@@ -981,7 +1004,9 @@ Page({
 
         }
       }, re => { }, { isShowLoading: false });
+      app.isRegister(user_info.openid,that);
     }
+    
     mta.Event.stat('showIndex', { 'linktype': app.globalData.link_type })
 
     //this.onLoad()
@@ -1059,5 +1084,17 @@ Page({
         url: '/pages/hotel/waiter_evaluate_h5?openid='+openid+'&box_id='+box_id,
       });
     } 
+  },
+  closeFollowOfficialAccount:function(e){
+    this.setData({
+      is_view_official_account:false
+    })
+    wx.setStorageSync(cache_key+'colose_official_account',1);
+  },
+  nowFollowOfficialAccount:function(){
+    var openid= this.data.openid;
+    wx.navigateTo({
+      url: '/pages/h5/index?h5_url='+app.globalData.Ofiicial_account_url+openid,
+    })
   }
 })

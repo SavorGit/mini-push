@@ -20,10 +20,24 @@ let SavorUtils = {
     isRegister: pageContext => utils.PostRequest(api_v_url + '/User/isRegister', {
       openid: pageContext.data.openid,
       page_id: 2
-    }, (data, headers, cookies, errMsg, statusCode) => wx.setStorage({
-      key: 'savor_user_info',
-      data: data.result.userinfo,
-    }), function () {
+    }, (data, headers, cookies, errMsg, statusCode) =>{
+      var user_info = data.result.userinfo;
+            
+      var colose_official_account = wx.getStorageSync(cache_key+'colose_official_account');
+      if(user_info.subscribe==0 && colose_official_account ==''){
+        pageContext.setData({
+          is_view_official_account:true
+        })
+      }else {
+        pageContext.setData({
+          is_view_official_account:false
+        })
+      }
+      wx.setStorage({
+        key: 'savor_user_info',
+        data: data.result.userinfo,
+      })
+    }, function () {
       if (app.globalData.link_type != 2) {
         wx.setStorage({
           key: 'savor_user_info',
@@ -63,6 +77,7 @@ Page({
     keywords: '',
     mall_cart_nums: 0,
     goods_id:0,
+    is_view_official_account:app.globalData.is_view_official_account
   },
 
   /**
@@ -482,6 +497,7 @@ Page({
     that.getGoodsList(category_id, select_page, user_info.openid,1);
     }
     
+    app.isRegister(user_info.openid,that);
   },
   getMallCartNums: function (openid) {
     var that = this;
@@ -611,6 +627,17 @@ Page({
       showBuyGoodsPopWindow: false
     });
   },
-
+  closeFollowOfficialAccount:function(e){
+    this.setData({
+      is_view_official_account:false
+    })
+    wx.setStorageSync(cache_key+'colose_official_account',1);
+  },
+  nowFollowOfficialAccount:function(){
+    var openid= this.data.openid;
+    wx.navigateTo({
+      url: '/pages/h5/index?h5_url='+app.globalData.Ofiicial_account_url+openid,
+    })
+  },
   noneActive: function (e) {}
 })

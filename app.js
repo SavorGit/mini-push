@@ -1223,6 +1223,31 @@ App({
       }
     })
   },
+  isRegister:function(openid,self){
+    var that = this;
+    var colose_official_account = wx.getStorageSync(that.globalData.cache_key+'colose_official_account');
+    if(colose_official_account==1){
+      self.setData({is_view_official_account:false})
+    }else{
+      wx.request({
+        url: that.globalData.api_v_url+'/User/isRegister',
+        data: {
+          openid: openid,
+        },success:function(res){
+          if(res.data.code==10000){
+            var user_info = res.data.result.userinfo;
+            if(user_info.subscribe ==1){
+              self.setData({
+                is_view_official_account:false,
+              })
+              that.globalData.is_view_official_account = false
+            }
+          }
+        }
+      })
+    }
+    
+  },
   globalData: {
     openid: '',
     session_key: '',
@@ -1238,6 +1263,7 @@ App({
     oss_upload_url: 'https://image.littlehotspot.com',
     netty_url: 'https://netty-push.littlehotspot.com',
     oss_url: 'https://oss.littlehotspot.com',
+    Ofiicial_account_url:'https://mobile.littlehotspot.com/h5/official/getuserinfo/p/',
     oss_bucket: 'redian-produce',
     oss_access_key_id:'LTAI4SFjj1AsowpVFZNXOBCVqRHDs',
     link_type: 0,  //1:外网投屏  2：直连投屏
@@ -1253,6 +1279,8 @@ App({
     hotels: [],
     not_link_box_pre:'N_',
     have_link_box_pre:'Y_',
-    serial_number:''
+    serial_number:'',
+    is_view_official_account:false,
+    
   }
 })
