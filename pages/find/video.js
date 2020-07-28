@@ -17,7 +17,7 @@ Page({
     statusBarHeight: getApp().globalData.statusBarHeight,
     pageFrom: null, // 来源页面地址
     link_type: app.globalData.link_type, //1:外网投屏  2：直连投屏
-    is_replay_disabel: false,
+    is_replay_disabel: true,
     showControl: false,
     is_box_show: false,
   },
@@ -80,6 +80,7 @@ Page({
           is_collect: res.data.result.is_collect,
           openid: openid,
           box_mac: box_mac,
+          is_replay_disabel:false
         })
       }
     })
