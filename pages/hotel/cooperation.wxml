@@ -100,3 +100,6 @@
 		<loading hidden="{{hiddens}}" bindchange="loadingChange">加载中...</loading>
 	</view>
 </view>
+
+<!-- 关注公众号 -->
+<template is="followOfficialAccount" />
