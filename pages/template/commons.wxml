@@ -280,7 +280,7 @@
 <template name="followOfficialAccount">
 	<view class="flex-row-center-space_around theme-button-red" style='position:absolute;left:25rpx;right:25rpx;bottom:10rpx;width:690rpx;height:70rpx;padding:0 5rpx;border-radius:10rpx;background-color:rgb(254,240,225);color:rgba(252,143,45,1);z-index:999;'>
 		<!-- <view class="fa fa-times-circle-o" style="width:50rpx;height:50rpx;line-height:50rpx;text-align:center;font-size:46rpx;" aria-hidden="true" bindtap="closeFollowOfficialAccount"></view> -->
-		<image style="width:36rpx;height:36rpx;" mode="aspectFit" src="/images/icon2/FC8F2D_close.png" bindtap="closeFollowOfficialAccount"></image>
+		<image style="width:30rpx;height:30rpx;padding:20rpx;" mode="aspectFit" src="/images/icon2/FC8F2D_close.png" bindtap="closeFollowOfficialAccount"></image>
 		<!-- <view style="width:50rpx;height:50rpx;line-height:50rpx;text-align:center;font-size:46rpx;" aria-hidden="true" bindtap="closeFollowOfficialAccount">X</view> -->
 		<view style="font-size:24rpx;">关注热点服务公众号，及时关注好物活动。</view>
 		<button style="width:120rpx;height:50rpx;line-height:50rpx;text-align:center;border:3rpx solid rgba(252,143,45,1);border-radius:10rpx;margin:0;padding:0;font-size:20rpx;background-color:unset;color:rgba(252,143,45,1)" bindtap="nowFollowOfficialAccount">立即关注</button>
