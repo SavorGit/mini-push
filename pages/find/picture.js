@@ -4,6 +4,7 @@ let utils = require("../../utils/util.js");
 let mta = require('../../utils/mta_analysis.js');
 var pubdetail;
 var api_url = app.globalData.api_url;
+var api_v_url = app.globalData.api_v_url;
 var pageid = 21;
 Page({
 
@@ -15,7 +16,7 @@ Page({
     pageFrom: null, // 来源页面地址
     link_type: app.globalData.link_type, //1:外网投屏  2：直连投屏
     picinfo: [],
-    is_replay_disabel: false,
+    is_replay_disabel: true,
   },
 
   /**
@@ -46,6 +47,21 @@ Page({
     //wx.hideShareMenu();
     var forscreen_id = options.forscreen_id;
     wx.request({
+      url: api_v_url + '/index/isHaveCallBox?openid=' + openid,
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      success: function(res) {
+        if (res.data.code == 10000 && res.data.result.is_have == 1) {
+          self.setData({
+            is_open_simple: res.data.result.is_open_simple,
+            hotel_info: res.data.result,
+            
+          })
+        }
+      }
+    })
+    wx.request({
       url: api_url + '/Smallapp3/Find/showPic',
       data: {
         forscreen_id: forscreen_id,
@@ -61,6 +77,7 @@ Page({
           is_collect: res.data.result.is_collect,
           openid: openid,
           box_mac: box_mac,
+          is_replay_disabel:false,
         })
       }
     })
@@ -258,7 +275,8 @@ Page({
     } else if (res_type == 2) {
       var action = 12; //发现视频点播
     }
-    app.boxShow(box_mac, find_id, pubdetail, res_type, res_nums, action, '', self);
+    var hotel_info = self.data.hotel_info;
+    app.boxShow(box_mac, find_id, pubdetail, res_type, res_nums, action, hotel_info, self);
 
     utils.tryCatch(mta.Event.stat('FindPic_PicDetail_LaunchTV', {
       'openid': self.data.openid,

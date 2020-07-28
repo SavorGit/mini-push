@@ -53,7 +53,7 @@
       <view class='btn-group full_width'>
         <button wx:if="{{is_replay_disabel == false}}" class='theme-button-dark' bindtap='boxShow' data-forscreen_id='{{picinfo.forscreen_id}}' data-pubdetail='{{picinfo.pubdetail}}' data-forscreen_char='{{picinfo.forscreen_char}}' data-res_type="{{picinfo.res_type}}"
           data-res_nums="{{picinfo.res_nums}}" data-boxmac="{{box_mac}}" data-openid="{{openid}}">电视播放</button>
-        <button wx:else disabled="true">{{djs}}S</button>
+        <!-- <button wx:else disabled="true">{{djs}}S</button> -->
       </view>
     </view>
     <view class='full_width page_bottom'></view>
