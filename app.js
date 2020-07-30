@@ -750,16 +750,22 @@ App({
             'content-type': 'application/json'
           },
           success: function (res) {
-            
-            that.globalData.openid = res.data.result.openid;
-            that.globalData.session_key = res.data.result.session_key;
-            that.globalData.Official_article_url = res.data.result.official_account_article_url
-            if (that.openidCallback) {
-              if(that.globalData.serial_number==''){
-                that.globalData.serial_number = that.globalData.not_link_box_pre+res.data.result.openid+'_'+(new Date()).valueOf();
+            if(res.data.code==10000){
+              that.globalData.openid = res.data.result.openid;
+              that.globalData.session_key = res.data.result.session_key;
+              that.globalData.Official_article_url = res.data.result.official_account_article_url
+              if (that.openidCallback) {
+                if(that.globalData.serial_number==''){
+                  that.globalData.serial_number = that.globalData.not_link_box_pre+res.data.result.openid+'_'+(new Date()).valueOf();
+                }
+                that.openidCallback(res.data.result.openid);
               }
-              that.openidCallback(res.data.result.openid);
+            }else {
+              wx.reLaunch({
+                url: '/pages/index/index',
+              })
             }
+            
           }
         })
       }
@@ -1243,6 +1249,11 @@ App({
                 is_view_official_account:false,
               })
               that.globalData.is_view_official_account = false
+            }else {
+              self.setData({
+                is_view_official_account:true,
+              })
+              that.globalData.is_view_official_account = true
             }
           }
         }
