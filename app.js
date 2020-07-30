@@ -753,6 +753,7 @@ App({
             
             that.globalData.openid = res.data.result.openid;
             that.globalData.session_key = res.data.result.session_key;
+            that.globalData.Official_article_url = res.data.result.official_account_article_url
             if (that.openidCallback) {
               if(that.globalData.serial_number==''){
                 that.globalData.serial_number = that.globalData.not_link_box_pre+res.data.result.openid+'_'+(new Date()).valueOf();
@@ -1236,6 +1237,7 @@ App({
         },success:function(res){
           if(res.data.code==10000){
             var user_info = res.data.result.userinfo;
+            wx.setStorageSync(that.globalData.cache_key+'user_info', user_info);
             if(user_info.subscribe ==1){
               self.setData({
                 is_view_official_account:false,
@@ -1263,7 +1265,8 @@ App({
     oss_upload_url: 'https://image.littlehotspot.com',
     netty_url: 'https://netty-push.littlehotspot.com',
     oss_url: 'https://oss.littlehotspot.com',
-    Ofiicial_account_url:'https://mobile.littlehotspot.com/h5/official/getuserinfo/p/',
+    Official_account_url:'https://mobile.littlehotspot.com/h5/official/getuserinfo/p/',
+    Official_article_url:'',
     oss_bucket: 'redian-produce',
     oss_access_key_id:'LTAI4SFjj1AsowpVFZNXOBCVqRHDs',
     link_type: 0,  //1:外网投屏  2：直连投屏

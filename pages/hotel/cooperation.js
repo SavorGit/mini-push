@@ -674,7 +674,7 @@ Page({
   nowFollowOfficialAccount:function(){
     var openid= this.data.openid;
     wx.navigateTo({
-      url: '/pages/h5/index?h5_url='+app.globalData.Ofiicial_account_url+openid,
+      url: '/pages/h5/index?h5_url='+app.globalData.Official_account_url+openid,
     })
   },
 })
