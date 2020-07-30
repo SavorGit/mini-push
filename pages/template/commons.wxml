@@ -283,6 +283,6 @@
 		<image style="width:30rpx;height:30rpx;padding:20rpx;" mode="aspectFit" src="/images/icon2/FC8F2D_close.png" bindtap="closeFollowOfficialAccount"></image>
 		<!-- <view style="width:50rpx;height:50rpx;line-height:50rpx;text-align:center;font-size:46rpx;" aria-hidden="true" bindtap="closeFollowOfficialAccount">X</view> -->
 		<view style="font-size:24rpx;">关注热点服务公众号，及时关注好物活动。</view>
-		<button style="width:120rpx;height:50rpx;line-height:50rpx;text-align:center;border:3rpx solid rgba(252,143,45,1);border-radius:10rpx;margin:0;padding:0;font-size:20rpx;background-color:unset;color:rgba(252,143,45,1)" bindtap="nowFollowOfficialAccount">立即关注</button>
+		<button style="width:120rpx;height:60rpx;line-height:60rpx;text-align:center;border:3rpx solid rgba(252,143,45,1);border-radius:10rpx;margin:0;padding:0;font-size:20rpx;background-color:unset;color:rgba(252,143,45,1)" bindtap="nowFollowOfficialAccount">立即关注</button>
 	</view>
 </template>
