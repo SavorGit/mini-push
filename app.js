@@ -641,7 +641,7 @@ App({
           wx.scanCode({
             onlyFromCamera: true,
             success: (res) => {
-              console.log(res)
+              
               if (res.scanType == 'QR_CODE') {
                 var selemite = res.result.indexOf("?");
                 var params = res.result.substring(selemite, res.result.length);
@@ -651,7 +651,7 @@ App({
                   url: params
                 })
               } else if (res.scanType == 'WX_CODE') {
-                console.log(res)
+                
                 wx.navigateTo({
                   url: '/' + res.path
                 })
@@ -829,7 +829,6 @@ App({
     if (pages.length) {
       currPage = pages[pages.length - 1];
     }
-    console.log(currPage);
     mta.Event.stat('goToBack', { 'url': currPage.__route__, 'params': params })
   },
   checkMobile: function (mobile) {
@@ -994,7 +993,7 @@ App({
                 }
                 //wx.hideLoading()
               }, fail: function (res) {
-                console.log(res);
+                console.log('getConnectedWifi:'+res.errMsg);
                 if(res.errMsg == 'getConnectedWifi:fail:currentWifi is null' || res.errMsg=='getConnectedWifi:fail no wifi is connected.'){
                   aps.connectWifi(wifi_name, wifi_mac, use_wifi_password, box_mac, that);
                 }else {
@@ -1130,54 +1129,54 @@ App({
 
 
       }, fail: function (res) {
-        console.log(res)
-        wx.stopWifi({
-
-        })
+        console.log('connectWifi:fail'+res.errMsg);
+        
         //wx.hideLoading();
         that.setData({
           wifi_hidden: true,
         })
-        if (res.errCode == 12005) { //安卓特有  未打开wifi
-          that.setData({
-            wifiErr: { 'is_open': 1, 'msg': '亲，使用此小程序前需要打开您手机的wifi,连上wifi投屏更快哦！', 'confirm': '确定', 'calcle': '取消', 'type': 1 }
-          })
-        } else if (res.errCode == 12006) {//Android 特有，未打开 GPS 定位开关
-          that.setData({
-            wifiErr: { 'is_open': 1, 'msg': '亲，使用此小程序前需要打开您手机的GPS定位,连上wifi投屏更快哦！', 'confirm': '确定', 'calcle': '取消', 'type': 2 }
-          })
-        } else if(res.errCode == 12007){//用户拒绝授权链接 Wi-Fi
-          that.setData({
-            wifiErr: { 'is_open': 1, 'msg': '亲，使用此小程序前需要链接包间wifi,连上wifi投屏更快哦！', 'confirm': '重试', 'calcle': '', 'type': 3 }
-          })
-        }
-        
-        else {
-          if (use_wifi_password == '') {
-            var wifi_password_str = '空';
-          } else {
-            var wifi_password_str = use_wifi_password;
-          }
-          var msg = '请手动连接包间wifi:' + wifi_name + ',密码为' + wifi_password_str+'。连上wifi投屏更快哦！';
-          that.setData({
-            wifiErr: { 'is_open': 1, 'msg': msg, 'confirm': '重试', 'type': 4 }
-          })
-        }
+        if(res.errCode==12000){
 
-        var err_info = JSON.stringify(res);
-        wx.request({
-          url: aps.globalData.api_v_url + '/datalog/recordWifiErr',
-          data: {
-            err_info: err_info,
-            box_mac: box_mac,
-            openid:aps.globalData.openid,
-            mobile_brand:aps.globalData.sys_info.brand,
-            mobile_model:aps.globalData.sys_info.model,
-            platform:aps.globalData.sys_info.platform,
-            version:aps.globalData.sys_info.version,
-            system:aps.globalData.sys_info.system
+        }else {
+          if (res.errCode == 12005) { //安卓特有  未打开wifi
+            that.setData({
+              wifiErr: { 'is_open': 1, 'msg': '亲，使用此小程序前需要打开您手机的wifi,连上wifi投屏更快哦！', 'confirm': '确定', 'calcle': '取消', 'type': 1 }
+            })
+          } else if (res.errCode == 12006) {//Android 特有，未打开 GPS 定位开关
+            that.setData({
+              wifiErr: { 'is_open': 1, 'msg': '亲，使用此小程序前需要打开您手机的GPS定位,连上wifi投屏更快哦！', 'confirm': '确定', 'calcle': '取消', 'type': 2 }
+            })
+          } else if(res.errCode == 12007){//用户拒绝授权链接 Wi-Fi
+            that.setData({
+              wifiErr: { 'is_open': 1, 'msg': '亲，使用此小程序前需要链接包间wifi,连上wifi投屏更快哦！', 'confirm': '重试', 'calcle': '', 'type': 3 }
+            })
+          }else {
+            if (use_wifi_password == '') {
+              var wifi_password_str = '空';
+            } else {
+              var wifi_password_str = use_wifi_password;
+            }
+            var msg = '请手动连接包间wifi:' + wifi_name + ',密码为' + wifi_password_str+'。连上wifi投屏更快哦！';
+            that.setData({
+              wifiErr: { 'is_open': 1, 'msg': msg, 'confirm': '重试', 'type': 4 }
+            })
           }
-        })
+  
+          var err_info = JSON.stringify(res);
+          wx.request({
+            url: aps.globalData.api_v_url + '/datalog/recordWifiErr',
+            data: {
+              err_info: err_info,
+              box_mac: box_mac,
+              openid:aps.globalData.openid,
+              mobile_brand:aps.globalData.sys_info.brand,
+              mobile_model:aps.globalData.sys_info.model,
+              platform:aps.globalData.sys_info.platform,
+              version:aps.globalData.sys_info.version,
+              system:aps.globalData.sys_info.system
+            }
+          })
+        }
       }, complete: function (res) {
         //wx.hideLoading()
         that.setData({
@@ -1185,11 +1184,7 @@ App({
         })
       }
     })
-    setTimeout(function () {
-      wx.stopWifi({
-
-      })
-    }, 10000)
+    
 
   },
   showToast: function (title, duration = 2000, icon = 'none', mask = 'false') {
