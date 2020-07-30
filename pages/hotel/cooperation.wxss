@@ -56,6 +56,10 @@
   height: calc(100% - 170rpx);
 }
 
+.page_main_scroll_speed {
+  height: 100%;
+}
+
 .page_main {
   min-height: 100%;
 }
