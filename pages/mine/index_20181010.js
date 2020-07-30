@@ -468,6 +468,7 @@ Page({
         url: '/pages/h5/index?h5_url='+app.globalData.Official_article_url,
       })
     }
+    mta.Event.stat('clickOfficialAccount',{'openid':openid})
   },
   /**
    * 页面上拉触底事件的处理函数

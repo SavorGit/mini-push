@@ -1106,5 +1106,6 @@ Page({
         url: '/pages/h5/index?h5_url='+app.globalData.Official_article_url,
       })
     }
+    mta.Event.stat('clickOfficialAccount',{'openid':openid})
   }
 })

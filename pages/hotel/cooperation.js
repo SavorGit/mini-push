@@ -673,8 +673,17 @@ Page({
   },
   nowFollowOfficialAccount:function(){
     var openid= this.data.openid;
-    wx.navigateTo({
-      url: '/pages/h5/index?h5_url='+app.globalData.Official_account_url+openid,
-    })
+    var user_info = wx.getStorageSync(cache_key+'user_info');
+    if(user_info.wx_mpopenid=='' || typeof(user_info.wx_mpopenid)=='undefined'){
+      wx.navigateTo({
+        url: '/pages/h5/index?h5_url='+app.globalData.Official_account_url+openid,
+      })
+    }else {
+      wx.navigateTo({
+        url: '/pages/h5/index?h5_url='+app.globalData.Official_article_url,
+      })
+    }
+
+    mta.Event.stat('clickOfficialAccount',{'openid':openid})
   },
 })
