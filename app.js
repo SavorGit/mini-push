@@ -993,7 +993,6 @@ App({
                 }
                 //wx.hideLoading()
               }, fail: function (res) {
-                console.log('getConnectedWifi:'+res.errMsg);
                 if(res.errMsg == 'getConnectedWifi:fail:currentWifi is null' || res.errMsg=='getConnectedWifi:fail no wifi is connected.'){
                   aps.connectWifi(wifi_name, wifi_mac, use_wifi_password, box_mac, that);
                 }else {
@@ -1129,7 +1128,6 @@ App({
 
 
       }, fail: function (res) {
-        console.log('connectWifi:fail'+res.errMsg);
         
         //wx.hideLoading();
         that.setData({
@@ -1253,11 +1251,11 @@ App({
     rest_appid: 'wxc395eb4b44563af1',
     jijian_appid: 'wx7883a4327329a67c',
     jd_appid: 'wx91d27dbf599dff74',
-    api_url: 'https://mobile.littlehotspot.com',
-    api_v_url:'https://mobile.littlehotspot.com/Smallapp46',
-    oss_upload_url: 'https://image.littlehotspot.com',
-    netty_url: 'https://netty-push.littlehotspot.com',
-    oss_url: 'https://oss.littlehotspot.com',
+    api_url: 'https://dev-mobile.littlehotspot.com',
+    api_v_url:'https://dev-mobile.littlehotspot.com/Smallapp46',
+    oss_upload_url: 'https://dev-image.littlehotspot.com',
+    netty_url: 'https://dev-netty-push.littlehotspot.com',
+    oss_url: 'https://dev-oss.littlehotspot.com',
     Official_account_url:'https://mobile.littlehotspot.com/h5/official/getuserinfo/p/',
     Official_article_url:'',
     oss_bucket: 'redian-produce',

@@ -139,7 +139,6 @@ Page({
                         hot_play[i].is_show = 0;
                       }
                     }
-                    console.log(hot_play);
                     that.setData({
                       hot_play: hot_play
                     });
@@ -206,7 +205,6 @@ Page({
         mask: true
       })
       app.openidCallback = openid => {
-        console.log(app.globalData.serial_number)
         if (openid != '') {
           that.setData({
             openid: openid
@@ -547,7 +545,6 @@ Page({
 
       }
     }
-    console.log(app.globalData);
     mta.Event.stat('gotoForscreenVideo', { 'linktype': app.globalData.link_type, 'boxmac': box_mac })
 
   },
@@ -1063,7 +1060,6 @@ Page({
       data_id: ads_id,
       type: 1
     });
-    console.log(box_mac);
     mta.Event.stat('clickTopAds', { 'linktype': app.globalData.link_type, "boxmac": box_mac })
   },
   closeWxAuth: function (e) {
