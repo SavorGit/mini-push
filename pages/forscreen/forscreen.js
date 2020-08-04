@@ -6,6 +6,7 @@ var box_mac = '';               //机顶盒mac
 var code_type ='';
 var nowtime;
 var api_url = app.globalData.api_url;
+var api_v_url = app.globalData.api_v_url;
 Page({
   /**
  * 页面的初始数据
@@ -249,7 +250,7 @@ Page({
               }
               if (code_type == 7) {
                 wx.request({
-                  url: api_url + '/smallapp3/index/recodeQrcodeLog',
+                  url: api_v_url + '/index/recodeQrcodeLog',
                   data: {
                     openid: res.data.result.openid,
                     type: 7

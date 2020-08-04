@@ -67,6 +67,46 @@ Page({
         openid: app.globalData.openid
       });
       SavorUtils.User.isRegister(self); //判断用户是否注册
+
+
+      if (typeof (options.q) != 'undefined') {
+        var q = decodeURIComponent(options.q);
+        var selemite = q.indexOf("?");
+        var pams = q.substring(selemite + 3, q.length);
+  
+        var pams_arr = pams.split('_');
+        goods_id = pams_arr[1];
+        var goods_type = pams_arr[2];
+        if(typeof(pams_arr[3])!='undefined'){
+          pur_uid = pams_arr[3];
+        }
+        if(typeof(pams_arr[4])!='undefined'){
+          box_id = pams_arr[4];
+        }
+        
+        self.setData({
+          is_share: true
+        })
+        self.recordScanCodeLog(app.globalData.openid,goods_type,goods_id,box_id);
+        mta.Event.stat('scanGoodsQrcode',{'goodsid':goods_id,'goodstype':goods_type,'boxid':box_id})
+      } else {
+        goods_id = options.goods_id;
+        if (typeof (options.is_share) != 'undefined' && options.is_share == 1) {
+          self.setData({
+            is_share: true
+          })
+        } else {
+          self.setData({
+            is_share: false
+          })
+        }
+        mta.Event.stat('jumpGoodsDetail',{'goodsid':goods_id})
+      }
+      //获取商品详情
+      self.getGoodsInfo(goods_id);
+      //优选推荐
+      self.getRecommend(goods_id, 1, 3);
+
     } else {
       app.openidCallback = openid => {
         if (openid != '') {
@@ -74,48 +114,62 @@ Page({
             openid: openid
           });
           SavorUtils.User.isRegister(self); //判断用户是否注册
+
+          if (typeof (options.q) != 'undefined') {
+            var q = decodeURIComponent(options.q);
+            var selemite = q.indexOf("?");
+            var pams = q.substring(selemite + 3, q.length);
+      
+            var pams_arr = pams.split('_');
+            goods_id = pams_arr[1];
+            var goods_type = pams_arr[2];
+            if(typeof(pams_arr[3])!='undefined'){
+              pur_uid = pams_arr[3];
+            }
+            if(typeof(pams_arr[4])!='undefined'){
+              box_id = pams_arr[4];
+            }
+            
+            self.setData({
+              is_share: true
+            })
+            self.recordScanCodeLog(openid,goods_type,goods_id,box_id);
+            mta.Event.stat('scanGoodsQrcode',{'goodsid':goods_id,'goodstype':goods_type,'boxid':box_id})
+          } else {
+            goods_id = options.goods_id;
+            if (typeof (options.is_share) != 'undefined' && options.is_share == 1) {
+              self.setData({
+                is_share: true
+              })
+            } else {
+              self.setData({
+                is_share: false
+              })
+            }
+            mta.Event.stat('jumpGoodsDetail',{'goodsid':goods_id})
+          }
+          //获取商品详情
+          self.getGoodsInfo(goods_id);
+          //优选推荐
+          self.getRecommend(goods_id, 1, 3);
         }
       }
     }
-    if (typeof (options.q) != 'undefined') {
-      var q = decodeURIComponent(options.q);
-      var selemite = q.indexOf("?");
-      var pams = q.substring(selemite + 3, q.length);
+    
 
-      var pams_arr = pams.split('_');
-      goods_id = pams_arr[1];
-      var goods_type = pams_arr[2];
-      if(typeof(pams_arr[3])!='undefined'){
-        pur_uid = pams_arr[3];
-      }
-      if(typeof(pams_arr[4])!='undefined'){
-        box_id = pams_arr[4];
-      }
+
+    
+
+  },
+  recordScanCodeLog:function(openid,goods_type,goods_id,box_id){
+    utils.PostRequest(api_v_url + '/Index/recodeQrcodeLog', {
+      openid:openid,
+      type:goods_type,
+      data_id:goods_id,
+      box_id:box_id,
+    }, (data, headers, cookies, errMsg, statusCode) => {
       
-      self.setData({
-        is_share: true
-      })
-      mta.Event.stat('scanGoodsQrcode',{'goodsid':goods_id,'goodstype':goods_type,'boxid':box_id})
-    } else {
-      goods_id = options.goods_id;
-      if (typeof (options.is_share) != 'undefined' && options.is_share == 1) {
-        self.setData({
-          is_share: true
-        })
-      } else {
-        self.setData({
-          is_share: false
-        })
-      }
-      mta.Event.stat('jumpGoodsDetail',{'goodsid':goods_id})
-    }
-
-
-    //获取商品详情
-    self.getGoodsInfo(goods_id);
-    //优选推荐
-    self.getRecommend(goods_id, 1, 3);
-
+    })
   },
   getGoodsInfo: function (goods_id) {
     var that = this;
