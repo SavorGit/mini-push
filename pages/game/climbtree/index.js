@@ -21,28 +21,14 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
-    //wx.hideShareMenu();
-    if (app.globalData.link_type == 2) {
-      wx.navigateBack({
-        delta: 1,
-        success: function(res) {
-
-          wx.showToast({
-            title: '直连方式该游戏功能不可用',
-            icon: 'none',
-            duration: 3000,
-          })
-        }
-      })
-    } else {
-      var that = this;
-      var box_mac = options.box_mac;
-      var game_id = options.game_id;
-      this.setData({
-        box_mac: box_mac,
-        game_id: game_id,
-      })
-    }
+    wx.hideShareMenu();
+    var that = this;
+    var box_mac = options.box_mac;
+    var game_id = options.game_id;
+    this.setData({
+      box_mac: box_mac,
+      game_id: game_id,
+    })
   },
   lunchGame: function(res) {
     djs = 60;

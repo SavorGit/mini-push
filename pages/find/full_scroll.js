@@ -361,29 +361,6 @@ Page({
       console.log('full_scroll.Page.onReady', 'app.globalData.hotel_info', app.globalData.hotel_info);
       console.log('full_scroll.Page.onReady', 'self.data.link_type', self.data.link_type, app.globalData.link_type, SavorUtils.Constant.LinkType.BOX);
     }
-    if (self.data.link_type == SavorUtils.Constant.LinkType.BOX) { // 直联方式
-      if (typeof(app.globalData.hotel_info) != 'object' || typeof(app.globalData.hotel_info.intranet_ip) != 'string') {
-        wx.showToast({
-          title: '请连接电视',
-          icon: 'none',
-          duration: 3000
-        });
-        setTimeout(function() {
-          wx.switchTab({
-            url: '/index/index'
-          });
-        }, 3000);
-        return;
-      }
-      box_api_domain = 'http://' + app.globalData.hotel_info.intranet_ip + ':8080';
-      self.setData({
-        funFrom: 'onReady'
-      });
-      SavorUtils.Page.loadBoxMediaData(self);
-      SavorUtils.Page.initPageSetData(self)
-      return;
-    }
-
     // 非直联方式
     if (app.globalData.openid && app.globalData.openid != '') {
       self.setData({
@@ -582,8 +559,6 @@ Page({
   // 加载进度
   onLoadProgress: function(e) {
     let self = this;
-    // console.log('full_scroll.Page.onLoadProgress', e);
-    // wx.hideLoading();
     self.setData({
       isShowMediaLoading: false
     });
@@ -751,24 +726,6 @@ Page({
       app.scanQrcode(pageid);
     } else {
       SavorUtils.User.launchMedia(self, forscreenId, indexInList);
-      /*utils.PostRequest(api_url + '/smallapp21/User/isForscreenIng', {
-        box_mac: self.data.box_mac
-      }, (data, headers, cookies, errMsg, statusCode) => {
-        let is_forscreen = data.result.is_forscreen;
-        if (is_forscreen == 1) {
-          wx.showModal({
-            title: '确认要打断投屏',
-            content: '当前电视正在进行投屏,继续投屏有可能打断当前投屏中的内容.',
-            success: function(res) {
-              if (res.confirm) {
-               
-              }
-            }
-          })
-        } else {
-          SavorUtils.User.launchMedia(self, forscreenId, indexInList);
-        }
-      });*/
     }
   }, //电视播放结束
 
@@ -873,7 +830,7 @@ Page({
         if (data.result.is_have == 1) {
 
         } else {
-          app.globalData.link_type = 1;
+          //app.globalData.link_type = 1;
           that.setData({
             box_mac: '',
           })
@@ -993,33 +950,8 @@ Page({
 
   // 跳转到机顶盒视频 - 无网
   gotoBoxVideoPage(e) {
-    // wx.navigateTo({
-    //   url: '/pages/find/box_video',
-    // });
     wx.switchTab({
       url: '/pages/index/index',
     });
   },
-
-  // 投屏到电视 - 直联
-  onLaunchtTV: function(e) {
-    let self = this;
-    let url = e.target.dataset.url;
-    let filename = url.substring(url.lastIndexOf('/') + 1);
-    let user_info = wx.getStorageSync("savor_user_info");
-    let request_url = box_api_domain + '/h5/discover_ondemand_nonetwork?box_mac=' + app.globalData.hotel_info.box_mac + '&web=true&deviceId=' + user_info.openid + '&filename=' + filename;
-    if (utils.verbose == true) {
-      console.log('full_scroll.Page.onLaunchtTV', request_url, url, filename, app.globalData.hotel_info, user_info);
-    }
-    utils.PostRequest(request_url, {}, (data, headers, cookies, errMsg, statusCode) => {
-      if (utils.verbose == true) {
-        console.log('full_scroll.Page.loadMediaData', 'success', app.globalData.hotel_info.intranet_ip, app.globalData.hotel_info.box_mac, user_info.openid, request_url, data);
-      }
-    }, res => {
-      if (utils.verbose == true) {
-        console.log('full_scroll.Page.loadMediaData', 'fail', app.globalData.hotel_info.intranet_ip, app.globalData.hotel_info.box_mac, user_info.openid, request_url, res);
-      }
-      // wx.navigateBack();
-    });
-  }
 });

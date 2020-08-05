@@ -2,7 +2,7 @@
 <import src="/pages/template/commons" />
 <template is="navigationBarForTopLevel" data='{{statusBarHeight: statusBarHeight,titleText:"热点投屏"}}' />
 
-<scroll-view class="container flex-column-center-flex_start theme-container" style='height: calc(100vh - 46px - {{statusBarHeight}}px);' scroll-y="true" scroll-with-animation="true" bindscrolltolower="loadMore" data-openid='{{openid}}'>
+<scroll-view class="container flex-column-center-flex_start theme-container" style='height: calc(100vh - 46px - {{statusBarHeight}}px);' scroll-y="true" scroll-with-animation="true"  data-openid='{{openid}}'>
 	<view class='page_top flex-row-center-flex_start theme-panel'>
 		<view class='user flex-row-center-flex_start'>
 			<view class='head'>
@@ -64,9 +64,8 @@
 						<view class='yingtao'>
 
 							<navigator url="/pages/mine/index?box_mac={{box_mac}}" bindtap="clickPublicContent">
-								<!-- <image wx:if="{{link_type!=2}}" class="pic_show" mode='aspectFill' src="{{bean.imgurl}}"></image>
-                <image wx:else class="pic_show" mode='aspectFill' src="/images/imgs/default-pic.png"></image> -->
-								<image binderror="bindImgErro" data-type="pub" data-index="{{index}}" class="pic_show" mode='aspectFill' src="{{bean.imgurl}}"></image>
+								
+								<image  data-type="pub" data-index="{{index}}" class="pic_show" mode='aspectFill' src="{{bean.imgurl}}"></image>
 
 								<view class='cover'>
 									<view class='share font_FFFFFF_32'>
@@ -105,9 +104,8 @@
 						<!-- <view bindtap="tts" data-type="col"  data-index="{{index}}">ddddd</view> -->
 						<view class='yingtao' wx:if="{{bean.res_type=='1'}}">
 							<navigator class='full_width full_height' url="/pages/find/picture?forscreen_id={{bean.res_id}}&box_mac={{box_mac}}" bindtap="clickLikeContent">
-								<!-- <image wx:if="{{link_type!=2}}" class="pic_show" mode='aspectFill' src="{{bean.imgurl}}"></image>
-                <image wx:else class="pic_show" mode='aspectFill' src="/images/imgs/default-pic.png"></image> -->
-								<image binderror="bindImgErro" data-type="col" data-index="{{index}}" class="pic_show" mode='aspectFill' src="{{bean.imgurl}}"></image>
+								
+								<image  data-type="col" data-index="{{index}}" class="pic_show" mode='aspectFill' src="{{bean.imgurl}}"></image>
 
 
 								<view class='cover'>
@@ -120,8 +118,8 @@
 						</view>
 						<view class='yingtao' wx:else>
 							<navigator wx:if="{{bean.type==1 || bean.type==3}}" url="/pages/forscreen/video/launch_video?video_url={{bean.res_url}}&video_name={{bean.title}}&box_mac={{box_mac}}&res_id={{bean.res_id}}&filename={{bean.filename}}&video_img_url={{bean.imgurl}}" bindtap="clickLikeContent">
-								<image wx:if="{{link_type!=2}}" class="pic_show" mode='aspectFill' src="{{bean.imgurl}}"></image>
-								<image wx:else class="pic_show" mode='aspectFill' src="/images/imgs/default-pic.png"></image>
+								<image  class="pic_show" mode='aspectFill' src="{{bean.imgurl}}"></image>
+								
 								<view class='cover'>
 									<view class='share font_FFFFFF_32'>
 										<label class="fa fa-heart fa-lg" style="color: #E11E4C;"></label>
@@ -131,8 +129,8 @@
 							</navigator>
 
 							<navigator wx:if="{{bean.type==2}}" class='full_width full_height' url="/pages/find/video?forscreen_id={{bean.res_id}}&box_mac={{box_mac}}" bindtap="clickLikeContent">
-								<image wx:if="{{link_type!=2}}" class="pic_show" mode='aspectFill' src="{{bean.imgurl}}"></image>
-								<image wx:else class="pic_show" mode='aspectFill' src="/images/imgs/default-pic.png"></image>
+								<image class="pic_show" mode='aspectFill' src="{{bean.imgurl}}"></image>
+								
 								<view class='cover'>
 									<view class='share font_FFFFFF_32'>
 										<label class="fa fa-heart fa-lg" style="color: #E11E4C;"></label>

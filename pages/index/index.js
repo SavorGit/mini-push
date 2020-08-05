@@ -55,134 +55,62 @@ Page({
   onLoad: function (options) {
     wx.removeStorageSync(cache_key+'colose_official_account');
     var that = this;
-    wx.hideLoading()
-    //mta.Page.init()
-    if (app.globalData.openid && app.globalData.openid != '') {
-      wx.showLoading({
-        title: '数据加载中..',
-        mask: true
-      })
+    that.getHotplaylist();
+
+    that.getAdspositionList();
+      
+  },
+  //是否显示活动
+  isShowAct:function(openid) {
+    var that = this;
+    var goods_info = wx.getStorageSync('savor_goods_info');
+    if (goods_info == '' || typeof (goods_info) == 'undefined') {
+      
+    } else {
+      var goods_id = goods_info.goods_id;
+      var goods_box_mac = goods_info.goods_box_mac;
+      var uid = goods_info.uid;
       that.setData({
-        openid: app.globalData.openid
+        goods_id: goods_id,
+        goods_box_mac: goods_box_mac,
+        uid: uid,
       })
-      openid = app.globalData.openid;
-      //判断用户是否注册
-      utils.PostRequest(api_v_url + '/User/isRegister', {
-        "openid": app.globalData.openid,
-        "page_id": 3
+      utils.PostRequest(api_url + '/Smallsale/goods/getdetail', {
+        goods_id: goods_id,
+        uid: uid,
+        openid: openid
       }, (data, headers, cookies, errMsg, statusCode) => {
-        var user_info = data.result.userinfo;
-        var colose_official_account = wx.getStorageSync(cache_key+'colose_official_account');
-        if(user_info.subscribe==0 && colose_official_account ==''){
-          that.setData({
-            is_view_official_account:true
-          })
-        }else {
-          that.setData({
-            is_view_official_account:false
-          })
+        if (data.result.jd_url == '') {
+          var is_jd = false;
+        } else {
+          is_jd = true;
         }
-        wx.setStorage({
-          key: 'savor_user_info',
-          data: data.result.userinfo,
-
-        })
-        utils.PostRequest(api_url + '/Smallapp4/content/initdata', {
-          "openid": app.globalData.openid,
-
-        }, (data, headers, cookies, errMsg, statusCode) => {
-
-
-          app.globalData.optimize_data = data.result.optimize_data;
-          app.globalData.public_list = data.result.public_list;
-          app.globalData.collect_list = data.result.collect_list;
-
-          app.globalData.hotels = data.result.forscreen_hotels.hotels;
-          utils.PostRequest(api_url + '/Smallapp4/content/getHotplaylist', {
-            page: 1,
-            pagesize: 6
-          }, (data, headers, cookies, errMsg, statusCode) => {
-
-            var hot_play = data.result.datalist;
-            that.setData({
-              hot_play: data.result.datalist
-            });
-            setTimeout(function () {
-              wx.hideLoading();
-            }, 1000)
-
-            app.wifiOkCallback = wifiOk => {
-              var hotel_info = app.globalData.hotel_info;
-              if (Object.keys(hotel_info).length > 0) {
-                that.setData({
-                  wifi_hidden: true
-                })
-                var inner_url = 'http://' + hotel_info.intranet_ip + ':8080/h5/findHotShow?box_mac=' + hotel_info.box_mac + '&web=true&deviceId=123456';
-                wx.request({
-                  url: inner_url,
-                  success: function (rest) {
-                    if (rest.data.code == 10000) {
-
-                      var rb_list = rest.data.result;
-                      for (var i = 0; i < hot_play.length; i++) {
-                        if (app.in_array(hot_play[i].forscreen_id, rb_list, 'media_id')) {
-
-                          hot_play[i].is_show = 1;
-                        } else {
-
-                          hot_play[i].is_show = 0;
-                        }
-                      }
-
-                    } else {
-                      for (var i = 0; i < hot_play.length; i++) {
-                        hot_play[i].is_show = 0;
-                      }
-                    }
-                    that.setData({
-                      hot_play: hot_play
-                    });
-                  }
-                })
-              }
-            }
-          });
-        }, res => {
-          wx.hideLoading();
+        that.setData({
+          jd_url: data.result.jd_url,
+          goods_info: data.result,
+          showActgoods: true,
+          showButton4JD: is_jd,
+          showButton4Favorites: is_jd
         });
-
-        utils.PostRequest(api_v_url + '/index/isHaveCallBox?openid=' + app.globalData.openid, {}, (data, headers, cookies, errMsg, statusCode) => {
-          var is_have = data.result.is_have;
-          
-          
-          if (is_have == 1) { //已经扫码链接电视
-            var box_id = data.result.box_id;
-            is_view_eval_waiter(box_id);
-            app.linkHotelWifi(data.result, that);
-            app.globalData.hotel_info = data.result;
-            that.setData({
-              is_link: 1,
-              hotel_room: data.result.hotel_name + data.result.room_name,
-              hotel_name: data.result.hotel_name,
-              room_name: data.result.room_name,
-              box_mac: data.result.box_mac,
-              hotel_info: data.result,
-              hotel_info_json: JSON.stringify(data.result),
-              is_compress:data.result.is_compress
-            })
-            box_mac = data.result.box_mac;
-          } else {
-            that.setData({
-              is_link: 0,
-              box_mac: '',
-            })
-            box_mac = '';
-          }
-        });
-
       });
 
-      utils.PostRequest(api_url + '/Smallapp3/Adsposition/getAdspositionList', {
+    }
+  },
+  
+  getHotplaylist:function(){//获取热播内容
+    var that = this;
+    utils.PostRequest(api_url + '/Smallapp4/content/getHotplaylist', {
+      page: 1,
+      pagesize: 6
+    }, (data, headers, cookies, errMsg, statusCode) => {
+      that.setData({
+        hot_play: data.result.datalist
+      });
+    })
+  },
+  getAdspositionList:function(){//获取轮播广告banner
+    var that = this;
+    utils.PostRequest(api_url + '/Smallapp3/Adsposition/getAdspositionList', {
         position: '2,3',
       }, (data, headers, cookies, errMsg, statusCode) => {
         var imgUrls = data.result[2];
@@ -195,212 +123,20 @@ Page({
           imgUrls_mid: imgUrls_mid
         });
       });
-
-
-      //是否显示活动
-      isShowAct(app.globalData.openid);
-    } else {
-      wx.showLoading({
-        title: '数据加载中..',
-        mask: true
-      })
-      app.openidCallback = openid => {
-        if (openid != '') {
-          that.setData({
-            openid: openid
-          })
-          openid = openid;
-          //判断用户是否注册
-          utils.PostRequest(api_v_url + '/User/isRegister', {
-            "openid": openid,
-            "page_id": 3
-          }, (data, headers, cookies, errMsg, statusCode) => {
-            var user_info = data.result.userinfo;
-            
-            var colose_official_account = wx.getStorageSync(cache_key+'colose_official_account');
-            if(user_info.subscribe=='' && colose_official_account ==''){
-              that.setData({
-                is_view_official_account:true
-              })
-            }else {
-              that.setData({
-                is_view_official_account:false
-              })
-            }
-            wx.setStorage({
-              key: 'savor_user_info',
-              data: data.result.userinfo,
-            })
-            utils.PostRequest(api_url + '/Smallapp4/content/initdata', {
-              "openid": openid,
-
-            }, (data, headers, cookies, errMsg, statusCode) => {
-
-              app.globalData.optimize_data = data.result.optimize_data;
-              app.globalData.public_list = data.result.public_list;
-              app.globalData.collect_list = data.result.collect_list;
-
-              app.globalData.hotels = data.result.forscreen_hotels.hotels;
-
-              utils.PostRequest(api_url + '/Smallapp4/content/getHotplaylist', {
-                page: 1,
-                pagesize: 6
-              }, (data, headers, cookies, errMsg, statusCode) => {
-
-                var hot_play = data.result.datalist;
-                that.setData({
-                  hot_play: data.result.datalist
-                });
-                setTimeout(function () {
-                  wx.hideLoading();
-                }, 1000)
-                app.wifiOkCallback = wifiOk => {
-                  var hotel_info = app.globalData.hotel_info;
-                  if (Object.keys(hotel_info).length > 0) {
-                    that.setData({
-                      wifi_hidden: true
-                    })
-                    var inner_url = 'http://' + hotel_info.intranet_ip + ':8080/h5/findHotShow?box_mac=' + hotel_info.box_mac + '&web=true&deviceId=123456';
-                    wx.request({
-                      url: inner_url,
-                      success: function (rest) {
-                        if (rest.data.code == 10000) {
-
-                          var rb_list = rest.data.result;
-                          for (var i = 0; i < hot_play.length; i++) {
-                            if (app.in_array(hot_play[i].forscreen_id, rb_list, 'media_id')) {
-
-                              hot_play[i].is_show = 1;
-                            } else {
-
-                              hot_play[i].is_show = 0;
-                            }
-                          }
-                        } else {
-                          for (var i = 0; i < hot_play.length; i++) {
-                            hot_play[i].is_show = 0;
-                          }
-                        }
-                        that.setData({
-                          hot_play: hot_play
-                        });
-
-                      }
-                    })
-                  }
-                }
-              });
-
-            }, res => {
-              wx.hideLoading();
-            });
-
-            utils.PostRequest(api_v_url + '/index/isHaveCallBox?openid=' + openid, {}, (data, headers, cookies, errMsg, statusCode) => {
-              var is_have = data.result.is_have;
-              if (is_have == 1) {
-                var serial_number = app.globalData.serial_number;
-                var head_serial_number = serial_number.substring(0,2);
-                if(head_serial_number==app.globalData.not_link_box_pre){
-                  app.globalData.serial_number = app.globalData.have_link_box_pre+openid+'_'+(new Date()).valueOf();
-                }
-                var box_id = data.result.box_id;
-                is_view_eval_waiter(box_id);
-                app.linkHotelWifi(data.result, that);
-                app.globalData.hotel_info = data.result;
-                that.setData({
-                  is_link: 1,
-                  hotel_room: data.result.hotel_name + data.result.room_name,
-                  hotel_name: data.result.hotel_name,
-                  room_name: data.result.room_name,
-                  box_mac: data.result.box_mac,
-                  hotel_info: data.result,
-                  hotel_info_json: JSON.stringify(data.result),
-                  wifi_hidden: true,
-                  is_compress:data.result.is_compress
-                })
-                box_mac = data.result.box_mac;
-              } else {
-                that.setData({
-                  is_link: 0,
-                  box_mac: '',
-                })
-                box_mac = '';
-              }
-            });
-
-          });
-
-          utils.PostRequest(api_url + '/Smallapp3/Adsposition/getAdspositionList', {
-            position: '2,3',
-          }, (data, headers, cookies, errMsg, statusCode) => {
-            var imgUrls = data.result[2];
-            var imgUrls_mid = [];
-            if (typeof (data.result[3]) != 'undefined') {
-              var imgUrls_mid = data.result[3];
-            }
-            that.setData({
-              imgUrls: imgUrls,
-              imgUrls_mid: imgUrls_mid
-            });
-          });
-
-
-          isShowAct(openid);
-        }
-      }
-    }
-    //是否显示活动
-    function isShowAct(openid) {
-      var goods_info = wx.getStorageSync('savor_goods_info');
-      if (goods_info == '' || typeof (goods_info) == 'undefined') {
-        //************************上线去掉 */
-        // that.setData({
-        //   showActgoods: true
-        // });
-      } else {
-        var goods_id = goods_info.goods_id;
-        var goods_box_mac = goods_info.goods_box_mac;
-        var uid = goods_info.uid;
-        that.setData({
-          goods_id: goods_id,
-          goods_box_mac: goods_box_mac,
-          uid: uid,
-        })
-        utils.PostRequest(api_url + '/Smallsale/goods/getdetail', {
-          goods_id: goods_id,
-          uid: uid,
-          openid: openid
-        }, (data, headers, cookies, errMsg, statusCode) => {
-          if (data.result.jd_url == '') {
-            var is_jd = false;
-          } else {
-            is_jd = true;
-          }
-          that.setData({
-            jd_url: data.result.jd_url,
-            goods_info: data.result,
-            showActgoods: true,
-            showButton4JD: is_jd,
-            showButton4Favorites: is_jd
-          });
-        });
-
-      }
-    }
-    //是否显示评价入口
-    function is_view_eval_waiter(box_id){
-      utils.PostRequest(api_url + '/Smallapp4/index/getConfig', {
-        box_id: box_id,
-      }, (data, headers, cookies, errMsg, statusCode) => {
-        var is_view_eval_waiter = data.result.is_comment;
-        that.setData({
-          box_id:box_id,
-          is_view_eval_waiter: is_view_eval_waiter
-        })
-      });
-    }
-
   },
+  is_view_eval_waiter:function (box_id){
+    var that = this;
+    utils.PostRequest(api_url + '/Smallapp4/index/getConfig', {
+      box_id: box_id,
+    }, (data, headers, cookies, errMsg, statusCode) => {
+      var is_view_eval_waiter = data.result.is_comment;
+      that.setData({
+        box_id:box_id,
+        is_view_eval_waiter: is_view_eval_waiter
+      })
+    });
+  },
+  
   onGetUserInfo: function (res) {
     var that = this;
 
@@ -552,12 +288,11 @@ Page({
   showHappy(e) { //视频点播让盒子播放
     var box_mac = e.currentTarget.dataset.boxmac;
     var openid = e.currentTarget.dataset.openid;
-    var intranet_ip = e.currentTarget.dataset.intranet_ip;
     if (box_mac == '') {
       app.scanQrcode(pageid);
     } else {
       wx.navigateTo({
-        url: '/pages/thematic/birthday/list?openid=' + openid + '&box_mac=' + box_mac + "&intranet_ip=" + intranet_ip,
+        url: '/pages/thematic/birthday/list?openid=' + openid + '&box_mac=' + box_mac ,
       })
     }
     mta.Event.stat('gotoHappyList', { 'linktype': app.globalData.link_type, 'boxmac': box_mac })
@@ -958,21 +693,25 @@ Page({
   onShow: function () {
 
     var that = this;
-    var user_info = wx.getStorageSync(cache_key + "user_info");
-    if (typeof (user_info.openid) != 'undefined') {
+
+    if (app.globalData.openid && app.globalData.openid != '') {
+      console.log('dddd');
+      that.setData({
+        openid: app.globalData.openid
+      })
+      openid = app.globalData.openid;
+      that.isShowAct(openid);
       utils.PostRequest(api_v_url + '/index/isHaveCallBox', {
-        openid: user_info.openid
+        openid: openid
       }, (data, headers, cookies, errMsg, statusCode) => {
         if (data.result.is_have == 1) {//如果已连接盒子
           var serial_number = app.globalData.serial_number;
           var head_serial_number = serial_number.substring(0,2);
           if(head_serial_number==app.globalData.not_link_box_pre){
-            app.globalData.serial_number = app.globalData.have_link_box_pre+user_info.openid+'_'+(new Date()).valueOf();
+            app.globalData.serial_number = app.globalData.have_link_box_pre+openid+'_'+(new Date()).valueOf();
           }
-          if(app.globalData.link_type==2){
-            app.linkHotelWifi(data.result, that);
-            app.globalData.hotel_info = data.result;
-          }
+          app.linkHotelWifi(data.result, that);
+          app.globalData.hotel_info = data.result;
           that.setData({
             is_link: 1,
             link_type:data.result.forscreen_type,
@@ -989,7 +728,7 @@ Page({
           var serial_number = app.globalData.serial_number;
           var head_serial_number = serial_number.substring(0,2);
           if(head_serial_number==app.globalData.have_link_box_pre){
-            app.globalData.serial_number = app.globalData.not_link_box_pre+user_info.openid+'_'+(new Date()).valueOf();
+            app.globalData.serial_number = app.globalData.not_link_box_pre+openid+'_'+(new Date()).valueOf();
           }
           app.globalData.link_type = 0;
           box_mac = ''
@@ -1001,21 +740,63 @@ Page({
 
         }
       }, re => { }, { isShowLoading: false });
-      app.isRegister(user_info.openid,that);
-    }
-    
-    mta.Event.stat('showIndex', { 'linktype': app.globalData.link_type })
+      app.isRegister(openid,that);
 
-    //this.onLoad()
+    }else {
+      wx.showLoading({
+        title: '数据加载中..',
+        mask: true
+      })
+      app.openidCallback = openid => {
+        
+        if (openid != '') {
+          that.setData({
+            openid: openid
+          })
+          openid = openid;
+          that.isShowAct(openid);
+          utils.PostRequest(api_v_url + '/index/isHaveCallBox?openid=' + openid, {}, (data, headers, cookies, errMsg, statusCode) => {
+            var is_have = data.result.is_have;
+            if (is_have == 1) {
+              var serial_number = app.globalData.serial_number;
+              var head_serial_number = serial_number.substring(0,2);
+              if(head_serial_number==app.globalData.not_link_box_pre){
+                app.globalData.serial_number = app.globalData.have_link_box_pre+openid+'_'+(new Date()).valueOf();
+              }
+              var box_id = data.result.box_id;
+              that.is_view_eval_waiter(box_id);
+              app.linkHotelWifi(data.result, that);
+              app.globalData.hotel_info = data.result;
+              that.setData({
+                is_link: 1,
+                hotel_room: data.result.hotel_name + data.result.room_name,
+                hotel_name: data.result.hotel_name,
+                room_name: data.result.room_name,
+                box_mac: data.result.box_mac,
+                hotel_info: data.result,
+                hotel_info_json: JSON.stringify(data.result),
+                wifi_hidden: true,
+                is_compress:data.result.is_compress
+              })
+              box_mac = data.result.box_mac;
+            } else {
+              that.setData({
+                is_link: 0,
+                box_mac: '',
+              })
+              box_mac = '';
+            }
+          });
+        }
+        app.isRegister(openid,that);
+      }
+    }
   },
   bannerGo: function (e) {
     var linkcontent = e.currentTarget.dataset.linkcontent;
     wx.switchTab({
       url: linkcontent,
     })
-    /*wx.navigateTo({
-      url: linkcontent
-    })*/
   },
   /**
    * 生命周期函数--监听页面隐藏
