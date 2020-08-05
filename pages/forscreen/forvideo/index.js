@@ -64,6 +64,7 @@ Page({
     showGuidedMaskAfterLaunch: false,
     res_head_desc: '视频',
     compressed:true,  //默认压缩
+    launchType:'classic'
   },
 
   /**
@@ -940,5 +941,13 @@ Page({
    */
   onShareAppMessage: function() {
 
+  },
+  /**
+   * 选择投屏类型
+   */
+  chooseLaunchType:function(e){
+    let self=this;
+    let launchType=e.currentTarget.dataset.launch_type;
+    self.setData({launchType:launchType});
   }
 })

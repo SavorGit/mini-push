@@ -64,17 +64,49 @@ image.pic_show_cur {
   left: 180rpx;
 }
 
+.choose-launch-edition {
+  width: 100%;
+  height: 200rpx;
+}
+
+.choose-launch-edition>.btn {
+  width: 328rpx;
+  height: 150rpx;
+  padding: 20rpx 10rpx;
+  font-size: 28rpx;
+  font-weight: 400;
+}
+
+.choose-launch-edition>.btn>.name {
+  font-size: 36rpx;
+}
+
+.choose-launch-edition>.btn.selected {
+  color: rgb(16, 16, 16);
+  border-color: rgb(68, 126, 217);
+  border-width: 2px;
+  border-style: solid;
+}
+
+.choose-launch-edition>.btn.not-selected {
+  color: rgba(102, 102, 102, 1);
+  border-color: rgb(187, 187, 187);
+  border-width: 1px;
+  border-style: solid;
+}
+
+
 /* ================================== 上传图片前 ================================== */
 
-.before_launch .page_main > .pic_text {
+.before_launch .page_main>.pic_text {
   padding: 10rpx 30rpx;
 }
 
-.before_launch .page_main > .pic_text > label {
+.before_launch .page_main>.pic_text>label {
   margin: 25rpx 0 24rpx 28rpx;
 }
 
-.before_launch .page_main > .pic_text > textarea {
+.before_launch .page_main>.pic_text>textarea {
   width: 690rpx;
   height: 100rpx;
   font-size: 28rpx;
