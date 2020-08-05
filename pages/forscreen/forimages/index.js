@@ -50,6 +50,7 @@ Page({
     showGuidedMaskBeforLaunch:false,
     showGuidedMaskAfterLaunch:false,
     res_head_desc:'图片',
+    launchType:'classic'
   },
   /**
    * 生命周期函数--监听页面加载
@@ -946,5 +947,13 @@ Page({
       var status = 0;  
     }
     app.goToBack(status);
+  },
+  /**
+   * 选择投屏类型
+   */
+  chooseLaunchType:function(e){
+    let self=this;
+    let launchType=e.currentTarget.dataset.launch_type;
+    self.setData({launchType:launchType});
   }
 })
