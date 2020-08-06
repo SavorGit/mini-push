@@ -15,14 +15,12 @@
 					<view class="weui-grid" wx:for="{{up_imgs}}" wx:key="key" wx:for-item="img" wx:for-index="index">
 						<view class="pic_show">
 							<image class="pic_show {{pic_show_cur[index]?'pic_show_cur':''}}" mode='aspectFill' data-img="{{tmp_imgs[index].oss_img}}" data-boxmac="{{box_mac}}" data-openid="{{openid}}" data-imgindex="{{index}}" data-imglen="{{img_lenth}}" src="{{img.tmp_img}}"></image>
-							<view class='upload_success_frame' wx:if="{{tmp_percent[index].percent >= 100}}">
+							<view class='upload_success_frame' wx:if="{{img.percent >= 100}}">
 								<label class="fa fa-check-circle fa-lg" style='margin:0 0 0 0;width:38rpx;height:38rpx;'></label>
 							</view>
-							<view class='upload_mask' wx:if="{{tmp_percent[index].percent < 100}}">
-								<label>{{tmp_percent[index].percent}}%</label>
-							</view>
-							<input class="display_hide" name="upimgs{{index}}" value="{{img.tmp_img}}"></input>
-							<input class="display_hide" name="imgSize{{index}}" value="{{img.resource_size}}"></input>
+							<!-- <view class='upload_mask' wx:if="{{img.percent < 100}}">
+								<label>{{img.percent}}%</label>
+							</view> -->
 						</view>
 					</view>
 				</view>
@@ -33,12 +31,12 @@
 				<input class="display_hide" name="is_share" value="{{is_share}}"></input>
 				<input class="display_hide" name="avatarUrl" value="{{avatarUrl}}"></input>
 				<input class="display_hide" name="nickName" value="{{nickName}}"></input>
-				<input class="display_hide" name="is_open_simple" value="{{is_open_simple}}"></input>
 
 				<!-- 投图片 -->
 				<view class='pic_text'>
 					<textarea class='text_input theme-textarea' name="forscreen_char" maxlength='30' placeholder='电视展示时增加文字...'></textarea>
 				</view>
+				<block wx:if="{{launchType!='speed'}}">
 				<view class='grant_auth flex-column-center-space_between'>
 					<checkbox-group class="checkbox-group flex-column-flex_start-start" bindchange="checkboxChange">
 						<label class="items" wx:for="{{item}}" wx:key="key" wx:for-index="index">
@@ -55,7 +53,9 @@
 				<view wx:if="{{is_share>0}}" class='speak_with_interest'>
 					<textarea class='text_input theme-textarea' name="public_text" maxlength='200' placeholder='顺便对公众说两句...'></textarea>
 				</view>
-				<view class="choose-launch-edition flex-row-center-space_around">
+
+				</block>
+				<view class="choose-launch-edition flex-row-center-space_around" wx:if="{{hotel_info.forscreen_method=='1-1'}}">
 					<view class="btn flex-column-center-space_around {{launchType=='classic'?'selected':'not-selected'}}" data-launch_type="classic" bindtap="chooseLaunchType">
 						<view class="name">经典投屏</view>
 						<view class="description">适合小视频、短视频</view>
@@ -97,13 +97,15 @@
 				<view class="weui-grids grids-frame">
 					<view class="weui-grid" wx:for="{{up_imgs}}" wx:key="key" wx:for-item="img" wx:for-index="index">
 						<view class="pic_show">
-							<image wx:if="{{tmp_imgs[index].is_sing_forscreen==1}}" class="pic_show {{pic_show_cur[index]?'pic_show_cur':''}}" mode='aspectFill' bindtap='up_single_pic' data-img="{{tmp_imgs[index].oss_img}}" data-img_id="{{tmp_imgs[index].img_id}}" data-boxmac="{{box_mac}}" data-openid="{{openid}}" data-imgindex="{{index}}" data-imglen="{{img_lenth}}" src="{{img.tmp_img}}" data-resource_size="{{tmp_imgs[index].resource_size}}"></image>
-							<image wx:elif="{{tmp_imgs[index].is_sing_forscreen==''}}" bindtap='upload_wait' class="pic_show {{pic_show_cur[index]?'pic_show_cur':''}}" mode='aspectFill' data-img="{{tmp_imgs[index].oss_img}}" data-boxmac="{{box_mac}}" data-openid="{{openid}}" data-imgindex="{{index}}" data-imglen="{{img_lenth}}" src="{{img.tmp_img}}"></image>
-							<view class='upload_success_frame' wx:if="{{tmp_percent[index].percent >= 100}}">
+							<image wx:if="{{img.is_sing_forscreen==1}}" class="pic_show {{pic_show_cur[index]?'pic_show_cur':''}}" mode='aspectFill' bindtap='up_single_pic' data-tmp_img="{{img.tmp_img}}" data-img_id="{{}}" data-img="{{img.oss_img}}" data-img_id="{{img.img_id}}" data-boxmac="{{box_mac}}" data-openid="{{openid}}" data-imgindex="{{index}}" data-imglen="{{img_lenth}}" src="{{img.tmp_img}}" data-resource_size="{{img.resource_size}}"></image>
+							<image wx:elif="{{img.is_sing_forscreen==''}}" class="pic_show {{pic_show_cur[index]?'pic_show_cur':''}}" mode='aspectFill' bindtap='up_single_pic' data-img="{{img.oss_img}}"  data-boxmac="{{box_mac}}" data-openid="{{openid}}" data-imgindex="{{index}}" data-imglen="{{img_lenth}}" src="{{img.tmp_img}}" data-resource_size="{{img.resource_size}}"></image>
+							<!-- <image wx:elif="{{tmp_imgs[index].is_sing_forscreen==''}}" bindtap='upload_wait' class="pic_show {{pic_show_cur[index]?'pic_show_cur':''}}" mode='aspectFill' data-img="{{tmp_imgs[index].oss_img}}" data-boxmac="{{box_mac}}" data-openid="{{openid}}" data-imgindex="{{index}}" data-imglen="{{img_lenth}}" src="{{img.tmp_img}}"></image> -->
+							<!-- <image wx:else bindtap='up_single_pic' class="pic_show {{pic_show_cur[index]?'pic_show_cur':''}}" mode='aspectFill' data-img="{{img.tmp_img}}" data-boxmac="{{box_mac}}" data-filename='{{filename_arr[index]}}' data-openid="{{openid}}" data-imgindex="{{index}}" data-imglen="{{img_lenth}}" data-resource_size="{{img.resource_size}}" src="{{img.tmp_img}}" ></image> -->
+							<view class='upload_success_frame' wx:if="{{img.percent >= 100}}">
 								<label class="fa fa-check-circle fa-lg" style='margin:0 0 0 0;width:38rpx;height:38rpx;'></label>
 							</view>
-							<view class='upload_mask' wx:if="{{tmp_percent[index].percent < 100}}">
-								<label>{{tmp_percent[index].percent}}%</label>
+							<view class='upload_mask' wx:if="{{img.percent < 100}}">
+								<label>{{img.percent}}%</label>
 							</view>
 							<input class="display_hide" name="upimgs{{index}}" value="{{img.tmp_img}}"></input>
 						</view>
@@ -116,7 +118,6 @@
 				<input class="display_hide" name="is_share" value="{{is_share}}"></input>
 				<input class="display_hide" name="avatarUrl" value="{{avatarUrl}}"></input>
 				<input class="display_hide" name="nickName" value="{{nickName}}"></input>
-				<input class="display_hide" name="is_open_simple" value="{{is_open_simple}}"></input>
 			</form>
 
 
@@ -135,7 +136,7 @@
 				<button class='savor-btn theme-button-dark' bindtap="exitForscreen" data-boxmac="{{box_mac}}">退出投屏</button>
 			</view>
 		</view>
-		<view class='launch_history'>
+		<view class='launch_history' wx:if="{{launchType=='classic'}}">
 			<view class='title'>
 				<label class='font_666666_26'>投屏历史</label>
 			</view>
@@ -188,10 +189,12 @@
 		<!-- 广告面板 -->
 		<template is="adsPanelForSavorBusinessContacts" />
 	</view>
-
+	
 	<!-- 投屏之后引导蒙板 -->
 	<template is="afterLaunchGuidedMask" wx:if="{{showGuidedMaskAfterLaunch}}" data='{{marginTop: "calc(608rpx + 46px + " + statusBarHeight + "px)", dataType: 2, openid: openid}}' />
 </view>
 
-<!-- 跳转极简版 -->
-<template is="jumpSimple" data="{{show:is_show_jump,box_mac:box_mac}}" />
+<view class="body-view">
+	<loading hidden="{{wifi_hidden}}" bindchange="loadingChange">正在连接包间wifi,请稍后...</loading>
+</view>
+

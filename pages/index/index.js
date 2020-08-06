@@ -31,7 +31,6 @@ Page({
     showButton4Favorites: true, // 显示收藏按钮
     showFavoritesPanel: false, // 显示收藏面板
 
-    is_open_simple: 0,
     imgUrls: [], //顶部广告位
     imgUrls_mid: [], //中部广告位
     indicatorDots: true, //是否显示面板指示点
@@ -218,29 +217,32 @@ Page({
     } else {
       var box_mac = e.detail.value.boxmac;
       var openid = e.detail.value.openid;
-      var is_open_simple = e.detail.value.is_open_simple;
-      var formId = e.detail.formId;
+      
       if (box_mac == '') {
 
         app.scanQrcode(pageid);
       } else {
-
-        if (app.globalData.link_type == 1) {
+        var hotel_info = app.globalData.hotel_info;
+        if(hotel_info.forscreen_method=='1-1'){
           wx.navigateTo({
-            url: '/pages/forscreen/forimages/index?box_mac=' + box_mac + '&openid=' + openid + '&is_open_simple=' + is_open_simple,
+            url: '/pages/forscreen/forimages/index?box_mac=' + box_mac + '&openid=' + openid ,
           })
-          app.recordFormId(openid, formId);
-        } else if (app.globalData.link_type == 2) {
-
-          var intranet_ip = e.detail.value.intranet_ip;
-          var wifi_mac = e.detail.value.wifi_mac;
-          var wifi_name = e.detail.value.wifi_name;
-          var wifi_password = e.detail.value.wifi_password;
-          wx.navigateTo({
-            url: '/pages/forscreen/forimages/wifi?box_mac=' + box_mac + '&openid=' + openid + '&intranet_ip=' + intranet_ip + '&wifi_mac=' + wifi_mac + '&wifi_name=' + wifi_name + '&wifi_password=' + wifi_password,
-          })
+        }else {
+          if (app.globalData.link_type == 1) {
+            wx.navigateTo({
+              url: '/pages/forscreen/forimages/index?box_mac=' + box_mac + '&openid=' + openid ,
+            })
+          } else if (app.globalData.link_type == 2) {
+  
+            var intranet_ip = e.detail.value.intranet_ip;
+            var wifi_mac = e.detail.value.wifi_mac;
+            var wifi_name = e.detail.value.wifi_name;
+            var wifi_password = e.detail.value.wifi_password;
+            wx.navigateTo({
+              url: '/pages/forscreen/forimages/wifi?box_mac=' + box_mac + '&openid=' + openid + '&intranet_ip=' + intranet_ip + '&wifi_mac=' + wifi_mac + '&wifi_name=' + wifi_name + '&wifi_password=' + wifi_password,
+            })
+          }
         }
-
       }
       mta.Event.stat('gotoForscreenImg', { 'linktype': app.globalData.link_type, 'boxmac': box_mac })
     }
@@ -257,17 +259,15 @@ Page({
     } else {
       var box_mac = e.detail.value.boxmac;
       var openid = e.detail.value.openid;
-      var is_open_simple = e.detail.value.is_open_simple;
-      var formId = e.detail.formId;
+      
       if (box_mac == '') {
         app.scanQrcode(pageid);
       } else {
         if (app.globalData.link_type == 1) {
           var is_compress = that.data.is_compress;
           wx.navigateTo({
-            url: '/pages/forscreen/forvideo/index?box_mac=' + box_mac + '&openid=' + openid + '&is_open_simple=' + is_open_simple+'&is_compress='+is_compress,
+            url: '/pages/forscreen/forvideo/index?box_mac=' + box_mac + '&openid=' + openid +'&is_compress='+is_compress,
           })
-          app.recordFormId(openid, formId);
         } else {
           var intranet_ip = e.detail.value.intranet_ip;
           var wifi_mac = e.detail.value.wifi_mac;
@@ -462,8 +462,7 @@ Page({
     } else {
       var box_mac = e.detail.value.boxmac;
       var openid = e.detail.value.openid;
-      var is_open_simple = e.detail.value.is_open_simple;
-      var formId = e.detail.formId;
+      
       //微信好友文件投屏+h5文件投屏
       if (box_mac == '') {
         app.scanQrcode(pageid);
@@ -471,7 +470,6 @@ Page({
         that.setData({
           showMe: true,
         })
-        app.recordFormId(openid, formId);
       }
     }
     mta.Event.stat('gotoForscreenFile', { 'linktype': app.globalData.link_type, "boxmac": box_mac })
@@ -481,9 +479,8 @@ Page({
     var that = this;
     var box_mac = e.currentTarget.dataset.boxmac;
     var openid = e.currentTarget.dataset.openid;
-    var is_open_simple = e.currentTarget.dataset.is_open_simple;
     wx.navigateTo({
-      url: '/pages/forscreen/forfile/files?box_mac=' + box_mac + '&openid=' + openid + "&is_open_simple=" + is_open_simple,
+      url: '/pages/forscreen/forfile/files?box_mac=' + box_mac + '&openid=' + openid ,
       success: function (e) {
         that.setData({
           showMe: false
@@ -495,9 +492,8 @@ Page({
     var that = this;
     var box_mac = e.currentTarget.dataset.boxmac;
     var openid = e.currentTarget.dataset.openid;
-    var is_open_simple = e.currentTarget.dataset.is_open_simple;
     wx.navigateTo({
-      url: '/pages/forscreen/forfile/h5files?box_mac=' + box_mac + '&openid=' + openid + "&is_open_simple=" + is_open_simple,
+      url: '/pages/forscreen/forfile/h5files?box_mac=' + box_mac + '&openid=' + openid ,
       success: function (e) {
         that.setData({
           showMe: false

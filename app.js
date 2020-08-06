@@ -693,13 +693,13 @@ App({
     return false;
   },
 
-  linkHotelWifi: function (hotel_info, that) {
+  linkHotelWifi: function (hotel_info, that,launchType = '') {
     var aps = this;
     var is_minimal = wx.getStorageSync(aps.globalData.cache_key + 'is_minimal');//是否扫码标准版
     var room_ssid = hotel_info.wifi_name;
     if (typeof (is_minimal) == 'undefined' || is_minimal == '') {//非极简版
       if (hotel_info.forscreen_type == 2) {//后台推荐用极简版
-        aps.jugeLinkType(hotel_info, that);
+        aps.jugeLinkType(hotel_info, that,launchType);
 
         mta.Event.stat('linkMode', { 'linktype': '2' })
       } else {//后台推荐用标准版 
@@ -716,7 +716,7 @@ App({
       mta.Event.stat('linkMode', { 'linktype': '2' })
     }
   },
-  jugeLinkType: function (hotel_info, that) {
+  jugeLinkType: function (hotel_info, that,launchType) {
     var aps = this;
     //第一步  判断客户端基础库版本
     var sdk_version = aps.globalData.sys_info.SDKVersion;
@@ -750,25 +750,34 @@ App({
                     that.setData({
                       wifi_hidden: true,
                     })
+                    if(launchType!=''){
+                      that.setData({
+                        launchType:launchType
+                      })
+                      aps.globalData.change_link_type = 2;
+                    }
                     //wx.hideLoading()
                   } else {//链接的不是本包间wifi
-                    aps.connectWifi(wifi_name, wifi_mac, use_wifi_password, box_mac, that);
+                    aps.connectWifi(wifi_name, wifi_mac, use_wifi_password, box_mac, that,launchType);
                   }
                 } else {
                   //当前打开wifi 但是没有链接任何wifi
-                  aps.connectWifi(wifi_name, wifi_mac, use_wifi_password, box_mac, that);
+                  aps.connectWifi(wifi_name, wifi_mac, use_wifi_password, box_mac, that,launchType);
                   
                 }
                 //wx.hideLoading()
               }, fail: function (res) {
+                var err_msg = 'wifi链接失败';
                 if(res.errMsg == 'getConnectedWifi:fail:currentWifi is null' || res.errMsg=='getConnectedWifi:fail no wifi is connected.'){
-                  aps.connectWifi(wifi_name, wifi_mac, use_wifi_password, box_mac, that);
+                  aps.connectWifi(wifi_name, wifi_mac, use_wifi_password, box_mac, that,launchType);
                 }else {
                   if (res.errCode == 12005) { //安卓特有  未打开wifi
+                    err_msg = '请打开您的手机Wifi';
                     that.setData({
                       wifiErr: { 'is_open': 1, 'msg': '亲，使用此小程序前需要打开您手机的wifi,连上wifi投屏更快哦！', 'confirm': '确定', 'calcle': '取消', 'type': 1 }
                     })
                   } else if (res.errCode == 12006) {//Android 特有，未打开 GPS 定位开关
+                    err_msg = '请打开您的手机GPS';
                     that.setData({
                       wifiErr: { 'is_open': 1, 'msg': '亲，使用此小程序前需要打开您手机的GPS定位,连上wifi投屏更快哦！', 'confirm': '确定', 'calcle': '取消', 'type': 2 }
                     })
@@ -787,7 +796,13 @@ App({
                       wifiErr: { 'is_open': 1, 'msg': msg, 'confirm': '重试', 'type': 4 }
                     })
                   }
-  
+                  if(launchType!=''){
+                    wx.showToast({
+                      title: err_msg,
+                      icon: 'none',
+                      duration:5000
+                    })
+                  }
                   var err_info = JSON.stringify(res);
                   wx.request({
                     url: aps.globalData.api_v_url + '/datalog/recordWifiErr',
@@ -835,6 +850,13 @@ App({
         that.setData({
           wifiErr: { 'is_open': 1, 'msg': '亲，该包间电视暂不能投屏，请更换其他包间', 'confirm': '我知道了', 'type': 5 }
         })
+        if(launchType!=''){
+          wx.showToast({
+            title: '该电视暂不支持极速投屏',
+            icon:'none',
+            duration:5000,
+          })
+        }
       }
 
     } else {//客户端基础库版本不支持链接wifi 直接使用标准版
@@ -842,9 +864,16 @@ App({
         link_type: 1,
         wifiErr: { 'is_open': 1, 'msg': '当前微信版本过低,升级后才能使用本小程序', 'confirm': '我知道了', 'calcle': '', 'type': 5 },
       })
+      if(launchType!=''){
+        wx.showToast({
+          title: '微信版本过低！',
+          icon:'none',
+          duration:5000,
+        })
+      }
     }
   },
-  connectWifi: function (wifi_name, wifi_mac, use_wifi_password, box_mac, that) {
+  connectWifi: function (wifi_name, wifi_mac, use_wifi_password, box_mac, that,launchType) {
     var aps = this;
     that.setData({
       wifi_hidden: false,
@@ -876,7 +905,12 @@ App({
             icon: 'success',
             duration: 2000
           });
-
+          if(launchType!=''){
+            that.setData({
+              launchType:launchType
+            })
+            aps.globalData.change_link_type = 2;
+          }
           //wx.hideLoading()
         })
 
@@ -896,8 +930,7 @@ App({
 
 
       }, fail: function (res) {
-        
-        //wx.hideLoading();
+        var err_msg = 'wifi链接失败';
         that.setData({
           wifi_hidden: true,
         })
@@ -905,10 +938,12 @@ App({
 
         }else {
           if (res.errCode == 12005) { //安卓特有  未打开wifi
+            err_msg = '请打开您的手机Wifi';
             that.setData({
               wifiErr: { 'is_open': 1, 'msg': '亲，使用此小程序前需要打开您手机的wifi,连上wifi投屏更快哦！', 'confirm': '确定', 'calcle': '取消', 'type': 1 }
             })
           } else if (res.errCode == 12006) {//Android 特有，未打开 GPS 定位开关
+            err_msg = '请打开您的手机GPS';
             that.setData({
               wifiErr: { 'is_open': 1, 'msg': '亲，使用此小程序前需要打开您手机的GPS定位,连上wifi投屏更快哦！', 'confirm': '确定', 'calcle': '取消', 'type': 2 }
             })
@@ -927,7 +962,13 @@ App({
               wifiErr: { 'is_open': 1, 'msg': msg, 'confirm': '重试', 'type': 4 }
             })
           }
-  
+          if(launchType!=''){
+            wx.showToast({
+              title: err_msg,
+              icon: 'none',
+              duration:5000
+            })
+          }
           var err_info = JSON.stringify(res);
           wx.request({
             url: aps.globalData.api_v_url + '/datalog/recordWifiErr',
@@ -1033,7 +1074,8 @@ App({
     cache_key: 'savor_',
     min_sdk_version: '1.6.0',
     wifiErr: { 'is_open': 0, 'msg': '', 'confirm': '确定', 'calcle': '取消', 'type': 0 },
-    hotel_info: {},
+    hotel_info: {},       //链接酒楼电视的信息
+    change_link_type :0,  //是否手动切换投屏方式 0:未切换 1：外网投屏 2:直连投屏
 
     not_link_box_pre:'N_',
     have_link_box_pre:'Y_',

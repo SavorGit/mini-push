@@ -58,7 +58,6 @@
 			<form bindsubmit="chooseImage" report-submit="true">
 				<input class="display_hide" name="boxmac" value="{{box_mac}}"></input>
 				<input class="display_hide" name="openid" value="{{openid}}"></input>
-				<input class="display_hide" name="is_open_simple" value="{{is_open_simple}}"></input>
 				<input class="display_hide" name="intranet_ip" value="{{hotel_info.intranet_ip}}"></input>
 				<input class="display_hide" name="wifi_mac" value="{{hotel_info.wifi_mac}}"></input>
 				<input class="display_hide" name="wifi_name" value="{{hotel_info.wifi_name}}"></input>
@@ -89,7 +88,6 @@
 			<form bindsubmit="forfiles" report-submit="true">
 				<input class="display_hide" name="boxmac" value="{{box_mac}}"></input>
 				<input class="display_hide" name="openid" value="{{openid}}"></input>
-				<input class="display_hide" name="is_open_simple" value="{{is_open_simple}}"></input>
 				<button  class="theme-font2" form-type="submit">
 					<view class="icon flex-column-center-center file">
 						<image src='/images/icon2/FFFFFF_files.png'></image>
@@ -192,10 +190,10 @@
 	</view>
 	<view class="flex-column-center-center" style="width: 100%; font-size: 32rpx; color: #0076FF;">
 		<view style="width: 100%; border-top: 1rpx solid rgba(7,17,27,0.1);">
-			<button bindtap="wxFriendfiles" data-boxmac="{{box_mac}}" data-openid="{{openid}}" data-is_open_simple="{{is_open_simple}}" class="button_none" style="margin: 0;padding: 0; border: 0;border-radius: 0;">微信好友文件</button>
+			<button bindtap="wxFriendfiles" data-boxmac="{{box_mac}}" data-openid="{{openid}}" class="button_none" style="margin: 0;padding: 0; border: 0;border-radius: 0;">微信好友文件</button>
 		</view>
 		<view style="width: 100%; border-top: 1rpx solid rgba(7,17,27,0.1); border-bottom: 10rpx solid rgba(7,17,27,0.05);">
-			<button bindtap="phonefiles" data-boxmac="{{box_mac}}" data-openid="{{openid}}" data-is_open_simple="{{is_open_simple}}" class="button_none" style="margin: 0;padding: 0; border: 0;border-radius: 0;">手机中的文件</button>
+			<button bindtap="phonefiles" data-boxmac="{{box_mac}}" data-openid="{{openid}}"  class="button_none" style="margin: 0;padding: 0; border: 0;border-radius: 0;">手机中的文件</button>
 		</view>
 	</view>
 	<view class='cancel-btn' style='flex: 1; margin-top: 10rpx; width: 100%; height: 60rpx; line-height: 60rpx; text-align: center; font-size: 30rpx; color: rgba(7,17,27,0.6);' bindtap='modalCancel'>取消</view>

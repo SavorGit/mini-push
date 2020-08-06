@@ -71,10 +71,27 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function(e) {
-    //wx.hideShareMenu();
+    wx.hideShareMenu();
     var that = this
     box_mac = e.box_mac;
     var openid = e.openid;
+
+
+    var hotel_info = app.globalData.hotel_info;
+    var change_link_type = app.globalData.change_link_type;
+    if(change_link_type==0){//未手动切换投屏方式
+      if(hotel_info.forscreen_type==2){//直连投屏
+        var launch_type = 'speed';
+      }else if(hotel_info.forscreen_type==1){
+        var launch_type = 'classic';
+      }
+    }else if(change_link_type==1){
+      var launch_type = 'classic';
+    }else if(change_link_type ==2){
+      var launch_type = 'speed';
+    }
+    console.log(launch_type);
+
     var user_info = wx.getStorageSync("savor_user_info");
     var avatarUrl = user_info.avatarUrl;
     var nickName = user_info.nickName;
@@ -211,7 +228,7 @@ Page({
     var nickName = res.detail.value.nickName;
     var public_text = res.detail.value.public_text;
     var is_open_simple = res.detail.value.is_open_simple;
-    var formId = res.detail.formId;
+    
     var is_assist = 0;
     res_size = res.detail.value.size;
     if (is_share == 1) {
@@ -250,7 +267,7 @@ Page({
                 
                 
                 uploadVedio(video, box_mac, openid, is_pub_hotelinfo, is_share, duration, avatarUrl, nickName, public_text, timer8_0);
-                app.recordFormId(openid, formId);
+                
 
                 if (public_text = '' || typeof (public_text) == 'undefined') {
                   public_text = 0;
@@ -280,7 +297,7 @@ Page({
         } else {
           
           uploadVedio(video, box_mac, openid, is_pub_hotelinfo, is_share, duration, avatarUrl, nickName, public_text, timer8_0);
-          app.recordFormId(openid, formId);
+          
           if (public_text = '' || typeof (public_text) == 'undefined') {
             public_text = 0;
           } else {
@@ -794,8 +811,7 @@ Page({
     var forscreen_id = e.detail.value.forscreen_id;
     var openid = e.detail.value.openid;
     var box_mac = e.detail.value.box_mac;
-    var formId = e.detail.formId;
-    app.recordFormId(openid, formId);
+    
     if (typeof(forscreen_id) == 'undefined') {
       wx.showToast({
         title: '助力参数异常，请重试或重选视频',
