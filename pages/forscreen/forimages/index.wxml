@@ -185,6 +185,7 @@
 				</view>
 			</scroll-view>
 		</view>
+    <view class='launch_history' wx:else></view>
 
 		<!-- 广告面板 -->
 		<template is="adsPanelForSavorBusinessContacts" />
