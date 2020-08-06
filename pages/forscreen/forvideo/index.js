@@ -410,6 +410,12 @@ Page({
           var res_eup_time = (new Date()).valueOf();
           that.setData({
             showVedio: false,
+            oss_video_url: oss_url + "/forscreen/resource/" + timestamp + postf_t,
+            upload_vedio_temp: '',
+            is_view_control: true,
+            hiddens: true,
+            is_open_control: false,
+            forscreen_id: timestamp
           })
           wx.request({
             url: api_url + '/Netty/Index/pushnetty',
@@ -509,12 +515,7 @@ Page({
 
           that.setData({
             //showVedio:false,
-            oss_video_url: oss_url + "/forscreen/resource/" + timestamp + postf_t,
-            upload_vedio_temp: '',
-            is_view_control: true,
-            hiddens: true,
-            is_open_control: false,
-            forscreen_id: timestamp
+            
           })
 
         }
