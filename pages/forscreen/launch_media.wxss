@@ -17,11 +17,11 @@
   line-height: 50rpx;
 }
 
-.before_launch .page_top > label {
+.before_launch .page_top>label {
   margin-left: 30rpx;
 }
 
-.before_launch .page_top > button {
+.before_launch .page_top>button {
   width: 150rpx;
   height: 60rpx;
 }
@@ -32,17 +32,17 @@
   text-align: center;
 }
 
-.before_launch .page_main > view.cover > video {
+.before_launch .page_main>view.cover>video {
   width: 100%;
   height: 484rpx;
 }
 
-.before_launch .page_main > view.cover > view {
+.before_launch .page_main>view.cover>view {
   margin-top: 63rpx;
   margin-bottom: 100rpx;
 }
 
-.before_launch .page_main > view.cover > view > progress {
+.before_launch .page_main>view.cover>view>progress {
   margin-top: 16rpx;
   margin-left: calc((100vw - 450rpx) / 2);
   width: 450rpx;
@@ -51,27 +51,27 @@
   overflow: hidden;
 }
 
-.before_launch .page_main > .grant_auth {
+.before_launch .page_main>.grant_auth {
   min-height: 10rpx;
   padding: 10rpx 0rpx 20rpx 0rpx;
 }
 
-.before_launch .page_main > .grant_auth > .checkbox-group checkbox {
+.before_launch .page_main>.grant_auth>.checkbox-group checkbox {
   font-size: 28rpx;
 }
 
-.before_launch .page_main > .grant_auth > .checkbox-group checkbox .wx-checkbox-input {
+.before_launch .page_main>.grant_auth>.checkbox-group checkbox .wx-checkbox-input {
   width: 30rpx;
   height: 30rpx;
   background: unset;
 }
 
-.before_launch .page_main > .grant_auth > .checkbox-group checkbox .wx-checkbox-input.wx-checkbox-input-checked {
+.before_launch .page_main>.grant_auth>.checkbox-group checkbox .wx-checkbox-input.wx-checkbox-input-checked {
   background: #1cbeb6;
   border-color: #1cbeb6;
 }
 
-.before_launch .page_main > .grant_auth > .checkbox-group checkbox .wx-checkbox-input.wx-checkbox-input-checked::before {
+.before_launch .page_main>.grant_auth>.checkbox-group checkbox .wx-checkbox-input.wx-checkbox-input-checked::before {
   width: 28rpx;
   height: 28rpx;
   line-height: 28rpx;
@@ -83,25 +83,25 @@
   -webkit-transform: translate(-50%, -50%) scale(1);
 }
 
-.before_launch .page_main > label {
+.before_launch .page_main>label {
   min-height: 24rpx;
   padding: 0 0 30rpx 0;
   text-align: center;
   display: block;
 }
 
-.before_launch .page_main > .speak_with_interest {
+.before_launch .page_main>.speak_with_interest {
   padding: 10rpx 30rpx;
 }
 
-.before_launch .page_main > .speak_with_interest > textarea {
+.before_launch .page_main>.speak_with_interest>textarea {
   width: 690rpx;
   height: 200rpx;
   font-size: 28rpx;
   text-align: left;
 }
 
-.before_launch .page_main > .savor-btn {
+.before_launch .page_main>.savor-btn {
   width: 400rpx;
   height: 80rpx;
   line-height: 80rpx;
@@ -115,20 +115,52 @@
   height: 100rpx;
 }
 
-.before_launch .page_bottom > .uploading {
+.before_launch .page_bottom>.uploading {
   background-color: #106763;
 }
 
-.before_launch .page_bottom > button {
+.before_launch .page_bottom>button {
   height: 100rpx;
   line-height: 100rpx;
   margin: 0rpx;
   border-radius: 0rpx;
 }
 
+.choose-launch-edition {
+  width: calc(100% - 20rpx);
+  height: 200rpx;
+  padding: 5rpx 10rpx;
+}
+
+.choose-launch-edition>.btn {
+  width: 300rpx;
+  height: 110rpx;
+  padding: 20rpx 10rpx;
+  font-size: 28rpx;
+  font-weight: 400;
+}
+
+.choose-launch-edition>.btn>.name {
+  font-size: 36rpx;
+}
+
+.choose-launch-edition>.btn.selected {
+  color: rgba(252, 143, 45, 1);
+  border-color: rgba(252, 143, 45, 1);
+  border-width: 2px;
+  border-style: solid;
+}
+
+.choose-launch-edition>.btn.not-selected {
+  color: rgba(102, 102, 102, 1);
+  border-color: rgb(187, 187, 187);
+  border-width: 1px;
+  border-style: solid;
+}
+
 /* =============== 投屏前引导蒙板 ==================*/
 
-.guided_mask_panel.launch_before > .point {
+.guided_mask_panel.launch_before>.point {
   width: 330rpx;
   height: 60rpx;
   line-height: 60rpx;
@@ -139,21 +171,21 @@
   text-align: center;
 }
 
-.guided_mask_panel.launch_before > .point > .checkbox-group {
+.guided_mask_panel.launch_before>.point>.checkbox-group {
   padding-left: 10rpx;
 }
 
-.guided_mask_panel.launch_before > .point > .checkbox-group checkbox {
+.guided_mask_panel.launch_before>.point>.checkbox-group checkbox {
   font-size: 28rpx;
 }
 
-.guided_mask_panel.launch_before > .point > .checkbox-group checkbox .wx-checkbox-input {
+.guided_mask_panel.launch_before>.point>.checkbox-group checkbox .wx-checkbox-input {
   width: 30rpx;
   height: 30rpx;
   background: unset;
 }
 
-.guided_mask_panel.launch_before > .arrow {
+.guided_mask_panel.launch_before>.arrow {
   width: 100rpx;
   height: 100rpx;
   margin-top: 30rpx;
@@ -161,12 +193,12 @@
   filter: FlipH();
 }
 
-.guided_mask_panel.launch_before > .explain {
+.guided_mask_panel.launch_before>.explain {
   height: 70rpx;
   margin-top: 30rpx;
 }
 
-.guided_mask_panel.launch_before > .theme-button {
+.guided_mask_panel.launch_before>.theme-button {
   width: 200rpx;
   height: 80rpx;
   line-height: 80rpx;
@@ -184,7 +216,7 @@
   height: 100%;
 }
 
-.after_launch > .page_top {
+.after_launch>.page_top {
   padding-top: 10rpx;
   padding-bottom: 10rpx;
   width: 100%;
@@ -192,11 +224,11 @@
   line-height: 50rpx;
 }
 
-.after_launch > .page_top > label {
+.after_launch>.page_top>label {
   margin-left: 30rpx;
 }
 
-.after_launch > .page_top > button {
+.after_launch>.page_top>button {
   width: 150rpx;
   height: 60rpx;
 }
@@ -207,28 +239,28 @@
   text-align: center;
 }
 
-.after_launch .page_main > view.cover {
+.after_launch .page_main>view.cover {
   padding-bottom: 10rpx;
 }
 
-.after_launch .page_main > view.cover > image,
-.after_launch .page_main > view.cover > video {
+.after_launch .page_main>view.cover>image,
+.after_launch .page_main>view.cover>video {
   width: 100%;
   height: 100%;
 }
 
-.after_launch > .page_bottom {
+.after_launch>.page_bottom {
   width: 100%;
   height: 100rpx;
   margin: 0rpx;
 }
 
-.after_launch > .page_bottom > .button_group {
+.after_launch>.page_bottom>.button_group {
   width: calc(100% - 80rpx);
   padding: 0 40rpx;
 }
 
-.after_launch > .page_bottom > .button_group button {
+.after_launch>.page_bottom>.button_group button {
   width: 150rpx;
   height: 50rpx;
   line-height: 50rpx;
@@ -249,19 +281,19 @@
   height: calc(100% - 793rpx);
 }
 
-.after_launch .launch_history > .title {
+.after_launch .launch_history>.title {
   text-align: left;
   height: 50rpx;
   padding: 15rpx;
 }
 
-.after_launch .launch_history > .title > image {
+.after_launch .launch_history>.title>image {
   width: 40rpx;
   height: 40rpx;
   vertical-align: middle;
 }
 
-.after_launch .launch_history > scroll-view {
+.after_launch .launch_history>scroll-view {
   width: 100%;
   height: calc(100% - 80rpx);
 }
@@ -282,34 +314,34 @@
   margin-bottom: 15rpx;
 }
 
-.after_launch .launch_history .history_list .pic > .weui-grids {
+.after_launch .launch_history .history_list .pic>.weui-grids {
   width: 570rpx;
   height: 100rpx;
 }
 
-.after_launch .launch_history .history_list .pic > .weui-grids > .weui-grid {
+.after_launch .launch_history .history_list .pic>.weui-grids>.weui-grid {
   width: 95rpx;
   height: 100rpx;
 }
 
-.after_launch .launch_history .history_list .pic > .weui-grids > .weui-grid > image {
+.after_launch .launch_history .history_list .pic>.weui-grids>.weui-grid>image {
   width: 90rpx;
   height: 90rpx;
   border-radius: 10rpx;
   margin: 5rpx 5rpx 5rpx 0rpx;
 }
 
-.after_launch .launch_history .history_list .pic > .btn {
+.after_launch .launch_history .history_list .pic>.btn {
   width: calc(100vw - 630rpx);
   text-align: right;
 }
 
-.after_launch .launch_history .history_list .pic > .btn > button::before,
-.after_launch .launch_history .history_list .pic > .btn > button::after {
+.after_launch .launch_history .history_list .pic>.btn>button::before,
+.after_launch .launch_history .history_list .pic>.btn>button::after {
   border: unset;
 }
 
-.after_launch .launch_history .history_list .pic > .btn > button {
+.after_launch .launch_history .history_list .pic>.btn>button {
   width: 90rpx;
   height: 90rpx;
   line-height: 90rpx;
@@ -320,47 +352,47 @@
   font-size: 24rpx;
 }
 
-.after_launch .launch_history .history_list .video > .cover {
+.after_launch .launch_history .history_list .video>.cover {
   width: 570rpx;
   height: 100rpx;
 }
 
-.after_launch .launch_history .history_list .video > .cover > navigator {
+.after_launch .launch_history .history_list .video>.cover>navigator {
   width: 90rpx;
   height: 90rpx;
 }
 
-.after_launch .launch_history .history_list .video > .cover > navigator > image {
+.after_launch .launch_history .history_list .video>.cover>navigator>image {
   width: 100%;
   height: 100%;
   border-radius: 10rpx;
   margin: 5rpx 5rpx 5rpx 0rpx;
 }
 
-.after_launch .launch_history .history_list .video > .cover > view > navigator {
+.after_launch .launch_history .history_list .video>.cover>view>navigator {
   margin-top: -65rpx;
   margin-left: 25rpx;
   width: 40rpx;
   height: 40rpx;
 }
 
-.after_launch .launch_history .history_list .video > .cover > view > navigator > .icon {
+.after_launch .launch_history .history_list .video>.cover>view>navigator>.icon {
   width: 40rpx;
   height: 40rpx;
   font-size: 40rpx;
 }
 
-.after_launch .launch_history .history_list .video > .btn {
+.after_launch .launch_history .history_list .video>.btn {
   width: calc(100vw - 630rpx);
   text-align: right;
 }
 
-.after_launch .launch_history .history_list .video > .btn > button::before,
-.after_launch .launch_history .history_list .video > .btn > button::after {
+.after_launch .launch_history .history_list .video>.btn>button::before,
+.after_launch .launch_history .history_list .video>.btn>button::after {
   border: unset;
 }
 
-.after_launch .launch_history .history_list .video > .btn > button {
+.after_launch .launch_history .history_list .video>.btn>button {
   width: 90rpx;
   height: 90rpx;
   line-height: 90rpx;
@@ -372,14 +404,14 @@
 
 /* ==================================== 投屏后引导蒙板 ==================================== */
 
-.guided_mask_panel.launch_after > .point {
+.guided_mask_panel.launch_after>.point {
   width: 670rpx;
   height: 60rpx;
   line-height: 60rpx;
   font-size: 28rpx;
 }
 
-.guided_mask_panel.launch_after > .point > view {
+.guided_mask_panel.launch_after>.point>view {
   width: 160rpx;
   height: 50rpx;
   line-height: 50rpx;
@@ -390,7 +422,7 @@
   text-align: center;
 }
 
-.guided_mask_panel.launch_after > .point button {
+.guided_mask_panel.launch_after>.point button {
   width: 150rpx;
   height: 50rpx;
   line-height: 50rpx;
@@ -399,7 +431,7 @@
   font-size: 28rpx;
 }
 
-.guided_mask_panel.launch_after > .arrow {
+.guided_mask_panel.launch_after>.arrow {
   width: 100rpx;
   height: 100rpx;
   margin-top: 30rpx;
@@ -407,12 +439,12 @@
   transform: rotate(-135deg);
 }
 
-.guided_mask_panel.launch_after > .explain {
+.guided_mask_panel.launch_after>.explain {
   height: 70rpx;
   margin-top: 30rpx;
 }
 
-.guided_mask_panel.launch_after > .theme-button {
+.guided_mask_panel.launch_after>.theme-button {
   width: 200rpx;
   height: 80rpx;
   line-height: 80rpx;
