@@ -56,6 +56,7 @@ Page({
     djs: 10,
     forscreen_history_list: '',
     hiddens: true, //上拉加载中,
+    wifi_hidden:true,
     load_fresh_char: '',
     is_view_control: false,
     is_view_control: true,
@@ -95,7 +96,6 @@ Page({
     var user_info = wx.getStorageSync("savor_user_info");
     var avatarUrl = user_info.avatarUrl;
     var nickName = user_info.nickName;
-    var is_open_simple = e.is_open_simple;
     if(typeof(e.is_compress)!='undefined'){
       var is_compress = e.is_compress
     }else {
@@ -108,12 +108,13 @@ Page({
     }
     
     that.setData({
+      hotel_info:hotel_info,
+      launchType:launch_type,
       openid: openid,
       box_mac: box_mac,
       upload_vedio_temp: '',
       avatarUrl: avatarUrl,
       nickName: nickName,
-      is_open_simple: is_open_simple,
       is_compress:is_compress
     })
 
@@ -123,17 +124,14 @@ Page({
       camera: 'back',
       compressed:compressed,
       success: function(res) {
-        // console.log(res);
         that.setData({
           showVedio: true,
           is_btn_disabel: false,
           upload_vedio_temp: res.tempFilePath,
-          //upload_vedio_cover:res.thumbTempFilePath,
           duration: res.duration,
           size: res.size
         });
         lead(openid);
-        //res_sup_time = (new Date()).valueOf();
         mta.Event.stat('LaunchVideoWithNet_Launch_ChooseVideo', {
           'status': 'success'
         });
@@ -215,103 +213,156 @@ Page({
   },
 
   forscreen_video: function(res) {
-    //console.log(res);
     var that = this;
+    var launchType = that.data.launchType;
+    
+    var hotel_info = that.data.hotel_info;
 
-    var video = res.detail.value.video;
+
     var box_mac = res.detail.value.box_mac;
     var openid = res.detail.value.openid;
-    var is_pub_hotelinfo = res.detail.value.is_pub_hotelinfo;
-    var is_share = res.detail.value.is_share;
+    var video = res.detail.value.video;
     var duration = res.detail.value.duration;
     var avatarUrl = res.detail.value.avatarUrl;
     var nickName = res.detail.value.nickName;
-    var public_text = res.detail.value.public_text;
-    var is_open_simple = res.detail.value.is_open_simple;
-    
-    var is_assist = 0;
-    res_size = res.detail.value.size;
-    if (is_share == 1) {
-      is_assist = 1;
-    }
-    lead(openid, is_share);
-    that.setData({
-      load_fresh_char: '亲^_^投屏中,请稍后...',
-      hiddens: false,
-      is_btn_disabel: true,
-      //is_open_control: true,
-      is_share: is_share,
-      is_assist: is_assist
-    })
-
-    
-
-    wx.request({
-      url: api_url + '/smallapp21/User/isForscreenIng',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      method: "POST",
-      data: {
-        box_mac: box_mac
-      },
-      success: function(res) {
-        var timer8_0;
-        var is_forscreen = res.data.result.is_forscreen;
-        if (is_forscreen == 1) {
-          wx.showModal({
-            title: '确认要打断投屏',
-            content: '当前电视正在进行投屏,继续投屏有可能打断当前投屏中的内容.',
-            success: function(res) {
-              if (res.confirm) {
-                
-                
-                uploadVedio(video, box_mac, openid, is_pub_hotelinfo, is_share, duration, avatarUrl, nickName, public_text, timer8_0);
-                
-
-                if (public_text = '' || typeof (public_text) == 'undefined') {
-                  public_text = 0;
-                } else {
-                  public_text = 1;
-                }
-                utils.tryCatch(mta.Event.stat('forscreenVedio', { 'ispublictext': public_text, 'ispublic': is_share, 'isforscreen': 1 }));
-              } else if (res.cancel) {
-                that.setData({
-                  hiddens: true,
-                })
-                wx.navigateBack({
-                  delta: 1
-                })
-
-                if (public_text = '' || typeof (public_text) == 'undefined') {
-                  public_text = 0;
-                } else {
-                  public_text = 1;
-                }
-                utils.tryCatch(mta.Event.stat('forscreenVedio', { 'ispublictext': public_text, 'ispublic': is_share, 'isforscreen': 0 }));
-              }
-            }
-          })
-          
-          
-        } else {
-          
-          uploadVedio(video, box_mac, openid, is_pub_hotelinfo, is_share, duration, avatarUrl, nickName, public_text, timer8_0);
-          
-          if (public_text = '' || typeof (public_text) == 'undefined') {
-            public_text = 0;
-          } else {
-            public_text = 1;
-          }
-          utils.tryCatch(mta.Event.stat('forscreenVedio', { 'ispublictext': public_text, 'ispublic': is_share, 'isforscreen': 0 }));
-        }
+    if(launchType=='classic'){//经典投屏
+      var is_pub_hotelinfo = res.detail.value.is_pub_hotelinfo;
+      var is_share = res.detail.value.is_share;
+      var public_text = res.detail.value.public_text;
+      var is_assist = 0;
+      res_size = res.detail.value.size;
+      if (is_share == 1) {
+        is_assist = 1;
       }
-    })
-
-
-
-
-
+      lead(openid, is_share);
+      that.setData({
+        load_fresh_char: '亲^_^投屏中,请稍后...',
+        hiddens: false,
+        is_btn_disabel: true,
+        //is_open_control: true,
+        is_share: is_share,
+        is_assist: is_assist
+      })
+      wx.request({
+        url: api_url + '/smallapp21/User/isForscreenIng',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        method: "POST",
+        data: {
+          box_mac: box_mac
+        },
+        success: function(res) {
+          var timer8_0;
+          var is_forscreen = res.data.result.is_forscreen;
+          if (is_forscreen == 1) {
+            wx.showModal({
+              title: '确认要打断投屏',
+              content: '当前电视正在进行投屏,继续投屏有可能打断当前投屏中的内容.',
+              success: function(res) {
+                if (res.confirm) {
+                  uploadVedio(video, box_mac, openid, is_pub_hotelinfo, is_share, duration, avatarUrl, nickName, public_text, timer8_0);
+                  if (public_text = '' || typeof (public_text) == 'undefined') {
+                    public_text = 0;
+                  } else {
+                    public_text = 1;
+                  }
+                  utils.tryCatch(mta.Event.stat('forscreenVedio', { 'ispublictext': public_text, 'ispublic': is_share, 'isforscreen': 1 }));
+                } else if (res.cancel) {
+                  that.setData({
+                    hiddens: true,
+                  })
+                  wx.navigateBack({
+                    delta: 1
+                  })
+                  if (public_text = '' || typeof (public_text) == 'undefined') {
+                    public_text = 0;
+                  } else {
+                    public_text = 1;
+                  }
+                  utils.tryCatch(mta.Event.stat('forscreenVedio', { 'ispublictext': public_text, 'ispublic': is_share, 'isforscreen': 0 }));
+                }
+              }
+            })
+            
+          } else {
+            uploadVedio(video, box_mac, openid, is_pub_hotelinfo, is_share, duration, avatarUrl, nickName, public_text, timer8_0);
+            if (public_text = '' || typeof (public_text) == 'undefined') {
+              public_text = 0;
+            } else {
+              public_text = 1;
+            }
+            utils.tryCatch(mta.Event.stat('forscreenVedio', { 'ispublictext': public_text, 'ispublic': is_share, 'isforscreen': 0 }));
+          }
+        }
+      })
+    }else {//极速投屏
+      that.setData({
+        load_fresh_char: '亲^_^投屏中,请稍后...',
+        hiddens: false, 
+        is_btn_disabel: true,
+        
+      })
+      var intranet_ip = hotel_info.intranet_ip;
+      var video_url = video;
+      var mobile_brand = app.globalData.mobile_brand;
+      var mobile_model = app.globalData.mobile_model;
+      var forscreen_id = (new Date()).valueOf();
+      var filename = forscreen_id;
+      var start_time = forscreen_id; 
+      var resouce_size  = res.detail.value.size;
+      wx.uploadFile({
+        url: 'http://' + intranet_ip + ':8080/videoH5?deviceId=' + openid + '&box_mac=' + box_mac + '&deviceName=' + mobile_brand + '&web=true&forscreen_id=' + forscreen_id + '&filename=' + filename + '&device_model=' + mobile_model + '&resource_size=' + resouce_size + '&duration=' + duration + '&action=2&resource_type=2&avatarUrl=' + avatarUrl + "&nickName=" + nickName+'&serial_number='+app.globalData.serial_number,
+        filePath: video_url,
+        name: 'fileUpload',
+        success: function(res) {
+          var info_rt = JSON.parse(res.data);
+          if (info_rt.code == 10000) {
+            that.setData({
+              is_upload: 1,
+              vedio_url: video_url,
+              oss_video_url:video_url,
+              filename: filename,
+              resouce_size: resouce_size,
+              duration: duration,
+              intranet_ip: intranet_ip,
+              hiddens: true,
+              showVedio: false,
+            })
+            utils.tryCatch(mta.Event.stat('wifiVideoForscreen', { 'status': 1 }));
+  
+            var end_time = (new Date()).valueOf(); 
+            var diff_time = end_time - start_time;
+            utils.tryCatch(mta.Event.stat('wifiVideoUploadWastTime', { 'uploadtime': diff_time }));
+          } else if (res.code == 1001) {
+  
+            that.setData({
+              is_btn_disabel: false,
+              hiddens: true,
+            })
+            app.showToast('投屏失败，请重试！')
+            
+            utils.tryCatch(mta.Event.stat('wifiVideoForscreen', { 'status': 0 }));
+          }else if(res.code==-1){
+            that.setData({
+              hiddens: true,
+              is_forscreen: 1,
+            })
+            app.showToast('系统繁忙，请重试');
+          }
+        },
+        fail: function({
+          errMsg
+        }) {
+          wx.navigateBack({
+            delta: 1,
+          })
+          app.showToast('投屏失败,请确认是否连接本包间wifi！',3000,'none',true);
+          
+          utils.tryCatch(mta.Event.stat('wifiVideoForscreen', { 'status': 0 }));
+        }
+      })
+    }
     function uploadVedio(video, box_mac, openid, is_pub_hotelinfo, is_share, duration, avatarUrl, nickName, public_text, timer8_0) {
 
       wx.request({
@@ -326,7 +377,6 @@ Page({
         }
       });
     }
-
     function uploadOssVedio(policy, signature, video, box_mac, openid, is_pub_hotelinfo, is_share, duration, avatarUrl, nickName, public_text, timer8_0) {
 
       var filename = video; //视频url
@@ -587,38 +637,10 @@ Page({
     var that = this;
     openid = e.currentTarget.dataset.openid;
     box_mac = e.currentTarget.dataset.boxmac;
+    var hotel_info = that.data.hotel_info;
     var timestamp = (new Date()).valueOf();
-    wx.request({
-      url: api_url + '/Netty/Index/pushnetty',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      method: "POST",
-      data: {
-        box_mac: box_mac,
-        msg: '{"action": 3,"openid":"' + openid + '"}',
-      },
-      success: function(res) {
-        wx.navigateBack({
-          delta: 1,
-        })
-        wx.showToast({
-          title: '退出成功',
-          icon: 'none',
-          duration: 2000
-        });
-        utils.tryCatch(mta.Event.stat('forVideoExit', { 'status': 1 }));
-        
-      },
-      fail: function(res) {
-        wx.showToast({
-          title: '网络异常，退出失败',
-          icon: 'none',
-          duration: 2000
-        })
-        utils.tryCatch(mta.Event.stat('forVideoExit', { 'status': 0 }));
-      }
-    })
+    app.controlExitForscreen(openid, box_mac,hotel_info ,that,1);
+    
   },
   //是否公开显示餐厅信息
   checkboxChange: function(e) {
@@ -785,9 +807,11 @@ Page({
   },
   //遥控退出投屏
   exitForscreen: function(e) {
+    var that = this;
     openid = e.currentTarget.dataset.openid;
     box_mac = e.currentTarget.dataset.box_mac;
-    app.controlExitForscreen(openid, box_mac);
+    var hotel_info = that.data.hotel_info;
+    app.controlExitForscreen(openid, box_mac,hotel_info,that);
   },
   //遥控调整音量
   changeVolume: function(e) {
@@ -963,7 +987,14 @@ Page({
    */
   chooseLaunchType:function(e){
     let self=this;
+    var hotel_info = self.data.hotel_info;
     let launchType=e.currentTarget.dataset.launch_type;
-    self.setData({launchType:launchType});
+    hotel_info.forscreen_type = 2;
+    if(launchType=='speed'){
+      app.linkHotelWifi(hotel_info,self,'speed');
+    }else {
+      self.setData({launchType:launchType});
+      app.globalData.change_link_type = 1;
+    }
   }
 })

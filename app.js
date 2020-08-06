@@ -223,177 +223,348 @@ App({
 
     })
   },
-  controlExitForscreen: function (openid, box_mac, hotel_info, aps) {
+  controlExitForscreen: function (openid, box_mac, hotel_info='', aps,is_back=0) {
     var that = this;
-    var link_type = that.globalData.link_type;
-    
-    var timestamp = (new Date()).valueOf();
-    wx.request({
-      url: that.globalData.api_url + '/Netty/Index/pushnetty',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      method: "POST",
-      data: {
-        box_mac: box_mac,
-        msg: '{ "action": 3,"openid":"' + openid + '"}',
-      },
-      success: function (res) {
-        wx.showToast({
-          title: '退出成功',
-          icon: 'none',
-          duration: 2000
-        });
-      },
-      fail: function (res) {
-        wx.showToast({
-          title: '网络异常，退出失败',
-          icon: 'none',
-          duration: 2000
-        })
-      }
-    })
-    
-    mta.Event.stat("controlexitforscreen", {})
-  }, //退出投屏结束
-  //遥控器呼玛
-  controlCallQrcode: function (openid, box_mac, qrcode_img, hotel_info, aps) {
-    var that = this;
-    if (box_mac) {
-      
-      var timestamp = (new Date()).valueOf();
-      var qrcode_url = that.globalData.api_url + '/Smallapp/index/getBoxQr?box_mac=' + box_mac + '&type=3';
-      var mobile_brand = this.globalData.mobile_brand;
-      var mobile_model = this.globalData.mobile_model;
+    var change_link_type = that.globalData.change_link_type;
+    var forscreen_type = hotel_info.forscreen_type;
+    var link_type = 1;
+    if(change_link_type ==''){
+      link_type = forscreen_type
+    }else{
+      link_type = change_link_type;
+    }
 
+    if (link_type == 1 || hotel_info=='') {
+      var timestamp = (new Date()).valueOf();
       wx.request({
-        url: that.globalData.api_url + '/smallapp21/User/isForscreenIng',
+        url: that.globalData.api_url + '/Netty/Index/pushnetty',
         headers: {
           'Content-Type': 'application/json'
         },
         method: "POST",
         data: {
-          box_mac: box_mac
+          box_mac: box_mac,
+          msg: '{ "action": 3,"openid":"' + openid + '"}',
         },
         success: function (res) {
-          var is_forscreen = res.data.result.is_forscreen;
-          if (is_forscreen == 1) {
-            wx.showModal({
-              title: '确认要打断投屏',
-              content: '当前电视正在进行投屏,继续投屏有可能打断当前投屏中的内容.',
-              success: function (res) {
-                if (res.confirm) {
-                  wx.request({
-                    url: that.globalData.api_url + '/Netty/Index/pushnetty',
-                    headers: {
-                      'Content-Type': 'application/json'
-                    },
-                    method: "POST",
-                    data: {
-                      box_mac: box_mac,
-                      msg: '{ "action": 9,"url":"' + qrcode_url + '","openid":"'+openid+'","forscreen_id":"'+timestamp+'","serial_number":"'+that.globalData.serial_number+'"}',
-                    },
-                    success: function () {
-                      wx.showToast({
-                        title: '呼玛成功，电视即将展示',
-                        icon: 'none',
-                        duration: 2000
-                      });
-                      wx.request({
-                        url: that.globalData.api_v_url + '/Smallapp/index/recordForScreenPics',
-                        header: {
-                          'content-type': 'application/json'
-                        },
-                        data: {
-                          forscreen_id:timestamp,
-                          openid: openid,
-                          box_mac: box_mac,
-                          action: 9,
-                          mobile_brand: mobile_brand,
-                          mobile_model: mobile_model,
-                          imgs: '[]',
-                          serial_number:that.globalData.serial_number
-                        },
-
-                      })
-                    }
-                  })
-                } else {
-
-                }
-              }
-            })
-          } else {
-            wx.request({
-              url: that.globalData.api_url + '/Netty/Index/pushnetty',
-              headers: {
-                'Content-Type': 'application/json'
-              },
-              method: "POST",
-              data: {
-                box_mac: box_mac,
-                msg: '{ "action": 9,"url":"' + qrcode_url + '","openid":"'+openid+'","forscreen_id":"'+timestamp+'","serial_number":"'+that.globalData.serial_number+'"}',
-              },
-              success: function () {
-                wx.showToast({
-                  title: '呼玛成功，电视即将展示',
-                  icon: 'none',
-                  duration: 2000
-                });
-                wx.request({
-                  url: that.globalData.api_v_url + '/index/recordForScreenPics',
-                  header: {
-                    'content-type': 'application/json'
-                  },
-                  data: {
-                    forscreen_id:timestamp,
-                    openid: openid,
-                    box_mac: box_mac,
-                    action: 9,
-                    mobile_brand: mobile_brand,
-                    mobile_model: mobile_model,
-                    imgs: '[]',
-                    serial_number:that.globalData.serial_number
-                  },
-                })
-              }
+          if(is_back!=0){
+            wx.navigateBack({
+              delta: 1,
             })
           }
+          wx.showToast({
+            title: '退出成功',
+            icon: 'none',
+            duration: 2000
+          });
+        },
+        fail: function (res) {
+          wx.showToast({
+            title: '网络异常，退出失败',
+            icon: 'none',
+            duration: 2000
+          })
         }
       })
+    } else if (link_type == 2) {
+      wx.request({
+        url: "http://" + hotel_info.intranet_ip + ":8080/h5/stop?deviceId=" + openid + "&box_mac=" + box_mac + "&web=true",
+        success: function (res) {
+          if (res.data.code == 10000) {
+            if(is_back!=0){
+              wx.navigateBack({
+                delta: 1,
+              })
+            }
+            wx.showToast({
+              title: '退出成功',
+              icon: 'none',
+              duration: 2000
+            });
+          }else {
+            wx.showToast({
+              title: '退出失败',
+              icon: 'none',
+              duration: 2000
+            });
+          }
+        },
+        fail: function ({ errMsg }) {
+          wx.showToast({
+            title: '退出失败',
+            icon: 'none',
+            duration: 2000
+          });
+        },
+      })
+    }
+    mta.Event.stat("controlexitforscreen", {})
+  }, //退出投屏结束
+  //遥控器呼玛
+  controlCallQrcode: function (openid, box_mac, qrcode_img, hotel_info='', aps) {
+    var that = this;
+    if (box_mac) {
+      var change_link_type = that.globalData.change_link_type;
+      var forscreen_type = hotel_info.forscreen_type;
+      var link_type = 1;
+      if(change_link_type ==''){
+        link_type = forscreen_type
+      }else{
+        link_type = change_link_type;
+      }
+      if(link_type==1 || hotel_info==''){
+        var timestamp = (new Date()).valueOf();
+        var qrcode_url = that.globalData.api_url + '/Smallapp/index/getBoxQr?box_mac=' + box_mac + '&type=3';
+        var mobile_brand = this.globalData.mobile_brand;
+        var mobile_model = this.globalData.mobile_model;
+
+        wx.request({
+          url: that.globalData.api_url + '/smallapp21/User/isForscreenIng',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          method: "POST",
+          data: {
+            box_mac: box_mac
+          },
+          success: function (res) {
+            var is_forscreen = res.data.result.is_forscreen;
+            if (is_forscreen == 1) {
+              wx.showModal({
+                title: '确认要打断投屏',
+                content: '当前电视正在进行投屏,继续投屏有可能打断当前投屏中的内容.',
+                success: function (res) {
+                  if (res.confirm) {
+                    wx.request({
+                      url: that.globalData.api_url + '/Netty/Index/pushnetty',
+                      headers: {
+                        'Content-Type': 'application/json'
+                      },
+                      method: "POST",
+                      data: {
+                        box_mac: box_mac,
+                        msg: '{ "action": 9,"url":"' + qrcode_url + '","openid":"'+openid+'","forscreen_id":"'+timestamp+'","serial_number":"'+that.globalData.serial_number+'"}',
+                      },
+                      success: function () {
+                        wx.showToast({
+                          title: '呼玛成功，电视即将展示',
+                          icon: 'none',
+                          duration: 2000
+                        });
+                        wx.request({
+                          url: that.globalData.api_v_url + '/Smallapp/index/recordForScreenPics',
+                          header: {
+                            'content-type': 'application/json'
+                          },
+                          data: {
+                            forscreen_id:timestamp,
+                            openid: openid,
+                            box_mac: box_mac,
+                            action: 9,
+                            mobile_brand: mobile_brand,
+                            mobile_model: mobile_model,
+                            imgs: '[]',
+                            serial_number:that.globalData.serial_number
+                          },
+
+                        })
+                      }
+                    })
+                  } else {
+
+                  }
+                }
+              })
+            } else {
+              wx.request({
+                url: that.globalData.api_url + '/Netty/Index/pushnetty',
+                headers: {
+                  'Content-Type': 'application/json'
+                },
+                method: "POST",
+                data: {
+                  box_mac: box_mac,
+                  msg: '{ "action": 9,"url":"' + qrcode_url + '","openid":"'+openid+'","forscreen_id":"'+timestamp+'","serial_number":"'+that.globalData.serial_number+'"}',
+                },
+                success: function () {
+                  wx.showToast({
+                    title: '呼玛成功，电视即将展示',
+                    icon: 'none',
+                    duration: 2000
+                  });
+                  wx.request({
+                    url: that.globalData.api_v_url + '/index/recordForScreenPics',
+                    header: {
+                      'content-type': 'application/json'
+                    },
+                    data: {
+                      forscreen_id:timestamp,
+                      openid: openid,
+                      box_mac: box_mac,
+                      action: 9,
+                      mobile_brand: mobile_brand,
+                      mobile_model: mobile_model,
+                      imgs: '[]',
+                      serial_number:that.globalData.serial_number
+                    },
+                  })
+                }
+              })
+            }
+          }
+        })
+      }else {
+        wx.request({
+          url: "http://" + hotel_info.intranet_ip + ":8080/showMiniProgramCode?deviceId=" + openid + "&box_mac=" + box_mac + "&web=true&serial_number="+that.globalData.serial_number,
+          success: function (res) {
+            if (res.data.code == 10000) {
+              wx.showToast({
+                title: '呼码成功',
+                icon: 'none',
+                duration: 2000
+              });
+            }else {
+              wx.showToast({
+                title: '呼码失败',
+                icon: 'none',
+                duration: 2000
+              });
+            }
+
+          },
+          fial: function ({ errMsg }) {
+            wx.showToast({
+              title: '呼码失败',
+              icon: 'none',
+              duration: 2000
+            });
+            
+          },
+        })
+      }
     }
     mta.Event.stat("controlcallqrcode", {})
   },
   //遥控器控制音量
-  controlChangeVolume: function (openid, box_mac, change_type, hotel_info, aps) {
+  controlChangeVolume: function (openid, box_mac, change_type, hotel_info='', aps) {
     var that = this;
-    wx.request({
-      url: that.globalData.api_url + '/Netty/Index/pushnetty',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      method: "POST",
-      data: {
-        box_mac: box_mac,
-        msg: '{"action":31,"change_type":' + change_type + '}',
-      },
-    })
+    var change_link_type = that.globalData.change_link_type;
+    var forscreen_type = hotel_info.forscreen_type;
+    var link_type = 1;
+    if(change_link_type ==''){
+      link_type = forscreen_type
+    }else{
+      link_type = change_link_type;
+    }
+    if (link_type == 1 || hotel_info=='') {
+      wx.request({
+        url: that.globalData.api_url + '/Netty/Index/pushnetty',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        method: "POST",
+        data: {
+          box_mac: box_mac,
+          msg: '{"action":31,"change_type":' + change_type + '}',
+        },
+      })
+    } else if (link_type == 2) {
+      var timestamp = (new Date()).valueOf();
+      var change_type_name = '';
+      if (change_type == 1) {
+        change_type = 3
+        change_type_name = '减小音量'
+      } else if (change_type == 2) {
+        change_type = 4
+        change_type_name = '增大音量'
+      }
+      wx.request({
+        url: "http://" + hotel_info.intranet_ip + ":8080/volume?action=" + change_type + "&deviceId=" + openid + "&box_mac=" + box_mac + "&projectId=" + timestamp + "&web=true&serial_number="+that.globalData.serial_number,
+        success: function (res) {
+          if (res.data.code == 10000) {
+            wx.showToast({
+              title: change_type_name + '成功',
+              icon: 'none',
+              duration: 2000
+            })
+          } else {
+            wx.showToast({
+              title: '投屏过程中才可控制音量',
+              icon: 'none',
+              duration: 2000
+            })
+          }
+        }, fail: function () {
+          wx.showToast({
+            title: '投屏过程中才可控制音量',
+            icon: 'none',
+            duration: 2000
+          })
+        }
+      })
+    }
+    if (change_type == 3) {
+      change_type = 1;
+    }
+    if (change_type == 4) {
+      change_type = 2;
+    }
     mta.Event.stat('controlChangeVolume', { 'changetype': change_type })
   },
   //遥控控制节目
-  controlChangeProgram: function (openid, box_mac, change_type, hotel_info, aps) {
+  controlChangeProgram: function (openid, box_mac, change_type, hotel_info='', aps) {
     var that = this;
-    wx.request({
-      url: that.globalData.api_url + '/Netty/Index/pushnetty',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      method: "POST",
-      data: {
-        box_mac: box_mac,
-        msg: '{"action":32,"change_type":' + change_type + '}',
-      },
-    })
+    var change_link_type = that.globalData.change_link_type;
+    var forscreen_type = hotel_info.forscreen_type;
+    var link_type = 1;
+    if(change_link_type ==''){
+      link_type = forscreen_type
+    }else{
+      link_type = change_link_type;
+    }
+    if (link_type == 1 || hotel_info=='') {
+
+      wx.request({
+        url: that.globalData.api_url + '/Netty/Index/pushnetty',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        method: "POST",
+        data: {
+          box_mac: box_mac,
+          msg: '{"action":32,"change_type":' + change_type + '}',
+        },
+      })
+    } else if (link_type == 2) {
+      var timestamp = (new Date()).valueOf();
+      wx.request({
+        url: "http://" + hotel_info.intranet_ip + ":8080/switchProgram?action=" + change_type + "&deviceId=" + openid + "&box_mac=" + box_mac + "&projectId=" + timestamp + "&web=true&serial_number="+that.globalData.serial_number,
+        success: function (res) {
+
+          if (res.data.code == 10000) {
+            wx.showToast({
+              title: '切换成功',
+              icon: 'none',
+              duration: 2000
+            })
+          } else if (res.data.code == 1001) {
+            wx.showToast({
+              title: '切换失败',
+              icon: 'none',
+              duration: 2000
+            })
+          } else {
+            wx.showToast({
+              title: '电视投屏中，切换无效',
+              icon: 'none',
+              duration: 2000
+            })
+          }
+        }, fail: function () {
+          
+        }
+      })
+    }
     mta.Event.stat('controlChangePro', { 'changetype': change_type })
   },
   //扫码

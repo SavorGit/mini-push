@@ -263,21 +263,33 @@ Page({
       if (box_mac == '') {
         app.scanQrcode(pageid);
       } else {
-        if (app.globalData.link_type == 1) {
+        var hotel_info = app.globalData.hotel_info;
+        if(hotel_info.forscreen_method=='1-1'){
           var is_compress = that.data.is_compress;
-          wx.navigateTo({
-            url: '/pages/forscreen/forvideo/index?box_mac=' + box_mac + '&openid=' + openid +'&is_compress='+is_compress,
-          })
-        } else {
-          var intranet_ip = e.detail.value.intranet_ip;
-          var wifi_mac = e.detail.value.wifi_mac;
-          var wifi_name = e.detail.value.wifi_name;
-          var wifi_password = e.detail.value.wifi_password;
-
-          wx.navigateTo({
-            url: '/pages/forscreen/forvideo/wifi?box_mac=' + box_mac + '&openid=' + openid + '&intranet_ip=' + intranet_ip + '&wifi_mac=' + wifi_mac + '&wifi_name=' + wifi_name + '&wifi_password=' + wifi_password,
-          })
+            wx.navigateTo({
+              url: '/pages/forscreen/forvideo/index?box_mac=' + box_mac + '&openid=' + openid +'&is_compress='+is_compress,
+            })
+        }else {
+          if (app.globalData.link_type == 1) {
+            var is_compress = that.data.is_compress;
+            wx.navigateTo({
+              url: '/pages/forscreen/forvideo/index?box_mac=' + box_mac + '&openid=' + openid +'&is_compress='+is_compress,
+            })
+          } else {
+            var intranet_ip = e.detail.value.intranet_ip;
+            var wifi_mac = e.detail.value.wifi_mac;
+            var wifi_name = e.detail.value.wifi_name;
+            var wifi_password = e.detail.value.wifi_password;
+  
+            wx.navigateTo({
+              url: '/pages/forscreen/forvideo/wifi?box_mac=' + box_mac + '&openid=' + openid + '&intranet_ip=' + intranet_ip + '&wifi_mac=' + wifi_mac + '&wifi_name=' + wifi_name + '&wifi_password=' + wifi_password,
+            })
+          }
         }
+        
+
+
+        
 
       }
     }

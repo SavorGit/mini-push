@@ -750,37 +750,8 @@ Page({
     var that = this;
     openid = e.currentTarget.dataset.openid;
     box_mac = e.currentTarget.dataset.boxmac;
-    var timestamp = (new Date()).valueOf();
-    wx.request({
-      url: api_url+'/Netty/Index/pushnetty',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      method: "POST",
-      data: {
-        box_mac: box_mac,
-        msg: '{ "action": 3,"openid":"' + openid + '"}',
-      },
-      success: function (res) {
-        wx.navigateBack({
-          delta: 1
-        })
-        wx.showToast({
-          title: '退出成功',
-          icon: 'none',
-          duration: 2000
-        });
-        utils.tryCatch(mta.Event.stat('exitForscreen', { 'status': 1 }))
-      },
-      fail: function (res) {
-        wx.showToast({
-          title: '网络异常，退出失败',
-          icon: 'none',
-          duration: 2000
-        })
-        utils.tryCatch(mta.Event.stat('exitForscreen', { 'status': 0 }))
-      }
-    })
+    var hotel_info = that.data.hotel_info;
+    app.controlExitForscreen(openid, box_mac,hotel_info ,that,1);
   },//退出投屏结束
   //是否公开显示餐厅信息
   checkboxChange:function(e){
