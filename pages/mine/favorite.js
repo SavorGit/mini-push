@@ -393,7 +393,7 @@ Page({
     openid = e.currentTarget.dataset.openid;
     box_mac = e.currentTarget.dataset.box_mac;
     var hotel_info = e.currentTarget.dataset.hotel_info;
-    app.controlExitForscreen(openid, box_mac, hotel_info, self);
+    app.controlExitForscreen(openid, box_mac, '', self);
   },
   //遥控调整音量
   changeVolume: function(e) {
@@ -402,7 +402,7 @@ Page({
     openid = e.currentTarget.dataset.openid;
     var change_type = e.currentTarget.dataset.change_type;
     var hotel_info = e.currentTarget.dataset.hotel_info;
-    app.controlChangeVolume(openid, box_mac, change_type, hotel_info, self);
+    app.controlChangeVolume(openid, box_mac, change_type, '', self);
 
   },
   //遥控切换节目
@@ -412,7 +412,7 @@ Page({
     openid = e.currentTarget.dataset.openid;
     var change_type = e.currentTarget.dataset.change_type;
     var hotel_info = e.currentTarget.dataset.hotel_info;
-    app.controlChangeProgram(openid, box_mac, change_type, hotel_info, self);
+    app.controlChangeProgram(openid, box_mac, change_type, '', self);
   },
   modalConfirm: function(e) {
     var self = this;

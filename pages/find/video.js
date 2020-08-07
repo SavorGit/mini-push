@@ -38,11 +38,6 @@ Page({
       });
     }
 
-    // console.log('onLoad', 'self.data.link_type', self.data.link_type);
-    if (self.data.link_type == 2) {
-      return;
-    }
-
     var user_info = wx.getStorageSync("savor_user_info");
     openid = user_info.openid;
     box_mac = options.box_mac;
@@ -290,7 +285,7 @@ Page({
     box_mac = e.currentTarget.dataset.box_mac;
     var qrcode_img = e.currentTarget.dataset.qrcode_img;
     var hotel_info = e.currentTarget.dataset.hotel_info;
-    app.controlCallQrcode(openid, box_mac, qrcode_img, hotel_info, self);
+    app.controlCallQrcode(openid, box_mac, qrcode_img, '', self);
   }, 3000), //呼大码结束
   //打开遥控器
   openControl: function(e) {
@@ -320,7 +315,7 @@ Page({
     openid = e.currentTarget.dataset.openid;
     box_mac = e.currentTarget.dataset.box_mac;
     var hotel_info = e.currentTarget.dataset.hotel_info;
-    app.controlExitForscreen(openid, box_mac, hotel_info, self);
+    app.controlExitForscreen(openid, box_mac, '', self);
   },
   //遥控调整音量
   changeVolume: function(e) {
@@ -328,7 +323,7 @@ Page({
     box_mac = e.currentTarget.dataset.box_mac;
     var change_type = e.currentTarget.dataset.change_type;
     var hotel_info = e.currentTarget.dataset.hotel_info;
-    app.controlChangeVolume(openid, box_mac, change_type, hotel_info, self);
+    app.controlChangeVolume(openid, box_mac, change_type, '', self);
 
   },
   //遥控切换节目
@@ -337,7 +332,7 @@ Page({
     box_mac = e.currentTarget.dataset.box_mac;
     var change_type = e.currentTarget.dataset.change_type;
     var hotel_info = e.currentTarget.dataset.hotel_info;
-    app.controlChangeProgram(openid, box_mac, change_type, hotel_info, self);
+    app.controlChangeProgram(openid, box_mac, change_type, '', self);
   },
   modalConfirm: function(e) {
     console.log(e);

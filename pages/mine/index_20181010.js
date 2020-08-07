@@ -71,7 +71,11 @@ Page({
       openid: app.globalData.openid
     }, (data, headers, cookies, errMsg, statusCode) => {
       if (data.result.is_have == 1) {
-
+        that.setData({
+          hotel_info: data.result,
+          box_mac: data.result.box_mac,
+        })
+        box_mac = data.result.box_mac;
       } else {
         //app.globalData.link_type = 1;
         that.setData({
@@ -124,8 +128,8 @@ Page({
     var that = this;
     openid = e.currentTarget.dataset.openid;
     box_mac = e.currentTarget.dataset.box_mac;
-    var hotel_info = e.currentTarget.dataset.hotel_info;
-    app.controlExitForscreen(openid, box_mac, hotel_info, that);
+    //var hotel_info = e.currentTarget.dataset.hotel_info;
+    app.controlExitForscreen(openid, box_mac, '', that);
   },
   //遥控调整音量
   changeVolume: function (e) {
@@ -133,8 +137,8 @@ Page({
     box_mac = e.currentTarget.dataset.box_mac;
     openid = e.currentTarget.dataset.openid;
     var change_type = e.currentTarget.dataset.change_type;
-    var hotel_info = e.currentTarget.dataset.hotel_info;
-    app.controlChangeVolume(openid, box_mac, change_type, hotel_info, that);
+    //var hotel_info = e.currentTarget.dataset.hotel_info;
+    app.controlChangeVolume(openid, box_mac, change_type, '', that);
 
   },
   //遥控切换节目
@@ -143,8 +147,8 @@ Page({
     box_mac = e.currentTarget.dataset.box_mac;
     openid = e.currentTarget.dataset.openid;
     var change_type = e.currentTarget.dataset.change_type;
-    var hotel_info = e.currentTarget.dataset.hotel_info;
-    app.controlChangeProgram(openid, box_mac, change_type, hotel_info, that);
+    //var hotel_info = e.currentTarget.dataset.hotel_info;
+    app.controlChangeProgram(openid, box_mac, change_type, '', that);
   },
   modalConfirm: function (e) {
     var that = this;
