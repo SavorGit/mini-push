@@ -1010,9 +1010,7 @@ App({
             that.setData({
               wifi_hidden: true,
             })
-            wx.stopWifi({
-
-            })
+            
           }, complete: function (res) {
 
           }
