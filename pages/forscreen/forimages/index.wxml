@@ -37,22 +37,22 @@
 					<textarea class='text_input theme-textarea' name="forscreen_char" maxlength='30' placeholder='电视展示时增加文字...'></textarea>
 				</view>
 				<block wx:if="{{launchType!='speed'}}">
-				<view class='grant_auth flex-column-center-space_between'>
-					<checkbox-group class="checkbox-group flex-column-flex_start-start" bindchange="checkboxChange">
-						<label class="items" wx:for="{{item}}" wx:key="key" wx:for-index="index">
-							<view wx:if="{{index==0}}">
-								<checkbox class="display_hide" value="{{item.value}}" checked="{{item.checked}}" disabled="{{item.disabled}}">{{item.name}}</checkbox>
-							</view>
-							<view wx:else>
-								<checkbox value="{{item.value}}" checked="{{item.checked}}" disabled="{{item.disabled}}">{{item.name}}</checkbox>
-							</view>
-						</label>
-					</checkbox-group>
-				</view>
-				<label class="full_width font_333333_24">公开即有机会在上千家餐厅电视中播放</label>
-				<view wx:if="{{is_share>0}}" class='speak_with_interest'>
-					<textarea class='text_input theme-textarea' name="public_text" maxlength='200' placeholder='顺便对公众说两句...'></textarea>
-				</view>
+					<view class='grant_auth flex-column-center-space_between'>
+						<checkbox-group class="checkbox-group flex-column-flex_start-start" bindchange="checkboxChange">
+							<label class="items" wx:for="{{item}}" wx:key="key" wx:for-index="index">
+								<view wx:if="{{index==0}}">
+									<checkbox class="display_hide" value="{{item.value}}" checked="{{item.checked}}" disabled="{{item.disabled}}">{{item.name}}</checkbox>
+								</view>
+								<view wx:else>
+									<checkbox value="{{item.value}}" checked="{{item.checked}}" disabled="{{item.disabled}}">{{item.name}}</checkbox>
+								</view>
+							</label>
+						</checkbox-group>
+					</view>
+					<label class="full_width font_333333_24">公开即有机会在上千家餐厅电视中播放</label>
+					<view wx:if="{{is_share>0}}" class='speak_with_interest'>
+						<textarea class='text_input theme-textarea' name="public_text" maxlength='200' placeholder='顺便对公众说两句...'></textarea>
+					</view>
 
 				</block>
 				<view class="choose-launch-edition flex-row-center-space_around" wx:if="{{hotel_info.forscreen_method=='1-1'}}">
@@ -98,7 +98,7 @@
 					<view class="weui-grid" wx:for="{{up_imgs}}" wx:key="key" wx:for-item="img" wx:for-index="index">
 						<view class="pic_show">
 							<image wx:if="{{img.is_sing_forscreen==1}}" class="pic_show {{pic_show_cur[index]?'pic_show_cur':''}}" mode='aspectFill' bindtap='up_single_pic' data-tmp_img="{{img.tmp_img}}" data-img_id="{{}}" data-img="{{img.oss_img}}" data-img_id="{{img.img_id}}" data-boxmac="{{box_mac}}" data-openid="{{openid}}" data-imgindex="{{index}}" data-imglen="{{img_lenth}}" src="{{img.tmp_img}}" data-resource_size="{{img.resource_size}}"></image>
-							<image wx:elif="{{img.is_sing_forscreen==''}}" class="pic_show {{pic_show_cur[index]?'pic_show_cur':''}}" mode='aspectFill' bindtap='up_single_pic' data-img="{{img.oss_img}}"  data-boxmac="{{box_mac}}" data-openid="{{openid}}" data-imgindex="{{index}}" data-imglen="{{img_lenth}}" src="{{img.tmp_img}}" data-resource_size="{{img.resource_size}}"></image>
+							<image wx:elif="{{img.is_sing_forscreen==''}}" class="pic_show {{pic_show_cur[index]?'pic_show_cur':''}}" mode='aspectFill' bindtap='up_single_pic' data-img="{{img.oss_img}}" data-boxmac="{{box_mac}}" data-openid="{{openid}}" data-imgindex="{{index}}" data-imglen="{{img_lenth}}" src="{{img.tmp_img}}" data-resource_size="{{img.resource_size}}"></image>
 							<!-- <image wx:elif="{{tmp_imgs[index].is_sing_forscreen==''}}" bindtap='upload_wait' class="pic_show {{pic_show_cur[index]?'pic_show_cur':''}}" mode='aspectFill' data-img="{{tmp_imgs[index].oss_img}}" data-boxmac="{{box_mac}}" data-openid="{{openid}}" data-imgindex="{{index}}" data-imglen="{{img_lenth}}" src="{{img.tmp_img}}"></image> -->
 							<!-- <image wx:else bindtap='up_single_pic' class="pic_show {{pic_show_cur[index]?'pic_show_cur':''}}" mode='aspectFill' data-img="{{img.tmp_img}}" data-boxmac="{{box_mac}}" data-filename='{{filename_arr[index]}}' data-openid="{{openid}}" data-imgindex="{{index}}" data-imglen="{{img_lenth}}" data-resource_size="{{img.resource_size}}" src="{{img.tmp_img}}" ></image> -->
 							<view class='upload_success_frame' wx:if="{{img.percent >= 100}}">
@@ -185,12 +185,12 @@
 				</view>
 			</scroll-view>
 		</view>
-    <view class='launch_history' wx:else></view>
+		<view class='launch_history' wx:else></view>
 
 		<!-- 广告面板 -->
 		<template is="adsPanelForSavorBusinessContacts" />
 	</view>
-	
+
 	<!-- 投屏之后引导蒙板 -->
 	<template is="afterLaunchGuidedMask" wx:if="{{showGuidedMaskAfterLaunch}}" data='{{marginTop: "calc(608rpx + 46px + " + statusBarHeight + "px)", dataType: 2, openid: openid}}' />
 </view>
@@ -198,4 +198,3 @@
 <view class="body-view">
 	<loading hidden="{{wifi_hidden}}" bindchange="loadingChange">正在连接包间wifi,请稍后...</loading>
 </view>
-
