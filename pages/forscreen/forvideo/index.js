@@ -993,9 +993,11 @@ Page({
     hotel_info.forscreen_type = 2;
     if(launchType=='speed'){
       app.linkHotelWifi(hotel_info,self,'speed');
+      mta.Event.stat('clickChangeLinkType',{'openid':openid,'linktype':2,'forscreentype':1})
     }else {
       self.setData({launchType:launchType});
       app.globalData.change_link_type = 1;
+      mta.Event.stat('clickChangeLinkType',{'openid':openid,'linktype':1,'forscreentype':1})
     }
   }
 })

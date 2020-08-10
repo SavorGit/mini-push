@@ -1226,8 +1226,6 @@ App({
     mobile_brand: '',
     mobile_model: '',
     statusBarHeight: 0,
-    rest_appid: 'wxc395eb4b44563af1',
-    jijian_appid: 'wx7883a4327329a67c',
     jd_appid: 'wx91d27dbf599dff74',
     api_url: 'https://mobile.littlehotspot.com',
     api_v_url:'https://mobile.littlehotspot.com/Smallapp46',
