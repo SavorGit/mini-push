@@ -228,11 +228,11 @@ Page({
             url: '/pages/forscreen/forimages/index?box_mac=' + box_mac + '&openid=' + openid ,
           })
         }else {
-          if (app.globalData.link_type == 1) {
+          if (hotel_info.forscreen_type == 1) {
             wx.navigateTo({
               url: '/pages/forscreen/forimages/index?box_mac=' + box_mac + '&openid=' + openid ,
             })
-          } else if (app.globalData.link_type == 2) {
+          } else if (hotel_info.forscreen_type== 2) {
   
             var intranet_ip = e.detail.value.intranet_ip;
             var wifi_mac = e.detail.value.wifi_mac;
@@ -270,7 +270,7 @@ Page({
               url: '/pages/forscreen/forvideo/index?box_mac=' + box_mac + '&openid=' + openid +'&is_compress='+is_compress,
             })
         }else {
-          if (app.globalData.link_type == 1) {
+          if (hotel_info.forscreen_type == 1) {
             var is_compress = that.data.is_compress;
             wx.navigateTo({
               url: '/pages/forscreen/forvideo/index?box_mac=' + box_mac + '&openid=' + openid +'&is_compress='+is_compress,
@@ -703,7 +703,6 @@ Page({
     var that = this;
 
     if (app.globalData.openid && app.globalData.openid != '') {
-      console.log('dddd');
       that.setData({
         openid: app.globalData.openid
       })
