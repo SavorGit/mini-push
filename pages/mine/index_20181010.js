@@ -262,7 +262,9 @@ Page({
    * 我的收货地址
    */
   gotoAdress:function(e){
-    var openid = this.data.openid;
+    //var openid = this.data.openid;
+    var userinfo = wx.getStorageSync(cache_key+'user_info');
+    var openid = userinfo.openid
     wx.navigateTo({
       url: '/pages/mine/address/index?openid='+openid+'&isOrder=0',
     })

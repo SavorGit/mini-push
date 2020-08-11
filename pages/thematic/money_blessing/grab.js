@@ -12,7 +12,6 @@ var pubdetail;
 var i;
 var api_url = app.globalData.api_url;
 var api_v_url = app.globalData.api_v_url
-var netty_url = app.globalData.netty_url;
 var pageid=61;
 Page({
 
@@ -658,15 +657,33 @@ Page({
   //选择照片上电视
   chooseImage(e) {
     var that = this;
+    var user_info = wx.getStorageSync("savor_user_info");
     var box_mac = e.currentTarget.dataset.box_mac;
     var openid = e.currentTarget.dataset.openid;
     var is_open_simple = e.currentTarget.dataset.is_open_simple;
     if (box_mac == '') {
       app.scanQrcode(pageid);
     } else {
-      wx.navigateTo({
-        url: '/pages/forscreen/forimages/index?box_mac=' + box_mac + '&openid=' + openid + '&is_open_simple=' + is_open_simple,
+      utils.PostRequest(api_v_url + '/index/isHaveCallBox', {
+        openid: user_info.openid
+      }, (data, headers, cookies, errMsg, statusCode) => {
+        var is_have = data.result.is_have;
+        if(is_have==1){
+          app.globalData.hotel_info = data.result;
+          wx.navigateTo({
+            url: '/pages/forscreen/forimages/index?box_mac=' + box_mac + '&openid=' + openid + '&is_open_simple=' + is_open_simple,
+          })
+        }else {
+          wx.reLaunch({
+            url: '/pages/index/index',
+          })
+        }
+      },function(e){
+        wx.reLaunch({
+          url: '/pages/index/index',
+        })
       })
+      
     }
   },
   //选择视频投屏
@@ -684,6 +701,7 @@ Page({
       }, (data, headers, cookies, errMsg, statusCode) => {
         var is_have = data.result.is_have;
         if(is_have==1){
+          app.globalData.hotel_info = data.result;
           var is_compress = data.result.is_compress;
           wx.navigateTo({
             url: '/pages/forscreen/forvideo/index?box_mac=' + box_mac + '&openid=' + openid + '&is_open_simple=' + is_open_simple+'&is_compress='+is_compress,
