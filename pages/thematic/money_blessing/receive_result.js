@@ -111,26 +111,11 @@ Page({
     if (box_mac == '') {
       app.scanQrcode(pageid);
     } else {
-      utils.PostRequest(api_v_url + '/index/isHaveCallBox', {
-        openid: user_info.openid
-      }, (data, headers, cookies, errMsg, statusCode) => {
-        var is_have = data.result.is_have;
-        if(is_have==1){
-          app.globalData.hotel_info = data.result;
-          wx.navigateTo({
-            url: '/pages/forscreen/forimages/index?box_mac=' + box_mac + '&openid=' + openid + '&is_open_simple=' + is_open_simple,
-          })
-        }else {
-          wx.reLaunch({
-            url: '/pages/index/index',
-          })
-        }
-      },function(e){
-        wx.reLaunch({
-          url: '/pages/index/index',
-        })
+      app.globalData.change_link_type = 0;
+      app.globalData.hotel_info.forscreen_type = 1;
+      wx.navigateTo({
+        url: '/pages/forscreen/forimages/index?box_mac=' + box_mac + '&openid=' + openid + '&is_open_simple=' + is_open_simple,
       })
-      
     }
   },
   //选择视频投屏
@@ -146,13 +131,14 @@ Page({
       /*wx.navigateTo({
         url: '/pages/forscreen/forvideo/index?box_mac=' + box_mac + '&openid=' + openid + '&is_open_simple=' + is_open_simple,
       })*/
+      app.globalData.change_link_type = 0;
+      app.globalData.hotel_info.forscreen_type = 1;
       utils.PostRequest(api_v_url + '/index/isHaveCallBox', {
         openid: user_info.openid
       }, (data, headers, cookies, errMsg, statusCode) => {
         var is_have = data.result.is_have;
         if(is_have==1){
           var is_compress = data.result.is_compress;
-          app.globalData.hotel_info = data.result;
           wx.navigateTo({
             url: '/pages/forscreen/forvideo/index?box_mac=' + box_mac + '&openid=' + openid + '&is_open_simple=' + is_open_simple+'&is_compress='+is_compress,
           })

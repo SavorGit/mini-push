@@ -85,6 +85,8 @@ Page({
         var launch_type = 'speed';
       }else if(hotel_info.forscreen_type==1){
         var launch_type = 'classic';
+      }else {
+        var launch_type = 'classic';
       }
     }else if(change_link_type==1){
       var launch_type = 'classic';
