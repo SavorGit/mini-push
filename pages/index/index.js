@@ -29,7 +29,6 @@ Page({
     showActgoods: false, // 显示活动促销
     showButton4JD: false, // 显示京东购买按钮
     showButton4Favorites: true, // 显示收藏按钮
-    showFavoritesPanel: false, // 显示收藏面板
 
     imgUrls: [], //顶部广告位
     imgUrls_mid: [], //中部广告位
@@ -595,16 +594,6 @@ Page({
       openid: openid,
       type: 2,
     });
-
-  },
-  //收藏商品
-  collectGoods: function (e) {
-    var goods_id = e.currentTarget.dataset.goods_id;
-    var that = this;
-    that.setData({
-      showFavoritesPanel: true,
-    })
-
 
   },
   //输入手机号失去焦点
