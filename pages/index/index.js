@@ -44,7 +44,10 @@ Page({
     wifi_hidden: true,
     is_view_eval_waiter:0,  //是否显示评价服务员
     is_view_official_account:app.globalData.is_view_official_account, //是否显示关注公众号
-
+    is_open_popcomment:0,
+    star_list:[{'lev':1,'is_select':true},{'lev':2,'is_select':true},{'lev':3,'is_select':true},{'lev':4,'is_select':true},{'lev':5,'is_select':true}],
+    comment_str:'',
+    
   },
 
   /**
@@ -690,7 +693,6 @@ Page({
   onShow: function () {
 
     var that = this;
-
     if (app.globalData.openid && app.globalData.openid != '') {
       that.setData({
         openid: app.globalData.openid
@@ -698,14 +700,23 @@ Page({
       openid = app.globalData.openid;
       that.isShowAct(openid);
       utils.PostRequest(api_v_url + '/index/isHaveCallBox', {
-        openid: openid
+        openid: openid,
+        pop_eval:1
       }, (data, headers, cookies, errMsg, statusCode) => {
         if (data.result.is_have == 1) {//如果已连接盒子
+          that.setData({
+            is_open_popcomment:data.result.is_open_popcomment,
+            staff_user_info:data.result.staff_user_info,
+            tags:data.result.tags,
+            comment_str:'',
+
+          })
           var serial_number = app.globalData.serial_number;
           var head_serial_number = serial_number.substring(0,2);
           if(head_serial_number==app.globalData.not_link_box_pre){
             app.globalData.serial_number = app.globalData.have_link_box_pre+openid+'_'+(new Date()).valueOf();
           }
+          
           app.linkHotelWifi(data.result, that);
           app.globalData.hotel_info = data.result;
           that.setData({
@@ -751,9 +762,19 @@ Page({
           })
           openid = openid;
           that.isShowAct(openid);
-          utils.PostRequest(api_v_url + '/index/isHaveCallBox?openid=' + openid, {}, (data, headers, cookies, errMsg, statusCode) => {
+          utils.PostRequest(api_v_url + '/index/isHaveCallBox', {
+            openid: openid,
+            pop_eval:1
+          
+          }, (data, headers, cookies, errMsg, statusCode) => {
             var is_have = data.result.is_have;
             if (is_have == 1) {
+              that.setData({
+                is_open_popcomment:data.result.is_open_popcomment,
+                staff_user_info:data.result.staff_user_info,
+                tags:data.result.tags,
+                comment_str:'',
+              })
               var serial_number = app.globalData.serial_number;
               var head_serial_number = serial_number.substring(0,2);
               if(head_serial_number==app.globalData.not_link_box_pre){
@@ -880,5 +901,87 @@ Page({
       })
     }
     mta.Event.stat('clickOfficialAccount',{'openid':openid})
+  },
+  closeComment:function(e){
+    this.setData({is_open_popcomment:0})
+  },
+  subStar:function(e){
+    var star_list = this.data.star_list;
+    var keys = e.target.dataset.keys;
+    var flag = keys +1;
+    
+    if(flag<star_list.length){
+      for(let i in star_list){
+        if(i>keys){
+          star_list[i].is_select = false
+        }
+      }
+      this.setData({star_list:star_list})
+    }
+  },
+  addStar:function(e){
+    var star_list = this.data.star_list;
+    var keys = e.target.dataset.keys;
+    for(let i in star_list){
+      if(i<=keys){
+        star_list[i].is_select = true;
+      }
+    }
+    this.setData({star_list:star_list})
+  },
+  editCommnet:function(e){
+    var comment_str = e.detail.value;
+    this.setData({comment_str:comment_str})
+    
+  },
+  clickTag:function(e){
+    var comment_str = this.data.comment_str;
+    var value = e.target.dataset.value;
+    var keys  = e.target.dataset.keys;
+    var tags  = this.data.tags;
+    for(let i in tags){
+      if(i== keys){
+        tags[i].selected = true
+      }else {
+        tags[i].selected = false
+      }
+    }
+    this.setData({tags:tags})
+    if(comment_str==''){
+      comment_str += value
+    }else {
+      comment_str += ','+value
+    }
+    
+    this.setData({comment_str:comment_str})
+  },
+  submitComment:function(e){
+    console.log(e);
+    //return false;
+    var that = this;
+    var star_list = this.data.star_list;
+    var comment_str = this.data.comment_str.replace(/\s+/g, '');
+    var staff_user_info = this.data.staff_user_info;
+    var openid = this.data.openid;
+    var score = 0;
+    var flag_score = 0;
+    if(comment_str==''){
+      app.showToast('请填写评价内容');
+      return false;
+    }
+    for(let i in star_list){
+      if(star_list[i].is_select==true){
+        score  +=1;
+      }
+    }
+    utils.PostRequest(api_v_url + '/Comment/subComment', {
+      openid: openid,
+      score:score,
+      content:comment_str,
+      staff_id :staff_user_info.staff_id
+    
+    }, (data, headers, cookies, errMsg, statusCode) => {
+      that.setData({is_open_popcomment:0})
+    })
   }
 })
