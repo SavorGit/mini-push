@@ -62,13 +62,13 @@
 				<input class="display_hide" name="wifi_mac" value="{{hotel_info.wifi_mac}}"></input>
 				<input class="display_hide" name="wifi_name" value="{{hotel_info.wifi_name}}"></input>
 				<input class="display_hide" name="wifi_password" value="{{hotel_info.wifi_password}}"></input>
-				<button  class="theme-font2" form-type="submit">
+				<button class="theme-font2" form-type="submit">
 					<view class="icon flex-column-center-center pic">
 						<image src='/images/icon2/FFFFFF_picture.png'></image>
 					</view>
 					<label>照片上电视</label>
 				</button>
-				
+
 			</form>
 			<form bindsubmit="chooseVedio" report-submit="true">
 				<input class="display_hide" name="boxmac" value="{{box_mac}}"></input>
@@ -77,44 +77,44 @@
 				<input class="display_hide" name="wifi_mac" value="{{hotel_info.wifi_mac}}"></input>
 				<input class="display_hide" name="wifi_name" value="{{hotel_info.wifi_name}}"></input>
 				<input class="display_hide" name="wifi_password" value="{{hotel_info.wifi_password}}"></input>
-				<button  class="theme-font2" form-type="submit">
+				<button class="theme-font2" form-type="submit">
 					<view class="icon flex-column-center-center video">
 						<image src='/images/icon2/FFFFFF_video.png'></image>
 					</view>
 					<label>视频上电视</label>
 				</button>
-				
+
 			</form>
 			<form bindsubmit="forfiles" report-submit="true">
 				<input class="display_hide" name="boxmac" value="{{box_mac}}"></input>
 				<input class="display_hide" name="openid" value="{{openid}}"></input>
-				<button  class="theme-font2" form-type="submit">
+				<button class="theme-font2" form-type="submit">
 					<view class="icon flex-column-center-center file">
 						<image src='/images/icon2/FFFFFF_files.png'></image>
 					</view>
 					<label>文件上电视</label>
 				</button>
-				
+
 			</form>
 		</view>
 		<view class="row flex-row-center-space_around full_width">
 			<view>
-				<button  class="theme-font2" bindtap='showHappy' data-boxmac="{{box_mac}}" data-openid="{{openid}}" >
+				<button class="theme-font2" bindtap='showHappy' data-boxmac="{{box_mac}}" data-openid="{{openid}}">
 					<view class="icon flex-column-center-center birthday">
 						<image src='/images/icon2/FFFFFF_birthday.png'></image>
 					</view>
 					<label>生日歌点播</label>
 				</button>
-			
+
 			</view>
 			<view>
-				<button class="theme-font2" bindtap='hdgames'  data-linkcontent='/games/pages/gamelist' data-boxmac="{{box_mac}}" data-openid="{{openid}}">
+				<button class="theme-font2" bindtap='hdgames' data-linkcontent='/games/pages/gamelist' data-boxmac="{{box_mac}}" data-openid="{{openid}}">
 					<view class="icon flex-column-center-center game">
 						<image src='/images/icon2/FFFFFF_game.png'></image>
 					</view>
 					<label>互动小游戏</label>
 				</button>
-				
+
 			</view>
 			<view>
 				<button class="theme-font2" bindtap='forscreenHistory' data-boxmac="{{box_mac}}" data-openid="{{openid}}">
@@ -157,7 +157,7 @@
 				</view>
 			</view>
 		</view>
-		
+
 	</view>
 </scroll-view>
 <view class="body-view">
@@ -193,7 +193,7 @@
 			<button bindtap="wxFriendfiles" data-boxmac="{{box_mac}}" data-openid="{{openid}}" class="button_none" style="margin: 0;padding: 0; border: 0;border-radius: 0;">微信好友文件</button>
 		</view>
 		<view style="width: 100%; border-top: 1rpx solid rgba(7,17,27,0.1); border-bottom: 10rpx solid rgba(7,17,27,0.05);">
-			<button bindtap="phonefiles" data-boxmac="{{box_mac}}" data-openid="{{openid}}"  class="button_none" style="margin: 0;padding: 0; border: 0;border-radius: 0;">手机中的文件</button>
+			<button bindtap="phonefiles" data-boxmac="{{box_mac}}" data-openid="{{openid}}" class="button_none" style="margin: 0;padding: 0; border: 0;border-radius: 0;">手机中的文件</button>
 		</view>
 	</view>
 	<view class='cancel-btn' style='flex: 1; margin-top: 10rpx; width: 100%; height: 60rpx; line-height: 60rpx; text-align: center; font-size: 30rpx; color: rgba(7,17,27,0.6);' bindtap='modalCancel'>取消</view>
@@ -229,7 +229,7 @@
 			<navigator bindtap="tpBuyGoods" data-goods_id="{{goods_id}}" data-goods_nums="{{goods_nums}}" data-goods_box_mac="{{goods_box_mac}}" data-buy_type="2" wx:if='{{showButton4JD}}' style="width: 100%;height: 80rpx;line-height: 80rpx; color: #448ACA; text-align: center;border-left: 2rpx solid #ededed;" target="miniProgram" app-id="{{goods_info.appid}}" path="{{jd_url}}">{{goods_info.buybutton}}</navigator>
 		</view>
 	</view>
-	
+
 	<view wx:if='{{showFavoritesPanel}}' class="flex-row-center-space_between" style="width: 600rpx;height: 70rpx;margin-top: 10rpx;font-size: 24rpx;">
 		<input type="number" bindinput="mobileOnInput" placeholder="请输入手机号" style="width: 385rpx;height: 70rpx; line-height: 70rpx; border-radius: 5rpx; color: #333333; background-color: #FFFFFF;padding-left: 10rpx;" placeholder-style="padding-left: 10rpx; color: #999999;"></input>
 		<button bindtap="sendGoodsLink" data-goods_id="{{goods_id}}" data-mobile="{{mobile}}" style="width: 200rpx;height: 70rpx;line-height: 70rpx;color: #FFFFFF; background-color: #eb6877;font-size: 24rpx;">发送商品链接</button>
@@ -238,3 +238,55 @@
 
 <!-- 关注公众号 -->
 <template is="followOfficialAccount" wx:if="{{is_view_official_account==true }}" />
+
+<!-- 服务员评价窗口 -->
+<view class='waiter-evaluate-window-mask'>
+	<view class="waiter-evaluate-window flex-column-center-start theme-window" style="margin-top:{{46 + statusBarHeight}}px;">
+		<view class="title-bar flex-row-center-flex_end">
+			<view class="fa fa-times-circle-o" aria-hidden="true"></view>
+		</view>
+		<view class="document">
+			<view class="head flex-row-center-center">
+				<view class="title theme-font5">请您对服务人员进行评价</view>
+			</view>
+			<scroll-view class="body" scroll-y="true" scroll-with-animation="true">
+				<form>
+					<view class="waiter flex-row-center-space_between">
+						<image mode="aspectFill" class="head-pic" src="https://oss.littlehotspot.com/WeChat/resource/default.jpg"></image>
+						<view class="sketch flex-column-flex_start-space_around">
+							<view class="name theme-font1">张三</view>
+							<view class="job theme-font7">销售经理</view>
+						</view>
+					</view>
+					<view class="score flex-row-center-flex_start">
+						<view class="label theme-font1">服务评分</view>
+						<view class="star-group flex-row-center-space_around">
+							<view class="fa fa-star theme-font5" aria-hidden="true"></view>
+							<view class="fa fa-star theme-font5" aria-hidden="true"></view>
+							<view class="fa fa-star theme-font5" aria-hidden="true"></view>
+							<view class="fa fa-star-o theme-font1" aria-hidden="true"></view>
+							<view class="fa fa-star-o theme-font1" aria-hidden="true"></view>
+						</view>
+					</view>
+					<view class="tag-group">
+						<view class="tag theme-font1">服务态度好</view>
+						<view class="tag theme-button-red">包间环境优雅</view>
+						<view class="tag theme-font1">菜品</view>
+						<view class="tag theme-font1">菜品优质</view>
+						<view class="tag theme-font1">优质</view>
+						<view class="tag theme-font1">优</view>
+						<view class="tag theme-font1">菜品优质</view>
+						<view class="tag theme-font1">菜品优质</view>
+						<view class="tag theme-font1">菜品优质</view>
+						<view class="tag theme-font1">菜品优质</view>
+						<view class="tag theme-font1">菜品优质</view>
+						<view class="tag theme-font1">菜品优质</view>
+						<view class="tag theme-font1">菜品优质</view>
+					</view>
+					<textarea class="theme-textarea" placeholder="您的建议是我们前进的动力...（300字以内）"></textarea>
+					<button class="theme-button-red" type="submit">提交</button>
+				</form>
+			</scroll-view>
+		</view>
+	</view>
+</view>
