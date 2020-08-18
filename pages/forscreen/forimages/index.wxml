@@ -196,5 +196,6 @@
 </view>
 
 <view class="body-view">
+<loading hidden="{{hiddens}}" bindchange="loadingChange">{{load_fresh_char}}</loading>
 	<loading hidden="{{wifi_hidden}}" bindchange="loadingChange">正在连接包间wifi,请稍后...</loading>
 </view>
