@@ -956,6 +956,11 @@ App({
                     that.setData({
                       wifiErr: { 'is_open': 1, 'msg': '亲，使用此小程序前需要链接包间wifi,连上wifi投屏更快哦！', 'confirm': '重试', 'calcle': '', 'type': 3 }
                     })
+                  }else if(res.errCode == 12010){
+                    var err_msg = '请确认并打开wifi';
+                    that.setData({
+                      wifiErr: { 'is_open': 1, 'msg': '请确认并打开wifi', 'confirm': '重试', 'calcle': '', 'type': 3 }
+                    })
                   }else {
                     if (hotel_info.wifi_password == '') {
                       var us_wifi_password = '空';
@@ -1119,6 +1124,11 @@ App({
           } else if(res.errCode == 12007){//用户拒绝授权链接 Wi-Fi
             that.setData({
               wifiErr: { 'is_open': 1, 'msg': '亲，使用此小程序前需要链接包间wifi,连上wifi投屏更快哦！', 'confirm': '重试', 'calcle': '', 'type': 3 }
+            })
+          }else if(res.errCode == 12010){
+            var err_msg = '请确认并打开wifi';
+            that.setData({
+              wifiErr: { 'is_open': 1, 'msg': '请确认并打开wifi', 'confirm': '重试', 'calcle': '', 'type': 3 }
             })
           }else {
             if (use_wifi_password == '') {
