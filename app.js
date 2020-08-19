@@ -869,7 +869,7 @@ App({
     var is_minimal = wx.getStorageSync(aps.globalData.cache_key + 'is_minimal');//是否扫码标准版
     var room_ssid = hotel_info.wifi_name;
     if (typeof (is_minimal) == 'undefined' || is_minimal == '') {//非极简版
-      if (hotel_info.forscreen_type == 2) {//后台推荐用极简版
+      if (hotel_info.forscreen_type == 2 || aps.globalData.change_link_type==2) {//后台推荐用极简版
         aps.jugeLinkType(hotel_info, that,launchType);
 
         mta.Event.stat('linkMode', { 'linktype': '2' })
