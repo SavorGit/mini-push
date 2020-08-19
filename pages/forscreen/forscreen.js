@@ -31,6 +31,7 @@ Page({
     })
     var sysconfig = wx.getStorageSync("savor_now_time");
     nowtime = sysconfig.sys_time;
+    wx.removeStorageSync(app.globalData.cache_key+'is_closeComment');
     
     if (typeof (options.scene) != 'undefined') {//小程序码
       var scene = decodeURIComponent(options.scene);

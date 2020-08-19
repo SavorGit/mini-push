@@ -704,13 +704,17 @@ Page({
         pop_eval:1
       }, (data, headers, cookies, errMsg, statusCode) => {
         if (data.result.is_have == 1) {//如果已连接盒子
-          that.setData({
-            is_open_popcomment:data.result.is_open_popcomment,
-            staff_user_info:data.result.staff_user_info,
-            tags:data.result.tags,
-            comment_str:'',
-
-          })
+          var is_closeComment = wx.getStorageSync(app.globalData.cache_key+'is_closeComment');
+          if(is_closeComment!=1){
+            that.setData({
+              is_open_popcomment:data.result.is_open_popcomment,
+              staff_user_info:data.result.staff_user_info,
+              tags:data.result.tags,
+              comment_str:'',
+  
+            })
+          }
+          
           var serial_number = app.globalData.serial_number;
           var head_serial_number = serial_number.substring(0,2);
           if(head_serial_number==app.globalData.not_link_box_pre){
@@ -769,12 +773,16 @@ Page({
           }, (data, headers, cookies, errMsg, statusCode) => {
             var is_have = data.result.is_have;
             if (is_have == 1) {
-              that.setData({
-                is_open_popcomment:data.result.is_open_popcomment,
-                staff_user_info:data.result.staff_user_info,
-                tags:data.result.tags,
-                comment_str:'',
-              })
+              var is_closeComment = wx.getStorageSync(app.globalData.cache_key+'is_closeComment');
+              if(is_closeComment!=1){
+                that.setData({
+                  is_open_popcomment:data.result.is_open_popcomment,
+                  staff_user_info:data.result.staff_user_info,
+                  tags:data.result.tags,
+                  comment_str:'',
+                })
+              }
+              
               var serial_number = app.globalData.serial_number;
               var head_serial_number = serial_number.substring(0,2);
               if(head_serial_number==app.globalData.not_link_box_pre){
@@ -903,7 +911,15 @@ Page({
     mta.Event.stat('clickOfficialAccount',{'openid':openid})
   },
   closeComment:function(e){
-    this.setData({is_open_popcomment:0})
+    var that = this;
+    wx.setStorage({
+      data: 1,
+      key: app.globalData.cache_key+'is_closeComment',
+      success:function(e){
+        that.setData({is_open_popcomment:0})
+      }
+    })
+    
   },
   subStar:function(e){
     var star_list = this.data.star_list;
@@ -982,6 +998,7 @@ Page({
     
     }, (data, headers, cookies, errMsg, statusCode) => {
       that.setData({is_open_popcomment:0})
+      app.showToast('感谢您的评价！')
     })
   }
 })
