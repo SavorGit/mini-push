@@ -1003,9 +1003,6 @@ App({
                   })
                   mta.Event.stat('linkWifiErro', { 'wifierrocode': res.errCode, 'wifierromsg': res.errMsg })
                 }
-                wx.stopWifi({
-
-                })
                 mta.Event.stat('linkWifiErro', { 'wifierrocode': res.errCode, 'wifierromsg': res.errMsg })
               },
             })

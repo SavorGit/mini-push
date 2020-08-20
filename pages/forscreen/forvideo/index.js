@@ -347,6 +347,7 @@ Page({
             utils.tryCatch(mta.Event.stat('wifiVideoForscreen', { 'status': 0 }));
           }else if(res.code==-1){
             that.setData({
+              is_btn_disabel: false,
               hiddens: true,
               is_forscreen: 1,
             })
