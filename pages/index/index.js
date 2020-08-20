@@ -44,6 +44,7 @@ Page({
     wifi_hidden: true,
     is_view_eval_waiter:0,  //是否显示评价服务员
     is_view_official_account:app.globalData.is_view_official_account, //是否显示关注公众号
+    is_test:0,
 
   },
 
@@ -709,6 +710,7 @@ Page({
           app.linkHotelWifi(data.result, that);
           app.globalData.hotel_info = data.result;
           that.setData({
+            is_test:data.result.is_test,
             is_link: 1,
             link_type:data.result.forscreen_type,
             hotel_room: data.result.hotel_name + data.result.room_name,
@@ -764,6 +766,7 @@ Page({
               app.linkHotelWifi(data.result, that);
               app.globalData.hotel_info = data.result;
               that.setData({
+                is_test:data.result.is_test,
                 is_link: 1,
                 hotel_room: data.result.hotel_name + data.result.room_name,
                 hotel_name: data.result.hotel_name,
@@ -792,6 +795,18 @@ Page({
     var linkcontent = e.currentTarget.dataset.linkcontent;
     wx.switchTab({
       url: linkcontent,
+    })
+  },
+  testForscreen:function(e){
+    var box_mac = e.currentTarget.dataset.boxmac;
+    var openid = e.currentTarget.dataset.openid;
+    var type   = e.currentTarget.dataset.type;
+    utils.PostRequest(api_v_url + '/forscreen/collectforscreen', {
+      box_mac: box_mac,
+      openid: openid,
+      type:type
+    }, (data, headers, cookies, errMsg, statusCode) =>{
+      app.showToast('投屏成功')
     })
   },
   /**
