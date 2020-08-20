@@ -246,19 +246,6 @@
 	</view>
 </template>
 
-<!-- 没有网络的页面 -->
-<template name="pageForNoNet">
-	<view class="container flex-column-center-center theme-container" style='height: calc(100vh - 46px - {{statusBarHeight}}px);'>
-		<view class="no-net flex-column-center-flex_start">
-			<image src="/images/imgs/default-bg.png"></image>
-			<text class="theme-font1">网络异常，请检查网络</text>
-			<view class="flex-row-center-center">
-				<view class="theme-button-dark" bindtap="onReload">重试</view>
-			</view>
-		</view>
-	</view>
-</template>
-
 <!-- 关注公众号 -->
 <template name="followOfficialAccount">
 	<view class="flex-row-center-space_around theme-button-red" style='position:absolute;left:25rpx;right:25rpx;bottom:10rpx;width:690rpx;height:70rpx;padding:0 5rpx;border-radius:10rpx;background-color:rgb(254,240,225);color:rgba(252,143,45,1);z-index:999;'>

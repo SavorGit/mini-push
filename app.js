@@ -1158,7 +1158,10 @@ App({
           })
         }
       }, complete: function (res) {
-        that.setData({wifi_hidden:true})
+        setTimeout(() => {
+          that.setData({wifi_hidden:true})
+        }, 500);
+        
         
         //wx.hideLoading()
         

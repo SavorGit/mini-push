@@ -2,63 +2,59 @@
 <import src="/pages/template/commons" />
 <template is="navigationBarForTwoLevel" data='{{statusBarHeight: statusBarHeight,titleText:"热点投屏"}}' />
 
-<block wx:if="{{link_type != 2}}">
-  <!-- 发现视频落地页 -->
-  <view class="container flex-column-center-flex_start theme-container" style='height: calc(100vh - 46px - {{statusBarHeight}}px);'>
-    <view class='full_width page_top'></view>
-    <view class='full_width page_main'>
-      <view class='article'>
-        <view class='con_top'>
-          <view class='user_info'>
-            <image mode='aspectFill' src='{{picinfo.avatarUrl}}'></image>
-            <label class='theme-font'>{{picinfo.nickName}}</label>
-          </view>
+
+<!-- 发现视频落地页 -->
+<view class="container flex-column-center-flex_start theme-container" style='height: calc(100vh - 46px - {{statusBarHeight}}px);'>
+  <view class='full_width page_top'></view>
+  <view class='full_width page_main'>
+    <view class='article'>
+      <view class='con_top'>
+        <view class='user_info'>
+          <image mode='aspectFill' src='{{picinfo.avatarUrl}}'></image>
+          <label class='theme-font'>{{picinfo.nickName}}</label>
         </view>
-        <view class='con_main'>
-          <view wx:if="{{picinfo.public_text!=''}}" class='speak_with_interest'>
-            <label class="one-line-overflow">{{picinfo.public_text}}</label>
-          </view>
-          <view class='weui-grids'>
-            <view class='weui-grid' wx:for="{{picinfo.pubdetail}}" wx:key="key" wx:for-item="bean" wx:for-index="index">
-              <image mode='aspectFill' src='{{bean.res_url}}' bindtap="previewImage" data-src="{{picinfo.pubdetail}}" data-pkey="{{index}}"></image>
-            </view>
-          </view>
+      </view>
+      <view class='con_main'>
+        <view wx:if="{{picinfo.public_text!=''}}" class='speak_with_interest'>
+          <label class="one-line-overflow">{{picinfo.public_text}}</label>
         </view>
-        <view class='con_bottom'>
-          <view class='font_25635f_24'>
-            <label>{{picinfo.create_time}}</label>
-            <label wx:if="{{picinfo.hotel_name!=''}}">.</label>
-            <label wx:if="{{picinfo.hotel_name!=''}}">{{picinfo.hotel_name}}</label>
-          </view>
-          <view class='operation flex-row-center-flex_start font_666666_24'>
-            <view>
-              <label class="fa fa-play fa-lg" style="margin-right: 5rpx;"></label>
-              <label>{{play_num}}</label>
-            </view>
-            <button wx:if="{{is_collect=='1'}}" class="flex-row-center-flex_start font_666666_24" bindtap='cancCollect' data-res_id="{{picinfo.forscreen_id}}" data-openid="{{openid}}" data-type="2">
-              <label class="fa fa-heart fa-lg" style="color: #E11E4C;margin-right: 5rpx;"></label>
-              <label>{{collect_num}}</label>
-            </button>
-            <button wx:else bindtap='onCollect' class="flex-row-center-flex_start font_666666_24" data-res_id="{{picinfo.forscreen_id}}" data-openid="{{openid}}" data-type="2">
-              <label class="fa fa-heart-o fa-lg" style="margin-right: 5rpx;"></label>
-              <label>{{collect_num}}</label>
-            </button>
-            <button class="flex-row-center-flex_start font_666666_24" open-type='share' data-res_id="{{picinfo.forscreen_id}}" data-res_key="{{index}}" data-pubdetail="{{picinfo.pubdetail}}" data-openid="{{openid}}" data-res_type="2">
-              <label class="fa fa-share-square-o fa-lg" style="margin-right: 5rpx;"></label>
-              <label>{{share_num}}</label>
-            </button>
+        <view class='weui-grids'>
+          <view class='weui-grid' wx:for="{{picinfo.pubdetail}}" wx:key="key" wx:for-item="bean" wx:for-index="index">
+            <image mode='aspectFill' src='{{bean.res_url}}' bindtap="previewImage" data-src="{{picinfo.pubdetail}}" data-pkey="{{index}}"></image>
           </view>
         </view>
       </view>
-      <view class='btn-group full_width'>
-        <button wx:if="{{is_replay_disabel == false}}" class='theme-button-dark' bindtap='boxShow' data-forscreen_id='{{picinfo.forscreen_id}}' data-pubdetail='{{picinfo.pubdetail}}' data-forscreen_char='{{picinfo.forscreen_char}}' data-res_type="{{picinfo.res_type}}"
-          data-res_nums="{{picinfo.res_nums}}" data-boxmac="{{box_mac}}" data-openid="{{openid}}">电视播放</button>
-        <!-- <button wx:else disabled="true">{{djs}}S</button> -->
+      <view class='con_bottom'>
+        <view class='font_25635f_24'>
+          <label>{{picinfo.create_time}}</label>
+          <label wx:if="{{picinfo.hotel_name!=''}}">.</label>
+          <label wx:if="{{picinfo.hotel_name!=''}}">{{picinfo.hotel_name}}</label>
+        </view>
+        <view class='operation flex-row-center-flex_start font_666666_24'>
+          <view>
+            <label class="fa fa-play fa-lg" style="margin-right: 5rpx;"></label>
+            <label>{{play_num}}</label>
+          </view>
+          <button wx:if="{{is_collect=='1'}}" class="flex-row-center-flex_start font_666666_24" bindtap='cancCollect' data-res_id="{{picinfo.forscreen_id}}" data-openid="{{openid}}" data-type="2">
+            <label class="fa fa-heart fa-lg" style="color: #E11E4C;margin-right: 5rpx;"></label>
+            <label>{{collect_num}}</label>
+          </button>
+          <button wx:else bindtap='onCollect' class="flex-row-center-flex_start font_666666_24" data-res_id="{{picinfo.forscreen_id}}" data-openid="{{openid}}" data-type="2">
+            <label class="fa fa-heart-o fa-lg" style="margin-right: 5rpx;"></label>
+            <label>{{collect_num}}</label>
+          </button>
+          <button class="flex-row-center-flex_start font_666666_24" open-type='share' data-res_id="{{picinfo.forscreen_id}}" data-res_key="{{index}}" data-pubdetail="{{picinfo.pubdetail}}" data-openid="{{openid}}" data-res_type="2">
+            <label class="fa fa-share-square-o fa-lg" style="margin-right: 5rpx;"></label>
+            <label>{{share_num}}</label>
+          </button>
+        </view>
       </view>
     </view>
-    <view class='full_width page_bottom'></view>
+    <view class='btn-group full_width'>
+      <button wx:if="{{is_replay_disabel == false}}" class='theme-button-dark' bindtap='boxShow' data-forscreen_id='{{picinfo.forscreen_id}}' data-pubdetail='{{picinfo.pubdetail}}' data-forscreen_char='{{picinfo.forscreen_char}}' data-res_type="{{picinfo.res_type}}"
+        data-res_nums="{{picinfo.res_nums}}" data-boxmac="{{box_mac}}" data-openid="{{openid}}">电视播放</button>
+      <!-- <button wx:else disabled="true">{{djs}}S</button> -->
+    </view>
   </view>
-</block>
-<block wx:else>
-  <template is="pageForNoNet" data='{{statusBarHeight: statusBarHeight,titleText:"热点投屏"}}' />
-</block>
+  <view class='full_width page_bottom'></view>
+</view>
