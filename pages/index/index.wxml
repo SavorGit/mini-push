@@ -291,6 +291,7 @@
 						<view class="tag theme-font1">菜品优质</view> -->
 					</view>
 					<textarea class="theme-textarea"  bindinput="editCommnet" placeholder="您的建议是我们前进的动力...（300字以内）"  value="{{comment_str}}" maxlength='300'></textarea>
+					<input type="hidden" name="box_mac" value="{{box_mac}}"></input>
 					<button class="theme-button-red" form-type="submit" type="submit">提交</button>
 				</form>
 			</scroll-view>

@@ -979,6 +979,8 @@ Page({
     var comment_str = this.data.comment_str.replace(/\s+/g, '');
     var staff_user_info = this.data.staff_user_info;
     var openid = this.data.openid;
+    var box_mac = e.detail.value.box_mac;
+
     var score = 0;
     var flag_score = 0;
     if(comment_str==''){
@@ -994,8 +996,8 @@ Page({
       openid: openid,
       score:score,
       content:comment_str,
-      staff_id :staff_user_info.staff_id
-    
+      staff_id :staff_user_info.staff_id,
+      box_mac:box_mac
     }, (data, headers, cookies, errMsg, statusCode) => {
       that.setData({is_open_popcomment:0})
       app.showToast('感谢您的评价！')
