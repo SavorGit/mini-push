@@ -30,6 +30,7 @@ Page({
       title: '扫码中，请稍后',
     })
     var sysconfig = wx.getStorageSync("savor_now_time");
+    app.globalData.change_link_type = 0;
     nowtime = sysconfig.sys_time;
     wx.removeStorageSync(app.globalData.cache_key+'is_closeComment');
     

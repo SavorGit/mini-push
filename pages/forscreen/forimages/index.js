@@ -370,7 +370,7 @@ Page({
                   hiddens:true,
                   up_imgs: up_imgs,
                   forscreen_char: forscreen_char,
-                  hiddens: true,
+                  
                 })
                 utils.tryCatch(mta.Event.stat('wifiPicForscreen', { 'picnums': up_imgs.length }));
   
@@ -382,12 +382,11 @@ Page({
             errMsg
           }) {
             if (i == img_lenth) {
-              wx.navigateBack({
-                delta: 1,
-                success:function(){
-                  app.showToast('投屏失败,请确认是否连接本包间wifi！',3000,'none',true);
-                }
+              
+              that.setData({
+                hiddens: true,
               })
+              app.showToast('投屏失败,请确认是否连接本包间wifi！',3000,'none',true);
               
             }
           },
@@ -746,13 +745,10 @@ Page({
         fail: function({
           errMsg
         }) {
-          
-          wx.navigateBack({
+          /*wx.navigateBack({
             delta: 1,
-          })
+          })*/
           app.showToast('投屏失败,请确认是否连接本包间wifi！',3000,'none',true);
-          
-  
         },
       });
       utils.tryCatch(mta.Event.stat("wifiswitchpic", {}));

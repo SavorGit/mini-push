@@ -356,8 +356,9 @@ Page({
         fail: function({
           errMsg
         }) {
-          wx.navigateBack({
-            delta: 1,
+          that.setData({
+            is_btn_disabel: false,
+            hiddens: true,
           })
           app.showToast('投屏失败,请确认是否连接本包间wifi！',3000,'none',true);
           
