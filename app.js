@@ -1056,35 +1056,45 @@ App({
       success: function (reswifi) {
         
         wx.onWifiConnected((result) => {
-          console.log(result)
-          if (aps.wifiOkCallback) {
+          console.log('11'+result)
+          if(result.wifi.SSID==wifi_name){
+            if (aps.wifiOkCallback) {
 
-            aps.wifiOkCallback(1);
+              aps.wifiOkCallback(1);
+            }
+            
+            that.setData({
+              wifiErr: { 'is_open': 0, 'msg': '', 'confirm': '确定', 'calcle': '取消', 'type': 0 },
+              link_type: 2
+            })
+  
+            aps.globalData.link_type = 2;
+    
+              
+            if(launchType!=''){
+              that.setData({
+                launchType:launchType
+              })
+              aps.globalData.change_link_type = 2;
+            }
+            
+            wx.showToast({
+              title: 'wifi链接成功',
+              icon: 'success',
+              duration: 2000,
+              mask:true,
+            });
           }
           
-          that.setData({
-            wifiErr: { 'is_open': 0, 'msg': '', 'confirm': '确定', 'calcle': '取消', 'type': 0 },
-            link_type: 2
-          })
-
-          aps.globalData.link_type = 2;
-  
-            
-          if(launchType!=''){
-            that.setData({
-              launchType:launchType
-            })
-            aps.globalData.change_link_type = 2;
-          }
-          wx.showToast({
-            title: 'wifi链接成功',
-            icon: 'success',
-            duration: 2000
-          });
+        },()=>{
           that.setData({
             wifi_hidden: true,
           })
-          
+          wx.showToast({
+            title: 'wifi链接失败',
+            icon: 'success',
+            duration: 2000
+          });
         })
         
       }, fail: function (res) {
@@ -1148,6 +1158,8 @@ App({
           })
         }
       }, complete: function (res) {
+        that.setData({wifi_hidden:true})
+        
         //wx.hideLoading()
         
       }
