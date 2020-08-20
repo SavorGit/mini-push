@@ -249,8 +249,8 @@
 			<view class="head flex-row-center-center">
 				<view class="title theme-font5">请您对服务人员进行评价</view>
 			</view>
-			<scroll-view class="body" scroll-y="true" scroll-with-animation="true">
-				<form bindsubmit="submitComment">
+			<form bindsubmit="submitComment">
+				<scroll-view class="body" scroll-y="true" scroll-with-animation="true">
 					<view class="waiter flex-row-center-space_between">
 						<image mode="aspectFill" class="head-pic" src="{{staff_user_info.avatarUrl}}"></image>
 						<view class="sketch flex-column-flex_start-space_around">
@@ -275,9 +275,10 @@
 					</view>
 					<textarea class="theme-textarea" bindinput="editCommnet" placeholder="您的建议是我们前进的动力...（300字以内）" value="{{comment_str}}" maxlength='300'></textarea>
 					<input class="display_hide" name="box_mac" value="{{box_mac}}"></input>
-					<button class="theme-button-red" form-type="submit" type="submit">提交</button>
-				</form>
-			</scroll-view>
+					<!-- <button class="theme-button-red" form-type="submit" type="submit">提交</button> -->
+				</scroll-view>
+				<button class="theme-button-red" form-type="submit" type="submit">提交</button>
+			</form>
 		</view>
 	</view>
 </view>
