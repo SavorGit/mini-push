@@ -262,14 +262,9 @@
 						<view class="label theme-font1">服务评分</view>
 						<view class="star-group flex-row-center-space_around">
 							<block wx:for="{{star_list}}" wx:key="item" wx:for-index="index">
-							<view wx:if="{{item.is_select==true}}" class="fa fa-star theme-font5" aria-hidden="true" bindtap="subStar" data-keys="{{index}}"></view>
-							<view wx:else class="fa fa-star-o theme-font1" aria-hidden="true" bindtap="addStar" data-keys="{{index}}"></view>
+								<view wx:if="{{item.is_select==true}}" class="fa fa-star theme-font5" aria-hidden="true" bindtap="subStar" data-keys="{{index}}"></view>
+								<view wx:else class="fa fa-star-o theme-font1" aria-hidden="true" bindtap="addStar" data-keys="{{index}}"></view>
 							</block>
-
-							<!--<view class="fa fa-star theme-font5" aria-hidden="true"></view>
-							<view class="fa fa-star theme-font5" aria-hidden="true"></view>
-							 <view class="fa fa-star-o theme-font1" aria-hidden="true"></view>
-							<view class="fa fa-star-o theme-font1" aria-hidden="true"></view> -->
 						</view>
 					</view>
 					<view class="tag-group">
@@ -277,21 +272,9 @@
 							<view wx:if="{{item.selected==true}}" class="tag theme-button-red">{{item.value}}</view>
 							<view wx:else class="tag theme-font1" bindtap="clickTag" data-keys="{{index}}" data-value="{{item.value}}">{{item.value}}</view>
 						</block>
-						<!-- <view class="tag theme-button-red">包间环境优雅</view>
-						<view class="tag theme-font1">菜品</view>
-						<view class="tag theme-font1">菜品优质</view>
-						<view class="tag theme-font1">优质</view>
-						<view class="tag theme-font1">优</view>
-						<view class="tag theme-font1">菜品优质</view>
-						<view class="tag theme-font1">菜品优质</view>
-						<view class="tag theme-font1">菜品优质</view>
-						<view class="tag theme-font1">菜品优质</view>
-						<view class="tag theme-font1">菜品优质</view>
-						<view class="tag theme-font1">菜品优质</view>
-						<view class="tag theme-font1">菜品优质</view> -->
 					</view>
-					<textarea class="theme-textarea"  bindinput="editCommnet" placeholder="您的建议是我们前进的动力...（300字以内）"  value="{{comment_str}}" maxlength='300'></textarea>
-					<input type="hidden" name="box_mac" value="{{box_mac}}"></input>
+					<textarea class="theme-textarea" bindinput="editCommnet" placeholder="您的建议是我们前进的动力...（300字以内）" value="{{comment_str}}" maxlength='300'></textarea>
+					<input class="display_hide" name="box_mac" value="{{box_mac}}"></input>
 					<button class="theme-button-red" form-type="submit" type="submit">提交</button>
 				</form>
 			</scroll-view>
