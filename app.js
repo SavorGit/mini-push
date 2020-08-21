@@ -1067,23 +1067,23 @@ App({
               wifiErr: { 'is_open': 0, 'msg': '', 'confirm': '确定', 'calcle': '取消', 'type': 0 },
               link_type: 2
             })
-  
             aps.globalData.link_type = 2;
-    
-              
             if(launchType!=''){
               that.setData({
                 launchType:launchType
               })
               aps.globalData.change_link_type = 2;
             }
-            
             wx.showToast({
               title: 'wifi链接成功',
               icon: 'success',
               duration: 2000,
               mask:true,
             });
+
+            setTimeout(() => {
+              that.setData({wifi_hidden:true})
+            }, 500);
           }
           
         },()=>{
@@ -1158,9 +1158,7 @@ App({
           })
         }
       }, complete: function (res) {
-        setTimeout(() => {
-          that.setData({wifi_hidden:true})
-        }, 500);
+        
         
         
         //wx.hideLoading()
