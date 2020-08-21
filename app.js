@@ -869,7 +869,7 @@ App({
     var is_minimal = wx.getStorageSync(aps.globalData.cache_key + 'is_minimal');//是否扫码标准版
     var room_ssid = hotel_info.wifi_name;
     if (typeof (is_minimal) == 'undefined' || is_minimal == '') {//非极简版
-      if (hotel_info.forscreen_type == 2) {//后台推荐用极简版
+      if (hotel_info.forscreen_type == 2 ) {//后台推荐用极简版
         aps.jugeLinkType(hotel_info, that,launchType);
 
         mta.Event.stat('linkMode', { 'linktype': '2' })
@@ -956,6 +956,11 @@ App({
                     that.setData({
                       wifiErr: { 'is_open': 1, 'msg': '亲，使用此小程序前需要链接包间wifi,连上wifi投屏更快哦！', 'confirm': '重试', 'calcle': '', 'type': 3 }
                     })
+                  }else if(res.errCode== 12010){
+                    err_msg = '请确认并打开wifi';
+                    /*that.setData({
+                      wifiErr: { 'is_open': 1, 'msg': '请确认并打开wifi', 'confirm': '重试', 'calcle': '', 'type': 3 }
+                    })*/
                   }else {
                     if (hotel_info.wifi_password == '') {
                       var us_wifi_password = '空';
@@ -998,9 +1003,6 @@ App({
                   })
                   mta.Event.stat('linkWifiErro', { 'wifierrocode': res.errCode, 'wifierromsg': res.errMsg })
                 }
-                wx.stopWifi({
-
-                })
                 mta.Event.stat('linkWifiErro', { 'wifierrocode': res.errCode, 'wifierromsg': res.errMsg })
               },
             })
@@ -1052,52 +1054,49 @@ App({
       BSSID: wifi_mac,
       password: use_wifi_password,
       success: function (reswifi) {
-        if (aps.wifiOkCallback) {
+        
+        wx.onWifiConnected((result) => {
+          console.log('11'+result)
+          if(result.wifi.SSID==wifi_name){
+            if (aps.wifiOkCallback) {
 
-          aps.wifiOkCallback(1);
-        }
-        that.setData({
-          wifiErr: { 'is_open': 0, 'msg': '', 'confirm': '确定', 'calcle': '取消', 'type': 0 }
-        })
+              aps.wifiOkCallback(1);
+            }
+            
+            that.setData({
+              wifiErr: { 'is_open': 0, 'msg': '', 'confirm': '确定', 'calcle': '取消', 'type': 0 },
+              link_type: 2
+            })
+            aps.globalData.link_type = 2;
+            if(launchType!=''){
+              that.setData({
+                launchType:launchType
+              })
+              aps.globalData.change_link_type = 2;
+            }
+            wx.showToast({
+              title: 'wifi链接成功',
+              icon: 'success',
+              duration: 2000,
+              mask:true,
+            });
 
-        that.setData({
-          wifiErr: { 'is_open': 0, 'msg': '', 'confirm': '确定', 'calcle': '取消', 'type': 0 },
-          link_type: 2
-        }, () => {
+            setTimeout(() => {
+              that.setData({wifi_hidden:true})
+            }, 500);
+          }
+          
+        },()=>{
           that.setData({
             wifi_hidden: true,
           })
-          aps.globalData.link_type = 2;
-
           wx.showToast({
-            title: 'wifi链接成功',
+            title: 'wifi链接失败',
             icon: 'success',
             duration: 2000
           });
-          if(launchType!=''){
-            that.setData({
-              launchType:launchType
-            })
-            aps.globalData.change_link_type = 2;
-          }
-          //wx.hideLoading()
         })
-
-        that.setData({
-          wifi_hidden: true,
-        })
-        aps.globalData.link_type = 2;
-
-        wx.showToast({
-          title: 'wifi链接成功',
-          icon: 'success',
-          duration: 2000
-        });
-
-        //wx.hideLoading()
-
-
-
+        
       }, fail: function (res) {
         var err_msg = 'wifi链接失败';
         that.setData({
@@ -1120,6 +1119,11 @@ App({
             that.setData({
               wifiErr: { 'is_open': 1, 'msg': '亲，使用此小程序前需要链接包间wifi,连上wifi投屏更快哦！', 'confirm': '重试', 'calcle': '', 'type': 3 }
             })
+          }else if(res.errCode==12010){
+            err_msg = '请确认并打开wifi';
+            /*that.setData({
+              wifiErr: { 'is_open': 1, 'msg': '请确认并打开wifi', 'confirm': '重试', 'calcle': '', 'type': 3 }
+            })*/
           }else {
             if (use_wifi_password == '') {
               var wifi_password_str = '空';
@@ -1154,10 +1158,11 @@ App({
           })
         }
       }, complete: function (res) {
+        
+        
+        
         //wx.hideLoading()
-        that.setData({
-          wifi_hidden: true,
-        })
+        
       }
     })
     

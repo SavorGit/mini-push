@@ -347,6 +347,7 @@ Page({
             utils.tryCatch(mta.Event.stat('wifiVideoForscreen', { 'status': 0 }));
           }else if(res.code==-1){
             that.setData({
+              is_btn_disabel: false,
               hiddens: true,
               is_forscreen: 1,
             })
@@ -356,8 +357,9 @@ Page({
         fail: function({
           errMsg
         }) {
-          wx.navigateBack({
-            delta: 1,
+          that.setData({
+            is_btn_disabel: false,
+            hiddens: true,
           })
           app.showToast('投屏失败,请确认是否连接本包间wifi！',3000,'none',true);
           

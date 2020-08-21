@@ -86,6 +86,7 @@ button[disabled] {
   background-color: #1cbeb6;
 }
 
+.theme-window,
 .theme-panel,
 .theme-button-white,
 .theme-navigation {

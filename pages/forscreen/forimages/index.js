@@ -49,6 +49,7 @@ Page({
     res_head_desc:'图片',
     launchType:'classic',
     wifi_hidden: true,
+    hiddens: true, //
   },
   /**
    * 生命周期函数--监听页面加载
@@ -245,6 +246,8 @@ Page({
       
 
       that.setData({
+        load_fresh_char: '亲^_^投屏中,请稍后...',
+        hiddens: false,
         is_btn_disabel: true,
         is_share: is_share,
         is_assist:is_assist
@@ -283,6 +286,9 @@ Page({
                   
                   
                 } else if (res.cancel) {
+                  that.setData({
+                    hiddens: true,
+                  })
                   wx.navigateBack({
                     delta:1
                   })
@@ -325,6 +331,8 @@ Page({
       console.log(up_imgs);
       //return false;
       that.setData({
+        load_fresh_char: '亲^_^投屏中,请稍后...',
+        hiddens: false,
         is_btn_disabel: true,
         
       })
@@ -359,9 +367,10 @@ Page({
               }else {
                 that.setData({
                   showThird: true,
+                  hiddens:true,
                   up_imgs: up_imgs,
                   forscreen_char: forscreen_char,
-                  hiddens: true,
+                  
                 })
                 utils.tryCatch(mta.Event.stat('wifiPicForscreen', { 'picnums': up_imgs.length }));
   
@@ -373,12 +382,12 @@ Page({
             errMsg
           }) {
             if (i == img_lenth) {
-              wx.navigateBack({
-                delta: 1,
-                success:function(){
-                  app.showToast('投屏失败,请确认是否连接本包间wifi！',3000,'none',true);
-                }
+              
+              that.setData({
+                is_btn_disabel: false,
+                hiddens: true,
               })
+              app.showToast('投屏失败,请确认是否连接本包间wifi！',3000,'none',true);
               
             }
           },
@@ -452,6 +461,7 @@ Page({
         },
         success: function (res) {
           that.setData({
+            hiddens:true,
             showThird: true,
             showTpBt: false,
             forscreen_id: forscreen_id,
@@ -736,13 +746,10 @@ Page({
         fail: function({
           errMsg
         }) {
-          
-          wx.navigateBack({
+          /*wx.navigateBack({
             delta: 1,
-          })
+          })*/
           app.showToast('投屏失败,请确认是否连接本包间wifi！',3000,'none',true);
-          
-  
         },
       });
       utils.tryCatch(mta.Event.stat("wifiswitchpic", {}));

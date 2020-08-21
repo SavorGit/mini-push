@@ -2,111 +2,104 @@
 <import src="/pages/template/commons" />
 <template is="navigationBarForTwoLevel" data='{{statusBarHeight: statusBarHeight,titleText:"我的公开"}}' />
 
-<block wx:if="{{link_type != 2}}">
-  <view class="container flex-column-center-flex_start theme-container" style='height: calc(100vh - 46px - {{statusBarHeight}}px);'>
-    <scroll-view class='page_main' scroll-y="true" scroll-with-animation="true" bindscrolltolower="loadMore" data-openid='{{openid}}'>
-      <view>
 
-        <!--循环开始 -->
-        <view wx:for="{{publiclist}}" wx:key="key" wx:for-item="bean" wx:for-index="index">
+<view class="container flex-column-center-flex_start theme-container" style='height: calc(100vh - 46px - {{statusBarHeight}}px);'>
+  <scroll-view class='page_main' scroll-y="true" scroll-with-animation="true" bindscrolltolower="loadMore" data-openid='{{openid}}'>
+    <view>
 
-          <view class='content content_bottom_border'>
-            <view class='con_top flex-row-center-flex_start' bindtap="onClickItem">
-              <view class='user_info flex-row-center-flex_start font_333333_36'>
-                <image src='{{userinfo.avatarUrl}}'></image>
-                <label>{{userinfo.nickName}}</label>
-              </view>
-              <view class='operation flex-row-center-flex_end'>
-                <button bindtap='boxShow' data-res_type="{{bean.res_type}}" data-res_nums="{{bean.res_nums}}" data-pubdetail="{{bean.pubdetail}}" data-boxmac="{{box_mac}}" data-openid="{{openid}}" data-forscreen_id="{{bean.forscreen_id}}" class='theme-button'>电视播放</button>
-              </view>
+      <!--循环开始 -->
+      <view wx:for="{{publiclist}}" wx:key="key" wx:for-item="bean" wx:for-index="index">
+
+        <view class='content content_bottom_border'>
+          <view class='con_top flex-row-center-flex_start' bindtap="onClickItem">
+            <view class='user_info flex-row-center-flex_start font_333333_36'>
+              <image src='{{userinfo.avatarUrl}}'></image>
+              <label>{{userinfo.nickName}}</label>
             </view>
-            <view class='con_main' bindtap="onClickItem">
-              <view class="full_width weui-grids" wx:if="{{bean.res_type=='1'}}">
-
-                <view class="weui-grid" wx:for="{{bean.pubdetail}}" wx:key="pkey" wx:for-item="pubdetail" wx:for-index="pindex">
-                  <navigator url='/pages/find/picture?forscreen_id={{bean.forscreen_id}}&box_mac={{box_mac}}'>
-                    <image class="pic_show" mode='aspectFill' src="{{pubdetail.res_url}}"></image>
-                  </navigator>
-                </view>
-
-              </view>
-
-              <view class="video" wx:else>
-                <view wx:for="{{bean.pubdetail}}" wx:key="pkey" wx:for-item="pubdetail" wx:for-index="pindex">
-                  <navigator url="/pages/find/video?forscreen_id={{bean.forscreen_id}}&box_mac={{box_mac}}">
-                    <image mode='aspectFill' src="{{pubdetail.vide_img}}"></image>
-                  </navigator>
-                  <view class="cover">
-                    <navigator url="/pages/forscreen/video/launch_video?video_url={{pubdetail.res_url}}&video_name=">
-                      <label class="fa fa-play-circle icon theme-font4"></label>
-                    </navigator>
-                    <view>
-                      <label class='font_F6F3EE_20'>{{pubdetail.duration}}</label>
-                    </view>
-                  </view>
-                </view>
-              </view>
+            <view class='operation flex-row-center-flex_end'>
+              <button bindtap='boxShow' data-res_type="{{bean.res_type}}" data-res_nums="{{bean.res_nums}}" data-pubdetail="{{bean.pubdetail}}" data-boxmac="{{box_mac}}" data-openid="{{openid}}" data-forscreen_id="{{bean.forscreen_id}}" class='theme-button'>电视播放</button>
             </view>
-            <view class='con_bottom'>
-              <view class='hotel_info flex-row-center-flex_start font_25635f_24'>
-                <label>{{bean.create_time}}</label>
-                <label wx:if="{{bean.is_pub_hotelinfo==1}}">.</label>
-                <label wx:if="{{bean.is_pub_hotelinfo==1}}">{{bean.hotel_name}}</label>
+          </view>
+          <view class='con_main' bindtap="onClickItem">
+            <view class="full_width weui-grids" wx:if="{{bean.res_type=='1'}}">
+
+              <view class="weui-grid" wx:for="{{bean.pubdetail}}" wx:key="pkey" wx:for-item="pubdetail" wx:for-index="pindex">
+                <navigator url='/pages/find/picture?forscreen_id={{bean.forscreen_id}}&box_mac={{box_mac}}'>
+                  <image class="pic_show" mode='aspectFill' src="{{pubdetail.res_url}}"></image>
+                </navigator>
               </view>
-              <view class='operation flex-row-center-space_between font_666666_26'>
-                <view class='op-left flex-row-center-flex_start'>
+
+            </view>
+
+            <view class="video" wx:else>
+              <view wx:for="{{bean.pubdetail}}" wx:key="pkey" wx:for-item="pubdetail" wx:for-index="pindex">
+                <navigator url="/pages/find/video?forscreen_id={{bean.forscreen_id}}&box_mac={{box_mac}}">
+                  <image mode='aspectFill' src="{{pubdetail.vide_img}}"></image>
+                </navigator>
+                <view class="cover">
+                  <navigator url="/pages/forscreen/video/launch_video?video_url={{pubdetail.res_url}}&video_name=">
+                    <label class="fa fa-play-circle icon theme-font4"></label>
+                  </navigator>
                   <view>
-                    <label class="fa fa-play fa-lg" style="color: #666666;"></label>
-                    <label>{{bean.play_num}}</label>
+                    <label class='font_F6F3EE_20'>{{pubdetail.duration}}</label>
                   </view>
-                  <view wx:if="{{bean.is_collect=='1'}}">
-                    <button bindtap='cancCollect' data-res_id="{{bean.forscreen_id}}" data-openid="{{openid}}" data-res_key="{{index}}">
-                      <label class="fa fa-heart fa-lg" style="color: #E11E4C;"></label>
-                      <label>{{bean.collect_num}}</label>
-                    </button>
-                  </view>
-                  <view wx:else>
-                    <button bindtap='onCollect' data-res_id="{{bean.forscreen_id}}" data-openid="{{openid}}" data-res_key="{{index}}">
-                      <label class="fa fa-heart-o fa-lg" style="color: #666666;"></label>
-                      <label>{{bean.collect_num}}</label>
-                    </button>
-                  </view>
-                  <view>
-                    <button open-type='share' data-res_id="{{bean.forscreen_id}}" data-res_key="{{index}}" data-pubdetail="{{bean.pubdetail}}" data-openid="{{openid}}" data-res_type="{{bean.res_type}}">
-                      <label class="fa fa-share-square-o fa-lg" style="color: #666666;"></label>
-                      <label>{{bean.share_num}}</label>
-                    </button>
-                  </view>
-                </view>
-                <view class='op-right'>
-                  <label bindtap='popDel' data-forscreen_id="{{bean.forscreen_id}}" data-publiclist="{{publiclist}}" data-keys="{{index}}">删除</label>
                 </view>
               </view>
             </view>
           </view>
-          <view class="body-view">
-            <loading hidden="{{hiddens}}" bindchange="loadingChange">加载中...</loading>
+          <view class='con_bottom'>
+            <view class='hotel_info flex-row-center-flex_start font_25635f_24'>
+              <label>{{bean.create_time}}</label>
+              <label wx:if="{{bean.is_pub_hotelinfo==1}}">.</label>
+              <label wx:if="{{bean.is_pub_hotelinfo==1}}">{{bean.hotel_name}}</label>
+            </view>
+            <view class='operation flex-row-center-space_between font_666666_26'>
+              <view class='op-left flex-row-center-flex_start'>
+                <view>
+                  <label class="fa fa-play fa-lg" style="color: #666666;"></label>
+                  <label>{{bean.play_num}}</label>
+                </view>
+                <view wx:if="{{bean.is_collect=='1'}}">
+                  <button bindtap='cancCollect' data-res_id="{{bean.forscreen_id}}" data-openid="{{openid}}" data-res_key="{{index}}">
+                    <label class="fa fa-heart fa-lg" style="color: #E11E4C;"></label>
+                    <label>{{bean.collect_num}}</label>
+                  </button>
+                </view>
+                <view wx:else>
+                  <button bindtap='onCollect' data-res_id="{{bean.forscreen_id}}" data-openid="{{openid}}" data-res_key="{{index}}">
+                    <label class="fa fa-heart-o fa-lg" style="color: #666666;"></label>
+                    <label>{{bean.collect_num}}</label>
+                  </button>
+                </view>
+                <view>
+                  <button open-type='share' data-res_id="{{bean.forscreen_id}}" data-res_key="{{index}}" data-pubdetail="{{bean.pubdetail}}" data-openid="{{openid}}" data-res_type="{{bean.res_type}}">
+                    <label class="fa fa-share-square-o fa-lg" style="color: #666666;"></label>
+                    <label>{{bean.share_num}}</label>
+                  </button>
+                </view>
+              </view>
+              <view class='op-right'>
+                <label bindtap='popDel' data-forscreen_id="{{bean.forscreen_id}}" data-publiclist="{{publiclist}}" data-keys="{{index}}">删除</label>
+              </view>
+            </view>
           </view>
         </view>
-        <!--循环结束 -->
-
+        <view class="body-view">
+          <loading hidden="{{hiddens}}" bindchange="loadingChange">加载中...</loading>
+        </view>
       </view>
-      <!-- 选项卡结束 -->
+      <!--循环结束 -->
 
-    </scroll-view>
-  </view>
-</block>
-<block wx:else>
-  <template is="pageForNoNet" data='{{statusBarHeight: statusBarHeight,titleText:"热点投屏"}}' />
-</block>
+    </view>
+    <!-- 选项卡结束 -->
+
+  </scroll-view>
+</view>
+
 
 <!-- 遥控器 -->
 <template is="remoteControlWindow" data='{{popRemoteControlWindow: showControl, qrcode_img:qrcode_img, box_mac:box_mac, openid:openid, hotel_info:hotel_info}}' />
-<!--wifi链接错误提示
-<modal show="{{wifiErr.is_open==1 ? true : false}}" width="650rpx" height='380rpx' border-radius="10rpx" title-text='提示' title-color="#333333" title-background-color="unset" title-border-radius="0rpx" confirm-text='{{wifiErr.confirm}}' confirm-color="#FFFFFF"
-  confirm-background-color="#1cbeb6" confirm-border-radius="10rpx" cancel-text='{{wifiErr.cancel}}' cancel-color='#FFFFFF' cancel-background-color="#333333" cancel-border-radius="10rpx" bindcancel="modalCancel" data-hotel_info="{{hotel_info}}" bindconfirm='modalConfirm'>
-  <view class="theme-font1" style="padding:0 50rpx;font-size:28rpx;">{{wifiErr.msg}}</view>
-</modal>-->
+
 <!-- 固定悬浮按钮组 -->
 <view wx:if="{{box_mac !=''}}">
   <template is="fixedSuspensionButtonGroup" />
