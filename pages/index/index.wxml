@@ -265,7 +265,7 @@
 		</view>
 		<view class="document">
 			<view class="head flex-row-center-center">
-				<view class="title theme-font5">请您对服务人员进行评价</view>
+				<view class="title theme-font5">亲，您对服务满意吗？</view>
 			</view>
 			<form bindsubmit="submitComment">
 				<scroll-view class="body" scroll-y="true" scroll-with-animation="true">
@@ -273,7 +273,7 @@
 						<image mode="aspectFill" class="head-pic" src="{{staff_user_info.avatarUrl}}"></image>
 						<view class="sketch flex-column-flex_start-space_around">
 							<view class="name theme-font1">{{staff_user_info.nickName}}</view>
-							<view class="job theme-font7">服务人员</view>
+							<view class="job theme-font7">服务专员</view>
 						</view>
 					</view>
 					<view class="score flex-row-center-flex_start">
@@ -281,14 +281,14 @@
 						<view class="star-group flex-row-center-space_around">
 							<block wx:for="{{star_list}}" wx:key="item" wx:for-index="index">
 								<view wx:if="{{item.is_select==true}}" class="fa fa-star theme-font5" aria-hidden="true" bindtap="subStar" data-keys="{{index}}"></view>
-								<view wx:else class="fa fa-star-o theme-font1" aria-hidden="true" bindtap="addStar" data-keys="{{index}}"></view>
+								<view wx:else class="fa fa-star-o theme-font3" aria-hidden="true" bindtap="addStar" data-keys="{{index}}"></view>
 							</block>
 						</view>
 					</view>
 					<view class="tag-group">
 						<block wx:for="{{tags}}" wx:key="item" wx:for-index="index">
 							<view wx:if="{{item.selected==true}}" class="tag theme-button-red">{{item.value}}</view>
-							<view wx:else class="tag theme-font1" bindtap="clickTag" data-keys="{{index}}" data-value="{{item.value}}">{{item.value}}</view>
+							<view wx:else class="tag theme-font5" bindtap="clickTag" data-keys="{{index}}" data-value="{{item.value}}">{{item.value}}</view>
 						</block>
 					</view>
 					<textarea class="theme-textarea" bindinput="editCommnet" placeholder="您的建议是我们前进的动力...（300字以内）" value="{{comment_str}}" maxlength='300'></textarea>

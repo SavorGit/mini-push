@@ -354,7 +354,7 @@
 }
 
 .waiter-evaluate-window>.document>.head>.title {
-  font-size: 56rpx;
+  font-size: 48rpx;
   font-weight: 400;
 }
 
@@ -383,7 +383,7 @@
 }
 
 .waiter-evaluate-window>.document .body .waiter>.sketch>.name {
-  font-size: 40rpx;
+  font-size: 36rpx;
   font-weight: 400;
 }
 
@@ -398,9 +398,9 @@
 }
 
 .waiter-evaluate-window>.document .body .score>.label {
-  width: 120rpx;
-  font-size: 28rpx;
-  font-weight: 400;
+  width: 150rpx;
+  font-size: 36rpx;
+  font-weight: bold;
 }
 
 .waiter-evaluate-window>.document .body .score>.star-group {
@@ -408,7 +408,11 @@
 }
 
 .waiter-evaluate-window>.document .body .score>.star-group>.fa {
-  font-size: 42rpx;
+  width: 60rpx;
+  height: 60rpx;
+  line-height: 60rpx;
+  text-align: center;
+  font-size: 54rpx;
 }
 
 .waiter-evaluate-window>.document .body .tag-group {
@@ -420,7 +424,7 @@
   margin: 5rpx;
   padding: 10rpx 15rpx;
   display: inline-block;
-  font-size: 28rpx;
+  font-size: 24rpx;
   font-weight: normal;
   border-radius: 5rpx;
   border: 2rpx solid rgba(187, 187, 187, 0.43);
