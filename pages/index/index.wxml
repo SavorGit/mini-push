@@ -247,7 +247,7 @@
 		</view>
 		<view class="document">
 			<view class="head flex-row-center-center">
-				<view class="title theme-font5">亲,请您对我们的服务进行点评</view>
+				<view class="title theme-font5">亲，您对服务满意吗？</view>
 			</view>
 			<form bindsubmit="submitComment">
 				<scroll-view class="body" scroll-y="true" scroll-with-animation="true">
