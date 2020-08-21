@@ -408,6 +408,10 @@
 }
 
 .waiter-evaluate-window>.document .body .score>.star-group>.fa {
+  width: 60rpx;
+  height: 60rpx;
+  line-height: 60rpx;
+  text-align: center;
   font-size: 42rpx;
 }
 
