@@ -269,15 +269,15 @@
 			</view>
 			<form bindsubmit="submitComment">
 				<scroll-view class="body" scroll-y="true" scroll-with-animation="true">
-					<view class="waiter flex-row-center-space_between">
+					<view class="waiter flex-row-center-space_between" wx:if="{{staff_user_info.staff_id>0}}">
 						<image mode="aspectFill" class="head-pic" src="{{staff_user_info.avatarUrl}}"></image>
 						<view class="sketch flex-column-flex_start-space_around">
 							<view class="name theme-font1">{{staff_user_info.nickName}}</view>
-							<view class="job theme-font7">服务专员</view>
+							<view class="job theme-font7">{{staff_user_info.waiter_str}}</view>
 						</view>
 					</view>
 					<view class="score flex-row-center-flex_start">
-						<view class="label theme-font1">服务评分</view>
+						<view class="label theme-font1">{{staff_user_info.comment_str}}</view>
 						<view class="star-group flex-row-center-space_around">
 							<block wx:for="{{star_list}}" wx:key="item" wx:for-index="index">
 								<view wx:if="{{item.is_select==true}}" class="fa fa-star theme-font5" aria-hidden="true" bindtap="subStar" data-keys="{{index}}"></view>
