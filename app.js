@@ -904,15 +904,16 @@ App({
           success: function (res) {
             wx.getConnectedWifi({
               success: function (res) {
+                console.log(res)
                 if (res.errMsg == 'getConnectedWifi:ok') {
                   if (res.wifi.SSID == wifi_name) {//链接的是本包间wifi
                     wx.stopWifi({
 
                     })
-                    if (aps.wifiOkCallback) {
+                    // if (aps.wifiOkCallback) {
 
-                      aps.wifiOkCallback(1);
-                    }
+                    //   aps.wifiOkCallback(1);
+                    // }
                     that.setData({
                       link_type: 2,
                       wifiErr: { 'is_open': 0, 'msg': '', 'confirm': '确定', 'calcle': '取消', 'type': 0 }
@@ -1046,9 +1047,12 @@ App({
   },
   connectWifi: function (wifi_name, wifi_mac, use_wifi_password, box_mac, that,launchType) {
     var aps = this;
-    that.setData({
-      wifi_hidden: false,
-    })
+    if(aps.globalData.sys_info.platform=='ios'){
+      that.setData({
+       wifi_hidden: false,
+      })
+    }
+    
     wx.connectWifi({
       SSID: wifi_name,
       BSSID: wifi_mac,
@@ -1056,34 +1060,31 @@ App({
       success: function (reswifi) {
         
         wx.onWifiConnected((result) => {
-          console.log('11'+result)
           if(result.wifi.SSID==wifi_name){
-            if (aps.wifiOkCallback) {
+            // if (aps.wifiOkCallback) {
 
-              aps.wifiOkCallback(1);
-            }
+            //   aps.wifiOkCallback(1);
+            // }
             
             that.setData({
               wifiErr: { 'is_open': 0, 'msg': '', 'confirm': '确定', 'calcle': '取消', 'type': 0 },
               link_type: 2
             })
             aps.globalData.link_type = 2;
-            if(launchType!=''){
-              that.setData({
-                launchType:launchType
-              })
-              aps.globalData.change_link_type = 2;
-            }
+            
+            that.setData({
+              launchType:'speed'
+            })
+            aps.globalData.change_link_type = 2;
+            
             wx.showToast({
               title: 'wifi链接成功',
               icon: 'success',
               duration: 2000,
               mask:true,
             });
-
-            setTimeout(() => {
-              that.setData({wifi_hidden:true})
-            }, 500);
+            that.setData({wifi_hidden:true})
+            
           }
           
         },()=>{

@@ -991,15 +991,16 @@ Page({
    * 选择投屏类型
    */
   chooseLaunchType:function(e){
-    let self=this;
-    var hotel_info = self.data.hotel_info;
-    let launchType=e.currentTarget.dataset.launch_type;
-    hotel_info.forscreen_type = 2;
+    let that=this;
+    var hotel_info = that.data.hotel_info;
+    let launchType=e.currentTarget.dataset.launch_type; 
+    
     if(launchType=='speed'){
-      app.linkHotelWifi(hotel_info,self,'speed');
+      hotel_info.forscreen_type = 2;
+      app.linkHotelWifi(hotel_info,that,'speed');
       mta.Event.stat('clickChangeLinkType',{'openid':openid,'linktype':2,'forscreentype':1,'boxmac':box_mac})
     }else {
-      self.setData({launchType:launchType});
+      that.setData({launchType:launchType});
       app.globalData.change_link_type = 1;
       mta.Event.stat('clickChangeLinkType',{'openid':openid,'linktype':1,'forscreentype':1,'boxmac':box_mac})
     }
