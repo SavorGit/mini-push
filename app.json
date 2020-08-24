@@ -83,7 +83,8 @@
     {
       "root": "games",
       "pages": [
-        "pages/gamelist"
+        "pages/gamelist",
+        "pages/activity/din_dash"
       ]
     }
   ],
