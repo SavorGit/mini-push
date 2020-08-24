@@ -883,7 +883,7 @@ App({
       }
       mta.Event.stat('linkMode', { 'linktype': '1' })
     } else {//扫极简版
-      aps.jugeLinkType(hotel_info, that);
+      aps.jugeLinkType(hotel_info, that,launchType);
       mta.Event.stat('linkMode', { 'linktype': '2' })
     }
   },
