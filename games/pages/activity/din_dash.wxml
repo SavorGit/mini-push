@@ -1,2 +1,104 @@
 <!--games/pages/activity/din_dash.wxml-->
-<text>games/pages/activity/din_dash.wxml</text>
+<!--
+ | 【游戏】霸王菜页面
+ |-->
+
+
+<import src="/pages/template/commons" />
+<!-- <template is="navigationBarForTwoLevel" data='{{statusBarHeight: statusBarHeight,titleText:"热点投屏"}}' /> -->
+
+<template is="navigationBarForShare" data='{{statusBarHeight: statusBarHeight,titleText:"热点投屏"}}' />
+
+<!-- 参与成功页面 -->
+<view wx:if="{{showPage=='JOIN'}}" class='container theme-container' style='height:calc(100vh - {{46 + statusBarHeight}}px);'>
+	<view class="page">
+		<view class="head theme-page"></view>
+		<view class="body" style="min-height:calc(100vh - {{46 + statusBarHeight + SystemInfo.screenBottomSpace}}px - 20rpx - 5rpx - 68rpx);">
+			<!-- 状态面板 - 成功 -->
+			<view wx:if="{{showStatus=='success'}}" class="panel status theme-panel">
+				<view class="panel-body flex-column-center-flex_start">
+					<view class="row pic center status">
+						<view class="icon fa fa-check-circle theme-icon-green" aria-hidden="true"></view>
+						<view class="name theme-icon-green">恭喜您，报名成功</view>
+					</view>
+					<view class="row text center tip">开奖时间为2020-9-1（今天）19:00，请及时关注中奖结果，详细奖项请看奖品列表</view>
+					<view class="row pic center notice-btn flex-column-center-center">
+						<view class="btn theme-button-orange" bindtap="prizeNotice">开启中奖结果通知</view>
+					</view>
+				</view>
+			</view>
+			<!-- 状态面板 - 失败 -->
+			<view wx:else class="panel status theme-panel">
+				<view class="panel-body flex-column-center-flex_start">
+					<view class="row pic center status">
+						<view class="icon fa fa-times-circle-o theme-icon-green" aria-hidden="true"></view>
+						<view class="name theme-icon-green">已过本轮抽奖时间，请等待下一轮抽奖</view>
+					</view>
+					<view class="row text center tip">本轮报名时间为2020-9-1 19:00-19:40，现已超时，请等待新一轮抽奖。</view>
+				</view>
+			</view>
+			<view class="panel prize">
+				<view class="title-bar flex-row-center-flex_start">
+					<view class="title">本次活动奖品：</view>
+				</view>
+				<view class="panel-body flex-column-center-flex_start">
+					<view class="row text center name">唐宫海鲜舫（西藏大厦店）春春面</view>
+					<view class="row pic center">
+						<image class="pic" mode="aspectFill" src="https://oss.littlehotspot.com/WeChat/resource/default.jpg"></image>
+					</view>
+				</view>
+			</view>
+		</view>
+		<view class="foot flex-row-center-center">
+			<view class="copyright">本活动最终解释权归本餐厅所有</view>
+		</view>
+	</view>
+</view>
+
+<!-- 抽奖结果页面 -->
+<view wx:else class='container theme-container' style='height:calc(100vh - {{46 + statusBarHeight}}px);'>
+	<view class="page">
+		<view class="head theme-page"></view>
+		<view class="body" style="min-height:calc(100vh - {{46 + statusBarHeight + SystemInfo.screenBottomSpace}}px - 20rpx - 5rpx - 68rpx);">
+			<!-- 状态面板 - 成功 -->
+			<view wx:if="{{showStatus=='success'}}" class="panel status theme-panel">
+				<view class="panel-body flex-column-center-flex_start">
+					<view class="row pic center status">
+						<view class="icon fa fa-trophy theme-icon-green" aria-hidden="true"></view>
+						<view class="name theme-icon-green">恭喜您，获得XXXXXXXX 1份</view>
+					</view>
+					<view class="row text center id">本轮编号 111231244</view>
+					<view class="row text center tip">请及时联系餐厅服务人员进行兑换，过期无效</view>
+					<view class="row text center expire">有效时间至：2020年9月1日19:00</view>
+				</view>
+			</view>
+			<!-- 状态面板 - 失败 -->
+			<view wx:else class="panel status theme-panel">
+				<view class="panel-body flex-column-center-flex_start">
+					<view class="row pic center status">
+						<view class="icon fa fa-smile-o theme-icon-orange" aria-hidden="true"></view>
+						<view class="name theme-icon-orange">很遗憾，没有中奖哦，下一轮继续吧～</view>
+					</view>
+					<view class="row text center id">本轮编号 111231244</view>
+				</view>
+			</view>
+			<view class="panel prize">
+				<view class="title-bar flex-row-center-flex_start">
+					<view class="title">本次活动奖品：</view>
+				</view>
+				<view class="panel-body flex-column-center-flex_start">
+					<view class="row text center name">唐宫海鲜舫（西藏大厦店）春春面</view>
+					<view class="row pic center">
+						<image class="pic" mode="aspectFill" src="https://oss.littlehotspot.com/WeChat/resource/default.jpg"></image>
+					</view>
+				</view>
+			</view>
+		</view>
+		<view class="foot flex-row-center-center">
+			<view class="copyright">本活动最终解释权归本餐厅所有</view>
+		</view>
+	</view>
+</view>
+
+<!-- 微信授权登录 -->
+<template is="wxAuthLoginOp" data='{{showOp: showModal}}' />

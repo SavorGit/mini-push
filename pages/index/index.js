@@ -1022,5 +1022,6 @@ Page({
     wx.reLaunch({
       url: '/games/pages/activity/din_dash?openid=ofYZG4yZJHaV2h3lJHG5wOB9MzxE',
     })
-  }
+  },
+  
 })

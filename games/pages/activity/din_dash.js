@@ -6,6 +6,8 @@ var mta = require('../../../utils/mta_analysis.js')
 var api_v_url = app.globalData.api_v_url;
 var cache_key = app.globalData.cache_key;
 var openid;
+var box_mac;
+var activity_id;
 var activity_id;
 let SavorUtils = {
   User: {
@@ -23,7 +25,9 @@ let SavorUtils = {
           openid: app.globalData.openid
         }
       })
-    }, { isShowLoading: false }),
+    }, {
+      isShowLoading: false
+    }),
   },
 };
 Page({
@@ -32,6 +36,10 @@ Page({
    * 页面的初始数据
    */
   data: {
+    statusBarHeight: getApp().globalData.statusBarHeight,
+    SystemInfo: getApp().SystemInfo,
+    showPage: 'JOIN', // JOIN:参与结果； LOTTERY:抽奖结果。
+    showStatus: 'success', // success:成功； fail:失败。
     showModal: false, //显示授权登陆弹窗
   },
 
@@ -40,28 +48,32 @@ Page({
    */
   onLoad: function (options) {
     var that = this;
-
-    openid      = options.openid;
-    activity_id = options.activity_id;
-    
+    openid = options.openid;
+    box_mac= options.box_mac;
+    activity_id = 0;
+    if(typeof(options.activity_id)!='undefined'){
+      activity_id = options.activity_id;
+    }
     SavorUtils.User.isRegister(openid); //判断用户是否注册
-    var user_info = wx.getStorageSync(cache_key+'user_info');
-    if(user_info.is_wx_auth!=3){
+    var user_info = wx.getStorageSync(cache_key + 'user_info');
+    if (user_info.is_wx_auth != 3) {
       that.setData({
         showModal: true
       })
-    }else {
-      that.getActivityInfo(openid,activity_id);
+    } else {
+      that.getActivityInfo();
     }
   },
-  getActivityInfo(openid,activity_id){
+  getActivityInfo() {
     var that = this;
     utils.PostRequest(api_v_url + '/aa/bb', {
-      page: page
+      openid:openid,
+      box_mac:box_mac,
+      activity_id:activity_id
     }, (data, headers, cookies, errMsg, statusCode) => {
       that.setData({
-        act_info:data.result
-      })  
+        act_info: data.result
+      })
     })
 
   },
@@ -81,7 +93,7 @@ Page({
             'iv': rets.iv,
             'encryptedData': rets.encryptedData
           }, (data, headers, cookies, errMsg, statusCode) => {
-            that.getActivityInfo(openid,activity_id);
+            that.getActivityInfo();
             wx.setStorage({
               key: 'savor_user_info',
               data: data.result,
@@ -106,28 +118,29 @@ Page({
           key: 'savor_user_info',
           data: user_info,
         })
+        wx.reLaunch({
+          url: '/pages/index/index',
+        })
       });
       mta.Event.stat("refuseauth", {})
     }
   },
   //关闭授权弹窗
-  closeAuth: function () {
+  closeWxAuth: function () {
     //关闭授权登陆埋点
     var that = this;
     that.setData({
       showModal: false,
     })
-    
-    utils.PostRequest(api_url + '/Smallapp21/index/closeauthLog', {
-      openid: openid,
-      box_mac: '',
-    });
+    wx.reLaunch({
+      url: '/pages/index/index',
+    })
     mta.Event.stat("closewxauth", {})
   },
-  testone:function(){
+  prizeNotice: function () {
     wx.requestSubscribeMessage({
       tmplIds: ['HqNYdceqH7MAQk6dl4Gn54yZObVRNG0FJk40OIwa9x4'],
-      success (res) { }
+      success(res) {}
     })
   },
   /**
