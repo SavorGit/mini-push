@@ -1018,4 +1018,9 @@ Page({
       app.showToast('感谢您的评价！')
     })
   },
+  testone:function(e){
+    wx.reLaunch({
+      url: '/games/pages/activity/din_dash?openid=ofYZG4yZJHaV2h3lJHG5wOB9MzxE',
+    })
+  }
 })
