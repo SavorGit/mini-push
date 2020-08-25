@@ -1018,4 +1018,14 @@ Page({
       app.showToast('感谢您的评价！')
     })
   },
+  /**
+   * 跳转到指定路径
+   */
+  gotoPath:function(e){
+    let self = this;
+    let path = e.currentTarget.dataset.path;
+    wx.navigateTo({
+      url: path,
+    });
+  }
 })

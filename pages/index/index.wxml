@@ -32,7 +32,7 @@
 			<label class='font_666666_24'>当前暂未链接电视，链接后即可使用投屏功能</label>
 		</view>
 	</view>
-
+	<view class="free-dish-panel full_width flex-row-center-center broadcast-panel" data-path="/games/pages/activity/din_dash" bindtap="gotoPath">霸王菜等你来吃</view>
 	<!-- 服务员评价入口 
 	<view class="hotel-waiter-evaluate-panel theme-rad-panel" wx:if="{{is_view_eval_waiter==1}}">
 		<view class="btn-waiter-evaluate flex-row-center-center" bindtap="gotoPageHotelWaiterEvaluate" data-openid="{{openid}}" data-box_id="{{box_id}}">评价服务员</view>
@@ -97,13 +97,13 @@
 
 			</form>
 			<view wx:if="{{is_test==1}}">
-				<button  class="theme-font2" bindtap='testForscreen' data-type="2" data-boxmac="{{box_mac}}" data-openid="{{openid}}" >
+				<button class="theme-font2" bindtap='testForscreen' data-type="2" data-boxmac="{{box_mac}}" data-openid="{{openid}}">
 					<view class="icon flex-column-center-center pic">
 						<image src='/images/icon2/FFFFFF_picture.png'></image>
 					</view>
 					<label>模拟照片投屏</label>
 				</button>
-			
+
 			</view>
 		</view>
 		<view class="row flex-row-center-space_around full_width">
@@ -135,13 +135,13 @@
 
 			</view>
 			<view wx:if="{{is_test==1}}">
-				<button  class="theme-font2" bindtap='testForscreen' data-type="1" data-boxmac="{{box_mac}}" data-openid="{{openid}}" >
+				<button class="theme-font2" bindtap='testForscreen' data-type="1" data-boxmac="{{box_mac}}" data-openid="{{openid}}">
 					<view class="icon flex-column-center-center video">
 						<image src='/images/icon2/FFFFFF_video.png'></image>
 					</view>
 					<label>模拟视频投屏</label>
 				</button>
-			
+
 			</view>
 			<!-- <navigator url="/pages/hotel/index">商家入口</navigator> -->
 			<!-- <navigator target="miniProgram" app-id="wxf96ad76f27597d65" path="packages/goods/detail/index?alias=1y5c6oa8cduzn&dc_ps=2328936063642568704.200001" class='theme-button'>前往故宫书店</navigator> -->

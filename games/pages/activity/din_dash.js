@@ -23,7 +23,9 @@ let SavorUtils = {
           openid: app.globalData.openid
         }
       })
-    }, { isShowLoading: false }),
+    }, {
+      isShowLoading: false
+    }),
   },
 };
 Page({
@@ -32,6 +34,10 @@ Page({
    * 页面的初始数据
    */
   data: {
+    statusBarHeight: getApp().globalData.statusBarHeight,
+    SystemInfo: getApp().SystemInfo,
+    showPage: 'JOIN', // JOIN:参与结果； LOTTERY:抽奖结果。
+    showStatus: 'success', // success:成功； fail:失败。
     showModal: false, //显示授权登陆弹窗
   },
 
@@ -41,27 +47,31 @@ Page({
   onLoad: function (options) {
     var that = this;
 
-    openid      = options.openid;
+    that.setData({
+      showModal: true
+    });
+
+    openid = options.openid;
     activity_id = options.activity_id;
-    
+
     SavorUtils.User.isRegister(openid); //判断用户是否注册
-    var user_info = wx.getStorageSync(cache_key+'user_info');
-    if(user_info.is_wx_auth!=3){
+    var user_info = wx.getStorageSync(cache_key + 'user_info');
+    if (user_info.is_wx_auth != 3) {
       that.setData({
         showModal: true
       })
-    }else {
-      that.getActivityInfo(openid,activity_id);
+    } else {
+      that.getActivityInfo(openid, activity_id);
     }
   },
-  getActivityInfo(openid,activity_id){
+  getActivityInfo(openid, activity_id) {
     var that = this;
     utils.PostRequest(api_v_url + '/aa/bb', {
       page: page
     }, (data, headers, cookies, errMsg, statusCode) => {
       that.setData({
-        act_info:data.result
-      })  
+        act_info: data.result
+      })
     })
 
   },
@@ -81,7 +91,7 @@ Page({
             'iv': rets.iv,
             'encryptedData': rets.encryptedData
           }, (data, headers, cookies, errMsg, statusCode) => {
-            that.getActivityInfo(openid,activity_id);
+            that.getActivityInfo(openid, activity_id);
             wx.setStorage({
               key: 'savor_user_info',
               data: data.result,
@@ -117,17 +127,17 @@ Page({
     that.setData({
       showModal: false,
     })
-    
+
     utils.PostRequest(api_url + '/Smallapp21/index/closeauthLog', {
       openid: openid,
       box_mac: '',
     });
     mta.Event.stat("closewxauth", {})
   },
-  testone:function(){
+  testone: function () {
     wx.requestSubscribeMessage({
       tmplIds: ['HqNYdceqH7MAQk6dl4Gn54yZObVRNG0FJk40OIwa9x4'],
-      success (res) { }
+      success(res) {}
     })
   },
   /**

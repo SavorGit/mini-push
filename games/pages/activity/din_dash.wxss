@@ -1,1 +1,111 @@
 /* games/pages/activity/din_dash.wxss */
+/**
+ * 【游戏】游戏列表
+ */
+
+
+.page {
+  width: 100%;
+  min-height: calc(100% - 20rpx);
+  padding-bottom: 20rpx;
+}
+
+.page>view {
+  width: 100%;
+}
+
+.head {
+  height: 5rpx;
+}
+
+.body {
+  min-height: calc(100% - 5rpx - 68rpx);
+}
+
+.panel {
+  padding: 10rpx 0;
+}
+
+.panel>.title-bar {
+  width: calc(100% - 40rpx);
+  height: 50rpx;
+  padding: 10rpx 20rpx;
+}
+
+.panel>.title-bar>.title {
+  font-size: 28rpx;
+}
+
+.panel>.panel-body {
+  width: 100%;
+}
+
+.panel>.panel-body>.row {
+  width: calc(100% - 40rpx);
+  padding: 5rpx 20rpx;
+}
+
+.panel>.panel-body>.row.text {
+  font-size: 28rpx;
+}
+
+.panel>.panel-body>.row.pic {
+  font-size: 28rpx;
+}
+
+.panel>.panel-body>.row.pic>.pic {
+  width: 660rpx;
+  height: 372rpx;
+  border-radius: 5rpx;
+}
+
+.panel>.panel-body>.row.center {
+  text-align: center;
+}
+
+.panel>.panel-body>.row.middle {
+  vertical-align: middle;
+}
+
+.panel>.panel-body>.row>.btn {
+  /* margin: 0; */
+  padding: 0;
+  border: 0;
+  border-radius: 8rpx;
+  text-align: center;
+  vertical-align: middle;
+}
+
+.panel.status>.panel-body>.status {
+  padding: 20rpx 0;
+}
+
+.panel.status>.panel-body>.status>.icon {
+  padding: 10rpx 0;
+  font-size: 96rpx;
+}
+
+.panel.status>.panel-body>.notice-btn {
+  padding: 30rpx 0 10rpx;
+}
+
+.panel.status>.panel-body>.notice-btn>.btn {
+  width: 274rpx;
+  height: 60rpx;
+  line-height: 60rpx;
+}
+
+.panel.status>.panel-body>.status>.name {
+  padding: 10rpx 0;
+  font-size: 28rpx;
+  font-weight: 700;
+}
+
+.foot {
+  height: 68rpx;
+}
+
+.foot>.copyright {
+  font-size: 28rpx;
+  font-weight: 600;
+}
