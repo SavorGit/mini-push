@@ -84,7 +84,11 @@ Page({
         act_info: data.result,
         status:status
       })
-    })
+    },re=> {
+      wx.reLaunch({
+        url: '/pages/index/index',
+      })
+     })
 
   },
   onGetUserInfo: function (res) {

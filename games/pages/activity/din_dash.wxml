@@ -69,8 +69,8 @@
 						<view class="name theme-icon-green">{{act_info.tips}}</view>
 					</view>
 					<view class="row text center id">本轮编号 {{act_info.activity_num}}</view>
-					<view class="row text center tip">请及时联系餐厅服务人员进行兑换，过期无效</view>
-					<view class="row text center expire">{{act_info.message}}</view>
+					<view class="row text center tip">{{act_info.message}}</view>
+					<!-- <view class="row text center expire">{{act_info.end_message}}</view> -->
 				</view>
 			</view>
 			<!-- 状态面板 - 失败 -->

@@ -137,7 +137,7 @@ Page({
         box_id:box_id,
         is_view_eval_waiter: is_view_eval_waiter
       })
-    });
+    },re => { }, { isShowLoading: false });
   },
   
   onGetUserInfo: function (res) {
@@ -1045,9 +1045,11 @@ Page({
       }
     }
   },
-  /*testone:function(){
+  testone:function(){
+    var user_info = wx.getStorageSync("savor_user_info");
+    var openid = user_info.openid;
     wx.navigateTo({
       url: '/games/pages/activity/din_dash?openid='+openid+'&box_mac='+box_mac+'&is_share=0',
     })
-  }*/
+  }
 })
