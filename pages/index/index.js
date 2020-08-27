@@ -722,7 +722,7 @@ Page({
           if(head_serial_number==app.globalData.not_link_box_pre){
             app.globalData.serial_number = app.globalData.have_link_box_pre+openid+'_'+(new Date()).valueOf();
           }
-          
+          that.is_view_eval_waiter(data.result.box_id);
           app.linkHotelWifi(data.result, that);
           that.getAdspositionList(data.result.box_id)
           app.globalData.hotel_info = data.result;
@@ -1023,7 +1023,7 @@ Page({
       app.showToast('感谢您的评价！')
     })
   },
-  gotoActivity:function(){
+  gotoActivity:function(e){
     var that = this;
     var linkcontent = e.currentTarget.dataset.linkcontent;
     var user_info = wx.getStorageSync("savor_user_info");
