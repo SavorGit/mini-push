@@ -58,8 +58,8 @@ Page({
     wx.removeStorageSync(cache_key+'colose_official_account');
     var that = this;
     that.getHotplaylist();
-
-    that.getAdspositionList();
+    //var box_mac = that.data.boxShow
+    //that.getAdspositionList(box_mac);
       
   },
   //是否显示活动
@@ -110,10 +110,11 @@ Page({
       });
     })
   },
-  getAdspositionList:function(){//获取轮播广告banner
+  getAdspositionList:function(box_id){//获取轮播广告banner
     var that = this;
-    utils.PostRequest(api_url + '/Smallapp3/Adsposition/getAdspositionList', {
+    utils.PostRequest(api_v_url + '/Adsposition/getAdspositionList', {
         position: '2,3',
+        box_id:box_id
       }, (data, headers, cookies, errMsg, statusCode) => {
         var imgUrls = data.result[2];
         var imgUrls_mid = [];
@@ -124,7 +125,7 @@ Page({
           imgUrls: imgUrls,
           imgUrls_mid: imgUrls_mid
         });
-      });
+      },re => { }, { isShowLoading: false });
   },
   is_view_eval_waiter:function (box_id){
     var that = this;
@@ -212,7 +213,7 @@ Page({
   chooseImage(e) {
     var that = this;
     var user_info = wx.getStorageSync("savor_user_info");
-    if (user_info.is_wx_auth != 3 && app.globalData.link_type != 2) {
+    if (user_info.is_wx_auth != 3 ) {
       that.setData({
         showModal: true
       })
@@ -254,7 +255,7 @@ Page({
   chooseVedio(e) {
     var that = this
     var user_info = wx.getStorageSync("savor_user_info");
-    if (user_info.is_wx_auth != 3 && app.globalData.link_type != 2) {
+    if (user_info.is_wx_auth != 3 ) {
       that.setData({
         showModal: true
       })
@@ -723,6 +724,7 @@ Page({
           }
           
           app.linkHotelWifi(data.result, that);
+          that.getAdspositionList(data.result.box_id)
           app.globalData.hotel_info = data.result;
           that.setData({
             is_test:data.result.is_test,
@@ -738,6 +740,7 @@ Page({
           })
           box_mac = data.result.box_mac;
         } else {//如果未连接盒子
+          that.getAdspositionList('')
           var serial_number = app.globalData.serial_number;
           var head_serial_number = serial_number.substring(0,2);
           if(head_serial_number==app.globalData.have_link_box_pre){
@@ -793,6 +796,7 @@ Page({
               var box_id = data.result.box_id;
               that.is_view_eval_waiter(box_id);
               app.linkHotelWifi(data.result, that);
+              that.getAdspositionList(data.result.box_id)
               app.globalData.hotel_info = data.result;
               that.setData({
                 is_test:data.result.is_test,
@@ -808,6 +812,7 @@ Page({
               })
               box_mac = data.result.box_mac;
             } else {
+              that.getAdspositionList('')
               that.setData({
                 is_link: 0,
                 box_mac: '',
@@ -1018,10 +1023,31 @@ Page({
       app.showToast('感谢您的评价！')
     })
   },
-  testone:function(e){
-    wx.reLaunch({
-      url: '/games/pages/activity/din_dash?openid=ofYZG4yZJHaV2h3lJHG5wOB9MzxE',
-    })
+  gotoActivity:function(){
+    var that = this;
+    var linkcontent = e.currentTarget.dataset.linkcontent;
+    var user_info = wx.getStorageSync("savor_user_info");
+    if (user_info.is_wx_auth != 3 ) {
+      that.setData({
+        showModal: true
+      })
+      mta.Event.stat("showwxauth", {})
+    } else {
+      var openid = that.data.openid;
+      var box_mac = that.data.box_mac;
+      if (box_mac == '') {
+
+        app.scanQrcode(pageid);
+      } else {
+        wx.navigateTo({
+          url: linkcontent+'?openid='+openid+'&box_mac='+box_mac+'&is_share=0',
+        })
+      }
+    }
   },
-  
+  /*testone:function(){
+    wx.navigateTo({
+      url: '/games/pages/activity/din_dash?openid='+openid+'&box_mac='+box_mac+'&is_share=0',
+    })
+  }*/
 })

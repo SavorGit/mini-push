@@ -38,19 +38,27 @@ Page({
   data: {
     statusBarHeight: getApp().globalData.statusBarHeight,
     SystemInfo: getApp().SystemInfo,
-    showPage: 'JOIN', // JOIN:参与结果； LOTTERY:抽奖结果。
-    showStatus: 'success', // success:成功； fail:失败。
+    status :0,        //中奖状态
     showModal: false, //显示授权登陆弹窗
+    is_share :1
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    wx.hideShareMenu();
     var that = this;
     openid = options.openid;
     box_mac= options.box_mac;
     activity_id = 0;
+    var is_share = 1;
+    if(typeof(options.is_share)!='undefined'){
+      is_share = options.is_share;
+    }
+    that.setData({
+      is_share:is_share
+    })
     if(typeof(options.activity_id)!='undefined'){
       activity_id = options.activity_id;
     }
@@ -66,13 +74,15 @@ Page({
   },
   getActivityInfo() {
     var that = this;
-    utils.PostRequest(api_v_url + '/aa/bb', {
+    utils.PostRequest(api_v_url + '/activity/lottery', {
       openid:openid,
       box_mac:box_mac,
       activity_id:activity_id
     }, (data, headers, cookies, errMsg, statusCode) => {
+      var status = data.result.status;
       that.setData({
-        act_info: data.result
+        act_info: data.result,
+        status:status
       })
     })
 

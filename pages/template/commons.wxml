@@ -206,6 +206,23 @@
 	</view>
 </template>
 
+<!-- 自定义分享页面导航栏 -->
+<template name="navigationBarToIndex">
+	<view class='default-navigation-bar theme-navigation'>
+		<view class='status-bar' style='height:{{statusBarHeight}}px;'></view>
+		<view class='navigation-bar flex-row-center-flex_start'>
+			<view class='btn flex-row-center-flex_start'>
+				<navigator class='to-home' open-type="switchTab" url='/pages/index/index'>
+					<label class="fa fa-home fa-2x"></label>
+				</navigator>
+			</view>
+			<view class='title flex-column-center-space_between'>
+				<label class='text'>{{titleText}}</label>
+			</view>
+		</view>
+	</view>
+</template>
+
 
 <!-- 自定义二级游戏页面导航栏 -->
 <template name="navigationBarForTwoLevelInGame">
