@@ -1021,7 +1021,26 @@ Page({
     }, (data, headers, cookies, errMsg, statusCode) => {
       that.setData({is_open_popcomment:0})
       app.showToast('感谢您的评价！')
+      var forscreen_id = (new Date()).valueOf();
+      that.recordForscreenLog(forscreen_id,openid,box_mac,52);
     })
+  },
+  recordForscreenLog:function(forscreen_id,openid,box_mac,action=0){
+
+    utils.PostRequest(api_v_url+'/index/recordForScreenPics', {
+      forscreen_id: forscreen_id,
+      openid: openid,
+      box_mac: box_mac,
+      action: action,
+      mobile_brand: app.globalData.mobile_brand,
+      mobile_model: app.globalData.mobile_model,
+      imgs: '[]',
+      serial_number:app.globalData.serial_number
+
+    }, (data, headers, cookies, errMsg, statusCode) => {
+      
+    })
+    
   },
   gotoActivity:function(e){
     var that = this;
@@ -1042,6 +1061,7 @@ Page({
         wx.navigateTo({
           url: linkcontent+'?openid='+openid+'&box_mac='+box_mac+'&is_share=0',
         })
+        mta.Event.stat('clickDindashBanner',{'openid':user_info.openid,'boxmac':box_mac})
       }
     }
   },

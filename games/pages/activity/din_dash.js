@@ -69,10 +69,10 @@ Page({
         showModal: true
       })
     } else {
-      that.getActivityInfo();
+      that.getActivityInfo(is_share);
     }
   },
-  getActivityInfo() {
+  getActivityInfo(is_share) {
     var that = this;
     utils.PostRequest(api_v_url + '/activity/lottery', {
       openid:openid,
@@ -84,12 +84,34 @@ Page({
         act_info: data.result,
         status:status
       })
+      if(is_share==1){
+        var forscreen_id = (new Date()).valueOf();
+        that.recordForscreenLog(forscreen_id,openid,box_mac,51);
+      }
+      
     },re=> {
       wx.reLaunch({
         url: '/pages/index/index',
       })
      })
 
+  },
+  recordForscreenLog:function(forscreen_id,openid,box_mac,action=0){
+
+    utils.PostRequest(api_v_url+'/index/recordForScreenPics', {
+      forscreen_id: forscreen_id,
+      openid: openid,
+      box_mac: box_mac,
+      action: action,
+      mobile_brand: app.globalData.mobile_brand,
+      mobile_model: app.globalData.mobile_model,
+      imgs: '[]',
+      serial_number:app.globalData.serial_number
+
+    }, (data, headers, cookies, errMsg, statusCode) => {
+      
+    })
+    
   },
   onGetUserInfo: function (res) {
     var that = this;
