@@ -154,7 +154,11 @@ Page({
   prizeNotice: function () {
     wx.requestSubscribeMessage({
       tmplIds: ['HqNYdceqH7MAQk6dl4Gn54yZObVRNG0FJk40OIwa9x4'],
-      success(res) {}
+      success(res) {
+        app.showToast('开启成功!');
+      },fail(res){
+        app.showToast('开启失败,请重试!')
+      }
     })
   },
   /**
