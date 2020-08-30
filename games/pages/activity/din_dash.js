@@ -177,7 +177,7 @@ Page({
     wx.requestSubscribeMessage({
       tmplIds: ['HqNYdceqH7MAQk6dl4Gn54yZObVRNG0FJk40OIwa9x4'],
       success(res) {
-        app.showToast('开启成功!');
+        //app.showToast('操作成功!');
       },fail(res){
         app.showToast('开启失败,请重试!')
       }
