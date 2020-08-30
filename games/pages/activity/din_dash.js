@@ -177,9 +177,11 @@ Page({
     wx.requestSubscribeMessage({
       tmplIds: ['HqNYdceqH7MAQk6dl4Gn54yZObVRNG0FJk40OIwa9x4'],
       success(res) {
-        //app.showToast('操作成功!');
-      },fail(res){
-        app.showToast('开启失败,请重试!')
+        if(res['HqNYdceqH7MAQk6dl4Gn54yZObVRNG0FJk40OIwa9x4'] === 'accept'){
+          app.showToast('开启成功',2000,'success',);
+        }else {
+          app.showToast('开启失败!');
+        }
       }
     })
   },
