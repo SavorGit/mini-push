@@ -301,10 +301,16 @@ Page({
             mta.Event.stat('scanQrcodeResult', { 'linktype': 1 })
           }
           app.globalData.serial_number = app.globalData.have_link_box_pre+openid+'_'+(new Date()).valueOf();
-                                         
-          wx.reLaunch({
-            url: '../index/index',
-          })
+          if(code_type==31){
+            wx.reLaunch({
+              url: '/games/pages/activity/din_dash?openid='+openid+'&box_mac='+box_mac,
+            })
+          } else {
+            wx.reLaunch({
+              url: '../index/index',
+            })
+          }                              
+          
         }
       })
     }

@@ -31,7 +31,7 @@
 		"userConfirmedUseCompilerModuleSwitch": false
 	},
 	"compileType": "miniprogram",
-	"libVersion": "2.12.1",
+	"libVersion": "2.12.2",
 	"appid": "wxfdf0346934bb672f",
 	"projectname": "savor_produce",
 	"isGameTourist": false,

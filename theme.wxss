@@ -86,8 +86,17 @@ button[disabled] {
   background-color: #1cbeb6;
 }
 
+.theme-icon-green {
+  color: rgb(48, 219, 13);
+}
+
+.theme-icon-orange {
+  color: #F68855;
+}
+
 .theme-window,
 .theme-panel,
+.theme-page,
 .theme-button-white,
 .theme-navigation {
   color: #333333;

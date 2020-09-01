@@ -1,0 +1,109 @@
+<!--games/pages/activity/din_dash.wxml-->
+<!--
+ | 【游戏】霸王菜页面
+ |-->
+
+
+<import src="/pages/template/commons" />
+<template is="navigationBarToIndex" data='{{statusBarHeight: statusBarHeight,titleText:"热点投屏"}}' wx:if="{{is_share==1}}" />
+<template is="navigationBarForTwoLevel" data='{{statusBarHeight: statusBarHeight,titleText:"热点投屏"}}' wx:if="{{is_share==0}}" />
+
+
+
+<!-- 参与成功页面 -->
+<view wx:if="{{status=='1' || status==2}}" class='container theme-container' style='height:calc(100vh - {{46 + statusBarHeight}}px);'>
+	<view class="page">
+		<view class="head theme-page"></view>
+		<view class="body" style="min-height:calc(100vh - {{46 + statusBarHeight + SystemInfo.screenBottomSpace}}px - 20rpx - 5rpx - 68rpx);">
+			<!-- 状态面板 - 成功 -->
+			<view wx:if="{{status=='1'}}" class="panel status theme-panel">
+				<view class="panel-body flex-column-center-flex_start">
+					<view class="row pic center status">
+						<view class="icon fa fa-check-circle theme-icon-green" aria-hidden="true"></view>
+						<view class="name theme-icon-green">{{act_info.tips}}</view>
+					</view>
+					<view class="row text center tip">{{act_info.message}}</view>
+					<view class="row pic center notice-btn flex-column-center-center">
+						<view class="btn theme-button-orange" bindtap="prizeNotice">开启中奖结果通知</view>
+						<view class="flex-row-center-center">
+							<image style="width:44rpx;height:64rpx;" mode="aspectFull" src="/images/imgs/shouzhi.jpg"></image>
+							<view style="font-size:24rpx;" class="theme-font5">点击按钮可以接收通知哦</view>
+						</view>
+					</view>
+				</view>
+			</view>
+			<!-- 状态面板 - 失败 -->
+			<view wx:else class="panel status theme-panel">
+				<view class="panel-body flex-column-center-flex_start">
+					<view class="row pic center status">
+						<view class="icon fa fa-times-circle-o theme-icon-green" aria-hidden="true"></view>
+						<view class="name theme-icon-green">{{act_info.tips}}</view>
+					</view>
+					<view class="row text center tip">{{act_info.message}}</view>
+				</view>
+			</view>
+			<view class="panel prize">
+				<view class="title-bar flex-row-center-flex_start">
+					<view class="title">本次活动奖品：</view>
+				</view>
+				<view class="panel-body flex-column-center-flex_start">
+					<view class="row text center name">{{act_info.prize_name}}</view>
+					<view class="row pic center">
+						<image class="pic" mode="aspectFill" src="{{act_info.img_url}}"></image>
+					</view>
+				</view>
+			</view>
+		</view>
+		<view class="foot flex-row-center-center">
+			<view class="copyright">本活动最终解释权归本餐厅所有</view>
+		</view>
+	</view>
+</view>
+
+<!-- 抽奖结果页面 -->
+<view wx:if="{{status==3 || status==4}}" class='container theme-container' style='height:calc(100vh - {{46 + statusBarHeight}}px);'>
+	<view class="page">
+		<view class="head theme-page"></view>
+		<view class="body" style="min-height:calc(100vh - {{46 + statusBarHeight + SystemInfo.screenBottomSpace}}px - 20rpx - 5rpx - 68rpx);">
+			<!-- 状态面板 - 成功 -->
+			<view wx:if="{{status=='3'}}" class="panel status theme-panel">
+				<view class="panel-body flex-column-center-flex_start">
+					<view class="row pic center status">
+						<view class="icon fa fa-trophy theme-icon-green" aria-hidden="true"></view>
+						<view class="name theme-icon-green">{{act_info.tips}}</view>
+					</view>
+					<view class="row text center id">本轮编号 {{act_info.activity_num}}</view>
+					<view class="row text center tip">{{act_info.message}}</view>
+					<!-- <view class="row text center expire">{{act_info.end_message}}</view> -->
+				</view>
+			</view>
+			<!-- 状态面板 - 失败 -->
+			<view wx:else class="panel status theme-panel">
+				<view class="panel-body flex-column-center-flex_start">
+					<view class="row pic center status">
+						<view class="icon fa fa-smile-o theme-icon-orange" aria-hidden="true"></view>
+						<view class="name theme-icon-orange">{{act_info.tips}}</view>
+					</view>
+					<view class="row text center id">本轮编号 {{act_info.activity_num}}</view>
+				</view>
+			</view>
+			<view class="panel prize">
+				<view class="title-bar flex-row-center-flex_start">
+					<view class="title">本次活动奖品：</view>
+				</view>
+				<view class="panel-body flex-column-center-flex_start">
+					<view class="row text center name">{{act_info.prize_name}}</view>
+					<view class="row pic center">
+						<image class="pic" mode="aspectFill" src="{{act_info.img_url}}"></image>
+					</view>
+				</view>
+			</view>
+		</view>
+		<view class="foot flex-row-center-center">
+			<view class="copyright">本活动最终解释权归本餐厅所有</view>
+		</view>
+	</view>
+</view>
+
+<!-- 微信授权登录 -->
+<template is="wxAuthLoginOp" data='{{showOp: showModal}}' />
