@@ -48,7 +48,7 @@ Page({
     is_open_popcomment:0,
     star_list:[{'lev':1,'is_select':true},{'lev':2,'is_select':true},{'lev':3,'is_select':true},{'lev':4,'is_select':true},{'lev':5,'is_select':true}],
     comment_str:'',
-
+    tab:'bestow'
   },
 
   /**
@@ -1071,5 +1071,14 @@ Page({
     wx.navigateTo({
       url: '/games/pages/activity/din_dash?openid='+openid+'&box_mac='+box_mac+'&is_share=0',
     })
-  }
+  },
+
+  // 选项卡选择
+  showTab: function (e) {
+    let self = this;
+    let tabType = e.currentTarget.dataset.tab;
+    self.setData({
+      tab: tabType
+    });
+  },
 })

@@ -336,7 +336,7 @@
 
 .waiter-evaluate-window {
   width: 690rpx;
-  height: 960rpx;
+  height: 1000rpx;
   border-radius: 10rpx;
 }
 
@@ -358,7 +358,7 @@
 
 .waiter-evaluate-window>.document>.head {
   width: 100%;
-  height: 70rpx;
+  height: 50rpx;
 }
 
 .waiter-evaluate-window>.document>.head>.title {
@@ -367,16 +367,16 @@
 }
 
 .waiter-evaluate-window>.document .body {
-  width: calc(100% - 50rpx);
-  height: calc(100% - 260rpx);
+  width: calc(100% - 30rpx);
+  height: calc(100% - 200rpx);
   /* height: calc(100% - 100rpx); */
-  padding: 50rpx 25rpx 20rpx;
+  padding: 20rpx 15rpx 20rpx;
 }
 
 .waiter-evaluate-window>.document .body .waiter {
-  width: 100%;
+  width: calc(100% - 20rpx);
   height: 110rpx;
-  padding: 5rpx 0;
+  padding: 10rpx 10rpx;
 }
 
 .waiter-evaluate-window>.document .body .waiter>.head-pic {
@@ -400,22 +400,36 @@
   font-weight: 400;
 }
 
-.waiter-evaluate-window>.document .body .score {
+.waiter-evaluate-window>.document .body .panel {
+  width: calc(100% - 20rpx);
+  padding: 15rpx 10rpx;
+  border-radius: 10rpx;
+}
+
+.waiter-evaluate-window>.document .body .panel>.body {
+  padding: 10rpx;
+}
+
+.waiter-evaluate-window>.document .body .panel>.body>.tab-body {
+  padding: 10rpx;
+}
+
+.waiter-evaluate-window>.document .body .panel.evaluate>.score {
   width: 100%;
   height: 70rpx;
 }
 
-.waiter-evaluate-window>.document .body .score>.label {
+.waiter-evaluate-window>.document .body .panel.evaluate>.score>.label {
   width: 150rpx;
   font-size: 36rpx;
   font-weight: bold;
 }
 
-.waiter-evaluate-window>.document .body .score>.star-group {
+.waiter-evaluate-window>.document .body .panel.evaluate>.score>.star-group {
   width: calc(100% - 300rpx);
 }
 
-.waiter-evaluate-window>.document .body .score>.star-group>.fa {
+.waiter-evaluate-window>.document .body .panel.evaluate>.score>.star-group>.fa {
   width: 60rpx;
   height: 60rpx;
   line-height: 60rpx;
@@ -423,12 +437,12 @@
   font-size: 54rpx;
 }
 
-.waiter-evaluate-window>.document .body .tag-group {
+.waiter-evaluate-window>.document .body .panel.evaluate>.tag-group {
   width: 100%;
   padding: 10rpx 0;
 }
 
-.waiter-evaluate-window>.document .body .tag-group>.tag {
+.waiter-evaluate-window>.document .body .panel.evaluate>.tag-group>.tag {
   margin: 5rpx;
   padding: 10rpx 15rpx;
   display: inline-block;
@@ -438,9 +452,72 @@
   border: 2rpx solid rgba(187, 187, 187, 0.43);
 }
 
+.waiter-evaluate-window>.document .body .panel.bestow {
+  height: 200rpx;
+  margin-top: 10rpx;
+}
+
+.waiter-evaluate-window>.document .body .panel.bestow>.title-bar {
+  width: calc(100% - 20rpx);
+  height: 60rpx;
+  padding: 5rpx 10rpx;
+}
+
+.waiter-evaluate-window>.document .body .panel.bestow>.title-bar>.title {
+  font-size: 28rpx;
+  font-weight: 700;
+}
+
+.waiter-evaluate-window>.document .body .panel.bestow>.title-bar>.tab-bar>.tab {
+  width: 120rpx;
+  height: 56rpx;
+  line-height: 56rpx;
+  text-align: center;
+  font-size: 26rpx;
+  border: 2rpx solid #F55555;
+}
+
+.waiter-evaluate-window>.document .body .panel.bestow>.title-bar>.tab-bar>.tab.selected {
+  color: #FFFFFF;
+  background-color: #F55555;
+}
+
+.waiter-evaluate-window>.document .body .panel.bestow>.body {
+  width: calc(100 - 20rpx);
+  height: 110rpx;
+  padding: 10rpx 10rpx;
+}
+
+.waiter-evaluate-window>.document .body .panel.bestow>.body>.tab-body {
+  width: 100%;
+}
+
+.waiter-evaluate-window>.document .body .panel.bestow>.body>.tab-body>.item {
+  width: 90rpx;
+  height: 100rpx;
+  margin-top: 10rpx;
+  margin-left: 10rpx;
+  float: left;
+  border: 2rpx dashed #F55555;
+}
+
+.waiter-evaluate-window>.document .body .panel.bestow>.body>.tab-body>.item>.pic {
+  width: 60rpx;
+  height: 60rpx;
+}
+
+.waiter-evaluate-window>.document .body .panel.bestow>.body>.tab-body>.item>.fee {
+  font-size: 32rpx;
+  font-weight: 700;
+}
+
+.waiter-evaluate-window>.document .body .panel.bestow>.body>.tab-body>.item.selected {
+  border: 2rpx solid #F55555;
+}
+
 .waiter-evaluate-window>.document .body textarea {
   width: calc(100% - 10rpx);
-  height: 290rpx;
+  height: 150rpx;
   font-size: 28rpx;
   font-weight: normal;
   padding: 5rpx;
