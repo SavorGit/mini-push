@@ -1,11 +1,20 @@
 // pages/hotel/comment/index.js
+/**
+ * 用户满意度调查页面
+ */
+
+
+
+
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-
+    statusBarHeight: getApp().globalData.statusBarHeight,
+    SystemInfo: getApp().SystemInfo,
+    tab: 'bestow'
   },
 
   /**
@@ -62,5 +71,14 @@ Page({
    */
   onShareAppMessage: function () {
 
-  }
+  },
+
+  // 选项卡选择
+  showTab: function (e) {
+    let self = this;
+    let tabType = e.currentTarget.dataset.tab;
+    self.setData({
+      tab: tabType
+    });
+  },
 })

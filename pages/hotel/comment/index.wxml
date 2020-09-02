@@ -1,2 +1,86 @@
 <!--pages/hotel/comment/index.wxml-->
-<text>pages/hotel/comment/index.wxml</text>
+<!--
+ | 用户满意度调查页面
+ |-->
+
+
+<import src="/pages/template/commons" />
+<template is="navigationBarForTwoLevel" data='{{statusBarHeight: statusBarHeight,titleText:"小热点"}}' />
+
+<view class="waiter-evaluate-window flex-column-center-start theme-container" style="height:calc(100vh - {{46 + statusBarHeight + SystemInfo.screenBottomSpace}}px);">
+	<view class="document">
+		<view class="head flex-row-center-center">
+			<!-- <view class="title theme-font5">亲，您对服务满意吗？</view> -->
+			<view class="title theme-font5">用户满意度调查</view>
+		</view>
+		<form bindsubmit="submitComment">
+			<scroll-view class="body" scroll-y="true" scroll-with-animation="true">
+				<view class="waiter flex-row-center-space_between" wx:if="{{staff_user_info.staff_id>0}}">
+					<image mode="aspectFill" class="head-pic" src="{{staff_user_info.avatarUrl}}"></image>
+					<view class="sketch flex-column-flex_start-space_around">
+						<view class="name theme-font1">{{staff_user_info.nickName}}</view>
+						<view class="job theme-font7">{{staff_user_info.waiter_str}}</view>
+					</view>
+				</view>
+				<view class="evaluate panel theme-panel">
+					<view class="score flex-row-center-flex_start">
+						<view class="label theme-font1">{{staff_user_info.comment_str}}</view>
+						<view class="star-group flex-row-center-space_around">
+							<block wx:for="{{star_list}}" wx:key="item" wx:for-index="index">
+								<view wx:if="{{item.is_select==true}}" class="fa fa-star theme-font5" aria-hidden="true" bindtap="subStar" data-keys="{{index}}"></view>
+								<view wx:else class="fa fa-star-o theme-font3" aria-hidden="true" bindtap="addStar" data-keys="{{index}}"></view>
+							</block>
+						</view>
+					</view>
+					<view class="tag-group">
+						<block wx:for="{{tags}}" wx:key="item" wx:for-index="index">
+							<view wx:if="{{item.selected==true}}" class="tag theme-button-red">{{item.value}}</view>
+							<view wx:else class="tag theme-font5" bindtap="clickTag" data-keys="{{index}}" data-value="{{item.value}}">{{item.value}}</view>
+						</block>
+					</view>
+					<textarea class="theme-textarea" bindinput="editCommnet" placeholder="您的建议是我们前进的动力...（300字以内）" value="{{comment_str}}" maxlength='300'></textarea>
+				</view>
+				<view class="bestow panel theme-panel">
+					<view class="title-bar flex-row-center-space_between">
+						<view class="title">对服务员很满意，要打个赏吗？</view>
+						<view class="tab-bar flex-row-center-center">
+							<view class="tab{{tab=='bestow'?' selected':''}}" data-tab="bestow" bindtap="showTab">打赏</view>
+							<view class="tab{{tab=='none'?' selected':''}}" data-tab="none" bindtap="showTab">不打赏</view>
+						</view>
+					</view>
+					<view class="body">
+						<view wx:if="{{tab=='bestow'}}" class="bestow tab-body">
+							<view class="item flex-column-center-center selected">
+								<image class="pic" mode="aspectFill" src="http://oss.littlehotspot.com/WeChat/resource/default.jpg"></image>
+								<view class="fee theme-font5">¥2</view>
+							</view>
+							<view class="item flex-column-center-center">
+								<image class="pic" mode="aspectFill" src="http://oss.littlehotspot.com/WeChat/resource/default.jpg"></image>
+								<view class="fee theme-font5">¥10</view>
+							</view>
+							<view class="item flex-column-center-center">
+								<image class="pic" mode="aspectFill" src="http://oss.littlehotspot.com/WeChat/resource/default.jpg"></image>
+								<view class="fee theme-font5">¥2</view>
+							</view>
+							<view class="item flex-column-center-center">
+								<image class="pic" mode="aspectFill" src="http://oss.littlehotspot.com/WeChat/resource/default.jpg"></image>
+								<view class="fee theme-font5">¥10</view>
+							</view>
+							<view class="item flex-column-center-center">
+								<image class="pic" mode="aspectFill" src="http://oss.littlehotspot.com/WeChat/resource/default.jpg"></image>
+								<view class="fee theme-font5">¥2</view>
+							</view>
+							<view class="item flex-column-center-center">
+								<image class="pic" mode="aspectFill" src="http://oss.littlehotspot.com/WeChat/resource/default.jpg"></image>
+								<view class="fee theme-font5">¥10</view>
+							</view>
+						</view>
+					</view>
+				</view>
+				<input class="display_hide" name="box_mac" value="{{box_mac}}"></input>
+				<!-- <button class="theme-button-red" form-type="submit" type="submit">提交</button> -->
+			</scroll-view>
+			<button class="theme-button-red" form-type="submit" type="submit">提交</button>
+		</form>
+	</view>
+</view>
