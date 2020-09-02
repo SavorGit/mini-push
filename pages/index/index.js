@@ -903,7 +903,8 @@ Page({
       app.scanQrcode(pageid);
     }else {
       wx.navigateTo({
-        url: '/pages/hotel/waiter_evaluate_h5?openid='+openid+'&box_id='+box_id,
+        //url: '/pages/hotel/waiter_evaluate_h5?openid='+openid+'&box_id='+box_id,
+        url:'/pages/hotel/comment/index?openid='+openid+'&box_id='+box_id
       });
     } 
   },
