@@ -48,7 +48,8 @@ Page({
     is_open_popcomment:0,
     star_list:[{'lev':1,'is_select':true},{'lev':2,'is_select':true},{'lev':3,'is_select':true},{'lev':4,'is_select':true},{'lev':5,'is_select':true}],
     comment_str:'',
-    tab:'bestow'
+    is_reward:'1',
+    comment_disable:false,
   },
 
   /**
@@ -61,42 +62,6 @@ Page({
     //var box_mac = that.data.boxShow
     //that.getAdspositionList(box_mac);
       
-  },
-  //是否显示活动
-  isShowAct:function(openid) {
-    var that = this;
-    var goods_info = wx.getStorageSync('savor_goods_info');
-    if (goods_info == '' || typeof (goods_info) == 'undefined') {
-      
-    } else {
-      var goods_id = goods_info.goods_id;
-      var goods_box_mac = goods_info.goods_box_mac;
-      var uid = goods_info.uid;
-      that.setData({
-        goods_id: goods_id,
-        goods_box_mac: goods_box_mac,
-        uid: uid,
-      })
-      utils.PostRequest(api_url + '/Smallsale/goods/getdetail', {
-        goods_id: goods_id,
-        uid: uid,
-        openid: openid
-      }, (data, headers, cookies, errMsg, statusCode) => {
-        if (data.result.jd_url == '') {
-          var is_jd = false;
-        } else {
-          is_jd = true;
-        }
-        that.setData({
-          jd_url: data.result.jd_url,
-          goods_info: data.result,
-          showActgoods: true,
-          showButton4JD: is_jd,
-          showButton4Favorites: is_jd
-        });
-      });
-
-    }
   },
   
   getHotplaylist:function(){//获取热播内容
@@ -700,7 +665,7 @@ Page({
         openid: app.globalData.openid
       })
       openid = app.globalData.openid;
-      that.isShowAct(openid);
+      
       utils.PostRequest(api_v_url + '/index/isHaveCallBox', {
         openid: openid,
         pop_eval:1
@@ -713,6 +678,7 @@ Page({
               staff_user_info:data.result.staff_user_info,
               tags:data.result.tags,
               comment_str:'',
+              reward_list:data.result.reward_list
   
             })
           }
@@ -770,7 +736,7 @@ Page({
             openid: openid
           })
           openid = openid;
-          that.isShowAct(openid);
+          
           utils.PostRequest(api_v_url + '/index/isHaveCallBox', {
             openid: openid,
             pop_eval:1
@@ -785,6 +751,7 @@ Page({
                   staff_user_info:data.result.staff_user_info,
                   tags:data.result.tags,
                   comment_str:'',
+                  reward_list:data.result.reward_list
                 })
               }
               
@@ -904,7 +871,7 @@ Page({
     }else {
       wx.navigateTo({
         //url: '/pages/hotel/waiter_evaluate_h5?openid='+openid+'&box_id='+box_id,
-        url:'/pages/hotel/comment/index?openid='+openid+'&box_id='+box_id
+        url:'/pages/hotel/comment/index?openid='+openid+'&box_mac='+box_mac
       });
     } 
   },
@@ -992,6 +959,48 @@ Page({
     
     this.setData({comment_str:comment_str})
   },
+  subComment:function(openid,score,comment_str,staff_id,box_mac){
+    var that = this;
+    utils.PostRequest(api_v_url + '/Comment/subComment', {
+      openid: openid,
+      score:score,
+      content:comment_str,
+      staff_id :staff_id,
+      box_mac:box_mac
+    }, (data, headers, cookies, errMsg, statusCode) => {
+      that.setData({is_open_popcomment:0,comment_disable:false})
+      app.showToast('感谢您的支持！',2000,'success')
+      var forscreen_id = (new Date()).valueOf();
+      that.recordForscreenLog(forscreen_id,openid,box_mac,52);
+    })
+  },
+  payReward:function(openid,score,comment_str,staff_id,box_mac,reward_money){
+    var that = this;
+    utils.PostRequest(api_v_url + '/aa/bb', {
+      openid: openid,
+      reward_money:reward_money,
+    }, (data, headers, cookies, errMsg, statusCode) => {
+      wx.requestPayment({
+        'timeStamp': data.result.payinfo.timeStamp,
+        'nonceStr': data.result.payinfo.nonceStr,
+        'package': data.result.payinfo.package,
+        'signType': 'MD5',
+        'paySign': data.result.payinfo.paySign,
+        success(res) {
+          that.subComment(openid,score,comment_str,staff_id,box_mac) 
+        },
+        fail(res) {
+          if (res.errMsg == "requestPayment:fail cancel") {
+            app.showToast('支付取消')
+            
+          } else {
+            app.showToast('支付失败')
+          }
+          that.setData({comment_disable:false})
+        }
+      })
+    })
+  },
   submitComment:function(e){
     console.log(e);
     //return false;
@@ -1013,18 +1022,27 @@ Page({
         score  +=1;
       }
     }
-    utils.PostRequest(api_v_url + '/Comment/subComment', {
-      openid: openid,
-      score:score,
-      content:comment_str,
-      staff_id :staff_user_info.staff_id,
-      box_mac:box_mac
-    }, (data, headers, cookies, errMsg, statusCode) => {
-      that.setData({is_open_popcomment:0})
-      app.showToast('感谢您的评价！')
-      var forscreen_id = (new Date()).valueOf();
-      that.recordForscreenLog(forscreen_id,openid,box_mac,52);
-    })
+    var is_reward = that.data.is_reward;
+    
+    if(is_reward==1){//打赏
+      var reward_money = 0;
+      var reward_list = that.data.reward_list;
+      for(let i in reward_list){
+        if(reward_list[i].is_select==1){
+          reward_money = reward_list[i].reward_money;
+          break;
+        }
+      }
+      if(reward_money==0){
+        app.showToast('请选择打赏金额');
+        return false;
+      }
+      that.setData({comment_disable:ture})
+      that.payReward(openid,score,comment_str,staff_user_info.staff_id,box_mac,reward_money);
+    }else {//不打赏
+      that.subComment(openid,score,comment_str,staff_user_info.staff_id,box_mac)
+    }
+    
   },
   recordForscreenLog:function(forscreen_id,openid,box_mac,action=0){
 
@@ -1040,7 +1058,7 @@ Page({
 
     }, (data, headers, cookies, errMsg, statusCode) => {
       
-    })
+    },re => { }, { isShowLoading: false })
     
   },
   gotoActivity:function(e){
@@ -1066,20 +1084,26 @@ Page({
       }
     }
   },
-  testone:function(){
-    var user_info = wx.getStorageSync("savor_user_info");
-    var openid = user_info.openid;
-    wx.navigateTo({
-      url: '/games/pages/activity/din_dash?openid='+openid+'&box_mac='+box_mac+'&is_share=0',
-    })
+  //选择打赏金额
+  selectReward:function(e){
+    var reward_list = this.data.reward_list;
+    var keys = e.currentTarget.dataset.keys;
+    for(let i in reward_list){
+      if(reward_list[i].is_select==1){
+        reward_list[i].is_select = 0;
+      }
+      if(i==keys){
+        reward_list[i].is_select = 1;
+      }
+    }
+    this.setData({reward_list:reward_list});
   },
-
-  // 选项卡选择
+  // 打赏选项卡选择
   showTab: function (e) {
     let self = this;
-    let tabType = e.currentTarget.dataset.tab;
+    let is_reward = e.currentTarget.dataset.is_reward;
     self.setData({
-      tab: tabType
+      is_reward: is_reward
     });
   },
 })

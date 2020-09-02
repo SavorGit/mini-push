@@ -44,12 +44,12 @@
 					<view class="title-bar flex-row-center-space_between">
 						<view class="title">对服务员很满意，要打个赏吗？</view>
 						<view class="tab-bar flex-row-center-center">
-							<view class="tab{{tab=='bestow'?' selected':''}}" data-tab="bestow" bindtap="showTab">打赏</view>
-							<view class="tab{{tab=='none'?' selected':''}}" data-tab="none" bindtap="showTab">不打赏</view>
+							<view class="tab{{is_reward=='1'?' selected':''}}" data-is_reward="1" bindtap="showTab">打赏</view>
+							<view class="tab{{is_reward=='0'?' selected':''}}" data-is_reward="0" bindtap="showTab">不打赏</view>
 						</view>
 					</view>
 					<view class="body">
-						<view wx:if="{{tab=='bestow'}}" class="bestow tab-body">
+						<view wx:if="{{is_reward=='1'}}" class="bestow tab-body">
 							<view class="item flex-column-center-center selected">
 								<image class="pic" mode="aspectFill" src="http://oss.littlehotspot.com/WeChat/resource/default.jpg"></image>
 								<view class="fee theme-font5">¥2</view>
@@ -80,7 +80,7 @@
 				<input class="display_hide" name="box_mac" value="{{box_mac}}"></input>
 				<!-- <button class="theme-button-red" form-type="submit" type="submit">提交</button> -->
 			</scroll-view>
-			<button class="theme-button-red" form-type="submit" type="submit">提交</button>
+			<button class="theme-button-red" form-type="submit" type="submit" disabled="{{comment_disable}}">提交</button>
 		</form>
 	</view>
 </view>

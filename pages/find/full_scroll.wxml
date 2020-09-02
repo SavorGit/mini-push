@@ -87,7 +87,7 @@
               </view>
               <view class="right-btn-group flex-column-center-flex_start fadeInRight">
                 <image webp="true" class="user-hader-img" src="{{bean.avatarUrl == '' ? '/images/imgs/default-user.png' : bean.avatarUrl}}"></image>
-                <cover-image wx:if="{{bean.is_collect=='1'}}" class="btn-favorite" src="/images/imgs/FF757D_Favorite.png" data-id="{{bean.id}}" data-type="{{bean.type}}" data-forscreen_id="{{bean.forscreen_id}}" data-index="{{index}}" bindtap="cancCollect"></cover-image>
+                <cover-image wx:if="{{bean.is_collect=='1'}}" class="btn-favorite" src="/images/icon2/FF757D_Favorite.png" data-id="{{bean.id}}" data-type="{{bean.type}}" data-forscreen_id="{{bean.forscreen_id}}" data-index="{{index}}" bindtap="cancCollect"></cover-image>
                 <cover-image wx:else class="btn-favorite" src="/images/imgs/FFFFFF_Favorite.png" data-id="{{bean.id}}" data-type="{{bean.type}}" data-forscreen_id="{{bean.forscreen_id}}" data-index="{{index}}" bindtap="onCollect"></cover-image>
                 <label>{{bean.collect_num}}</label>
                 <cover-view class="btn-share">
