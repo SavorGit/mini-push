@@ -336,7 +336,7 @@
 
 .waiter-evaluate-window {
   width: 690rpx;
-  height: 1000rpx;
+  height: 1050rpx;
   border-radius: 10rpx;
 }
 
@@ -344,6 +344,13 @@
   width: calc(100% - 40rpx);
   height: 50rpx;
   padding: 20rpx 20rpx 10rpx;
+}
+
+.waiter-evaluate-window>.title-bar>.icon {
+  width: 50rpx;
+  height: 50rpx;
+  /* background-color: #f29b76; */
+  border-radius: 50%;
 }
 
 .waiter-evaluate-window>.title-bar>.fa {
@@ -453,7 +460,7 @@
 }
 
 .waiter-evaluate-window>.document .body .panel.bestow {
-  height: 200rpx;
+  height: 250rpx;
   margin-top: 10rpx;
 }
 
@@ -469,12 +476,20 @@
 }
 
 .waiter-evaluate-window>.document .body .panel.bestow>.title-bar>.tab-bar>.tab {
-  width: 120rpx;
+  width: 106rpx;
   height: 56rpx;
   line-height: 56rpx;
   text-align: center;
   font-size: 26rpx;
   border: 2rpx solid #F55555;
+}
+
+.waiter-evaluate-window>.document .body .panel.bestow>.title-bar>.tab-bar>.tab.reward {
+  border-radius: 28rpx 0 0 28rpx;
+}
+
+.waiter-evaluate-window>.document .body .panel.bestow>.title-bar>.tab-bar>.tab.none {
+  border-radius: 0 28rpx 28rpx 0;
 }
 
 .waiter-evaluate-window>.document .body .panel.bestow>.title-bar>.tab-bar>.tab.selected {
@@ -483,8 +498,8 @@
 }
 
 .waiter-evaluate-window>.document .body .panel.bestow>.body {
-  width: calc(100 - 20rpx);
-  height: 110rpx;
+  width: calc(100% - 20rpx);
+  height: calc(100% - 90rpx);
   padding: 10rpx 10rpx;
 }
 
@@ -493,12 +508,13 @@
 }
 
 .waiter-evaluate-window>.document .body .panel.bestow>.body>.tab-body>.item {
-  width: 90rpx;
-  height: 100rpx;
+  width: 116rpx;
+  height: 146rpx;
   margin-top: 10rpx;
   margin-left: 10rpx;
+  margin-right: 15rpx;
   float: left;
-  border: 2rpx dashed #F55555;
+  border: 2rpx dashed #666666;
 }
 
 .waiter-evaluate-window>.document .body .panel.bestow>.body>.tab-body>.item>.pic {
@@ -512,7 +528,9 @@
 }
 
 .waiter-evaluate-window>.document .body .panel.bestow>.body>.tab-body>.item.selected {
-  border: 2rpx solid #F55555;
+  width: 112rpx;
+  height: 142rpx;
+  border: 4rpx solid #F55555;
 }
 
 .waiter-evaluate-window>.document .body textarea {
