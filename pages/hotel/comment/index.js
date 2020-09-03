@@ -40,7 +40,13 @@ Page({
       box_id: box_id,
       openid:openid,
     }, (data, headers, cookies, errMsg, statusCode) => {
+      var staff_user_info = data.result.staff_user_info;
+      var is_reward = that.data.is_reward;
+        if(staff_user_info.staff_id==0){
+          is_reward = 0;
+        }
       that.setData({
+        is_reward:is_reward,
         staff_user_info:data.result.staff_user_info,
         tags:data.result.tags,
         comment_str:'',
