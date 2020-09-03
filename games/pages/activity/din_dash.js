@@ -129,7 +129,8 @@ Page({
             'iv': rets.iv,
             'encryptedData': rets.encryptedData
           }, (data, headers, cookies, errMsg, statusCode) => {
-            that.getActivityInfo();
+            var is_share = that.data.is_share
+            that.getActivityInfo(is_share);
             wx.setStorage({
               key: 'savor_user_info',
               data: data.result,
