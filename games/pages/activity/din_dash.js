@@ -84,9 +84,12 @@ Page({
         act_info: data.result,
         status:status
       })
+      var forscreen_id = (new Date()).valueOf();
       if(is_share==1){
-        var forscreen_id = (new Date()).valueOf();
+        
         that.recordForscreenLog(forscreen_id,openid,box_mac,51);
+      }else {
+        that.recordForscreenLog(forscreen_id,openid,box_mac,53);
       }
       
     },re=> {
