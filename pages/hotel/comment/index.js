@@ -7,6 +7,7 @@ var mta = require('../../../utils/mta_analysis.js')
 const app = getApp()
 var openid;
 var box_mac;
+var box_id;
 var api_v_url = app.globalData.api_v_url;
 Page({
 
@@ -29,27 +30,22 @@ Page({
     var that = this;
     openid = options.openid;
     box_mac = options.box_mac
+    box_id  = options.box_id
     that.setData({openid:openid,box_mac:box_mac})
-    that.isHaveCallBox(openid)
+    that.commentConfig(openid)
   },
-  isHaveCallBox:function(){
+  commentConfig:function(){
     var that = this;
-    utils.PostRequest(api_v_url + '/index/isHaveCallBox', {
-      openid: openid,
-      pop_eval:1
+    utils.PostRequest(api_v_url + '/index/getConfig', {
+      box_id: box_id,
+      openid:openid,
     }, (data, headers, cookies, errMsg, statusCode) => {
-      if (data.result.is_have == 1) {//如果已连接盒子
-        
-        that.setData({
-          
-          staff_user_info:data.result.staff_user_info,
-          tags:data.result.tags,
-          comment_str:'',
-          reward_list:data.result.reward_list
-
-        })
-        
-      }
+      that.setData({
+        staff_user_info:data.result.staff_user_info,
+        tags:data.result.tags,
+        comment_str:'',
+        reward_list:data.result.reward_money
+      })
     })
   },
   subStar:function(e){
@@ -126,17 +122,19 @@ Page({
       
     })
   },
-  payReward:function(openid,score,comment_str,staff_id,box_mac,reward_money){
+  payReward:function(openid,score,comment_str,staff_id,box_mac,reward_id){
     var that = this;
-    utils.PostRequest(api_v_url + '/aa/bb', {
+    utils.PostRequest(api_v_url + '/comment/reward', {
+      box_mac:box_mac,
+      reward_id:reward_id,
       openid: openid,
-      reward_money:reward_money,
+      staff_id:staff_id,
     }, (data, headers, cookies, errMsg, statusCode) => {
       wx.requestPayment({
         'timeStamp': data.result.payinfo.timeStamp,
         'nonceStr': data.result.payinfo.nonceStr,
         'package': data.result.payinfo.package,
-        'signType': 'MD5',
+        'signType': data.result.payinfo.signType,
         'paySign': data.result.payinfo.paySign,
         success(res) {
           that.subComment(openid,score,comment_str,staff_id,box_mac) 
@@ -150,6 +148,8 @@ Page({
           }
           that.setData({comment_disable:false})
         }
+      },re => { 
+        that.setData({comment_disable:false})
       })
     })
   },
@@ -177,20 +177,20 @@ Page({
     var is_reward = that.data.is_reward;
     
     if(is_reward==1){//打赏
-      var reward_money = 0;
+      var reward_id = 0;
       var reward_list = that.data.reward_list;
       for(let i in reward_list){
-        if(reward_list[i].is_select==1){
-          reward_money = reward_list[i].reward_money;
+        if(reward_list[i].selected===true){
+          reward_id = reward_list[i].id;
           break;
         }
       }
-      if(reward_money==0){
+      if(reward_id==0){
         app.showToast('请选择打赏金额');
         return false;
       }
-      that.setData({comment_disable:ture})
-      that.payReward(openid,score,comment_str,staff_user_info.staff_id,box_mac,reward_money);
+      that.setData({comment_disable:true})
+      that.payReward(openid,score,comment_str,staff_user_info.staff_id,box_mac,reward_id);
     }else {//不打赏
       that.subComment(openid,score,comment_str,staff_user_info.staff_id,box_mac)
     }
@@ -212,6 +212,20 @@ Page({
       
     },re => { }, { isShowLoading: false })
     
+  },
+  //选择打赏金额
+  selectReward:function(e){
+    var reward_list = this.data.reward_list;
+    var keys = e.currentTarget.dataset.keys;
+    for(let i in reward_list){
+      if(reward_list[i].selected===true){
+        reward_list[i].selected = false;
+      }
+      if(i==keys){
+        reward_list[i].selected = true;
+      }
+    }
+    this.setData({reward_list:reward_list});
   },
   /**
    * 生命周期函数--监听页面初次渲染完成

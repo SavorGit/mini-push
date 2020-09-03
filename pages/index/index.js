@@ -92,16 +92,26 @@ Page({
         });
       },re => { }, { isShowLoading: false });
   },
-  is_view_eval_waiter:function (box_id){
+  is_view_eval_waiter:function (openid,box_id){
     var that = this;
-    utils.PostRequest(api_url + '/Smallapp4/index/getConfig', {
+    utils.PostRequest(api_v_url + '/index/getConfig', {
       box_id: box_id,
+      openid:openid,
     }, (data, headers, cookies, errMsg, statusCode) => {
       var is_view_eval_waiter = data.result.is_comment;
-      that.setData({
-        box_id:box_id,
-        is_view_eval_waiter: is_view_eval_waiter
-      })
+      that.setData({is_view_eval_waiter: is_view_eval_waiter})
+      var is_closeComment = wx.getStorageSync(app.globalData.cache_key+'is_closeComment');
+      if(is_closeComment!=1){
+        that.setData({
+          box_id:box_id,
+          is_open_popcomment:data.result.is_open_popcomment,
+          staff_user_info:data.result.staff_user_info,
+          tags:data.result.tags,
+          comment_str:'',
+          reward_list:data.result.reward_money
+        })
+      } 
+      
     },re => { }, { isShowLoading: false });
   },
   
@@ -653,7 +663,7 @@ Page({
   onReady: function () {
 
   },
-
+  
   /**
    * 生命周期函数--监听页面显示
    */
@@ -668,27 +678,15 @@ Page({
       
       utils.PostRequest(api_v_url + '/index/isHaveCallBox', {
         openid: openid,
-        pop_eval:1
       }, (data, headers, cookies, errMsg, statusCode) => {
         if (data.result.is_have == 1) {//如果已连接盒子
-          var is_closeComment = wx.getStorageSync(app.globalData.cache_key+'is_closeComment');
-          if(is_closeComment!=1){
-            that.setData({
-              is_open_popcomment:data.result.is_open_popcomment,
-              staff_user_info:data.result.staff_user_info,
-              tags:data.result.tags,
-              comment_str:'',
-              reward_list:data.result.reward_list
-  
-            })
-          }
           
           var serial_number = app.globalData.serial_number;
           var head_serial_number = serial_number.substring(0,2);
           if(head_serial_number==app.globalData.not_link_box_pre){
             app.globalData.serial_number = app.globalData.have_link_box_pre+openid+'_'+(new Date()).valueOf();
           }
-          that.is_view_eval_waiter(data.result.box_id);
+          that.is_view_eval_waiter(openid,data.result.box_id);
           app.linkHotelWifi(data.result, that);
           that.getAdspositionList(data.result.box_id)
           app.globalData.hotel_info = data.result;
@@ -739,21 +737,10 @@ Page({
           
           utils.PostRequest(api_v_url + '/index/isHaveCallBox', {
             openid: openid,
-            pop_eval:1
           
           }, (data, headers, cookies, errMsg, statusCode) => {
             var is_have = data.result.is_have;
             if (is_have == 1) {
-              var is_closeComment = wx.getStorageSync(app.globalData.cache_key+'is_closeComment');
-              if(is_closeComment!=1){
-                that.setData({
-                  is_open_popcomment:data.result.is_open_popcomment,
-                  staff_user_info:data.result.staff_user_info,
-                  tags:data.result.tags,
-                  comment_str:'',
-                  reward_list:data.result.reward_list
-                })
-              }
               
               var serial_number = app.globalData.serial_number;
               var head_serial_number = serial_number.substring(0,2);
@@ -761,7 +748,7 @@ Page({
                 app.globalData.serial_number = app.globalData.have_link_box_pre+openid+'_'+(new Date()).valueOf();
               }
               var box_id = data.result.box_id;
-              that.is_view_eval_waiter(box_id);
+              that.is_view_eval_waiter(openid,box_id);
               app.linkHotelWifi(data.result, that);
               that.getAdspositionList(data.result.box_id)
               app.globalData.hotel_info = data.result;
@@ -871,7 +858,7 @@ Page({
     }else {
       wx.navigateTo({
         //url: '/pages/hotel/waiter_evaluate_h5?openid='+openid+'&box_id='+box_id,
-        url:'/pages/hotel/comment/index?openid='+openid+'&box_mac='+box_mac
+        url:'/pages/hotel/comment/index?openid='+openid+'&box_mac='+box_mac+'&box_id='+box_id,
       });
     } 
   },
@@ -974,17 +961,19 @@ Page({
       that.recordForscreenLog(forscreen_id,openid,box_mac,52);
     })
   },
-  payReward:function(openid,score,comment_str,staff_id,box_mac,reward_money){
+  payReward:function(openid,score,comment_str,staff_id,box_mac,reward_id){
     var that = this;
-    utils.PostRequest(api_v_url + '/aa/bb', {
+    utils.PostRequest(api_v_url + '/comment/reward', {
+      box_mac:box_mac,
+      reward_id:reward_id,
       openid: openid,
-      reward_money:reward_money,
+      staff_id:staff_id,
     }, (data, headers, cookies, errMsg, statusCode) => {
       wx.requestPayment({
         'timeStamp': data.result.payinfo.timeStamp,
         'nonceStr': data.result.payinfo.nonceStr,
         'package': data.result.payinfo.package,
-        'signType': 'MD5',
+        'signType': data.result.payinfo.signType,
         'paySign': data.result.payinfo.paySign,
         success(res) {
           that.subComment(openid,score,comment_str,staff_id,box_mac) 
@@ -999,6 +988,8 @@ Page({
           that.setData({comment_disable:false})
         }
       })
+    },re => { 
+      that.setData({comment_disable:false})
     })
   },
   submitComment:function(e){
@@ -1025,20 +1016,20 @@ Page({
     var is_reward = that.data.is_reward;
     
     if(is_reward==1){//打赏
-      var reward_money = 0;
+      var reward_id = 0;
       var reward_list = that.data.reward_list;
       for(let i in reward_list){
-        if(reward_list[i].is_select==1){
-          reward_money = reward_list[i].reward_money;
+        if(reward_list[i].selected===true){
+          reward_id = reward_list[i].id;
           break;
         }
       }
-      if(reward_money==0){
+      if(reward_id==0){
         app.showToast('请选择打赏金额');
         return false;
       }
-      that.setData({comment_disable:ture})
-      that.payReward(openid,score,comment_str,staff_user_info.staff_id,box_mac,reward_money);
+      that.setData({comment_disable:true})
+      that.payReward(openid,score,comment_str,staff_user_info.staff_id,box_mac,reward_id);
     }else {//不打赏
       that.subComment(openid,score,comment_str,staff_user_info.staff_id,box_mac)
     }
@@ -1089,11 +1080,11 @@ Page({
     var reward_list = this.data.reward_list;
     var keys = e.currentTarget.dataset.keys;
     for(let i in reward_list){
-      if(reward_list[i].is_select==1){
-        reward_list[i].is_select = 0;
+      if(reward_list[i].selected===true){
+        reward_list[i].selected = false;
       }
       if(i==keys){
-        reward_list[i].is_select = 1;
+        reward_list[i].selected = true;
       }
     }
     this.setData({reward_list:reward_list});
