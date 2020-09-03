@@ -50,6 +50,7 @@ Page({
     comment_str:'',
     is_reward:'1',
     comment_disable:false,
+    reward_list:[],
   },
 
   /**
@@ -107,14 +108,19 @@ Page({
         if(staff_user_info.staff_id==0){
           is_reward = 0;
         }
+        var comment_str = that.data.comment_str;
+        var reward_list = that.data.reward_list;
+        if(reward_list.length==0){
+          reward_list = data.result.reward_money
+        }
         that.setData({
           is_reward:is_reward,
           box_id:box_id,
           is_open_popcomment:data.result.is_open_popcomment,
           staff_user_info:data.result.staff_user_info,
           tags:data.result.tags,
-          comment_str:'',
-          reward_list:data.result.reward_money
+          comment_str:comment_str,
+          reward_list:reward_list
         })
       } 
       
