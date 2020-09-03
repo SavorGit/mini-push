@@ -41,11 +41,13 @@ Page({
       openid:openid,
     }, (data, headers, cookies, errMsg, statusCode) => {
       var staff_user_info = data.result.staff_user_info;
+      var is_open_reward = data.result.is_open_reward;
       var is_reward = that.data.is_reward;
-        if(staff_user_info.staff_id==0){
+        if(staff_user_info.staff_id==0 || is_open_reward==0){
           is_reward = 0;
         }
       that.setData({
+        is_open_reward:is_open_reward,
         is_reward:is_reward,
         staff_user_info:data.result.staff_user_info,
         tags:data.result.tags,

@@ -103,9 +103,10 @@ Page({
       that.setData({is_view_eval_waiter: is_view_eval_waiter})
       var is_closeComment = wx.getStorageSync(app.globalData.cache_key+'is_closeComment');
       var staff_user_info = data.result.staff_user_info;
+      var is_open_reward = data.result.is_open_reward;
       if(is_closeComment!=1){
         var is_reward = that.data.is_reward;
-        if(staff_user_info.staff_id==0){
+        if(staff_user_info.staff_id==0 || is_open_reward==0){
           is_reward = 0;
         }
         var comment_str = that.data.comment_str;
@@ -115,6 +116,7 @@ Page({
         }
         that.setData({
           is_reward:is_reward,
+          is_open_reward:is_open_reward,
           box_id:box_id,
           is_open_popcomment:data.result.is_open_popcomment,
           staff_user_info:data.result.staff_user_info,

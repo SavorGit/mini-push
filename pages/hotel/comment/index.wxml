@@ -40,7 +40,7 @@
 					</view>
 					<textarea class="theme-textarea" bindinput="editCommnet" placeholder="您的建议是我们前进的动力...（300字以内）" value="{{comment_str}}" maxlength='300'></textarea>
 				</view>
-				<view class="bestow panel theme-panel" wx:if="{{staff_user_info.staff_id>0}}">
+				<view class="bestow panel theme-panel" wx:if="{{staff_user_info.staff_id>0 && is_open_reward==1}}">
 					<view class="title-bar flex-row-center-space_between">
 						<view class="title">对服务很满意，要打个赏吗？</view>
 						<view class="tab-bar flex-row-center-center">
