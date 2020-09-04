@@ -96,12 +96,12 @@
 				</button>
 
 			</form>
-			<view wx:if="{{is_test==1}}">
-				<button class="theme-font2" bindtap='testForscreen' data-type="2" data-boxmac="{{box_mac}}" data-openid="{{openid}}">
+			<view >
+				<button class="theme-font2" bindtap='testVoice' data-type="2" data-boxmac="{{box_mac}}" data-openid="{{openid}}">
 					<view class="icon flex-column-center-center pic">
 						<image src='/images/icon2/FFFFFF_picture.png'></image>
 					</view>
-					<label>模拟照片投屏</label>
+					<label>同声传译</label>
 				</button>
 
 			</view>

@@ -843,6 +843,11 @@ Page({
       app.showToast('投屏成功')
     })
   },
+  testVoice:function(e){
+    wx.navigateTo({
+      url: '/pages/voice/index',
+    })
+  },
   /**
    * 生命周期函数--监听页面隐藏
    */

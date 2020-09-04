@@ -51,7 +51,9 @@
     "pages/thematic/money_blessing/grab_list",
     "pages/thematic/money_blessing/pay_result",
     "pages/thematic/money_blessing/receive_h5",
-    "pages/thematic/money_blessing/receive_result"
+    "pages/thematic/money_blessing/receive_result",
+    "pages/voice/index",
+    "pages/voice/edit"
   ],
   "subpackages": [
     {
@@ -150,5 +152,11 @@
     "wxcd10170e55a1f55d",
     "wx13e41a437b8a1d2e"
   ],
+  "plugins": {
+    "WechatSI": {
+      "version": "0.3.4",
+      "provider": "wx069ba97219f66d99"
+    }
+  },
   "sitemapLocation": "sitemap.json"
 }
