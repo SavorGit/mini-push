@@ -26,7 +26,7 @@
 					<view class="row pic center notice-btn flex-column-center-center">
 						<view class="btn theme-button-orange" bindtap="prizeNotice">开启中奖结果通知</view>
 						<view class="flex-row-center-center">
-							<image style="width:44rpx;height:64rpx;" mode="aspectFull" src="/images/imgs/shouzhi.jpg"></image>
+							<image style="width:64rpx;height:64rpx;" mode="aspectFull" src="/images/imgs/shouzhi.png"></image>
 							<view style="font-size:24rpx;" class="theme-font5">点击按钮可以接收通知哦</view>
 						</view>
 					</view>

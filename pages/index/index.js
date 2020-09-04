@@ -48,7 +48,9 @@ Page({
     is_open_popcomment:0,
     star_list:[{'lev':1,'is_select':true},{'lev':2,'is_select':true},{'lev':3,'is_select':true},{'lev':4,'is_select':true},{'lev':5,'is_select':true}],
     comment_str:'',
-
+    is_reward:'1',
+    comment_disable:false,
+    reward_list:[],
   },
 
   /**
@@ -61,42 +63,6 @@ Page({
     //var box_mac = that.data.boxShow
     //that.getAdspositionList(box_mac);
       
-  },
-  //是否显示活动
-  isShowAct:function(openid) {
-    var that = this;
-    var goods_info = wx.getStorageSync('savor_goods_info');
-    if (goods_info == '' || typeof (goods_info) == 'undefined') {
-      
-    } else {
-      var goods_id = goods_info.goods_id;
-      var goods_box_mac = goods_info.goods_box_mac;
-      var uid = goods_info.uid;
-      that.setData({
-        goods_id: goods_id,
-        goods_box_mac: goods_box_mac,
-        uid: uid,
-      })
-      utils.PostRequest(api_url + '/Smallsale/goods/getdetail', {
-        goods_id: goods_id,
-        uid: uid,
-        openid: openid
-      }, (data, headers, cookies, errMsg, statusCode) => {
-        if (data.result.jd_url == '') {
-          var is_jd = false;
-        } else {
-          is_jd = true;
-        }
-        that.setData({
-          jd_url: data.result.jd_url,
-          goods_info: data.result,
-          showActgoods: true,
-          showButton4JD: is_jd,
-          showButton4Favorites: is_jd
-        });
-      });
-
-    }
   },
   
   getHotplaylist:function(){//获取热播内容
@@ -127,16 +93,39 @@ Page({
         });
       },re => { }, { isShowLoading: false });
   },
-  is_view_eval_waiter:function (box_id){
+  is_view_eval_waiter:function (openid,box_id){
     var that = this;
-    utils.PostRequest(api_url + '/Smallapp4/index/getConfig', {
+    utils.PostRequest(api_v_url + '/index/getConfig', {
       box_id: box_id,
+      openid:openid,
     }, (data, headers, cookies, errMsg, statusCode) => {
       var is_view_eval_waiter = data.result.is_comment;
-      that.setData({
-        box_id:box_id,
-        is_view_eval_waiter: is_view_eval_waiter
-      })
+      that.setData({is_view_eval_waiter: is_view_eval_waiter})
+      var is_closeComment = wx.getStorageSync(app.globalData.cache_key+'is_closeComment');
+      var staff_user_info = data.result.staff_user_info;
+      var is_open_reward = data.result.is_open_reward;
+      if(is_closeComment!=1){
+        var is_reward = that.data.is_reward;
+        if(staff_user_info.staff_id==0 || is_open_reward==0){
+          is_reward = 0;
+        }
+        var comment_str = that.data.comment_str;
+        var reward_list = that.data.reward_list;
+        if(reward_list.length==0){
+          reward_list = data.result.reward_money
+        }
+        that.setData({
+          is_reward:is_reward,
+          is_open_reward:is_open_reward,
+          box_id:box_id,
+          is_open_popcomment:data.result.is_open_popcomment,
+          staff_user_info:data.result.staff_user_info,
+          tags:data.result.tags,
+          comment_str:comment_str,
+          reward_list:reward_list
+        })
+      } 
+      
     },re => { }, { isShowLoading: false });
   },
   
@@ -688,7 +677,7 @@ Page({
   onReady: function () {
 
   },
-
+  
   /**
    * 生命周期函数--监听页面显示
    */
@@ -700,33 +689,23 @@ Page({
         openid: app.globalData.openid
       })
       openid = app.globalData.openid;
-      that.isShowAct(openid);
+      
       utils.PostRequest(api_v_url + '/index/isHaveCallBox', {
         openid: openid,
-        pop_eval:1
       }, (data, headers, cookies, errMsg, statusCode) => {
         if (data.result.is_have == 1) {//如果已连接盒子
-          var is_closeComment = wx.getStorageSync(app.globalData.cache_key+'is_closeComment');
-          if(is_closeComment!=1){
-            that.setData({
-              is_open_popcomment:data.result.is_open_popcomment,
-              staff_user_info:data.result.staff_user_info,
-              tags:data.result.tags,
-              comment_str:'',
-  
-            })
-          }
           
           var serial_number = app.globalData.serial_number;
           var head_serial_number = serial_number.substring(0,2);
           if(head_serial_number==app.globalData.not_link_box_pre){
             app.globalData.serial_number = app.globalData.have_link_box_pre+openid+'_'+(new Date()).valueOf();
           }
-          that.is_view_eval_waiter(data.result.box_id);
+          that.is_view_eval_waiter(openid,data.result.box_id);
           app.linkHotelWifi(data.result, that);
           that.getAdspositionList(data.result.box_id)
           app.globalData.hotel_info = data.result;
           that.setData({
+            box_id:data.result.box_id,
             is_test:data.result.is_test,
             is_link: 1,
             link_type:data.result.forscreen_type,
@@ -770,23 +749,13 @@ Page({
             openid: openid
           })
           openid = openid;
-          that.isShowAct(openid);
+          
           utils.PostRequest(api_v_url + '/index/isHaveCallBox', {
             openid: openid,
-            pop_eval:1
           
           }, (data, headers, cookies, errMsg, statusCode) => {
             var is_have = data.result.is_have;
             if (is_have == 1) {
-              var is_closeComment = wx.getStorageSync(app.globalData.cache_key+'is_closeComment');
-              if(is_closeComment!=1){
-                that.setData({
-                  is_open_popcomment:data.result.is_open_popcomment,
-                  staff_user_info:data.result.staff_user_info,
-                  tags:data.result.tags,
-                  comment_str:'',
-                })
-              }
               
               var serial_number = app.globalData.serial_number;
               var head_serial_number = serial_number.substring(0,2);
@@ -794,11 +763,12 @@ Page({
                 app.globalData.serial_number = app.globalData.have_link_box_pre+openid+'_'+(new Date()).valueOf();
               }
               var box_id = data.result.box_id;
-              that.is_view_eval_waiter(box_id);
+              that.is_view_eval_waiter(openid,box_id);
               app.linkHotelWifi(data.result, that);
               that.getAdspositionList(data.result.box_id)
               app.globalData.hotel_info = data.result;
               that.setData({
+                box_id:data.result.box_id,
                 is_test:data.result.is_test,
                 is_link: 1,
                 hotel_room: data.result.hotel_name + data.result.room_name,
@@ -903,7 +873,8 @@ Page({
       app.scanQrcode(pageid);
     }else {
       wx.navigateTo({
-        url: '/pages/hotel/waiter_evaluate_h5?openid='+openid+'&box_id='+box_id,
+        //url: '/pages/hotel/waiter_evaluate_h5?openid='+openid+'&box_id='+box_id,
+        url:'/pages/hotel/comment/index?openid='+openid+'&box_mac='+box_mac+'&box_id='+box_id,
       });
     } 
   },
@@ -991,6 +962,52 @@ Page({
     
     this.setData({comment_str:comment_str})
   },
+  subComment:function(openid,score,comment_str,staff_id,box_mac){
+    var that = this;
+    utils.PostRequest(api_v_url + '/Comment/subComment', {
+      openid: openid,
+      score:score,
+      content:comment_str,
+      staff_id :staff_id,
+      box_mac:box_mac
+    }, (data, headers, cookies, errMsg, statusCode) => {
+      that.setData({is_open_popcomment:0,comment_disable:false})
+      app.showToast('感谢您的支持！',2000,'success')
+      var forscreen_id = (new Date()).valueOf();
+      that.recordForscreenLog(forscreen_id,openid,box_mac,52);
+    })
+  },
+  payReward:function(openid,score,comment_str,staff_id,box_mac,reward_id){
+    var that = this;
+    utils.PostRequest(api_v_url + '/comment/reward', {
+      box_mac:box_mac,
+      reward_id:reward_id,
+      openid: openid,
+      staff_id:staff_id,
+    }, (data, headers, cookies, errMsg, statusCode) => {
+      wx.requestPayment({
+        'timeStamp': data.result.payinfo.timeStamp,
+        'nonceStr': data.result.payinfo.nonceStr,
+        'package': data.result.payinfo.package,
+        'signType': data.result.payinfo.signType,
+        'paySign': data.result.payinfo.paySign,
+        success(res) {
+          that.subComment(openid,score,comment_str,staff_id,box_mac) 
+        },
+        fail(res) {
+          if (res.errMsg == "requestPayment:fail cancel") {
+            app.showToast('支付取消')
+            
+          } else {
+            app.showToast('支付失败')
+          }
+          that.setData({comment_disable:false})
+        }
+      })
+    },re => { 
+      that.setData({comment_disable:false})
+    })
+  },
   submitComment:function(e){
     console.log(e);
     //return false;
@@ -1012,18 +1029,27 @@ Page({
         score  +=1;
       }
     }
-    utils.PostRequest(api_v_url + '/Comment/subComment', {
-      openid: openid,
-      score:score,
-      content:comment_str,
-      staff_id :staff_user_info.staff_id,
-      box_mac:box_mac
-    }, (data, headers, cookies, errMsg, statusCode) => {
-      that.setData({is_open_popcomment:0})
-      app.showToast('感谢您的评价！')
-      var forscreen_id = (new Date()).valueOf();
-      that.recordForscreenLog(forscreen_id,openid,box_mac,52);
-    })
+    var is_reward = that.data.is_reward;
+    
+    if(is_reward==1){//打赏
+      var reward_id = 0;
+      var reward_list = that.data.reward_list;
+      for(let i in reward_list){
+        if(reward_list[i].selected===true){
+          reward_id = reward_list[i].id;
+          break;
+        }
+      }
+      if(reward_id==0){
+        app.showToast('请选择打赏金额');
+        return false;
+      }
+      that.setData({comment_disable:true})
+      that.payReward(openid,score,comment_str,staff_user_info.staff_id,box_mac,reward_id);
+    }else {//不打赏
+      that.subComment(openid,score,comment_str,staff_user_info.staff_id,box_mac)
+    }
+    
   },
   recordForscreenLog:function(forscreen_id,openid,box_mac,action=0){
 
@@ -1039,7 +1065,7 @@ Page({
 
     }, (data, headers, cookies, errMsg, statusCode) => {
       
-    })
+    },re => { }, { isShowLoading: false })
     
   },
   gotoActivity:function(e){
@@ -1065,11 +1091,26 @@ Page({
       }
     }
   },
-  testone:function(){
-    var user_info = wx.getStorageSync("savor_user_info");
-    var openid = user_info.openid;
-    wx.navigateTo({
-      url: '/games/pages/activity/din_dash?openid='+openid+'&box_mac='+box_mac+'&is_share=0',
-    })
-  }
+  //选择打赏金额
+  selectReward:function(e){
+    var reward_list = this.data.reward_list;
+    var keys = e.currentTarget.dataset.keys;
+    for(let i in reward_list){
+      if(reward_list[i].selected===true){
+        reward_list[i].selected = false;
+      }
+      if(i==keys){
+        reward_list[i].selected = true;
+      }
+    }
+    this.setData({reward_list:reward_list});
+  },
+  // 打赏选项卡选择
+  showTab: function (e) {
+    let self = this;
+    let is_reward = e.currentTarget.dataset.is_reward;
+    self.setData({
+      is_reward: is_reward
+    });
+  },
 })

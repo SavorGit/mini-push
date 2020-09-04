@@ -218,54 +218,22 @@
 </bottomModal>
 
 
-<!-- 销售页 -->
-<modal show="{{showActgoods}}" width="600rpx" height='750rpx' border-radius="10rpx" title-text='' confirm-text='' cancel-text='' background-color='unset'>
-	<view style="width: 600rpx;height: 560rpx; border-radius: 10rpx; background-color: #FFFFFF;font-size: 24rpx;">
-		<view style="width: 100%;height: 80rpx;padding-left: 60rpx;padding-right: 30rpx;">
-			<label style="width: calc(100% - 122rpx);height: 80rpx;line-height: 80rpx;display: inline-block;font-size: 30rpx; color: #333333;text-align: center;">下单提示</label>
-			<view style="width: 32rpx; height: 80rpx; display: inline-block;" bindtap="closeAct">
-				<label class="fa fa-close fa-lg" style="width: 32rpx; height: 32rpx; color: #666666;"></label>
-			</view>
-		</view>
-		<view class="flex-column-center-start" style="width: 100%;height: calc(100% - 160rpx);color: #666666;">
-			<image style="width: 480rpx;height: 270rpx;" src="{{goods_info.img_url}}"></image>
-			<view class="one-line-overflow" style="width: 480rpx;height: calc(100% - 320rpx);line-height: 3;text-align: center;">{{goods_info.name}}</view>
-			<view class="flex-row-center-center" style="width: 100%;height: 80rpx;border-top: 2rpx solid #ededed;">
-				<label style="width: 70rpx;">数量</label>
-				<view style="width: 40rpx; height: 40rpx;font-size: 30rpx;" bindtap="changeActNums" data-type="1">
-					<label class="fa fa-plus-square-o fa-lg" style="width: 40rpx; height: 40rpx; color: #666666;"></label>
-				</view>
-				<label style="width: 70rpx;text-align: center;">{{goods_nums}}</label>
-				<view style="width: 40rpx; height: 40rpx;font-size: 30rpx;" bindtap="changeActNums" data-type="2">
-					<label class="fa fa-minus-square-o fa-lg" style="width: 40rpx; height: 40rpx; color: #666666;"></label>
-				</view>
-			</view>
-		</view>
-		<view class="flex-row-center-center" style="width: 100%;height: 80rpx;border-top: 2rpx solid #ededed;font-size: 28rpx;">
-			<view style="width: 100%;height: 80rpx;line-height: 80rpx; color: #448ACA; text-align: center;" bindtap="shopBuyGoods" data-goods_id="{{goods_id}}" data-goods_nums="{{goods_nums}}" data-goods_box_mac="{{goods_box_mac}}" data-buy_type="1" data-uid="{{uid}}">店内购买</view>
-			<!-- <view wx:if='{{showButton4JD}}' style="width: 100%;height: 80rpx;line-height: 80rpx; color: #666666; text-align: center;border-left: 2rpx solid #ededed;" bindtap="jdBuy" data-h5_url="{{jd_url}}">京东购买</view> -->
-			<navigator bindtap="tpBuyGoods" data-goods_id="{{goods_id}}" data-goods_nums="{{goods_nums}}" data-goods_box_mac="{{goods_box_mac}}" data-buy_type="2" wx:if='{{showButton4JD}}' style="width: 100%;height: 80rpx;line-height: 80rpx; color: #448ACA; text-align: center;border-left: 2rpx solid #ededed;" target="miniProgram" app-id="{{goods_info.appid}}" path="{{jd_url}}">{{goods_info.buybutton}}</navigator>
-		</view>
-	</view>
 
-	<view wx:if='{{showFavoritesPanel}}' class="flex-row-center-space_between" style="width: 600rpx;height: 70rpx;margin-top: 10rpx;font-size: 24rpx;">
-		<input type="number" bindinput="mobileOnInput" placeholder="请输入手机号" style="width: 385rpx;height: 70rpx; line-height: 70rpx; border-radius: 5rpx; color: #333333; background-color: #FFFFFF;padding-left: 10rpx;" placeholder-style="padding-left: 10rpx; color: #999999;"></input>
-		<button bindtap="sendGoodsLink" data-goods_id="{{goods_id}}" data-mobile="{{mobile}}" style="width: 200rpx;height: 70rpx;line-height: 70rpx;color: #FFFFFF; background-color: #eb6877;font-size: 24rpx;">发送商品链接</button>
-	</view>
-</modal>
 
 <!-- 关注公众号 -->
 <template is="followOfficialAccount" wx:if="{{is_view_official_account==true }}" />
 
 <!-- 服务员评价窗口 -->
 <view class='waiter-evaluate-window-mask' wx:if="{{is_open_popcomment==1}}">
-	<view class="waiter-evaluate-window flex-column-center-start theme-window" style="margin-top:{{46 + statusBarHeight}}px;">
-		<view class="title-bar flex-row-center-flex_end" bindtap="closeComment">
-			<view class="fa fa-times-circle-o" aria-hidden="true"></view>
+	<view class="waiter-evaluate-window flex-column-center-start theme-container" style="margin-top:{{46 + statusBarHeight}}px;">
+		<view class="title-bar flex-row-center-flex_end theme-panel" bindtap="closeComment">
+			<!-- <view class="fa fa-times-circle-o" aria-hidden="true"></view> -->
+			<image class="icon close" mode="aspectFill" src="/images/icon2/ededed_close.png"></image>
 		</view>
 		<view class="document">
-			<view class="head flex-row-center-center">
-				<view class="title theme-font5">亲，您对服务满意吗？</view>
+			<view class="head flex-row-center-center theme-panel">
+				<!-- <view class="title theme-font5">亲，您对服务满意吗？</view> -->
+				<view class="title theme-font5">用户满意度调查</view>
 			</view>
 			<form bindsubmit="submitComment">
 				<scroll-view class="body" scroll-y="true" scroll-with-animation="true">
@@ -276,26 +244,47 @@
 							<view class="job theme-font7">{{staff_user_info.waiter_str}}</view>
 						</view>
 					</view>
-					<view class="score flex-row-center-flex_start">
-						<view class="label theme-font1">{{staff_user_info.comment_str}}</view>
-						<view class="star-group flex-row-center-space_around">
-							<block wx:for="{{star_list}}" wx:key="item" wx:for-index="index">
-								<view wx:if="{{item.is_select==true}}" class="fa fa-star theme-font5" aria-hidden="true" bindtap="subStar" data-keys="{{index}}"></view>
-								<view wx:else class="fa fa-star-o theme-font3" aria-hidden="true" bindtap="addStar" data-keys="{{index}}"></view>
+					<view class="evaluate panel theme-panel">
+						<view class="score flex-row-center-flex_start">
+							<view class="label theme-font1">{{staff_user_info.comment_str}}</view>
+							<view class="star-group flex-row-center-space_around">
+								<block wx:for="{{star_list}}" wx:key="item" wx:for-index="index">
+									<view wx:if="{{item.is_select==true}}" class="fa fa-star theme-font5" aria-hidden="true" bindtap="subStar" data-keys="{{index}}"></view>
+									<view wx:else class="fa fa-star-o theme-font3" aria-hidden="true" bindtap="addStar" data-keys="{{index}}"></view>
+								</block>
+							</view>
+						</view>
+						<view class="tag-group">
+							<block wx:for="{{tags}}" wx:key="item" wx:for-index="index">
+								<view wx:if="{{item.selected==true}}" class="tag theme-button-red">{{item.value}}</view>
+								<view wx:else class="tag theme-font5" bindtap="clickTag" data-keys="{{index}}" data-value="{{item.value}}">{{item.value}}</view>
 							</block>
 						</view>
+						<textarea class="theme-textarea" bindinput="editCommnet" placeholder="您的建议是我们前进的动力...（300字以内）" value="{{comment_str}}" maxlength='300'></textarea>
 					</view>
-					<view class="tag-group">
-						<block wx:for="{{tags}}" wx:key="item" wx:for-index="index">
-							<view wx:if="{{item.selected==true}}" class="tag theme-button-red">{{item.value}}</view>
-							<view wx:else class="tag theme-font5" bindtap="clickTag" data-keys="{{index}}" data-value="{{item.value}}">{{item.value}}</view>
-						</block>
+					<view class="bestow panel theme-panel" wx:if="{{staff_user_info.staff_id>0 && is_open_reward==1}}">
+						<view class="title-bar flex-row-center-space_between">
+							<view class="title">对服务很满意，要打个赏吗？</view>
+							<view class="tab-bar flex-row-center-center">
+								<view class="tab reward{{is_reward=='1'?' selected':''}}" data-is_reward="1" bindtap="showTab">打赏</view>
+								<view class="tab none{{is_reward=='0'?' selected':''}}" data-is_reward="0" bindtap="showTab">不打赏</view>
+							</view>
+						</view>
+						<view class="body">
+							<view wx:if="{{is_reward=='1'}}" class="bestow tab-body">
+								<block wx:for="{{reward_list}}" wx:key="key" wx:for-index="index" wx:for-item="bean">
+									<view class="item flex-column-center-center {{bean.selected==true?'selected':''}}" bindtap="selectReward" data-keys="{{index}}">
+										<image class="pic" mode="aspectFull" src="{{bean.image}}"></image>
+										<view class="fee theme-font5">{{bean.name}}</view>
+									</view>
+								</block>
+							</view>
+						</view>
 					</view>
-					<textarea class="theme-textarea" bindinput="editCommnet" placeholder="您的建议是我们前进的动力...（300字以内）" value="{{comment_str}}" maxlength='300'></textarea>
 					<input class="display_hide" name="box_mac" value="{{box_mac}}"></input>
 					<!-- <button class="theme-button-red" form-type="submit" type="submit">提交</button> -->
 				</scroll-view>
-				<button class="theme-button-red" form-type="submit" type="submit">提交</button>
+				<button class="theme-button-red" form-type="submit" type="submit" disabled="{{comment_disable}}">提交</button>
 			</form>
 		</view>
 	</view>
