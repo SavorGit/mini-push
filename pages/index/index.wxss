@@ -343,7 +343,8 @@
 .waiter-evaluate-window>.title-bar {
   width: calc(100% - 40rpx);
   height: 50rpx;
-  padding: 20rpx 20rpx 10rpx;
+  padding: 20rpx 20rpx 00rpx;
+  border-radius: 10rpx 10rpx 0 0;
 }
 
 .waiter-evaluate-window>.title-bar>.icon {
@@ -360,12 +361,13 @@
 
 .waiter-evaluate-window>.document {
   width: 100%;
-  height: calc(100% - 80rpx);
+  height: calc(100% - 70rpx);
 }
 
 .waiter-evaluate-window>.document>.head {
   width: 100%;
   height: 50rpx;
+  padding-bottom: 20rpx;
 }
 
 .waiter-evaluate-window>.document>.head>.title {
@@ -377,13 +379,13 @@
   width: calc(100% - 30rpx);
   height: calc(100% - 200rpx);
   /* height: calc(100% - 100rpx); */
-  padding: 20rpx 15rpx 20rpx;
+  padding: 0rpx 15rpx 20rpx;
 }
 
 .waiter-evaluate-window>.document .body .waiter {
   width: calc(100% - 20rpx);
   height: 110rpx;
-  padding: 10rpx 10rpx;
+  padding: 15rpx 10rpx 10rpx;
 }
 
 .waiter-evaluate-window>.document .body .waiter>.head-pic {
@@ -461,7 +463,7 @@
 
 .waiter-evaluate-window>.document .body .panel.bestow {
   height: 250rpx;
-  margin-top: 10rpx;
+  margin-top: 15rpx;
 }
 
 .waiter-evaluate-window>.document .body .panel.bestow>.title-bar {
