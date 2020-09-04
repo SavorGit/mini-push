@@ -1,0 +1,23 @@
+<!--pages/forscreen/history/list.wxml-->
+<import src="/pages/template/commons" />
+<template is="navigationBarForTwoLevel" data='{{statusBarHeight: statusBarHeight,titleText:"语音识别"}}' />
+
+<view class="container flex-column-center-flex_start theme-container" style='height: calc(100vh - 46px - {{statusBarHeight}}px);'>
+  <scroll-view class='page_main' scroll-y="true" bindscrolltolower="loadMore" data-openid='{{openid}}' data-box_mac='{{box_mac}}'>
+    <!--循环开始-->
+
+    <!-- 一张图片 -->
+    <view class='pic_text'>
+				<textarea class='text_input theme-textarea' name="forscreen_char" maxlength='30' placeholder='电视展示时增加文字...' value="{{CompTypeText}}"></textarea>
+		</view>
+   
+  <view bindtouchstart="touchdown_plugin" bindtouchend="touchup_plugin">长摁说话</view>
+
+
+    
+
+  </scroll-view>
+  
+</view>
+
+

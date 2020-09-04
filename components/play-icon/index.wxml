@@ -1,3 +1,4 @@
+
 <view  class="play-loud-icon" >
   <image  src="../../image/play_loud.png" class="play-loud-img play-icon-main {{realPlayType == 'loading' ? 'is-hide' : ''}}" ></image>
 

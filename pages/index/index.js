@@ -845,7 +845,7 @@ Page({
   },
   testVoice:function(e){
     wx.navigateTo({
-      url: '/pages/voice/index',
+      url: '/pages/voice/voice',
     })
   },
   /**

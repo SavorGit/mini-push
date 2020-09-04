@@ -53,7 +53,8 @@
     "pages/thematic/money_blessing/receive_h5",
     "pages/thematic/money_blessing/receive_result",
     "pages/voice/index",
-    "pages/voice/edit"
+    "pages/voice/edit",
+    "pages/voice/voice"
   ],
   "subpackages": [
     {
