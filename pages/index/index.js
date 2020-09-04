@@ -705,6 +705,7 @@ Page({
           that.getAdspositionList(data.result.box_id)
           app.globalData.hotel_info = data.result;
           that.setData({
+            box_id:data.result.box_id,
             is_test:data.result.is_test,
             is_link: 1,
             link_type:data.result.forscreen_type,
@@ -767,6 +768,7 @@ Page({
               that.getAdspositionList(data.result.box_id)
               app.globalData.hotel_info = data.result;
               that.setData({
+                box_id:data.result.box_id,
                 is_test:data.result.is_test,
                 is_link: 1,
                 hotel_room: data.result.hotel_name + data.result.room_name,

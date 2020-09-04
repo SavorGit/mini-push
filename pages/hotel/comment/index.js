@@ -31,8 +31,15 @@ Page({
     openid = options.openid;
     box_mac = options.box_mac
     box_id  = options.box_id
-    that.setData({openid:openid,box_mac:box_mac})
-    that.commentConfig(openid)
+    if(typeof(box_id)=='undefined' || typeof(openid)=='undefined'){
+      wx.navigateBack({
+        delta: 1
+      })
+    }else {
+      that.setData({openid:openid,box_mac:box_mac})
+      that.commentConfig(openid)
+    }
+    
   },
   commentConfig:function(){
     var that = this;
@@ -53,6 +60,10 @@ Page({
         tags:data.result.tags,
         comment_str:'',
         reward_list:data.result.reward_money
+      })
+    },res=>{
+      wx.navigateBack({
+        delta: 1
       })
     })
   },
