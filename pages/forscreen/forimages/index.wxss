@@ -67,17 +67,18 @@ image.pic_show_cur {
 
 /* ================================== 上传图片前 ================================== */
 
-.before_launch .page_main>.pic_text {
+.before_launch .page_main .pic_text {
   padding: 10rpx 30rpx;
 }
 
-.before_launch .page_main>.pic_text>label {
+.before_launch .page_main .pic_text>label {
   margin: 25rpx 0 24rpx 28rpx;
 }
 
-.before_launch .page_main>.pic_text>textarea {
-  width: 690rpx;
-  height: 100rpx;
+.before_launch .page_main .pic_text>textarea {
+  width: 680rpx;
+  height: 90rpx;
+  padding: 5rpx;
   font-size: 28rpx;
   text-align: left;
 }
