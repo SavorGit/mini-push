@@ -962,14 +962,15 @@ Page({
     
     this.setData({comment_str:comment_str})
   },
-  subComment:function(openid,score,comment_str,staff_id,box_mac){
+  subComment:function(openid,score,comment_str,staff_id,box_mac,order_id=0){
     var that = this;
     utils.PostRequest(api_v_url + '/Comment/subComment', {
       openid: openid,
       score:score,
       content:comment_str,
       staff_id :staff_id,
-      box_mac:box_mac
+      box_mac:box_mac,
+      reward_id:order_id
     }, (data, headers, cookies, errMsg, statusCode) => {
       that.setData({is_open_popcomment:0,comment_disable:false})
       app.showToast('感谢您的支持！',2000,'success')
@@ -985,6 +986,7 @@ Page({
       openid: openid,
       staff_id:staff_id,
     }, (data, headers, cookies, errMsg, statusCode) => {
+      var order_id = data.result.order_id;
       wx.requestPayment({
         'timeStamp': data.result.payinfo.timeStamp,
         'nonceStr': data.result.payinfo.nonceStr,
@@ -992,7 +994,7 @@ Page({
         'signType': data.result.payinfo.signType,
         'paySign': data.result.payinfo.paySign,
         success(res) {
-          that.subComment(openid,score,comment_str,staff_id,box_mac) 
+          that.subComment(openid,score,comment_str,staff_id,box_mac,order_id) 
         },
         fail(res) {
           if (res.errMsg == "requestPayment:fail cancel") {
