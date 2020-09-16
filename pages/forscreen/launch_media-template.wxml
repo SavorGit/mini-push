@@ -2,44 +2,54 @@
 
 <!-- 页头 -->
 <template name="pageTop">
-  <view class='page_top theme-panel-2 flex-row-center-flex_start font_666666_26'>
-    <label>{{res_head_desc}}加载完成后，电视开始加载并自动播放</label>
-    <label class='link_relief'>
-      <navigator url="/pages/forscreen/relief">免责声明</navigator>
-    </label>
-  </view>
+	<view class='page_top theme-panel-2 flex-row-center-flex_start font_666666_26'>
+		<label>{{res_head_desc}}加载完成后，电视开始加载并自动播放</label>
+		<label class='link_relief'>
+			<navigator url="/pages/forscreen/relief">免责声明</navigator>
+		</label>
+	</view>
 </template>
 
 <!-- 投屏之前引导蒙板 -->
 <template name="beforeLaunchGuidedMask">
-  <view class="guided_mask_panel launch_before flex-column-center-flex_start full_width full_height">
-    <view class="point" style="margin-top:{{marginTop}};">
-      <checkbox-group class="checkbox-group flex-column-stretch-flex_start">
-        <checkbox disabled="true">公开发表，公众可见</checkbox>
-      </checkbox-group>
-    </view>
-    <image class="arrow" src="/images/imgs/FFFFFF_guide_arrow.png"></image>
-    <view class="explain flex-column-center-flex_start font_FFFFFF_28">
-      <label>公开不仅可以让更多人看到，</label>
-      <label>还有机会在上千家餐厅电视中播放哦~</label>
-    </view>
-    <button class="theme-button font_FFFFFF_28" bindtap="closeLead" data-type="{{dataType}}" data-openid="{{openid}}">知道了</button>
-  </view>
+	<view class="guided_mask_panel launch_before flex-column-center-flex_start full_width full_height">
+		<view class="point" style="margin-top:{{marginTop}};">
+			<checkbox-group class="checkbox-group flex-column-stretch-flex_start">
+				<checkbox disabled="true">公开发表，公众可见</checkbox>
+			</checkbox-group>
+		</view>
+		<image class="arrow" src="/images/imgs/FFFFFF_guide_arrow.png"></image>
+		<view class="explain flex-column-center-flex_start font_FFFFFF_28">
+			<label>公开不仅可以让更多人看到，</label>
+			<label>还有机会在上千家餐厅电视中播放哦~</label>
+		</view>
+		<button class="theme-button font_FFFFFF_28" bindtap="closeLead" data-type="{{dataType}}" data-openid="{{openid}}">知道了</button>
+	</view>
+</template>
+
+<!-- 投屏之前引导蒙板 -->
+<template name="beforeLaunchQuality">
+	<radio-group class="quality flex-row-center-space_around">
+		<block wx:for="{{qualityList}}" wx:key="key" wx:for-item="bean" wx:for-index="index">
+			<radio class="radio checked theme-font1" wx:if="{{bean.checked==true}}" checked="true">{{bean.name}}</radio>
+			<radio class="radio theme-font1" wx:else>{{bean.name}}</radio>
+		</block>
+	</radio-group>
 </template>
 
 <!-- 投屏之后引导蒙板 -->
 <template name="afterLaunchGuidedMask">
-  <view class="guided_mask_panel launch_after flex-column-center-flex_start full_width full_height">
-    <view class="point" style="margin-top:{{marginTop}};">
-      <view>
-        <button class='savor-btn theme-button' form-type="submit">助力全网播放</button>
-      </view>
-    </view>
-    <image class="arrow" src="/images/imgs/FFFFFF_guide_arrow.png"></image>
-    <view class="explain flex-column-center-flex_start font_FFFFFF_28">
-      <label>您可邀请好友帮您助力，</label>
-      <label>助力人数越多，越有可能在上千家餐厅电视中播放~</label>
-    </view>
-    <button class="theme-button font_FFFFFF_28" bindtap="closeLead" data-type="{{dataType}}" data-openid="{{openid}}">知道了</button>
-  </view>
+	<view class="guided_mask_panel launch_after flex-column-center-flex_start full_width full_height">
+		<view class="point" style="margin-top:{{marginTop}};">
+			<view>
+				<button class='savor-btn theme-button' form-type="submit">助力全网播放</button>
+			</view>
+		</view>
+		<image class="arrow" src="/images/imgs/FFFFFF_guide_arrow.png"></image>
+		<view class="explain flex-column-center-flex_start font_FFFFFF_28">
+			<label>您可邀请好友帮您助力，</label>
+			<label>助力人数越多，越有可能在上千家餐厅电视中播放~</label>
+		</view>
+		<button class="theme-button font_FFFFFF_28" bindtap="closeLead" data-type="{{dataType}}" data-openid="{{openid}}">知道了</button>
+	</view>
 </template>

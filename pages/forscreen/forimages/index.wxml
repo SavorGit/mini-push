@@ -10,7 +10,7 @@
 	<view class="full_width before_launch">
 		<template is="pageTop" data="{{res_head_desc:res_head_desc}}" />
 		<form bindsubmit="up_forscreen" report-submit="true">
-			<view class='page_main'>
+			<scroll-view class='page_main flex-column-center-flex_start theme-container' scroll-y="true" scroll-with-animation="true">
 				<view class="weui-grids grids-frame">
 					<view class="weui-grid" wx:for="{{up_imgs}}" wx:key="key" wx:for-item="img" wx:for-index="index">
 						<view class="pic_show">
@@ -65,9 +65,12 @@
 						<view class="description">适合较长视频、高清视频</view>
 					</view>
 				</view>
+				<template is="beforeLaunchQuality" data="{{qualityList:[{name:'标清',checked:true},{name:'高清'},{name:'原图'}]}}" />
+				<!-- <button class="savor-btn theme-button-dark" form-type="submit" hover-class="none" disabled='{{is_btn_disabel}}'>投屏</button> -->
+			</scroll-view>
+			<view class='page_bottom flex-row-center-center'>
 				<button class="savor-btn theme-button-dark" form-type="submit" hover-class="none" disabled='{{is_btn_disabel}}'>投屏</button>
 			</view>
-			<view class='page_bottom flex-row-center-center'></view>
 		</form>
 
 		<!-- 打断投屏弹窗 -->
@@ -196,6 +199,6 @@
 </view>
 
 <view class="body-view">
-<loading hidden="{{hiddens}}" bindchange="loadingChange">{{load_fresh_char}}</loading>
+	<loading hidden="{{hiddens}}" bindchange="loadingChange">{{load_fresh_char}}</loading>
 	<loading hidden="{{wifi_hidden}}" bindchange="loadingChange">正在连接包间wifi,请稍后...</loading>
 </view>
