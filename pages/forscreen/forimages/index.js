@@ -49,7 +49,8 @@ Page({
     res_head_desc:'图片',
     launchType:'classic',
     wifi_hidden: true,
-    hiddens: true, //
+    hiddens: true, //,
+    qualityList:[{name:'标清',checked:true,value:1},{name:'高清',value:2},{name:'原图',value:3}],
   },
   /**
    * 生命周期函数--监听页面加载
@@ -997,5 +998,21 @@ Page({
 
 
     
-  }
+  },
+  /**
+   * 选择照片清晰度
+   */
+  RadoChange:function(e){
+    var qualityList = this.data.qualityList;
+    var q_value = e.detail.value;
+    for(let i in qualityList){
+      if(qualityList[i].checked==true){
+        qualityList[i].checked = false;
+      }
+      if(qualityList[i].value == q_value){
+        qualityList[i].checked = true;
+      }
+    } 
+    this.setData({qualityList:qualityList})
+  },
 })

@@ -65,7 +65,9 @@
 						<view class="description">适合较长视频、高清视频</view>
 					</view>
 				</view>
-				<template is="beforeLaunchQuality" data="{{qualityList:[{name:'标清',checked:true},{name:'高清'},{name:'原图'}]}}" />
+				<block wx:if="{{launchType!='speed'}}">
+					<template is="beforeLaunchQuality" data="{{qualityList:qualityList}}" />
+				</block>
 				<!-- <button class="savor-btn theme-button-dark" form-type="submit" hover-class="none" disabled='{{is_btn_disabel}}'>投屏</button> -->
 			</scroll-view>
 			<view class='page_bottom flex-row-center-center'>

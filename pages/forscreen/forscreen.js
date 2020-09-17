@@ -153,41 +153,44 @@ Page({
               'content-type': 'application/json'
             },
             success: function (res) {
-
-              if (jz_time) {//判断二维码时间是否超过两个小时
-                //var fztime = 7200000;
-                var fztime = sysconfig.exp_time;
-                var difftime = nowtime - jz_time;
-                if (difftime > fztime) {
-                  wx.request({
-                    url: api_url + '/smallapp21/index/recOverQrcodeLog',
-                    data: {
-                      "openid": res.data.result.openid,
-                      "box_mac": box_mac,
-                      "type": code_type,
-                      "is_overtime": 1
-                    },
-                    header: {
-                      'content-type': 'application/json'
-                    },
-                  })
-                  
-                }else {
-                  wx.request({
-                    url: api_url + '/Smallapp21/Index/genCode',
-                    headers: {
-                      'Content-Type': 'application/json'
-                    },
-                    data: {
-                      'box_mac': box_mac,
-                      'openid': res.data.result.openid,
-                      'type': code_type
-                    },
-                    method: "POST",
-                    success: function (res) {
-                      app.globalData.serial_number = app.globalData.have_link_box_pre+ res.data.result.openid+'_'+(new Date()).valueOf();
-                    }
-                  })
+              if(res.data.code==10000){
+                app.globalData.openid = res.data.result.openid;
+                app.globalData.session_key = res.data.result.session_key;
+                if (jz_time) {//判断二维码时间是否超过两个小时
+                  //var fztime = 7200000;
+                  var fztime = sysconfig.exp_time;
+                  var difftime = nowtime - jz_time;
+                  if (difftime > fztime) {
+                    wx.request({
+                      url: api_url + '/smallapp21/index/recOverQrcodeLog',
+                      data: {
+                        "openid": res.data.result.openid,
+                        "box_mac": box_mac,
+                        "type": code_type,
+                        "is_overtime": 1
+                      },
+                      header: {
+                        'content-type': 'application/json'
+                      },
+                    })
+                    
+                  }else {
+                    wx.request({
+                      url: api_url + '/Smallapp21/Index/genCode',
+                      headers: {
+                        'Content-Type': 'application/json'
+                      },
+                      data: {
+                        'box_mac': box_mac,
+                        'openid': res.data.result.openid,
+                        'type': code_type
+                      },
+                      method: "POST",
+                      success: function (res) {
+                        app.globalData.serial_number = app.globalData.have_link_box_pre+ res.data.result.openid+'_'+(new Date()).valueOf();
+                      }
+                    })
+                  }
                 }
               }
             }
@@ -221,57 +224,63 @@ Page({
               'content-type': 'application/json'
             },
             success: function (res) {
-
-              if (jz_time) {//判断二维码时间是否超过两个小时
-                //var fztime = 7200000;
-                var fztime = sysconfig.exp_time;
-                var difftime = nowtime - jz_time;
-                if (difftime > fztime) {
+              if(res.data.code==10000){
+                app.globalData.openid = res.data.result.openid;
+                app.globalData.session_key = res.data.result.session_key;
+                if (jz_time) {//判断二维码时间是否超过两个小时
+                  //var fztime = 7200000;
+                  var fztime = sysconfig.exp_time;
+                  var difftime = nowtime - jz_time;
+                  if (difftime > fztime) {
+                    wx.request({
+                      url: api_url + '/smallapp21/index/recOverQrcodeLog',
+                      data: {
+                        "openid": res.data.result.openid,
+                        "box_mac": box_mac,
+                        "type": code_type,
+                        "is_overtime": 1
+                      },
+                      header: {
+                        'content-type': 'application/json'
+                      },
+                    })
+                    wx.reLaunch({
+                      url: '/pages/index/index',
+                    })
+                    wx.showToast({
+                      title: '二维码已过期',
+                      icon: 'none',
+                      duration: 2000
+                    });
+                    return false;
+                  }
+                }
+                if (code_type == 7) {
                   wx.request({
-                    url: api_url + '/smallapp21/index/recOverQrcodeLog',
+                    url: api_v_url + '/index/recodeQrcodeLog',
                     data: {
-                      "openid": res.data.result.openid,
-                      "box_mac": box_mac,
-                      "type": code_type,
-                      "is_overtime": 1
+                      openid: res.data.result.openid,
+                      type: 7
                     },
-                    header: {
-                      'content-type': 'application/json'
-                    },
+                    success: function (rts) {
+                      wx.reLaunch({
+                        url: '../index/index',
+                      })
+                    }, fail: function (rts) {
+                      wx.reLaunch({
+                        url: '../index/index',
+                      })
+                    }
                   })
-                  wx.reLaunch({
-                    url: '/pages/index/index',
-                  })
-                  wx.showToast({
-                    title: '二维码已过期',
-                    icon: 'none',
-                    duration: 2000
-                  });
-                  return false;
+                } else {
+                  
+                  setInfos(box_mac, res.data.result.openid, code_type);
                 }
               }
-              if (code_type == 7) {
-                wx.request({
-                  url: api_v_url + '/index/recodeQrcodeLog',
-                  data: {
-                    openid: res.data.result.openid,
-                    type: 7
-                  },
-                  success: function (rts) {
-                    wx.reLaunch({
-                      url: '../index/index',
-                    })
-                  }, fail: function (rts) {
-                    wx.reLaunch({
-                      url: '../index/index',
-                    })
-                  }
-                })
-              } else {
-                
-                setInfos(box_mac, res.data.result.openid, code_type);
-              }
-              //console.log(res.data.result.openid);
+            },fail:function(){
+              wx.reLaunch({
+                url: '/pages/index/index',
+              })
             }
           })
         }
@@ -292,25 +301,30 @@ Page({
         },
         method: "POST",
         success: function (res) {
-          var timestamp = (new Date()).valueOf();
-          var is_have = res.data.result.is_have;
-          if (is_have == 0) {
-            
-            mta.Event.stat('scanQrcodeResult', { 'linktype': 0 })
-          } else if (is_have == 1) {
-            mta.Event.stat('scanQrcodeResult', { 'linktype': 1 })
-          }
-          app.globalData.serial_number = app.globalData.have_link_box_pre+openid+'_'+(new Date()).valueOf();
-          if(code_type==31){
-            wx.reLaunch({
-              url: '/games/pages/activity/din_dash?openid='+openid+'&box_mac='+box_mac,
-            })
-          } else {
-            wx.reLaunch({
-              url: '../index/index',
-            })
-          }                              
-          
+          if(res.data.code==10000){
+            var timestamp = (new Date()).valueOf();
+            var is_have = res.data.result.is_have;
+            if (is_have == 0) {
+              
+              mta.Event.stat('scanQrcodeResult', { 'linktype': 0 })
+            } else if (is_have == 1) {
+              mta.Event.stat('scanQrcodeResult', { 'linktype': 1 })
+            }
+            app.globalData.serial_number = app.globalData.have_link_box_pre+openid+'_'+(new Date()).valueOf();
+            if(code_type==31){
+              wx.reLaunch({
+                url: '/games/pages/activity/din_dash?openid='+openid+'&box_mac='+box_mac,
+              })
+            } else {
+              wx.reLaunch({
+                url: '../index/index',
+              })
+            }  
+          }                          
+        },fail:function(e){
+          wx.reLaunch({
+            url: '../index/index',
+          })
         }
       })
     }
