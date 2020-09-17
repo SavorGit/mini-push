@@ -705,6 +705,10 @@ App({
               })
             }
             
+          },fail:function(){
+            wx.reLaunch({
+              url: '/pages/index/index',
+            })
           }
         })
       }
