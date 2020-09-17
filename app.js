@@ -1047,11 +1047,11 @@ App({
   },
   connectWifi: function (wifi_name, wifi_mac, use_wifi_password, box_mac, that,launchType) {
     var aps = this;
-    if(aps.globalData.sys_info.platform=='ios'){
+    //if(aps.globalData.sys_info.platform=='ios'){
       that.setData({
        wifi_hidden: false,
       })
-    }
+    //}
     
     wx.connectWifi({
       SSID: wifi_name,
