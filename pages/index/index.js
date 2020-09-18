@@ -99,6 +99,7 @@ Page({
       box_id: box_id,
       openid:openid,
     }, (data, headers, cookies, errMsg, statusCode) => {
+      app.globalData.qualityList = data.result.quality_list;
       var is_view_eval_waiter = data.result.is_comment;
       that.setData({is_view_eval_waiter: is_view_eval_waiter})
       var is_closeComment = wx.getStorageSync(app.globalData.cache_key+'is_closeComment');

@@ -81,6 +81,21 @@ App({
       var res_obj = [];
       var msg = { action: 10,  openid: openid, img_nums: res_len, forscreen_char: forscreen_char, forscreen_id: forscreen_id, avatarUrl: avatarUrl, nickName: nickName,serial_number:serial_number}
       for (var i = 0; i < pubdetail.length; i++) {
+        var quality = '';
+        var quality_type = 0;
+        if(action==8){
+          if(typeof(pubdetail[i].quality_type)!='undefind' && pubdetail[i].quality_type<3){
+            var qualityList = that.globalData.qualityList;
+            for(let j in qualityList){
+              if(pubdetail[i].quality_type== qualityList[j].value){
+                quality = qualityList[j].quality;
+                quality_type = qualityList[j].value;
+                break;
+              }
+            }
+            pubdetail[i].resource_size = 0;
+          }
+        }
         var order = i + 1;
         wx.request({ //start
           url: that.globalData.api_v_url + '/index/recordForScreenPics',
@@ -103,12 +118,13 @@ App({
             is_pub_hotelinfo: 0,
             is_share: 0,
             resource_type:1,
+            quality_type:quality_type,
             serial_number:that.globalData.serial_number
           },success: function (ret) {
 
           }
         }); //end
-        var url = pubdetail[i]['forscreen_url'];
+        var url = pubdetail[i]['forscreen_url'] +quality;
         var filename = pubdetail[i]['filename'];
         var res_id = pubdetail[i]['res_id'];
         if(typeof(pubdetail[i]['resource_size'])!='undefined'){
@@ -1258,6 +1274,6 @@ App({
     have_link_box_pre:'Y_',
     serial_number:'',
     is_view_official_account:false,
-    
+    qualityList:[{name:'标清',checked:true,value:1,quality:'?x-oss-process=image/quality,q_40'},{name:'高清',checked:false,value:2,quality:'?x-oss-process=image/quality,q_80'},{name:'原图',checked:false,value:3,quality:''}],
   }
 })

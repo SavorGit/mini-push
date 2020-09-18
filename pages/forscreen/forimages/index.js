@@ -21,6 +21,7 @@ var oss_upload_url = app.globalData.oss_upload_url;
 var pubdetail = [];
 var netty_push_info ;
 var netty_push_img ;
+console.log(app.globalData.qualityList)
 Page({
   data: {
     statusBarHeight: getApp().globalData.statusBarHeight,
@@ -50,7 +51,7 @@ Page({
     launchType:'classic',
     wifi_hidden: true,
     hiddens: true, //,
-    qualityList:[{name:'标清',checked:true,value:1},{name:'高清',value:2},{name:'原图',value:3}],
+    qualityList:[],
   },
   /**
    * 生命周期函数--监听页面加载
@@ -78,6 +79,7 @@ Page({
     openid = e.openid;
     box_mac = e.box_mac;
     that.setData({
+      qualityList:app.globalData.qualityList,
       hotel_info:hotel_info,
       launchType:launch_type,
       openid: openid,
@@ -237,6 +239,9 @@ Page({
       
       
       var public_text = e.detail.value.public_text;
+      if(typeof(public_text)=='undefined'){
+        public_text = '';
+      }
       var is_pub_hotelinfo = e.detail.value.is_pub_hotelinfo;   //是否公开显示餐厅信息
       var is_share = e.detail.value.is_share;
       lead(openid, is_share);
@@ -411,7 +416,16 @@ Page({
       netty_push_info.avatarUrl = avatarUrl;
       netty_push_info.nickName  = nickName;
       netty_push_info.res_sup_time = (new Date()).valueOf();
+      var qualityList = app.globalData.qualityList;
+      var quality_obj = {quality:'',quality_type:''};
       
+      for(let j in qualityList){
+        if(qualityList[j].checked==true){
+          quality_obj.quality = qualityList[j].quality;
+          quality_obj.quality_type    = qualityList[j].value;
+          break;
+        }
+      }
       
       for (var i = 0; i < up_imgs.length; i++) {
         
@@ -429,11 +443,11 @@ Page({
         up_imgs[i].resource_size = resource_size
         
         //第二步
-        uploadOssNew( filename, resource_size, timestamp, i,  forscreen_char, forscreen_id, res_sup_time, avatarUrl, nickName, public_text);
+        uploadOssNew( filename, resource_size, timestamp, i,  forscreen_char, forscreen_id, res_sup_time, avatarUrl, nickName, public_text,quality_obj);
         app.sleep(1)
       }
     }
-    function uploadOssNew(img_url, resource_size, timestamp, flag,forscreen_char, forscreen_id, res_sup_time, avatarUrl, nickName, public_text) {
+    function uploadOssNew(img_url, resource_size, timestamp, flag,forscreen_char, forscreen_id, res_sup_time, avatarUrl, nickName, public_text,quality_obj) {
       var img_len = up_imgs.length;
       var filename = img_url;
       var index1 = filename.lastIndexOf(".");
@@ -469,11 +483,16 @@ Page({
           });
           var res_eup_time = (new Date()).valueOf();
           var netty_tmp = {};
-          netty_tmp.url = "forscreen/resource/" + timestamp + postf_t;
+          netty_tmp.url = "forscreen/resource/" + timestamp + postf_t+quality_obj.quality;
           netty_tmp.filename = filename = timestamp + postf_t ;
           netty_tmp.order    = flag;
           netty_tmp.img_id   = timestamp;
-          netty_tmp.resource_size = resource_size;
+          if(quality_obj.quality_type==3){
+            netty_tmp.resource_size = resource_size;
+          }else {
+            netty_tmp.resource_size = 0;
+          }
+          
           netty_push_img.push(netty_tmp);
           wx.request({
             url: api_v_url + '/index/recordForScreenPics',
@@ -490,6 +509,7 @@ Page({
               forscreen_char: forscreen_char,
               public_text: public_text,
               imgs: '["forscreen/resource/' + timestamp + postf_t + '"]',
+              quality_type:quality_obj.quality_type,
               resource_id: timestamp,
               res_sup_time: res_sup_time,
               res_eup_time: res_eup_time,
@@ -502,7 +522,7 @@ Page({
             },
             success: function (ret) {
               wx.request({
-                url: api_url + '/Smallapp21/ForscreenHistory/getList',
+                url: api_v_url + '/ForscreenHistory/getList',
                 header: {
                   'content-type': 'application/json'
                 },
@@ -665,7 +685,18 @@ Page({
           pic_show_cur: pic_show_cur
         })
       }
+      var qualityList = app.globalData.qualityList;
+      var quality_obj = {quality:'',quality_type:''};
       
+      for(let j in qualityList){
+        if(qualityList[j].checked==true){
+          quality_obj.quality = qualityList[j].quality;
+          quality_obj.quality_type    = qualityList[j].value;
+          break;
+        }
+      }
+
+
       var push_img = [];
       var push_info = {};
       push_info.forscreen_id = forscreen_id;
@@ -676,11 +707,17 @@ Page({
       push_info.avatarUrl = avatarUrl;
       push_info.nickName  = nickName;
       push_info.serial_number = app.globalData.serial_number;
+      push_info.quality_type = quality_obj.quality_type;
       var netty_tmp = {};
-      netty_tmp.url = forscreen_img ;
+      netty_tmp.url = forscreen_img+quality_obj.quality ;
       netty_tmp.filename = filename ;
       netty_tmp.img_id   = img_id;
-      netty_tmp.resource_size = resource_size;
+      if(quality_obj.quality_type==3){
+        netty_tmp.resource_size = resource_size;
+      }else {
+        netty_tmp.resource_size = 0;
+      }
+      
   
       push_img.push(netty_tmp);
   
@@ -720,6 +757,7 @@ Page({
               mobile_brand: mobile_brand,
               mobile_model: mobile_model,
               imgs: '["' + forscreen_img + '"]',
+              quality_type:quality_obj.quality_type,
               serial_number : app.globalData.serial_number
             },
           });
@@ -817,13 +855,20 @@ Page({
     var res_list = e.target.dataset.res_list;
     var res_nums = res_list.length;
     pubdetail = []
+
+    var qualityList = app.globalData.qualityList;
+    
+    
     for(var i=0;i<res_nums;i++){
-      var tmp = {forscreen_url:'',res_id:'',filename:'',resource_size:'',duration:0};
-      tmp.forscreen_url = res_list[i].forscreen_url;
+      var tmp = {forscreen_url:'',res_id:'',filename:'',resource_size:'',duration:0,quality_type:''};
+      
+      tmp.forscreen_url = res_list[i].forscreen_url ;
       tmp.res_id        = res_list[i].resource_id;
       tmp.filename      = res_list[i].filename;
+      
       tmp.resource_size = res_list[i].resource_size;
       tmp.duration      = 0;
+      tmp.quality_type  = res_list[i].quality_type;
       pubdetail[i] = tmp;
     }
 
@@ -844,7 +889,7 @@ Page({
       hiddens: false,
     })
     wx.request({
-      url: api_url+'/Smallapp21/ForscreenHistory/getList',
+      url: api_v_url+'/ForscreenHistory/getList',
       header: {
         'Content-Type': 'application/json'
       },
@@ -1013,6 +1058,9 @@ Page({
         qualityList[i].checked = true;
       }
     } 
+    console.log(qualityList)
+    app.globalData.qualityList = qualityList;
+    console.log(app.globalData.qualityList)
     this.setData({qualityList:qualityList})
   },
 })

@@ -470,7 +470,7 @@ Page({
                 },
                 success: function(ret) {
                   wx.request({
-                    url: api_url + '/Smallapp21/ForscreenHistory/getList',
+                    url: api_v_url + '/ForscreenHistory/getList',
                     header: {
                       'content-type': 'application/json'
                     },
@@ -705,11 +705,12 @@ Page({
     var res_nums = res_list.length;
     pubdetail = []
     for(var i=0;i<res_nums;i++){
-      var tmp = {forscreen_url:'',res_id:'',filename:'',resource_size:'',duration:0};
+      var tmp = {forscreen_url:'',res_id:'',filename:'',resource_size:'',duration:0,quality_type:''};
       tmp.forscreen_url = res_list[i].forscreen_url;
       tmp.res_id        = res_list[i].resource_id;
       tmp.filename      = res_list[i].filename;
       tmp.resource_size = res_list[i].resource_size;
+      tmp.quality_type  = res_list[i].quality_type;
       tmp.duration      = 0;
       pubdetail[i] = tmp;
     }
@@ -729,7 +730,7 @@ Page({
       hiddens: false,
     })
     wx.request({
-      url: api_url + '/Smallapp21/ForscreenHistory/getList',
+      url: api_v_url + '/ForscreenHistory/getList',
       header: {
         'Content-Type': 'application/json'
       },
