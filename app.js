@@ -84,7 +84,7 @@ App({
         var quality = '';
         var quality_type = 0;
         if(action==8){
-          if(typeof(pubdetail[i].quality_type)!='undefind' && pubdetail[i].quality_type<3){
+          if(typeof(pubdetail[i].quality_type)!='undefind' && pubdetail[i].quality_type<=3){
             var qualityList = that.globalData.qualityList;
             for(let j in qualityList){
               if(pubdetail[i].quality_type== qualityList[j].value){
@@ -1253,11 +1253,11 @@ App({
     mobile_model: '',
     statusBarHeight: 0,
     jd_appid: 'wx91d27dbf599dff74',
-    api_url: 'https://mobile.littlehotspot.com',
-    api_v_url:'https://mobile.littlehotspot.com/Smallapp46',
-    oss_upload_url: 'https://image.littlehotspot.com',
-    netty_url: 'https://netty-push.littlehotspot.com',
-    oss_url: 'https://oss.littlehotspot.com',
+    api_url: 'https://dev-mobile.littlehotspot.com',
+    api_v_url:'https://dev-mobile.littlehotspot.com/Smallapp46',
+    oss_upload_url: 'https://dev-image.littlehotspot.com',
+    netty_url: 'https://dev-netty-push.littlehotspot.com',
+    oss_url: 'https://dev-oss.littlehotspot.com',
     Official_account_url:'https://mobile.littlehotspot.com/h5/official/getuserinfo/p/',
     Official_article_url:'',
     oss_bucket: 'redian-produce',
