@@ -48,7 +48,7 @@ Page({
     is_open_popcomment:0,
     star_list:[{'lev':1,'is_select':true},{'lev':2,'is_select':true},{'lev':3,'is_select':true},{'lev':4,'is_select':true},{'lev':5,'is_select':true}],
     comment_str:'',
-
+    showMsgToase:false,
   },
 
   /**
@@ -756,7 +756,7 @@ Page({
 
         }
       }, re => { }, { isShowLoading: false });
-      app.isRegister(openid,that);
+      app.isRegister(openid,that,1);
 
     }else {
       wx.showLoading({
@@ -821,7 +821,7 @@ Page({
             }
           });
         }
-        app.isRegister(openid,that);
+        app.isRegister(openid,that,1);
       }
     }
   },

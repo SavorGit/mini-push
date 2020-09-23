@@ -302,4 +302,4 @@
 </view>
 
 <!-- 按秒定时显示消息提示框 -->
-<msg-toast show="{{showMsgToase}}" content="本次您是第101次使用热点投屏" show-second="5" />
+<msg-toast show="{{showMsgToase}}" content="{{use_time.use_time_str}}" show-second="5" />
