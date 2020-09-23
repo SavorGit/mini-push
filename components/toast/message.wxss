@@ -1,0 +1,41 @@
+/* components/toast/message.wxss */
+
+.toast-wrapper {
+  width: 736rpx;
+  height: 76rpx;
+  margin: auto 5rpx;
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 5rpx;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 2rpx solid rgb(255, 130, 107);
+  background-color: rgb(251, 240, 238);
+  color: rgba(240, 67, 36, 1);
+  border-radius: 40rpx;
+  font-size: 28rpx;
+  z-index: 9999;
+}
+
+.icon,
+.delay {
+  width: 60rpx;
+  padding-left: 20rpx;
+}
+
+.icon {
+  text-align: right;
+}
+
+.message {
+  max-width: calc(100% - 160rpx);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.delay {
+  text-align: center;
+}
