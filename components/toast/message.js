@@ -40,9 +40,6 @@ Component({
 
   },
   ready: function () {
-    
-  },
-  onShow: function () {
     let self = this;
     // console.log(self.data.show);
     function cutTime() {
@@ -60,5 +57,6 @@ Component({
       }
     }
     execCutTime();
-  }
+  },
+  
 })
