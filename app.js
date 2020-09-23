@@ -1274,6 +1274,6 @@ App({
     have_link_box_pre:'Y_',
     serial_number:'',
     is_view_official_account:false,
-    qualityList:[{name:'标清',checked:true,value:1,quality:'?x-oss-process=image/quality,q_40'},{name:'高清',checked:false,value:2,quality:'?x-oss-process=image/quality,q_80'},{name:'原图',checked:false,value:3,quality:''}],
+    qualityList:[],
   }
 })
