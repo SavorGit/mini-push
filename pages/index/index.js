@@ -49,6 +49,7 @@ Page({
     star_list:[{'lev':1,'is_select':true},{'lev':2,'is_select':true},{'lev':3,'is_select':true},{'lev':4,'is_select':true},{'lev':5,'is_select':true}],
     comment_str:'',
     showMsgToase:false,
+    use_time:{'use_time_str':'','cut_sec':'','is_show':false}
   },
 
   /**
