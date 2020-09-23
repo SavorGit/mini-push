@@ -184,10 +184,10 @@ Page({
 
     var score = 0;
     var flag_score = 0;
-    if(comment_str==''){
+    /*if(comment_str==''){
       app.showToast('请填写评价内容');
       return false;
-    }
+    }*/
     for(let i in star_list){
       if(star_list[i].is_select==true){
         score  +=1;
