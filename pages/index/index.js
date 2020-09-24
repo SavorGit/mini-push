@@ -706,6 +706,7 @@ Page({
         openid: openid,
         pop_eval:1
       }, (data, headers, cookies, errMsg, statusCode) => {
+
         if (data.result.is_have == 1) {//如果已连接盒子
           var is_closeComment = wx.getStorageSync(app.globalData.cache_key+'is_closeComment');
           if(is_closeComment!=1){
@@ -756,8 +757,9 @@ Page({
           })
 
         }
+        app.isRegister(openid,that,1,data.result.is_have);
       }, re => { }, { isShowLoading: false });
-      app.isRegister(openid,that,1);
+      
 
     }else {
       wx.showLoading({
@@ -820,9 +822,10 @@ Page({
               })
               box_mac = '';
             }
+            app.isRegister(openid,that,1,is_have);
           });
         }
-        app.isRegister(openid,that,1);
+        
       }
     }
   },

@@ -1194,7 +1194,7 @@ App({
       }
     })
   },
-  isRegister:function(openid,self,page_id =0){
+  isRegister:function(openid,self,page_id =0,is_have_link=0){
     var that = this;
     var colose_official_account = wx.getStorageSync(that.globalData.cache_key+'colose_official_account');
     if(colose_official_account==1){
@@ -1205,6 +1205,7 @@ App({
         data: {
           openid: openid,
           page_id:page_id,
+          is_have_link:is_have_link,
         },success:function(res){
           if(res.data.code==10000){
             var user_info = res.data.result.userinfo;
