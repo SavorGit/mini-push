@@ -58,11 +58,11 @@
 				<view class="choose-launch-edition flex-row-center-space_around" wx:if="{{hotel_info.forscreen_method=='1-1'}}">
 					<view class="btn flex-column-center-space_around {{launchType=='classic'?'selected':'not-selected'}}" data-launch_type="classic" bindtap="chooseLaunchType">
 						<view class="name">经典投屏</view>
-						<view class="description">适合小视频、短视频</view>
+						<view class="description">适合普通小图、照片</view>
 					</view>
 					<view class="btn flex-column-center-space_around {{launchType=='speed'?'selected':'not-selected'}}" data-launch_type="speed" bindtap="chooseLaunchType">
 						<view class="name">极速投屏</view>
-						<view class="description">适合较长视频、高清视频</view>
+						<view class="description">适合高清大图、照片</view>
 					</view>
 				</view>
 				<button class="savor-btn theme-button-dark" form-type="submit" hover-class="none" disabled='{{is_btn_disabel}}'>投屏</button>
