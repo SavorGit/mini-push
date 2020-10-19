@@ -289,3 +289,8 @@
 		</view>
 	</view>
 </view>
+
+<!-- 按秒定时显示消息提示框 -->
+<block wx:if="{{is_link==1}}">
+<msg-toast show="{{use_time.is_show}}" content="{{use_time.use_time_str}}" show-second="{{use_time.cut_sec}}" />
+</block>

@@ -1214,7 +1214,7 @@ App({
       }
     })
   },
-  isRegister:function(openid,self){
+  isRegister:function(openid,self,page_id =0,is_have_link=0){
     var that = this;
     var colose_official_account = wx.getStorageSync(that.globalData.cache_key+'colose_official_account');
     if(colose_official_account==1){
@@ -1224,6 +1224,8 @@ App({
         url: that.globalData.api_v_url+'/User/isRegister',
         data: {
           openid: openid,
+          page_id:page_id,
+          is_have_link:is_have_link,
         },success:function(res){
           if(res.data.code==10000){
             var user_info = res.data.result.userinfo;
@@ -1231,11 +1233,16 @@ App({
             if(user_info.subscribe ==1){
               self.setData({
                 is_view_official_account:false,
+                use_time:user_info.use_time,
+                showMsgToase:user_info.use_time.is_show
               })
               that.globalData.is_view_official_account = false
             }else {
               self.setData({
+                use_time:user_info.use_time,
+                showMsgToase:user_info.use_time.is_show,
                 is_view_official_account:true,
+
               })
               that.globalData.is_view_official_account = true
             }
@@ -1256,7 +1263,7 @@ App({
     api_url: 'https://mobile.littlehotspot.com',
     api_v_url:'https://mobile.littlehotspot.com/Smallapp46',
     oss_upload_url: 'https://image.littlehotspot.com',
-    netty_url: 'https://netty-push.littlehotspot.com',
+    netty_url: 'https:/netty-push.littlehotspot.com',
     oss_url: 'https://oss.littlehotspot.com',
     Official_account_url:'https://mobile.littlehotspot.com/h5/official/getuserinfo/p/',
     Official_article_url:'',

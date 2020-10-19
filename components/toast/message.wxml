@@ -1,0 +1,6 @@
+<!--components/toast/message.wxml-->
+<view wx:if="{{show}}" class="toast-wrapper">
+	<view class="icon"></view>
+	<view class="message">{{content}}</view>
+	<view class="delay">{{showSecond}}{{delayUnit}}</view>
+</view>

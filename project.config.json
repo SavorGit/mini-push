@@ -21,7 +21,7 @@
     "checkSiteMap": true,
     "uploadWithSourceMap": true,
     "compileHotReLoad": false,
-    "useMultiFrameRuntime": true,
+    "useMultiFrameRuntime": false,
     "useApiHook": true,
     "babelSetting": {
       "ignore": [],
@@ -35,7 +35,8 @@
     "packNpmRelationList": []
   },
   "compileType": "miniprogram",
-  "libVersion": "2.12.2",
+
+  "libVersion": "2.13.0",
   "appid": "wxfdf0346934bb672f",
   "projectname": "savor_produce",
   "isGameTourist": false,

@@ -51,6 +51,8 @@ Page({
     is_reward:'1',
     comment_disable:false,
     reward_list:[],
+    showMsgToase:false,
+    use_time:{'use_time_str':'','cut_sec':'','is_show':false}
   },
 
   /**
@@ -697,6 +699,7 @@ Page({
       utils.PostRequest(api_v_url + '/index/isHaveCallBox', {
         openid: openid,
       }, (data, headers, cookies, errMsg, statusCode) => {
+
         if (data.result.is_have == 1) {//如果已连接盒子
           
           var serial_number = app.globalData.serial_number;
@@ -738,8 +741,9 @@ Page({
           })
 
         }
+        app.isRegister(openid,that,1,data.result.is_have);
       }, re => { }, { isShowLoading: false });
-      app.isRegister(openid,that);
+      
 
     }else {
       wx.showLoading({
@@ -793,9 +797,10 @@ Page({
               })
               box_mac = '';
             }
+            app.isRegister(openid,that,1,is_have);
           });
         }
-        app.isRegister(openid,that);
+        
       }
     }
   },

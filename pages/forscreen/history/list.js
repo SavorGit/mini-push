@@ -4,7 +4,7 @@ var mta = require('../../../utils/mta_analysis.js')
 const app = getApp();
 var openid;
 var box_mac = '';
-var page = 1;
+var page ;
 var forscreen_history_list;
 var api_url = app.globalData.api_url;
 var api_v_url = app.globalData.api_v_url;
@@ -25,6 +25,7 @@ Page({
    */
   onLoad: function(options) {
     //wx.hideShareMenu();
+    page = 1;
     var self = this;
     openid = options.openid;
     box_mac = options.box_mac;

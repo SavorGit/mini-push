@@ -2,6 +2,7 @@
   "enablePullDownRefresh": false,
   "usingComponents": {
     "modal": "/components/modal/modal",
-    "bottomModal": "/components/modal/bottomModal"
+    "bottomModal": "/components/modal/bottomModal",
+    "msg-toast":"/components/toast/message"
   }
 }
