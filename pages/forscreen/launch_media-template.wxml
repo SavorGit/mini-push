@@ -85,7 +85,7 @@
 								<view class="tip">{{tip}}</view>
 							</view>
 							<view wx:if="{{step==(isWifi?2:1)}}" class="handle flex-column-center-center">
-								<progress class="progress" percent="{{progress}}" aria-hidden="true" stroke-width="40rpx" color="rgb(255, 112, 66)" activeColor="rgb(255, 112, 66)" backgroundColor="#EBEBEB" active="true"></progress>
+								<progress class="progress" percent="{{progress}}" aria-hidden="true" stroke-width="40rpx" color="rgb(255, 112, 66)" activeColor="rgb(255, 112, 66)" backgroundColor="#EBEBEB" active="true" active-mode="forwards"></progress>
 								<view class="tip">{{tip}}</view>
 							</view>
 							<view wx:if="{{step>(isWifi?2:1)}}" class="launching flex-column-center-center">

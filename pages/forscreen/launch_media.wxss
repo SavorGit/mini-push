@@ -148,9 +148,14 @@
 .choose-launch-edition>.btn {
   width: 300rpx;
   height: 110rpx;
+  line-height: unset;
   padding: 20rpx 10rpx;
   font-size: 28rpx;
   font-weight: 400;
+  margin: 0;
+  cursor: pointer;
+  box-sizing: unset;
+  border-radius: 0;
 }
 
 .choose-launch-edition>.btn>.name {
