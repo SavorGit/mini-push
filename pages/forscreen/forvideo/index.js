@@ -369,19 +369,8 @@ Page({
                   openWind:openWind,
                 })
               }else {
-                var cutDownTime = that.data.cutDownTime;
-                var djs = cutDownTime;
-                var interval = setInterval(function(){ 
-                  that.setData({
-                    cutDownTime:djs
-                  })
-
-                  if(djs<-0){
-                    clearInterval(interval);
-                    that.setData({isOpenWind:false})
-                  }
-                  djs --;
-                 }, 1000)
+                //倒计时关闭窗口
+                that.closeOpenWind();
               }
               that.setData({
                 upload_vedio_cover: oss_url + '/forscreen/resource/' + timestamp + postf_t + '?x-oss-process=video/snapshot,t_2000,f_jpg,w_450,m_fast',
@@ -486,6 +475,15 @@ Page({
     //console.log(hotel_info);
     //return false;
     if (hotel_info.wifi_name != '') {
+      var openWind = that.data.openWind;
+      openWind.isWifi = true,
+      openWind.step = 1;
+      openWind.title = '您正在使用极速投屏';
+      openWind.tip   = '包间wifi链接中';
+      that.setData({
+        isOpenWind:true,
+        openWind:openWind,
+      })
       wx.startWifi({
         success: function (res) {
           wx.getConnectedWifi({
@@ -496,18 +494,14 @@ Page({
                   wx.stopWifi({
                   })
                   //第二步开始投屏
-                  app.showToast('包间链接成功')
                   that.sppedUploadVideo(hotel_info,data);
-
 
                 } else {//链接的不是本包间wifi
                   that.connectWifi(wifi_name, wifi_mac, use_wifi_password, box_mac,hotel_info,data);
-                  
                 }
               } else {
                 //当前打开wifi 但是没有链接任何wifi
                 that.connectWifi(wifi_name, wifi_mac, use_wifi_password, box_mac,hotel_info,data);
-                
               }
               //wx.hideLoading()
             }, fail: function (res) {
@@ -517,18 +511,12 @@ Page({
               }else {
                 if (res.errCode == 12005) { //安卓特有  未打开wifi
                   err_msg = '请打开您的手机Wifi';
-                  that.setData({
-                    wifiErr: { 'is_open': 1, 'msg': '亲，使用此小程序前需要打开您手机的wifi,连上wifi投屏更快哦！', 'confirm': '确定', 'calcle': '取消', 'type': 1 }
-                  })
+                  
                 } else if (res.errCode == 12006) {//Android 特有，未打开 GPS 定位开关
                   err_msg = '请打开您的手机GPS';
-                  that.setData({
-                    wifiErr: { 'is_open': 1, 'msg': '亲，使用此小程序前需要打开您手机的GPS定位,连上wifi投屏更快哦！', 'confirm': '确定', 'calcle': '取消', 'type': 2 }
-                  })
+                  
                 } else if(res.errCode == 12007){//用户拒绝授权链接 Wi-Fi
-                  that.setData({
-                    wifiErr: { 'is_open': 1, 'msg': '亲，使用此小程序前需要链接包间wifi,连上wifi投屏更快哦！', 'confirm': '重试', 'calcle': '', 'type': 3 }
-                  })
+                  
                 }else if(res.errCode== 12010){
                   err_msg = '请确认并打开wifi';
                   
@@ -542,11 +530,20 @@ Page({
                   
                 }
               }
-              app.showToast(err_msg)
+              openWind.tip = err_msg;
+              openWind.isError = true;
+              that.setData({
+                openWind:openWind
+              })
             },
           })
         }, fail: function (res) {
           console.log('startwifierr')
+          openWind.tip = res.errMsg;
+          openWind.isError = true;
+          that.setData({
+            openWind:openWind
+          })
           
         }
       })
@@ -558,6 +555,7 @@ Page({
   connectWifi:function(wifi_name, wifi_mac, use_wifi_password, box_mac,hotel_info,data){
     var that = this;
     console.log('connectWifi');
+    var openWind = that.data.openWind;
     wx.connectWifi({
       SSID: wifi_name,
       BSSID: wifi_mac,
@@ -566,12 +564,16 @@ Page({
         
         wx.onWifiConnected((result) => {
           if(result.wifi.SSID==wifi_name){
-            app.showToast('wifi链接成功');
+            //app.showToast('wifi链接成功');
             that.sppedUploadVideo(hotel_info,data);
           }
           
         },()=>{
-          app.showToast('wifi链接失败');
+          openWind.tip = err_msg;
+          openWind.isError = true;
+          that.setData({
+            openWind:openWind
+          })
         })
       }, fail: function (res) {
         var err_msg = 'wifi链接失败';
@@ -597,7 +599,11 @@ Page({
             var msg = '请手动连接包间wifi:' + wifi_name + ',密码为' + wifi_password_str+'。连上wifi投屏更快哦！';
             
           }
-          app.showToast(err_msg);
+          openWind.tip = err_msg;
+          openWind.isError = true;
+          that.setData({
+            openWind:openWind
+          })
           
           var err_info = JSON.stringify(res);
           that.recordWifiErr(err_info,box_mac);
@@ -637,15 +643,35 @@ Page({
     var filename = forscreen_id;
     var start_time = forscreen_id; 
     var resouce_size  = data.size;
-
+    var openWind = that.data.openWind;
+    openWind.step = 2;
+    openWind.tip = '视频处理中';
+    var progress = 50;
+    openWind.progress = progress;
     that.setData({
-      load_fresh_char: '亲^_^投屏中,请稍后...',
-      hiddens: false, 
+      openWind:openWind,
+
+      //load_fresh_char: '亲^_^投屏中,请稍后...',
+      //hiddens: false, 
       //is_btn_disabel: true,
       is_classic_disabel:true,
       is_speed_disabel:true,
       
     })
+    
+    
+    var time_80 = setInterval(function(){ 
+      
+        progress +=50;
+        if(progress>100){
+          progress = 0;
+        }
+        openWind.progress = progress;
+        that.setData({
+          openWind:openWind,
+        })
+      
+    }, 1000)
     var intranet_ip = hotel_info.intranet_ip;
     var video_url = video;
     var mobile_brand = app.globalData.mobile_brand;
@@ -658,9 +684,13 @@ Page({
       filePath: video_url,
       name: 'fileUpload',
       success: function(res) {
+        clearInterval(time_80);
         var info_rt = JSON.parse(res.data);
         if (info_rt.code == 10000) {
+          openWind.step = 3;
+          openWind.tip = '正在投屏,请稍后';
           that.setData({
+            openWind:openWind,
             is_upload: 1,
             vedio_url: video_url,
             oss_video_url:video_url,
@@ -671,14 +701,20 @@ Page({
             hiddens: true,
             showVedio: false,
           })
+          //倒计时关闭窗口
+          that.closeOpenWind();
+          
           utils.tryCatch(mta.Event.stat('wifiVideoForscreen', { 'status': 1 }));
 
           var end_time = (new Date()).valueOf(); 
           var diff_time = end_time - start_time;
+
           utils.tryCatch(mta.Event.stat('wifiVideoUploadWastTime', { 'uploadtime': diff_time }));
         } else if (res.code == 1001) {
-
+          openWind.tip = '投屏失败，请重试！';
+          openWind.isError = true;
           that.setData({
+            openWind:openWind,
             //is_btn_disabel: false,
             is_classic_disabel:false,
             is_speed_disabel:false,
@@ -688,7 +724,10 @@ Page({
           
           utils.tryCatch(mta.Event.stat('wifiVideoForscreen', { 'status': 0 }));
         }else if(res.code==-1){
+          openWind.tip = '系统繁忙，请重试';
+          openWind.isError = true;
           that.setData({
+            openWind:openWind,
             //is_btn_disabel: false,
             is_classic_disabel:false,
             is_speed_disabel:false,
@@ -701,7 +740,11 @@ Page({
       fail: function({
         errMsg
       }) {
+        clearInterval(time_80);
+        openWind.tip = '投屏失败,请确认是否连接本包间wifi！';
+        openWind.isError = true;
         that.setData({
+          openWind:openWind,
           is_btn_disabel: false,
           is_classic_disabel:false,
           is_speed_disabel:false,
@@ -789,7 +832,7 @@ Page({
       camera: 'back',
       compressed:compressed,
       success: function(res) {
-
+        
         that.setData({
           showVedio: true,
           //is_btn_disabel: false,
@@ -819,7 +862,26 @@ Page({
     });
 
   },
+  closeOpenWind:function(){
+    var that = this;
+    var cutDownTime = that.data.cutDownTime;
+    var djs = cutDownTime -1;
+    var interval = setInterval(function(){ 
+      that.setData({
+        cutDownTime:djs
+      })
 
+      if(djs<=0){
+        clearInterval(interval);
+        that.setData({isOpenWind:false})
+      }
+      djs --;
+      }, 1000)
+  },
+  tipsForLaunchWindowCance:function(){
+    var that = this;
+    
+  },
   //退出投屏
   exitForscreend(e) {
     var that = this;
