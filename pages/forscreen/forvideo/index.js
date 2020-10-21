@@ -74,27 +74,11 @@ Page({
   onLoad: function(e) {
     wx.hideShareMenu();
     var that = this
+    that.getOssParam();//获取oss上传参数
     box_mac = e.box_mac;
     var openid = e.openid;
-
-
     var hotel_info = app.globalData.hotel_info;
-    var change_link_type = app.globalData.change_link_type;
-    if(change_link_type==0){//未手动切换投屏方式
-      if(hotel_info.forscreen_type==2){//直连投屏
-        var launch_type = 'speed';
-      }else if(hotel_info.forscreen_type==1){
-        var launch_type = 'classic';
-      }else {
-        var launch_type = 'classic';
-      }
-    }else if(change_link_type==1){
-      var launch_type = 'classic';
-    }else if(change_link_type ==2){
-      var launch_type = 'speed';
-    }
-    console.log(launch_type);
-
+    
     var user_info = wx.getStorageSync("savor_user_info");
     var avatarUrl = user_info.avatarUrl;
     var nickName = user_info.nickName;
@@ -108,18 +92,15 @@ Page({
     }else if(is_compress==0){
       var compressed = false;
     }
-    
     that.setData({
       hotel_info:hotel_info,
-      launchType:launch_type,
       openid: openid,
       box_mac: box_mac,
       upload_vedio_temp: '',
       avatarUrl: avatarUrl,
       nickName: nickName,
-      is_compress:is_compress
+      is_compress:is_compress,
     })
-
     wx.chooseVideo({
       sourceType: ['album', 'camera'],
       maxDuration: 60,
@@ -147,6 +128,7 @@ Page({
         });
       }
     });
+    
 
     //引导蒙层
     function lead(openid) {
@@ -160,6 +142,7 @@ Page({
         } else {
           var is_lead = 1;
           for (var i = 0; i < guide_prompt.length; i++) {
+            console.log(guide_prompt[i])
             if (guide_prompt[i] == 3) {
               is_lead = 0;
 
@@ -175,6 +158,19 @@ Page({
       }
 
     }
+  },
+  getOssParam:function(){
+    var that = this;
+    wx.request({
+      url: api_url + '/Smallapp/Index/getOssParams',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      success: function(rest) {
+        policy = rest.data.policy;
+        signature = rest.data.signature;
+      }
+    });
   },
 
   // 投视频前播放
@@ -213,180 +209,85 @@ Page({
       'fullscreen': e.detail.fullScreen
     });
   },
-
-  forscreen_video: function(res) {
+  classicForVideo:function(res){
     var that = this;
-    var launchType = that.data.launchType;
-    
-    var hotel_info = that.data.hotel_info;
 
-
-    var box_mac = res.detail.value.box_mac;
-    var openid = res.detail.value.openid;
-    var video = res.detail.value.video;
-    var duration = res.detail.value.duration;
-    var avatarUrl = res.detail.value.avatarUrl;
-    var nickName = res.detail.value.nickName;
-    if(launchType=='classic'){//经典投屏
-      var is_pub_hotelinfo = res.detail.value.is_pub_hotelinfo;
-      var is_share = res.detail.value.is_share;
-      var public_text = res.detail.value.public_text;
-      var is_assist = 0;
-      res_size = res.detail.value.size;
-      if (is_share == 1) {
-        is_assist = 1;
-      }
-      lead(openid, is_share);
-      that.setData({
-        load_fresh_char: '亲^_^投屏中,请稍后...',
-        hiddens: false,
-        is_btn_disabel: true,
-        //is_open_control: true,
-        is_share: is_share,
-        is_assist: is_assist
-      })
-      wx.request({
-        url: api_url + '/smallapp21/User/isForscreenIng',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        method: "POST",
-        data: {
-          box_mac: box_mac
-        },
-        success: function(res) {
-          var timer8_0;
-          var is_forscreen = res.data.result.is_forscreen;
-          if (is_forscreen == 1) {
-            wx.showModal({
-              title: '确认要打断投屏',
-              content: '当前电视正在进行投屏,继续投屏有可能打断当前投屏中的内容.',
-              success: function(res) {
-                if (res.confirm) {
-                  uploadVedio(video, box_mac, openid, is_pub_hotelinfo, is_share, duration, avatarUrl, nickName, public_text, timer8_0);
-                  if (public_text = '' || typeof (public_text) == 'undefined') {
-                    public_text = 0;
-                  } else {
-                    public_text = 1;
-                  }
-                  utils.tryCatch(mta.Event.stat('forscreenVedio', { 'ispublictext': public_text, 'ispublic': is_share, 'isforscreen': 1 }));
-                } else if (res.cancel) {
-                  that.setData({
-                    hiddens: true,
-                  })
-                  wx.navigateBack({
-                    delta: 1
-                  })
-                  if (public_text = '' || typeof (public_text) == 'undefined') {
-                    public_text = 0;
-                  } else {
-                    public_text = 1;
-                  }
-                  utils.tryCatch(mta.Event.stat('forscreenVedio', { 'ispublictext': public_text, 'ispublic': is_share, 'isforscreen': 0 }));
+    var box_mac = res.box_mac;
+    var openid = res.openid;
+    var video = res.video;
+    var duration = res.duration;
+    var avatarUrl = res.avatarUrl;
+    var nickName = res.nickName;
+    var is_pub_hotelinfo = res.is_pub_hotelinfo;
+    var is_share = res.is_share;
+    var public_text = res.public_text;
+    var is_assist = 0;
+    res_size = res.size;
+    if (is_share == 1) {
+      is_assist = 1;
+    } 
+    that.setData({
+      load_fresh_char: '亲^_^投屏中,请稍后...',
+      hiddens: false,
+      is_btn_disabel: true,
+      //is_open_control: true,
+      is_share: is_share,
+      is_assist: is_assist
+    })
+    wx.request({
+      url: api_url + '/smallapp21/User/isForscreenIng',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      method: "POST",
+      data: {
+        box_mac: box_mac
+      },
+      success: function(res) {
+        var is_forscreen = res.data.result.is_forscreen;
+        if (is_forscreen == 1) {
+          wx.showModal({
+            title: '确认要打断投屏',
+            content: '当前电视正在进行投屏,继续投屏有可能打断当前投屏中的内容.',
+            success: function(res) {
+              if (res.confirm) {
+                uploadOssVedio(policy, signature, video, box_mac, openid, is_pub_hotelinfo, is_share, duration, avatarUrl, nickName, public_text);
+                if (public_text = '' || typeof (public_text) == 'undefined') {
+                  public_text = 0;
+                } else {
+                  public_text = 1;
                 }
+                utils.tryCatch(mta.Event.stat('forscreenVedio', { 'ispublictext': public_text, 'ispublic': is_share, 'isforscreen': 1 }));
+              } else if (res.cancel) {
+                that.setData({
+                  hiddens: true,
+                })
+                wx.navigateBack({
+                  delta: 1
+                })
+                if (public_text = '' || typeof (public_text) == 'undefined') {
+                  public_text = 0;
+                } else {
+                  public_text = 1;
+                }
+                utils.tryCatch(mta.Event.stat('forscreenVedio', { 'ispublictext': public_text, 'ispublic': is_share, 'isforscreen': 0 }));
               }
-            })
-            
-          } else {
-            uploadVedio(video, box_mac, openid, is_pub_hotelinfo, is_share, duration, avatarUrl, nickName, public_text, timer8_0);
-            if (public_text = '' || typeof (public_text) == 'undefined') {
-              public_text = 0;
-            } else {
-              public_text = 1;
             }
-            utils.tryCatch(mta.Event.stat('forscreenVedio', { 'ispublictext': public_text, 'ispublic': is_share, 'isforscreen': 0 }));
-          }
-        }
-      })
-    }else {//极速投屏
-      that.setData({
-        load_fresh_char: '亲^_^投屏中,请稍后...',
-        hiddens: false, 
-        is_btn_disabel: true,
-        
-      })
-      var intranet_ip = hotel_info.intranet_ip;
-      var video_url = video;
-      var mobile_brand = app.globalData.mobile_brand;
-      var mobile_model = app.globalData.mobile_model;
-      var forscreen_id = (new Date()).valueOf();
-      var filename = forscreen_id;
-      var start_time = forscreen_id; 
-      var resouce_size  = res.detail.value.size;
-      wx.uploadFile({
-        url: 'http://' + intranet_ip + ':8080/videoH5?deviceId=' + openid + '&box_mac=' + box_mac + '&deviceName=' + mobile_brand + '&web=true&forscreen_id=' + forscreen_id + '&filename=' + filename + '&device_model=' + mobile_model + '&resource_size=' + resouce_size + '&duration=' + duration + '&action=2&resource_type=2&avatarUrl=' + avatarUrl + "&nickName=" + nickName+'&serial_number='+app.globalData.serial_number,
-        filePath: video_url,
-        name: 'fileUpload',
-        success: function(res) {
-          var info_rt = JSON.parse(res.data);
-          if (info_rt.code == 10000) {
-            that.setData({
-              is_upload: 1,
-              vedio_url: video_url,
-              oss_video_url:video_url,
-              filename: filename,
-              resouce_size: resouce_size,
-              duration: duration,
-              intranet_ip: intranet_ip,
-              hiddens: true,
-              showVedio: false,
-            })
-            utils.tryCatch(mta.Event.stat('wifiVideoForscreen', { 'status': 1 }));
-  
-            var end_time = (new Date()).valueOf(); 
-            var diff_time = end_time - start_time;
-            utils.tryCatch(mta.Event.stat('wifiVideoUploadWastTime', { 'uploadtime': diff_time }));
-          } else if (res.code == 1001) {
-  
-            that.setData({
-              is_btn_disabel: false,
-              hiddens: true,
-            })
-            app.showToast('投屏失败，请重试！')
-            
-            utils.tryCatch(mta.Event.stat('wifiVideoForscreen', { 'status': 0 }));
-          }else if(res.code==-1){
-            that.setData({
-              is_btn_disabel: false,
-              hiddens: true,
-              is_forscreen: 1,
-            })
-            app.showToast('系统繁忙，请重试');
-          }
-        },
-        fail: function({
-          errMsg
-        }) {
-          that.setData({
-            is_btn_disabel: false,
-            hiddens: true,
           })
-          app.showToast('投屏失败,请确认是否连接本包间wifi！',3000,'none',true);
           
-          utils.tryCatch(mta.Event.stat('wifiVideoForscreen', { 'status': 0 }));
+        } else {
+          uploadOssVedio(policy, signature, video, box_mac, openid, is_pub_hotelinfo, is_share, duration, avatarUrl, nickName, public_text);
+          if (public_text = '' || typeof (public_text) == 'undefined') {
+            public_text = 0;
+          } else {
+            public_text = 1;
+          }
+          utils.tryCatch(mta.Event.stat('forscreenVedio', { 'ispublictext': public_text, 'ispublic': is_share, 'isforscreen': 0 }));
         }
-      })
-    }
-    function uploadVedio(video, box_mac, openid, is_pub_hotelinfo, is_share, duration, avatarUrl, nickName, public_text, timer8_0) {
-
-      wx.request({
-        url: api_url + '/Smallapp/Index/getOssParams',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        success: function(rest) {
-          policy = rest.data.policy;
-          signature = rest.data.signature;
-          uploadOssVedio(policy, signature, video, box_mac, openid, is_pub_hotelinfo, is_share, duration, avatarUrl, nickName, public_text, timer8_0);
-        }
-      });
-    }
-    function uploadOssVedio(policy, signature, video, box_mac, openid, is_pub_hotelinfo, is_share, duration, avatarUrl, nickName, public_text, timer8_0) {
-
+      }
+    })
+    function uploadOssVedio(policy, signature, video, box_mac, openid, is_pub_hotelinfo, is_share, duration, avatarUrl, nickName, public_text) {
       var filename = video; //视频url
-
-      //var filename_img = video.thumbTempFilePath; //视频封面图
-      //console.log(video);
       var index1 = filename.lastIndexOf(".");
       var index2 = filename.length;
       var mobile_brand = app.globalData.mobile_brand;
@@ -394,6 +295,7 @@ Page({
       var postf_t = filename.substring(index1, index2); //后缀名
       var timestamp = (new Date()).valueOf();
       res_sup_time = timestamp;
+      //第一步上传视频
       var upload_task = wx.uploadFile({
         url: oss_upload_url,
         filePath: filename,
@@ -409,7 +311,7 @@ Page({
           signature: signature
         },
         success: function(res) {
-          //clearInterval(timer8_0);
+          //第二步正在投屏
           var res_eup_time = (new Date()).valueOf();
           that.setData({
             showVedio: false,
@@ -496,7 +398,6 @@ Page({
                 }
               });
             },
-
           });
           try {
             let consumeDuration = res_eup_time - timestamp;
@@ -509,58 +410,282 @@ Page({
         }
       });
       upload_task.onProgressUpdate((res) => {
-        //console.log(res);
-
         that.setData({
           vedio_percent: res.progress
         });
         if (res.progress == 100) {
-
           that.setData({
             //showVedio:false,
-            
           })
-
         }
-
       });
-      // that.setData({
-      //   replay_video_url: "forscreen/resource/" + timestamp + postf_t,
-      //   showVedio: true,
-      //   upload_vedio_temp: filename,
-      // });
     }
-    //引导蒙层
-    function lead(openid) {
+  },
+  speedForVideo:function(res,hotel_info){
+    var that = this;
+    
 
-      if (is_share == 1) {
-        var user_info = wx.getStorageSync('savor_user_info');
-        var guide_prompt = user_info.guide_prompt;
-        if (typeof(guide_prompt) != 'undefined') {
-          if (guide_prompt.length == 0) {
-            that.setData({
-              showGuidedMaskAfterLaunch: true,
-            })
-          } else {
-            var is_lead = 1;
-            for (var i = 0; i < guide_prompt.length; i++) {
-              if (guide_prompt[i] == 4) {
-                is_lead = 0;
+    that.linkHotelWifi(res,hotel_info)
 
-                break;
+
+  },
+  linkHotelWifi:function(data,hotel_info){
+    var that = this;
+    var box_mac = data.box_mac;
+
+    var wifi_name = hotel_info.wifi_name;
+    var wifi_mac = hotel_info.wifi_mac;
+    var use_wifi_password = hotel_info.wifi_password;
+    var box_mac = hotel_info.box_mac
+    //console.log(data);
+    //console.log(hotel_info);
+    //return false;
+    if (hotel_info.wifi_name != '') {
+      wx.startWifi({
+        success: function (res) {
+          wx.getConnectedWifi({
+            success: function (res) {
+              //第一步链接wifi
+              if (res.errMsg == 'getConnectedWifi:ok') {
+                if (res.wifi.SSID == wifi_name) {//链接的是本包间wifi
+                  wx.stopWifi({
+                  })
+                  //第二步开始投屏
+                  app.showToast('包间链接成功')
+                  that.sppedUploadVideo(hotel_info,data);
+
+
+                } else {//链接的不是本包间wifi
+                  that.connectWifi(wifi_name, wifi_mac, use_wifi_password, box_mac,hotel_info,data);
+                  
+                }
+              } else {
+                //当前打开wifi 但是没有链接任何wifi
+                that.connectWifi(wifi_name, wifi_mac, use_wifi_password, box_mac,hotel_info,data);
+                
               }
-            }
-            if (is_lead == 1) {
-              that.setData({
-                showGuidedMaskAfterLaunch: true,
-              })
-            }
-          }
+              //wx.hideLoading()
+            }, fail: function (res) {
+              var err_msg = 'wifi链接失败';
+              if(res.errMsg == 'getConnectedWifi:fail:currentWifi is null' || res.errMsg=='getConnectedWifi:fail no wifi is connected.'){
+                that.connectWifi(wifi_name, wifi_mac, use_wifi_password, box_mac,hotel_info,data);
+              }else {
+                if (res.errCode == 12005) { //安卓特有  未打开wifi
+                  err_msg = '请打开您的手机Wifi';
+                  that.setData({
+                    wifiErr: { 'is_open': 1, 'msg': '亲，使用此小程序前需要打开您手机的wifi,连上wifi投屏更快哦！', 'confirm': '确定', 'calcle': '取消', 'type': 1 }
+                  })
+                } else if (res.errCode == 12006) {//Android 特有，未打开 GPS 定位开关
+                  err_msg = '请打开您的手机GPS';
+                  that.setData({
+                    wifiErr: { 'is_open': 1, 'msg': '亲，使用此小程序前需要打开您手机的GPS定位,连上wifi投屏更快哦！', 'confirm': '确定', 'calcle': '取消', 'type': 2 }
+                  })
+                } else if(res.errCode == 12007){//用户拒绝授权链接 Wi-Fi
+                  that.setData({
+                    wifiErr: { 'is_open': 1, 'msg': '亲，使用此小程序前需要链接包间wifi,连上wifi投屏更快哦！', 'confirm': '重试', 'calcle': '', 'type': 3 }
+                  })
+                }else if(res.errCode== 12010){
+                  err_msg = '请确认并打开wifi';
+                  
+                }else {
+                  if (hotel_info.wifi_password == '') {
+                    var us_wifi_password = '空';
+                  } else {
+                    var us_wifi_password = hotel_info.wifi_password;
+                  }
+                  var msg = '请手动连接包间wifi:' + hotel_info.wifi_name + ',密码为' + us_wifi_password+'。连上wifi投屏更快哦！';
+                  
+                }
+              }
+              app.showToast(err_msg)
+            },
+          })
+        }, fail: function (res) {
+          console.log('startwifierr')
+          
         }
-
-      }
-
+      })
+    }else {
+      app.showToast('该电视暂不支持极速投屏');
     }
+
+  },
+  connectWifi:function(wifi_name, wifi_mac, use_wifi_password, box_mac,hotel_info,data){
+    var that = this;
+    console.log('connectWifi');
+    wx.connectWifi({
+      SSID: wifi_name,
+      BSSID: wifi_mac,
+      password: use_wifi_password,
+      success: function (reswifi) {
+        
+        wx.onWifiConnected((result) => {
+          if(result.wifi.SSID==wifi_name){
+            app.showToast('wifi链接成功');
+            that.sppedUploadVideo(hotel_info,data);
+          }
+          
+        },()=>{
+          app.showToast('wifi链接失败');
+        })
+      }, fail: function (res) {
+        var err_msg = 'wifi链接失败';
+        if(res.errCode==12000){
+        }else {
+          if (res.errCode == 12005) { //安卓特有  未打开wifi
+            err_msg = '请打开您的手机Wifi';
+            
+          } else if (res.errCode == 12006) {//Android 特有，未打开 GPS 定位开关
+            err_msg = '请打开您的手机GPS';
+            
+          } else if(res.errCode == 12007){//用户拒绝授权链接 Wi-Fi
+            
+          }else if(res.errCode==12010){
+            err_msg = '请确认并打开wifi';
+            
+          }else {
+            if (use_wifi_password == '') {
+              var wifi_password_str = '空';
+            } else {
+              var wifi_password_str = use_wifi_password;
+            }
+            var msg = '请手动连接包间wifi:' + wifi_name + ',密码为' + wifi_password_str+'。连上wifi投屏更快哦！';
+            
+          }
+          app.showToast(err_msg);
+          
+          var err_info = JSON.stringify(res);
+          that.recordWifiErr(err_info,box_mac);
+        }
+      }
+    })
+  },
+  recordWifiErr:function(err_info,box_mac){
+    wx.request({
+      url: aps.globalData.api_v_url + '/datalog/recordWifiErr',
+      data: {
+        err_info: err_info,
+        box_mac: box_mac,
+        openid:aps.globalData.openid,
+        mobile_brand:aps.globalData.sys_info.brand,
+        mobile_model:aps.globalData.sys_info.model,
+        platform:aps.globalData.sys_info.platform,
+        version:aps.globalData.sys_info.version,
+        system:aps.globalData.sys_info.system
+      }
+    })
+  },
+  sppedUploadVideo:function(hotel_info,data){
+    var that = this;
+    var box_mac = data.box_mac;
+    var openid = data.openid;
+    var video = data.video;
+    var duration = data.duration;
+    var avatarUrl = data.avatarUrl;
+    var nickName = data.nickName;
+
+    var intranet_ip = hotel_info.intranet_ip;
+    var video_url = data.video;
+    var mobile_brand = app.globalData.mobile_brand;
+    var mobile_model = app.globalData.mobile_model;
+    var forscreen_id = (new Date()).valueOf();
+    var filename = forscreen_id;
+    var start_time = forscreen_id; 
+    var resouce_size  = data.size;
+
+    that.setData({
+      load_fresh_char: '亲^_^投屏中,请稍后...',
+      hiddens: false, 
+      is_btn_disabel: true,
+      
+    })
+    var intranet_ip = hotel_info.intranet_ip;
+    var video_url = video;
+    var mobile_brand = app.globalData.mobile_brand;
+    var mobile_model = app.globalData.mobile_model;
+    var forscreen_id = (new Date()).valueOf();
+    var filename = forscreen_id;
+    var start_time = forscreen_id; 
+    wx.uploadFile({
+      url: 'http://' + intranet_ip + ':8080/videoH5?deviceId=' + openid + '&box_mac=' + box_mac + '&deviceName=' + mobile_brand + '&web=true&forscreen_id=' + forscreen_id + '&filename=' + filename + '&device_model=' + mobile_model + '&resource_size=' + resouce_size + '&duration=' + duration + '&action=2&resource_type=2&avatarUrl=' + avatarUrl + "&nickName=" + nickName+'&serial_number='+app.globalData.serial_number,
+      filePath: video_url,
+      name: 'fileUpload',
+      success: function(res) {
+        var info_rt = JSON.parse(res.data);
+        if (info_rt.code == 10000) {
+          that.setData({
+            is_upload: 1,
+            vedio_url: video_url,
+            oss_video_url:video_url,
+            filename: filename,
+            resouce_size: resouce_size,
+            duration: duration,
+            intranet_ip: intranet_ip,
+            hiddens: true,
+            showVedio: false,
+          })
+          utils.tryCatch(mta.Event.stat('wifiVideoForscreen', { 'status': 1 }));
+
+          var end_time = (new Date()).valueOf(); 
+          var diff_time = end_time - start_time;
+          utils.tryCatch(mta.Event.stat('wifiVideoUploadWastTime', { 'uploadtime': diff_time }));
+        } else if (res.code == 1001) {
+
+          that.setData({
+            is_btn_disabel: false,
+            hiddens: true,
+          })
+          app.showToast('投屏失败，请重试！')
+          
+          utils.tryCatch(mta.Event.stat('wifiVideoForscreen', { 'status': 0 }));
+        }else if(res.code==-1){
+          that.setData({
+            is_btn_disabel: false,
+            hiddens: true,
+            is_forscreen: 1,
+          })
+          app.showToast('系统繁忙，请重试');
+        }
+      },
+      fail: function({
+        errMsg
+      }) {
+        that.setData({
+          is_btn_disabel: false,
+          hiddens: true,
+        })
+        app.showToast('投屏失败,请确认是否连接本包间wifi！',3000,'none',true);
+        
+        utils.tryCatch(mta.Event.stat('wifiVideoForscreen', { 'status': 0 }));
+      }
+    })
+  },
+  forscreen_video: function(res) {
+    var that = this;
+   
+    var launchType = res.detail.target.launchType;
+    
+    var hotel_info = that.data.hotel_info;
+
+
+    var box_mac = res.detail.value.box_mac;
+    var openid = res.detail.value.openid;
+    var video = res.detail.value.video;
+    var duration = res.detail.value.duration;
+    var avatarUrl = res.detail.value.avatarUrl;
+    var nickName = res.detail.value.nickName;
+    if(launchType=='classic'){//经典投屏
+      that.classicForVideo(res.detail.value);
+
+
+      
+    }else {//极速投屏
+      that.speedForVideo(res.detail.value,hotel_info);
+      return false;
+
+      
+    }
+    
   },
 
   //重新选择视频
@@ -987,22 +1112,4 @@ Page({
   onShareAppMessage: function() {
 
   },
-  /**
-   * 选择投屏类型
-   */
-  chooseLaunchType:function(e){
-    let that=this;
-    var hotel_info = that.data.hotel_info;
-    let launchType=e.currentTarget.dataset.launch_type; 
-    
-    if(launchType=='speed'){
-      hotel_info.forscreen_type = 2;
-      app.linkHotelWifi(hotel_info,that,'speed');
-      mta.Event.stat('clickChangeLinkType',{'openid':openid,'linktype':2,'forscreentype':1,'boxmac':box_mac})
-    }else {
-      that.setData({launchType:launchType});
-      app.globalData.change_link_type = 1;
-      mta.Event.stat('clickChangeLinkType',{'openid':openid,'linktype':1,'forscreentype':1,'boxmac':box_mac})
-    }
-  }
 })
