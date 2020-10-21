@@ -36,14 +36,14 @@
 				</block>
 
 				<view class="choose-launch-edition flex-row-center-space_around" wx:if="{{hotel_info.forscreen_method=='1-1'}}">
-					<view class="btn flex-column-center-space_around {{launchType=='classic'?'selected':'not-selected'}}" data-launch_type="classic" bindtap="chooseLaunchType">
+					<button class="btn flex-column-center-space_around {{launchType=='classic'?'selected':'not-selected'}}" form-type="submit" data-launch_type="classic" disabled='{{is_classic_disabel}}'>
 						<view class="name">经典投屏</view>
 						<view class="description">适合小视频、短视频</view>
-					</view>
-					<view class="btn flex-column-center-space_around {{launchType=='speed'?'selected':'not-selected'}}" data-launch_type="speed" bindtap="chooseLaunchType">
+					</button>
+					<button class="btn flex-column-center-space_around {{launchType=='speed'?'selected':'not-selected'}}" form-type="submit" data-launch_type="speed" disabled='{{is_speed_disabel}}'>
 						<view class="name">极速投屏</view>
 						<view class="description">适合较长视频、高清视频</view>
-					</view>
+					</button>
 				</view>
 				<!-- <template is="beforeLaunchQuality" data="{{qualityList:[{name:'标清',checked:true},{name:'高清'},{name:'原片'}]}}" /> -->
 				<!-- <button class="savor-btn theme-button-dark" form-type="submit" hover-class="none" disabled='{{is_btn_disabel}}'>投屏</button> -->
@@ -177,4 +177,4 @@
 </view>
 
 <!-- 投屏提示弹窗 -->
-<template is="tipsForLaunch" data="{{isWifi:true,isError:true,title:'您正在使用极速投屏',step:1,progress:20,tip:'正在投屏，请稍候',time:'3S',DevOpsTips:'耗时23秒'}}" />
+<template wx:if="{{isOpenWind== true}}" is="tipsForLaunch" data="{{isWifi:openWind.isWifi,isError:openWind.isError,title:openWind.title,step:openWind.step,progress:openWind.progress,tip:openWind.tip,time:cutDownTime,DevOpsTips:DevOpsTips}}" />

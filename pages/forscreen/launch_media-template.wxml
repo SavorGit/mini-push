@@ -91,7 +91,7 @@
 							<view wx:if="{{step>(isWifi?2:1)}}" class="launching flex-column-center-center">
 								<view class="icon fa fa-check-circle" aria-hidden="true"></view>
 								<view class="tip">{{tip}}</view>
-								<view class="time theme-font-orange">{{time}}</view>
+								<view class="time theme-font-orange">{{time}}S</view>
 							</view>
 						</block>
 					</view>

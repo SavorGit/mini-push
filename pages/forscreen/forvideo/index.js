@@ -48,7 +48,10 @@ Page({
     ],
     is_pub_hotelinfo: 1, //是否公开酒楼信息
     is_share: 0, //是否分享到发现栏目
-    is_btn_disabel: true,
+    //is_btn_disabel: true,
+
+    is_classic_disabel:true,
+    is_speed_disabel:true,
     avatarUrl: '',
     nickName: '',
     replay_video_url: '',
@@ -65,7 +68,14 @@ Page({
     showGuidedMaskAfterLaunch: false,
     res_head_desc: '视频',
     compressed:true,  //默认压缩
-    launchType:'classic'
+    launchType:'classic',
+
+    isOpenWind:false, //是否显示投屏状态弹窗
+    // isWifi:是否显示WIFI连接提示  isError:是否显示错误信息 title 弹窗标题 step:步骤 progress:进度条 tip:正在投屏，请稍候 
+    openWind:{'isWifi':false,'isError':false,'title':'','step':1,'progress':0,'tip':''}, 
+    cutDownTime:'3', // 3S   倒计时
+    DevOpsTips:'0', //耗时23秒
+
   },
 
   /**
@@ -109,7 +119,9 @@ Page({
       success: function(res) {
         that.setData({
           showVedio: true,
-          is_btn_disabel: false,
+          //is_btn_disabel: false,
+          is_classic_disabel:false,
+          is_speed_disabel:false,
           upload_vedio_temp: res.tempFilePath,
           duration: res.duration,
           size: res.size
@@ -225,12 +237,20 @@ Page({
     res_size = res.size;
     if (is_share == 1) {
       is_assist = 1;
-    } 
+    }
+    var openWind = that.data.openWind;
+    openWind.title = '您正在使用经典投屏';
+    openWind.tip   = '视频正在处理中';
+
     that.setData({
-      load_fresh_char: '亲^_^投屏中,请稍后...',
-      hiddens: false,
-      is_btn_disabel: true,
+      isOpenWind:true,
+      openWind:openWind,
+      //load_fresh_char: '亲^_^投屏中,请稍后...',
+      //hiddens: false,
+      //is_btn_disabel: true,
       //is_open_control: true,
+      is_classic_disabel:true,
+      is_speed_disabel:true,
       is_share: is_share,
       is_assist: is_assist
     })
@@ -313,7 +333,11 @@ Page({
         success: function(res) {
           //第二步正在投屏
           var res_eup_time = (new Date()).valueOf();
+          var openWind = that.data.openWind;
+          openWind.step = 2;
+          openWind.tip  = '正在投屏,请稍后';
           that.setData({
+            openWind:openWind,
             showVedio: false,
             oss_video_url: oss_url + "/forscreen/resource/" + timestamp + postf_t,
             upload_vedio_temp: '',
@@ -339,6 +363,25 @@ Page({
                   icon: 'none',
                   duration: 2000,
                 })
+                openWind.isError = true;
+                openWind.tip     = '投屏失败';
+                that.setData({
+                  openWind:openWind,
+                })
+              }else {
+                var cutDownTime = that.data.cutDownTime;
+                var djs = cutDownTime;
+                var interval = setInterval(function(){ 
+                  that.setData({
+                    cutDownTime:djs
+                  })
+
+                  if(djs<-0){
+                    clearInterval(interval);
+                    that.setData({isOpenWind:false})
+                  }
+                  djs --;
+                 }, 1000)
               }
               that.setData({
                 upload_vedio_cover: oss_url + '/forscreen/resource/' + timestamp + postf_t + '?x-oss-process=video/snapshot,t_2000,f_jpg,w_450,m_fast',
@@ -410,13 +453,15 @@ Page({
         }
       });
       upload_task.onProgressUpdate((res) => {
+        console.log(res)
+        var openWind = that.data.openWind;
+        openWind.progress = res.progress
         that.setData({
-          vedio_percent: res.progress
+          openWind:openWind,
+          
         });
         if (res.progress == 100) {
-          that.setData({
-            //showVedio:false,
-          })
+          
         }
       });
     }
@@ -596,7 +641,9 @@ Page({
     that.setData({
       load_fresh_char: '亲^_^投屏中,请稍后...',
       hiddens: false, 
-      is_btn_disabel: true,
+      //is_btn_disabel: true,
+      is_classic_disabel:true,
+      is_speed_disabel:true,
       
     })
     var intranet_ip = hotel_info.intranet_ip;
@@ -632,7 +679,9 @@ Page({
         } else if (res.code == 1001) {
 
           that.setData({
-            is_btn_disabel: false,
+            //is_btn_disabel: false,
+            is_classic_disabel:false,
+            is_speed_disabel:false,
             hiddens: true,
           })
           app.showToast('投屏失败，请重试！')
@@ -640,7 +689,9 @@ Page({
           utils.tryCatch(mta.Event.stat('wifiVideoForscreen', { 'status': 0 }));
         }else if(res.code==-1){
           that.setData({
-            is_btn_disabel: false,
+            //is_btn_disabel: false,
+            is_classic_disabel:false,
+            is_speed_disabel:false,
             hiddens: true,
             is_forscreen: 1,
           })
@@ -652,6 +703,8 @@ Page({
       }) {
         that.setData({
           is_btn_disabel: false,
+          is_classic_disabel:false,
+          is_speed_disabel:false,
           hiddens: true,
         })
         app.showToast('投屏失败,请确认是否连接本包间wifi！',3000,'none',true);
@@ -660,20 +713,20 @@ Page({
       }
     })
   },
+  //点击投屏
   forscreen_video: function(res) {
     var that = this;
-   
-    var launchType = res.detail.target.launchType;
-    
+    var openWind = that.data.openWind;
+    openWind= {'isWifi':false,'isError':false,'title':'','step':1,'progress':0,'tip':''};
+    that.setData({
+      cutDownTime:3,
+      openWind:openWind,
+    })
+    var launchType = res.detail.target.dataset.launch_type;
     var hotel_info = that.data.hotel_info;
 
 
-    var box_mac = res.detail.value.box_mac;
-    var openid = res.detail.value.openid;
-    var video = res.detail.value.video;
-    var duration = res.detail.value.duration;
-    var avatarUrl = res.detail.value.avatarUrl;
-    var nickName = res.detail.value.nickName;
+    
     if(launchType=='classic'){//经典投屏
       that.classicForVideo(res.detail.value);
 
@@ -722,7 +775,9 @@ Page({
       ],
       is_share: 0,
       showVedio: true,
-      is_btn_disabel: true,
+      //is_btn_disabel: true,
+      is_classic_disabel:true,
+      is_speed_disabel:true,
     });
     var box_mac = e.currentTarget.dataset.boxmac;
     var openid = e.currentTarget.dataset.openid;
@@ -737,7 +792,9 @@ Page({
 
         that.setData({
           showVedio: true,
-          is_btn_disabel: false,
+          //is_btn_disabel: false,
+          is_classic_disabel:false,
+          is_speed_disabel:false,
           upload_vedio_temp: res.tempFilePath,
           //upload_vedio_cover: res.thumbTempFilePath,
           vedio_percent: 0,
@@ -751,7 +808,9 @@ Page({
       fail: function(res) {
         that.setData({
           showVedio: false,
-          is_btn_disabel: true,
+          //is_btn_disabel: true,
+          is_classic_disabel:true,
+          is_speed_disabel:true,
         });
         mta.Event.stat('LaunchVideoWithNet_Launch_ChooseVideo', {
           'status': 'fail'
