@@ -53,3 +53,53 @@
 		<button class="theme-button font_FFFFFF_28" bindtap="closeLead" data-type="{{dataType}}" data-openid="{{openid}}">知道了</button>
 	</view>
 </template>
+
+<!-- 投屏提示弹窗 -->
+<template name="tipsForLaunch">
+	<view class="tipsForLaunchWindow">
+		<view class="mask flex-column-center-center">
+			<view class="window theme-window">
+				<view class="head">
+					<view class="DevOps" bindtap="tipsForLaunchWindowDevOps">{{DevOpsTips}}</view>
+					<view class="title-bar">
+						<view class="title">{{title}}</view>
+					</view>
+				</view>
+				<view class="body">
+					<view class="top flex-row-center-center">
+						<view wx:if="{{isWifi}}" class="step {{step>0?'theme-font-orange':''}}">1.连接wifi</view>
+						<view wx:if="{{isWifi}}" class="step line {{step>1?'theme-font-orange':''}}">------</view>
+						<view class="step {{step>(isWifi?1:0)?'theme-font-orange':''}}">{{isWifi?2:1}}.处理中</view>
+						<view class="step line {{step>(isWifi?2:1)?'theme-font-orange':''}}">------</view>
+						<view class="step {{step>(isWifi?2:1)?'theme-font-orange':''}}">{{isWifi?3:2}}.开始投屏</view>
+					</view>
+					<view class="main flex-column-center-center">
+						<view wx:if="{{isError}}" class="error flex-column-center-center">
+							<view class="icon fa fa-exclamation-circle theme-font-orange" aria-hidden="true"></view>
+							<view class="tip theme-font-orange">{{tip}}</view>
+							<view class="btn retry" bindtap="tipsForLaunchWindowRetry">重试</view>
+						</view>
+						<block wx:else>
+							<view wx:if="{{isWifi&&step==1}}" class="conn-wifi flex-column-center-center">
+								<view class="icon fa fa-cog fa-spin" aria-hidden="true"></view>
+								<view class="tip">{{tip}}</view>
+							</view>
+							<view wx:if="{{step==(isWifi?2:1)}}" class="handle flex-column-center-center">
+								<progress class="progress" percent="{{progress}}" aria-hidden="true" stroke-width="40rpx" color="rgb(255, 112, 66)" activeColor="rgb(255, 112, 66)" backgroundColor="#EBEBEB" active="true"></progress>
+								<view class="tip">{{tip}}</view>
+							</view>
+							<view wx:if="{{step>(isWifi?2:1)}}" class="launching flex-column-center-center">
+								<view class="icon fa fa-check-circle" aria-hidden="true"></view>
+								<view class="tip">{{tip}}</view>
+								<view class="time theme-font-orange">{{time}}</view>
+							</view>
+						</block>
+					</view>
+					<view class="bottom flex-row-center-center">
+						<view wx:if="{{step<(isWifi?3:2)}}" class="btn theme-button-dark" bindtap="tipsForLaunchWindowCancel">取消投屏</view>
+					</view>
+				</view>
+			</view>
+		</view>
+	</view>
+</template>
