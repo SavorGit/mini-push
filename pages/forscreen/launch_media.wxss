@@ -28,7 +28,8 @@
 
 .before_launch .page_main {
   width: 100%;
-  height: calc(100% - 168rpx);
+  height: calc(100% - 68rpx);
+  /* height: calc(100% - 168rpx); */
   text-align: center;
 }
 
@@ -113,7 +114,8 @@
 }
 
 .before_launch .page_bottom {
-  height: 100rpx;
+  height: 0;
+  /* height: 100rpx; */
 }
 
 .before_launch .page_bottom>.savor-btn {
@@ -181,7 +183,6 @@
   text-decoration: none;
 }
 
-.quality>.radio.checked {}
 
 
 
@@ -478,4 +479,160 @@
   margin-top: 50rpx;
   font-size: 28rpx;
   opacity: 1;
+}
+
+
+
+
+
+/* ================================== 投屏提示弹窗 ================================== */
+.tipsForLaunchWindow,
+.tipsForLaunchWindow>.mask {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+}
+
+.tipsForLaunchWindow>.mask {
+  background-color: rgba(0, 0, 0, 0.4);
+  z-index: 9999;
+}
+
+.tipsForLaunchWindow>.mask>.window {
+  width: 690rpx;
+  height: 660rpx;
+  border-radius: 20rpx;
+}
+
+.tipsForLaunchWindow>.mask>.window>.head {
+  width: 100%;
+  height: 120rpx;
+}
+
+.tipsForLaunchWindow>.mask>.window>.head>.DevOps {
+  width: calc(100% - 20rpx);
+  height: 40rpx;
+  line-height: 40rpx;
+  padding: 10rpx;
+  font-size: 24rpx;
+}
+
+.tipsForLaunchWindow>.mask>.window>.head>.title-bar {
+  width: calc(100% - 60rpx);
+  height: 60rpx;
+  margin: 0 30rpx;
+  border-bottom: solid 2rpx rgba(237, 237, 237, 1);
+}
+
+.tipsForLaunchWindow>.mask>.window>.head>.title-bar>.title {
+  width: 100%;
+  height: 60rpx;
+  text-align: center;
+  font-size: 36rpx;
+  font-weight: 400;
+}
+
+.tipsForLaunchWindow>.mask>.window>.body {
+  width: calc(100% - 50rpx);
+  height: calc(100% - 160rpx);
+  padding: 20rpx 25rpx;
+}
+
+.tipsForLaunchWindow>.mask>.window>.body>.top {
+  width: 100%;
+  height: 80rpx;
+}
+
+.tipsForLaunchWindow>.mask>.window>.body>.top>.step {
+  font-size: 28rpx;
+  font-weight: 400;
+}
+
+.tipsForLaunchWindow>.mask>.window>.body>.top>.step.line {
+  width: 120rpx;
+  text-align: center;
+}
+
+.tipsForLaunchWindow>.mask>.window>.body>.main {
+  width: 100%;
+  height: calc(100% - 180rpx);
+}
+
+.tipsForLaunchWindow>.mask>.window>.body>.main>view {
+  width: 100%;
+  height: 100%;
+}
+
+.tipsForLaunchWindow>.mask>.window>.body>.main>.error>.icon {
+  font-size: 130rpx;
+}
+
+.tipsForLaunchWindow>.mask>.window>.body>.main>.error>.tip {
+  font-size: 28rpx;
+  font-weight: 400;
+}
+
+.tipsForLaunchWindow>.mask>.window>.body>.main>.error>.btn {
+  width: 322rpx;
+  height: 60rpx;
+  line-height: 64rpx;
+  text-align: center;
+  border-radius: 10rpx;
+  font-size: 28rpx;
+  border: solid 2rpx #F68855;
+  color: #F68855;
+  padding: 0;
+  margin: 0;
+}
+
+.tipsForLaunchWindow>.mask>.window>.body>.main>.conn-wifi>.icon {
+  font-size: 130rpx;
+}
+
+.tipsForLaunchWindow>.mask>.window>.body>.main>.conn-wifi>.tip {
+  font-size: 28rpx;
+  font-weight: 400;
+}
+
+.tipsForLaunchWindow>.mask>.window>.body>.main>.handle>.progress {
+  width: 640rpx;
+  height: 40rpx;
+}
+
+.tipsForLaunchWindow>.mask>.window>.body>.main>.handle>.tip {
+  font-size: 28rpx;
+  font-weight: 400;
+}
+
+.tipsForLaunchWindow>.mask>.window>.body>.main>.launching>.icon {
+  font-size: 130rpx;
+}
+
+.tipsForLaunchWindow>.mask>.window>.body>.main>.launching>.tip {
+  font-size: 28rpx;
+  font-weight: 400;
+}
+
+.tipsForLaunchWindow>.mask>.window>.body>.main>.launching>.time {
+  font-size: 28rpx;
+  font-weight: 400;
+}
+
+.tipsForLaunchWindow>.mask>.window>.body>.bottom {
+  width: 100%;
+  height: 100rpx;
+}
+
+.tipsForLaunchWindow>.mask>.window>.body>.bottom>.btn {
+  width: 326rpx;
+  height: 64rpx;
+  line-height: 64rpx;
+  text-align: center;
+  border-radius: 10rpx;
+  font-size: 28rpx;
+  padding: 0;
+  border: 0;
+  margin: 0;
 }

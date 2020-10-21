@@ -71,7 +71,7 @@
 				<!-- <button class="savor-btn theme-button-dark" form-type="submit" hover-class="none" disabled='{{is_btn_disabel}}'>投屏</button> -->
 			</scroll-view>
 			<view class='page_bottom flex-row-center-center'>
-				<button class="savor-btn theme-button-dark" form-type="submit" hover-class="none" disabled='{{is_btn_disabel}}'>投屏</button>
+				<!-- <button class="savor-btn theme-button-dark" form-type="submit" hover-class="none" disabled='{{is_btn_disabel}}'>投屏</button> -->
 			</view>
 		</form>
 
@@ -204,3 +204,6 @@
 	<loading hidden="{{hiddens}}" bindchange="loadingChange">{{load_fresh_char}}</loading>
 	<loading hidden="{{wifi_hidden}}" bindchange="loadingChange">正在连接包间wifi,请稍后...</loading>
 </view>
+
+<!-- 投屏提示弹窗 -->
+<template is="tipsForLaunch" data="{{isWifi:true,title:'您正在使用极速投屏',step:3,progress:20,tip:'正在投屏，请稍候',time:'3S',DevOpsTips:'耗时23秒'}}" />

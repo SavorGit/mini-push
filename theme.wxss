@@ -90,6 +90,7 @@ button[disabled] {
   color: rgb(48, 219, 13);
 }
 
+.theme-font-orange,
 .theme-icon-orange {
   color: #F68855;
 }
