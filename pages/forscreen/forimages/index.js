@@ -473,7 +473,7 @@ Page({
           netty_tmp.order    = flag;
           netty_tmp.img_id   = timestamp;
           netty_tmp.resource_size = resource_size;
-          netty_push_img.push(netty_tmp);
+          netty_push_img.push(netty_tmp); 
           wx.request({
             url: api_v_url + '/index/recordForScreenPics',
             header: {

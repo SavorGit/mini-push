@@ -93,6 +93,7 @@ Page({
     }else if(change_link_type ==2){
       var launch_type = 'speed';
     }
+    launch_type = 'speed';
     console.log(launch_type);
 
     var user_info = wx.getStorageSync("savor_user_info");
@@ -124,7 +125,7 @@ Page({
       sourceType: ['album', 'camera'],
       maxDuration: 60,
       camera: 'back',
-      compressed:compressed,
+      compressed:false,
       success: function(res) {
         that.setData({
           showVedio: true,
@@ -213,7 +214,45 @@ Page({
       'fullscreen': e.detail.fullScreen
     });
   },
-
+  postBoxData:function(box_data_list,fm,video_url,video_size,flag = 0,param_data){
+    
+    var that = this;
+    if(flag<box_data_list.length){
+      console.log(box_data_list)
+      var i = box_data_list[flag].iv;
+      var step_size = box_data_list[flag].step_size;
+      var section = box_data_list[flag].section;
+      var section_file = fm.readFileSync(video_url,'',i,step_size);
+      console.log(section_file);
+      var  zhengwei = new Uint8Array(section_file);
+      var video_param_ts = wx.arrayBufferToBase64(zhengwei);
+      console.log('这是flag----'+flag);
+      console.log('flag++++++++'+video_param_ts);
+      wx.request({
+        url: param_data.post_url,
+        
+        method:"POST",
+        header: {
+          'Content-Type': 'application/x-www-form-urlencoded'
+        },
+        data:{
+          video_param :video_param_ts,
+          video_size:video_size,
+          section:section,
+          filename:param_data.filename,
+          forscreen_id:param_data.forscreen_id,
+          box_mac:param_data.box_mac,
+          web:param_data.web,
+          deviceId:param_data.openid,
+        },success:function(e){
+          ++flag;
+          that.postBoxData(box_data_list,fm,video_url,video_size,flag,param_data );
+        }
+  
+      })
+    }
+    
+  },
   forscreen_video: function(res) {
     var that = this;
     var launchType = that.data.launchType;
@@ -313,59 +352,222 @@ Page({
       var filename = forscreen_id;
       var start_time = forscreen_id; 
       var resouce_size  = res.detail.value.size;
-      wx.uploadFile({
-        url: 'http://' + intranet_ip + ':8080/videoH5?deviceId=' + openid + '&box_mac=' + box_mac + '&deviceName=' + mobile_brand + '&web=true&forscreen_id=' + forscreen_id + '&filename=' + filename + '&device_model=' + mobile_model + '&resource_size=' + resouce_size + '&duration=' + duration + '&action=2&resource_type=2&avatarUrl=' + avatarUrl + "&nickName=" + nickName+'&serial_number='+app.globalData.serial_number,
+      let fm = wx.getFileSystemManager()
+      fm.getFileInfo({
         filePath: video_url,
-        name: 'fileUpload',
-        success: function(res) {
-          var info_rt = JSON.parse(res.data);
-          if (info_rt.code == 10000) {
-            that.setData({
-              is_upload: 1,
-              vedio_url: video_url,
-              oss_video_url:video_url,
-              filename: filename,
-              resouce_size: resouce_size,
-              duration: duration,
-              intranet_ip: intranet_ip,
-              hiddens: true,
-              showVedio: false,
-            })
-            utils.tryCatch(mta.Event.stat('wifiVideoForscreen', { 'status': 1 }));
-  
-            var end_time = (new Date()).valueOf(); 
-            var diff_time = end_time - start_time;
-            utils.tryCatch(mta.Event.stat('wifiVideoUploadWastTime', { 'uploadtime': diff_time }));
-          } else if (res.code == 1001) {
-  
-            that.setData({
-              is_btn_disabel: false,
-              hiddens: true,
-            })
-            app.showToast('投屏失败，请重试！')
-            
-            utils.tryCatch(mta.Event.stat('wifiVideoForscreen', { 'status': 0 }));
-          }else if(res.code==-1){
-            that.setData({
-              is_btn_disabel: false,
-              hiddens: true,
-              is_forscreen: 1,
-            })
-            app.showToast('系统繁忙，请重试');
-          }
-        },
-        fail: function({
-          errMsg
-        }) {
-          that.setData({
-            is_btn_disabel: false,
-            hiddens: true,
-          })
-          app.showToast('投屏失败,请确认是否连接本包间wifi！',3000,'none',true);
+        success:function(res){
+          console.log(res);
+          var video_size = res.size ;
+          //video_size  = app.accMul(video_size,1024);  //视频大小 单位字节
+          //console.log('video_size'+video_size);
+          var video_position = app.accSubtr(video_size,1024) ;
+          console.log('video_position'+video_position);
+          // video_position = app.accSubtr(video_position,1) ;
+          console.log('video_position'+video_position);
+          var tail_file = fm.readFileSync(video_url,'',video_position,1024);
+          console.log(tail_file)
+          var  zhengwei = new Uint8Array(tail_file);
+          console.log('zhengwei:'+zhengwei)
+          var video_param_ts = wx.arrayBufferToBase64(zhengwei);
+          //console.log(video_param)
+          //var video_param_tt = JSON.stringify(zhengwei);
+          console.log('文件大小-'+video_size);
           
-          utils.tryCatch(mta.Event.stat('wifiVideoForscreen', { 'status': 0 }));
+          var et = app.accSubtr(video_size,1);
+          var section = video_position+','+et
+          console.log('第一个区间-'+section)
+
+          /*wx.request({
+            url: 'http://work.com/aa.php',
+            method:'POST',
+            header:{
+              'Content-Type': 'application/x-www-form-urlencoded'
+            },
+            data:{
+              video_param :video_param_ts,
+              video_size:video_size,
+              section:section,
+              filename:filename,
+              forscreen_id:forscreen_id,
+              box_mac:box_mac,
+              web:true,
+              deviceId:openid,
+            }
+          })*/
+          wx.request({
+            url: 'http://' + intranet_ip + ':8080/videoH5',
+            method:"POST",
+            header: {
+              'Content-Type': 'application/x-www-form-urlencoded'
+            },
+            data:{
+              video_param :video_param_ts,
+              video_size:video_size,
+              section:section,
+              filename:filename,
+              forscreen_id:forscreen_id,
+              box_mac:box_mac,
+              web:true,
+              deviceId:openid,
+            },success:function(e){
+
+            }
+          })
+          var step_size =  1048576 ;
+          var file_length = app.accSubtr(video_size,1);
+
+          var box_data_list = [];
+          var param_data = {'filename':filename,'forscreen_id':forscreen_id,'box_mac':box_mac,'web':true,'deviceId':openid,'post_url':'http://' + intranet_ip + ':8080/videoH5'}
+          for(var i=0;i<video_size;i++){
+            var tmp = {'param_video':'','section':'','iv':'','step_size':''};
+            var end = app.plus(i,1048576);
+            if(end >=video_size){
+              end = app.accSubtr(video_size,1);
+              step_size = app.accSubtr(video_size,i);
+            }else {
+              end = app.accSubtr(end,1);
+            }
+            
+            console.log('i-'+i);
+            console.log('video_size-'+video_size)
+            if(i>=video_size){//说明读完了
+              
+              //var section_file = fm.readFileSync(video_url,'',video_position,1048576);
+
+
+            }else {//没读完
+
+              //var section_file = fm.readFileSync(video_url,'',i,step_size);
+              //var  zhengwei = new Uint8Array(section_file);
+              //var video_param_ts = wx.arrayBufferToBase64(zhengwei);
+              var section = i+','+end;
+              console.log('区间-'+section);
+              tmp.param_video = video_param_ts;
+              tmp.section     = section;
+              tmp.iv          = i;
+              tmp.step_size   = step_size;
+            }
+            box_data_list.push(tmp);
+            i = app.plus(i,step_size);
+            i = app.accSubtr(i,1);
+          }
+          that.postBoxData(box_data_list,fm,video_url,video_size,0,param_data);
+
+          /*for(var i=0;i<video_size;i++){
+            
+            var end = app.plus(i,1048576);
+            if(end >=video_size){
+              end = app.accSubtr(video_size,1);
+              step_size = app.accSubtr(video_size,i);
+            }else {
+              end = app.accSubtr(end,1);
+            }
+            
+            console.log('i-'+i);
+            console.log('video_size-'+video_size)
+            if(i>=video_size){//说明读完了
+              
+              //var section_file = fm.readFileSync(video_url,'',video_position,1048576);
+
+
+            }else {//没读完
+              //发送1M
+              
+              var section_file = fm.readFileSync(video_url,'',i,step_size);
+              var  zhengwei = new Uint8Array(section_file);
+              var video_param_ts = wx.arrayBufferToBase64(zhengwei);
+              var section = i+','+end;
+              console.log('区间-'+section);
+              wx.request({
+                url: 'http://' + intranet_ip + ':8080/videoH5',
+                method:"POST",
+                header: {
+                  'Content-Type': 'application/x-www-form-urlencoded'
+                },
+                data:{
+                  video_param :video_param_ts,
+                  video_size:video_size,
+                  section:section,
+                  filename:filename,
+                  forscreen_id:forscreen_id,
+                  box_mac:box_mac,
+                  web:true,
+                  deviceId:openid,
+                },success:function(e){
+    
+                }
+              })
+            }
+            i = app.plus(i,step_size);
+            i = app.accSubtr(i,1);
+            //i = app.accSubtr(i,step_size);
+          }*/
+          
+
+
+
+          return false;
+          wx.uploadFile({
+            url: 'http://' + intranet_ip + ':8080/videoH5?deviceId=' + openid + '&box_mac=' + box_mac + '&deviceName=' + mobile_brand + '&web=true&forscreen_id=' + forscreen_id + '&filename=' + filename + '&device_model=' + mobile_model + '&resource_size=' + resouce_size + '&duration=' + duration + '&action=2&resource_type=2&avatarUrl=' + avatarUrl + "&nickName=" + nickName+'&serial_number='+app.globalData.serial_number+'&video_param='+video_param_ts+'&video_size='+video_size,
+            filePath: video_url,
+            name: 'fileUpload',
+            
+            formData: {
+              video_param:video_param_tt,
+              video_size:video_size
+            },
+            success: function(res) {
+              var info_rt = JSON.parse(res.data);
+              if (info_rt.code == 10000) {
+                that.setData({
+                  is_upload: 1,
+                  vedio_url: video_url,
+                  oss_video_url:video_url,
+                  filename: filename,
+                  resouce_size: resouce_size,
+                  duration: duration,
+                  intranet_ip: intranet_ip,
+                  hiddens: true,
+                  showVedio: false,
+                })
+                utils.tryCatch(mta.Event.stat('wifiVideoForscreen', { 'status': 1 }));
+      
+                var end_time = (new Date()).valueOf(); 
+                var diff_time = end_time - start_time;
+                utils.tryCatch(mta.Event.stat('wifiVideoUploadWastTime', { 'uploadtime': diff_time }));
+              } else if (res.code == 1001) {
+      
+                that.setData({
+                  is_btn_disabel: false,
+                  hiddens: true,
+                })
+                app.showToast('投屏失败，请重试！')
+                
+                utils.tryCatch(mta.Event.stat('wifiVideoForscreen', { 'status': 0 }));
+              }else if(res.code==-1){
+                that.setData({
+                  is_btn_disabel: false,
+                  hiddens: true,
+                  is_forscreen: 1,
+                })
+                app.showToast('系统繁忙，请重试');
+              }
+            },
+            fail: function({
+              errMsg
+            }) {
+              that.setData({
+                is_btn_disabel: false,
+                hiddens: true,
+              })
+              app.showToast('投屏失败,请确认是否连接本包间wifi！',3000,'none',true);
+              
+              utils.tryCatch(mta.Event.stat('wifiVideoForscreen', { 'status': 0 }));
+            }
+          })
         }
       })
+      
     }
     function uploadVedio(video, box_mac, openid, is_pub_hotelinfo, is_share, duration, avatarUrl, nickName, public_text, timer8_0) {
 
@@ -608,7 +810,7 @@ Page({
       sourceType: ['album', 'camera'],
       maxDuration: 60,
       camera: 'back',
-      compressed:compressed,
+      compressed:false,
       success: function(res) {
 
         that.setData({
