@@ -127,17 +127,65 @@ Page({
       camera: 'back',
       compressed:false,
       success: function(res) {
-        that.setData({
-          showVedio: true,
-          is_btn_disabel: false,
-          upload_vedio_temp: res.tempFilePath,
-          duration: res.duration,
-          size: res.size
-        });
+        console.log(res)
+        /*wx.openVideoEditor({
+          filePath:res.tempFilePath,
+          success:function(et){
+            let fm = wx.getFileSystemManager()
+            fm.saveFile({
+              tempFilePath:et.tempFilePath,
+              success(res_save){
+                console.log(res_save);
+                
+                that.setData({
+                  showVedio: true,
+                  is_btn_disabel: false,
+                  upload_vedio_temp: res_save.tempFilePath,
+                  duration: et.duration,
+                  size: et.size
+                });
+
+                
+              }
+            })
+          }
+        })*/
+        let fm = wx.getFileSystemManager()
+        fm.saveFile({
+          tempFilePath:res.tempFilePath,
+          success(res_save){
+            console.log(res_save);
+            
+            that.setData({
+              showVedio: true,
+              is_btn_disabel: false,
+              upload_vedio_temp: res_save.savedFilePath,
+              duration: res.duration,
+              size: res.size
+            });
+
+            
+          }
+        })
+        
+        
+        
         lead(openid);
         mta.Event.stat('LaunchVideoWithNet_Launch_ChooseVideo', {
           'status': 'success'
         });
+        
+        
+        /*wx.openVideoEditor({
+          filePath:res.tempFilePath,
+          success:function(res){
+            
+
+
+            
+          }
+        })*/
+        
       },
       fail: function(res) {
         wx.navigateBack({
@@ -217,20 +265,24 @@ Page({
   postBoxData:function(box_data_list,fm,video_url,video_size,flag = 0,param_data){
     
     var that = this;
+    console.log('文件快数'+box_data_list.length);
     if(flag<box_data_list.length){
       console.log(box_data_list)
       var i = box_data_list[flag].iv;
       var step_size = box_data_list[flag].step_size;
       var section = box_data_list[flag].section;
+      //console.log('开始'+(new Date()).valueOf())
       var section_file = fm.readFileSync(video_url,'',i,step_size);
-      console.log(section_file);
+      //console.log('结束'+(new Date()).valueOf())
+      //console.log(section_file);
       var  zhengwei = new Uint8Array(section_file);
       var video_param_ts = wx.arrayBufferToBase64(zhengwei);
-      console.log('这是flag----'+flag);
-      console.log('flag++++++++'+video_param_ts);
-      wx.request({
-        url: param_data.post_url,
-        
+      //console.log('这是flag----'+flag);
+      //console.log('flag++++++++'+video_param_ts);
+      /*wx.request({
+        //url: 'http://admin.littlehotspot.com/test/mergevideo',
+        url: 'http://192.168.168.20:8080/upload',
+        //url:param_data.post_url,
         method:"POST",
         header: {
           'Content-Type': 'application/x-www-form-urlencoded'
@@ -249,6 +301,32 @@ Page({
           that.postBoxData(box_data_list,fm,video_url,video_size,flag,param_data );
         }
   
+      })*/
+      var web_soket_data = {
+        video_param :video_param_ts,
+        video_size:video_size,
+        section:section,
+        filename:param_data.filename,
+        forscreen_id:param_data.forscreen_id,
+        box_mac:param_data.box_mac,
+        web:param_data.web,
+        deviceId:param_data.openid,
+      };
+      web_soket_data = JSON.stringify(web_soket_data);
+      // wx.onSocketOpen((result) => {
+      //   console.log('ddd')
+        
+      // })
+      wx.sendSocketMessage({
+        data: web_soket_data,
+        success:function(e){
+          ++flag;
+          console.log('fdafasd');
+          that.postBoxData(box_data_list,fm,video_url,video_size,flag,param_data );
+        },fail:function(result){
+          console.log('发送失败');
+          console.log(result);
+        }
       })
     }
     
@@ -338,6 +416,16 @@ Page({
         }
       })
     }else {//极速投屏
+
+      wx.connectSocket({
+        url: 'ws://192.168.168.20:7778/test/',
+        perMessageDeflate:true,
+        success:function(e){
+          console.log('success');
+          
+        }
+      })
+
       that.setData({
         load_fresh_char: '亲^_^投屏中,请稍后...',
         hiddens: false, 
@@ -353,6 +441,7 @@ Page({
       var start_time = forscreen_id; 
       var resouce_size  = res.detail.value.size;
       let fm = wx.getFileSystemManager()
+      
       fm.getFileInfo({
         filePath: video_url,
         success:function(res){
@@ -360,22 +449,31 @@ Page({
           var video_size = res.size ;
           //video_size  = app.accMul(video_size,1024);  //视频大小 单位字节
           //console.log('video_size'+video_size);
-          var video_position = app.accSubtr(video_size,1024) ;
-          console.log('video_position'+video_position);
+          //var tail_size = 1024*1024*3;
+          var tail_size = 524288;
+          console.log(tail_size);
+
+          console.log(tail_size);
+          console.log(video_size);
+
+          var video_position = app.accSubtr(video_size,  tail_size  ) ;
+          //console.log('video_position'+video_position);
           // video_position = app.accSubtr(video_position,1) ;
-          console.log('video_position'+video_position);
-          var tail_file = fm.readFileSync(video_url,'',video_position,1024);
-          console.log(tail_file)
+          //console.log('video_position'+video_position);
+          //console.log((new Date()).valueOf())
+          var tail_file = fm.readFileSync(video_url,'',video_position,  tail_size  );
+          //console.log((new Date()).valueOf())
+          //console.log(tail_file)
           var  zhengwei = new Uint8Array(tail_file);
-          console.log('zhengwei:'+zhengwei)
+          //console.log('zhengwei:'+zhengwei)
           var video_param_ts = wx.arrayBufferToBase64(zhengwei);
           //console.log(video_param)
           //var video_param_tt = JSON.stringify(zhengwei);
-          console.log('文件大小-'+video_size);
+          //console.log('文件大小-'+video_size);
           
           var et = app.accSubtr(video_size,1);
           var section = video_position+','+et
-          console.log('第一个区间-'+section)
+          //console.log('第一个区间-'+section)
 
           /*wx.request({
             url: 'http://work.com/aa.php',
@@ -394,8 +492,10 @@ Page({
               deviceId:openid,
             }
           })*/
-          wx.request({
-            url: 'http://' + intranet_ip + ':8080/videoH5',
+          /*wx.request({
+            //url:'http://admin.littlehotspot.com/test/mergevideo',
+            url: 'http://192.168.168.20:8080/upload',
+            //url:'http://' + intranet_ip + ':8080/videoH5',
             method:"POST",
             header: {
               'Content-Type': 'application/x-www-form-urlencoded'
@@ -412,15 +512,42 @@ Page({
             },success:function(e){
 
             }
+          })*/
+          var web_soket_data = {
+            video_param :video_param_ts,
+            video_size:video_size,
+            section:section,
+            filename:filename,
+            forscreen_id:forscreen_id,
+            box_mac:box_mac,
+            web:true,
+            deviceId:openid,
+          };
+          web_soket_data = JSON.stringify(web_soket_data);
+          //console.log('发送'+web_soket_data)
+          wx.onSocketOpen((result) => {
+            console.log('ddd')
+            wx.sendSocketMessage({
+              data: web_soket_data,
+              success:function(e){
+                console.log('send')
+              },fail:function(result){
+                console.log('发送失败');
+                console.log(result);
+              }
+            })
           })
-          var step_size =  1048576 ;
+          var step_size = 524288;
+          //var step_size =  1048576 ;
+          //var step_size =  2097152;
+          //var step_size = 3145728;
           var file_length = app.accSubtr(video_size,1);
 
           var box_data_list = [];
           var param_data = {'filename':filename,'forscreen_id':forscreen_id,'box_mac':box_mac,'web':true,'deviceId':openid,'post_url':'http://' + intranet_ip + ':8080/videoH5'}
           for(var i=0;i<video_size;i++){
             var tmp = {'param_video':'','section':'','iv':'','step_size':''};
-            var end = app.plus(i,1048576);
+            var end = app.plus(i,524288);
             if(end >=video_size){
               end = app.accSubtr(video_size,1);
               step_size = app.accSubtr(video_size,i);
@@ -428,8 +555,8 @@ Page({
               end = app.accSubtr(end,1);
             }
             
-            console.log('i-'+i);
-            console.log('video_size-'+video_size)
+            //console.log('i-'+i);
+            //console.log('video_size-'+video_size)
             if(i>=video_size){//说明读完了
               
               //var section_file = fm.readFileSync(video_url,'',video_position,1048576);
@@ -441,7 +568,7 @@ Page({
               //var  zhengwei = new Uint8Array(section_file);
               //var video_param_ts = wx.arrayBufferToBase64(zhengwei);
               var section = i+','+end;
-              console.log('区间-'+section);
+              //console.log('区间-'+section);
               tmp.param_video = video_param_ts;
               tmp.section     = section;
               tmp.iv          = i;
@@ -451,6 +578,7 @@ Page({
             i = app.plus(i,step_size);
             i = app.accSubtr(i,1);
           }
+          //console.log('一共多少块'+box_data_list.length)
           that.postBoxData(box_data_list,fm,video_url,video_size,0,param_data);
 
           /*for(var i=0;i<video_size;i++){
@@ -810,7 +938,7 @@ Page({
       sourceType: ['album', 'camera'],
       maxDuration: 60,
       camera: 'back',
-      compressed:false,
+      compressed:true,
       success: function(res) {
 
         that.setData({
