@@ -74,9 +74,10 @@ Page({
   onLoad: function(e) {
     wx.hideShareMenu();
     var that = this
+    that.reMoveSaveFile();
     box_mac = e.box_mac;
     var openid = e.openid;
-
+    wx.closeSocket(1001);
 
     var hotel_info = app.globalData.hotel_info;
     var change_link_type = app.globalData.change_link_type;
@@ -125,11 +126,13 @@ Page({
       camera: 'back',
       compressed:false,
       success: function(res) {
+        console.log(res)
         if(app.globalData.mobile_brand=='devtools'){
           that.setData({
             showVedio: true,
             is_btn_disabel: false,
             upload_vedio_temp: res.tempFilePath,
+            temp_video_file:res.tempFilePath,
             //upload_vedio_cover: res.thumbTempFilePath,
             vedio_percent: 0,
             duration: res.duration,
@@ -145,6 +148,7 @@ Page({
               that.setData({
                 showVedio: true,
                 is_btn_disabel: false,
+                temp_video_file:res_save.savedFilePath,
                 upload_vedio_temp: res_save.savedFilePath,
                 duration: res.duration,
                 size: res.size
@@ -196,7 +200,20 @@ Page({
 
     }
   },
-
+  reMoveSaveFile:function(e){
+    wx.getSavedFileList({  // 获取文件列表
+    	success (res) {
+        console.log('垃圾数据')
+        console.log(res)
+    	  res.fileList.forEach((val, key) => { // 遍历文件列表里的数据
+            // 删除存储的垃圾数据
+    	    wx.removeSavedFile({
+    	        filePath: val.filePath
+    	    });
+    	  })
+    	}
+    })
+  },
   // 投视频前播放
   onPlayBeforeLauch: function(e) {
     let self = this;
@@ -262,7 +279,7 @@ Page({
         var is_tail = 1;
         that.postBoxData( is_tail ,box_data_list,fm,video_url,video_size,0,form_data,forscreen_id);
         
-        var step_size = 524288;
+        var step_size = 1024*1024;
         var box_data_list = [];
         
         for(var i=0;i<video_size;i++){
@@ -301,21 +318,25 @@ Page({
     console.log(form_data);
     if(flag<box_data_list.length){
       console.log('文件第'+flag+'块数开始');
+      var file_block_name = ''; //第几块
+      var all_file_block  = ''; //总块数
       if(is_tail==1){
-        var file_block_name = 'file_end';
-        var all_file_block  = '';
+        file_block_name = 'file_end';
+        all_file_block  = '';
       }else {
-        var file_block_name ="file_"+flag;
-        var all_file_block  = box_data_list.length;
+        file_block_name ="file_"+flag;
+        all_file_block  = box_data_list.length;
       }
       var i = box_data_list[flag].iv;
       var step_size = box_data_list[flag].step_size;
       var section = box_data_list[flag].section;
 
-      var section_file = fm.readFileSync(video_url,'',i,step_size);
+      var section_file = fm.readFileSync(video_url,'base64',i,step_size);
+      var video_param_ts = section_file;
       
-      var  file_buffer = new Uint8Array(section_file);
-      var video_param_ts = wx.arrayBufferToBase64(file_buffer);
+      
+      //var  file_buffer = new Uint8Array(section_file);
+      //var video_param_ts = wx.arrayBufferToBase64(file_buffer);
       
       var web_soket_data = {
         video_param :video_param_ts,
@@ -327,15 +348,22 @@ Page({
         all_file_block:all_file_block,
 
       };
-      console.log(web_soket_data);
+      //console.log(web_soket_data);
       web_soket_data = JSON.stringify(web_soket_data);
       wx.sendSocketMessage({
         data: web_soket_data,
         success:function(e){
-          ++flag;
-          console.log('文件第'+flag+'块数发送成功');
-          that.postBoxData(is_tail,box_data_list,fm,video_url,video_size,flag,form_data ,forscreen_id);
+          wx.onSocketMessage((result) => {
+            if(result.data==1000){
+              ++flag;
+              console.log('文件第'+flag+'块数发送成功');
+              that.postBoxData(is_tail,box_data_list,fm,video_url,video_size,flag,form_data ,forscreen_id);
+            }
+          })
+          
         },fail:function(result){
+          wx.closeSocket(1001);
+          
           console.log('文件第'+flag+'块数发送失败');
           console.log(result);
           that.setData({
@@ -345,7 +373,10 @@ Page({
         }
       })
     }else {
-      if(is_tail!=0){
+      if(is_tail==0){
+        wx.closeSocket(1000);
+        
+        //fm.unlink(video_url);
         that.setData({
           showVedio: false,
           oss_video_url: video_url,
@@ -355,6 +386,7 @@ Page({
           is_open_control: false,
           forscreen_id: forscreen_id
         })
+        
       }
       
       //记录投屏日志
@@ -439,8 +471,8 @@ Page({
       //return false;
 
       wx.connectSocket({
-        url:'ws://192.168.168.95:8888/wb',
-        //url:'ws://192.168.168.20:7778/test/',
+        //url:'ws://192.168.168.95:8888/wb',
+        url:'ws://192.168.168.20:7778/test/',
         //url: 'ws://192.168.168.20:7778/test/',
         perMessageDeflate:true,
         success:function(e){//websocket创建连接成功
@@ -731,7 +763,7 @@ Page({
   //重新选择视频
   chooseVedio(e) {
     var that = this;
-
+    that.reMoveSaveFile();
     var is_compress = that.data.is_compress;
     if(is_compress==1){
       var compressed = true;
@@ -767,7 +799,6 @@ Page({
     var box_mac = e.currentTarget.dataset.boxmac;
     var openid = e.currentTarget.dataset.openid;
 
-
     wx.chooseVideo({
       sourceType: ['album', 'camera'],
       maxDuration: 60,
@@ -780,6 +811,7 @@ Page({
             showVedio: true,
             is_btn_disabel: false,
             upload_vedio_temp: res.tempFilePath,
+            tempFilePath:res.tempFilePath,
             //upload_vedio_cover: res.thumbTempFilePath,
             vedio_percent: 0,
             duration: res.duration,
@@ -795,6 +827,7 @@ Page({
                 showVedio: true,
                 is_btn_disabel: false,
                 upload_vedio_temp: res_save.savedFilePath,
+                tempFilePath:res_save.savedFilePath,
                 duration: res.duration,
                 size: res.size
               });
