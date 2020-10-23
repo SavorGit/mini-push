@@ -811,7 +811,7 @@ Page({
             showVedio: true,
             is_btn_disabel: false,
             upload_vedio_temp: res.tempFilePath,
-            tempFilePath:res.tempFilePath,
+            temp_video_file:res.tempFilePath,
             //upload_vedio_cover: res.thumbTempFilePath,
             vedio_percent: 0,
             duration: res.duration,
@@ -823,14 +823,17 @@ Page({
             tempFilePath:res.tempFilePath,
             success(res_save){
               console.log(res_save);
+              
               that.setData({
                 showVedio: true,
                 is_btn_disabel: false,
+                temp_video_file:res_save.savedFilePath,
                 upload_vedio_temp: res_save.savedFilePath,
-                tempFilePath:res_save.savedFilePath,
                 duration: res.duration,
                 size: res.size
               });
+
+              
             }
           })
         }
