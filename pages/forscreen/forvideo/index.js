@@ -119,20 +119,41 @@ Page({
       nickName: nickName,
       is_compress:is_compress
     })
-
     wx.chooseVideo({
       sourceType: ['album', 'camera'],
       maxDuration: 60,
       camera: 'back',
-      compressed:compressed,
+      compressed:false,
       success: function(res) {
-        that.setData({
-          showVedio: true,
-          is_btn_disabel: false,
-          upload_vedio_temp: res.tempFilePath,
-          duration: res.duration,
-          size: res.size
-        });
+        if(app.globalData.mobile_brand=='devtools'){
+          that.setData({
+            showVedio: true,
+            is_btn_disabel: false,
+            upload_vedio_temp: res.tempFilePath,
+            //upload_vedio_cover: res.thumbTempFilePath,
+            vedio_percent: 0,
+            duration: res.duration,
+            size: res.size
+          });
+        }else {
+          let fm = wx.getFileSystemManager()
+          fm.saveFile({
+            tempFilePath:res.tempFilePath,
+            success(res_save){
+              console.log(res_save);
+              
+              that.setData({
+                showVedio: true,
+                is_btn_disabel: false,
+                upload_vedio_temp: res_save.savedFilePath,
+                duration: res.duration,
+                size: res.size
+              });
+
+              
+            }
+          })
+        }
         lead(openid);
         mta.Event.stat('LaunchVideoWithNet_Launch_ChooseVideo', {
           'status': 'success'
@@ -147,7 +168,6 @@ Page({
         });
       }
     });
-
     //引导蒙层
     function lead(openid) {
       var user_info = wx.getStorageSync('savor_user_info');
@@ -213,7 +233,177 @@ Page({
       'fullscreen': e.detail.fullScreen
     });
   },
+  cutFileToCloud:function(form_data){
+    var that = this;
+    let fm = wx.getFileSystemManager();
+    var video_url = form_data.video;
+    var forscreen_id = (new Date()).valueOf();
+    fm.getFileInfo({
+      filePath: video_url,
+      success:function(res){
+        console.log(res);
+        var video_size = res.size ;
+        var tail_size = 524288;
+        var video_position = app.accSubtr(video_size,  tail_size  ) ;
+        //var tail_file = fm.readFileSync(video_url,'',video_position,  tail_size  );
+        //var  tail_file_buffer = new Uint8Array(tail_file);
+        //var video_param_ts = wx.arrayBufferToBase64(tail_file_buffer);
+        var et = app.accSubtr(video_size,1); 
+        var section = video_position+','+et  //尾部空间
+        //发送尾部数据
+        var box_data_list = []; //文件分块数组
+        var tmp = {'param_video':'','section':'','iv':'','step_size':''};
+        //tmp.param_video = video_param_ts;
+        tmp.section     = section;
+        tmp.iv          = video_position;
+        tmp.step_size   = tail_size;
+        box_data_list.push(tmp);
+        console.log(box_data_list);
+        var is_tail = 1;
+        that.postBoxData( is_tail ,box_data_list,fm,video_url,video_size,0,form_data,forscreen_id);
+        
+        var step_size = 524288;
+        var box_data_list = [];
+        
+        for(var i=0;i<video_size;i++){
+          var tmp = {'param_video':'','section':'','iv':'','step_size':''};
+          var end = app.plus(i,step_size);
+          if(end >=video_size){
+            end = app.accSubtr(video_size,1);
+            step_size = app.accSubtr(video_size,i);
+          }else {
+            end = app.accSubtr(end,1);
+          }
+          
+          if(i>=video_size){//说明读完了
+            console.log('读完了');
+          }else {//没读完
+            var section = i+','+end;
+            //console.log('区间-'+section);
+            tmp.section     = section;
+            tmp.iv          = i;
+            tmp.step_size   = step_size;
+          }
+          box_data_list.push(tmp);
+          i = app.plus(i,step_size);
+          i = app.accSubtr(i,1);
+        }
+        is_tail = 0;
+        that.postBoxData(is_tail,box_data_list,fm,video_url,video_size,0,form_data,forscreen_id);
+      }
+    })
+  },
+  postBoxData:function(is_tail,box_data_list,fm,video_url,video_size,flag = 0,form_data,forscreen_id){
+    
+    var that = this;
+    console.log('文件总块数'+box_data_list.length);
+    console.log(video_url);
+    console.log(form_data);
+    if(flag<box_data_list.length){
+      console.log('文件第'+flag+'块数开始');
+      if(is_tail==1){
+        var file_block_name = 'file_end';
+        var all_file_block  = '';
+      }else {
+        var file_block_name ="file_"+flag;
+        var all_file_block  = box_data_list.length;
+      }
+      var i = box_data_list[flag].iv;
+      var step_size = box_data_list[flag].step_size;
+      var section = box_data_list[flag].section;
 
+      var section_file = fm.readFileSync(video_url,'',i,step_size);
+      
+      var  file_buffer = new Uint8Array(section_file);
+      var video_param_ts = wx.arrayBufferToBase64(file_buffer);
+      
+      var web_soket_data = {
+        video_param :video_param_ts,
+        section:section,
+        filename:forscreen_id,
+        form_data : form_data,
+        video_size:form_data.size,
+        file_block_name:file_block_name,
+        all_file_block:all_file_block,
+
+      };
+      console.log(web_soket_data);
+      web_soket_data = JSON.stringify(web_soket_data);
+      wx.sendSocketMessage({
+        data: web_soket_data,
+        success:function(e){
+          ++flag;
+          console.log('文件第'+flag+'块数发送成功');
+          that.postBoxData(is_tail,box_data_list,fm,video_url,video_size,flag,form_data ,forscreen_id);
+        },fail:function(result){
+          console.log('文件第'+flag+'块数发送失败');
+          console.log(result);
+          that.setData({
+            is_btn_disabel:false,
+            hiddens:true,
+          })
+        }
+      })
+    }else {
+      if(is_tail!=0){
+        that.setData({
+          showVedio: false,
+          oss_video_url: video_url,
+          upload_vedio_temp: '',
+          is_view_control: true,
+          hiddens: true,
+          is_open_control: false,
+          forscreen_id: forscreen_id
+        })
+      }
+      
+      //记录投屏日志
+      //获取投屏历史记录
+      //that.recordForscreenLog(form_data);
+    }
+    
+  },
+  recordForscreenLog:function(form_data){
+    var that = this;
+    utils.PostRequest(api_v_url + '/index/recordForScreenPics', {
+      openid : from_data.openid,
+      box_mac: from_data.box_mac,
+      action : 2,
+      resource_type: 2,
+      mobile_brand: app.globalData.mobile_brand,
+      mobile_model: app.globalData.mobile_model,
+      forscreen_char: from_data.forscreen_char,
+      public_text: from_data.public_text,
+      imgs: '["forscreen/resource/' + timestamp + postf_t + '"]',
+      resource_id: timestamp,
+      res_sup_time: res_sup_time,
+      res_eup_time: res_eup_time,
+      resource_size: res_size,
+      is_pub_hotelinfo: is_pub_hotelinfo,
+      is_share: is_share,
+      forscreen_id: timestamp,
+      duration: duration,
+      res_nums: 1,
+      serial_number:app.globalData.serial_number
+    }, (data, headers, cookies, errMsg, statusCode) => {
+      utils.PostRequest(api_url + '/Smallapp4/content/getHotplaylist', {
+        openid: openid,
+        box_mac: box_mac,
+        page: page,
+      }, (data, headers, cookies, errMsg, statusCode) => {
+        var hst_list = res.data.result;
+        if (JSON.stringify(hst_list) == "{}") {
+          that.setData({
+            forscreen_history_list: ''
+          })
+        } else {
+          that.setData({
+            forscreen_history_list: res.data.result
+          })
+        }
+      })
+    })
+  },
   forscreen_video: function(res) {
     var that = this;
     var launchType = that.data.launchType;
@@ -236,7 +426,6 @@ Page({
       if (is_share == 1) {
         is_assist = 1;
       }
-      lead(openid, is_share);
       that.setData({
         load_fresh_char: '亲^_^投屏中,请稍后...',
         hiddens: false,
@@ -245,59 +434,35 @@ Page({
         is_share: is_share,
         is_assist: is_assist
       })
-      wx.request({
-        url: api_url + '/smallapp21/User/isForscreenIng',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        method: "POST",
-        data: {
-          box_mac: box_mac
-        },
-        success: function(res) {
-          var timer8_0;
-          var is_forscreen = res.data.result.is_forscreen;
-          if (is_forscreen == 1) {
-            wx.showModal({
-              title: '确认要打断投屏',
-              content: '当前电视正在进行投屏,继续投屏有可能打断当前投屏中的内容.',
-              success: function(res) {
-                if (res.confirm) {
-                  uploadVedio(video, box_mac, openid, is_pub_hotelinfo, is_share, duration, avatarUrl, nickName, public_text, timer8_0);
-                  if (public_text = '' || typeof (public_text) == 'undefined') {
-                    public_text = 0;
-                  } else {
-                    public_text = 1;
-                  }
-                  utils.tryCatch(mta.Event.stat('forscreenVedio', { 'ispublictext': public_text, 'ispublic': is_share, 'isforscreen': 1 }));
-                } else if (res.cancel) {
-                  that.setData({
-                    hiddens: true,
-                  })
-                  wx.navigateBack({
-                    delta: 1
-                  })
-                  if (public_text = '' || typeof (public_text) == 'undefined') {
-                    public_text = 0;
-                  } else {
-                    public_text = 1;
-                  }
-                  utils.tryCatch(mta.Event.stat('forscreenVedio', { 'ispublictext': public_text, 'ispublic': is_share, 'isforscreen': 0 }));
-                }
-              }
-            })
-            
-          } else {
-            uploadVedio(video, box_mac, openid, is_pub_hotelinfo, is_share, duration, avatarUrl, nickName, public_text, timer8_0);
-            if (public_text = '' || typeof (public_text) == 'undefined') {
-              public_text = 0;
-            } else {
-              public_text = 1;
-            }
-            utils.tryCatch(mta.Event.stat('forscreenVedio', { 'ispublictext': public_text, 'ispublic': is_share, 'isforscreen': 0 }));
-          }
+
+      //that.cutFileToCloud(res.detail.value);//切片文件上传云端 +++++++++++++++++++++测试*****
+      //return false;
+
+      wx.connectSocket({
+        url:'ws://192.168.168.95:8888/wb',
+        //url:'ws://192.168.168.20:7778/test/',
+        //url: 'ws://192.168.168.20:7778/test/',
+        perMessageDeflate:true,
+        success:function(e){//websocket创建连接成功
+          console.log('success');
+          
+        },fail:function(res){
+          app.showToast('电视连接创建失败,请重试');
+          that.setData({
+            is_btn_disabel: false,
+            hiddens: true,
+          })
         }
+        
       })
+      wx.onSocketOpen((result) => {
+        console.log('onSocketOpen')
+          
+        that.cutFileToCloud(res.detail.value);//切片文件上传云端
+      })
+
+
+      
     }else {//极速投屏
       that.setData({
         load_fresh_char: '亲^_^投屏中,请稍后...',
@@ -607,18 +772,36 @@ Page({
       sourceType: ['album', 'camera'],
       maxDuration: 60,
       camera: 'back',
-      compressed:compressed,
+      compressed:false,
       success: function(res) {
-
-        that.setData({
-          showVedio: true,
-          is_btn_disabel: false,
-          upload_vedio_temp: res.tempFilePath,
-          //upload_vedio_cover: res.thumbTempFilePath,
-          vedio_percent: 0,
-          duration: res.duration,
-          size: res.size
-        });
+        console.log(res)
+        if(app.globalData.mobile_brand=='devtools'){
+          that.setData({
+            showVedio: true,
+            is_btn_disabel: false,
+            upload_vedio_temp: res.tempFilePath,
+            //upload_vedio_cover: res.thumbTempFilePath,
+            vedio_percent: 0,
+            duration: res.duration,
+            size: res.size
+          });
+        }else {
+          let fm = wx.getFileSystemManager()
+          fm.saveFile({
+            tempFilePath:res.tempFilePath,
+            success(res_save){
+              console.log(res_save);
+              that.setData({
+                showVedio: true,
+                is_btn_disabel: false,
+                upload_vedio_temp: res_save.savedFilePath,
+                duration: res.duration,
+                size: res.size
+              });
+            }
+          })
+        }
+        
         mta.Event.stat('LaunchVideoWithNet_Launch_ChooseVideo', {
           'status': 'success'
         });
