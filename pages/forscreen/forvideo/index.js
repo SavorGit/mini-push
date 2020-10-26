@@ -18,6 +18,7 @@ var api_v_url = app.globalData.api_v_url;
 var oss_upload_url = app.globalData.oss_upload_url;
 var oss_url = app.globalData.oss_url;
 var pubdetail = [];
+var udpDiscover;
 Page({
 
   /**
@@ -77,7 +78,7 @@ Page({
     that.reMoveSaveFile();
     box_mac = e.box_mac;
     var openid = e.openid;
-    wx.closeSocket(1001);
+    
 
     var hotel_info = app.globalData.hotel_info;
     var change_link_type = app.globalData.change_link_type;
@@ -94,6 +95,7 @@ Page({
     }else if(change_link_type ==2){
       var launch_type = 'speed';
     }
+    launch_type = 'speed'
     console.log(launch_type);
 
     var user_info = wx.getStorageSync("savor_user_info");
@@ -120,6 +122,7 @@ Page({
       nickName: nickName,
       is_compress:is_compress
     })
+    
     wx.chooseVideo({
       sourceType: ['album', 'camera'],
       maxDuration: 60,
@@ -127,7 +130,11 @@ Page({
       compressed:false,
       success: function(res) {
         console.log(res)
+        wx.showLoading({
+          title: '文件处理中',
+        })
         if(app.globalData.mobile_brand=='devtools'){
+          wx.hideLoading()
           that.setData({
             showVedio: true,
             is_btn_disabel: false,
@@ -144,7 +151,7 @@ Page({
             tempFilePath:res.tempFilePath,
             success(res_save){
               console.log(res_save);
-              
+              wx.hideLoading()
               that.setData({
                 showVedio: true,
                 is_btn_disabel: false,
@@ -250,7 +257,7 @@ Page({
       'fullscreen': e.detail.fullScreen
     });
   },
-  cutFileToCloud:function(form_data){
+  cutFileToCloud:function(form_data,send_type= 1){
     var that = this;
     let fm = wx.getFileSystemManager();
     var video_url = form_data.video;
@@ -260,7 +267,12 @@ Page({
       success:function(res){
         console.log(res);
         var video_size = res.size ;
-        var tail_size = 524288;
+        if(send_type==1){
+          var tail_size = 524288;
+        }else {
+          var tail_size = 1024*40;
+        }
+        
         var video_position = app.accSubtr(video_size,  tail_size  ) ;
         //var tail_file = fm.readFileSync(video_url,'',video_position,  tail_size  );
         //var  tail_file_buffer = new Uint8Array(tail_file);
@@ -277,9 +289,18 @@ Page({
         box_data_list.push(tmp);
         console.log(box_data_list);
         var is_tail = 1;
-        that.postBoxData( is_tail ,box_data_list,fm,video_url,video_size,0,form_data,forscreen_id);
+        if(send_type==1){
+          that.postBoxData( is_tail ,box_data_list,fm,video_url,video_size,0,form_data,forscreen_id);
+        }else {
+          that.postBoxDataByUdp( is_tail ,box_data_list,fm,video_url,video_size,0,form_data,forscreen_id);
+        }
         
-        var step_size = 1024*1024;
+        if(send_type==1){//websocket
+          var step_size = 1024*1024;
+        }else {
+          var step_size = 1024*40;
+        }//udp
+        
         var box_data_list = [];
         
         for(var i=0;i<video_size;i++){
@@ -306,7 +327,12 @@ Page({
           i = app.accSubtr(i,1);
         }
         is_tail = 0;
-        that.postBoxData(is_tail,box_data_list,fm,video_url,video_size,0,form_data,forscreen_id);
+        if(send_type==1){
+          that.postBoxData(is_tail,box_data_list,fm,video_url,video_size,0,form_data,forscreen_id);
+        }else {
+          that.postBoxDataByUdp( is_tail ,box_data_list,fm,video_url,video_size,0,form_data,forscreen_id);
+        }
+        
       }
     })
   },
@@ -374,7 +400,7 @@ Page({
       })
     }else {
       if(is_tail==0){
-        wx.closeSocket(1000);
+        //wx.closeSocket(1000);
         
         //fm.unlink(video_url);
         that.setData({
@@ -394,6 +420,103 @@ Page({
       //that.recordForscreenLog(form_data);
     }
     
+  },
+  postBoxDataByUdp:function(is_tail,box_data_list,fm,video_url,video_size,flag = 0,form_data,forscreen_id){
+    var that = this;
+    console.log('文件总块数'+box_data_list.length);
+    //console.log(video_url);
+    //console.log(form_data);
+    
+    if(flag<box_data_list.length){
+      console.log('文件第'+flag+'块数开始');
+      var file_block_name = ''; //第几块
+      var all_file_block  = ''; //总块数
+      if(is_tail==1){
+        file_block_name = 'file_end';
+        all_file_block  = '';
+      }else {
+        file_block_name ="file_"+flag;
+        all_file_block  = box_data_list.length;
+      }
+      var i = box_data_list[flag].iv;
+      var step_size = box_data_list[flag].step_size;
+      var section = box_data_list[flag].section;
+
+      var section_file = fm.readFileSync(video_url,'base64',i,step_size);
+      var video_param_ts = section_file;
+      
+      
+      //var  file_buffer = new Uint8Array(section_file);
+      //var video_param_ts = wx.arrayBufferToBase64(file_buffer);
+      
+      var web_soket_data = {
+        video_param :video_param_ts,
+        section:section,
+        filename:forscreen_id,
+        form_data : form_data,
+        video_size:form_data.size,
+        file_block_name:file_block_name,
+        all_file_block:all_file_block,
+
+      };
+      //console.log(web_soket_data);
+      web_soket_data = JSON.stringify(web_soket_data);
+      //console.log(web_soket_data)
+      udpDiscover.send({
+        address: '192.168.168.71',
+        port: 9999,
+        message: web_soket_data
+      })
+      
+      udpDiscover.onListening(function(res) {
+        console.log('onListening');
+        console.log(res);
+     });
+     udpDiscover.onMessage(function(res) {
+       console.log('onMessage');
+        console.log(res.message);
+        console.log(res.remoteInfo.address);
+        console.log(res.remoteInfo.port);
+        console.log(res.remoteInfo.size);
+      });
+      ++flag;
+      that.postBoxDataByUdp(is_tail,box_data_list,fm,video_url,video_size,flag,form_data ,forscreen_id);
+      udpDiscover.onError(function(res){
+        console.log('udp文件第'+flag+'块数发送失败');
+        console.log(res);
+        that.setData({
+          is_btn_disabel:false,
+          hiddens:true,
+        })
+      })
+
+      
+    }else {
+      if(is_tail==0){
+        
+        //fm.unlink(video_url);
+        that.setData({
+          showVedio: false,
+          oss_video_url: video_url,
+          upload_vedio_temp: '',
+          is_view_control: true,
+          hiddens: true,
+          is_open_control: false,
+          forscreen_id: forscreen_id
+        })
+        
+      }
+      
+      //记录投屏日志
+      //获取投屏历史记录
+      //that.recordForscreenLog(form_data);
+    }
+  },
+  newAb2Str(arrayBuffer) {
+    let unit8Arr = new Uint8Array(arrayBuffer);
+    let encodedString = String.fromCharCode.apply(null, unit8Arr),
+      decodedString = decodeURIComponent(escape((encodedString)));//没有这一步中文会乱码
+    return decodedString;
   },
   recordForscreenLog:function(form_data){
     var that = this;
@@ -471,8 +594,9 @@ Page({
       //return false;
 
       wx.connectSocket({
+        url:'ws://47.93.76.149:7778/video/',
         //url:'ws://192.168.168.95:8888/wb',
-        url:'ws://192.168.168.20:7778/test/',
+        //url:'ws://192.168.168.71:7778/video/',
         //url: 'ws://192.168.168.20:7778/test/',
         perMessageDeflate:true,
         success:function(e){//websocket创建连接成功
@@ -489,8 +613,9 @@ Page({
       })
       wx.onSocketOpen((result) => {
         console.log('onSocketOpen')
+        console.log(result)
           
-        that.cutFileToCloud(res.detail.value);//切片文件上传云端
+        that.cutFileToCloud(res.detail.value,1);//切片文件上传云端
       })
 
 
@@ -510,59 +635,12 @@ Page({
       var filename = forscreen_id;
       var start_time = forscreen_id; 
       var resouce_size  = res.detail.value.size;
-      wx.uploadFile({
-        url: 'http://' + intranet_ip + ':8080/videoH5?deviceId=' + openid + '&box_mac=' + box_mac + '&deviceName=' + mobile_brand + '&web=true&forscreen_id=' + forscreen_id + '&filename=' + filename + '&device_model=' + mobile_model + '&resource_size=' + resouce_size + '&duration=' + duration + '&action=2&resource_type=2&avatarUrl=' + avatarUrl + "&nickName=" + nickName+'&serial_number='+app.globalData.serial_number,
-        filePath: video_url,
-        name: 'fileUpload',
-        success: function(res) {
-          var info_rt = JSON.parse(res.data);
-          if (info_rt.code == 10000) {
-            that.setData({
-              is_upload: 1,
-              vedio_url: video_url,
-              oss_video_url:video_url,
-              filename: filename,
-              resouce_size: resouce_size,
-              duration: duration,
-              intranet_ip: intranet_ip,
-              hiddens: true,
-              showVedio: false,
-            })
-            utils.tryCatch(mta.Event.stat('wifiVideoForscreen', { 'status': 1 }));
-  
-            var end_time = (new Date()).valueOf(); 
-            var diff_time = end_time - start_time;
-            utils.tryCatch(mta.Event.stat('wifiVideoUploadWastTime', { 'uploadtime': diff_time }));
-          } else if (res.code == 1001) {
-  
-            that.setData({
-              is_btn_disabel: false,
-              hiddens: true,
-            })
-            app.showToast('投屏失败，请重试！')
-            
-            utils.tryCatch(mta.Event.stat('wifiVideoForscreen', { 'status': 0 }));
-          }else if(res.code==-1){
-            that.setData({
-              is_btn_disabel: false,
-              hiddens: true,
-              is_forscreen: 1,
-            })
-            app.showToast('系统繁忙，请重试');
-          }
-        },
-        fail: function({
-          errMsg
-        }) {
-          that.setData({
-            is_btn_disabel: false,
-            hiddens: true,
-          })
-          app.showToast('投屏失败,请确认是否连接本包间wifi！',3000,'none',true);
-          
-          utils.tryCatch(mta.Event.stat('wifiVideoForscreen', { 'status': 0 }));
-        }
-      })
+      udpDiscover = wx.createUDPSocket();
+      var locationPort = udpDiscover.bind();
+      that.cutFileToCloud(res.detail.value,2);//切片文件上传云端
+
+
+      
     }
     function uploadVedio(video, box_mac, openid, is_pub_hotelinfo, is_share, duration, avatarUrl, nickName, public_text, timer8_0) {
 
@@ -1183,7 +1261,10 @@ Page({
    * 生命周期函数--监听页面卸载
    */
   onUnload: function() {
-
+    var that = this;
+    that.reMoveSaveFile();
+    wx.closeSocket(1001);
+    udpDiscover.close();
   },
 
   /**
