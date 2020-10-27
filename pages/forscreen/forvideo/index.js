@@ -95,7 +95,7 @@ Page({
     }else if(change_link_type ==2){
       var launch_type = 'speed';
     }
-    launch_type = 'speed'
+    //launch_type = 'speed'
     console.log(launch_type);
 
     var user_info = wx.getStorageSync("savor_user_info");
@@ -270,7 +270,7 @@ Page({
         if(send_type==1){
           var tail_size = 524288;
         }else {
-          var tail_size = 1024*40;
+          var tail_size = 1024*10;
         }
         
         var video_position = app.accSubtr(video_size,  tail_size  ) ;
@@ -298,7 +298,7 @@ Page({
         if(send_type==1){//websocket
           var step_size = 1024*1024;
         }else {
-          var step_size = 1024*40;
+          var step_size = 1024*10;
         }//udp
         
         var box_data_list = [];
@@ -388,7 +388,7 @@ Page({
           })
           
         },fail:function(result){
-          wx.closeSocket(1001);
+          //wx.closeSocket(1001);
           
           console.log('文件第'+flag+'块数发送失败');
           console.log(result);
@@ -400,7 +400,7 @@ Page({
       })
     }else {
       if(is_tail==0){
-        //wx.closeSocket(1000);
+        wx.closeSocket(1000);
         
         //fm.unlink(video_url);
         that.setData({
@@ -594,9 +594,9 @@ Page({
       //return false;
 
       wx.connectSocket({
-        url:'ws://47.93.76.149:7778/video/',
+        //url:'ws://47.93.76.149:7778/video/',
         //url:'ws://192.168.168.95:8888/wb',
-        //url:'ws://192.168.168.71:7778/video/',
+        url:'ws://192.168.168.71:7778/video/',
         //url: 'ws://192.168.168.20:7778/test/',
         perMessageDeflate:true,
         success:function(e){//websocket创建连接成功
@@ -1263,7 +1263,8 @@ Page({
   onUnload: function() {
     var that = this;
     that.reMoveSaveFile();
-    wx.closeSocket(1001);
+    wx.closeSocket();
+    
     udpDiscover.close();
   },
 
