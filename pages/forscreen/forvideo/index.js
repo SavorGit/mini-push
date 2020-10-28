@@ -296,7 +296,7 @@ Page({
         }
         
         if(send_type==1){//websocket
-          var step_size = 1024*1024;
+          var step_size = 1024*1024*2;
         }else {
           var step_size = 1024*10;
         }//udp
@@ -340,7 +340,7 @@ Page({
     
     var that = this;
     console.log('文件总块数'+box_data_list.length);
-    console.log(video_url);
+    //console.log(video_url);
     console.log(form_data);
     if(flag<box_data_list.length){
       console.log('文件第'+flag+'块数开始');
@@ -348,7 +348,7 @@ Page({
       var all_file_block  = ''; //总块数
       if(is_tail==1){
         file_block_name = 'file_end';
-        all_file_block  = '';
+        all_file_block  = 0;
       }else {
         file_block_name ="file_"+flag;
         all_file_block  = box_data_list.length;
@@ -356,7 +356,7 @@ Page({
       var i = box_data_list[flag].iv;
       var step_size = box_data_list[flag].step_size;
       var section = box_data_list[flag].section;
-
+      console.log(section);
       var section_file = fm.readFileSync(video_url,'base64',i,step_size);
       var video_param_ts = section_file;
       
@@ -376,10 +376,13 @@ Page({
       };
       //console.log(web_soket_data);
       web_soket_data = JSON.stringify(web_soket_data);
+      
       wx.sendSocketMessage({
         data: web_soket_data,
         success:function(e){
           wx.onSocketMessage((result) => {
+            console.log('返回');
+            console.log(result)
             if(result.data==1000){
               ++flag;
               console.log('文件第'+flag+'块数发送成功');
@@ -388,6 +391,8 @@ Page({
           })
           
         },fail:function(result){
+          console.log('send_fail')
+          console.log(result)
           //wx.closeSocket(1001);
           
           console.log('文件第'+flag+'块数发送失败');
@@ -596,8 +601,9 @@ Page({
       wx.connectSocket({
         //url:'ws://47.93.76.149:7778/video/',
         //url:'ws://192.168.168.95:8888/wb',
-        url:'ws://192.168.168.71:7778/video/',
+        //url:'ws://192.168.168.71:7778/video/',
         //url: 'ws://192.168.168.20:7778/test/',
+        url:'ws://192.168.168.42:9999/android/',
         perMessageDeflate:true,
         success:function(e){//websocket创建连接成功
           console.log('success');
