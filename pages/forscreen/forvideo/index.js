@@ -18,6 +18,7 @@ var api_v_url = app.globalData.api_v_url;
 var oss_upload_url = app.globalData.oss_upload_url;
 var oss_url = app.globalData.oss_url;
 var pubdetail = [];
+var upload_task;
 Page({
 
   /**
@@ -84,6 +85,7 @@ Page({
   onLoad: function(e) {
     wx.hideShareMenu();
     var that = this
+    upload_task = {};
     that.getOssParam();//获取oss上传参数
     box_mac = e.box_mac;
     var openid = e.openid;
@@ -278,7 +280,7 @@ Page({
     var timestamp = (new Date()).valueOf();
     res_sup_time = timestamp;
     //第一步上传视频
-    var upload_task = wx.uploadFile({
+    upload_task = wx.uploadFile({
       url: oss_upload_url,
       filePath: filename,
       name: 'file',
@@ -313,7 +315,6 @@ Page({
   videoPushNetty:function(timestamp,postf_t,box_mac,openid, is_pub_hotelinfo, is_share, duration, avatarUrl, nickName, public_text){
     //第二步正在投屏
     var that = this;
-    
     var mobile_brand = app.globalData.mobile_brand;
     var mobile_model = app.globalData.mobile_model;
     var res_eup_time = (new Date()).valueOf();
@@ -651,7 +652,7 @@ Page({
     var forscreen_id = (new Date()).valueOf();
     var filename = forscreen_id;
     var start_time = forscreen_id; 
-    var upload_task = wx.uploadFile({
+    upload_task = wx.uploadFile({
       url: 'http://' + intranet_ip + ':8080/videoH5?deviceId=' + openid + '&box_mac=' + box_mac + '&deviceName=' + mobile_brand + '&web=true&forscreen_id=' + forscreen_id + '&filename=' + filename + '&device_model=' + mobile_model + '&resource_size=' + resouce_size + '&duration=' + duration + '&action=2&resource_type=2&avatarUrl=' + avatarUrl + "&nickName=" + nickName+'&serial_number='+app.globalData.serial_number,
       filePath: video_url,
       name: 'fileUpload',
@@ -803,6 +804,7 @@ Page({
         },
 
       ],
+      launchType:'classic',
       is_view_forscreen_char:true,
       is_share: 0,
       showVedio: true,
@@ -870,6 +872,8 @@ Page({
   },
   tipsForLaunchWindowCancel:function(){
     this.setData({isOpenWind:false,is_classic_disabel:false,'is_speed_disabel':false})
+    
+    upload_task.abort();
   },
 
   //retryForscreen

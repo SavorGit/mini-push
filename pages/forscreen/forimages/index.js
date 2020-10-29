@@ -21,7 +21,7 @@ var oss_upload_url = app.globalData.oss_upload_url;
 var pubdetail = [];
 var netty_push_info ;
 var netty_push_img ;
-console.log(app.globalData.qualityList)
+var upload_task;
 Page({
   data: {
     statusBarHeight: getApp().globalData.statusBarHeight,
@@ -66,6 +66,7 @@ Page({
   onLoad: function (e) {
     wx.hideShareMenu();
     var that = this;
+    upload_task = {};
     that.getOssParam();//获取oss上传参数
     var hotel_info = app.globalData.hotel_info;
     var change_link_type = app.globalData.change_link_type;
@@ -186,6 +187,7 @@ Page({
         { 'name': '公开发表，公众可见', 'value': '2', 'checked': false, 'disabled': false },
 
       ],
+      launchType:'classic',
       is_view_forscreen_char:true,
       is_share:0,
       is_btn_disabel: true,
@@ -376,7 +378,7 @@ Page({
       var order = flag + 1;
       var postf_t = filename.substring(index1, index2);//后缀名
       var postf_w = filename.substring(index1 + 1, index2);//后缀名
-      var upload_task = wx.uploadFile({
+      upload_task = wx.uploadFile({
         url: oss_upload_url,
         filePath: img_url,
         name: 'file',
@@ -602,6 +604,7 @@ Page({
   },
   tipsForLaunchWindowCancel:function(){
     this.setData({isOpenWind:false,is_btn_disabel:false})
+    upload_task.abort();
   },
   //retryForscreen
   
@@ -819,7 +822,7 @@ Page({
       var img_size = up_imgs[i].resource_size;
       
 
-      wx.uploadFile({
+      upload_task=wx.uploadFile({
         url: "http://" + intranet_ip + ":8080/picH5?isThumbnail=1&imageId=20170301&deviceId=" + openid + "&box_mac=" + box_mac + "&deviceName=" + mobile_brand + "&rotation=90&imageType=1&web=true&forscreen_id=" + forscreen_id + '&forscreen_char=' + forscreen_char + '&filename=' + filename + '&device_model=' + mobile_model + '&resource_size=' + img_size + '&action=4&resource_type=0&avatarUrl=' + avatarUrl + "&nickName=" + nickName + "&forscreen_nums=" + img_lenth+"&serial_number="+app.globalData.serial_number,
         filePath: img_url,
         name: 'fileUpload',
