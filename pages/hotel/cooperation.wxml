@@ -37,7 +37,7 @@
 				<view class="row-top flex-row-flex_start-start" wx:if="{{bean.is_takeout==1}}">
 					<view class='cover flex-column-center-flex_start' bindtap="gotoMerchant" data-merchant_id="{{bean.merchant_id}}">
 						<image mode="aspectFill" src='{{bean.img_url}}' binderror="bindImgErro" data-index="{{index}}"></image>
-						<view class="theme-rad-panel">支持外卖</view>
+						<!-- <view class="theme-rad-panel">支持外卖</view> -->
 					</view>
 					<view class='i-right flex-column-flex_start-space_between'>
 						<view class='ir-top flex-row-flex_start-start'>
@@ -87,11 +87,11 @@
 				</view>
 
 
-				<view class="row-bottom" wx:if="{{bean.goods.length>0}}">
+				<!-- <view class="row-bottom" wx:if="{{bean.goods.length>0}}">
 					<block wx:for="{{bean.goods}}" wx:key="kk" wx:for-item="item" wx:for-index="idx">
 						<image mode="aspectFill" src="{{item.img}}" bindtap="gotoDishes" data-goods_id="{{item.id}}"></image>
 					</block>
-				</view>
+				</view> -->
 			</view>
 		</view>
 	</scroll-view>

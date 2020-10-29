@@ -52,6 +52,13 @@ Page({
     wifi_hidden: true,
     hiddens: true, //,
     qualityList:[],
+    
+    is_view_forscreen_char:true,
+    isOpenWind:false, //是否显示投屏状态弹窗
+    // isWifi:是否显示WIFI连接提示  isError:是否显示错误信息 title 弹窗标题 step:步骤 progress:进度条 tip:正在投屏，请稍候 
+    openWind:{'isWifi':false,'isError':false,'title':'','step':1,'progress':0,'tip':''}, 
+    cutDownTime:'3', // 3S   倒计时
+    DevOpsTips:'0', //耗时23秒
   },
   /**
    * 生命周期函数--监听页面加载
@@ -59,9 +66,10 @@ Page({
   onLoad: function (e) {
     wx.hideShareMenu();
     var that = this;
+    that.getOssParam();//获取oss上传参数
     var hotel_info = app.globalData.hotel_info;
     var change_link_type = app.globalData.change_link_type;
-    if(change_link_type==0){//未手动切换投屏方式
+    /*if(change_link_type==0){//未手动切换投屏方式
       if(hotel_info.forscreen_type==2){//直连投屏
         var launch_type = 'speed';
       }else if(hotel_info.forscreen_type==1){
@@ -73,15 +81,13 @@ Page({
       var launch_type = 'classic';
     }else if(change_link_type ==2){
       var launch_type = 'speed';
-    }
-    console.log(launch_type);
+    }*/
     var user_info = wx.getStorageSync("savor_user_info");
     openid = e.openid;
     box_mac = e.box_mac;
     that.setData({
       qualityList:app.globalData.qualityList,
       hotel_info:hotel_info,
-      launchType:launch_type,
       openid: openid,
       box_mac: box_mac,
       up_imgs: [],
@@ -160,17 +166,31 @@ Page({
       
     }
   },
+  getOssParam:function(){
+    var that = this;
+    wx.request({
+      url: api_url + '/Smallapp/Index/getOssParams',
+      success: function(rest) {
+        policy = rest.data.policy;
+        signature = rest.data.signature;
+      }
+    });
+  },
 
   chooseImage(e) {//重新选择照片开始
     var that = this;
+    var openWind= {'isWifi':false,'isError':false,'title':'','step':1,'progress':0,'tip':''};
     that.setData({
       item: [
         { 'name': '公开时显示餐厅信息', 'value': '1', 'checked': true, 'disabled': false },
         { 'name': '公开发表，公众可见', 'value': '2', 'checked': false, 'disabled': false },
 
       ],
+      is_view_forscreen_char:true,
       is_share:0,
       is_btn_disabel: true,
+      openWind:openWind,
+      cutDownTime:3,
     })
     openid = e.currentTarget.dataset.openid;
     box_mac = e.currentTarget.dataset.boxmac;
@@ -218,193 +238,92 @@ Page({
     }
   },//重新选择照片结束
 
-  up_forscreen(e) {//多张图片投屏开始(不分享到发现)
+  classicForImg:function(res){
     var that = this;
-    var launchType = that.data.launchType;
     var up_imgs = that.data.up_imgs;
     var hotel_info = that.data.hotel_info;
-    img_lenth = e.detail.value.img_lenth;
-    openid = e.detail.value.openid;
-    box_mac = e.detail.value.box_mac;
-    forscreen_char = e.detail.value.forscreen_char;
-    var avatarUrl = e.detail.value.avatarUrl;
-    var nickName = e.detail.value.nickName;
-    var mobile_brand = app.globalData.mobile_brand;
-    var mobile_model = app.globalData.mobile_model;
+    img_lenth = res.img_lenth;
+    openid = res.openid;
+    box_mac = res.box_mac;
+    forscreen_char = res.forscreen_char;
+    var avatarUrl = res.avatarUrl;
+    var nickName = res.nickName;
 
-     
-    if(launchType=='classic'){//经典投屏
-      netty_push_info={};
-      netty_push_img = [];
-      
-      
-      var public_text = e.detail.value.public_text;
-      if(typeof(public_text)=='undefined'){
-        public_text = '';
-      }
-      var is_pub_hotelinfo = e.detail.value.is_pub_hotelinfo;   //是否公开显示餐厅信息
-      var is_share = e.detail.value.is_share;
-      lead(openid, is_share);
-      var is_assist = 0;
-      if(is_share==1){
-        is_assist = 1
-      }
-      
+    netty_push_info={};
+    netty_push_img = [];
+    
+    var public_text = res.public_text;
+    if(typeof(public_text)=='undefined'){
+      public_text = '';
+    }
+    var is_pub_hotelinfo = res.is_pub_hotelinfo;   //是否公开显示餐厅信息
+    var is_share = res.is_share;
+    that.lead(openid, is_share);
+    var is_assist = 0;
+    if(is_share==1){
+      is_assist = 1
+    }
+    var openWind = that.data.openWind;
+    openWind.title = '您正在使用经典投屏';
+    openWind.tip   = '图片正在处理中';
+    console.log('ddd');
+    that.setData({
+      is_view_forscreen_char:false,
+      isOpenWind:true,
+      openWind:openWind,
+      //load_fresh_char: '亲^_^投屏中,请稍后...',
+      //hiddens: false,
+      is_btn_disabel: true,
+      is_share: is_share,
+      is_assist:is_assist
+    })
 
-      that.setData({
-        load_fresh_char: '亲^_^投屏中,请稍后...',
-        hiddens: false,
-        is_btn_disabel: true,
-        is_share: is_share,
-        is_assist:is_assist
-      })
-
-      
-      wx.request({
-        url: api_url+'/smallapp21/User/isForscreenIng',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        method: "POST",
-        data: { box_mac: box_mac },
-        success: function (res) {
-          var is_forscreen = res.data.result.is_forscreen;
-          if (is_forscreen == 1) {
-            wx.showModal({
-              title: '确认要打断投屏',
-              content: '当前电视正在进行投屏,继续投屏有可能打断当前投屏中的内容.',
-              success: function (res) {
-                if (res.confirm) {
-                  
-                  wx.request({
-                    url: api_url+'/Smallapp/Index/getOssParams',
-                    headers: {
-                      'Content-Type': 'application/json'
-                    },
-                    success: function (rest) {
-  
-                      policy = rest.data.policy;
-                      signature = rest.data.signature;
-                      //第一步
-                      uploadOss_multy( forscreen_char, avatarUrl, nickName, public_text);
-                    }
-                  });
-                  
-                  
-                } else if (res.cancel) {
-                  that.setData({
-                    hiddens: true,
-                  })
-                  wx.navigateBack({
-                    delta:1
-                  })
-                }
-              }
-            })
-            if (public_text == '' || typeof (public_text) == 'undefined') {
-              var ispublictext = 0;
-            } else {
-              var ispublictext = 1;
-            }
-            utils.tryCatch(mta.Event.stat('forscreenImg', { 'picnums': up_imgs.length, 'forscreenchar': forscreen_char, 'ispublictext': ispublictext, 'is_share': is_share, 'isforscreen': 1 }))
-          }else {
-            
-            wx.request({
-              url: api_url+'/Smallapp/Index/getOssParams',
-              headers: {
-                'Content-Type': 'application/json'
-              },
-              success: function (rest) {
-  
-                policy = rest.data.policy;
-                signature = rest.data.signature;
+    wx.request({
+      url: api_url+'/smallapp21/User/isForscreenIng',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      method: "POST",
+      data: { box_mac: box_mac },
+      success: function (res) {
+        var is_forscreen = res.data.result.is_forscreen;
+        if (is_forscreen == 1) {
+          wx.showModal({
+            title: '确认要打断投屏',
+            content: '当前电视正在进行投屏,继续投屏有可能打断当前投屏中的内容.',
+            success: function (res) {
+              if (res.confirm) {
                 //第一步
-                uploadOss_multy(forscreen_char, avatarUrl, nickName, public_text);
-              }
-            });
-            
-            if (public_text == '' || typeof (public_text) == 'undefined') {
-              var ispublictext = 0;
-            } else {
-              var ispublictext = 1;
-            }
-            utils.tryCatch(mta.Event.stat('forscreenImg', { 'picnums': up_imgs.length, 'forscreenchar': forscreen_char, 'ispublictext': ispublictext, 'is_share': is_share,'isforscreen':0 }))
-          }
-        }
-      })   
-
-    }else if(launchType=='speed'){//极速投屏
-      console.log(up_imgs);
-      //return false;
-      that.setData({
-        load_fresh_char: '亲^_^投屏中,请稍后...',
-        hiddens: false,
-        is_btn_disabel: true,
-        
-      })
-      var forscreen_id = (new Date()).valueOf();
-      var start_time   = (new Date()).getTime();
-      var intranet_ip = hotel_info.intranet_ip;
-      for (var i = 0; i < img_lenth; i++) {
-        var filename = (new Date()).valueOf();
-        up_imgs[i].img_id = filename;
-        up_imgs[i].is_sing_forscreen = 1;
-        up_imgs[i].percent = 100;
-        var img_url = up_imgs[i].tmp_img;
-        var img_size = up_imgs[i].resource_size;
-        
-  
-        wx.uploadFile({
-          url: "http://" + intranet_ip + ":8080/picH5?isThumbnail=1&imageId=20170301&deviceId=" + openid + "&box_mac=" + box_mac + "&deviceName=" + mobile_brand + "&rotation=90&imageType=1&web=true&forscreen_id=" + forscreen_id + '&forscreen_char=' + forscreen_char + '&filename=' + filename + '&device_model=' + mobile_model + '&resource_size=' + img_size + '&action=4&resource_type=0&avatarUrl=' + avatarUrl + "&nickName=" + nickName + "&forscreen_nums=" + img_lenth+"&serial_number="+app.globalData.serial_number,
-          filePath: img_url,
-          name: 'fileUpload',
-          success: function(res) {
-            if (i == img_lenth) {
-              var end_time = (new Date()).getTime();
-              var diff_time =  end_time - start_time;
-              var info_rt = JSON.parse(res.data);
-              if (info_rt.code == 1001) {
+                uploadOss_multy( forscreen_char, avatarUrl, nickName, public_text);
+                
+              } else if (res.cancel) {
                 that.setData({
-                  is_btn_disabel: false,
                   hiddens: true,
                 })
-                app.showToast('投屏失败，请重试！')
-                
-              }else {
-                that.setData({
-                  showThird: true,
-                  hiddens:true,
-                  up_imgs: up_imgs,
-                  forscreen_char: forscreen_char,
-                  
+                wx.navigateBack({
+                  delta:1
                 })
-                utils.tryCatch(mta.Event.stat('wifiPicForscreen', { 'picnums': up_imgs.length }));
-  
               }
-              utils.tryCatch(mta.Event.stat('wifiPicUploadWasteTime', { 'wasttime': diff_time }));
             }
-          },
-          fail: function({
-            errMsg
-          }) {
-            if (i == img_lenth) {
-              
-              that.setData({
-                is_btn_disabel: false,
-                hiddens: true,
-              })
-              app.showToast('投屏失败,请确认是否连接本包间wifi！',3000,'none',true);
-              
-            }
-          },
-        });
-        app.sleep(1);
+          })
+          if (public_text == '' || typeof (public_text) == 'undefined') {
+            var ispublictext = 0;
+          } else {
+            var ispublictext = 1;
+          }
+          utils.tryCatch(mta.Event.stat('forscreenImg', { 'picnums': up_imgs.length, 'forscreenchar': forscreen_char, 'ispublictext': ispublictext, 'is_share': is_share, 'isforscreen': 1 }))
+        }else {
+          //第一步
+          uploadOss_multy(forscreen_char, avatarUrl, nickName, public_text);
+          if (public_text == '' || typeof (public_text) == 'undefined') {
+            var ispublictext = 0;
+          } else {
+            var ispublictext = 1;
+          }
+          utils.tryCatch(mta.Event.stat('forscreenImg', { 'picnums': up_imgs.length, 'forscreenchar': forscreen_char, 'ispublictext': ispublictext, 'is_share': is_share,'isforscreen':0 }))
+        }
       }
-
-    }
-    
-
-
+    }) 
     function uploadOss_multy( forscreen_char, avatarUrl, nickName, public_text) {
      
       var forscreen_id = (new Date()).valueOf();
@@ -475,12 +394,10 @@ Page({
 
         },
         success: function (res) {
-          that.setData({
-            hiddens:true,
-            showThird: true,
-            showTpBt: false,
-            forscreen_id: forscreen_id,
-          });
+          var openWind = that.data.openWind;
+
+          
+          
           var res_eup_time = (new Date()).valueOf();
           var netty_tmp = {};
           netty_tmp.url = "forscreen/resource/" + timestamp + postf_t+quality_obj.quality;
@@ -494,6 +411,13 @@ Page({
           }
           
           netty_push_img.push(netty_tmp);
+
+          var have_up_img_num = netty_push_img.length;
+          var progress  =parseInt((have_up_img_num / img_len)*100) ;
+          openWind.progress = progress;
+          console.log('aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa'+progress)
+          that.setData({openWind:openWind})
+          
           wx.request({
             url: api_v_url + '/index/recordForScreenPics',
             header: {
@@ -550,6 +474,7 @@ Page({
           });
 
           if (netty_push_img.length == img_len) {
+            
             var end_time = (new Date()).valueOf();
             var diff_time = end_time - forscreen_id;
             netty_push_info.res_eup_time = (new Date()).valueOf();
@@ -558,7 +483,9 @@ Page({
             netty_push_info.img_list = netty_push_img;
 
             netty_push_info = JSON.stringify(netty_push_info);
-            
+            openWind.step = 2;
+            openWind.tip  = '正在投屏,请稍后';
+            that.setData({openWind:openWind});
             wx.request({
               url: api_url + '/Netty/Index/pushnetty',
               headers: {
@@ -573,12 +500,21 @@ Page({
               },
               success: function (result) {
                 if(result.data.code!=10000){
-                  wx.showToast({
-                    title: '投屏失败!',
-                    icon:'none',
-                    duration:2000,
-  
+                  openWind.tip = '投屏失败，请重试！';
+                  openWind.isError = true;
+                  that.setData({
+                    openWind:openWind,
                   })
+                }else {
+                  that.setData({
+                    showThird: true,
+                    hiddens:true,
+                    
+                    showTpBt: false,
+                    forscreen_id: forscreen_id,
+                  });
+                  //倒计时关闭窗口
+                  that.closeOpenWind();
                 }
               }
             })
@@ -602,6 +538,7 @@ Page({
         },
       });
       upload_task.onProgressUpdate((res) => {
+        console.log(res)
         up_imgs[flag].percent  = res.progress
         that.setData({
           up_imgs: up_imgs
@@ -619,35 +556,430 @@ Page({
         }
       })
     }
-    //引导蒙层
-    function lead(openid, is_share) {
-      if(is_share==1){
-        var user_info = wx.getStorageSync('savor_user_info');
-        var guide_prompt = user_info.guide_prompt;
-        if (typeof (guide_prompt) !='undefined'){
-          if (guide_prompt.length == 0) {
-            that.setData({
-              showGuidedMaskAfterLaunch: true,
-            })
-          } else {
-            var is_lead = 1;
-            for (var i = 0; i < guide_prompt.length; i++) {
-              if (guide_prompt[i] == 2) {
-                is_lead = 0;
-                break;
-              }
-            }
-            if (is_lead == 1) {
-              that.setData({
-                showGuidedMaskAfterLaunch: true
-              })
+  },
+  lead:function(openid, is_share) {
+    var that = this;
+    if(is_share==1){
+      var user_info = wx.getStorageSync('savor_user_info');
+      var guide_prompt = user_info.guide_prompt;
+      if (typeof (guide_prompt) !='undefined'){
+        if (guide_prompt.length == 0) {
+          that.setData({
+            showGuidedMaskAfterLaunch: true,
+          })
+        } else {
+          var is_lead = 1;
+          for (var i = 0; i < guide_prompt.length; i++) {
+            if (guide_prompt[i] == 2) {
+              is_lead = 0;
+              break;
             }
           }
-        }  
-      } 
+          if (is_lead == 1) {
+            that.setData({
+              showGuidedMaskAfterLaunch: true
+            })
+          }
+        }
+      }  
+    } 
+  },
+  closeOpenWind:function(){
+    var that = this;
+    var cutDownTime = that.data.cutDownTime;
+    var djs = cutDownTime -1;
+    var interval = setInterval(function(){ 
+      that.setData({
+        cutDownTime:djs
+      })
+
+      if(djs<=0){
+        clearInterval(interval);
+        that.setData({isOpenWind:false})
+      }
+      djs --;
+      }, 1000)
+  },
+  tipsForLaunchWindowCancel:function(){
+    this.setData({isOpenWind:false,is_btn_disabel:false})
+  },
+  //retryForscreen
+  
+  tipsForLaunchWindowRetry:function(){
+    var that = this;
+    var hotel_info = that.data.hotel_info;
+    var form_data  = that.data.form_data;
+    var launchType = that.data.launchType;
+    that.setData({
+      openWind:{'isWifi':false,'isError':false,'title':'','step':1,'progress':0,'tip':''}
+    })
+    if(launchType=='classic'){//经典投屏
+      that.classicForImg(form_data);
+    }else {//极速投屏
+      that.speedForImg(form_data,hotel_info);
+    }
+  },
+  speedForImg:function(form_data,hotel_info){
+    var that = this;
+    that.linkHotelWifi(form_data,hotel_info);
+  },
+  linkHotelWifi:function(data,hotel_info){
+    var that = this;
+    var wifi_name = hotel_info.wifi_name;
+    var wifi_mac = hotel_info.wifi_mac;
+    var use_wifi_password = hotel_info.wifi_password;
+    var box_mac = hotel_info.box_mac
+    if (hotel_info.wifi_name != '') {
+      var openWind = that.data.openWind;
+      openWind.isWifi = true,
+      openWind.step = 1;
+      openWind.title = '您正在使用极速投屏';
+      openWind.tip   = '包间wifi链接中';
+      that.setData({
+        isOpenWind:true,
+        openWind:openWind,
+        is_view_forscreen_char:false,
+      })
+
+      wx.startWifi({
+        success: function (res) {
+          wx.getConnectedWifi({
+            success: function (res) {
+              //第一步链接wifi
+              if (res.errMsg == 'getConnectedWifi:ok') {
+                if (res.wifi.SSID == wifi_name) {//链接的是本包间wifi
+                  wx.stopWifi({
+                  })
+                  //第二步开始投屏
+                  that.speedUploadImg(hotel_info,data);
+
+                } else {//链接的不是本包间wifi
+                  that.connectWifi(wifi_name, wifi_mac, use_wifi_password, box_mac,hotel_info,data);
+                }
+              } else {
+                //当前打开wifi 但是没有链接任何wifi
+                that.connectWifi(wifi_name, wifi_mac, use_wifi_password, box_mac,hotel_info,data);
+              }
+              //wx.hideLoading()
+            }, fail: function (res) {
+              var err_msg = 'wifi链接失败';
+              if(res.errMsg == 'getConnectedWifi:fail:currentWifi is null' || res.errMsg=='getConnectedWifi:fail no wifi is connected.'){
+                that.connectWifi(wifi_name, wifi_mac, use_wifi_password, box_mac,hotel_info,data);
+              }else {
+                if (res.errCode == 12005) { //安卓特有  未打开wifi
+                  err_msg = '请打开您的手机Wifi';
+                  
+                } else if (res.errCode == 12006) {//Android 特有，未打开 GPS 定位开关
+                  err_msg = '请打开您的手机GPS';
+                  
+                } else if(res.errCode == 12007){//用户拒绝授权链接 Wi-Fi
+                  
+                }else if(res.errCode== 12010){
+                  err_msg = '请确认并打开wifi';
+                  
+                }else {
+                  if (hotel_info.wifi_password == '') {
+                    var us_wifi_password = '空';
+                  } else {
+                    var us_wifi_password = hotel_info.wifi_password;
+                  }
+                  var msg = '请手动连接包间wifi:' + hotel_info.wifi_name + ',密码为' + us_wifi_password+'。连上wifi投屏更快哦！';
+                  
+                }
+                openWind.tip = err_msg;
+                openWind.isError = true;
+                that.setData({
+                  openWind:openWind
+                })
+              }
+              
+            },
+          })
+        }, fail: function (res) {
+          console.log('startwifierr')
+          openWind.tip = res.errMsg;
+          openWind.isError = true;
+          that.setData({
+            openWind:openWind
+          })
+          
+        }
+      })
+    }else {
+      app.showToast('该电视暂不支持极速投屏');
+    }
+  },
+  connectWifi:function(wifi_name, wifi_mac, use_wifi_password, box_mac,hotel_info,data){
+    var that = this;
+    console.log('connectWifi');
+    var openWind = that.data.openWind;
+    wx.connectWifi({
+      SSID: wifi_name,
+      BSSID: wifi_mac,
+      password: use_wifi_password,
+      success: function (reswifi) {
+        
+        wx.onWifiConnected((result) => {
+          if(result.wifi.SSID==wifi_name){
+            //app.showToast('wifi链接成功');
+            that.speedUploadImg(hotel_info,data);
+          }
+          
+        },()=>{
+          openWind.tip = err_msg;
+          openWind.isError = true;
+          that.setData({
+            openWind:openWind
+          })
+        })
+      }, fail: function (res) {
+        var err_msg = 'wifi链接失败';
+        if(res.errCode==12000){
+        }else {
+          if (res.errCode == 12005) { //安卓特有  未打开wifi
+            err_msg = '请打开您的手机Wifi';
+            
+          } else if (res.errCode == 12006) {//Android 特有，未打开 GPS 定位开关
+            err_msg = '请打开您的手机GPS';
+            
+          } else if(res.errCode == 12007){//用户拒绝授权链接 Wi-Fi
+            
+          }else if(res.errCode==12010){
+            err_msg = '请确认并打开wifi';
+            
+          }else {
+            if (use_wifi_password == '') {
+              var wifi_password_str = '空';
+            } else {
+              var wifi_password_str = use_wifi_password;
+            }
+            var msg = '请手动连接包间wifi:' + wifi_name + ',密码为' + wifi_password_str+'。连上wifi投屏更快哦！';
+            
+          }
+          openWind.tip = err_msg;
+          openWind.isError = true;
+          that.setData({
+            openWind:openWind
+          })
+          
+          var err_info = JSON.stringify(res);
+          that.recordWifiErr(err_info,box_mac,data.openid);
+        }
+      }
+    })
+  },
+  recordWifiErr:function(err_info,box_mac,openid){
+    wx.request({
+      url: api_v_url + '/datalog/recordWifiErr',
+      data: {
+        err_info: err_info,
+        box_mac: box_mac,
+        openid:openid,
+        mobile_brand:app.globalData.sys_info.brand,
+        mobile_model:app.globalData.sys_info.model,
+        platform:app.globalData.sys_info.platform,
+        version:app.globalData.sys_info.version,
+        system:app.globalData.sys_info.system
+      }
+    })
+  },
+  speedUploadImg:function(hotel_info,data){
+    var that = this;
+    var openWind = that.data.openWind;
+    openWind.step = 2;
+    openWind.tip = '图片处理中';
+    that.setData({
+      openWind:openWind,
+      is_btn_disabel: true,
+    })
+    var forscreen_id = (new Date()).valueOf();
+    var start_time   = (new Date()).getTime();
+    var intranet_ip = hotel_info.intranet_ip;
+    var mobile_brand = app.globalData.mobile_brand;
+    var mobile_model = app.globalData.mobile_model;
+    
+    var up_imgs = that.data.up_imgs;
+    var hotel_info = that.data.hotel_info;
+    img_lenth = data.img_lenth;
+    openid = data.openid;
+    box_mac = data.box_mac;
+    forscreen_char = data.forscreen_char;
+    var avatarUrl = data.avatarUrl;
+    var nickName = data.nickName;
+    
+    var post_img_data = [];
+
+    for (var i = 0; i < img_lenth; i++) {
+      
+      var filename = (new Date()).valueOf();
+      up_imgs[i].img_id = filename;
+      up_imgs[i].is_sing_forscreen = 1;
+      up_imgs[i].percent = 100;
+      var img_url = up_imgs[i].tmp_img;
+      var img_size = up_imgs[i].resource_size;
+      
+
+      wx.uploadFile({
+        url: "http://" + intranet_ip + ":8080/picH5?isThumbnail=1&imageId=20170301&deviceId=" + openid + "&box_mac=" + box_mac + "&deviceName=" + mobile_brand + "&rotation=90&imageType=1&web=true&forscreen_id=" + forscreen_id + '&forscreen_char=' + forscreen_char + '&filename=' + filename + '&device_model=' + mobile_model + '&resource_size=' + img_size + '&action=4&resource_type=0&avatarUrl=' + avatarUrl + "&nickName=" + nickName + "&forscreen_nums=" + img_lenth+"&serial_number="+app.globalData.serial_number,
+        filePath: img_url,
+        name: 'fileUpload',
+        success: function(res) {
+          var box_post_data = {'filename':''};
+          box_post_data.filename = filename;
+          post_img_data.push(box_post_data);
+          
+          var have_up_img_num = post_img_data.length;
+          var progress  =parseInt((have_up_img_num / img_lenth)*100) ;
+          console.log('aaaaaaaaaaaaaaaaa--'+progress)
+          openWind.progress = progress;
+          that.setData({openWind:openWind})
+
+
+          if (post_img_data.length == img_lenth) {
+            var end_time = (new Date()).getTime();
+            var diff_time =  end_time - start_time;
+            var info_rt = JSON.parse(res.data);
+            if (info_rt.code == 1001) {
+              
+              openWind.tip = '投屏失败，请重试！';
+              openWind.isError = true;
+              that.setData({
+                openWind:openWind,
+                is_btn_disabel: false,
+                hiddens: true,
+              })
+              
+            }else {
+              
+              openWind.step = 3;
+              openWind.tip = '正在投屏,请稍后';
+              that.setData({
+                openWind:openWind,
+                showThird: true,
+                hiddens:true,
+                up_imgs: up_imgs,
+                forscreen_char: forscreen_char,
+                
+              })
+              that.closeOpenWind();
+              utils.tryCatch(mta.Event.stat('wifiPicForscreen', { 'picnums': up_imgs.length }));
+
+            }
+            utils.tryCatch(mta.Event.stat('wifiPicUploadWasteTime', { 'wasttime': diff_time }));
+          }
+        },
+        fail: function({
+          errMsg
+        }) {
+          if (i == img_lenth) {
+            
+            that.setData({
+              is_btn_disabel: false,
+              hiddens: true,
+            })
+            app.showToast('投屏失败,请确认是否连接本包间wifi！',3000,'none',true);
+            
+          }
+        },
+      });
+      app.sleep(1);
+    }
+  },
+  up_forscreen(e) {//多张图片投屏开始(不分享到发现)
+    var that = this;
+    var launchType = e.detail.target.dataset.launch_type;
+    var up_imgs = that.data.up_imgs;
+    var hotel_info = that.data.hotel_info;
+    img_lenth = e.detail.value.img_lenth;
+    openid = e.detail.value.openid;
+    box_mac = e.detail.value.box_mac;
+    forscreen_char = e.detail.value.forscreen_char;
+    var avatarUrl = e.detail.value.avatarUrl;
+    var nickName = e.detail.value.nickName;
+    var mobile_brand = app.globalData.mobile_brand;
+    var mobile_model = app.globalData.mobile_model;
+    
+    that.setData({
+      form_data:e.detail.value,
+      launchType:launchType,
+    })
+    if(launchType=='classic'){//经典投屏
+      that.classicForImg(e.detail.value);
+      return false;
+
+    }else if(launchType=='speed'){//极速投屏
+      console.log(up_imgs);
+
+
+      that.speedForImg(e.detail.value,hotel_info);
+      return false;
+      //return false;
+      that.setData({
+        load_fresh_char: '亲^_^投屏中,请稍后...',
+        hiddens: false,
+        is_btn_disabel: true,
+        
+      })
+      var forscreen_id = (new Date()).valueOf();
+      var start_time   = (new Date()).getTime();
+      var intranet_ip = hotel_info.intranet_ip;
+      for (var i = 0; i < img_lenth; i++) {
+        var filename = (new Date()).valueOf();
+        up_imgs[i].img_id = filename;
+        up_imgs[i].is_sing_forscreen = 1;
+        up_imgs[i].percent = 100;
+        var img_url = up_imgs[i].tmp_img;
+        var img_size = up_imgs[i].resource_size;
+        
+  
+        wx.uploadFile({
+          url: "http://" + intranet_ip + ":8080/picH5?isThumbnail=1&imageId=20170301&deviceId=" + openid + "&box_mac=" + box_mac + "&deviceName=" + mobile_brand + "&rotation=90&imageType=1&web=true&forscreen_id=" + forscreen_id + '&forscreen_char=' + forscreen_char + '&filename=' + filename + '&device_model=' + mobile_model + '&resource_size=' + img_size + '&action=4&resource_type=0&avatarUrl=' + avatarUrl + "&nickName=" + nickName + "&forscreen_nums=" + img_lenth+"&serial_number="+app.globalData.serial_number,
+          filePath: img_url,
+          name: 'fileUpload',
+          success: function(res) {
+            if (i == img_lenth) {
+              var end_time = (new Date()).getTime();
+              var diff_time =  end_time - start_time;
+              var info_rt = JSON.parse(res.data);
+              if (info_rt.code == 1001) {
+                that.setData({
+                  is_btn_disabel: false,
+                  hiddens: true,
+                })
+                app.showToast('投屏失败，请重试！')
+                
+              }else {
+                that.setData({
+                  showThird: true,
+                  hiddens:true,
+                  up_imgs: up_imgs,
+                  forscreen_char: forscreen_char,
+                  
+                })
+                utils.tryCatch(mta.Event.stat('wifiPicForscreen', { 'picnums': up_imgs.length }));
+  
+              }
+              utils.tryCatch(mta.Event.stat('wifiPicUploadWasteTime', { 'wasttime': diff_time }));
+            }
+          },
+          fail: function({
+            errMsg
+          }) {
+            if (i == img_lenth) {
+              
+              that.setData({
+                is_btn_disabel: false,
+                hiddens: true,
+              })
+              app.showToast('投屏失败,请确认是否连接本包间wifi！',3000,'none',true);
+              
+            }
+          },
+        });
+        app.sleep(1);
+      }
     }
   }, //多张图片投屏结束(不分享到发现)
-
   up_single_pic(e) {//指定单张图片投屏开始
     console.log(e)
     var that = this;
