@@ -72,6 +72,7 @@ Page({
         var pams_arr = pams.split('_');
         merchant_id = pams_arr[1];
         var tab = pams_arr[3];
+        tab ='goods';
         that.setData({
           is_share: true,
           tab: tab,
@@ -83,6 +84,7 @@ Page({
         }else {
           var tab = 'goods';
         }
+        tab ='goods';
         that.setData({
           tab:tab,
         })
@@ -121,6 +123,7 @@ Page({
             var pams_arr = pams.split('_');
             merchant_id = pams_arr[1];
             var tab = pams_arr[3];
+            tab ='goods';
             that.setData({
               is_share: true,
               tab: tab
@@ -132,6 +135,7 @@ Page({
             } else {
               var tab = 'goods';
             }
+            tab ='goods';
             that.setData({
               tab: tab,
             })
