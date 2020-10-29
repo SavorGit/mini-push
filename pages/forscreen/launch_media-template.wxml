@@ -60,7 +60,7 @@
 		<view class="mask flex-column-center-center">
 			<view class="window theme-window">
 				<view class="head">
-					<view class="DevOps" bindtap="tipsForLaunchWindowDevOps">{{DevOpsTips}}</view>
+					<!-- <view class="DevOps" bindtap="tipsForLaunchWindowDevOps">{{DevOpsTips}}</view> -->
 					<view class="title-bar">
 						<view class="title">{{title}}</view>
 					</view>
@@ -95,9 +95,13 @@
 							</view>
 						</block>
 					</view>
-					<view class="bottom flex-row-center-center" >
+					<view class="bottom flex-row-center-center" wx:if="{{isError==true}}">
+						<view wx:if="{{step<(isWifi?3:2)}}" class="btn theme-button-dark" bindtap="tipsForLaunchWindowCancel">取消投屏</view>
+					</view>
+					<view class="bottom flex-row-center-center" wx:if="{{isError==false}}">
 						<view wx:if="{{step<(isWifi?3:2) && step>(isWifi?1:0)}}" class="btn theme-button-dark" bindtap="tipsForLaunchWindowCancel">取消投屏</view>
 					</view>
+
 				</view>
 			</view>
 		</view>

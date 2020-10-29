@@ -632,19 +632,6 @@ Page({
       
     })
     
-    
-    /*var time_80 = setInterval(function(){ 
-      
-        progress +=10;
-        if(progress>100){
-          progress = 0;
-        }
-        openWind.progress = progress;
-        that.setData({
-          openWind:openWind,
-        })
-      
-    }, 1000)*/
     var intranet_ip = hotel_info.intranet_ip;
     var video_url = video;
     var mobile_brand = app.globalData.mobile_brand;

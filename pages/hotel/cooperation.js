@@ -636,7 +636,7 @@ Page({
       return false;
     }else {
       wx.navigateTo({
-        url: '/pages/hotel/shop?merchant_id=' + merchant_id +'&tab=foods',
+        url: '/pages/hotel/shop?merchant_id=' + merchant_id +'&tab=goods',
       })
       
     }

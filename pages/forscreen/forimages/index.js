@@ -280,52 +280,7 @@ Page({
       is_assist:is_assist
     })
 
-    wx.request({
-      url: api_url+'/smallapp21/User/isForscreenIng',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      method: "POST",
-      data: { box_mac: box_mac },
-      success: function (res) {
-        var is_forscreen = res.data.result.is_forscreen;
-        if (is_forscreen == 1) {
-          wx.showModal({
-            title: '确认要打断投屏',
-            content: '当前电视正在进行投屏,继续投屏有可能打断当前投屏中的内容.',
-            success: function (res) {
-              if (res.confirm) {
-                //第一步
-                uploadOss_multy( forscreen_char, avatarUrl, nickName, public_text);
-                
-              } else if (res.cancel) {
-                that.setData({
-                  hiddens: true,
-                })
-                wx.navigateBack({
-                  delta:1
-                })
-              }
-            }
-          })
-          if (public_text == '' || typeof (public_text) == 'undefined') {
-            var ispublictext = 0;
-          } else {
-            var ispublictext = 1;
-          }
-          utils.tryCatch(mta.Event.stat('forscreenImg', { 'picnums': up_imgs.length, 'forscreenchar': forscreen_char, 'ispublictext': ispublictext, 'is_share': is_share, 'isforscreen': 1 }))
-        }else {
-          //第一步
-          uploadOss_multy(forscreen_char, avatarUrl, nickName, public_text);
-          if (public_text == '' || typeof (public_text) == 'undefined') {
-            var ispublictext = 0;
-          } else {
-            var ispublictext = 1;
-          }
-          utils.tryCatch(mta.Event.stat('forscreenImg', { 'picnums': up_imgs.length, 'forscreenchar': forscreen_char, 'ispublictext': ispublictext, 'is_share': is_share,'isforscreen':0 }))
-        }
-      }
-    }) 
+    uploadOss_multy(forscreen_char, avatarUrl, nickName, public_text);
     function uploadOss_multy( forscreen_char, avatarUrl, nickName, public_text) {
      
       var forscreen_id = (new Date()).valueOf();
@@ -529,9 +484,7 @@ Page({
           })
         },
         fail: function ({ errMsg }) {
-          wx.navigateBack({
-            delta: 1
-          })
+          
           wx.showToast({
             title: '投屏失败，请重试',
             icon:'none',
@@ -721,8 +674,9 @@ Page({
       BSSID: wifi_mac,
       password: use_wifi_password,
       success: function (reswifi) {
-        
+        console.log('connect_cg')
         wx.onWifiConnected((result) => {
+          console.log(result);
           if(result.wifi.SSID==wifi_name){
             //app.showToast('wifi链接成功');
             that.speedUploadImg(hotel_info,data);
@@ -788,6 +742,7 @@ Page({
   },
   speedUploadImg:function(hotel_info,data){
     var that = this;
+    console.log('图片上传');
     var openWind = that.data.openWind;
     openWind.step = 2;
     openWind.tip = '图片处理中';
@@ -901,8 +856,9 @@ Page({
     var nickName = e.detail.value.nickName;
     var mobile_brand = app.globalData.mobile_brand;
     var mobile_model = app.globalData.mobile_model;
-    
+    var openWind = {'isWifi':false,'isError':false,'title':'','step':1,'progress':0,'tip':''};
     that.setData({
+      openWind:openWind,
       form_data:e.detail.value,
       launchType:launchType,
     })
@@ -917,70 +873,7 @@ Page({
       that.speedForImg(e.detail.value,hotel_info);
       return false;
       //return false;
-      that.setData({
-        load_fresh_char: '亲^_^投屏中,请稍后...',
-        hiddens: false,
-        is_btn_disabel: true,
-        
-      })
-      var forscreen_id = (new Date()).valueOf();
-      var start_time   = (new Date()).getTime();
-      var intranet_ip = hotel_info.intranet_ip;
-      for (var i = 0; i < img_lenth; i++) {
-        var filename = (new Date()).valueOf();
-        up_imgs[i].img_id = filename;
-        up_imgs[i].is_sing_forscreen = 1;
-        up_imgs[i].percent = 100;
-        var img_url = up_imgs[i].tmp_img;
-        var img_size = up_imgs[i].resource_size;
-        
-  
-        wx.uploadFile({
-          url: "http://" + intranet_ip + ":8080/picH5?isThumbnail=1&imageId=20170301&deviceId=" + openid + "&box_mac=" + box_mac + "&deviceName=" + mobile_brand + "&rotation=90&imageType=1&web=true&forscreen_id=" + forscreen_id + '&forscreen_char=' + forscreen_char + '&filename=' + filename + '&device_model=' + mobile_model + '&resource_size=' + img_size + '&action=4&resource_type=0&avatarUrl=' + avatarUrl + "&nickName=" + nickName + "&forscreen_nums=" + img_lenth+"&serial_number="+app.globalData.serial_number,
-          filePath: img_url,
-          name: 'fileUpload',
-          success: function(res) {
-            if (i == img_lenth) {
-              var end_time = (new Date()).getTime();
-              var diff_time =  end_time - start_time;
-              var info_rt = JSON.parse(res.data);
-              if (info_rt.code == 1001) {
-                that.setData({
-                  is_btn_disabel: false,
-                  hiddens: true,
-                })
-                app.showToast('投屏失败，请重试！')
-                
-              }else {
-                that.setData({
-                  showThird: true,
-                  hiddens:true,
-                  up_imgs: up_imgs,
-                  forscreen_char: forscreen_char,
-                  
-                })
-                utils.tryCatch(mta.Event.stat('wifiPicForscreen', { 'picnums': up_imgs.length }));
-  
-              }
-              utils.tryCatch(mta.Event.stat('wifiPicUploadWasteTime', { 'wasttime': diff_time }));
-            }
-          },
-          fail: function({
-            errMsg
-          }) {
-            if (i == img_lenth) {
-              
-              that.setData({
-                is_btn_disabel: false,
-                hiddens: true,
-              })
-              app.showToast('投屏失败,请确认是否连接本包间wifi！',3000,'none',true);
-              
-            }
-          },
-        });
-        app.sleep(1);
-      }
+      
     }
   }, //多张图片投屏结束(不分享到发现)
   up_single_pic(e) {//指定单张图片投屏开始
