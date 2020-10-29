@@ -64,14 +64,19 @@
 						<view class="name">极速投屏</view>
 						<view class="description">适合高清大图、照片</view>
 					</button>
-					<!-- <button class="btn flex-column-center-space_around {{launchType=='classic'?'selected':'not-selected'}}" data-launch_type="classic" form-type="submit" disabled='{{is_btn_disabel}}'>
+					
+				</view>
+				<view class="choose-launch-edition flex-row-center-space_around" wx:if="{{hotel_info.forscreen_method=='1-0'}}">
+					<button class="btn flex-column-center-space_around theme-button-orange" data-launch_type="classic" form-type="submit" disabled='{{is_btn_disabel}}'>
 						<view class="name">经典投屏</view>
 						<view class="description">适合普通小图、照片</view>
 					</button>
-					<button class="btn flex-column-center-space_around {{launchType=='speed'?'selected':'not-selected'}}" data-launch_type="speed" form-type="submit" disabled='{{is_btn_disabel}}'>
+				</view>
+				<view class="choose-launch-edition flex-row-center-space_around" wx:if="{{hotel_info.forscreen_method=='0-1'}}">
+					<button class="btn flex-column-center-space_around theme-panel-welcome-dark" data-launch_type="speed" form-type="submit" disabled='{{is_btn_disabel}}'>
 						<view class="name">极速投屏</view>
 						<view class="description">适合高清大图、照片</view>
-					</button> -->
+					</button>
 				</view>
 				<block >
 					<template is="beforeLaunchQuality" data="{{qualityList:qualityList}}" />

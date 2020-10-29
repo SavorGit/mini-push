@@ -81,7 +81,7 @@
 						</view>
 						<block wx:else>
 							<view wx:if="{{isWifi&&step==1}}" class="conn-wifi flex-column-center-center">
-								<view class="icon fa fa-cog fa-spin" aria-hidden="true"></view>
+								<view class="icon fa fa-circle-o-notch fa-spin" aria-hidden="true"></view>
 								<view class="tip">{{tip}}</view>
 							</view>
 							<view wx:if="{{step==(isWifi?2:1)}}" class="handle flex-column-center-center">

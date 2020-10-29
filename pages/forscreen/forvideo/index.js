@@ -272,6 +272,7 @@ Page({
   },
   uploadOssVedio:function (policy, signature, video, box_mac, openid, is_pub_hotelinfo, is_share, duration, avatarUrl, nickName, public_text) {
     var that = this;
+    return false;
     var filename = video; //视频url
     var index1 = filename.lastIndexOf(".");
     var index2 = filename.length;
@@ -601,6 +602,7 @@ Page({
   },
   speedUploadVideo:function(hotel_info,data){
     var that = this;
+    return false;
     var box_mac = data.box_mac;
     var openid = data.openid;
     var video = data.video;
@@ -878,6 +880,10 @@ Page({
     }else {//极速投屏
       that.speedForVideo(form_data,hotel_info);
     }
+  },
+  tipsForLaunchWindowDevOps:function(e){
+    console.log('dsssssssssssssssssss')
+    this.setData({is_vew_cutdown_time:true})
   },
   //退出投屏
   exitForscreend(e) {
