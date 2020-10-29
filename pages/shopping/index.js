@@ -13,6 +13,7 @@ var api_v_url = app.globalData.api_v_url;
 var cache_key = app.globalData.cache_key;
 var pageid = 1;
 var goods_list;
+var page;
 let SavorUtils = {
   User: {
 
@@ -86,6 +87,7 @@ Page({
   onLoad: function (options) {
     var self = this;
     goods_list = [];
+    page = 1;
     self.setData({
       category_id: 0,
       keywords: ''
@@ -98,9 +100,9 @@ Page({
       SavorUtils.User.isRegister(self); //判断用户是否注册
 
       //商品列表
-      //self.getGoodsList(0, 1, app.globalData.openid,1);
+      self.getGoodsList(0, 1, app.globalData.openid,1);
       //获取商品分类
-      self.getCategoryList(app.globalData.openid);
+      //self.getCategoryList(app.globalData.openid);
     } else {
       app.openidCallback = openid => {
         if (openid != '') {
@@ -109,9 +111,9 @@ Page({
           });
           SavorUtils.User.isRegister(self); //判断用户是否注册
           //获取商品分类
-          self.getCategoryList(openid);
+          //self.getCategoryList(openid);
           //商品列表
-          //self.getGoodsList(0, 1, openid,1);
+          self.getGoodsList(0, 1, openid,1);
         }
       }
     }
@@ -188,13 +190,14 @@ Page({
   getCategoryList: function (openid) {
     var that = this;
     utils.PostRequest(api_v_url + '/category/categorylist', {}, (data, headers, cookies, errMsg, statusCode) => {
-      var category_list = data.result.category_list
+      /*var category_list = data.result.category_list
       var page_arr = that.data.page_arr;
       var category_id = category_list[0].id;
       for (var i = 0; i < category_list.length; i++) {
         var id = category_list[i].id;
         page_arr[id] = 1;
-      }
+      }*/
+      var category_id = 0;
       that.getGoodsList(category_id, 1, openid,1);
       that.setData({
         category_id:category_id,
@@ -212,7 +215,10 @@ Page({
       page: page,
       action:action
     }, (data, headers, cookies, errMsg, statusCode) => {
-      if (typeof (goods_list[category_id]) != 'undefined') {
+      that.setData({
+        goods_list:data.result.datalist,
+      })
+      /*if (typeof (goods_list[category_id]) != 'undefined') {
         var rts = data.result.datalist
         if (goods_list[category_id].length == rts.length) {
 
@@ -227,7 +233,7 @@ Page({
         that.setData({
           goods_list: goods_list,
         })
-      }
+      }*/
 
     });
   },
@@ -259,7 +265,8 @@ Page({
   },
   loadMore: function (e) {
     var that = this;
-    var category_id = that.data.category_id;
+    /*var category_id = that.data.category_id;
+    
     var page_arr = that.data.page_arr;
     var select_page = 1;
     var user_info = wx.getStorageSync(cache_key + 'user_info')
@@ -272,8 +279,12 @@ Page({
     }
     that.setData({
       page_arr: page_arr,
-    })
-    that.getGoodsList(category_id, select_page, user_info.openid)
+    })*/
+    var user_info = wx.getStorageSync(cache_key + 'user_info')
+    page +=1;
+
+    var category_id = 0;
+    that.getGoodsList(category_id, page, user_info.openid)
   },
   //电视播放
   boxShow(e) {
