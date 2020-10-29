@@ -241,11 +241,11 @@ Page({
                 }
                 utils.tryCatch(mta.Event.stat('forscreenVedio', { 'ispublictext': public_text, 'ispublic': is_share, 'isforscreen': 1 }));
               } else if (res.cancel) {
+                
                 that.setData({
-                  hiddens: true,
-                })
-                wx.navigateBack({
-                  delta: 1
+                  isOpenWind:false,
+                  is_classic_disabel:false,
+                  is_speed_disabel:false,
                 })
                 if (public_text = '' || typeof (public_text) == 'undefined') {
                   public_text = 0;
