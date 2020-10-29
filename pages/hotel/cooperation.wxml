@@ -42,15 +42,16 @@
 					<view class='i-right flex-column-flex_start-space_between'>
 						<view class='ir-top flex-row-flex_start-start'>
 							<view class='irt-left' bindtap="gotoMerchant" data-merchant_id="{{bean.merchant_id}}">
-								<label class='hotel-name'>{{bean.name}}</label>
+								<view class='hotel-name  one-line-overflow'>{{bean.name}}</view>
 								<view class='irtl-bottom theme-font3'>
 									<label>{{bean.food_name}}</label>
 									<label wx:if="{{bean.avg_expense>0}}">￥{{bean.avg_expense}}/人</label>
 									<label wx:else></label>
 								</view>
 							</view>
-							<view class='option' wx:if="{{bean.tel !=''}}">
-								<button class="fa fa-phone-square theme-font5" aria-hidden="true" bindtap='phonecallevent' data-tel="{{bean.tel}}" data-hotelid="{{bean.hotel_id}}"></button>
+							<view class='irt-rigth flex-column-flex_start-center'>
+								<button wx:if="{{bean.tel!=''}}" class="btn fa fa-phone-square theme-font5" aria-hidden="true" bindtap='phonecallevent' data-tel="{{bean.tel}}" data-hotelid="{{bean.hotel_id}}"></button>
+								<view class="distance theme-font3 one-line-overflow">190.0km</view>
 							</view>
 						</view>
 						<view class='address' bindtap="gotoMerchant" data-merchant_id="{{bean.merchant_id}}">
@@ -68,15 +69,16 @@
 					<view class='i-right flex-column-flex_start-space_between'>
 						<view class='ir-top flex-row-flex_start-start'>
 							<view class='irt-left'>
-								<label class='hotel-name'>{{bean.name}}</label>
+								<view class='hotel-name  one-line-overflow'>{{bean.name}}</view>
 								<view class='irtl-bottom theme-font3'>
 									<label>{{bean.food_name}}</label>
 									<label wx:if="{{bean.avg_expense>0}}">￥{{bean.avg_expense}}/人</label>
 									<label wx:else></label>
 								</view>
 							</view>
-							<view class='option' wx:if="{{bean.tel !=''}}">
-								<button class="fa fa-phone-square theme-font5" aria-hidden="true" bindtap='phonecallevent' data-tel="{{bean.tel}}" data-hotelid="{{bean.hotel_id}}"></button>
+							<view class='irt-rigth flex-column-flex_start-center'>
+								<button wx:if="{{bean.tel!=''}}" class="btn fa fa-phone-square theme-font5" aria-hidden="true" bindtap='phonecallevent' data-tel="{{bean.tel}}" data-hotelid="{{bean.hotel_id}}"></button>
+								<view class="distance theme-font3 one-line-overflow">190.0km</view>
 							</view>
 						</view>
 						<view class='address'>

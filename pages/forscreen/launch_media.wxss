@@ -1,5 +1,14 @@
 /* pages/forscreen/launch_media.wxss */
 
+
+button[disabled] {
+  color: rgba(102, 102, 102, 1) !important;
+  border-color: rgb(187, 187, 187) !important;
+  background-color: unset !important;
+  border-width: 1px;
+  border-style: solid;
+}
+
 /** ================================== 上传媒体之前 ================================== **/
 
 .before_launch {
@@ -147,7 +156,7 @@
 
 .choose-launch-edition>.btn {
   width: 300rpx;
-  height: 110rpx;
+  height: 80rpx;
   line-height: unset;
   padding: 20rpx 10rpx;
   font-size: 28rpx;
@@ -155,7 +164,7 @@
   margin: 0;
   cursor: pointer;
   box-sizing: unset;
-  border-radius: 0;
+  border-radius: 8rpx;
 }
 
 .choose-launch-edition>.btn>.name {
