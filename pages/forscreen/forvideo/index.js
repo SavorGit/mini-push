@@ -1,4 +1,5 @@
 // pages/forscreen/forvideo/index.js
+import Uploader from 'miniprogram-file-uploader'
 const utils = require('../../../utils/util.js')
 var mta = require('../../../utils/mta_analysis.js')
 const app = getApp();
@@ -74,6 +75,9 @@ Page({
    */
   onLoad: function(e) {
     wx.hideShareMenu();
+    if (Uploader.isSupport()) {
+      console.log('fdafadsfasdfdasfdsasdfsd')
+    }
     var that = this
     that.reMoveSaveFile();
     box_mac = e.box_mac;

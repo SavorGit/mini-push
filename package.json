@@ -1,0 +1,23 @@
+{
+  "name": "savor_xcx",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "dependencies": {
+    "miniprogram-file-uploader": "^1.0.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SavorGit/mini-push.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/SavorGit/mini-push/issues"
+  },
+  "homepage": "https://github.com/SavorGit/mini-push#readme"
+}
