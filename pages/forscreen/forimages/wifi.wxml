@@ -33,17 +33,17 @@
 				<input class="display_hide" name="nickName" value="{{nickName}}"></input>
 
 				<!-- 投图片 -->
-				
-				
-				
-				
-				<view class="choose-launch-edition flex-row-center-space_around" >
-					<button class="btn flex-column-center-space_around theme-panel-welcome-dark" data-launch_type="speed" form-type="submit" disabled='{{is_btn_disabel}}'>
-						<view class="name">极速投屏</view>
-						<view class="description">适合高清大图、照片</view>
+
+
+
+
+				<view class="choose-launch-edition flex-row-center-space_around">
+					<button class="btn big flex-column-center-space_around theme-panel-welcome-dark" data-launch_type="speed" form-type="submit" disabled='{{is_btn_disabel}}'>
+						<view class="name">投屏</view>
+						<!-- <view class="description">适合高清大图、照片</view> -->
 					</button>
 				</view>
-				
+
 				<!-- <button class="savor-btn theme-button-dark" form-type="submit" hover-class="none" disabled='{{is_btn_disabel}}'>投屏</button> -->
 			</scroll-view>
 			<view class='page_bottom flex-row-center-center'>
@@ -107,13 +107,13 @@
 		<!-- 重选 -->
 		<view class="page_bottom flex-row-center-center theme-panel-2">
 			<view class='button_group flex-row-center-space_between'>
-				
+
 				<button class='savor-btn theme-button-dark' bindtap="chooseImage" data-boxmac="{{box_mac}}" data-openid="{{openid}}">重选照片</button>
 				<button class='savor-btn theme-button-dark' bindtap="exitForscreen" data-boxmac="{{box_mac}}">退出投屏</button>
 			</view>
 		</view>
-		
-		
+
+
 
 		<!-- 广告面板 -->
 		<template is="adsPanelForSavorBusinessContacts" />
