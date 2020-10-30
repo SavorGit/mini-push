@@ -272,7 +272,6 @@ Page({
   },
   uploadOssVedio:function (policy, signature, video, box_mac, openid, is_pub_hotelinfo, is_share, duration, avatarUrl, nickName, public_text) {
     var that = this;
-    return false;
     var filename = video; //视频url
     var index1 = filename.lastIndexOf(".");
     var index2 = filename.length;
@@ -602,7 +601,6 @@ Page({
   },
   speedUploadVideo:function(hotel_info,data){
     var that = this;
-    return false;
     var box_mac = data.box_mac;
     var openid = data.openid;
     var video = data.video;
@@ -621,14 +619,8 @@ Page({
     var openWind = that.data.openWind;
     openWind.step = 2;
     openWind.tip = '视频处理中';
-    //var progress = 50;
-    //openWind.progress = progress;
     that.setData({
       openWind:openWind,
-
-      //load_fresh_char: '亲^_^投屏中,请稍后...',
-      //hiddens: false, 
-      //is_btn_disabel: true,
       is_classic_disabel:true,
       is_speed_disabel:true,
       
@@ -646,7 +638,6 @@ Page({
       filePath: video_url,
       name: 'fileUpload',
       success: function(res) {
-        //clearInterval(time_80);
         var info_rt = JSON.parse(res.data);
         if (info_rt.code == 10000) {
           openWind.step = 3;
@@ -677,7 +668,6 @@ Page({
           openWind.isError = true;
           that.setData({
             openWind:openWind,
-            //is_btn_disabel: false,
             is_classic_disabel:false,
             is_speed_disabel:false,
             hiddens: true,
@@ -690,7 +680,6 @@ Page({
           openWind.isError = true;
           that.setData({
             openWind:openWind,
-            //is_btn_disabel: false,
             is_classic_disabel:false,
             is_speed_disabel:false,
             hiddens: true,
@@ -699,9 +688,7 @@ Page({
           app.showToast('系统繁忙，请重试');
         }
       },
-      fail: function({
-        errMsg
-      }) {
+      fail: function({errMsg}) {
         clearInterval(time_80);
         openWind.tip = '投屏失败,请确认是否连接本包间wifi！';
         openWind.isError = true;
@@ -747,18 +734,10 @@ Page({
     })
     if(launchType=='classic'){//经典投屏
       that.classicForVideo(res.detail.value);
-
-
-      
     }else {//极速投屏
       that.speedForVideo(res.detail.value,hotel_info);
-      return false;
-
-      
     }
-    
   },
-
   //重新选择视频
   chooseVedio(e) {
     var that = this;
@@ -791,7 +770,6 @@ Page({
           'checked': false,
           'disabled': false
         },
-
       ],
       launchType:'classic',
       is_view_forscreen_char:true,
@@ -805,22 +783,17 @@ Page({
     });
     var box_mac = e.currentTarget.dataset.boxmac;
     var openid = e.currentTarget.dataset.openid;
-
-
     wx.chooseVideo({
       sourceType: ['album', 'camera'],
       maxDuration: 60,
       camera: 'back',
       compressed:compressed,
       success: function(res) {
-        
         that.setData({
           showVedio: true,
-          //is_btn_disabel: false,
           is_classic_disabel:false,
           is_speed_disabel:false,
           upload_vedio_temp: res.tempFilePath,
-          //upload_vedio_cover: res.thumbTempFilePath,
           vedio_percent: 0,
           duration: res.duration,
           size: res.size
@@ -832,7 +805,6 @@ Page({
       fail: function(res) {
         that.setData({
           showVedio: false,
-          //is_btn_disabel: true,
           is_classic_disabel:true,
           is_speed_disabel:true,
         });
@@ -841,7 +813,6 @@ Page({
         });
       }
     });
-
   },
   closeOpenWind:function(){
     var that = this;
@@ -851,22 +822,19 @@ Page({
       that.setData({
         cutDownTime:djs
       })
-
       if(djs<=0){
         clearInterval(interval);
         that.setData({isOpenWind:false})
       }
       djs --;
-      }, 1000)
+    }, 1000)
   },
   tipsForLaunchWindowCancel:function(){
     this.setData({isOpenWind:false,is_classic_disabel:false,'is_speed_disabel':false})
     
     upload_task.abort();
   },
-
   //retryForscreen
-  
   tipsForLaunchWindowRetry:function(){
     var that = this;
     var hotel_info = that.data.hotel_info;
@@ -882,7 +850,7 @@ Page({
     }
   },
   tipsForLaunchWindowDevOps:function(e){
-    console.log('dsssssssssssssssssss')
+    
     this.setData({is_vew_cutdown_time:true})
   },
   //退出投屏
@@ -898,7 +866,6 @@ Page({
   //是否公开显示餐厅信息
   checkboxChange: function(e) {
     var that = this;
-    //console.log(e.detail.value.length);
     var check_lenth = e.detail.value.length;
     var check_arr = e.detail.value;
     if (check_lenth == 2) {
@@ -925,10 +892,7 @@ Page({
       })
     }
     var check_arr = e.detail.value;
-
-
   }, //是否公开显示餐厅信息结束
-  
   previewImage: function(e) {
     var current = e.target.dataset.src;
     var pkey = e.target.dataset.pkey;
@@ -962,10 +926,7 @@ Page({
       tmp.duration      = 0;
       pubdetail[i] = tmp;
     }
-
     app.boxShow(box_mac, forscreen_id, pubdetail, res_type, res_nums, action, '', that);
-
-
   },
   //上拉刷新
   loadMore: function(e) {
@@ -1019,7 +980,6 @@ Page({
       },
     })
     utils.tryCatch(mta.Event.stat('controlChangeVolume', { 'changetype': change_type }))
-    
   },
   closeJump: function(e) {
     var that = this;
@@ -1132,7 +1092,6 @@ Page({
         }
       })
     }
-
   },
   phonecallevent: function(e) {
     var tel = e.target.dataset.tel;

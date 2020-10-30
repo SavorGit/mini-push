@@ -35,7 +35,7 @@
     "packNpmRelationList": []
   },
   "compileType": "miniprogram",
-  "libVersion": "2.13.1",
+  "libVersion": "2.13.2",
   "appid": "wxfdf0346934bb672f",
   "projectname": "savor_produce",
   "isGameTourist": false,
