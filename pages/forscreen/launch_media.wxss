@@ -167,6 +167,11 @@ button[disabled] {
   border-radius: 8rpx;
 }
 
+.choose-launch-edition>.btn.big {
+  width: 480rpx;
+  height: 60rpx;
+}
+
 .choose-launch-edition>.btn>.name {
   font-size: 36rpx;
 }

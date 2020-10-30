@@ -16,7 +16,7 @@
 				</view>
 
 				<!-- 投视频 -->
-				<block >
+				<block>
 					<view wx:if="{{is_open_control==false}}" class="grant_auth flex-column-center-space_between">
 						<checkbox-group class="checkbox-group flex-column-flex_start-start" bindchange="checkboxChange">
 							<label class="items" wx:for="{{item}}" wx:key="key" wx:for-index="index">
@@ -47,16 +47,16 @@
 				</view>
 
 				<view class="choose-launch-edition flex-row-center-space_around" wx:if="{{hotel_info.forscreen_method=='1-0'}}">
-					<button class="btn flex-column-center-space_around theme-button-orange" form-type="submit" data-launch_type="classic" disabled='{{is_classic_disabel}}'>
-						<view class="name">经典投屏</view>
-						<view class="description">适合小视频、短视频</view>
+					<button class="btn big flex-column-center-space_around theme-button-orange" form-type="submit" data-launch_type="classic" disabled='{{is_classic_disabel}}'>
+						<view class="name">投屏</view>
+						<!-- <view class="description">适合小视频、短视频</view> -->
 					</button>
 				</view>
-				
+
 				<view class="choose-launch-edition flex-row-center-space_around" wx:if="{{hotel_info.forscreen_method=='0-1'}}">
-					<button class="btn flex-column-center-space_around theme-panel-welcome-dark" form-type="submit" data-launch_type="speed" disabled='{{is_speed_disabel}}'>
-						<view class="name">极速投屏</view>
-						<view class="description">适合长视频、高清视频</view>
+					<button class="btn big flex-column-center-space_around theme-panel-welcome-dark" form-type="submit" data-launch_type="speed" disabled='{{is_speed_disabel}}'>
+						<view class="name">投屏</view>
+						<!-- <view class="description">适合长视频、高清视频</view> -->
 					</button>
 				</view>
 

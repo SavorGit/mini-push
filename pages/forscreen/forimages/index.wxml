@@ -36,7 +36,7 @@
 				<view class='pic_text' wx:if="{{is_view_forscreen_char}}">
 					<textarea class='text_input theme-textarea' name="forscreen_char" maxlength='30' placeholder='电视展示时增加文字...'></textarea>
 				</view>
-				<block >
+				<block>
 					<view class='grant_auth flex-column-center-space_between'>
 						<checkbox-group class="checkbox-group flex-column-flex_start-start" bindchange="checkboxChange">
 							<label class="items" wx:for="{{item}}" wx:key="key" wx:for-index="index">
@@ -64,21 +64,20 @@
 						<view class="name">极速投屏</view>
 						<view class="description">适合高清大图、照片</view>
 					</button>
-					
 				</view>
 				<view class="choose-launch-edition flex-row-center-space_around" wx:if="{{hotel_info.forscreen_method=='1-0'}}">
-					<button class="btn flex-column-center-space_around theme-button-orange" data-launch_type="classic" form-type="submit" disabled='{{is_btn_disabel}}'>
-						<view class="name">经典投屏</view>
-						<view class="description">适合普通小图、照片</view>
+					<button class="btn big flex-column-center-space_around theme-button-orange" data-launch_type="classic" form-type="submit" disabled='{{is_btn_disabel}}'>
+						<view class="name">投屏</view>
+						<!-- <view class="description">适合普通小图、照片</view> -->
 					</button>
 				</view>
 				<view class="choose-launch-edition flex-row-center-space_around" wx:if="{{hotel_info.forscreen_method=='0-1'}}">
-					<button class="btn flex-column-center-space_around theme-panel-welcome-dark" data-launch_type="speed" form-type="submit" disabled='{{is_btn_disabel}}'>
-						<view class="name">极速投屏</view>
-						<view class="description">适合高清大图、照片</view>
+					<button class="btn big flex-column-center-space_around theme-panel-welcome-dark" data-launch_type="speed" form-type="submit" disabled='{{is_btn_disabel}}'>
+						<view class="name">投屏</view>
+						<!-- <view class="description">适合高清大图、照片</view> -->
 					</button>
 				</view>
-				<block >
+				<block>
 					<template is="beforeLaunchQuality" data="{{qualityList:qualityList}}" />
 				</block>
 				<!-- <button class="savor-btn theme-button-dark" form-type="submit" hover-class="none" disabled='{{is_btn_disabel}}'>投屏</button> -->
