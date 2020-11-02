@@ -771,7 +771,7 @@ Page({
           'disabled': false
         },
       ],
-      launchType:'classic',
+      //launchType:'classic',
       is_view_forscreen_char:true,
       is_share: 0,
       showVedio: true,

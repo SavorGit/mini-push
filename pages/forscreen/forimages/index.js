@@ -187,7 +187,6 @@ Page({
         { 'name': '公开发表，公众可见', 'value': '2', 'checked': false, 'disabled': false },
 
       ],
-      launchType:'classic',
       is_view_forscreen_char:true,
       is_share:0,
       is_btn_disabel: true,
