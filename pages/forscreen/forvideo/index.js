@@ -689,7 +689,7 @@ Page({
         }
       },
       fail: function({errMsg}) {
-        clearInterval(time_80);
+        //clearInterval(time_80);
         openWind.tip = '投屏失败,请确认是否连接本包间wifi！';
         openWind.isError = true;
         that.setData({
