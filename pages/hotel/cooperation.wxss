@@ -135,6 +135,7 @@
 
 .page_main>.row-item>.row-top>.i-right>.ir-top>.irt-rigth {
   width: 100rpx;
+  text-align: end;
 }
 
 .page_main>.row-item>.row-top>.i-right>.ir-top>.irt-rigth>.btn {
@@ -145,7 +146,12 @@
   border-radius: 25rpx;
   border: 0;
   padding: 0;
-  margin: auto;
+  margin: 0;
+}
+
+.page_main>.row-item>.row-top>.i-right>.ir-top>.irt-rigth>.btn::before,
+.page_main>.row-item>.row-top>.i-right>.ir-top>.irt-rigth>.btn::after {
+  margin: 0;
 }
 
 .page_main>.row-item>.row-top>.i-right>.ir-top>.irt-rigth>.distance {

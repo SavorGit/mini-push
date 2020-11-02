@@ -59,8 +59,8 @@
 	<view class="tipsForLaunchWindow">
 		<view class="mask flex-column-center-center">
 			<view class="window theme-window">
-				<view class="head">
-					<!-- <view class="DevOps" bindtap="tipsForLaunchWindowDevOps">{{DevOpsTips}}</view> -->
+				<view class="head flex-column-center-center">
+					<view class="DevOps" bindtap="tipsForLaunchWindowDevOps">{{DevOpsTips}}</view>
 					<view class="title-bar">
 						<view class="title">{{title}}</view>
 					</view>
