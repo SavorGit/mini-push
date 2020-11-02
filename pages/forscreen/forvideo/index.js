@@ -75,7 +75,7 @@ Page({
     // isWifi:是否显示WIFI连接提示  isError:是否显示错误信息 title 弹窗标题 step:步骤 progress:进度条 tip:正在投屏，请稍候 
     openWind:{'isWifi':false,'isError':false,'title':'','step':1,'progress':0,'tip':''}, 
     cutDownTime:'3', // 3S   倒计时
-    DevOpsTips:'0', //耗时23秒
+    DevOpsTips:'', //耗时23秒
 
   },
 
