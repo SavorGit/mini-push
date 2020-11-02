@@ -77,9 +77,9 @@
 						<!-- <view class="description">适合高清大图、照片</view> -->
 					</button>
 				</view>
-				<block>
+				<!-- <block>
 					<template is="beforeLaunchQuality" data="{{qualityList:qualityList}}" />
-				</block>
+				</block> -->
 				<!-- <button class="savor-btn theme-button-dark" form-type="submit" hover-class="none" disabled='{{is_btn_disabel}}'>投屏</button> -->
 			</scroll-view>
 			<view class='page_bottom flex-row-center-center'>

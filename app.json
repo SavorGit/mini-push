@@ -132,8 +132,8 @@
       {
         "pagePath": "pages/hotel/cooperation",
         "text": "餐厅",
-        "iconPath": "/images/icon2/wm_wxz.png",
-        "selectedIconPath": "/images/icon2/wm_xz.png"
+        "iconPath": "/images/icon2/999999_star.png",
+        "selectedIconPath": "/images/icon2/000000_star.png"
       },
       {
         "pagePath": "pages/mine/index_20181010",
