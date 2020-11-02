@@ -463,6 +463,7 @@ Page({
                     openWind:openWind,
                   })
                 }else {
+                  app.globalData.change_link_type = 1;
                   that.setData({
                     showThird: true,
                     hiddens:true,
@@ -606,6 +607,7 @@ Page({
                 if (res.wifi.SSID == wifi_name) {//链接的是本包间wifi
                   wx.stopWifi({
                   })
+                  app.globalData.link_type = 2;
                   //第二步开始投屏
                   that.speedUploadImg(hotel_info,data);
 
@@ -679,6 +681,7 @@ Page({
           console.log(result);
           if(result.wifi.SSID==wifi_name){
             //app.showToast('wifi链接成功');
+            app.globalData.link_type = 2;
             that.speedUploadImg(hotel_info,data);
           }
           
