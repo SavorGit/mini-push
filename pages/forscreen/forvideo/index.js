@@ -121,7 +121,7 @@ Page({
       sourceType: ['album', 'camera'],
       maxDuration: 60,
       camera: 'back',
-      compressed:false,
+      compressed:compressed,
       success: function(res) {
         var filePath = res.tempFilePath
         wx.getFileInfo({
@@ -1008,7 +1008,7 @@ Page({
       sourceType: ['album', 'camera'],
       maxDuration: 60,
       camera: 'back',
-      compressed:false,
+      compressed:compressed,
       success: function(res) {
 
         var filePath = res.tempFilePath
