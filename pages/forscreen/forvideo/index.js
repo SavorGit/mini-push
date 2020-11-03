@@ -19,6 +19,8 @@ var oss_upload_url = app.globalData.oss_upload_url;
 var oss_url = app.globalData.oss_url;
 var pubdetail = [];
 var upload_task;
+const chunkSize = 1024*1024*3;
+const maxConcurrency = 4
 Page({
 
   /**
@@ -71,6 +73,7 @@ Page({
     compressed:true,  //默认压缩
     launchType:'classic',
 
+    cancel_for:'',
     isOpenWind:false, //是否显示投屏状态弹窗
     // isWifi:是否显示WIFI连接提示  isError:是否显示错误信息 title 弹窗标题 step:步骤 progress:进度条 tip:正在投屏，请稍候 
     openWind:{'isWifi':false,'isError':false,'title':'','step':1,'progress':0,'tip':''}, 
@@ -424,8 +427,6 @@ Page({
   },
   speedForVideo:function(res,hotel_info){
     var that = this;
-    
-
     that.linkHotelWifi(res,hotel_info)
 
 
@@ -438,6 +439,7 @@ Page({
     var wifi_mac = hotel_info.wifi_mac;
     var use_wifi_password = hotel_info.wifi_password;
     var box_mac = hotel_info.box_mac
+    var video_size = that.data.size;
     //console.log(data);
     //console.log(hotel_info);
     //return false;
@@ -463,8 +465,11 @@ Page({
                   wx.stopWifi({
                   })
                   //第二步开始投屏
-                  that.speedUploadVideo(hotel_info,data);
-
+                  if(video_size>10485760){
+                    that.burstReadVideoFile(data,hotel_info,);
+                  }else {
+                    that.speedUploadVideo(hotel_info,data);
+                  }
                 } else {//链接的不是本包间wifi
                   that.connectWifi(wifi_name, wifi_mac, use_wifi_password, box_mac,hotel_info,data);
                 }
@@ -527,6 +532,7 @@ Page({
   connectWifi:function(wifi_name, wifi_mac, use_wifi_password, box_mac,hotel_info,data){
     var that = this;
     console.log('connectWifi');
+    var video_size = that.data.size;
     var openWind = that.data.openWind;
     wx.connectWifi({
       SSID: wifi_name,
@@ -537,7 +543,11 @@ Page({
         wx.onWifiConnected((result) => {
           if(result.wifi.SSID==wifi_name){
             //app.showToast('wifi链接成功');
-            that.speedUploadVideo(hotel_info,data);
+            if(video_size>10485760){
+              that.speedUploadVideo(hotel_info,data);
+            }else {
+              that.burstReadVideoFile(data,hotel_info);
+            }
           }
           
         },()=>{
@@ -599,6 +609,195 @@ Page({
       }
     })
   },
+  burstReadVideoFile(data,hotel_info){
+    var that = this;
+    var video_url = data.video;
+    var start_time = (new Date()).valueOf()
+    console.log('start_time:'+start_time)
+    var openWind = that.data.openWind;
+    openWind.step = 2;
+    openWind.tip = '视频处理中';
+    that.setData({
+      openWind:openWind,
+      is_classic_disabel:true,
+      is_speed_disabel:true,
+      readfile_start_time:start_time,
+    })
+
+    var forscreen_id = (new Date()).valueOf();
+    var filePath = that.data.upload_vedio_temp;
+    var fileName = forscreen_id
+    var box_mac  = data.box_mac;
+    var video_size = that.data.size
+    var step_size = chunkSize
+    let length   = 1024*1024
+    let position = video_size - length
+
+    let fm = wx.getFileSystemManager()
+    let video_param = fm.readFileSync(filePath,'base64',position,length);
+    var mobile_brand = app.globalData.mobile_brand;
+    var mobile_model = app.globalData.mobile_model;
+    var openid = data.openid;
+    var duration = data.duration;
+    var avatarUrl = data.avatarUrl;
+    var nickName = data.nickName;
+    console.log('burstReadVideoFile');
+    console.log('http://' + hotel_info.intranet_ip + ':8080/videoUploadSpeed'+'?position='+position+'&chunkSize='+length+'&box_mac='+box_mac+'&forscreen_id='+forscreen_id+'&deviceId=' + openid+ '&deviceName=' + mobile_brand + '&web=true' + '&filename=' + fileName + '&device_model=' + mobile_model + '&resource_size=' + video_size + '&duration=' + duration + '&action=2&resource_type=2&avatarUrl=' + avatarUrl + "&nickName=" + nickName+'&serial_number='+app.globalData.serial_number);
+    wx.request({
+      url: 'http://' + hotel_info.intranet_ip + ':8080/videoUploadSpeed'+'?position='+position+'&chunkSize='+length+'&box_mac='+box_mac+'&forscreen_id='+forscreen_id+'&deviceId=' + openid+ '&deviceName=' + mobile_brand + '&web=true' + '&filename=' + fileName + '&device_model=' + mobile_model + '&resource_size=' + video_size + '&duration=' + duration + '&action=2&resource_type=2&avatarUrl=' + avatarUrl + "&nickName=" + nickName+'&serial_number='+app.globalData.serial_number,
+      method:'POST',
+      data:video_param,
+      success(res_part){
+        console.log(res_part)
+
+        var file_data_list = [];
+        var index=0;
+        for(var i=0;i<position;i++){
+          var tmp = {'param_video':'','section':'','iv':'','step_size':'','index':''};
+          var end = app.plus(i,step_size);
+          if(end >=position){
+            end = app.accSubtr(position,1);
+            step_size = app.accSubtr(position,i);
+          }else {
+            end = app.accSubtr(end,1);
+          }
+          if(i>=position){//说明读完了
+            console.log('读完了');
+          }else {//没读完
+            var section = i+','+end;
+            tmp.section     = section;
+            tmp.iv          = i;
+            tmp.step_size   = step_size;
+            tmp.index = index;
+            index++;
+          }
+          file_data_list.push(tmp);
+          i = app.plus(i,step_size);
+          i = app.accSubtr(i,1);
+        }
+        that.postConcurrencyPromisedata(0,file_data_list,filePath,fileName,position,forscreen_id,hotel_info,video_url,data)
+
+      },fail:function(res){
+        console.log(res)
+        openWind.tip = '投屏失败，请重试！';
+        openWind.isError = true;
+        that.setData({
+          openWind:openWind,
+          is_classic_disabel:false,
+          is_speed_disabel:false,
+          hiddens: true,
+        })
+      }
+    })
+  },
+  postConcurrencyPromisedata:function(start,file_data_list,filePath,fileName,video_size,forscreen_id,hotel_info,video_url,data){
+    var that = this;
+    var openWind = that.data.openWind;
+    console.log('start='+start)
+    if(start>file_data_list.length){
+      return false
+    }
+    if(that.data.cancel_for==1){
+      return false;
+    }
+    var that = this
+    let block_data_list = file_data_list.slice(start, start + maxConcurrency);
+    let promise_arr = that.pushPromiseData(block_data_list,filePath,fileName,video_size,forscreen_id,hotel_info,data)
+    //var flag =0;
+    Promise.all(promise_arr).then(res_full_data => {
+      let tmp_full_data = []
+      for (var j= 0; j< res_full_data.length; j++) {
+        console.log(res_full_data[j]['data'])
+        if(res_full_data[j]['data']['code']==10000){
+          tmp_full_data.push(res_full_data[j]['data'])
+          
+
+        }
+      }
+      if(res_full_data.length == tmp_full_data.length){
+        console.log('return data eq')
+        let end_time = (new Date()).valueOf()
+        let use_time = end_time - that.data.readfile_start_time
+        console.log('total_use_time:'+use_time)
+        
+        let now_start = start + maxConcurrency
+        var progress  = parseInt((now_start / file_data_list.length)*100) ;
+        openWind.progress = progress;
+        that.setData({
+          openWind:openWind,
+        })
+        if(now_start>=file_data_list.length){
+          
+          openWind.step = 3;
+          openWind.tip = '正在投屏,请稍后';
+          that.setData({
+            openWind:openWind,
+            is_upload: 1,
+            vedio_url: video_url,
+            oss_video_url:video_url,
+            filename: fileName,
+            resouce_size: data.size,
+            duration: that.data.duration,
+            intranet_ip: hotel_info.intranet_ip,
+            hiddens: true,
+            showVedio: false,
+          })
+          //倒计时关闭窗口
+          that.closeOpenWind();
+        }
+
+
+        that.postConcurrencyPromisedata(now_start,file_data_list,filePath,fileName,video_size,forscreen_id,hotel_info,video_url,data)
+      }else{
+        openWind.tip = '投屏失败，请重试！';
+        openWind.isError = true;
+        that.setData({
+          openWind:openWind,
+          is_classic_disabel:false,
+          is_speed_disabel:false,
+          hiddens: true,
+        })
+      }
+    })
+  },
+  pushPromiseData:function(box_data_list,filePath,fileName,totalSize,forscreen_id,hotel_info,data){
+    let fm = wx.getFileSystemManager()
+    var that = this
+
+    var mobile_brand = app.globalData.mobile_brand;
+    var mobile_model = app.globalData.mobile_model;
+    var openid = data.openid;
+    var duration = data.duration;
+    var avatarUrl = data.avatarUrl;
+    var nickName = data.nickName;
+    var box_mac  = data.box_mac;
+    let data_num = box_data_list.length
+    var promise_arr = []
+    for (var i = 0; i < data_num; i++) {
+      var promise_name='promise'+i;
+      promise_name = new Promise(function (resolve, reject) {
+        
+        let dinfo = box_data_list[i]
+        let index = dinfo['index']
+        let video_param = fm.readFileSync(filePath,'base64',dinfo['iv'],dinfo['step_size']);
+        console.log('pushPromiseData');
+        console.log('http://' + hotel_info.intranet_ip + ':8080/videoUploadSpeed'+'?index='+index+ '&box_mac='+ box_mac+ '&chunkSize='+dinfo['step_size']+'&forscreen_id='+forscreen_id+'&deviceId=' + openid+ '&deviceName=' + mobile_brand + '&web=true' + '&filename=' + fileName + '&device_model=' + mobile_model + '&resource_size=' + totalSize + '&duration=' + duration + '&action=2&resource_type=2&avatarUrl=' + avatarUrl + "&nickName=" + nickName+'&serial_number='+app.globalData.serial_number);
+
+        console.log(dinfo['iv']);
+        console.log(dinfo['step_size']);
+        wx.request({
+          url: 'http://' + hotel_info.intranet_ip + ':8080/videoUploadSpeed'+'?index='+index+ '&box_mac='+ box_mac+'&chunkSize='+dinfo['step_size']+'&forscreen_id='+forscreen_id+'&deviceId=' + openid+ '&deviceName=' + mobile_brand + '&web=true' + '&filename=' + fileName + '&device_model=' + mobile_model + '&resource_size=' + totalSize + '&duration=' + duration + '&action=2&resource_type=2&avatarUrl=' + avatarUrl + "&nickName=" + nickName+'&serial_number='+app.globalData.serial_number,
+          method:'POST',
+          data:video_param,
+          success(res_part){
+            resolve(res_part)
+          }
+        })
+      });
+      promise_arr.push(promise_name)
+    }
+    return promise_arr
+},
   speedUploadVideo:function(hotel_info,data){
     var that = this;
     var box_mac = data.box_mac;
@@ -735,7 +934,10 @@ Page({
     if(launchType=='classic'){//经典投屏
       that.classicForVideo(res.detail.value);
     }else {//极速投屏
-      that.speedForVideo(res.detail.value,hotel_info);
+      
+      //that.burstReadVideoFile(res.detail.value,hotel_info);
+      that.speedForVideo(res.detail.value,hotel_info)
+      
     }
   },
   //重新选择视频
@@ -830,7 +1032,7 @@ Page({
     }, 1000)
   },
   tipsForLaunchWindowCancel:function(){
-    this.setData({isOpenWind:false,is_classic_disabel:false,'is_speed_disabel':false})
+    this.setData({isOpenWind:false,is_classic_disabel:false,'is_speed_disabel':false,'cancel_for':1})
     
     upload_task.abort();
   },
