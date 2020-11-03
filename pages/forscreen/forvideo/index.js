@@ -21,6 +21,7 @@ var pubdetail = [];
 var upload_task;
 const chunkSize = 1024*1024*3;
 const maxConcurrency = 4
+const limit_video_size = 10485760;
 Page({
 
   /**
@@ -120,17 +121,25 @@ Page({
       sourceType: ['album', 'camera'],
       maxDuration: 60,
       camera: 'back',
-      compressed:compressed,
+      compressed:false,
       success: function(res) {
-        that.setData({
-          showVedio: true,
-          //is_btn_disabel: false,
-          is_classic_disabel:false,
-          is_speed_disabel:false,
-          upload_vedio_temp: res.tempFilePath,
-          duration: res.duration,
-          size: res.size
-        });
+        var filePath = res.tempFilePath
+        wx.getFileInfo({
+          filePath: filePath,
+          success(res_info){
+            var video_size = res_info.size
+            that.setData({
+              showVedio: true,
+              //is_btn_disabel: false,
+              is_classic_disabel:false,
+              is_speed_disabel:false,
+              upload_vedio_temp: res.tempFilePath,
+              duration: res.duration,
+              size: video_size
+            });
+          }
+        })
+        
         lead(openid);
         mta.Event.stat('LaunchVideoWithNet_Launch_ChooseVideo', {
           'status': 'success'
@@ -465,7 +474,7 @@ Page({
                   wx.stopWifi({
                   })
                   //第二步开始投屏
-                  if(video_size>10485760){
+                  if(video_size>limit_video_size){
                     that.burstReadVideoFile(data,hotel_info,);
                   }else {
                     that.speedUploadVideo(hotel_info,data);
@@ -543,7 +552,7 @@ Page({
         wx.onWifiConnected((result) => {
           if(result.wifi.SSID==wifi_name){
             //app.showToast('wifi链接成功');
-            if(video_size>10485760){
+            if(video_size>limit_video_size){
               that.speedUploadVideo(hotel_info,data);
             }else {
               that.burstReadVideoFile(data,hotel_info);
@@ -618,6 +627,7 @@ Page({
     openWind.step = 2;
     openWind.tip = '视频处理中';
     that.setData({
+      cancel_for:'',
       openWind:openWind,
       is_classic_disabel:true,
       is_speed_disabel:true,
@@ -633,6 +643,12 @@ Page({
     let length   = 1024*1024
     let position = video_size - length
 
+
+    console.log('video_size'+video_size);
+    
+    
+    console.log('tail');
+    console.log(position+','+length);
     let fm = wx.getFileSystemManager()
     let video_param = fm.readFileSync(filePath,'base64',position,length);
     var mobile_brand = app.globalData.mobile_brand;
@@ -655,13 +671,13 @@ Page({
         for(var i=0;i<position;i++){
           var tmp = {'param_video':'','section':'','iv':'','step_size':'','index':''};
           var end = app.plus(i,step_size);
-          if(end >=position){
-            end = app.accSubtr(position,1);
-            step_size = app.accSubtr(position,i);
+          if(end >=video_size){
+            end = app.accSubtr(video_size,1);
+            step_size = app.accSubtr(video_size,i);
           }else {
             end = app.accSubtr(end,1);
           }
-          if(i>=position){//说明读完了
+          if(i>=video_size){//说明读完了
             console.log('读完了');
           }else {//没读完
             var section = i+','+end;
@@ -671,11 +687,13 @@ Page({
             tmp.index = index;
             index++;
           }
+          console.log(tmp);
           file_data_list.push(tmp);
           i = app.plus(i,step_size);
           i = app.accSubtr(i,1);
         }
-        that.postConcurrencyPromisedata(0,file_data_list,filePath,fileName,position,forscreen_id,hotel_info,video_url,data)
+
+        that.postConcurrencyPromisedata(0,file_data_list,filePath,fileName,video_size,forscreen_id,hotel_info,video_url,data)
 
       },fail:function(res){
         console.log(res)
@@ -932,9 +950,10 @@ Page({
       launchType:launchType,
     })
     if(launchType=='classic'){//经典投屏
+      app.globalData.change_link_type = 1;
       that.classicForVideo(res.detail.value);
     }else {//极速投屏
-      
+      app.globalData.change_link_type = 2;
       //that.burstReadVideoFile(res.detail.value,hotel_info);
       that.speedForVideo(res.detail.value,hotel_info)
       
@@ -989,17 +1008,27 @@ Page({
       sourceType: ['album', 'camera'],
       maxDuration: 60,
       camera: 'back',
-      compressed:compressed,
+      compressed:false,
       success: function(res) {
-        that.setData({
-          showVedio: true,
-          is_classic_disabel:false,
-          is_speed_disabel:false,
-          upload_vedio_temp: res.tempFilePath,
-          vedio_percent: 0,
-          duration: res.duration,
-          size: res.size
-        });
+
+        var filePath = res.tempFilePath
+        wx.getFileInfo({
+          filePath: filePath,
+          success(res_info){
+            var video_size = res_info.size
+            that.setData({
+              showVedio: true,
+              //is_btn_disabel: false,
+              is_classic_disabel:false,
+              is_speed_disabel:false,
+              upload_vedio_temp: res.tempFilePath,
+              duration: res.duration,
+              size: video_size
+            })
+          }
+
+        })
+        
         mta.Event.stat('LaunchVideoWithNet_Launch_ChooseVideo', {
           'status': 'success'
         });
@@ -1032,9 +1061,23 @@ Page({
     }, 1000)
   },
   tipsForLaunchWindowCancel:function(){
+    var that = this;
     this.setData({isOpenWind:false,is_classic_disabel:false,'is_speed_disabel':false,'cancel_for':1})
     
-    upload_task.abort();
+    console.log('cancel++++++++++++++++++++');
+    var hotel_info = that.data.hotel_info;
+    var openid = this.data.openid;
+    var box_mac = this.data.box_mac;
+    var video_size = this.data.size;
+    
+    if(app.globalData.change_link_type==2 && video_size>limit_video_size){
+      app.controlExitForscreen(openid, box_mac,hotel_info,that,0,0);
+    }else if(app.globalData.change_link_type==2 && video_size<=limit_video_size){
+      upload_task.abort();
+    }
+    
+    
+    
   },
   //retryForscreen
   tipsForLaunchWindowRetry:function(){

@@ -239,7 +239,7 @@ App({
 
     })
   },
-  controlExitForscreen: function (openid, box_mac, hotel_info='', aps,is_back=0) {
+  controlExitForscreen: function (openid, box_mac, hotel_info='', aps,is_back=0,showtost=1) {
     var that = this;
     var change_link_type = that.globalData.change_link_type;
     var forscreen_type = hotel_info.forscreen_type;
@@ -249,7 +249,7 @@ App({
     }else{
       link_type = change_link_type;
     }
-
+    console.log(link_type+'link_type')
     if (link_type == 1 || hotel_info=='') {
       var timestamp = (new Date()).valueOf();
       wx.request({
@@ -268,18 +268,24 @@ App({
               delta: 1,
             })
           }
-          wx.showToast({
-            title: '退出成功',
-            icon: 'none',
-            duration: 2000
-          });
+          if(showtost==1){
+            wx.showToast({
+              title: '退出成功',
+              icon: 'none',
+              duration: 2000
+            });
+          } 
+          
         },
         fail: function (res) {
-          wx.showToast({
-            title: '网络异常，退出失败',
-            icon: 'none',
-            duration: 2000
-          })
+          if(showtost==1){
+            wx.showToast({
+              title: '网络异常，退出失败',
+              icon: 'none',
+              duration: 2000
+            })
+          }
+          
         }
       })
     } else if (link_type == 2) {
@@ -292,25 +298,34 @@ App({
                 delta: 1,
               })
             }
-            wx.showToast({
-              title: '退出成功',
-              icon: 'none',
-              duration: 2000
-            });
+            if(showtost==1){
+              wx.showToast({
+                title: '退出成功',
+                icon: 'none',
+                duration: 2000
+              });
+            }
+            
           }else {
+            if(showtost==1){
+              wx.showToast({
+                title: '退出失败',
+                icon: 'none',
+                duration: 2000
+              });
+            }
+            
+          }
+        },
+        fail: function ({ errMsg }) {
+          if(showtost==1){
             wx.showToast({
               title: '退出失败',
               icon: 'none',
               duration: 2000
             });
           }
-        },
-        fail: function ({ errMsg }) {
-          wx.showToast({
-            title: '退出失败',
-            icon: 'none',
-            duration: 2000
-          });
+          
         },
       })
     }
