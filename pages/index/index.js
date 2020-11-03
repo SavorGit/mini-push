@@ -1,5 +1,10 @@
 // pages/interact/index.js
 const utils = require('../../utils/util.js')
+import Uploader from 'miniprogram-file-uploader'
+// import {request,setConfig,Promise} from 'wx-promise-request'
+
+
+
 var mta = require('../../utils/mta_analysis.js')
 const app = getApp()
 var openid;
@@ -11,6 +16,34 @@ var goods_nums = 1;
 var jd_appid = app.globalData.jd_appid;
 var cache_key = app.globalData.cache_key;
 var pageid = 3;
+var chunkSize = 1024*1024*3
+var maxConcurrency = 4
+var concurrency_url = 'https://dev-mobile.littlehotspot.com/upload.php'
+//var concurrency_url = 'http://192.168.99.2:8080'
+var concurrency_upload_url = 'http://devp.admin.littlehotspot.com:8083'
+let allSettled = (funcArr) => {
+  return new Promise((resolve) => {
+    let sttled = 0
+    let result = []
+    for(let index = 0;index<funcArr.length;index++){
+      const element = funcArr[index]
+      element
+      .then(res => { 
+        result[index] = {
+          status: 'fulfilled',
+          value: res
+        }
+      })
+      .catch(err => { 
+        result[index] = {
+          status: 'rejected',
+          reason: err
+        }
+      })
+      .finally(() => { ++sttled === funcArr.length && resolve(result) })
+    }
+  })
+}
 Page({
 
   /**
@@ -202,6 +235,248 @@ Page({
     });
     mta.Event.stat("closewxauth", {})
   },
+
+  chooseUploadfile(e) {
+    var that = this
+    wx.chooseVideo({
+      compressed:false,
+      success:function(res){
+        var filePath = res.tempFilePath
+        wx.getFileInfo({
+          filePath: filePath,
+          success(res_info){
+            if (!Uploader.isSupport()) {
+              wx.showToast({
+                title: '分片上传在 2.10.0 版本以上支持',
+                icon: 'none',
+                duration: 3000
+              })
+              return false
+            }
+            
+            var file_name = (new Date()).valueOf()
+            let length = 1024*1024
+            let position = res_info.size - length
+            var box_mac='00226D583D92'
+
+            let fm = wx.getFileSystemManager()
+            fm.readFile({
+              filePath,
+              encoding:'base64',
+              position,
+              length,
+              success(res_readinfo){
+                var video_param = res_readinfo.data
+                wx.request({
+                  url: concurrency_upload_url+'/uploadPart'+'?position='+position+'&chunkSize='+length+'&totalSize='+res_info.size+'&fileName='+file_name+'&box_mac='+box_mac,
+                  method:'POST',
+                  data:video_param,
+                  success(res_part){
+                    console.log(res_part)
+                  }
+                })
+              }
+            })
+            const uploader = new Uploader({
+              tempFilePath:filePath,
+              // totalSize: res_info.size,
+              totalSize: position,
+              fileName: file_name,
+              uploadUrl: concurrency_upload_url+'/uploadPart',
+              mergeUrl: 'https://dev-mobile.littlehotspot.com/systemtime.php',
+              maxConcurrency:maxConcurrency,
+              chunkSize:chunkSize,
+              maxMemory: 200 * 1024 * 1024,
+              query:{"box_mac":box_mac},
+              maxChunkRetries:3,
+              chunkRetryInterval:0,
+              verbose: true
+            })
+            uploader.on('retry', (res) => {
+              console.log('retry', res.url)
+            })
+            uploader.on('complete', (res) => {
+              console.log('upload complete', res)
+            })
+            uploader.on('success', (res) => {
+              console.log('upload success', res)
+            })
+            uploader.on('fail', (res) => {
+              console.log('upload fail', res)
+            })
+            uploader.on('progress', (res) => {
+              console.log('upload progress', res)
+            })
+
+            uploader.upload()
+          }
+        })
+      }
+    })
+  },
+
+  chooseReadfile(e) {
+    var that = this
+    wx.chooseVideo({
+      compressed:false,
+      success:function(res){
+        var filePath = res.tempFilePath
+
+        wx.getFileInfo({
+          filePath: filePath,
+          success(res_info){
+            var start_time = (new Date()).valueOf()
+            console.log('start_time:'+start_time)
+            that.setData({
+              readfile_start_time:start_time,
+            })
+
+            var fileName = (new Date()).valueOf()
+            var video_size = res_info.size
+            var step_size = chunkSize
+            let length = 1024*1024
+            let position = video_size - length
+
+            let fm = wx.getFileSystemManager()
+            let video_param = fm.readFileSync(filePath,'base64',position,length);
+
+            wx.request({
+              url: concurrency_url+'/uploadPart'+'?position='+position+'&chunkSize='+length+'&totalSize='+res_info.size+'&fileName='+fileName+'&box_mac='+box_mac,
+              method:'POST',
+              data:video_param,
+              success(res_part){
+                console.log(res_part)
+
+                var file_data_list = [];
+                var index=0;
+                for(var i=0;i<position;i++){
+                  var tmp = {'param_video':'','section':'','iv':'','step_size':'','index':''};
+                  var end = app.plus(i,step_size);
+                  if(end >=video_size){
+                    end = app.accSubtr(video_size,1);
+                    step_size = app.accSubtr(video_size,i);
+                  }else {
+                    end = app.accSubtr(end,1);
+                  }
+                  if(i>=video_size){//说明读完了
+                    console.log('读完了');
+                  }else {//没读完
+                    var section = i+','+end;
+                    tmp.section     = section;
+                    tmp.iv          = i;
+                    tmp.step_size   = step_size;
+                    tmp.index = index;
+                    index++;
+                  }
+                  file_data_list.push(tmp);
+                  i = app.plus(i,step_size);
+                  i = app.accSubtr(i,1);
+                }
+                that.postConcurrencyPromisedata(0,file_data_list,filePath,fileName,video_size)
+
+              }
+            })
+            
+            
+          }
+        })
+      }
+    })
+  },
+  postConcurrencyPromisedata:function(start,file_data_list,filePath,fileName,video_size){
+    console.log('start='+start)
+    if(start>file_data_list.length){
+      return false
+    }
+    var that = this
+    let block_data_list = file_data_list.slice(start, start + maxConcurrency);
+    let promise_arr = that.pushPromiseData(block_data_list,filePath,fileName,video_size)
+    /*Promise.allSettled(promise_arr).then(res_full_data => {
+      let tmp_full_data = []
+      for (var j= 0; j< res_full_data.length; j++) {
+        console.log(res_full_data[j]['data'])
+        if(res_full_data[j]['data']['code']==1000){
+          tmp_full_data.push(res_full_data[j]['data'])
+        }
+      }
+      if(res_full_data.length == tmp_full_data.length){
+        console.log('return data eq')
+        let end_time = (new Date()).valueOf()
+        let use_time = end_time - that.data.readfile_start_time
+        console.log('total_use_time:'+use_time)
+
+        let now_start = start + maxConcurrency
+        that.postConcurrencyPromisedata(now_start,file_data_list,filePath,fileName,video_size)
+      }else{
+        console.log('return data not neq')
+        return false
+      }
+    })*/
+    allSettled(promise_arr).then(res => {
+      console.log(res)
+    })
+
+
+
+    
+  },
+  pushPromiseData:function(box_data_list,filePath,fileName,totalSize){
+    let fm = wx.getFileSystemManager()
+    var that = this
+    let data_num = box_data_list.length
+    var promise_arr = []
+    for (var i = 0; i < data_num; i++) {
+      var promise_name='promise'+i;
+      promise_name = new Promise(function (resolve, reject) {
+        let dinfo = box_data_list[i]
+        let index = dinfo['index']
+        let video_param = fm.readFileSync(filePath,'base64',dinfo['iv'],dinfo['step_size']);
+        wx.request({
+          url: concurrency_url+'/uploadPart'+'?index='+index+'&chunkSize='+dinfo['step_size']+'&totalSize='+totalSize+'&fileName='+fileName,
+          method:'POST',
+          data:video_param,
+          success(res_part){
+            resolve(res_part)
+          }
+        })
+      });
+      promise_arr.push(promise_name)
+    }
+    return promise_arr
+},
+
+/*
+  postConcurrencyData:function(box_data_list,filePath,fileName,totalSize,concurrency){
+      var that = this
+      let fm = wx.getFileSystemManager()
+      setConfig({
+        request: wx.request,
+        Promise,
+        concurrency: concurrency,
+      })
+      let data_num = box_data_list.length
+      for (var i = 0; i < data_num; i++) {
+        let index = box_data_list[i]['index']
+        let video_param = fm.readFileSync(filePath,'base64',box_data_list[i]['iv'],box_data_list[i]['step_size']);
+        request({
+          url: concurrency_url+'/uploadPart'+'?index='+index+'&chunkSize='+box_data_list[i]['step_size']+'&totalSize='+totalSize+'&fileName='+fileName,
+          method:'POST',
+          data:video_param,
+        })
+        .then(res => {
+          if(res.data.code==1000){
+            console.log('index:'+index+' receive ok')
+            
+            let end_time = (new Date()).valueOf()
+            let use_time = end_time - that.data.readfile_start_time
+            console.log('total_use_time:'+use_time)
+
+          }
+        })
+        .catch(error => console.error(error))
+      }
+  },
+  */
 
 
   //选择照片上电视
