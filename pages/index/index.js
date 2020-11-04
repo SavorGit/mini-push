@@ -18,32 +18,11 @@ var cache_key = app.globalData.cache_key;
 var pageid = 3;
 var chunkSize = 1024*1024*3
 var maxConcurrency = 4
-var concurrency_url = 'https://dev-mobile.littlehotspot.com/upload.php'
-//var concurrency_url = 'http://192.168.99.2:8080'
+// var concurrency_url = 'http://admin.littlehotspot.com/test/cachevideo'
+var concurrency_url = 'http://192.168.168.76:8080'
 var concurrency_upload_url = 'http://devp.admin.littlehotspot.com:8083'
-let allSettled = (funcArr) => {
-  return new Promise((resolve) => {
-    let sttled = 0
-    let result = []
-    for(let index = 0;index<funcArr.length;index++){
-      const element = funcArr[index]
-      element
-      .then(res => { 
-        result[index] = {
-          status: 'fulfilled',
-          value: res
-        }
-      })
-      .catch(err => { 
-        result[index] = {
-          status: 'rejected',
-          reason: err
-        }
-      })
-      .finally(() => { ++sttled === funcArr.length && resolve(result) })
-    }
-  })
-}
+var push_box_mac='00226D583D92'
+
 Page({
 
   /**
@@ -341,7 +320,8 @@ Page({
             let video_param = fm.readFileSync(filePath,'base64',position,length);
 
             wx.request({
-              url: concurrency_url+'/uploadPart'+'?position='+position+'&chunkSize='+length+'&totalSize='+res_info.size+'&fileName='+fileName+'&box_mac='+box_mac,
+              url: concurrency_url+'/uploadPart'+'?position='+position+'&chunkSize='+length+'&totalSize='+res_info.size+'&fileName='+fileName+'&box_mac='+push_box_mac,
+              // url: concurrency_url+'?position='+position+'&chunkSize='+length+'&totalSize='+res_info.size+'&fileName='+fileName+'&box_mac='+box_mac,
               method:'POST',
               data:video_param,
               success(res_part){
@@ -352,13 +332,13 @@ Page({
                 for(var i=0;i<position;i++){
                   var tmp = {'param_video':'','section':'','iv':'','step_size':'','index':''};
                   var end = app.plus(i,step_size);
-                  if(end >=video_size){
-                    end = app.accSubtr(video_size,1);
-                    step_size = app.accSubtr(video_size,i);
+                  if(end >=position){
+                    end = app.accSubtr(position,1);
+                    step_size = app.accSubtr(position,i);
                   }else {
                     end = app.accSubtr(end,1);
                   }
-                  if(i>=video_size){//说明读完了
+                  if(i>=position){//说明读完了
                     console.log('读完了');
                   }else {//没读完
                     var section = i+','+end;
@@ -372,7 +352,7 @@ Page({
                   i = app.plus(i,step_size);
                   i = app.accSubtr(i,1);
                 }
-                that.postConcurrencyPromisedata(0,file_data_list,filePath,fileName,video_size)
+                that.postConcurrencyPromisedata(0,file_data_list,filePath,fileName,position)
 
               }
             })
@@ -391,11 +371,11 @@ Page({
     var that = this
     let block_data_list = file_data_list.slice(start, start + maxConcurrency);
     let promise_arr = that.pushPromiseData(block_data_list,filePath,fileName,video_size)
-    /*Promise.allSettled(promise_arr).then(res_full_data => {
+    Promise.all(promise_arr).then(res_full_data => {
       let tmp_full_data = []
       for (var j= 0; j< res_full_data.length; j++) {
         console.log(res_full_data[j]['data'])
-        if(res_full_data[j]['data']['code']==1000){
+        if(res_full_data[j]['data']['code']==10000){
           tmp_full_data.push(res_full_data[j]['data'])
         }
       }
@@ -411,10 +391,8 @@ Page({
         console.log('return data not neq')
         return false
       }
-    })*/
-    allSettled(promise_arr).then(res => {
-      console.log(res)
     })
+    
 
 
 
@@ -432,7 +410,8 @@ Page({
         let index = dinfo['index']
         let video_param = fm.readFileSync(filePath,'base64',dinfo['iv'],dinfo['step_size']);
         wx.request({
-          url: concurrency_url+'/uploadPart'+'?index='+index+'&chunkSize='+dinfo['step_size']+'&totalSize='+totalSize+'&fileName='+fileName,
+          url: concurrency_url+'/uploadPart'+'?index='+index+'&chunkSize='+dinfo['step_size']+'&totalSize='+totalSize+'&fileName='+fileName+'&box_mac='+push_box_mac,
+          // url: concurrency_url+'?index='+index+'&chunkSize='+dinfo['step_size']+'&totalSize='+totalSize+'&fileName='+fileName,
           method:'POST',
           data:video_param,
           success(res_part){
