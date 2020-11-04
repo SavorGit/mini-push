@@ -450,6 +450,8 @@ Page({
     var use_wifi_password = hotel_info.wifi_password;
     var box_mac = hotel_info.box_mac
     var video_size = that.data.size;
+    console.log('video_size')
+    console.log(video_size)
     //console.log(data);
     //console.log(hotel_info);
     //return false;
@@ -542,8 +544,9 @@ Page({
   },
   connectWifi:function(wifi_name, wifi_mac, use_wifi_password, box_mac,hotel_info,data){
     var that = this;
-    //console.log('connectWifi');
+    console.log('connectWifi');
     var video_size = that.data.size;
+    console.log(video_size);
     var openWind = that.data.openWind;
     wx.connectWifi({
       SSID: wifi_name,
@@ -555,9 +558,10 @@ Page({
           if(result.wifi.SSID==wifi_name){
             //app.showToast('wifi链接成功');
             if(video_size>limit_video_size){
-              that.speedUploadVideo(hotel_info,data);
-            }else {
               that.burstReadVideoFile(data,hotel_info);
+            }else {
+              that.speedUploadVideo(hotel_info,data);
+              
             }
             app.globalData.change_link_type = 2;
           }
