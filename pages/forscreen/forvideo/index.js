@@ -22,6 +22,7 @@ var upload_task;
 const chunkSize = 1024*1024*3;
 const maxConcurrency = 4
 const limit_video_size = 10485760;
+const tail_lenth = 1024*1024;
 Page({
 
   /**
@@ -166,7 +167,7 @@ Page({
         } else {
           var is_lead = 1;
           for (var i = 0; i < guide_prompt.length; i++) {
-            console.log(guide_prompt[i])
+            //console.log(guide_prompt[i])
             if (guide_prompt[i] == 3) {
               is_lead = 0;
 
@@ -488,8 +489,8 @@ Page({
               }
               //wx.hideLoading()
             }, fail: function (res) {
-              console.log('getConnectedWifi_fail');
-              console.log(res)
+              //console.log('getConnectedWifi_fail');
+              //console.log(res)
               var err_msg = 'wifi链接失败';
               if(res.errMsg == 'getConnectedWifi:fail:currentWifi is null' || res.errMsg=='getConnectedWifi:fail no wifi is connected.'){
                 that.connectWifi(wifi_name, wifi_mac, use_wifi_password, box_mac,hotel_info,data);
@@ -524,7 +525,7 @@ Page({
             },
           })
         }, fail: function (res) {
-          console.log('startwifierr')
+          //console.log('startwifierr')
           openWind.tip = res.errMsg;
           openWind.isError = true;
           that.setData({
@@ -540,7 +541,7 @@ Page({
   },
   connectWifi:function(wifi_name, wifi_mac, use_wifi_password, box_mac,hotel_info,data){
     var that = this;
-    console.log('connectWifi');
+    //console.log('connectWifi');
     var video_size = that.data.size;
     var openWind = that.data.openWind;
     wx.connectWifi({
@@ -567,7 +568,7 @@ Page({
           })
         })
       }, fail: function (res) {
-        console.log('connectWifi_fail');
+        //console.log('connectWifi_fail');
         var err_msg = 'wifi链接失败';
         if(res.errCode==12000){
         }else {
@@ -640,7 +641,7 @@ Page({
     var box_mac  = data.box_mac;
     var video_size = that.data.size
     var step_size = chunkSize
-    let length   = 1024*1024
+    let length   = tail_lenth
     let position = video_size - length
 
 
@@ -658,13 +659,13 @@ Page({
     var avatarUrl = data.avatarUrl;
     var nickName = data.nickName;
     console.log('burstReadVideoFile');
-    console.log('http://' + hotel_info.intranet_ip + ':8080/videoUploadSpeed'+'?position='+position+'&chunkSize='+length+'&box_mac='+box_mac+'&forscreen_id='+forscreen_id+'&deviceId=' + openid+ '&deviceName=' + mobile_brand + '&web=true' + '&filename=' + fileName + '&device_model=' + mobile_model + '&resource_size=' + video_size + '&duration=' + duration + '&action=2&resource_type=2&avatarUrl=' + avatarUrl + "&nickName=" + nickName+'&serial_number='+app.globalData.serial_number);
+    //console.log('http://' + hotel_info.intranet_ip + ':8080/videoUploadSpeed'+'?position='+position+'&chunkSize='+length+'&box_mac='+box_mac+'&forscreen_id='+forscreen_id+'&deviceId=' + openid+ '&deviceName=' + mobile_brand + '&web=true' + '&filename=' + fileName + '&device_model=' + mobile_model + '&resource_size=' + video_size + '&duration=' + duration + '&action=2&resource_type=2&avatarUrl=' + avatarUrl + "&nickName=" + nickName+'&serial_number='+app.globalData.serial_number);
     wx.request({
       url: 'http://' + hotel_info.intranet_ip + ':8080/videoUploadSpeed'+'?position='+position+'&chunkSize='+length+'&box_mac='+box_mac+'&forscreen_id='+forscreen_id+'&deviceId=' + openid+ '&deviceName=' + mobile_brand + '&web=true' + '&filename=' + fileName + '&device_model=' + mobile_model + '&resource_size=' + video_size + '&duration=' + duration + '&action=2&resource_type=2&avatarUrl=' + avatarUrl + "&nickName=" + nickName+'&serial_number='+app.globalData.serial_number,
       method:'POST',
       data:video_param,
       success(res_part){
-        console.log(res_part)
+        //console.log(res_part)
 
         var file_data_list = [];
         var index=0;
@@ -687,16 +688,16 @@ Page({
             tmp.index = index;
             index++;
           }
-          console.log(tmp);
+          //console.log(tmp);
           file_data_list.push(tmp);
           i = app.plus(i,step_size);
           i = app.accSubtr(i,1);
         }
-
+        
         that.postConcurrencyPromisedata(0,file_data_list,filePath,fileName,video_size,forscreen_id,hotel_info,video_url,data)
 
       },fail:function(res){
-        console.log(res)
+        //console.log(res)
         openWind.tip = '投屏失败，请重试！';
         openWind.isError = true;
         that.setData({
@@ -711,7 +712,7 @@ Page({
   postConcurrencyPromisedata:function(start,file_data_list,filePath,fileName,video_size,forscreen_id,hotel_info,video_url,data){
     var that = this;
     var openWind = that.data.openWind;
-    console.log('start='+start)
+    //console.log('start='+start)
     if(start>file_data_list.length){
       return false
     }
@@ -725,7 +726,7 @@ Page({
     Promise.all(promise_arr).then(res_full_data => {
       let tmp_full_data = []
       for (var j= 0; j< res_full_data.length; j++) {
-        console.log(res_full_data[j]['data'])
+        //console.log(res_full_data[j]['data'])
         if(res_full_data[j]['data']['code']==10000){
           tmp_full_data.push(res_full_data[j]['data'])
           
@@ -798,11 +799,11 @@ Page({
         let dinfo = box_data_list[i]
         let index = dinfo['index']
         let video_param = fm.readFileSync(filePath,'base64',dinfo['iv'],dinfo['step_size']);
-        console.log('pushPromiseData');
-        console.log('http://' + hotel_info.intranet_ip + ':8080/videoUploadSpeed'+'?index='+index+ '&box_mac='+ box_mac+ '&chunkSize='+dinfo['step_size']+'&forscreen_id='+forscreen_id+'&deviceId=' + openid+ '&deviceName=' + mobile_brand + '&web=true' + '&filename=' + fileName + '&device_model=' + mobile_model + '&resource_size=' + totalSize + '&duration=' + duration + '&action=2&resource_type=2&avatarUrl=' + avatarUrl + "&nickName=" + nickName+'&serial_number='+app.globalData.serial_number);
+        //console.log('pushPromiseData');
+        //console.log('http://' + hotel_info.intranet_ip + ':8080/videoUploadSpeed'+'?index='+index+ '&box_mac='+ box_mac+ '&chunkSize='+dinfo['step_size']+'&forscreen_id='+forscreen_id+'&deviceId=' + openid+ '&deviceName=' + mobile_brand + '&web=true' + '&filename=' + fileName + '&device_model=' + mobile_model + '&resource_size=' + totalSize + '&duration=' + duration + '&action=2&resource_type=2&avatarUrl=' + avatarUrl + "&nickName=" + nickName+'&serial_number='+app.globalData.serial_number);
 
-        console.log(dinfo['iv']);
-        console.log(dinfo['step_size']);
+        //console.log(dinfo['iv']);
+        //console.log(dinfo['step_size']);
         wx.request({
           url: 'http://' + hotel_info.intranet_ip + ':8080/videoUploadSpeed'+'?index='+index+ '&box_mac='+ box_mac+'&chunkSize='+dinfo['step_size']+'&forscreen_id='+forscreen_id+'&deviceId=' + openid+ '&deviceName=' + mobile_brand + '&web=true' + '&filename=' + fileName + '&device_model=' + mobile_model + '&resource_size=' + totalSize + '&duration=' + duration + '&action=2&resource_type=2&avatarUrl=' + avatarUrl + "&nickName=" + nickName+'&serial_number='+app.globalData.serial_number,
           method:'POST',
@@ -1064,7 +1065,7 @@ Page({
     var that = this;
     this.setData({isOpenWind:false,is_classic_disabel:false,'is_speed_disabel':false,'cancel_for':1})
     
-    console.log('cancel++++++++++++++++++++');
+    //console.log('cancel++++++++++++++++++++');
     var hotel_info = that.data.hotel_info;
     var openid = this.data.openid;
     var box_mac = this.data.box_mac;
@@ -1289,7 +1290,7 @@ Page({
   },
   //我要助力
   assist: function(e) {
-    console.log(e);
+    //console.log(e);
     var that = this;
     var forscreen_id = e.detail.value.forscreen_id;
     var openid = e.detail.value.openid;
