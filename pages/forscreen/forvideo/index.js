@@ -480,6 +480,7 @@ Page({
                   }else {
                     that.speedUploadVideo(hotel_info,data);
                   }
+                  app.globalData.change_link_type = 2;
                 } else {//链接的不是本包间wifi
                   that.connectWifi(wifi_name, wifi_mac, use_wifi_password, box_mac,hotel_info,data);
                 }
@@ -558,6 +559,7 @@ Page({
             }else {
               that.burstReadVideoFile(data,hotel_info);
             }
+            app.globalData.change_link_type = 2;
           }
           
         },()=>{
@@ -954,7 +956,7 @@ Page({
       app.globalData.change_link_type = 1;
       that.classicForVideo(res.detail.value);
     }else {//极速投屏
-      app.globalData.change_link_type = 2;
+      
       //that.burstReadVideoFile(res.detail.value,hotel_info);
       that.speedForVideo(res.detail.value,hotel_info)
       
