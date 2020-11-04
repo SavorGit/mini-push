@@ -674,13 +674,13 @@ Page({
         for(var i=0;i<position;i++){
           var tmp = {'param_video':'','section':'','iv':'','step_size':'','index':''};
           var end = app.plus(i,step_size);
-          if(end >=video_size){
-            end = app.accSubtr(video_size,1);
-            step_size = app.accSubtr(video_size,i);
+          if(end >=position){
+            end = app.accSubtr(position,1);
+            step_size = app.accSubtr(position,i);
           }else {
             end = app.accSubtr(end,1);
           }
-          if(i>=video_size){//说明读完了
+          if(i>=position){//说明读完了
             console.log('读完了');
           }else {//没读完
             var section = i+','+end;
@@ -690,7 +690,7 @@ Page({
             tmp.index = index;
             index++;
           }
-          //console.log(tmp);
+          console.log(tmp);
           file_data_list.push(tmp);
           i = app.plus(i,step_size);
           i = app.accSubtr(i,1);
