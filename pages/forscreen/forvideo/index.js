@@ -667,7 +667,8 @@ Page({
     console.log('burstReadVideoFile');
     console.log('http://' + hotel_info.intranet_ip + ':8080/videoUploadSpeed'+'?position='+position+'&chunkSize='+length+'&box_mac='+box_mac+'&forscreen_id='+forscreen_id+'&deviceId=' + openid+ '&deviceName=' + mobile_brand + '&web=true' + '&filename=' + fileName + '&device_model=' + mobile_model + '&resource_size=' + video_size + '&duration=' + duration + '&action=2&resource_type=2&avatarUrl=' + avatarUrl + "&nickName=" + nickName+'&serial_number='+app.globalData.serial_number);
     wx.request({
-      url: 'http://' + hotel_info.intranet_ip + ':8080/videoUploadSpeed'+'?position='+position+'&chunkSize='+length+'&box_mac='+box_mac+'&forscreen_id='+forscreen_id+'&deviceId=' + openid+ '&deviceName=' + mobile_brand + '&web=true' + '&filename=' + fileName + '&device_model=' + mobile_model + '&resource_size=' + video_size + '&duration=' + duration + '&action=2&resource_type=2&avatarUrl=' + avatarUrl + "&nickName=" + nickName+'&serial_number='+app.globalData.serial_number,
+      //url: 'http://' + hotel_info.intranet_ip + ':8080/videoUploadSpeed'+'?position='+position+'&chunkSize='+length+'&box_mac='+box_mac+'&forscreen_id='+forscreen_id+'&deviceId=' + openid+ '&deviceName=' + mobile_brand + '&web=true' + '&filename=' + fileName + '&device_model=' + mobile_model + '&resource_size=' + video_size + '&duration=' + duration + '&action=2&resource_type=2&avatarUrl=' + avatarUrl + "&nickName=" + nickName+'&serial_number='+app.globalData.serial_number,
+      url:'http://work.com/bcd.php',
       method:'POST',
       data:video_param,
       success(res_part){
@@ -727,7 +728,7 @@ Page({
     }
     var that = this
     let block_data_list = file_data_list.slice(start, start + maxConcurrency);
-    let promise_arr = that.pushPromiseData(block_data_list,filePath,fileName,video_size,forscreen_id,hotel_info,data)
+    let promise_arr = that.pushPromiseData(block_data_list,filePath,fileName,video_size,forscreen_id,hotel_info,data,file_data_list.length)
     //var flag =0;
     Promise.all(promise_arr).then(res_full_data => {
       let tmp_full_data = []
@@ -783,9 +784,19 @@ Page({
           hiddens: true,
         })
       }
+    }).catch(function(reason) {
+      var block_data_list = reason;
+      let promise_arr_err = that.pushPromiseData(block_data_list,filePath,fileName,video_size,forscreen_id,hotel_info,data,file_data_list.length)
+      Promise.all(promise_arr).then(res_full_data => {
+      
+      }).catch(function(reason) {
+        console.log('重发失败')
+      })
+      //console.log('promise reject failed reason', reason)
+      
     })
   },
-  pushPromiseData:function(box_data_list,filePath,fileName,totalSize,forscreen_id,hotel_info,data){
+  pushPromiseData:function(box_data_list,filePath,fileName,totalSize,forscreen_id,hotel_info,data,t_len){
     let fm = wx.getFileSystemManager()
     var that = this
 
@@ -798,6 +809,7 @@ Page({
     var box_mac  = data.box_mac;
     let data_num = box_data_list.length
     var promise_arr = []
+    var totalChunks = t_len; 
     for (var i = 0; i < data_num; i++) {
       var promise_name='promise'+i;
       promise_name = new Promise(function (resolve, reject) {
@@ -806,16 +818,19 @@ Page({
         let index = dinfo['index']
         let video_param = fm.readFileSync(filePath,'base64',dinfo['iv'],dinfo['step_size']);
         //console.log('pushPromiseData');
-        console.log('http://' + hotel_info.intranet_ip + ':8080/videoUploadSpeed'+'?index='+index+ '&box_mac='+ box_mac+ '&chunkSize='+dinfo['step_size']+'&forscreen_id='+forscreen_id+'&deviceId=' + openid+ '&deviceName=' + mobile_brand + '&web=true' + '&filename=' + fileName + '&device_model=' + mobile_model + '&resource_size=' + totalSize + '&duration=' + duration + '&action=2&resource_type=2&avatarUrl=' + avatarUrl + "&nickName=" + nickName+'&serial_number='+app.globalData.serial_number);
+        console.log('http://' + hotel_info.intranet_ip + ':8080/videoUploadSpeed'+'?index='+index+ '&box_mac='+ box_mac+ '&chunkSize='+dinfo['step_size']+'&forscreen_id='+forscreen_id+'&deviceId=' + openid+ '&deviceName=' + mobile_brand + '&web=true' + '&filename=' + fileName + '&device_model=' + mobile_model + '&resource_size=' + totalSize + '&duration=' + duration + '&action=2&resource_type=2&avatarUrl=' + avatarUrl + "&nickName=" + nickName+'&serial_number='+app.globalData.serial_number+'&totalChunks='+totalChunks+'&position='+dinfo['iv']);
 
         //console.log(dinfo['iv']);
         //console.log(dinfo['step_size']);
         wx.request({
-          url: 'http://' + hotel_info.intranet_ip + ':8080/videoUploadSpeed'+'?index='+index+ '&box_mac='+ box_mac+'&chunkSize='+dinfo['step_size']+'&forscreen_id='+forscreen_id+'&deviceId=' + openid+ '&deviceName=' + mobile_brand + '&web=true' + '&filename=' + fileName + '&device_model=' + mobile_model + '&resource_size=' + totalSize + '&duration=' + duration + '&action=2&resource_type=2&avatarUrl=' + avatarUrl + "&nickName=" + nickName+'&serial_number='+app.globalData.serial_number,
+          url: 'http://' + hotel_info.intranet_ip + ':8080/videoUploadSpeed'+'?index='+index+ '&box_mac='+ box_mac+'&chunkSize='+dinfo['step_size']+'&forscreen_id='+forscreen_id+'&deviceId=' + openid+ '&deviceName=' + mobile_brand + '&web=true' + '&filename=' + fileName + '&device_model=' + mobile_model + '&resource_size=' + totalSize + '&duration=' + duration + '&action=2&resource_type=2&avatarUrl=' + avatarUrl + "&nickName=" + nickName+'&serial_number='+app.globalData.serial_number+'&totalChunks='+totalChunks+'&position='+dinfo['iv'],
           method:'POST',
           data:video_param,
           success(res_part){
             resolve(res_part)
+          },fail:function(res_err){
+            reject(box_data_list);
+            //console.log(box_data_list)
           }
         })
       });
