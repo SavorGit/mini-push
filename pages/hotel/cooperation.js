@@ -49,84 +49,8 @@ Page({
     //wx.hideShareMenu();
     var that = this;
     
-    var user_info = wx.getStorageSync("savor_user_info");
-    openid = user_info.openid;
-    that.setData({
-      openid: openid,
-    })
-    wx.request({
-      url: api_v_url + '/User/isRegister',
-      data: {
-        "openid": openid,
-        "page_id": 4
-      },
-      header: {
-        'content-type': 'application/json'
-      },
-      success: function (res) {
-        if (res.data.code == 10000) {
-          var user_info = res.data.result.userinfo;
-          var colose_official_account = wx.getStorageSync(cache_key+'colose_official_account');
-          if(user_info.subscribe==0 && colose_official_account ==''){
-            that.setData({
-              is_view_official_account:true
-            })
-          }else {
-            that.setData({
-              is_view_official_account:false
-            })
-          }
-          that.setData({
-            close_hotel_hint: res.data.result.userinfo.close_hotel_hint,
-          })
-        }
-      }
-    }); //判断用户是否注册结束
-
-    wx.request({
-      url: api_v_url + '/index/isHaveCallBox?openid=' + openid,
-      headers: {
-        'Content-Type': 'application/json'
-      },
-
-      success: function (rest) {
-        var is_have = rest.data.result.is_have;
-        if (is_have == 1) {
-          app.linkHotelWifi(rest.data.result, that);
-          that.setData({
-            is_link: 1,
-            hotel_info: rest.data.result,
-            hotel_name: rest.data.result.hotel_name,
-            room_name: rest.data.result.room_name,
-            box_mac: rest.data.result.box_mac,
-            is_open_simple: rest.data.result.is_open_simple,
-          })
-          box_mac = rest.data.result.box_mac;
-          //getHotelInfo(rest.data.result.box_mac);
-        } else {
-          that.setData({
-            is_link: 0,
-            box_mac: '',
-          })
-          box_mac = '';
-        }
-      }
-    })
     //获取城市列表
-    wx.request({
-      url: api_url + '/Smallapp21/Area/getAreaList',
-      header: {
-        'content-type': 'application/json'
-      },
-      success: function (res) {
-        that.setData({
-          cityArray: res.data.result.city_name_list,
-          objectCityArray: res.data.result.city_list
-        })
-      }
-    })
-
-
+    that.getCityList();
     //获取当前城市
     wx.getLocation({
       type: 'wgs84',
@@ -153,40 +77,14 @@ Page({
               })
             }
             var area_id = res.data.result.area_id;
-            wx.request({
-              url: api_url + '/Smallapp21/Area/getSecArea',
-              header: {
-                'content-type': 'application/json'
-              },
-              data: {
-                area_id: area_id
-              },
-              success: function (res) {
-                that.setData({
-                  areaArray: res.data.result.area_name_list,
-                  objectAreaArray: res.data.result.area_list
-                })
-              }
-            });
+
+
+            //获取区域列表
+            that.getAreaList(area_id);
+            
             //获取酒楼列表
-            wx.request({
-              url: api_url + '/Smallapp4/merchant/hotelList',
-              header: {
-                'content-type': 'application/json'
-              },
-              data: {
-                page: page,
-                area_id: area_id,
-                county_id: 0,
-                food_style_id: 0,
-                avg_exp_id: 0
-              },
-              success: function (res) {
-                that.setData({
-                  hotel_list: res.data.result
-                })
-              }
-            })
+            
+            that.getHotelList(page,area_id,0,0,0);
           }
         })
         //mta.Event.stat('getLocationInfo', { 'ltype': 2 })
@@ -196,94 +94,78 @@ Page({
           cityIndex: 0
         })
         var area_id = 1;
-        wx.request({
-          url: api_url + '/Smallapp21/Area/getSecArea',
-          header: {
-            'content-type': 'application/json'
-          },
-          data: {
-            area_id: area_id
-          },
-          success: function (res) {
-            that.setData({
-              areaArray: res.data.result.area_name_list,
-              objectAreaArray: res.data.result.area_list
-            })
-          }
-        });
-        //获取酒楼列表
-        wx.request({
-          url: api_url + '/Smallapp4/merchant/hotelList',
-          header: {
-            'content-type': 'application/json'
-          },
-          data: {
-            page: page,
-            area_id: area_id,
-            county_id: 0,
-            food_style_id: 0,
-            avg_exp_id: 0
-          },
-          success: function (res) {
-            that.setData({
-              hotel_list: res.data.result
-            })
-          }
-        })
+        that.getAreaList(area_id);
+        
+        that.getHotelList(page,area_id,0,0,0);
+        
         //mta.Event.stat('getLocationInfo', { 'ltype': 1 })
       }
     })
     //获取菜系列表
-    wx.request({
-      url: api_url + '/Smallapp21/FoodStyle/getList',
-      header: {
-        'content-type': 'application/json'
-      },
-      success: function (res) {
-        that.setData({
-          cuisineArray: res.data.result.food_name_list,
-          objectCuisineArray: res.data.result.food_list
-        })
-      }
-    })
+    that.getFoodStyleList()
     //获取人均消费
-    wx.request({
-      url: api_url + '/Smallapp21/Hotel/getExplist',
-      header: {
-        'content-type': 'application/json'
-      },
-      success: function (res) {
-
-        that.setData({
-          perCapitaPayArray: res.data.result.agv_name,
-          objectPerCapitaPayArray: res.data.result.agv_lisg
-        })
-      }
-    })
-
-    //获取酒楼信息
-    wx.request({
-      url: api_url + '/Smallapp4/merchant/hotelList',
-      data: {
-        page: page,
-        openid: openid,
-      },
-      header: {
-        'content-type': 'application/json'
-      },
-      success: function (res) {
-        if (res.data.code == 10000) {
-          hotel_list = res.data.result
-
-          that.setData({
-            hotel_list: res.data.result,
-          })
-        }
-      }
-    });
-    
+    that.getExpList();
   },
-
+  getExpList:function(){
+    var that = this;
+    utils.PostRequest(api_url + '/Smallapp21/Hotel/getExplist', {
+    }, (data, headers, cookies, errMsg, statusCode) => {
+      that.setData({
+        perCapitaPayArray: data.result.agv_name,
+        objectPerCapitaPayArray: data.result.agv_lisg
+      })
+    })
+  },
+  getFoodStyleList:function(){
+    var that = this;
+    utils.PostRequest(api_url + '/Smallapp21/FoodStyle/getList', {
+    }, (data, headers, cookies, errMsg, statusCode) => {
+      that.setData({
+        cuisineArray: data.result.food_name_list,
+        objectCuisineArray: data.result.food_list
+      })
+    })
+    
+  }, 
+  getAreaList:function(area_id){
+    var that = this;
+    utils.PostRequest(api_url + '/Smallapp21/Area/getSecArea', {
+      area_id: area_id
+    }, (data, headers, cookies, errMsg, statusCode) => {
+      that.setData({
+        areaArray: data.result.area_name_list,
+        objectAreaArray: data.result.area_list
+      })
+    })
+   
+  },
+  //获取城市列表
+  getCityList:function(){
+    var that = this;
+    utils.PostRequest(api_url + '/Smallapp21/Area/getAreaList', {
+    }, (data, headers, cookies, errMsg, statusCode) => {
+      that.setData({
+        cityArray: data.result.city_name_list,
+        objectCityArray: data.result.city_list
+      })
+    })
+  },
+  //获取酒楼列表
+  getHotelList:function(page=1,area_id=1,county_id=0,food_style_id=0,avg_exp_id=0){
+    var that = this;
+    
+    utils.PostRequest(api_url + '/Smallapp4/merchant/hotelList', {
+      page: page,
+      area_id: area_id,
+      county_id: county_id,
+      food_style_id: food_style_id,
+      avg_exp_id: avg_exp_id,
+    }, (data, headers, cookies, errMsg, statusCode) => {
+      that.setData({
+        hotel_list: data.result
+      })
+    })
+  },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
@@ -339,9 +221,7 @@ Page({
     var that = this;
     
     page = page + 1;
-    that.setData({
-      hiddens: false,
-    })
+    
     var city_list = that.data.objectCityArray;
     var cityIndex = that.data.cityIndex; //城市key
     var area_id = city_list[cityIndex].id; //城市id
@@ -357,40 +237,7 @@ Page({
     var avg_exp_list = that.data.objectPerCapitaPayArray;
     var perCapitaPayIndex = that.data.perCapitaPayIndex;
     var avg_exp_id = avg_exp_list[perCapitaPayIndex].id; //人均消费id
-
-
-    getHotelList(area_id, county_id, food_style_id, avg_exp_id);
-
-    function getHotelList(area_id, county_id, food_style_id, avg_exp_id) {
-      wx.request({
-        url: api_url + '/Smallapp4/merchant/hotelList',
-        header: {
-          'content-type': 'application/json'
-        },
-        data: {
-          page: page,
-          area_id: area_id,
-          county_id: county_id,
-          food_style_id: food_style_id,
-          avg_exp_id: avg_exp_id
-        },
-        success: function (res) {
-          if (res.data.code == 10000) {
-            that.setData({
-              hotel_list: res.data.result,
-              hiddens: true,
-            })
-          } else {
-            that.setData({
-              hiddens: true,
-            })
-          }
-
-        }
-      })
-    }
-    
-    //mta.Event.stat("hotelswipeup", {})
+    that.getHotelList(page,area_id, county_id, food_style_id, avg_exp_id);
   },
 
   previewImage: function (e) {
@@ -437,53 +284,17 @@ Page({
       })
       //获取当前城市的区域
       var area_id = city_list[picCityIndex].id;
-      wx.request({
-        url: api_url + '/Smallapp21/Area/getSecArea',
-        header: {
-          'content-type': 'application/json'
-        },
-        data: {
-          area_id: area_id
-        },
-        success: function (res) {
-          that.setData({
-            areaArray: res.data.result.area_name_list,
-            objectAreaArray: res.data.result.area_list
-          })
-        }
-      });
+
+      that.getAreaList(area_id);
+      
       //获取酒楼列表
       var food_style_list = that.data.objectCuisineArray;
       var cuisineIndex = that.data.cuisineIndex;
-
       var food_style_id = food_style_list[cuisineIndex].id;
-
       var avg_exp_list = that.data.objectPerCapitaPayArray;
       var perCapitaPayIndex = that.data.perCapitaPayIndex;
       var avg_exp_id = avg_exp_list[perCapitaPayIndex].id;
-
-      getHotelList(area_id, 0, food_style_id, avg_exp_id);
-
-      function getHotelList(area_id, county_id, food_style_id, avg_exp_id) {
-        wx.request({
-          url: api_url + '/Smallapp4/merchant/hotelList',
-          header: {
-            'content-type': 'application/json'
-          },
-          data: {
-            page: page,
-            area_id: area_id,
-            county_id: county_id,
-            food_style_id: food_style_id,
-            avg_exp_id: avg_exp_id
-          },
-          success: function (res) {
-            that.setData({
-              hotel_list: res.data.result
-            })
-          }
-        })
-      }
+      that.getHotelList(page,area_id, 0, food_style_id, avg_exp_id);
     }
     //mta.Event.stat('chooseCity', { 'cityname': city_list[picCityIndex].region_name })
   },
@@ -508,29 +319,8 @@ Page({
     var avg_exp_list = that.data.objectPerCapitaPayArray;
     var perCapitaPayIndex = that.data.perCapitaPayIndex;
     var avg_exp_id = avg_exp_list[perCapitaPayIndex].id; //人均消费id
-    getHotelList(area_id, county_id, food_style_id, avg_exp_id);
+    that.getHotelList(page,area_id, county_id, food_style_id, avg_exp_id);
 
-    function getHotelList(area_id, county_id, food_style_id, avg_exp_id) {
-      wx.request({
-        url: api_url + '/Smallapp4/merchant/hotelList',
-        header: {
-          'content-type': 'application/json'
-        },
-        data: {
-          page: page,
-          area_id: area_id,
-          county_id: county_id,
-          food_style_id: food_style_id,
-          avg_exp_id: avg_exp_id
-        },
-        success: function (res) {
-          that.setData({
-            hotel_list: res.data.result
-          })
-        }
-      })
-    }
-    //mta.Event.stat('chooseArea', { 'cityname': city_list[cityIndex].region_name, 'areaname': area_list[areaIndex].region_name })
   },
   //切换菜系
   bindCuiPickerChange: function (e) {
@@ -553,29 +343,7 @@ Page({
     var perCapitaPayIndex = that.data.perCapitaPayIndex;
     var avg_exp_id = avg_exp_list[perCapitaPayIndex].id; //人均消费id
 
-    getHotelList(area_id, county_id, food_style_id, avg_exp_id);
-
-    function getHotelList(area_id, county_id, food_style_id, avg_exp_id) {
-      wx.request({
-        url: api_url + '/Smallapp4/merchant/hotelList',
-        header: {
-          'content-type': 'application/json'
-        },
-        data: {
-          page: page,
-          area_id: area_id,
-          county_id: county_id,
-          food_style_id: food_style_id,
-          avg_exp_id: avg_exp_id
-        },
-        success: function (res) {
-          that.setData({
-            hotel_list: res.data.result
-          })
-        }
-      })
-    }
-    //mta.Event.stat('chooseCuisines', { 'name': cui_list[cuisineIndex].name })
+    that.getHotelList(page,area_id, county_id, food_style_id, avg_exp_id);
   },
   //切换消费水平
   bindPayPickerChange: function (e) {
@@ -598,29 +366,8 @@ Page({
     var cuisineIndex = that.data.cuisineIndex;
     var food_style_id = food_style_list[cuisineIndex].id;
 
-    getHotelList(area_id, county_id, food_style_id, avg_exp_id);
+    that.getHotelList(page,area_id, county_id, food_style_id, avg_exp_id);
 
-    function getHotelList(area_id, county_id, food_style_id, avg_exp_id) {
-      wx.request({
-        url: api_url + '/Smallapp4/merchant/hotelList',
-        header: {
-          'content-type': 'application/json'
-        },
-        data: {
-          page: page,
-          area_id: area_id,
-          county_id: county_id,
-          food_style_id: food_style_id,
-          avg_exp_id: avg_exp_id
-        },
-        success: function (res) {
-          that.setData({
-            hotel_list: res.data.result
-          })
-        }
-      })
-    }
-    //mta.Event.stat('chooseAvgprice', { 'price': pay_list[perCapitaPayIndex].name })
   },
   phonecallevent: function (e) {
     var tel = e.target.dataset.tel;
