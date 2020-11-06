@@ -16,10 +16,10 @@ var goods_nums = 1;
 var jd_appid = app.globalData.jd_appid;
 var cache_key = app.globalData.cache_key;
 var pageid = 3;
-var chunkSize = 1024*1024*3
-var maxConcurrency = 4
-// var concurrency_url = 'http://admin.littlehotspot.com/test/cachevideo'
-var concurrency_url = 'http://192.168.168.76:8080'
+var chunkSize = 1024*1024*1
+var maxConcurrency = 8
+// var concurrency_url = 'https://1379506082945137.cn-beijing.fc.aliyuncs.com/2016-08-15/proxy/miniprogram/receiveFile/'
+var concurrency_url = 'http://123.56.162.131:8081/uploadPart'
 var concurrency_upload_url = 'http://devp.admin.littlehotspot.com:8083'
 var push_box_mac='00226D583D92'
 
@@ -315,17 +315,14 @@ Page({
             var step_size = chunkSize
             let length = 1024*1024
             let position = video_size - length
-
             let fm = wx.getFileSystemManager()
             let video_param = fm.readFileSync(filePath,'base64',position,length);
-
             wx.request({
-              url: concurrency_url+'/uploadPart'+'?position='+position+'&chunkSize='+length+'&totalSize='+res_info.size+'&fileName='+fileName+'&box_mac='+push_box_mac,
-              // url: concurrency_url+'?position='+position+'&chunkSize='+length+'&totalSize='+res_info.size+'&fileName='+fileName+'&box_mac='+box_mac,
+              url: concurrency_url+'?position='+position+'&chunkSize='+length+'&totalSize='+res_info.size+'&fileName='+fileName+'&box_mac='+push_box_mac,
               method:'POST',
               data:video_param,
               success(res_part){
-                console.log(res_part)
+                console.log(res_part.data)
 
                 var file_data_list = [];
                 var index=0;
@@ -363,14 +360,16 @@ Page({
       }
     })
   },
+  
   postConcurrencyPromisedata:function(start,file_data_list,filePath,fileName,video_size){
     console.log('start='+start)
     if(start>file_data_list.length){
       return false
     }
     var that = this
+    let totalChunks = file_data_list.length
     let block_data_list = file_data_list.slice(start, start + maxConcurrency);
-    let promise_arr = that.pushPromiseData(block_data_list,filePath,fileName,video_size)
+    let promise_arr = that.pushPromiseData(block_data_list,filePath,fileName,video_size,totalChunks)
     Promise.all(promise_arr).then(res_full_data => {
       let tmp_full_data = []
       for (var j= 0; j< res_full_data.length; j++) {
@@ -392,13 +391,9 @@ Page({
         return false
       }
     })
-    
-
-
-
-    
   },
-  pushPromiseData:function(box_data_list,filePath,fileName,totalSize){
+ 
+  pushPromiseData:function(box_data_list,filePath,fileName,totalSize,totalChunks){
     let fm = wx.getFileSystemManager()
     var that = this
     let data_num = box_data_list.length
@@ -408,10 +403,10 @@ Page({
       promise_name = new Promise(function (resolve, reject) {
         let dinfo = box_data_list[i]
         let index = dinfo['index']
+        let position = dinfo['iv']
         let video_param = fm.readFileSync(filePath,'base64',dinfo['iv'],dinfo['step_size']);
         wx.request({
-          url: concurrency_url+'/uploadPart'+'?index='+index+'&chunkSize='+dinfo['step_size']+'&totalSize='+totalSize+'&fileName='+fileName+'&box_mac='+push_box_mac,
-          // url: concurrency_url+'?index='+index+'&chunkSize='+dinfo['step_size']+'&totalSize='+totalSize+'&fileName='+fileName,
+          url: concurrency_url+'?index='+index+'&chunkSize='+dinfo['step_size']+'&totalSize='+totalSize+'&totalChunks='+totalChunks+'&fileName='+fileName+'&box_mac='+push_box_mac,
           method:'POST',
           data:video_param,
           success(res_part){
