@@ -33,6 +33,8 @@ Page({
     objectPerCapitaPayArray: [],
     perCapitaPayIndex: 0,
     hotel_list: [],
+    latitude:0,    //纬度
+    longitude:0,  //经度
 
     hiddens: true, //加载更多
     box_mac: '', //机顶盒mac
@@ -54,9 +56,15 @@ Page({
     //获取当前城市
     wx.getLocation({
       type: 'wgs84',
+      isHighAccuracy:true,
       success(res) {
+        console.log(res)
         var latitude = res.latitude;
         var longitude = res.longitude;
+        that.setData({
+          latitude:latitude,
+          longitude:longitude
+        })
         wx.request({
           url: api_url + '/Smallapp21/Area/getAreaid',
           header: {
@@ -153,13 +161,17 @@ Page({
   //获取酒楼列表
   getHotelList:function(page=1,area_id=1,county_id=0,food_style_id=0,avg_exp_id=0){
     var that = this;
-    
-    utils.PostRequest(api_url + '/Smallapp4/merchant/hotelList', {
+    var latitude = that.data.latitude;
+
+    var longitude = that.data.longitude;
+    utils.PostRequest(api_v_url + '/hotel/recList', {
       page: page,
       area_id: area_id,
       county_id: county_id,
       food_style_id: food_style_id,
       avg_exp_id: avg_exp_id,
+      latitude:latitude,
+      longitude,longitude,
     }, (data, headers, cookies, errMsg, statusCode) => {
       that.setData({
         hotel_list: data.result
@@ -178,8 +190,9 @@ Page({
    */
   onShow: function () {
     var that = this;
-    var user_info = wx.getStorageSync("savor_user_info");
-    app.isRegister(user_info.openid,that);
+    //是否关注公众号 暂时关闭
+    //var user_info = wx.getStorageSync("savor_user_info");
+    //app.isRegister(user_info.openid,that);
   },
 
   /**
