@@ -66,7 +66,7 @@ Page({
           longitude:longitude
         })
         wx.request({
-          url: api_url + '/Smallapp21/Area/getAreaid',
+          url: api_v_url + '/Area/getAreaid',
           header: {
             'content-type': 'application/json'
           },
@@ -116,7 +116,7 @@ Page({
   },
   getExpList:function(){
     var that = this;
-    utils.PostRequest(api_url + '/Smallapp21/Hotel/getExplist', {
+    utils.PostRequest(api_v_url + '/Hotel/getExplist', {
     }, (data, headers, cookies, errMsg, statusCode) => {
       that.setData({
         perCapitaPayArray: data.result.agv_name,
@@ -126,7 +126,7 @@ Page({
   },
   getFoodStyleList:function(){
     var that = this;
-    utils.PostRequest(api_url + '/Smallapp21/FoodStyle/getList', {
+    utils.PostRequest(api_v_url + '/FoodStyle/getList', {
     }, (data, headers, cookies, errMsg, statusCode) => {
       that.setData({
         cuisineArray: data.result.food_name_list,
@@ -137,7 +137,7 @@ Page({
   }, 
   getAreaList:function(area_id){
     var that = this;
-    utils.PostRequest(api_url + '/Smallapp21/Area/getSecArea', {
+    utils.PostRequest(api_v_url + '/Area/getSecArea', {
       area_id: area_id
     }, (data, headers, cookies, errMsg, statusCode) => {
       that.setData({
@@ -150,7 +150,7 @@ Page({
   //获取城市列表
   getCityList:function(){
     var that = this;
-    utils.PostRequest(api_url + '/Smallapp21/Area/getAreaList', {
+    utils.PostRequest(api_v_url + '/Area/getAreaList', {
     }, (data, headers, cookies, errMsg, statusCode) => {
       that.setData({
         cityArray: data.result.city_name_list,

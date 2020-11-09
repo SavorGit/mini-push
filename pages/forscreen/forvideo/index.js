@@ -19,10 +19,10 @@ var oss_upload_url = app.globalData.oss_upload_url;
 var oss_url = app.globalData.oss_url;
 var pubdetail = [];
 var upload_task;
-const chunkSize = 1024*1024*3;
-const maxConcurrency = 4
-const limit_video_size = 10485760;
-const tail_lenth = 1024*1024;
+var chunkSize       //每块post大小
+var  maxConcurrency //并发量
+var  limit_video_size //超过10M读文件写
+var  tail_lenth    //尾部大小
 Page({
 
   /**
@@ -90,12 +90,17 @@ Page({
   onLoad: function(e) {
     wx.hideShareMenu();
     var that = this
+    
     upload_task = {};
     that.getOssParam();//获取oss上传参数
     box_mac = e.box_mac;
     var openid = e.openid;
     var hotel_info = app.globalData.hotel_info;
-    
+    console.log(hotel_info);
+    chunkSize = hotel_info.chunkSize;
+    maxConcurrency = hotel_info.maxConcurrency;
+    limit_video_size = hotel_info.limit_video_size;
+    tail_lenth = hotel_info.tail_lenth;
     var user_info = wx.getStorageSync("savor_user_info");
     var avatarUrl = user_info.avatarUrl;
     var nickName = user_info.nickName;
@@ -313,7 +318,7 @@ Page({
       }
     });
     upload_task.onProgressUpdate((res) => {
-      console.log(res)
+      //console.log(res)
       var openWind = that.data.openWind;
       openWind.progress = res.progress
       that.setData({
@@ -450,8 +455,8 @@ Page({
     var use_wifi_password = hotel_info.wifi_password;
     var box_mac = hotel_info.box_mac
     var video_size = that.data.size;
-    console.log('video_size')
-    console.log(video_size)
+    //console.log('video_size')
+    //console.log(video_size)
     //console.log(data);
     //console.log(hotel_info);
     //return false;
@@ -470,7 +475,7 @@ Page({
           wx.getConnectedWifi({
             
             success: function (res) {
-              console.log('getConnectedWifi_success');
+              //console.log('getConnectedWifi_success');
               //第一步链接wifi
               if (res.errMsg == 'getConnectedWifi:ok') {
                 if (res.wifi.SSID == wifi_name) {//链接的是本包间wifi
@@ -544,9 +549,9 @@ Page({
   },
   connectWifi:function(wifi_name, wifi_mac, use_wifi_password, box_mac,hotel_info,data){
     var that = this;
-    console.log('connectWifi');
+    //console.log('connectWifi');
     var video_size = that.data.size;
-    console.log(video_size);
+    //console.logconsole.log(video_size);
     var openWind = that.data.openWind;
     wx.connectWifi({
       SSID: wifi_name,
@@ -654,8 +659,8 @@ Page({
     console.log('video_size'+video_size);
     
     
-    console.log('tail');
-    console.log(position+','+length);
+    //console.log('tail');
+    //console.log(position+','+length);
     let fm = wx.getFileSystemManager()
     let video_param = fm.readFileSync(filePath,'base64',position,length);
     var mobile_brand = app.globalData.mobile_brand;
