@@ -222,7 +222,10 @@ Page({
         app.scanQrcode(pageid);
       } else {
         var hotel_info = app.globalData.hotel_info;
-        if(hotel_info.forscreen_method=='1-1'){
+        wx.navigateTo({
+          url: '/pages/forscreen/forimages/index?box_mac=' + box_mac + '&openid=' + openid ,
+        })
+        /*if(hotel_info.forscreen_method=='1-1'){
           wx.navigateTo({
             url: '/pages/forscreen/forimages/index?box_mac=' + box_mac + '&openid=' + openid ,
           })
@@ -241,7 +244,7 @@ Page({
               url: '/pages/forscreen/forimages/wifi?box_mac=' + box_mac + '&openid=' + openid + '&intranet_ip=' + intranet_ip + '&wifi_mac=' + wifi_mac + '&wifi_name=' + wifi_name + '&wifi_password=' + wifi_password,
             })
           }
-        }
+        }*/
       }
       mta.Event.stat('gotoForscreenImg', { 'linktype': app.globalData.link_type, 'boxmac': box_mac })
     }
@@ -263,7 +266,11 @@ Page({
         app.scanQrcode(pageid);
       } else {
         var hotel_info = app.globalData.hotel_info;
-        if(hotel_info.forscreen_method=='1-1'){
+        var is_compress = that.data.is_compress;
+        wx.navigateTo({
+          url: '/pages/forscreen/forvideo/index?box_mac=' + box_mac + '&openid=' + openid +'&is_compress='+is_compress,
+        })
+        /*if(hotel_info.forscreen_method=='1-1'){
           var is_compress = that.data.is_compress;
             wx.navigateTo({
               url: '/pages/forscreen/forvideo/index?box_mac=' + box_mac + '&openid=' + openid +'&is_compress='+is_compress,
@@ -284,7 +291,7 @@ Page({
               url: '/pages/forscreen/forvideo/wifi?box_mac=' + box_mac + '&openid=' + openid + '&intranet_ip=' + intranet_ip + '&wifi_mac=' + wifi_mac + '&wifi_name=' + wifi_name + '&wifi_password=' + wifi_password,
             })
           }
-        }
+        }*/
         
 
 
