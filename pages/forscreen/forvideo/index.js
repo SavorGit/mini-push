@@ -129,10 +129,22 @@ Page({
       camera: 'back',
       compressed:compressed,
       success: function(res) {
+        console.log(res)
         var filePath = res.tempFilePath
-        wx.getFileInfo({
+        var video_size = res.size;
+        that.setData({
+          showVedio: true,
+          //is_btn_disabel: false,
+          is_classic_disabel:false,
+          is_speed_disabel:false,
+          upload_vedio_temp: res.tempFilePath,
+          duration: res.duration,
+          size: video_size
+        });
+        /*wx.getFileInfo({
           filePath: filePath,
           success(res_info){
+            console.log(res_info)
             var video_size = res_info.size
             that.setData({
               showVedio: true,
@@ -143,8 +155,10 @@ Page({
               duration: res.duration,
               size: video_size
             });
+          },fail:function(e){
+            console.log('视频加载失败');
           }
-        })
+        })*/
         
         lead(openid);
         mta.Event.stat('LaunchVideoWithNet_Launch_ChooseVideo', {
@@ -1091,7 +1105,17 @@ Page({
       success: function(res) {
 
         var filePath = res.tempFilePath
-        wx.getFileInfo({
+        var video_size = res.size
+        that.setData({
+          showVedio: true,
+          //is_btn_disabel: false,
+          is_classic_disabel:false,
+          is_speed_disabel:false,
+          upload_vedio_temp: res.tempFilePath,
+          duration: res.duration,
+          size: video_size
+        })
+        /*wx.getFileInfo({
           filePath: filePath,
           success(res_info){
             var video_size = res_info.size
@@ -1104,9 +1128,11 @@ Page({
               duration: res.duration,
               size: video_size
             })
+          },fail:function(e){
+            console.log('视频加载失败');
           }
 
-        })
+        })*/
         
         mta.Event.stat('LaunchVideoWithNet_Launch_ChooseVideo', {
           'status': 'success'
