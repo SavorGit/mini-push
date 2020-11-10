@@ -17,9 +17,9 @@ var jd_appid = app.globalData.jd_appid;
 var cache_key = app.globalData.cache_key;
 var pageid = 3;
 var chunkSize = 1024*1024*1
-var maxConcurrency = 8
+var maxConcurrency = 4
 // var concurrency_url = 'https://1379506082945137.cn-beijing.fc.aliyuncs.com/2016-08-15/proxy/miniprogram/receiveFile/'
-var concurrency_url = 'http://123.56.162.131:8081/uploadPart'
+var concurrency_url = 'http://123.56.162.131:8080/uploadPart'
 var concurrency_upload_url = 'http://devp.admin.littlehotspot.com:8083'
 var push_box_mac='00226D583D92'
 
@@ -406,7 +406,7 @@ Page({
         let position = dinfo['iv']
         let video_param = fm.readFileSync(filePath,'base64',dinfo['iv'],dinfo['step_size']);
         wx.request({
-          url: concurrency_url+'?index='+index+'&chunkSize='+dinfo['step_size']+'&totalSize='+totalSize+'&totalChunks='+totalChunks+'&fileName='+fileName+'&box_mac='+push_box_mac,
+          url: concurrency_url+'?position='+position+'&index='+index+'&chunkSize='+dinfo['step_size']+'&totalSize='+totalSize+'&totalChunks='+totalChunks+'&fileName='+fileName+'&box_mac='+push_box_mac,
           method:'POST',
           data:video_param,
           success(res_part){
