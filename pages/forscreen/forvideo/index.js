@@ -166,6 +166,7 @@ Page({
         });
       },
       fail: function(res) {
+        console.log(res)
         wx.navigateBack({
           delta: 1,
         });
@@ -1167,6 +1168,9 @@ Page({
   },
   tipsForLaunchWindowCancel:function(){
     var that = this;
+    wx.navigateBack({
+      delta: 1,
+    })
     this.setData({isOpenWind:false,is_classic_disabel:false,'is_speed_disabel':false,'cancel_for':1})
     
     //console.log('cancel++++++++++++++++++++');
