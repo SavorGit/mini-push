@@ -624,6 +624,8 @@ button[disabled] {
 }
 
 .tipsForLaunchWindow>.mask>.window>.body>.main>.error>.tip {
+  padding: 10rpx;
+  padding-bottom: 20rpx;
   font-size: 28rpx;
   font-weight: 400;
 }

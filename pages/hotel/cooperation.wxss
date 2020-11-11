@@ -161,7 +161,7 @@
   line-height: 34rpx;
   padding-top: 5rpx;
   font-size: 24rpx;
-  text-align: center;
+  text-align: right;
 }
 
 .page_main>.row-item>.row-top>.i-right>.address {
