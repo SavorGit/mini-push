@@ -861,14 +861,19 @@ App({
 },
 changeKb:function (limit){
   var size = "";
+  var unit = "";
   if(limit < 1 * 1024){                            //小于1KB，则转化成B
-      size = limit.toFixed(2) + "B"
+      size = limit.toFixed(2) 
+      unit = "B"
   }else if(limit < 1 * 1024 * 1024){            //小于1MB，则转化成KB
-      size = (limit/1024).toFixed(2) + "K"
+      size = (limit/1024).toFixed(2) 
+      unit = "K";
   }else if(limit < 1 * 1024 * 1024 * 1024){        //小于1GB，则转化成MB
-      size = (limit/(1024 * 1024)).toFixed(2) + "M"
+      size = (limit/(1024 * 1024)).toFixed(2) 
+      unit = "M";
   }else{                                            //其他转化成GB
-      size = (limit/(1024 * 1024 * 1024)).toFixed(2) + "G"
+      size = (limit/(1024 * 1024 * 1024)).toFixed(2) 
+      unit = "G";
   }
 
   var sizeStr = size + "";                        //转成字符串
@@ -877,7 +882,13 @@ changeKb:function (limit){
   if(dou == "00"){                                //判断后两位是否为00，如果是则删除00
       return sizeStr.substring(0, index) + sizeStr.substr(index + 3, 2)
   }
-  return size;
+  if(limit < 1 * 1024 * 1024){
+    size = parseInt(size)
+  }else if(limit>=10*1024*1024){
+    size = parseInt(size);
+  }
+
+  return size+unit;
 },
   compareVersion: function (v1, v2) {
     v1 = v1.split('.')

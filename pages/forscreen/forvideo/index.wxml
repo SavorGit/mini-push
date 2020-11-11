@@ -44,7 +44,7 @@
 						<view class="name">经典投屏</view>
 						<view class="description">适合小视频、短视频</view>
 					</button>
-					<button class="btn flex-column-center-space_around theme-panel-welcome-dark" form-type="submit" data-launch_type="speed" disabled='{{is_speed_disabel}}'>
+					<button class="btn flex-column-center-space_around theme-button-dark" form-type="submit" data-launch_type="speed" disabled='{{is_speed_disabel}}'>
 						<view class="name">极速投屏</view>
 						<view class="description">适合长视频、高清视频</view>
 					</button>
@@ -58,7 +58,7 @@
 				</view>
 
 				<view class="choose-launch-edition flex-row-center-space_around" wx:if="{{hotel_info.forscreen_method=='0-1'}}">
-					<button class="btn big flex-column-center-space_around theme-panel-welcome-dark" form-type="submit" data-launch_type="speed" disabled='{{is_speed_disabel}}'>
+					<button class="btn big flex-column-center-space_around theme-button-dark" form-type="submit" data-launch_type="speed" disabled='{{is_speed_disabel}}'>
 						<view class="name">投屏</view>
 						<!-- <view class="description">适合长视频、高清视频</view> -->
 					</button>

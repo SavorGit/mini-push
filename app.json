@@ -103,7 +103,7 @@
     "navigationStyle": "custom"
   },
   "networkTimeout": {
-    "request": 10000,
+    "request": 15000,
     "downloadFile": 10000
   },
   "tabBar": {
