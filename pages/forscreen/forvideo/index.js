@@ -83,6 +83,7 @@ Page({
     openWind:{'isWifi':false,'isError':false,'title':'','step':1,'progress':0,'tip':''}, 
     cutDownTime:'3', // 3S   倒计时
     DevOpsTips:'', //耗时23秒
+    showModal_2:false
 
   },
 
@@ -125,6 +126,7 @@ Page({
       avatarUrl: avatarUrl,
       nickName: nickName,
       is_compress:is_compress,
+      max_video_size:app.changeKb(max_video_size)
     })
     wx.chooseVideo({
       sourceType: ['album', 'camera'],
@@ -137,11 +139,13 @@ Page({
         var video_size = res.size;
         console.log(video_size)
         console.log(max_video_size)
+        console.log(app.globalData.sys_info.platform);
         if(video_size>max_video_size && app.globalData.sys_info.platform=='ios'){
-          wx.navigateBack({
+          /*wx.navigateBack({
             delta: 1,
           })
-          app.showToast('亲,请选择小于'+app.changeKb(max_video_size)+'的视频文件')
+          app.showToast('亲,请选择小于'+app.changeKb(max_video_size)+'的视频文件')*/
+          that.setData({showModal_2:true})
           
         }else {
           that.setData({
@@ -1102,6 +1106,7 @@ Page({
       is_speed_disabel:true,
       openWind:openWind,
       cutDownTime:3,
+      showModal_2:false
     });
     var box_mac = e.currentTarget.dataset.boxmac;
     var openid = e.currentTarget.dataset.openid;
@@ -1115,10 +1120,7 @@ Page({
         var filePath = res.tempFilePath
         var video_size = res.size
         if(video_size>max_video_size && app.globalData.sys_info.platform=='ios'){
-          wx.navigateBack({
-            delta: 1,
-          })
-          app.showToast('亲,请选择小于'+app.changeKb(max_video_size)+'的视频文件')
+          that.setData({showModal_2:true})
           
         }else {
           that.setData({
@@ -1499,6 +1501,12 @@ Page({
       var status = 1;
     }
     app.goToBack(status);
+  },
+  cancelMaxVideo:function(){
+    this.setData({showModal_2:false})
+    wx.navigateBack({
+      delta: 1,
+    })
   },
   /**
    * 生命周期函数--监听页面初次渲染完成
