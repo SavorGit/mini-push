@@ -57,7 +57,7 @@ button[disabled] {
   line-height: 490rpx;
   margin-top: -560rpx;
   text-align: center;
-  font-size: 100rpx;
+  font-size: 70rpx;
   color: #f46849;
 }
 
@@ -301,12 +301,28 @@ button[disabled] {
 
 .after_launch .page_main {
   width: 100%;
-  height: 528rpx;
+  height: 490rpx;
   text-align: center;
 }
 
 .after_launch .page_main view.cover {
+  width: 100%;
   padding-bottom: 10rpx;
+}
+
+.after_launch .page_main view.cover>.video-show {
+  width: 750rpx;
+  height: 490rpx;
+}
+
+.after_launch .page_main view.cover>.video-size {
+  width: 750rpx;
+  height: 490rpx;
+  line-height: 490rpx;
+  margin-top: -560rpx;
+  text-align: center;
+  font-size: 70rpx;
+  color: #f46849;
 }
 
 .after_launch .page_main view.cover>image,
