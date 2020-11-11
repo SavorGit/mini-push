@@ -360,7 +360,7 @@ button[disabled] {
 }
 
 .after_launch .launch_history {
-  height: calc(100% - 793rpx);
+  height: calc(100% - 755rpx);
 }
 
 .after_launch .launch_history>.title {

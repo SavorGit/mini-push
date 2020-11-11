@@ -4,7 +4,7 @@
 .grids-frame {
   width: calc(100% - 70rpx);
   height: 458rpx;
-  padding: 35rpx;
+  padding: 20rpx 35rpx;
 }
 
 view.pic_show {
