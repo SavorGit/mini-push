@@ -137,7 +137,7 @@ Page({
         var video_size = res.size;
         console.log(video_size)
         console.log(max_video_size)
-        if(video_size>max_video_size){
+        if(video_size>max_video_size && app.globalData.sys_info.platform=='ios'){
           wx.navigateBack({
             delta: 1,
           })
@@ -1054,7 +1054,16 @@ Page({
   //重新选择视频
   chooseVedio(e) {
     var that = this;
-
+    if(app.globalData.sys_info.platform=='android'){
+      fm.unlink({
+        filePath:this.data.upload_vedio_temp,
+        success:function(e){
+          console.log('删除成功');
+        },fail:function(e){
+          console.log(e)
+        }
+      })
+    }
     var is_compress = that.data.is_compress;
     if(is_compress==1){
       var compressed = true;
@@ -1105,7 +1114,7 @@ Page({
 
         var filePath = res.tempFilePath
         var video_size = res.size
-        if(video_size>max_video_size){
+        if(video_size>max_video_size && app.globalData.sys_info.platform=='ios'){
           wx.navigateBack({
             delta: 1,
           })
@@ -1516,15 +1525,19 @@ Page({
    * 生命周期函数--监听页面卸载
    */
   onUnload: function() {
-    console.log(this.data.upload_vedio_temp)
-    fm.unlink({
-      filePath:this.data.upload_vedio_temp,
-      success:function(e){
-        console.log('删除成功');
-      },fail:function(e){
-        console.log(e)
-      }
-    })
+    //console.log(this.data.upload_vedio_temp)
+    console.log(app.globalData.sys_info.platform)
+    if(app.globalData.sys_info.platform=='android'){
+      fm.unlink({
+        filePath:this.data.upload_vedio_temp,
+        success:function(e){
+          console.log('删除成功');
+        },fail:function(e){
+          console.log(e)
+        }
+      })
+    }
+
   },
 
   /**
