@@ -11,8 +11,12 @@
 		<template is="pageTop" data="{{res_head_desc:res_head_desc}}" />
 		<form bindsubmit="forscreen_video">
 			<scroll-view class='page_main flex-column-center-flex_start theme-container' scroll-y="true" scroll-with-animation="true">
-				<view wx:if="{{is_open_control==false}}" class='cover full_width'>
+				<!-- <view wx:if="{{is_open_control==false}}" class='cover full_width'>
 					<video src='{{upload_vedio_temp}}' bindplay="onPlayBeforeLauch"></video>
+				</view> -->
+				<view wx:if="{{is_open_control==false}}" class='cover full_width'>
+					<image class="video-show" src="https://oss.littlehotspot.com/WeChat/MiniProgram/images/launch_video_bg.jpg"></image>
+					<view class="video-size">50M</view>
 				</view>
 
 				<!-- 投视频 -->

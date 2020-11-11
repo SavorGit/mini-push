@@ -42,17 +42,36 @@ button[disabled] {
   text-align: center;
 }
 
-.before_launch .page_main>view.cover>video {
+.before_launch .page_main view.cover {
+  width: 100%;
+}
+
+.before_launch .page_main view.cover>.video-show {
+  width: 750rpx;
+  height: 490rpx;
+}
+
+.before_launch .page_main view.cover>.video-size {
+  width: 750rpx;
+  height: 490rpx;
+  line-height: 490rpx;
+  margin-top: -560rpx;
+  text-align: center;
+  font-size: 100rpx;
+  color: #f46849;
+}
+
+.before_launch .page_main view.cover>video {
   width: 100%;
   height: 484rpx;
 }
 
-.before_launch .page_main>view.cover>view {
+.before_launch .page_main view.cover>view {
   margin-top: 63rpx;
   margin-bottom: 100rpx;
 }
 
-.before_launch .page_main>view.cover>view>progress {
+.before_launch .page_main view.cover>view>progress {
   margin-top: 16rpx;
   margin-left: calc((100vw - 450rpx) / 2);
   width: 450rpx;
@@ -286,12 +305,12 @@ button[disabled] {
   text-align: center;
 }
 
-.after_launch .page_main>view.cover {
+.after_launch .page_main view.cover {
   padding-bottom: 10rpx;
 }
 
-.after_launch .page_main>view.cover>image,
-.after_launch .page_main>view.cover>video {
+.after_launch .page_main view.cover>image,
+.after_launch .page_main view.cover>video {
   width: 100%;
   height: 100%;
 }
