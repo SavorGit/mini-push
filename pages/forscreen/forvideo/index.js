@@ -23,6 +23,8 @@ var chunkSize       //每块post大小
 var  maxConcurrency //并发量
 var  limit_video_size //超过10M读文件写
 var  tail_lenth    //尾部大小
+var fm;
+var max_video_size;
 Page({
 
   /**
@@ -90,7 +92,7 @@ Page({
   onLoad: function(e) {
     wx.hideShareMenu();
     var that = this
-    
+    fm = wx.getFileSystemManager()
     upload_task = {};
     that.getOssParam();//获取oss上传参数
     box_mac = e.box_mac;
@@ -101,6 +103,7 @@ Page({
     maxConcurrency = hotel_info.maxConcurrency;
     limit_video_size = hotel_info.limit_video_size;
     tail_lenth = hotel_info.tail_lenth;
+    max_video_size = hotel_info.max_video_size;
     var user_info = wx.getStorageSync("savor_user_info");
     var avatarUrl = user_info.avatarUrl;
     var nickName = user_info.nickName;
@@ -132,38 +135,29 @@ Page({
         console.log(res)
         var filePath = res.tempFilePath
         var video_size = res.size;
-        that.setData({
-          showVedio: true,
-          //is_btn_disabel: false,
-          is_classic_disabel:false,
-          is_speed_disabel:false,
-          upload_vedio_temp: res.tempFilePath,
-          duration: res.duration,
-          size: video_size
-        });
-        /*wx.getFileInfo({
-          filePath: filePath,
-          success(res_info){
-            console.log(res_info)
-            var video_size = res_info.size
-            that.setData({
-              showVedio: true,
-              //is_btn_disabel: false,
-              is_classic_disabel:false,
-              is_speed_disabel:false,
-              upload_vedio_temp: res.tempFilePath,
-              duration: res.duration,
-              size: video_size
-            });
-          },fail:function(e){
-            console.log('视频加载失败');
-          }
-        })*/
-        
-        lead(openid);
-        mta.Event.stat('LaunchVideoWithNet_Launch_ChooseVideo', {
-          'status': 'success'
-        });
+        console.log(video_size)
+        console.log(max_video_size)
+        if(video_size>max_video_size){
+          wx.navigateBack({
+            delta: 1,
+          })
+          app.showToast('亲,请选择小于'+app.changeKb(max_video_size)+'的视频文件')
+          
+        }else {
+          that.setData({
+            showVedio: true,
+            //is_btn_disabel: false,
+            is_classic_disabel:false,
+            is_speed_disabel:false,
+            upload_vedio_temp: res.tempFilePath,
+            duration: res.duration,
+            size: video_size
+          });
+          lead(openid);
+          mta.Event.stat('LaunchVideoWithNet_Launch_ChooseVideo', {
+            'status': 'success'
+          });
+        }
       },
       fail: function(res) {
         console.log(res)
@@ -676,7 +670,7 @@ Page({
     
     //console.log('tail');
     //console.log(position+','+length);
-    let fm = wx.getFileSystemManager()
+    //let fm = wx.getFileSystemManager()
     let video_param = fm.readFileSync(filePath,'base64',position,length);
     var mobile_brand = app.globalData.mobile_brand;
     var mobile_model = app.globalData.mobile_model;
@@ -693,7 +687,7 @@ Page({
       data:video_param,
       success(res_part){
         //console.log(res_part)
-
+        video_param = null;
         var file_data_list = [];
         var index=0;
         for(var i=0;i<position;i++){
@@ -708,14 +702,17 @@ Page({
           if(i>=position){//说明读完了
             console.log('读完了');
           }else {//没读完
+            
             var section = i+','+end;
             tmp.section     = section;
             tmp.iv          = i;
             tmp.step_size   = step_size;
             tmp.index = index;
             index++;
+            //console.log(section);
+            //fm.readFileSync(filePath,'base64',i,step_size);
           }
-          console.log(tmp);
+          //console.log(tmp);
           file_data_list.push(tmp);
           i = app.plus(i,step_size);
           i = app.accSubtr(i,1);
@@ -869,7 +866,7 @@ Page({
     })
   },
   pushPromiseData:function(box_data_list,filePath,fileName,totalSize,forscreen_id,hotel_info,data,t_len){
-    let fm = wx.getFileSystemManager()
+    //et fm = wx.getFileSystemManager()
     var that = this
 
     var mobile_brand = app.globalData.mobile_brand;
@@ -900,6 +897,7 @@ Page({
           data:video_param,
           success(res_part){
             resolve(res_part)
+            video_param =  null;
           },fail:function(res_err){
             reject(box_data_list);
             //console.log(box_data_list)
@@ -1107,39 +1105,31 @@ Page({
 
         var filePath = res.tempFilePath
         var video_size = res.size
-        that.setData({
-          showVedio: true,
-          //is_btn_disabel: false,
-          is_classic_disabel:false,
-          is_speed_disabel:false,
-          upload_vedio_temp: res.tempFilePath,
-          duration: res.duration,
-          size: video_size
-        })
-        /*wx.getFileInfo({
-          filePath: filePath,
-          success(res_info){
-            var video_size = res_info.size
-            that.setData({
-              showVedio: true,
-              //is_btn_disabel: false,
-              is_classic_disabel:false,
-              is_speed_disabel:false,
-              upload_vedio_temp: res.tempFilePath,
-              duration: res.duration,
-              size: video_size
-            })
-          },fail:function(e){
-            console.log('视频加载失败');
-          }
-
-        })*/
-        
+        if(video_size>max_video_size){
+          wx.navigateBack({
+            delta: 1,
+          })
+          app.showToast('亲,请选择小于'+app.changeKb(max_video_size)+'的视频文件')
+          
+        }else {
+          that.setData({
+            showVedio: true,
+            //is_btn_disabel: false,
+            is_classic_disabel:false,
+            is_speed_disabel:false,
+            upload_vedio_temp: res.tempFilePath,
+            duration: res.duration,
+            size: video_size
+          })
+        }
         mta.Event.stat('LaunchVideoWithNet_Launch_ChooseVideo', {
           'status': 'success'
         });
       },
       fail: function(res) {
+        wx.navigateBack({
+          delta: 1,
+        })
         that.setData({
           showVedio: false,
           is_classic_disabel:true,
@@ -1519,14 +1509,22 @@ Page({
    * 生命周期函数--监听页面隐藏
    */
   onHide: function() {
-
+    
   },
 
   /**
    * 生命周期函数--监听页面卸载
    */
   onUnload: function() {
-
+    console.log(this.data.upload_vedio_temp)
+    fm.unlink({
+      filePath:this.data.upload_vedio_temp,
+      success:function(e){
+        console.log('删除成功');
+      },fail:function(e){
+        console.log(e)
+      }
+    })
   },
 
   /**
