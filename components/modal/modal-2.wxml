@@ -1,0 +1,15 @@
+<!--components/modal/modal-2.wxml-->
+<view wx:if="{{show}}" class='mask' bindtap='clickMask'>
+	<view class='modal-content' style="{{width != '' ? 'width: ' + width + ';' : ''}}{{height != '' ? 'height: ' + height + ';' : ''}}{{borderRadius != '' ? 'border-radius: ' + borderRadius + ';' : ''}}{{backgroundColor != '' ? 'background-color: ' + backgroundColor + ';' : ''}}">
+		<view wx:if="{{titleText != ''}}" class='title' style='color:{{titleColor == "" ? "unset" : titleColor}};background-color:{{titleBackgroundColor == "" ? "unset" : titleBackgroundColor}};border-radius:{{titleBorderRadius == "" ? "unset" : titleBorderRadius}};'>
+			<view style="width:100%;height:calc(100% - 2rpx);display:flex;flex-direction:row;align-items:center;justify-content:center;border-bottom:2rpx solid #EDEDED;">{{titleText}}</view>
+		</view>
+		<scroll-view scroll-y class='main-content'>
+			<slot></slot>
+		</scroll-view>
+		<view wx:if="{{cancelText != '' || confirmText != ''}}" class='modal-btn-wrapper' style="padding:{{buttonWapperPadding}}">
+			<button wx:if="{{confirmText != ''}}" class='confirm-btn' style='color:{{confirmColor == "" ? "unset" : confirmColor}};background-color:{{confirmBackgroundColor == "" ? "unset" : confirmBackgroundColor}};border-color:{{confirmBorderColor == "" ? "unset" : confirmBorderColor}};border-radius:{{confirmBorderRadius == "" ? "unset" : confirmBorderRadius}};' bindtap='confirm'>{{confirmText}}</button>
+			<button wx:if="{{cancelText != ''}}" class='cancel-btn' style='color:{{cancelColor == "" ? "unset" : cancelColor}};background-color:{{cancelBackgroundColor == "" ? "unset" : cancelBackgroundColor}};border-color:{{cancelBorderColor == "" ? "unset" : cancelBorderColor}};border-radius:{{cancelBorderRadius == "" ? "unset" : cancelBorderRadius}};' bindtap='cancel'>{{cancelText}}</button>
+		</view>
+	</view>
+</view>

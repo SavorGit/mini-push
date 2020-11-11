@@ -193,3 +193,12 @@
 
 <!-- 投屏提示弹窗 -->
 <template wx:if="{{isOpenWind== true}}" is="tipsForLaunch" data="{{isWifi:openWind.isWifi,isError:openWind.isError,title:openWind.title,step:openWind.step,progress:openWind.progress,tip:openWind.tip,time:cutDownTime,DevOpsTips:DevOpsTips}}" />
+
+<!-- 投屏失败弹窗 -->
+<modal-2 show="{{showModal_2}}" width="690rpx" height='450rpx' border-radius="10rpx" title-text='投屏失败' title-color="#333333" title-background-color="unset" title-border-radius="0rpx" buttonWapperPadding='0' confirm-text='重新选择' confirm-color="#FFFFFF" confirm-background-color="#58525c" confirm-border-radius="10rpx" confirm-border-color="#58525c" cancel-text='取消' cancel-color='#333333' cancel-background-color="unset" cancel-border-color="#333333" cancel-border-radius="10rpx" bindclickMask='modalClickMask' bindcancel="modalCancel" bindconfirm='modalConfirm'>
+	<view class="flex-column-center-center" style="width:100%;height:100%;font-size:30rpx;color:#333333;">
+		<view style="height:46rpx;">当前视频文件太大，无法投屏。</view>
+		<view style="height:46rpx;">为了您的投屏顺畅，请选择150M以下的视频 。</view>
+		<view style="height:46rpx;">给您带来的不便敬请谅解~</view>
+	</view>
+</modal-2>

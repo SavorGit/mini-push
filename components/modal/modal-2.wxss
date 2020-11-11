@@ -1,0 +1,73 @@
+/* components/modal/modal-2.wxss */
+
+.mask {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.4);
+  z-index: 9999;
+}
+
+.title {
+  padding: 10rpx 25rpx;
+  height: 100rpx;
+  line-height: 100rpx;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  /* color: #f6f3ee; */
+  font-size: 34rpx;
+  font-weight: bold;
+  border-bottom: 2rpx solid rgba(246, 243, 238, 0.1);
+}
+
+.modal-content {
+  display: flex;
+  flex-direction: column;
+}
+
+.modal-btn-wrapper {
+  width: 100%;
+  height: 120rpx;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-evenly;
+  font-weight: bold;
+  border-top: 2rpx solid rgba(246, 243, 238, 0.1);
+}
+
+.modal-btn-wrapper button {
+  width: calc(50% - 50rpx);
+  height: 80rpx;
+  line-height: 80rpx;
+  margin: unset;
+  padding: unset;
+  border-radius: 5rpx;
+  border-style: solid;
+  border-width: 2rpx;
+}
+
+.cancel-btn,
+.confirm-btn {
+  background-color: #1cbeb6;
+  color: #fff;
+  text-align: center;
+  font-size: 32rpx;
+}
+
+.cancel-btn {
+  background-color: #05101a;
+}
+
+.main-content {
+  flex: 1;
+  height: 100%;
+  overflow-y: hidden;
+}
