@@ -145,7 +145,7 @@ Page({
             delta: 1,
           })
           app.showToast('亲,请选择小于'+app.changeKb(max_video_size)+'的视频文件')*/
-          that.setData({showModal_2:true})
+          that.setData({showModal_2:true,vide_size_str:app.changeKb(video_size)})
           
         }else {
           that.setData({
@@ -155,7 +155,8 @@ Page({
             is_speed_disabel:false,
             upload_vedio_temp: res.tempFilePath,
             duration: res.duration,
-            size: video_size
+            size: video_size,
+            vide_size_str:app.changeKb(video_size)
           });
           lead(openid);
           mta.Event.stat('LaunchVideoWithNet_Launch_ChooseVideo', {
@@ -1120,7 +1121,7 @@ Page({
         var filePath = res.tempFilePath
         var video_size = res.size
         if(video_size>max_video_size && app.globalData.sys_info.platform=='ios'){
-          that.setData({showModal_2:true})
+          that.setData({showModal_2:true,vide_size_str:app.changeKb(video_size)})
           
         }else {
           that.setData({
@@ -1130,7 +1131,8 @@ Page({
             is_speed_disabel:false,
             upload_vedio_temp: res.tempFilePath,
             duration: res.duration,
-            size: video_size
+            size: video_size,
+            vide_size_str:app.changeKb(video_size)
           })
         }
         mta.Event.stat('LaunchVideoWithNet_Launch_ChooseVideo', {

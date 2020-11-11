@@ -864,11 +864,11 @@ changeKb:function (limit){
   if(limit < 1 * 1024){                            //小于1KB，则转化成B
       size = limit.toFixed(2) + "B"
   }else if(limit < 1 * 1024 * 1024){            //小于1MB，则转化成KB
-      size = (limit/1024).toFixed(2) + "KB"
+      size = (limit/1024).toFixed(2) + "K"
   }else if(limit < 1 * 1024 * 1024 * 1024){        //小于1GB，则转化成MB
-      size = (limit/(1024 * 1024)).toFixed(2) + "MB"
+      size = (limit/(1024 * 1024)).toFixed(2) + "M"
   }else{                                            //其他转化成GB
-      size = (limit/(1024 * 1024 * 1024)).toFixed(2) + "GB"
+      size = (limit/(1024 * 1024 * 1024)).toFixed(2) + "G"
   }
 
   var sizeStr = size + "";                        //转成字符串
