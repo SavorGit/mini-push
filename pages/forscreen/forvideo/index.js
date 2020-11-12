@@ -99,7 +99,7 @@ Page({
     box_mac = e.box_mac;
     var openid = e.openid;
     var hotel_info = app.globalData.hotel_info;
-    console.log(hotel_info);
+    //console.log(hotel_info);
     chunkSize = hotel_info.chunkSize;
     maxConcurrency = hotel_info.maxConcurrency;
     limit_video_size = hotel_info.limit_video_size;
@@ -134,12 +134,12 @@ Page({
       camera: 'back',
       compressed:compressed,
       success: function(res) {
-        console.log(res)
+        //console.log(res)
         var filePath = res.tempFilePath
         var video_size = res.size;
-        console.log(video_size)
-        console.log(max_video_size)
-        console.log(app.globalData.sys_info.platform);
+        //console.log(video_size)
+        //console.log(max_video_size)
+        //console.log(app.globalData.sys_info.platform);
         if(video_size>max_video_size && app.globalData.sys_info.platform=='ios'){
           /*wx.navigateBack({
             delta: 1,
@@ -165,7 +165,7 @@ Page({
         }
       },
       fail: function(res) {
-        console.log(res)
+        //console.log(res)
         wx.navigateBack({
           delta: 1,
         });
@@ -683,8 +683,8 @@ Page({
     var duration = data.duration;
     var avatarUrl = data.avatarUrl;
     var nickName = data.nickName;
-    console.log('burstReadVideoFile');
-    console.log('http://' + hotel_info.intranet_ip + ':8080/videoUploadSpeed'+'?position='+position+'&chunkSize='+length+'&box_mac='+box_mac+'&forscreen_id='+forscreen_id+'&deviceId=' + openid+ '&deviceName=' + mobile_brand + '&web=true' + '&filename=' + fileName + '&device_model=' + mobile_model + '&resource_size=' + video_size + '&duration=' + duration + '&action=3&resource_type=2&avatarUrl=' + avatarUrl + "&nickName=" + nickName+'&serial_number='+app.globalData.serial_number);
+    //console.log('burstReadVideoFile');
+    //console.log('http://' + hotel_info.intranet_ip + ':8080/videoUploadSpeed'+'?position='+position+'&chunkSize='+length+'&box_mac='+box_mac+'&forscreen_id='+forscreen_id+'&deviceId=' + openid+ '&deviceName=' + mobile_brand + '&web=true' + '&filename=' + fileName + '&device_model=' + mobile_model + '&resource_size=' + video_size + '&duration=' + duration + '&action=3&resource_type=2&avatarUrl=' + avatarUrl + "&nickName=" + nickName+'&serial_number='+app.globalData.serial_number);
     wx.request({
       url: 'http://' + hotel_info.intranet_ip + ':8080/videoUploadSpeed'+'?position='+position+'&chunkSize='+length+'&box_mac='+box_mac+'&forscreen_id='+forscreen_id+'&deviceId=' + openid+ '&deviceName=' + mobile_brand + '&web=true' + '&filename=' + fileName + '&device_model=' + mobile_model + '&resource_size=' + video_size + '&duration=' + duration + '&action=3&resource_type=2&avatarUrl=' + avatarUrl + "&nickName=" + nickName+'&serial_number='+app.globalData.serial_number,
       //url:'http://work.com/bcd.php',
@@ -760,10 +760,10 @@ Page({
         }
       }
       if(res_full_data.length == tmp_full_data.length){
-        console.log('return data eq')
+        //console.log('return data eq')
         let end_time = (new Date()).valueOf()
         let use_time = end_time - that.data.readfile_start_time
-        console.log('total_use_time:'+use_time)
+        //console.log('total_use_time:'+use_time)
         
         let now_start = start + maxConcurrency
         var progress  = parseInt((now_start / file_data_list.length)*100) ;
@@ -814,10 +814,10 @@ Page({
           }
         }
         if(res_full_data.length == tmp_full_data.length){
-          console.log('return data eq')
+          //console.log('return data eq')
           let end_time = (new Date()).valueOf()
           let use_time = end_time - that.data.readfile_start_time
-          console.log('total_use_time:'+use_time)
+          //console.log('total_use_time:'+use_time)
           
           let now_start = start + maxConcurrency
           var progress  = parseInt((now_start / file_data_list.length)*100) ;
@@ -892,7 +892,7 @@ Page({
         let index = dinfo['index']
         let video_param = fm.readFileSync(filePath,'base64',dinfo['iv'],dinfo['step_size']);
         //console.log('pushPromiseData');
-        console.log('http://' + hotel_info.intranet_ip + ':8080/videoUploadSpeed'+'?index='+index+ '&box_mac='+ box_mac+ '&chunkSize='+dinfo['step_size']+'&forscreen_id='+forscreen_id+'&deviceId=' + openid+ '&deviceName=' + mobile_brand + '&web=true' + '&filename=' + fileName + '&device_model=' + mobile_model + '&resource_size=' + totalSize + '&duration=' + duration + '&action=3&resource_type=2&avatarUrl=' + avatarUrl + "&nickName=" + nickName+'&serial_number='+app.globalData.serial_number+'&totalChunks='+totalChunks+'&position='+dinfo['iv']);
+        //console.log('http://' + hotel_info.intranet_ip + ':8080/videoUploadSpeed'+'?index='+index+ '&box_mac='+ box_mac+ '&chunkSize='+dinfo['step_size']+'&forscreen_id='+forscreen_id+'&deviceId=' + openid+ '&deviceName=' + mobile_brand + '&web=true' + '&filename=' + fileName + '&device_model=' + mobile_model + '&resource_size=' + totalSize + '&duration=' + duration + '&action=3&resource_type=2&avatarUrl=' + avatarUrl + "&nickName=" + nickName+'&serial_number='+app.globalData.serial_number+'&totalChunks='+totalChunks+'&position='+dinfo['iv']);
 
         //console.log(dinfo['iv']);
         //console.log(dinfo['step_size']);
@@ -1536,7 +1536,7 @@ Page({
    */
   onUnload: function() {
     //console.log(this.data.upload_vedio_temp)
-    console.log(app.globalData.sys_info.platform)
+    //console.log(app.globalData.sys_info.platform)
     if(app.globalData.sys_info.platform=='android'){
       fm.unlink({
         filePath:this.data.upload_vedio_temp,
