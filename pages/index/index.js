@@ -1,6 +1,14 @@
 // pages/interact/index.js
 const utils = require('../../utils/util.js')
 import Uploader from 'miniprogram-file-uploader'
+
+// import config from '../../uploader/config'
+// import EventEmitter from '../../uploader/eventEmitter'
+// import * as Util from '../../uploader/util'
+// import * as Type from '../../uploader/type'
+// const fileManager = wx.getFileSystemManager()
+// const readFileAsync = Util.promisify(fileManager.readFile)
+
 // import {request,setConfig,Promise} from 'wx-promise-request'
 
 
@@ -19,8 +27,8 @@ var pageid = 3;
 var chunkSize = 1024*1024*1
 var maxConcurrency = 4
 // var concurrency_url = 'https://1379506082945137.cn-beijing.fc.aliyuncs.com/2016-08-15/proxy/miniprogram/receiveFile/'
-var concurrency_url = 'http://123.56.162.131:8080/uploadPart'
-var concurrency_upload_url = 'http://devp.admin.littlehotspot.com:8083'
+var concurrency_url = 'http://123.56.162.131:8081/uploadPart'
+var concurrency_upload_url = 'http://123.56.162.131:8081/uploadPart'
 var push_box_mac='00226D583D92'
 
 Page({
@@ -214,13 +222,54 @@ Page({
     });
     mta.Event.stat("closewxauth", {})
   },
+/*
+  chooseUploadfile(e) {
+    var that = this
+    wx.chooseVideo({
+      compressed:false,
+      success:function(res){
+        console.log('choosevideo ok' +filePath)
+        wx.getFileInfo({
+          filePath: filePath,
+          success(res_info){
+            console.log('getfile ok')
+            
+            var file_name = (new Date()).valueOf()
+            let length = 1024*1024
+            let position = res_info.size - length
+            var box_mac='00226D583D92'
+            // readFileAsync({
+            //   filePath: res.tempFilePath,
+            //   position,
+            //   length
+            // }).then(res => {
+            //   const chunk = res.data
+              
+            //   return null
+            // }).catch(e => {
+              
+            // })
+
+
+
+            
+          }
+        })
+      }
+    })
+  },
+  */
 
   chooseUploadfile(e) {
     var that = this
     wx.chooseVideo({
       compressed:false,
       success:function(res){
+        var start_time = (new Date()).valueOf()
+        console.log('start_time:'+start_time)
+        
         var filePath = res.tempFilePath
+        console.log('choosevideo ok' +filePath)
         wx.getFileInfo({
           filePath: filePath,
           success(res_info){
@@ -232,41 +281,43 @@ Page({
               })
               return false
             }
+            console.log('getfile ok')
             
             var file_name = (new Date()).valueOf()
-            let length = 1024*1024
-            let position = res_info.size - length
-            var box_mac='00226D583D92'
+            // let length = 1024*1024
+            // let position = res_info.size - length
+            // var box_mac='00226D583D92'
 
-            let fm = wx.getFileSystemManager()
-            fm.readFile({
-              filePath,
-              encoding:'base64',
-              position,
-              length,
-              success(res_readinfo){
-                var video_param = res_readinfo.data
-                wx.request({
-                  url: concurrency_upload_url+'/uploadPart'+'?position='+position+'&chunkSize='+length+'&totalSize='+res_info.size+'&fileName='+file_name+'&box_mac='+box_mac,
-                  method:'POST',
-                  data:video_param,
-                  success(res_part){
-                    console.log(res_part)
-                  }
-                })
-              }
-            })
+            // let fm = wx.getFileSystemManager()
+            // fm.readFile({
+            //   filePath,
+            //   encoding:'base64',
+            //   position,
+            //   length,
+            //   success(res_readinfo){
+            //     console.log('readFile ok')
+            //     var video_param = res_readinfo.data
+            //     wx.request({
+            //       url: concurrency_upload_url+'?position='+position+'&chunkSize='+length+'&totalSize='+res_info.size+'&fileName='+file_name+'&box_mac='+box_mac,
+            //       method:'POST',
+            //       data:video_param,
+            //       success(res_part){
+            //         console.log(res_part)
+            //       }
+            //     })
+            //   }
+            // })
+            console.log('begin uploader')
             const uploader = new Uploader({
               tempFilePath:filePath,
-              // totalSize: res_info.size,
-              totalSize: position,
+              totalSize: res_info.size,
               fileName: file_name,
-              uploadUrl: concurrency_upload_url+'/uploadPart',
+              uploadUrl: concurrency_upload_url,
               mergeUrl: 'https://dev-mobile.littlehotspot.com/systemtime.php',
               maxConcurrency:maxConcurrency,
               chunkSize:chunkSize,
-              maxMemory: 200 * 1024 * 1024,
-              query:{"box_mac":box_mac},
+              maxMemory: 500 * 1024 * 1024,
+              query:{"box_mac":push_box_mac},
               maxChunkRetries:3,
               chunkRetryInterval:0,
               verbose: true
@@ -279,6 +330,10 @@ Page({
             })
             uploader.on('success', (res) => {
               console.log('upload success', res)
+              var end_time = (new Date()).valueOf()
+              var total_time = end_time - start_time
+
+              console.log('total_time:'+total_time)
             })
             uploader.on('fail', (res) => {
               console.log('upload fail', res)
@@ -288,11 +343,13 @@ Page({
             })
 
             uploader.upload()
+            console.log('end uploader')
           }
         })
       }
     })
   },
+  
 
   chooseReadfile(e) {
     var that = this
