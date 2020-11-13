@@ -2,17 +2,6 @@
 const utils = require('../../utils/util.js')
 import Uploader from 'miniprogram-file-uploader'
 
-// import config from '../../uploader/config'
-// import EventEmitter from '../../uploader/eventEmitter'
-// import * as Util from '../../uploader/util'
-// import * as Type from '../../uploader/type'
-// const fileManager = wx.getFileSystemManager()
-// const readFileAsync = Util.promisify(fileManager.readFile)
-
-// import {request,setConfig,Promise} from 'wx-promise-request'
-
-
-
 var mta = require('../../utils/mta_analysis.js')
 const app = getApp()
 var openid;
@@ -24,9 +13,8 @@ var goods_nums = 1;
 var jd_appid = app.globalData.jd_appid;
 var cache_key = app.globalData.cache_key;
 var pageid = 3;
-var chunkSize = 1024*1024*1
+var chunkSize = 1024*1024*3
 var maxConcurrency = 4
-// var concurrency_url = 'https://1379506082945137.cn-beijing.fc.aliyuncs.com/2016-08-15/proxy/miniprogram/receiveFile/'
 var concurrency_url = 'http://123.56.162.131:8081/uploadPart'
 var concurrency_upload_url = 'http://123.56.162.131:8081/uploadPart'
 var push_box_mac='00226D583D92'
@@ -222,44 +210,6 @@ Page({
     });
     mta.Event.stat("closewxauth", {})
   },
-/*
-  chooseUploadfile(e) {
-    var that = this
-    wx.chooseVideo({
-      compressed:false,
-      success:function(res){
-        console.log('choosevideo ok' +filePath)
-        wx.getFileInfo({
-          filePath: filePath,
-          success(res_info){
-            console.log('getfile ok')
-            
-            var file_name = (new Date()).valueOf()
-            let length = 1024*1024
-            let position = res_info.size - length
-            var box_mac='00226D583D92'
-            // readFileAsync({
-            //   filePath: res.tempFilePath,
-            //   position,
-            //   length
-            // }).then(res => {
-            //   const chunk = res.data
-              
-            //   return null
-            // }).catch(e => {
-              
-            // })
-
-
-
-            
-          }
-        })
-      }
-    })
-  },
-  */
-
   chooseUploadfile(e) {
     var that = this
     wx.chooseVideo({
@@ -284,66 +234,72 @@ Page({
             console.log('getfile ok')
             
             var file_name = (new Date()).valueOf()
-            // let length = 1024*1024
-            // let position = res_info.size - length
-            // var box_mac='00226D583D92'
+            let length = 1024*1024
+            let position = res_info.size - length
+            var box_mac='00226D583D92'
 
-            // let fm = wx.getFileSystemManager()
-            // fm.readFile({
-            //   filePath,
-            //   encoding:'base64',
-            //   position,
-            //   length,
-            //   success(res_readinfo){
-            //     console.log('readFile ok')
-            //     var video_param = res_readinfo.data
-            //     wx.request({
-            //       url: concurrency_upload_url+'?position='+position+'&chunkSize='+length+'&totalSize='+res_info.size+'&fileName='+file_name+'&box_mac='+box_mac,
-            //       method:'POST',
-            //       data:video_param,
-            //       success(res_part){
-            //         console.log(res_part)
-            //       }
-            //     })
-            //   }
-            // })
-            console.log('begin uploader')
-            const uploader = new Uploader({
-              tempFilePath:filePath,
-              totalSize: res_info.size,
-              fileName: file_name,
-              uploadUrl: concurrency_upload_url,
-              mergeUrl: 'https://dev-mobile.littlehotspot.com/systemtime.php',
-              maxConcurrency:maxConcurrency,
-              chunkSize:chunkSize,
-              maxMemory: 500 * 1024 * 1024,
-              query:{"box_mac":push_box_mac},
-              maxChunkRetries:3,
-              chunkRetryInterval:0,
-              verbose: true
-            })
-            uploader.on('retry', (res) => {
-              console.log('retry', res.url)
-            })
-            uploader.on('complete', (res) => {
-              console.log('upload complete', res)
-            })
-            uploader.on('success', (res) => {
-              console.log('upload success', res)
-              var end_time = (new Date()).valueOf()
-              var total_time = end_time - start_time
+            let fm = wx.getFileSystemManager()
+            fm.readFile({
+              filePath,
+              encoding:'base64',
+              position,
+              length,
+              success(res_readinfo){
+                console.log('readFile ok')
+                var video_param = res_readinfo.data
+                wx.request({
+                  url: concurrency_upload_url+'?position='+position+'&chunkSize='+length+'&totalSize='+res_info.size+'&fileName='+file_name+'&box_mac='+box_mac,
+                  data:video_param,
+                  header: {
+                    'X-Data-Encoding': 'BASE64'
+                  },
+                  method:'POST',
+                  success(res_part){
+                    console.log('end of file uploaded successfully')
 
-              console.log('total_time:'+total_time)
-            })
-            uploader.on('fail', (res) => {
-              console.log('upload fail', res)
-            })
-            uploader.on('progress', (res) => {
-              console.log('upload progress', res)
-            })
+                    console.log('begin uploader')
+                    const uploader = new Uploader({
+                      tempFilePath:filePath,
+                      totalSize: position,
+                      fileName: file_name,
+                      uploadUrl: concurrency_upload_url,
+                      mergeUrl: 'https://dev-mobile.littlehotspot.com/systemtime.php',
+                      maxConcurrency:maxConcurrency,
+                      chunkSize:chunkSize,
+                      maxMemory: 500 * 1024 * 1024,
+                      query:{"box_mac":push_box_mac},
+                      maxChunkRetries:3,
+                      chunkRetryInterval:0,
+                      verbose: true
+                    })
+                    uploader.on('retry', (res) => {
+                      console.log('retry', res.url)
+                    })
+                    uploader.on('complete', (res) => {
+                      console.log('upload complete', res)
+                    })
+                    uploader.on('success', (res) => {
+                      console.log('upload success', res)
+                      var end_time = (new Date()).valueOf()
+                      var total_time = end_time - start_time
 
-            uploader.upload()
-            console.log('end uploader')
+                      console.log('total_time:'+total_time)
+                    })
+                    uploader.on('fail', (res) => {
+                      console.log('upload fail', res)
+                    })
+                    uploader.on('progress', (res) => {
+                      console.log('upload progress', res)
+                    })
+                    uploader.upload()
+                    console.log('end uploader')
+
+
+                  }
+                })
+              }
+            })
+            
           }
         })
       }
@@ -376,8 +332,11 @@ Page({
             let video_param = fm.readFileSync(filePath,'base64',position,length);
             wx.request({
               url: concurrency_url+'?position='+position+'&chunkSize='+length+'&totalSize='+res_info.size+'&fileName='+fileName+'&box_mac='+push_box_mac,
-              method:'POST',
               data:video_param,
+              header: {
+                'X-Data-Encoding': 'BASE64'
+              },
+              method:'POST',
               success(res_part){
                 console.log(res_part.data)
 
@@ -464,8 +423,11 @@ Page({
         let video_param = fm.readFileSync(filePath,'base64',dinfo['iv'],dinfo['step_size']);
         wx.request({
           url: concurrency_url+'?position='+position+'&index='+index+'&chunkSize='+dinfo['step_size']+'&totalSize='+totalSize+'&totalChunks='+totalChunks+'&fileName='+fileName+'&box_mac='+push_box_mac,
-          method:'POST',
           data:video_param,
+          header: {
+            'X-Data-Encoding': 'BASE64'
+          },
+          method:'POST',
           success(res_part){
             resolve(res_part)
           }
