@@ -34,12 +34,12 @@
 }
 
 .payment-panel>.success>.status>.icon {
-  font-size: 128rpx;
+  font-size: 130rpx;
   color: rgb(59, 191, 3);
 }
 
 .payment-panel>.success>.status>.centent {
-  font-size: 32rpx;
+  font-size: 34rpx;
   font-weight: bold;
 }
 
@@ -55,7 +55,7 @@
   line-height: 54rpx;
   text-align: center;
   border-radius: 5rpx;
-  font-size: 32rpx;
+  font-size: 34rpx;
   margin: 0;
   padding: 0;
   background: unset;
@@ -87,11 +87,11 @@
   line-height: 80rpx;
   padding: 0 10rpx;
   border-bottom: 5rpx solid #F44444;
-  font-size: 32rpx;
+  font-size: 34rpx;
 }
 
 .recommend-panel>.title-bar>.btn {
-  font-size: 28rpx;
+  font-size: 30rpx;
   margin: 0;
   padding: 0;
   border: 0;
@@ -132,7 +132,7 @@
 
 .recommend-panel>.body>.list>.item>.bottom>.name {
   width: 100%;
-  font-size: 24rpx;
+  font-size: 26rpx;
 }
 
 .recommend-panel>.body>.list>.item>.bottom>.bottom {
@@ -140,7 +140,7 @@
 }
 
 .recommend-panel>.body>.list>.item>.bottom>.bottom>.price {
-  font-size: 24rpx;
+  font-size: 26rpx;
 }
 
 .recommend-panel>.body>.list>.item>.bottom>.bottom>.btn {
@@ -148,7 +148,7 @@
   height: 30rpx;
   line-height: 30rpx;
   text-align: center;
-  font-size: 24rpx;
+  font-size: 26rpx;
   border: 3rpx solid #F44444;
   border-radius: 50%;
   margin: 0;
@@ -188,12 +188,12 @@
 
 .buy-goods-window>.top>.center>.name {
   width: 100%;
-  font-size: 28rpx;
+  font-size: 30rpx;
 }
 
 .buy-goods-window>.top>.center>.price {
   width: 100%;
-  font-size: 28rpx;
+  font-size: 30rpx;
 }
 
 .buy-goods-window>.top>.right {
@@ -206,7 +206,7 @@
   height: 40rpx;
   line-height: 40rpx;
   text-align: center;
-  font-size: 40rpx;
+  font-size: 42rpx;
 }
 
 .buy-goods-window>.top>.right>.btn.circle {
@@ -230,7 +230,7 @@
 }
 
 .buy-goods-window>.middle .specs-panel>.title-bar>.title {
-  font-size: 28rpx;
+  font-size: 30rpx;
 }
 
 .buy-goods-window>.middle .specs-panel>.body {
@@ -248,7 +248,7 @@
   margin-left: 20rpx;
   margin-bottom: 10rpx;
   display: inline-block;
-  font-size: 24rpx;
+  font-size: 26rpx;
   border-radius: 25rpx;
 }
 
@@ -262,7 +262,7 @@
 }
 
 .buy-goods-window>.middle .count>.label {
-  font-size: 28rpx;
+  font-size: 30rpx;
 }
 
 .buy-goods-window>.middle .count>.value>.btn {
@@ -270,7 +270,7 @@
   height: 34rpx;
   line-height: 30rpx;
   text-align: center;
-  font-size: 32rpx;
+  font-size: 34rpx;
   color: #BEBEBE;
   border: 3rpx solid #BEBEBE;
   border-radius: 5rpx;
@@ -283,12 +283,12 @@
   height: 40rpx;
   line-height: 40rpx;
   text-align: center;
-  font-size: 24rpx;
+  font-size: 26rpx;
 }
 
 .buy-goods-window>.middle .stock {
   width: 100%;
-  font-size: 24rpx;
+  font-size: 26rpx;
   padding-bottom: 10rpx;
 }
 
@@ -302,7 +302,7 @@
   height: 80rpx;
   line-height: 80rpx;
   text-align: center;
-  font-size: 24rpx;
+  font-size: 26rpx;
   border-radius: 0;
   border: 0;
   margin: 0;

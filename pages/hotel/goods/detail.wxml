@@ -184,17 +184,17 @@
 			<!-- </view> -->
 		</view>
 		<view class="right flex-row-center-space_between">
-			<!-- <view class="btn theme-button-orange" bindtap="addMallCart" data-type="1">加入购物车</view> -->
-			<view wx:if="{{goods_info.gtype==2}}" class="btn theme-button-orange" bindtap="openBuyGoodsPopWindow" data-action='3' data-is_self="1" data-goods_id="{{goods_id}}">赠送好友</view>
-			<view wx:else class="btn theme-button-orange" bindtap="openBuyGoodsPopWindow" bindtap="present" data-goods_id="{{goods_id}}">赠送好友</view>
+			<view wx:if="{{goods_info.gtype==2}}" class="btn theme-button-dark" bindtap="openBuyGoodsPopWindow" data-action='3' data-is_self="1" data-goods_id="{{goods_id}}">赠送好友</view>
+			<view wx:else class="btn theme-button-dark" bindtap="openBuyGoodsPopWindow" bindtap="present" data-goods_id="{{goods_id}}">赠送好友</view>
+			<view class="btn theme-button-orange" bindtap="openBuyGoodsPopWindow" data-action='1' data-is_self="1" data-goods_id="{{goods_id}}">加入购物车</view>
 			<view class="btn theme-button-red" bindtap="openBuyGoodsPopWindow" data-action='2' data-is_self="1" data-goods_id="{{goods_id}}">立即购买</view>
 		</view>
 	</view>
-	<view class="flex-right flex-column-center-flex_end" style="bottom:calc(100rpx + {{SystemInfo.screenBottomSpace}}px);">
+	<!-- <view class="flex-right flex-column-center-flex_end" style="bottom:calc(100rpx + {{SystemInfo.screenBottomSpace}}px);">
 		<view class="btn cart flex-column-center-center" bindtap="openBuyGoodsPopWindow" data-action='1' data-is_self="1" data-goods_id="{{goods_id}}">
 			<image class="icon" src="/images/icon2/F44444_cart_down.png"></image>
 		</view>
-	</view>
+	</view> -->
 </view>
 
 

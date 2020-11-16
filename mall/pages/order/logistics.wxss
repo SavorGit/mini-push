@@ -22,12 +22,12 @@
 .simple-icon,
 .simple-title,
 .simple-title-no {
-  font-size: 32rpx;
+  font-size: 34rpx;
   padding: 0 15rpx;
 }
 
 .simple-icon {
-  font-size: 48rpx;
+  font-size: 50rpx;
 }
 
 /* 收货图片 */
@@ -44,16 +44,16 @@
 
 /* 快递状态 */
 .head_name {
-  font-size: 26rpx;
+  font-size: 28rpx;
 }
 
 /* 快递编号 */
 .head_title {
-  font-size: 26rpx;
+  font-size: 28rpx;
 }
 
 .head_tel_name {
-  font-size: 26rpx;
+  font-size: 28rpx;
 }
 
 .body {
@@ -70,15 +70,15 @@
 }
 
 .express-status-address {
-  font-size: 28rpx;
+  font-size: 30rpx;
 }
 
 .express-statusing {
-  font-size: 22rpx;
+  font-size: 24rpx;
 }
 
 .express-logistics-status {
-  font-size: 32rpx;
+  font-size: 34rpx;
   font-weight: bold;
 }
 
@@ -91,7 +91,7 @@
 .express-left>.time,
 .express-left>.datetime {
   width: 100%;
-  font-size: 32rpx;
+  font-size: 34rpx;
   text-align: center;
 }
 
@@ -108,7 +108,7 @@
   text-align: center;
   border-radius: 50%;
   border: 3rpx solid #d7d7d7;
-  font-size: 30rpx;
+  font-size: 32rpx;
   color: #d7d7d7;
 }
 

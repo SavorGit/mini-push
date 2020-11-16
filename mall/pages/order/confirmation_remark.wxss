@@ -14,7 +14,7 @@
   width: calc(100% - 16rpx);
   height: 300rpx;
   padding: 5rpx;
-  font-size: 28rpx;
+  font-size: 30rpx;
   border: 3rpx solid #bebebe;
 }
 
@@ -33,7 +33,7 @@
 .bottom>.btn {
   line-height: 88rpx;
   text-align: center;
-  font-size: 32rpx;
+  font-size: 34rpx;
   margin: 0;
   padding: 0;
   border: 0;

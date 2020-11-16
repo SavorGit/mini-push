@@ -57,7 +57,7 @@
 }
 
 .wxAuthLogin-container>.wxAuthLogin-middle>.link_relief>navigator {
-  font-size: 30rpx;
+  font-size: 32rpx;
   text-decoration: underline;
 }
 
@@ -115,7 +115,7 @@
   height: 100rpx;
   line-height: 100rpx;
   text-align: center;
-  font-size: 34rpx;
+  font-size: 36rpx;
   border-radius: 60rpx;
   background-color: unset;
 }
@@ -161,7 +161,7 @@
 .remoteControlWindow-container .remoteControlWindow-middle .btn-tip {
   margin-top: -10rpx;
   height: 100rpx;
-  font-size: 24rpx;
+  font-size: 26rpx;
   z-index: 10;
 }
 
@@ -180,7 +180,7 @@
   width: 260rpx;
   height: 80rpx;
   line-height: 80rpx;
-  font-size: 28rpx;
+  font-size: 30rpx;
   border-radius: 15rpx;
 }
 
@@ -189,7 +189,7 @@
   height: 80rpx;
   line-height: 80rpx;
   margin: auto;
-  font-size: 28rpx;
+  font-size: 30rpx;
   border-radius: 15rpx;
 }
 
@@ -198,7 +198,7 @@
 .advert-panel {
   height: 90rpx;
   margin-top: 10rpx;
-  font-size: 28rpx;
+  font-size: 30rpx;
 }
 
 .advert-panel>label,
@@ -211,7 +211,7 @@
   height: 50rpx;
   line-height: 50rpx;
   border-radius: 5rpx;
-  font-size: 24rpx;
+  font-size: 26rpx;
 }
 
 .advert-panel>.fa {
@@ -272,7 +272,7 @@
 }
 
 .default-navigation-bar>.status-bar {
-  font-size: 24px;
+  font-size: 52rpx;
 }
 
 .default-navigation-bar>.navigation-bar {
@@ -288,7 +288,7 @@
 }
 
 .default-navigation-bar>.navigation-bar>.title>.text {
-  font-size: 16px;
+  font-size: 36rpx;
   font-weight: bold;
 }
 
@@ -302,7 +302,7 @@
 .default-navigation-bar>.navigation-bar>.btn>.to-home {
   padding-left: 5px;
   padding-right: 5px;
-  font-size: 12px;
+  font-size: 28rpx;
 }
 
 .default-navigation-bar>.navigation-bar>.btn>.go-back>image,
@@ -334,7 +334,7 @@
   height: 30rpx;
   line-height: 30rpx;
   text-align: center;
-  font-size: 28rpx;
+  font-size: 30rpx;
   font-weight: bold;
 }
 
@@ -350,7 +350,7 @@
   height: 60rpx;
   line-height: 60rpx;
   text-align: center;
-  font-size: 24rpx;
+  font-size: 26rpx;
   border-radius: 10rpx;
 }
 

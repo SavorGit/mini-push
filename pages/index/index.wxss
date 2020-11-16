@@ -1,9 +1,10 @@
 /* pages/interact/index.wxss */
+@import '/animation.wxss';
 
 /* ==================================== 轮播图面板 ==================================== */
 
 .banner-loop-panel {
-  height: 420rpx;
+  height: 280rpx;
 }
 
 .banner-loop-panel button {
@@ -14,14 +15,14 @@
 /* ==================================== 连接信息面板 ==================================== */
 
 .link-box-panel {
-  height: 90rpx;
+  height: 100rpx;
 }
 
 .link-box-panel>.tip>button {
   width: 120rpx;
   height: 50rpx;
   line-height: 50rpx;
-  margin: auto;
+  margin: 0 auto;
   background: unset;
   font-size: unset;
 }
@@ -35,7 +36,7 @@
 
 .free-dish-panel {
   height: 202rpx;
-  font-size: 56rpx;
+  font-size: 58rpx;
   /* margin: 10rpx 0; */
 }
 
@@ -49,7 +50,7 @@
 .hotel-waiter-evaluate-panel>.btn-waiter-evaluate {
   width: 100%;
   height: 100%;
-  font-size: 40rpx;
+  font-size: 42rpx;
   font-weight: bold;
 }
 
@@ -63,7 +64,7 @@
 /* ==================================== 功能模块面板 ==================================== */
 
 .functional-module-panel {
-  height: 320rpx;
+  height: 380rpx;
 }
 
 .functional-module-panel>.row>view,
@@ -77,6 +78,7 @@
 .functional-module-panel>.row button {
   line-height: unset;
   background: unset;
+  padding: 10rpx;
 }
 
 .functional-module-panel>.row button[disabled] {
@@ -86,16 +88,33 @@
 
 .functional-module-panel>.row>view>.icon,
 .functional-module-panel>.row button>.icon {
-  width: 74rpx;
-  height: 74rpx;
+  width: 100rpx;
+  height: 100rpx;
   margin: 0 auto;
   border-radius: 10rpx;
 }
 
+.eye-catching {
+  position: relative;
+}
+
+.eye-catching:after {
+  content: "";
+  display: block;
+  position: absolute;
+  width: 120rpx;
+  height: 120rpx;
+  border: 10rpx solid #FFFFFF;
+  background-color: #FFFFFF;
+  border-radius: 10rpx;
+  animation: warn 1.5s infinite linear;
+}
+
+
 .functional-module-panel>.row>view>.icon>image,
 .functional-module-panel>.row button>.icon>image {
-  width: 48rpx;
-  height: 48rpx;
+  width: 70rpx;
+  height: 70rpx;
 }
 
 .functional-module-panel>.row>view>.pic,
@@ -137,7 +156,8 @@
   height: 60rpx;
   line-height: 60rpx;
   margin-left: 10rpx;
-  font-size: 24rpx;
+  font-size: 26rpx;
+  font-weight: bold;
 }
 
 /* ==================================== 推荐面板 ==================================== */
@@ -154,10 +174,10 @@
 }
 
 .recommend-panel>.title-bar>.title {
-  width: 100rpx;
+  width: 110rpx;
   display: block;
   text-align: center;
-  font-size: 24rpx;
+  font-size: 26rpx;
   padding-bottom: 2rpx;
   border-bottom: 6rpx solid #333;
 }
@@ -199,18 +219,18 @@
 .recommend-panel>.weui-grids>.weui-grid>.card>.people {
   height: 50rpx;
   line-height: 50rpx;
-  font-size: 24rpx;
+  font-size: 26rpx;
 }
 
 .recommend-panel>.weui-grids>.weui-grid>.card>.msg {
   height: 30rpx;
   line-height: 30rpx;
-  font-size: 18rpx;
+  font-size: 20rpx;
 }
 
 .recommend-panel>.weui-grids>.weui-grid>.card>.flex-row-center-space_between>.user {
   width: calc(100% - 100rpx);
-  font-size: 22rpx;
+  font-size: 24rpx;
 }
 
 .recommend-panel>.weui-grids>.weui-grid>.card>.flex-row-center-space_between>.user>image {
@@ -226,8 +246,8 @@
 }
 
 .recommend-panel>.weui-grids>.weui-grid>.card>.flex-row-center-space_between>.sta {
-  width: 100rpx;
-  font-size: 22rpx;
+  width: 110rpx;
+  font-size: 24rpx;
   text-align: right;
 }
 
@@ -244,7 +264,7 @@
 }
 
 .recommend-panel>.weui-grids>.weui-grid>.card>.flex-row-center-space_between>.rank {
-  font-size: 24rpx;
+  font-size: 26rpx;
 }
 
 .recommend-panel>.weui-grids>.weui-grid>.card>.flex-row-center-space_between>.btn {
@@ -255,66 +275,14 @@
   padding: 0;
   margin: 0;
   border: 0;
-  font-size: 20rpx;
+  font-size: 22rpx;
 }
-
-/*
-.recommend-panel > .list > .row {
-  height: 160rpx;
-  padding: 20rpx 0 10rpx 0;
-  margin: 0 25rpx;
-}
-
-.recommend-panel > .list > .row.line {
-  border-bottom: 1rpx solid #fff;
-}
-
-.recommend-panel > .list > .row > .img {
-  width: 160rpx;
-  height: 160rpx;
-  border-radius: 5rpx;
-}
-
-.recommend-panel > .list > .row > .info {
-  width: calc(100% - 290rpx);
-  height: 150rpx;
-  padding-left: 30rpx;
-  padding-bottom: 10rpx;
-  border-radius: 5rpx;
-}
-
-.recommend-panel > .list > .row > .info > .rank {
-  height: 30rpx;
-  font-size: 28rpx;
-  font-style: italic;
-}
-
-.recommend-panel > .list > .row > .info > .people {
-  height: 30rpx;
-  margin-top: 20rpx;
-  font-size: 24rpx;
-}
-
-.recommend-panel > .list > .row > .info > .msg {
-  height: 25rpx;
-  margin-top: 55rpx;
-  font-size: 20rpx;
-}
-
-.recommend-panel > .list > .row > .btn {
-  width: 100rpx;
-  height: 40rpx;
-  line-height: 40rpx;
-  font-size: 20rpx;
-  border-radius: 5rpx;
-}
-*/
 
 /* 扫描弹窗提示内容 */
 
 .scan_tip {
   padding: 0rpx 40rpx;
-  font-size: 30rpx;
+  font-size: 32rpx;
   text-align: center;
 }
 
@@ -355,7 +323,7 @@
 }
 
 .waiter-evaluate-window>.title-bar>.fa {
-  font-size: 48rpx;
+  font-size: 50rpx;
   font-weight: 100;
 }
 
@@ -371,7 +339,7 @@
 }
 
 .waiter-evaluate-window>.document>.head>.title {
-  font-size: 48rpx;
+  font-size: 50rpx;
   font-weight: 400;
 }
 
@@ -400,12 +368,12 @@
 }
 
 .waiter-evaluate-window>.document .body .waiter>.sketch>.name {
-  font-size: 36rpx;
+  font-size: 38rpx;
   font-weight: 400;
 }
 
 .waiter-evaluate-window>.document .body .waiter>.sketch>.job {
-  font-size: 28rpx;
+  font-size: 30rpx;
   font-weight: 400;
 }
 
@@ -430,7 +398,7 @@
 
 .waiter-evaluate-window>.document .body .panel.evaluate>.score>.label {
   width: 150rpx;
-  font-size: 36rpx;
+  font-size: 38rpx;
   font-weight: bold;
 }
 
@@ -443,7 +411,7 @@
   height: 60rpx;
   line-height: 60rpx;
   text-align: center;
-  font-size: 54rpx;
+  font-size: 56rpx;
 }
 
 .waiter-evaluate-window>.document .body .panel.evaluate>.tag-group {
@@ -455,7 +423,7 @@
   margin: 5rpx;
   padding: 10rpx 15rpx;
   display: inline-block;
-  font-size: 24rpx;
+  font-size: 26rpx;
   font-weight: normal;
   border-radius: 5rpx;
   border: 2rpx solid rgba(187, 187, 187, 0.43);
@@ -473,7 +441,7 @@
 }
 
 .waiter-evaluate-window>.document .body .panel.bestow>.title-bar>.title {
-  font-size: 28rpx;
+  font-size: 30rpx;
   font-weight: 700;
 }
 
@@ -482,7 +450,7 @@
   height: 56rpx;
   line-height: 56rpx;
   text-align: center;
-  font-size: 26rpx;
+  font-size: 28rpx;
   border: 2rpx solid #F55555;
 }
 
@@ -525,7 +493,7 @@
 }
 
 .waiter-evaluate-window>.document .body .panel.bestow>.body>.tab-body>.item>.fee {
-  font-size: 32rpx;
+  font-size: 34rpx;
   font-weight: 700;
 }
 
@@ -538,7 +506,7 @@
 .waiter-evaluate-window>.document .body textarea {
   width: calc(100% - 10rpx);
   height: 150rpx;
-  font-size: 28rpx;
+  font-size: 30rpx;
   font-weight: normal;
   padding: 5rpx;
 }
@@ -548,17 +516,7 @@
   height: 80rpx;
   line-height: 80rpx;
   margin: 0 40rpx;
-  font-size: 36rpx;
+  font-size: 38rpx;
   font-weight: normal;
   border-radius: 8rpx;
 }
-
-/* .waiter-evaluate-window>.document .body button {
-  width: 100%;
-  height: 80rpx;
-  line-height: 80rpx;
-  margin-top: 20rpx;
-  font-size: 36rpx;
-  font-weight: normal;
-  border-radius: 0rpx;
-} */

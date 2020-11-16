@@ -49,11 +49,11 @@
   padding: 20rpx 10rpx 0 10rpx;
   display: inline-block;
   border-bottom: 5rpx solid #F44444;
-  font-size: 24rpx;
+  font-size: 26rpx;
 }
 
 .panel>.title-bar>.more {
-  font-size: 22rpx;
+  font-size: 24rpx;
   margin: 0;
   padding: 0;
   border: 0;
@@ -78,20 +78,20 @@
   height: 30rpx;
   line-height: 30rpx;
   text-align: center;
-  font-size: 30rpx;
+  font-size: 32rpx;
 }
 
 .page-bottom>.left>.btn>.fa-phone {
   border-radius: 50%;
   border: 3rpx solid #666666;
-  font-size: 28rpx;
+  font-size: 30rpx;
 }
 
 .page-bottom>.left>.btn>.content {
   height: 30rpx;
   line-height: 30rpx;
   text-align: center;
-  font-size: 18rpx;
+  font-size: 20rpx;
 }
 
 .page-bottom>.left>.phone {
@@ -113,7 +113,7 @@
   line-height: 80rpx;
   text-align: center;
   margin-left: 3rpx;
-  font-size: 24rpx;
+  font-size: 26rpx;
   margin: 0;
   padding: 0;
   border: 0;
@@ -150,17 +150,17 @@
 }
 
 .goods-smple-info>.bottom>.left>.name {
-  font-size: 32rpx;
+  font-size: 34rpx;
   font-weight: bold;
 }
 
 .goods-smple-info>.bottom>.left>.bottom>.price {
-  font-size: 20rpx;
+  font-size: 22rpx;
 }
 
 .goods-smple-info>.bottom>.left>.bottom>.price>text {
   margin-left: 5rpx;
-  font-size: 32rpx;
+  font-size: 34rpx;
 }
 
 .goods-smple-info>.bottom>.left>.bottom>.market {
@@ -170,7 +170,7 @@
 
 .goods-smple-info>.bottom>.left>.bottom>.tip {
   margin-left: 30rpx;
-  font-size: 20rpx;
+  font-size: 22rpx;
 }
 
 .goods-smple-info>.bottom>.right {
@@ -191,11 +191,11 @@
   height: 30rpx;
   line-height: 30rpx;
   text-align: center;
-  font-size: 30rpx;
+  font-size: 32rpx;
 }
 
 .goods-smple-info>.bottom>.right>.btn>.content {
-  font-size: 20rpx;
+  font-size: 22rpx;
 }
 
 /* ===================================== 商铺面板 ===================================== */
@@ -223,11 +223,11 @@
 }
 
 .shop-panel>.center>.name {
-  font-size: 28rpx;
+  font-size: 30rpx;
 }
 
 .shop-panel>.center>.info {
-  font-size: 24rpx;
+  font-size: 26rpx;
 }
 
 .shop-panel>.right {
@@ -244,7 +244,7 @@
   border-radius: 10rpx;
   color: #F44444;
   border: 3rpx solid #F44444;
-  font-size: 28rpx;
+  font-size: 30rpx;
   padding: 0;
   margin: 0;
   background-color: unset;
@@ -289,7 +289,7 @@
 
 .recommend>.scroll-view .list>.item>.bottom>.name {
   width: 100%;
-  font-size: 24rpx;
+  font-size: 26rpx;
   white-space: normal;
 }
 
@@ -298,7 +298,7 @@
 }
 
 .recommend>.scroll-view .list>.item>.bottom>.bottom>.price {
-  font-size: 24rpx;
+  font-size: 26rpx;
 }
 
 .recommend>.scroll-view .list>.item>.bottom>.bottom>.btn {
@@ -312,7 +312,7 @@
   color: #F44444;
   border: 3rpx solid #F44444;
   border-radius: 50%;
-  font-size: 24rpx;
+  font-size: 26rpx;
 }
 
 /* ===================================== 商品介绍面板 ===================================== */
@@ -330,7 +330,7 @@
 }
 
 .information-panel>.title-bar>.title {
-  font-size: 24rpx;
+  font-size: 26rpx;
 }
 
 .information-panel>.panel-body,
@@ -354,7 +354,7 @@
 }
 
 .information-panel>.panel-body>.info>.body>.text {
-  font-size: 24rpx;
+  font-size: 26rpx;
 }
 
 .information-panel>.panel-body>.info>.body>.pics {
@@ -397,12 +397,12 @@
 
 .buy-goods-window>.top>.center>.name {
   width: 100%;
-  font-size: 28rpx;
+  font-size: 30rpx;
 }
 
 .buy-goods-window>.top>.center>.price {
   width: 100%;
-  font-size: 28rpx;
+  font-size: 30rpx;
 }
 
 .buy-goods-window>.top>.right {
@@ -415,7 +415,7 @@
   height: 40rpx;
   line-height: 40rpx;
   text-align: center;
-  font-size: 40rpx;
+  font-size: 42rpx;
 }
 
 .buy-goods-window>.top>.right>.btn.circle {
@@ -439,7 +439,7 @@
 }
 
 .buy-goods-window>.middle .specs-panel>.title-bar>.title {
-  font-size: 28rpx;
+  font-size: 30rpx;
 }
 
 .buy-goods-window>.middle .specs-panel>.body {
@@ -457,7 +457,7 @@
   margin-left: 20rpx;
   margin-bottom: 10rpx;
   display: inline-block;
-  font-size: 24rpx;
+  font-size: 26rpx;
   border-radius: 25rpx;
 }
 
@@ -471,7 +471,7 @@
 }
 
 .buy-goods-window>.middle .count>.label {
-  font-size: 28rpx;
+  font-size: 30rpx;
 }
 
 .buy-goods-window>.middle .count>.value>.btn {
@@ -479,7 +479,7 @@
   height: 34rpx;
   line-height: 30rpx;
   text-align: center;
-  font-size: 32rpx;
+  font-size: 34rpx;
   color: #BEBEBE;
   border: 3rpx solid #BEBEBE;
   border-radius: 5rpx;
@@ -492,12 +492,12 @@
   height: 40rpx;
   line-height: 40rpx;
   text-align: center;
-  font-size: 24rpx;
+  font-size: 26rpx;
 }
 
 .buy-goods-window>.middle .stock {
   width: 100%;
-  font-size: 24rpx;
+  font-size: 26rpx;
   padding-bottom: 10rpx;
 }
 
@@ -512,7 +512,7 @@
   height: 80rpx;
   line-height: 80rpx;
   text-align: center;
-  font-size: 24rpx;
+  font-size: 26rpx;
   border-radius: 0;
   border: 0;
   margin: 0;
