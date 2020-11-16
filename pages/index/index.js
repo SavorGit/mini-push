@@ -334,6 +334,14 @@ Page({
     mta.Event.stat('clickTopAds', { 'linktype': app.globalData.link_type, "box_mac": box_mac })
     mta.Event.stat('gotoHdGame', { 'linktype': app.globalData.link_type, "box_mac": box_mac })
   },
+  //本校程序内跳转
+  goToPage:function(e){
+    var openid = e.currentTarget.dataset.openid;
+    var linkcontent = e.currentTarget.dataset.linkcontent;
+    wx.navigateTo({
+      url: linkcontent+'&openid='+openid, 
+    })
+  },
   //断开连接
   breakLink: function (e) {
     var that = this;
