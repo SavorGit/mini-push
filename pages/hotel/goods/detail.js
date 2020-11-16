@@ -155,14 +155,9 @@ Page({
         }
       }
     }
-    
-
-
-    
-
   },
   recordScanCodeLog:function(openid,goods_type,goods_id,box_id){
-    utils.PostRequest(api_v_url + '/Index/recodeQrcodeLog', {
+    utils.PostRequest(api_v_url + '/Index/gencode', {
       openid:openid,
       type:goods_type,
       data_id:goods_id,

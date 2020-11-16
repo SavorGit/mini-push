@@ -24,7 +24,8 @@ var  maxConcurrency //并发量
 var  limit_video_size //超过10M读文件写
 var  tail_lenth    //尾部大小
 var fm;
-var max_video_size;
+var max_video_size;         //极简投屏最大M数限制
+var max_user_forvideo_size; //主干版超过XXM走极简投屏
 Page({
 
   /**
@@ -105,6 +106,7 @@ Page({
     limit_video_size = hotel_info.limit_video_size;
     tail_lenth = hotel_info.tail_lenth;
     max_video_size = hotel_info.max_video_size;
+    max_user_forvideo_size = hotel_info.max_user_forvideo_size;
     var user_info = wx.getStorageSync("savor_user_info");
     var avatarUrl = user_info.avatarUrl;
     var nickName = user_info.nickName;
@@ -134,35 +136,49 @@ Page({
       camera: 'back',
       compressed:compressed,
       success: function(res) {
-        //console.log(res)
+
         var filePath = res.tempFilePath
         var video_size = res.size;
-        //console.log(video_size)
-        //console.log(max_video_size)
-        //console.log(app.globalData.sys_info.platform);
-        if(video_size>max_video_size && app.globalData.sys_info.platform=='ios'){
-          /*wx.navigateBack({
-            delta: 1,
-          })
-          app.showToast('亲,请选择小于'+app.changeKb(max_video_size)+'的视频文件')*/
-          that.setData({showModal_2:true,vide_size_str:app.changeKb(video_size)})
-          
-        }else {
-          that.setData({
-            showVedio: true,
-            //is_btn_disabel: false,
-            is_classic_disabel:false,
-            is_speed_disabel:false,
-            upload_vedio_temp: res.tempFilePath,
-            duration: res.duration,
-            size: video_size,
-            vide_size_str:app.changeKb(video_size)
-          });
-          lead(openid);
-          mta.Event.stat('LaunchVideoWithNet_Launch_ChooseVideo', {
-            'status': 'success'
-          });
-        }
+        var duration  = res.duration;
+        var saveFileName = (new Date()).valueOf()+'mp4';
+        fm.saveFile({
+          tempFilePath: filePath,
+          filePath:wx.env.USER_DATA_PATH+'/'+saveFileName,
+          success:function(res){
+            var savedFilePath = res.savedFilePath;
+            //that.setData({tmp_video_url:savedFilePath})
+            if(video_size>max_video_size && app.globalData.sys_info.platform=='ios'){
+              
+              that.setData({showModal_2:true,vide_size_str:app.changeKb(video_size)})
+              
+            }else {
+              that.setData({
+                showVedio: true,
+                //is_btn_disabel: false,
+                is_classic_disabel:false,
+                is_speed_disabel:false,
+                upload_vedio_temp: savedFilePath,
+                duration: duration,
+                size: video_size,
+                vide_size_str:app.changeKb(video_size)
+              });
+              lead(openid);
+              mta.Event.stat('LaunchVideoWithNet_Launch_ChooseVideo', {
+                'status': 'success'
+              });
+            }
+
+
+
+
+            //console.log(res);
+          },fail:function(res){
+            console.log(res)
+          }
+        })
+
+        
+        
       },
       fail: function(res) {
         //console.log(res)
@@ -1047,8 +1063,15 @@ Page({
       launchType:launchType,
     })
     if(launchType=='classic'){//经典投屏
-      app.globalData.change_link_type = 1;
-      that.classicForVideo(res.detail.value);
+      if(res.detail.value.size>=max_user_forvideo_size){
+        that.setData({launchType:'speed'})
+        that.speedForVideo(res.detail.value,hotel_info)
+
+      }else {
+        app.globalData.change_link_type = 1;
+        that.classicForVideo(res.detail.value);
+      }
+      
     }else {//极速投屏
       
       //that.burstReadVideoFile(res.detail.value,hotel_info);
@@ -1059,16 +1082,7 @@ Page({
   //重新选择视频
   chooseVedio(e) {
     var that = this;
-    if(app.globalData.sys_info.platform=='android'){
-      fm.unlink({
-        filePath:this.data.upload_vedio_temp,
-        success:function(e){
-          console.log('删除成功');
-        },fail:function(e){
-          console.log(e)
-        }
-      })
-    }
+    that.removeSavedFile();
     var is_compress = that.data.is_compress;
     if(is_compress==1){
       var compressed = true;
@@ -1119,22 +1133,37 @@ Page({
       success: function(res) {
 
         var filePath = res.tempFilePath
-        var video_size = res.size
-        if(video_size>max_video_size && app.globalData.sys_info.platform=='ios'){
-          that.setData({showModal_2:true,vide_size_str:app.changeKb(video_size)})
-          
-        }else {
-          that.setData({
-            showVedio: true,
-            //is_btn_disabel: false,
-            is_classic_disabel:false,
-            is_speed_disabel:false,
-            upload_vedio_temp: res.tempFilePath,
-            duration: res.duration,
-            size: video_size,
-            vide_size_str:app.changeKb(video_size)
-          })
-        }
+        var video_size = res.size;
+        var duration  = res.duration;
+        var saveFileName = (new Date()).valueOf()+'mp4';
+        fm.saveFile({
+          tempFilePath: filePath,
+          filePath:wx.env.USER_DATA_PATH+'/'+saveFileName,
+          success:function(res){
+            var savedFilePath = res.savedFilePath;
+            //that.setData({tmp_video_url:savedFilePath})
+
+            if(video_size>max_video_size && app.globalData.sys_info.platform=='ios'){
+              
+              that.setData({showModal_2:true,vide_size_str:app.changeKb(video_size)})
+              
+            }else {
+              that.setData({
+                showVedio: true,
+                //is_btn_disabel: false,
+                is_classic_disabel:false,
+                is_speed_disabel:false,
+                upload_vedio_temp: savedFilePath,
+                duration: duration,
+                size: video_size,
+                vide_size_str:app.changeKb(video_size)
+              })
+            }
+            //console.log(res);
+          },fail:function(res){
+            console.log(res)
+          }
+        })
         mta.Event.stat('LaunchVideoWithNet_Launch_ChooseVideo', {
           'status': 'success'
         });
@@ -1537,17 +1566,24 @@ Page({
   onUnload: function() {
     //console.log(this.data.upload_vedio_temp)
     //console.log(app.globalData.sys_info.platform)
-    if(app.globalData.sys_info.platform=='android'){
-      fm.unlink({
-        filePath:this.data.upload_vedio_temp,
-        success:function(e){
-          console.log('删除成功');
-        },fail:function(e){
-          console.log(e)
-        }
-      })
-    }
+    this.removeSavedFile();
+    
 
+  },
+  removeSavedFile:function(e){
+    console.log(this.data.upload_vedio_temp)
+    fm.unlink({
+      filePath:this.data.upload_vedio_temp,
+      success:function(res){
+        console.log(res);
+        console.log('删除成功');
+      },fail:function(res){
+        console.log(res)
+        console.log('删除失败');
+      }
+    })
+
+    
   },
 
   /**
