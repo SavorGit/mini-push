@@ -470,13 +470,13 @@ Page({
       //TODO nothing
     }
   },
-  speedForVideo:function(res,hotel_info){
+  speedForVideo:function(res,hotel_info,cTs=0){
     var that = this;
-    that.linkHotelWifi(res,hotel_info)
+    that.linkHotelWifi(res,hotel_info,cts)
 
 
   },
-  linkHotelWifi:function(data,hotel_info){
+  linkHotelWifi:function(data,hotel_info,cTs){
     var that = this;
     var box_mac = data.box_mac;
 
@@ -540,7 +540,9 @@ Page({
                   err_msg = '请打开您的手机GPS';
                   
                 } else if(res.errCode == 12007){//用户拒绝授权链接 Wi-Fi
-                  
+                  if(cTs==1){
+                    that.classicForVideo(data)
+                  }
                 }else if(res.errCode== 12010){
                   err_msg = '请确认并打开wifi';
                   
@@ -1065,7 +1067,7 @@ Page({
     if(launchType=='classic'){//经典投屏
       if(res.detail.value.size>=max_user_forvideo_size){
         that.setData({launchType:'speed'})
-        that.speedForVideo(res.detail.value,hotel_info)
+        that.speedForVideo(res.detail.value,hotel_info,1)
 
       }else {
         app.globalData.change_link_type = 1;
