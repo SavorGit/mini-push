@@ -3,59 +3,59 @@
 <template is="navigationBarForShare" data='{{statusBarHeight: statusBarHeight,titleText:"热点投屏"}}' />
 
 <view class="container flex-column-center-flex_start theme-container" style='height: calc(100vh - 46px - {{statusBarHeight}}px);'>
-  <view class='page_main'>
+	<view class='page_main'>
 
-    <view class='content content_bottom_border'>
-      <view class='con_top flex-row-center-flex_start'>
-        <view class='user_info flex-row-center-flex_start'>
-          <image class='user_head' src="{{pub_info.avatarUrl}}"></image>
-          <label class='user_name font_333333_32'>{{pub_info.nickName}}</label>
-        </view>
-      </view>
-      <view class='con_main'>
-        <view class="weui-grids" wx:if="{{pub_info.res_nums=='1'}}">
-          <view class="weui-grid_1" wx:for="{{pub_info.pubdetail}}" wx:key="pkey" wx:for-item="item" wx:for-index="indexs">
-            <image bindtap="previewImage" data-pkey="{{indexs}}" data-src="{{pub_info.pubdetail}}" class="pic_show" mode='aspectFill' src="{{item.res_url}}"></image>
-          </view>
-        </view>
-        <view class="weui-grids" wx:if="{{pub_info.res_nums=='4'}}">
-          <view class="weui-grid_4" wx:for="{{pub_info.pubdetail}}" wx:key="pkey" wx:for-item="item" wx:for-index="indexs">
-            <image bindtap="previewImage" data-pkey="{{indexs}}" data-src="{{pub_info.pubdetail}}" class="pic_show" mode='aspectFill' src="{{item.res_url}}"></image>
-          </view>
-        </view>
-        <view class="weui-grids" wx:if="{{pub_info.res_nums=='2' || pub_info.res_nums=='3' || pub_info.res_nums=='5' || pub_info.res_nums=='6'}}">
-          <view class="weui-grid" wx:for="{{pub_info.pubdetail}}" wx:key="pkey" wx:for-item="item" wx:for-index="indexs">
-            <image bindtap="previewImage" data-pkey="{{indexs}}" data-src="{{pub_info.pubdetail}}" class="pic_show" mode='aspectFill' src="{{item.res_url}}"></image>
-          </view>
-        </view>
-      </view>
-      <view class='con_bottom flex-row-center-flex_start'>
-        <view class='hotel_info flex-row-center-flex_start font_666666_26'>
-          <label class='time'>{{pub_info.create_time}}</label>
-          <label class='dot' wx:if="{{pub_info.is_pub_hotelinfo==1}}">.</label>
-          <label class='hotel_name' wx:if="{{pub_info.is_pub_hotelinfo==1}}">{{pub_info.hotel_name}}</label>
-        </view>
-        <view class='operation flex-row-center-flex_end'>
-          <view wx:if="{{pub_info.is_collect=='1'}}">
-            <button bindtap='cancCollect' data-res_id="{{pub_info.forscreen_id}}" data-pub_info="{{pub_info}}" data-openid="{{openid}}">
-              <image src='http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/icon/red_heart.png'></image>
-              <label class='font_333333_28'>{{pub_info.collect_num}}</label>
-            </button>
-          </view>
-          <view wx:else>
-            <button bindtap='onCollect' data-res_id="{{pub_info.forscreen_id}}" data-pub_info="{{pub_info}}" data-openid="{{openid}}">
-              <image src='http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/icon/grey_heart.png'></image>
-              <label class='font_333333_28'>{{pub_info.collect_num}}</label>
-            </button>
-          </view>
-          <view>
-            <button open-type='share' data-res_id="{{pub_info.forscreen_id}}" data-pub_info="{{pub_info}}" data-pubdetail="{{pub_info.pubdetail}}" data-openid="{{openid}}" data-res_type="{{pub_info.res_type}}">
-              <image src='http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/icon/grey_share.png'></image>
-              <label class='font_333333_28'>{{pub_info.share_num}}</label>
-            </button>
-          </view>
-        </view>
-      </view>
-    </view>
-  </view>
+		<view class='content content_bottom_border'>
+			<view class='con_top flex-row-center-flex_start'>
+				<view class='user_info flex-row-center-flex_start'>
+					<image class='user_head' src="{{pub_info.avatarUrl}}"></image>
+					<label class='user_name font_333333_32'>{{pub_info.nickName}}</label>
+				</view>
+			</view>
+			<view class='con_main'>
+				<view class="weui-grids" wx:if="{{pub_info.res_nums=='1'}}">
+					<view class="weui-grid_1" wx:for="{{pub_info.pubdetail}}" wx:key="pkey" wx:for-item="item" wx:for-index="indexs">
+						<image bindtap="previewImage" data-pkey="{{indexs}}" data-src="{{pub_info.pubdetail}}" class="pic_show" mode='aspectFill' src="{{item.res_url}}"></image>
+					</view>
+				</view>
+				<view class="weui-grids" wx:if="{{pub_info.res_nums=='4'}}">
+					<view class="weui-grid_4" wx:for="{{pub_info.pubdetail}}" wx:key="pkey" wx:for-item="item" wx:for-index="indexs">
+						<image bindtap="previewImage" data-pkey="{{indexs}}" data-src="{{pub_info.pubdetail}}" class="pic_show" mode='aspectFill' src="{{item.res_url}}"></image>
+					</view>
+				</view>
+				<view class="weui-grids" wx:if="{{pub_info.res_nums=='2' || pub_info.res_nums=='3' || pub_info.res_nums=='5' || pub_info.res_nums=='6'}}">
+					<view class="weui-grid" wx:for="{{pub_info.pubdetail}}" wx:key="pkey" wx:for-item="item" wx:for-index="indexs">
+						<image bindtap="previewImage" data-pkey="{{indexs}}" data-src="{{pub_info.pubdetail}}" class="pic_show" mode='aspectFill' src="{{item.res_url}}"></image>
+					</view>
+				</view>
+			</view>
+			<view class='con_bottom flex-row-center-flex_start'>
+				<view class='hotel_info flex-row-center-flex_start font_666666_26'>
+					<label class='time one-line-overflow'>{{pub_info.create_time}}</label>
+					<label class='dot' wx:if="{{pub_info.is_pub_hotelinfo==1}}">.</label>
+					<label class='hotel_name one-line-overflow' wx:if="{{pub_info.is_pub_hotelinfo==1}}">{{pub_info.hotel_name}}</label>
+				</view>
+				<view class='operation flex-row-center-flex_end'>
+					<view wx:if="{{pub_info.is_collect=='1'}}">
+						<button bindtap='cancCollect' data-res_id="{{pub_info.forscreen_id}}" data-pub_info="{{pub_info}}" data-openid="{{openid}}">
+							<image src='http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/icon/red_heart.png'></image>
+							<label class='font_333333_28'>{{pub_info.collect_num}}</label>
+						</button>
+					</view>
+					<view wx:else>
+						<button bindtap='onCollect' data-res_id="{{pub_info.forscreen_id}}" data-pub_info="{{pub_info}}" data-openid="{{openid}}">
+							<image src='http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/icon/grey_heart.png'></image>
+							<label class='font_333333_28'>{{pub_info.collect_num}}</label>
+						</button>
+					</view>
+					<view>
+						<button open-type='share' data-res_id="{{pub_info.forscreen_id}}" data-pub_info="{{pub_info}}" data-pubdetail="{{pub_info.pubdetail}}" data-openid="{{openid}}" data-res_type="{{pub_info.res_type}}">
+							<image src='http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/icon/grey_share.png'></image>
+							<label class='font_333333_28'>{{pub_info.share_num}}</label>
+						</button>
+					</view>
+				</view>
+			</view>
+		</view>
+	</view>
 </view>
