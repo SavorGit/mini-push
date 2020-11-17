@@ -19,11 +19,12 @@
   height: 120rpx;
 }
 
-.con_top > .user_info {
+.con_top>.user_info {
   flex-grow: 1;
 }
 
-.con_top > .user_info > .user_head, .con_top > .user_info > .user_head::before {
+.con_top>.user_info>.user_head,
+.con_top>.user_info>.user_head::before {
   width: 70rpx;
   height: 70rpx;
   border-radius: 50%;
@@ -31,7 +32,7 @@
   vertical-align: middle;
 }
 
-.con_top > .user_info > .user_name {
+.con_top>.user_info>.user_name {
   margin: 0rpx 20rpx 0rpx 10rpx;
 }
 
@@ -47,7 +48,7 @@
   width: 100%;
 }
 
-.con_main .weui-grid_1 > image {
+.con_main .weui-grid_1>image {
   width: 450rpx;
   height: 450rpx;
   border-radius: 10rpx;
@@ -60,7 +61,7 @@
   box-sizing: border-box;
 }
 
-.con_main .weui-grid_4 > image {
+.con_main .weui-grid_4>image {
   width: calc((100vw - 200rpx) * 0.34 - 8rpx);
   height: calc((100vw - 200rpx) * 0.34 - 8rpx);
   border-radius: 10rpx;
@@ -81,22 +82,31 @@
   padding-left: 70rpx;
 }
 
-.con_bottom > .hotel_info {
+.con_bottom>.hotel_info {
   flex-grow: 1;
 }
 
-.con_bottom > .operation > view {
+.con_bottom>.hotel_info>.time {
+  width: 116rpx;
+}
+
+.con_bottom>.hotel_info>.hotel_name {
+  width: 290rpx;
+}
+
+.con_bottom>.operation>view {
   margin-left: 15rpx;
   margin-right: 15rpx;
 }
 
-.con_bottom > .operation > view > button,
-.con_bottom > .operation > view > button::before,
-.con_bottom > .operation > view > button::after {
+.con_bottom>.operation>view>button,
+.con_bottom>.operation>view>button::before,
+.con_bottom>.operation>view>button::after {
+  line-height: 32rpx;
   background: unset;
 }
 
-.con_bottom > .operation > view > button > image {
+.con_bottom>.operation>view>button>image {
   width: 36rpx;
   height: 32rpx;
   margin-right: 8rpx;

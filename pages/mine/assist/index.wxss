@@ -8,37 +8,37 @@
   padding: 20rpx 20rpx 25rpx 20rpx;
 }
 
-.assist-info-other-panel > .people > .head-img {
+.assist-info-other-panel>.people>.head-img {
   width: 80rpx;
   height: 80rpx;
   border-radius: 50%;
   margin-right: 20rpx;
 }
 
-.assist-info-other-panel > .people > view {
+.assist-info-other-panel>.people>view {
   width: calc(100% - 80rpx);
 }
 
-.assist-info-other-panel > .people > view > .name {
+.assist-info-other-panel>.people>view>.name {
   margin-top: 15rpx;
 }
 
-.assist-info-other-panel > .people > view > .msg:nth-child(2) {
+.assist-info-other-panel>.people>view>.msg:nth-child(2) {
   margin-top: 20rpx;
 }
 
-.assist-info-other-panel > .people > view > .msg:nth-child(3) {
+.assist-info-other-panel>.people>view>.msg:nth-child(3) {
   margin-left: 24rpx;
 }
 
-.assist-info-other-panel > .img {
+.assist-info-other-panel>.img {
   width: 260rpx;
   height: 260rpx;
   margin-top: 30rpx;
   border-radius: 10rpx;
 }
 
-.assist-info-other-panel > .theme-button {
+.assist-info-other-panel>.theme-button {
   width: 350rpx;
   height: 70rpx;
   line-height: 70rpx;
@@ -55,37 +55,37 @@
   padding: 20rpx;
 }
 
-.assist-info-self-panel > .people > .head-img {
+.assist-info-self-panel>.people>.head-img {
   width: 80rpx;
   height: 80rpx;
   border-radius: 50%;
   margin-right: 20rpx;
 }
 
-.assist-info-self-panel > .people > view {
+.assist-info-self-panel>.people>view {
   width: calc(100% - 80rpx);
 }
 
-.assist-info-self-panel > .people > view > .name {
+.assist-info-self-panel>.people>view>.name {
   margin-top: 15rpx;
 }
 
-.assist-info-self-panel > .people > view > .msg:nth-child(2) {
+.assist-info-self-panel>.people>view>.msg:nth-child(2) {
   margin-top: 20rpx;
 }
 
-.assist-info-self-panel > .people > view > .msg:nth-child(3) {
+.assist-info-self-panel>.people>view>.msg:nth-child(3) {
   margin-left: 24rpx;
 }
 
-.assist-info-self-panel > .img {
+.assist-info-self-panel>.img {
   width: 260rpx;
   height: 260rpx;
   margin-top: 30rpx;
   border-radius: 10rpx;
 }
 
-.assist-info-self-panel > .theme-button {
+.assist-info-self-panel>.theme-button {
   width: 350rpx;
   height: 70rpx;
   line-height: 70rpx;
@@ -94,13 +94,13 @@
   font-size: 30rpx;
 }
 
-.assist-info-self-panel > .font_333333_24 {
+.assist-info-self-panel>.font_333333_24 {
   height: 30rpx;
   line-height: 30rpx;
   margin-top: 25rpx;
 }
 
-.assist-info-self-panel > .font_333333_24 > .theme-font5 {
+.assist-info-self-panel>.font_333333_24>.theme-font5 {
   font-size: 32rpx;
 }
 
@@ -111,23 +111,23 @@
   margin-top: 20rpx;
 }
 
-.assist-people-panel > .title-bar {
+.assist-people-panel>.title-bar {
   height: 24rpx;
   padding: 5rpx 20rpx 0 20rpx;
 }
 
-.assist-people-panel > .list {
+.assist-people-panel>.list {
   height: 110rpx;
   padding: 0 20rpx;
 }
 
-.assist-people-panel > .list > .people {
+.assist-people-panel>.list>.people {
   width: 90rpx;
   height: 90rpx;
   margin-right: 20rpx;
 }
 
-.assist-people-panel > .list > .people > .head-img {
+.assist-people-panel>.list>.people>.head-img {
   width: 100%;
   height: 100%;
   border-radius: 50%;
@@ -140,13 +140,13 @@
   margin-top: 10rpx;
 }
 
-.recommend-panel > .title-bar {
+.recommend-panel>.title-bar {
   padding: 0 20rpx;
   font-size: 26rpx;
 }
 
-.recommend-panel > .title-bar > .title {
-  width: 100rpx;
+.recommend-panel>.title-bar>.title {
+  width: 110rpx;
   display: block;
   text-align: center;
   font-size: 26rpx;
@@ -154,23 +154,23 @@
   border-bottom: 6rpx solid #333;
 }
 
-.recommend-panel > .list > .row {
+.recommend-panel>.list>.row {
   height: 160rpx;
   padding: 20rpx 0 15rpx 0;
   margin: 0 25rpx;
 }
 
-.recommend-panel > .list > .row.line {
+.recommend-panel>.list>.row.line {
   border-bottom: 1rpx solid #fff;
 }
 
-.recommend-panel > .list > .row > .img {
+.recommend-panel>.list>.row>.img {
   width: 160rpx;
   height: 160rpx;
   border-radius: 5rpx;
 }
 
-.recommend-panel > .list > .row > .info {
+.recommend-panel>.list>.row>.info {
   width: calc(100% - 290rpx);
   height: 150rpx;
   padding-left: 30rpx;
@@ -178,25 +178,25 @@
   border-radius: 5rpx;
 }
 
-.recommend-panel > .list > .row > .info > .rank {
+.recommend-panel>.list>.row>.info>.rank {
   height: 30rpx;
   font-size: 30rpx;
   font-style: italic;
 }
 
-.recommend-panel > .list > .row > .info > .people {
+.recommend-panel>.list>.row>.info>.people {
   height: 30rpx;
   margin-top: 20rpx;
   font-size: 26rpx;
 }
 
-.recommend-panel > .list > .row > .info > .msg {
+.recommend-panel>.list>.row>.info>.msg {
   height: 25rpx;
   margin-top: 55rpx;
   font-size: 22rpx;
 }
 
-.recommend-panel > .list > .row > .btn {
+.recommend-panel>.list>.row>.btn {
   width: 100rpx;
   height: 40rpx;
   line-height: 40rpx;
