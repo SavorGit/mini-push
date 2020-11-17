@@ -96,6 +96,26 @@
 
 .eye-catching {
   position: relative;
+  border-width: 0rpx;
+  border-style: solid;
+  /* animation: warn1 2s infinite linear; */
+}
+
+@keyframes warn2 {
+
+  0%,
+  100% {
+    transform: scale(1);
+  }
+
+  25%,
+  75% {
+    transform: scale(0.8);
+  }
+
+  50% {
+    transform: scale(1.2);
+  }
 }
 
 .eye-catching:after {
@@ -104,10 +124,32 @@
   position: absolute;
   width: 120rpx;
   height: 120rpx;
-  border: 10rpx solid #FFFFFF;
-  background-color: #FFFFFF;
-  border-radius: 10rpx;
+  border: 0;
+  background-color: #5030F5;
+  border-radius: 60rpx;
   animation: warn 1.5s infinite linear;
+}
+
+@keyframes warn1 {
+  0% {
+    border-color: #000000;
+  }
+
+  25% {
+    border-color: #00FF00;
+  }
+
+  50% {
+    border-color: #FF0000;
+  }
+
+  75% {
+    border-color: #0000FF;
+  }
+
+  100% {
+    border-color: yellow;
+  }
 }
 
 
