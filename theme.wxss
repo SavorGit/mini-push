@@ -303,6 +303,11 @@ button[disabled] {
   color: #333333;
 }
 
+.font_333333_38 {
+  font-size: 38rpx;
+  color: #333333;
+}
+
 .font_666666_20 {
   font-size: 20rpx;
   color: #666666;
@@ -435,6 +440,11 @@ button[disabled] {
 
 .font_25635f_24 {
   font-size: 24rpx;
+  color: #25635f;
+}
+
+.font_25635f_26 {
+  font-size: 26rpx;
   color: #25635f;
 }
 
