@@ -542,6 +542,7 @@ Page({
                 } else if(res.errCode == 12007){//用户拒绝授权链接 Wi-Fi
                   if(cTs==1){
                     that.classicForVideo(data)
+                    return false;
                   }
                 }else if(res.errCode== 12010){
                   err_msg = '请确认并打开wifi';
