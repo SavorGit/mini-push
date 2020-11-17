@@ -139,6 +139,38 @@ Page({
 
         var filePath = res.tempFilePath
         var video_size = res.size;
+        //console.log(video_size)
+        //console.log(max_video_size)
+        //console.log(app.globalData.sys_info.platform);
+        if(video_size>max_video_size && app.globalData.sys_info.platform=='ios'){
+          /*wx.navigateBack({
+            delta: 1,
+          })
+          app.showToast('亲,请选择小于'+app.changeKb(max_video_size)+'的视频文件')*/
+          that.setData({showModal_2:true,vide_size_str:app.changeKb(video_size)})
+          
+        }else {
+          that.setData({
+            showVedio: true,
+            //is_btn_disabel: false,
+            is_classic_disabel:false,
+            is_speed_disabel:false,
+            upload_vedio_temp: res.tempFilePath,
+            duration: res.duration,
+            size: video_size,
+            vide_size_str:app.changeKb(video_size)
+          });
+          lead(openid);
+          mta.Event.stat('LaunchVideoWithNet_Launch_ChooseVideo', {
+            'status': 'success'
+          });
+        }
+
+
+
+
+        /*var filePath = res.tempFilePath
+        var video_size = res.size;
         var duration  = res.duration;
         var saveFileName = (new Date()).valueOf()+'mp4';
         fm.saveFile({
@@ -167,6 +199,8 @@ Page({
                 'status': 'success'
               });
             }
+            //console.log(res)
+        
 
 
 
@@ -174,8 +208,11 @@ Page({
             //console.log(res);
           },fail:function(res){
             console.log(res)
+            wx.navigateBack({
+              delta: 1,
+            })
           }
-        })
+        })*/
 
         
         
@@ -472,7 +509,7 @@ Page({
   },
   speedForVideo:function(res,hotel_info,cTs=0){
     var that = this;
-    that.linkHotelWifi(res,hotel_info,cts)
+    that.linkHotelWifi(res,hotel_info,cTs)
 
 
   },
@@ -502,9 +539,11 @@ Page({
       })
       wx.startWifi({
         success: function (res) {
+          console.log('wifi_start_sucess')
           wx.getConnectedWifi({
             
             success: function (res) {
+              console.log(res);
               //console.log('getConnectedWifi_success');
               //第一步链接wifi
               if (res.errMsg == 'getConnectedWifi:ok') {
@@ -519,16 +558,16 @@ Page({
                   }
                   app.globalData.change_link_type = 2;
                 } else {//链接的不是本包间wifi
-                  that.connectWifi(wifi_name, wifi_mac, use_wifi_password, box_mac,hotel_info,data);
+                  that.connectWifi(wifi_name, wifi_mac, use_wifi_password, box_mac,hotel_info,data,cTs);
                 }
               } else {
                 //当前打开wifi 但是没有链接任何wifi
-                that.connectWifi(wifi_name, wifi_mac, use_wifi_password, box_mac,hotel_info,data);
+                that.connectWifi(wifi_name, wifi_mac, use_wifi_password, box_mac,hotel_info,data,cTs);
               }
               //wx.hideLoading()
             }, fail: function (res) {
               //console.log('getConnectedWifi_fail');
-              //console.log(res)
+              console.log(res)
               var err_msg = 'wifi链接失败';
               if(res.errMsg == 'getConnectedWifi:fail:currentWifi is null' || res.errMsg=='getConnectedWifi:fail no wifi is connected.'){
                 that.connectWifi(wifi_name, wifi_mac, use_wifi_password, box_mac,hotel_info,data);
@@ -540,6 +579,7 @@ Page({
                   err_msg = '请打开您的手机GPS';
                   
                 } else if(res.errCode == 12007){//用户拒绝授权链接 Wi-Fi
+
                   if(cTs==1){
                     that.classicForVideo(data)
                     return false;
@@ -556,16 +596,20 @@ Page({
                   var msg = '请手动连接包间wifi:' + hotel_info.wifi_name + ',密码为' + us_wifi_password+'。连上wifi投屏更快哦！';
                   
                 }
-                openWind.tip = err_msg;
-                openWind.isError = true;
-                that.setData({
-                  openWind:openWind
-                })
+                if(cTs!=1){
+                  openWind.tip = err_msg;
+                  openWind.isError = true;
+                  that.setData({
+                    openWind:openWind
+                  })
+                }
+                
               }
               
             },
           })
         }, fail: function (res) {
+          console.log('++++++++++++++++++++++++')
           //console.log('startwifierr')
           openWind.tip = res.errMsg;
           openWind.isError = true;
@@ -580,7 +624,7 @@ Page({
     }
 
   },
-  connectWifi:function(wifi_name, wifi_mac, use_wifi_password, box_mac,hotel_info,data){
+  connectWifi:function(wifi_name, wifi_mac, use_wifi_password, box_mac,hotel_info,data,cTs=0){
     var that = this;
     //console.log('connectWifi');
     var video_size = that.data.size;
@@ -623,7 +667,13 @@ Page({
             err_msg = '请打开您的手机GPS';
             
           } else if(res.errCode == 12007){//用户拒绝授权链接 Wi-Fi
-            
+            console.log('12007');
+            console.log(cTs);
+            if(cTs==1){
+              that.setData({openWind:{'isWifi':false,'isError':false,'title':'','step':1,'progress':0,'tip':''}})
+              that.classicForVideo(data)
+              return false;
+            }
           }else if(res.errCode==12010){
             err_msg = '请确认并打开wifi';
             
@@ -636,6 +686,7 @@ Page({
             var msg = '请手动连接包间wifi:' + wifi_name + ',密码为' + wifi_password_str+'。连上wifi投屏更快哦！';
             
           }
+          console.log('go on');
           openWind.tip = err_msg;
           openWind.isError = true;
           that.setData({
@@ -1066,6 +1117,8 @@ Page({
       launchType:launchType,
     })
     if(launchType=='classic'){//经典投屏
+      console.log(res.detail.value)
+      console.log(max_user_forvideo_size);
       if(res.detail.value.size>=max_user_forvideo_size){
         that.setData({launchType:'speed'})
         that.speedForVideo(res.detail.value,hotel_info,1)
@@ -1135,7 +1188,7 @@ Page({
       compressed:compressed,
       success: function(res) {
 
-        var filePath = res.tempFilePath
+        /*var filePath = res.tempFilePath
         var video_size = res.size;
         var duration  = res.duration;
         var saveFileName = (new Date()).valueOf()+'mp4';
@@ -1165,8 +1218,31 @@ Page({
             //console.log(res);
           },fail:function(res){
             console.log(res)
+            wx.navigateBack({
+              delta: 1,
+            })
           }
         })
+        mta.Event.stat('LaunchVideoWithNet_Launch_ChooseVideo', {
+          'status': 'success'
+        });*/
+        var filePath = res.tempFilePath
+        var video_size = res.size
+        if(video_size>max_video_size && app.globalData.sys_info.platform=='ios'){
+          that.setData({showModal_2:true,vide_size_str:app.changeKb(video_size)})
+          
+        }else {
+          that.setData({
+            showVedio: true,
+            //is_btn_disabel: false,
+            is_classic_disabel:false,
+            is_speed_disabel:false,
+            upload_vedio_temp: res.tempFilePath,
+            duration: res.duration,
+            size: video_size,
+            vide_size_str:app.changeKb(video_size)
+          })
+        }
         mta.Event.stat('LaunchVideoWithNet_Launch_ChooseVideo', {
           'status': 'success'
         });
@@ -1575,7 +1651,7 @@ Page({
   },
   removeSavedFile:function(e){
     console.log(this.data.upload_vedio_temp)
-    fm.unlink({
+    /*fm.unlink({
       filePath:this.data.upload_vedio_temp,
       success:function(res){
         console.log(res);
@@ -1584,7 +1660,18 @@ Page({
         console.log(res)
         console.log('删除失败');
       }
-    })
+    })*/
+    if(app.globalData.sys_info.platform=='android'){
+      fm.unlink({
+        filePath:this.data.upload_vedio_temp,
+        success:function(e){
+          console.log('删除成功');
+        },fail:function(e){
+          console.log(e)
+          console.log('删除失败');
+        }
+      })
+    }
 
     
   },
