@@ -397,7 +397,7 @@
 }
 
 .waiter-evaluate-window>.document .body .panel.evaluate>.score>.label {
-  width: 150rpx;
+  width: 160rpx;
   font-size: 38rpx;
   font-weight: bold;
 }
