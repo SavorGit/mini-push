@@ -33,7 +33,7 @@
 }
 
 .panel>.title-bar>.title {
-  font-size: 28rpx;
+  font-size: 30rpx;
 }
 
 .panel>.panel-body {
@@ -46,11 +46,11 @@
 }
 
 .panel>.panel-body>.row.text {
-  font-size: 28rpx;
+  font-size: 30rpx;
 }
 
 .panel>.panel-body>.row.pic {
-  font-size: 28rpx;
+  font-size: 30rpx;
 }
 
 .panel>.panel-body>.row.pic>.pic {
@@ -82,7 +82,7 @@
 
 .panel.status>.panel-body>.status>.icon {
   padding: 10rpx 0;
-  font-size: 96rpx;
+  font-size: 98rpx;
 }
 
 .panel.status>.panel-body>.notice-btn {
@@ -97,7 +97,7 @@
 
 .panel.status>.panel-body>.status>.name {
   padding: 10rpx 0;
-  font-size: 28rpx;
+  font-size: 30rpx;
   font-weight: 700;
 }
 
@@ -106,6 +106,6 @@
 }
 
 .foot>.copyright {
-  font-size: 28rpx;
+  font-size: 30rpx;
   font-weight: 600;
 }

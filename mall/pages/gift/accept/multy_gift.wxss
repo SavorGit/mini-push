@@ -31,7 +31,7 @@
 }
 
 .panel>.title-bar>.title {
-  font-size: 28rpx;
+  font-size: 30rpx;
 }
 
 .panel>.title-bar>.btn {
@@ -39,7 +39,7 @@
   height: 52rpx;
   line-height: 52rpx;
   text-align: center;
-  font-size: 24rpx;
+  font-size: 26rpx;
   border-radius: 10rpx;
   border: 0;
   margin: 0;
@@ -61,19 +61,19 @@
   height: 80rpx;
   line-height: 80rpx;
   text-align: center;
-  font-size: 80rpx;
+  font-size: 82rpx;
   color: #F68855;
 }
 
 .status-panel>.status>.msg {
   padding: 10rpx 20rpx;
-  font-size: 28rpx;
+  font-size: 30rpx;
   color: #F68855;
 }
 
 .status-panel>.tip {
   padding: 10rpx 20rpx;
-  font-size: 28rpx;
+  font-size: 30rpx;
 }
 
 .mine-address {
@@ -98,12 +98,12 @@
   height: 60rpx;
   line-height: 60rpx;
   text-align: center;
-  font-size: 32rpx;
+  font-size: 34rpx;
 }
 
 .mine-address>.body>.row>.left>.value {
   width: calc(100% - 70rpx);
-  font-size: 28rpx;
+  font-size: 30rpx;
 }
 
 .mine-address>.body>.row>.left>.choosed {
@@ -116,18 +116,18 @@
 
 .mine-address>.body>.row>.left>.choosed>.consignee>.name {
   max-width: calc(50% - 10rpx);
-  font-size: 28rpx;
+  font-size: 30rpx;
 }
 
 .mine-address>.body>.row>.left>.choosed>.consignee>.phone {
   max-width: calc(50% - 10rpx);
   margin-left: 20rpx;
-  font-size: 28rpx;
+  font-size: 30rpx;
 }
 
 .mine-address>.body>.row>.left>.choosed>.address {
   width: 100%;
-  font-size: 28rpx;
+  font-size: 30rpx;
 }
 
 .mine-address>.body>.row>.right {
@@ -139,7 +139,7 @@
   height: 60rpx;
   line-height: 60rpx;
   text-align: center;
-  font-size: 32rpx;
+  font-size: 34rpx;
   border: 0;
   margin: 0;
   padding: 0;
@@ -162,7 +162,7 @@
 }
 
 .gift-panel>.body>.goods-info>.hotel {
-  font-size: 24rpx;
+  font-size: 26rpx;
 }
 
 .gift-panel>.body>.goods-info>.row {
@@ -183,7 +183,7 @@
 }
 
 .gift-panel>.body>.goods-info>.row>.center>.name {
-  font-size: 24rpx;
+  font-size: 26rpx;
 }
 
 .gift-panel>.body>.goods-info>.row>.center>.bottom {
@@ -191,7 +191,7 @@
 }
 
 .gift-panel>.body>.goods-info>.row>.center>.bottom>.specs {
-  font-size: 24rpx;
+  font-size: 26rpx;
 }
 
 .gift-panel>.body>.goods-info>.row>.right {
@@ -202,7 +202,7 @@
 .gift-panel>.body>.goods-info>.row>.right>.price {
   width: 100%;
   text-align: right;
-  font-size: 28rpx;
+  font-size: 30rpx;
 }
 
 .gift-panel>.body>.message-block {
@@ -216,13 +216,13 @@
 }
 
 .gift-panel>.body>.message-block .title-bar>.title {
-  font-size: 28rpx;
+  font-size: 30rpx;
 }
 
 .gift-panel>.body>.message-block .title-bar>.btn {
   width: 30rpx;
   height: 30rpx;
-  font-size: 30rpx;
+  font-size: 32rpx;
   color: #FBBBBB;
   border-bottom: 4rpx solid #FBBBBB;
   margin: 0;
@@ -241,12 +241,12 @@
 .gift-panel>.body>.message-block .content>.input {
   min-height: 40rpx;
   max-height: 80rpx;
-  font-size: 30rpx;
+  font-size: 32rpx;
   border: 3rpx solid #EDEDED;
 }
 
 .gift-panel>.body>.message-block .content>.view {
-  font-size: 32rpx;
+  font-size: 34rpx;
   font-weight: bold;
 }
 
@@ -264,9 +264,9 @@
 
 .gift-panel>.body>.sender>.isp>.name {
   margin-left: 15rpx;
-  font-size: 24rpx;
+  font-size: 26rpx;
 }
 
 .gift-panel>.body>.sender>.nikename {
-  font-size: 28rpx;
+  font-size: 30rpx;
 }

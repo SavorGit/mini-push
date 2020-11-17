@@ -4,7 +4,7 @@
 <template is="navigationBarForTopLevel" data='{{statusBarHeight: statusBarHeight,titleText:"合作餐厅"}}' />
 <view class="container flex-column-center-flex_start theme-container" style='height: calc(100vh - 46px - {{statusBarHeight}}px);'>
 	<view class='page_top'>
-		<view class='v-structure flex-row-center-space_between theme-panel-2 font_666666_28'>
+		<view class='v-structure flex-row-center-space_between theme-panel-2 font_666666_30'>
 			<picker bindchange="bindCityPickerChange" value="{{cityIndex}}" range="{{cityArray}}">
 				<view class='city_show'>
 					<label class="fa fa-map-o icon"></label>

@@ -39,7 +39,7 @@
 
 .PageMain .package>.body>view>.RowLabel {
   width: 150rpx;
-  font-size: 30rpx;
+  font-size: 32rpx;
   font-weight: 600;
 }
 
@@ -57,7 +57,7 @@
 .PageMain .package>.body>view input.input,
 .PageMain .package>.body>view radio-group,
 .PageMain .package>.body>view picker.picker {
-  font-size: 28rpx;
+  font-size: 30rpx;
   height: 50rpx;
   min-height: 50rpx;
   line-height: 50rpx;
@@ -82,7 +82,7 @@
 .PageMain .package>.body>view radio-group radio {
   margin-left: 20rpx;
   margin-right: 20rpx;
-  font-size: 28rpx;
+  font-size: 30rpx;
 }
 
 .PageMain .package>.body>view radio-group radio .wx-radio-input {

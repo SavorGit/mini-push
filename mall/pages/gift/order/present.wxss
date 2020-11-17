@@ -9,7 +9,7 @@ picker,
 textarea {
   width: 454rpx;
   border: 3rpx solid #bebebe;
-  font-size: 24rpx;
+  font-size: 26rpx;
 }
 
 input,
@@ -45,7 +45,7 @@ textarea {
   height: 70rpx;
   line-height: 80rpx;
   padding: 0 30rpx;
-  font-size: 28rpx;
+  font-size: 30rpx;
 }
 
 .input-panel>.body {
@@ -60,39 +60,39 @@ textarea {
 
 .input-panel>.body>view>.label {
   width: 120rpx;
-  font-size: 28rpx;
+  font-size: 30rpx;
 }
 
 .input-panel>.body>view>.icon {
-  font-size: 34rpx;
+  font-size: 36rpx;
   margin-right: 10rpx;
 }
 
 .input-panel>.body>view>.btn>.choosed {
-  font-size: 28rpx;
+  font-size: 30rpx;
 }
 
 .input-panel>.body>view>.btn>.fa {
   width: 60rpx;
   text-align: right;
-  font-size: 32rpx;
+  font-size: 34rpx;
 }
 
 .input-panel>.body>.row>.left>.icon {
-  font-size: 36rpx;
+  font-size: 38rpx;
   margin-right: 10rpx;
 }
 
 .input-panel>.body>.row>.left>.label>.title {
-  font-size: 28rpx;
+  font-size: 30rpx;
 }
 
 .input-panel>.body>.row>.left>.label>.desc {
-  font-size: 24rpx;
+  font-size: 26rpx;
 }
 
 .input-panel>.body>.row>.right {
-  font-size: 28rpx;
+  font-size: 30rpx;
 }
 
 .goods-info {
@@ -115,7 +115,7 @@ textarea {
   width: 100%;
   height: 50rpx;
   line-height: 50rpx;
-  font-size: 24rpx;
+  font-size: 26rpx;
 }
 
 .goods-info>.body>.row {
@@ -132,7 +132,7 @@ textarea {
 .goods-info>.body>.row>.center {
   width: calc(100% - 320rpx);
   height: 160rpx;
-  font-size: 32rpx;
+  font-size: 34rpx;
   padding: 0 15rpx;
 }
 
@@ -149,7 +149,7 @@ textarea {
   height: 30rpx;
   line-height: 30rpx;
   padding: 5rpx 15rpx;
-  font-size: 20rpx;
+  font-size: 22rpx;
   border-radius: 20rpx;
 }
 
@@ -158,12 +158,12 @@ textarea {
 }
 
 .goods-info>.body>.row>.right>.count {
-  font-size: 32rpx;
+  font-size: 34rpx;
 }
 
 .goods-info>.body>.row>.right>.count-chooser {
   width: 144rpx;
-  font-size: 32rpx;
+  font-size: 34rpx;
 }
 
 .goods-info>.body>.row>.right>.count-chooser>view {
@@ -171,7 +171,7 @@ textarea {
   height: 42rpx;
   line-height: 42rpx;
   text-align: center;
-  font-size: 46rpx;
+  font-size: 48rpx;
   color: #f0c02b;
 }
 
@@ -186,12 +186,12 @@ textarea {
 .goods-info>.foot {
   height: 60rpx;
   line-height: 60rpx;
-  font-size: 24rpx;
+  font-size: 26rpx;
   border-top: 1px solid #ededed;
 }
 
 .goods-info>.foot>.label {
-  font-size: 28rpx;
+  font-size: 30rpx;
 }
 
 .goods-info>.foot>.count-warper {
@@ -204,7 +204,7 @@ textarea {
   height: 50rpx;
   line-height: 50rpx;
   text-align: center;
-  font-size: 24rpx;
+  font-size: 26rpx;
   background-color: #DEDEDE;
 }
 
@@ -228,18 +228,18 @@ textarea {
 }
 
 /* .goods-info>.foot>view:last-child {
-  font-size: 32rpx;
+  font-size: 34rpx;
   font-weight: bold;
 } */
 
 .delivery>.head>.fee {
-  font-size: 32rpx;
+  font-size: 34rpx;
   font-weight: bold;
 }
 
 .delivery>.body>.row>view {
   width: 100rpx;
-  font-size: 28rpx;
+  font-size: 30rpx;
 }
 
 .delivery>.body>.row>.label {
@@ -266,7 +266,7 @@ textarea {
 
 .misc>.body>view>.btn>.fa {
   width: 40rpx;
-  font-size: 28rpx;
+  font-size: 30rpx;
 }
 
 .misc>.body>view>.value>.input {
@@ -294,7 +294,7 @@ textarea {
   height: 70rpx;
   line-height: 70rpx;
   padding-left: 60rpx;
-  font-size: 32rpx;
+  font-size: 34rpx;
   border-radius: 34rpx 0 0 34rpx;
   box-shadow: 2px 2px 8px #DEDEDE;
 }
@@ -304,7 +304,7 @@ textarea {
   height: 70rpx;
   line-height: 70rpx;
   text-align: center;
-  font-size: 32rpx;
+  font-size: 34rpx;
   border-radius: 0 34rpx 34rpx 0;
   margin: 0;
   padding: 0;

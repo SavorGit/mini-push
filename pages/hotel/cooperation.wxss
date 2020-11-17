@@ -14,7 +14,7 @@
 .page_top>view .city_show>.icon {
   width: 38rpx;
   height: 30rpx;
-  font-size: 30rpx;
+  font-size: 32rpx;
   vertical-align: middle;
 }
 
@@ -43,7 +43,7 @@
 .page_top>view>.fa {
   width: 30rpx;
   height: 30rpx;
-  font-size: 28rpx;
+  font-size: 30rpx;
 }
 
 /* =========================== 页面主体 =========================== */
@@ -87,7 +87,7 @@
   line-height: 50rpx;
   margin-top: -48rpx;
   text-align: center;
-  font-size: 30rpx;
+  font-size: 32rpx;
   border-radius: 0 0 5rpx 5rpx;
   z-index: 15;
 }
@@ -117,12 +117,12 @@
 .page_main>.row-item>.row-top>.i-right>.ir-top>.irt-left>.hotel-name {
   display: block;
   width: 100%;
-  font-size: 32rpx;
+  font-size: 34rpx;
 }
 
 .page_main>.row-item>.row-top>.i-right>.ir-top>.irt-left>.irtl-bottom {
   margin: 25rpx 0 25rpx 0;
-  font-size: 24rpx;
+  font-size: 26rpx;
 }
 
 .page_main>.row-item>.row-top>.i-right>.ir-top>.irt-left>.irtl-bottom>label {
@@ -142,7 +142,7 @@
   width: 60rpx;
   height: 60rpx;
   line-height: 60rpx;
-  font-size: 60rpx;
+  font-size: 62rpx;
   border-radius: 25rpx;
   border: 0;
   padding: 0;
@@ -160,12 +160,12 @@
   height: 34rpx;
   line-height: 34rpx;
   padding-top: 5rpx;
-  font-size: 24rpx;
+  font-size: 26rpx;
   text-align: right;
 }
 
 .page_main>.row-item>.row-top>.i-right>.address {
-  font-size: 28rpx;
+  font-size: 30rpx;
 }
 
 .page_main>.row-item>.row-top>.i-right>.address>.icon {

@@ -26,7 +26,7 @@
   height: 70rpx;
   padding: 0 30rpx;
   line-height: 80rpx;
-  font-size: 32rpx;
+  font-size: 34rpx;
 }
 
 .input-panel>.body>.tab-bar {
@@ -38,7 +38,7 @@
   height: 50rpx;
   line-height: 50rpx;
   padding: 0 10rpx;
-  font-size: 28rpx;
+  font-size: 30rpx;
 }
 
 .input-panel>.body>.tab-bar>.tab.selected {
@@ -62,23 +62,23 @@
 .input-panel>.body>.row>.lable,
 .input-panel>.body>.tab-body>.row>.lable {
   width: 150rpx;
-  font-size: 28rpx;
+  font-size: 30rpx;
 }
 
 .input-panel>.body>.row>.view,
 .input-panel>.body>.tab-body>.row>.view {
   width: calc(100% - 150rpx);
-  font-size: 28rpx;
+  font-size: 30rpx;
 }
 
 .input-panel>.body>.row>.view>.tip,
 .input-panel>.body>.tab-body>.row>.view>.tip {
-  font-size: 28rpx;
+  font-size: 30rpx;
 }
 
 .input-panel>.body>.row>.view>.btn,
 .input-panel>.body>.tab-body>.row>.view>.btn {
-  font-size: 32rpx;
+  font-size: 34rpx;
   margin: 0;
   padding: 0;
   border: 0;
@@ -93,12 +93,12 @@
 }
 
 .status-panel>.head>.status {
-  font-size: 32rpx;
+  font-size: 34rpx;
 }
 
 .status-panel>.head>.distance {
   width: 300rpx;
-  font-size: 24rpx;
+  font-size: 26rpx;
 }
 
 .status-panel>.head>.distance>.content {
@@ -110,7 +110,7 @@
   height: 60rpx;
   line-height: 60rpx;
   text-align: center;
-  font-size: 36rpx;
+  font-size: 38rpx;
   margin: 0;
   padding: 0;
   border: 0;
@@ -131,7 +131,7 @@
   height: 80rpx;
   line-height: 80rpx;
   text-align: center;
-  font-size: 32rpx;
+  font-size: 34rpx;
   border-radius: 0;
 }
 
@@ -140,7 +140,7 @@
   height: 80rpx;
   line-height: 80rpx;
   text-align: center;
-  font-size: 32rpx;
+  font-size: 34rpx;
   font-weight: bold;
 }
 
@@ -150,7 +150,7 @@
   line-height: 50rpx;
   text-align: center;
   border-radius: 5rpx;
-  font-size: 28rpx;
+  font-size: 30rpx;
   padding: 0;
   margin: 0;
   border: 0;
@@ -179,7 +179,7 @@
 
 .goods-info>.body>.hotel>.name {
   width: calc(100% - 100rpx);
-  font-size: 24rpx;
+  font-size: 26rpx;
 }
 
 .goods-info>.body>.row {
@@ -197,7 +197,7 @@
 .goods-info>.body>.row>.center {
   width: calc(100% - 320rpx);
   height: 170rpx;
-  font-size: 32rpx;
+  font-size: 34rpx;
   padding: 0 15rpx;
 }
 
@@ -221,7 +221,7 @@
   height: 30rpx;
   line-height: 30rpx;
   padding: 5rpx 15rpx;
-  font-size: 20rpx;
+  font-size: 22rpx;
   border-radius: 20rpx;
 }
 
@@ -229,7 +229,7 @@
   width: 100%;
   margin: 5rpx 0;
   padding: 0 10rpx;
-  font-size: 20rpx;
+  font-size: 22rpx;
   border-radius: 10rpx;
 }
 
@@ -252,20 +252,20 @@
 }
 
 .goods-info>.body>.row>.right>.price {
-  font-size: 28rpx;
+  font-size: 30rpx;
 }
 
 .goods-info>.body>.row>.right>.count {
-  font-size: 32rpx;
+  font-size: 34rpx;
 }
 
 .goods-info>.foot {
   height: 60rpx;
   line-height: 60rpx;
-  font-size: 24rpx;
+  font-size: 26rpx;
 }
 
 .goods-info>.foot>view:last-child {
-  font-size: 32rpx;
+  font-size: 34rpx;
   font-weight: bold;
 }

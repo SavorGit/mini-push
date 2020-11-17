@@ -65,7 +65,7 @@
   height: 100rpx;
   padding: 0 30rpx;
   border-top: 2rpx solid #ededed;
-  font-size: 28rpx;
+  font-size: 30rpx;
 }
 
 .promotion-goods-manage-panel>navigator {

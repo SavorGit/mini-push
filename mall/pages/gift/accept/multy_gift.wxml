@@ -101,7 +101,7 @@
 							<form bindsubmit="saveSendWord">
 								<view class="title-bar flex-row-center-space_between">
 									<view class="title theme-font2">寄语</view>
-									<button form-type="submit" class="btn theme-button-welcome" style="width:100rpx;height:40rpx;line-height:40rpx;text-align:center;border-radius:5rpx;font-size:24rpx;color:#FFFFFF;border:0;" aria-hidden="true">保存</button>
+									<button form-type="submit" class="btn theme-button-welcome" style="width:100rpx;height:40rpx;line-height:40rpx;text-align:center;border-radius:5rpx;font-size: 26rpx;color:#FFFFFF;border:0;" aria-hidden="true">保存</button>
 								</view>
 								<view class="content">
 									<textarea class="input" name="send_word" value="{{send_word}}"></textarea>

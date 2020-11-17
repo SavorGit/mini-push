@@ -50,7 +50,7 @@ image.pic_show_cur {
   opacity: 0.7;
   background-color: #000;
   color: #fff;
-  font-size: 50rpx;
+  font-size: 52rpx;
   border-radius: 10rpx;
 }
 
@@ -79,6 +79,6 @@ image.pic_show_cur {
   width: 680rpx;
   height: 90rpx;
   padding: 5rpx;
-  font-size: 28rpx;
+  font-size: 30rpx;
   text-align: left;
 }

@@ -26,7 +26,7 @@
 }
 
 .article > .title > label {
-  font-size: 30rpx;
+  font-size: 32rpx;
   color: #434343;
 }
 
@@ -76,7 +76,7 @@
   width: 400rpx;
   height: 80rpx;
   line-height: 80rpx;
-  font-size: 28rpx;
+  font-size: 30rpx;
 }
 
 .page_bottom {
@@ -87,6 +87,6 @@
 .page_bottom button {
   height: 100rpx;
   line-height: 100rpx;
-  font-size: 36rpx;
+  font-size: 38rpx;
   border-radius: 0rpx;
 }

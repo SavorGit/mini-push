@@ -44,7 +44,7 @@
   line-height: 70rpx;
   margin-top: 21rpx;
   border-radius: 35rpx;
-  font-size: 28rpx;
+  font-size: 30rpx;
 }
 
 /* ==================================== 内容信息面板 [自己] ==================================== */
@@ -91,7 +91,7 @@
   line-height: 70rpx;
   margin-top: 21rpx;
   border-radius: 35rpx;
-  font-size: 28rpx;
+  font-size: 30rpx;
 }
 
 .assist-info-self-panel > .font_333333_24 {
@@ -101,7 +101,7 @@
 }
 
 .assist-info-self-panel > .font_333333_24 > .theme-font5 {
-  font-size: 30rpx;
+  font-size: 32rpx;
 }
 
 /* ==================================== 助力人员面板 ==================================== */
@@ -142,14 +142,14 @@
 
 .recommend-panel > .title-bar {
   padding: 0 20rpx;
-  font-size: 24rpx;
+  font-size: 26rpx;
 }
 
 .recommend-panel > .title-bar > .title {
   width: 100rpx;
   display: block;
   text-align: center;
-  font-size: 24rpx;
+  font-size: 26rpx;
   padding-bottom: 2rpx;
   border-bottom: 6rpx solid #333;
 }
@@ -180,26 +180,26 @@
 
 .recommend-panel > .list > .row > .info > .rank {
   height: 30rpx;
-  font-size: 28rpx;
+  font-size: 30rpx;
   font-style: italic;
 }
 
 .recommend-panel > .list > .row > .info > .people {
   height: 30rpx;
   margin-top: 20rpx;
-  font-size: 24rpx;
+  font-size: 26rpx;
 }
 
 .recommend-panel > .list > .row > .info > .msg {
   height: 25rpx;
   margin-top: 55rpx;
-  font-size: 20rpx;
+  font-size: 22rpx;
 }
 
 .recommend-panel > .list > .row > .btn {
   width: 100rpx;
   height: 40rpx;
   line-height: 40rpx;
-  font-size: 20rpx;
+  font-size: 22rpx;
   border-radius: 5rpx;
 }

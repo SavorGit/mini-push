@@ -6,8 +6,8 @@
   <block wx:for="{{assist_friend_list}}" wx:key="{{key}}" wx:index="{{index}}" wx:for-item="bean">
     <view class="row flex-row-center-flex_start {{index+1==assist_friend_list.length ? '':'line'}}">
       <image class="head-img" src="{{bean.avatarUrl}}"></image>
-      <view class="name font_333333_24">{{bean.nickName}}</view>
-      <view class="date-time font_666666_20">{{bean.add_time}}</view>
+      <view class="name font_333333_26">{{bean.nickName}}</view>
+      <view class="date-time font_666666_22">{{bean.add_time}}</view>
     </view>
   </block>
 </scroll-view>

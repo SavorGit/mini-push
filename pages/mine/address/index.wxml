@@ -44,18 +44,18 @@
 <!-- 收货地址列表 - 无数据 -->
 <view wx:else style='height: calc(100vh - 46px - {{statusBarHeight}}px);' class='container theme-container'>
 	<view class="full_width full_height flex-column-center-center">
-		<view class="theme-rad-panel flex-column-center-center" style="width:150rpx;height:150rpx;margin-bottom:50rpx;border-radius:50%;font-size:50rpx;">
+		<view class="theme-rad-panel flex-column-center-center" style="width:150rpx;height:150rpx;margin-bottom:50rpx;border-radius:50%;font-size: 52rpx;">
 			<view class="fa fa-close fa-lg"></view>
 		</view>
-		<view style="font-size:32rpx;font-weight:bold;">暂未设置</view>
-		<view class="theme-font2" style="height:80rpx;line-height:80rpx;font-size:28rpx;">没有收货地址寄不了快递哦~</view>
-		<view class="theme-font5" style="width:150rpx;height:50rpx;line-height:50rpx;text-align:center;font-size:32rpx;border-radius: 5rpx;border:3rpx solid #eb6877;" bindtap="gotoAddAdress" >新增地址</view>
+		<view style="font-size: 34rpx;font-weight:bold;">暂未设置</view>
+		<view class="theme-font2" style="height:80rpx;line-height:80rpx;font-size: 30rpx;">没有收货地址寄不了快递哦~</view>
+		<view class="theme-font5" style="width:150rpx;height:50rpx;line-height:50rpx;text-align:center;font-size: 34rpx;border-radius: 5rpx;border:3rpx solid #eb6877;" bindtap="gotoAddAdress" >新增地址</view>
 	</view>
 </view>
 
 <!-- 删除确认 -->
 <modal show="{{showDeleteConfirmPopWindow}}" width="450rpx" height='300rpx' background-color='unset' border-radius="10rpx" title-text='删除确认' title-color="#333333" title-background-color="#FFFFFF" title-border-radius="10rpx 10rpx 0 0" confirm-text='确定' confirm-color="#FFFFFF" confirm-background-color="#1cbeb6" confirm-border-radius="0 0 10rpx 0" cancel-text='取消' cancel-color='#FFFFFF' cancel-background-color="#BEBEBE" cancel-border-radius="0 0 0 10rpx" bindcancel="modalCancel" bindconfirm='modalConfirm'>
-	<view class="theme-panel" style="width:calc(100% - 100rpx);height:100%;padding:0 50rpx;font-size:28rpx;">确定要删除该收货地址吗？</view>
+	<view class="theme-panel" style="width:calc(100% - 100rpx);height:100%;padding:0 50rpx;font-size: 30rpx;">确定要删除该收货地址吗？</view>
 </modal>
 
 <!-- 微信授权登录 -->

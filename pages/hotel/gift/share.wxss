@@ -22,7 +22,7 @@
 }
 
 .main-panel>.goods-info>.hotel {
-  font-size: 24rpx;
+  font-size: 26rpx;
 }
 
 .main-panel>.goods-info>.row {
@@ -43,7 +43,7 @@
 }
 
 .main-panel>.goods-info>.row>.center>.name {
-  font-size: 24rpx;
+  font-size: 26rpx;
 }
 
 .main-panel>.goods-info>.row>.center>.bottom {
@@ -51,7 +51,7 @@
 }
 
 .main-panel>.goods-info>.row>.center>.bottom>.specs {
-  font-size: 24rpx;
+  font-size: 26rpx;
 }
 
 .main-panel>.goods-info>.row>.right {
@@ -62,7 +62,7 @@
 .main-panel>.goods-info>.row>.right>.price {
   width: 100%;
   text-align: right;
-  font-size: 28rpx;
+  font-size: 30rpx;
 }
 
 .main-panel>.message-block {
@@ -76,14 +76,14 @@
 }
 
 .main-panel>.message-block .title-bar>.title {
-  font-size: 28rpx;
+  font-size: 30rpx;
   color: #EDB0B0;
 }
 
 .main-panel>.message-block .title-bar>.btn {
   width: 30rpx;
   height: 30rpx;
-  font-size: 30rpx;
+  font-size: 32rpx;
   color: #FBBBBB;
   border-bottom: 4rpx solid #FBBBBB;
 }
@@ -100,13 +100,13 @@
 .main-panel>.message-block .content>.input {
   min-height: 40rpx;
   max-height: 80rpx;
-  font-size: 30rpx;
+  font-size: 32rpx;
   border: 3rpx solid #EDEDED;
 }
 
 .main-panel>.message-block .content>.view {
   color: #FAF3E6;
-  font-size: 32rpx;
+  font-size: 34rpx;
   font-weight: bold;
 }
 
@@ -124,12 +124,12 @@
 
 .main-panel>.sender>.isp>.name {
   margin-left: 15rpx;
-  font-size: 24rpx;
+  font-size: 26rpx;
   color: #F8A9AA;
 }
 
 .main-panel>.sender>.nikename {
-  font-size: 28rpx;
+  font-size: 30rpx;
 }
 
 .count-panel {
@@ -148,7 +148,7 @@
   height: 34rpx;
   line-height: 34rpx;
   text-align: center;
-  font-size: 28rpx;
+  font-size: 30rpx;
   border-radius: 50rpx;
   border: 3rpx solid #F44444;
   color: #F44444;
@@ -161,7 +161,7 @@
   height: 40rpx;
   line-height: 40rpx;
   text-align: center;
-  font-size: 28rpx;
+  font-size: 30rpx;
 }
 
 .goto-panel {
@@ -174,7 +174,7 @@
   height: 80rpx;
   line-height: 80rpx;
   text-align: center;
-  font-size: 28rpx;
+  font-size: 30rpx;
   border-radius: 40rpx;
   margin: 0;
   padding: 0;
@@ -209,12 +209,12 @@
 
 .get-record-panel>.title-bar>.big>.title {
   width: calc(100% - 300rpx);
-  font-size: 32rpx;
+  font-size: 34rpx;
 }
 
 .get-record-panel>.title-bar>.small.title {
   width: 100%;
-  font-size: 24rpx;
+  font-size: 26rpx;
 }
 
 .get-record-panel>.body {
@@ -240,7 +240,7 @@
 
 .get-record-panel>.body>.list>.row>.left>.name {
   margin-left: 30rpx;
-  font-size: 28rpx;
+  font-size: 30rpx;
 }
 
 .get-record-panel>.body>.list>.row>.right>.time {

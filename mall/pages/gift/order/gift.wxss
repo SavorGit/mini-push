@@ -13,18 +13,18 @@
 .status-panel>.status>.icon {
   width: 80rpx;
   height: 80rpx;
-  font-size: 80rpx;
+  font-size: 82rpx;
   color: rgb(59, 191, 3);
 }
 
 .status-panel>.status>.content {
   margin-left: 30rpx;
-  font-size: 36rpx;
+  font-size: 38rpx;
 }
 
 .status-panel>.tip {
   padding-left: 110rpx;
-  font-size: 22rpx;
+  font-size: 24rpx;
 }
 
 .main-panel {
@@ -44,7 +44,7 @@
 }
 
 .main-panel>.goods-info>.hotel {
-  font-size: 24rpx;
+  font-size: 26rpx;
 }
 
 .main-panel>.goods-info>.row {
@@ -65,7 +65,7 @@
 }
 
 .main-panel>.goods-info>.row>.center>.name {
-  font-size: 24rpx;
+  font-size: 26rpx;
 }
 
 .main-panel>.goods-info>.row>.center>.bottom {
@@ -73,7 +73,7 @@
 }
 
 .main-panel>.goods-info>.row>.center>.bottom>.specs {
-  font-size: 24rpx;
+  font-size: 26rpx;
 }
 
 .main-panel>.goods-info>.row>.right {
@@ -84,7 +84,7 @@
 .main-panel>.goods-info>.row>.right>.price {
   width: 100%;
   text-align: right;
-  font-size: 28rpx;
+  font-size: 30rpx;
 }
 
 .main-panel>.message-block {
@@ -98,13 +98,13 @@
 }
 
 .main-panel>.message-block .title-bar>.title {
-  font-size: 28rpx;
+  font-size: 30rpx;
 }
 
 .main-panel>.message-block .title-bar>.btn {
   width: 30rpx;
   height: 30rpx;
-  font-size: 30rpx;
+  font-size: 32rpx;
   color: #FBBBBB;
   border-bottom: 4rpx solid #FBBBBB;
   margin: 0;
@@ -123,12 +123,12 @@
 .main-panel>.message-block .content>.input {
   min-height: 40rpx;
   max-height: 80rpx;
-  font-size: 30rpx;
+  font-size: 32rpx;
   border: 3rpx solid #EDEDED;
 }
 
 .main-panel>.message-block .content>.view {
-  font-size: 32rpx;
+  font-size: 34rpx;
   font-weight: bold;
 }
 
@@ -146,11 +146,11 @@
 
 .main-panel>.sender>.isp>.name {
   margin-left: 15rpx;
-  font-size: 24rpx;
+  font-size: 26rpx;
 }
 
 .main-panel>.sender>.nikename {
-  font-size: 28rpx;
+  font-size: 30rpx;
 }
 
 .goto-panel {
@@ -163,7 +163,7 @@
   height: 80rpx;
   line-height: 80rpx;
   text-align: center;
-  font-size: 28rpx;
+  font-size: 30rpx;
   border-radius: 40rpx;
   margin: 0;
   padding: 0;
@@ -172,7 +172,7 @@
 
 .goto-panel>.link {
   margin-top: 30rpx;
-  font-size: 24rpx;
+  font-size: 26rpx;
 }
 
 .rule-panel {
@@ -187,7 +187,7 @@
 }
 
 .rule-panel>.title-bar>.title {
-  font-size: 28rpx;
+  font-size: 30rpx;
 }
 
 .rule-panel>.body {
@@ -196,5 +196,5 @@
 }
 
 .rule-panel>.body>.line {
-  font-size: 28rpx;
+  font-size: 30rpx;
 }

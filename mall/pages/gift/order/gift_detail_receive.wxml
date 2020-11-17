@@ -20,16 +20,16 @@
 				<block wx:for="{{express}}" wx:for-index="index" wx:for-item="bean" wx:key="key">
 					<view wx:if="{{logisticsTab==index+1}}" data-index="{{index}}" class="tab-body">
 						<view class="row flex-row-center-space_between" style="height:unset;" bindtap="gotoExinfo" data-express_id="{{bean.express_id}}">
-							<view class="fa fa-truck theme-font" style="width:50rpx;font-size:32rpx;text-align:center;" aria-hidden="true"></view>
+							<view class="fa fa-truck theme-font" style="width:50rpx;font-size: 34rpx;text-align:center;" aria-hidden="true"></view>
 							<view class="view flex-column-flex_start-space_between" style="width:calc(100% - 120rpx);height:unset;padding:20rpx 0;">
 								<view class="one-line-overflow">{{bean.data[0].state_str}}</view>
 								<view class="two-line-overflow theme-font2">{{bean.data[0].context}}</view>
 								<view class="one-line-overflow theme-font3">{{bean.data[0].time}}</view>
 							</view>
-							<view class="fa fa-chevron-right" style="width:50rpx;font-size:32rpx;text-align:center;" aria-hidden="true"></view>
+							<view class="fa fa-chevron-right" style="width:50rpx;font-size: 34rpx;text-align:center;" aria-hidden="true"></view>
 						</view>
 						<view class="row flex-row-center-space_between" style="height:unset;">
-							<view class="fa fa-map-marker theme-font5" style="width:50rpx;font-size:32rpx;text-align:center;" aria-hidden="true"></view>
+							<view class="fa fa-map-marker theme-font5" style="width:50rpx;font-size: 34rpx;text-align:center;" aria-hidden="true"></view>
 							<view class="view flex-column-flex_start-space_between" style="width:calc(100% - 70rpx);height:unset;padding:20rpx 0;">
 								<view class="flex-row-center-flex_start" style="width:100%;">
 									<view class="theme-font2">{{order_info.contact}}</view>

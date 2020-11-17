@@ -10,9 +10,9 @@
     <view class="people flex-row-flex_start-start full_width">
       <image class="head-img" src="{{assist_info.user.avatarUrl}}"></image>
       <view class="flex-column-flex_start-start">
-        <label class="name font_333333_24">{{assist_info.user.nickName}}：</label>
-        <label class="msg font_999999_24">“快来帮我助力！</label>
-        <label class="msg font_999999_24">我要在全国千家高端餐厅SHOW”</label>
+        <label class="name font_333333_26">{{assist_info.user.nickName}}：</label>
+        <label class="msg font_999999_26">“快来帮我助力！</label>
+        <label class="msg font_999999_26">我要在全国千家高端餐厅SHOW”</label>
       </view>
     </view>
     <block wx:if="{{assist_info.media_type==1}}">
@@ -31,9 +31,9 @@
     <view class="people flex-row-flex_start-start full_width">
       <image class="head-img" src="{{assist_info.user.avatarUrl}}"></image>
       <view class="flex-column-flex_start-start">
-        <label class="name font_333333_24">{{assist_info.user.nickName}}：</label>
-        <label class="msg font_999999_24">“快来帮我助力！</label>
-        <label class="msg font_999999_24">我要在全国千家高端餐厅SHOW”</label>
+        <label class="name font_333333_26">{{assist_info.user.nickName}}：</label>
+        <label class="msg font_999999_26">“快来帮我助力！</label>
+        <label class="msg font_999999_26">我要在全国千家高端餐厅SHOW”</label>
       </view>
     </view>
     <block wx:if="{{assist_info.media_type==1}}">
@@ -44,7 +44,7 @@
       <image class="img" src="{{assist_info.img_url}}" bindtap="previewImage" data-src="{{pubdetail}}" data-pkey="0"></image>
     </block>
     <button open-type='share' data-img_url="{{assist_info.img_url}}" data-forscreen_id="{{forscreen_id}}" data-box_mac="{{box_mac}}" class="theme-button">邀请好友助力</button>
-    <view class="font_333333_24">
+    <view class="font_333333_26">
       <label>您当前有</label>
       <label class="theme-font5">{{assist_info.rate}}%</label>
       <label>的几率，加油亲~</label>
@@ -54,8 +54,8 @@
   <!-- 助力人员面板 -->
   <view wx:if="{{assist_frieds_nums>0}}" class="assist-people-panel full_width theme-panel">
     <view class="title-bar flex-row-center-space_between">
-      <view class="title font_333333_24">已有{{assist_frieds_nums}}名好友帮您助力</view>
-      <navigator class="more font_999999_24" url="/pages/mine/assist/assistlist?forscreen_id={{forscreen_id}}">更多...</navigator>
+      <view class="title font_333333_26">已有{{assist_frieds_nums}}名好友帮您助力</view>
+      <navigator class="more font_999999_26" url="/pages/mine/assist/assistlist?forscreen_id={{forscreen_id}}">更多...</navigator>
     </view>
     <view class="list flex-row-center-flex_start" wx:if="{{assist_frieds.length>0}}">
       <view class="people" wx:for="{{assist_frieds}}" wx:key="{{key}}" wx:index="{{index}}" wx:for-item="bean">
@@ -68,7 +68,7 @@
   <!-- 推荐面板 -->
   <view wx:if="{{hot_play.length > 0}}" class="recommend-panel full_width">
     <view class="title-bar flex-row-center-space_between">
-      <view class="title font_333333_24">热播内容</view>
+      <view class="title font_333333_26">热播内容</view>
       <navigator class="more" open-type="switchTab" url="/pages/find/full_scroll">更多...</navigator>
     </view>
     <view class="list">

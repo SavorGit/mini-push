@@ -26,25 +26,25 @@
         </view>
       </view>
       <view class='con_bottom'>
-        <view class='font_25635f_24'>
+        <view class='font_25635f_26'>
           <label>{{videoinfo.create_time}}</label>
           <label wx:if="{{videoinfo.hotel_name!=''}}">.</label>
           <label wx:if="{{videoinfo.hotel_name!=''}}">{{videoinfo.hotel_name}}</label>
         </view>
-        <view class='operation flex-row-center-flex_start font_666666_24'>
+        <view class='operation flex-row-center-flex_start font_666666_26'>
           <view>
             <label class="fa fa-play fa-lg" style="margin-right: 5rpx;"></label>
             <label>{{play_num}}</label>
           </view>
-          <button wx:if="{{is_collect=='1'}}" class="flex-row-center-flex_start font_666666_24" bindtap='cancCollect' data-res_id="{{videoinfo.forscreen_id}}" data-openid="{{openid}}" data-type="2">
+          <button wx:if="{{is_collect=='1'}}" class="flex-row-center-flex_start font_666666_26" bindtap='cancCollect' data-res_id="{{videoinfo.forscreen_id}}" data-openid="{{openid}}" data-type="2">
             <label class="fa fa-heart fa-lg" style="color: #E11E4C;margin-right: 5rpx;"></label>
             <label>{{collect_num}}</label>
           </button>
-          <button wx:else class="flex-row-center-flex_start font_666666_24" bindtap='onCollect' data-res_id="{{videoinfo.forscreen_id}}" data-openid="{{openid}}" data-type="2">
+          <button wx:else class="flex-row-center-flex_start font_666666_26" bindtap='onCollect' data-res_id="{{videoinfo.forscreen_id}}" data-openid="{{openid}}" data-type="2">
             <label class="fa fa-heart-o fa-lg" style="margin-right: 5rpx;"></label>
             <label>{{collect_num}}</label>
           </button>
-          <button class="flex-row-center-flex_start font_666666_24" open-type='share' data-res_id="{{videoinfo.forscreen_id}}" data-pubdetail="{{videoinfo.pubdetail}}" data-openid="{{openid}}" data-res_type="2">
+          <button class="flex-row-center-flex_start font_666666_26" open-type='share' data-res_id="{{videoinfo.forscreen_id}}" data-pubdetail="{{videoinfo.pubdetail}}" data-openid="{{openid}}" data-res_type="2">
             <label class="fa fa-share-square-o fa-lg" style="margin-right: 5rpx;"></label>
             <label>{{share_num}}</label>
           </button>
@@ -67,7 +67,7 @@
 <!--wifi链接错误提示-->
 <modal show="{{wifiErr.is_open==1 ? true : false}}" width="650rpx" height='380rpx' border-radius="10rpx" title-text='提示' title-color="#333333" title-background-color="unset" title-border-radius="0rpx" confirm-text='{{wifiErr.confirm}}' confirm-color="#FFFFFF"
   confirm-background-color="#1cbeb6" confirm-border-radius="10rpx" cancel-text='{{wifiErr.cancel}}' cancel-color='#FFFFFF' cancel-background-color="#333333" cancel-border-radius="10rpx" bindcancel="modalCancel" data-hotel_info="{{hotel_info}}" bindconfirm='modalConfirm'>
-  <view class="theme-font1" style="padding:0 50rpx;font-size:28rpx;">{{wifiErr.msg}}</view>
+  <view class="theme-font1" style="padding:0 50rpx;font-size: 30rpx;">{{wifiErr.msg}}</view>
 </modal>
 <!-- 固定悬浮按钮组 -->
 <view wx:if="{{box_mac !=''}}">

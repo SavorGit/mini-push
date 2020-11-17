@@ -23,13 +23,13 @@
 			<button bindtap="breakLink" data-boxmac="{{box_mac}}" data-openid="{{openid}}">
 				<image class="full_width full_height" src="/images/icon2/1CBEB6_link.png"></image>
 			</button>
-			<label class='font_666666_26'>您已链接【{{hotel_name}}】的{{room_name}}电视</label>
+			<label class='font_666666_28'>您已链接【{{hotel_name}}】的{{room_name}}电视</label>
 		</view>
 		<view wx:else class='full_width full_height tip flex-column-center-start'>
 			<button bindtap="scanQrcode" data-boxmac="{{box_mac}}" data-openid="{{openid}}">
 				<image class="full_width full_height" src="/images/icon2/666666_link.png"></image>
 			</button>
-			<label class='font_666666_26'>当前暂未链接电视，链接后即可使用投屏功能</label>
+			<label class='font_666666_28'>当前暂未链接电视，链接后即可使用投屏功能</label>
 		</view>
 	</view>
 

@@ -5,14 +5,14 @@ scroll-view {
 label.paragraph {
   margin: 12rpx 42rpx 12rpx 42rpx;
   width: calc(100vw - 84rpx);
-  font-size: 24rpx;
+  font-size: 26rpx;
   color: #666;
   line-height: 40rpx;
 }
 
 label.title {
   margin: 40rpx 42rpx 12rpx 42rpx;
-  font-size: 28rpx;
+  font-size: 30rpx;
   text-align: center;
   color: #1cbeb6;
 }

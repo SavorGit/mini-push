@@ -11,8 +11,8 @@
 	<view class="page-wapper">
 		<view class="panel">
 			<view class="body flex-row-center-flex_start" style="height:100rpx;padding:0 30rpx;">
-				<view class="fa fa-forward" aria-hidden="true" style="width:60rpx;color:rgb(251, 107, 33);font-size:36rpx;"></view>
-				<view class="status one-line-overflow theme-font1" style="width:calc(100% - 60rpx);font-size:36rpx;">{{order_info.status_str}}</view>
+				<view class="fa fa-forward" aria-hidden="true" style="width:60rpx;color:rgb(251, 107, 33);font-size: 38rpx;"></view>
+				<view class="status one-line-overflow theme-font1" style="width:calc(100% - 60rpx);font-size: 38rpx;">{{order_info.status_str}}</view>
 			</view>
 		</view>
 		<view class="goods-info input-panel theme-panel">

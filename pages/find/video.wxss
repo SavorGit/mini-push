@@ -22,7 +22,7 @@
 
 .page_main .article .con_top .user_info label {
   margin-left: 20rpx;
-  font-size: 36rpx;
+  font-size: 38rpx;
   vertical-align: middle;
 }
 
@@ -30,7 +30,7 @@
   word-break: break-all;
   line-height: 50rpx;
   display: block;
-  font-size: 30rpx;
+  font-size: 32rpx;
 }
 
 .page_main .article .con_main .media {
@@ -55,7 +55,7 @@
 .page_main .article .con_bottom {
   height: 90rpx;
   margin-top: 10rpx;
-  font-size: 32rpx;
+  font-size: 34rpx;
 }
 
 .page_main .article .con_bottom > .operation {
@@ -77,7 +77,7 @@
   height: 80rpx;
   line-height: 80rpx;
   border-radius: 10rpx;
-  font-size: 28rpx;
+  font-size: 30rpx;
 }
 
 .page_bottom {

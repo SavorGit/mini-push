@@ -57,7 +57,7 @@ button[disabled] {
   line-height: 490rpx;
   margin-top: -560rpx;
   text-align: center;
-  font-size: 70rpx;
+  font-size: 72rpx;
   color: #f46849;
 }
 
@@ -86,7 +86,7 @@ button[disabled] {
 }
 
 .before_launch .page_main>.grant_auth>.checkbox-group checkbox {
-  font-size: 28rpx;
+  font-size: 30rpx;
 }
 
 .before_launch .page_main>.grant_auth>.checkbox-group checkbox .wx-checkbox-input {
@@ -105,7 +105,7 @@ button[disabled] {
   height: 28rpx;
   line-height: 28rpx;
   text-align: center;
-  font-size: 22rpx;
+  font-size: 24rpx;
   color: #fff;
   background: transparent;
   transform: translate(-50%, -50%) scale(1);
@@ -127,7 +127,7 @@ button[disabled] {
   width: 680rpx;
   height: 190rpx;
   padding: 5rpx;
-  font-size: 28rpx;
+  font-size: 30rpx;
   text-align: left;
 }
 
@@ -136,7 +136,7 @@ button[disabled] {
   height: 80rpx;
   line-height: 80rpx;
   border-radius: 10rpx;
-  font-size: 28rpx;
+  font-size: 30rpx;
   margin: 30rpx auto auto auto;
   padding: 0;
 }
@@ -151,7 +151,7 @@ button[disabled] {
   height: 80rpx;
   line-height: 80rpx;
   border-radius: 10rpx;
-  font-size: 28rpx;
+  font-size: 30rpx;
   margin: 0;
   padding: 0;
 }
@@ -178,7 +178,7 @@ button[disabled] {
   height: 80rpx;
   line-height: unset;
   padding: 20rpx 10rpx;
-  font-size: 28rpx;
+  font-size: 30rpx;
   font-weight: 400;
   margin: 0;
   cursor: pointer;
@@ -192,7 +192,7 @@ button[disabled] {
 }
 
 .choose-launch-edition>.btn>.name {
-  font-size: 36rpx;
+  font-size: 38rpx;
 }
 
 .choose-launch-edition>.btn.selected {
@@ -216,7 +216,7 @@ button[disabled] {
 }
 
 .quality>.radio {
-  font-size: 28rpx;
+  font-size: 30rpx;
   font-weight: 400;
   text-decoration: none;
 }
@@ -230,7 +230,7 @@ button[disabled] {
   width: 330rpx;
   height: 60rpx;
   line-height: 60rpx;
-  font-size: 28rpx;
+  font-size: 30rpx;
   background-color: #fff;
   opacity: 1;
   border: 1rpx dashed #1cbeb6;
@@ -242,7 +242,7 @@ button[disabled] {
 }
 
 .guided_mask_panel.launch_before>.point>.checkbox-group checkbox {
-  font-size: 28rpx;
+  font-size: 30rpx;
 }
 
 .guided_mask_panel.launch_before>.point>.checkbox-group checkbox .wx-checkbox-input {
@@ -269,7 +269,7 @@ button[disabled] {
   height: 80rpx;
   line-height: 80rpx;
   margin-top: 50rpx;
-  font-size: 28rpx;
+  font-size: 30rpx;
   opacity: 1;
 }
 
@@ -321,7 +321,7 @@ button[disabled] {
   line-height: 490rpx;
   margin-top: -560rpx;
   text-align: center;
-  font-size: 70rpx;
+  font-size: 72rpx;
   color: #f46849;
 }
 
@@ -350,7 +350,7 @@ button[disabled] {
   margin: auto 0;
   padding: unset;
   border: unset;
-  font-size: 28rpx;
+  font-size: 30rpx;
 }
 
 .disabled-button {
@@ -431,7 +431,7 @@ button[disabled] {
   padding: 0rpx;
   margin-top: 5rpx;
   margin-right: 0rpx;
-  font-size: 24rpx;
+  font-size: 26rpx;
 }
 
 .after_launch .launch_history .history_list .video>.cover {
@@ -461,7 +461,7 @@ button[disabled] {
 .after_launch .launch_history .history_list .video>.cover>view>navigator>.icon {
   width: 40rpx;
   height: 40rpx;
-  font-size: 40rpx;
+  font-size: 42rpx;
 }
 
 .after_launch .launch_history .history_list .video>.btn {
@@ -481,7 +481,7 @@ button[disabled] {
   border-radius: 10rpx;
   padding: 0rpx;
   margin-right: 0rpx;
-  font-size: 24rpx;
+  font-size: 26rpx;
 }
 
 /* ==================================== 投屏后引导蒙板 ==================================== */
@@ -490,7 +490,7 @@ button[disabled] {
   width: 670rpx;
   height: 60rpx;
   line-height: 60rpx;
-  font-size: 28rpx;
+  font-size: 30rpx;
 }
 
 .guided_mask_panel.launch_after>.point>view {
@@ -510,7 +510,7 @@ button[disabled] {
   line-height: 50rpx;
   border-radius: 25rpx;
   margin: auto 0;
-  font-size: 28rpx;
+  font-size: 30rpx;
 }
 
 .guided_mask_panel.launch_after>.arrow {
@@ -531,7 +531,7 @@ button[disabled] {
   height: 80rpx;
   line-height: 80rpx;
   margin-top: 50rpx;
-  font-size: 28rpx;
+  font-size: 30rpx;
   opacity: 1;
 }
 
@@ -571,7 +571,7 @@ button[disabled] {
   width: 100%;
   height: 40rpx;
   line-height: 40rpx;
-  font-size: 24rpx;
+  font-size: 26rpx;
 }
 
 .tipsForLaunchWindow>.mask>.window>.head>.title-bar {
@@ -584,7 +584,7 @@ button[disabled] {
   height: 60rpx;
   line-height: 60rpx;
   text-align: center;
-  font-size: 36rpx;
+  font-size: 38rpx;
   font-weight: 400;
 }
 
@@ -600,7 +600,7 @@ button[disabled] {
 }
 
 .tipsForLaunchWindow>.mask>.window>.body>.top>.step {
-  font-size: 28rpx;
+  font-size: 30rpx;
   font-weight: 400;
 }
 
@@ -620,13 +620,13 @@ button[disabled] {
 }
 
 .tipsForLaunchWindow>.mask>.window>.body>.main>.error>.icon {
-  font-size: 130rpx;
+  font-size: 132rpx;
 }
 
 .tipsForLaunchWindow>.mask>.window>.body>.main>.error>.tip {
   padding: 10rpx;
   padding-bottom: 20rpx;
-  font-size: 28rpx;
+  font-size: 30rpx;
   font-weight: 400;
 }
 
@@ -636,7 +636,7 @@ button[disabled] {
   line-height: 64rpx;
   text-align: center;
   border-radius: 10rpx;
-  font-size: 28rpx;
+  font-size: 30rpx;
   border: solid 2rpx #F68855;
   color: #F68855;
   padding: 0;
@@ -644,11 +644,11 @@ button[disabled] {
 }
 
 .tipsForLaunchWindow>.mask>.window>.body>.main>.conn-wifi>.icon {
-  font-size: 130rpx;
+  font-size: 132rpx;
 }
 
 .tipsForLaunchWindow>.mask>.window>.body>.main>.conn-wifi>.tip {
-  font-size: 28rpx;
+  font-size: 30rpx;
   font-weight: 400;
 }
 
@@ -658,21 +658,21 @@ button[disabled] {
 }
 
 .tipsForLaunchWindow>.mask>.window>.body>.main>.handle>.tip {
-  font-size: 28rpx;
+  font-size: 30rpx;
   font-weight: 400;
 }
 
 .tipsForLaunchWindow>.mask>.window>.body>.main>.launching>.icon {
-  font-size: 130rpx;
+  font-size: 132rpx;
 }
 
 .tipsForLaunchWindow>.mask>.window>.body>.main>.launching>.tip {
-  font-size: 28rpx;
+  font-size: 30rpx;
   font-weight: 400;
 }
 
 .tipsForLaunchWindow>.mask>.window>.body>.main>.launching>.time {
-  font-size: 28rpx;
+  font-size: 30rpx;
   font-weight: 400;
 }
 
@@ -687,7 +687,7 @@ button[disabled] {
   line-height: 64rpx;
   text-align: center;
   border-radius: 10rpx;
-  font-size: 28rpx;
+  font-size: 30rpx;
   padding: 0;
   border: 0;
   margin: 0;

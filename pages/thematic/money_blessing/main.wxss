@@ -38,7 +38,7 @@
   margin-right: auto;
   text-align: center;
   color: #f05649;
-  font-size: 30rpx;
+  font-size: 32rpx;
   text-decoration: underline;
   background: unset;
 }

@@ -13,7 +13,7 @@
   height: 300rpx;
   padding: 5rpx;
   margin: 20rpx;
-  font-size: 28rpx;
+  font-size: 30rpx;
   border: 3rpx solid #bebebe;
 }
 
@@ -26,7 +26,7 @@
 
 .quick-pnael>.head {
   height: 60rpx;
-  font-size: 32rpx;
+  font-size: 34rpx;
 }
 
 .quick-pnael>.body {
@@ -44,7 +44,7 @@
   margin-left: 20rpx;
   margin-bottom: 10rpx;
   border: 3rpx solid #bebebe;
-  font-size: 24rpx;
+  font-size: 26rpx;
 }
 
 .bottom,
@@ -56,7 +56,7 @@
 .bottom>.btn {
   line-height: 88rpx;
   text-align: center;
-  font-size: 32rpx;
+  font-size: 34rpx;
   margin: 0;
   padding: 0;
   border: 0;

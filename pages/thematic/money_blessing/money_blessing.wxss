@@ -17,7 +17,7 @@
 }
 
 .PackingButtonFontSize {
-  font-size: 36rpx;
+  font-size: 38rpx;
   font-weight: 900;
 }
 

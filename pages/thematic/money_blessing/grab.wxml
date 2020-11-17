@@ -52,7 +52,7 @@
           <view class='con_top flex-row-center-flex_start'>
             <view class='user_info flex-row-center-flex_start'>
               <image class='user_head' src="{{bean.avatarUrl}}" lazy-load='/images/icon2/666666_interact.png'></image>
-              <label class='user_name font_999999_30'>{{bean.nickName}}</label>
+              <label class='user_name font_999999_32'>{{bean.nickName}}</label>
             </view>
             <view class='operation flex-row-center-flex_end'>
               <button bindtap='boxShow' data-res_type="{{bean.res_type}}" data-res_nums="{{bean.res_nums}}" data-pubdetail="{{bean.pubdetail}}" data-boxmac="{{box_mac}}" data-openid="{{openid}}" data-forscreen_id="{{bean.forscreen_id}}" class='launch_tv theme-button'>电视播放</button>
@@ -75,7 +75,7 @@
                     <label class="fa fa-play-circle-o icon theme-font4"></label>
                   </navigator>
                   <view>
-                    <label class='font_F6F3EE_20'>65s</label>
+                    <label class='font_F6F3EE_22'>65s</label>
                   </view>
                 </view>
               </view>
@@ -83,7 +83,7 @@
 
           </view>
           <view class='con_bottom flex-row-center-flex_start'>
-            <view class='hotel_info flex-row-center-flex_start font_999999_24'>
+            <view class='hotel_info flex-row-center-flex_start font_999999_26'>
               <label class='time'>{{bean.create_time}}</label>
               <label class='dot' wx:if="{{bean.hotel_name!=''}}">.</label>
               <label class='hotel_name one-line-overflow' wx:if="{{picinfo.hotel_name!=''}}">{{bean.hotel_name}}</label>
@@ -92,19 +92,19 @@
               <view wx:if="{{bean.is_collect==1}}">
                 <button bindtap='cancCollect' data-res_id="{{bean.forscreen_id}}" data-openid="{{openid}}" data-res_key="{{index}}">
                   <image src='http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/icon/red_heart.png'></image>
-                  <label class='font_999999_26'>{{bean.collect_num}}</label>
+                  <label class='font_999999_28'>{{bean.collect_num}}</label>
                 </button>
               </view>
               <view wx:else>
                 <button bindtap='onCollect' data-res_id="{{bean.forscreen_id}}" data-openid="{{openid}}" data-res_key="{{index}}">
                   <image src='http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/icon/grey_heart.png'></image>
-                  <label class='font_999999_26'>{{bean.collect_num}}</label>
+                  <label class='font_999999_28'>{{bean.collect_num}}</label>
                 </button>
               </view>
               <view>
                 <button open-type='share' data-res_id="{{bean.forscreen_id}}" data-res_key="{{index}}" data-pubdetail="{{bean.pubdetail}}" data-openid="{{openid}}" data-res_type="{{bean.res_type}}">
                   <image src='http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/icon/grey_share.png'></image>
-                  <label class='font_999999_26'>{{bean.share_num}}</label>
+                  <label class='font_999999_28'>{{bean.share_num}}</label>
                 </button>
               </view>
             </view>
@@ -175,7 +175,7 @@
           <view class='con_top flex-row-center-flex_start'>
             <view class='user_info flex-row-center-flex_start'>
               <image class='user_head' src="{{bean.avatarUrl}}" lazy-load='/images/icon2/666666_interact.png'></image>
-              <label class='user_name font_999999_30'>{{bean.nickName}}</label>
+              <label class='user_name font_999999_32'>{{bean.nickName}}</label>
             </view>
             <view class='operation flex-row-center-flex_end'>
               <button bindtap='boxShow' data-res_type="{{bean.res_type}}" data-res_nums="{{bean.res_nums}}" data-pubdetail="{{bean.pubdetail}}" data-boxmac="{{box_mac}}" data-openid="{{openid}}" data-forscreen_id="{{bean.forscreen_id}}" class='launch_tv theme-button'>电视播放</button>
@@ -198,7 +198,7 @@
                     <label class="fa fa-play-circle-o icon theme-font4"></label>
                   </navigator>
                   <view>
-                    <label class='font_F6F3EE_20'>65s</label>
+                    <label class='font_F6F3EE_22'>65s</label>
                   </view>
                 </view>
               </view>
@@ -206,7 +206,7 @@
 
           </view>
           <view class='con_bottom flex-row-center-flex_start'>
-            <view class='hotel_info flex-row-center-flex_start font_999999_24'>
+            <view class='hotel_info flex-row-center-flex_start font_999999_26'>
               <label class='time'>{{bean.create_time}}</label>
               <label class='dot' wx:if="{{bean.hotel_name!=''}}">.</label>
               <label class='hotel_name one-line-overflow' wx:if="{{picinfo.hotel_name!=''}}">{{bean.hotel_name}}</label>
@@ -215,19 +215,19 @@
               <view wx:if="{{bean.is_collect==1}}">
                 <button bindtap='cancCollect' data-res_id="{{bean.forscreen_id}}" data-openid="{{openid}}" data-res_key="{{index}}">
                   <image src='http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/icon/red_heart.png'></image>
-                  <label class='font_999999_26'>{{bean.collect_num}}</label>
+                  <label class='font_999999_28'>{{bean.collect_num}}</label>
                 </button>
               </view>
               <view wx:else>
                 <button bindtap='onCollect' data-res_id="{{bean.forscreen_id}}" data-openid="{{openid}}" data-res_key="{{index}}">
                   <image src='http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/icon/grey_heart.png'></image>
-                  <label class='font_999999_26'>{{bean.collect_num}}</label>
+                  <label class='font_999999_28'>{{bean.collect_num}}</label>
                 </button>
               </view>
               <view>
                 <button open-type='share' data-res_id="{{bean.forscreen_id}}" data-res_key="{{index}}" data-pubdetail="{{bean.pubdetail}}" data-openid="{{openid}}" data-res_type="{{bean.res_type}}">
                   <image src='http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/icon/grey_share.png'></image>
-                  <label class='font_999999_26'>{{bean.share_num}}</label>
+                  <label class='font_999999_28'>{{bean.share_num}}</label>
                 </button>
               </view>
             </view>

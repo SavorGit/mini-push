@@ -8,11 +8,11 @@
 				<view class='opt'>
 				</view>
 				<view class='title'>
-					<label class='font_1CBEB6_34'>温馨提示</label>
+					<label class='font_1CBEB6_36'>温馨提示</label>
 				</view>
 			</view>
 			<view class='wxAuthLogin-middle'>
-				<label class='content font_333333_30'>使用"热点投屏"过程中,请遵守相关法律法规。</label>
+				<label class='content font_333333_32'>使用"热点投屏"过程中,请遵守相关法律法规。</label>
 				<label class='link_relief'>
 					<navigator url="/pages/forscreen/relief">免责声明</navigator>
 				</label>
@@ -32,11 +32,11 @@
 				<view class='opt'>
 				</view>
 				<view class='title'>
-					<label class='font_1CBEB6_34'>温馨提示</label>
+					<label class='font_1CBEB6_36'>温馨提示</label>
 				</view>
 			</view>
 			<view class='wxAuthLogin-middle'>
-				<label class='content font_333333_30'>使用"热点投屏"过程中,请遵守相关法律法规。</label>
+				<label class='content font_333333_32'>使用"热点投屏"过程中,请遵守相关法律法规。</label>
 				<label class='link_relief'>
 					<navigator url="/pages/forscreen/relief">免责声明</navigator>
 				</label>
@@ -126,11 +126,11 @@
 		<view class='interrupt-launch-screen-window-container'>
 			<view class='window-top'>
 				<view class='title'>
-					<label class='font_333333_34'>确认打断投屏？</label>
+					<label class='font_333333_36'>确认打断投屏？</label>
 				</view>
 			</view>
 			<view class='window-main'>
-				<label class='content font_666666_30'>当前电视正在进行投屏，继续投屏有可能打断当前投屏中的内容。</label>
+				<label class='content font_666666_32'>当前电视正在进行投屏，继续投屏有可能打断当前投屏中的内容。</label>
 			</view>
 			<view class='window-bottom'>
 				<button class='savor-btn theme-button' bindtap="{{funConfirm}}">继续投屏</button>

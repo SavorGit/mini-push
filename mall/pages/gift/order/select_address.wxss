@@ -18,12 +18,12 @@
   height: 80rpx;
   line-height: 80rpx;
   text-align: center;
-  font-size: 80rpx;
+  font-size: 82rpx;
 }
 
 .status-panel>.content {
   margin-top: 30rpx;
-  font-size: 28rpx;
+  font-size: 30rpx;
 }
 
 .choose-address-panel {
@@ -41,13 +41,13 @@
   width: 34rpx;
   height: 34rpx;
   line-height: 34rpx;
-  font-size: 34rpx;
+  font-size: 36rpx;
 }
 
 .choose-address-panel>.left>.title {
   width: calc(100% - 50rpx);
   margin-left: 16rpx;
-  font-size: 28rpx;
+  font-size: 30rpx;
 }
 
 
@@ -60,7 +60,7 @@
   height: 40rpx;
   line-height: 40rpx;
   text-align: right;
-  font-size: 40rpx;
+  font-size: 42rpx;
   margin: 0;
   padding: 0;
   border: 0;
@@ -78,7 +78,7 @@
 }
 
 .consignee-info>.head>.title {
-  font-size: 28rpx;
+  font-size: 30rpx;
 }
 
 .consignee-info>.head>.btn {
@@ -86,7 +86,7 @@
   height: 40rpx;
   line-height: 40rpx;
   text-align: right;
-  font-size: 40rpx;
+  font-size: 42rpx;
   margin: 0;
   padding: 0;
   border: 0;
@@ -102,7 +102,7 @@
   width: calc(100% - 120rpx);
   height: 90rpx;
   padding: 0 60rpx;
-  font-size: 28rpx;
+  font-size: 30rpx;
 }
 
 .consignee-info>.body>view:first-child>.phone {
@@ -129,7 +129,7 @@
   height: 80rpx;
   line-height: 80rpx;
   text-align: center;
-  font-size: 28rpx;
+  font-size: 30rpx;
   border-radius: 40rpx;
   border: 0;
   margin: 0;

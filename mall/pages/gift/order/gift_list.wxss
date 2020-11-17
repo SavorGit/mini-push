@@ -15,7 +15,7 @@
   height: 50rpx;
   line-height: 50rpx;
   text-align: center;
-  font-size: 28rpx;
+  font-size: 30rpx;
 }
 
 .tab.selected {
@@ -47,7 +47,7 @@
 .row>.foot {
   width: calc(100% - 50rpx);
   margin: 0 25rpx;
-  font-size: 24rpx;
+  font-size: 26rpx;
 }
 
 .row>.head {
@@ -68,7 +68,7 @@
   height: 70rpx;
   line-height: 70rpx;
   margin-left: 20rpx;
-  font-size: 32rpx;
+  font-size: 34rpx;
 }
 
 .row>.head>.order-status {
@@ -87,7 +87,7 @@
   line-height: 30rpx;
   text-align: center;
   padding: 0 10rpx;
-  font-size: 20rpx;
+  font-size: 22rpx;
   overflow: hidden;
   border-radius: 5rpx 0 0 5rpx;
   transform: skewY(30deg) translate(-80rpx, 20rpx);
@@ -128,7 +128,7 @@
 }
 
 .row>.body>.center>view:first-child {
-  font-size: 28rpx;
+  font-size: 30rpx;
 }
 
 .row>.body>.center>.bottom {
@@ -139,7 +139,7 @@
   height: 30rpx;
   line-height: 30rpx;
   padding: 5rpx 15rpx;
-  font-size: 20rpx;
+  font-size: 22rpx;
   border-radius: 20rpx;
 }
 
@@ -148,7 +148,7 @@
 }
 
 .row>.body>.center.multiple-goods>view:first-child {
-  font-size: 42rpx;
+  font-size: 44rpx;
 }
 
 .row>.body>.right {
@@ -157,11 +157,11 @@
 }
 
 .row>.body>.right>.price {
-  font-size: 28rpx;
+  font-size: 30rpx;
 }
 
 .row>.body>.right>.count {
-  font-size: 24rpx;
+  font-size: 26rpx;
 }
 
 .row>.foot {
@@ -190,7 +190,7 @@
   height: 40rpx;
   line-height: 40rpx;
   text-align: center;
-  font-size: 24rpx;
+  font-size: 26rpx;
   border-radius: 5rpx;
   border: 0;
   margin: 0 10rpx 0 0;

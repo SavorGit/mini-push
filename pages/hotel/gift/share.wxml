@@ -43,7 +43,7 @@
 				</view>
 			</view>
 			<view class="count-panel flex-row-center-center">
-				<view class="label font_333333_28">我要领取</view>
+				<view class="label font_333333_30">我要领取</view>
 				<view class="count-warper flex-row-center-center">
 					<view class="btn" bindtap="cutReceiveAmount">-</view>
 					<view class="input" disable='true'>{{receive_num}}</view>

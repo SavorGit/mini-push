@@ -9,7 +9,7 @@
       <view class='con_top flex-row-center-flex_start'>
         <view class='user_info flex-row-center-flex_start'>
           <image class='user_head' src="{{pub_info.avatarUrl}}"></image>
-          <label class='user_name font_333333_30'>{{pub_info.nickName}}</label>
+          <label class='user_name font_333333_32'>{{pub_info.nickName}}</label>
         </view>
       </view>
       <view class='con_main'>
@@ -30,7 +30,7 @@
         </view>
       </view>
       <view class='con_bottom flex-row-center-flex_start'>
-        <view class='hotel_info flex-row-center-flex_start font_666666_24'>
+        <view class='hotel_info flex-row-center-flex_start font_666666_26'>
           <label class='time'>{{pub_info.create_time}}</label>
           <label class='dot' wx:if="{{pub_info.is_pub_hotelinfo==1}}">.</label>
           <label class='hotel_name' wx:if="{{pub_info.is_pub_hotelinfo==1}}">{{pub_info.hotel_name}}</label>
@@ -39,19 +39,19 @@
           <view wx:if="{{pub_info.is_collect=='1'}}">
             <button bindtap='cancCollect' data-res_id="{{pub_info.forscreen_id}}" data-pub_info="{{pub_info}}" data-openid="{{openid}}">
               <image src='http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/icon/red_heart.png'></image>
-              <label class='font_333333_26'>{{pub_info.collect_num}}</label>
+              <label class='font_333333_28'>{{pub_info.collect_num}}</label>
             </button>
           </view>
           <view wx:else>
             <button bindtap='onCollect' data-res_id="{{pub_info.forscreen_id}}" data-pub_info="{{pub_info}}" data-openid="{{openid}}">
               <image src='http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/icon/grey_heart.png'></image>
-              <label class='font_333333_26'>{{pub_info.collect_num}}</label>
+              <label class='font_333333_28'>{{pub_info.collect_num}}</label>
             </button>
           </view>
           <view>
             <button open-type='share' data-res_id="{{pub_info.forscreen_id}}" data-pub_info="{{pub_info}}" data-pubdetail="{{pub_info.pubdetail}}" data-openid="{{openid}}" data-res_type="{{pub_info.res_type}}">
               <image src='http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/icon/grey_share.png'></image>
-              <label class='font_333333_26'>{{pub_info.share_num}}</label>
+              <label class='font_333333_28'>{{pub_info.share_num}}</label>
             </button>
           </view>
         </view>

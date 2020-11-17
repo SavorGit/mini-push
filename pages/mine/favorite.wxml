@@ -9,11 +9,11 @@
       <!--循环开始 -->
       <view class='content content_bottom_border' wx:for="{{sharelist}}" wx:key="key" wx:for-item="bean" wx:for-index="index">
         <view class='con_top flex-row-center-flex_start' bindtap="onClickItem">
-          <view wx:if="{{bean.type==1 || bean.type==3}}" class='user_info flex-row-center-flex_start font_333333_36'>
+          <view wx:if="{{bean.type==1 || bean.type==3}}" class='user_info flex-row-center-flex_start font_333333_38'>
             <image src='http://oss.littlehotspot.com/media/resource/5dh67ffRXM.png'></image>
             <label>小热点</label>
           </view>
-          <view wx:else class='user_info font_333333_36'>
+          <view wx:else class='user_info font_333333_38'>
             <image wx:if="{{bean.avatarUrl==''}}" src='http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default_user_head.png'></image>
             <image wx:else src='{{bean.avatarUrl}}'></image>
             <label>{{bean.nickName}}</label>
@@ -50,18 +50,18 @@
                 <label class="fa fa-play-circle-o icon theme-font4"></label>
               </navigator>
               <view>
-                <label class='font_F6F3EE_20'>{{bean.list.duration}}</label>
+                <label class='font_F6F3EE_22'>{{bean.list.duration}}</label>
               </view>
             </view>
           </view>
         </view>
         <view class='con_bottom'>
-          <view class='hotel_info flex-row-center-flex_start font_25635f_24'>
+          <view class='hotel_info flex-row-center-flex_start font_25635f_26'>
             <label>{{bean.create_time}}</label>
             <label wx:if="{{bean.is_pub_hotelinfo==1}}">.</label>
             <label wx:if="{{bean.is_pub_hotelinfo==1}}">{{bean.hotel_name}}</label>
           </view>
-          <view class='operation flex-row-center-space_between font_666666_26'>
+          <view class='operation flex-row-center-space_between font_666666_28'>
             <view class='op-left flex-row-center-flex_start'>
               <view>
                 <label class="fa fa-play fa-lg" style="color: #666666;"></label>

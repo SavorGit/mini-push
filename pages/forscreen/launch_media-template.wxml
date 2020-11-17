@@ -2,7 +2,7 @@
 
 <!-- 页头 -->
 <template name="pageTop">
-	<view class='page_top theme-panel-2 flex-row-center-flex_start font_666666_26'>
+	<view class='page_top theme-panel-2 flex-row-center-flex_start font_666666_28'>
 		<label>{{res_head_desc}}加载完成后，电视开始加载并自动播放</label>
 		<label class='link_relief'>
 			<navigator url="/pages/forscreen/relief">免责声明</navigator>
@@ -19,11 +19,11 @@
 			</checkbox-group>
 		</view>
 		<image class="arrow" src="/images/imgs/FFFFFF_guide_arrow.png"></image>
-		<view class="explain flex-column-center-flex_start font_FFFFFF_28">
+		<view class="explain flex-column-center-flex_start font_FFFFFF_30">
 			<label>公开不仅可以让更多人看到，</label>
 			<label>还有机会在上千家餐厅电视中播放哦~</label>
 		</view>
-		<button class="theme-button font_FFFFFF_28" bindtap="closeLead" data-type="{{dataType}}" data-openid="{{openid}}">知道了</button>
+		<button class="theme-button font_FFFFFF_30" bindtap="closeLead" data-type="{{dataType}}" data-openid="{{openid}}">知道了</button>
 	</view>
 </template>
 
@@ -46,11 +46,11 @@
 			</view>
 		</view>
 		<image class="arrow" src="/images/imgs/FFFFFF_guide_arrow.png"></image>
-		<view class="explain flex-column-center-flex_start font_FFFFFF_28">
+		<view class="explain flex-column-center-flex_start font_FFFFFF_30">
 			<label>您可邀请好友帮您助力，</label>
 			<label>助力人数越多，越有可能在上千家餐厅电视中播放~</label>
 		</view>
-		<button class="theme-button font_FFFFFF_28" bindtap="closeLead" data-type="{{dataType}}" data-openid="{{openid}}">知道了</button>
+		<button class="theme-button font_FFFFFF_30" bindtap="closeLead" data-type="{{dataType}}" data-openid="{{openid}}">知道了</button>
 	</view>
 </template>
 

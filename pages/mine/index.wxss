@@ -26,7 +26,7 @@
 
 .con_top > .user_info > label {
   margin-left: 20rpx;
-  font-size: 36rpx;
+  font-size: 38rpx;
 }
 
 .con_top > .operation > button {
@@ -34,7 +34,7 @@
   height: 50rpx;
   line-height: 50rpx;
   border-radius: 25rpx;
-  font-size: 24rpx;
+  font-size: 26rpx;
 }
 
 .con_main {
@@ -82,7 +82,7 @@
 .con_main > .video .cover > navigator > .icon {
   width: 60rpx;
   height: 60rpx;
-  font-size: 60rpx;
+  font-size: 62rpx;
 }
 
 .con_main > .video .cover > view {

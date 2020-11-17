@@ -15,7 +15,7 @@
   height: 50rpx;
   line-height: 50rpx;
   text-align: center;
-  font-size: 32rpx;
+  font-size: 34rpx;
   font-weight: bold;
 }
 
@@ -47,7 +47,7 @@
 .row>.foot {
   width: calc(100% - 50rpx);
   margin: 0 25rpx;
-  font-size: 24rpx;
+  font-size: 26rpx;
 }
 
 .row>.head {
@@ -68,7 +68,7 @@
   height: 70rpx;
   line-height: 70rpx;
   margin-left: 15rpx;
-  font-size: 32rpx;
+  font-size: 34rpx;
 }
 
 .row>.head>.order-status {
@@ -88,7 +88,7 @@
   margin-left: -122rpx;
   padding-left: 20rpx;
   padding-right: 20rpx;
-  font-size: 24rpx;
+  font-size: 26rpx;
   overflow: hidden;
   border-radius: 10rpx 0 0 10rpx;
   transform: skewY(30deg) translate(-20rpx, -34rpx);
@@ -129,7 +129,7 @@
 }
 
 .row>.body>.center>view:first-child {
-  font-size: 28rpx;
+  font-size: 30rpx;
 }
 
 .row>.body>.center.multiple-goods {
@@ -137,7 +137,7 @@
 }
 
 .row>.body>.center.multiple-goods>view:first-child {
-  font-size: 42rpx;
+  font-size: 44rpx;
 }
 
 .row>.body>.right {
@@ -146,11 +146,11 @@
 }
 
 .row>.body>.right>.price {
-  font-size: 36rpx;
+  font-size: 38rpx;
 }
 
 .row>.body>.right>.count {
-  font-size: 24rpx;
+  font-size: 26rpx;
 }
 
 .row>.foot {
@@ -169,6 +169,6 @@
   height: 50rpx;
   line-height: 50rpx;
   text-align: center;
-  font-size: 28rpx;
+  font-size: 30rpx;
   border-radius: 5rpx;
 }

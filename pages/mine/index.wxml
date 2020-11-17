@@ -12,7 +12,7 @@
 
         <view class='content content_bottom_border'>
           <view class='con_top flex-row-center-flex_start' bindtap="onClickItem">
-            <view class='user_info flex-row-center-flex_start font_333333_36'>
+            <view class='user_info flex-row-center-flex_start font_333333_38'>
               <image src='{{userinfo.avatarUrl}}'></image>
               <label>{{userinfo.nickName}}</label>
             </view>
@@ -41,19 +41,19 @@
                     <label class="fa fa-play-circle icon theme-font4"></label>
                   </navigator>
                   <view>
-                    <label class='font_F6F3EE_20'>{{pubdetail.duration}}</label>
+                    <label class='font_F6F3EE_22'>{{pubdetail.duration}}</label>
                   </view>
                 </view>
               </view>
             </view>
           </view>
           <view class='con_bottom'>
-            <view class='hotel_info flex-row-center-flex_start font_25635f_24'>
+            <view class='hotel_info flex-row-center-flex_start font_25635f_26'>
               <label>{{bean.create_time}}</label>
               <label wx:if="{{bean.is_pub_hotelinfo==1}}">.</label>
               <label wx:if="{{bean.is_pub_hotelinfo==1}}">{{bean.hotel_name}}</label>
             </view>
-            <view class='operation flex-row-center-space_between font_666666_26'>
+            <view class='operation flex-row-center-space_between font_666666_28'>
               <view class='op-left flex-row-center-flex_start'>
                 <view>
                   <label class="fa fa-play fa-lg" style="color: #666666;"></label>
@@ -110,11 +110,11 @@
   <view class='delete-container'>
     <view class='delete-top'>
       <view class='title'>
-        <label class='font_333333_34'>确认删除？</label>
+        <label class='font_333333_36'>确认删除？</label>
       </view>
     </view>
     <view class='delete-main'>
-      <label class='content font_666666_30'>您公开的作品删除后，其他人将无法在发现页面看到您的作品。并在当前列表中删除。</label>
+      <label class='content font_666666_32'>您公开的作品删除后，其他人将无法在发现页面看到您的作品。并在当前列表中删除。</label>
     </view>
 
     <view class='delete-bottom'>

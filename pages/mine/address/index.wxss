@@ -22,16 +22,16 @@
 }
 
 .row>.info>.top>.name {
-  font-size: 32rpx;
+  font-size: 34rpx;
 }
 
 .row>.info>.top>.phone {
-  font-size: 28rpx;
+  font-size: 30rpx;
 }
 
 .row>.info>.address {
   width: 100%;
-  font-size: 24rpx;
+  font-size: 26rpx;
 }
 
 .row>.btn-group {
@@ -47,7 +47,7 @@
 }
 
 .row>.btn-group>.left>checkbox {
-  font-size: 28rpx;
+  font-size: 30rpx;
 }
 
 .row>.btn-group>.right>.btn {
@@ -56,7 +56,7 @@
   line-height: 50rpx;
   text-align: center;
   margin-left: 10rpx;
-  font-size: 28rpx;
+  font-size: 30rpx;
   border-radius: 5rpx;
 }
 
@@ -76,5 +76,5 @@
   height: 88rpx;
   line-height: 88rpx;
   text-align: center;
-  font-size: 32rpx;
+  font-size: 34rpx;
 }

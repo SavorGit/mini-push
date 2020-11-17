@@ -29,19 +29,19 @@
   height: 80rpx;
   line-height: 80rpx;
   text-align: center;
-  font-size: 80rpx;
+  font-size: 82rpx;
   color: #F68855;
 }
 
 .status-panel>.status>.msg {
   padding: 10rpx 20rpx;
-  font-size: 28rpx;
+  font-size: 30rpx;
   color: #F68855;
 }
 
 .status-panel>.tip {
   padding: 10rpx 20rpx;
-  font-size: 28rpx;
+  font-size: 30rpx;
 }
 
 /* --------------------- 单个赠品 --------------------- */
@@ -55,7 +55,7 @@
   height: 100rpx;
   line-height: 100rpx;
   text-align: center;
-  font-size: 32rpx;
+  font-size: 34rpx;
   border-radius: 50rpx;
   margin: 80rpx 0 0 0;
   padding: 0;
@@ -81,7 +81,7 @@
 }
 
 .setting-panel>.row>.label {
-  font-size: 28rpx;
+  font-size: 30rpx;
 }
 
 .setting-panel>.row>.count {
@@ -93,7 +93,7 @@
   height: 54rpx;
   line-height: 54rpx;
   text-align: center;
-  font-size: 28rpx;
+  font-size: 30rpx;
   border: 3rpx solid rgb(216, 220, 230);
 }
 
@@ -110,7 +110,7 @@
   height: 54rpx;
   line-height: 54rpx;
   text-align: center;
-  font-size: 28rpx;
+  font-size: 30rpx;
   border-top: 3rpx solid rgb(216, 220, 230);
   border-bottom: 3rpx solid rgb(216, 220, 230);
 }

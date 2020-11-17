@@ -10,7 +10,7 @@
     <button wx:else>
       <image src='https://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/games/monkeys_climb_trees/launch_game_hide.png'></image>
     </button>
-    <view class='game-tip flex-column-center-center font_333333_24'>
+    <view class='game-tip flex-column-center-center font_333333_26'>
       <label>多人竞速爬树，最多支持10人</label>
       <label>发起游戏后，邀请好友扫描电视二维码加入游戏</label>
     </view>
