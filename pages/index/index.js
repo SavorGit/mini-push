@@ -320,6 +320,7 @@ Page({
     var openid = e.currentTarget.dataset.openid;
     var box_mac = e.currentTarget.dataset.boxmac;
     var linkcontent = e.currentTarget.dataset.linkcontent;
+    var box_id  = e.currentTarget.dataset.box_id;
 
     if (box_mac == '') {
       app.scanQrcode(pageid);
@@ -328,13 +329,13 @@ Page({
       var mobile_model = app.globalData.mobile_model;
 
       wx.navigateTo({
-        url: linkcontent + '?box_mac=' + box_mac + '&openid=' + openid + '&game_id=2'
+        url: linkcontent + '?box_mac=' + box_mac + '&openid=' + openid + '&box_id='+box_id+'&game_id=2'
       })
     }
     mta.Event.stat('clickTopAds', { 'linktype': app.globalData.link_type, "box_mac": box_mac })
     mta.Event.stat('gotoHdGame', { 'linktype': app.globalData.link_type, "box_mac": box_mac })
   },
-  //本校程序内跳转
+  //本小程序内跳转
   goToPage:function(e){
     var openid = e.currentTarget.dataset.openid;
     var linkcontent = e.currentTarget.dataset.linkcontent;
