@@ -670,7 +670,7 @@ Page({
             console.log('12007');
             console.log(cTs);
             if(cTs==1){
-              that.setData({openWind:{'isWifi':false,'isError':false,'title':'','step':1,'progress':0,'tip':''}})
+              that.setData({isOpenWind:'false',openWind:{'isWifi':false,'isError':false,'title':'','step':1,'progress':0,'tip':''}})
               that.classicForVideo(data)
               return false;
             }
