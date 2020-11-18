@@ -142,32 +142,41 @@ Page({
     openid = user_info.openid;
     mta.Event.stat("clickonwxauth", {})
     if (res.detail.errMsg == 'getUserInfo:ok') {
-      wx.getUserInfo({
-        success(rets) {
-          utils.PostRequest(api_v_url + '/User/registerCom', {
-            'openid': openid,
-            'avatarUrl': rets.userInfo.avatarUrl,
-            'nickName': rets.userInfo.nickName,
-            'gender': rets.userInfo.gender,
-            'session_key': app.globalData.session_key,
-            'iv': rets.iv,
-            'encryptedData': rets.encryptedData
-          }, (data, headers, cookies, errMsg, statusCode) => {
-            wx.setStorage({
-              key: 'savor_user_info',
-              data: data.result,
-            });
-            that.setData({
-              showModal: false,
-            })
-          }, res => wx.showToast({
-            title: '微信登陆失败，请重试',
-            icon: 'none',
-            duration: 2000
-          }));
-
-        }
-      })
+      if(typeof(openid)!='undefined'){
+        wx.getUserInfo({
+          success(rets) {
+            utils.PostRequest(api_v_url + '/User/registerCom', {
+              'openid': openid,
+              'avatarUrl': rets.userInfo.avatarUrl,
+              'nickName': rets.userInfo.nickName,
+              'gender': rets.userInfo.gender,
+              'session_key': app.globalData.session_key,
+              'iv': rets.iv,
+              'encryptedData': rets.encryptedData
+            }, (data, headers, cookies, errMsg, statusCode) => {
+              wx.setStorage({
+                key: 'savor_user_info',
+                data: data.result,
+              });
+              that.setData({
+                showModal: false,
+              })
+            }, res => wx.showToast({
+              title: '微信登陆失败，请重试',
+              icon: 'none',
+              duration: 2000
+            }));
+  
+          }
+        })
+      }else {
+        that.setData({
+          showModal: false,
+        })
+        app.showToast('微信登陆失败，请重试');
+        
+      }
+      
       mta.Event.stat("allowauth", {})
     } else {
       utils.PostRequest(api_v_url + '/User/refuseRegister', {
@@ -208,6 +217,10 @@ Page({
   chooseImage(e) {
     var that = this;
     var user_info = wx.getStorageSync("savor_user_info");
+    if(user_info=='' || typeof(user_info)=='undefined'){
+      app.showToast('网络异常，请用微信重新扫码链接电视')
+      return false;
+    }
     if (user_info.is_wx_auth != 3 ) {
       that.setData({
         showModal: true
@@ -253,6 +266,10 @@ Page({
   chooseVedio(e) {
     var that = this
     var user_info = wx.getStorageSync("savor_user_info");
+    if(user_info=='' || typeof(user_info)=='undefined'){
+      app.showToast('网络异常，请用微信重新扫码链接电视')
+      return false;
+    }
     if (user_info.is_wx_auth != 3 ) {
       that.setData({
         showModal: true
@@ -481,6 +498,10 @@ Page({
   forfiles: function (e) {
     var that = this;
     var user_info = wx.getStorageSync("savor_user_info");
+    if(user_info=='' || typeof(user_info)=='undefined'){
+      app.showToast('网络异常，请用微信重新扫码链接电视')
+      return false;
+    }
     if (user_info.is_wx_auth != 3) {
       that.setData({
         showModal: true

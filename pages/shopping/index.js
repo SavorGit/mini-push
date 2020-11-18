@@ -238,7 +238,7 @@ Page({
     });
   },
   //选择分类
-  selectCate: function (e) {
+  /*selectCate: function (e) {
     var that = this;
     var category_id = e.currentTarget.dataset.category_id;
     var user_info = wx.getStorageSync(cache_key + 'user_info')
@@ -262,7 +262,7 @@ Page({
       that.getGoodsList(category_id, select_page, user_info.openid);
     }
 
-  },
+  },*/
   loadMore: function (e) {
     var that = this;
     /*var category_id = that.data.category_id;
@@ -467,7 +467,7 @@ Page({
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-    let self = this;
+    /*let self = this;
     self.tabBar = {
       category: {
         scrollViewWidth: 750
@@ -475,9 +475,9 @@ Page({
     };
     wx.createSelectorQuery().select('.tab-bar').boundingClientRect((rect) => {
       self.tabBar.category.scrollViewWidth = Math.round(rect.width);
-    }).exec();
+    }).exec();*/
   },
-  switchCategoryTabBar(e) {
+  /*switchCategoryTabBar(e) {
     let self = this;
     let offsetLeft = e.currentTarget.offsetLeft;
     wx.createSelectorQuery().select('.tab-bar .selected').fields({
@@ -487,7 +487,7 @@ Page({
         scrollLeft: offsetLeft - (self.tabBar.category.scrollViewWidth - res.width) / 2
       });
     }).exec();
-  },
+  },*/
 
   /**
    * 生命周期函数--监听页面显示
