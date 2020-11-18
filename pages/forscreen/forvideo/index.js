@@ -1119,7 +1119,9 @@ Page({
     if(launchType=='classic'){//经典投屏
       console.log(res.detail.value)
       console.log(max_user_forvideo_size);
-      if(res.detail.value.size>=max_user_forvideo_size){
+      var forscreen_method = hotel_info.forscreen_method;
+      var speed_forscreen_method = forscreen_method.substr(2,1);
+      if(res.detail.value.size>=max_user_forvideo_size && speed_forscreen_method==1){
         that.setData({launchType:'speed'})
         that.speedForVideo(res.detail.value,hotel_info,1)
 
