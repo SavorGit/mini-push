@@ -86,16 +86,6 @@
 
 			</form>
 
-			<form bindsubmit="chooseUploadfile" report-submit="true">
-				<button class="theme-font2" form-type="submit">
-					<view class="icon flex-column-center-center video">
-						<image src='/images/icon2/FFFFFF_video.png'></image>
-					</view>
-					<label>测试upload</label>
-				</button>
-
-			</form>
-
 			<form bindsubmit="chooseReadfile" report-submit="true">
 				<button class="theme-font2" form-type="submit">
 					<view class="icon flex-column-center-center video">

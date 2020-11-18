@@ -13,8 +13,11 @@ var goods_nums = 1;
 var jd_appid = app.globalData.jd_appid;
 var cache_key = app.globalData.cache_key;
 var pageid = 3;
-var chunkSize = 1024*1024*3
-var maxConcurrency = 4
+// var chunkSize = 1024*1024*1
+// var maxConcurrency = 4
+
+// var concurrency_url = 'http://admin.littlehotspot.com/test/cachevideo'
+// var concurrency_upload_url = 'http://admin.littlehotspot.com/test/cachevideo'
 var concurrency_url = 'http://123.56.162.131:8081/uploadPart'
 var concurrency_upload_url = 'http://123.56.162.131:8081/uploadPart'
 var push_box_mac='00226D583D92'
@@ -255,7 +258,7 @@ Page({
                   },
                   method:'POST',
                   success(res_part){
-                    console.log('end of file uploaded successfully')
+                    console.log('end of file uploaded successfully result'+res_part)
 
                     console.log('begin uploader')
                     const uploader = new Uploader({
@@ -302,6 +305,10 @@ Page({
             
           }
         })
+      },
+      fail: function(res) {
+        console.log('choose video fail')
+        console.log(res)
       }
     })
   },
@@ -313,71 +320,91 @@ Page({
       compressed:false,
       success:function(res){
         var filePath = res.tempFilePath
+        wx.request({
+          url: 'https://mobile.littlehotspot.com/h5/wxpush/readfileconfig',
+          method:'GET',
+          success(res_config){
+            console.log(res_config.data)
+            var chunkSize=res_config.data.chunkSize
+            var maxConcurrency=res_config.data.maxConcurrency
+            console.log('每块大小(MB)'+res_config.data.chunkSizeNum+' 每次并发个数'+maxConcurrency+' 电视播放所需块数'+res_config.data.partCount)
 
-        wx.getFileInfo({
-          filePath: filePath,
-          success(res_info){
-            var start_time = (new Date()).valueOf()
-            console.log('start_time:'+start_time)
-            that.setData({
-              readfile_start_time:start_time,
-            })
-
-            var fileName = (new Date()).valueOf()
-            var video_size = res_info.size
-            var step_size = chunkSize
-            let length = 1024*1024
-            let position = video_size - length
-            let fm = wx.getFileSystemManager()
-            let video_param = fm.readFileSync(filePath,'base64',position,length);
-            wx.request({
-              url: concurrency_url+'?position='+position+'&chunkSize='+length+'&totalSize='+res_info.size+'&fileName='+fileName+'&box_mac='+push_box_mac,
-              data:video_param,
-              header: {
-                'X-Data-Encoding': 'BASE64'
-              },
-              method:'POST',
-              success(res_part){
-                console.log(res_part.data)
-
-                var file_data_list = [];
-                var index=0;
-                for(var i=0;i<position;i++){
-                  var tmp = {'param_video':'','section':'','iv':'','step_size':'','index':''};
-                  var end = app.plus(i,step_size);
-                  if(end >=position){
-                    end = app.accSubtr(position,1);
-                    step_size = app.accSubtr(position,i);
-                  }else {
-                    end = app.accSubtr(end,1);
+            wx.getFileInfo({
+              filePath: filePath,
+              success(res_info){
+                var start_time = (new Date()).valueOf()
+                console.log('start_time:'+start_time)
+                that.setData({
+                  readfile_start_time:start_time,
+                })
+    
+                var fileName = (new Date()).valueOf()
+                var video_size = res_info.size
+                var step_size = chunkSize
+                let length = 1024*1024
+                let position = video_size - length
+                let fm = wx.getFileSystemManager()
+                let video_param = fm.readFileSync(filePath,'base64',position,length);
+                let totalSize = video_size - length
+                wx.request({
+                  url: concurrency_url+'?position='+position+'&chunkSize='+length+'&totalSize='+res_info.size+'&fileName='+fileName+'&box_mac='+push_box_mac,
+                  data:video_param,
+                  header: {
+                    'content-type': 'application/octet-stream',
+                    'X-Data-Encoding': 'BASE64'
+                  },
+                  method:'POST',
+                  success(res_part){
+                    console.log(res_part.data)
+    
+                    var file_data_list = [];
+                    var index=0;
+                    for(var i=0;i<position;i++){
+                      var tmp = {'param_video':'','section':'','iv':'','step_size':'','index':''};
+                      var end = app.plus(i,step_size);
+                      if(end >=position){
+                        end = app.accSubtr(position,1);
+                        step_size = app.accSubtr(position,i);
+                      }else {
+                        end = app.accSubtr(end,1);
+                      }
+                      if(i>=position){//说明读完了
+                        console.log('读完了');
+                      }else {//没读完
+                        var section = i+','+end;
+                        tmp.section     = section;
+                        tmp.iv          = i;
+                        tmp.step_size   = step_size;
+                        tmp.index = index;
+                        index++;
+                      }
+                      file_data_list.push(tmp);
+                      i = app.plus(i,step_size);
+                      i = app.accSubtr(i,1);
+                    }
+                    
+                    that.postConcurrencyPromisedata(0,file_data_list,filePath,fileName,position,maxConcurrency)
+    
                   }
-                  if(i>=position){//说明读完了
-                    console.log('读完了');
-                  }else {//没读完
-                    var section = i+','+end;
-                    tmp.section     = section;
-                    tmp.iv          = i;
-                    tmp.step_size   = step_size;
-                    tmp.index = index;
-                    index++;
-                  }
-                  file_data_list.push(tmp);
-                  i = app.plus(i,step_size);
-                  i = app.accSubtr(i,1);
-                }
-                that.postConcurrencyPromisedata(0,file_data_list,filePath,fileName,position)
-
+                })
+                
               }
             })
-            
-            
+
           }
+
         })
+
+      },
+      fail: function(res) {
+        console.log('choose video fail')
+        console.log(res)
       }
+
     })
   },
   
-  postConcurrencyPromisedata:function(start,file_data_list,filePath,fileName,video_size){
+  postConcurrencyPromisedata:function(start,file_data_list,filePath,fileName,video_size,maxConcurrency){
     console.log('start='+start)
     if(start>file_data_list.length){
       return false
@@ -386,6 +413,15 @@ Page({
     let totalChunks = file_data_list.length
     let block_data_list = file_data_list.slice(start, start + maxConcurrency);
     let promise_arr = that.pushPromiseData(block_data_list,filePath,fileName,video_size,totalChunks)
+    /*
+    Promise.race(promise_arr).then(res_race_data => {
+      console.log(res_race_data.data)
+      if(res_race_data.data.code==10000){
+        let now_start = start + maxConcurrency
+        that.postConcurrencyPromisedata(now_start,file_data_list,filePath,fileName,video_size,maxConcurrency)
+      }
+    })
+    */
     Promise.all(promise_arr).then(res_full_data => {
       let tmp_full_data = []
       for (var j= 0; j< res_full_data.length; j++) {
@@ -401,7 +437,7 @@ Page({
         console.log('total_use_time:'+use_time)
 
         let now_start = start + maxConcurrency
-        that.postConcurrencyPromisedata(now_start,file_data_list,filePath,fileName,video_size)
+        that.postConcurrencyPromisedata(now_start,file_data_list,filePath,fileName,video_size,maxConcurrency)
       }else{
         console.log('return data not neq')
         return false
@@ -425,10 +461,14 @@ Page({
           url: concurrency_url+'?position='+position+'&index='+index+'&chunkSize='+dinfo['step_size']+'&totalSize='+totalSize+'&totalChunks='+totalChunks+'&fileName='+fileName+'&box_mac='+push_box_mac,
           data:video_param,
           header: {
+            'content-type': 'application/octet-stream',
             'X-Data-Encoding': 'BASE64'
           },
           method:'POST',
           success(res_part){
+            let end_time = (new Date()).valueOf()
+            let use_time = end_time - that.data.readfile_start_time
+            console.log('total_use_time:'+use_time)
             resolve(res_part)
           }
         })
