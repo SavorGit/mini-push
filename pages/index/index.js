@@ -706,7 +706,7 @@ Page({
   onShow: function () {
 
     var that = this;
-    if (app.globalData.openid && app.globalData.openid != '') {
+    if (app.globalData.openid && app.globalData.openid != '' && typeof(app.globalData.openid)!='undefined') {
       that.setData({
         openid: app.globalData.openid
       })
@@ -768,7 +768,7 @@ Page({
       })
       app.openidCallback = openid => {
         
-        if (openid != '') {
+        if (openid != '' && typeof(app.globalData.openid)!='undefined') {
           that.setData({
             openid: openid
           })
@@ -815,6 +815,14 @@ Page({
             }
             app.isRegister(openid,that,1,is_have);
           });
+        }else {
+          wx.hideLoading({ })
+          that.getAdspositionList('')
+          that.setData({
+            is_link: 0,
+            box_mac: '',
+          })
+          box_mac = '';
         }
         
       }
