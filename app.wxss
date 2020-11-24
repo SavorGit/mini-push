@@ -23,7 +23,7 @@ radio .wx-radio-input {
 }
 
 checkbox {
-  font-size: 28rpx;
+  font-size: 30rpx;
 }
 
 checkbox .wx-checkbox-input {
