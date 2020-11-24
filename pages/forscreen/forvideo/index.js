@@ -562,15 +562,18 @@ Page({
                 }
               } else {
                 //当前打开wifi 但是没有链接任何wifi
+                //console.log('ffffffffffffffffffff');
                 that.connectWifi(wifi_name, wifi_mac, use_wifi_password, box_mac,hotel_info,data,cTs);
               }
               //wx.hideLoading()
             }, fail: function (res) {
               //console.log('getConnectedWifi_fail');
-              console.log(res)
+              //console.log('getConnectedWifi fail');
+              //console.log(res)
               var err_msg = 'wifi链接失败';
               if(res.errMsg == 'getConnectedWifi:fail:currentWifi is null' || res.errMsg=='getConnectedWifi:fail no wifi is connected.'){
-                that.connectWifi(wifi_name, wifi_mac, use_wifi_password, box_mac,hotel_info,data);
+                //console.log('99999--'+cTs);
+                that.connectWifi(wifi_name, wifi_mac, use_wifi_password, box_mac,hotel_info,data,cTs);
               }else {
                 if (res.errCode == 12005) { //安卓特有  未打开wifi
                   err_msg = '请打开您的手机Wifi';
@@ -596,20 +599,19 @@ Page({
                   var msg = '请手动连接包间wifi:' + hotel_info.wifi_name + ',密码为' + us_wifi_password+'。连上wifi投屏更快哦！';
                   
                 }
-                if(cTs!=1){
-                  openWind.tip = err_msg;
-                  openWind.isError = true;
-                  that.setData({
-                    openWind:openWind
-                  })
-                }
+                openWind.tip = err_msg;
+                openWind.isError = true;
+                that.setData({
+                  openWind:openWind
+                })
+              
                 
               }
               
             },
           })
         }, fail: function (res) {
-          console.log('++++++++++++++++++++++++')
+          //console.log('++++++++++++++++++++++++')
           //console.log('startwifierr')
           openWind.tip = res.errMsg;
           openWind.isError = true;
@@ -667,8 +669,8 @@ Page({
             err_msg = '请打开您的手机GPS';
             
           } else if(res.errCode == 12007){//用户拒绝授权链接 Wi-Fi
-            console.log('12007');
-            console.log(cTs);
+            //console.log('12007');
+            //console.log(cTs);
             if(cTs==1){
               that.setData({isOpenWind:'false',openWind:{'isWifi':false,'isError':false,'title':'','step':1,'progress':0,'tip':''}})
               that.classicForVideo(data)
@@ -686,7 +688,7 @@ Page({
             var msg = '请手动连接包间wifi:' + wifi_name + ',密码为' + wifi_password_str+'。连上wifi投屏更快哦！';
             
           }
-          console.log('go on');
+          //console.log('go on');
           openWind.tip = err_msg;
           openWind.isError = true;
           that.setData({
