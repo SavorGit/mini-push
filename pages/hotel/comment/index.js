@@ -59,7 +59,8 @@ Page({
         staff_user_info:data.result.staff_user_info,
         tags:data.result.tags,
         comment_str:'',
-        reward_list:data.result.reward_money
+        reward_list:data.result.reward_money,
+        cacsi:data.result.cacsi,
       })
     },res=>{
       wx.navigateBack({
@@ -67,7 +68,168 @@ Page({
       })
     })
   },
-  subStar:function(e){
+  /**
+   * 选择评价类型 
+   */
+  selectCommentLevle:function(e){
+    var commentLevel = e.target.dataset.commentLevel;  //1很糟糕 2一般般 3太赞了
+    this.setData({
+      commentLevel:commentLevel,
+    })
+
+  },
+
+  /**
+   * 选择评价标签
+   */
+  selectCommentLable:function(e){
+    var cacsi = this.data.cacsi;
+    var commentLevel = this.data.commentLevel;
+    var lableKey = e.target.dataset.lableKey;
+    if(cacsi[commentLevel].label[lableKey].selected == false){//选择标签
+      cacsi[commentLevel].label[lableKey].selected = true;
+    }else {                                                   //取消标签
+      cacsi[commentLevel].label[lableKey].selected = false;
+    }
+  },
+  /**
+   * 随便说两句
+   */
+  editCommnet:function(e){
+    var comment_str = e.detail.value;
+    this.setData({comment_str:comment_str})
+    
+  },
+  /**
+   * 提交评价
+   */
+  submitComment:function(e){
+    var that = this;
+    var comment_str = this.data.comment_str.replace(/\s+/g, '');
+    var staff_user_info = this.data.staff_user_info;
+    var staff_id = staff_user_info.staff_id;
+    var is_open_reward = that.data.is_open_reward; //打赏开关 1开0关
+
+    var cacsi = that.data.cacsi;
+    var tag_ids  = '';
+    var tag_strs = '';
+    var space    = '';
+    for(var i in cacsi[commentLevel].label){
+      if(cacsi[commentLevel].label[i].selected==true){
+        tag_ids  += space + cacsi[commentLevel].label[i].id;
+        tag_strs += space+cacsi[commentLevel].label[i].name;
+        space = ',';
+      }
+    }
+
+
+    utils.PostRequest(api_v_url + '/Comment/subComment', {
+      openid: openid,
+      score:0,
+      content:comment_str,
+      staff_id :staff_id,
+      box_mac:box_mac,
+      satisfaction_id:commentLevel,
+      tag_ids:tag_ids,
+    }, (data, headers, cookies, errMsg, statusCode) => {
+      var comment_id = data.result.comment_id;
+      that.setData({comment_disable:false,tag_strs:tag_strs,comment_id:comment_id})
+      
+      
+      
+      var forscreen_id = (new Date()).valueOf();
+      that.recordForscreenLog(forscreen_id,openid,box_mac,52);
+      
+    })
+
+  },
+  /***
+   * 提交打赏
+   */
+  payReward:function(){
+    
+    var that = this;
+    var reward_id = that.data.reward_id;  //选择打赏金额id
+    var staff_user_info = this.data.staff_user_info;
+    var staff_id = staff_user_info.staff_id;
+    
+    utils.PostRequest(api_v_url + '/comment/reward', {
+      box_mac:box_mac,
+      reward_id:reward_id,
+      openid: openid,
+      staff_id:staff_id,
+    }, (data, headers, cookies, errMsg, statusCode) => {
+      wx.requestPayment({
+        'timeStamp': data.result.payinfo.timeStamp,
+        'nonceStr': data.result.payinfo.nonceStr,
+        'package': data.result.payinfo.package,
+        'signType': data.result.payinfo.signType,
+        'paySign': data.result.payinfo.paySign,
+        success(res) {//支付成功
+          wx.showToast({
+            title: '感谢您的支持',
+            icon:'success',
+            duration:2000,
+            success:function(e){
+              wx.switchTab({
+                url: '/pages/index/index',
+              })
+            }
+          })
+        },
+        fail(res) {
+          if (res.errMsg == "requestPayment:fail cancel") {
+            app.showToast('支付取消')
+            
+          } else {
+            app.showToast('支付失败')
+          }
+          that.setData({comment_disable:false})
+        }
+      },re => { 
+        that.setData({comment_disable:false})
+      })
+    })
+  },
+  //选择打赏金额
+  selectReward:function(e){
+    var reward_list = this.data.reward_list;
+    var keys = e.currentTarget.dataset.keys;
+    for(let i in reward_list){
+      if(reward_list[i].selected===true){
+        reward_list[i].selected = false;
+      }
+      if(i==keys){
+        reward_list[i].selected = true;
+      }
+    }
+    this.setData({reward_list:reward_list,reward_money:''});
+  },
+  /**
+   * 输入打赏金额
+   */
+  inputRewardMoney:function(e){
+    var reward_money = e.detail.value.replace(/\s+/g, '');
+    this.setData({reward_money:reward_money})
+  },
+  recordForscreenLog:function(forscreen_id,openid,box_mac,action=0){
+
+    utils.PostRequest(api_v_url+'/index/recordForScreenPics', {
+      forscreen_id: forscreen_id,
+      openid: openid,
+      box_mac: box_mac,
+      action: action,
+      mobile_brand: app.globalData.mobile_brand,
+      mobile_model: app.globalData.mobile_model,
+      imgs: '[]',
+      serial_number:app.globalData.serial_number
+
+    }, (data, headers, cookies, errMsg, statusCode) => {
+      
+    },re => { }, { isShowLoading: false })
+    
+  },
+  /*subStar:function(e){
     var star_list = this.data.star_list;
     var keys = e.target.dataset.keys;
     var flag = keys +1;
@@ -90,13 +252,9 @@ Page({
       }
     }
     this.setData({star_list:star_list})
-  },
-  editCommnet:function(e){
-    var comment_str = e.detail.value;
-    this.setData({comment_str:comment_str})
-    
-  },
-  clickTag:function(e){
+  },*/
+  
+  /*clickTag:function(e){
     var comment_str = this.data.comment_str;
     var value = e.target.dataset.value;
     var keys  = e.target.dataset.keys;
@@ -116,10 +274,10 @@ Page({
     }
     
     this.setData({comment_str:comment_str})
-  },
+  },*/
 
 
-  subComment:function(openid,score,comment_str,staff_id,box_mac){
+  /*subComment:function(openid,score,comment_str,staff_id,box_mac){
     var that = this;
     utils.PostRequest(api_v_url + '/Comment/subComment', {
       openid: openid,
@@ -140,38 +298,9 @@ Page({
       that.recordForscreenLog(forscreen_id,openid,box_mac,52);
       
     })
-  },
-  payReward:function(openid,score,comment_str,staff_id,box_mac,reward_id){
-    var that = this;
-    utils.PostRequest(api_v_url + '/comment/reward', {
-      box_mac:box_mac,
-      reward_id:reward_id,
-      openid: openid,
-      staff_id:staff_id,
-    }, (data, headers, cookies, errMsg, statusCode) => {
-      wx.requestPayment({
-        'timeStamp': data.result.payinfo.timeStamp,
-        'nonceStr': data.result.payinfo.nonceStr,
-        'package': data.result.payinfo.package,
-        'signType': data.result.payinfo.signType,
-        'paySign': data.result.payinfo.paySign,
-        success(res) {
-          that.subComment(openid,score,comment_str,staff_id,box_mac) 
-        },
-        fail(res) {
-          if (res.errMsg == "requestPayment:fail cancel") {
-            app.showToast('支付取消')
-            
-          } else {
-            app.showToast('支付失败')
-          }
-          that.setData({comment_disable:false})
-        }
-      },re => { 
-        that.setData({comment_disable:false})
-      })
-    })
-  },
+  },*/
+  
+  /*
   submitComment:function(e){
     console.log(e);
     //return false;
@@ -184,10 +313,7 @@ Page({
 
     var score = 0;
     var flag_score = 0;
-    /*if(comment_str==''){
-      app.showToast('请填写评价内容');
-      return false;
-    }*/
+    
     for(let i in star_list){
       if(star_list[i].is_select==true){
         score  +=1;
@@ -214,38 +340,9 @@ Page({
       that.subComment(openid,score,comment_str,staff_user_info.staff_id,box_mac)
     }
     
-  },
-  recordForscreenLog:function(forscreen_id,openid,box_mac,action=0){
-
-    utils.PostRequest(api_v_url+'/index/recordForScreenPics', {
-      forscreen_id: forscreen_id,
-      openid: openid,
-      box_mac: box_mac,
-      action: action,
-      mobile_brand: app.globalData.mobile_brand,
-      mobile_model: app.globalData.mobile_model,
-      imgs: '[]',
-      serial_number:app.globalData.serial_number
-
-    }, (data, headers, cookies, errMsg, statusCode) => {
-      
-    },re => { }, { isShowLoading: false })
-    
-  },
-  //选择打赏金额
-  selectReward:function(e){
-    var reward_list = this.data.reward_list;
-    var keys = e.currentTarget.dataset.keys;
-    for(let i in reward_list){
-      if(reward_list[i].selected===true){
-        reward_list[i].selected = false;
-      }
-      if(i==keys){
-        reward_list[i].selected = true;
-      }
-    }
-    this.setData({reward_list:reward_list});
-  },
+  },*/
+  
+  
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
