@@ -48,21 +48,16 @@ Page({
     that.isHaveCallBox(openid);
     
     //获取用户信息以及我的公开
-   
-    wx.request({
-      url: api_url + '/Smallapp3/User/index',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      data: { openid: openid },
-      success: function (res) {
-        that.setData({
-          userinfo: res.data.result.user_info,
-          publiclist: res.data.result.public_list,
-          collectlist: res.data.result.collect_list
-        })
-      }
+    utils.PostRequest(api_url + '/Smallapp3/User/index', {
+      openid: openid 
+    }, (data, headers, cookies, errMsg, statusCode) => {
+      that.setData({
+        userinfo: data.result.user_info,
+        publiclist: data.result.public_list,
+        collectlist: data.result.collect_list
+      })
     })
+    
     
   },
   isHaveCallBox:function(openid){

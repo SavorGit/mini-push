@@ -1,5 +1,5 @@
 const verbose = false; // true: 开；false: 关。
-
+const app = getApp()
 const formatTime = date => {
   const year = date.getFullYear()
   const month = date.getMonth() + 1
@@ -68,14 +68,14 @@ const HttpRequest = (options) => {
   if (typeof(requestUrl) != 'string') {
     throw "The request 'url' is wrong";
   }
-  let requestHeaders = options.header;
+  let requestHeaders = options.headers;
   if (typeof(requestHeaders) != 'object') {
     requestHeaders = {};
   }
   let requestMethod = options.method;
   let requestOptions = {
     url: requestUrl,
-    headers: requestHeaders,
+    header: requestHeaders,
     data: options.data,
     method: options.method,
     dataType: options.dataType,
@@ -258,6 +258,10 @@ const PostRequest = (url, data, successFn, failFn, options) => {
   HttpRequestForLHS({
     url: url,
     data: data,
+    headers: {
+      'content-type': 'application/json',
+      'serial_number':app.globalData.serial_number
+    },
     method: 'POST',
     isShowLoading: options.isShowLoading,
     isShowToastForSuccess: options.isShowToastForSuccess,

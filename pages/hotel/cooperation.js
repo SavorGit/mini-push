@@ -65,36 +65,30 @@ Page({
           latitude:latitude,
           longitude:longitude
         })
-        wx.request({
-          url: api_v_url + '/Area/getAreaid',
-          header: {
-            'content-type': 'application/json'
-          },
-          data: {
-            latitude: latitude,
-            longitude: longitude
-          },
-          success: function (res) {
-            if (res.data.result.cityindex == null) {
-              that.setData({
-                cityIndex: 0
-              })
-            } else {
-              that.setData({
-                cityIndex: res.data.result.cityindex
-              })
-            }
-            var area_id = res.data.result.area_id;
-
-
-            //获取区域列表
-            that.getAreaList(area_id);
-            
-            //获取酒楼列表
-            
-            that.getHotelList(page,area_id,0,0,0);
+        utils.PostRequest(api_v_url + '/Area/getAreaid', {
+          latitude: latitude,
+          longitude: longitude
+        }, (data, headers, cookies, errMsg, statusCode) => {
+          if (data.result.cityindex == null) {
+            that.setData({
+              cityIndex: 0
+            })
+          } else {
+            that.setData({
+              cityIndex: data.result.cityindex
+            })
           }
+          var area_id = data.result.area_id;
+
+
+          //获取区域列表
+          that.getAreaList(area_id);
+          
+          //获取酒楼列表
+          
+          that.getHotelList(page,area_id,0,0,0);
         })
+        
         //mta.Event.stat('getLocationInfo', { 'ltype': 2 })
       },
       fail: function (e) {
@@ -264,25 +258,6 @@ Page({
       urls: urls // 需要预览的图片http链接列表
     })
     //mta.Event.stat('clickHotelImg', { 'hotelid': e.currentTarget.dataset.hotelid })
-  },
-  closeHotelHind: function (e) {
-    var that = this;
-    var openid = e.currentTarget.dataset.openid;
-    wx.request({
-      url: api_url + '/Smallapp3/user/closeHotelHind',
-      header: {
-        'content-type': 'application/json'
-      },
-      data: {
-        openid: openid
-      },
-      success: function (res) {
-        that.setData({
-          close_hotel_hint: 1
-        })
-      }
-    })
-
   },
   //城市切换 
   bindCityPickerChange: function (e) {

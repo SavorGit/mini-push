@@ -47,39 +47,28 @@ Page({
       box_mac: box_mac,
       openid: openid,
     })
-    wx.request({
-      url: api_v_url + '/index/isHaveCallBox?openid=' + openid,
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      success: function(res) {
-        if (res.data.code == 10000 && res.data.result.is_have == 1) {
-
-          self.setData({
-            is_open_simple: res.data.result.is_open_simple,
-            hotel_info: res.data.result,
-          })
-        }
-      }
-    })
-    wx.request({
-      url: api_url + '/Smallapp3/User/getMyPublic',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      data: {
-        openid: openid
-      },
-      success: function(res) {
-
-        publiclist = res.data.result.list;
+    utils.PostRequest(api_v_url + '/index/isHaveCallBox', {
+      openid:openid
+    }, (data, headers, cookies, errMsg, statusCode) => {
+      if (data.result.is_have == 1) {
 
         self.setData({
-          userinfo: res.data.result.user_info,
-          publiclist: res.data.result.list,
+          hotel_info: data.result,
         })
       }
     })
+    utils.PostRequest(api_url + '/Smallapp3/User/getMyPublic', {
+      openid: openid
+    }, (data, headers, cookies, errMsg, statusCode) => {
+      publiclist = data.result.list;
+
+      self.setData({
+        userinfo: data.result.user_info,
+        publiclist: data.result.list,
+      })
+    })
+    
+    
   },
   //遥控呼大码
   callQrCode: utils.throttle(function(e) {
@@ -203,38 +192,29 @@ Page({
 
     if (res.from === 'button') {
       // 转发成功
-      wx.request({
-        url: api_url + '/Smallapp/share/recLogs',
-        header: {
-          'content-type': 'application/json'
-        },
-        data: {
-          'openid': openid,
-          'res_id': res_id,
-          'type': 2,
-          'status': 1,
-        },
-        success: function(e) {
-          for (var i = 0; i < publiclist.length; i++) {
-            if (i == res_key) {
-              publiclist[i].share_num++;
-            }
+      utils.PostRequest(api_url + '/Smallapp/share/recLogs', {
+        'openid': openid,
+        'res_id': res_id,
+        'type': 2,
+        'status': 1,
+      }, (data, headers, cookies, errMsg, statusCode) => {
+        for (var i = 0; i < publiclist.length; i++) {
+          if (i == res_key) {
+            publiclist[i].share_num++;
           }
-          self.setData({
-            publiclist: publiclist
-          })
-
-        },
-        fail: function({
-          errMsg
-        }) {
-          wx.showToast({
-            title: '网络异常，请稍后重试',
-            icon: 'none',
-            duration: 2000
-          })
         }
+        self.setData({
+          publiclist: publiclist
+        })
+      },res=>{
+        wx.showToast({
+          title: '网络异常，请稍后重试',
+          icon: 'none',
+          duration: 2000
+        })
       })
+
+      
       // 来自页面内转发按钮
       return {
         title: '发现一个好玩的东西',
@@ -268,30 +248,26 @@ Page({
       'openid': self.data.openid,
       'status': true
     }));
-    wx.request({
-      url: api_url + '/Smallapp/User/delMyPublic',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      data: {
-        openid: openid,
-        forscreen_id: forscreen_id
-      },
-      success: function(res) {
 
-        self.setData({
-          showModal: false,
-        })
-        for (var i = 0; i < publiclist.length; i++) {
-          if (keys == i) {
-            publiclist.splice(keys, 1);
-          }
+    utils.PostRequest(api_url + '/Smallapp/User/delMyPublic', {
+      openid: openid,
+      forscreen_id: forscreen_id
+    }, (data, headers, cookies, errMsg, statusCode) => {
+      self.setData({
+        showModal: false,
+      })
+      for (var i = 0; i < publiclist.length; i++) {
+        if (keys == i) {
+          publiclist.splice(keys, 1);
         }
-        self.setData({
-          publiclist: publiclist,
-        })
       }
+      self.setData({
+        publiclist: publiclist,
+      })
+      
     })
+
+    
   },
   onClickItem: function(e) {
     var self = this;
@@ -327,35 +303,19 @@ Page({
     var self = this;
 
     page = page + 1;
-    self.setData({
-      hiddens: false,
+    
+    utils.PostRequest(api_url + '/smallapp3/user/getMyPublic', {
+      page: page,
+      openid: openid,
+    }, (data, headers, cookies, errMsg, statusCode) => {
+      publiclist = data.result.list;
+      self.setData({
+        userinfo: data.result.user_info,
+        publiclist: data.result.list,
+        
+      })
     })
-    wx.request({
-      url: api_url + '/smallapp3/user/getMyPublic',
-      header: {
-        'Content-Type': 'application/json'
-      },
-      data: {
-        page: page,
-        openid: openid,
-      },
-      method: "POST",
-      success: function(res) {
-        if (res.data.code == 10000) {
-          publiclist = res.data.result.list;
-          self.setData({
-            userinfo: res.data.result.user_info,
-            publiclist: res.data.result.list,
-            hiddens: true,
-          })
-
-        } else {
-          self.setData({
-            hiddens: true,
-          })
-        }
-      }
-    })
+    
   },
   //电视播放
   boxShow(e) {
@@ -386,52 +346,31 @@ Page({
       'openid': openid,
       'status': true
     }));
-    wx.request({
-      url: api_url + '/Smallapp/collect/recLogs',
-      header: {
-        'content-type': 'application/json'
-      },
-      data: {
-        'openid': openid,
-        'res_id': res_id,
-        'type': 2,
-        'status': 1,
-      },
-      success: function(e) {
-        var collect_nums = e.data.result.nums;
-        for (var i = 0; i < publiclist.length; i++) {
-          if (i == res_key) {
-            publiclist[i].is_collect = 1;
-            publiclist[i].collect_num = collect_nums;
-          }
+
+    utils.PostRequest(api_url + '/Smallapp/collect/recLogs', {
+      'openid': openid,
+      'res_id': res_id,
+      'type': 2,
+      'status': 1,
+    }, (data, headers, cookies, errMsg, statusCode) => {
+      var collect_nums = data.result.nums;
+      for (var i = 0; i < publiclist.length; i++) {
+        if (i == res_key) {
+          publiclist[i].is_collect = 1;
+          publiclist[i].collect_num = collect_nums;
         }
-        self.setData({
-          publiclist: publiclist
-        })
-        /*if (e.data.code == 10000) {
-          wx.showToast({
-            title: '收藏成功',
-            icon: 'none',
-            duration: 2000
-          })
-        } else {
-          wx.showToast({
-            title: '收藏失败，请稍后重试',
-            icon: 'none',
-            duration: 2000
-          })
-        }*/
-      },
-      fial: function({
-        errMsg
-      }) {
-        wx.showToast({
-          title: '网络异常，请稍后重试',
-          icon: 'none',
-          duration: 2000
-        })
       }
+      self.setData({
+        publiclist: publiclist
+      })
+    },res=>{
+      wx.showToast({
+        title: '网络异常，请稍后重试',
+        icon: 'none',
+        duration: 2000
+      })
     })
+    
   }, //收藏资源结束
   //取消收藏
   cancCollect: function(e) {
@@ -443,52 +382,31 @@ Page({
       'openid': openid,
       'status': false
     }));
-    wx.request({
-      url: api_url + '/Smallapp/collect/recLogs',
-      header: {
-        'content-type': 'application/json'
-      },
-      data: {
-        'openid': openid,
-        'res_id': res_id,
-        'type': 2,
-        'status': 0,
-      },
-      success: function(e) {
-        var collect_nums = e.data.result.nums;
-        for (var i = 0; i < publiclist.length; i++) {
-          if (i == res_key) {
-            publiclist[i].is_collect = 0;
-            publiclist[i].collect_num = collect_nums;
-          }
+    utils.PostRequest(api_url + '/Smallapp/collect/recLogs', {
+      'openid': openid,
+      'res_id': res_id,
+      'type': 2,
+      'status': 0,
+    }, (data, headers, cookies, errMsg, statusCode) => {
+      var collect_nums = data.result.nums;
+      for (var i = 0; i < publiclist.length; i++) {
+        if (i == res_key) {
+          publiclist[i].is_collect = 0;
+          publiclist[i].collect_num = collect_nums;
         }
-        self.setData({
-          publiclist: publiclist
-        })
-        /*if (e.data.code == 10000) {
-          wx.showToast({
-            title: '取消收藏成功',
-            icon: 'none',
-            duration: 2000
-          })
-        } else {
-          wx.showToast({
-            title: '取消收藏失败，请稍后重试',
-            icon: 'none',
-            duration: 2000
-          })
-        }*/
-      },
-      fial: function({
-        errMsg
-      }) {
-        wx.showToast({
-          title: '网络异常，请稍后重试',
-          icon: 'none',
-          duration: 2000
-        })
       }
+      self.setData({
+        publiclist: publiclist
+      })
+      
+    },res=>{
+      wx.showToast({
+        title: '网络异常，请稍后重试',
+        icon: 'none',
+        duration: 2000
+      })
     })
+    
   }, //取消收藏结束
   goToBack: function(e) {
     app.goToBack();
