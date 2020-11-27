@@ -4,7 +4,7 @@
  */
 
 
-.waiter-evaluate-window {
+/* .waiter-evaluate-window {
   width: 100%;
 }
 
@@ -210,4 +210,360 @@
   font-size: 38rpx;
   font-weight: normal;
   border-radius: 8rpx;
+} */
+
+
+
+.mask {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.4);
+  z-index: 10;
+}
+
+.bottom-window>.window {
+  position: absolute;
+  bottom: 0;
+  z-index: 11;
+}
+
+.head {
+  width: calc(100% - 50rpx);
+  height: 180rpx;
+  padding: 10rpx 25rpx;
+}
+
+.head-pic {
+  width: 174rpx;
+  height: 174rpx;
+  border-radius: 50%;
+  border: 3rpx solid rgb(210, 196, 181);
+}
+
+.head>.right {
+  width: calc(100% - 200rpx);
+  height: 100%;
+}
+
+.nickname {
+  font-size: 28rpx;
+}
+
+.tip {
+  font-size: 28rpx;
+}
+
+.body {
+  width: calc(100% - 40rpx);
+  height: calc(100% - 250rpx);
+  margin-top: 10rpx;
+  padding: 20rpx;
+}
+
+.panel {
+  width: 100%;
+}
+
+.panel>.title-bar {
+  width: 100%;
+  height: 50rpx;
+}
+
+.panel>.body {
+  width: 100%;
+  height: calc(100% - 50rpx);
+  margin: unset;
+  padding: unset;
+}
+
+/* ==================================== 满意度面板 ==================================== */
+.satisfaction {
+  height: 300rpx;
+}
+
+.satisfaction>.title-bar {
+  height: 90rpx;
+}
+
+.satisfaction>.title-bar>.text {
+  width: 100%;
+  font-size: 36rpx;
+  font-weight: 700;
+  text-align: center;
+}
+
+.satisfaction>.body {
+  height: calc(100% - 90rpx);
+}
+
+.satisfaction>.body>view {
+  width: 150rpx;
+  height: 160rpx;
+}
+
+.satisfaction>.body>view>.icon {
+  width: 116rpx;
+  height: 116rpx;
+}
+
+.satisfaction>.body>view>.label {
+  width: 100%;
+  font-size: 28rpx;
+  text-align: center;
+}
+
+/* ==================================== 意见面板 ==================================== */
+.opinion {
+  height: calc(100% - 440rpx);
+}
+
+.opinion>.title-bar {
+  height: 70rpx;
+}
+
+.opinion>.title-bar>.text {
+  font-size: 48rpx;
+}
+
+.opinion>.body {
+  height: calc(100% - 70rpx);
+  overflow-y: auto;
+  /* overflow-x: hidden; */
+}
+
+.opinion>.body .tag-group {
+  width: 100%;
+  padding: 10rpx 20rpx;
+}
+
+.opinion>.body .tag-group>.tag {
+  display: inline-block;
+  margin: 5rpx;
+  padding: 5rpx 10rpx;
+  font-size: 28rpx;
+  border-width: 3rpx;
+  border-style: solid;
+  border-color: rgb(187, 187, 187);
+  border-radius: 10rpx;
+  box-sizing: border-box;
+}
+
+.opinion>.body .tag-group>.tag.selected {
+  color: #F44444;
+  border-color: #F44444;
+}
+
+.opinion>.body .input-group {
+  width: calc(100% - 40rpx);
+  /* height: 200rpx; */
+  padding: 10rpx 20rpx;
+}
+
+.opinion>.body .input-group>.btn {
+  width: 190rpx;
+  height: 50rpx;
+}
+
+.opinion>.body .input-group>.btn>.icon {
+  font-size: 48rpx;
+}
+
+.opinion>.body .input-group>.btn>.label {
+  font-size: 28rpx;
+}
+
+.opinion>.body .input-group>.input {
+  width: calc(100% - 16rpx);
+  height: 200rpx;
+  padding: 5rpx;
+  font-size: 28rpx;
+  border: 3rpx solid #DEDEDE;
+}
+
+/* ==================================== 底部按钮面板【评价页】 ==================================== */
+.btn-group {
+  height: 140rpx;
+}
+
+.btn-group>.body {
+  height: 100%;
+}
+
+.btn-group>.body>.btn {
+  width: 690rpx;
+  height: 100rpx;
+  line-height: 100rpx;
+  border-radius: 20rpx;
+  font-size: 36rpx;
+  margin: unset;
+  padding: unset;
+  border: unset;
+}
+
+/* ==================================== 评价响应面板 ==================================== */
+.response {
+  height: 300rpx;
+}
+
+.response>.body {
+  height: 100%;
+}
+
+.response>.body>.icon {
+  width: 120rpx;
+  height: 120rpx;
+}
+
+.response>.body>.title {
+  font-size: 40rpx;
+}
+
+.response>.body>.content {
+  font-size: 28rpx;
+}
+
+/* ==================================== 评价回馈面板 ==================================== */
+.feedback {
+  height: 200rpx;
+}
+
+.feedback>.body {
+  height: 100%;
+}
+
+.feedback>.body>.text {
+  font-size: 28rpx;
+}
+
+/* ==================================== 底部按钮面板【结果页】 ==================================== */
+.evaluate-result .btn-group {
+  height: 200rpx;
+}
+
+.evaluate-result .btn-group>.body {
+  height: 100%;
+}
+
+.evaluate-result .btn-group>.body>.btn {
+  width: 400rpx;
+  height: 176rpx;
+  line-height: 176rpx;
+  border-radius: 20rpx;
+  font-size: 36rpx;
+  margin: unset;
+  padding: unset;
+  border: unset;
+}
+
+.evaluate-result .btn-group>.body>.btn view {
+  display: inline-block;
+  padding: 5rpx;
+  box-sizing: border-box;
+}
+
+
+
+/* ==================================== [Window] 打赏服务员弹窗 ==================================== */
+.gratuity>.window {
+  width: 100%;
+  height: 600rpx;
+}
+
+.gratuity>.window>.head {
+  width: 100%;
+  height: 100rpx;
+  margin: unset;
+  padding: unset;
+}
+
+.gratuity>.window>.head>.title-bar {
+  width: calc(100% - 50rpx);
+  height: calc(100% - 20rpx);
+  padding: 10rpx 25rpx;
+}
+
+.gratuity>.window>.head>.title-bar>.text {
+  font-size: 40rpx;
+  font-weight: 700;
+}
+
+.gratuity>.window>.head>.btn-group {
+  width: calc(100% - 50rpx);
+  height: calc(100% - 20rpx);
+  padding: 10rpx 25rpx;
+  margin-top: -100rpx;
+}
+
+.gratuity>.window>.head>.btn-group>.btn {
+  width: 60rpx;
+  height: 60rpx;
+  line-height: 60rpx;
+  text-align: center;
+  font-size: 40rpx;
+  border: 3rpx solid #DEDEDE;
+  border-radius: 50%;
+  margin: 0;
+  padding: 0;
+}
+
+.gratuity>.window>.body {
+  width: calc(100% - 50rpx);
+  height: calc(100% - 140rpx);
+  padding: 20rpx 25rpx;
+  margin: 0;
+}
+
+.gratuity>.window>.body>.btn-row {
+  width: 100%;
+  height: 200rpx;
+}
+
+.gratuity>.window>.body>.btn-row .icon {
+  width: 120rpx;
+  height: 120rpx;
+  line-height: 120rpx;
+  text-align: center;
+  border-radius: 50%;
+  color: rgb(16, 16, 16);
+  background-color: rgb(237, 237, 237);
+  font-size: 48rpx;
+}
+
+.gratuity>.window>.body>.btn-row .label {
+  font-size: 28rpx;
+}
+
+.gratuity>.window>.body>.input-row {
+  width: calc(100% - 100rpx);
+  height: 100rpx;
+  padding: 10rpx 50rpx;
+}
+
+.gratuity>.window>.body>.input-row>.input-wrapper {
+  width: 100%;
+  height: 60rpx;
+  padding: 0 20rpx;
+  border-bottom: 3rpx solid #DEDEDE;
+}
+
+.gratuity>.window>.body>.input-row>.input-wrapper>.input {
+  font-size: 28rpx;
+}
+
+.gratuity>.window>.body>.input-row>.input-wrapper>.unit {
+  font-size: 28rpx;
+}
+
+.gratuity>.window>.body>.btn-group>.btn {
+  width: 690rpx;
+  height: 100rpx;
+  line-height: 100rpx;
+  border-radius: 20rpx;
+  font-size: 36rpx;
+  margin: unset;
+  padding: unset;
+  border: unset;
 }
