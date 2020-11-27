@@ -71,12 +71,12 @@
 
 
 <!-- 评价页 -->
-<view wx:if="showEvaluate" class="container flex-column-center-start evaluate theme-container" style="height:calc(100vh - {{46 + statusBarHeight + SystemInfo.screenBottomSpace}}px);">
+<view wx:if="{{is_comment==0}}" class="container flex-column-center-start evaluate theme-container" style="height:calc(100vh - {{46 + statusBarHeight + SystemInfo.screenBottomSpace}}px);">
 	<view class="head flex-row-center-space_between theme-panel">
-		<image class="head-pic left" mode="aspectFill" src="https://oss.littlehotspot.com/WeChat/resource/default.jpg"></image>
+		<image class="head-pic left" mode="aspectFill" src="{{staff_user_info.avatarUrl}}"></image>
 		<view class="right flex-column-flex_start-center">
-			<view class="nickname theme-font1">张三</view>
-			<view class="tip three-line-overflow theme-font2">“很高兴为您服务，期待您对本次饭局的评价。您的评价将是我们前进的动力及导向！”</view>
+			<view class="nickname theme-font1">{{staff_user_info.nickName}}</view>
+			<view class="tip three-line-overflow theme-font2">{{staff_user_info.service_str}}</view>
 		</view>
 	</view>
 	<view class="body theme-panel">
@@ -88,49 +88,59 @@
 					<view class="text one-line-overflow theme-font1">您对本次饭局还满意吗？</view>
 				</view>
 				<view class="body flex-row-center-space_around">
-					<view class="frown flex-column-center-space_between">
-						<!-- <image class="icon" mode="aspectFill" src="https://oss.littlehotspot.com/WeChat/MiniProgram/images/icon/frown_selected.png"></image> -->
-						<image class="icon" mode="aspectFill" src="https://oss.littlehotspot.com/WeChat/MiniProgram/images/icon/frown_default.png"></image>
-						<view class="label one-line-overflow">很糟糕</view>
-					</view>
-					<view class="meh flex-column-center-space_between">
-						<image class="icon" mode="aspectFill" src="https://oss.littlehotspot.com/WeChat/MiniProgram/images/icon/meh_selected.png"></image>
-						<!-- <image class="icon" mode="aspectFill" src="https://oss.littlehotspot.com/WeChat/MiniProgram/images/icon/meh_default.png"></image> -->
+
+					<block wx:for="{{cacsi}}" wx:key="key"  wx:for-item="bean" wx:for-index="index">
+						<view class="frown flex-column-center-space_between">
+							<!-- <image class="icon" mode="aspectFill" src="/images/icon/bad_no_select.png"></image> -->
+
+							<image wx:if="{{commentLevel==index}}" class="icon" mode="aspectFill" src="/images/icon/{{index}}_select.png"></image>
+							<image wx:else class="icon" mode="aspectFill" src="/images/icon/{{index}}_no_select.png" bindtap="selectCommentLevle" data-commentLevel="{{index}}"></image>
+							<view class="label one-line-overflow">{{bean.name}}</view>
+						</view>
+					</block>
+					<!-- <view class="meh flex-column-center-space_between">
+						<image class="icon" mode="aspectFill" src="/images/icon/general_no_select.png"></image>
+						<image class="icon" mode="aspectFill" src="/images/icon/general_select.png"></image> 
 						<view class="label one-line-overflow">一般般</view>
 					</view>
 					<view class="smile flex-column-center-space_between">
-						<!-- <image class="icon" mode="aspectFill" src="https://oss.littlehotspot.com/WeChat/MiniProgram/images/icon/smile_selected.png"></image> -->
-						<image class="icon" mode="aspectFill" src="https://oss.littlehotspot.com/WeChat/MiniProgram/images/icon/smile_default.png"></image>
+						 <image class="icon" mode="aspectFill" src="/images/icon/good_select.png"></image> 
+						<image class="icon" mode="aspectFill" src="/images/icon/good_no_select.png"></image>
 						<view class="label one-line-overflow">太赞了</view>
-					</view>
+					</view> -->
 				</view>
 			</view>
 
 			<!-- 意见面板 -->
 			<view class="panel opinion">
-				<view class="title-bar flex-row-center-center">
-					<view class="text three-line-overflow theme-font5">一般般，还需要改善</view>
+				<view class="title-bar flex-row-center-center" wx:if="{{commentLevel!=0}}">
+					<view class="text three-line-overflow theme-font5">{{cacsi[commentLevel].title}}</view>
 				</view>
 				<scroll-view class="body flex-column-center-flex_start" scroll-y="true" scroll-with-animation="true">
 					<view class="tag-group">
-						<view class="tag theme-font1">服务很一般</view>
+						<block wx:for="{{cacsi[commentLevel].label}}" wx:key="key" wx:for-item="bean" wx:for-index="index">
+							<view class="tag theme-font1" wx:if="{{bean.selected==false}}" bindtap="selectCommentLable" data-lableKey="{{index}}">{{bean.name}}</view>
+							<view class="tag selected" wx:else  bindtap="selectCommentLable" data-lableKey="{{index}}">{{bean.name}}</view>
+						</block>
+
+						<!-- <view class="tag theme-font1">服务很一般</view>
 						<view class="tag selected">菜品很一般</view>
-						<view class="tag theme-font1">环境很一般</view>
+						<view class="tag theme-font1">环境很一般</view> -->
 					</view>
 					<view class="input-group flex-column-center-flex_start">
-						<view wx:if="{{showButton}}" class="btn flex-row-center-space_between theme-font3">
+						<view wx:if="{{showButton}}" class="btn flex-row-center-space_between theme-font3" bindtap="clickComment">
 							<view class="icon fa fa-pencil-square-o" aria-hidden="true"></view>
 							<view class="label">顺便说两句</view>
 						</view>
-						<textarea wx:else class="input" placeholder="请输入"></textarea>
+						<textarea wx:else class="input" bindinput="editCommnet" placeholder="您的建议是我们前进的动力...（300字以内）" value="{{comment_str}}" maxlength='300'></textarea>
 					</view>
 				</scroll-view>
 			</view>
 
 			<!-- 底部按钮面板 -->
-			<view class="panel btn-group">
+			<view class="panel btn-group" bindtap="submitComment">
 				<view class="body flex-row-center-center">
-					<button class="btn theme-button-red">评价</button>
+					<button class="btn theme-button-red" disabled="{{comment_disable}}">评价</button>
 				</view>
 			</view>
 
@@ -143,12 +153,12 @@
 
 
 <!-- 评价结果页 -->
-<view wx:if="{{showResult}}" class="container flex-column-center-start evaluate-result theme-container" style="height:calc(100vh - {{46 + statusBarHeight + SystemInfo.screenBottomSpace}}px);">
+<view wx:if="{{is_comment==1}}" class="container flex-column-center-start evaluate-result theme-container" style="height:calc(100vh - {{46 + statusBarHeight + SystemInfo.screenBottomSpace}}px);">
 	<view class="head flex-row-center-space_between theme-panel">
-		<image class="head-pic left" mode="aspectFill" src="https://oss.littlehotspot.com/WeChat/resource/default.jpg"></image>
+		<image class="head-pic left" mode="aspectFill" src="{{staff_user_info.avatarUrl}}"></image>
 		<view class="right flex-column-flex_start-center">
-			<view class="nickname theme-font1">张三</view>
-			<view class="tip three-line-overflow theme-font2">“很高兴为您服务，期待您对本次饭局的评价。您的评价将是我们前进的动力及导向！”</view>
+			<view class="nickname theme-font1">{{staff_user_info.nickName}}</view>
+			<view class="tip three-line-overflow theme-font2">{{staff_user_info.service_str}}</view>
 		</view>
 	</view>
 	<view class="body theme-panel">
@@ -158,7 +168,7 @@
 			<view class="body flex-column-center-center">
 				<image class="icon" mode="aspectFill" src="https://oss.littlehotspot.com/WeChat/MiniProgram/images/icon/meh_selected.png"></image>
 				<view class="title theme-font5">本次饭局一般般，还需要改善</view>
-				<view class="content theme-font5">“菜品很一般、环境很一般”</view>
+				<view class="content theme-font5" wx:if="{{tag_strs!=''}}">“{{tag_strs}}”</view>
 			</view>
 		</view>
 
@@ -171,7 +181,7 @@
 		</view>
 
 		<!-- 底部按钮面板 -->
-		<view class="panel btn-group">
+		<view class="panel btn-group" wx:if="{{is_open_reward==1}}" bindtap="openReward" data-is_close="0">
 			<view class="body flex-row-center-center">
 				<button class="btn theme-button-red">
 					<view class="icon fa fa-rmb" aria-hidden="true"></view>
@@ -192,18 +202,22 @@
 			<view class="title-bar flex-row-center-flex_start">
 				<view class="text theme-font1">感谢餐厅人员的服务</view>
 			</view>
-			<view class="btn-group flex-row-center-flex_end">
+			<view class="btn-group flex-row-center-flex_end" bindtap="openReward" data-is_close="1">
 				<view class="btn close theme-font2">X</view>
 			</view>
 		</view>
 		<view class="body">
 
 			<view class="btn-row flex-row-center-space_around">
-				<view class="btn flex-column-center-center">
-					<view class="icon fa fa-rmb" aria-hidden="true"></view>
-					<view class="label theme-font1">1元</view>
-				</view>
-				<view class="btn flex-column-center-center">
+
+
+				<block wx:for="{{reward_list}}" wx:key="key" wx:for-index="index" wx:for-item="bean">
+					<view class="btn flex-column-center-center">
+						<view class="icon fa fa-rmb" aria-hidden="true" bindtap="selectReward" data-keys="{{index}}"></view>
+						<view class="label theme-font1">{{bean.name}}</view>
+					</view>
+				</block>
+				<!-- <view class="btn flex-column-center-center">
 					<view class="icon fa fa-glass" aria-hidden="true"></view>
 					<view class="label theme-font1">5元</view>
 				</view>
@@ -214,15 +228,15 @@
 				<view class="btn flex-column-center-center">
 					<view class="icon fa fa-cutlery" aria-hidden="true"></view>
 					<view class="label theme-font1">100元</view>
-				</view>
+				</view> -->
 			</view>
 			<view class="input-row flex-row-center-center">
 				<view class="input-wrapper flex-row-center-space_between">
-					<input class="input theme-font2" type="text" placeholder="其他金额1-500"></input>
+					<input type="number" class="input theme-font2" type="text" placeholder="其他金额1-500" bindinput="inputRewardMoney" value="{{reward_money}}"></input>
 					<view class="unit theme-font1">元</view>
 				</view>
 			</view>
-			<view class="btn-group flex-row-center-center">
+			<view class="btn-group flex-row-center-center" bindtap="payReward">
 				<button class="btn pay theme-button-red">确认支付</button>
 			</view>
 

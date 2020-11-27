@@ -21,6 +21,12 @@ Page({
     comment_str:'',
     is_reward:'1',
     comment_disable:false,
+    commentLevel:0,  //评价等级
+    showButton:true,     //顺便说两句
+    comment_disable:true, //评价按钮置灰
+    is_comment:0,   //是否评价
+    showWindow:false , //打赏弹窗
+    reward_money:'',
   },
 
   /**
@@ -72,9 +78,11 @@ Page({
    * 选择评价类型 
    */
   selectCommentLevle:function(e){
-    var commentLevel = e.target.dataset.commentLevel;  //1很糟糕 2一般般 3太赞了
+    console.log(e)
+    var commentLevel = e.target.dataset.commentlevel;  //1很糟糕 2一般般 3太赞了
     this.setData({
       commentLevel:commentLevel,
+      comment_disable:false
     })
 
   },
@@ -83,23 +91,34 @@ Page({
    * 选择评价标签
    */
   selectCommentLable:function(e){
+    console.log(e)
     var cacsi = this.data.cacsi;
     var commentLevel = this.data.commentLevel;
-    var lableKey = e.target.dataset.lableKey;
+    var lableKey = e.target.dataset.lablekey;
     if(cacsi[commentLevel].label[lableKey].selected == false){//选择标签
       cacsi[commentLevel].label[lableKey].selected = true;
     }else {                                                   //取消标签
       cacsi[commentLevel].label[lableKey].selected = false;
     }
+    this.setData({
+      cacsi:cacsi
+    })
   },
+  
+  
+  clickComment:function(e){
+    this.setData({showButton:false})
+  },
+  
   /**
-   * 随便说两句
+   * 随便说两句输入框
    */
   editCommnet:function(e){
     var comment_str = e.detail.value;
     this.setData({comment_str:comment_str})
     
   },
+
   /**
    * 提交评价
    */
@@ -109,7 +128,11 @@ Page({
     var staff_user_info = this.data.staff_user_info;
     var staff_id = staff_user_info.staff_id;
     var is_open_reward = that.data.is_open_reward; //打赏开关 1开0关
-
+    var commentLevel = that.data.commentLevel;
+    if(commentLevel==0){
+      app.showToast('请您选择满意度');
+      return false;
+    }
     var cacsi = that.data.cacsi;
     var tag_ids  = '';
     var tag_strs = '';
@@ -133,7 +156,7 @@ Page({
       tag_ids:tag_ids,
     }, (data, headers, cookies, errMsg, statusCode) => {
       var comment_id = data.result.comment_id;
-      that.setData({comment_disable:false,tag_strs:tag_strs,comment_id:comment_id})
+      that.setData({comment_disable:false,tag_strs:tag_strs,comment_id:comment_id,is_comment:1})
       
       
       
@@ -149,13 +172,31 @@ Page({
   payReward:function(){
     
     var that = this;
-    var reward_id = that.data.reward_id;  //选择打赏金额id
+    var reward_list = that.data.reward_list;
+    var reward_id = 0;
+    for(let i in reward_list){
+      if(reward_list[i].selected===true){
+        reward_id = reward_list[i].id;
+        break;
+      }
+    }
+    var money = that.data.reward_money;
+    if(money=='' && reward_id==0){
+      app.showToast('请选择打赏金额');
+      return false;
+    }
+    if(money!='' &&(money<1 || money>500)){
+      app.showToast('请输入1-500打赏金额');
+      return false;
+    }
+
     var staff_user_info = this.data.staff_user_info;
     var staff_id = staff_user_info.staff_id;
     
     utils.PostRequest(api_v_url + '/comment/reward', {
       box_mac:box_mac,
       reward_id:reward_id,
+      money:money,
       openid: openid,
       staff_id:staff_id,
     }, (data, headers, cookies, errMsg, statusCode) => {
@@ -193,6 +234,7 @@ Page({
   },
   //选择打赏金额
   selectReward:function(e){
+    console.log(e)
     var reward_list = this.data.reward_list;
     var keys = e.currentTarget.dataset.keys;
     for(let i in reward_list){
@@ -209,8 +251,14 @@ Page({
    * 输入打赏金额
    */
   inputRewardMoney:function(e){
+    console.log(e)
     var reward_money = e.detail.value.replace(/\s+/g, '');
-    this.setData({reward_money:reward_money})
+    
+    var reward_list = this.data.reward_list;
+    for(let i in reward_list){
+      reward_list[i].selected = false;
+    }
+    this.setData({reward_money:reward_money,reward_list:reward_list})
   },
   recordForscreenLog:function(forscreen_id,openid,box_mac,action=0){
 
@@ -228,6 +276,16 @@ Page({
       
     },re => { }, { isShowLoading: false })
     
+  },
+  openReward:function(e){
+    console.log(e)
+    var is_close = e.currentTarget.dataset.is_close;
+    if(is_close== 1){
+      var showWindow = false;
+    }else {
+      var showWindow = true;
+    }
+    this.setData({showWindow:showWindow})
   },
   /*subStar:function(e){
     var star_list = this.data.star_list;
