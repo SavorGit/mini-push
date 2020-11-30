@@ -213,7 +213,11 @@
 
 				<block wx:for="{{reward_list}}" wx:key="key" wx:for-index="index" wx:for-item="bean">
 					<view class="btn flex-column-center-center">
-						<view class="icon fa fa-rmb" aria-hidden="true" bindtap="selectReward" data-keys="{{index}}"></view>
+
+						<view wx:if="{{index==0}}" class="icon fa fa-rmb" aria-hidden="true" bindtap="selectReward" data-keys="{{index}}"></view>
+						<view wx:if="{{index==1}}" class="icon fa fa-glass" aria-hidden="true" bindtap="selectReward" data-keys="{{index}}"></view>
+						<view wx:if="{{index==2}}" class="icon fa fa-coffee" aria-hidden="true" bindtap="selectReward" data-keys="{{index}}"></view>
+						<view wx:if="{{index==3}}" class="icon fa fa-cutlery" aria-hidden="true" bindtap="selectReward" data-keys="{{index}}"></view>
 						<view class="label theme-font1">{{bean.name}}</view>
 					</view>
 				</block>
