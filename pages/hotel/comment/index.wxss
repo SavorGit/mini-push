@@ -257,10 +257,10 @@
 }
 
 .body {
-  width: calc(100% - 40rpx);
+  width: 100%;
   height: calc(100% - 250rpx);
   margin-top: 10rpx;
-  padding: 20rpx;
+  padding: 20rpx 0;
 }
 
 .panel {
@@ -405,7 +405,7 @@
 
 /* ==================================== 评价响应面板 ==================================== */
 .response {
-  height: 300rpx;
+  height: 260rpx;
 }
 
 .response>.body {
@@ -427,7 +427,7 @@
 
 /* ==================================== 评价回馈面板 ==================================== */
 .feedback {
-  height: 200rpx;
+  height: 160rpx;
 }
 
 .feedback>.body {
@@ -462,6 +462,121 @@
   display: inline-block;
   padding: 5rpx;
   box-sizing: border-box;
+}
+
+.gratuity>.head {
+  width: 100%;
+  height: 80rpx;
+  margin: unset;
+  padding: unset;
+}
+
+.gratuity>.head>.title-bar {
+  width: calc(100% - 50rpx);
+  height: calc(100% - 20rpx);
+  padding: 10rpx 25rpx;
+}
+
+.gratuity>.head>.title-bar>.text {
+  font-size: 40rpx;
+  font-weight: 700;
+}
+
+.gratuity>.head>.btn-group {
+  width: calc(100% - 50rpx);
+  height: calc(100% - 20rpx);
+  padding: 10rpx 25rpx;
+  margin-top: -100rpx;
+}
+
+.gratuity>.head>.btn-group>.btn {
+  width: 60rpx;
+  height: 60rpx;
+  line-height: 60rpx;
+  text-align: center;
+  font-size: 40rpx;
+  border: 3rpx solid #DEDEDE;
+  border-radius: 50%;
+  margin: 0;
+  padding: 0;
+}
+
+.gratuity>.body {
+  width: calc(100% - 50rpx);
+  height: calc(100% - 100rpx);
+  padding: 10rpx 25rpx;
+  margin: 0;
+}
+
+.gratuity>.body>.btn-row {
+  width: 100%;
+  height: 200rpx;
+}
+
+.gratuity>.body>.btn-row>.btn {
+  width: 150rpx;
+  height: 165rpx;
+}
+
+.gratuity>.body>.btn-row>.btn>.icon {
+  width: 120rpx;
+  height: 120rpx;
+  line-height: 120rpx;
+  text-align: center;
+  border-radius: 50%;
+  color: rgb(16, 16, 16);
+  background-color: rgb(237, 237, 237);
+  font-size: 48rpx;
+}
+
+.gratuity>.body>.btn-row>.btn>.label {
+  color: rgb(16, 16, 16);
+  font-size: 28rpx;
+}
+
+.gratuity>.body>.btn-row>.btn.selected>.icon {
+  color: rgb(255, 68, 68);
+  background-color: rgba(253, 128, 36, 0.6);
+}
+
+.gratuity>.body>.btn-row>.btn.selected>.label {
+  color: rgba(255, 68, 68, 1);
+}
+
+.gratuity>.body>.input-row {
+  width: calc(100% - 100rpx);
+  height: 80rpx;
+  padding: 10rpx 50rpx;
+}
+
+.gratuity>.body>.input-row>.input-wrapper {
+  width: 100%;
+  height: 60rpx;
+  padding: 0 20rpx;
+  border-bottom: 3rpx solid #DEDEDE;
+}
+
+.gratuity>.body>.input-row>.input-wrapper>.input {
+  font-size: 28rpx;
+}
+
+.gratuity>.body>.input-row>.input-wrapper>.unit {
+  font-size: 28rpx;
+}
+
+.gratuity>.body>.btn-group>.btn {
+  width: 690rpx;
+  height: 100rpx;
+  line-height: 100rpx;
+  border-radius: 20rpx;
+  font-size: 36rpx;
+  margin: unset;
+  padding: unset;
+  border: unset;
+}
+
+.gratuity>.body>.btn-group {
+  height: 120rpx;
 }
 
 
@@ -521,7 +636,13 @@
   height: 200rpx;
 }
 
-.gratuity>.window>.body>.btn-row .icon {
+
+.gratuity>.window>.body>.btn-row>.btn {
+  width: 150rpx;
+  height: 165rpx;
+}
+
+.gratuity>.window>.body>.btn-row>.btn>.icon {
   width: 120rpx;
   height: 120rpx;
   line-height: 120rpx;
@@ -532,8 +653,17 @@
   font-size: 48rpx;
 }
 
-.gratuity>.window>.body>.btn-row .label {
+.gratuity>.window>.body>.btn-row>.btn>.label {
   font-size: 28rpx;
+}
+
+.gratuity>.window>.body>.btn-row>.btn.selected>.icon {
+  color: rgb(255, 68, 68);
+  background-color: rgba(253, 128, 36, 0.6);
+}
+
+.gratuity>.window>.body>.btn-row>.btn.selected>.label {
+  color: rgba(255, 68, 68, 1);
 }
 
 .gratuity>.window>.body>.input-row {
