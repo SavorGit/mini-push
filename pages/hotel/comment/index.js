@@ -155,11 +155,22 @@ Page({
       satisfaction_id:commentLevel,
       tag_ids:tag_ids,
     }, (data, headers, cookies, errMsg, statusCode) => {
-      var comment_id = data.result.comment_id;
-      that.setData({comment_disable:false,tag_strs:tag_strs,comment_id:comment_id,is_comment:1})
-      
-      
-      
+
+
+      if(staff_id==0){
+
+        wx.switchTab({
+          url: '/pages/index/index',
+          success:function(){
+            app.showToast('感谢您的支持');
+          }
+        })
+
+        
+      }else{
+        var comment_id = data.result.comment_id;
+        that.setData({comment_disable:false,tag_strs:tag_strs,comment_id:comment_id,is_comment:1})
+      }
       var forscreen_id = (new Date()).valueOf();
       that.recordForscreenLog(forscreen_id,openid,box_mac,52);
       
@@ -207,14 +218,10 @@ Page({
         'signType': data.result.payinfo.signType,
         'paySign': data.result.payinfo.paySign,
         success(res) {//支付成功
-          wx.showToast({
-            title: '感谢您的支持',
-            icon:'success',
-            duration:2000,
-            success:function(e){
-              wx.switchTab({
-                url: '/pages/index/index',
-              })
+          wx.switchTab({
+            url: '/pages/index/index',
+            success:function(){
+              app.showToast('感谢您的支持');
             }
           })
         },
