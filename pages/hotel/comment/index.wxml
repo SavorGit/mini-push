@@ -92,7 +92,7 @@
 					<block wx:for="{{cacsi}}" wx:key="key" wx:for-item="bean" wx:for-index="index">
 						<view class="frown flex-column-center-space_between" bindtap="selectCommentLevle" data-commentLevel="{{index}}">
 							<image wx:if="{{commentLevel==index}}" class="icon" mode="aspectFill" src="/images/icon/{{index}}_select.png"></image>
-							<image wx:else class="icon" mode="aspectFill" src="/images/icon/{{index}}_no_select.png" ></image>
+							<image wx:else class="icon" mode="aspectFill" src="/images/icon/{{index}}_no_select.png"></image>
 							<view class="label one-line-overflow">{{bean.name}}</view>
 						</view>
 					</block>
@@ -120,7 +120,7 @@
 							<view class="tag theme-font1" wx:if="{{bean.selected==false}}" bindtap="selectCommentLable" data-lableKey="{{index}}">{{bean.name}}</view>
 							<view class="tag selected" wx:else bindtap="selectCommentLable" data-lableKey="{{index}}">{{bean.name}}</view>
 						</block>
-						
+
 
 						<!-- <view class="tag theme-font1">服务很一般</view>
 						<view class="tag selected">菜品很一般</view>
@@ -152,7 +152,7 @@
 
 
 <!-- 评价结果页 -->
-<view wx:if="{{is_comment==1}}" class="container flex-column-center-start evaluate-result theme-container" style="height:calc(100vh - {{46 + statusBarHeight + SystemInfo.screenBottomSpace}}px);">
+<scroll-view wx:if="{{is_comment==1}}" class="container flex-column-center-start evaluate-result theme-container" style="height:calc(100vh - {{46 + statusBarHeight + SystemInfo.screenBottomSpace}}px);" scroll-y="true" scroll-with-animation="true">
 	<view class="head flex-row-center-space_between theme-panel">
 		<image class="head-pic left" mode="aspectFill" src="{{staff_user_info.avatarUrl}}"></image>
 		<view class="right flex-column-flex_start-center">
@@ -164,20 +164,26 @@
 
 		<!-- 评价响应面板 -->
 		<view class="panel response">
-			<view class="body flex-column-center-center">
+			<view class="body flex-column-center-center" scroll-y="true" scroll-with-animation="true">
 				<image class="icon" mode="aspectFill" src="/images/icon/{{commentLevel}}_select.png"></image>
-				<view class="title theme-font5">{{cacsi[commentLevel].desc}}</view>
-				<view class="content theme-font5" wx:if="{{tag_strs!=''}}">“{{tag_strs}}”</view>
+				<view class="title theme-font5">{{cacsi[commentLevel].name}}</view>
+				<view class="tags three-line-overflow theme-font5" wx:if="{{tag_strs!=''}}">“{{tag_strs}}”</view>
+				<view class="content three-line-overflow theme-font1" wx:if="{{tag_strs!=''}}">“{{tag_strs}}”</view>
+				<view class="tips flex-column-center-center">
+					<view class="tip theme-font3">十分感谢您的评价</view>
+					<view class="tip theme-font3">我们将对您提出的问题进行改进</view>
+				</view>
 			</view>
 		</view>
 
-		<!-- 评价回馈面板 -->
+		<!-- 评价回馈面板 
 		<view class="panel feedback">
 			<view class="body flex-column-center-center">
 				<view class="text theme-font1">十分感谢您的评价</view>
 				<view class="text theme-font1">我们将对您提出的问题进行改进</view>
 			</view>
 		</view>
+		-->
 
 		<!-- 底部按钮面板 
 		<view class="panel btn-group" wx:if="{{is_open_reward==1}}" bindtap="openReward" data-is_close="0">
@@ -213,7 +219,7 @@
 				<view class="input-row flex-row-center-center">
 					<view class="input-wrapper flex-row-center-space_between">
 						<input type="number" class="input theme-font2" placeholder="其他金额1-500" bindinput="inputRewardMoney" value="{{reward_money}}"></input>
-						<view class="unit theme-font1">元</view>
+						<view class="unit theme-font2">元</view>
 					</view>
 				</view>
 				<view class="btn-group flex-row-center-center" bindtap="payReward">
@@ -224,7 +230,7 @@
 		</view>
 
 	</view>
-</view>
+</scroll-view>
 
 
 <!-- [Window] 打赏服务员弹窗 -->

@@ -258,9 +258,9 @@
 
 .body {
   width: 100%;
-  height: calc(100% - 250rpx);
+  height: calc(100% - 220rpx);
   margin-top: 10rpx;
-  padding: 20rpx 0;
+  padding: 0 0 20rpx 0;
 }
 
 .panel {
@@ -285,7 +285,7 @@
 }
 
 .satisfaction>.title-bar {
-  height: 90rpx;
+  height: 120rpx;
 }
 
 .satisfaction>.title-bar>.text {
@@ -297,8 +297,8 @@
 
 .satisfaction>.body {
   width: calc(100% - 100rpx);
-  height: calc(100% - 90rpx);
-  padding: 20rpx 50rpx 0;
+  height: calc(100% - 120rpx);
+  padding: 0 50rpx;
 }
 
 .satisfaction>.body>view {
@@ -408,26 +408,46 @@
 }
 
 /* ==================================== 评价响应面板 ==================================== */
-.response {
-  height: 260rpx;
-}
+/* .response {
+  min-height: calc(100% - 530rpx);
+} */
 
 .response>.body {
   height: 100%;
+  padding: 20rpx 0;
 }
 
-.response>.body>.icon {
-  width: 120rpx;
-  height: 120rpx;
+.response>.body .icon {
+  width: 100rpx;
+  height: 100rpx;
 }
 
-.response>.body>.title {
+.response>.body .title {
+  margin-top: 10rpx;
   font-size: 40rpx;
 }
 
-.response>.body>.content {
+.response>.body .tags {
+  width: calc(100% - 60rpx);
+  margin-top: 20rpx;
   font-size: 28rpx;
 }
+
+.response>.body .content {
+  width: calc(100% - 60rpx);
+  margin-top: 30rpx;
+  font-size: 28rpx;
+}
+
+.response>.body .tips {
+  width: 100%;
+  margin-top: 30rpx;
+}
+
+.response>.body .tips>.tip {
+  font-size: 24rpx;
+}
+
 
 /* ==================================== 评价回馈面板 ==================================== */
 .feedback {
@@ -470,6 +490,7 @@
 
 .gratuity {
   border-top: 10rpx solid #f5f6f8;
+  height: 520rpx;
 }
 
 .gratuity>.head {
@@ -523,7 +544,7 @@
 
 .gratuity>.body>.btn-row>.btn {
   width: 150rpx;
-  height: 165rpx;
+  height: 145rpx;
 }
 
 .gratuity>.body>.btn-row>.btn>.icon {
