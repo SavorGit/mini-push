@@ -1,5 +1,6 @@
 // pages/forscreen/forscreen.js
 const app = getApp();
+const utils = require('../../utils/util.js')
 var mta = require('../../utils/mta_analysis.js')
 var openid;                     //用户小程序唯一标识
 var box_mac = '';               //机顶盒mac
@@ -17,15 +18,13 @@ Page({
   
   //进来加载页面：
   onLoad: function (options) {
-    wx.request({
-      url: api_url+'/smallapp21/index/getConfig',
-      success: function (e) {
-        wx.setStorage({
-          key: 'savor_now_time',
-          data: e.data.result,
-        })
-      }
-    })
+    utils.PostRequest(api_url+'/smallapp21/index/getConfig', {
+    }, (data, headers, cookies, errMsg, statusCode) => {
+      wx.setStorage({
+        key: 'savor_now_time',
+        data: data.result,
+      })
+    },res=>{},{ isShowLoading: false })
     wx.showToast({
       title: '扫码中，请稍后',
     })
@@ -41,30 +40,23 @@ Page({
 
     }else if(typeof(options.s) !='undefined'){//小程序内扫普通二维码
       var s = options.s
-      wx.request({
-        url: api_url + '/Smallapp21/index/getQrcontent',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        data:{
-          content: s
-        },
-        success:function(res){
-          if(res.data.code==10000){
-            var scene = res.data.result.content;
-            linkHotelBox(scene);
-          }else {
-            wx.reLaunch({
-              url: '/pages/index/index',
-            })
-            wx.showToast({
-              title: '二维码已过期',
-              icon: 'none',
-              duration: 2000
-            });
-          }
-        }
-      })
+      utils.PostRequest(api_url + '/Smallapp21/index/getQrcontent', {
+        content: s
+      }, (data, headers, cookies, errMsg, statusCode) => {
+        var scene = data.result.content;
+        linkHotelBox(scene);
+      },res=>{
+        wx.reLaunch({
+          url: '/pages/index/index',
+        })
+        wx.showToast({
+          title: '二维码已过期',
+          icon: 'none',
+          duration: 2000
+        });
+      },{ isShowLoading: false })
+
+      
     } else if (typeof (options.q) !='undefined'){//微信扫普通二维码
       var q = decodeURIComponent(options.q);
       var selemite = q.indexOf("?");
@@ -92,31 +84,23 @@ Page({
           url: launch_url,
         }) 
       }else {
-        wx.request({
-          url: api_url + '/Smallapp21/index/getQrcontent',
-          headers: {
-            'Content-Type': 'application/json'
-          },
-          data: {
-            content: pams
-          },
-          success: function (res) {
-            if (res.data.code == 10000) {
-              var scene = res.data.result.content;
-              linkHotelBox(scene);
-            } else {
-              
-              wx.reLaunch({
-                url: '/pages/index/index',
-              })
-              wx.showToast({
-                title: '二维码已过期',
-                icon: 'none',
-                duration: 2000
-              });
-            }
-          }
-        })
+        utils.PostRequest(api_url + '/Smallapp21/index/getQrcontent', {
+          content: pams
+        }, (data, headers, cookies, errMsg, statusCode) => {
+          var scene = data.result.content;
+          linkHotelBox(scene);
+        },res=>{
+          wx.reLaunch({
+            url: '/pages/index/index',
+          })
+          wx.showToast({
+            title: '二维码已过期',
+            icon: 'none',
+            duration: 2000
+          });
+        },{ isShowLoading: false })
+
+        
       }
     } else if (typeof (options.g) != 'undefined'){ //小程序内部扫销售端商品活动码
       console.log(options.g)
@@ -146,55 +130,43 @@ Page({
       wx.login({
         success: res => {
           var code = res.code; //返回code
-          wx.request({
-            url: api_url + '/smallapp/index/getOpenid',
-            data: { "code": code },
-            header: {
-              'content-type': 'application/json'
-            },
-            success: function (res) {
-              if(res.data.code==10000){
-                app.globalData.openid = res.data.result.openid;
-                app.globalData.session_key = res.data.result.session_key;
-                if (jz_time) {//判断二维码时间是否超过两个小时
-                  //var fztime = 7200000;
-                  var fztime = sysconfig.exp_time;
-                  var difftime = nowtime - jz_time;
-                  if (difftime > fztime) {
-                    wx.request({
-                      url: api_url + '/smallapp21/index/recOverQrcodeLog',
-                      data: {
-                        "openid": res.data.result.openid,
-                        "box_mac": box_mac,
-                        "type": code_type,
-                        "is_overtime": 1
-                      },
-                      header: {
-                        'content-type': 'application/json'
-                      },
-                    })
-                    
-                  }else {
-                    wx.request({
-                      url: api_url + '/Smallapp21/Index/genCode',
-                      headers: {
-                        'Content-Type': 'application/json'
-                      },
-                      data: {
-                        'box_mac': box_mac,
-                        'openid': res.data.result.openid,
-                        'type': code_type
-                      },
-                      method: "POST",
-                      success: function (res) {
-                        app.globalData.serial_number = app.globalData.have_link_box_pre+ res.data.result.openid+'_'+(new Date()).valueOf();
-                      }
-                    })
-                  }
-                }
+
+          utils.PostRequest(api_url + '/smallapp/index/getOpenid', {
+            "code": code
+          }, (data, headers, cookies, errMsg, statusCode) => {
+            app.globalData.openid = data.result.openid;
+            app.globalData.session_key = data.result.session_key;
+            var openid = data.result.openid
+            if (jz_time) {//判断二维码时间是否超过两个小时
+              //var fztime = 7200000;
+              var fztime = sysconfig.exp_time;
+              var difftime = nowtime - jz_time;
+              if (difftime > fztime) {
+
+                utils.PostRequest(api_url + '/smallapp21/index/recOverQrcodeLog', {
+                  "openid": openid,
+                  "box_mac": box_mac,
+                  "type": code_type,
+                  "is_overtime": 1
+                }, (data, headers, cookies, errMsg, statusCode) => {
+
+                },res=>{},{ isShowLoading: false })
+                
+                
+              }else {
+
+                utils.PostRequest(api_url + '/Smallapp21/Index/genCode', {
+                  'box_mac': box_mac,
+                  'openid': openid,
+                  'type': code_type
+                }, (data, headers, cookies, errMsg, statusCode) => {
+                  app.globalData.serial_number = app.globalData.have_link_box_pre+ openid+'_'+(new Date()).valueOf();
+                },res=>{},{ isShowLoading: false })
+
+                
               }
             }
-          })
+          },res=>{},{ isShowLoading: false })
         }
       });
     }
@@ -217,116 +189,79 @@ Page({
       wx.login({
         success: res => {
           var code = res.code; //返回code
-          wx.request({
-            url: api_url + '/smallapp/index/getOpenid',
-            data: { "code": code },
-            header: {
-              'content-type': 'application/json'
-            },
-            success: function (res) {
-              if(res.data.code==10000){
-                app.globalData.openid = res.data.result.openid;
-                app.globalData.session_key = res.data.result.session_key;
-                if (jz_time) {//判断二维码时间是否超过两个小时
-                  //var fztime = 7200000;
-                  var fztime = sysconfig.exp_time;
-                  var difftime = nowtime - jz_time;
-                  if (difftime > fztime) {
-                    wx.request({
-                      url: api_url + '/smallapp21/index/recOverQrcodeLog',
-                      data: {
-                        "openid": res.data.result.openid,
-                        "box_mac": box_mac,
-                        "type": code_type,
-                        "is_overtime": 1
-                      },
-                      header: {
-                        'content-type': 'application/json'
-                      },
-                    })
-                    wx.reLaunch({
-                      url: '/pages/index/index',
-                    })
-                    wx.showToast({
-                      title: '二维码已过期',
-                      icon: 'none',
-                      duration: 2000
-                    });
-                    return false;
-                  }
-                }
-                if (code_type == 7) {
-                  wx.request({
-                    url: api_v_url + '/index/recodeQrcodeLog',
-                    data: {
-                      openid: res.data.result.openid,
-                      type: 7
-                    },
-                    success: function (rts) {
-                      wx.reLaunch({
-                        url: '../index/index',
-                      })
-                    }, fail: function (rts) {
-                      wx.reLaunch({
-                        url: '../index/index',
-                      })
-                    }
-                  })
-                } else {
-                  
-                  setInfos(box_mac, res.data.result.openid, code_type);
-                }
+          utils.PostRequest(api_url + '/smallapp/index/getOpenid', {
+            "code": code
+          }, (data, headers, cookies, errMsg, statusCode) => {
+            app.globalData.openid = data.result.openid;
+            app.globalData.session_key = data.result.session_key;
+            var openid = data.result.openid
+            if (jz_time) {//判断二维码时间是否超过两个小时
+              //var fztime = 7200000;
+              var fztime = sysconfig.exp_time;
+              var difftime = nowtime - jz_time;
+              if (difftime > fztime) {
+                utils.PostRequest(api_url + '/smallapp21/index/recOverQrcodeLog', {
+                  "openid": openid,
+                  "box_mac": box_mac,
+                  "type": code_type,
+                  "is_overtime": 1
+                }, (data, headers, cookies, errMsg, statusCode) => {
+
+                },res=>{},{ isShowLoading: false })
+
+                
+                wx.reLaunch({
+                  url: '/pages/index/index',
+                })
+                wx.showToast({
+                  title: '二维码已过期',
+                  icon: 'none',
+                  duration: 2000
+                });
+                return false;
               }
-            },fail:function(){
-              wx.reLaunch({
-                url: '/pages/index/index',
-              })
             }
-          })
+            setInfos(box_mac, openid, code_type);
+
+          },res=>{
+            wx.reLaunch({
+              url: '/pages/index/index',
+            })
+          },{ isShowLoading: false })
         }
       });
     }
     function setInfos(box_mac, openid,code_type) {
       //发送随机码给电视显示 (默认用户不用填写三位呼玛)
-      
-      wx.request({
-        url: api_url+'/Smallapp21/Index/genCode',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        data: {
-         'box_mac': box_mac,
-         'openid' : openid,
-         'type'   : code_type
-        },
-        method: "POST",
-        success: function (res) {
-          if(res.data.code==10000){
-            var timestamp = (new Date()).valueOf();
-            var is_have = res.data.result.is_have;
-            if (is_have == 0) {
-              
-              mta.Event.stat('scanQrcodeResult', { 'linktype': 0 })
-            } else if (is_have == 1) {
-              mta.Event.stat('scanQrcodeResult', { 'linktype': 1 })
-            }
-            app.globalData.serial_number = app.globalData.have_link_box_pre+openid+'_'+(new Date()).valueOf();
-            if(code_type==31){
-              wx.reLaunch({
-                url: '/games/pages/activity/din_dash?openid='+openid+'&box_mac='+box_mac,
-              })
-            } else {
-              wx.reLaunch({
-                url: '../index/index',
-              })
-            }  
-          }                          
-        },fail:function(e){
+      utils.PostRequest(api_url+'/Smallapp21/Index/genCode', {
+        'box_mac': box_mac,
+        'openid' : openid,
+        'type'   : code_type
+      }, (data, headers, cookies, errMsg, statusCode) => {
+        var timestamp = (new Date()).valueOf();
+        var is_have = data.result.is_have;
+        if (is_have == 0) {
+          
+          mta.Event.stat('scanQrcodeResult', { 'linktype': 0 })
+        } else if (is_have == 1) {
+          mta.Event.stat('scanQrcodeResult', { 'linktype': 1 })
+        }
+        app.globalData.serial_number = app.globalData.have_link_box_pre+openid+'_'+(new Date()).valueOf();
+        if(code_type==31){
+          wx.reLaunch({
+            url: '/games/pages/activity/din_dash?openid='+openid+'&box_mac='+box_mac,
+          })
+        } else {
           wx.reLaunch({
             url: '../index/index',
           })
-        }
-      })
+        }  
+      },res=>{
+        wx.reLaunch({
+          url: '../index/index',
+        })
+      },{ isShowLoading: false })
+      
     }
   },
 })

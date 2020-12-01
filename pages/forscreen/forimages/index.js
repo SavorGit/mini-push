@@ -374,60 +374,46 @@ Page({
           console.log('aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa'+progress)
           that.setData({openWind:openWind})
           
-          wx.request({
-            url: api_v_url + '/index/recordForScreenPics',
-            header: {
-              'content-type': 'application/json'
-            },
-            data: {
-              forscreen_id: forscreen_id,
+          utils.PostRequest(api_v_url + '/index/recordForScreenPics', {
+            forscreen_id: forscreen_id,
+            openid: openid,
+            box_mac: box_mac,
+            action: 4,
+            mobile_brand: mobile_brand,
+            mobile_model: mobile_model,
+            forscreen_char: forscreen_char,
+            public_text: public_text,
+            imgs: '["forscreen/resource/' + timestamp + postf_t + '"]',
+            quality_type:quality_obj.quality_type,
+            resource_id: timestamp,
+            res_sup_time: res_sup_time,
+            res_eup_time: res_eup_time,
+            resource_size: resource_size,
+            is_pub_hotelinfo: is_pub_hotelinfo,
+            is_share: is_share,
+            resource_type: 1,
+            res_nums: img_len,
+            serial_number:app.globalData.serial_number
+          }, (data, headers, cookies, errMsg, statusCode) => {
+            utils.PostRequest(api_v_url + '/ForscreenHistory/getList', {
               openid: openid,
               box_mac: box_mac,
-              action: 4,
-              mobile_brand: mobile_brand,
-              mobile_model: mobile_model,
-              forscreen_char: forscreen_char,
-              public_text: public_text,
-              imgs: '["forscreen/resource/' + timestamp + postf_t + '"]',
-              quality_type:quality_obj.quality_type,
-              resource_id: timestamp,
-              res_sup_time: res_sup_time,
-              res_eup_time: res_eup_time,
-              resource_size: resource_size,
-              is_pub_hotelinfo: is_pub_hotelinfo,
-              is_share: is_share,
-              resource_type: 1,
-              res_nums: img_len,
-              serial_number:app.globalData.serial_number
-            },
-            success: function (ret) {
-              wx.request({
-                url: api_v_url + '/ForscreenHistory/getList',
-                header: {
-                  'content-type': 'application/json'
-                },
-                data: {
-                  openid: openid,
-                  box_mac: box_mac,
-                  page: page,
-                },
-                success: function (res) {
-                  var hst_list = res.data.result;
+              page: page,
+            }, (data, headers, cookies, errMsg, statusCode) => {
+              var hst_list = data.result;
 
-                  if (JSON.stringify(hst_list) == "{}") {
-                    that.setData({
-                      forscreen_history_list: ''
-                    })
-                  } else {
-                    that.setData({
-                      forscreen_history_list: res.data.result
-                    })
-                  }
-
-                }
-              })
-            }
-          });
+              if (JSON.stringify(hst_list) == "{}") {
+                that.setData({
+                  forscreen_history_list: ''
+                })
+              } else {
+                that.setData({
+                  forscreen_history_list: data.result
+                })
+              }
+            },res=>{},{ isShowLoading: false })
+          },res=>{},{ isShowLoading: false })
+          
 
           if (netty_push_img.length == img_len) {
             
@@ -442,39 +428,29 @@ Page({
             openWind.step = 2;
             openWind.tip  = '正在投屏,请稍后';
             that.setData({openWind:openWind});
-            wx.request({
-              url: api_url + '/Netty/Index/pushnetty',
-              headers: {
-                'Content-Type': 'application/json'
-              },
-              method: "POST",
-              data: {
-                box_mac: box_mac,
-  
-                msg: netty_push_info,
-  
-              },
-              success: function (result) {
-                if(result.data.code!=10000){
-                  openWind.tip = '投屏失败，请重试！';
-                  openWind.isError = true;
-                  that.setData({
-                    openWind:openWind,
-                  })
-                }else {
-                  app.globalData.change_link_type = 1;
-                  that.setData({
-                    showThird: true,
-                    hiddens:true,
-                    
-                    showTpBt: false,
-                    forscreen_id: forscreen_id,
-                  });
-                  //倒计时关闭窗口
-                  that.closeOpenWind();
-                }
-              }
-            })
+            utils.PostRequest(api_url + '/Netty/Index/pushnetty', {
+              box_mac: box_mac,
+              msg: netty_push_info,
+            }, (data, headers, cookies, errMsg, statusCode) => {
+              app.globalData.change_link_type = 1;
+              that.setData({
+                showThird: true,
+                hiddens:true,
+                
+                showTpBt: false,
+                forscreen_id: forscreen_id,
+              });
+              //倒计时关闭窗口
+              that.closeOpenWind();
+            },res=>{
+              openWind.tip = '投屏失败，请重试！';
+              openWind.isError = true;
+              that.setData({
+                openWind:openWind,
+              })
+            },{ isShowLoading: false })
+
+            
           }
         },
         complete: function (es) {
@@ -728,19 +704,20 @@ Page({
     })
   },
   recordWifiErr:function(err_info,box_mac,openid){
-    wx.request({
-      url: api_v_url + '/datalog/recordWifiErr',
-      data: {
-        err_info: err_info,
-        box_mac: box_mac,
-        openid:openid,
-        mobile_brand:app.globalData.sys_info.brand,
-        mobile_model:app.globalData.sys_info.model,
-        platform:app.globalData.sys_info.platform,
-        version:app.globalData.sys_info.version,
-        system:app.globalData.sys_info.system
-      }
-    })
+
+    utils.PostRequest(api_v_url + '/datalog/recordWifiErr', {
+      err_info: err_info,
+      box_mac: box_mac,
+      openid:openid,
+      mobile_brand:app.globalData.sys_info.brand,
+      mobile_model:app.globalData.sys_info.model,
+      platform:app.globalData.sys_info.platform,
+      version:app.globalData.sys_info.version,
+      system:app.globalData.sys_info.system
+    }, (data, headers, cookies, errMsg, statusCode) => {
+
+    },res=>{},{ isShowLoading: false })
+    
   },
   speedUploadImg:function(hotel_info,data){
     var that = this;
@@ -954,46 +931,36 @@ Page({
       push_info.img_list = push_img;
   
       push_info = JSON.stringify(push_info);
-      wx.request({
-        url: api_url+'/Netty/Index/pushnetty',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        method: "POST",
-        data: {
-          box_mac: box_mac,
-          msg: push_info,
-        },
-        success: function (result) {
-          if(result.data.code!=10000){
-            wx.showToast({
-              title: '投屏失败!',
-              icon: 'none',
-              duration: 2000,
-  
-            })
-          }
-          wx.request({
-            url: api_v_url+'/index/recordForScreenPics',
-            header: {
-              'content-type': 'application/json'
-            },
-            data: {
-              forscreen_id: forscreen_id,
-              openid: openid,
-              box_mac: box_mac,
-              action: 2,
-              resource_type: 1,
-              mobile_brand: mobile_brand,
-              mobile_model: mobile_model,
-              imgs: '["' + forscreen_img + '"]',
-              quality_type:quality_obj.quality_type,
-              serial_number : app.globalData.serial_number
-            },
-          });
-          utils.tryCatch(mta.Event.stat("switchpic", {}))
-        },
-      })
+      utils.PostRequest(api_url+'/Netty/Index/pushnetty', {
+        box_mac: box_mac,
+        msg: push_info,
+      }, (data, headers, cookies, errMsg, statusCode) => {
+
+        utils.PostRequest(api_v_url+'/index/recordForScreenPics', {
+          forscreen_id: forscreen_id,
+            openid: openid,
+            box_mac: box_mac,
+            action: 2,
+            resource_type: 1,
+            mobile_brand: mobile_brand,
+            mobile_model: mobile_model,
+            imgs: '["' + forscreen_img + '"]',
+            quality_type:quality_obj.quality_type,
+            serial_number : app.globalData.serial_number
+        }, (data, headers, cookies, errMsg, statusCode) => {
+
+        },res=>{},{ isShowLoading: false })
+        
+      },res=>{
+        wx.showToast({
+          title: '投屏失败!',
+          icon: 'none',
+          duration: 2000,
+
+        })
+      },{ isShowLoading: false })
+
+      
     }else if(launchType=='speed'){
       var intranet_ip = hotel_info.intranet_ip;
       var img_url = e.currentTarget.dataset.tmp_img;
@@ -1115,34 +1082,18 @@ Page({
     var openid = e.target.dataset.openid;
     var box_mac = e.target.dataset.box_mac;
     page = page + 1;
-    that.setData({
-      hiddens: false,
+    utils.PostRequest(api_v_url+'/ForscreenHistory/getList', {
+      page: page,
+      box_mac: box_mac,
+      openid: openid,
+    }, (data, headers, cookies, errMsg, statusCode) => {
+      forscreen_history_list = data.result,
+      that.setData({
+        forscreen_history_list: data.result,
+      })
     })
-    wx.request({
-      url: api_v_url+'/ForscreenHistory/getList',
-      header: {
-        'Content-Type': 'application/json'
-      },
-      data: {
-        page: page,
-        box_mac: box_mac,
-        openid: openid,
-      },
-      method: "POST",
-      success: function (res) {
-        if (res.data.code == 10000) {
-          forscreen_history_list = res.data.result,
-            that.setData({
-              forscreen_history_list: res.data.result,
-              hiddens: true,
-            })
-        } else {
-          that.setData({
-            hiddens: true,
-          })
-        }
-      }
-    })
+
+    
   },
   
   upload_wait:function(e){
@@ -1167,37 +1118,24 @@ Page({
       })
       
     }else {
-
-      wx.request({
-        url: api_url +'/Smallapp3/ForscreenHelp/helpplay',
-        header: {
-          'Content-Type': 'application/json'
-        },
-        data:{
-          forscreen_id: forscreen_id,
-          openid      : openid,
-        },success:function(res){
-          if(res.data.code==10000){
-            var rec_id = res.data.result.forscreen_id;
-            wx.navigateTo({
-              url: '/pages/mine/assist/index?forscreen_id=' + rec_id + '&box_mac=' + box_mac +"&inside=1",
-            })
+      utils.PostRequest(api_url +'/Smallapp3/ForscreenHelp/helpplay', {
+        forscreen_id: forscreen_id,
+        openid      : openid,
+      }, (data, headers, cookies, errMsg, statusCode) => {
+        var rec_id = data.result.forscreen_id;
+        wx.navigateTo({
+          url: '/pages/mine/assist/index?forscreen_id=' + rec_id + '&box_mac=' + box_mac +"&inside=1",
+        })
             
-          }else {
-            wx.showToast({
-              title: '助力参数异常，请重选照片',
-              icon: 'none',
-              duration: 2000
-            })
-          }
-        },fail:function(res){
-          wx.showToast({
-            title: '助力参数异常，请重选照片',
-            icon: 'none',
-            duration: 2000
-          })
-        }
+      },res=>{
+        wx.showToast({
+          title: '助力参数异常，请重选照片',
+          icon: 'none',
+          duration: 2000
+        })
       })
+
+      
     }
   },
   phonecallevent: function (e) {
@@ -1223,25 +1161,16 @@ Page({
         showGuidedMaskAfterLaunch:false,
       })
     }
-    wx.request({
-      url: api_url + '/Smallapp3/content/guidePrompt',
-      header: {
-        'Content-Type': 'application/json'
-      },
-      data: {
-        openid: openid,
-        type: type,
-      },
-      success: function (res) {
-        if (res.data.code == 10000) {
-          var user_info = wx.getStorageSync('savor_user_info');
+    utils.PostRequest(api_url + '/Smallapp3/content/guidePrompt', {
+      openid: openid,
+      type: type,
+    }, (data, headers, cookies, errMsg, statusCode) => {
+      var user_info = wx.getStorageSync('savor_user_info');
 
-          user_info.guide_prompt.push(type);
-          wx.setStorageSync('savor_user_info', user_info);
-
-        }
-      }
-    })
+      user_info.guide_prompt.push(type);
+      wx.setStorageSync('savor_user_info', user_info);
+    },res=>{},{ isShowLoading: false })
+    
   },
   goToBack:function(e){
     var that = this;
