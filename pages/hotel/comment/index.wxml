@@ -126,7 +126,7 @@
 						<view class="tag selected">菜品很一般</view>
 						<view class="tag theme-font1">环境很一般</view> -->
 					</view>
-					<view class="input-group flex-column-center-flex_start">
+					<view class="input-group flex-column-center-flex_start" wx:if="{{commentLevel!=0}}">
 						<view wx:if="{{showButton}}" class="btn flex-row-center-space_between theme-font3" bindtap="clickComment">
 							<view class="icon fa fa-pencil-square-o" aria-hidden="true"></view>
 							<view class="label">顺便说两句</view>
