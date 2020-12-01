@@ -166,7 +166,7 @@
 		<view class="panel response">
 			<view class="body flex-column-center-center">
 				<image class="icon" mode="aspectFill" src="/images/icon/{{commentLevel}}_select.png"></image>
-				<view class="title theme-font5">{{cacsi[commentLevel].title}}</view>
+				<view class="title theme-font5">{{cacsi[commentLevel].desc}}</view>
 				<view class="content theme-font5" wx:if="{{tag_strs!=''}}">“{{tag_strs}}”</view>
 			</view>
 		</view>
