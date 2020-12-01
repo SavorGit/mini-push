@@ -44,42 +44,35 @@ Page({
 
     //wx.hideShareMenu();
     var forscreen_id = options.forscreen_id;
-    wx.request({
-      url: api_v_url + '/index/isHaveCallBox?openid=' + openid,
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      success: function(res) {
-        if (res.data.code == 10000 && res.data.result.is_have == 1) {
-          self.setData({
-            is_open_simple: res.data.result.is_open_simple,
-            hotel_info: res.data.result,
-          })
-        }
-      },complete:function(){
-        wx.request({
-          url: api_url + '/Smallapp3/Find/showPic',
-          data: {
-            forscreen_id: forscreen_id,
-            openid: openid,
-    
-          },
-          success: function(res) {
-            self.setData({
-              forscreen_id:forscreen_id,
-              videoinfo: res.data.result,
-              play_num: res.data.result.play_num,
-              collect_num: res.data.result.collect_num,
-              share_num: res.data.result.share_num,
-              is_collect: res.data.result.is_collect,
-              openid: openid,
-              box_mac: box_mac,
-              is_replay_disabel:false
-            })
-          }
+
+    utils.PostRequest(api_v_url + '/index/isHaveCallBox', {
+      openid:openid
+    }, (data, headers, cookies, errMsg, statusCode) => {
+      if (data.result.is_have == 1) {//如果已连接盒子
+        self.setData({
+          
+          hotel_info: data.result,
+          
         })
       }
     })
+    utils.PostRequest(api_url + '/Smallapp3/Find/showPic', {
+      forscreen_id: forscreen_id,
+        openid: openid,
+    }, (data, headers, cookies, errMsg, statusCode) => {
+      self.setData({
+        forscreen_id:forscreen_id,
+        videoinfo: data.result,
+        play_num: data.result.play_num,
+        collect_num: data.result.collect_num,
+        share_num: data.result.share_num,
+        is_collect: data.result.is_collect,
+        openid: openid,
+        box_mac: box_mac,
+        is_replay_disabel:false
+      })
+    })
+    
     
   },
   //收藏资源
@@ -94,33 +87,22 @@ Page({
       'from': self.data.pageFrom,
       'status': true
     }));
-    wx.request({
-      url: api_url + '/Smallapp/collect/recLogs',
-      header: {
-        'content-type': 'application/json'
-      },
-      data: {
-        'openid': openid,
-        'res_id': res_id,
-        'type': res_type,
-        'status': 1,
-      },
-      success: function(e) {
-        self.setData({
-          is_collect: 1,
-          collect_num: e.data.result.nums,
-        })
-      },
-      fial: function({
-        errMsg
-      }) {
-        wx.showToast({
-          title: '网络异常，请稍后重试',
-          icon: 'none',
-          duration: 2000
-        })
-      }
+
+    utils.PostRequest(api_url + '/Smallapp/collect/recLogs', {
+      'openid': openid,
+      'res_id': res_id,
+      'type': res_type,
+      'status': 1,
+    }, (data, headers, cookies, errMsg, statusCode) => {
+      self.setData({
+        is_collect: 1,
+        collect_num: data.result.nums,
+      })
+    },res=>{
+      app.showToast('网络异常，请稍后重试');
     })
+
+    
   }, //收藏资源结束
   //取消收藏
   cancCollect: function(e) {
@@ -134,36 +116,21 @@ Page({
       'from': self.data.pageFrom,
       'status': false
     }));
-    wx.request({
-      url: api_url + '/Smallapp/collect/recLogs',
-      header: {
-        'content-type': 'application/json'
-      },
-      data: {
-        'openid': openid,
-        'res_id': res_id,
-        'type': res_type,
-        'status': 0,
-      },
-      success: function(e) {
-
-
-        self.setData({
-          is_collect: 0,
-          collect_num: e.data.result.nums,
-        })
-
-      },
-      fial: function({
-        errMsg
-      }) {
-        wx.showToast({
-          title: '网络异常，请稍后重试',
-          icon: 'none',
-          duration: 2000
-        })
-      }
+    utils.PostRequest(api_url + '/Smallapp/collect/recLogs', {
+      'openid': openid,
+      'res_id': res_id,
+      'type': res_type,
+      'status': 0,
+    }, (data, headers, cookies, errMsg, statusCode) => {
+      self.setData({
+        is_collect: 0,
+        collect_num: data.result.nums,
+      })
+    },res=>{
+      app.showToast('网络异常，请稍后重试')
     })
+
+    
   }, //取消收藏结束
   //点击分享按钮
   onShareAppMessage: function(res) {
@@ -171,7 +138,7 @@ Page({
     var openid = res.target.dataset.openid;
     var res_id = res.target.dataset.res_id;
 
-    var res_type = res.target.dataset.type;
+    var res_type = res.target.dataset.res_type;
     var pubdetail = res.target.dataset.pubdetail;
     var img_url = pubdetail[0]['vide_img'];
 
@@ -184,36 +151,20 @@ Page({
     if (res.from === 'button') {
       // 转发成功
       share_num = share_num++;
-      wx.request({
-        url: api_url + '/Smallapp3/share/recLogs',
-        header: {
-          'content-type': 'application/json'
-        },
-        data: {
-          'openid': openid,
-          'res_id': res_id,
-          'type': res_type,
-          'status': 1,
-        },
-        success: function(e) {
-          if (e.data.code == 10000) {
-            self.setData({
-              share_num: e.data.result.share_nums,
-            })
-          }
-
-
-        },
-        fail: function({
-          errMsg
-        }) {
-          wx.showToast({
-            title: '网络异常，请稍后重试',
-            icon: 'none',
-            duration: 2000
-          })
-        }
+      utils.PostRequest(api_url + '/Smallapp3/share/recLogs', {
+        'openid': openid,
+        'res_id': res_id,
+        'type': res_type,
+        'status': 1,
+      }, (data, headers, cookies, errMsg, statusCode) => {
+        self.setData({
+          share_num: data.result.share_nums,
+        })
+      },res=>{
+        app.showToast('网络异常，请稍后重试');
       })
+
+      
       //var share_url = '/pages/share/pic?forscreen_id=' + res_id;
       // 来自页面内转发按钮
       return {

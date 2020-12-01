@@ -504,7 +504,7 @@ Page({
       sharelist = data.result.list;
       self.setData({
         //userinfo: res.data.result.user_info,
-        sharelist: res.data.result.list,
+        sharelist: data.result.list,
         
       })
     })
