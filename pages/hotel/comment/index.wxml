@@ -91,8 +91,6 @@
 
 					<block wx:for="{{cacsi}}" wx:key="key" wx:for-item="bean" wx:for-index="index">
 						<view class="frown flex-column-center-space_between">
-							<!-- <image class="icon" mode="aspectFill" src="/images/icon/bad_no_select.png"></image> -->
-
 							<image wx:if="{{commentLevel==index}}" class="icon" mode="aspectFill" src="/images/icon/{{index}}_select.png"></image>
 							<image wx:else class="icon" mode="aspectFill" src="/images/icon/{{index}}_no_select.png" bindtap="selectCommentLevle" data-commentLevel="{{index}}"></image>
 							<view class="label one-line-overflow">{{bean.name}}</view>
@@ -121,6 +119,14 @@
 						<block wx:for="{{cacsi[commentLevel].label}}" wx:key="key" wx:for-item="bean" wx:for-index="index">
 							<view class="tag theme-font1" wx:if="{{bean.selected==false}}" bindtap="selectCommentLable" data-lableKey="{{index}}">{{bean.name}}</view>
 							<view class="tag selected" wx:else bindtap="selectCommentLable" data-lableKey="{{index}}">{{bean.name}}</view>
+						</block>
+						<block wx:for="{{cacsi[commentLevel].label}}" wx:key="key" wx:for-item="bean" wx:for-index="index">
+							<view class="tag theme-font1" wx:if="{{bean.selected==false}}" bindtap="selectCommentLable" data-lableKey="{{index}}">工{{bean.name}}</view>
+							<view class="tag selected" wx:else bindtap="selectCommentLable" data-lableKey="{{index}}">工{{bean.name}}</view>
+						</block>
+						<block wx:for="{{cacsi[commentLevel].label}}" wx:key="key" wx:for-item="bean" wx:for-index="index">
+							<view class="tag theme-font1" wx:if="{{bean.selected==false}}" bindtap="selectCommentLable" data-lableKey="{{index}}">工工 工{{bean.name}}</view>
+							<view class="tag selected" wx:else bindtap="selectCommentLable" data-lableKey="{{index}}">工工 工{{bean.name}}</view>
 						</block>
 
 						<!-- <view class="tag theme-font1">服务很一般</view>
@@ -161,7 +167,7 @@
 			<view class="tip three-line-overflow theme-font2">{{staff_user_info.service_str}}</view>
 		</view>
 	</view>
-	<view class="body">
+	<view class="body theme-panel">
 
 		<!-- 评价响应面板 -->
 		<view class="panel response">
@@ -192,7 +198,7 @@
 		-->
 
 		<!-- 打赏面板 -->
-		<view class="panel gratuity theme-panel" wx:if="{{is_open_reward==1}}">
+		<view class="panel gratuity" wx:if="{{is_open_reward==1}}">
 			<view class="head flex-column-flex_start-center">
 				<view class="title-bar flex-row-center-center">
 					<view class="text theme-font1">感谢餐厅人员的服务</view>
@@ -213,7 +219,7 @@
 				</view>
 				<view class="input-row flex-row-center-center">
 					<view class="input-wrapper flex-row-center-space_between">
-						<input type="number" class="input theme-font2"  placeholder="其他金额1-500" bindinput="inputRewardMoney" value="{{reward_money}}"></input>
+						<input type="number" class="input theme-font2" placeholder="其他金额1-500" bindinput="inputRewardMoney" value="{{reward_money}}"></input>
 						<view class="unit theme-font1">元</view>
 					</view>
 				</view>

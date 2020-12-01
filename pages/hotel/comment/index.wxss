@@ -231,20 +231,20 @@
 }
 
 .head {
-  width: calc(100% - 50rpx);
+  width: calc(100% - 60rpx);
   height: 180rpx;
-  padding: 10rpx 25rpx;
+  padding: 10rpx 30rpx;
 }
 
 .head-pic {
-  width: 174rpx;
-  height: 174rpx;
+  width: 120rpx;
+  height: 120rpx;
   border-radius: 50%;
   border: 3rpx solid rgb(210, 196, 181);
 }
 
 .head>.right {
-  width: calc(100% - 200rpx);
+  width: calc(100% - 150rpx);
   height: 100%;
 }
 
@@ -253,7 +253,7 @@
 }
 
 .tip {
-  font-size: 28rpx;
+  font-size: 24rpx;
 }
 
 .body {
@@ -281,7 +281,7 @@
 
 /* ==================================== 满意度面板 ==================================== */
 .satisfaction {
-  height: 300rpx;
+  height: 280rpx;
 }
 
 .satisfaction>.title-bar {
@@ -296,28 +296,30 @@
 }
 
 .satisfaction>.body {
+  width: calc(100% - 100rpx);
   height: calc(100% - 90rpx);
+  padding: 20rpx 50rpx 0;
 }
 
 .satisfaction>.body>view {
   width: 150rpx;
-  height: 160rpx;
+  height: 135rpx;
 }
 
 .satisfaction>.body>view>.icon {
-  width: 116rpx;
-  height: 116rpx;
+  width: 90rpx;
+  height: 90rpx;
 }
 
 .satisfaction>.body>view>.label {
   width: 100%;
-  font-size: 28rpx;
+  font-size: 24rpx;
   text-align: center;
 }
 
 /* ==================================== 意见面板 ==================================== */
 .opinion {
-  height: calc(100% - 440rpx);
+  height: calc(100% - 410rpx);
 }
 
 .opinion>.title-bar {
@@ -325,7 +327,7 @@
 }
 
 .opinion>.title-bar>.text {
-  font-size: 48rpx;
+  font-size: 42rpx;
 }
 
 .opinion>.body {
@@ -335,18 +337,19 @@
 }
 
 .opinion>.body .tag-group {
-  width: 100%;
-  padding: 10rpx 20rpx;
+  width: calc(100% - 200rpx);
+  padding: 10rpx 100rpx;
+  text-align: center;
 }
 
 .opinion>.body .tag-group>.tag {
   display: inline-block;
-  margin: 5rpx;
-  padding: 5rpx 10rpx;
-  font-size: 28rpx;
+  margin: 10rpx;
+  padding: 5rpx 20rpx;
+  font-size: 24rpx;
   border-width: 3rpx;
   border-style: solid;
-  border-color: rgb(187, 187, 187);
+  border-color: #DEDEDE;
   border-radius: 10rpx;
   box-sizing: border-box;
 }
@@ -357,29 +360,30 @@
 }
 
 .opinion>.body .input-group {
-  width: calc(100% - 40rpx);
+  width: calc(100% - 200rpx);
   /* height: 200rpx; */
-  padding: 10rpx 20rpx;
+  padding: 10rpx 100rpx;
 }
 
 .opinion>.body .input-group>.btn {
-  width: 190rpx;
+  width: 170rpx;
   height: 50rpx;
 }
 
 .opinion>.body .input-group>.btn>.icon {
-  font-size: 48rpx;
+  font-size: 36rpx;
 }
 
 .opinion>.body .input-group>.btn>.label {
-  font-size: 28rpx;
+  font-size: 24rpx;
 }
 
 .opinion>.body .input-group>.input {
   width: calc(100% - 16rpx);
   height: 200rpx;
-  padding: 5rpx;
-  font-size: 28rpx;
+  padding: 10rpx;
+  font-size: 24rpx;
+  border-radius: 10rpx;
   border: 3rpx solid #DEDEDE;
 }
 
@@ -464,6 +468,10 @@
   box-sizing: border-box;
 }
 
+.gratuity {
+  border-top: 10rpx solid #f5f6f8;
+}
+
 .gratuity>.head {
   width: 100%;
   height: 80rpx;
@@ -519,14 +527,14 @@
 }
 
 .gratuity>.body>.btn-row>.btn>.icon {
-  width: 120rpx;
-  height: 120rpx;
-  line-height: 120rpx;
+  width: 100rpx;
+  height: 100rpx;
+  line-height: 100rpx;
   text-align: center;
   border-radius: 50%;
   color: rgb(16, 16, 16);
   background-color: rgb(237, 237, 237);
-  font-size: 48rpx;
+  font-size: 42rpx;
 }
 
 .gratuity>.body>.btn-row>.btn>.label {
@@ -536,7 +544,7 @@
 
 .gratuity>.body>.btn-row>.btn.selected>.icon {
   color: rgb(255, 68, 68);
-  background-color: rgba(253, 128, 36, 0.6);
+  background-color: rgba(253, 128, 36, 0.2);
 }
 
 .gratuity>.body>.btn-row>.btn.selected>.label {
@@ -557,6 +565,7 @@
 }
 
 .gratuity>.body>.input-row>.input-wrapper>.input {
+  width: calc(100% - 50rpx);
   font-size: 28rpx;
 }
 
