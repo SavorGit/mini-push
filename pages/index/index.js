@@ -936,10 +936,18 @@ Page({
     if (box_mac == '') {
       app.scanQrcode(pageid);
     }else {
-      wx.navigateTo({
-        //url: '/pages/hotel/waiter_evaluate_h5?openid='+openid+'&box_id='+box_id,
-        url:'/pages/hotel/comment/index?openid='+openid+'&box_mac='+box_mac+'&box_id='+box_id,
-      });
+      var user_info = wx.getStorageSync("savor_user_info");
+      if (user_info.is_wx_auth != 3 ) {
+        this.setData({
+          showModal: true
+        })
+        mta.Event.stat("showwxauth", {})
+      }else {
+        wx.navigateTo({
+          //url: '/pages/hotel/waiter_evaluate_h5?openid='+openid+'&box_id='+box_id,
+          url:'/pages/hotel/comment/index?openid='+openid+'&box_mac='+box_mac+'&box_id='+box_id,
+        });
+      }
     } 
   },
   closeFollowOfficialAccount:function(e){
