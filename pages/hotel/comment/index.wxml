@@ -90,9 +90,9 @@
 				<view class="body flex-row-center-space_around">
 
 					<block wx:for="{{cacsi}}" wx:key="key" wx:for-item="bean" wx:for-index="index">
-						<view class="frown flex-column-center-space_between">
+						<view class="frown flex-column-center-space_between" bindtap="selectCommentLevle" data-commentLevel="{{index}}">
 							<image wx:if="{{commentLevel==index}}" class="icon" mode="aspectFill" src="/images/icon/{{index}}_select.png"></image>
-							<image wx:else class="icon" mode="aspectFill" src="/images/icon/{{index}}_no_select.png" bindtap="selectCommentLevle" data-commentLevel="{{index}}"></image>
+							<image wx:else class="icon" mode="aspectFill" src="/images/icon/{{index}}_no_select.png" ></image>
 							<view class="label one-line-overflow">{{bean.name}}</view>
 						</view>
 					</block>
@@ -120,14 +120,7 @@
 							<view class="tag theme-font1" wx:if="{{bean.selected==false}}" bindtap="selectCommentLable" data-lableKey="{{index}}">{{bean.name}}</view>
 							<view class="tag selected" wx:else bindtap="selectCommentLable" data-lableKey="{{index}}">{{bean.name}}</view>
 						</block>
-						<block wx:for="{{cacsi[commentLevel].label}}" wx:key="key" wx:for-item="bean" wx:for-index="index">
-							<view class="tag theme-font1" wx:if="{{bean.selected==false}}" bindtap="selectCommentLable" data-lableKey="{{index}}">工{{bean.name}}</view>
-							<view class="tag selected" wx:else bindtap="selectCommentLable" data-lableKey="{{index}}">工{{bean.name}}</view>
-						</block>
-						<block wx:for="{{cacsi[commentLevel].label}}" wx:key="key" wx:for-item="bean" wx:for-index="index">
-							<view class="tag theme-font1" wx:if="{{bean.selected==false}}" bindtap="selectCommentLable" data-lableKey="{{index}}">工工 工{{bean.name}}</view>
-							<view class="tag selected" wx:else bindtap="selectCommentLable" data-lableKey="{{index}}">工工 工{{bean.name}}</view>
-						</block>
+						
 
 						<!-- <view class="tag theme-font1">服务很一般</view>
 						<view class="tag selected">菜品很一般</view>

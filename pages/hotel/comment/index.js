@@ -79,7 +79,7 @@ Page({
    */
   selectCommentLevle:function(e){
     console.log(e)
-    var commentLevel = e.target.dataset.commentlevel;  //1很糟糕 2一般般 3太赞了
+    var commentLevel = e.currentTarget.dataset.commentlevel;  //1很糟糕 2一般般 3太赞了
     var cacsi = this.data.cacsi;
     for(let i in cacsi){
       if(i!=commentLevel){
@@ -175,7 +175,7 @@ Page({
         wx.switchTab({
           url: '/pages/index/index',
           success:function(){
-            app.showToast('感谢您的支持');
+            app.showToast('感谢支持');
           }
         })
 
@@ -234,7 +234,7 @@ Page({
           wx.switchTab({
             url: '/pages/index/index',
             success:function(){
-              app.showToast('感谢您的支持');
+              app.showToast('感谢支持');
             }
           })
         },
