@@ -168,7 +168,7 @@
 				<image class="icon" mode="aspectFill" src="/images/icon/{{commentLevel}}_select.png"></image>
 				<view class="title theme-font5">{{cacsi[commentLevel].name}}</view>
 				<view class="tags three-line-overflow theme-font5" wx:if="{{tag_strs!=''}}">“{{tag_strs}}”</view>
-				<view class="content three-line-overflow theme-font1" wx:if="{{tag_strs!=''}}">“{{tag_strs}}”</view>
+				<view class="content three-line-overflow theme-font1" wx:if="{{comment_str!=''}}">“{{comment_str}}”</view>
 				<view class="tips flex-column-center-center">
 					<view class="tip theme-font3">十分感谢您的评价</view>
 					<view class="tip theme-font3">我们将对您提出的问题进行改进</view>
