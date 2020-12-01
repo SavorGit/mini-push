@@ -431,12 +431,14 @@
   width: calc(100% - 60rpx);
   margin-top: 20rpx;
   font-size: 28rpx;
+  text-align: center;
 }
 
 .response>.body .content {
   width: calc(100% - 60rpx);
   margin-top: 30rpx;
   font-size: 28rpx;
+  text-align: center;
 }
 
 .response>.body .tips {
