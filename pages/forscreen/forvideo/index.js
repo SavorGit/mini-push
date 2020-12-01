@@ -301,58 +301,51 @@ Page({
       is_share: is_share,
       is_assist: is_assist
     })
-    wx.request({
-      url: api_url + '/smallapp21/User/isForscreenIng',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      method: "POST",
-      data: {
-        box_mac: box_mac
-      },
-      success: function(res) {
-        var is_forscreen = res.data.result.is_forscreen;
-        if (is_forscreen == 1) {
-          wx.showModal({
-            title: '确认要打断投屏',
-            content: '当前电视正在进行投屏,继续投屏有可能打断当前投屏中的内容.',
-            success: function(res) {
-              if (res.confirm) {
-                that.uploadOssVedio(policy, signature, video, box_mac, openid, is_pub_hotelinfo, is_share, duration, avatarUrl, nickName, public_text);
-                if (public_text = '' || typeof (public_text) == 'undefined') {
-                  public_text = 0;
-                } else {
-                  public_text = 1;
-                }
-                utils.tryCatch(mta.Event.stat('forscreenVedio', { 'ispublictext': public_text, 'ispublic': is_share, 'isforscreen': 1 }));
-              } else if (res.cancel) {
-                
-                that.setData({
-                  isOpenWind:false,
-                  is_classic_disabel:false,
-                  is_speed_disabel:false,
-                })
-                if (public_text = '' || typeof (public_text) == 'undefined') {
-                  public_text = 0;
-                } else {
-                  public_text = 1;
-                }
-                utils.tryCatch(mta.Event.stat('forscreenVedio', { 'ispublictext': public_text, 'ispublic': is_share, 'isforscreen': 0 }));
+
+    utils.PostRequest(api_url + '/smallapp21/User/isForscreenIng', {
+      box_mac: box_mac
+    }, (data, headers, cookies, errMsg, statusCode) => {
+      var is_forscreen = data.result.is_forscreen;
+      if (is_forscreen == 1) {
+        wx.showModal({
+          title: '确认要打断投屏',
+          content: '当前电视正在进行投屏,继续投屏有可能打断当前投屏中的内容.',
+          success: function(res) {
+            if (res.confirm) {
+              that.uploadOssVedio(policy, signature, video, box_mac, openid, is_pub_hotelinfo, is_share, duration, avatarUrl, nickName, public_text);
+              if (public_text = '' || typeof (public_text) == 'undefined') {
+                public_text = 0;
+              } else {
+                public_text = 1;
               }
+              utils.tryCatch(mta.Event.stat('forscreenVedio', { 'ispublictext': public_text, 'ispublic': is_share, 'isforscreen': 1 }));
+            } else if (res.cancel) {
+              
+              that.setData({
+                isOpenWind:false,
+                is_classic_disabel:false,
+                is_speed_disabel:false,
+              })
+              if (public_text = '' || typeof (public_text) == 'undefined') {
+                public_text = 0;
+              } else {
+                public_text = 1;
+              }
+              utils.tryCatch(mta.Event.stat('forscreenVedio', { 'ispublictext': public_text, 'ispublic': is_share, 'isforscreen': 0 }));
             }
-          })
-          
-        } else {
-          that.uploadOssVedio(policy, signature, video, box_mac, openid, is_pub_hotelinfo, is_share, duration, avatarUrl, nickName, public_text);
-          if (public_text = '' || typeof (public_text) == 'undefined') {
-            public_text = 0;
-          } else {
-            public_text = 1;
           }
-          utils.tryCatch(mta.Event.stat('forscreenVedio', { 'ispublictext': public_text, 'ispublic': is_share, 'isforscreen': 0 }));
+        })
+        
+      } else {
+        that.uploadOssVedio(policy, signature, video, box_mac, openid, is_pub_hotelinfo, is_share, duration, avatarUrl, nickName, public_text);
+        if (public_text = '' || typeof (public_text) == 'undefined') {
+          public_text = 0;
+        } else {
+          public_text = 1;
         }
+        utils.tryCatch(mta.Event.stat('forscreenVedio', { 'ispublictext': public_text, 'ispublic': is_share, 'isforscreen': 0 }));
       }
-    })
+    },res=>{},{ isShowLoading: false })
     
   },
   uploadOssVedio:function (policy, signature, video, box_mac, openid, is_pub_hotelinfo, is_share, duration, avatarUrl, nickName, public_text) {
@@ -406,98 +399,75 @@ Page({
     var openWind = that.data.openWind;
     openWind.step = 2;
     openWind.tip  = '正在投屏,请稍后';
-    
-    wx.request({
-      url: api_url + '/Netty/Index/pushnetty',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      method: "POST",
-      data: {
+    utils.PostRequest(api_url + '/Netty/Index/pushnetty', {
+      box_mac: box_mac,
+      msg: '{ "action":2, "url": "forscreen/resource/' + timestamp + postf_t + '", "filename":"' + timestamp + postf_t + '","openid":"' + openid + '","resource_type":2,"video_id":"' + timestamp + '","avatarUrl":"' + avatarUrl + '","nickName":"' + nickName + '","forscreen_id":"' + timestamp + '","res_sup_time":"'+res_sup_time+'","res_eup_time":"'+res_eup_time+'","resource_size":'+res_size+',"serial_number":"'+app.globalData.serial_number+'"}',
+    }, (data, headers, cookies, errMsg, statusCode) => {
+      that.setData({
+        openWind:openWind,
+        showVedio: false,
+        oss_video_url: oss_url + "/forscreen/resource/" + timestamp + postf_t,
+        upload_vedio_temp: '',
+        is_view_control: true,
+        hiddens: true,
+        is_open_control: false,
+        forscreen_id: timestamp
+      })
+      //倒计时关闭窗口
+      that.closeOpenWind();
+
+      that.setData({
+        upload_vedio_cover: oss_url + '/forscreen/resource/' + timestamp + postf_t + '?x-oss-process=video/snapshot,t_2000,f_jpg,w_450,m_fast',
+      })
+      utils.PostRequest(api_v_url + '/index/recordForScreenPics', {
+        openid: openid,
         box_mac: box_mac,
-        msg: '{ "action":2, "url": "forscreen/resource/' + timestamp + postf_t + '", "filename":"' + timestamp + postf_t + '","openid":"' + openid + '","resource_type":2,"video_id":"' + timestamp + '","avatarUrl":"' + avatarUrl + '","nickName":"' + nickName + '","forscreen_id":"' + timestamp + '","res_sup_time":"'+res_sup_time+'","res_eup_time":"'+res_eup_time+'","resource_size":'+res_size+',"serial_number":"'+app.globalData.serial_number+'"}',
-      },
-      success: function(result) {
-        if (result.data.code != 10000) {
-          
-          openWind.isError = true;
-          openWind.tip     = '投屏失败';
-          that.setData({
-            openWind:openWind,
-          })
-        }else {
-          that.setData({
-            openWind:openWind,
-            showVedio: false,
-            oss_video_url: oss_url + "/forscreen/resource/" + timestamp + postf_t,
-            upload_vedio_temp: '',
-            is_view_control: true,
-            hiddens: true,
-            is_open_control: false,
-            forscreen_id: timestamp
-          })
-          //倒计时关闭窗口
-          that.closeOpenWind();
-        }
-        that.setData({
-          upload_vedio_cover: oss_url + '/forscreen/resource/' + timestamp + postf_t + '?x-oss-process=video/snapshot,t_2000,f_jpg,w_450,m_fast',
-        })
-        wx.request({
-          url: api_v_url + '/index/recordForScreenPics',
-          header: {
-            'content-type': 'application/json'
-          },
-          data: {
-            openid: openid,
-            box_mac: box_mac,
-            action: 2,
-            resource_type: 2,
-            mobile_brand: mobile_brand,
-            mobile_model: mobile_model,
-            forscreen_char: forscreen_char,
-            public_text: public_text,
-            imgs: '["forscreen/resource/' + timestamp + postf_t + '"]',
-            resource_id: timestamp,
-            res_sup_time: res_sup_time,
-            res_eup_time: res_eup_time,
-            resource_size: res_size,
-            is_pub_hotelinfo: is_pub_hotelinfo,
-            is_share: is_share,
-            forscreen_id: timestamp,
-            duration: duration,
-            res_nums: 1,
-            serial_number:app.globalData.serial_number
-          },
-          success: function(ret) {
-            wx.request({
-              url: api_v_url + '/ForscreenHistory/getList',
-              header: {
-                'content-type': 'application/json'
-              },
-              data: {
-                openid: openid,
-                box_mac: box_mac,
-                page: page,
-              },
-              success: function(res) {
-                var hst_list = res.data.result;
+        action: 2,
+        resource_type: 2,
+        mobile_brand: mobile_brand,
+        mobile_model: mobile_model,
+        forscreen_char: forscreen_char,
+        public_text: public_text,
+        imgs: '["forscreen/resource/' + timestamp + postf_t + '"]',
+        resource_id: timestamp,
+        res_sup_time: res_sup_time,
+        res_eup_time: res_eup_time,
+        resource_size: res_size,
+        is_pub_hotelinfo: is_pub_hotelinfo,
+        is_share: is_share,
+        forscreen_id: timestamp,
+        duration: duration,
+        res_nums: 1,
+        serial_number:app.globalData.serial_number
+      }, (data, headers, cookies, errMsg, statusCode) => {
+        utils.PostRequest(api_v_url + '/ForscreenHistory/getList', {
+          openid: openid,
+          box_mac: box_mac,
+          page: page,
+        }, (data, headers, cookies, errMsg, statusCode) => {
+          var hst_list = data.result;
 
-                if (JSON.stringify(hst_list) == "{}") {
-                  that.setData({
-                    forscreen_history_list: ''
-                  })
-                } else {
-                  that.setData({
-                    forscreen_history_list: res.data.result
-                  })
-                }
+            if (JSON.stringify(hst_list) == "{}") {
+              that.setData({
+                forscreen_history_list: ''
+              })
+            } else {
+              that.setData({
+                forscreen_history_list: data.result
+              })
+            }
+        },res=>{},{ isShowLoading: false })
+      },res=>{},{ isShowLoading: false })
+    }, res_eup_time => {
+      openWind.isError = true;
+      openWind.tip     = '投屏失败';
+      that.setData({
+        openWind:openWind,
+      })
 
-              }
-            })
-          }
-        });
-      },
-    });
+    }, { isShowLoading: false })
+
+    
     try {
       let consumeDuration = res_eup_time - timestamp;
       mta.Event.stat('LaunchVideoWithNet_Launching_OSSDuration', {
@@ -702,19 +672,20 @@ Page({
     })
   },
   recordWifiErr:function(err_info,box_mac,openid){
-    wx.request({
-      url: api_v_url + '/datalog/recordWifiErr',
-      data: {
-        err_info: err_info,
-        box_mac: box_mac,
-        openid:openid,
-        mobile_brand:app.globalData.sys_info.brand,
-        mobile_model:app.globalData.sys_info.model,
-        platform:app.globalData.sys_info.platform,
-        version:app.globalData.sys_info.version,
-        system:app.globalData.sys_info.system
-      }
-    })
+
+    utils.PostRequest(api_v_url + '/datalog/recordWifiErr', {
+      err_info: err_info,
+      box_mac: box_mac,
+      openid:openid,
+      mobile_brand:app.globalData.sys_info.brand,
+      mobile_model:app.globalData.sys_info.model,
+      platform:app.globalData.sys_info.platform,
+      version:app.globalData.sys_info.version,
+      system:app.globalData.sys_info.system
+    }, (data, headers, cookies, errMsg, statusCode) => {
+
+    }, re => { }, { isShowLoading: false })
+    
   },
   burstReadVideoFile(data,hotel_info){
     var that = this;
@@ -1403,51 +1374,31 @@ Page({
     var openid = e.target.dataset.openid;
     var box_mac = e.target.dataset.box_mac;
     page = page + 1;
-    that.setData({
-      load_fresh_char: '加载中...',
-      hiddens: false,
+    
+    utils.PostRequest(api_v_url + '/ForscreenHistory/getList', {
+      page: page,
+      box_mac: box_mac,
+      openid: openid,
+    }, (data, headers, cookies, errMsg, statusCode) => {
+      forscreen_history_list = data.result,
+      that.setData({
+        forscreen_history_list: data.result,
+      })
     })
-    wx.request({
-      url: api_v_url + '/ForscreenHistory/getList',
-      header: {
-        'Content-Type': 'application/json'
-      },
-      data: {
-        page: page,
-        box_mac: box_mac,
-        openid: openid,
-      },
-      method: "POST",
-      success: function(res) {
-        if (res.data.code == 10000) {
-          forscreen_history_list = res.data.result,
-            that.setData({
-              forscreen_history_list: res.data.result,
-              hiddens: true,
-            })
-        } else {
-          that.setData({
-            hiddens: true,
-          })
-        }
-      }
-    })
+
+    
   },
   changeVolume: function(e) {
     var box_mac = e.target.dataset.box_mac;
     var change_type = e.target.dataset.change_type;
-    var timestamp = (new Date()).valueOf();
-    wx.request({
-      url: api_url + '/Netty/Index/pushnetty',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      method: "POST",
-      data: {
-        box_mac: box_mac,
-        msg: '{"action":31,"change_type":' + change_type + '}',
-      },
-    })
+    utils.PostRequest(api_url + '/Netty/Index/pushnetty', {
+      box_mac: box_mac,
+      msg: '{"action":31,"change_type":' + change_type + '}',
+    }, (data, headers, cookies, errMsg, statusCode) => {
+      
+    },res=>{},{ isShowLoading: false })
+
+    
     utils.tryCatch(mta.Event.stat('controlChangeVolume', { 'changetype': change_type }))
   },
   closeJump: function(e) {
@@ -1527,39 +1478,23 @@ Page({
       })
 
     } else {
-
-      wx.request({
-        url: api_url + '/Smallapp3/ForscreenHelp/helpplay',
-        header: {
-          'Content-Type': 'application/json'
-        },
-        data: {
-          forscreen_id: forscreen_id,
-          openid: openid,
-        },
-        success: function(res) {
-          if (res.data.code == 10000) {
-            var rec_id = res.data.result.forscreen_id;
-            wx.navigateTo({
-              url: '/pages/mine/assist/index?forscreen_id=' + rec_id + "&box_mac=" + box_mac + "&inside=1",
-            })
-
-          } else {
-            wx.showToast({
-              title: '助力参数异常，请重选照片',
-              icon: 'none',
-              duration: 2000
-            })
-          }
-        },
-        fail: function(res) {
-          wx.showToast({
-            title: '助力参数异常，请重选照片',
-            icon: 'none',
-            duration: 2000
-          })
-        }
+      utils.PostRequest(api_url + '/Smallapp3/ForscreenHelp/helpplay', {
+        forscreen_id: forscreen_id,
+        openid: openid,
+      }, (data, headers, cookies, errMsg, statusCode) => {
+        var rec_id = data.result.forscreen_id;
+        wx.navigateTo({
+          url: '/pages/mine/assist/index?forscreen_id=' + rec_id + "&box_mac=" + box_mac + "&inside=1",
+        })
+        
+      },res=>{
+        wx.showToast({
+          title: '助力参数异常，请重选照片',
+          icon: 'none',
+          duration: 2000
+        })
       })
+      
     }
   },
   phonecallevent: function(e) {
@@ -1587,24 +1522,17 @@ Page({
         showGuidedMaskAfterLaunch: false,
       })
     }
-    wx.request({
-      url: api_url + '/Smallapp3/content/guidePrompt',
-      header: {
-        'Content-Type': 'application/json'
-      },
-      data: {
-        openid: openid,
-        type: type,
-      },
-      success: function(res) {
-        if (res.data.code == 10000) {
-          var user_info = wx.getStorageSync('savor_user_info');
+    utils.PostRequest(api_url + '/Smallapp3/content/guidePrompt', {
+      openid: openid,
+      type: type,
+    }, (data, headers, cookies, errMsg, statusCode) => {
+      var user_info = wx.getStorageSync('savor_user_info');
 
-          user_info.guide_prompt.push(type);
-          wx.setStorageSync('savor_user_info', user_info);
-        }
-      }
+      user_info.guide_prompt.push(type);
+      wx.setStorageSync('savor_user_info', user_info);
     })
+
+    
   },
   goToBack: function (e) {
     var that = this;
