@@ -80,7 +80,20 @@ Page({
   selectCommentLevle:function(e){
     console.log(e)
     var commentLevel = e.target.dataset.commentlevel;  //1很糟糕 2一般般 3太赞了
+    var cacsi = this.data.cacsi;
+    for(let i in cacsi){
+      if(i!=commentLevel){
+
+        var label = cacsi[i].label
+        for(let j in label){
+          label[j].selected= false;
+        }
+
+      }
+    }
+
     this.setData({
+      cacsi:cacsi,
       commentLevel:commentLevel,
       comment_disable:false
     })

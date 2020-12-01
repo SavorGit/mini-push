@@ -166,8 +166,8 @@
 		<!-- 评价响应面板 -->
 		<view class="panel response">
 			<view class="body flex-column-center-center">
-				<image class="icon" mode="aspectFill" src="https://oss.littlehotspot.com/WeChat/MiniProgram/images/icon/meh_selected.png"></image>
-				<view class="title theme-font5">本次饭局一般般，还需要改善</view>
+				<image class="icon" mode="aspectFill" src="/images/icon/{{commentLevel}}_select.png"></image>
+				<view class="title theme-font5">{{cacsi[commentLevel].name}}</view>
 				<view class="content theme-font5" wx:if="{{tag_strs!=''}}">“{{tag_strs}}”</view>
 			</view>
 		</view>
@@ -213,7 +213,7 @@
 				</view>
 				<view class="input-row flex-row-center-center">
 					<view class="input-wrapper flex-row-center-space_between">
-						<input type="number" class="input theme-font2" type="text" placeholder="其他金额1-500" bindinput="inputRewardMoney" value="{{reward_money}}"></input>
+						<input type="number" class="input theme-font2"  placeholder="其他金额1-500" bindinput="inputRewardMoney" value="{{reward_money}}"></input>
 						<view class="unit theme-font1">元</view>
 					</view>
 				</view>
