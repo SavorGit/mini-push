@@ -198,6 +198,7 @@ Page({
     var that = this;
     var reward_list = that.data.reward_list;
     var reward_id = 0;
+    var comment_id = that.data.comment_id;
     for(let i in reward_list){
       if(reward_list[i].selected===true){
         reward_id = reward_list[i].id;
@@ -223,6 +224,7 @@ Page({
       money:money,
       openid: openid,
       staff_id:staff_id,
+      comment_id:comment_id,
     }, (data, headers, cookies, errMsg, statusCode) => {
       wx.requestPayment({
         'timeStamp': data.result.payinfo.timeStamp,
