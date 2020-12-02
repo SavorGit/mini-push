@@ -1,4 +1,5 @@
 // pages/share/video.js
+const utils = require('../../utils/util.js')
 const app = getApp()
 var box_mac;
 var openid;
@@ -33,28 +34,20 @@ Page({
       })
       openid = app.globalData.openid;
       //判断用户是否注册
-      wx.request({
-        url: api_v_url+'/User/isRegister',
-        data: {
-          "openid": app.globalData.openid,
-          
-        },
-        header: {
-          'content-type': 'application/json'
-        },
-        success: function (res) {
-          wx.setStorage({
-            key: 'savor_user_info',
-            data: res.data.result.userinfo,
-          })
-        },
-        fail: function (e) {
-          wx.setStorage({
-            key: 'savor_user_info',
-            data: { 'openid': app.globalData.openid },
-          })
-        }
-      });//判断用户是否注册结束
+      utils.PostRequest(api_v_url+'/User/isRegister',{
+        "openid": app.globalData.openid,
+      }, (data, headers, cookies, errMsg, statusCode) => {
+        wx.setStorage({
+          key: 'savor_user_info',
+          data: data.result.userinfo,
+        })
+      },res=>{
+        wx.setStorage({
+          key: 'savor_user_info',
+          data: { 'openid': app.globalData.openid },
+        })
+      })
+      
       
     } else {
       app.openidCallback = openid => {
@@ -64,28 +57,20 @@ Page({
           })
           openid = openid;
           //判断用户是否注册
-          wx.request({
-            url: api_v_url+'/User/isRegister',
-            data: {
-              "openid": app.globalData.openid,
-              
-            },
-            header: {
-              'content-type': 'application/json'
-            },
-            success: function (res) {
-              wx.setStorage({
-                key: 'savor_user_info',
-                data: res.data.result.userinfo,
-              })
-            },
-            fail: function (e) {
-              wx.setStorage({
-                key: 'savor_user_info',
-                data: { 'openid': openid },
-              })
-            }
-          });//判断用户是否注册结束
+          utils.PostRequest(api_v_url+'/User/isRegister', {
+            "openid": openid,
+          }, (data, headers, cookies, errMsg, statusCode) => {
+            wx.setStorage({
+              key: 'savor_user_info',
+              data: data.result.userinfo,
+            })
+          },res=>{
+            wx.setStorage({
+              key: 'savor_user_info',
+              data: { 'openid': openid },
+            })
+          })
+          //判断用户是否注册结束
          
         }
       }
@@ -93,23 +78,19 @@ Page({
     //var forscreen_id = options.forscreen_id;
     var user_info = wx.getStorageSync("savor_user_info");
     openid = user_info.openid;
-    wx.request({
-      url: api_url+'/smallapp3/Share/showVideo',
-      data: {
-        'res_id': res_id,
-        'type': type,
-        'openid': openid,
-      },
-      success: function (res) {
-        //console.log(res.data.result.pubdetail);
-        info = res.data.result;
-        that.setData({
-          info: res.data.result,
-          openid: openid,
-          
-        })
-      }
+    utils.PostRequest(api_url+'/smallapp3/Share/showVideo', {
+      'res_id': res_id,
+      'type': type,
+      'openid': openid,
+    }, (data, headers, cookies, errMsg, statusCode) => {
+      info = data.result;
+      that.setData({
+        info: data.result,
+        openid: openid,
+        
+      })
     })
+    
     
   },
   
@@ -120,46 +101,20 @@ Page({
     var res_id = e.target.dataset.res_id;
     var info = e.target.dataset.info;
     var type = e.target.dataset.type;
-    wx.request({
-      url: api_url+'/Smallapp/collect/recLogs',
-      header: {
-        'content-type': 'application/json'
-      },
-      data: {
-        'openid': openid,
-        'res_id': res_id,
-        'type': type,
-        'status': 1,
-      },
-      success: function (e) {
-        var collect_nums = e.data.result.nums;
-        info.collect_nums = collect_nums;
-        info.is_collect = 1;
-        that.setData({
-          info: info
-        })
-        /*if (e.data.code == 10000) {
-          wx.showToast({
-            title: '收藏成功',
-            icon: 'none',
-            duration: 2000
-          })
-        } else {
-          wx.showToast({
-            title: '收藏失败，请稍后重试',
-            icon: 'none',
-            duration: 2000
-          })
-        }*/
-      },
-      fial: function ({ errMsg }) {
-        wx.showToast({
-          title: '网络异常，请稍后重试',
-          icon: 'none',
-          duration: 2000
-        })
-      }
+    utils.PostRequest(api_url+'/Smallapp/collect/recLogs', {
+      'openid': openid,
+      'res_id': res_id,
+      'type': type,
+      'status': 1,
+    }, (data, headers, cookies, errMsg, statusCode) => {
+      var collect_nums = data.result.nums;
+      info.collect_nums = collect_nums;
+      info.is_collect = 1;
+      that.setData({
+        info: info
+      })
     })
+    
   },//收藏资源结束
   //取消收藏
   cancCollect: function (e) {
@@ -168,46 +123,20 @@ Page({
     var info = e.target.dataset.info;
     var openid = e.target.dataset.openid;
     var type = e.target.dataset.type;
-    wx.request({
-      url: api_url+'/Smallapp/collect/recLogs',
-      header: {
-        'content-type': 'application/json'
-      },
-      data: {
-        'openid': openid,
-        'res_id': res_id,
-        'type': type,
-        'status': 0,
-      },
-      success: function (e) {
-        var collect_nums = e.data.result.nums;
-        info.collect_nums = collect_nums;
-        info.is_collect = 0;
-        that.setData({
-          info: info
-        })
-        /*if (e.data.code == 10000) {
-          wx.showToast({
-            title: '取消收藏成功',
-            icon: 'none',
-            duration: 2000
-          })
-        } else {
-          wx.showToast({
-            title: '取消收藏失败，请稍后重试',
-            icon: 'none',
-            duration: 2000
-          })
-        }*/
-      },
-      fial: function ({ errMsg }) {
-        wx.showToast({
-          title: '网络异常，请稍后重试',
-          icon: 'none',
-          duration: 2000
-        })
-      }
+    utils.PostRequest(api_url+'/Smallapp/collect/recLogs', {
+      'openid': openid,
+      'res_id': res_id,
+      'type': type,
+      'status': 0,
+    }, (data, headers, cookies, errMsg, statusCode) => {
+      var collect_nums = data.result.nums;
+      info.collect_nums = collect_nums;
+      info.is_collect = 0;
+      that.setData({
+        info: info
+      })
     })
+    
   },//取消收藏结束
   //点击分享按钮
   onShareAppMessage: function (res) {
@@ -220,36 +149,19 @@ Page({
     
     if (res.from === 'button') {
       // 转发成功
-      wx.request({
-        url: api_url+'/Smallapp/share/recLogs',
-        header: {
-          'content-type': 'application/json'
-        },
-        data: {
-          'openid': openid,
-          'res_id': res_id,
-          'type': type,
-          'status': 1,
-        },
-        success: function (e) {
-
-          info.share_nums++;
+      utils.PostRequest(api_url+'/Smallapp/share/recLogs', {
+        'openid': openid,
+        'res_id': res_id,
+        'type': type,
+        'status': 1,
+      }, (data, headers, cookies, errMsg, statusCode) => {
+        info.share_nums++;
 
 
           that.setData({
             info: info
           })
-
-        },
-        fial: function ({ errMsg }) {
-          wx.showToast({
-            title: '网络异常，请稍后重试',
-            icon: 'none',
-            duration: 2000
-          })
-        }
       })
-
       // 来自页面内转发按钮
       return {
         title: '发现一个好玩的东西',

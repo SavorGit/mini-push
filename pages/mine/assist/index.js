@@ -254,7 +254,6 @@ Page({
       utils.PostRequest(api_v_url + '/User/refuseRegister', {
         'openid': openid,
       }, (data, headers, cookies, errMsg, statusCode) => {
-        var user_info  = data.result;
         user_info['is_wx_auth'] = 1;
         wx.setStorage({
           key: 'savor_user_info',

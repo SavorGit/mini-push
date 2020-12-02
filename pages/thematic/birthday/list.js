@@ -1,5 +1,5 @@
 // pages/thematic/birthday/list.js
-const util = require('../../../utils/util.js')
+const utils = require('../../../utils/util.js')
 var mta = require('../../../utils/mta_analysis.js')
 const app = getApp()
 var box_mac;
@@ -28,34 +28,21 @@ Page({
 
   getContellDetail:function(constellid){
     var that = this
-    wx.request({
-      url: api_url+'/Smallapp3/constellation/getVideoList',
-      header: {
-        'content-type': 'application/json'
-      },
-      data: {
-        constellation_id: constellid,
-      },
-      success: function (res) {
-        that.setData({
-          videolist: res.data.result
-        })
-      }
+    utils.PostRequest(api_url+'/Smallapp3/constellation/getVideoList', {
+      constellation_id: constellid,
+    }, (data, headers, cookies, errMsg, statusCode) => {
+      that.setData({
+        videolist: data.result
+      })
     })
-    wx.request({
-      url: api_url+'/Smallapp3/constellation/getConstellationDetail',
-      header: {
-        'content-type': 'application/json'
-      },
-      data: {
-        constellation_id: constellid,
-      },
-      success: function (res) {
-        that.setData({
-          constellation_detail: res.data.result
-        })
-      }
+    utils.PostRequest(api_url+'/Smallapp3/constellation/getConstellationDetail', {
+      constellation_id: constellid,
+    }, (data, headers, cookies, errMsg, statusCode) => {
+      that.setData({
+        constellation_detail: data.result
+      })
     })
+    
   },
   /**
    * 生命周期函数--监听页面加载
@@ -70,55 +57,38 @@ Page({
       openid:openid,
       box_mac:box_mac,
     })
+    utils.PostRequest(api_url+'/Smallapp21/index/happylist', {
+    }, (data, headers, cookies, errMsg, statusCode) => {
+      that.setData({
+        happylist:data.result
+      })
+    })
+    utils.PostRequest(api_url+'/Smallapp3/constellation/getConstellationList', {
+    }, (data, headers, cookies, errMsg, statusCode) => {
+      that.setData({
+        constellationlist:data.result,
+        choose_constellid:data.result[0]['id'],
+        choose_constellname: data.result[0]['name'],
+        choose_constellisnow: 1
+      })
+      if (that.data.choose_constellid) {
+        mta.Event.stat('viewConstellation', { 'name': that.data.choose_constellname })
+        that.getContellDetail(that.data.choose_constellid)
+      }
+    })
     
-    wx.request({
-      url: api_url+'/Smallapp21/index/happylist',
-      header: {
-        'content-type': 'application/json'
-      },
-      success:function(res){
-        that.setData({
-          happylist:res.data.result
-        })
-      }
-    })
-    wx.request({
-      url: api_url+'/Smallapp3/constellation/getConstellationList',
-      header: {
-        'content-type': 'application/json'
-      },
-      success:function(res){
-        that.setData({
-          constellationlist:res.data.result,
-          choose_constellid:res.data.result[0]['id'],
-          choose_constellname: res.data.result[0]['name'],
-          choose_constellisnow: 1
-        })
-        if (that.data.choose_constellid) {
-          mta.Event.stat('viewConstellation', { 'name': that.data.choose_constellname })
-          that.getContellDetail(that.data.choose_constellid)
-        }
-      }
-    })
 
     //红包送祝福开关
-    wx.request({
-      url: api_url+'/smallapp3/Redpacket/getConfig',
-      header: {
-        'content-type': 'application/json'
-      },
-      data:{
-        type:1
-      },
-      success:function(res){
-        if(res.data.code==10000){
-          that.setData({
-            is_open_red_packet: res.data.result.is_open_red_packet
-          })
-        }
-        
-      }
+
+    utils.PostRequest(api_url+'/smallapp3/Redpacket/getConfig', {
+      type:1
+    }, (data, headers, cookies, errMsg, statusCode) => {
+      that.setData({
+        is_open_red_packet: data.result.is_open_red_packet
+      })
     })
+
+    
 
   },
   switchConstell:function(e){
@@ -155,16 +125,10 @@ Page({
     var timestamp = (new Date()).valueOf();
     var mobile_brand = app.globalData.mobile_brand;
     var mobile_model = app.globalData.mobile_model;
-
-    wx.request({
-      url: api_url + '/smallapp21/User/isForscreenIng',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      method: "POST",
-      data: { box_mac: box_mac },
-      success: function (res) {
-        var is_forscreen = res.data.result.is_forscreen;
+    utils.PostRequest(api_url + '/smallapp21/User/isForscreenIng', {
+      box_mac: box_mac 
+    }, (data, headers, cookies, errMsg, statusCode) => {
+      var is_forscreen = data.result.is_forscreen;
         if (is_forscreen == 1) {
           wx.showModal({
             title: '确认要打断投屏',
@@ -172,47 +136,30 @@ Page({
             success: function (res) {
               if (res.confirm) {
                 mta.Event.stat('breakForscreen', { 'isbreak':1 })
-                wx.request({
-                  url: api_url + '/Netty/Index/pushnetty',
-                  headers: {
-                    'Content-Type': 'application/json'
-                  },
-                  method: "POST",
-                  data: {
+
+                utils.PostRequest(api_url + '/Netty/Index/pushnetty', {
+                  box_mac: box_mac,
+                  msg: '{ "action": 6,"url":"' + vediourl + '","filename":"' + filename + '","forscreen_id":"' + timestamp + '","resource_type":2,"openid":"'+openid+'","serial_number":"'+app.globalData.serial_number+'"}',
+                }, (data, headers, cookies, errMsg, statusCode) => {
+                  wx.showToast({
+                    title: '点播成功,电视即将开始播放',
+                    icon: 'none',
+                    duration: 5000
+                  });
+                  utils.PostRequest(api_v_url + '/index/recordForScreenPics', {
+                    forscreen_id: timestamp,
+                    openid: openid,
                     box_mac: box_mac,
-                    msg: '{ "action": 6,"url":"' + vediourl + '","filename":"' + filename + '","forscreen_id":"' + timestamp + '","resource_type":2,"openid":"'+openid+'","serial_number":"'+app.globalData.serial_number+'"}',
-                  },
-                  success: function (res) {
-                    wx.showToast({
-                      title: '点播成功,电视即将开始播放',
-                      icon: 'none',
-                      duration: 5000
-                    });
-                    wx.request({
-                      url: api_v_url + '/index/recordForScreenPics',
-                      header: {
-                        'content-type': 'application/json'
-                      },
-                      data: {
-                        forscreen_id: timestamp,
-                        openid: openid,
-                        box_mac: box_mac,
-                        action: 5,
-                        mobile_brand: mobile_brand,
-                        mobile_model: mobile_model,
-                        forscreen_char: forscreen_char,
-                        imgs: '["media/resource/' + filename + '"]',
-                        serial_number:app.globalData.serial_number
-                      },
-                    });
-                  },
-                  fail: function (res) {
-                    wx.showToast({
-                      title: '网络异常,点播失败',
-                      icon: 'none',
-                      duration: 2000
-                    })
-                  }
+                    action: 5,
+                    mobile_brand: mobile_brand,
+                    mobile_model: mobile_model,
+                    forscreen_char: forscreen_char,
+                    imgs: '["media/resource/' + filename + '"]',
+                    serial_number:app.globalData.serial_number
+                  }, (data, headers, cookies, errMsg, statusCode) => {
+
+                  })
+                  
                 })
               } else {
                 mta.Event.stat('breakForscreen', { 'isbreak': 0 })
@@ -220,52 +167,35 @@ Page({
             }
           })
         } else {
-          wx.request({
-            url: api_url + '/Netty/Index/pushnetty',
-            headers: {
-              'Content-Type': 'application/json'
-            },
-            method: "POST",
-            data: {
-              box_mac: box_mac,
-              msg: '{ "action": 6,"url":"' + vediourl + '","filename":"' + filename + '","forscreen_id":"' + timestamp + '","resource_type":2,"openid":"'+openid+'","serial_number":"'+app.globalData.serial_number+'"}',
-            },
-            success: function (res) {
-              wx.showToast({
-                title: '点播成功,电视即将开始播放',
-                icon: 'none',
-                duration: 5000
-              });
-              wx.request({
-                url: api_v_url + '/index/recordForScreenPics',
-                header: {
-                  'content-type': 'application/json'
-                },
-                data: {
-                  forscreen_id: timestamp,
-                  openid: openid,
-                  box_mac: box_mac,
-                  action: 5,
-                  mobile_brand: mobile_brand,
-                  mobile_model: mobile_model,
-                  forscreen_char: forscreen_char,
-                  imgs: '["media/resource/' + filename + '"]',
-                  serial_number:app.globalData.serial_number
-                },
-              });
-            },
-            fail: function (res) {
-              wx.showToast({
-                title: '网络异常,点播失败',
-                icon: 'none',
-                duration: 2000
-              })
-            }
+          utils.PostRequest(api_url + '/Netty/Index/pushnetty', {
+            box_mac: box_mac,
+            msg: '{ "action": 6,"url":"' + vediourl + '","filename":"' + filename + '","forscreen_id":"' + timestamp + '","resource_type":2,"openid":"'+openid+'","serial_number":"'+app.globalData.serial_number+'"}',
+          }, (data, headers, cookies, errMsg, statusCode) => {
+            wx.showToast({
+              title: '点播成功,电视即将开始播放',
+              icon: 'none',
+              duration: 5000
+            });
+            utils.PostRequest(api_v_url + '/index/recordForScreenPics', {
+              forscreen_id: timestamp,
+                openid: openid,
+                box_mac: box_mac,
+                action: 5,
+                mobile_brand: mobile_brand,
+                mobile_model: mobile_model,
+                forscreen_char: forscreen_char,
+                imgs: '["media/resource/' + filename + '"]',
+                serial_number:app.globalData.serial_number
+            }, (data, headers, cookies, errMsg, statusCode) => {
+
+            })
+            
           })
+          
         }
-      }
-      
+
     })
+    
     
     if(source==1){
       mta.Event.stat('clickBirthdayMusic', { 'name': rname })
@@ -306,73 +236,41 @@ Page({
     if (res.detail.errMsg == 'getUserInfo:ok') {
       wx.getUserInfo({
         success(rets) {
-          wx.request({
-            url: api_v_url+'/User/registerCom',
-            data: {
-              'openid': openid,
-              'avatarUrl': rets.userInfo.avatarUrl,
-              'nickName': rets.userInfo.nickName,
-              'gender': rets.userInfo.gender,
-              'session_key': app.globalData.session_key,
-              'iv': rets.iv,
-              'encryptedData': rets.encryptedData
-            },
-            header: {
-              'content-type': 'application/json'
-            },
-            success: function (res) {
-              if (res.data.code == 10000) {
-                wx.setStorage({
-                  key: 'savor_user_info',
-                  data: res.data.result,
-                });
-                that.setData({
-                  showModal: false,
-                })
-                wx.navigateTo({
-                  url: '/pages/thematic/money_blessing/main?openid=' + openid + '&box_mac=' + box_mac,
-                })
-              } else {
-                wx.showToast({
-                  title: '微信授权登陆失败，请重试',
-                  icon: 'none',
-                  duration: 2000,
-
-                })
-              }
-
-            }
+          utils.PostRequest(api_v_url+'/User/registerCom', {
+            'openid': openid,
+            'avatarUrl': rets.userInfo.avatarUrl,
+            'nickName': rets.userInfo.nickName,
+            'gender': rets.userInfo.gender,
+            'session_key': app.globalData.session_key,
+            'iv': rets.iv,
+            'encryptedData': rets.encryptedData
+          }, (data, headers, cookies, errMsg, statusCode) => {
+            wx.setStorage({
+              key: 'savor_user_info',
+              data: data.result,
+            });
+            that.setData({
+              showModal: false,
+            })
+            wx.navigateTo({
+              url: '/pages/thematic/money_blessing/main?openid=' + openid + '&box_mac=' + box_mac,
+            })
           })
+          
         }
       })
       mta.Event.stat("allowauth", {})
     }else {
-      wx.request({
-        url: api_v_url+'/User/refuseRegister',
-        data: {
-          'openid': openid,
-        },
-        header: {
-          'content-type': 'application/json'
-        },
-        success: function (res) {
-          if (res.data.code == 10000) {
-            user_info['is_wx_auth'] = 1;
-            wx.setStorage({
-              key: 'savor_user_info',
-              data: user_info,
-            })
-
-          } else {
-            wx.showToast({
-              title: '拒绝失败,请重试',
-              icon: 'none',
-              duration: 2000
-            });
-          }
-
-        }
+      utils.PostRequest(api_v_url+'/User/refuseRegister', {
+        'openid': openid,
+      }, (data, headers, cookies, errMsg, statusCode) => {
+        user_info['is_wx_auth'] = 1;
+        wx.setStorage({
+          key: 'savor_user_info',
+          data: user_info,
+        })
       })
+      
       mta.Event.stat("refuseauth", {})
     }
     
@@ -388,23 +286,19 @@ Page({
     if (box_mac == 'undefined' || box_mac == undefined) {
       box_mac = '';
     }
-    wx.request({
-      url: api_url+'/Smallapp21/index/closeauthLog',
-      header: {
-        'content-type': 'application/json'
-      },
-      data: {
-        openid: openid,
-        box_mac: box_mac,
-      },
+    utils.PostRequest(api_url+'/Smallapp21/index/closeauthLog', {
+      openid: openid,
+      box_mac: box_mac,
+    }, (data, headers, cookies, errMsg, statusCode) => {
 
     })
+    
     mta.Event.stat("closewxauth", {})
   },
 
 
   //遥控呼大码
-  callQrCode: util.throttle(function (e) {
+  callQrCode: utils.throttle(function (e) {
     var that = this;
     openid = e.currentTarget.dataset.openid;
     box_mac = e.currentTarget.dataset.box_mac;
