@@ -42,7 +42,7 @@ Page({
     console.log('1111');
     if(openid !=pa_openid){
       wx.showToast({
-        title: '用户效验失败',
+        title: '用户校验失败',
         icon: 'none',
         duration: 2000,
         success: function (res) {
