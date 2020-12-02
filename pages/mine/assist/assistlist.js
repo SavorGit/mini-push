@@ -1,4 +1,5 @@
 // pages/mine/assist/assistlist.js
+const utils = require('../../../utils/util.js')
 const app = getApp()
 var api_url = app.globalData.api_url;
 var page = 1;
@@ -21,64 +22,32 @@ Page({
     that.setData({
       forscreen_id: forscreen_id,
     })
-    wx.request({
-      url: api_url + '/Smallapp3/ForscreenHelp/userlist',
-      header: {
-        'content-type': 'application/json'
-      },
-      data: {
-        forscreen_id: forscreen_id,
-        page: 1,
-        pagesize:20
-      },
-      method: "POST",
-      success: function(res) {
-        if (res.data.code == 10000) {
-          that.setData({
-            assist_friend_list:res.data.result.datalist
-          })
-        }
-      }
+    utils.PostRequest(api_url + '/Smallapp3/ForscreenHelp/userlist', {
+      forscreen_id: forscreen_id,
+      page: 1,
+      pagesize:20
+    }, (data, headers, cookies, errMsg, statusCode) => {
+      that.setData({
+        assist_friend_list:data.result.datalist
+      })
     })
+    
   },
   loadMore: function(e) {
     var that = this;
     var forscreen_id = e.target.dataset.forscreen_id;
-    wx.showLoading({
-      title: '加载中，请稍后',
-    })
+    
     page = page + 1;
-    wx.request({
-      url: api_url + '/Smallapp3/ForscreenHelp/userlist',
-      header: {
-        'content-type': 'application/json'
-      },
-      data: {
-        forscreen_id: forscreen_id,
-        page: page,
-        pagesize:20
-      },
-      method: "POST",
-      success: function(res) {
-        if (res.data.code == 10000) {
-          wx.hideLoading()
-          that.setData({
-            assist_friend_list: res.data.result.datalist
-          })
-        } else {
-          wx.hideLoading()
-          wx.showToast({
-            title: '加载失败，请重试',
-            icon: 'none',
-            duration: 2000,
-          })
-        }
-      },
-      fail: function(res) {
-        wx.hideLoading()
-      }
-
+    utils.PostRequest(api_url + '/Smallapp3/ForscreenHelp/userlist', {
+      forscreen_id: forscreen_id,
+      page: page,
+      pagesize:20
+    }, (data, headers, cookies, errMsg, statusCode) => {
+      that.setData({
+        assist_friend_list: data.result.datalist
+      })
     })
+    
   },
 
   /**

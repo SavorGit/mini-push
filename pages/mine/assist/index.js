@@ -1,4 +1,5 @@
 // pages/mine/assist/index.js
+const utils = require('../../../utils/util.js')
 var mta = require('../../../utils/mta_analysis.js')
 const app = getApp()
 var api_url = app.globalData.api_url;
@@ -42,38 +43,32 @@ Page({
       })
       openid = app.globalData.openid;
       //判断用户是否注册
-      wx.request({
-        url: api_v_url + '/User/isRegister',
-        data: {
-          "openid": app.globalData.openid,
-        },
-        header: {
-          'content-type': 'application/json'
-        },
-        success: function (res) {
+
+      utils.PostRequest(api_v_url + '/User/isRegister', {
+        "openid": app.globalData.openid,
+      }, (data, headers, cookies, errMsg, statusCode) => {
+        wx.setStorage({
+          key: 'savor_user_info',
+          data: data.result.userinfo,
+        })
+        if (data.result.userinfo.is_wx_auth != 3) {
+          that.setData({
+            showModal: true
+          })
+          mta.Event.stat("showwxauth", {})
+        }
+      },res=>{
+        if(app.globalData.link_type!=2){
           wx.setStorage({
             key: 'savor_user_info',
-            data: res.data.result.userinfo,
+            data: {
+              'openid': app.globalData.openid
+            },
           })
-          if (res.data.result.userinfo.is_wx_auth != 3) {
-            that.setData({
-              showModal: true
-            })
-            mta.Event.stat("showwxauth", {})
-          }
-        },
-        fail: function (e) {
-          if(app.globalData.link_type!=2){
-            wx.setStorage({
-              key: 'savor_user_info',
-              data: {
-                'openid': app.globalData.openid
-              },
-            })
-          }
-          
         }
-      }); //判断用户是否注册结束
+      })
+
+      
       //获取助力的内容
       getAssistInfo(app.globalData.openid, forscreen_id);
       //获取助力好友
@@ -86,35 +81,29 @@ Page({
           })
           openid = openid;
           //判断用户是否注册
-          wx.request({
-            url: api_v_url + '/User/isRegister',
-            data: {
-              "openid": app.globalData.openid,
-            },
-            header: {
-              'content-type': 'application/json'
-            },
-            success: function (res) {
-              wx.setStorage({
-                key: 'savor_user_info',
-                data: res.data.result.userinfo,
+
+          utils.PostRequest(api_v_url + '/User/isRegister', {
+            "openid": openid,
+          }, (data, headers, cookies, errMsg, statusCode) => {
+            wx.setStorage({
+              key: 'savor_user_info',
+              data: data.result.userinfo,
+            })
+            if (data.result.userinfo.is_wx_auth != 3) {
+              that.setData({
+                showModal: true
               })
-              if (res.data.result.userinfo.is_wx_auth != 3) {
-                that.setData({
-                  showModal: true
-                })
-                mta.Event.stat("showwxauth", {})
-              }
-            },
-            fail: function (e) {
-              wx.setStorage({
-                key: 'savor_user_info',
-                data: {
-                  'openid': openid
-                },
-              })
+              mta.Event.stat("showwxauth", {})
             }
-          }); //判断用户是否注册结束
+          },res=>{
+            wx.setStorage({
+              key: 'savor_user_info',
+              data: {
+                'openid': openid
+              },
+            })
+          })
+          
           //获取助力的内容
           getAssistInfo(openid, forscreen_id);
           //获取助力好友
@@ -123,79 +112,53 @@ Page({
       }
     }
     //热播内容
-    wx.request({
-      url: api_url + '/Smallapp3/content/getHotplaylist',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      method: "POST",
-      data:{
-        page:1,
-        pagesize:3
-      },
-      success: function (res) {
-        if (res.data.code == 10000) {
-          console.log(res.data.result);
-          that.setData({
-            hot_play: res.data.result.datalist
-          })
-        }
-      }
+    utils.PostRequest(api_url + '/Smallapp3/content/getHotplaylist', {
+      page:1,
+      pagesize:3
+    }, (data, headers, cookies, errMsg, statusCode) => {
+      that.setData({
+        hot_play: data.result.datalist
+      })
     })
+    
 
     function getAssistInfo(openid,forscreen_id){
-      wx.request({
-        url: api_url +'/Smallapp3/ForscreenHelp/detail',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        method: "POST",
-        data:{
-          openid:openid,
-          forscreen_id:forscreen_id
-        },success:function(res){
-          if(res.data.code==10000){
-            var is_assist ;
-            if(res.data.result.status==3){
-              is_assist= true
-            }else {
-              is_assist = false
-            }
-            var pubdetail = [{'res_url':''}];
-            
-            for(var i=0;i<1;i++){
-              pubdetail[i]['res_url'] = res.data.result.img_url;
-            }
-            console.log('dfdafad');
-            that.setData({
-              assist_info:res.data.result,
-              is_assist: is_assist,
-              pubdetail: pubdetail,
-            })
-          }
+      utils.PostRequest(api_url +'/Smallapp3/ForscreenHelp/detail', {
+        openid:openid,
+        forscreen_id:forscreen_id
+      }, (data, headers, cookies, errMsg, statusCode) => {
+        var is_assist ;
+        if(data.result.status==3){
+          is_assist= true
+        }else {
+          is_assist = false
         }
+        var pubdetail = [{'res_url':''}];
+        
+        for(var i=0;i<1;i++){
+          pubdetail[i]['res_url'] = data.result.img_url;
+        }
+        that.setData({
+          assist_info:data.result,
+          is_assist: is_assist,
+          pubdetail: pubdetail,
+        })
       })
+      
     }
     function getAssistFriends(openid, forscreen_id){
-      wx.request({
-        url: api_url + '/Smallapp3/ForscreenHelp/userlist',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        method: "POST",
-        data: {
-          forscreen_id: forscreen_id,
-          page:1,
-          pagesize:7,
-        }, success: function (res) {
-          if (res.data.code == 10000) {
-            that.setData({
-              assist_frieds: res.data.result.datalist,
-              assist_frieds_nums: res.data.result.total_num
-            })
-          }
-        }
+
+      utils.PostRequest(api_url + '/Smallapp3/ForscreenHelp/userlist', {
+        forscreen_id: forscreen_id,
+        page:1,
+        pagesize:7,
+      }, (data, headers, cookies, errMsg, statusCode) => {
+        that.setData({
+          assist_frieds: data.result.datalist,
+          assist_frieds_nums: data.result.total_num
+        })
       })
+      
     }
   },
   assist:function(e){
@@ -221,67 +184,39 @@ Page({
       })
       mta.Event.stat("showwxauth", {})
     }else {
-      wx.request({
-        url: api_url +'/Smallapp3/ForscreenHelp/addhelp',
-        header: {
-          'content-type': 'application/json'
-        },
-        method:'POST',
-        data:{
-          help_id:help_id,
-          openid:openid
-        },
-        success:function(res){
-          if(res.data.code==10000){
-            that.setData({
-              is_assist:true
-            })
-            wx.request({
-              url: api_url + '/Smallapp3/ForscreenHelp/userlist',
-              headers: {
-                'Content-Type': 'application/json'
-              },
-              method: "POST",
-              data: {
-                forscreen_id: forscreen_id,
-                page: 1,
-                pagesize: 7,
-              }, success: function (res) {
-                if (res.data.code == 10000) {
-                  that.setData({
-                    assist_frieds: res.data.result.datalist,
-                    assist_frieds_nums: res.data.result.total_num
-                  })
-                }
-              }
-            })
-            wx.request({
-              url: api_v_url + '/index/recordForScreenPics',
-              header: {
-                'content-type': 'application/json'
-              },
-              data:{
-                forscreen_id: timestamp,
-                openid: openid,
-                box_mac: box_mac,
-                action: 50,
-                mobile_brand: mobile_brand,
-                mobile_model: mobile_model,
-                imgs: '["' + forscreen_url+'"]',
-                resource_type: resource_type,
-                serial_number:app.globalData.serial_number
-              }
-              
-            })
-          }else {
-            wx.showToast({
-              title: res.data.msg,
-              icon:'none',
-              duration:2000
-            })
-            
-          }
-        }
+      utils.PostRequest(api_url +'/Smallapp3/ForscreenHelp/addhelp', {
+        help_id:help_id,
+        openid:openid
+      }, (data, headers, cookies, errMsg, statusCode) => {
+        that.setData({
+          is_assist:true
+        })
+
+        utils.PostRequest(api_url + '/Smallapp3/ForscreenHelp/userlist', {
+          forscreen_id: forscreen_id,
+          page: 1,
+          pagesize: 7,
+        }, (data, headers, cookies, errMsg, statusCode) => {
+
+          that.setData({
+            assist_frieds: data.result.datalist,
+            assist_frieds_nums: data.result.total_num
+          })
+        })
+        utils.PostRequest(api_v_url + '/index/recordForScreenPics', {
+          forscreen_id: timestamp,
+            openid: openid,
+            box_mac: box_mac,
+            action: 50,
+            mobile_brand: mobile_brand,
+            mobile_model: mobile_model,
+            imgs: '["' + forscreen_url+'"]',
+            resource_type: resource_type,
+            serial_number:app.globalData.serial_number
+        }, (data, headers, cookies, errMsg, statusCode) => {
+
+        })
+        
       })
     }
   },
@@ -294,77 +229,39 @@ Page({
     if (res.detail.errMsg == 'getUserInfo:ok') {
       wx.getUserInfo({
         success(rets) {
-          wx.request({
-            url: api_v_url + '/User/registerCom',
-            data: {
-              'openid': openid,
-              'avatarUrl': rets.userInfo.avatarUrl,
-              'nickName': rets.userInfo.nickName,
-              'gender': rets.userInfo.gender,
-              'session_key': app.globalData.session_key,
-              'iv': rets.iv,
-              'encryptedData': rets.encryptedData
-            },
-            header: {
-              'content-type': 'application/json'
-            },
-            success: function (res) {
-              if (res.data.code == 10000) {
-                wx.setStorage({
-                  key: 'savor_user_info',
-                  data: res.data.result,
-                });
-                that.setData({
-                  showModal: false,
-                })
-              } else {
-                wx.showToast({
-                  title: '微信授权登陆失败，请重试',
-                  icon: 'none',
-                  duration: 2000,
-
-                })
-              }
-
-            },
-            fail: function (res) {
-              wx.showToast({
-                title: '微信登陆失败，请重试',
-                icon: 'none',
-                duration: 2000
-              });
-            }
+          utils.PostRequest(api_v_url + '/User/registerCom', {
+            'openid': openid,
+            'avatarUrl': rets.userInfo.avatarUrl,
+            'nickName': rets.userInfo.nickName,
+            'gender': rets.userInfo.gender,
+            'session_key': app.globalData.session_key,
+            'iv': rets.iv,
+            'encryptedData': rets.encryptedData
+          }, (data, headers, cookies, errMsg, statusCode) => {
+            wx.setStorage({
+              key: 'savor_user_info',
+              data: data.result,
+            });
+            that.setData({
+              showModal: false,
+            })
           })
+          
         }
       })
       mta.Event.stat("allowauth", {})
     } else {
-      wx.request({
-        url: api_v_url + '/User/refuseRegister',
-        data: {
-          'openid': openid,
-        },
-        header: {
-          'content-type': 'application/json'
-        },
-        success: function (res) {
-          if (res.data.code == 10000) {
-            user_info['is_wx_auth'] = 1;
-            wx.setStorage({
-              key: 'savor_user_info',
-              data: user_info,
-            })
-
-          } else {
-            wx.showToast({
-              title: '拒绝失败,请重试',
-              icon: 'none',
-              duration: 2000
-            });
-          }
-
-        }
+      utils.PostRequest(api_v_url + '/User/refuseRegister', {
+        'openid': openid,
+      }, (data, headers, cookies, errMsg, statusCode) => {
+        var user_info  = data.result;
+        user_info['is_wx_auth'] = 1;
+        wx.setStorage({
+          key: 'savor_user_info',
+          data: user_info,
+        })
       })
+      
       mta.Event.stat("refuseauth", {})
     }
 
@@ -379,17 +276,14 @@ Page({
     })
     var user_info = wx.getStorageSync("savor_user_info");
    
-    wx.request({
-      url: api_url + '/Smallapp21/index/closeauthLog',
-      header: {
-        'content-type': 'application/json'
-      },
-      data: {
-        openid: openid,
+    utils.PostRequest(api_url + '/Smallapp21/index/closeauthLog', {
+      openid: openid,
         box_mac: '',
-      },
+    }, (data, headers, cookies, errMsg, statusCode) => {
 
     })
+
+    
     mta.Event.stat("closewxauth", {})
   },
   phonecallevent: function (e) {

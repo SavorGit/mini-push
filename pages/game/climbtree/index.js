@@ -48,103 +48,79 @@ Page({
       'gameid': game_id,
       'boxmac': box_mac
     }));
-    wx.request({
-      url: api_url + '/Games/Index/getGameInfo',
-      data: {
-        game_id: game_id
-      },
-      success: function(res) {
-        if (res.data.code == 10000) {
-          var game_h5_url = "https://" + res.data.result.game_url + box_mac;
-          var game_m_h5_url = "https://" + res.data.result.game_url + box_mac + '/' + res.data.result.game_m_url;
-          // wx.request({
-          //   url: api_url+'/Games/ClimbTree/clearLaunchGame',
-          //   data: {
-          //     box_mac: box_mac,
-          //   },
-          // })
+    utils.PostRequest(api_url + '/Games/Index/getGameInfo', {
+      game_id: game_id
+    }, (data, headers, cookies, errMsg, statusCode) => {
+      var game_h5_url = "https://" + data.result.game_url + box_mac;
+      var game_m_h5_url = "https://" + data.result.game_url + box_mac + '/' + data.result.game_m_url;
+      
+      utils.PostRequest(api_url + '/Games/ClimbTree/isHaveGameimg', {
+        box_mac: box_mac,
+      }, (data, headers, cookies, errMsg, statusCode) => {
+        var is_gaming = data.result.is_gaming;
+          if (is_gaming == 1) {
 
-          wx.request({
-            url: api_url + '/Games/ClimbTree/isHaveGameimg',
-            data: {
+            app.showToast('该房间已经创建游戏!')
+            
+          } else {
+            that.setData({
+              showButton: false,
+              hiddens: false,
+            })
+            utils.PostRequest(api_url + '/Netty/Index/pushnetty', {
               box_mac: box_mac,
-            },
-            success: function(rtt) {
-              var is_gaming = rtt.data.result.is_gaming;
-              if (is_gaming == 1) {
-                wx.showToast({
-                  title: '该房间已经创建游戏!',
-                  icon: 'none',
-                  duration: 2000
-                })
-              } else {
-                that.setData({
-                  showButton: false,
-                  hiddens: false,
-                })
+              msg: '{"action":110,"url":"' + game_h5_url + '"}'
+            }, (data, headers, cookies, errMsg, statusCode) => {
 
-                wx.request({
-                  url: api_url + '/Netty/Index/pushnetty',
-                  data: {
+              var interval = setInterval(function() {
+
+
+                utils.PostRequest(api_url + '/Games/ClimbTree/isHaveLaunchGame', {
+                  box_mac: box_mac,
+                }, (data, headers, cookies, errMsg, statusCode) => {
+                  that.setData({
+                    hiddens: true,
+                    showButton: true
+                  })
+                  clearInterval(interval);
+                  utils.PostRequest(api_url + '/Games/ClimbTree/clearLaunchGame', {
                     box_mac: box_mac,
-                    msg: '{"action":110,"url":"' + game_h5_url + '"}'
-                  },
-                  success: function(rtt) {
+                  }, (data, headers, cookies, errMsg, statusCode) => {
 
-
-                    var interval = setInterval(function() {
-
-                      wx.request({
-                        url: api_url + '/Games/ClimbTree/isHaveLaunchGame',
-                        data: {
-                          box_mac: box_mac,
-                        },
-                        success: function(tmps) {
-                          if (tmps.data.code == 10000) {
-                            that.setData({
-                              hiddens: true,
-                              showButton: true
-                            })
-                            clearInterval(interval);
-                            wx.request({
-                              url: api_url + '/Games/ClimbTree/clearLaunchGame',
-                              data: {
-                                box_mac: box_mac,
-                              },
-                            })
-                            wx.navigateTo({
-                              url: '/pages/game/climbtree/climbtree?box_mac=' + box_mac + '&game_m_h5_url=' + game_m_h5_url
-                            })
-                          }
-                        }
-                      })
-                      if (djs <= 0) {
-                        clearInterval(interval);
-                        that.setData({
-                          hiddens: true,
-                          showButton: true
-                        })
-                      }
-                      djs--;
-
-                    }.bind(this), 1000);
-                  }
+                  })
+                  
+                  wx.navigateTo({
+                    url: '/pages/game/climbtree/climbtree?box_mac=' + box_mac + '&game_m_h5_url=' + game_m_h5_url
+                  })
                 })
-              }
-            }
-          })
-        } else {
-          wx.showToast({
-            title: '该游戏不存在',
-            icon: 'none',
-            duration: 2000
-          })
-          wx.navigateTo({
-            url: '/pages/index/index',
-          })
-        }
-      }
+                
+                if (djs <= 0) {
+                  clearInterval(interval);
+                  that.setData({
+                    hiddens: true,
+                    showButton: true
+                  })
+                }
+                djs--;
+
+              }.bind(this), 1000);
+            })
+
+            
+          }
+      })
+      
+    },res=>{
+      wx.showToast({
+        title: '该游戏不存在',
+        icon: 'none',
+        duration: 2000
+      })
+      wx.navigateTo({
+        url: '/pages/index/index',
+      })
     })
+    
 
 
   },

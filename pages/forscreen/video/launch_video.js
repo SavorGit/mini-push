@@ -36,47 +36,33 @@ Page({
     var video_img_url = options.video_img_url;
     //wx.hideShareMenu();
 
-    /*wx.request({
-      url: api_v_url+'/index/isHaveCallBox?openid=' + openid,
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      success:function(res){
-        if (res.data.code == 10000 && res.data.result.is_have == 1){
-          that.setData({
-            is_open_simple: res.data.result.is_open_simple,
-          })
-        }
-      }
-    })*/
     
 
     var that = this;
     //获取节目单视频详情
-    wx.request({
-      url: api_url+'/Smallapp3/Demand/getVideoInfo',
-      data:{
-        res_id : res_id,
-        openid : openid,
-      },
-      success:function(res){
-        that.setData({
-          openid    : openid,
-          res_id    : res_id,
-          video_url : video_url,
-          video_name: video_name,
-          video_img_url: video_img_url,
-          box_mac   : box_mac,
-          openid    : openid,
-          is_collect: res.data.result.is_collect,
-          collect_num: res.data.result.collect_num,
-          share_num : res.data.result.share_num,
-          play_num  : res.data.result.play_num,
-          res_type  : res.data.result.res_type, 
-          filename  : filename,
-        })
-      }
+
+    util.PostRequest(api_url+'/Smallapp3/Demand/getVideoInfo', {
+      res_id : res_id,
+      openid : openid,
+    }, (data, headers, cookies, errMsg, statusCode) => {
+      that.setData({
+        openid    : openid,
+        res_id    : res_id,
+        video_url : video_url,
+        video_name: video_name,
+        video_img_url: video_img_url,
+        box_mac   : box_mac,
+        openid    : openid,
+        is_collect: data.result.is_collect,
+        collect_num: data.result.collect_num,
+        share_num : data.result.share_num,
+        play_num  : data.result.play_num,
+        res_type  : data.result.res_type, 
+        filename  : filename,
+      })
+      
     })
+    
     
     
   },
@@ -87,31 +73,22 @@ Page({
     var res_id = e.target.dataset.res_id;
     
     var res_type = e.target.dataset.type;
-    wx.request({
-      url: api_url+'/Smallapp/collect/recLogs',
-      header: {
-        'content-type': 'application/json'
-      },
-      data: {
-        'openid': openid,
-        'res_id': res_id,
-        'type': res_type,
-        'status': 1,
-      },
-      success: function (e) {
-        that.setData({
-          is_collect:1,
-          collect_num:e.data.result.nums,
-        })
-      },
-      fial: function ({ errMsg }) {
-        wx.showToast({
-          title: '网络异常，请稍后重试',
-          icon: 'none',
-          duration: 2000
-        })
-      }
+    util.PostRequest(api_url+'/Smallapp/collect/recLogs', {
+      'openid': openid,
+      'res_id': res_id,
+      'type': res_type,
+      'status': 1,
+    }, (data, headers, cookies, errMsg, statusCode) => {
+      that.setData({
+        is_collect:1,
+        collect_num:data.result.nums,
+      })
+    },res=>{
+      app.showToast('网络异常，请稍后重试')
+      
     })
+
+    
   },//收藏资源结束
   //取消收藏
   cancCollect: function (e) {
@@ -120,37 +97,25 @@ Page({
     var res_id = e.target.dataset.res_id;
     
     var res_type = e.target.dataset.type;
-    wx.request({
-      url: api_url+'/Smallapp/collect/recLogs',
-      header: {
-        'content-type': 'application/json'
-      },
-      data: {
-        'openid': openid,
-        'res_id': res_id,
-        'type': res_type,
-        'status': 0,
-      },
-      success: function (e) {
-       
-      
-        that.setData({
-          is_collect: 0,
-          collect_num: e.data.result.nums,
-        })
-        
-      },
-      fial: function ({ errMsg }) {
-        wx.showToast({
-          title: '网络异常，请稍后重试',
-          icon: 'none',
-          duration: 2000
-        })
-      }
+    util.PostRequest(api_url+'/Smallapp/collect/recLogs', {
+      'openid': openid,
+      'res_id': res_id,
+      'type': res_type,
+      'status': 0,
+    }, (data, headers, cookies, errMsg, statusCode) => {
+      that.setData({
+        is_collect: 0,
+        collect_num: data.result.nums,
+      })
+    },res=>{
+      app.showToast('网络异常，请稍后重试')
     })
+
+    
   },//取消收藏结束
   //点击分享按钮
   onShareAppMessage: function (res) {
+    console.log(res)
     var that = this;
     var openid = res.target.dataset.openid;
     var res_id = res.target.dataset.res_id;
@@ -165,34 +130,21 @@ Page({
       
       // 转发成功
       share_num = share_num++;
-      wx.request({
-        url: api_url+'/Smallapp3/share/recLogs',
-        header: {
-          'content-type': 'application/json'
-        },
-        data: {
-          'openid': openid,
-          'res_id': res_id,
-          'type': res_type,
-          'status': 1,
-        },
-        success: function (e) {
-          if(e.data.code==10000){
-            that.setData({
-              share_num: e.data.result.share_nums,
-            })
-          }
-          
 
-        },
-        fail: function ({ errMsg }) {
-          wx.showToast({
-            title: '网络异常，请稍后重试',
-            icon: 'none',
-            duration: 2000
-          })
-        }
+      util.PostRequest(api_url+'/Smallapp3/share/recLogs', {
+        'openid': openid,
+        'res_id': res_id,
+        'type': res_type,
+        'status': 1,
+      }, (data, headers, cookies, errMsg, statusCode) => {
+        that.setData({
+          share_num: data.result.share_nums,
+        })
+      },res=>{
+        app.showToast('网络异常，请稍后重试');
       })
+
+      
       // 来自页面内转发按钮
       return {
         title: video_name,

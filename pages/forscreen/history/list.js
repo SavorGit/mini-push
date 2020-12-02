@@ -33,33 +33,13 @@ Page({
       openid: openid,
       box_mac: box_mac
     })
-
-    /*wx.request({
-      url: api_v_url + '/index/isHaveCallBox?openid=' + openid,
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      success: function(res) {
-        if (res.data.code == 10000 && res.data.result.is_have == 1) {
-          self.setData({
-            is_open_simple: res.data.result.is_open_simple,
-          })
-        }
-      }
-    })*/
     //获取投屏历史
-    wx.request({
-      url: api_v_url + '/ForscreenHistory/getList',
-      header: {
-        'content-type': 'application/json'
-      },
-      data: {
-        openid: openid,
-        box_mac: box_mac,
-        page: page,
-      },
-      success: function(res) {
-        var hst_list = res.data.result;
+    utils.PostRequest(api_v_url + '/ForscreenHistory/getList', {
+      openid: openid,
+      box_mac: box_mac,
+      page: page,
+    }, (data, headers, cookies, errMsg, statusCode) => {
+      var hst_list = data.result;
 
         if (JSON.stringify(hst_list) == "{}") {
           self.setData({
@@ -67,12 +47,13 @@ Page({
           })
         } else {
           self.setData({
-            forscreen_history_list: res.data.result
+            forscreen_history_list: data.result
           })
         }
-
-      }
+      
     })
+    
+    
   },
   replayHistory: function(e) {
     var self = this;
@@ -163,34 +144,20 @@ Page({
     var openid = e.target.dataset.openid;
     var box_mac = e.target.dataset.box_mac;
     page = page + 1;
-    self.setData({
-      hiddens: false,
+    
+
+    utils.PostRequest(api_v_url + '/ForscreenHistory/getList', {
+      page: page,
+      box_mac: box_mac,
+      openid: openid,
+    }, (data, headers, cookies, errMsg, statusCode) => {
+      forscreen_history_list = data.result,
+      self.setData({
+        forscreen_history_list: data.result,
+      })
+      
     })
-    wx.request({
-      url: api_v_url + '/ForscreenHistory/getList',
-      header: {
-        'Content-Type': 'application/json'
-      },
-      data: {
-        page: page,
-        box_mac: box_mac,
-        openid: openid,
-      },
-      method: "POST",
-      success: function(res) {
-        if (res.data.code == 10000) {
-          forscreen_history_list = res.data.result,
-            self.setData({
-              forscreen_history_list: res.data.result,
-              hiddens: true,
-            })
-        } else {
-          self.setData({
-            hiddens: true,
-          })
-        }
-      }
-    })
+    
   },
   //遥控呼大码
   callQrCode: utils.throttle(function(e) {
