@@ -210,6 +210,11 @@ Page({
       app.showToast('请选择打赏金额');
       return false;
     }
+    if(!app.isInteger(money)){
+      app.showToast('请输入1-500打赏金额');
+      return false;
+    }
+    
     if(money!='' &&(money<1 || money>500)){
       app.showToast('请输入1-500打赏金额');
       return false;

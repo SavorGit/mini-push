@@ -1249,6 +1249,9 @@ changeKb:function (limit){
       continue;
     }
   },
+  isInteger:function (obj) {
+    return obj % 1 === 0
+  },
   /**
    * 拨打订餐电话
    */
