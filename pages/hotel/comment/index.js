@@ -127,7 +127,7 @@ Page({
    * 随便说两句输入框
    */
   editCommnet:function(e){
-    var comment_str = e.detail.value;
+    var comment_str = e.detail.value.replace(/\s+/g, '');
     this.setData({comment_str:comment_str})
     
   },
