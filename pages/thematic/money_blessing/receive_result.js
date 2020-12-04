@@ -29,61 +29,42 @@ Page({
     var user_info = wx.getStorageSync("savor_user_info");
     openid = user_info.openid;
     is_open_simple = user_info.is_open_simple;
-    wx.request({
-      url: api_v_url+'/redpacket/grabBonusResult',
-      header: {
-        'content-type': 'application/json'
-      },
-      data:{
-        order_id: order_id,
-        sign: sign,
-        user_id: user_id,
-      },
-      success:function(res){
-        if(res.data.code==10000){
-          that.setData({
-            order_status: res.data.result.status,
-            order_id: res.data.result.order_id,
-            user_id: res.data.result.user_id,
-            bless: res.data.result.bless,
-            money: res.data.result.money,
-            nickName: res.data.result.nickName,
-            avatarUrl: res.data.result.avatarUrl,
-            box_mac: res.data.result.box_mac,
-            openid : openid,
-            is_open_simple: is_open_simple,
-          })
-          getRedpacketJx(openid);
-        }else {
-          wx.reLaunch({
-            url: '/pages/index/index',
-          })
-          wx.showToast({
-            title: '红包领取失败',
-            icon: 'none',
-            duration: 2000,
-          })
-        }
-      }
-    })
-    function getRedpacketJx(openid) {
-      wx.request({
-        url: api_url+'/Smallapp3/Find/redPacketJx',
-        header: {
-          'content-type': 'application/json'
-        },
-        data: {
-          openid: openid,
-        },
-        success: function (res) {
-          if (res.data.code == 10000) {
-            discovery_list = res.data.result
-            that.setData({
-              discovery_list: res.data.result,
-            })
-          }
-        }
+    utils.PostRequest(api_v_url+'/redpacket/grabBonusResult', {
+      order_id: order_id,
+      sign: sign,
+      user_id: user_id,
+    }, (data, headers, cookies, errMsg, statusCode) => {
+      that.setData({
+        order_status: data.result.status,
+        order_id: data.result.order_id,
+        user_id: data.result.user_id,
+        bless: data.result.bless,
+        money: data.result.money,
+        nickName: data.result.nickName,
+        avatarUrl: data.result.avatarUrl,
+        box_mac: data.result.box_mac,
+        openid : openid,
+        is_open_simple: is_open_simple,
       })
+      getRedpacketJx(openid);
+    },res=>{
+      wx.reLaunch({
+        url: '/pages/index/index',
+      })
+      app.showToast('红包领取失败')
+      
+    })
+    
+    function getRedpacketJx(openid) {
+      utils.PostRequest(api_url+'/Smallapp3/Find/redPacketJx', {
+        openid: openid,
+      }, (data, headers, cookies, errMsg, statusCode) => {
+        discovery_list = data.result
+        that.setData({
+          discovery_list: data.result,
+        })
+      })
+      
     }
   },
   //预览图片
@@ -196,40 +177,25 @@ Page({
     var openid = e.target.dataset.openid;
     var res_id = e.target.dataset.res_id;
     var res_key = e.target.dataset.res_key;
-    wx.request({
-      url: api_url+'/Smallapp/collect/recLogs',
-      header: {
-        'content-type': 'application/json'
-      },
-      data: {
-        'openid': openid,
-        'res_id': res_id,
-        'type': 2,
-        'status': 1,
-      },
-      success: function (e) {
-        var collect_nums = e.data.result.nums;
-        for (var i = 0; i < discovery_list.length; i++) {
-          if (i == res_key) {
-            discovery_list[i].is_collect = 1;
-            discovery_list[i].collect_num = collect_nums;
-          }
+    utils.PostRequest(api_url+'/Smallapp/collect/recLogs', {
+      'openid': openid,
+      'res_id': res_id,
+      'type': 2,
+      'status': 1,
+    }, (data, headers, cookies, errMsg, statusCode) => {
+      var collect_nums = data.result.nums;
+      for (var i = 0; i < discovery_list.length; i++) {
+        if (i == res_key) {
+          discovery_list[i].is_collect = 1;
+          discovery_list[i].collect_num = collect_nums;
         }
-        that.setData({
-          discovery_list: discovery_list
-        })
-
-      },
-      fial: function ({
-        errMsg
-      }) {
-        wx.showToast({
-          title: '网络异常，请稍后重试',
-          icon: 'none',
-          duration: 2000
-        })
       }
+      that.setData({
+        discovery_list: discovery_list
+      })
+
     })
+    
   }, //收藏资源结束
   //取消收藏
   cancCollect: function (e) {
@@ -237,40 +203,24 @@ Page({
     var res_id = e.target.dataset.res_id;
     var res_key = e.target.dataset.res_key;
     var openid = e.target.dataset.openid;
-    wx.request({
-      url: api_url+'/Smallapp/collect/recLogs',
-      header: {
-        'content-type': 'application/json'
-      },
-      data: {
-        'openid': openid,
-        'res_id': res_id,
-        'type': 2,
-        'status': 0,
-      },
-      success: function (e) {
-        var collect_nums = e.data.result.nums;
-        for (var i = 0; i < discovery_list.length; i++) {
-          if (i == res_key) {
-            discovery_list[i].is_collect = 0;
-            discovery_list[i].collect_num = collect_nums;
-          }
+    utils.PostRequest(api_url+'/Smallapp/collect/recLogs', {
+      'openid': openid,
+      'res_id': res_id,
+      'type': 2,
+      'status': 0,
+    }, (data, headers, cookies, errMsg, statusCode) => {
+      var collect_nums = data.result.nums;
+      for (var i = 0; i < discovery_list.length; i++) {
+        if (i == res_key) {
+          discovery_list[i].is_collect = 0;
+          discovery_list[i].collect_num = collect_nums;
         }
-        that.setData({
-          discovery_list: discovery_list
-        })
-
-      },
-      fial: function ({
-        errMsg
-      }) {
-        wx.showToast({
-          title: '网络异常，请稍后重试',
-          icon: 'none',
-          duration: 2000
-        })
       }
+      that.setData({
+        discovery_list: discovery_list
+      })
     })
+    
   }, //取消收藏结束
   //点击分享按钮
   onShareAppMessage: function (res) {
@@ -291,38 +241,22 @@ Page({
 
     if (res.from === 'button') {
       // 转发成功
-      wx.request({
-        url: api_url+'/Smallapp/share/recLogs',
-        header: {
-          'content-type': 'application/json'
-        },
-        data: {
-          'openid': openid,
-          'res_id': res_id,
-          'type': 2,
-          'status': 1,
-        },
-        success: function (e) {
-          for (var i = 0; i < discovery_list.length; i++) {
-            if (i == res_key) {
-              discovery_list[i].share_num++;
-            }
+      utils.PostRequest(api_url+'/Smallapp/share/recLogs', {
+        'openid': openid,
+        'res_id': res_id,
+        'type': 2,
+        'status': 1,
+      }, (data, headers, cookies, errMsg, statusCode) => {
+        for (var i = 0; i < discovery_list.length; i++) {
+          if (i == res_key) {
+            discovery_list[i].share_num++;
           }
-          that.setData({
-            discovery_list: discovery_list
-          })
-
-        },
-        fail: function ({
-          errMsg
-        }) {
-          wx.showToast({
-            title: '网络异常，请稍后重试',
-            icon: 'none',
-            duration: 2000
-          })
         }
+        that.setData({
+          discovery_list: discovery_list
+        })
       })
+      
       // 来自页面内转发按钮
       return {
         title: '发现一个好玩的东西',

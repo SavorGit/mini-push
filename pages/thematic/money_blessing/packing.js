@@ -1,4 +1,5 @@
 // 抢红包-发红包 pages/thematic/money_blessing/packing.js
+const utils = require('../../../utils/util.js')
 const app = getApp();
 var openid;
 var box_mac;
@@ -37,33 +38,20 @@ Page({
       
     })
     //获取发送红包 祝福语 发送范围配置
-    wx.request({
-      url: api_v_url+'/Redpacket/getConfig',
-      header: {
-        'content-type': 'application/json'
-      },
-      data: {
-        type: 2
-      },
-      success:function(res){
-        if(res.data.code==10000){
-          that.setData({
-            blessingArray: res.data.result.bless,
-            rangeArray:res.data.result.range
+    utils.PostRequest(api_v_url+'/Redpacket/getConfig', {
+      type: 2
+    }, (data, headers, cookies, errMsg, statusCode) => {
+      that.setData({
+        blessingArray: data.result.bless,
+        rangeArray:data.result.range
 
-          })
-        } else {
-          wx.navigateBack({
-            delta: 1,
-          })
-          wx.showToast({
-            title: '该电视暂不支持发送红包',
-            icon: 'none',
-            duration: 2000
-          });
-        }
-        
-      },
+      })
+    },res=>{
+      wx.navigateBack({
+        delta: 1,
+      })
+      app.showToast('该电视暂不支持发送红包');
+      
     })
 
   },
@@ -227,10 +215,12 @@ Page({
       hiddens: false,
     })
     //发送电视红包
+    
     wx.request({
       url: api_v_url+'/redpacket/sendTvbonus',
       header: {
-        'content-type': 'application/json'
+        'content-type': 'application/json',
+        'serial_number':app.globalData.serial_number
       },
       data: {
         amount: totalnums,
@@ -253,26 +243,20 @@ Page({
             jump_url = encodeURIComponent(jump_url);
 
             //记录发红包日志
-            wx.request({
-              url: api_v_url + '/index/recordForScreenPics',
-              header: {
-                'content-type': 'application/json'
-              },
-              data: {
-                forscreen_id: forscreen_id,
-                openid: openid,
-                box_mac: box_mac,
-                action: 120,
-                mobile_brand: mobile_brand,
-                mobile_model: mobile_model,
+            utils.PostRequest(api_v_url + '/index/recordForScreenPics', {
+              forscreen_id: forscreen_id,
+              openid: openid,
+              box_mac: box_mac,
+              action: 120,
+              mobile_brand: mobile_brand,
+              mobile_model: mobile_model,
 
-                imgs: '[]',
-                resource_id: order_id,
-                serial_number:app.globalData.serial_number
+              imgs: '[]',
+              resource_id: order_id,
+              serial_number:app.globalData.serial_number
+            }, (data, headers, cookies, errMsg, statusCode) => {
 
-              },
             })
-
             wx.navigateTo({
               url: '/pages/thematic/money_blessing/pay_result?order_id=' + order_id + '&jump_url=' + jump_url,
             })
@@ -305,6 +289,7 @@ Page({
                 if (res.errMsg == "requestPayment:fail cancel") {
                   wx.showToast({
                     title: '支付取消',
+                    icon:'none',
                     duration: 1200
                   })
 

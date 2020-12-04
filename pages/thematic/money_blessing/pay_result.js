@@ -1,4 +1,5 @@
 //  抢红包-主页 pages/thematic/money_blessing/main.js
+const utils = require('../../../utils/util.js')
 const app = getApp();
 var openid;
 var box_mac;
@@ -36,50 +37,36 @@ Page({
       var openid    = user_info.openid;
       order_id = pay_info.order_id;
       
-      wx.request({
-        url: api_v_url+'/redpacket/getresult',
-        header: {
-          'content-type': 'application/json'
-        },
-        data:{
-          order_id:order_id,
-          open_id:openid,
-        },
-        success:function(res){
-          //console.log(res);
-          if(res.data.code==10000){
-            var pay_status = res.data.result.status;
-            var jump_url   = res.data.result.jump_url;
-            if (pay_status==0){
 
-            } else if (pay_status == 1) { //付款码到电视
+      utils.PostRequest(api_v_url+'/redpacket/getresult', {
+        order_id:order_id,
+        open_id:openid,
+      }, (data, headers, cookies, errMsg, statusCode) => {
+        var pay_status = data.result.status;
+        var jump_url   = data.result.jump_url;
+        if (pay_status==0){
 
-            } else if (pay_status == 2) { //付款中
+        } else if (pay_status == 1) { //付款码到电视
 
-            } else if (pay_status == 3) {  //付款失败
-              
-              wx.navigateBack({
-                delta: 1
-              })
-              wx.showToast({
-                title: '支付失败',
-                icon: 'none',
-                duration: 2000
-              }); 
-            } else if(pay_status==4){ //付款成功
-              that.setData({
-                pay_result_url: jump_url,
-              })
-            } 
-          }
-        }
+        } else if (pay_status == 2) { //付款中
+
+        } else if (pay_status == 3) {  //付款失败
+          
+          wx.navigateBack({
+            delta: 1
+          })
+          wx.showToast({
+            title: '支付失败',
+            icon: 'none',
+            duration: 2000
+          }); 
+        } else if(pay_status==4){ //付款成功
+          that.setData({
+            pay_result_url: jump_url,
+          })
+        } 
       })
-
-      // console.log(pay_info);
-      // var jump_url = decodeURIComponent(pay_info.jump_url);
-      // that.setData({
-      //    pay_result_url: jump_url,
-      // })
+      
       
     }
     
