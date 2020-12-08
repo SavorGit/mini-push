@@ -222,8 +222,9 @@
 						<view class="unit theme-font2">元</view>
 					</view>
 				</view>
-				<view class="btn-group flex-row-center-center" bindtap="payReward">
+				<view class="btn-group flex-column-center-center" bindtap="payReward">
 					<button class="btn pay theme-button-red">确认支付</button>
+					<view class="btn index theme-font5">返回首页</view>
 				</view>
 
 			</view>

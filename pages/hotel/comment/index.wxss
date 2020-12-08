@@ -465,62 +465,37 @@
 }
 
 /* ==================================== 底部按钮面板【结果页】 ==================================== */
-.evaluate-result .btn-group {
-  height: 200rpx;
-}
-
-.evaluate-result .btn-group>.body {
-  height: 100%;
-}
-
-.evaluate-result .btn-group>.body>.btn {
-  width: 400rpx;
-  height: 176rpx;
-  line-height: 176rpx;
-  border-radius: 20rpx;
-  font-size: 36rpx;
-  margin: unset;
-  padding: unset;
-  border: unset;
-}
-
-.evaluate-result .btn-group>.body>.btn view {
-  display: inline-block;
-  padding: 5rpx;
-  box-sizing: border-box;
-}
-
-.gratuity {
+.evaluate-result>.body>.gratuity {
   border-top: 10rpx solid #f5f6f8;
-  height: 520rpx;
+  /* height: 580rpx; */
 }
 
-.gratuity>.head {
+.evaluate-result .body>.gratuity>.head {
   width: 100%;
   height: 80rpx;
   margin: unset;
   padding: unset;
 }
 
-.gratuity>.head>.title-bar {
+.evaluate-result .body>.gratuity>.head>.title-bar {
   width: calc(100% - 50rpx);
   height: calc(100% - 20rpx);
   padding: 10rpx 25rpx;
 }
 
-.gratuity>.head>.title-bar>.text {
+.evaluate-result .body>.gratuity>.head>.title-bar>.text {
   font-size: 40rpx;
   font-weight: 700;
 }
 
-.gratuity>.head>.btn-group {
+.evaluate-result .body>.gratuity>.head>.btn-group {
   width: calc(100% - 50rpx);
   height: calc(100% - 20rpx);
   padding: 10rpx 25rpx;
   margin-top: -100rpx;
 }
 
-.gratuity>.head>.btn-group>.btn {
+.evaluate-result .body>.gratuity>.head>.btn-group>.btn {
   width: 60rpx;
   height: 60rpx;
   line-height: 60rpx;
@@ -532,24 +507,25 @@
   padding: 0;
 }
 
-.gratuity>.body {
+.evaluate-result .body>.gratuity>.body {
   width: calc(100% - 50rpx);
-  height: calc(100% - 100rpx);
+  /* height: calc(100% - 100rpx); */
+  height: auto;
   padding: 10rpx 25rpx;
   margin: 0;
 }
 
-.gratuity>.body>.btn-row {
+.evaluate-result .body>.gratuity>.body>.btn-row {
   width: 100%;
   height: 200rpx;
 }
 
-.gratuity>.body>.btn-row>.btn {
+.evaluate-result .body>.gratuity>.body>.btn-row>.btn {
   width: 150rpx;
   height: 145rpx;
 }
 
-.gratuity>.body>.btn-row>.btn>.icon {
+.evaluate-result .body>.gratuity>.body>.btn-row>.btn>.icon {
   width: 100rpx;
   height: 100rpx;
   line-height: 100rpx;
@@ -560,43 +536,43 @@
   font-size: 42rpx;
 }
 
-.gratuity>.body>.btn-row>.btn>.label {
+.evaluate-result .body>.gratuity>.body>.btn-row>.btn>.label {
   color: rgb(16, 16, 16);
   font-size: 28rpx;
 }
 
-.gratuity>.body>.btn-row>.btn.selected>.icon {
+.evaluate-result .body>.gratuity>.body>.btn-row>.btn.selected>.icon {
   color: rgb(255, 68, 68);
   background-color: rgba(253, 128, 36, 0.2);
 }
 
-.gratuity>.body>.btn-row>.btn.selected>.label {
+.evaluate-result .body>.gratuity>.body>.btn-row>.btn.selected>.label {
   color: rgba(255, 68, 68, 1);
 }
 
-.gratuity>.body>.input-row {
+.evaluate-result .body>.gratuity>.body>.input-row {
   width: calc(100% - 100rpx);
   height: 80rpx;
   padding: 10rpx 50rpx;
 }
 
-.gratuity>.body>.input-row>.input-wrapper {
+.evaluate-result .body>.gratuity>.body>.input-row>.input-wrapper {
   width: 100%;
   height: 60rpx;
   padding: 0 20rpx;
   border-bottom: 3rpx solid #DEDEDE;
 }
 
-.gratuity>.body>.input-row>.input-wrapper>.input {
+.evaluate-result .body>.gratuity>.body>.input-row>.input-wrapper>.input {
   width: calc(100% - 50rpx);
   font-size: 28rpx;
 }
 
-.gratuity>.body>.input-row>.input-wrapper>.unit {
+.evaluate-result .body>.gratuity>.body>.input-row>.input-wrapper>.unit {
   font-size: 28rpx;
 }
 
-.gratuity>.body>.btn-group>.btn {
+.evaluate-result .body>.gratuity>.body>.btn-group>.btn {
   width: 690rpx;
   height: 100rpx;
   line-height: 100rpx;
@@ -607,9 +583,39 @@
   border: unset;
 }
 
-.gratuity>.body>.btn-group {
-  height: 120rpx;
+.evaluate-result .body>.gratuity>.body>.btn-group>.btn.index {
+  height: 60rpx;
+  line-height: 60rpx;
+  font-size: 28rpx;
+  text-align: center;
+  text-decoration: underline;
 }
+
+.evaluate-result .body>.gratuity>.body>.btn-group {
+  height: 200rpx;
+}
+
+.evaluate-result .body>.gratuity>.body>.btn-group>.body {
+  height: 100%;
+}
+
+.evaluate-result .body>.gratuity>.body>.btn-group>.body>.btn {
+  width: 400rpx;
+  height: 176rpx;
+  line-height: 176rpx;
+  border-radius: 20rpx;
+  font-size: 36rpx;
+  margin: unset;
+  padding: unset;
+  border: unset;
+}
+
+.evaluate-result .body>.gratuity>.body>.btn-group>.body>.btn view {
+  display: inline-block;
+  padding: 5rpx;
+  box-sizing: border-box;
+}
+
 
 
 
