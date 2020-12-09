@@ -260,7 +260,7 @@ const PostRequest = (url, data, successFn, failFn, options) => {
     data: data,
     headers: {
       'content-type': 'application/json',
-      'serial_number':app.globalData.serial_number
+      'serial-number':app.globalData.serial_number
     },
     method: 'POST',
     isShowLoading: options.isShowLoading,

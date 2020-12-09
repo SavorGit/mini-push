@@ -157,7 +157,7 @@
 			<view class='title'>
 				<label class='font_666666_28'>投屏历史</label>
 			</view>
-			<scroll-view scroll-y="true" scroll-with-animation="true" bindscrolltolower="loadMore" data-openid='{{openid}}' data-box_mac='{{box_mac}}'>
+			<scroll-view scroll-y="true" scroll-with-animation="true" bindscrolltolower="loadMore" data-openid='{{openid}}' data-box_mac='{{box_mac}}' data-launchType="{{launchType}}" >
 				<!-- 有数据时 -->
 				<view class='history_list' wx:if="{{forscreen_history_list !=''}}">
 					<view wx:for="{{forscreen_history_list}}" wx:key="key" wx:for-item="bean" wx:for-index="index">

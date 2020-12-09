@@ -395,7 +395,7 @@ Page({
             res_nums: img_len,
             serial_number:app.globalData.serial_number
           }, (data, headers, cookies, errMsg, statusCode) => {
-            utils.PostRequest(api_v_url + '/ForscreenHistory/getList', {
+            /*utils.PostRequest(api_v_url + '/ForscreenHistory/getList', {
               openid: openid,
               box_mac: box_mac,
               page: page,
@@ -411,7 +411,8 @@ Page({
                   forscreen_history_list: data.result
                 })
               }
-            },res=>{},{ isShowLoading: false })
+            },res=>{},{ isShowLoading: false })*/
+            
           },res=>{},{ isShowLoading: false })
           
 
@@ -441,7 +442,9 @@ Page({
                 forscreen_id: forscreen_id,
               });
               //倒计时关闭窗口
+              that.getHistoryList(openid,box_mac,1,0);
               that.closeOpenWind();
+              
             },res=>{
               openWind.tip = '投屏失败，请重试！';
               openWind.isError = true;
@@ -757,7 +760,7 @@ Page({
       
 
       upload_task=wx.uploadFile({
-        url: "http://" + intranet_ip + ":8080/picH5?isThumbnail=1&imageId=20170301&deviceId=" + openid + "&box_mac=" + box_mac + "&deviceName=" + mobile_brand + "&rotation=90&imageType=1&web=true&forscreen_id=" + forscreen_id + '&forscreen_char=' + forscreen_char + '&filename=' + filename + '&device_model=' + mobile_model + '&resource_size=' + img_size + '&action=4&resource_type=0&avatarUrl=' + avatarUrl + "&nickName=" + nickName + "&forscreen_nums=" + img_lenth+"&serial_number="+app.globalData.serial_number,
+        url: "http://" + intranet_ip + ":8080/picH5?isThumbnail=1&imageId=20170301&deviceId=" + openid + "&box_mac=" + box_mac + "&deviceName=" + mobile_brand + "&rotation=90&imageType=1&web=true&forscreen_id=" + forscreen_id + '&forscreen_char=' + forscreen_char + '&filename=' + filename + '&device_model=' + mobile_model + '&resource_size=' + img_size + '&action=4&resource_type=1&avatarUrl=' + avatarUrl + "&nickName=" + nickName + "&forscreen_nums=" + img_lenth+"&serial_number="+app.globalData.serial_number,
         filePath: img_url,
         name: 'fileUpload',
         success: function(res) {
@@ -798,6 +801,7 @@ Page({
                 forscreen_char: forscreen_char,
                 
               })
+              that.getHistoryList(openid,box_mac,1,1)
               that.closeOpenWind();
               utils.tryCatch(mta.Event.stat('wifiPicForscreen', { 'picnums': up_imgs.length }));
 
@@ -819,8 +823,135 @@ Page({
           }
         },
       });
+      utils.PostRequest(api_v_url + '/index/recordForScreenPics', {
+        forscreen_id: forscreen_id,
+        openid: openid,
+        box_mac: box_mac,
+        action: 4,
+        mobile_brand: mobile_brand,
+        mobile_model: mobile_model,
+        forscreen_char: forscreen_char,
+        public_text: '',
+        imgs: '[]',
+        resource_id: filename,
+        resource_size: img_size,
+        is_pub_hotelinfo: 0,
+        is_share: 0,
+        resource_type: 1,
+        res_nums: img_lenth,
+        serial_number:app.globalData.serial_number,
+        is_speed:1,
+      }, (data, headers, cookies, errMsg, statusCode) => {
+        
+      },res=>{},{ isShowLoading: false })
       app.sleep(1);
     }
+  },
+  getHistoryList:function(openid,box_mac,page,is_speed= 0){
+    
+    var that = this;
+    utils.PostRequest(api_v_url + '/ForscreenHistory/getList', {
+      openid: openid,
+      box_mac: box_mac,
+      page: page,
+    }, (data, headers, cookies, errMsg, statusCode) => {
+      if(is_speed==0){//普通投屏
+        var forscreen_history_list = data.result;
+
+        if (JSON.stringify(forscreen_history_list) == "{}") {
+          that.setData({
+            forscreen_history_list: ''
+          })
+        } else {
+          console.log(forscreen_history_list)
+          for(let i=forscreen_history_list.length-1; i>=0; i--){
+            if(forscreen_history_list[i].is_speed == 1){
+              forscreen_history_list.splice(i,1);
+            }
+          }
+          that.setData({
+            forscreen_history_list: forscreen_history_list
+          })
+        }
+      }else if(is_speed==1){//极简投屏
+        var forscreen_history_list = data.result;
+        if (JSON.stringify(forscreen_history_list) == "{}") {
+          that.setData({
+            forscreen_history_list: ''
+          })
+        } else {
+          var hotel_info = that.data.hotel_info;
+          //请求盒子接口   如果盒子接口有数据插入到  forscreen_history_list
+          console.log('http://' + hotel_info.intranet_ip + ':8080/h5/projectionLog?openid='+openid+'&box_mac='+box_mac);
+          wx.request({
+            url: 'http://' + hotel_info.intranet_ip + ':8080/h5/projectionLog?openid='+openid+'&box_mac='+box_mac,
+            success:function(res){
+              console.log('盒子数据');
+              console.log(res)
+              if(res.data.code==10000){
+                console.log('云端数据')
+                console.log(forscreen_history_list);
+                
+                
+                var speed_history_list = res.data.result;
+                
+                for(let i in forscreen_history_list){
+                  if(forscreen_history_list[i].is_speed==1 && forscreen_history_list[i].res_type==2){//视频
+                    for(let j in speed_history_list){
+                      if(forscreen_history_list[i].forscreen_id == speed_history_list[j].forscreen_id){
+                        forscreen_history_list[i].res_type = speed_history_list[j].resource_type;
+                        forscreen_history_list[i].imgurl   = speed_history_list[j].media_screenshot_path;
+                        forscreen_history_list[i].is_speed = 1;
+                        forscreen_history_list[i].is_box_have = 1;
+                      }
+                    }
+                    
+                  }else if(forscreen_history_list[i].is_speed==1 && forscreen_history_list[i].res_type==1){//照片
+                    for(let j in speed_history_list){
+                      if(forscreen_history_list[i].forscreen_id == speed_history_list[j].forscreen_id){
+
+                        for(let k in forscreen_history_list[i].list){
+                          forscreen_history_list[i].list[k].imgurl = speed_history_list[j].list[k].media_screenshot_path
+                        }
+
+                        forscreen_history_list[i].is_speed = 1;
+                        forscreen_history_list[i].is_box_have = 1;
+                      }
+                    }
+                  }
+
+                  
+                  
+                }
+
+                
+                
+              }else{
+                
+              }
+              for(let i=forscreen_history_list.length-1; i>=0; i--){
+                if(forscreen_history_list[i].is_speed == 1 && forscreen_history_list[i].is_box_have==0){
+                  forscreen_history_list.splice(i,1);
+                }
+              }
+              console.log('最终数据');
+              console.log(forscreen_history_list);
+              that.setData({forscreen_history_list:forscreen_history_list})  
+            },fail:function(e){
+              for(let i=forscreen_history_list.length-1; i>=0; i--){
+                if(forscreen_history_list[i].is_speed == 1 && forscreen_history_list[i].is_box_have==0){
+                  forscreen_history_list.splice(i,1);
+                }
+              }
+              that.setData({forscreen_history_list:forscreen_history_list})  
+            }
+          })
+        }
+      }
+      
+    },res=>{},{ isShowLoading: false })
+
+
   },
   up_forscreen(e) {//多张图片投屏开始(不分享到发现)
     var that = this;
@@ -1046,34 +1177,87 @@ Page({
   replayHistory: function (e) {
     var that = this;
     var box_mac = e.target.dataset.box_mac;
-    var action = 8; //重新播放
-    var forscreen_id = (new Date()).valueOf(); //投屏id
-    var res_type = e.target.dataset.res_type;
-    var res_list = e.target.dataset.res_list;
-    var res_nums = res_list.length;
-    pubdetail = []
+    var is_speed = e.target.dataset.is_speed;
+    if(is_speed==1){
+      console.log(e)
+      var openid = e.target.dataset.openid;
+      var mobile_brand = app.globalData.mobile_brand;
+      var mobile_model = app.globalData.mobile_model;
+      var forscreen_id = e.target.dataset.forscreen_id;
+      var filename     = e.target.dataset.filename;
+      var resouce_size = e.target.dataset.resource_size;
+      var avatarUrl    = e.target.dataset.avatarurl;
+      var nickName     = e.target.dataset.nickname;
+      var duration     = e.target.dataset.duration;
+      var hotel_info  = that.data.hotel_info;
+      var res_type    = e.target.dataset.res_type;
+      if(res_type==1){
+        var res_list = e.target.dataset.res_list;
+        var img_lenth = res_list.length;
+        for(let i in res_list){
+          var forscreen_char = res_list[i].forscreen_char;
+          var filename       = res_list[i].resource_id;
+          var img_size       = res_list[i].resource_size;
+          wx.request({
+            url: "http://" + intranet_ip + ":8080/picH5?isThumbnail=1&imageId=20170301&deviceId=" + openid + "&box_mac=" + box_mac + "&deviceName=" + mobile_brand + "&rotation=90&imageType=1&web=true&forscreen_id=" + forscreen_id + '&forscreen_char=' + forscreen_char + '&filename=' + filename + '&device_model=' + mobile_model + '&resource_size=' + img_size + '&action=4&resource_type=1&avatarUrl=' + avatarUrl + "&nickName=" + nickName + "&forscreen_nums=" + img_lenth+"&serial_number="+app.globalData.serial_number,
+            success:function(res){
+              if(res.data.code==10000){
+                app.showToast('重投成功，电视即将播放');
+              }else{
+                app.showToast('重投失败');
+              }
+            },fail:function(e){
+              app.showToast('重投失败');
+            }
+          })
+        }
+        console.log("http://" + intranet_ip + ":8080/picH5?isThumbnail=1&imageId=20170301&deviceId=" + openid + "&box_mac=" + box_mac + "&deviceName=" + mobile_brand + "&rotation=90&imageType=1&web=true&forscreen_id=" + forscreen_id + '&forscreen_char=' + forscreen_char + '&filename=' + filename + '&device_model=' + mobile_model + '&resource_size=' + img_size + '&action=4&resource_type=0&avatarUrl=' + avatarUrl + "&nickName=" + nickName + "&forscreen_nums=" + img_lenth+"&serial_number="+app.globalData.serial_number);
+        
 
-    var qualityList = app.globalData.qualityList;
-    
-    
-    for(var i=0;i<res_nums;i++){
-      var tmp = {forscreen_url:'',res_id:'',filename:'',resource_size:'',duration:0,quality_type:''};
+      }else{
+        
+        console.log('http://' + hotel_info.intranet_ip + ':8080/videoH5?deviceId=' + openid + '&box_mac=' + box_mac + '&deviceName=' + mobile_brand + '&web=true&forscreen_id=' + forscreen_id + '&filename=' + filename + '&device_model=' + mobile_model + '&resource_size=' + resouce_size + '&duration=' + duration + '&action=2&resource_type=2&avatarUrl=' + avatarUrl + "&nickName=" + nickName+'&serial_number='+app.globalData.serial_number)
+        wx.request({
+          url: 'http://' + hotel_info.intranet_ip + ':8080/videoH5?deviceId=' + openid + '&box_mac=' + box_mac + '&deviceName=' + mobile_brand + '&web=true&forscreen_id=' + forscreen_id + '&filename=' + filename + '&device_model=' + mobile_model + '&resource_size=' + resouce_size + '&duration=' + duration + '&action=2&resource_type=2&avatarUrl=' + avatarUrl + "&nickName=" + nickName+'&serial_number='+app.globalData.serial_number,
+          
+          success:function(res){
+            if(res.data.code==10000){
+              app.showToast('重投成功，电视即将播放');
+            }else{
+              app.showToast('重投失败');
+            }
+          },fail:function(e){
+            app.showToast('重投失败');
+          }
+        })
+      }
       
-      tmp.forscreen_url = res_list[i].forscreen_url ;
-      tmp.res_id        = res_list[i].resource_id;
-      tmp.filename      = res_list[i].filename;
+    }else{
+      var action = 8; //重新播放
+      var forscreen_id = (new Date()).valueOf(); //投屏id
+      var res_type = e.target.dataset.res_type;
+      var res_list = e.target.dataset.res_list;
+      var res_nums = res_list.length;
+      pubdetail = []
+
+      var qualityList = app.globalData.qualityList;
       
-      tmp.resource_size = res_list[i].resource_size;
-      tmp.duration      = 0;
-      tmp.quality_type  = res_list[i].quality_type;
-      pubdetail[i] = tmp;
-    }
+      
+      for(var i=0;i<res_nums;i++){
+        var tmp = {forscreen_url:'',res_id:'',filename:'',resource_size:'',duration:0,quality_type:''};
+        
+        tmp.forscreen_url = res_list[i].forscreen_url ;
+        tmp.res_id        = res_list[i].resource_id;
+        tmp.filename      = res_list[i].filename;
+        
+        tmp.resource_size = res_list[i].resource_size;
+        tmp.duration      = 0;
+        tmp.quality_type  = res_list[i].quality_type;
+        pubdetail[i] = tmp;
+      }
 
-    app.boxShow(box_mac, forscreen_id, pubdetail, res_type, res_nums, action, '', that);
-
-
-
-    
+      app.boxShow(box_mac, forscreen_id, pubdetail, res_type, res_nums, action, '', that);
+    } 
 
   },
   //上拉刷新
@@ -1081,17 +1265,16 @@ Page({
     var that = this;
     var openid = e.target.dataset.openid;
     var box_mac = e.target.dataset.box_mac;
+
+    var launchType = e.target.dataset.launchtype;
+    if(launchType =='classic'){
+      var is_speed = 0;
+    }else{
+      var is_speed = 1;
+    }
     page = page + 1;
-    utils.PostRequest(api_v_url+'/ForscreenHistory/getList', {
-      page: page,
-      box_mac: box_mac,
-      openid: openid,
-    }, (data, headers, cookies, errMsg, statusCode) => {
-      forscreen_history_list = data.result,
-      that.setData({
-        forscreen_history_list: data.result,
-      })
-    })
+    
+    that.getHistoryList(openid,box_mac,page,is_speed);
 
     
   },
