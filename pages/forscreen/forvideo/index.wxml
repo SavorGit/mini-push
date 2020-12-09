@@ -141,11 +141,11 @@
 								</view>
 							</view>
 							<view class='btn'>
-								<button class="theme-button-dark" bindtap="replayHistory" data-res_type='{{bean.res_type}}' data-box_mac='{{box_mac}}' data-openid='{{openid}}' data-res_list='{{bean.list}}'>重投</button>
+								<button class="theme-button-dark" bindtap="replayHistory" data-res_type='{{bean.res_type}}' data-is_speed="{{bean.is_speed}}" data-box_mac='{{box_mac}}'  data-openid='{{openid}}' data-forscreen_id="{{bean.forscreen_id}}" data-res_list='{{bean.list}}' data-avatarUrl="{{avatarUrl}}" data-nickName="{{nickName}}">重投</button>
 							</view>
 						</view>
 						<view wx:else class="video flex-row-flex_start-start">
-							<block wx:if="{{bean.is_speed==0}}">
+							<block >
 								<view class="cover" wx:for="{{bean.list}}" wx:key="pkey" wx:for-item="item" wx:for-index="indexs">
 									<navigator url="">
 										<image mode='aspectFill' src="{{item.imgurl}}"></image>
@@ -157,10 +157,10 @@
 									</view>
 								</view>
 								<view class='btn'>
-								<button class="theme-button-dark" bindtap="replayHistory" data-res_type='{{bean.res_type}}' data-is_speed="0" data-box_mac='{{box_mac}}' data-openid='{{openid}}' data-forscreen_id="{{bean.forscreen_id}}" data-res_list='{{bean.list}}'>重投</button>
+								<button class="theme-button-dark" bindtap="replayHistory" data-res_type='{{bean.res_type}}' data-is_speed="{{bean.is_speed}}" data-box_mac='{{box_mac}}' data-openid='{{openid}}' data-forscreen_id="{{bean.forscreen_id}}" data-res_list='{{bean.list}}' data-avatarUrl="{{avatarUrl}}" data-nickName="{{nickName}}">重投</button>
 								</view>
 							</block>
-							<block wx:if="{{bean.is_speed==1 && bean.is_box_have==1}}">
+							<!-- <block wx:if="{{bean.is_speed==1 && bean.is_box_have==1}}">
 								<view class="cover" >
 									<navigator url="">
 										<image mode='aspectFill' src="{{bean.imgurl}}"></image>
@@ -174,7 +174,7 @@
 								<view class='btn'>
 								<button class="theme-button-dark" bindtap="replayHistory" data-res_type='{{bean.res_type}}' data-box_mac='{{box_mac}}' data-is_speed="1" data-openid='{{openid}}' data-filename="{{bean.filename}}" data-resource_size="{{bean.resource_size}}" data-avatarUrl="{{avatarUrl}}" data-nickName="{{nickName}}" data-forscreen_id="{{bean.forscreen_id}}" data-duration="{{bean.duration}}">重投</button>
 								</view>
-							</block>
+							</block> -->
 							
 						</view>
 						<view wx:if="{{forscreen_history_list.length > index+1}}" class='line'></view>

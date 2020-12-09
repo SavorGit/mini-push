@@ -896,11 +896,11 @@ Page({
                 var speed_history_list = res.data.result;
                 
                 for(let i in forscreen_history_list){
-                  if(forscreen_history_list[i].is_speed==1 && forscreen_history_list[i].res_type==2){//视频
+                  if(forscreen_history_list[i].is_speed==1 && forscreen_history_list[i].res_type==2){ //视频
                     for(let j in speed_history_list){
                       if(forscreen_history_list[i].forscreen_id == speed_history_list[j].forscreen_id){
                         forscreen_history_list[i].res_type = speed_history_list[j].resource_type;
-                        forscreen_history_list[i].imgurl   = speed_history_list[j].media_screenshot_path;
+                        forscreen_history_list[i].list[0].imgurl   = speed_history_list[j].list[0].media_screenshot_path;
                         forscreen_history_list[i].is_speed = 1;
                         forscreen_history_list[i].is_box_have = 1;
                       }
@@ -1174,21 +1174,24 @@ Page({
       urls: urls // 需要预览的图片http链接列表
     })
   },
-  replayHistory: function (e) {
+  replayHistory: function(e) {
     var that = this;
     var box_mac = e.target.dataset.box_mac;
+
     var is_speed = e.target.dataset.is_speed;
+    console.log(is_speed)
     if(is_speed==1){
       console.log(e)
       var openid = e.target.dataset.openid;
       var mobile_brand = app.globalData.mobile_brand;
       var mobile_model = app.globalData.mobile_model;
       var forscreen_id = e.target.dataset.forscreen_id;
+      /*var forscreen_id = e.target.dataset.forscreen_id;
       var filename     = e.target.dataset.filename;
-      var resouce_size = e.target.dataset.resource_size;
+      var resouce_size = e.target.dataset.resource_size;*/
       var avatarUrl    = e.target.dataset.avatarurl;
       var nickName     = e.target.dataset.nickname;
-      var duration     = e.target.dataset.duration;
+      //var duration     = e.target.dataset.duration;
       var hotel_info  = that.data.hotel_info;
       var res_type    = e.target.dataset.res_type;
       if(res_type==1){
@@ -1198,11 +1201,16 @@ Page({
           var forscreen_char = res_list[i].forscreen_char;
           var filename       = res_list[i].resource_id;
           var img_size       = res_list[i].resource_size;
+          console.log("http://" + hotel_info.intranet_ip + ":8080/picH5?isThumbnail=1&imageId=20170301&deviceId=" + openid + "&box_mac=" + box_mac + "&deviceName=" + mobile_brand + "&rotation=90&imageType=1&web=true&forscreen_id=" + forscreen_id + '&forscreen_char=' + forscreen_char + '&filename=' + filename + '&device_model=' + mobile_model + '&resource_size=' + img_size + '&action=4&resource_type=1&avatarUrl=' + avatarUrl + "&nickName=" + nickName + "&forscreen_nums=" + img_lenth+"&serial_number="+app.globalData.serial_number);
           wx.request({
-            url: "http://" + intranet_ip + ":8080/picH5?isThumbnail=1&imageId=20170301&deviceId=" + openid + "&box_mac=" + box_mac + "&deviceName=" + mobile_brand + "&rotation=90&imageType=1&web=true&forscreen_id=" + forscreen_id + '&forscreen_char=' + forscreen_char + '&filename=' + filename + '&device_model=' + mobile_model + '&resource_size=' + img_size + '&action=4&resource_type=1&avatarUrl=' + avatarUrl + "&nickName=" + nickName + "&forscreen_nums=" + img_lenth+"&serial_number="+app.globalData.serial_number,
+            url: "http://" + hotel_info.intranet_ip + ":8080/picH5?isThumbnail=1&imageId=20170301&deviceId=" + openid + "&box_mac=" + box_mac + "&deviceName=" + mobile_brand + "&rotation=90&imageType=1&web=true&forscreen_id=" + forscreen_id + '&forscreen_char=' + forscreen_char + '&filename=' + filename + '&device_model=' + mobile_model + '&resource_size=' + img_size + '&action=4&resource_type=1&avatarUrl=' + avatarUrl + "&nickName=" + nickName + "&forscreen_nums=" + img_lenth+"&serial_number="+app.globalData.serial_number,
             success:function(res){
+              console.log(res);
               if(res.data.code==10000){
-                app.showToast('重投成功，电视即将播放');
+                if(i==res_list.length - 1){
+                  app.showToast('重投成功，电视即将播放');
+                }
+                
               }else{
                 app.showToast('重投失败');
               }
@@ -1211,12 +1219,16 @@ Page({
             }
           })
         }
-        console.log("http://" + intranet_ip + ":8080/picH5?isThumbnail=1&imageId=20170301&deviceId=" + openid + "&box_mac=" + box_mac + "&deviceName=" + mobile_brand + "&rotation=90&imageType=1&web=true&forscreen_id=" + forscreen_id + '&forscreen_char=' + forscreen_char + '&filename=' + filename + '&device_model=' + mobile_model + '&resource_size=' + img_size + '&action=4&resource_type=0&avatarUrl=' + avatarUrl + "&nickName=" + nickName + "&forscreen_nums=" + img_lenth+"&serial_number="+app.globalData.serial_number);
         
 
       }else{
         
         console.log('http://' + hotel_info.intranet_ip + ':8080/videoH5?deviceId=' + openid + '&box_mac=' + box_mac + '&deviceName=' + mobile_brand + '&web=true&forscreen_id=' + forscreen_id + '&filename=' + filename + '&device_model=' + mobile_model + '&resource_size=' + resouce_size + '&duration=' + duration + '&action=2&resource_type=2&avatarUrl=' + avatarUrl + "&nickName=" + nickName+'&serial_number='+app.globalData.serial_number)
+        var res_list = e.target.dataset.res_list;
+        
+        var filename     = forscreen_id;
+        var resouce_size = res_list[0].resource_size;
+        var duration     = res_list[0].duration;
         wx.request({
           url: 'http://' + hotel_info.intranet_ip + ':8080/videoH5?deviceId=' + openid + '&box_mac=' + box_mac + '&deviceName=' + mobile_brand + '&web=true&forscreen_id=' + forscreen_id + '&filename=' + filename + '&device_model=' + mobile_model + '&resource_size=' + resouce_size + '&duration=' + duration + '&action=2&resource_type=2&avatarUrl=' + avatarUrl + "&nickName=" + nickName+'&serial_number='+app.globalData.serial_number,
           
@@ -1239,26 +1251,19 @@ Page({
       var res_list = e.target.dataset.res_list;
       var res_nums = res_list.length;
       pubdetail = []
-
-      var qualityList = app.globalData.qualityList;
-      
-      
       for(var i=0;i<res_nums;i++){
         var tmp = {forscreen_url:'',res_id:'',filename:'',resource_size:'',duration:0,quality_type:''};
-        
-        tmp.forscreen_url = res_list[i].forscreen_url ;
+        tmp.forscreen_url = res_list[i].forscreen_url;
         tmp.res_id        = res_list[i].resource_id;
         tmp.filename      = res_list[i].filename;
-        
         tmp.resource_size = res_list[i].resource_size;
-        tmp.duration      = 0;
         tmp.quality_type  = res_list[i].quality_type;
+        tmp.duration      = 0;
         pubdetail[i] = tmp;
       }
-
       app.boxShow(box_mac, forscreen_id, pubdetail, res_type, res_nums, action, '', that);
-    } 
-
+    }
+    
   },
   //上拉刷新
   loadMore: function (e) {

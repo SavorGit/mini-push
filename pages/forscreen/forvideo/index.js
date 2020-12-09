@@ -516,7 +516,7 @@ Page({
                     for(let j in speed_history_list){
                       if(forscreen_history_list[i].forscreen_id == speed_history_list[j].forscreen_id){
                         forscreen_history_list[i].res_type = speed_history_list[j].resource_type;
-                        forscreen_history_list[i].imgurl   = speed_history_list[j].list[0].media_screenshot_path;
+                        forscreen_history_list[i].list[0].imgurl   = speed_history_list[j].list[0].media_screenshot_path;
                         forscreen_history_list[i].is_speed = 1;
                         forscreen_history_list[i].is_box_have = 1;
                       }
@@ -1507,11 +1507,12 @@ Page({
       var mobile_brand = app.globalData.mobile_brand;
       var mobile_model = app.globalData.mobile_model;
       var forscreen_id = e.target.dataset.forscreen_id;
+      /*var forscreen_id = e.target.dataset.forscreen_id;
       var filename     = e.target.dataset.filename;
-      var resouce_size = e.target.dataset.resource_size;
+      var resouce_size = e.target.dataset.resource_size;*/
       var avatarUrl    = e.target.dataset.avatarurl;
       var nickName     = e.target.dataset.nickname;
-      var duration     = e.target.dataset.duration;
+      //var duration     = e.target.dataset.duration;
       var hotel_info  = that.data.hotel_info;
       var res_type    = e.target.dataset.res_type;
       if(res_type==1){
@@ -1521,11 +1522,16 @@ Page({
           var forscreen_char = res_list[i].forscreen_char;
           var filename       = res_list[i].resource_id;
           var img_size       = res_list[i].resource_size;
+          console.log("http://" + hotel_info.intranet_ip + ":8080/picH5?isThumbnail=1&imageId=20170301&deviceId=" + openid + "&box_mac=" + box_mac + "&deviceName=" + mobile_brand + "&rotation=90&imageType=1&web=true&forscreen_id=" + forscreen_id + '&forscreen_char=' + forscreen_char + '&filename=' + filename + '&device_model=' + mobile_model + '&resource_size=' + img_size + '&action=4&resource_type=1&avatarUrl=' + avatarUrl + "&nickName=" + nickName + "&forscreen_nums=" + img_lenth+"&serial_number="+app.globalData.serial_number);
           wx.request({
-            url: "http://" + intranet_ip + ":8080/picH5?isThumbnail=1&imageId=20170301&deviceId=" + openid + "&box_mac=" + box_mac + "&deviceName=" + mobile_brand + "&rotation=90&imageType=1&web=true&forscreen_id=" + forscreen_id + '&forscreen_char=' + forscreen_char + '&filename=' + filename + '&device_model=' + mobile_model + '&resource_size=' + img_size + '&action=4&resource_type=1&avatarUrl=' + avatarUrl + "&nickName=" + nickName + "&forscreen_nums=" + img_lenth+"&serial_number="+app.globalData.serial_number,
+            url: "http://" + hotel_info.intranet_ip + ":8080/picH5?isThumbnail=1&imageId=20170301&deviceId=" + openid + "&box_mac=" + box_mac + "&deviceName=" + mobile_brand + "&rotation=90&imageType=1&web=true&forscreen_id=" + forscreen_id + '&forscreen_char=' + forscreen_char + '&filename=' + filename + '&device_model=' + mobile_model + '&resource_size=' + img_size + '&action=4&resource_type=1&avatarUrl=' + avatarUrl + "&nickName=" + nickName + "&forscreen_nums=" + img_lenth+"&serial_number="+app.globalData.serial_number,
             success:function(res){
+              console.log(res);
               if(res.data.code==10000){
-                app.showToast('重投成功，电视即将播放');
+                if(i==res_list.length - 1){
+                  app.showToast('重投成功，电视即将播放');
+                }
+                
               }else{
                 app.showToast('重投失败');
               }
@@ -1534,12 +1540,16 @@ Page({
             }
           })
         }
-        console.log("http://" + intranet_ip + ":8080/picH5?isThumbnail=1&imageId=20170301&deviceId=" + openid + "&box_mac=" + box_mac + "&deviceName=" + mobile_brand + "&rotation=90&imageType=1&web=true&forscreen_id=" + forscreen_id + '&forscreen_char=' + forscreen_char + '&filename=' + filename + '&device_model=' + mobile_model + '&resource_size=' + img_size + '&action=4&resource_type=0&avatarUrl=' + avatarUrl + "&nickName=" + nickName + "&forscreen_nums=" + img_lenth+"&serial_number="+app.globalData.serial_number);
         
 
       }else{
         
         console.log('http://' + hotel_info.intranet_ip + ':8080/videoH5?deviceId=' + openid + '&box_mac=' + box_mac + '&deviceName=' + mobile_brand + '&web=true&forscreen_id=' + forscreen_id + '&filename=' + filename + '&device_model=' + mobile_model + '&resource_size=' + resouce_size + '&duration=' + duration + '&action=2&resource_type=2&avatarUrl=' + avatarUrl + "&nickName=" + nickName+'&serial_number='+app.globalData.serial_number)
+        var res_list = e.target.dataset.res_list;
+        
+        var filename     = forscreen_id;
+        var resouce_size = res_list[0].resource_size;
+        var duration     = res_list[0].duration;
         wx.request({
           url: 'http://' + hotel_info.intranet_ip + ':8080/videoH5?deviceId=' + openid + '&box_mac=' + box_mac + '&deviceName=' + mobile_brand + '&web=true&forscreen_id=' + forscreen_id + '&filename=' + filename + '&device_model=' + mobile_model + '&resource_size=' + resouce_size + '&duration=' + duration + '&action=2&resource_type=2&avatarUrl=' + avatarUrl + "&nickName=" + nickName+'&serial_number='+app.globalData.serial_number,
           

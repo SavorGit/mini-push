@@ -153,7 +153,7 @@
 				<button class='savor-btn theme-button-dark' bindtap="exitForscreen" data-boxmac="{{box_mac}}">退出投屏</button>
 			</view>
 		</view>
-		<view class='launch_history' wx:if="{{launchType=='classic'}}">
+		<view class='launch_history'>
 			<view class='title'>
 				<label class='font_666666_28'>投屏历史</label>
 			</view>
@@ -168,23 +168,41 @@
 								</view>
 							</view>
 							<view class='btn'>
-								<button class="theme-button-dark" bindtap="replayHistory" data-res_type='{{bean.res_type}}' data-box_mac='{{box_mac}}' data-openid='{{openid}}' data-res_list='{{bean.list}}'>重投</button>
+								<button class="theme-button-dark" bindtap="replayHistory" data-res_type='{{bean.res_type}}' data-is_speed="{{bean.is_speed}}" data-box_mac='{{box_mac}}'  data-openid='{{openid}}' data-forscreen_id="{{bean.forscreen_id}}" data-res_list='{{bean.list}}' data-avatarUrl="{{avatarUrl}}" data-nickName="{{nickName}}">重投</button>
 							</view>
 						</view>
 						<view wx:else class="video flex-row-flex_start-start">
-							<view class="cover" wx:for="{{bean.list}}" wx:key="pkey" wx:for-item="item" wx:for-index="indexs">
-								<navigator url="">
-									<image mode='aspectFill' src="{{item.imgurl}}"></image>
-								</navigator>
-								<view>
+							<block >
+								<view class="cover" wx:for="{{bean.list}}" wx:key="pkey" wx:for-item="item" wx:for-index="indexs">
 									<navigator url="">
-										<label class="fa fa-play-circle icon theme-font4"></label>
+										<image mode='aspectFill' src="{{item.imgurl}}"></image>
 									</navigator>
+									<view>
+										<navigator url="">
+											<label class="fa fa-play-circle-o icon theme-font4"></label>
+										</navigator>
+									</view>
 								</view>
-							</view>
-							<view class='btn'>
-								<button class="theme-button-dark" bindtap="replayHistory" data-res_type='{{bean.res_type}}' data-box_mac='{{box_mac}}' data-openid='{{openid}}' data-res_list='{{bean.list}}'>重投</button>
-							</view>
+								<view class='btn'>
+								<button class="theme-button-dark" bindtap="replayHistory" data-res_type='{{bean.res_type}}' data-is_speed="{{bean.is_speed}}" data-box_mac='{{box_mac}}' data-openid='{{openid}}' data-forscreen_id="{{bean.forscreen_id}}" data-res_list='{{bean.list}}' data-avatarUrl="{{avatarUrl}}" data-nickName="{{nickName}}">重投</button>
+								</view>
+							</block>
+							<!-- <block wx:if="{{bean.is_speed==1 && bean.is_box_have==1}}">
+								<view class="cover" >
+									<navigator url="">
+										<image mode='aspectFill' src="{{bean.imgurl}}"></image>
+									</navigator>
+									<view>
+										<navigator url="">
+											<label class="fa fa-play-circle-o icon theme-font4"></label>
+										</navigator>
+									</view>
+								</view>
+								<view class='btn'>
+								<button class="theme-button-dark" bindtap="replayHistory" data-res_type='{{bean.res_type}}' data-box_mac='{{box_mac}}' data-is_speed="1" data-openid='{{openid}}' data-filename="{{bean.filename}}" data-resource_size="{{bean.resource_size}}" data-avatarUrl="{{avatarUrl}}" data-nickName="{{nickName}}" data-forscreen_id="{{bean.forscreen_id}}" data-duration="{{bean.duration}}">重投</button>
+								</view>
+							</block> -->
+							
 						</view>
 						<view wx:if="{{forscreen_history_list.length > index+1}}" class='line'></view>
 					</view>
@@ -202,7 +220,7 @@
 				</view>
 			</scroll-view>
 		</view>
-		<view class='launch_history' wx:else></view>
+		<!-- <view class='launch_history' wx:else></view> -->
 
 		<!-- 广告面板 -->
 		<template is="adsPanelForSavorBusinessContacts" />
