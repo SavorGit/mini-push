@@ -69,7 +69,7 @@
 
 .functional-module-panel>.row>view,
 .functional-module-panel>.row>form {
-  width: 33.33333333333%;
+  width: 28%;
   display: block;
   text-align: center;
   padding: 10rpx 0rpx;
@@ -91,6 +91,8 @@
   width: 100rpx;
   height: 100rpx;
   margin: 0 auto;
+  padding: 0;
+  border: 0;
   border-radius: 10rpx;
 }
 
@@ -195,11 +197,11 @@
 
 .functional-module-panel>.row>view>label,
 .functional-module-panel>.row button>label {
-  height: 60rpx;
-  line-height: 60rpx;
-  margin-left: 10rpx;
+  height: 50rpx;
+  line-height: 50rpx;
+  /* margin-left: 10rpx; */
   font-size: 26rpx;
-  font-weight: bold;
+  /* font-weight: bold; */
 }
 
 /* ==================================== 推荐面板 ==================================== */
