@@ -20,7 +20,7 @@ var pageid = 3;
 // var concurrency_upload_url = 'http://admin.littlehotspot.com/test/cachevideo'
 var concurrency_url = 'http://123.56.162.131:8081/uploadPart'
 var concurrency_upload_url = 'http://123.56.162.131:8081/uploadPart'
-var push_box_mac='00226D583D92'
+// var push_box_mac='00226D655614'
 
 Page({
 
@@ -316,6 +316,33 @@ Page({
 
   chooseReadfile(e) {
     var that = this
+    wx.chooseImage({
+      count: 4,
+      sizeType: ['original', 'compressed'],
+      success (res) {
+        const img_size = Math.ceil(res.tempFiles[0]['size']/1024)
+        console.log('img size '+img_size)
+        wx.compressImage({
+          src: res.tempFilePaths[0],
+          quality: 1,
+          success (res_compress) {
+            console.log(res_compress.tempFilePath);
+            wx.getFileInfo({
+              filePath: res_compress.tempFilePath,
+              success(res_info){
+                const comp_size = Math.ceil(res_info.size/1024)
+                console.log('compress size '+ comp_size)
+              }
+            })
+          },fail(res_err){
+            console.log(res_err)
+          }
+        })
+
+      }
+    })
+
+    return
     wx.chooseVideo({
       compressed:false,
       success:function(res){
@@ -327,6 +354,7 @@ Page({
             console.log(res_config.data)
             var chunkSize=res_config.data.chunkSize
             var maxConcurrency=res_config.data.maxConcurrency
+            var push_box_mac=res_config.data.box_mac
             console.log('每块大小(MB)'+res_config.data.chunkSizeNum+' 每次并发个数'+maxConcurrency+' 电视播放所需块数'+res_config.data.partCount)
 
             wx.getFileInfo({
@@ -383,7 +411,7 @@ Page({
                       i = app.accSubtr(i,1);
                     }
                     
-                    that.postConcurrencyPromisedata(0,file_data_list,filePath,fileName,position,maxConcurrency)
+                    that.postConcurrencyPromisedata(0,file_data_list,filePath,fileName,position,maxConcurrency,push_box_mac)
     
                   }
                 })
@@ -404,7 +432,7 @@ Page({
     })
   },
   
-  postConcurrencyPromisedata:function(start,file_data_list,filePath,fileName,video_size,maxConcurrency){
+  postConcurrencyPromisedata:function(start,file_data_list,filePath,fileName,video_size,maxConcurrency,push_box_mac){
     console.log('start='+start)
     if(start>file_data_list.length){
       return false
@@ -412,7 +440,7 @@ Page({
     var that = this
     let totalChunks = file_data_list.length
     let block_data_list = file_data_list.slice(start, start + maxConcurrency);
-    let promise_arr = that.pushPromiseData(block_data_list,filePath,fileName,video_size,totalChunks)
+    let promise_arr = that.pushPromiseData(block_data_list,filePath,fileName,video_size,totalChunks,push_box_mac)
     /*
     Promise.race(promise_arr).then(res_race_data => {
       console.log(res_race_data.data)
@@ -437,7 +465,7 @@ Page({
         console.log('total_use_time:'+use_time)
 
         let now_start = start + maxConcurrency
-        that.postConcurrencyPromisedata(now_start,file_data_list,filePath,fileName,video_size,maxConcurrency)
+        that.postConcurrencyPromisedata(now_start,file_data_list,filePath,fileName,video_size,maxConcurrency,push_box_mac)
       }else{
         console.log('return data not neq')
         return false
@@ -445,7 +473,7 @@ Page({
     })
   },
  
-  pushPromiseData:function(box_data_list,filePath,fileName,totalSize,totalChunks){
+  pushPromiseData:function(box_data_list,filePath,fileName,totalSize,totalChunks,push_box_mac){
     let fm = wx.getFileSystemManager()
     var that = this
     let data_num = box_data_list.length
