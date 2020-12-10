@@ -1000,7 +1000,7 @@ Page({
     var duration = data.duration;
     var avatarUrl = data.avatarUrl;
     var nickName = data.nickName;
-
+    console.log('极简上传');
     var intranet_ip = hotel_info.intranet_ip;
     var video_url = data.video;
     var mobile_brand = app.globalData.mobile_brand;
