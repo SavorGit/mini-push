@@ -78,6 +78,7 @@ App({
     }
     if (res_type == 1) {
       //图集
+      forscreen_char = pubdetail[0].forscreen_char;
       var res_obj = [];
       var msg = { action: 10,  openid: openid, img_nums: res_len, forscreen_char: forscreen_char, forscreen_id: forscreen_id, avatarUrl: avatarUrl, nickName: nickName,serial_number:serial_number}
       for (var i = 0; i < pubdetail.length; i++) {
