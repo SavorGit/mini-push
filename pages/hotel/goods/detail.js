@@ -162,6 +162,8 @@ Page({
       type:goods_type,
       data_id:goods_id,
       box_id:box_id,
+      mobile_brand:app.globalData.mobile_brand,
+      mobile_model:app.globalData.mobile_model
     }, (data, headers, cookies, errMsg, statusCode) => {
       
     })

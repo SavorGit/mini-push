@@ -158,7 +158,9 @@ Page({
                 utils.PostRequest(api_url + '/Smallapp21/Index/genCode', {
                   'box_mac': box_mac,
                   'openid': openid,
-                  'type': code_type
+                  'type': code_type,
+                  'mobile_brand':app.globalData.mobile_brand,
+                  'mobile_model':app.globalData.mobile_model
                 }, (data, headers, cookies, errMsg, statusCode) => {
                   app.globalData.serial_number = app.globalData.have_link_box_pre+ openid+'_'+(new Date()).valueOf();
                 },res=>{},{ isShowLoading: false })
@@ -236,7 +238,9 @@ Page({
       utils.PostRequest(api_url+'/Smallapp21/Index/genCode', {
         'box_mac': box_mac,
         'openid' : openid,
-        'type'   : code_type
+        'type'   : code_type,
+        'mobile_brand':app.globalData.mobile_brand,
+        'mobile_model':app.globalData.mobile_model
       }, (data, headers, cookies, errMsg, statusCode) => {
         var timestamp = (new Date()).valueOf();
         var is_have = data.result.is_have;

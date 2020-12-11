@@ -1369,6 +1369,7 @@ Page({
     })
   },
   replayHistory: function(e) {
+    console.log(e);
     var that = this;
     var box_mac = e.target.dataset.box_mac;
 
@@ -1378,7 +1379,7 @@ Page({
       var openid = e.target.dataset.openid;
       var mobile_brand = app.globalData.mobile_brand;
       var mobile_model = app.globalData.mobile_model;
-      var forscreen_id = e.target.dataset.forscreen_id;
+      var forscreen_id = (new Date()).valueOf();
       /*var forscreen_id = e.target.dataset.forscreen_id;
       var filename     = e.target.dataset.filename;
       var resouce_size = e.target.dataset.resource_size;*/
@@ -1416,16 +1417,18 @@ Page({
 
       }else{
         
-        console.log('http://' + hotel_info.intranet_ip + ':8080/videoH5?deviceId=' + openid + '&box_mac=' + box_mac + '&deviceName=' + mobile_brand + '&web=true&forscreen_id=' + forscreen_id + '&filename=' + filename + '&device_model=' + mobile_model + '&resource_size=' + resouce_size + '&duration=' + duration + '&action=2&resource_type=2&avatarUrl=' + avatarUrl + "&nickName=" + nickName+'&serial_number='+app.globalData.serial_number)
+        
         var res_list = e.target.dataset.res_list;
         
-        var filename     = forscreen_id;
+        var filename     = e.target.dataset.forscreen_id;
         var resouce_size = res_list[0].resource_size;
-        var duration     = res_list[0].duration;
+        var duration     = parseInt(res_list[0].duration);
+        console.log('http://' + hotel_info.intranet_ip + ':8080/videoH5?deviceId=' + openid + '&box_mac=' + box_mac + '&deviceName=' + mobile_brand + '&web=true&forscreen_id=' + forscreen_id + '&filename=' + filename + '&device_model=' + mobile_model + '&resource_size=' + resouce_size + '&duration=' + duration + '&action=2&resource_type=2&avatarUrl=' + avatarUrl + "&nickName=" + nickName+'&serial_number='+app.globalData.serial_number)
         wx.request({
           url: 'http://' + hotel_info.intranet_ip + ':8080/videoH5?deviceId=' + openid + '&box_mac=' + box_mac + '&deviceName=' + mobile_brand + '&web=true&forscreen_id=' + forscreen_id + '&filename=' + filename + '&device_model=' + mobile_model + '&resource_size=' + resouce_size + '&duration=' + duration + '&action=2&resource_type=2&avatarUrl=' + avatarUrl + "&nickName=" + nickName+'&serial_number='+app.globalData.serial_number,
           
           success:function(res){
+            console.log(res)
             if(res.data.code==10000){
               app.showToast('重投成功，电视即将播放');
             }else{
