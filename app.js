@@ -1124,45 +1124,66 @@ changeKb:function (limit){
       BSSID: wifi_mac,
       password: use_wifi_password,
       success: function (reswifi) {
-        
-        wx.onWifiConnected((result) => {
-          if(result.wifi.SSID==wifi_name){
-            // if (aps.wifiOkCallback) {
-
-            //   aps.wifiOkCallback(1);
-            // }
-            
-            that.setData({
-              wifiErr: { 'is_open': 0, 'msg': '', 'confirm': '确定', 'calcle': '取消', 'type': 0 },
-              link_type: 2
-            })
-            aps.globalData.link_type = 2;
-            
-            that.setData({
-              launchType:'speed'
-            })
-            aps.globalData.change_link_type = 2;
-            
-            wx.showToast({
-              title: 'wifi链接成功',
-              icon: 'success',
-              duration: 2000,
-              mask:true,
-            });
-            that.setData({wifi_hidden:true})
-            
-          }
-          
-        },()=>{
+        if(reswifi.errMsg=='connectWifi:ok' && typeof(reswifi.wifi)!='undefined'){
           that.setData({
-            wifi_hidden: true,
+            wifiErr: { 'is_open': 0, 'msg': '', 'confirm': '确定', 'calcle': '取消', 'type': 0 },
+            link_type: 2
           })
+          aps.globalData.link_type = 2;
+          
+          that.setData({
+            launchType:'speed'
+          })
+          aps.globalData.change_link_type = 2;
+          
           wx.showToast({
-            title: 'wifi链接失败',
+            title: 'wifi链接成功',
             icon: 'success',
-            duration: 2000
+            duration: 2000,
+            mask:true,
           });
-        })
+          that.setData({wifi_hidden:true})
+        }else {
+          wx.onWifiConnected((result) => {
+            if(result.wifi.SSID==wifi_name){
+              // if (aps.wifiOkCallback) {
+  
+              //   aps.wifiOkCallback(1);
+              // }
+              
+              that.setData({
+                wifiErr: { 'is_open': 0, 'msg': '', 'confirm': '确定', 'calcle': '取消', 'type': 0 },
+                link_type: 2
+              })
+              aps.globalData.link_type = 2;
+              
+              that.setData({
+                launchType:'speed'
+              })
+              aps.globalData.change_link_type = 2;
+              
+              wx.showToast({
+                title: 'wifi链接成功',
+                icon: 'success',
+                duration: 2000,
+                mask:true,
+              });
+              that.setData({wifi_hidden:true})
+              
+            }
+            
+          },()=>{
+            that.setData({
+              wifi_hidden: true,
+            })
+            wx.showToast({
+              title: 'wifi链接失败',
+              icon: 'success',
+              duration: 2000
+            });
+          })
+        }
+        
         
       }, fail: function (res) {
         var err_msg = 'wifi链接失败';

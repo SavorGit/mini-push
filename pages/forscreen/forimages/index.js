@@ -650,23 +650,31 @@ Page({
       BSSID: wifi_mac,
       password: use_wifi_password,
       success: function (reswifi) {
-        wx.onWifiConnected((result) => {
-          
-          if(result.wifi.SSID==wifi_name){
-            //app.showToast('wifi链接成功');
-            app.globalData.link_type = 2;
-            that.speedUploadImg(hotel_info,data);
-            return true;
+        if(reswifi.errMsg=='connectWifi:ok' && typeof(reswifi.wifi)!='undefined'){
+          app.globalData.link_type = 2;
+          that.speedUploadImg(hotel_info,data);
+          return true;
+        }else {
+          wx.onWifiConnected((result) => {
+            console.log(result);
+            console.log(wifi_name)
+            if(result.wifi.SSID==wifi_name){
+              //app.showToast('wifi链接成功');
+              app.globalData.link_type = 2;
+              that.speedUploadImg(hotel_info,data);
+              return true;
+              
+            }
             
-          }
-          
-        },()=>{
-          openWind.tip = err_msg;
-          openWind.isError = true;
-          that.setData({
-            openWind:openWind
+          },()=>{
+            openWind.tip = err_msg;
+            openWind.isError = true;
+            that.setData({
+              openWind:openWind
+            })
           })
-        })
+        }
+        
       }, fail: function (res) {
         var err_msg = 'wifi链接失败';
         if(res.errCode==12000){

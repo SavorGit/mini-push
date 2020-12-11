@@ -631,27 +631,41 @@ Page({
       BSSID: wifi_mac,
       password: use_wifi_password,
       success: function (reswifi) {
-        console.log('有没有')
-        wx.onWifiConnected((result) => {
-          if(result.wifi.SSID==wifi_name){
-            //app.showToast('wifi链接成功');
-            if(video_size>limit_video_size){
-              that.burstReadVideoFile(data,hotel_info);
-            }else {
-              that.speedUploadVideo(hotel_info,data);
-              
-            }
-            app.globalData.change_link_type = 2;
-            return true; 
+        
+        if(reswifi.errMsg=='connectWifi:ok' && typeof(reswifi.wifi)!='undefined'){
+          //app.showToast('wifi链接成功');
+          if(video_size>limit_video_size){
+            that.burstReadVideoFile(data,hotel_info);
+          }else {
+            that.speedUploadVideo(hotel_info,data);
+            
           }
-          
-        },()=>{
-          openWind.tip = err_msg;
-          openWind.isError = true;
-          that.setData({
-            openWind:openWind
+          app.globalData.change_link_type = 2;
+          return true; 
+        }else{
+          wx.onWifiConnected((result) => {
+            if(result.wifi.SSID==wifi_name){
+              //app.showToast('wifi链接成功');
+              if(video_size>limit_video_size){
+                that.burstReadVideoFile(data,hotel_info);
+              }else {
+                that.speedUploadVideo(hotel_info,data);
+                
+              }
+              app.globalData.change_link_type = 2;
+              return true; 
+            }
+            
+          },()=>{
+            openWind.tip = err_msg;
+            openWind.isError = true;
+            that.setData({
+              openWind:openWind
+            })
           })
-        })
+        }
+
+        
       }, fail: function (res) {
         //console.log('connectWifi_fail');
         var err_msg = 'wifi链接失败';
