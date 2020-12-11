@@ -220,7 +220,7 @@ Page({
       url: api_v_url+'/redpacket/sendTvbonus',
       header: {
         'content-type': 'application/json',
-        'serial_number':app.globalData.serial_number
+        'serial-number':app.globalData.serial_number
       },
       data: {
         amount: totalnums,

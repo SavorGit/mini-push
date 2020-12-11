@@ -413,7 +413,7 @@ Page({
             },
             header: {
               'content-type': 'application/json',
-              'serial_number':app.globalData.serial_number
+              'serial-number':app.globalData.serial_number
             },
             success: function (res) {
               if (res.data.code == 10000) {
