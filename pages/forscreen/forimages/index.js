@@ -22,7 +22,6 @@ var pubdetail = [];
 var netty_push_info ;
 var netty_push_img ;
 var upload_task;
-const admin = 1;
 Page({
   data: {
     statusBarHeight: getApp().globalData.statusBarHeight,
@@ -654,12 +653,10 @@ Page({
         wx.onWifiConnected((result) => {
           
           if(result.wifi.SSID==wifi_name){
-            if(admin ==1){
-              //app.showToast('wifi链接成功');
-              app.globalData.link_type = 2;
-              that.speedUploadImg(hotel_info,data);
-              return true;
-            }
+            //app.showToast('wifi链接成功');
+            app.globalData.link_type = 2;
+            that.speedUploadImg(hotel_info,data);
+            return true;
             
           }
           
@@ -855,6 +852,7 @@ Page({
       openid: openid,
       box_mac: box_mac,
       page: page,
+      is_speed :is_speed,
     }, (data, headers, cookies, errMsg, statusCode) => {
       if(is_speed==0){//普通投屏
         var forscreen_history_list = data.result;
@@ -1159,19 +1157,7 @@ Page({
     
 
   },//是否公开显示餐厅信息结束
-  previewImage: function (e) {
-    var current = e.target.dataset.src;
-    var pkey = e.target.dataset.pkey;
-    var urls = [];
-    for (var row in current) {
-      urls[row] = current[row]['res_url']
-
-    }
-    wx.previewImage({
-      current: urls[pkey], // 当前显示图片的http链接
-      urls: urls // 需要预览的图片http链接列表
-    })
-  },
+  
   replayHistory: function(e) {
     console.log(e);
     var that = this;

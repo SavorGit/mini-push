@@ -38,6 +38,7 @@ Page({
       openid: openid,
       box_mac: box_mac,
       page: page,
+      type:1,
     }, (data, headers, cookies, errMsg, statusCode) => {
       var hst_list = data.result;
 
@@ -150,11 +151,19 @@ Page({
       page: page,
       box_mac: box_mac,
       openid: openid,
+      type:1,
     }, (data, headers, cookies, errMsg, statusCode) => {
-      forscreen_history_list = data.result,
-      self.setData({
-        forscreen_history_list: data.result,
-      })
+        var hst_list = data.result;
+
+        if (JSON.stringify(hst_list) == "{}") {
+          self.setData({
+            forscreen_history_list: ''
+          })
+        } else {
+          self.setData({
+            forscreen_history_list: data.result
+          })
+        }
       
     })
     

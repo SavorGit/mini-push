@@ -26,7 +26,6 @@ var  tail_lenth    //尾部大小
 var fm;
 var max_video_size;         //极简投屏最大M数限制
 var max_user_forvideo_size; //主干版超过XXM走极简投屏
-const admin = 2;
 Page({
 
   /**
@@ -411,6 +410,7 @@ Page({
       openid: openid,
       box_mac: box_mac,
       page: page,
+      is_speed:is_speed,
     }, (data, headers, cookies, errMsg, statusCode) => {
       if(is_speed==0){//普通投屏
         var forscreen_history_list = data.result;
@@ -1355,19 +1355,7 @@ Page({
     }
     var check_arr = e.detail.value;
   }, //是否公开显示餐厅信息结束
-  previewImage: function(e) {
-    var current = e.target.dataset.src;
-    var pkey = e.target.dataset.pkey;
-    var urls = [];
-    for (var row in current) {
-      urls[row] = current[row]['res_url']
-
-    }
-    wx.previewImage({
-      current: urls[pkey], // 当前显示图片的http链接
-      urls: urls // 需要预览的图片http链接列表
-    })
-  },
+  
   replayHistory: function(e) {
     console.log(e);
     var that = this;

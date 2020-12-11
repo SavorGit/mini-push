@@ -137,7 +137,7 @@
 						<view wx:if="{{bean.res_type==1}}" class="pic flex-row-flex_start-start">
 							<view class="weui-grids">
 								<view class="weui-grid" wx:for="{{bean.list}}" wx:key="pkey" wx:for-item="item" wx:for-index="indexs">
-									<image bindtap="previewImage" data-pkey="{{indexs}}" data-src="{{bean.list}}" mode='aspectFill' src="{{item.imgurl}}"></image>
+									<image  data-pkey="{{indexs}}" data-src="{{bean.list}}" mode='aspectFill' src="{{item.imgurl}}"></image>
 								</view>
 							</view>
 							<view class='btn'>
