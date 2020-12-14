@@ -1353,5 +1353,6 @@ changeKb:function (limit){
     serial_number:'',
     is_view_official_account:false,
     qualityList:[],
+    is_getjj_history:0,
   }
 })

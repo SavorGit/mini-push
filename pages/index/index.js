@@ -103,8 +103,9 @@ Page({
     }, (data, headers, cookies, errMsg, statusCode) => {
       if(app.globalData.qualityList.length==0){
         app.globalData.qualityList = data.result.quality_list;
+        
       }
-      
+      app.globalData.is_getjj_history = data.result.is_open_simplehistory;
       var is_view_eval_waiter = data.result.is_comment;
       that.setData({is_view_eval_waiter: is_view_eval_waiter})
       var is_closeComment = wx.getStorageSync(app.globalData.cache_key+'is_closeComment');

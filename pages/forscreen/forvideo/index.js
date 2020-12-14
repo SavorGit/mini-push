@@ -438,70 +438,79 @@ Page({
         } else {
           var hotel_info = that.data.hotel_info;
           //请求盒子接口   如果盒子接口有数据插入到  forscreen_history_list
-          
-          wx.request({
-            url: 'http://' + hotel_info.intranet_ip + ':8080/h5/projectionLog?openid='+openid+'&box_mac='+box_mac,
-            success:function(res){
-              console.log('盒子数据');
-              console.log(res)
-              if(res.data.code==10000){
-                console.log('云端数据')
-                console.log(forscreen_history_list);
-                
-                
-                var speed_history_list = res.data.result;
-                
-                for(let i in forscreen_history_list){
-                  if(forscreen_history_list[i].is_speed==1 && forscreen_history_list[i].res_type==2){ //视频
-                    for(let j in speed_history_list){
-                      if(forscreen_history_list[i].forscreen_id == speed_history_list[j].forscreen_id){
-                        forscreen_history_list[i].res_type = speed_history_list[j].resource_type;
-                        forscreen_history_list[i].list[0].imgurl   = speed_history_list[j].list[0].media_screenshot_path;
-                        forscreen_history_list[i].is_speed = 1;
-                        forscreen_history_list[i].is_box_have = 1;
-                      }
-                    }
-                    
-                  }else if(forscreen_history_list[i].is_speed==1 && forscreen_history_list[i].res_type==1){//照片
-                    for(let j in speed_history_list){
-                      if(forscreen_history_list[i].forscreen_id == speed_history_list[j].forscreen_id){
-
-                        for(let k in forscreen_history_list[i].list){
-                          forscreen_history_list[i].list[k].imgurl = speed_history_list[j].list[k].media_screenshot_path
+          if(app.globalData.is_getjj_history){
+            wx.request({
+              url: 'http://' + hotel_info.intranet_ip + ':8080/h5/projectionLog?openid='+openid+'&box_mac='+box_mac,
+              success:function(res){
+                console.log('盒子数据');
+                console.log(res)
+                if(res.data.code==10000){
+                  console.log('云端数据')
+                  console.log(forscreen_history_list);
+                  
+                  
+                  var speed_history_list = res.data.result;
+                  
+                  for(let i in forscreen_history_list){
+                    if(forscreen_history_list[i].is_speed==1 && forscreen_history_list[i].res_type==2){ //视频
+                      for(let j in speed_history_list){
+                        if(forscreen_history_list[i].forscreen_id == speed_history_list[j].forscreen_id){
+                          forscreen_history_list[i].res_type = speed_history_list[j].resource_type;
+                          forscreen_history_list[i].list[0].imgurl   = speed_history_list[j].list[0].media_screenshot_path;
+                          forscreen_history_list[i].is_speed = 1;
+                          forscreen_history_list[i].is_box_have = 1;
                         }
-
-                        forscreen_history_list[i].is_speed = 1;
-                        forscreen_history_list[i].is_box_have = 1;
+                      }
+                      
+                    }else if(forscreen_history_list[i].is_speed==1 && forscreen_history_list[i].res_type==1){//照片
+                      for(let j in speed_history_list){
+                        if(forscreen_history_list[i].forscreen_id == speed_history_list[j].forscreen_id){
+  
+                          for(let k in forscreen_history_list[i].list){
+                            forscreen_history_list[i].list[k].imgurl = speed_history_list[j].list[k].media_screenshot_path
+                          }
+  
+                          forscreen_history_list[i].is_speed = 1;
+                          forscreen_history_list[i].is_box_have = 1;
+                        }
                       }
                     }
+  
+                    
+                    
                   }
-
+  
                   
                   
+                }else{
+                  
                 }
-
-                
-                
-              }else{
-                
-              }
-              for(let i=forscreen_history_list.length-1; i>=0; i--){
-                if(forscreen_history_list[i].is_speed == 1 && forscreen_history_list[i].is_box_have==0){
-                  forscreen_history_list.splice(i,1);
+                for(let i=forscreen_history_list.length-1; i>=0; i--){
+                  if(forscreen_history_list[i].is_speed == 1 && forscreen_history_list[i].is_box_have==0){
+                    forscreen_history_list.splice(i,1);
+                  }
                 }
-              }
-              console.log('最终数据');
-              console.log(forscreen_history_list);
-              that.setData({forscreen_history_list:forscreen_history_list})  
-            },fail:function(e){
-              for(let i=forscreen_history_list.length-1; i>=0; i--){
-                if(forscreen_history_list[i].is_speed == 1 && forscreen_history_list[i].is_box_have==0){
-                  forscreen_history_list.splice(i,1);
+                console.log('最终数据');
+                console.log(forscreen_history_list);
+                that.setData({forscreen_history_list:forscreen_history_list})  
+              },fail:function(e){
+                for(let i=forscreen_history_list.length-1; i>=0; i--){
+                  if(forscreen_history_list[i].is_speed == 1 && forscreen_history_list[i].is_box_have==0){
+                    forscreen_history_list.splice(i,1);
+                  }
                 }
+                that.setData({forscreen_history_list:forscreen_history_list})  
               }
-              that.setData({forscreen_history_list:forscreen_history_list})  
+            })
+          }else {
+            for(let i=forscreen_history_list.length-1; i>=0; i--){
+              if(forscreen_history_list[i].is_speed == 1 && forscreen_history_list[i].is_box_have==0){
+                forscreen_history_list.splice(i,1);
+              }
             }
-          })
+            that.setData({forscreen_history_list:forscreen_history_list})  
+          }
+          
         }
       }
       
