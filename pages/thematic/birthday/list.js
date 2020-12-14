@@ -188,13 +188,13 @@ Page({
                 serial_number:app.globalData.serial_number
             }, (data, headers, cookies, errMsg, statusCode) => {
 
-            })
+            },res=>{},{ isShowLoading: false })
             
-          })
+          },res=>{},{ isShowLoading: false })
           
         }
 
-    })
+    },res=>{},{ isShowLoading: false })
     
     
     if(source==1){
@@ -255,7 +255,7 @@ Page({
             wx.navigateTo({
               url: '/pages/thematic/money_blessing/main?openid=' + openid + '&box_mac=' + box_mac,
             })
-          })
+          },res=>{},{ isShowLoading: false })
           
         }
       })
@@ -269,7 +269,7 @@ Page({
           key: 'savor_user_info',
           data: user_info,
         })
-      })
+      },res=>{},{ isShowLoading: false })
       
       mta.Event.stat("refuseauth", {})
     }
@@ -291,7 +291,7 @@ Page({
       box_mac: box_mac,
     }, (data, headers, cookies, errMsg, statusCode) => {
 
-    })
+    },res=>{},{ isShowLoading: false })
     
     mta.Event.stat("closewxauth", {})
   },

@@ -66,26 +66,23 @@ Page({
               var forscreen_id = (new Date()).valueOf();
               var mobile_brand = app.globalData.mobile_brand;
               var mobile_model = app.globalData.mobile_model;
+              app.globalData.serial_number = app.globalData.have_link_box_pre+openid+'_'+(new Date()).valueOf();
               //记录扫码抢红包日志
-              wx.request({
-                url: api_v_url+'/index/recordForScreenPics',
-                header: {
-                  'content-type': 'application/json'
-                },
-                data: {
-                  forscreen_id: forscreen_id,
-                  openid: openid,
-                  box_mac: box_mac,
-                  action: 121,
-                  mobile_brand: mobile_brand,
-                  mobile_model: mobile_model,
+              utils.PostRequest(api_v_url+'/index/recordForScreenPics', {
+                forscreen_id: forscreen_id,
+                openid: openid,
+                box_mac: box_mac,
+                action: 121,
+                mobile_brand: mobile_brand,
+                mobile_model: mobile_model,
 
-                  imgs: '[]',
-                  resource_id: order_id,
-                  serial_number:app.globalData.serial_number
+                imgs: '[]',
+                resource_id: order_id,
+                serial_number:app.globalData.serial_number
+              }, (data, headers, cookies, errMsg, statusCode) => {
 
-                },
               })
+              
               //判断用户是否注册
               wx.request({
                 url: api_url+'/smallapp3/User/isRegister',
@@ -113,88 +110,71 @@ Page({
                       mta.Event.stat("showwxauth", {})
                     } else {
                       //如果已授权   请求获取扫电视红包小程序码结果
-                      wx.request({
-                        url: api_v_url+'/redpacket/getScanresult',
-                        header: {
-                          'content-type': 'application/json'
-                        },
-                        data: {
-                          "open_id": openid,
-                          "order_id": order_id,
-                          "box_mac": box_mac,
-                        },
-                        success: function (res) {
-                          if (res.data.code == 10000) {
-                            app.globalData.serial_number = app.globalData.have_link_box_pre+openid+'_'+(new Date()).valueOf();
-                            var order_status = res.data.result.status;
-                            if (order_status == 4 || order_status == 0) {
-                              wx.redirectTo({
-                                url: '/pages/thematic/money_blessing/receive_h5?jump_url=' + encodeURIComponent(res.data.result.jump_url),
-                              })
 
-                            } else if (order_status == 1 || order_status == 2) {
-                              that.setData({
-                                order_status: res.data.result.status,
-                                avatarUrl: res.data.result.avatarUrl,
-                                bless: res.data.result.bless,
-                                nickName: res.data.result.nickName,
-                                order_id: res.data.result.order_id,
-                                money: res.data.result.money,
-                                is_open_simple: is_open_simple
-                              })
-                              getRedpacketJx(openid);
+                      utils.PostRequest(api_v_url+'/redpacket/getScanresult', {
+                        "open_id": openid,
+                        "order_id": order_id,
+                        "box_mac": box_mac,
+                      }, (data, headers, cookies, errMsg, statusCode) => {
+                        var order_status = data.result.status;
+                        var avatarUrl    = data.result.avatarUrl;
+                        var bless        = data.result.bless;
+                        var nickName     = data.result.nickName;
+                        var order_id     = data.result.order_id;
+                        var money        = data.result.money;
+                        var user_id      = data.result.user_id;
+                        var sign         = data.result.sign;
+                        if (order_status == 4 || order_status == 0) {
+                          wx.redirectTo({
+                            url: '/pages/thematic/money_blessing/receive_h5?jump_url=' + encodeURIComponent(data.result.jump_url),
+                          })
 
-                            } else if (order_status == 3) {
-                              wx.request({
-                                url: api_v_url+'/redpacket/grabBonusResult',
-                                header: {
-                                  'content-type': 'application/json'
-                                },
-                                data: {
-                                  order_id: order_id,
-                                  user_id: res.data.result.user_id,
-                                  sign: res.data.result.sign,
-                                },
-                                success: function (rt) {
-                                  if (rt.data.code == 10000) {
-                                    that.setData({
-                                      order_status: res.data.result.status,
-                                      avatarUrl: res.data.result.avatarUrl,
-                                      bless: res.data.result.bless,
-                                      nickName: res.data.result.nickName,
-                                      order_id: res.data.result.order_id,
-                                      money: res.data.result.money,
-                                    })
-                                  } else {
-                                    wx.reLaunch({
-                                      url: '/pages/index/index',
-                                    })
-                                    wx.showToast({
-                                      title: '红包领取失败',
-                                      icon: 'none',
-                                      duration: 2000,
-                                    })
-                                  }
-                                }
-                              })
-                            } else if (order_status == 5) {
-                              wx.redirectTo({
-                                url: '/pages/thematic/money_blessing/grab_detail?order_id=' + order_id + "&box_mac=" + box_mac,
-                              })
-                            }
-                          } else {
+                        } else if (order_status == 1 || order_status == 2) {
+                          that.setData({
+                            order_status: order_status,
+                            avatarUrl: avatarUrl,
+                            bless: bless,
+                            nickName: nickName,
+                            order_id: order_id,
+                            money: money,
+                            is_open_simple: is_open_simple
+                          })
+                          getRedpacketJx(openid);
+
+                        } else if (order_status == 3) {
+
+                          utils.PostRequest(api_v_url+'/redpacket/grabBonusResult', {
+                            order_id: order_id,
+                            user_id: user_id,
+                            sign: sign,
+                          }, (data, headers, cookies, errMsg, statusCode) => {
+                            that.setData({
+                              order_status: order_status,
+                              avatarUrl: avatarUrl,
+                              bless: bless,
+                              nickName: nickName,
+                              order_id: order_id,
+                              money: money,
+                            })
+                          },res=>{
                             wx.reLaunch({
                               url: '/pages/index/index',
                             })
                             wx.showToast({
-                              title: '该红包不可领取',
+                              title: '红包领取失败',
                               icon: 'none',
                               duration: 2000,
                             })
-                          }
+                          })
 
+                          
+                        } else if (order_status == 5) {
+                          wx.redirectTo({
+                            url: '/pages/thematic/money_blessing/grab_detail?order_id=' + order_id + "&box_mac=" + box_mac,
+                          })
                         }
                       })
+                      
 
                     }
 
@@ -227,26 +207,23 @@ Page({
                   var forscreen_id = (new Date()).valueOf();
                   var mobile_brand = app.globalData.mobile_brand;
                   var mobile_model = app.globalData.mobile_model;
+                  app.globalData.serial_number = app.globalData.have_link_box_pre+openid+'_'+(new Date()).valueOf();
                   //记录扫码抢红包日志
-                  wx.request({
-                    url: api_v_url+'/index/recordForScreenPics',
-                    header: {
-                      'content-type': 'application/json'
-                    },
-                    data: {
-                      forscreen_id: forscreen_id,
-                      openid: openid,
-                      box_mac: box_mac,
-                      action: 121,
-                      mobile_brand: mobile_brand,
-                      mobile_model: mobile_model,
+                  utils.PostRequest(api_v_url+'/index/recordForScreenPics', {
+                    forscreen_id: forscreen_id,
+                    openid: openid,
+                    box_mac: box_mac,
+                    action: 121,
+                    mobile_brand: mobile_brand,
+                    mobile_model: mobile_model,
 
-                      imgs: '[]',
-                      resource_id: order_id,
-                      serial_number:app.globalData.serial_number
+                    imgs: '[]',
+                    resource_id: order_id,
+                    serial_number:app.globalData.serial_number
+                  }, (data, headers, cookies, errMsg, statusCode) => {
 
-                    },
                   })
+                  
                   //判断用户是否注册
                   wx.request({
                     url: api_url+'/smallapp3/User/isRegister',
@@ -272,87 +249,79 @@ Page({
                           mta.Event.stat("showwxauth", {})
                         } else {
                           //如果已授权   请求获取扫电视红包小程序码结果
-                          wx.request({
-                            url: api_v_url+'/redpacket/getScanresult',
-                            header: {
-                              'content-type': 'application/json'
-                            },
-                            data: {
-                              "open_id": openid,
-                              "order_id": order_id,
-                              "box_mac": box_mac
-                            },
-                            success: function (res) {
-                              if (res.data.code == 10000) {
-                                app.globalData.serial_number = app.globalData.have_link_box_pre+openid+'_'+(new Date()).valueOf();
-                                var order_status = res.data.result.status;
-                                if (order_status == 4 || order_status == 0) {
-                                  wx.redirectTo({
-                                    url: '/pages/thematic/money_blessing/receive_h5?jump_url=' + encodeURIComponent(res.data.result.jump_url),
-                                  })
 
-                                } else if (order_status == 1 || order_status == 2) {
-                                  that.setData({
-                                    order_status: res.data.result.status,
-                                    avatarUrl: res.data.result.avatarUrl,
-                                    bless: res.data.result.bless,
-                                    nickName: res.data.result.nickName,
-                                    order_id: res.data.result.order_id,
-                                    money: res.data.result.money,
-                                    is_open_simple: is_open_simple,
-                                  })
-                                  getRedpacketJx(openid);
-                                } else if (order_status == 3) {
-                                  wx.request({
-                                    url: api_v_url+'/redpacket/grabBonusResult',
-                                    header: {
-                                      'content-type': 'application/json'
-                                    },
-                                    data: {
-                                      order_id: order_id,
-                                      user_id: res.data.result.user_id,
-                                      sign: res.data.result.sign,
-                                    },
-                                    success: function (rt) {
-                                      if (rt.data.code == 10000) {
-                                        that.setData({
-                                          order_status: res.data.result.status,
-                                          avatarUrl: res.data.result.avatarUrl,
-                                          bless: res.data.result.bless,
-                                          nickName: res.data.result.nickName,
-                                          order_id: res.data.result.order_id,
-                                          money: res.data.result.money,
-                                        })
-                                      } else {
-                                        wx.reLaunch({
-                                          url: '/pages/index/index',
-                                        })
-                                        wx.showToast({
-                                          title: '红包领取失败',
-                                          icon: 'none',
-                                          duration: 2000,
-                                        })
-                                      }
-                                    }
-                                  })
-                                } else if (order_status == 5) {
-                                  wx.redirectTo({
-                                    url: '/pages/thematic/money_blessing/grab_detail?order_id=' + order_id,
-                                  })
-                                }
-                              } else {
+                          utils.PostRequest(api_v_url+'/redpacket/getScanresult', {
+                            "open_id": openid,
+                            "order_id": order_id,
+                            "box_mac": box_mac
+                          }, (data, headers, cookies, errMsg, statusCode) => {
+                            var order_status = data.result.status;
+                            var avatarUrl    = data.result.avatarUrl;
+                            var bless        = data.result.bless;
+                            var nickName     = data.result.nickName;
+                            var order_id     = data.result.order_id;
+                            var money        = data.result.money;
+                            var user_id      = data.result.user_id;
+                            var sign         = data.result.sign;
+                            if (order_status == 4 || order_status == 0) {
+                              wx.redirectTo({
+                                url: '/pages/thematic/money_blessing/receive_h5?jump_url=' + encodeURIComponent(data.result.jump_url),
+                              })
+
+                            } else if (order_status == 1 || order_status == 2) {
+                              that.setData({
+                                order_status: order_status,
+                                avatarUrl: avatarUrl,
+                                bless: bless,
+                                nickName: nickName,
+                                order_id: order_id,
+                                money: money,
+                                is_open_simple: is_open_simple,
+                              })
+                              getRedpacketJx(openid);
+                            } else if (order_status == 3) {
+
+
+
+                              utils.PostRequest(api_v_url+'/redpacket/grabBonusResult', {
+                                order_id: order_id,
+                                user_id: user_id,
+                                sign: sign,
+                              }, (data, headers, cookies, errMsg, statusCode) => {
+                                that.setData({
+                                  order_status: order_status,
+                                  avatarUrl: avatarUrl,
+                                  bless: bless,
+                                  nickName: nickName,
+                                  order_id: order_id,
+                                  money: money,
+                                })
+                              },res=>{
                                 wx.reLaunch({
                                   url: '/pages/index/index',
                                 })
                                 wx.showToast({
-                                  title: '该红包不可领取',
+                                  title: '红包领取失败',
                                   icon: 'none',
                                   duration: 2000,
                                 })
-                              }
-
+                              })
+                            } else if (order_status == 5) {
+                              wx.redirectTo({
+                                url: '/pages/thematic/money_blessing/grab_detail?order_id=' + order_id,
+                              })
                             }
+                          },res=>{
+                            wx.reLaunch({
+                              url: '/pages/index/index',
+                            })
+                            wx.showToast({
+                              title: '该红包不可领取',
+                              icon: 'none',
+                              duration: 2000,
+                            })
                           })
+                          
 
                         }
 
@@ -377,23 +346,16 @@ Page({
               }
             }
             function getRedpacketJx(openid) {
-              wx.request({
-                url: api_url+'/Smallapp3/Find/redPacketJx',
-                header: {
-                  'content-type': 'application/json'
-                },
-                data: {
-                  openid: openid,
-                },
-                success: function (res) {
-                  if (res.data.code == 10000) {
-                    discovery_list = res.data.result
-                    that.setData({
-                      discovery_list: res.data.result,
-                    })
-                  }
-                }
-              })
+              utils.PostRequest(api_url+'/Smallapp3/Find/redPacketJx', {
+                openid: openid,
+              }, (data, headers, cookies, errMsg, statusCode) => {
+                discovery_list = data.result
+                that.setData({
+                  discovery_list: data.result,
+                })
+                
+              },res=>{},{ isShowLoading: false })
+              
             }
           }
 
@@ -433,6 +395,7 @@ Page({
     openid = user_info.openid;
     is_open_simple = user_info.is_open_simple;
     mta.Event.stat("clickonwxauth", {})
+    app.globalData.serial_number = app.globalData.have_link_box_pre+openid+'_'+(new Date()).valueOf();
     if (res.detail.errMsg == 'getUserInfo:ok') {
       wx.getUserInfo({
         success(rets) {
@@ -449,7 +412,8 @@ Page({
               'encryptedData': rets.encryptedData
             },
             header: {
-              'content-type': 'application/json'
+              'content-type': 'application/json',
+              'serial-number':app.globalData.serial_number
             },
             success: function (res) {
               if (res.data.code == 10000) {
@@ -460,94 +424,78 @@ Page({
                 that.setData({
                   showModal: false,
                 })
-                // wx.navigateTo({
-                //   url: '/pages/thematic/money_blessing/grab?scene='+order_id+'_'+box_mac,
-                // })
-                //that.onLoad()
-                //this.onLoad();
-                //that.reload();
-                //如果已授权   请求获取扫电视红包小程序码结果
-                wx.request({
-                  url: api_v_url+'/redpacket/getScanresult',
-                  header: {
-                    'content-type': 'application/json'
-                  },
-                  data: {
-                    "open_id": openid,
-                    "order_id": order_id,
-                    "box_mac": box_mac,
-                  },
-                  success: function (res) {
-                    if (res.data.code == 10000) {
-                      app.globalData.serial_number = app.globalData.have_link_box_pre+openid+'_'+(new Date()).valueOf();
-                      var order_status = res.data.result.status;
-                      if (order_status == 4 || order_status == 0) {
-                        wx.redirectTo({
-                          url: '/pages/thematic/money_blessing/receive_h5?jump_url=' + encodeURIComponent(res.data.result.jump_url),
-                        })
+                
+                utils.PostRequest(api_v_url+'/redpacket/getScanresult', {
+                  "open_id": openid,
+                  "order_id": order_id,
+                  "box_mac": box_mac,
+                }, (data, headers, cookies, errMsg, statusCode) => {
+                  var order_status = data.result.status;
+                  var avatarUrl    = data.result.avatarUrl;
+                  var bless        = data.result.bless;
+                  var nickName     = data.result.nickName;
+                  var order_id     = data.result.order_id;
+                  var money        = data.result.money;
+                  var user_id      = data.result.user_id;
+                  var sign          = data.result.sign;
+                  if (order_status == 4 || order_status == 0) {
+                    wx.redirectTo({
+                      url: '/pages/thematic/money_blessing/receive_h5?jump_url=' + encodeURIComponent(data.result.jump_url),
+                    })
 
-                      } else if (order_status == 1 || order_status == 2) {
-                        that.setData({
-                          order_status: res.data.result.status,
-                          avatarUrl: res.data.result.avatarUrl,
-                          bless: res.data.result.bless,
-                          nickName: res.data.result.nickName,
-                          order_id: res.data.result.order_id,
-                          money: res.data.result.money,
-                          is_open_simple: is_open_simple
-                        })
-                        getRedpacketJx(openid);
-                      } else if (order_status == 3) {
-                        wx.request({
-                          url: api_v_url+'/redpacket/grabBonusResult',
-                          header: {
-                            'content-type': 'application/json'
-                          },
-                          data: {
-                            order_id: order_id,
-                            user_id: res.data.result.user_id,
-                            sign: res.data.result.sign,
-                          },
-                          success: function (rt) {
-                            if (rt.data.code == 10000) {
-                              that.setData({
-                                order_status: res.data.result.status,
-                                avatarUrl: res.data.result.avatarUrl,
-                                bless: res.data.result.bless,
-                                nickName: res.data.result.nickName,
-                                order_id: res.data.result.order_id,
-                                money: res.data.result.money,
-                              })
-                            } else {
-                              wx.reLaunch({
-                                url: '/pages/index/index',
-                              })
-                              wx.showToast({
-                                title: '红包领取失败',
-                                icon: 'none',
-                                duration: 2000,
-                              })
-                            }
-                          }
-                        })
-                      } else if (order_status == 5) {
-                        wx.redirectTo({
-                          url: '/pages/thematic/money_blessing/grab_detail?order_id=' + order_id,
-                        })
-                      }
-                    } else {
+                  } else if (order_status == 1 || order_status == 2) {
+                    that.setData({
+                      order_status: order_status,
+                      avatarUrl: avatarUrl,
+                      bless: bless,
+                      nickName: nickName,
+                      order_id: order_id,
+                      money: money,
+                      is_open_simple: is_open_simple
+                    })
+                    getRedpacketJx(openid);
+                  } else if (order_status == 3) {
+
+                    utils.PostRequest(api_v_url+'/redpacket/grabBonusResult', {
+                      order_id: order_id,
+                      user_id: user_id,
+                      sign: sign,
+                    }, (data, headers, cookies, errMsg, statusCode) => {
+                      that.setData({
+                        order_status: order_status,
+                        avatarUrl: avatarUrl,
+                        bless: bless,
+                        nickName: nickName,
+                        order_id: order_id,
+                        money: money,
+                      })
+                    },res=>{
                       wx.reLaunch({
                         url: '/pages/index/index',
                       })
                       wx.showToast({
-                        title: '该红包不可领取',
+                        title: '红包领取失败',
                         icon: 'none',
                         duration: 2000,
                       })
-                    }
-
+                    })
+                    
+                  } else if (order_status == 5) {
+                    wx.redirectTo({
+                      url: '/pages/thematic/money_blessing/grab_detail?order_id=' + order_id,
+                    })
                   }
+                },res=>{
+                  wx.reLaunch({
+                    url: '/pages/index/index',
+                  })
+                  wx.showToast({
+                    title: '该红包不可领取',
+                    icon: 'none',
+                    duration: 2000,
+                  })
                 })
+                
               } else {
                 wx.showToast({
                   title: '微信授权登陆失败，请重试',
@@ -563,52 +511,28 @@ Page({
       })
       mta.Event.stat("allowauth", {})
     }else {
-      wx.request({
-        url: api_v_url+'/User/refuseRegister',
-        data: {
-          'openid': openid,
-        },
-        header: {
-          'content-type': 'application/json'
-        },
-        success: function (res) {
-          if (res.data.code == 10000) {
-            user_info['is_wx_auth'] = 1;
-            wx.setStorage({
-              key: 'savor_user_info',
-              data: user_info,
-            })
-
-          } else {
-            wx.showToast({
-              title: '拒绝失败,请重试',
-              icon: 'none',
-              duration: 2000
-            });
-          }
-
-        }
-      })
+      utils.PostRequest(api_v_url+'/User/refuseRegister', {
+        'openid': openid,
+      }, (data, headers, cookies, errMsg, statusCode) => {
+        user_info['is_wx_auth'] = 1;
+        wx.setStorage({
+          key: 'savor_user_info',
+          data: user_info,
+        })
+      },re => { }, { isShowLoading: false })
+      
       mta.Event.stat("refuseauth", {})
     }  
     function getRedpacketJx(openid) {
-      wx.request({
-        url: api_url+'/Smallapp3/Find/redPacketJx',
-        header: {
-          'content-type': 'application/json'
-        },
-        data: {
-          openid: openid,
-        },
-        success: function (res) {
-          if (res.data.code == 10000) {
-            discovery_list = res.data.result
-            that.setData({
-              discovery_list: res.data.result,
-            })
-          }
-        }
-      })
+      utils.PostRequest(api_url+'/Smallapp3/Find/redPacketJx', {
+        openid: openid,
+      }, (data, headers, cookies, errMsg, statusCode) => {
+        discovery_list = data.result
+        that.setData({
+          discovery_list: data.result,
+        })
+      },re => { }, { isShowLoading: false })
+      
     }
     
 
@@ -623,17 +547,13 @@ Page({
     if (box_mac == 'undefined' || box_mac == undefined) {
       box_mac = '';
     }
-    wx.request({
-      url: api_url+'/Smallapp21/index/closeauthLog',
-      header: {
-        'content-type': 'application/json'
-      },
-      data: {
-        openid: openid,
-        box_mac: box_mac,
-      },
+    utils.PostRequest(api_url+'/Smallapp21/index/closeauthLog', {
+      openid: openid,
+      box_mac: box_mac,
+    }, (data, headers, cookies, errMsg, statusCode) => {
 
-    })
+    },re => { }, { isShowLoading: false })
+    
     wx.reLaunch({
       url: '/pages/index/index',
     })
@@ -752,40 +672,25 @@ Page({
     var openid = e.target.dataset.openid;
     var res_id = e.target.dataset.res_id;
     var res_key = e.target.dataset.res_key;
-    wx.request({
-      url: api_url+'/Smallapp/collect/recLogs',
-      header: {
-        'content-type': 'application/json'
-      },
-      data: {
-        'openid': openid,
-        'res_id': res_id,
-        'type': 2,
-        'status': 1,
-      },
-      success: function (e) {
-        var collect_nums = e.data.result.nums;
-        for (var i = 0; i < discovery_list.length; i++) {
-          if (i == res_key) {
-            discovery_list[i].is_collect = 1;
-            discovery_list[i].collect_num = collect_nums;
-          }
+
+    utils.PostRequest(api_url+'/Smallapp/collect/recLogs', {
+      'openid': openid,
+      'res_id': res_id,
+      'type': 2,
+      'status': 1,
+    }, (data, headers, cookies, errMsg, statusCode) => {
+      var collect_nums = data.result.nums;
+      for (var i = 0; i < discovery_list.length; i++) {
+        if (i == res_key) {
+          discovery_list[i].is_collect = 1;
+          discovery_list[i].collect_num = collect_nums;
         }
-        that.setData({
-          discovery_list: discovery_list
-        })
-        
-      },
-      fial: function ({
-        errMsg
-      }) {
-        wx.showToast({
-          title: '网络异常，请稍后重试',
-          icon: 'none',
-          duration: 2000
-        })
       }
-    })
+      that.setData({
+        discovery_list: discovery_list
+      })
+    },res=>{},{ isShowLoading: false })
+    
   }, //收藏资源结束
   //取消收藏
   cancCollect: function (e) {
@@ -793,40 +698,24 @@ Page({
     var res_id = e.target.dataset.res_id;
     var res_key = e.target.dataset.res_key;
     var openid = e.target.dataset.openid;
-    wx.request({
-      url: api_url+'/Smallapp/collect/recLogs',
-      header: {
-        'content-type': 'application/json'
-      },
-      data: {
-        'openid': openid,
-        'res_id': res_id,
-        'type': 2,
-        'status': 0,
-      },
-      success: function (e) {
-        var collect_nums = e.data.result.nums;
-        for (var i = 0; i < discovery_list.length; i++) {
-          if (i == res_key) {
-            discovery_list[i].is_collect = 0;
-            discovery_list[i].collect_num = collect_nums;
-          }
+    utils.PostRequest(api_url+'/Smallapp/collect/recLogs', {
+      'openid': openid,
+      'res_id': res_id,
+      'type': 2,
+      'status': 0,
+    }, (data, headers, cookies, errMsg, statusCode) => {
+      var collect_nums = data.result.nums;
+      for (var i = 0; i < discovery_list.length; i++) {
+        if (i == res_key) {
+          discovery_list[i].is_collect = 0;
+          discovery_list[i].collect_num = collect_nums;
         }
-        that.setData({
-          discovery_list: discovery_list
-        })
-        
-      },
-      fial: function ({
-        errMsg
-      }) {
-        wx.showToast({
-          title: '网络异常，请稍后重试',
-          icon: 'none',
-          duration: 2000
-        })
       }
-    })
+      that.setData({
+        discovery_list: discovery_list
+      })
+    },res=>{},{ isShowLoading: false })
+    
   }, //取消收藏结束
   //点击分享按钮
   onShareAppMessage: function (res) {
@@ -847,38 +736,22 @@ Page({
 
     if (res.from === 'button') {
       // 转发成功
-      wx.request({
-        url: api_url+'/Smallapp/share/recLogs',
-        header: {
-          'content-type': 'application/json'
-        },
-        data: {
-          'openid': openid,
-          'res_id': res_id,
-          'type': 2,
-          'status': 1,
-        },
-        success: function (e) {
-          for (var i = 0; i < discovery_list.length; i++) {
-            if (i == res_key) {
-              discovery_list[i].share_num++;
-            }
+      utils.PostRequest(api_url+'/Smallapp/share/recLogs', {
+        'openid': openid,
+        'res_id': res_id,
+        'type': 2,
+        'status': 1,
+      }, (data, headers, cookies, errMsg, statusCode) => {
+        for (var i = 0; i < discovery_list.length; i++) {
+          if (i == res_key) {
+            discovery_list[i].share_num++;
           }
-          that.setData({
-            discovery_list: discovery_list
-          })
-
-        },
-        fail: function ({
-          errMsg
-        }) {
-          wx.showToast({
-            title: '网络异常，请稍后重试',
-            icon: 'none',
-            duration: 2000
-          })
         }
+        that.setData({
+          discovery_list: discovery_list
+        })
       })
+      
       // 来自页面内转发按钮
       return {
         title: '发现一个好玩的东西',

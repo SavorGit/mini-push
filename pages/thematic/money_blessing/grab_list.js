@@ -1,4 +1,5 @@
 // 抢红包-红包列表 pages/thematic/money_blessing/grab_list.js
+const utils = require('../../../utils/util.js')
 const app = getApp();
 var openid;
 var page = 1;
@@ -23,67 +24,40 @@ Page({
     var user_info = wx.getStorageSync("savor_user_info");
     openid = user_info.openid;
     box_mac = options.box_mac;
-    wx.request({
-      url: api_v_url+'/redpacket/sendList',
-      header: {
-        'content-type': 'application/json'
-      },
-      data: {
-        openid: openid,
-        page:page
-      },
-      success:function(res){
-        //console.log(res);
-        if(res.data.code==10000){
-          that.setData({
-            redpacket_list:res.data.result,
-            box_mac:box_mac,
-          })
+    utils.PostRequest(api_v_url+'/redpacket/sendList', {
+      openid: openid,
+      page:page
+    }, (data, headers, cookies, errMsg, statusCode) => {
+      that.setData({
+        redpacket_list:data.result,
+        box_mac:box_mac,
+      })
 
-        }else {
-          wx.navigateBack({
-            delta: 1
-          })
-          wx.showToast({
-            title: '获取红包列表失败',
-            icon: 'none',
-            duration: 2000
-          })
-        }
-      }
+    },res=>{
+      wx.navigateBack({
+        delta: 1
+      })
+      app.showToast('获取红包列表失败');
+      
     })
+    
   },
   //上拉刷新
   loadMore: function (e) {
     var that = this;
     
     page = page + 1;
-    that.setData({
-      hiddens: false,
-    })
-    wx.request({
-      url: api_v_url+'/redpacket/sendList',
-      header: {
-        'Content-Type': 'application/json'
-      },
-      data: {
-        page: page,
+    
+    utils.PostRequest(api_v_url+'/redpacket/sendList', {
+      page: page,
         openid: openid,
-      },
-      method: "POST",
-      success: function (res) {
-        if (res.data.code == 10000) {
-          that.setData({
-            redpacket_list: res.data.result,
-            hiddens: true,
-          })
-        } else {
-          that.setData({
-            hiddens: true,
-          })
-        }
-      }
+    }, (data, headers, cookies, errMsg, statusCode) => {
+      that.setData({
+        redpacket_list: data.result,
+        hiddens: true,
+      })
     })
+    
   },
 
   /**

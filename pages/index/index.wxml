@@ -37,8 +37,8 @@
 	<view class="hotel-waiter-evaluate-panel theme-rad-panel" wx:if="{{is_view_eval_waiter==1}}">
 		<view class="btn-waiter-evaluate flex-row-center-center" bindtap="gotoPageHotelWaiterEvaluate" data-openid="{{openid}}" data-box_id="{{box_id}}">评价服务员</view>
 	</view>-->
-	<view class="hotel-waiter-evaluate-panel theme-rad-panel" wx:if="{{is_view_eval_waiter==1}}">
-		<image class="btn-waiter-evaluate flex-row-center-center" mode="aspectFill" src="https://oss.littlehotspot.com/Html5/script/mini-push/pages/index/index/waiter_enter.jpg" data-openid="{{openid}}" data-box_id="{{box_id}}" bindtap="gotoPageHotelWaiterEvaluate"></image>
+	<view class="hotel-waiter-evaluate-panel" wx:if="{{is_view_eval_waiter==1}}">
+		<image class="btn-waiter-evaluate flex-row-center-center" mode="aspectFill" src="https://oss.littlehotspot.com/Html5/script/mini-push/pages/index/index/waiter_enter_20201209.png" data-openid="{{openid}}" data-box_id="{{box_id}}" bindtap="gotoPageHotelWaiterEvaluate"></image>
 	</view>
 
 	<!-- 中部横幅图面板 -->
@@ -54,7 +54,7 @@
 	</view>
 	<!-- 功能模块面板 -->
 	<view class='functional-module-panel flex-column-center-center full_width theme-panel'>
-		<view class="row flex-row-center-space_around full_width">
+		<view class="row flex-row-center-center full_width">
 			<form bindsubmit="chooseImage" report-submit="true">
 				<input class="display_hide" name="boxmac" value="{{box_mac}}"></input>
 				<input class="display_hide" name="openid" value="{{openid}}"></input>
@@ -68,7 +68,6 @@
 					</view>
 					<label>照片上电视</label>
 				</button>
-
 			</form>
 			<form bindsubmit="chooseVedio" report-submit="true">
 				<input class="display_hide" name="boxmac" value="{{box_mac}}"></input>
@@ -77,71 +76,64 @@
 				<input class="display_hide" name="wifi_mac" value="{{hotel_info.wifi_mac}}"></input>
 				<input class="display_hide" name="wifi_name" value="{{hotel_info.wifi_name}}"></input>
 				<input class="display_hide" name="wifi_password" value="{{hotel_info.wifi_password}}"></input>
-				<button class="theme-font1" form-type="submit">
+				<button class="flex-column-center-center theme-font1" form-type="submit">
 					<view class="icon flex-column-center-center video {{hotel_info.is_interact==1?'eye-catching':''}}">
 						<image src='/images/icon2/FFFFFF_video.png'></image>
 					</view>
 					<label>视频上电视</label>
 				</button>
-
 			</form>
 			<form bindsubmit="forfiles" report-submit="true">
 				<input class="display_hide" name="boxmac" value="{{box_mac}}"></input>
 				<input class="display_hide" name="openid" value="{{openid}}"></input>
-				<button class="theme-font1" form-type="submit">
+				<button class="flex-column-center-center theme-font1" form-type="submit">
 					<view class="icon flex-column-center-center file {{hotel_info.is_interact==1?'eye-catching':''}}">
 						<image src='/images/icon2/FFFFFF_files.png'></image>
 					</view>
 					<label>文件上电视</label>
 				</button>
-
 			</form>
 			<view wx:if="{{is_test==1}}">
-				<button class="theme-font2" bindtap='testForscreen' data-type="2" data-boxmac="{{box_mac}}" data-openid="{{openid}}">
+				<button class="flex-column-center-center theme-font2" bindtap='testForscreen' data-type="2" data-boxmac="{{box_mac}}" data-openid="{{openid}}">
 					<view class="icon flex-column-center-center pic">
 						<image src='/images/icon2/FFFFFF_picture.png'></image>
 					</view>
 					<label>模拟照片投屏</label>
 				</button>
-
 			</view>
 		</view>
-		<view class="row flex-row-center-space_around full_width">
+		<view class="row flex-row-center-center full_width">
 			<view>
-				<button class="theme-font1" bindtap='showHappy' data-boxmac="{{box_mac}}" data-openid="{{openid}}">
+				<button class="flex-column-center-center theme-font1" bindtap='showHappy' data-boxmac="{{box_mac}}" data-openid="{{openid}}">
 					<view class="icon flex-column-center-center birthday">
 						<image src='/images/icon2/FFFFFF_birthday.png'></image>
 					</view>
 					<label>生日歌点播</label>
 				</button>
-
 			</view>
 			<view>
-				<button class="theme-font1" bindtap='hdgames' data-linkcontent='/games/pages/gamelist' data-boxmac="{{box_mac}}" data-openid="{{openid}}">
+				<button class="flex-column-center-center theme-font1" bindtap='hdgames' data-linkcontent='/games/pages/gamelist' data-boxmac="{{box_mac}}" data-openid="{{openid}}">
 					<view class="icon flex-column-center-center game">
 						<image src='/images/icon2/FFFFFF_game.png'></image>
 					</view>
 					<label>互动小游戏</label>
 				</button>
-
 			</view>
 			<view>
-				<button class="theme-font1" bindtap='forscreenHistory' data-boxmac="{{box_mac}}" data-openid="{{openid}}">
+				<button class="flex-column-center-center theme-font1" bindtap='forscreenHistory' data-boxmac="{{box_mac}}" data-openid="{{openid}}">
 					<view class="icon flex-column-center-center history">
 						<image src='/images/icon2/FFFFFF_history.png'></image>
 					</view>
 					<label>投屏历史</label>
 				</button>
-
 			</view>
 			<view wx:if="{{is_test==1}}">
-				<button class="theme-font1" bindtap='testForscreen' data-type="1" data-boxmac="{{box_mac}}" data-openid="{{openid}}">
+				<button class="flex-column-center-center theme-font1" bindtap='testForscreen' data-type="1" data-boxmac="{{box_mac}}" data-openid="{{openid}}">
 					<view class="icon flex-column-center-center video">
 						<image src='/images/icon2/FFFFFF_video.png'></image>
 					</view>
 					<label>模拟视频投屏</label>
 				</button>
-
 			</view>
 			<!-- <navigator url="/pages/hotel/index">商家入口</navigator> -->
 			<!-- <navigator target="miniProgram" app-id="wxf96ad76f27597d65" path="packages/goods/detail/index?alias=1y5c6oa8cduzn&dc_ps=2328936063642568704.200001" class='theme-button'>前往故宫书店</navigator> -->

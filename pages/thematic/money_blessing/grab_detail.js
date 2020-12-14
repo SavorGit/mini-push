@@ -1,4 +1,5 @@
 // 抢红包-红包详情成功 pages/thematic/money_blessing/grab_detail.js
+const utils = require('../../../utils/util.js')
 const app = getApp();
 var page =1;
 var openid;
@@ -37,37 +38,23 @@ Page({
         duration: 2000
       })
     }
-    wx.request({
-      url: api_v_url+'/redpacket/redpacketDetail',
-      header: {
-        'content-type': 'application/json'
-      },
-      data:{
-        order_id:order_id,
+    utils.PostRequest(api_v_url+'/redpacket/redpacketDetail', {
+      order_id:order_id,
         openid:openid,
         page:page,
-      },
-      success:function(res){
-        if(res.data.code==10000){
-          that.setData({
-            packet_info:res.data.result.info,
-            receive_list: res.data.result.receive_list,
-            openid:openid,
-          })
-
-        }else {
-          wx.navigateBack({
-            delta:1,
-          })
-          wx.showToast({
-            title: '该红包为异常红包',
-            icon: 'none',
-            duration: 2000
-          })
-        }
-      }
-
+    }, (data, headers, cookies, errMsg, statusCode) => {
+      that.setData({
+        packet_info:data.result.info,
+        receive_list: data.result.receive_list,
+        openid:openid,
+      })
+    },res=>{
+      wx.navigateBack({
+        delta:1,
+      })
+      app.showToast('该红包为异常红包')
     })
+    
   },
   cintoindex:function(e){
     wx.reLaunch({
@@ -127,39 +114,19 @@ Page({
     var openid = e.target.dataset.openid;
     page = page + 1;
     var order_id = e.target.dataset.order_id;
-    that.setData({
-      hiddens: false,
-    })
-    wx.request({
-      url: api_v_url + '/redpacket/redpacketDetail',
-      header: {
-        'content-type': 'application/json'
-      },
-      data: {
-        order_id: order_id,
+    
+    utils.PostRequest(api_v_url + '/redpacket/redpacketDetail', {
+      order_id: order_id,
+      openid: openid,
+      page: page,
+    }, (data, headers, cookies, errMsg, statusCode) => {
+      that.setData({
+        packet_info: data.result.info,
+        receive_list: data.result.receive_list,
         openid: openid,
-        page: page,
-      },
-      success: function (res) {
-        if (res.data.code == 10000) {
-          that.setData({
-            packet_info: res.data.result.info,
-            receive_list: res.data.result.receive_list,
-            openid: openid,
-            hiddens: true,
-          })
-
-        } else {
-          wx.showToast({
-            title: '数据异常，请重试',
-            icon: 'none',
-            duration: 2000
-          })
-          that.setData({
-            hiddens: true,
-          })
-        }
-      }
+      })
     })
+
+    
   }
 })
