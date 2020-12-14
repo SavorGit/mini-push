@@ -100,7 +100,7 @@ Page({
             })
           }
         });
-    })
+    },res=>{},{ isShowLoading: false })
 
     
 
@@ -117,6 +117,9 @@ Page({
       wx.reportAnalytics('file_forscreen_report', {
         forscreen_num: 1,
       });
+      wx.showLoading({
+        title: '文件处理中...',
+      })
       var upload_task = wx.uploadFile({
         url: oss_upload_url,
         filePath: file_path,
@@ -134,8 +137,15 @@ Page({
         },
         success: function (res) {
           //console.log(res);
+          wx.hideLoading({
+            
+          })
           var res_eup_time = (new Date()).valueOf();
           dealFile(oss_file_path, file_name, file_size, polling_time, timestamp, res_eup_time, that);
+        },fail:function(){
+          wx.hideLoading({
+            
+          })
         }
       });
       
@@ -289,7 +299,7 @@ Page({
             serial_number:app.globalData.serial_number
         }, (data, headers, cookies, errMsg, statusCode) => {
           
-        })
+        },res=>{},{ isShowLoading: false })
         
       })
     }
@@ -377,7 +387,7 @@ Page({
         
         })
         
-      })
+      },res=>{},{ isShowLoading: false })
 
       
     }
@@ -423,9 +433,9 @@ Page({
         serial_number:app.globalData.serial_number,
       }, (data, headers, cookies, errMsg, statusCode) => {
         
-      })
+      },res=>{},{ isShowLoading: false })
       
-    })
+    },res=>{},{ isShowLoading: false })
 
     
   },
@@ -490,7 +500,7 @@ Page({
           })
         }
       });
-    })
+    },res=>{},{ isShowLoading: false })
 
     
 
@@ -679,9 +689,9 @@ Page({
           serial_number:app.globalData.serial_number,
         }, (data, headers, cookies, errMsg, statusCode) => {
           
-        })
+        },res=>{},{ isShowLoading: false })
         
-      })
+      },res=>{},{ isShowLoading: false })
 
       
 
@@ -713,7 +723,7 @@ Page({
         icon: 'none',
         duration: 2000
       })
-    })
+    },res=>{},{ isShowLoading: false })
 
     
   },
