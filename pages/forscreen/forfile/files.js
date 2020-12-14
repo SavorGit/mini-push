@@ -189,6 +189,9 @@ Page({
           forscreenFirstPic(data.result.imgs,forscreen_id);
         } else if (file_status==1){  //转换中
           //console.log('转换中');
+          wx.showLoading({
+            title: '加载中...',
+          })
           var timer8_0 = setInterval(function () {
             polling_time -= 1;
             //console.log(polling_time);
@@ -204,6 +207,8 @@ Page({
                   oss_suffix: data.result.oss_suffix,
                   forscreen_id: forscreen_id,
                   hiddens: true,
+                })
+                wx.hideLoading({
                 })
                 clearInterval(timer8_0);
                 //console.log('转换成功')
@@ -222,7 +227,7 @@ Page({
                   duration: 2000
                 });
               }
-            })
+            },res=>{},{ isShowLoading: false })
 
            
             if (polling_time == 0) {//超时 提示投屏失败
@@ -262,7 +267,7 @@ Page({
           icon: 'none',
           duration: 2000
         });
-      })
+      },{ isShowLoading: false })
 
       
     }
@@ -584,6 +589,9 @@ Page({
           forscreenFirstPic(data.result.imgs,forscreen_id);
         } else if (file_status == 1) {  //转换中
           //console.log('转换中');
+          wx.showLoading({
+            title: '加载中...',
+          })
           var timer8_0 = setInterval(function () {
             polling_time -= 1;
             //console.log(polling_time);
@@ -599,6 +607,8 @@ Page({
                   img_num: data.result.img_num,
                   forscreen_id: forscreen_id,
                   hiddens: true,
+                })
+                wx.hideLoading({
                 })
                 clearInterval(timer8_0);
                 forscreenFirstPic(data.result.imgs, forscreen_id);
@@ -655,7 +665,7 @@ Page({
           icon: 'none',
           duration: 2000
         });
-      })
+      },{ isShowLoading: false })
 
       
     }
