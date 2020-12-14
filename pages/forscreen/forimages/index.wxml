@@ -56,13 +56,15 @@
 
 				</block>
 				<view class="choose-launch-edition flex-row-center-space_around" wx:if="{{hotel_info.forscreen_method=='1-1'}}">
-					<button class="btn flex-column-center-space_around theme-button-orange" data-launch_type="classic" form-type="submit" disabled='{{is_btn_disabel}}'>
+					<button class="btn flex-column-flex_start-flex_start" data-launch_type="classic" form-type="submit" disabled='{{is_btn_disabel}}'>
+						<image class="background-pic" mode="aspectFit" src="/images/imgs/btn_hd.png"></image>
 						<view class="name">经典投屏</view>
-						<view class="description">适合普通小图、照片</view>
+						<!-- <view class="description">适合普通小图、照片</view> -->
 					</button>
-					<button class="btn flex-column-center-space_around theme-panel-welcome-dark" data-launch_type="speed" form-type="submit" disabled='{{is_btn_disabel}}'>
+					<button class="btn flex-column-flex_start-flex_start" data-launch_type="speed" form-type="submit" disabled='{{is_btn_disabel}}'>
+						<image class="background-pic" mode="aspectFit" src="/images/imgs/btn_rapid.png"></image>
 						<view class="name">极速投屏</view>
-						<view class="description">适合高清大图、照片</view>
+						<!-- <view class="description">适合高清大图、照片</view> -->
 					</button>
 				</view>
 				<view class="choose-launch-edition flex-row-center-space_around" wx:if="{{hotel_info.forscreen_method=='1-0'}}">
@@ -157,22 +159,22 @@
 			<view class='title'>
 				<label class='font_666666_28'>投屏历史</label>
 			</view>
-			<scroll-view scroll-y="true" scroll-with-animation="true" bindscrolltolower="loadMore" data-openid='{{openid}}' data-box_mac='{{box_mac}}' data-launchType="{{launchType}}" >
+			<scroll-view scroll-y="true" scroll-with-animation="true" bindscrolltolower="loadMore" data-openid='{{openid}}' data-box_mac='{{box_mac}}' data-launchType="{{launchType}}">
 				<!-- 有数据时 -->
 				<view class='history_list' wx:if="{{forscreen_history_list !=''}}">
 					<view wx:for="{{forscreen_history_list}}" wx:key="key" wx:for-item="bean" wx:for-index="index">
 						<view wx:if="{{bean.res_type==1}}" class="pic flex-row-flex_start-start">
 							<view class="weui-grids">
 								<view class="weui-grid" wx:for="{{bean.list}}" wx:key="pkey" wx:for-item="item" wx:for-index="indexs">
-									<image  data-pkey="{{indexs}}" data-src="{{bean.list}}" mode='aspectFill' src="{{item.imgurl}}"></image>
+									<image data-pkey="{{indexs}}" data-src="{{bean.list}}" mode='aspectFill' src="{{item.imgurl}}"></image>
 								</view>
 							</view>
 							<view class='btn'>
-								<button class="theme-button-dark" bindtap="replayHistory" data-res_type='{{bean.res_type}}' data-is_speed="{{bean.is_speed}}" data-box_mac='{{box_mac}}'  data-openid='{{openid}}' data-forscreen_id="{{bean.forscreen_id}}" data-res_list='{{bean.list}}' data-avatarUrl="{{avatarUrl}}" data-nickName="{{nickName}}">重投</button>
+								<button class="theme-button-dark" bindtap="replayHistory" data-res_type='{{bean.res_type}}' data-is_speed="{{bean.is_speed}}" data-box_mac='{{box_mac}}' data-openid='{{openid}}' data-forscreen_id="{{bean.forscreen_id}}" data-res_list='{{bean.list}}' data-avatarUrl="{{avatarUrl}}" data-nickName="{{nickName}}">重投</button>
 							</view>
 						</view>
 						<view wx:else class="video flex-row-flex_start-start">
-							<block >
+							<block>
 								<view class="cover" wx:for="{{bean.list}}" wx:key="pkey" wx:for-item="item" wx:for-index="indexs">
 									<navigator url="">
 										<image mode='aspectFill' src="{{item.imgurl}}"></image>
@@ -184,7 +186,7 @@
 									</view>
 								</view>
 								<view class='btn'>
-								<button class="theme-button-dark" bindtap="replayHistory" data-res_type='{{bean.res_type}}' data-is_speed="{{bean.is_speed}}" data-box_mac='{{box_mac}}' data-openid='{{openid}}' data-forscreen_id="{{bean.forscreen_id}}" data-res_list='{{bean.list}}' data-avatarUrl="{{avatarUrl}}" data-nickName="{{nickName}}">重投</button>
+									<button class="theme-button-dark" bindtap="replayHistory" data-res_type='{{bean.res_type}}' data-is_speed="{{bean.is_speed}}" data-box_mac='{{box_mac}}' data-openid='{{openid}}' data-forscreen_id="{{bean.forscreen_id}}" data-res_list='{{bean.list}}' data-avatarUrl="{{avatarUrl}}" data-nickName="{{nickName}}">重投</button>
 								</view>
 							</block>
 							<!-- <block wx:if="{{bean.is_speed==1 && bean.is_box_have==1}}">
@@ -202,7 +204,7 @@
 								<button class="theme-button-dark" bindtap="replayHistory" data-res_type='{{bean.res_type}}' data-box_mac='{{box_mac}}' data-is_speed="1" data-openid='{{openid}}' data-filename="{{bean.filename}}" data-resource_size="{{bean.resource_size}}" data-avatarUrl="{{avatarUrl}}" data-nickName="{{nickName}}" data-forscreen_id="{{bean.forscreen_id}}" data-duration="{{bean.duration}}">重投</button>
 								</view>
 							</block> -->
-							
+
 						</view>
 						<view wx:if="{{forscreen_history_list.length > index+1}}" class='line'></view>
 					</view>

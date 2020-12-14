@@ -40,7 +40,7 @@
 				<view wx:if="{{mall_cart_nums>0}}" class="marker theme-button-red">{{mall_cart_nums}}</view>
 			</view>
 		</view>
-		
+
 		<!-- 主面板 -->
 		<view class="main-panel flex-column-center-flex_start">
 			<!-- <scroll-view class="tab-bar theme-panel" scroll-left="{{scrollLeft}}" scroll-x="true" scroll-with-animation="true">
@@ -77,9 +77,10 @@
 								</view>
 								<view class="right flex-row-center-flex_end">
 									<view class="fa fa-television theme-font5" aria-hidden="true" wx:if="{{bean.is_tv==1}}" data-index="{{index}}" data-goods_id="{{bean.id}}" data-name="{{bean.name}}" data-filename='{{bean.filename}}' data-vediourl="{{bean.tx_url}}" data-boxmac="{{box_mac}}" data-openid="{{openid}}" data-duration="{{bean.duration}}" data-hotel_info="{{hotel_info}}" data-forscreen_url="{{bean.forscreen_url}}" data-resource_size="{{bean.resource_size}}" data-filename="{{bean.filename}}" data-tx_url="{{bean.tx_url}}" bindtap='boxShow'></view>
-									<view wx:if="{{bean.type==10}}" class="btn fa fa-sign-in theme-font5" aria-hidden="true" bindtap="gotoDetail" data-goods_id="{{bean.id}}" data-box_mac="{{box_mac}}" data-type="{{bean.type}}"></view>
+									<image class="btn orange" aria-hidden="true" mode="aspectFit" src="/images/imgs/btn_tv.png"></image>
+									<view wx:if="{{bean.type==10}}" class="btn red fa fa-sign-in theme-font5" aria-hidden="true" bindtap="gotoDetail" data-goods_id="{{bean.id}}" data-box_mac="{{box_mac}}" data-type="{{bean.type}}"></view>
 									<!-- <view wx:else class="btn fa fa-cart-plus theme-font5" aria-hidden="true" bindtap="openBuyGoodsPopWindow" data-goods_info="{{bean}}" data-type="2" data-goods_id="{{bean.id}}"></view> -->
-									<image wx:else class="btn" aria-hidden="true" bindtap="openBuyGoodsPopWindow" data-goods_info="{{bean}}" data-type="2" data-goods_id="{{bean.id}}" src="/images/icon2/F44444_cart.png"></image>
+									<image wx:else class="btn red" aria-hidden="true" mode="aspectFit" bindtap="openBuyGoodsPopWindow" data-goods_info="{{bean}}" data-type="2" data-goods_id="{{bean.id}}" src="/images/icon2/F44444_cart.png"></image>
 								</view>
 							</view>
 						</view>

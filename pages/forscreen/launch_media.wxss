@@ -174,16 +174,18 @@ button[disabled] {
 }
 
 .choose-launch-edition>.btn {
-  width: 300rpx;
-  height: 80rpx;
+  width: 320rpx;
+  height: 96rpx;
   line-height: unset;
-  padding: 20rpx 10rpx;
   font-size: 30rpx;
   font-weight: 400;
-  margin: 0;
+  color: #FFFFFF;
   cursor: pointer;
   box-sizing: unset;
   border-radius: 8rpx;
+  margin: 0;
+  padding: 0;
+  border: 0;
 }
 
 .choose-launch-edition>.btn.big {
@@ -191,7 +193,17 @@ button[disabled] {
   height: 60rpx;
 }
 
+.choose-launch-edition>.btn>.background-pic {
+  width: 320rpx;
+  height: 96rpx;
+  margin-bottom: -96rpx;
+}
+
 .choose-launch-edition>.btn>.name {
+  width: 260rpx;
+  height: 96rpx;
+  line-height: 96rpx;
+  padding-left: 60rpx;
   font-size: 38rpx;
 }
 

@@ -218,8 +218,22 @@
 
 .main-panel>.tab-body .list>.item>.bottom>.bottom>.right>image.btn {
   padding: 8rpx;
-  border: 3rpx solid #F44444;
+  margin-left: 20rpx;
   border-radius: 50%;
+  border-width: 3rpx;
+  border-style: solid;
+}
+
+.main-panel>.tab-body .list>.item>.bottom>.bottom>.right>image.btn:first-child {
+  margin-left: 0;
+}
+
+.main-panel>.tab-body .list>.item>.bottom>.bottom>.right>image.red {
+  border-color: #F44444;
+}
+
+.main-panel>.tab-body .list>.item>.bottom>.bottom>.right>image.orange {
+  border-color: #F68855;
 }
 
 .main-panel>.tab-body .list>.item>.bottom>.bottom>.right>.fa-television {

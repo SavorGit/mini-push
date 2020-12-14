@@ -132,6 +132,9 @@
 					</view>
 					<view class="body">
 						<video class="video" src="{{goods_info.video_url}}"></video>
+						<view class="option-bar flex-row-center-center">
+							<view class="btn launch-tv">电视播放</view>
+						</view>
 					</view>
 				</view>
 				<view class="panel info">

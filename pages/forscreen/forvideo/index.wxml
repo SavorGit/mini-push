@@ -40,13 +40,15 @@
 				</block>
 
 				<view class="choose-launch-edition flex-row-center-space_around" wx:if="{{hotel_info.forscreen_method=='1-1'}}">
-					<button class="btn flex-column-center-space_around theme-button-orange" form-type="submit" data-launch_type="classic" disabled='{{is_classic_disabel}}'>
+					<button class="btn flex-column-flex_start-flex_start" form-type="submit" data-launch_type="classic" disabled='{{is_classic_disabel}}'>
+						<image class="background-pic" mode="aspectFit" src="/images/imgs/btn_hd.png"></image>
 						<view class="name">经典投屏</view>
-						<view class="description">适合小视频、短视频</view>
+						<!-- <view class="description">适合小视频、短视频</view> -->
 					</button>
-					<button class="btn flex-column-center-space_around theme-button-dark" form-type="submit" data-launch_type="speed" disabled='{{is_speed_disabel}}'>
+					<button class="btn flex-column-flex_start-flex_start" form-type="submit" data-launch_type="speed" disabled='{{is_speed_disabel}}'>
+						<image class="background-pic" mode="aspectFit" src="/images/imgs/btn_rapid.png"></image>
 						<view class="name">极速投屏</view>
-						<view class="description">适合长视频、高清视频</view>
+						<!-- <view class="description">适合长视频、高清视频</view> -->
 					</button>
 				</view>
 
@@ -108,8 +110,8 @@
 				<!-- <video class="full_width full_height" src='{{oss_video_url}}' bindplay='onPlayAfterLauch' bindpause='onPauseAfterLauch' bindfullscreenchange='onFullScreenChangeAfterLauch'></video>-->
 				<image class="video-show" src="https://oss.littlehotspot.com/WeChat/MiniProgram/images/launch_video_bg.jpg"></image>
 				<view class="video-size">{{vide_size_str}}</view>
-			</view> 
-			
+			</view>
+
 		</view>
 
 		<!-- 重选 -->
@@ -126,7 +128,7 @@
 			</view>
 		</view>
 
-		<view class='launch_history' >
+		<view class='launch_history'>
 			<view class='title'>
 				<label class='font_666666_28'>投屏历史</label>
 			</view>
@@ -137,15 +139,15 @@
 						<view wx:if="{{bean.res_type==1}}" class="pic flex-row-flex_start-start">
 							<view class="weui-grids">
 								<view class="weui-grid" wx:for="{{bean.list}}" wx:key="pkey" wx:for-item="item" wx:for-index="indexs">
-									<image  data-pkey="{{indexs}}" data-src="{{bean.list}}" mode='aspectFill' src="{{item.imgurl}}"></image>
+									<image data-pkey="{{indexs}}" data-src="{{bean.list}}" mode='aspectFill' src="{{item.imgurl}}"></image>
 								</view>
 							</view>
 							<view class='btn'>
-								<button class="theme-button-dark" bindtap="replayHistory" data-res_type='{{bean.res_type}}' data-is_speed="{{bean.is_speed}}" data-box_mac='{{box_mac}}'  data-openid='{{openid}}' data-forscreen_id="{{bean.forscreen_id}}" data-res_list='{{bean.list}}' data-avatarUrl="{{avatarUrl}}" data-nickName="{{nickName}}">重投</button>
+								<button class="theme-button-dark" bindtap="replayHistory" data-res_type='{{bean.res_type}}' data-is_speed="{{bean.is_speed}}" data-box_mac='{{box_mac}}' data-openid='{{openid}}' data-forscreen_id="{{bean.forscreen_id}}" data-res_list='{{bean.list}}' data-avatarUrl="{{avatarUrl}}" data-nickName="{{nickName}}">重投</button>
 							</view>
 						</view>
 						<view wx:else class="video flex-row-flex_start-start">
-							<block >
+							<block>
 								<view class="cover" wx:for="{{bean.list}}" wx:key="pkey" wx:for-item="item" wx:for-index="indexs">
 									<navigator url="">
 										<image mode='aspectFill' src="{{item.imgurl}}"></image>
@@ -157,7 +159,7 @@
 									</view>
 								</view>
 								<view class='btn'>
-								<button class="theme-button-dark" bindtap="replayHistory" data-res_type='{{bean.res_type}}' data-is_speed="{{bean.is_speed}}" data-box_mac='{{box_mac}}' data-openid='{{openid}}' data-forscreen_id="{{bean.forscreen_id}}" data-res_list='{{bean.list}}' data-avatarUrl="{{avatarUrl}}" data-nickName="{{nickName}}">重投</button>
+									<button class="theme-button-dark" bindtap="replayHistory" data-res_type='{{bean.res_type}}' data-is_speed="{{bean.is_speed}}" data-box_mac='{{box_mac}}' data-openid='{{openid}}' data-forscreen_id="{{bean.forscreen_id}}" data-res_list='{{bean.list}}' data-avatarUrl="{{avatarUrl}}" data-nickName="{{nickName}}">重投</button>
 								</view>
 							</block>
 							<!-- <block wx:if="{{bean.is_speed==1 && bean.is_box_have==1}}">
@@ -175,7 +177,7 @@
 								<button class="theme-button-dark" bindtap="replayHistory" data-res_type='{{bean.res_type}}' data-box_mac='{{box_mac}}' data-is_speed="1" data-openid='{{openid}}' data-filename="{{bean.filename}}" data-resource_size="{{bean.resource_size}}" data-avatarUrl="{{avatarUrl}}" data-nickName="{{nickName}}" data-forscreen_id="{{bean.forscreen_id}}" data-duration="{{bean.duration}}">重投</button>
 								</view>
 							</block> -->
-							
+
 						</view>
 						<view wx:if="{{forscreen_history_list.length > index+1}}" class='line'></view>
 					</view>
