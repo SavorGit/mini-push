@@ -378,11 +378,11 @@ App({
                         msg: '{ "action": 9,"url":"' + qrcode_url + '","openid":"'+openid+'","forscreen_id":"'+timestamp+'","serial_number":"'+that.globalData.serial_number+'"}',
                       },
                       success: function () {
-                        wx.showToast({
+                        /*wx.showToast({
                           title: '呼玛成功，电视即将展示',
                           icon: 'none',
                           duration: 2000
-                        });
+                        });*/
                         wx.request({
                           url: that.globalData.api_v_url + '/index/recordForScreenPics',
                           header: {
@@ -419,11 +419,11 @@ App({
                   msg: '{ "action": 9,"url":"' + qrcode_url + '","openid":"'+openid+'","forscreen_id":"'+timestamp+'","serial_number":"'+that.globalData.serial_number+'"}',
                 },
                 success: function () {
-                  wx.showToast({
+                  /*wx.showToast({
                     title: '呼玛成功，电视即将展示',
                     icon: 'none',
                     duration: 2000
-                  });
+                  });*/
                   wx.request({
                     url: that.globalData.api_v_url + '/index/recordForScreenPics',
                     header: {
