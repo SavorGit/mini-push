@@ -656,8 +656,8 @@ Page({
           return true;
         }else {
           wx.onWifiConnected((result) => {
-            console.log(result);
-            console.log(wifi_name)
+            //console.log(result);
+            //console.log(wifi_name)
             if(result.wifi.SSID==wifi_name){
               //app.showToast('wifi链接成功');
               app.globalData.link_type = 2;
@@ -763,13 +763,13 @@ Page({
       var img_url = up_imgs[i].tmp_img;
       var img_size = up_imgs[i].resource_size;
       
-      console.log("http://" + intranet_ip + ":8080/picH5?isThumbnail=1&imageId=20170301&deviceId=" + openid + "&box_mac=" + box_mac + "&deviceName=" + mobile_brand + "&rotation=90&imageType=1&web=true&forscreen_id=" + forscreen_id + '&forscreen_char=' + forscreen_char + '&filename=' + filename + '&device_model=' + mobile_model + '&resource_size=' + img_size + '&action=4&resource_type=1&avatarUrl=' + avatarUrl + "&nickName=" + nickName + "&forscreen_nums=" + img_lenth+"&serial_number="+app.globalData.serial_number);
+      //console.log("http://" + intranet_ip + ":8080/picH5?isThumbnail=1&imageId=20170301&deviceId=" + openid + "&box_mac=" + box_mac + "&deviceName=" + mobile_brand + "&rotation=90&imageType=1&web=true&forscreen_id=" + forscreen_id + '&forscreen_char=' + forscreen_char + '&filename=' + filename + '&device_model=' + mobile_model + '&resource_size=' + img_size + '&action=4&resource_type=1&avatarUrl=' + avatarUrl + "&nickName=" + nickName + "&forscreen_nums=" + img_lenth+"&serial_number="+app.globalData.serial_number);
       upload_task=wx.uploadFile({
         url: "http://" + intranet_ip + ":8080/picH5?isThumbnail=1&imageId=20170301&deviceId=" + openid + "&box_mac=" + box_mac + "&deviceName=" + mobile_brand + "&rotation=90&imageType=1&web=true&forscreen_id=" + forscreen_id + '&forscreen_char=' + forscreen_char + '&filename=' + filename + '&device_model=' + mobile_model + '&resource_size=' + img_size + '&action=4&resource_type=1&avatarUrl=' + avatarUrl + "&nickName=" + nickName + "&forscreen_nums=" + img_lenth+"&serial_number="+app.globalData.serial_number,
         filePath: img_url,
         name: 'fileUpload',
         success: function(res) {
-          console.log(res)
+          //console.log(res)
           var box_post_data = {'filename':''};
           box_post_data.filename = filename;
           post_img_data.push(box_post_data);
@@ -892,11 +892,11 @@ Page({
             wx.request({
               url: 'http://' + hotel_info.intranet_ip + ':8080/h5/projectionLog?openid='+openid+'&box_mac='+box_mac,
               success:function(res){
-                console.log('盒子数据');
-                console.log(res)
+                //console.log('盒子数据');
+                //console.log(res)
                 if(res.data.code==10000){
-                  console.log('云端数据')
-                  console.log(forscreen_history_list);
+                  //console.log('云端数据')
+                  //console.log(forscreen_history_list);
                   
                   
                   var speed_history_list = res.data.result;
@@ -940,8 +940,8 @@ Page({
                     forscreen_history_list.splice(i,1);
                   }
                 }
-                console.log('最终数据');
-                console.log(forscreen_history_list);
+                //console.log('最终数据');
+                //console.log(forscreen_history_list);
                 that.setData({forscreen_history_list:forscreen_history_list})  
               },fail:function(e){
                 for(let i=forscreen_history_list.length-1; i>=0; i--){
@@ -1176,7 +1176,7 @@ Page({
   },//是否公开显示餐厅信息结束
   
   replayHistory: function(e) {
-    console.log(e);
+    //console.log(e);
     var that = this;
     var box_mac = e.target.dataset.box_mac;
 
@@ -1201,7 +1201,7 @@ Page({
           var forscreen_char = res_list[i].forscreen_char;
           var filename       = res_list[i].resource_id;
           var img_size       = res_list[i].resource_size;
-          console.log("http://" + hotel_info.intranet_ip + ":8080/picH5?isThumbnail=1&imageId=20170301&deviceId=" + openid + "&box_mac=" + box_mac + "&deviceName=" + mobile_brand + "&rotation=90&imageType=1&web=true&forscreen_id=" + forscreen_id + '&forscreen_char=' + forscreen_char + '&filename=' + filename + '&device_model=' + mobile_model + '&resource_size=' + img_size + '&action=4&resource_type=1&avatarUrl=' + avatarUrl + "&nickName=" + nickName + "&forscreen_nums=" + img_lenth+"&serial_number="+app.globalData.serial_number);
+          //console.log("http://" + hotel_info.intranet_ip + ":8080/picH5?isThumbnail=1&imageId=20170301&deviceId=" + openid + "&box_mac=" + box_mac + "&deviceName=" + mobile_brand + "&rotation=90&imageType=1&web=true&forscreen_id=" + forscreen_id + '&forscreen_char=' + forscreen_char + '&filename=' + filename + '&device_model=' + mobile_model + '&resource_size=' + img_size + '&action=4&resource_type=1&avatarUrl=' + avatarUrl + "&nickName=" + nickName + "&forscreen_nums=" + img_lenth+"&serial_number="+app.globalData.serial_number);
           wx.request({
             url: "http://" + hotel_info.intranet_ip + ":8080/picH5?isThumbnail=1&imageId=20170301&deviceId=" + openid + "&box_mac=" + box_mac + "&deviceName=" + mobile_brand + "&rotation=90&imageType=1&web=true&forscreen_id=" + forscreen_id + '&forscreen_char=' + forscreen_char + '&filename=' + filename + '&device_model=' + mobile_model + '&resource_size=' + img_size + '&action=4&resource_type=1&avatarUrl=' + avatarUrl + "&nickName=" + nickName + "&forscreen_nums=" + img_lenth+"&serial_number="+app.globalData.serial_number,
             success:function(res){
@@ -1233,7 +1233,7 @@ Page({
           
           success:function(res){
             if(res.data.code==10000){
-              console.log(res)
+              //console.log(res)
               app.showToast('重投成功，电视即将播放');
             }else{
               app.showToast('重投失败');

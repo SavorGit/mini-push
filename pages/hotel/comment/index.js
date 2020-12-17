@@ -170,7 +170,7 @@ Page({
     }, (data, headers, cookies, errMsg, statusCode) => {
 
 
-      if(staff_id==0){
+      /*if(staff_id==0){
 
         wx.switchTab({
           url: '/pages/index/index',
@@ -183,7 +183,9 @@ Page({
       }else{
         var comment_id = data.result.comment_id;
         that.setData({comment_disable:false,tag_strs:tag_strs,comment_id:comment_id,is_comment:1})
-      }
+      }*/
+      var comment_id = data.result.comment_id;
+      that.setData({comment_disable:false,tag_strs:tag_strs,comment_id:comment_id,is_comment:1})
       var forscreen_id = (new Date()).valueOf();
       that.recordForscreenLog(forscreen_id,openid,box_mac,52);
       

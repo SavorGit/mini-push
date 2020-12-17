@@ -442,11 +442,11 @@ Page({
             wx.request({
               url: 'http://' + hotel_info.intranet_ip + ':8080/h5/projectionLog?openid='+openid+'&box_mac='+box_mac,
               success:function(res){
-                console.log('盒子数据');
-                console.log(res)
+                //console.log('盒子数据');
+                //console.log(res)
                 if(res.data.code==10000){
-                  console.log('云端数据')
-                  console.log(forscreen_history_list);
+                  //console.log('云端数据')
+                  //console.log(forscreen_history_list);
                   
                   
                   var speed_history_list = res.data.result;
@@ -490,8 +490,8 @@ Page({
                     forscreen_history_list.splice(i,1);
                   }
                 }
-                console.log('最终数据');
-                console.log(forscreen_history_list);
+                //console.log('最终数据');
+                //console.log(forscreen_history_list);
                 that.setData({forscreen_history_list:forscreen_history_list})  
               },fail:function(e){
                 for(let i=forscreen_history_list.length-1; i>=0; i--){
@@ -546,16 +546,16 @@ Page({
       })
       wx.startWifi({
         success: function (res) {
-          console.log('wifi_start_sucess')
+          //console.log('wifi_start_sucess')
           wx.getConnectedWifi({
             
             success: function (res) {
-              console.log(res);
+              //console.log(res);
               //console.log('getConnectedWifi_success');
               //第一步链接wifi
               if (res.errMsg == 'getConnectedWifi:ok') {
                 if (res.wifi.SSID == wifi_name) {//链接的是本包间wifi
-                  console.log('wifiok')
+                  //console.log('wifiok')
                   wx.stopWifi({
                   })
                   //第二步开始投屏
@@ -640,8 +640,10 @@ Page({
       BSSID: wifi_mac,
       password: use_wifi_password,
       success: function (reswifi) {
-        
+        console.log(reswifi);
+        console.log('来了')
         if(reswifi.errMsg=='connectWifi:ok' && typeof(reswifi.wifi)!='undefined'){
+          console.log('sssssssssss');
           //app.showToast('wifi链接成功');
           if(video_size>limit_video_size){
             that.burstReadVideoFile(data,hotel_info);
@@ -652,7 +654,10 @@ Page({
           app.globalData.change_link_type = 2;
           return true; 
         }else{
+          console.log('dddd')
           wx.onWifiConnected((result) => {
+            console.log('onWifiConnected')
+            console.log(result);
             if(result.wifi.SSID==wifi_name){
               //app.showToast('wifi链接成功');
               if(video_size>limit_video_size){
@@ -666,7 +671,7 @@ Page({
             }
             
           },()=>{
-            openWind.tip = err_msg;
+            openWind.tip = 'wifi链接失败';
             openWind.isError = true;
             that.setData({
               openWind:openWind
@@ -804,8 +809,12 @@ Page({
 
         
       },fail:function(res){
-        //console.log(res)
-        openWind.tip = '投屏失败，请重试！';
+        if(res.errMsg=='request:fail 似乎已断开与互联网的连接。'){
+          openWind.tip = '请打开设置-找到微信app-打开本地网络开关';
+        }else {
+          openWind.tip = 'aaa投屏失败，请重试！';
+        }
+        
         openWind.isError = true;
         that.setData({
           openWind:openWind,
@@ -962,7 +971,7 @@ Page({
           })
         }
       }).catch(function(reason) {
-        console.log('重发失败')
+        //console.log('重发失败')
         openWind.tip = '投屏失败，请重试！';
         openWind.isError = true;
         that.setData({
@@ -1023,7 +1032,7 @@ Page({
     var duration = data.duration;
     var avatarUrl = data.avatarUrl;
     var nickName = data.nickName;
-    console.log('极简上传');
+    //console.log('极简上传');
     var intranet_ip = hotel_info.intranet_ip;
     var video_url = data.video;
     var mobile_brand = app.globalData.mobile_brand;
@@ -1380,12 +1389,12 @@ Page({
   }, //是否公开显示餐厅信息结束
   
   replayHistory: function(e) {
-    console.log(e);
+    //console.log(e);
     var that = this;
     var box_mac = e.target.dataset.box_mac;
 
     var is_speed = e.target.dataset.is_speed;
-    console.log(is_speed)
+    //console.log(is_speed)
     if(is_speed==1){
       var openid = e.target.dataset.openid;
       var mobile_brand = app.globalData.mobile_brand;
@@ -1406,11 +1415,11 @@ Page({
           var forscreen_char = res_list[i].forscreen_char;
           var filename       = res_list[i].resource_id;
           var img_size       = res_list[i].resource_size;
-          console.log("http://" + hotel_info.intranet_ip + ":8080/picH5?isThumbnail=1&imageId=20170301&deviceId=" + openid + "&box_mac=" + box_mac + "&deviceName=" + mobile_brand + "&rotation=90&imageType=1&web=true&forscreen_id=" + forscreen_id + '&forscreen_char=' + forscreen_char + '&filename=' + filename + '&device_model=' + mobile_model + '&resource_size=' + img_size + '&action=4&resource_type=1&avatarUrl=' + avatarUrl + "&nickName=" + nickName + "&forscreen_nums=" + img_lenth+"&serial_number="+app.globalData.serial_number);
+          //console.log("http://" + hotel_info.intranet_ip + ":8080/picH5?isThumbnail=1&imageId=20170301&deviceId=" + openid + "&box_mac=" + box_mac + "&deviceName=" + mobile_brand + "&rotation=90&imageType=1&web=true&forscreen_id=" + forscreen_id + '&forscreen_char=' + forscreen_char + '&filename=' + filename + '&device_model=' + mobile_model + '&resource_size=' + img_size + '&action=4&resource_type=1&avatarUrl=' + avatarUrl + "&nickName=" + nickName + "&forscreen_nums=" + img_lenth+"&serial_number="+app.globalData.serial_number);
           wx.request({
             url: "http://" + hotel_info.intranet_ip + ":8080/picH5?isThumbnail=1&imageId=20170301&deviceId=" + openid + "&box_mac=" + box_mac + "&deviceName=" + mobile_brand + "&rotation=90&imageType=1&web=true&forscreen_id=" + forscreen_id + '&forscreen_char=' + forscreen_char + '&filename=' + filename + '&device_model=' + mobile_model + '&resource_size=' + img_size + '&action=4&resource_type=1&avatarUrl=' + avatarUrl + "&nickName=" + nickName + "&forscreen_nums=" + img_lenth+"&serial_number="+app.globalData.serial_number,
             success:function(res){
-              console.log(res);
+              //console.log(res);
               if(res.data.code==10000){
                 if(i==res_list.length - 1){
                   app.showToast('重投成功，电视即将播放');
@@ -1434,12 +1443,12 @@ Page({
         var filename     = e.target.dataset.forscreen_id;
         var resouce_size = res_list[0].resource_size;
         var duration     = parseInt(res_list[0].duration);
-        console.log('http://' + hotel_info.intranet_ip + ':8080/videoH5?deviceId=' + openid + '&box_mac=' + box_mac + '&deviceName=' + mobile_brand + '&web=true&forscreen_id=' + forscreen_id + '&filename=' + filename + '&device_model=' + mobile_model + '&resource_size=' + resouce_size + '&duration=' + duration + '&action=2&resource_type=2&avatarUrl=' + avatarUrl + "&nickName=" + nickName+'&serial_number='+app.globalData.serial_number)
+        //console.log('http://' + hotel_info.intranet_ip + ':8080/videoH5?deviceId=' + openid + '&box_mac=' + box_mac + '&deviceName=' + mobile_brand + '&web=true&forscreen_id=' + forscreen_id + '&filename=' + filename + '&device_model=' + mobile_model + '&resource_size=' + resouce_size + '&duration=' + duration + '&action=2&resource_type=2&avatarUrl=' + avatarUrl + "&nickName=" + nickName+'&serial_number='+app.globalData.serial_number)
         wx.request({
           url: 'http://' + hotel_info.intranet_ip + ':8080/videoH5?deviceId=' + openid + '&box_mac=' + box_mac + '&deviceName=' + mobile_brand + '&web=true&forscreen_id=' + forscreen_id + '&filename=' + filename + '&device_model=' + mobile_model + '&resource_size=' + resouce_size + '&duration=' + duration + '&action=2&resource_type=2&avatarUrl=' + avatarUrl + "&nickName=" + nickName+'&serial_number='+app.globalData.serial_number,
           
           success:function(res){
-            console.log(res)
+            //console.log(res)
             if(res.data.code==10000){
               app.showToast('重投成功，电视即将播放');
             }else{
@@ -1683,7 +1692,7 @@ Page({
 
   },
   removeSavedFile:function(e){
-    console.log(this.data.upload_vedio_temp)
+    //console.log(this.data.upload_vedio_temp)
     
     if(app.globalData.sys_info.platform=='android'){
       fm.unlink({

@@ -296,13 +296,10 @@ Page({
     if (box_mac == '') {
       app.scanQrcode(pageid);
     } else {
-      var openid = e.currentTarget.dataset.openid;
-      var vediourl = e.currentTarget.dataset.vediourl;
-      var forscreen_char = e.currentTarget.dataset.name;
-      var filename = e.currentTarget.dataset.filename; //文件名
-      var timestamp = (new Date()).valueOf();
-      var mobile_brand = app.globalData.mobile_brand;
-      var mobile_model = app.globalData.mobile_model;
+      console.log(e);
+
+
+      
 
 
       var forscreen_id = e.currentTarget.dataset.goods_id;
@@ -311,36 +308,30 @@ Page({
       var duration = e.currentTarget.dataset.duration;
       var resource_size = e.currentTarget.dataset.resource_size;
       var forscreen_url = e.currentTarget.dataset.forscreen_url;
-      var filename = e.currentTarget.dataset.filename;
       var tx_url = e.currentTarget.dataset.tx_url;
+      var qrcode_url = e.currentTarget.dataset.qrcode_url;
       var pubdetail = [{
         'duration': 0,
         'resource_size': 0,
         'forscreen_url': '',
-        'res_id': 0
+        'res_id': 0,
+        'res_url':'',
+        'forscreen_char':'',
+        'qrcode_url':'',
       }];
       for (var i = 0; i < 1; i++) {
         pubdetail[0].duration = duration;
         pubdetail[0].resource_size = resource_size;
         pubdetail[0].forscreen_url = forscreen_url;
         pubdetail[0].res_id = forscreen_id;
-        pubdetail[0].filename = filename;
         pubdetail[0].res_url = tx_url;
+        pubdetail[0].forscreen_char = '';
+        pubdetail[0].qrcode_url = qrcode_url;
       }
       var hotel_info = e.currentTarget.dataset.hotel_info;
-      app.boxShow(box_mac, forscreen_id, pubdetail, res_type, res_nums, 5, hotel_info, self);
+      app.boxShow(box_mac, forscreen_id, pubdetail, res_type, res_nums, 13, hotel_info, self);
 
-      // 调用记录播放次数接口
-      utils.PostRequest(api_url + '/Smallapp4/demand/recordPlaynum', {
-        openid: openid,
-        res_id: forscreen_id
-      }, (data, headers, cookies, errMsg, statusCode) => {
-        let program_list = self.data.program_list;
-        program_list[listIndex].play_num = data.result.play_num;
-        self.setData({
-          program_list: program_list
-        });
-      });
+      
 
       mta.Event.stat('optimizationClickTvPlay', {
         'goodsid': forscreen_id

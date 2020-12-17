@@ -198,9 +198,19 @@ App({
         if(action==5){
           var netty_action = 5
           var url = that.globalData.oss_url+"/"+pubdetail[i]['forscreen_url']
+          var msg = '{ "action":'+netty_action+', "url": "' + url+ '", "filename":"' + pubdetail[i]['filename'] + '","openid":"' + openid + '","resource_type":2,"video_id":"' + pubdetail[i]['res_id'] + '","avatarUrl":"' + avatarUrl + '","nickName":"' + nickName + '","forscreen_id":"' + forscreen_id + '","resource_size":"'+pubdetail[i]['resource_size']+'","serial_number":"'+serial_number+'"}';
+        }else if(action ==13){
+          var msg = {};
+          msg.action = 13;
+          msg.forscreen_id = forscreen_id;
+          msg.goods_id = pubdetail[i].res_id;
+          msg.qrcode_url = pubdetail[i].qrcode_url;
+          msg.url      = pubdetail[i].forscreen_url;
+          msg = JSON.stringify(msg)
         }else {
           var netty_action = 2
           var url = pubdetail[i]['forscreen_url']
+          var msg = '{ "action":'+netty_action+', "url": "' + url+ '", "filename":"' + pubdetail[i]['filename'] + '","openid":"' + openid + '","resource_type":2,"video_id":"' + pubdetail[i]['res_id'] + '","avatarUrl":"' + avatarUrl + '","nickName":"' + nickName + '","forscreen_id":"' + forscreen_id + '","resource_size":"'+pubdetail[i]['resource_size']+'","serial_number":"'+serial_number+'"}';
         }
         wx.request({
           url: that.globalData.api_url + '/Netty/Index/pushnetty',
@@ -210,7 +220,7 @@ App({
           method: "POST",
           data: {
             box_mac: box_mac,
-            msg: '{ "action":'+netty_action+', "url": "' + url+ '", "filename":"' + pubdetail[i]['filename'] + '","openid":"' + openid + '","resource_type":2,"video_id":"' + pubdetail[i]['res_id'] + '","avatarUrl":"' + avatarUrl + '","nickName":"' + nickName + '","forscreen_id":"' + forscreen_id + '","resource_size":"'+pubdetail[i]['resource_size']+'","serial_number":"'+serial_number+'"}',
+            msg: msg,
           },
           success: function (result) {
             wx.showToast({
