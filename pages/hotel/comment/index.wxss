@@ -619,6 +619,11 @@
   box-sizing: border-box;
 }
 
+.evaluate-result .body>.no-gratuity>.body>.btn-group>.go-home {
+  width: 420rpx;
+  height: 80rpx;
+  line-height: 80rpx;
+}
 
 
 
