@@ -465,7 +465,8 @@
 }
 
 /* ==================================== 底部按钮面板【结果页】 ==================================== */
-.evaluate-result>.body>.gratuity {
+.evaluate-result>.body>.gratuity,
+.evaluate-result>.body>.no-gratuity {
   border-top: 10rpx solid #f5f6f8;
   /* height: 580rpx; */
 }
@@ -572,7 +573,8 @@
   font-size: 28rpx;
 }
 
-.evaluate-result .body>.gratuity>.body>.btn-group>.btn {
+.evaluate-result .body>.gratuity>.body>.btn-group>.btn,
+.evaluate-result .body>.no-gratuity>.body>.btn-group>.btn {
   width: 690rpx;
   height: 100rpx;
   line-height: 100rpx;
@@ -591,7 +593,8 @@
   text-decoration: underline;
 }
 
-.evaluate-result .body>.gratuity>.body>.btn-group {
+.evaluate-result .body>.gratuity>.body>.btn-group,
+.evaluate-result .body>.no-gratuity>.body>.btn-group {
   height: 200rpx;
 }
 
@@ -615,6 +618,8 @@
   padding: 5rpx;
   box-sizing: border-box;
 }
+
+
 
 
 

@@ -197,7 +197,7 @@
 		-->
 
 		<!-- 打赏面板 -->
-		<view class="panel gratuity" wx:if="{{is_open_reward==1}}">
+		<view wx:if="{{is_open_reward==1}}" class="panel gratuity">
 			<view class="head flex-column-flex_start-center">
 				<view class="title-bar flex-row-center-center">
 					<view class="text theme-font1">感谢餐厅人员的服务</view>
@@ -222,9 +222,18 @@
 						<view class="unit theme-font2">元</view>
 					</view>
 				</view>
-				<view class="btn-group flex-column-center-center" >
+				<view class="btn-group flex-column-center-center">
 					<button class="btn pay theme-button-red" bindtap="payReward">确认支付</button>
 					<view class="btn index theme-font5" bindtap="gotoHome">返回首页</view>
+				</view>
+			</view>
+		</view>
+
+		<!-- 无打赏面板 -->
+		<view wx:else class="panel no-gratuity">
+			<view class="body">
+				<view class="btn-group flex-column-center-center">
+					<button class="btn go-home theme-button-red" bindtap="gotoHome">返回首页</button>
 				</view>
 			</view>
 		</view>
