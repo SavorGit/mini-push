@@ -63,7 +63,6 @@ Page({
         is_open_reward:is_open_reward,
         is_reward:is_reward,
         staff_user_info:data.result.staff_user_info,
-        tags:data.result.tags,
         comment_str:'',
         reward_list:data.result.reward_money,
         cacsi:data.result.cacsi,
@@ -316,118 +315,7 @@ Page({
     }
     this.setData({showWindow:showWindow})
   },
-  /*subStar:function(e){
-    var star_list = this.data.star_list;
-    var keys = e.target.dataset.keys;
-    var flag = keys +1;
-    
-    if(flag<star_list.length){
-      for(let i in star_list){
-        if(i>keys){
-          star_list[i].is_select = false
-        }
-      }
-      this.setData({star_list:star_list})
-    }
-  },
-  addStar:function(e){
-    var star_list = this.data.star_list;
-    var keys = e.target.dataset.keys;
-    for(let i in star_list){
-      if(i<=keys){
-        star_list[i].is_select = true;
-      }
-    }
-    this.setData({star_list:star_list})
-  },*/
   
-  /*clickTag:function(e){
-    var comment_str = this.data.comment_str;
-    var value = e.target.dataset.value;
-    var keys  = e.target.dataset.keys;
-    var tags  = this.data.tags;
-    for(let i in tags){
-      if(i== keys){
-        tags[i].selected = true
-      }else {
-        tags[i].selected = false
-      }
-    }
-    this.setData({tags:tags})
-    if(comment_str==''){
-      comment_str += value
-    }else {
-      comment_str += ','+value
-    }
-    
-    this.setData({comment_str:comment_str})
-  },*/
-
-
-  /*subComment:function(openid,score,comment_str,staff_id,box_mac){
-    var that = this;
-    utils.PostRequest(api_v_url + '/Comment/subComment', {
-      openid: openid,
-      score:score,
-      content:comment_str,
-      staff_id :staff_id,
-      box_mac:box_mac
-    }, (data, headers, cookies, errMsg, statusCode) => {
-      that.setData({comment_disable:false})
-      
-      wx.navigateBack({
-        delta: 1,
-        success:function(){
-          app.showToast('感谢您的支持！',2000,'success')
-        }
-      })
-      var forscreen_id = (new Date()).valueOf();
-      that.recordForscreenLog(forscreen_id,openid,box_mac,52);
-      
-    })
-  },*/
-  
-  /*
-  submitComment:function(e){
-    console.log(e);
-    //return false;
-    var that = this;
-    var star_list = this.data.star_list;
-    var comment_str = this.data.comment_str.replace(/\s+/g, '');
-    var staff_user_info = this.data.staff_user_info;
-    var openid = this.data.openid;
-    var box_mac = e.detail.value.box_mac;
-
-    var score = 0;
-    var flag_score = 0;
-    
-    for(let i in star_list){
-      if(star_list[i].is_select==true){
-        score  +=1;
-      }
-    }
-    var is_reward = that.data.is_reward;
-    
-    if(is_reward==1){//打赏
-      var reward_id = 0;
-      var reward_list = that.data.reward_list;
-      for(let i in reward_list){
-        if(reward_list[i].selected===true){
-          reward_id = reward_list[i].id;
-          break;
-        }
-      }
-      if(reward_id==0){
-        app.showToast('请选择打赏金额');
-        return false;
-      }
-      that.setData({comment_disable:true})
-      that.payReward(openid,score,comment_str,staff_user_info.staff_id,box_mac,reward_id);
-    }else {//不打赏
-      that.subComment(openid,score,comment_str,staff_user_info.staff_id,box_mac)
-    }
-    
-  },*/
   gotoHome:function(e){
     wx.navigateBack({
       delta: 1,
