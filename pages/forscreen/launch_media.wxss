@@ -4,7 +4,7 @@
 button[disabled] {
   color: rgba(102, 102, 102, 1) !important;
   border-color: rgb(187, 187, 187) !important;
-  background-color: unset !important;
+  background-color: rgba(0, 0, 0, 0.1) !important;
   border-width: 1px;
   border-style: solid;
 }
@@ -191,6 +191,10 @@ button[disabled] {
 .choose-launch-edition>.btn.big {
   width: 480rpx;
   height: 60rpx;
+}
+
+.choose-launch-edition>.btn.big>.name {
+  padding-left: 0;
 }
 
 .choose-launch-edition>.btn>.background-pic {

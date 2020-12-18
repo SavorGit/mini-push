@@ -40,12 +40,12 @@
 				</block>
 
 				<view class="choose-launch-edition flex-row-center-space_around" wx:if="{{hotel_info.forscreen_method=='1-1'}}">
-					<button class="btn flex-column-flex_start-flex_start" form-type="submit" data-launch_type="classic">
+					<button class="btn flex-column-flex_start-flex_start" form-type="submit" data-launch_type="classic" disabled='{{is_classic_disabel}}'>
 						<image class="background-pic" mode="aspectFit" src="/images/imgs/btn_hd.png"></image>
 						<view class="name">高清视频</view>
 						<!-- <view class="description">适合小视频、短视频</view> -->
 					</button>
-					<button class="btn flex-column-flex_start-flex_start" form-type="submit" data-launch_type="speed">
+					<button class="btn flex-column-flex_start-flex_start" form-type="submit" data-launch_type="speed" disabled='{{is_classic_disabel}}'>
 						<image class="background-pic" mode="aspectFit" src="/images/imgs/btn_rapid.png"></image>
 						<view class="name">极速投屏</view>
 						<!-- <view class="description">适合长视频、高清视频</view> -->
