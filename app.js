@@ -204,7 +204,7 @@ App({
           msg.action = 13;
           msg.forscreen_id = forscreen_id;
           msg.goods_id = pubdetail[i].res_id;
-          msg.qrcode_url = pubdetail[i].qrcode_url;
+          msg.codeUrl = pubdetail[i].qrcode_url;
           msg.url      = pubdetail[i].forscreen_url;
           msg = JSON.stringify(msg)
         }else {

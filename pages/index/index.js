@@ -516,19 +516,24 @@ Page({
       if (box_mac == '') {
         app.scanQrcode(pageid);
       } else {
-        /*that.setData({
+        if(app.globalData.sys_info.platform=='android'){
+          that.setData({
           showMe: true,
-        })*/
-        var box_mac = e.detail.value.boxmac;
-        var openid = e.detail.value.openid;
-        wx.navigateTo({
-          url: '/pages/forscreen/forfile/files?box_mac=' + box_mac + '&openid=' + openid ,
-          success: function (e) {
-            that.setData({
-              showMe: false
-            })
-          }
-        })
+          })
+        }else {
+          var box_mac = e.detail.value.boxmac;
+          var openid = e.detail.value.openid;
+          wx.navigateTo({
+            url: '/pages/forscreen/forfile/files?box_mac=' + box_mac + '&openid=' + openid ,
+            success: function (e) {
+              that.setData({
+                showMe: false
+              })
+            }
+          })
+        }
+        
+        
       }
     }
     mta.Event.stat('gotoForscreenFile', { 'linktype': app.globalData.link_type, "boxmac": box_mac })
