@@ -55,7 +55,7 @@
 	<!-- 功能模块面板 -->
 	<view class='functional-module-panel flex-column-center-center full_width theme-panel'>
 		<view class="row flex-row-center-center full_width">
-			<form bindsubmit="chooseImage" report-submit="true">
+			<form bindsubmit="chooseImage" >
 				<input class="display_hide" name="boxmac" value="{{box_mac}}"></input>
 				<input class="display_hide" name="openid" value="{{openid}}"></input>
 				<input class="display_hide" name="intranet_ip" value="{{hotel_info.intranet_ip}}"></input>
@@ -69,7 +69,7 @@
 					<label>照片上电视</label>
 				</button>
 			</form>
-			<form bindsubmit="chooseVedio" report-submit="true">
+			<form bindsubmit="chooseVedio" >
 				<input class="display_hide" name="boxmac" value="{{box_mac}}"></input>
 				<input class="display_hide" name="openid" value="{{openid}}"></input>
 				<input class="display_hide" name="intranet_ip" value="{{hotel_info.intranet_ip}}"></input>
@@ -83,7 +83,7 @@
 					<label>视频上电视</label>
 				</button>
 			</form>
-			<form bindsubmit="forfiles" report-submit="true">
+			<form bindsubmit="forfiles" >
 				<input class="display_hide" name="boxmac" value="{{box_mac}}"></input>
 				<input class="display_hide" name="openid" value="{{openid}}"></input>
 				<button class="flex-column-center-center theme-font1" form-type="submit">
