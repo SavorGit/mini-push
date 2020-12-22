@@ -1,0 +1,7 @@
+{
+  "enablePullDownRefresh": false,
+  "usingComponents": {
+    "modal": "/components/modal/modal",
+    "modal2": "/components/modal/modal-2"
+  }
+}

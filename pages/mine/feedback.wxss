@@ -1,0 +1,122 @@
+/* pages/mine/feedback.wxss */
+/**
+ * 意见反馈页面
+ */
+
+
+.item {
+  width: calc(100% - 60rpx);
+  height: calc(100% - 30rpx);
+  padding: 15rpx 30rpx;
+}
+
+.row {
+  width: 100%;
+  height: 100%;
+}
+
+.row>.label,
+.row>.value {
+  height: 100%;
+  font-size: 28rpx;
+}
+
+.row>.label {
+  width: 120rpx;
+  line-height: 2.555555555555555555555556;
+}
+
+.row>.value {
+  width: calc(100% - 120rpx);
+}
+
+.row>.value>.input {
+  width: 100%;
+  height: 100%;
+}
+
+.row>.btn {
+  width: 480rpx;
+  height: 80rpx;
+  line-height: 80rpx;
+  text-align: center;
+  font-size: 28rpx;
+  border-radius: 10rpx;
+  border: 0;
+  margin: 0;
+  padding: 0;
+}
+
+.textarea {
+  height: 434rpx;
+}
+
+.textarea>.row>.value {
+  width: calc(100% - 10rpx);
+  height: calc(100% - 10rpx);
+  padding: 5rpx;
+  border: 3rpx solid #BEBEBE;
+}
+
+.text {
+  height: 60rpx;
+}
+
+.text>.row {
+  border-bottom: 3rpx solid #E0E0E0;
+}
+
+
+/* ====================================== 提交成功弹窗 ====================================== */
+.window {
+  width: calc(100% - 20rpx);
+  height: calc(100% - 20rpx);
+  padding: 10rpx;
+}
+
+.window>.panel {
+  width: 100%;
+  padding: 10rpx 0;
+}
+
+.window>.status {
+  height: 180rpx;
+}
+
+.window>.status>.icon {
+  width: 128rpx;
+  height: 128rpx;
+  line-height: 128rpx;
+  text-align: center;
+  font-size: 128rpx;
+  color: rgb(75, 208, 71);
+}
+
+.window>.status>.value {
+  font-size: 36rpx;
+  font-weight: 700;
+}
+
+.window>.tips {
+  height: calc(100% - 330rpx);
+}
+
+.window>.tips>.tip {
+  font-size: 28rpx;
+}
+
+.window>.buttons {
+  height: 100rpx;
+}
+
+.window>.buttons>.btn {
+  width: 400rpx;
+  height: 80rpx;
+  line-height: 80rpx;
+  text-align: center;
+  font-size: 28rpx;
+  border-radius: 10rpx;
+  border: 0;
+  margin: 0;
+  padding: 0;
+}

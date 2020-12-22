@@ -1,5 +1,6 @@
 {
   "pages": [
+    "pages/mine/feedback",
     "pages/index/index",
     "pages/shopping/index",
     "pages/demand/goods_detail",
