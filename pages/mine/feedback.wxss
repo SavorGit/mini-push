@@ -4,6 +4,10 @@
  */
 
 
+.placeholder-input {
+  font-size: 28rpx;
+}
+
 .item {
   width: calc(100% - 60rpx);
   height: calc(100% - 30rpx);
@@ -47,23 +51,27 @@
   padding: 0;
 }
 
-.textarea {
+.item.textarea {
   height: 434rpx;
 }
 
-.textarea>.row>.value {
+.item.textarea>.row>.value {
   width: calc(100% - 10rpx);
   height: calc(100% - 10rpx);
   padding: 5rpx;
   border: 3rpx solid #BEBEBE;
 }
 
-.text {
+.item.text {
   height: 60rpx;
 }
 
-.text>.row {
+.item.text>.row {
   border-bottom: 3rpx solid #E0E0E0;
+}
+
+.item.button {
+  height: 200rpx;
 }
 
 

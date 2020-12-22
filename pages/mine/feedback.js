@@ -17,7 +17,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    this.setData({ showModal: true });
+
   },
 
   /**
@@ -67,5 +67,66 @@ Page({
    */
   onShareAppMessage: function () {
 
+  },
+
+  /**
+   * 投资意见反馈表单
+   * @param {*} e 事件
+   */
+  submitFeedback: function (e) {
+    let self = this;
+    let timerId = null;
+    function cutSecond() {
+      let closeSuccessWindowSecond = self.data.closeSuccessWindowSecond;
+      if (timerId != null && timerId != undefined) {
+        clearTimeout(timerId);
+      }
+      if (closeSuccessWindowSecond <= 0) {
+        wx.switchTab({
+          url: '/pages/index/index',
+          fail: function (res) {
+            console.error(res);
+          }
+        });
+        return;
+      }
+      timerId = setTimeout(function () {
+        self.setData({ closeSuccessWindowSecond: closeSuccessWindowSecond - 1 }, cutSecond);
+      }, 1000);
+    }
+    self.setData({ showSuccessWindow: true, closeSuccessWindowSecond: 5 }, cutSecond);
+  },
+
+  /**
+   * 点击进入首页按钮
+   * @param {*} e 事件
+   */
+  gotoIndex: function (e) {
+    let self = this;
+    wx.switchTab({
+      url: '/pages/index/index',
+      fail: function (res) {
+        console.error(res);
+      }
+    });
+  },
+
+  /**
+   * 校验手机号
+   * @param {*} e 
+   */
+  checkPhone: function (e) {
+    if (e.detail.keyCode >= 48 && e.detail.keyCode <= 57) {// 主键盘数字
+      return;
+    } else if (e.detail.keyCode >= 96 && e.detail.keyCode <= 105) {// 小键盘数字
+      return;
+    } else if (e.detail.keyCode == 8) {// 回退按钮
+      return;
+    } else if (e.detail.keyCode == 46) {// 删除按钮
+      return;
+    }
+    // console.log(e, e.detail.keyCode);
+    var value = parseInt(e.detail.value);
+    this.setData({ phone: value });
   }
 })
