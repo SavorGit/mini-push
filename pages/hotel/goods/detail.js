@@ -12,6 +12,7 @@ var goods_id;
 var pur_uid;
 var openid;
 var box_id;
+var box_mac;
 let SavorUtils = {
   User: {
 
@@ -52,6 +53,7 @@ Page({
     notice:'',
     showModal: false, //显示授权登陆弹窗
     is_have_gift:false,
+    box_mac:''
   },
 
   /**
@@ -67,7 +69,7 @@ Page({
         openid: app.globalData.openid
       });
       SavorUtils.User.isRegister(self); //判断用户是否注册
-
+      
 
       if (typeof (options.q) != 'undefined') {
         var q = decodeURIComponent(options.q);
@@ -100,12 +102,14 @@ Page({
             is_share: false
           })
         }
+        self.isHaveCallBox(app.globalData.openid);
         mta.Event.stat('jumpGoodsDetail',{'goodsid':goods_id})
       }
       //获取商品详情
       self.getGoodsInfo(goods_id);
       //优选推荐
       self.getRecommend(goods_id, 1, 3);
+      
 
     } else {
       app.openidCallback = openid => {
@@ -146,17 +150,31 @@ Page({
                 is_share: false
               })
             }
+            self.isHaveCallBox(openid);
             mta.Event.stat('jumpGoodsDetail',{'goodsid':goods_id})
           }
           //获取商品详情
           self.getGoodsInfo(goods_id);
           //优选推荐
           self.getRecommend(goods_id, 1, 3);
+          
         }
       }
     }
   },
+  isHaveCallBox:function(openid){
+    var that = this;
+    utils.PostRequest(api_v_url + '/index/isHaveCallBox', {
+      openid: openid,
+    }, (data, headers, cookies, errMsg, statusCode) => {
+      if (data.result.is_have == 1) {//如果已连接盒子
+        that.setData({box_mac: data.result.box_mac})
+      }
+    })
+
+  },
   recordScanCodeLog:function(openid,goods_type,goods_id,box_id){
+    var that = this;
     utils.PostRequest(api_v_url + '/Index/gencode', {
       openid:openid,
       type:goods_type,
@@ -165,7 +183,7 @@ Page({
       mobile_brand:app.globalData.mobile_brand,
       mobile_model:app.globalData.mobile_model
     }, (data, headers, cookies, errMsg, statusCode) => {
-      
+      that.setData({box_mac:data.result.box_mac})
     })
   },
   getGoodsInfo: function (goods_id) {
@@ -614,6 +632,47 @@ Page({
       url: '/pages/hotel/goods/detail?goods_id='+gift_id,
     })
   },
+  //电视播放
+  boxShow(e) {
+    console.log(e)
+    let self = this;
+    var box_mac = e.currentTarget.dataset.boxmac;
+
+
+    if (box_mac == '') {
+      app.scanQrcode();
+    } else {
+      var forscreen_id = e.currentTarget.dataset.goods_id;
+      var res_type = 2;
+      var res_nums = 1;
+      var duration = e.currentTarget.dataset.duration;
+      var resource_size = e.currentTarget.dataset.resource_size;
+      var forscreen_url = e.currentTarget.dataset.forscreen_url;
+      var tx_url = e.currentTarget.dataset.tx_url;
+      var qrcode_url = e.currentTarget.dataset.qrcode_url;
+      var pubdetail = [{
+        'duration': 0,
+        'resource_size': 0,
+        'forscreen_url': '',
+        'res_id': 0,
+        'res_url':'',
+        'forscreen_char':'',
+        'qrcode_url':'',
+      }];
+      for (var i = 0; i < 1; i++) {
+        pubdetail[0].duration = duration;
+        pubdetail[0].resource_size = resource_size;
+        pubdetail[0].forscreen_url = forscreen_url;
+        pubdetail[0].res_id = forscreen_id;
+        pubdetail[0].res_url = tx_url;
+        pubdetail[0].forscreen_char = '';
+        pubdetail[0].qrcode_url = qrcode_url;
+      }
+      var hotel_info = e.currentTarget.dataset.hotel_info;
+      app.boxShow(box_mac, forscreen_id, pubdetail, res_type, res_nums, 13, hotel_info, self);
+
+    }
+  }, //电视播放结束
   /**
    * 生命周期函数--监听页面初次渲染完成
    */

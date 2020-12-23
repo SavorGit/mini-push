@@ -1,6 +1,5 @@
 {
   "pages": [
-    "pages/mine/feedback",
     "pages/index/index",
     "pages/shopping/index",
     "pages/demand/goods_detail",
@@ -41,6 +40,7 @@
     "pages/mine/assist/assistlist",
     "pages/mine/address/index",
     "pages/mine/address/add",
+    "pages/mine/feedback",
     "pages/share/pic",
     "pages/share/video",
 

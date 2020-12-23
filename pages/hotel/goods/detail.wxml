@@ -132,7 +132,7 @@
 					</view>
 					<view class="body">
 						<video class="video" src="{{goods_info.video_url}}"></video>
-						<view class="option-bar flex-row-center-center">
+						<view class="option-bar flex-row-center-center" bindtap="boxShow" data-goods_id="{{goods_info.goods_id}}" data-name="{{goods_info.name}}"  data-vediourl="{{goods_info.tx_url}}" data-boxmac="{{box_mac}}" data-openid="{{openid}}" data-duration="{{goods_info.duration}}"  data-forscreen_url="{{goods_info.forscreen_url}}" data-resource_size="{{goods_info.resource_size}}" data-qrcode_url="{{goods_info.qrcode_url}}"  >
 							<view class="btn launch-tv">电视播放</view>
 						</view>
 					</view>

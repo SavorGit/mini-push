@@ -812,7 +812,7 @@ Page({
         if(res.errMsg=='request:fail 似乎已断开与互联网的连接。'){
           openWind.tip = '请打开设置-找到微信app-打开本地网络开关';
         }else {
-          openWind.tip = 'aaa投屏失败，请重试！';
+          openWind.tip = '投屏失败，请重试！';
         }
         
         openWind.isError = true;
