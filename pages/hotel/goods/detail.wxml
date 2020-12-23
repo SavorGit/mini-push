@@ -96,7 +96,7 @@
 		</view>
 
 		<!-- 投屏Banner -->
-		<view wx:if="{{is_share==true}}" class="panel launch-banner flex-column-center-flex_start">
+		<view wx:if="{{is_share==true}}" class="panel launch-banner flex-column-center-flex_start" bindtap="gotoIndex">
 			<image class="banner" mode="aspectFit" src="/images/imgs/launch_banner.png"></image>
 		</view>
 

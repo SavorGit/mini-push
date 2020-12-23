@@ -121,6 +121,27 @@ Page({
       wx.reLaunch({
         url: launch_url,
       })
+    }else if(typeof(options.official)!='undefined'){
+      console.log(options)
+      var s = options.official
+      var wxmpopenid = options.wxmpopenid;
+      utils.PostRequest(api_url + '/Smallapp21/index/getQrcontent', {
+        content: s
+      }, (data, headers, cookies, errMsg, statusCode) => {
+        var scene = data.result.content;
+        linkHotelBox(scene,wxmpopenid);
+
+      },res=>{
+        wx.reLaunch({
+          url: '/pages/index/index',
+        })
+        wx.showToast({
+          title: '二维码已过期',
+          icon: 'none',
+          duration: 2000
+        });
+      },{ isShowLoading: false })
+      
     }else{
       wx.reLaunch({
         url: '/pages/index/index',
@@ -172,13 +193,12 @@ Page({
         }
       });
     }
-    function linkHotelBox(scene){
+    function linkHotelBox(scene,wxmpopenid=''){
       console.log(scene);
       var scene_arr = scene.split('_');
       box_mac = scene_arr[0];
       code_type = scene_arr[1];
       var jz_time = scene_arr[2];
-      var mp_wxopenid = '';
       if(typeof(scene_arr[3])!='undefined' && scene_arr[3]==2){
         wx.setStorageSync('savor_is_minimal', 1);
       }else {
@@ -186,9 +206,6 @@ Page({
           wx.removeStorageSync('savor_is_minimal')
         } catch (e) {
           // Do something when catch error
-        }
-        if(typeof(scene_arr[3])!='undefined'){
-          mp_wxopenid = scene_arr[3];
         }
       }
       var that = this
@@ -228,10 +245,14 @@ Page({
               }
             }
             setInfos(box_mac, openid, code_type);
-            if(mp_wxopenid!=''){//如果是从公众号过来的，小程序
-              that.boundSmallapp(openid,mp_wxopenid);
+            if(wxmpopenid!=''){//如果是从公众号过来的，小程序 绑定
+              utils.PostRequest(api_v_url+'/user/bindOffiaccount', {
+                wxmpopenid:wxmpopenid,
+                openid : openid,
+              }, (data, headers, cookies, errMsg, statusCode) => {
+          
+              })
             }
-
           },res=>{
             wx.reLaunch({
               url: '/pages/index/index',
@@ -275,12 +296,5 @@ Page({
       
     }
   },
-  bdSmallapp:function(openid,mp_wxopenid){
-    utils.PostRequest(api_v_url+'/aa/bb', {
-      mp_wxopenid:mp_wxopenid,
-      openid : openid,
-    }, (data, headers, cookies, errMsg, statusCode) => {
-
-    })
-  }
+ 
 })

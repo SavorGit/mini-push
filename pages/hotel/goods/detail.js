@@ -53,7 +53,7 @@ Page({
     notice:'',
     showModal: false, //显示授权登陆弹窗
     is_have_gift:false,
-    box_mac:''
+    box_mac:'',  //是否连接盒子的mac
   },
 
   /**
@@ -673,6 +673,11 @@ Page({
 
     }
   }, //电视播放结束
+  gotoIndex:function(e){
+    wx.reLaunch({
+      url: '/pages/index/index',
+    })
+  },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */

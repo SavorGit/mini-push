@@ -132,6 +132,10 @@ Page({
           box_mac: data.result.box_mac,
           hotel_info: data.result,
         });
+      }else {
+        that.setData({
+          box_mac:''
+        })
       }
     })
   },
