@@ -8,41 +8,43 @@
 <template is="navigationBarForTwoLevel" data='{{statusBarHeight: statusBarHeight,titleText:"意见反馈"}}' />
 
 <scroll-view class='container theme-container' style='height: calc(100vh - {{statusBarHeight + 46}}px);' scroll-y="true" scroll-with-animation="true">
-	<view class="page">
-		<view class="item textarea">
-			<view class="row flex-row-center-center">
-				<view class="value">
-					<textarea class="input" placeholder="请输入您的意见"></textarea>
+	<form>
+		<view class="page">
+			<view class="item textarea">
+				<view class="row flex-row-center-center">
+					<view class="value">
+						<textarea class="input" placeholder="请输入您的意见" maxlength="300"></textarea>
+					</view>
+				</view>
+			</view>
+			<view class="item text">
+				<view class="row flex-row-center-space_between">
+					<view class="label flex-row-center-flex_start theme-font1">联系人</view>
+					<view class="value">
+						<input class="input" placeholder="请输入" maxlength="10"></input>
+					</view>
+				</view>
+			</view>
+			<view class="item text">
+				<view class="row flex-row-center-space_between">
+					<view class="label flex-row-center-flex_start theme-font1">联系电话</view>
+					<view class="value">
+						<input class="input" placeholder="请输入" type="number" maxlength="11" value="{{phone}}" bindinput="checkPhone"></input>
+					</view>
+				</view>
+			</view>
+			<view class="item button">
+				<view class="row flex-row-center-center">
+					<view class="btn submit theme-button-welcome-dark" bindtap="submitFeedback">提交</view>
 				</view>
 			</view>
 		</view>
-		<view class="item text">
-			<view class="row flex-row-center-space_between">
-				<view class="label flex-row-center-flex_start theme-font1">联系人</view>
-				<view class="value">
-					<input class="input" placeholder="请输入"></input>
-				</view>
-			</view>
-		</view>
-		<view class="item text">
-			<view class="row flex-row-center-space_between">
-				<view class="label flex-row-center-flex_start theme-font1">联系电话</view>
-				<view class="value">
-					<input class="input" placeholder="请输入"></input>
-				</view>
-			</view>
-		</view>
-		<view class="item button">
-			<view class="row flex-row-center-center">
-				<view class="btn submit theme-button-welcome-dark">提交</view>
-			</view>
-		</view>
-	</view>
+	</form>
 </scroll-view>
 
 
 <!-- 提交成功弹窗 -->
-<modal2 show="{{showModal}}" width="690rpx" height='480rpx' border-radius="10rpx" title-text='' confirm-text='' cancel-text='' bindclickMask='modalClickMask'>
+<modal2 show="{{showSuccessWindow}}" width="690rpx" height='480rpx' border-radius="10rpx" title-text='' confirm-text='' cancel-text='' bindclickMask='modalClickMask'>
 	<view class="window">
 		<view class="panel status flex-column-center-space_around">
 			<view class="icon fa fa-check-circle" aria-hidden="true"></view>
@@ -53,7 +55,11 @@
 			<view class="tip theme-font1">感谢您的建议，您的建议是我们前进的动力！</view>
 		</view>
 		<view class="panel buttons flex-column-center-flex_start">
-			<view class="btn goto-index theme-button-welcome-dark">5S 进入首页</view>
+			<view class="btn goto-index theme-button-welcome-dark" bindtap="gotoIndex">{{closeSuccessWindowSecond}}S 进入首页</view>
 		</view>
 	</view>
 </modal2>
+
+
+<!-- 微信授权登录 -->
+<template is="wxAuthLoginOp" data='{{showOp: showModal}}' />
