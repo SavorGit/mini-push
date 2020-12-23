@@ -1415,6 +1415,7 @@ Page({
           var forscreen_char = res_list[i].forscreen_char;
           var filename       = res_list[i].resource_id;
           var img_size       = res_list[i].resource_size;
+          console.log(forscreen_char);
           //console.log("http://" + hotel_info.intranet_ip + ":8080/picH5?isThumbnail=1&imageId=20170301&deviceId=" + openid + "&box_mac=" + box_mac + "&deviceName=" + mobile_brand + "&rotation=90&imageType=1&web=true&forscreen_id=" + forscreen_id + '&forscreen_char=' + forscreen_char + '&filename=' + filename + '&device_model=' + mobile_model + '&resource_size=' + img_size + '&action=4&resource_type=1&avatarUrl=' + avatarUrl + "&nickName=" + nickName + "&forscreen_nums=" + img_lenth+"&serial_number="+app.globalData.serial_number);
           wx.request({
             url: "http://" + hotel_info.intranet_ip + ":8080/picH5?isThumbnail=1&imageId=20170301&deviceId=" + openid + "&box_mac=" + box_mac + "&deviceName=" + mobile_brand + "&rotation=90&imageType=1&web=true&forscreen_id=" + forscreen_id + '&forscreen_char=' + forscreen_char + '&filename=' + filename + '&device_model=' + mobile_model + '&resource_size=' + img_size + '&action=4&resource_type=1&avatarUrl=' + avatarUrl + "&nickName=" + nickName + "&forscreen_nums=" + img_lenth+"&serial_number="+app.globalData.serial_number,
@@ -1474,6 +1475,7 @@ Page({
         tmp.filename      = res_list[i].filename;
         tmp.resource_size = res_list[i].resource_size;
         tmp.quality_type  = res_list[i].quality_type;
+        tmp.forscreen_char = res_list[i].forscreen_char;
         tmp.duration      = 0;
         pubdetail[i] = tmp;
       }

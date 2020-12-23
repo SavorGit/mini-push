@@ -77,6 +77,7 @@ Page({
       tmp.filename      = res_list[i].filename;
       tmp.resource_size = res_list[i].resource_size;
       tmp.quality_type  = res_list[i].quality_type;
+      tmp.forscreen_char = res_list[i].forscreen_char;
       tmp.duration      = 0;
       pubdetail[i] = tmp;
     }

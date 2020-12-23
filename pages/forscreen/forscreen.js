@@ -26,7 +26,7 @@ Page({
       })
     },res=>{},{ isShowLoading: false })
     wx.showToast({
-      title: '扫码中，请稍后',
+      title: '连接中，请稍后',
     })
     var sysconfig = wx.getStorageSync("savor_now_time");
     app.globalData.change_link_type = 0;
@@ -178,6 +178,7 @@ Page({
       box_mac = scene_arr[0];
       code_type = scene_arr[1];
       var jz_time = scene_arr[2];
+      var mp_wxopenid = '';
       if(typeof(scene_arr[3])!='undefined' && scene_arr[3]==2){
         wx.setStorageSync('savor_is_minimal', 1);
       }else {
@@ -185,6 +186,9 @@ Page({
           wx.removeStorageSync('savor_is_minimal')
         } catch (e) {
           // Do something when catch error
+        }
+        if(typeof(scene_arr[3])!='undefined'){
+          mp_wxopenid = scene_arr[3];
         }
       }
       var that = this
@@ -224,6 +228,9 @@ Page({
               }
             }
             setInfos(box_mac, openid, code_type);
+            if(mp_wxopenid!=''){//如果是从公众号过来的，小程序
+              that.boundSmallapp(openid,mp_wxopenid);
+            }
 
           },res=>{
             wx.reLaunch({
@@ -268,4 +275,12 @@ Page({
       
     }
   },
+  bdSmallapp:function(openid,mp_wxopenid){
+    utils.PostRequest(api_v_url+'/aa/bb', {
+      mp_wxopenid:mp_wxopenid,
+      openid : openid,
+    }, (data, headers, cookies, errMsg, statusCode) => {
+
+    })
+  }
 })
