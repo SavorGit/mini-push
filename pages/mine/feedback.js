@@ -2,7 +2,11 @@
 /**
  * 意见反馈页面
  */
-Page({
+const utils = require('../../utils/util.js')
+var mta = require('../../utils/mta_analysis.js')
+const app = getApp();
+var api_v_url = app.globalData.api_v_url;
+ Page({
 
   /**
    * 页面的初始数据
@@ -17,9 +21,50 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    var that = this;
+    wx.hideShareMenu();
+    if (app.globalData.openid && app.globalData.openid != '' && typeof(app.globalData.openid)!='undefined') {
+      that.setData({
+        openid: app.globalData.openid
+      })
 
+    }else {
+
+      app.openidCallback = openid => { 
+        if (openid != '' && typeof(app.globalData.openid)!='undefined') {
+          that.setData({
+            openid: openid
+          })
+        }
+      }
+    }
   },
+  submitFd:function(e){
+    var that = this;
 
+    var content = e.detail.value.content;
+    var contact = e.detail.value.contact.replace(/\s+/g, '');
+    var mobile  = e.detail.value.mobile.replace(/\s+/g, '');
+    var openid = that.data.openid;
+    console.log(mobile);
+    if(content.replace(/\s+/g, '').length==0){
+      app.showToast('请输入您的意见内容');
+      return false;
+    }
+    if(!app.checkMobile(mobile) && mobile!=''){
+      return false;
+    }
+    utils.PostRequest(api_v_url + '/content/feedback', {
+      openid:  openid,
+      content: content,
+      contact: contact,
+      mobile : mobile,
+      mobile_brand  : app.globalData.mobile_model,
+      mobile_model  : app.globalData.mobile_model,
+    }, (data, headers, cookies, errMsg, statusCode) => {
+      that.submitFeedback();
+    })
+  },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
@@ -115,7 +160,7 @@ Page({
    * 校验手机号
    * @param {*} e 
    */
-  checkPhone: function (e) {
+  /*checkPhone: function (e) {
     if (e.detail.keyCode >= 48 && e.detail.keyCode <= 57) {// 主键盘数字
       return;
     } else if (e.detail.keyCode >= 96 && e.detail.keyCode <= 105) {// 小键盘数字
@@ -128,5 +173,5 @@ Page({
     // console.log(e, e.detail.keyCode);
     var value = parseInt(e.detail.value);
     this.setData({ phone: value });
-  }
+  }*/
 })

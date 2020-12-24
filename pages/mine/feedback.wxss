@@ -4,6 +4,10 @@
  */
 
 
+.theme-container {
+  background-color: #FFFFFF;
+}
+
 .placeholder-input {
   font-size: 28rpx;
 }

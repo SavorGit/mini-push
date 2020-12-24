@@ -5,15 +5,14 @@
 
 
 <import src="/pages/template/commons" />
-<template is="navigationBarForTwoLevel" data='{{statusBarHeight: statusBarHeight,titleText:"意见反馈"}}' />
-
+<template is="navigationBarToIndex" data='{{statusBarHeight: statusBarHeight,titleText:"意见反馈"}}' />
 <scroll-view class='container theme-container' style='height: calc(100vh - {{statusBarHeight + 46}}px);' scroll-y="true" scroll-with-animation="true">
-	<form>
+	<form bindsubmit="submitFd">
 		<view class="page">
 			<view class="item textarea">
 				<view class="row flex-row-center-center">
 					<view class="value">
-						<textarea class="input" placeholder="请输入您的意见" maxlength="300"></textarea>
+						<textarea class="input" placeholder="请输入您的意见" maxlength="300" name="content"></textarea>
 					</view>
 				</view>
 			</view>
@@ -21,7 +20,7 @@
 				<view class="row flex-row-center-space_between">
 					<view class="label flex-row-center-flex_start theme-font1">联系人</view>
 					<view class="value">
-						<input class="input" placeholder="请输入" maxlength="10"></input>
+						<input class="input" placeholder="请输入" maxlength="10" name="contact"></input>
 					</view>
 				</view>
 			</view>
@@ -29,13 +28,13 @@
 				<view class="row flex-row-center-space_between">
 					<view class="label flex-row-center-flex_start theme-font1">联系电话</view>
 					<view class="value">
-						<input class="input" placeholder="请输入" type="number" maxlength="11" value="{{phone}}" bindinput="checkPhone"></input>
+						<input class="input" placeholder="请输入" type="number" maxlength="11" name="mobile"></input>
 					</view>
 				</view>
 			</view>
 			<view class="item button">
 				<view class="row flex-row-center-center">
-					<view class="btn submit theme-button-welcome-dark" bindtap="submitFeedback">提交</view>
+					<button class="btn submit theme-button-welcome-dark" form-type="submit">提交</button>
 				</view>
 			</view>
 		</view>
