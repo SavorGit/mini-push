@@ -137,7 +137,7 @@ Page({
           box_mac:''
         })
       }
-    })
+    },res=>{},{isShowLoading: false})
   },
   //轮播图
   getBannerList: function () {
@@ -239,7 +239,7 @@ Page({
         })
       }*/
 
-    });
+    },res=>{},{isShowLoading: false});
   },
   //选择分类
   /*selectCate: function (e) {
