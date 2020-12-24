@@ -54,6 +54,7 @@ Page({
     showModal: false, //显示授权登陆弹窗
     is_have_gift:false,
     box_mac:'',  //是否连接盒子的mac
+    oss_url:app.globalData.oss_url
   },
 
   /**
