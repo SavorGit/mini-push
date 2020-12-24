@@ -276,6 +276,13 @@ Page({
           
           mta.Event.stat('scanQrcodeResult', { 'linktype': 0 })
         } else if (is_have == 1) {
+          utils.PostRequest(api_v_url+'/forscreen/helpimage', {
+            'box_mac': box_mac,
+            'openid' : openid,
+            
+          }, (data, headers, cookies, errMsg, statusCode) => {
+
+          })
           mta.Event.stat('scanQrcodeResult', { 'linktype': 1 })
         }
         app.globalData.serial_number = app.globalData.have_link_box_pre+openid+'_'+(new Date()).valueOf();
