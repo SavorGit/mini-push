@@ -96,8 +96,8 @@
 		</view>
 
 		<!-- 投屏Banner -->
-		<view wx:if="{{1==1}}" class="panel launch-banner flex-column-center-flex_start" bindtap="gotoIndex">
-			<image class="banner" mode="aspectFit" src="{{oss_url}}/media/resource/launch_banner.png"></image>
+		<view wx:if="{{is_share==true}}" class="panel launch-banner flex-column-center-flex_start" bindtap="gotoIndex">
+			<image class="banner" mode="aspectFit" src="{{oss_url}}/WeChat/MiniProgram/LaunchScreen/source/images/imgs/launch_banner.png"></image>
 		</view>
 
 		<!-- 优选推荐面板 -->
