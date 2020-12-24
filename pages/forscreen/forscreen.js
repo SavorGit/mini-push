@@ -282,7 +282,7 @@ Page({
             
           }, (data, headers, cookies, errMsg, statusCode) => {
 
-          })
+          },res=>{},{isShowLoading: false})
           mta.Event.stat('scanQrcodeResult', { 'linktype': 1 })
         }
         app.globalData.serial_number = app.globalData.have_link_box_pre+openid+'_'+(new Date()).valueOf();
