@@ -622,21 +622,31 @@ App({
           wx.scanCode({
             onlyFromCamera: true,
             success: (res) => {
+              console.log(res)
               
-              if (res.scanType == 'QR_CODE') {
-                var selemite = res.result.indexOf("?");
-                var params = res.result.substring(selemite, res.result.length);
+              console.log(res.result.indexOf("weixin.qq.com") )
 
-                params = '/pages/forscreen/forscreen' + params;
-                wx.navigateTo({
-                  url: params
-                })
-              } else if (res.scanType == 'WX_CODE') {
-                
-                wx.navigateTo({
-                  url: '/' + res.path
-                })
+              if(res.result.indexOf("weixin.qq.com") >0){
+                that.showToast('识别失败，请使用微信扫描电视二维码！',5000)
+              }else {
+                if (res.scanType == 'QR_CODE') {
+                  var selemite = res.result.indexOf("?");
+                  var params = res.result.substring(selemite, res.result.length);
+  
+                  params = '/pages/forscreen/forscreen' + params;
+                  wx.navigateTo({
+                    url: params
+                  })
+                } else if (res.scanType == 'WX_CODE') {
+                  
+                  wx.navigateTo({
+                    url: '/' + res.path
+                  })
+                }
               }
+              
+            },fail:function(res){
+              console.log(res)
             }
           })
           let pages = getCurrentPages();

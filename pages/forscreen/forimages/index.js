@@ -578,6 +578,7 @@ Page({
         success: function (res) {
           wx.getConnectedWifi({
             success: function (res) {
+              console.log(res);
               //第一步链接wifi
               if (res.errMsg == 'getConnectedWifi:ok') {
                 if (res.wifi.SSID == wifi_name) {//链接的是本包间wifi
@@ -650,6 +651,7 @@ Page({
       BSSID: wifi_mac,
       password: use_wifi_password,
       success: function (reswifi) {
+        console.log(reswifi)
         if(reswifi.errMsg=='connectWifi:ok' && typeof(reswifi.wifi)!='undefined'){
           app.globalData.link_type = 2;
           that.speedUploadImg(hotel_info,data);
@@ -890,7 +892,7 @@ Page({
           //请求盒子接口   如果盒子接口有数据插入到  forscreen_history_list
           if(app.globalData.is_getjj_history){
             wx.request({
-              url: 'http://' + hotel_info.intranet_ip + ':8080/h5/projectionLog?openid='+openid+'&box_mac='+box_mac,
+              url: 'http://' + hotel_info.intranet_ip + ':8080/h5/projectionLog?deviceId='+openid+'&box_mac='+box_mac+'&openid='+openid,
               success:function(res){
                 //console.log('盒子数据');
                 //console.log(res)

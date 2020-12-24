@@ -440,7 +440,7 @@ Page({
           //请求盒子接口   如果盒子接口有数据插入到  forscreen_history_list
           if(app.globalData.is_getjj_history){
             wx.request({
-              url: 'http://' + hotel_info.intranet_ip + ':8080/h5/projectionLog?openid='+openid+'&box_mac='+box_mac,
+              url: 'http://' + hotel_info.intranet_ip + ':8080/h5/projectionLog?deviceId='+openid+'&box_mac='+box_mac+'&openid='+openid,
               success:function(res){
                 //console.log('盒子数据');
                 //console.log(res)
