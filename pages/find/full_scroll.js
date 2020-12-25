@@ -906,7 +906,7 @@ Page({
     var pubdetail = res.target.dataset.pubdetail;
     var img_url = pubdetail[0].img_url;
     //var res_url = res.target.dataset.res_url;
-
+   
     if (res.from === 'button') {
 
       // 转发成功
@@ -917,11 +917,11 @@ Page({
         'status': 1,
       }, (data, headers, cookies, errMsg, statusCode) => {
         if (res_type == 1) {
-          let pictureObjectList = that.data.pictureObjectList;
-          pictureObjectList[index].share_num = data.result.share_num;
+          /*let pictureObjectList = that.data.pictureObjectList;
+          pictureObjectList[index].share_num = data.result.share_nums;
           that.setData({
             pictureObjectList: pictureObjectList
-          });
+          });*/
         } else {
           let mediaObjectList = that.data.mediaObjectList;
           mediaObjectList[index].share_num = data.result.share_nums;
