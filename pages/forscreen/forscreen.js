@@ -125,11 +125,12 @@ Page({
       console.log(options)
       var s = options.official
       var wxmpopenid = options.wxmpopenid;
+      var subscribe_time = options.subscribe_time;
       utils.PostRequest(api_url + '/Smallapp21/index/getQrcontent', {
         content: s
       }, (data, headers, cookies, errMsg, statusCode) => {
         var scene = data.result.content;
-        linkHotelBox(scene,wxmpopenid);
+        linkHotelBox(scene,wxmpopenid,subscribe_time);
 
       },res=>{
         wx.reLaunch({
@@ -193,7 +194,7 @@ Page({
         }
       });
     }
-    function linkHotelBox(scene,wxmpopenid=''){
+    function linkHotelBox(scene,wxmpopenid='',subscribe_time=''){
       console.log(scene);
       var scene_arr = scene.split('_');
       box_mac = scene_arr[0];
@@ -249,6 +250,7 @@ Page({
               utils.PostRequest(api_v_url+'/user/bindOffiaccount', {
                 wxmpopenid:wxmpopenid,
                 openid : openid,
+                subscribe_time:subscribe_time
               }, (data, headers, cookies, errMsg, statusCode) => {
           
               })
