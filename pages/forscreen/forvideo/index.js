@@ -161,9 +161,25 @@ Page({
         } 
       },
       fail: function(res) {
-        wx.navigateBack({
-          delta: 1,
-        });
+        if(res.errMsg=='chooseVideo:fail copy video file fail!'){
+          wx.showModal({
+            title:'选择视频文件失败',
+            content:'小程序临时文件过大,请您选择小视频投屏或者手动删除小程序后重新扫码进入',
+            showCancel:false,
+            success: function (res) {
+              if (res.confirm) {
+                wx.navigateBack({
+                  delta: 1,
+                })
+              }
+            }
+          })
+        }else {
+          wx.navigateBack({
+            delta: 1,
+          });
+        }
+        
         mta.Event.stat('LaunchVideoWithNet_Launch_ChooseVideo', {
           'status': 'fail'
         });
@@ -1277,17 +1293,34 @@ Page({
         });
       },
       fail: function(res) {
-        wx.navigateBack({
-          delta: 1,
-        })
-        that.setData({
-          showVedio: false,
-          is_classic_disabel:true,
-          is_speed_disabel:true,
-        });
-        mta.Event.stat('LaunchVideoWithNet_Launch_ChooseVideo', {
-          'status': 'fail'
-        });
+        if(res.errMsg=='chooseVideo:fail copy video file fail!'){
+          wx.showModal({
+            title:'选择视频文件失败',
+            content:'小程序临时文件过大,请您选择小视频投屏或者手动删除小程序后重新扫码进入',
+            showCancel:false,
+            success: function (res) {
+              if (res.confirm) {
+                wx.navigateBack({
+                  delta: 1,
+                })
+              }
+            }
+          })
+          //app.showToast('请选择小视屏或者删除小程序清理缓存');
+        }else {
+          wx.navigateBack({
+            delta: 1,
+          })
+          that.setData({
+            showVedio: false,
+            is_classic_disabel:true,
+            is_speed_disabel:true,
+          });
+          mta.Event.stat('LaunchVideoWithNet_Launch_ChooseVideo', {
+            'status': 'fail'
+          });
+        }
+        
       }
     });
   },

@@ -356,7 +356,12 @@ Page({
           
           var res_eup_time = (new Date()).valueOf();
           var netty_tmp = {};
-          netty_tmp.url = "forscreen/resource/" + timestamp + postf_t+quality_obj.quality;
+          if(postf_w!='gif'){
+            netty_tmp.url = "forscreen/resource/" + timestamp + postf_t+quality_obj.quality;
+          }else {
+            netty_tmp.url = "forscreen/resource/" + timestamp + postf_t
+          }
+          
           netty_tmp.filename = filename = timestamp + postf_t ;
           netty_tmp.order    = flag;
           netty_tmp.img_id   = timestamp;
@@ -578,7 +583,7 @@ Page({
         success: function (res) {
           wx.getConnectedWifi({
             success: function (res) {
-              console.log(res);
+              //console.log(res);
               //第一步链接wifi
               if (res.errMsg == 'getConnectedWifi:ok') {
                 if (res.wifi.SSID == wifi_name) {//链接的是本包间wifi
@@ -651,7 +656,7 @@ Page({
       BSSID: wifi_mac,
       password: use_wifi_password,
       success: function (reswifi) {
-        console.log(reswifi)
+        //console.log(reswifi)
         if(reswifi.errMsg=='connectWifi:ok' && typeof(reswifi.wifi)!='undefined'){
           app.globalData.link_type = 2;
           that.speedUploadImg(hotel_info,data);
@@ -764,6 +769,12 @@ Page({
       up_imgs[i].percent = 100;
       var img_url = up_imgs[i].tmp_img;
       var img_size = up_imgs[i].resource_size;
+
+      
+      var index1 = img_url.lastIndexOf(".");
+      var index2 = img_url.length;
+      var postf_t = img_url.substring(index1, index2);//后缀名
+      filename +=postf_t;
       
       //console.log("http://" + intranet_ip + ":8080/picH5?isThumbnail=1&imageId=20170301&deviceId=" + openid + "&box_mac=" + box_mac + "&deviceName=" + mobile_brand + "&rotation=90&imageType=1&web=true&forscreen_id=" + forscreen_id + '&forscreen_char=' + forscreen_char + '&filename=' + filename + '&device_model=' + mobile_model + '&resource_size=' + img_size + '&action=4&resource_type=1&avatarUrl=' + avatarUrl + "&nickName=" + nickName + "&forscreen_nums=" + img_lenth+"&serial_number="+app.globalData.serial_number);
       upload_task=wx.uploadFile({
@@ -1110,7 +1121,13 @@ Page({
     }else if(launchType=='speed'){
       var intranet_ip = hotel_info.intranet_ip;
       var img_url = e.currentTarget.dataset.tmp_img;
-      var filename = e.currentTarget.dataset.img_id;
+
+      var index1 = img_url.lastIndexOf(".");
+      var index2 = img_url.length;
+      var postf_t = img_url.substring(index1, index2);//后缀名
+
+      var filename = e.currentTarget.dataset.img_id+postf_t;
+      //console.log("http://" + intranet_ip + ":8080/h5/singleImg?isThumbnail=1&imageId=20170301&deviceId=" + openid + "&box_mac=" + box_mac + "&deviceName=" + mobile_brand + "&rotation=90&imageType=1&web=true&forscreen_id=" + forscreen_id + '&forscreen_char=' + forscreen_char + '&filename=' + filename + '&device_model=' + mobile_model + '&resource_size=' + resource_size + '&action=2&resource_type=1&avatarUrl=' + avatarUrl + "&nickName=" + nickName+"&serial_number="+app.globalData.serial_number);
       wx.uploadFile({
         url: "http://" + intranet_ip + ":8080/h5/singleImg?isThumbnail=1&imageId=20170301&deviceId=" + openid + "&box_mac=" + box_mac + "&deviceName=" + mobile_brand + "&rotation=90&imageType=1&web=true&forscreen_id=" + forscreen_id + '&forscreen_char=' + forscreen_char + '&filename=' + filename + '&device_model=' + mobile_model + '&resource_size=' + resource_size + '&action=2&resource_type=1&avatarUrl=' + avatarUrl + "&nickName=" + nickName+"&serial_number="+app.globalData.serial_number,
         filePath: img_url,
