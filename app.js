@@ -1305,6 +1305,9 @@ changeKb:function (limit){
       }
     })
   },
+  isFunction:function(fn) {
+    return Object.prototype.toString.call(fn)=== '[object Function]';
+  },
   isRegister:function(openid,self,page_id =0,is_have_link=0){
     var that = this;
     var colose_official_account = wx.getStorageSync(that.globalData.cache_key+'colose_official_account');

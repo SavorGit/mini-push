@@ -539,7 +539,9 @@ Page({
   },
   tipsForLaunchWindowCancel:function(){
     this.setData({isOpenWind:false,is_btn_disabel:false})
-    upload_task.abort();
+    if(app.isFunction(upload_task.abort)){
+      upload_task.abort();
+    }
   },
   //retryForscreen
   
@@ -651,6 +653,32 @@ Page({
   imgConnectWifi:function(wifi_name, wifi_mac, use_wifi_password, box_mac,hotel_info,data){
     var that = this;
     var openWind = that.data.openWind;
+    var clearTime8 = setTimeout(() => {
+            wx.stopWifi({
+              success: (res) => {},
+            })
+            that.setData({isOpenWind:false});
+            wx.showModal({
+              title: 'wifi链接超时',
+              content: '未成功链接对应的包间wifi,您可以重试链接wifi或者尝试经典投屏',
+              cancelText:'经典投屏',
+              confirmText:'重试',
+              success: function (res) {
+                if (res.confirm) {
+                  that.tipsForLaunchWindowRetry();
+                }else {
+                  that.setData({
+                    launchType:'classic',
+                  })
+                  that.tipsForLaunchWindowRetry();
+                  
+                }
+              }
+            })
+            var timeout_err_info = '{"errCode":13000,"errMsg":"connectWifi:fail internal error."}'
+            that.recordWifiErr(timeout_err_info,box_mac,data.openid);
+    },hotel_info.wifi_timeout_time);
+    var wifi_start_time = (new Date()).valueOf();
     wx.connectWifi({
       SSID: wifi_name,
       BSSID: wifi_mac,
@@ -658,7 +686,11 @@ Page({
       success: function (reswifi) {
         //console.log(reswifi)
         if(reswifi.errMsg=='connectWifi:ok' && typeof(reswifi.wifi)!='undefined'){
+          var wifi_end_time = (new Date()).valueOf();
+          var diff_time = wifi_end_time - wifi_start_time;
+          console.log('wiif链接时间'+diff_time)
           app.globalData.link_type = 2;
+          clearTimeout(clearTime8);
           that.speedUploadImg(hotel_info,data);
           return true;
         }else {
@@ -667,13 +699,18 @@ Page({
             //console.log(wifi_name)
             if(result.wifi.SSID==wifi_name){
               //app.showToast('wifi链接成功');
+              var wifi_end_time = (new Date()).valueOf();
+              var diff_time = wifi_end_time - wifi_start_time;
+              console.log('wiif链接时间'+diff_time)
               app.globalData.link_type = 2;
+              clearTimeout(clearTime8);
               that.speedUploadImg(hotel_info,data);
               return true;
               
             }
             
           },()=>{
+            clearTimeout(clearTime8);
             openWind.tip = err_msg;
             openWind.isError = true;
             that.setData({
@@ -683,6 +720,7 @@ Page({
         }
         
       }, fail: function (res) {
+        clearTimeout(clearTime8);
         var err_msg = 'wifi链接失败';
         if(res.errCode==12000){
         }else {
@@ -981,6 +1019,7 @@ Page({
 
 
   },
+  //点击投屏
   up_forscreen(e) {//多张图片投屏开始(不分享到发现)
     var that = this;
     var launchType = e.detail.target.dataset.launch_type;
@@ -1002,12 +1041,12 @@ Page({
     })
     if(launchType=='classic'){//经典投屏
       that.classicForImg(e.detail.value);
+      mta.Event.stat('clickImageForscreen',{'openid':openid,'boxmac':box_mac,'ftype':1})
       return false;
 
     }else if(launchType=='speed'){//极速投屏
-
-
       that.speedForImg(e.detail.value,hotel_info);
+      mta.Event.stat('clickImageForscreen',{'openid':openid,'boxmac':box_mac,'ftype':2})
       return false;
       //return false;
       
