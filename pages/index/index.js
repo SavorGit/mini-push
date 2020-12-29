@@ -69,7 +69,7 @@ Page({
   
   getHotplaylist:function(){//获取热播内容
     var that = this;
-    utils.PostRequest(api_url + '/Smallapp4/content/getHotplaylist', {
+    utils.PostRequest(api_v_url + '/content/getHotplaylist', {
       page: 1,
       pagesize: 6
     }, (data, headers, cookies, errMsg, statusCode) => {
@@ -105,6 +105,7 @@ Page({
         app.globalData.qualityList = data.result.quality_list;
         
       }
+      app.globalData.forscreen_call_code_filename = data.result.forscreen_call_code_filename;
       app.globalData.is_getjj_history = data.result.is_open_simplehistory;
       var is_view_eval_waiter = data.result.is_comment;
       that.setData({is_view_eval_waiter: is_view_eval_waiter})
@@ -516,9 +517,26 @@ Page({
       if (box_mac == '') {
         app.scanQrcode(pageid);
       } else {
-        that.setData({
-          showMe: true,
-        })
+        if(app.globalData.sys_info.platform=='android'){
+          that.setData({showMe: true,})
+        }else {
+          var version = app.globalData.sys_info.version
+          if(app.compareVersion(version,'7.0.18')){
+            that.setData({showMe: true,})
+          }else {
+            var box_mac = e.detail.value.boxmac;
+            var openid = e.detail.value.openid;
+            wx.navigateTo({
+              url: '/pages/forscreen/forfile/files?box_mac=' + box_mac + '&openid=' + openid ,
+              success: function (e) {
+                that.setData({
+                  showMe: false
+                })
+              }
+            })
+          }
+          
+        }
       }
     }
     mta.Event.stat('gotoForscreenFile', { 'linktype': app.globalData.link_type, "boxmac": box_mac })
@@ -684,6 +702,7 @@ Page({
   boxShow: function (e) {
     var that = this;
     var forscreen_id = e.currentTarget.dataset.forscreen_id;
+    var res_id       = e.currentTarget.dataset.res_id;
 
     var pubdetail = e.currentTarget.dataset.pubdetail;
     var res_type = e.currentTarget.dataset.res_type;
@@ -692,12 +711,20 @@ Page({
     var index = e.currentTarget.dataset.index;
     if (res_type == 1) {
       var action = 11; //发现图片点播
+      var jump_url = '/pages/find/picture?box_mac='+box_mac+'&forscreen_id='+forscreen_id;
     } else if (res_type == 2) {
       var action = 12; //发现视频点播
+      var jump_url = '/pages/find/video?box_mac='+box_mac+'&forscreen_id='+forscreen_id;
     }
 
-    app.boxShow(box_mac, forscreen_id, pubdetail, res_type, res_nums, action, hotel_info, that);
-
+    app.boxShow(box_mac, res_id, pubdetail, res_type, res_nums, action, hotel_info, that);
+    if(box_mac!='' && typeof(box_mac)!='undefined'){
+      //跳转到详情页
+      wx.navigateTo({
+        url: jump_url,
+      })
+    }
+    
     var order = index + 1;
     mta.Event.stat('clickHotPlay', { 'linktype': app.globalData.link_type, 'boxmac': box_mac, "order": order })
   },

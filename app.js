@@ -354,6 +354,7 @@ App({
       }else{
         link_type = change_link_type;
       }
+      var forscreen_call_code_filename = that.globalData.forscreen_call_code_filename;
       if(link_type==1 || hotel_info==''){
         var timestamp = (new Date()).valueOf();
         var qrcode_url = that.globalData.api_url + '/Smallapp/index/getBoxQr?box_mac=' + box_mac + '&type=3';
@@ -385,7 +386,7 @@ App({
                       method: "POST",
                       data: {
                         box_mac: box_mac,
-                        msg: '{ "action": 9,"url":"' + qrcode_url + '","openid":"'+openid+'","forscreen_id":"'+timestamp+'","serial_number":"'+that.globalData.serial_number+'"}',
+                        msg: '{ "action": 9,"url":"' + qrcode_url + '","openid":"'+openid+'","forscreen_id":"'+timestamp+'","serial_number":"'+that.globalData.serial_number+'","filename":"'+forscreen_call_code_filename+'"}',
                       },
                       success: function () {
                         /*wx.showToast({
@@ -426,14 +427,14 @@ App({
                 method: "POST",
                 data: {
                   box_mac: box_mac,
-                  msg: '{ "action": 9,"url":"' + qrcode_url + '","openid":"'+openid+'","forscreen_id":"'+timestamp+'","serial_number":"'+that.globalData.serial_number+'"}',
+                  msg: '{ "action": 9,"url":"' + qrcode_url + '","openid":"'+openid+'","forscreen_id":"'+timestamp+'","serial_number":"'+that.globalData.serial_number+'","filename":"'+forscreen_call_code_filename+'"}',
                 },
                 success: function () {
-                  /*wx.showToast({
+                  wx.showToast({
                     title: '呼玛成功，电视即将展示',
                     icon: 'none',
                     duration: 2000
-                  });*/
+                  });
                   wx.request({
                     url: that.globalData.api_v_url + '/index/recordForScreenPics',
                     header: {
@@ -457,7 +458,7 @@ App({
         })
       }else {
         wx.request({
-          url: "http://" + hotel_info.intranet_ip + ":8080/showMiniProgramCode?deviceId=" + openid + "&box_mac=" + box_mac + "&web=true&serial_number="+that.globalData.serial_number,
+          url: "http://" + hotel_info.intranet_ip + ":8080/showMiniProgramCode?deviceId=" + openid + "&box_mac=" + box_mac + "&web=true&serial_number="+that.globalData.serial_number+"&filename="+forscreen_call_code_filename,
           success: function (res) {
             if (res.data.code == 10000) {
               wx.showToast({
@@ -1377,5 +1378,6 @@ changeKb:function (limit){
     is_view_official_account:false,
     qualityList:[],
     is_getjj_history:0,
+    forscreen_call_code_filename:'',
   }
 })
