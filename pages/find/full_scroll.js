@@ -813,6 +813,13 @@ Page({
       'status': !pictureObjectList[index].isOpen ? 'open' : 'close'
     }));
     pictureObjectList[index].isOpen = !(pictureObjectList[index].isOpen);
+    if(pictureObjectList[index].isOpen){
+      for(let i in pictureObjectList){
+        if(i!=index){
+          pictureObjectList[i].isOpen = false;
+        }
+      }
+    }
     self.setData({
       pictureObjectList: pictureObjectList
     });
