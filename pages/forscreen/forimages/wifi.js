@@ -170,7 +170,7 @@ Page({
   getOssParam:function(){
     var that = this;
     wx.request({
-      url: api_url + '/Smallapp/Index/getOssParams',
+      url: api_v_url + '/Index/getOssParams',
       success: function(rest) {
         policy = rest.data.policy;
         signature = rest.data.signature;
@@ -1167,7 +1167,7 @@ Page({
     }else {
 
       wx.request({
-        url: api_url +'/Smallapp3/ForscreenHelp/helpplay',
+        url: api_v_url +'/ForscreenHelp/helpplay',
         header: {
           'Content-Type': 'application/json'
         },
@@ -1222,7 +1222,7 @@ Page({
       })
     }
     wx.request({
-      url: api_url + '/Smallapp3/content/guidePrompt',
+      url: api_v_url + '/content/guidePrompt',
       header: {
         'Content-Type': 'application/json'
       },

@@ -8,6 +8,7 @@ const app = getApp()
 const utils = require('../../../utils/util.js')
 const mta = require('../../../utils/mta_analysis.js')
 var api_url = app.globalData.api_url;
+var api_v_url = app.globalData.api_v_url;
 var order_id;
 var openid;
 Page({
@@ -59,7 +60,7 @@ Page({
     openid = options.openid;
     order_id = options.order_id;
     //订单详情
-    utils.PostRequest(api_url + '/smallapp43/order/detail', {
+    utils.PostRequest(api_v_url + '/order/detail', {
       openid: openid,
       order_id: order_id,
     }, (data, headers, cookies, errMsg, statusCode) => {
@@ -95,7 +96,7 @@ Page({
   reFreshOrder:function(e){
     var that = this;
     //订单详情
-    utils.PostRequest(api_url + '/smallapp43/order/detail', {
+    utils.PostRequest(api_v_url + '/order/detail', {
       openid: openid,
       order_id: order_id,
     }, (data, headers, cookies, errMsg, statusCode) => {

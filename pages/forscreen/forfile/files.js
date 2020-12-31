@@ -42,7 +42,7 @@ Page({
       box_mac:box_mac,
       is_open_simple: is_open_simple
     })
-    util.PostRequest(api_url + '/smallapp3/index/getConfig', {
+    util.PostRequest(api_v_url + '/index/getConfig', {
       page: 1,
       pagesize: 6
     }, (data, headers, cookies, errMsg, statusCode) => {
@@ -82,7 +82,7 @@ Page({
               });
             } else {//如果文件未超过设置的最大值
                wx.request({
-                url: api_url + '/Smallapp/Index/getOssParams',
+                url: api_v_url + '/Index/getOssParams',
                 headers: {
                   'Content-Type': 'application/json'
                 },
@@ -447,7 +447,7 @@ Page({
   //重选文件
   reChooseFile:function(e){
     var that = this;
-    util.PostRequest(api_url + '/smallapp3/index/getConfig', {
+    util.PostRequest(api_v_url + '/index/getConfig', {
       
     }, (data, headers, cookies, errMsg, statusCode) => {
       //console.log(rst);
@@ -487,7 +487,7 @@ Page({
             });
           } else {//如果文件未超过设置的最大值
             wx.request({
-              url: api_url + '/Smallapp/Index/getOssParams',
+              url: api_v_url + '/Index/getOssParams',
               headers: {
                 'Content-Type': 'application/json'
               },
@@ -747,7 +747,7 @@ Page({
   //打开遥控器
   openControl: function (e) {
     var that = this;
-    var qrcode_url = api_url + '/Smallapp4/index/getBoxQr?box_mac=' + box_mac + '&type=3';
+    var qrcode_url = api_v_url + '/index/getBoxQr?box_mac=' + box_mac + '&type=3';
     that.setData({
       showControl: true,
       qrcode_img: qrcode_url

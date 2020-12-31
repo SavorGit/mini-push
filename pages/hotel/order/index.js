@@ -3,6 +3,7 @@ const app = getApp()
 const utils = require('../../../utils/util.js')
 const mta = require('../../../utils/mta_analysis.js')
 var api_url = app.globalData.api_url;
+var api_v_url = app.globalData.api_v_url;
 var openid;
 var page = 1;
 var page_all = 1;
@@ -33,7 +34,7 @@ Page({
 
 
     //全部订单
-    utils.PostRequest(api_url + '/smallapp43/order/orderlist', {
+    utils.PostRequest(api_v_url + '/order/orderlist', {
       openid: openid,
       page: 1,
       status: 0
@@ -43,7 +44,7 @@ Page({
       })
     })
     //处理中的订单
-    utils.PostRequest(api_url + '/smallapp43/order/orderlist', {
+    utils.PostRequest(api_v_url + '/order/orderlist', {
       openid: openid,
 
       page: 1,
@@ -54,7 +55,7 @@ Page({
       })
     })
     //已完成的订单
-    utils.PostRequest(api_url + '/smallapp43/order/orderlist', {
+    utils.PostRequest(api_v_url + '/order/orderlist', {
       openid: openid,
       page: 1,
       status: 2
@@ -86,7 +87,7 @@ Page({
       page = page_complete;
     }
     //订单分页
-    utils.PostRequest(api_url + '/smallapp43/order/orderlist', {
+    utils.PostRequest(api_v_url + '/order/orderlist', {
       openid: openid,
       page: page,
       status: order_status
@@ -174,7 +175,7 @@ Page({
       content: '确认取消订单吗?',
       success: function (res) {
         if (res.confirm) {
-          utils.PostRequest(api_url + '/smallapp43/order/cancel', {
+          utils.PostRequest(api_v_url + '/order/cancel', {
             openid: openid,
             order_id: order_id,
           }, (data, headers, cookies, errMsg, statusCode) => {
@@ -185,7 +186,7 @@ Page({
                 all_order_list:order_list
               })
               //处理中的订单
-              utils.PostRequest(api_url + '/smallapp43/order/orderlist', {
+              utils.PostRequest(api_v_url + '/order/orderlist', {
                 openid: openid,
 
                 page: page_dealing,
@@ -203,7 +204,7 @@ Page({
               })
             }
             //全部
-            utils.PostRequest(api_url + '/smallapp43/order/orderlist', {
+            utils.PostRequest(api_v_url + '/order/orderlist', {
               openid: openid,
 
               page: page_all,
@@ -215,7 +216,7 @@ Page({
             })
             //获取已完成的订单列表
             //订单分页
-            utils.PostRequest(api_url + '/smallapp43/order/orderlist', {
+            utils.PostRequest(api_v_url + '/order/orderlist', {
               openid: openid,
               page: page_complete,
               status: 2
@@ -244,7 +245,7 @@ Page({
   onShow: function () {
     var that = this;
     //全部订单
-    utils.PostRequest(api_url + '/smallapp43/order/orderlist', {
+    utils.PostRequest(api_v_url + '/order/orderlist', {
       openid: openid,
       page: page_all,
       status: 0
@@ -255,7 +256,7 @@ Page({
     })
     
     //已完成的订单
-    utils.PostRequest(api_url + '/smallapp43/order/orderlist', {
+    utils.PostRequest(api_v_url + '/order/orderlist', {
       openid: openid,
       page: page_complete,
       status: 2

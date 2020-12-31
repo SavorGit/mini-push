@@ -58,7 +58,7 @@ Page({
         })
       }
     })
-    utils.PostRequest(api_url + '/Smallapp3/Find/showPic', {
+    utils.PostRequest(api_v_url + '/Find/showPic', {
       forscreen_id: forscreen_id,
       openid: openid,
     }, (data, headers, cookies, errMsg, statusCode) => {
@@ -118,7 +118,7 @@ Page({
       'status': true
     }));
 
-    utils.PostRequest(api_url + '/Smallapp/collect/recLogs', {
+    utils.PostRequest(api_v_url + '/collect/recLogs', {
       'openid': openid,
       'res_id': res_id,
       'type': res_type,
@@ -148,7 +148,7 @@ Page({
       'status': false
     }));
 
-    utils.PostRequest(api_url + '/Smallapp/collect/recLogs', {
+    utils.PostRequest(api_v_url + '/collect/recLogs', {
       'openid': openid,
       'res_id': res_id,
       'type': res_type,
@@ -186,7 +186,7 @@ Page({
       // 转发成功
       share_num = share_num++;
 
-      utils.PostRequest(api_url + '/Smallapp3/share/recLogs', {
+      utils.PostRequest(api_v_url + '/share/recLogs', {
         'openid': openid,
         'res_id': res_id,
         'type': res_type,

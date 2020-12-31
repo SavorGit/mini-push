@@ -48,7 +48,7 @@ Page({
     that.isHaveCallBox(openid);
     
     //获取用户信息以及我的公开
-    utils.PostRequest(api_url + '/Smallapp3/User/index', {
+    utils.PostRequest(api_v_url + '/User/index', {
       openid: openid 
     }, (data, headers, cookies, errMsg, statusCode) => {
       that.setData({
@@ -103,7 +103,7 @@ Page({
   //打开遥控器
   openControl: function (e) {
     var that = this;
-    var qrcode_url = api_url+'/Smallapp4/index/getBoxQr?box_mac=' + box_mac + '&type=3';
+    var qrcode_url = api_v_url+'/index/getBoxQr?box_mac=' + box_mac + '&type=3';
     that.setData({
       popRemoteControlWindow: true,
       qrcode_img: qrcode_url

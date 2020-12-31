@@ -3,6 +3,7 @@ const app = getApp()
 const utils = require('../../../utils/util.js')
 const mta = require('../../../utils/mta_analysis.js')
 var api_url = app.globalData.api_url;
+var api_v_url = app.globalData.api_v_url;
 var openid = openid;
 var area_id = 0;
 Page({
@@ -44,8 +45,9 @@ Page({
 
     if(typeof(address_id) =='undefined'){//新增收货地址
       //获取城市列表
-      utils.PostRequest(api_url + '/smallsale18/Area/getAreaList', {
-        area_id: area_id
+      utils.PostRequest(api_v_url + '/Area/getAreaList', {
+        area_id: area_id,
+        type:2
       }, (data, headers, cookies, errMsg, statusCode) => {
         console.log(data)
         that.setData({
@@ -59,7 +61,7 @@ Page({
     }else {//编辑收货地址
       
       
-      utils.PostRequest(api_url + '/Smallapp43/address/detail', {
+      utils.PostRequest(api_v_url + '/address/detail', {
         openid: openid,
         address_id: address_id
       }, (data, headers, cookies, errMsg, statusCode) => {
@@ -78,8 +80,9 @@ Page({
         })
 
         //获取城市列表
-        utils.PostRequest(api_url + '/smallsale18/Area/getAreaList', {
-          area_id: area_id
+        utils.PostRequest(api_v_url + '/Area/getAreaList', {
+          area_id: area_id,
+          type:2
         }, (data, headers, cookies, errMsg, statusCode) => {
           var city_list = data.result.city_list
           
@@ -98,8 +101,9 @@ Page({
           })
         }) 
         //获取区域列表
-        utils.PostRequest(api_url + '/smallsale18/Area/getSecArea', {
-          area_id: area_id
+        utils.PostRequest(api_v_url + '/Area/getSecArea', {
+          area_id: area_id,
+          type:2
         }, (data, headers, cookies, errMsg, statusCode) => {
           
           var area_list = data.result.area_list
@@ -144,8 +148,9 @@ Page({
       var area_id = city_list[picCityIndex].id;
 
       //获取城市列表
-      utils.PostRequest(api_url + '/smallsale18/Area/getSecArea', {
-        area_id: area_id
+      utils.PostRequest(api_v_url + '/Area/getSecArea', {
+        area_id: area_id,
+        type:2
       }, (data, headers, cookies, errMsg, statusCode) => {
         console.log(data)
         that.setData({
@@ -257,9 +262,9 @@ Page({
       is_default = 0;
     }
     if(address_id==''){
-      var api_all_url = api_url +'/Smallapp43/address/addAddress'
+      var api_all_url = api_v_url +'/address/addAddress'
     }else {
-      var api_all_url = api_url+'/Smallapp43/address/editAddress'
+      var api_all_url = api_v_url+'/address/editAddress'
     }
 
     utils.PostRequest(api_all_url, {

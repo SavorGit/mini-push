@@ -78,7 +78,7 @@ Page({
     //var forscreen_id = options.forscreen_id;
     var user_info = wx.getStorageSync("savor_user_info");
     openid = user_info.openid;
-    utils.PostRequest(api_url+'/smallapp3/Share/showVideo', {
+    utils.PostRequest(api_v_url+'/Share/showVideo', {
       'res_id': res_id,
       'type': type,
       'openid': openid,
@@ -101,7 +101,7 @@ Page({
     var res_id = e.target.dataset.res_id;
     var info = e.target.dataset.info;
     var type = e.target.dataset.type;
-    utils.PostRequest(api_url+'/Smallapp/collect/recLogs', {
+    utils.PostRequest(api_v_url+'/collect/recLogs', {
       'openid': openid,
       'res_id': res_id,
       'type': type,
@@ -123,7 +123,7 @@ Page({
     var info = e.target.dataset.info;
     var openid = e.target.dataset.openid;
     var type = e.target.dataset.type;
-    utils.PostRequest(api_url+'/Smallapp/collect/recLogs', {
+    utils.PostRequest(api_v_url+'/collect/recLogs', {
       'openid': openid,
       'res_id': res_id,
       'type': type,
@@ -149,7 +149,7 @@ Page({
     
     if (res.from === 'button') {
       // 转发成功
-      utils.PostRequest(api_url+'/Smallapp/share/recLogs', {
+      utils.PostRequest(api_v_url+'/share/recLogs', {
         'openid': openid,
         'res_id': res_id,
         'type': type,

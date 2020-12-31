@@ -56,7 +56,7 @@ Page({
         })
       }
     })
-    utils.PostRequest(api_url + '/Smallapp3/Find/showPic', {
+    utils.PostRequest(api_v_url + '/Find/showPic', {
       forscreen_id: forscreen_id,
         openid: openid,
     }, (data, headers, cookies, errMsg, statusCode) => {
@@ -88,7 +88,7 @@ Page({
       'status': true
     }));
 
-    utils.PostRequest(api_url + '/Smallapp/collect/recLogs', {
+    utils.PostRequest(api_v_url + '/collect/recLogs', {
       'openid': openid,
       'res_id': res_id,
       'type': res_type,
@@ -116,7 +116,7 @@ Page({
       'from': self.data.pageFrom,
       'status': false
     }));
-    utils.PostRequest(api_url + '/Smallapp/collect/recLogs', {
+    utils.PostRequest(api_v_url + '/collect/recLogs', {
       'openid': openid,
       'res_id': res_id,
       'type': res_type,
@@ -151,7 +151,7 @@ Page({
     if (res.from === 'button') {
       // 转发成功
       share_num = share_num++;
-      utils.PostRequest(api_url + '/Smallapp3/share/recLogs', {
+      utils.PostRequest(api_v_url + '/share/recLogs', {
         'openid': openid,
         'res_id': res_id,
         'type': res_type,
@@ -241,7 +241,7 @@ Page({
   //打开遥控器
   openControl: function(e) {
     var self = this;
-    var qrcode_url = api_url + '/Smallapp4/index/getBoxQr?box_mac=' + box_mac + '&type=3';
+    var qrcode_url = api_v_url + '/index/getBoxQr?box_mac=' + box_mac + '&type=3';
     self.setData({
 
       showControl: true,

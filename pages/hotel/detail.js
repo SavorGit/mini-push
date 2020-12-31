@@ -141,7 +141,7 @@ Page({
   },
   getMerchantInfo: function (merchant_id) {
     var that = this;
-    utils.PostRequest(api_url + '/smallapp43/merchant/info', {
+    utils.PostRequest(api_v_url + '/merchant/info', {
       merchant_id: merchant_id,
     }, (data, headers, cookies, errMsg, statusCode) => that.setData({
       hotel_info: data.result
@@ -149,7 +149,7 @@ Page({
   },
   getDishInfo: function (merchant_id) {
     var that = this;
-    utils.PostRequest(api_url + '/Smallapp4/dish/goodslist', {
+    utils.PostRequest(api_v_url + '/dish/goodslist', {
       merchant_id: merchant_id,
       page: 1
     }, (data, headers, cookies, errMsg, statusCode) => that.setData({
@@ -193,7 +193,7 @@ Page({
     var that = this;
     page += 1;
     //菜品列表
-    utils.PostRequest(api_url + '/Smallapp4/dish/goodslist', {
+    utils.PostRequest(api_v_url + '/dish/goodslist', {
       merchant_id: merchant_id,
       page: page
     }, (data, headers, cookies, errMsg, statusCode) => that.setData({
@@ -445,7 +445,7 @@ Page({
     var that = this;
     if(merchant_id !='' && typeof(merchant_id)!='undefined'){
       //菜品列表
-      utils.PostRequest(api_url + '/Smallapp4/dish/goodslist', {
+      utils.PostRequest(api_v_url + '/dish/goodslist', {
         merchant_id: merchant_id,
         page: page
       }, (data, headers, cookies, errMsg, statusCode) => that.setData({
@@ -496,7 +496,7 @@ Page({
     var that = this;
     page += 1;
     //菜品列表
-    utils.PostRequest(api_url + '/Smallapp4/dish/goodslist', {
+    utils.PostRequest(api_v_url + '/dish/goodslist', {
       merchant_id: merchant_id,
       page: page
     }, (data, headers, cookies, errMsg, statusCode) => that.setData({

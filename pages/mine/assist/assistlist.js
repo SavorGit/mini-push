@@ -2,6 +2,7 @@
 const utils = require('../../../utils/util.js')
 const app = getApp()
 var api_url = app.globalData.api_url;
+var api_v_url = app.globalData.api_v_url;
 var page = 1;
 Page({
 
@@ -22,7 +23,7 @@ Page({
     that.setData({
       forscreen_id: forscreen_id,
     })
-    utils.PostRequest(api_url + '/Smallapp3/ForscreenHelp/userlist', {
+    utils.PostRequest(api_v_url + '/ForscreenHelp/userlist', {
       forscreen_id: forscreen_id,
       page: 1,
       pagesize:20
@@ -38,7 +39,7 @@ Page({
     var forscreen_id = e.target.dataset.forscreen_id;
     
     page = page + 1;
-    utils.PostRequest(api_url + '/Smallapp3/ForscreenHelp/userlist', {
+    utils.PostRequest(api_v_url + '/ForscreenHelp/userlist', {
       forscreen_id: forscreen_id,
       page: page,
       pagesize:20

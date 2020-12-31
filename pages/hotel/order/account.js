@@ -8,6 +8,7 @@ const app = getApp()
 const utils = require('../../../utils/util.js')
 const mta = require('../../../utils/mta_analysis.js')
 var api_url = app.globalData.api_url;
+var api_v_url = app.globalData.api_v_url;
 var cache_key = app.globalData.cache_key;
 var goods_id;
 var openid;
@@ -57,7 +58,7 @@ Page({
     })
     wx.removeStorageSync(cache_key + 'order:remark')
     //获取默认地址
-    utils.PostRequest(api_url + '/Smallapp4/address/getDefaultAddress', {
+    utils.PostRequest(api_v_url + '/address/getDefaultAddress', {
       openid: openid,
     }, (data, headers, cookies, errMsg, statusCode) => {
       var address_info = data.result;
@@ -78,7 +79,7 @@ Page({
         goods_id = options.goods_id;
         var amount = options.amount;
         //菜品详情
-        utils.PostRequest(api_url + '/Smallapp4/dish/detail', {
+        utils.PostRequest(api_v_url + '/dish/detail', {
           goods_id: goods_id,
         }, (data, headers, cookies, errMsg, statusCode) => {
           var goods_info = data.result;
@@ -120,7 +121,7 @@ Page({
       } else if (order_type == 3) {
         var order_id = options.order_id;
         //订单详情
-        utils.PostRequest(api_url + '/smallapp43/order/detail', {
+        utils.PostRequest(api_v_url + '/order/detail', {
           order_id: order_id,
           openid: openid,
         }, (data, headers, cookies, errMsg, statusCode) => {
@@ -155,7 +156,7 @@ Page({
   },
   getMerchantInfo: function (merchant_id) {
     var that = this;
-    utils.PostRequest(api_url + '/smallapp43/merchant/info', {
+    utils.PostRequest(api_v_url + '/merchant/info', {
       merchant_id: merchant_id,
     }, (data, headers, cookies, errMsg, statusCode) => that.setData({
       hotel_info: data.result
@@ -168,7 +169,7 @@ Page({
       addDisabled: true
     })
     var money = total_price;
-    utils.PostRequest(api_url + '/smallapp43/order/getPrepareData', {
+    utils.PostRequest(api_v_url + '/order/getPrepareData', {
       merchant_id: merchant_id,
     }, (data, headers, cookies, errMsg, statusCode) => {
       var delivery_types = data.result.delivery_types;
@@ -180,7 +181,7 @@ Page({
         tableware_arr.push(tableware[i].name);
       }
       if (delivery_platform == 1 && address_id!='') {//获取配送费
-        utils.PostRequest(api_url + '/smallapp43/order/getDeliveryfee', {
+        utils.PostRequest(api_v_url + '/order/getDeliveryfee', {
           address_id: address_id,
           merchant_id: merchant_id,
           money: money,
@@ -217,7 +218,7 @@ Page({
       })
     });
     //获取配送时间列表
-    utils.PostRequest(api_url + '/Smallapp43/order/getDeliveryTime', {
+    utils.PostRequest(api_v_url + '/order/getDeliveryTime', {
       merchant_id: merchant_id,
     }, (data, headers, cookies, errMsg, statusCode) => {
       
@@ -338,7 +339,7 @@ Page({
       addDisabled: true
     })
     //下单
-    utils.PostRequest(api_url + '/smallapp43/order/addOrder', {
+    utils.PostRequest(api_v_url + '/order/addOrder', {
       address_id: address_id,
       amount: amount,
       carts: carts,
@@ -580,7 +581,7 @@ Page({
     
       if (delivery_platform == 1 && address_id > 0 && total_price>0){
         
-        utils.PostRequest(api_url + '/smallapp43/order/getDeliveryfee', {
+        utils.PostRequest(api_v_url + '/order/getDeliveryfee', {
           address_id: address_id,
           merchant_id: merchant_id,
           money: total_price,
@@ -603,7 +604,7 @@ Page({
       
     } else {
       //获取默认地址
-      utils.PostRequest(api_url + '/Smallapp4/address/getDefaultAddress', {
+      utils.PostRequest(api_v_url + '/address/getDefaultAddress', {
         openid: openid,
       }, (data, headers, cookies, errMsg, statusCode) => {
         var address_info = data.result;
@@ -620,7 +621,7 @@ Page({
           var address_id = address_info.address_id;
           var money = that.data.total_price;
           if (delivery_platform == 1 && address_id != '') {//获取配送费
-            utils.PostRequest(api_url + '/smallapp43/order/getDeliveryfee', {
+            utils.PostRequest(api_v_url + '/order/getDeliveryfee', {
               address_id: address_id,
               merchant_id: merchant_id,
               money: money,

@@ -112,7 +112,7 @@ Page({
       }
     }
     //热播内容
-    utils.PostRequest(api_url + '/Smallapp3/content/getHotplaylist', {
+    utils.PostRequest(api_v_url + '/content/getHotplaylist', {
       page:1,
       pagesize:3
     }, (data, headers, cookies, errMsg, statusCode) => {
@@ -123,7 +123,7 @@ Page({
     
 
     function getAssistInfo(openid,forscreen_id){
-      utils.PostRequest(api_url +'/Smallapp3/ForscreenHelp/detail', {
+      utils.PostRequest(api_v_url +'/ForscreenHelp/detail', {
         openid:openid,
         forscreen_id:forscreen_id
       }, (data, headers, cookies, errMsg, statusCode) => {
@@ -148,7 +148,7 @@ Page({
     }
     function getAssistFriends(openid, forscreen_id){
 
-      utils.PostRequest(api_url + '/Smallapp3/ForscreenHelp/userlist', {
+      utils.PostRequest(api_v_url + '/ForscreenHelp/userlist', {
         forscreen_id: forscreen_id,
         page:1,
         pagesize:7,
@@ -184,7 +184,7 @@ Page({
       })
       mta.Event.stat("showwxauth", {})
     }else {
-      utils.PostRequest(api_url +'/Smallapp3/ForscreenHelp/addhelp', {
+      utils.PostRequest(api_v_url +'/ForscreenHelp/addhelp', {
         help_id:help_id,
         openid:openid
       }, (data, headers, cookies, errMsg, statusCode) => {
@@ -192,7 +192,7 @@ Page({
           is_assist:true
         })
 
-        utils.PostRequest(api_url + '/Smallapp3/ForscreenHelp/userlist', {
+        utils.PostRequest(api_v_url + '/ForscreenHelp/userlist', {
           forscreen_id: forscreen_id,
           page: 1,
           pagesize: 7,
@@ -275,7 +275,7 @@ Page({
     })
     var user_info = wx.getStorageSync("savor_user_info");
    
-    utils.PostRequest(api_url + '/Smallapp21/index/closeauthLog', {
+    utils.PostRequest(api_v_url + '/index/closeauthLog', {
       openid: openid,
         box_mac: '',
     }, (data, headers, cookies, errMsg, statusCode) => {

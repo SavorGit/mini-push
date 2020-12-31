@@ -124,7 +124,7 @@ Page({
   },
   getDishInfo: function (goods_id) {
     var that = this;
-    utils.PostRequest(api_url + '/Smallapp4/dish/detail', {
+    utils.PostRequest(api_v_url + '/dish/detail', {
       goods_id: goods_id,
     }, (data, headers, cookies, errMsg, statusCode) => that.setData({
       goods_info: data.result,

@@ -60,7 +60,7 @@ Page({
         })
       }
     })
-    utils.PostRequest(api_url + '/Smallapp4/User/getMyCollect', {
+    utils.PostRequest(api_v_url + '/User/getMyCollect', {
       openid:openid
     }, (data, headers, cookies, errMsg, statusCode) => {
       sharelist = data.result.list;
@@ -90,7 +90,7 @@ Page({
       var mobile_brand = app.globalData.mobile_brand;
       var mobile_model = app.globalData.mobile_model;
 
-      utils.PostRequest(api_url + '/smallapp21/User/isForscreenIng', {
+      utils.PostRequest(api_v_url + '/User/isForscreenIng', {
         box_mac: box_mac
       }, (data, headers, cookies, errMsg, statusCode) => {
         var is_forscreen = data.result.is_forscreen;
@@ -110,7 +110,7 @@ Page({
                       duration: 2000
                     });
 
-                    utils.PostRequest(api_url + '/Smallapp/index/recordForScreenPics', {
+                    utils.PostRequest(api_v_url + '/index/recordForScreenPics', {
                       openid: openid,
                       box_mac: box_mac,
                       action: 5,
@@ -147,7 +147,7 @@ Page({
                 icon: 'none',
                 duration: 2000
               });
-              utils.PostRequest(api_url + '/Smallapp/index/recordForScreenPics', {
+              utils.PostRequest(api_v_url + '/index/recordForScreenPics', {
                 openid: openid,
                   box_mac: box_mac,
                   action: 5,
@@ -210,7 +210,7 @@ Page({
       'openid': openid,
       'status': true
     }));
-    utils.PostRequest(api_url + '/Smallapp/collect/recLogs', {
+    utils.PostRequest(api_v_url + '/collect/recLogs', {
       openid: openid,
       res_id: res_id,
       type: type,
@@ -248,7 +248,7 @@ Page({
       'status': false
     }));
 
-    utils.PostRequest(api_url + '/Smallapp/collect/recLogs', {
+    utils.PostRequest(api_v_url + '/collect/recLogs', {
       openid: openid,
       res_id: res_id,
       type: type,
@@ -285,7 +285,7 @@ Page({
   //打开遥控器
   openControl: function(e) {
     var self = this;
-    var qrcode_url = api_url + '/Smallapp4/index/getBoxQr?box_mac=' + box_mac + '&type=3';
+    var qrcode_url = api_v_url + '/index/getBoxQr?box_mac=' + box_mac + '&type=3';
     self.setData({
 
       showControl: true,
@@ -411,7 +411,7 @@ Page({
 
     if (res.from === 'button') {
       // 转发成功
-      utils.PostRequest(api_url + '/Smallapp/share/recLogs', {
+      utils.PostRequest(api_v_url + '/share/recLogs', {
         openid: openid,
         res_id: res_id,
         type: type,
@@ -459,7 +459,7 @@ Page({
     var self = this;
     var forscreen_id = e.currentTarget.dataset.forscreen_id;
 
-    utils.PostRequest(api_url + '/Smallapp/User/delMycollect', {
+    utils.PostRequest(api_v_url + '/User/delMycollect', {
       openid: openid,
       res_id: forscreen_id
     }, (data, headers, cookies, errMsg, statusCode) => {
@@ -497,7 +497,7 @@ Page({
     page = page + 1;
     
 
-    utils.PostRequest(api_url + '/smallapp4/user/getMyCollect', {
+    utils.PostRequest(api_v_url + '/user/getMyCollect', {
       page: page,
         openid: openid,
     }, (data, headers, cookies, errMsg, statusCode) => {

@@ -65,7 +65,7 @@ Page({
         hotel_info: data.result
       })
     });
-    utils.PostRequest(api_url + '/Smallapp4/optimize/detail', {
+    utils.PostRequest(api_v_url + '/optimize/detail', {
         uid: uid,
         goods_id: goods_id,
         openid: openid,
@@ -95,7 +95,7 @@ Page({
     var user_info = wx.getStorageSync('savor_user_info');
     var openid = user_info.openid;
     var goods_id = e.currentTarget.dataset.goods_id;
-    utils.PostRequest(api_url + '/Smallapp3/datalog/recordlog', {
+    utils.PostRequest(api_v_url + '/datalog/recordlog', {
       openid: openid,
       data_id: goods_id,
       action_type: 3,
@@ -189,7 +189,7 @@ Page({
     app.boxShow(box_mac, forscreen_id, pubdetail, res_type, res_nums, 5, hotel_info);
     if (box_mac) {
       // 调用记录播放次数接口
-      utils.PostRequest(api_url + '/Smallapp4/demand/recordPlaynum', {
+      utils.PostRequest(api_v_url + '/demand/recordPlaynum', {
         openid: openid,
         res_id: forscreen_id
       }, (data, headers, cookies, errMsg, statusCode) => {
@@ -211,7 +211,7 @@ Page({
     var user_info = wx.getStorageSync('savor_user_info');
     var openid = user_info.openid;
     var res_type = 4;
-    utils.PostRequest(api_url + '/Smallapp/collect/recLogs', {
+    utils.PostRequest(api_v_url + '/collect/recLogs', {
       'openid': openid,
       'res_id': res_id,
       'type': res_type,
@@ -237,7 +237,7 @@ Page({
     var user_info = wx.getStorageSync('savor_user_info');
     var openid = user_info.openid;
     var res_type = 4;
-    utils.PostRequest(api_url + '/Smallapp/collect/recLogs', {
+    utils.PostRequest(api_v_url + '/collect/recLogs', {
       'openid': openid,
       'res_id': res_id,
       'type': res_type,
@@ -269,7 +269,7 @@ Page({
 
     if (res.from === 'button') {
       // 转发成功
-      utils.PostRequest(api_url + '/Smallapp/share/recLogs', {
+      utils.PostRequest(api_v_url + '/share/recLogs', {
         'openid': openid,
         'res_id': goods_id,
         'type': 4,
@@ -366,7 +366,7 @@ Page({
     var uid = e.currentTarget.dataset.uid;
     var user_info = wx.getStorageSync("savor_user_info");
     var openid = user_info.openid;
-    utils.PostRequest(api_url + '/Smallsale/order/addOrder', {
+    utils.PostRequest(api_v_url + '/order/addActivityOrder', {
       goods_id: goods_id,
       box_mac: goods_box_mac,
       amount: 1,

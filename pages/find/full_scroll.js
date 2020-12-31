@@ -66,7 +66,7 @@ let SavorUtils = {
     }),
 
     // 收藏/取消收藏
-    favorite: (pageContext, forscreenId, type, index, status) => utils.PostRequest(api_url + '/Smallapp4/collect/recLogs', {
+    favorite: (pageContext, forscreenId, type, index, status) => utils.PostRequest(api_v_url + '/collect/recLogs', {
       'openid': pageContext.data.openid,
       'res_id': forscreenId,
       'type': type,
@@ -135,7 +135,7 @@ let SavorUtils = {
         action: 12
       };
       let data = utils.ObjectUtil.extend(originalData, extendData);
-      utils.PostRequest(api_url + '/Smallapp/index/recordForScreenPics', data);
+      utils.PostRequest(api_v_url + '/index/recordForScreenPics', data);
     },
 
     // 投屏媒体组
@@ -185,7 +185,7 @@ let SavorUtils = {
         mediaObject = pageContext.data.mediaObjectList[indexInList];
       }
       SavorUtils.User.launchMediaSubGroup(pageContext, mediaObject, forscreenId);
-      utils.PostRequest(api_url + '/Smallapp21/CollectCount/recCount', {
+      utils.PostRequest(api_v_url + '/CollectCount/recCount', {
         res_id: forscreenId
       });
       //utils.tryCatch(mta.Event.stat('findBoxShow', { 'openid': pageContext.data.openid }));
@@ -197,7 +197,7 @@ let SavorUtils = {
     loadMediaData: pageContext => {
       let user_info = wx.getStorageSync("savor_user_info");
       let pageNo = ++pageContext.data.mediaPageNo;
-      utils.PostRequest(api_url + '/Smallapp4/find/videos', {
+      utils.PostRequest(api_v_url + '/find/videos', {
         page: pageNo,
         openid: user_info.openid
       }, (data, headers, cookies, errMsg, statusCode) => {
@@ -270,7 +270,7 @@ let SavorUtils = {
     loadPictureData: pageContext => {
       let user_info = wx.getStorageSync("savor_user_info");
       let pageNo = ++pageContext.data.picturePageNo;
-      utils.PostRequest(api_url + '/Smallapp4/find/images', {
+      utils.PostRequest(api_v_url + '/find/images', {
         page: pageNo,
         openid: user_info.openid
       }, (data, headers, cookies, errMsg, statusCode) => {
@@ -917,7 +917,7 @@ Page({
     if (res.from === 'button') {
 
       // 转发成功
-      utils.PostRequest(api_url + '/Smallapp4/share/recLogs', {
+      utils.PostRequest(api_v_url + '/share/recLogs', {
         'openid': openid,
         'res_id': res_id,
         'type': c_type,

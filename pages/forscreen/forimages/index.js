@@ -171,7 +171,7 @@ Page({
   getOssParam:function(){
     var that = this;
     wx.request({
-      url: api_url + '/Smallapp/Index/getOssParams',
+      url: api_v_url + '/Index/getOssParams',
       success: function(rest) {
         policy = rest.data.policy;
         signature = rest.data.signature;
@@ -1365,7 +1365,7 @@ Page({
       })
       
     }else {
-      utils.PostRequest(api_url +'/Smallapp3/ForscreenHelp/helpplay', {
+      utils.PostRequest(api_v_url +'/ForscreenHelp/helpplay', {
         forscreen_id: forscreen_id,
         openid      : openid,
       }, (data, headers, cookies, errMsg, statusCode) => {
@@ -1408,7 +1408,7 @@ Page({
         showGuidedMaskAfterLaunch:false,
       })
     }
-    utils.PostRequest(api_url + '/Smallapp3/content/guidePrompt', {
+    utils.PostRequest(api_v_url + '/content/guidePrompt', {
       openid: openid,
       type: type,
     }, (data, headers, cookies, errMsg, statusCode) => {

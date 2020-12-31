@@ -207,7 +207,7 @@ Page({
     if (box_mac == 'undefined' || box_mac == undefined) {
       box_mac = '';
     }
-    utils.PostRequest(api_url + '/Smallapp21/index/closeauthLog', {
+    utils.PostRequest(api_v_url + '/index/closeauthLog', {
       openid: openid,
       box_mac: box_mac,
     });
@@ -374,7 +374,7 @@ Page({
       content: '确定要断开链接的电视吗？',
       success(res) {
         if (res.confirm) {
-          utils.PostRequest(api_url + '/Smallapp21/index/breakLink', {
+          utils.PostRequest(api_v_url + '/index/breakLink', {
             box_mac: box_mac,
             openid: openid
           }, (data, headers, cookies, errMsg, statusCode) => {
@@ -432,7 +432,7 @@ Page({
   //打开遥控器
   openControl: function (e) {
     var that = this;
-    var qrcode_url = api_url + '/Smallapp4/index/getBoxQr?box_mac=' + box_mac + '&type=3';
+    var qrcode_url = api_v_url + '/index/getBoxQr?box_mac=' + box_mac + '&type=3';
     that.setData({
 
       popRemoteControlWindow: true,
@@ -483,7 +483,7 @@ Page({
       that.setData({
         wifiErr: { 'is_open': 0, 'msg': '', 'confirm': '', 'calcle': '', 'type': 0 },
       })
-      utils.PostRequest(api_url + '/Smallapp21/index/breakLink', {
+      utils.PostRequest(api_v_url + '/index/breakLink', {
         box_mac: box_mac,
         openid: user_info.openid
       }, (data, headers, cookies, errMsg, statusCode) => {
@@ -621,7 +621,7 @@ Page({
     var user_info = wx.getStorageSync("savor_user_info");
     var uid = e.currentTarget.dataset.uid;
     openid = user_info.openid;
-    utils.PostRequest(api_url + '/Smallsale/order/addOrder', {
+    utils.PostRequest(api_v_url + '/order/addActivityOrder', {
       goods_id: goods_id,
       box_mac: goods_box_mac,
       amount: goods_nums,
@@ -644,7 +644,7 @@ Page({
     var goods_id = e.currentTarget.dataset.goods_id;
     var user_info = wx.getStorageSync("savor_user_info");
     openid = user_info.openid;
-    utils.PostRequest(api_url + '/Smallapp3/datalog/recordlog', {
+    utils.PostRequest(api_v_url + '/datalog/recordlog', {
       action_type: 3,
       data_id: goods_id,
       openid: openid,
@@ -679,7 +679,7 @@ Page({
     if (!is_mobile) {
       return;
     }
-    utils.PostRequest(api_url + '/Smallsale/collection/addGoodscollection', {
+    utils.PostRequest(api_v_url + '/collect/addGoodscollection', {
       goods_id: goods_id,
       phone: mobile,
       openid: openid,
@@ -716,14 +716,13 @@ Page({
       var action = 12; //发现视频点播
       var jump_url = '/pages/find/video?box_mac='+box_mac+'&forscreen_id='+forscreen_id;
     }
-
-    app.boxShow(box_mac, res_id, pubdetail, res_type, res_nums, action, hotel_info, that);
     if(box_mac!='' && typeof(box_mac)!='undefined'){
       //跳转到详情页
-      wx.navigateTo({
-        url: jump_url,
-      })
+      app.boxShow(box_mac, res_id, pubdetail, res_type, res_nums, action, hotel_info, that);
     }
+    wx.navigateTo({
+      url: jump_url,
+    })
     
     var order = index + 1;
     mta.Event.stat('clickHotPlay', { 'linktype': app.globalData.link_type, 'boxmac': box_mac, "order": order })
@@ -932,7 +931,7 @@ Page({
       ads_id: ads_id,
       open_num: 1,
     });
-    utils.PostRequest(api_url + '/Smallapp3/datalog/recordlog', {
+    utils.PostRequest(api_v_url + '/datalog/recordlog', {
       action_type: 1,
       openid: openid,
       data_id: ads_id,

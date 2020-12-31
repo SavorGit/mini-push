@@ -2,22 +2,7 @@
 var mta = require('./utils/mta_analysis.js');
 App({
 
-  recordFormId(openid, formId) {
-    var that = this;
-    if (formId != 'the formId is a mock one') {
-      wx.request({
-        url: that.globalData.api_url + '/Smallapp3/content/addFormid',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        method: "POST",
-        data: {
-          openid: openid,
-          formid: formId,
-        }
-      })
-    }
-  },
+  
   //电视播放
   boxShow(box_mac = '', forscreen_id, pubdetail, res_type, res_len, action, hotel_info, aps) {
     var that = this;
@@ -32,7 +17,7 @@ App({
   tpst: function (box_mac = '', forscreen_id, pubdetail, res_type, res_len, action, hotel_info) {
     var that = this;
     wx.request({
-      url: that.globalData.api_url + '/smallapp21/User/isForscreenIng',
+      url: that.globalData.api_v_url + '/User/isForscreenIng',
       headers: {
         'Content-Type': 'application/json'
       },
@@ -240,7 +225,7 @@ App({
       }
     }
     wx.request({
-      url: that.globalData.api_url + '/Smallapp21/CollectCount/recCount',
+      url: that.globalData.api_v_url + '/CollectCount/recCount',
       headers: {
         'Content-Type': 'application/json'
       },
@@ -357,12 +342,12 @@ App({
       var forscreen_call_code_filename = that.globalData.forscreen_call_code_filename;
       if(link_type==1 || hotel_info==''){
         var timestamp = (new Date()).valueOf();
-        var qrcode_url = that.globalData.api_url + '/Smallapp/index/getBoxQr?box_mac=' + box_mac + '&type=3';
+        var qrcode_url = that.globalData.api_v_url + '/index/getBoxQr?box_mac=' + box_mac + '&type=3';
         var mobile_brand = this.globalData.mobile_brand;
         var mobile_model = this.globalData.mobile_model;
 
         wx.request({
-          url: that.globalData.api_url + '/smallapp21/User/isForscreenIng',
+          url: that.globalData.api_v_url + '/User/isForscreenIng',
           headers: {
             'Content-Type': 'application/json'
           },
@@ -623,9 +608,7 @@ App({
           wx.scanCode({
             onlyFromCamera: true,
             success: (res) => {
-              console.log(res)
               
-              console.log(res.result.indexOf("weixin.qq.com") )
 
               if(res.result.indexOf("weixin.qq.com") >0){
                 that.showToast('识别失败，请使用微信扫描电视二维码！',5000)
@@ -734,7 +717,7 @@ App({
       success: res => {
         var code = res.code; //返回code
         wx.request({
-          url: that.globalData.api_url + '/smallapp/index/getOpenid',
+          url: that.globalData.api_v_url + '/index/getOpenid',
           data: {
             "code": code
           },
@@ -1355,11 +1338,11 @@ changeKb:function (limit){
     mobile_model: '',
     statusBarHeight: 0,
     jd_appid: 'wx91d27dbf599dff74',
-    api_url: 'https://mobile.littlehotspot.com',
-    api_v_url:'https://mobile.littlehotspot.com/Smallapp46',
-    oss_upload_url: 'https://image.littlehotspot.com',
-    netty_url: 'https:/netty-push.littlehotspot.com',
-    oss_url: 'https://oss.littlehotspot.com',
+    api_url: 'https://dev-mobile.littlehotspot.com',
+    api_v_url:'https://dev-mobile.littlehotspot.com/Smallapp46',
+    oss_upload_url: 'https://dev-image.littlehotspot.com',
+    netty_url: 'https:/dev-netty-push.littlehotspot.com',
+    oss_url: 'https://dev-oss.littlehotspot.com',
     Official_account_url:'https://mobile.littlehotspot.com/h5/official/getuserinfo/p/',
     Official_article_url:'',
     oss_bucket: 'redian-produce',

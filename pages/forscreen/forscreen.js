@@ -18,7 +18,7 @@ Page({
   
   //进来加载页面：
   onLoad: function (options) {
-    utils.PostRequest(api_url+'/smallapp21/index/getConfig', {
+    utils.PostRequest(api_v_url+'/index/getConfig', {
     }, (data, headers, cookies, errMsg, statusCode) => {
       wx.setStorage({
         key: 'savor_now_time',
@@ -40,7 +40,7 @@ Page({
 
     }else if(typeof(options.s) !='undefined'){//小程序内扫普通二维码
       var s = options.s
-      utils.PostRequest(api_url + '/Smallapp21/index/getQrcontent', {
+      utils.PostRequest(api_v_url + '/index/getQrcontent', {
         content: s
       }, (data, headers, cookies, errMsg, statusCode) => {
         var scene = data.result.content;
@@ -84,7 +84,7 @@ Page({
           url: launch_url,
         }) 
       }else {
-        utils.PostRequest(api_url + '/Smallapp21/index/getQrcontent', {
+        utils.PostRequest(api_v_url + '/index/getQrcontent', {
           content: pams
         }, (data, headers, cookies, errMsg, statusCode) => {
           var scene = data.result.content;
@@ -126,7 +126,7 @@ Page({
       var s = options.official
       var wxmpopenid = options.wxmpopenid;
       var subscribe_time = options.subscribe_time;
-      utils.PostRequest(api_url + '/Smallapp21/index/getQrcontent', {
+      utils.PostRequest(api_v_url + '/index/getQrcontent', {
         content: s
       }, (data, headers, cookies, errMsg, statusCode) => {
         var scene = data.result.content;
@@ -153,7 +153,7 @@ Page({
         success: res => {
           var code = res.code; //返回code
 
-          utils.PostRequest(api_url + '/smallapp/index/getOpenid', {
+          utils.PostRequest(api_v_url + '/index/getOpenid', {
             "code": code
           }, (data, headers, cookies, errMsg, statusCode) => {
             app.globalData.openid = data.result.openid;
@@ -165,7 +165,7 @@ Page({
               var difftime = nowtime - jz_time;
               if (difftime > fztime) {
 
-                utils.PostRequest(api_url + '/smallapp21/index/recOverQrcodeLog', {
+                utils.PostRequest(api_v_url + '/index/recOverQrcodeLog', {
                   "openid": openid,
                   "box_mac": box_mac,
                   "type": code_type,
@@ -177,7 +177,7 @@ Page({
                 
               }else {
 
-                utils.PostRequest(api_url + '/Smallapp21/Index/genCode', {
+                utils.PostRequest(api_v_url + '/Index/genCode', {
                   'box_mac': box_mac,
                   'openid': openid,
                   'type': code_type,
@@ -210,21 +210,26 @@ Page({
         }
       }
       var that = this
+      
       wx.login({
         success: res => {
           var code = res.code; //返回code
-          utils.PostRequest(api_url + '/smallapp/index/getOpenid', {
+          utils.PostRequest(api_v_url + '/index/getOpenid', {
             "code": code
           }, (data, headers, cookies, errMsg, statusCode) => {
             app.globalData.openid = data.result.openid;
             app.globalData.session_key = data.result.session_key;
             var openid = data.result.openid
+            if(app.globalData.serial_number==''){
+              app.globalData.serial_number = app.not_link_box_pre+data.result.openid+'_'+(new Date()).valueOf();
+            }
+            
             if (jz_time) {//判断二维码时间是否超过两个小时
               //var fztime = 7200000;
               var fztime = sysconfig.exp_time;
               var difftime = nowtime - jz_time;
               if (difftime > fztime) {
-                utils.PostRequest(api_url + '/smallapp21/index/recOverQrcodeLog', {
+                utils.PostRequest(api_v_url + '/index/recOverQrcodeLog', {
                   "openid": openid,
                   "box_mac": box_mac,
                   "type": code_type,
@@ -265,7 +270,7 @@ Page({
     }
     function setInfos(box_mac, openid,code_type) {
       //发送随机码给电视显示 (默认用户不用填写三位呼玛)
-      utils.PostRequest(api_url+'/Smallapp21/Index/genCode', {
+      utils.PostRequest(api_v_url+'/Index/genCode', {
         'box_mac': box_mac,
         'openid' : openid,
         'type'   : code_type,

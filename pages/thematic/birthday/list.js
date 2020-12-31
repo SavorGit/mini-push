@@ -28,14 +28,14 @@ Page({
 
   getContellDetail:function(constellid){
     var that = this
-    utils.PostRequest(api_url+'/Smallapp3/constellation/getVideoList', {
+    utils.PostRequest(api_v_url+'/constellation/getVideoList', {
       constellation_id: constellid,
     }, (data, headers, cookies, errMsg, statusCode) => {
       that.setData({
         videolist: data.result
       })
     })
-    utils.PostRequest(api_url+'/Smallapp3/constellation/getConstellationDetail', {
+    utils.PostRequest(api_v_url+'/constellation/getConstellationDetail', {
       constellation_id: constellid,
     }, (data, headers, cookies, errMsg, statusCode) => {
       that.setData({
@@ -57,13 +57,13 @@ Page({
       openid:openid,
       box_mac:box_mac,
     })
-    utils.PostRequest(api_url+'/Smallapp21/index/happylist', {
+    utils.PostRequest(api_v_url+'/index/happylist', {
     }, (data, headers, cookies, errMsg, statusCode) => {
       that.setData({
         happylist:data.result
       })
     })
-    utils.PostRequest(api_url+'/Smallapp3/constellation/getConstellationList', {
+    utils.PostRequest(api_v_url+'/constellation/getConstellationList', {
     }, (data, headers, cookies, errMsg, statusCode) => {
       that.setData({
         constellationlist:data.result,
@@ -80,7 +80,7 @@ Page({
 
     //红包送祝福开关
 
-    utils.PostRequest(api_url+'/smallapp3/Redpacket/getConfig', {
+    utils.PostRequest(api_v_url+'/Redpacket/getConfig', {
       type:1
     }, (data, headers, cookies, errMsg, statusCode) => {
       that.setData({
@@ -125,7 +125,7 @@ Page({
     var timestamp = (new Date()).valueOf();
     var mobile_brand = app.globalData.mobile_brand;
     var mobile_model = app.globalData.mobile_model;
-    utils.PostRequest(api_url + '/smallapp21/User/isForscreenIng', {
+    utils.PostRequest(api_v_url + '/User/isForscreenIng', {
       box_mac: box_mac 
     }, (data, headers, cookies, errMsg, statusCode) => {
       var is_forscreen = data.result.is_forscreen;
@@ -286,7 +286,7 @@ Page({
     if (box_mac == 'undefined' || box_mac == undefined) {
       box_mac = '';
     }
-    utils.PostRequest(api_url+'/Smallapp21/index/closeauthLog', {
+    utils.PostRequest(api_v_url+'/index/closeauthLog', {
       openid: openid,
       box_mac: box_mac,
     }, (data, headers, cookies, errMsg, statusCode) => {
@@ -308,7 +308,7 @@ Page({
   //打开遥控器
   openControl: function (e) {
     var that = this;
-    var qrcode_url = api_url+'/Smallapp4/index/getBoxQr?box_mac=' + box_mac + '&type=3';
+    var qrcode_url = api_v_url+'/index/getBoxQr?box_mac=' + box_mac + '&type=3';
     that.setData({
 
       showControl: true,

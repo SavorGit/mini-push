@@ -29,7 +29,7 @@ Page({
     var forscreen_id = options.forscreen_id;
     var user_info = wx.getStorageSync("savor_user_info");
     openid = user_info.openid;
-    utils.PostRequest(api_url+'/smallapp21/Discovery/showPic', {
+    utils.PostRequest(api_v_url+'/Discovery/showPic', {
       'forscreen_id':forscreen_id,
       'openid':openid,
     }, (data, headers, cookies, errMsg, statusCode) => {
@@ -81,7 +81,7 @@ Page({
     var res_id = e.target.dataset.res_id;
     var pub_info = e.target.dataset.pub_info;
 
-    utils.PostRequest(api_url+'/Smallapp/collect/recLogs', {
+    utils.PostRequest(api_v_url+'/collect/recLogs', {
       'openid': openid,
       'res_id': res_id,
       'type': 2,
@@ -103,7 +103,7 @@ Page({
     var res_id = e.target.dataset.res_id;
     var pub_info = e.target.dataset.pub_info;
     var openid = e.target.dataset.openid;
-    utils.PostRequest(api_url+'/Smallapp/collect/recLogs', {
+    utils.PostRequest(api_v_url+'/collect/recLogs', {
       'openid': openid,
       'res_id': res_id,
       'type': 2,
@@ -135,7 +135,7 @@ Page({
 
     if (res.from === 'button') {
       // 转发成功
-      utils.PostRequest(api_url+'/Smallapp/share/recLogs', {
+      utils.PostRequest(api_v_url+'/share/recLogs', {
         'openid': openid,
         'res_id': res_id,
         'type': 2,

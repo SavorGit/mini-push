@@ -6,6 +6,7 @@ const app = getApp()
 const utils = require('../../../utils/util.js')
 const mta = require('../../../utils/mta_analysis.js')
 var api_url = app.globalData.api_url;
+var api_v_url = app.globalData.api_v_url;
 var cache_key = app.globalData.cache_key;
 
 
@@ -32,7 +33,7 @@ Page({
         remark_strs: remark_strs
       })
     }
-    utils.PostRequest(api_url + '/Smallapp43/order/getRemarks', {
+    utils.PostRequest(api_v_url + '/order/getRemarks', {
       
     }, (data, headers, cookies, errMsg, statusCode) => that.setData({
       remark_list: data.result

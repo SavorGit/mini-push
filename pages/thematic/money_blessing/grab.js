@@ -38,7 +38,7 @@ Page({
     box_mac = scene_arr[1];
     var redpackt_qrcode_createtime = scene_arr[2];  //红包生成时间
     wx.request({
-      url: api_url+'/smallapp3/index/getConfig',
+      url: api_v_url+'/index/getConfig',
       success: function (e) {
         if(e.data.code==10000){
           var sys_time = e.data.result.sys_time;  //系统时间
@@ -85,7 +85,7 @@ Page({
               
               //判断用户是否注册
               wx.request({
-                url: api_url+'/smallapp3/User/isRegister',
+                url: api_v_url+'/User/isRegister',
                 data: {
                   "openid": openid,
                   "box_mac": box_mac,
@@ -226,7 +226,7 @@ Page({
                   
                   //判断用户是否注册
                   wx.request({
-                    url: api_url+'/smallapp3/User/isRegister',
+                    url: api_v_url+'/User/isRegister',
                     data: {
                       "openid": openid,
                     },
@@ -346,7 +346,7 @@ Page({
               }
             }
             function getRedpacketJx(openid) {
-              utils.PostRequest(api_url+'/Smallapp3/Find/redPacketJx', {
+              utils.PostRequest(api_v_url+'/Find/redPacketJx', {
                 openid: openid,
               }, (data, headers, cookies, errMsg, statusCode) => {
                 discovery_list = data.result
@@ -524,7 +524,7 @@ Page({
       mta.Event.stat("refuseauth", {})
     }  
     function getRedpacketJx(openid) {
-      utils.PostRequest(api_url+'/Smallapp3/Find/redPacketJx', {
+      utils.PostRequest(api_v_url+'/Find/redPacketJx', {
         openid: openid,
       }, (data, headers, cookies, errMsg, statusCode) => {
         discovery_list = data.result
@@ -547,7 +547,7 @@ Page({
     if (box_mac == 'undefined' || box_mac == undefined) {
       box_mac = '';
     }
-    utils.PostRequest(api_url+'/Smallapp21/index/closeauthLog', {
+    utils.PostRequest(api_v_url+'/index/closeauthLog', {
       openid: openid,
       box_mac: box_mac,
     }, (data, headers, cookies, errMsg, statusCode) => {
@@ -692,7 +692,7 @@ Page({
     var res_id = e.target.dataset.res_id;
     var res_key = e.target.dataset.res_key;
 
-    utils.PostRequest(api_url+'/Smallapp/collect/recLogs', {
+    utils.PostRequest(api_v_url+'/collect/recLogs', {
       'openid': openid,
       'res_id': res_id,
       'type': 2,
@@ -717,7 +717,7 @@ Page({
     var res_id = e.target.dataset.res_id;
     var res_key = e.target.dataset.res_key;
     var openid = e.target.dataset.openid;
-    utils.PostRequest(api_url+'/Smallapp/collect/recLogs', {
+    utils.PostRequest(api_v_url+'/collect/recLogs', {
       'openid': openid,
       'res_id': res_id,
       'type': 2,
@@ -755,7 +755,7 @@ Page({
 
     if (res.from === 'button') {
       // 转发成功
-      utils.PostRequest(api_url+'/Smallapp/share/recLogs', {
+      utils.PostRequest(api_v_url+'/share/recLogs', {
         'openid': openid,
         'res_id': res_id,
         'type': 2,

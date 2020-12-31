@@ -33,13 +33,11 @@ Page({
    */
   onLoad: function (options) {
     app.globalData.fromPage = "/pages/forscreen/forfile/h5files_result";
-    console.log(options);
     var that = this;
     var pa_openid  = options.openid;
     var pa_box_mac = options.box_mac;
     var user_info = wx.getStorageSync("savor_user_info");
     openid = user_info.openid;
-    console.log('1111');
     if(openid !=pa_openid){
       wx.showToast({
         title: '用户校验失败',
@@ -68,10 +66,10 @@ Page({
       var res_eup_time  = options.res_eup_time;
       var save_type     = options.save_type;
       var is_fresh      = options.is_fresh;
-      console.log('222');
+
       if (is_fresh==1){
         wx.request({
-          url: api_url + '/smallapp3/index/getConfig',
+          url: api_v_url + '/index/getConfig',
           headers: {
             'Content-Type': 'application/json'
           },
@@ -101,7 +99,7 @@ Page({
           }
         })
       }else if(is_fresh==2){//投屏历史
-        console.log('aaaa');
+
         var forscreen_id = options.forscreen_id;
         wx.request({
           url: api_v_url +'/Fileforscreen/getforscreenbyid',
@@ -110,7 +108,7 @@ Page({
           },
           success:function(res){
             if(res.data.code==10000){
-              console.log(res);
+
               that.setData({
                 file_imgs: res.data.result.imgs,
                 img_nums: res.data.result.img_num,
@@ -157,8 +155,7 @@ Page({
       }
     }
     function dealFile(oss_file_path, file_name, file_size, polling_time, res_sup_time, res_eup_time, save_type, that) {
-      console.log(polling_time);
-      console.log(that);
+
       var index1 = file_name.lastIndexOf(".");
       file_name = file_name.substring(0, index1);
       //首先调用文件处理接口  if 如果返回文件处理完成则结束  else 轮询调用获取文件处理的图片接口
@@ -182,7 +179,7 @@ Page({
           save_type: save_type
         },
         success: function (res) {
-          console.log(res);
+
           if (res.data.code == 10000) {
             var task_id = res.data.result.task_id;
             var file_status = res.data.result.status;
@@ -203,7 +200,7 @@ Page({
               console.log('转换中');
               var timer8_0 = setInterval(function () {
                 polling_time -= 1;
-                console.log(polling_time);
+
                 wx.request({
                   url: api_v_url + '/Fileforscreen/getresult',  //轮询获取文件处理结果接口
                   headers: {
@@ -214,7 +211,7 @@ Page({
                     forscreen_id: forscreen_id,
                   },
                   success: function (res) {
-                    console.log(res);
+    
                     if (res.data.code == 10000) {
                       if (res.data.result.status == 2) {//文件转换成功
                         that.setData({
@@ -363,7 +360,7 @@ Page({
    * @desc  上一张  下一张
    */
   changePic: util.throttle(function (e) {
-    console.log(e);
+
     var that = this;
 
     var user_info = wx.getStorageSync("savor_user_info");
@@ -415,7 +412,7 @@ Page({
         }
       }
       var target = 'list' + pos_id;
-      console.log(pos_id);
+
       that.setData({
         pos_id: pos_id,
         toView: target
@@ -464,7 +461,7 @@ Page({
    * @desc 指定单张图片投屏
    */
   appointPic: function (e) {
-    console.log(e);
+
     var that = this;
     pos_id = e.currentTarget.dataset.pos_id;  //指定图片的索引
     that.setData({
@@ -567,7 +564,7 @@ Page({
   //打开遥控器
   openControl: function (e) {
     var that = this;
-    var qrcode_url = api_url + '/Smallapp4/index/getBoxQr?box_mac=' + box_mac + '&type=3';
+    var qrcode_url = api_v_url + '/index/getBoxQr?box_mac=' + box_mac + '&type=3';
     that.setData({
       showControl: true,
       qrcode_img: qrcode_url

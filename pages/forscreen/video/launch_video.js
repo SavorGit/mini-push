@@ -41,7 +41,7 @@ Page({
     var that = this;
     //获取节目单视频详情
 
-    util.PostRequest(api_url+'/Smallapp3/Demand/getVideoInfo', {
+    util.PostRequest(api_v_url+'/Demand/getVideoInfo', {
       res_id : res_id,
       openid : openid,
     }, (data, headers, cookies, errMsg, statusCode) => {
@@ -73,7 +73,7 @@ Page({
     var res_id = e.target.dataset.res_id;
     
     var res_type = e.target.dataset.type;
-    util.PostRequest(api_url+'/Smallapp/collect/recLogs', {
+    util.PostRequest(api_v_url+'/collect/recLogs', {
       'openid': openid,
       'res_id': res_id,
       'type': res_type,
@@ -97,7 +97,7 @@ Page({
     var res_id = e.target.dataset.res_id;
     
     var res_type = e.target.dataset.type;
-    util.PostRequest(api_url+'/Smallapp/collect/recLogs', {
+    util.PostRequest(api_v_url+'/collect/recLogs', {
       'openid': openid,
       'res_id': res_id,
       'type': res_type,
@@ -131,7 +131,7 @@ Page({
       // 转发成功
       share_num = share_num++;
 
-      util.PostRequest(api_url+'/Smallapp3/share/recLogs', {
+      util.PostRequest(api_v_url+'/share/recLogs', {
         'openid': openid,
         'res_id': res_id,
         'type': res_type,
@@ -199,7 +199,7 @@ Page({
   //打开遥控器
   openControl: function (e) {
     var that = this;
-    var qrcode_url = api_url+'/Smallapp4/index/getBoxQr?box_mac=' + box_mac + '&type=3';
+    var qrcode_url = api_v_url+'/index/getBoxQr?box_mac=' + box_mac + '&type=3';
     that.setData({
 
       showControl: true,

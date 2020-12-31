@@ -215,7 +215,7 @@ Page({
   getOssParam:function(){
     var that = this;
     wx.request({
-      url: api_url + '/Smallapp/Index/getOssParams',
+      url: api_v_url + '/Index/getOssParams',
       headers: {
         'Content-Type': 'application/json'
       },
@@ -259,7 +259,7 @@ Page({
       is_assist: is_assist
     })
 
-    utils.PostRequest(api_url + '/smallapp21/User/isForscreenIng', {
+    utils.PostRequest(api_v_url + '/User/isForscreenIng', {
       box_mac: box_mac
     }, (data, headers, cookies, errMsg, statusCode) => {
       var is_forscreen = data.result.is_forscreen;
@@ -1616,7 +1616,7 @@ Page({
   //打开遥控器
   openControl: function(e) {
     var that = this;
-    var qrcode_url = api_url + '/Smallapp4/index/getBoxQr?box_mac=' + box_mac + '&type=3';
+    var qrcode_url = api_v_url + '/index/getBoxQr?box_mac=' + box_mac + '&type=3';
     that.setData({
       is_open_control: true,
       popRemoteControlWindow: true,
@@ -1677,7 +1677,7 @@ Page({
       })
 
     } else {
-      utils.PostRequest(api_url + '/Smallapp3/ForscreenHelp/helpplay', {
+      utils.PostRequest(api_v_url + '/ForscreenHelp/helpplay', {
         forscreen_id: forscreen_id,
         openid: openid,
       }, (data, headers, cookies, errMsg, statusCode) => {
@@ -1721,7 +1721,7 @@ Page({
         showGuidedMaskAfterLaunch: false,
       })
     }
-    utils.PostRequest(api_url + '/Smallapp3/content/guidePrompt', {
+    utils.PostRequest(api_v_url + '/content/guidePrompt', {
       openid: openid,
       type: type,
     }, (data, headers, cookies, errMsg, statusCode) => {

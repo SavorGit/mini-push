@@ -57,7 +57,7 @@ Page({
         })
       }
     })
-    utils.PostRequest(api_url + '/Smallapp3/User/getMyPublic', {
+    utils.PostRequest(api_v_url + '/User/getMyPublic', {
       openid: openid
     }, (data, headers, cookies, errMsg, statusCode) => {
       publiclist = data.result.list;
@@ -82,7 +82,7 @@ Page({
   //打开遥控器
   openControl: function(e) {
     var self = this;
-    var qrcode_url = api_url + '/Smallapp4/index/getBoxQr?box_mac=' + box_mac + '&type=3';
+    var qrcode_url = api_v_url + '/index/getBoxQr?box_mac=' + box_mac + '&type=3';
     self.setData({
       showControl: true,
       qrcode_img: qrcode_url
@@ -192,7 +192,7 @@ Page({
 
     if (res.from === 'button') {
       // 转发成功
-      utils.PostRequest(api_url + '/Smallapp/share/recLogs', {
+      utils.PostRequest(api_v_url + '/share/recLogs', {
         'openid': openid,
         'res_id': res_id,
         'type': 2,
@@ -249,7 +249,7 @@ Page({
       'status': true
     }));
 
-    utils.PostRequest(api_url + '/Smallapp/User/delMyPublic', {
+    utils.PostRequest(api_v_url + '/User/delMyPublic', {
       openid: openid,
       forscreen_id: forscreen_id
     }, (data, headers, cookies, errMsg, statusCode) => {
@@ -304,7 +304,7 @@ Page({
 
     page = page + 1;
     
-    utils.PostRequest(api_url + '/smallapp3/user/getMyPublic', {
+    utils.PostRequest(api_v_url + '/user/getMyPublic', {
       page: page,
       openid: openid,
     }, (data, headers, cookies, errMsg, statusCode) => {
@@ -347,7 +347,7 @@ Page({
       'status': true
     }));
 
-    utils.PostRequest(api_url + '/Smallapp/collect/recLogs', {
+    utils.PostRequest(api_v_url + '/collect/recLogs', {
       'openid': openid,
       'res_id': res_id,
       'type': 2,
@@ -382,7 +382,7 @@ Page({
       'openid': openid,
       'status': false
     }));
-    utils.PostRequest(api_url + '/Smallapp/collect/recLogs', {
+    utils.PostRequest(api_v_url + '/collect/recLogs', {
       'openid': openid,
       'res_id': res_id,
       'type': 2,

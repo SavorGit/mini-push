@@ -41,7 +41,7 @@ Page({
       area_id = 0;
     }
     console.log(area_id)
-    utils.PostRequest(api_url + '/Smallapp43/address/addresslist', {
+    utils.PostRequest(api_v_url + '/address/addresslist', {
       openid: openid,
       page :1,
       area_id: area_id,
@@ -65,7 +65,7 @@ Page({
   loadMore:function(e){
     var that = this;
     page +=1;
-    utils.PostRequest(api_url + '/Smallapp43/address/addresslist', {
+    utils.PostRequest(api_v_url + '/address/addresslist', {
       openid: openid,
       page: page,
       area_id:area_id
@@ -104,7 +104,7 @@ Page({
     var address_id = that.data.address_id;
     var keys = that.data.keys;
     if(typeof(address_id)!='undefined'){
-      utils.PostRequest(api_url + '/Smallapp43/address/delAddress', {
+      utils.PostRequest(api_v_url + '/address/delAddress', {
         openid: openid,
         address_id: address_id
       }, (data, headers, cookies, errMsg, statusCode) => {
@@ -142,7 +142,7 @@ Page({
       var address_list = that.data.address_list;
       var address_id  = e.currentTarget.dataset.address_id;
       
-      utils.PostRequest(api_url + '/Smallapp43/address/setDefaultAddress', {
+      utils.PostRequest(api_v_url + '/address/setDefaultAddress', {
         openid: openid,
         address_id: address_id,
         is_default:1
@@ -248,7 +248,7 @@ Page({
    */
   onShow: function () {
     var that = this;
-    utils.PostRequest(api_url + '/Smallapp43/address/addresslist', {
+    utils.PostRequest(api_v_url + '/address/addresslist', {
       openid: openid,
       page: page,
       area_id:area_id

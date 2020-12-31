@@ -173,7 +173,7 @@ Page({
   getOssParam:function(){
     var that = this;
     wx.request({
-      url: api_url + '/Smallapp/Index/getOssParams',
+      url: api_v_url + '/Index/getOssParams',
       headers: {
         'Content-Type': 'application/json'
       },
@@ -217,7 +217,7 @@ Page({
       is_assist: is_assist
     })
     wx.request({
-      url: api_url + '/smallapp21/User/isForscreenIng',
+      url: api_v_url + '/User/isForscreenIng',
       headers: {
         'Content-Type': 'application/json'
       },
@@ -997,7 +997,7 @@ Page({
   //打开遥控器
   openControl: function(e) {
     var that = this;
-    var qrcode_url = api_url + '/Smallapp4/index/getBoxQr?box_mac=' + box_mac + '&type=3';
+    var qrcode_url = api_v_url + '/index/getBoxQr?box_mac=' + box_mac + '&type=3';
     that.setData({
       is_open_control: true,
       popRemoteControlWindow: true,
@@ -1060,7 +1060,7 @@ Page({
     } else {
 
       wx.request({
-        url: api_url + '/Smallapp3/ForscreenHelp/helpplay',
+        url: api_v_url + '/ForscreenHelp/helpplay',
         header: {
           'Content-Type': 'application/json'
         },
@@ -1119,7 +1119,7 @@ Page({
       })
     }
     wx.request({
-      url: api_url + '/Smallapp3/content/guidePrompt',
+      url: api_v_url + '/content/guidePrompt',
       header: {
         'Content-Type': 'application/json'
       },

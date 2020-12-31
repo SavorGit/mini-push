@@ -56,7 +56,7 @@ Page({
     })
     
     function getRedpacketJx(openid) {
-      utils.PostRequest(api_url+'/Smallapp3/Find/redPacketJx', {
+      utils.PostRequest(api_v_url+'/Find/redPacketJx', {
         openid: openid,
       }, (data, headers, cookies, errMsg, statusCode) => {
         discovery_list = data.result
@@ -192,7 +192,7 @@ Page({
     var openid = e.target.dataset.openid;
     var res_id = e.target.dataset.res_id;
     var res_key = e.target.dataset.res_key;
-    utils.PostRequest(api_url+'/Smallapp/collect/recLogs', {
+    utils.PostRequest(api_v_url+'/collect/recLogs', {
       'openid': openid,
       'res_id': res_id,
       'type': 2,
@@ -218,7 +218,7 @@ Page({
     var res_id = e.target.dataset.res_id;
     var res_key = e.target.dataset.res_key;
     var openid = e.target.dataset.openid;
-    utils.PostRequest(api_url+'/Smallapp/collect/recLogs', {
+    utils.PostRequest(api_v_url+'/collect/recLogs', {
       'openid': openid,
       'res_id': res_id,
       'type': 2,
@@ -256,7 +256,7 @@ Page({
 
     if (res.from === 'button') {
       // 转发成功
-      utils.PostRequest(api_url+'/Smallapp/share/recLogs', {
+      utils.PostRequest(api_v_url+'/share/recLogs', {
         'openid': openid,
         'res_id': res_id,
         'type': 2,
