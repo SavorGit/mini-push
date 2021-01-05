@@ -1,4 +1,9 @@
 // scene/pages/business/card/add.js
+/**
+ * 【场景】商务宴请 - 名片
+ */
+
+
 const utils = require('../../../../utils/util.js')
 var mta = require('../../../../utils/mta_analysis.js')
 const app = getApp()
@@ -12,6 +17,8 @@ Page({
    * 页面的初始数据
    */
   data: {
+    statusBarHeight: getApp().globalData.statusBarHeight,
+    SystemInfo: getApp().SystemInfo,
     is_edit:0,
     card_info:{'hader_url':'','name':'','mobile':'','job_title':'','company':'','wx_qrcode':''},
     addDisabled:false,

@@ -1,1 +1,180 @@
 /* scene/pages/business/card/add.wxss */
+/**
+ * 【场景】商务宴请 - 名片
+ */
+
+
+/* ============================================= 展示页面 ============================================= */
+.viewer>.card-group {
+  width: 100%;
+}
+
+.viewer>.card-group>.card {
+  width: 720rpx;
+  height: 464rpx;
+  border-radius: 10rpx;
+}
+
+.viewer>.card-group>.card>.option-mark {
+  width: 70rpx;
+  height: 70rpx;
+  margin-top: -424rpx;
+  margin-left: calc(100% - 110rpx);
+}
+
+.viewer>.card-group>.card>.option-mark>.btn {
+  width: 70rpx;
+  height: 70rpx;
+  line-height: 70rpx;
+  text-align: center;
+  font-size: 64rpx;
+}
+
+.viewer>.card-group>.card>.face {
+  width: calc(100% - 40rpx);
+  height: 424rpx;
+  padding: 20rpx;
+}
+
+.viewer>.card-group>.card>.face>.info {
+  width: 100%;
+}
+
+.viewer>.card-group>.card>.face>.info>.left {
+  width: 120rpx;
+  height: 100rpx;
+}
+
+.viewer>.card-group>.card>.face>.info>.left>.head-pic {
+  width: 100rpx;
+  height: 100rpx;
+  border-radius: 50%;
+}
+
+.viewer>.card-group>.card>.face>.info>.right>.user>.name {
+  font-size: 36rpx;
+  font-weight: 700;
+}
+
+.viewer>.card-group>.card>.face>.info>.right>.user>.title {
+  padding-left: 10rpx;
+  font-size: 24rpx;
+  font-weight: 400;
+}
+
+.viewer>.card-group>.card>.face>.info>.right>.company {
+  font-size: 24rpx;
+  font-weight: 400;
+}
+
+.viewer>.card-group>.card>.face>.bottom {
+  width: 100%;
+}
+
+.viewer>.card-group>.card>.face>.bottom>.qr {
+  width: 228rpx;
+  height: 228rpx;
+}
+
+
+
+
+
+/* ============================================= 编辑页面 ============================================= */
+.editer>.page .row>.label {
+  width: 150rpx;
+  font-size: 28rpx;
+}
+
+.editer>.page .row>.value {
+  width: calc(100% - 166rpx);
+  padding: 5rpx;
+  border: 3rpx solid #BBBBBB;
+}
+
+.editer>.page .row>.value>.input {
+  width: 100%;
+  height: 100%;
+  font-size: 28rpx;
+}
+
+.editer>.page>.part-1 {
+  width: calc(100% - 40rpx);
+  padding: 0 20rpx;
+}
+
+.editer>.page>.part-1>.left {
+  width: calc(100% - 200rpx);
+}
+
+.editer>.page>.part-1>.left>.row {
+  padding: 10rpx 0;
+}
+
+.editer>.page>.part-1>.left>.row>.value {
+  height: 50rpx;
+}
+
+.editer>.page>.part-1>.left>.row>.value>.input {
+  height: 50rpx;
+  line-height: 50rpx;
+}
+
+.editer>.page>.part-1>.right {
+  width: 180rpx;
+}
+
+.editer>.page>.part-1>.right>.head-pic {
+  width: 180rpx;
+  height: 180rpx;
+}
+
+.editer>.page>.part-1>.right>.label {
+  font-size: 28rpx;
+}
+
+.editer>.page>.company,
+.editer>.page>.qr {
+  width: calc(100% - 40rpx);
+  padding: 10rpx 20rpx;
+}
+
+.editer>.page>.company>.value {
+  height: 120rpx;
+}
+
+.editer>.page>.qr>.value {
+  width: 200rpx;
+  height: 200rpx;
+  padding: 0;
+}
+
+.editer>.page>.qr>.value>.icon {
+  font-size: 64rpx;
+}
+
+.editer>.page>.qr>.value>.title {
+  font-size: 28rpx;
+}
+
+.editer>.page>.qr>.value>.pic {
+  width: 100%;
+  height: 100%;
+}
+
+.editer>.page>.buttons {
+  width: 100%;
+  height: 120rpx;
+}
+
+.editer>.page>.buttons>.btn {
+  width: 544rpx;
+  height: 88rpx;
+  line-height: 88rpx;
+  text-align: center;
+  font-size: 28rpx;
+  border-radius: 8rpx;
+  border: 0;
+  padding: 0;
+  margin: 0;
+}
