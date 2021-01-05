@@ -1,4 +1,11 @@
 // scene/pages/welcome/add.js
+const utils = require('../../../utils/util.js')
+var mta = require('../../../utils/mta_analysis.js')
+const app = getApp()
+var api_v_url = app.globalData.api_v_url;
+var openid;
+var box_mac;
+var type;
 Page({
 
   /**
@@ -12,7 +19,24 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    openid = options.openid;
+    box_mac = options.box_mac;
+    type   = options.type;
+    this.getWelcomeInfo(openid,box_mac,type);
+  },
+  /**
+   * 获取欢迎词信息
+   */
+  getWelcomeInfo:function(openid,box_mac,type){
+    var that = this;
+    utils.PostRequest(api_v_url + '/aa/bb', {
+      openid:openid,
+      box_mac:box_mac,
+    }, (data, headers, cookies, errMsg, statusCode) =>{
+      that.setData({
+        welcome_info:data.result
+      })
+    })
   },
 
   /**
