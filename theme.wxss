@@ -138,7 +138,8 @@ button[disabled] {
   background-color: #F44444;
 }
 
-.theme-button-orange {
+.theme-button-orange,
+.theme-orange-panel {
   color: #FFFFFF;
   background-color: #F68855;
 }
