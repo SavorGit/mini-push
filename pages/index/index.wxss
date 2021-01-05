@@ -207,7 +207,7 @@
 /* ==================================== 推荐面板 ==================================== */
 
 .recommend-panel {
-  max-height: 1410rpx;
+  /* max-height: 1410rpx; */
   margin-top: 20rpx;
 }
 
@@ -228,7 +228,7 @@
 
 .recommend-panel>.weui-grids {
   width: calc(100% - 60rpx);
-  height: 1230rpx;
+  /* height: 1230rpx; */
   padding: 30rpx;
 }
 
