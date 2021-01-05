@@ -53,7 +53,8 @@
     "pages/thematic/money_blessing/grab_list",
     "pages/thematic/money_blessing/pay_result",
     "pages/thematic/money_blessing/receive_h5",
-    "pages/thematic/money_blessing/receive_result"
+    "pages/thematic/money_blessing/receive_result",
+    "pages/scene/business/downloadfile"
   ],
   "subpackages": [
     {
@@ -87,6 +88,15 @@
       "pages": [
         "pages/gamelist",
         "pages/activity/din_dash"
+      ]
+    },
+    {
+      "root":"scene",
+      "pages":[
+        "pages/business/index",
+        "pages/business/card/add",
+        "pages/business/welcome",
+        "pages/business/forfiles"
       ]
     }
   ],
