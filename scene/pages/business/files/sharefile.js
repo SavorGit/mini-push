@@ -1,4 +1,4 @@
-// scene/pages/business/forfiles/index.js
+// scene/pages/business/files/sharefile.js
 Page({
 
   /**

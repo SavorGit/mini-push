@@ -96,7 +96,7 @@
         "pages/business/index",
         "pages/business/card/add",
         "pages/welcome/add",
-        "pages/business/forfiles/index",
+        "pages/business/files/sharefile",
         "pages/party/index"
       ]
     }
