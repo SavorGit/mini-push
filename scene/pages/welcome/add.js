@@ -1,4 +1,4 @@
-// scene/pages/business/forfiles.js
+// scene/pages/welcome/add.js
 Page({
 
   /**
