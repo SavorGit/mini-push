@@ -108,7 +108,7 @@
 					<view class="icon flex-column-center-center birthday">
 						<image src='/images/icon2/FFFFFF_birthday.png'></image>
 					</view>
-					<label>生日歌点播</label>
+					<label>生日点播</label>
 				</button>
 			</view>
 			<view>
@@ -116,7 +116,7 @@
 					<view class="icon flex-column-center-center game">
 						<image src='/images/icon2/FFFFFF_game.png'></image>
 					</view>
-					<label>互动小游戏</label>
+					<label>互动游戏</label>
 				</button>
 			</view>
 			<view>
