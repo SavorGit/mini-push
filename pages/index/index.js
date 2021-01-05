@@ -71,7 +71,7 @@ Page({
     var that = this;
     utils.PostRequest(api_v_url + '/content/getHotplaylist', {
       page: 1,
-      pagesize: 6
+      pagesize: 8
     }, (data, headers, cookies, errMsg, statusCode) => {
       that.setData({
         hot_play: data.result.datalist
