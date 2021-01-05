@@ -143,8 +143,8 @@
 	<!-- 场景按钮面板 -->
 	<view class="panel scene flex-column-center-center theme-panel">
 		<view class="row flex-row-center-space_around">
-			<view class="btn business">商务宴请</view>
-			<view class="btn birthday">生日聚会</view>
+			<view class="btn business" bindtap="gotoBusiness" data-openid="{{openid}}" data-box_mac="{{box_mac}}">商务宴请</view>
+			<view class="btn birthday" bindtap="gotoParty"    data-openid="{{openid}}" data-box_mac="{{box_mac}}">生日聚会</view>
 		</view>
 	</view>
 

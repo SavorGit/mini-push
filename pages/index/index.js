@@ -1193,4 +1193,58 @@ Page({
       is_reward: is_reward
     });
   },
+  /**
+   * 商务宴请
+   */
+  gotoBusiness:function(e){
+    var box_mac = e.target.dataset.box_mac;
+    var openid = e.target.dataset.openid;
+    mta.Event.stat('gotoBusiness',{'openid':openid,'boxmac':box_mac})
+    var user_info = wx.getStorageSync("savor_user_info");
+    if(user_info=='' || typeof(user_info)=='undefined'){
+      app.showToast('网络异常，请用微信重新扫码链接电视')
+      return false;
+    }
+    if (user_info.is_wx_auth != 3 ) {
+      that.setData({
+        showModal: true
+      })
+      mta.Event.stat("showwxauth", {})
+    } else {
+      if (box_mac == '') {
+        app.scanQrcode(pageid);
+      } else {
+        wx.navigateTo({
+          url: '/scene/pages/business/index?openid='+openid+'&box_mac='+box_mac,
+        })
+      }
+    }
+  },
+  /**
+   * 生日聚会
+   */
+  gotoParty:function(e){
+    var box_mac = e.target.dataset.box_mac;
+    var openid = e.target.dataset.openid;
+    mta.Event.stat('gotoParty',{'openid':openid,'boxmac':box_mac})
+    var user_info = wx.getStorageSync("savor_user_info");
+    if(user_info=='' || typeof(user_info)=='undefined'){
+      app.showToast('网络异常，请用微信重新扫码链接电视')
+      return false;
+    }
+    if (user_info.is_wx_auth != 3 ) {
+      that.setData({
+        showModal: true
+      })
+      mta.Event.stat("showwxauth", {})
+    } else {
+      if (box_mac == '') {
+        app.scanQrcode(pageid);
+      } else {
+        wx.navigateTo({
+          url: '/scene/pages/party/index?openid='+openid+'&box_mac='+box_mac,
+        })
+      }
+    }
+  }
 })
