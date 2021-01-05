@@ -98,76 +98,76 @@
   font-size: 28rpx;
 }
 
-.editer>.page>.part-1 {
+.editer>.page .part-1 {
   width: calc(100% - 40rpx);
   padding: 0 20rpx;
 }
 
-.editer>.page>.part-1>.left {
+.editer>.page .part-1>.left {
   width: calc(100% - 200rpx);
 }
 
-.editer>.page>.part-1>.left>.row {
+.editer>.page .part-1>.left>.row {
   padding: 10rpx 0;
 }
 
-.editer>.page>.part-1>.left>.row>.value {
+.editer>.page .part-1>.left>.row>.value {
   height: 50rpx;
 }
 
-.editer>.page>.part-1>.left>.row>.value>.input {
+.editer>.page .part-1>.left>.row>.value>.input {
   height: 50rpx;
   line-height: 50rpx;
 }
 
-.editer>.page>.part-1>.right {
+.editer>.page .part-1>.right {
   width: 180rpx;
 }
 
-.editer>.page>.part-1>.right>.head-pic {
+.editer>.page .part-1>.right>.head-pic {
   width: 180rpx;
   height: 180rpx;
 }
 
-.editer>.page>.part-1>.right>.label {
+.editer>.page .part-1>.right>.label {
   font-size: 28rpx;
 }
 
-.editer>.page>.company,
-.editer>.page>.qr {
+.editer>.page .company,
+.editer>.page .qr {
   width: calc(100% - 40rpx);
   padding: 10rpx 20rpx;
 }
 
-.editer>.page>.company>.value {
+.editer>.page .company>.value {
   height: 120rpx;
 }
 
-.editer>.page>.qr>.value {
+.editer>.page .qr>.value {
   width: 200rpx;
   height: 200rpx;
   padding: 0;
 }
 
-.editer>.page>.qr>.value>.icon {
+.editer>.page .qr>.value>.icon {
   font-size: 64rpx;
 }
 
-.editer>.page>.qr>.value>.title {
+.editer>.page .qr>.value>.title {
   font-size: 28rpx;
 }
 
-.editer>.page>.qr>.value>.pic {
+.editer>.page .qr>.value>.pic {
   width: 100%;
   height: 100%;
 }
 
-.editer>.page>.buttons {
+.editer>.page .buttons {
   width: 100%;
   height: 120rpx;
 }
 
-.editer>.page>.buttons>.btn {
+.editer>.page .buttons>.btn {
   width: 544rpx;
   height: 88rpx;
   line-height: 88rpx;

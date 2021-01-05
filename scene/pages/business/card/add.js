@@ -17,10 +17,11 @@ Page({
    * 页面的初始数据
    */
   data: {
+    oss_url:app.globalData.oss_url,
     statusBarHeight: getApp().globalData.statusBarHeight,
     SystemInfo: getApp().SystemInfo,
     is_edit:0,
-    card_info:{'hader_url':'','name':'','mobile':'','job_title':'','company':'','wx_qrcode':''},
+    card_info:{'header_url':'','name':'','mobile':'','job_title':'','company':'','wx_qrcode':''},
     addDisabled:false,
   },
 
@@ -28,8 +29,9 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    var openid = options.openid;
-    var box_mac = options.box_mac;
+    console.log(options)
+    openid = options.openid;
+    box_mac = options.box_mac;
     this.getMyCardInfo(openid);
   },
   getMyCardInfo:function(openid){
@@ -48,6 +50,7 @@ Page({
    */
   uploadImage:function(e){
     var that = this;
+    var type = e.currentTarget.dataset.type;
     wx.showLoading({
       title: '图片上传中...',
       mask: true
@@ -103,6 +106,7 @@ Page({
                   var wx_qrcode = "forscreen/resource/" + img_url
                   card_info.wx_qrcode = wx_qrcode;
                 } 
+                that.setData({card_info:card_info})
                 wx.hideLoading();
                 setTimeout(function () {
                   that.setData({
@@ -126,6 +130,11 @@ Page({
             })
           }
         })
+      },fail:function(e){
+        wx.hideLoading();
+        that.setData({
+          addDisabled: false
+        })
       }
     })
   },
@@ -137,26 +146,26 @@ Page({
     var job_title = e.detail.value.job_title.replace(/\s+/g, '');
     var company  = e.detail.value.company.replace(/\s+/g, '');
     if(name==''){
-      app.showToast('请输入您的姓名',2000,'',false);
+      app.showToast('请输入您的姓名',2000,'none',false);
       return false;
     }
     if(!app.checkMobile(mobile)){
       return false;
     }
     if(job_title==''){
-      app.showToast('请输入您的职称',2000,'',false);
+      app.showToast('请输入您的职称',2000,'none',false);
       return false;
     }
     if(company==''){
-      app.showToast('请输入您的公司名称',2000,'',false);
+      app.showToast('请输入您的公司名称',2000,'none',false);
       return false;
     }
-    if(card_info.header_url=''){
-      app.showToast('请上传您的头像',2000,'',false);
+    if(card_info.header_url==''){
+      app.showToast('请上传您的头像',2000,'none',false);
       return false;
     }
     if(card_info.wx_qrcode==''){
-      app.showToast('请上传您的微信二维码',2000,'',false);
+      app.showToast('请上传您的微信二维码',2000,'none',false);
       return false;
     }
     card_info.name = name;
@@ -164,6 +173,8 @@ Page({
     card_info.job_title = job_title;
     card_info.company = company;
     utils.PostRequest(api_v_url + '/aa/bb', {
+      openid:openid,
+      box_mac:box_mac,
       name:name,
       mobile:mobile,
       job_title:job_title,

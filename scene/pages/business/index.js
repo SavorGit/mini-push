@@ -40,7 +40,7 @@ Page({
    */
   gotoCard:function(e){
     wx.navigateTo({
-      url: '/scene/pages/business/card/add?openid+'+openid+'&box_mac='+box_mac,
+      url: '/scene/pages/business/card/add?openid='+openid+'&box_mac='+box_mac,
     })
   },
   /**
@@ -54,7 +54,7 @@ Page({
    */
   gotoWelcome:function(e){
     wx.navigateTo({
-      url: '/scene/pages/business/card/add?openid+'+openid+'&box_mac='+box_mac+'&type=1',
+      url: '/scene/pages/business/card/add?openid='+openid+'&box_mac='+box_mac+'&type=1',
     })
   },
   /**
@@ -68,7 +68,7 @@ Page({
    */
   gotoShareFiles:function(e){
     wx.navigateTo({
-      url: '/scene/pages/business/forfiles/index?openid+'+openid+'&box_mac='+box_mac,
+      url: '/scene/pages/business/forfiles/index?openid='+openid+'&box_mac='+box_mac,
     })
   },
   /**

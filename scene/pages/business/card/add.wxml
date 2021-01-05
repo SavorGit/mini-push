@@ -8,13 +8,15 @@
 <template is="navigationBarForTwoLevel" data='{{statusBarHeight: statusBarHeight,titleText:"商务名片"}}' />
 
 <!-- 展示页面 -->
-<view wx:if="{{showViewer}}" class='container viewer theme-container' style='height:calc(100vh - {{46 + statusBarHeight + SystemInfo.screenBottomSpace}}px);'>
+<view wx:if="{{is_edit==1}}" class='container viewer theme-container'
+	style='height:calc(100vh - {{46 + statusBarHeight + SystemInfo.screenBottomSpace}}px);'>
 	<view class="card-group flex-column-center-flex_start">
 		<view class="card flex-column-flex_start-flex_start theme-orange-panel">
 			<view class="face flex-column-flex_start-space_around">
 				<view class="info flex-row-center-flex_start">
 					<view class="left">
-						<image class="head-pic" mode="aspectFill" src="https://oss.littlehotspot.com/Html5/images/common/default_user_head_3.jpg"></image>
+						<image class="head-pic" mode="aspectFill"
+							src="https://oss.littlehotspot.com/Html5/images/common/default_user_head_3.jpg"></image>
 					</view>
 					<view class="right flex-column-flex_start-flex_start">
 						<view class="user flex-row-flex_end-flex_start">
@@ -38,52 +40,58 @@
 
 
 <!-- 编辑页面 -->
-<view class='container editer theme-container' style='height:calc(100vh - {{46 + statusBarHeight + SystemInfo.screenBottomSpace}}px);'>
+<view wx:else class='container editer theme-container'
+	style='height:calc(100vh - {{46 + statusBarHeight + SystemInfo.screenBottomSpace}}px);'>
 	<view class="page">
-		<view class="part-1 flex-row-flex_start-space_between">
-			<view class="left">
-				<view class="row flex-row-center-flex_start">
-					<view class="label">姓名</view>
-					<view class="value">
-						<input class="input" placeholder="请输入"></input>
+		<form bindsubmit="submitInfo">
+			<view class="part-1 flex-row-flex_start-space_between">
+				<view class="left">
+					<view class="row flex-row-center-flex_start">
+						<view class="label">姓名</view>
+						<view class="value">
+							<input class="input" placeholder="请输入" maxlength="10" name="name"></input>
+						</view>
+					</view>
+					<view class="row flex-row-center-flex_start">
+						<view class="label">电话</view>
+						<view class="value">
+							<input class="input" placeholder="请输入" type="number" maxlength="11" name="mobile"></input>
+						</view>
+					</view>
+					<view class="row flex-row-center-flex_start">
+						<view class="label">职称</view>
+						<view class="value">
+							<input class="input" placeholder="请输入" maxlength="10" name="job_title"></input>
+						</view>
 					</view>
 				</view>
-				<view class="row flex-row-center-flex_start">
-					<view class="label">电话</view>
-					<view class="value">
-						<input class="input" placeholder="请输入"></input>
-					</view>
-				</view>
-				<view class="row flex-row-center-flex_start">
-					<view class="label">职称</view>
-					<view class="value">
-						<input class="input" placeholder="请输入"></input>
-					</view>
+				<view class="right flex-column-center-space_around" bindtap="uploadImage" data-type="1">
+					<image wx:if="{{card_info.header_url==''}}" class="head-pic" mode="aspectFill"
+						src="https://oss.littlehotspot.com/Html5/images/common/default_user_head_3.jpg"></image>
+					<image wx:else class="head-pic" mode="aspectFill" src="{{oss_url}}/{{card_info.header_url}}"></image>
+					<view class="label">头像</view>
 				</view>
 			</view>
-			<view class="right flex-column-center-space_around">
-				<image class="head-pic" mode="aspectFill" src="https://oss.littlehotspot.com/Html5/images/common/default_user_head_3.jpg"></image>
-				<view class="label">头像</view>
+			<view class="row company flex-row-center-flex_start">
+				<view class="label">公司名称</view>
+				<view class="value">
+					<textarea class="input" placeholder="请输入" maxlength="50" name="company"></textarea>
+				</view>
 			</view>
-		</view>
-		<view class="row company flex-row-center-flex_start">
-			<view class="label">公司名称</view>
-			<view class="value">
-				<textarea class="input" placeholder="请输入"></textarea>
+			<view class="row qr flex-row-center-flex_start">
+				<view class="label">微信二维码</view>
+				<view class="value add flex-column-center-center" wx:if="{{card_info.wx_qrcode==''}}" bindtap="uploadImage"
+					data-type="2">
+					<view class="icon">+</view>
+					<view class="title">上传二维码</view>
+				</view>
+				<view wx:else class="value viewer" bindtap="uploadImage" data-type="2">
+					<image class="pic" mode="aspectFill" src="{{oss_url}}/{{card_info.wx_qrcode}}"></image>
+				</view>
 			</view>
-		</view>
-		<view class="row qr flex-row-center-flex_start">
-			<view class="label">微信二维码</view>
-			<view class="value add flex-column-center-center">
-				<view class="icon">+</view>
-				<view class="title">上传二维码</view>
+			<view class="row buttons flex-row-center-center">
+				<button class="btn save theme-button-red" form-type="submit" disabled="{{addDisabled}}">保存</button>
 			</view>
-			<view wx:if="{{a}}" class="value viewer">
-				<image class="pic" mode="aspectFill" src="https://oss.littlehotspot.com/Html5/images/common/default_user_head_3.jpg"></image>
-			</view>
-		</view>
-		<view class="row buttons flex-row-center-center">
-			<view class="btn save theme-button-red">保存</view>
-		</view>
+		</form>
 	</view>
 </view>
