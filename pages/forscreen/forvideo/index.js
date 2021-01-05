@@ -594,7 +594,10 @@ Page({
               if(res.errMsg == 'getConnectedWifi:fail:currentWifi is null' || res.errMsg=='getConnectedWifi:fail no wifi is connected.'){
                 //console.log('99999--'+cTs);
                 that.connectWifi(wifi_name, wifi_mac, use_wifi_password, box_mac,hotel_info,data,cTs);
-              }else {
+              }else if(res.errMsg == 'getConnectedWifi:fail:netInfo is null'){
+                that.speedUploadImg(hotel_info,data);
+              }
+              else {
                 if (res.errCode == 12005) { //安卓特有  未打开wifi
                   err_msg = '请打开您的手机Wifi';
                   
@@ -663,7 +666,9 @@ Page({
               confirmText:'重试',
               success: function (res) {
                 if (res.confirm) {
-                  that.tipsForLaunchWindowRetry();
+                  
+                  that.linkHotelWifi(data,hotel_info)
+                  //that.tipsForLaunchWindowRetry();
                 }else {
                   that.setData({
                     launchType:'classic',
