@@ -18,9 +18,10 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    wx.hideShareMenu({})
     openid  = options.openid;
     box_mac = options.box_mac;
-    this.getBussnessInfo(openid,box_mac);
+    
   },
   /**
    * 获取商务功能数据
@@ -54,7 +55,7 @@ Page({
    */
   gotoWelcome:function(e){
     wx.navigateTo({
-      url: '/scene/pages/business/card/add?openid='+openid+'&box_mac='+box_mac+'&type=1',
+      url: '/scene/pages/welcome/add?openid='+openid+'&box_mac='+box_mac+'&type=1',
     })
   },
   /**
@@ -88,7 +89,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    this.getBussnessInfo(openid,box_mac);
   },
 
   /**

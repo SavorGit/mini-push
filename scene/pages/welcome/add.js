@@ -1,4 +1,9 @@
 // scene/pages/welcome/add.js
+/**
+ * 【场景】欢迎词
+ */
+
+
 const utils = require('../../../utils/util.js')
 var mta = require('../../../utils/mta_analysis.js')
 const app = getApp()
@@ -13,6 +18,10 @@ Page({
    */
   data: {
     welcome_info:{'img_list':[],'welcome_message':'','font_style_id':0,'font_size_id':0,'font_color':0,'stay_time':0},
+
+    statusBarHeight: getApp().globalData.statusBarHeight,
+    SystemInfo: getApp().SystemInfo,
+
   },
 
   /**

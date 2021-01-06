@@ -1,2 +1,2 @@
 <!--scene/pages/business/index.wxml-->
-<text>scene/pages/business/index.wxml</text>
+<text bindtap="gotoWelcome">scene/pages/business/index.wxml</text>
