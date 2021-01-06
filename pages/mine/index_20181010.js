@@ -45,6 +45,7 @@ Page({
         is_view_official_account:false
       })
     }
+    that.setData({openid:openid})
     that.isHaveCallBox(openid);
     
     //获取用户信息以及我的公开
@@ -94,6 +95,7 @@ Page({
   },
   //遥控呼大码
   callQrCode: utils.throttle(function (e){
+    console.log(e)
     var that = this;
     openid = e.currentTarget.dataset.openid;
     box_mac = e.currentTarget.dataset.box_mac;
