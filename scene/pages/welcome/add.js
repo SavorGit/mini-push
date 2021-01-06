@@ -1,4 +1,9 @@
 // scene/pages/welcome/add.js
+/**
+ * 【场景】欢迎词
+ */
+
+
 const utils = require('../../../utils/util.js')
 var mta = require('../../../utils/mta_analysis.js')
 const app = getApp()
@@ -12,6 +17,8 @@ Page({
    * 页面的初始数据
    */
   data: {
+    statusBarHeight: getApp().globalData.statusBarHeight,
+    SystemInfo: getApp().SystemInfo,
 
   },
 
