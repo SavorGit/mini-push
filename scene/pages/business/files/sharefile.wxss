@@ -1,1 +1,103 @@
 /* scene/pages/business/files/sharefile.wxss */
+/**
+ * 【场景】商务宴请 - 分享文件
+ */
+
+
+.page {
+  width: 100%;
+  height: 100%;
+}
+
+.page>.body {
+  width: 100%;
+  height: calc(100% - 120rpx);
+}
+
+.page>.foot {
+  width: 100%;
+  height: 100rpx;
+  padding-bottom: 20rpx;
+}
+
+.page>.foot>.btn {
+  width: 544rpx;
+  height: 88rpx;
+  line-height: 88rpx;
+  text-align: center;
+  font-size: 28rpx;
+  border-radius: 8rpx;
+  border: 0;
+  padding: 0;
+  margin: 0;
+}
+
+.wrapper {
+  width: calc(100% - 50rpx);
+  padding: 20rpx 25rpx;
+}
+
+.part {
+  width: 100%;
+}
+
+.label {
+  width: 120rpx;
+  font-size: 28rpx;
+}
+
+.value {
+  width: calc(100% - 120rpx);
+}
+
+.item {
+  width: calc(50% - 40rpx);
+  height: 270rpx;
+  padding: 15rpx;
+  margin-top: 10rpx;
+  margin-left: 20rpx;
+  display: inline-block;
+  box-sizing: border-box;
+  vertical-align: middle;
+}
+
+.item:nth-child(-n + 2) {
+  margin-top: 0;
+}
+
+.item:nth-child(2n + 1) {
+  margin-left: 0;
+}
+
+.item>.file-cover {
+  width: 200rpx;
+  height: 200rpx;
+  vertical-align: middle;
+}
+
+.item>.filename {
+  width: 100%;
+  text-align: center;
+  font-size: 28rpx;
+}
+
+.add {
+  width: 160rpx;
+  height: 160rpx;
+  border-radius: 8rpx;
+  border: 3rpx solid rgba(0, 0, 0, 0.15);
+  background-color: rgba(0, 0, 0, 0.02);
+}
+
+.add>view {
+  width: 100%;
+  height: 100%;
+}
+
+.add>view>.icon {
+  font-size: 38rpx;
+}
+
+.add>view>.text {
+  font-size: 28rpx;
+}

@@ -73,6 +73,7 @@
   border-color: #BBBBBB;
   display: inline-block;
   box-sizing: border-box;
+  vertical-align: middle;
 }
 
 .item.block>.value>.input:nth-child(5n + 1) {
@@ -105,6 +106,7 @@
   box-sizing: border-box;
   background-color: #E8E8E8;
   border: 3rpx solid #BBBBBB;
+  vertical-align: middle;
 }
 
 .item.pic-group>.value>.input:nth-child(3n + 1) {

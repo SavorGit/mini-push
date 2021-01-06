@@ -1,2 +1,51 @@
 <!--scene/pages/business/files/sharefile.wxml-->
-<text>scene/pages/business/files/sharefile.wxml</text>
+<!--
+ | 【场景】商务宴请 - 分享文件
+ |-->
+
+
+<import src="/pages/template/commons" />
+<template is="navigationBarForTwoLevel" data='{{statusBarHeight: statusBarHeight,titleText:"分享文件"}}' />
+
+<view class='container viewer theme-container' style='height:calc(100vh - {{46 + statusBarHeight + SystemInfo.screenBottomSpace}}px);'>
+	<view class="page">
+		<scroll-view class="body" scroll-y="true" scroll-with-animation="true">
+			<view class="wrapper flex-column-center-flex_start">
+				<view class="part flex-row-flex_start-flex_start">
+					<view class="label">分享文件</view>
+					<view class="value">
+						<view class="item flex-column-center-flex_start">
+							<image class="file-cover" mode="aspectFill" src="https://oss.littlehotspot.com/WeChat/resource/default.jpg"></image>
+							<view class="filename two-line-overflow">xxxxxxx.pdf</view>
+						</view>
+						<view class="item flex-column-center-flex_start">
+							<image class="file-cover" mode="aspectFill" src="https://oss.littlehotspot.com/WeChat/resource/default.jpg"></image>
+							<view class="filename two-line-overflow">xxxxxxx.pdf</view>
+						</view>
+						<view class="item flex-column-center-flex_start">
+							<image class="file-cover" mode="aspectFill" src="https://oss.littlehotspot.com/WeChat/resource/default.jpg"></image>
+							<view class="filename two-line-overflow">xxxxxxx.pdf</view>
+						</view>
+						<view class="item flex-column-center-flex_start">
+							<image class="file-cover" mode="aspectFill" src="https://oss.littlehotspot.com/WeChat/resource/default.jpg"></image>
+							<view class="filename two-line-overflow">xxxxxxx.pdf</view>
+						</view>
+						<view class="item flex-column-center-flex_start">
+							<image class="file-cover" mode="aspectFill" src="https://oss.littlehotspot.com/WeChat/resource/default.jpg"></image>
+							<view class="filename two-line-overflow">xxxxxxx.pdf</view>
+						</view>
+						<view class="item add flex-column-center-flex_start">
+							<view class="flex-column-center-center">
+								<view class="icon">+</view>
+								<view class="text">上传文件</view>
+							</view>
+						</view>
+					</view>
+				</view>
+			</view>
+		</scroll-view>
+		<view class="foot flex-row-center-center">
+			<view class="btn save theme-button-red">保存</view>
+		</view>
+	</view>
+</view>
