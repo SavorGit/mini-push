@@ -35,14 +35,87 @@ Page({
    */
   getBussnessInfo:function(openid,box_mac){
     var that = this;
-    utils.PostRequest(api_v_url + '/aa/bb', {
+    utils.PostRequest(api_v_url + '/Businessdinners/moduleList', {
       openid:openid,
       box_mac:box_mac,
     }, (data, headers, cookies, errMsg, statusCode) =>{
-      that.setData({business_info:data.result})
+      var card_info = data.result.card;
+      if(JSON.stringify(card_info) == "{}"){
+        that.setData({is_have_card:false})
+      }else {
+        that.setData({is_have_card:true,card_info:card_info})
+      }
+      var welcome_info = data.result.welcome;
+      if(JSON.stringify(welcome_info) == "{}"){
+        that.setData({is_have_welcome:false})
+      }else {
+        that.setData({is_have_welcome:true,welcome_info:welcome_info})
+      }
+      var share_file = data.result.share_file;
+      if(share_file.length>0){
+        that.setData({is_have_sharefile:false})
+      }else {
+        that.setData({is_have_sharefile:true,'sharefile_info':data.result.share_file})
+      }
     })
   },
+  forImages:function(e){
+    wx.navigateTo({
+      url: '/pages/forscreen/forimages/index?box_mac=' + box_mac + '&openid=' + openid ,
+    })
+  },
+  forVideo:function(e){
+    wx.navigateTo({
+      url: '/pages/forscreen/forvideo/index?box_mac=' + box_mac + '&openid=' + openid ,
+    })
+  },
+  forfiles: function (e) {
+    var that = this;
   
+    //微信好友文件投屏+h5文件投屏
+    if(app.globalData.sys_info.platform=='android'){
+      that.setData({showMe: true,})
+    }else {
+      wx.navigateTo({
+        url: '/pages/forscreen/forfile/files?box_mac=' + box_mac + '&openid=' + openid ,
+        success: function (e) {
+          that.setData({
+            showMe: false
+          })
+        }
+      })
+    }
+  },
+  //微信好友文件
+  wxFriendfiles: function (e) {
+    var that = this;
+    wx.navigateTo({
+      url: '/pages/forscreen/forfile/files?box_mac=' + box_mac + '&openid=' + openid ,
+      success: function (e) {
+        that.setData({
+          showMe: false
+        })
+      }
+    })
+  },
+  phonefiles: function (e) {
+    var that = this;
+    wx.navigateTo({
+      url: '/pages/forscreen/forfile/h5files?box_mac=' + box_mac + '&openid=' + openid ,
+      success: function (e) {
+        that.setData({
+          showMe: false
+        })
+      }
+    })
+  },
+  modalCancel: function (e) {
+    var that = this;
+    that.setData({
+      showMe: false,
+    })
+    mta.Event.stat("cancellinkwifi", {})
+  },
   /**
    * 编辑/添加名片
    */

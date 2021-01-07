@@ -1,5 +1,9 @@
 {
   "navigationBarTitleText": "商务投屏",
   "disableScroll": true,
-  "usingComponents": {}
+  "usingComponents": {
+    "modal": "/components/modal/modal",
+    "bottomModal": "/components/modal/bottomModal",
+    "msg-toast":"/components/toast/message"
+  }
 }

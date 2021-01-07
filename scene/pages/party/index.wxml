@@ -31,8 +31,17 @@
 			<!-- 生日歌面板 -->
 			<view class="panel birthday-music">
 				<view class="list">
-
-					<view class="item">
+					<block wx:for="{{happylist}}" wx:key="key" wx:for-item="happyinfo" wx:for-index="index">
+						<view class="item" bindtap='showHappy'  data-vediourl="{{happyinfo.res_url}}" data-happyVedioName="{{happyinfo.file_name}}" data-name="{{happyinfo.name}}" data-source="1" data-hotel_info="{{hotel_info}}">
+							<view class="inner flex-column-center-center">
+								<view class="icon fa fa-music theme-font" aria-hidden="true"></view>
+								<view class="name theme-font1">{{happyinfo.title}}{{happyinfo.sub_title}}</view>
+								<!-- <label>{{happyinfo.title}}</label>
+            					<label>{{happyinfo.sub_title}}</label> -->
+							</view>
+						</view>
+					</block>
+					<!-- <view class="item">
 						<view class="inner flex-column-center-center">
 							<view class="icon fa fa-music theme-font" aria-hidden="true"></view>
 							<view class="name theme-font1">生日歌</view>
@@ -49,13 +58,7 @@
 							<view class="icon fa fa-music theme-font" aria-hidden="true"></view>
 							<view class="name theme-font1">生日歌</view>
 						</view>
-					</view>
-					<view class="item">
-						<view class="inner flex-column-center-center">
-							<view class="icon fa fa-music theme-font" aria-hidden="true"></view>
-							<view class="name theme-font1">生日歌</view>
-						</view>
-					</view>
+					</view> -->
 
 				</view>
 			</view>
