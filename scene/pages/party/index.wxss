@@ -1,1 +1,52 @@
 /* scene/pages/party/index.wxss */
+/**
+ * 【场景】生日聚会 - 首页
+ */
+
+
+@import "/scene/pages/business/index.wxss";
+
+.panel.media>.btn {
+  width: 330rpx;
+  margin-left: 20rpx;
+}
+
+/* ==================================== 生日歌面板 ==================================== */
+.panel.birthday-music>.list {
+  width: 100%;
+  height: 100%;
+}
+
+.panel.birthday-music>.list>.item {
+  width: 155rpx;
+  height: 184rpx;
+  margin-top: 10rpx;
+  margin-left: 20rpx;
+  border-radius: 20rpx;
+  background-color: #FFFFFF;
+  display: inline-block;
+  box-sizing: border-box;
+  vertical-align: middle;
+}
+
+.panel.birthday-music>.list>.item:nth-child(-n + 4) {
+  margin-top: 0;
+}
+
+.panel.birthday-music>.list>.item:nth-child(4n + 1) {
+  margin-left: 0;
+}
+
+.panel.birthday-music>.list>.item>.inner {
+  width: 100%;
+  height: 100%;
+}
+
+.panel.birthday-music>.list>.item>.inner>.icon {
+  font-size: 36rpx;
+}
+
+.panel.birthday-music>.list>.item>.inner>.name {
+  margin-top: 10rpx;
+  font-size: 28rpx;
+}

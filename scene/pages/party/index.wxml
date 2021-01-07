@@ -1,2 +1,126 @@
 <!--scene/pages/party/index.wxml-->
-<text>scene/pages/party/index.wxml</text>
+<!--
+ | 【场景】生日聚会 - 首页
+ |-->
+
+
+<import src="/pages/template/commons" />
+<template is="navigationBarForTwoLevel" data='{{statusBarHeight: statusBarHeight,titleText:"生日聚会"}}' />
+
+<scroll-view class='container viewer theme-container' style='height:calc(100vh - {{46 + statusBarHeight + SystemInfo.screenBottomSpace}}px);' scroll-y="true" scroll-with-animation="true">
+	<view class="page flex-column-center-flex_start">
+		<view class="head"></view>
+		<view class="body flex-column-flex_start-flex_start">
+
+			<!-- 连接信息面板 -->
+			<view class="panel link-box full_width theme-panel">
+				<view wx:if="{{is_link > 0}}" class='full_width full_height tip flex-column-center-start'>
+					<button bindtap="breakLink" data-boxmac="{{box_mac}}" data-openid="{{openid}}">
+						<image class="full_width full_height" src="/images/icon2/1CBEB6_link.png"></image>
+					</button>
+					<label class='font_666666_28'>您已链接【{{hotel_name}}】的{{room_name}}电视</label>
+				</view>
+				<view wx:else class='full_width full_height tip flex-column-center-start'>
+					<button bindtap="scanQrcode" data-boxmac="{{box_mac}}" data-openid="{{openid}}">
+						<image class="full_width full_height" src="/images/icon2/666666_link.png"></image>
+					</button>
+					<label class='font_666666_28'>当前暂未链接电视，链接后即可使用投屏功能</label>
+				</view>
+			</view>
+
+			<!-- 生日歌面板 -->
+			<view class="panel birthday-music">
+				<view class="list">
+
+					<view class="item">
+						<view class="inner flex-column-center-center">
+							<view class="icon fa fa-music theme-font" aria-hidden="true"></view>
+							<view class="name theme-font1">生日歌</view>
+						</view>
+					</view>
+					<view class="item">
+						<view class="inner flex-column-center-center">
+							<view class="icon fa fa-music theme-font" aria-hidden="true"></view>
+							<view class="name theme-font1">生日歌</view>
+						</view>
+					</view>
+					<view class="item">
+						<view class="inner flex-column-center-center">
+							<view class="icon fa fa-music theme-font" aria-hidden="true"></view>
+							<view class="name theme-font1">生日歌</view>
+						</view>
+					</view>
+					<view class="item">
+						<view class="inner flex-column-center-center">
+							<view class="icon fa fa-music theme-font" aria-hidden="true"></view>
+							<view class="name theme-font1">生日歌</view>
+						</view>
+					</view>
+
+				</view>
+			</view>
+
+			<!-- 媒体面板 -->
+			<view class="panel media">
+				<view class="btn pic theme-button-orange2">
+					<view class="flex-column-center-center">
+						<image class="icon" mode="aspectFill" src='/images/icon2/FFFFFF_picture.png'></image>
+						<view class="text">图片投屏</view>
+					</view>
+				</view>
+				<view class="btn video theme-button-orange2">
+					<view class="flex-column-center-center">
+						<image class="icon" mode="aspectFill" src='/images/icon2/FFFFFF_video.png'></image>
+						<view class="text">视频投屏</view>
+					</view>
+				</view>
+			</view>
+
+			<!-- 欢迎词面板 -->
+			<view class="panel detailed-list welcome">
+				<block wx:if="{{hasData}}">
+					<view class="head flex-column-flex_start-flex_start">
+						<view class="title-bar flex-row-center-flex_start">
+							<view class="icon fa fa-desktop theme-font-FFAA2C" aria-hidden="true"></view>
+							<view class="title theme-font-FFAA2C">生日祝福</view>
+						</view>
+						<view class="option-bar flex-row-flex_start-flex_end">
+							<view class="btn edit theme-button-orange2">
+								<view class="icon fa fa-pencil" aria-hidden="true"></view>
+							</view>
+						</view>
+					</view>
+					<view class="body flex-column-center-flex_start">
+						<view class="item flex-row-center-center">
+							<view class="name one-line-overflow theme-font1">欢迎xxxxxxxxxxx</view>
+							<view class="btn launch theme-button-orange2">投屏</view>
+						</view>
+					</view>
+				</block>
+				<block wx:else>
+					<view class="head flex-column-flex_start-flex_start">
+						<view class="title-bar flex-row-center-flex_start">
+							<view class="icon fa fa-desktop theme-font-FFAA2C" aria-hidden="true"></view>
+							<view class="title theme-font-FFAA2C">生日祝福</view>
+						</view>
+					</view>
+					<view class="body flex-column-center-flex_start">
+						<view class="item add flex-row-center-center">
+							<view class="btn theme-button-orange2">添加生日祝福</view>
+						</view>
+					</view>
+				</block>
+			</view>
+
+			<!-- 福利面板 -->
+			<view class="panel welfare">
+				<view class="row flex-row-center-space_between">
+					<image class="btn money" src="/scene/images/imgs/btn_money.png"></image>
+					<image class="btn money" src="/scene/images/imgs/btn_gift.png"></image>
+				</view>
+			</view>
+
+		</view>
+		<view class="foot"></view>
+	</view>
+</scroll-view>

@@ -1,10 +1,17 @@
 // scene/pages/party/index.js
+/**
+ * 【场景】生日聚会 - 首页
+ */
+
+
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
+    statusBarHeight: getApp().globalData.statusBarHeight,
+    SystemInfo: getApp().SystemInfo,
 
   },
 
