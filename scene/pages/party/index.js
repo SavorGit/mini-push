@@ -2,7 +2,12 @@
 /**
  * 【场景】生日聚会 - 首页
  */
-
+const utils = require('../../../utils/util.js')
+var mta = require('../../../utils/mta_analysis.js')
+const app = getApp()
+var api_v_url = app.globalData.api_v_url;
+var openid;
+var box_mac;
 
 Page({
 
@@ -19,9 +24,14 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    openid = options.openid;
+    box_mac = options.box_mac;
   },
-
+  gotoWelcome:function(e){
+    wx.navigateTo({
+      url: '/scene/pages/welcome/add?openid='+openid+'&box_mac='+box_mac+'&type=2',
+    })
+  },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */

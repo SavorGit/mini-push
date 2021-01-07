@@ -18,7 +18,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    welcome_info:{'img_list':[],'welcome_message':'','font_style_id':0,'font_size_id':0,'font_color':0,'stay_time':0},
+    welcome_info:{'img_list':[],'welcome_message':'','font_style_id':0,'font_size_id':0,'font_color_id':0,'stay_time':0},
     oss_url:app.globalData.oss_url,
     statusBarHeight: getApp().globalData.statusBarHeight,
     SystemInfo: getApp().SystemInfo,
@@ -326,6 +326,60 @@ Page({
    */
   selectFontSize:function(e){
 
+  },
+  /**
+   * 选择字体颜色
+   */
+  selectFontColor:function(e){
+
+  },
+  selectStayTime:function(e){
+
+  },
+  submitWelcome:function(e){
+    var that = this;
+    var welcome_info = that.data.welcome_info;
+    if(welcome_info.img_list.length==0){
+      app.showToast('请上传北京图片',2000,'none',false);
+      return false;
+    }
+    var welcome_message = e.detail.value.welcome_message.replace(/\s+/g, '');
+    if(welcome_message==''){
+      app.showToast('请输入欢迎语',2000,'none',false);
+      return false;
+    }
+    if(welcome_info.font_style_id==0){
+      app.showToast('请选择字体样式',2000,'none',false);
+      return false;
+    }
+    if(welcome_info.font_size_id==0){
+      app.showToast('请选择字体大小',2000,'none',false);
+      return false;
+    }
+    if(welcome_info.font_color_id==0){
+      app.showToast('请选择字体颜色',2000,'none',false);
+      return false;
+    }
+    if(welcome_info.stay_time==0){
+      app.showToast('请选择停留时间',2000,'none',false);
+      return false;
+    }
+    utils.PostRequest(api_v_url + '/aa/bb', {
+      openid:openid,
+      box_mac:box_mac,
+      img_list:JSON.stringify(welcome_info.img_list),
+      welcome_message:welcome_message,
+      font_style_id:font_style_id,
+      font_size_id:ont_size_id,
+      font_color_id:font_color_id,
+      stay_time:stay_time,
+      type:type
+    }, (data, headers, cookies, errMsg, statusCode) =>{
+      app.showToast('保存成功')
+      wx.navigateBack({
+        delta: 1
+      })
+    })
   },
   /**
    * 生命周期函数--监听页面初次渲染完成

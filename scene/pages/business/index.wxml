@@ -56,7 +56,7 @@
 						</view>
 					</block>
 					<view wx:else class="face flex-column-center-center">
-						<view class="btn flex-column-center-center">
+						<view class="btn flex-column-center-center" bindtap="gotoCard">
 							<view class="icon fa fa-plus" aria-hidden="true"></view>
 							<view class="text">添加名片</view>
 						</view>
@@ -115,7 +115,7 @@
 						</view>
 					</view>
 					<view class="body flex-column-center-flex_start">
-						<view class="item add flex-row-center-center">
+						<view class="item add flex-row-center-center" bindtap="gotoWelcome">
 							<view class="btn theme-button-orange2">添加欢迎词</view>
 						</view>
 					</view>

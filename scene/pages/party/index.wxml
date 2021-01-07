@@ -105,7 +105,7 @@
 						</view>
 					</view>
 					<view class="body flex-column-center-flex_start">
-						<view class="item add flex-row-center-center">
+						<view class="item add flex-row-center-center" bindtap="gotoWelcome">
 							<view class="btn theme-button-orange2">添加生日祝福</view>
 						</view>
 					</view>
