@@ -144,6 +144,11 @@ button[disabled] {
   background-color: #F68855;
 }
 
+.theme-button-orange2 {
+  color: #FFFFFF;
+  background-color: #FFAA2C;
+}
+
 .theme-button-welcome,
 .broadcast-panel {
   color: #FFFFFF;
@@ -255,6 +260,10 @@ button[disabled] {
 
 .theme-font-999999 {
   color: #999999;
+}
+
+.theme-font-FFAA2C {
+  color: #FFAA2C;
 }
 
 /* ================================== 文字 ================================== */
