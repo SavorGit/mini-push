@@ -11,13 +11,14 @@
 <view class='container viewer theme-container' style='height:calc(100vh - {{46 + statusBarHeight + SystemInfo.screenBottomSpace}}px);'>
 	<view class="page flex-column-flex_start-flex_start">
 		<form bindsubmit="submitWelcome">
-		<view class="item pic-group flex-row-flex_start-flex_start">
-			<view class="label theme-font1">背景图片</view>
-			<view class="value">
-				<view class="input" wx:for="{{welcome_info.img_list}}" wx:key="key" wx:for-item="bean" wx:for-index="index" >
-					<image mode="aspectFill" src="{{oss_url}}/{{bean}}" bindtap="uploadOnePic" data-type='one' data-keys="{{index}}"></image>
-				</view>
-				<!-- <view class="input">
+			<view class="item pic-group flex-row-flex_start-flex_start">
+				<view class="label theme-font1">背景图片</view>
+				<view class="value">
+					<view class="input flex-column-flex_start-flex_start" wx:for="{{welcome_info.img_list}}" wx:key="key" wx:for-item="bean" wx:for-index="index">
+						<image mode="aspectFill" src="{{oss_url}}/{{bean}}" bindtap="uploadOnePic" data-type='one' data-keys="{{index}}"></image>
+						<view class="btn del fa fa-times theme-button-orange2" aria-hidden="true"></view>
+					</view>
+					<!-- <view class="input">
 					<image mode="aspectFill" src="https://oss.littlehotspot.com/WeChat/resource/default.jpg"></image>
 				</view>
 				<view class="input">
@@ -26,66 +27,66 @@
 				<view class="input">
 					<image mode="aspectFill" src="https://oss.littlehotspot.com/WeChat/resource/default.jpg"></image>
 				</view> -->
-				<view class="input add" wx:if="{{welcome_info.img_list.length<6}}" bindtap="uploadImage" data-type='all'>
-					<view class="icon fa fa-picture-o" aria-hidden="true"></view>
-				</view>
-				<view class="tip theme-font5">可选择1-6张图片</view>
-			</view>
-		</view>
-		<view class="item text flex-row-center-flex_start">
-			<view class="label theme-font1">欢迎语</view>
-			<view class="value">
-				<input class="input" placeholder="请输入"></input>
-			</view>
-		</view>
-		<view class="item select flex-row-center-flex_start">
-			<view class="label theme-font1">字体样式</view>
-			<view class="value">
-				<picker class="input">
-					<view class="innter flex-row-center-space_between">
-						<view class="text">默认字体</view>
-						<view class="icon fa fa-angle-down" aria-hidden="true"></view>
+					<view class="input flex-column-center-center add" wx:if="{{welcome_info.img_list.length<6}}" bindtap="uploadImage" data-type='all'>
+						<view class="icon fa fa-picture-o" aria-hidden="true"></view>
 					</view>
-				</picker>
+					<view class="tip theme-font5">可选择1-6张图片</view>
+				</view>
 			</view>
-		</view>
-		<view class="item block flex-row-flex_start-flex_start">
-			<view class="label theme-font1">字体大小</view>
-			<view class="value">
-				<view class="input selected">小</view>
-				<view class="input">中</view>
-				<view class="input">大</view>
-				<view class="input">特大</view>
+			<view class="item text flex-row-center-flex_start">
+				<view class="label theme-font1">欢迎语</view>
+				<view class="value">
+					<input class="input" placeholder="请输入"></input>
+				</view>
 			</view>
-		</view>
-		<view class="item block flex-row-flex_start-flex_start">
-			<view class="label theme-font1">字体颜色</view>
-			<view class="value">
-				<view class="input selected" style="background-color:rgb(255,68,68);"></view>
-				<view class="input" style="background-color:rgb(16,16,16);"></view>
-				<view class="input" style="background-color:rgb(255,255,255);"></view>
-				<view class="input" style="background-color:rgb(219,190,49);"></view>
-				<view class="input" style="background-color:rgb(27,190,182);"></view>
-				<view class="input" style="background-color:rgb(253,128,36);"></view>
-				<view class="input" style="background-color:rgb(17,151,215);"></view>
-				<view class="input" style="background-color:rgb(75,208,71);"></view>
-				<view class="input" style="background-color:rgb(249,166,200);"></view>
-				<view class="input" style="background-color:rgb(244,13,13);"></view>
+			<view class="item select flex-row-center-flex_start">
+				<view class="label theme-font1">字体样式</view>
+				<view class="value">
+					<picker class="input">
+						<view class="innter flex-row-center-space_between">
+							<view class="text">默认字体</view>
+							<view class="icon fa fa-angle-down" aria-hidden="true"></view>
+						</view>
+					</picker>
+				</view>
 			</view>
-		</view>
-		<view class="item radio flex-row-flex_start-flex_start">
-			<view class="label theme-font1">停留时间</view>
-			<view class="value">
-				<radio-group class="input">
-					<radio class="btn" checked="true">2分钟</radio>
-					<radio class="btn">5分钟</radio>
-					<radio class="btn">10分钟</radio>
-				</radio-group>
+			<view class="item block flex-row-flex_start-flex_start">
+				<view class="label theme-font1">字体大小</view>
+				<view class="value">
+					<view class="input flex-column-center-center selected">小</view>
+					<view class="input flex-column-center-center">中</view>
+					<view class="input flex-column-center-center">大</view>
+					<view class="input flex-column-center-center">特大</view>
+				</view>
 			</view>
-		</view>
-		<view class="item button flex-row-center-center">
-			<button class="btn save theme-button-red" form-type="submit" disabled="{{addDisabled}}">保存</button>
-		</view>
+			<view class="item block flex-row-flex_start-flex_start">
+				<view class="label theme-font1">字体颜色</view>
+				<view class="value">
+					<view class="input selected" style="background-color:rgb(255,68,68);"></view>
+					<view class="input" style="background-color:rgb(16,16,16);"></view>
+					<view class="input" style="background-color:rgb(255,255,255);"></view>
+					<view class="input" style="background-color:rgb(219,190,49);"></view>
+					<view class="input" style="background-color:rgb(27,190,182);"></view>
+					<view class="input" style="background-color:rgb(253,128,36);"></view>
+					<view class="input" style="background-color:rgb(17,151,215);"></view>
+					<view class="input" style="background-color:rgb(75,208,71);"></view>
+					<view class="input" style="background-color:rgb(249,166,200);"></view>
+					<view class="input" style="background-color:rgb(244,13,13);"></view>
+				</view>
+			</view>
+			<view class="item radio flex-row-flex_start-flex_start">
+				<view class="label theme-font1">停留时间</view>
+				<view class="value">
+					<radio-group class="input">
+						<radio class="btn" checked="true">2分钟</radio>
+						<radio class="btn">5分钟</radio>
+						<radio class="btn">10分钟</radio>
+					</radio-group>
+				</view>
+			</view>
+			<view class="item button flex-row-center-center">
+				<button class="btn save theme-button-red" form-type="submit" disabled="{{addDisabled}}">保存</button>
+			</view>
 		</form>
 	</view>
 </view>

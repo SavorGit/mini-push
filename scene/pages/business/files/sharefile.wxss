@@ -51,12 +51,11 @@
 }
 
 .item {
-  width: calc(50% - 40rpx);
-  height: 270rpx;
-  padding: 15rpx;
+  width: calc(50% - 20rpx);
+  height: 350rpx;
   margin-top: 10rpx;
   margin-left: 20rpx;
-  display: inline-block;
+  display: inline-flex;
   box-sizing: border-box;
   vertical-align: middle;
 }
@@ -69,19 +68,38 @@
   margin-left: 0;
 }
 
-.item>.file-cover {
-  width: 200rpx;
-  height: 200rpx;
+.item>.inner {
+  width: 100%;
+  height: 100%;
+}
+
+.item>.inner>.file-cover {
+  width: 270rpx;
+  height: 270rpx;
+  border-radius: 10rpx;
   vertical-align: middle;
 }
 
-.item>.filename {
+.item>.inner>.filename {
   width: 100%;
   text-align: center;
   font-size: 28rpx;
 }
 
-.add {
+.item>.btn {
+  width: 60rpx;
+  height: 60rpx;
+  line-height: 60rpx;
+  text-align: center;
+  margin-top: -365rpx;
+  margin-left: 220rpx;
+  border-radius: 50%;
+  font-size: 36rpx;
+  border: 0;
+  padding: 0;
+}
+
+.item.add>.inner {
   width: 160rpx;
   height: 160rpx;
   border-radius: 8rpx;
@@ -89,15 +107,10 @@
   background-color: rgba(0, 0, 0, 0.02);
 }
 
-.add>view {
-  width: 100%;
-  height: 100%;
-}
-
-.add>view>.icon {
+.item.add>.inner>.icon {
   font-size: 38rpx;
 }
 
-.add>view>.text {
+.item.add>.inner>.text {
   font-size: 28rpx;
 }

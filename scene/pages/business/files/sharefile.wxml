@@ -14,28 +14,43 @@
 				<view class="part flex-row-flex_start-flex_start">
 					<view class="label">分享文件</view>
 					<view class="value">
-						<view class="item flex-column-center-flex_start">
-							<image class="file-cover" mode="aspectFill" src="https://oss.littlehotspot.com/WeChat/resource/default.jpg"></image>
-							<view class="filename two-line-overflow">xxxxxxx.pdf</view>
+						<view class="item flex-column-flex_start-flex_start">
+							<view class="inner flex-column-center-flex_start">
+								<image class="file-cover" mode="aspectFill" src="https://oss.littlehotspot.com/WeChat/resource/default.jpg"></image>
+								<view class="filename two-line-overflow">xxxxxxx.pdf</view>
+							</view>
+							<view class="btn del fa fa-times theme-button-orange2" aria-hidden="true"></view>
 						</view>
-						<view class="item flex-column-center-flex_start">
-							<image class="file-cover" mode="aspectFill" src="https://oss.littlehotspot.com/WeChat/resource/default.jpg"></image>
-							<view class="filename two-line-overflow">xxxxxxx.pdf</view>
+						<view class="item flex-column-flex_start-flex_start">
+							<view class="inner flex-column-center-flex_start">
+								<image class="file-cover" mode="aspectFill" src="https://oss.littlehotspot.com/WeChat/resource/default.jpg"></image>
+								<view class="filename two-line-overflow">xxxxxxx.pdf</view>
+							</view>
+							<view class="btn del fa fa-times theme-button-orange2" aria-hidden="true"></view>
 						</view>
-						<view class="item flex-column-center-flex_start">
-							<image class="file-cover" mode="aspectFill" src="https://oss.littlehotspot.com/WeChat/resource/default.jpg"></image>
-							<view class="filename two-line-overflow">xxxxxxx.pdf</view>
+						<view class="item flex-column-flex_start-flex_start">
+							<view class="inner flex-column-center-flex_start">
+								<image class="file-cover" mode="aspectFill" src="https://oss.littlehotspot.com/WeChat/resource/default.jpg"></image>
+								<view class="filename two-line-overflow">xxxxxxx.pdf</view>
+							</view>
+							<view class="btn del fa fa-times theme-button-orange2" aria-hidden="true"></view>
 						</view>
-						<view class="item flex-column-center-flex_start">
-							<image class="file-cover" mode="aspectFill" src="https://oss.littlehotspot.com/WeChat/resource/default.jpg"></image>
-							<view class="filename two-line-overflow">xxxxxxx.pdf</view>
+						<view class="item flex-column-flex_start-flex_start">
+							<view class="inner flex-column-center-flex_start">
+								<image class="file-cover" mode="aspectFill" src="https://oss.littlehotspot.com/WeChat/resource/default.jpg"></image>
+								<view class="filename two-line-overflow">xxxxxxx.pdf</view>
+							</view>
+							<view class="btn del fa fa-times theme-button-orange2" aria-hidden="true"></view>
 						</view>
-						<view class="item flex-column-center-flex_start">
-							<image class="file-cover" mode="aspectFill" src="https://oss.littlehotspot.com/WeChat/resource/default.jpg"></image>
-							<view class="filename two-line-overflow">xxxxxxx.pdf</view>
+						<view class="item flex-column-flex_start-flex_start">
+							<view class="inner flex-column-center-flex_start">
+								<image class="file-cover" mode="aspectFill" src="https://oss.littlehotspot.com/WeChat/resource/default.jpg"></image>
+								<view class="filename two-line-overflow">xxxxxxx.pdf</view>
+							</view>
+							<view class="btn del fa fa-times theme-button-orange2" aria-hidden="true"></view>
 						</view>
-						<view class="item add flex-column-center-flex_start">
-							<view class="flex-column-center-center">
+						<view class="item add flex-column-flex_start-flex_start">
+							<view class="inner flex-column-center-center">
 								<view class="icon">+</view>
 								<view class="text">上传文件</view>
 							</view>
