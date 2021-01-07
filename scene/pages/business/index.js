@@ -1,4 +1,9 @@
 // scene/pages/business/index.js
+/**
+ * 【场景】商务宴请 - 首页
+ */
+
+
 const utils = require('../../../utils/util.js')
 var mta = require('../../../utils/mta_analysis.js')
 const app = getApp()
@@ -11,6 +16,8 @@ Page({
    * 页面的初始数据
    */
   data: {
+    statusBarHeight: getApp().globalData.statusBarHeight,
+    SystemInfo: getApp().SystemInfo,
 
   },
 

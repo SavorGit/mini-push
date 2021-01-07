@@ -101,7 +101,7 @@
   width: 172rpx;
   height: 146rpx;
   margin-top: 10rpx;
-  margin-left: 30rpx;
+  margin-left: 25rpx;
   display: inline-block;
   box-sizing: border-box;
   background-color: #E8E8E8;
