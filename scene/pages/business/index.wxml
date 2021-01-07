@@ -52,7 +52,7 @@
 							</view>
 						</view>
 						<view class="cover">
-							<view class="btn edit fa fa-pencil-square theme-button-orange2" aria-hidden="true"></view>
+							<view class="btn edit fa fa-pencil theme-button-orange2" aria-hidden="true"></view>
 						</view>
 					</block>
 					<view wx:else class="face flex-column-center-center">
@@ -96,7 +96,7 @@
 						</view>
 						<view class="option-bar flex-row-flex_start-flex_end">
 							<view class="btn edit theme-button-orange2">
-								<view class="icon fa fa-pencil-square" aria-hidden="true"></view>
+								<view class="icon fa fa-pencil" aria-hidden="true"></view>
 							</view>
 						</view>
 					</view>
@@ -132,7 +132,7 @@
 						</view>
 						<view class="option-bar flex-row-flex_start-flex_end">
 							<view class="btn edit theme-button-orange2">
-								<view class="icon fa fa-pencil-square" aria-hidden="true"></view>
+								<view class="icon fa fa-pencil" aria-hidden="true"></view>
 							</view>
 						</view>
 					</view>
