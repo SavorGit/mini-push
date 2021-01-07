@@ -65,13 +65,11 @@
   height: 74rpx;
   margin-top: 5rpx;
   margin-left: 25rpx;
-  line-height: 74rpx;
-  text-align: center;
   font-size: 28rpx;
   border-width: 3rpx;
   border-style: solid;
   border-color: #BBBBBB;
-  display: inline-block;
+  display: inline-flex;
   box-sizing: border-box;
   vertical-align: middle;
 }
@@ -102,9 +100,10 @@
   height: 146rpx;
   margin-top: 10rpx;
   margin-left: 25rpx;
-  display: inline-block;
+  display: inline-flex;
   box-sizing: border-box;
   background-color: #E8E8E8;
+  border-radius: 10rpx;
   border: 3rpx solid #BBBBBB;
   vertical-align: middle;
 }
@@ -117,15 +116,23 @@
   margin-top: 0;
 }
 
-.item.pic-group>.value>.input.add {
-  line-height: 146rpx;
-  text-align: center;
-}
-
 .item.pic-group>.value>.input>image {
   width: 100%;
   height: 100%;
   vertical-align: middle;
+}
+
+.item.pic-group>.value>.input>.btn.del {
+  width: 60rpx;
+  height: 60rpx;
+  line-height: 60rpx;
+  text-align: center;
+  margin-top: -150rpx;
+  margin-left: 120rpx;
+  border-radius: 50%;
+  font-size: 36rpx;
+  border: 0;
+  padding: 0;
 }
 
 .item.pic-group>.value>.tip {
