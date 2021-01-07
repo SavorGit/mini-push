@@ -31,23 +31,23 @@
 			<!-- 卡片面板 -->
 			<view class="panel card-group">
 				<view class="card">
-					<block wx:if="{{is_have_card}}">
+					<block wx:if="{{1==1}}">
 						<view class="face flex-column-flex_start-flex_start">
 							<view class="top flex-row-flex_start-space_between">
 								<view class="left flex-column-flex_start-flex_start">
-									<image class="head-pic" mode="aspectFill" src="https://oss.littlehotspot.com/Html5/images/common/default_user_head_3.jpg"></image>
+									<image class="head-pic" mode="aspectFill" src="{{card_info.head_img}}"></image>
 									<view class="row flex-row-flex_end-flex_start">
-										<view class="name theme-font-FFFFFF">张三三</view>
-										<view class="title theme-font-FFFFFF">市场总监</view>
+										<view class="name theme-font-FFFFFF">{{card_info.name}}</view>
+										<view class="title theme-font-FFFFFF">{{card_info.job}}</view>
 									</view>
-									<view class="phone theme-font-FFFFFF">Tel: 13800138000</view>
-									<view class="company theme-font-FFFFFF">热点信息技术有限公司</view>
+									<view class="phone theme-font-FFFFFF">Tel: {{card_info.mobile}}</view>
+									<view class="company theme-font-FFFFFF">{{card_info.company}}</view>
 								</view>
 								<view class="right">
-									<image class="qr" mode="aspectFill" src="https://oss.littlehotspot.com/WeChat/resource/qr-code.jpg"></image>
+									<image class="qr" mode="aspectFill" src="{{card_info.qrcode_img}}"></image>
 								</view>
 							</view>
-							<view class="bottom">
+							<view class="bottom" bindtap="forCard">
 								<view class="btn launch theme-button-orange2">名片投屏</view>
 							</view>
 						</view>
@@ -124,7 +124,7 @@
 
 			<!-- 分享文件面板 -->
 			<view class="panel detailed-list share-file">
-				<block wx:if="{{hasData}}">
+				<block wx:if="{{is_have_sharefile}}">
 					<view class="head flex-column-flex_start-flex_start">
 						<view class="title-bar flex-row-center-flex_start">
 							<view class="icon fa fa-file-text theme-font-FFAA2C" aria-hidden="true"></view>
@@ -159,7 +159,7 @@
 						</view>
 					</view>
 					<view class="body flex-column-center-flex_start">
-						<view class="item add flex-row-center-center">
+						<view class="item add flex-row-center-center" bindtap="gotoShareFiles">
 							<view class="btn theme-button-orange2">添加文件</view>
 						</view>
 					</view>

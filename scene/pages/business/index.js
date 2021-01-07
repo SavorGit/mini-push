@@ -59,6 +59,18 @@ Page({
       }
     })
   },
+  forCard:function(e){
+    var that = this;
+    var card_info = that.data.card_info;
+    card_info.acion = 100;
+    var push_info = JSON.stringify(card_info) 
+    utils.PostRequest(api_url+'/Netty/Index/pushnetty', {
+      box_mac: box_mac,
+      openid:openid,
+      msg: push_info,
+    }, (data, headers, cookies, errMsg, statusCode) => {
+    })
+  },
   forImages:function(e){
     wx.navigateTo({
       url: '/pages/forscreen/forimages/index?box_mac=' + box_mac + '&openid=' + openid ,
@@ -76,14 +88,20 @@ Page({
     if(app.globalData.sys_info.platform=='android'){
       that.setData({showMe: true,})
     }else {
-      wx.navigateTo({
-        url: '/pages/forscreen/forfile/files?box_mac=' + box_mac + '&openid=' + openid ,
-        success: function (e) {
-          that.setData({
-            showMe: false
-          })
-        }
-      })
+      var version = app.globalData.sys_info.version
+      if(app.compareVersion(version,'7.0.18')){
+        that.setData({showMe: true,})
+      }else {
+       
+        wx.navigateTo({
+          url: '/pages/forscreen/forfile/files?box_mac=' + box_mac + '&openid=' + openid ,
+          success: function (e) {
+            that.setData({
+              showMe: false
+            })
+          }
+        })
+      }
     }
   },
   //微信好友文件
@@ -148,9 +166,11 @@ Page({
    * 添加/编辑分享文件
    */
   gotoShareFiles:function(e){
+    console.log('dddd')
     wx.navigateTo({
-      url: '/scene/pages/business/forfiles/index?openid='+openid+'&box_mac='+box_mac,
+      url: '/scene/pages/business/files/sharefile?openid='+openid+'&box_mac='+box_mac+'&type=1',
     })
+    
   },
   /**
    * 投屏分享文件
