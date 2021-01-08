@@ -1197,6 +1197,7 @@ Page({
    * 商务宴请
    */
   gotoBusiness:function(e){
+    var that = this;
     var box_mac = e.target.dataset.box_mac;
     var openid = e.target.dataset.openid;
     mta.Event.stat('gotoBusiness',{'openid':openid,'boxmac':box_mac})
@@ -1214,8 +1215,11 @@ Page({
       if (box_mac == '') {
         app.scanQrcode(pageid);
       } else {
+        var hotel_name = that.data.hotel_name;
+        var room_name = that.data.room_name;
+        var is_compress = that.data.is_compress
         wx.navigateTo({
-          url: '/scene/pages/business/index?openid='+openid+'&box_mac='+box_mac,
+          url: '/scene/pages/business/index?openid='+openid+'&box_mac='+box_mac+'&hotel_name='+hotel_name+'&room_name='+room_name+'&is_compress='+is_compress,
         })
       }
     }
@@ -1224,6 +1228,7 @@ Page({
    * 生日聚会
    */
   gotoParty:function(e){
+    var that = this;
     var box_mac = e.target.dataset.box_mac;
     var openid = e.target.dataset.openid;
     mta.Event.stat('gotoParty',{'openid':openid,'boxmac':box_mac})
@@ -1241,8 +1246,10 @@ Page({
       if (box_mac == '') {
         app.scanQrcode(pageid);
       } else {
+        var hotel_name = that.data.hotel_name;
+        var room_name = that.data.room_name;
         wx.navigateTo({
-          url: '/scene/pages/party/index?openid='+openid+'&box_mac='+box_mac,
+          url: '/scene/pages/party/index?openid='+openid+'&box_mac='+box_mac+'&hotel_name='+hotel_name+'&room_name='+room_name,
         })
       }
     }

@@ -27,6 +27,9 @@ Page({
   onLoad: function (options) {
     openid = options.openid;
     box_mac = options.box_mac;
+    var hotel_name = options.hotel_name;
+    var room_name  = options.room_name;
+    this.setData({'hotel_name':hotel_name,'room_name':room_name})
     this.getHappyList();
   },
   gotoWelcome:function(e){

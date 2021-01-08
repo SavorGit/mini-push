@@ -14,24 +14,24 @@
 
 			<!-- 连接信息面板 -->
 			<view class="panel link-box full_width theme-panel">
-				<view wx:if="{{is_link > 0}}" class='full_width full_height tip flex-column-center-start'>
-					<button bindtap="breakLink" data-boxmac="{{box_mac}}" data-openid="{{openid}}">
+				<view  class='full_width full_height tip flex-column-center-start'>
+					<button>
 						<image class="full_width full_height" src="/images/icon2/1CBEB6_link.png"></image>
 					</button>
 					<label class='font_666666_28'>您已链接【{{hotel_name}}】的{{room_name}}电视</label>
 				</view>
-				<view wx:else class='full_width full_height tip flex-column-center-start'>
+				<!-- <view wx:else class='full_width full_height tip flex-column-center-start'>
 					<button bindtap="scanQrcode" data-boxmac="{{box_mac}}" data-openid="{{openid}}">
 						<image class="full_width full_height" src="/images/icon2/666666_link.png"></image>
 					</button>
 					<label class='font_666666_28'>当前暂未链接电视，链接后即可使用投屏功能</label>
-				</view>
+				</view> -->
 			</view>
 
 			<!-- 卡片面板 -->
 			<view class="panel card-group">
 				<view class="card">
-					<block wx:if="{{1==1}}">
+					<block wx:if="{{is_have_card}}">
 						<view class="face flex-column-flex_start-flex_start">
 							<view class="top flex-row-flex_start-space_between">
 								<view class="left flex-column-flex_start-flex_start">

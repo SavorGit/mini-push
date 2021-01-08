@@ -28,7 +28,10 @@ Page({
     wx.hideShareMenu({})
     openid  = options.openid;
     box_mac = options.box_mac;
-    
+    var hotel_name = options.hotel_name;
+    var room_name  = options.room_name;
+    var is_compress = options.is_compress;
+    this.setData({'hotel_name':hotel_name,'room_name':room_name,is_compress:is_compress})
   },
   /**
    * 获取商务功能数据
@@ -77,8 +80,9 @@ Page({
     })
   },
   forVideo:function(e){
+    var is_compress = this.data.is_compress;
     wx.navigateTo({
-      url: '/pages/forscreen/forvideo/index?box_mac=' + box_mac + '&openid=' + openid ,
+      url: '/pages/forscreen/forvideo/index?box_mac=' + box_mac + '&openid=' + openid +'&is_compress='+is_compress,
     })
   },
   forfiles: function (e) {

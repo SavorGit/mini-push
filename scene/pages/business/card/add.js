@@ -21,7 +21,7 @@ Page({
     statusBarHeight: getApp().globalData.statusBarHeight,
     SystemInfo: getApp().SystemInfo,
     is_edit:0,
-    card_info:{'header_url':'','name':'','mobile':'','job_title':'','company':'','wx_qrcode':''},
+    card_info:{'head_img':'','name':'','mobile':'','job':'','company':'','qrcode_img':''},
     addDisabled:false,
   },
 
@@ -37,10 +37,17 @@ Page({
   },
   getMyCardInfo:function(openid){
     var that = this;
-    utils.PostRequest(api_v_url + '/aa/bb', {
+    utils.PostRequest(api_v_url + '/Businessdinners/cardDetail', {
       openid:openid,
     }, (data, headers, cookies, errMsg, statusCode) =>{
-      that.setData({card_info:data.result})
+      var is_card = data.result.is_card;
+      if(is_card==1){
+        var card_info = data.result;
+      }else {
+        var card_info = {};
+      }
+
+      that.setData({card_info:card_info,is_edit:is_card})
     })
   },
   editCard:function(e){
@@ -101,11 +108,11 @@ Page({
               success: function (res) {
                 var card_info  = that.data.card_info;
                 if (type == 1) {//头像
-                  var header_url = "forscreen/resource/" + img_url
-                  card_info.header_url = header_url;
+                  var head_img = "forscreen/resource/" + img_url
+                  card_info.head_img = head_img;
                 } else if (type == 2) {//微信二维码
-                  var wx_qrcode = "forscreen/resource/" + img_url
-                  card_info.wx_qrcode = wx_qrcode;
+                  var qrcode_img = "forscreen/resource/" + img_url
+                  card_info.qrcode_img = qrcode_img;
                 } 
                 that.setData({card_info:card_info})
                 wx.hideLoading();
@@ -144,7 +151,7 @@ Page({
     var card_info = this.data.card_info;
     var name = e.detail.value.name.replace(/\s+/g, '');
     var mobile = e.detail.value.mobile.replace(/\s+/g, '');
-    var job_title = e.detail.value.job_title.replace(/\s+/g, '');
+    var job = e.detail.value.job.replace(/\s+/g, '');
     var company  = e.detail.value.company.replace(/\s+/g, '');
     if(name==''){
       app.showToast('请输入您的姓名',2000,'none',false);
@@ -153,7 +160,7 @@ Page({
     if(!app.checkMobile(mobile)){
       return false;
     }
-    if(job_title==''){
+    if(job==''){
       app.showToast('请输入您的职称',2000,'none',false);
       return false;
     }
@@ -161,27 +168,27 @@ Page({
       app.showToast('请输入您的公司名称',2000,'none',false);
       return false;
     }
-    if(card_info.header_url==''){
+    if(card_info.head_img==''){
       app.showToast('请上传您的头像',2000,'none',false);
       return false;
     }
-    if(card_info.wx_qrcode==''){
+    if(card_info.qrcode_img==''){
       app.showToast('请上传您的微信二维码',2000,'none',false);
       return false;
     }
     card_info.name = name;
     card_info.mobile = mobile;
-    card_info.job_title = job_title;
+    card_info.job = job;
     card_info.company = company;
-    utils.PostRequest(api_v_url + '/aa/bb', {
+    utils.PostRequest(api_v_url + '/user/editCard', {
       openid:openid,
       box_mac:box_mac,
-      name:name,
-      mobile:mobile,
-      job_title:job_title,
-      company:company,
-      header_url:card_info.header_url,
-      wx_qrcode:card_info.wx_qrcode
+      name:name,                    //姓名
+      mobile:mobile,                 //手机号
+      job:job,                 //职称
+      company:company,               //公司名称
+      head_img:card_info.head_img, //用户头像
+      qrcode_img:card_info.qrcode_img //微信二维码
     }, (data, headers, cookies, errMsg, statusCode) =>{
       that.setData({
         is_edit:1,
