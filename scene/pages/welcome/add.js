@@ -12,16 +12,18 @@ var oss_upload_url = app.globalData.oss_upload_url;
 var openid;
 var box_mac;
 var type;
+var welcome_id ;
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    welcome_info:{'img_list':[],'welcome_message':'','font_style_id':0,'font_size_id':0,'font_color_id':0,'stay_time':0},
+    welcome_info:{'images':[],'content':'','font_id':0,'wordsize_id':0,'color_id':0,'stay_time':0},
     oss_url:app.globalData.oss_url,
     statusBarHeight: getApp().globalData.statusBarHeight,
     SystemInfo: getApp().SystemInfo,
+    wordtype_index: 0, //字体样式索引值
 
   },
 
@@ -34,6 +36,7 @@ Page({
     openid = options.openid;
     box_mac = options.box_mac;
     type   = options.type;
+    welcome_id = options.welcome_id;
     wx.request({
       url: api_v_url + '/Index/getOssParams',
       headers: {
@@ -44,26 +47,35 @@ Page({
       }
     })
     
-    utils.PostRequest(api_v_url + '/aa/bb', {//获取欢迎词配置
+    utils.PostRequest(api_v_url + '/Welcome/config', {//获取欢迎词配置
       openid:openid,
       box_mac:box_mac,
     }, (data, headers, cookies, errMsg, statusCode) =>{
       //字体样式
-
+      var wordtype = data.result.font_namelist
       //字体大小
+      var wordsize = data.result.wordsize;
       //停留时间
-      that.getWelcomeInfo(openid,box_mac,type);
+      var stay_times = data.result.stay_times
+      var wordtype_list = data.result.font
+
+      that.setData({'wordtype':wordtype,'wordsize':wordsize,'stay_times':stay_times,'wordtype_list':wordtype_list});
+      if(welcome_id>0){
+        that.getWelcomeInfo(openid,box_mac,type,welcome_id);
+      }
+      
     })
     
   },
   /**
    * 获取欢迎词信息
    */
-  getWelcomeInfo:function(openid,box_mac,type){
+  getWelcomeInfo:function(openid,box_mac,type,welcome_id){
     var that = this;
     utils.PostRequest(api_v_url + '/aa/bb', {
       openid:openid,
       box_mac:box_mac,
+      welcome_id:welcome_id,
     }, (data, headers, cookies, errMsg, statusCode) =>{
       that.setData({
         welcome_info:data.result
@@ -81,7 +93,7 @@ Page({
     var type = e.currentTarget.dataset.type;
 
     
-    var total_pic = that.data.welcome_info.img_list.length;
+    var total_pic = that.data.welcome_info.images.length;
       //var choose_num = 6 - total_pic;
     
     if (total_pic > 6) {
@@ -144,7 +156,7 @@ Page({
               success: function (res) {
                 var dish_img_url = "forscreen/resource/" + img_url
                 if (type == 'one') {
-                  var dish_img_list = that.data.welcome_info.img_list;
+                  var dish_img_list = that.data.welcome_info.images;
                   for (var i = 0; i < dish_img_list.length; i++) {
                     if (i == keys) {
                       dish_img_list[i] = dish_img_url;
@@ -152,7 +164,7 @@ Page({
                     }
                   }
                   var welcome_info = that.data.welcome_info;
-                  welcome_info.img_list = dish_img_list;
+                  welcome_info.images = dish_img_list;
                   that.setData({
                     welcome_info: welcome_info
                   })
@@ -196,7 +208,7 @@ Page({
   uploadImage: function (e) {
     var that = this;
     var type = e.currentTarget.dataset.type;
-    var total_pic = that.data.welcome_info.img_list.length;
+    var total_pic = that.data.welcome_info.images.length;
     console.log('type'+type)
     
     var choose_num = 6 - total_pic;
@@ -292,7 +304,7 @@ Page({
       },
       success: function (res) {
         if (type == 'all') {
-          var dish_img_list = that.data.welcome_info.img_list;
+          var dish_img_list = that.data.welcome_info.images;
           dish_img_list.push("forscreen/resource/" + img_url);
 
           var end_flag = dish_img_list.length
@@ -300,7 +312,7 @@ Page({
         if (end_flag == flag) {
           if (type == 'all') {
             var welcome_info = that.data.welcome_info
-            welcome_info.img_list = dish_img_list;
+            welcome_info.images = dish_img_list;
             that.setData({
               welcome_info: welcome_info
             }, () => {
@@ -318,20 +330,40 @@ Page({
   /**
    * 选择字体样式
    */
-  selectFontStyle:function(e){
-
+  selectWordType:function(e){
+    var that = this;
+    var wordtype_list = that.data.wordtype_list;
+    var index = e.detail.value;
+    var welcome_info = that.data.welcome_info;
+    welcome_info.font_id = wordtype_list[index].id  
+    that.setData({
+      welcome_info: welcome_info,
+      wordtype_index: index
+    })
   },
   /**
    * 选择字体大小
    */
-  selectFontSize:function(e){
-
+  selectWordSize:function(e){
+    var that = this;
+    var id = e.currentTarget.dataset.id;
+    var welcome_info = that.data.welcome_info;
+    welcome_info.word_size_id = id;
+    that.setData({
+      welcome_info: welcome_info
+    })
   },
   /**
    * 选择字体颜色
    */
-  selectFontColor:function(e){
-
+  selectWordColor:function(e){
+    var that = this;
+    var welcome_info = that.data.welcome_info;
+    var id = e.currentTarget.dataset.id;
+    welcome_info.color_id = id;
+    that.setData({
+      welcome_info: welcome_info
+    })
   },
   selectStayTime:function(e){
 
@@ -339,24 +371,24 @@ Page({
   submitWelcome:function(e){
     var that = this;
     var welcome_info = that.data.welcome_info;
-    if(welcome_info.img_list.length==0){
-      app.showToast('请上传北京图片',2000,'none',false);
+    if(welcome_info.images.length==0){
+      app.showToast('请上传背景图片',2000,'none',false);
       return false;
     }
-    var welcome_message = e.detail.value.welcome_message.replace(/\s+/g, '');
-    if(welcome_message==''){
+    var content = e.detail.value.content.replace(/\s+/g, '');
+    if(content==''){
       app.showToast('请输入欢迎语',2000,'none',false);
       return false;
     }
-    if(welcome_info.font_style_id==0){
+    if(welcome_info.font_id==0){
       app.showToast('请选择字体样式',2000,'none',false);
       return false;
     }
-    if(welcome_info.font_size_id==0){
+    if(welcome_info.wordsize_id==0){
       app.showToast('请选择字体大小',2000,'none',false);
       return false;
     }
-    if(welcome_info.font_color_id==0){
+    if(welcome_info.color_id==0){
       app.showToast('请选择字体颜色',2000,'none',false);
       return false;
     }
@@ -367,12 +399,12 @@ Page({
     utils.PostRequest(api_v_url + '/aa/bb', {
       openid:openid,
       box_mac:box_mac,
-      img_list:JSON.stringify(welcome_info.img_list),
-      welcome_message:welcome_message,
-      font_style_id:font_style_id,
-      font_size_id:ont_size_id,
-      font_color_id:font_color_id,
-      stay_time:stay_time,
+      images:JSON.stringify(welcome_info.images),
+      content:content,
+      font_id:welcome_info.font_id,
+      wordsize_id:welcome_info.wordsize_id,
+      color_id:welcome_info.color_id,
+      stay_time:welcome_info.stay_time,
       type:type
     }, (data, headers, cookies, errMsg, statusCode) =>{
       app.showToast('保存成功')

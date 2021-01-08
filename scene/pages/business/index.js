@@ -157,7 +157,7 @@ Page({
    */
   gotoWelcome:function(e){
     wx.navigateTo({
-      url: '/scene/pages/welcome/add?openid='+openid+'&box_mac='+box_mac+'&type=1',
+      url: '/scene/pages/welcome/add?openid='+openid+'&box_mac='+box_mac+'&type=3',
     })
   },
   /**
