@@ -1,10 +1,17 @@
 // pages/scene/business/downloadfile.js
+/**
+ * 【场景】商务宴请 - 文件下载
+ */
+
+
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
+    statusBarHeight: getApp().globalData.statusBarHeight,
+    SystemInfo: getApp().SystemInfo,
 
   },
 

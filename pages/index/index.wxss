@@ -64,7 +64,8 @@
 /* ==================================== 功能模块面板 ==================================== */
 
 .functional-module-panel {
-  height: 380rpx;
+  /* height: 380rpx; */
+  padding: 30rpx 0;
 }
 
 .functional-module-panel>.row>view,
@@ -212,6 +213,7 @@
 .scene {
   width: 100%;
   height: 200rpx;
+  margin-top: 20rpx;
 }
 
 .scene>.row {
@@ -246,7 +248,7 @@
 /* ==================================== 推荐面板 ==================================== */
 
 .recommend-panel {
-  max-height: 1410rpx;
+  /* max-height: 1410rpx; */
   margin-top: 20rpx;
 }
 
@@ -267,7 +269,7 @@
 
 .recommend-panel>.weui-grids {
   width: calc(100% - 60rpx);
-  height: 1230rpx;
+  /* height: 1230rpx; */
   padding: 30rpx;
 }
 
