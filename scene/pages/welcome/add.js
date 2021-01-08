@@ -51,15 +51,25 @@ Page({
       openid:openid,
       box_mac:box_mac,
     }, (data, headers, cookies, errMsg, statusCode) =>{
+      var welcome_info = that.data.welcome_info;
       //字体样式
       var wordtype = data.result.font_namelist
+      var font_list     = data.result.font;
       //字体大小
       var wordsize = data.result.wordsize;
+      //字体颜色
+      var color_list = data.result.color;
       //停留时间
       var stay_times = data.result.stay_times
       var wordtype_list = data.result.font
 
-      that.setData({'wordtype':wordtype,'wordsize':wordsize,'stay_times':stay_times,'wordtype_list':wordtype_list});
+
+      welcome_info.wordsize_id = wordsize[0].id;
+      welcome_info.color_id   = color_list[0].id
+      that.setData({'wordtype':wordtype,'wordsize':wordsize,'stay_times':stay_times,
+                    'wordtype_list':wordtype_list,'font_list':font_list,'welcome_info':welcome_info,
+                    'color_list':color_list
+                  });
       if(welcome_id>0){
         that.getWelcomeInfo(openid,box_mac,type,welcome_id);
       }
@@ -72,13 +82,34 @@ Page({
    */
   getWelcomeInfo:function(openid,box_mac,type,welcome_id){
     var that = this;
-    utils.PostRequest(api_v_url + '/aa/bb', {
+    utils.PostRequest(api_v_url + '/Welcome/detail', {
       openid:openid,
       box_mac:box_mac,
       welcome_id:welcome_id,
     }, (data, headers, cookies, errMsg, statusCode) =>{
+      var welcome_info =data.result;
+      var font_list = that.data.font_list;
+      var font_id = welcome_info.font_id;
+      var wordtype_index = that.data.wordtype_index;
+      var stay_time = welcome_info.stay_time;
+      var stay_times = that.data.stay_times;
+      for(let i in font_list){
+        if(font_id== font_list[i].id){
+          wordtype_index = i;
+          break;
+        }
+      }
+      for(let i in stay_times){
+        stay_times[i].is_select = 0;
+        if(stay_times[i].id==stay_time){
+          stay_times[i].is_select = 1;
+        }
+      }
+      
       that.setData({
-        welcome_info:data.result
+        welcome_info:welcome_info,
+        wordtype_index:wordtype_index,
+        stay_times:stay_times
       })
     })
   },
@@ -327,6 +358,25 @@ Page({
       }
     })
   },
+  delPic: function (e) {
+    var that = this;
+    var keys = e.currentTarget.dataset.keys;
+
+    var welcome_info = that.data.welcome_info;
+
+    var img_list = welcome_info.images;
+    for (var i = 0; i < img_list.length; i++) {
+      if (i == keys) {
+        img_list.splice(keys, 1);
+        break;
+      }
+    }
+    welcome_info.images = img_list;
+    that.setData({
+      welcome_info: welcome_info
+    })
+    
+  },
   /**
    * 选择字体样式
    */
@@ -341,6 +391,12 @@ Page({
       wordtype_index: index
     })
   },
+  addContent:function(e){
+    var content = e.detail.value;
+    var welcome_info = this.data.welcome_info;
+    welcome_info.content = content;
+    this.setData({welcome_info:welcome_info})
+  },
   /**
    * 选择字体大小
    */
@@ -348,7 +404,7 @@ Page({
     var that = this;
     var id = e.currentTarget.dataset.id;
     var welcome_info = that.data.welcome_info;
-    welcome_info.word_size_id = id;
+    welcome_info.wordsize_id = id;
     that.setData({
       welcome_info: welcome_info
     })
@@ -365,8 +421,11 @@ Page({
       welcome_info: welcome_info
     })
   },
-  selectStayTime:function(e){
-
+  playTimesChange:function(e){
+    var stay_time = e.detail.value;
+    var welcome_info = this.data.welcome_info;
+    welcome_info.stay_time = stay_time;
+    this.setData({welcome_info:welcome_info});
   },
   submitWelcome:function(e){
     var that = this;
@@ -396,16 +455,23 @@ Page({
       app.showToast('请选择停留时间',2000,'none',false);
       return false;
     }
-    utils.PostRequest(api_v_url + '/aa/bb', {
-      openid:openid,
+    var images = '';
+    var space  = '';
+    for(let i in welcome_info.images){
+      images +=space + welcome_info.images[i];
+      space = ','
+    }
+    utils.PostRequest(api_v_url + '/Welcome/addwelcome', {
+      
       box_mac:box_mac,
-      images:JSON.stringify(welcome_info.images),
+      color_id:welcome_info.color_id,
       content:content,
       font_id:welcome_info.font_id,
-      wordsize_id:welcome_info.wordsize_id,
-      color_id:welcome_info.color_id,
+      images:images,
+      openid:openid,
       stay_time:welcome_info.stay_time,
-      type:type
+      type:type,
+      wordsize_id:welcome_info.wordsize_id,
     }, (data, headers, cookies, errMsg, statusCode) =>{
       app.showToast('保存成功')
       wx.navigateBack({

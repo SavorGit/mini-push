@@ -44,7 +44,7 @@ Page({
       if(is_card==1){
         var card_info = data.result;
       }else {
-        var card_info = {};
+        var card_info = that.data.card_info;
       }
 
       that.setData({card_info:card_info,is_edit:is_card})
@@ -190,9 +190,8 @@ Page({
       head_img:card_info.head_img, //用户头像
       qrcode_img:card_info.qrcode_img //微信二维码
     }, (data, headers, cookies, errMsg, statusCode) =>{
-      that.setData({
-        is_edit:1,
-        addDisabled:false,
+      wx.navigateBack({
+        delta: 1,
       })
     })
 

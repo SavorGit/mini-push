@@ -3,7 +3,13 @@
  * 【场景】商务宴请 - 分享文件
  */
 
-
+const utils = require('../../../../utils/util.js')
+var mta = require('../../../../utils/mta_analysis.js')
+const app = getApp()
+var api_v_url = app.globalData.api_v_url;
+var oss_upload_url = app.globalData.oss_upload_url;
+var openid;
+var box_mac;
 Page({
 
   /**
@@ -19,7 +25,9 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    openid = options.openid;
+    box_mac = options.box_mac;
+    this.getFileDetail(openid)
   },
 
   /**

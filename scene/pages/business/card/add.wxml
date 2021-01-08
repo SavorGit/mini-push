@@ -8,7 +8,7 @@
 <template is="navigationBarForTwoLevel" data='{{statusBarHeight: statusBarHeight,titleText:"商务名片"}}' />
 
 <!-- 展示页面 -->
-<view wx:if="{{is_edit==1}}" class='container viewer theme-container'
+<!-- <view wx:if="{{is_edit==1}}" class='container viewer theme-container'
 	style='height:calc(100vh - {{46 + statusBarHeight + SystemInfo.screenBottomSpace}}px);'>
 	<view class="card-group flex-column-center-flex_start">
 		<view class="card flex-column-flex_start-flex_start theme-orange-panel">
@@ -35,12 +35,12 @@
 			</view>
 		</view>
 	</view>
-</view>
+</view> -->
 
 
 
 <!-- 编辑页面 -->
-<view wx:else class='container editer theme-container'
+<view class='container editer theme-container'
 	style='height:calc(100vh - {{46 + statusBarHeight + SystemInfo.screenBottomSpace}}px);'>
 	<view class="page">
 		<form bindsubmit="submitInfo">
@@ -49,19 +49,19 @@
 					<view class="row flex-row-center-flex_start">
 						<view class="label">姓名</view>
 						<view class="value">
-							<input class="input" placeholder="请输入" maxlength="10" name="name"></input>
+							<input class="input" placeholder="请输入" maxlength="4" name="name" value="{{card_info.name}}"></input>
 						</view>
 					</view>
 					<view class="row flex-row-center-flex_start">
 						<view class="label">电话</view>
 						<view class="value">
-							<input class="input" placeholder="请输入" type="number" maxlength="11" name="mobile"></input>
+							<input class="input" placeholder="请输入" type="number" maxlength="11" name="mobile" value="{{card_info.mobile}}"></input>
 						</view>
 					</view>
 					<view class="row flex-row-center-flex_start">
 						<view class="label">职称</view>
 						<view class="value">
-							<input class="input" placeholder="请输入" maxlength="10" name="job"></input>
+							<input class="input" placeholder="请输入" maxlength="10" name="job" value="{{card_info.job}}"></input>
 						</view>
 					</view>
 				</view>
@@ -75,7 +75,7 @@
 			<view class="row company flex-row-center-flex_start">
 				<view class="label">公司名称</view>
 				<view class="value">
-					<textarea class="input" placeholder="请输入" maxlength="50" name="company"></textarea>
+					<textarea class="input" placeholder="请输入" maxlength="50" name="company" value="{{card_info.company}}"></textarea>
 				</view>
 			</view>
 			<view class="row qr flex-row-center-flex_start">

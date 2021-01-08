@@ -47,11 +47,11 @@
 									<image class="qr" mode="aspectFill" src="{{card_info.qrcode_img}}"></image>
 								</view>
 							</view>
-							<view class="bottom" bindtap="forCard">
+							<view class="bottom" bindtap="forscreenCard">
 								<view class="btn launch theme-button-orange2">名片投屏</view>
 							</view>
 						</view>
-						<view class="cover">
+						<view class="cover" bindtap="gotoCard">
 							<view class="btn edit fa fa-pencil theme-button-orange2" aria-hidden="true"></view>
 						</view>
 					</block>
@@ -94,7 +94,7 @@
 							<view class="icon fa fa-desktop theme-font-FFAA2C" aria-hidden="true"></view>
 							<view class="title theme-font-FFAA2C">欢迎词</view>
 						</view>
-						<view class="option-bar flex-row-flex_start-flex_end">
+						<view class="option-bar flex-row-flex_start-flex_end" bindtap="gotoWelcome">
 							<view class="btn edit theme-button-orange2">
 								<view class="icon fa fa-pencil" aria-hidden="true"></view>
 							</view>
@@ -102,8 +102,8 @@
 					</view>
 					<view class="body flex-column-center-flex_start">
 						<view class="item flex-row-center-center">
-							<view class="name one-line-overflow theme-font1">欢迎xxxxxxxxxxx</view>
-							<view class="btn launch theme-button-orange2">投屏</view>
+							<view class="name one-line-overflow theme-font1">{{welcome_info.content}}</view>
+							<view class="btn launch theme-button-orange2" bindtap="forscreenWelcome">投屏</view>
 						</view>
 					</view>
 				</block>
@@ -169,8 +169,8 @@
 			<!-- 福利面板 -->
 			<view class="panel welfare">
 				<view class="row flex-row-center-space_between">
-					<image class="btn money" src="/scene/images/imgs/btn_money.png"></image>
-					<image class="btn money" src="/scene/images/imgs/btn_gift.png"></image>
+					<image class="btn money" src="/scene/images/imgs/btn_money.png" bindtap="gotoRedPack"></image>
+					<image class="btn money" src="/scene/images/imgs/btn_gift.png" bindtap="gotoGift"></image>
 				</view>
 			</view>
 

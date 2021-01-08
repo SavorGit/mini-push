@@ -118,8 +118,8 @@
 			<!-- 福利面板 -->
 			<view class="panel welfare">
 				<view class="row flex-row-center-space_between">
-					<image class="btn money" src="/scene/images/imgs/btn_money.png"></image>
-					<image class="btn money" src="/scene/images/imgs/btn_gift.png"></image>
+					<image class="btn money" src="/scene/images/imgs/btn_money.png" bindtap="gotoRedPack"></image>
+					<image class="btn money" src="/scene/images/imgs/btn_gift.png" bindtap="gotoGift"></image>
 				</view>
 			</view>
 

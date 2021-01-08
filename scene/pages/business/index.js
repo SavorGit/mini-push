@@ -62,18 +62,7 @@ Page({
       }
     })
   },
-  forCard:function(e){
-    var that = this;
-    var card_info = that.data.card_info;
-    card_info.acion = 100;
-    var push_info = JSON.stringify(card_info) 
-    utils.PostRequest(api_url+'/Netty/Index/pushnetty', {
-      box_mac: box_mac,
-      openid:openid,
-      msg: push_info,
-    }, (data, headers, cookies, errMsg, statusCode) => {
-    })
-  },
+
   forImages:function(e){
     wx.navigateTo({
       url: '/pages/forscreen/forimages/index?box_mac=' + box_mac + '&openid=' + openid ,
@@ -156,8 +145,14 @@ Page({
    * 添加/编辑欢迎词
    */
   gotoWelcome:function(e){
+    var is_have_welcome = this.data.is_have_welcome;
+    if(is_have_welcome){
+      var welcome_id = this.data.welcome_info.welcome_id;
+    }else {
+      var welcome_id = 0 ;
+    }
     wx.navigateTo({
-      url: '/scene/pages/welcome/add?openid='+openid+'&box_mac='+box_mac+'&type=3',
+      url: '/scene/pages/welcome/add?openid='+openid+'&box_mac='+box_mac+'&type=3&welcome_id='+welcome_id,
     })
   },
   /**
@@ -175,6 +170,80 @@ Page({
       url: '/scene/pages/business/files/sharefile?openid='+openid+'&box_mac='+box_mac+'&type=1',
     })
     
+  },
+  gotoGift:function(e){
+    wx.switchTab({
+      url: '/pages/shopping/index',
+    })
+  },
+  gotoRedPack:function(e){
+    wx.navigateTo({
+      url: '/pages/thematic/money_blessing/packing?openid='+openid+'&box_mac='+box_mac,
+    })
+  },
+  //分享名片到电视
+  forscreenCard:function(e){
+    var that = this;
+    utils.PostRequest(api_v_url + '/Businessdinners/shareCardOnTv', {
+      openid:openid,
+      box_mac:box_mac,
+    }, (data, headers, cookies, errMsg, statusCode) =>{
+      app.showToast('投屏成功',2000,'success')
+    })
+    var card_info = that.data.card_info;
+    var forscreen_id =(new Date()).valueOf();
+    utils.PostRequest(api_v_url + '/index/recordForScreenPics', {
+      forscreen_id: forscreen_id,
+      openid: openid,
+      box_mac: box_mac,
+      action: 45,
+      mobile_brand: app.globalData.sys_info.mobile_brand,
+      mobile_model: app.globalData.sys_info.mobile_model,
+      forscreen_char: '',
+      imgs: '["'+card_info.qrcode_img_path+'"]',
+      res_sup_time: 0,
+      res_eup_time: 0,
+      resource_type: 1,
+      res_nums: 1,
+      serial_number:app.globalData.serial_number
+    }, (data, headers, cookies, errMsg, statusCode) => {
+    },res=>{},{ isShowLoading: false })
+    
+  },
+  forscreenWelcome:function(e){
+    var that = this;
+    var welcome_info = that.data.welcome_info;
+    utils.PostRequest(api_v_url + '/Welcome/demandplay', {
+      openid:openid,
+      box_mac:box_mac,
+      welcome_id:welcome_info.welcome_id
+    }, (data, headers, cookies, errMsg, statusCode) =>{
+      app.showToast('投屏成功',2000,'success')
+    })
+    /*var forscreen_id =(new Date()).valueOf();
+    var image_list = welcome_info.image_list;
+    var image_str ='';
+    var space  = '';
+    for(let in image_list){
+      image_str =space +'"'+image_list[i]+'"';
+      space = ',';
+    }
+    utils.PostRequest(api_v_url + '/index/recordForScreenPics', {
+      forscreen_id: forscreen_id,
+      openid: openid,
+      box_mac: box_mac,
+      action: 45,
+      mobile_brand: app.globalData.sys_info.mobile_brand,
+      mobile_model: app.globalData.sys_info.mobile_model,
+      forscreen_char: '',
+      imgs: '['+image_str+']',
+      res_sup_time: 0,
+      res_eup_time: 0,
+      resource_type: 1,
+      res_nums: image_list.length,
+      serial_number:app.globalData.serial_number
+    }, (data, headers, cookies, errMsg, statusCode) => {
+    },res=>{},{ isShowLoading: false })*/
   },
   /**
    * 投屏分享文件
