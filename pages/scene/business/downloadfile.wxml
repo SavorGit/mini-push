@@ -25,7 +25,7 @@
 				</view>
 				<view class="name theme-font1">xxxxxxxxxxxxx.pdf</view>
 			</view>
-			<view class="buttons flex-row-center-center">
+			<view class="buttons flex-row-center-center" bindtap="downLoadFile">
 				<view class="btn download theme-button-red">下载</view>
 			</view>
 		</view>

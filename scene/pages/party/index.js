@@ -144,7 +144,7 @@ Page({
   },
   gotoRedPack:function(e){
     wx.navigateTo({
-      url: '/pages/thematic/money_blessing/packing?openid='+openid+'&box_mac='+box_mac,
+      url: '/pages/thematic/money_blessing/packing?openid='+openid+'&box_mac='+box_mac+'&type=4',
     })
   },
   /**

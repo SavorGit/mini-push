@@ -1253,5 +1253,10 @@ Page({
         })
       }
     }
+  },
+  gotoDf:function(e){
+    wx.navigateTo({
+      url: '/pages/scene/business/downloadfile',
+    })
   }
 })

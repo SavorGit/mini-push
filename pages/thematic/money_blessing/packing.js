@@ -29,6 +29,10 @@ Page({
   onLoad: function(options) {
     openid = options.openid;
     box_mac= options.box_mac;
+    var type = 2;
+    if(typeof(options.type)!='undefined'){
+      type = options.type;
+    }
     var that = this;
     var user_info = wx.getStorageSync("savor_user_info");
     that.setData({
@@ -39,7 +43,7 @@ Page({
     })
     //获取发送红包 祝福语 发送范围配置
     utils.PostRequest(api_v_url+'/Redpacket/getConfig', {
-      type: 2
+      type: type
     }, (data, headers, cookies, errMsg, statusCode) => {
       that.setData({
         blessingArray: data.result.bless,

@@ -116,7 +116,7 @@
   },
   "networkTimeout": {
     "request": 15000,
-    "downloadFile": 10000
+    "downloadFile": 100000
   },
   "tabBar": {
     "color": "#999999",

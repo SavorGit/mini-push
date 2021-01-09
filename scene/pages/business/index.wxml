@@ -130,25 +130,26 @@
 							<view class="icon fa fa-file-text theme-font-FFAA2C" aria-hidden="true"></view>
 							<view class="title theme-font-FFAA2C">电视分享文件给好友</view>
 						</view>
-						<view class="option-bar flex-row-flex_start-flex_end">
+						<view class="option-bar flex-row-flex_start-flex_end" bindtap="gotoShareFiles">
 							<view class="btn edit theme-button-orange2">
 								<view class="icon fa fa-pencil" aria-hidden="true"></view>
 							</view>
 						</view>
 					</view>
 					<view class="body flex-column-center-flex_start">
-						<view class="item flex-row-center-center">
+
+						<view class="item flex-row-center-center" wx:for="{{share_file}}" wx:key="key" wx:for-item="bean" wx:for-index="index" >
+							<view class="name one-line-overflow theme-font1">{{bean.name}}</view>
+							<view class="btn launch theme-button-orange2" bindtap="forscreenShareFile" data-file_id="{{bean.file_id}}">分享</view>
+						</view>
+						<!-- <view class="item flex-row-center-center">
 							<view class="name one-line-overflow theme-font1">xxxxxxxxxxxx.pdf</view>
 							<view class="btn launch theme-button-orange2">分享</view>
 						</view>
 						<view class="item flex-row-center-center">
 							<view class="name one-line-overflow theme-font1">xxxxxxxxxxxx.pdf</view>
 							<view class="btn launch theme-button-orange2">分享</view>
-						</view>
-						<view class="item flex-row-center-center">
-							<view class="name one-line-overflow theme-font1">xxxxxxxxxxxx.pdf</view>
-							<view class="btn launch theme-button-orange2">分享</view>
-						</view>
+						</view> -->
 					</view>
 				</block>
 				<block wx:else>

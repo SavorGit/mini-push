@@ -54,11 +54,13 @@ Page({
       }else {
         that.setData({is_have_welcome:true,welcome_info:welcome_info})
       }
+      var share_file_num = data.result.share_file_num;
+
       var share_file = data.result.share_file;
-      if(share_file.length>0){
-        that.setData({is_have_sharefile:false})
+      if(share_file_num>0){
+        that.setData({is_have_sharefile:true,'share_file':share_file})
       }else {
-        that.setData({is_have_sharefile:true,'sharefile_info':data.result.share_file})
+        that.setData({is_have_sharefile:false})
       }
     })
   },
@@ -135,12 +137,7 @@ Page({
       url: '/scene/pages/business/card/add?openid='+openid+'&box_mac='+box_mac,
     })
   },
-  /**
-   * 分享名片
-   */
-  shareCard:function(e){
-
-  },
+ 
   /**
    * 添加/编辑欢迎词
    */
@@ -155,17 +152,11 @@ Page({
       url: '/scene/pages/welcome/add?openid='+openid+'&box_mac='+box_mac+'&type=3&welcome_id='+welcome_id,
     })
   },
-  /**
-   * 投屏欢迎词
-   */
-  forscreenWelcome:function(e){
-
-  },
+  
   /**
    * 添加/编辑分享文件
    */
   gotoShareFiles:function(e){
-    console.log('dddd')
     wx.navigateTo({
       url: '/scene/pages/business/files/sharefile?openid='+openid+'&box_mac='+box_mac+'&type=1',
     })
@@ -178,7 +169,7 @@ Page({
   },
   gotoRedPack:function(e){
     wx.navigateTo({
-      url: '/pages/thematic/money_blessing/packing?openid='+openid+'&box_mac='+box_mac,
+      url: '/pages/thematic/money_blessing/packing?openid='+openid+'&box_mac='+box_mac+'&type=4',
     })
   },
   //分享名片到电视
@@ -249,7 +240,14 @@ Page({
    * 投屏分享文件
    */
   forscreenShareFile:function(e){
-    
+    var file_id = e.currentTarget.dataset.file_id;
+    utils.PostRequest(api_v_url + '/file/shareFileOnTv', {
+      openid:openid,
+      file_id:file_id
+    }, (data, headers, cookies, errMsg, statusCode) =>{
+      app.showToast('投屏成功',2000,'success')
+    })
+    //记录投屏历史
   },
   /**
    * 生命周期函数--监听页面初次渲染完成
