@@ -137,7 +137,7 @@
       },
       {
         "pagePath": "pages/index/index",
-        "text": "电视互动",
+        "text": "投屏",
         "iconPath": "/images/icon2/999999_interact.png",
         "selectedIconPath": "/images/icon2/000000_interact.png"
       },

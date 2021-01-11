@@ -44,7 +44,7 @@
               <image src='{{videoinfo.video_img}}'></image>
               <view class='cover'>
                 <label class='title'></label>
-                <button class='theme-button'>电视播放</button>
+                <button class='theme-button'>投屏</button>
               </view>
             </view>
           </view>
