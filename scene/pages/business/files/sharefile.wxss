@@ -80,6 +80,13 @@
   vertical-align: middle;
 }
 
+.item>.inner>.icon {
+  width: auto;
+  height: auto;
+  font-size: 200rpx;
+  vertical-align: middle;
+}
+
 .item>.inner>.filename {
   width: 100%;
   text-align: center;
