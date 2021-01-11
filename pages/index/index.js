@@ -1255,4 +1255,9 @@ Page({
       }
     }
   },
+  gotoPd:function(e){
+    wx.navigateTo({
+      url: '/pages/scene/business/downloadfile',
+    })
+  }
 })

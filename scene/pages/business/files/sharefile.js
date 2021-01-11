@@ -67,6 +67,7 @@ Page({
     }, (data, headers, cookies, errMsg, statusCode) =>{
       var share_files = data.result.share_file;
       var share_file_num = data.result.share_file_num;
+      
       that.setData({'share_files':share_files,'share_file_num':share_file_num})
     })
   },
@@ -101,7 +102,18 @@ Page({
 
     var index1 = file_name.lastIndexOf('.');
     var file_name = file_name.substring(0,index1);
-    file_name +=that.getDataTime()+postf_t;
+    var date_time = that.getDataTime();
+    var view_file_name = file_name+date_time;
+    if(view_file_name.length>11){
+      view_file_name  = view_file_name.substring(0,11);
+      view_file_name +='***'+postf_t;
+    }else {
+      view_file_name +=postf_t;
+    }
+    console.log(view_file_name)
+
+
+    file_name +=date_time+postf_t;
  
     var oss_file_path = "forscreen/resource/" + file_name ;
     //console.log(timestamp);
@@ -136,6 +148,7 @@ Page({
         var file_info ={};
         file_info.oss_file_path = oss_file_path;
         file_info.name = file_name ;
+        file_info.view_file_name = view_file_name;
         file_info.file_id = 0;
         console.log(share_files)
         console.log(file_info)

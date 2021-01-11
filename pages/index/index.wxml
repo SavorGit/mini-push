@@ -1,7 +1,7 @@
 <!--pages/interact/index.wxml-->
 <import src="/pages/template/commons" />
 <template is="navigationBarForTopLevel" data='{{statusBarHeight: statusBarHeight,titleText:"热点投屏"}}' />
-
+<!-- <view bindtap="gotoPd">test</view> -->
 <scroll-view class="container flex-column-center-flex_start theme-container" style='height: calc(100vh - 46px - {{statusBarHeight}}px);' scroll-y="true" scroll-with-animation="true">
 
 	<!-- 轮播图面板 -->

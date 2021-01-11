@@ -20,7 +20,7 @@
 								<view class="inner flex-column-center-flex_start">
 									<!-- <image class="file-cover" mode="aspectFill" src="https://oss.littlehotspot.com/WeChat/resource/default.jpg"></image> -->
 									<view class="icon fa fa-file-text-o" aria-hidden="true"></view>
-									<view class="filename two-line-overflow">{{bean.name}}</view>
+									<view class="filename two-line-overflow">{{bean.view_file_name}}</view>
 								</view>
 								<view class="btn del fa fa-times theme-button-orange2" aria-hidden="true" bindtap="delFile" data-keys="{{index}}" data-file_id="{{bean.file_id}}"></view>
 							</view>

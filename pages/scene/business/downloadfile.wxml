@@ -26,13 +26,22 @@
 				</view>
 				<view class="name theme-font1">{{file_info.name}}</view>
 			</view>
-			<view class="buttons flex-row-center-center" bindtap="downLoadFile" wx:if="{{is_have_download==false}}">
-				<view class="btn download theme-button-red">下载</view>
-			</view>
+			<block wx:if="{{is_open==1}}">
+				<view class="buttons flex-row-center-center" bindtap="downLoadFile" wx:if="{{is_have_download==false}}">
+					<view class="btn download theme-button-red">下载</view>
+				</view>
 
-			<view class="buttons flex-row-center-center" bindtap="openDoc" wx:if="{{is_have_download==true && is_open==1}}">
-				<view class="btn download theme-button-red">打开</view>
-			</view>
+				<view class="buttons flex-row-center-center" bindtap="openDoc" wx:else>
+					<view class="btn download theme-button-red">打开</view>
+				</view>
+			</block>
+			<block wx:else>
+				<view class="buttons flex-row-center-center" bindtap="downLoadFile" >
+					<view class="btn download theme-button-red">下载</view>
+				</view>
+
+			</block>
+
 		</view>
 	</view>
 </scroll-view>
