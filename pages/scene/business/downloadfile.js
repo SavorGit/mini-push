@@ -6,6 +6,7 @@ const app = getApp();
 const utils = require('../../../utils/util.js')
 var mta = require('../../../utils/mta_analysis.js')
 var api_v_url = app.globalData.api_v_url;
+var oss_url = app.globalData.oss_url;
 var openid;
 var box_id;
 var box_mac;
@@ -66,7 +67,7 @@ Page({
         var file_type = pams_arr[2];
         box_id = pams_arr[3];
         //获取文件详情
-        self.getFileInfo(goods_id);
+        self.getFileInfo(file_id,app.globalData.openid);
         self.recordScanCodeLog(app.globalData.openid,file_type,file_id,box_id);
       } 
 
@@ -101,21 +102,42 @@ Page({
   },
   getFileInfo:function(file_id,openid){
     var that = this;
-    utils.PostRequest(api_v_url + '/file/addFile', {
+    utils.PostRequest(api_v_url + '/file/info', {
       file_id:file_id,
       openid:openid
     }, (data, headers, cookies, errMsg, statusCode) => {
-      that.setData({file_info:data.result})
+      var is_open = data.result.is_open;
+      that.setData({file_info:data.result,is_open:is_open})
+    },res=>{
+      wx.switchTab({
+        url: '/pages/index/index',
+      })
+    })
+  },
+  recordScanCodeLog:function(openid,goods_type,file_id,box_id){
+    var that = this;
+    utils.PostRequest(api_v_url + '/Index/gencode', {
+      openid:openid,
+      type:goods_type,
+      data_id:file_id,
+      box_id:box_id,
+      mobile_brand:app.globalData.mobile_brand,
+      mobile_model:app.globalData.mobile_model
+    }, (data, headers, cookies, errMsg, statusCode) => {
+      that.setData({box_mac:data.result.box_mac})
     })
   },
   downLoadFile:function(e){
+    var that = this;
     var rootPath = wx.env.USER_DATA_PATH + '/doc';
     console.log(rootPath)
     wx.showLoading({
       title: '文件下载中...',
     })
+    var file_info = this.data.file_info;
+    var file_url = oss_url+'/'+file_info.file_path;
     const downloadTask = wx.downloadFile({
-      url: 'https://oss.littlehotspot.com/forscreen/resource/1610172543876.pdf',
+      url: file_url,
       filePath: rootPath,
       header: {},
       success: function (res) {
@@ -123,8 +145,8 @@ Page({
         wx.hideLoading({})
         app.showToast('文件下载成功');
         console.log(res);
-        var filePath = res.filePath;
-        
+        var openFilepath = res.filePath;
+        that.setData({openFilepath:openFilepath})
       },
       fail: function (res) {
         console.log(e)

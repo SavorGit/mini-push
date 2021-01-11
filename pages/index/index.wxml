@@ -1,7 +1,7 @@
 <!--pages/interact/index.wxml-->
 <import src="/pages/template/commons" />
 <template is="navigationBarForTopLevel" data='{{statusBarHeight: statusBarHeight,titleText:"热点投屏"}}' />
-<view bindtap="gotoDf">testtt</view>
+
 <scroll-view class="container flex-column-center-flex_start theme-container" style='height: calc(100vh - 46px - {{statusBarHeight}}px);' scroll-y="true" scroll-with-animation="true">
 
 	<!-- 轮播图面板 -->
@@ -93,14 +93,14 @@
 					<label>文件上电视</label>
 				</button>
 			</form>
-			<view wx:if="{{is_test==1}}">
+			<!-- <view wx:if="{{is_test==1}}">
 				<button class="flex-column-center-center theme-font2" bindtap='testForscreen' data-type="2" data-boxmac="{{box_mac}}" data-openid="{{openid}}">
 					<view class="icon flex-column-center-center pic">
 						<image src='/images/icon2/FFFFFF_picture.png'></image>
 					</view>
 					<label>模拟照片投屏</label>
 				</button>
-			</view>
+			</view> -->
 		</view>
 		<!-- <view class="row flex-row-center-center full_width">
 			<view>

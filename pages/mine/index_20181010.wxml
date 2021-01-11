@@ -46,6 +46,21 @@
 		</view>
 	</view>
 
+	<!-- 模拟投照片 -->
+	<view wx:if="{{is_test==1}}" class="promotion-goods-manage-panel theme-font2 theme-panel"  bindtap='testForscreen' data-type="2" data-boxmac="{{box_mac}}" >
+		<view class="full_width full_height flex-row-center-space_between">
+			<view>模拟投照片</view>
+			<view class="fa fa-angle-right" aria-hidden="true"></view>
+		</view>
+	</view>
+	<!-- 模拟投视频 -->
+	<view wx:if="{{is_test==1}}" class="promotion-goods-manage-panel theme-font2 theme-panel" bindtap='testForscreen' data-type="1" data-boxmac="{{box_mac}}" >
+		<view class="full_width full_height flex-row-center-space_between">
+			<view>模拟投视频</view>
+			<view class="fa fa-angle-right" aria-hidden="true"></view>
+		</view>
+	</view>
+
 	<!-- 我的公开 -->
 	<view class='theme-panel' style='margin-top: 10rpx;'>
 		<view class='swiper-tab font_666666_30'>

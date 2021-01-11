@@ -96,7 +96,7 @@
 					<view class="body flex-column-center-flex_start">
 						<view class="item flex-row-center-center">
 							<view class="name one-line-overflow theme-font1">{{welcome_info.content}}</view>
-							<view class="btn launch theme-button-orange2">投屏</view>
+							<view class="btn launch theme-button-orange2" bindtap="forscreenWelcome">投屏</view>
 						</view>
 					</view>
 				</block>

@@ -12,10 +12,10 @@
 		<view class="body">
 			<view class="user flex-row-flex_start-space_between">
 				<view class="left">
-					<image class="head-pic" mode="aspectFill" src="https://oss.littlehotspot.com/Html5/images/common/default_user_head_3.jpg"></image>
+					<image class="head-pic" mode="aspectFill" src="{{file_info.avatarUrl}}"></image>
 				</view>
 				<view class="right flex-row-center-flex_start">
-					<view class="name theme-font1">张三三</view>
+					<view class="name theme-font1">{{file_info.nickName}}</view>
 					<view class="tip theme-font3">分享了</view>
 				</view>
 			</view>
@@ -23,7 +23,7 @@
 				<view class="cover flex-column-center-flex_start">
 					<image class="pic" mode="aspectFill" src="https://oss.littlehotspot.com/WeChat/resource/default.jpg"></image>
 				</view>
-				<view class="name theme-font1">xxxxxxxxxxxxx.pdf</view>
+				<view class="name theme-font1">{{file_info.name}}</view>
 			</view>
 			<view class="buttons flex-row-center-center" bindtap="downLoadFile" wx:if="{{is_have_download==false}}">
 				<view class="btn download theme-button-red">下载</view>

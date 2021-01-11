@@ -22,6 +22,7 @@ Page({
     box_mac:'',
     wifiErr: app.globalData.wifiErr,
     is_view_official_account:app.globalData.is_view_official_account, //是否显示关注公众号
+    is_test:0,
   },
 
   /**
@@ -66,9 +67,11 @@ Page({
       openid: app.globalData.openid
     }, (data, headers, cookies, errMsg, statusCode) => {
       if (data.result.is_have == 1) {
+        var is_test = data.result.is_test
         that.setData({
           hotel_info: data.result,
           box_mac: data.result.box_mac,
+          is_test:is_test
         })
         box_mac = data.result.box_mac;
       } else {
@@ -83,7 +86,17 @@ Page({
       }
     }, re => { }, { isShowLoading: false });
   },
-
+  testForscreen:function(e){
+    var box_mac = e.currentTarget.dataset.boxmac;
+    var type   = e.currentTarget.dataset.type;
+    utils.PostRequest(api_v_url + '/forscreen/collectforscreen', {
+      box_mac: box_mac,
+      openid: openid,
+      type:type
+    }, (data, headers, cookies, errMsg, statusCode) =>{
+      app.showToast('投屏成功')
+    })
+  },
   refreshOn:function(){
     wx.showToast({
       title: '刷新成功',
