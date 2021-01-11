@@ -186,6 +186,7 @@ Page({
     console.log(e)
     var that = this;
     var share_files = that.data.share_files;
+    console.log(share_files)
     /*if(share_files.length==0){
       app.showToast('请上传您要分享的文件');
       return false;
