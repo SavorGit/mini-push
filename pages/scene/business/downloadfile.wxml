@@ -21,7 +21,8 @@
 			</view>
 			<view class="file flex-column-center-center">
 				<view class="cover flex-column-center-flex_start">
-					<image class="pic" mode="aspectFill" src="https://oss.littlehotspot.com/WeChat/resource/default.jpg"></image>
+					<!-- <image class="pic" mode="aspectFill" src="https://oss.littlehotspot.com/WeChat/resource/default.jpg"></image> -->
+					<view class="icon fa fa-file-text-o" aria-hidden="true"></view>
 				</view>
 				<view class="name theme-font1">{{file_info.name}}</view>
 			</view>

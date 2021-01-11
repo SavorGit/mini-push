@@ -91,6 +91,7 @@
   width: 100%;
   text-align: center;
   font-size: 28rpx;
+  word-wrap: break-word;
 }
 
 .item>.btn {

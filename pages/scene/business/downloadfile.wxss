@@ -62,6 +62,12 @@
   border-radius: 10rpx;
 }
 
+.page>.body>.file>.cover>.icon {
+  width: auto;
+  height: auto;
+  font-size: 200rpx;
+}
+
 .page>.body>.file>.name {
   height: 30rpx;
   line-height: 30rpx;
