@@ -22,10 +22,10 @@
 									<view class="icon fa fa-file-text-o" aria-hidden="true"></view>
 									<view class="filename two-line-overflow">{{bean.name}}</view>
 								</view>
-								<view class="btn del fa fa-times theme-button-orange2" aria-hidden="true" bindtap="delFile" data-keys="{{index}}"></view>
+								<view class="btn del fa fa-times theme-button-orange2" aria-hidden="true" bindtap="delFile" data-keys="{{index}}" data-file_id="{{bean.file_id}}"></view>
 							</view>
 						</block>
-						<view class="item add flex-column-flex_start-flex_start" bindtap="uploadFile">
+						<view class="item add flex-column-flex_start-flex_start" bindtap="uploadFile" wx:if="{{share_files.length<6}}">
 							<view class="inner flex-column-center-center">
 								<view class="icon">+</view>
 								<view class="text">上传文件</view>

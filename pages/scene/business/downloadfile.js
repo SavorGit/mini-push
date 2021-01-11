@@ -41,7 +41,7 @@ Page({
   data: {
     statusBarHeight: getApp().globalData.statusBarHeight,
     SystemInfo: getApp().SystemInfo,
-
+    is_have_download:false,
   },
 
   /**
@@ -119,23 +119,12 @@ Page({
       filePath: rootPath,
       header: {},
       success: function (res) {
+        that.setData({is_have_download:true})
         wx.hideLoading({})
         app.showToast('文件下载成功');
         console.log(res);
         var filePath = res.filePath;
-        wx.openDocument({
-          filePath: filePath,
-          success: function (res) {
-            console.log('打开文档成功')
-          },
-          fail: function (res) {
-            
-            console.log(res);
-          },
-          complete: function (res) {
-            console.log(res);
-          }
-        })
+        
       },
       fail: function (res) {
         console.log(e)
@@ -160,6 +149,22 @@ Page({
         downloadPercent: ((res.totalBytesWritten / totalbytes) * 100).toFixed(2)  //toFixed(2)取小数点后两位，更新wxml中progress组件的进度值  
 
       })*/
+    })
+  },
+  openDoc:function(e){
+    var openFilepath = this.data.openFilepath;
+    wx.openDocument({
+      filePath: openFilepath,
+      success: function (res) {
+        console.log('打开文档成功')
+      },
+      fail: function (res) {
+        
+        console.log(res);
+      },
+      complete: function (res) {
+        console.log(res);
+      }
     })
   },
   /**

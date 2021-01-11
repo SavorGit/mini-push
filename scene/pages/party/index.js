@@ -31,6 +31,7 @@ Page({
     var room_name  = options.room_name;
     this.setData({'hotel_name':hotel_name,'room_name':room_name})
     this.getHappyList();
+    
   },
   gotoWelcome:function(e){
     wx.navigateTo({
@@ -45,6 +46,21 @@ Page({
         happylist:data.result
       })
     })
+  },
+  getPartyInfo:function(e){
+    var that = this;
+    utils.PostRequest(api_v_url+'/Birthdayparty/moduleList', {
+      openid:openid,
+      box_mac:box_mac
+    }, (data, headers, cookies, errMsg, statusCode) => {
+      var welcome_info = data.result.welcome;
+      if(JSON.stringify(welcome_info) == "{}"){
+        that.setData({is_have_welcome:false})
+      }else {
+        that.setData({is_have_welcome:true,welcome_info:welcome_info})
+      }
+    })
+    
   },
 
   showHappy:function(e){
@@ -158,7 +174,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    this.getPartyInfo();
   },
 
   /**

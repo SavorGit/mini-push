@@ -28,6 +28,7 @@ Page({
     statusBarHeight: getApp().globalData.statusBarHeight,
     SystemInfo: getApp().SystemInfo,
     share_files:[],
+    del_files:[],
     addDisabled:false
   },
 
@@ -109,6 +110,9 @@ Page({
     });
     wx.showLoading({
       title: '文件上传中...',
+      mask:true,
+    })
+    that.setData({
       addDisabled:true,
     })
     var upload_task = wx.uploadFile({
@@ -132,6 +136,7 @@ Page({
         var file_info ={};
         file_info.oss_file_path = oss_file_path;
         file_info.name = file_name ;
+        file_info.file_id = 0;
         console.log(share_files)
         console.log(file_info)
         share_files.push(file_info);
@@ -153,8 +158,14 @@ Page({
     var that = this;
     var share_files = that.data.share_files;
     var keys = e.currentTarget.dataset.keys;
+    var file_id = e.currentTarget.dataset.file_id;
+
     share_files.splice(keys,1);
-    that.setData({'share_files':share_files})
+    var del_files = that.data.del_files;
+    if(file_id>0){
+      del_files.push(file_id);
+    }
+    that.setData({'share_files':share_files,'del_files':del_files})
   },
   getDataTime:function(){
     var timestamp = Date.parse(new Date());
@@ -175,20 +186,29 @@ Page({
     console.log(e)
     var that = this;
     var share_files = that.data.share_files;
-    if(share_files.length==0){
+    /*if(share_files.length==0){
       app.showToast('请上传您要分享的文件');
       return false;
-    }
+    }*/
     var file_path = '';
     var space  = '';
     for(let i in share_files){
       file_path+=space + share_files[i].oss_file_path;
+      space  = ',';
+    }
+    var del_files = that.data.del_files;
+    var file_ids = '';
+    var space  = '';
+    for(let i in del_files){
+      file_ids +=space+del_files[i];
+      space  = ',';
     }
     utils.PostRequest(api_v_url + '/file/addFile', {
       box_mac: box_mac,
       file_path:file_path,
       openid: openid,
-      type:1
+      type:1,
+      file_ids:file_ids
     }, (data, headers, cookies, errMsg, statusCode) => {
       app.showToast('保存成功',2000,'success');
       wx.navigateBack({

@@ -81,7 +81,7 @@
 
 			<!-- 欢迎词面板 -->
 			<view class="panel detailed-list welcome">
-				<block wx:if="{{hasData}}">
+				<block wx:if="{{is_have_welcome}}">
 					<view class="head flex-column-flex_start-flex_start">
 						<view class="title-bar flex-row-center-flex_start">
 							<view class="icon fa fa-desktop theme-font-FFAA2C" aria-hidden="true"></view>
@@ -95,7 +95,7 @@
 					</view>
 					<view class="body flex-column-center-flex_start">
 						<view class="item flex-row-center-center">
-							<view class="name one-line-overflow theme-font1">欢迎xxxxxxxxxxx</view>
+							<view class="name one-line-overflow theme-font1">{{welcome_info.content}}</view>
 							<view class="btn launch theme-button-orange2">投屏</view>
 						</view>
 					</view>

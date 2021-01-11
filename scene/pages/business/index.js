@@ -10,6 +10,8 @@ const app = getApp()
 var api_v_url = app.globalData.api_v_url;
 var openid;
 var box_mac;
+var mobile_brand = app.globalData.mobile_brand;
+var mobile_model = app.globalData.mobile_model;
 Page({
 
   /**
@@ -188,8 +190,8 @@ Page({
       openid: openid,
       box_mac: box_mac,
       action: 45,
-      mobile_brand: app.globalData.sys_info.mobile_brand,
-      mobile_model: app.globalData.sys_info.mobile_model,
+      mobile_brand: mobile_brand,
+      mobile_model: mobile_model,
       forscreen_char: '',
       imgs: '["'+card_info.qrcode_img_path+'"]',
       res_sup_time: 0,
@@ -211,12 +213,12 @@ Page({
     }, (data, headers, cookies, errMsg, statusCode) =>{
       app.showToast('投屏成功',2000,'success')
     })
-    /*var forscreen_id =(new Date()).valueOf();
-    var image_list = welcome_info.image_list;
+    var forscreen_id =(new Date()).valueOf();
+    var image_list = welcome_info.images;
     var image_str ='';
     var space  = '';
-    for(let in image_list){
-      image_str =space +'"'+image_list[i]+'"';
+    for(let i in image_list){
+      image_str +=space +'"'+image_list[i]+'"';
       space = ',';
     }
     utils.PostRequest(api_v_url + '/index/recordForScreenPics', {
@@ -224,8 +226,8 @@ Page({
       openid: openid,
       box_mac: box_mac,
       action: 45,
-      mobile_brand: app.globalData.sys_info.mobile_brand,
-      mobile_model: app.globalData.sys_info.mobile_model,
+      mobile_brand: mobile_brand,
+      mobile_model: mobile_model,
       forscreen_char: '',
       imgs: '['+image_str+']',
       res_sup_time: 0,
@@ -234,13 +236,14 @@ Page({
       res_nums: image_list.length,
       serial_number:app.globalData.serial_number
     }, (data, headers, cookies, errMsg, statusCode) => {
-    },res=>{},{ isShowLoading: false })*/
+    },res=>{},{ isShowLoading: false })
   },
   /**
    * 投屏分享文件
    */
   forscreenShareFile:function(e){
     var file_id = e.currentTarget.dataset.file_id;
+    var file_path= e.currentTarget.dataset.file_path;
     utils.PostRequest(api_v_url + '/file/shareFileOnTv', {
       openid:openid,
       file_id:file_id
@@ -248,6 +251,22 @@ Page({
       app.showToast('投屏成功',2000,'success')
     })
     //记录投屏历史
+    var forscreen_id =(new Date()).valueOf();
+    utils.PostRequest(api_v_url + '/index/recordForScreenPics', {
+      forscreen_id: forscreen_id,
+      openid: openid,
+      box_mac: box_mac,
+      action: 44,
+      mobile_brand: mobile_brand,
+      mobile_model: mobile_model,
+      forscreen_char: '',
+      imgs: '["'+file_path+'"]',
+      res_sup_time: 0,
+      res_eup_time: 0,
+      resource_type: 3,
+      serial_number:app.globalData.serial_number
+    }, (data, headers, cookies, errMsg, statusCode) => {
+    },res=>{},{ isShowLoading: false })
   },
   /**
    * 生命周期函数--监听页面初次渲染完成
