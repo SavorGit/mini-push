@@ -87,7 +87,7 @@
 							<view class="icon fa fa-desktop theme-font-FFAA2C" aria-hidden="true"></view>
 							<view class="title theme-font-FFAA2C">生日祝福</view>
 						</view>
-						<view class="option-bar flex-row-flex_start-flex_end">
+						<view class="option-bar flex-row-flex_start-flex_end" bindtap="gotoWelcome">
 							<view class="btn edit theme-button-orange2">
 								<view class="icon fa fa-pencil" aria-hidden="true"></view>
 							</view>

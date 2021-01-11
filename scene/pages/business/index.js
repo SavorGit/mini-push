@@ -71,12 +71,14 @@ Page({
     wx.navigateTo({
       url: '/pages/forscreen/forimages/index?box_mac=' + box_mac + '&openid=' + openid ,
     })
+    mta.Event.stat('besForscreenImage',{'openid':openid,'boxmac':box_mac})
   },
   forVideo:function(e){
     var is_compress = this.data.is_compress;
     wx.navigateTo({
       url: '/pages/forscreen/forvideo/index?box_mac=' + box_mac + '&openid=' + openid +'&is_compress='+is_compress,
     })
+    mta.Event.stat('besForscreenVideo',{'openid':openid,'boxmac':box_mac})
   },
   forfiles: function (e) {
     var that = this;
@@ -100,6 +102,7 @@ Page({
         })
       }
     }
+    mta.Event.stat('besForscreenShareFile',{'openid':openid,'boxmac':box_mac})
   },
   //微信好友文件
   wxFriendfiles: function (e) {
@@ -138,6 +141,7 @@ Page({
     wx.navigateTo({
       url: '/scene/pages/business/card/add?openid='+openid+'&box_mac='+box_mac,
     })
+    mta.Event.stat('clickAddCard',{'openid':openid,'boxmac':box_mac})
   },
  
   /**
@@ -149,10 +153,12 @@ Page({
       var welcome_id = this.data.welcome_info.welcome_id;
     }else {
       var welcome_id = 0 ;
+      
     }
     wx.navigateTo({
       url: '/scene/pages/welcome/add?openid='+openid+'&box_mac='+box_mac+'&type=3&welcome_id='+welcome_id,
     })
+    mta.Event.stat('clickAddWelcome',{'openid':openid,'boxmac':box_mac,'typeid':1})
   },
   
   /**
@@ -162,17 +168,21 @@ Page({
     wx.navigateTo({
       url: '/scene/pages/business/files/sharefile?openid='+openid+'&box_mac='+box_mac+'&type=1',
     })
+    mta.Event.stat('clickAddShareFile',{'openid':openid,'boxmac':box_mac})
     
   },
   gotoGift:function(e){
     wx.switchTab({
       url: '/pages/shopping/index',
     })
+    mta.Event.stat('clickSendGift',{'openid':openid,'boxmac':box_mac,'typeid':1})
   },
   gotoRedPack:function(e){
     wx.navigateTo({
       url: '/pages/thematic/money_blessing/packing?openid='+openid+'&box_mac='+box_mac+'&type=4',
     })
+    mta.Event.stat('clickSendRedPack',{'openid':openid,'boxmac':box_mac,'typeid':1})
+    
   },
   //分享名片到电视
   forscreenCard:function(e){
@@ -201,7 +211,7 @@ Page({
       serial_number:app.globalData.serial_number
     }, (data, headers, cookies, errMsg, statusCode) => {
     },res=>{},{ isShowLoading: false })
-    
+    mta.Event.stat('forscreenCard',{'openid':openid,'boxmac':box_mac})
   },
   forscreenWelcome:function(e){
     var that = this;
@@ -237,6 +247,7 @@ Page({
       serial_number:app.globalData.serial_number
     }, (data, headers, cookies, errMsg, statusCode) => {
     },res=>{},{ isShowLoading: false })
+    mta.Event.stat('forscreenWelcome',{'openid':openid,'boxmac':box_mac,'typeid':1})
   },
   /**
    * 投屏分享文件
@@ -267,6 +278,7 @@ Page({
       serial_number:app.globalData.serial_number
     }, (data, headers, cookies, errMsg, statusCode) => {
     },res=>{},{ isShowLoading: false })
+    mta.Event.stat('forscreenShareFile',{'openid':openid,'boxmac':box_mac})
   },
   /**
    * 生命周期函数--监听页面初次渲染完成

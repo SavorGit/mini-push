@@ -1200,12 +1200,12 @@ Page({
     var that = this;
     var box_mac = e.target.dataset.box_mac;
     var openid = e.target.dataset.openid;
-    mta.Event.stat('gotoBusiness',{'openid':openid,'boxmac':box_mac})
     var user_info = wx.getStorageSync("savor_user_info");
     if(user_info=='' || typeof(user_info)=='undefined'){
       app.showToast('网络异常，请用微信重新扫码链接电视')
       return false;
     }
+    mta.Event.stat('clickBusiness',{'openid':openid,'boxmac':box_mac})
     if (user_info.is_wx_auth != 3 ) {
       that.setData({
         showModal: true
@@ -1231,12 +1231,13 @@ Page({
     var that = this;
     var box_mac = e.target.dataset.box_mac;
     var openid = e.target.dataset.openid;
-    mta.Event.stat('gotoParty',{'openid':openid,'boxmac':box_mac})
+    
     var user_info = wx.getStorageSync("savor_user_info");
     if(user_info=='' || typeof(user_info)=='undefined'){
       app.showToast('网络异常，请用微信重新扫码链接电视')
       return false;
     }
+    mta.Event.stat('clickHappyParty',{'openid':openid,'boxmac':box_mac})
     if (user_info.is_wx_auth != 3 ) {
       that.setData({
         showModal: true
