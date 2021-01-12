@@ -451,10 +451,10 @@ Page({
       app.showToast('请选择字体颜色',2000,'none',false);
       return false;
     }
-    if(welcome_info.stay_time==0){
+    /*if(welcome_info.stay_time==0){
       app.showToast('请选择停留时间',2000,'none',false);
       return false;
-    }
+    }*/
     var images = '';
     var space  = '';
     for(let i in welcome_info.images){
