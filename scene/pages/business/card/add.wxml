@@ -65,12 +65,12 @@
 						</view>
 					</view>
 				</view>
-				<view class="right flex-column-center-space_around" bindtap="uploadImage" data-type="1">
+				<!-- <view class="right flex-column-center-space_around" bindtap="uploadImage" data-type="1">
 					<image wx:if="{{card_info.head_img==''}}" class="head-pic" mode="aspectFill"
 						src="https://oss.littlehotspot.com/Html5/images/common/default_user_head_3.jpg"></image>
 					<image wx:else class="head-pic" mode="aspectFill" src="{{oss_url}}/{{card_info.head_img}}"></image>
 					<view class="label">头像</view>
-				</view>
+				</view> -->
 			</view>
 			<view class="row company flex-row-center-flex_start">
 				<view class="label">公司名称</view>

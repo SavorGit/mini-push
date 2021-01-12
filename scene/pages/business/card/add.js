@@ -160,14 +160,14 @@ Page({
     if(!app.checkMobile(mobile)){
       return false;
     }
-    if(job==''){
+    /*if(job==''){
       app.showToast('请输入您的职称',2000,'none',false);
       return false;
     }
     if(company==''){
       app.showToast('请输入您的公司名称',2000,'none',false);
       return false;
-    }
+    }*/
     if(card_info.head_img==''){
       app.showToast('请上传您的头像',2000,'none',false);
       return false;
