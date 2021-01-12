@@ -27,6 +27,7 @@
   display: inline-block;
   box-sizing: border-box;
   vertical-align: middle;
+  box-shadow: 5rpx 5rpx 5rpx #DBE5F8;
 }
 
 .panel.birthday-music>.list>.item.hover {

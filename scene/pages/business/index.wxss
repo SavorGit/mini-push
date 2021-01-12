@@ -103,6 +103,7 @@
 .panel.card-group>.card {
   width: 680rpx;
   height: 380rpx;
+  border-radius: 20rpx;
   box-shadow: 10rpx 10rpx 15rpx #DBE5F8;
   background-size: 100% 100%;
   background-repeat: no-repeat;
@@ -134,11 +135,11 @@
 }
 
 .panel.card-group>.card>.face>.top>.left>.row {
-  margin-top: 10rpx;
+  width: 100%;
 }
 
 .panel.card-group>.card>.face>.top>.left>.row>.name {
-  font-size: 36rpx;
+  font-size: 40rpx;
 }
 
 .panel.card-group>.card>.face>.top>.left>.row>.title {
@@ -147,13 +148,15 @@
 }
 
 .panel.card-group>.card>.face>.top>.left>.phone {
+  width: 100%;
   margin-top: 20rpx;
-  font-size: 22rpx;
+  font-size: 28rpx;
 }
 
 .panel.card-group>.card>.face>.top>.left>.company {
+  width: 100%;
   margin-top: 15rpx;
-  font-size: 22rpx;
+  font-size: 24rpx;
 }
 
 .panel.card-group>.card>.face>.top>.right {

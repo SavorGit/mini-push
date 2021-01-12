@@ -14,7 +14,7 @@
 
 			<!-- 连接信息面板 -->
 			<view class="panel link-box full_width theme-panel">
-				<view  class='full_width full_height tip flex-column-center-start'>
+				<view class='full_width full_height tip flex-column-center-start'>
 					<button>
 						<image class="full_width full_height" src="/images/icon2/1CBEB6_link.png"></image>
 					</button>
@@ -34,7 +34,7 @@
 					<block wx:if="{{is_have_card}}">
 						<view class="face flex-column-flex_start-flex_start">
 							<view class="top flex-row-flex_start-space_between">
-								<view class="left flex-column-flex_start-flex_start">
+								<view class="left flex-column-flex_start-center">
 									<!-- <image class="head-pic" mode="aspectFill" src="{{card_info.head_img}}"></image> -->
 									<view class="row flex-row-flex_end-flex_start">
 										<view class="name theme-font-FFFFFF">{{card_info.name}}</view>
@@ -67,19 +67,19 @@
 			<!-- 媒体面板 -->
 			<view class="panel media">
 				<view class="btn pic theme-button-orange2" bindtap="forImages">
-					<view class="flex-column-center-center" >
+					<view class="flex-column-center-center">
 						<image class="icon" mode="aspectFill" src='/images/icon2/FFFFFF_picture.png'></image>
 						<view class="text">图片投屏</view>
 					</view>
 				</view>
 				<view class="btn file theme-button-orange2" bindtap="forfiles">
-					<view class="flex-column-center-center" >
+					<view class="flex-column-center-center">
 						<image class="icon" mode="aspectFill" src='/images/icon2/FFFFFF_files.png'></image>
 						<view class="text">文件投屏</view>
 					</view>
 				</view>
 				<view class="btn video theme-button-orange2" bindtap="forVideo">
-					<view class="flex-column-center-center" >
+					<view class="flex-column-center-center">
 						<image class="icon" mode="aspectFill" src='/images/icon2/FFFFFF_video.png'></image>
 						<view class="text">视频投屏</view>
 					</view>
@@ -138,7 +138,7 @@
 					</view>
 					<view class="body flex-column-center-flex_start">
 
-						<view class="item flex-row-center-center" wx:for="{{share_file}}" wx:key="key" wx:for-item="bean" wx:for-index="index" >
+						<view class="item flex-row-center-center" wx:for="{{share_file}}" wx:key="key" wx:for-item="bean" wx:for-index="index">
 							<view class="name one-line-overflow theme-font1">{{bean.name}}</view>
 							<view class="btn launch theme-button-orange2" bindtap="forscreenShareFile" data-file_id="{{bean.file_id}}" data-file_path="{{bean.file_path}}">分享</view>
 						</view>
