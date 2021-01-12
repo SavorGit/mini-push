@@ -29,6 +29,10 @@
   vertical-align: middle;
 }
 
+.panel.birthday-music>.list>.item.hover {
+  background-color: rgba(0, 0, 0, 0.2);
+}
+
 .panel.birthday-music>.list>.item:nth-child(-n + 4) {
   margin-top: 0;
 }
@@ -38,8 +42,9 @@
 }
 
 .panel.birthday-music>.list>.item>.inner {
-  width: 100%;
-  height: 100%;
+  width: calc(100% - 20rpx);
+  height: calc(100% - 20rpx);
+  padding: 10rpx;
 }
 
 .panel.birthday-music>.list>.item>.inner>.icon {
@@ -49,4 +54,5 @@
 .panel.birthday-music>.list>.item>.inner>.name {
   margin-top: 10rpx;
   font-size: 28rpx;
+  text-align: center;
 }

@@ -14,7 +14,7 @@
 
 			<!-- 连接信息面板 -->
 			<view class="panel link-box full_width theme-panel">
-				<view  class='full_width full_height tip flex-column-center-start'>
+				<view class='full_width full_height tip flex-column-center-start'>
 					<button>
 						<image class="full_width full_height" src="/images/icon2/1CBEB6_link.png"></image>
 					</button>
@@ -32,7 +32,7 @@
 			<view class="panel birthday-music">
 				<view class="list">
 					<block wx:for="{{happylist}}" wx:key="key" wx:for-item="happyinfo" wx:for-index="index">
-						<view class="item" bindtap='showHappy'  data-vediourl="{{happyinfo.res_url}}" data-happyVedioName="{{happyinfo.file_name}}" data-name="{{happyinfo.name}}" data-source="1" data-hotel_info="{{hotel_info}}">
+						<view class="item" hover-class="hover" bindtap='showHappy' data-vediourl="{{happyinfo.res_url}}" data-happyVedioName="{{happyinfo.file_name}}" data-name="{{happyinfo.name}}" data-source="1" data-hotel_info="{{hotel_info}}">
 							<view class="inner flex-column-center-center">
 								<view class="icon fa fa-music theme-font" aria-hidden="true"></view>
 								<view class="name theme-font1">{{happyinfo.title}}{{happyinfo.sub_title}}</view>
