@@ -26,12 +26,161 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    var that = this;
     openid = options.openid;
     box_mac = options.box_mac;
     var hotel_name = options.hotel_name;
     var room_name  = options.room_name;
     this.setData({'hotel_name':hotel_name,'room_name':room_name})
     this.getHappyList();
+    utils.PostRequest(api_url+'/Smallapp3/constellation/getConstellationList', {
+    }, (data, headers, cookies, errMsg, statusCode) => {
+      that.setData({
+        constellationlist:data.result,
+        choose_constellid:data.result[0]['id'],
+        choose_constellname: data.result[0]['name'],
+        choose_constellisnow: 1
+      })
+      if (that.data.choose_constellid) {
+        mta.Event.stat('viewConstellation', { 'name': that.data.choose_constellname })
+        that.getContellDetail(that.data.choose_constellid)
+      }
+    })
+  },
+  getContellDetail:function(constellid){
+    var that = this
+    utils.PostRequest(api_url+'/Smallapp3/constellation/getVideoList', {
+      constellation_id: constellid,
+    }, (data, headers, cookies, errMsg, statusCode) => {
+      that.setData({
+        videolist: data.result
+      })
+    })
+    utils.PostRequest(api_url+'/Smallapp3/constellation/getConstellationDetail', {
+      constellation_id: constellid,
+    }, (data, headers, cookies, errMsg, statusCode) => {
+      that.setData({
+        constellation_detail: data.result
+      })
+    })
+    
+  },
+  switchConstell:function(e){
+    var that = this;
+    var constellid = e.currentTarget.dataset.constellid;
+    var constellisnow = e.currentTarget.dataset.isnow;
+    var constellname = e.currentTarget.dataset.name;
+    that.setData({
+      choose_constellid:constellid,
+      choose_constellisnow:constellisnow,
+      choose_constellname:constellname
+    })
+    that.getContellDetail(constellid)
+    if(constellisnow==1){
+      mta.Event.stat('viewConstellation', { 'name': constellname })
+    }else{
+      mta.Event.stat('viewNextConstellation', { 'name': constellname })
+    }
+  },
+  showHappy:function(e){
+    var user_info = wx.getStorageSync(cache_key +'user_info');
+    var box_mac = e.currentTarget.dataset.boxmac;
+    var openid = e.currentTarget.dataset.openid;
+    var vediourl = e.currentTarget.dataset.vediourl;
+    var source = e.currentTarget.dataset.source
+    var rname = e.currentTarget.dataset.name;
+    
+    var forscreen_char = 'Happy Birthday';
+    var index1 = vediourl.lastIndexOf("/");
+    var index2 = vediourl.length;
+    var filename = vediourl.substring(index1 + 1, index2);//后缀名
+
+
+    var timestamp = (new Date()).valueOf();
+    var mobile_brand = app.globalData.mobile_brand;
+    var mobile_model = app.globalData.mobile_model;
+    utils.PostRequest(api_url + '/smallapp21/User/isForscreenIng', {
+      box_mac: box_mac 
+    }, (data, headers, cookies, errMsg, statusCode) => {
+      var is_forscreen = data.result.is_forscreen;
+        if (is_forscreen == 1) {
+          wx.showModal({
+            title: '确认要打断投屏',
+            content: '当前电视正在进行投屏,继续投屏有可能打断当前投屏中的内容.',
+            success: function (res) {
+              if (res.confirm) {
+                mta.Event.stat('breakForscreen', { 'isbreak':1 })
+
+                utils.PostRequest(api_url + '/Netty/Index/pushnetty', {
+                  box_mac: box_mac,
+                  msg: '{ "action": 6,"url":"' + vediourl + '","filename":"' + filename + '","forscreen_id":"' + timestamp + '","resource_type":2,"openid":"'+openid+'","serial_number":"'+app.globalData.serial_number+'"}',
+                }, (data, headers, cookies, errMsg, statusCode) => {
+                  wx.showToast({
+                    title: '点播成功,电视即将开始播放',
+                    icon: 'none',
+                    duration: 5000
+                  });
+                  utils.PostRequest(api_v_url + '/index/recordForScreenPics', {
+                    forscreen_id: timestamp,
+                    openid: openid,
+                    box_mac: box_mac,
+                    action: 5,
+                    mobile_brand: mobile_brand,
+                    mobile_model: mobile_model,
+                    forscreen_char: forscreen_char,
+                    imgs: '["media/resource/' + filename + '"]',
+                    serial_number:app.globalData.serial_number
+                  }, (data, headers, cookies, errMsg, statusCode) => {
+
+                  })
+                  
+                })
+              } else {
+                mta.Event.stat('breakForscreen', { 'isbreak': 0 })
+              }
+            }
+          })
+        } else {
+          utils.PostRequest(api_url + '/Netty/Index/pushnetty', {
+            box_mac: box_mac,
+            msg: '{ "action": 6,"url":"' + vediourl + '","filename":"' + filename + '","forscreen_id":"' + timestamp + '","resource_type":2,"openid":"'+openid+'","serial_number":"'+app.globalData.serial_number+'"}',
+          }, (data, headers, cookies, errMsg, statusCode) => {
+            wx.showToast({
+              title: '点播成功,电视即将开始播放',
+              icon: 'none',
+              duration: 5000
+            });
+            utils.PostRequest(api_v_url + '/index/recordForScreenPics', {
+              forscreen_id: timestamp,
+                openid: openid,
+                box_mac: box_mac,
+                action: 5,
+                mobile_brand: mobile_brand,
+                mobile_model: mobile_model,
+                forscreen_char: forscreen_char,
+                imgs: '["media/resource/' + filename + '"]',
+                serial_number:app.globalData.serial_number
+            }, (data, headers, cookies, errMsg, statusCode) => {
+
+            },res=>{},{ isShowLoading: false })
+            
+          },res=>{},{ isShowLoading: false })
+          
+        }
+
+    },res=>{},{ isShowLoading: false })
+    
+    
+    if(source==1){
+      mta.Event.stat('clickBirthdayMusic', { 'name': rname })
+    } else if (source == 2){
+      var that = this;
+      if (that.data.choose_constellisnow == 1) {
+        mta.Event.stat('playConstellationVideo', { 'name': that.data.choose_constellname, 'videoname': rname })
+      }else{
+        mta.Event.stat('playNextConstellationVideo', { 'name': that.data.choose_constellname, 'videoname': rname })
+      }
+    }
     
   },
   gotoWelcome:function(e){

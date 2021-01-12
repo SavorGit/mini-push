@@ -129,7 +129,8 @@ Page({
   },
   downLoadFile:function(e){
     var that = this;
-    var rootPath = wx.env.USER_DATA_PATH + '/doc';
+    var file_info = that.data.file_info;
+    var rootPath = wx.env.USER_DATA_PATH + '/'+file_info.name;
     console.log(rootPath)
     wx.showLoading({
       title: '文件下载中...',
