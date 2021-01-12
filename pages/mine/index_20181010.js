@@ -97,6 +97,17 @@ Page({
       app.showToast('投屏成功')
     })
   },
+  forscreenHistory: function (e) {
+    var box_mac = e.currentTarget.dataset.boxmac;
+    if (box_mac == '') {
+      app.scanQrcode();
+    } else {
+      wx.navigateTo({
+        url: '/pages/forscreen/history/list?openid=' + openid + '&box_mac=' + box_mac,
+      })
+    }
+    mta.Event.stat('gotoForscreenHis', { 'linktype': app.globalData.link_type, "boxmac": box_mac })
+  },
   refreshOn:function(){
     wx.showToast({
       title: '刷新成功',
