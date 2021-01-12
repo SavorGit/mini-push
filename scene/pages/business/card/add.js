@@ -167,11 +167,11 @@ Page({
     if(company==''){
       app.showToast('请输入您的公司名称',2000,'none',false);
       return false;
-    }*/
+    }
     if(card_info.head_img==''){
       app.showToast('请上传您的头像',2000,'none',false);
       return false;
-    }
+    }*/
     if(card_info.qrcode_img==''){
       app.showToast('请上传您的微信二维码',2000,'none',false);
       return false;
