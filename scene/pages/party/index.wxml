@@ -65,13 +65,13 @@
 
 			<!-- 媒体面板 -->
 			<view class="panel media">
-				<view class="btn pic theme-button-orange2">
+				<view class="btn pic theme-button-orange2" bindtap="forImages">
 					<view class="flex-column-center-center">
 						<image class="icon" mode="aspectFill" src='/images/icon2/FFFFFF_picture.png'></image>
 						<view class="text">图片投屏</view>
 					</view>
 				</view>
-				<view class="btn video theme-button-orange2">
+				<view class="btn video theme-button-orange2" bindtap="forVideo">
 					<view class="flex-column-center-center">
 						<image class="icon" mode="aspectFill" src='/images/icon2/FFFFFF_video.png'></image>
 						<view class="text">视频投屏</view>

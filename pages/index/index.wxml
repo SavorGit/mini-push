@@ -194,7 +194,7 @@
 
 <!-- 扫描二维码提示弹窗 -->
 <modal show="{{showScanModal}}" width="90vw" height="360rpx" border-radius="20rpx" title-text="温馨提示" confirm-text="立即扫码">
-	<view class='scan_tip'>您需要扫描热点合作餐厅电视中的二维码链接电视，链接成功后可使用此功能。</view>
+	<view class='scan_tip'>您可扫描热点合作餐厅电视中的二维码使用此功能</view>
 </modal>
 
 <modal show="{{wifiErr.is_open==1 ? true : false}}" width="650rpx" height='380rpx' border-radius="10rpx" title-text='提示' title-color="#333333" title-background-color="unset" title-border-radius="0rpx" buttonWapperPadding="0 5rpx 10rpx 5rpx" confirm-text='{{wifiErr.confirm}}' confirm-color="#FFFFFF" confirm-background-color="#1cbeb6" confirm-border-radius="10rpx" cancel-text='{{wifiErr.cancel}}' cancel-color='#FFFFFF' cancel-background-color="#333333" cancel-border-radius="10rpx" bindcancel="modalCancel" data-type="{{wifiErr.type}}" data-hotel_info="{{hotel_info}}" bindconfirm='modalConfirm'>

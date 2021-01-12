@@ -49,19 +49,19 @@
 					<view class="row flex-row-center-flex_start">
 						<view class="label">姓名</view>
 						<view class="value">
-							<input class="input" placeholder="请输入" maxlength="4" name="name" value="{{card_info.name}}"></input>
+							<input class="input" placeholder="请输入" maxlength="4" name="name" value="{{card_info.name}}" bindinput="inputConteng" data-type="name"></input>
 						</view>
 					</view>
 					<view class="row flex-row-center-flex_start">
 						<view class="label">电话</view>
 						<view class="value">
-							<input class="input" placeholder="请输入" type="number" maxlength="11" name="mobile" value="{{card_info.mobile}}"></input>
+							<input class="input" placeholder="请输入" type="number" maxlength="11" name="mobile" value="{{card_info.mobile}}" bindinput="inputConteng" data-type="mobile"></input>
 						</view>
 					</view>
 					<view class="row flex-row-center-flex_start">
 						<view class="label">职称</view>
 						<view class="value">
-							<input class="input" placeholder="请输入" maxlength="10" name="job" value="{{card_info.job}}"></input>
+							<input class="input" placeholder="请输入" maxlength="10" name="job" value="{{card_info.job}}" bindinput="inputConteng" data-type="job"></input>
 						</view>
 					</view>
 				</view>
@@ -75,7 +75,7 @@
 			<view class="row company flex-row-center-flex_start">
 				<view class="label">公司名称</view>
 				<view class="value">
-					<textarea class="input" placeholder="请输入" maxlength="50" name="company" value="{{card_info.company}}"></textarea>
+					<textarea class="input" placeholder="请输入" maxlength="50" name="company" value="{{card_info.company}}" bindinput="inputConteng" data-type="company"></textarea>
 				</view>
 			</view>
 			<view class="row qr flex-row-center-flex_start">

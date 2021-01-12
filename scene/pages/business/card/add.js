@@ -196,6 +196,22 @@ Page({
     })
 
   },
+  inputConteng:function(e){
+    var that = this;
+    var type = e.currentTarget.dataset.type;
+    var value = e.detail.value;
+    var card_info = that.data.card_info;
+    if(type=='name'){
+      card_info.name = value;
+    }else if(type=='mobile'){
+      card_info.mobile = value;
+    }else if(type=='job'){
+      card_info.job = value;
+    }else if(type=='company'){
+      card_info.company = value;
+    }
+    that.setData({card_info:card_info})
+  },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
