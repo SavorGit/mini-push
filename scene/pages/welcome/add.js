@@ -439,10 +439,10 @@ Page({
       app.showToast('请输入欢迎语',2000,'none',false);
       return false;
     }
-    if(welcome_info.font_id==0){
+    /*if(welcome_info.font_id==''){
       app.showToast('请选择字体样式',2000,'none',false);
       return false;
-    }
+    }*/
     if(welcome_info.wordsize_id==0){
       app.showToast('请选择字体大小',2000,'none',false);
       return false;
