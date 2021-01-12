@@ -13,6 +13,8 @@ var openid;
 var box_mac;
 var type;
 var welcome_id ;
+var mobile_brand = app.globalData.mobile_brand;
+var mobile_model = app.globalData.mobile_model;
 Page({
 
   /**
@@ -474,10 +476,48 @@ Page({
       wordsize_id:welcome_info.wordsize_id,
     }, (data, headers, cookies, errMsg, statusCode) =>{
       app.showToast('保存成功')
+      var welcome_id = data.result.welcome_id;
+      that.forscreenWelcome(welcome_id,welcome_info)
       wx.navigateBack({
         delta: 1
       })
     })
+  },
+  forscreenWelcome:function(welcome_id,welcome_info){
+    var that = this;
+    
+    utils.PostRequest(api_v_url + '/Welcome/demandplay', {
+      openid:openid,
+      box_mac:box_mac,
+      welcome_id:welcome_id
+    }, (data, headers, cookies, errMsg, statusCode) =>{
+      app.showToast('投屏成功',2000,'success')
+    })
+    var forscreen_id =(new Date()).valueOf();
+    var image_list = welcome_info.images;
+    var image_str ='';
+    var space  = '';
+    for(let i in image_list){
+      image_str +=space +'"'+image_list[i]+'"';
+      space = ',';
+    }
+    utils.PostRequest(api_v_url + '/index/recordForScreenPics', {
+      forscreen_id: forscreen_id,
+      openid: openid,
+      box_mac: box_mac,
+      action: 42,
+      mobile_brand: mobile_brand,
+      mobile_model: mobile_model,
+      forscreen_char: welcome_info.content,
+      imgs: '['+image_str+']',
+      res_sup_time: 0,
+      res_eup_time: 0,
+      resource_type: 1,
+      res_nums: image_list.length,
+      serial_number:app.globalData.serial_number
+    }, (data, headers, cookies, errMsg, statusCode) => {
+    },res=>{},{ isShowLoading: false })
+    
   },
   /**
    * 生命周期函数--监听页面初次渲染完成
