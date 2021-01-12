@@ -92,7 +92,7 @@ Page({
             //获取文件详情
             self.getFileInfo(file_id,openid);
             
-            self.recordScanCodeLog(openid,goods_type,file_type,box_id);
+            self.recordScanCodeLog(openid,file_type,file_type,box_id);
           } 
           
           
@@ -114,11 +114,11 @@ Page({
       })
     })
   },
-  recordScanCodeLog:function(openid,goods_type,file_id,box_id){
+  recordScanCodeLog:function(openid,file_type,file_id,box_id){
     var that = this;
     utils.PostRequest(api_v_url + '/Index/gencode', {
       openid:openid,
-      type:goods_type,
+      type:file_type,
       data_id:file_id,
       box_id:box_id,
       mobile_brand:app.globalData.mobile_brand,
