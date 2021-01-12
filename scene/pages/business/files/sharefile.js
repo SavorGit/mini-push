@@ -18,7 +18,6 @@ var oss_upload_url = app.globalData.oss_upload_url;
 var mobile_brand = app.globalData.mobile_brand;
 var mobile_model = app.globalData.mobile_model;
 var wx_download_max_size = app.globalData.wx_download_max_size;
-var file_exts;
 Page({
 
   /**
@@ -49,12 +48,12 @@ Page({
         //uploadOssFile(policy, signature, file_path,openid,box_mac,file_name,file_size,polling_time,that);
       }
     });
-    utils.PostRequest(api_v_url + '/index/getConfig', {
+    /*utils.PostRequest(api_v_url + '/index/getConfig', {
       page: 1,
       pagesize: 6
     }, (data, headers, cookies, errMsg, statusCode) => {
       file_exts = data.result.file_exts;
-    })
+    })*/
 
     this.getFileDetail(openid,box_mac)
   },
@@ -73,10 +72,11 @@ Page({
   },
   uploadFile:function(e){
     var that = this;
+    var share_file_exts = app.globalData.config_info.share_file_exts
     wx.chooseMessageFile({
       count: 1,
       type: 'file',
-      extension: file_exts,
+      extension: share_file_exts,
       success(res) {
     
         var tempFilePaths = res.tempFilePaths

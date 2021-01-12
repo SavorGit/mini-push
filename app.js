@@ -1374,6 +1374,7 @@ changeKb:function (limit){
     is_view_official_account:false,
     qualityList:[],
     is_getjj_history:0,
-    wx_download_max_size:209715200
+    wx_download_max_size:209715200,
+    config_info:{},
   }
 })
