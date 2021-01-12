@@ -71,20 +71,24 @@
 					<view class="label">头像</view>
 				</view> -->
 			</view>
-			<view class="row company flex-row-center-flex_start">
+			<view class="row company flex-row-flex_start-flex_start">
 				<view class="label">公司名称</view>
 				<view class="value">
 					<textarea class="input" placeholder="请输入(非必填)" maxlength="50" name="company" value="{{card_info.company}}" bindinput="inputConteng" data-type="company"></textarea>
 				</view>
 			</view>
-			<view class="row qr flex-row-center-flex_start">
+			<view class="row qr flex-row-flex_start-flex_start">
 				<view class="label">微信二维码</view>
-				<view class="value add flex-column-center-center" wx:if="{{card_info.qrcode_img==''}}" bindtap="uploadImage" data-type="2">
-					<view class="icon">+</view>
-					<view class="title">上传二维码</view>
+				<view class="value add" wx:if="{{card_info.qrcode_img==''}}" bindtap="uploadImage" data-type="2">
+					<view class="pic flex-column-center-center">
+						<view class="icon">+</view>
+						<view class="title">上传二维码</view>
+					</view>
+					<view class="tip theme-font3">请在“微信--我--个人信息”页面下载您的微信二维码</view>
 				</view>
 				<view wx:else class="value viewer" bindtap="uploadImage" data-type="2">
 					<image class="pic" mode="aspectFill" src="{{oss_url}}/{{card_info.qrcode_img}}"></image>
+					<view class="tip theme-font3">请在“微信--我--个人信息”页面下载您的微信二维码</view>
 				</view>
 			</view>
 			<view class="row buttons flex-row-center-center">
