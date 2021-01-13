@@ -148,6 +148,7 @@ Page({
         console.log(res);
         var openFilepath = res.filePath;
         that.setData({openFilepath:openFilepath})
+        that.openDoc(openFilepath);
       },
       fail: function (res) {
         console.log(e)
@@ -174,8 +175,7 @@ Page({
       })*/
     })
   },
-  openDoc:function(e){
-    var openFilepath = this.data.openFilepath;
+  openDoc:function(openFilepath){
     wx.openDocument({
       filePath: openFilepath,
       success: function (res) {
@@ -187,6 +187,17 @@ Page({
       },
       complete: function (res) {
         console.log(res);
+      }
+    })
+  },
+  coptyDownloadUrl:function(e){
+    var that = this;
+    var file_info = that.data.file_info;
+    var oss_file_path = file_info.oss_file_path
+    wx.setClipboardData({
+      data: oss_file_path,
+      success (res) {
+        app.showToast('复制链接成功');
       }
     })
   },
