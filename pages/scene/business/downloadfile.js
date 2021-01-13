@@ -92,7 +92,7 @@ Page({
             //获取文件详情
             self.getFileInfo(file_id,openid);
             
-            self.recordScanCodeLog(openid,file_type,file_type,box_id);
+            self.recordScanCodeLog(openid,file_type,file_id,box_id);
           } 
           
           
