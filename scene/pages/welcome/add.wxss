@@ -63,10 +63,10 @@
 .item.block>.value>.input {
   width: 94rpx;
   height: 74rpx;
-  margin-top: 5rpx;
+  margin-top: 15rpx;
   margin-left: 25rpx;
   font-size: 28rpx;
-  border-width: 3rpx;
+  border-width: 6rpx;
   border-style: solid;
   border-color: #BBBBBB;
   display: inline-flex;

@@ -271,9 +271,9 @@
 }
 
 .panel.welcome>.body>.item>.btn {
-  width: 120rpx;
-  height: 40rpx;
-  line-height: 40rpx;
+  width: 150rpx;
+  height: 50rpx;
+  line-height: 50rpx;
   text-align: center;
   font-size: 28rpx;
   border-radius: 5rpx;
@@ -284,8 +284,8 @@
 
 .panel.welcome>.body>.item.add>.btn {
   width: 180rpx;
-  height: 50rpx;
-  line-height: 50rpx;
+  height: 60rpx;
+  line-height: 60rpx;
 }
 
 /* ==================================== 分享文件面板 ==================================== */
@@ -307,14 +307,14 @@
 }
 
 .panel.share-file>.body>.item>.name {
-  width: calc(100% - 120rpx);
+  width: calc(100% - 150rpx);
   font-size: 28rpx;
 }
 
 .panel.share-file>.body>.item>.btn {
-  width: 120rpx;
-  height: 40rpx;
-  line-height: 40rpx;
+  width: 150rpx;
+  height: 50rpx;
+  line-height: 50rpx;
   text-align: center;
   font-size: 28rpx;
   border-radius: 5rpx;

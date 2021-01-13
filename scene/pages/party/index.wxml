@@ -34,7 +34,7 @@
 					<block wx:for="{{happylist}}" wx:key="key" wx:for-item="happyinfo" wx:for-index="index">
 						<view class="item" hover-class="hover" bindtap='showHappy' data-vediourl="{{happyinfo.res_url}}" data-happyVedioName="{{happyinfo.file_name}}" data-name="{{happyinfo.name}}" data-source="1" data-hotel_info="{{hotel_info}}">
 							<view class="inner flex-column-center-center">
-								<view class="icon fa fa-music theme-font" aria-hidden="true"></view>
+								<view class="icon fa fa-music theme-font-FFAA2C" aria-hidden="true"></view>
 								<view class="name theme-font1">{{happyinfo.title}}{{happyinfo.sub_title}}</view>
 								<!-- <label>{{happyinfo.title}}</label>
             					<label>{{happyinfo.sub_title}}</label> -->
@@ -143,7 +143,7 @@
 									<image src='{{videoinfo.video_img}}'></image>
 									<view class='cover'>
 										<label class='title'></label>
-										<button class='theme-button'>投屏</button>
+										<button class='theme-button-orange2'>投屏</button>
 									</view>
 								</view>
 							</view>
@@ -176,7 +176,7 @@
 						</view>
 						<view class='describtion theme-font2'>
 							<label>{{constellation_detail.desc}}
-								<navigator class='theme-font' url="/pages/thematic/birthday/detail?url={{constellation_detail.detail_url}}&constellname={{constellation_detail.name}}">[详情]</navigator>
+								<navigator class='theme-font-FFAA2C' url="/pages/thematic/birthday/detail?url={{constellation_detail.detail_url}}&constellname={{constellation_detail.name}}">[详情]</navigator>
 							</label>
 						</view>
 					</view>
