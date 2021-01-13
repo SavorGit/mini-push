@@ -224,8 +224,8 @@
 
 .scene>.row>.btn {
   width: 360rpx;
-  height: 107rpx;
-  line-height: 107rpx;
+  height: 134rpx;
+  line-height: 134rpx;
   text-align: center;
   font-size: 52rpx;
   font-weight: bold;
