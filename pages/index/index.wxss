@@ -65,7 +65,7 @@
 
 .functional-module-panel {
   /* height: 380rpx; */
-  padding: 30rpx 0;
+  padding: 10rpx 0;
 }
 
 .functional-module-panel>.row>view,
@@ -212,8 +212,9 @@
 
 .scene {
   width: 100%;
-  height: 200rpx;
-  margin-top: 20rpx;
+  /* height: 200rpx; */
+  margin-top: 10rpx;
+  padding: 0;
 }
 
 .scene>.row {
@@ -222,9 +223,9 @@
 }
 
 .scene>.row>.btn {
-  width: 345rpx;
-  height: 150rpx;
-  line-height: 150rpx;
+  width: 360rpx;
+  height: 107rpx;
+  line-height: 107rpx;
   text-align: center;
   font-size: 52rpx;
   font-weight: bold;
@@ -234,7 +235,7 @@
   border: 0;
 }
 
-.scene>.row>.business {
+/* .scene>.row>.business {
   color: #FFFFFF;
   background-color: rgb(219, 190, 49);
 }
@@ -242,7 +243,7 @@
 .scene>.row>.birthday {
   color: #FFFFFF;
   background-color: rgb(253, 128, 36);
-}
+} */
 
 
 /* ==================================== 推荐面板 ==================================== */
