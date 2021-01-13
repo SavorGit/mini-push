@@ -68,7 +68,7 @@ Page({
 
       welcome_info.wordsize_id = wordsize[0].id;
       welcome_info.color_id   = color_list[0].id
-      welcome_info.stay_time = stay_times[0].id
+      //welcome_info.stay_time = stay_times[0].id
       that.setData({'wordtype':wordtype,'wordsize':wordsize,'stay_times':stay_times,
                     'wordtype_list':wordtype_list,'font_list':font_list,'welcome_info':welcome_info,
                     'color_list':color_list
@@ -425,14 +425,26 @@ Page({
     })
   },
   playTimesChange:function(e){
+
     var stay_time = e.detail.value;
     var welcome_info = this.data.welcome_info;
-    welcome_info.stay_time = stay_time;
-    this.setData({welcome_info:welcome_info});
+    //welcome_info.stay_time = stay_time;
+    var stay_times = this.data.stay_times;
+
+    for(let i in stay_times){
+      if(stay_times[i].id==stay_time){
+        stay_times[i].is_select = 1;
+      }else {
+        stay_times[i].is_select = 0;
+      }
+    }
+    console.log(stay_times);
+    this.setData({welcome_info:welcome_info,stay_times:stay_times});
   },
   submitWelcome:function(e){
     var that = this;
     var welcome_info = that.data.welcome_info;
+    var stay_times =  that.data.stay_times;
     if(welcome_info.images.length==0){
       app.showToast('请上传背景图片',2000,'none',false);
       return false;
@@ -454,10 +466,17 @@ Page({
       app.showToast('请选择字体颜色',2000,'none',false);
       return false;
     }
+    for(let i in stay_times){
+      if(stay_times[i].is_select==1){
+        var stay_time = stay_times[i].id
+        break;
+      }
+    }
     /*if(welcome_info.stay_time==0){
       app.showToast('请选择停留时间',2000,'none',false);
       return false;
     }*/
+
     var images = '';
     var space  = '';
     for(let i in welcome_info.images){
@@ -472,7 +491,7 @@ Page({
       font_id:welcome_info.font_id,
       images:images,
       openid:openid,
-      stay_time:welcome_info.stay_time,
+      stay_time:stay_time,
       type:type,
       wordsize_id:welcome_info.wordsize_id,
     }, (data, headers, cookies, errMsg, statusCode) =>{
