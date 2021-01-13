@@ -68,6 +68,7 @@ Page({
 
       welcome_info.wordsize_id = wordsize[0].id;
       welcome_info.color_id   = color_list[0].id
+      welcome_info.stay_time = stay_times[0].id
       that.setData({'wordtype':wordtype,'wordsize':wordsize,'stay_times':stay_times,
                     'wordtype_list':wordtype_list,'font_list':font_list,'welcome_info':welcome_info,
                     'color_list':color_list
