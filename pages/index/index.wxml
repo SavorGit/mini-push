@@ -149,10 +149,12 @@
 	</view>
 
 	<!-- 场景按钮面板 -->
-	<view class="panel scene flex-column-center-center theme-panel">
+	<view class="panel scene flex-column-center-center">
 		<view class="row flex-row-center-space_around">
-			<view class="btn business" bindtap="gotoBusiness" data-openid="{{openid}}" data-box_mac="{{box_mac}}">商务宴请</view>
-			<view class="btn birthday" bindtap="gotoParty" data-openid="{{openid}}" data-box_mac="{{box_mac}}">生日聚会</view>
+			<!-- <view class="btn business" bindtap="gotoBusiness" data-openid="{{openid}}" data-box_mac="{{box_mac}}">商务宴请</view>
+			<view class="btn birthday" bindtap="gotoParty" data-openid="{{openid}}" data-box_mac="{{box_mac}}">生日聚会</view> -->
+			<image class="btn business" mode="aspectFit" src="/images/imgs/btn_business.png" bindtap="gotoBusiness" data-openid="{{openid}}" data-box_mac="{{box_mac}}"></image>
+			<image class="btn birthday" mode="aspectFit" src="/images/imgs/btn_birthday.png" bindtap="gotoParty" data-openid="{{openid}}" data-box_mac="{{box_mac}}"></image>
 		</view>
 	</view>
 
