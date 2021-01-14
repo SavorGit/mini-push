@@ -268,7 +268,7 @@ Page({
       success: function (res) {
         var tempFilePaths = res.tempFilePaths; //多张图片临时地址
         var flag = tempFilePaths.length + total_pic;
-  
+        var total_choose_img = tempFilePaths.length;
         wx.request({
           url: api_v_url + '/Index/getOssParams',
           headers: {
@@ -291,7 +291,7 @@ Page({
 
               var img_url = timestamp + postf;
               //console.log(img_url)
-              that.upOss(filename, postf_w, img_url, policy, signature, i, flag, type)
+              that.upOss(filename, postf_w, img_url, policy, signature, i, flag, type,total_choose_img)
               app.sleep(1)
             }
           },
@@ -314,7 +314,7 @@ Page({
       }
     })
   },
-  upOss: function (filename, postf_w, img_url, policy, signature, i, flag, type) {
+  upOss: function (filename, postf_w, img_url, policy, signature, i, flag, type,total_choose_img) {
 
     var that = this;
 
@@ -343,7 +343,7 @@ Page({
 
           var end_flag = dish_img_list.length
         }
-        if (end_flag == flag) {
+        if (end_flag == total_choose_img) {
           if (type == 'all') {
             var welcome_info = that.data.welcome_info
             welcome_info.images = dish_img_list;
@@ -358,6 +358,16 @@ Page({
             })
           } 
         }
+      },fail:function(e){
+        wx.hideLoading();
+        app.showToast('文件上传失败,请重试')
+        var dish_img_list = [];
+        var welcome_info = that.data.welcome_info
+            welcome_info.images = dish_img_list;
+        that.setData({
+          addDisabled: false,
+          upDisabled: false
+        })
       }
     })
   },
