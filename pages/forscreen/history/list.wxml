@@ -13,7 +13,7 @@
           <label>{{bean.create_time}}</label>
         </view>
         <view class='operation flex-row-center-flex_end'>
-          <button bindtap='replayHistory' class='launch_tv theme-button' data-res_type="{{bean.res_type}}" data-res_nums="{{bean.res_nums}}" data-historylist="{{bean.list}}" data-box_mac="{{box_mac}}" data-openid="{{openid}}">电视播放</button>
+          <button bindtap='replayHistory' class='launch_tv theme-button' data-res_type="{{bean.res_type}}" data-res_nums="{{bean.res_nums}}" data-historylist="{{bean.list}}" data-box_mac="{{box_mac}}" data-openid="{{openid}}">投屏</button>
         </view>
       </view>
       <view class='con_main'>

@@ -40,12 +40,12 @@
       </view>
     </view>
     <view class="btn-group full_width">
-      <button wx:if="{{is_replay_disabel==false}}" class='theme-button-dark' bindtap='boxShow' data-name="{{video_name}}" data-filename='{{filename}}' data-vediourl="{{video_url}}" data-boxmac="{{box_mac}}" data-openid="{{openid}}">电视播放</button>
+      <button wx:if="{{is_replay_disabel==false}}" class='theme-button-dark' bindtap='boxShow' data-name="{{video_name}}" data-filename='{{filename}}' data-vediourl="{{video_url}}" data-boxmac="{{box_mac}}" data-openid="{{openid}}">投屏</button>
       <button wx:else disabled="true">{{djs}} S</button>
     </view>
   </view>
   <view class='page_bottom full_width'>
-    <!-- <button wx:if="{{is_replay_disabel==false}}" bindtap='boxShow' data-name="{{video_name}}" data-filename='{{filename}}' data-vediourl="{{video_url}}" data-boxmac="{{box_mac}}" data-openid="{{openid}}" class='full_width theme-button'>电视播放</button>
+    <!-- <button wx:if="{{is_replay_disabel==false}}" bindtap='boxShow' data-name="{{video_name}}" data-filename='{{filename}}' data-vediourl="{{video_url}}" data-boxmac="{{box_mac}}" data-openid="{{openid}}" class='full_width theme-button'>投屏</button>
     <button wx:else class='theme-button2'>{{djs}} S</button> -->
   </view>
 </view>

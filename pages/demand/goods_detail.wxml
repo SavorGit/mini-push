@@ -50,7 +50,7 @@
     </block>
   </scroll-view>
   <view class="page-bottom full_width flex-row-center-space_around theme-panel">
-    <button class="theme-button-dark" bindtap="boxShow" data-goods_id="{{goods_info.goods_id}}" data-pubdetail="{{goods_info.pubdetail}}" data-media_type="{{goods_info.media_type}}" data-hotel_info="{{hotel_info}}">电视播放</button>
+    <button class="theme-button-dark" bindtap="boxShow" data-goods_id="{{goods_info.goods_id}}" data-pubdetail="{{goods_info.pubdetail}}" data-media_type="{{goods_info.media_type}}" data-hotel_info="{{hotel_info}}">投屏</button>
     <button wx:if="{{goods_info.is_storebuy==1 && uid!=''}}" bindtap="showTc" class="theme-button-buy" data-goods_id="{{goods_info.goods_id}}" data-goods_box_mac="{{goods_box_mac}}" data-buy_type="1" data-uid="{{uid}}">店内购买</button>
     <navigator class="theme-button-buy" bindtap="clickBuyGoods" data-goods_id="{{goods_info.goods_id}}" target="miniProgram" app-id="{{goods_info.appid}}" path="{{goods_info.jd_url}}">{{goods_info.buybutton}}</navigator>
   </view>

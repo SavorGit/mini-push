@@ -1,0 +1,104 @@
+/* pages/scene/business/downloadfile.wxss */
+/**
+ * 【场景】商务宴请 - 文件下载
+ */
+
+
+.page {
+  width: 100%;
+}
+
+.page>.body {
+  width: calc(100% - 50rpx);
+  padding: 25rpx;
+}
+
+.page>.body>.user {
+  width: 100%;
+  height: 100rpx;
+  padding: 30rpx 0;
+}
+
+.page>.body>.user>.left {
+  width: 100rpx;
+  height: 100%;
+}
+
+.page>.body>.user>.left>.head-pic {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  border: 3rpx solid #EBEBEB;
+}
+
+.page>.body>.user>.right {
+  width: calc(100% - 150rpx);
+  height: 100%;
+}
+
+.page>.body>.user>.right>.name {
+  font-size: 36rpx;
+  font-weight: 700;
+}
+
+.page>.body>.user>.right>.tip {
+  margin-left: 20rpx;
+  font-size: 28rpx;
+}
+
+.page>.body>.file {
+  width: calc(100% - 70rpx);
+  padding: 50rpx 35rpx;
+}
+
+.page>.body>.file>.cover {
+  width: 100%;
+  height: calc(100% - 30rpx);
+}
+
+.page>.body>.file>.cover>.pic {
+  width: 300rpx;
+  height: 300rpx;
+  border-radius: 10rpx;
+}
+
+.page>.body>.file>.cover>.icon {
+  width: auto;
+  height: auto;
+  font-size: 200rpx;
+}
+
+.page>.body>.file>.name {
+  height: 30rpx;
+  line-height: 30rpx;
+  padding: 20rpx 0;
+  font-size: 28rpx;
+}
+
+.page>.body>.buttons {
+  width: 100%;
+  height: 340rpx;
+  padding: 30rpx 0;
+}
+
+.page>.body>.buttons>.item {
+  width: 100%;
+  height: 150rpx;
+}
+
+.page>.body>.buttons>.item>.btn {
+  width: 544rpx;
+  height: 88rpx;
+  line-height: 88rpx;
+  text-align: center;
+  font-size: 28rpx;
+  border-radius: 8rpx;
+  border: 0;
+  padding: 0;
+  margin: 0;
+}
+
+.page>.body>.buttons>.item>.tip {
+  margin-top: 15rpx;
+  font-size: 28rpx;
+}

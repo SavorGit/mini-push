@@ -1,0 +1,196 @@
+<!--scene/pages/business/index.wxml-->
+<!--
+ | 【场景】商务宴请 - 首页
+ |-->
+
+
+<import src="/pages/template/commons" />
+<template is="navigationBarForTwoLevel" data='{{statusBarHeight: statusBarHeight,titleText:"商务宴请"}}' />
+
+<scroll-view class='container viewer theme-container' style='height:calc(100vh - {{46 + statusBarHeight + SystemInfo.screenBottomSpace}}px);' scroll-y="true" scroll-with-animation="true">
+	<view class="page flex-column-center-flex_start">
+		<view class="head"></view>
+		<view class="body flex-column-flex_start-flex_start">
+
+			<!-- 连接信息面板 -->
+			<view class="panel link-box full_width theme-panel">
+				<view class='full_width full_height tip flex-column-center-start'>
+					<button>
+						<image class="full_width full_height" src="/images/icon2/1CBEB6_link.png"></image>
+					</button>
+					<label class='font_666666_28'>您已链接【{{hotel_name}}】的{{room_name}}电视</label>
+				</view>
+				<!-- <view wx:else class='full_width full_height tip flex-column-center-start'>
+					<button bindtap="scanQrcode" data-boxmac="{{box_mac}}" data-openid="{{openid}}">
+						<image class="full_width full_height" src="/images/icon2/666666_link.png"></image>
+					</button>
+					<label class='font_666666_28'>当前暂未链接电视，链接后即可使用投屏功能</label>
+				</view> -->
+			</view>
+
+			<!-- 卡片面板 -->
+			<view class="panel card-group">
+				<view class="card">
+					<block wx:if="{{is_have_card}}">
+						<view class="face flex-column-flex_start-flex_start">
+							<view class="top flex-row-flex_start-space_between">
+								<view class="left flex-column-flex_start-center">
+									<!-- <image class="head-pic" mode="aspectFill" src="{{card_info.head_img}}"></image> -->
+									<view class="row flex-row-flex_end-flex_start">
+										<view class="name theme-font-FFFFFF">{{card_info.name}}</view>
+										<view class="title theme-font-FFFFFF">{{card_info.job}}</view>
+									</view>
+									<view class="phone theme-font-FFFFFF">Tel: {{card_info.mobile}}</view>
+									<view class="company theme-font-FFFFFF">{{card_info.company}}</view>
+								</view>
+								<view class="right">
+									<image class="qr" mode="aspectFill" src="{{card_info.qrcode_img}}"></image>
+								</view>
+							</view>
+							<view class="bottom" bindtap="forscreenCard">
+								<view class="btn launch theme-button-orange2">名片投屏</view>
+							</view>
+						</view>
+						<view class="cover" bindtap="gotoCard">
+							<view class="btn edit fa fa-pencil theme-button-orange2" aria-hidden="true"></view>
+						</view>
+					</block>
+					<view wx:else class="face flex-column-center-center">
+						<view class="btn flex-column-center-center" bindtap="gotoCard">
+							<view class="icon fa fa-plus" aria-hidden="true"></view>
+							<view class="text">添加名片</view>
+						</view>
+					</view>
+				</view>
+			</view>
+
+			<!-- 媒体面板 -->
+			<view class="panel media">
+				<view class="btn pic theme-button-orange2" bindtap="forImages">
+					<view class="flex-column-center-center">
+						<image class="icon" mode="aspectFill" src='/images/icon2/FFFFFF_picture.png'></image>
+						<view class="text">图片投屏</view>
+					</view>
+				</view>
+				<view class="btn file theme-button-orange2" bindtap="forfiles">
+					<view class="flex-column-center-center">
+						<image class="icon" mode="aspectFill" src='/images/icon2/FFFFFF_files.png'></image>
+						<view class="text">文件投屏</view>
+					</view>
+				</view>
+				<view class="btn video theme-button-orange2" bindtap="forVideo">
+					<view class="flex-column-center-center">
+						<image class="icon" mode="aspectFill" src='/images/icon2/FFFFFF_video.png'></image>
+						<view class="text">视频投屏</view>
+					</view>
+				</view>
+			</view>
+
+			<!-- 欢迎词面板 -->
+			<view class="panel detailed-list welcome">
+				<block wx:if="{{is_have_welcome}}">
+					<view class="head flex-column-flex_start-flex_start">
+						<view class="title-bar flex-row-center-flex_start">
+							<view class="icon fa fa-desktop theme-font-FFAA2C" aria-hidden="true"></view>
+							<view class="title theme-font-FFAA2C">欢迎词</view>
+						</view>
+						<view class="option-bar flex-row-flex_start-flex_end" bindtap="gotoWelcome">
+							<view class="btn edit theme-button-orange2">
+								<view class="icon fa fa-pencil" aria-hidden="true"></view>
+							</view>
+						</view>
+					</view>
+					<view class="body flex-column-center-flex_start">
+						<view class="item flex-row-center-center">
+							<view class="name one-line-overflow theme-font1">{{welcome_info.content}}</view>
+							<view class="btn launch theme-button-orange2" bindtap="forscreenWelcome">投屏</view>
+						</view>
+					</view>
+				</block>
+				<block wx:else>
+					<view class="head flex-column-flex_start-flex_start">
+						<view class="title-bar flex-row-center-flex_start">
+							<view class="icon fa fa-desktop theme-font-FFAA2C" aria-hidden="true"></view>
+							<view class="title theme-font-FFAA2C">欢迎词</view>
+						</view>
+					</view>
+					<view class="body flex-column-center-flex_start">
+						<view class="item add flex-row-center-center" bindtap="gotoWelcome">
+							<view class="btn theme-button-orange2">添加欢迎词</view>
+						</view>
+					</view>
+				</block>
+			</view>
+
+			<!-- 分享文件面板 -->
+			<view class="panel detailed-list share-file">
+				<block wx:if="{{is_have_sharefile}}">
+					<view class="head flex-column-flex_start-flex_start">
+						<view class="title-bar flex-row-center-flex_start">
+							<view class="icon fa fa-file-text theme-font-FFAA2C" aria-hidden="true"></view>
+							<view class="title theme-font-FFAA2C">电视分享文件给好友</view>
+						</view>
+						<view class="option-bar flex-row-flex_start-flex_end" bindtap="gotoShareFiles">
+							<view class="btn edit theme-button-orange2">
+								<view class="icon fa fa-pencil" aria-hidden="true"></view>
+							</view>
+						</view>
+					</view>
+					<view class="body flex-column-center-flex_start">
+
+						<view class="item flex-row-center-center" wx:for="{{share_file}}" wx:key="key" wx:for-item="bean" wx:for-index="index">
+							<view class="name one-line-overflow theme-font1">{{bean.name}}</view>
+							<view class="btn launch theme-button-orange2" bindtap="forscreenShareFile" data-file_id="{{bean.file_id}}" data-file_path="{{bean.file_path}}">分享</view>
+						</view>
+						<!-- <view class="item flex-row-center-center">
+							<view class="name one-line-overflow theme-font1">xxxxxxxxxxxx.pdf</view>
+							<view class="btn launch theme-button-orange2">分享</view>
+						</view>
+						<view class="item flex-row-center-center">
+							<view class="name one-line-overflow theme-font1">xxxxxxxxxxxx.pdf</view>
+							<view class="btn launch theme-button-orange2">分享</view>
+						</view> -->
+					</view>
+				</block>
+				<block wx:else>
+					<view class="head flex-column-flex_start-flex_start">
+						<view class="title-bar flex-row-center-flex_start">
+							<view class="icon fa fa-file-text theme-font-FFAA2C" aria-hidden="true"></view>
+							<view class="title theme-font-FFAA2C">电视分享文件给好友</view>
+						</view>
+					</view>
+					<view class="body flex-column-center-flex_start">
+						<view class="item add flex-row-center-center" bindtap="gotoShareFiles">
+							<view class="btn theme-button-orange2">添加文件</view>
+						</view>
+					</view>
+				</block>
+			</view>
+
+			<!-- 福利面板 -->
+			<view class="panel welfare">
+				<view class="row flex-row-center-space_between">
+					<image class="btn money" src="/scene/images/imgs/btn_money.png" bindtap="gotoRedPack"></image>
+					<image class="btn money" src="/scene/images/imgs/btn_gift.png" bindtap="gotoGift"></image>
+				</view>
+			</view>
+
+		</view>
+		<view class="foot"></view>
+	</view>
+</scroll-view>
+<!-- 选择文件弹窗 -->
+<bottomModal show="{{showMe}}" width="98%" height='340rpx' background-color='#FFFFFF' border-radius="20rpx" title-text='' title-color="" confirm-text='' confirm-color="#f6f3ee" cancel-text='' cancel-color='' bindcancel="modalCancel">
+	<view class="flex-column-center-space_between" style='padding: 10rpx; height: 60rpx; line-height: 60rpx; border-bottom: 2rpx solid rgba(246, 243, 238, 0.1);font-size: 32rpx; color: #666666;'>
+		<label>选择要投屏的文件</label>
+	</view>
+	<view class="flex-column-center-center" style="width: 100%; font-size: 34rpx; color: #0076FF;">
+		<view style="width: 100%; border-top: 1rpx solid rgba(7,17,27,0.1);">
+			<button bindtap="wxFriendfiles" data-boxmac="{{box_mac}}" data-openid="{{openid}}" class="button_none" style="margin: 0;padding: 0; border: 0;border-radius: 0;">微信好友文件</button>
+		</view>
+		<view style="width: 100%; border-top: 1rpx solid rgba(7,17,27,0.1); border-bottom: 10rpx solid rgba(7,17,27,0.05);">
+			<button bindtap="phonefiles" data-boxmac="{{box_mac}}" data-openid="{{openid}}" class="button_none" style="margin: 0;padding: 0; border: 0;border-radius: 0;">手机中的文件</button>
+		</view>
+	</view>
+	<view class='cancel-btn' style='flex: 1; margin-top: 10rpx; width: 100%; height: 60rpx; line-height: 60rpx; text-align: center; font-size: 32rpx; color: rgba(7,17,27,0.6);' bindtap='modalCancel'>取消</view>
+</bottomModal>

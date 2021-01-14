@@ -1,0 +1,152 @@
+/* scene/pages/welcome/add.wxss */
+/**
+ * 【场景】欢迎词
+ */
+
+
+.page {
+  width: 100%;
+}
+
+.item {
+  width: calc(100% - 40rpx);
+  padding: 10rpx 20rpx 10rpx 30rpx;
+}
+
+.item>.label {
+  width: 120rpx;
+  font-size: 28rpx;
+}
+
+.item>.value {
+  width: calc(100% - 136rpx);
+  padding: 5rpx;
+}
+
+.item>.value>.input {
+  width: 100%;
+  height: 100%;
+  font-size: 28rpx;
+}
+
+.item.text>.value,
+.item.textarea>.value,
+.item.select>.value {
+  border: 3rpx solid #BBBBBB;
+}
+
+.item.text>.value {
+  height: 50rpx;
+}
+
+.item.text>.value>.input,
+.item.select>.value>.input {
+  line-height: 50rpx;
+}
+
+.item.select>.value>.input .innter {
+  width: 100%;
+  height: 100%;
+}
+
+.item.select>.value>.input .innter>.text {
+  width: calc(100% - 30rpx);
+}
+
+.item.select>.value>.input .innter>.icon {
+  width: 30rpx;
+  height: 30rpx;
+  line-height: 30rpx;
+  text-align: center;
+}
+
+.item.block>.value>.input {
+  width: 94rpx;
+  height: 74rpx;
+  margin-top: 15rpx;
+  margin-left: 25rpx;
+  font-size: 28rpx;
+  border-width: 6rpx;
+  border-style: solid;
+  border-color: #BBBBBB;
+  display: inline-flex;
+  box-sizing: border-box;
+  vertical-align: middle;
+}
+
+.item.block>.value>.input:nth-child(5n + 1) {
+  margin-left: 0;
+}
+
+.item.block>.value>.input:nth-child(-n + 5) {
+  margin-top: 0;
+}
+
+.item.block>.value>.input.selected {
+  border-color: #F44444;
+}
+
+.item.radio>.value>.input>.btn {
+  margin-left: 30rpx;
+  font-size: 28rpx;
+}
+
+.item.radio>.value>.input>.btn:first-child {
+  margin-left: 0;
+}
+
+.item.pic-group>.value>.input {
+  width: 172rpx;
+  height: 146rpx;
+  margin-top: 10rpx;
+  margin-left: 25rpx;
+  display: inline-flex;
+  box-sizing: border-box;
+  background-color: #E8E8E8;
+  border-radius: 10rpx;
+  border: 3rpx solid #BBBBBB;
+  vertical-align: middle;
+}
+
+.item.pic-group>.value>.input:nth-child(3n + 1) {
+  margin-left: 0;
+}
+
+.item.pic-group>.value>.input:nth-child(-n + 3) {
+  margin-top: 0;
+}
+
+.item.pic-group>.value>.input>image {
+  width: 100%;
+  height: 100%;
+  vertical-align: middle;
+}
+
+.item.pic-group>.value>.input>.btn.del {
+  width: 60rpx;
+  height: 60rpx;
+  line-height: 60rpx;
+  text-align: center;
+  margin-top: -150rpx;
+  margin-left: 120rpx;
+  border-radius: 50%;
+  font-size: 36rpx;
+  border: 0;
+  padding: 0;
+}
+
+.item.pic-group>.value>.tip {
+  font-size: 24rpx;
+}
+
+.item.button>.btn {
+  width: 544rpx;
+  height: 88rpx;
+  line-height: 88rpx;
+  text-align: center;
+  font-size: 28rpx;
+  border-radius: 8rpx;
+  border: 0;
+  padding: 0;
+  margin: 0;
+}

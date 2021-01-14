@@ -497,14 +497,21 @@
 .information-panel>.panel-body>.panel>.body>.option-bar>.btn {
   width: 200rpx;
   height: 60rpx;
-  line-height: 60rpx;
-  text-align: center;
-  font-size: 28rpx;
   border-radius: 5rpx;
   border: 3rpx solid #F44444;
   color: #F44444;
   margin: 0;
   padding: 0;
+}
+
+.information-panel>.panel-body>.panel>.body>.option-bar>.btn>.icon {
+  width: 42rpx;
+  height: 42rpx;
+}
+
+.information-panel>.panel-body>.panel>.body>.option-bar>.btn>.text {
+  margin-left: 20rpx;
+  font-size: 28rpx;
 }
 
 .information-panel>.panel-body>.info>.body {

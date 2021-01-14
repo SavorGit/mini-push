@@ -53,7 +53,8 @@
     "pages/thematic/money_blessing/grab_list",
     "pages/thematic/money_blessing/pay_result",
     "pages/thematic/money_blessing/receive_h5",
-    "pages/thematic/money_blessing/receive_result"
+    "pages/thematic/money_blessing/receive_result",
+    "pages/scene/business/downloadfile"
   ],
   "subpackages": [
     {
@@ -88,6 +89,16 @@
         "pages/gamelist",
         "pages/activity/din_dash"
       ]
+    },
+    {
+      "root":"scene",
+      "pages":[
+        "pages/business/index",
+        "pages/business/card/add",
+        "pages/welcome/add",
+        "pages/business/files/sharefile",
+        "pages/party/index"
+      ]
     }
   ],
   "permission": {
@@ -105,7 +116,7 @@
   },
   "networkTimeout": {
     "request": 15000,
-    "downloadFile": 10000
+    "downloadFile": 100000
   },
   "tabBar": {
     "color": "#999999",
@@ -126,7 +137,7 @@
       },
       {
         "pagePath": "pages/index/index",
-        "text": "电视互动",
+        "text": "投屏",
         "iconPath": "/images/icon2/999999_interact.png",
         "selectedIconPath": "/images/icon2/000000_interact.png"
       },

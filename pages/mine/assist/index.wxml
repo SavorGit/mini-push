@@ -80,7 +80,7 @@
             <view class="people theme-font1">{{bean.nickName}}</view>
             <view class="msg">累计播放 {{bean.play_nums}} 次</view>
           </view>
-          <!-- <button bindtap="boxShow" class="btn theme-button-dark">电视播放</button> -->
+          <!-- <button bindtap="boxShow" class="btn theme-button-dark">投屏</button> -->
         </view>
       </block>
     </view>

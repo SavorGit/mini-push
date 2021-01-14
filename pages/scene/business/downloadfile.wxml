@@ -1,0 +1,51 @@
+<!--pages/scene/business/downloadfile.wxml-->
+<!--
+ | 【场景】商务宴请 - 文件下载
+ |-->
+
+
+<import src="/pages/template/commons" />
+<template is="navigationBarForShare" data='{{statusBarHeight: statusBarHeight,titleText:"文件下载"}}' />
+
+<scroll-view class='container viewer theme-container' style='height:calc(100vh - {{46 + statusBarHeight + SystemInfo.screenBottomSpace}}px);' scroll-y="true" scroll-with-animation="true">
+	<view class="page flex-column-center-flex_start">
+		<view class="body">
+			<view class="user flex-row-flex_start-space_between">
+				<view class="left">
+					<image class="head-pic" mode="aspectFill" src="{{file_info.avatarUrl}}"></image>
+				</view>
+				<view class="right flex-row-center-flex_start">
+					<view class="name theme-font1">{{file_info.nickName}}</view>
+					<view class="tip theme-font3">分享了</view>
+				</view>
+			</view>
+			<view class="file flex-column-center-center">
+				<view class="cover flex-column-center-flex_start">
+					<!-- <image class="pic" mode="aspectFill" src="https://oss.littlehotspot.com/WeChat/resource/default.jpg"></image> -->
+					<view class="icon fa fa-file-text-o" aria-hidden="true"></view>
+				</view>
+				<view class="name theme-font1">{{file_info.name}}</view>
+			</view>
+			<!-- <block wx:if="{{is_open==1}}">
+				<view class="buttons flex-row-center-center" bindtap="downLoadFile" wx:if="{{is_have_download==false}}">
+					<view class="btn download theme-button-red">下载</view>
+				</view>
+
+				<view class="buttons flex-row-center-center" bindtap="openDoc" wx:else>
+					<view class="btn download theme-button-red">打开</view>
+				</view>
+			</block> -->
+
+			<view class="buttons flex-column-flex_start-center">
+				<view class="item flex-column-center-center" bindtap="downLoadFile">
+					<view class="btn download theme-button-red">查看</view>
+				</view>
+				<view class="item flex-column-center-center" bindtap="coptyDownloadUrl">
+					<view class="btn download theme-button-dark">复制下载链接</view>
+					<view class="tip index theme-font5">您可以复制链接后使用浏览器进行下载或者分享</view>
+				</view>
+			</view>
+
+		</view>
+	</view>
+</scroll-view>

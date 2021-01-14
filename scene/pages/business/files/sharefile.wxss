@@ -1,0 +1,131 @@
+/* scene/pages/business/files/sharefile.wxss */
+/**
+ * 【场景】商务宴请 - 分享文件
+ */
+
+
+.page {
+  width: 100%;
+  height: 100%;
+}
+
+.page>.body {
+  width: 100%;
+  height: calc(100% - 120rpx);
+}
+
+.page>.foot {
+  width: 100%;
+  height: 100rpx;
+  padding-bottom: 20rpx;
+}
+
+.page>.foot>.btn {
+  width: 544rpx;
+  height: 88rpx;
+  line-height: 88rpx;
+  text-align: center;
+  font-size: 28rpx;
+  border-radius: 8rpx;
+  border: 0;
+  padding: 0;
+  margin: 0;
+}
+
+.wrapper {
+  width: calc(100% - 50rpx);
+  padding: 20rpx 25rpx;
+}
+
+.part {
+  width: 100%;
+}
+
+.label {
+  width: 120rpx;
+  font-size: 28rpx;
+}
+
+.value {
+  width: calc(100% - 120rpx);
+}
+
+.item {
+  width: calc(50% - 20rpx);
+  height: 350rpx;
+  margin-top: 10rpx;
+  margin-left: 20rpx;
+  display: inline-flex;
+  box-sizing: border-box;
+  vertical-align: middle;
+}
+
+.item:nth-child(-n + 2) {
+  margin-top: 0;
+}
+
+.item:nth-child(2n + 1) {
+  margin-left: 0;
+}
+
+.item>.inner {
+  width: 100%;
+  height: calc(100% - 30rpx);
+  margin-top: 30rpx;
+}
+
+.item>.inner>.file-cover {
+  width: 270rpx;
+  height: 270rpx;
+  border-radius: 10rpx;
+  vertical-align: middle;
+}
+
+.item>.inner>.icon {
+  width: 160rpx;
+  height: 160rpx;
+  line-height: 160rpx;
+  text-align: center;
+  font-size: 80rpx;
+  border-radius: 10rpx;
+}
+
+.item>.inner>.filename {
+  width: 100%;
+  margin-top: 10rpx;
+  text-align: center;
+  font-size: 28rpx;
+  word-wrap: break-word;
+}
+
+.item>.btn {
+  width: 60rpx;
+  height: 60rpx;
+  line-height: 60rpx;
+  text-align: center;
+  margin-top: -335rpx;
+  margin-left: 170rpx;
+  border-radius: 50%;
+  font-size: 36rpx;
+  border: 0;
+  padding: 0;
+}
+
+.item.add>.inner {
+  width: 160rpx;
+  height: 160rpx;
+  border-radius: 8rpx;
+  border: 3rpx solid rgba(0, 0, 0, 0.15);
+  background-color: rgba(0, 0, 0, 0.02);
+}
+
+.item.add>.inner>.icon {
+  width: auto;
+  height: auto;
+  font-size: 38rpx;
+  line-height: unset;
+}
+
+.item.add>.inner>.text {
+  font-size: 28rpx;
+}

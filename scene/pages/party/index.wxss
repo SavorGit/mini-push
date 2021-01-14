@@ -1,0 +1,195 @@
+/* scene/pages/party/index.wxss */
+/**
+ * 【场景】生日聚会 - 首页
+ */
+
+
+@import "/scene/pages/business/index.wxss";
+
+.panel.media>.btn {
+  width: 330rpx;
+  margin-left: 20rpx;
+}
+
+/* ==================================== 生日歌面板 ==================================== */
+.panel.birthday-music>.list {
+  width: 100%;
+  height: 100%;
+}
+
+.panel.birthday-music>.list>.item {
+  width: 155rpx;
+  height: 184rpx;
+  margin-top: 10rpx;
+  margin-left: 20rpx;
+  border-radius: 20rpx;
+  background-color: #FFFFFF;
+  display: inline-block;
+  box-sizing: border-box;
+  vertical-align: middle;
+  box-shadow: 5rpx 5rpx 5rpx #DBE5F8;
+}
+
+.panel.birthday-music>.list>.item.hover {
+  background-color: rgba(0, 0, 0, 0.2);
+}
+
+.panel.birthday-music>.list>.item:nth-child(-n + 4) {
+  margin-top: 0;
+}
+
+.panel.birthday-music>.list>.item:nth-child(4n + 1) {
+  margin-left: 0;
+}
+
+.panel.birthday-music>.list>.item>.inner {
+  width: calc(100% - 20rpx);
+  height: calc(100% - 20rpx);
+  padding: 10rpx;
+}
+
+.panel.birthday-music>.list>.item>.inner>.icon {
+  font-size: 36rpx;
+}
+
+.panel.birthday-music>.list>.item>.inner>.name {
+  margin-top: 10rpx;
+  font-size: 28rpx;
+  text-align: center;
+}
+
+
+.panel.constellation {
+  width: 92%;
+  height: calc(100% - 250rpx);
+}
+
+.panel.constellation .sketch_list {
+  height: 350rpx;
+}
+
+.panel.constellation .sketch_list .constellation {
+  margin: 0rpx 20rpx;
+  font-size: 26rpx;
+}
+
+.panel.constellation .sketch_list .constellation image {
+  width: 150rpx;
+  height: 150rpx;
+  border-radius: 50%;
+  opacity: 0.7;
+}
+
+.panel.constellation .sketch_list .constellation .title {
+  margin-top: 10rpx;
+}
+
+.panel.constellation .sketch_list .constellation .summary {
+  display: none;
+}
+
+.panel.constellation .sketch_list .constellation.cur image {
+  width: 250rpx;
+  height: 250rpx;
+  opacity: 1;
+}
+
+.panel.constellation .sketch_list .constellation.cur .title {
+  margin-top: 20rpx;
+  font-size: 32rpx;
+  color: #333;
+}
+
+.panel.constellation .sketch_list .constellation.cur .summary {
+  display: block;
+}
+
+.panel.constellation .detailed {
+  width: 100%;
+  /* height: calc(100% - 450rpx); */
+}
+
+.panel.constellation .detailed .video_list {
+  height: 400rpx;
+}
+
+.panel.constellation .detailed .video_list .title {
+  height: 70rpx;
+}
+
+.panel.constellation .detailed .video_list .title .icon {
+  width: 54rpx;
+  height: 54rpx;
+  font-size: 56rpx;
+  vertical-align: middle;
+}
+
+.panel.constellation .detailed .video_list .title label {
+  vertical-align: middle;
+  font-size: 32rpx;
+  margin-left: 10rpx;
+}
+
+.panel.constellation .detailed .video_list .list .video image {
+  width: 340rpx;
+  height: 255rpx;
+  border-radius: 10rpx 10rpx 0rpx 0rpx;
+}
+
+.panel.constellation .detailed .video_list .list .video .cover {
+  width: 340rpx;
+  height: 255rpx;
+  margin-top: -255rpx;
+  text-align: center;
+}
+
+.panel.constellation .detailed .video_list .list .video .cover label {
+  margin-top: 80rpx;
+  margin-bottom: 60rpx;
+  height: 50rpx;
+  font-size: 32rpx;
+  font-weight: 900;
+  display: block;
+}
+
+.panel.constellation .detailed .video_list .list .video .cover button {
+  width: 100%;
+  height: 60rpx;
+  line-height: 60rpx;
+  font-size: 30rpx;
+  border-radius: 0rpx;
+}
+
+.panel.constellation .detailed .overall .title {
+  height: 70rpx;
+}
+
+.panel.constellation .detailed .overall .title image {
+  width: 54rpx;
+  height: 54rpx;
+  vertical-align: middle;
+}
+
+.panel.constellation .detailed .overall .title label {
+  vertical-align: middle;
+  font-size: 32rpx;
+  margin-left: 10rpx;
+}
+
+.panel.constellation .detailed .overall .property {
+  font-size: 28rpx;
+}
+
+.panel.constellation .detailed .overall .property label {
+  display: block;
+}
+
+.panel.constellation .detailed .overall .describtion {
+  margin-top: 50rpx;
+  margin-bottom: 100rpx;
+  font-size: 28rpx;
+}
+
+.panel.constellation .detailed .overall .describtion label navigator {
+  display: inline-block;
+}

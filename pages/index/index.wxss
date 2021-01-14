@@ -64,7 +64,8 @@
 /* ==================================== 功能模块面板 ==================================== */
 
 .functional-module-panel {
-  height: 380rpx;
+  /* height: 380rpx; */
+  padding: 10rpx 0;
 }
 
 .functional-module-panel>.row>view,
@@ -203,6 +204,47 @@
   font-size: 26rpx;
   /* font-weight: bold; */
 }
+
+/* ==================================== 场景按钮面板 ==================================== */
+.panel {
+  padding: 10rpx 0;
+}
+
+.scene {
+  width: 100%;
+  /* height: 200rpx; */
+  margin-top: 10rpx;
+  padding: 0;
+}
+
+.scene>.row {
+  width: 100%;
+  height: 100%;
+}
+
+.scene>.row>.btn {
+  width: 360rpx;
+  height: 134rpx;
+  line-height: 134rpx;
+  text-align: center;
+  font-size: 52rpx;
+  font-weight: bold;
+  border-radius: 5rpx;
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+/* .scene>.row>.business {
+  color: #FFFFFF;
+  background-color: rgb(219, 190, 49);
+}
+
+.scene>.row>.birthday {
+  color: #FFFFFF;
+  background-color: rgb(253, 128, 36);
+} */
+
 
 /* ==================================== 推荐面板 ==================================== */
 

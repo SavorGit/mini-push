@@ -1,0 +1,188 @@
+<!--scene/pages/party/index.wxml-->
+<!--
+ | 【场景】生日聚会 - 首页
+ |-->
+
+
+<import src="/pages/template/commons" />
+<template is="navigationBarForTwoLevel" data='{{statusBarHeight: statusBarHeight,titleText:"生日聚会"}}' />
+
+<scroll-view class='container viewer theme-container' style='height:calc(100vh - {{46 + statusBarHeight + SystemInfo.screenBottomSpace}}px);' scroll-y="true" scroll-with-animation="true">
+	<view class="page flex-column-center-flex_start">
+		<view class="head"></view>
+		<view class="body flex-column-flex_start-flex_start">
+
+			<!-- 连接信息面板 -->
+			<view class="panel link-box full_width theme-panel">
+				<view class='full_width full_height tip flex-column-center-start'>
+					<button>
+						<image class="full_width full_height" src="/images/icon2/1CBEB6_link.png"></image>
+					</button>
+					<label class='font_666666_28'>您已链接【{{hotel_name}}】的{{room_name}}电视</label>
+				</view>
+				<!-- <view wx:else class='full_width full_height tip flex-column-center-start'>
+					<button bindtap="scanQrcode" data-boxmac="{{box_mac}}" data-openid="{{openid}}">
+						<image class="full_width full_height" src="/images/icon2/666666_link.png"></image>
+					</button>
+					<label class='font_666666_28'>当前暂未链接电视，链接后即可使用投屏功能</label>
+				</view> -->
+			</view>
+
+			<!-- 生日歌面板 -->
+			<view class="panel birthday-music">
+				<view class="list">
+					<block wx:for="{{happylist}}" wx:key="key" wx:for-item="happyinfo" wx:for-index="index">
+						<view class="item" hover-class="hover" bindtap='showHappy' data-vediourl="{{happyinfo.res_url}}" data-happyVedioName="{{happyinfo.file_name}}" data-name="{{happyinfo.name}}" data-source="1" data-hotel_info="{{hotel_info}}">
+							<view class="inner flex-column-center-center">
+								<view class="icon fa fa-music theme-font-FFAA2C" aria-hidden="true"></view>
+								<view class="name theme-font1">{{happyinfo.title}}{{happyinfo.sub_title}}</view>
+								<!-- <label>{{happyinfo.title}}</label>
+            					<label>{{happyinfo.sub_title}}</label> -->
+							</view>
+						</view>
+					</block>
+					<!-- <view class="item">
+						<view class="inner flex-column-center-center">
+							<view class="icon fa fa-music theme-font" aria-hidden="true"></view>
+							<view class="name theme-font1">生日歌</view>
+						</view>
+					</view>
+					<view class="item">
+						<view class="inner flex-column-center-center">
+							<view class="icon fa fa-music theme-font" aria-hidden="true"></view>
+							<view class="name theme-font1">生日歌</view>
+						</view>
+					</view>
+					<view class="item">
+						<view class="inner flex-column-center-center">
+							<view class="icon fa fa-music theme-font" aria-hidden="true"></view>
+							<view class="name theme-font1">生日歌</view>
+						</view>
+					</view> -->
+
+				</view>
+			</view>
+
+			<!-- 媒体面板 -->
+			<view class="panel media">
+				<view class="btn pic theme-button-orange2" bindtap="forImages">
+					<view class="flex-column-center-center">
+						<image class="icon" mode="aspectFill" src='/images/icon2/FFFFFF_picture.png'></image>
+						<view class="text">图片投屏</view>
+					</view>
+				</view>
+				<view class="btn video theme-button-orange2" bindtap="forVideo">
+					<view class="flex-column-center-center">
+						<image class="icon" mode="aspectFill" src='/images/icon2/FFFFFF_video.png'></image>
+						<view class="text">视频投屏</view>
+					</view>
+				</view>
+			</view>
+
+			<!-- 欢迎词面板 -->
+			<view class="panel detailed-list welcome">
+				<block wx:if="{{is_have_welcome}}">
+					<view class="head flex-column-flex_start-flex_start">
+						<view class="title-bar flex-row-center-flex_start">
+							<view class="icon fa fa-desktop theme-font-FFAA2C" aria-hidden="true"></view>
+							<view class="title theme-font-FFAA2C">生日祝福</view>
+						</view>
+						<view class="option-bar flex-row-flex_start-flex_end" bindtap="gotoWelcome">
+							<view class="btn edit theme-button-orange2">
+								<view class="icon fa fa-pencil" aria-hidden="true"></view>
+							</view>
+						</view>
+					</view>
+					<view class="body flex-column-center-flex_start">
+						<view class="item flex-row-center-center">
+							<view class="name one-line-overflow theme-font1">{{welcome_info.content}}</view>
+							<view class="btn launch theme-button-orange2" bindtap="forscreenWelcome">投屏</view>
+						</view>
+					</view>
+				</block>
+				<block wx:else>
+					<view class="head flex-column-flex_start-flex_start">
+						<view class="title-bar flex-row-center-flex_start">
+							<view class="icon fa fa-desktop theme-font-FFAA2C" aria-hidden="true"></view>
+							<view class="title theme-font-FFAA2C">生日祝福</view>
+						</view>
+					</view>
+					<view class="body flex-column-center-flex_start">
+						<view class="item add flex-row-center-center" bindtap="gotoWelcome">
+							<view class="btn theme-button-orange2">添加生日祝福</view>
+						</view>
+					</view>
+				</block>
+			</view>
+
+			<!-- 福利面板 -->
+			<view class="panel welfare">
+				<view class="row flex-row-center-space_between">
+					<image class="btn money" src="/scene/images/imgs/btn_money.png" bindtap="gotoRedPack"></image>
+					<image class="btn money" src="/scene/images/imgs/btn_gift.png" bindtap="gotoGift"></image>
+				</view>
+			</view>
+
+			<view class='panel constellation'>
+				<view class='sketch_list flex-row-center-center'>
+					<view class='constellation flex-column-center-center theme-font6{{choose_constellid==constelinfo.id? " cur" :""}}' wx:for="{{constellationlist}}" wx:key="key" wx:for-item="constelinfo" wx:for-index="index">
+						<image bindtap='switchConstell' data-constellid="{{constelinfo.id}}" src="{{constelinfo.img_url}}" data-isnow="{{constelinfo.is_now}}" data-name="{{constelinfo.name}}"></image>
+						<label class='title'>{{constelinfo.name}} ({{constelinfo.date}})</label>
+						<label class='summary'>{{constelinfo.intro}}</label>
+					</view>
+				</view>
+				<view class='detailed'>
+					<view class='video_list'>
+						<view class='title theme-font1'>
+							<label class="fa fa-youtube-play icon"></label>
+							<label>相关视频</label>
+						</view>
+						<view class='list flex-row-center-space_between'>
+							<view class='video' wx:for="{{videolist}}" wx:key="key" wx:for-item="videoinfo">
+								<view bindtap='showHappy' data-boxmac="{{box_mac}}" data-openid="{{openid}}" data-source="2" data-vediourl="{{videoinfo.video_url}}" data-name="{{videoinfo.name}}">
+									<image src='{{videoinfo.video_img}}'></image>
+									<view class='cover'>
+										<label class='title'></label>
+										<button class='theme-button-orange2'>投屏</button>
+									</view>
+								</view>
+							</view>
+						</view>
+					</view>
+					<view class='overall'>
+						<view class='title theme-font1'>
+							<image src='/images/icon2/666666_star1.png'></image>
+							<label>星座详情</label>
+						</view>
+						<view class='property flex-row-center-space_between theme-font2'>
+							<view class='left'>
+								<label>关键词：{{constellation_detail.keywords}}</label>
+								<label>掌管宫位：{{constellation_detail.house}}</label>
+								<label>主管星：{{constellation_detail.star}}</label>
+								<label>掌管身体：{{constellation_detail.body}}</label>
+							</view>
+							<view class='center'>
+								<label>象征：{{constellation_detail.symbol}}</label>
+								<label>阴阳性：{{constellation_detail.yinyang}}</label>
+								<label>颜色：{{constellation_detail.color}}</label>
+								<label>珠宝：{{constellation_detail.gems}}</label>
+							</view>
+							<view class='right'>
+								<label>四象性：{{constellation_detail.quad}}</label>
+								<label>最大特征：{{constellation_detail.feature}}</label>
+								<label>三方宫：{{constellation_detail.trikona}}</label>
+								<label>幸运号码：{{constellation_detail.lucknum}}</label>
+							</view>
+						</view>
+						<view class='describtion theme-font2'>
+							<label>{{constellation_detail.desc}}
+								<navigator class='theme-font-FFAA2C' url="/pages/thematic/birthday/detail?url={{constellation_detail.detail_url}}&constellname={{constellation_detail.name}}">[详情]</navigator>
+							</label>
+						</view>
+					</view>
+				</view>
+			</view>
+		</view>
+		<view class="foot"></view>
+	</view>
+</scroll-view>

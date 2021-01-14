@@ -600,7 +600,7 @@ App({
     var that = this;
     wx.showModal({
       title: '提示',
-      content: "您可扫码链接\n热点合作餐厅电视使用此功能",
+      content: "您可扫描热点合作餐厅电视中的二维码使用此功能",
       showCancel: true,
       confirmText: '立即扫码',
       success: function (res) {
@@ -1362,5 +1362,7 @@ changeKb:function (limit){
     qualityList:[],
     is_getjj_history:0,
     forscreen_call_code_filename:'',
+    wx_download_max_size:209715200,
+    config_info:{},
   }
 })

@@ -6,7 +6,6 @@
   "setting": {
     "urlCheck": true,
     "es6": true,
-    "enhance": false,
     "postcss": true,
     "preloadBackgroundData": false,
     "minified": true,
@@ -16,13 +15,15 @@
     "autoAudits": false,
     "showShadowRootInWxmlPanel": true,
     "scopeDataCheck": false,
-    "uglifyFileName": false,
     "checkInvalidKey": true,
     "checkSiteMap": true,
     "uploadWithSourceMap": true,
     "compileHotReLoad": false,
+<<<<<<< HEAD
     "useMultiFrameRuntime": true,
     "useApiHook": true,
+=======
+>>>>>>> v4.6.18
     "babelSetting": {
       "ignore": [],
       "disablePlugins": [],
@@ -30,12 +31,18 @@
     },
     "bundle": false,
     "useIsolateContext": true,
-    "useCompilerModule": true,
+    "useCompilerModule": false,
     "userConfirmedUseCompilerModuleSwitch": false,
+<<<<<<< HEAD
     "userConfirmedBundleSwitch": false,
     "packNpmManually": false,
     "packNpmRelationList": [],
     "minifyWXSS": true,
+=======
+    "useMultiFrameRuntime": true,
+    "bundle": false,
+    "useApiHook": true,
+>>>>>>> v4.6.18
     "useApiHostProcess": false
   },
   "compileType": "miniprogram",

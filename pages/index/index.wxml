@@ -1,7 +1,7 @@
 <!--pages/interact/index.wxml-->
 <import src="/pages/template/commons" />
 <template is="navigationBarForTopLevel" data='{{statusBarHeight: statusBarHeight,titleText:"热点投屏"}}' />
-
+<!-- <view bindtap="gotoPd">test</view> -->
 <scroll-view class="container flex-column-center-flex_start theme-container" style='height: calc(100vh - 46px - {{statusBarHeight}}px);' scroll-y="true" scroll-with-animation="true">
 
 	<!-- 轮播图面板 -->
@@ -55,7 +55,7 @@
 	<!-- 功能模块面板 -->
 	<view class='functional-module-panel flex-column-center-center full_width theme-panel'>
 		<view class="row flex-row-center-center full_width">
-			<form bindsubmit="chooseImage" >
+			<form bindsubmit="chooseImage">
 				<input class="display_hide" name="boxmac" value="{{box_mac}}"></input>
 				<input class="display_hide" name="openid" value="{{openid}}"></input>
 				<input class="display_hide" name="intranet_ip" value="{{hotel_info.intranet_ip}}"></input>
@@ -69,7 +69,7 @@
 					<label>照片投屏</label>
 				</button>
 			</form>
-			<form bindsubmit="chooseVedio" >
+			<form bindsubmit="chooseVedio">
 				<input class="display_hide" name="boxmac" value="{{box_mac}}"></input>
 				<input class="display_hide" name="openid" value="{{openid}}"></input>
 				<input class="display_hide" name="intranet_ip" value="{{hotel_info.intranet_ip}}"></input>
@@ -83,7 +83,7 @@
 					<label>视频投屏</label>
 				</button>
 			</form>
-			<form bindsubmit="forfiles" >
+			<form bindsubmit="forfiles">
 				<input class="display_hide" name="boxmac" value="{{box_mac}}"></input>
 				<input class="display_hide" name="openid" value="{{openid}}"></input>
 				<button class="flex-column-center-center theme-font1" form-type="submit">
@@ -93,16 +93,24 @@
 					<label>文件投屏</label>
 				</button>
 			</form>
-			<view wx:if="{{is_test==1}}">
+			<view>
+				<button class="flex-column-center-center theme-font1" bindtap='hdgames' data-linkcontent='/games/pages/gamelist' data-boxmac="{{box_mac}}" data-openid="{{openid}}">
+					<view class="icon flex-column-center-center game">
+						<image src='/images/icon2/FFFFFF_game.png'></image>
+					</view>
+					<label>互动小游戏</label>
+				</button>
+			</view>
+			<!-- <view wx:if="{{is_test==1}}">
 				<button class="flex-column-center-center theme-font2" bindtap='testForscreen' data-type="2" data-boxmac="{{box_mac}}" data-openid="{{openid}}">
 					<view class="icon flex-column-center-center pic">
 						<image src='/images/icon2/FFFFFF_picture.png'></image>
 					</view>
 					<label>模拟照片投屏</label>
 				</button>
-			</view>
+			</view> -->
 		</view>
-		<view class="row flex-row-center-center full_width">
+		<!-- <view class="row flex-row-center-center full_width">
 			<view>
 				<button class="flex-column-center-center theme-font1" bindtap='showHappy' data-boxmac="{{box_mac}}" data-openid="{{openid}}">
 					<view class="icon flex-column-center-center birthday">
@@ -135,8 +143,18 @@
 					<label>模拟视频投屏</label>
 				</button>
 			</view>
-			<!-- <navigator url="/pages/hotel/index">商家入口</navigator> -->
-			<!-- <navigator target="miniProgram" app-id="wxf96ad76f27597d65" path="packages/goods/detail/index?alias=1y5c6oa8cduzn&dc_ps=2328936063642568704.200001" class='theme-button'>前往故宫书店</navigator> -->
+			!-- <navigator url="/pages/hotel/index">商家入口</navigator> --
+			!-- <navigator target="miniProgram" app-id="wxf96ad76f27597d65" path="packages/goods/detail/index?alias=1y5c6oa8cduzn&dc_ps=2328936063642568704.200001" class='theme-button'>前往故宫书店</navigator> --
+		</view> -->
+	</view>
+
+	<!-- 场景按钮面板 -->
+	<view class="panel scene flex-column-center-center">
+		<view class="row flex-row-center-space_around">
+			<!-- <view class="btn business" bindtap="gotoBusiness" data-openid="{{openid}}" data-box_mac="{{box_mac}}">商务宴请</view>
+			<view class="btn birthday" bindtap="gotoParty" data-openid="{{openid}}" data-box_mac="{{box_mac}}">生日聚会</view> -->
+			<image class="btn business" mode="aspectFit" src="/images/imgs/btn_business.png" bindtap="gotoBusiness" data-openid="{{openid}}" data-box_mac="{{box_mac}}"></image>
+			<image class="btn birthday" mode="aspectFit" src="/images/imgs/btn_birthday.png" bindtap="gotoParty" data-openid="{{openid}}" data-box_mac="{{box_mac}}"></image>
 		</view>
 	</view>
 
@@ -162,7 +180,11 @@
           -->
 					<view class="flex-row-center-space_between">
 						<view class="rank theme-font5">TOP {{index+1}}</view>
+<<<<<<< HEAD
 						<button wx:if="{{bean.is_show==1}}" class="btn theme-button-dark">电视播放</button>
+=======
+						<button wx:if="{{bean.is_show==1}}" bindtap="boxShow" class="btn theme-button-dark" data-res_type="{{bean.res_type}}" data-res_nums="{{bean.res_nums}}" data-pubdetail="{{bean.pubdetail}}" data-boxmac="{{box_mac}}" data-openid="{{openid}}" data-forscreen_id="{{bean.forscreen_id}}" data-hotel_info="{{hotel_info}}" data-index="{{index}}">投屏</button>
+>>>>>>> v4.6.18
 					</view>
 				</view>
 			</view>
@@ -186,7 +208,7 @@
 
 <!-- 扫描二维码提示弹窗 -->
 <modal show="{{showScanModal}}" width="90vw" height="360rpx" border-radius="20rpx" title-text="温馨提示" confirm-text="立即扫码">
-	<view class='scan_tip'>您需要扫描热点合作餐厅电视中的二维码链接电视，链接成功后可使用此功能。</view>
+	<view class='scan_tip'>您可扫描热点合作餐厅电视中的二维码使用此功能</view>
 </modal>
 
 <modal show="{{wifiErr.is_open==1 ? true : false}}" width="650rpx" height='380rpx' border-radius="10rpx" title-text='提示' title-color="#333333" title-background-color="unset" title-border-radius="0rpx" buttonWapperPadding="0 5rpx 10rpx 5rpx" confirm-text='{{wifiErr.confirm}}' confirm-color="#FFFFFF" confirm-background-color="#1cbeb6" confirm-border-radius="10rpx" cancel-text='{{wifiErr.cancel}}' cancel-color='#FFFFFF' cancel-background-color="#333333" cancel-border-radius="10rpx" bindcancel="modalCancel" data-type="{{wifiErr.type}}" data-hotel_info="{{hotel_info}}" bindconfirm='modalConfirm'>

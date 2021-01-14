@@ -105,7 +105,11 @@ Page({
         app.globalData.qualityList = data.result.quality_list;
         
       }
+<<<<<<< HEAD
       app.globalData.forscreen_call_code_filename = data.result.forscreen_call_code_filename;
+=======
+      app.globalData.config_info = data.result;
+>>>>>>> v4.6.18
       app.globalData.is_getjj_history = data.result.is_open_simplehistory;
       var is_view_eval_waiter = data.result.is_comment;
       that.setData({is_view_eval_waiter: is_view_eval_waiter})
@@ -1204,4 +1208,71 @@ Page({
       is_reward: is_reward
     });
   },
+  /**
+   * 商务宴请
+   */
+  gotoBusiness:function(e){
+    var that = this;
+    var box_mac = e.target.dataset.box_mac;
+    var openid = e.target.dataset.openid;
+    var user_info = wx.getStorageSync("savor_user_info");
+    if(user_info=='' || typeof(user_info)=='undefined'){
+      app.showToast('网络异常，请用微信重新扫码链接电视')
+      return false;
+    }
+    mta.Event.stat('clickBusiness',{'openid':openid,'boxmac':box_mac})
+    if (user_info.is_wx_auth != 3 ) {
+      that.setData({
+        showModal: true
+      })
+      mta.Event.stat("showwxauth", {})
+    } else {
+      if (box_mac == '') {
+        app.scanQrcode(pageid);
+      } else {
+        var hotel_name = that.data.hotel_name;
+        var room_name = that.data.room_name;
+        var is_compress = that.data.is_compress
+        wx.navigateTo({
+          url: '/scene/pages/business/index?openid='+openid+'&box_mac='+box_mac+'&hotel_name='+hotel_name+'&room_name='+room_name+'&is_compress='+is_compress,
+        })
+      }
+    }
+  },
+  /**
+   * 生日聚会
+   */
+  gotoParty:function(e){
+    var that = this;
+    var box_mac = e.target.dataset.box_mac;
+    var openid = e.target.dataset.openid;
+    
+    var user_info = wx.getStorageSync("savor_user_info");
+    if(user_info=='' || typeof(user_info)=='undefined'){
+      app.showToast('网络异常，请用微信重新扫码链接电视')
+      return false;
+    }
+    mta.Event.stat('clickHappyParty',{'openid':openid,'boxmac':box_mac})
+    if (user_info.is_wx_auth != 3 ) {
+      that.setData({
+        showModal: true
+      })
+      mta.Event.stat("showwxauth", {})
+    } else {
+      if (box_mac == '') {
+        app.scanQrcode(pageid);
+      } else {
+        var hotel_name = that.data.hotel_name;
+        var room_name = that.data.room_name;
+        wx.navigateTo({
+          url: '/scene/pages/party/index?openid='+openid+'&box_mac='+box_mac+'&hotel_name='+hotel_name+'&room_name='+room_name,
+        })
+      }
+    }
+  },
+  gotoPd:function(e){
+    wx.navigateTo({
+      url: '/pages/scene/business/downloadfile',
+    })
+  }
 })
