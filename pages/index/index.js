@@ -105,11 +105,11 @@ Page({
         app.globalData.qualityList = data.result.quality_list;
         
       }
-<<<<<<< HEAD
+
       app.globalData.forscreen_call_code_filename = data.result.forscreen_call_code_filename;
-=======
+
       app.globalData.config_info = data.result;
->>>>>>> v4.6.18
+
       app.globalData.is_getjj_history = data.result.is_open_simplehistory;
       var is_view_eval_waiter = data.result.is_comment;
       that.setData({is_view_eval_waiter: is_view_eval_waiter})
