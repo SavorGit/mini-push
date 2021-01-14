@@ -11,6 +11,8 @@ var api_v_url = app.globalData.api_v_url;
 var oss_upload_url = app.globalData.oss_upload_url;
 var openid;
 var box_mac;
+var mobile_brand = app.globalData.mobile_brand;
+var mobile_model = app.globalData.mobile_model;
 Page({
 
   /**
@@ -190,11 +192,41 @@ Page({
       head_img:card_info.head_img, //用户头像
       qrcode_img:card_info.qrcode_img //微信二维码
     }, (data, headers, cookies, errMsg, statusCode) =>{
+      that.forscreenCard();
       wx.navigateBack({
         delta: 1,
       })
     })
 
+  },
+  //分享名片到电视
+  forscreenCard:function(){
+    var that = this;
+    utils.PostRequest(api_v_url + '/Businessdinners/shareCardOnTv', {
+      openid:openid,
+      box_mac:box_mac,
+    }, (data, headers, cookies, errMsg, statusCode) =>{
+      app.showToast('投屏成功',2000,'success')
+    })
+    var card_info = that.data.card_info;
+    var forscreen_id =(new Date()).valueOf();
+    utils.PostRequest(api_v_url + '/index/recordForScreenPics', {
+      forscreen_id: forscreen_id,
+      openid: openid,
+      box_mac: box_mac,
+      action: 45,
+      mobile_brand: mobile_brand,
+      mobile_model: mobile_model,
+      forscreen_char: '',
+      imgs: '["'+card_info.qrcode_img+'"]',
+      res_sup_time: 0,
+      res_eup_time: 0,
+      resource_type: 1,
+      res_nums: 1,
+      serial_number:app.globalData.serial_number
+    }, (data, headers, cookies, errMsg, statusCode) => {
+    },res=>{},{ isShowLoading: false })
+    mta.Event.stat('forscreenCard',{'openid':openid,'boxmac':box_mac})
   },
   inputConteng:function(e){
     var that = this;
