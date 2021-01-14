@@ -85,6 +85,11 @@
 
 
 /* ============================================= 编辑页面 ============================================= */
+.editer>.page .row {
+  height: 80rpx;
+  border-bottom: 3rpx solid #EBEBEB;
+}
+
 .editer>.page .row>.label {
   width: 150rpx;
   font-size: 28rpx;
@@ -92,8 +97,8 @@
 
 .editer>.page .row>.value {
   width: calc(100% - 166rpx);
+  height: 50rpx;
   padding: 5rpx;
-  border: 3rpx solid #BBBBBB;
 }
 
 .editer>.page .row>.value>.input {
@@ -116,13 +121,21 @@
   padding: 10rpx 0;
 }
 
-.editer>.page .part-1>.left>.row>.value {
-  height: 50rpx;
+.editer>.page .part-1>.left>.phone>.value>.input {
+  width: calc(100% - 240rpx);
 }
 
-.editer>.page .part-1>.left>.row>.value>.input {
-  height: 50rpx;
-  line-height: 50rpx;
+.editer>.page .part-1>.left>.phone>.value>.btn {
+  width: 240rpx;
+  height: 60rpx;
+  line-height: 60rpx;
+  text-align: center;
+  font-size: 28rpx;
+  border-radius: 30rpx;
+  color: #F44444;
+  border: 3rpx solid #F44444;
+  padding: 0;
+  margin: 0;
 }
 
 .editer>.page .part-1>.right {
@@ -144,13 +157,15 @@
   padding: 10rpx 20rpx;
 }
 
-.editer>.page .company>.value {
-  height: 120rpx;
+.editer>.page .qr {
+  height: auto;
+  padding: 20rpx;
+  border: 0;
 }
 
 .editer>.page .qr>.value {
-  /* width: 200rpx;
-  height: 300rpx; */
+  /* width: 200rpx;*/
+  height: auto;
   padding: 0;
   border: 0;
 }
@@ -176,6 +191,7 @@
 .editer>.page .buttons {
   width: 100%;
   height: 120rpx;
+  border: 0;
 }
 
 .editer>.page .buttons>.btn {

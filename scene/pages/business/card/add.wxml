@@ -40,7 +40,7 @@
 
 
 <!-- 编辑页面 -->
-<view class='container editer theme-container' style='height:calc(100vh - {{46 + statusBarHeight + SystemInfo.screenBottomSpace}}px);'>
+<view class='container editer' style='height:calc(100vh - {{46 + statusBarHeight + SystemInfo.screenBottomSpace}}px);'>
 	<view class="page">
 		<form bindsubmit="submitInfo">
 			<view class="part-1 flex-row-flex_start-space_between">
@@ -51,10 +51,11 @@
 							<input class="input" placeholder="请输入" maxlength="20" name="name" value="{{card_info.name}}" bindinput="inputConteng" data-type="name"></input>
 						</view>
 					</view>
-					<view class="row flex-row-center-flex_start">
+					<view class="row phone flex-row-center-flex_start">
 						<view class="label">电话</view>
-						<view class="value">
+						<view class="value flex-row-center-space_between">
 							<input class="input" placeholder="请输入" type="number" maxlength="11" name="mobile" value="{{card_info.mobile}}" bindinput="inputConteng" data-type="mobile"></input>
+							<button class="btn wx-phone" open-type="getPhoneNumber" bindgetphonenumber="getPhoneNumber">获取微信手机号</button>
 						</view>
 					</view>
 					<view class="row flex-row-center-flex_start">
@@ -71,10 +72,11 @@
 					<view class="label">头像</view>
 				</view> -->
 			</view>
-			<view class="row company flex-row-flex_start-flex_start">
+			<view class="row company flex-row-center-flex_start">
 				<view class="label">公司名称</view>
 				<view class="value">
-					<textarea class="input" placeholder="请输入(非必填)" maxlength="50" name="company" value="{{card_info.company}}" bindinput="inputConteng" data-type="company"></textarea>
+					<!-- <textarea class="input" placeholder="请输入(非必填)" maxlength="50" name="company" value="{{card_info.company}}" bindinput="inputConteng" data-type="company"></textarea> -->
+					<input class="input" placeholder="请输入(非必填)" maxlength="50" name="company" value="{{card_info.company}}" bindinput="inputConteng" data-type="company"></input>
 				</view>
 			</view>
 			<view class="row qr flex-row-flex_start-flex_start">

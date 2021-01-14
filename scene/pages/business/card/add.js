@@ -244,6 +244,27 @@ Page({
     }
     that.setData({card_info:card_info})
   },
+  getPhoneNumber:function(e){
+    console.log(e)
+    var that = this;
+    var card_info = that.data.card_info;
+    if ("getPhoneNumber:ok" != e.detail.errMsg) {
+      app.showToast('获取用户手机号失败')
+      return false;
+    }
+    var iv = e.detail.iv;
+    var encryptedData = e.detail.encryptedData;
+    utils.PostRequest(api_v_url + '/user/bindMobile', {
+      openid:openid,
+      iv: iv,
+      encryptedData: encryptedData,
+      session_key: app.globalData.session_key,
+    }, (data, headers, cookies, errMsg, statusCode) => {
+      var mobile = data.result.phoneNumber;
+      card_info.mobile = mobile;
+      that.setData({card_info:card_info})
+    })
+  },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
