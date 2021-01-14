@@ -138,6 +138,10 @@
   width: 100%;
 }
 
+.panel.card-group>.card>.face>.top>.left>.name-title {
+  overflow: hidden;
+}
+
 .panel.card-group>.card>.face>.top>.left>.row>.name {
   font-size: 40rpx;
 }
