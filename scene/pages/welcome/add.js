@@ -26,7 +26,7 @@ Page({
     statusBarHeight: getApp().globalData.statusBarHeight,
     SystemInfo: getApp().SystemInfo,
     wordtype_index: 0, //字体样式索引值
-
+    addDisabled:false
   },
 
   /**

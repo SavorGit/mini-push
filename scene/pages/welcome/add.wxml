@@ -27,7 +27,7 @@
 				<view class="input">
 					<image mode="aspectFill" src="https://oss.littlehotspot.com/WeChat/resource/default.jpg"></image>
 				</view> -->
-					<view class="input flex-column-center-center add" wx:if="{{welcome_info.images.length<6}}" bindtap="uploadImage" data-type='all'>
+					<view class="input flex-column-center-center add" wx:if="{{welcome_info.images.length<6 && addDisabled==false}}" bindtap="uploadImage" data-type='all'>
 						<view class="icon fa fa-picture-o" aria-hidden="true"></view>
 					</view>
 					<view class="tip theme-font5">可选择1-6张图片</view>
