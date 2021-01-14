@@ -48,7 +48,7 @@
 					<view class="row flex-row-center-flex_start">
 						<view class="label">姓名</view>
 						<view class="value">
-							<input class="input" placeholder="请输入" maxlength="4" name="name" value="{{card_info.name}}" bindinput="inputConteng" data-type="name"></input>
+							<input class="input" placeholder="请输入" maxlength="8" name="name" value="{{card_info.name}}" bindinput="inputConteng" data-type="name"></input>
 						</view>
 					</view>
 					<view class="row flex-row-center-flex_start">

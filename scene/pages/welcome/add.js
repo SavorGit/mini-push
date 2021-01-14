@@ -269,6 +269,8 @@ Page({
         var tempFilePaths = res.tempFilePaths; //多张图片临时地址
         var flag = tempFilePaths.length + total_pic;
         var total_choose_img = tempFilePaths.length;
+        total_choose_img += total_pic;
+        console.log('一共选择了'+total_choose_img);
         wx.request({
           url: api_v_url + '/Index/getOssParams',
           headers: {
@@ -340,9 +342,11 @@ Page({
         if (type == 'all') {
           var dish_img_list = that.data.welcome_info.images;
           dish_img_list.push("forscreen/resource/" + img_url);
-
+          console.log(dish_img_list);
           var end_flag = dish_img_list.length
         }
+        console.log('end_flag'+end_flag)
+        console.log('total_choose_img'+total_choose_img)
         if (end_flag == total_choose_img) {
           if (type == 'all') {
             var welcome_info = that.data.welcome_info
