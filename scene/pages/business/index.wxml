@@ -156,7 +156,7 @@
 					<view class="head flex-column-flex_start-flex_start">
 						<view class="title-bar flex-row-center-flex_start">
 							<view class="icon fa fa-file-text theme-font-FFAA2C" aria-hidden="true"></view>
-							<view class="title theme-font-FFAA2C">电视分享文件给好友</view>
+							<view class="title theme-font-FFAA2C">大屏分享文件供好友下载</view>
 						</view>
 					</view>
 					<view class="body flex-column-center-flex_start">
