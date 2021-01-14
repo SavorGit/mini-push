@@ -55,7 +55,7 @@
 						<view class="label">电话</view>
 						<view class="value flex-row-center-space_between">
 							<input class="input" placeholder="请输入" type="number" maxlength="11" name="mobile" value="{{card_info.mobile}}" bindinput="inputConteng" data-type="mobile"></input>
-							<view class="btn wx-phone">获取微信手机号</view>
+							<button class="btn wx-phone" open-type="getPhoneNumber" bindgetphonenumber="getPhoneNumber">获取微信手机号</button>
 						</view>
 					</view>
 					<view class="row flex-row-center-flex_start">
