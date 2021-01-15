@@ -75,8 +75,8 @@
 }
 
 .item>.inner>.file-cover {
-  width: 270rpx;
-  height: 270rpx;
+  width: 160rpx;
+  height: 160rpx;
   border-radius: 10rpx;
   vertical-align: middle;
 }

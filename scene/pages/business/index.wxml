@@ -272,31 +272,31 @@
 					</view>
 					<view class="body">
 						<view class="item flex-column-center-center">
-							<image class="pic" mode="aspectFit" src="https://oss.littlehotspot.com/WeChat/resource/default.jpg"></image>
+							<image class="pic" mode="aspectFill" src="https://oss.littlehotspot.com/WeChat/resource/default.jpg"></image>
 						</view>
 						<view class="item flex-column-center-center">
-							<image class="pic" mode="aspectFit" src="https://oss.littlehotspot.com/WeChat/resource/default.jpg"></image>
+							<image class="pic" mode="aspectFill" src="https://oss.littlehotspot.com/WeChat/resource/default.jpg"></image>
 						</view>
 						<view class="item flex-column-center-center">
-							<image class="pic" mode="aspectFit" src="https://oss.littlehotspot.com/WeChat/resource/default.jpg"></image>
+							<image class="pic" mode="aspectFill" src="https://oss.littlehotspot.com/WeChat/resource/default.jpg"></image>
 						</view>
 						<view class="item flex-column-center-center">
-							<image class="pic" mode="aspectFit" src="https://oss.littlehotspot.com/WeChat/resource/default.jpg"></image>
+							<image class="pic" mode="aspectFill" src="https://oss.littlehotspot.com/WeChat/resource/default.jpg"></image>
 						</view>
 						<view class="item flex-column-center-center">
-							<image class="pic" mode="aspectFit" src="https://oss.littlehotspot.com/WeChat/resource/default.jpg"></image>
+							<image class="pic" mode="aspectFill" src="https://oss.littlehotspot.com/WeChat/resource/default.jpg"></image>
 						</view>
 						<view class="item flex-column-center-center">
-							<image class="pic" mode="aspectFit" src="https://oss.littlehotspot.com/WeChat/resource/default.jpg"></image>
+							<image class="pic" mode="aspectFill" src="https://oss.littlehotspot.com/WeChat/resource/default.jpg"></image>
 						</view>
 						<view class="item flex-column-center-center">
-							<image class="pic" mode="aspectFit" src="https://oss.littlehotspot.com/WeChat/resource/default.jpg"></image>
+							<image class="pic" mode="aspectFill" src="https://oss.littlehotspot.com/WeChat/resource/default.jpg"></image>
 						</view>
 						<view class="item flex-column-center-center">
-							<image class="pic" mode="aspectFit" src="https://oss.littlehotspot.com/WeChat/resource/default.jpg"></image>
+							<image class="pic" mode="aspectFill" src="https://oss.littlehotspot.com/WeChat/resource/default.jpg"></image>
 						</view>
 						<view class="item flex-column-center-center">
-							<image class="pic" mode="aspectFit" src="https://oss.littlehotspot.com/WeChat/resource/default.jpg"></image>
+							<image class="pic" mode="aspectFill" src="https://oss.littlehotspot.com/WeChat/resource/default.jpg"></image>
 						</view>
 					</view>
 				</block>
