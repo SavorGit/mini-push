@@ -1,1 +1,30 @@
 /* scene/pages/forscreen/forimages.wxss */
+/**
+ * 【场景】商务宴请 - 图片投屏
+ */
+
+
+@import "/scene/pages/business/files/sharefile.wxss";
+
+.item {
+  width: calc(33.33% - 20rpx);
+  height: 200rpx;
+}
+
+.item:nth-child(2n + 1) {
+  margin-left: 20rpx;
+}
+
+.item:nth-child(3n + 1) {
+  margin-left: 0;
+}
+
+.item>.inner>.file-cover {
+  width: 170rpx;
+  height: 170rpx;
+}
+
+.item>.btn {
+  margin-top: -185rpx;
+  margin-left: 125rpx;
+}
