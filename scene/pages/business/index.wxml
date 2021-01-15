@@ -94,7 +94,7 @@
 							<view class="icon fa fa-desktop theme-font-FFAA2C" aria-hidden="true"></view>
 							<view class="title theme-font-FFAA2C">欢迎词</view>
 						</view>
-						<view class="option-bar flex-row-flex_start-flex_end" bindtap="gotoWelcome">
+						<view class="option-bar flex-row-flex_start-flex_end" bindtap="gotoWelcome" data-page_title="欢迎词">
 							<view class="btn edit theme-button-orange2">
 								<view class="icon fa fa-pencil" aria-hidden="true"></view>
 							</view>
@@ -115,7 +115,7 @@
 						</view>
 					</view>
 					<view class="body flex-column-center-flex_start">
-						<view class="item add flex-row-center-center" bindtap="gotoWelcome">
+						<view class="item add flex-row-center-center" bindtap="gotoWelcome" data-page_title="欢迎词">
 							<view class="btn theme-button-orange2">添加欢迎词</view>
 						</view>
 					</view>

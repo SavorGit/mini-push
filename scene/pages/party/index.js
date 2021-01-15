@@ -184,6 +184,7 @@ Page({
     
   },
   gotoWelcome:function(e){
+    var pageTitle = e.currentTarget.dataset.page_title;
     var is_have_welcome = this.data.is_have_welcome;
     if(is_have_welcome){
       var welcome_id = this.data.welcome_info.welcome_id;
@@ -192,7 +193,7 @@ Page({
       
     }
     wx.navigateTo({
-      url: '/scene/pages/welcome/add?openid='+openid+'&box_mac='+box_mac+'&type=4&welcome_id='+welcome_id,
+      url: '/scene/pages/welcome/add?openid='+openid+'&box_mac='+box_mac+'&type=4&welcome_id='+welcome_id+'&pageTitle='+pageTitle,
     })
     mta.Event.stat('clickAddWelcome',{'openid':openid,'boxmac':box_mac,'typeid':2})
   },

@@ -35,6 +35,11 @@ Page({
   onLoad: function (options) {
     wx.hideShareMenu({})
     var that = this;
+    var pageTitle = options.pageTitle;
+    if(typeof(pageTitle)!='string'){
+      pageTitle = '欢迎词';
+    }
+    that.setData({pageTitle:pageTitle});
     openid = options.openid;
     box_mac = options.box_mac;
     type   = options.type;

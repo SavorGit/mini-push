@@ -5,7 +5,7 @@
 
 
 <import src="/pages/template/commons" />
-<template is="navigationBarForTwoLevel" data='{{statusBarHeight: statusBarHeight,titleText:"欢迎词"}}' />
+<template is="navigationBarForTwoLevel" data='{{statusBarHeight: statusBarHeight,titleText:pageTitle}}' />
 
 <!-- 展示页面 -->
 <view class='container viewer theme-container' style='height:calc(100vh - {{46 + statusBarHeight + SystemInfo.screenBottomSpace}}px);'>
@@ -54,8 +54,8 @@
 				<view class="label theme-font1">字体大小</view>
 				<view class="value">
 					<block wx:for="{{wordsize}}" wx:for-item="bean" wx:key="key" wx:for-index="index">
-							<view wx:if="{{welcome_info.wordsize_id==bean.id}}" class="input flex-column-center-center selected">{{bean.name}}</view>
-							<view wx:else class="input flex-column-center-center" bindtap="selectWordSize" data-id="{{bean.id}}" data-wordsize="{{bean.wordsize}}">{{bean.name}}</view>
+						<view wx:if="{{welcome_info.wordsize_id==bean.id}}" class="input flex-column-center-center selected">{{bean.name}}</view>
+						<view wx:else class="input flex-column-center-center" bindtap="selectWordSize" data-id="{{bean.id}}" data-wordsize="{{bean.wordsize}}">{{bean.name}}</view>
 					</block>
 					<!-- <view class="input flex-column-center-center selected">小</view>
 					<view class="input flex-column-center-center">中</view>
@@ -87,8 +87,8 @@
 				<view class="value">
 					<radio-group class="input" bindchange="playTimesChange">
 						<block wx:for="{{stay_times}}" wx:key="key" wx:for-index="index" wx:for-item="bean">
-						<radio class="btn" checked="true" value="{{bean.id}}" checked="{{bean.is_select}}">{{bean.name}}</radio>
-					</block>
+							<radio class="btn" checked="true" value="{{bean.id}}" checked="{{bean.is_select}}">{{bean.name}}</radio>
+						</block>
 						<!-- <radio class="btn">5分钟</radio>
 						<radio class="btn">10分钟</radio> -->
 					</radio-group>
