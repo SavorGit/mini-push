@@ -97,7 +97,11 @@
         "pages/business/card/add",
         "pages/welcome/add",
         "pages/business/files/sharefile",
-        "pages/party/index"
+        "pages/party/index",
+        "pages/forscreen/forfile",
+        "pages/forscreen/forimages",
+        "pages/forscreen/forvideo",
+        "pages/gift/list"
       ]
     }
   ],
