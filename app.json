@@ -95,13 +95,13 @@
       "pages":[
         "pages/business/index",
         "pages/business/card/add",
-        "pages/welcome/add",
         "pages/business/files/sharefile",
-        "pages/party/index",
         "pages/forscreen/forfile",
         "pages/forscreen/forimages",
         "pages/forscreen/forvideo",
-        "pages/gift/list"
+        "pages/gift/list",
+        "pages/welcome/add",
+        "pages/party/index"
       ]
     }
   ],
