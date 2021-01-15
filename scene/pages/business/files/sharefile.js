@@ -78,8 +78,14 @@ Page({
       type: 'file',
       extension: share_file_exts,
       success(res) {
-    
-        var tempFilePaths = res.tempFilePaths
+        console.log(res)
+        var tempFiles = res.tempFiles
+        
+        
+        if(tempFiles.length==0){
+          app.showToast('您选择的文件异常，请更换文件或重试');
+          return false;
+        }
         var file_path = res.tempFiles[0].path;
         var file_size = res.tempFiles[0].size;
         var file_name = res.tempFiles[0].name;

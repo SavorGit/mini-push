@@ -196,7 +196,7 @@ Page({
         return false;
       }
     }
-    var surname = res.detail.value.surname;
+    var surname = res.detail.value.surname.replace(/\s+/g, '');
     if(surname ==''){
       wx.showToast({
         title: '请输入姓氏',

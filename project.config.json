@@ -19,10 +19,8 @@
     "checkSiteMap": true,
     "uploadWithSourceMap": true,
     "compileHotReLoad": false,
-
     "useMultiFrameRuntime": true,
     "useApiHook": true,
-
     "babelSetting": {
       "ignore": [],
       "disablePlugins": [],
@@ -32,20 +30,14 @@
     "useIsolateContext": true,
     "useCompilerModule": false,
     "userConfirmedUseCompilerModuleSwitch": false,
-
     "userConfirmedBundleSwitch": false,
     "packNpmManually": false,
     "packNpmRelationList": [],
     "minifyWXSS": true,
-
-    "useMultiFrameRuntime": true,
-    "bundle": false,
-    "useApiHook": true,
-
     "useApiHostProcess": false
   },
   "compileType": "miniprogram",
-  "libVersion": "2.14.1",
+  "libVersion": "2.14.3",
   "appid": "wxfdf0346934bb672f",
   "projectname": "savor_produce",
   "isGameTourist": false,
