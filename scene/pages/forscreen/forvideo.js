@@ -1,10 +1,17 @@
 // scene/pages/forscreen/forvideo.js
+/**
+ * 【场景】商务宴请 - 视频投屏
+ */
+
+
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
+    statusBarHeight: getApp().globalData.statusBarHeight,
+    SystemInfo: getApp().SystemInfo,
 
   },
 

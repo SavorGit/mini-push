@@ -1,2 +1,69 @@
 <!--scene/pages/forscreen/forvideo.wxml-->
-<text>scene/pages/forscreen/forvideo.wxml</text>
+<!--
+ | 【场景】商务宴请 - 视频投屏
+ |-->
+
+
+<import src="/pages/template/commons" />
+<template is="navigationBarForTwoLevel" data='{{statusBarHeight: statusBarHeight,titleText:"投屏视频"}}' />
+
+<view class='container viewer theme-container' style='height:calc(100vh - {{46 + statusBarHeight + SystemInfo.screenBottomSpace}}px);'>
+	<view class="page">
+
+		<scroll-view class="body" scroll-y="true" scroll-with-animation="true">
+			<view class="wrapper flex-column-center-flex_start">
+				<view class="part flex-row-flex_start-flex_start">
+					<view class="label">投屏视频</view>
+					<view class="value">
+
+						<view class="item flex-column-flex_start-flex_start">
+							<view class="inner flex-column-center-flex_start">
+								<view class="icon fa fa-file-text-o theme-button-welcome" aria-hidden="true"></view>
+								<view class="filename two-line-overflow">xxxxxxx.pdf</view>
+							</view>
+							<view class="btn del fa fa-times theme-button-orange2" aria-hidden="true"></view>
+						</view>
+						<view class="item flex-column-flex_start-flex_start">
+							<view class="inner flex-column-center-flex_start">
+								<view class="icon fa fa-file-text-o theme-button-welcome" aria-hidden="true"></view>
+								<view class="filename two-line-overflow">xxxxxxx.pdf</view>
+							</view>
+							<view class="btn del fa fa-times theme-button-orange2" aria-hidden="true"></view>
+						</view>
+						<view class="item flex-column-flex_start-flex_start">
+							<view class="inner flex-column-center-flex_start">
+								<view class="icon fa fa-file-text-o theme-button-welcome" aria-hidden="true"></view>
+								<view class="filename two-line-overflow">xxxxxxx.pdf</view>
+							</view>
+							<view class="btn del fa fa-times theme-button-orange2" aria-hidden="true"></view>
+						</view>
+						<view class="item flex-column-flex_start-flex_start">
+							<view class="inner flex-column-center-flex_start">
+								<view class="icon fa fa-file-text-o theme-button-welcome" aria-hidden="true"></view>
+								<view class="filename two-line-overflow">xxxxxxx.pdf</view>
+							</view>
+							<view class="btn del fa fa-times theme-button-orange2" aria-hidden="true"></view>
+						</view>
+						<view class="item flex-column-flex_start-flex_start">
+							<view class="inner flex-column-center-flex_start">
+								<view class="icon fa fa-file-text-o theme-button-welcome" aria-hidden="true"></view>
+								<view class="filename two-line-overflow">xxxxxxx.pdf</view>
+							</view>
+							<view class="btn del fa fa-times theme-button-orange2" aria-hidden="true"></view>
+						</view>
+
+						<view class="item add flex-column-center-flex_start">
+							<view class="inner flex-column-center-center">
+								<view class="icon">+</view>
+								<view class="text">上传文件</view>
+							</view>
+						</view>
+					</view>
+				</view>
+			</view>
+		</scroll-view>
+		<view class="foot flex-row-center-center">
+			<button class="btn save theme-button-red">保存</button>
+		</view>
+	</view>
+</view>
