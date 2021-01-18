@@ -281,6 +281,12 @@ Page({
     },res=>{},{ isShowLoading: false })
     mta.Event.stat('forscreenShareFile',{'openid':openid,'boxmac':box_mac})
   },
+  gotoForImages:function(e){
+    var that = this;
+    wx.navigateTo({
+      url: '/scene/pages/forscreen/forimages?openid='+openid+'&box_mac='+box_mac+'&scene_type=1',
+    })
+  },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
