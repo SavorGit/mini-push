@@ -119,6 +119,14 @@
   background-color: rgba(0, 0, 0, 0.02);
 }
 
+.item.add>button.inner {
+  line-height: 40rpx;
+  margin: 30rpx 0 0;
+  padding: 0;
+  color: inherit;
+  font-size: inherit;
+}
+
 .item.add>.inner>.icon {
   width: auto;
   height: auto;
