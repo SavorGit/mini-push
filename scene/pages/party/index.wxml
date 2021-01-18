@@ -176,7 +176,7 @@
 							<view class="icon fa fa-picture-o theme-font-FFAA2C" aria-hidden="true"></view>
 							<view class="title theme-font-FFAA2C">图片投屏</view>
 						</view>
-						<view class="option-bar flex-row-flex_start-flex_end" bindtap="gotoLaunchPictures">
+						<view class="option-bar flex-row-flex_start-flex_end" bindtap="gotoForImages">
 							<view class="btn edit theme-button-orange2">
 								<view class="icon fa fa-pencil" aria-hidden="true"></view>
 							</view>
@@ -220,7 +220,7 @@
 						</view>
 					</view>
 					<view class="body flex-column-center-flex_start">
-						<view class="item add flex-row-center-center" bindtap="gotoLaunchPictures">
+						<view class="item add flex-row-center-center" bindtap="gotoForImages">
 							<view class="btn theme-button-orange2">添加图片</view>
 						</view>
 					</view>

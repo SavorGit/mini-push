@@ -374,6 +374,12 @@ Page({
     })
     mta.Event.stat('clickSendRedPack',{'openid':openid,'boxmac':box_mac,'typeid':2})
   },
+  gotoForImages:function(e){
+    var that = this;
+    wx.navigateTo({
+      url: '/scene/pages/forscreen/forimages?openid='+openid+'&box_mac='+box_mac+'&scene_type=2',
+    })
+  },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */

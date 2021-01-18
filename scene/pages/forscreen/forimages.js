@@ -70,6 +70,7 @@ Page({
     var keys  = '';
     if(type=='one'){
       var choose_num = 1;
+      var total_pic = that.data.images_list;
       var keys = e.currentTarget.dataset.keys;
     }else {
       var total_pic = that.data.images_list;
@@ -95,7 +96,6 @@ Page({
       sourceType: ['album', 'camera'], // 可以指定来源是相册还是相机，默认二者都有
       success: function (res) {
         var tempFilePaths = res.tempFilePaths; //多张图片临时地址
-        var flag = tempFilePaths.length + total_pic;
         var total_choose_img = tempFilePaths.length;
         total_choose_img += total_pic;
         console.log('一共选择了'+total_choose_img);
@@ -113,7 +113,7 @@ Page({
 
           var img_url = timestamp + postf;
           //console.log(img_url)
-          that.upOss(filename, postf_w, img_url, policy, signature, i, flag, type,total_choose_img,keys)
+          that.upOss(filename, postf_w, img_url, policy, signature,  type,total_choose_img,keys)
           app.sleep(1)
         }
       },
@@ -126,7 +126,7 @@ Page({
       }
     })
   },
-  upOss: function (filename, postf_w, img_url, policy, signature, i, flag, type,total_choose_img,keys) {
+  upOss: function (filename, postf_w, img_url, policy, signature,  type,total_choose_img,keys) {
     var that = this;
     wx.uploadFile({
       url: oss_upload_url,
@@ -193,20 +193,21 @@ Page({
   delPic: function (e) {
     var that = this;
     var keys = e.currentTarget.dataset.keys;
-    var image_list = that.data.image_list;
-    for (var i = 0; i < image_list.length; i++) {
+    var images_list = that.data.images_list;
+    console.log()
+    for (var i = 0; i < images_list.length; i++) {
       if (i == keys) {
-        image_list.splice(keys, 1);
+        images_list.splice(keys, 1);
         break;
       }
     }
     that.setData({
-      image_list: image_list
+      images_list: images_list
     })
     
   },
   submitForImages:function(e){
-    var image_list = that.data.image_list;
+    var images_list = that.data.images_list;
     
     utils.PostRequest(api_v_url + '/aa/bb', {
       openid:openid,
