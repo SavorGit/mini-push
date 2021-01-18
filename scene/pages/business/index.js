@@ -282,9 +282,13 @@ Page({
     mta.Event.stat('forscreenShareFile',{'openid':openid,'boxmac':box_mac})
   },
   gotoForImages:function(e){
-    var that = this;
     wx.navigateTo({
       url: '/scene/pages/forscreen/forimages?openid='+openid+'&box_mac='+box_mac+'&scene_type=1',
+    })
+  },
+  gotoForVideo:function(e){
+    wx.navigateTo({
+      url: '/scene/pages/forscreen/forvideo?openid='+openid+'&box_mac='+box_mac+'&scene_type=1',
     })
   },
   /**

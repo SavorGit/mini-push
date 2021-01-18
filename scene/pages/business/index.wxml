@@ -220,7 +220,7 @@
 							<view class="icon fa fa-file-video-o theme-font-FFAA2C" aria-hidden="true"></view>
 							<view class="title theme-font-FFAA2C">视频投屏</view>
 						</view>
-						<view class="option-bar flex-row-flex_start-flex_end" bindtap="gotoLaunchVideos">
+						<view class="option-bar flex-row-flex_start-flex_end" bindtap="gotoForVideo">
 							<view class="btn edit theme-button-orange2">
 								<view class="icon fa fa-pencil" aria-hidden="true"></view>
 							</view>
@@ -257,7 +257,7 @@
 						</view>
 					</view>
 					<view class="body flex-column-center-flex_start">
-						<view class="item add flex-row-center-center" bindtap="gotoLaunchVideos">
+						<view class="item add flex-row-center-center" bindtap="gotoForVideo">
 							<view class="btn theme-button-orange2">添加视频</view>
 						</view>
 					</view>

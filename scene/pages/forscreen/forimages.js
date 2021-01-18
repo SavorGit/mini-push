@@ -179,10 +179,8 @@ Page({
         
       },fail:function(e){
         wx.hideLoading();
-        app.showToast('文件上传失败,请重试')
-        var dish_img_list = [];
-        var welcome_info = that.data.welcome_info
-            welcome_info.images = dish_img_list;
+        app.showToast('图片上传失败,请重试')
+        
         that.setData({
           addDisabled: false,
           upDisabled: false

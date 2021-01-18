@@ -375,9 +375,13 @@ Page({
     mta.Event.stat('clickSendRedPack',{'openid':openid,'boxmac':box_mac,'typeid':2})
   },
   gotoForImages:function(e){
-    var that = this;
     wx.navigateTo({
       url: '/scene/pages/forscreen/forimages?openid='+openid+'&box_mac='+box_mac+'&scene_type=2',
+    })
+  },
+  gotoForVideo:function(e){
+    wx.navigateTo({
+      url: '/scene/pages/forscreen/forvideo?openid='+openid+'&box_mac='+box_mac+'&scene_type=1',
     })
   },
   /**
