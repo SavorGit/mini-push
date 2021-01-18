@@ -223,7 +223,7 @@
   font-size: 36rpx;
 }
 
-/* ==================================== 媒体面板 ==================================== */
+/* ==================================== 媒体面板 ==================================== 
 .panel.media {
   padding: 20rpx 35rpx;
 }
@@ -261,7 +261,7 @@
   text-align: center;
   font-size: 28rpx;
 }
-
+*/
 /* ==================================== 欢迎词面板 ==================================== */
 .panel.welcome>.body>.item {
   width: calc(100% - 40rpx);
@@ -349,6 +349,42 @@
 }
 
 
+/* ==================================== 视频投屏面板 ==================================== */
+.panel.launch-video>.body {
+  width: calc(100% - 70rpx);
+  padding: 20rpx 30rpx 25rpx 40rpx;
+}
+
+.panel.launch-video>.body>.item {
+  width: calc(50% - 20rpx);
+  height: auto;
+  margin-top: 25rpx;
+  margin-left: 25rpx;
+  padding: 0;
+  border: 0;
+  display: inline-flex;
+  box-sizing: border-box;
+}
+
+.panel.launch-video>.body>.item:nth-child(2n + 1) {
+  margin-left: 0;
+}
+
+.panel.launch-video>.body>.item:nth-child(-n + 2) {
+  margin-top: 0;
+}
+
+.panel.launch-video>.body>.item>.pic {
+  width: 282rpx;
+  height: 176rpx;
+  background-color: #EEEEEE;
+  border-radius: 5rpx;
+}
+
+.panel.launch-video>.body>.item>.btn.launch {
+  margin-top: 10rpx;
+}
+
 /* ==================================== 图片投屏面板 ==================================== */
 .panel.launch-picture>.body {
   width: calc(100% - 15rpx);
@@ -357,8 +393,11 @@
 
 .panel.launch-picture>.body>.item {
   width: calc(33.33% - 15rpx);
+  height: auto;
   margin-top: 15rpx;
   margin-left: 15rpx;
+  padding: 0;
+  border: 0;
   display: inline-flex;
   box-sizing: border-box;
 }
