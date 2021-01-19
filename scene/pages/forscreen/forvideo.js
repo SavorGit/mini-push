@@ -11,7 +11,7 @@ var openid;
 var box_mac;
 var mobile_brand = app.globalData.mobile_brand;
 var mobile_model = app.globalData.mobile_model;
-var scene_type ;  //来源类型1：商务宴请 2：生日聚会
+var scene_type ;  
 var all_images_num = 6;
 var policy;
 var signature;
@@ -25,7 +25,8 @@ Page({
     statusBarHeight: getApp().globalData.statusBarHeight,
     SystemInfo: getApp().SystemInfo,
     oss_url:app.globalData.oss_url,
-    video_list:[{'name':'1592056143067.mp4','video_url':'forscreen/resource/1592056143067.mp4','video_url_img':'forscreen/resource/1592056143067.mp4?x-oss-process=video/snapshot,t_10000,f_jpg,w_450,m_fast','percent':0}], //已选择投屏照片列表
+    video_list:[], //已选择投屏照片列表
+    del_videos:[],
     addDisabled:false,  //保存按钮是否可用
     upDisabled:false,   //上传按钮是否可用
   },
@@ -34,6 +35,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    console.log(options)
     openid  = options.openid;  
     box_mac = options.box_mac;
     scene_type    = options.scene_type; 
@@ -52,16 +54,18 @@ Page({
         })
       }
     })
-    this.getVideoList(openid,box_mac,scene_type);
+    this.getVideoList(scene_type);
   },
-  getVideoList:function(e){
+  getVideoList:function(scene_type){
     var that = this;
-    var that = this;
-    utils.PostRequest(api_v_url + '/aa/bb', {
+    utils.PostRequest(api_v_url + '/file/detail', {
       openid:openid,
       box_mac:box_mac,
-      scene_type,scene_type
+      type:scene_type
     }, (data, headers, cookies, errMsg, statusCode) =>{
+      var video_list = data.result.videos;
+      var videos_num = data.result.videos_num;
+      that.setData({video_list:video_list,videos_num:videos_num}) 
     })
   },
 
@@ -105,6 +109,7 @@ Page({
 
         var filename = res.tempFilePath
         var video_size = res.size;
+        var duration  = res.duration;
         var index1 = filename.lastIndexOf(".");
         var index2 = filename.length;
         var timestamp = (new Date()).valueOf();
@@ -114,14 +119,14 @@ Page({
         var postf_w = filename.substring(index1 + 1, index2); //后缀名
 
         var video_url = timestamp + postf;
-        that.upOss(filename, postf_w, video_url, policy, signature,  type,keys,up_flag)
+        that.upOss(filename, postf_w, video_url, video_size,duration, policy, signature,  type,keys,up_flag)
       },
       fail: function (e) {
         
       }
     })
   },
-  upOss: function (filename, postf_w, video_url, policy, signature,  type,keys,up_flag) {
+  upOss: function (filename, postf_w, video_url,video_size,duration, policy, signature,  type,keys,up_flag) {
     console.log(filename);
     console.log(oss_upload_url);
     console.log(video_url)
@@ -147,9 +152,12 @@ Page({
         console.log(video_url);
         var tmp_info = {};
         tmp_info.name = video_url;
-        tmp_info.video_url = "forscreen/resource/" + video_url,
-        tmp_info.video_url_img = "forscreen/resource/" + video_url+'?x-oss-process=video/snapshot,t_1000,f_jpg,w_450,m_fast';
+        tmp_info.oss_file_path = "forscreen/resource/" + video_url,
+        tmp_info.img_url = "forscreen/resource/" + video_url+'?x-oss-process=video/snapshot,t_1000,f_jpg,w_450,m_fast';
         tmp_info.percent  = 0;
+        tmp_info.file_id = 0;
+        tmp_info.resource_size = video_size;
+        tmp_info.duration = duration;
         if(type=='all'){
           var video_list = that.data.video_list;
           video_list[up_flag] = tmp_info;
@@ -187,8 +195,8 @@ Page({
     })
     var video_list = that.data.video_list;
     var up_tmp_info ={};
-    up_tmp_info.video_url = '';
-    up_tmp_info.video_url_img = '';
+    up_tmp_info.oss_file_path = '';
+    up_tmp_info.img_url = '';
     upload_task.onProgressUpdate((res) => {
       console.log(res.progress);
       up_tmp_info.percent = res.progress;
@@ -198,25 +206,49 @@ Page({
     });
   },
   delVideo:function(e){
+    console.log(e)
     var that = this;
     var keys = e.currentTarget.dataset.keys;
     var video_list = that.data.video_list;
-    for (var i = 0; i < video_list.length; i++) {
-      if (i == keys) {
-        video_list.splice(keys, 1);
-        break;
-      }
+    var video_id = e.currentTarget.dataset.video_id
+    var del_videos  = that.data.del_videos;
+    if(video_id>0){
+      del_videos.push(video_id);
     }
-    that.setData({video_list: video_list})
+    console.log(del_videos)
+    video_list.splice(keys, 1);
+    that.setData({del_videos:del_videos,video_list: video_list})
   },
   submitForVideo:function(e){
     var that = this;
     var video_list = that.data.video_list;
-    
-    utils.PostRequest(api_v_url + '/aa/bb', {
+    var file_path = '';
+    var space  = '';
+    for(let i in video_list){
+      file_path+=space + video_list[i].oss_file_path;
+      space  = ',';
+    }
+    var del_videos = that.data.del_videos;
+    var file_ids = '';
+    var space  = '';
+    for(let i in del_videos){
+      file_ids +=space+del_videos[i];
+      space  = ',';
+    }
+    var json_video_list = JSON.stringify(video_list)
+    console.log(json_video_list);
+    utils.PostRequest(api_v_url + '/file/addFile', {
       openid:openid,
       box_mac:box_mac,
+      type:scene_type,
+      file_path:file_path,
+      file_ids:file_ids
     }, (data, headers, cookies, errMsg, statusCode) =>{
+      app.showToast('保存成功',2000,'success');
+      app.sleep(1000)
+      wx.navigateBack({
+        delta: 1,
+      })
     })
   },
   /**

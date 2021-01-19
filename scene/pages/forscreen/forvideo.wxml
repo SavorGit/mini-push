@@ -19,10 +19,10 @@
 						<view class="item flex-column-flex_start-flex_start" wx:for="{{video_list}}" wx:key="key" wx:for-item="bean" wx:for-index="index" >
 							<block wx:if="{{bean.percent==0}}">
 								<view class="inner flex-column-center-flex_start">
-									<image class="file-cover" mode="aspectFill" src="{{oss_url}}/{{bean.video_url_img}}"></image>
+									<image class="file-cover" mode="aspectFill" src="{{oss_url}}/{{bean.img_url}}"></image>
 									<view class="filename two-line-overflow">{{bean.name}}</view>
 								</view>
-								<view class="btn del fa fa-times theme-button-orange2" aria-hidden="true" bindtap="delVideo" data-keys="{{index}}"></view>
+								<view class="btn del fa fa-times theme-button-orange2" aria-hidden="true" bindtap="delVideo" data-keys="{{index}}" data-video_id="{{bean.file_id}}"></view>
 							</block>
 							<block wx:else>
 								<view class="inner flex-column-center-flex_start">

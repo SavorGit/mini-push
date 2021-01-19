@@ -25,6 +25,7 @@ Page({
     SystemInfo: getApp().SystemInfo,
     oss_url:app.globalData.oss_url,
     images_list:[], //已选择投屏照片列表
+    del_images:[],  //删除的图片列表
     addDisabled:false,  //保存按钮是否可用
     upDisabled:false,   //上传按钮是否可用
   },
@@ -55,11 +56,15 @@ Page({
   },
   getImageList:function(openid,box_mac,scene_type){
     var that = this;
-    utils.PostRequest(api_v_url + '/aa/bb', {
+    utils.PostRequest(api_v_url + '/file/detail', {
       openid:openid,
       box_mac:box_mac,
-      scene_type,scene_type
+      type:scene_type
     }, (data, headers, cookies, errMsg, statusCode) =>{
+      var images_list = data.result.images;
+      var images_num = data.result.images_num;
+      
+      that.setData({'images_list':images_list,'images_num':images_num})
     })
   },
   //选择上传图片
@@ -73,7 +78,7 @@ Page({
       var total_pic = that.data.images_list;
       var keys = e.currentTarget.dataset.keys;
     }else {
-      var total_pic = that.data.images_list;
+      var total_pic = that.data.images_list.length;
       var choose_num = all_images_num - total_pic;
       if (total_pic >= all_images_num) {
         app.showToast('最多上传'+all_images_num+'张照片');
@@ -97,12 +102,14 @@ Page({
       success: function (res) {
         var tempFilePaths = res.tempFilePaths; //多张图片临时地址
         var total_choose_img = tempFilePaths.length;
+        console.log(res)
+        console.log('total_pic'+total_pic)
         total_choose_img += total_pic;
         console.log('一共选择了'+total_choose_img);
 
         for (var i = 0; i < tempFilePaths.length; i++) {
           var filename = tempFilePaths[i];
-
+          var resource_size = res.tempFiles[i].size
           var index1 = filename.lastIndexOf(".");
           var index2 = filename.length;
           var timestamp = (new Date()).valueOf();
@@ -113,7 +120,7 @@ Page({
 
           var img_url = timestamp + postf;
           //console.log(img_url)
-          that.upOss(filename, postf_w, img_url, policy, signature,  type,total_choose_img,keys)
+          that.upOss(filename, postf_w, img_url,resource_size, policy, signature,  type,total_choose_img,keys)
           app.sleep(1)
         }
       },
@@ -126,7 +133,7 @@ Page({
       }
     })
   },
-  upOss: function (filename, postf_w, img_url, policy, signature,  type,total_choose_img,keys) {
+  upOss: function (filename, postf_w, img_url, resource_size,policy, signature,  type,total_choose_img,keys) {
     var that = this;
     wx.uploadFile({
       url: oss_upload_url,
@@ -147,9 +154,14 @@ Page({
       },
       success: function (res) {
         var dish_img_url = "forscreen/resource/" + img_url
+        var tmp_info = {};
+        tmp_info.oss_file_path = dish_img_url;
+        tmp_info.file_id       = 0;
+        tmp_info.resource_size = resource_size;
         if(type=='all'){
+          
           var images_list = that.data.images_list;
-          images_list.push(dish_img_url);
+          images_list.push(tmp_info);
           var end_flag = images_list.length
           if (end_flag == total_choose_img) {
             that.setData({
@@ -157,10 +169,11 @@ Page({
             })
           }
         }else if(type=='one'){
+          
           var images_list = that.data.images_list;
           for (var i = 0; i < images_list.length; i++) {
             if (i == keys) {
-              images_list[i] = dish_img_url;
+              images_list[i] = tmp_info;
               break;
             }
           }
@@ -192,25 +205,46 @@ Page({
     var that = this;
     var keys = e.currentTarget.dataset.keys;
     var images_list = that.data.images_list;
-    console.log()
-    for (var i = 0; i < images_list.length; i++) {
-      if (i == keys) {
-        images_list.splice(keys, 1);
-        break;
-      }
+    var del_images  = that.data.del_images;
+    var img_id      = e.currentTarget.dataset.img_id;
+    if(img_id>0){
+      del_images.push(img_id);
     }
-    that.setData({
-      images_list: images_list
-    })
+    images_list.splice(keys, 1);
+    that.setData({images_list: images_list,del_images:del_images})
     
   },
   submitForImages:function(e){
+    var that = this;
     var images_list = that.data.images_list;
-    
-    utils.PostRequest(api_v_url + '/aa/bb', {
+    var file_path = '';
+    var space  = '';
+    for(let i in images_list){
+      file_path+=space + images_list[i].oss_file_path;
+      space  = ',';
+    }
+    var json_images_list = JSON.stringify(images_list)
+    console.log(json_images_list);
+    var del_images = that.data.del_images;
+    var file_ids = '';
+    var space  = '';
+    for(let i in del_images){
+      file_ids +=space+del_images[i];
+      space  = ',';
+    }
+    utils.PostRequest(api_v_url + '/file/addFile', {
       openid:openid,
       box_mac:box_mac,
+      type:scene_type,
+      file_path:file_path,
+      file_ids:file_ids,
+      file_info:json_images_list
     }, (data, headers, cookies, errMsg, statusCode) =>{
+      app.showToast('保存成功',2000,'success');
+      app.sleep(1000)
+      wx.navigateBack({
+        delta: 1,
+      })
     })
   },
   /**

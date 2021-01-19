@@ -283,12 +283,12 @@ Page({
   },
   gotoForImages:function(e){
     wx.navigateTo({
-      url: '/scene/pages/forscreen/forimages?openid='+openid+'&box_mac='+box_mac+'&scene_type=1',
+      url: '/scene/pages/forscreen/forimages?openid='+openid+'&box_mac='+box_mac+'&scene_type=4',
     })
   },
   gotoForVideo:function(e){
     wx.navigateTo({
-      url: '/scene/pages/forscreen/forvideo?openid='+openid+'&box_mac='+box_mac+'&scene_type=1',
+      url: '/scene/pages/forscreen/forvideo?openid='+openid+'&box_mac='+box_mac+'&scene_type=3',
     })
   },
   /**

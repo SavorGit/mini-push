@@ -18,9 +18,9 @@
 
 						<view class="item flex-column-flex_start-flex_start" wx:for="{{images_list}}" wx:key="key" wx:for-item="bean" wx:for-index="index">
 							<view class="inner flex-column-center-flex_start" bindtap="uploadImage" data-type="one">
-								<image class="file-cover" mode="aspectFill" src="{{oss_url}}/{{bean}}"></image>
+								<image class="file-cover" mode="aspectFill" src="{{oss_url}}/{{bean.oss_file_path}}"></image>
 							</view>
-							<view class="btn del fa fa-times theme-button-orange2" aria-hidden="true" bindtap="delPic" data-keys="{{index}}"></view>
+							<view class="btn del fa fa-times theme-button-orange2" aria-hidden="true" bindtap="delPic" data-keys="{{index}}" data-img_id="{{bean.file_id}}"></view>
 						</view>
 						<!-- <view class="item flex-column-flex_start-flex_start">
 							<view class="inner flex-column-center-flex_start">
