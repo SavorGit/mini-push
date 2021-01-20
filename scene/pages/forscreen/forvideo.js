@@ -163,7 +163,14 @@ Page({
           video_list[up_flag] = tmp_info;
           
         }else if(type=='one'){
+          
           var video_list = that.data.video_list;
+          var del_videos = that.data.del_videos;
+          var or_video_info = video_list[keys]
+          if(or_video_info.file_id>0){
+            
+            del_videos.push(or_video_info.file_id)
+          }
           for (var i = 0; i < video_list.length; i++) {
             if (i == keys) {
               video_list[i] = tmp_info;
@@ -173,7 +180,8 @@ Page({
           
         }
         that.setData({
-          video_list: video_list
+          video_list: video_list,
+          del_videos:del_videos
         })
         console.log(video_list);
         wx.hideLoading();
@@ -242,7 +250,8 @@ Page({
       box_mac:box_mac,
       type:scene_type,
       file_path:file_path,
-      file_ids:file_ids
+      file_ids:file_ids,
+      file_info:json_video_list
     }, (data, headers, cookies, errMsg, statusCode) =>{
       app.showToast('保存成功',2000,'success');
       app.sleep(1000)

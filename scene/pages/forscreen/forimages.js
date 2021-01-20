@@ -12,7 +12,7 @@ var box_mac;
 var mobile_brand = app.globalData.mobile_brand;
 var mobile_model = app.globalData.mobile_model;
 var scene_type ;  //来源类型1：商务宴请 2：生日聚会
-var all_images_num = 6;
+var all_images_num = 9;
 var policy;
 var signature;
 Page({
@@ -171,6 +171,11 @@ Page({
         }else if(type=='one'){
           
           var images_list = that.data.images_list;
+          var del_images  = that.data.del_images;
+          var or_image_info = images_list[keys];
+          if(or_image_info.file_id>0){
+            del_images.push(or_image_info.file_id)
+          }
           for (var i = 0; i < images_list.length; i++) {
             if (i == keys) {
               images_list[i] = tmp_info;
@@ -178,7 +183,8 @@ Page({
             }
           }
           that.setData({
-            images_list: images_list
+            images_list: images_list,
+            del_images:del_images,
           })
         }
         console.log(images_list);
