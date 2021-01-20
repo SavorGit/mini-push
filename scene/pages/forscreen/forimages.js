@@ -166,6 +166,12 @@ Page({
           if (end_flag == total_choose_img) {
             that.setData({
               images_list: images_list
+            }, () => {
+              wx.hideLoading();
+              that.setData({
+                addDisabled: false,
+                upDisabled: false
+              })
             })
           }
         }else if(type=='one'){
@@ -185,14 +191,16 @@ Page({
           that.setData({
             images_list: images_list,
             del_images:del_images,
+          }, () => {
+            wx.hideLoading();
+            that.setData({
+              addDisabled: false,
+              upDisabled: false
+            })
           })
         }
         console.log(images_list);
-        wx.hideLoading();
-        that.setData({
-          addDisabled: false,
-          upDisabled: false
-        })
+        
 
         
         

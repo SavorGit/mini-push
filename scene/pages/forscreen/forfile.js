@@ -157,9 +157,17 @@ Page({
         console.log(file_info)
         share_files.push(file_info);
 
-        that.setData({'share_files':share_files,'addDisabled':false,'upDisabled':false})
-        wx.hideLoading({
+        that.setData({
+          'share_files':share_files
+        }, () => {
+
+          wx.hideLoading();
+          that.setData({
+            addDisabled: false,
+            upDisabled: false
+          })
         })
+        
         
       },fail:function(){
         wx.hideLoading({

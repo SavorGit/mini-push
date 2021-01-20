@@ -182,13 +182,14 @@ Page({
         that.setData({
           video_list: video_list,
           del_videos:del_videos
+        }, () => {
+          wx.hideLoading();
+          that.setData({
+            addDisabled: false,
+            upDisabled: false
+          })
         })
-        console.log(video_list);
-        wx.hideLoading();
-        that.setData({
-          addDisabled: false,
-          upDisabled: false
-        })
+        
 
         
         
