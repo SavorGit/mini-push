@@ -118,7 +118,7 @@
 
 			<!-- 视频投屏面板 -->
 			<view class="panel detailed-list launch-video">
-				<block wx:if="{{is_have_launchVideo}}">
+				<block wx:if="{{videos_num>0}}">
 					<view class="head flex-column-flex_start-flex_start">
 						<view class="title-bar flex-row-center-flex_start">
 							<view class="icon fa fa-file-video-o theme-font-FFAA2C" aria-hidden="true"></view>
@@ -131,26 +131,11 @@
 						</view>
 					</view>
 					<view class="body">
-						<view class="item flex-column-center-center">
-							<image class="pic" mode="aspectFill" src="https://oss.littlehotspot.com/WeChat/resource/default.jpg"></image>
-							<view class="btn launch theme-button-orange2">投屏</view>
+						<view class="item flex-column-center-center" wx:for="{{videos}}" wx:key="key" wx:for-item="bean" wx:for-index="index">
+							<image class="pic" mode="aspectFill" src="{{oss_url}}/{{bean.img_url}}"></image>
+							<view class="btn launch theme-button-orange2" bindtap="forscreenVideo" data-keys="{{index}}">投屏</view>
 						</view>
-						<view class="item flex-column-center-center">
-							<image class="pic" mode="aspectFill" src="https://oss.littlehotspot.com/WeChat/resource/default.jpg"></image>
-							<view class="btn launch theme-button-orange2">投屏</view>
-						</view>
-						<view class="item flex-column-center-center">
-							<image class="pic" mode="aspectFill" src="https://oss.littlehotspot.com/WeChat/resource/default.jpg"></image>
-							<view class="btn launch theme-button-orange2">投屏</view>
-						</view>
-						<view class="item flex-column-center-center">
-							<image class="pic" mode="aspectFill" src="https://oss.littlehotspot.com/WeChat/resource/default.jpg"></image>
-							<view class="btn launch theme-button-orange2">投屏</view>
-						</view>
-						<view class="item flex-column-center-center">
-							<image class="pic" mode="aspectFill" src="https://oss.littlehotspot.com/WeChat/resource/default.jpg"></image>
-							<view class="btn launch theme-button-orange2">投屏</view>
-						</view>
+						
 					</view>
 				</block>
 				<block wx:else>
@@ -170,7 +155,7 @@
 
 			<!-- 图片投屏面板 -->
 			<view class="panel detailed-list launch-picture">
-				<block wx:if="{{is_have_launchPicture}}">
+				<block wx:if="{{images_num>0}}">
 					<view class="head flex-column-flex_start-flex_start">
 						<view class="title-bar flex-row-center-flex_start">
 							<view class="icon fa fa-picture-o theme-font-FFAA2C" aria-hidden="true"></view>
@@ -183,33 +168,10 @@
 						</view>
 					</view>
 					<view class="body">
-						<view class="item flex-column-center-center">
-							<image class="pic" mode="aspectFill" src="https://oss.littlehotspot.com/WeChat/resource/default.jpg"></image>
+						<view class="item flex-column-center-center" wx:for="{{images}}" wx:key="key" wx:for-item="bean" wx:for-index="index">
+							<image class="pic" mode="aspectFill" src="{{oss_url}}/{{bean.file_path}}" bindtap="forscreenImage" data-keys="{{index}}"></image>
 						</view>
-						<view class="item flex-column-center-center">
-							<image class="pic" mode="aspectFill" src="https://oss.littlehotspot.com/WeChat/resource/default.jpg"></image>
-						</view>
-						<view class="item flex-column-center-center">
-							<image class="pic" mode="aspectFill" src="https://oss.littlehotspot.com/WeChat/resource/default.jpg"></image>
-						</view>
-						<view class="item flex-column-center-center">
-							<image class="pic" mode="aspectFill" src="https://oss.littlehotspot.com/WeChat/resource/default.jpg"></image>
-						</view>
-						<view class="item flex-column-center-center">
-							<image class="pic" mode="aspectFill" src="https://oss.littlehotspot.com/WeChat/resource/default.jpg"></image>
-						</view>
-						<view class="item flex-column-center-center">
-							<image class="pic" mode="aspectFill" src="https://oss.littlehotspot.com/WeChat/resource/default.jpg"></image>
-						</view>
-						<view class="item flex-column-center-center">
-							<image class="pic" mode="aspectFill" src="https://oss.littlehotspot.com/WeChat/resource/default.jpg"></image>
-						</view>
-						<view class="item flex-column-center-center">
-							<image class="pic" mode="aspectFill" src="https://oss.littlehotspot.com/WeChat/resource/default.jpg"></image>
-						</view>
-						<view class="item flex-column-center-center">
-							<image class="pic" mode="aspectFill" src="https://oss.littlehotspot.com/WeChat/resource/default.jpg"></image>
-						</view>
+						
 					</view>
 				</block>
 				<block wx:else>

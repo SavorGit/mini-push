@@ -48,7 +48,16 @@ Page({
         openid: openid,
         file_id: file_id
       }, (data, headers, cookies, errMsg, statusCode) => {
-        console.log(data)
+        var forscreen_id = (new Date()).valueOf();
+        that.setData({
+          file_imgs: data.result.imgs,
+          img_nums: data.result.img_num,
+          oss_host: data.result.oss_host,
+          oss_suffix: data.result.oss_suffix,
+          forscreen_id:forscreen_id
+        })
+
+        forscreenFirstPic(data.result.imgs,forscreen_id);
       })
 
     }else {

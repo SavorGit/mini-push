@@ -332,7 +332,8 @@ Page({
     var user_info = wx.getStorageSync(cache_key+'user_info');
     var forscreen_id =(new Date()).valueOf();
     var netty_info = {};
-    netty_info.action = 2;
+    netty_info.action = 4;
+    netty_info.resource_type = 1;
     netty_info.forscreen_id = forscreen_id;
     netty_info.res_sup_time = forscreen_id;
     netty_info.res_eup_time = forscreen_id;
@@ -377,9 +378,11 @@ Page({
     var user_info = wx.getStorageSync(cache_key+'user_info');
     var forscreen_id =(new Date()).valueOf();
     var netty_info = {};
+    
     netty_info.action = 2;
     netty_info.url = videos[keys].file_path;
     netty_info.filename = videos[keys].name;
+    netty_info.openid   = openid;
     netty_info.resource_type = 2;
     netty_info.video_id = videos[keys].video_id;
     netty_info.avatarUrl = user_info.avatarUrl;
