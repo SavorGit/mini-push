@@ -33,12 +33,19 @@ Page({
     if(typeof(options.type)!='undefined'){
       type = options.type;
     }
+    if(type==4){
+      var rangeid = 3;
+
+    }else{
+      var rangeid = 1;
+    }
     var that = this;
     var user_info = wx.getStorageSync("savor_user_info");
     that.setData({
       openid: openid,
       box_mac: box_mac,
       avatarUrl: user_info.avatarUrl,
+      rangeid:rangeid
       
     })
     //获取发送红包 祝福语 发送范围配置
