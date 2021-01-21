@@ -42,6 +42,7 @@ Page({
     var that = this;
     var user_info = wx.getStorageSync("savor_user_info");
     that.setData({
+      type:type,
       openid: openid,
       box_mac: box_mac,
       avatarUrl: user_info.avatarUrl,
@@ -140,11 +141,18 @@ Page({
   },
   bindRangePickerChange:function(res){
     var that = this;
-    var rangeid = parseInt(res.detail.value)+1;
-    that.setData({
-      rangeIndex:res.detail.value,
-      rangeid: rangeid
-    })
+    var type = that.data.type;
+    if(type==2){
+      var rangeid = parseInt(res.detail.value)+1;
+      that.setData({
+        rangeIndex:res.detail.value,
+        rangeid: rangeid
+      })
+    }else {
+      that.setData({
+        rangeid: 3
+      })
+    }
   },
   sendRedPacket:function(res){
     var that = this;
