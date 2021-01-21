@@ -192,8 +192,8 @@ Page({
     
   },
   gotoGift:function(e){
-    wx.switchTab({
-      url: '/pages/shopping/index',
+    wx.navigateTo({
+      url: '/scene/pages/gift/list?openid='+openid+'&box_mac='+box_mac,
     })
     mta.Event.stat('clickSendGift',{'openid':openid,'boxmac':box_mac,'typeid':1})
   },

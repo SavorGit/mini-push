@@ -26,7 +26,7 @@
 							</block>
 							<block wx:else>
 								<view class="inner flex-column-center-flex_start">
-								<view class="progress flex-column-center-center theme-font-000000" aria-hidden="true">{{bean.percent}}%</view>
+								<view class="progress flex-column-center-center theme-font-000000" aria-hidden="true"></view>
 								<view class="filename two-line-overflow">{{bean.name}}</view>
 							</view>
 							</block>

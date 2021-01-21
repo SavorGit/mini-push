@@ -377,9 +377,10 @@ Page({
     mta.Event.stat('forscreenWelcome',{'openid':openid,'boxmac':box_mac,'typeid':2})
   },
   gotoGift:function(e){
-    wx.switchTab({
-      url: '/pages/shopping/index',
+    wx.navigateTo({
+      url: '/scene/pages/gift/list?openid='+openid+'&box_mac='+box_mac,
     })
+    
     mta.Event.stat('clickSendGift',{'openid':openid,'boxmac':box_mac,'typeid':2})
    
   },

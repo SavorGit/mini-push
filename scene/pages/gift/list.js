@@ -16,48 +16,7 @@ var cache_key = app.globalData.cache_key;
 var pageid = 1;
 var goods_list;
 var page;
-let SavorUtils = {
-  User: {
 
-    // 判断用户是否注册
-    isRegister: pageContext => utils.PostRequest(api_v_url + '/User/isRegister', {
-      openid: pageContext.data.openid,
-      page_id: 2
-    }, (data, headers, cookies, errMsg, statusCode) => {
-      var user_info = data.result.userinfo;
-
-      var colose_official_account = wx.getStorageSync(cache_key + 'colose_official_account');
-      if (user_info.subscribe == 0 && colose_official_account == '') {
-        pageContext.setData({
-          is_view_official_account: true
-        })
-      } else {
-        pageContext.setData({
-          is_view_official_account: false
-        })
-      }
-      wx.setStorage({
-        key: 'savor_user_info',
-        data: data.result.userinfo,
-      })
-    }, function () {
-      if (app.globalData.link_type != 2) {
-        wx.setStorage({
-          key: 'savor_user_info',
-          data: {
-            openid: app.globalData.openid
-          }
-        })
-      }
-
-    }, {
-      isShowLoading: false
-    }),
-  },
-  Page: {},
-
-  Netty: {}
-};
 
 Page({
 
@@ -88,42 +47,12 @@ Page({
    */
   onLoad: function (options) {
     var self = this;
+    openid = options.openid;
+    box_mac = options.box_mac;
     goods_list = [];
     page = 1;
-    self.setData({
-      category_id: 0,
-      keywords: ''
-    })
-    if (app.globalData.openid && app.globalData.openid != '') {
-      //注册用户
-      self.setData({
-        openid: app.globalData.openid
-      });
-      SavorUtils.User.isRegister(self); //判断用户是否注册
-
-      //商品列表
-      self.getGoodsList(0, 1, app.globalData.openid, 1);
-      //获取商品分类
-      //self.getCategoryList(app.globalData.openid);
-    } else {
-      app.openidCallback = openid => {
-        if (openid != '') {
-          self.setData({
-            openid: openid
-          });
-          SavorUtils.User.isRegister(self); //判断用户是否注册
-          //获取商品分类
-          //self.getCategoryList(openid);
-          //商品列表
-          self.getGoodsList(0, 1, openid, 1);
-        }
-      }
-    }
-
-    //轮播图
-    self.getBannerList();
-
-
+   //商品列表
+   self.getGoodsList(page);
   },
   isHaveCallBox: function (openid) {
     var that = this;
@@ -141,156 +70,23 @@ Page({
       }
     }, res => { }, { isShowLoading: false })
   },
-  //轮播图
-  getBannerList: function () {
-    var self = this;
-    utils.PostRequest(api_v_url + '/Adsposition/getAdspositionList', {
-      position: 1,
-    }, (data, headers, cookies, errMsg, statusCode) => {
-      var topBanners = self.data.topBanners;
-      topBanners.list = data.result
-      self.setData({
-        topBanners: topBanners,
-      })
-    });
-  },
-  //banner点击跳转
-  bannerGo: function (e) {
-    var linkcontent = e.currentTarget.dataset.linkcontent;
-    /*wx.navigateTo({
-      url: linkcontent 
-    })*/
-    wx.switchTab({
-      url: linkcontent
-    })
-  },
-  //输入关键词
-  inputSearch: function (e) {
-    var keywords = e.detail.value.replace(/\s+/g, '');
-    this.setData({
-      keywords: keywords
-    })
-  },
-  //搜索商品
-  searchGoods: function (e) {
-    var user_info = wx.getStorageSync("savor_user_info");
-    var openid = user_info.openid;
-    var keywords = this.data.keywords;
-    if (keywords == '') {
-      app.showToast('请输入搜索关键词');
-      return false;
-    }
-    wx.showLoading({
-      title: '搜索中',
-      mask: true,
-    })
-    console.log(keywords);
-    wx.navigateTo({
-      url: '/mall/pages/goods/search_result?openid=' + openid + '&keywords=' + keywords,
-      success: function (e) {
-        wx.hideLoading();
-      }
-    })
-  },
-  //商品分类
-  getCategoryList: function (openid) {
-    var that = this;
-    utils.PostRequest(api_v_url + '/category/categorylist', {}, (data, headers, cookies, errMsg, statusCode) => {
-      /*var category_list = data.result.category_list
-      var page_arr = that.data.page_arr;
-      var category_id = category_list[0].id;
-      for (var i = 0; i < category_list.length; i++) {
-        var id = category_list[i].id;
-        page_arr[id] = 1;
-      }*/
-      var category_id = 0;
-      that.getGoodsList(category_id, 1, openid, 1);
-      that.setData({
-        category_id: category_id,
-        page_arr: page_arr,
-        category_list: category_list,
-      })
-    });
-  },
+  
   //商品列表
-  getGoodsList: function (category_id, page, openid, action = 0) {
+  getGoodsList: function ( page) {
     var that = this;
-    utils.PostRequest(api_v_url + '/shop/goods', {
-      category_id: category_id,
-      openid: openid,
+    utils.PostRequest(api_v_url + '/shop/scenegift', {
       page: page,
-      action: action
+      pagesize:10
     }, (data, headers, cookies, errMsg, statusCode) => {
       that.setData({
         goods_list: data.result.datalist,
       })
-      /*if (typeof (goods_list[category_id]) != 'undefined') {
-        var rts = data.result.datalist
-        if (goods_list[category_id].length == rts.length) {
-
-        } else {
-          goods_list[category_id] = data.result.datalist;
-          that.setData({
-            goods_list: goods_list,
-          })
-        }
-      } else {
-        goods_list[category_id] = data.result.datalist;
-        that.setData({
-          goods_list: goods_list,
-        })
-      }*/
-
     }, res => { }, { isShowLoading: false });
   },
-  //选择分类
-  /*selectCate: function (e) {
-    var that = this;
-    var category_id = e.currentTarget.dataset.category_id;
-    var user_info = wx.getStorageSync(cache_key + 'user_info')
-    that.setData({
-      category_id: category_id
-    }, function () {
-      try {
-        that.switchCategoryTabBar(e);
-      } catch (error) {
-        console.error(error)
-      }
-    });
-    var page_arr = that.data.page_arr;
-    var select_page = 1;
-    for (let index in page_arr) {
-      if (category_id == index) {
-        select_page = page_arr[index];
-      }
-    }
-    if (typeof (goods_list[category_id]) == 'undefined') {
-      that.getGoodsList(category_id, select_page, user_info.openid);
-    }
-
-  },*/
+  
   loadMore: function (e) {
-    var that = this;
-    /*var category_id = that.data.category_id;
-    
-    var page_arr = that.data.page_arr;
-    var select_page = 1;
-    var user_info = wx.getStorageSync(cache_key + 'user_info')
-    for (let index in page_arr) {
-      if (index == category_id) {
-        select_page = page_arr[index] + 1;
-        page_arr[index] += 1;
-        break;
-      }
-    }
-    that.setData({
-      page_arr: page_arr,
-    })*/
-    var user_info = wx.getStorageSync(cache_key + 'user_info')
     page += 1;
-
-    var category_id = 0;
-    that.getGoodsList(category_id, page, user_info.openid)
+    this.getGoodsList(page)
   },
   //电视播放
   boxShow(e) {
@@ -303,10 +99,6 @@ Page({
       app.scanQrcode(pageid);
     } else {
       console.log(e);
-
-
-
-
 
       var forscreen_id = e.currentTarget.dataset.goods_id;
       var res_type = 2;
@@ -464,27 +256,9 @@ Page({
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-    /*let self = this;
-    self.tabBar = {
-      category: {
-        scrollViewWidth: 750
-      }
-    };
-    wx.createSelectorQuery().select('.tab-bar').boundingClientRect((rect) => {
-      self.tabBar.category.scrollViewWidth = Math.round(rect.width);
-    }).exec();*/
+    
   },
-  /*switchCategoryTabBar(e) {
-    let self = this;
-    let offsetLeft = e.currentTarget.offsetLeft;
-    wx.createSelectorQuery().select('.tab-bar .selected').fields({
-      size: true
-    }, function (res) {
-      self.setData({
-        scrollLeft: offsetLeft - (self.tabBar.category.scrollViewWidth - res.width) / 2
-      });
-    }).exec();
-  },*/
+  
 
   /**
    * 生命周期函数--监听页面显示
@@ -494,39 +268,8 @@ Page({
     var user_info = wx.getStorageSync("savor_user_info");
     //判断是否连接包间盒子
     that.isHaveCallBox(user_info.openid);
-    //购物车数量
-    that.getMallCartNums(user_info.openid);
-    var category_id = that.data.category_id;
-
-    var page_arr = that.data.page_arr;
-    if (page_arr.length > 0) {
-      var select_page = page_arr[category_id];
-      //
-      that.getGoodsList(category_id, select_page, user_info.openid, 1);
-    }
-
-    app.isRegister(user_info.openid, that);
   },
-  getMallCartNums: function (openid) {
-    var that = this;
-    var mall_cart_list = wx.getStorageSync(cache_key + 'mall_cart_' + openid, mall_cart_list);
-    if (mall_cart_list != '') {
-      var mall_cart_nums = 0
-      mall_cart_list = JSON.parse(mall_cart_list);
-      console.log(mall_cart_list);
-      for (let index in mall_cart_list) {
-        mall_cart_nums += Number(mall_cart_list[index].amount);
-      }
-      console.log(mall_cart_nums)
-      that.setData({
-        mall_cart_nums: mall_cart_nums
-      })
-    } else {
-      that.setData({
-        mall_cart_nums: 0
-      });
-    }
-  },
+  
   buyOne: function (e) {
     var that = this;
     var goods_info = that.data.goods_info;

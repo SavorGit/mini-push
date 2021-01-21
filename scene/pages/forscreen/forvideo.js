@@ -194,6 +194,15 @@ Page({
         
         
       },fail:function(e){
+        var video_list = that.data.video_list;
+        for(let i in video_list){
+          if(video_list[i].img_url==''){
+            video_list.splice(i,1)
+          }
+        }
+        that.setData({
+          video_list:video_list
+        })
         wx.hideLoading();
         app.showToast('视频上传失败,请重试')
         that.setData({
