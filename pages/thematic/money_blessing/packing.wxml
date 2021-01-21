@@ -26,7 +26,7 @@
 					<view class="flex-row-stretch-flex_start">
 						<label class='RowLabel'>祝</label>
 						<view class='right'>
-							<input name="surname" class='input surname' maxlength="1" type='text' placeholder=''></input>
+							<input name="surname" class='input surname' maxlength="6" type='text' placeholder=''></input>
 							<radio-group bindchange="sexChange">
 								<radio value='1' checked='true'>先生</radio>
 								<radio value='2'>女士</radio>
