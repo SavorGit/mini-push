@@ -344,7 +344,7 @@ Page({
     var box_mac = e.currentTarget.dataset.boxmac;
     var linkcontent = e.currentTarget.dataset.linkcontent;
     var box_id  = e.currentTarget.dataset.box_id;
-
+    var id = e.currentTarget.dataset.id;
     if (box_mac == '') {
       app.scanQrcode(pageid);
     } else {
@@ -355,16 +355,18 @@ Page({
         url: linkcontent + '?box_mac=' + box_mac + '&openid=' + openid + '&box_id='+box_id+'&game_id=2'
       })
     }
-    mta.Event.stat('clickTopAds', { 'linktype': app.globalData.link_type, "box_mac": box_mac })
+    mta.Event.stat('clickTopAds', { 'linktype': app.globalData.link_type, "box_mac": box_mac,'id':id })
     mta.Event.stat('gotoHdGame', { 'linktype': app.globalData.link_type, "box_mac": box_mac })
   },
   //本小程序内跳转
   goToPage:function(e){
     var openid = e.currentTarget.dataset.openid;
     var linkcontent = e.currentTarget.dataset.linkcontent;
+    var id = e.currentTarget.dataset.id;
     wx.navigateTo({
       url: linkcontent+'&openid='+openid, 
     })
+    mta.Event.stat('clickTopAds', { 'linktype': app.globalData.link_type, "box_mac": box_mac,'id':id })
   },
   //断开连接
   breakLink: function (e) {

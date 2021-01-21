@@ -14,6 +14,7 @@ var oss_upload_url = app.globalData.oss_upload_url;
 var mobile_brand = app.globalData.mobile_brand;
 var mobile_model = app.globalData.mobile_model;
 var pos_id = 0;   //当前播放的文件图片索引
+var rec_action;
 Page({
 
   /**
@@ -43,6 +44,7 @@ Page({
       is_open_simple: is_open_simple
     })
     if(typeof(options.file_id)!='undefined'){
+      rec_action = 32;
       var file_id = options.file_id
       util.PostRequest(api_v_url + '/file/getFileForscreenInfo', {
         openid: openid,
@@ -61,6 +63,7 @@ Page({
       })
 
     }else {
+      rec_action = 31;
       util.PostRequest(api_v_url + '/index/getConfig', {
         page: 1,
         pagesize: 6
@@ -314,7 +317,7 @@ Page({
           forscreen_id: forscreen_id,
             openid: openid,
             box_mac: box_mac,
-            action: 31,
+            action: rec_action,
             resource_type: 1,
             mobile_brand: mobile_brand,
             mobile_model: mobile_model,
@@ -400,7 +403,7 @@ Page({
           forscreen_id: forscreen_id,
           openid: openid,
           box_mac: box_mac,
-          action: 31,
+          action: rec_action,
           resource_type: 1,
           mobile_brand: mobile_brand,
           mobile_model: mobile_model,
@@ -448,7 +451,7 @@ Page({
         forscreen_id: forscreen_id,
         openid: openid,
         box_mac: box_mac,
-        action: 31,
+        action: rec_action,
         resource_type: 1,
         mobile_brand: mobile_brand,
         mobile_model: mobile_model,
@@ -709,7 +712,7 @@ Page({
           forscreen_id: forscreen_id,
           openid: openid,
           box_mac: box_mac,
-          action: 31,
+          action: rec_action,
           resource_type: 1,
           mobile_brand: mobile_brand,
           mobile_model: mobile_model,

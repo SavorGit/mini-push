@@ -436,12 +436,12 @@ Page({
       msg: netty_info,
     }, (data, headers, cookies, errMsg, statusCode) => {
       app.showToast('投屏成功',2000,'success')
-      var action = 4;
+      var action = 48;
       var imgs = '["'+images[keys].file_path+'"]';
       var quality_type = 3;
       var resource_id = images[keys].img_id;
       var resource_size  =img_info.resource_size;
-      var resource_type = 2;
+      var resource_type = 1;
       that.recordForscreen(forscreen_id,action,imgs,quality_type,resource_id,resource_size,resource_type);
     })
 
@@ -475,7 +475,7 @@ Page({
       msg: netty_info,
     }, (data, headers, cookies, errMsg, statusCode) => {
       app.showToast('投屏成功',2000,'success')
-      var action =2;
+      var action =49;
       var imgs = '["'+videos[keys].file_path+'"]';
       var quality_type = 0;
       var resource_id = videos[keys].video_id;
