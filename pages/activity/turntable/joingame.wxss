@@ -1,0 +1,45 @@
+/* pages/activity/turntable/joingame.wxss */
+
+/* ================================== 加入游戏 ================================== */
+
+.container {
+  margin-top: -1rpx;
+  height: calc(100vw * 1.781333333333333);
+}
+
+.join_game {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.join_game_bg {
+  margin: 0;
+  padding: 0;
+}
+
+.join_game > .code {
+  margin-top: calc((100vw * 1.781333333333333 - 220rpx) * -1);
+  width: 405rpx;
+  height: 405rpx;
+}
+
+button {
+  margin: 0;
+  padding: 0;
+  width: 490rpx;
+  height: 88rpx;
+  background: transparent;
+  border: none;
+  display: flex;
+  border-radius: 28rpx;
+}
+
+button > image {
+  margin: 0;
+  padding: 0;
+  width: 490rpx;
+  height: 88rpx;
+}
