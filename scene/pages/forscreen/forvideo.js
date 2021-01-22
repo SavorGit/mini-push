@@ -153,7 +153,7 @@ Page({
         var tmp_info = {};
         tmp_info.name = video_url;
         tmp_info.oss_file_path = "forscreen/resource/" + video_url,
-        tmp_info.img_url = "forscreen/resource/" + video_url+'?x-oss-process=video/snapshot,t_1000,f_jpg,w_450,m_fast';
+        tmp_info.img_url = "forscreen/resource/" + video_url+'?x-oss-process=video/snapshot,t_3000,f_jpg,w_450,m_fast';
         tmp_info.percent  = 0;
         tmp_info.file_id = 0;
         tmp_info.resource_size = video_size;
