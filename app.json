@@ -92,7 +92,8 @@
       "root": "games",
       "pages": [
         "pages/gamelist",
-        "pages/activity/din_dash"
+        "pages/activity/din_dash",
+        "pages/activity/luckyturn/index"
       ]
     },
     {
