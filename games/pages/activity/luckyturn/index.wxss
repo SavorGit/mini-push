@@ -1,1 +1,130 @@
 /* games/pages/activity/luckyturn/index.wxss */
+/**
+ * 【游戏】 幸运转转转
+ */
+
+
+.container {
+  background-color: #E74231;
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+}
+
+.container>.bottom {
+  width: 100%;
+  padding: 850rpx 0 20rpx;
+}
+
+.container>.bottom>.buttons {
+  width: 100%;
+  padding: 20rpx 0;
+}
+
+.container>.bottom>.buttons>.btn {
+  width: 400rpx;
+  height: 130rpx;
+  line-height: 120rpx;
+  text-align: center;
+  color: #FFFFFF;
+  font-size: 48rpx;
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  background-image: url(https://oss.littlehotspot.com/WeChat/MiniProgram/images/luckyturn/bg_btn.png);
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+.container>.bottom>.progress {
+  width: 100%;
+  padding: 20rpx;
+}
+
+.container>.bottom>.progress>.item {
+  font-size: 24rpx;
+  color: #FFFFFF;
+}
+
+.container>.bottom>.progress>.item.complete {
+  color: #F99B06;
+}
+
+
+/* ============================== 配置奖项 ============================== */
+.container.first {
+  background-image: url(https://oss.littlehotspot.com/WeChat/MiniProgram/images/luckyturn/bg_first.jpg);
+}
+
+
+/* ============================== 发起抽奖 ============================== */
+.container.config {
+  background-image: url(https://oss.littlehotspot.com/WeChat/MiniProgram/images/luckyturn/bg_config.jpg);
+}
+
+.container.config>.main {
+  width: 100%;
+  padding: 440rpx 0 20rpx;
+}
+
+.container.config>.main>.pic {
+  width: 400rpx;
+  height: 280rpx;
+  margin: 10rpx 0;
+  border-radius: 10rpx;
+  background-color: #FFFFFF;
+}
+
+.container.config>.main>.pic>.icon {
+  font-size: 64rpx;
+}
+
+.container.config>.main>.pic>.label {
+  font-size: 28rpx;
+}
+
+.container.config>.main>.field {
+  width: 390rpx;
+  padding: 5rpx;
+  margin: 10rpx 0;
+  border-radius: 10rpx;
+  background-color: #FFFFFF;
+}
+
+.container.config>.main>.field>.label {
+  width: 120rpx;
+  text-align: center;
+  font-size: 28rpx;
+  color: #333333;
+  border-right: 3rpx solid #EDEDED;
+}
+
+.container.config>.main>.field>.input {
+  width: calc(100% - 125rpx);
+  font-size: 28rpx;
+}
+
+.container.config>.bottom {
+  padding-top: 20rpx;
+}
+
+
+/* ============================== 好友加入 ============================== */
+.container.waiting-join {
+  background-image: url(https://oss.littlehotspot.com/WeChat/MiniProgram/images/luckyturn/bg_waiting_join.jpg);
+}
+
+
+/* ============================== 开始抽奖 ============================== */
+.container.waiting-lottery {
+  background-image: url(https://oss.littlehotspot.com/WeChat/MiniProgram/images/luckyturn/bg_waiting_lottery.jpg);
+}
+
+.container.waiting-lottery>.bottom>.buttons>.btn {
+  background-image: none;
+}
+
+
+/* ============================== 抽奖结束 ============================== */
+.container.finish {
+  background-image: url(https://oss.littlehotspot.com/WeChat/MiniProgram/images/luckyturn/bg_finish.jpg);
+}

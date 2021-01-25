@@ -1,2 +1,101 @@
 <!--games/pages/activity/luckyturn/index.wxml-->
-<text>games/pages/activity/luckyturn/index.wxml</text>
+<!--
+ | 【游戏】 幸运转转转
+ |-->
+
+
+<import src="/pages/template/commons" />
+<template is="navigationBarForTwoLevel" data='{{statusBarHeight: statusBarHeight,titleText:"幸运转转转"}}' />
+
+<!-- 配置奖项 -->
+<view wx:if='{{a}}' class='container first' style='height:calc(100vh - {{46 + statusBarHeight + SystemInfo.screenBottomSpace}}px);'>
+	<view class="bottom flex-column-center-center">
+		<view class="buttons flex-row-center-center">
+			<view class="btn">配置奖项</view>
+		</view>
+		<view class="progress flex-row-center-center">
+			<view class="item complete">配置奖项</view>
+			<view class="item">——发起抽奖</view>
+			<view class="item">——好友加入</view>
+			<view class="item">——开始抽奖</view>
+			<view class="item">——抽奖结束</view>
+		</view>
+	</view>
+</view>
+
+<!-- 发起抽奖 -->
+<view wx:if='{{b}}' class='container config' style='height:calc(100vh - {{46 + statusBarHeight + SystemInfo.screenBottomSpace}}px);'>
+	<view class="main flex-column-center-center">
+		<!-- 
+		<view class="pic flex-column-center-center">
+			<view class="icon theme-font5">+</view>
+			<view class="label theme-font5">上传奖品图</view>
+		</view> -->
+		<image class="pic" mode="aspectFill" src="https://oss.littlehotspot.com/WeChat/resource/default.jpg"></image>
+		<view class="field flex-row-center-flex_start">
+			<view class="label">奖品名称</view>
+			<input class="input"></input>
+		</view>
+	</view>
+	<view class="bottom flex-column-center-center">
+		<view class="buttons flex-row-center-center">
+			<view class="btn">发起抽奖</view>
+		</view>
+		<view class="progress flex-row-center-center">
+			<view class="item complete">配置奖项</view>
+			<view class="item complete">——发起抽奖</view>
+			<view class="item">——好友加入</view>
+			<view class="item">——开始抽奖</view>
+			<view class="item">——抽奖结束</view>
+		</view>
+	</view>
+</view>
+
+<!-- 好友加入 -->
+<view wx:if='{{c}}' class='container waiting-join' style='height:calc(100vh - {{46 + statusBarHeight + SystemInfo.screenBottomSpace}}px);'>
+	<view class="bottom flex-column-center-center">
+		<view class="buttons flex-row-center-center">
+			<view class="btn">开始抽奖</view>
+		</view>
+		<view class="progress flex-row-center-center">
+			<view class="item complete">配置奖项</view>
+			<view class="item complete">——发起抽奖</view>
+			<view class="item complete">——好友加入</view>
+			<view class="item">——开始抽奖</view>
+			<view class="item">——抽奖结束</view>
+		</view>
+	</view>
+</view>
+
+<!-- 开始抽奖 -->
+<view wx:if='{{1==1}}' class='container waiting-lottery' style='height:calc(100vh - {{46 + statusBarHeight + SystemInfo.screenBottomSpace}}px);'>
+	<view class="bottom flex-column-center-center">
+		<view class="buttons flex-row-center-center">
+			<view class="btn"></view>
+		</view>
+		<view class="progress flex-row-center-center">
+			<view class="item complete">配置奖项</view>
+			<view class="item complete">——发起抽奖</view>
+			<view class="item complete">——好友加入</view>
+			<view class="item complete">——开始抽奖</view>
+			<view class="item">——抽奖结束</view>
+		</view>
+	</view>
+</view>
+
+<!-- 抽奖结束 -->
+<view wx:if='{{e}}' class='container finish' style='height:calc(100vh - {{46 + statusBarHeight + SystemInfo.screenBottomSpace}}px);'>
+	<view class="bottom flex-column-center-center">
+		<view class="buttons flex-row-center-center">
+			<view class="btn reset">重新配置游戏</view>
+			<view class="btn restart">再来一局</view>
+		</view>
+		<view class="progress flex-row-center-center">
+			<view class="item complete">配置奖项</view>
+			<view class="item complete">——发起抽奖</view>
+			<view class="item complete">——好友加入</view>
+			<view class="item complete">——开始抽奖</view>
+			<view class="item complete">——抽奖结束</view>
+		</view>
+	</view>
+</view>

@@ -1,10 +1,17 @@
 // games/pages/activity/luckyturn/index.js
+/**
+ * 【游戏】 幸运转转转
+ */
+
+
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
+    statusBarHeight: getApp().globalData.statusBarHeight,
+    SystemInfo: getApp().SystemInfo
 
   },
 
