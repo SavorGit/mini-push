@@ -14,6 +14,7 @@ var oss_upload_url = app.globalData.oss_upload_url;
 var mobile_brand = app.globalData.mobile_brand;
 var mobile_model = app.globalData.mobile_model;
 var pos_id = 0;   //当前播放的文件图片索引
+var rec_action;
 Page({
 
   /**
@@ -42,66 +43,87 @@ Page({
       box_mac:box_mac,
       is_open_simple: is_open_simple
     })
-    util.PostRequest(api_v_url + '/index/getConfig', {
-      page: 1,
-      pagesize: 6
-    }, (data, headers, cookies, errMsg, statusCode) => {
-      var file_exts = data.result.file_exts;
-        var file_max_size = data.result.file_max_size;
-        var polling_time = data.result.polling_time;
-        //console.log(rst);
-        wx.chooseMessageFile({
-          count: 1,
-          type: 'file',
-          extension: file_exts,
-          success(res) {
-            // tempFilePath可以作为img标签的src属性显示图片
-            //console.log(res);
-            
-            /*that.setData({
-              hiddens:false,
-            })*/
-            var tempFilePaths = res.tempFilePaths
-            var file_path = res.tempFiles[0].path;
-            var file_size = res.tempFiles[0].size;
-            var file_name = res.tempFiles[0].name;
-            
-            if (file_size >= file_max_size) {//如果文件超过最大配置大小 不可投屏
-              /*that.setData({
-                hiddens:true,
-              })*/
-              var show_max_file_size = file_max_size / (1024 * 1024)
+    if(typeof(options.file_id)!='undefined'){
+      rec_action = 32;
+      var file_id = options.file_id
+      util.PostRequest(api_v_url + '/file/getFileForscreenInfo', {
+        openid: openid,
+        file_id: file_id
+      }, (data, headers, cookies, errMsg, statusCode) => {
+        var forscreen_id = (new Date()).valueOf();
+        that.setData({
+          file_imgs: data.result.imgs,
+          img_nums: data.result.img_num,
+          oss_host: data.result.oss_host,
+          oss_suffix: data.result.oss_suffix,
+          forscreen_id:forscreen_id
+        })
+
+        forscreenFirstPic(data.result.imgs,forscreen_id);
+      })
+
+    }else {
+      rec_action = 31;
+      util.PostRequest(api_v_url + '/index/getConfig', {
+        page: 1,
+        pagesize: 6
+      }, (data, headers, cookies, errMsg, statusCode) => {
+        var file_exts = data.result.file_exts;
+          var file_max_size = data.result.file_max_size;
+          var polling_time = data.result.polling_time;
+          //console.log(rst);
+          wx.chooseMessageFile({
+            count: 1,
+            type: 'file',
+            extension: file_exts,
+            success(res) {
+              // tempFilePath可以作为img标签的src属性显示图片
+              //console.log(res);
               
-              wx.switchTab({
-                url: '/pages/index/index',
+              /*that.setData({
+                hiddens:false,
+              })*/
+              var tempFilePaths = res.tempFilePaths
+              var file_path = res.tempFiles[0].path;
+              var file_size = res.tempFiles[0].size;
+              var file_name = res.tempFiles[0].name;
+              
+              if (file_size >= file_max_size) {//如果文件超过最大配置大小 不可投屏
+                /*that.setData({
+                  hiddens:true,
+                })*/
+                var show_max_file_size = file_max_size / (1024 * 1024)
+                
+                wx.switchTab({
+                  url: '/pages/index/index',
+                })
+                wx.showToast({
+                  title: '投屏文件不可以超过' + show_max_file_size + 'M',
+                  icon: 'none',
+                  duration: 2000
+                });
+              } else {//如果文件未超过设置的最大值
+                 wx.request({
+                  url: api_v_url + '/Index/getOssParams',
+                  headers: {
+                    'Content-Type': 'application/json'
+                  },
+                  success: function (rest) {
+                    policy = rest.data.policy;
+                    signature = rest.data.signature;
+                    uploadOssFile(policy, signature, file_path,openid,box_mac,file_name,file_size,polling_time,that);
+                  }
+                });
+              }
+  
+            }, fail: function (res) {
+              wx.navigateBack({
+                delta: 1,
               })
-              wx.showToast({
-                title: '投屏文件不可以超过' + show_max_file_size + 'M',
-                icon: 'none',
-                duration: 2000
-              });
-            } else {//如果文件未超过设置的最大值
-               wx.request({
-                url: api_v_url + '/Index/getOssParams',
-                headers: {
-                  'Content-Type': 'application/json'
-                },
-                success: function (rest) {
-                  policy = rest.data.policy;
-                  signature = rest.data.signature;
-                  uploadOssFile(policy, signature, file_path,openid,box_mac,file_name,file_size,polling_time,that);
-                }
-              });
             }
-
-          }, fail: function (res) {
-            wx.navigateBack({
-              delta: 1,
-            })
-          }
-        });
-    },res=>{},{ isShowLoading: false })
-
+          });
+      },res=>{},{ isShowLoading: false })
+    }
     
 
     function uploadOssFile(policy, signature, file_path, openid, box_mac, file_name, file_size, polling_time, that){
@@ -295,7 +317,7 @@ Page({
           forscreen_id: forscreen_id,
             openid: openid,
             box_mac: box_mac,
-            action: 31,
+            action: rec_action,
             resource_type: 1,
             mobile_brand: mobile_brand,
             mobile_model: mobile_model,
@@ -381,7 +403,7 @@ Page({
           forscreen_id: forscreen_id,
           openid: openid,
           box_mac: box_mac,
-          action: 31,
+          action: rec_action,
           resource_type: 1,
           mobile_brand: mobile_brand,
           mobile_model: mobile_model,
@@ -429,7 +451,7 @@ Page({
         forscreen_id: forscreen_id,
         openid: openid,
         box_mac: box_mac,
-        action: 31,
+        action: rec_action,
         resource_type: 1,
         mobile_brand: mobile_brand,
         mobile_model: mobile_model,
@@ -690,7 +712,7 @@ Page({
           forscreen_id: forscreen_id,
           openid: openid,
           box_mac: box_mac,
-          action: 31,
+          action: rec_action,
           resource_type: 1,
           mobile_brand: mobile_brand,
           mobile_model: mobile_model,

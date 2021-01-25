@@ -223,7 +223,7 @@
   font-size: 36rpx;
 }
 
-/* ==================================== 媒体面板 ==================================== */
+/* ==================================== 媒体面板 ==================================== 
 .panel.media {
   padding: 20rpx 35rpx;
 }
@@ -261,7 +261,7 @@
   text-align: center;
   font-size: 28rpx;
 }
-
+*/
 /* ==================================== 欢迎词面板 ==================================== */
 .panel.welcome>.body>.item {
   width: calc(100% - 40rpx);
@@ -293,29 +293,41 @@
 }
 
 /* ==================================== 分享文件面板 ==================================== */
-.panel.share-file>.body>.item {
+.panel.share-file>.body>.item,
+.panel.launch-file>.body>.item,
+.panel.launch-video>.body>.item {
   width: calc(100% - 70rpx);
   height: 40rpx;
   padding: 20rpx 20rpx 20rpx 50rpx;
   border-bottom: 3rpx solid #EDEDED;
 }
 
-.panel.share-file>.body>.item:last-child {
+.panel.share-file>.body>.item:last-child,
+.panel.launch-file>.body>.item:last-child,
+.panel.launch-video>.body>.item:last-child {
   border-bottom: 0;
 }
 
-.panel.share-file>.body>.item.add {
+.panel.share-file>.body>.item.add,
+.panel.launch-file>.body>.item.add,
+.panel.launch-video>.body>.item.add,
+.panel.launch-picture>.body>.item.add {
   width: calc(100% - 40rpx);
   height: 72rpx;
   padding: 20rpx;
 }
 
-.panel.share-file>.body>.item>.name {
+.panel.share-file>.body>.item>.name,
+.panel.launch-file>.body>.item>.name,
+.panel.launch-video>.body>.item>.name {
   width: calc(100% - 150rpx);
   font-size: 28rpx;
 }
 
-.panel.share-file>.body>.item>.btn {
+.panel.share-file>.body>.item>.btn,
+.panel.launch-file>.body>.item>.btn,
+.panel.launch-video>.body>.item>.btn,
+.panel.launch-picture>.body>.item>.btn {
   width: 150rpx;
   height: 50rpx;
   line-height: 50rpx;
@@ -327,10 +339,82 @@
   margin: 0;
 }
 
-.panel.share-file>.body>.item.add>.btn {
+.panel.share-file>.body>.item.add>.btn,
+.panel.launch-file>.body>.item.add>.btn,
+.panel.launch-video>.body>.item.add>.btn,
+.panel.launch-picture>.body>.item.add>.btn {
   width: 180rpx;
   height: 60rpx;
   line-height: 60rpx;
+}
+
+
+/* ==================================== 视频投屏面板 ==================================== */
+.panel.launch-video>.body {
+  width: calc(100% - 70rpx);
+  padding: 20rpx 30rpx 25rpx 40rpx;
+}
+
+.panel.launch-video>.body>.item {
+  width: calc(50% - 20rpx);
+  height: auto;
+  margin-top: 25rpx;
+  margin-left: 25rpx;
+  padding: 0;
+  border: 0;
+  display: inline-flex;
+  box-sizing: border-box;
+}
+
+.panel.launch-video>.body>.item:nth-child(2n + 1) {
+  margin-left: 0;
+}
+
+.panel.launch-video>.body>.item:nth-child(-n + 2) {
+  margin-top: 0;
+}
+
+.panel.launch-video>.body>.item>.pic {
+  width: 282rpx;
+  height: 176rpx;
+  background-color: #EEEEEE;
+  border-radius: 5rpx;
+}
+
+.panel.launch-video>.body>.item>.btn.launch {
+  margin-top: 10rpx;
+}
+
+/* ==================================== 图片投屏面板 ==================================== */
+.panel.launch-picture>.body {
+  width: calc(100% - 15rpx);
+  padding: 20rpx 0 20rpx 15rpx;
+}
+
+.panel.launch-picture>.body>.item {
+  width: calc(33.33% - 15rpx);
+  height: auto;
+  margin-top: 15rpx;
+  margin-left: 15rpx;
+  padding: 0;
+  border: 0;
+  display: inline-flex;
+  box-sizing: border-box;
+}
+
+.panel.launch-picture>.body>.item:nth-child(3n + 1) {
+  margin-left: 0;
+}
+
+.panel.launch-picture>.body>.item:nth-child(-n + 3) {
+  margin-top: 0;
+}
+
+.panel.launch-picture>.body>.item>.pic {
+  width: 200rpx;
+  height: 200rpx;
+  background-color: #EEEEEE;
+  border-radius: 5rpx;
 }
 
 

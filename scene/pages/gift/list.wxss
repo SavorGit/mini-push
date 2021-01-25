@@ -1,0 +1,7 @@
+/* scene/pages/gift/list.wxss */
+/**
+ * 【场景】商务宴请 - 礼品列表
+ */
+
+
+@import "/pages/shopping/index.wxss";

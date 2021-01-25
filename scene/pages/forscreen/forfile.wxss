@@ -1,0 +1,7 @@
+/* scene/pages/forscreen/forfile.wxss */
+/**
+ * 【场景】商务宴请 - 文件投屏
+ */
+
+
+@import "/scene/pages/business/files/sharefile.wxss";

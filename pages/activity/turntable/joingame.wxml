@@ -1,0 +1,15 @@
+<!--pages/activity/turntable/joingame.wxml-->
+<import src="/pages/template/commons" />
+<template is="navigationBarForTwoLevel" data='{{statusBarHeight: statusBarHeight,titleText:"热点投屏"}}' />
+
+<!-- ================================== 加入游戏 ================================== -->
+<view class="container">
+  <view class='join_game full_width full_height'>
+    <image class='join_game_bg full_width full_height' src='http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/games/drink/game_bg_join.png' mode='aspectFit'></image>
+    <image class='code' src='{{gamecode}}'></image>
+    <button style='margin-top: 450rpx;' wx:if="{{canIUse}}" open-type="getUserInfo" bindgetuserinfo="joingame" data-box_mac='{{box_mac}}' data-openid='{{openid}}' data-activity_id='{{activity_id}}'>
+      <image src='http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/games/drink/btn_game_join.png'></image>
+    </button>
+    <view wx:else>请升级微信版本</view>
+  </view>
+</view>

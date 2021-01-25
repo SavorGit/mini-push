@@ -1,0 +1,91 @@
+<!--scene/pages/gift/list.wxml-->
+<!--
+ | 【场景】商务宴请 - 礼品列表
+ |-->
+
+
+<import src="/pages/template/commons" />
+<template is="navigationBarForTwoLevel" data='{{statusBarHeight: statusBarHeight,titleText:"礼品列表"}}' />
+
+<scroll-view class='container theme-container' style='height: calc(100vh - {{statusBarHeight + 46}}px);' scroll-y="true" scroll-with-animation="true" bindscrolltolower="loadMore">
+	<view class="page flex-column-center-flex_start">
+
+		<!-- 主面板 -->
+		<view class="main-panel flex-column-center-flex_start">
+			<view class="tab-body flex-column-center-flex_start">
+				<view class="list flex-column-center-flex_start">
+					<view class="item flex-column-center-flex_start theme-panel" wx:for="{{goods_list}}" wx:key="key" wx:for-item="bean" wx:for-index="index">
+						<view class="top flex-column-flex_start-flex_start" bindtap="gotoDetail" data-goods_id="{{bean.id}}" data-box_mac="{{box_mac}}" data-type="{{bean.type}}">
+							<image class="pic" mode="aspectFill" src="{{bean.img_url}}"></image>
+							<view class="marker theme-rad-panel" wx:if="{{bean.type==10}}">优选</view>
+						</view>
+						<view class="bottom flex-column-flex_start-flex_start">
+							<view class="name two-line-overflow">{{bean.name}}</view>
+							<view class="bottom flex-row-flex_start-space_between">
+								<view class="left flex-row-flex_end-flex_start">
+									<view class="price theme-font5">￥<text>{{bean.price}}</text></view>
+									<view class="price market theme-font3" wx:if="{{bean.line_price>0}}">￥{{bean.line_price}}</view>
+								</view>
+								<view class="right flex-row-center-flex_end">
+									<image wx:if="{{bean.is_tvdemand==1}}" class="btn orange" aria-hidden="true" mode="aspectFit" src="/images/icon2/F68855_interact.png" data-index="{{index}}" data-goods_id="{{bean.id}}" data-name="{{bean.name}}" data-vediourl="{{bean.tx_url}}" data-boxmac="{{box_mac}}" data-openid="{{openid}}" data-duration="{{bean.duration}}" data-hotel_info="{{hotel_info}}" data-forscreen_url="{{bean.forscreen_url}}" data-resource_size="{{bean.resource_size}}" data-qrcode_url="{{bean.qrcode_url}}" bindtap='boxShow'></image>
+									<view wx:if="{{bean.type==10}}" class="btn red fa fa-sign-in theme-font5" aria-hidden="true" bindtap="gotoDetail" data-goods_id="{{bean.id}}" data-box_mac="{{box_mac}}" data-type="{{bean.type}}"></view>
+									<image wx:else class="btn red" aria-hidden="true" mode="aspectFit" bindtap="openBuyGoodsPopWindow" data-goods_info="{{bean}}" data-type="2" data-goods_id="{{bean.id}}" src="/images/icon2/F44444_cart.png"></image>
+								</view>
+							</view>
+						</view>
+					</view>
+				</view>
+			</view>
+		</view>
+	</view>
+</scroll-view>
+
+
+
+
+<!-- 购买商品弹窗 -->
+<block wx:if="{{showBuyGoodsPopWindow}}">
+	<view class="mask" bindtap="closeBuyGoodsPopWindow" style="bottom:{{SystemInfo.screenBottomSpace}}px;"></view>
+	<view class="buy-goods-window theme-panel">
+		<view class="top flex-row-flex_end-space_between">
+			<image class="pic" mode="aspectFill" src="{{goods_info.img_url}}" wx:if="{{goods_info.gtype==1}}"></image>
+			<image class="pic" mode="aspectFill" src="{{goods_info.model_img}}" wx:else></image>
+			<view class="center flex-column-flex_start-space_between">
+				<view class="name one-line-overflow">{{goods_info.name}}</view>
+				<view class="price one-line-overflow theme-font5">￥{{goods_info.price}}</view>
+			</view>
+			<view class="right flex-column-center-flex_start">
+				<image class="btn" src="/images/icon2/ededed_close.png" bindtap="closeBuyGoodsPopWindow"></image>
+			</view>
+		</view>
+		<scroll-view class="middle flex-column-flex_start-space_between" scroll-y="true" scroll-with-animation="true">
+			<view class="specs-panel" wx:for="{{goods_info.attrs}}" wx:key="key" wx:for-item="bean" wx:for-index="index">
+				<view class="title-bar">
+					<view class="title">{{bean.name}}</view>
+				</view>
+				<view class="body flex-row-center-flex_start">
+					<view class="specs-group">
+						<block wx:for="{{bean.attrs}}" wx:key="kk" wx:for-item="item" wx:for-index="idx">
+							<view class="specs selected" wx:if="{{item.is_select==1 && item.is_disable==0}}">{{item.name}}</view>
+							<view class="specs theme-button-000000-EDF0F2" wx:if="{{item.is_select==0 && item.is_disable==0}}" bindtap="selectModel" data-index="{{index}}" data-idx="{{idx}}">{{item.name}}</view>
+							<view class="specs theme-button-none" wx:if="{{item.is_disable==1}}">{{item.name}}</view>
+						</block>
+					</view>
+				</view>
+			</view>
+			<view class="count flex-row-center-space_between">
+				<view class="label">购买数量：</view>
+				<view class="value flex-row-center-space_between">
+					<view class="btn" bindtap="cutNum">-</view>
+					<input value="{{goods_info.amount}}" disabled="true"></input>
+					<view class="btn" bindtap="addNum">+</view>
+				</view>
+			</view>
+			<view class="stock one-line-overflow theme-font3">剩余{{goods_info.stock_num}}件</view>
+		</scroll-view>
+		<view class="bottom flex-row-center-space_between">
+			<view class="btn theme-button-orange" bindtap="addMallCart">加入购物车</view>
+			<view class="btn theme-button-red" bindtap="buyOne">立即购买</view>
+		</view>
+	</view>
+</block>

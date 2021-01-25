@@ -234,7 +234,6 @@ Page({
       hiddens: false,
     })
     //发送电视红包
-    
     wx.request({
       url: api_v_url+'/redpacket/sendTvbonus',
       header: {

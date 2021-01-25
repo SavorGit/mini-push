@@ -75,8 +75,8 @@
 }
 
 .item>.inner>.file-cover {
-  width: 270rpx;
-  height: 270rpx;
+  width: 160rpx;
+  height: 160rpx;
   border-radius: 10rpx;
   vertical-align: middle;
 }
@@ -117,6 +117,14 @@
   border-radius: 8rpx;
   border: 3rpx solid rgba(0, 0, 0, 0.15);
   background-color: rgba(0, 0, 0, 0.02);
+}
+
+.item.add>button.inner {
+  line-height: 40rpx;
+  margin: 30rpx 0 0;
+  padding: 0;
+  color: inherit;
+  font-size: inherit;
 }
 
 .item.add>.inner>.icon {

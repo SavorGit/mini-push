@@ -1,0 +1,77 @@
+<!--scene/pages/forscreen/forvideo.wxml-->
+<!--
+ | 【场景】商务宴请 - 视频投屏
+ |-->
+
+
+<import src="/pages/template/commons" />
+<template is="navigationBarForTwoLevel" data='{{statusBarHeight: statusBarHeight,titleText:"投屏视频"}}' />
+
+<view class='container viewer theme-container' style='height:calc(100vh - {{46 + statusBarHeight + SystemInfo.screenBottomSpace}}px);'>
+	<view class="page">
+
+		<scroll-view class="body" scroll-y="true" scroll-with-animation="true">
+			<view class="wrapper flex-column-center-flex_start">
+				<view class="part flex-row-flex_start-flex_start">
+					<view class="label">投屏视频</view>
+					<view class="value">
+
+						<view class="item flex-column-flex_start-flex_start" wx:for="{{video_list}}" wx:key="key" wx:for-item="bean" wx:for-index="index" >
+							<block wx:if="{{bean.percent==0}}">
+								<view class="inner flex-column-center-flex_start" >
+									<image class="file-cover" mode="aspectFill" src="{{oss_url}}/{{bean.img_url}}"></image>
+									<view class="filename two-line-overflow">{{bean.name}}</view>
+								</view>
+								<view class="btn del fa fa-times theme-button-orange2" aria-hidden="true" bindtap="delVideo" data-keys="{{index}}" data-video_id="{{bean.file_id}}"></view>
+							</block>
+							<block wx:else>
+								<view class="inner flex-column-center-flex_start">
+								<view class="progress flex-column-center-center theme-font-000000" aria-hidden="true"></view>
+								<view class="filename two-line-overflow">{{bean.name}}</view>
+							</view>
+							</block>
+						</view>
+						
+						<!-- <view class="item flex-column-flex_start-flex_start">
+							<view class="inner flex-column-center-flex_start">
+								<image class="file-cover" mode="aspectFill" src="https://oss.littlehotspot.com/WeChat/resource/default.jpg"></image>
+								<view class="filename two-line-overflow">xxxxxxx.pdf</view>
+							</view>
+							<view class="btn del fa fa-times theme-button-orange2" aria-hidden="true"></view>
+						</view>
+						<view class="item flex-column-flex_start-flex_start">
+							<view class="inner flex-column-center-flex_start">
+								<image class="file-cover" mode="aspectFill" src="https://oss.littlehotspot.com/WeChat/resource/default.jpg"></image>
+								<view class="filename two-line-overflow">xxxxxxx.pdf</view>
+							</view>
+							<view class="btn del fa fa-times theme-button-orange2" aria-hidden="true"></view>
+						</view>
+						<view class="item flex-column-flex_start-flex_start">
+							<view class="inner flex-column-center-flex_start">
+								<view class="progress flex-column-center-center theme-font-000000" aria-hidden="true">59%</view>
+								<view class="filename two-line-overflow">xxxxxxx.pdf</view>
+							</view>
+						</view>
+						<view class="item flex-column-flex_start-flex_start">
+							<view class="inner flex-column-center-flex_start">
+								<image class="file-cover" mode="aspectFill" src="https://oss.littlehotspot.com/WeChat/resource/default.jpg"></image>
+								<view class="filename two-line-overflow">xxxxxxx.pdf</view>
+							</view>
+							<view class="btn del fa fa-times theme-button-orange2" aria-hidden="true"></view>
+						</view> -->
+
+						<view class="item add flex-column-center-flex_start">
+							<button class="inner flex-column-center-center" bindtap="uploadImage" disabled="{{upDisabled}}" data-type="all">
+								<view class="icon">+</view>
+								<view class="text">上传文件</view>
+							</button>
+						</view>
+					</view>
+				</view>
+			</view>
+		</scroll-view>
+		<view class="foot flex-row-center-center">
+			<button class="btn save theme-button-red" form-type="sumbit" disabled="{{addDisabled}}" bindtap="submitForVideo">保存</button>
+		</view>
+	</view>
+</view>

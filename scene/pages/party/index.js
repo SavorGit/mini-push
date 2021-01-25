@@ -7,6 +7,7 @@ var mta = require('../../../utils/mta_analysis.js')
 const app = getApp()
 var api_v_url = app.globalData.api_v_url;
 var api_url   = app.globalData.api_url;
+var cache_key = app.globalData.cache_key;
 var openid;
 var box_mac;
 var mobile_brand = app.globalData.mobile_brand;
@@ -19,7 +20,7 @@ Page({
   data: {
     statusBarHeight: getApp().globalData.statusBarHeight,
     SystemInfo: getApp().SystemInfo,
-
+    oss_url:app.globalData.oss_url,
   },
 
   /**
@@ -184,6 +185,7 @@ Page({
     
   },
   gotoWelcome:function(e){
+    var pageTitle = e.currentTarget.dataset.page_title;
     var is_have_welcome = this.data.is_have_welcome;
     if(is_have_welcome){
       var welcome_id = this.data.welcome_info.welcome_id;
@@ -192,7 +194,7 @@ Page({
       
     }
     wx.navigateTo({
-      url: '/scene/pages/welcome/add?openid='+openid+'&box_mac='+box_mac+'&type=4&welcome_id='+welcome_id,
+      url: '/scene/pages/welcome/add?openid='+openid+'&box_mac='+box_mac+'&type=4&welcome_id='+welcome_id+'&pageTitle='+pageTitle,
     })
     mta.Event.stat('clickAddWelcome',{'openid':openid,'boxmac':box_mac,'typeid':2})
   },
@@ -217,6 +219,20 @@ Page({
       }else {
         that.setData({is_have_welcome:true,welcome_info:welcome_info})
       }
+
+      var images = data.result.images;
+      var images_num = data.result.images_num;
+      var videos = data.result.videos;
+      var videos_num = data.result.videos_num
+      
+
+      that.setData({
+        images:images,
+        images_num:images_num,
+        videos:videos,
+        videos_num:videos_num,
+        
+      })
     })
     
   },
@@ -361,9 +377,10 @@ Page({
     mta.Event.stat('forscreenWelcome',{'openid':openid,'boxmac':box_mac,'typeid':2})
   },
   gotoGift:function(e){
-    wx.switchTab({
-      url: '/pages/shopping/index',
+    wx.navigateTo({
+      url: '/scene/pages/gift/list?openid='+openid+'&box_mac='+box_mac,
     })
+    
     mta.Event.stat('clickSendGift',{'openid':openid,'boxmac':box_mac,'typeid':2})
    
   },
@@ -372,6 +389,127 @@ Page({
       url: '/pages/thematic/money_blessing/packing?openid='+openid+'&box_mac='+box_mac+'&type=4',
     })
     mta.Event.stat('clickSendRedPack',{'openid':openid,'boxmac':box_mac,'typeid':2})
+  },
+  gotoForImages:function(e){
+    wx.navigateTo({
+      url: '/scene/pages/forscreen/forimages?openid='+openid+'&box_mac='+box_mac+'&scene_type=6',
+    })
+  },
+  gotoForVideo:function(e){
+    wx.navigateTo({
+      url: '/scene/pages/forscreen/forvideo?openid='+openid+'&box_mac='+box_mac+'&scene_type=5',
+    })
+  },
+  forscreenImage:function(e){
+    var that = this;
+    var keys = e.currentTarget.dataset.keys;
+    var images = that.data.images;
+    
+    //return false;
+    var user_info = wx.getStorageSync(cache_key+'user_info');
+    var forscreen_id =(new Date()).valueOf();
+    var netty_info = {};
+    netty_info.action = 4;
+    netty_info.resource_type = 1;
+    netty_info.forscreen_id = forscreen_id;
+    netty_info.res_sup_time = forscreen_id;
+    netty_info.res_eup_time = forscreen_id;
+    netty_info.openid = openid;
+    netty_info.forscreen_char = '';
+    netty_info.avatarUrl = user_info.avatarUrl;
+    netty_info.nickName  = user_info.nickName;
+    netty_info.serial_number = app.globalData.serial_number;
+
+    var img_info = {};
+    var img_list = [];
+    img_info.url = images[keys].file_path;
+    img_info.filename = images[keys].name;
+    img_info.order    = 0;
+    img_info.img_id   = images[keys].img_id;
+    img_info.resource_size = images[keys].resource_size;
+    img_list.push(img_info);
+    netty_info.img_list = img_list;
+    netty_info = JSON.stringify(netty_info);
+    console.log(netty_info);
+    utils.PostRequest(api_url + '/Netty/Index/pushnetty', {
+      box_mac: box_mac,
+      msg: netty_info,
+    }, (data, headers, cookies, errMsg, statusCode) => {
+      app.showToast('投屏成功',2000,'success')
+      var action = 48;
+      var imgs = '["'+images[keys].file_path+'"]';
+      var quality_type = 3;
+      var resource_id = images[keys].img_id;
+      var resource_size  =img_info.resource_size;
+      var resource_type = 1;
+      that.recordForscreen(forscreen_id,action,imgs,quality_type,resource_id,resource_size,resource_type);
+    })
+
+  },
+  forscreenVideo:function(e){
+    var that = this;
+    var keys = e.currentTarget.dataset.keys;
+    var videos = that.data.videos;
+    console.log(videos);
+
+    var user_info = wx.getStorageSync(cache_key+'user_info');
+    var forscreen_id =(new Date()).valueOf();
+    var netty_info = {};
+    
+    netty_info.action = 2;
+    netty_info.url = videos[keys].file_path;
+    netty_info.filename = videos[keys].name;
+    netty_info.openid   = openid;
+    netty_info.resource_type = 2;
+    netty_info.video_id = videos[keys].video_id;
+    netty_info.avatarUrl = user_info.avatarUrl;
+    netty_info.nickName = user_info.nickName;
+    netty_info.forscreen_id = forscreen_id;
+    netty_info.res_sup_time = forscreen_id;
+    netty_info.res_eup_time = forscreen_id;
+    netty_info.resource_size = videos[keys].resource_size;
+    netty_info.serial_number = app.globalData.serial_number;
+    netty_info = JSON.stringify(netty_info);
+    utils.PostRequest(api_url + '/Netty/Index/pushnetty', {
+      box_mac: box_mac,
+      msg: netty_info,
+    }, (data, headers, cookies, errMsg, statusCode) => {
+      app.showToast('投屏成功',2000,'success')
+      var action =49;
+      var imgs = '["'+videos[keys].file_path+'"]';
+      var quality_type = 0;
+      var resource_id = videos[keys].video_id;
+      var resource_size = videos[keys].resource_size;
+      var resource_type = 2;
+      var duration =  videos[keys].duration
+      that.recordForscreen(forscreen_id,action,imgs,quality_type,resource_id,resource_size,resource_type,duration);
+    })
+  },
+
+  recordForscreen:function(forscreen_id,action,imgs,quality_type,resource_id,resource_size,resource_type,duration= 0){
+    utils.PostRequest(api_v_url + '/index/recordForScreenPics', {
+      forscreen_id: forscreen_id,
+      openid: openid,
+      box_mac: box_mac,
+      action: action,
+      mobile_brand: mobile_brand,
+      mobile_model: mobile_model,
+      forscreen_char: '',
+      public_text: '',
+      imgs: imgs,
+      quality_type:quality_type,
+      resource_id: resource_id,
+      res_sup_time: forscreen_id,
+      res_eup_time: forscreen_id,
+      resource_size: resource_size,
+      is_pub_hotelinfo: 0,
+      is_share: 0,
+      resource_type: resource_type,
+      res_nums: 1,
+      duration:duration,
+      serial_number:app.globalData.serial_number
+    }, (data, headers, cookies, errMsg, statusCode) => {
+    },re => { }, { isShowLoading: false })
   },
   /**
    * 生命周期函数--监听页面初次渲染完成
