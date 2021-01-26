@@ -19,6 +19,7 @@
     "pages/forscreen/forvideo/wifi",
     "pages/game/climbtree/index",
     "pages/game/climbtree/climbtree",
+    "pages/game/luckyturn/join",
     "pages/h5/index",
     "pages/hotel/waiter_evaluate_h5",
     "pages/hotel/detail",
