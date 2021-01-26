@@ -8,13 +8,13 @@
 <template is="navigationBarForTwoLevel" data='{{statusBarHeight: statusBarHeight,titleText:"幸运转转转"}}' />
 
 <!-- 配置奖项 -->
-<view wx:if='{{a}}' class='container first' style='height:calc(100vh - {{46 + statusBarHeight + SystemInfo.screenBottomSpace}}px);'>
+<view wx:if='{{status==0}}' class='container first' style='height:calc(100vh - {{46 + statusBarHeight + SystemInfo.screenBottomSpace}}px);'>
 	<view class="bottom flex-column-center-center">
-		<view class="buttons flex-row-center-center">
+		<view class="buttons flex-row-center-center" bindtap="addPrize">
 			<view class="btn">配置奖项</view>
 		</view>
 		<view class="progress flex-row-center-center">
-			<view class="item complete">配置奖项</view>
+			<view class="item complete" >配置奖项</view>
 			<view class="item">——发起抽奖</view>
 			<view class="item">——好友加入</view>
 			<view class="item">——开始抽奖</view>
@@ -24,22 +24,22 @@
 </view>
 
 <!-- 发起抽奖 -->
-<view wx:if='{{b}}' class='container config' style='height:calc(100vh - {{46 + statusBarHeight + SystemInfo.screenBottomSpace}}px);'>
+<view wx:if='{{status==1}}' class='container config' style='height:calc(100vh - {{46 + statusBarHeight + SystemInfo.screenBottomSpace}}px);'>
 	<view class="main flex-column-center-center">
-		<!-- 
-		<view class="pic flex-column-center-center">
+		
+		<button class="pic flex-column-center-center" wx:if="{{prize_info.img_url ==''}}" disabled="{{upDisabled}}" bindtap="uploadImage">
 			<view class="icon theme-font5">+</view>
 			<view class="label theme-font5">上传奖品图</view>
-		</view> -->
-		<image class="pic" mode="aspectFill" src="https://oss.littlehotspot.com/WeChat/resource/default.jpg"></image>
+		</button>
+		<image wx:else class="pic" mode="aspectFill" src="{{oss_url}}/{{prize_info.img_url}}"></image>
 		<view class="field flex-row-center-flex_start">
-			<view class="label">奖品名称</view>
-			<input class="input"></input>
+			<view class="label">奖品名称:</view>
+			<input class="input" name="prizeName" value="{{prize_info.prizeName}}" maxlength="50" bindinput="addPrizeName"></input>
 		</view>
 	</view>
 	<view class="bottom flex-column-center-center">
 		<view class="buttons flex-row-center-center">
-			<view class="btn">发起抽奖</view>
+			<button class="btn" disabled="{{addDisabled}}" bindtap="startPrize">发起抽奖</button>
 		</view>
 		<view class="progress flex-row-center-center">
 			<view class="item complete">配置奖项</view>
@@ -52,7 +52,7 @@
 </view>
 
 <!-- 好友加入 -->
-<view wx:if='{{c}}' class='container waiting-join' style='height:calc(100vh - {{46 + statusBarHeight + SystemInfo.screenBottomSpace}}px);'>
+<view wx:if='{{status==2}}' class='container waiting-join' style='height:calc(100vh - {{46 + statusBarHeight + SystemInfo.screenBottomSpace}}px);'>
 	<view class="bottom flex-column-center-center">
 		<view class="buttons flex-row-center-center">
 			<view class="btn">开始抽奖</view>
@@ -68,7 +68,7 @@
 </view>
 
 <!-- 开始抽奖 -->
-<view wx:if='{{1==1}}' class='container waiting-lottery' style='height:calc(100vh - {{46 + statusBarHeight + SystemInfo.screenBottomSpace}}px);'>
+<view wx:if='{{status==3}}' class='container waiting-lottery' style='height:calc(100vh - {{46 + statusBarHeight + SystemInfo.screenBottomSpace}}px);'>
 	<view class="bottom flex-column-center-center">
 		<view class="buttons flex-row-center-center">
 			<view class="btn"></view>
@@ -84,7 +84,7 @@
 </view>
 
 <!-- 抽奖结束 -->
-<view wx:if='{{e}}' class='container finish' style='height:calc(100vh - {{46 + statusBarHeight + SystemInfo.screenBottomSpace}}px);'>
+<view wx:if='{{status==4}}' class='container finish' style='height:calc(100vh - {{46 + statusBarHeight + SystemInfo.screenBottomSpace}}px);'>
 	<view class="bottom flex-column-center-center">
 		<view class="buttons flex-row-center-center">
 			<view class="btn reset">重新配置游戏</view>

@@ -66,6 +66,16 @@ Page({
       url: jumpUrl,
     })
   },
+  gotoDrink:function(e){
+    wx.navigateTo({
+      url: '/pages/activity/turntable/index?openid=' + openid + '&box_mac=' + box_mac 
+    })
+  },
+  gotoLuckyTrun:function(e){
+    wx.navigateTo({
+      url: '/games/pages/activity/luckyturn/index?openid=' + openid + '&box_mac=' + box_mac 
+    })
+  },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
