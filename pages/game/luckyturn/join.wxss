@@ -10,6 +10,26 @@
   background-size: 100% 100%;
 }
 
+.container.config>.main>.pic[disabled] {
+  color: #F44444 !important;
+  background-color: #FFFFFF !important;
+}
+
+.container>.bottom>.buttons>.btn[disabled] {
+  color: #BEBEBE !important;
+  background-color: unset !important;
+}
+
+.container.config>.main>.pic.button-hover {
+  background-color: #FFFFFF;
+  opacity: 1;
+}
+
+.container>.bottom>.buttons>.btn.button-hover {
+  background-color: unset;
+  opacity: 1;
+}
+
 .container>.bottom {
   width: 100%;
   padding: 850rpx 0 20rpx;
@@ -30,6 +50,7 @@
   background-size: 100% 100%;
   background-repeat: no-repeat;
   background-image: url(https://oss.littlehotspot.com/WeChat/MiniProgram/images/luckyturn/bg_btn.png);
+  background-color: unset;
   margin: 0;
   padding: 0;
   border: 0;

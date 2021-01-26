@@ -14,7 +14,7 @@
 			<view class="btn">配置奖项</view>
 		</view>
 		<view class="progress flex-row-center-center">
-			<view class="item complete" >配置奖项</view>
+			<view class="item complete">配置奖项</view>
 			<view class="item">——发起抽奖</view>
 			<view class="item">——好友加入</view>
 			<view class="item">——开始抽奖</view>
@@ -26,7 +26,7 @@
 <!-- 发起抽奖 -->
 <view wx:if='{{status==1}}' class='container config' style='height:calc(100vh - {{46 + statusBarHeight + SystemInfo.screenBottomSpace}}px);'>
 	<view class="main flex-column-center-center">
-		
+
 		<button class="pic flex-column-center-center" wx:if="{{prize_info.img_url ==''}}" disabled="{{upDisabled}}" bindtap="uploadImage">
 			<view class="icon theme-font5">+</view>
 			<view class="label theme-font5">上传奖品图</view>
