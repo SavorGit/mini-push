@@ -1,10 +1,17 @@
 // pages/game/luckyturn/join.js
+/**
+ * 【游戏】 幸运转转转 - 参与
+ */
+
+
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
+    statusBarHeight: getApp().globalData.statusBarHeight,
+    SystemInfo: getApp().SystemInfo
 
   },
 
