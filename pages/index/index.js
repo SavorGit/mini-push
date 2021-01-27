@@ -1276,5 +1276,10 @@ Page({
     wx.navigateTo({
       url: '/pages/scene/business/downloadfile',
     })
+  },
+  gotoTT:function(e){
+    wx.navigateTo({
+      url: '/games/pages/activity/luckyturn/join?openid=ofYZG4yZJHaV2h3lJHG5wOB9MzxE&box_mac=00226D584281',
+    })
   }
 })

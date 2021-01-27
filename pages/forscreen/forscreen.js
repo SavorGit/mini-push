@@ -297,7 +297,7 @@ Page({
           wx.reLaunch({
             url: '/games/pages/activity/din_dash?openid='+openid+'&box_mac='+box_mac,
           })
-        }else if(code_type==34){
+        }else if(code_type==35){
           wx.reLaunch({
             url: '/games/pages/activity/luckyturn/join?openid='+openid+'&box_mac='+box_mac,
           })

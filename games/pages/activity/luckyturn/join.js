@@ -46,10 +46,17 @@ Page({
       box_mac:box_mac,
     }, (data, headers, cookies, errMsg, statusCode) => {
       var tips = data.result.tips;
-      app.showToast(tips,2000,'success',true);
+      var activity_id = data.result.activity_id
+      if(activity_id>0){
+        app.showToast(tips,3000,'success',true);
+      }else {
+        app.showToast(tips,3000);
+      }
+      app.sleep(3000)
       wx.switchTab({
         url: '/pages/index/index',
       })
+      
     })
     
   },
@@ -69,7 +76,7 @@ Page({
               'iv': rets.iv,
               'encryptedData': rets.encryptedData
             }, (data, headers, cookies, errMsg, statusCode) => {
-              
+              that.joinPrize();
             }, res => wx.showToast({
               title: '微信登陆失败，请重试',
               icon: 'none',

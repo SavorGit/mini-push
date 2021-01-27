@@ -59,8 +59,9 @@ Page({
       openid:openid,
       box_mac:box_mac,
     }, (data, headers, cookies, errMsg, statusCode) => {
+      var activity_id = data.result.activity_id
       var status = data.result.lottery_status
-      that.setData({status:status})
+      that.setData({status:status,activity_id:activity_id})
       if(status==3){
         that.pollingCheckStatus(openid,box_mac);
       }
@@ -68,11 +69,12 @@ Page({
   },
   pollingCheckStatus:function(openid,box_mac){
     var that = this;
+    var activity_id = that.data.activity_id;
     var timer8_0 = setInterval(function () {
     
       utils.PostRequest(api_v_url + '/activity/getLotteryResult', {
         openid:openid,
-        box_mac:box_mac,
+        activity_id:activity_id,
       }, (data, headers, cookies, errMsg, statusCode) => {
         var status = data.result.lottery_status
         if(status!=3){
@@ -206,12 +208,19 @@ Page({
       app.showToast('当前未配置奖品');
       that.setData({status:0});
     }
-    utils.PostRequest(api_v_url + '/activity/addLottery', {
+    utils.PostRequest(api_v_url + '/activity/openLottery', {
       openid:openid,
       activity_id:activity_id
     }, (data, headers, cookies, errMsg, statusCode) => {
-      that.setData({status:3})
-      that.pollingCheckStatus(openid,box_mac)
+      var status = data.result.lottery_status;
+      var activity_id = data.result.activity_id;
+      if(status==3){
+        that.pollingCheckStatus(openid,box_mac)
+      }else {
+
+      }
+      that.setData({status:status,activity_id:activity_id})
+      
     })
   },
   resetPrize:function(e){
@@ -221,6 +230,7 @@ Page({
       status:1,
     })
   },
+  
   replayPrize:function(e){
     var that = this;
     var activity_id = that.data.activity_id;
@@ -228,7 +238,8 @@ Page({
       openid:openid,
       activity_id:activity_id
     }, (data, headers, cookies, errMsg, statusCode) => {
-      that.setData({status:2});
+      var activity_id = data.result.activity_id;
+      that.setData({status:2,activity_id:activity_id});
       
     })
   },
@@ -243,7 +254,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    
   },
 
   /**
