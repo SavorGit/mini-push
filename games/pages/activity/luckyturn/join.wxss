@@ -1,0 +1,75 @@
+/* pages/game/luckyturn/join.wxss */
+/**
+ * 【游戏】 幸运转转转 - 参与
+ */
+
+
+.container {
+  background-color: #E74231;
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+}
+
+.container.config>.main>.pic[disabled] {
+  color: #F44444 !important;
+  background-color: #FFFFFF !important;
+}
+
+.container>.bottom>.buttons>.btn[disabled] {
+  color: #BEBEBE !important;
+  background-color: unset !important;
+}
+
+.container.config>.main>.pic.button-hover {
+  background-color: #FFFFFF;
+  opacity: 1;
+}
+
+.container>.bottom>.buttons>.btn.button-hover {
+  background-color: unset;
+  opacity: 1;
+}
+
+.container>.bottom {
+  width: 100%;
+  padding: 850rpx 0 20rpx;
+}
+
+.container>.bottom>.buttons {
+  width: 100%;
+  padding: 20rpx 0;
+}
+
+.container>.bottom>.buttons>.btn {
+  width: 400rpx;
+  height: 130rpx;
+  line-height: 120rpx;
+  text-align: center;
+  color: #FFFFFF;
+  font-size: 48rpx;
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  background-image: url(https://oss.littlehotspot.com/WeChat/MiniProgram/images/luckyturn/bg_btn.png);
+  background-color: unset;
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+.container>.bottom>.progress {
+  width: 100%;
+  padding: 20rpx;
+}
+
+.container>.bottom>.progress>.item {
+  font-size: 24rpx;
+  color: #FFFFFF;
+}
+
+.container>.bottom>.progress>.item.complete {
+  color: #F99B06;
+}
+
+.container.join {
+  background-image: url(https://oss.littlehotspot.com/WeChat/MiniProgram/images/luckyturn/bg_join.jpg);
+}

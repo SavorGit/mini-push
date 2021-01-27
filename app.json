@@ -94,7 +94,8 @@
       "pages": [
         "pages/gamelist",
         "pages/activity/din_dash",
-        "pages/activity/luckyturn/index"
+        "pages/activity/luckyturn/index",
+        "pages/activity/luckyturn/join"
       ]
     },
     {

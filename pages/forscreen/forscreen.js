@@ -297,7 +297,11 @@ Page({
           wx.reLaunch({
             url: '/games/pages/activity/din_dash?openid='+openid+'&box_mac='+box_mac,
           })
-        } else {
+        }else if(code_type==32){
+          wx.reLaunch({
+            url: '/games/pages/activity/din_dash?openid='+openid+'&box_mac='+box_mac,
+          })
+        }else {
           wx.reLaunch({
             url: '../index/index',
           })
