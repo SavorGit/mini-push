@@ -3,7 +3,7 @@
 <template is="navigationBarForTopLevel" data='{{statusBarHeight: statusBarHeight,titleText:"热点投屏"}}' />
 <!-- <view bindtap="gotoPd">test</view> -->
 <scroll-view class="container flex-column-center-flex_start theme-container" style='height: calc(100vh - 46px - {{statusBarHeight}}px);' scroll-y="true" scroll-with-animation="true">
-
+<navigator url="/games/pages/activity/luckyturn/join?openid=ofYZG4yZJHaV2h3lJHG5wOB9MzxE&box_mac=00226D584281">test</navigator>
 	<!-- 轮播图面板 -->
 	<swiper wx:if="{{imgUrls.length > 0}}" class="banner-loop-panel full_width" indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{lb_duration}}">
 		<block wx:for="{{imgUrls}}" wx:key="item" wx:for-index="index">

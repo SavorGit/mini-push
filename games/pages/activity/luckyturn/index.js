@@ -224,7 +224,7 @@ Page({
   replayPrize:function(e){
     var that = this;
     var activity_id = that.data.activity_id;
-    utils.PostRequest(api_v_url + '/aa/bb', {
+    utils.PostRequest(api_v_url + '/activity/againLottery', {
       openid:openid,
       activity_id:activity_id
     }, (data, headers, cookies, errMsg, statusCode) => {

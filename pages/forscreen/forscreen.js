@@ -297,9 +297,9 @@ Page({
           wx.reLaunch({
             url: '/games/pages/activity/din_dash?openid='+openid+'&box_mac='+box_mac,
           })
-        }else if(code_type==32){
+        }else if(code_type==34){
           wx.reLaunch({
-            url: '/games/pages/activity/din_dash?openid='+openid+'&box_mac='+box_mac,
+            url: '/games/pages/activity/luckyturn/join?openid='+openid+'&box_mac='+box_mac,
           })
         }else {
           wx.reLaunch({
