@@ -10,7 +10,7 @@
 <!-- 配置奖项 -->
 <view wx:if='{{status==0}}' class='container first' style='height:calc(100vh - {{46 + statusBarHeight + SystemInfo.screenBottomSpace}}px);'>
 	<view class="bottom flex-column-center-center">
-		<view class="buttons flex-row-center-center" bindtap="addPrize">
+		<view class="buttons flex-row-center-center" bindtap="configPrize">
 			<view class="btn">配置奖项</view>
 		</view>
 		<view class="progress flex-row-center-center">
@@ -39,7 +39,7 @@
 	</view>
 	<view class="bottom flex-column-center-center">
 		<view class="buttons flex-row-center-center">
-			<button class="btn" disabled="{{addDisabled}}" bindtap="startPrize">发起抽奖</button>
+			<button class="btn" disabled="{{addDisabled}}" bindtap="addPrize">发起抽奖</button>
 		</view>
 		<view class="progress flex-row-center-center">
 			<view class="item complete">配置奖项</view>
@@ -54,8 +54,8 @@
 <!-- 好友加入 -->
 <view wx:if='{{status==2}}' class='container waiting-join' style='height:calc(100vh - {{46 + statusBarHeight + SystemInfo.screenBottomSpace}}px);'>
 	<view class="bottom flex-column-center-center">
-		<view class="buttons flex-row-center-center">
-			<view class="btn">开始抽奖</view>
+		<view class="buttons flex-row-center-center" >
+			<view class="btn" bindtap="startPrize">开始抽奖</view>
 		</view>
 		<view class="progress flex-row-center-center">
 			<view class="item complete">配置奖项</view>
@@ -87,8 +87,8 @@
 <view wx:if='{{status==4}}' class='container finish' style='height:calc(100vh - {{46 + statusBarHeight + SystemInfo.screenBottomSpace}}px);'>
 	<view class="bottom flex-column-center-center">
 		<view class="buttons flex-row-center-center">
-			<view class="btn reset">重新配置游戏</view>
-			<view class="btn restart">再来一局</view>
+			<view class="btn reset" bindtap="resetPrize">重新配置游戏</view>
+			<view class="btn restart" bindtap="replayPrize">再来一局</view>
 		</view>
 		<view class="progress flex-row-center-center">
 			<view class="item complete">配置奖项</view>

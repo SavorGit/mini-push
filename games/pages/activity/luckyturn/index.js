@@ -23,6 +23,7 @@ Page({
     statusBarHeight: getApp().globalData.statusBarHeight,
     SystemInfo: getApp().SystemInfo,
     prize_info:{'img_url':'','prizeName':''},
+    activity_id:0,
     status:0,
     addDisabled:false,  //保存按钮是否可用
     upDisabled:false,   //上传按钮是否可用
@@ -54,14 +55,38 @@ Page({
   },
   getActivityInfo:function(openid,box_mac){
     var that = this;
-    utils.PostRequest(api_v_url + '/aa/bb', {
+    utils.PostRequest(api_v_url + '/activity/getConfigLotteryStatus', {
       openid:openid,
       box_mac:box_mac,
     }, (data, headers, cookies, errMsg, statusCode) => {
-      
+      var status = data.result.lottery_status
+      that.setData({status:status})
+      if(status==3){
+        that.pollingCheckStatus(openid,box_mac);
+      }
     })
   },
-  addPrize:function(e){
+  pollingCheckStatus:function(openid,box_mac){
+    var that = this;
+    var timer8_0 = setInterval(function () {
+    
+      utils.PostRequest(api_v_url + '/activity/getLotteryResult', {
+        openid:openid,
+        box_mac:box_mac,
+      }, (data, headers, cookies, errMsg, statusCode) => {
+        var status = data.result.lottery_status
+        if(status!=3){
+          var activity_id = data.result.activity_id;
+          that.setData({status:status,activity_id:activity_id})
+          clearInterval(timer8_0);
+          
+        }
+        
+      },res=>{},{ isShowLoading: false })
+      
+    }, 10000);
+  },
+  configPrize:function(e){
     this.setData({
       status:1,
     })
@@ -153,8 +178,59 @@ Page({
       }
     })
   },
+  addPrize:function(e){
+    var that = this;
+    var prize_info = that.data.prize_info;
+    if(prize_info.img_url==''){
+      app.showToast('请上传奖品图');
+      return false;
+    }
+    if(prize_info.prizeName==''){
+      app.showToast('请输入奖品名称');
+      return false;
+    }
+    utils.PostRequest(api_v_url + '/activity/addLottery', {
+      openid:openid,
+      box_mac:box_mac,
+      image:prize_info.img_url,
+      prize:prize_info.prizeName
+    }, (data, headers, cookies, errMsg, statusCode) => {
+      var activity_id = data.result.activity_id;
+      that.setData({activity_id:activity_id,status:2})
+    })
+  },
   startPrize:function(e){
-    console.log(e)
+    var that = this;
+    var activity_id = that.data.activity_id;
+    if(activity_id==0){
+      app.showToast('当前未配置奖品');
+      that.setData({status:0});
+    }
+    utils.PostRequest(api_v_url + '/activity/addLottery', {
+      openid:openid,
+      activity_id:activity_id
+    }, (data, headers, cookies, errMsg, statusCode) => {
+      that.setData({status:3})
+      that.pollingCheckStatus(openid,box_mac)
+    })
+  },
+  resetPrize:function(e){
+    this.setData({
+      prize_info:{'img_url':'','prizeName':''},
+      activity_id:0,
+      status:1,
+    })
+  },
+  replayPrize:function(e){
+    var that = this;
+    var activity_id = that.data.activity_id;
+    utils.PostRequest(api_v_url + '/aa/bb', {
+      openid:openid,
+      activity_id:activity_id
+    }, (data, headers, cookies, errMsg, statusCode) => {
+      that.setData({status:2});
+      
+    })
   },
   /**
    * 生命周期函数--监听页面初次渲染完成
