@@ -9,6 +9,7 @@ var api_v_url = app.globalData.api_v_url;
 var oss_upload_url = app.globalData.oss_upload_url;
 var openid;
 var box_mac;
+var activity_id;
 var user_info ;
 Page({
 
@@ -26,8 +27,10 @@ Page({
    */
   onLoad: function (options) {
     var that = this;
+    console.log(options)
     openid = options.openid;
     box_mac = options.box_mac;
+    activity_id = options.activity_id;
     utils.PostRequest(api_v_url + '/User/isRegister', {
       openid:openid,
     }, (data, headers, cookies, errMsg, statusCode) => {
@@ -41,23 +44,45 @@ Page({
     })
   },
   joinPrize:function(){
+    var that = this;
     utils.PostRequest(api_v_url + '/activity/joinLottery', {
       openid:openid,
       box_mac:box_mac,
+      activity_id:activity_id
     }, (data, headers, cookies, errMsg, statusCode) => {
       var tips = data.result.tips;
       var activity_id = data.result.activity_id
+      var image_url = data.result.image_url;
       if(activity_id>0){
-        app.showToast(tips,3000,'success',true);
+        app.showToast(tips,3000,'none',true);
       }else {
-        app.showToast(tips,3000);
+        app.showToast(tips,3000,'none',true);
       }
+      var forscreen_id = (new Date()).valueOf();
+      that.recordForscreenLog(forscreen_id,openid,box_mac,image_url,54)
       app.sleep(3000)
       wx.switchTab({
         url: '/pages/index/index',
       })
       
     })
+    
+  },
+  recordForscreenLog:function(forscreen_id,openid,box_mac,image_url,action=0){
+
+    utils.PostRequest(api_v_url+'/index/recordForScreenPics', {
+      forscreen_id: forscreen_id,
+      openid: openid,
+      box_mac: box_mac,
+      action: action,
+      mobile_brand: app.globalData.mobile_brand,
+      mobile_model: app.globalData.mobile_model,
+      imgs: '["'+image_url+'"]',
+      serial_number:app.globalData.serial_number
+
+    }, (data, headers, cookies, errMsg, statusCode) => {
+      
+    },re => { }, { isShowLoading: false })
     
   },
   onGetUserInfo: function (res) {

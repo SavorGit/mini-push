@@ -26,7 +26,7 @@ Page({
       })
     },res=>{},{ isShowLoading: false })
     wx.showToast({
-      title: '连接中，请稍后',
+      title: '努力加载中,请稍后...',
     })
     var sysconfig = wx.getStorageSync("savor_now_time");
     app.globalData.change_link_type = 0;
@@ -200,9 +200,11 @@ Page({
       box_mac = scene_arr[0];
       code_type = scene_arr[1];
       var jz_time = scene_arr[2];
+      var prize_activity_id = 0;
       if(typeof(scene_arr[3])!='undefined' && scene_arr[3]==2){
         wx.setStorageSync('savor_is_minimal', 1);
       }else {
+        prize_activity_id = scene_arr[3];
         try {
           wx.removeStorageSync('savor_is_minimal')
         } catch (e) {
@@ -250,7 +252,7 @@ Page({
                 return false;
               }
             }
-            setInfos(box_mac, openid, code_type);
+            setInfos(box_mac, openid, code_type,prize_activity_id);
             if(wxmpopenid!=''){//如果是从公众号过来的，小程序 绑定
               utils.PostRequest(api_v_url+'/user/bindOffiaccount', {
                 wxmpopenid:wxmpopenid,
@@ -268,7 +270,7 @@ Page({
         }
       });
     }
-    function setInfos(box_mac, openid,code_type) {
+    function setInfos(box_mac, openid,code_type,prize_activity_id=0) {
       //发送随机码给电视显示 (默认用户不用填写三位呼玛)
       utils.PostRequest(api_v_url+'/Index/genCode', {
         'box_mac': box_mac,
@@ -299,7 +301,7 @@ Page({
           })
         }else if(code_type==35){
           wx.reLaunch({
-            url: '/games/pages/activity/luckyturn/join?openid='+openid+'&box_mac='+box_mac,
+            url: '/games/pages/activity/luckyturn/join?openid='+openid+'&box_mac='+box_mac+'&activity_id='+prize_activity_id,
           })
         }else {
           wx.reLaunch({
