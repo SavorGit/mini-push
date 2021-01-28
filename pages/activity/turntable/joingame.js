@@ -4,6 +4,7 @@ var box_mac;
 var activity_id;
 var openid;
 var gamecode;
+var api_v_url = app.globalData.api_v_url;
 Page({
 
   /**
@@ -28,7 +29,7 @@ Page({
     box_mac = scene[0];
     activity_id = scene[1];
 
-    gamecode = "https://mobile.littlehotspot.com/Smallapp/Activity/getGameCode?scene=" + box_mac + "_" + activity_id;
+    gamecode = api_v_url+"/Activity/getGameCode?scene=" + box_mac + "_" + activity_id;
     wx.login({
       success: res => {
         var code = res.code; //返回code
@@ -66,13 +67,13 @@ Page({
     var nickname = options.detail.userInfo.nickName;
     var timestamp = (new Date()).valueOf();
     //var gamecode = "https://mobile.littlehotspot.com/Smallapp/Activity/getGameCode?scene=" + box_mac + "_" + activity_id;
-    var gamecode = "https://mobile.littlehotspot.com/Smallapp/Activity/getGameCode";
+    var gamecode = api_v_url+"/Activity/getGameCode";
     var mobile_brand = app.globalData.mobile_brand;
     var mobile_model = app.globalData.mobile_model;
 
 
     wx.request({
-      url: 'https://mobile.littlehotspot.com/smallapp/Activity/canJoinGame',
+      url: api_v_url+'/Activity/canJoinGame',
       headers: {
         'Content-Type': 'application/json'
       },
@@ -84,7 +85,7 @@ Page({
         var canjoin = res.data.result.can_join;
         if(canjoin==1){
           wx.request({
-            url: 'https://mobile.littlehotspot.com/smallapp/Activity/joinGameLog',
+            url: api_v_url+'/Activity/joinGameLog',
             headers: {
               'Content-Type': 'application/json'
             },

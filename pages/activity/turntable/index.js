@@ -1,4 +1,5 @@
 const app = getApp();
+var api_v_url = app.globalData.api_v_url
 Page({
   data: {
     statusBarHeight: getApp().globalData.statusBarHeight,
@@ -27,7 +28,7 @@ Page({
     var mobile_brand = app.globalData.mobile_brand;
     var mobile_model = app.globalData.mobile_model;
     var activity_id = (new Date()).valueOf();
-    var gamecode = "https://mobile.littlehotspot.com/Smallapp/Activity/getGameCode?scene=" + box_mac + "_" + activity_id;
+    var gamecode = api_v_url+"/Activity/getGameCode?scene=" + box_mac + "_" + activity_id;
     /*wx.request({
       url: 'https://netty-push.littlehotspot.com/push/box',
       header: {
@@ -72,7 +73,7 @@ Page({
     })*/
     //记录日志
     wx.request({
-      url: 'https://mobile.littlehotspot.com/smallapp/Activity/orgGameLog',
+      url: api_v_url+'/Activity/orgGameLog',
       headers: {
         'Content-Type': 'application/json'
       },

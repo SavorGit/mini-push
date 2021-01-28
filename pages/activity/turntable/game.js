@@ -1,6 +1,7 @@
 // pages/activity/turntable/game.js
 const app = getApp();
 var api_url = app.globalData.api_url;
+var api_v_url = app.globalData.api_v_url;
 Page({
 
   /**
@@ -30,7 +31,7 @@ Page({
       var openid    = options.openid;              //openid
       var activity_id = options.activity_id;         //活动id
       //var activity_id  = (new Date()).valueOf();   //活动id
-      var gameCode = "https://mobile.littlehotspot.com/Smallapp/Activity/getGameCode?scene="+box_mac+"_"+activity_id;
+      var gameCode = api_v_url+"/Activity/getGameCode?scene="+box_mac+"_"+activity_id;
       that.setData({
         avatarurl:avatarurl,
         nickName :nickName,
@@ -58,7 +59,7 @@ Page({
     
     if (retry == 0) {
       wx.request({
-        url: 'https://mobile.littlehotspot.com/smallapp/Activity/startGameLog',
+        url: api_v_url+'/Activity/startGameLog',
         headers: {
           'Content-Type': 'application/json'
         },
@@ -88,7 +89,7 @@ Page({
       })
     } else if (retry == 1) {
       wx.request({
-        url: 'https://mobile.littlehotspot.com/smallapp/Activity/retryGame',
+        url: api_v_url+'/Activity/retryGame',
         headers: {
           'Content-Type': 'application/json'
         },

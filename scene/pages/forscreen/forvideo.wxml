@@ -60,7 +60,7 @@
 							<view class="btn del fa fa-times theme-button-orange2" aria-hidden="true"></view>
 						</view> -->
 
-						<view class="item add flex-column-center-flex_start">
+						<view class="item add flex-column-center-flex_start" wx:if="{{video_list.length<6}}">
 							<button class="inner flex-column-center-center" bindtap="uploadImage" disabled="{{upDisabled}}" data-type="all">
 								<view class="icon">+</view>
 								<view class="text">上传文件</view>
