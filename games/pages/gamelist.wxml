@@ -26,13 +26,28 @@
 				</view>
 				<!-- <view class="item flex-row-center-space_between theme-panel">
 					<view class="left flex-row-center-space_between">
-						
 						<view class="title two-line-overflow">猴子爬树</view>
 					</view>
 					<view class="right flex-row-center-flex_end">
 						<view class="btn">进入</view>
 					</view>
 				</view> -->
+				<view class="item flex-row-center-space_between theme-panel">
+					<view class="left flex-row-center-space_between">
+						<view class="title two-line-overflow">该谁喝酒</view>
+					</view>
+					<view class="right flex-row-center-flex_end" bindtap="gotoDrink">
+						<view class="btn">进入</view>
+					</view>
+				</view>
+				<view class="item flex-row-center-space_between theme-panel">
+					<view class="left flex-row-center-space_between">
+						<view class="title two-line-overflow">幸运转转转</view>
+					</view>
+					<view class="right flex-row-center-flex_end" bindtap="gotoLuckyTrun">
+						<view class="btn">进入</view>
+					</view>
+				</view>
 			</view>
 		</view>
 	</scroll-view>

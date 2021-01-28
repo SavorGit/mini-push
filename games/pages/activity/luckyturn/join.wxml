@@ -1,0 +1,19 @@
+<!--pages/game/luckyturn/join.wxml-->
+<!--
+ | 【游戏】 幸运转转转 - 参与
+ |-->
+
+
+<import src="/pages/template/commons" />
+<template is="navigationBarForTwoLevel" data='{{statusBarHeight: statusBarHeight,titleText:"参与幸运转转转"}}' />
+
+<!-- 参与抽奖 -->
+<view class='container join' style='height:calc(100vh - {{46 + statusBarHeight + SystemInfo.screenBottomSpace}}px);'>
+	<view class="bottom flex-column-center-center">
+		<view class="buttons flex-row-center-center">
+			<view class="btn" wx:if="{{user_info.is_wx_auth==3}}" bindtap="joinPrize">立即参与</view>
+			<button wx:else class="btn" open-type="getUserInfo" bindgetuserinfo="onGetUserInfo" >立即参与</button>
+			
+		</view>
+	</view>
+</view>

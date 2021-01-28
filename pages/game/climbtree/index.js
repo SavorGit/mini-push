@@ -88,11 +88,11 @@ Page({
                   }, (data, headers, cookies, errMsg, statusCode) => {
 
                   })
-                  
+                  game_m_h5_url +='?isLauncher=true';
                   wx.navigateTo({
                     url: '/pages/game/climbtree/climbtree?box_mac=' + box_mac + '&game_m_h5_url=' + game_m_h5_url
                   })
-                })
+                },re => { }, { isShowLoading: false })
                 
                 if (djs <= 0) {
                   clearInterval(interval);

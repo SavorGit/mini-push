@@ -1,0 +1,89 @@
+/* games/pages/activity/luckyturn/index.wxss */
+/**
+ * 【游戏】 幸运转转转
+ */
+
+
+/* @import '/pages/game/luckyturn/join.wxss'; */
+@import 'join.wxss';
+
+
+/* ============================== 配置奖项 ============================== */
+.container.first {
+  background-image: url(https://oss.littlehotspot.com/WeChat/MiniProgram/images/luckyturn/bg_first.jpg);
+}
+
+
+/* ============================== 发起抽奖 ============================== */
+.container.config {
+  background-image: url(https://oss.littlehotspot.com/WeChat/MiniProgram/images/luckyturn/bg_config.jpg);
+}
+
+.container.config>.main {
+  width: 100%;
+  padding: 440rpx 0 20rpx;
+}
+
+.container.config>.main>.pic {
+  width: 400rpx;
+  height: 280rpx;
+  line-height: unset;
+  margin: 10rpx 0;
+  border-radius: 10rpx;
+  background-color: #FFFFFF;
+}
+
+.container.config>.main>.pic>.icon {
+  font-size: 64rpx;
+}
+
+.container.config>.main>.pic>.label {
+  font-size: 28rpx;
+}
+
+.container.config>.main>.field {
+  width: 390rpx;
+  padding: 5rpx;
+  margin: 10rpx 0;
+  border-radius: 10rpx;
+  background-color: #FFFFFF;
+}
+
+.container.config>.main>.field>.label {
+  width: 120rpx;
+  text-align: center;
+  font-size: 28rpx;
+  color: #333333;
+  border-right: 3rpx solid #EDEDED;
+}
+
+.container.config>.main>.field>.input {
+  width: calc(100% - 125rpx);
+  font-size: 28rpx;
+}
+
+.container.config>.bottom {
+  padding-top: 20rpx;
+}
+
+
+/* ============================== 好友加入 ============================== */
+.container.waiting-join {
+  background-image: url(https://oss.littlehotspot.com/WeChat/MiniProgram/images/luckyturn/bg_waiting_join.jpg);
+}
+
+
+/* ============================== 开始抽奖 ============================== */
+.container.waiting-lottery {
+  background-image: url(https://oss.littlehotspot.com/WeChat/MiniProgram/images/luckyturn/bg_waiting_lottery.jpg);
+}
+
+.container.waiting-lottery>.bottom>.buttons>.btn {
+  background-image: none;
+}
+
+
+/* ============================== 抽奖结束 ============================== */
+.container.finish {
+  background-image: url(https://oss.littlehotspot.com/WeChat/MiniProgram/images/luckyturn/bg_finish.jpg);
+}
