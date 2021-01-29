@@ -201,7 +201,21 @@ Page({
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage: function () {
+  onShareAppMessage: function (e) {
+    var that = this;
+    var box_mac = e.target.dataset.type;
+    var activity_id = e.target.dataset.activity_id;
+    if (e.from === 'button') {
+      
+      var share_url = '/pages/activity/turntable/joingame?box_mac='+box_mac+'&activity_id='+activity_id;
+      return {
+        title: '您的好友邀请您参与转盘游戏',
+        path: share_url,
+        success: function(res) {
+          // console.log('full_scroll.Page.onShareAppMessage','return', e);
+        },
+      }
+    }
   
   }
 })
