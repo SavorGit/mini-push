@@ -26,7 +26,7 @@ Page({
       })
     },res=>{},{ isShowLoading: false })
     wx.showToast({
-      title: '努力加载中,请稍后...',
+      title: '努力加载中...',
     })
     var sysconfig = wx.getStorageSync("savor_now_time");
     app.globalData.change_link_type = 0;
