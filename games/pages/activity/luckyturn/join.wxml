@@ -5,7 +5,7 @@
 
 
 <import src="/pages/template/commons" />
-<template is="navigationBarForShare" data='{{statusBarHeight: statusBarHeight,titleText:"参与幸运转转转"}}' />
+<template is="navigationBarToIndex" data='{{statusBarHeight: statusBarHeight,titleText:"参与幸运转转转"}}' />
 
 <!-- 参与抽奖 -->
 <view class='container join' style='height:calc(100vh - {{46 + statusBarHeight + SystemInfo.screenBottomSpace}}px);'>

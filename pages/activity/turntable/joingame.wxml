@@ -1,6 +1,6 @@
 <!--pages/activity/turntable/joingame.wxml-->
 <import src="/pages/template/commons" />
-<template is="navigationBarForShare" data='{{statusBarHeight: statusBarHeight,titleText:"热点投屏"}}' />
+<template is="navigationBarToIndex" data='{{statusBarHeight: statusBarHeight,titleText:"热点投屏"}}' />
 
 
 <!-- ================================== 加入游戏 ================================== -->
