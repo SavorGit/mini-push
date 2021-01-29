@@ -31,7 +31,7 @@
 			<view class="icon theme-font5">+</view>
 			<view class="label theme-font5">上传奖品图</view>
 		</button>
-		<image wx:else class="pic" mode="aspectFill" src="{{oss_url}}/{{prize_info.img_url}}"></image>
+		<image wx:else class="pic" mode="aspectFill" src="{{oss_url}}/{{prize_info.img_url}}" bindtap="uploadImage"></image>
 		<view class="field flex-row-center-flex_start">
 			<view class="label">奖品名称:</view>
 			<input class="input" name="prizeName" value="{{prize_info.prizeName}}" maxlength="50" bindinput="addPrizeName"></input>
