@@ -203,7 +203,7 @@ Page({
    */
   onShareAppMessage: function (e) {
     var that = this;
-    var box_mac = e.target.dataset.type;
+    var box_mac = e.target.dataset.box_mac;
     var activity_id = e.target.dataset.activity_id;
     if (e.from === 'button') {
       
