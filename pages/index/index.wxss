@@ -223,9 +223,12 @@
 }
 
 .scene>.row>.btn {
-  width: 360rpx;
+  width: 345rpx;
+  height: 150rpx;
+  line-height: 150rpx;
+  /* width: 360rpx;
   height: 134rpx;
-  line-height: 134rpx;
+  line-height: 134rpx; */
   text-align: center;
   font-size: 52rpx;
   font-weight: bold;
@@ -235,7 +238,8 @@
   border: 0;
 }
 
-/* .scene>.row>.business {
+/**/
+.scene>.row>.business {
   color: #FFFFFF;
   background-color: rgb(219, 190, 49);
 }
@@ -243,7 +247,7 @@
 .scene>.row>.birthday {
   color: #FFFFFF;
   background-color: rgb(253, 128, 36);
-} */
+}
 
 
 /* ==================================== 推荐面板 ==================================== */

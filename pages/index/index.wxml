@@ -11,7 +11,7 @@
 				<navigator wx:if="{{item.clicktype == 1}}" class='full_width full_height' target="miniProgram" app-id="{{item.appid}}" path="{{item.linkcontent}}" bindtap="openAdsLink" data-ads_id="{{item.id}}">
 					<image mode='aspectFill' src="{{item.oss_addr}}" class="full_width full_height" />
 				</navigator>
-				<button wx:if="{{item.clicktype == 2}}" class='full_width full_height' bindtap='{{item.bindtap}}' data-boxmac="{{box_mac}}" data-box_id="{{box_id}}" data-openid="{{openid}}" data-index='{{index}}' data-linkcontent='{{item.linkcontent}}' data-id="{{item.id}}" >
+				<button wx:if="{{item.clicktype == 2}}" class='full_width full_height' bindtap='{{item.bindtap}}' data-boxmac="{{box_mac}}" data-box_id="{{box_id}}" data-openid="{{openid}}" data-index='{{index}}' data-linkcontent='{{item.linkcontent}}' data-id="{{item.id}}">
 					<image mode='aspectFill' src="{{item.oss_addr}}" class="full_width full_height" />
 				</button>
 			</swiper-item>
@@ -151,10 +151,12 @@
 	<!-- 场景按钮面板 -->
 	<view class="panel scene flex-column-center-center">
 		<view class="row flex-row-center-space_around">
-			<!-- <view class="btn business" bindtap="gotoBusiness" data-openid="{{openid}}" data-box_mac="{{box_mac}}">商务宴请</view>
-			<view class="btn birthday" bindtap="gotoParty" data-openid="{{openid}}" data-box_mac="{{box_mac}}">生日聚会</view> -->
+			<view class="btn business" bindtap="gotoBusiness" data-openid="{{openid}}" data-box_mac="{{box_mac}}">商务宴请</view>
+			<view class="btn birthday" bindtap="gotoParty" data-openid="{{openid}}" data-box_mac="{{box_mac}}">生日聚会</view>
+			<!--
 			<image class="btn business" mode="aspectFit" src="/images/imgs/btn_business.png" bindtap="gotoBusiness" data-openid="{{openid}}" data-box_mac="{{box_mac}}"></image>
 			<image class="btn birthday" mode="aspectFit" src="/images/imgs/btn_birthday.png" bindtap="gotoParty" data-openid="{{openid}}" data-box_mac="{{box_mac}}"></image>
+			-->
 		</view>
 	</view>
 
@@ -165,7 +167,7 @@
 		</view>
 		<view class="weui-grids">
 			<view wx:for="{{hot_play}}" wx:key="item" wx:for-index="index" wx:for-item="bean" class="weui-grid">
-				<view class="card" bindtap="boxShow"  data-res_type="{{bean.res_type}}" data-res_nums="{{bean.res_nums}}" data-pubdetail="{{bean.pubdetail}}" data-boxmac="{{box_mac}}" data-openid="{{openid}}" data-forscreen_id="{{bean.forscreen_id}}" data-hotel_info="{{hotel_info}}" data-res_id="{{bean.res_id}}" data-index="{{index}}">
+				<view class="card" bindtap="boxShow" data-res_type="{{bean.res_type}}" data-res_nums="{{bean.res_nums}}" data-pubdetail="{{bean.pubdetail}}" data-boxmac="{{box_mac}}" data-openid="{{openid}}" data-forscreen_id="{{bean.forscreen_id}}" data-hotel_info="{{hotel_info}}" data-res_id="{{bean.res_id}}" data-index="{{index}}">
 					<image mode="aspectFill" src="{{bean.pubdetail[0].img_url}}"></image>
 					<view class="flex-row-center-space_between">
 						<view class="user flex-row-center-space_between">
@@ -181,7 +183,7 @@
 					<view class="flex-row-center-space_between">
 						<view class="rank theme-font5">TOP {{index+1}}</view>
 
-						<button wx:if="{{bean.is_show==1}}"  class="btn theme-button-dark" data-res_type="{{bean.res_type}}" data-res_nums="{{bean.res_nums}}" data-pubdetail="{{bean.pubdetail}}" data-boxmac="{{box_mac}}" data-openid="{{openid}}" data-forscreen_id="{{bean.forscreen_id}}" data-hotel_info="{{hotel_info}}" data-index="{{index}}">投屏</button>
+						<button wx:if="{{bean.is_show==1}}" class="btn theme-button-dark" data-res_type="{{bean.res_type}}" data-res_nums="{{bean.res_nums}}" data-pubdetail="{{bean.pubdetail}}" data-boxmac="{{box_mac}}" data-openid="{{openid}}" data-forscreen_id="{{bean.forscreen_id}}" data-hotel_info="{{hotel_info}}" data-index="{{index}}">投屏</button>
 
 					</view>
 				</view>
