@@ -39,7 +39,8 @@ Page({
   getGameList: function () {
     var that = this;
     utils.PostRequest(api_url + '/games/index/gameList', {
-      page: page
+      page: page,
+      version:"4.6.20"
     }, (data, headers, cookies, errMsg, statusCode) => {
       that.setData({
         gameList: data.result,
