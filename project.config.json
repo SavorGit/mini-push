@@ -37,7 +37,7 @@
     "minifyWXSS": true
   },
   "compileType": "miniprogram",
-  "libVersion": "2.14.4",
+  "libVersion": "2.15.0",
   "appid": "wxfdf0346934bb672f",
   "projectname": "savor_produce",
   "isGameTourist": false,
