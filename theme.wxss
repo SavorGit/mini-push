@@ -126,6 +126,11 @@ button[disabled] {
 }
 
 .theme-button-000000-EDF0F2 {
+  color: #000000;
+  background-color: #EDF0F2;
+}
+
+.theme-button-333333-EDF0F2 {
   color: #333333;
   background-color: #EDF0F2;
 }
@@ -133,7 +138,8 @@ button[disabled] {
 .theme-button-buy,
 .theme-button-like,
 .theme-button-red,
-.theme-rad-panel {
+.theme-rad-panel,
+.theme-button-FFFFFF-F44444 {
   color: #FFFFFF;
   background-color: #F44444;
 }
