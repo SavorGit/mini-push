@@ -25,9 +25,16 @@ Page({
    */
   onLoad: function (options) {
     var that = this;
-    var scene = options.scene.split('_');
-    box_mac = scene[0];
-    activity_id = scene[1];
+    console.log(options);
+    if(typeof(options.scene)!='undefined'){
+      var scene = options.scene.split('_');
+      box_mac = scene[0];
+      activity_id = scene[1];
+    }else {
+      box_mac = options.box_mac;
+      activity_id = options.activity_id;
+    }
+    
 
     gamecode = api_v_url+"/Activity/getGameCode?scene=" + box_mac + "_" + activity_id;
     wx.login({

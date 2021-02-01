@@ -88,34 +88,16 @@ Page({
         }
       })
     } else if (retry == 1) {
-      wx.request({
-        url: api_v_url+'/Activity/retryGame',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        data: {
-          activity_id: activity_id,
-        },
-        success: function (res) {
-          that.setData({
-            showStart: false,
-          })
-          wx.request({
-            url: api_url+'/Netty/Index/pushnetty',
-            
-            method: "POST",
-            data: {
-              box_mac: box_mac,
-              cmd: 'call-mini-program',
-              msg: '{"action":105,"openid":"' + openid + '","activity_id":' + activity_id + '}',
-              req_id: activity_id
-            },
-            success: function (ret) {
 
-            }
-          });
-        }
+      utils.PostRequest(api_v_url + '/activity/againTurntable', {
+        box_mac: box_mac,
+        openid:openid,
+        activity_id: activity_id,
+      }, (data, headers, cookies, errMsg, statusCode) => {
+        app.showToast('操作成功');
       })
+
+      
     }
 
   },
@@ -202,7 +184,21 @@ Page({
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage: function () {
+  onShareAppMessage: function (e) {
+    var that = this;
+    var box_mac = e.target.dataset.box_mac;
+    var activity_id = e.target.dataset.activity_id;
+    if (e.from === 'button') {
+      
+      var share_url = '/pages/activity/turntable/joingame?box_mac='+box_mac+'&activity_id='+activity_id;
+      return {
+        title: '您的好友邀请您参与转盘游戏',
+        path: share_url,
+        success: function(res) {
+          // console.log('full_scroll.Page.onShareAppMessage','return', e);
+        },
+      }
+    }
   
   }
 })
