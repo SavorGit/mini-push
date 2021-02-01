@@ -87,7 +87,15 @@ Page({
         }
       })
     } else if (retry == 1) {
-      wx.request({
+      utils.PostRequest(api_v_url + '/activity/againTurntable', {
+        box_mac: box_mac,
+        openid:openid,
+        activity_id: activity_id,
+      }, (data, headers, cookies, errMsg, statusCode) => {
+        app.showToast('操作成功');
+      })
+
+      /*wx.request({
         url: 'https://mobile.littlehotspot.com/smallapp/Activity/retryGame',
         headers: {
           'Content-Type': 'application/json'
@@ -114,7 +122,7 @@ Page({
             }
           });
         }
-      })
+      })*/
     }
 
   },
