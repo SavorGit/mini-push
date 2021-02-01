@@ -11,19 +11,20 @@
 
 .item {
   width: calc(100% - 40rpx);
-  height: 90rpx;
-  padding: 5rpx 20rpx;
+  /* height: 90rpx; */
+  padding: 20rpx;
   margin-top: 3rpx;
   border-radius: 5rpx;
 }
 
+/* 备份在4.6.20(2021.02.01)操作
 .item>.left {
   width: calc(100% - 100rpx);
 }
 
 .item>.left>.icon {
-  width: 70rpx;
-  height: 70rpx;
+  width: 240rpx;
+  height: 194rpx;
 }
 
 .item>.left>.icon image {
@@ -33,10 +34,10 @@
 }
 
 .item>.left>.title {
-  /* width: calc(100% - 80rpx); */
-  width: 100%;
-  margin-left: 10rpx;
-  font-size: 30rpx;
+  width: calc(100% - 270rpx);
+  margin-left: 30rpx;
+  font-size: 36rpx;
+  font-weight: 700;
 }
 
 .item>.right {
@@ -55,4 +56,46 @@
   margin: 0;
   padding: 0;
   background-color: unset;
+}
+*/
+.item>.left {
+  width: 270rpx;
+}
+
+.item>.left>.icon {
+  width: 240rpx;
+  height: 194rpx;
+  border-radius: 5rpx;
+}
+
+.item>.right {
+  width: calc(100% - 270rpx);
+}
+
+.item>.right>.row {
+  width: 100%;
+  padding: 10rpx 0;
+}
+
+.item>.right>.row>.title {
+  width: calc(100% - 160rpx);
+  font-size: 36rpx;
+  font-weight: 700;
+}
+
+.item>.right>.row>.btn {
+  width: 160rpx;
+  height: 60rpx;
+  line-height: 60rpx;
+  text-align: center;
+  font-size: 36rpx;
+  border-radius: 8rpx;
+  margin: 0;
+  padding: 0;
+}
+
+.item>.right>.row>.description {
+  width: 100%;
+  font-size: 28rpx;
+  font-weight: 400;
 }
