@@ -1,6 +1,7 @@
 // pages/activity/turntable/game.js
 const app = getApp();
 var utils = require("../../../utils/util.js");
+var api_v_url = app.globalData.api_v_url;
 var api_url = app.globalData.api_url;
 Page({
 
