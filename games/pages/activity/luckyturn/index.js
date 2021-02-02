@@ -221,6 +221,10 @@ Page({
       }
       that.setData({status:status,activity_id:activity_id})
       
+    },re=>{
+      wx.navigateBack({
+        delta: 1,
+      })
     })
   },
   resetPrize:function(e){
