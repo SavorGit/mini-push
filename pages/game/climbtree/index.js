@@ -89,6 +89,7 @@ Page({
 
                   })
                   game_m_h5_url +='?isLauncher=true';
+                  game_m_h5_url = encodeURIComponent(game_m_h5_url);
                   wx.navigateTo({
                     url: '/pages/game/climbtree/climbtree?box_mac=' + box_mac + '&game_m_h5_url=' + game_m_h5_url
                   })

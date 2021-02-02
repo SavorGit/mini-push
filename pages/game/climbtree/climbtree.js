@@ -19,6 +19,7 @@ Page({
     var that = this;
     var box_mac = options.box_mac;
     var game_m_h5_url = options.game_m_h5_url;
+    game_m_h5_url = decodeURIComponent(game_m_h5_url)
     that.setData({
       game_m_h5_url: game_m_h5_url
     })
