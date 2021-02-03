@@ -36,14 +36,14 @@ Page({
     }, (data, headers, cookies, errMsg, statusCode) => {
       user_info = data.result.userinfo;
       if(user_info.is_wx_auth==3){
-        that.joinPrize();
+        that.joinPrize(openid,box_mac,activity_id);
       }else {
         that.setData({user_info:user_info})
       }
       
     })
   },
-  joinPrize:function(){
+  joinPrize:function(openid,box_mac,activity_id){
     var that = this;
     utils.PostRequest(api_v_url + '/activity/joinLottery', {
       openid:openid,

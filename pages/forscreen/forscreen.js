@@ -305,6 +305,7 @@ Page({
             url: '/games/pages/activity/din_dash?openid='+openid+'&box_mac='+box_mac,
           })
         }else if(code_type==35){
+          console.log('/games/pages/activity/luckyturn/join?openid='+openid+'&box_mac='+box_mac+'&activity_id='+prize_activity_id)
           wx.reLaunch({
             url: '/games/pages/activity/luckyturn/join?openid='+openid+'&box_mac='+box_mac+'&activity_id='+prize_activity_id,
           })
