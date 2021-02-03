@@ -21,7 +21,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    welcome_info:{'images':[],'content':'','font_id':0,'wordsize_id':0,'color_id':0,'stay_time':0},
+    welcome_info:{'images':[],'content':'','font_id':0,'wordsize_id':0,'color_id':0,'stay_time':0,'music_id':0},
     oss_url:app.globalData.oss_url,
     statusBarHeight: getApp().globalData.statusBarHeight,
     SystemInfo: getApp().SystemInfo,
@@ -70,13 +70,22 @@ Page({
       var stay_times = data.result.stay_times
       var wordtype_list = data.result.font
 
+      //背景音乐
+      var music =  data.result.music;
+      var music_str_list = [];
+      for(var i in music){
+        music_str_list.push(music[i].name)
+      }
+
 
       welcome_info.wordsize_id = wordsize[0].id;
       welcome_info.color_id   = color_list[0].id
       //welcome_info.stay_time = stay_times[0].id
       that.setData({'wordtype':wordtype,'wordsize':wordsize,'stay_times':stay_times,
                     'wordtype_list':wordtype_list,'font_list':font_list,'welcome_info':welcome_info,
-                    'color_list':color_list
+                    'color_list':color_list,
+                    "music_str_list":music_str_list,
+                    "music":music
                   });
       if(welcome_id>0){
         that.getWelcomeInfo(openid,box_mac,type,welcome_id);
@@ -443,6 +452,13 @@ Page({
       welcome_info: welcome_info
     })
   },
+  bindChangeMusic:function(e){
+    console.log(e)
+    var music_id = e.detail.value;
+    var welcome_info = this.data.welcome_info;
+    welcome_info.music_id = music_id;
+    this.setData({welcome_info:welcome_info})
+  },
   playTimesChange:function(e){
 
     var stay_time = e.detail.value;
@@ -485,6 +501,7 @@ Page({
       app.showToast('请选择字体颜色',2000,'none',false);
       return false;
     }
+    var music_id = welcome_info.music_id;
     for(let i in stay_times){
       if(stay_times[i].is_select==1){
         var stay_time = stay_times[i].id
@@ -513,6 +530,7 @@ Page({
       stay_time:stay_time,
       type:type,
       wordsize_id:welcome_info.wordsize_id,
+      music_id:music_id
     }, (data, headers, cookies, errMsg, statusCode) =>{
       app.showToast('保存成功')
       var welcome_id = data.result.welcome_id;
