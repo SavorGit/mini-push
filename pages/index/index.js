@@ -340,23 +340,37 @@ Page({
   },
   //互动游戏
   hdgames(e) {
+    var that = this;
     var openid = e.currentTarget.dataset.openid;
     var box_mac = e.currentTarget.dataset.boxmac;
     var linkcontent = e.currentTarget.dataset.linkcontent;
     var box_id  = e.currentTarget.dataset.box_id;
     var id = e.currentTarget.dataset.id;
-    if (box_mac == '') {
-      app.scanQrcode(pageid);
-    } else {
-      var mobile_brand = app.globalData.mobile_brand;
-      var mobile_model = app.globalData.mobile_model;
-
-      wx.navigateTo({
-        url: linkcontent + '?box_mac=' + box_mac + '&openid=' + openid + '&box_id='+box_id+'&game_id=2'
-      })
+    var user_info = wx.getStorageSync("savor_user_info");
+    if(user_info=='' || typeof(user_info)=='undefined'){
+      app.showToast('网络异常，请用微信重新扫码链接电视')
+      return false;
     }
-    mta.Event.stat('clickTopAds', { 'linktype': app.globalData.link_type, "box_mac": box_mac,'id':id })
-    mta.Event.stat('gotoHdGame', { 'linktype': app.globalData.link_type, "box_mac": box_mac })
+    if (user_info.is_wx_auth != 3 ) {
+      that.setData({
+        showModal: true
+      })
+    } else {
+      if (box_mac == '') {
+        app.scanQrcode(pageid);
+      } else {
+        var mobile_brand = app.globalData.mobile_brand;
+        var mobile_model = app.globalData.mobile_model;
+  
+        wx.navigateTo({
+          url: linkcontent + '?box_mac=' + box_mac + '&openid=' + openid + '&box_id='+box_id+'&game_id=2'
+        })
+      }
+      mta.Event.stat('clickTopAds', { 'linktype': app.globalData.link_type, "box_mac": box_mac,'id':id })
+      mta.Event.stat('gotoHdGame', { 'linktype': app.globalData.link_type, "box_mac": box_mac })
+
+    }
+    
   },
   //本小程序内跳转
   goToPage:function(e){
