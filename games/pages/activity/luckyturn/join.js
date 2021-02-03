@@ -101,7 +101,7 @@ Page({
               'iv': rets.iv,
               'encryptedData': rets.encryptedData
             }, (data, headers, cookies, errMsg, statusCode) => {
-              that.joinPrize();
+              that.joinPrize(openid,box_mac,activity_id);
             }, res => wx.showToast({
               title: '微信登陆失败，请重试',
               icon: 'none',
