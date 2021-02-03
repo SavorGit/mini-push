@@ -82,6 +82,17 @@
 					<view class="input" style="background-color:rgb(244,13,13);"></view> -->
 				</view>
 			</view>
+			<view class="item select flex-row-center-flex_start">
+				<view class="label theme-font1">背景音乐</view>
+				<view class="value">
+					<picker class="input">
+						<view class="innter flex-row-center-space_between">
+							<view class="text">-- 无 --</view>
+							<view class="icon fa fa-angle-down" aria-hidden="true"></view>
+						</view>
+					</picker>
+				</view>
+			</view>
 			<view class="item radio flex-row-flex_start-flex_start">
 				<view class="label theme-font1">停留时间</view>
 				<view class="value">
