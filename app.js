@@ -133,7 +133,9 @@ App({
           msg: msg
         },
         success: function (result) {
-          
+          if(result.data.code!=10000){
+            title = result.data.msg;
+          }
           wx.showToast({
             title: title,
             icon: 'none',
@@ -208,6 +210,9 @@ App({
             msg: msg,
           },
           success: function (result) {
+            if(result.data.code!=10000){
+              title = result.data.msg;
+            }
             wx.showToast({
               title: title,
               icon: 'none',
@@ -600,7 +605,7 @@ App({
     var that = this;
     wx.showModal({
       title: '提示',
-      content: "您可扫描热点合作餐厅电视中的二维码使用此功能",
+      content: "请扫电视二维码",
       showCancel: true,
       confirmText: '立即扫码',
       success: function (res) {

@@ -374,12 +374,42 @@ Page({
   },
   //本小程序内跳转
   goToPage:function(e){
+    var that = this;
     var openid = e.currentTarget.dataset.openid;
     var linkcontent = e.currentTarget.dataset.linkcontent;
     var id = e.currentTarget.dataset.id;
     wx.navigateTo({
       url: linkcontent+'&openid='+openid, 
     })
+    var info = e.currentTarget.dataset.info;
+    if(box_mac!='' && info.is_tvdemand==1){
+      
+      var pubdetail = [{
+        'duration': 0,
+        'resource_size': 0,
+        'forscreen_url': '',
+        'res_id': 0,
+        'res_url':'',
+        'forscreen_char':'',
+        'qrcode_url':'',
+      }];
+      var res_id = info.res_id;
+      for (var i = 0; i < 1; i++) {
+        pubdetail[0].duration = info.duration;
+        pubdetail[0].resource_size = info.resource_size;
+        pubdetail[0].forscreen_url = info.forscreen_url;
+        pubdetail[0].res_id = res_id;
+        pubdetail[0].res_url = info.tx_url;
+        pubdetail[0].forscreen_char = '';
+        pubdetail[0].qrcode_url = info.qrcode_url;
+      }
+      var actoin = info.action;
+      var hotel_info = that.data.hotel_info;
+      var res_type = 2;
+      var res_nums = 1;
+      
+      app.boxShow(box_mac, res_id, pubdetail, res_type, res_nums, actoin, hotel_info, that);
+    }
     mta.Event.stat('clickTopAds', { 'linktype': app.globalData.link_type, "box_mac": box_mac,'id':id })
   },
   //断开连接
