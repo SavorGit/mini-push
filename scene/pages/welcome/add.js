@@ -122,7 +122,15 @@ Page({
           stay_times[i].is_select = 1;
         }
       }
-      
+      var music = that.data.music;
+      var m_id = welcome_info.music_id;
+      var keys = 0;
+      for(var i in music){
+        if(m_id == music[i].id){
+          keys = i;
+        }
+      }
+      welcome_info.music_id = keys;
       that.setData({
         welcome_info:welcome_info,
         wordtype_index:wordtype_index,
@@ -502,6 +510,9 @@ Page({
       return false;
     }
     var music_id = welcome_info.music_id;
+    var music    = that.data.music;
+    music_id = music[music_id].id;
+
     for(let i in stay_times){
       if(stay_times[i].is_select==1){
         var stay_time = stay_times[i].id
