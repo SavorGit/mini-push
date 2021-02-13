@@ -1,5 +1,7 @@
 const app = getApp();
 var api_v_url = app.globalData.api_v_url
+const utils = require('../../../utils/util.js')
+var cache_key = app.globalData.cache_key;
 Page({
   data: {
     statusBarHeight: getApp().globalData.statusBarHeight,
@@ -15,6 +17,21 @@ Page({
       box_mac:box_mac,
       openid :openid
     });
+    utils.PostRequest(api_v_url + '/activity/getTurntableStatus', {
+      openid: openid,
+      box_mac:box_mac
+    }, (data, headers, cookies, errMsg, statusCode) => {
+      var activity_id = data.result.activity_id;
+      var status = data.result.status;
+      var user_info = wx.getStorageSync(cache_key + 'user_info');
+      var avatarurl = user_info.avatarUrl;
+      var nickName  = user_info.nickName;
+      if(status==1){
+        wx.navigateTo({
+          url: '/pages/activity/turntable/game?avatarurl=' + avatarurl + '&nickName=' + nickName + '&box_mac=' + box_mac + '&openid=' + openid + '&activity_id=' + activity_id,
+        })
+      }
+    })
     
   },
  
