@@ -133,7 +133,9 @@ App({
           msg: msg
         },
         success: function (result) {
-          
+          if(result.data.code!=10000){
+            title = result.data.msg;
+          }
           wx.showToast({
             title: title,
             icon: 'none',
@@ -184,7 +186,7 @@ App({
           var netty_action = 5
           var url = that.globalData.oss_url+"/"+pubdetail[i]['forscreen_url']
           var msg = '{ "action":'+netty_action+', "url": "' + url+ '", "filename":"' + pubdetail[i]['filename'] + '","openid":"' + openid + '","resource_type":2,"video_id":"' + pubdetail[i]['res_id'] + '","avatarUrl":"' + avatarUrl + '","nickName":"' + nickName + '","forscreen_id":"' + forscreen_id + '","resource_size":"'+pubdetail[i]['resource_size']+'","serial_number":"'+serial_number+'"}';
-        }else if(action ==13){
+        }else if(action ==13 || action==14){
           var msg = {};
           msg.action = 13;
           msg.forscreen_id = forscreen_id;
@@ -208,6 +210,9 @@ App({
             msg: msg,
           },
           success: function (result) {
+            if(result.data.code!=10000){
+              title = result.data.msg;
+            }
             wx.showToast({
               title: title,
               icon: 'none',
@@ -600,7 +605,7 @@ App({
     var that = this;
     wx.showModal({
       title: '提示',
-      content: "您可扫描热点合作餐厅电视中的二维码使用此功能",
+      content: "请扫电视二维码",
       showCancel: true,
       confirmText: '立即扫码',
       success: function (res) {

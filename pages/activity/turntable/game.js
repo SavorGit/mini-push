@@ -88,6 +88,7 @@ Page({
           });
         }
       })
+      
     } else if (retry == 1) {
 
       utils.PostRequest(api_v_url + '/activity/againTurntable', {
