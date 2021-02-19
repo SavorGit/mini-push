@@ -59,42 +59,34 @@ Page({
 
     
     if (retry == 0) {
-      utils.PostRequest(api_v_url + '/activity/getTurntableStatus', {
-        activity_id:activity_id
-      }, (data, headers, cookies, errMsg, statusCode) => {
-        wx.request({
-          url: api_v_url+'/Activity/startGameLog',
-          headers: {
-            'Content-Type': 'application/json'
-          },
-          data: {
-            activity_id: activity_id,
-            startgame_time: timestamp
-          },
-          success: function (res) {
-            that.setData({
-              showStart: false,
-            })
-            wx.request({
-              url: api_url+'/Netty/Index/pushnetty',
-              
-              method: "POST",
-              data: {
-                box_mac: box_mac,
-                cmd: 'call-mini-program',
-                msg: '{"action":102,"openid":"' + openid + '","activity_id":' + activity_id + '}',
-                req_id: activity_id
-              },
-              success:function(ret){
-  
-              }
-            });
-          }
-        })
-      },res=>{
-        wx.navigateBack({
-          delta: 2,
-        })
+      wx.request({
+        url: api_v_url+'/Activity/startGameLog',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        data: {
+          activity_id: activity_id,
+          startgame_time: timestamp
+        },
+        success: function (res) {
+          that.setData({
+            showStart: false,
+          })
+          wx.request({
+            url: api_url+'/Netty/Index/pushnetty',
+            
+            method: "POST",
+            data: {
+              box_mac: box_mac,
+              cmd: 'call-mini-program',
+              msg: '{"action":102,"openid":"' + openid + '","activity_id":' + activity_id + '}',
+              req_id: activity_id
+            },
+            success:function(ret){
+
+            }
+          });
+        }
       })
       
     } else if (retry == 1) {

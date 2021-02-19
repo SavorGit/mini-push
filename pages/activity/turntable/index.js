@@ -17,7 +17,7 @@ Page({
       box_mac:box_mac,
       openid :openid
     });
-    utils.PostRequest(api_v_url + '/activity/getTurntableStatus', {
+    /*utils.PostRequest(api_v_url + '/activity/getTurntableStatus', {
       openid: openid,
       box_mac:box_mac
     }, (data, headers, cookies, errMsg, statusCode) => {
@@ -31,7 +31,7 @@ Page({
           url: '/pages/activity/turntable/game?avatarurl=' + avatarurl + '&nickName=' + nickName + '&box_mac=' + box_mac + '&openid=' + openid + '&activity_id=' + activity_id,
         })
       }
-    })
+    })*/
     
   },
  
