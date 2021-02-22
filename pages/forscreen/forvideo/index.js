@@ -338,10 +338,11 @@ Page({
     });
     var hotel_info = that.data.hotel_info;
     var timer_90 = setTimeout(function () {
+      console.log('ddd')
       //upload_task.abort();
       //that.speedForVideo(form_data,hotel_info,1)
     
-    }, 100);
+    }, 10000);
     upload_task.onProgressUpdate((res) => {
       var openWind = that.data.openWind;
       openWind.progress = res.progress
