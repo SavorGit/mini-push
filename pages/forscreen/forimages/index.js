@@ -629,7 +629,7 @@ Page({
                   } else {
                     var us_wifi_password = hotel_info.wifi_password;
                   }
-                  var msg = '请手动连接包间wifi:' + hotel_info.wifi_name + ',密码为' + us_wifi_password+'。连上wifi投屏更快哦！';
+                  var err_msg = '请手动连接包间wifi:' + hotel_info.wifi_name + ',密码为' + us_wifi_password+'。连上wifi投屏更快哦！';
                   
                 }
                 openWind.tip = err_msg;

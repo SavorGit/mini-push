@@ -595,7 +595,7 @@ Page({
                 //console.log('99999--'+cTs);
                 that.connectWifi(wifi_name, wifi_mac, use_wifi_password, box_mac,hotel_info,data,cTs);
               }else if(res.errMsg == 'getConnectedWifi:fail:netInfo is null'){
-                that.speedUploadImg(hotel_info,data);
+                that.speedUploadVideo(hotel_info,data);
               }
               else {
                 if (res.errCode == 12005) { //安卓特有  未打开wifi
@@ -763,7 +763,7 @@ Page({
             } else {
               var wifi_password_str = use_wifi_password;
             }
-            var msg = '请手动连接包间wifi:' + wifi_name + ',密码为' + wifi_password_str+'。连上wifi投屏更快哦！';
+            var err_msg = '请手动连接包间wifi:' + wifi_name + ',密码为' + wifi_password_str+'。连上wifi投屏更快哦！';
             
           }
           //console.log('go on');

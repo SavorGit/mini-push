@@ -103,7 +103,6 @@ Page({
         
       }
     } else if (typeof (options.g) != 'undefined'){ //小程序内部扫销售端商品活动码
-      console.log(options.g)
       var g = options.g;
       var g_arr = g.split('_');
       var box_mac = g_arr[1];
@@ -122,7 +121,6 @@ Page({
         url: launch_url,
       })
     }else if(typeof(options.official)!='undefined'){
-      console.log(options)
       var s = options.official
       var wxmpopenid = options.wxmpopenid;
       var subscribe_time = options.subscribe_time;

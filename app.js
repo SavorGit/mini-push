@@ -4,17 +4,17 @@ App({
 
   
   //电视播放
-  boxShow(box_mac = '', forscreen_id, pubdetail, res_type, res_len, action, hotel_info, aps) {
+  boxShow(box_mac = '', forscreen_id, pubdetail, res_type, res_len, action, hotel_info, aps,is_hot= 0) {
     var that = this;
 
     if (box_mac == '') {
       this.scanQrcode();
     } else {
       var user_info = wx.getStorageSync("savor_user_info");
-      that.tpst(box_mac, forscreen_id, pubdetail, res_type, res_len, action, hotel_info);
+      that.tpst(box_mac, forscreen_id, pubdetail, res_type, res_len, action, hotel_info,is_hot);
     }
   }, //电视播放结束
-  tpst: function (box_mac = '', forscreen_id, pubdetail, res_type, res_len, action, hotel_info) {
+  tpst: function (box_mac = '', forscreen_id, pubdetail, res_type, res_len, action, hotel_info,is_hot) {
     var that = this;
     wx.request({
       url: that.globalData.api_v_url + '/User/isForscreenIng',
@@ -34,17 +34,17 @@ App({
             success: function (res) {
               if (res.confirm) {
 
-                that.tprc(box_mac, forscreen_id, pubdetail, res_type, res_len, action, hotel_info);
+                that.tprc(box_mac, forscreen_id, pubdetail, res_type, res_len, action, hotel_info,is_hot);
               }
             }
           })
         } else {
-          that.tprc(box_mac, forscreen_id, pubdetail, res_type, res_len, action, hotel_info);
+          that.tprc(box_mac, forscreen_id, pubdetail, res_type, res_len, action, hotel_info,is_hot);
         }
       }
     });
   },
-  tprc: function (box_mac = '', forscreen_id, pubdetail, res_type, res_len, action, hotel_info) {
+  tprc: function (box_mac = '', forscreen_id, pubdetail, res_type, res_len, action, hotel_info,is_hot) {
     var that = this;
     var user_info = wx.getStorageSync("savor_user_info");
     var avatarUrl = user_info.avatarUrl;
@@ -63,9 +63,14 @@ App({
     }
     if (res_type == 1) {
       //图集
+      if(is_hot==1){
+        var netty_action = 11;
+      }else {
+        var netty_action = 10;
+      }
       forscreen_char = pubdetail[0].forscreen_char;
       var res_obj = [];
-      var msg = { action: 10,  openid: openid, img_nums: res_len, forscreen_char: forscreen_char, forscreen_id: forscreen_id, avatarUrl: avatarUrl, nickName: nickName,serial_number:serial_number}
+      var msg = { action: netty_action,  openid: openid, img_nums: res_len, forscreen_char: forscreen_char, forscreen_id: forscreen_id, avatarUrl: avatarUrl, nickName: nickName,serial_number:serial_number}
       for (var i = 0; i < pubdetail.length; i++) {
         var quality = '';
         var quality_type = 0;
@@ -195,7 +200,12 @@ App({
           msg.url      = pubdetail[i].forscreen_url;
           msg = JSON.stringify(msg)
         }else {
-          var netty_action = 2
+          if(is_hot==1){
+            var netty_action = 12;
+          }else {
+            var netty_action = 2
+          }
+          
           var url = pubdetail[i]['forscreen_url']
           var msg = '{ "action":'+netty_action+', "url": "' + url+ '", "filename":"' + pubdetail[i]['filename'] + '","openid":"' + openid + '","resource_type":2,"video_id":"' + pubdetail[i]['res_id'] + '","avatarUrl":"' + avatarUrl + '","nickName":"' + nickName + '","forscreen_id":"' + forscreen_id + '","resource_size":"'+pubdetail[i]['resource_size']+'","serial_number":"'+serial_number+'"}';
         }

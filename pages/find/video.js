@@ -27,6 +27,10 @@ Page({
    */
   onLoad: function(options) {
     var self = this;
+    var is_hot = 0;
+    if(typeof(options.is_hot)!='undefined'){
+      var is_hot = options.is_hot;
+    }
     let pages = getCurrentPages(); //当前页面栈
     if (pages.length > 1) {
       self.setData({
@@ -69,7 +73,8 @@ Page({
         is_collect: data.result.is_collect,
         openid: openid,
         box_mac: box_mac,
-        is_replay_disabel:false
+        is_replay_disabel:false,
+        is_hot:is_hot
       })
     })
     
@@ -218,7 +223,8 @@ Page({
         var action = 12; //发现视频点播
       }
       var hotel_info = self.data.hotel_info;
-      app.boxShow(box_mac, find_id, pubdetail, res_type, res_len, action, hotel_info, self);
+      var is_hot = self.data.is_hot;
+      app.boxShow(box_mac, find_id, pubdetail, res_type, res_len, action, hotel_info, self,is_hot);
 
       
 

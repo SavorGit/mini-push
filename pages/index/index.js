@@ -761,14 +761,14 @@ Page({
     var index = e.currentTarget.dataset.index;
     if (res_type == 1) {
       var action = 11; //发现图片点播
-      var jump_url = '/pages/find/picture?box_mac='+box_mac+'&forscreen_id='+forscreen_id;
+      var jump_url = '/pages/find/picture?box_mac='+box_mac+'&forscreen_id='+forscreen_id+'&is_hot=1';
     } else if (res_type == 2) {
       var action = 12; //发现视频点播
-      var jump_url = '/pages/find/video?box_mac='+box_mac+'&forscreen_id='+forscreen_id;
+      var jump_url = '/pages/find/video?box_mac='+box_mac+'&forscreen_id='+forscreen_id+'&is_hot=1';
     }
     if(box_mac!='' && typeof(box_mac)!='undefined'){
       //跳转到详情页
-      app.boxShow(box_mac, res_id, pubdetail, res_type, res_nums, action, hotel_info, that);
+      app.boxShow(box_mac, res_id, pubdetail, res_type, res_nums, action, hotel_info, that,1);
     }
     wx.navigateTo({
       url: jump_url,
