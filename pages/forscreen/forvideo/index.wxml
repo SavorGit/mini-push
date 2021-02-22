@@ -231,7 +231,7 @@
 </modal-2>
 
 <!-- 上传超时弹窗 -->
-<modal show="{{showModal_3}}" width="690rpx" height='450rpx' border-radius="10rpx" title-text='温馨提示' title-color="#333333" title-background-color="unset" title-border-radius="0rpx" buttonWapperPadding='15rpx' confirm-text='确定' confirm-color="#FFFFFF" confirm-background-color="#F44444" confirm-border-radius="10rpx" cancel-text='取消' cancel-color='#FFFFFF' cancel-background-color="#58525C" cancel-border-radius="10rpx" bindcancel="timeoutUploadCancel" bindconfirm='timeoutUploadConfirm'>
+<modal show="{{showModal_3}}" width="690rpx" height='450rpx' border-radius="10rpx" title-text='温馨提示' title-color="#333333" title-background-color="unset" title-border-radius="0rpx" buttonWapperPadding='15rpx' confirm-text='切换极速投屏' confirm-color="#FFFFFF" confirm-background-color="#F44444" confirm-border-radius="10rpx" cancel-text='继续投屏' cancel-color='#FFFFFF' cancel-background-color="#58525C" cancel-border-radius="10rpx" bindcancel="timeoutUploadCancel" bindconfirm='timeoutUploadConfirm'>
 	<view class="flex-column-center-flex_start" style="padding:30rpx 0 0 0;color:#333333;font-size:28rpx;">
 		<view>当前网络不太好，投屏缓慢。</view>
 		<view>您可切换到【极速投屏模式】提升投屏速度。</view>

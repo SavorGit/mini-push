@@ -315,7 +315,16 @@ Page({
     var postf_t = filename.substring(index1, index2); //后缀名
     var timestamp = (new Date()).valueOf();
     res_sup_time = timestamp;
+    var timer_90 = setTimeout(function () {
+      
+      that.setData({
+        showModal_3:true,
+        isOpenWind:false,
+      })
+      //upload_task.abort();
+      //that.speedForVideo(form_data,hotel_info,1)
     
+    }, 10000);
     //第一步上传视频
     upload_task = wx.uploadFile({
       url: oss_upload_url,
@@ -332,17 +341,16 @@ Page({
         signature: signature
       },
       success: function(res) {
+        that.setData({
+          showModal_3:false,
+        })
+        clearTimeout(timer_90)
         that.videoPushNetty(timestamp,postf_t,box_mac,openid, is_pub_hotelinfo, is_share, duration, avatarUrl, nickName, public_text);
         
       }
     });
-    var hotel_info = that.data.hotel_info;
-    var timer_90 = setTimeout(function () {
-      console.log('ddd')
-      //upload_task.abort();
-      //that.speedForVideo(form_data,hotel_info,1)
     
-    }, 10000);
+    
     upload_task.onProgressUpdate((res) => {
       var openWind = that.data.openWind;
       openWind.progress = res.progress
@@ -1762,6 +1770,21 @@ Page({
     wx.navigateBack({
       delta: 1,
     })
+  },
+  timeoutUploadCancel:function(e){
+    var that = this;
+    that.setData({showModal_3:false,isOpenWind:true})
+  },
+  timeoutUploadConfirm:function(e){
+    upload_task.abort();
+    var that = this;
+    var hotel_info = that.data.hotel_info;
+    var form_data  = that.data.form_data;
+    var launchType = that.data.launchType;
+    that.setData({
+      openWind:{'isWifi':false,'isError':false,'title':'','step':1,'progress':0,'tip':''}
+    })
+    that.speedForVideo(form_data,hotel_info);
   },
   /**
    * 生命周期函数--监听页面初次渲染完成
