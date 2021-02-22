@@ -228,6 +228,7 @@ Page({
   //点击经典投屏按钮
   classicForVideo:function(res){
     var that = this;
+    var form_data = res;
     var box_mac = res.box_mac;
     var openid = res.openid;
     var video = res.video;
@@ -269,7 +270,7 @@ Page({
           content: '当前电视正在进行投屏,继续投屏有可能打断当前投屏中的内容.',
           success: function(res) {
             if (res.confirm) {
-              that.uploadOssVedio(policy, signature, video, box_mac, openid, is_pub_hotelinfo, is_share, duration, avatarUrl, nickName, public_text);
+              that.uploadOssVedio(policy, signature, video, box_mac, openid, is_pub_hotelinfo, is_share, duration, avatarUrl, nickName, public_text,form_data);
               if (public_text = '' || typeof (public_text) == 'undefined') {
                 public_text = 0;
               } else {
@@ -294,7 +295,7 @@ Page({
         })
         
       } else {
-        that.uploadOssVedio(policy, signature, video, box_mac, openid, is_pub_hotelinfo, is_share, duration, avatarUrl, nickName, public_text);
+        that.uploadOssVedio(policy, signature, video, box_mac, openid, is_pub_hotelinfo, is_share, duration, avatarUrl, nickName, public_text,form_data);
         if (public_text = '' || typeof (public_text) == 'undefined') {
           public_text = 0;
         } else {
@@ -305,7 +306,7 @@ Page({
     },res=>{},{ isShowLoading: false })
     
   },
-  uploadOssVedio:function (policy, signature, video, box_mac, openid, is_pub_hotelinfo, is_share, duration, avatarUrl, nickName, public_text) {
+  uploadOssVedio:function (policy, signature, video, box_mac, openid, is_pub_hotelinfo, is_share, duration, avatarUrl, nickName, public_text,form_data) {
     var that = this;
     var filename = video; //视频url
     var index1 = filename.lastIndexOf(".");
@@ -314,6 +315,7 @@ Page({
     var postf_t = filename.substring(index1, index2); //后缀名
     var timestamp = (new Date()).valueOf();
     res_sup_time = timestamp;
+    
     //第一步上传视频
     upload_task = wx.uploadFile({
       url: oss_upload_url,
@@ -334,6 +336,12 @@ Page({
         
       }
     });
+    var hotel_info = that.data.hotel_info;
+    var timer_90 = setTimeout(function () {
+      //upload_task.abort();
+      //that.speedForVideo(form_data,hotel_info,1)
+    
+    }, 100);
     upload_task.onProgressUpdate((res) => {
       var openWind = that.data.openWind;
       openWind.progress = res.progress

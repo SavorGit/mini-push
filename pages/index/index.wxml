@@ -5,7 +5,7 @@
 <scroll-view class="container flex-column-center-flex_start theme-container" style='height: calc(100vh - 46px - {{statusBarHeight}}px);' scroll-y="true" scroll-with-animation="true">
 
 	<!-- 轮播图面板 -->
-	<swiper wx:if="{{imgUrls.length > 0}}" class="banner-loop-panel full_width" indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{lb_duration}}">
+	<swiper wx:if="{{imgUrls.length > 0}}" current="{{goods_index}}" class="banner-loop-panel full_width" indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{lb_duration}}">
 		<block wx:for="{{imgUrls}}" wx:key="item" wx:for-index="index">
 			<swiper-item class="full_width full_height">
 				<navigator wx:if="{{item.clicktype == 1}}" class='full_width full_height' target="miniProgram" app-id="{{item.appid}}" path="{{item.linkcontent}}" bindtap="openAdsLink" data-ads_id="{{item.id}}">
@@ -36,10 +36,10 @@
 	<!-- 服务员评价入口 
 	<view class="hotel-waiter-evaluate-panel theme-rad-panel" wx:if="{{is_view_eval_waiter==1}}">
 		<view class="btn-waiter-evaluate flex-row-center-center" bindtap="gotoPageHotelWaiterEvaluate" data-openid="{{openid}}" data-box_id="{{box_id}}">评价服务员</view>
-	</view>-->
+	</view>
 	<view class="hotel-waiter-evaluate-panel" wx:if="{{is_view_eval_waiter==1}}">
 		<image class="btn-waiter-evaluate flex-row-center-center" mode="aspectFill" src="https://oss.littlehotspot.com/Html5/script/mini-push/pages/index/index/waiter_enter_20201209.png" data-openid="{{openid}}" data-box_id="{{box_id}}" bindtap="gotoPageHotelWaiterEvaluate"></image>
-	</view>
+	</view>-->
 
 	<!-- 中部横幅图面板 -->
 	<view wx:if="{{imgUrls_mid.length > 0}}" class="middle-banner-panel full_width">

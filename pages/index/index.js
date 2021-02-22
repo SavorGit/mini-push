@@ -80,19 +80,33 @@ Page({
   },
   getAdspositionList:function(box_id){//获取轮播广告banner
     var that = this;
+    var small_app_version = app.globalData.small_app_version;
+    var qrcode_goods_id = wx.getStorageSync(cache_key+'qrcode_goods');
+
     utils.PostRequest(api_v_url + '/Adsposition/getAdspositionList', {
         position: '2,3',
-        box_id:box_id
+        version:small_app_version,
+        box_id:box_id,
+        goods_id:qrcode_goods_id
       }, (data, headers, cookies, errMsg, statusCode) => {
-        var imgUrls = data.result[2];
+        var imgUrls = data.result.datalist[2];
         var imgUrls_mid = [];
         if (typeof (data.result[3]) != 'undefined') {
-          var imgUrls_mid = data.result[3];
+          var imgUrls_mid = data.result.datalist[3];
         }
+        var goods_index = data.result.goods_index;
+        var slide_time  = data.result.slide_time;
+        var switch_time = data.result.switch_time;
+        //interval: 3000, //自动切换时间间隔
+        //lb_duration: 1000, //滑动动画时长
         that.setData({
           imgUrls: imgUrls,
-          imgUrls_mid: imgUrls_mid
+          imgUrls_mid: imgUrls_mid,
+          goods_index:goods_index,
+          interval:switch_time,
+          lb_duration:slide_time
         });
+        wx.removeStorageSync(cache_key+'qrcode_goods');
       },re => { }, { isShowLoading: false });
   },
   is_view_eval_waiter:function (openid,box_id){

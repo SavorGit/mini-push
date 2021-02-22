@@ -307,6 +307,12 @@ Page({
           wx.reLaunch({
             url: '/games/pages/activity/luckyturn/join?openid='+openid+'&box_mac='+box_mac+'&activity_id='+prize_activity_id,
           })
+        }else if(code_type==28){//扫描商城商品二维码
+          wx.setStorageSync('savor_qrcode_goods', prize_activity_id);
+          wx.reLaunch({
+            url: '../index/index',
+          })
+
         }else {
           wx.reLaunch({
             url: '../index/index',

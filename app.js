@@ -1379,5 +1379,6 @@ changeKb:function (limit){
     forscreen_call_code_filename:'',
     wx_download_max_size:209715200,
     config_info:{},
+    small_app_version:'4.6.22'
   }
 })
