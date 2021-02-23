@@ -26,6 +26,8 @@ var  tail_lenth    //尾部大小
 var fm;
 var max_video_size;         //极简投屏最大M数限制
 var max_user_forvideo_size; //主干版超过XXM走极简投屏
+var forscreen_timeout_time; //投屏超时切换极简版投屏
+
 Page({
 
   /**
@@ -106,6 +108,7 @@ Page({
     tail_lenth = hotel_info.tail_lenth;
     max_video_size = hotel_info.max_video_size;
     max_user_forvideo_size = hotel_info.max_user_forvideo_size;
+    forscreen_timeout_time = hotel_info.forscreen_timeout_time;
     var user_info = wx.getStorageSync("savor_user_info");
     var avatarUrl = user_info.avatarUrl;
     var nickName = user_info.nickName;
@@ -324,7 +327,7 @@ Page({
       //upload_task.abort();
       //that.speedForVideo(form_data,hotel_info,1)
     
-    }, 10000);
+    }, forscreen_timeout_time);
     //第一步上传视频
     upload_task = wx.uploadFile({
       url: oss_upload_url,
