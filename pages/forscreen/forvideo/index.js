@@ -270,7 +270,7 @@ Page({
           content: '当前电视正在进行投屏,继续投屏有可能打断当前投屏中的内容.',
           success: function(res) {
             if (res.confirm) {
-              that.uploadOssVedio(policy, signature, video, box_mac, openid, is_pub_hotelinfo, is_share, duration, avatarUrl, nickName, public_text,form_data);
+              that.uploadOssVedio(policy, signature, video, box_mac, openid, is_pub_hotelinfo, is_share, duration, avatarUrl, nickName, public_text);
               if (public_text = '' || typeof (public_text) == 'undefined') {
                 public_text = 0;
               } else {
@@ -295,7 +295,7 @@ Page({
         })
         
       } else {
-        that.uploadOssVedio(policy, signature, video, box_mac, openid, is_pub_hotelinfo, is_share, duration, avatarUrl, nickName, public_text,form_data);
+        that.uploadOssVedio(policy, signature, video, box_mac, openid, is_pub_hotelinfo, is_share, duration, avatarUrl, nickName, public_text);
         if (public_text = '' || typeof (public_text) == 'undefined') {
           public_text = 0;
         } else {
@@ -306,7 +306,7 @@ Page({
     },res=>{},{ isShowLoading: false })
     
   },
-  uploadOssVedio:function (policy, signature, video, box_mac, openid, is_pub_hotelinfo, is_share, duration, avatarUrl, nickName, public_text,form_data) {
+  uploadOssVedio:function (policy, signature, video, box_mac, openid, is_pub_hotelinfo, is_share, duration, avatarUrl, nickName, public_text) {
     var that = this;
     var filename = video; //视频url
     var index1 = filename.lastIndexOf(".");
@@ -1780,7 +1780,7 @@ Page({
     var that = this;
     var hotel_info = that.data.hotel_info;
     var form_data  = that.data.form_data;
-    var launchType = that.data.launchType;
+
     that.setData({
       openWind:{'isWifi':false,'isError':false,'title':'','step':1,'progress':0,'tip':''}
     })
