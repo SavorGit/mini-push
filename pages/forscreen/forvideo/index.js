@@ -704,6 +704,10 @@ Page({
                   that.linkHotelWifi(data,hotel_info)
                   //that.tipsForLaunchWindowRetry();
                 }else {
+                  that.setData({
+                    is_classic_disabel:false,
+                    is_speed_disabel:false,
+                  })
                   /*that.setData({
                     launchType:'classic',
                     
