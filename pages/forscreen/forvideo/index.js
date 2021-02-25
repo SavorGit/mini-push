@@ -695,8 +695,8 @@ Page({
             that.setData({isOpenWind:false});
             wx.showModal({
               title: 'wifi链接超时',
-              content: '未成功链接对应的包间wifi,您可以重试链接wifi或者尝试经典投屏',
-              cancelText:'经典投屏',
+              content: '未成功链接对应的包间wifi,您可以重试链接wifi',
+              cancelText:'关闭',
               confirmText:'重试',
               success: function (res) {
                 if (res.confirm) {
@@ -704,11 +704,11 @@ Page({
                   that.linkHotelWifi(data,hotel_info)
                   //that.tipsForLaunchWindowRetry();
                 }else {
-                  that.setData({
+                  /*that.setData({
                     launchType:'classic',
                     
                   })
-                  that.tipsForLaunchWindowRetry(false);
+                  that.tipsForLaunchWindowRetry(false);*/
                   
                 }
               }
