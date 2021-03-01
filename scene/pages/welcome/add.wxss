@@ -95,7 +95,8 @@
   margin-left: 0;
 }
 
-.item.pic-group>.value>.input {
+.item.pic-group>.value>.input,
+.item.pic-group>.value>.show {
   width: 172rpx;
   height: 146rpx;
   margin-top: 10rpx;
@@ -104,22 +105,28 @@
   box-sizing: border-box;
   background-color: #E8E8E8;
   border-radius: 10rpx;
-  border: 3rpx solid #BBBBBB;
   vertical-align: middle;
 }
 
-.item.pic-group>.value>.input:nth-child(3n + 1) {
+.item.pic-group>.value>.input:nth-child(3n + 1),
+.item.pic-group>.value>.show:nth-child(3n + 1) {
   margin-left: 0;
 }
 
-.item.pic-group>.value>.input:nth-child(-n + 3) {
+.item.pic-group>.value>.input:nth-child(-n + 3),
+.item.pic-group>.value>.show:nth-child(-n + 3) {
   margin-top: 0;
 }
 
-.item.pic-group>.value>.input>image {
+.item.pic-group>.value>.input>image,
+.item.pic-group>.value>.show>image {
   width: 100%;
   height: 100%;
   vertical-align: middle;
+}
+
+.item.pic-group>.value>.input {
+  border: 3rpx solid #BBBBBB;
 }
 
 .item.pic-group>.value>.input>.btn.del {
@@ -149,4 +156,8 @@
   border: 0;
   padding: 0;
   margin: 0;
+}
+
+.viewer>.page>.item.button>.btn.launch {
+  margin-top: 50rpx;
 }

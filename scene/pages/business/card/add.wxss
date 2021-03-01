@@ -80,6 +80,21 @@
   height: 228rpx;
 }
 
+.viewer>.card-group>.btn {
+  width: 544rpx;
+  height: 88rpx;
+  line-height: 88rpx;
+  text-align: center;
+  font-size: 28rpx;
+  border-radius: 8rpx;
+  border: 0;
+  padding: 0;
+  margin: 0;
+}
+
+.viewer>.card-group>.btn.launch {
+  margin-top: 50rpx;
+}
 
 
 
