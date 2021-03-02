@@ -14,6 +14,10 @@
   width: 100%;
 }
 
+.viewer>.card-group {
+  padding: 30rpx 0;
+}
+
 .viewer>.card-group>.item>.card {
   width: 680rpx;
   height: 380rpx;
@@ -133,8 +137,8 @@
 .viewer>.card-group>.item>.card>.option-mark {
   width: 70rpx;
   height: 70rpx;
-  margin-top: -370rpx;
-  margin-left: calc(100% - 80rpx);
+  margin-top: -390rpx;
+  margin-left: calc(100% - 60rpx);
 }
 
 .viewer>.card-group>.item>.card>.option-mark>.btn {
@@ -142,16 +146,16 @@
   height: 70rpx;
   line-height: 70rpx;
   text-align: center;
-  font-size: 42rpx;
-  border-radius: 5rpx;
+  font-size: 36rpx;
+  border-radius: 50%;
   border: 0;
   margin: 0;
   padding: 0;
 }
 
-.viewer>.card-group>.item>.card>.option-mark>.btn.edit {
+/* .viewer>.card-group>.item>.card>.option-mark>.btn.edit {
   color: #333333;
-}
+} */
 
 .viewer>.card-group>.item>.btn {
   width: 544rpx;

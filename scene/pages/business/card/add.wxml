@@ -50,7 +50,7 @@
 					</view>
 				</view>
 				<view class="option-mark" bindtap="editCard">
-					<view class="btn edit fa fa-pencil" aria-hidden="true"></view>
+					<view class="btn edit fa fa-pencil theme-button-orange2" aria-hidden="true"></view>
 				</view>
 			</view>
 			<view class="btn launch theme-button-dark" bindtap="forscreenCard">投屏</view>
