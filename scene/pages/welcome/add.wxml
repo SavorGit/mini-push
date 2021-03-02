@@ -36,8 +36,9 @@
 				<view class="show theme-font7">{{stay_times[welcome_info.stay_time].name}}</view>
 			</view>
 		</view>
-		<view class="item button flex-row-center-center" bindtap="butForscreenWelcome">
-			<button class="btn launch theme-button-red">投屏</button>
+		<view class="item button flex-column-center-center">
+			<button class="btn launch theme-button-dark" bindtap="butForscreenWelcome">投屏</button>
+			<button class="btn editer theme-button-red">编辑</button>
 		</view>
 	</view>
 </view>

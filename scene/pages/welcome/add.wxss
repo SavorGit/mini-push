@@ -158,6 +158,7 @@
   margin: 0;
 }
 
-.viewer>.page>.item.button>.btn.launch {
+.viewer>.page>.item.button>.btn.launch,
+.viewer>.page>.item.button>.btn.editer {
   margin-top: 50rpx;
 }
