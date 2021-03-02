@@ -33,12 +33,12 @@
 		<view class="item radio flex-row-flex_start-flex_start">
 			<view class="label theme-font1">停留时间</view>
 			<view class="value">
-				<view class="show theme-font7">{{stay_times[welcome_info.stay_time].name}}</view>
+				<view class="show theme-font7">{{welcome_info.stay_time}}分钟</view>
 			</view>
 		</view>
 		<view class="item button flex-column-center-center">
 			<button class="btn launch theme-button-dark" bindtap="butForscreenWelcome">投屏</button>
-			<button class="btn editer theme-button-red">编辑</button>
+			<button class="btn editer theme-button-red" bindtap="editWelcome">编辑</button>
 		</view>
 	</view>
 </view>

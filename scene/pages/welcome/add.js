@@ -147,6 +147,9 @@ Page({
       })
     })
   },
+  editWelcome:function(e){
+    this.setData({is_edit:0})
+  },
   /**
    * 上传欢迎词图片
    */
@@ -556,6 +559,7 @@ Page({
       var welcome_id = data.result.welcome_id;
       that.forscreenWelcome(welcome_id,welcome_info)
       if(pageid=='index'){
+        that.getWelcomeInfo(openid,box_mac,type,welcome_id)
         that.setData({is_edit:1})
       }else {
         wx.navigateBack({
