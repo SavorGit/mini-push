@@ -27,7 +27,7 @@ var fm;
 var max_video_size;         //极简投屏最大M数限制
 var max_user_forvideo_size; //主干版超过XXM走极简投屏
 var forscreen_timeout_time; //投屏超时切换极简版投屏
-
+var forscreen_method_origin;
 Page({
 
   /**
@@ -102,6 +102,7 @@ Page({
     box_mac = e.box_mac;
     var openid = e.openid;
     var hotel_info = app.globalData.hotel_info;
+    forscreen_method_origin = hotel_info.forscreen_method;
     chunkSize = hotel_info.chunkSize;
     maxConcurrency = hotel_info.maxConcurrency;
     limit_video_size = hotel_info.limit_video_size;
@@ -141,6 +142,15 @@ Page({
 
         var filePath = res.tempFilePath
         var video_size = res.size;
+        if(video_size>=max_user_forvideo_size){
+          
+          var pams_arr = forscreen_method_origin.split('-');
+          if(pams_arr[1]==1){
+            hotel_info.forscreen_method = '0-1';
+            that.setData({hotel_info:hotel_info})
+          }
+        }
+        
         
         /*if(video_size>max_video_size && app.globalData.sys_info.platform=='ios'){
           
@@ -1361,6 +1371,17 @@ Page({
 
         var filePath = res.tempFilePath
         var video_size = res.size
+        var hotel_info = that.data.hotel_info;
+        if(video_size>=max_user_forvideo_size){
+          
+          var pams_arr = forscreen_method_origin.split('-');
+          if(pams_arr[1]==1){
+            hotel_info.forscreen_method = '0-1';
+            
+          }
+        }else {
+          hotel_info.forscreen_method = forscreen_method_origin;
+        }
         /*if(video_size>max_video_size && app.globalData.sys_info.platform=='ios'){
           that.setData({showModal_2:true,vide_size_str:app.changeKb(video_size)})
           
@@ -1384,7 +1405,8 @@ Page({
           upload_vedio_temp: res.tempFilePath,
           duration: res.duration,
           size: video_size,
-          vide_size_str:app.changeKb(video_size)
+          vide_size_str:app.changeKb(video_size),
+          hotel_info:hotel_info,
         })
         mta.Event.stat('LaunchVideoWithNet_Launch_ChooseVideo', {
           'status': 'success'
