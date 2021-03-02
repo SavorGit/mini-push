@@ -1352,7 +1352,7 @@ Page({
       } else {
         
         wx.navigateTo({
-          url: '/scene/pages/welcome/add?openid='+openid+'&box_mac='+box_mac+'&type=5&welcome_id=0',
+          url: '/scene/pages/welcome/add?openid='+openid+'&box_mac='+box_mac+'&type=5&welcome_id=38883&pageid=index',
         })
       }
     }
@@ -1379,7 +1379,7 @@ Page({
       } else {
         
         wx.navigateTo({
-          url: '/scene/pages/business/card/add?openid='+openid+'&box_mac='+box_mac,
+          url: '/scene/pages/business/card/add?openid='+openid+'&box_mac='+box_mac+'&pageid=index',
         })
       }
     }

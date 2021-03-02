@@ -8,7 +8,7 @@
 <template is="navigationBarForTwoLevel" data='{{statusBarHeight: statusBarHeight,titleText:"商务名片"}}' />
 
 <!-- 展示页面 -->
-<view wx:if="{{isShowPage}}" class='container viewer theme-container' style='height:calc(100vh - {{46 + statusBarHeight + SystemInfo.screenBottomSpace}}px);'>
+<view wx:if="{{is_edit}}" class='container viewer theme-container' style='height:calc(100vh - {{46 + statusBarHeight + SystemInfo.screenBottomSpace}}px);'>
 	<view class="card-group flex-column-center-flex_start">
 		<view class="card flex-column-flex_start-flex_start theme-orange-panel">
 			<view class="face flex-column-flex_start-space_around">
@@ -32,7 +32,7 @@
 				<view class="btn edit fa fa-pencil" aria-hidden="true"></view>
 			</view>
 		</view>
-		<view class="btn launch theme-button-red">投屏</view>
+		<view class="btn launch theme-button-red" bindtap="forscreenCard">投屏</view>
 	</view>
 </view>
 

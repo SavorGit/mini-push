@@ -11,6 +11,7 @@ var api_v_url = app.globalData.api_v_url;
 var oss_upload_url = app.globalData.oss_upload_url;
 var openid;
 var box_mac;
+var pageid;
 var mobile_brand = app.globalData.mobile_brand;
 var mobile_model = app.globalData.mobile_model;
 Page({
@@ -35,6 +36,7 @@ Page({
     console.log(options)
     openid = options.openid;
     box_mac = options.box_mac;
+    pageid  = options.pageid;
     this.getMyCardInfo(openid);
   },
   getMyCardInfo:function(openid){
@@ -53,7 +55,7 @@ Page({
     })
   },
   editCard:function(e){
-    this.setData({is_edit:1})
+    this.setData({is_edit:0})
   },
   /**
    * 上传头像/微信二维码
@@ -193,9 +195,14 @@ Page({
       qrcode_img:card_info.qrcode_img //微信二维码
     }, (data, headers, cookies, errMsg, statusCode) =>{
       that.forscreenCard();
-      wx.navigateBack({
-        delta: 1,
-      })
+      if(pageid=='index'){
+        that.setData({is_edit:1})
+      }else {
+        wx.navigateBack({
+          delta: 1,
+        })
+      }
+      
     })
 
   },

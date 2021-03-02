@@ -8,20 +8,20 @@
 <template is="navigationBarForTwoLevel" data='{{statusBarHeight: statusBarHeight,titleText:pageTitle}}' />
 
 <!-- 展示页面 -->
-<view wx:if="{{isShowPage}}" class='container viewer theme-container' style='height:calc(100vh - {{46 + statusBarHeight + SystemInfo.screenBottomSpace}}px);'>
+<view wx:if="{{is_edit}}" class='container viewer theme-container' style='height:calc(100vh - {{46 + statusBarHeight + SystemInfo.screenBottomSpace}}px);'>
 	<view class="page flex-column-flex_start-flex_start">
 		<view class="item pic-group flex-row-flex_start-flex_start">
 			<view class="label theme-font1">背景图片</view>
 			<view class="value">
-				<view class="show">
+				<view class="show" wx:for="{{welcome_info.images}}" wx:key="key" wx:for-item="bean" wx:for-index="index">
+					<image mode="aspectFill" src="{{oss_url}}/{{bean}}"></image>
+				</view>
+				<!-- <view class="show">
 					<image mode="aspectFill" src="https://oss.littlehotspot.com/WeChat/resource/default.jpg"></image>
 				</view>
 				<view class="show">
 					<image mode="aspectFill" src="https://oss.littlehotspot.com/WeChat/resource/default.jpg"></image>
-				</view>
-				<view class="show">
-					<image mode="aspectFill" src="https://oss.littlehotspot.com/WeChat/resource/default.jpg"></image>
-				</view>
+				</view> -->
 			</view>
 		</view>
 		<view class="item text flex-row-center-flex_start">
@@ -33,10 +33,10 @@
 		<view class="item radio flex-row-flex_start-flex_start">
 			<view class="label theme-font1">停留时间</view>
 			<view class="value">
-				<view class="show theme-font7">{{bean.name}}</view>
+				<view class="show theme-font7">{{stay_times[welcome_info.stay_time].name}}</view>
 			</view>
 		</view>
-		<view class="item button flex-row-center-center">
+		<view class="item button flex-row-center-center" bindtap="butForscreenWelcome">
 			<button class="btn launch theme-button-red">投屏</button>
 		</view>
 	</view>

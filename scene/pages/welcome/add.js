@@ -13,6 +13,7 @@ var openid;
 var box_mac;
 var type;
 var welcome_id ;
+var pageid;
 var mobile_brand = app.globalData.mobile_brand;
 var mobile_model = app.globalData.mobile_model;
 Page({
@@ -26,7 +27,8 @@ Page({
     statusBarHeight: getApp().globalData.statusBarHeight,
     SystemInfo: getApp().SystemInfo,
     wordtype_index: 0, //字体样式索引值
-    addDisabled:false
+    addDisabled:false,
+    is_edit:0,
   },
 
   /**
@@ -39,11 +41,18 @@ Page({
     if(typeof(pageTitle)!='string'){
       pageTitle = '欢迎词';
     }
-    that.setData({pageTitle:pageTitle});
+    
     openid = options.openid;
     box_mac = options.box_mac;
     type   = options.type;
     welcome_id = options.welcome_id;
+    pageid = options.pageid;
+    if(welcome_id>0){
+      var is_edit = 1;
+    }else {
+      var is_edit = 0;
+    }
+    that.setData({pageTitle:pageTitle,is_edit:is_edit});
     wx.request({
       url: api_v_url + '/Index/getOssParams',
       headers: {
@@ -546,10 +555,19 @@ Page({
       app.showToast('保存成功')
       var welcome_id = data.result.welcome_id;
       that.forscreenWelcome(welcome_id,welcome_info)
-      wx.navigateBack({
-        delta: 1
-      })
+      if(pageid=='index'){
+        that.setData({is_edit:1})
+      }else {
+        wx.navigateBack({
+          delta: 1
+        })
+      }
+      
     })
+  },
+  butForscreenWelcome:function(e){
+    var welcome_info = this.data.welcome_info;
+    this.forscreenWelcome(welcome_id,welcome_info);
   },
   forscreenWelcome:function(welcome_id,welcome_info){
     var that = this;
