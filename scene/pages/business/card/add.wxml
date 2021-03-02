@@ -7,34 +7,11 @@
 <import src="/pages/template/commons" />
 <template is="navigationBarForTwoLevel" data='{{statusBarHeight: statusBarHeight,titleText:"商务名片"}}' />
 
-<!-- 展示页面 -->
+<!-- 展示页面 
 <view wx:if="{{is_edit}}" class='container viewer theme-container' style='height:calc(100vh - {{46 + statusBarHeight + SystemInfo.screenBottomSpace}}px);'>
 	<view class="card-group flex-column-flex_start-flex_start">
 		<view class="item flex-column-center-flex_start">
-			<!--
-			<view class="card flex-column-flex_start-flex_start theme-orange-panel">
-				<view class="face flex-column-flex_start-space_around">
-					<view class="info flex-row-center-flex_start">
-						<view class="left">
-							<image class="head-pic" mode="aspectFill" src="{{oss_url}}/{{card_info.head_img}}"></image>
-						</view>
-						<view class="right flex-column-flex_start-flex_start">
-							<view class="user flex-row-flex_end-flex_start">
-								<view class="name">{{card_info.mobile}}</view>
-								<view class="title">{{card_info.job}}</view>
-							</view>
-							<view class="company">{{card_info.company}}</view>
-						</view>
-					</view>
-					<view class="bottom flex-row-center-center">
-						<image class="qr" mode="aspectFill" src="{{oss_url}}/{{card_info.qrcode_img}}"></image>
-					</view>
-				</view>
-				<view class="option-mark" bindtap="editCard">
-					<view class="btn edit fa fa-pencil" aria-hidden="true"></view>
-				</view>
-			</view>
-			-->
+			
 			<view class="card flex-column-flex_start-flex_start theme-orange-panel">
 				<view class="face flex-row-flex_start-space_around">
 					<view class="left flex-column-flex_start-center">
@@ -56,11 +33,11 @@
 			<view class="btn launch theme-button-dark" bindtap="forscreenCard">投屏</view>
 		</view>
 	</view>
-</view>
+</view>-->
 
 
 <!-- 添加/编辑页面 -->
-<view wx:else class='container editer' style='height:calc(100vh - {{46 + statusBarHeight + SystemInfo.screenBottomSpace}}px);'>
+<view  class='container editer' style='height:calc(100vh - {{46 + statusBarHeight + SystemInfo.screenBottomSpace}}px);'>
 	<view class="page">
 		<form bindsubmit="submitInfo">
 			<view class="part-1 flex-row-flex_start-space_between">

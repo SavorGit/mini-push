@@ -45,12 +45,12 @@
 			<view class="fa fa-angle-right" aria-hidden="true"></view>
 		</view>
 	</view>
-	<view class="promotion-goods-manage-panel theme-font2 theme-panel" bindtap="forscreenHistory" data-boxmac="{{box_mac}}">
+	<!-- <view class="promotion-goods-manage-panel theme-font2 theme-panel" bindtap="forscreenHistory" data-boxmac="{{box_mac}}">
 		<view class="full_width full_height flex-row-center-space_between">
 			<view>历史投屏</view>
 			<view class="fa fa-angle-right" aria-hidden="true"></view>
 		</view>
-	</view>
+	</view> -->
 
 	<!-- 模拟投照片 -->
 	<view wx:if="{{is_test==1}}" class="promotion-goods-manage-panel theme-font2 theme-panel" bindtap='testForscreen' data-type="2" data-boxmac="{{box_mac}}">

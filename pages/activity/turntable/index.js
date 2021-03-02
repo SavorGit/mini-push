@@ -40,8 +40,10 @@ Page({
 
     var box_mac = res.currentTarget.dataset.box_mac;
     var openid  = res.currentTarget.dataset.openid;
-    var avatarurl = res.detail.userInfo.avatarUrl;
-    var nickName = res.detail.userInfo.nickName;
+    var user_info = wx.getStorageSync(cache_key + 'user_info');
+    var avatarurl = user_info.avatarUrl;
+    var nickName  = user_info.nickName;
+    
     var mobile_brand = app.globalData.mobile_brand;
     var mobile_model = app.globalData.mobile_model;
     var activity_id = (new Date()).valueOf();
