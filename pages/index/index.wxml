@@ -64,7 +64,7 @@
 				<input class="display_hide" name="wifi_password" value="{{hotel_info.wifi_password}}"></input>
 				<button class="flex-column-center-center theme-font1" form-type="submit">
 					<view class="icon flex-column-center-center pic {{hotel_info.is_interact==1?'eye-catching':''}}">
-						<image src='/images/icon2/FFFFFF_picture.png'></image>
+						<image mode="aspectFit" src='/images/icon2/FFFFFF_picture.png'></image>
 					</view>
 					<label>照片投屏</label>
 				</button>
@@ -78,7 +78,7 @@
 				<input class="display_hide" name="wifi_password" value="{{hotel_info.wifi_password}}"></input>
 				<button class="flex-column-center-center theme-font1" form-type="submit">
 					<view class="icon flex-column-center-center video {{hotel_info.is_interact==1?'eye-catching':''}}">
-						<image src='/images/icon2/FFFFFF_video.png'></image>
+						<image mode="aspectFit" src='/images/icon2/FFFFFF_video.png'></image>
 					</view>
 					<label>视频投屏</label>
 				</button>
@@ -88,7 +88,7 @@
 				<input class="display_hide" name="openid" value="{{openid}}"></input>
 				<button class="flex-column-center-center theme-font1" form-type="submit">
 					<view class="icon flex-column-center-center file {{hotel_info.is_interact==1?'eye-catching':''}}">
-						<image src='/images/icon2/FFFFFF_files.png'></image>
+						<image mode="aspectFit" src='/images/icon2/FFFFFF_files.png'></image>
 					</view>
 					<label>文件投屏</label>
 				</button>
@@ -96,7 +96,7 @@
 			<view>
 				<button class="flex-column-center-center theme-font1" bindtap='hdgames' data-linkcontent='/games/pages/gamelist' data-boxmac="{{box_mac}}" data-openid="{{openid}}">
 					<view class="icon flex-column-center-center game">
-						<image src='/images/icon2/FFFFFF_game.png'></image>
+						<image mode="aspectFit" src='/images/icon2/FFFFFF_game.png'></image>
 					</view>
 					<label>互动小游戏</label>
 				</button>
@@ -104,7 +104,7 @@
 			<!-- <view wx:if="{{is_test==1}}">
 				<button class="flex-column-center-center theme-font2" bindtap='testForscreen' data-type="2" data-boxmac="{{box_mac}}" data-openid="{{openid}}">
 					<view class="icon flex-column-center-center pic">
-						<image src='/images/icon2/FFFFFF_picture.png'></image>
+						<image mode="aspectFit" src='/images/icon2/FFFFFF_picture.png'></image>
 					</view>
 					<label>模拟照片投屏</label>
 				</button>
@@ -115,7 +115,7 @@
 			<view>
 				<button class="flex-column-center-center theme-font1" bindtap='showHappy' data-boxmac="{{box_mac}}" data-openid="{{openid}}">
 					<view class="icon flex-column-center-center birthday">
-						<image src='/images/icon2/FFFFFF_birthday.png'></image>
+						<image mode="aspectFit" src='/images/icon2/FFFFFF_birthday.png'></image>
 					</view>
 					<label>生日点播</label>
 				</button>
@@ -123,7 +123,7 @@
 			<view>
 				<button class="flex-column-center-center theme-font1" bindtap='hdgames' data-linkcontent='/games/pages/gamelist' data-boxmac="{{box_mac}}" data-openid="{{openid}}">
 					<view class="icon flex-column-center-center game">
-						<image src='/images/icon2/FFFFFF_game.png'></image>
+						<image mode="aspectFit" src='/images/icon2/FFFFFF_game.png'></image>
 					</view>
 					<label>互动游戏</label>
 				</button>
@@ -131,7 +131,7 @@
 			<view>
 				<button class="flex-column-center-center theme-font1" bindtap='forscreenHistory' data-boxmac="{{box_mac}}" data-openid="{{openid}}">
 					<view class="icon flex-column-center-center history">
-						<image src='/images/icon2/FFFFFF_history.png'></image>
+						<image mode="aspectFit" src='/images/icon2/FFFFFF_history.png'></image>
 					</view>
 					<label>投屏历史</label>
 				</button>
@@ -139,7 +139,7 @@
 			<view wx:if="{{is_test==1}}">
 				<button class="flex-column-center-center theme-font1" bindtap='testForscreen' data-type="1" data-boxmac="{{box_mac}}" data-openid="{{openid}}">
 					<view class="icon flex-column-center-center video">
-						<image src='/images/icon2/FFFFFF_video.png'></image>
+						<image mode="aspectFit" src='/images/icon2/FFFFFF_video.png'></image>
 					</view>
 					<label>模拟视频投屏</label>
 				</button>
@@ -150,7 +150,7 @@
 			<view>
 				<button class="flex-column-center-center theme-font1" bindtap="gotoWelcome" data-openid="{{openid}}" data-box_mac="{{box_mac}}">
 					<view class="icon flex-column-center-center welcome">
-						<image src='/images/icon2/FFFFFF_birthday.png'></image>
+						<image mode="aspectFit" src='/images/icon2/FFFFFF_notice.png'></image>
 					</view>
 					<label>致欢迎词</label>
 				</button>
@@ -159,7 +159,7 @@
 			<view>
 				<button class="flex-column-center-center theme-font1" bindtap="gotoCard" data-openid="{{openid}}" data-box_mac="{{box_mac}}">
 					<view class="icon flex-column-center-center cards">
-						<image src='/images/icon2/FFFFFF_birthday.png'></image>
+						<image mode="aspectFit" src='/images/icon2/FFFFFF_birthday.png'></image>
 					</view>
 					<label>名片投屏</label>
 				</button>
@@ -168,7 +168,7 @@
 			<view>
 				<button class="flex-column-center-center theme-font1" bindtap="gotoBusiness" data-openid="{{openid}}" data-box_mac="{{box_mac}}">
 					<view class="icon flex-column-center-center business">
-						<image src='/images/icon2/FFFFFF_birthday.png'></image>
+						<image mode="aspectFit" src='/images/icon2/FFFFFF_businessGroup.png'></image>
 					</view>
 					<label>商务宴请</label>
 				</button>
@@ -176,7 +176,7 @@
 			<view>
 				<button class="flex-column-center-center theme-font1" bindtap="gotoParty" data-openid="{{openid}}" data-box_mac="{{box_mac}}">
 					<view class="icon flex-column-center-center birthday">
-						<image src='/images/icon2/FFFFFF_birthday.png'></image>
+						<image mode="aspectFit" src='/images/icon2/FFFFFF_birthday.png'></image>
 					</view>
 					<label>生日聚会</label>
 				</button>
@@ -184,7 +184,7 @@
 			<view>
 				<button class="flex-column-center-center theme-font1" bindtap='forscreenHistory' data-boxmac="{{box_mac}}" data-openid="{{openid}}">
 					<view class="icon flex-column-center-center history">
-						<image src='/images/icon2/FFFFFF_history.png'></image>
+						<image mode="aspectFit" src='/images/icon2/FFFFFF_history.png'></image>
 					</view>
 					<label>投屏历史</label>
 				</button>
