@@ -190,7 +190,7 @@ button[disabled] {
 
 .choose-launch-edition>.btn.big {
   width: 480rpx;
-  height: 60rpx;
+  height: 120rpx;
 }
 
 .choose-launch-edition>.btn.big>.name {
