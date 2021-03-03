@@ -1351,9 +1351,16 @@ Page({
         app.scanQrcode(pageid);
       } else {
         
-        wx.navigateTo({
-          url: '/scene/pages/welcome/add?openid='+openid+'&box_mac='+box_mac+'&type=5&welcome_id=38883&pageid=index',
-        })
+        utils.PostRequest(api_v_url + '/Welcome/checkwelcome', {
+          'openid': openid,
+          'box_mac':box_mac,
+        }, (data, headers, cookies, errMsg, statusCode) => {
+          var welcome_id = data.result.welcome_id;
+          wx.navigateTo({
+            url: '/scene/pages/welcome/add?openid='+openid+'&box_mac='+box_mac+'&type=5&welcome_id='+welcome_id+'&pageid=index',
+          })
+        },re => { }, { isShowLoading: false })
+        
       }
     }
   },
