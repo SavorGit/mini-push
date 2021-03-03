@@ -20,7 +20,7 @@
 				</view>
 
 				<!-- 投视频 -->
-				<block>
+				<block wx:if="{{hotel_info.forscreen_method !='0-1'}}">
 					<view wx:if="{{is_open_control==false}}" class="grant_auth flex-column-center-space_between">
 						<checkbox-group class="checkbox-group flex-column-flex_start-start" bindchange="checkboxChange">
 							<label class="items" wx:for="{{item}}" wx:key="key" wx:for-index="index">
