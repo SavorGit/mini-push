@@ -17,7 +17,7 @@ Page({
     
     rangeArray: [],
     rangeIndex: 0,
-    rangeid:1,
+    //rangeid:1,
     blessid: 1,
     sex:1,
     hiddens:true,
@@ -29,16 +29,16 @@ Page({
   onLoad: function(options) {
     openid = options.openid;
     box_mac= options.box_mac;
-    var type = 2;
+    var type = 2;    //默认发红包入口
     if(typeof(options.type)!='undefined'){
       type = options.type;
     }
-    if(type==4){
+    /*if(type==4){            //商务或者生日聚餐入口
       var rangeid = 3;
 
     }else{
       var rangeid = 1;
-    }
+    }*/
     var that = this;
     var user_info = wx.getStorageSync("savor_user_info");
     that.setData({
@@ -46,17 +46,20 @@ Page({
       openid: openid,
       box_mac: box_mac,
       avatarUrl: user_info.avatarUrl,
-      rangeid:rangeid
+      //rangeid:rangeid
       
     })
     //获取发送红包 祝福语 发送范围配置
     utils.PostRequest(api_v_url+'/Redpacket/getConfig', {
       type: type
     }, (data, headers, cookies, errMsg, statusCode) => {
+      var range_list = data.result.range_list;
+      var rangeid = range_list[0].id
       that.setData({
         blessingArray: data.result.bless,
-        rangeArray:data.result.range
-
+        rangeArray:data.result.range,
+        range_list:data.result.range_list,
+        rangeid:rangeid
       })
     },res=>{
       wx.navigateBack({
@@ -142,7 +145,12 @@ Page({
   bindRangePickerChange:function(res){
     var that = this;
     var type = that.data.type;
-    if(type==2){
+    console.log(res.detail.value)
+    var range_list = that.data.range_list;
+    var rangeIndex = res.detail.value
+    var rangeid = range_list[rangeIndex].id;
+    that.setData({rangeIndex:rangeIndex,rangeid:rangeid})
+    /*if(type==2){
       var rangeid = parseInt(res.detail.value)+1;
       that.setData({
         rangeIndex:res.detail.value,
@@ -152,7 +160,7 @@ Page({
       that.setData({
         rangeid: 3
       })
-    }
+    }*/
   },
   sendRedPacket:function(res){
     var that = this;

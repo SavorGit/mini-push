@@ -13,6 +13,8 @@ var i;
 var api_url = app.globalData.api_url;
 var api_v_url = app.globalData.api_v_url
 var pageid=61;
+var wxmpopenid;
+var subscribe_time;
 Page({
 
   /**
@@ -31,12 +33,25 @@ Page({
   onLoad: function (options) {
     //wx.hideShareMenu();
     var that = this;
-    scene = decodeURIComponent(options.scene);
+    wxmpopenid = '';
+    subscribe_time = '';
     var tims = (new Date()).valueOf();
-    var scene_arr = scene.split('_');
-    order_id = scene_arr[0];
-    box_mac = scene_arr[1];
-    var redpackt_qrcode_createtime = scene_arr[2];  //红包生成时间
+    if(typeof(options.scene)!='undefined'){
+      scene = decodeURIComponent(options.scene);
+      
+      var scene_arr = scene.split('_');
+      order_id = scene_arr[0];
+      box_mac = scene_arr[1];
+      var redpackt_qrcode_createtime = scene_arr[2];  //红包生成时间
+    }else {
+      order_id = options.order_id;
+      box_mac  = options.box_mac;
+      wxmpopenid = options.wxmpopenid;
+      subscribe_time = options.subscribe_time;
+      var redpackt_qrcode_createtime = options.redpackt_qrcode_createtime
+    }
+
+    
     wx.request({
       url: api_v_url+'/index/getConfig',
       success: function (e) {
@@ -82,6 +97,28 @@ Page({
               }, (data, headers, cookies, errMsg, statusCode) => {
 
               })
+              //绑定公众号openid
+              if(wxmpopenid!=''){
+                utils.PostRequest(api_v_url+'/user/bindOffiaccount', {
+                  wxmpopenid:wxmpopenid,
+                  openid : openid,
+                  subscribe_time:subscribe_time
+                }, (data, headers, cookies, errMsg, statusCode) => {
+            
+                },re => { }, { isShowLoading: false })
+
+                utils.PostRequest(api_v_url+'/index/recodeQrcodeLog', {
+                  openid : openid,
+                  type   :36,
+                  data_id:order_id,
+                  box_mac:box_mac
+                }, (data, headers, cookies, errMsg, statusCode) => {
+            
+                },re => { }, { isShowLoading: false })
+
+              }
+              
+              
               
               //判断用户是否注册
               wx.request({
@@ -223,7 +260,25 @@ Page({
                   }, (data, headers, cookies, errMsg, statusCode) => {
 
                   })
-                  
+                  //绑定公众号openid
+                  if(wxmpopenid!=''){
+                    utils.PostRequest(api_v_url+'/user/bindOffiaccount', {
+                      wxmpopenid:wxmpopenid,
+                      openid : openid,
+                      subscribe_time:subscribe_time
+                    }, (data, headers, cookies, errMsg, statusCode) => {
+                
+                    },re => { }, { isShowLoading: false })
+    
+                    utils.PostRequest(api_v_url+'/index/recodeQrcodeLog', {
+                      openid : openid,
+                      type   :36,
+                      data_id:order_id,
+                      box_mac:box_mac
+                    }, (data, headers, cookies, errMsg, statusCode) => {
+                
+                    },re => { }, { isShowLoading: false })
+                  }
                   //判断用户是否注册
                   wx.request({
                     url: api_v_url+'/User/isRegister',
