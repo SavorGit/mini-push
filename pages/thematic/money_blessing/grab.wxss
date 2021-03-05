@@ -112,7 +112,8 @@
 
 .PageMain .EntranceCard {
   width: 90%;
-  height: 200rpx;
+  /* height: 200rpx; */
+  padding: 30rpx 0 20rpx;
   margin: 0 5%;
   border-radius: 20rpx;
 }
@@ -122,16 +123,20 @@
 }
 
 .PageMain .EntranceCard>.entrance-bar>.entrance {
-  font-size: 28rpx;
-  font-weight: 900;
+  height: 70rpx;
 }
 
-.PageMain .EntranceCard>.entrance-bar>.entrance image {
+.PageMain .EntranceCard>.entrance-bar>.entrance .icon {
   width: 80rpx;
   height: 70rpx;
   vertical-align: middle;
   text-align: center;
-  margin-bottom: 10rpx;
+  /* margin-bottom: 10rpx; */
+}
+
+.PageMain .EntranceCard>.entrance-bar>.entrance .label {
+  font-size: 28rpx;
+  font-weight: 900;
 }
 
 /* ======== 发现精选 ======== */
