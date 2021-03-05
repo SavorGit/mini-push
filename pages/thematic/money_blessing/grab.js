@@ -279,7 +279,9 @@ Page({
                       openid : openid,
                       type   :36,
                       data_id:order_id,
-                      box_mac:box_mac
+                      box_mac:box_mac,
+                      mobile_brand:app.globalData.mobile_brand,
+                      mobile_model:app.globalData.mobile_model
                     }, (data, headers, cookies, errMsg, statusCode) => {
                 
                     },re => { }, { isShowLoading: false })
