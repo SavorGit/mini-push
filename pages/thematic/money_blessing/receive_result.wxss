@@ -100,7 +100,7 @@
 }
 
 .PageMain .package>.body .money>sub {
-  font-size: 32rpx;
+  font-size: 26rpx;
   font-weight: 900;
 }
 
