@@ -33,7 +33,7 @@
 }
 
 .PageMain .package>.body {
-  height: calc(100% - 170rpx);
+  /* height: calc(100% - 170rpx); */
   padding: 10rpx 50rpx 30rpx 50rpx;
   border-radius: 20rpx;
 }
@@ -56,7 +56,7 @@
 .PageMain .package>.body .grab {
   font-size: 42rpx;
   font-weight: 900;
-  margin-top: 40rpx;
+  margin-top: 20rpx;
 }
 
 .PageMain .package>.body .grab .button {
@@ -86,9 +86,9 @@
 
 .PageMain .package>.body .tip {
   text-align: center;
-  font-size: 32rpx;
+  font-size: 26rpx;
   font-weight: 900;
-  margin-top: 10rpx;
+  /* margin-top: 10rpx; */
 }
 
 /* ======== 支付失败 ======== */
@@ -100,7 +100,7 @@
 }
 
 .PageMain .package>.body .money>sub {
-  font-size: 26rpx;
+  font-size: 32rpx;
   font-weight: 900;
 }
 
