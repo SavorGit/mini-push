@@ -14,7 +14,7 @@
 			<view class='body PackageColor'>
 				<view class='user_name'>{{nickName}}</view>
 				<view class='message'>手慢了，红包抢完了</view>
-				<view class="tip">即刻分享视频照片，一键投屏，让饭局分享爽不停</view>
+				<view class="tip">{{redpacket_content}}</view>
 				<view class='grab flex-row-center-space_between'>
 					<navigator class='button' url='/pages/thematic/money_blessing/packing?openid={{openid}}&box_mac={{box_mac}}'>我也发一个></navigator>
 					<navigator class='button' url='/pages/thematic/money_blessing/grab_detail?order_id={{order_id}}&box_mac={{box_mac}}'>查看领取详情></navigator>
@@ -137,7 +137,7 @@
 					<label>{{money}}</label>
 					<sub>元</sub>
 				</view>
-				<view class="tip">即刻分享视频照片，一键投屏，让饭局分享爽不停</view>
+				<view class="tip">{{redpacket_content}}</view>
 				<view class='grab flex-row-center-space_between'>
 					<navigator class='button' url='/pages/thematic/money_blessing/packing?openid={{openid}}&box_mac={{box_mac}}'>我也发一个></navigator>
 					<navigator class='button' url='/pages/thematic/money_blessing/grab_detail?order_id={{order_id}}&box_mac={{box_mac}}'>查看领取详情></navigator>

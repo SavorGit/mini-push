@@ -16,6 +16,7 @@ Page({
    */
   data: {
     statusBarHeight: getApp().globalData.statusBarHeight,
+    redpacket_content:'即刻分享视频照片，一键投屏，让饭局分享爽不停'
   },
 
   /**
@@ -294,7 +295,13 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    var that = this;
+    utils.PostRequest(api_v_url+'/index/getConfig', {
+    }, (data, headers, cookies, errMsg, statusCode) => {
+      var redpacket_content = data.result.redpacket_content
+      that.setData({redpacket_content:redpacket_content})
+    })
+    
   },
 
   /**

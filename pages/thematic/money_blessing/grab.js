@@ -25,6 +25,7 @@ Page({
     wxAuthLogin: false,
     order_status :0,
     is_open_simple: 0,
+    redpacket_content:'即刻分享视频照片，一键投屏，让饭局分享爽不停'
   },
 
   /**
@@ -56,6 +57,7 @@ Page({
       url: api_v_url+'/index/getConfig',
       success: function (e) {
         if(e.data.code==10000){
+          var redpacket_content = e.data.result.redpacket_content;
           var sys_time = e.data.result.sys_time;  //系统时间
           var redpacket_exp_time = e.data.result.redpacket_exp_time;  //红包失效时间
           var diff_time = sys_time - redpackt_qrcode_createtime;
@@ -72,6 +74,7 @@ Page({
             that.setData({
               order_id: order_id,
               box_mac: box_mac,
+              redpacket_content:redpacket_content
             })
             if (app.globalData.openid && app.globalData.openid != '') {
               that.setData({
