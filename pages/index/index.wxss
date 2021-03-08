@@ -165,41 +165,48 @@
 .functional-module-panel>.row>view>.pic,
 .functional-module-panel>.row button>.pic {
   /* background-color: #ef6877; */
-  background-color: rgb(253, 128, 36);
+  /* background-color: rgb(253, 128, 36); */
+  background-color: #F25D9C;
 }
 
 .functional-module-panel>.row>view>.video,
 .functional-module-panel>.row button>.video {
   /* background-color: #84ccc9; */
-  background-color: rgb(251, 86, 155);
+  /* background-color: rgb(251, 86, 155); */
+  background-color: #7874F2;
 }
 
 .functional-module-panel>.row>view>.file,
 .functional-module-panel>.row button>.file {
   /* background-color: #f19ec2; */
-  background-color: rgb(219, 190, 49);
+  /* background-color: rgb(219, 190, 49); */
+  background-color: #F6416C;
 }
 
 .functional-module-panel>.row>view>.birthday,
 .functional-module-panel>.row button>.birthday {
   /* background-color: #448aca; */
-  background-color: rgb(213, 102, 251);
+  /* background-color: rgb(213, 102, 251); */
+  background-color: #4993FA;
 }
 
 .functional-module-panel>.row>view>.game,
 .functional-module-panel>.row button>.game {
   /* background-color: #f29b76; */
-  background-color: rgb(160, 215, 125);
+  /* background-color: rgb(160, 215, 125); */
+  background-color: #9BDF46;
 }
 
 .functional-module-panel>.row>view>.history,
 .functional-module-panel>.row button>.history {
-  background-color: #8f82bc;
+  /* background-color: #8f82bc; */
+  background-color: #D566FB;
 }
 
 .functional-module-panel>.row>view>.welcome,
 .functional-module-panel>.row button>.welcome {
-  background-color: rgb(91, 219, 249);
+  /* background-color: rgb(91, 219, 249); */
+  background-color: #10DDC2;
 }
 
 .functional-module-panel>.row>view>.cards,
@@ -209,7 +216,8 @@
 
 .functional-module-panel>.row>view>.business,
 .functional-module-panel>.row button>.business {
-  background-color: rgb(116, 168, 240);
+  /* background-color: rgb(116, 168, 240); */
+  background-color: #FF7E67;
 }
 
 .functional-module-panel>.row button[disabled]>view {
