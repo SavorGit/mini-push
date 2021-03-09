@@ -139,21 +139,24 @@ Page({
   }, //取消收藏结束
   //点击分享按钮
   onShareAppMessage: function(res) {
+    console.log(res)
     var self = this;
-    var openid = res.target.dataset.openid;
-    var res_id = res.target.dataset.res_id;
+    var openid = self.data.openid;
+    var videoinfo = self.data.videoinfo;
 
-    var res_type = res.target.dataset.res_type;
-    var pubdetail = res.target.dataset.pubdetail;
+    var res_id = videoinfo.forscreen_id;
+
+    var res_type = 2;
+    var pubdetail = videoinfo.pubdetail;
     var img_url = pubdetail[0]['vide_img'];
 
-    var share_num = res.target.dataset.share_num;
+    var share_num = self.data.share_num;
 
     utils.tryCatch(mta.Event.stat('FindVideo_VideoDetail_Share', {
       'openid': openid,
       'from': self.data.pageFrom
     }));
-    if (res.from === 'button') {
+    if (res.from === 'button' || res.from=='menu') {
       // 转发成功
       share_num = share_num++;
       utils.PostRequest(api_v_url + '/share/recLogs', {

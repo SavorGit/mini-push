@@ -25,6 +25,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    console.log(options)
     var that = this;
     var user_info = wx.getStorageSync("savor_user_info");
     var res_id     = options.res_id;  //资源id
@@ -33,7 +34,7 @@ Page({
     box_mac    = options.box_mac;
     openid = user_info.openid;
     var filename = options.filename;
-    var video_img_url = options.video_img_url;
+    var video_img_url = decodeURIComponent(options.video_img_url);
     //wx.hideShareMenu();
 
     
@@ -117,16 +118,16 @@ Page({
   onShareAppMessage: function (res) {
     console.log(res)
     var that = this;
-    var openid = res.target.dataset.openid;
-    var res_id = res.target.dataset.res_id;
+    var openid = that.data.openid;
+    var res_id = that.data.res_id;
     
-    var res_type = res.target.dataset.type;
-    var video_url = res.target.dataset.video_url;
-    var video_name = res.target.dataset.video_name;
-    var video_img = res.target.dataset.video_img;
-    var share_num = res.target.dataset.share_num;
+    var res_type = that.data.res_type;
+    var video_url = that.data.video_url;
+    var video_name = that.data.video_name;
+    var video_img = that.data.video_img_url;
+    var share_num = that.data.share_num;
     
-    if (res.from === 'button') {
+    if (res.from === 'button' || res.from=='menu') {
       
       // 转发成功
       share_num = share_num++;

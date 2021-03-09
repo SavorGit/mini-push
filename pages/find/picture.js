@@ -172,11 +172,13 @@ Page({
   //点击分享按钮
   onShareAppMessage: function(res) {
     var self = this;
-    var openid = res.target.dataset.openid;
-    var res_id = res.target.dataset.res_id;
+    var openid = self.data.openid;
+    var picinfo = self.data.picinfo;
 
-    var res_type = res.target.dataset.res_type;
-    var pubdetail = res.target.dataset.pubdetail;
+    var res_id = picinfo.forscreen_id;
+
+    var res_type = 2;
+    var pubdetail = picinfo.pubdetail;
     var img_url = pubdetail[0]['res_url'];
     // console.log(img_url);
     utils.tryCatch(mta.Event.stat('FindPic_PicDetail_Share', {
@@ -184,9 +186,9 @@ Page({
       'from': self.data.pageFrom,
       'boxmac': self.data.box_mac
     }));
-    var share_num = res.target.dataset.share_num;
+    var share_num = self.data.share_num;
 
-    if (res.from === 'button') {
+    if (res.from === 'button' || res.from=='menu') {
 
       // 转发成功
       share_num = share_num++;
