@@ -775,10 +775,10 @@ Page({
     var index = e.currentTarget.dataset.index;
     if (res_type == 1) {
       var action = 11; //发现图片点播
-      var jump_url = '/pages/find/picture?box_mac='+box_mac+'&forscreen_id='+forscreen_id+'&is_hot=1';
+      var jump_url = '/pages/find/picture?box_mac='+box_mac+'&forscreen_id='+forscreen_id+'&is_hot=1&res_id='+res_id;
     } else if (res_type == 2) {
       var action = 12; //发现视频点播
-      var jump_url = '/pages/find/video?box_mac='+box_mac+'&forscreen_id='+forscreen_id+'&is_hot=1';
+      var jump_url = '/pages/find/video?box_mac='+box_mac+'&forscreen_id='+forscreen_id+'&is_hot=1&res_id='+res_id;
     }
     if(box_mac!='' && typeof(box_mac)!='undefined'){
       //跳转到详情页

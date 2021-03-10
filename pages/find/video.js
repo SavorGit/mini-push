@@ -28,6 +28,10 @@ Page({
   onLoad: function(options) {
     var self = this;
     var is_hot = 0;
+    var res_id = 0;
+    if(typeof(options.res_id)!='undefined'){
+      res_id = options.res_id;
+    }
     if(typeof(options.is_hot)!='undefined'){
       var is_hot = options.is_hot;
     }
@@ -63,6 +67,7 @@ Page({
     utils.PostRequest(api_v_url + '/Find/showPic', {
       forscreen_id: forscreen_id,
         openid: openid,
+        res_id:res_id,
     }, (data, headers, cookies, errMsg, statusCode) => {
       self.setData({
         forscreen_id:forscreen_id,
