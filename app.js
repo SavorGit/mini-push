@@ -260,7 +260,6 @@ App({
     }else{
       link_type = change_link_type;
     }
-    console.log(link_type+'link_type')
     if (link_type == 1 || hotel_info=='') {
       var timestamp = (new Date()).valueOf();
       wx.request({

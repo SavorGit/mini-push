@@ -230,7 +230,12 @@ Page({
       'boxmac': box_mac
     }));
     if (box_mac == '') {
-      app.scanQrcode(pageid);
+      wx.showModal({
+        title: '提示',
+        content: "请使用微信扫电视二维码",
+        showCancel: false,
+        confirmText:'我知道了'
+      })
     } else {
       var user_info = wx.getStorageSync("savor_user_info");
       //console.log(user_info);
@@ -357,7 +362,17 @@ Page({
     openid = e.currentTarget.dataset.openid;
     box_mac = e.currentTarget.dataset.box_mac;
     var hotel_info = e.currentTarget.dataset.hotel_info;
-    app.controlExitForscreen(openid, box_mac, '', self);
+    if (box_mac == '') {
+      wx.showModal({
+        title: '提示',
+        content: "请使用微信扫电视二维码",
+        showCancel: false,
+        confirmText:'我知道了'
+      })
+    } else {
+      app.controlExitForscreen(openid, box_mac, '', self);
+    }
+    
   },
   //遥控调整音量
   changeVolume: function(e) {
@@ -365,8 +380,16 @@ Page({
     box_mac = e.currentTarget.dataset.box_mac;
     var change_type = e.currentTarget.dataset.change_type;
     var hotel_info = e.currentTarget.dataset.hotel_info;
-    app.controlChangeVolume(openid, box_mac, change_type, '', self);
-
+    if (box_mac == '') {
+      wx.showModal({
+        title: '提示',
+        content: "请使用微信扫电视二维码",
+        showCancel: false,
+        confirmText:'我知道了'
+      })
+    } else {
+      app.controlChangeVolume(openid, box_mac, change_type, '', self);
+    }
   },
   //遥控切换节目
   changeProgram: function(e) {

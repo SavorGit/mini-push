@@ -178,7 +178,12 @@ Page({
     var box_mac = e.currentTarget.dataset.boxmac;
     
     if (box_mac == '') {
-      app.scanQrcode(pageid);
+      wx.showModal({
+        title: '提示',
+        content: "请使用微信扫电视二维码",
+        showCancel: false,
+        confirmText:'我知道了'
+      })
     } else {
       var openid = e.currentTarget.dataset.openid;
       var vediourl = e.currentTarget.dataset.vediourl;
@@ -294,14 +299,34 @@ Page({
   exitForscreen: function (e) {
     openid = e.currentTarget.dataset.openid;
     box_mac = e.currentTarget.dataset.box_mac;
-    app.controlExitForscreen(openid, box_mac);
+    if (box_mac == '') {
+      wx.showModal({
+        title: '提示',
+        content: "请使用微信扫电视二维码",
+        showCancel: false,
+        confirmText:'我知道了'
+      })
+    } else {
+      app.controlExitForscreen(openid, box_mac);
+    }
+    
   },
   //遥控调整音量
   changeVolume: function (e) {
     openid = e.currentTarget.dataset.openid;
     box_mac = e.currentTarget.dataset.box_mac;
     var change_type = e.currentTarget.dataset.change_type;
-    app.controlChangeVolume(openid,box_mac, change_type);
+    if (box_mac == '') {
+      wx.showModal({
+        title: '提示',
+        content: "请使用微信扫电视二维码",
+        showCancel: false,
+        confirmText:'我知道了'
+      })
+    } else {
+      app.controlChangeVolume(openid,box_mac, change_type);
+    }
+    
 
   },
   //遥控切换节目
