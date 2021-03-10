@@ -1,5 +1,6 @@
 /* pages/find/video.wxss */
 
+/* 2021-03-10 14:00 删除
 .page_top {
   display: none;
 }
@@ -82,4 +83,255 @@
 
 .page_bottom {
   height: 100rpx;
+}
+*/
+
+
+
+.page_top,
+.page_main,
+.page_bottom,
+.page_main .panels {
+  width: 100%;
+}
+
+.page_main {
+  height: 100%;
+}
+
+/* ================================= 视频内容面板 ================================= */
+.page_main .panels>.article {
+  padding: 0rpx 60rpx;
+}
+
+.page_main .panels>.article>.con_top {
+  height: 120rpx;
+}
+
+.page_main .panels>.article>.con_top>.user-head {
+  width: 80rpx;
+  height: 80rpx;
+  border-radius: 50%;
+}
+
+.page_main .panels>.article>.con_top>.user-info {
+  width: calc(100% - 90rpx);
+}
+
+.page_main .panels>.article>.con_top>.user-info>.nickname {
+  width: 100%;
+  height: 40rpx;
+  padding: 0 15rpx;
+  font-size: 38rpx;
+}
+
+.page_main .panels>.article>.con_top>.user-info>.time-address {
+  height: 30rpx;
+  margin-top: 10rpx;
+  padding: 0 15rpx;
+  border-radius: 20rpx;
+  font-size: 20rpx;
+  color: #FE6F27;
+  background-color: #FFEBE0;
+}
+
+.page_main .panels>.article>.con_main>.speak-with-interest>label {
+  word-break: break-all;
+  line-height: 50rpx;
+  display: block;
+  font-size: 32rpx;
+}
+
+.page_main .panels>.article>.con_main>.media {
+  width: 640rpx;
+  height: 360rpx;
+  line-height: 360rpx;
+  text-align: center;
+}
+
+.page_main .panels>.article>.con_main>.media>video {
+  width: 100%;
+  height: 100%;
+  border-radius: 10rpx;
+}
+
+.page_main .panels>.article>.con_main>.media>image {
+  width: 100%;
+  height: 100%;
+  border-radius: 10rpx;
+}
+
+.page_main .panels>.article>.con_bottom {
+  height: 70rpx;
+  padding: 10rpx 0;
+}
+
+.page_main .panels>.article>.con_bottom>.operation {
+  height: 50rpx;
+}
+
+.page_main .panels>.article>.con_bottom>.operation>view,
+.page_main .panels>.article>.con_bottom>.operation>button {
+  margin: 0 20rpx 0 0;
+  padding: unset;
+  border: unset;
+  background-color: unset;
+}
+
+/* ================================= 控制器面板 ================================= */
+.page_main .panels>.controller {
+  width: calc(100% - 120rpx);
+  height: 100rpx;
+  padding: 20rpx 60rpx;
+  margin-top: 10rpx;
+}
+
+.page_main .panels>.controller>.btn {
+  width: calc(25% - 3rpx);
+  height: 100%;
+  border-left: 3rpx solid #F6F6F6;
+}
+
+.page_main .panels>.controller>.btn:first-child {
+  border-left: unset
+}
+
+.page_main .panels>.controller>.btn>.icon {
+  width: 64rpx;
+  height: 64rpx;
+  line-height: 64rpx;
+  text-align: center;
+  font-size: 42rpx;
+}
+
+.page_main .panels>.controller>.btn>.label {
+  font-size: 28rpx;
+}
+
+/* ================================= 推荐面板 ================================= */
+.page_main .panels>.recommend {
+  margin-top: 10rpx;
+}
+
+.page_main .panels>.recommend>.title-bar {
+  height: 40rpx;
+  padding-top: 20rpx;
+  padding-left: 25rpx;
+}
+
+.page_main .panels>.recommend>.title-bar>.title {
+  width: 110rpx;
+  display: block;
+  text-align: center;
+  font-size: 26rpx;
+  padding-bottom: 2rpx;
+  border-bottom: 6rpx solid #333;
+}
+
+.page_main .panels>.recommend>.weui-grids {
+  width: calc(100% - 60rpx);
+  padding: 30rpx;
+}
+
+.page_main .panels>.recommend>.weui-grids>.weui-grid {
+  width: 350rpx;
+  height: 410rpx;
+}
+
+.page_main .panels>.recommend>.weui-grids>.weui-grid:nth-child(even) {
+  width: 340rpx;
+}
+
+.page_main .panels>.recommend>.weui-grids>.weui-grid>.card {
+  width: 340rpx;
+  height: 380rpx;
+  background-color: rgba(245, 246, 248, 0.5);
+  border-radius: 5rpx;
+}
+
+.page_main .panels>.recommend>.weui-grids>.weui-grid>.card>image {
+  width: 340rpx;
+  height: 250rpx;
+  border-radius: 5rpx;
+}
+
+.page_main .panels>.recommend>.weui-grids>.weui-grid>.card>.people,
+.page_main .panels>.recommend>.weui-grids>.weui-grid>.card>.msg {
+  width: 100%;
+  text-align: center;
+}
+
+.page_main .panels>.recommend>.weui-grids>.weui-grid>.card>.people {
+  height: 50rpx;
+  line-height: 50rpx;
+  font-size: 26rpx;
+}
+
+.page_main .panels>.recommend>.weui-grids>.weui-grid>.card>.msg {
+  height: 30rpx;
+  line-height: 30rpx;
+  font-size: 20rpx;
+}
+
+.page_main .panels>.recommend>.weui-grids>.weui-grid>.card>.flex-row-center-space_between>.user {
+  width: calc(100% - 100rpx);
+  font-size: 24rpx;
+}
+
+.page_main .panels>.recommend>.weui-grids>.weui-grid>.card>.flex-row-center-space_between>.user>image {
+  width: 32rpx;
+  height: 32rpx;
+  border: 1rpx solid #ddd;
+  border-radius: 50%;
+}
+
+.page_main .panels>.recommend>.weui-grids>.weui-grid>.card>.flex-row-center-space_between>.user>view {
+  width: calc(100% - 37rpx);
+  margin-left: 5rpx;
+}
+
+.page_main .panels>.recommend>.weui-grids>.weui-grid>.card>.flex-row-center-space_between>.sta {
+  width: 110rpx;
+  font-size: 24rpx;
+  text-align: right;
+}
+
+.page_main .panels>.recommend>.weui-grids>.weui-grid>.card>.flex-row-center-space_between {
+  width: calc(100% - 45rpx);
+  height: 58rpx;
+  padding-left: 25rpx;
+  padding-right: 20rpx;
+}
+
+.page_main .panels>.recommend>.weui-grids>.weui-grid>.card>.flex-row-center-space_between:last-child {
+  border-top: 2rpx solid #fff;
+  height: 60rpx;
+}
+
+.page_main .panels>.recommend>.weui-grids>.weui-grid>.card>.flex-row-center-space_between>.rank {
+  font-size: 26rpx;
+}
+
+.page_main .panels>.recommend>.weui-grids>.weui-grid>.card>.flex-row-center-space_between>.btn {
+  width: 100rpx;
+  height: 40rpx;
+  line-height: 40rpx;
+  text-align: center;
+  padding: 0;
+  margin: 0;
+  border: 0;
+  font-size: 22rpx;
+}
+
+.page_main>.btn-group {
+  margin-top: 30rpx;
+  text-align: center;
+}
+
+.page_main>.btn-group>button {
+  width: 400rpx;
+  height: 80rpx;
+  line-height: 80rpx;
+  border-radius: 10rpx;
+  font-size: 30rpx;
 }
