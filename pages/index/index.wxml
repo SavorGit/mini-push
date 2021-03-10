@@ -212,7 +212,7 @@
 		</view>
 		<view class="weui-grids">
 			<view wx:for="{{hot_play}}" wx:key="item" wx:for-index="index" wx:for-item="bean" class="weui-grid">
-				<view class="card" bindtap="boxShow" data-res_type="{{bean.res_type}}" data-res_nums="{{bean.res_nums}}" data-pubdetail="{{bean.pubdetail}}" data-boxmac="{{box_mac}}" data-openid="{{openid}}" data-forscreen_id="{{bean.forscreen_id}}" data-hotel_info="{{hotel_info}}" data-res_id="{{bean.res_id}}" data-index="{{index}}">
+				<view class="card" bindtap="boxShow" data-type="{{bean.type}}" data-res_type="{{bean.res_type}}" data-res_nums="{{bean.res_nums}}" data-pubdetail="{{bean.pubdetail}}" data-boxmac="{{box_mac}}" data-openid="{{openid}}" data-forscreen_id="{{bean.forscreen_id}}" data-hotel_info="{{hotel_info}}" data-res_id="{{bean.res_id}}" data-index="{{index}}">
 					<image mode="aspectFill" src="{{bean.pubdetail[0].img_url}}"></image>
 					<view class="flex-row-center-space_between">
 						<view class="user flex-row-center-space_between">

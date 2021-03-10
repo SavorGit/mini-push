@@ -1,5 +1,5 @@
 // pages/forscreen/video/launch_video.js
-const util = require('../../../utils/util.js')
+const utils = require('../../../utils/util.js')
 var mta = require('../../../utils/mta_analysis.js')
 const app = getApp()
 var box_mac;
@@ -35,14 +35,12 @@ Page({
     openid = user_info.openid;
     var filename = options.filename;
     var video_img_url = decodeURIComponent(options.video_img_url);
-    //wx.hideShareMenu();
 
-    
 
-    var that = this;
+    that.getHotplaylist(box_mac);
     //获取节目单视频详情
 
-    util.PostRequest(api_v_url+'/Demand/getVideoInfo', {
+    utils.PostRequest(api_v_url+'/Demand/getVideoInfo', {
       res_id : res_id,
       openid : openid,
     }, (data, headers, cookies, errMsg, statusCode) => {
@@ -67,6 +65,17 @@ Page({
     
     
   },
+  getHotplaylist:function(box_mac=''){//获取热播内容
+    var that = this;
+    utils.PostRequest(api_v_url + '/content/getHotplaylist', {
+      page: 1,
+      box_mac:box_mac
+    }, (data, headers, cookies, errMsg, statusCode) => {
+      that.setData({
+        hot_play: data.result.datalist
+      });
+    })
+  },
   //收藏资源
   onCollect: function (e) {
     var that = this;
@@ -74,7 +83,7 @@ Page({
     var res_id = e.target.dataset.res_id;
     
     var res_type = e.target.dataset.type;
-    util.PostRequest(api_v_url+'/collect/recLogs', {
+    utils.PostRequest(api_v_url+'/collect/recLogs', {
       'openid': openid,
       'res_id': res_id,
       'type': res_type,
@@ -98,7 +107,7 @@ Page({
     var res_id = e.target.dataset.res_id;
     
     var res_type = e.target.dataset.type;
-    util.PostRequest(api_v_url+'/collect/recLogs', {
+    utils.PostRequest(api_v_url+'/collect/recLogs', {
       'openid': openid,
       'res_id': res_id,
       'type': res_type,
@@ -132,7 +141,7 @@ Page({
       // 转发成功
       share_num = share_num++;
 
-      util.PostRequest(api_v_url+'/share/recLogs', {
+      utils.PostRequest(api_v_url+'/share/recLogs', {
         'openid': openid,
         'res_id': res_id,
         'type': res_type,
@@ -191,7 +200,7 @@ Page({
     }
   },//电视播放结束
   //遥控呼大码
-  callQrCode: util.throttle(function (e) {
+  callQrCode: utils.throttle(function (e) {
     openid = e.currentTarget.dataset.openid;
     box_mac = e.currentTarget.dataset.box_mac;
     var qrcode_img = e.currentTarget.dataset.qrcode_img;

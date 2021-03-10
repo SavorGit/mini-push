@@ -54,7 +54,7 @@ Page({
 
     //wx.hideShareMenu();
     var forscreen_id = options.forscreen_id;
-
+    self.getHotplaylist(box_mac);
     utils.PostRequest(api_v_url + '/index/isHaveCallBox', {
       openid:openid
     }, (data, headers, cookies, errMsg, statusCode) => {
@@ -84,6 +84,17 @@ Page({
       })
     })
 
+  },
+  getHotplaylist:function(box_mac=''){//获取热播内容
+    var that = this;
+    utils.PostRequest(api_v_url + '/content/getHotplaylist', {
+      page: 1,
+      box_mac:box_mac
+    }, (data, headers, cookies, errMsg, statusCode) => {
+      that.setData({
+        hot_play: data.result.datalist
+      });
+    })
   },
   //预览图片
   previewImage: function(e) {
