@@ -785,11 +785,10 @@ Page({
       var is_hot = 1;
     }else if(type==2){
       var hot_play = that.data.hot_play;
-      console
       var hot_paly_info = hot_play[index];
       var pubdetail = hot_paly_info['pubdetail'];
       var res_id = hot_paly_info.ads_id;
-      var video_name= hot_play.title;
+      var video_name= hot_paly_info.title;
       var video_url = pubdetail[0].res_url;
       var filename = pubdetail[0].filename;
       var resource_size = pubdetail[0].resource_size;

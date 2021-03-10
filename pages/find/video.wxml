@@ -114,19 +114,19 @@
 
 			<!-- 控制器面板 -->
 			<view class="panel controller flex-row-center-space_between theme-panel">
-				<view class="btn volume-down flex-column-center-center">
+				<view class="btn volume-down flex-column-center-center" bindtap="changeVolume" data-box_mac="{{box_mac}}" data-change_type="1" data-hotel_info="{{hotel_info}}">
 					<view class="icon fa fa-volume-down" aria-hidden="true"></view>
 					<view class="label">音量-</view>
 				</view>
-				<view class="btn volume-up flex-column-center-center">
+				<view class="btn volume-up flex-column-center-center" bindtap="changeVolume" data-box_mac="{{box_mac}}" data-change_type="2" data-hotel_info="{{hotel_info}}">
 					<view class="icon fa fa-volume-up" aria-hidden="true"></view>
 					<view class="label">音量+</view>
 				</view>
-				<view class="btn launch flex-column-center-center">
+				<view class="btn launch flex-column-center-center" wx:if="{{is_replay_disabel==false}}"  bindtap='boxShow' data-forscreen_id='{{videoinfo.forscreen_id}}' data-pubdetail='{{videoinfo.pubdetail}}' data-forscreen_char='{{videoinfo.forscreen_char}}' data-res_type="{{videoinfo.res_type}}" data-res_nums="{{videoinfo.res_nums}}" data-boxmac="{{box_mac}}" data-openid="{{openid}}">
 					<view class="icon fa fa-television" aria-hidden="true"></view>
 					<view class="label">投屏</view>
 				</view>
-				<view class="btn exit flex-column-center-center">
+				<view class="btn exit flex-column-center-center" bindtap="exitForscreen" data-openid="{{openid}}" data-box_mac="{{box_mac}}">
 					<view class="icon fa fa-sign-out" aria-hidden="true"></view>
 					<view class="label">退出</view>
 				</view>
@@ -139,7 +139,7 @@
 				</view>
 				<view class="weui-grids">
 					<view wx:for="{{hot_play}}" wx:key="item" wx:for-index="index" wx:for-item="bean" class="weui-grid">
-						<view class="card" bindtap="boxShow" data-res_type="{{bean.res_type}}" data-res_nums="{{bean.res_nums}}" data-pubdetail="{{bean.pubdetail}}" data-boxmac="{{box_mac}}" data-openid="{{openid}}" data-forscreen_id="{{bean.forscreen_id}}" data-hotel_info="{{hotel_info}}" data-res_id="{{bean.res_id}}" data-index="{{index}}">
+						<view class="card" bindtap="forscreenBox" data-type="{{bean.type}}" data-res_type="{{bean.res_type}}" data-res_nums="{{bean.res_nums}}" data-pubdetail="{{bean.pubdetail}}" data-boxmac="{{box_mac}}" data-openid="{{openid}}" data-forscreen_id="{{bean.forscreen_id}}" data-hotel_info="{{hotel_info}}" data-res_id="{{bean.res_id}}" data-index="{{index}}">
 							<image mode="aspectFill" src="{{bean.pubdetail[0].img_url}}"></image>
 							<view class="flex-row-center-space_between">
 								<view class="user flex-row-center-space_between">
