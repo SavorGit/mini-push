@@ -370,7 +370,7 @@ Page({
         confirmText:'我知道了'
       })
     } else {
-      app.controlExitForscreen(openid, box_mac, '', self);
+      app.controlExitForscreen(openid, box_mac, hotel_info, self);
     }
     
   },
@@ -388,7 +388,7 @@ Page({
         confirmText:'我知道了'
       })
     } else {
-      app.controlChangeVolume(openid, box_mac, change_type, '', self);
+      app.controlChangeVolume(openid, box_mac, change_type, hotel_info, self);
     }
   },
   //遥控切换节目
