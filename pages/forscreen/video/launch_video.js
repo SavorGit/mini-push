@@ -38,6 +38,17 @@ Page({
 
 
     that.getHotplaylist(box_mac,res_id);
+    utils.PostRequest(api_v_url + '/index/isHaveCallBox', {
+      openid:openid
+    }, (data, headers, cookies, errMsg, statusCode) => {
+      if (data.result.is_have == 1) {//如果已连接盒子
+        that.setData({
+          
+          hotel_info: data.result,
+          
+        })
+      }
+    })
     //获取节目单视频详情
 
     utils.PostRequest(api_v_url+'/Demand/getVideoInfo', {
@@ -192,7 +203,7 @@ Page({
       var timestamp = (new Date()).valueOf();
       var mobile_brand = app.globalData.mobile_brand;
       var mobile_model = app.globalData.mobile_model;
-
+      var hotel_info = that.data.hotel_info;
 
       var res_id = that.data.res_id;
       var res_type = 2;
@@ -205,7 +216,7 @@ Page({
       media_info.duration = 0;
       var pubdetail = [];
       pubdetail.push(media_info);
-      app.boxShow(box_mac, res_id, pubdetail, res_type, 1, action, '', self);
+      app.boxShow(box_mac, res_id, pubdetail, res_type, 1, action, hotel_info, self);
 
 
     }
@@ -263,7 +274,7 @@ Page({
       //跳转到详情页
       app.boxShow(box_mac, res_id, pubdetail, res_type, res_nums, action, hotel_info, that,is_hot);
     }
-    wx.navigateTo({
+    wx.redirectTo({
       url: jump_url,
     })
 
@@ -297,8 +308,10 @@ Page({
   },
   //遥控退出投屏
   exitForscreen: function (e) {
+    var self = this;
     openid = e.currentTarget.dataset.openid;
     box_mac = e.currentTarget.dataset.box_mac;
+    var hotel_info = self.data.hotel_info;
     if (box_mac == '') {
       wx.showModal({
         title: '提示',
@@ -307,15 +320,17 @@ Page({
         confirmText:'我知道了'
       })
     } else {
-      app.controlExitForscreen(openid, box_mac);
+      app.controlExitForscreen(openid, box_mac, hotel_info, self);
     }
     
   },
   //遥控调整音量
   changeVolume: function (e) {
+    var self = this;
     openid = e.currentTarget.dataset.openid;
     box_mac = e.currentTarget.dataset.box_mac;
     var change_type = e.currentTarget.dataset.change_type;
+    var hotel_info = e.currentTarget.dataset.hotel_info;
     if (box_mac == '') {
       wx.showModal({
         title: '提示',
@@ -324,7 +339,7 @@ Page({
         confirmText:'我知道了'
       })
     } else {
-      app.controlChangeVolume(openid,box_mac, change_type);
+      app.controlChangeVolume(openid, box_mac, change_type, hotel_info, self);
     }
     
 

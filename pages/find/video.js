@@ -320,7 +320,7 @@ Page({
       //跳转到详情页
       app.boxShow(box_mac, res_id, pubdetail, res_type, res_nums, action, hotel_info, that,is_hot);
     }
-    wx.navigateTo({
+    wx.redirectTo({
       url: jump_url,
     })
 

@@ -106,7 +106,7 @@
 					<view class="icon fa fa-television" aria-hidden="true"></view>
 					<view class="label">投屏</view>
 				</view>
-				<view class="btn exit flex-column-center-center" bindtap="exitForscreen" data-openid="{{openid}}" data-box_mac="{{box_mac}}">
+				<view class="btn exit flex-column-center-center" bindtap="exitForscreen" data-openid="{{openid}}" data-box_mac="{{box_mac}}" data-hotel_info="{{hotel_info}}">
 					<view class="icon fa fa-sign-out" aria-hidden="true"></view>
 					<view class="label">退出</view>
 				</view>
