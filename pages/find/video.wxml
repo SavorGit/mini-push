@@ -63,7 +63,7 @@
 <!-- 发现视频落地页 -->
 <view class="container flex-column-center-flex_start theme-container" style='height: calc(100vh - {{46 + statusBarHeight}}px);'>
 	<view class='page_top'></view>
-	<scroll-view class='page_main'>
+	<scroll-view class='page_main' scroll-y="true" scroll-with-animation="true">
 		<view class="panels">
 
 			<!-- 视频内容面板 -->
