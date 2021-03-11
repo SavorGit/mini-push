@@ -275,7 +275,8 @@ Page({
         'openid' : openid,
         'type'   : code_type,
         'mobile_brand':app.globalData.mobile_brand,
-        'mobile_model':app.globalData.mobile_model
+        'mobile_model':app.globalData.mobile_model,
+        'data_id':prize_activity_id
       }, (data, headers, cookies, errMsg, statusCode) => {
         var timestamp = (new Date()).valueOf();
         var is_have = data.result.is_have;
