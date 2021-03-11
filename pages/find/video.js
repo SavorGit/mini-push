@@ -28,6 +28,10 @@ Page({
   onLoad: function(options) {
     var self = this;
     var is_hot = 0;
+    var res_id = 0;
+    if(typeof(options.res_id)!='undefined'){
+      res_id = options.res_id;
+    }
     if(typeof(options.is_hot)!='undefined'){
       var is_hot = options.is_hot;
     }
@@ -48,7 +52,7 @@ Page({
 
     //wx.hideShareMenu();
     var forscreen_id = options.forscreen_id;
-
+    self.getHotplaylist(box_mac,forscreen_id);
     utils.PostRequest(api_v_url + '/index/isHaveCallBox', {
       openid:openid
     }, (data, headers, cookies, errMsg, statusCode) => {
@@ -63,6 +67,7 @@ Page({
     utils.PostRequest(api_v_url + '/Find/showPic', {
       forscreen_id: forscreen_id,
         openid: openid,
+        res_id:res_id,
     }, (data, headers, cookies, errMsg, statusCode) => {
       self.setData({
         forscreen_id:forscreen_id,
@@ -79,6 +84,24 @@ Page({
     })
     
     
+  },
+  getHotplaylist:function(box_mac='',forscreen_id){//获取热播内容
+    var that = this;
+    utils.PostRequest(api_v_url + '/content/getHotplaylist', {
+      page: 1,
+      box_mac:box_mac
+    }, (data, headers, cookies, errMsg, statusCode) => {
+      var hot_play = data.result.datalist;
+      for(var i in hot_play){
+        if(forscreen_id==hot_play[i].forscreen_id){
+          hot_play.splice(i,1)
+          break;
+        }
+      }
+      that.setData({
+        hot_play: hot_play
+      });
+    })
   },
   //收藏资源
   onCollect: function(e) {
@@ -139,21 +162,24 @@ Page({
   }, //取消收藏结束
   //点击分享按钮
   onShareAppMessage: function(res) {
+    console.log(res)
     var self = this;
-    var openid = res.target.dataset.openid;
-    var res_id = res.target.dataset.res_id;
+    var openid = self.data.openid;
+    var videoinfo = self.data.videoinfo;
 
-    var res_type = res.target.dataset.res_type;
-    var pubdetail = res.target.dataset.pubdetail;
+    var res_id = videoinfo.forscreen_id;
+
+    var res_type = 2;
+    var pubdetail = videoinfo.pubdetail;
     var img_url = pubdetail[0]['vide_img'];
 
-    var share_num = res.target.dataset.share_num;
+    var share_num = self.data.share_num;
 
     utils.tryCatch(mta.Event.stat('FindVideo_VideoDetail_Share', {
       'openid': openid,
       'from': self.data.pageFrom
     }));
-    if (res.from === 'button') {
+    if (res.from === 'button' || res.from=='menu') {
       // 转发成功
       share_num = share_num++;
       utils.PostRequest(api_v_url + '/share/recLogs', {
@@ -194,8 +220,9 @@ Page({
   //电视播放
   boxShow(e) {
     var self = this;
-    var box_mac = e.target.dataset.boxmac;
-    var find_id = e.target.dataset.forscreen_id
+    
+    var box_mac = e.currentTarget.dataset.boxmac;
+    var find_id = e.currentTarget.dataset.forscreen_id
 
     utils.tryCatch(mta.Event.stat('FindVideo_VideoDetail_LaunchTV', {
       'openid': openid,
@@ -203,7 +230,12 @@ Page({
       'boxmac': box_mac
     }));
     if (box_mac == '') {
-      app.scanQrcode(pageid);
+      wx.showModal({
+        title: '提示',
+        content: "请使用微信扫电视二维码",
+        showCancel: false,
+        confirmText:'我知道了'
+      })
     } else {
       var user_info = wx.getStorageSync("savor_user_info");
       //console.log(user_info);
@@ -235,6 +267,64 @@ Page({
 
     }
   }, //电视播放结束
+  //电视播放
+  forscreenBox: function (e) {
+    var that = this;
+    var forscreen_id = e.currentTarget.dataset.forscreen_id;
+    var res_id       = e.currentTarget.dataset.res_id;
+
+    var pubdetail = e.currentTarget.dataset.pubdetail;
+    var res_type = e.currentTarget.dataset.res_type;
+    var res_nums = e.currentTarget.dataset.res_nums;
+    var hotel_info = e.currentTarget.dataset.hotel_info;
+    var index = e.currentTarget.dataset.index;
+    var type  = e.currentTarget.dataset.type;
+    if(type==1){
+      if (res_type == 1) {
+        var action = 11; //发现图片点播
+        var jump_url = '/pages/find/picture?box_mac='+box_mac+'&forscreen_id='+forscreen_id+'&is_hot=1&res_id='+res_id;
+      } else if (res_type == 2) {
+        var action = 12; //发现视频点播
+        var jump_url = '/pages/find/video?box_mac='+box_mac+'&forscreen_id='+forscreen_id+'&is_hot=1&res_id='+res_id;
+      }
+      var is_hot = 1;
+    }else if(type==2){
+      var hot_play = that.data.hot_play;
+      var hot_paly_info = hot_play[index];
+      var pubdetail = hot_paly_info['pubdetail'];
+      var res_id = hot_paly_info.ads_id;
+      var video_name= hot_paly_info.title;
+      var video_url = pubdetail[0].res_url;
+      var filename = pubdetail[0].filename;
+      var resource_size = pubdetail[0].resource_size;
+      var duration = pubdetail[0].duration;
+      var res_nums = 1;
+      var res_type = 2;
+      var action = 5;
+      var img_url = encodeURIComponent(pubdetail[0].img_url);
+
+      var jump_url = '/pages/forscreen/video/launch_video?res_id='+res_id+'&video_url='+video_url+'&video_name='+video_name+'&box_mac='+box_mac+'&filename='+filename+'&video_img_url='+img_url;
+      
+      var media_info = {};
+      media_info.forscreen_url = "media/resource/"+ filename;
+      media_info.filename      = filename;
+      media_info.res_id = res_id;
+      media_info.resource_size = resource_size;
+      media_info.duration = duration;
+      var pubdetail = [];
+      pubdetail.push(media_info);
+      var is_hot = 0;
+    }
+    
+    if(box_mac!='' && typeof(box_mac)!='undefined'){
+      //跳转到详情页
+      app.boxShow(box_mac, res_id, pubdetail, res_type, res_nums, action, hotel_info, that,is_hot);
+    }
+    wx.redirectTo({
+      url: jump_url,
+    })
+
+  },
   //遥控呼大码
   callQrCode: utils.throttle(function(e) {
     var self = this;
@@ -272,7 +362,17 @@ Page({
     openid = e.currentTarget.dataset.openid;
     box_mac = e.currentTarget.dataset.box_mac;
     var hotel_info = e.currentTarget.dataset.hotel_info;
-    app.controlExitForscreen(openid, box_mac, '', self);
+    if (box_mac == '') {
+      wx.showModal({
+        title: '提示',
+        content: "请使用微信扫电视二维码",
+        showCancel: false,
+        confirmText:'我知道了'
+      })
+    } else {
+      app.controlExitForscreen(openid, box_mac, hotel_info, self);
+    }
+    
   },
   //遥控调整音量
   changeVolume: function(e) {
@@ -280,8 +380,16 @@ Page({
     box_mac = e.currentTarget.dataset.box_mac;
     var change_type = e.currentTarget.dataset.change_type;
     var hotel_info = e.currentTarget.dataset.hotel_info;
-    app.controlChangeVolume(openid, box_mac, change_type, '', self);
-
+    if (box_mac == '') {
+      wx.showModal({
+        title: '提示',
+        content: "请使用微信扫电视二维码",
+        showCancel: false,
+        confirmText:'我知道了'
+      })
+    } else {
+      app.controlChangeVolume(openid, box_mac, change_type, hotel_info, self);
+    }
   },
   //遥控切换节目
   changeProgram: function(e) {

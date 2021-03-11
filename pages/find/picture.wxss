@@ -1,5 +1,5 @@
 /* pages/find/picture.wxss */
-
+/* 2021-03-10 14:00 删除
 .page_top {
   display: none;
 }
@@ -74,4 +74,18 @@
 
 .page_bottom {
   height: 100rpx;
+}
+*/
+@import "/pages/find/video.wxss";
+
+
+.page_main .panels>.article>.con_main>.weui-grids>.weui-grid {
+  width: 210rpx;
+  height: 210rpx;
+  padding: 5rpx;
+}
+
+.page_main .panels>.article>.con_main>.weui-grids>.weui-grid image {
+  width: 100%;
+  height: 100%;
 }

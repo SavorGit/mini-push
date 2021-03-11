@@ -260,7 +260,6 @@ App({
     }else{
       link_type = change_link_type;
     }
-    console.log(link_type+'link_type')
     if (link_type == 1 || hotel_info=='') {
       var timestamp = (new Date()).valueOf();
       wx.request({
@@ -1379,6 +1378,6 @@ changeKb:function (limit){
     forscreen_call_code_filename:'',
     wx_download_max_size:209715200,
     config_info:{},
-    small_app_version:'4.6.22'
+    small_app_version:'4.6.24'
   }
 })

@@ -61,22 +61,22 @@ Page({
   onLoad: function (options) {
     wx.removeStorageSync(cache_key+'colose_official_account');
     var that = this;
-    that.getHotplaylist();
+    
     //var box_mac = that.data.boxShow
     //that.getAdspositionList(box_mac);
       
   },
   
-  getHotplaylist:function(){//获取热播内容
+  getHotplaylist:function(box_mac=''){//获取热播内容
     var that = this;
     utils.PostRequest(api_v_url + '/content/getHotplaylist', {
       page: 1,
-      pagesize: 8
+      box_mac:box_mac
     }, (data, headers, cookies, errMsg, statusCode) => {
       that.setData({
         hot_play: data.result.datalist
       });
-    })
+    },re => { }, { isShowLoading: false })
   },
   getAdspositionList:function(box_id){//获取轮播广告banner
     var that = this;
@@ -773,21 +773,52 @@ Page({
     var res_nums = e.currentTarget.dataset.res_nums;
     var hotel_info = e.currentTarget.dataset.hotel_info;
     var index = e.currentTarget.dataset.index;
-    if (res_type == 1) {
-      var action = 11; //发现图片点播
-      var jump_url = '/pages/find/picture?box_mac='+box_mac+'&forscreen_id='+forscreen_id+'&is_hot=1';
-    } else if (res_type == 2) {
-      var action = 12; //发现视频点播
-      var jump_url = '/pages/find/video?box_mac='+box_mac+'&forscreen_id='+forscreen_id+'&is_hot=1';
+    var type  = e.currentTarget.dataset.type;
+    if(type==1){
+      if (res_type == 1) {
+        var action = 11; //发现图片点播
+        var jump_url = '/pages/find/picture?box_mac='+box_mac+'&forscreen_id='+forscreen_id+'&is_hot=1&res_id='+res_id;
+      } else if (res_type == 2) {
+        var action = 12; //发现视频点播
+        var jump_url = '/pages/find/video?box_mac='+box_mac+'&forscreen_id='+forscreen_id+'&is_hot=1&res_id='+res_id;
+      }
+      var is_hot = 1;
+    }else if(type==2){
+      var hot_play = that.data.hot_play;
+      var hot_paly_info = hot_play[index];
+      var pubdetail = hot_paly_info['pubdetail'];
+      var res_id = hot_paly_info.ads_id;
+      var video_name= hot_paly_info.title;
+      var video_url = pubdetail[0].res_url;
+      var filename = pubdetail[0].filename;
+      var resource_size = pubdetail[0].resource_size;
+      var duration = pubdetail[0].duration;
+      var res_nums = 1;
+      var res_type = 2;
+      var action = 5;
+      var img_url = encodeURIComponent(pubdetail[0].img_url);
+
+      var jump_url = '/pages/forscreen/video/launch_video?res_id='+res_id+'&video_url='+video_url+'&video_name='+video_name+'&box_mac='+box_mac+'&filename='+filename+'&video_img_url='+img_url;
+      
+      var media_info = {};
+      media_info.forscreen_url = "media/resource/"+ filename;
+      media_info.filename      = filename;
+      media_info.res_id = res_id;
+      media_info.resource_size = resource_size;
+      media_info.duration = duration;
+      var pubdetail = [];
+      pubdetail.push(media_info);
+      var is_hot = 0;
     }
+    
     if(box_mac!='' && typeof(box_mac)!='undefined'){
       //跳转到详情页
-      app.boxShow(box_mac, res_id, pubdetail, res_type, res_nums, action, hotel_info, that,1);
+      app.boxShow(box_mac, res_id, pubdetail, res_type, res_nums, action, hotel_info, that,is_hot);
     }
     wx.navigateTo({
       url: jump_url,
     })
-    
+
     var order = index + 1;
     mta.Event.stat('clickHotPlay', { 'linktype': app.globalData.link_type, 'boxmac': box_mac, "order": order })
   },
@@ -853,6 +884,7 @@ Page({
             is_compress:data.result.is_compress
           })
           box_mac = data.result.box_mac;
+          that.getHotplaylist(box_mac);
         } else {//如果未连接盒子
           that.getAdspositionList('')
           var serial_number = app.globalData.serial_number;
@@ -867,7 +899,7 @@ Page({
             box_mac: '',
             link_type: 0
           })
-
+          that.getHotplaylist(box_mac);
         }
         app.isRegister(openid,that,1,data.result.is_have);
       }, re => { }, { isShowLoading: false });
@@ -917,6 +949,7 @@ Page({
                 is_compress:data.result.is_compress
               })
               box_mac = data.result.box_mac;
+              that.getHotplaylist(box_mac);
             } else {
               that.getAdspositionList('')
               that.setData({
@@ -924,6 +957,7 @@ Page({
                 box_mac: '',
               })
               box_mac = '';
+              that.getHotplaylist(box_mac);
             }
             app.isRegister(openid,that,1,is_have);
           });
@@ -935,6 +969,7 @@ Page({
             box_mac: '',
           })
           box_mac = '';
+          that.getHotplaylist(box_mac);
         }
         
       }

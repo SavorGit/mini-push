@@ -183,7 +183,22 @@ Page({
     mta.Event.stat("clickpubliccontentmore", {})
   },
   clickLikeContent: function(e){
+    
     mta.Event.stat("clicklikecontent", {})
+  },
+  clickLikeContentPro:function(e){
+    console.log(e)
+    var res_url = e.currentTarget.dataset.rts.res_url;
+    var title   = e.currentTarget.dataset.rts.title;
+    var res_id  = e.currentTarget.dataset.rts.res_id;
+    var filename= e.currentTarget.dataset.rts.filename;
+    
+    var imgurl  = e.currentTarget.dataset.rts.imgurl;
+    imgurl = encodeURIComponent(imgurl);
+    var url="/pages/forscreen/video/launch_video?video_url="+res_url+"&video_name="+title+"&box_mac="+box_mac+"&res_id="+res_id+"&filename="+filename+"&video_img_url="+imgurl
+    wx.navigateTo({
+      url: url,
+    })
   },
   clickLikeContentMore:function(e){
     mta.Event.stat("clicklikecontentmore", {})

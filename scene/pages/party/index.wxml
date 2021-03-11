@@ -117,7 +117,7 @@
 			</view>
 			-->
 
-			<!-- 视频投屏面板 -->
+			<!-- 视频投屏面板 
 			<view class="panel detailed-list launch-video">
 				<block wx:if="{{videos_num>0}}">
 					<view class="head flex-column-flex_start-flex_start">
@@ -152,9 +152,9 @@
 						</view>
 					</view>
 				</block>
-			</view>
+			</view>-->
 
-			<!-- 图片投屏面板 -->
+			<!-- 图片投屏面板 
 			<view class="panel detailed-list launch-picture">
 				<block wx:if="{{images_num>0}}">
 					<view class="head flex-column-flex_start-flex_start">
@@ -188,7 +188,7 @@
 						</view>
 					</view>
 				</block>
-			</view>
+			</view>-->
 
 			<!-- 福利面板 -->
 			<view class="panel welfare">

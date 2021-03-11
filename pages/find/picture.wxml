@@ -3,7 +3,7 @@
 <template is="navigationBarForTwoLevel" data='{{statusBarHeight: statusBarHeight,titleText:"热点投屏"}}' />
 
 
-<!-- 发现视频落地页 -->
+<!-- 发现图片落地页 
 <view class="container flex-column-center-flex_start theme-container" style='height: calc(100vh - 46px - {{statusBarHeight}}px);'>
   <view class='full_width page_top'></view>
   <view class='full_width page_main'>
@@ -53,8 +53,103 @@
     <view class='btn-group full_width'>
       <button wx:if="{{is_replay_disabel == false}}" class='theme-button-dark' bindtap='boxShow' data-forscreen_id='{{picinfo.forscreen_id}}' data-pubdetail='{{picinfo.pubdetail}}' data-forscreen_char='{{picinfo.forscreen_char}}' data-res_type="{{picinfo.res_type}}"
         data-res_nums="{{picinfo.res_nums}}" data-boxmac="{{box_mac}}" data-openid="{{openid}}">投屏</button>
-      <!-- <button wx:else disabled="true">{{djs}}S</button> -->
+      !-- <button wx:else disabled="true">{{djs}}S</button> --
     </view>
   </view>
   <view class='full_width page_bottom'></view>
+</view>
+-->
+
+<!-- 发现图片落地页 -->
+<view class="container flex-column-center-flex_start theme-container" style='height: calc(100vh - {{46 + statusBarHeight}}px);'>
+	<view class='page_top'></view>
+	<scroll-view class='page_main' scroll-y="true" scroll-with-animation="true">
+		<view class="panels">
+
+			<!-- 图片内容面板 -->
+			<view class='panel article theme-panel'>
+				<view class='con_top flex-row-center-space_between'>
+					<image class="user-head" mode='aspectFill' src='{{picinfo.avatarUrl}}'></image>
+					<view class='user-info flex-column-flex_start-center'>
+						<view class='nickname theme-font1'>{{picinfo.nickName}}</view>
+						<view class='time-address flex-row-center-flex_start'>
+							<label class="">{{picinfo.create_time}}</label>
+							<label wx:if="{{picinfo.hotel_name!=''}}" class="">.</label>
+							<label wx:if="{{picinfo.hotel_name!=''}}" class="">{{picinfo.hotel_name}}</label>
+						</view>
+					</view>
+				</view>
+				<view class='con_main'>
+					<view wx:if="{{picinfo.public_text!=''}}" class='speak_with_interest'>
+						<label class="one-line-overflow">{{picinfo.public_text}}</label>
+					</view>
+					<view class='weui-grids'>
+						<view class='weui-grid' wx:for="{{picinfo.pubdetail}}" wx:key="key" wx:for-item="bean" wx:for-index="index">
+							<image mode='aspectFill' src='{{bean.res_url}}' bindtap="previewImage" data-src="{{picinfo.pubdetail}}" data-pkey="{{index}}"></image>
+						</view>
+					</view>
+				</view>
+				<view class='con_bottom flex-column-center-center'>
+					<view class='operation flex-row-center-flex_start font_666666_26'>
+						<view>
+							<label class="fa fa-play fa-lg" style="margin-right: 5rpx;"></label>
+							<label>{{play_num}}</label>
+						</view>
+						<button wx:if="{{is_collect=='1'}}" class="flex-row-center-flex_start font_666666_26" bindtap='cancCollect' data-res_id="{{picinfo.forscreen_id}}" data-openid="{{openid}}" data-type="2">
+							<label class="fa fa-heart fa-lg" style="color: #E11E4C;margin-right: 5rpx;"></label>
+							<label>{{collect_num}}</label>
+						</button>
+						<button wx:else bindtap='onCollect' class="flex-row-center-flex_start font_666666_26" data-res_id="{{picinfo.forscreen_id}}" data-openid="{{openid}}" data-type="2">
+							<label class="fa fa-heart-o fa-lg" style="margin-right: 5rpx;"></label>
+							<label>{{collect_num}}</label>
+						</button>
+						<button class="flex-row-center-flex_start font_666666_26" open-type='share' data-res_id="{{picinfo.forscreen_id}}" data-res_key="{{index}}" data-pubdetail="{{picinfo.pubdetail}}" data-openid="{{openid}}" data-res_type="2">
+							<label class="fa fa-share-alt fa-lg" style="margin-right: 5rpx;"></label>
+							<label>{{share_num}}</label>
+						</button>
+					</view>
+				</view>
+			</view>
+
+			<!-- 控制器面板 -->
+			<view class="panel controller flex-row-center-center theme-panel">
+				<view class="btn launch flex-column-center-center" wx:if="{{is_replay_disabel == false}}"  bindtap='boxShow' data-forscreen_id='{{picinfo.forscreen_id}}' data-pubdetail='{{picinfo.pubdetail}}' data-forscreen_char='{{picinfo.forscreen_char}}' data-res_type="{{picinfo.res_type}}"
+        data-res_nums="{{picinfo.res_nums}}" data-boxmac="{{box_mac}}" data-openid="{{openid}}">
+					<view class="icon fa fa-television" aria-hidden="true"></view>
+					<view class="label">投屏</view>
+				</view>
+				<view class="btn exit flex-column-center-center" bindtap="exitForscreen" data-openid="{{openid}}" data-box_mac="{{box_mac}}" data-hotel_info="{{hotel_info}}">
+					<view class="icon fa fa-sign-out" aria-hidden="true"></view>
+					<view class="label">退出</view>
+				</view>
+			</view>
+
+			<!-- 推荐面板 -->
+			<view class="panel recommend full_width theme-panel">
+				<view class="title-bar">
+					<label class="title theme-font1">热播内容</label>
+				</view>
+				<view class="weui-grids">
+					<view wx:for="{{hot_play}}" wx:key="item" wx:for-index="index" wx:for-item="bean" class="weui-grid">
+						<view class="card" bindtap="forscreenBox" data-type="{{bean.type}}" data-res_type="{{bean.res_type}}" data-res_nums="{{bean.res_nums}}" data-pubdetail="{{bean.pubdetail}}" data-boxmac="{{box_mac}}" data-openid="{{openid}}" data-forscreen_id="{{bean.forscreen_id}}" data-hotel_info="{{hotel_info}}" data-res_id="{{bean.res_id}}" data-index="{{index}}">
+							<image mode="aspectFill" src="{{bean.pubdetail[0].img_url}}"></image>
+							<view class="flex-row-center-space_between">
+								<view class="user flex-row-center-space_between">
+									<image src="{{bean.avatarUrl}}"></image>
+									<view class="one-line-overflow">{{bean.nickName}}</view>
+								</view>
+								<view class="sta theme-font3">{{bean.play_nums}} 次</view>
+							</view>
+							<view class="flex-row-center-space_between">
+								<view class="rank theme-font5">TOP {{index+1}}</view>
+								<button wx:if="{{bean.is_show==1}}" class="btn theme-button-dark" data-res_type="{{bean.res_type}}" data-res_nums="{{bean.res_nums}}" data-pubdetail="{{bean.pubdetail}}" data-boxmac="{{box_mac}}" data-openid="{{openid}}" data-forscreen_id="{{bean.forscreen_id}}" data-hotel_info="{{hotel_info}}" data-index="{{index}}">投屏</button>
+							</view>
+						</view>
+					</view>
+				</view>
+			</view>
+
+		</view>
+	</scroll-view>
+	<view class='page_bottom'></view>
 </view>

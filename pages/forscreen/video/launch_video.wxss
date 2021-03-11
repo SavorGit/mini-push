@@ -1,7 +1,7 @@
 /* pages/forscreen/video/launch_video.wxss */
 
 /* ================================== 点播页面 ================================== */
-
+/* 2021-03-10 14:00 删除
 .page_top {
   display: none;
 }
@@ -90,3 +90,5 @@
   font-size: 38rpx;
   border-radius: 0rpx;
 }
+*/
+@import "/pages/find/video.wxss";
