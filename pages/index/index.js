@@ -76,7 +76,7 @@ Page({
       that.setData({
         hot_play: data.result.datalist
       });
-    })
+    },re => { }, { isShowLoading: false })
   },
   getAdspositionList:function(box_id){//获取轮播广告banner
     var that = this;
