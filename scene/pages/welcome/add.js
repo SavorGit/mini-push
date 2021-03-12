@@ -556,7 +556,7 @@ Page({
       music_id:music_id
     }, (data, headers, cookies, errMsg, statusCode) =>{
       app.showToast('保存成功')
-      var welcome_id = data.result.welcome_id;
+      welcome_id = data.result.welcome_id;
       that.forscreenWelcome(welcome_id,welcome_info)
       if(pageid=='index'){
         that.getWelcomeInfo(openid,box_mac,type,welcome_id)
