@@ -12,7 +12,7 @@
 			<!-- 视频内容面板 -->
 			<view class='panel article theme-panel' wx:if="{{showControl==false}}">
 				<view class='con_top flex-row-center-space_between'>
-					<image class="user-head" mode='aspectFill' src='{{videoinfo.avatarUrl}}'></image>
+					<image class="user-head" mode='aspectFill' src='{{videoinfo.avatarUrl}}'></image> 
 					<view class='user-info flex-column-flex_start-center'>
 						<view class='nickname theme-font1'>{{videoinfo.nickName}}</view>
 						<view class='time-address flex-row-center-flex_start'>
