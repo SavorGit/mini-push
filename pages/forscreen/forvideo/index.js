@@ -639,7 +639,13 @@ Page({
                 //console.log('99999--'+cTs);
                 that.connectWifi(wifi_name, wifi_mac, use_wifi_password, box_mac,hotel_info,data,cTs);
               }else if(res.errMsg == 'getConnectedWifi:fail:netInfo is null'){
-                that.speedUploadVideo(hotel_info,data);
+                if(video_size>limit_video_size){
+                  that.burstReadVideoFile(data,hotel_info,);
+                }else {
+                  that.speedUploadVideo(hotel_info,data);
+                }
+                return false;
+                //that.speedUploadVideo(hotel_info,data);
               }
               else {
                 if (res.errCode == 12005) { //安卓特有  未打开wifi
@@ -699,9 +705,9 @@ Page({
     var video_size = that.data.size;
     var openWind = that.data.openWind;
     var clearTime8 = setTimeout(() => {
-            wx.stopWifi({
+            /*wx.stopWifi({
               success: (res) => {},
-            })
+            })*/
             that.setData({isOpenWind:false});
             wx.showModal({
               title: 'wifi链接超时',
@@ -1297,6 +1303,7 @@ Page({
       form_data:res.detail.value,
       launchType:launchType,
     })
+    console.log(launchType);
     if(launchType=='classic'){//经典投屏
       var forscreen_method = hotel_info.forscreen_method;
       var speed_forscreen_method = forscreen_method.substr(2,1);

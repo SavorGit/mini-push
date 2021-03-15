@@ -2,63 +2,24 @@
 <import src="/pages/template/commons" />
 <template is="navigationBarForTwoLevel" data='{{statusBarHeight: statusBarHeight,titleText:"热点投屏"}}' />
 
-<!-- ================================== 点播页面 ================================== 
-<view class="container flex-column-center-flex_start theme-container" style='height: calc(100vh - 46px - {{statusBarHeight}}px);'>
-  <view class='page_top full_width'></view>
-  <view class='page_main full_width' wx:if="{{showControl==false}}">
-    <view class='full_width article'>
-      <view wx:if="{{is_box_show==false}}" class='full_width video'>
-        <video class='full_width' src="{{video_url}}" autoplay="false"></video>
-      </view>
-      <view wx:else class='full_width video'>
-        <image class='full_width' src="{{video_img_url}}"></image>
-      </view>
-      <view class='title display_hide'>
-        <label>{{video_name}}</label>
-      </view>
-      <view class='con_bottom theme-panel'>
-        <view class='full_height operation flex-row-center-flex_end font_666666_28'>
-          <view>
-            <label class="fa fa-play fa-lg" style="color: #666666;margin-right: 5rpx;"></label>
-            <label>{{play_num}}</label>
-          </view>
-          <view wx:if="{{is_collect==1}}">
-            <label class="fa fa-heart fa-lg" style="color: #E11E4C;margin-right: 5rpx;" bindtap='cancCollect' data-res_id="{{res_id}}" data-type='{{res_type}}' data-openid='{{openid}}'></label>
-            <label>{{collect_num}}</label>
-          </view>
-          <view wx:else>
-            <label class="fa fa-heart-o fa-lg" style="color: #666666;margin-right: 5rpx;" bindtap='onCollect' data-res_id="{{res_id}}" data-type='{{res_type}}' data-openid='{{openid}}'></label>
-            <label>{{collect_num}}</label>
-          </view>
-          <view>
-            <button class="font_666666_28" open-type='share' data-openid="{{openid}}" data-res_id="{{res_id}}" data-type='{{res_type}}' data-video_url="{{video_url}}" data-video_name="{{video_name}}" data-video_img='{{video_img_url}}' data-share_num='{{share_num}}'>
-              <label class="fa fa-share-square-o fa-lg" style="color: #666666;margin-right: 5rpx;"></label>
-              <label>{{share_num}}</label>
-            </button>
-          </view>
-        </view>
-      </view>
-    </view>
-    <view class="btn-group full_width">
-      <button wx:if="{{is_replay_disabel==false}}" class='theme-button-dark' bindtap='boxShow' data-name="{{video_name}}" data-filename='{{filename}}' data-vediourl="{{video_url}}" data-boxmac="{{box_mac}}" data-openid="{{openid}}">投屏</button>
-      <button wx:else disabled="true">{{djs}} S</button>
-    </view>
-  </view>
-  <view class='page_bottom full_width'>
-    !-- <button wx:if="{{is_replay_disabel==false}}" bindtap='boxShow' data-name="{{video_name}}" data-filename='{{filename}}' data-vediourl="{{video_url}}" data-boxmac="{{box_mac}}" data-openid="{{openid}}" class='full_width theme-button'>投屏</button>
-    <button wx:else class='theme-button2'>{{djs}} S</button> --
-  </view>
-</view>
--->
+
 
 <!-- ================================== 点播页面 ================================== -->
-<view class="container flex-column-center-flex_start theme-container" style='height: calc(100vh - {{46 + statusBarHeight}}px);'>
+<view class="container flex-column-center-flex_start theme-container"
+	style='height: calc(100vh - {{46 + statusBarHeight}}px);'>
 	<view class='page_top'></view>
 	<scroll-view class='page_main' scroll-y="true" scroll-with-animation="true">
 		<view class="panels">
 
 			<!-- 视频内容面板 -->
 			<view class='panel article theme-panel' wx:if="{{showControl==false}}">
+				<view class='con_top flex-row-center-space_between'>
+					<image class="user-head" mode='aspectFill' src='http://oss.littlehotspot.com/media/resource/btCfRRhHkn.jpg'></image>
+					<view class='user-info flex-column-flex_start-center'>
+						<view class='nickname theme-font1'>小热点</view>
+						
+					</view>
+				</view>
 				<view class='con_main'>
 					<view wx:if="{{video_name!=''}}" class='speak-with-interest'>
 						<label class="one-line-overflow">{{video_name}}</label>
@@ -77,14 +38,18 @@
 							<label>{{play_num}}</label>
 						</view>
 						<view wx:if="{{is_collect==1}}">
-							<label class="fa fa-heart fa-lg" style="color: #E11E4C;margin-right: 5rpx;" bindtap='cancCollect' data-res_id="{{res_id}}" data-type='{{res_type}}' data-openid='{{openid}}'></label>
+							<label class="fa fa-heart fa-lg" style="color: #E11E4C;margin-right: 5rpx;" bindtap='cancCollect'
+								data-res_id="{{res_id}}" data-type='{{res_type}}' data-openid='{{openid}}'></label>
 							<label>{{collect_num}}</label>
 						</view>
 						<view wx:else>
-							<label class="fa fa-heart-o fa-lg" style="color: #666666;margin-right: 5rpx;" bindtap='onCollect' data-res_id="{{res_id}}" data-type='{{res_type}}' data-openid='{{openid}}'></label>
+							<label class="fa fa-heart-o fa-lg" style="color: #666666;margin-right: 5rpx;" bindtap='onCollect'
+								data-res_id="{{res_id}}" data-type='{{res_type}}' data-openid='{{openid}}'></label>
 							<label>{{collect_num}}</label>
 						</view>
-						<button class="flex-row-center-flex_start font_666666_28" open-type='share' data-openid="{{openid}}" data-res_id="{{res_id}}" data-type='{{res_type}}' data-video_url="{{video_url}}" data-video_name="{{video_name}}" data-video_img='{{video_img_url}}' data-share_num='{{share_num}}'>
+						<button class="flex-row-center-flex_start font_666666_28" open-type='share' data-openid="{{openid}}"
+							data-res_id="{{res_id}}" data-type='{{res_type}}' data-video_url="{{video_url}}"
+							data-video_name="{{video_name}}" data-video_img='{{video_img_url}}' data-share_num='{{share_num}}'>
 							<label class="fa fa-share-alt fa-lg" style="color: #666666;margin-right: 5rpx;"></label>
 							<label>{{share_num}}</label>
 						</button>
@@ -94,20 +59,29 @@
 
 			<!-- 控制器面板 -->
 			<view class="panel controller flex-row-center-space_between theme-panel">
-				<view class="btn volume-down flex-column-center-center" bindtap="changeVolume" data-box_mac="{{box_mac}}" data-change_type="1" data-hotel_info="{{hotel_info}}">
-					<view class="icon fa fa-volume-down" aria-hidden="true"></view>
+				<view class="btn volume-down flex-column-center-center" bindtap="changeVolume" data-box_mac="{{box_mac}}"
+					data-change_type="1" data-hotel_info="{{hotel_info}}">
+					<!-- <view class="icon fa fa-volume-down" aria-hidden="true"></view> -->
+					<image class="icon" mode="aspectFill" src="/images/imgs/volume-down.png"></image>
 					<view class="label">音量-</view>
 				</view>
-				<view class="btn volume-up flex-column-center-center" bindtap="changeVolume" data-box_mac="{{box_mac}}" data-change_type="2" data-hotel_info="{{hotel_info}}">
-					<view class="icon fa fa-volume-up" aria-hidden="true"></view>
+				<view class="btn volume-up flex-column-center-center" bindtap="changeVolume" data-box_mac="{{box_mac}}"
+					data-change_type="2" data-hotel_info="{{hotel_info}}">
+					<!-- <view class="icon fa fa-volume-up" aria-hidden="true"></view> -->
+					<image class="icon" mode="aspectFill" src="/images/imgs/volume-up.png"></image>
 					<view class="label">音量+</view>
 				</view>
-				<view class="btn launch flex-column-center-center" wx:if="{{is_replay_disabel==false}}" bindtap='boxShow' data-name="{{video_name}}" data-filename='{{filename}}' data-vediourl="{{video_url}}" data-boxmac="{{box_mac}}" data-openid="{{openid}}">
-					<view class="icon fa fa-television" aria-hidden="true"></view>
+				<view class="btn launch flex-column-center-center" wx:if="{{is_replay_disabel==false}}" bindtap='boxShow'
+					data-name="{{video_name}}" data-filename='{{filename}}' data-vediourl="{{video_url}}"
+					data-boxmac="{{box_mac}}" data-openid="{{openid}}">
+					<!-- <view class="icon fa fa-television" aria-hidden="true"></view> -->
+					<image class="icon" mode="aspectFill" src="/images/imgs/launch-tv.png"></image>
 					<view class="label">投屏</view>
 				</view>
-				<view class="btn exit flex-column-center-center" bindtap="exitForscreen" data-openid="{{openid}}" data-box_mac="{{box_mac}}" data-hotel_info="{{hotel_info}}">
-					<view class="icon fa fa-sign-out" aria-hidden="true"></view>
+				<view class="btn exit flex-column-center-center" bindtap="exitForscreen" data-openid="{{openid}}"
+					data-box_mac="{{box_mac}}" data-hotel_info="{{hotel_info}}">
+					<!-- <view class="icon fa fa-sign-out" aria-hidden="true"></view> -->
+					<image class="icon" mode="aspectFill" src="/images/imgs/sign-out.png"></image>
 					<view class="label">退出</view>
 				</view>
 			</view>
@@ -119,7 +93,10 @@
 				</view>
 				<view class="weui-grids">
 					<view wx:for="{{hot_play}}" wx:key="item" wx:for-index="index" wx:for-item="bean" class="weui-grid">
-						<view class="card" bindtap="boxShow" bindtap="forscreenBox" data-type="{{bean.type}}" data-res_type="{{bean.res_type}}" data-res_nums="{{bean.res_nums}}" data-pubdetail="{{bean.pubdetail}}" data-boxmac="{{box_mac}}" data-openid="{{openid}}" data-forscreen_id="{{bean.forscreen_id}}" data-hotel_info="{{hotel_info}}" data-res_id="{{bean.res_id}}" data-index="{{index}}">
+						<view class="card" bindtap="boxShow" bindtap="forscreenBox" data-type="{{bean.type}}"
+							data-res_type="{{bean.res_type}}" data-res_nums="{{bean.res_nums}}" data-pubdetail="{{bean.pubdetail}}"
+							data-boxmac="{{box_mac}}" data-openid="{{openid}}" data-forscreen_id="{{bean.forscreen_id}}"
+							data-hotel_info="{{hotel_info}}" data-res_id="{{bean.res_id}}" data-index="{{index}}">
 							<image mode="aspectFill" src="{{bean.pubdetail[0].img_url}}"></image>
 							<view class="flex-row-center-space_between">
 								<view class="user flex-row-center-space_between">
@@ -130,7 +107,10 @@
 							</view>
 							<view class="flex-row-center-space_between">
 								<view class="rank theme-font5">TOP {{index+1}}</view>
-								<button wx:if="{{bean.is_show==1}}" class="btn theme-button-dark" data-res_type="{{bean.res_type}}" data-res_nums="{{bean.res_nums}}" data-pubdetail="{{bean.pubdetail}}" data-boxmac="{{box_mac}}" data-openid="{{openid}}" data-forscreen_id="{{bean.forscreen_id}}" data-hotel_info="{{hotel_info}}" data-index="{{index}}">投屏</button>
+								<button wx:if="{{bean.is_show==1}}" class="btn theme-button-dark" data-res_type="{{bean.res_type}}"
+									data-res_nums="{{bean.res_nums}}" data-pubdetail="{{bean.pubdetail}}" data-boxmac="{{box_mac}}"
+									data-openid="{{openid}}" data-forscreen_id="{{bean.forscreen_id}}" data-hotel_info="{{hotel_info}}"
+									data-index="{{index}}">投屏</button>
 							</view>
 						</view>
 					</view>
@@ -143,7 +123,8 @@
 </view>
 
 <!-- 遥控器 -->
-<template is="remoteControlWindow" data='{{popRemoteControlWindow: showControl, qrcode_img:qrcode_img, box_mac:box_mac, openid:openid, is_open_simple:is_open_simple}}' />
+<template is="remoteControlWindow"
+	data='{{popRemoteControlWindow: showControl, qrcode_img:qrcode_img, box_mac:box_mac, openid:openid, is_open_simple:is_open_simple}}' />
 
 <!-- 固定悬浮按钮组 -->
 <view wx:if="{{box_mac !=''}}">

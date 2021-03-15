@@ -172,10 +172,14 @@
 
 .page_main .panels>.article>.con_bottom>.operation>view,
 .page_main .panels>.article>.con_bottom>.operation>button {
-  margin: 0 20rpx 0 0;
+  margin: 0 40rpx 0 0;
   padding: unset;
   border: unset;
   background-color: unset;
+}
+
+.page_main .panels>.article>.con_bottom>.operation>button:last-child {
+  margin-right: 0;
 }
 
 /* ================================= 控制器面板 ================================= */
