@@ -31,7 +31,7 @@
 						</view>
 					</view>
 					<view class="foot flex-row-center-space_between theme-font3">
-						<view wx:if='{{bean.hotel_name != ""}}' class="time-hotel" data-index="{{index}}" data-box_mac="{{box_mac}}" bindtap="onInputPictureDetail">{{bean.create_time}}.{{bean.hotel_name}}</view>
+						<view wx:if='{{bean.hotel_name != ""}}' class="time-hotel" data-index="{{index}}" data-box_mac="{{box_mac}}" bindtap="onInputPictureDetail">{{bean.hotel_name}}</view>
 						<view wx:if="{{bean.isOpen == true}}" class="btn-group flex-row-center-space_between theme-panel-pop-menu-dark">
 							<view class="launch-tv" bindtap='boxShow' data-forscreen_id="{{bean.forscreen_id}}" data-index="{{index}}">投屏</view>
 							<view class="flex-row-center-space_around">
@@ -106,7 +106,8 @@
 								<view>{{bean.content}}</view>
 								<view wx:if='{{bean.hotel_name != ""}}' class="flex-row-center-flex_start" style="margin-top:15rpx;">
 									<image src="/images/icon2/1CBEB6_map-mark.png" style="width:24rpx;height:24rpx;margin-right:5rpx;"></image>
-									<label>{{bean.create_time}}.{{bean.hotel_name}}</label>
+									<!-- <label>{{bean.create_time}}.{{bean.hotel_name}}</label> -->
+									<label>{{bean.hotel_name}}</label>
 								</view>
 							</view>
 						</view>

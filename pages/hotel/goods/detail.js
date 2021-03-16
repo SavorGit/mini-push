@@ -679,6 +679,22 @@ Page({
       url: '/pages/index/index',
     })
   },
+  //预览图片
+  previewImage: function(e) {
+    let self = this;
+    var urls = self.data.goods_info.detail_imgs;
+    var pkey = e.target.dataset.pkey;
+    wx.previewImage({
+      current: urls[pkey], // 当前显示图片的http链接
+      urls: urls, // 需要预览的图片http链接列表
+      success: function(res) {
+        
+      },
+      fail: function(e) {
+        
+      }
+    })
+  },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
