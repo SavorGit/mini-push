@@ -32,7 +32,7 @@
 			<label class='font_666666_28'>当前暂未链接电视，链接后即可使用投屏功能</label>
 		</view>
 	</view>
-	<view bindtap="testone" data-boxmac="{{box_mac}}" data-openid="{{openid}}">test</view>
+
 	<!-- 服务员评价入口 
 	<view class="hotel-waiter-evaluate-panel theme-rad-panel" wx:if="{{is_view_eval_waiter==1}}">
 		<view class="btn-waiter-evaluate flex-row-center-center" bindtap="gotoPageHotelWaiterEvaluate" data-openid="{{openid}}" data-box_id="{{box_id}}">评价服务员</view>
@@ -55,7 +55,7 @@
 	<!-- 功能模块面板 -->
 	<view class='functional-module-panel flex-column-center-center full_width theme-panel'>
 		<view class="row flex-row-center-center full_width">
-			<view class="box">
+			<view class="box" bindtap="forAlbum" data-openid="{{openid}}" data-boxmac="{{box_mac}}" >
 				<view class="btn flex-column-center-center theme-font1">
 					<view class="icon flex-column-center-center pic">
 						<image mode="aspectFit" src='/images/icon2/FFFFFF_picture.png'></image>
@@ -63,7 +63,7 @@
 					<label class="label">相册投屏</label>
 				</view>
 			</view>
-			<view class="box">
+			<view class="box" bindtap="wxFriendfiles" data-openid="{{openid}}" data-boxmac="{{box_mac}}" >
 				<view class="btn flex-column-center-center theme-font1">
 					<view class="icon flex-column-center-center wechart">
 						<image mode="aspectFit" src='/images/icon2/FFFFFF_game.png'></image>
@@ -101,16 +101,14 @@
 				</button>
 			</form>
 			-->
-			<form class="box" bindsubmit="forfiles">
-				<input class="display_hide" name="boxmac" value="{{box_mac}}"></input>
-				<input class="display_hide" name="openid" value="{{openid}}"></input>
-				<button class="flex-column-center-center theme-font1" form-type="submit">
+			<view class="box" bindtap="phonefiles" data-openid="{{openid}}" data-boxmac="{{box_mac}}" >
+				<view class="btn flex-column-center-center theme-font1">
 					<view class="icon flex-column-center-center file {{hotel_info.is_interact==1?'eye-catching':''}}">
 						<image mode="aspectFit" src='/images/icon2/FFFFFF_files.png'></image>
 					</view>
 					<label>文件投屏</label>
-				</button>
-			</form>
+				</view>
+			</view>
 			<!-- 2021-03-17 15:28
 			<view class="box">
 				<button class="flex-column-center-center theme-font1" bindtap='hdgames' data-linkcontent='/games/pages/gamelist' data-boxmac="{{box_mac}}" data-openid="{{openid}}">
@@ -183,15 +181,15 @@
 			!-- <navigator url="/pages/hotel/index">商家入口</navigator> --
 			!-- <navigator target="miniProgram" app-id="wxf96ad76f27597d65" path="packages/goods/detail/index?alias=1y5c6oa8cduzn&dc_ps=2328936063642568704.200001" class='theme-button'>前往故宫书店</navigator> --
 			-->
-			<view class="box">
-				<button class="flex-column-center-center theme-font1" bindtap="gotoWelcome" data-openid="{{openid}}" data-box_mac="{{box_mac}}">
+			<view class="box" bindtap="gotoWelcome" data-openid="{{openid}}" data-box_mac="{{box_mac}}">
+				<button class="flex-column-center-center theme-font1" >
 					<view class="icon flex-column-center-center welcome">
 						<image mode="aspectFit" src='/images/icon2/FFFFFF_notice.png'></image>
 					</view>
 					<label>致欢迎词</label>
 				</button>
 			</view>
-			<view class="box">
+			<view class="box" bindtap="gotoPageHotelWaiterEvaluate" data-openid="{{openid}}" data-box_id="{{box_id}}">
 				<button class="flex-column-center-center theme-font1">
 					<view class="icon flex-column-center-center evaluate">
 						<image mode="aspectFit" src='/images/icon2/FFFFFF_birthday.png'></image>
