@@ -55,7 +55,7 @@
 	<!-- 功能模块面板 -->
 	<view class='functional-module-panel flex-column-center-center full_width theme-panel'>
 		<view class="row flex-row-center-center full_width">
-			<view class="box" bindtap="forAlbum" data-openid="{{openid}}" data-boxmac="{{box_mac}}" >
+			<view class="box" bindtap="forAlbum" data-openid="{{openid}}" data-boxmac="{{box_mac}}">
 				<view class="btn flex-column-center-center theme-font1">
 					<view class="icon flex-column-center-center pic">
 						<image mode="aspectFit" src='/images/icon2/FFFFFF_picture.png'></image>
@@ -63,7 +63,7 @@
 					<label class="label">相册投屏</label>
 				</view>
 			</view>
-			<view class="box" bindtap="wxFriendfiles" data-openid="{{openid}}" data-boxmac="{{box_mac}}" >
+			<view class="box" bindtap="wxFriendfiles" data-openid="{{openid}}" data-boxmac="{{box_mac}}">
 				<view class="btn flex-column-center-center theme-font1">
 					<view class="icon flex-column-center-center wechart">
 						<image mode="aspectFit" src='/images/icon2/FFFFFF_game.png'></image>
@@ -101,12 +101,12 @@
 				</button>
 			</form>
 			-->
-			<view class="box" bindtap="phonefiles" data-openid="{{openid}}" data-boxmac="{{box_mac}}" >
+			<view class="box" bindtap="phonefiles" data-openid="{{openid}}" data-boxmac="{{box_mac}}">
 				<view class="btn flex-column-center-center theme-font1">
 					<view class="icon flex-column-center-center file {{hotel_info.is_interact==1?'eye-catching':''}}">
 						<image mode="aspectFit" src='/images/icon2/FFFFFF_files.png'></image>
 					</view>
-					<label>文件投屏</label>
+					<label class="label">文件投屏</label>
 				</view>
 			</view>
 			<!-- 2021-03-17 15:28
@@ -182,7 +182,7 @@
 			!-- <navigator target="miniProgram" app-id="wxf96ad76f27597d65" path="packages/goods/detail/index?alias=1y5c6oa8cduzn&dc_ps=2328936063642568704.200001" class='theme-button'>前往故宫书店</navigator> --
 			-->
 			<view class="box" bindtap="gotoWelcome" data-openid="{{openid}}" data-box_mac="{{box_mac}}">
-				<button class="flex-column-center-center theme-font1" >
+				<button class="flex-column-center-center theme-font1">
 					<view class="icon flex-column-center-center welcome">
 						<image mode="aspectFit" src='/images/icon2/FFFFFF_notice.png'></image>
 					</view>
