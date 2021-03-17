@@ -277,46 +277,46 @@
   font-size: 20rpx;
 }
 
-.page_main .panels>.recommend>.weui-grids>.weui-grid>.card>.flex-row-center-space_between>.user {
+.page_main .panels>.recommend>.weui-grids>.weui-grid>.card>.row>.user {
   width: calc(100% - 100rpx);
   font-size: 24rpx;
 }
 
-.page_main .panels>.recommend>.weui-grids>.weui-grid>.card>.flex-row-center-space_between>.user>image {
+.page_main .panels>.recommend>.weui-grids>.weui-grid>.card>.row>.user>image {
   width: 32rpx;
   height: 32rpx;
   border: 1rpx solid #ddd;
   border-radius: 50%;
 }
 
-.page_main .panels>.recommend>.weui-grids>.weui-grid>.card>.flex-row-center-space_between>.user>view {
+.page_main .panels>.recommend>.weui-grids>.weui-grid>.card>.row>.user>view {
   width: calc(100% - 37rpx);
   margin-left: 5rpx;
 }
 
-.page_main .panels>.recommend>.weui-grids>.weui-grid>.card>.flex-row-center-space_between>.sta {
+.page_main .panels>.recommend>.weui-grids>.weui-grid>.card>.row>.sta {
   width: 110rpx;
   font-size: 24rpx;
   text-align: right;
 }
 
-.page_main .panels>.recommend>.weui-grids>.weui-grid>.card>.flex-row-center-space_between {
+.page_main .panels>.recommend>.weui-grids>.weui-grid>.card>.row {
   width: calc(100% - 45rpx);
   height: 58rpx;
   padding-left: 25rpx;
   padding-right: 20rpx;
 }
 
-.page_main .panels>.recommend>.weui-grids>.weui-grid>.card>.flex-row-center-space_between:last-child {
+.page_main .panels>.recommend>.weui-grids>.weui-grid>.card>.row:last-child {
   border-top: 2rpx solid #fff;
   height: 60rpx;
 }
 
-.page_main .panels>.recommend>.weui-grids>.weui-grid>.card>.flex-row-center-space_between>.rank {
+.page_main .panels>.recommend>.weui-grids>.weui-grid>.card>.row>.rank {
   font-size: 26rpx;
 }
 
-.page_main .panels>.recommend>.weui-grids>.weui-grid>.card>.flex-row-center-space_between>.btn {
+.page_main .panels>.recommend>.weui-grids>.weui-grid>.card>.row>.btn {
   width: 100rpx;
   height: 40rpx;
   line-height: 40rpx;

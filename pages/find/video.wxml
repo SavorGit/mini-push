@@ -12,7 +12,7 @@
 			<!-- 视频内容面板 -->
 			<view class='panel article theme-panel' wx:if="{{showControl==false}}">
 				<view class='con_top flex-row-center-space_between'>
-					<image class="user-head" mode='aspectFill' src='{{videoinfo.avatarUrl}}'></image> 
+					<image class="user-head" mode='aspectFill' src='{{videoinfo.avatarUrl}}'></image>
 					<view class='user-info flex-column-flex_start-center'>
 						<view class='nickname theme-font1'>{{videoinfo.nickName}}</view>
 						<view class='time-address flex-row-center-flex_start'>
@@ -88,15 +88,20 @@
 					<view wx:for="{{hot_play}}" wx:key="item" wx:for-index="index" wx:for-item="bean" class="weui-grid">
 						<view class="card" bindtap="forscreenBox" data-type="{{bean.type}}" data-res_type="{{bean.res_type}}" data-res_nums="{{bean.res_nums}}" data-pubdetail="{{bean.pubdetail}}" data-boxmac="{{box_mac}}" data-openid="{{openid}}" data-forscreen_id="{{bean.forscreen_id}}" data-hotel_info="{{hotel_info}}" data-res_id="{{bean.res_id}}" data-index="{{index}}">
 							<image mode="aspectFill" src="{{bean.pubdetail[0].img_url}}"></image>
-							<view class="flex-row-center-space_between">
+							<view class="row flex-row-center-space_between">
 								<view class="user flex-row-center-space_between">
 									<image src="{{bean.avatarUrl}}"></image>
 									<view class="one-line-overflow">{{bean.nickName}}</view>
 								</view>
 								<view class="sta theme-font3">{{bean.play_nums}} 次</view>
 							</view>
-							<view class="flex-row-center-space_between">
+							<!-- 2021-03-17 14:27
+							<view class="row flex-row-center-space_between">
 								<view class="rank theme-font5">TOP {{index+1}}</view>
+								<button wx:if="{{bean.is_show==1}}" class="btn theme-button-dark" data-res_type="{{bean.res_type}}" data-res_nums="{{bean.res_nums}}" data-pubdetail="{{bean.pubdetail}}" data-boxmac="{{box_mac}}" data-openid="{{openid}}" data-forscreen_id="{{bean.forscreen_id}}" data-hotel_info="{{hotel_info}}" data-index="{{index}}">投屏</button>
+							</view>
+							-->
+							<view class="row flex-row-center-center">
 								<button wx:if="{{bean.is_show==1}}" class="btn theme-button-dark" data-res_type="{{bean.res_type}}" data-res_nums="{{bean.res_nums}}" data-pubdetail="{{bean.pubdetail}}" data-boxmac="{{box_mac}}" data-openid="{{openid}}" data-forscreen_id="{{bean.forscreen_id}}" data-hotel_info="{{hotel_info}}" data-index="{{index}}">投屏</button>
 							</view>
 						</view>
