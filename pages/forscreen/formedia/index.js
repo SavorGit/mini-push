@@ -1428,6 +1428,7 @@ Page({
         if(media_type=='video'){
 
           if(res.tempFiles.length>1){
+            that.setData({showVedio: false,})
             app.showToast('每次只能选择一个视频文件投屏')
             return false;
           }
