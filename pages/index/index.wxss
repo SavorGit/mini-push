@@ -190,6 +190,21 @@
   background-color: #7874F2;
 }
 
+.functional-module-panel>.row button>.wechart,
+.functional-module-panel>.row>.box>.btn>.wechart {
+  background-color: rgb(46, 184, 114);
+}
+
+.functional-module-panel>.row button>.evaluate,
+.functional-module-panel>.row>.box>.btn>.evaluate {
+  background-color: #FF7E67;
+}
+
+.functional-module-panel>.row button>.money-blessing,
+.functional-module-panel>.row>.box>.btn>.money-blessing {
+  background-color: #9BDF46;
+}
+
 .functional-module-panel>.row>view>.file,
 .functional-module-panel>.row button>.file,
 .functional-module-panel>.row>.box>.btn>.file {
@@ -225,7 +240,8 @@
 .functional-module-panel>.row button>.welcome,
 .functional-module-panel>.row>.box>.btn>.welcome {
   /* background-color: rgb(91, 219, 249); */
-  background-color: #10DDC2;
+  /* background-color: #10DDC2; */
+  background-color: #7874F2;
 }
 
 .functional-module-panel>.row>view>.cards,
@@ -319,25 +335,45 @@
 }
 
 .recommend-panel>.weui-grids>.weui-grid {
-  width: 350rpx;
-  height: 410rpx;
+  width: 340rpx;
+  height: 310rpx;
+  margin-right: 10rpx;
+  margin-bottom: 20rpx;
 }
 
 .recommend-panel>.weui-grids>.weui-grid:nth-child(even) {
-  width: 340rpx;
+  margin-right: 0;
 }
 
 .recommend-panel>.weui-grids>.weui-grid>.card {
   width: 340rpx;
-  height: 380rpx;
+  height: 310rpx;
   background-color: rgba(245, 246, 248, 0.5);
   border-radius: 5rpx;
 }
 
-.recommend-panel>.weui-grids>.weui-grid>.card>image {
+/* .recommend-panel>.weui-grids>.weui-grid>.card>image, */
+.recommend-panel>.weui-grids>.weui-grid>.card>.showcase,
+.recommend-panel>.weui-grids>.weui-grid>.card>.showcase>.cover {
   width: 340rpx;
   height: 250rpx;
+}
+
+.recommend-panel>.weui-grids>.weui-grid>.card>.showcase>.cover {
   border-radius: 5rpx;
+}
+
+.recommend-panel>.weui-grids>.weui-grid>.card>.showcase>.visits {
+  width: 110rpx;
+  height: 30rpx;
+  margin-top: -50rpx;
+  margin-left: 200rpx;
+  padding: 5rpx 10rpx;
+  border-radius: 23rpx;
+  font-size: 24rpx;
+  border: 3rpx solid rgba(255, 255, 255, 0.5);
+  color: #FFFFFF;
+  background-color: rgba(0, 0, 0, 0.3);
 }
 
 .recommend-panel>.weui-grids>.weui-grid>.card>.people,
@@ -375,11 +411,12 @@
   margin-left: 5rpx;
 }
 
+/* 2021-03-17 15：48
 .recommend-panel>.weui-grids>.weui-grid>.card>.row>.sta {
   width: 110rpx;
   font-size: 24rpx;
   text-align: right;
-}
+} */
 
 .recommend-panel>.weui-grids>.weui-grid>.card>.row {
   width: calc(100% - 45rpx);
@@ -388,6 +425,7 @@
   padding-right: 20rpx;
 }
 
+/* 2021-03-17 16:00
 .recommend-panel>.weui-grids>.weui-grid>.card>.row:last-child {
   border-top: 2rpx solid #fff;
   height: 60rpx;
@@ -406,6 +444,22 @@
   margin: 0;
   border: 0;
   font-size: 22rpx;
+}
+*/
+.recommend-panel>.weui-grids>.weui-grid>.card>.row>.btn {
+  width: 48rpx;
+  height: 48rpx;
+  line-height: 48rpx;
+  text-align: center;
+  padding: 0;
+  margin: 0;
+  border: 0;
+  font-size: 22rpx;
+}
+
+.recommend-panel>.weui-grids>.weui-grid>.card>.row>.btn .bg {
+  width: 100%;
+  height: 100%;
 }
 
 /* 扫描弹窗提示内容 */

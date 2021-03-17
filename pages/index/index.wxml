@@ -55,26 +55,23 @@
 	<!-- 功能模块面板 -->
 	<view class='functional-module-panel flex-column-center-center full_width theme-panel'>
 		<view class="row flex-row-center-center full_width">
-			<!-- 2021-03-17 14:53
 			<view class="box">
 				<view class="btn flex-column-center-center theme-font1">
-					<view class="icon flex-column-center-center game">
-						<image mode="aspectFit" src='/images/icon2/FFFFFF_game.png'></image>
+					<view class="icon flex-column-center-center pic">
+						<image mode="aspectFit" src='/images/icon2/FFFFFF_picture.png'></image>
 					</view>
 					<label class="label">相册投屏</label>
 				</view>
 			</view>
 			<view class="box">
 				<view class="btn flex-column-center-center theme-font1">
-					<view class="icon flex-column-center-center game">
+					<view class="icon flex-column-center-center wechart">
 						<image mode="aspectFit" src='/images/icon2/FFFFFF_game.png'></image>
 					</view>
-					<label class="label">微信文件投屏</label>
+					<label class="label">微信投屏</label>
 				</view>
 			</view>
-			-->
 			<!-- 2021-03-17 14:53
-			-->
 			<form class="box" bindsubmit="chooseImage">
 				<input class="display_hide" name="boxmac" value="{{box_mac}}"></input>
 				<input class="display_hide" name="openid" value="{{openid}}"></input>
@@ -103,6 +100,7 @@
 					<label>视频投屏</label>
 				</button>
 			</form>
+			-->
 			<form class="box" bindsubmit="forfiles">
 				<input class="display_hide" name="boxmac" value="{{box_mac}}"></input>
 				<input class="display_hide" name="openid" value="{{openid}}"></input>
@@ -113,12 +111,22 @@
 					<label>文件投屏</label>
 				</button>
 			</form>
+			<!-- 2021-03-17 15:28
 			<view class="box">
 				<button class="flex-column-center-center theme-font1" bindtap='hdgames' data-linkcontent='/games/pages/gamelist' data-boxmac="{{box_mac}}" data-openid="{{openid}}">
 					<view class="icon flex-column-center-center game">
 						<image mode="aspectFit" src='/images/icon2/FFFFFF_game.png'></image>
 					</view>
 					<label>互动小游戏</label>
+				</button>
+			</view>
+			-->
+			<view class="box">
+				<button class="flex-column-center-center theme-font1" bindtap='forscreenHistory' data-boxmac="{{box_mac}}" data-openid="{{openid}}">
+					<view class="icon flex-column-center-center history">
+						<image mode="aspectFit" src='/images/icon2/FFFFFF_history.png'></image>
+					</view>
+					<label>投屏历史</label>
 				</button>
 			</view>
 			<!-- <view class="box"wx:if="{{is_test==1}}">
@@ -131,6 +139,14 @@
 			</view> -->
 		</view>
 		<view class="row flex-row-center-center full_width">
+			<view class="box">
+				<button class="flex-column-center-center theme-font1" bindtap="gotoParty" data-openid="{{openid}}" data-box_mac="{{box_mac}}">
+					<view class="icon flex-column-center-center birthday">
+						<image mode="aspectFit" src='/images/icon2/FFFFFF_birthday.png'></image>
+					</view>
+					<label>生日聚会</label>
+				</button>
+			</view>
 			<!--
 			<view class="box">
 				<button class="flex-column-center-center theme-font1" bindtap='showHappy' data-boxmac="{{box_mac}}" data-openid="{{openid}}">
@@ -175,6 +191,22 @@
 					<label>致欢迎词</label>
 				</button>
 			</view>
+			<view class="box">
+				<button class="flex-column-center-center theme-font1">
+					<view class="icon flex-column-center-center evaluate">
+						<image mode="aspectFit" src='/images/icon2/FFFFFF_birthday.png'></image>
+					</view>
+					<label>服务评价</label>
+				</button>
+			</view>
+			<view class="box">
+				<button class="flex-column-center-center theme-font1">
+					<view class="icon flex-column-center-center money-blessing">
+						<image mode="aspectFit" src='/images/icon2/FFFFFF_birthday.png'></image>
+					</view>
+					<label>电视红包</label>
+				</button>
+			</view>
 			<!--
 			<view class="box">
 				<button class="flex-column-center-center theme-font1" bindtap="gotoCard" data-openid="{{openid}}" data-box_mac="{{box_mac}}">
@@ -185,6 +217,7 @@
 				</button>
 			</view>
 			-->
+			<!-- 2021-03-17 15:29
 			<view class="box">
 				<button class="flex-column-center-center theme-font1" bindtap="gotoBusiness" data-openid="{{openid}}" data-box_mac="{{box_mac}}">
 					<view class="icon flex-column-center-center business">
@@ -193,22 +226,7 @@
 					<label>商务宴请</label>
 				</button>
 			</view>
-			<view class="box">
-				<button class="flex-column-center-center theme-font1" bindtap="gotoParty" data-openid="{{openid}}" data-box_mac="{{box_mac}}">
-					<view class="icon flex-column-center-center birthday">
-						<image mode="aspectFit" src='/images/icon2/FFFFFF_birthday.png'></image>
-					</view>
-					<label>生日聚会</label>
-				</button>
-			</view>
-			<view class="box">
-				<button class="flex-column-center-center theme-font1" bindtap='forscreenHistory' data-boxmac="{{box_mac}}" data-openid="{{openid}}">
-					<view class="icon flex-column-center-center history">
-						<image mode="aspectFit" src='/images/icon2/FFFFFF_history.png'></image>
-					</view>
-					<label>投屏历史</label>
-				</button>
-			</view>
+			-->
 		</view>
 	</view>
 
@@ -233,13 +251,18 @@
 		<view class="weui-grids">
 			<view wx:for="{{hot_play}}" wx:key="item" wx:for-index="index" wx:for-item="bean" class="weui-grid">
 				<view class="card" bindtap="boxShow" data-type="{{bean.type}}" data-res_type="{{bean.res_type}}" data-res_nums="{{bean.res_nums}}" data-pubdetail="{{bean.pubdetail}}" data-boxmac="{{box_mac}}" data-openid="{{openid}}" data-forscreen_id="{{bean.forscreen_id}}" data-hotel_info="{{hotel_info}}" data-res_id="{{bean.res_id}}" data-index="{{index}}">
-					<image mode="aspectFill" src="{{bean.pubdetail[0].img_url}}"></image>
+					<view class="showcase flex-column-flex_start-flex_start">
+						<image class="cover" mode="aspectFill" src="{{bean.pubdetail[0].img_url}}"></image>
+						<view class="visits flex-row-center-center one-line-overflow">{{bean.play_nums}} 次</view>
+					</view>
 					<view class="row flex-row-center-space_between">
 						<view class="user flex-row-center-space_between">
 							<image src="{{bean.avatarUrl}}"></image>
 							<view class="one-line-overflow">{{bean.nickName}}</view>
 						</view>
-						<view class="sta theme-font3">{{bean.play_nums}} 次</view>
+						<button wx:if="{{bean.is_show==1}}" class="btn theme-button-dark" data-res_type="{{bean.res_type}}" data-res_nums="{{bean.res_nums}}" data-pubdetail="{{bean.pubdetail}}" data-boxmac="{{box_mac}}" data-openid="{{openid}}" data-forscreen_id="{{bean.forscreen_id}}" data-hotel_info="{{hotel_info}}" data-index="{{index}}">
+							<image class="bg" mode="aspectFill" src='/images/icon2/FFFFFF_businessGroup.png'></image>
+						</button>
 					</view>
 					<!--
           <view class="people theme-font1">{{bean.nickName}}</view>
@@ -251,9 +274,6 @@
 						<button wx:if="{{bean.is_show==1}}" class="btn theme-button-dark" data-res_type="{{bean.res_type}}" data-res_nums="{{bean.res_nums}}" data-pubdetail="{{bean.pubdetail}}" data-boxmac="{{box_mac}}" data-openid="{{openid}}" data-forscreen_id="{{bean.forscreen_id}}" data-hotel_info="{{hotel_info}}" data-index="{{index}}">投屏</button>
 					</view>
           -->
-					<view class="row flex-row-center-center">
-						<button wx:if="{{bean.is_show==1}}" class="btn theme-button-dark" data-res_type="{{bean.res_type}}" data-res_nums="{{bean.res_nums}}" data-pubdetail="{{bean.pubdetail}}" data-boxmac="{{box_mac}}" data-openid="{{openid}}" data-forscreen_id="{{bean.forscreen_id}}" data-hotel_info="{{hotel_info}}" data-index="{{index}}">投屏</button>
-					</view>
 				</view>
 			</view>
 		</view>
