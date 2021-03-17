@@ -163,21 +163,7 @@
 									<button class="theme-button-dark" bindtap="replayHistory" data-res_type='{{bean.res_type}}' data-is_speed="{{bean.is_speed}}" data-box_mac='{{box_mac}}' data-openid='{{openid}}' data-forscreen_id="{{bean.forscreen_id}}" data-res_list='{{bean.list}}' data-avatarUrl="{{avatarUrl}}" data-nickName="{{nickName}}">重投</button>
 								</view>
 							</block>
-							<!-- <block wx:if="{{bean.is_speed==1 && bean.is_box_have==1}}">
-								<view class="cover" >
-									<navigator url="">
-										<image mode='aspectFill' src="{{bean.imgurl}}"></image>
-									</navigator>
-									<view>
-										<navigator url="">
-											<label class="fa fa-play-circle-o icon theme-font4"></label>
-										</navigator>
-									</view>
-								</view>
-								<view class='btn'>
-								<button class="theme-button-dark" bindtap="replayHistory" data-res_type='{{bean.res_type}}' data-box_mac='{{box_mac}}' data-is_speed="1" data-openid='{{openid}}' data-filename="{{bean.filename}}" data-resource_size="{{bean.resource_size}}" data-avatarUrl="{{avatarUrl}}" data-nickName="{{nickName}}" data-forscreen_id="{{bean.forscreen_id}}" data-duration="{{bean.duration}}">重投</button>
-								</view>
-							</block> -->
+						
 
 						</view>
 						<view wx:if="{{forscreen_history_list.length > index+1}}" class='line'></view>
@@ -391,21 +377,7 @@
 									<button class="theme-button-dark" bindtap="replayHistory" data-res_type='{{bean.res_type}}' data-is_speed="{{bean.is_speed}}" data-box_mac='{{box_mac}}' data-openid='{{openid}}' data-forscreen_id="{{bean.forscreen_id}}" data-res_list='{{bean.list}}' data-avatarUrl="{{avatarUrl}}" data-nickName="{{nickName}}">重投</button>
 								</view>
 							</block>
-							<!-- <block wx:if="{{bean.is_speed==1 && bean.is_box_have==1}}">
-								<view class="cover" >
-									<navigator url="">
-										<image mode='aspectFill' src="{{bean.imgurl}}"></image>
-									</navigator>
-									<view>
-										<navigator url="">
-											<label class="fa fa-play-circle-o icon theme-font4"></label>
-										</navigator>
-									</view>
-								</view>
-								<view class='btn'>
-								<button class="theme-button-dark" bindtap="replayHistory" data-res_type='{{bean.res_type}}' data-box_mac='{{box_mac}}' data-is_speed="1" data-openid='{{openid}}' data-filename="{{bean.filename}}" data-resource_size="{{bean.resource_size}}" data-avatarUrl="{{avatarUrl}}" data-nickName="{{nickName}}" data-forscreen_id="{{bean.forscreen_id}}" data-duration="{{bean.duration}}">重投</button>
-								</view>
-							</block> -->
+							
 
 						</view>
 						<view wx:if="{{forscreen_history_list.length > index+1}}" class='line'></view>
@@ -434,28 +406,21 @@
 	<template is="afterLaunchGuidedMask" wx:if="{{showGuidedMaskAfterLaunch}}" data='{{marginTop: "calc(608rpx + 46px + " + statusBarHeight + "px)", dataType: 2, openid: openid}}' />
 </view>
 
-
-
 </block>
-
 
 <view class="body-view">
 	<loading hidden="{{hiddens}}" bindchange="loadingChange">{{load_fresh_char}}</loading>
 	<loading hidden="{{wifi_hidden}}" bindchange="loadingChange">正在连接包间wifi,请稍后...</loading>
 </view>
 
-
 <!-- 遥控器 -->
 <template is="remoteControlWindow" data='{{popRemoteControlWindow: popRemoteControlWindow,qrcode_img:qrcode_img,box_mac:box_mac,openid:openid,is_open_simple:is_open_simple}}' />
-
 <!-- 固定悬浮按钮组 -->
 <view wx:if="{{box_mac !='' && is_view_control==true}}">
 	<template is="fixedSuspensionButtonGroup" />
 </view>
-
 <!-- 投屏提示弹窗 -->
 <template wx:if="{{isOpenWind== true}}" is="tipsForLaunch" data="{{isWifi:openWind.isWifi,isError:openWind.isError,title:openWind.title,step:openWind.step,progress:openWind.progress,tip:openWind.tip,time:cutDownTime,DevOpsTips:DevOpsTips}}" />
-
 <!-- 投屏失败弹窗 -->
 <modal-2 show="{{showModal_2}}" width="690rpx" height='450rpx' border-radius="10rpx" title-text='投屏失败' title-color="#333333" title-background-color="unset" title-border-radius="0rpx" buttonWapperPadding='0' confirm-text='重新选择' confirm-color="#FFFFFF" confirm-background-color="#58525c" confirm-border-radius="10rpx" confirm-border-color="#58525c" cancel-text='取消' cancel-color='#333333' cancel-background-color="unset" cancel-border-color="#333333" cancel-border-radius="10rpx" bindclickMask='modalClickMask' bindcancel="cancelMaxVideo" bindconfirm='chooseVedio'>
 	<view class="flex-column-center-center" style="width:100%;height:100%;font-size: 32rpx;color:#333333;">
@@ -464,7 +429,6 @@
 		<view style="height:46rpx;">给您带来的不便敬请谅解~</view>
 	</view>
 </modal-2>
-
 <!-- 上传超时弹窗 -->
 <modal show="{{showModal_3}}" width="690rpx" height='450rpx' border-radius="10rpx" title-text='温馨提示' title-color="#333333" title-background-color="unset" title-border-radius="0rpx" buttonWapperPadding='15rpx' confirm-text='切换极速投屏' confirm-color="#FFFFFF" confirm-background-color="#F44444" confirm-border-radius="10rpx" cancel-text='继续投屏' cancel-color='#FFFFFF' cancel-background-color="#58525C" cancel-border-radius="10rpx" bindcancel="timeoutUploadCancel" bindconfirm='timeoutUploadConfirm'>
 	<view class="flex-column-center-flex_start" style="padding:30rpx 0 0 0;color:#333333;font-size:28rpx;">

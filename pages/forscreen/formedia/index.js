@@ -239,7 +239,7 @@ Page({
       }
     });
     function uploadInfos(res, box_mac, openid) {
-      console.log(res)
+
       var img_len = res.tempFiles.length;
       if (img_len > 0 && img_len < 10) {
         var tmp_imgs = [];
@@ -547,8 +547,7 @@ Page({
             wx.request({
               url: 'http://' + hotel_info.intranet_ip + ':8080/h5/projectionLog?deviceId='+openid+'&box_mac='+box_mac+'&openid='+openid,
               success:function(res){
-                console.log('盒子数据');
-                console.log(res)
+                
                 if(res.data.code==10000){
                   //console.log('云端数据')
                   //console.log(forscreen_history_list);
@@ -622,8 +621,6 @@ Page({
           
         }
       }
-      console.log('历史数据')
-      console.log(forscreen_history_list)
     },res=>{},{ isShowLoading: false })
 
 
@@ -1373,134 +1370,7 @@ Page({
       mta.Event.stat('clickVideoForscreen',{'openid':res.detail.value.openid,'boxmac':res.detail.value.box_mac,'ftype':2})
     }
   },
-  //重新选择视频
-  chooseVedio(e) {
-    var that = this;
-    that.removeSavedFile();
-    var is_compress = that.data.is_compress;
-    if(is_compress==1){
-      var compressed = true;
-    }else if(is_compress==0){
-      var compressed = false;
-    }
-    try {
-      mta.Event.stat('LaunchVideoWithNet_AfterLaunch_RechooseVideo', {
-        'openid': that.data.openid
-      });
-    } catch (e) {
-      //TODO nothing
-    }
-    var openWind= {'isWifi':false,'isError':false,'title':'','step':1,'progress':0,'tip':''};
   
-    that.setData({
-      item: [{
-          'name': '公开时显示餐厅信息',
-          'value': '1',
-          'checked': true,
-          'disabled': false
-        },
-        {
-          'name': '公开发表，公众可见',
-          'value': '2',
-          'checked': false,
-          'disabled': false
-        },
-      ],
-      //launchType:'classic',
-      is_view_forscreen_char:true,
-      is_share: 0,
-      showVedio: true,
-      //is_btn_disabel: true,
-      is_classic_disabel:true,
-      is_speed_disabel:true,
-      openWind:openWind,
-      cutDownTime:3,
-      showModal_2:false
-    });
-    var box_mac = e.currentTarget.dataset.boxmac;
-    var openid = e.currentTarget.dataset.openid;
-    wx.chooseVideo({
-      sourceType: ['album', 'camera'],
-      maxDuration: 60,
-      camera: 'back',
-      compressed:compressed,
-      success: function(res) {
-
-        var filePath = res.tempFilePath
-        var video_size = res.size
-        var hotel_info = that.data.hotel_info;
-        if(video_size>=max_user_forvideo_size){
-          
-          var pams_arr = forscreen_method_origin.split('-');
-          if(pams_arr[1]==1){
-            hotel_info.forscreen_method = '0-1';
-            
-          }
-        }else {
-          hotel_info.forscreen_method = forscreen_method_origin;
-        }
-        /*if(video_size>max_video_size && app.globalData.sys_info.platform=='ios'){
-          that.setData({showModal_2:true,vide_size_str:app.changeKb(video_size)})
-          
-        }else {
-          that.setData({
-            showVedio: true,
-            //is_btn_disabel: false,
-            is_classic_disabel:false,
-            is_speed_disabel:false,
-            upload_vedio_temp: res.tempFilePath,
-            duration: res.duration,
-            size: video_size,
-            vide_size_str:app.changeKb(video_size)
-          })
-        }*/
-        that.setData({
-          showVedio: true,
-          //is_btn_disabel: false,
-          is_classic_disabel:false,
-          is_speed_disabel:false,
-          upload_vedio_temp: res.tempFilePath,
-          duration: res.duration,
-          size: video_size,
-          vide_size_str:app.changeKb(video_size),
-          hotel_info:hotel_info,
-        })
-        mta.Event.stat('LaunchVideoWithNet_Launch_ChooseVideo', {
-          'status': 'success'
-        });
-      },
-      fail: function(res) {
-        if(res.errMsg=='chooseVideo:fail copy video file fail!'){
-          wx.showModal({
-            title:'选择视频文件失败',
-            content:'小程序临时文件过大,请您选择小视频投屏或者手动删除小程序后重新扫码进入',
-            showCancel:false,
-            success: function (res) {
-              if (res.confirm) {
-                wx.navigateBack({
-                  delta: 1,
-                })
-              }
-            }
-          })
-          //app.showToast('请选择小视屏或者删除小程序清理缓存');
-        }else {
-          wx.navigateBack({
-            delta: 1,
-          })
-          that.setData({
-            showVedio: false,
-            is_classic_disabel:true,
-            is_speed_disabel:true,
-          });
-          mta.Event.stat('LaunchVideoWithNet_Launch_ChooseVideo', {
-            'status': 'fail'
-          });
-        }
-        
-      }
-    });
-  },
   //重新选择资源
   chooseMedia:function(e){
     var that = this;
@@ -1761,7 +1631,6 @@ Page({
 
         var history_imgs = [];
         var tmp_history_img;
-        console.log(res_list);
         for(let j in res_list){
           tmp_history_img = {};
           tmp_history_img.tmp_img = res_list[j].imgurl;
@@ -2152,46 +2021,6 @@ Page({
   onShareAppMessage: function() {
 
   },
-  // 投视频前播放
-  onPlayBeforeLauch: function(e) {
-    let self = this;
-    mta.Event.stat('LaunchVideoWithNet_BeforeLaunch_PLAY', {
-      'openid': self.data.openid,
-      'video': self.data.upload_vedio_temp
-    });
-  },
-
-  // 投视频后播放
-  onPlayAfterLauch: function(e) {
-    let self = this;
-    mta.Event.stat('LaunchVideoWithNet_AfterLaunch_Play', {
-      'openid': self.data.openid,
-      'video': self.data.oss_video_url
-    });
-  },
-
-  // 投视频后暂停
-  onPauseAfterLauch: function(e) {
-    let self = this;
-    mta.Event.stat('LaunchVideoWithNet_AfterLaunch_Pause', {
-      'openid': self.data.openid,
-      'video': self.data.oss_video_url
-    });
-  },
-
-  // 投视频后进入/退出全屏
-  onFullScreenChangeAfterLauch: function(e) {
-    let self = this;
-    mta.Event.stat('LaunchVideoWithNet_AfterLaunch_FullScreen', {
-      'openid': self.data.openid,
-      'video': self.data.oss_video_url,
-      'fullscreen': e.detail.fullScreen
-    });
-  },
-
-
-
-
 
   speedForImg:function(form_data,hotel_info){
     var that = this;
@@ -2671,7 +2500,6 @@ Page({
       var index1 = img_url.lastIndexOf(".");
       var index2 = img_url.length;
       var postf_t = img_url.substring(index1, index2);//后缀名
-      console.log(e.currentTarget.dataset)
       var filename = e.currentTarget.dataset.img_id+postf_t;
       wx.request({
         url: "http://" + hotel_info.intranet_ip + ":8080/picH5?isThumbnail=1&imageId=20170301&deviceId=" + openid + "&box_mac=" + box_mac + "&deviceName=" + mobile_brand + "&rotation=90&imageType=1&web=true&forscreen_id=" + forscreen_id + '&forscreen_char=' + forscreen_char + '&filename=' + filename + '&device_model=' + mobile_model + '&resource_size=' + resource_size + '&action=4&resource_type=1&avatarUrl=' + avatarUrl + "&nickName=" + nickName + "&forscreen_nums=1&serial_number="+app.globalData.serial_number,
