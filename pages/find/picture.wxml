@@ -14,9 +14,13 @@
 					<image class="user-head" mode='aspectFill' src='{{picinfo.avatarUrl}}'></image>
 					<view class='user-info flex-column-flex_start-center'>
 						<view class='nickname theme-font1'>{{picinfo.nickName}}</view>
-						<view class='time-address flex-row-center-flex_start'>
+						<view class='time-address flex-row-center-flex_start' wx:if="{{picinfo.create_time!=''}}">
 							<label class="">{{picinfo.create_time}}</label>
 							<label wx:if="{{picinfo.hotel_name!=''}}" class="">.</label>
+							<label wx:if="{{picinfo.hotel_name!=''}}" class="">{{picinfo.hotel_name}}</label>
+						</view>
+						<view class='time-address flex-row-center-flex_start' wx:else>
+							
 							<label wx:if="{{picinfo.hotel_name!=''}}" class="">{{picinfo.hotel_name}}</label>
 						</view>
 					</view>

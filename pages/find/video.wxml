@@ -15,9 +15,13 @@
 					<image class="user-head" mode='aspectFill' src='{{videoinfo.avatarUrl}}'></image>
 					<view class='user-info flex-column-flex_start-center'>
 						<view class='nickname theme-font1'>{{videoinfo.nickName}}</view>
-						<view class='time-address flex-row-center-flex_start'>
+						<view class='time-address flex-row-center-flex_start' wx:if="{{videoinfo.hotel_name!=''}}">
 							<label class="">{{videoinfo.create_time}}</label>
 							<label wx:if="{{videoinfo.hotel_name!=''}}" class="">.</label>
+							<label wx:if="{{videoinfo.hotel_name!=''}}" class="">{{videoinfo.hotel_name}}</label>
+						</view>
+						<view class='time-address flex-row-center-flex_start' wx:else>
+	
 							<label wx:if="{{videoinfo.hotel_name!=''}}" class="">{{videoinfo.hotel_name}}</label>
 						</view>
 					</view>

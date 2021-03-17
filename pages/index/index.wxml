@@ -198,7 +198,7 @@
 				</button>
 			</view>
 			<view class="box">
-				<button class="flex-column-center-center theme-font1">
+				<button class="flex-column-center-center theme-font1" bindtap='hdgames' data-linkcontent='/games/pages/gamelist' data-boxmac="{{box_mac}}" data-openid="{{openid}}">
 					<view class="icon flex-column-center-center money-blessing">
 						<image mode="aspectFit" src='/images/icon2/FFFFFF_birthday.png'></image>
 					</view>
