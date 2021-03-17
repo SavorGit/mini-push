@@ -1426,4 +1426,30 @@ Page({
       }
     }
   },
+  testone:function(e){
+    var that = this
+    var user_info = wx.getStorageSync("savor_user_info");
+    if(user_info=='' || typeof(user_info)=='undefined'){
+      app.showToast('网络异常，请用微信重新扫码链接电视')
+      return false;
+    }
+    if (user_info.is_wx_auth != 3 ) {
+      that.setData({
+        showModal: true
+      })
+      mta.Event.stat("showwxauth", {})
+    } else {
+      var box_mac = e.currentTarget.dataset.boxmac;
+      var openid  = e.currentTarget.dataset.openid;
+      
+      if (box_mac == '') {
+        app.scanQrcode(pageid);
+      } else {
+        var is_compress = that.data.is_compress;
+        wx.navigateTo({
+          url: '/pages/forscreen/formedia/index?box_mac=' + box_mac + '&openid=' + openid +'&is_compress='+is_compress,
+        })
+      }
+    }
+  }
 })
