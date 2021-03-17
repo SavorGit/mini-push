@@ -165,6 +165,7 @@ Page({
       mediaType: ['image', 'video'],
       sourceType: ['album','camera'],
       sizeType:['original'],
+      maxDuration:30,
       success: function(res) {
         var media_type = res.tempFiles[0].fileType;
         if(media_type=='video'){
@@ -1551,6 +1552,7 @@ Page({
       mediaType: ['image', 'video'],
       sourceType: ['album','camera'],
       sizeType:['original'],
+      maxDuration:30,
       success: function(res) {
         var media_type = res.tempFiles[0].fileType;
         if(media_type=='video'){
@@ -2024,7 +2026,15 @@ Page({
     var that = this;
     var type = e.currentTarget.dataset.type;
     var openid = e.currentTarget.dataset.openid;
-    if (type == 3) {
+    if(type==1){
+      that.setData({
+        showGuidedMaskBeforLaunch:false,
+      })
+    }else if(type==2){
+      that.setData({
+        showGuidedMaskAfterLaunch:false,
+      })
+    }else if (type == 3) {
       that.setData({
         showGuidedMaskBeforLaunch: false,
       })
