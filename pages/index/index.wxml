@@ -260,8 +260,8 @@
 							<image src="{{bean.avatarUrl}}"></image>
 							<view class="one-line-overflow">{{bean.nickName}}</view>
 						</view>
-						<button wx:if="{{bean.is_show==1}}" class="btn theme-button-dark" data-res_type="{{bean.res_type}}" data-res_nums="{{bean.res_nums}}" data-pubdetail="{{bean.pubdetail}}" data-boxmac="{{box_mac}}" data-openid="{{openid}}" data-forscreen_id="{{bean.forscreen_id}}" data-hotel_info="{{hotel_info}}" data-index="{{index}}">
-							<image class="bg" mode="aspectFill" src='/images/icon2/FFFFFF_businessGroup.png'></image>
+						<button wx:if="{{bean.is_show==1}}" class="btn" data-res_type="{{bean.res_type}}" data-res_nums="{{bean.res_nums}}" data-pubdetail="{{bean.pubdetail}}" data-boxmac="{{box_mac}}" data-openid="{{openid}}" data-forscreen_id="{{bean.forscreen_id}}" data-hotel_info="{{hotel_info}}" data-index="{{index}}">
+							<image class="bg" mode="aspectFill" src='/images/icon2/000000_interact.png'></image>
 						</button>
 					</view>
 					<!--
