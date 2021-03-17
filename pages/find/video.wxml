@@ -15,7 +15,8 @@
 					<image class="user-head" mode='aspectFill' src='{{videoinfo.avatarUrl}}'></image>
 					<view class='user-info flex-column-flex_start-center'>
 						<view class='nickname theme-font1'>{{videoinfo.nickName}}</view>
-						<view class='time-address one-line-overflow'>{{videoinfo.hotel_name}}</view>
+						<view class='time-address one-line-overflow' wx:if="{{videoinfo.create_time!=''}}">{{videoinfo.create_time}}.{{videoinfo.hotel_name}}</view>
+						<view class='time-address one-line-overflow' wx:else>{{videoinfo.hotel_name}}</view>
 						<!-- 2021-03-17 17:21
 						<view class='time-address flex-row-center-flex_start'>
 							<label class="">{{videoinfo.create_time}}</label>
