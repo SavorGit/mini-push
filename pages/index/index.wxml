@@ -66,7 +66,7 @@
 			<view class="box" bindtap="wxFriendfiles" data-openid="{{openid}}" data-boxmac="{{box_mac}}">
 				<view class="btn flex-column-center-center theme-font1">
 					<view class="icon flex-column-center-center wechart">
-						<image mode="aspectFit" src='/images/icon2/FFFFFF_game.png'></image>
+						<image mode="aspectFit" src='/images/icon2/FFFFFF_WeChart.png'></image>
 					</view>
 					<label class="label">微信投屏</label>
 				</view>
@@ -192,7 +192,7 @@
 			<view class="box" bindtap="gotoPageHotelWaiterEvaluate" data-openid="{{openid}}" data-box_id="{{box_id}}">
 				<button class="flex-column-center-center theme-font1">
 					<view class="icon flex-column-center-center evaluate">
-						<image mode="aspectFit" src='/images/icon2/FFFFFF_birthday.png'></image>
+						<image mode="aspectFit" src='/images/icon2/FFFFFF_pop.png'></image>
 					</view>
 					<label>服务评价</label>
 				</button>
@@ -200,7 +200,7 @@
 			<view class="box">
 				<button class="flex-column-center-center theme-font1" bindtap='hdgames' data-linkcontent='/games/pages/gamelist' data-boxmac="{{box_mac}}" data-openid="{{openid}}">
 					<view class="icon flex-column-center-center money-blessing">
-						<image mode="aspectFit" src='/images/icon2/FFFFFF_birthday.png'></image>
+						<image mode="aspectFit" src='/images/icon2/FFFFFF_money.png'></image>
 					</view>
 					<label>电视红包</label>
 				</button>

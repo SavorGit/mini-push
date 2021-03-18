@@ -350,14 +350,59 @@ button[disabled] {
 .after_launch>.page_bottom {
   width: 100%;
   height: 100rpx;
-  margin: 0rpx;
+  margin: 10rpx 0;
 }
 
 .after_launch>.page_bottom>.button_group {
   width: calc(100% - 80rpx);
+  height: 100%;
   padding: 0 40rpx;
 }
 
+.after_launch>.page_bottom>.button_group>.box {
+  width: 25%;
+  height: 100%;
+}
+
+.after_launch>.page_bottom>.button_group>.box>.btn {
+  width: 80rpx;
+  height: 80rpx;
+  line-height: unset;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background-color: unset;
+}
+
+.after_launch>.page_bottom>.button_group>.box>.btn .icon {
+  width: 48rpx;
+  height: 48rpx;
+  line-height: 48rpx;
+  text-align: center;
+  font-size: 48rpx;
+}
+
+.after_launch>.page_bottom>.button_group>.box>.btn .label {
+  font-size: 20rpx;
+}
+
+.after_launch>.page_bottom>.button_group>.box>.btn.album .icon {
+  color: rgb(255, 126, 103);
+}
+
+.after_launch>.page_bottom>.button_group>.box>.btn.WeChart .icon {
+  color: rgb(46, 184, 114);
+}
+
+.after_launch>.page_bottom>.button_group>.box>.btn.file .icon {
+  color: rgb(255, 126, 103);
+}
+
+.after_launch>.page_bottom>.button_group>.box>.btn.exit .icon {
+  color: rgb(16, 16, 16);
+}
+
+/*
 .after_launch>.page_bottom>.button_group button {
   width: 150rpx;
   height: 50rpx;
@@ -368,6 +413,7 @@ button[disabled] {
   border: unset;
   font-size: 30rpx;
 }
+*/
 
 .disabled-button {
   cursor: not-allowed;
@@ -376,7 +422,7 @@ button[disabled] {
 }
 
 .after_launch .launch_history {
-  height: calc(100% - 755rpx);
+  height: calc(100% - 775rpx);
 }
 
 .after_launch .launch_history>.title {
