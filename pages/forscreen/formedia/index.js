@@ -200,7 +200,7 @@ Page({
             vide_size_str:app.changeKb(video_size),
             media_type:media_type
           });
-          lead(openid,3);
+          //lead(openid,3);
         }else if(media_type=='image'){
           that.setData({
             showTpBt: true,
@@ -210,7 +210,7 @@ Page({
             media_type:media_type
           })
           uploadInfos(res, box_mac, openid);
-          lead(openid,1);
+          //lead(openid,1);
         }
       },
       fail: function(res) {
@@ -2536,7 +2536,7 @@ Page({
     }
     var is_pub_hotelinfo = res.is_pub_hotelinfo;   //是否公开显示餐厅信息
     var is_share = res.is_share;
-    that.lead(openid, is_share);
+    //that.lead(openid, is_share);
     var is_assist = 0;
     if(is_share==1){
       is_assist = 1
