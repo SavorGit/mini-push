@@ -120,7 +120,7 @@ Page({
     upload_task = {};
     that.getOssParam();//获取oss上传参数
     box_mac = e.box_mac;
-    var openid = e.openid;
+    openid = e.openid;
     var hotel_info = app.globalData.hotel_info;
     forscreen_method_origin = hotel_info.forscreen_method;
     chunkSize = hotel_info.chunkSize;
@@ -2797,4 +2797,18 @@ Page({
       }  
     } 
   },
+  //微信好友文件投屏
+  gotoFriendForFiles:function(e){
+    var that = this;
+    wx.redirectTo({
+      url: '/pages/forscreen/forfile/files?box_mac=' + box_mac + '&openid=' + openid ,
+    })
+  },
+  //本地文件投屏
+  gotoPhonefiles:function(e){
+    var that = this;
+    wx.redirectTo({
+      url: '/pages/forscreen/forfile/h5files?box_mac=' + box_mac + '&openid=' + openid ,
+    })
+  }
 })
