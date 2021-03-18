@@ -129,18 +129,18 @@
 					<button class='savor-btn theme-button-dark' bindtap="exitForscreend" data-boxmac="{{box_mac}}" data-openid="{{openid}}">退出投屏</button>
 					-->
 					<view class="box flex-column-center-center">
-						<button class="btn album flex-column-center-center">
+						<button class="btn album flex-column-center-center" bindtap='chooseMedia' data-boxmac="{{box_mac}}" data-openid="{{openid}}">
 							<image class="icon" mode="aspectFit" src='/images/icon2/F25D9C_pic.png'></image>
 							<view class="label theme-font1">相册投屏</view>
 						</button>
 					</view>
-					<view class="box flex-column-center-center">
+					<view class="box flex-column-center-center" bindtap="gotoFriendForFiles">
 						<view class="btn WeChart flex-column-center-center">
 							<image class="icon" mode="aspectFit" src='/images/icon2/00D268_WeChart.png'></image>
 							<view class="label theme-font1">微信投屏</view>
 						</view>
 					</view>
-					<view class="box flex-column-center-center">
+					<view class="box flex-column-center-center" bindtap="gotoPhonefiles">
 						<view class="btn file flex-column-center-center">
 							<image class="icon" mode="aspectFit" src='/images/icon2/FF7E67_folder.png'></image>
 							<view class="label theme-font1">文件投屏</view>
@@ -370,18 +370,18 @@
 					<button class='savor-btn theme-button-dark' bindtap="exitForscreen" data-boxmac="{{box_mac}}">退出投屏</button>
 					-->
 					<view class="box flex-column-center-center">
-						<button class="btn album flex-column-center-center">
+						<button class="btn album flex-column-center-center" bindtap='chooseMedia' data-boxmac="{{box_mac}}" data-openid="{{openid}}">
 							<image class="icon" mode="aspectFit" src='/images/icon2/F25D9C_pic.png'></image>
 							<view class="label theme-font1">相册投屏</view>
 						</button>
 					</view>
-					<view class="box flex-column-center-center">
+					<view class="box flex-column-center-center" bindtap="gotoFriendForFiles">
 						<view class="btn WeChart flex-column-center-center">
 							<image class="icon" mode="aspectFit" src='/images/icon2/00D268_WeChart.png'></image>
 							<view class="label theme-font1">微信投屏</view>
 						</view>
 					</view>
-					<view class="box flex-column-center-center">
+					<view class="box flex-column-center-center" bindtap="gotoPhonefiles">
 						<view class="btn file flex-column-center-center">
 							<image class="icon" mode="aspectFit" src='/images/icon2/FF7E67_folder.png'></image>
 							<view class="label theme-font1">文件投屏</view>

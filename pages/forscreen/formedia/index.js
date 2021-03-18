@@ -1406,7 +1406,7 @@ Page({
       ],
       is_view_forscreen_char:true,
       is_share: 0,
-      showVedio: true,
+      showVedio: false,
       is_classic_disabel:true,
       is_speed_disabel:true,
       openWind:openWind,
@@ -1465,6 +1465,8 @@ Page({
           });
         }else {
           that.setData({
+            showVedio:false,
+            is_btn_disabel: false,
             up_imgs: [],
             tmp_imgs: [],
             pic_show_cur: [],
@@ -1477,6 +1479,12 @@ Page({
             is_btn_disabel:false,
           })
         }
+      },fail:function(){
+        that.setData({
+          showVedio:false,
+          is_btn_disabel: false,
+          showThird:true
+        })
       }
     })
     function uploadInfos(res, box_mac, openid) {

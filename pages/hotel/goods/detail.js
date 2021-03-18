@@ -169,7 +169,7 @@ Page({
       openid: openid,
     }, (data, headers, cookies, errMsg, statusCode) => {
       if (data.result.is_have == 1) {//如果已连接盒子
-        that.setData({box_mac: data.result.box_mac})
+        that.setData({box_mac: data.result.box_mac,hotel_info:data.result})
       }
     })
 
@@ -694,6 +694,41 @@ Page({
         
       }
     })
+  },
+  //遥控退出投屏
+  exitForscreen: function(e) {
+    var self = this;
+    openid = e.currentTarget.dataset.openid;
+    box_mac = e.currentTarget.dataset.box_mac;
+    var hotel_info = e.currentTarget.dataset.hotel_info;
+    if (box_mac == '') {
+      wx.showModal({
+        title: '提示',
+        content: "请使用微信扫电视二维码",
+        showCancel: false,
+        confirmText:'我知道了'
+      })
+    } else {
+      app.controlExitForscreen(openid, box_mac, hotel_info, self);
+    }
+    
+  },
+  //遥控调整音量
+  changeVolume: function(e) {
+    var self = this;
+    box_mac = e.currentTarget.dataset.box_mac;
+    var change_type = e.currentTarget.dataset.change_type;
+    var hotel_info = e.currentTarget.dataset.hotel_info;
+    if (box_mac == '') {
+      wx.showModal({
+        title: '提示',
+        content: "请使用微信扫电视二维码",
+        showCancel: false,
+        confirmText:'我知道了'
+      })
+    } else {
+      app.controlChangeVolume(openid, box_mac, change_type, hotel_info, self);
+    }
   },
   /**
    * 生命周期函数--监听页面初次渲染完成
