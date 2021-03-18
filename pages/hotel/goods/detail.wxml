@@ -137,12 +137,37 @@
 					</view>
 					<view class="body">
 						<video class="video" src="{{goods_info.video_url}}"></video>
+						<!-- 控制器面板 -->
+						<view wx:if="{{goods_info.is_tvdemand==1}}" class="panel controller flex-row-center-space_between theme-panel">
+							<view class="btn volume-down flex-column-center-center">
+								<!-- <view class="icon fa fa-volume-down" aria-hidden="true"></view> -->
+								<image class="icon" mode="aspectFill" src="/images/imgs/volume-down.png"></image>
+								<view class="label">音量-</view>
+							</view>
+							<view class="btn volume-up flex-column-center-center">
+								<!-- <view class="icon fa fa-volume-up" aria-hidden="true"></view> -->
+								<image class="icon" mode="aspectFill" src="/images/imgs/volume-up.png"></image>
+								<view class="label">音量+</view>
+							</view>
+							<view class="btn launch flex-column-center-center" bindtap="boxShow" data-goods_id="{{goods_info.goods_id}}" data-name="{{goods_info.name}}" data-vediourl="{{goods_info.tx_url}}" data-boxmac="{{box_mac}}" data-openid="{{openid}}" data-duration="{{goods_info.duration}}" data-forscreen_url="{{goods_info.forscreen_url}}" data-resource_size="{{goods_info.resource_size}}" data-qrcode_url="{{goods_info.qrcode_url}}">
+								<!-- <view class="icon fa fa-television" aria-hidden="true"></view> -->
+								<image class="icon" mode="aspectFill" src="/images/imgs/launch-tv.png"></image>
+								<view class="label">投屏</view>
+							</view>
+							<view class="btn exit flex-column-center-center" bindtap="exitForscreen" data-openid="{{openid}}" data-box_mac="{{box_mac}}">
+								<!-- <view class="icon fa fa-sign-out" aria-hidden="true"></view> -->
+								<image class="icon" mode="aspectFill" src="/images/imgs/sign-out.png"></image>
+								<view class="label">退出</view>
+							</view>
+						</view>
+						<!-- 2021-03-18 15:25
 						<view wx:if="{{goods_info.is_tvdemand==1}}" class="option-bar flex-row-center-center" bindtap="boxShow" data-goods_id="{{goods_info.goods_id}}" data-name="{{goods_info.name}}" data-vediourl="{{goods_info.tx_url}}" data-boxmac="{{box_mac}}" data-openid="{{openid}}" data-duration="{{goods_info.duration}}" data-forscreen_url="{{goods_info.forscreen_url}}" data-resource_size="{{goods_info.resource_size}}" data-qrcode_url="{{goods_info.qrcode_url}}">
 							<view class="btn flex-row-center-center launch-tv">
 								<image class="icon" mode="aspectFit" src="/images/icon2/F44444_interact.png"></image>
 								<view class="text">投屏</view>
 							</view>
 						</view>
+						-->
 					</view>
 				</view>
 				<view class="panel info">

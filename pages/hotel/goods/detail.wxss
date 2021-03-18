@@ -514,6 +514,35 @@
   font-size: 28rpx;
 }
 
+.information-panel>.panel-body>.panel>.body>.controller {
+  width: calc(100% - 120rpx);
+  height: 100rpx;
+  padding: 20rpx 60rpx;
+  margin-top: 10rpx;
+}
+
+.information-panel>.panel-body>.panel>.body>.controller>.btn {
+  width: calc(25% - 3rpx);
+  height: 100%;
+  border-left: 3rpx solid #F6F6F6;
+}
+
+.information-panel>.panel-body>.panel>.body>.controller>.btn:first-child {
+  border-left: unset
+}
+
+.information-panel>.panel-body>.panel>.body>.controller>.btn>.icon {
+  width: 64rpx;
+  height: 64rpx;
+  line-height: 64rpx;
+  text-align: center;
+  font-size: 42rpx;
+}
+
+.information-panel>.panel-body>.panel>.body>.controller>.btn>.label {
+  font-size: 28rpx;
+}
+
 .information-panel>.panel-body>.info>.body {
   width: calc(100% - 80rpx);
   padding: 40rpx;
