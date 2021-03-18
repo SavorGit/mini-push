@@ -140,23 +140,19 @@
 						<!-- 控制器面板 -->
 						<view wx:if="{{goods_info.is_tvdemand==1}}" class="panel controller flex-row-center-space_between theme-panel">
 							<view class="btn volume-down flex-column-center-center" bindtap="changeVolume" data-box_mac="{{box_mac}}" data-change_type="1" data-hotel_info="{{hotel_info}}">
-								<!-- <view class="icon fa fa-volume-down" aria-hidden="true"></view> -->
-								<image class="icon" mode="aspectFill" src="/images/imgs/volume-down.png"></image>
+								<image class="icon" mode="aspectFit" src="/images/icon2/000000_volume-down.png"></image>
 								<view class="label">音量-</view>
 							</view>
 							<view class="btn volume-up flex-column-center-center" bindtap="changeVolume" data-box_mac="{{box_mac}}" data-change_type="2" data-hotel_info="{{hotel_info}}">
-								<!-- <view class="icon fa fa-volume-up" aria-hidden="true"></view> -->
-								<image class="icon" mode="aspectFill" src="/images/imgs/volume-up.png"></image>
+								<image class="icon" mode="aspectFit" src="/images/icon2/000000_volume-up.png"></image>
 								<view class="label">音量+</view>
 							</view>
 							<view class="btn launch flex-column-center-center" bindtap="boxShow" data-goods_id="{{goods_info.goods_id}}" data-name="{{goods_info.name}}" data-vediourl="{{goods_info.tx_url}}" data-boxmac="{{box_mac}}" data-openid="{{openid}}" data-duration="{{goods_info.duration}}" data-forscreen_url="{{goods_info.forscreen_url}}" data-resource_size="{{goods_info.resource_size}}" data-qrcode_url="{{goods_info.qrcode_url}}">
-								<!-- <view class="icon fa fa-television" aria-hidden="true"></view> -->
-								<image class="icon" mode="aspectFill" src="/images/imgs/launch-tv.png"></image>
+								<image class="icon" mode="aspectFit" src="/images/icon2/000000_interact.png"></image>
 								<view class="label">投屏</view>
 							</view>
 							<view class="btn exit flex-column-center-center" bindtap="exitForscreen" data-openid="{{openid}}" data-box_mac="{{box_mac}}">
-								<!-- <view class="icon fa fa-sign-out" aria-hidden="true"></view> -->
-								<image class="icon" mode="aspectFill" src="/images/imgs/sign-out.png"></image>
+								<image class="icon" mode="aspectFit" src="/images/icon2/000000_exit.png"></image>
 								<view class="label">退出</view>
 							</view>
 						</view>

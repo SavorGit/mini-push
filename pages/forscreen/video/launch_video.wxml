@@ -55,23 +55,19 @@
 			<!-- 控制器面板 -->
 			<view class="panel controller flex-row-center-space_between theme-panel">
 				<view class="btn volume-down flex-column-center-center" bindtap="changeVolume" data-box_mac="{{box_mac}}" data-change_type="1" data-hotel_info="{{hotel_info}}">
-					<!-- <view class="icon fa fa-volume-down" aria-hidden="true"></view> -->
-					<image class="icon" mode="aspectFill" src="/images/imgs/volume-down.png"></image>
+					<image class="icon" mode="aspectFit" src="/images/icon2/000000_volume-down.png"></image>
 					<view class="label">音量-</view>
 				</view>
 				<view class="btn volume-up flex-column-center-center" bindtap="changeVolume" data-box_mac="{{box_mac}}" data-change_type="2" data-hotel_info="{{hotel_info}}">
-					<!-- <view class="icon fa fa-volume-up" aria-hidden="true"></view> -->
-					<image class="icon" mode="aspectFill" src="/images/imgs/volume-up.png"></image>
+					<image class="icon" mode="aspectFit" src="/images/icon2/000000_volume-up.png"></image>
 					<view class="label">音量+</view>
 				</view>
 				<view class="btn launch flex-column-center-center" wx:if="{{is_replay_disabel==false}}" bindtap='boxShow' data-name="{{video_name}}" data-filename='{{filename}}' data-vediourl="{{video_url}}" data-boxmac="{{box_mac}}" data-openid="{{openid}}">
-					<!-- <view class="icon fa fa-television" aria-hidden="true"></view> -->
-					<image class="icon" mode="aspectFill" src="/images/imgs/launch-tv.png"></image>
+					<image class="icon" mode="aspectFit" src="/images/icon2/000000_interact.png"></image>
 					<view class="label">投屏</view>
 				</view>
 				<view class="btn exit flex-column-center-center" bindtap="exitForscreen" data-openid="{{openid}}" data-box_mac="{{box_mac}}" data-hotel_info="{{hotel_info}}">
-					<!-- <view class="icon fa fa-sign-out" aria-hidden="true"></view> -->
-					<image class="icon" mode="aspectFill" src="/images/imgs/sign-out.png"></image>
+					<image class="icon" mode="aspectFit" src="/images/icon2/000000_exit.png"></image>
 					<view class="label">退出</view>
 				</view>
 			</view>
