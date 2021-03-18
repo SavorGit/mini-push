@@ -333,7 +333,6 @@ Page({
   },
   // 打开购买弹窗
   openBuyGoodsPopWindow: function (e) {
-    console.log(e)
     let that = this;
     var is_self = e.currentTarget.dataset.is_self;
     if (is_self == 1) {
@@ -505,7 +504,6 @@ Page({
   },
   selectAttrs:function(e){
     var that = this;
-    console.log(e)
     var index = e.currentTarget.dataset.index;
     var attr_ids = e.currentTarget.dataset.attr_ids;
 
@@ -635,7 +633,6 @@ Page({
   },
   //电视播放
   boxShow(e) {
-    console.log(e)
     let self = this;
     var box_mac = e.currentTarget.dataset.boxmac;
 
