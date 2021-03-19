@@ -387,16 +387,20 @@ Page({
     var postf_t = filename.substring(index1, index2); //后缀名
     var timestamp = (new Date()).valueOf();
     res_sup_time = timestamp;
-    var timer_90 = setTimeout(function () {
+    var pams_arr = forscreen_method_origin.split('-');
+    if(pams_arr[1]==1){
+      var timer_90 = setTimeout(function () {
       
-      that.setData({
-        showModal_3:true,
-        isOpenWind:false,
-      })
-      //upload_task.abort();
-      //that.speedForVideo(form_data,hotel_info,1)
+        that.setData({
+          showModal_3:true,
+          isOpenWind:false,
+        })
+        //upload_task.abort();
+        //that.speedForVideo(form_data,hotel_info,1)
+      
+      }, forscreen_timeout_time);
+    }
     
-    }, forscreen_timeout_time);
     //第一步上传视频
     upload_task = wx.uploadFile({
       url: oss_upload_url,
