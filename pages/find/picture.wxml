@@ -60,13 +60,11 @@
 			<!-- 控制器面板 -->
 			<view class="panel controller flex-row-center-center theme-panel">
 				<view class="btn launch flex-column-center-center" wx:if="{{is_replay_disabel == false}}" bindtap='boxShow' data-forscreen_id='{{picinfo.forscreen_id}}' data-pubdetail='{{picinfo.pubdetail}}' data-forscreen_char='{{picinfo.forscreen_char}}' data-res_type="{{picinfo.res_type}}" data-res_nums="{{picinfo.res_nums}}" data-boxmac="{{box_mac}}" data-openid="{{openid}}">
-					<!-- <view class="icon fa fa-television" aria-hidden="true"></view> -->
-					<image class="icon" mode="aspectFill" src="/images/imgs/launch-tv.png"></image>
+					<image class="icon" mode="aspectFit" src="/images/icon2/000000_interact.png"></image>
 					<view class="label">投屏</view>
 				</view>
 				<view class="btn exit flex-column-center-center" bindtap="exitForscreen" data-openid="{{openid}}" data-box_mac="{{box_mac}}" data-hotel_info="{{hotel_info}}">
-					<!-- <view class="icon fa fa-sign-out" aria-hidden="true"></view> -->
-					<image class="icon" mode="aspectFill" src="/images/imgs/sign-out.png"></image>
+					<image class="icon" mode="aspectFit" src="/images/icon2/000000_exit.png"></image>
 					<view class="label">退出</view>
 				</view>
 			</view>
