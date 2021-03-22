@@ -1,1 +1,90 @@
 /* pages/life/index.wxss */
+@import '/pages/life/list.wxss';
+
+/**
+ * 生活分类列表
+ */
+
+.page {
+  width: 100%;
+}
+
+.panel {
+  width: calc(100% - 20rpx);
+  padding: 0 10rpx;
+}
+
+.panel>.title-bar,
+.panel>.body {
+  width: 100%;
+}
+
+.panel>.title-bar {
+  height: 100rpx;
+}
+
+/* ========================================= 分类按钮面板 ========================================= */
+
+.category>.body>.btn {
+  width: calc(20% - 23rpx);
+  margin: 10rpx;
+  display: inline-flex;
+  box-sizing: border-box;
+  border-right: 3rpx solid rgba(237, 240, 242, 1);
+}
+
+.category>.body>.btn:nth-child(5n) {
+  border-right: 0;
+}
+
+.category>.body>.btn>.icon {
+  width: 80rpx;
+  height: 80rpx;
+  background-color: rgb(242, 93, 156);
+  border-radius: 50%;
+}
+
+.category>.body>.btn>.label {
+  font-size: 28rpx;
+}
+
+/* ========================================= 主面板 ========================================= */
+.main {
+  margin-top: 10rpx;
+}
+
+.main>.title-bar {
+  width: calc(100% - 50rpx);
+  padding: 0 25rpx;
+}
+
+.main>.title-bar>.title {
+  height: 64rpx;
+  line-height: 70rpx;
+  border-bottom: 6rpx solid rgba(102, 102, 102, 1);
+  font-size: 28rpx;
+}
+
+.main>.title-bar>.options>.btn>.icon {
+  padding: 0 5rpx;
+  font-size: 28rpx;
+}
+
+.main>.title-bar>.options>.btn>.label {
+  padding: 0 5rpx;
+  font-size: 28rpx;
+}
+
+.main>.body>.banner {
+  width: 100%;
+}
+
+.main>.body>.banner>.pic {
+  width: 690rpx;
+  height: 175rpx;
+  border-radius: 40rpx;
+}
+
+.list {
+  min-height: unset;
+}
