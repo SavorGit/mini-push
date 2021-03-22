@@ -12,7 +12,8 @@ Page({
    * 页面的初始数据
    */
   data: {
-    dis_type:0,  //距离类型 0由近到远1由远到近
+    is_view_dis:true, //是否显示距离
+    dis_type:0,       //距离类型 0由近到远1由远到近
     statusBarHeight: getApp().globalData.statusBarHeight,
   },
 
@@ -22,6 +23,7 @@ Page({
   onLoad: function (options) {
     var that = this;
     that.getLifeTypeList();
+    that.getBanner();
     wx.getLocation({
       type: 'wgs84',
       isHighAccuracy:true,
@@ -37,20 +39,24 @@ Page({
           longitude: longitude
         }, (data, headers, cookies, errMsg, statusCode) => {
           var area_id = data.result.area_id;
+          that.setData({area_id:area_id})
           //获取酒楼列表
           that.getHotelList(page,area_id);
         })
       },fail:function(){
         var area_id = 1;
+        that.setData({is_view_dis:false,area_id:area_id})
         that.getHotelList(page,area_id,0,0,0);
       }
     })
+    
   },
   //获取酒楼列表
   getHotelList:function(page=1,area_id=1,county_id=0,food_style_id=0,avg_exp_id=0){
     var that = this;
     var latitude = that.data.latitude;
     var longitude = that.data.longitude;
+    var dis_type  = that.data.dis_type;
     utils.PostRequest(api_v_url + '/hotel/recList', {
       page: page,
       area_id: area_id,
@@ -59,6 +65,7 @@ Page({
       avg_exp_id: avg_exp_id,
       latitude:latitude,
       longitude,longitude,
+      dis_type:dis_type
     }, (data, headers, cookies, errMsg, statusCode) => {
       that.setData({
         hotel_list: data.result
@@ -69,13 +76,33 @@ Page({
   getLifeTypeList:function(e){
     var that = this;
     utils.PostRequest(api_v_url + '/aa/bb', {
+      position:4,
+    }, (data, headers, cookies, errMsg, statusCode) => {
+      var banner_list = data.result.datalist;
+
+    })
+  },
+  //获取广告banner
+  getBanner:function(e){
+    var that = this;
+    utils.PostRequest(api_v_url + '/aa/bb', {
       
     }, (data, headers, cookies, errMsg, statusCode) => {
       
     })
   },
   //切换距离
-
+  changeDisType:function(e){
+    var that = this;
+    var dis_type = that.data.dis_type;
+    if(dis_type==0){
+      dis_type = 1;
+    } 
+    that.setData({dis_type:dis_type})
+    page = 1;
+    var area_id = that.data.area_id;
+    that.getHotelList(page,area_id,0,0,0);
+  },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
