@@ -2,11 +2,10 @@
 const utils = require('../../utils/util.js')
 var mta = require('../../utils/mta_analysis.js')
 const app = getApp()
-var openid; //用户openid
 var page = 1; //当前节目单页数
 var hotel_list;
-var box_mac;
-
+var latitude;
+var longitude;
 var api_url = app.globalData.api_url;
 var api_v_url = app.globalData.api_v_url;
 var cache_key = app.globalData.cache_key;
@@ -50,8 +49,19 @@ Page({
   onLoad: function (options) {
     //wx.hideShareMenu();
     var that = this;
-    
-    //获取城市列表
+    var type = options.type;
+    latitude = options.latitude;
+    longitude= options.longitude;
+
+    that.getCityList();
+    //获取菜系列表
+    that.getFoodStyleList()
+    //获取人均消费
+    that.getExpList();
+
+
+
+    /*//获取城市列表
     that.getCityList();
     //获取当前城市
     wx.getLocation({
@@ -106,7 +116,8 @@ Page({
     //获取菜系列表
     that.getFoodStyleList()
     //获取人均消费
-    that.getExpList();
+    that.getExpList();*/
+
   },
   getExpList:function(){
     var that = this;
@@ -118,9 +129,10 @@ Page({
       })
     })
   },
-  getFoodStyleList:function(){
+  getFoodStyleList:function(type){
     var that = this;
     utils.PostRequest(api_v_url + '/FoodStyle/getList', {
+      type:type
     }, (data, headers, cookies, errMsg, statusCode) => {
       that.setData({
         cuisineArray: data.result.food_name_list,
@@ -146,6 +158,7 @@ Page({
     var that = this;
     utils.PostRequest(api_v_url + '/Area/getAreaList', {
     }, (data, headers, cookies, errMsg, statusCode) => {
+      
       that.setData({
         cityArray: data.result.city_name_list,
         objectCityArray: data.result.city_list
