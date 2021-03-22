@@ -167,7 +167,8 @@ Page({
       sizeType:['original'],
       maxDuration:30,
       success: function(res) {
-        var media_type = res.tempFiles[0].fileType;
+        console.log(res)
+        var media_type = res.type;
         if(media_type=='video'){
           if(res.tempFiles.length>1){
             wx.navigateBack({
@@ -1428,7 +1429,8 @@ Page({
       sizeType:['original'],
       maxDuration:30,
       success: function(res) {
-        var media_type = res.tempFiles[0].fileType;
+        console.log(res)
+        var media_type = res.type;
         if(media_type=='video'){
 
           if(res.tempFiles.length>1){
