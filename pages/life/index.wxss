@@ -33,15 +33,14 @@
   border-right: 3rpx solid rgba(237, 240, 242, 1);
 }
 
-.category>.body>.btn:nth-child(5n) {
+.category>.body>.btn:nth-child(5n),
+.category>.body>.btn:last-child {
   border-right: 0;
 }
 
 .category>.body>.btn>.icon {
   width: 80rpx;
   height: 80rpx;
-  background-color: rgb(242, 93, 156);
-  border-radius: 50%;
 }
 
 .category>.body>.btn>.label {
@@ -77,6 +76,7 @@
 
 .main>.body>.banner {
   width: 100%;
+  padding: 10rpx 0;
 }
 
 .main>.body>.banner>.pic {

@@ -62,7 +62,7 @@
 
 .list>.row-item {
   min-height: 200rpx;
-  padding: 40rpx 40rpx 45rpx 40rpx;
+  padding: 30rpx 40rpx;
   margin-top: 10rpx;
 }
 
