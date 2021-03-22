@@ -15,6 +15,9 @@ Page({
     is_view_dis:true, //是否显示距离
     dis_type:0,       //距离类型 0由近到远1由远到近
     statusBarHeight: getApp().globalData.statusBarHeight,
+
+    latitude:0,    //纬度
+    longitude:0,  //经度
   },
 
   /**
@@ -97,11 +100,22 @@ Page({
     var dis_type = that.data.dis_type;
     if(dis_type==0){
       dis_type = 1;
+    }else {
+      dis_type = 0;
     } 
     that.setData({dis_type:dis_type})
     page = 1;
     var area_id = that.data.area_id;
     that.getHotelList(page,area_id,0,0,0);
+  },
+  //上拉刷新
+  loadMore: function (e) {
+    var that = this;
+    
+    page = page + 1;
+    var area_id = that.data.area_id;
+    
+    that.getHotelList(page,area_id, 0, 0, 0);
   },
   /**
    * 生命周期函数--监听页面初次渲染完成

@@ -7,7 +7,7 @@
 <import src="../template/commons" />
 <template is="navigationBarForTopLevel" data='{{statusBarHeight: statusBarHeight,titleText:"热点投屏"}}' />
 
-<scroll-view class="container flex-column-center-flex_start theme-container" style='height: calc(100vh - {{46 + statusBarHeight}}px);' scroll-y="true" scroll-with-animation="true">
+<scroll-view class="container flex-column-center-flex_start theme-container" style='height: calc(100vh - {{46 + statusBarHeight}}px);' scroll-y="true" scroll-with-animation="true" bindscrolltolower="loadMore">
 	<view class="page">
 
 		<!-- ========================================= 分类按钮面板 ========================================= -->
@@ -47,8 +47,8 @@
 				<view class="options" wx:if="{{is_view_dis==true}}">
 					<view class="btn flex-row-center-center" bindtap="changeDisType">
 						<view class="label theme-font3">距离</view>
-						<view class="icon fa fa-sort-amount-desc theme-font3" aria-hidden="true"></view>
-						<!-- <view class="icon fa fa-sort-amount-asc theme-font3" aria-hidden="true"></view> -->
+						<view class="icon fa fa-sort-amount-desc theme-font3" aria-hidden="true" wx:if="{{dis_type==1}}"></view>
+						<view class="icon fa fa-sort-amount-asc theme-font3" aria-hidden="true" wx:else></view>
 					</view>
 				</view>
 			</view>
