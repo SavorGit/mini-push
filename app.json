@@ -60,7 +60,9 @@
     "pages/activity/turntable/index",
     "pages/activity/turntable/join_success",
     "pages/activity/turntable/joingame",
-    "pages/activity/turntable/scangame"
+    "pages/activity/turntable/scangame",
+    "pages/life/index",
+    "pages/life/list"
   ],
   "subpackages": [
     {
