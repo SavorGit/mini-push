@@ -1426,9 +1426,4 @@ Page({
       }
     }
   },
-  testone:function(e){
-    wx.navigateTo({
-      url: '/pages/life/list?type=1',
-    })
-  }
 })
