@@ -12,7 +12,7 @@
 		<view class='v-structure flex-row-center-space_between theme-panel-2 font_666666_30'>
 			<picker bindchange="bindAreaPickerChange" bindcolumnchange="bindAreaPickerColumnChange" value="{{cityIndex}}" range="{{cityArray}}" mode="multiSelector">
 				<view class='area_show'>
-					<label>{{cityArray[0][cityIndex[0]]}}-{{cityArray[1][cityIndex[1]]}}</label>
+					<label>{{objectCityArray[cityIndex[0]].name}}-{{objectAreaArray[cityIndex[0]][cityIndex[1]].name}}</label>
 					<label class="fa fa-caret-down icon"></label>
 				</view>
 			</picker>

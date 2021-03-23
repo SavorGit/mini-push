@@ -16,27 +16,38 @@ Page({
    */
   data: {
     statusBarHeight: getApp().globalData.statusBarHeight,
-    cityArray:[['北京', '上海','广州','深圳'], ['海淀区', '朝阳区', '昌平区', '西城区', '大兴区']],
+    cityArray:[['北京', '上海','广州','深圳'], ['全部','海淀区', '朝阳区', '昌平区', '西城区', '大兴区']],
     objectCityArray: [
-      [
+
         {
           id: 1,
           name: '北京'
         },
+
+
         {
           id: 9,
           name: '上海'
         },
+
         {
           id: 236,
           name: '广州'
         },
+
+
         {
           id: 246,
           name: '深圳'
         }
-      ],
+
+    ],
+    objectAreaArray:[
       [
+        {
+          id: 0,
+          name: '全部'
+        },
         {
           id: 10,
           name: '海淀区'
@@ -57,13 +68,83 @@ Page({
           id: 14,
           name: '大兴区'
         }
-      ]
+      ],
+      [
+        {
+          id: 15,
+          name: '黄浦区'
+        },
+        {
+          id: 16,
+          name: '徐汇区'
+        },
+        {
+          id: 17,
+          name: '长宁区'
+        },
+        {
+          id: 18,
+          name: '静安区'
+        },
+        {
+          id: 19,
+          name: '普陀区'
+        }
+      ],
+      [
+        {
+          id: 20,
+          name: '天河1'
+        },
+        {
+          id: 21,
+          name: '白云区'
+        },
+        {
+          id: 22,
+          name: '越秀区'
+        },
+        {
+          id: 23,
+          name: '番禺区'
+        },
+        {
+          id: 24,
+          name: '花都区'
+        }
+      ],
+      [
+        {
+          id: 25,
+          name: '天河2'
+        },
+        {
+          id: 26,
+          name: '南山区'
+        },
+        {
+          id: 27,
+          name: '宝安区'
+        },
+        {
+          id: 28,
+          name: '龙岗区'
+        },
+        {
+          id: 29,
+          name: '光明区'
+        },
+        {
+          id: 30,
+          name: '其他区'
+        },
+      ],
     ],
     cityIndex: [0,0],
 
-    areaArray: [],
-    objectAreaArray: [],
-    areaIndex: 0,
+    //areaArray: [],
+    //objectAreaArray: [],
+    //areaIndex: 0,
 
     cuisineArray: [],
     objectCuisineArray: [],
@@ -227,7 +308,24 @@ Page({
     console.log(e)
     var city_index = e.detail.value[0];
     var area_index = e.detail.value[1];
+    console.log(city_index)
+    console.log(area_index)
 
+    var objectCityArray = this.data.objectCityArray;
+    var objectAreaArray = this.data.objectAreaArray;
+
+    console.log(objectCityArray);
+    console.log(objectAreaArray);
+
+    var city_id = objectCityArray[city_index].id;
+    var area_id = objectAreaArray[city_index][area_index].id;
+
+
+    console.log(city_id);
+    console.log(area_id);
+    var cityIndex = this.data.cityIndex;
+    cityIndex = [city_index,area_index]
+    this.setData({cityIndex});
     //获取城市id
 
     //获取区域id
@@ -243,7 +341,14 @@ Page({
     var cityArray = this.data.cityArray;
 
     if(column==0){ //改变城市
-      cityArray[1] = ['闽行','奉贤'];    //找到对应城市的区域并赋值
+      var objectAreaArray = this.data.objectAreaArray;
+      //console.log(objectAreaArray)
+      objectAreaArray = objectAreaArray[value];
+      var tmp_area_arr = [];
+      for(let i in objectAreaArray){
+        tmp_area_arr.push(objectAreaArray[i].name);
+      }
+      cityArray[1] = tmp_area_arr;    //找到对应城市的区域并赋值
       this.setData({cityArray:cityArray})
     }
     
@@ -333,34 +438,6 @@ Page({
       current: urls[0], // 当前显示图片的http链接
       urls: urls // 需要预览的图片http链接列表
     })
-    //mta.Event.stat('clickHotelImg', { 'hotelid': e.currentTarget.dataset.hotelid })
-  },
-  //城市切换 
-  bindCityPickerChange: function (e) {
-    var that = this;
-    var city_list = that.data.objectCityArray;
-    var picCityIndex = e.detail.value //切换之后城市key
-    var cityIndex = that.data.cityIndex; //切换之前城市key
-    if (picCityIndex != cityIndex) {
-      that.setData({
-        cityIndex: picCityIndex,
-        areaIndex: 0
-      })
-      //获取当前城市的区域
-      var area_id = city_list[picCityIndex].id;
-
-      that.getAreaList(area_id);
-      
-      //获取酒楼列表
-      var food_style_list = that.data.objectCuisineArray;
-      var cuisineIndex = that.data.cuisineIndex;
-      var food_style_id = food_style_list[cuisineIndex].id;
-      var avg_exp_list = that.data.objectPerCapitaPayArray;
-      var perCapitaPayIndex = that.data.perCapitaPayIndex;
-      var avg_exp_id = avg_exp_list[perCapitaPayIndex].id;
-      that.getHotelList(page,area_id, 0, food_style_id, avg_exp_id);
-    }
-    //mta.Event.stat('chooseCity', { 'cityname': city_list[picCityIndex].region_name })
   },
   
   //切换菜系

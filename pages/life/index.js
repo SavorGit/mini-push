@@ -56,6 +56,7 @@ Page({
   },
   //获取酒楼列表
   getHotelList:function(page=1,area_id=1,county_id=0,food_style_id=0,avg_exp_id=0){
+
     var that = this;
     var latitude = that.data.latitude;
     var longitude = that.data.longitude;
