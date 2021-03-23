@@ -10,9 +10,9 @@
 <view class="container flex-column-center-flex_start theme-container" style='height: calc(100vh - {{46 + statusBarHeight}}px);'>
 	<view class='page_top'>
 		<view class='v-structure flex-row-center-space_between theme-panel-2 font_666666_30'>
-			<picker bindchange="bindAreaPickerChange" value="{{areaIndex}}" range="{{cityArray}}" mode = multiSelector>
+			<picker bindchange="bindAreaPickerChange" bindcolumnchange="bindAreaPickerColumnChange" value="{{cityIndex}}" range="{{cityArray}}" mode="multiSelector">
 				<view class='area_show'>
-					<label>{{cityArray[areaIndex]}}-朝阳区</label>
+					<label>{{cityArray[0][cityIndex[0]]}}-{{cityArray[1][cityIndex[1]]}}</label>
 					<label class="fa fa-caret-down icon"></label>
 				</view>
 			</picker>

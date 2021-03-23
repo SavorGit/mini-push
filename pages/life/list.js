@@ -16,9 +16,50 @@ Page({
    */
   data: {
     statusBarHeight: getApp().globalData.statusBarHeight,
-    cityArray: ['北京'],
-    objectCityArray: [],
-    cityIndex: 0,
+    cityArray:[['北京', '上海','广州','深圳'], ['海淀区', '朝阳区', '昌平区', '西城区', '大兴区']],
+    objectCityArray: [
+      [
+        {
+          id: 1,
+          name: '北京'
+        },
+        {
+          id: 9,
+          name: '上海'
+        },
+        {
+          id: 236,
+          name: '广州'
+        },
+        {
+          id: 246,
+          name: '深圳'
+        }
+      ],
+      [
+        {
+          id: 10,
+          name: '海淀区'
+        },
+        {
+          id: 11,
+          name: '朝阳区'
+        },
+        {
+          id: 12,
+          name: '昌平区'
+        },
+        {
+          id: 13,
+          name: '西城区'
+        },
+        {
+          id: 14,
+          name: '大兴区'
+        }
+      ]
+    ],
+    cityIndex: [0,0],
 
     areaArray: [],
     objectAreaArray: [],
@@ -31,16 +72,10 @@ Page({
     perCapitaPayArray: [],
     objectPerCapitaPayArray: [],
     perCapitaPayIndex: 0,
+
     hotel_list: [],
     latitude:0,    //纬度
     longitude:0,  //经度
-
-    hiddens: true, //加载更多
-    box_mac: '', //机顶盒mac
-    close_hotel_hint: 1,
-    wifiErr: app.globalData.wifiErr,
-    link_type: app.globalData.link_type,
-    is_view_official_account:app.globalData.is_view_official_account
   },
 
   /**
@@ -48,14 +83,15 @@ Page({
    */
   onLoad: function (options) {
     //wx.hideShareMenu();
+    console.log(options)
     var that = this;
     var type = options.type;
     latitude = options.latitude;
     longitude= options.longitude;
 
-    that.getCityList();
+    //that.getCityList();
     //获取菜系列表
-    that.getFoodStyleList()
+    that.getFoodStyleList(type)
     //获取人均消费
     that.getExpList();
 
@@ -185,6 +221,36 @@ Page({
       })
     })
   },
+  //改变区域城市
+  bindAreaPickerChange:function(e){
+    console.log('确认')
+    console.log(e)
+    var city_index = e.detail.value[0];
+    var area_index = e.detail.value[1];
+
+    //获取城市id
+
+    //获取区域id
+
+    //获取当前商店列表
+  },
+  //改变区域地区
+  bindAreaPickerColumnChange:function(e){
+    console.log('改变列')
+    console.log(e);
+    var column = e.detail.column;  //第几列
+    var value  = e.detail.value;   //第几列的索引值
+    var cityArray = this.data.cityArray;
+
+    if(column==0){ //改变城市
+      cityArray[1] = ['闽行','奉贤'];    //找到对应城市的区域并赋值
+      this.setData({cityArray:cityArray})
+    }
+    
+
+
+  },
+ 
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
@@ -196,10 +262,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    var that = this;
-    //是否关注公众号 暂时关闭
-    //var user_info = wx.getStorageSync("savor_user_info");
-    //app.isRegister(user_info.openid,that);
+  
   },
 
   /**
@@ -299,30 +362,7 @@ Page({
     }
     //mta.Event.stat('chooseCity', { 'cityname': city_list[picCityIndex].region_name })
   },
-  //切换区域
-  bindAreaPickerChange: function (e) {
-    var that = this;
-    var area_list = that.data.objectAreaArray;
-    var areaIndex = e.detail.value;
-    that.setData({
-      areaIndex: e.detail.value
-    })
-
-    var city_list = that.data.objectCityArray;
-    var cityIndex = that.data.cityIndex; //城市key
-    var area_id = city_list[cityIndex].id; //城市id
-    var county_id = area_list[areaIndex].id; //区域id
-
-    var food_style_list = that.data.objectCuisineArray;
-    var cuisineIndex = that.data.cuisineIndex;
-    var food_style_id = food_style_list[cuisineIndex].id; //菜系id
-
-    var avg_exp_list = that.data.objectPerCapitaPayArray;
-    var perCapitaPayIndex = that.data.perCapitaPayIndex;
-    var avg_exp_id = avg_exp_list[perCapitaPayIndex].id; //人均消费id
-    that.getHotelList(page,area_id, county_id, food_style_id, avg_exp_id);
-
-  },
+  
   //切换菜系
   bindCuiPickerChange: function (e) {
     var that = this;

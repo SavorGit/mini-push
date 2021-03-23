@@ -123,6 +123,14 @@ Page({
       phoneNumber: tel
     })
   },
+  gotoList:function(e){
+    var latitude = this.data.latitude;    //纬度
+    var longitude= this.data.longitude;   //经度
+    
+    wx.navigateTo({
+      url: '/pages/life/list?latitude='+latitude+'&longitude='+longitude+'&type=1',
+    })
+  },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */

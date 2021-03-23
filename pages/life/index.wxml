@@ -13,7 +13,7 @@
 		<!-- ========================================= 分类按钮面板 ========================================= -->
 		<view class="panel category theme-panel">
 			<view class="body">
-				<view class="btn flex-column-center-center">
+				<view class="btn flex-column-center-center" bindtap="gotoList">
 					<image class="icon" mode="aspectFit" src='/images/icon2/FFFFFF_video.png'></image>
 					<view class="label theme-font1">美食</view>
 				</view>
