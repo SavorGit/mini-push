@@ -18,135 +18,10 @@ Page({
    */
   data: {
     statusBarHeight: getApp().globalData.statusBarHeight,
-    cityArray:[['北京', '上海','广州','深圳'], ['全部','海淀区', '朝阳区', '昌平区', '西城区', '大兴区']],
-    objectCityArray: [
-
-        {
-          id: 1,
-          name: '北京'
-        },
-
-
-        {
-          id: 9,
-          name: '上海'
-        },
-
-        {
-          id: 236,
-          name: '广州'
-        },
-
-
-        {
-          id: 246,
-          name: '深圳'
-        }
-
-    ],
-    objectAreaArray:[
-      [
-        {
-          id: 0,
-          name: '全部'
-        },
-        {
-          id: 10,
-          name: '海淀区'
-        },
-        {
-          id: 11,
-          name: '朝阳区'
-        },
-        {
-          id: 12,
-          name: '昌平区'
-        },
-        {
-          id: 13,
-          name: '西城区'
-        },
-        {
-          id: 14,
-          name: '大兴区'
-        }
-      ],
-      [
-        {
-          id: 15,
-          name: '黄浦区'
-        },
-        {
-          id: 16,
-          name: '徐汇区'
-        },
-        {
-          id: 17,
-          name: '长宁区'
-        },
-        {
-          id: 18,
-          name: '静安区'
-        },
-        {
-          id: 19,
-          name: '普陀区'
-        }
-      ],
-      [
-        {
-          id: 20,
-          name: '天河1'
-        },
-        {
-          id: 21,
-          name: '白云区'
-        },
-        {
-          id: 22,
-          name: '越秀区'
-        },
-        {
-          id: 23,
-          name: '番禺区'
-        },
-        {
-          id: 24,
-          name: '花都区'
-        }
-      ],
-      [
-        {
-          id: 25,
-          name: '天河2'
-        },
-        {
-          id: 26,
-          name: '南山区'
-        },
-        {
-          id: 27,
-          name: '宝安区'
-        },
-        {
-          id: 28,
-          name: '龙岗区'
-        },
-        {
-          id: 29,
-          name: '光明区'
-        },
-        {
-          id: 30,
-          name: '其他区'
-        },
-      ],
-    ],
+    cityArray:[],
+    objectCityArray: [],
+    objectAreaArray:[],
     cityIndex: [0,0],
-
-    //areaArray: [],
-    //objectAreaArray: [],
-    //areaIndex: 0,
 
     cuisineArray: [],
     objectCuisineArray: [],
@@ -173,70 +48,12 @@ Page({
     latitude = options.latitude;
     longitude= options.longitude;
 
-    //that.getCityList();
+    that.getCityList(area_id);
     //获取菜系列表
     that.getFoodStyleList(cate_id)
     //获取人均消费
     that.getExpList(cate_id);
-
-
-
-    /*//获取城市列表
-    that.getCityList();
-    //获取当前城市
-    wx.getLocation({
-      type: 'wgs84',
-      isHighAccuracy:true,
-      success(res) {
-        console.log(res)
-        var latitude = res.latitude;
-        var longitude = res.longitude;
-        that.setData({
-          latitude:latitude,
-          longitude:longitude
-        })
-        utils.PostRequest(api_v_url + '/Area/getAreaid', {
-          latitude: latitude,
-          longitude: longitude
-        }, (data, headers, cookies, errMsg, statusCode) => {
-          if (data.result.cityindex == null) {
-            that.setData({
-              cityIndex: 0
-            })
-          } else {
-            that.setData({
-              cityIndex: data.result.cityindex
-            })
-          }
-          var area_id = data.result.area_id;
-
-
-          //获取区域列表
-          that.getAreaList(area_id);
-          
-          //获取酒楼列表
-          
-          that.getHotelList(page,area_id,0,0,0);
-        })
-        
-        //mta.Event.stat('getLocationInfo', { 'ltype': 2 })
-      },
-      fail: function (e) {
-        that.setData({
-          cityIndex: 0
-        })
-        var area_id = 1;
-        that.getAreaList(area_id);
-        
-        that.getHotelList(page,area_id,0,0,0);
-        
-        //mta.Event.stat('getLocationInfo', { 'ltype': 1 })
-      }
-    })
-    //获取菜系列表
-    that.getFoodStyleList()
-    //获取人均消费
-    that.getExpList();*/
+    that.getHotelList(cate_id,page,area_id);
 
   },
   getExpList:function(cate_id){
@@ -277,24 +94,31 @@ Page({
    
   },
   //获取城市列表
-  getCityList:function(){
+  getCityList:function(area_id){
     var that = this;
-    utils.PostRequest(api_v_url + '/Area/getAreaList', {
+    utils.PostRequest(api_v_url + '/area/getCityAreaList', {
+      area_id:area_id
     }, (data, headers, cookies, errMsg, statusCode) => {
       
-      that.setData({
+      var cityArray = data.result.names
+      var objectCityArray = data.result.city_list
+      var objectAreaArray = data.result.area_list;
+      var cityIndex = data.result.index
+      that.setData({cityArray:cityArray,objectCityArray:objectCityArray,objectAreaArray:objectAreaArray,cityIndex:cityIndex})
+      /*that.setData({
         cityArray: data.result.city_name_list,
         objectCityArray: data.result.city_list
-      })
+      })*/
     })
   },
   //获取酒楼列表
-  getHotelList:function(page=1,area_id=1,county_id=0,food_style_id=0,avg_exp_id=0){
+  getHotelList:function(cate_id,page=1,area_id=1,county_id=0,food_style_id=0,avg_exp_id=0){
     var that = this;
     var latitude = that.data.latitude;
 
     var longitude = that.data.longitude;
     utils.PostRequest(api_v_url + '/hotel/recList', {
+      cate_id:cate_id,
       page: page,
       area_id: area_id,
       county_id: county_id,
@@ -310,12 +134,10 @@ Page({
   },
   //改变区域城市
   bindAreaPickerChange:function(e){
-    console.log('确认')
-    console.log(e)
+    var that = this;
     var city_index = e.detail.value[0];
     var area_index = e.detail.value[1];
-    console.log(city_index)
-    console.log(area_index)
+
 
     var objectCityArray = this.data.objectCityArray;
     var objectAreaArray = this.data.objectAreaArray;
@@ -332,6 +154,16 @@ Page({
     var cityIndex = this.data.cityIndex;
     cityIndex = [city_index,area_index]
     this.setData({cityIndex});
+
+    var cuisineIndex = that.data.cuisineIndex
+    var cui_list = that.data.objectCuisineArray;
+
+    var food_style_id = cui_list[cuisineIndex].id; //菜系id
+    var avg_exp_list = that.data.objectPerCapitaPayArray;
+    var perCapitaPayIndex = that.data.perCapitaPayIndex;
+    var avg_exp_id = avg_exp_list[perCapitaPayIndex].id; //人均消费id
+    page = 1;
+    that.getHotelList(cate_id,page,city_id, area_id, food_style_id, avg_exp_id);
     //获取城市id
 
     //获取区域id
@@ -416,13 +248,15 @@ Page({
     
     page = page + 1;
     
-    var city_list = that.data.objectCityArray;
-    var cityIndex = that.data.cityIndex; //城市key
-    var area_id = city_list[cityIndex].id; //城市id
+    var cityIndex = that.data.cityIndex;
+    var objectCityArray = that.data.objectCityArray;
+    var objectAreaArray = that.data.objectAreaArray;
+    
+ 
+    
+    var area_id   = objectCityArray[cityIndex[0]].id
+    var county_id = objectAreaArray[cityIndex[0]][cityIndex[1]].id
 
-    var county_list = that.data.objectAreaArray;
-    var areaIndex = that.data.areaIndex;
-    var county_id = county_list[areaIndex].id; //区域id
 
     var food_style_list = that.data.objectCuisineArray;
     var cuisineIndex = that.data.cuisineIndex;
@@ -431,7 +265,7 @@ Page({
     var avg_exp_list = that.data.objectPerCapitaPayArray;
     var perCapitaPayIndex = that.data.perCapitaPayIndex;
     var avg_exp_id = avg_exp_list[perCapitaPayIndex].id; //人均消费id
-    that.getHotelList(page,area_id, county_id, food_style_id, avg_exp_id);
+    that.getHotelList(cate_id,page,area_id, county_id, food_style_id, avg_exp_id);
   },
 
   previewImage: function (e) {
@@ -454,20 +288,27 @@ Page({
     that.setData({
       cuisineIndex: cuisineIndex
     })
-    var city_list = that.data.objectCityArray;
-    var cityIndex = that.data.cityIndex; //城市key
-    var area_id = city_list[cityIndex].id; //城市id
+    console.log(cuisineIndex);
+   
+    var cityIndex = that.data.cityIndex;
+    var objectCityArray = that.data.objectCityArray;
+    var objectAreaArray = that.data.objectAreaArray;
+    
+ 
+    
+    var area_id   = objectCityArray[cityIndex[0]].id
+    var county_id = objectAreaArray[cityIndex[0]][cityIndex[1]].id
+    console.log(area_id)
+    console.log(county_id);
 
-    var county_list = that.data.objectAreaArray;
-    var areaIndex = that.data.areaIndex;
-    var county_id = county_list[areaIndex].id; //区域id
+
 
     var food_style_id = cui_list[cuisineIndex].id; //菜系id
     var avg_exp_list = that.data.objectPerCapitaPayArray;
     var perCapitaPayIndex = that.data.perCapitaPayIndex;
     var avg_exp_id = avg_exp_list[perCapitaPayIndex].id; //人均消费id
-
-    that.getHotelList(page,area_id, county_id, food_style_id, avg_exp_id);
+    page = 1;
+    that.getHotelList(cate_id,page,area_id, county_id, food_style_id, avg_exp_id);
   },
   //切换消费水平
   bindPayPickerChange: function (e) {
@@ -478,19 +319,23 @@ Page({
       perCapitaPayIndex: perCapitaPayIndex
     })
     var avg_exp_id = pay_list[perCapitaPayIndex].id //人均消费id
-    var city_list = that.data.objectCityArray;
-    var cityIndex = that.data.cityIndex; //城市key
-    var area_id = city_list[cityIndex].id; //城市id
 
-    var county_list = that.data.objectAreaArray;
-    var areaIndex = that.data.areaIndex;
-    var county_id = county_list[areaIndex].id; //区域id
+    var cityIndex = that.data.cityIndex;
+    var objectCityArray = that.data.objectCityArray;
+    var objectAreaArray = that.data.objectAreaArray;
+    
+ 
+    
+    var area_id   = objectCityArray[cityIndex[0]].id
+    var county_id = objectAreaArray[cityIndex[0]][cityIndex[1]].id
+    console.log(area_id)
+    console.log(county_id);
 
     var food_style_list = that.data.objectCuisineArray;
     var cuisineIndex = that.data.cuisineIndex;
     var food_style_id = food_style_list[cuisineIndex].id;
-
-    that.getHotelList(page,area_id, county_id, food_style_id, avg_exp_id);
+    page = 1;
+    that.getHotelList(cate_id,page,area_id, county_id, food_style_id, avg_exp_id);
 
   },
   phonecallevent: function (e) {
