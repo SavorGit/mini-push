@@ -2261,6 +2261,9 @@ Page({
     openid = data.openid;
     box_mac = data.box_mac;
     forscreen_char = data.forscreen_char;
+    if(typeof(forscreen_char)=='undefined'){
+      forscreen_char = '';
+    }
     var avatarUrl = data.avatarUrl;
     var nickName = data.nickName;
     
