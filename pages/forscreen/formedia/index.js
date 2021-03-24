@@ -1728,13 +1728,14 @@ Page({
       pubdetail = []
 
 
-      var history_imgs = [];
+      var history_imgs = []; 
       var tmp_history_img;
       for(let j in res_list){
         tmp_history_img = {};
         tmp_history_img.tmp_img = res_list[j].res_url;
         tmp_history_img.resource_size = res_list[j].resource_size;
-        tmp_history_img.oss_img  = res_list[j].res_url;
+        //tmp_history_img.oss_img  = res_list[j].res_url;
+        tmp_history_img.oss_img  = res_list[j].forscreen_url
         tmp_history_img.img_id  = res_list[j].resource_id;
         tmp_history_img.percent = '100';
         tmp_history_img.is_sing_forscreen = 1;
