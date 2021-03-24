@@ -9,6 +9,8 @@ var longitude;
 var api_url = app.globalData.api_url;
 var api_v_url = app.globalData.api_v_url;
 var cache_key = app.globalData.cache_key;
+var area_id;
+var cate_id;
 Page({
 
   /**
@@ -166,15 +168,16 @@ Page({
     //wx.hideShareMenu();
     console.log(options)
     var that = this;
-    var type = options.type;
+    area_id = options.area_id;
+    cate_id = options.cate_id;
     latitude = options.latitude;
     longitude= options.longitude;
 
     //that.getCityList();
     //获取菜系列表
-    that.getFoodStyleList(type)
+    that.getFoodStyleList(cate_id)
     //获取人均消费
-    that.getExpList();
+    that.getExpList(cate_id);
 
 
 
@@ -236,24 +239,27 @@ Page({
     that.getExpList();*/
 
   },
-  getExpList:function(){
+  getExpList:function(cate_id){
     var that = this;
-    utils.PostRequest(api_v_url + '/Hotel/getExplist', {
+    utils.PostRequest(api_v_url + '/category/categorylist', {
+      cate_id:cate_id,
+      type:102
     }, (data, headers, cookies, errMsg, statusCode) => {
       that.setData({
-        perCapitaPayArray: data.result.agv_name,
-        objectPerCapitaPayArray: data.result.agv_lisg
+        perCapitaPayArray: data.result.category_name_list,
+        objectPerCapitaPayArray: data.result.category_list
       })
     })
   },
-  getFoodStyleList:function(type){
+  getFoodStyleList:function(cate_id){
     var that = this;
-    utils.PostRequest(api_v_url + '/FoodStyle/getList', {
-      type:type
+    utils.PostRequest(api_v_url + '/category/categorylist', {
+      cate_id:cate_id,
+      type:101
     }, (data, headers, cookies, errMsg, statusCode) => {
       that.setData({
-        cuisineArray: data.result.food_name_list,
-        objectCuisineArray: data.result.food_list
+        cuisineArray: data.result.category_name_list,
+        objectCuisineArray: data.result.category_list
       })
     })
     

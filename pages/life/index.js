@@ -79,11 +79,13 @@ Page({
   //生活分类
   getLifeTypeList:function(e){
     var that = this;
-    utils.PostRequest(api_v_url + '/aa/bb', {
-      position:4,
+    utils.PostRequest(api_v_url + '/category/categorylist', {
+      cate_id:0,
+      type:8,
     }, (data, headers, cookies, errMsg, statusCode) => {
-      var banner_list = data.result.datalist;
-
+      var category_list = data.result.category_list;
+      console.log(category_list)
+      that.setData({category_list:category_list})
     })
   },
   //获取广告banner
@@ -127,9 +129,10 @@ Page({
   gotoList:function(e){
     var latitude = this.data.latitude;    //纬度
     var longitude= this.data.longitude;   //经度
-    
+    var cate_id = e.currentTarget.dataset.cate_id;
+    var area_id = this.data.area_id;
     wx.navigateTo({
-      url: '/pages/life/list?latitude='+latitude+'&longitude='+longitude+'&type=1',
+      url: '/pages/life/list?latitude='+latitude+'&longitude='+longitude+'&cate_id='+cate_id+'&area_id='+area_id,
     })
   },
   /**
