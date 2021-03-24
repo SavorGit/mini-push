@@ -13,28 +13,33 @@
   margin: 30rpx 30rpx 40rpx 30rpx;
 }
 
-.con_top > .user_info {
+.con_top>.user_info {
   flex-grow: 1;
 }
 
-.con_top > .user_info > image {
+.con_top>.user_info>image {
   width: 80rpx;
   height: 80rpx;
   vertical-align: middle;
   border-radius: 50%;
 }
 
-.con_top > .user_info > label {
+.con_top>.user_info>label {
   margin-left: 20rpx;
   font-size: 38rpx;
 }
 
-.con_top > .operation > button {
+.con_top>.operation>button {
   width: 150rpx;
   height: 50rpx;
   line-height: 50rpx;
   border-radius: 25rpx;
   font-size: 26rpx;
+}
+
+.con_top>.operation>button .bg {
+  width: 100%;
+  height: 100%;
 }
 
 .con_main {
@@ -55,18 +60,18 @@
   border-radius: 10rpx;
 }
 
-.con_main > .video navigator {
+.con_main>.video navigator {
   width: 450rpx;
   height: 450rpx;
 }
 
-.con_main > .video navigator > image {
+.con_main>.video navigator>image {
   width: 100%;
   height: 100%;
   border-radius: 10rpx;
 }
 
-.con_main > .video .cover {
+.con_main>.video .cover {
   width: 255rpx;
   height: 255rpx;
   margin: -450rpx 0rpx 0rpx 0rpx;
@@ -74,18 +79,18 @@
   border: 0rpx;
 }
 
-.con_main > .video .cover > navigator {
+.con_main>.video .cover>navigator {
   width: 60rpx;
   height: 60rpx;
 }
 
-.con_main > .video .cover > navigator > .icon {
+.con_main>.video .cover>navigator>.icon {
   width: 60rpx;
   height: 60rpx;
   font-size: 62rpx;
 }
 
-.con_main > .video .cover > view {
+.con_main>.video .cover>view {
   margin-top: 115rpx;
   padding-right: 20rpx;
   text-align: right;
@@ -95,18 +100,18 @@
   margin: 20rpx 65rpx 30rpx 65rpx;
 }
 
-.con_bottom > .hotel_info {
+.con_bottom>.hotel_info {
   margin-bottom: 20rpx;
   flex-grow: 1;
 }
 
-.con_bottom > .operation > .op-left > view {
+.con_bottom>.operation>.op-left>view {
   margin-right: 30rpx;
 }
 
-.con_bottom > .operation > .op-left > view button,
-.con_bottom > .operation > .op-left > view button::before,
-.con_bottom > .operation > .op-left > view button::after {
+.con_bottom>.operation>.op-left>view button,
+.con_bottom>.operation>.op-left>view button::before,
+.con_bottom>.operation>.op-left>view button::after {
   height: 50rpx;
   line-height: 50rpx;
   background: unset;
@@ -114,19 +119,19 @@
   font-size: unset;
 }
 
-.con_bottom > .operation > .op-left > view image {
+.con_bottom>.operation>.op-left>view image {
   width: 36rpx;
   height: 32rpx;
   margin-right: 8rpx;
   vertical-align: middle;
 }
 
-.con_bottom > .operation > .op-left > view label {
+.con_bottom>.operation>.op-left>view label {
   vertical-align: middle;
   margin-right: 8rpx;
 }
 
-.con_bottom > .operation > .op-right > label {
+.con_bottom>.operation>.op-right>label {
   text-decoration: underline;
 }
 
@@ -141,30 +146,30 @@
   border-radius: 10rpx;
 }
 
-.delete-container > .delete-top {
+.delete-container>.delete-top {
   padding: 50rpx 0rpx 20rpx 0rpx;
 }
 
-.delete-container > .delete-top > .title > label {
+.delete-container>.delete-top>.title>label {
   font-weight: bold;
   padding-left: 20rpx;
 }
 
-.delete-container > .delete-main {
+.delete-container>.delete-main {
   padding: 20rpx 40rpx;
   margin-bottom: 20rpx;
 }
 
-.delete-container > .delete-main > .content {
+.delete-container>.delete-main>.content {
   display: block;
   margin-bottom: 20rpx;
 }
 
-.delete-container > .delete-bottom {
+.delete-container>.delete-bottom {
   height: 120rpx;
 }
 
-.delete-container > .delete-bottom > button {
+.delete-container>.delete-bottom>button {
   width: 285rpx;
   height: 80rpx;
   line-height: 80rpx;

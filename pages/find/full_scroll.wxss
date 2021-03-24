@@ -8,7 +8,8 @@ page {
   color: #fff;
 }
 
-.picture-page, .media-page {
+.picture-page,
+.media-page {
   width: 100%;
   height: 100%;
 }
@@ -21,7 +22,8 @@ page {
   font-size: 32rpx;
 }
 
-.picture-page .page-head view, .picture-page .page-head image,
+.picture-page .page-head view,
+.picture-page .page-head image,
 .picture-page .page-head label {
   width: 80rpx;
   height: 40rpx;
@@ -44,24 +46,24 @@ page {
   margin-bottom: 20rpx;
 }
 
-.picture-page .page-body .card > .body {
+.picture-page .page-body .card>.body {
   width: calc(100% - 40rpx);
   max-height: calc(100% - 110rpx);
   padding: 25rpx 20rpx 0 20rpx;
 }
 
-.picture-page .page-body .card > .body > .user {
+.picture-page .page-body .card>.body>.user {
   width: 100%;
   height: 80rpx;
 }
 
-.picture-page .page-body .card > .body > .user > .hader-img {
+.picture-page .page-body .card>.body>.user>.hader-img {
   width: 80rpx;
   height: 80rpx;
   border-radius: 50%;
 }
 
-.picture-page .page-body .card > .body > .user > .nickname {
+.picture-page .page-body .card>.body>.user>.nickname {
   width: calc(100% - 100rpx);
   height: 80rpx;
   line-height: 80rpx;
@@ -70,7 +72,7 @@ page {
   font-weight: bold;
 }
 
-.picture-page .page-body .card > .body > .desc {
+.picture-page .page-body .card>.body>.desc {
   width: calc(100% - 100rpx);
   padding-left: 100rpx;
   font-size: 26rpx;
@@ -111,152 +113,152 @@ page {
   border-radius: 50%;
 } */
 
-.picture-page .page-body .card > .body > .main {
+.picture-page .page-body .card>.body>.main {
   width: 100%;
   height: 100%;
 }
 
-.picture-page .page-body .card > .body > .main > .grid-space-left {
+.picture-page .page-body .card>.body>.main>.grid-space-left {
   width: 100rpx;
 }
 
-.picture-page .page-body .card > .body > .main > .grid-space-left.pic-size-1,
-.picture-page .page-body .card > .body > .main > .grid-space-left.pic-size-3 {
+.picture-page .page-body .card>.body>.main>.grid-space-left.pic-size-1,
+.picture-page .page-body .card>.body>.main>.grid-space-left.pic-size-3 {
   height: 420rpx;
 }
 
-.picture-page .page-body .card > .body > .main > .grid-space-left.pic-size-2 {
+.picture-page .page-body .card>.body>.main>.grid-space-left.pic-size-2 {
   height: 280rpx;
 }
 
-.picture-page .page-body .card > .body > .main > .grid-space-left.pic-size-4 {
+.picture-page .page-body .card>.body>.main>.grid-space-left.pic-size-4 {
   height: 530rpx;
 }
 
-.picture-page .page-body .card > .body > .main > .grid-space-left.pic-size-5,
-.picture-page .page-body .card > .body > .main > .grid-space-left.pic-size-6 {
+.picture-page .page-body .card>.body>.main>.grid-space-left.pic-size-5,
+.picture-page .page-body .card>.body>.main>.grid-space-left.pic-size-6 {
   height: 390rpx;
 }
 
-.picture-page .page-body .card > .body > .main > .weui-grids {
+.picture-page .page-body .card>.body>.main>.weui-grids {
   width: calc(100% - 100rpx);
   margin-top: 20rpx;
 }
 
-.picture-page .page-body .card > .body > .main > .weui-grids > .grid-space-right {
+.picture-page .page-body .card>.body>.main>.weui-grids>.grid-space-right {
   float: left;
 }
 
-.picture-page .page-body .card > .body > .main > .weui-grids > .pic-size-1 {
+.picture-page .page-body .card>.body>.main>.weui-grids>.pic-size-1 {
   width: 400rpx;
   height: 400rpx;
 }
 
-.picture-page .page-body .card > .body > .main > .weui-grids > .pic-size-1 > image {
+.picture-page .page-body .card>.body>.main>.weui-grids>.pic-size-1>image {
   width: 400rpx;
   height: 400rpx;
   border-radius: 10rpx;
 }
 
-.picture-page .page-body .card > .body > .main > .weui-grids > .grid-space-right.pic-size-1 {
+.picture-page .page-body .card>.body>.main>.weui-grids>.grid-space-right.pic-size-1 {
   width: calc(100% - 400rpx);
   height: 400rpx;
 }
 
-.picture-page .page-body .card > .body > .main > .weui-grids > .pic-size-2 {
+.picture-page .page-body .card>.body>.main>.weui-grids>.pic-size-2 {
   width: 260rpx;
   height: 250rpx;
 }
 
-.picture-page .page-body .card > .body > .main > .weui-grids > .pic-size-2 > image {
+.picture-page .page-body .card>.body>.main>.weui-grids>.pic-size-2>image {
   width: 250rpx;
   height: 250rpx;
   border-radius: 10rpx;
 }
 
-.picture-page .page-body .card > .body > .main > .weui-grids > .grid-space-right.pic-size-2 {
+.picture-page .page-body .card>.body>.main>.weui-grids>.grid-space-right.pic-size-2 {
   width: calc(100% - 520rpx);
   height: 250rpx;
 }
 
-.picture-page .page-body .card > .body > .main > .weui-grids > .pic-size-3 {
+.picture-page .page-body .card>.body>.main>.weui-grids>.pic-size-3 {
   width: 200rpx;
   height: 205rpx;
 }
 
-.picture-page .page-body .card > .body > .main > .weui-grids > .pic-size-3:first-child {
+.picture-page .page-body .card>.body>.main>.weui-grids>.pic-size-3:first-child {
   width: 310rpx;
   height: 400rpx;
 }
 
-.picture-page .page-body .card > .body > .main > .weui-grids > .pic-size-3:last-child {
+.picture-page .page-body .card>.body>.main>.weui-grids>.pic-size-3:last-child {
   height: 195rpx;
 }
 
-.picture-page .page-body .card > .body > .main > .weui-grids > .pic-size-3 > image {
+.picture-page .page-body .card>.body>.main>.weui-grids>.pic-size-3>image {
   width: 200rpx;
   height: 195rpx;
   border-radius: 10rpx;
 }
 
-.picture-page .page-body .card > .body > .main > .weui-grids > .pic-size-3:first-child > image {
+.picture-page .page-body .card>.body>.main>.weui-grids>.pic-size-3:first-child>image {
   width: 300rpx;
   height: 400rpx;
   border-radius: 10rpx;
 }
 
-.picture-page .page-body .card > .body > .main > .weui-grids > .grid-space-right.pic-size-3 {
+.picture-page .page-body .card>.body>.main>.weui-grids>.grid-space-right.pic-size-3 {
   width: calc(100% - 510rpx);
   height: 400rpx;
   margin-top: -205rpx;
 }
 
-.picture-page .page-body .card > .body > .main > .weui-grids > .pic-size-4 {
+.picture-page .page-body .card>.body>.main>.weui-grids>.pic-size-4 {
   width: 260rpx;
   height: 260rpx;
 }
 
-.picture-page .page-body .card > .body > .main > .weui-grids > .pic-size-4:nth-child(3),
-.picture-page .page-body .card > .body > .main > .weui-grids > .pic-size-4:nth-child(4) {
+.picture-page .page-body .card>.body>.main>.weui-grids>.pic-size-4:nth-child(3),
+.picture-page .page-body .card>.body>.main>.weui-grids>.pic-size-4:nth-child(4) {
   height: 250rpx;
 }
 
-.picture-page .page-body .card > .body > .main > .weui-grids > .pic-size-4 > image {
+.picture-page .page-body .card>.body>.main>.weui-grids>.pic-size-4>image {
   width: 250rpx;
   height: 250rpx;
   border-radius: 10rpx;
 }
 
-.picture-page .page-body .card > .body > .main > .weui-grids > .grid-space-right.pic-size-4 {
+.picture-page .page-body .card>.body>.main>.weui-grids>.grid-space-right.pic-size-4 {
   width: calc(100% - 520rpx);
   height: 510rpx;
   margin-top: -260rpx;
 }
 
-.picture-page .page-body .card > .body > .main > .weui-grids > .pic-size-5,
-.picture-page .page-body .card > .body > .main > .weui-grids > .pic-size-6 {
+.picture-page .page-body .card>.body>.main>.weui-grids>.pic-size-5,
+.picture-page .page-body .card>.body>.main>.weui-grids>.pic-size-6 {
   width: 190rpx;
   height: 180rpx;
 }
 
-.picture-page .page-body .card > .body > .main > .weui-grids > .pic-size-5:nth-child(1),
-.picture-page .page-body .card > .body > .main > .weui-grids > .pic-size-5:nth-child(2),
-.picture-page .page-body .card > .body > .main > .weui-grids > .pic-size-5:nth-child(3),
-.picture-page .page-body .card > .body > .main > .weui-grids > .pic-size-6:nth-child(1),
-.picture-page .page-body .card > .body > .main > .weui-grids > .pic-size-6:nth-child(2),
-.picture-page .page-body .card > .body > .main > .weui-grids > .pic-size-6:nth-child(3) {
+.picture-page .page-body .card>.body>.main>.weui-grids>.pic-size-5:nth-child(1),
+.picture-page .page-body .card>.body>.main>.weui-grids>.pic-size-5:nth-child(2),
+.picture-page .page-body .card>.body>.main>.weui-grids>.pic-size-5:nth-child(3),
+.picture-page .page-body .card>.body>.main>.weui-grids>.pic-size-6:nth-child(1),
+.picture-page .page-body .card>.body>.main>.weui-grids>.pic-size-6:nth-child(2),
+.picture-page .page-body .card>.body>.main>.weui-grids>.pic-size-6:nth-child(3) {
   height: 190rpx;
 }
 
-.picture-page .page-body .card > .body > .main > .weui-grids > .pic-size-5 > image,
-.picture-page .page-body .card > .body > .main > .weui-grids > .pic-size-6 > image {
+.picture-page .page-body .card>.body>.main>.weui-grids>.pic-size-5>image,
+.picture-page .page-body .card>.body>.main>.weui-grids>.pic-size-6>image {
   width: 180rpx;
   height: 180rpx;
   border-radius: 10rpx;
 }
 
-.picture-page .page-body .card > .body > .main > .weui-grids > .grid-space-right.pic-size-5,
-.picture-page .page-body .card > .body > .main > .weui-grids > .grid-space-right.pic-size-6 {
+.picture-page .page-body .card>.body>.main>.weui-grids>.grid-space-right.pic-size-5,
+.picture-page .page-body .card>.body>.main>.weui-grids>.grid-space-right.pic-size-6 {
   width: calc(100% - 570rpx);
   height: 370rpx;
   margin-top: -200rpx;
@@ -410,21 +412,21 @@ page {
   margin-top: -200rpx;
 } */
 
-.picture-page .page-body .card > .foot {
+.picture-page .page-body .card>.foot {
   width: calc(100% - 25rpx);
   height: 85rpx;
   padding-right: 25rpx;
   font-size: 26rpx;
 }
 
-.picture-page .page-body .card > .foot > .time-hotel {
+.picture-page .page-body .card>.foot>.time-hotel {
   width: calc(100% - 80rpx);
   height: 85rpx;
   line-height: 85rpx;
   padding-left: 120rpx;
 }
 
-.picture-page .page-body .card > .foot > .btn-group {
+.picture-page .page-body .card>.foot>.btn-group {
   width: 400rpx;
   height: 60rpx;
   border-radius: 5rpx;
@@ -432,7 +434,7 @@ page {
   right: 110rpx;
 }
 
-.picture-page .page-body .card > .foot > .btn-group > .launch-tv {
+.picture-page .page-body .card>.foot>.btn-group>.launch-tv {
   width: 130rpx;
   height: 60rpx;
   line-height: 60rpx;
@@ -440,15 +442,20 @@ page {
   border-right: 1rpx solid #fff;
 }
 
-.picture-page .page-body .card > .foot > .btn-group > view:nth-child(2) {
+.picture-page .page-body .card>.foot>.btn-group>.launch-tv .bg {
+  width: 80%;
+  height: 80%;
+}
+
+.picture-page .page-body .card>.foot>.btn-group>view:nth-child(2) {
   width: calc(100% - 132rpx);
 }
 
-.picture-page .page-body .card > .foot > .btn-group .fa {
+.picture-page .page-body .card>.foot>.btn-group .fa {
   margin-right: 10rpx;
 }
 
-.picture-page .page-body .card > .foot > .more {
+.picture-page .page-body .card>.foot>.more {
   width: 80rpx;
   height: 40rpx;
   line-height: 0.06;
@@ -456,13 +463,13 @@ page {
   font-size: 66rpx;
 }
 
-.picture-page .page-body .card > .foot > .more.close {
+.picture-page .page-body .card>.foot>.more.close {
   border-radius: 20rpx;
   color: #666;
   background-color: #ededed;
 }
 
-.picture-page .page-body .card > .foot > .more.open {
+.picture-page .page-body .card>.foot>.more.open {
   border-radius: 12rpx;
   color: #999;
   background-color: #666;
@@ -502,7 +509,8 @@ page {
   padding-top: 20rpx;
 }
 
-.media-page .page-top cover-view, .media-page .page-top image,
+.media-page .page-top cover-view,
+.media-page .page-top image,
 .media-page .page-top label {
   width: 80rpx;
   height: 45rpx;
@@ -521,33 +529,33 @@ page {
   max-height: calc(100% - 46px - 264rpx);
 }
 
-.media-page .page-main > .video-option-area {
+.media-page .page-main>.video-option-area {
   width: calc(100% - 198rpx);
   height: 100%;
 }
 
-.media-page .page-main > .video-option-area .btn-play,
-.media-page .page-main > .video-option-area .loading {
+.media-page .page-main>.video-option-area .btn-play,
+.media-page .page-main>.video-option-area .loading {
   width: 80rpx;
   height: 80rpx;
   border-radius: 50%;
 }
 
-.media-page .page-main > .video-option-area .btn-play {
+.media-page .page-main>.video-option-area .btn-play {
   background-color: rgba(0, 0, 0, 0.65);
 }
 
-.media-page .page-main > .video-option-area .loading .fa-spinner {
+.media-page .page-main>.video-option-area .loading .fa-spinner {
   font-size: 82rpx;
 }
 
-.media-page .page-main > .video-option-area .btn-play .fa-play {
+.media-page .page-main>.video-option-area .btn-play .fa-play {
   font-size: 62rpx;
   margin-top: 5rpx;
   margin-left: 15rpx;
 }
 
-.media-page .page-main > .right-btn-group {
+.media-page .page-main>.right-btn-group {
   width: 84rpx;
   height: 497rpx;
   margin-right: 15rpx;
@@ -555,23 +563,23 @@ page {
   border-radius: 10rpx;
 }
 
-.media-page .page-main > .right-btn-group > .user-hader-img {
+.media-page .page-main>.right-btn-group>.user-hader-img {
   width: 80rpx;
   height: 80rpx;
   border: 2rpx solid #fff;
   border-radius: 50%;
 }
 
-.media-page .page-main > .right-btn-group > .btn-favorite,
-.media-page .page-main > .right-btn-group > .btn-share,
-.media-page .page-main > .right-btn-group > .btn-tv {
+.media-page .page-main>.right-btn-group>.btn-favorite,
+.media-page .page-main>.right-btn-group>.btn-share,
+.media-page .page-main>.right-btn-group>.btn-tv {
   width: 60rpx;
   height: 60rpx;
   margin-top: 40rpx;
 }
 
-.media-page .page-main > .right-btn-group > .btn-share button,
-.media-page .page-main > .right-btn-group > .btn-share button image {
+.media-page .page-main>.right-btn-group>.btn-share button,
+.media-page .page-main>.right-btn-group>.btn-share button image {
   width: 60rpx;
   height: 60rpx;
   border: 0;
@@ -583,20 +591,20 @@ page {
   bottom: 0;
 }
 
-.media-page .page-main > .right-btn-group > .btn-share button {
+.media-page .page-main>.right-btn-group>.btn-share button {
   background: unset;
 }
 
-.media-page .page-main > .right-btn-group > .btn-favorite {
+.media-page .page-main>.right-btn-group>.btn-favorite {
   height: 54rpx;
   margin-top: 60rpx;
 }
 
-.media-page .page-main > .right-btn-group > .btn-tv {
+.media-page .page-main>.right-btn-group>.btn-tv {
   height: 57rpx;
 }
 
-.media-page .page-main > .right-btn-group > label {
+.media-page .page-main>.right-btn-group>label {
   height: 24rpx;
   line-height: 24rpx;
   margin-top: 10rpx;
@@ -697,12 +705,12 @@ page {
   height: 500rpx;
 }
 
-.no-net > image {
+.no-net>image {
   width: 200rpx;
   height: 200rpx;
 }
 
-.no-net > text {
+.no-net>text {
   height: 30rpx;
   line-height: 30rpx;
   text-align: center;
@@ -710,13 +718,14 @@ page {
   font-weight: bold;
 }
 
-.no-net > view {
+.no-net>view {
   width: 100%;
   height: 60rpx;
   margin-top: 160rpx;
 }
 
-.no-net > view > .theme-button-dark, .no-net > view > .theme-button-like {
+.no-net>view>.theme-button-dark,
+.no-net>view>.theme-button-like {
   width: 200rpx;
   height: 60rpx;
   line-height: 60rpx;
