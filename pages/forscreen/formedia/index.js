@@ -1657,7 +1657,7 @@ Page({
           history_imgs.push(tmp_history_img);
         } 
 
-        
+        that.setData({media_type:'image','showThird':true,'up_imgs':history_imgs,'img_lenth':img_lenth,'launchType':'speed'})
 
 
         for(let i in res_list){
@@ -1672,7 +1672,7 @@ Page({
               if(res.data.code==10000){
                 if(i==res_list.length - 1){
                   app.showToast('重投成功，电视即将播放');
-                  that.setData({media_type:'image','showThird':true,'up_imgs':history_imgs,'img_lenth':img_lenth,'launchType':'speed'})
+                  
                 }
                 
               }else{
