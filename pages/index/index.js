@@ -69,7 +69,7 @@ Page({
   
   getHotplaylist:function(box_mac=''){//获取热播内容
     var that = this;
-    utils.PostRequest(api_v_url + '/content/getHotplaylist', {
+    utils.PostRequest(api_v_url + '/content/hotplay', {
       page: 1,
       box_mac:box_mac
     }, (data, headers, cookies, errMsg, statusCode) => {
