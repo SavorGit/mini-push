@@ -153,7 +153,7 @@ Page({
     console.log(area_id);
     var cityIndex = this.data.cityIndex;
     cityIndex = [city_index,area_index]
-    this.setData({cityIndex});
+    this.setData({cityIndex:cityIndex});
 
     var cuisineIndex = that.data.cuisineIndex
     var cui_list = that.data.objectCuisineArray;
