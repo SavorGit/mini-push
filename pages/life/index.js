@@ -24,8 +24,8 @@ Page({
    */
   onLoad: function (options) {
     var that = this;
-    that.getLifeTypeList();
-    that.getBanner();
+    that.getLifeTypeList();  //获取生活分类列表
+    that.getBanner();        //获取广告banner
     wx.getLocation({
       type: 'wgs84',
       isHighAccuracy:true,
@@ -48,14 +48,13 @@ Page({
       },fail:function(){
         var area_id = 1;
         that.setData({is_view_dis:false,area_id:area_id})
-        that.getHotelList(page,area_id,0,0,0);
+        that.getHotelList(page,area_id);
       }
     })
     
   },
   //获取酒楼列表
   getHotelList:function(page=1,area_id=1,county_id=0,food_style_id=0,avg_exp_id=0){
-
     var that = this;
     var latitude = that.data.latitude;
     var longitude = that.data.longitude;
@@ -82,7 +81,6 @@ Page({
       type:8,
     }, (data, headers, cookies, errMsg, statusCode) => {
       var category_list = data.result.category_list;
-      console.log(category_list)
       that.setData({category_list:category_list})
     })
   },
@@ -96,15 +94,12 @@ Page({
       that.setData({banner_list:banner_list})
     })
   },
-  
   //上拉刷新
   loadMore: function (e) {
     var that = this;
-    
     page = page + 1;
     var area_id = that.data.area_id;
-    
-    that.getHotelList(page,area_id, 0, 0, 0);
+    that.getHotelList(page,area_id);
   },
   phonecallevent: function (e) {
     var tel = e.target.dataset.tel;
