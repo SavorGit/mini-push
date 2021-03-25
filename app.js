@@ -612,7 +612,7 @@ App({
   //扫码
   scanQrcode: function (pageid = 1) {
     var that = this;
-    wx.showModal({
+    /*wx.showModal({
       title: '提示',
       content: "请扫电视二维码",
       showCancel: true,
@@ -669,13 +669,13 @@ App({
     if (pages.length) {
       currPage = pages[pages.length - 1];
     }
-    mta.Event.stat('popScanQrcode', { 'url': currPage.__route__ })
-    /*wx.showModal({
+    mta.Event.stat('popScanQrcode', { 'url': currPage.__route__ })*/
+    wx.showModal({
       title: '提示',
       content: "请使用微信扫电视二维码",
       showCancel: false,
       confirmText:'我知道了'
-    })*/
+    })
   },
   onLaunch: function () {
     var oss_tmp_key = this.globalData.oss_access_key_id;
