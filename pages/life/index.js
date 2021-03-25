@@ -13,7 +13,6 @@ Page({
    */
   data: {
     is_view_dis:true, //是否显示距离
-    dis_type:0,       //距离类型 0由近到远1由远到近
     statusBarHeight: getApp().globalData.statusBarHeight,
 
     latitude:0,    //纬度
@@ -60,8 +59,7 @@ Page({
     var that = this;
     var latitude = that.data.latitude;
     var longitude = that.data.longitude;
-    var dis_type  = that.data.dis_type;
-    utils.PostRequest(api_v_url + '/hotel/recList', {
+    utils.PostRequest(api_v_url + '/store/dataList', {
       page: page,
       area_id: area_id,
       county_id: county_id,
@@ -69,10 +67,10 @@ Page({
       avg_exp_id: avg_exp_id,
       latitude:latitude,
       longitude,longitude,
-      dis_type:dis_type
+      cate_id:0,
     }, (data, headers, cookies, errMsg, statusCode) => {
       that.setData({
-        hotel_list: data.result
+        hotel_list: data.result.datalist
       })
     })
   },
@@ -91,26 +89,14 @@ Page({
   //获取广告banner
   getBanner:function(e){
     var that = this;
-    utils.PostRequest(api_v_url + '/aa/bb', {
-      
+    utils.PostRequest(api_v_url + '/Adsposition/getAdspositionList', {
+      position: '4',
     }, (data, headers, cookies, errMsg, statusCode) => {
-      
+      var banner_list = data.result[4];
+      that.setData({banner_list:banner_list})
     })
   },
-  //切换距离
-  changeDisType:function(e){
-    var that = this;
-    var dis_type = that.data.dis_type;
-    if(dis_type==0){
-      dis_type = 1;
-    }else {
-      dis_type = 0;
-    } 
-    that.setData({dis_type:dis_type})
-    page = 1;
-    var area_id = that.data.area_id;
-    that.getHotelList(page,area_id,0,0,0);
-  },
+  
   //上拉刷新
   loadMore: function (e) {
     var that = this;

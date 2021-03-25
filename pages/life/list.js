@@ -114,10 +114,8 @@ Page({
   //获取酒楼列表
   getHotelList:function(cate_id,page=1,area_id=1,county_id=0,food_style_id=0,avg_exp_id=0){
     var that = this;
-    var latitude = that.data.latitude;
-
-    var longitude = that.data.longitude;
-    utils.PostRequest(api_v_url + '/hotel/recList', {
+    
+    utils.PostRequest(api_v_url + '/store/dataList', {
       cate_id:cate_id,
       page: page,
       area_id: area_id,
@@ -128,7 +126,7 @@ Page({
       longitude,longitude,
     }, (data, headers, cookies, errMsg, statusCode) => {
       that.setData({
-        hotel_list: data.result
+        hotel_list: data.result.datalist
       })
     })
   },
