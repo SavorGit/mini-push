@@ -9,7 +9,7 @@
 <block wx:if="{{media_type=='video'}}">
 	<view wx:if="{{showVedio}}" class="container flex-column-center-flex_start theme-container" style='height: calc(100vh - 46px - {{statusBarHeight}}px);'>
 		<view class="full_width before_launch">
-			<template is="pageTop" data="{{res_head_desc:res_head_desc}}" />
+			<template is="pageTop" data="{{res_head_desc:'视频'}}" />
 			<form bindsubmit="forscreen_video">
 				<scroll-view class='page_main flex-column-center-flex_start theme-container' scroll-y="true" scroll-with-animation="true">
 					<!-- <view wx:if="{{is_open_control==false}}" class='cover full_width'>
@@ -137,13 +137,13 @@
 					<view class="box flex-column-center-center" bindtap="gotoFriendForFiles">
 						<view class="btn WeChart flex-column-center-center">
 							<image class="icon" mode="aspectFit" src='/images/icon2/00D268_WeChart.png'></image>
-							<view class="label theme-font1">微信投屏</view>
+							<view class="label theme-font1">微信文件</view>
 						</view>
 					</view>
 					<view class="box flex-column-center-center" bindtap="gotoPhonefiles">
 						<view class="btn file flex-column-center-center">
 							<image class="icon" mode="aspectFit" src='/images/icon2/FF7E67_folder.png'></image>
-							<view class="label theme-font1">文件投屏</view>
+							<view class="label theme-font1">本地文件</view>
 						</view>
 					</view>
 					<view class="box flex-column-center-center">
@@ -222,7 +222,7 @@
 	<!-- ================================== 上传图片前 ================================== -->
 	<view wx:if="{{!showThird}}" class="container flex-column-center-flex_start theme-container" style='height: calc(100vh - 46px - {{statusBarHeight}}px);'>
 		<view class="full_width before_launch">
-			<template is="pageTop" data="{{res_head_desc:res_head_desc}}" />
+			<template is="pageTop" data="{{res_head_desc:'图片'}}" />
 			<form bindsubmit="up_forscreen">
 				<scroll-view class='page_main flex-column-center-flex_start theme-container' scroll-y="true" scroll-with-animation="true">
 					<view class="weui-grids grids-frame">
@@ -378,13 +378,13 @@
 					<view class="box flex-column-center-center" bindtap="gotoFriendForFiles">
 						<view class="btn WeChart flex-column-center-center">
 							<image class="icon" mode="aspectFit" src='/images/icon2/00D268_WeChart.png'></image>
-							<view class="label theme-font1">微信投屏</view>
+							<view class="label theme-font1">微信文件</view>
 						</view>
 					</view>
 					<view class="box flex-column-center-center" bindtap="gotoPhonefiles">
 						<view class="btn file flex-column-center-center">
 							<image class="icon" mode="aspectFit" src='/images/icon2/FF7E67_folder.png'></image>
-							<view class="label theme-font1">文件投屏</view>
+							<view class="label theme-font1">本地文件</view>
 						</view>
 					</view>
 					<view class="box flex-column-center-center">

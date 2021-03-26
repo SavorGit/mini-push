@@ -84,7 +84,7 @@ Page({
     is_open_control: false,
     showGuidedMaskBeforLaunch: false,
     showGuidedMaskAfterLaunch: false,
-    res_head_desc: '视频',
+    //res_head_desc: '视频',
     compressed:true,  //默认压缩
     launchType:'classic',
 
@@ -105,7 +105,7 @@ Page({
     pic_show_cur: [],    //当前上传照片是否被选中,
     is_btn_disabel:false,
     is_assist:0,         //是否助力
-    res_head_desc:'图片',
+    //res_head_desc:'图片',
     is_view_forscreen_char:true,
     isOpenWind:false, //是否显示投屏状态弹窗
   },
@@ -1431,6 +1431,7 @@ Page({
       success: function(res) {
         console.log(res)
         var media_type = res.type;
+        console.log(media_type)
         if(media_type=='video'){
 
           if(res.tempFiles.length>1){

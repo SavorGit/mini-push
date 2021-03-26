@@ -88,7 +88,7 @@
 			</view>
 			<view class="center flex-column-flex_start-space_around">
 				<view class="name two-line-overflow">{{merchant.name}}</view>
-				<view class="info theme-font3 one-line-overflow">共发布了{{merchant.num}}件菜品</view>
+				<view class="info theme-font3 one-line-overflow">共发布了{{merchant.num}}件商品</view>
 			</view>
 			<view class="right">
 				<view class="btn" bindtap="gotoMerchant" data-merchant_id="{{merchant.merchant_id}}">进店</view>

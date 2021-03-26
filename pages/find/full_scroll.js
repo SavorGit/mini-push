@@ -720,8 +720,8 @@ Page({
   //电视播放
   boxShow(e) {
     let self = this;
-    let forscreenId = e.target.dataset.forscreen_id;
-    let indexInList = e.target.dataset.index;
+    let forscreenId = e.currentTarget.dataset.forscreen_id;
+    let indexInList = e.currentTarget.dataset.index;
     if (self.data.box_mac == '') {
       app.scanQrcode(pageid);
     } else {
