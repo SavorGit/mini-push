@@ -68,7 +68,7 @@
 					<view class="icon flex-column-center-center wechart">
 						<image mode="aspectFit" src='/images/icon2/FFFFFF_WeChart.png'></image>
 					</view>
-					<label class="label">微信投屏</label>
+					<label class="label">微信文件</label>
 				</view>
 			</view>
 			<!-- 2021-03-17 14:53
@@ -106,7 +106,7 @@
 					<view class="icon flex-column-center-center file {{hotel_info.is_interact==1?'eye-catching':''}}">
 						<image mode="aspectFit" src='/images/icon2/FFFFFF_files.png'></image>
 					</view>
-					<label class="label">文件投屏</label>
+					<label class="label">本地文件</label>
 				</view>
 			</view>
 			<!-- 2021-03-17 15:28
