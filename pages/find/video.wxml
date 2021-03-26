@@ -12,14 +12,18 @@
 			<!-- 视频内容面板 -->
 			<view class='panel article theme-panel' wx:if="{{showControl==false}}">
 				<view class='con_top flex-row-center-space_between'>
-					<image class="user-head" mode='aspectFill' src='{{videoinfo.avatarUrl}}'></image> 
+					<image class="user-head" mode='aspectFill' src='{{videoinfo.avatarUrl}}'></image>
 					<view class='user-info flex-column-flex_start-center'>
 						<view class='nickname theme-font1'>{{videoinfo.nickName}}</view>
+						<view class='time-address one-line-overflow' wx:if="{{videoinfo.create_time!=''}}">{{videoinfo.create_time}}.{{videoinfo.hotel_name}}</view>
+						<view class='time-address one-line-overflow' wx:else>{{videoinfo.hotel_name}}</view>
+						<!-- 2021-03-17 17:21
 						<view class='time-address flex-row-center-flex_start'>
 							<label class="">{{videoinfo.create_time}}</label>
 							<label wx:if="{{videoinfo.hotel_name!=''}}" class="">.</label>
 							<label wx:if="{{videoinfo.hotel_name!=''}}" class="">{{videoinfo.hotel_name}}</label>
 						</view>
+						-->
 					</view>
 				</view>
 				<view class='con_main'>
@@ -58,23 +62,19 @@
 			<!-- 控制器面板 -->
 			<view class="panel controller flex-row-center-space_between theme-panel">
 				<view class="btn volume-down flex-column-center-center" bindtap="changeVolume" data-box_mac="{{box_mac}}" data-change_type="1" data-hotel_info="{{hotel_info}}">
-					<!-- <view class="icon fa fa-volume-down" aria-hidden="true"></view> -->
-					<image class="icon" mode="aspectFill" src="/images/imgs/volume-down.png"></image>
+					<image class="icon" mode="aspectFit" src="/images/icon2/000000_volume-down.png"></image>
 					<view class="label">音量-</view>
 				</view>
 				<view class="btn volume-up flex-column-center-center" bindtap="changeVolume" data-box_mac="{{box_mac}}" data-change_type="2" data-hotel_info="{{hotel_info}}">
-					<!-- <view class="icon fa fa-volume-up" aria-hidden="true"></view> -->
-					<image class="icon" mode="aspectFill" src="/images/imgs/volume-up.png"></image>
+					<image class="icon" mode="aspectFit" src="/images/icon2/000000_volume-up.png"></image>
 					<view class="label">音量+</view>
 				</view>
 				<view class="btn launch flex-column-center-center" wx:if="{{is_replay_disabel==false}}" bindtap='boxShow' data-forscreen_id='{{videoinfo.forscreen_id}}' data-pubdetail='{{videoinfo.pubdetail}}' data-forscreen_char='{{videoinfo.forscreen_char}}' data-res_type="{{videoinfo.res_type}}" data-res_nums="{{videoinfo.res_nums}}" data-boxmac="{{box_mac}}" data-openid="{{openid}}">
-					<!-- <view class="icon fa fa-television" aria-hidden="true"></view> -->
-					<image class="icon" mode="aspectFill" src="/images/imgs/launch-tv.png"></image>
+					<image class="icon" mode="aspectFit" src="/images/icon2/000000_interact.png"></image>
 					<view class="label">投屏</view>
 				</view>
 				<view class="btn exit flex-column-center-center" bindtap="exitForscreen" data-openid="{{openid}}" data-box_mac="{{box_mac}}">
-					<!-- <view class="icon fa fa-sign-out" aria-hidden="true"></view> -->
-					<image class="icon" mode="aspectFill" src="/images/imgs/sign-out.png"></image>
+					<image class="icon" mode="aspectFit" src="/images/icon2/000000_exit.png"></image>
 					<view class="label">退出</view>
 				</view>
 			</view>
@@ -87,18 +87,25 @@
 				<view class="weui-grids">
 					<view wx:for="{{hot_play}}" wx:key="item" wx:for-index="index" wx:for-item="bean" class="weui-grid">
 						<view class="card" bindtap="forscreenBox" data-type="{{bean.type}}" data-res_type="{{bean.res_type}}" data-res_nums="{{bean.res_nums}}" data-pubdetail="{{bean.pubdetail}}" data-boxmac="{{box_mac}}" data-openid="{{openid}}" data-forscreen_id="{{bean.forscreen_id}}" data-hotel_info="{{hotel_info}}" data-res_id="{{bean.res_id}}" data-index="{{index}}">
-							<image mode="aspectFill" src="{{bean.pubdetail[0].img_url}}"></image>
-							<view class="flex-row-center-space_between">
+							<view class="showcase flex-column-flex_start-flex_start">
+								<image class="cover" mode="aspectFill" src="{{bean.pubdetail[0].img_url}}"></image>
+								<view class="visits flex-row-center-center one-line-overflow">{{bean.play_nums}} 次</view>
+							</view>
+							<view class="row flex-row-center-space_between">
 								<view class="user flex-row-center-space_between">
 									<image src="{{bean.avatarUrl}}"></image>
 									<view class="one-line-overflow">{{bean.nickName}}</view>
 								</view>
-								<view class="sta theme-font3">{{bean.play_nums}} 次</view>
+								<button wx:if="{{bean.is_show==1}}" class="btn" data-res_type="{{bean.res_type}}" data-res_nums="{{bean.res_nums}}" data-pubdetail="{{bean.pubdetail}}" data-boxmac="{{box_mac}}" data-openid="{{openid}}" data-forscreen_id="{{bean.forscreen_id}}" data-hotel_info="{{hotel_info}}" data-index="{{index}}">
+									<image class="bg" mode="aspectFit" src='/images/icon2/F68855_interact.png'></image>
+								</button>
 							</view>
-							<view class="flex-row-center-space_between">
+							<!-- 2021-03-17 14:27
+							<view class="row flex-row-center-space_between">
 								<view class="rank theme-font5">TOP {{index+1}}</view>
 								<button wx:if="{{bean.is_show==1}}" class="btn theme-button-dark" data-res_type="{{bean.res_type}}" data-res_nums="{{bean.res_nums}}" data-pubdetail="{{bean.pubdetail}}" data-boxmac="{{box_mac}}" data-openid="{{openid}}" data-forscreen_id="{{bean.forscreen_id}}" data-hotel_info="{{hotel_info}}" data-index="{{index}}">投屏</button>
 							</view>
+							-->
 						</view>
 					</view>
 				</view>

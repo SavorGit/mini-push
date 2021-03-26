@@ -1,0 +1,490 @@
+<!-- pages/forscreen/forvideo/index.wxml -->
+<import src="/pages/template/commons" />
+<import src="/pages/forscreen/launch_media-template" />
+<template is="navigationBarForTwoLevel" data='{{statusBarHeight: statusBarHeight,titleText:"热点投屏"}}' />
+
+
+
+<!-- ================================== 上传视频前 ================================== -->
+<block wx:if="{{media_type=='video'}}">
+	<view wx:if="{{showVedio}}" class="container flex-column-center-flex_start theme-container" style='height: calc(100vh - 46px - {{statusBarHeight}}px);'>
+		<view class="full_width before_launch">
+			<template is="pageTop" data="{{res_head_desc:'视频'}}" />
+			<form bindsubmit="forscreen_video">
+				<scroll-view class='page_main flex-column-center-flex_start theme-container' scroll-y="true" scroll-with-animation="true">
+					<!-- <view wx:if="{{is_open_control==false}}" class='cover full_width'>
+					<video src='{{upload_vedio_temp}}' bindplay="onPlayBeforeLauch"></video>
+				</view> -->
+					<view wx:if="{{is_open_control==false}}" class='cover full_width'>
+						<image class="video-show" src="https://oss.littlehotspot.com/WeChat/MiniProgram/images/launch_video_bg.jpg"></image>
+						<view class="video-size">{{vide_size_str}}</view>
+					</view>
+
+					<!-- 投视频 -->
+					<block wx:if="{{hotel_info.forscreen_method !='0-1'}}">
+						<view wx:if="{{is_open_control==false}}" class="grant_auth flex-column-center-space_between">
+							<checkbox-group class="checkbox-group flex-column-flex_start-start" bindchange="checkboxChange">
+								<label class="items" wx:for="{{item}}" wx:key="key" wx:for-index="index">
+									<view wx:if="{{index==0}}">
+										<checkbox class="display_hide" value="{{item.value}}" checked="{{item.checked}}" disabled="{{item.disabled}}">{{item.name}}</checkbox>
+									</view>
+									<view wx:else>
+										<checkbox value="{{item.value}}" checked="{{item.checked}}" disabled="{{item.disabled}}">{{item.name}}</checkbox>
+									</view>
+								</label>
+							</checkbox-group>
+						</view>
+						<label class="full_width font_333333_26">公开即有机会在上千家餐厅电视中播放</label>
+						<view wx:if="{{is_share>0}}" class='speak_with_interest'>
+							<textarea class='text_input theme-textarea' name="public_text" maxlength='200' placeholder='顺便对公众说两句...'></textarea>
+						</view>
+					</block>
+
+					<view class="choose-launch-edition flex-row-center-space_around" wx:if="{{hotel_info.forscreen_method=='1-1'}}">
+						<button class="btn flex-column-flex_start-flex_start" form-type="submit" data-launch_type="classic" disabled='{{is_classic_disabel}}'>
+							<image class="background-pic" mode="aspectFit" src="/images/imgs/btn_hd.png"></image>
+							<view class="name">普通投屏</view>
+							<!-- <view class="description">适合小视频、短视频</view> -->
+						</button>
+						<button class="btn flex-column-flex_start-flex_start" form-type="submit" data-launch_type="speed" disabled='{{is_classic_disabel}}'>
+							<image class="background-pic" mode="aspectFit" src="/images/imgs/btn_rapid.png"></image>
+							<view class="name">极速投屏</view>
+							<!-- <view class="description">适合长视频、高清视频</view> -->
+						</button>
+					</view>
+
+					<view class="choose-launch-edition flex-row-center-space_around" wx:if="{{hotel_info.forscreen_method=='1-0'}}">
+						<button class="btn big flex-column-center-space_around theme-button-orange" form-type="submit" data-launch_type="classic" disabled='{{is_classic_disabel}}'>
+							<view class="name">投屏</view>
+							<!-- <view class="description">适合小视频、短视频</view> -->
+						</button>
+					</view>
+
+					<view class="choose-launch-edition flex-row-center-space_around" wx:if="{{hotel_info.forscreen_method=='0-1'}}">
+						<button class="btn big flex-column-center-space_around theme-button-dark" form-type="submit" data-launch_type="speed" disabled='{{is_speed_disabel}}'>
+							<view class="name">投屏</view>
+							<!-- <view class="description">适合长视频、高清视频</view> -->
+						</button>
+					</view>
+
+					<!-- <template is="beforeLaunchQuality" data="{{qualityList:[{name:'标清',checked:true},{name:'高清'},{name:'原片'}]}}" /> -->
+					<!-- <button class="savor-btn theme-button-dark" form-type="submit" hover-class="none" disabled='{{is_btn_disabel}}'>投屏</button> -->
+				</scroll-view>
+				<input class='display_hide' name="box_mac" value="{{box_mac}}"></input>
+				<input class='display_hide' name="openid" value="{{openid}}"></input>
+				<input class='display_hide' name="video" value="{{upload_vedio_temp}}"></input>
+				<input class='display_hide' name="is_pub_hotelinfo" value="{{is_pub_hotelinfo}}"></input>
+				<input class='display_hide' name="duration" value="{{duration}}"></input>
+				<input class='display_hide' name="is_share" value="{{is_share}}"></input>
+				<input class='display_hide' name="avatarUrl" value="{{avatarUrl}}"></input>
+				<input class='display_hide' name="nickName" value="{{nickName}}"></input>
+				<input class="display_hide" name="size" value="{{size}}"></input>
+				<input class='display_hide' name="is_open_simple" value="{{is_open_simple}}"></input>
+
+				<view class='page_bottom flex-row-center-center'>
+					<!-- <button class="savor-btn theme-button-dark" form-type="submit" hover-class="none" disabled='{{is_btn_disabel}}'>投屏</button> -->
+				</view>
+			</form>
+
+			<!-- 打断投屏弹窗 -->
+			<template is="interruptLaunchScreenWindow" data='{{popInterruptLaunchScreenWindow: showModal, funConfirm: "", funCancel: ""}}' />
+		</view>
+
+		<!-- 投屏之前引导蒙板 -->
+		<template is="beforeLaunchGuidedMask" wx:if="{{showGuidedMaskBeforLaunch}}" data='{{marginTop: "calc(564rpx + 46px + " + statusBarHeight + "px)", dataType: 3, openid: openid}}' />
+	</view>
+
+
+
+
+	<!-- ================================== 上传视频后 ================================== -->
+	<view wx:if="{{!showVedio}}" class="container flex-column-center-flex_start theme-container" style='height: calc(100vh - 46px - {{statusBarHeight}}px);'>
+		<view class="full_width full_height after_launch">
+			<view class='page_top theme-panel-2 flex-row-center-flex_start font_666666_28'>
+				<label>视频加载完成后，电视开始加载并自动播放</label>
+				<label class='link_relief'>
+					<navigator url="/pages/forscreen/relief">免责声明</navigator>
+				</label>
+			</view>
+			<view class='page_main'>
+				<view wx:if="{{is_open_control==false}}" class='cover full_width full_height'>
+					<!-- <video class="full_width full_height" src='{{oss_video_url}}' bindplay='onPlayAfterLauch' bindpause='onPauseAfterLauch' bindfullscreenchange='onFullScreenChangeAfterLauch'></video>-->
+					<image class="video-show" src="https://oss.littlehotspot.com/WeChat/MiniProgram/images/launch_video_bg.jpg"></image>
+					<view class="video-size">{{vide_size_str}}</view>
+				</view>
+
+			</view>
+
+			<!-- 重选 -->
+			<view class="page_bottom flex-row-center-center theme-panel">
+				<view class='button_group flex-row-center-space_between'>
+					<!-- 2021-03-18 13:56
+					<form bindsubmit="assist" wx:if="{{is_assist==1}}">
+						<input class="display_hide" name="box_mac" value="{{box_mac}}"></input>
+						<input class="display_hide" name="openid" value="{{openid}}"></input>
+						<input class="display_hide" name="forscreen_id" value="{{forscreen_id}}"></input>
+						<button class='savor-btn theme-button' form-type="submit">助力全网播放</button>
+					</form>
+					<button class='savor-btn theme-button-dark' bindtap='chooseMedia' data-boxmac="{{box_mac}}" data-openid="{{openid}}">重选视频</button>
+					<button class='savor-btn theme-button-dark' bindtap="exitForscreend" data-boxmac="{{box_mac}}" data-openid="{{openid}}">退出投屏</button>
+					-->
+					<view class="box flex-column-center-center">
+						<button class="btn album flex-column-center-center" bindtap='chooseMedia' data-boxmac="{{box_mac}}" data-openid="{{openid}}">
+							<image class="icon" mode="aspectFit" src='/images/icon2/F25D9C_pic.png'></image>
+							<view class="label theme-font1">相册投屏</view>
+						</button>
+					</view>
+					<view class="box flex-column-center-center" bindtap="gotoFriendForFiles">
+						<view class="btn WeChart flex-column-center-center">
+							<image class="icon" mode="aspectFit" src='/images/icon2/00D268_WeChart.png'></image>
+							<view class="label theme-font1">微信文件</view>
+						</view>
+					</view>
+					<view class="box flex-column-center-center" bindtap="gotoPhonefiles">
+						<view class="btn file flex-column-center-center">
+							<image class="icon" mode="aspectFit" src='/images/icon2/FF7E67_folder.png'></image>
+							<view class="label theme-font1">本地文件</view>
+						</view>
+					</view>
+					<view class="box flex-column-center-center">
+						<view class="btn exit flex-column-center-center" bindtap="exitForscreend" data-boxmac="{{box_mac}}" data-openid="{{openid}}">
+							<image class="icon" mode="aspectFit" src='/images/icon2/000000_exit.png'></image>
+							<view class="label theme-font1">退出投屏</view>
+						</view>
+					</view>
+				</view>
+			</view>
+
+			<view class='launch_history'>
+				<view class='title'>
+					<label class='font_666666_28'>投屏历史</label>
+				</view>
+				<scroll-view scroll-y="true" scroll-with-animation="true" bindscrolltolower="loadMore" data-openid='{{openid}}' data-box_mac='{{box_mac}}' data-launchType="{{launchType}}">
+					<!-- 有数据时 -->
+					<view class='history_list' wx:if="{{forscreen_history_list !=''}}">
+						<view wx:for="{{forscreen_history_list}}" wx:key="key" wx:for-item="bean" wx:for-index="index">
+							<view wx:if="{{bean.res_type==1}}" class="pic flex-row-flex_start-start">
+								<view class="weui-grids">
+									<view class="weui-grid" wx:for="{{bean.list}}" wx:key="pkey" wx:for-item="item" wx:for-index="indexs">
+										<image data-pkey="{{indexs}}" data-src="{{bean.list}}" mode='aspectFill' src="{{item.imgurl}}"></image>
+									</view>
+								</view>
+								<view class='btn'>
+									<button class="theme-button-dark" bindtap="replayHistory" data-res_type='{{bean.res_type}}' data-is_speed="{{bean.is_speed}}" data-box_mac='{{box_mac}}' data-openid='{{openid}}' data-forscreen_id="{{bean.forscreen_id}}" data-res_list='{{bean.list}}' data-avatarUrl="{{avatarUrl}}" data-nickName="{{nickName}}">重投</button>
+								</view>
+							</view>
+							<view wx:else class="video flex-row-flex_start-start">
+								<block>
+									<view class="cover" wx:for="{{bean.list}}" wx:key="pkey" wx:for-item="item" wx:for-index="indexs">
+										<navigator url="">
+											<image mode='aspectFill' src="{{item.imgurl}}"></image>
+										</navigator>
+										<view>
+											<navigator url="">
+												<label class="fa fa-play-circle-o icon theme-font4"></label>
+											</navigator>
+										</view>
+									</view>
+									<view class='btn'>
+										<button class="theme-button-dark" bindtap="replayHistory" data-res_type='{{bean.res_type}}' data-is_speed="{{bean.is_speed}}" data-box_mac='{{box_mac}}' data-openid='{{openid}}' data-forscreen_id="{{bean.forscreen_id}}" data-res_list='{{bean.list}}' data-avatarUrl="{{avatarUrl}}" data-nickName="{{nickName}}">重投</button>
+									</view>
+								</block>
+
+
+							</view>
+							<view wx:if="{{forscreen_history_list.length > index+1}}" class='line'></view>
+						</view>
+					</view>
+					<view class='no_data flex-row-center-flex_start' wx:else>
+						<view class="full_width flex-column-center-space_between">
+							<view>
+								<image style='width: 44rpx;height: 64rpx;' src='http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default_mine.png'></image>
+							</view>
+							<view>
+								<label class='font_666666_26'>暂无投屏记录</label>
+							</view>
+						</view>
+					</view>
+				</scroll-view>
+			</view>
+			<!-- <view class='launch_history' wx:else></view> -->
+
+			<!-- 广告面板 -->
+			<template is="adsPanelForSavorBusinessContacts" />
+		</view>
+
+		<!-- 投屏之后引导蒙板 -->
+		<template is="afterLaunchGuidedMask" wx:if="{{showGuidedMaskAfterLaunch}}" data='{{marginTop: "calc(608rpx + 46px + " + statusBarHeight + "px)", dataType: 4, openid: openid}}' />
+	</view>
+
+</block>
+<block wx:else>
+	<!-- ================================== 上传图片前 ================================== -->
+	<view wx:if="{{!showThird}}" class="container flex-column-center-flex_start theme-container" style='height: calc(100vh - 46px - {{statusBarHeight}}px);'>
+		<view class="full_width before_launch">
+			<template is="pageTop" data="{{res_head_desc:'图片'}}" />
+			<form bindsubmit="up_forscreen">
+				<scroll-view class='page_main flex-column-center-flex_start theme-container' scroll-y="true" scroll-with-animation="true">
+					<view class="weui-grids grids-frame">
+						<view class="weui-grid" wx:for="{{up_imgs}}" wx:key="key" wx:for-item="img" wx:for-index="index">
+							<view class="pic_show">
+								<image class="pic_show {{pic_show_cur[index]?'pic_show_cur':''}}" mode='aspectFill' data-img="{{tmp_imgs[index].oss_img}}" data-boxmac="{{box_mac}}" data-openid="{{openid}}" data-imgindex="{{index}}" data-imglen="{{img_lenth}}" src="{{img.tmp_img}}"></image>
+								<view class='upload_success_frame' wx:if="{{img.percent >= 100}}">
+									<label class="fa fa-check-circle fa-lg" style='margin:0 0 0 0;width:38rpx;height:38rpx;'></label>
+								</view>
+								<!-- <view class='upload_mask' wx:if="{{img.percent < 100}}">
+								<label>{{img.percent}}%</label>
+							</view> -->
+							</view>
+						</view>
+					</view>
+					<input class='display_hide' name="img_lenth" value="{{img_lenth}}"></input>
+					<input class="display_hide" name="box_mac" value="{{box_mac}}"></input>
+					<input class="display_hide" name="openid" value="{{openid}}"></input>
+					<input class="display_hide" name="is_pub_hotelinfo" value="{{is_pub_hotelinfo}}"></input>
+					<input class="display_hide" name="is_share" value="{{is_share}}"></input>
+					<input class="display_hide" name="avatarUrl" value="{{avatarUrl}}"></input>
+					<input class="display_hide" name="nickName" value="{{nickName}}"></input>
+
+					<!-- 投图片 -->
+					<view class='pic_text' wx:if="{{is_view_forscreen_char}}">
+						<textarea class='text_input theme-textarea' name="forscreen_char" maxlength='30' placeholder='电视展示时增加文字...'></textarea>
+					</view>
+					<block>
+						<view class='grant_auth flex-column-center-space_between'>
+							<checkbox-group class="checkbox-group flex-column-flex_start-start" bindchange="checkboxChange">
+								<label class="items" wx:for="{{item}}" wx:key="key" wx:for-index="index">
+									<view wx:if="{{index==0}}">
+										<checkbox class="display_hide" value="{{item.value}}" checked="{{item.checked}}" disabled="{{item.disabled}}">{{item.name}}</checkbox>
+									</view>
+									<view wx:else>
+										<checkbox value="{{item.value}}" checked="{{item.checked}}" disabled="{{item.disabled}}">{{item.name}}</checkbox>
+									</view>
+								</label>
+							</checkbox-group>
+						</view>
+						<label class="full_width font_333333_26">公开即有机会在上千家餐厅电视中播放</label>
+						<view wx:if="{{is_share>0}}" class='speak_with_interest'>
+							<textarea class='text_input theme-textarea' name="public_text" maxlength='200' placeholder='顺便对公众说两句...'></textarea>
+						</view>
+
+					</block>
+					<view class="choose-launch-edition flex-row-center-space_around" wx:if="{{hotel_info.forscreen_method=='1-1'}}">
+						<button class="btn flex-column-flex_start-flex_start" data-launch_type="classic" form-type="submit" disabled='{{is_btn_disabel}}'>
+							<image class="background-pic" mode="aspectFit" src="/images/imgs/btn_hd.png"></image>
+							<view class="name">普通投屏</view>
+							<!-- <view class="description">适合普通小图、照片</view> -->
+						</button>
+						<button class="btn flex-column-flex_start-flex_start" data-launch_type="speed" form-type="submit" disabled='{{is_btn_disabel}}'>
+							<image class="background-pic" mode="aspectFit" src="/images/imgs/btn_rapid.png"></image>
+							<view class="name">极速投屏</view>
+							<!-- <view class="description">适合高清大图、照片</view> -->
+						</button>
+					</view>
+					<view class="choose-launch-edition flex-row-center-space_around" wx:if="{{hotel_info.forscreen_method=='1-0'}}">
+						<button class="btn big flex-column-center-space_around theme-button-orange" data-launch_type="classic" form-type="submit" disabled='{{is_btn_disabel}}'>
+							<view class="name">投屏</view>
+							<!-- <view class="description">适合普通小图、照片</view> -->
+						</button>
+					</view>
+					<view class="choose-launch-edition flex-row-center-space_around" wx:if="{{hotel_info.forscreen_method=='0-1'}}">
+						<button class="btn big flex-column-center-space_around theme-panel-welcome-dark" data-launch_type="speed" form-type="submit" disabled='{{is_btn_disabel}}'>
+							<view class="name">投屏</view>
+							<!-- <view class="description">适合高清大图、照片</view> -->
+						</button>
+					</view>
+					<!-- <block>
+					<template is="beforeLaunchQuality" data="{{qualityList:qualityList}}" />
+				</block> -->
+					<!-- <button class="savor-btn theme-button-dark" form-type="submit" hover-class="none" disabled='{{is_btn_disabel}}'>投屏</button> -->
+				</scroll-view>
+				<view class='page_bottom flex-row-center-center'>
+					<!-- <button class="savor-btn theme-button-dark" form-type="submit" hover-class="none" disabled='{{is_btn_disabel}}'>投屏</button> -->
+				</view>
+			</form>
+
+			<!-- 打断投屏弹窗 -->
+			<template is="interruptLaunchScreenWindow" data='{{popInterruptLaunchScreenWindow: showModal, funConfirm: "", funCancel: ""}}' />
+		</view>
+
+		<!-- 投屏之前引导蒙板 -->
+		<template is="beforeLaunchGuidedMask" wx:if="{{showGuidedMaskBeforLaunch}}" data='{{marginTop: "calc(718rpx + 46px + " + statusBarHeight + "px)", dataType: 1, openid: openid}}' />
+	</view>
+
+
+
+
+
+	<!-- ================================== 上传图片后 ================================== -->
+	<view wx:if="{{showThird}}" class="container flex-column-center-flex_start theme-container" style='height: calc(100vh - 46px - {{statusBarHeight}}px);'>
+		<view class="full_width full_height after_launch">
+			<view class="page_top theme-panel-2 flex-row-center-flex_start font_666666_28">
+				<label>图片加载成功后，选择照片，电视开始展示</label>
+				<label class='link_relief'>
+					<navigator url="/pages/forscreen/relief">免责声明</navigator>
+				</label>
+			</view>
+
+			<view class='page_main'>
+				<form bindsubmit="up_forscreen">
+					<view class="weui-grids grids-frame">
+						<view class="weui-grid" wx:for="{{up_imgs}}" wx:key="key" wx:for-item="img" wx:for-index="index">
+							<view class="pic_show">
+								<image wx:if="{{img.is_sing_forscreen==1}}" class="pic_show {{pic_show_cur[index]?'pic_show_cur':''}}" mode='aspectFill' bindtap='up_single_pic' data-tmp_img="{{img.tmp_img}}" data-img="{{img.oss_img}}" data-img_id="{{img.img_id}}" data-boxmac="{{box_mac}}" data-openid="{{openid}}" data-imgindex="{{index}}" data-imglen="{{img_lenth}}" src="{{img.tmp_img}}" data-resource_size="{{img.resource_size}}"></image>
+								<image wx:elif="{{img.is_sing_forscreen==''}}" class="pic_show {{pic_show_cur[index]?'pic_show_cur':''}}" mode='aspectFill' bindtap='up_single_pic' data-img="{{img.oss_img}}" data-boxmac="{{box_mac}}" data-openid="{{openid}}" data-imgindex="{{index}}" data-imglen="{{img_lenth}}" src="{{img.tmp_img}}" data-resource_size="{{img.resource_size}}"></image>
+								<!-- <image wx:elif="{{tmp_imgs[index].is_sing_forscreen==''}}" bindtap='upload_wait' class="pic_show {{pic_show_cur[index]?'pic_show_cur':''}}" mode='aspectFill' data-img="{{tmp_imgs[index].oss_img}}" data-boxmac="{{box_mac}}" data-openid="{{openid}}" data-imgindex="{{index}}" data-imglen="{{img_lenth}}" src="{{img.tmp_img}}"></image> -->
+								<!-- <image wx:else bindtap='up_single_pic' class="pic_show {{pic_show_cur[index]?'pic_show_cur':''}}" mode='aspectFill' data-img="{{img.tmp_img}}" data-boxmac="{{box_mac}}" data-filename='{{filename_arr[index]}}' data-openid="{{openid}}" data-imgindex="{{index}}" data-imglen="{{img_lenth}}" data-resource_size="{{img.resource_size}}" src="{{img.tmp_img}}" ></image> -->
+								<view class='upload_success_frame' wx:if="{{img.percent >= 100}}">
+									<label class="fa fa-check-circle fa-lg" style='margin:0 0 0 0;width:38rpx;height:38rpx;'></label>
+								</view>
+								<view class='upload_mask' wx:if="{{img.percent < 100}}">
+									<label>{{img.percent}}%</label>
+								</view>
+								<input class="display_hide" name="upimgs{{index}}" value="{{img.tmp_img}}"></input>
+							</view>
+						</view>
+					</view>
+					<input class='display_hide' name="img_lenth" value="{{img_lenth}}"></input>
+					<input class="display_hide" name="box_mac" value="{{box_mac}}"></input>
+					<input class="display_hide" name="openid" value="{{openid}}"></input>
+					<input class="display_hide" name="is_pub_hotelinfo" value="{{is_pub_hotelinfo}}"></input>
+					<input class="display_hide" name="is_share" value="{{is_share}}"></input>
+					<input class="display_hide" name="avatarUrl" value="{{avatarUrl}}"></input>
+					<input class="display_hide" name="nickName" value="{{nickName}}"></input>
+				</form>
+
+
+			</view>
+
+			<!-- 重选 -->
+			<view class="page_bottom flex-row-center-center theme-panel">
+				<view class='button_group flex-row-center-space_between'>
+					<!-- 2021-03-18 14:52
+					<form bindsubmit="assist" wx:if="{{is_assist==1}}">
+						<input class="display_hide" name="box_mac" value="{{box_mac}}"></input>
+						<input class="display_hide" name="openid" value="{{openid}}"></input>
+						<input class="display_hide" name="forscreen_id" value="{{forscreen_id}}"></input>
+						<button class='savor-btn theme-button' form-type="submit">助力全网播放</button>
+					</form>
+					<button class='savor-btn theme-button-dark' bindtap="chooseMedia" data-boxmac="{{box_mac}}" data-openid="{{openid}}">重选照片</button>
+					<button class='savor-btn theme-button-dark' bindtap="exitForscreen" data-boxmac="{{box_mac}}">退出投屏</button>
+					-->
+					<view class="box flex-column-center-center">
+						<button class="btn album flex-column-center-center" bindtap='chooseMedia' data-boxmac="{{box_mac}}" data-openid="{{openid}}">
+							<image class="icon" mode="aspectFit" src='/images/icon2/F25D9C_pic.png'></image>
+							<view class="label theme-font1">相册投屏</view>
+						</button>
+					</view>
+					<view class="box flex-column-center-center" bindtap="gotoFriendForFiles">
+						<view class="btn WeChart flex-column-center-center">
+							<image class="icon" mode="aspectFit" src='/images/icon2/00D268_WeChart.png'></image>
+							<view class="label theme-font1">微信文件</view>
+						</view>
+					</view>
+					<view class="box flex-column-center-center" bindtap="gotoPhonefiles">
+						<view class="btn file flex-column-center-center">
+							<image class="icon" mode="aspectFit" src='/images/icon2/FF7E67_folder.png'></image>
+							<view class="label theme-font1">本地文件</view>
+						</view>
+					</view>
+					<view class="box flex-column-center-center">
+						<view class="btn exit flex-column-center-center" bindtap="exitForscreend" data-boxmac="{{box_mac}}" data-openid="{{openid}}">
+							<image class="icon" mode="aspectFit" src='/images/icon2/000000_exit.png'></image>
+							<view class="label theme-font1">退出投屏</view>
+						</view>
+					</view>
+				</view>
+			</view>
+			<view class='launch_history'>
+				<view class='title'>
+					<label class='font_666666_28'>投屏历史</label>
+				</view>
+				<scroll-view scroll-y="true" scroll-with-animation="true" bindscrolltolower="loadMore" data-openid='{{openid}}' data-box_mac='{{box_mac}}' data-launchType="{{launchType}}">
+					<!-- 有数据时 -->
+					<view class='history_list' wx:if="{{forscreen_history_list !=''}}">
+						<view wx:for="{{forscreen_history_list}}" wx:key="key" wx:for-item="bean" wx:for-index="index">
+							<view wx:if="{{bean.res_type==1}}" class="pic flex-row-flex_start-start">
+								<view class="weui-grids">
+									<view class="weui-grid" wx:for="{{bean.list}}" wx:key="pkey" wx:for-item="item" wx:for-index="indexs">
+										<image data-pkey="{{indexs}}" data-src="{{bean.list}}" mode='aspectFill' src="{{item.imgurl}}"></image>
+									</view>
+								</view>
+								<view class='btn'>
+									<button class="theme-button-dark" bindtap="replayHistory" data-res_type='{{bean.res_type}}' data-is_speed="{{bean.is_speed}}" data-box_mac='{{box_mac}}' data-openid='{{openid}}' data-forscreen_id="{{bean.forscreen_id}}" data-res_list='{{bean.list}}' data-avatarUrl="{{avatarUrl}}" data-nickName="{{nickName}}">重投</button>
+								</view>
+							</view>
+							<view wx:else class="video flex-row-flex_start-start">
+								<block>
+									<view class="cover" wx:for="{{bean.list}}" wx:key="pkey" wx:for-item="item" wx:for-index="indexs">
+										<navigator url="">
+											<image mode='aspectFill' src="{{item.imgurl}}"></image>
+										</navigator>
+										<view>
+											<navigator url="">
+												<label class="fa fa-play-circle-o icon theme-font4"></label>
+											</navigator>
+										</view>
+									</view>
+									<view class='btn'>
+										<button class="theme-button-dark" bindtap="replayHistory" data-res_type='{{bean.res_type}}' data-is_speed="{{bean.is_speed}}" data-box_mac='{{box_mac}}' data-openid='{{openid}}' data-forscreen_id="{{bean.forscreen_id}}" data-res_list='{{bean.list}}' data-avatarUrl="{{avatarUrl}}" data-nickName="{{nickName}}">重投</button>
+									</view>
+								</block>
+
+
+							</view>
+							<view wx:if="{{forscreen_history_list.length > index+1}}" class='line'></view>
+						</view>
+					</view>
+
+					<view class='no_data flex-row-center-flex_start' wx:else>
+						<view class="full_width flex-column-center-space_between">
+							<view>
+								<image style='width: 44rpx;height: 64rpx;' src='http://oss.littlehotspot.com/WeChat/MiniProgram/LaunchScreen/source/images/imgs/default_mine.png'></image>
+							</view>
+							<view>
+								<label class='font_666666_26'>暂无投屏记录</label>
+							</view>
+						</view>
+					</view>
+				</scroll-view>
+			</view>
+			<!-- <view class='launch_history' wx:else></view> -->
+
+			<!-- 广告面板 -->
+			<template is="adsPanelForSavorBusinessContacts" />
+		</view>
+
+		<!-- 投屏之后引导蒙板 -->
+		<template is="afterLaunchGuidedMask" wx:if="{{showGuidedMaskAfterLaunch}}" data='{{marginTop: "calc(608rpx + 46px + " + statusBarHeight + "px)", dataType: 2, openid: openid}}' />
+	</view>
+
+</block>
+
+<view class="body-view">
+	<loading hidden="{{hiddens}}" bindchange="loadingChange">{{load_fresh_char}}</loading>
+	<loading hidden="{{wifi_hidden}}" bindchange="loadingChange">正在连接包间wifi,请稍后...</loading>
+</view>
+
+<!-- 遥控器 -->
+<template is="remoteControlWindow" data='{{popRemoteControlWindow: popRemoteControlWindow,qrcode_img:qrcode_img,box_mac:box_mac,openid:openid,is_open_simple:is_open_simple}}' />
+<!-- 固定悬浮按钮组 -->
+<view wx:if="{{box_mac !='' && is_view_control==true}}">
+	<template is="fixedSuspensionButtonGroup" />
+</view>
+<!-- 投屏提示弹窗 -->
+<template wx:if="{{isOpenWind== true}}" is="tipsForLaunch" data="{{isWifi:openWind.isWifi,isError:openWind.isError,title:openWind.title,step:openWind.step,progress:openWind.progress,tip:openWind.tip,time:cutDownTime,DevOpsTips:DevOpsTips}}" />
+<!-- 投屏失败弹窗 -->
+<modal-2 show="{{showModal_2}}" width="690rpx" height='450rpx' border-radius="10rpx" title-text='投屏失败' title-color="#333333" title-background-color="unset" title-border-radius="0rpx" buttonWapperPadding='0' confirm-text='重新选择' confirm-color="#FFFFFF" confirm-background-color="#58525c" confirm-border-radius="10rpx" confirm-border-color="#58525c" cancel-text='取消' cancel-color='#333333' cancel-background-color="unset" cancel-border-color="#333333" cancel-border-radius="10rpx" bindclickMask='modalClickMask' bindcancel="cancelMaxVideo" bindconfirm='chooseVedio'>
+	<view class="flex-column-center-center" style="width:100%;height:100%;font-size: 32rpx;color:#333333;">
+		<view style="height:46rpx;">当前视频文件太大，无法投屏。</view>
+		<view style="height:46rpx;">为了您的投屏顺畅，请选择{{max_video_size}}以下的视频 。</view>
+		<view style="height:46rpx;">给您带来的不便敬请谅解~</view>
+	</view>
+</modal-2>
+<!-- 上传超时弹窗 -->
+<modal show="{{showModal_3}}" width="690rpx" height='450rpx' border-radius="10rpx" title-text='温馨提示' title-color="#333333" title-background-color="unset" title-border-radius="0rpx" buttonWapperPadding='15rpx' confirm-text='切换极速投屏' confirm-color="#FFFFFF" confirm-background-color="#F44444" confirm-border-radius="10rpx" cancel-text='继续投屏' cancel-color='#FFFFFF' cancel-background-color="#58525C" cancel-border-radius="10rpx" bindcancel="timeoutUploadCancel" bindconfirm='timeoutUploadConfirm'>
+	<view class="flex-column-center-flex_start" style="padding:30rpx 0 0 0;color:#333333;font-size:28rpx;">
+		<view>当前网络不太好，投屏缓慢。</view>
+		<view>您可切换到【极速投屏模式】提升投屏速度。</view>
+	</view>
+</modal>

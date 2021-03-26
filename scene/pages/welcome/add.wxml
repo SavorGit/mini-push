@@ -26,12 +26,14 @@
 		</view>
 		<view class="item text flex-row-center-flex_start">
 			<view class="label theme-font1">欢迎语</view>
-			<view class="value" style="border:0;">
-				<view class="show theme-font7">{{welcome_info.content}}</view>
+			<view class="value" style="height:unset;border:0;">
+				<view class="show three-line-overflow theme-font7">{{welcome_info.content}}</view>
 			</view>
 		</view>
+
 		<view class="item radio flex-row-flex_start-flex_start">
 			<view class="label theme-font1" style="padding-top:10rpx;">停留时间</view>
+
 			<view class="value">
 				<view class="show theme-font7">{{welcome_info.stay_time}}分钟</view>
 			</view>
@@ -129,7 +131,7 @@
 					</picker>
 				</view>
 			</view>
-			<view class="item radio flex-row-flex_start-flex_start">
+			<view class="item radio flex-row-center-flex_start">
 				<view class="label theme-font1">停留时间</view>
 				<view class="value">
 					<radio-group class="input" bindchange="playTimesChange">

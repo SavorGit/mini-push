@@ -68,33 +68,52 @@
   padding: 10rpx 0;
 }
 
-.functional-module-panel>.row>view,
-.functional-module-panel>.row>form {
-  width: 28%;
+.functional-module-panel>.row>.box {
+  width: 25%;
   display: block;
   text-align: center;
   padding: 10rpx 0rpx;
 }
 
-.functional-module-panel>.row button {
+.functional-module-panel>.row button,
+.functional-module-panel>.row>.box>.btn {
   line-height: unset;
   background: unset;
   padding: 10rpx;
 }
 
-.functional-module-panel>.row button[disabled] {
+.functional-module-panel>.row button[disabled],
+.functional-module-panel>.row>.box>.btn[disabled] {
   color: #999 !important;
   background: unset !important;
 }
 
 .functional-module-panel>.row>view>.icon,
-.functional-module-panel>.row button>.icon {
+.functional-module-panel>.row button>.icon,
+.functional-module-panel>.row>.box>.btn>.icon {
   width: 100rpx;
   height: 100rpx;
   margin: 0 auto;
   padding: 0;
   border: 0;
   border-radius: 10rpx;
+}
+
+.functional-module-panel>.row>view>.icon>image,
+.functional-module-panel>.row button>.icon>image,
+.functional-module-panel>.row>.box>.btn>.icon>image {
+  width: 70rpx;
+  height: 70rpx;
+}
+
+.functional-module-panel>.row>view>label,
+.functional-module-panel>.row button>label,
+.functional-module-panel>.row>.box>.btn>.label {
+  height: 50rpx;
+  line-height: 50rpx;
+  /* margin-left: 10rpx; */
+  font-size: 26rpx;
+  /* font-weight: bold; */
 }
 
 .eye-catching {
@@ -155,82 +174,91 @@
   }
 }
 
-
-.functional-module-panel>.row>view>.icon>image,
-.functional-module-panel>.row button>.icon>image {
-  width: 70rpx;
-  height: 70rpx;
-}
-
 .functional-module-panel>.row>view>.pic,
-.functional-module-panel>.row button>.pic {
+.functional-module-panel>.row button>.pic,
+.functional-module-panel>.row>.box>.btn>.pic {
   /* background-color: #ef6877; */
   /* background-color: rgb(253, 128, 36); */
   background-color: #F25D9C;
 }
 
 .functional-module-panel>.row>view>.video,
-.functional-module-panel>.row button>.video {
+.functional-module-panel>.row button>.video,
+.functional-module-panel>.row>.box>.btn>.video {
   /* background-color: #84ccc9; */
   /* background-color: rgb(251, 86, 155); */
   background-color: #7874F2;
 }
 
+.functional-module-panel>.row button>.wechart,
+.functional-module-panel>.row>.box>.btn>.wechart {
+  background-color: rgb(46, 184, 114);
+}
+
+.functional-module-panel>.row button>.evaluate,
+.functional-module-panel>.row>.box>.btn>.evaluate {
+  background-color: #FF7E67;
+}
+
+.functional-module-panel>.row button>.money-blessing,
+.functional-module-panel>.row>.box>.btn>.money-blessing {
+  background-color: #9BDF46;
+}
+
 .functional-module-panel>.row>view>.file,
-.functional-module-panel>.row button>.file {
+.functional-module-panel>.row button>.file,
+.functional-module-panel>.row>.box>.btn>.file {
   /* background-color: #f19ec2; */
   /* background-color: rgb(219, 190, 49); */
   background-color: #F6416C;
 }
 
 .functional-module-panel>.row>view>.birthday,
-.functional-module-panel>.row button>.birthday {
+.functional-module-panel>.row button>.birthday,
+.functional-module-panel>.row>.box>.btn>.birthday {
   /* background-color: #448aca; */
   /* background-color: rgb(213, 102, 251); */
   background-color: #4993FA;
 }
 
 .functional-module-panel>.row>view>.game,
-.functional-module-panel>.row button>.game {
+.functional-module-panel>.row button>.game,
+.functional-module-panel>.row>.box>.btn>.game {
   /* background-color: #f29b76; */
   /* background-color: rgb(160, 215, 125); */
   background-color: #9BDF46;
 }
 
 .functional-module-panel>.row>view>.history,
-.functional-module-panel>.row button>.history {
+.functional-module-panel>.row button>.history,
+.functional-module-panel>.row>.box>.btn>.history {
   /* background-color: #8f82bc; */
   background-color: #D566FB;
 }
 
 .functional-module-panel>.row>view>.welcome,
-.functional-module-panel>.row button>.welcome {
+.functional-module-panel>.row button>.welcome,
+.functional-module-panel>.row>.box>.btn>.welcome {
   /* background-color: rgb(91, 219, 249); */
-  background-color: #10DDC2;
+  /* background-color: #10DDC2; */
+  background-color: #7874F2;
 }
 
 .functional-module-panel>.row>view>.cards,
-.functional-module-panel>.row button>.cards {
+.functional-module-panel>.row button>.cards,
+.functional-module-panel>.row>.box>.btn>.cards {
   background-color: rgb(249, 99, 91);
 }
 
 .functional-module-panel>.row>view>.business,
-.functional-module-panel>.row button>.business {
+.functional-module-panel>.row button>.business,
+.functional-module-panel>.row>.box>.btn>.business {
   /* background-color: rgb(116, 168, 240); */
   background-color: #FF7E67;
 }
 
 .functional-module-panel>.row button[disabled]>view {
   background-color: #999 !important;
-}
-
-.functional-module-panel>.row>view>label,
-.functional-module-panel>.row button>label {
-  height: 50rpx;
-  line-height: 50rpx;
-  /* margin-left: 10rpx; */
-  font-size: 26rpx;
-  /* font-weight: bold; */
 }
 
 /* ==================================== 场景按钮面板 ==================================== */
@@ -307,25 +335,45 @@
 }
 
 .recommend-panel>.weui-grids>.weui-grid {
-  width: 350rpx;
-  height: 410rpx;
+  width: 340rpx;
+  height: 310rpx;
+  margin-right: 10rpx;
+  margin-bottom: 20rpx;
 }
 
 .recommend-panel>.weui-grids>.weui-grid:nth-child(even) {
-  width: 340rpx;
+  margin-right: 0;
 }
 
 .recommend-panel>.weui-grids>.weui-grid>.card {
   width: 340rpx;
-  height: 380rpx;
+  height: 310rpx;
   background-color: rgba(245, 246, 248, 0.5);
   border-radius: 5rpx;
 }
 
-.recommend-panel>.weui-grids>.weui-grid>.card>image {
+/* .recommend-panel>.weui-grids>.weui-grid>.card>image, */
+.recommend-panel>.weui-grids>.weui-grid>.card>.showcase,
+.recommend-panel>.weui-grids>.weui-grid>.card>.showcase>.cover {
   width: 340rpx;
   height: 250rpx;
+}
+
+.recommend-panel>.weui-grids>.weui-grid>.card>.showcase>.cover {
   border-radius: 5rpx;
+}
+
+.recommend-panel>.weui-grids>.weui-grid>.card>.showcase>.visits {
+  width: 110rpx;
+  height: 30rpx;
+  margin-top: -50rpx;
+  margin-left: 200rpx;
+  padding: 5rpx 10rpx;
+  border-radius: 23rpx;
+  font-size: 24rpx;
+  border: 3rpx solid rgba(255, 255, 255, 0.5);
+  color: #FFFFFF;
+  background-color: rgba(0, 0, 0, 0.3);
 }
 
 .recommend-panel>.weui-grids>.weui-grid>.card>.people,
@@ -346,46 +394,48 @@
   font-size: 20rpx;
 }
 
-.recommend-panel>.weui-grids>.weui-grid>.card>.flex-row-center-space_between>.user {
+.recommend-panel>.weui-grids>.weui-grid>.card>.row>.user {
   width: calc(100% - 100rpx);
   font-size: 24rpx;
 }
 
-.recommend-panel>.weui-grids>.weui-grid>.card>.flex-row-center-space_between>.user>image {
+.recommend-panel>.weui-grids>.weui-grid>.card>.row>.user>image {
   width: 32rpx;
   height: 32rpx;
   border: 1rpx solid #ddd;
   border-radius: 50%;
 }
 
-.recommend-panel>.weui-grids>.weui-grid>.card>.flex-row-center-space_between>.user>view {
+.recommend-panel>.weui-grids>.weui-grid>.card>.row>.user>view {
   width: calc(100% - 37rpx);
   margin-left: 5rpx;
 }
 
-.recommend-panel>.weui-grids>.weui-grid>.card>.flex-row-center-space_between>.sta {
+/* 2021-03-17 15：48
+.recommend-panel>.weui-grids>.weui-grid>.card>.row>.sta {
   width: 110rpx;
   font-size: 24rpx;
   text-align: right;
-}
+} */
 
-.recommend-panel>.weui-grids>.weui-grid>.card>.flex-row-center-space_between {
+.recommend-panel>.weui-grids>.weui-grid>.card>.row {
   width: calc(100% - 45rpx);
   height: 58rpx;
   padding-left: 25rpx;
   padding-right: 20rpx;
 }
 
-.recommend-panel>.weui-grids>.weui-grid>.card>.flex-row-center-space_between:last-child {
+/* 2021-03-17 16:00
+.recommend-panel>.weui-grids>.weui-grid>.card>.row:last-child {
   border-top: 2rpx solid #fff;
   height: 60rpx;
 }
 
-.recommend-panel>.weui-grids>.weui-grid>.card>.flex-row-center-space_between>.rank {
+.recommend-panel>.weui-grids>.weui-grid>.card>.row>.rank {
   font-size: 26rpx;
 }
 
-.recommend-panel>.weui-grids>.weui-grid>.card>.flex-row-center-space_between>.btn {
+.recommend-panel>.weui-grids>.weui-grid>.card>.row>.btn {
   width: 100rpx;
   height: 40rpx;
   line-height: 40rpx;
@@ -394,6 +444,23 @@
   margin: 0;
   border: 0;
   font-size: 22rpx;
+}
+*/
+.recommend-panel>.weui-grids>.weui-grid>.card>.row>.btn {
+  width: 48rpx;
+  height: 48rpx;
+  line-height: 48rpx;
+  text-align: center;
+  padding: 0;
+  margin: 0;
+  border: 0;
+  background-color: unset;
+  font-size: 22rpx;
+}
+
+.recommend-panel>.weui-grids>.weui-grid>.card>.row>.btn .bg {
+  width: 100%;
+  height: 100%;
 }
 
 /* 扫描弹窗提示内容 */

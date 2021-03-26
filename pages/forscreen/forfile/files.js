@@ -194,6 +194,7 @@ Page({
         resource_type:3,
         serial_number:app.globalData.serial_number,
       }, (data, headers, cookies, errMsg, statusCode) => {
+        console.log(data);
         var task_id = data.result.task_id;
         var file_status = data.result.status;
         var forscreen_id = data.result.forscreen_id;
@@ -648,7 +649,7 @@ Page({
                   duration: 2000
                 });
               }
-            })
+            },re => { }, { isShowLoading: false })
             
             if (polling_time == 0) {//超时 提示投屏失败
               clearInterval(timer8_0);

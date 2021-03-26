@@ -103,9 +103,10 @@ Page({
             is_share: false
           })
         }
-        self.isHaveCallBox(app.globalData.openid);
+        
         mta.Event.stat('jumpGoodsDetail',{'goodsid':goods_id})
       }
+      self.isHaveCallBox(app.globalData.openid);
       //获取商品详情
       self.getGoodsInfo(goods_id);
       //优选推荐
@@ -151,9 +152,10 @@ Page({
                 is_share: false
               })
             }
-            self.isHaveCallBox(openid);
+            
             mta.Event.stat('jumpGoodsDetail',{'goodsid':goods_id})
           }
+          self.isHaveCallBox(openid);
           //获取商品详情
           self.getGoodsInfo(goods_id);
           //优选推荐
@@ -169,7 +171,7 @@ Page({
       openid: openid,
     }, (data, headers, cookies, errMsg, statusCode) => {
       if (data.result.is_have == 1) {//如果已连接盒子
-        that.setData({box_mac: data.result.box_mac})
+        that.setData({box_mac: data.result.box_mac,hotel_info:data.result})
       }
     })
 
@@ -333,7 +335,6 @@ Page({
   },
   // 打开购买弹窗
   openBuyGoodsPopWindow: function (e) {
-    console.log(e)
     let that = this;
     var is_self = e.currentTarget.dataset.is_self;
     if (is_self == 1) {
@@ -505,7 +506,6 @@ Page({
   },
   selectAttrs:function(e){
     var that = this;
-    console.log(e)
     var index = e.currentTarget.dataset.index;
     var attr_ids = e.currentTarget.dataset.attr_ids;
 
@@ -635,7 +635,6 @@ Page({
   },
   //电视播放
   boxShow(e) {
-    console.log(e)
     let self = this;
     var box_mac = e.currentTarget.dataset.boxmac;
 
@@ -678,6 +677,57 @@ Page({
     wx.reLaunch({
       url: '/pages/index/index',
     })
+  },
+  //预览图片
+  previewImage: function(e) {
+    let self = this;
+    var urls = self.data.goods_info.detail_imgs;
+    var pkey = e.target.dataset.pkey;
+    wx.previewImage({
+      current: urls[pkey], // 当前显示图片的http链接
+      urls: urls, // 需要预览的图片http链接列表
+      success: function(res) {
+        
+      },
+      fail: function(e) {
+        
+      }
+    })
+  },
+  //遥控退出投屏
+  exitForscreen: function(e) {
+    var self = this;
+    openid = e.currentTarget.dataset.openid;
+    box_mac = e.currentTarget.dataset.box_mac;
+    var hotel_info = e.currentTarget.dataset.hotel_info;
+    if (box_mac == '') {
+      wx.showModal({
+        title: '提示',
+        content: "请使用微信扫电视二维码",
+        showCancel: false,
+        confirmText:'我知道了'
+      })
+    } else {
+      app.controlExitForscreen(openid, box_mac, hotel_info, self);
+    }
+    
+  },
+  //遥控调整音量
+  changeVolume: function(e) {
+    var self = this;
+    box_mac = e.currentTarget.dataset.box_mac;
+    var change_type = e.currentTarget.dataset.change_type;
+    var hotel_info = e.currentTarget.dataset.hotel_info;
+    if (box_mac == '') {
+      wx.showModal({
+        title: '提示',
+        content: "请使用微信扫电视二维码",
+        showCancel: false,
+        confirmText:'我知道了'
+      })
+    } else {
+      app.controlChangeVolume(openid, box_mac, change_type, hotel_info, self);
+    }
   },
   /**
    * 生命周期函数--监听页面初次渲染完成
