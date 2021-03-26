@@ -103,9 +103,10 @@ Page({
             is_share: false
           })
         }
-        self.isHaveCallBox(app.globalData.openid);
+        
         mta.Event.stat('jumpGoodsDetail',{'goodsid':goods_id})
       }
+      self.isHaveCallBox(app.globalData.openid);
       //获取商品详情
       self.getGoodsInfo(goods_id);
       //优选推荐
@@ -151,9 +152,10 @@ Page({
                 is_share: false
               })
             }
-            self.isHaveCallBox(openid);
+            
             mta.Event.stat('jumpGoodsDetail',{'goodsid':goods_id})
           }
+          self.isHaveCallBox(openid);
           //获取商品详情
           self.getGoodsInfo(goods_id);
           //优选推荐
