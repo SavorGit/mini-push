@@ -9,6 +9,7 @@
     "pages/forscreen/forscreen",
     "pages/forscreen/relief",
     "pages/forscreen/video/launch_video",
+    "pages/forscreen/image/launch_image",
     "pages/forscreen/forimages/index",
     "pages/forscreen/forvideo/index",
     "pages/forscreen/history/list",

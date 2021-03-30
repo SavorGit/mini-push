@@ -192,10 +192,21 @@ Page({
     var title   = e.currentTarget.dataset.rts.title;
     var res_id  = e.currentTarget.dataset.rts.res_id;
     var filename= e.currentTarget.dataset.rts.filename;
-    
-    var imgurl  = e.currentTarget.dataset.rts.imgurl;
-    imgurl = encodeURIComponent(imgurl);
-    var url="/pages/forscreen/video/launch_video?video_url="+res_url+"&video_name="+title+"&box_mac="+box_mac+"&res_id="+res_id+"&filename="+filename+"&video_img_url="+imgurl
+    var res_type = e.currentTarget.dataset.rts.res_type;
+    var media_type = e.currentTarget.dataset.rts.media_type;
+    var is_hot = 0;
+    if(res_type==5){
+      is_hot = 2;
+    }
+
+    if(media_type==1){
+      var imgurl  = e.currentTarget.dataset.rts.imgurl;
+      imgurl = encodeURIComponent(imgurl);
+      var url="/pages/forscreen/video/launch_video?video_url="+res_url+"&video_name="+title+"&box_mac="+box_mac+"&res_id="+res_id+"&filename="+filename+"&video_img_url="+imgurl+'&is_hot='+is_hot
+      
+    }else {
+      var url = "/pages/forscreen/image/launch_image?res_id="+res_id+"&box_mac="+box_mac+'&is_hot=2'
+    }
     wx.navigateTo({
       url: url,
     })

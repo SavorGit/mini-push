@@ -24,8 +24,7 @@ Page({
    */
   onLoad: function (options) {
     var that = this;
-    that.getLifeTypeList();  //获取生活分类列表
-    that.getBanner();        //获取广告banner
+    
     wx.getLocation({
       type: 'wgs84',
       isHighAccuracy:true,
@@ -82,7 +81,7 @@ Page({
     }, (data, headers, cookies, errMsg, statusCode) => {
       var category_list = data.result.category_list;
       that.setData({category_list:category_list})
-    })
+    },re => { }, { isShowLoading: false })
   },
   //获取广告banner
   getBanner:function(e){
@@ -92,7 +91,7 @@ Page({
     }, (data, headers, cookies, errMsg, statusCode) => {
       var banner_list = data.result[4];
       that.setData({banner_list:banner_list})
-    })
+    },re => { }, { isShowLoading: false })
   },
   //上拉刷新
   loadMore: function (e) {
@@ -138,7 +137,8 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    
+    this.getLifeTypeList();  //获取生活分类列表
+    this.getBanner();        //获取广告banner
   },
 
   /**

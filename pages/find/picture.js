@@ -347,6 +347,45 @@ Page({
       var pubdetail = [];
       pubdetail.push(media_info);
       var is_hot = 0;
+    }else if(type==3){
+      
+      var is_hot = 2;
+      if(res_type==1){
+        var action = 11; //发现图片点播
+        var res_url = pubdetail[0].res_url;
+        var filename = pubdetail[0].filename;
+        var resource_size = pubdetail[0].resource_size;
+        var forscreen_url = pubdetail[0].forscreen_url;
+        var res_id = e.currentTarget.dataset.ads_id;
+        var jump_url = '/pages/forscreen/image/launch_image?box_mac='+box_mac+'&is_hot=2&res_id='+res_id+'&filename='+filename+'&resource_size='+resource_size+'&forscreen_url='+forscreen_url+'&res_url='+res_url;
+      }else {
+        var hot_play = that.data.hot_play;
+        var hot_paly_info = hot_play[index];
+        var pubdetail = hot_paly_info['pubdetail'];
+        var res_id = hot_paly_info.ads_id;
+        var video_name= hot_paly_info.title;
+        var video_url = pubdetail[0].res_url;
+        var filename = pubdetail[0].filename;
+        var resource_size = pubdetail[0].resource_size;
+        var duration = pubdetail[0].duration;
+        var res_nums = 1;
+        var res_type = 2;
+        var action = 12;
+        var img_url = encodeURIComponent(pubdetail[0].img_url);
+
+        var jump_url = '/pages/forscreen/video/launch_video?res_id='+res_id+'&video_url='+video_url+'&video_name='+video_name+'&box_mac='+box_mac+'&filename='+filename+'&video_img_url='+img_url+'&is_hot=2';
+        
+        var media_info = {};
+        media_info.forscreen_url = "media/resource/"+ filename;
+        media_info.filename      = filename;
+        media_info.res_id = res_id;
+        media_info.resource_size = resource_size;
+        media_info.duration = duration;
+        var pubdetail = [];
+        pubdetail.push(media_info);
+      
+      }
+
     }
     
     if(box_mac!='' && typeof(box_mac)!='undefined'){

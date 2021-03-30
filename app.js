@@ -65,7 +65,10 @@ App({
       //图集
       if(is_hot==1){
         var netty_action = 11;
-      }else {
+      }else if(is_hot==2){
+        var netty_action = 14;
+      }
+      else {
         var netty_action = 10;
       }
       forscreen_char = pubdetail[0].forscreen_char;
@@ -202,7 +205,10 @@ App({
         }else {
           if(is_hot==1){
             var netty_action = 12;
-          }else {
+          }else if(is_hot==2){
+            var netty_action = 15;
+          }
+          else {
             var netty_action = 2
           }
           
@@ -612,7 +618,7 @@ App({
   //扫码
   scanQrcode: function (pageid = 1) {
     var that = this;
-    /*wx.showModal({
+    wx.showModal({
       title: '提示',
       content: "请扫电视二维码",
       showCancel: true,
@@ -669,13 +675,13 @@ App({
     if (pages.length) {
       currPage = pages[pages.length - 1];
     }
-    mta.Event.stat('popScanQrcode', { 'url': currPage.__route__ })*/
-    wx.showModal({
+    mta.Event.stat('popScanQrcode', { 'url': currPage.__route__ })
+    /*wx.showModal({
       title: '提示',
       content: "请使用微信扫电视二维码",
       showCancel: false,
       confirmText:'我知道了'
-    })
+    })*/
   },
   onLaunch: function () {
     var oss_tmp_key = this.globalData.oss_access_key_id;

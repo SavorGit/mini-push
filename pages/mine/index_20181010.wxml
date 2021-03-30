@@ -138,7 +138,7 @@
 							</navigator>
 						</view>
 						<view class='yingtao' wx:else>
-							<navigator wx:if="{{bean.type==1 || bean.type==3}}" url=""  data-rts="{{bean}}" bindtap="clickLikeContentPro">
+							<navigator wx:if="{{bean.type==1 || bean.type==3 || bean.type==5}}" url=""  data-rts="{{bean}}" bindtap="clickLikeContentPro">
 								<image class="pic_show" mode='aspectFill' src="{{bean.imgurl}}"></image>
 
 								<view class='cover'>

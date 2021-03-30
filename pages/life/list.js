@@ -70,9 +70,13 @@ Page({
   //获取菜系列表
   getFoodStyleList:function(cate_id){
     var that = this;
+    var type=8;
+    if(cate_id==120){
+      type = 101
+    }
     utils.PostRequest(api_v_url + '/category/categorylist', {
       cate_id:cate_id,
-      type:101
+      type:type
     }, (data, headers, cookies, errMsg, statusCode) => {
       that.setData({
         cuisineArray: data.result.category_name_list,
@@ -264,6 +268,14 @@ Page({
     var perCapitaPayIndex = that.data.perCapitaPayIndex;
     var avg_exp_id = avg_exp_list[perCapitaPayIndex].id; //人均消费id
     page = 1;
+
+    if(cate_id==120){
+
+    }else{
+      cate_id = food_style_id;
+      food_style_id = 0;
+      
+    }
     that.getHotelList(cate_id,page,area_id, county_id, food_style_id, avg_exp_id);
   },
   //切换消费水平

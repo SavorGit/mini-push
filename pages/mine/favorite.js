@@ -90,6 +90,13 @@ Page({
       var mobile_brand = app.globalData.mobile_brand;
       var mobile_model = app.globalData.mobile_model;
 
+      var type = e.currentTarget.dataset.type;
+      if(type==5){
+        var action = 15;
+      }else {
+        var action = 5;
+      }
+
       utils.PostRequest(api_v_url + '/User/isForscreenIng', {
         box_mac: box_mac
       }, (data, headers, cookies, errMsg, statusCode) => {
@@ -102,7 +109,7 @@ Page({
                 if (res.confirm) {
                   utils.PostRequest(api_url + '/Netty/Index/pushnetty', {
                     box_mac: box_mac,
-                    msg: '{ "action": 5,"url":"' + vediourl + '","filename":"' + filename + '","forscreen_id":' + timestamp + ',"resource_id":' + timestamp + ',"openid":"'+openid+'"}',
+                    msg: '{ "action": '+action+',"url":"' + vediourl + '","filename":"' + filename + '","forscreen_id":' + timestamp + ',"resource_id":' + timestamp + ',"openid":"'+openid+'"}',
                   }, (data, headers, cookies, errMsg, statusCode) => {
                     wx.showToast({
                       title: '点播成功,电视即将开始播放',
@@ -140,7 +147,7 @@ Page({
 
             utils.PostRequest(api_url + '/Netty/Index/pushnetty', {
               box_mac: box_mac,
-              msg: '{ "action": 5,"url":"' + vediourl + '","filename":"' + filename + '","forscreen_id":' + timestamp + ',"resource_id":' + timestamp + ',"openid":"'+openid+'"}',
+              msg: '{ "action": '+action+',"url":"' + vediourl + '","filename":"' + filename + '","forscreen_id":' + timestamp + ',"resource_id":' + timestamp + ',"openid":"'+openid+'"}',
             }, (data, headers, cookies, errMsg, statusCode) => {
               wx.showToast({
                 title: '点播成功,电视即将开始播放',
@@ -186,14 +193,29 @@ Page({
     pubdetail = e.currentTarget.dataset.pubdetail;
     var res_type = e.currentTarget.dataset.res_type;
     var res_nums = e.currentTarget.dataset.res_nums;
+    var type = e.currentTarget.dataset.type;
+    var media_type = e.currentTarget.dataset.media_type;
+
     var forscreen_char = '';
-    if (res_type == 1) {
+    
+    if(type==5){
+      var pubdetail_arr = [];
+      pubdetail_arr.push(pubdetail);
+      pubdetail = pubdetail_arr
       var action = 11; //发现图片点播
-    } else if (res_type == 2) {
-      var action = 12; //发现视频点播
+     var res_type = 1;
+      var is_hot = 2;
+      var res_nums = 1;
+    }else {
+      if (res_type == 1) {
+        var action = 11; //发现图片点播
+      } else if (res_type == 2) {
+        var action = 12; //发现视频点播
+      }
+      var is_hot = 0;
     }
     var hotel_info = that.data.hotel_info;
-    app.boxShow(box_mac, find_id, pubdetail, res_type, res_nums, action, hotel_info, that);
+    app.boxShow(box_mac, find_id, pubdetail, res_type, res_nums, action, hotel_info, that,is_hot);
 
 
 
