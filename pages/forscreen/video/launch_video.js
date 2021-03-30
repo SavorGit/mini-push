@@ -20,6 +20,7 @@ Page({
     is_replay_disabel:false,
     showControl: false,   //显示授权登陆弹窗,
     is_box_show:false,
+    is_share:false
   },
 
   /**
@@ -27,22 +28,99 @@ Page({
    */
   onLoad: function (options) {
     console.log(options)
-    is_hot = 0;
-    if(typeof(options.is_hot)!='undefined'){
-      is_hot = options.is_hot;
-    }
     var that = this;
-    var user_info = wx.getStorageSync("savor_user_info");
-    var res_id     = options.res_id;  //资源id
-    var video_url  = options.video_url;
-    var video_name = decodeURIComponent(options.video_name);
-    box_mac    = options.box_mac;
-    openid = user_info.openid;
-    var filename = options.filename;
-    var video_img_url = decodeURIComponent(options.video_img_url);
+    if(typeof(options.is_share)!='undefined'){
+      var is_share = options.is_share
+      that.setData({is_share:is_share})
+    }
+    if (app.globalData.openid && app.globalData.openid != '' && typeof(app.globalData.openid)!='undefined') {
+      is_hot = 0;
+      if(typeof(options.is_hot)!='undefined'){
+        is_hot = options.is_hot;
+      }
+      
+      var user_info = wx.getStorageSync("savor_user_info");
+      var res_id     = options.res_id;  //资源id
+      var video_url  = options.video_url;
+      var video_name = decodeURIComponent(options.video_name);
+      box_mac    = options.box_mac;
+      openid     = app.globalData.openid
+      var filename = options.filename;
+      var video_img_url = decodeURIComponent(options.video_img_url);
+      that.setData({
+        openid    : openid,
+        res_id    : res_id,
+        video_url : video_url,
+        video_name: video_name,
+        video_img_url: video_img_url,
+        box_mac   : box_mac,
+        openid    : openid,
+       
+        filename  : filename,
+      })
 
+      that.getHotplaylist(box_mac,res_id);
+      that.getVideoInfo(openid,res_id);
+      that.isHaveCallBox(openid);
+    }else {
+      app.openidCallback = openid => {
+        is_hot = 0;
+        if(typeof(options.is_hot)!='undefined'){
+          is_hot = options.is_hot;
+        }
+        var res_id     = options.res_id;  //资源id
+        var video_url  = options.video_url;
+        var video_name = decodeURIComponent(options.video_name);
+        box_mac    = options.box_mac;
+        var filename = options.filename;
+        var video_img_url = decodeURIComponent(options.video_img_url);
+        that.setData({
+          openid    : openid,
+          res_id    : res_id,
+          video_url : video_url,
+          video_name: video_name,
+          video_img_url: video_img_url,
+          box_mac   : box_mac,
+          openid    : openid,
+         
+          filename  : filename,
+        })
 
-    that.getHotplaylist(box_mac,res_id);
+        that.getHotplaylist(box_mac,res_id);
+        that.getVideoInfo(openid,res_id);
+        that.isHaveCallBox(openid);
+        
+      }
+    }
+    
+    
+    //获取节目单视频详情
+
+    
+    
+    
+    
+  },
+  getVideoInfo:function(openid,res_id){
+    var that = this;
+    utils.PostRequest(api_v_url+'/Demand/getVideoInfo', {
+      res_id : res_id,
+      openid : openid,
+    }, (data, headers, cookies, errMsg, statusCode) => {
+      that.setData({
+        
+        is_collect: data.result.is_collect,
+        collect_num: data.result.collect_num,
+        share_num : data.result.share_num,
+        play_num  : data.result.play_num,
+        res_type  : data.result.res_type, 
+      
+      })
+      
+    })
+  },
+  isHaveCallBox:function(openid){
+    var that = this;
     utils.PostRequest(api_v_url + '/index/isHaveCallBox', {
       openid:openid
     }, (data, headers, cookies, errMsg, statusCode) => {
@@ -54,36 +132,10 @@ Page({
         })
       }
     })
-    //获取节目单视频详情
-
-    utils.PostRequest(api_v_url+'/Demand/getVideoInfo', {
-      res_id : res_id,
-      openid : openid,
-    }, (data, headers, cookies, errMsg, statusCode) => {
-      that.setData({
-        openid    : openid,
-        res_id    : res_id,
-        video_url : video_url,
-        video_name: video_name,
-        video_img_url: video_img_url,
-        box_mac   : box_mac,
-        openid    : openid,
-        is_collect: data.result.is_collect,
-        collect_num: data.result.collect_num,
-        share_num : data.result.share_num,
-        play_num  : data.result.play_num,
-        res_type  : data.result.res_type, 
-        filename  : filename,
-      })
-      
-    })
-    
-    
-    
   },
   getHotplaylist:function(box_mac='',res_id){//获取热播内容
     var that = this;
-    utils.PostRequest(api_v_url + '/content/getHotplaylist', {
+    utils.PostRequest(api_v_url + '/content/hotplay', {
       page: 1,
       box_mac:box_mac
     }, (data, headers, cookies, errMsg, statusCode) => {
@@ -157,6 +209,7 @@ Page({
     var video_name = that.data.video_name;
     var video_img = that.data.video_img_url;
     var share_num = that.data.share_num;
+    var filename = that.data.filename;
     
     if (res.from === 'button' || res.from=='menu') {
       
@@ -176,11 +229,15 @@ Page({
         app.showToast('网络异常，请稍后重试');
       })
 
-      
+      if(res_type==5){
+        var share_url = '/pages/forscreen/video/launch_video?res_id='+res_id+'&is_hot=2&is_share=1&video_url='+video_url+'&video_name='+video_name+'&box_mac=&filename='+filename+'&video_img_url='+video_img+'';
+      }else {
+        var share_url = '/pages/share/video?res_id=' + res_id + '&type=3&is_share=true'
+      }
       // 来自页面内转发按钮
       return {
         title: video_name,
-        path: '/pages/share/video?res_id=' + res_id + '&type=3',
+        path: share_url,
         imageUrl: video_img,
         success: function (res) {
           

@@ -1,6 +1,7 @@
 <!--pages/find/picture.wxml-->
 <import src="/pages/template/commons" />
-<template is="navigationBarForTwoLevel" data='{{statusBarHeight: statusBarHeight,titleText:"热点投屏"}}' />
+<template is="navigationBarForShare" data='{{statusBarHeight: statusBarHeight,titleText:"热点投屏"}}' wx:if="{{is_share==true}}" />
+<template is="navigationBarForTwoLevel" data='{{statusBarHeight: statusBarHeight,titleText:"热点投屏"}}' wx:else />
 
 <!-- 发现图片落地页 -->
 <view class="container flex-column-center-flex_start theme-container" style='height: calc(100vh - {{46 + statusBarHeight}}px);'>
