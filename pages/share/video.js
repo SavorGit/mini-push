@@ -47,7 +47,18 @@ Page({
           data: { 'openid': app.globalData.openid },
         })
       })
-      
+      utils.PostRequest(api_v_url+'/Share/showVideo', {
+        'res_id': res_id,
+        'type': type,
+        'openid': openid,
+      }, (data, headers, cookies, errMsg, statusCode) => {
+        info = data.result;
+        that.setData({
+          info: data.result,
+          openid: openid,
+          
+        })
+      })
       
     } else {
       app.openidCallback = openid => {
@@ -72,24 +83,25 @@ Page({
           })
           //判断用户是否注册结束
          
+          utils.PostRequest(api_v_url+'/Share/showVideo', {
+            'res_id': res_id,
+            'type': type,
+            'openid': openid,
+          }, (data, headers, cookies, errMsg, statusCode) => {
+            info = data.result;
+            that.setData({
+              info: data.result,
+              openid: openid,
+              
+            })
+          })
         }
       }
     }
     //var forscreen_id = options.forscreen_id;
     var user_info = wx.getStorageSync("savor_user_info");
-    openid = user_info.openid;
-    utils.PostRequest(api_v_url+'/Share/showVideo', {
-      'res_id': res_id,
-      'type': type,
-      'openid': openid,
-    }, (data, headers, cookies, errMsg, statusCode) => {
-      info = data.result;
-      that.setData({
-        info: data.result,
-        openid: openid,
-        
-      })
-    })
+    //openid = user_info.openid;
+    
     
     
   },

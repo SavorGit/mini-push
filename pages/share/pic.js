@@ -28,7 +28,22 @@ Page({
     var that = this;
     var forscreen_id = options.forscreen_id;
     var user_info = wx.getStorageSync("savor_user_info");
-    openid = user_info.openid;
+    if (app.globalData.openid && app.globalData.openid != '' && typeof(app.globalData.openid)!='undefined') {
+      openid = app.globalData.openid
+      that.showPic(openid,forscreen_id);
+      that.isHaveCallBox(openid);
+    }else {
+      app.openidCallback = openid => {
+        that.showPic(openid,forscreen_id);
+        that.isHaveCallBox(openid);
+      }
+    }
+    
+    
+    
+  },
+  showPic:function(openid,forscreen_id){
+    var that = this;
     utils.PostRequest(api_v_url+'/Discovery/showPic', {
       'forscreen_id':forscreen_id,
       'openid':openid,
@@ -38,6 +53,9 @@ Page({
         openid:openid
       })
     })
+  },
+  isHaveCallBox:function(openid){
+    var that = this;
     utils.PostRequest(api_v_url+'/index/isHaveCallBox', {
       openid:openid,
     }, (data, headers, cookies, errMsg, statusCode) => {
@@ -57,7 +75,6 @@ Page({
         }
 
     })
-    
   },
   previewImage: function (e) {
     var current = e.target.dataset.src;
