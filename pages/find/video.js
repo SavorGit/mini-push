@@ -20,6 +20,7 @@ Page({
     is_replay_disabel: true,
     showControl: false,
     is_box_show: false,
+    is_share:0
   },
 
   /**
@@ -35,6 +36,10 @@ Page({
     if(typeof(options.is_hot)!='undefined'){
       var is_hot = options.is_hot;
     }
+    if(typeof(options.is_share)!='undefined'){
+      var is_share = options.is_share;
+      self.setData({is_share:is_share});
+    }
     let pages = getCurrentPages(); //当前页面栈
     if (pages.length > 1) {
       self.setData({
@@ -47,12 +52,43 @@ Page({
     }
 
     var user_info = wx.getStorageSync("savor_user_info");
-    openid = user_info.openid;
-    box_mac = options.box_mac;
 
-    //wx.hideShareMenu();
-    var forscreen_id = options.forscreen_id;
-    self.getHotplaylist(box_mac,forscreen_id);
+    box_mac = options.box_mac;
+    if (app.globalData.openid && app.globalData.openid != '' && typeof(app.globalData.openid)!='undefined') {
+      openid = app.globalData.openid;
+      var forscreen_id = options.forscreen_id;
+      self.getHotplaylist(box_mac,forscreen_id);
+      self.isHaveCallBox(openid);
+      self.showPic(forscreen_id,openid,res_id);
+      self.setData({
+        forscreen_id:forscreen_id,
+        
+        openid: openid,
+        box_mac: box_mac,
+        is_replay_disabel:false,
+        is_hot:is_hot
+      })
+    }else {
+      app.openidCallback = openid => {
+       var forscreen_id = options.forscreen_id;
+       self.getHotplaylist(box_mac,forscreen_id);
+       self.isHaveCallBox(openid);
+       self.showPic(forscreen_id,openid,res_id);
+       self.setData({
+        forscreen_id:forscreen_id,
+        openid: openid,
+        box_mac: box_mac,
+        is_replay_disabel:false,
+        is_hot:is_hot
+      })
+      }
+    }
+
+
+    
+  },
+  isHaveCallBox:function(openid){
+    var self = this;
     utils.PostRequest(api_v_url + '/index/isHaveCallBox', {
       openid:openid
     }, (data, headers, cookies, errMsg, statusCode) => {
@@ -64,26 +100,23 @@ Page({
         })
       }
     })
+  },
+  showPic:function(forscreen_id,openid,res_id){
+    var self = this;
     utils.PostRequest(api_v_url + '/Find/showPic', {
       forscreen_id: forscreen_id,
         openid: openid,
         res_id:res_id,
     }, (data, headers, cookies, errMsg, statusCode) => {
       self.setData({
-        forscreen_id:forscreen_id,
         videoinfo: data.result,
         play_num: data.result.play_num,
         collect_num: data.result.collect_num,
         share_num: data.result.share_num,
         is_collect: data.result.is_collect,
-        openid: openid,
-        box_mac: box_mac,
-        is_replay_disabel:false,
-        is_hot:is_hot
+        
       })
     })
-    
-    
   },
   getHotplaylist:function(box_mac='',forscreen_id){//获取热播内容
     var that = this;
@@ -279,13 +312,14 @@ Page({
     var hotel_info = e.currentTarget.dataset.hotel_info;
     var index = e.currentTarget.dataset.index;
     var type  = e.currentTarget.dataset.type;
+    var is_share = that.data.is_share;
     if(type==1){
       if (res_type == 1) {
         var action = 11; //发现图片点播
-        var jump_url = '/pages/find/picture?box_mac='+box_mac+'&forscreen_id='+forscreen_id+'&is_hot=1&res_id='+res_id;
+        var jump_url = '/pages/find/picture?is_share='+is_share+'&box_mac='+box_mac+'&forscreen_id='+forscreen_id+'&is_hot=1&res_id='+res_id;
       } else if (res_type == 2) {
         var action = 12; //发现视频点播
-        var jump_url = '/pages/find/video?box_mac='+box_mac+'&forscreen_id='+forscreen_id+'&is_hot=1&res_id='+res_id;
+        var jump_url = '/pages/find/video?is_share='+is_share+'&box_mac='+box_mac+'&forscreen_id='+forscreen_id+'&is_hot=1&res_id='+res_id;
       }
       var is_hot = 1;
     }else if(type==2){
@@ -303,7 +337,7 @@ Page({
       var action = 5;
       var img_url = encodeURIComponent(pubdetail[0].img_url);
 
-      var jump_url = '/pages/forscreen/video/launch_video?res_id='+res_id+'&video_url='+video_url+'&video_name='+video_name+'&box_mac='+box_mac+'&filename='+filename+'&video_img_url='+img_url;
+      var jump_url = '/pages/forscreen/video/launch_video?is_share='+is_share+'&res_id='+res_id+'&video_url='+video_url+'&video_name='+video_name+'&box_mac='+box_mac+'&filename='+filename+'&video_img_url='+img_url;
       
       var media_info = {};
       media_info.forscreen_url = "media/resource/"+ filename;
@@ -324,7 +358,7 @@ Page({
         var resource_size = pubdetail[0].resource_size;
         var forscreen_url = pubdetail[0].forscreen_url;
         var res_id = e.currentTarget.dataset.ads_id;
-        var jump_url = '/pages/forscreen/image/launch_image?box_mac='+box_mac+'&is_hot=2&res_id='+res_id+'&filename='+filename+'&resource_size='+resource_size+'&forscreen_url='+forscreen_url+'&res_url='+res_url;
+        var jump_url = '/pages/forscreen/image/launch_image?is_share='+is_share+'&box_mac='+box_mac+'&is_hot=2&res_id='+res_id+'&filename='+filename+'&resource_size='+resource_size+'&forscreen_url='+forscreen_url+'&res_url='+res_url;
       }else {
         var hot_play = that.data.hot_play;
         var hot_paly_info = hot_play[index];
@@ -340,7 +374,7 @@ Page({
         var action = 12;
         var img_url = encodeURIComponent(pubdetail[0].img_url);
 
-        var jump_url = '/pages/forscreen/video/launch_video?res_id='+res_id+'&video_url='+video_url+'&video_name='+video_name+'&box_mac='+box_mac+'&filename='+filename+'&video_img_url='+img_url+'&is_hot=2';
+        var jump_url = '/pages/forscreen/video/launch_video?is_share='+is_share+'&res_id='+res_id+'&video_url='+video_url+'&video_name='+video_name+'&box_mac='+box_mac+'&filename='+filename+'&video_img_url='+img_url+'&is_hot=2';
         
         var media_info = {};
         media_info.forscreen_url = "media/resource/"+ filename;
