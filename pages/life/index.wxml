@@ -54,7 +54,7 @@
 									<view class='irt-left'>
 										<view class='hotel-name  one-line-overflow'>{{bean.name}}</view>
 										<view class='irtl-bottom theme-font3'>
-											<label>{{bean.food_name}}</label>
+											<label>{{bean.tag_name}}</label>
 											<label wx:if="{{bean.avg_expense>0}}">￥{{bean.avg_expense}}/人</label>
 											<label wx:else></label>
 										</view>
