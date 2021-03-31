@@ -24,26 +24,29 @@
 }
 
 /* ========================================= 分类按钮面板 ========================================= */
-
 .category>.body>.btn {
-  width: calc(20% - 23rpx);
-  margin: 10rpx;
+  width: 20%;
   display: inline-flex;
   box-sizing: border-box;
-  border-right: 3rpx solid rgba(237, 240, 242, 1);
 }
 
-.category>.body>.btn:nth-child(5n),
-.category>.body>.btn:last-child {
+.category>.body>.btn .tx {
+  width: calc(100% - 3rpx);
+  margin: 15rpx 0;
+  border-right: 3rpx solid #FFFFFF;
+}
+
+.category>.body>.btn:nth-child(5n) .tx,
+.category>.body>.btn:last-child .tx {
   border-right: 0;
 }
 
-.category>.body>.btn>.icon {
+.category>.body>.btn .tx>.icon {
   width: 80rpx;
   height: 80rpx;
 }
 
-.category>.body>.btn>.label {
+.category>.body>.btn .tx>.label {
   font-size: 28rpx;
 }
 
