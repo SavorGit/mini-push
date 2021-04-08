@@ -2241,6 +2241,59 @@ Page({
       }
     })
   },
+
+  speedUploadImgS:function(hotel_info,data){
+    var that = this;
+    var up_imgs = that.data.up_imgs;
+    for (var i = 0; i < up_imgs.length; i++) {
+      that.chunckImage(hotel_info,data,i)
+    }
+  },
+  chunckImage:function(hotel_info,data,flag){
+    
+    var that = this;
+    var up_imgs = that.data.up_imgs;
+    
+    let length   = 0
+    var image_size = up_imgs[flag].resouce_size;
+    let position = up_imgs[flag].resouce_size - length
+
+    var filePath = up_imgs[flag].tmp_img;
+    //let video_param = fm.readFileSync(filePath,'base64',position,length);
+    var step_size = chunkSize
+    console.log(chunkSize);
+    return false;
+    var file_data_list = [];
+    var index=0;
+    for(var i=0;i<position;i++){
+      var tmp = {'param_video':'','section':'','iv':'','step_size':'','index':''};
+      var end = app.plus(i,step_size);
+      if(end >=position){
+        end = app.accSubtr(position,1);
+        step_size = app.accSubtr(position,i);
+      }else {
+        end = app.accSubtr(end,1);
+      }
+      if(i>=position){//说明读完了
+        console.log('读完了');
+      }else {//没读完
+        
+        var section = i+','+end;
+        tmp.section     = section;
+        tmp.iv          = i;
+        tmp.step_size   = step_size;
+        tmp.index = index;
+        index++;
+        
+      }
+      file_data_list.push(tmp);
+      i = app.plus(i,step_size);
+      i = app.accSubtr(i,1);
+    }
+    that.postConcurrencyPromisedataTT(0,file_data_list,filePath,fileName,image_size,forscreen_id,hotel_info,video_url,data)
+
+  },
+
   speedUploadImg:function(hotel_info,data){
     var that = this;
 
@@ -2397,7 +2450,8 @@ Page({
       launchType:launchType,
     })
     if(launchType=='classic'){//经典投屏
-      that.classicForImg(e.detail.value);
+      that.speedUploadImgS(hotel_info,e.detail.value)
+      //that.classicForImg(e.detail.value);
       mta.Event.stat('clickImageForscreen',{'openid':openid,'boxmac':box_mac,'ftype':1})
       return false;
 
