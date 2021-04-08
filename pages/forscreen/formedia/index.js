@@ -2255,16 +2255,22 @@ Page({
     var up_imgs = that.data.up_imgs;
     
     let length   = 0
-    var image_size = up_imgs[flag].resouce_size;
-    let position = up_imgs[flag].resouce_size - length
-
+    var image_size = up_imgs[flag].resource_size;
+    let position = up_imgs[flag].resource_size - length
+    
     var filePath = up_imgs[flag].tmp_img;
+    var forscreen_id = (new Date()).valueOf();
+    var fileName = forscreen_id
     //let video_param = fm.readFileSync(filePath,'base64',position,length);
     var step_size = chunkSize
-    console.log(chunkSize);
-    return false;
+    
     var file_data_list = [];
     var index=0;
+
+
+    console.log(position);
+    return false;
+
     for(var i=0;i<position;i++){
       var tmp = {'param_video':'','section':'','iv':'','step_size':'','index':''};
       var end = app.plus(i,step_size);
@@ -2290,9 +2296,113 @@ Page({
       i = app.plus(i,step_size);
       i = app.accSubtr(i,1);
     }
-    that.postConcurrencyPromisedataTT(0,file_data_list,filePath,fileName,image_size,forscreen_id,hotel_info,video_url,data)
+    that.postConcurrencyPromisedataTT(0,file_data_list,filePath,fileName,image_size,forscreen_id,hotel_info,data)
 
   },
+  postConcurrencyPromisedataTT:function(start,file_data_list,filePath,fileName,image_size,forscreen_id,hotel_info,data){
+    var that = this;
+    var openWind = that.data.openWind;
+    console.log(file_data_list);
+    return false;
+    if(start>file_data_list.length){
+      return false
+    }
+    if(that.data.cancel_for==1){
+      return false;
+    }
+    var that = this
+    let block_data_list = file_data_list.slice(start, start + maxConcurrency);
+
+
+
+
+
+    let promise_arr = that.pushPromiseData(block_data_list,filePath,fileName,video_size,forscreen_id,hotel_info,data,file_data_list.length)
+    //var flag =0;
+    
+    Promise.all(promise_arr).then(res_full_data => {
+      let tmp_full_data = []
+      let is_break = 0;
+      for (var j= 0; j< res_full_data.length; j++) {
+        if(res_full_data[j]['data']['code']==10000){
+          tmp_full_data.push(res_full_data[j]['data'])
+        }
+        if(res_full_data[j]['data']['code']==10012){
+          is_break = 1;
+        }
+      }
+      if(res_full_data.length == tmp_full_data.length){
+
+        let end_time = (new Date()).valueOf()
+        let use_time = end_time - that.data.readfile_start_time
+  
+        
+        let now_start = start + maxConcurrency
+        var progress  = parseInt((now_start / file_data_list.length)*100) ;
+        openWind.progress = progress;
+        that.setData({
+          openWind:openWind,
+        })
+        
+
+
+        that.postConcurrencyPromisedataTT(now_start,file_data_list,filePath,fileName,video_size,forscreen_id,hotel_info,video_url,data)
+      }else{
+        if(is_break==0){
+          openWind.tip = '投屏失败，请重试！';
+        }else {
+          openWind.tip = '您的投屏已被其他用户打断。';
+        }
+        
+        openWind.isError = true;
+        that.setData({
+          openWind:openWind,
+          is_classic_disabel:false,
+          is_speed_disabel:false,
+          hiddens: true,
+        })
+      }
+    })
+  },
+  pushPromiseDataTT:function(box_data_list,filePath,fileName,totalSize,forscreen_id,hotel_info,data,t_len){
+    //et fm = wx.getFileSystemManager()
+    var that = this
+
+    var mobile_brand = app.globalData.mobile_brand;
+    var mobile_model = app.globalData.mobile_model;
+    var openid = data.openid;
+    var duration = data.duration;
+    var avatarUrl = data.avatarUrl;
+    var nickName = data.nickName;
+    var box_mac  = data.box_mac;
+    let data_num = box_data_list.length
+    var promise_arr = []
+    var totalChunks = t_len; 
+    for (var i = 0; i < data_num; i++) {
+      var promise_name='promise'+i;
+      promise_name = new Promise(function (resolve, reject) {
+        
+        let dinfo = box_data_list[i]
+        let index = dinfo['index']
+        let video_param = fm.readFileSync(filePath,'base64',dinfo['iv'],dinfo['step_size']);
+        
+        wx.request({
+          url: 'http://' + hotel_info.intranet_ip + ':8080/videoUploadSpeed'+'?index='+index+ '&box_mac='+ box_mac+'&chunkSize='+dinfo['step_size']+'&forscreen_id='+forscreen_id+'&deviceId=' + openid+ '&deviceName=' + mobile_brand + '&web=true' + '&filename=' + fileName + '&device_model=' + mobile_model + '&resource_size=' + totalSize + '&duration=' + duration + '&action=3&resource_type=2&avatarUrl=' + avatarUrl + "&nickName=" + nickName+'&serial_number='+app.globalData.serial_number+'&totalChunks='+totalChunks+'&position='+dinfo['iv'],
+          method:'POST',
+          data:video_param,
+          success(res_part){
+            resolve(res_part)
+            video_param =  null;
+          },fail:function(res_err){
+            reject(box_data_list);
+            //console.log(box_data_list)
+          }
+        })
+      });
+      promise_arr.push(promise_name)
+    }
+    return promise_arr
+},
 
   speedUploadImg:function(hotel_info,data){
     var that = this;
