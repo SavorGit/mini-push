@@ -1619,10 +1619,24 @@ Page({
     that.setData({
       openWind:{'isWifi':false,'isError':false,'title':'','step':1,'progress':0,'tip':''}
     })
+    console.log(that.data.media_type)
+    var media_type = that.data.media_type;
+    
+
     if(launchType=='classic'){//经典投屏
-      that.classicForVideo(form_data);
+      if(media_type=='image'){
+        that.classicForImg(form_data);
+      }else {
+        that.classicForVideo(form_data);
+      }
+      
     }else {//极速投屏
-      that.speedForVideo(form_data,hotel_info);
+      if(media_type=='image'){
+        that.speedForImg(form_data,hotel_info);
+      }else {
+        that.speedForVideo(form_data,hotel_info);
+      }
+      
     }
   },
   tipsForLaunchWindowDevOps:function(e){
@@ -2490,7 +2504,7 @@ Page({
   pushPromiseDataTT:function(box_data_list,filePath,fileName,totalSize,forscreen_id,hotel_info,data,t_len,thumbnail){
     //et fm = wx.getFileSystemManager()
     var that = this
-
+    var forscreen_nums = that.data.up_imgs.length
     var mobile_brand = app.globalData.mobile_brand;
     var mobile_model = app.globalData.mobile_model;
     var openid = data.openid;
@@ -2510,7 +2524,7 @@ Page({
         let video_param = fm.readFileSync(filePath,'base64',dinfo['iv'],dinfo['step_size']);
         
         wx.request({
-          url: 'http://' + hotel_info.intranet_ip + ':8080/bigImgPartUpload'+'?index='+index+ '&box_mac='+ box_mac+'&chunkSize='+dinfo['step_size']+'&forscreen_id='+forscreen_id+'&deviceId=' + openid+ '&deviceName=' + mobile_brand + '&web=true' + '&filename=' + fileName + '&device_model=' + mobile_model + '&resource_size=' + totalSize + '&duration=' + duration + '&action=3&resource_type=2&avatarUrl=' + avatarUrl + "&nickName=" + nickName+'&serial_number='+app.globalData.serial_number+'&totalChunks='+totalChunks+'&position='+dinfo['iv']+'&thumbnail='+thumbnail,
+          url: 'http://' + hotel_info.intranet_ip + ':8080/bigImgPartUpload'+'?index='+index+ '&box_mac='+ box_mac+'&chunkSize='+dinfo['step_size']+'&forscreen_id='+forscreen_id+'&deviceId=' + openid+ '&deviceName=' + mobile_brand + '&web=true' + '&filename=' + fileName + '&device_model=' + mobile_model + '&resource_size=' + totalSize + '&duration=' + duration + '&action=3&resource_type=2&avatarUrl=' + avatarUrl + "&nickName=" + nickName+'&serial_number='+app.globalData.serial_number+'&totalChunks='+totalChunks+'&position='+dinfo['iv']+'&thumbnail='+thumbnail+'&forscreen_nums='+forscreen_nums,
           method:'POST',
           data:video_param,
           success(res_part){
