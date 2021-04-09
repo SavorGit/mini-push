@@ -206,7 +206,7 @@ Page({
             showTpBt: true,
             showThird: false,
             showSecond: true,
-            is_btn_disabel: false,
+            
             media_type:media_type
           })
           uploadInfos(res, box_mac, openid);
@@ -256,7 +256,7 @@ Page({
                 filePath:com_tempFilePath,
                 success:function(rt){
                   var size = rt.size;
-                  tmp_imgs[i] = { "tmp_img": com_tempFilePath, 'resource_size': size,'oss_img':'','img_id':'','percent':'','is_sing_forscreen':''};
+                  tmp_imgs[i] = {"com_tempFilePath":com_tempFilePath,"com_size":size,"tmp_img": res.tempFiles[i].tempFilePath, 'resource_size': res.tempFiles[i].size,'oss_img':'','img_id':'','percent':'','is_sing_forscreen':''};
                   console.log(tmp_imgs)
                   if(tmp_imgs.length== img_len){
                     that.setData({
@@ -267,13 +267,13 @@ Page({
                       percent: 0,
                       up_imgs: tmp_imgs,
                       img_lenth: img_len,
+                      is_btn_disabel: false,
                     })
                   }
                 }
               })
             },fail:function(e){
-              console.log('ddd')
-              tmp_imgs[i] = { "tmp_img": res.tempFiles[i].tempFilePath, 'resource_size': res.tempFiles[i].size,'oss_img':'','img_id':'','percent':'','is_sing_forscreen':''};
+              tmp_imgs[i] = {"com_tempFilePath":res.tempFiles[i].tempFilePath,"com_size":res.tempFiles[i].resource_size,"tmp_img": res.tempFiles[i].tempFilePath, 'resource_size': res.tempFiles[i].resource_size,'oss_img':'','img_id':'','percent':'','is_sing_forscreen':''};
               
             }
           })
@@ -1505,7 +1505,6 @@ Page({
           that.setData({
             showTpBt: true,
             showThird: false,
-            is_btn_disabel:false,
           })
         }
       },fail:function(){
@@ -1517,37 +1516,44 @@ Page({
       }
     })
     function uploadInfos(res, box_mac, openid) {
-      console.log('dddd')
+      
       var img_len = res.tempFiles.length;
       if (img_len > 0 && img_len < 10) {
         var tmp_imgs = [];
-        for (var i = 0; i < img_len; i++) {
-
+        for (let i in res.tempFiles) {
           wx.compressImage({
             src:res.tempFiles[i].tempFilePath,
             quality:80,
             success:function(rts){
+              console.log(rts)
               var com_tempFilePath = rts.tempFilePath; //压缩临时文件
               wx.getFileInfo({
                 filePath:com_tempFilePath,
                 success:function(rt){
                   var size = rt.size;
-                  tmp_imgs[i] = { "tmp_img": com_tempFilePath, 'resource_size': size,'oss_img':'','img_id':'','percent':'','is_sing_forscreen':''};
+                  tmp_imgs[i] = {"com_tempFilePath":com_tempFilePath,"com_size":size,"tmp_img": res.tempFiles[i].tempFilePath, 'resource_size': res.tempFiles[i].size,'oss_img':'','img_id':'','percent':'','is_sing_forscreen':''};
+                  
+                  if(tmp_imgs.length== img_len){
+                    that.setData({
+                      showFirst: false,
+                      showSecond: true,
+                      showView: false,
+                      showThird: false,
+                      percent: 0,
+                      up_imgs: tmp_imgs,
+                      img_lenth: img_len,
+                      is_btn_disabel: false,
+                    })
+                  }
                 }
               })
+            },fail:function(e){
+              tmp_imgs[i] = {"com_tempFilePath":res.tempFiles[i].tempFilePath,"com_size":res.tempFiles[i].resource_size,"tmp_img": res.tempFiles[i].tempFilePath, 'resource_size': res.tempFiles[i].resource_size,'oss_img':'','img_id':'','percent':'','is_sing_forscreen':''};
+              
             }
           })
         }
-        console.log(tmp_imgs)
-        that.setData({
-          showFirst: false,
-          showSecond: true,
-          showView: false,
-          showThird: false,
-          percent: 0,
-          up_imgs: tmp_imgs,
-          img_lenth: img_len,
-        })
+        
       }
     } 
   },
@@ -2293,6 +2299,7 @@ Page({
     var com_up_imgs = [];
     var forscreen_id = (new Date()).valueOf();
     var post_img_data = [];
+    
     for (var i = 0; i < up_imgs.length; i++) {
       var filePath = up_imgs[i].tmp_img;
 
@@ -2316,7 +2323,7 @@ Page({
               success:function(rt){
                 console.log(rt);
                 var com_img_info ={};
-                com_img_info.com_resource_size = rt.size;
+                com_img_info.com_size = rt.size;
                 com_img_info.com_filePath = com_tempFilePath
                 com_img_info.filename     = filename;
                 
@@ -2339,8 +2346,8 @@ Page({
     
     if(thumbnail==0){
       var up_imgs = that.data.up_imgs;
-      var image_size = up_imgs[flag].resource_size;
-      var filePath   = up_imgs[flag].tmp_img;
+      var image_size = up_imgs[flag].com_size;
+      var filePath   = up_imgs[flag].com_tempFilePath;
       var fileName = up_imgs[flag].filename;
     }else {
 
