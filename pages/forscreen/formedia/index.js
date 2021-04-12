@@ -243,12 +243,11 @@ Page({
       var img_len = res.tempFiles.length;
       if (img_len > 0 && img_len < 10) {
         var tmp_imgs = [];
-        console.log(img_len);
         for (let i in res.tempFiles) {
           
           wx.compressImage({
             src:res.tempFiles[i].tempFilePath,
-            quality:80,
+            quality:50,
             success:function(rts){
               
               var com_tempFilePath = rts.tempFilePath; //压缩临时文件
@@ -256,7 +255,12 @@ Page({
                 filePath:com_tempFilePath,
                 success:function(rt){
                   var size = rt.size;
-                  tmp_imgs[i] = {"com_tempFilePath":com_tempFilePath,"com_size":size,"tmp_img": res.tempFiles[i].tempFilePath, 'resource_size': res.tempFiles[i].size,'oss_img':'','img_id':'','percent':'','is_sing_forscreen':''};
+                  if(size>=res.tempFiles[i].size){
+                    tmp_imgs[i] = {"com_tempFilePath":res.tempFiles[i].tempFilePath,"com_size":res.tempFiles[i].size,"tmp_img": res.tempFiles[i].tempFilePath, 'resource_size': res.tempFiles[i].size,'oss_img':'','img_id':'','percent':'','is_sing_forscreen':''};
+                  }else {
+                    tmp_imgs[i] = {"com_tempFilePath":com_tempFilePath,"com_size":size,"tmp_img": res.tempFiles[i].tempFilePath, 'resource_size': res.tempFiles[i].size,'oss_img':'','img_id':'','percent':'','is_sing_forscreen':''};
+                  }
+                  
                   console.log(tmp_imgs)
                   if(tmp_imgs.length== img_len){
                     that.setData({
@@ -492,6 +496,7 @@ Page({
       that.setData({
         upload_vedio_cover: oss_url + '/forscreen/resource/' + timestamp + postf_t + '?x-oss-process=video/snapshot,t_2000,f_jpg,w_450,m_fast',
       })
+      console.log('videoPushNetty');
       utils.PostRequest(api_v_url + '/index/recordForScreenPics', {
         openid: openid,
         box_mac: box_mac,
@@ -1069,6 +1074,7 @@ Page({
           var openid = data.openid;
           var box_mac = data.box_mac;
           //极简版upload上传记录历史投屏
+          console.log('postConcurrencyPromisedata');
           utils.PostRequest(api_v_url + '/index/recordForScreenPics', {
             openid: data.openid,
             box_mac: data.box_mac,
@@ -1283,7 +1289,7 @@ Page({
   
             var end_time = (new Date()).valueOf(); 
             var diff_time = end_time - start_time;
-  
+            console.log(speedUploadVideo)
             //极简版upload上传记录历史投屏
             utils.PostRequest(api_v_url + '/index/recordForScreenPics', {
               openid: openid,
@@ -1382,7 +1388,7 @@ Page({
     if(launchType=='classic'){//经典投屏
       var forscreen_method = hotel_info.forscreen_method;
       var speed_forscreen_method = forscreen_method.substr(2,1);
-      if(res.detail.value.size>=max_user_forvideo_size && speed_forscreen_method==1){
+      if((res.detail.value.size>=max_user_forvideo_size && speed_forscreen_method==1) || hotel_info.tv_forscreen_type==2){
         that.setData({launchType:'speed'})
         that.speedForVideo(res.detail.value,hotel_info,1)
 
@@ -2312,71 +2318,73 @@ Page({
     })
     var com_up_imgs = [];
     var forscreen_id = (new Date()).valueOf();
-    var post_img_data = [];
+    var post_img_data_th = [];
     
-    for (var i = 0; i < up_imgs.length; i++) {
+    for(var i = 0; i<up_imgs.length; i++){
       var filePath = up_imgs[i].tmp_img;
 
       var index1 = filePath.lastIndexOf(".");
       var index2 = filePath.length;
       var postf_t = filePath.substring(index1, index2);//后缀名
       var filename = (new Date()).valueOf();
+      up_imgs[i].resource_id = filename;
       filename +=postf_t;
-
       up_imgs[i].filename = filename;
-      
-      that.setData({up_imgs:up_imgs})
-      /*if(i==0){
-        wx.compressImage({
-          src:up_imgs[i].tmp_img,
-          quality:10,
-          success:function(res){
-            var com_tempFilePath = res.tempFilePath; //压缩临时文件
-            wx.getFileInfo({
-              filePath:com_tempFilePath,
-              success:function(rt){
-                console.log(rt);
-                var com_img_info ={};
-                com_img_info.com_size = rt.size;
-                com_img_info.com_filePath = com_tempFilePath
-                com_img_info.filename     = filename;
-                
-                console.log(com_img_info)
-                that.chunckImage(hotel_info,data,i,forscreen_id,1,com_img_info)
-              }
-            })
-          }
-        })
-      }*/
-      that.chunckImage(post_img_data,hotel_info,data,i,forscreen_id,0)
-      app.sleep(1);
+      app.sleep(1)
+
+
+      console.log('speedUploadImgS')
+      utils.PostRequest(api_v_url + '/index/recordForScreenPics', {
+        forscreen_id: forscreen_id,
+        openid: openid,
+        box_mac: box_mac,
+        action: 4,
+        mobile_brand: app.globalData.mobile_brand,
+        mobile_model: app.globalData.mobile_model,
+        forscreen_char: data.forscreen_char,
+        public_text: '',
+        imgs: '[]',
+        resource_id: up_imgs[i].resource_id,
+        resource_size: up_imgs[i].img_size,
+        is_pub_hotelinfo: 0,
+        is_share: 0,
+        resource_type: 1,
+        res_nums: up_imgs.length,
+        serial_number:app.globalData.serial_number,
+        is_speed:1,
+      }, (data, headers, cookies, errMsg, statusCode) => {
+        
+      },res=>{},{ isShowLoading: false })
     }
+    that.setData({up_imgs:up_imgs})
+    for(var i = 0; i<up_imgs.length; i++){
+      that.chunckImage(post_img_data_th,hotel_info,data,i,forscreen_id,1);//缩略图
+    }
+    var post_img_data = [];
+    for (var i = 0; i < up_imgs.length; i++) {
+      that.chunckImage(post_img_data,hotel_info,data,i,forscreen_id,0);//原图
+    }
+    
   },
   chunckImage:function(post_img_data,hotel_info,data,flag,forscreen_id,thumbnail =0,com_img_info= {}){
-    
     var that = this;
-    
     let length   = 0
-    
+    var up_imgs = that.data.up_imgs;
+
     if(thumbnail==0){
-      var up_imgs = that.data.up_imgs;
-      var image_size = up_imgs[flag].com_size;
-      var filePath   = up_imgs[flag].com_tempFilePath;
+      
+      var image_size = up_imgs[flag].resource_size;
+      var filePath   = up_imgs[flag].tmp_img;
       var fileName = up_imgs[flag].filename;
     }else {
-
-      var image_size = com_img_info.com_resource_size;
-      var filePath   = com_img_info.com_filePath;
-      var fileName   = com_img_info.filename;
+      var image_size = up_imgs[flag].com_size;
+      var filePath   = up_imgs[flag].com_tempFilePath;
+      var fileName   = up_imgs[flag].filename;
     }
-   
-    
     let position = image_size - length
-    
     var step_size = chunkSize
     var file_data_list = [];
     var index=0;
-    
     for(var i=0;i<position;i++){
       var tmp = {'param_image':'','section':'','iv':'','step_size':'','index':''};
       var end = app.plus(i,step_size);
@@ -2429,6 +2437,8 @@ Page({
 
         openWind.progress = progress;
         that.setData({openWind:openWind})
+        
+
 
         if(post_img_data.length == up_imgs.length){
           openWind.step = 3;
@@ -2445,6 +2455,7 @@ Page({
           that.closeOpenWind();
         }
       }
+      
       return false
     }
     if(that.data.cancel_for==1){
@@ -2472,32 +2483,23 @@ Page({
 
         let end_time = (new Date()).valueOf()
         let use_time = end_time - that.data.readfile_start_time
-        
-        
         let now_start = start + maxConcurrency
-        /*var progress  = parseInt((now_start / file_data_list.length)*100) ;
-        openWind.progress = progress;
-        that.setData({
-          openWind:openWind,
-        })*/
-        
-
-
         that.postConcurrencyPromisedataTT(now_start,file_data_list,filePath,fileName,image_size,forscreen_id,hotel_info,data,flag,post_img_data,thumbnail)
       }else{
-        if(is_break==0){
-          openWind.tip = '投屏失败，请重试！';
-        }else {
-          openWind.tip = '您的投屏已被其他用户打断。';
+        if(thumbnail==0){
+          if(is_break==0){
+            openWind.tip = '投屏失败，请重试！';
+          }else {
+            openWind.tip = '您的投屏已被其他用户打断。';
+          }
+          openWind.isError = true;
+          that.setData({
+            openWind:openWind,
+            is_classic_disabel:false,
+            is_speed_disabel:false,
+            hiddens: true,
+          })
         }
-        
-        openWind.isError = true;
-        that.setData({
-          openWind:openWind,
-          is_classic_disabel:false,
-          is_speed_disabel:false,
-          hiddens: true,
-        })
       }
     })
   },
@@ -2518,13 +2520,12 @@ Page({
     for (var i = 0; i < data_num; i++) {
       var promise_name='promise'+i;
       promise_name = new Promise(function (resolve, reject) {
-        
         let dinfo = box_data_list[i]
         let index = dinfo['index']
         let video_param = fm.readFileSync(filePath,'base64',dinfo['iv'],dinfo['step_size']);
-        
+        console.log('http://' + hotel_info.intranet_ip + ':8080/bigImgPartUpload'+'?index='+index+ '&box_mac='+ box_mac+'&chunkSize='+dinfo['step_size']+'&forscreen_id='+forscreen_id+'&deviceId=' + openid+ '&deviceName=' + mobile_brand + '&web=true' + '&filename=' + fileName + '&device_model=' + mobile_model + '&resource_size=' + totalSize + '&duration=0&action=3&resource_type=1&avatarUrl=' + avatarUrl + "&nickName=" + nickName+'&serial_number='+app.globalData.serial_number+'&totalChunks='+totalChunks+'&position='+dinfo['iv']+'&thumbnail='+thumbnail+'&forscreen_nums='+forscreen_nums)
         wx.request({
-          url: 'http://' + hotel_info.intranet_ip + ':8080/bigImgPartUpload'+'?index='+index+ '&box_mac='+ box_mac+'&chunkSize='+dinfo['step_size']+'&forscreen_id='+forscreen_id+'&deviceId=' + openid+ '&deviceName=' + mobile_brand + '&web=true' + '&filename=' + fileName + '&device_model=' + mobile_model + '&resource_size=' + totalSize + '&duration=' + duration + '&action=3&resource_type=2&avatarUrl=' + avatarUrl + "&nickName=" + nickName+'&serial_number='+app.globalData.serial_number+'&totalChunks='+totalChunks+'&position='+dinfo['iv']+'&thumbnail='+thumbnail+'&forscreen_nums='+forscreen_nums,
+          url: 'http://' + hotel_info.intranet_ip + ':8080/bigImgPartUpload'+'?index='+index+ '&box_mac='+ box_mac+'&chunkSize='+dinfo['step_size']+'&forscreen_id='+forscreen_id+'&deviceId=' + openid+ '&deviceName=' + mobile_brand + '&web=true' + '&filename=' + fileName + '&device_model=' + mobile_model + '&resource_size=' + totalSize + '&duration=0&action=3&resource_type=1&avatarUrl=' + avatarUrl + "&nickName=" + nickName+'&serial_number='+app.globalData.serial_number+'&totalChunks='+totalChunks+'&position='+dinfo['iv']+'&thumbnail='+thumbnail+'&forscreen_nums='+forscreen_nums,
           method:'POST',
           data:video_param,
           success(res_part){
@@ -2542,141 +2543,7 @@ Page({
     return promise_arr
 },
 
-  speedUploadImg:function(hotel_info,data){
-    var that = this;
-
-    var openWind = that.data.openWind;
-    openWind.step = 2;
-    openWind.tip = '图片处理中';
-    that.setData({
-      openWind:openWind,
-      is_btn_disabel: true,
-    })
-    var forscreen_id = (new Date()).valueOf();
-    var start_time   = (new Date()).getTime();
-    var intranet_ip = hotel_info.intranet_ip;
-    var mobile_brand = app.globalData.mobile_brand;
-    var mobile_model = app.globalData.mobile_model;
-    
-    var up_imgs = that.data.up_imgs;
-    var hotel_info = that.data.hotel_info;
-    img_lenth = up_imgs.length;
-    openid = data.openid;
-    box_mac = data.box_mac;
-    forscreen_char = data.forscreen_char;
-    if(typeof(forscreen_char)=='undefined'){
-      forscreen_char = '';
-    }
-    var avatarUrl = data.avatarUrl;
-    var nickName = data.nickName;
-    
-    var post_img_data = [];
-
-    for (var i = 0; i < img_lenth; i++) {
-      
-      var filename = (new Date()).valueOf();
-      up_imgs[i].img_id = filename;
-      up_imgs[i].is_sing_forscreen = 1;
-      up_imgs[i].percent = 100;
-      var img_url = up_imgs[i].tmp_img;
-      var img_size = up_imgs[i].resource_size;
-
-      
-      var index1 = img_url.lastIndexOf(".");
-      var index2 = img_url.length;
-      var postf_t = img_url.substring(index1, index2);//后缀名
-      filename +=postf_t;
-      
-      //console.log("http://" + intranet_ip + ":8080/picH5?isThumbnail=1&imageId=20170301&deviceId=" + openid + "&box_mac=" + box_mac + "&deviceName=" + mobile_brand + "&rotation=90&imageType=1&web=true&forscreen_id=" + forscreen_id + '&forscreen_char=' + forscreen_char + '&filename=' + filename + '&device_model=' + mobile_model + '&resource_size=' + img_size + '&action=4&resource_type=1&avatarUrl=' + avatarUrl + "&nickName=" + nickName + "&forscreen_nums=" + img_lenth+"&serial_number="+app.globalData.serial_number);
-      upload_task=wx.uploadFile({
-        url: "http://" + intranet_ip + ":8080/picH5?isThumbnail=1&imageId=20170301&deviceId=" + openid + "&box_mac=" + box_mac + "&deviceName=" + mobile_brand + "&rotation=90&imageType=1&web=true&forscreen_id=" + forscreen_id + '&forscreen_char=' + forscreen_char + '&filename=' + filename + '&device_model=' + mobile_model + '&resource_size=' + img_size + '&action=4&resource_type=1&avatarUrl=' + avatarUrl + "&nickName=" + nickName + "&forscreen_nums=" + img_lenth+"&serial_number="+app.globalData.serial_number,
-        filePath: img_url,
-        name: 'fileUpload',
-        success: function(res) {
-          //console.log(res)
-          var box_post_data = {'filename':''};
-          box_post_data.filename = filename;
-          post_img_data.push(box_post_data);
-          
-          var have_up_img_num = post_img_data.length;
-          var progress  =parseInt((have_up_img_num / img_lenth)*100) ;
-
-          openWind.progress = progress;
-          that.setData({openWind:openWind})
-
-
-          if (post_img_data.length == img_lenth) {
-            var end_time = (new Date()).getTime();
-            var diff_time =  end_time - start_time;
-            var info_rt = JSON.parse(res.data);
-            if (info_rt.code == 1001) {
-              
-              openWind.tip = '投屏失败，请重试！';
-              openWind.isError = true;
-              that.setData({
-                openWind:openWind,
-                is_btn_disabel: false,
-                hiddens: true,
-              })
-              
-            }else {
-              
-              openWind.step = 3;
-              openWind.tip = '正在投屏,请稍后';
-              that.setData({
-                openWind:openWind,
-                showThird: true,
-                hiddens:true,
-                up_imgs: up_imgs,
-                forscreen_char: forscreen_char,
-                
-              })
-              that.getHistoryList(openid,box_mac,1,1)
-              that.closeOpenWind();
-              utils.tryCatch(mta.Event.stat('wifiPicForscreen', { 'picnums': up_imgs.length }));
-
-            }
-            utils.tryCatch(mta.Event.stat('wifiPicUploadWasteTime', { 'wasttime': diff_time }));
-          }
-        },
-        fail: function({
-          errMsg
-        }) {
-          if (i == img_lenth) {
-            
-            that.setData({
-              is_btn_disabel: false,
-              hiddens: true,
-            })
-            app.showToast('投屏失败,请确认是否连接本包间wifi！',3000,'none',true);
-            
-          }
-        },
-      });
-      utils.PostRequest(api_v_url + '/index/recordForScreenPics', {
-        forscreen_id: forscreen_id,
-        openid: openid,
-        box_mac: box_mac,
-        action: 4,
-        mobile_brand: mobile_brand,
-        mobile_model: mobile_model,
-        forscreen_char: forscreen_char,
-        public_text: '',
-        imgs: '[]',
-        resource_id: filename,
-        resource_size: img_size,
-        is_pub_hotelinfo: 0,
-        is_share: 0,
-        resource_type: 1,
-        res_nums: img_lenth,
-        serial_number:app.globalData.serial_number,
-        is_speed:1,
-      }, (data, headers, cookies, errMsg, statusCode) => {
-        
-      },res=>{},{ isShowLoading: false })
-      app.sleep(1);
-    }
-  },
+  
   //点击投屏
   up_forscreen(e) {//多张图片投屏开始(不分享到发现)
     var that = this;
@@ -2699,9 +2566,16 @@ Page({
     })
     if(launchType=='classic'){//经典投屏
       //that.speedUploadImgS(hotel_info,e.detail.value)
-      that.classicForImg(e.detail.value);
-      mta.Event.stat('clickImageForscreen',{'openid':openid,'boxmac':box_mac,'ftype':1})
-      return false;
+      if(hotel_info.tv_forscreen_type==2){
+        that.setData({launchType:'speed'})
+        that.speedForImg(e.detail.value,hotel_info);
+        return false;
+      }else {
+        that.classicForImg(e.detail.value);
+        mta.Event.stat('clickImageForscreen',{'openid':openid,'boxmac':box_mac,'ftype':1})
+        return false;
+      }
+     
 
     }else if(launchType=='speed'){//极速投屏
       that.speedForImg(e.detail.value,hotel_info);
@@ -2791,7 +2665,7 @@ Page({
         box_mac: box_mac,
         msg: push_info,
       }, (data, headers, cookies, errMsg, statusCode) => {
-
+        console.log('up_single_pic');
         utils.PostRequest(api_v_url+'/index/recordForScreenPics', {
           forscreen_id: forscreen_id,
             openid: openid,
@@ -2976,7 +2850,7 @@ Page({
           var progress  =parseInt((have_up_img_num / img_len)*100) ;
           openWind.progress = progress;
           that.setData({openWind:openWind})
-          
+          console.log('uploadOssNew')
           utils.PostRequest(api_v_url + '/index/recordForScreenPics', {
             forscreen_id: forscreen_id,
             openid: openid,
