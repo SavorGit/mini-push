@@ -181,7 +181,7 @@ Page({
           }
           var filePath = res.tempFiles[0].tempFilePath;
           var video_size = res.tempFiles[0].size;
-          if(video_size>=max_user_forvideo_size){
+          if(video_size>=max_user_forvideo_size || hotel_info.tv_forscreen_type==2){
             
             var pams_arr = forscreen_method_origin.split('-');
             if(pams_arr[1]==1){
@@ -202,6 +202,10 @@ Page({
           });
           //lead(openid,3);
         }else if(media_type=='image'){
+          if(hotel_info.tv_forscreen_type==2){
+            hotel_info.forscreen_method = '0-1';
+            that.setData({hotel_info:hotel_info})
+          }
           that.setData({
             showTpBt: true,
             showThird: false,
@@ -1451,6 +1455,7 @@ Page({
     });
     var box_mac = e.currentTarget.dataset.boxmac;
     var openid = e.currentTarget.dataset.openid;
+    var hotel_info = that.data.hotel_info;
     wx.chooseMedia({
       count:6,
       mediaType: ['image', 'video'],
@@ -1470,10 +1475,10 @@ Page({
 
           var filePath = res.tempFiles[0].tempFilePath;
           var video_size = res.tempFiles[0].size;
-          var hotel_info = that.data.hotel_info;
+          
           
 
-          if(video_size>=max_user_forvideo_size){
+          if(video_size>=max_user_forvideo_size || hotel_info.tv_forscreen_type==2){
           
             var pams_arr = forscreen_method_origin.split('-');
             if(pams_arr[1]==1){
@@ -1499,7 +1504,14 @@ Page({
             media_type:media_type
           });
         }else {
+          if(hotel_info.tv_forscreen_type==2){
+            hotel_info.forscreen_method = '0-1';
+          }else {
+            hotel_info.forscreen_method = forscreen_method_origin;
+          }
+          
           that.setData({
+            hotel_info:hotel_info,
             showVedio:false,
             is_btn_disabel: false,
             up_imgs: [],
@@ -1713,6 +1725,7 @@ Page({
         var tmp_history_img;
         for(let j in res_list){
           tmp_history_img = {};
+          tmp_history_img.com_tempFilePath = res_list[j].imgurl;
           tmp_history_img.tmp_img = res_list[j].imgurl;
           tmp_history_img.resource_size = res_list[j].resource_size;
           tmp_history_img.oss_img  = res_list[j].imgurl;
@@ -1797,6 +1810,7 @@ Page({
       var tmp_history_img;
       for(let j in res_list){
         tmp_history_img = {};
+        tmp_history_img.com_tempFilePath = res_list[j].res_url;
         tmp_history_img.tmp_img = res_list[j].res_url;
         tmp_history_img.resource_size = res_list[j].resource_size;
         //tmp_history_img.oss_img  = res_list[j].res_url;
@@ -1833,6 +1847,7 @@ Page({
     }
     
   },
+  
   //上拉刷新
   loadMore: function(e) {
     var that = this;
