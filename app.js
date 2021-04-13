@@ -618,7 +618,7 @@ App({
   //扫码
   scanQrcode: function (pageid = 1) {
     var that = this;
-    wx.showModal({
+    /*wx.showModal({
       title: '提示',
       content: "请扫电视二维码",
       showCancel: true,
@@ -675,13 +675,13 @@ App({
     if (pages.length) {
       currPage = pages[pages.length - 1];
     }
-    mta.Event.stat('popScanQrcode', { 'url': currPage.__route__ })
-    /*wx.showModal({
+    mta.Event.stat('popScanQrcode', { 'url': currPage.__route__ })*/
+    wx.showModal({
       title: '提示',
       content: "请使用微信扫电视二维码",
       showCancel: false,
       confirmText:'我知道了'
-    })*/
+    })
   },
   onLaunch: function () {
     var oss_tmp_key = this.globalData.oss_access_key_id;
@@ -1364,11 +1364,11 @@ changeKb:function (limit){
     mobile_model: '',
     statusBarHeight: 0,
     jd_appid: 'wx91d27dbf599dff74',
-    api_url: 'https://dev-mobile.littlehotspot.com',
-    api_v_url:'https://dev-mobile.littlehotspot.com/Smallapp46',
-    oss_upload_url: 'https://dev-image.littlehotspot.com',
-    netty_url: 'https:/dev-netty-push.littlehotspot.com',
-    oss_url: 'https://dev-oss.littlehotspot.com',
+    api_url: 'https://mobile.littlehotspot.com',
+    api_v_url:'https://mobile.littlehotspot.com/Smallapp46',
+    oss_upload_url: 'https://image.littlehotspot.com',
+    netty_url: 'https:/netty-push.littlehotspot.com',
+    oss_url: 'https://oss.littlehotspot.com',
     Official_account_url:'https://mobile.littlehotspot.com/h5/official/getuserinfo/p/',
     Official_article_url:'',
     oss_bucket: 'redian-produce',

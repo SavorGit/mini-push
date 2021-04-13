@@ -1422,6 +1422,7 @@ Page({
     });
     var box_mac = e.currentTarget.dataset.boxmac;
     var openid = e.currentTarget.dataset.openid;
+    var hotel_info = that.data.hotel_info;
     wx.chooseMedia({
       count:6,
       mediaType: ['image', 'video'],
@@ -1442,7 +1443,7 @@ Page({
 
           var filePath = res.tempFiles[0].tempFilePath;
           var video_size = res.tempFiles[0].size;
-          var hotel_info = that.data.hotel_info;
+          
           
 
           if(video_size>=max_user_forvideo_size){
@@ -1471,7 +1472,9 @@ Page({
             media_type:media_type
           });
         }else {
+          hotel_info.forscreen_method = forscreen_method_origin;
           that.setData({
+            hotel_info:hotel_info,
             showVedio:false,
             is_btn_disabel: false,
             up_imgs: [],
@@ -1575,10 +1578,24 @@ Page({
     that.setData({
       openWind:{'isWifi':false,'isError':false,'title':'','step':1,'progress':0,'tip':''}
     })
+    console.log(that.data.media_type)
+    var media_type = that.data.media_type;
+    
+
     if(launchType=='classic'){//经典投屏
-      that.classicForVideo(form_data);
+      if(media_type=='image'){
+        that.classicForImg(form_data);
+      }else {
+        that.classicForVideo(form_data);
+      }
+      
     }else {//极速投屏
-      that.speedForVideo(form_data,hotel_info);
+      if(media_type=='image'){
+        that.speedForImg(form_data,hotel_info);
+      }else {
+        that.speedForVideo(form_data,hotel_info);
+      }
+      
     }
   },
   tipsForLaunchWindowDevOps:function(e){
