@@ -58,7 +58,7 @@
 				</view>
 			</view>
 
-			<!-- 控制器面板 -->
+			<!-- 控制器面板 
 			<view class="panel controller flex-row-center-center theme-panel">
 				<view class="btn launch flex-column-center-center" wx:if="{{is_replay_disabel == false}}" bindtap='boxShow' data-forscreen_id='{{picinfo.forscreen_id}}' data-pubdetail='{{picinfo.pubdetail}}' data-forscreen_char='{{picinfo.forscreen_char}}' data-res_type="{{picinfo.res_type}}" data-res_nums="{{picinfo.res_nums}}" data-boxmac="{{box_mac}}" data-openid="{{openid}}">
 					<image class="icon" mode="aspectFit" src="/images/icon2/000000_interact.png"></image>
@@ -69,6 +69,8 @@
 					<view class="label">退出</view>
 				</view>
 			</view>
+			-->
+			<template is="launchTVControllerFind" data="{{isVolume:false, isLaunch:is_replay_disabel==false, boxMac:box_mac, openId:openid, hotelInfo:hotel_info, entry:picinfo}}" />
 
 			<!-- 推荐面板 -->
 			<view class="panel recommend full_width theme-panel">

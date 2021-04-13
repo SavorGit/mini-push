@@ -159,7 +159,7 @@
 	<view class='default-navigation-bar theme-navigation'>
 		<view class='status-bar' style='height:{{statusBarHeight}}px;'></view>
 		<view class='navigation-bar flex-row-center-flex_start'>
-			<view class='btn flex-row-center-flex_start' >
+			<view class='btn flex-row-center-flex_start'>
 				<navigator class='go-back' open-type='navigateBack' delta='1'>
 					<label class="fa fa-angle-left fa-2x" title="Back"></label>
 				</navigator>
@@ -176,7 +176,7 @@
 	<view class='default-navigation-bar theme-navigation'>
 		<view class='status-bar' style='height:{{statusBarHeight}}px;'></view>
 		<view class='navigation-bar flex-row-center-flex_start'>
-			<view class='btn flex-row-center-flex_start' >
+			<view class='btn flex-row-center-flex_start'>
 				<navigator class='go-back' open-type='navigateBack' delta='1'>
 					<label class="fa fa-angle-left fa-2x" title="Back"></label>
 				</navigator>
@@ -269,5 +269,171 @@
 		<image style="width:30rpx;height:30rpx;padding:20rpx;" mode="aspectFit" src="/images/icon2/FC8F2D_close.png" bindtap="closeFollowOfficialAccount"></image>
 		<view style="font-size:26rpx;">关注热点服务公众号，及时关注好物活动。</view>
 		<button style="width:120rpx;height:60rpx;line-height:60rpx;text-align:center;border:3rpx solid rgba(252,143,45,1);border-radius:10rpx;margin:0;padding:0;font-size:22rpx;background-color:unset;color:rgba(252,143,45,1)" bindtap="nowFollowOfficialAccount">立即关注</button>
+	</view>
+</template>
+
+
+<!-- 投屏/电视控制面板 -->
+<template name="launchTVController">
+	<view class="panel launch-tv flex-column-center-center theme-container">
+		<view class="panel-container flex-column-center-center theme-panel">
+			<view class="title-bar flex-row-center-flex_start">
+				<view class="title theme-font1">TV控制</view>
+			</view>
+			<view class="tv-controller-bar flex-row-center-flex_end">
+				<block wx:if="{{isVolume==true || isVolume=='true'}}">
+					<view class="btn volume-up flex-column-center-center" bindtap="changeVolume" data-openid='{{openId}}' data-box_mac='{{boxMac}}' data-hotel_info="{{hotelInfo}}" data-change_type='2'>
+						<image class="icon" mode="aspectFit" src="/images/icon2/000000_volume-up.png"></image>
+					</view>
+					<view class="btn volume-down flex-column-center-center" bindtap="changeVolume" data-openid='{{openId}}' data-box_mac='{{boxMac}}' data-hotel_info="{{hotelInfo}}" data-change_type='1'>
+						<image class="icon" mode="aspectFit" src="/images/icon2/000000_volume-down.png"></image>
+					</view>
+				</block>
+				<block wx:if="{{isLaunch==true || isLaunch=='true'}}">
+					<view class="btn launch flex-column-center-center" bindtap="boxShow" data-name="{{name}}" data-filename='{{filename}}' data-vediourl="{{videoUrl}}" data-boxmac="{{boxMac}}" data-openid="{{openId}}">
+						<image class="icon" mode="aspectFit" src="/images/icon2/000000_interact.png"></image>
+					</view>
+				</block>
+				<view class="btn exit flex-column-center-center" bindtap="{{exitFun}}" data-boxmac="{{boxMac}}" data-box_mac="{{boxMac}}" data-openid="{{openId}}" data-hotel_info="{{hotelInfo}}">
+					<image class="icon" mode="aspectFit" src="/images/icon2/000000_exit.png"></image>
+				</view>
+			</view>
+			<view class='launch-block flex-row-center-space_between'>
+				<view class="box flex-column-center-center">
+					<button class="btn album flex-column-center-center" bindtap='chooseMedia' data-boxmac="{{boxMac}}" data-openid="{{openId}}">
+						<image class="icon" mode="aspectFit" src='/images/icon2/F25D9C_pic.png'></image>
+						<view class="label theme-font1">相册投屏</view>
+					</button>
+				</view>
+				<view class="box flex-column-center-center" bindtap="gotoFriendForFiles" data-boxmac="{{boxMac}}" data-openid="{{openId}}">
+					<view class="btn WeChart flex-column-center-center">
+						<image class="icon" mode="aspectFit" src='/images/icon2/00D268_WeChart.png'></image>
+						<view class="label theme-font1">微信文件</view>
+					</view>
+				</view>
+				<view class="box flex-column-center-center" bindtap="gotoPhonefiles" data-boxmac="{{boxMac}}" data-openid="{{openId}}">
+					<view class="btn file flex-column-center-center">
+						<image class="icon" mode="aspectFit" src='/images/icon2/FF7E67_folder.png'></image>
+						<view class="label theme-font1">本地文件</view>
+					</view>
+				</view>
+				<view class="box flex-column-center-center" bindtap="gotoWelcome" data-boxmac="{{boxMac}}" data-openid="{{openId}}">
+					<view class="btn exit flex-column-center-center">
+						<image class="icon" mode="aspectFit" src='/images/icon2/000000_exit.png'></image>
+						<view class="label theme-font1">投欢迎词</view>
+					</view>
+				</view>
+			</view>
+		</view>
+	</view>
+</template>
+
+<!-- 投屏/电视控制面板【商品】 -->
+<template name="launchTVControllerGoods">
+	<view class="panel launch-tv flex-column-center-center theme-container">
+		<view class="panel-container flex-column-center-center theme-panel">
+			<view class="title-bar flex-row-center-flex_start">
+				<view class="title theme-font1">TV控制</view>
+			</view>
+			<view class="tv-controller-bar flex-row-center-flex_end">
+				<block wx:if="{{isVolume==true || isVolume=='true'}}">
+					<view class="btn volume-up flex-column-center-center" bindtap="changeVolume" data-openid='{{openId}}' data-box_mac='{{boxMac}}' data-hotel_info="{{hotelInfo}}" data-change_type='2'>
+						<image class="icon" mode="aspectFit" src="/images/icon2/000000_volume-up.png"></image>
+					</view>
+					<view class="btn volume-down flex-column-center-center" bindtap="changeVolume" data-openid='{{openId}}' data-box_mac='{{boxMac}}' data-hotel_info="{{hotelInfo}}" data-change_type='1'>
+						<image class="icon" mode="aspectFit" src="/images/icon2/000000_volume-down.png"></image>
+					</view>
+				</block>
+				<block wx:if="{{isLaunch==true || isLaunch=='true'}}">
+					<view class="btn launch flex-column-center-center" bindtap="boxShow" data-goods_id="{{entry.goods_id}}" data-name="{{entry.name}}" data-vediourl="{{entry.tx_url}}" data-duration="{{entry.duration}}" data-forscreen_url="{{entry.forscreen_url}}" data-resource_size="{{entry.resource_size}}" data-qrcode_url="{{entry.qrcode_url}}" data-boxmac="{{boxMac}}" data-openid="{{openId}}">
+						<image class="icon" mode="aspectFit" src="/images/icon2/000000_interact.png"></image>
+					</view>
+				</block>
+				<view class="btn exit flex-column-center-center" bindtap="exitForscreen" data-boxmac="{{boxMac}}" data-box_mac="{{boxMac}}" data-openid="{{openId}}" data-hotel_info="{{hotelInfo}}">
+					<image class="icon" mode="aspectFit" src="/images/icon2/000000_exit.png"></image>
+				</view>
+			</view>
+			<view class='launch-block flex-row-center-space_between'>
+				<view class="box flex-column-center-center">
+					<button class="btn album flex-column-center-center" bindtap='chooseMedia' data-boxmac="{{boxMac}}" data-openid="{{openId}}">
+						<image class="icon" mode="aspectFit" src='/images/icon2/F25D9C_pic.png'></image>
+						<view class="label theme-font1">相册投屏</view>
+					</button>
+				</view>
+				<view class="box flex-column-center-center" bindtap="gotoFriendForFiles" data-boxmac="{{boxMac}}" data-openid="{{openId}}">
+					<view class="btn WeChart flex-column-center-center">
+						<image class="icon" mode="aspectFit" src='/images/icon2/00D268_WeChart.png'></image>
+						<view class="label theme-font1">微信文件</view>
+					</view>
+				</view>
+				<view class="box flex-column-center-center" bindtap="gotoPhonefiles" data-boxmac="{{boxMac}}" data-openid="{{openId}}">
+					<view class="btn file flex-column-center-center">
+						<image class="icon" mode="aspectFit" src='/images/icon2/FF7E67_folder.png'></image>
+						<view class="label theme-font1">本地文件</view>
+					</view>
+				</view>
+				<view class="box flex-column-center-center" bindtap="gotoWelcome" data-boxmac="{{boxMac}}" data-openid="{{openId}}">
+					<view class="btn exit flex-column-center-center">
+						<image class="icon" mode="aspectFit" src='/images/icon2/000000_exit.png'></image>
+						<view class="label theme-font1">投欢迎词</view>
+					</view>
+				</view>
+			</view>
+		</view>
+	</view>
+</template>
+
+<!-- 投屏/电视控制面板【发现】 -->
+<template name="launchTVControllerFind">
+	<view class="panel launch-tv flex-column-center-center theme-container">
+		<view class="panel-container flex-column-center-center theme-panel">
+			<view class="title-bar flex-row-center-flex_start">
+				<view class="title theme-font1">TV控制</view>
+			</view>
+			<view class="tv-controller-bar flex-row-center-flex_end">
+				<block wx:if="{{isVolume==true || isVolume=='true'}}">
+					<view class="btn volume-up flex-column-center-center" bindtap="changeVolume" data-openid='{{openId}}' data-box_mac='{{boxMac}}' data-hotel_info="{{hotelInfo}}" data-change_type='2'>
+						<image class="icon" mode="aspectFit" src="/images/icon2/000000_volume-up.png"></image>
+					</view>
+					<view class="btn volume-down flex-column-center-center" bindtap="changeVolume" data-openid='{{openId}}' data-box_mac='{{boxMac}}' data-hotel_info="{{hotelInfo}}" data-change_type='1'>
+						<image class="icon" mode="aspectFit" src="/images/icon2/000000_volume-down.png"></image>
+					</view>
+				</block>
+				<block wx:if="{{isLaunch==true || isLaunch=='true'}}">
+					<view class="btn launch flex-column-center-center" bindtap="boxShow" data-forscreen_id='{{entry.forscreen_id}}' data-pubdetail='{{entry.pubdetail}}' data-forscreen_char='{{entry.forscreen_char}}' data-res_type="{{entry.res_type}}" data-res_nums="{{entry.res_nums}}" data-boxmac="{{boxMac}}" data-openid="{{openId}}">
+						<image class="icon" mode="aspectFit" src="/images/icon2/000000_interact.png"></image>
+					</view>
+				</block>
+				<view class="btn exit flex-column-center-center" bindtap="exitForscreen" data-boxmac="{{boxMac}}" data-box_mac="{{boxMac}}" data-openid="{{openId}}" data-hotel_info="{{hotelInfo}}">
+					<image class="icon" mode="aspectFit" src="/images/icon2/000000_exit.png"></image>
+				</view>
+			</view>
+			<view class='launch-block flex-row-center-space_between'>
+				<view class="box flex-column-center-center">
+					<button class="btn album flex-column-center-center" bindtap='chooseMedia' data-boxmac="{{boxMac}}" data-openid="{{openId}}">
+						<image class="icon" mode="aspectFit" src='/images/icon2/F25D9C_pic.png'></image>
+						<view class="label theme-font1">相册投屏</view>
+					</button>
+				</view>
+				<view class="box flex-column-center-center" bindtap="gotoFriendForFiles" data-boxmac="{{boxMac}}" data-openid="{{openId}}">
+					<view class="btn WeChart flex-column-center-center">
+						<image class="icon" mode="aspectFit" src='/images/icon2/00D268_WeChart.png'></image>
+						<view class="label theme-font1">微信文件</view>
+					</view>
+				</view>
+				<view class="box flex-column-center-center" bindtap="gotoPhonefiles" data-boxmac="{{boxMac}}" data-openid="{{openId}}">
+					<view class="btn file flex-column-center-center">
+						<image class="icon" mode="aspectFit" src='/images/icon2/FF7E67_folder.png'></image>
+						<view class="label theme-font1">本地文件</view>
+					</view>
+				</view>
+				<view class="box flex-column-center-center" bindtap="gotoWelcome" data-boxmac="{{boxMac}}" data-openid="{{openId}}">
+					<view class="btn exit flex-column-center-center">
+						<image class="icon" mode="aspectFit" src='/images/icon2/000000_exit.png'></image>
+						<view class="label theme-font1">投欢迎词</view>
+					</view>
+				</view>
+			</view>
+		</view>
 	</view>
 </template>

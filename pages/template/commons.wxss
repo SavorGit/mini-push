@@ -1,7 +1,6 @@
 /* pages/template/commons.wxss */
 
 /* ================================= 微信授权登录 ================================= */
-
 .wxAuthLogin-container {
   width: 100%;
   height: 100%;
@@ -67,7 +66,6 @@
 }
 
 /* ================================= 固定悬浮按钮组 ================================= */
-
 .fixedSuspensionButtonGroup {
   position: fixed;
   right: 0;
@@ -88,7 +86,6 @@
 }
 
 /* ================================= 遥控器窗口 ================================= */
-
 .remoteControlWindow-container {
   width: 100%;
   height: 100%;
@@ -194,7 +191,6 @@
 }
 
 /* ================================= 热点商务联系广告面板 ================================= */
-
 .advert-panel {
   height: 90rpx;
   margin-top: 10rpx;
@@ -225,7 +221,6 @@
 }
 
 /* ================================= 打断投屏弹窗 ================================= */
-
 .interrupt-launch-screen-window-container {
   width: 100%;
   height: 100%;
@@ -266,7 +261,6 @@
 }
 
 /* ================================= 自定义顶级页面导航栏 ================================= */
-
 .default-navigation-bar {
   width: 100vw;
 }
@@ -293,7 +287,6 @@
 }
 
 /* ================================= 自定义二级页面导航栏 ================================= */
-
 .default-navigation-bar>.navigation-bar>.btn {
   padding-left: 20rpx;
 }
@@ -319,7 +312,6 @@
 }
 
 /* ======================================= 无网页面 ======================================= */
-
 .no-net {
   width: 500rpx;
   height: 500rpx;
@@ -354,6 +346,7 @@
   border-radius: 10rpx;
 }
 
+/* 
 @-webkit-keyframes rotate2 {
   from {
     -webkit-transform: rotateX(0deg);
@@ -362,4 +355,99 @@
   to {
     -webkit-transform: rotateX(720deg);
   }
+} 
+*/
+
+/* ======================================= 投屏/电视控制面板 ======================================= */
+.panel.launch-tv {
+  width: calc(100vw - 20rpx);
+  padding: 20rpx 10rpx;
+  border-radius: 0;
+}
+
+.panel.launch-tv>.panel-container {
+  width: 100%;
+  border-radius: 10rpx;
+}
+
+.panel.launch-tv>.panel-container>.title-bar {
+  width: calc(100% - 40rpx);
+  height: 70rpx;
+  padding: 10rpx 20rpx;
+  border-bottom: 3rpx solid #DEDEDE;
+}
+
+.panel.launch-tv>.panel-container>.title-bar>.title {
+  font-size: 28rpx;
+  font-weight: 700;
+}
+
+.panel.launch-tv>.panel-container>.tv-controller-bar {
+  width: calc(50% - 40rpx);
+  height: 70rpx;
+  padding: 10rpx 20rpx;
+  margin-top: -90rpx;
+  margin-left: 50%;
+}
+
+.panel.launch-tv>.panel-container>.tv-controller-bar>.btn {
+  width: 70rpx;
+  height: 70rpx;
+  padding: 0;
+  margin: 0 20rpx;
+  border: 0;
+}
+
+.panel.launch-tv>.panel-container>.tv-controller-bar>.btn>.icon {
+  width: 48rpx;
+  height: 48rpx;
+}
+
+.panel.launch-tv>.panel-container>.launch-block {
+  width: calc(100% - 20rpx);
+  height: 100rpx;
+  padding: 20rpx 10rpx;
+}
+
+.panel.launch-tv>.panel-container>.launch-block>.box {
+  width: 25%;
+  height: 100%;
+}
+
+.panel.launch-tv>.panel-container>.launch-block>.box>.btn {
+  width: 100rpx;
+  height: 100rpx;
+  line-height: unset;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background-color: unset;
+}
+
+.panel.launch-tv>.panel-container>.launch-block>.box>.btn .icon {
+  width: 64rpx;
+  height: 64rpx;
+  line-height: 64rpx;
+  text-align: center;
+  font-size: 48rpx;
+}
+
+.panel.launch-tv>.panel-container>.launch-block>.box>.btn .label {
+  font-size: 24rpx;
+}
+
+.panel.launch-tv>.panel-container>.launch-block>.box>.btn.album .icon {
+  color: rgb(255, 126, 103);
+}
+
+.panel.launch-tv>.panel-container>.launch-block>.box>.btn.WeChart .icon {
+  color: rgb(46, 184, 114);
+}
+
+.panel.launch-tv>.panel-container>.launch-block>.box>.btn.file .icon {
+  color: rgb(255, 126, 103);
+}
+
+.panel.launch-tv>.panel-container>.launch-block>.box>.btn.exit .icon {
+  color: rgb(16, 16, 16);
 }

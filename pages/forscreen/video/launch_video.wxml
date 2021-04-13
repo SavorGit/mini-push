@@ -53,7 +53,7 @@
 				</view>
 			</view>
 
-			<!-- 控制器面板 -->
+			<!-- 控制器面板 
 			<view class="panel controller flex-row-center-space_between theme-panel">
 				<view class="btn volume-down flex-column-center-center" bindtap="changeVolume" data-box_mac="{{box_mac}}" data-change_type="1" data-hotel_info="{{hotel_info}}">
 					<image class="icon" mode="aspectFit" src="/images/icon2/000000_volume-down.png"></image>
@@ -72,6 +72,8 @@
 					<view class="label">退出</view>
 				</view>
 			</view>
+			-->
+			<template is="launchTVController" data="{{isVolume:true, isLaunch:is_replay_disabel==false, exitFun:'exitForscreen', boxMac:box_mac, openId:openid, hotelInfo:hotel_info, name:video_name, filename:filename, videoUrl:video_url}}" />
 
 			<!-- 推荐面板 -->
 			<view class="panel recommend full_width theme-panel">

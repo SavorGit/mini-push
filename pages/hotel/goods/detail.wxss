@@ -489,6 +489,10 @@
   height: 400rpx;
 }
 
+.information-panel>.panel-body>.panel>.body>.panel.launch-tv {
+  margin-left: -30rpx;
+}
+
 .information-panel>.panel-body>.panel>.body>.option-bar {
   width: 100%;
   height: 80rpx;

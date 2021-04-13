@@ -137,7 +137,7 @@
 					</view>
 					<view class="body">
 						<video class="video" src="{{goods_info.video_url}}"></video>
-						<!-- 控制器面板 -->
+						<!-- 控制器面板 
 						<view wx:if="{{goods_info.is_tvdemand==1}}" class="panel controller flex-row-center-space_between theme-panel">
 							<view class="btn volume-down flex-column-center-center" bindtap="changeVolume" data-box_mac="{{box_mac}}" data-change_type="1" data-hotel_info="{{hotel_info}}">
 								<image class="icon" mode="aspectFit" src="/images/icon2/000000_volume-down.png"></image>
@@ -156,6 +156,8 @@
 								<view class="label">退出</view>
 							</view>
 						</view>
+						-->
+						<template is="launchTVControllerGoods" data="{{isVolume:true, isLaunch:true, boxMac:box_mac, openId:openid, hotelInfo:hotel_info, entry:goods_info}}" />
 						<!-- 2021-03-18 15:25
 						<view wx:if="{{goods_info.is_tvdemand==1}}" class="option-bar flex-row-center-center" bindtap="boxShow" data-goods_id="{{goods_info.goods_id}}" data-name="{{goods_info.name}}" data-vediourl="{{goods_info.tx_url}}" data-boxmac="{{box_mac}}" data-openid="{{openid}}" data-duration="{{goods_info.duration}}" data-forscreen_url="{{goods_info.forscreen_url}}" data-resource_size="{{goods_info.resource_size}}" data-qrcode_url="{{goods_info.qrcode_url}}">
 							<view class="btn flex-row-center-center launch-tv">
