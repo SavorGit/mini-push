@@ -20,7 +20,8 @@ Page({
     is_replay_disabel:false,
     showControl: false,   //显示授权登陆弹窗,
     is_box_show:false,
-    is_share:0
+    is_share:0,
+    showModal: false, //显示授权登陆弹窗
   },
 
   /**
@@ -382,6 +383,87 @@ Page({
       url: jump_url,
     })
 
+  },
+  onGetUserInfo: function (res) {
+    var that = this;
+
+    var user_info = wx.getStorageSync("savor_user_info");
+    openid = user_info.openid;
+    if (res.detail.errMsg == 'getUserInfo:ok') {
+      if(typeof(openid)!='undefined'){
+        wx.getUserInfo({
+          success(rets) {
+            utils.PostRequest(api_v_url + '/User/registerCom', {
+              'openid': openid,
+              'avatarUrl': rets.userInfo.avatarUrl,
+              'nickName': rets.userInfo.nickName,
+              'gender': rets.userInfo.gender,
+              'session_key': app.globalData.session_key,
+              'iv': rets.iv,
+              'encryptedData': rets.encryptedData
+            }, (data, headers, cookies, errMsg, statusCode) => {
+              wx.setStorage({
+                key: 'savor_user_info',
+                data: data.result,
+              });
+              that.setData({
+                showModal: false,
+              })
+            }, res => wx.showToast({
+              title: '微信登陆失败，请重试',
+              icon: 'none',
+              duration: 2000
+            }));
+  
+          }
+        })
+      }else {
+        that.setData({
+          showModal: false,
+        })
+        app.showToast('微信登陆失败，请重试');
+        
+      }
+      
+    } else {
+      utils.PostRequest(api_v_url + '/User/refuseRegister', {
+        'openid': openid,
+      }, (data, headers, cookies, errMsg, statusCode) => {
+        user_info['is_wx_auth'] = 1;
+        wx.setStorage({
+          key: 'savor_user_info',
+          data: user_info,
+        })
+      });
+    }
+
+
+  },
+  //关闭授权弹窗
+  closeWxAuth: function (e) {
+    var that = this;
+    that.setData({
+      showModal: false,
+    })
+  },
+  chooseMedia:function(e){
+    var that = this;
+    app.chooseMedia(that.data.openid,box_mac,that)
+  },
+  //微信好友文件
+  gotoFriendForFiles: function (e) {
+    var that = this
+    app.gotoFriendForFiles(that.data.openid,box_mac,that);
+  },
+  //本地文件
+  gotoPhonefiles:function(e){
+    var that = this;
+    app.gotoPhonefiles(that.data.openid,box_mac,that);
+  },
+  //投欢迎词
+  gotoWelcome:function(e){
+    var that = this;
+    app.gotoWelcome(that.data.openid,box_mac,that);
   },
   //遥控呼大码
   callQrCode: utils.throttle(function (e) {

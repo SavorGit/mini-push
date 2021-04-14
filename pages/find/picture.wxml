@@ -108,3 +108,5 @@
 	</scroll-view>
 	<view class='page_bottom'></view>
 </view>
+<!-- 微信授权登录 -->
+<template is="wxAuthLoginOp" data='{{showOp: showModal}}' />
