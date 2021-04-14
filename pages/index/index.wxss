@@ -197,12 +197,14 @@
 
 .functional-module-panel>.row button>.evaluate,
 .functional-module-panel>.row>.box>.btn>.evaluate {
-  background-color: #FF7E67;
+  /* background-color: #FF7E67; */
+  background-color: #9BDF46;
 }
 
 .functional-module-panel>.row button>.money-blessing,
 .functional-module-panel>.row>.box>.btn>.money-blessing {
-  background-color: #9BDF46;
+  /* background-color: #9BDF46; */
+  background-color: #F6416C;
 }
 
 .functional-module-panel>.row>view>.file,
@@ -210,7 +212,8 @@
 .functional-module-panel>.row>.box>.btn>.file {
   /* background-color: #f19ec2; */
   /* background-color: rgb(219, 190, 49); */
-  background-color: #F6416C;
+  /* background-color: #F6416C; */
+  background-color: #FF7E67;
 }
 
 .functional-module-panel>.row>view>.birthday,
