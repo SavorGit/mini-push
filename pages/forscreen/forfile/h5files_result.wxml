@@ -3,56 +3,58 @@
 <template is="navigationBarForTwoLevel" data='{{statusBarHeight: statusBarHeight,titleText:"热点投屏"}}' />
 
 <view class="container flex-column-center-flex_start theme-container" style='height: calc(100vh - 46px - {{statusBarHeight}}px);'>
-  <view class="page-top theme-panel-2 flex-row-center-flex_start font_666666_28">
-    <label>所有投屏文件，投屏结束后自动销毁</label>
-    <label class='link_relief'>
-      <navigator url="/pages/forscreen/relief">免责声明</navigator>
-    </label>
-  </view>
-  <view class="page-main">
-    <scroll-view class="file-list" scroll-into-view="{{toView}}" scroll-y="true" scroll-with-animation="true">
-      <view class="weui-grids pic-platform">
-        <block wx:for="{{file_imgs}}" wx:key="key" wx:for-item="bean" wx:for-index="index">
-          <view id="list{{index}}" wx:if="{{pos_id == index}}" class="weui-grid pic-frame choose" bindtap="appointPic" data-forscreen_id="{{forscreen_id}}" data-forscreen_img="{{bean}}" data-pos_id="{{index}}">
-            <image src="{{oss_host}}/{{bean}}{{oss_suffix}}"></image>
-            <view class="cover theme-font4">
-              <image src="/images/icon2/1CBEB6_right-triangle.png"></image>
-              <label class="page-number">{{index+1}}</label>
-            </view>
-          </view>
-          <view wx:if="{{pos_id != index}}" class="weui-grid pic-frame" bindtap="appointPic" data-forscreen_id="{{forscreen_id}}" data-forscreen_img="{{bean}}" data-pos_id="{{index}}">
-            <image src="{{oss_host}}/{{bean}}{{oss_suffix}}"></image>
-            <view class="cover theme-font1">
-              <image src="/images/icon2/FFFFFF_right-triangle.png"></image>
-              <label class="page-number">{{index+1}}</label>
-            </view>
-          </view>
-        </block>
-
-      </view>
-    </scroll-view>
-    <view class="operation flex-row-center-center theme-panel-2">
-      <button class="rechoose theme-button" bindtap="reChooseFile">重选文件</button>
-      <button class="quit theme-button5" bindtap="exitForscreend" data-openid="{{openid}}" data-box_mac="{{box_mac}}">退出投屏</button>
-      <button class="previous flex-column-center-center font_333333_26" bindtap="changePic" data-action="1" data-file_imgs="{{file_imgs}}" data-pos_id="{{pos_id}}" data-forscreen_id="{{forscreen_id}}">
-        <label class="fa fa-chevron-circle-left"></label>
-        <label>播放上一页</label>
-      </button>
-      <button class="next flex-column-center-center font_333333_26" bindtap="changePic" data-action="2" data-file_imgs="{{file_imgs}}" data-pos_id="{{pos_id}}" data-forscreen_id="{{forscreen_id}}">
-        <label class="fa fa-chevron-circle-right"></label>
-        <label>播放下一页</label>
-      </button>
-    </view>
-  </view>
-  <view class="page-bottom"></view>
+	<view class="page-top theme-panel-2 flex-row-center-flex_start font_666666_28">
+		<label>所有投屏文件，投屏结束后自动销毁</label>
+		<label class='link_relief'>
+			<navigator url="/pages/forscreen/relief">免责声明</navigator>
+		</label>
+	</view>
+	<view class="page-main">
+		<scroll-view class="file-list" scroll-into-view="{{toView}}" scroll-y="true" scroll-with-animation="true">
+			<view class="weui-grids pic-platform">
+				<block wx:for="{{file_imgs}}" wx:key="key" wx:for-item="bean" wx:for-index="index">
+					<view id="list{{index}}" wx:if="{{pos_id == index}}" class="weui-grid pic-frame choose" bindtap="appointPic" data-forscreen_id="{{forscreen_id}}" data-forscreen_img="{{bean}}" data-pos_id="{{index}}">
+						<image src="{{oss_host}}/{{bean}}{{oss_suffix}}"></image>
+						<view class="cover theme-font4">
+							<image src="/images/icon2/1CBEB6_right-triangle.png"></image>
+							<label class="page-number">{{index+1}}</label>
+						</view>
+					</view>
+					<view wx:if="{{pos_id != index}}" class="weui-grid pic-frame" bindtap="appointPic" data-forscreen_id="{{forscreen_id}}" data-forscreen_img="{{bean}}" data-pos_id="{{index}}">
+						<image src="{{oss_host}}/{{bean}}{{oss_suffix}}"></image>
+						<view class="cover theme-font1">
+							<image src="/images/icon2/FFFFFF_right-triangle.png"></image>
+							<label class="page-number">{{index+1}}</label>
+						</view>
+					</view>
+				</block>
+			</view>
+		</scroll-view>
+		<!--
+		<view class="operation flex-row-center-center theme-panel-2">
+			<button class="rechoose theme-button" bindtap="reChooseFile">重选文件</button>
+			<button class="quit theme-button5" bindtap="exitForscreend" data-openid="{{openid}}" data-box_mac="{{box_mac}}">退出投屏</button>
+			<button class="previous flex-column-center-center font_333333_26" bindtap="changePic" data-action="1" data-file_imgs="{{file_imgs}}" data-pos_id="{{pos_id}}" data-forscreen_id="{{forscreen_id}}">
+				<label class="fa fa-chevron-circle-left"></label>
+				<label>播放上一页</label>
+			</button>
+			<button class="next flex-column-center-center font_333333_26" bindtap="changePic" data-action="2" data-file_imgs="{{file_imgs}}" data-pos_id="{{pos_id}}" data-forscreen_id="{{forscreen_id}}">
+				<label class="fa fa-chevron-circle-right"></label>
+				<label>播放下一页</label>
+			</button>
+		</view>
+    -->
+		<template is="launchTVControllerFile" data="{{isVolume:true, isLaunch:false, boxMac:box_mac, openId:openid, hotelInfo:hotel_info, fileImgs:file_imgs, posId:pos_id, forscreenId:forscreen_id}}" />
+	</view>
+	<view class="page-bottom"></view>
 </view>
 <!-- 遥控器 -->
 <template is="remoteControlWindow" data='{{popRemoteControlWindow: showControl, qrcode_img:qrcode_img, box_mac:box_mac, openid:openid, is_open_simple:is_open_simple}}' />
 
 <!-- 固定悬浮按钮组 -->
 <view wx:if="{{box_mac !=''}}">
-  <template is="fixedSuspensionButtonGroup" />
+	<template is="fixedSuspensionButtonGroup" />
 </view>
 <view class="body-view">
-  <loading hidden="{{hiddens}}" bindchange="loadingChange">投屏文件处理中，请稍后!</loading>
+	<loading hidden="{{hiddens}}" bindchange="loadingChange">投屏文件处理中，请稍后!</loading>
 </view>

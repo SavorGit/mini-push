@@ -554,6 +554,25 @@ Page({
       }
     })
   },
+  chooseMedia:function(e){
+    var that = this;
+    app.chooseMedia(that.data.openid,box_mac,that)
+  },
+  //微信好友文件
+  gotoFriendForFiles: function (e) {
+    var that = this
+    app.gotoFriendForFiles(that.data.openid,box_mac,that);
+  },
+  //本地文件
+  gotoPhonefiles:function(e){
+    var that = this;
+    app.gotoPhonefiles(that.data.openid,box_mac,that);
+  },
+  //投欢迎词
+  gotoWelcome:function(e){
+    var that = this;
+    app.gotoWelcome(that.data.openid,box_mac,that);
+  },
   //遥控呼大码
   callQrCode: util.throttle(function (e) {
     openid = e.currentTarget.dataset.openid;

@@ -195,7 +195,7 @@
   margin-right: 0;
 }
 
-/* ================================= 控制器面板 ================================= */
+/* ================================= 控制器面板 ================================= 
 .page_main .panels>.controller {
   width: calc(100% - 120rpx);
   height: 100rpx;
@@ -224,12 +224,13 @@
 .page_main .panels>.controller>.btn>.label {
   font-size: 28rpx;
 }
-
+*/
 /* ================================= 推荐面板 ================================= */
+/*
 .page_main .panels>.recommend {
   margin-top: 10rpx;
 }
-
+*/
 .page_main .panels>.recommend>.title-bar {
   height: 40rpx;
   padding-top: 20rpx;
