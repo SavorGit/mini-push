@@ -598,9 +598,9 @@ Page({
               that.setData({
                 showModal: false,
               })
-              wx.navigateTo({
+              /*wx.navigateTo({
                 url: '/mall/pages/gift/order/present?goods_id=' + goods_info.goods_id + '&openid=' + openid + '&amount=1'+ '&pur_uid=' + pur_uid+'&box_id='+box_id,
-              })
+              })*/
             }
             
           }, res => wx.showToast({
@@ -728,6 +728,25 @@ Page({
     } else {
       app.controlChangeVolume(openid, box_mac, change_type, hotel_info, self);
     }
+  },
+  chooseMedia:function(e){
+    var that = this;
+    app.chooseMedia(that.data.openid,that.data.box_mac,that)
+  },
+  //微信好友文件
+  gotoFriendForFiles: function (e) {
+    var that = this
+    app.gotoFriendForFiles(that.data.openid,that.data.box_mac,that);
+  },
+  //本地文件
+  gotoPhonefiles:function(e){
+    var that = this;
+    app.gotoPhonefiles(that.data.openid,that.data.box_mac,that);
+  },
+  //投欢迎词
+  gotoWelcome:function(e){
+    var that = this;
+    app.gotoWelcome(that.data.openid,that.data.box_mac,that);
   },
   /**
    * 生命周期函数--监听页面初次渲染完成

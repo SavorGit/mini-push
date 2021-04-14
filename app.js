@@ -147,7 +147,7 @@ App({
           wx.showToast({
             title: title,
             icon: 'none',
-            duration: 3000
+            duration: 2000
           });
         },
         fail: function (res) {
@@ -232,7 +232,7 @@ App({
             wx.showToast({
               title: title,
               icon: 'none',
-              duration: 3000
+              duration: 2000
             });
           },
           fail: function (res) {
